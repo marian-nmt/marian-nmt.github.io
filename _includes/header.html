@@ -1,0 +1,23 @@
+<header id="header" class="header">
+  <div class="container">
+    <div class="branding">
+      <h1 class="logo">
+        <a href="{{ "/" | relative_url }}">
+          <span aria-hidden="true" class="{{ site.header.title_icon }} icon"></span>
+          <span class="text-highlight">{{ site.header.title_highlighted }}</span><span class="text-bold">{{ site.header.title_bold }}</span>
+        </a>
+      </h1>
+      <p class="description">{{ site.description }}</p>
+    </div><!--//branding-->
+    <ol class="breadcrumb">
+    {% assign pages = site.pages | sort:"menu" %}
+    {% for my_page in pages %}
+     {% if my_page.title and my_page.menu %}
+     <li>
+       <a class="page-link" href="{{ my_page.url | relative_url }}">{{ my_page.title | escape }}</a>
+     </li>
+     {% endif %}
+    {% endfor %}
+    </ol>
+  </div><!--//container-->
+</header><!--//header-->

@@ -1,0 +1,53 @@
+<!--[if IE 8]> <html lang="{{ page.lang | default: site.lang | default: "en" }}" class="ie8"> <![endif]-->
+<!--[if IE 9]> <html lang="{{ page.lang | default: site.lang | default: "en" }}" class="ie9"> <![endif]-->
+<!--[if !IE]><!-->
+<html lang="{{ page.lang | default: site.lang | default: "en" }}">
+<!--<![endif]-->
+
+  {% include head.html %}
+
+  <body class="body-{{ page.color | default: site.color_scheme | default: "blue" }}">
+    <div class="page-wrapper">
+
+    {% include header.html %}
+
+    <div class="doc-wrapper">
+      <div class="container">
+
+        <div id="doc-header" class="doc-header text-center">
+          <h1 class="doc-title">
+            {% if page.icon %}
+            <i class="icon fa {{ page.icon }} }}"></i>
+            {% endif %}
+            {{ page.title }}
+          </h1>
+          {% if page.date %}
+          <div class="meta"><i class="fa fa-clock-o"></i> Last updated: {{ page.date | date_to_long_string }}</div>
+          {% endif %}
+        </div><!--//doc-header-->
+
+        <div class="doc-body">
+          <div class="doc-content">
+            <div class="content-inner">
+
+              {{ content }}
+
+            </div><!--//content-inner-->
+          </div><!--//doc-content-->
+
+          <div class="doc-sidebar hidden-xs">
+            <nav id="doc-nav"></nav>
+          </div><!--//doc-sidebar-->
+
+        </div><!--//doc-body-->
+
+      </div><!--//container-->
+    </div><!--//doc-wrapper-->
+
+    </div><!--//page-wrapper-->
+
+    {% include footer.html %}
+    {% include javascript.html %}
+
+  </body>
+</html>

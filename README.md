@@ -15,9 +15,12 @@ the CSS pre-processor _Less_ (this requirement is temporarily).
 
 On Ubuntu 16.04 you can run:
 
-    sudo apt-get install ruby node-less
-    gem install bundler
+    sudo apt-get install ruby-dev node-less
+    sudo gem install bundler
 
-Then, running `make setup` will install all dependencies, e.g. Jekyll.
-Use `make` to build and serve the website locally. It will be available from
-`127.0.0.1:4000`.
+Then, to install all dependencies run: 
+
+    make install
+    
+`make` command will build and serve the website locally. It will be available
+from `127.0.0.1:4000`.

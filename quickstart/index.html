@@ -88,7 +88,7 @@
     
      
      <li>
-       <a class="page-link" href="/research/">Research</a>
+       <a class="page-link" href="/publications/">Publications</a>
      </li>
      
     
@@ -114,7 +114,66 @@
           <div class="doc-content">
             <div class="content-inner">
 
-              <p>Download and installation instructions…</p>
+              <h2 id="recommended-software">Recommended software:</h2>
+
+<h3 id="gpu-version">GPU version</h3>
+
+<p>Tested on Ubuntu 14.04 LTS</p>
+<ul>
+  <li>CMake 3.5.1 (due to CUDA related bugs in earlier versions)</li>
+  <li>GCC/G++ 4.9</li>
+  <li>Boost 1.54</li>
+  <li>CUDA 7.5</li>
+</ul>
+
+<p>Tested on Ubuntu 16.04 LTS</p>
+<ul>
+  <li>CMake 3.5.1 (due to CUDA related bugs in earlier versions)</li>
+  <li>GCC/G++ 5.4</li>
+  <li>Boost 1.61</li>
+  <li>CUDA 8.0</li>
+</ul>
+
+<p>Also compiles the CPU version.</p>
+
+<h3 id="cpu-version">CPU version</h3>
+
+<p>The CPU-only version will automatically be compiled if CUDA cannot be detected by CMAKE. Tested on different machines and distributions:</p>
+<ul>
+  <li>CMake 3.5.1</li>
+  <li>The CPU version should be a lot more forgiving concerning GCC/G++ or Boost versions.</li>
+</ul>
+
+<h2 id="compilation">Compilation</h2>
+
+<p>The project is a standard CMake out-of-source build:</p>
+
+<div class="highlighter-rouge"><pre class="highlight"><code>mkdir build
+cd build
+cmake ..
+make -j
+</code></pre>
+</div>
+
+<p>If run for the first time, this will also download <code class="highlighter-rouge">Marian</code> from https://github.com/amunmt/marian – the training
+framework for AmuNMT.</p>
+
+<h2 id="running-amunmt">Running AmuNMT</h2>
+
+<h3 id="training">Training</h3>
+<p>bla bla</p>
+
+<div class="highlighter-rouge"><pre class="highlight"><code>./marian --train-sets corpus.ro corpus.en
+</code></pre>
+</div>
+
+<h3 id="translating">Translating</h3>
+<p>bla bla</p>
+
+<div class="highlighter-rouge"><pre class="highlight"><code>./amun -c model.npz.amun.yml &lt;&lt;&lt; "This is a test ."
+</code></pre>
+</div>
+
 
 
             </div><!--//content-inner-->

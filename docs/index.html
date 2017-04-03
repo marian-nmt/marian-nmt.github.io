@@ -64,25 +64,25 @@
     
      
      <li>
+       <a class="page-link" href="/features/">Features</a>
+     </li>
+     
+    
+     
+     <li>
        <a class="page-link" href="/docs/">Documentation</a>
      </li>
      
     
      
      <li>
-       <a class="page-link" href="/tutorial/">Tutorial</a>
+       <a class="page-link" href="/googlegroup/">Google Group</a>
      </li>
      
     
      
      <li>
        <a class="page-link" href="/examples/">Examples</a>
-     </li>
-     
-    
-     
-     <li>
-       <a class="page-link" href="/faq/">FAQ</a>
      </li>
      
     
@@ -112,185 +112,161 @@
           <div class="doc-content">
             <div class="content-inner">
 
-              <h2 id="marian">Marian</h2>
+              <h2 id="marian-training">Marian (Training)</h2>
 
-<p>Lorem ipsum dolor sit amet, consectetur adipiscing elit. Morbi nec imperdiet turpis. Curabitur aliquet pulvinar ultrices. Etiam at posuere leo. Proin ultrices ex et dapibus feugiat <a href="#">link example</a> aenean purus leo, faucibus at elit vel, aliquet scelerisque dui. Etiam quis elit euismod, imperdiet augue sit amet, imperdiet odio. Aenean sem erat, hendrerit eu gravida id, dignissim ut ante. Nam consequat porttitor libero euismod congue.</p>
+<h3 id="general-options">General options</h3>
 
-<p><a href="http://themes.3rdwavemedia.com" class="btn btn-primary">Download PrettyDocs</a></p>
-
-<h2 id="installation">Installation</h2>
-
-<h3 id="step-one">Step One</h3>
-
-<p>Lorem ipsum dolor sit amet, consectetuer adipiscing elit. Aenean commodo ligula eget dolor. Aenean massa. Cum sociis natoque penatibus et magnis dis parturient montes, nascetur ridiculus mus. Donec quam felis.</p>
-
-<h3 id="step-two">Step Two</h3>
-
-<p>Lorem ipsum dolor sit amet, consectetuer adipiscing elit. Aenean commodo ligula eget dolor. Aenean massa.</p>
-
-<h6 id="un-ordered-list-example">Un-ordered list example</h6>
-
-<ul>
-  <li>Lorem ipsum dolor sit amet.</li>
-  <li>Aliquam tincidunt mauris.</li>
-  <li>Ultricies eget vel aliquam libero.
-    <ul>
-      <li>Turpis pulvinar</li>
-      <li>Feugiat scelerisque</li>
-      <li>Ut tincidunt</li>
-    </ul>
-  </li>
-  <li>Pellentesque habitant morbi.</li>
-  <li>Praesent dapibus, neque id.</li>
-</ul>
-
-<h6 id="ordered-list-example">Ordered list example</h6>
-
-<ol>
-  <li>Lorem ipsum dolor sit amet.</li>
-  <li>Aliquam tincidunt mauris.</li>
-  <li>Ultricies eget vel aliquam libero.
-    <ul>
-      <li>Turpis pulvinar</li>
-      <li>Feugiat scelerisque</li>
-      <li>Ut tincidunt</li>
-    </ul>
-  </li>
-  <li>Pellentesque habitant morbi.</li>
-  <li>Praesent dapibus, neque id.</li>
-</ol>
-
-<h3 id="step-three">Step Three</h3>
-
-<p>Lorem ipsum dolor sit amet, consectetuer adipiscing elit. Aenean commodo ligula eget dolor. Aenean massa. Cum sociis natoque penatibus et magnis dis parturient montes, nascetur ridiculus mus. Donec quam felis.</p>
-
-<h2 id="code">Code</h2>
-
-<p><a href="http://prismjs.com/">PrismJS</a> is used as the syntax highlighter here. You can <a href="http://prismjs.com/download.html">build your own version</a> via their website should you need to.</p>
-
-<div class="language-c highlighter-rouge"><pre class="highlight"><code><span class="cp">#include &lt;iostream&gt;
-</span>
-<span class="c1">// Hello World
-</span><span class="kt">int</span> <span class="nf">main</span><span class="p">()</span>
-<span class="p">{</span>
-    <span class="n">cout</span> <span class="o">&lt;&lt;</span> <span class="s">"hello world"</span> <span class="o">&lt;&lt;</span> <span class="n">endl</span><span class="p">;</span>
-    <span class="kt">int</span> <span class="n">a</span> <span class="o">=</span> <span class="mi">10</span><span class="p">;</span>
-<span class="p">}</span>
+<div class="highlighter-rouge"><pre class="highlight"><code>  -c [ --config ] arg                   Configuration file
+  -w [ --workspace ] arg (=2048)        Preallocate  arg  MB of work space
+  --log arg                             Log training process information to 
+                                        file given by  arg
+  --seed arg (=0)                       Seed for all random number generators. 
+                                        0 means initialize randomly
+  --relative-paths                      All paths are relative to the config 
+                                        file location
+  --dump-config                         Dump current (modified) configuration 
+                                        to stdout and exit
+  -h [ --help ]                         Print this help message and exit
 </code></pre>
 </div>
 
-<div class="language-cpp highlighter-rouge"><pre class="highlight"><code><span class="cp">#pragma once
-#include &lt;memory&gt;
-#include "common/types.h"
-#include "common/soft_alignment.h"
-</span>
-<span class="k">namespace</span> <span class="n">amunmt</span> <span class="p">{</span>
+<h3 id="model-options">Model options</h3>
 
-<span class="k">class</span> <span class="nc">Hypothesis</span><span class="p">;</span>
-
-<span class="k">typedef</span> <span class="n">std</span><span class="o">::</span><span class="n">shared_ptr</span><span class="o">&lt;</span><span class="n">Hypothesis</span><span class="o">&gt;</span> <span class="n">HypothesisPtr</span><span class="p">;</span>
-
-<span class="k">class</span> <span class="nc">Hypothesis</span> <span class="p">{</span>
-  <span class="k">public</span><span class="o">:</span>
-    <span class="n">Hypothesis</span><span class="p">()</span>
-     <span class="o">:</span> <span class="n">prevHyp_</span><span class="p">(</span><span class="nb">nullptr</span><span class="p">),</span>
-       <span class="n">prevIndex_</span><span class="p">(</span><span class="mi">0</span><span class="p">),</span>
-       <span class="n">word_</span><span class="p">(</span><span class="mi">0</span><span class="p">),</span>
-       <span class="n">cost_</span><span class="p">(</span><span class="mf">0.0</span><span class="p">)</span>
-<span class="p">{}</span>
+<div class="highlighter-rouge"><pre class="highlight"><code>  -m [ --model ] arg (=model.npz)       Path prefix for model to be 
+                                        saved/resumed
+  --type arg (=dl4mt)                   Model type (possible values: dl4mt, 
+                                        gnmt, multi-gnmt
+  --dim-vocabs arg (=50000 50000)       Maximum items in vocabulary ordered by 
+                                        rank
+  --dim-emb arg (=512)                  Size of embedding vector
+  --dim-rnn arg (=1024)                 Size of rnn hidden state
+  --layers-enc arg (=1)                 Number of encoder layers
+  --layers-dec arg (=1)                 Number of decoder layers
+  --skip                                Use skip connections
+  --layer-normalization                 Enable layer normalization
+  --dropout-rnn arg (=0)                Scaling dropout along rnn layers and 
+                                        time (0 = no dropout)
+  --dropout-src arg (=0)                Dropout source words (0 = no dropout)
+  --dropout-trg arg (=0)                Dropout target words (0 = no dropout)
 </code></pre>
 </div>
 
-<h6 id="default-code-example">Default code example:</h6>
+<h3 id="training-options">Training options</h3>
 
-<p><code class="highlighter-rouge">bower install &lt;package&gt;</code>
-<code class="highlighter-rouge">npm install &lt;package&gt;</code></p>
+<div class="highlighter-rouge"><pre class="highlight"><code>  --overwrite                           Overwrite model with following 
+                                        checkpoints
+  --no-reload                           Do not load existing model specified in
+                                        --model arg
+  -t [ --train-sets ] arg               Paths to training corpora: source 
+                                        target
+  -v [ --vocabs ] arg                   Paths to vocabulary files have to 
+                                        correspond to --trainsets. If this 
+                                        parameter is not supplied we look for 
+                                        vocabulary files source.{yml,json} and 
+                                        target.{yml,json}. If these files do 
+                                        not exists they are created.
+  --max-length arg (=50)                Maximum length of a sentence in a 
+                                        training sentence pair
+  -e [ --after-epochs ] arg (=0)        Finish after this many epochs, 0 is 
+                                        infinity
+  --after-batches arg (=0)              Finish after this many batch updates, 0
+                                        is infinity
+  --disp-freq arg (=1000)               Display information every  arg  updates
+  --save-freq arg (=10000)              Save model file every  arg  updates
+  --no-shuffle                          Skip shuffling of training data before 
+                                        each epoch
+  -d [ --devices ] arg (=0)             GPUs to use for training. Asynchronous 
+                                        SGD is used with multiple devices.
+  --mini-batch arg (=64)                Size of mini-batch used during update
+  --maxi-batch arg (=100)               Number of batches to preload for 
+                                        length-based sorting
+  -o [ --optimizer ] arg (=adam)        Optimization algorithm (possible 
+                                        values: sgd, adagrad, adam
+  -l [ --learn-rate ] arg (=0.0001)     Learning rate
+  --clip-norm arg (=1)                  Clip gradient norm to  arg  (0 to 
+                                        disable)
+  --moving-average                      Maintain and save moving average of 
+                                        parameters
+  --moving-decay arg (=0.999)           decay factor for moving average
+</code></pre>
+</div>
 
-<h2 id="math">Math</h2>
+<h3 id="validation-set-options">Validation set options</h3>
 
-<p>When $a \ne 0$, there are two solutions to \(ax^2 + bx + c = 0\) and they are
-<script type="math/tex">x = {-b \pm \sqrt{b^2-4ac} \over 2a}.</script></p>
+<div class="highlighter-rouge"><pre class="highlight"><code>  --valid-sets arg                      Paths to validation corpora: source 
+                                        target
+  --valid-freq arg (=10000)             Validate model every  arg  updates
+  --valid-metrics arg (=cross-entropy)  Metric to use during validation: 
+                                        cross-entropy, perplexity, 
+                                        valid-script. Multiple metrics can be 
+                                        specified
+  --valid-script-path arg               Path to external validation script
+  --early-stopping arg (=10)            Stop if the first validation metric 
+                                        does not improve for  arg  consecutive 
+                                        validation steps
+  --valid-log arg                       Log validation scores to file given by 
+                                        arg
+</code></pre>
+</div>
 
-<h2 id="links">Links</h2>
+<h2 id="amun-translation">Amun (Translation)</h2>
 
-<p>Here’s a link to <a href="http://foo.bar">a website</a>, to a <a href="local-doc.html">local
-doc</a>, and to a <a href="#an-h2-header">section heading in the current
-doc</a>. Here’s a footnote <sup id="fnref:1"><a href="#fn:1" class="footnote">1</a></sup>.</p>
+<h3 id="general-options-1">General options</h3>
 
-<h2 id="tables">Tables</h2>
+<div class="highlighter-rouge"><pre class="highlight"><code>  -c [ --config ] arg             Configuration file
+  -i [ --input-file ] arg         Take input from a file instead of stdin
+  -m [ --model ] arg              Overwrite scorer section in config file with 
+                                  these models. Assumes models of type Nematus 
+                                  and assigns model names F0, F1, ...
+  -s [ --source-vocab ] arg       Overwrite source vocab section in config file
+                                  with vocab file.
+  -t [ --target-vocab ] arg       Overwrite target vocab section in config file
+                                  with vocab file.
+  --bpe arg                       Overwrite bpe section in config with bpe code
+                                  file.
+  --no-debpe                      Providing bpe is on, turn off deBPE of the 
+                                  output.
+  -d [ --devices ] arg (=0)       CUDA device(s) to use, set to 0 by default, 
+                                  e.g. set to 0 1 to use gpu0 and gpu1. 
+                                  Implicitly sets minimal number of threads to 
+                                  number of devices.
+  --gpu-threads arg (=1)          Number of threads on a single GPU.
+  --cpu-threads arg (=0)          Number of threads on the CPU.
+  --mini-batch arg (=1)           Number of sentences in mini batch.
+  --maxi-batch arg (=1)           Number of sentences in maxi batch.
+  --show-weights                  Output used weights to stdout and exit
+  --load-weights arg              Load scorer weights from this file
+  --wipo                          Use WIPO specific n-best-list format and 
+                                  non-buffering single-threading
+  --return-alignment              If true, return alignment.
+  --max-length arg (=500)         Maximum length of input sentences. Anything 
+                                  above this is truncated. 0=no max length
+  -v [ --version ]                Print version.
+  -h [ --help ]                   Print this help message and exit
+  --log-progress [=arg(=1)] (=1)  Log progress to stderr.
+  --log-info [=arg(=1)] (=1)      Log info to stderr.
+</code></pre>
+</div>
 
-<table class="table">
-  <thead>
-    <tr>
-      <th>Default aligned</th>
-      <th style="text-align: left">Left aligned</th>
-      <th style="text-align: center">Center aligned</th>
-      <th style="text-align: right">Right aligned</th>
-    </tr>
-  </thead>
-  <tbody>
-    <tr>
-      <td>First body part</td>
-      <td style="text-align: left">Second cell</td>
-      <td style="text-align: center">Third cell</td>
-      <td style="text-align: right">fourth cell</td>
-    </tr>
-    <tr>
-      <td>Second line</td>
-      <td style="text-align: left">foo</td>
-      <td style="text-align: center"><strong>strong</strong></td>
-      <td style="text-align: right">baz</td>
-    </tr>
-    <tr>
-      <td>Third line</td>
-      <td style="text-align: left">quux</td>
-      <td style="text-align: center">baz</td>
-      <td style="text-align: right">bar</td>
-    </tr>
-  </tbody>
-  <tbody>
-    <tr>
-      <td>Second body</td>
-      <td style="text-align: left"> </td>
-      <td style="text-align: center"> </td>
-      <td style="text-align: right"> </td>
-    </tr>
-    <tr>
-      <td>2 line</td>
-      <td style="text-align: left"> </td>
-      <td style="text-align: center"> </td>
-      <td style="text-align: right"> </td>
-    </tr>
-  </tbody>
-  <tfoot>
-    <tr>
-      <td>Footer row</td>
-      <td style="text-align: left"> </td>
-      <td style="text-align: center"> </td>
-      <td style="text-align: right"> </td>
-    </tr>
-  </tfoot>
-</table>
+<h3 id="search-options">Search options</h3>
 
-<h2 id="buttons">Buttons</h2>
+<div class="highlighter-rouge"><pre class="highlight"><code>  -b [ --beam-size ] arg (=12)    Decoding beam-size
+  -n [ --normalize ]              Normalize scores by translation length after 
+                                  decoding
+  -f [ --softmax-filter ] arg     Filter final softmax: path to file with 
+                                  alignment [N first words]
+  -u [ --allow-unk ]              Allow generation of UNK
+  --n-best                        Output n-best list with n = beam-size
+</code></pre>
+</div>
 
-<p>Lorem ipsum dolor sit amet, consectetur adipiscing elit. Morbi nec imperdiet turpis. Curabitur aliquet pulvinar ultrices. Etiam at posuere leo. Proin ultrices ex et dapibus feugiat <a href="#">link example</a> aenean purus leo, faucibus at elit vel, aliquet scelerisque dui. Etiam quis elit euismod, imperdiet augue sit amet, imperdiet odio. Aenean sem erat, hendrerit eu gravida id, dignissim ut ante. Nam consequat porttitor libero euismod congue.</p>
+<h3 id="configuration-meta-options">Configuration meta options</h3>
 
-<h6 id="basic-buttons">Basic Buttons</h6>
-
-<ul>
-  <li><a href="#" class="btn btn-primary">Primary Button</a></li>
-  <li><a href="#" class="btn btn-green">Green Button</a></li>
-  <li><a href="#" class="btn btn-blue">Blue Button</a></li>
-  <li><a href="#" class="btn btn-orange">Orange Button</a></li>
-  <li><a href="#" class="btn btn-red">Red Button</a></li>
-</ul>
-<div class="footnotes">
-  <ol>
-    <li id="fn:1">
-      <p>Footnote text goes here.&nbsp;<a href="#fnref:1" class="reversefootnote">&#8617;</a></p>
-    </li>
-  </ol>
+<div class="highlighter-rouge"><pre class="highlight"><code>  --relative-paths                All paths are relative to the config file 
+                                  location
+  --dump-config                   Dump current (modified) configuration to 
+                                  stdout and exit
+</code></pre>
 </div>
 
 

@@ -6,4 +6,51 @@ icon: fa-paper-plane
 menu: 1
 ---
 
-Download and installation instructions...
+## Recommended software:
+
+### GPU version
+
+Tested on Ubuntu 14.04 LTS
+ * CMake 3.5.1 (due to CUDA related bugs in earlier versions)
+ * GCC/G++ 4.9
+ * Boost 1.54
+ * CUDA 7.5
+
+Tested on Ubuntu 16.04 LTS
+ * CMake 3.5.1 (due to CUDA related bugs in earlier versions)
+ * GCC/G++ 5.4
+ * Boost 1.61
+ * CUDA 8.0
+
+Also compiles the CPU version.
+
+### CPU version
+
+The CPU-only version will automatically be compiled if CUDA cannot be detected by CMAKE. Tested on different machines and distributions:
+ * CMake 3.5.1
+ * The CPU version should be a lot more forgiving concerning GCC/G++ or Boost versions.
+
+## Compilation
+
+The project is a standard CMake out-of-source build:
+
+    mkdir build
+    cd build
+    cmake ..
+    make -j
+    
+If run for the first time, this will also download `Marian` from https://github.com/amunmt/marian -- the training
+framework for AmuNMT.
+
+## Running AmuNMT
+
+### Training
+bla bla
+
+    ./marian --train-sets corpus.ro corpus.en
+
+### Translating
+bla bla
+
+    ./amun -c model.npz.amun.yml <<< "This is a test ."
+

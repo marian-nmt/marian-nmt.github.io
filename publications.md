@@ -1,7 +1,7 @@
 ---
 layout: docs
-title: Research
-permalink: /research/
+title: Publications
+permalink: /publications/
 icon: fa-graduation-cap
 menu: 6
 ---
@@ -20,7 +20,3 @@ Please cite the following paper if you use AmuNMT or Marian in your research:
   url = {https://arxiv.org/abs/1610.01108}
 }
 ```
-
-## Publications
-
-The list of papers on AmuNMT...

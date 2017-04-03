@@ -118,15 +118,7 @@
 
 <h3 id="gpu-version">GPU version</h3>
 
-<p>Tested on Ubuntu 14.04 LTS</p>
-<ul>
-  <li>CMake 3.5.1 (due to CUDA related bugs in earlier versions)</li>
-  <li>GCC/G++ 4.9</li>
-  <li>Boost 1.54</li>
-  <li>CUDA 7.5</li>
-</ul>
-
-<p>Tested on Ubuntu 16.04 LTS</p>
+<p>Ubuntu 16.04 LTS (tested and recommended)</p>
 <ul>
   <li>CMake 3.5.1 (due to CUDA related bugs in earlier versions)</li>
   <li>GCC/G++ 5.4</li>
@@ -135,6 +127,14 @@
 </ul>
 
 <p>Also compiles the CPU version.</p>
+
+<p>Ubuntu 14.04 LTS (tested)</p>
+<ul>
+  <li>CMake 3.5.1 (due to CUDA related bugs in earlier versions)</li>
+  <li>GCC/G++ 4.9</li>
+  <li>Boost 1.54</li>
+  <li>CUDA 7.5</li>
+</ul>
 
 <h3 id="cpu-version">CPU version</h3>
 
@@ -155,25 +155,37 @@ make -j
 </code></pre>
 </div>
 
-<p>If run for the first time, this will also download <code class="highlighter-rouge">Marian</code> from https://github.com/amunmt/marian – the training
+<p>If run for the first time, this will also download Marian – the training
 framework for AmuNMT.</p>
 
 <h2 id="running-amunmt">Running AmuNMT</h2>
 
 <h3 id="training">Training</h3>
-<p>bla bla</p>
+<p>Marian is the training framework of AmuNMT. Assuming <code class="highlighter-rouge">corpus.en</code> and <code class="highlighter-rouge">corpus.ro</code> are
+corresponding and preprocessed files of a English-Romanian parallel corpus, the
+following command will create a Nematus-compatible neural machine translation model.</p>
 
-<div class="highlighter-rouge"><pre class="highlight"><code>./marian --train-sets corpus.ro corpus.en
+<div class="highlighter-rouge"><pre class="highlight"><code>./amunmt/build/marian \
+  --train-sets corpus.en corpus.ro \
+  --vocabs vocab.en vocab.ro \
+  --model model.npz
 </code></pre>
 </div>
+
+<p>See the <a href="../docs#marian">documentation</a> for a full list of command line
+options or the <a href="../examples#training">examples</a> for a full example of how to train
+a WMT-grade model.</p>
 
 <h3 id="translating">Translating</h3>
-<p>bla bla</p>
+<p>If a trained model is available</p>
 
-<div class="highlighter-rouge"><pre class="highlight"><code>./amun -c model.npz.amun.yml &lt;&lt;&lt; "This is a test ."
+<div class="highlighter-rouge"><pre class="highlight"><code>./amunmt/build/amun -m model.npz -s vocab.en -t vocab.ro &lt;&lt;&lt; "This is a test ."
 </code></pre>
 </div>
 
+<p>See the <a href="../docs#amun">documentation</a> for a full list of command line options
+or the <a href="../examples#translating">examples</a> for a full example of how to use
+Edinburgh’s WMT models for translation.</p>
 
 
             </div><!--//content-inner-->

@@ -2,7 +2,7 @@
 layout: docs
 title: Google Group
 permalink: /googlegroup/
-icon: fa-map-signs
+icon: fa-life-ring
 menu: 3
 ---
 

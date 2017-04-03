@@ -2,6 +2,7 @@
 layout: docs
 title: Documentation
 permalink: /docs/
+icon: fa-file-code-o
 menu: 3
 ---
 

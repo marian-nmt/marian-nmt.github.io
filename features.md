@@ -1,12 +1,15 @@
 ---
 layout: docs
-title: Features
+title: Features & Benchmarks
 permalink: /features/
-date: 28/03/2017
-icon: fa-life-ring
+icon: fa-bar-chart-o
 menu: 2
 ---
+
+## Features
 
 * Fast
 * Faster
 * Fastest
+
+## Benchmarks

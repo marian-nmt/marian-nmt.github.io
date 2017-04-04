@@ -1,7 +1,7 @@
 ---
 layout: docs
 title: Translating with Amun
-permalink: /usecases/translating
+permalink: /usecases/translating/
 icon: fa-cogs
 ---
 

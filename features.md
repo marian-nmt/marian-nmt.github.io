@@ -15,6 +15,7 @@ menu: 2
 * Batched translation on single and multiple GPUs
 * Pure C++ implementation with minimal depedencies on external packages
 * Optionally static compilation of binaries
+* Permissive open source license (MIT)
 
 ## Benchmarks
 

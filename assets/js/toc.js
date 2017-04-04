@@ -28,8 +28,8 @@
                 }
                 else {
                     if (! submenu) {
-                        nav.find('li:last-child')
-                            .append( $('<ul class="nav doc-sub-menu">') )
+                        nav.find('li').last()
+                            .append( $('<ul class="nav doc-sub-menu">') );
                     }
                     nav.find('li:last-child > ul').append( li );
                     submenu = true;

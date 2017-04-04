@@ -7,25 +7,22 @@ permalink: /
 <h2 class="title">Welcome to {{ site.title }}!</h2>
 <div class="intro">
   <p>
-  Short introductory text. Short introductory text. Short introductory text.
-  Short introductory text. Short introductory text. Short introductory text.
-  Short introductory text. Short introductory text. Short introductory text.
+  AmuNMT is a deployment-ready, efficient Neural Machine Translation framework written
+  in pure C++ with minimal dependencies. 
   </p>
 
   <p>
-  Features:
+  Some features:
 
   <ul>
-    <li>feature 1</li>
-    <li>feature 2</li>
-    <li>feature 3</li>
+    <li> Fast multi-gpu training and translation </li>
+    <li> Compatible with Nematus and DL4MT </li>
+    <li> Efficient pure C++ implementation </li>
+    <li> Permissive open source license (MIT) </li>
+    <li> <a href="{{ site.baseurl }}../features"> more details... </a> </li>
   </ul>
   </p>
-
-  <p>
-  Short introductory text. Short introductory text. Short introductory text.
-  Short introductory text. Short introductory text. Short introductory text.
-  </p>
+  
   <br/>
   <div class="cta-container">
     <a class="btn btn-primary btn-cta" href=" {{ site.github }} " target="_blank">
@@ -51,3 +48,10 @@ permalink: /
   {% endfor %}
 
 </div><!--//cards-->
+
+<h4> Acknowledgements </h4>
+<div class="intro">
+  <p>
+The development of Marian received funding from the European Union's Horizon 2020 Research and Innovation Programme under grant agreements 688139 (<a href="http://www.summa-project.eu">SUMMA</a>); 2016-2019) and 645487 (<a href="http://www.modernmt.eu">Modern MT</a>); 2015-2017) and the Amazon Academic Research Awards program. 
+  </p>
+</div>

@@ -64,7 +64,7 @@ a WMT-grade model.
 
 ### Translating
 
-If a trained model is available
+If a trained model is available, run:
 
     ./amunmt/build/amun -m model.npz -s vocab.en -t vocab.ro <<< "This is a test ."
 

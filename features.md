@@ -83,7 +83,8 @@ As AmuNMT is still early work, we expect speed to improve with future optimizati
 </table>
 
 We compare models with standard setting and comparable embedding, hidden layer and batch sizes.
-The first graph (blue bars) corresponds to the model parameters described in the [OpenNMT paper](http://),
+The first graph (blue bars) corresponds to the model parameters described in the
+[OpenNMT paper](https://arxiv.org/abs/1701.02810),
 the second (green bars) corresponds to Nematus standard settings for embedding and hidden layer
 sizes. In both cases we use a vocabulary size of 32,000 subword units. The models were trained
 on German-English WMT data.

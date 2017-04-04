@@ -1,7 +1,7 @@
 
 all: run
 
-run: install build
+run: build
 	bundle exec jekyll serve --skip-initial-build
 
 build:

@@ -12,4 +12,5 @@ ruby RUBY_VERSION
 
 gem "jekyll"
 gem "git-up"
-gem "jekyll-less"
+gem "less"
+gem "therubyracer"

@@ -7,7 +7,7 @@
   <head>
   <title>
     
-    AmuNMT :: Quick start
+    AmuNMT :: Translating with Amun
     
   </title>
   <!-- Meta -->
@@ -109,9 +109,9 @@
         <div id="doc-header" class="doc-header text-center">
           <h1 class="doc-title">
             
-            <i class="icon fa fa-paper-plane }}"></i>
+            <i class="icon fa fa-cogs }}"></i>
             
-            Quick start
+            Translating with Amun
           </h1>
           
         </div><!--//doc-header-->
@@ -120,83 +120,7 @@
           <div class="doc-content">
             <div class="content-inner">
 
-              <h2 id="recommended-software">Recommended software</h2>
-
-<h3 id="gpu-version">GPU version</h3>
-
-<p>Ubuntu 16.04 LTS (tested and recommended)</p>
-
-<ul>
-  <li>CMake 3.5.1 (due to CUDA related bugs in earlier versions)</li>
-  <li>GCC/G++ 5.4</li>
-  <li>Boost 1.61</li>
-  <li>CUDA 8.0</li>
-</ul>
-
-<p>Also compiles the CPU version.</p>
-
-<p>Ubuntu 14.04 LTS (tested)</p>
-
-<ul>
-  <li>CMake 3.5.1 (due to CUDA related bugs in earlier versions)</li>
-  <li>GCC/G++ 4.9</li>
-  <li>Boost 1.54</li>
-  <li>CUDA 7.5</li>
-</ul>
-
-<h3 id="cpu-version">CPU version</h3>
-
-<p>The CPU-only version will automatically be compiled if CUDA cannot be detected by CMAKE. Tested on different machines and distributions:</p>
-
-<ul>
-  <li>CMake 3.5.1</li>
-  <li>The CPU version should be a lot more forgiving concerning GCC/G++ or Boost versions.</li>
-</ul>
-
-<h2 id="compilation">Compilation</h2>
-
-<p>The project is a standard CMake out-of-source build:</p>
-
-<div class="highlighter-rouge"><pre class="highlight"><code>mkdir build
-cd build
-cmake ..
-make -j
-</code></pre>
-</div>
-
-<p>If run for the first time, this will also download Marian – the training
-framework for AmuNMT.</p>
-
-<h2 id="running-amunmt">Running AmuNMT</h2>
-
-<h3 id="training">Training</h3>
-
-<p>Marian is the training framework of AmuNMT. Assuming <code class="highlighter-rouge">corpus.en</code> and <code class="highlighter-rouge">corpus.ro</code> are
-corresponding and preprocessed files of a English-Romanian parallel corpus, the
-following command will create a Nematus-compatible neural machine translation model.</p>
-
-<div class="highlighter-rouge"><pre class="highlight"><code>./amunmt/build/marian \
-  --train-sets corpus.en corpus.ro \
-  --vocabs vocab.en vocab.ro \
-  --model model.npz
-</code></pre>
-</div>
-
-<p>See the <a href="../docs#marian">documentation</a> for a full list of command line
-options or the <a href="../examples#training">examples</a> for a full example of how to train
-a WMT-grade model.</p>
-
-<h3 id="translating">Translating</h3>
-
-<p>If a trained model is available</p>
-
-<div class="highlighter-rouge"><pre class="highlight"><code>./amunmt/build/amun -m model.npz -s vocab.en -t vocab.ro &lt;&lt;&lt; "This is a test ."
-</code></pre>
-</div>
-
-<p>See the <a href="../docs#amun">documentation</a> for a full list of command line options
-or the <a href="../examples#translating">examples</a> for a full example of how to use
-Edinburgh’s WMT models for translation.</p>
+              <h2 id="quick-start">Quick start</h2>
 
 
             </div><!--//content-inner-->

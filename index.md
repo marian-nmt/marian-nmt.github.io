@@ -4,10 +4,10 @@ title: Home
 permalink: /
 ---
 
-<h2 class="title">Welcome to {{ site.title }}!</h2>
+<!--h2 class="title">Welcome to {{ site.title }}!</h2-->
 <div class="intro">
   <p>
-  AmuNMT is a deployment-ready, efficient Neural Machine Translation framework written
+  <b>AmuNMT</b> is a deployment-ready, efficient Neural Machine Translation framework written
   in pure C++ with minimal dependencies. 
   </p>
 
@@ -52,6 +52,6 @@ permalink: /
 <h4> Acknowledgements </h4>
 <div class="intro">
   <p>
-The development of Marian received funding from the European Union's Horizon 2020 Research and Innovation Programme under grant agreements 688139 (<a href="http://www.summa-project.eu">SUMMA</a>); 2016-2019) and 645487 (<a href="http://www.modernmt.eu">Modern MT</a>); 2015-2017) and the Amazon Academic Research Awards program. 
+The development of AmuNMT received funding from the European Union's Horizon 2020 Research and Innovation Programme under grant agreements 688139 (<a href="http://www.summa-project.eu">SUMMA</a>); 2016-2019) and 645487 (<a href="http://www.modernmt.eu">Modern MT</a>); 2015-2017) and the Amazon Academic Research Awards program. 
   </p>
 </div>

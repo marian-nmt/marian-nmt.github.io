@@ -6,7 +6,26 @@ permalink: /
 
 <h2 class="title">Welcome to {{ site.title }}!</h2>
 <div class="intro">
-  <p>{{ site.description }}</p>
+  <p>
+  Short introductory text. Short introductory text. Short introductory text.
+  Short introductory text. Short introductory text. Short introductory text.
+  Short introductory text. Short introductory text. Short introductory text.
+  </p>
+
+  <p>
+  Features:
+
+  <ul>
+    <li>feature 1</li>
+    <li>feature 2</li>
+    <li>feature 3</li>
+  </ul>
+  </p>
+
+  <p>
+  Short introductory text. Short introductory text. Short introductory text.
+  Short introductory text. Short introductory text. Short introductory text.
+  </p>
   <br/>
   <div class="cta-container">
     <a class="btn btn-primary btn-cta" href=" {{ site.github }} " target="_blank">

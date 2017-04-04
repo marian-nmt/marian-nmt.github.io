@@ -91,3 +91,19 @@ on German-English WMT data.
 
 ### Multi-GPU training
 
+AmuNMT's training framework provides multi-GPU training via asynchronous SGD and
+data parallelism (copies of the full model on each GPU). We benchmarked
+the [Romanian-English]({{ site.baseurl }}../examples#training_with_marian) on a machine with
+8 NVIDIA GTX 1080 GPUs. Training speed increases with each GPU instance, but currently
+the increase is sub-linear. Using 4-5 GPUs seems optimal, for more GPUs it might be worth
+to use them for another training run. 
+
+<table style="border-collapse: separate; border-spacing: 40px; margin: auto">
+<tr>
+  <td><img style="border: 1px solid black;" src="{{site.baseurl}}../assets/images/multi_gpu.png"/></td>
+</tr>
+</table>
+
+Our current version of asynchronous SGD is delay-free, i.e. that all (sharded) gradients
+are propagated to all GPUs for each update. In the future we will introduce delayed updates
+which should results in a more linear performance increas with each additional GPU.

@@ -83,10 +83,10 @@ As AmuNMT is still early work, we expect speed to improve with future optimizati
 </tr>
 </table>
 
-We compare models with standard setting and comparable embedding, hidden layer and batch sizes.
+We compare models with standard settings and comparable embedding, hidden layer and batch sizes.
 The first graph (blue bars) corresponds to the model parameters described in the
 [OpenNMT paper](https://arxiv.org/abs/1701.02810),
-the second (green bars) corresponds to Nematus standard settings for embedding and hidden layer
+the second (green bars) corresponds to Nematus default settings for embedding and hidden layer
 sizes. In both cases we use a vocabulary size of 32,000 subword units. The models were trained
 on German-English WMT data.
 
@@ -107,4 +107,4 @@ to use them for another training run.
 
 Our current version of asynchronous SGD is delay-free, i.e. that all (sharded) gradients
 are propagated to all GPUs for each update. In the future we will introduce delayed updates
-which should results in a more linear performance increase with each additional GPU.
+which should result in a more linear performance increase with each additional GPU.

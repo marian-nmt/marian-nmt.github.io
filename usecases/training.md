@@ -1,16 +1,11 @@
 ---
 layout: docs
-title: Examples & Use Cases
-permalink: /examples/
+title: Training with Marian
+permalink: /usecases/training/
 icon: fa-cogs
-menu: 4
 ---
 
-## Translating with Amun
-
-Bla bla
-
-## Training with Marian
+## Quick start
 
 The files and scripts described in this section can be found in
 `amunmt/examples/training`. They have been adapted from the Romanian-English sample 
@@ -35,7 +30,7 @@ Training time on 1 NVIDIA GTX 1080 GPU should be roughly 24 hours.
 ./run-me.sh 0 1 2 3
 ```
 
-### Details
+## Details
 
 We ommit a decription of the preprocessing, individual steps can be retraced by
 inspecting `amunmt/examples/training/scripts/preprocess.sh`.
@@ -80,7 +75,7 @@ newstest2016:
 BLEU = 34.53, 66.0/40.7/27.5/19.2 (BP=1.000, ratio=1.015, hyp_len=49258, ref_len=48531)
 ```
 
-### Custom validation script
+## Custom validation script
 
 The validation script `scripts/validate.sh` is a quick example how to write a custom validation script. The training pauses until the validation script finishes executing. A validation script should not output anything to `stdout` apart from the final single score (last line): 
 

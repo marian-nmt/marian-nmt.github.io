@@ -19,7 +19,7 @@
                 var li = $('<li>').append(
                             $('<a class="scrollto">')
                                 .attr( 'href', '#' + id )
-                                .text( this.innerHTML )
+                                .text( this.innerHTML.replace(/[.:;-]+$/, '') )
                             )
 
                 if (this.nodeName == "H2") {

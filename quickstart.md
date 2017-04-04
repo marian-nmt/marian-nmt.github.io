@@ -6,7 +6,7 @@ icon: fa-paper-plane
 menu: 1
 ---
 
-## Recommended software:
+## Recommended software
 
 ### GPU version
 

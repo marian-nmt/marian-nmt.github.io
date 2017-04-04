@@ -10,14 +10,16 @@ generator. The static files have to be generated locally.
 
 ## Local build
 
-To build the website locally you need to install _ruby_ with gem _bundler_, and
-the CSS pre-processor _Less_ (this requirement is temporarily).
+To build the website locally you need to install `ruby` with gem `bundler`.
 
 On Ubuntu 16.04 you can run:
 
-    sudo apt-get install ruby node-less
-    gem install bundler
+    [sudo] apt-get install ruby-dev
+    [sudo] gem install bundler
 
-Then, running `make setup` will install all dependencies, e.g. Jekyll.
-Use `make` to build and serve the website locally. It will be available from
-`127.0.0.1:4000`.
+Then, to install all dependencies run:
+
+    make install
+
+`make` command will build and serve the website locally. It will be available
+from _127.0.0.1:4000_.

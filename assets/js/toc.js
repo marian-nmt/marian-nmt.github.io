@@ -19,7 +19,7 @@
                 var li = $('<li>').append(
                             $('<a class="scrollto">')
                                 .attr( 'href', '#' + id )
-                                .text( this.innerHTML )
+                                .text( this.innerHTML.replace(/[.:;-]+$/, '') )
                             )
 
                 if (this.nodeName == "H2") {
@@ -28,8 +28,8 @@
                 }
                 else {
                     if (! submenu) {
-                        nav.find('li:last-child')
-                            .append( $('<ul class="nav doc-sub-menu">') )
+                        nav.find('li').last()
+                            .append( $('<ul class="nav doc-sub-menu">') );
                     }
                     nav.find('li:last-child > ul').append( li );
                     submenu = true;

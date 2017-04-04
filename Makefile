@@ -1,18 +1,17 @@
 
 all: run
 
-run: build
+run: install build
 	bundle exec jekyll serve --skip-initial-build
 
 build:
-	lessc ./assets/less/styles.less > ./assets/css/styles.css
 	bundle exec jekyll build
 
-install:
+install: Gemfile.lock
+Gemfile.lock: Gemfile
 	bundle update
 
 zip: amunmt-website.tgz
-
 amunmt-website.tgz: build
 	tar zcf $@ _site
 

@@ -17,3 +17,14 @@ menu: 2
 * Optionally static compilation of binaries
 
 ## Benchmarks
+
+### Translation speed in words per second
+
+### Training speed in words per second
+
+<table style="border-collapse: separate; border-spacing: 40px">
+<tr>
+  <td><img style="border: 1px solid black;" src="{{site.baseurl}}../assets/images/training_speed.png"/></td>
+  <td><img style="border: 1px solid black;" src="{{site.baseurl}}../assets/images/training_speed2.png"/></td>
+</tr>
+</table>

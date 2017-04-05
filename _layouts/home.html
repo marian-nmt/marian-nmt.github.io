@@ -6,10 +6,26 @@
 
   {% include head.html %}
 
-  <body>
+  <body class="landing-page body-{{ page.color | default: site.color_scheme | default: "blue" }}">
     <div class="page-wrapper">
 
-      {% include header.html %}
+      <header class="header text-center">
+        <div class="container">
+          <div class="branding">
+            <h1 class="logo">
+              <span aria-hidden="true" class="{{ site.header.title_icon }} icon"></span>
+              <span class="text-highlight">{{ site.header.title_highlighted }}</span><span class="text-bold">{{ site.header.title_bold }}</span>
+            </h1>
+          </div>
+
+          <div class="tagline">
+            <p>{{ site.description }}</p>
+          </div>
+
+          {% include top_menu.html %}
+
+        </div><!--//container-->
+      </header><!--//header-->
 
       <section class="cards-section text-center">
         <div class="container">

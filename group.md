@@ -6,6 +6,12 @@ icon: fa-life-ring
 menu: 3
 ---
 
+## By e-mail
+
+You can send questions to the group by e-mail: `amunmt@googlegroups.com`
+
+## Group view
+
 <iframe id="forum_embed"
   src="javascript:void(0)"
   scrolling="no"

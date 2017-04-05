@@ -9,7 +9,7 @@ menu: 4
 ## Basic examples
 
 * **[Translating with Amun](/usecases/translating/)**:
-The files and scripts described in this section can be found in `amunmt/examples/translation`. They demonstrate how to translate with Amun using Edinburgh's German-English WMT2016 single model and ensemble. 
+The files and scripts described in this section can be found in `amunmt/examples/translate`. They demonstrate how to translate with Amun using Edinburgh's German-English WMT2016 single model and ensemble. 
 * **[Training with Marian](/usecases/training/)**: The files
 and scripts described in this section can be found in
 `amunmt/examples/training`. They have been adapted from the Romanian-English sample 

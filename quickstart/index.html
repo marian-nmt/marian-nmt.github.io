@@ -14,7 +14,7 @@
   <meta charset="utf-8">
   <meta http-equiv="X-UA-Compatible" content="IE=edge">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <meta name="description" content="Fast and deployment-ready Neural Machine Translation in C++">
+  <meta name="description" content="Fast Neural Machine Translation in C++">
 
   <link href='http://fonts.googleapis.com/css?family=Open+Sans:300italic,400italic,600italic,700italic,800italic,400,300,600,700,800' rel='stylesheet' type='text/css'>
   <!-- Global CSS -->
@@ -47,7 +47,7 @@
           <span class="text-highlight">Amu</span><span class="text-bold">NMT</span>
         </a>
       </h1>
-      <p class="description">Fast and deployment-ready Neural Machine Translation in C++</p>
+      <p class="description">Fast Neural Machine Translation in C++</p>
     </div><!--//branding-->
     <ol class="breadcrumb">
     
@@ -124,18 +124,18 @@
 
 <h3 id="gpu-version">GPU version</h3>
 
-<p>Ubuntu 16.04 LTS (tested and recommended)</p>
+<p><strong>Ubuntu 16.04 LTS (tested and recommended).</strong> For Ubuntu 16.04 the standard packages should work. On newer versions of Ubuntu, e.g. 16.10, there may be problems due to
+incompatibilities of the default g++ compiler and CUDA.</p>
 
 <ul>
-  <li>CMake 3.5.1 (due to CUDA related bugs in earlier versions)</li>
+  <li>CMake 3.5.1</li>
   <li>GCC/G++ 5.4</li>
   <li>Boost 1.61</li>
   <li>CUDA 8.0</li>
 </ul>
 
-<p>Also compiles the CPU version.</p>
-
-<p>Ubuntu 14.04 LTS (tested)</p>
+<p><strong>Ubuntu 14.04 LTS (tested).</strong> A newer CMake version than the default version is
+required and can be installed from source.</p>
 
 <ul>
   <li>CMake 3.5.1 (due to CUDA related bugs in earlier versions)</li>
@@ -146,7 +146,10 @@
 
 <h3 id="cpu-version">CPU version</h3>
 
-<p>The CPU-only version will automatically be compiled if CUDA cannot be detected by CMAKE. Tested on different machines and distributions:</p>
+<p>The CPU-only version will automatically be compiled if CUDA cannot be detected by CMAKE.
+Only the translator will be compiled, the training framework is strictily GPU-based.</p>
+
+<p>Tested on different machines and distributions:</p>
 
 <ul>
   <li>CMake 3.5.1</li>

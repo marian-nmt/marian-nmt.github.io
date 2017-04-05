@@ -7,12 +7,12 @@ permalink: /
 <!--h2 class="title">Welcome to {{ site.title }}!</h2-->
 <div class="intro">
   <p>
-  <b>AmuNMT</b> is a deployment-ready, efficient Neural Machine Translation framework written
+  <b>AmuNMT</b> is an efficient Neural Machine Translation framework written
   in pure C++ with minimal dependencies. 
   </p>
 
   <p>
-  Some features:
+  Main features:
 
   <ul>
     <li> Fast multi-gpu training and translation </li>
@@ -48,6 +48,12 @@ permalink: /
   {% endfor %}
 
 </div><!--//cards-->
+
+<!--div class="intro">
+  <p>
+  <a class="twitter-timeline" href="https://twitter.com/AmuNmt">Tweets</a> <script async src="//platform.twitter.com/widgets.js" charset="utf-8"></script>
+  </p>
+</div-->
 
 <h4> Acknowledgements </h4>
 <div class="intro">

@@ -13,7 +13,7 @@ menu: 2
 * Binary/model-compatible with [DL4MT](https://github.com/nyu-dl/dl4mt-tutorial) and [Nematus](https://github.com/rsennrich/nematus) models
 * Multi-GPU training and translation
 * Batched translation on single and multiple GPUs
-* Pure C++ implementation with minimal depedencies on external packages
+* Pure C++ implementation with minimal depedencies on external packages (cuda, boost)
 * Optionally static compilation of binaries
 * Permissive open source license (MIT)
 

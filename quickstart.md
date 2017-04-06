@@ -36,10 +36,15 @@ Tested on different machines and distributions:
  * CMake 3.5.1
  * The CPU version should be a lot more forgiving concerning GCC/G++ or Boost versions.
 
-## Compilation
+## Download and Compilation
+
+Clone a fresh copy from github:
+
+    git clone https://github.com/amunmt/amunmt
 
 The project is a standard CMake out-of-source build:
 
+    cd amunmt
     mkdir build
     cd build
     cmake ..

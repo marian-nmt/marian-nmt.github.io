@@ -125,7 +125,9 @@
 
               <h2 id="quick-start">Quick start</h2>
 
-<p>The files and scripts described in this section can be found in <code class="highlighter-rouge">amunmt/examples/translate</code>. They demonstrate how to translate with Amun using Edinburgh’s German-English WMT2016 single model and ensemble.</p>
+<p>The files and scripts described in this section can be found in
+<a class="github-link" href="https://github.com/amunmt/amunmt/tree/master/examples/translate " target="_blank"><code class="highlighter-rogue">amunmt/examples/translate </code></a>. They demonstrate how to translate with Amun using
+Edinburgh’s German-English WMT2016 single model and ensemble.</p>
 
 <p>To execute the complete example type:</p>
 
@@ -133,12 +135,15 @@
 </code></pre>
 </div>
 
-<p>which downloads Edinburgh’s WMT16 English-Germain pretrained models from <a href="http://data.statmt.org/rsennrich/wmt16_systems">http://data.statmt.org/rsennrich/wmt16_systems</a>, and next translates the
-WMT15 test set with the single best model and with a 4-model ensemble.</p>
+<p>which downloads Edinburgh’s WMT16 English-Germain pretrained models from
+<a href="http://data.statmt.org/rsennrich/wmt16_systems">http://data.statmt.org/rsennrich/wmt16_systems</a>, and next translates the WMT15
+test set with the single best model and with a 4-model ensemble.</p>
 
-<p>The test set is processed before and after translation (tokenization, truecasing, segmentation into subwords units).</p>
+<p>The test set is processed before and after translation (tokenization,
+truecasing, segmentation into subwords units).</p>
 
-<p>To use with a different GPU than device 0 or more GPUs (here 0 1 2 3) type the command below.</p>
+<p>To use with a different GPU than device 0 or more GPUs (here 0 1 2 3) type the
+command below.</p>
 
 <div class="highlighter-rouge"><pre class="highlight"><code>./run-me.sh 0 1 2 3
 </code></pre>
@@ -171,7 +176,7 @@ moses-scripts/scripts/tokenizer/detokenizer.perl -l de &gt; data/newstest2015.si
 <h3 id="create-a-configuration-file-using-command-line-options">Create a configuration file using command line options</h3>
 
 <p>We can use <code class="highlighter-rouge">amun</code> to create a configuration file for us by providing command line
-paramteres and saving them into a YAML file with <code class="highlighter-rouge">--dump-config</code>:</p>
+parameters and saving them into a YAML file with <code class="highlighter-rouge">--dump-config</code>:</p>
 
 <div class="highlighter-rouge"><pre class="highlight"><code>../../build/amun -m en-de/model-ens?.npz -s en-de/vocab.en.json -t en-de/vocab.de.json \
  --mini-batch 1 --maxi-batch 1 -d $GPUS -b 12 -n --bpe en-de/ende.bpe \
@@ -193,7 +198,8 @@ moses-scripts/scripts/recaser/truecase.perl -model en-de/truecase-model.en | \
 ../../build/amun -c ensemble.yml | \
 # postprocess
 moses-scripts/scripts/recaser/detruecase.perl | \
-moses-scripts/scripts/tokenizer/detokenizer.perl -l de &gt; data/newstest2015.ensemble.out
+moses-scripts/scripts/tokenizer/detokenizer.perl -l de \
+&gt; data/newstest2015.ensemble.out
 </code></pre>
 </div>
 

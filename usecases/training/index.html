@@ -126,11 +126,13 @@
               <h2 id="quick-start">Quick start</h2>
 
 <p>The files and scripts described in this section can be found in
-<code class="highlighter-rouge">amunmt/examples/training</code>. They have been adapted from the Romanian-English sample 
-from <a href="https://github.com/rsennrich/wmt16-scripts">https://github.com/rsennrich/wmt16-scripts</a>. We also add the back-translated data from
-<a href="http://data.statmt.org/rsennrich/wmt16_backtranslations/">http://data.statmt.org/rsennrich/wmt16_backtranslations/</a> as desribed in 
-<a href="http://www.aclweb.org/anthology/W16-2323">Edinburgh’s WMT16 paper</a>. The resulting system should be competitive 
-or even slightly better than reported in that paper.</p>
+<a class="github-link" href="https://github.com/amunmt/amunmt/tree/master/examples/training " target="_blank"><code class="highlighter-rogue">amunmt/examples/training </code></a>. They have been adapted from the
+Romanian-English sample from <a href="https://github.com/rsennrich/wmt16-scripts">https://github.com/rsennrich/wmt16-scripts</a>. We
+also add the back-translated data from
+<a href="http://data.statmt.org/rsennrich/wmt16_backtranslations/">http://data.statmt.org/rsennrich/wmt16_backtranslations/</a> as described in
+<a href="http://www.aclweb.org/anthology/W16-2323">Edinburgh’s WMT16 paper</a>. The
+resulting system should be competitive or even slightly better than reported in
+that paper.</p>
 
 <p>To execute the complete example type:</p>
 
@@ -138,11 +140,12 @@ or even slightly better than reported in that paper.</p>
 </code></pre>
 </div>
 
-<p>which downloads the Romanian-English training files and preprocesses them (tokenization, 
-truecasing, segmentation into subwords units).</p>
+<p>which downloads the Romanian-English training files and preprocesses them
+(tokenization, truecasing, segmentation into subwords units).</p>
 
-<p>To use with a different GPU than device 0 or more GPUs (here 0 1 2 3) type the command below. 
-Training time on 1 NVIDIA GTX 1080 GPU should be roughly 24 hours.</p>
+<p>To use with a different GPU than device 0 or more GPUs (here 0 1 2 3) type the
+command below. Training time on 1 NVIDIA GTX 1080 GPU should be roughly 24
+hours.</p>
 
 <div class="highlighter-rouge"><pre class="highlight"><code>./run-me.sh 0 1 2 3
 </code></pre>
@@ -150,10 +153,10 @@ Training time on 1 NVIDIA GTX 1080 GPU should be roughly 24 hours.</p>
 
 <h2 id="details">Details</h2>
 
-<p>We ommit a decription of the preprocessing, individual steps can be retraced by
-inspecting <code class="highlighter-rouge">amunmt/examples/training/scripts/preprocess.sh</code>.</p>
+<p>We omit a description of the preprocessing, individual steps can be retraced by
+inspecting <a class="github-link" href="https://github.com/amunmt/amunmt/tree/master/examples/training/scripts/preprocess.sh " target="_blank"><code class="highlighter-rogue">amunmt/examples/training/scripts/preprocess.sh </code></a>.</p>
 
-<p>For training with marian, the following command is being used:</p>
+<p>For training with Marian, the following command is being used:</p>
 
 <div class="highlighter-rouge"><pre class="highlight"><code>../../build/marian \
  --model model/model.npz \
@@ -172,9 +175,11 @@ inspecting <code class="highlighter-rouge">amunmt/examples/training/scripts/prep
  --log model/train.log --valid-log model/valid.log
 </code></pre>
 </div>
-<p>After training (the training should stop if cross-entropy on the validation set stops improving) a final model 
-<code class="highlighter-rouge">model/model.avg.npz</code> is created from the 4 best models on the validation sets (by element-wise averaging). This model is used to 
-translate the WMT2016 dev set and test set with <code class="highlighter-rouge">amun</code>:</p>
+
+<p>After training (the training should stop if cross-entropy on the validation set
+stops improving) a final model <code class="highlighter-rouge">model/model.avg.npz</code> is created from the 4 best
+models on the validation sets (by element-wise averaging). This model is used
+to translate the WMT2016 dev set and test set with <code class="highlighter-rouge">amun</code>:</p>
 
 <div class="highlighter-rouge"><pre class="highlight"><code>cat data/newstest2016.bpe.ro \
  | ../../build/amun -c model/model.npz.amun.yml \
@@ -183,7 +188,9 @@ translate the WMT2016 dev set and test set with <code class="highlighter-rouge">
  &gt; data/newstest2016.bpe.ro.output
 </code></pre>
 </div>
-<p>after which BLEU scores for the dev and test set are reported. Results should be somewhere in the area of:</p>
+
+<p>after which BLEU scores for the dev and test set are reported. Results should
+be somewhere in the area of:</p>
 
 <div class="highlighter-rouge"><pre class="highlight"><code>newsdev2016:
 BLEU = 35.88, 67.4/42.3/28.8/20.2 (BP=1.000, ratio=1.012, hyp_len=51085, ref_len=50483)
@@ -195,9 +202,12 @@ BLEU = 34.53, 66.0/40.7/27.5/19.2 (BP=1.000, ratio=1.015, hyp_len=49258, ref_len
 
 <h2 id="custom-validation-script">Custom validation script</h2>
 
-<p>The validation script <code class="highlighter-rouge">scripts/validate.sh</code> is a quick example how to write a custom validation script. The training pauses until the validation script finishes executing. A validation script should not output anything to <code class="highlighter-rouge">stdout</code> apart from the final single score (last line):</p>
+<p>The validation script <code class="highlighter-rouge">scripts/validate.sh</code> is a quick example how to write a
+custom validation script. The training pauses until the validation script
+finishes executing. A validation script should not output anything to <code class="highlighter-rouge">stdout</code>
+apart from the final single score (last line):</p>
 
-<div class="highlighter-rouge"><pre class="highlight"><code><span class="c">#!/bin/bash</span>
+<div class="language-bash highlighter-rouge"><pre class="highlight"><code><span class="c">#!/bin/bash</span>
 
 <span class="c">#model prefix</span>
 <span class="nv">prefix</span><span class="o">=</span>model/model.npz

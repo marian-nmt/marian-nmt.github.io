@@ -68,7 +68,7 @@ on a single GPU. Since computation time for matrix products on the GPU increases
 with regard to matrix size, we can take advantage of this by pushing multiple translation
 through the neural network. For the same models as above and a batch-size of 200 (beam-size 5)
 we achieve over 5000 words per second on one GPU. This scales linearly to the number of GPUs
-used. As before, the asteriks marks systems with vocabulary filtering. Systems "Single" and "Single*"
+used. As before, the asteriks marks systems with vocabulary filtering. Systems "Single" and "Single\*"
 are the same as two best systems in the first graph.
 
 ### Training speed in words per second

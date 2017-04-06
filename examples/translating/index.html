@@ -7,7 +7,7 @@
   <head>
   <title>
     
-    AmuNMT :: Quick start
+    AmuNMT :: Translating with Amun
     
   </title>
   <!-- Meta -->
@@ -112,9 +112,9 @@
         <div id="doc-header" class="doc-header text-center">
           <h1 class="doc-title">
             
-            <i class="icon fa fa-paper-plane }}"></i>
+            <i class="icon fa fa-cogs }}"></i>
             
-            Quick start
+            Translating with Amun
           </h1>
           
         </div><!--//doc-header-->
@@ -123,86 +123,85 @@
           <div class="doc-content">
             <div class="content-inner">
 
-              <h2 id="recommended-software">Recommended software</h2>
+              <h2 id="quick-start">Quick start</h2>
 
-<h3 id="gpu-version">GPU version</h3>
+<p>The files and scripts described in this section can be found in
+<a class="github-link" href="https://github.com/amunmt/amunmt/tree/master/examples/translate " target="_blank"><code class="highlighter-rogue">amunmt/examples/translate </code></a>. They demonstrate how to translate with Amun using
+Edinburgh’s German-English WMT2016 single model and ensemble.</p>
 
-<p><strong>Ubuntu 16.04 LTS (tested and recommended).</strong> For Ubuntu 16.04 the standard packages should work. On newer versions of Ubuntu, e.g. 16.10, there may be problems due to
-incompatibilities of the default g++ compiler and CUDA.</p>
+<p>To execute the complete example type:</p>
 
-<ul>
-  <li>CMake 3.5.1</li>
-  <li>GCC/G++ 5.4</li>
-  <li>Boost 1.61</li>
-  <li>CUDA 8.0</li>
-</ul>
-
-<p><strong>Ubuntu 14.04 LTS (tested).</strong> A newer CMake version than the default version is
-required and can be installed from source.</p>
-
-<ul>
-  <li>CMake 3.5.1 (due to CUDA related bugs in earlier versions)</li>
-  <li>GCC/G++ 4.9</li>
-  <li>Boost 1.54</li>
-  <li>CUDA 7.5</li>
-</ul>
-
-<h3 id="cpu-version">CPU version</h3>
-
-<p>The CPU-only version will automatically be compiled if CUDA cannot be detected by CMAKE.
-Only the translator will be compiled, the training framework is strictily GPU-based.</p>
-
-<p>Tested on different machines and distributions:</p>
-
-<ul>
-  <li>CMake 3.5.1</li>
-  <li>The CPU version should be a lot more forgiving concerning GCC/G++ or Boost versions.</li>
-</ul>
-
-<h2 id="compilation">Compilation</h2>
-
-<p>The project is a standard CMake out-of-source build:</p>
-
-<div class="highlighter-rouge"><pre class="highlight"><code>mkdir build
-cd build
-cmake ..
-make -j
+<div class="highlighter-rouge"><pre class="highlight"><code>./run-me.sh
 </code></pre>
 </div>
 
-<p>If run for the first time, this will also download Marian – the training
-framework for AmuNMT.</p>
+<p>which downloads Edinburgh’s WMT16 English-Germain pretrained models from
+<a href="http://data.statmt.org/rsennrich/wmt16_systems">http://data.statmt.org/rsennrich/wmt16_systems</a>, and next translates the WMT15
+test set with the single best model and with a 4-model ensemble.</p>
 
-<h2 id="running-amunmt">Running AmuNMT</h2>
+<p>The test set is processed before and after translation (tokenization,
+truecasing, segmentation into subwords units).</p>
 
-<h3 id="training">Training</h3>
+<p>To use with a different GPU than device 0 or more GPUs (here 0 1 2 3) type the
+command below.</p>
 
-<p>Marian is the training framework of AmuNMT. Assuming <code class="highlighter-rouge">corpus.en</code> and <code class="highlighter-rouge">corpus.ro</code> are
-corresponding and preprocessed files of a English-Romanian parallel corpus, the
-following command will create a Nematus-compatible neural machine translation model.</p>
-
-<div class="highlighter-rouge"><pre class="highlight"><code>./amunmt/build/marian \
-  --train-sets corpus.en corpus.ro \
-  --vocabs vocab.en vocab.ro \
-  --model model.npz
+<div class="highlighter-rouge"><pre class="highlight"><code>./run-me.sh 0 1 2 3
 </code></pre>
 </div>
 
-<p>See the <a href="/docs/#marian">documentation</a> for a full list of command line
-options or the <a href="/examples/training">examples</a> for a full example of how to train
-a WMT-grade model.</p>
+<h2 id="details">Details</h2>
 
-<h3 id="translating">Translating</h3>
+<h3 id="translate-with-a-single-model">Translate with a single model</h3>
 
-<p>If a trained model is available, run:</p>
+<p>First, we translate the WMT15 test set with a single model using only command
+line options. Here, batched decoding is used with a mini-batch size of 50, i.e.
+50 sentences are being translated at once, while 1000 sentence are being preloaded
+so they can be organized into length-based batches:</p>
 
-<div class="highlighter-rouge"><pre class="highlight"><code>./amunmt/build/amun -m model.npz -s vocab.en -t vocab.ro &lt;&lt;&lt; "This is a test ."
+<div class="highlighter-rouge"><pre class="highlight"><code># Translate test set with single model
+cat data/newstest2015.ende.en | \
+#preprocess
+moses-scripts/scripts/tokenizer/normalize-punctuation.perl -l en | \
+moses-scripts/scripts/tokenizer/tokenizer.perl -l en -penn | \
+moses-scripts/scripts/recaser/truecase.perl -model en-de/truecase-model.en | \
+# translate
+../../build/amun -m en-de/model.npz -s en-de/vocab.en.json -t en-de/vocab.de.json \
+ --mini-batch 50 --maxi-batch 1000 -d $GPUS -b 12 -n --bpe en-de/ende.bpe  | \
+# postprocess
+moses-scripts/scripts/recaser/detruecase.perl | \
+moses-scripts/scripts/tokenizer/detokenizer.perl -l de &gt; data/newstest2015.single.out
 </code></pre>
 </div>
 
-<p>See the <a href="/docs/#amun">documentation</a> for a full list of command line options
-or the <a href="/examples/translating">examples</a> for a full example of how to use
-Edinburgh’s WMT models for translation.</p>
+<h3 id="create-a-configuration-file-using-command-line-options">Create a configuration file using command line options</h3>
+
+<p>We can use <code class="highlighter-rouge">amun</code> to create a configuration file for us by providing command line
+parameters and saving them into a YAML file with <code class="highlighter-rouge">--dump-config</code>:</p>
+
+<div class="highlighter-rouge"><pre class="highlight"><code>../../build/amun -m en-de/model-ens?.npz -s en-de/vocab.en.json -t en-de/vocab.de.json \
+ --mini-batch 1 --maxi-batch 1 -d $GPUS -b 12 -n --bpe en-de/ende.bpe \
+ --relative-paths --dump-config &gt; ensemble.yml
+</code></pre>
+</div>
+
+<h3 id="translate-with-configuration-file">Translate with configuration file</h3>
+
+<p>Such a configuration file can then be used instead of the command line arguments:</p>
+
+<div class="highlighter-rouge"><pre class="highlight"><code># Translate test set with ensemble
+cat data/newstest2015.ende.en | \
+#preprocess
+moses-scripts/scripts/tokenizer/normalize-punctuation.perl -l en | \
+moses-scripts/scripts/tokenizer/tokenizer.perl -l en -penn | \
+moses-scripts/scripts/recaser/truecase.perl -model en-de/truecase-model.en | \
+# translate
+../../build/amun -c ensemble.yml | \
+# postprocess
+moses-scripts/scripts/recaser/detruecase.perl | \
+moses-scripts/scripts/tokenizer/detokenizer.perl -l de \
+&gt; data/newstest2015.ensemble.out
+</code></pre>
+</div>
 
 
             </div><!--//content-inner-->

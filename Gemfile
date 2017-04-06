@@ -11,6 +11,7 @@ ruby RUBY_VERSION
 # Happy Jekylling!
 
 gem "jekyll"
+gem "jekyll-scholar"
 gem "git-up"
 gem "less"
 gem "therubyracer"

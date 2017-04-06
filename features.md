@@ -26,7 +26,7 @@ menu: 2
 ### Translation speed in words per second
 
 The models used for the translation speed benchmarks have been described in
-the [ISWLT paper](http://workshop2016.iwslt.org/downloads/IWSLT_2016_paper_4.pdf).
+the [IWSLT paper](http://workshop2016.iwslt.org/downloads/IWSLT_2016_paper_4.pdf).
 
 ![Translation speed #1]({{ site.baseurl }}/assets/images/translation_speed.png)
 

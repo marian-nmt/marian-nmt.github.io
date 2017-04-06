@@ -31,3 +31,4 @@ if you use AmuNMT or Marian in your research:
 ## Press
 
 * [Neural Conquers Patent Translation in Major WIPO Roll-out](https://slator.com/technology/neural-conquers-patent-translation-in-major-wipo-roll-out/) on [Slator](https://slator.com)
+* [WIPO Develops Cutting-Edge Translation Tool For Patent Documents](http://www.wipo.int/pressroom/en/articles/2016/article_0014.html)

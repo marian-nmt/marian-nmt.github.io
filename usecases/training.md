@@ -8,11 +8,13 @@ icon: fa-cogs
 ## Quick start
 
 The files and scripts described in this section can be found in
-`amunmt/examples/training`. They have been adapted from the Romanian-English sample 
-from <https://github.com/rsennrich/wmt16-scripts>. We also add the back-translated data from
-<http://data.statmt.org/rsennrich/wmt16_backtranslations/> as desribed in 
-[Edinburgh's WMT16 paper](http://www.aclweb.org/anthology/W16-2323). The resulting system should be competitive 
-or even slightly better than reported in that paper. 
+`amunmt/examples/training`. They have been adapted from the Romanian-English
+sample from <https://github.com/rsennrich/wmt16-scripts>. We also add the
+back-translated data from
+<http://data.statmt.org/rsennrich/wmt16_backtranslations/> as described in
+[Edinburgh's WMT16 paper](http://www.aclweb.org/anthology/W16-2323). The
+resulting system should be competitive or even slightly better than reported in
+that paper.
 
 To execute the complete example type:
 
@@ -20,11 +22,12 @@ To execute the complete example type:
 ./run-me.sh
 ```
 
-which downloads the Romanian-English training files and preprocesses them (tokenization, 
-truecasing, segmentation into subwords units). 
+which downloads the Romanian-English training files and preprocesses them
+(tokenization, truecasing, segmentation into subwords units).
 
-To use with a different GPU than device 0 or more GPUs (here 0 1 2 3) type the command below. 
-Training time on 1 NVIDIA GTX 1080 GPU should be roughly 24 hours.
+To use with a different GPU than device 0 or more GPUs (here 0 1 2 3) type the
+command below. Training time on 1 NVIDIA GTX 1080 GPU should be roughly 24
+hours.
 
 ```
 ./run-me.sh 0 1 2 3
@@ -32,10 +35,10 @@ Training time on 1 NVIDIA GTX 1080 GPU should be roughly 24 hours.
 
 ## Details
 
-We ommit a decription of the preprocessing, individual steps can be retraced by
+We omit a description of the preprocessing, individual steps can be retraced by
 inspecting `amunmt/examples/training/scripts/preprocess.sh`.
 
-For training with marian, the following command is being used:
+For training with Marian, the following command is being used:
 
 ```
 ../../build/marian \
@@ -54,9 +57,11 @@ For training with marian, the following command is being used:
  --valid-script-path ./scripts/validate.sh \
  --log model/train.log --valid-log model/valid.log
 ```
-After training (the training should stop if cross-entropy on the validation set stops improving) a final model 
-`model/model.avg.npz` is created from the 4 best models on the validation sets (by element-wise averaging). This model is used to 
-translate the WMT2016 dev set and test set with `amun`:
+
+After training (the training should stop if cross-entropy on the validation set
+stops improving) a final model `model/model.avg.npz` is created from the 4 best
+models on the validation sets (by element-wise averaging). This model is used
+to translate the WMT2016 dev set and test set with `amun`:
 
 ```
 cat data/newstest2016.bpe.ro \
@@ -65,7 +70,9 @@ cat data/newstest2016.bpe.ro \
  | sed 's/\@\@ //g' | mosesdecoder/scripts/recaser/detruecase.perl \
  > data/newstest2016.bpe.ro.output
 ```
-after which BLEU scores for the dev and test set are reported. Results should be somewhere in the area of:
+
+after which BLEU scores for the dev and test set are reported. Results should
+be somewhere in the area of:
 
 ```
 newsdev2016:
@@ -77,9 +84,12 @@ BLEU = 34.53, 66.0/40.7/27.5/19.2 (BP=1.000, ratio=1.015, hyp_len=49258, ref_len
 
 ## Custom validation script
 
-The validation script `scripts/validate.sh` is a quick example how to write a custom validation script. The training pauses until the validation script finishes executing. A validation script should not output anything to `stdout` apart from the final single score (last line): 
+The validation script `scripts/validate.sh` is a quick example how to write a
+custom validation script. The training pauses until the validation script
+finishes executing. A validation script should not output anything to `stdout`
+apart from the final single score (last line):
 
-```
+```bash
 #!/bin/bash
 
 #model prefix

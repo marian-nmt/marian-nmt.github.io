@@ -19,7 +19,7 @@ email: junczys@amu.edu.pl
 description: Fast Neural Machine Translation in C++
 baseurl: "" # the subpath of your site, e.g. /blog
 url: "https://amunmt.github.io/" # the base hostname & protocol for your site, e.g. http://example.com
-github: "https://github.com/amunmt/amunmt"
+github: "https://github.com/amunmt"
 
 # Build settings
 markdown: kramdown
@@ -27,12 +27,16 @@ highlighter: rouge
 exclude:
   - Gemfile
   - Gemfile.lock
+  - commit-and-deploy.sh
+  - Makefile
+  - "assets/css/_*.less"
   - "*/CHANGELOG*"
   - "*/README*"
   - "*/LICENSE*"
   - "*.json"
   - "*.txt"
-  - commit-and-deploy.sh
+gems:
+  - "jekyll/scholar"
 
 # Theme settings
 color_scheme: blue
@@ -41,3 +45,12 @@ header:
     title_icon: icon_documents_alt
     title_highlighted: Amu
     title_bold: NMT
+
+# Jekyll-schollar settings
+scholar:
+  style: ./_layouts/acl.csl
+  sort_by: author
+  order: ascending
+  source: ./_data
+  bibliography_template: bib
+  bibliography: amunmt.bib

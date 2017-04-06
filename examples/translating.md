@@ -1,13 +1,15 @@
 ---
 layout: docs
 title: Translating with Amun
-permalink: /usecases/translating/
+permalink: /examples/translating/
 icon: fa-cogs
 ---
 
 ## Quick start
 
-The files and scripts described in this section can be found in `amunmt/examples/translate`. They demonstrate how to translate with Amun using Edinburgh’s German-English WMT2016 single model and ensemble.
+The files and scripts described in this section can be found in
+{% github_link amunmt/examples/translate %}. They demonstrate how to translate with Amun using
+Edinburgh’s German-English WMT2016 single model and ensemble.
 
 To execute the complete example type:
 
@@ -15,12 +17,15 @@ To execute the complete example type:
 ./run-me.sh
 ```
 
-which downloads Edinburgh's WMT16 English-Germain pretrained models from <http://data.statmt.org/rsennrich/wmt16_systems>, and next translates the
-WMT15 test set with the single best model and with a 4-model ensemble. 
+which downloads Edinburgh's WMT16 English-Germain pretrained models from
+<http://data.statmt.org/rsennrich/wmt16_systems>, and next translates the WMT15
+test set with the single best model and with a 4-model ensemble.
 
-The test set is processed before and after translation (tokenization, truecasing, segmentation into subwords units).
+The test set is processed before and after translation (tokenization,
+truecasing, segmentation into subwords units).
 
-To use with a different GPU than device 0 or more GPUs (here 0 1 2 3) type the command below. 
+To use with a different GPU than device 0 or more GPUs (here 0 1 2 3) type the
+command below.
 
 ```
 ./run-me.sh 0 1 2 3
@@ -53,7 +58,7 @@ moses-scripts/scripts/tokenizer/detokenizer.perl -l de > data/newstest2015.singl
 ### Create a configuration file using command line options
 
 We can use `amun` to create a configuration file for us by providing command line
-paramteres and saving them into a YAML file with `--dump-config`:
+parameters and saving them into a YAML file with `--dump-config`:
 
 ```
 ../../build/amun -m en-de/model-ens?.npz -s en-de/vocab.en.json -t en-de/vocab.de.json \
@@ -76,5 +81,6 @@ moses-scripts/scripts/recaser/truecase.perl -model en-de/truecase-model.en | \
 ../../build/amun -c ensemble.yml | \
 # postprocess
 moses-scripts/scripts/recaser/detruecase.perl | \
-moses-scripts/scripts/tokenizer/detokenizer.perl -l de > data/newstest2015.ensemble.out
+moses-scripts/scripts/tokenizer/detokenizer.perl -l de \
+> data/newstest2015.ensemble.out
 ```

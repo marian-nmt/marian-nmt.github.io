@@ -62,7 +62,7 @@ following command will create a Nematus-compatible neural machine translation mo
       --model model.npz
 
 See the [documentation](/docs/#marian) for a full list of command line
-options or the [examples](/usecases/training) for a full example of how to train
+options or the [examples](/examples/training) for a full example of how to train
 a WMT-grade model.
 
 ### Translating
@@ -72,5 +72,5 @@ If a trained model is available, run:
     ./amunmt/build/amun -m model.npz -s vocab.en -t vocab.ro <<< "This is a test ."
 
 See the [documentation](/docs/#amun) for a full list of command line options
-or the [examples](/usecases/translating) for a full example of how to use
+or the [examples](/examples/translating) for a full example of how to use
 Edinburgh's WMT models for translation.

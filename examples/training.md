@@ -1,7 +1,7 @@
 ---
 layout: docs
 title: Training with Marian
-permalink: /usecases/training/
+permalink: /examples/training/
 icon: fa-cogs
 ---
 

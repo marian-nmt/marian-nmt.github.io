@@ -1,7 +1,7 @@
 ---
 layout: docs
 title: Winning system of the WMT 2016 APE shared task
-permalink: /usecases/postedit/
+permalink: /examples/postedit/
 icon: fa-cogs
 ---
 

@@ -12,6 +12,9 @@ ruby RUBY_VERSION
 
 gem "jekyll"
 gem "jekyll-scholar"
+gem "jekyll-last-modified-at"
+
 gem "git-up"
+
 gem "less"
 gem "therubyracer"

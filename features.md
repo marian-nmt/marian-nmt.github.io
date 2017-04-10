@@ -8,6 +8,7 @@ menu: 2
 
 ## Features
 
+### Overview
 * Up to 15x faster translation than Nematus and similar toolkits on a single GPU
 * Up to 2x faster training than toolkits based on Theano, Tensorflow, Torch on
   a single GPU
@@ -20,6 +21,30 @@ menu: 2
   boost)
 * Optionally static compilation of binaries
 * Permissive open source license (MIT)
+
+### Model features
+* GRU-based bidirectional encoder, GRU-based decoder, multiplicative attention
+mechanism;
+* Layer normalization ([Ba et al. 2016](https://arxiv.org/abs/1607.06450)) -- faster
+convergence and better test results;
+* Dynamic batching -- adjust mini-batch size dynamically to maximize usage of
+available or bounded memory, increases training throughput;
+* Running average of parameters for inference -- better results at test time;
+* Scaling dropout for RNN inputs and states, input and output embeddings;
+* Asynchronous parallel SGD (model parallelism) with vanilla SGD, Adagrad,
+or Adam -- faster training and better convergence;
+
+### Experimental features
+Experimental features are not available in the Amun translation tool and are
+potentially unstable. They can be used with the (also experimental) Marian
+translation only (slower and memory hungry in comparison to Amun). Useful
+and proven features are likely to be implemented in Amun in the future. 
+
+* Multi-layer encoder/decoder
+* Residual/skip connections between RNN layers
+* Multi-source encoder
+
+
 
 ## Benchmarks
 

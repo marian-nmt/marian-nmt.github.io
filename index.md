@@ -9,15 +9,13 @@ permalink: /
   <p>
   <b>AmuNMT</b> is an efficient Neural Machine Translation framework written
   in pure C++ with minimal dependencies. It has mainly been developed at the
-  Adam Mickiewicz University in Poznań (AMU) and at the University of Edinburgh. 
+  Adam Mickiewicz University in Poznań (AMU) and at the University of Edinburgh.
   </p>
-  
+
   <p>
-  It is currently being deployed in
-  multiple European projects and is the main translation and training engine
-  behind the neural MT launch at the
+  It is currently being deployed in multiple European projects and is the main
+  translation and training engine behind the neural MT launch at the
   <a href="http://www.wipo.int/pressroom/en/articles/2016/article_0014.html">World Intellectual Property Organization</a>.
-  
   </p>
 
   <p>
@@ -32,7 +30,7 @@ permalink: /
   </p>
 
   <div class="cta-container">
-    <a class="btn btn-primary btn-cta btn-blue" href=" {{ site.github }} " target="_blank">
+    <a class="btn btn-primary btn-cta btn-blue" href="{{ site.github }}/amunmt" target="_blank">
       <i class="fa fa-github"></i>
       Download from GitHub
     </a>

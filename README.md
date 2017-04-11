@@ -48,4 +48,4 @@ message.
 | Tag | Description |
 | --- | --- |
 | `[Text](/permalink/)` | An active link to another subpage of the website identified by its permalink. |
-| `{% github_link <repo>/<path/to/file> %}` | An active link to a file/directory `<path/to/file>` in repository `<repo>`, i.e. _amunmt.github.io/amunmt/<repo>/tree/master/<path/to/file>_. |
+| `{% github_link <repository>/<path/to/file> %}` | An active link to a file/directory `<path/to/file>` in the given repository, i.e. _http://amunmt.github.io/amunmt/<repository>/tree/master/<path/to/file>_. |

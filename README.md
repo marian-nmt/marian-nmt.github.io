@@ -41,3 +41,11 @@ When all updates have been made and the website can be still generated locally
 The script commit all changes for you with default commit message, but it is
 always better to commit changes on your own beforehand and set a relevant
 message.
+
+
+## Tag reference
+
+| Tag | Description |
+| --- | --- |
+| `[Text](/permalink/)` | An active link to another subpage of the website identified by its permalink. |
+| `{% github_link <repository>/<path/to/file> %}` | An active link to a file/directory `<path/to/file>` in the given repository, i.e. `http://amunmt.github.io/amunmt/<repository>/tree/master/<path/to/file>`. |

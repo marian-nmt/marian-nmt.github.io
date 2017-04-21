@@ -31,11 +31,18 @@
     <script src="https://oss.maxcdn.com/respond/1.4.2/respond.min.js"></script>
   <![endif]-->
 
+  <link rel="stylesheet" href="/assets/plugins/github-fork-ribbon-css/gh-fork-ribbon.css" />
+  <!--[if lt IE 9]>
+    <link rel="stylesheet" href="/assets/plugins/github-fork-ribbon-css/gh-fork-ribbon.ie.css" />
+  <![endif]-->
+
   
 </head>
 
 
   <body class="body-blue">
+    <a class="github-fork-ribbon" href="https://github.com/amunmt/amunmt" title="Fork me on GitHub">Fork me on GitHub</a>
+
     <div class="page-wrapper">
 
     <header id="header" class="header">
@@ -120,7 +127,7 @@
           </h1>
           <div class="meta">
             <i class="fa fa-clock-o"></i>
-            Last updated: 06 April 2017
+            Last updated: 21 April 2017
           </div>
         </div><!--//doc-header-->
 
@@ -164,20 +171,19 @@ inspecting <a class="github-link" href="https://github.com/amunmt/amunmt/tree/ma
 <p>For training with Marian, the following command is being used:</p>
 
 <div class="highlighter-rouge"><pre class="highlight"><code>../../build/marian \
- --model model/model.npz \
- --devices $GPUS \
- --train-sets data/corpus.bpe.ro data/corpus.bpe.en \
- --vocabs model/vocab.ro.yml model/vocab.en.yml \
- --dim-vocabs 66000 50000 \
- --mini-batch 80 \
- --layer-normalization \
- --dropout-rnn 0.2 --dropout-src 0.1 --dropout-trg 0.1 \
- --early-stopping 5 --moving-average \
- --valid-freq 10000 --save-freq 10000 --disp-freq 1000 \
- --valid-sets data/newsdev2016.bpe.ro data/newsdev2016.bpe.en \
- --valid-metrics cross-entropy valid-script \
- --valid-script-path ./scripts/validate.sh \
- --log model/train.log --valid-log model/valid.log
+    --model model/model.npz \
+    --devices 0 --seed 0 \
+    --train-sets data/corpus.bpe.ro data/corpus.bpe.en \
+    --vocabs model/vocab.ro.yml model/vocab.en.yml \
+    --dim-vocabs 66000 50000 \
+    --dynamic-batching -w 3000 \
+    --layer-normalization --dropout-rnn 0.2 --dropout-src 0.1 --dropout-trg 0.1 \
+    --early-stopping 5 --moving-average \
+    --valid-freq 10000 --save-freq 10000 --disp-freq 1000 \
+    --valid-sets data/newsdev2016.bpe.ro data/newsdev2016.bpe.en \
+    --valid-metrics cross-entropy valid-script \
+    --valid-script-path ./scripts/validate.sh \
+    --log model/train.log --valid-log model/valid.log
 </code></pre>
 </div>
 
@@ -187,10 +193,11 @@ models on the validation sets (by element-wise averaging). This model is used
 to translate the WMT2016 dev set and test set with <code class="highlighter-rouge">amun</code>:</p>
 
 <div class="highlighter-rouge"><pre class="highlight"><code>cat data/newstest2016.bpe.ro \
- | ../../build/amun -c model/model.npz.amun.yml \
-   -m model/model.avg.npz -b 12 -n --mini-batch 100 --maxi-batch 1000 \
- | sed 's/\@\@ //g' | mosesdecoder/scripts/recaser/detruecase.perl \
- &gt; data/newstest2016.bpe.ro.output
+    | ../../build/amun \
+        -c model/model.npz.amun.yml -m model/model.avg.npz \
+        -d 0 -b 12 -n --mini-batch 10 --maxi-batch 1000 \
+    | sed 's/\@\@ //g' | moses-scripts/scripts/recaser/detruecase.perl \
+    &gt; data/newstest2016.bpe.ro.output.postprocessed
 </code></pre>
 </div>
 
@@ -214,20 +221,19 @@ apart from the final single score (last line):</p>
 
 <div class="language-bash highlighter-rouge"><pre class="highlight"><code><span class="c">#!/bin/bash</span>
 
-<span class="c">#model prefix</span>
+<span class="c"># model prefix</span>
 <span class="nv">prefix</span><span class="o">=</span>model/model.npz
 
 <span class="nv">dev</span><span class="o">=</span>data/newsdev2016.bpe.ro
 <span class="nv">ref</span><span class="o">=</span>data/newsdev2016.tok.en
 
 <span class="c"># decode</span>
+cat <span class="nv">$dev</span> | ../../build/amun -c <span class="nv">$prefix</span>.dev.npz.amun.yml -b 12 -n --mini-batch 10 --maxi-batch 100 2&gt; /dev/null <span class="se">\</span>
+    | sed <span class="s1">'s/\@\@ //g'</span> | ./moses-scripts/scripts/recaser/detruecase.perl &gt; <span class="nv">$dev</span>.output.postprocessed
 
-cat <span class="nv">$dev</span> | ../../build/amun -c <span class="nv">$prefix</span>.dev.npz.amun.yml --mini-batch 10 --maxi-batch 100 2&gt;/dev/null <span class="se">\</span>
- | sed <span class="s1">'s/\@\@ //g'</span> | ./moses-scripts/scripts/recaser/detruecase.perl &gt; <span class="nv">$dev</span>.output.postprocessed
-
-<span class="c">## get BLEU</span>
+<span class="c"># get BLEU</span>
 ./moses-scripts/scripts/generic/multi-bleu.perl <span class="nv">$ref</span> &lt; <span class="nv">$dev</span>.output.postprocessed <span class="se">\</span>
-| cut -f 3 -d <span class="s1">' '</span> | cut -f 1 -d <span class="s1">','</span>
+    | cut -f 3 -d <span class="s1">' '</span> | cut -f 1 -d <span class="s1">','</span>
 </code></pre>
 </div>
 
@@ -248,7 +254,12 @@ cat <span class="nv">$dev</span> | ../../build/amun -c <span class="nv">$prefix<
 
     <footer id="footer" class="footer text-center">
   <div class="container">
-    <small class="copyright">Based on the theme PrettyDocs designed by <a href="http://themes.3rdwavemedia.com/" targe="_blank">Xiaoying Riley</a> with modifications</small>
+    <p>
+      AmuNMT - an efficient Neural Machine Translation framework written in pure C++.</br>
+      Mainly developed at the Adam Mickiewicz University in Poznań (AMU) and at the University of Edinburgh.
+    </p>
+    <p><a href="https://github.com/amunmt/amunmt">AmuNMT</a> and <a href="https://github.com/amunmt/marian">Marian</a> are licensed under the <a href="https://github.com/amunmt/amunmt/LICENSE">MIT license</a>.</p>
+    <small class="copyright">Based on the theme PrettyDocs designed by <a href="http://themes.3rdwavemedia.com/" targe="_blank">Xiaoying Riley</a> with modifications.</small>
   </div><!--//container-->
 </footer><!--//footer-->
 

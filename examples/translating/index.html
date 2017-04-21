@@ -31,11 +31,18 @@
     <script src="https://oss.maxcdn.com/respond/1.4.2/respond.min.js"></script>
   <![endif]-->
 
+  <link rel="stylesheet" href="/assets/plugins/github-fork-ribbon-css/gh-fork-ribbon.css" />
+  <!--[if lt IE 9]>
+    <link rel="stylesheet" href="/assets/plugins/github-fork-ribbon-css/gh-fork-ribbon.ie.css" />
+  <![endif]-->
+
   
 </head>
 
 
   <body class="body-blue">
+    <a class="github-fork-ribbon" href="https://github.com/amunmt/amunmt" title="Fork me on GitHub">Fork me on GitHub</a>
+
     <div class="page-wrapper">
 
     <header id="header" class="header">
@@ -120,7 +127,7 @@
           </h1>
           <div class="meta">
             <i class="fa fa-clock-o"></i>
-            Last updated: 06 April 2017
+            Last updated: 21 April 2017
           </div>
         </div><!--//doc-header-->
 
@@ -163,18 +170,18 @@ line options. Here, batched decoding is used with a mini-batch size of 50, i.e.
 50 sentences are being translated at once, while 1000 sentence are being preloaded
 so they can be organized into length-based batches:</p>
 
-<div class="highlighter-rouge"><pre class="highlight"><code># Translate test set with single model
+<div class="highlighter-rouge"><pre class="highlight"><code># translate test set with single model
 cat data/newstest2015.ende.en | \
-#preprocess
-moses-scripts/scripts/tokenizer/normalize-punctuation.perl -l en | \
-moses-scripts/scripts/tokenizer/tokenizer.perl -l en -penn | \
-moses-scripts/scripts/recaser/truecase.perl -model en-de/truecase-model.en | \
-# translate
-../../build/amun -m en-de/model.npz -s en-de/vocab.en.json -t en-de/vocab.de.json \
- --mini-batch 50 --maxi-batch 1000 -d $GPUS -b 12 -n --bpe en-de/ende.bpe  | \
-# postprocess
-moses-scripts/scripts/recaser/detruecase.perl | \
-moses-scripts/scripts/tokenizer/detokenizer.perl -l de &gt; data/newstest2015.single.out
+    # preprocess
+    moses-scripts/scripts/tokenizer/normalize-punctuation.perl -l en | \
+    moses-scripts/scripts/tokenizer/tokenizer.perl -l en -penn | \
+    moses-scripts/scripts/recaser/truecase.perl -model en-de/truecase-model.en | \
+    # translate
+    ../../build/amun -m en-de/model.npz -s en-de/vocab.en.json -t en-de/vocab.de.json \
+    --mini-batch 50 --maxi-batch 1000 -b 12 -n --bpe en-de/ende.bpe | \
+    # postprocess
+    moses-scripts/scripts/recaser/detruecase.perl | \
+    moses-scripts/scripts/tokenizer/detokenizer.perl -l de &gt; data/newstest2015.single.out
 </code></pre>
 </div>
 
@@ -184,8 +191,8 @@ moses-scripts/scripts/tokenizer/detokenizer.perl -l de &gt; data/newstest2015.si
 parameters and saving them into a YAML file with <code class="highlighter-rouge">--dump-config</code>:</p>
 
 <div class="highlighter-rouge"><pre class="highlight"><code>../../build/amun -m en-de/model-ens?.npz -s en-de/vocab.en.json -t en-de/vocab.de.json \
- --mini-batch 1 --maxi-batch 1 -d $GPUS -b 12 -n --bpe en-de/ende.bpe \
- --relative-paths --dump-config &gt; ensemble.yml
+    --mini-batch 1 --maxi-batch 1 -b 12 -n --bpe en-de/ende.bpe \
+    --relative-paths --dump-config &gt; ensemble.yml
 </code></pre>
 </div>
 
@@ -193,18 +200,17 @@ parameters and saving them into a YAML file with <code class="highlighter-rouge"
 
 <p>Such a configuration file can then be used instead of the command line arguments:</p>
 
-<div class="highlighter-rouge"><pre class="highlight"><code># Translate test set with ensemble
+<div class="highlighter-rouge"><pre class="highlight"><code># translate test set with ensemble
 cat data/newstest2015.ende.en | \
-#preprocess
-moses-scripts/scripts/tokenizer/normalize-punctuation.perl -l en | \
-moses-scripts/scripts/tokenizer/tokenizer.perl -l en -penn | \
-moses-scripts/scripts/recaser/truecase.perl -model en-de/truecase-model.en | \
-# translate
-../../build/amun -c ensemble.yml | \
-# postprocess
-moses-scripts/scripts/recaser/detruecase.perl | \
-moses-scripts/scripts/tokenizer/detokenizer.perl -l de \
-&gt; data/newstest2015.ensemble.out
+    # preprocess
+    moses-scripts/scripts/tokenizer/normalize-punctuation.perl -l en | \
+    moses-scripts/scripts/tokenizer/tokenizer.perl -l en -penn | \
+    moses-scripts/scripts/recaser/truecase.perl -model en-de/truecase-model.en | \
+    # translate
+    ../../build/amun -c ensemble.yml | \
+    # postprocess
+    moses-scripts/scripts/recaser/detruecase.perl | \
+    moses-scripts/scripts/tokenizer/detokenizer.perl -l de &gt; data/newstest2015.ensemble.out
 </code></pre>
 </div>
 
@@ -225,7 +231,12 @@ moses-scripts/scripts/tokenizer/detokenizer.perl -l de \
 
     <footer id="footer" class="footer text-center">
   <div class="container">
-    <small class="copyright">Based on the theme PrettyDocs designed by <a href="http://themes.3rdwavemedia.com/" targe="_blank">Xiaoying Riley</a> with modifications</small>
+    <p>
+      AmuNMT - an efficient Neural Machine Translation framework written in pure C++.</br>
+      Mainly developed at the Adam Mickiewicz University in Poznań (AMU) and at the University of Edinburgh.
+    </p>
+    <p><a href="https://github.com/amunmt/amunmt">AmuNMT</a> and <a href="https://github.com/amunmt/marian">Marian</a> are licensed under the <a href="https://github.com/amunmt/amunmt/LICENSE">MIT license</a>.</p>
+    <small class="copyright">Based on the theme PrettyDocs designed by <a href="http://themes.3rdwavemedia.com/" targe="_blank">Xiaoying Riley</a> with modifications.</small>
   </div><!--//container-->
 </footer><!--//footer-->
 

@@ -42,20 +42,19 @@ For training with Marian, the following command is being used:
 
 ```
 ../../build/marian \
- --model model/model.npz \
- --devices $GPUS \
- --train-sets data/corpus.bpe.ro data/corpus.bpe.en \
- --vocabs model/vocab.ro.yml model/vocab.en.yml \
- --dim-vocabs 66000 50000 \
- --mini-batch 80 \
- --layer-normalization \
- --dropout-rnn 0.2 --dropout-src 0.1 --dropout-trg 0.1 \
- --early-stopping 5 --moving-average \
- --valid-freq 10000 --save-freq 10000 --disp-freq 1000 \
- --valid-sets data/newsdev2016.bpe.ro data/newsdev2016.bpe.en \
- --valid-metrics cross-entropy valid-script \
- --valid-script-path ./scripts/validate.sh \
- --log model/train.log --valid-log model/valid.log
+    --model model/model.npz \
+    --devices 0 --seed 0 \
+    --train-sets data/corpus.bpe.ro data/corpus.bpe.en \
+    --vocabs model/vocab.ro.yml model/vocab.en.yml \
+    --dim-vocabs 66000 50000 \
+    --dynamic-batching -w 3000 \
+    --layer-normalization --dropout-rnn 0.2 --dropout-src 0.1 --dropout-trg 0.1 \
+    --early-stopping 5 --moving-average \
+    --valid-freq 10000 --save-freq 10000 --disp-freq 1000 \
+    --valid-sets data/newsdev2016.bpe.ro data/newsdev2016.bpe.en \
+    --valid-metrics cross-entropy valid-script \
+    --valid-script-path ./scripts/validate.sh \
+    --log model/train.log --valid-log model/valid.log
 ```
 
 After training (the training should stop if cross-entropy on the validation set
@@ -65,10 +64,11 @@ to translate the WMT2016 dev set and test set with `amun`:
 
 ```
 cat data/newstest2016.bpe.ro \
- | ../../build/amun -c model/model.npz.amun.yml \
-   -m model/model.avg.npz -b 12 -n --mini-batch 100 --maxi-batch 1000 \
- | sed 's/\@\@ //g' | mosesdecoder/scripts/recaser/detruecase.perl \
- > data/newstest2016.bpe.ro.output
+    | ../../build/amun \
+        -c model/model.npz.amun.yml -m model/model.avg.npz \
+        -d 0 -b 12 -n --mini-batch 10 --maxi-batch 1000 \
+    | sed 's/\@\@ //g' | moses-scripts/scripts/recaser/detruecase.perl \
+    > data/newstest2016.bpe.ro.output.postprocessed
 ```
 
 after which BLEU scores for the dev and test set are reported. Results should
@@ -92,18 +92,17 @@ apart from the final single score (last line):
 ```bash
 #!/bin/bash
 
-#model prefix
+# model prefix
 prefix=model/model.npz
 
 dev=data/newsdev2016.bpe.ro
 ref=data/newsdev2016.tok.en
 
 # decode
+cat $dev | ../../build/amun -c $prefix.dev.npz.amun.yml -b 12 -n --mini-batch 10 --maxi-batch 100 2> /dev/null \
+    | sed 's/\@\@ //g' | ./moses-scripts/scripts/recaser/detruecase.perl > $dev.output.postprocessed
 
-cat $dev | ../../build/amun -c $prefix.dev.npz.amun.yml --mini-batch 10 --maxi-batch 100 2>/dev/null \
- | sed 's/\@\@ //g' | ./moses-scripts/scripts/recaser/detruecase.perl > $dev.output.postprocessed
-
-## get BLEU
+# get BLEU
 ./moses-scripts/scripts/generic/multi-bleu.perl $ref < $dev.output.postprocessed \
-| cut -f 3 -d ' ' | cut -f 1 -d ','
+    | cut -f 3 -d ' ' | cut -f 1 -d ','
 ```

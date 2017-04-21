@@ -41,18 +41,18 @@ line options. Here, batched decoding is used with a mini-batch size of 50, i.e.
 so they can be organized into length-based batches:
 
 ```
-# Translate test set with single model
+# translate test set with single model
 cat data/newstest2015.ende.en | \
-#preprocess
-moses-scripts/scripts/tokenizer/normalize-punctuation.perl -l en | \
-moses-scripts/scripts/tokenizer/tokenizer.perl -l en -penn | \
-moses-scripts/scripts/recaser/truecase.perl -model en-de/truecase-model.en | \
-# translate
-../../build/amun -m en-de/model.npz -s en-de/vocab.en.json -t en-de/vocab.de.json \
- --mini-batch 50 --maxi-batch 1000 -d $GPUS -b 12 -n --bpe en-de/ende.bpe  | \
-# postprocess
-moses-scripts/scripts/recaser/detruecase.perl | \
-moses-scripts/scripts/tokenizer/detokenizer.perl -l de > data/newstest2015.single.out
+    # preprocess
+    moses-scripts/scripts/tokenizer/normalize-punctuation.perl -l en | \
+    moses-scripts/scripts/tokenizer/tokenizer.perl -l en -penn | \
+    moses-scripts/scripts/recaser/truecase.perl -model en-de/truecase-model.en | \
+    # translate
+    ../../build/amun -m en-de/model.npz -s en-de/vocab.en.json -t en-de/vocab.de.json \
+    --mini-batch 50 --maxi-batch 1000 -b 12 -n --bpe en-de/ende.bpe | \
+    # postprocess
+    moses-scripts/scripts/recaser/detruecase.perl | \
+    moses-scripts/scripts/tokenizer/detokenizer.perl -l de > data/newstest2015.single.out
 ```
 
 ### Create a configuration file using command line options
@@ -62,8 +62,8 @@ parameters and saving them into a YAML file with `--dump-config`:
 
 ```
 ../../build/amun -m en-de/model-ens?.npz -s en-de/vocab.en.json -t en-de/vocab.de.json \
- --mini-batch 1 --maxi-batch 1 -d $GPUS -b 12 -n --bpe en-de/ende.bpe \
- --relative-paths --dump-config > ensemble.yml
+    --mini-batch 1 --maxi-batch 1 -b 12 -n --bpe en-de/ende.bpe \
+    --relative-paths --dump-config > ensemble.yml
 ```
 
 ### Translate with configuration file
@@ -71,16 +71,15 @@ parameters and saving them into a YAML file with `--dump-config`:
 Such a configuration file can then be used instead of the command line arguments:
 
 ```
-# Translate test set with ensemble
+# translate test set with ensemble
 cat data/newstest2015.ende.en | \
-#preprocess
-moses-scripts/scripts/tokenizer/normalize-punctuation.perl -l en | \
-moses-scripts/scripts/tokenizer/tokenizer.perl -l en -penn | \
-moses-scripts/scripts/recaser/truecase.perl -model en-de/truecase-model.en | \
-# translate
-../../build/amun -c ensemble.yml | \
-# postprocess
-moses-scripts/scripts/recaser/detruecase.perl | \
-moses-scripts/scripts/tokenizer/detokenizer.perl -l de \
-> data/newstest2015.ensemble.out
+    # preprocess
+    moses-scripts/scripts/tokenizer/normalize-punctuation.perl -l en | \
+    moses-scripts/scripts/tokenizer/tokenizer.perl -l en -penn | \
+    moses-scripts/scripts/recaser/truecase.perl -model en-de/truecase-model.en | \
+    # translate
+    ../../build/amun -c ensemble.yml | \
+    # postprocess
+    moses-scripts/scripts/recaser/detruecase.perl | \
+    moses-scripts/scripts/tokenizer/detokenizer.perl -l de > data/newstest2015.ensemble.out
 ```

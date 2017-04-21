@@ -7,6 +7,8 @@ body {
   -moz-osx-font-smoothing: grayscale;
 }
 
+@footer-height: 140px;
+
 html, body {
   height: 100%;
 }
@@ -15,16 +17,16 @@ html, body {
   background-color: #f9f9fb;
   min-height: 100%;
   /* equal to footer height */
-  margin-bottom: -50px;
+  margin-bottom: -@footer-height;
   &:after {
     content: "";
     display: block;
-    height: 50px;
+    height: @footer-height;
   }
 }
 
 .footer {
-  height: 50px;
+  height: @footer-height;
 }
 
 p {
@@ -295,7 +297,7 @@ select {
 
 /* ====== Footer ====== */
 .footer {
-  background: darken(@text-color-secondary, 15%);
+  background: darken(@text-color-secondary, 10%);
   color: rgba(256, 256, 256, 0.6);
   padding: 15px 0;
   a {

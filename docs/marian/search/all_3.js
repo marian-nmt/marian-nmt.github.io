@@ -1,0 +1,25 @@
+var searchData=
+[
+  ['data',['data',['../classmarian_1_1data_1_1Input.html#a4ab2dc585e463b4dab0e822b2108b977',1,'marian::data::Input::data()'],['../namespacemarian_1_1data.html#a5801e80ecb76ee38a5ac080f08d9646c',1,'marian::data::Data()']]],
+  ['database',['DataBase',['../classmarian_1_1data_1_1DataBase.html',1,'marian::data']]],
+  ['dataptr',['DataPtr',['../namespacemarian_1_1data.html#a9f6a0f9589e574f5631c92e8c66ebbae',1,'marian::data']]],
+  ['dataset',['DataSet',['../namespacemarian_1_1data.html#a88352f9dcf8e3520af06c8616337804d',1,'marian::data']]],
+  ['decoderamun',['DecoderAmun',['../classmarian_1_1DecoderAmun.html',1,'marian']]],
+  ['decoderbase',['DecoderBase',['../classmarian_1_1DecoderBase.html',1,'marian']]],
+  ['decoderhardatt',['DecoderHardAtt',['../classmarian_1_1DecoderHardAtt.html',1,'marian']]],
+  ['decoderhardsoftatt',['DecoderHardSoftAtt',['../classmarian_1_1DecoderHardSoftAtt.html',1,'marian']]],
+  ['decoders2s',['DecoderS2S',['../classmarian_1_1DecoderS2S.html',1,'marian']]],
+  ['decoderstate',['DecoderState',['../classmarian_1_1DecoderState.html',1,'marian']]],
+  ['decoderstateamun',['DecoderStateAmun',['../classmarian_1_1DecoderStateAmun.html',1,'marian']]],
+  ['decoderstatehardatt',['DecoderStateHardAtt',['../classmarian_1_1DecoderStateHardAtt.html',1,'marian']]],
+  ['decoderstates2s',['DecoderStateS2S',['../classmarian_1_1DecoderStateS2S.html',1,'marian']]],
+  ['dense',['Dense',['../classmarian_1_1Dense.html',1,'marian']]],
+  ['densenew',['DenseNew',['../classmarian_1_1DenseNew.html',1,'marian']]],
+  ['densewithfilter',['DenseWithFilter',['../classmarian_1_1DenseWithFilter.html',1,'marian']]],
+  ['destruct',['Destruct',['../classNpzConverter.html#a5546c446fba3083e22e1741a1f08d80f',1,'NpzConverter']]],
+  ['devicecpu',['DeviceCPU',['../classmarian_1_1DeviceCPU.html',1,'marian']]],
+  ['devicegpu',['DeviceGPU',['../classmarian_1_1DeviceGPU.html',1,'marian']]],
+  ['dim',['dim',['../structmarian_1_1Shape.html#a32b4539b5c36415806486ca90bfca650',1,'marian::Shape::dim(int i)'],['../structmarian_1_1Shape.html#a5f8b66b62e80d2eebe5d3b35568273cc',1,'marian::Shape::dim(int i) const '],['../classmarian_1_1data_1_1DataBase.html#ae5d0da97db965068fa532567f282fea3',1,'marian::data::DataBase::dim()']]],
+  ['divnodeop',['DivNodeOp',['../structmarian_1_1DivNodeOp.html',1,'marian']]],
+  ['dotnodeop',['DotNodeOp',['../structmarian_1_1DotNodeOp.html',1,'marian']]]
+];

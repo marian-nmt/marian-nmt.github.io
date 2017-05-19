@@ -6,7 +6,19 @@ icon: fa-file-code-o
 menu: 3
 ---
 
-## Marian (Training)
+For training NMT models, you want to use Marian toolkit. Amun provides fast
+decoding for Marian's default models, which is compatible with Nematus/DL4MT
+models.
+
+## Code documentation
+
+[The code documentation for Marian toolkit](/docs/marian/classes.html) is
+generated using Doxygen. The newest version can be generated locally with CMake:
+`mkdir -p build && cd build && cmake .. && make doc`.
+
+## Marian's commands
+
+Command-line options for `marian_train` tool:
 
 ### General options
 
@@ -76,7 +88,9 @@ menu: 3
   --valid-log arg                       Log validation scores to file given by  arg
 ```
 
-## Amun (Translation)
+## Amun's commands
+
+Command-line options for `amun` decoder:
 
 ### General options
 

@@ -10,5 +10,5 @@ rsync -ca _site/* .
 rm -rf _site
 git add *
 git commit -a -m 'Commit static pages'
-#git push
-#git checkout jekyll
+git push
+git checkout jekyll

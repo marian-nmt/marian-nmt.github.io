@@ -43,28 +43,28 @@ Tested on different machines and distributions:
 
 Clone a fresh copy from github:
 
-    git clone https://github.com/amunmt/amunmt
+    git clone https://github.com/marian-nmt/marian
 
 The project is a standard CMake out-of-source build:
 
-    cd amunmt
+    cd marian
     mkdir build
     cd build
     cmake ..
     make -j
 
 If run for the first time, this will also download Marian -- the training
-framework for AmuNMT.
+framework for Marian.
 
-## Running AmuNMT
+## Running Marian
 
 ### Training
 
-Marian is the training framework of AmuNMT. Assuming `corpus.en` and `corpus.ro` are
+Marian is the training framework of Marian. Assuming `corpus.en` and `corpus.ro` are
 corresponding and preprocessed files of a English-Romanian parallel corpus, the
 following command will create a Nematus-compatible neural machine translation model.
 
-    ./amunmt/build/marian \
+    ./marian/build/marian \
       --train-sets corpus.en corpus.ro \
       --vocabs vocab.en vocab.ro \
       --model model.npz
@@ -77,7 +77,7 @@ a WMT-grade model.
 
 If a trained model is available, run:
 
-    ./amunmt/build/amun -m model.npz -s vocab.en -t vocab.ro <<< "This is a test ."
+    ./marian/build/amun -m model.npz -s vocab.en -t vocab.ro <<< "This is a test ."
 
 See the [documentation](/docs/#amun) for a full list of command line options
 or the [examples](/examples/translating) for a full example of how to use

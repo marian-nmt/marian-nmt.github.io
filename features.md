@@ -57,20 +57,20 @@ the [IWSLT paper](http://workshop2016.iwslt.org/downloads/IWSLT_2016_paper_4.pdf
 
 We ran our experiments on an Intel Xeon E5-2620 2.40GHz server with four NVIDIA
 GeForce GTX 1080 GPUs.We present the words-per-second ratio for our NMT models
-using AmuNMT and Nematus, executed on the CPU and GPU. For the CPU version we
+using Marian and Nematus, executed on the CPU and GPU. For the CPU version we
 use 16 threads, translating one sentence per thread. We restrict the number of
 OpenBLAS threads to 1 per main Nematus thread. For the GPU version of Nematus
 we use 5 processes to maximize GPU saturation. As a baseline, the phrase-based
 model reaches 455 words per second using 16 threads.
 
 The CPU-bound execution of Nematus reaches 47 words per second while the
-GPU-bound achieved 270 words per second. In similar settings, CPU-bound AmuNMT
+GPU-bound achieved 270 words per second. In similar settings, CPU-bound Marian
 is three times faster than Nematus CPU, but three times slower than Moses. With
 vocabulary selection (systems with asteriks) we can nearly double the speed of
-AmuNMT CPU. The GPU-executed version of AmuNMT is more than three times faster
+Marian CPU. The GPU-executed version of Marian is more than three times faster
 than Nematus and nearly twice as fast as Moses, achieving 865 words per second,
 with vocabulary selection we reach 1,192. Even the speed of the CPU version
-would already allow to replace a Moses-based SMT system with an AmuNMT-based
+would already allow to replace a Moses-based SMT system with an Marian-based
 NMT system in a production environment without severely affecting translation
 throughput.
 
@@ -88,8 +88,8 @@ graph.
 
 ### Training speed in words per second
 
-We also compare training speed between a number of popular toolkits and AmuNMT.
-As AmuNMT is still early work, we expect speed to improve with future optimizations.
+We also compare training speed between a number of popular toolkits and Marian.
+As Marian is still early work, we expect speed to improve with future optimizations.
 
 <div class="multiple-images">
   <img alt="Training speed #1" src="{{ site.baseurl }}/assets/images/training_speed.png" />
@@ -105,7 +105,7 @@ on German-English WMT data.
 
 ### Multi-GPU training
 
-AmuNMT's training framework provides multi-GPU training via asynchronous SGD and
+Marian's training framework provides multi-GPU training via asynchronous SGD and
 data parallelism (copies of the full model on each GPU). We benchmarked
 the [Romanian-English example](/examples/training/) on a machine with
 8 NVIDIA GTX 1080 GPUs. Training speed increases with each GPU instance, but currently

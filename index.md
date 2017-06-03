@@ -30,7 +30,7 @@ permalink: /
   </p>
 
   <div class="cta-container">
-    <a class="btn btn-primary btn-cta btn-blue" href="{{ site.github }}/amunmt" target="_blank">
+    <a class="btn btn-primary btn-cta btn-blue" href="{{ site.github }}/marian" target="_blank">
       <i class="fa fa-github"></i>
       Download from GitHub
     </a>

@@ -9,7 +9,7 @@ menu: 6
 ## Citation
 
 Please cite the following [IWSLT paper](http://workshop2016.iwslt.org/downloads/IWSLT_2016_paper_4.pdf)
-if you use AmuNMT or Marian in your research:
+if you use Marian (formerly AmuNMT) in your research:
 
 ```tex
 @InProceedings{junczys2016neural,
@@ -24,7 +24,7 @@ if you use AmuNMT or Marian in your research:
 }
 ```
 
-## Work using AmuNMT
+## Work using Marian/AmuNMT
 
 {% bibliography %}
 

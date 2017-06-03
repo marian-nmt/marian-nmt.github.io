@@ -11,14 +11,14 @@ install: Gemfile.lock
 Gemfile.lock: Gemfile
 	bundle update
 
-zip: amunmt-website.tgz
-amunmt-website.tgz: build
+zip: marian-nmt-website.tgz
+marian-nmt-website.tgz: build
 	tar zcf $@ _site
 
 docs: Doxyfile.marian.in marian
 	doxygen $<
 marian:
-	git clone https://github.com/amunmt/marian.git $@
+	git clone https://github.com/marian-nmt/marian-train.git $@
 
 clean-docs:
 	rm -rf docs/marian

@@ -9,6 +9,7 @@ var searchData=
   ['encoderdecoder_3c_20encoderamun_2c_20decoderamun_20_3e',['EncoderDecoder&lt; EncoderAmun, DecoderAmun &gt;',['../classmarian_1_1EncoderDecoder.html',1,'marian']]],
   ['encoderdecoder_3c_20encoders2s_2c_20decoders2s_20_3e',['EncoderDecoder&lt; EncoderS2S, DecoderS2S &gt;',['../classmarian_1_1EncoderDecoder.html',1,'marian']]],
   ['encoderdecoder_3c_20multiencoders2s_2c_20multidecoderhardsoftatt_20_3e',['EncoderDecoder&lt; MultiEncoderS2S, MultiDecoderHardSoftAtt &gt;',['../classmarian_1_1EncoderDecoder.html',1,'marian']]],
+  ['encoderdecoder_3c_20multiencoders2s_2c_20multidecoders2s_20_3e',['EncoderDecoder&lt; MultiEncoderS2S, MultiDecoderS2S &gt;',['../classmarian_1_1EncoderDecoder.html',1,'marian']]],
   ['encoderdecoderbase',['EncoderDecoderBase',['../classmarian_1_1EncoderDecoderBase.html',1,'marian']]],
   ['encoderdecoderrec',['EncoderDecoderRec',['../classmarian_1_1EncoderDecoderRec.html',1,'marian']]],
   ['encoderdecodersymmetric',['EncoderDecoderSymmetric',['../classmarian_1_1EncoderDecoderSymmetric.html',1,'marian']]],

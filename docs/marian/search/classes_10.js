@@ -13,6 +13,7 @@ var searchData=
   ['sentencetuple',['SentenceTuple',['../classmarian_1_1data_1_1SentenceTuple.html',1,'marian::data']]],
   ['sgd',['Sgd',['../classmarian_1_1Sgd.html',1,'marian']]],
   ['shape',['Shape',['../structmarian_1_1Shape.html',1,'marian']]],
+  ['shapegpu',['ShapeGPU',['../structmarian_1_1ShapeGPU.html',1,'marian']]],
   ['shiftnodeop',['ShiftNodeOp',['../structmarian_1_1ShiftNodeOp.html',1,'marian']]],
   ['singleton',['Singleton',['../classmarian_1_1Singleton.html',1,'marian']]],
   ['softmaxnodeop',['SoftmaxNodeOp',['../structmarian_1_1SoftmaxNodeOp.html',1,'marian']]],
@@ -20,6 +21,5 @@ var searchData=
   ['sqrtnodeop',['SqrtNodeOp',['../structmarian_1_1SqrtNodeOp.html',1,'marian']]],
   ['squarenodeop',['SquareNodeOp',['../structmarian_1_1SquareNodeOp.html',1,'marian']]],
   ['subbatch',['SubBatch',['../classmarian_1_1data_1_1SubBatch.html',1,'marian::data']]],
-  ['sumnodeop',['SumNodeOp',['../structmarian_1_1SumNodeOp.html',1,'marian']]],
-  ['syncgraphgroup',['SyncGraphGroup',['../classmarian_1_1SyncGraphGroup.html',1,'marian']]]
+  ['sumnodeop',['SumNodeOp',['../structmarian_1_1SumNodeOp.html',1,'marian']]]
 ];

@@ -5,6 +5,5 @@ var searchData=
   ['gradientdropbase',['GradientDropBase',['../classmarian_1_1GradientDropBase.html',1,'marian']]],
   ['graphgroup',['GraphGroup',['../classmarian_1_1GraphGroup.html',1,'marian']]],
   ['graphviz',['graphviz',['../classmarian_1_1ExpressionGraph.html#a3bbdbd8964031c78c7825958d1e9c9fe',1,'marian::ExpressionGraph']]],
-  ['gru',['GRU',['../classmarian_1_1GRU.html',1,'marian']]],
-  ['grufastnodeop',['GRUFastNodeOp',['../structmarian_1_1GRUFastNodeOp.html',1,'marian']]]
+  ['gru',['GRU',['../classmarian_1_1GRU.html',1,'marian']]]
 ];

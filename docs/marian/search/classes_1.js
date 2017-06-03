@@ -1,5 +1,7 @@
 var searchData=
 [
+  ['backend',['Backend',['../classmarian_1_1Backend.html',1,'marian']]],
+  ['backendgpu',['BackendGPU',['../classmarian_1_1BackendGPU.html',1,'marian']]],
   ['batch',['Batch',['../classmarian_1_1data_1_1Batch.html',1,'marian::data']]],
   ['batchgenerator',['BatchGenerator',['../classmarian_1_1data_1_1BatchGenerator.html',1,'marian::data']]],
   ['batchstats',['BatchStats',['../classmarian_1_1data_1_1BatchStats.html',1,'marian::data']]],

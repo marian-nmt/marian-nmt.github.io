@@ -2,7 +2,6 @@ var searchData=
 [
   ['tanh',['Tanh',['../classmarian_1_1Tanh.html',1,'marian']]],
   ['tanhnodeop',['TanhNodeOp',['../structmarian_1_1TanhNodeOp.html',1,'marian']]],
-  ['tanhplus3nodeop',['TanhPlus3NodeOp',['../structmarian_1_1TanhPlus3NodeOp.html',1,'marian']]],
   ['temporaryfile',['TemporaryFile',['../classTemporaryFile.html',1,'']]],
   ['tensorallocator',['TensorAllocator',['../classmarian_1_1TensorAllocator.html',1,'marian']]],
   ['tensorbase',['TensorBase',['../classmarian_1_1TensorBase.html',1,'marian']]],

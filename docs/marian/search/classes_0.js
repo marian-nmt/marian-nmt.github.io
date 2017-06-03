@@ -6,6 +6,5 @@ var searchData=
   ['allocationexception',['AllocationException',['../classmarian_1_1AllocationException.html',1,'marian']]],
   ['amun',['Amun',['../classmarian_1_1Amun.html',1,'marian']]],
   ['asyncgraphgroup',['AsyncGraphGroup',['../classmarian_1_1AsyncGraphGroup.html',1,'marian']]],
-  ['attentioncell',['AttentionCell',['../classmarian_1_1AttentionCell.html',1,'marian']]],
-  ['attentionnodeop',['AttentionNodeOp',['../structmarian_1_1AttentionNodeOp.html',1,'marian']]]
+  ['attentioncell',['AttentionCell',['../classmarian_1_1AttentionCell.html',1,'marian']]]
 ];

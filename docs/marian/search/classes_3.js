@@ -12,6 +12,7 @@ var searchData=
   ['decoderstates2s',['DecoderStateS2S',['../classmarian_1_1DecoderStateS2S.html',1,'marian']]],
   ['dense',['Dense',['../classmarian_1_1Dense.html',1,'marian']]],
   ['densenew',['DenseNew',['../classmarian_1_1DenseNew.html',1,'marian']]],
+  ['densetied',['DenseTied',['../classmarian_1_1DenseTied.html',1,'marian']]],
   ['densewithfilter',['DenseWithFilter',['../classmarian_1_1DenseWithFilter.html',1,'marian']]],
   ['devicecpu',['DeviceCPU',['../classmarian_1_1DeviceCPU.html',1,'marian']]],
   ['devicegpu',['DeviceGPU',['../classmarian_1_1DeviceGPU.html',1,'marian']]],

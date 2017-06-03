@@ -9,5 +9,6 @@ var searchData=
   ['multidecoders2s',['MultiDecoderS2S',['../classmarian_1_1MultiDecoderS2S.html',1,'marian']]],
   ['multiencoder',['MultiEncoder',['../classmarian_1_1MultiEncoder.html',1,'marian']]],
   ['multihardsoftatt',['MultiHardSoftAtt',['../classmarian_1_1MultiHardSoftAtt.html',1,'marian']]],
+  ['multis2s',['MultiS2S',['../classmarian_1_1MultiS2S.html',1,'marian']]],
   ['multnodeop',['MultNodeOp',['../structmarian_1_1MultNodeOp.html',1,'marian']]]
 ];

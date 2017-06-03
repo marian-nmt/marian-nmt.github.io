@@ -7,7 +7,7 @@ permalink: /
 <!--h2 class="title">Welcome to {{ site.title }}!</h2-->
 <div class="intro">
   <p>
-  <b>AmuNMT</b> is an efficient Neural Machine Translation framework written
+  <b>Marian</b> is an efficient Neural Machine Translation framework written
   in pure C++ with minimal dependencies. It has mainly been developed at the
   Adam Mickiewicz University in Poznań (AMU) and at the University of Edinburgh.
   </p>
@@ -63,7 +63,7 @@ permalink: /
 <h4> Acknowledgements </h4>
 <div class="intro">
   <p>
-The development of AmuNMT received funding from the European Union's Horizon 2020
+The development of Marian received funding from the European Union's Horizon 2020
 Research and Innovation Programme under grant agreements 688139
 (<a href="http://www.summa-project.eu">SUMMA</a>; 2016-2019) and 645487
 (<a href="http://www.modernmt.eu">Modern MT</a>; 2015-2017), the

@@ -1,4 +1,4 @@
-# AmuNMT Website
+# Marian Website
 
 The website is build with Jekyll - a static site generator.
 The content is created and updated on branch `jekyll`, then the static pages
@@ -48,4 +48,4 @@ message.
 | Tag | Description |
 | --- | --- |
 | `[Text](/permalink/)` | An active link to another subpage of the website identified by its permalink. |
-| `{% github_link <repository>/<path/to/file> %}` | An active link to a file/directory `<path/to/file>` in the given repository, i.e. `http://amunmt.github.io/amunmt/<repository>/tree/master/<path/to/file>`. |
+| `{% github_link <repository>/<path/to/file> %}` | An active link to a file/directory `<path/to/file>` in the given repository, i.e. `http://marian-nmt.github.io/marian/<repository>/tree/master/<path/to/file>`. |

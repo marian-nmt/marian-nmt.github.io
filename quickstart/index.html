@@ -127,7 +127,7 @@
           </h1>
           <div class="meta">
             <i class="fa fa-clock-o"></i>
-            Last updated: 19 April 2017
+            Last updated: 04 June 2017
           </div>
         </div><!--//doc-header-->
 
@@ -178,13 +178,13 @@ Only the translator will be compiled, the training framework is strictily GPU-ba
 
 <p>Clone a fresh copy from github:</p>
 
-<div class="highlighter-rouge"><pre class="highlight"><code>git clone https://github.com/amunmt/amunmt
+<div class="highlighter-rouge"><pre class="highlight"><code>git clone https://github.com/marian-nmt/marian
 </code></pre>
 </div>
 
 <p>The project is a standard CMake out-of-source build:</p>
 
-<div class="highlighter-rouge"><pre class="highlight"><code>cd amunmt
+<div class="highlighter-rouge"><pre class="highlight"><code>cd marian
 mkdir build
 cd build
 cmake ..
@@ -193,17 +193,17 @@ make -j
 </div>
 
 <p>If run for the first time, this will also download Marian – the training
-framework for AmuNMT.</p>
+framework for Marian.</p>
 
-<h2 id="running-amunmt">Running AmuNMT</h2>
+<h2 id="running-marian">Running Marian</h2>
 
 <h3 id="training">Training</h3>
 
-<p>Marian is the training framework of AmuNMT. Assuming <code class="highlighter-rouge">corpus.en</code> and <code class="highlighter-rouge">corpus.ro</code> are
+<p>Marian is the training framework of Marian. Assuming <code class="highlighter-rouge">corpus.en</code> and <code class="highlighter-rouge">corpus.ro</code> are
 corresponding and preprocessed files of a English-Romanian parallel corpus, the
 following command will create a Nematus-compatible neural machine translation model.</p>
 
-<div class="highlighter-rouge"><pre class="highlight"><code>./amunmt/build/marian \
+<div class="highlighter-rouge"><pre class="highlight"><code>./marian/build/marian \
   --train-sets corpus.en corpus.ro \
   --vocabs vocab.en vocab.ro \
   --model model.npz
@@ -218,7 +218,7 @@ a WMT-grade model.</p>
 
 <p>If a trained model is available, run:</p>
 
-<div class="highlighter-rouge"><pre class="highlight"><code>./amunmt/build/amun -m model.npz -s vocab.en -t vocab.ro &lt;&lt;&lt; "This is a test ."
+<div class="highlighter-rouge"><pre class="highlight"><code>./marian/build/amun -m model.npz -s vocab.en -t vocab.ro &lt;&lt;&lt; "This is a test ."
 </code></pre>
 </div>
 

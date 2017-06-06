@@ -8,7 +8,7 @@ icon: fa-cogs
 ## Quick start
 
 The files and scripts described in this section can be found in
-{% github_link amunmt/examples/translate %}. They demonstrate how to translate with Amun using
+{% github_link marian/examples/translate %}. They demonstrate how to translate with Amun using
 Edinburgh’s German-English WMT2016 single model and ensemble.
 
 To execute the complete example type:

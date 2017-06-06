@@ -8,7 +8,7 @@ icon: fa-cogs
 ## Quick start
 
 The files and scripts described in this section can be found in
-{% github_link amunmt/examples/training %}. They have been adapted from the
+{% github_link marian/examples/training %}. They have been adapted from the
 Romanian-English sample from <https://github.com/rsennrich/wmt16-scripts>. We
 also add the back-translated data from
 <http://data.statmt.org/rsennrich/wmt16_backtranslations/> as described in
@@ -36,7 +36,7 @@ hours.
 ## Details
 
 We omit a description of the preprocessing, individual steps can be retraced by
-inspecting {% github_link amunmt/examples/training/scripts/preprocess.sh %}.
+inspecting {% github_link marian/examples/training/scripts/preprocess.sh %}.
 
 For training with Marian, the following command is being used:
 

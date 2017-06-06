@@ -42,7 +42,7 @@ This file contains the artificially generated post-editing triplets described in
 
 We also provide the complete primary system and two contrastive variants. To create the submitted output, locate the ```Makefile``` and provide the path to the main directory of your working Marian tool (latest master, see [Readme](https://github.com/emjotde/amunmt/blob/master/README.md)) in the following line:
 
-    AMUNMT=/home/marcinj/Badania/amunmt 
+    AMUNMT=/home/marcinj/Badania/marian 
 
 Next type ```make```. The included files should provide all input files, model files and scripts to produce our exact submission. You may need to change the number of GPU devices, as the original configs assume three GPUs. In the end you should see the three submission files:
 

@@ -40,7 +40,7 @@ This file contains the artificially generated post-editing triplets described in
 ## Models and config files
 [Download the systems](http://odkrywka.wmi.amu.edu.pl/static/data/ape/system.tgz) (2.7G)
 
-We also provide the complete primary system and two contrastive variants. To create the submitted output, locate the ```Makefile``` and provide the path to the main directory of your working Marian tool (latest master, see [Readme](https://github.com/emjotde/amunmt/blob/master/README.md)) in the following line:
+We also provide the complete primary system and two contrastive variants. To create the submitted output, locate the ```Makefile``` and provide the path to the main directory of your working Marian tool (latest master, see [Readme](https://github.com/marian-nmt/marian/blob/master/README.md)) in the following line:
 
     AMUNMT=/home/marcinj/Badania/marian 
 

@@ -76,10 +76,10 @@ be somewhere in the area of:
 
 ```
 newsdev2016:
-BLEU = 35.88, 67.4/42.3/28.8/20.2 (BP=1.000, ratio=1.012, hyp_len=51085, ref_len=50483)
+BLEU = 36.27, 67.7/42.6/29.2/20.6 (BP=1.000, ratio=1.005, hyp_len=50740, ref_len=50483)
 
 newstest2016:
-BLEU = 34.53, 66.0/40.7/27.5/19.2 (BP=1.000, ratio=1.015, hyp_len=49258, ref_len=48531)
+BLEU = 35.01, 66.6/41.3/28.0/19.5 (BP=1.000, ratio=1.006, hyp_len=48800, ref_len=48531)
 ```
 
 ## Custom validation script

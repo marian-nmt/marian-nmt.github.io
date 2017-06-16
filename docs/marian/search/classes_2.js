@@ -1,5 +1,7 @@
 var searchData=
 [
+  ['cell',['cell',['../classmarian_1_1cell.html',1,'marian::cell'],['../classmarian_1_1Cell.html',1,'marian::Cell']]],
+  ['cells',['cells',['../classmarian_1_1cells.html',1,'marian']]],
   ['chainable',['Chainable',['../classmarian_1_1Chainable.html',1,'marian']]],
   ['chainable_3c_20tensor_20_3e',['Chainable&lt; Tensor &gt;',['../classmarian_1_1Chainable.html',1,'marian']]],
   ['clipperbase',['ClipperBase',['../classmarian_1_1ClipperBase.html',1,'marian']]],

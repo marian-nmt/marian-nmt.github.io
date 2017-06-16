@@ -1,4 +1,4 @@
 var searchData=
 [
-  ['fits',['fits',['../classmarian_1_1ExpressionGraph.html#a1ce5fad852cb6d30cfd0a2d729bb44c3',1,'marian::ExpressionGraph']]]
+  ['forward',['forward',['../classmarian_1_1ExpressionGraph.html#aa7596e34cc2895cf374ce06d9d5ee370',1,'marian::ExpressionGraph']]]
 ];

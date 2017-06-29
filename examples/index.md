@@ -20,6 +20,8 @@ We also add the back-translated data from <http://data.statmt.org/rsennrich/wmt1
 as desribed in [Edinburgh's WMT16 paper](http://www.aclweb.org/anthology/W16-2323).
 The resulting system should be competitive or even slightly better than
 reported in that paper.
+* **[Custom models with Marian](/examples/tutorial/)**: Building and modifing a
+basic Sutskever-style sequence-to-sequence model.
 
 ## Use cases
 

@@ -255,3 +255,148 @@ virtual Ptr<DecoderState> startState(Ptr<EncoderState> encState) {
   return New<DecoderState>(startStates, nullptr, encState);
 }
 ```
+
+#### The step function
+
+In the step function we define actions to be taken to either train on or create
+the target sequence (all time steps during training, one time step during
+translation).
+
+##### Shifted embeddings
+``` c++
+auto embeddings = state->getTargetEmbeddings();
+```
+
+##### Decoder RNN
+
+``` c++
+// forward RNN for decoder
+float dropoutRnn = inference_ ? 0 : opt<float>("dropout-rnn");
+auto rnn = rnn::rnn(graph)
+           ("type", "lstm")
+           ("prefix", prefix_)
+           ("dimInput", opt<int>("dim-emb"))
+           ("dimState", opt<int>("dim-rnn"))
+           ("dropout", dropoutRnn)
+           ("layer-normalization", opt<bool>("layer-normalization"))
+           .push_back(rnn::cell(graph))
+           .construct();
+
+// apply RNN to embeddings, initialized with encoder context mapped into
+// decoder space
+auto decoderContext = rnn->transduce(embeddings, state->getStates());
+
+// retrieve the last state per layer. They are required during translation
+// in order to continue decoding for the next word
+rnn::States decoderStates = rnn->lastCellStates();
+```
+
+##### Deep output (2-layers)
+``` c++
+// construct deep output multi-layer network layer-wise
+auto layer1 = mlp::dense(graph)
+              ("prefix", prefix_ + "_ff_logit_l1")
+              ("dim", opt<int>("dim-emb"))
+              ("activation", mlp::act::tanh);
+int dimTrgVoc = opt<std::vector<int>>("dim-vocabs").back();
+auto layer2 = mlp::dense(graph)
+              ("prefix", prefix_ + "_ff_logit_l2")
+              ("dim", dimTrgVoc);
+
+// assemble layers into MLP and apply to embeddings, decoder context and
+// aligned source context
+auto logits = mlp::mlp(graph)
+              .push_back(layer1)
+              .push_back(layer2)
+              ->apply(embeddings, decoderContext);
+```
+
+##### Return the decoder state
+``` c++
+// return unormalized(!) probabilities
+return New<DecoderState>(decoderStates, logits, state->getEncoderState());
+```
+
+#### The complete decoder
+
+``` c++
+class DecoderSutskever : public DecoderBase {
+public:
+  template <class... Args>
+  DecoderSutskever(Ptr<Config> options, Args... args)
+      : DecoderBase(options, args...) {}
+
+  virtual Ptr<DecoderState> startState(Ptr<EncoderState> encState) {
+    using namespace keywords;
+
+    // Use first encoded word as start state
+    auto start = marian::step(encState->getContext(), 0);
+
+    rnn::States startStates({{start, start}});
+    return New<DecoderState>(startStates, nullptr, encState);
+  }
+
+  virtual Ptr<DecoderState> step(Ptr<ExpressionGraph> graph,
+                                 Ptr<DecoderState> state) {
+    using namespace keywords;
+
+    auto embeddings = state->getTargetEmbeddings();
+
+    // forward RNN for decoder
+    float dropoutRnn = inference_ ? 0 : opt<float>("dropout-rnn");
+    auto rnn = rnn::rnn(graph)
+               ("type", "lstm")
+               ("prefix", prefix_)
+               ("dimInput", opt<int>("dim-emb"))
+               ("dimState", opt<int>("dim-rnn"))
+               ("dropout", dropoutRnn)
+               ("layer-normalization", opt<bool>("layer-normalization"))
+               .push_back(rnn::cell(graph))
+               .construct();
+
+    // apply RNN to embeddings, initialized with encoder context mapped into
+    // decoder space
+    auto decoderContext = rnn->transduce(embeddings, state->getStates());
+
+    // retrieve the last state per layer. They are required during translation
+    // in order to continue decoding for the next word
+    rnn::States decoderStates = rnn->lastCellStates();
+
+    // construct deep output multi-layer network layer-wise
+    auto layer1 = mlp::dense(graph)
+                  ("prefix", prefix_ + "_ff_logit_l1")
+                  ("dim", opt<int>("dim-emb"))
+                  ("activation", mlp::act::tanh);
+    int dimTrgVoc = opt<std::vector<int>>("dim-vocabs").back();
+    auto layer2 = mlp::dense(graph)
+                  ("prefix", prefix_ + "_ff_logit_l2")
+                  ("dim", dimTrgVoc);
+
+    // assemble layers into MLP and apply to embeddings, decoder context and
+    // aligned source context
+    auto logits = mlp::mlp(graph)
+                  .push_back(layer1)
+                  .push_back(layer2)
+                  ->apply(embeddings, decoderContext);
+
+    // return unormalized(!) probabilities
+    return New<DecoderState>(decoderStates, logits, state->getEncoderState());
+  }
+
+};
+```
+
+## Compile, train and translate
+
+```
+cd build
+make -j
+```
+
+```
+./build/marian --type sutskever -t corpus.bpe.ro corpus.bpe.en -v vocab.ro.yml vocab.en.yml -m model.npz
+```
+
+```
+echo test | ./build/s2s --type sutskever -m model.npz -v vocab.ro.yml vocab.en.yml
+```

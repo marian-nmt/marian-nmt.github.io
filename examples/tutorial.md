@@ -335,7 +335,7 @@ public:
     // Use first encoded word as start state
     auto start = marian::step(encState->getContext(), 0);
 
-    rnn::States startStates({{start, start}});
+    rnn::States startStates({ {start, start} });
     return New<DecoderState>(startStates, nullptr, encState);
   }
 

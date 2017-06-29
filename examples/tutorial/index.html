@@ -388,6 +388,151 @@ Create the file <code class="highlighter-rouge">src/models/sutskever.h</code> wi
 </code></pre>
 </div>
 
+<h4 id="the-step-function">The step function</h4>
+
+<p>In the step function we define actions to be taken to either train on or create
+the target sequence (all time steps during training, one time step during
+translation).</p>
+
+<h5 id="shifted-embeddings">Shifted embeddings</h5>
+<div class="language-c++ highlighter-rouge"><pre class="highlight"><code><span class="k">auto</span> <span class="n">embeddings</span> <span class="o">=</span> <span class="n">state</span><span class="o">-&gt;</span><span class="n">getTargetEmbeddings</span><span class="p">();</span>
+</code></pre>
+</div>
+
+<h5 id="decoder-rnn">Decoder RNN</h5>
+
+<div class="language-c++ highlighter-rouge"><pre class="highlight"><code><span class="c1">// forward RNN for decoder
+</span><span class="kt">float</span> <span class="n">dropoutRnn</span> <span class="o">=</span> <span class="n">inference_</span> <span class="o">?</span> <span class="mi">0</span> <span class="o">:</span> <span class="n">opt</span><span class="o">&lt;</span><span class="kt">float</span><span class="o">&gt;</span><span class="p">(</span><span class="s">"dropout-rnn"</span><span class="p">);</span>
+<span class="k">auto</span> <span class="n">rnn</span> <span class="o">=</span> <span class="n">rnn</span><span class="o">::</span><span class="n">rnn</span><span class="p">(</span><span class="n">graph</span><span class="p">)</span>
+           <span class="p">(</span><span class="s">"type"</span><span class="p">,</span> <span class="s">"lstm"</span><span class="p">)</span>
+           <span class="p">(</span><span class="s">"prefix"</span><span class="p">,</span> <span class="n">prefix_</span><span class="p">)</span>
+           <span class="p">(</span><span class="s">"dimInput"</span><span class="p">,</span> <span class="n">opt</span><span class="o">&lt;</span><span class="kt">int</span><span class="o">&gt;</span><span class="p">(</span><span class="s">"dim-emb"</span><span class="p">))</span>
+           <span class="p">(</span><span class="s">"dimState"</span><span class="p">,</span> <span class="n">opt</span><span class="o">&lt;</span><span class="kt">int</span><span class="o">&gt;</span><span class="p">(</span><span class="s">"dim-rnn"</span><span class="p">))</span>
+           <span class="p">(</span><span class="s">"dropout"</span><span class="p">,</span> <span class="n">dropoutRnn</span><span class="p">)</span>
+           <span class="p">(</span><span class="s">"layer-normalization"</span><span class="p">,</span> <span class="n">opt</span><span class="o">&lt;</span><span class="kt">bool</span><span class="o">&gt;</span><span class="p">(</span><span class="s">"layer-normalization"</span><span class="p">))</span>
+           <span class="p">.</span><span class="n">push_back</span><span class="p">(</span><span class="n">rnn</span><span class="o">::</span><span class="n">cell</span><span class="p">(</span><span class="n">graph</span><span class="p">))</span>
+           <span class="p">.</span><span class="n">construct</span><span class="p">();</span>
+
+<span class="c1">// apply RNN to embeddings, initialized with encoder context mapped into
+// decoder space
+</span><span class="k">auto</span> <span class="n">decoderContext</span> <span class="o">=</span> <span class="n">rnn</span><span class="o">-&gt;</span><span class="n">transduce</span><span class="p">(</span><span class="n">embeddings</span><span class="p">,</span> <span class="n">state</span><span class="o">-&gt;</span><span class="n">getStates</span><span class="p">());</span>
+
+<span class="c1">// retrieve the last state per layer. They are required during translation
+// in order to continue decoding for the next word
+</span><span class="n">rnn</span><span class="o">::</span><span class="n">States</span> <span class="n">decoderStates</span> <span class="o">=</span> <span class="n">rnn</span><span class="o">-&gt;</span><span class="n">lastCellStates</span><span class="p">();</span>
+</code></pre>
+</div>
+
+<h5 id="deep-output-2-layers">Deep output (2-layers)</h5>
+<div class="language-c++ highlighter-rouge"><pre class="highlight"><code><span class="c1">// construct deep output multi-layer network layer-wise
+</span><span class="k">auto</span> <span class="n">layer1</span> <span class="o">=</span> <span class="n">mlp</span><span class="o">::</span><span class="n">dense</span><span class="p">(</span><span class="n">graph</span><span class="p">)</span>
+              <span class="p">(</span><span class="s">"prefix"</span><span class="p">,</span> <span class="n">prefix_</span> <span class="o">+</span> <span class="s">"_ff_logit_l1"</span><span class="p">)</span>
+              <span class="p">(</span><span class="s">"dim"</span><span class="p">,</span> <span class="n">opt</span><span class="o">&lt;</span><span class="kt">int</span><span class="o">&gt;</span><span class="p">(</span><span class="s">"dim-emb"</span><span class="p">))</span>
+              <span class="p">(</span><span class="s">"activation"</span><span class="p">,</span> <span class="n">mlp</span><span class="o">::</span><span class="n">act</span><span class="o">::</span><span class="n">tanh</span><span class="p">);</span>
+<span class="kt">int</span> <span class="n">dimTrgVoc</span> <span class="o">=</span> <span class="n">opt</span><span class="o">&lt;</span><span class="n">std</span><span class="o">::</span><span class="n">vector</span><span class="o">&lt;</span><span class="kt">int</span><span class="o">&gt;&gt;</span><span class="p">(</span><span class="s">"dim-vocabs"</span><span class="p">).</span><span class="n">back</span><span class="p">();</span>
+<span class="k">auto</span> <span class="n">layer2</span> <span class="o">=</span> <span class="n">mlp</span><span class="o">::</span><span class="n">dense</span><span class="p">(</span><span class="n">graph</span><span class="p">)</span>
+              <span class="p">(</span><span class="s">"prefix"</span><span class="p">,</span> <span class="n">prefix_</span> <span class="o">+</span> <span class="s">"_ff_logit_l2"</span><span class="p">)</span>
+              <span class="p">(</span><span class="s">"dim"</span><span class="p">,</span> <span class="n">dimTrgVoc</span><span class="p">);</span>
+
+<span class="c1">// assemble layers into MLP and apply to embeddings, decoder context and
+// aligned source context
+</span><span class="k">auto</span> <span class="n">logits</span> <span class="o">=</span> <span class="n">mlp</span><span class="o">::</span><span class="n">mlp</span><span class="p">(</span><span class="n">graph</span><span class="p">)</span>
+              <span class="p">.</span><span class="n">push_back</span><span class="p">(</span><span class="n">layer1</span><span class="p">)</span>
+              <span class="p">.</span><span class="n">push_back</span><span class="p">(</span><span class="n">layer2</span><span class="p">)</span>
+              <span class="o">-&gt;</span><span class="n">apply</span><span class="p">(</span><span class="n">embeddings</span><span class="p">,</span> <span class="n">decoderContext</span><span class="p">);</span>
+</code></pre>
+</div>
+
+<h5 id="return-the-decoder-state">Return the decoder state</h5>
+<div class="language-c++ highlighter-rouge"><pre class="highlight"><code><span class="c1">// return unormalized(!) probabilities
+</span><span class="k">return</span> <span class="n">New</span><span class="o">&lt;</span><span class="n">DecoderState</span><span class="o">&gt;</span><span class="p">(</span><span class="n">decoderStates</span><span class="p">,</span> <span class="n">logits</span><span class="p">,</span> <span class="n">state</span><span class="o">-&gt;</span><span class="n">getEncoderState</span><span class="p">());</span>
+</code></pre>
+</div>
+
+<h4 id="the-complete-decoder">The complete decoder</h4>
+
+<div class="language-c++ highlighter-rouge"><pre class="highlight"><code><span class="k">class</span> <span class="nc">DecoderSutskever</span> <span class="o">:</span> <span class="k">public</span> <span class="n">DecoderBase</span> <span class="p">{</span>
+<span class="k">public</span><span class="o">:</span>
+  <span class="k">template</span> <span class="o">&lt;</span><span class="k">class</span><span class="err">...</span> <span class="nc">Args</span><span class="o">&gt;</span>
+  <span class="n">DecoderSutskever</span><span class="p">(</span><span class="n">Ptr</span><span class="o">&lt;</span><span class="n">Config</span><span class="o">&gt;</span> <span class="n">options</span><span class="p">,</span> <span class="n">Args</span><span class="p">...</span> <span class="n">args</span><span class="p">)</span>
+      <span class="o">:</span> <span class="n">DecoderBase</span><span class="p">(</span><span class="n">options</span><span class="p">,</span> <span class="n">args</span><span class="p">...)</span> <span class="p">{}</span>
+
+  <span class="k">virtual</span> <span class="n">Ptr</span><span class="o">&lt;</span><span class="n">DecoderState</span><span class="o">&gt;</span> <span class="n">startState</span><span class="p">(</span><span class="n">Ptr</span><span class="o">&lt;</span><span class="n">EncoderState</span><span class="o">&gt;</span> <span class="n">encState</span><span class="p">)</span> <span class="p">{</span>
+    <span class="k">using</span> <span class="k">namespace</span> <span class="n">keywords</span><span class="p">;</span>
+
+    <span class="c1">// Use first encoded word as start state
+</span>    <span class="k">auto</span> <span class="n">start</span> <span class="o">=</span> <span class="n">marian</span><span class="o">::</span><span class="n">step</span><span class="p">(</span><span class="n">encState</span><span class="o">-&gt;</span><span class="n">getContext</span><span class="p">(),</span> <span class="mi">0</span><span class="p">);</span>
+
+    <span class="n">rnn</span><span class="o">::</span><span class="n">States</span> <span class="n">startStates</span><span class="p">();</span>
+    <span class="k">return</span> <span class="n">New</span><span class="o">&lt;</span><span class="n">DecoderState</span><span class="o">&gt;</span><span class="p">(</span><span class="n">startStates</span><span class="p">,</span> <span class="nb">nullptr</span><span class="p">,</span> <span class="n">encState</span><span class="p">);</span>
+  <span class="p">}</span>
+
+  <span class="k">virtual</span> <span class="n">Ptr</span><span class="o">&lt;</span><span class="n">DecoderState</span><span class="o">&gt;</span> <span class="n">step</span><span class="p">(</span><span class="n">Ptr</span><span class="o">&lt;</span><span class="n">ExpressionGraph</span><span class="o">&gt;</span> <span class="n">graph</span><span class="p">,</span>
+                                 <span class="n">Ptr</span><span class="o">&lt;</span><span class="n">DecoderState</span><span class="o">&gt;</span> <span class="n">state</span><span class="p">)</span> <span class="p">{</span>
+    <span class="k">using</span> <span class="k">namespace</span> <span class="n">keywords</span><span class="p">;</span>
+
+    <span class="k">auto</span> <span class="n">embeddings</span> <span class="o">=</span> <span class="n">state</span><span class="o">-&gt;</span><span class="n">getTargetEmbeddings</span><span class="p">();</span>
+
+    <span class="c1">// forward RNN for decoder
+</span>    <span class="kt">float</span> <span class="n">dropoutRnn</span> <span class="o">=</span> <span class="n">inference_</span> <span class="o">?</span> <span class="mi">0</span> <span class="o">:</span> <span class="n">opt</span><span class="o">&lt;</span><span class="kt">float</span><span class="o">&gt;</span><span class="p">(</span><span class="s">"dropout-rnn"</span><span class="p">);</span>
+    <span class="k">auto</span> <span class="n">rnn</span> <span class="o">=</span> <span class="n">rnn</span><span class="o">::</span><span class="n">rnn</span><span class="p">(</span><span class="n">graph</span><span class="p">)</span>
+               <span class="p">(</span><span class="s">"type"</span><span class="p">,</span> <span class="s">"lstm"</span><span class="p">)</span>
+               <span class="p">(</span><span class="s">"prefix"</span><span class="p">,</span> <span class="n">prefix_</span><span class="p">)</span>
+               <span class="p">(</span><span class="s">"dimInput"</span><span class="p">,</span> <span class="n">opt</span><span class="o">&lt;</span><span class="kt">int</span><span class="o">&gt;</span><span class="p">(</span><span class="s">"dim-emb"</span><span class="p">))</span>
+               <span class="p">(</span><span class="s">"dimState"</span><span class="p">,</span> <span class="n">opt</span><span class="o">&lt;</span><span class="kt">int</span><span class="o">&gt;</span><span class="p">(</span><span class="s">"dim-rnn"</span><span class="p">))</span>
+               <span class="p">(</span><span class="s">"dropout"</span><span class="p">,</span> <span class="n">dropoutRnn</span><span class="p">)</span>
+               <span class="p">(</span><span class="s">"layer-normalization"</span><span class="p">,</span> <span class="n">opt</span><span class="o">&lt;</span><span class="kt">bool</span><span class="o">&gt;</span><span class="p">(</span><span class="s">"layer-normalization"</span><span class="p">))</span>
+               <span class="p">.</span><span class="n">push_back</span><span class="p">(</span><span class="n">rnn</span><span class="o">::</span><span class="n">cell</span><span class="p">(</span><span class="n">graph</span><span class="p">))</span>
+               <span class="p">.</span><span class="n">construct</span><span class="p">();</span>
+
+    <span class="c1">// apply RNN to embeddings, initialized with encoder context mapped into
+</span>    <span class="c1">// decoder space
+</span>    <span class="k">auto</span> <span class="n">decoderContext</span> <span class="o">=</span> <span class="n">rnn</span><span class="o">-&gt;</span><span class="n">transduce</span><span class="p">(</span><span class="n">embeddings</span><span class="p">,</span> <span class="n">state</span><span class="o">-&gt;</span><span class="n">getStates</span><span class="p">());</span>
+
+    <span class="c1">// retrieve the last state per layer. They are required during translation
+</span>    <span class="c1">// in order to continue decoding for the next word
+</span>    <span class="n">rnn</span><span class="o">::</span><span class="n">States</span> <span class="n">decoderStates</span> <span class="o">=</span> <span class="n">rnn</span><span class="o">-&gt;</span><span class="n">lastCellStates</span><span class="p">();</span>
+
+    <span class="c1">// construct deep output multi-layer network layer-wise
+</span>    <span class="k">auto</span> <span class="n">layer1</span> <span class="o">=</span> <span class="n">mlp</span><span class="o">::</span><span class="n">dense</span><span class="p">(</span><span class="n">graph</span><span class="p">)</span>
+                  <span class="p">(</span><span class="s">"prefix"</span><span class="p">,</span> <span class="n">prefix_</span> <span class="o">+</span> <span class="s">"_ff_logit_l1"</span><span class="p">)</span>
+                  <span class="p">(</span><span class="s">"dim"</span><span class="p">,</span> <span class="n">opt</span><span class="o">&lt;</span><span class="kt">int</span><span class="o">&gt;</span><span class="p">(</span><span class="s">"dim-emb"</span><span class="p">))</span>
+                  <span class="p">(</span><span class="s">"activation"</span><span class="p">,</span> <span class="n">mlp</span><span class="o">::</span><span class="n">act</span><span class="o">::</span><span class="n">tanh</span><span class="p">);</span>
+    <span class="kt">int</span> <span class="n">dimTrgVoc</span> <span class="o">=</span> <span class="n">opt</span><span class="o">&lt;</span><span class="n">std</span><span class="o">::</span><span class="n">vector</span><span class="o">&lt;</span><span class="kt">int</span><span class="o">&gt;&gt;</span><span class="p">(</span><span class="s">"dim-vocabs"</span><span class="p">).</span><span class="n">back</span><span class="p">();</span>
+    <span class="k">auto</span> <span class="n">layer2</span> <span class="o">=</span> <span class="n">mlp</span><span class="o">::</span><span class="n">dense</span><span class="p">(</span><span class="n">graph</span><span class="p">)</span>
+                  <span class="p">(</span><span class="s">"prefix"</span><span class="p">,</span> <span class="n">prefix_</span> <span class="o">+</span> <span class="s">"_ff_logit_l2"</span><span class="p">)</span>
+                  <span class="p">(</span><span class="s">"dim"</span><span class="p">,</span> <span class="n">dimTrgVoc</span><span class="p">);</span>
+
+    <span class="c1">// assemble layers into MLP and apply to embeddings, decoder context and
+</span>    <span class="c1">// aligned source context
+</span>    <span class="k">auto</span> <span class="n">logits</span> <span class="o">=</span> <span class="n">mlp</span><span class="o">::</span><span class="n">mlp</span><span class="p">(</span><span class="n">graph</span><span class="p">)</span>
+                  <span class="p">.</span><span class="n">push_back</span><span class="p">(</span><span class="n">layer1</span><span class="p">)</span>
+                  <span class="p">.</span><span class="n">push_back</span><span class="p">(</span><span class="n">layer2</span><span class="p">)</span>
+                  <span class="o">-&gt;</span><span class="n">apply</span><span class="p">(</span><span class="n">embeddings</span><span class="p">,</span> <span class="n">decoderContext</span><span class="p">);</span>
+
+    <span class="c1">// return unormalized(!) probabilities
+</span>    <span class="k">return</span> <span class="n">New</span><span class="o">&lt;</span><span class="n">DecoderState</span><span class="o">&gt;</span><span class="p">(</span><span class="n">decoderStates</span><span class="p">,</span> <span class="n">logits</span><span class="p">,</span> <span class="n">state</span><span class="o">-&gt;</span><span class="n">getEncoderState</span><span class="p">());</span>
+  <span class="p">}</span>
+
+<span class="p">};</span>
+</code></pre>
+</div>
+
+<h2 id="compile-train-and-translate">Compile, train and translate</h2>
+
+<div class="highlighter-rouge"><pre class="highlight"><code>cd build
+make -j
+</code></pre>
+</div>
+
+<div class="highlighter-rouge"><pre class="highlight"><code>./build/marian --type sutskever -t corpus.bpe.ro corpus.bpe.en -v vocab.ro.yml vocab.en.yml -m model.npz
+</code></pre>
+</div>
+
+<div class="highlighter-rouge"><pre class="highlight"><code>echo test | ./build/s2s --type sutskever -m model.npz -v vocab.ro.yml vocab.en.yml
+</code></pre>
+</div>
+
 
             </div><!--//content-inner-->
           </div><!--//doc-content-->

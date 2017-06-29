@@ -466,7 +466,7 @@ translation).</p>
     <span class="c1">// Use first encoded word as start state
 </span>    <span class="k">auto</span> <span class="n">start</span> <span class="o">=</span> <span class="n">marian</span><span class="o">::</span><span class="n">step</span><span class="p">(</span><span class="n">encState</span><span class="o">-&gt;</span><span class="n">getContext</span><span class="p">(),</span> <span class="mi">0</span><span class="p">);</span>
 
-    <span class="n">rnn</span><span class="o">::</span><span class="n">States</span> <span class="n">startStates</span><span class="p">();</span>
+    <span class="n">rnn</span><span class="o">::</span><span class="n">States</span> <span class="n">startStates</span><span class="p">({</span> <span class="p">{</span><span class="n">start</span><span class="p">,</span> <span class="n">start</span><span class="p">}</span> <span class="p">});</span>
     <span class="k">return</span> <span class="n">New</span><span class="o">&lt;</span><span class="n">DecoderState</span><span class="o">&gt;</span><span class="p">(</span><span class="n">startStates</span><span class="p">,</span> <span class="nb">nullptr</span><span class="p">,</span> <span class="n">encState</span><span class="p">);</span>
   <span class="p">}</span>
 

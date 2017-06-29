@@ -14,6 +14,7 @@ git checkout refactor-rnn
 mkdir build
 cd build
 cmake .. -DCMAKE_BUILD_TYPE=Release
+make -j
 ```
 
 ## Skeleton model file
@@ -109,6 +110,8 @@ Ptr<ModelTask> WrapModelType(Ptr<Config> options) {
 ```
 
 ### For translation
+
+Edit the file `src/translator/scorers.h`
 
 ``` c++
 #pragma once

@@ -11,9 +11,11 @@ var searchData=
   ['encoderdecoderbase',['EncoderDecoderBase',['../classmarian_1_1EncoderDecoderBase.html',1,'marian']]],
   ['encoderdecoderrec',['EncoderDecoderRec',['../classmarian_1_1EncoderDecoderRec.html',1,'marian']]],
   ['encoderdecodersymmetric',['EncoderDecoderSymmetric',['../classmarian_1_1EncoderDecoderSymmetric.html',1,'marian']]],
+  ['encoderpooling',['EncoderPooling',['../classmarian_1_1EncoderPooling.html',1,'marian']]],
   ['encoders2s',['EncoderS2S',['../classmarian_1_1EncoderS2S.html',1,'marian']]],
   ['encoderstate',['EncoderState',['../structmarian_1_1EncoderState.html',1,'marian']]],
   ['encoderstatemultis2s',['EncoderStateMultiS2S',['../structmarian_1_1EncoderStateMultiS2S.html',1,'marian']]],
+  ['encoderstatepooling',['EncoderStatePooling',['../classmarian_1_1EncoderStatePooling.html',1,'marian']]],
   ['encoderstates2s',['EncoderStateS2S',['../classmarian_1_1EncoderStateS2S.html',1,'marian']]],
   ['expnodeop',['ExpNodeOp',['../structmarian_1_1ExpNodeOp.html',1,'marian']]],
   ['expressiongraph',['ExpressionGraph',['../classmarian_1_1ExpressionGraph.html',1,'marian']]]

@@ -1,4 +1,4 @@
 var searchData=
 [
-  ['addoptions',['addOptions',['../classmarian_1_1Config.html#a4c29a1a404d824de04a8760428595420',1,'marian::Config']]]
+  ['addoptions',['addOptions',['../classmarian_1_1Config.html#ab61bd6ed16e4bf57836dfa374e202472',1,'marian::Config']]]
 ];

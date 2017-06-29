@@ -102,9 +102,9 @@ var searchBox = new SearchBox("searchBox", "search",false,'Search');
 <table class="memberdecls">
 <tr class="heading"><td colspan="2"><h2 class="groupheader"><a name="pub-methods"></a>
 Public Member Functions</h2></td></tr>
-<tr class="memitem:a7db7ee9685963d5624966e173cd4bd75"><td class="memItemLeft" align="right" valign="top"><a class="anchor" id="a7db7ee9685963d5624966e173cd4bd75"></a>
-&#160;</td><td class="memItemRight" valign="bottom"><b>Config</b> (int argc, char **argv, bool validate=true, bool translate=false)</td></tr>
-<tr class="separator:a7db7ee9685963d5624966e173cd4bd75"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a541dff77b795b25f180951db6d8f3d41"><td class="memItemLeft" align="right" valign="top"><a class="anchor" id="a541dff77b795b25f180951db6d8f3d41"></a>
+&#160;</td><td class="memItemRight" valign="bottom"><b>Config</b> (int argc, char **argv, bool validate=true, bool translate=false, bool rescore=false)</td></tr>
+<tr class="separator:a541dff77b795b25f180951db6d8f3d41"><td class="memSeparator" colspan="2">&#160;</td></tr>
 <tr class="memitem:a13774d365b7b891e2f14078832032aff"><td class="memItemLeft" align="right" valign="top"><a class="anchor" id="a13774d365b7b891e2f14078832032aff"></a>
 &#160;</td><td class="memItemRight" valign="bottom"><b>Config</b> (const <a class="el" href="classmarian_1_1Config.html">Config</a> &amp;other)</td></tr>
 <tr class="separator:a13774d365b7b891e2f14078832032aff"><td class="memSeparator" colspan="2">&#160;</td></tr>
@@ -149,29 +149,32 @@ void&#160;</td><td class="memItemRight" valign="bottom"><b>GetYamlFromNpz</b> (Y
 <tr class="memitem:a1dd63c638735224839b6faa7050c7f7a"><td class="memItemLeft" align="right" valign="top"><a class="anchor" id="a1dd63c638735224839b6faa7050c7f7a"></a>
 void&#160;</td><td class="memItemRight" valign="bottom"><b>AddYamlToNpz</b> (const YAML::Node &amp;, const std::string &amp;, const std::string &amp;)</td></tr>
 <tr class="separator:a1dd63c638735224839b6faa7050c7f7a"><td class="memSeparator" colspan="2">&#160;</td></tr>
-<tr class="memitem:a4c29a1a404d824de04a8760428595420"><td class="memItemLeft" align="right" valign="top">void&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classmarian_1_1Config.html#a4c29a1a404d824de04a8760428595420">addOptions</a> (int argc, char **argv, bool validate, bool translate)</td></tr>
-<tr class="separator:a4c29a1a404d824de04a8760428595420"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:ab61bd6ed16e4bf57836dfa374e202472"><td class="memItemLeft" align="right" valign="top">void&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classmarian_1_1Config.html#ab61bd6ed16e4bf57836dfa374e202472">addOptions</a> (int argc, char **argv, bool validate, bool translate, bool rescore)</td></tr>
+<tr class="separator:ab61bd6ed16e4bf57836dfa374e202472"><td class="memSeparator" colspan="2">&#160;</td></tr>
 <tr class="memitem:a9211bcbd008a7583cf5adf7a669b1099"><td class="memItemLeft" align="right" valign="top"><a class="anchor" id="a9211bcbd008a7583cf5adf7a669b1099"></a>
 void&#160;</td><td class="memItemRight" valign="bottom"><b>addOptionsCommon</b> (boost::program_options::options_description &amp;, bool)</td></tr>
 <tr class="separator:a9211bcbd008a7583cf5adf7a669b1099"><td class="memSeparator" colspan="2">&#160;</td></tr>
-<tr class="memitem:a35b86d7e4c2ef9f27918d9c48f4ca9c6"><td class="memItemLeft" align="right" valign="top"><a class="anchor" id="a35b86d7e4c2ef9f27918d9c48f4ca9c6"></a>
-void&#160;</td><td class="memItemRight" valign="bottom"><b>addOptionsModel</b> (boost::program_options::options_description &amp;, bool)</td></tr>
-<tr class="separator:a35b86d7e4c2ef9f27918d9c48f4ca9c6"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:aab4fe00bfce2405358089d80e8b05ff3"><td class="memItemLeft" align="right" valign="top"><a class="anchor" id="aab4fe00bfce2405358089d80e8b05ff3"></a>
+void&#160;</td><td class="memItemRight" valign="bottom"><b>addOptionsModel</b> (boost::program_options::options_description &amp;, bool, bool)</td></tr>
+<tr class="separator:aab4fe00bfce2405358089d80e8b05ff3"><td class="memSeparator" colspan="2">&#160;</td></tr>
 <tr class="memitem:a5774a39adb0bc4406a3e917815eaf814"><td class="memItemLeft" align="right" valign="top"><a class="anchor" id="a5774a39adb0bc4406a3e917815eaf814"></a>
 void&#160;</td><td class="memItemRight" valign="bottom"><b>addOptionsTraining</b> (boost::program_options::options_description &amp;)</td></tr>
 <tr class="separator:a5774a39adb0bc4406a3e917815eaf814"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a65b460ffdff1e80ae893126d08cd1a7a"><td class="memItemLeft" align="right" valign="top"><a class="anchor" id="a65b460ffdff1e80ae893126d08cd1a7a"></a>
+void&#160;</td><td class="memItemRight" valign="bottom"><b>addOptionsRescore</b> (boost::program_options::options_description &amp;)</td></tr>
+<tr class="separator:a65b460ffdff1e80ae893126d08cd1a7a"><td class="memSeparator" colspan="2">&#160;</td></tr>
 <tr class="memitem:ac493c371b36a7842aa9911731a9da9fb"><td class="memItemLeft" align="right" valign="top"><a class="anchor" id="ac493c371b36a7842aa9911731a9da9fb"></a>
 void&#160;</td><td class="memItemRight" valign="bottom"><b>addOptionsValid</b> (boost::program_options::options_description &amp;)</td></tr>
 <tr class="separator:ac493c371b36a7842aa9911731a9da9fb"><td class="memSeparator" colspan="2">&#160;</td></tr>
-<tr class="memitem:ab254aaeaa88e680ae68ae506801894ec"><td class="memItemLeft" align="right" valign="top"><a class="anchor" id="ab254aaeaa88e680ae68ae506801894ec"></a>
-void&#160;</td><td class="memItemRight" valign="bottom"><b>addOptionsTranslate</b> (boost::program_options::options_description &amp;desc)</td></tr>
-<tr class="separator:ab254aaeaa88e680ae68ae506801894ec"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a4bc889df41c04eebec9e7ed86a3d4f51"><td class="memItemLeft" align="right" valign="top"><a class="anchor" id="a4bc889df41c04eebec9e7ed86a3d4f51"></a>
+void&#160;</td><td class="memItemRight" valign="bottom"><b>addOptionsTranslate</b> (boost::program_options::options_description &amp;)</td></tr>
+<tr class="separator:a4bc889df41c04eebec9e7ed86a3d4f51"><td class="memSeparator" colspan="2">&#160;</td></tr>
 <tr class="memitem:a04803eb8aac3297bc9da7d697cd07ba0"><td class="memItemLeft" align="right" valign="top"><a class="anchor" id="a04803eb8aac3297bc9da7d697cd07ba0"></a>
 void&#160;</td><td class="memItemRight" valign="bottom"><b>log</b> ()</td></tr>
 <tr class="separator:a04803eb8aac3297bc9da7d697cd07ba0"><td class="memSeparator" colspan="2">&#160;</td></tr>
-<tr class="memitem:a12cea5f8e8df7d5c1a1a7006bf2466e1"><td class="memItemLeft" align="right" valign="top"><a class="anchor" id="a12cea5f8e8df7d5c1a1a7006bf2466e1"></a>
-void&#160;</td><td class="memItemRight" valign="bottom"><b>validate</b> (bool translate=false) const </td></tr>
-<tr class="separator:a12cea5f8e8df7d5c1a1a7006bf2466e1"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:aba01b528417d48548b8978088016a8e3"><td class="memItemLeft" align="right" valign="top"><a class="anchor" id="aba01b528417d48548b8978088016a8e3"></a>
+void&#160;</td><td class="memItemRight" valign="bottom"><b>validateOptions</b> (bool translate=false, bool rescore=false) const </td></tr>
+<tr class="separator:aba01b528417d48548b8978088016a8e3"><td class="memSeparator" colspan="2">&#160;</td></tr>
 <tr class="memitem:a584fbc13647bf09dd598204e187b1d5d"><td class="memItemLeft" align="right" valign="top"><a class="anchor" id="a584fbc13647bf09dd598204e187b1d5d"></a>
 void&#160;</td><td class="memItemRight" valign="bottom"><b>OutputRec</b> (const YAML::Node node, YAML::Emitter &amp;out) const </td></tr>
 <tr class="separator:a584fbc13647bf09dd598204e187b1d5d"><td class="memSeparator" colspan="2">&#160;</td></tr>
@@ -193,7 +196,7 @@ template&lt;class OStream &gt; </td></tr>
 <tr class="separator:a12edc9cd675b196fa52930d9058c1ad2"><td class="memSeparator" colspan="2">&#160;</td></tr>
 </table>
 <h2 class="groupheader">Member Function Documentation</h2>
-<a class="anchor" id="a4c29a1a404d824de04a8760428595420"></a>
+<a class="anchor" id="ab61bd6ed16e4bf57836dfa374e202472"></a>
 <div class="memitem">
 <div class="memproto">
       <table class="memname">
@@ -219,7 +222,13 @@ template&lt;class OStream &gt; </td></tr>
           <td class="paramkey"></td>
           <td></td>
           <td class="paramtype">bool&#160;</td>
-          <td class="paramname"><em>translate</em>&#160;</td>
+          <td class="paramname"><em>translate</em>, </td>
+        </tr>
+        <tr>
+          <td class="paramkey"></td>
+          <td></td>
+          <td class="paramtype">bool&#160;</td>
+          <td class="paramname"><em>rescore</em>&#160;</td>
         </tr>
         <tr>
           <td></td>
@@ -232,6 +241,7 @@ template&lt;class OStream &gt; </td></tr>
 <p>model</p>
 <p>training start</p>
 <p>training end</p>
+<p>translation start</p>
 <p>valid</p>
 <p>valid </p>
 
@@ -244,7 +254,7 @@ template&lt;class OStream &gt; </td></tr>
 </div><!-- contents -->
 <!-- start footer part -->
 <hr class="footer"/><address class="footer"><small>
-Generated on Fri Jun 16 2017 21:59:44 for Marian by &#160;<a href="http://www.doxygen.org/index.html">
+Generated on Thu Jun 29 2017 08:41:26 for Marian by &#160;<a href="http://www.doxygen.org/index.html">
 <img class="footer" src="doxygen.png" alt="doxygen"/>
 </a> 1.8.11
 </small></address>

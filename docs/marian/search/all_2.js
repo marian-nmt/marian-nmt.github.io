@@ -10,6 +10,7 @@ var searchData=
   ['config',['Config',['../classmarian_1_1Config.html',1,'marian']]],
   ['constant',['constant',['../classmarian_1_1ExpressionGraph.html#a98fec0be161df64c066f9d871aba4274',1,'marian::ExpressionGraph']]],
   ['constantnode',['ConstantNode',['../structmarian_1_1ConstantNode.html',1,'marian']]],
+  ['convolution',['Convolution',['../classmarian_1_1Convolution.html',1,'marian']]],
   ['corpus',['Corpus',['../classmarian_1_1data_1_1Corpus.html',1,'marian::data']]],
   ['corpusbatch',['CorpusBatch',['../classmarian_1_1data_1_1CorpusBatch.html',1,'marian::data']]],
   ['corpusiterator',['CorpusIterator',['../classmarian_1_1data_1_1CorpusIterator.html',1,'marian::data']]],

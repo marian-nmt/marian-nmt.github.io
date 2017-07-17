@@ -90,6 +90,7 @@ graph.
 
 We also compare training speed between a number of popular toolkits and Marian.
 As Marian is still early work, we expect speed to improve with future optimizations.
+The numbers reported in this section have been computed on a single GPU.
 
 <div class="multiple-images">
   <img alt="Training speed #1" src="{{ site.baseurl }}/assets/images/train.speed500.png"/>

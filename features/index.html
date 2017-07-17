@@ -148,19 +148,19 @@
 a single GPU</li>
   <li>Binary/model-compatible with
 <a href="https://github.com/nyu-dl/dl4mt-tutorial">DL4MT</a> and
-<a href="https://github.com/rsennrich/nematus">Nematus</a> models</li>
+<a href="https://github.com/rsennrich/nematus">Nematus</a> models for certain model types.</li>
   <li>Multi-GPU training and translation</li>
   <li>Batched translation on single and multiple GPUs</li>
   <li>Pure C++ implementation with minimal depedencies on external packages (cuda,
 boost)</li>
   <li>Optionally static compilation of binaries</li>
+  <li>Different types of deep and multi-sources models</li>
   <li>Permissive open source license (MIT)</li>
 </ul>
 
 <h3 id="model-features">Model features</h3>
 <ul>
-  <li>GRU-based bidirectional encoder, GRU-based decoder, multiplicative attention
-mechanism;</li>
+  <li>GRU-based bidirectional encoder, GRU-based decoder;</li>
   <li>Layer normalization (<a href="https://arxiv.org/abs/1607.06450">Ba et al. 2016</a>) – faster
 convergence and better test results;</li>
   <li>Dynamic batching – adjust mini-batch size dynamically to maximize usage of
@@ -172,15 +172,16 @@ or Adam – faster training and better convergence;</li>
 </ul>
 
 <h3 id="experimental-features">Experimental features</h3>
-<p>Experimental features are not available in the Amun translation tool and are
-potentially unstable. They can be used with the (also experimental) Marian
-translation only (slower and memory hungry in comparison to Amun). Useful
-and proven features are likely to be implemented in Amun in the future.</p>
+<p>Experimental features are not available in the Amun translation tool.
+They can be used with the Marian
+translation tool S2S. This tool is slowly approaching the translation speed of
+Amun and likely to replace Amun in the future.</p>
 
 <ul>
-  <li>Multi-layer encoder/decoder</li>
+  <li>Deep RNNs with Deep Transition Cells (Sennrich et al. 2017 : correct citation TBD)</li>
+  <li>LSTM cell instead of GRU.</li>
   <li>Residual/skip connections between RNN layers</li>
-  <li>Multi-source encoder</li>
+  <li>Dual-source models for Automatic Post Editing (<a href="https://arxiv.org/abs/1706.04138">Junczys-Dowmunt and Grundkiewicz 2017</a>)</li>
 </ul>
 
 <h2 id="benchmarks">Benchmarks</h2>

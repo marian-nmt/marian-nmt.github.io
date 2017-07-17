@@ -1,0 +1,277 @@
+<!--[if IE 8]> <html lang="en" class="ie8"> <![endif]-->
+<!--[if IE 9]> <html lang="en" class="ie9"> <![endif]-->
+<!--[if !IE]><!-->
+<html lang="en">
+<!--<![endif]-->
+
+  <head>
+  <title>
+    
+    Marian :: An Exploration of Neural Sequence-to-Sequence Architectures for Automatic Post-Editing
+    
+  </title>
+  <!-- Meta -->
+  <meta charset="utf-8">
+  <meta http-equiv="X-UA-Compatible" content="IE=edge">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <meta name="description" content="Fast Neural Machine Translation in C++">
+
+  <link href='http://fonts.googleapis.com/css?family=Open+Sans:300italic,400italic,600italic,700italic,800italic,400,300,600,700,800' rel='stylesheet' type='text/css'>
+  <!-- Global CSS -->
+  <link rel="stylesheet" href="/assets/plugins/bootstrap/css/bootstrap.min.css">
+  <!-- Plugins CSS -->
+  <link rel="stylesheet" href="/assets/plugins/font-awesome/css/font-awesome.min.css">
+  <link rel="stylesheet" href="/assets/css/pygments/github.css">
+
+  <!-- Theme CSS -->
+  <link id="theme-style" rel="stylesheet" href="/assets/css/styles.css">
+  <!-- HTML5 shim and Respond.js IE8 support of HTML5 elements and media queries -->
+  <!--[if lt IE 9]>
+    <script src="https://oss.maxcdn.com/html5shiv/3.7.2/html5shiv.min.js"></script>
+    <script src="https://oss.maxcdn.com/respond/1.4.2/respond.min.js"></script>
+  <![endif]-->
+
+  <link rel="stylesheet" href="/assets/plugins/github-fork-ribbon-css/gh-fork-ribbon.css" />
+  <!--[if lt IE 9]>
+    <link rel="stylesheet" href="/assets/plugins/github-fork-ribbon-css/gh-fork-ribbon.ie.css" />
+  <![endif]-->
+
+  
+</head>
+
+
+  <body class="body-blue">
+    <a class="github-fork-ribbon" href="https://github.com/marian-nmt/marian" title="Fork me on GitHub">Fork me on GitHub</a>
+
+    <div class="page-wrapper">
+
+    <header id="header" class="header">
+  <div class="container">
+    <div class="branding">
+      <h1 class="logo">
+        <a href="/">
+          <span aria-hidden="true" class="icon_documents_alt icon"></span>
+          <span class="text-highlight">Marian</span><span class="text-bold">NMT</span>
+        </a>
+      </h1>
+      <p class="description">Fast Neural Machine Translation in C++</p>
+    </div><!--//branding-->
+
+    <ol class="breadcrumb">
+
+
+ 
+
+ 
+
+ 
+
+ 
+
+ 
+
+ 
+
+ 
+
+ 
+
+ 
+ <li>
+   <a class="page-link" href="/quickstart/">Quick start</a>
+ </li>
+ 
+
+ 
+ <li>
+   <a class="page-link" href="/features/">Features &amp; Benchmarks</a>
+ </li>
+ 
+
+ 
+ <li>
+   <a class="page-link" href="/googlegroup/">Google Group</a>
+ </li>
+ 
+
+ 
+ <li>
+   <a class="page-link" href="/docs/">Documentation</a>
+ </li>
+ 
+
+ 
+ <li>
+   <a class="page-link" href="/examples/">Examples &amp; Use cases</a>
+ </li>
+ 
+
+ 
+ <li>
+   <a class="page-link" href="/publications/">Publications</a>
+ </li>
+ 
+
+</ol>
+
+
+  </div><!--//container-->
+</header><!--//header-->
+
+
+    <div class="doc-wrapper">
+      <div class="container">
+
+        <div id="doc-header" class="doc-header text-center">
+          <h1 class="doc-title">
+            
+            <i class="icon fa fa-cogs }}"></i>
+            
+            An Exploration of Neural Sequence-to-Sequence Architectures for Automatic Post-Editing
+          </h1>
+          <div class="meta">
+            <i class="fa fa-clock-o"></i>
+            Last updated: 17 July 2017
+          </div>
+        </div><!--//doc-header-->
+
+        <div class="doc-body">
+          <div class="doc-content">
+            <div class="content-inner">
+
+              <p>This page provides data, model files and training instructions for our APE system described in <a href="https://arxiv.org/abs/1706.04138">An Exploration of Neural Sequence-to-Sequence Architectures for Automatic Post-Editing</a>.
+If you use any of the data, systems or ideas, please cite:</p>
+
+<div class="highlighter-rouge"><pre class="highlight"><code>@InProceedings{junczysdowmunt-grundkiewicz:2016:WMT,
+   author    = {Marcin Junczys-Dowmunt and Roman Grundkiewicz},
+   title     = {An Exploration of Neural Sequence-to-Sequence Architectures for Automatic Post-Editing},
+   year      = {2017},
+   url       = {https://arxiv.org/abs/1706.04138}
+}
+</code></pre>
+</div>
+
+<h2 id="reproducing-our-results">Reproducing our results</h2>
+
+<h3 id="tools-and-data">Tools and data</h3>
+<p>Create a new working folder and enter that folder:</p>
+
+<div class="highlighter-rouge"><pre class="highlight"><code>mkdir ape-explore
+cd ape-explore
+</code></pre>
+</div>
+
+<p>Download and compile Marian. This is our training and translation toolkit.</p>
+<div class="highlighter-rouge"><pre class="highlight"><code>git clone https://github.com/marian-nmt/marian
+cd marian
+mkdir build
+cd build
+cmake .. -DCMAKE_BUILD_TYPE=Release
+make -j16
+cd ../..
+</code></pre>
+</div>
+
+<p>Download and compile Moses. We use the TER scorer in Moses for reporting of validation results during training.</p>
+<div class="highlighter-rouge"><pre class="highlight"><code>git clone https://github.com/moses-smt/mosesdecoder
+cd mosesdecoder
+./bjam -j16
+cd ..
+</code></pre>
+</div>
+
+<p>Obtain the already preprocessed training data as described below. The data has been prepared in such a way that training can be executed immediately. The included <code class="highlighter-rouge">Makefile</code> can be used to retrace the preprocessing steps. The folder train/data.all contains the raw unprocessed training and test data. The data has been created using the official training data for the <a href="http://www.statmt.org/wmt16/ape-task.html">WMT 2016 APE task</a> and the artifical data made available <a href="../postedit">here</a>.</p>
+<div class="highlighter-rouge"><pre class="highlight"><code>wget http://data.statmt.org/romang/ape-explore/train.tgz
+tar -xzf train.tgz
+cd train
+</code></pre>
+</div>
+
+<h3 id="training-with-a-chosen-configuration">Training with a chosen configuration</h3>
+
+<p>Inside the <code class="highlighter-rouge">train</code> folder there is a set of YAML configuration files, one for each model type introduced in our paper. The configuration files can also be obtained separatly <a href="http://www.data.statmt.org/romang/ape-explore/config.tgz">here</a>.
+Train a model by using its configuration file. Here we chose the dual-source model <code class="highlighter-rouge">m-cgru</code> from the paper.</p>
+
+<p>Type the following command to train on four GPUs:</p>
+<div class="highlighter-rouge"><pre class="highlight"><code>../marian/build/marian -c config/m-cgru.yml -d 0 1 2 3
+</code></pre>
+</div>
+
+<p>which will produce model files in the <code class="highlighter-rouge">models/m-cgru</code> folder. Example output during training would look roughly like this:</p>
+
+<div class="highlighter-rouge"><pre class="highlight"><code>[2017-07-10 23:28:47] Ep. 1 : Up. 1000 : Sen. 64000 : Cost 129.47 : Time 201.87s : 5814.94 words/s
+[2017-07-10 23:31:33] Ep. 1 : Up. 2000 : Sen. 128000 : Cost 104.59 : Time 166.06s : 7060.59 words/s
+[2017-07-10 23:34:16] Ep. 1 : Up. 3000 : Sen. 192000 : Cost 89.37 : Time 163.62s : 7185.44 words/s
+[2017-07-10 23:37:02] Ep. 1 : Up. 4000 : Sen. 256000 : Cost 77.24 : Time 166.10s : 7062.50 words/s
+[2017-07-10 23:39:47] Ep. 1 : Up. 5000 : Sen. 320000 : Cost 69.96 : Time 164.44s : 7174.16 words/s
+[2017-07-10 23:42:33] Ep. 1 : Up. 6000 : Sen. 384000 : Cost 63.79 : Time 166.52s : 7034.91 words/s
+[2017-07-10 23:45:22] Ep. 1 : Up. 7000 : Sen. 448000 : Cost 59.78 : Time 168.35s : 6984.08 words/s
+[2017-07-10 23:48:06] Ep. 1 : Up. 8000 : Sen. 512000 : Cost 56.00 : Time 164.65s : 7117.06 words/s
+[2017-07-10 23:50:50] Ep. 1 : Up. 9000 : Sen. 576000 : Cost 53.39 : Time 163.57s : 7176.63 words/s
+[2017-07-10 23:53:34] Ep. 1 : Up. 10000 : Sen. 640000 : Cost 51.26 : Time 164.56s : 7145.62 words/s
+[2017-07-10 23:53:34] Saving model to models/m-cgru/model.iter10000.npz
+[2017-07-10 23:53:35] Saving model to models/m-cgru/model.npz
+[2017-07-10 23:53:38] [valid] 10000 : cross-entropy : 38.332 : new best
+[2017-07-10 23:53:38] Saving model to models/m-cgru/model.npz.dev.npz
+[2017-07-10 23:54:22] [valid] 10000 : valid-script : 0.6483 : new best
+[2017-07-10 23:57:06] Ep. 1 : Up. 11000 : Sen. 704000 : Cost 48.64 : Time 211.14s : 5554.63 words/s
+[2017-07-10 23:59:53] Ep. 1 : Up. 12000 : Sen. 768000 : Cost 47.09 : Time 167.37s : 7012.21 words/s
+</code></pre>
+</div>
+<p>The reported figures coming from the validation script are <code class="highlighter-rouge">1-TER</code> as produced by the Moses scorer, thus higher is better.</p>
+
+<p>Inspect <code class="highlighter-rouge">models/m-cgru/validate.sh</code> or the example below to see how translation and validation works. For ensembling back-up the recently trained model (or move the folder <code class="highlighter-rouge">models/m-cgru</code>) and restart training with the same config file. Weights will be initialized to different random weights.</p>
+
+<p>In order to create and validate the averaged model (an element-wise average of model weights) run:</p>
+<div class="highlighter-rouge"><pre class="highlight"><code>./models/m-cgru/validate_avg.sh
+</code></pre>
+</div>
+<p>This will create the averaged model <code class="highlighter-rouge">m-cgru/model.avg.npz</code> and validate on the official WMT 2016 test set, reporting BLEU with <code class="highlighter-rouge">../mosesdecoder/scripts/generic/multi-bleu.pl</code> and the official APE task scorer from <code class="highlighter-rouge">eval</code>. Results for averaged models from one training run are usually slightly better. Do not attempt to average models from different training runs, this will not work.</p>
+
+<h2 id="models-and-config-files">Models and config files</h2>
+
+<p>Coming soon.</p>
+
+
+
+            </div><!--//content-inner-->
+          </div><!--//doc-content-->
+
+          <div class="doc-sidebar hidden-xs">
+            <nav id="doc-nav"></nav>
+          </div><!--//doc-sidebar-->
+
+        </div><!--//doc-body-->
+
+      </div><!--//container-->
+    </div><!--//doc-wrapper-->
+
+    </div><!--//page-wrapper-->
+
+    <footer id="footer" class="footer text-center">
+  <div class="container">
+    <p>
+     Marian - an efficient Neural Machine Translation framework written in pure C++.</br>
+      Mainly developed at the Adam Mickiewicz University in Poznań and at the University of Edinburgh.
+    </p>
+    <p><a href="https://github.com/marian-nmt/marian">Marian</a> is licensed under the <a href="https://github.com/marian-nmt/marian/LICENSE">MIT license</a>.</p>
+    <small class="copyright">Based on the theme PrettyDocs designed by <a href="http://themes.3rdwavemedia.com/" targe="_blank">Xiaoying Riley</a> with modifications.</small>
+  </div><!--//container-->
+</footer><!--//footer-->
+
+    <!-- Main Javascript -->
+<script type="text/javascript"> localStorage.clear();</script>
+
+<script type="text/javascript" src="/assets/plugins/jquery-1.12.3.min.js"></script>
+<script type="text/javascript" src="/assets/plugins/bootstrap/js/bootstrap.min.js"></script>
+<script type="text/javascript" src="/assets/plugins/jquery-scrollTo/jquery.scrollTo.min.js"></script>
+<script type="text/javascript" src="/assets/plugins/jquery-match-height/jquery.matchHeight-min.js"></script>
+
+<script src="https://cdn.mathjax.org/mathjax/latest/MathJax.js?config=TeX-AMS-MML_HTMLorMML" type="text/javascript"></script>
+
+<script type="text/javascript" src="/assets/js/main.js"></script>
+<script type="text/javascript" src="/assets/js/toc.js"></script>
+
+
+  </body>
+</html>

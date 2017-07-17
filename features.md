@@ -97,11 +97,13 @@ The numbers reported in this section have been computed on a single GPU.
 </div>
 
 We compare models with standard settings and comparable embedding, hidden layer and batch sizes.
-The first graph (blue bars) corresponds to the model parameters described in the
+The first graph corresponds to the model parameters described in the
 [OpenNMT paper](https://arxiv.org/abs/1701.02810),
-the second (green bars) corresponds to Nematus default settings for embedding and hidden layer
+the second corresponds to Nematus default settings for embedding and hidden layer
 sizes. In both cases we use a vocabulary size of 32,000 subword units. The models were trained
 on German-English WMT data. Nematus-array is Nematus run with the new Cuda backend libgpuarray.
+Blue bars describe training speed on a NVIDIA GTX 1080 GPU, green bars on a Titan X with Pascal
+architecture.
 
 ### Multi-GPU training
 

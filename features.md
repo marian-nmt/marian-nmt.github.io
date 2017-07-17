@@ -14,17 +14,17 @@ menu: 2
   a single GPU
 * Binary/model-compatible with
   [DL4MT](https://github.com/nyu-dl/dl4mt-tutorial) and
-  [Nematus](https://github.com/rsennrich/nematus) models
+  [Nematus](https://github.com/rsennrich/nematus) models for certain model types.
 * Multi-GPU training and translation
 * Batched translation on single and multiple GPUs
 * Pure C++ implementation with minimal depedencies on external packages (cuda,
   boost)
 * Optionally static compilation of binaries
+* Different types of deep and multi-sources models
 * Permissive open source license (MIT)
 
 ### Model features
-* GRU-based bidirectional encoder, GRU-based decoder, multiplicative attention
-mechanism;
+* GRU-based bidirectional encoder, GRU-based decoder;
 * Layer normalization ([Ba et al. 2016](https://arxiv.org/abs/1607.06450)) -- faster
 convergence and better test results;
 * Dynamic batching -- adjust mini-batch size dynamically to maximize usage of
@@ -35,16 +35,15 @@ available or bounded memory, increases training throughput;
 or Adam -- faster training and better convergence;
 
 ### Experimental features
-Experimental features are not available in the Amun translation tool and are
-potentially unstable. They can be used with the (also experimental) Marian
-translation only (slower and memory hungry in comparison to Amun). Useful
-and proven features are likely to be implemented in Amun in the future.
+Experimental features are not available in the Amun translation tool.
+They can be used with the Marian
+translation tool S2S. This tool is slowly approaching the translation speed of
+Amun and likely to replace Amun in the future.
 
-* Multi-layer encoder/decoder
+* Deep RNNs with Deep Transition Cells (Sennrich et al. 2017 : correct citation TBD)
+* LSTM cell instead of GRU.
 * Residual/skip connections between RNN layers
-* Multi-source encoder
-
-
+* Dual-source models for Automatic Post Editing ([Junczys-Dowmunt and Grundkiewicz 2017](https://arxiv.org/abs/1706.04138))
 
 ## Benchmarks
 

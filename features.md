@@ -38,7 +38,7 @@ or Adam -- faster training and better convergence;
 Experimental features are not available in the Amun translation tool and are
 potentially unstable. They can be used with the (also experimental) Marian
 translation only (slower and memory hungry in comparison to Amun). Useful
-and proven features are likely to be implemented in Amun in the future. 
+and proven features are likely to be implemented in Amun in the future.
 
 * Multi-layer encoder/decoder
 * Residual/skip connections between RNN layers
@@ -92,8 +92,8 @@ We also compare training speed between a number of popular toolkits and Marian.
 As Marian is still early work, we expect speed to improve with future optimizations.
 
 <div class="multiple-images">
-  <img alt="Training speed #1" src="{{ site.baseurl }}/assets/images/training_speed.png" />
-  <img att="Training speed #2" src="{{ site.baseurl }}/assets/images/training_speed2.png" />
+  <img alt="Training speed #1" src="{{ site.baseurl }}/assets/images/train.speed500.png"/>
+  <img att="Training speed #2" src="{{ site.baseurl }}/assets/images/train.speed1024.png"/>
 </div>
 
 We compare models with standard settings and comparable embedding, hidden layer and batch sizes.
@@ -101,7 +101,7 @@ The first graph (blue bars) corresponds to the model parameters described in the
 [OpenNMT paper](https://arxiv.org/abs/1701.02810),
 the second (green bars) corresponds to Nematus default settings for embedding and hidden layer
 sizes. In both cases we use a vocabulary size of 32,000 subword units. The models were trained
-on German-English WMT data.
+on German-English WMT data. Nematus-array is Nematus run with the new Cuda backend libgpuarray.
 
 ### Multi-GPU training
 

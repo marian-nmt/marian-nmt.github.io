@@ -1,9 +1,11 @@
 ---
 layout: docs
-title: Custom models with Marian
+title: Custom models with Marian (Part 1)
 permalink: /examples/tutorial/
 icon: fa-cogs
 ---
+
+# A Sutskever-style sequence-to-sequence model
 
 ## Checkout and Compilation
 
@@ -73,18 +75,13 @@ typedef EncoderDecoder<EncoderSutskever, DecoderSutskever> Sutskever;
 }
 ```
 
-## Register the model
+## Registering the model
 
-Each new model needs to be registered to be used later from the command line with
-```
-marian --type sutskever ...
-```
+In order to be able to use the model later during training or translation we need to register it in two places. This will later change to only one file.
 
-Currently two files need to modified, this will later change to one location.
+### Registering for training
 
-### For training
-
-Edit `src/models/model_task.h` in the following way:
+Edit `src/models/model_task.h` in the following way (add the header include at the top of the page and the register the model):
 
 ``` c++
 #pragma once
@@ -98,10 +95,11 @@ template <template <class> class TaskName, template <class> class Wrapper>
 Ptr<ModelTask> WrapModelType(Ptr<Config> options) {
   auto type = options->get<std::string>("type");
 
+  [...]
   // Add this line anywhere in the function
   REGISTER_MODEL("sutskever", Sutskever);
+  [...]
 
-  UTIL_THROW2("Unknown model type: " << type);
 }
 
 [...]
@@ -109,9 +107,9 @@ Ptr<ModelTask> WrapModelType(Ptr<Config> options) {
 }
 ```
 
-### For translation
+### Registering for translation
 
-Edit the file `src/translator/scorers.h`
+Edit the file `src/translator/scorers.h`, add the header file and the model wrapper:
 
 ``` c++
 #pragma once
@@ -156,11 +154,13 @@ Ptr<Scorer> scorerByType(std::string fname,
 }
 
 ```
-## Building a Sutskever-style model
+## Filling the gaps
 
 ### Encoder
 
-#### Creating the embedding matrix
+The complete encoder is given at the bottom of this section.
+We insert the following code pieces in the `build` function of the encoder.
+
 ``` c++
 // create source embeddings
 int dimVoc = opt<std::vector<int>>("dim-vocabs")[encoderIndex];

@@ -20,8 +20,13 @@ We also add the back-translated data from <http://data.statmt.org/rsennrich/wmt1
 as desribed in [Edinburgh's WMT16 paper](http://www.aclweb.org/anthology/W16-2323).
 The resulting system should be competitive or even slightly better than
 reported in that paper.
-* **[Custom models with Marian](/examples/tutorial/)**: Building and modifing a
-basic Sutskever-style sequence-to-sequence model.
+
+## Coding Tutorials
+
+### Custom sequence-to-sequence models
+* **[Part 1: A Sutskever-style model](/examples/tutorial/)**: Building and deploying a
+Sutskever-style sequence-to-sequence model.
+<!--* **[Part 2: Re-implementing basic Nematus](/examples/tutorial/)**: Extending the Sutskever model to a shallow Bahdanau-style model with attention as implemented in Nematus. * **[Part 3: Going deeper](/examples/tutorial/)**: Adding stacked RNNs and Deep Transtion Networks.-->
 
 ## Use cases
 
@@ -30,3 +35,6 @@ This page provides data and model files for our shared task winning APE system
 described in [Log-linear Combinations of Monolingual and Bilingual Neural
 Machine Translation Models for Automatic
 Post-Editing](http://www.aclweb.org/anthology/W16-2378).
+* **[An Exploration of Neural Sequence-to-Sequence Architectures for Automatic Post-Editing](/examples/exploration/)**:
+This page provides data and model files and training instructions for our models described in
+[Junczys-Dowmunt & Grundkiewicz (2017). An Exploration of Neural Sequence-to-Sequence Architectures for Automatic Post-Editing](https://arxiv.org/abs/1706.04138).

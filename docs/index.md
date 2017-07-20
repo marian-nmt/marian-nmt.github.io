@@ -16,7 +16,7 @@ models.
 generated using Doxygen. The newest version can be generated locally with CMake:
 `mkdir -p build && cd build && cmake .. && make doc`.
 
-## Marian's commands
+## Marian command line options
 
 Command-line options for `marian_train` tool:
 
@@ -120,7 +120,7 @@ Command-line options for `marian_train` tool:
   --valid-log arg                           Log validation scores to file given by  arg
 ```
 
-## Amun's commands
+## Amun command line options
 
 Command-line options for `amun` decoder:
 

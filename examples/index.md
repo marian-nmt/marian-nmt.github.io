@@ -21,7 +21,16 @@ as desribed in [Edinburgh's WMT16 paper](http://www.aclweb.org/anthology/W16-232
 The resulting system should be competitive or even slightly better than
 reported in that paper.
 
-## Coding Tutorials
+## Tutorials
+
+### Machine Translation Marathon 2017 Tutorial
+
+* **[Part 1: Set-up and data preprocessing](/examples/mtm2017/intro/)**:
+* **[Part 2: Training a typical model](/examples/mtm2017/model/)**:
+* **[Part 3: Deep Edinburgh-style models](/examples/mtm2017/deep/)**:
+* **[Part 4: Other models (language models, multi-source models ...)](/examples/mtm2017/other/)**:
+* **[Part 5: Coding tutorial](/examples/mtm2017/coding/)**:
+
 
 ### Custom sequence-to-sequence models
 * **[Part 1: A Sutskever-style model](/examples/tutorial/)**: Building and deploying a

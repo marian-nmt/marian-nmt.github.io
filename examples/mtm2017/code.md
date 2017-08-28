@@ -1,7 +1,7 @@
 ---
 layout: docs
-title: Custom models with Marian (Part 1)
-permalink: /examples/tutorial/
+title: title: MTM2017 Tutorial - Part 3
+permalink: /examples/mtm2017/code
 icon: fa-cogs
 ---
 

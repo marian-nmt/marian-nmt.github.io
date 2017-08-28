@@ -25,16 +25,18 @@ reported in that paper.
 
 ### Machine Translation Marathon 2017 Tutorial
 
-* **[Part 1: Set-up and data preprocessing](/examples/mtm2017/intro/)**:
-* **[Part 2: Training a typical model](/examples/mtm2017/model/)**:
-* **[Part 3: Deep Edinburgh-style models](/examples/mtm2017/deep/)**:
-* **[Part 4: Other models (language models, multi-source models ...)](/examples/mtm2017/other/)**:
-* **[Part 5: Coding tutorial](/examples/mtm2017/coding/)**:
+* **[Part 1: First steps with Marian](/examples/mtm2017/intro/)**:
+Downloading and compiling Marian. Translation with a pretrained model.
+Preparing a parallel corpus for training. Training a shallow encoder-decoder
+model with attention.
+* **[Part 2: Complex models](/examples/mtm2017/complex/)**: Here we take a look
+at more complex models, for instance deeper models or multi-encoder models.
+* **[Part 3: Coding tutorial](/examples/mtm2017/coding/)**: Creating a custom model, here a Sutskever-style model.
 
 
-### Custom sequence-to-sequence models
+<!-- ### Custom sequence-to-sequence models
 * **[Part 1: A Sutskever-style model](/examples/tutorial/)**: Building and deploying a
-Sutskever-style sequence-to-sequence model.
+Sutskever-style sequence-to-sequence model. -->
 <!--* **[Part 2: Re-implementing basic Nematus](/examples/tutorial/)**: Extending the Sutskever model to a shallow Bahdanau-style model with attention as implemented in Nematus. * **[Part 3: Going deeper](/examples/tutorial/)**: Adding stacked RNNs and Deep Transtion Networks.-->
 
 ## Use cases

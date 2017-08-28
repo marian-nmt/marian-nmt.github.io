@@ -1,405 +1,273 @@
 ---
 layout: docs
-title: Custom models with Marian (Part 1)
-permalink: /examples/tutorial/
+title: MTM2017 Tutorial - Part 1
+permalink: /examples/mtm2017/intro
 icon: fa-cogs
 ---
 
-# A Sutskever-style sequence-to-sequence model
+<b>Marian</b> is an efficient Neural Machine Translation framework written
+  in pure C++ with minimal dependencies. It has mainly been developed at the
+  Adam Mickiewicz University in Poznań (AMU) and at the University of Edinburgh.
+
+  It is currently being deployed in multiple European projects and is the main
+  translation and training engine behind the neural MT launch at the
+  <a href="http://www.wipo.int/pressroom/en/articles/2016/article_0014.html">World Intellectual Property Organization</a>.
+
+  <p>
+  Main features:
+  <ul>
+    <li> Fast multi-gpu training and translation </li>
+    <li> Compatible with Nematus and DL4MT </li>
+    <li> Efficient pure C++ implementation </li>
+    <li> Permissive open source license (MIT) </li>
+    <li> <a href="{{ site.baseurl }}../../features"> more details... </a> </li>
+  </ul>
+  </p>
+
+  It is also a Machine Translation Marathon 2016 project that is celebrating its
+  first birthday during the current MTM :)
+
+# First steps with Marian
+
+Change your current working directory to mtm2017-marian
+
+```
+cd mtm2017-marian
+```
 
 ## Checkout and Compilation
 
 ```
-git clone https://github.com/marian-nmt/marian-train
-cd marian-train
-git checkout refactor-rnn
+git clone https://github.com/marian-nmt/marian-dev
+cd marian-dev
 mkdir build
 cd build
 cmake .. -DCMAKE_BUILD_TYPE=Release
 make -j
-```
-
-## Skeleton model file
-
-All file paths are relative to the main repository directory `marian-train`.
-Create the file `src/models/sutskever.h` with the following skeleton code:
-
-``` c++
-#pragma once
-
-#include "marian.h"
-
-namespace marian {
-
-class EncoderSutskever : public EncoderBase {
-public:
-
-  template <class... Args>
-  EncoderSutskever(Ptr<Config> options, Args... args)
-      : EncoderBase(options, args...) {}
-
-  Ptr<EncoderState> build(Ptr<ExpressionGraph> graph,
-                          Ptr<data::CorpusBatch> batch,
-                          size_t encoderIndex) {
-    using namespace keywords;
-
-    return New<EncoderState>(nullptr, nullptr, batch);
-  }
-};
-
-class DecoderSutskever : public DecoderBase {
-public:
-  template <class... Args>
-  DecoderSutskever(Ptr<Config> options, Args... args)
-      : DecoderBase(options, args...) {}
-
-  virtual Ptr<DecoderState> startState(Ptr<EncoderState> encState) {
-    using namespace keywords;
-
-    rnn::States startStates;
-    return New<DecoderState>(startStates, nullptr, encState);
-  }
-
-  virtual Ptr<DecoderState> step(Ptr<ExpressionGraph> graph,
-                                 Ptr<DecoderState> state) {
-    using namespace keywords;
-
-    rnn::States decoderStates;
-    return New<DecoderState>(decoderStates, nullptr, state->getEncoderState());
-  }
-
-};
-
-typedef EncoderDecoder<EncoderSutskever, DecoderSutskever> Sutskever;
-
-}
-```
-
-## Registering the model
-
-In order to be able to use the model later during training or translation we need to register it in two places. This will later change to only one file.
-
-### Registering for training
-
-Edit `src/models/model_task.h` in the following way (add the header include at the top of the page and the register the model):
-
-``` c++
-#pragma once
-
-// Add this include at the top
-#include "models/sutskever.h"
-
-[...]
-
-template <template <class> class TaskName, template <class> class Wrapper>
-Ptr<ModelTask> WrapModelType(Ptr<Config> options) {
-  auto type = options->get<std::string>("type");
-
-  [...]
-  // Add this line anywhere in the function
-  REGISTER_MODEL("sutskever", Sutskever);
-  [...]
-
-}
-
-[...]
-
-}
-```
-
-### Registering for translation
-
-Edit the file `src/translator/scorers.h`, add the header file and the model wrapper:
-
-``` c++
-#pragma once
-
-#include "marian.h"
-
-[...]
-
-// Add this include at the top
-#include "models/sutskever.h"
-
-// find this function
-Ptr<Scorer> scorerByType(std::string fname,
-                         float weight,
-                         std::string model,
-                         Ptr<Config> options) {
-  std::string type = options->get<std::string>("type");
-
-  if(type == "s2s") {
-    return New<ScorerWrapper<S2S>>(fname, weight, model, options);
-  } else if(type == "amun") {
-    return New<ScorerWrapper<Amun>>(fname, weight, model, options);
-  } else if(type == "hard-att") {
-    return New<ScorerWrapper<HardAtt>>(fname, weight, model, options);
-  } else if(type == "hard-soft-att") {
-    return New<ScorerWrapper<HardSoftAtt>>(fname, weight, model, options);
-  }
-
-  // Add this to register the scorer for the translator
-  else if(type == "sutskever") {
-    return New<ScorerWrapper<Sutskever>>(fname, weight, model, options);
-  }
-
-  else {
-    UTIL_THROW2("Unknown decoder type: " + type);
-  }
-
-}
-
-[...]
-
-}
 
 ```
-## Filling the gaps
 
-### Encoder
-
-The complete encoder is given at the bottom of this section.
-We insert the following code pieces in the `build` function of the encoder.
-
-``` c++
-// create source embeddings
-int dimVoc = opt<std::vector<int>>("dim-vocabs")[encoderIndex];
-auto embeddings = embedding(graph)
-                  ("prefix", prefix_ + "_Wemb")
-                  ("dimVocab", dimVoc)
-                  ("dimEmb", opt<int>("dim-emb"))
-                  .construct();
+If everything worked correctly you can display the list of options with
+```
+./marian --help
 ```
 
-#### Embedding look-up
-``` c++
-// select embeddings that occur in the batch
-Expr batchEmbeddings, batchMask;
-std::tie(batchEmbeddings, batchMask)
-  = EncoderBase::lookup(embeddings, batch, encoderIndex);
+And download a couple of useful scripts:
+
+Return to the working directory and download a number of scripts for
+preprocessing and splitting into subwords:
+```
+cd ../..
+
+git clone https://github.com/marian-nmt/mtm2017-tutorial
+git clone https://github.com/marian-nmt/moses-scripts
+git clone https://github.com/rsennrich/subword-nmt
+
 ```
 
-#### Backward encoder RNN
-``` c++
-// backward RNN for encoding
-float dropoutRnn = inference_ ? 0 : opt<float>("dropout-rnn");
-auto rnnBw = rnn::rnn(graph)
-             ("type", "lstm")
-             ("prefix", prefix_)
-             ("direction", rnn::dir::backward)
-             ("dimInput", opt<int>("dim-emb"))
-             ("dimState", opt<int>("dim-rnn"))
-             ("dropout", dropoutRnn)
-             ("layer-normalization", opt<bool>("layer-normalization"))
-             .push_back(rnn::cell(graph))
-             .construct();
+## Tanslate with a pretrained model
 
-auto context = rnnBw->transduce(batchEmbeddings, batchMask);
-```
-
-#### The complete encoder
-``` c++
-class EncoderSutskever : public EncoderBase {
-public:
-
-  template <class... Args>
-  EncoderSutskever(Ptr<Config> options, Args... args)
-      : EncoderBase(options, args...) {}
-
-  Ptr<EncoderState> build(Ptr<ExpressionGraph> graph,
-                          Ptr<data::CorpusBatch> batch,
-                          size_t encoderIndex) {
-    using namespace keywords;
-
-    // create source embeddings
-    int dimVoc = opt<std::vector<int>>("dim-vocabs")[encoderIndex];
-    auto embeddings = embedding(graph)
-                      ("prefix", prefix_ + "_Wemb")
-                      ("dimVocab", dimVoc)
-                      ("dimEmb", opt<int>("dim-emb"))
-                      .construct();
-
-    // select embeddings that occur in the batch
-    Expr batchEmbeddings, batchMask;
-    std::tie(batchEmbeddings, batchMask)
-      = EncoderBase::lookup(embeddings, batch, encoderIndex);
-
-    // backward RNN for encoding
-    float dropoutRnn = inference_ ? 0 : opt<float>("dropout-rnn");
-    auto rnnBw = rnn::rnn(graph)
-                 ("type", "lstm")
-                 ("prefix", prefix_)
-                 ("direction", rnn::dir::backward)
-                 ("dimInput", opt<int>("dim-emb"))
-                 ("dimState", opt<int>("dim-rnn"))
-                 ("dropout", dropoutRnn)
-                 ("layer-normalization", opt<bool>("layer-normalization"))
-                 .push_back(rnn::cell(graph))
-                 .construct();
-
-    auto context = rnnBw->transduce(batchEmbeddings, batchMask);
-
-    return New<EncoderState>(context, batchMask, batch);
-  }
-};
-```
-
-### Decoder
-
-#### Setting the start state for decoding
-``` c++
-virtual Ptr<DecoderState> startState(Ptr<EncoderState> encState) {
-  using namespace keywords;
-
-  // Use first encoded word as start state
-  auto start = marian::step(encState->getContext(), 0);
-
-  rnn::States startStates({ {start, start} });
-  return New<DecoderState>(startStates, nullptr, encState);
-}
-```
-
-#### The step function
-
-In the step function we define actions to be taken to either train on or create
-the target sequence (all time steps during training, one time step during
-translation).
-
-##### Shifted embeddings
-``` c++
-auto embeddings = state->getTargetEmbeddings();
-```
-
-##### Decoder RNN
-
-``` c++
-// forward RNN for decoder
-float dropoutRnn = inference_ ? 0 : opt<float>("dropout-rnn");
-auto rnn = rnn::rnn(graph)
-           ("type", "lstm")
-           ("prefix", prefix_)
-           ("dimInput", opt<int>("dim-emb"))
-           ("dimState", opt<int>("dim-rnn"))
-           ("dropout", dropoutRnn)
-           ("layer-normalization", opt<bool>("layer-normalization"))
-           .push_back(rnn::cell(graph))
-           .construct();
-
-// apply RNN to embeddings, initialized with encoder context mapped into
-// decoder space
-auto decoderContext = rnn->transduce(embeddings, state->getStates());
-
-// retrieve the last state per layer. They are required during translation
-// in order to continue decoding for the next word
-rnn::States decoderStates = rnn->lastCellStates();
-```
-
-##### Deep output (2-layers)
-``` c++
-// construct deep output multi-layer network layer-wise
-auto layer1 = mlp::dense(graph)
-              ("prefix", prefix_ + "_ff_logit_l1")
-              ("dim", opt<int>("dim-emb"))
-              ("activation", mlp::act::tanh);
-int dimTrgVoc = opt<std::vector<int>>("dim-vocabs").back();
-auto layer2 = mlp::dense(graph)
-              ("prefix", prefix_ + "_ff_logit_l2")
-              ("dim", dimTrgVoc);
-
-// assemble layers into MLP and apply to embeddings, decoder context and
-// aligned source context
-auto logits = mlp::mlp(graph)
-              .push_back(layer1)
-              .push_back(layer2)
-              ->apply(embeddings, decoderContext);
-```
-
-##### Return the decoder state
-``` c++
-// return unormalized(!) probabilities
-return New<DecoderState>(decoderStates, logits, state->getEncoderState());
-```
-
-#### The complete decoder
-
-``` c++
-class DecoderSutskever : public DecoderBase {
-public:
-  template <class... Args>
-  DecoderSutskever(Ptr<Config> options, Args... args)
-      : DecoderBase(options, args...) {}
-
-  virtual Ptr<DecoderState> startState(Ptr<EncoderState> encState) {
-    using namespace keywords;
-
-    // Use first encoded word as start state
-    auto start = marian::step(encState->getContext(), 0);
-
-    rnn::States startStates({ {start, start} });
-    return New<DecoderState>(startStates, nullptr, encState);
-  }
-
-  virtual Ptr<DecoderState> step(Ptr<ExpressionGraph> graph,
-                                 Ptr<DecoderState> state) {
-    using namespace keywords;
-
-    auto embeddings = state->getTargetEmbeddings();
-
-    // forward RNN for decoder
-    float dropoutRnn = inference_ ? 0 : opt<float>("dropout-rnn");
-    auto rnn = rnn::rnn(graph)
-               ("type", "lstm")
-               ("prefix", prefix_)
-               ("dimInput", opt<int>("dim-emb"))
-               ("dimState", opt<int>("dim-rnn"))
-               ("dropout", dropoutRnn)
-               ("layer-normalization", opt<bool>("layer-normalization"))
-               .push_back(rnn::cell(graph))
-               .construct();
-
-    // apply RNN to embeddings, initialized with encoder context mapped into
-    // decoder space
-    auto decoderContext = rnn->transduce(embeddings, state->getStates());
-
-    // retrieve the last state per layer. They are required during translation
-    // in order to continue decoding for the next word
-    rnn::States decoderStates = rnn->lastCellStates();
-
-    // construct deep output multi-layer network layer-wise
-    auto layer1 = mlp::dense(graph)
-                  ("prefix", prefix_ + "_ff_logit_l1")
-                  ("dim", opt<int>("dim-emb"))
-                  ("activation", mlp::act::tanh);
-    int dimTrgVoc = opt<std::vector<int>>("dim-vocabs").back();
-    auto layer2 = mlp::dense(graph)
-                  ("prefix", prefix_ + "_ff_logit_l2")
-                  ("dim", dimTrgVoc);
-
-    // assemble layers into MLP and apply to embeddings, decoder context and
-    // aligned source context
-    auto logits = mlp::mlp(graph)
-                  .push_back(layer1)
-                  .push_back(layer2)
-                  ->apply(embeddings, decoderContext);
-
-    // return unormalized(!) probabilities
-    return New<DecoderState>(decoderStates, logits, state->getEncoderState());
-  }
-
-};
-```
-
-## Compile, train and translate
+We will first preprocess test files for translation. Make sure you understand
+what each command is doing (normalise-romanian.py and remove-diacritics.py are
+specialized commands for Romanian created by Barry Haddow).
 
 ```
-cd build
-make -j
-```
+cat mtm2017-tutorial/test/newstest2016.ro \
+    | ./moses-scripts/scripts/tokenizer/normalize-punctuation.perl -l ro \
+    | ./mtm2017-tutorial/scripts/normalise-romanian.py \
+    | ./mtm2017-tutorial/scripts/remove-diacritics.py \
+    | ./moses-scripts/scripts/tokenizer/tokenizer.perl -a -l ro \
+    | ./moses-scripts/scripts/recaser/truecase.perl -model pretrained/truecase-model.ro \
+    | ./subword-nmt/apply_bpe.py -c pretrained/roen.bpe > pretrained/newstest2016.tok.tc.bpe.ro
+
+cat mtm2017-tutorial/test/newstest2016.en \
+    | ./moses-scripts/scripts/tokenizer/normalize-punctuation.perl -l en \
+    | ./moses-scripts/scripts/tokenizer/tokenizer.perl -a -l en > pretrained/newstest2016.tok.en
 
 ```
-./build/marian --type sutskever -t corpus.bpe.ro corpus.bpe.en -v vocab.ro.yml vocab.en.yml -m model.npz
-```
+
+We can now translate the given test set with the command below. The
+files `vocab.{ro,en}.yml` contain the input and output vocabulary, `model.npz`
+is the model parameter file in Numpy format. Run the command and check
+if you can infer the model parameters (number of units in the rnn, number of
+layers, etc.).
 
 ```
-echo test | ./build/s2s --type sutskever -m model.npz -v vocab.ro.yml vocab.en.yml
+cat pretrained/newstest2016.tok.tc.bpe.ro | \
+  marian-dev/build/s2s -m pretrained/model.npz -v pretrained/vocab.ro.yml pretrained/vocab.en.yml \
+  > pretrained/newstest2016.tok.tc.bpe.ro.output
+
 ```
+
+The output `pretrained/newstest2016.tok.tc.bpe.ro.output` needs to be
+post-processed in order to compare it to the tokenized reference.
+We fuse subwords back together, detokenize and uppercase the first letter in each line:
+
+```
+cat pretrained/newstest2016.tok.tc.bpe.ro.output | \
+  perl -pe 's/@@ //g' | \
+  perl ./moses-scripts/scripts/recaser/detruecase.perl \
+  > pretrained/newstest2016.tok.ro.output
+```
+
+After that we can compute the BLEU score for this translation:
+
+```
+perl ./moses-scripts/scripts/generic/multi-bleu.perl pretrained/newstest2016.tok.en < pretrained/newstest2016.tok.ro.output
+```
+
+## Training your own WMT-grade model
+
+If you want to learn how to prepare your training data for a Romanian-English
+NMT system, you should continue with the next section *Preprocessing your
+data* and step through all the commands to create the training,
+development and test data. This may however take a while, therefore I recommend
+to skip it first and come back later.
+
+If you skip this step, just rename the `data.done` folder to `data` and
+move on to the following section *Training a basic Nematus-style model*.
+
+### Preprocessing your data
+
+Download the training data (this includes back-translated data by Rico Sennrich):
+```
+mkdir -p data
+wget http://www.statmt.org/europarl/v7/ro-en.tgz -O data/ro-en.tgz
+wget http://opus.lingfil.uu.se/download.php?f=SETIMES2/en-ro.txt.zip -O data/SETIMES2.ro-en.txt.zip
+wget http://data.statmt.org/rsennrich/wmt16_backtranslations/ro-en/corpus.bt.ro-en.en.gz -O data/corpus.bt.ro-en.en.gz
+wget http://data.statmt.org/rsennrich/wmt16_backtranslations/ro-en/corpus.bt.ro-en.ro.gz -O data/corpus.bt.ro-en.ro.gz
+
+```
+
+Unpack and concatenate the training data:
+```
+cd data/
+tar -xf ro-en.tgz
+unzip SETIMES2.ro-en.txt.zip
+gzip -d corpus.bt.ro-en.en.gz corpus.bt.ro-en.ro.gz
+
+cat europarl-v7.ro-en.en SETIMES2.en-ro.en corpus.bt.ro-en.en > corpus.en
+cat europarl-v7.ro-en.ro SETIMES2.en-ro.ro corpus.bt.ro-en.ro > corpus.ro
+
+cd ..
+
+```
+
+Tokenization and other language specific pre-processing steps:
+```
+cat data/corpus.ro \
+    | ./moses-scripts/scripts/tokenizer/normalize-punctuation.perl -l ro \
+    | ./mtm2017-tutorial/scripts/normalise-romanian.py \
+    | ./mtm2017-tutorial/scripts/remove-diacritics.py \
+    | ./moses-scripts/scripts/tokenizer/tokenizer.perl -threads 4 -a -l ro > data/corpus.tok.ro
+
+cat data/corpus.en \
+    | ./moses-scripts/scripts/tokenizer/normalize-punctuation.perl -l en \
+    | ./moses-scripts/scripts/tokenizer/tokenizer.perl -threads 4 -a -l en > data/corpus.tok.en
+
+
+cat mtm2017-tutorial/test/newsdev2016.ro \
+    | ./moses-scripts/scripts/tokenizer/normalize-punctuation.perl -l ro \
+    | ./mtm2017-tutorial/scripts/normalise-romanian.py \
+    | ./mtm2017-tutorial/scripts/remove-diacritics.py \
+    | ./moses-scripts/scripts/tokenizer/tokenizer.perl -threads 4 -a -l ro > data/newsdev2016.tok.ro
+
+cat mtm2017-tutorial/test/newsdev2016.en \
+    | ./moses-scripts/scripts/tokenizer/normalize-punctuation.perl -l en \
+    | ./moses-scripts/scripts/tokenizer/tokenizer.perl -threads 4 -a -l en > data/newsdev2016.tok.en
+
+cat mtm2017-tutorial/test/newstest2016.ro \
+    | ./moses-scripts/scripts/tokenizer/normalize-punctuation.perl -l ro \
+    | ./mtm2017-tutorial/scripts/normalise-romanian.py \
+    | ./mtm2017-tutorial/scripts/remove-diacritics.py \
+    | ./moses-scripts/scripts/tokenizer/tokenizer.perl -threads 4 -a -l ro > data/newstest2016.tok.ro
+
+cat mtm2017-tutorial/test/newstest2016.en \
+    | ./moses-scripts/scripts/tokenizer/normalize-punctuation.perl -l en \
+    | ./moses-scripts/scripts/tokenizer/tokenizer.perl -threads 4 -a -l en > data/newstest2016.tok.en
+
+```
+
+Clean empty and long sentences, and sentences with high source-target ratio (training corpus only):
+```
+./moses-scripts/scripts/training/clean-corpus-n.perl data/corpus.tok ro en data/corpus.clean.tok 1 80
+```
+
+Train truecaser:
+```
+./moses-scripts/scripts/recaser/train-truecaser.perl -corpus data/corpus.clean.tok.ro -model data/truecase-model.ro
+./moses-scripts/scripts/recaser/train-truecaser.perl -corpus data/corpus.clean.tok.en -model data/truecase-model.en
+```
+
+Apply truecaser to cleaned training corpus:
+```
+for prefix in corpus.clean newsdev2016 newstest2016
+do
+    ./moses-scripts/scripts/recaser/truecase.perl -model data/truecase-model.ro < data/$prefix.tok.ro > data/$prefix.tc.ro
+    ./moses-scripts/scripts/recaser/truecase.perl -model data/truecase-model.en < data/$prefix.tok.en > data/$prefix.tc.en
+done
+
+```
+
+Train BPE ([Read here about BPEs](https://arxiv.org/abs/1508.07909))
+```
+cat data/corpus.clean.tc.ro data/corpus.clean.tc.en | ./subword-nmt/learn_bpe.py -s 85000 > data/roen.bpe
+```
+
+Apply BPE
+```
+for prefix in corpus.clean newsdev2016 newstest2016
+do
+    ./subword-nmt/apply_bpe.py -c data/roen.bpe < data/$prefix.tc.ro > data/$prefix.bpe.ro
+    ./subword-nmt/apply_bpe.py -c data/roen.bpe < data/$prefix.tc.en > data/$prefix.bpe.en
+done
+```
+
+### Training a basic Nematus-style model
+
+We can now train a model using our previously created training data. We use
+`model` as our output folder and set the display freqency to 100
+(i.e. a status update will be displayed every 100 mini-batch updates). Try to
+inspect the `--help` option to determine what kind of model will be trained
+by default, e.g. what's the default batch size? or what kind of encoder
+is used? is there regularization?
+
+```
+mkdir -p model
+
+./marian-dev/build/marian \
+  --train-set data/corpus.clean.bpe.ro data/corpus.clean.bpe.en \
+  --model model/model.npz \
+  --disp-freq 100
+```
+
+You can kill the training process with the key shortcut `Ctrl+C`.
+
+Let's try a couple of more advanced options (can you infer from the
+help menu what these do?). But first, we will create a config file.
+
+```
+./marian-dev/build/marian \
+  --type s2s \
+  --train-set data/corpus.clean.bpe.ro data/corpus.clean.bpe.en \
+  --valid-set data/newsdev2016.bpe.ro data/newsdev2016.bpe.en \
+  --vocabs data/ro.yml data/en.yml \
+  --model model/model.npz \
+  --layer-normalization \
+  --dim-vocabs 66000 50000 \
+  --dynamic-batching --workspace 3000 \
+  --dropout-rnn 0.2 --dropout-src 0.1 --moving-average \
+  --early-stopping 5 --disp-freq 1000 \
+  --log model/train.log --valid-log model/valid.log \
+  --dump-config > model/config.yml
+```
+
+Now we can just use the config file to start our training process:
+```
+./marian-dev/build/marian -c model/config.yml
+```
+
+The training process will finish after a long time (these AWS GPUs are quite slow)
+and will result in a model with similar performance to the pretrained one.
+
+Continue with **[Part 2: Complex models](/examples/mtm2017/complex/)**

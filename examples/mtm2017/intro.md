@@ -251,7 +251,7 @@ help menu what these do?). But first, we will create a config file.
   --type s2s \
   --train-set data/corpus.clean.bpe.ro data/corpus.clean.bpe.en \
   --valid-set data/newsdev2016.bpe.ro data/newsdev2016.bpe.en \
-  --vocabs data/ro.yml data/en.yml \
+  --vocabs data/vocab.ro.yml data/vocab.en.yml \
   --model model/model.npz \
   --layer-normalization \
   --dim-vocabs 66000 50000 \
@@ -271,3 +271,5 @@ The training process will finish after a long time (these AWS GPUs are quite slo
 and will result in a model with similar performance to the pretrained one.
 
 Continue with **[Part 2: Complex models](/examples/mtm2017/complex/)**
+
+Continue with **[Part 3: A coding tutorial](/examples/mtm2017/code/)**

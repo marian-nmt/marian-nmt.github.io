@@ -31,7 +31,7 @@ Preparing a parallel corpus for training. Training a shallow encoder-decoder
 model with attention.
 * **[Part 2: Complex models](/examples/mtm2017/complex/)**: Here we take a look
 at more complex models, for instance deeper models or multi-encoder models.
-* **[Part 3: Coding tutorial](/examples/mtm2017/coding/)**: Creating a custom model, here a Sutskever-style model.
+* **[Part 3: Coding tutorial](/examples/mtm2017/code/)**: Code a custom model, here a simple Sutskever-style model without attention.
 
 
 <!-- ### Custom sequence-to-sequence models

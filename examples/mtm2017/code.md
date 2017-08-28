@@ -1,6 +1,6 @@
 ---
 layout: docs
-title: title: MTM2017 Tutorial - Part 3
+title: MTM2017 Tutorial - Part 3
 permalink: /examples/mtm2017/code
 icon: fa-cogs
 ---
@@ -9,10 +9,11 @@ icon: fa-cogs
 
 ## Checkout and Compilation
 
+If you skipped the previous parts, here's how to compile the code.
+
 ```
-git clone https://github.com/marian-nmt/marian-train
-cd marian-train
-git checkout refactor-rnn
+git clone https://github.com/marian-nmt/marian-dev
+cd marian-dev
 mkdir build
 cd build
 cmake .. -DCMAKE_BUILD_TYPE=Release
@@ -21,7 +22,7 @@ make -j
 
 ## Skeleton model file
 
-All file paths are relative to the main repository directory `marian-train`.
+All file paths are relative to the main repository directory `marian-dev`.
 Create the file `src/models/sutskever.h` with the following skeleton code:
 
 ``` c++
@@ -394,12 +395,38 @@ public:
 ```
 cd build
 make -j
+
+cd ../...
 ```
 
-```
-./build/marian --type sutskever -t corpus.bpe.ro corpus.bpe.en -v vocab.ro.yml vocab.en.yml -m model.npz
-```
+Now you can train your Sutskever-style model with the following command. It is
+possible to extend the model with multiple layers, see for instance the code
+in `src/models/s2s.h`.
 
 ```
-echo test | ./build/s2s --type sutskever -m model.npz -v vocab.ro.yml vocab.en.yml
+./marian-dev/build/marian \
+  --type sutskever \
+  -t data/corpus.clean.bpe.ro data/corpus.clean.bpe.en \
+  -v data/vocab.ro.yml data/vocab.en.yml \
+  -m model/model.npz
 ```
+
+Translation will work as shown in Part 1 of the tutorial.
+
+## For lazy people
+
+If you just want to see how the final model looks like, you can chech out the
+`tutorial` branch:
+
+```
+cd marian-dev
+cd build
+git checkout tutorial
+cmake .. -DCMAKE_BUILD_TYPE=Release
+make -j
+```
+
+This will compile a version of Marian which already has the `sutskever` model
+type.
+
+Back to **[Part 2: Complex models](/examples/mtm2017/complex/)**

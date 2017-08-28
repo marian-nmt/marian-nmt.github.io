@@ -1,7 +1,7 @@
 ---
 layout: docs
 title: MTM2017 Tutorial - Part 2
-permalink: /examples/mtm2017/complex
+permalink: /examples/mtm2017/complex/
 icon: fa-cogs
 ---
 

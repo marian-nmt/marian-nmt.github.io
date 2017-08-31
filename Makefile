@@ -18,7 +18,7 @@ marian-nmt-website.tgz: build
 docs: Doxyfile.marian.in marian
 	doxygen $<
 marian:
-	git clone https://github.com/marian-nmt/marian-train.git $@
+	git clone https://github.com/marian-nmt/marian-dev.git $@
 
 clean-docs:
 	rm -rf docs/marian

@@ -18,3 +18,4 @@ gem "git-up"
 
 gem "less"
 gem "therubyracer"
+gem "json"

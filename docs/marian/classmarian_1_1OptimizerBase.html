@@ -114,16 +114,15 @@ Inheritance diagram for marian::OptimizerBase:</div>
 <table class="memberdecls">
 <tr class="heading"><td colspan="2"><h2 class="groupheader"><a name="pub-methods"></a>
 Public Member Functions</h2></td></tr>
-<tr class="memitem:ad9dfe9f4b229d38bd9a0f6b53d9f9488"><td class="memTemplParams" colspan="2"><a class="anchor" id="ad9dfe9f4b229d38bd9a0f6b53d9f9488"></a>
-template&lt;typename... Args&gt; </td></tr>
-<tr class="memitem:ad9dfe9f4b229d38bd9a0f6b53d9f9488"><td class="memTemplItemLeft" align="right" valign="top">&#160;</td><td class="memTemplItemRight" valign="bottom"><b>OptimizerBase</b> (float eta, Args...args)</td></tr>
-<tr class="separator:ad9dfe9f4b229d38bd9a0f6b53d9f9488"><td class="memSeparator" colspan="2">&#160;</td></tr>
-<tr class="memitem:a7bfd912c8dbb63dae60cee9fe3718e0a"><td class="memItemLeft" align="right" valign="top"><a class="anchor" id="a7bfd912c8dbb63dae60cee9fe3718e0a"></a>
-void&#160;</td><td class="memItemRight" valign="bottom"><b>update</b> (Ptr&lt; <a class="el" href="classmarian_1_1ExpressionGraph.html">ExpressionGraph</a> &gt; graph)</td></tr>
-<tr class="separator:a7bfd912c8dbb63dae60cee9fe3718e0a"><td class="memSeparator" colspan="2">&#160;</td></tr>
-<tr class="memitem:acddf953946c7808bc45b7e84cda7299c"><td class="memItemLeft" align="right" valign="top"><a class="anchor" id="acddf953946c7808bc45b7e84cda7299c"></a>
-void&#160;</td><td class="memItemRight" valign="bottom"><b>update</b> (Tensor params, Tensor grads)</td></tr>
-<tr class="separator:acddf953946c7808bc45b7e84cda7299c"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:ac5998c5a0c94d25d3019f0c27deeb58b"><td class="memItemLeft" align="right" valign="top"><a class="anchor" id="ac5998c5a0c94d25d3019f0c27deeb58b"></a>
+&#160;</td><td class="memItemRight" valign="bottom"><b>OptimizerBase</b> (float eta, Ptr&lt; <a class="el" href="classmarian_1_1ClipperBase.html">ClipperBase</a> &gt; clipper=nullptr)</td></tr>
+<tr class="separator:ac5998c5a0c94d25d3019f0c27deeb58b"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a03d2c227f9f8112777351ed7fce292b0"><td class="memItemLeft" align="right" valign="top"><a class="anchor" id="a03d2c227f9f8112777351ed7fce292b0"></a>
+void&#160;</td><td class="memItemRight" valign="bottom"><b>update</b> (Ptr&lt; <a class="el" href="classmarian_1_1ExpressionGraph.html">ExpressionGraph</a> &gt; graph, float multiplyFactor=1.0f)</td></tr>
+<tr class="separator:a03d2c227f9f8112777351ed7fce292b0"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a1342cfffb323af02e2c164a633d6104a"><td class="memItemLeft" align="right" valign="top"><a class="anchor" id="a1342cfffb323af02e2c164a633d6104a"></a>
+void&#160;</td><td class="memItemRight" valign="bottom"><b>update</b> (Tensor params, Tensor grads, float multiplyFactor=1.0f)</td></tr>
+<tr class="separator:a1342cfffb323af02e2c164a633d6104a"><td class="memSeparator" colspan="2">&#160;</td></tr>
 <tr class="memitem:aab974f017773f25b979ceb42d7d98752"><td class="memItemLeft" align="right" valign="top"><a class="anchor" id="aab974f017773f25b979ceb42d7d98752"></a>
 void&#160;</td><td class="memItemRight" valign="bottom"><b>actAfterEpoch</b> (<a class="el" href="classmarian_1_1TrainingState.html">TrainingState</a> &amp;state)</td></tr>
 <tr class="separator:aab974f017773f25b979ceb42d7d98752"><td class="memSeparator" colspan="2">&#160;</td></tr>
@@ -133,21 +132,30 @@ void&#160;</td><td class="memItemRight" valign="bottom"><b>actAfterBatches</b> (
 <tr class="memitem:a6e14a01324f548d37a530a6be2237ce9"><td class="memItemLeft" align="right" valign="top"><a class="anchor" id="a6e14a01324f548d37a530a6be2237ce9"></a>
 void&#160;</td><td class="memItemRight" valign="bottom"><b>actAfterStalled</b> (<a class="el" href="classmarian_1_1TrainingState.html">TrainingState</a> &amp;state)</td></tr>
 <tr class="separator:a6e14a01324f548d37a530a6be2237ce9"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a521458bb527ba40170d08baf30386587"><td class="memItemLeft" align="right" valign="top"><a class="anchor" id="a521458bb527ba40170d08baf30386587"></a>
+void&#160;</td><td class="memItemRight" valign="bottom"><b>setParams</b> (const std::vector&lt; float &gt; &amp;params)</td></tr>
+<tr class="separator:a521458bb527ba40170d08baf30386587"><td class="memSeparator" colspan="2">&#160;</td></tr>
 </table><table class="memberdecls">
 <tr class="heading"><td colspan="2"><h2 class="groupheader"><a name="pro-methods"></a>
 Protected Member Functions</h2></td></tr>
 <tr class="memitem:ab387a8723637615adaef0134bb38e063"><td class="memItemLeft" align="right" valign="top"><a class="anchor" id="ab387a8723637615adaef0134bb38e063"></a>
 virtual void&#160;</td><td class="memItemRight" valign="bottom"><b>updateImpl</b> (Tensor params, Tensor grads)=0</td></tr>
 <tr class="separator:ab387a8723637615adaef0134bb38e063"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a575ca76ccdfe52b96e37a9690ff63118"><td class="memItemLeft" align="right" valign="top"><a class="anchor" id="a575ca76ccdfe52b96e37a9690ff63118"></a>
+virtual void&#160;</td><td class="memItemRight" valign="bottom"><b>parseParams</b> (const std::vector&lt; float &gt; &amp;params)=0</td></tr>
+<tr class="separator:a575ca76ccdfe52b96e37a9690ff63118"><td class="memSeparator" colspan="2">&#160;</td></tr>
 </table><table class="memberdecls">
 <tr class="heading"><td colspan="2"><h2 class="groupheader"><a name="pro-attribs"></a>
 Protected Attributes</h2></td></tr>
-<tr class="memitem:ac2a86cf5b8691476b891c9a9df99218d"><td class="memItemLeft" align="right" valign="top"><a class="anchor" id="ac2a86cf5b8691476b891c9a9df99218d"></a>
-Ptr&lt; <a class="el" href="classmarian_1_1ClipperBase.html">ClipperBase</a> &gt;&#160;</td><td class="memItemRight" valign="bottom"><b>clipper_</b></td></tr>
-<tr class="separator:ac2a86cf5b8691476b891c9a9df99218d"><td class="memSeparator" colspan="2">&#160;</td></tr>
 <tr class="memitem:a3ef582b12fb6816fb26d0eb8f697e204"><td class="memItemLeft" align="right" valign="top"><a class="anchor" id="a3ef582b12fb6816fb26d0eb8f697e204"></a>
 float&#160;</td><td class="memItemRight" valign="bottom"><b>eta_</b></td></tr>
 <tr class="separator:a3ef582b12fb6816fb26d0eb8f697e204"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a32f4ce6a8e956ab86ad6d47d9ceea26c"><td class="memItemLeft" align="right" valign="top"><a class="anchor" id="a32f4ce6a8e956ab86ad6d47d9ceea26c"></a>
+float&#160;</td><td class="memItemRight" valign="bottom"><b>multiplyFactor_</b></td></tr>
+<tr class="separator:a32f4ce6a8e956ab86ad6d47d9ceea26c"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:ac2a86cf5b8691476b891c9a9df99218d"><td class="memItemLeft" align="right" valign="top"><a class="anchor" id="ac2a86cf5b8691476b891c9a9df99218d"></a>
+Ptr&lt; <a class="el" href="classmarian_1_1ClipperBase.html">ClipperBase</a> &gt;&#160;</td><td class="memItemRight" valign="bottom"><b>clipper_</b></td></tr>
+<tr class="separator:ac2a86cf5b8691476b891c9a9df99218d"><td class="memSeparator" colspan="2">&#160;</td></tr>
 </table>
 <hr/>The documentation for this class was generated from the following file:<ul>
 <li>marian/src/optimizers/<a class="el" href="optimizers_8h_source.html">optimizers.h</a></li>
@@ -155,7 +163,7 @@ float&#160;</td><td class="memItemRight" valign="bottom"><b>eta_</b></td></tr>
 </div><!-- contents -->
 <!-- start footer part -->
 <hr class="footer"/><address class="footer"><small>
-Generated on Tue Aug 29 2017 00:37:32 for Marian by &#160;<a href="http://www.doxygen.org/index.html">
+Generated on Wed Oct 11 2017 14:59:55 for Marian by &#160;<a href="http://www.doxygen.org/index.html">
 <img class="footer" src="doxygen.png" alt="doxygen"/>
 </a> 1.8.11
 </small></address>

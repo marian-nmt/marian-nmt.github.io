@@ -4,6 +4,7 @@ var searchData=
   ['parameters',['Parameters',['../classmarian_1_1Parameters.html',1,'marian']]],
   ['paramnode',['ParamNode',['../structmarian_1_1ParamNode.html',1,'marian']]],
   ['params',['params',['../classmarian_1_1ExpressionGraph.html#a01122decdd8ff42c1c4ed519fd0222c9',1,'marian::ExpressionGraph']]],
+  ['parseoptions',['parseOptions',['../classmarian_1_1ConfigParser.html#a538eb5f3c97b6a25a2fc0c7a8f015425',1,'marian::ConfigParser']]],
   ['perplexityvalidator',['PerplexityValidator',['../classmarian_1_1PerplexityValidator.html',1,'marian']]],
   ['plusnodeop',['PlusNodeOp',['../structmarian_1_1PlusNodeOp.html',1,'marian']]]
 ];

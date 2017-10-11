@@ -105,9 +105,10 @@ Inheritance diagram for marian::EncoderBase:</div>
  <div class="center">
   <img src="classmarian_1_1EncoderBase.png" usemap="#marian::EncoderBase_map" alt=""/>
   <map id="marian::EncoderBase_map" name="marian::EncoderBase_map">
-<area href="classmarian_1_1EncoderPooling.html" alt="marian::EncoderPooling" shape="rect" coords="0,56,274,80"/>
-<area href="classmarian_1_1EncoderS2S.html" alt="marian::EncoderS2S" shape="rect" coords="284,56,558,80"/>
-<area href="classmarian_1_1MultiEncoder.html" alt="marian::MultiEncoder&lt; Encoder1, Encoder2 &gt;" shape="rect" coords="568,56,842,80"/>
+<area href="classmarian_1_1DummyEncoder.html" alt="marian::DummyEncoder" shape="rect" coords="0,56,274,80"/>
+<area href="classmarian_1_1EncoderPooling.html" alt="marian::EncoderPooling" shape="rect" coords="284,56,558,80"/>
+<area href="classmarian_1_1EncoderS2S.html" alt="marian::EncoderS2S" shape="rect" coords="568,56,842,80"/>
+<area href="classmarian_1_1MultiEncoder.html" alt="marian::MultiEncoder&lt; Encoder1, Encoder2 &gt;" shape="rect" coords="852,56,1126,80"/>
 </map>
  </div></div>
 <table class="memberdecls">
@@ -118,14 +119,18 @@ template&lt;class... Args&gt; </td></tr>
 <tr class="memitem:aba592bf63d3b015bdc41fc06d7fa3a59"><td class="memTemplItemLeft" align="right" valign="top">&#160;</td><td class="memTemplItemRight" valign="bottom"><b>EncoderBase</b> (Ptr&lt; <a class="el" href="classmarian_1_1Config.html">Config</a> &gt; options, Args...args)</td></tr>
 <tr class="separator:aba592bf63d3b015bdc41fc06d7fa3a59"><td class="memSeparator" colspan="2">&#160;</td></tr>
 <tr class="memitem:a7404d245bf899d6d8023d56407d81272"><td class="memItemLeft" align="right" valign="top"><a class="anchor" id="a7404d245bf899d6d8023d56407d81272"></a>
-virtual Ptr&lt; <a class="el" href="structmarian_1_1EncoderState.html">EncoderState</a> &gt;&#160;</td><td class="memItemRight" valign="bottom"><b>build</b> (Ptr&lt; <a class="el" href="classmarian_1_1ExpressionGraph.html">ExpressionGraph</a> &gt;, Ptr&lt; <a class="el" href="classmarian_1_1data_1_1CorpusBatch.html">data::CorpusBatch</a> &gt;, size_t)=0</td></tr>
+virtual Ptr&lt; <a class="el" href="classmarian_1_1EncoderState.html">EncoderState</a> &gt;&#160;</td><td class="memItemRight" valign="bottom"><b>build</b> (Ptr&lt; <a class="el" href="classmarian_1_1ExpressionGraph.html">ExpressionGraph</a> &gt;, Ptr&lt; <a class="el" href="classmarian_1_1data_1_1CorpusBatch.html">data::CorpusBatch</a> &gt;, size_t)=0</td></tr>
 <tr class="separator:a7404d245bf899d6d8023d56407d81272"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:aff87b618b2754b99eaf961e95739366d"><td class="memTemplParams" colspan="2"><a class="anchor" id="aff87b618b2754b99eaf961e95739366d"></a>
+template&lt;typename T &gt; </td></tr>
+<tr class="memitem:aff87b618b2754b99eaf961e95739366d"><td class="memTemplItemLeft" align="right" valign="top">T&#160;</td><td class="memTemplItemRight" valign="bottom"><b>opt</b> (const std::string &amp;key)</td></tr>
+<tr class="separator:aff87b618b2754b99eaf961e95739366d"><td class="memSeparator" colspan="2">&#160;</td></tr>
 </table><table class="memberdecls">
 <tr class="heading"><td colspan="2"><h2 class="groupheader"><a name="pro-methods"></a>
 Protected Member Functions</h2></td></tr>
-<tr class="memitem:ae1b45ffc4feb50f9c6ed41ba3f04d876"><td class="memItemLeft" align="right" valign="top"><a class="anchor" id="ae1b45ffc4feb50f9c6ed41ba3f04d876"></a>
-virtual std::tuple&lt; <a class="el" href="namespacemarian.html#a498d8baf75b754011078b890b39c8e12">Expr</a>, <a class="el" href="namespacemarian.html#a498d8baf75b754011078b890b39c8e12">Expr</a> &gt;&#160;</td><td class="memItemRight" valign="bottom"><b>prepareSource</b> (<a class="el" href="namespacemarian.html#a498d8baf75b754011078b890b39c8e12">Expr</a> srcEmbeddings, Ptr&lt; <a class="el" href="classmarian_1_1data_1_1CorpusBatch.html">data::CorpusBatch</a> &gt; batch, size_t index)</td></tr>
-<tr class="separator:ae1b45ffc4feb50f9c6ed41ba3f04d876"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a02e1594dfe8b093081c24f1aea1a35d6"><td class="memItemLeft" align="right" valign="top"><a class="anchor" id="a02e1594dfe8b093081c24f1aea1a35d6"></a>
+virtual std::tuple&lt; <a class="el" href="namespacemarian.html#a498d8baf75b754011078b890b39c8e12">Expr</a>, <a class="el" href="namespacemarian.html#a498d8baf75b754011078b890b39c8e12">Expr</a> &gt;&#160;</td><td class="memItemRight" valign="bottom"><b>lookup</b> (<a class="el" href="namespacemarian.html#a498d8baf75b754011078b890b39c8e12">Expr</a> srcEmbeddings, Ptr&lt; <a class="el" href="classmarian_1_1data_1_1CorpusBatch.html">data::CorpusBatch</a> &gt; batch, size_t index)</td></tr>
+<tr class="separator:a02e1594dfe8b093081c24f1aea1a35d6"><td class="memSeparator" colspan="2">&#160;</td></tr>
 </table><table class="memberdecls">
 <tr class="heading"><td colspan="2"><h2 class="groupheader"><a name="pro-attribs"></a>
 Protected Attributes</h2></td></tr>
@@ -145,7 +150,7 @@ bool&#160;</td><td class="memItemRight" valign="bottom"><b>inference_</b> {false
 </div><!-- contents -->
 <!-- start footer part -->
 <hr class="footer"/><address class="footer"><small>
-Generated on Tue Aug 29 2017 00:37:32 for Marian by &#160;<a href="http://www.doxygen.org/index.html">
+Generated on Wed Oct 11 2017 14:59:55 for Marian by &#160;<a href="http://www.doxygen.org/index.html">
 <img class="footer" src="doxygen.png" alt="doxygen"/>
 </a> 1.8.11
 </small></address>

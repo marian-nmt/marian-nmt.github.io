@@ -1,6 +1,6 @@
 ---
 layout: docs
-title: FAQ & Google group
+title: Google group
 permalink: /faq
 icon: fa-life-ring
 menu: 3
@@ -8,11 +8,11 @@ menu: 3
 
 ## Google group
 
-Google discussion group is available at [https://groups.google.com/forum/#!forum/amunmt](https://groups.google.com/forum/#!forum/amunmt)
+Google discussion group is available at [https://groups.google.com/forum/#!forum/marian-nmt](https://groups.google.com/forum/#!forum/marian-nmt)
 
-You can send questions to the group by e-mail: `amunmt@googlegroups.com`
+You can send questions to the group by e-mail: `marian-nmt@googlegroups.com`
 
-
+<!--
 ## FAQ
 
 ### General
@@ -47,3 +47,4 @@ Lorem ipsum dolor sit amet, consectetuer adipiscing elit. Aenean commodo ligula 
 #### Last question
 
 Lorem ipsum dolor sit amet, consectetuer adipiscing elit. Aenean commodo ligula eget dolor. Aenean massa. 
+-->

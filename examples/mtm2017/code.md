@@ -7,6 +7,9 @@ icon: fa-cogs
 
 # A Sutskever-style sequence-to-sequence model
 
+**Note**: the tutorial has been updated for marian-dev version available in
+commit a9279f1.
+
 ## Checkout and Compilation
 
 If you skipped the previous parts, here's how to compile the code.
@@ -32,33 +35,34 @@ Create the file `src/models/sutskever.h` with the following skeleton code:
 
 namespace marian {
 
+// Skeleton code for encoder
 class EncoderSutskever : public EncoderBase {
 public:
-
-  template <class... Args>
-  EncoderSutskever(Ptr<Config> options, Args... args)
-      : EncoderBase(options, args...) {}
+  EncoderSutskever(Ptr<Options> options) : EncoderBase(options) {}
 
   Ptr<EncoderState> build(Ptr<ExpressionGraph> graph,
-                          Ptr<data::CorpusBatch> batch,
-                          size_t encoderIndex) {
+                          Ptr<data::CorpusBatch> batch) {
     using namespace keywords;
 
     return New<EncoderState>(nullptr, nullptr, batch);
   }
+
+  void clear() {}
 };
 
+// Skeleton code for decoder
 class DecoderSutskever : public DecoderBase {
 public:
-  template <class... Args>
-  DecoderSutskever(Ptr<Config> options, Args... args)
-      : DecoderBase(options, args...) {}
+  DecoderSutskever(Ptr<Options> options) : DecoderBase(options) {}
 
-  virtual Ptr<DecoderState> startState(Ptr<EncoderState> encState) {
+  virtual Ptr<DecoderState> startState(
+      Ptr<ExpressionGraph> graph,
+      Ptr<data::CorpusBatch> batch,
+      std::vector<Ptr<EncoderState>>& encStates) {
     using namespace keywords;
 
     rnn::States startStates;
-    return New<DecoderState>(startStates, nullptr, encState);
+    return New<DecoderState>(startStates, nullptr, encStates);
   }
 
   virtual Ptr<DecoderState> step(Ptr<ExpressionGraph> graph,
@@ -66,95 +70,63 @@ public:
     using namespace keywords;
 
     rnn::States decoderStates;
-    return New<DecoderState>(decoderStates, nullptr, state->getEncoderState());
+    return New<DecoderState>(decoderStates, nullptr, state->getEncoderStates());
   }
 
+  void clear() {}
 };
 
-typedef EncoderDecoder<EncoderSutskever, DecoderSutskever> Sutskever;
-
-}
+} // namespace marian
 ```
 
 ## Registering the model
 
-In order to be able to use the model later during training or translation we need to register it in two places. This will later change to only one file.
+In order to be able to use the model later during training or translation we
+need to register it in model factory.
 
-### Registering for training
-
-Edit `src/models/model_task.h` in the following way (add the header include at the top of the page and the register the model):
+Edit `src/models/model_factory.h` in the following way: add the header include
+at the top of the file:
 
 ``` c++
 #pragma once
 
 // Add this include at the top
 #include "models/sutskever.h"
-
-[...]
-
-template <template <class> class TaskName, template <class> class Wrapper>
-Ptr<ModelTask> WrapModelType(Ptr<Config> options) {
-  auto type = options->get<std::string>("type");
-
-  [...]
-  // Add this line anywhere in the function
-  REGISTER_MODEL("sutskever", Sutskever);
-  [...]
-
-}
-
-[...]
-
-}
 ```
 
-### Registering for translation
-
-Edit the file `src/translator/scorers.h`, add the header file and the model wrapper:
+Register the encoder and the decoder:
 
 ``` c++
-#pragma once
+Ptr<EncoderBase> EncoderFactory::construct() {
+  if(options_->get<std::string>("type") == "sutskever")
+    return New<EncoderSutskever>(options_);
 
-#include "marian.h"
-
-[...]
-
-// Add this include at the top
-#include "models/sutskever.h"
-
-// find this function
-Ptr<Scorer> scorerByType(std::string fname,
-                         float weight,
-                         std::string model,
-                         Ptr<Config> options) {
-  std::string type = options->get<std::string>("type");
-
-  if(type == "s2s") {
-    return New<ScorerWrapper<S2S>>(fname, weight, model, options);
-  } else if(type == "amun") {
-    return New<ScorerWrapper<Amun>>(fname, weight, model, options);
-  } else if(type == "hard-att") {
-    return New<ScorerWrapper<HardAtt>>(fname, weight, model, options);
-  } else if(type == "hard-soft-att") {
-    return New<ScorerWrapper<HardSoftAtt>>(fname, weight, model, options);
-  }
-
-  // Add this to register the scorer for the translator
-  else if(type == "sutskever") {
-    return New<ScorerWrapper<Sutskever>>(fname, weight, model, options);
-  }
-
-  else {
-    UTIL_THROW2("Unknown decoder type: " + type);
-  }
-
+  [...]
 }
 
-[...]
+Ptr<DecoderBase> DecoderFactory::construct() {
+  if(options_->get<std::string>("type") == "sutskever")
+    return New<DecoderSutskever>(options_);
 
+  [...]
 }
-
 ```
+
+Specify how to construct the encoder-decoder Sutskever model:
+
+``` c++
+Ptr<ModelBase> by_type(std::string type, Ptr<Options> options) {
+  if(type == "sutskever") {
+    return models::encoder_decoder()(options)               //
+        .push_back(models::encoder()("type", "sutskever"))  //
+        .push_back(models::decoder()("type", "sutskever"))  //
+        .construct();
+  }
+
+  [...]
+}
+```
+
 ## Filling the gaps
 
 ### Encoder
@@ -164,23 +136,25 @@ We insert the following code pieces in the `build` function of the encoder.
 
 ``` c++
 // create source embeddings
-int dimVoc = opt<std::vector<int>>("dim-vocabs")[encoderIndex];
+int dimVoc = opt<std::vector<int>>("dim-vocabs")[batchIndex_];
 auto embeddings = embedding(graph)
                   ("prefix", prefix_ + "_Wemb")
                   ("dimVocab", dimVoc)
                   ("dimEmb", opt<int>("dim-emb"))
-                  .construct();
+                      .construct();
 ```
 
 #### Embedding look-up
+
 ``` c++
 // select embeddings that occur in the batch
 Expr batchEmbeddings, batchMask;
 std::tie(batchEmbeddings, batchMask)
-  = EncoderBase::lookup(embeddings, batch, encoderIndex);
+    = EncoderBase::lookup(embeddings, batch, encoderIndex);
 ```
 
 #### Backward encoder RNN
+
 ``` c++
 // backward RNN for encoding
 float dropoutRnn = inference_ ? 0 : opt<float>("dropout-rnn");
@@ -192,38 +166,35 @@ auto rnnBw = rnn::rnn(graph)
              ("dimState", opt<int>("dim-rnn"))
              ("dropout", dropoutRnn)
              ("layer-normalization", opt<bool>("layer-normalization"))
-             .push_back(rnn::cell(graph))
-             .construct();
+                 .push_back(rnn::cell(graph))
+                 .construct();
 
 auto context = rnnBw->transduce(batchEmbeddings, batchMask);
 ```
 
 #### The complete encoder
+
 ``` c++
 class EncoderSutskever : public EncoderBase {
 public:
-
-  template <class... Args>
-  EncoderSutskever(Ptr<Config> options, Args... args)
-      : EncoderBase(options, args...) {}
+  EncoderSutskever(Ptr<Options> options) : EncoderBase(options) {}
 
   Ptr<EncoderState> build(Ptr<ExpressionGraph> graph,
-                          Ptr<data::CorpusBatch> batch,
-                          size_t encoderIndex) {
+                          Ptr<data::CorpusBatch> batch) {
     using namespace keywords;
 
     // create source embeddings
-    int dimVoc = opt<std::vector<int>>("dim-vocabs")[encoderIndex];
+    int dimVoc = opt<std::vector<int>>("dim-vocabs")[batchIndex_];
     auto embeddings = embedding(graph)
                       ("prefix", prefix_ + "_Wemb")
                       ("dimVocab", dimVoc)
                       ("dimEmb", opt<int>("dim-emb"))
-                      .construct();
+                          .construct();
 
     // select embeddings that occur in the batch
     Expr batchEmbeddings, batchMask;
     std::tie(batchEmbeddings, batchMask)
-      = EncoderBase::lookup(embeddings, batch, encoderIndex);
+        = EncoderBase::lookup(embeddings, batch);
 
     // backward RNN for encoding
     float dropoutRnn = inference_ ? 0 : opt<float>("dropout-rnn");
@@ -235,28 +206,35 @@ public:
                  ("dimState", opt<int>("dim-rnn"))
                  ("dropout", dropoutRnn)
                  ("layer-normalization", opt<bool>("layer-normalization"))
-                 .push_back(rnn::cell(graph))
-                 .construct();
+                     .push_back(rnn::cell(graph))
+                     .construct();
 
     auto context = rnnBw->transduce(batchEmbeddings, batchMask);
 
     return New<EncoderState>(context, batchMask, batch);
   }
+
+  void clear() {}
 };
 ```
 
 ### Decoder
 
+Two methods have to be filled in the decoder: `startState` and `step`.
+
 #### Setting the start state for decoding
 ``` c++
-virtual Ptr<DecoderState> startState(Ptr<EncoderState> encState) {
+virtual Ptr<DecoderState> startState(
+    Ptr<ExpressionGraph> graph,
+    Ptr<data::CorpusBatch> batch,
+    std::vector<Ptr<EncoderState>>& encStates) {
   using namespace keywords;
 
   // Use first encoded word as start state
-  auto start = marian::step(encState->getContext(), 0);
+  auto start = marian::step(encStates[0]->getContext(), 0, 2);
 
-  rnn::States startStates({ {start, start} });
-  return New<DecoderState>(startStates, nullptr, encState);
+  rnn::States startStates({{start, start}});
+  return New<DecoderState>(startStates, nullptr, encStates);
 }
 ```
 
@@ -267,6 +245,7 @@ the target sequence (all time steps during training, one time step during
 translation).
 
 ##### Shifted embeddings
+
 ``` c++
 auto embeddings = state->getTargetEmbeddings();
 ```
@@ -296,6 +275,7 @@ rnn::States decoderStates = rnn->lastCellStates();
 ```
 
 ##### Deep output (2-layers)
+
 ``` c++
 // construct deep output multi-layer network layer-wise
 auto layer1 = mlp::dense(graph)
@@ -316,9 +296,10 @@ auto logits = mlp::mlp(graph)
 ```
 
 ##### Return the decoder state
+
 ``` c++
 // return unormalized(!) probabilities
-return New<DecoderState>(decoderStates, logits, state->getEncoderState());
+return New<DecoderState>(decoderStates, logits, state->getEncoderStates());
 ```
 
 #### The complete decoder
@@ -326,18 +307,19 @@ return New<DecoderState>(decoderStates, logits, state->getEncoderState());
 ``` c++
 class DecoderSutskever : public DecoderBase {
 public:
-  template <class... Args>
-  DecoderSutskever(Ptr<Config> options, Args... args)
-      : DecoderBase(options, args...) {}
+  DecoderSutskever(Ptr<Options> options) : DecoderBase(options) {}
 
-  virtual Ptr<DecoderState> startState(Ptr<EncoderState> encState) {
+  virtual Ptr<DecoderState> startState(
+      Ptr<ExpressionGraph> graph,
+      Ptr<data::CorpusBatch> batch,
+      std::vector<Ptr<EncoderState>>& encStates) {
     using namespace keywords;
 
     // Use first encoded word as start state
-    auto start = marian::step(encState->getContext(), 0);
+    auto start = marian::step(encStates[0]->getContext(), 0, 2);
 
-    rnn::States startStates({ {start, start} });
-    return New<DecoderState>(startStates, nullptr, encState);
+    rnn::States startStates({{start, start}});
+    return New<DecoderState>(startStates, nullptr, encStates);
   }
 
   virtual Ptr<DecoderState> step(Ptr<ExpressionGraph> graph,
@@ -355,8 +337,8 @@ public:
                ("dimState", opt<int>("dim-rnn"))
                ("dropout", dropoutRnn)
                ("layer-normalization", opt<bool>("layer-normalization"))
-               .push_back(rnn::cell(graph))
-               .construct();
+                   .push_back(rnn::cell(graph))
+                   .construct();
 
     // apply RNN to embeddings, initialized with encoder context mapped into
     // decoder space
@@ -379,14 +361,15 @@ public:
     // assemble layers into MLP and apply to embeddings, decoder context and
     // aligned source context
     auto logits = mlp::mlp(graph)
-                  .push_back(layer1)
-                  .push_back(layer2)
+                      .push_back(layer1)
+                      .push_back(layer2)
                   ->apply(embeddings, decoderContext);
 
     // return unormalized(!) probabilities
-    return New<DecoderState>(decoderStates, logits, state->getEncoderState());
+    return New<DecoderState>(decoderStates, logits, state->getEncoderStates());
   }
 
+  void clear() {}
 };
 ```
 
@@ -396,12 +379,12 @@ public:
 cd build
 make -j
 
-cd ../...
+cd ../..
 ```
 
 Now you can train your Sutskever-style model with the following command. It is
-possible to extend the model with multiple layers, see for instance the code
-in `src/models/s2s.h`.
+possible to extend the model with multiple layers, see for instance the code in
+`src/models/s2s.h`.
 
 ```
 ./marian-dev/build/marian \
@@ -413,15 +396,20 @@ in `src/models/s2s.h`.
 
 Translation will work as shown in Part 1 of the tutorial.
 
+On an adjusted ro-en example from
+`https://marian-nmt/marian/examples/training`, the Sutskever model should
+achieve ca.~22 BLEU.
+
 ## For lazy people
 
 If you just want to see how the final model looks like, you can chech out the
-`tutorial` branch:
+`tutorial-nov-17` branch:
 
 ```
 cd marian-dev
 cd build
-git checkout tutorial
+git fetch origin tutorial-nov-17
+git checkout tutorial-nov-17
 cmake .. -DCMAKE_BUILD_TYPE=Release
 make -j
 ```

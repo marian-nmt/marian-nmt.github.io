@@ -25,6 +25,7 @@ of only applying it to features, layer-normalization is applied to the activatio
 of the neural network. See [here](https://arxiv.org/abs/1607.06450) for more details.
 
 Layer normalization is turned on by:
+
 ```
 --layer-normalization
 ```
@@ -61,10 +62,13 @@ feed-forward layers. In the decoder the first RNN layer (the conditional cell th
 contains the attention mechanism) and all other layers have separate depth settings.
 
 We set the number of decoder layers with
+
 ```
 --dec-depth 4
 ```
+
 the number of feedword layers with the cell of the first and the following layers with
+
 ```
 --dec-cell-base-depth 4
 --dec-cell-high-depth 2
@@ -84,10 +88,12 @@ As for decoders, encoders can have multiple layers of complex RNN cells to be se
 with:
 
 We set the number of decoder layers with
+
 ```
 --enc-depth 4
 --dec-cell-depth 2
 ```
+
 or
 
 ```
@@ -166,7 +172,7 @@ mkdir -p model.deep
   --dec-depth 4 --dec-cell lstm --dec-cell-base-depth 4 --dec-cell-high-depth 2 \
   --tied-embeddings --layer-normalization --skip \
   --dim-vocabs 66000 50000 \
-  --dynamic-batching --workspace 6500 \
+  --mini-batch-fit --workspace 6500 \
   --dropout-rnn 0.2 --dropout-src 0.1 --moving-average \
   --early-stopping 5 --disp-freq 1000 \
   --log model.deep/train.log --valid-log model.deep/valid.log \
@@ -174,6 +180,7 @@ mkdir -p model.deep
 ```
 
 As before, we can just use the config file to start our training process:
+
 ```
 ./marian-dev/build/marian -c model.deep/config.yml
 ```

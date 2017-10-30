@@ -44,10 +44,10 @@ mkdir build
 cd build
 cmake .. -DCMAKE_BUILD_TYPE=Release
 make -j
-
 ```
 
 If everything worked correctly you can display the list of options with
+
 ```
 ./marian --help
 ```
@@ -56,13 +56,13 @@ And download a couple of useful scripts:
 
 Return to the working directory and download a number of scripts for
 preprocessing and splitting into subwords:
+
 ```
 cd ../..
 
 git clone https://github.com/marian-nmt/mtm2017-tutorial
 git clone https://github.com/marian-nmt/moses-scripts
 git clone https://github.com/rsennrich/subword-nmt
-
 ```
 
 ## Tanslate with a pretrained model
@@ -83,7 +83,6 @@ cat mtm2017-tutorial/test/newstest2016.ro \
 cat mtm2017-tutorial/test/newstest2016.en \
     | ./moses-scripts/scripts/tokenizer/normalize-punctuation.perl -l en \
     | ./moses-scripts/scripts/tokenizer/tokenizer.perl -a -l en > pretrained/newstest2016.tok.en
-
 ```
 
 We can now translate the given test set with the command below. The
@@ -96,7 +95,6 @@ layers, etc.).
 cat pretrained/newstest2016.tok.tc.bpe.ro | \
   marian-dev/build/s2s -m pretrained/model.npz -v pretrained/vocab.ro.yml pretrained/vocab.en.yml \
   > pretrained/newstest2016.tok.tc.bpe.ro.output
-
 ```
 
 The output `pretrained/newstest2016.tok.tc.bpe.ro.output` needs to be
@@ -130,16 +128,17 @@ move on to the following section *Training a basic Nematus-style model*.
 ### Preprocessing your data
 
 Download the training data (this includes back-translated data by Rico Sennrich):
+
 ```
 mkdir -p data
 wget http://www.statmt.org/europarl/v7/ro-en.tgz -O data/ro-en.tgz
 wget http://opus.lingfil.uu.se/download.php?f=SETIMES2/en-ro.txt.zip -O data/SETIMES2.ro-en.txt.zip
 wget http://data.statmt.org/rsennrich/wmt16_backtranslations/ro-en/corpus.bt.ro-en.en.gz -O data/corpus.bt.ro-en.en.gz
 wget http://data.statmt.org/rsennrich/wmt16_backtranslations/ro-en/corpus.bt.ro-en.ro.gz -O data/corpus.bt.ro-en.ro.gz
-
 ```
 
 Unpack and concatenate the training data:
+
 ```
 cd data/
 tar -xf ro-en.tgz
@@ -150,10 +149,10 @@ cat europarl-v7.ro-en.en SETIMES2.en-ro.en corpus.bt.ro-en.en > corpus.en
 cat europarl-v7.ro-en.ro SETIMES2.en-ro.ro corpus.bt.ro-en.ro > corpus.ro
 
 cd ..
-
 ```
 
 Tokenization and other language specific pre-processing steps:
+
 ```
 cat data/corpus.ro \
     | ./moses-scripts/scripts/tokenizer/normalize-punctuation.perl -l ro \
@@ -185,10 +184,11 @@ cat mtm2017-tutorial/test/newstest2016.ro \
 cat mtm2017-tutorial/test/newstest2016.en \
     | ./moses-scripts/scripts/tokenizer/normalize-punctuation.perl -l en \
     | ./moses-scripts/scripts/tokenizer/tokenizer.perl -threads 4 -a -l en > data/newstest2016.tok.en
-
 ```
 
-Clean empty and long sentences, and sentences with high source-target ratio (training corpus only):
+Clean empty and long sentences, and sentences with high source-target ratio
+(training corpus only):
+
 ```
 ./moses-scripts/scripts/training/clean-corpus-n.perl data/corpus.tok ro en data/corpus.clean.tok 1 80
 ```
@@ -200,21 +200,23 @@ Train truecaser:
 ```
 
 Apply truecaser to cleaned training corpus:
+
 ```
 for prefix in corpus.clean newsdev2016 newstest2016
 do
     ./moses-scripts/scripts/recaser/truecase.perl -model data/truecase-model.ro < data/$prefix.tok.ro > data/$prefix.tc.ro
     ./moses-scripts/scripts/recaser/truecase.perl -model data/truecase-model.en < data/$prefix.tok.en > data/$prefix.tc.en
 done
-
 ```
 
 Train BPE ([Read here about BPEs](https://arxiv.org/abs/1508.07909))
+
 ```
 cat data/corpus.clean.tc.ro data/corpus.clean.tc.en | ./subword-nmt/learn_bpe.py -s 85000 > data/roen.bpe
 ```
 
 Apply BPE
+
 ```
 for prefix in corpus.clean newsdev2016 newstest2016
 do
@@ -255,7 +257,7 @@ help menu what these do?). But first, we will create a config file.
   --model model/model.npz \
   --layer-normalization \
   --dim-vocabs 66000 50000 \
-  --dynamic-batching --workspace 3000 \
+  --mini-batch-fit --workspace 3000 \
   --dropout-rnn 0.2 --dropout-src 0.1 --moving-average \
   --early-stopping 5 --disp-freq 1000 \
   --log model/train.log --valid-log model/valid.log \
@@ -263,6 +265,7 @@ help menu what these do?). But first, we will create a config file.
 ```
 
 Now we can just use the config file to start our training process:
+
 ```
 ./marian-dev/build/marian -c model/config.yml
 ```

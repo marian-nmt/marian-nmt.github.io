@@ -1,6 +1,5 @@
 var searchData=
 [
-  ['s2svalidator',['S2SValidator',['../classmarian_1_1S2SValidator.html',1,'marian']]],
   ['scalaraddnodeop',['ScalarAddNodeOp',['../structmarian_1_1ScalarAddNodeOp.html',1,'marian']]],
   ['scalarmultnodeop',['ScalarMultNodeOp',['../structmarian_1_1ScalarMultNodeOp.html',1,'marian']]],
   ['scalarproductnodeop',['ScalarProductNodeOp',['../structmarian_1_1ScalarProductNodeOp.html',1,'marian']]],
@@ -11,6 +10,7 @@ var searchData=
   ['scorerwrapper',['ScorerWrapper',['../classmarian_1_1ScorerWrapper.html',1,'marian']]],
   ['scorerwrapperstate',['ScorerWrapperState',['../classmarian_1_1ScorerWrapperState.html',1,'marian']]],
   ['scriptvalidator',['ScriptValidator',['../classmarian_1_1ScriptValidator.html',1,'marian']]],
+  ['selectnodeop',['SelectNodeOp',['../structmarian_1_1SelectNodeOp.html',1,'marian']]],
   ['sentencetuple',['SentenceTuple',['../classmarian_1_1data_1_1SentenceTuple.html',1,'marian::data']]],
   ['sgd',['Sgd',['../classmarian_1_1Sgd.html',1,'marian']]],
   ['shape',['Shape',['../structmarian_1_1Shape.html',1,'marian']]],
@@ -29,7 +29,10 @@ var searchData=
   ['stackedcellfactory',['StackedCellFactory',['../classmarian_1_1rnn_1_1StackedCellFactory.html',1,'marian::rnn']]],
   ['state',['State',['../structmarian_1_1rnn_1_1State.html',1,'marian::rnn']]],
   ['states',['States',['../classmarian_1_1rnn_1_1States.html',1,'marian::rnn']]],
+  ['stepnodeop',['StepNodeOp',['../classmarian_1_1StepNodeOp.html',1,'marian']]],
   ['stringcollector',['StringCollector',['../classmarian_1_1StringCollector.html',1,'marian']]],
   ['subbatch',['SubBatch',['../classmarian_1_1data_1_1SubBatch.html',1,'marian::data']]],
-  ['sumnodeop',['SumNodeOp',['../structmarian_1_1SumNodeOp.html',1,'marian']]]
+  ['sumnodeop',['SumNodeOp',['../structmarian_1_1SumNodeOp.html',1,'marian']]],
+  ['swishnodeop',['SwishNodeOp',['../structmarian_1_1SwishNodeOp.html',1,'marian']]],
+  ['syncgraphgroup',['SyncGraphGroup',['../classmarian_1_1SyncGraphGroup.html',1,'marian']]]
 ];

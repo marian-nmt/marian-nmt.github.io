@@ -15,7 +15,6 @@ var searchData=
   ['corpus',['Corpus',['../classmarian_1_1data_1_1Corpus.html',1,'marian::data']]],
   ['corpusbatch',['CorpusBatch',['../classmarian_1_1data_1_1CorpusBatch.html',1,'marian::data']]],
   ['corpusiterator',['CorpusIterator',['../classmarian_1_1data_1_1CorpusIterator.html',1,'marian::data']]],
-  ['crossentropycost',['CrossEntropyCost',['../classmarian_1_1CrossEntropyCost.html',1,'marian']]],
   ['crossentropynodeop',['CrossEntropyNodeOp',['../structmarian_1_1CrossEntropyNodeOp.html',1,'marian']]],
   ['crossentropyvalidator',['CrossEntropyValidator',['../classmarian_1_1CrossEntropyValidator.html',1,'marian']]],
   ['csr',['CSR',['../classmarian_1_1sparse_1_1CSR.html',1,'marian::sparse']]]

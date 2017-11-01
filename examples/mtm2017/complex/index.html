@@ -94,13 +94,13 @@
 
  
  <li>
-   <a class="page-link" href="/faq">Google group</a>
+   <a class="page-link" href="/docs/">Documentation</a>
  </li>
  
 
  
  <li>
-   <a class="page-link" href="/docs/">Documentation</a>
+   <a class="page-link" href="/faq">Google group</a>
  </li>
  
 
@@ -135,7 +135,7 @@
           </h1>
           <div class="meta">
             <i class="fa fa-clock-o"></i>
-            Last updated: 29 August 2017
+            Last updated: 30 October 2017
           </div>
         </div><!--//doc-header-->
 
@@ -163,6 +163,7 @@ of only applying it to features, layer-normalization is applied to the activatio
 of the neural network. See <a href="https://arxiv.org/abs/1607.06450">here</a> for more details.</p>
 
 <p>Layer normalization is turned on by:</p>
+
 <div class="highlighter-rouge"><pre class="highlight"><code>--layer-normalization
 </code></pre>
 </div>
@@ -199,10 +200,13 @@ feed-forward layers. In the decoder the first RNN layer (the conditional cell th
 contains the attention mechanism) and all other layers have separate depth settings.</p>
 
 <p>We set the number of decoder layers with</p>
+
 <div class="highlighter-rouge"><pre class="highlight"><code>--dec-depth 4
 </code></pre>
 </div>
+
 <p>the number of feedword layers with the cell of the first and the following layers with</p>
+
 <div class="highlighter-rouge"><pre class="highlight"><code>--dec-cell-base-depth 4
 --dec-cell-high-depth 2
 </code></pre>
@@ -222,10 +226,12 @@ dec-cell-high-depth: 4
 with:</p>
 
 <p>We set the number of decoder layers with</p>
+
 <div class="highlighter-rouge"><pre class="highlight"><code>--enc-depth 4
 --dec-cell-depth 2
 </code></pre>
 </div>
+
 <p>or</p>
 
 <div class="highlighter-rouge"><pre class="highlight"><code>enc-depth: 4
@@ -305,7 +311,7 @@ dec-cell: lstm
   --dec-depth 4 --dec-cell lstm --dec-cell-base-depth 4 --dec-cell-high-depth 2 \
   --tied-embeddings --layer-normalization --skip \
   --dim-vocabs 66000 50000 \
-  --dynamic-batching --workspace 6500 \
+  --mini-batch-fit --workspace 6500 \
   --dropout-rnn 0.2 --dropout-src 0.1 --moving-average \
   --early-stopping 5 --disp-freq 1000 \
   --log model.deep/train.log --valid-log model.deep/valid.log \
@@ -314,6 +320,7 @@ dec-cell: lstm
 </div>
 
 <p>As before, we can just use the config file to start our training process:</p>
+
 <div class="highlighter-rouge"><pre class="highlight"><code>./marian-dev/build/marian -c model.deep/config.yml
 </code></pre>
 </div>

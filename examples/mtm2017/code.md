@@ -117,9 +117,9 @@ Specify how to construct the encoder-decoder Sutskever model:
 ``` c++
 Ptr<ModelBase> by_type(std::string type, Ptr<Options> options) {
   if(type == "sutskever") {
-    return models::encoder_decoder()(options)               //
-        .push_back(models::encoder()("type", "sutskever"))  //
-        .push_back(models::decoder()("type", "sutskever"))  //
+    return models::encoder_decoder()(options)
+        .push_back(models::encoder()("type", "sutskever"))
+        .push_back(models::decoder()("type", "sutskever"))
         .construct();
   }
 
@@ -298,7 +298,7 @@ auto logits = mlp::mlp(graph)
 ##### Return the decoder state
 
 ``` c++
-// return unormalized(!) probabilities
+// return unnormalized(!) probabilities
 return New<DecoderState>(decoderStates, logits, state->getEncoderStates());
 ```
 
@@ -365,7 +365,7 @@ public:
                       .push_back(layer2)
                   ->apply(embeddings, decoderContext);
 
-    // return unormalized(!) probabilities
+    // return unnormalized(!) probabilities
     return New<DecoderState>(decoderStates, logits, state->getEncoderStates());
   }
 

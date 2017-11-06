@@ -3,7 +3,7 @@ layout: docs
 title: Google group
 permalink: /faq
 icon: fa-life-ring
-menu: 3
+menu: 5
 ---
 
 ## Google group

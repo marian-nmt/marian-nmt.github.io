@@ -316,7 +316,7 @@ public:
     using namespace keywords;
 
     // Use first encoded word as start state
-    auto start = marian::step(encStates[0]->getContext(), 0, 2);
+    auto start = marian::step(encStates[0]->getContext(), 0, -3);
 
     rnn::States startStates({ {start, start} });
     return New<DecoderState>(startStates, nullptr, encStates);

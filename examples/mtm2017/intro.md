@@ -258,7 +258,7 @@ help menu what these do?). But first, we will create a config file.
   --layer-normalization \
   --dim-vocabs 66000 50000 \
   --mini-batch-fit --workspace 3000 \
-  --dropout-rnn 0.2 --dropout-src 0.1 --moving-average \
+  --dropout-rnn 0.2 --dropout-src 0.1 --exponential-smoothing \
   --early-stopping 5 --disp-freq 1000 \
   --log model/train.log --valid-log model/valid.log \
   --dump-config > model/config.yml

@@ -173,7 +173,7 @@ mkdir -p model.deep
   --tied-embeddings --layer-normalization --skip \
   --dim-vocabs 66000 50000 \
   --mini-batch-fit --workspace 6500 \
-  --dropout-rnn 0.2 --dropout-src 0.1 --moving-average \
+  --dropout-rnn 0.2 --dropout-src 0.1 --exponential-smoothing \
   --early-stopping 5 --disp-freq 1000 \
   --log model.deep/train.log --valid-log model.deep/valid.log \
   --dump-config > model.deep/config.yml

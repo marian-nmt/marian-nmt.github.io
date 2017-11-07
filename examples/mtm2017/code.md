@@ -233,7 +233,7 @@ virtual Ptr<DecoderState> startState(
   // Use first encoded word as start state
   auto start = marian::step(encStates[0]->getContext(), 0, 2);
 
-  rnn::States startStates({{start, start}});
+  rnn::States startStates({ {start, start} });
   return New<DecoderState>(startStates, nullptr, encStates);
 }
 ```
@@ -318,7 +318,7 @@ public:
     // Use first encoded word as start state
     auto start = marian::step(encStates[0]->getContext(), 0, 2);
 
-    rnn::States startStates({{start, start}});
+    rnn::States startStates({ {start, start} });
     return New<DecoderState>(startStates, nullptr, encStates);
   }
 

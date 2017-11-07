@@ -39,7 +39,7 @@ Tested on different machines and distributions:
  * CMake 3.5.1
  * The CPU version should be a lot more forgiving concerning GCC/G++ or Boost versions.
 
-## Download and Compilation
+## Installation
 
 Clone a fresh copy from github:
 
@@ -53,32 +53,37 @@ The project is a standard CMake out-of-source build:
     cmake ..
     make -j
 
-If run for the first time, this will also download Marian -- the training
+If run for the first time, this will also download _marian-dev_ -- the training
 framework for Marian.
 
 ## Running Marian
 
 ### Training
 
-Marian is the training framework of Marian. Assuming `corpus.en` and `corpus.ro` are
-corresponding and preprocessed files of a English-Romanian parallel corpus, the
-following command will create a Nematus-compatible neural machine translation model.
+Marian is the training framework of Marian. Assuming `corpus.en` and
+`corpus.ro` are corresponding and preprocessed files of a English-Romanian
+parallel corpus, the following command will create a Nematus-compatible neural
+machine translation model.
 
     ./marian/build/marian \
       --train-sets corpus.en corpus.ro \
       --vocabs vocab.en vocab.ro \
       --model model.npz
 
-See the [documentation](/docs/#marian) for a full list of command line
-options or the [examples](/examples/training) for a full example of how to train
-a WMT-grade model.
+See the [documentation](/docs/#marian) for a full list of command line options
+or the [examples](/examples/training) for an example of how to train a
+WMT-grade model.
 
 ### Translating
 
 If a trained model is available, run:
 
+    ./marian/build/marian-decoder -m model.npz -v vocab.en vocab.ro <<< "This is a test ."
+
+For CPU translation, use Amun:
+
     ./marian/build/amun -m model.npz -s vocab.en -t vocab.ro <<< "This is a test ."
 
-See the [documentation](/docs/#amun) for a full list of command line options
-or the [examples](/examples/translating) for a full example of how to use
+See the [documentation](/docs/#mariandecoder) for a full list of command line
+options or the [examples](/examples/translating) for an example of how to use
 Edinburgh's WMT models for translation.

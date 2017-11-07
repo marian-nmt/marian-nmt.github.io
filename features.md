@@ -14,7 +14,8 @@ menu: 2
   a single GPU
 * Binary/model-compatible with
   [DL4MT](https://github.com/nyu-dl/dl4mt-tutorial) and
-  [Nematus](https://github.com/rsennrich/nematus) models for certain model types.
+  [Nematus](https://github.com/rsennrich/nematus) models for certain model
+  types.
 * Multi-GPU training and translation
 * Batched translation on single and multiple GPUs
 * Pure C++ implementation with minimal depedencies on external packages (cuda,
@@ -24,26 +25,27 @@ menu: 2
 * Permissive open source license (MIT)
 
 ### Model features
-* GRU-based bidirectional encoder, GRU-based decoder;
-* Layer normalization ([Ba et al. 2016](https://arxiv.org/abs/1607.06450)) -- faster
-convergence and better test results;
+* GRU-based bidirectional encoder, GRU-based decoder
+* Layer normalization ([Ba et al. 2016](https://arxiv.org/abs/1607.06450)) --
+  faster convergence and better test results
 * Dynamic batching -- adjust mini-batch size dynamically to maximize usage of
-available or bounded memory, increases training throughput;
-* Running average of parameters for inference -- better results at test time;
-* Scaling dropout for RNN inputs and states, input and output embeddings;
-* Asynchronous parallel SGD (model parallelism) with vanilla SGD, Adagrad,
-or Adam -- faster training and better convergence;
+  available or bounded memory, increases training throughput
+* Running average of parameters for inference -- better results at test time
+* Scaling dropout for RNN inputs and states, input and output embeddings
+* Asynchronous parallel SGD (model parallelism) with vanilla SGD, Adagrad, or
+  Adam -- faster training and better convergence
 
 ### Experimental features
-Experimental features are not available in the Amun translation tool.
-They can be used with the Marian
-translation tool S2S. This tool is slowly approaching the translation speed of
-Amun and likely to replace Amun in the future.
+Experimental features are not available in the Amun translation tool.  
+They can be used with the Marian decoder. This tool is likely to replace Amun
+in the future.
 
-* Deep RNNs with Deep Transition Cells (Sennrich et al. 2017 : correct citation TBD)
-* LSTM cell instead of GRU.
+* Deep RNNs with Deep Transition Cells ([Sennrich et al.
+  2017](http://aclweb.org/anthology/W17-4710))
+* LSTM cell instead of GRU
 * Residual/skip connections between RNN layers
-* Dual-source models for Automatic Post Editing ([Junczys-Dowmunt and Grundkiewicz 2017](https://arxiv.org/abs/1706.04138))
+* Dual-source models for Automatic Post Editing ([Junczys-Dowmunt and
+  Grundkiewicz 2017](https://arxiv.org/abs/1706.04138))
 
 ## Benchmarks
 
@@ -107,15 +109,19 @@ architecture.
 
 ### Multi-GPU training
 
-Marian's training framework provides multi-GPU training via asynchronous SGD and
-data parallelism (copies of the full model on each GPU). We benchmarked
-the [Romanian-English example](/examples/training/) on a machine with
-8 NVIDIA GTX 1080 GPUs. Training speed increases with each GPU instance, but currently
-the increase is sub-linear. Using 4-5 GPUs seems optimal, for more GPUs it might be worth
-to use them for another training run.
+Marian's training framework provides multi-GPU training via
+synchronous/asynchronous SGD and data parallelism (copies of the full model on
+each GPU). 
+We benchmarked the [Romanian-English example](/examples/training/) on a machine
+with 8 NVIDIA P100 GPUs. Training speed increases with each GPU instance.
+The increase for synchronous SGD is sub-linear, but it may allow to achieve
+lower cross-entropy score for certain model types, which may be not achievable
+with asynchronous SGD. 
 
 ![Multi GPU]({{ site.baseurl }}/assets/images/multi_gpu.png)
+{: width="90%"}
 
-Our current version of asynchronous SGD is delay-free, i.e. that all (sharded) gradients
-are propagated to all GPUs for each update. In the future we will introduce delayed updates
-which should result in a more linear performance increase with each additional GPU.
+Our current version of asynchronous SGD is delay-free, i.e. that all (sharded)
+gradients are propagated to all GPUs for each update. In the future we will
+introduce delayed updates which should result in a more linear performance
+increase with each additional GPU.

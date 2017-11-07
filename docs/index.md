@@ -6,9 +6,234 @@ icon: fa-file-code-o
 menu: 3
 ---
 
-For training NMT models, you want to use Marian toolkit. Amun provides fast
-decoding for Marian's default models, which is compatible with Nematus/DL4MT
-models.
+## Tools overview
+
+Marian toolkit provides the following tools:
+
+* `marian`: for training models of all types
+* `marian-decoder`: for GPU translation with models of all types
+* `marian-server`: web-socket server providing GPU translation
+* `marian-scorer`: rescoring tool
+* `amun`: for CPU and GPU translation with Amun and certain Nematus models
+
+### Model types
+
+Available model types:
+* `s2s`: Default model type, which supports most of the features provided by
+  the toolkit. The architecture is equivalent to the
+  [Nematus](https://github.com/EdinburghNLP/nematus) models ([Senrich et al.,
+  2017](https://arxiv.org/pdf/1703.04357.pdf)), which use the RNN
+  encoder-decoder architecture with an attention mechanism, but not fully
+  compatible with them. Certain models of this type can be converted to models
+  of type Amun.
+* `multi_s2s`: Model of type `s2s`, which uses two or more encoders enabling
+  multi-source neural translation.
+* `transformer`: A new model based on [_Attention is all you need_, Vaswani et
+  al., 2017](https://arxiv.org/pdf/1706.03762.pdf). 
+* `nematus`: Model architecture is equivalent to deep models created by
+  Edinburgh MT group for WMT 2017 with Nematus. This is the only model type
+  supporting models trained with Nematus with enabled Nematus-like layer
+  normalization. Can be decoded with Amun tool as _nematus2_ model type. 
+* `amun`: Model architecture is equivalent to the DL4MT models used in Nematus.
+  Can be decoded with Amun tool as _nematus_ model type.
+* `lm`: An RNN language model.
+
+
+
+## Training
+
+For training NMT models, you want to use `marian` command.
+Assuming `corpus.en` and `corpus.ro` are corresponding and preprocessed files
+of a English-Romanian parallel corpus, the following command will create a
+Nematus-compatible neural machine translation model:
+
+    ./build/marian \
+        --train-sets corpus.en corpus.ro \
+        --vocabs vocab.en vocab.ro \
+        --model model.npz
+
+Training settings can be provided in the configuration file:
+
+```yaml
+# config.yml
+train-sets:
+  - corpus.en
+  - corpus.ro
+vocabs:
+  - vocab.en
+  - vocab.ro
+model: model.npz
+```
+
+which simplifies the command to:
+
+    ./build/marian -c config.yml
+
+Command-line options overwrite options stored in the configuration file.
+
+### Multi-GPU training
+
+Use option `--devices` to specify on which GPU devices the model should be
+trained:
+
+    ./build/marian \
+        --devices 0 1 2 3 \
+        --train-sets corpus.en corpus.ro \
+        --vocabs vocab.en vocab.ro \
+        --model model.npz
+
+The asynchronous SGD is used by default, while the synchronous version can be
+enabled with `--sync-sgd`. The latter scales worse on multiple devices, but may
+allow to achieve better cross-entropy scores.
+
+### Validation
+
+It is useful to monitor the performance of your model during training on
+held-out data.
+
+The minimum example of how to validate the model using cross-entropy and BLEU
+scores:
+
+    ./build/marian \
+        --train-sets corpus.en corpus.ro \
+        --vocabs vocab.en vocab.ro \
+        --model model.npz \
+        --valid-set dev.en dev.ro \
+        --valid-metrics cross-entropy translation \
+        --valid-script-path evaluate.sh
+
+where _evaluate.sh_ is a bash script, which takes the file with output
+translation of `dev.en` as the first argument (i.e. `$1`) and returns a BLEU
+score, e.g.:
+
+```sh
+# evaluate.sh
+cat $1 | ./postprocess.sh 2>/dev/null > file.out
+./moses-scripts/scripts/generic/multi-bleu-detok.perl file.ref < file.out 2>/dev/null \
+    | sed -r 's/BLEU = ([0-9.]+),.*/\1/'
+```
+
+### Decaying learning rate
+
+Manipulation of learning rate during the training may result in a better
+convergence and higher-quality translations.  
+
+Marian supports various strategies for decaying learning rate, which can be set
+with `--lr-decay-strategy` option. 
+* `epoch`: learning rate will be decayed after each epoch starting from epoch
+  specified with `--lr-decay-start`
+* `batches`: learning rate will be decayed every `--lr-decay-freq` batches
+  starting after the batch specified with `--lr-decay-start`
+* `stalled`: learning rate will be decayed every time when the first validation
+  metric does not improve for `--lr-decay-start` consecutive validation steps
+* `epoch+stalled`: learning rate will be decayed after the specified number of
+  epochs or stalled validation steps, whichever comes first. The option
+  `--lr-decay-start` takes two numbers: for epochs and stalled validation
+  steps, respectively
+* `batches+stalled`: as previous strategy, but batches are used instead of
+  epochs
+
+Decay factor for learning rate can be specified with `--lr-decay`.
+
+
+
+## Translation
+
+All model types can be decoded with `marian-decoder` and `marian-server`
+command.  Only models of type Amun and certain models of type Nematus can be
+used with `amun` command.
+
+### Marian decoder
+
+Currently, `marian-decoder` supports only translation on GPU. The CPU version
+of Marian is upcoming.
+
+Basic usage:
+
+    ./build/marian-decoder -m model.npz -v vocab.en vocab.ro < input.txt
+
+#### Model ensembling
+
+Models of various types and architectures can be ensembled if they use the same
+vocabularies:
+
+    ./build/marian-decoder \
+        --models model1.npz model2.npz model3.npz \
+        --weights 1.0 1.0 1.0 \
+        --vocabs vocab.en vocab.ro < input.txt
+
+#### Models trained with Nematus
+
+Certain types of models trained with Nematus, for example the [Edinburgh WMT17
+deep models](http://data.statmt.org/wmt17_systems/) can be decoded with
+`marian-decoder`.  As such models do not include model parameters specifying
+the model architecture, all parameters have to be set with command-line
+options.  
+
+For example, for the [de-en model](http://data.statmt.org/wmt17_systems/en-de/)
+this would be:
+
+    ./build/marian-decoder \
+        --type nematus \
+        --models model/en-de/model.npz \
+        --vocabs model/en-de/vocab.en.json model/en-de/vocab.de.json \
+        --dim-vocabs 51100 74383 \
+        --enc-depth 1 \
+        --enc-cell-depth 4 \
+        --enc-type bidirectional \
+        --dec-depth 1 \
+        --dec-cell-base-depth 8 \
+        --dec-cell-high-depth 1 \
+        --dec-cell gru-nematus --enc-cell gru-nematus \
+        --tied-embeddings true \
+        --layer-normalization true
+
+Alternatively, the model parameters can be added into the model _.npz_ file
+based on the Nematus _.json_ file using the following script: {% github_link
+marian-dev/scripts/contrib/inject_model_params.py %}. See its help for
+instructions how to use it.
+
+
+### Marian web server
+
+The `marian-server` command starts a web-socket server for translation. 
+It uses the same command-line options as `marian-decoder`.
+The only addition is `--port` option, which specifies the port number:
+
+    ./build/marian-server --port 8080 -m model.npz -v vocab.en vocab.ro
+
+An example client written in Python is {% github_link
+marian-dev/scripts/server/client_example.py %}:
+
+    ./scripts/server/client_example.py -p 8080 < input.txt
+
+### Amun
+
+Amun is a translation tool for certain models of `amun` and `nematus` model
+types. Translation can be performed on GPU or CPU or both.
+
+Basic usage:
+
+    ./marian/build/amun -m model.npz -s vocab.en -t vocab.ro <<< "This is a test ."
+
+
+
+## Scorer 
+
+The `marian-scorer` tool is used for scoring (or re-scoring) parallel sentences
+provided as plain texts in two corresponding files:
+
+    ./build/marian-scorer -m model.npz -v vocab.ro vocab.en -t file.ro file.en
+
+A cross-entropy score for each sentence pair is returned by default.  The
+scorer can be also used to summarize scores (option `--summary`), so it can
+calculate cross-entropy and perplexity for a whole test set and report it at
+the end. 
+
+### N-best lists
+
+The scorer does not support n-best lists as an input yet.
+
 
 ## Code documentation
 
@@ -16,155 +241,3 @@ models.
 generated using Doxygen. The newest version can be generated locally with CMake:
 `mkdir -p build && cd build && cmake .. && make doc`.
 
-## Marian command line options
-
-Command-line options for `marian_train` tool:
-
-### General options:
-```
-  -c [ --config ] arg                       Configuration file
-  -w [ --workspace ] arg (=2048)            Preallocate  arg  MB of work space
-  --log arg                                 Log training process information to file given by  arg
-  --log-level arg (=info)                   Set verbosity level of logging (trace - debug - info - warn - err(or)
-                                            - critical - off)
-  --seed arg (=0)                           Seed for all random number generators. 0 means initialize randomly
-  --relative-paths                          All paths are relative to the config file location
-  --dump-config                             Dump current (modified) configuration to stdout and exit
-  --version                                 Print version number and exit
-  -h [ --help ]                             Print this help message and exit
-```
-
-### Model options:
-```
-  -m [ --model ] arg (=model.npz)           Path prefix for model to be saved/resumed
-  --type arg (=amun)                        Model type (possible values: amun, s2s, multi-s2s)
-  --dim-vocabs arg (=50000 50000)           Maximum items in vocabulary ordered by rank
-  --dim-emb arg (=512)                      Size of embedding vector
-  --dim-rnn arg (=1024)                     Size of rnn hidden state
-  --enc-type arg (=bidirectional)           Type of encoder RNN : bidirectional, bi-unidirectional, alternating
-                                            (s2s)
-  --enc-cell arg (=gru)                     Type of RNN cell: gru, lstm, tanh (s2s)
-  --enc-cell-depth arg (=1)                 Number of tansitional cells in encoder layers (s2s)
-  --enc-depth arg (=1)                      Number of encoder layers (s2s)
-  --dec-cell arg (=gru)                     Type of RNN cell: gru, lstm, tanh (s2s)
-  --dec-cell-base-depth arg (=2)            Number of tansitional cells in first decoder layer (s2s)
-  --dec-cell-high-depth arg (=1)            Number of tansitional cells in next decoder layers (s2s)
-  --dec-depth arg (=1)                      Number of decoder layers (s2s)
-  --skip                                    Use skip connections (s2s)
-  --layer-normalization                     Enable layer normalization
-  --best-deep                               Use WMT-2017-style deep configuration (s2s)
-  --special-vocab arg                       Model-specific special vocabulary ids
-  --tied-embeddings                         Tie target embeddings and output embeddings in output layer
-  --dropout-rnn arg (=0)                    Scaling dropout along rnn layers and time (0 = no dropout)
-  --dropout-src arg (=0)                    Dropout source words (0 = no dropout)
-  --dropout-trg arg (=0)                    Dropout target words (0 = no dropout)
-  --noise-src arg (=0)                      Add noise to source embeddings with given stddev (0 = no noise)
-```
-### Training options:
-```
-  --overwrite                               Overwrite model with following checkpoints
-  --no-reload                               Do not load existing model specified in --model arg
-  -t [ --train-sets ] arg                   Paths to training corpora: source target
-  -v [ --vocabs ] arg                       Paths to vocabulary files have to correspond to --train-sets. If this
-                                            parameter is not supplied we look for vocabulary files
-                                            source.{yml,json} and target.{yml,json}. If these files do not exists
-                                            they are created
-  --max-length arg (=50)                    Maximum length of a sentence in a training sentence pair
-  -e [ --after-epochs ] arg (=0)            Finish after this many epochs, 0 is infinity
-  --after-batches arg (=0)                  Finish after this many batch updates, 0 is infinity
-  --disp-freq arg (=1000)                   Display information every  arg  updates
-  --save-freq arg (=10000)                  Save model file every  arg  updates
-  --no-shuffle                              Skip shuffling of training data before each epoch
-  -T [ --tempdir ] arg (=/tmp)              Directory for temporary (shuffled) files
-  -d [ --devices ] arg (=0)                 GPUs to use for training. Asynchronous SGD is used with multiple devices
-  --mini-batch arg (=64)                    Size of mini-batch used during update
-  --mini-batch-words arg (=0)               Set mini-batch size based on words instead of sentences
-  --dynamic-batching                        Determine mini-batch size dynamically based on sentence-length and
-                                            reserved memory
-  --maxi-batch arg (=100)                   Number of batches to preload for length-based sorting
-  --maxi-batch-sort arg (=trg)              Sorting strategy for maxi-batch: trg (default) src none
-  -o [ --optimizer ] arg (=adam)            Optimization algorithm (possible values: sgd, adagrad, adam
-  -l [ --learn-rate ] arg (=0.0001)         Learning rate
-  --lr-decay arg (=0)                       Decay factor for learning rate: lr = lr * arg (0 to disable)
-  --lr-decay-strategy arg (=epoch+stalled)  Strategy for learning rate decaying (possible values: epoch, batches,
-                                            stalled, epoch+batches, epoch+stalled)
-  --lr-decay-start arg (=10,1)              The first number of epoch/batches/stalled validations to start learning
-                                            rate decaying
-  --lr-decay-freq arg (=50000)              Learning rate decaying frequency for batches, requires
-                                            --lr-decay-strategy to be batches
-  --clip-norm arg (=1)                      Clip gradient norm to  arg  (0 to disable)
-  --moving-average                          Maintain and save moving average of parameters
-  --moving-decay arg (=0.9999)              Decay factor for moving average
-  --guided-alignment arg                    Use guided alignment to guide attention
-  --guided-alignment-cost arg (=ce)         Cost type for guided alignment. Possible values: ce (cross-entropy), mse
-                                            (mean square error), mult (multiplication)
-  --guided-alignment-weight arg (=1)        Weight for guided alignment cost
-  --drop-rate arg (=0)                      Gradient drop ratio (read: https://arxiv.org/abs/1704.05021)
-  --embedding-vectors arg                   Paths to files with custom source and target embedding vectors
-  --embedding-normalization                 Enable normalization of custom embedding vectors
-  --embedding-fix-src                       Fix source embeddings. Affects all encoders
-  --embedding-fix-trg                       Fix target embeddings. Affects all decoders
-```
-
-### Validation set options:
-```
-  --valid-sets arg                          Paths to validation corpora: source target
-  --valid-freq arg (=10000)                 Validate model every  arg  updates
-  --valid-metrics arg (=cross-entropy)      Metric to use during validation: cross-entropy, perplexity,
-                                            valid-script. Multiple metrics can be specified
-  --valid-mini-batch arg (=64)              Size of mini-batch used during validation
-  --valid-script-path arg                   Path to external validation script
-  --early-stopping arg (=10)                Stop if the first validation metric does not improve for  arg
-                                            consecutive validation steps
-  --keep-best                               Keep best model for each validation metric
-  --valid-log arg                           Log validation scores to file given by  arg
-```
-
-## Amun command line options
-
-Command-line options for `amun` decoder:
-
-### General options
-
-```
-  -c [ --config ] arg             Configuration file
-  -i [ --input-file ] arg         Take input from a file instead of stdin
-  -m [ --model ] arg              Overwrite scorer section in config file with these models. Assumes models of
-                                  type Nematus and assigns model names F0, F1, ...
-  -s [ --source-vocab ] arg       Overwrite source vocab section in config file with vocab file.
-  -t [ --target-vocab ] arg       Overwrite target vocab section in config file with vocab file.
-  --bpe arg                       Overwrite bpe section in config with bpe code file.
-  --no-debpe                      Providing bpe is on, turn off deBPE of the output.
-  -d [ --devices ] arg (=0)       CUDA device(s) to use, set to 0 by default, e.g. set to 0 1 to use gpu0
-                                  and gpu1. Implicitly sets minimal number of threads to number of devices.
-  --gpu-threads arg (=1)          Number of threads on a single GPU.
-  --cpu-threads arg (=0)          Number of threads on the CPU.
-  --mini-batch arg (=1)           Number of sentences in mini batch.
-  --maxi-batch arg (=1)           Number of sentences in maxi batch.
-  --show-weights                  Output used weights to stdout and exit
-  --load-weights arg              Load scorer weights from this file
-  --wipo                          Use WIPO specific n-best-list format and non-buffering single-threading
-  --return-alignment              If true, return alignment.
-  --max-length arg (=500)         Maximum length of input sentences. Anything above is truncated. 0=no max length
-  -v [ --version ]                Print version.
-  -h [ --help ]                   Print this help message and exit
-  --log-progress [=arg(=1)] (=1)  Log progress to stderr.
-  --log-info [=arg(=1)] (=1)      Log info to stderr.
-```
-
-### Search options
-
-```
-  -b [ --beam-size ] arg (=12)    Decoding beam-size
-  -n [ --normalize ]              Normalize scores by translation length after decoding
-  -f [ --softmax-filter ] arg     Filter final softmax: path to file with alignment [N first words]
-  -u [ --allow-unk ]              Allow generation of UNK
-  --n-best                        Output n-best list with n = beam-size
-```
-
-### Configuration meta options
-
-```
-  --relative-paths                All paths are relative to the config file location
-  --dump-config                   Dump current (modified) configuration to stdout and exit
-```

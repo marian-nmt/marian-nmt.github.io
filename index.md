@@ -22,10 +22,11 @@ permalink: /
   Main features:
   <ul>
     <li> Fast multi-gpu training and translation </li>
-    <li> Compatible with Nematus and DL4MT </li>
     <li> Efficient pure C++ implementation </li>
+    <li> Different model types: deep RNNs, transformer and LMs </li>
+    <li> Compatible with Nematus </li>
     <li> Permissive open source license (MIT) </li>
-    <li> <a href="{{ site.baseurl }}../features"> more details... </a> </li>
+    <li> <a href="{{ site.baseurl }}../features"> and much more... </a> </li>
   </ul>
   </p>
 

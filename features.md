@@ -12,44 +12,56 @@ menu: 2
 * Up to 15x faster translation than Nematus and similar toolkits on a single GPU
 * Up to 2x faster training than toolkits based on Theano, Tensorflow, Torch on
   a single GPU
-* Binary/model-compatible with
-  [DL4MT](https://github.com/nyu-dl/dl4mt-tutorial) and
-  [Nematus](https://github.com/rsennrich/nematus) models for certain model
-  types.
 * Multi-GPU training and translation
-* Batched translation on single and multiple GPUs
-* Pure C++ implementation with minimal depedencies on external packages (cuda,
-  boost)
+* Pure C++ implementation with minimal depedencies on external packages (CUDA,
+  Boost)
 * Optionally static compilation of binaries
-* Different types of deep and multi-sources models
+* Different types of models, including deep RNNs, transformer and language model
+* Binary/model-compatible with [Nematus](https://github.com/EdinburghNLP/nematus)
+  models for certain model types
+* C++ web-socket service for translation
+* CPU translation with Amun for certain model types
+* Batched translation on single and multiple GPU/CPUs with Amun
 * Permissive open source license (MIT)
 
 ### Model features
-* GRU-based bidirectional encoder, GRU-based decoder
-* Layer normalization ([Ba et al. 2016](https://arxiv.org/abs/1607.06450)) --
-  faster convergence and better test results
-* Dynamic batching -- adjust mini-batch size dynamically to maximize usage of
-  available or bounded memory, increases training throughput
-* Running average of parameters for inference -- better results at test time
-* Scaling dropout for RNN inputs and states, input and output embeddings
-* Asynchronous parallel SGD (model parallelism) with vanilla SGD, Adagrad, or
-  Adam -- faster training and better convergence
+* Deep RNNs with Deep Transition Cells ([Miceli Barone et al.
+  2017](http://aclweb.org/anthology/W17-4710))
+* Transformer models ([Vaswani et al.
+  2017](https://arxiv.org/abs/1706.03762))
+* Encoder types: bidirectional, uni-bidirectional, alternating
+* LSTM cell instead of GRU
+* Layer normalization ([Ba et al. 2016](https://arxiv.org/abs/1607.06450))
+* Residual/skip connections between RNN layers
+* Scaling dropout for RNN inputs and states, input and output embeddings ([Gal
+  and Ghahramani, 2016](https://arxiv.org/abs/1512.05287))
+* Tied embeddings ([Press and Wolf, 2017](https://arxiv.org/abs/1608.05859))
+* Deep RNN language models
+
+### Training features
+* Adjusting mini-batch size dynamically to maximize usage of available or
+  bounded memory
+* Asynchronous/synchronous parallel SGD (data parallelism) with vanilla SGD,
+  Adagrad, or Adam
+* Multi-GPU validation and in-training translation
+* Exposed optimizer parameters
+* Moving average of parameters
+* Decaying and warmup strategies for learning rate
+* Custom word embeddings from [word2vec](https://github.com/dav/word2vec)
+* Guided alignment to guide attention
+* Rescoring outputs
 
 ### Experimental features
-Experimental features are not available in the Amun translation tool.  
-They can be used with the Marian decoder. This tool is likely to replace Amun
-in the future.
+Experimental features are available only in the Marian decoder.
 
-* Deep RNNs with Deep Transition Cells ([Sennrich et al.
-  2017](http://aclweb.org/anthology/W17-4710))
-* LSTM cell instead of GRU
-* Residual/skip connections between RNN layers
 * Dual-source models for Automatic Post Editing ([Junczys-Dowmunt and
-  Grundkiewicz 2017](https://arxiv.org/abs/1706.04138))
+  Grundkiewicz, 2017](https://arxiv.org/abs/1706.04138))
+* Character-level convolutional models ([Lee et al.
+  2017](https://arxiv.org/abs/1610.03017))
 
 ## Benchmarks
 
-### Translation speed in words per second
+### Translation speed
 
 The models used for the translation speed benchmarks have been described in
 the [IWSLT paper](http://workshop2016.iwslt.org/downloads/IWSLT_2016_paper_4.pdf).
@@ -87,7 +99,7 @@ GPUs used. As before, the asteriks marks systems with vocabulary filtering.
 Systems "Single" and "Single\*" are the same as two best systems in the first
 graph.
 
-### Training speed in words per second
+### Training speed
 
 We also compare training speed between a number of popular toolkits and Marian.
 As Marian is still early work, we expect speed to improve with future optimizations.

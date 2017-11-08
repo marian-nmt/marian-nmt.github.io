@@ -28,7 +28,17 @@ if you use Marian (formerly AmuNMT) in your research:
 
 {% bibliography %}
 
+See [papers citing the Marian/AmuNMT toolkit on Google Scholar](https://scholar.google.co.uk/scholar?oi=bibs&hl=en&cites=14488488693117480286&as_sdt=5).
+
 ## Press
 
 * [Neural Conquers Patent Translation in Major WIPO Roll-out](https://slator.com/technology/neural-conquers-patent-translation-in-major-wipo-roll-out/) on [Slator](https://slator.com)
 * [WIPO Develops Cutting-Edge Translation Tool For Patent Documents](http://www.wipo.int/pressroom/en/articles/2016/article_0014.html)
+
+<!--
+## Research and innovation projects
+
+* [SUMMA](http://summa-project.eu/) -- Scalable Understanding of Multilingual MediA
+* [ModernMT](http://www.modernmt.eu/) -- Next Generation Machine Translation
+* [TraMOOC](http://tramooc.eu/) -- Translation for Massive Open Online Courses
+-->

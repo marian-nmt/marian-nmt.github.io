@@ -28,6 +28,23 @@ local development server:
 
 The website should be available at `http://127.0.0.1:4000`.
 
+### Documentation
+
+Documentation has to be updated manually:
+
+    make update-docs
+
+This requires `doxygen` to be installed.
+
+### Pages with command-line options
+
+Pages with command-line options for Marian tools have to be updated manually:
+
+    rm docs/cmd/marian*.md
+    make update-cmds
+
+This compiles Marian, so GPU is required.
+
 
 ## Deployment
 

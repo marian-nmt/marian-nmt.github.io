@@ -235,6 +235,17 @@ the end.
 The scorer does not support n-best lists as an input yet.
 
 
+
+## Command-line options
+
+* [marian](/docs/cmd/marian)
+* [marian-decoder](/docs/cmd/marian-decoder)
+* [marian-server](/docs/cmd/marian-server)
+* [marian-scorer](/docs/cmd/marian-scorer)
+* [amun](/docs/cmd/amun)
+
+
+
 ## Code documentation
 
 [The code documentation for Marian toolkit](/docs/marian/classes.html) is

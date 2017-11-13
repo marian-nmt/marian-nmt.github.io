@@ -7,9 +7,9 @@ icon: fa-cogs
 
 ## Quick start
 
-The files and scripts described in this section can be found in
-{% github_link marian/examples/translate %}. They demonstrate how to translate with Amun using
-Edinburgh’s German-English WMT2016 single model and ensemble.
+The files and scripts described in this section can be found in {% github_link
+marian-examples/amun-translation %}. They demonstrate how to translate with
+Amun using Edinburgh’s German-English WMT2016 single model and ensemble.
 
 To execute the complete example type:
 
@@ -44,15 +44,15 @@ so they can be organized into length-based batches:
 # translate test set with single model
 cat data/newstest2015.ende.en | \
     # preprocess
-    moses-scripts/scripts/tokenizer/normalize-punctuation.perl -l en | \
-    moses-scripts/scripts/tokenizer/tokenizer.perl -l en -penn | \
-    moses-scripts/scripts/recaser/truecase.perl -model en-de/truecase-model.en | \
+    ../tools/moses-scripts/scripts/tokenizer/normalize-punctuation.perl -l en | \
+    ../tools/moses-scripts/scripts/tokenizer/tokenizer.perl -l en -penn | \
+    ../tools/moses-scripts/scripts/recaser/truecase.perl -model en-de/truecase-model.en | \
     # translate
-    ../../build/amun -m en-de/model.npz -s en-de/vocab.en.json -t en-de/vocab.de.json \
-    --mini-batch 50 --maxi-batch 1000 -b 12 -n --bpe en-de/ende.bpe | \
+    $MARIAN/build/amun -m en-de/model.npz -s en-de/vocab.en.json -t en-de/vocab.de.json \
+    --mini-batch 50 --maxi-batch 1000 -d $GPUS --gpu-threads 1 -b 12 -n --bpe en-de/ende.bpe | \
     # postprocess
-    moses-scripts/scripts/recaser/detruecase.perl | \
-    moses-scripts/scripts/tokenizer/detokenizer.perl -l de > data/newstest2015.single.out
+    ../tools/moses-scripts/scripts/recaser/detruecase.perl | \
+    ../tools/moses-scripts/scripts/tokenizer/detokenizer.perl -l de > data/newstest2015.single.out
 ```
 
 ### Create a configuration file using command line options
@@ -74,12 +74,12 @@ Such a configuration file can then be used instead of the command line arguments
 # translate test set with ensemble
 cat data/newstest2015.ende.en | \
     # preprocess
-    moses-scripts/scripts/tokenizer/normalize-punctuation.perl -l en | \
-    moses-scripts/scripts/tokenizer/tokenizer.perl -l en -penn | \
-    moses-scripts/scripts/recaser/truecase.perl -model en-de/truecase-model.en | \
+    ../tools/moses-scripts/scripts/tokenizer/normalize-punctuation.perl -l en | \
+    ../tools/moses-scripts/scripts/tokenizer/tokenizer.perl -l en -penn | \
+    ../tools/moses-scripts/scripts/recaser/truecase.perl -model en-de/truecase-model.en | \
     # translate
-    ../../build/amun -c ensemble.yml | \
+    $MARIAN/build/amun -c ensemble.yml --gpu-threads 1 | \
     # postprocess
-    moses-scripts/scripts/recaser/detruecase.perl | \
-    moses-scripts/scripts/tokenizer/detokenizer.perl -l de > data/newstest2015.ensemble.out
+    ../tools/moses-scripts/scripts/recaser/detruecase.perl | \
+    ../tools/moses-scripts/scripts/tokenizer/detokenizer.perl -l de > data/newstest2015.ensemble.out
 ```

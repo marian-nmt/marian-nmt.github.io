@@ -1,7 +1,7 @@
 ---
 layout: docs
 title: Command-line options for amun
-permalink: /docs/cmd/amun
+permalink: /docs/cmd/amun/
 icon: fa-file-code-o
 ---
 

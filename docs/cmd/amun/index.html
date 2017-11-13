@@ -1,0 +1,263 @@
+<!--[if IE 8]> <html lang="en" class="ie8"> <![endif]-->
+<!--[if IE 9]> <html lang="en" class="ie9"> <![endif]-->
+<!--[if !IE]><!-->
+<html lang="en">
+<!--<![endif]-->
+
+  <head>
+  <title>
+    
+    Marian :: Command-line options for amun
+    
+  </title>
+  <!-- Meta -->
+  <meta charset="utf-8">
+  <meta http-equiv="X-UA-Compatible" content="IE=edge">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <meta name="description" content="Fast Neural Machine Translation in C++">
+
+  <link href='http://fonts.googleapis.com/css?family=Open+Sans:300italic,400italic,600italic,700italic,800italic,400,300,600,700,800' rel='stylesheet' type='text/css'>
+  <!-- Global CSS -->
+  <link rel="stylesheet" href="/assets/plugins/bootstrap/css/bootstrap.min.css">
+  <!-- Plugins CSS -->
+  <link rel="stylesheet" href="/assets/plugins/font-awesome/css/font-awesome.min.css">
+  <link rel="stylesheet" href="/assets/css/pygments/github.css">
+
+  <!-- Theme CSS -->
+  <link id="theme-style" rel="stylesheet" href="/assets/css/styles.css">
+  <!-- HTML5 shim and Respond.js IE8 support of HTML5 elements and media queries -->
+  <!--[if lt IE 9]>
+    <script src="https://oss.maxcdn.com/html5shiv/3.7.2/html5shiv.min.js"></script>
+    <script src="https://oss.maxcdn.com/respond/1.4.2/respond.min.js"></script>
+  <![endif]-->
+
+  <link rel="stylesheet" href="/assets/plugins/github-fork-ribbon-css/gh-fork-ribbon.css" />
+  <!--[if lt IE 9]>
+    <link rel="stylesheet" href="/assets/plugins/github-fork-ribbon-css/gh-fork-ribbon.ie.css" />
+  <![endif]-->
+
+  
+</head>
+
+
+  <body class="body-blue">
+    <a class="github-fork-ribbon" href="https://github.com/marian-nmt/marian" title="Fork me on GitHub">Fork me on GitHub</a>
+
+    <div class="page-wrapper">
+
+    <header id="header" class="header">
+  <div class="container">
+    <div class="branding">
+      <h1 class="logo">
+        <a href="/">
+          <span aria-hidden="true" class="icon_documents_alt icon"></span>
+          <span class="text-highlight">Marian</span><span class="text-bold">NMT</span>
+        </a>
+      </h1>
+      <p class="description">Fast Neural Machine Translation in C++</p>
+    </div><!--//branding-->
+
+    <ol class="breadcrumb">
+
+
+ 
+
+ 
+
+ 
+
+ 
+
+ 
+
+ 
+
+ 
+
+ 
+
+ 
+
+ 
+
+ 
+
+ 
+
+ 
+
+ 
+
+ 
+
+ 
+ <li>
+   <a class="page-link" href="/quickstart/">Quick start</a>
+ </li>
+ 
+
+ 
+ <li>
+   <a class="page-link" href="/features/">Features &amp; Benchmarks</a>
+ </li>
+ 
+
+ 
+ <li>
+   <a class="page-link" href="/docs/">Documentation</a>
+ </li>
+ 
+
+ 
+ <li>
+   <a class="page-link" href="/examples/">Examples &amp; Use cases</a>
+ </li>
+ 
+
+ 
+ <li>
+   <a class="page-link" href="/faq">Google group</a>
+ </li>
+ 
+
+ 
+ <li>
+   <a class="page-link" href="/publications/">Publications</a>
+ </li>
+ 
+
+</ol>
+
+
+  </div><!--//container-->
+</header><!--//header-->
+
+
+    <div class="doc-wrapper">
+      <div class="container">
+
+        <div id="doc-header" class="doc-header text-center">
+          <h1 class="doc-title">
+            
+            <i class="icon fa fa-file-code-o }}"></i>
+            
+            Command-line options for amun
+          </h1>
+          <div class="meta">
+            <i class="fa fa-clock-o"></i>
+            Last updated: 13 November 2017
+          </div>
+        </div><!--//doc-header-->
+
+        <div class="doc-body">
+          <div class="doc-content">
+            <div class="content-inner">
+
+              <h2 id="general-options">General options</h2>
+<div class="highlighter-rouge"><pre class="highlight"><code>-c [ --config ] arg                   Configuration file
+-i [ --input-file ] arg               Take input from a file instead of stdin
+-m [ --model ] arg                    Overwrite scorer section in config file
+                                      with these models. Assumes models of
+                                      type Nematus and assigns model names
+                                      F0, F1, ...
+-s [ --source-vocab ] arg             Overwrite source vocab section in
+                                      config file with vocab file.
+-t [ --target-vocab ] arg             Overwrite target vocab section in
+                                      config file with vocab file.
+--bpe arg                             Overwrite bpe section in config with
+                                      bpe code file.
+--no-debpe                            Providing bpe is on, turn off deBPE of
+                                      the output.
+-d [ --devices ] arg (=0)             CUDA device(s) to use, set to 0 by
+                                      default, e.g. set to 0 1 to use gpu0
+                                      and gpu1. Implicitly sets minimal
+                                      number of threads to number of devices.
+--gpu-threads arg (=1)                Number of threads on a single GPU.
+--cpu-threads arg (=0)                Number of threads on the CPU.
+--mini-batch arg (=1)                 Number of sentences in mini batch.
+--maxi-batch arg (=1)                 Number of sentences in maxi batch.
+--mini-batch-words arg (=0)           Set mini-batch size based on words
+                                      instead of sentences.
+--show-weights                        Output used weights to stdout and exit
+--load-weights arg                    Load scorer weights from this file
+--wipo                                Use WIPO specific n-best-list format
+                                      and non-buffering single-threading
+--return-alignment                    If true, return alignment.
+--return-soft-alignment               If true, return soft alignment.
+--return-nematus-alignment            If true, return Nematus style soft
+                                      alignment.
+--max-length arg (=500)               Maximum length of input sentences.
+                                      Anything above this is truncated. 0=no
+                                      max length
+-v [ --version ]                      Print version.
+-h [ --help ]                         Print this help message and exit
+--log-progress [=arg(=info)] (=info)  Log level for progress logging to
+                                      stderr (trace - debug - info - warn -
+                                      err(or) - critical - off).
+--log-info [=arg(=info)] (=info)      Log level for informative messages to
+                                      stderr (trace - debug - info - warn -
+                                      err(or) - critical - off).
+</code></pre>
+</div>
+
+<h2 id="search-options">Search options</h2>
+<div class="highlighter-rouge"><pre class="highlight"><code>-b [ --beam-size ] arg (=12)          Decoding beam-size
+-n [ --normalize ]                    Normalize scores by translation length
+                                      after decoding
+-f [ --softmax-filter ] arg           Filter final softmax: path to file with
+                                      alignment [N first words]
+-u [ --allow-unk ]                    Allow generation of UNK
+--n-best                              Output n-best list with n = beam-size
+</code></pre>
+</div>
+
+<h2 id="configuration-meta-options">Configuration meta options</h2>
+<div class="highlighter-rouge"><pre class="highlight"><code>--relative-paths                      All paths are relative to the config
+                                      file location
+--dump-config                         Dump current (modified) configuration
+                                      to stdout and exit
+</code></pre>
+</div>
+
+
+            </div><!--//content-inner-->
+          </div><!--//doc-content-->
+
+          <div class="doc-sidebar hidden-xs">
+            <nav id="doc-nav"></nav>
+          </div><!--//doc-sidebar-->
+
+        </div><!--//doc-body-->
+
+      </div><!--//container-->
+    </div><!--//doc-wrapper-->
+
+    </div><!--//page-wrapper-->
+
+    <footer id="footer" class="footer text-center">
+  <div class="container">
+    <p>
+     Marian - an efficient Neural Machine Translation framework written in pure C++.</br>
+      Mainly developed at the Adam Mickiewicz University in Poznań and at the University of Edinburgh.
+    </p>
+    <p><a href="https://github.com/marian-nmt/marian">Marian</a> is licensed under the <a href="https://github.com/marian-nmt/marian/LICENSE">MIT license</a>.</p>
+    <small class="copyright">Based on the theme PrettyDocs designed by <a href="http://themes.3rdwavemedia.com/" targe="_blank">Xiaoying Riley</a> with modifications.</small>
+  </div><!--//container-->
+</footer><!--//footer-->
+
+    <!-- Main Javascript -->
+<script type="text/javascript"> localStorage.clear();</script>
+
+<script type="text/javascript" src="/assets/plugins/jquery-1.12.3.min.js"></script>
+<script type="text/javascript" src="/assets/plugins/bootstrap/js/bootstrap.min.js"></script>
+<script type="text/javascript" src="/assets/plugins/jquery-scrollTo/jquery.scrollTo.min.js"></script>
+<script type="text/javascript" src="/assets/plugins/jquery-match-height/jquery.matchHeight-min.js"></script>
+
+<script src="https://cdn.mathjax.org/mathjax/latest/MathJax.js?config=TeX-AMS-MML_HTMLorMML" type="text/javascript"></script>
+
+<script type="text/javascript" src="/assets/js/main.js"></script>
+<script type="text/javascript" src="/assets/js/toc.js"></script>
+
+
+  </body>
+</html>

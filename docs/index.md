@@ -12,8 +12,8 @@ Marian toolkit provides the following tools:
 
 * `marian`: for training models of all types
 * `marian-decoder`: for GPU translation with models of all types
-* `marian-server`: web-socket server providing GPU translation
-* `marian-scorer`: rescoring tool
+* `marian-server`: the web-socket server providing GPU translation
+* `marian-scorer`: the rescoring tool
 * `amun`: for CPU and GPU translation with Amun and certain Nematus models
 
 ### Model types
@@ -22,18 +22,18 @@ Available model types:
 * `s2s`: Default model type, which supports most of the features provided by
   the toolkit. The architecture is equivalent to the
   [Nematus](https://github.com/EdinburghNLP/nematus) models ([Senrich et al.,
-  2017](https://arxiv.org/pdf/1703.04357.pdf)), which use the RNN
+  2017](https://arxiv.org/abs/1703.04357)), which use the RNN
   encoder-decoder architecture with an attention mechanism, but not fully
   compatible with them. Certain models of this type can be converted to models
   of type Amun.
 * `multi_s2s`: Model of type `s2s`, which uses two or more encoders enabling
   multi-source neural translation.
 * `transformer`: A new model based on [_Attention is all you need_, Vaswani et
-  al., 2017](https://arxiv.org/pdf/1706.03762.pdf). 
+  al., 2017](https://arxiv.org/abs/1706.03762).
 * `nematus`: Model architecture is equivalent to deep models created by
   Edinburgh MT group for WMT 2017 with Nematus. This is the only model type
-  supporting models trained with Nematus with enabled Nematus-like layer
-  normalization. Can be decoded with Amun tool as _nematus2_ model type. 
+  supporting models trained with the Nematus toolkit and enabled layer
+  normalization. Can be decoded with the Amun tool as _nematus2_ model type.
 * `amun`: Model architecture is equivalent to the DL4MT models used in Nematus.
   Can be decoded with Amun tool as _nematus_ model type.
 * `lm`: An RNN language model.
@@ -91,8 +91,8 @@ allow to achieve better cross-entropy scores.
 It is useful to monitor the performance of your model during training on
 held-out data.
 
-The minimum example of how to validate the model using cross-entropy and BLEU
-scores:
+This is a minimum example of how to validate the model using cross-entropy and
+BLEU score:
 
     ./build/marian \
         --train-sets corpus.en corpus.ro \
@@ -100,14 +100,14 @@ scores:
         --model model.npz \
         --valid-set dev.en dev.ro \
         --valid-metrics cross-entropy translation \
-        --valid-script-path evaluate.sh
+        --valid-script-path validate.sh
 
-where _evaluate.sh_ is a bash script, which takes the file with output
-translation of `dev.en` as the first argument (i.e. `$1`) and returns a BLEU
+where _validate.sh_ is a bash script, which takes the file with output
+translation of `dev.en` as the first argument (i.e. `$1`) and returns the BLEU
 score, e.g.:
 
 ```sh
-# evaluate.sh
+# validate.sh
 cat $1 | ./postprocess.sh 2>/dev/null > file.out
 ./moses-scripts/scripts/generic/multi-bleu-detok.perl file.ref < file.out 2>/dev/null \
     | sed -r 's/BLEU = ([0-9.]+),.*/\1/'
@@ -115,11 +115,11 @@ cat $1 | ./postprocess.sh 2>/dev/null > file.out
 
 ### Decaying learning rate
 
-Manipulation of learning rate during the training may result in a better
-convergence and higher-quality translations.  
+Manipulation of learning rate during the training may result in better
+convergence and higher-quality translations.
 
-Marian supports various strategies for decaying learning rate, which can be set
-with `--lr-decay-strategy` option. 
+Marian supports various strategies for decaying learning rate
+(`--lr-decay-strategy` option):
 * `epoch`: learning rate will be decayed after each epoch starting from epoch
   specified with `--lr-decay-start`
 * `batches`: learning rate will be decayed every `--lr-decay-freq` batches
@@ -168,8 +168,7 @@ Certain types of models trained with Nematus, for example the [Edinburgh WMT17
 deep models](http://data.statmt.org/wmt17_systems/) can be decoded with
 `marian-decoder`.  As such models do not include model parameters specifying
 the model architecture, all parameters have to be set with command-line
-options.  
-
+options.
 For example, for the [de-en model](http://data.statmt.org/wmt17_systems/en-de/)
 this would be:
 
@@ -189,14 +188,16 @@ this would be:
         --layer-normalization true
 
 Alternatively, the model parameters can be added into the model _.npz_ file
-based on the Nematus _.json_ file using the following script: {% github_link
-marian-dev/scripts/contrib/inject_model_params.py %}. See its help for
-instructions how to use it.
+based on the Nematus _.json_ file using the script: {% github_link
+marian-dev/scripts/contrib/inject_model_params.py %}, e.g.:
+
+    python inject_model_params.py -m model.npz -j model.npz.json
+
 
 
 ### Marian web server
 
-The `marian-server` command starts a web-socket server for translation. 
+The `marian-server` command starts a web-socket server for translation.
 It uses the same command-line options as `marian-decoder`.
 The only addition is `--port` option, which specifies the port number:
 
@@ -218,7 +219,7 @@ Basic usage:
 
 
 
-## Scorer 
+## Scorer
 
 The `marian-scorer` tool is used for scoring (or re-scoring) parallel sentences
 provided as plain texts in two corresponding files:
@@ -228,7 +229,7 @@ provided as plain texts in two corresponding files:
 A cross-entropy score for each sentence pair is returned by default.  The
 scorer can be also used to summarize scores (option `--summary`), so it can
 calculate cross-entropy and perplexity for a whole test set and report it at
-the end. 
+the end.
 
 ### N-best lists
 
@@ -250,5 +251,6 @@ The scorer does not support n-best lists as an input yet.
 
 [The code documentation for Marian toolkit](/docs/marian/classes.html) is
 generated using Doxygen. The newest version can be generated locally with CMake:
-`mkdir -p build && cd build && cmake .. && make doc`.
+
+    mkdir -p build && cd build && cmake .. && make doc
 

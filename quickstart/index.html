@@ -81,6 +81,16 @@
  
 
  
+
+ 
+
+ 
+
+ 
+
+ 
+
+ 
  <li>
    <a class="page-link" href="/quickstart/">Quick start</a>
  </li>
@@ -100,13 +110,13 @@
 
  
  <li>
-   <a class="page-link" href="/faq">Google group</a>
+   <a class="page-link" href="/examples/">Examples &amp; Use cases</a>
  </li>
  
 
  
  <li>
-   <a class="page-link" href="/examples/">Examples &amp; Use cases</a>
+   <a class="page-link" href="/faq">Google group</a>
  </li>
  
 
@@ -135,7 +145,7 @@
           </h1>
           <div class="meta">
             <i class="fa fa-clock-o"></i>
-            Last updated: 03 June 2017
+            Last updated: 07 November 2017
           </div>
         </div><!--//doc-header-->
 
@@ -182,7 +192,7 @@ Only the translator will be compiled, the training framework is strictily GPU-ba
   <li>The CPU version should be a lot more forgiving concerning GCC/G++ or Boost versions.</li>
 </ul>
 
-<h2 id="download-and-compilation">Download and Compilation</h2>
+<h2 id="installation">Installation</h2>
 
 <p>Clone a fresh copy from github:</p>
 
@@ -200,16 +210,17 @@ make -j
 </code></pre>
 </div>
 
-<p>If run for the first time, this will also download Marian – the training
+<p>If run for the first time, this will also download <em>marian-dev</em> – the training
 framework for Marian.</p>
 
 <h2 id="running-marian">Running Marian</h2>
 
 <h3 id="training">Training</h3>
 
-<p>Marian is the training framework of Marian. Assuming <code class="highlighter-rouge">corpus.en</code> and <code class="highlighter-rouge">corpus.ro</code> are
-corresponding and preprocessed files of a English-Romanian parallel corpus, the
-following command will create a Nematus-compatible neural machine translation model.</p>
+<p>Marian is the training framework of Marian. Assuming <code class="highlighter-rouge">corpus.en</code> and
+<code class="highlighter-rouge">corpus.ro</code> are corresponding and preprocessed files of a English-Romanian
+parallel corpus, the following command will create a Nematus-compatible neural
+machine translation model.</p>
 
 <div class="highlighter-rouge"><pre class="highlight"><code>./marian/build/marian \
   --train-sets corpus.en corpus.ro \
@@ -218,20 +229,26 @@ following command will create a Nematus-compatible neural machine translation mo
 </code></pre>
 </div>
 
-<p>See the <a href="/docs/#marian">documentation</a> for a full list of command line
-options or the <a href="/examples/training">examples</a> for a full example of how to train
-a WMT-grade model.</p>
+<p>See the <a href="/docs/#marian">documentation</a> for a full list of command line options
+or the <a href="/examples/training">examples</a> for an example of how to train a
+WMT-grade model.</p>
 
 <h3 id="translating">Translating</h3>
 
 <p>If a trained model is available, run:</p>
 
+<div class="highlighter-rouge"><pre class="highlight"><code>./marian/build/marian-decoder -m model.npz -v vocab.en vocab.ro &lt;&lt;&lt; "This is a test ."
+</code></pre>
+</div>
+
+<p>For CPU translation, use Amun:</p>
+
 <div class="highlighter-rouge"><pre class="highlight"><code>./marian/build/amun -m model.npz -s vocab.en -t vocab.ro &lt;&lt;&lt; "This is a test ."
 </code></pre>
 </div>
 
-<p>See the <a href="/docs/#amun">documentation</a> for a full list of command line options
-or the <a href="/examples/translating">examples</a> for a full example of how to use
+<p>See the <a href="/docs/#mariandecoder">documentation</a> for a full list of command line
+options or the <a href="/examples/translating">examples</a> for an example of how to use
 Edinburgh’s WMT models for translation.</p>
 
 

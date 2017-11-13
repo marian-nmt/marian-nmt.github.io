@@ -81,6 +81,16 @@
  
 
  
+
+ 
+
+ 
+
+ 
+
+ 
+
+ 
  <li>
    <a class="page-link" href="/quickstart/">Quick start</a>
  </li>
@@ -100,13 +110,13 @@
 
  
  <li>
-   <a class="page-link" href="/faq">Google group</a>
+   <a class="page-link" href="/examples/">Examples &amp; Use cases</a>
  </li>
  
 
  
  <li>
-   <a class="page-link" href="/examples/">Examples &amp; Use cases</a>
+   <a class="page-link" href="/faq">Google group</a>
  </li>
  
 
@@ -135,7 +145,7 @@
           </h1>
           <div class="meta">
             <i class="fa fa-clock-o"></i>
-            Last updated: 01 November 2017
+            Last updated: 07 November 2017
           </div>
         </div><!--//doc-header-->
 
@@ -370,7 +380,7 @@ We insert the following code pieces in the <code class="highlighter-rouge">build
   <span class="c1">// Use first encoded word as start state
 </span>  <span class="k">auto</span> <span class="n">start</span> <span class="o">=</span> <span class="n">marian</span><span class="o">::</span><span class="n">step</span><span class="p">(</span><span class="n">encStates</span><span class="p">[</span><span class="mi">0</span><span class="p">]</span><span class="o">-&gt;</span><span class="n">getContext</span><span class="p">(),</span> <span class="mi">0</span><span class="p">,</span> <span class="mi">2</span><span class="p">);</span>
 
-  <span class="n">rnn</span><span class="o">::</span><span class="n">States</span> <span class="n">startStates</span><span class="p">();</span>
+  <span class="n">rnn</span><span class="o">::</span><span class="n">States</span> <span class="n">startStates</span><span class="p">({</span> <span class="p">{</span><span class="n">start</span><span class="p">,</span> <span class="n">start</span><span class="p">}</span> <span class="p">});</span>
   <span class="k">return</span> <span class="n">New</span><span class="o">&lt;</span><span class="n">DecoderState</span><span class="o">&gt;</span><span class="p">(</span><span class="n">startStates</span><span class="p">,</span> <span class="nb">nullptr</span><span class="p">,</span> <span class="n">encStates</span><span class="p">);</span>
 <span class="p">}</span>
 </code></pre>
@@ -453,9 +463,9 @@ translation).</p>
     <span class="k">using</span> <span class="k">namespace</span> <span class="n">keywords</span><span class="p">;</span>
 
     <span class="c1">// Use first encoded word as start state
-</span>    <span class="k">auto</span> <span class="n">start</span> <span class="o">=</span> <span class="n">marian</span><span class="o">::</span><span class="n">step</span><span class="p">(</span><span class="n">encStates</span><span class="p">[</span><span class="mi">0</span><span class="p">]</span><span class="o">-&gt;</span><span class="n">getContext</span><span class="p">(),</span> <span class="mi">0</span><span class="p">,</span> <span class="mi">2</span><span class="p">);</span>
+</span>    <span class="k">auto</span> <span class="n">start</span> <span class="o">=</span> <span class="n">marian</span><span class="o">::</span><span class="n">step</span><span class="p">(</span><span class="n">encStates</span><span class="p">[</span><span class="mi">0</span><span class="p">]</span><span class="o">-&gt;</span><span class="n">getContext</span><span class="p">(),</span> <span class="mi">0</span><span class="p">,</span> <span class="o">-</span><span class="mi">3</span><span class="p">);</span>
 
-    <span class="n">rnn</span><span class="o">::</span><span class="n">States</span> <span class="n">startStates</span><span class="p">();</span>
+    <span class="n">rnn</span><span class="o">::</span><span class="n">States</span> <span class="n">startStates</span><span class="p">({</span> <span class="p">{</span><span class="n">start</span><span class="p">,</span> <span class="n">start</span><span class="p">}</span> <span class="p">});</span>
     <span class="k">return</span> <span class="n">New</span><span class="o">&lt;</span><span class="n">DecoderState</span><span class="o">&gt;</span><span class="p">(</span><span class="n">startStates</span><span class="p">,</span> <span class="nb">nullptr</span><span class="p">,</span> <span class="n">encStates</span><span class="p">);</span>
   <span class="p">}</span>
 

@@ -1,5 +1,7 @@
 var searchData=
 [
+  ['c',['C',['../structmarian_1_1functional_1_1C.html',1,'marian::functional']]],
+  ['capture',['Capture',['../structmarian_1_1functional_1_1Capture.html',1,'marian::functional']]],
   ['cell',['Cell',['../classmarian_1_1rnn_1_1Cell.html',1,'marian::rnn']]],
   ['cellfactory',['CellFactory',['../classmarian_1_1rnn_1_1CellFactory.html',1,'marian::rnn']]],
   ['cellinput',['CellInput',['../classmarian_1_1rnn_1_1CellInput.html',1,'marian::rnn']]],
@@ -10,8 +12,10 @@ var searchData=
   ['concatenatenodeop',['ConcatenateNodeOp',['../structmarian_1_1ConcatenateNodeOp.html',1,'marian']]],
   ['config',['Config',['../classmarian_1_1Config.html',1,'marian']]],
   ['configparser',['ConfigParser',['../classmarian_1_1ConfigParser.html',1,'marian']]],
-  ['constant',['constant',['../classmarian_1_1ExpressionGraph.html#a47df2f08338c32a680186086e7a6afd7',1,'marian::ExpressionGraph']]],
+  ['constant',['constant',['../classmarian_1_1ExpressionGraph.html#a98fec0be161df64c066f9d871aba4274',1,'marian::ExpressionGraph']]],
   ['constantnode',['ConstantNode',['../structmarian_1_1ConstantNode.html',1,'marian']]],
+  ['constantshape',['ConstantShape',['../structmarian_1_1gpu_1_1ConstantShape.html',1,'marian::gpu']]],
+  ['constantshape_3c_20gpu_5fshape_5fdims_20_3e',['ConstantShape&lt; GPU_SHAPE_DIMS &gt;',['../structmarian_1_1gpu_1_1ConstantShape.html',1,'marian::gpu']]],
   ['construct',['construct',['../classmarian_1_1models_1_1MnistFeedForwardNet.html#adcc1c8e9bf828339675f1c64dda0ddee',1,'marian::models::MnistFeedForwardNet::construct()'],['../classmarian_1_1models_1_1MnistLeNet.html#a4e307542058c84bdf712537cb3357e79',1,'marian::models::MnistLeNet::construct()']]],
   ['convolution',['Convolution',['../classmarian_1_1Convolution.html',1,'marian']]],
   ['corpus',['Corpus',['../classmarian_1_1data_1_1Corpus.html',1,'marian::data']]],

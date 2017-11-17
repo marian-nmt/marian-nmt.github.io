@@ -11,10 +11,6 @@ install: Gemfile.lock
 Gemfile.lock: Gemfile
 	bundle update
 
-zip: amunmt-website.tgz
-amunmt-website.tgz: build
-	tar zcf $@ _site
-
 clean:
 	bundle exec jekyll clean
 

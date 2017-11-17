@@ -40,7 +40,7 @@ update-docs: Doxyfile.marian.in marian
 marian/build: marian
 	mkdir marian/build && cd marian/build && cmake .. && make -j8
 marian:
-	git clone https://github.com/marian-nmt/marian.git $@
+	git clone https://github.com/marian-nmt/marian-dev.git $@
 	cd marian; git checkout stable; cd ..
 
 

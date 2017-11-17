@@ -8,19 +8,18 @@ menu: 4
 
 ## Basic examples
 
-- **[Training with Marian](/examples/training/)**: The files and scripts
-  described in this section can be found in {% github_link
-  marian-examples/training-basics %}. They have been adapted from the
+- **{% github_link marian-examples/training-basics %}**: The scripts for
+  training a [Edinburgh's WMT16
+  system](http://www.aclweb.org/anthology/W16-2323) adapted from the
   Romanian-English sample from <https://github.com/rsennrich/wmt16-scripts>.
-  We also add the back-translated data from
-  <http://data.statmt.org/rsennrich/wmt16_backtranslations/> as desribed in
-  [Edinburgh's WMT16 paper](http://www.aclweb.org/anthology/W16-2323).  The
-  resulting system should be competitive or even slightly better than reported
-  in that paper.
-- **[Translating with Amun](/examples/translating/)**: The files and
-  scripts described in this section can be found in {% github_link
-  marian-examples/translating-amun %}. They demonstrate how to translate with
-  Amun using Edinburgh's German-English WMT2016 single model and ensemble.
+  The resulting system should be competitive or even slightly better than
+  reported in that paper.
+  need_, Vaswani et al., 2017](https://arxiv.org/abs/1706.03762).
+- **{% github_link marian-examples/translating-amun %}**: The scripts
+  demonstrate how to translate with Amun using Edinburgh's German-English
+  WMT2016 single model and ensemble.
+- **{% github_link marian-examples/transformer %}**: An example for training a
+  Google-style transformer model introduced in [_Attention is all you
 
 ## Tutorials
 

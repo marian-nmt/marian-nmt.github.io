@@ -5,6 +5,9 @@ permalink: /
 ---
 
 <!--h2 class="title">Welcome to {{ site.title }}!</h2-->
+<!--div style="position: absolute; left: 50px;">
+{% twitter https://twitter.com/marian_nmt maxwidth=500 height=1000 limit=5 %}
+</div-->
 <div class="intro">
   <p>
   <b>Marian</b> is an efficient Neural Machine Translation framework written
@@ -55,15 +58,11 @@ permalink: /
 
 </div><!--//cards-->
 
-<!--
-{% twitter https://twitter.com/marian_nmt maxwidth=500 limit=5 %}
--->
-
 <h4> Acknowledgements </h4>
 <div class="intro">
   <p>
 The development of Marian received funding from the European Union's Horizon 2020
-Research and Innovation Programme under grant agreements 
+Research and Innovation Programme under grant agreements
 688139 (<a href="http://www.summa-project.eu">SUMMA</a>; 2016-2019),
 645487 (<a href="http://www.modernmt.eu">Modern MT</a>; 2015-2017), and
 644333 (<a href="http://tramooc.eu/">TraMOOC</a>; 2015-2017),

@@ -37,6 +37,42 @@ introduces Marian's predecessor AmuNMT:
 ```
 There's also a bunch of publications that use Marian on our [publications](/publications) page (let us know if you want us to add yours).
 
+### Training
+
+{:.question}
+#### What model types are currently available?
+
+{:.question}
+#### What are recommended training settings?
+
+{:.question}
+#### How do I train a model like in Edinburgh's WMT2017 submission?
+
+{:.question}
+#### How do I train a Google-style transformer model?
+
+{:.question}
+#### How do I enable multi-GPU training?
+
+{:.question}
+#### How do I chose mini-batch size, max-length and workspace memory?
+
+{:.question}
+#### How do I train a language model?
+
+{:.question}
+#### How do I train a multi-source model?
+
+{:.question}
+#### How do I set a validation set?
+
+{:.question}
+#### How long do I need to train my model?
+
+{:.question}
+#### What types of regularization are available?
+
+
 ### Translation
 
 {:.question}
@@ -55,6 +91,12 @@ we recommend to use the following options:
 
 Yes. This a feature introduced in Marian v1.1.0. Batched translation generates translation for whole mini-batches and significantly increases
 translation speed (roughly by a factor of 10 or more). See [this documentation section](/docs/#batched-translation) for details.
+
+{:.question}
+#### Can Marian do model ensembling?
+
+Yes, and you can even ensemble models of different types, for instance an Edinburgh-style deep RNN model and a Google Transformer model, or you can a
+language model to the mix. See [here](/docs/#model-ensembling) for details.
 
 <!--
 ### Training

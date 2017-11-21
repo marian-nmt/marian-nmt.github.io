@@ -1,5 +1,7 @@
 #!/bin/bash -v
 
+set -e
+
 make update-docs
 git commit -a -m 'Commit local changes to Jekyll sources'
 git up

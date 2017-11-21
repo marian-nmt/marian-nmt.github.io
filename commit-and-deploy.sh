@@ -3,7 +3,7 @@
 set -e
 
 make update-docs
-git commit -a -m 'Commit local changes to Jekyll sources'
+git commit -a -m 'Commit local changes to Jekyll sources' || true
 git up
 git push origin jekyll
 JEKYLL_ENV=production bundle exec jekyll build

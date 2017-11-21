@@ -200,44 +200,7 @@ we recommend to use the following options:</p>
 <h4 class="question" id="does-marian-support-batched-translation">Does Marian support batched translation?</h4>
 
 <p>Yes. This a feature introduced in Marian v1.1.0. Batched translation generates translation for whole mini-batches and significantly increases
-translation speed (roughly by a factor of 10 or more). Assuming your model file is <code class="highlighter-rouge">model.npz</code> and your vocabulary is <code class="highlighter-rouge">vocab.src.yml</code> and <code class="highlighter-rouge">vocab.trg.yml</code>,
-we recommend to use the following options to enable batched translation:</p>
-<div class="highlighter-rouge"><div class="highlight"><pre class="highlight"><code>./marian-decoder -m model.npz -v vocab.src.yml vocab.trg.yml -b 6 --normalize=0.6 --mini-batch 64 --maxi-batch-sort src --maxi-batch 100 -w 2500
-</code></pre></div></div>
-<p>This does a number of things: firstly, it enables translation with a mini-batch size of 64, i.e. translating 64 sentences at once, with a beam-size of 6;
-It preloads 100 maxi-batches and sorts them according to source sentence length, this allows for better packing of the batch and increases translation speed
-quite a bit. We also added an option to use a length-normalization weight of 0.6 (this usually increases BLEU a bit) and set the working memory to 2500 MB. The
-default working memory is 512 MB and Marian will increase it to match to requirements during translation, but pre-allocating memory makes it usually a bit faster.</p>
-
-<p>To give you an idea, how much faster batched translation is compared to sentence-by-sentence translation we have collected a few numbers. Proper benchmarks will
-be added soon. Below we have compiled the time it takes to translate the English-German WMT2013 test set with 3000 sentences using 4 Volta GPUs on AWS.</p>
-
-<table>
-  <thead>
-    <tr>
-      <th>System</th>
-      <th>Single</th>
-      <th>Batched</th>
-    </tr>
-  </thead>
-  <tbody>
-    <tr>
-      <td>Nematus-style Shallow RNN</td>
-      <td>82.7s</td>
-      <td>4.3s</td>
-    </tr>
-    <tr>
-      <td>Nematus-style Deep RNN</td>
-      <td>148.5s</td>
-      <td>5.9s</td>
-    </tr>
-    <tr>
-      <td>Google Transformer</td>
-      <td>201.9s</td>
-      <td>19.2s</td>
-    </tr>
-  </tbody>
-</table>
+translation speed (roughly by a factor of 10 or more). See <a href="/docs/#batched-translation">this documentation section</a> for details.</p>
 
 <!--
 ### Training

@@ -204,11 +204,11 @@ benchmarks will be added soon. Below we have compiled the time it takes to
 translate the English-German WMT2013 test set with 3000 sentences using 4 Volta
 GPUs on AWS.
 
-System | Single | Batched
------------|--------|---------
-Nematus-style Shallow RNN | 82.7s | 4.3s
-Nematus-style Deep RNN | 148.5s | 5.9s
-Google Transformer | 201.9s | 19.2s
+System | Single | Batched |
+-----------|-------:|---------:|
+Nematus-style Shallow RNN | 82.7s | 4.3s |
+Nematus-style Deep RNN | 148.5s | 5.9s |
+Google Transformer | 201.9s | 19.2s |
 {: .table .table-bordered .table-striped }
 
 #### Models trained with Nematus

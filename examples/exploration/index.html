@@ -37,16 +37,6 @@
   <![endif]-->
 
   
-  <!-- Global site tag (gtag.js) - Google Analytics -->
-<script async src="https://www.googletagmanager.com/gtag/js?id=UA-109819276-1"></script>
-<script>
-    window.dataLayer = window.dataLayer || [];
-    function gtag() { dataLayer.push(arguments); }
-    gtag('js', new Date());
-    gtag('config', 'UA-109819276-1');
-</script>
-
-  
 </head>
 
 
@@ -116,13 +106,13 @@
 
  
  <li>
-   <a class="page-link" href="/examples/">Examples &amp; Use cases</a>
+   <a class="page-link" href="/examples/">Examples</a>
  </li>
  
 
  
  <li>
-   <a class="page-link" href="/faq">Google group</a>
+   <a class="page-link" href="/faq">FAQ</a>
  </li>
  
 
@@ -162,50 +152,45 @@
               <p>This page provides data, model files and training instructions for our APE system described in <a href="https://arxiv.org/abs/1706.04138">An Exploration of Neural Sequence-to-Sequence Architectures for Automatic Post-Editing</a>.
 If you use any of the data, systems or ideas, please cite:</p>
 
-<div class="highlighter-rouge"><pre class="highlight"><code>@InProceedings{junczysdowmunt-grundkiewicz:2016:WMT,
+<div class="highlighter-rouge"><div class="highlight"><pre class="highlight"><code>@InProceedings{junczysdowmunt-grundkiewicz:2016:WMT,
    author    = {Marcin Junczys-Dowmunt and Roman Grundkiewicz},
    title     = {An Exploration of Neural Sequence-to-Sequence Architectures for Automatic Post-Editing},
    year      = {2017},
    url       = {https://arxiv.org/abs/1706.04138}
 }
-</code></pre>
-</div>
+</code></pre></div></div>
 
 <h2 id="reproducing-our-results">Reproducing our results</h2>
 
 <h3 id="tools-and-data">Tools and data</h3>
 <p>Create a new working folder and enter that folder:</p>
 
-<div class="highlighter-rouge"><pre class="highlight"><code>mkdir ape-explore
+<div class="highlighter-rouge"><div class="highlight"><pre class="highlight"><code>mkdir ape-explore
 cd ape-explore
-</code></pre>
-</div>
+</code></pre></div></div>
 
 <p>Download and compile Marian. This is our training and translation toolkit.</p>
-<div class="highlighter-rouge"><pre class="highlight"><code>git clone https://github.com/marian-nmt/marian
+<div class="highlighter-rouge"><div class="highlight"><pre class="highlight"><code>git clone https://github.com/marian-nmt/marian
 cd marian
 mkdir build
 cd build
 cmake .. -DCMAKE_BUILD_TYPE=Release
 make -j16
 cd ../..
-</code></pre>
-</div>
+</code></pre></div></div>
 
 <p>Download and compile Moses. We use the TER scorer in Moses for reporting of validation results during training.</p>
-<div class="highlighter-rouge"><pre class="highlight"><code>git clone https://github.com/moses-smt/mosesdecoder
+<div class="highlighter-rouge"><div class="highlight"><pre class="highlight"><code>git clone https://github.com/moses-smt/mosesdecoder
 cd mosesdecoder
 ./bjam -j16
 cd ..
-</code></pre>
-</div>
+</code></pre></div></div>
 
 <p>Obtain the already preprocessed training data as described below. The data has been prepared in such a way that training can be executed immediately. The included <code class="highlighter-rouge">Makefile</code> can be used to retrace the preprocessing steps. The folder train/data.all contains the raw unprocessed training and test data. The data has been created using the official training data for the <a href="http://www.statmt.org/wmt16/ape-task.html">WMT 2016 APE task</a> and the artifical data made available <a href="../postedit">here</a>.</p>
-<div class="highlighter-rouge"><pre class="highlight"><code>wget http://data.statmt.org/romang/ape-explore/train.tgz
+<div class="highlighter-rouge"><div class="highlight"><pre class="highlight"><code>wget http://data.statmt.org/romang/ape-explore/train.tgz
 tar -xzf train.tgz
 cd train
-</code></pre>
-</div>
+</code></pre></div></div>
 
 <h3 id="training-with-a-chosen-configuration">Training with a chosen configuration</h3>
 
@@ -213,13 +198,12 @@ cd train
 Train a model by using its configuration file. Here we chose the dual-source model <code class="highlighter-rouge">m-cgru</code> from the paper.</p>
 
 <p>Type the following command to train on four GPUs:</p>
-<div class="highlighter-rouge"><pre class="highlight"><code>../marian/build/marian -c config/m-cgru.yml -d 0 1 2 3
-</code></pre>
-</div>
+<div class="highlighter-rouge"><div class="highlight"><pre class="highlight"><code>../marian/build/marian -c config/m-cgru.yml -d 0 1 2 3
+</code></pre></div></div>
 
 <p>which will produce model files in the <code class="highlighter-rouge">models/m-cgru</code> folder. Example output during training would look roughly like this:</p>
 
-<div class="highlighter-rouge"><pre class="highlight"><code>[2017-07-10 23:28:47] Ep. 1 : Up. 1000 : Sen. 64000 : Cost 129.47 : Time 201.87s : 5814.94 words/s
+<div class="highlighter-rouge"><div class="highlight"><pre class="highlight"><code>[2017-07-10 23:28:47] Ep. 1 : Up. 1000 : Sen. 64000 : Cost 129.47 : Time 201.87s : 5814.94 words/s
 [2017-07-10 23:31:33] Ep. 1 : Up. 2000 : Sen. 128000 : Cost 104.59 : Time 166.06s : 7060.59 words/s
 [2017-07-10 23:34:16] Ep. 1 : Up. 3000 : Sen. 192000 : Cost 89.37 : Time 163.62s : 7185.44 words/s
 [2017-07-10 23:37:02] Ep. 1 : Up. 4000 : Sen. 256000 : Cost 77.24 : Time 166.10s : 7062.50 words/s
@@ -236,16 +220,14 @@ Train a model by using its configuration file. Here we chose the dual-source mod
 [2017-07-10 23:54:22] [valid] 10000 : valid-script : 0.6483 : new best
 [2017-07-10 23:57:06] Ep. 1 : Up. 11000 : Sen. 704000 : Cost 48.64 : Time 211.14s : 5554.63 words/s
 [2017-07-10 23:59:53] Ep. 1 : Up. 12000 : Sen. 768000 : Cost 47.09 : Time 167.37s : 7012.21 words/s
-</code></pre>
-</div>
+</code></pre></div></div>
 <p>The reported figures coming from the validation script are <code class="highlighter-rouge">1-TER</code> as produced by the Moses scorer, thus higher is better.</p>
 
 <p>Inspect <code class="highlighter-rouge">models/m-cgru/validate.sh</code> or the example below to see how translation and validation works. For ensembling back-up the recently trained model (or move the folder <code class="highlighter-rouge">models/m-cgru</code>) and restart training with the same config file. Weights will be initialized to different random weights.</p>
 
 <p>In order to create and validate the averaged model (an element-wise average of model weights) run:</p>
-<div class="highlighter-rouge"><pre class="highlight"><code>./models/m-cgru/validate_avg.sh
-</code></pre>
-</div>
+<div class="highlighter-rouge"><div class="highlight"><pre class="highlight"><code>./models/m-cgru/validate_avg.sh
+</code></pre></div></div>
 <p>This will create the averaged model <code class="highlighter-rouge">m-cgru/model.avg.npz</code> and validate on the official WMT 2016 test set, reporting BLEU with <code class="highlighter-rouge">../mosesdecoder/scripts/generic/multi-bleu.pl</code> and the official APE task scorer from <code class="highlighter-rouge">eval</code>. Results for averaged models from one training run are usually slightly better. Do not attempt to average models from different training runs, this will not work.</p>
 
 <h2 id="models-and-config-files">Models and config files</h2>

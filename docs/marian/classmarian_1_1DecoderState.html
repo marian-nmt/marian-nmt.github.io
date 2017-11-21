@@ -92,10 +92,9 @@ var searchBox = new SearchBox("searchBox", "search",false,'Search');
 <div class="header">
   <div class="summary">
 <a href="#pub-methods">Public Member Functions</a> &#124;
-<a href="#pro-attribs">Protected Attributes</a> &#124;
 <a href="classmarian_1_1DecoderState-members.html">List of all members</a>  </div>
   <div class="headertitle">
-<div class="title">marian::DecoderState Class Reference</div>  </div>
+<div class="title">marian::DecoderState Class Reference<span class="mlabels"><span class="mlabel">abstract</span></span></div>  </div>
 </div><!--header-->
 <div class="contents">
 <div class="dynheader">
@@ -105,75 +104,42 @@ Inheritance diagram for marian::DecoderState:</div>
   <img src="classmarian_1_1DecoderState.png" usemap="#marian::DecoderState_map" alt=""/>
   <map id="marian::DecoderState_map" name="marian::DecoderState_map">
 <area href="classmarian_1_1DecoderStateHardAtt.html" alt="marian::DecoderStateHardAtt" shape="rect" coords="0,56,176,80"/>
-<area href="classmarian_1_1TransformerState.html" alt="marian::TransformerState" shape="rect" coords="186,56,362,80"/>
+<area href="classmarian_1_1DecoderStateS2S.html" alt="marian::DecoderStateS2S" shape="rect" coords="186,56,362,80"/>
 </map>
  </div></div>
 <table class="memberdecls">
 <tr class="heading"><td colspan="2"><h2 class="groupheader"><a name="pub-methods"></a>
 Public Member Functions</h2></td></tr>
-<tr class="memitem:abf5968e16c55e51f109ec3b3af59b10f"><td class="memItemLeft" align="right" valign="top"><a class="anchor" id="abf5968e16c55e51f109ec3b3af59b10f"></a>
-&#160;</td><td class="memItemRight" valign="bottom"><b>DecoderState</b> (const <a class="el" href="classmarian_1_1rnn_1_1States.html">rnn::States</a> &amp;states, <a class="el" href="namespacemarian.html#a498d8baf75b754011078b890b39c8e12">Expr</a> probs, std::vector&lt; Ptr&lt; <a class="el" href="classmarian_1_1EncoderState.html">EncoderState</a> &gt;&gt; &amp;encStates)</td></tr>
-<tr class="separator:abf5968e16c55e51f109ec3b3af59b10f"><td class="memSeparator" colspan="2">&#160;</td></tr>
-<tr class="memitem:afed1f85cd82d4462c49f7107f960a100"><td class="memItemLeft" align="right" valign="top"><a class="anchor" id="afed1f85cd82d4462c49f7107f960a100"></a>
-virtual std::vector&lt; Ptr&lt; <a class="el" href="classmarian_1_1EncoderState.html">EncoderState</a> &gt; &gt; &amp;&#160;</td><td class="memItemRight" valign="bottom"><b>getEncoderStates</b> ()</td></tr>
-<tr class="separator:afed1f85cd82d4462c49f7107f960a100"><td class="memSeparator" colspan="2">&#160;</td></tr>
-<tr class="memitem:af761b699d78e9545987adc743bc579b8"><td class="memItemLeft" align="right" valign="top"><a class="anchor" id="af761b699d78e9545987adc743bc579b8"></a>
-virtual <a class="el" href="namespacemarian.html#a498d8baf75b754011078b890b39c8e12">Expr</a>&#160;</td><td class="memItemRight" valign="bottom"><b>getProbs</b> ()</td></tr>
-<tr class="separator:af761b699d78e9545987adc743bc579b8"><td class="memSeparator" colspan="2">&#160;</td></tr>
-<tr class="memitem:a7d99dcec147de0654c049736314e0792"><td class="memItemLeft" align="right" valign="top"><a class="anchor" id="a7d99dcec147de0654c049736314e0792"></a>
-virtual void&#160;</td><td class="memItemRight" valign="bottom"><b>setProbs</b> (<a class="el" href="namespacemarian.html#a498d8baf75b754011078b890b39c8e12">Expr</a> probs)</td></tr>
-<tr class="separator:a7d99dcec147de0654c049736314e0792"><td class="memSeparator" colspan="2">&#160;</td></tr>
-<tr class="memitem:af0f090185bd8f34b53b6a3cf79d7eea3"><td class="memItemLeft" align="right" valign="top"><a class="anchor" id="af0f090185bd8f34b53b6a3cf79d7eea3"></a>
-virtual Ptr&lt; <a class="el" href="classmarian_1_1DecoderState.html">DecoderState</a> &gt;&#160;</td><td class="memItemRight" valign="bottom"><b>select</b> (const std::vector&lt; size_t &gt; &amp;selIdx)</td></tr>
-<tr class="separator:af0f090185bd8f34b53b6a3cf79d7eea3"><td class="memSeparator" colspan="2">&#160;</td></tr>
-<tr class="memitem:a7ba0022e125c8392b43423107af33f5b"><td class="memItemLeft" align="right" valign="top"><a class="anchor" id="a7ba0022e125c8392b43423107af33f5b"></a>
-virtual const <a class="el" href="classmarian_1_1rnn_1_1States.html">rnn::States</a> &amp;&#160;</td><td class="memItemRight" valign="bottom"><b>getStates</b> ()</td></tr>
-<tr class="separator:a7ba0022e125c8392b43423107af33f5b"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a599749bcb3f14a520432cbccdb7b6e4a"><td class="memItemLeft" align="right" valign="top"><a class="anchor" id="a599749bcb3f14a520432cbccdb7b6e4a"></a>
+virtual Ptr&lt; <a class="el" href="structmarian_1_1EncoderState.html">EncoderState</a> &gt;&#160;</td><td class="memItemRight" valign="bottom"><b>getEncoderState</b> ()=0</td></tr>
+<tr class="separator:a599749bcb3f14a520432cbccdb7b6e4a"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a55399096704855ddfcbe2c4c3639011d"><td class="memItemLeft" align="right" valign="top"><a class="anchor" id="a55399096704855ddfcbe2c4c3639011d"></a>
+virtual <a class="el" href="namespacemarian.html#a498d8baf75b754011078b890b39c8e12">Expr</a>&#160;</td><td class="memItemRight" valign="bottom"><b>getProbs</b> ()=0</td></tr>
+<tr class="separator:a55399096704855ddfcbe2c4c3639011d"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a8a8052fb88397062a5cf02b4c3f56c64"><td class="memItemLeft" align="right" valign="top"><a class="anchor" id="a8a8052fb88397062a5cf02b4c3f56c64"></a>
+virtual void&#160;</td><td class="memItemRight" valign="bottom"><b>setProbs</b> (<a class="el" href="namespacemarian.html#a498d8baf75b754011078b890b39c8e12">Expr</a>)=0</td></tr>
+<tr class="separator:a8a8052fb88397062a5cf02b4c3f56c64"><td class="memSeparator" colspan="2">&#160;</td></tr>
 <tr class="memitem:a93f6000b711e4f710f46268e0781eed4"><td class="memItemLeft" align="right" valign="top"><a class="anchor" id="a93f6000b711e4f710f46268e0781eed4"></a>
 virtual <a class="el" href="namespacemarian.html#a498d8baf75b754011078b890b39c8e12">Expr</a>&#160;</td><td class="memItemRight" valign="bottom"><b>getTargetEmbeddings</b> ()</td></tr>
 <tr class="separator:a93f6000b711e4f710f46268e0781eed4"><td class="memSeparator" colspan="2">&#160;</td></tr>
 <tr class="memitem:a9ba5f20385a0b96e5306dd81bba2a203"><td class="memItemLeft" align="right" valign="top"><a class="anchor" id="a9ba5f20385a0b96e5306dd81bba2a203"></a>
 virtual void&#160;</td><td class="memItemRight" valign="bottom"><b>setTargetEmbeddings</b> (<a class="el" href="namespacemarian.html#a498d8baf75b754011078b890b39c8e12">Expr</a> targetEmbeddings)</td></tr>
 <tr class="separator:a9ba5f20385a0b96e5306dd81bba2a203"><td class="memSeparator" colspan="2">&#160;</td></tr>
-<tr class="memitem:aa17965a3f9151e8e7afe7c6d9e6b2117"><td class="memItemLeft" align="right" valign="top"><a class="anchor" id="aa17965a3f9151e8e7afe7c6d9e6b2117"></a>
-virtual <a class="el" href="namespacemarian.html#a498d8baf75b754011078b890b39c8e12">Expr</a>&#160;</td><td class="memItemRight" valign="bottom"><b>getTargetMask</b> ()</td></tr>
-<tr class="separator:aa17965a3f9151e8e7afe7c6d9e6b2117"><td class="memSeparator" colspan="2">&#160;</td></tr>
-<tr class="memitem:ab470f8886435bace93adba3a66f6377d"><td class="memItemLeft" align="right" valign="top"><a class="anchor" id="ab470f8886435bace93adba3a66f6377d"></a>
-virtual void&#160;</td><td class="memItemRight" valign="bottom"><b>setTargetMask</b> (<a class="el" href="namespacemarian.html#a498d8baf75b754011078b890b39c8e12">Expr</a> targetMask)</td></tr>
-<tr class="separator:ab470f8886435bace93adba3a66f6377d"><td class="memSeparator" colspan="2">&#160;</td></tr>
 <tr class="memitem:aa05a373b7a8e423af70829189e96fea5"><td class="memItemLeft" align="right" valign="top"><a class="anchor" id="aa05a373b7a8e423af70829189e96fea5"></a>
 virtual bool&#160;</td><td class="memItemRight" valign="bottom"><b>doSingleStep</b> ()</td></tr>
 <tr class="separator:aa05a373b7a8e423af70829189e96fea5"><td class="memSeparator" colspan="2">&#160;</td></tr>
 <tr class="memitem:a670f20d329fe47a6e9a483619bb0c115"><td class="memItemLeft" align="right" valign="top"><a class="anchor" id="a670f20d329fe47a6e9a483619bb0c115"></a>
 virtual void&#160;</td><td class="memItemRight" valign="bottom"><b>setSingleStep</b> (bool singleStep=true)</td></tr>
 <tr class="separator:a670f20d329fe47a6e9a483619bb0c115"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a8fbd16cc0281d45142681db0933a0bfe"><td class="memItemLeft" align="right" valign="top"><a class="anchor" id="a8fbd16cc0281d45142681db0933a0bfe"></a>
+virtual Ptr&lt; <a class="el" href="classmarian_1_1DecoderState.html">DecoderState</a> &gt;&#160;</td><td class="memItemRight" valign="bottom"><b>select</b> (const std::vector&lt; size_t &gt; &amp;)=0</td></tr>
+<tr class="separator:a8fbd16cc0281d45142681db0933a0bfe"><td class="memSeparator" colspan="2">&#160;</td></tr>
 <tr class="memitem:a9ab2da41ff8e8565476f83c7870ad46b"><td class="memItemLeft" align="right" valign="top"><a class="anchor" id="a9ab2da41ff8e8565476f83c7870ad46b"></a>
 virtual const std::vector&lt; size_t &gt; &amp;&#160;</td><td class="memItemRight" valign="bottom"><b>getSourceWords</b> ()</td></tr>
 <tr class="separator:a9ab2da41ff8e8565476f83c7870ad46b"><td class="memSeparator" colspan="2">&#160;</td></tr>
 <tr class="memitem:abc513554a6dec21e221b18def05297cb"><td class="memItemLeft" align="right" valign="top"><a class="anchor" id="abc513554a6dec21e221b18def05297cb"></a>
 virtual void&#160;</td><td class="memItemRight" valign="bottom"><b>blacklist</b> (<a class="el" href="namespacemarian.html#a498d8baf75b754011078b890b39c8e12">Expr</a> totalCosts, Ptr&lt; <a class="el" href="classmarian_1_1data_1_1CorpusBatch.html">data::CorpusBatch</a> &gt; batch)</td></tr>
 <tr class="separator:abc513554a6dec21e221b18def05297cb"><td class="memSeparator" colspan="2">&#160;</td></tr>
-</table><table class="memberdecls">
-<tr class="heading"><td colspan="2"><h2 class="groupheader"><a name="pro-attribs"></a>
-Protected Attributes</h2></td></tr>
-<tr class="memitem:a09838ecb77262feb0c2370968c38d93b"><td class="memItemLeft" align="right" valign="top"><a class="anchor" id="a09838ecb77262feb0c2370968c38d93b"></a>
-std::vector&lt; Ptr&lt; <a class="el" href="classmarian_1_1EncoderState.html">EncoderState</a> &gt; &gt;&#160;</td><td class="memItemRight" valign="bottom"><b>encStates_</b></td></tr>
-<tr class="separator:a09838ecb77262feb0c2370968c38d93b"><td class="memSeparator" colspan="2">&#160;</td></tr>
-<tr class="memitem:a67f590c5a27b165002f52f1fcfaa2c5f"><td class="memItemLeft" align="right" valign="top"><a class="anchor" id="a67f590c5a27b165002f52f1fcfaa2c5f"></a>
-<a class="el" href="namespacemarian.html#a498d8baf75b754011078b890b39c8e12">Expr</a>&#160;</td><td class="memItemRight" valign="bottom"><b>targetEmbeddings_</b></td></tr>
-<tr class="separator:a67f590c5a27b165002f52f1fcfaa2c5f"><td class="memSeparator" colspan="2">&#160;</td></tr>
-<tr class="memitem:a586ad1994ecc984651c412b7fd37cde5"><td class="memItemLeft" align="right" valign="top"><a class="anchor" id="a586ad1994ecc984651c412b7fd37cde5"></a>
-<a class="el" href="namespacemarian.html#a498d8baf75b754011078b890b39c8e12">Expr</a>&#160;</td><td class="memItemRight" valign="bottom"><b>targetMask_</b></td></tr>
-<tr class="separator:a586ad1994ecc984651c412b7fd37cde5"><td class="memSeparator" colspan="2">&#160;</td></tr>
-<tr class="memitem:afc5b2e6aebe1b64a37997344f4be5678"><td class="memItemLeft" align="right" valign="top"><a class="anchor" id="afc5b2e6aebe1b64a37997344f4be5678"></a>
-<a class="el" href="namespacemarian.html#a498d8baf75b754011078b890b39c8e12">Expr</a>&#160;</td><td class="memItemRight" valign="bottom"><b>probs_</b></td></tr>
-<tr class="separator:afc5b2e6aebe1b64a37997344f4be5678"><td class="memSeparator" colspan="2">&#160;</td></tr>
-<tr class="memitem:a6b7abc3679621fab6ae8807214bac9a8"><td class="memItemLeft" align="right" valign="top"><a class="anchor" id="a6b7abc3679621fab6ae8807214bac9a8"></a>
-bool&#160;</td><td class="memItemRight" valign="bottom"><b>singleStep_</b> {false}</td></tr>
-<tr class="separator:a6b7abc3679621fab6ae8807214bac9a8"><td class="memSeparator" colspan="2">&#160;</td></tr>
-<tr class="memitem:a999eed11d80cfd9cb80fc63550633062"><td class="memItemLeft" align="right" valign="top"><a class="anchor" id="a999eed11d80cfd9cb80fc63550633062"></a>
-<a class="el" href="classmarian_1_1rnn_1_1States.html">rnn::States</a>&#160;</td><td class="memItemRight" valign="bottom"><b>states_</b></td></tr>
-<tr class="separator:a999eed11d80cfd9cb80fc63550633062"><td class="memSeparator" colspan="2">&#160;</td></tr>
 </table>
 <hr/>The documentation for this class was generated from the following file:<ul>
 <li>marian/src/models/<a class="el" href="states_8h_source.html">states.h</a></li>
@@ -181,7 +147,7 @@ bool&#160;</td><td class="memItemRight" valign="bottom"><b>singleStep_</b> {fals
 </div><!-- contents -->
 <!-- start footer part -->
 <hr class="footer"/><address class="footer"><small>
-Generated on Fri Nov 17 2017 14:48:42 for Marian by &#160;<a href="http://www.doxygen.org/index.html">
+Generated on Tue Nov 21 2017 11:45:41 for Marian by &#160;<a href="http://www.doxygen.org/index.html">
 <img class="footer" src="doxygen.png" alt="doxygen"/>
 </a> 1.8.11
 </small></address>

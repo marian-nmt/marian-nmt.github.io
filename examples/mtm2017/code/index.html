@@ -37,16 +37,6 @@
   <![endif]-->
 
   
-  <!-- Global site tag (gtag.js) - Google Analytics -->
-<script async src="https://www.googletagmanager.com/gtag/js?id=UA-109819276-1"></script>
-<script>
-    window.dataLayer = window.dataLayer || [];
-    function gtag() { dataLayer.push(arguments); }
-    gtag('js', new Date());
-    gtag('config', 'UA-109819276-1');
-</script>
-
-  
 </head>
 
 
@@ -116,13 +106,13 @@
 
  
  <li>
-   <a class="page-link" href="/examples/">Examples &amp; Use cases</a>
+   <a class="page-link" href="/examples/">Examples</a>
  </li>
  
 
  
  <li>
-   <a class="page-link" href="/faq">Google group</a>
+   <a class="page-link" href="/faq">FAQ</a>
  </li>
  
 
@@ -168,21 +158,20 @@ commit a9279f1.</p>
 
 <p>If you skipped the previous parts, here’s how to compile the code.</p>
 
-<div class="highlighter-rouge"><pre class="highlight"><code>git clone https://github.com/marian-nmt/marian-dev
+<div class="highlighter-rouge"><div class="highlight"><pre class="highlight"><code>git clone https://github.com/marian-nmt/marian-dev
 cd marian-dev
 mkdir build
 cd build
 cmake .. -DCMAKE_BUILD_TYPE=Release
 make -j
-</code></pre>
-</div>
+</code></pre></div></div>
 
 <h2 id="skeleton-model-file">Skeleton model file</h2>
 
 <p>All file paths are relative to the main repository directory <code class="highlighter-rouge">marian-dev</code>.
 Create the file <code class="highlighter-rouge">src/models/sutskever.h</code> with the following skeleton code:</p>
 
-<div class="language-c++ highlighter-rouge"><pre class="highlight"><code><span class="cp">#pragma once
+<div class="language-c++ highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="cp">#pragma once
 </span>
 <span class="cp">#include "marian.h"
 </span>
@@ -230,8 +219,7 @@ Create the file <code class="highlighter-rouge">src/models/sutskever.h</code> wi
 <span class="p">};</span>
 
 <span class="p">}</span> <span class="c1">// namespace marian
-</span></code></pre>
-</div>
+</span></code></pre></div></div>
 
 <h2 id="registering-the-model">Registering the model</h2>
 
@@ -241,16 +229,15 @@ need to register it in model factory.</p>
 <p>Edit <code class="highlighter-rouge">src/models/model_factory.h</code> in the following way: add the header include
 at the top of the file:</p>
 
-<div class="language-c++ highlighter-rouge"><pre class="highlight"><code><span class="cp">#pragma once
+<div class="language-c++ highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="cp">#pragma once
 </span>
 <span class="c1">// Add this include at the top
 </span><span class="cp">#include "models/sutskever.h"
-</span></code></pre>
-</div>
+</span></code></pre></div></div>
 
 <p>Register the encoder and the decoder:</p>
 
-<div class="language-c++ highlighter-rouge"><pre class="highlight"><code><span class="n">Ptr</span><span class="o">&lt;</span><span class="n">EncoderBase</span><span class="o">&gt;</span> <span class="n">EncoderFactory</span><span class="o">::</span><span class="n">construct</span><span class="p">()</span> <span class="p">{</span>
+<div class="language-c++ highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="n">Ptr</span><span class="o">&lt;</span><span class="n">EncoderBase</span><span class="o">&gt;</span> <span class="n">EncoderFactory</span><span class="o">::</span><span class="n">construct</span><span class="p">()</span> <span class="p">{</span>
   <span class="k">if</span><span class="p">(</span><span class="n">options_</span><span class="o">-&gt;</span><span class="n">get</span><span class="o">&lt;</span><span class="n">std</span><span class="o">::</span><span class="n">string</span><span class="o">&gt;</span><span class="p">(</span><span class="s">"type"</span><span class="p">)</span> <span class="o">==</span> <span class="s">"sutskever"</span><span class="p">)</span>
     <span class="k">return</span> <span class="n">New</span><span class="o">&lt;</span><span class="n">EncoderSutskever</span><span class="o">&gt;</span><span class="p">(</span><span class="n">options_</span><span class="p">);</span>
 
@@ -263,12 +250,11 @@ at the top of the file:</p>
 
   <span class="p">[...]</span>
 <span class="p">}</span>
-</code></pre>
-</div>
+</code></pre></div></div>
 
 <p>Specify how to construct the encoder-decoder Sutskever model:</p>
 
-<div class="language-c++ highlighter-rouge"><pre class="highlight"><code><span class="n">Ptr</span><span class="o">&lt;</span><span class="n">ModelBase</span><span class="o">&gt;</span> <span class="n">by_type</span><span class="p">(</span><span class="n">std</span><span class="o">::</span><span class="n">string</span> <span class="n">type</span><span class="p">,</span> <span class="n">Ptr</span><span class="o">&lt;</span><span class="n">Options</span><span class="o">&gt;</span> <span class="n">options</span><span class="p">)</span> <span class="p">{</span>
+<div class="language-c++ highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="n">Ptr</span><span class="o">&lt;</span><span class="n">ModelBase</span><span class="o">&gt;</span> <span class="n">by_type</span><span class="p">(</span><span class="n">std</span><span class="o">::</span><span class="n">string</span> <span class="n">type</span><span class="p">,</span> <span class="n">Ptr</span><span class="o">&lt;</span><span class="n">Options</span><span class="o">&gt;</span> <span class="n">options</span><span class="p">)</span> <span class="p">{</span>
   <span class="k">if</span><span class="p">(</span><span class="n">type</span> <span class="o">==</span> <span class="s">"sutskever"</span><span class="p">)</span> <span class="p">{</span>
     <span class="k">return</span> <span class="n">models</span><span class="o">::</span><span class="n">encoder_decoder</span><span class="p">()(</span><span class="n">options</span><span class="p">)</span>
         <span class="p">.</span><span class="n">push_back</span><span class="p">(</span><span class="n">models</span><span class="o">::</span><span class="n">encoder</span><span class="p">()(</span><span class="s">"type"</span><span class="p">,</span> <span class="s">"sutskever"</span><span class="p">))</span>
@@ -278,8 +264,7 @@ at the top of the file:</p>
 
   <span class="p">[...]</span>
 <span class="p">}</span>
-</code></pre>
-</div>
+</code></pre></div></div>
 
 <h2 id="filling-the-gaps">Filling the gaps</h2>
 
@@ -288,28 +273,26 @@ at the top of the file:</p>
 <p>The complete encoder is given at the bottom of this section.
 We insert the following code pieces in the <code class="highlighter-rouge">build</code> function of the encoder.</p>
 
-<div class="language-c++ highlighter-rouge"><pre class="highlight"><code><span class="c1">// create source embeddings
+<div class="language-c++ highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="c1">// create source embeddings
 </span><span class="kt">int</span> <span class="n">dimVoc</span> <span class="o">=</span> <span class="n">opt</span><span class="o">&lt;</span><span class="n">std</span><span class="o">::</span><span class="n">vector</span><span class="o">&lt;</span><span class="kt">int</span><span class="o">&gt;&gt;</span><span class="p">(</span><span class="s">"dim-vocabs"</span><span class="p">)[</span><span class="n">batchIndex_</span><span class="p">];</span>
 <span class="k">auto</span> <span class="n">embeddings</span> <span class="o">=</span> <span class="n">embedding</span><span class="p">(</span><span class="n">graph</span><span class="p">)</span>
                   <span class="p">(</span><span class="s">"prefix"</span><span class="p">,</span> <span class="n">prefix_</span> <span class="o">+</span> <span class="s">"_Wemb"</span><span class="p">)</span>
                   <span class="p">(</span><span class="s">"dimVocab"</span><span class="p">,</span> <span class="n">dimVoc</span><span class="p">)</span>
                   <span class="p">(</span><span class="s">"dimEmb"</span><span class="p">,</span> <span class="n">opt</span><span class="o">&lt;</span><span class="kt">int</span><span class="o">&gt;</span><span class="p">(</span><span class="s">"dim-emb"</span><span class="p">))</span>
                       <span class="p">.</span><span class="n">construct</span><span class="p">();</span>
-</code></pre>
-</div>
+</code></pre></div></div>
 
 <h4 id="embedding-look-up">Embedding look-up</h4>
 
-<div class="language-c++ highlighter-rouge"><pre class="highlight"><code><span class="c1">// select embeddings that occur in the batch
+<div class="language-c++ highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="c1">// select embeddings that occur in the batch
 </span><span class="n">Expr</span> <span class="n">batchEmbeddings</span><span class="p">,</span> <span class="n">batchMask</span><span class="p">;</span>
 <span class="n">std</span><span class="o">::</span><span class="n">tie</span><span class="p">(</span><span class="n">batchEmbeddings</span><span class="p">,</span> <span class="n">batchMask</span><span class="p">)</span>
     <span class="o">=</span> <span class="n">EncoderBase</span><span class="o">::</span><span class="n">lookup</span><span class="p">(</span><span class="n">embeddings</span><span class="p">,</span> <span class="n">batch</span><span class="p">,</span> <span class="n">encoderIndex</span><span class="p">);</span>
-</code></pre>
-</div>
+</code></pre></div></div>
 
 <h4 id="backward-encoder-rnn">Backward encoder RNN</h4>
 
-<div class="language-c++ highlighter-rouge"><pre class="highlight"><code><span class="c1">// backward RNN for encoding
+<div class="language-c++ highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="c1">// backward RNN for encoding
 </span><span class="kt">float</span> <span class="n">dropoutRnn</span> <span class="o">=</span> <span class="n">inference_</span> <span class="o">?</span> <span class="mi">0</span> <span class="o">:</span> <span class="n">opt</span><span class="o">&lt;</span><span class="kt">float</span><span class="o">&gt;</span><span class="p">(</span><span class="s">"dropout-rnn"</span><span class="p">);</span>
 <span class="k">auto</span> <span class="n">rnnBw</span> <span class="o">=</span> <span class="n">rnn</span><span class="o">::</span><span class="n">rnn</span><span class="p">(</span><span class="n">graph</span><span class="p">)</span>
              <span class="p">(</span><span class="s">"type"</span><span class="p">,</span> <span class="s">"lstm"</span><span class="p">)</span>
@@ -323,12 +306,11 @@ We insert the following code pieces in the <code class="highlighter-rouge">build
                  <span class="p">.</span><span class="n">construct</span><span class="p">();</span>
 
 <span class="k">auto</span> <span class="n">context</span> <span class="o">=</span> <span class="n">rnnBw</span><span class="o">-&gt;</span><span class="n">transduce</span><span class="p">(</span><span class="n">batchEmbeddings</span><span class="p">,</span> <span class="n">batchMask</span><span class="p">);</span>
-</code></pre>
-</div>
+</code></pre></div></div>
 
 <h4 id="the-complete-encoder">The complete encoder</h4>
 
-<div class="language-c++ highlighter-rouge"><pre class="highlight"><code><span class="k">class</span> <span class="nc">EncoderSutskever</span> <span class="o">:</span> <span class="k">public</span> <span class="n">EncoderBase</span> <span class="p">{</span>
+<div class="language-c++ highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="k">class</span> <span class="nc">EncoderSutskever</span> <span class="o">:</span> <span class="k">public</span> <span class="n">EncoderBase</span> <span class="p">{</span>
 <span class="k">public</span><span class="o">:</span>
   <span class="n">EncoderSutskever</span><span class="p">(</span><span class="n">Ptr</span><span class="o">&lt;</span><span class="n">Options</span><span class="o">&gt;</span> <span class="n">options</span><span class="p">)</span> <span class="o">:</span> <span class="n">EncoderBase</span><span class="p">(</span><span class="n">options</span><span class="p">)</span> <span class="p">{}</span>
 
@@ -369,15 +351,14 @@ We insert the following code pieces in the <code class="highlighter-rouge">build
 
   <span class="kt">void</span> <span class="n">clear</span><span class="p">()</span> <span class="p">{}</span>
 <span class="p">};</span>
-</code></pre>
-</div>
+</code></pre></div></div>
 
 <h3 id="decoder">Decoder</h3>
 
 <p>Two methods have to be filled in the decoder: <code class="highlighter-rouge">startState</code> and <code class="highlighter-rouge">step</code>.</p>
 
 <h4 id="setting-the-start-state-for-decoding">Setting the start state for decoding</h4>
-<div class="language-c++ highlighter-rouge"><pre class="highlight"><code><span class="k">virtual</span> <span class="n">Ptr</span><span class="o">&lt;</span><span class="n">DecoderState</span><span class="o">&gt;</span> <span class="n">startState</span><span class="p">(</span>
+<div class="language-c++ highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="k">virtual</span> <span class="n">Ptr</span><span class="o">&lt;</span><span class="n">DecoderState</span><span class="o">&gt;</span> <span class="n">startState</span><span class="p">(</span>
     <span class="n">Ptr</span><span class="o">&lt;</span><span class="n">ExpressionGraph</span><span class="o">&gt;</span> <span class="n">graph</span><span class="p">,</span>
     <span class="n">Ptr</span><span class="o">&lt;</span><span class="n">data</span><span class="o">::</span><span class="n">CorpusBatch</span><span class="o">&gt;</span> <span class="n">batch</span><span class="p">,</span>
     <span class="n">std</span><span class="o">::</span><span class="n">vector</span><span class="o">&lt;</span><span class="n">Ptr</span><span class="o">&lt;</span><span class="n">EncoderState</span><span class="o">&gt;&gt;&amp;</span> <span class="n">encStates</span><span class="p">)</span> <span class="p">{</span>
@@ -389,8 +370,7 @@ We insert the following code pieces in the <code class="highlighter-rouge">build
   <span class="n">rnn</span><span class="o">::</span><span class="n">States</span> <span class="n">startStates</span><span class="p">({</span> <span class="p">{</span><span class="n">start</span><span class="p">,</span> <span class="n">start</span><span class="p">}</span> <span class="p">});</span>
   <span class="k">return</span> <span class="n">New</span><span class="o">&lt;</span><span class="n">DecoderState</span><span class="o">&gt;</span><span class="p">(</span><span class="n">startStates</span><span class="p">,</span> <span class="nb">nullptr</span><span class="p">,</span> <span class="n">encStates</span><span class="p">);</span>
 <span class="p">}</span>
-</code></pre>
-</div>
+</code></pre></div></div>
 
 <h4 id="the-step-function">The step function</h4>
 
@@ -400,13 +380,12 @@ translation).</p>
 
 <h5 id="shifted-embeddings">Shifted embeddings</h5>
 
-<div class="language-c++ highlighter-rouge"><pre class="highlight"><code><span class="k">auto</span> <span class="n">embeddings</span> <span class="o">=</span> <span class="n">state</span><span class="o">-&gt;</span><span class="n">getTargetEmbeddings</span><span class="p">();</span>
-</code></pre>
-</div>
+<div class="language-c++ highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="k">auto</span> <span class="n">embeddings</span> <span class="o">=</span> <span class="n">state</span><span class="o">-&gt;</span><span class="n">getTargetEmbeddings</span><span class="p">();</span>
+</code></pre></div></div>
 
 <h5 id="decoder-rnn">Decoder RNN</h5>
 
-<div class="language-c++ highlighter-rouge"><pre class="highlight"><code><span class="c1">// forward RNN for decoder
+<div class="language-c++ highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="c1">// forward RNN for decoder
 </span><span class="kt">float</span> <span class="n">dropoutRnn</span> <span class="o">=</span> <span class="n">inference_</span> <span class="o">?</span> <span class="mi">0</span> <span class="o">:</span> <span class="n">opt</span><span class="o">&lt;</span><span class="kt">float</span><span class="o">&gt;</span><span class="p">(</span><span class="s">"dropout-rnn"</span><span class="p">);</span>
 <span class="k">auto</span> <span class="n">rnn</span> <span class="o">=</span> <span class="n">rnn</span><span class="o">::</span><span class="n">rnn</span><span class="p">(</span><span class="n">graph</span><span class="p">)</span>
            <span class="p">(</span><span class="s">"type"</span><span class="p">,</span> <span class="s">"lstm"</span><span class="p">)</span>
@@ -425,12 +404,11 @@ translation).</p>
 <span class="c1">// retrieve the last state per layer. They are required during translation
 // in order to continue decoding for the next word
 </span><span class="n">rnn</span><span class="o">::</span><span class="n">States</span> <span class="n">decoderStates</span> <span class="o">=</span> <span class="n">rnn</span><span class="o">-&gt;</span><span class="n">lastCellStates</span><span class="p">();</span>
-</code></pre>
-</div>
+</code></pre></div></div>
 
 <h5 id="deep-output-2-layers">Deep output (2-layers)</h5>
 
-<div class="language-c++ highlighter-rouge"><pre class="highlight"><code><span class="c1">// construct deep output multi-layer network layer-wise
+<div class="language-c++ highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="c1">// construct deep output multi-layer network layer-wise
 </span><span class="k">auto</span> <span class="n">layer1</span> <span class="o">=</span> <span class="n">mlp</span><span class="o">::</span><span class="n">dense</span><span class="p">(</span><span class="n">graph</span><span class="p">)</span>
               <span class="p">(</span><span class="s">"prefix"</span><span class="p">,</span> <span class="n">prefix_</span> <span class="o">+</span> <span class="s">"_ff_logit_l1"</span><span class="p">)</span>
               <span class="p">(</span><span class="s">"dim"</span><span class="p">,</span> <span class="n">opt</span><span class="o">&lt;</span><span class="kt">int</span><span class="o">&gt;</span><span class="p">(</span><span class="s">"dim-emb"</span><span class="p">))</span>
@@ -446,19 +424,17 @@ translation).</p>
               <span class="p">.</span><span class="n">push_back</span><span class="p">(</span><span class="n">layer1</span><span class="p">)</span>
               <span class="p">.</span><span class="n">push_back</span><span class="p">(</span><span class="n">layer2</span><span class="p">)</span>
               <span class="o">-&gt;</span><span class="n">apply</span><span class="p">(</span><span class="n">embeddings</span><span class="p">,</span> <span class="n">decoderContext</span><span class="p">);</span>
-</code></pre>
-</div>
+</code></pre></div></div>
 
 <h5 id="return-the-decoder-state">Return the decoder state</h5>
 
-<div class="language-c++ highlighter-rouge"><pre class="highlight"><code><span class="c1">// return unnormalized(!) probabilities
+<div class="language-c++ highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="c1">// return unnormalized(!) probabilities
 </span><span class="k">return</span> <span class="n">New</span><span class="o">&lt;</span><span class="n">DecoderState</span><span class="o">&gt;</span><span class="p">(</span><span class="n">decoderStates</span><span class="p">,</span> <span class="n">logits</span><span class="p">,</span> <span class="n">state</span><span class="o">-&gt;</span><span class="n">getEncoderStates</span><span class="p">());</span>
-</code></pre>
-</div>
+</code></pre></div></div>
 
 <h4 id="the-complete-decoder">The complete decoder</h4>
 
-<div class="language-c++ highlighter-rouge"><pre class="highlight"><code><span class="k">class</span> <span class="nc">DecoderSutskever</span> <span class="o">:</span> <span class="k">public</span> <span class="n">DecoderBase</span> <span class="p">{</span>
+<div class="language-c++ highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="k">class</span> <span class="nc">DecoderSutskever</span> <span class="o">:</span> <span class="k">public</span> <span class="n">DecoderBase</span> <span class="p">{</span>
 <span class="k">public</span><span class="o">:</span>
   <span class="n">DecoderSutskever</span><span class="p">(</span><span class="n">Ptr</span><span class="o">&lt;</span><span class="n">Options</span><span class="o">&gt;</span> <span class="n">options</span><span class="p">)</span> <span class="o">:</span> <span class="n">DecoderBase</span><span class="p">(</span><span class="n">options</span><span class="p">)</span> <span class="p">{}</span>
 
@@ -524,29 +500,26 @@ translation).</p>
 
   <span class="kt">void</span> <span class="n">clear</span><span class="p">()</span> <span class="p">{}</span>
 <span class="p">};</span>
-</code></pre>
-</div>
+</code></pre></div></div>
 
 <h2 id="compile-train-and-translate">Compile, train and translate</h2>
 
-<div class="highlighter-rouge"><pre class="highlight"><code>cd build
+<div class="highlighter-rouge"><div class="highlight"><pre class="highlight"><code>cd build
 make -j
 
 cd ../..
-</code></pre>
-</div>
+</code></pre></div></div>
 
 <p>Now you can train your Sutskever-style model with the following command. It is
 possible to extend the model with multiple layers, see for instance the code in
 <code class="highlighter-rouge">src/models/s2s.h</code>.</p>
 
-<div class="highlighter-rouge"><pre class="highlight"><code>./marian-dev/build/marian \
+<div class="highlighter-rouge"><div class="highlight"><pre class="highlight"><code>./marian-dev/build/marian \
   --type sutskever \
   -t data/corpus.clean.bpe.ro data/corpus.clean.bpe.en \
   -v data/vocab.ro.yml data/vocab.en.yml \
   -m model/model.npz
-</code></pre>
-</div>
+</code></pre></div></div>
 
 <p>Translation will work as shown in Part 1 of the tutorial.</p>
 
@@ -559,14 +532,13 @@ achieve ca.~22 BLEU.</p>
 <p>If you just want to see how the final model looks like, you can chech out the
 <code class="highlighter-rouge">tutorial-nov-17</code> branch:</p>
 
-<div class="highlighter-rouge"><pre class="highlight"><code>cd marian-dev
+<div class="highlighter-rouge"><div class="highlight"><pre class="highlight"><code>cd marian-dev
 cd build
 git fetch origin tutorial-nov-17
 git checkout tutorial-nov-17
 cmake .. -DCMAKE_BUILD_TYPE=Release
 make -j
-</code></pre>
-</div>
+</code></pre></div></div>
 
 <p>This will compile a version of Marian which already has the <code class="highlighter-rouge">sutskever</code> model
 type.</p>

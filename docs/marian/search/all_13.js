@@ -1,6 +1,8 @@
 var searchData=
 [
-  ['unaryfunctor',['UnaryFunctor',['../structmarian_1_1functional_1_1UnaryFunctor.html',1,'marian::functional']]],
-  ['unarynodeop',['UnaryNodeOp',['../structmarian_1_1UnaryNodeOp.html',1,'marian']]],
-  ['unseenwordpenalty',['UnseenWordPenalty',['../classmarian_1_1UnseenWordPenalty.html',1,'marian']]]
+  ['validator',['Validator',['../classmarian_1_1Validator.html',1,'marian']]],
+  ['validator_3c_20data_3a_3acorpus_20_3e',['Validator&lt; data::Corpus &gt;',['../classmarian_1_1Validator.html',1,'marian']]],
+  ['validator_3c_20data_3a_3amnist_20_3e',['Validator&lt; data::MNIST &gt;',['../classmarian_1_1Validator.html',1,'marian']]],
+  ['vocab',['Vocab',['../classmarian_1_1Vocab.html',1,'marian']]],
+  ['vocabfreqorderer',['VocabFreqOrderer',['../classmarian_1_1Vocab_1_1VocabFreqOrderer.html',1,'marian::Vocab']]]
 ];

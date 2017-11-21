@@ -37,16 +37,6 @@
   <![endif]-->
 
   
-  <!-- Global site tag (gtag.js) - Google Analytics -->
-<script async src="https://www.googletagmanager.com/gtag/js?id=UA-109819276-1"></script>
-<script>
-    window.dataLayer = window.dataLayer || [];
-    function gtag() { dataLayer.push(arguments); }
-    gtag('js', new Date());
-    gtag('config', 'UA-109819276-1');
-</script>
-
-  
 </head>
 
 
@@ -116,13 +106,13 @@
 
  
  <li>
-   <a class="page-link" href="/examples/">Examples &amp; Use cases</a>
+   <a class="page-link" href="/examples/">Examples</a>
  </li>
  
 
  
  <li>
-   <a class="page-link" href="/faq">Google group</a>
+   <a class="page-link" href="/faq">FAQ</a>
  </li>
  
 
@@ -163,7 +153,7 @@
 
 <p>This page provides data and model files for our shared task winning APE system described in <a href="http://www.aclweb.org/anthology/W16-2378">Log-linear Combinations of Monolingual and Bilingual Neural Machine Translation Models for Automatic Post-Editing</a>. If you use any of the data, systems or ideas, please cite:</p>
 
-<div class="highlighter-rouge"><pre class="highlight"><code>@InProceedings{junczysdowmunt-grundkiewicz:2016:WMT,
+<div class="highlighter-rouge"><div class="highlight"><pre class="highlight"><code>@InProceedings{junczysdowmunt-grundkiewicz:2016:WMT,
    author    = {Junczys-Dowmunt, Marcin  and  Grundkiewicz, Roman},
    title     = {Log-linear Combinations of Monolingual and Bilingual Neural Machine Translation Models for Automatic Post-Editing},
    booktitle = {Proceedings of the First Conference on Machine Translation},
@@ -174,15 +164,14 @@
    pages     = {751--758},
    url       = {http://www.aclweb.org/anthology/W16-2378}
 }
-</code></pre>
-</div>
+</code></pre></div></div>
 
 <h2 id="artificially-created-data">Artificially created data</h2>
 <p><a href="http://odkrywka.wmi.amu.edu.pl/static/data/ape/data.tgz">Download the training data</a> (514M)</p>
 
 <p>This file contains the artificially generated post-editing triplets described in Table 1 of the paper. “4M” is the larger set denoted as “round-trip.n10” in that table, 500K is the smaller set denoted as “round-trip.n1”. The 20 times oversampled original training data for the shared task is not included, but can be obtained from the original <a href="http://www.statmt.org/wmt16/ape-task.html">shared task page</a>.</p>
 
-<div class="highlighter-rouge"><pre class="highlight"><code>data
+<div class="highlighter-rouge"><div class="highlight"><pre class="highlight"><code>data
 ├── 4M
 │   ├── 4M.mt
 │   ├── 4M.pe
@@ -191,29 +180,26 @@
     ├── 500K.mt
     ├── 500K.pe
     └── 500K.src
-</code></pre>
-</div>
+</code></pre></div></div>
 
 <h2 id="models-and-config-files">Models and config files</h2>
 <p><a href="http://odkrywka.wmi.amu.edu.pl/static/data/ape/system.tgz">Download the systems</a> (2.7G)</p>
 
 <p>We also provide the complete primary system and two contrastive variants. To create the submitted output, locate the <code class="highlighter-rouge">Makefile</code> and provide the path to the main directory of your working Marian tool (latest master, see <a href="https://github.com/marian-nmt/marian/blob/master/README.md">Readme</a>) in the following line:</p>
 
-<div class="highlighter-rouge"><pre class="highlight"><code>AMUNMT=/home/marcinj/Badania/marian 
-</code></pre>
-</div>
+<div class="highlighter-rouge"><div class="highlight"><pre class="highlight"><code>AMUNMT=/home/marcinj/Badania/marian 
+</code></pre></div></div>
 
 <p>Next type <code class="highlighter-rouge">make</code>. The included files should provide all input files, model files and scripts to produce our exact submission. You may need to change the number of GPU devices, as the original configs assume three GPUs. In the end you should see the three submission files:</p>
 
-<div class="highlighter-rouge"><pre class="highlight"><code>AMU_ensemble8-mt+src_PRIMARY
+<div class="highlighter-rouge"><div class="highlight"><pre class="highlight"><code>AMU_ensemble8-mt+src_PRIMARY
 AMU_ensemble4-mt_CONTRASTIVE
 AMU_ensemble4-src_CONTRASTIVE
-</code></pre>
-</div>
+</code></pre></div></div>
 
 <p>The configuration file for the best ensemble <code class="highlighter-rouge">models/configs/mtsrc-pe.ensemble.ape.tuned.yml</code> has been included below. It assumes the presence and availability of three GPUs in the line <code class="highlighter-rouge">devices: [0, 1, 2]</code>, you want to change it to one device by <code class="highlighter-rouge">devices: [0]</code>.</p>
 
-<div class="highlighter-rouge"><pre class="highlight"><code># amunn config file
+<div class="highlighter-rouge"><div class="highlight"><pre class="highlight"><code># amunn config file
 
 relative-paths: yes
 
@@ -272,12 +258,11 @@ n-best: no
 
 devices: [0, 1, 2]
 threads-per-device: 1
-</code></pre>
-</div>
+</code></pre></div></div>
 
 <p>In the future we will provide more hints on how to train a similar system. Currently we supply the following files:</p>
 
-<div class="highlighter-rouge"><pre class="highlight"><code>system
+<div class="highlighter-rouge"><div class="highlight"><pre class="highlight"><code>system
 ├── data
 │   ├── de.bpe
 │   ├── en.bpe
@@ -313,8 +298,7 @@ threads-per-device: 1
 └── test
     ├── test.mt
     └── test.src
-</code></pre>
-</div>
+</code></pre></div></div>
 
 <p>where <code class="highlighter-rouge">data</code> contains truecasing models and BPE codes. <code class="highlighter-rouge">models/configs</code> provides the configuration files for <code class="highlighter-rouge">amun</code> to load the model ensembles located in <code class="highlighter-rouge">mt-pe</code> (monolingual model, trained on MT-output and post-editing data) and <code class="highlighter-rouge">src-pe</code> (bilingual model, trained on source and post-editing data). <code class="highlighter-rouge">test</code> contains the blind test set, ground truth and evaluation scripts are again available from the <a href="http://www.statmt.org/wmt16/ape-task.html">shared task page</a>.</p>
 

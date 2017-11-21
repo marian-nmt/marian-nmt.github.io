@@ -55,11 +55,9 @@ permalink: /
 
 </div><!--//cards-->
 
-<!--div class="intro">
-  <p>
-  <a class="twitter-timeline" href="https://twitter.com/AmuNmt">Tweets</a> <script async src="//platform.twitter.com/widgets.js" charset="utf-8"></script>
-  </p>
-</div-->
+<!--
+{% twitter https://twitter.com/marian_nmt maxwidth=500 limit=5 %}
+-->
 
 <h4> Acknowledgements </h4>
 <div class="intro">

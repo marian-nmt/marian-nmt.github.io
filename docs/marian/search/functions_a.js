@@ -1,6 +1,6 @@
 var searchData=
 [
-  ['new',['New',['../namespacemarian.html#afe55543784336e96f224f9d88206d1fb',1,'marian']]],
-  ['next',['next',['../classmarian_1_1data_1_1Corpus.html#a383139a28eb51cc4140e3c97fd0ecebe',1,'marian::data::Corpus']]],
-  ['npzconverter',['NpzConverter',['../classNpzConverter.html#a8f9abbb8916c2e7853887ffa7b8f8b4f',1,'NpzConverter']]]
+  ['ones',['ones',['../classmarian_1_1ExpressionGraph.html#a7fc3b10b10d6ce7db77dcec73ed2d8e9',1,'marian::ExpressionGraph']]],
+  ['operator_28_29',['operator()',['../classmarian_1_1keywords_1_1Keyword.html#a77983b4dba4abfe656d0f5326892c148',1,'marian::keywords::Keyword']]],
+  ['operator_3d',['operator=',['../classmarian_1_1keywords_1_1Keyword.html#ae6065a4a38c4404da0b1f2abc5022fed',1,'marian::keywords::Keyword']]]
 ];

@@ -1,5 +1,5 @@
 var searchData=
 [
-  ['param',['param',['../classmarian_1_1ExpressionGraph.html#afbda84b9c30ce21ba27f2283b6e9db2d',1,'marian::ExpressionGraph']]],
-  ['params',['params',['../classmarian_1_1ExpressionGraph.html#a01122decdd8ff42c1c4ed519fd0222c9',1,'marian::ExpressionGraph']]]
+  ['shape',['shape',['../classmarian_1_1data_1_1Input.html#a990f24befa09e3c55c70cae43ee0cdd5',1,'marian::data::Input']]],
+  ['size',['size',['../classmarian_1_1data_1_1Input.html#a1cb991c51df615c4c2c422d621911c76',1,'marian::data::Input']]]
 ];

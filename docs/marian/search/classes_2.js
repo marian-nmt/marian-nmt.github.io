@@ -1,20 +1,28 @@
 var searchData=
 [
-  ['cell',['cell',['../classmarian_1_1cell.html',1,'marian::cell'],['../classmarian_1_1Cell.html',1,'marian::Cell']]],
-  ['cells',['cells',['../classmarian_1_1cells.html',1,'marian']]],
+  ['c',['C',['../structmarian_1_1functional_1_1C.html',1,'marian::functional']]],
+  ['capture',['Capture',['../structmarian_1_1functional_1_1Capture.html',1,'marian::functional']]],
+  ['cell',['Cell',['../classmarian_1_1rnn_1_1Cell.html',1,'marian::rnn']]],
+  ['cellfactory',['CellFactory',['../classmarian_1_1rnn_1_1CellFactory.html',1,'marian::rnn']]],
+  ['cellinput',['CellInput',['../classmarian_1_1rnn_1_1CellInput.html',1,'marian::rnn']]],
   ['chainable',['Chainable',['../classmarian_1_1Chainable.html',1,'marian']]],
   ['chainable_3c_20tensor_20_3e',['Chainable&lt; Tensor &gt;',['../classmarian_1_1Chainable.html',1,'marian']]],
   ['clipperbase',['ClipperBase',['../classmarian_1_1ClipperBase.html',1,'marian']]],
   ['colsnodeop',['ColsNodeOp',['../structmarian_1_1ColsNodeOp.html',1,'marian']]],
   ['concatenatenodeop',['ConcatenateNodeOp',['../structmarian_1_1ConcatenateNodeOp.html',1,'marian']]],
   ['config',['Config',['../classmarian_1_1Config.html',1,'marian']]],
+  ['configparser',['ConfigParser',['../classmarian_1_1ConfigParser.html',1,'marian']]],
   ['constantnode',['ConstantNode',['../structmarian_1_1ConstantNode.html',1,'marian']]],
+  ['constantshape',['ConstantShape',['../structmarian_1_1gpu_1_1ConstantShape.html',1,'marian::gpu']]],
+  ['constantshape_3c_20gpu_5fshape_5fdims_20_3e',['ConstantShape&lt; GPU_SHAPE_DIMS &gt;',['../structmarian_1_1gpu_1_1ConstantShape.html',1,'marian::gpu']]],
   ['convolution',['Convolution',['../classmarian_1_1Convolution.html',1,'marian']]],
+  ['convolutionop',['ConvolutionOp',['../classmarian_1_1ConvolutionOp.html',1,'marian']]],
+  ['convolutionwrapper',['ConvolutionWrapper',['../classmarian_1_1ConvolutionWrapper.html',1,'marian']]],
   ['corpus',['Corpus',['../classmarian_1_1data_1_1Corpus.html',1,'marian::data']]],
   ['corpusbatch',['CorpusBatch',['../classmarian_1_1data_1_1CorpusBatch.html',1,'marian::data']]],
   ['corpusiterator',['CorpusIterator',['../classmarian_1_1data_1_1CorpusIterator.html',1,'marian::data']]],
-  ['crossentropycost',['CrossEntropyCost',['../classmarian_1_1CrossEntropyCost.html',1,'marian']]],
   ['crossentropynodeop',['CrossEntropyNodeOp',['../structmarian_1_1CrossEntropyNodeOp.html',1,'marian']]],
   ['crossentropyvalidator',['CrossEntropyValidator',['../classmarian_1_1CrossEntropyValidator.html',1,'marian']]],
-  ['csr',['CSR',['../classmarian_1_1sparse_1_1CSR.html',1,'marian::sparse']]]
+  ['csr',['CSR',['../classmarian_1_1sparse_1_1CSR.html',1,'marian::sparse']]],
+  ['cudnnwrapper',['CUDNNWrapper',['../classmarian_1_1CUDNNWrapper.html',1,'marian']]]
 ];

@@ -30,12 +30,12 @@ Available model types:
   multi-source neural translation.
 * `transformer`: A new model based on [_Attention is all you need_, Vaswani et
   al., 2017](https://arxiv.org/abs/1706.03762).
-* `nematus`: Model architecture is equivalent to deep models created by
-  Edinburgh MT group for WMT 2017 with Nematus. This is the only model type
-  supporting models trained with the Nematus toolkit and enabled layer
-  normalization. Can be decoded with the Amun tool as _nematus2_ model type.
 * `amun`: Model architecture is equivalent to the DL4MT models used in Nematus.
   Can be decoded with Amun tool as _nematus_ model type.
+* `nematus`: Model architecture is equivalent to deep models developed by the
+  Edinburgh MT group for WMT 2017 using Nematus toolkit. This is the only model
+  type supporting models trained with the Nematus-style layer normalization.
+  Can be decoded with the Amun tool as _nematus2_ model type.
 * `lm`: An RNN language model.
 
 

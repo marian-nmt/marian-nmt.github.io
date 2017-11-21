@@ -1,6 +1,6 @@
 ---
 layout: docs
-title: Examples & Use cases
+title: Examples
 permalink: /examples/
 icon: fa-cogs
 menu: 4
@@ -46,4 +46,3 @@ menu: 4
   files and training instructions for our models described in [Junczys-Dowmunt
   & Grundkiewicz (2017). An Exploration of Neural Sequence-to-Sequence
   Architectures for Automatic Post-Editing](https://arxiv.org/abs/1706.04138).
-

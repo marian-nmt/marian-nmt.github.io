@@ -38,6 +38,7 @@ introduces Marian's predecessor AmuNMT:
 There's also a bunch of publications that use Marian on our [publications](/publications) page (let us know if you want us to add yours).
 
 ### Translation
+
 {:.question}
 #### Are there recommended settings for translation?
 We found that using length normalization with a penalty term of 0.6 and a beam size of 6 is usually best. This rougly follows the settings by Google from
@@ -63,7 +64,7 @@ It preloads 100 maxi-batches and sorts them according to source sentence length,
 quite a bit. We also added an option to use a length-normalization weight of 0.6 (this usually increases BLEU a bit) and set the working memory to 2500 MB. The
 default working memory is 512 MB and Marian will increase it to match to requirements during translation, but pre-allocating memory makes it usually a bit faster.
 
-To give you an idea, how much faster batched translation is compared to sentence-by-sentence translation we have compiled a few numbers. Proper benchmarks will
+To give you an idea, how much faster batched translation is compared to sentence-by-sentence translation we have collected a few numbers. Proper benchmarks will
 be added soon. Below we have compiled the time it takes to translate the English-German WMT2013 test set with 3000 sentences using 4 Volta GPUs on AWS.
 
 System | Single | Batched

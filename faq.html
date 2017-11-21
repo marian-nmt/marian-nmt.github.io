@@ -37,6 +37,16 @@
   <![endif]-->
 
   
+  <!-- Global site tag (gtag.js) - Google Analytics -->
+<script async src="https://www.googletagmanager.com/gtag/js?id=UA-109819276-1"></script>
+<script>
+    window.dataLayer = window.dataLayer || [];
+    function gtag() { dataLayer.push(arguments); }
+    gtag('js', new Date());
+    gtag('config', 'UA-109819276-1');
+</script>
+
+  
 </head>
 
 
@@ -141,7 +151,7 @@
           </h1>
           <div class="meta">
             <i class="fa fa-clock-o"></i>
-            Last updated: 06 November 2017
+            Last updated: 21 November 2017
           </div>
         </div><!--//doc-header-->
 
@@ -176,8 +186,9 @@ introduces Marian’s predecessor AmuNMT:</p>
 </code></pre></div></div>
 <p>There’s also a bunch of publications that use Marian on our <a href="/publications">publications</a> page (let us know if you want us to add yours).</p>
 
-<h3 class="question" id="translation">Translation</h3>
-<h4 id="are-there-recommended-settings-for-translation">Are there recommended settings for translation?</h4>
+<h3 id="translation">Translation</h3>
+
+<h4 class="question" id="are-there-recommended-settings-for-translation">Are there recommended settings for translation?</h4>
 <p>We found that using length normalization with a penalty term of 0.6 and a beam size of 6 is usually best. This rougly follows the settings by Google from
 their <a href="https://arxiv.org/abs/1706.03762">transformer paper</a>.
 Assuming your model file is <code class="highlighter-rouge">model.npz</code> and your vocabulary is <code class="highlighter-rouge">vocab.src.yml</code> and <code class="highlighter-rouge">vocab.trg.yml</code>,
@@ -198,7 +209,7 @@ It preloads 100 maxi-batches and sorts them according to source sentence length,
 quite a bit. We also added an option to use a length-normalization weight of 0.6 (this usually increases BLEU a bit) and set the working memory to 2500 MB. The
 default working memory is 512 MB and Marian will increase it to match to requirements during translation, but pre-allocating memory makes it usually a bit faster.</p>
 
-<p>To give you an idea, how much faster batched translation is compared to sentence-by-sentence translation we have compiled a few numbers. Proper benchmarks will
+<p>To give you an idea, how much faster batched translation is compared to sentence-by-sentence translation we have collected a few numbers. Proper benchmarks will
 be added soon. Below we have compiled the time it takes to translate the English-German WMT2013 test set with 3000 sentences using 4 Volta GPUs on AWS.</p>
 
 <table>

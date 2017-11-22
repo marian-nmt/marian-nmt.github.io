@@ -7,9 +7,21 @@ menu: 5
 latex: true
 ---
 
-## FAQ
+## Answers
 
 ### General
+
+{:.question}
+#### What is Marian?
+Marian is a pure C++ neural machine translation toolkit. It supports training and translation of a number of popular NMT models. Underneath the NMT API lurkes
+a quite mature deep learning engine with no external dependencies other than boost and Nvidia's CUDA (with optional CUDNN for convolutional networks).
+
+Due to its self-contained nature, it is quite easy to optimize Marian for NMT specific tasks which results in one of the more efficient NMT toolkits available.
+Take a look at the [benchmarks](/features/#benchmarks).
+
+{:.question}
+#### Where can I get Marian?
+Follow the steps in [quick start](/quickstart) to get install Marian from our github repository [https://github.com/marian-nmt/marian](https://github.com/marian-nmt/marian)
 
 {:.question}
 #### Where can I get support?
@@ -64,6 +76,16 @@ The list of contributors so far:
 - Kenneth Heafield, University of Edinburgh
 - Alexandra Birch, University of Edinburgh
 
+{:.question}
+#### What's up with the name?
+Marian has been named in honour of the Polish crypotologist [Marian Rejewski](https://en.wikipedia.org/wiki/Marian_Rejewski)
+who reconstructed the German military Enigma cipher machine in 1932.
+
+[Marcin](https://github.com/emjotde) (the creator of the Marian toolkit) was born in the same Polish city as Marian Rejewski (Bydgoszcz), taught a bit of mathematics at Marian Rejewski's
+secondary school in Bydgoszcz and finally ended up studying mathematics at Adam Mickiewicz University in Poznań, at Marian Rejewski's old faculty.
+
+The name started out as a joke, but was made official later by public demand.
+
 ### Training
 
 {:.question}
@@ -79,26 +101,114 @@ The list of contributors so far:
 #### How do I train a Google-style transformer model?
 
 {:.question}
-#### How do I enable multi-GPU training?
-
-{:.question}
-#### How do I chose mini-batch size, max-length and workspace memory?
-
-{:.question}
 #### How do I train a language model?
 
 {:.question}
 #### How do I train a multi-source model?
 
 {:.question}
-#### How do I use a validation set?
+#### How do I enable multi-GPU training?
+
+You only need to specify the device ids of the GPUs you want to use for training
+(this also works with most other binaries) as `--devices 0 1 2 3` for training
+on four GPUs. There is no automatic detection of GPUs for now.
+
+By default, this will use asynchronous SGD (or rather ADAM). For the deeper models
+and the transformer model, we found async SGD to be unreliable and you may want
+to use a synchronous SGD variant by setting `--sync-sgd`.
+
+For asynchronous SGD, the mini-batch size is used locally, i.e. `--mini-batch 64`
+means 64 sentences per GPU worker.
+
+For synchronous SGD, the mini-batch size is used
+globally and will be divided across the number of workers. This means that for
+synchronous SGD the effective mini-batch can be set N times larger for N GPUs. A
+mini-batch size of `--mini-batch 256` will mean a mini-batch of 64 per worker if
+four GPUs are used. This choice makes sense when you realize that synchronous
+SGD is essentially working like a single GPU training process with N times more
+memory. Larger mini-batches in a synchronous setting result in quite stable
+training.
 
 {:.question}
-#### How long do I need to train my model?
+#### How do I chose mini-batch size, max-length and workspace memory?
+Unfortunately this is quite involved and depends on the type of model, the available
+GPU memory, the number of GPUs, a number of other parameters like the chosen
+optimization algorithm, and the average or maximum sentence length in your
+training corpus (which you should know!).
+
+The options `--workspace 4000` sets the size of the memory available for the forward
+and backward step of the training procedure. This does not include model size and
+optimizer parameters that are allocated outsize workspace. Hence you cannot allocate
+all GPU memory to workspace. If you are not happy with default values this is a trial and error
+process.
+
+Setting `--mini-batch 64 --max-length 100` will generate batches that contain
+always 64 sentences (or less if the corpus is smaller) of up to a length of 100
+tokens. Sentences longer than that are filtered out. Marian will grow workspace memory
+if required and potentially exceed available memory, resulting in a crash. Workspace
+memory is always rounded to multiples of 512 MB.
+
+`--mini-batch-fit` overrides the specified mini-batch size and automatically choses
+the largest mini-batch for a given sentence length that fits the specified memory. When
+`--mini-batch-fit` is set, memory requirements are guaranteed to fit into the specified
+workspace. Choosing a too small workspace will result in small mini-batches which can prohibit
+learning.
+
+##### My rules of thumb:
+
+For shallow models I usually set the working memory to values between 3500 and 6000 (MB),
+e.g. `--workspace 5500` and then use `--mini-batch-fit` which automatically tries to make
+the best use of the specified memory size, mini-batch size and sentence length.
+
+For very deep models, I first set all other parameters like `--max-length 100`, model type, depth etc.
+Next I use `--mini-batch-fit` and try to max out `--workspace` until I get a crash due to insufficient memory. I then
+revert to the last workspace size that did not crash. Since setting `--mini-batch-fit` guarantees that memory
+will not grow during training due to batch-size this should result in a stable training run and maximal batch size.
+
+{:.question}
+#### How do I use a validation set?
+
+Just provide `--valid valid.src valid.trg`. Be default this provide sentence-wise
+normalized cross-entropy scores for the validation set every 10,000 iterations.
+You can change the validation frequency to, say 5000, with `--valid-freq 5000` and
+the display frequency to 500 with `--disp-freq 500`.
+
+**Attention:** the validation set needs to have been preprocessed in exactly the same
+manner as your training data.
+
+{:.question}
+#### What types of validation scores are available?
+Be default we report sentence-wise normalized cross-entropy, but you can specify
+different and more than one metrics, for example `--valid-metrics perplexity ce-mean-words translation`
+which will report word-wise normalized perplexity, word-wise normalized cross-entropy and will
+run in-process translation of the validation set to be scored with an external validation script.
+See [this part of the documentation](/docs/#validation) for more details.
+
+{:.question}
+#### How long do I need to train my models?
+This is a difficult question. What I usually do as a rule of thumb is to use a
+validation set as described above and the default settings for `--early-stopping 10`.
+This means that training will finish if the first specified metric in `--valid-metrics`
+did not improve (stalled) for 10 consecutive validation steps. Usually this will
+signal convergence or --- if the scores get worse with later validation steps ---
+potential overfitting.
 
 {:.question}
 #### What types of regularization are available?
+The numeric values in this answer are only provided as examples.
 
+Depending on the model type, Marian support multiple types of dropout. For
+RNN-based models it supports the `--dropout-rnn 0.2` option which uses
+variational dropout on all RNN inputs and recursive states.
+
+There is also `--dropout-src 0.1` and `--dropout-trg 0.1` which drops out entire
+source and target word positions, respectively. This is an options we found to
+be useful for monolingual settings.
+
+For the transformer model the equivalent of `--dropout-rnn 0.2` is `--transformer-dropout 0.2`.
+
+Apart from dropout, we also provide `--label-smoothing 0.1` as suggested by [Vaswani et
+  al., 2017](https://arxiv.org/abs/1706.03762).
 
 ### Translation
 

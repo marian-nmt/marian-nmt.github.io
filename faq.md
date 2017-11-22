@@ -40,10 +40,8 @@ There's also a bunch of publications that use Marian on our [publications](/publ
 
 {:.question}
 #### Where do you announce updates?
-See [changelog](/changelog) for a curated list of changes and our twitter feed or
-follow us directly on twitter:
-
-<a href="https://twitter.com/marian_nmt?ref_src=twsrc%5Etfw" class="twitter-follow-button" data-show-count="false">Follow @marian_nmt</a><script async src="https://platform.twitter.com/widgets.js" charset="utf-8"></script>
+See [changelog](https://github.com/marian-nmt/marian-dev/blob/master/CHANGELOG.md) for a curated list of changes or
+follow us directly on twitter: <a href="https://twitter.com/marian_nmt?ref_src=twsrc%5Etfw">@marian_nmt</a>
 
 ### Training
 

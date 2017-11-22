@@ -81,12 +81,19 @@ var searchBox = new SearchBox("searchBox", "search",false,'Search');
 <div class="title">Marian tests </div>  </div>
 </div><!--header-->
 <div class="contents">
-<div class="textblock"><p>Unit tests and application tests are enabled with CMake option <code>-DCOMPILE_TESTS=ON</code>.</p>
-<p>We use <a href="https://github.com/philsquared/Catch">Catch framework</a> for unit testing. </p>
+<div class="textblock"><p>Unit tests and application tests are enabled with CMake option <code>-DCOMPILE_TESTS=ON</code>, e.g.: </p>
+<pre class="fragment">cd build
+cmake .. -DCOMPILE_TESTS=ON
+make -j8
+</pre><p>Running all unit tests: </p>
+<pre class="fragment">make test
+</pre><p>Running a single unit test is also possible: </p>
+<pre class="fragment">./src/tests/run_graph_tests
+</pre><p>We use <a href="https://github.com/philsquared/Catch">Catch framework</a> for unit testing. </p>
 </div></div><!-- contents -->
 <!-- start footer part -->
 <hr class="footer"/><address class="footer"><small>
-Generated on Wed Nov 22 2017 16:58:45 for Marian by &#160;<a href="http://www.doxygen.org/index.html">
+Generated on Wed Nov 22 2017 17:20:00 for Marian by &#160;<a href="http://www.doxygen.org/index.html">
 <img class="footer" src="doxygen.png" alt="doxygen"/>
 </a> 1.8.6
 </small></address>

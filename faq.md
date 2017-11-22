@@ -4,6 +4,7 @@ title: FAQ
 permalink: /faq
 icon: fa-life-ring
 menu: 5
+latex: true
 ---
 
 ## FAQ

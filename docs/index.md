@@ -4,6 +4,7 @@ title: Documentation
 permalink: /docs/
 icon: fa-file-code-o
 menu: 3
+latex: true
 ---
 
 ## Tools overview
@@ -302,3 +303,4 @@ The scorer does not support n-best lists as an input yet.
 generated using Doxygen. The newest version can be generated locally with CMake:
 
     mkdir -p build && cd build && cmake .. && make doc
+

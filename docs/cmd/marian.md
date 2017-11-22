@@ -13,6 +13,7 @@ icon: fa-file-code-o
 --log arg                                   Log training process information to file given by  arg
 --log-level arg (=info)                     Set verbosity level of logging (trace - debug - info - warn - err(or) - critical - off)
 --quiet                                     Suppress all logging to stderr. Logging to files still works
+--quiet-translation                         Suppress logging for translation
 --seed arg (=0)                             Seed for all random number generators. 0 means initialize randomly
 --relative-paths                            All paths are relative to the config file location
 --dump-config                               Dump current (modified) configuration to stdout and exit
@@ -111,7 +112,7 @@ icon: fa-file-code-o
 --valid-sets arg                            Paths to validation corpora: source target
 --valid-freq arg (=10000)                   Validate model every  arg  updates
 --valid-metrics arg (=cross-entropy)        Metric to use during validation: cross-entropy, perplexity, valid-script, translation. Multiple metrics can be specified
---valid-mini-batch arg (=64)                Size of mini-batch used during validation
+--valid-mini-batch arg (=32)                Size of mini-batch used during validation
 --valid-max-length arg (=1000)              Maximum length of a sentence in a validating sentence pair
 --valid-script-path arg                     Path to external validation script. It should print a single score to stdout. If the option is used with validating translation, the 
                                             output translation file will be passed as a first argument 
@@ -119,11 +120,10 @@ icon: fa-file-code-o
 --keep-best                                 Keep best model for each validation metric
 --valid-log arg                             Log validation scores to file given by  arg
 --valid-translation-output arg              Path to store the translation
---quiet-translation                         Suppress logging for validating translation
 -b [ --beam-size ] arg (=12)                Beam size used during search with validating translator
 -n [ --normalize ] [=arg(=1)] (=0)          Divide translation score by pow(translation length, arg) 
 --allow-unk                                 Allow unknown words to appear in output
 --n-best                                    Generate n-best list
 ```
 Version: 
-v1.0.0+83f3b35
+v1.1.0+c50994d

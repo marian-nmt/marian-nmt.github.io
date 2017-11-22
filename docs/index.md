@@ -7,15 +7,14 @@ menu: 3
 latex: true
 ---
 
-## Tools overview
-
+## Overview and command-line options
 Marian toolkit provides the following tools:
 
-* `marian`: for training models of all types
-* `marian-decoder`: for GPU translation with models of all types
-* `marian-server`: the web-socket server providing GPU translation
-* `marian-scorer`: the rescoring tool
-* `amun`: for CPU and GPU translation with Amun and certain Nematus models
+* [marian](/docs/cmd/marian): for training models of all types
+* [marian-decoder](/docs/cmd/marian-decoder): for GPU translation with models of all types
+* [marian-server](/docs/cmd/marian-server): a web-socket server providing GPU translation
+* [marian-scorer](/docs/cmd/marian-scorer): a tool for rescoring
+* [amun](/docs/cmd/amun): for CPU and GPU translation with Amun and certain Nematus models
 
 ### Model types
 
@@ -286,21 +285,9 @@ the end.
 The scorer does not support n-best lists as an input yet.
 
 
-
-## Command-line options
-
-* [marian](/docs/cmd/marian)
-* [marian-decoder](/docs/cmd/marian-decoder)
-* [marian-server](/docs/cmd/marian-server)
-* [marian-scorer](/docs/cmd/marian-scorer)
-* [amun](/docs/cmd/amun)
-
-
-
 ## Code documentation
 
 [The code documentation for Marian toolkit](/docs/marian/classes.html) is
 generated using Doxygen. The newest version can be generated locally with CMake:
 
     mkdir -p build && cd build && cmake .. && make doc
-

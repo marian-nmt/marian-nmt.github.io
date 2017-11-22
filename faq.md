@@ -91,7 +91,7 @@ The list of contributors so far:
 #### How do I train a multi-source model?
 
 {:.question}
-#### How do I set a validation set?
+#### How do I use a validation set?
 
 {:.question}
 #### How long do I need to train my model?
@@ -141,7 +141,7 @@ Yes. Just use `--n-best` and the set `--beam-size 6` for an n-best list size of 
 ### Scoring
 
 {:.question}
-#### How can I calculate the perplexity of a test set
+#### How can I calculate the perplexity of a test set?
 Assuming your model file is `model.npz` and your vocabulary is `vocab.src.yml` and `vocab.trg.yml` and
 your test set files are `test.src` and `test.trg` use the following command:
 

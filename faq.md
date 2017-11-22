@@ -41,7 +41,28 @@ There's also a bunch of publications that use Marian on our [publications](/publ
 {:.question}
 #### Where do you announce updates?
 See [changelog](https://github.com/marian-nmt/marian-dev/blob/master/CHANGELOG.md) for a curated list of changes or
-follow us directly on twitter: <a href="https://twitter.com/marian_nmt?ref_src=twsrc%5Etfw">@marian_nmt</a>
+follow us directly on twitter <a href="https://twitter.com/marian_nmt?ref_src=twsrc%5Etfw">@marian_nmt</a> for highlights.
+
+{:.question}
+#### Who is responsible for Marian?
+See the list of [**marian-dev** contributors](https://github.com/marian-nmt/marian-dev/graphs/contributors) and [**marian** contributors](https://github.com/marian-nmt/marian/graphs/contributors).
+As [**marian-dev**](https://github.com/marian-nmt/marian-dev) is our bleeding-edge development repository the main work on **marian** is happening there.
+The [**marian**](https://github.com/marian-nmt/marian) repository is then updated with new versions.
+
+Apart from that [**marian**](https://github.com/marian-nmt/marian) still contains code for **amun** our hand-written NMT decoder.
+Contributions listed for that repository are mostly to **amun**.
+
+The list of contributors so far:
+
+- Marcin Junczys-Dowmunt, formerly Adam Mickiewicz University in Poznań and University of Edinburgh
+- Roman Grundkiewicz, University of Edinburgh and Adam Mickiewicz University in Poznań
+- Hieu Hoang
+- Tomasz Dwojak, Adam Mickiewicz University in Poznań, formerly University of Edinburgh
+- Ulrich German, University of Edinburgh
+- Alham Aji, University of Edinburgh
+- Nikolay Bogoychev, University of Edinburgh
+- Kenneth Heafield, University of Edinburgh
+- Alexandra Birch, University of Edinburgh
 
 ### Training
 
@@ -104,6 +125,43 @@ translation speed (roughly by a factor of 10 or more). See [this documentation s
 Yes, and you can even ensemble models of different types, for instance an Edinburgh-style deep RNN model and a Google Transformer model, or you can a
 language model to the mix. See [here](/docs/#model-ensembling) for details.
 
+{:.question}
+#### Are there options to deal with placeholders or XML-tags?
+No. This is a difficult issue for neural machine translation and we did not have the man power or motivation yet to deal with this.
+
+{:.question}
+#### Can I access the attention weights?
+Yes and no. `amun` has options for this, but is restricted to a specific model type. `marian-decoder` does not provide this options yet,
+but we are open to adding it if there is demand.
+
+{:.question}
+#### Can I generate n-best lists?
+Yes. Just use `--n-best` and the set `--beam-size 6` for an n-best list size of 6.
+
+### Scoring
+
+{:.question}
+#### How can I calculate the perplexity of a test set
+Assuming your model file is `model.npz` and your vocabulary is `vocab.src.yml` and `vocab.trg.yml` and
+your test set files are `test.src` and `test.trg` use the following command:
+
+```
+./marian-scorer -m model.npz -v vocab.src.yml vocab.trg.yml -t test.src test.trg --summary=perplexity
+```
+
+If your model had a different number of inputs (only one for a language model or three for a dual-source model)
+you need to provide all the correct number of vocabularies and test set files in corresponding order.
+
+Omitting the `--summary` option will print sentence-wise negative log probabilities.
+
+{:.question}
+#### Are Moses-style n-best lists supported?
+Not yet. If you want to use the rescorer for for n-best list rescoring you need to extract the sentences to a
+plain text file. If the model is a translation model you also need to create a source file that has the correct
+source sentences in the right order and number, i.e. you need to repeat the source sentence as many times as there
+are entries in the corresponding n-best list.
+
+
 <!--
 ### Training
 
@@ -116,27 +174,4 @@ Transformer 12-layers ([Ramachandran et al. 2017](https://arxiv.org/pdf/1710.059
 **Marian Edinburgh Deep RNN** (epoch 9) | 24.8* | 24.9 | 28.4 | 32.7
 **Marian Edinburgh Deep RNN** (epoch 16) | 25.0* | 25.2 | 28.4 | 32.6
 
-{:.question}
-#### First question
-
-Lorem ipsum dolor sit amet, consectetuer adipiscing elit. Aenean commodo ligula eget dolor. Aenean massa.
-
-{:.question}
-#### Second question has _special_, **special**, `special` text
-
-Lorem ipsum dolor sit amet, consectetuer adipiscing elit. Aenean commodo ligula eget dolor. Aenean massa.
-Lorem ipsum dolor sit amet, consectetuer adipiscing elit. Aenean commodo ligula eget dolor. Aenean massa.
-Lorem ipsum dolor sit amet, consectetuer adipiscing elit. Aenean commodo ligula eget dolor. Aenean massa.
-
-### Decoding
-
-{:.question}
-#### Third question is a very very very very very very very very long
-
-Lorem ipsum dolor sit amet, consectetuer adipiscing elit. Aenean commodo ligula eget dolor. Aenean massa.
-
-{:.question}
-#### Last question
-
-Lorem ipsum dolor sit amet, consectetuer adipiscing elit. Aenean commodo ligula eget dolor. Aenean massa.
 -->

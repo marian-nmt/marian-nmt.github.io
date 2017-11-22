@@ -4,17 +4,17 @@ title: Documentation
 permalink: /docs/
 icon: fa-file-code-o
 menu: 3
+latex: true
 ---
 
-## Tools overview
+## Overview and command-line options
+Marian toolkit provides the following tools (click on the name for a list of command line options):
 
-Marian toolkit provides the following tools:
-
-* `marian`: for training models of all types
-* `marian-decoder`: for GPU translation with models of all types
-* `marian-server`: the web-socket server providing GPU translation
-* `marian-scorer`: the rescoring tool
-* `amun`: for CPU and GPU translation with Amun and certain Nematus models
+* [marian](/docs/cmd/marian): for training models of all types
+* [marian-decoder](/docs/cmd/marian-decoder): for GPU translation with models of all types
+* [marian-server](/docs/cmd/marian-server): a web-socket server providing GPU translation
+* [marian-scorer](/docs/cmd/marian-scorer): a tool for rescoring
+* [amun](/docs/cmd/amun): for CPU and GPU translation with Amun and certain Nematus models
 
 ### Model types
 
@@ -30,12 +30,12 @@ Available model types:
   multi-source neural translation.
 * `transformer`: A new model based on [_Attention is all you need_, Vaswani et
   al., 2017](https://arxiv.org/abs/1706.03762).
-* `nematus`: Model architecture is equivalent to deep models created by
-  Edinburgh MT group for WMT 2017 with Nematus. This is the only model type
-  supporting models trained with the Nematus toolkit and enabled layer
-  normalization. Can be decoded with the Amun tool as _nematus2_ model type.
 * `amun`: Model architecture is equivalent to the DL4MT models used in Nematus.
   Can be decoded with Amun tool as _nematus_ model type.
+* `nematus`: Model architecture is equivalent to deep models developed by the
+  Edinburgh MT group for WMT 2017 using Nematus toolkit. This is the only model
+  type supporting models trained with the Nematus-style layer normalization.
+  Can be decoded with the Amun tool as _nematus2_ model type.
 * `lm`: An RNN language model.
 
 
@@ -141,12 +141,12 @@ Decay factor for learning rate can be specified with `--lr-decay`.
 
 All model types can be decoded with `marian-decoder` and `marian-server`
 command.  Only models of type Amun and certain models of type Nematus can be
-used with `amun` command.
+used with the `amun` command line tool.
 
 ### Marian decoder
 
-Currently, `marian-decoder` supports only translation on GPU. The CPU version
-of Marian is upcoming.
+Currently, `marian-decoder` supports only translation on GPUs. A CPU version
+of Marian is planned.
 
 Basic usage:
 
@@ -159,8 +159,57 @@ vocabularies:
 
     ./build/marian-decoder \
         --models model1.npz model2.npz model3.npz \
-        --weights 1.0 1.0 1.0 \
+        --weights 0.6 0.2 0.2 \
         --vocabs vocab.en vocab.ro < input.txt
+
+Weights are optional and set to 1.0 by default if ommitted.
+
+#### Recommended settings for translation
+
+We found that using length normalization with a penalty term of 0.6 and a beam
+size of 6 is usually best. This rougly follows the settings by Google from
+their [transformer paper](https://arxiv.org/abs/1706.03762).  Assuming your
+model file is `model.npz` and your vocabulary is `vocab.src.yml` and
+`vocab.trg.yml`, we recommend to use the following options:
+
+```
+./marian-decoder -m model.npz -v vocab.src.yml vocab.trg.yml -b 6 --normalize=0.6
+```
+
+#### Batched translation
+
+This a feature introduced in Marian v1.1.0. Batched translation generates
+translation for whole mini-batches and significantly increases translation
+speed (roughly by a factor of 10 or more). Assuming your model file is
+`model.npz` and your vocabulary is `vocab.src.yml` and `vocab.trg.yml`, we
+recommend to use the following options to enable batched translation:
+
+```
+./marian-decoder -m model.npz -v vocab.src.yml vocab.trg.yml -b 6 --normalize=0.6 --mini-batch 64 --maxi-batch-sort src --maxi-batch 100 -w 2500
+```
+
+This does a number of things: firstly, it enables translation with a mini-batch
+size of 64, i.e. translating 64 sentences at once, with a beam-size of 6; It
+preloads 100 maxi-batches and sorts them according to source sentence length,
+this allows for better packing of the batch and increases translation speed
+quite a bit. We also added an option to use a length-normalization weight of
+0.6 (this usually increases BLEU a bit) and set the working memory to 2500 MB.
+The default working memory is 512 MB and Marian will increase it to match to
+requirements during translation, but pre-allocating memory makes it usually a
+bit faster.
+
+To give you an idea, how much faster batched translation is compared to
+sentence-by-sentence translation we have collected a few numbers. Proper
+benchmarks will be added soon. Below we have compiled the time it takes to
+translate the English-German WMT2013 test set with 3000 sentences using 4 Volta
+GPUs on AWS.
+
+System | Single | Batched |
+-----------|-------:|---------:|
+Nematus-style Shallow RNN | 82.7s | 4.3s |
+Nematus-style Deep RNN | 148.5s | 5.9s |
+Google Transformer | 201.9s | 19.2s |
+{: .table .table-bordered .table-striped }
 
 #### Models trained with Nematus
 
@@ -236,21 +285,9 @@ the end.
 The scorer does not support n-best lists as an input yet.
 
 
-
-## Command-line options
-
-* [marian](/docs/cmd/marian)
-* [marian-decoder](/docs/cmd/marian-decoder)
-* [marian-server](/docs/cmd/marian-server)
-* [marian-scorer](/docs/cmd/marian-scorer)
-* [amun](/docs/cmd/amun)
-
-
-
 ## Code documentation
 
 [The code documentation for Marian toolkit](/docs/marian/classes.html) is
 generated using Doxygen. The newest version can be generated locally with CMake:
 
     mkdir -p build && cd build && cmake .. && make doc
-

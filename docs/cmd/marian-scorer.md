@@ -13,6 +13,7 @@ icon: fa-file-code-o
 --log arg                               Log training process information to file given by  arg
 --log-level arg (=info)                 Set verbosity level of logging (trace - debug - info - warn - err(or) - critical - off)
 --quiet                                 Suppress all logging to stderr. Logging to files still works
+--quiet-translation                     Suppress logging for translation
 --seed arg (=0)                         Seed for all random number generators. 0 means initialize randomly
 --relative-paths                        All paths are relative to the config file location
 --dump-config                           Dump current (modified) configuration to stdout and exit
@@ -64,4 +65,4 @@ icon: fa-file-code-o
 --maxi-batch arg (=100)                 Number of batches to preload for length-based sorting
 ```
 Version: 
-v1.0.0+83f3b35
+v1.1.0+c50994d

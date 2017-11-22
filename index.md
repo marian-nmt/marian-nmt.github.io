@@ -4,7 +4,6 @@ title: Home
 permalink: /
 ---
 
-<!--h2 class="title">Welcome to {{ site.title }}!</h2-->
 <div class="intro">
   <p>
   <b>Marian</b> is an efficient Neural Machine Translation framework written
@@ -31,9 +30,13 @@ permalink: /
   </p>
 
   <div class="cta-container">
-    <a class="btn btn-primary btn-cta btn-blue" href="{{ site.github }}/marian" target="_blank">
+    <a class="btn btn-primary btn-cta btn-blue" style="width: 220px; margin-right: 20px" href="{{ site.github }}/marian" target="_blank">
       <i class="fa fa-github"></i>
       Download from GitHub
+    </a>
+    <a class="btn btn-primary btn-cta btn-blue" style="width: 220px" href="https://twitter.com/marian_nmt?ref_src=twsrc%5Etfw" target="_blank">
+      <i class="fa fa-twitter"></i>
+      Follow Marian on Twitter
     </a>
   </div><!--//cta-container-->
 </div><!--//intro-->
@@ -55,17 +58,11 @@ permalink: /
 
 </div><!--//cards-->
 
-<!--div class="intro">
-  <p>
-  <a class="twitter-timeline" href="https://twitter.com/AmuNmt">Tweets</a> <script async src="//platform.twitter.com/widgets.js" charset="utf-8"></script>
-  </p>
-</div-->
-
 <h4> Acknowledgements </h4>
 <div class="intro">
   <p>
 The development of Marian received funding from the European Union's Horizon 2020
-Research and Innovation Programme under grant agreements 
+Research and Innovation Programme under grant agreements
 688139 (<a href="http://www.summa-project.eu">SUMMA</a>; 2016-2019),
 645487 (<a href="http://www.modernmt.eu">Modern MT</a>; 2015-2017), and
 644333 (<a href="http://tramooc.eu/">TraMOOC</a>; 2015-2017),

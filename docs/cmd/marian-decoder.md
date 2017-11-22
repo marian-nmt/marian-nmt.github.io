@@ -13,6 +13,7 @@ icon: fa-file-code-o
 --log arg                               Log training process information to file given by  arg
 --log-level arg (=info)                 Set verbosity level of logging (trace - debug - info - warn - err(or) - critical - off)
 --quiet                                 Suppress all logging to stderr. Logging to files still works
+--quiet-translation                     Suppress logging for translation
 --seed arg (=0)                         Seed for all random number generators. 0 means initialize randomly
 --relative-paths                        All paths are relative to the config file location
 --dump-config                           Dump current (modified) configuration to stdout and exit
@@ -60,9 +61,10 @@ icon: fa-file-code-o
 -d [ --devices ] arg (=0)               GPUs to use for translating
 --mini-batch arg (=1)                   Size of mini-batch used during update
 --maxi-batch arg (=1)                   Number of batches to preload for length-based sorting
+--maxi-batch-sort arg (=none)           Sorting strategy for maxi-batch: none (default) src
 --n-best                                Display n-best list
 --weights arg                           Scorer weights
 -p [ --port ] arg (=8080)               Port number for web socket server
 ```
 Version: 
-v1.0.0+83f3b35
+v1.1.0+c50994d

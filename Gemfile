@@ -13,9 +13,11 @@ ruby RUBY_VERSION
 gem "jekyll"
 gem "jekyll-scholar"
 gem "jekyll-last-modified-at"
+gem "jekyll-twitter-plugin"
 
 gem "git-up"
 
 gem "less"
 gem "therubyracer"
 gem "json"
+gem "unicode"

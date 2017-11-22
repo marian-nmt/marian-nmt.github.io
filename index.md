@@ -4,10 +4,6 @@ title: Home
 permalink: /
 ---
 
-<!--h2 class="title">Welcome to {{ site.title }}!</h2-->
-<!--div style="position: absolute; left: 50px;">
-{% twitter https://twitter.com/marian_nmt maxwidth=500 height=1000 limit=5 %}
-</div-->
 <div class="intro">
   <p>
   <b>Marian</b> is an efficient Neural Machine Translation framework written
@@ -34,9 +30,13 @@ permalink: /
   </p>
 
   <div class="cta-container">
-    <a class="btn btn-primary btn-cta btn-blue" href="{{ site.github }}/marian" target="_blank">
+    <a class="btn btn-primary btn-cta btn-blue" style="width: 220px; margin-right: 20px" href="{{ site.github }}/marian" target="_blank">
       <i class="fa fa-github"></i>
       Download from GitHub
+    </a>
+    <a class="btn btn-primary btn-cta btn-blue" style="width: 220px" href="https://twitter.com/marian_nmt?ref_src=twsrc%5Etfw" target="_blank">
+      <i class="fa fa-twitter"></i>
+      Follow Marian on Twitter
     </a>
   </div><!--//cta-container-->
 </div><!--//intro-->

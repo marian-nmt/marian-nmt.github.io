@@ -8,7 +8,7 @@ latex: true
 ---
 
 ## Overview and command-line options
-Marian toolkit provides the following tools:
+Marian toolkit provides the following tools (click on the name for a list of command line options):
 
 * [marian](/docs/cmd/marian): for training models of all types
 * [marian-decoder](/docs/cmd/marian-decoder): for GPU translation with models of all types

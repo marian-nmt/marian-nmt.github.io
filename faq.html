@@ -158,7 +158,7 @@
           </h1>
           <div class="meta">
             <i class="fa fa-clock-o"></i>
-            Last updated: 22 November 2017
+            Last updated: 24 November 2017
           </div>
         </div><!--//doc-header-->
 
@@ -244,14 +244,6 @@ secondary school in Bydgoszcz and finally ended up studying mathematics at Adam 
 <h4 class="question" id="what-model-types-are-currently-available">What model types are currently available?</h4>
 
 <h4 class="question" id="what-are-recommended-training-settings">What are recommended training settings?</h4>
-
-<h4 class="question" id="how-do-i-train-a-model-like-in-edinburghs-wmt2017-submission">How do I train a model like in Edinburgh’s WMT2017 submission?</h4>
-
-<h4 class="question" id="how-do-i-train-a-google-style-transformer-model">How do I train a Google-style transformer model?</h4>
-
-<h4 class="question" id="how-do-i-train-a-language-model">How do I train a language model?</h4>
-
-<h4 class="question" id="how-do-i-train-a-multi-source-model">How do I train a multi-source model?</h4>
 
 <h4 class="question" id="how-do-i-enable-multi-gpu-training">How do I enable multi-GPU training?</h4>
 
@@ -350,6 +342,62 @@ be useful for monolingual settings.</p>
 
 <p>Apart from dropout, we also provide <code class="highlighter-rouge">--label-smoothing 0.1</code> as suggested by <a href="https://arxiv.org/abs/1706.03762">Vaswani et
   al., 2017</a>.</p>
+
+<h4 class="question" id="how-do-i-train-a-google-style-transformer-model">How do I train a Google-style transformer model?</h4>
+
+<p>Please take a look at our <a href="https://github.com/marian-nmt/marian-examples/blob/master/transformer/README.md">transformer example</a>.
+Files and scripts in this folder show how to train a Google-style transformer model
+<a href="https://arxiv.org/abs/1706.03762">Vaswani et al, 2017</a> on WMT-17 (?) English-German data.
+The problem-set has been adapted from the original tensor2tensor repository by Google.
+We reuse their 36,000 common BPE subword units for both languages.
+No back-translationed data was added.</p>
+
+<p>The memory setting was adapted for a 12GB Titan X. If you are using GPUs with more
+RAM, e.g. a Volta with 16GB, you can set <code class="highlighter-rouge">-w 13000</code> instead of <code class="highlighter-rouge">-w 7000</code>. If you train models
+for ensembling remember to change the seed between training runs to initialize
+models differently.</p>
+
+<h4 class="question" id="how-do-i-train-a-model-like-in-edinburghs-wmt2017-submission">How do I train a model like in Edinburgh’s WMT2017 submission?</h4>
+
+<p>Re-using the transformer example from above, you can train a model similar to
+<a href="http://www.statmt.org/wmt17/pdf/WMT39.pdf">Edinburgh’s WMT2017 submission</a> with the following settings:</p>
+
+<div class="highlighter-rouge"><pre class="highlight"><code>../build/marian \
+    --model model/model.npz --type s2s \
+    --train-sets data/corpus.bpe.en data/corpus.bpe.de \
+    --max-length 100 \
+    --vocabs model/vocab.ende.yml model/vocab.ende.yml \
+    --mini-batch-fit -w 7000 --maxi-batch 1000 \
+    --early-stopping 10 \
+    --beam-size 6 --normalize 0.6 \
+    --log model/train.log --valid-log model/valid.log \
+    --enc-type bidirectional --enc-depth 1 --enc-cell-depth 4 \
+    --dec-depth 1 --dec-cell-base-depth 8 --dec-cell-high-depth 1 \
+    --tied-embeddings-all --layer-normalization \
+    --dropout-rnn 0.1 --label-smoothing 0.1 \
+    --learn-rate 0.0003 --lr-warmup 16000 --lr-decay-inv-sqrt 16000 --lr-report \
+    --optimizer-params 0.9 0.98 1e-09 --clip-norm 5 \
+    --tied-embeddings-all \
+    --devices $GPUS --sync-sgd --seed 1111 \
+    --valid-freq 5000 --save-freq 5000 --disp-freq 500 \
+    --valid-metrics cross-entropy perplexity translation \
+    --valid-sets data/valid.bpe.en data/valid.bpe.de \
+    --valid-script-path ./scripts/validate.sh \
+    --valid-translation-output data/valid.bpe.en.output --quiet-translation \
+    --valid-mini-batch 64
+</code></pre>
+</div>
+
+<p>The variable $GPUS would hold the GPU ids, for instance GPUS=”0 1 2 3”. As before
+you can increase the workspace if more GPU RAM is available. If you train models
+for ensembling remember to change the seed between training runs to initialize
+models differently.</p>
+
+<p>We will add an example to our examples repository.</p>
+
+<h4 class="question" id="how-do-i-train-a-language-model">How do I train a language model?</h4>
+
+<h4 class="question" id="how-do-i-train-a-multi-source-model">How do I train a multi-source model?</h4>
 
 <h3 id="translation">Translation</h3>
 

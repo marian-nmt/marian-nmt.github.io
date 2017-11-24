@@ -95,18 +95,6 @@ The name started out as a joke, but was made official later by public demand.
 #### What are recommended training settings?
 
 {:.question}
-#### How do I train a model like in Edinburgh's WMT2017 submission?
-
-{:.question}
-#### How do I train a Google-style transformer model?
-
-{:.question}
-#### How do I train a language model?
-
-{:.question}
-#### How do I train a multi-source model?
-
-{:.question}
 #### How do I enable multi-GPU training?
 
 You only need to specify the device ids of the GPUs you want to use for training
@@ -209,6 +197,67 @@ For the transformer model the equivalent of `--dropout-rnn 0.2` is `--transforme
 
 Apart from dropout, we also provide `--label-smoothing 0.1` as suggested by [Vaswani et
   al., 2017](https://arxiv.org/abs/1706.03762).
+
+{:.question}
+#### How do I train a Google-style transformer model?
+
+Please take a look at our [transformer example](https://github.com/marian-nmt/marian-examples/blob/master/transformer/README.md).
+Files and scripts in this folder show how to train a Google-style transformer model
+[Vaswani et al, 2017](https://arxiv.org/abs/1706.03762) on WMT-17 (?) English-German data.
+The problem-set has been adapted from the original tensor2tensor repository by Google.
+We reuse their 36,000 common BPE subword units for both languages.
+No back-translationed data was added.
+
+The memory setting was adapted for a 12GB Titan X. If you are using GPUs with more
+RAM, e.g. a Volta with 16GB, you can set `-w 13000` instead of `-w 7000`. If you train models
+for ensembling remember to change the seed between training runs to initialize
+models differently.
+
+{:.question}
+#### How do I train a model like in Edinburgh's WMT2017 submission?
+
+Re-using the transformer example from above, you can train a model similar to
+[Edinburgh's WMT2017 submission](http://www.statmt.org/wmt17/pdf/WMT39.pdf) with the following settings:
+
+```
+../build/marian \
+    --model model/model.npz --type s2s \
+    --train-sets data/corpus.bpe.en data/corpus.bpe.de \
+    --max-length 100 \
+    --vocabs model/vocab.ende.yml model/vocab.ende.yml \
+    --mini-batch-fit -w 7000 --maxi-batch 1000 \
+    --early-stopping 10 \
+    --beam-size 6 --normalize 0.6 \
+    --log model/train.log --valid-log model/valid.log \
+    --enc-type bidirectional --enc-depth 1 --enc-cell-depth 4 \
+    --dec-depth 1 --dec-cell-base-depth 8 --dec-cell-high-depth 1 \
+    --tied-embeddings-all --layer-normalization \
+    --dropout-rnn 0.1 --label-smoothing 0.1 \
+    --learn-rate 0.0003 --lr-warmup 16000 --lr-decay-inv-sqrt 16000 --lr-report \
+    --optimizer-params 0.9 0.98 1e-09 --clip-norm 5 \
+    --tied-embeddings-all \
+    --devices $GPUS --sync-sgd --seed 1111 \
+    --valid-freq 5000 --save-freq 5000 --disp-freq 500 \
+    --valid-metrics cross-entropy perplexity translation \
+    --valid-sets data/valid.bpe.en data/valid.bpe.de \
+    --valid-script-path ./scripts/validate.sh \
+    --valid-translation-output data/valid.bpe.en.output --quiet-translation \
+    --valid-mini-batch 64
+```
+
+The variable $GPUS would hold the GPU ids, for instance GPUS="0 1 2 3". As before
+you can increase the workspace if more GPU RAM is available. If you train models
+for ensembling remember to change the seed between training runs to initialize
+models differently.
+
+We will add an example to our examples repository.
+
+{:.question}
+#### How do I train a language model?
+
+{:.question}
+#### How do I train a multi-source model?
+
 
 ### Translation
 

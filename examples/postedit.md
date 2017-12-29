@@ -23,7 +23,7 @@ This page provides data and model files for our shared task winning APE system d
 
 
 ## Artificially created data
-[Download the training data](http://odkrywka.wmi.amu.edu.pl/static/data/ape/data.tgz) (514M)
+[Download the training data](http://data.statmt.org/romang/ape-wmt16/data.tgz) (514M)
 
 This file contains the artificially generated post-editing triplets described in Table 1 of the paper. "4M" is the larger set denoted as "round-trip.n10" in that table, 500K is the smaller set denoted as "round-trip.n1". The 20 times oversampled original training data for the shared task is not included, but can be obtained from the original [shared task page](http://www.statmt.org/wmt16/ape-task.html).
 
@@ -38,7 +38,7 @@ This file contains the artificially generated post-editing triplets described in
         └── 500K.src
 
 ## Models and config files
-[Download the systems](http://odkrywka.wmi.amu.edu.pl/static/data/ape/system.tgz) (2.7G)
+[Download the systems](http://data.statmt.org/romang/ape-wmt16/system.tgz) (2.7G)
 
 We also provide the complete primary system and two contrastive variants. To create the submitted output, locate the ```Makefile``` and provide the path to the main directory of your working Marian tool (latest master, see [Readme](https://github.com/marian-nmt/marian/blob/master/README.md)) in the following line:
 

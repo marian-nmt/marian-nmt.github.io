@@ -190,7 +190,7 @@ You can send questions to the group by e-mail: <code class="highlighter-rouge">m
 <h4 class="question" id="how-should-i-cite-marian">How should I cite Marian?</h4>
 <p>Currently there is no proper publication for Marian yet (we are working on it!). For the moment please cite the following publication which
 introduces Marian’s predecessor AmuNMT:</p>
-<div class="highlighter-rouge"><pre class="highlight"><code>@InProceedings{junczys2016neural,
+<div class="highlighter-rouge"><div class="highlight"><pre class="highlight"><code>@InProceedings{junczys2016neural,
   title     = {Is Neural Machine Translation Ready for Deployment? A Case Study
                on 30 Translation Directions},
   author    = {Junczys-Dowmunt, Marcin and Dwojak, Tomasz and Hoang, Hieu},
@@ -200,8 +200,7 @@ introduces Marian’s predecessor AmuNMT:</p>
   address   = {Seattle, WA},
   url       = {http://workshop2016.iwslt.org/downloads/IWSLT_2016_paper_4.pdf}
 }
-</code></pre>
-</div>
+</code></pre></div></div>
 <p>There’s also a bunch of publications that use Marian on our <a href="/publications">publications</a> page (let us know if you want us to add yours).</p>
 
 <h4 class="question" id="where-do-you-announce-updates">Where do you announce updates?</h4>
@@ -362,7 +361,7 @@ models differently.</p>
 <p>Re-using the transformer example from above, you can train a model similar to
 <a href="http://www.statmt.org/wmt17/pdf/WMT39.pdf">Edinburgh’s WMT2017 submission</a> with the following settings:</p>
 
-<div class="highlighter-rouge"><pre class="highlight"><code>../build/marian \
+<div class="highlighter-rouge"><div class="highlight"><pre class="highlight"><code>../build/marian \
     --model model/model.npz --type s2s \
     --train-sets data/corpus.bpe.en data/corpus.bpe.de \
     --max-length 100 \
@@ -385,8 +384,7 @@ models differently.</p>
     --valid-script-path ./scripts/validate.sh \
     --valid-translation-output data/valid.bpe.en.output --quiet-translation \
     --valid-mini-batch 64
-</code></pre>
-</div>
+</code></pre></div></div>
 
 <p>The variable $GPUS would hold the GPU ids, for instance GPUS=”0 1 2 3”. As before
 you can increase the workspace if more GPU RAM is available. If you train models
@@ -407,9 +405,8 @@ their <a href="https://arxiv.org/abs/1706.03762">transformer paper</a>.
 Assuming your model file is <code class="highlighter-rouge">model.npz</code> and your vocabulary is <code class="highlighter-rouge">vocab.src.yml</code> and <code class="highlighter-rouge">vocab.trg.yml</code>,
 we recommend to use the following options:</p>
 
-<div class="highlighter-rouge"><pre class="highlight"><code>./marian-decoder -m model.npz -v vocab.src.yml vocab.trg.yml -b 6 --normalize=0.6
-</code></pre>
-</div>
+<div class="highlighter-rouge"><div class="highlight"><pre class="highlight"><code>./marian-decoder -m model.npz -v vocab.src.yml vocab.trg.yml -b 6 --normalize=0.6
+</code></pre></div></div>
 
 <h4 class="question" id="does-marian-support-batched-translation">Does Marian support batched translation?</h4>
 
@@ -437,9 +434,8 @@ but we are open to adding it if there is demand.</p>
 <p>Assuming your model file is <code class="highlighter-rouge">model.npz</code> and your vocabulary is <code class="highlighter-rouge">vocab.src.yml</code> and <code class="highlighter-rouge">vocab.trg.yml</code> and
 your test set files are <code class="highlighter-rouge">test.src</code> and <code class="highlighter-rouge">test.trg</code> use the following command:</p>
 
-<div class="highlighter-rouge"><pre class="highlight"><code>./marian-scorer -m model.npz -v vocab.src.yml vocab.trg.yml -t test.src test.trg --summary=perplexity
-</code></pre>
-</div>
+<div class="highlighter-rouge"><div class="highlight"><pre class="highlight"><code>./marian-scorer -m model.npz -v vocab.src.yml vocab.trg.yml -t test.src test.trg --summary=perplexity
+</code></pre></div></div>
 
 <p>If your model had a different number of inputs (only one for a language model or three for a dual-source model)
 you need to provide all the correct number of vocabularies and test set files in corresponding order.</p>

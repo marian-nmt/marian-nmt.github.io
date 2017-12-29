@@ -208,31 +208,28 @@ Assuming <code class="highlighter-rouge">corpus.en</code> and <code class="highl
 of a English-Romanian parallel corpus, the following command will create a
 Nematus-compatible neural machine translation model:</p>
 
-<div class="highlighter-rouge"><pre class="highlight"><code>./build/marian \
+<div class="highlighter-rouge"><div class="highlight"><pre class="highlight"><code>./build/marian \
     --train-sets corpus.en corpus.ro \
     --vocabs vocab.en vocab.ro \
     --model model.npz
-</code></pre>
-</div>
+</code></pre></div></div>
 
 <p>Training settings can be provided in the configuration file:</p>
 
-<div class="language-yaml highlighter-rouge"><pre class="highlight"><code><span class="c1"># config.yml</span>
-<span class="s">train-sets</span><span class="pi">:</span>
+<div class="language-yaml highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="c1"># config.yml</span>
+<span class="na">train-sets</span><span class="pi">:</span>
   <span class="pi">-</span> <span class="s">corpus.en</span>
   <span class="pi">-</span> <span class="s">corpus.ro</span>
-<span class="s">vocabs</span><span class="pi">:</span>
+<span class="na">vocabs</span><span class="pi">:</span>
   <span class="pi">-</span> <span class="s">vocab.en</span>
   <span class="pi">-</span> <span class="s">vocab.ro</span>
-<span class="s">model</span><span class="pi">:</span> <span class="s">model.npz</span>
-</code></pre>
-</div>
+<span class="na">model</span><span class="pi">:</span> <span class="s">model.npz</span>
+</code></pre></div></div>
 
 <p>which simplifies the command to:</p>
 
-<div class="highlighter-rouge"><pre class="highlight"><code>./build/marian -c config.yml
-</code></pre>
-</div>
+<div class="highlighter-rouge"><div class="highlight"><pre class="highlight"><code>./build/marian -c config.yml
+</code></pre></div></div>
 
 <p>Command-line options overwrite options stored in the configuration file.</p>
 
@@ -241,13 +238,12 @@ Nematus-compatible neural machine translation model:</p>
 <p>Use option <code class="highlighter-rouge">--devices</code> to specify on which GPU devices the model should be
 trained:</p>
 
-<div class="highlighter-rouge"><pre class="highlight"><code>./build/marian \
+<div class="highlighter-rouge"><div class="highlight"><pre class="highlight"><code>./build/marian \
     --devices 0 1 2 3 \
     --train-sets corpus.en corpus.ro \
     --vocabs vocab.en vocab.ro \
     --model model.npz
-</code></pre>
-</div>
+</code></pre></div></div>
 
 <p>The asynchronous SGD is used by default, while the synchronous version can be
 enabled with <code class="highlighter-rouge">--sync-sgd</code>. The latter scales worse on multiple devices, but may
@@ -261,26 +257,24 @@ held-out data.</p>
 <p>This is a minimum example of how to validate the model using cross-entropy and
 BLEU score:</p>
 
-<div class="highlighter-rouge"><pre class="highlight"><code>./build/marian \
+<div class="highlighter-rouge"><div class="highlight"><pre class="highlight"><code>./build/marian \
     --train-sets corpus.en corpus.ro \
     --vocabs vocab.en vocab.ro \
     --model model.npz \
     --valid-set dev.en dev.ro \
     --valid-metrics cross-entropy translation \
     --valid-script-path validate.sh
-</code></pre>
-</div>
+</code></pre></div></div>
 
 <p>where <em>validate.sh</em> is a bash script, which takes the file with output
 translation of <code class="highlighter-rouge">dev.en</code> as the first argument (i.e. <code class="highlighter-rouge">$1</code>) and returns the BLEU
 score, e.g.:</p>
 
-<div class="language-sh highlighter-rouge"><pre class="highlight"><code><span class="c"># validate.sh</span>
-cat <span class="nv">$1</span> | ./postprocess.sh 2&gt;/dev/null &gt; file.out
+<div class="language-sh highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="c"># validate.sh</span>
+<span class="nb">cat</span> <span class="nv">$1</span> | ./postprocess.sh 2&gt;/dev/null <span class="o">&gt;</span> file.out
 ./moses-scripts/scripts/generic/multi-bleu-detok.perl file.ref &lt; file.out 2&gt;/dev/null <span class="se">\</span>
-    | sed -r <span class="s1">'s/BLEU = ([0-9.]+),.*/\1/'</span>
-</code></pre>
-</div>
+    | sed <span class="nt">-r</span> <span class="s1">'s/BLEU = ([0-9.]+),.*/\1/'</span>
+</code></pre></div></div>
 
 <h3 id="decaying-learning-rate">Decaying learning rate</h3>
 
@@ -319,21 +313,19 @@ of Marian is planned.</p>
 
 <p>Basic usage:</p>
 
-<div class="highlighter-rouge"><pre class="highlight"><code>./build/marian-decoder -m model.npz -v vocab.en vocab.ro &lt; input.txt
-</code></pre>
-</div>
+<div class="highlighter-rouge"><div class="highlight"><pre class="highlight"><code>./build/marian-decoder -m model.npz -v vocab.en vocab.ro &lt; input.txt
+</code></pre></div></div>
 
 <h4 id="model-ensembling">Model ensembling</h4>
 
 <p>Models of various types and architectures can be ensembled if they use the same
 vocabularies:</p>
 
-<div class="highlighter-rouge"><pre class="highlight"><code>./build/marian-decoder \
+<div class="highlighter-rouge"><div class="highlight"><pre class="highlight"><code>./build/marian-decoder \
     --models model1.npz model2.npz model3.npz \
     --weights 0.6 0.2 0.2 \
     --vocabs vocab.en vocab.ro &lt; input.txt
-</code></pre>
-</div>
+</code></pre></div></div>
 
 <p>Weights are optional and set to 1.0 by default if ommitted.</p>
 
@@ -345,9 +337,8 @@ their <a href="https://arxiv.org/abs/1706.03762">transformer paper</a>.  Assumin
 model file is <code class="highlighter-rouge">model.npz</code> and your vocabulary is <code class="highlighter-rouge">vocab.src.yml</code> and
 <code class="highlighter-rouge">vocab.trg.yml</code>, we recommend to use the following options:</p>
 
-<div class="highlighter-rouge"><pre class="highlight"><code>./marian-decoder -m model.npz -v vocab.src.yml vocab.trg.yml -b 6 --normalize=0.6
-</code></pre>
-</div>
+<div class="highlighter-rouge"><div class="highlight"><pre class="highlight"><code>./marian-decoder -m model.npz -v vocab.src.yml vocab.trg.yml -b 6 --normalize=0.6
+</code></pre></div></div>
 
 <h4 id="batched-translation">Batched translation</h4>
 
@@ -357,9 +348,8 @@ speed (roughly by a factor of 10 or more). Assuming your model file is
 <code class="highlighter-rouge">model.npz</code> and your vocabulary is <code class="highlighter-rouge">vocab.src.yml</code> and <code class="highlighter-rouge">vocab.trg.yml</code>, we
 recommend to use the following options to enable batched translation:</p>
 
-<div class="highlighter-rouge"><pre class="highlight"><code>./marian-decoder -m model.npz -v vocab.src.yml vocab.trg.yml -b 6 --normalize=0.6 --mini-batch 64 --maxi-batch-sort src --maxi-batch 100 -w 2500
-</code></pre>
-</div>
+<div class="highlighter-rouge"><div class="highlight"><pre class="highlight"><code>./marian-decoder -m model.npz -v vocab.src.yml vocab.trg.yml -b 6 --normalize=0.6 --mini-batch 64 --maxi-batch-sort src --maxi-batch 100 -w 2500
+</code></pre></div></div>
 
 <p>This does a number of things: firstly, it enables translation with a mini-batch
 size of 64, i.e. translating 64 sentences at once, with a beam-size of 6; It
@@ -414,7 +404,7 @@ options.
 For example, for the <a href="http://data.statmt.org/wmt17_systems/en-de/">de-en model</a>
 this would be:</p>
 
-<div class="highlighter-rouge"><pre class="highlight"><code>./build/marian-decoder \
+<div class="highlighter-rouge"><div class="highlight"><pre class="highlight"><code>./build/marian-decoder \
     --type nematus \
     --models model/en-de/model.npz \
     --vocabs model/en-de/vocab.en.json model/en-de/vocab.de.json \
@@ -428,15 +418,13 @@ this would be:</p>
     --dec-cell gru-nematus --enc-cell gru-nematus \
     --tied-embeddings true \
     --layer-normalization true
-</code></pre>
-</div>
+</code></pre></div></div>
 
 <p>Alternatively, the model parameters can be added into the model <em>.npz</em> file
 based on the Nematus <em>.json</em> file using the script: <a class="github-link" href="https://github.com/marian-nmt/marian-dev/tree/master/scripts/contrib/inject_model_params.py " target="_blank"><code class="highlighter-rogue">marian-dev/scripts/contrib/inject_model_params.py </code></a>, e.g.:</p>
 
-<div class="highlighter-rouge"><pre class="highlight"><code>python inject_model_params.py -m model.npz -j model.npz.json
-</code></pre>
-</div>
+<div class="highlighter-rouge"><div class="highlight"><pre class="highlight"><code>python inject_model_params.py -m model.npz -j model.npz.json
+</code></pre></div></div>
 
 <h3 id="marian-web-server">Marian web server</h3>
 
@@ -444,15 +432,13 @@ based on the Nematus <em>.json</em> file using the script: <a class="github-link
 It uses the same command-line options as <code class="highlighter-rouge">marian-decoder</code>.
 The only addition is <code class="highlighter-rouge">--port</code> option, which specifies the port number:</p>
 
-<div class="highlighter-rouge"><pre class="highlight"><code>./build/marian-server --port 8080 -m model.npz -v vocab.en vocab.ro
-</code></pre>
-</div>
+<div class="highlighter-rouge"><div class="highlight"><pre class="highlight"><code>./build/marian-server --port 8080 -m model.npz -v vocab.en vocab.ro
+</code></pre></div></div>
 
 <p>An example client written in Python is <a class="github-link" href="https://github.com/marian-nmt/marian-dev/tree/master/scripts/server/client_example.py " target="_blank"><code class="highlighter-rogue">marian-dev/scripts/server/client_example.py </code></a>:</p>
 
-<div class="highlighter-rouge"><pre class="highlight"><code>./scripts/server/client_example.py -p 8080 &lt; input.txt
-</code></pre>
-</div>
+<div class="highlighter-rouge"><div class="highlight"><pre class="highlight"><code>./scripts/server/client_example.py -p 8080 &lt; input.txt
+</code></pre></div></div>
 
 <h3 id="amun">Amun</h3>
 
@@ -461,18 +447,16 @@ types. Translation can be performed on GPU or CPU or both.</p>
 
 <p>Basic usage:</p>
 
-<div class="highlighter-rouge"><pre class="highlight"><code>./marian/build/amun -m model.npz -s vocab.en -t vocab.ro &lt;&lt;&lt; "This is a test ."
-</code></pre>
-</div>
+<div class="highlighter-rouge"><div class="highlight"><pre class="highlight"><code>./marian/build/amun -m model.npz -s vocab.en -t vocab.ro &lt;&lt;&lt; "This is a test ."
+</code></pre></div></div>
 
 <h2 id="scorer">Scorer</h2>
 
 <p>The <code class="highlighter-rouge">marian-scorer</code> tool is used for scoring (or re-scoring) parallel sentences
 provided as plain texts in two corresponding files:</p>
 
-<div class="highlighter-rouge"><pre class="highlight"><code>./build/marian-scorer -m model.npz -v vocab.ro vocab.en -t file.ro file.en
-</code></pre>
-</div>
+<div class="highlighter-rouge"><div class="highlight"><pre class="highlight"><code>./build/marian-scorer -m model.npz -v vocab.ro vocab.en -t file.ro file.en
+</code></pre></div></div>
 
 <p>A cross-entropy score for each sentence pair is returned by default.  The
 scorer can be also used to summarize scores (option <code class="highlighter-rouge">--summary</code>), so it can
@@ -488,9 +472,8 @@ the end.</p>
 <p><a href="/docs/marian/classes.html">The code documentation for Marian toolkit</a> is
 generated using Doxygen. The newest version can be generated locally with CMake:</p>
 
-<div class="highlighter-rouge"><pre class="highlight"><code>mkdir -p build &amp;&amp; cd build &amp;&amp; cmake .. &amp;&amp; make doc
-</code></pre>
-</div>
+<div class="highlighter-rouge"><div class="highlight"><pre class="highlight"><code>mkdir -p build &amp;&amp; cd build &amp;&amp; cmake .. &amp;&amp; make doc
+</code></pre></div></div>
 
 
             </div><!--//content-inner-->

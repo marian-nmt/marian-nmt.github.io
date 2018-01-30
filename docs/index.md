@@ -18,7 +18,6 @@ Marian toolkit provides the following tools (click on the name for a list of com
 
 ### Model types
 
-Available model types:
 * `s2s`: Default model type, which supports most of the features provided by
   the toolkit. The architecture is equivalent to the
   [Nematus](https://github.com/EdinburghNLP/nematus) models ([Senrich et al.,
@@ -52,7 +51,7 @@ Nematus-compatible neural machine translation model:
         --vocabs vocab.en vocab.ro \
         --model model.npz
 
-Training settings can be provided in the configuration file:
+Command options can be also specified in a configuration file in YAML format:
 
 ```yaml
 # config.yml
@@ -73,25 +72,40 @@ Command-line options overwrite options stored in the configuration file.
 
 ### Multi-GPU training
 
-Use option `--devices` to specify on which GPU devices the model should be
-trained:
+For multi-GPU training You only need to specify the device ids of the GPUs you want to use for training
+(this also works with most other binaries) as `--devices 0 1 2 3` for training
+on four GPUs. There is no automatic detection of GPUs for now.
 
-    ./build/marian \
-        --devices 0 1 2 3 \
-        --train-sets corpus.en corpus.ro \
-        --vocabs vocab.en vocab.ro \
-        --model model.npz
+By default, this will use asynchronous SGD (or rather ADAM). For the deeper models
+and the transformer model, we found async SGD to be unreliable and you may want
+to use a synchronous SGD variant by setting `--sync-sgd`.
 
-The asynchronous SGD is used by default, while the synchronous version can be
-enabled with `--sync-sgd`. The latter scales worse on multiple devices, but may
-allow to achieve better cross-entropy scores.
+For asynchronous SGD, the mini-batch size is used locally, i.e. `--mini-batch 64`
+means 64 sentences per GPU worker.
+
+For synchronous SGD, the mini-batch size is used globally and will be divided
+across the number of workers. This means that for synchronous SGD the effective
+mini-batch can be set N times larger for N GPUs. A mini-batch size of
+`--mini-batch 256` will mean a mini-batch of 64 per worker if four GPUs are
+used. This choice makes sense when you realize that synchronous SGD is
+essentially working like a single GPU training process with N times more
+memory. Larger mini-batches in a synchronous setting result in quite stable
+training.
+
 
 ### Validation
 
 It is useful to monitor the performance of your model during training on
-held-out data.
+held-out data. Just provide `--valid valid.src valid.trg` for that. By default
+this provide sentence-wise normalized cross-entropy scores for the validation
+set every 10,000 iterations.  You can change the validation frequency to, say
+5000, with `--valid-freq 5000` and the display frequency to 500 with
+`--disp-freq 500`.
 
-This is a minimum example of how to validate the model using cross-entropy and
+**Attention:** the validation set needs to have been preprocessed in exactly
+the same manner as your training data.
+
+A minimum example of how to validate the model using cross-entropy and
 BLEU score:
 
     ./build/marian \
@@ -102,16 +116,48 @@ BLEU score:
         --valid-metrics cross-entropy translation \
         --valid-script-path validate.sh
 
-where _validate.sh_ is a bash script, which takes the file with output
+where `validate.sh` is a bash script, which takes the file with output
 translation of `dev.en` as the first argument (i.e. `$1`) and returns the BLEU
-score, e.g.:
+score, for example:
 
 ```sh
 # validate.sh
-cat $1 | ./postprocess.sh 2>/dev/null > file.out
+./postprocess.sh < $1 > file.out 2>/dev/null
 ./moses-scripts/scripts/generic/multi-bleu-detok.perl file.ref < file.out 2>/dev/null \
     | sed -r 's/BLEU = ([0-9.]+),.*/\1/'
 ```
+
+
+### Early stopping
+
+Early stopping is a common technique for deciding when to stop training the
+model based on a heuristic involving a validation set. 
+
+By default we use early stopping with patience of 10, i.e. `--early-stopping
+10`. This means that training will finish if the first specified metric in
+`--valid-metrics` did not improve (stalled) for 10 consecutive validation
+steps. Usually this will signal convergence or --- if the scores get worse with
+later validation steps --- potential overfitting.
+
+
+### Dropouts
+
+The numeric values are only provided as examples.
+
+Depending on the model type, Marian support multiple types of dropout.  For
+RNN-based models it supports the `--dropout-rnn 0.2` option which uses
+variational dropout on all RNN inputs and recursive states.
+
+There is also `--dropout-src 0.1` and `--dropout-trg 0.1` which drops out
+entire source and target word positions, respectively. This is an options we
+found to be useful for monolingual settings.
+
+For the transformer model the equivalent of `--dropout-rnn 0.2` is
+`--transformer-dropout 0.2`.
+
+Apart from dropout, we also provide `--label-smoothing 0.1` as suggested by
+[Vaswani et al., 2017](https://arxiv.org/abs/1706.03762).
+
 
 ### Decaying learning rate
 
@@ -136,12 +182,53 @@ Marian supports various strategies for decaying learning rate
 Decay factor for learning rate can be specified with `--lr-decay`.
 
 
+### Workspace memory
+
+The choice of workspace memory, mini-batch size and max-length is quite
+involved and depends on the type of model, the available GPU memory, the number
+of GPUs, a number of other parameters like the chosen optimization algorithm,
+and the average or maximum sentence length in your training corpus (which you
+should know!).
+
+The options `--workspace 4000` sets the size of the memory available for the
+forward and backward step of the training procedure. This does not include
+model size and optimizer parameters that are allocated outsize workspace. Hence
+you cannot allocate all GPU memory to workspace. If you are not happy with
+default values this is a trial and error process.
+
+Setting `--mini-batch 64 --max-length 100` will generate batches that contain
+always 64 sentences (or less if the corpus is smaller) of up to a length of 100
+tokens. Sentences longer than that are filtered out. Marian will grow workspace
+memory if required and potentially exceed available memory, resulting in a
+crash. Workspace memory is always rounded to multiples of 512 MB.
+
+`--mini-batch-fit` overrides the specified mini-batch size and automatically
+choses the largest mini-batch for a given sentence length that fits the
+specified memory. When `--mini-batch-fit` is set, memory requirements are
+guaranteed to fit into the specified workspace. Choosing a too small workspace
+will result in small mini-batches which can prohibit learning.
+
+#### My rules of thumb
+
+For shallow models I usually set the working memory to values between 3500 and
+6000 (MB), e.g. `--workspace 5500` and then use `--mini-batch-fit` which
+automatically tries to make the best use of the specified memory size,
+mini-batch size and sentence length.
+
+For very deep models, I first set all other parameters like `--max-length 100`,
+model type, depth etc.  Next I use `--mini-batch-fit` and try to max out
+`--workspace` until I get a crash due to insufficient memory. I then revert to
+the last workspace size that did not crash. Since setting `--mini-batch-fit`
+guarantees that memory will not grow during training due to batch-size this
+should result in a stable training run and maximal batch size.
+
+
 
 ## Translation
 
 All model types can be decoded with `marian-decoder` and `marian-server`
 command.  Only models of type Amun and certain models of type Nematus can be
-used with the `amun` command line tool.
+used with the `amun` tool.
 
 ### Marian decoder
 
@@ -152,10 +239,10 @@ Basic usage:
 
     ./build/marian-decoder -m model.npz -v vocab.en vocab.ro < input.txt
 
-#### Model ensembling
+### Ensembles
 
-Models of various types and architectures can be ensembled if they use the same
-vocabularies:
+Models of different types and architectures can be ensembled as long as they
+use common vocabularies:
 
     ./build/marian-decoder \
         --models model1.npz model2.npz model3.npz \
@@ -164,60 +251,58 @@ vocabularies:
 
 Weights are optional and set to 1.0 by default if ommitted.
 
-#### Recommended settings for translation
+### Length normalization 
 
 We found that using length normalization with a penalty term of 0.6 and a beam
-size of 6 is usually best. This rougly follows the settings by Google from
-their [transformer paper](https://arxiv.org/abs/1706.03762).  Assuming your
-model file is `model.npz` and your vocabulary is `vocab.src.yml` and
-`vocab.trg.yml`, we recommend to use the following options:
+size of 6 is usually best:
 
-```
-./marian-decoder -m model.npz -v vocab.src.yml vocab.trg.yml -b 6 --normalize=0.6
-```
+    ./marian-decoder -m model.npz -v vocab.src.yml vocab.trg.yml -b 6 --normalize=0.6
 
-#### Batched translation
+This rougly follows the settings by Google from their [transformer
+paper](https://arxiv.org/abs/1706.03762).
 
-This a feature introduced in Marian v1.1.0. Batched translation generates
+### Batched translation
+
+This is a feature introduced in Marian v1.1.0. Batched translation generates
 translation for whole mini-batches and significantly increases translation
-speed (roughly by a factor of 10 or more). Assuming your model file is
-`model.npz` and your vocabulary is `vocab.src.yml` and `vocab.trg.yml`, we
-recommend to use the following options to enable batched translation:
+speed (roughly by a factor of 10 or more). We recommend to use the following
+options to enable batched translation:
 
-```
-./marian-decoder -m model.npz -v vocab.src.yml vocab.trg.yml -b 6 --normalize=0.6 --mini-batch 64 --maxi-batch-sort src --maxi-batch 100 -w 2500
-```
+    ./marian-decoder -m model.npz -v vocab.src.yml vocab.trg.yml -b 6 --normalize=0.6 \
+        --mini-batch 64 --maxi-batch-sort src --maxi-batch 100 -w 2500
 
-This does a number of things: firstly, it enables translation with a mini-batch
-size of 64, i.e. translating 64 sentences at once, with a beam-size of 6; It
-preloads 100 maxi-batches and sorts them according to source sentence length,
-this allows for better packing of the batch and increases translation speed
-quite a bit. We also added an option to use a length-normalization weight of
-0.6 (this usually increases BLEU a bit) and set the working memory to 2500 MB.
-The default working memory is 512 MB and Marian will increase it to match to
-requirements during translation, but pre-allocating memory makes it usually a
-bit faster.
+This does a number of things:
+* Firstly, it enables translation with a mini-batch size of 64, i.e.
+  translating 64 sentences at once, with a beam-size of 6.
+* It preloads 100 maxi-batches and sorts them according to source sentence
+  length, this allows for better packing of the batch and increases translation
+  speed quite a bit.
+* We also added an option to use a length-normalization weight of 0.6 (this
+  usually increases BLEU a bit).
+* The working memory is set to 2500 MB. The default working memory is 512 MB
+  and Marian will increase it to match to requirements during translation, but
+  pre-allocating memory makes it usually a bit faster.
 
 To give you an idea, how much faster batched translation is compared to
-sentence-by-sentence translation we have collected a few numbers. Proper
-benchmarks will be added soon. Below we have compiled the time it takes to
-translate the English-German WMT2013 test set with 3000 sentences using 4 Volta
-GPUs on AWS.
+sentence-by-sentence translation we have collected a few numbers. Below we have
+compiled the time it takes to translate the English-German WMT2013 test set
+with 3000 sentences using 4 Volta GPUs on AWS.
 
 System | Single | Batched |
------------|-------:|---------:|
+-------|-------:|--------:|
 Nematus-style Shallow RNN | 82.7s | 4.3s |
 Nematus-style Deep RNN | 148.5s | 5.9s |
 Google Transformer | 201.9s | 19.2s |
 {: .table .table-bordered .table-striped }
 
-#### Models trained with Nematus
+### Nematus models
 
 Certain types of models trained with Nematus, for example the [Edinburgh WMT17
 deep models](http://data.statmt.org/wmt17_systems/) can be decoded with
 `marian-decoder`.  As such models do not include model parameters specifying
-the model architecture, all parameters have to be set with command-line
+the model architecture, all parameters have to be set through command-line
 options.
+
 For example, for the [de-en model](http://data.statmt.org/wmt17_systems/en-de/)
 this would be:
 
@@ -241,8 +326,6 @@ based on the Nematus _.json_ file using the script: {% github_link
 marian-dev/scripts/contrib/inject_model_params.py %}, e.g.:
 
     python inject_model_params.py -m model.npz -j model.npz.json
-
-
 
 ### Marian web server
 
@@ -275,14 +358,24 @@ provided as plain texts in two corresponding files:
 
     ./build/marian-scorer -m model.npz -v vocab.ro vocab.en -t file.ro file.en
 
-A cross-entropy score for each sentence pair is returned by default.  The
-scorer can be also used to summarize scores (option `--summary`), so it can
-calculate cross-entropy and perplexity for a whole test set and report it at
-the end.
+A cross-entropy score for each sentence pair is returned by default.
 
 ### N-best lists
 
 The scorer does not support n-best lists as an input yet.
+
+If you want to use the rescorer for for n-best list rescoring you need to
+extract the sentences to a plain text file. If the model is a translation model
+you also need to create a source file that has the correct source sentences in
+the right order and number, i.e. you need to repeat the source sentence as many
+times as there are entries in the corresponding n-best list.
+
+### Summarized scores
+
+The scorer can be also used to summarize scores (option `--summary`). It can
+calculate cross-entropy and perplexity for a whole test set and report it at
+the end.
+
 
 
 ## Code documentation

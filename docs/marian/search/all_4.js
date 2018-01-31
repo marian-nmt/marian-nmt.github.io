@@ -18,6 +18,5 @@ var searchData=
   ['encodertransformer',['EncoderTransformer',['../classmarian_1_1EncoderTransformer.html',1,'marian']]],
   ['expnodeop',['ExpNodeOp',['../structmarian_1_1ExpNodeOp.html',1,'marian']]],
   ['expr',['Expr',['../namespacemarian.html#a498d8baf75b754011078b890b39c8e12',1,'marian']]],
-  ['expressiongraph',['ExpressionGraph',['../classmarian_1_1ExpressionGraph.html#a40b3f2a4c0bacb782241f321bd1d429c',1,'marian::ExpressionGraph']]],
-  ['expressiongraph',['ExpressionGraph',['../classmarian_1_1ExpressionGraph.html',1,'marian']]]
+  ['expressiongraph',['ExpressionGraph',['../classmarian_1_1ExpressionGraph.html',1,'marian::ExpressionGraph'],['../classmarian_1_1ExpressionGraph.html#a40b3f2a4c0bacb782241f321bd1d429c',1,'marian::ExpressionGraph::ExpressionGraph()']]]
 ];

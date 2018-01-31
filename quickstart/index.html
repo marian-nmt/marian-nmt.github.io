@@ -205,17 +205,19 @@ Only the translator will be compiled, the training framework is strictily GPU-ba
 
 <p>Clone a fresh copy from github:</p>
 
-<div class="highlighter-rouge"><div class="highlight"><pre class="highlight"><code>git clone https://github.com/marian-nmt/marian
-</code></pre></div></div>
+<div class="highlighter-rouge"><pre class="highlight"><code>git clone https://github.com/marian-nmt/marian
+</code></pre>
+</div>
 
 <p>The project is a standard CMake out-of-source build:</p>
 
-<div class="highlighter-rouge"><div class="highlight"><pre class="highlight"><code>cd marian
+<div class="highlighter-rouge"><pre class="highlight"><code>cd marian
 mkdir build
 cd build
 cmake ..
 make -j
-</code></pre></div></div>
+</code></pre>
+</div>
 
 <p>If run for the first time, this will also download <em>marian-dev</em> – the training
 framework for Marian.</p>
@@ -229,11 +231,12 @@ framework for Marian.</p>
 parallel corpus, the following command will create a Nematus-compatible neural
 machine translation model.</p>
 
-<div class="highlighter-rouge"><div class="highlight"><pre class="highlight"><code>./marian/build/marian \
+<div class="highlighter-rouge"><pre class="highlight"><code>./marian/build/marian \
   --train-sets corpus.en corpus.ro \
   --vocabs vocab.en vocab.ro \
   --model model.npz
-</code></pre></div></div>
+</code></pre>
+</div>
 
 <p>See the <a href="/docs/#marian">documentation</a> for a full list of command line options
 or the <a href="/examples/training">examples</a> for an example of how to train a
@@ -243,13 +246,15 @@ WMT-grade model.</p>
 
 <p>If a trained model is available, run:</p>
 
-<div class="highlighter-rouge"><div class="highlight"><pre class="highlight"><code>./marian/build/marian-decoder -m model.npz -v vocab.en vocab.ro &lt;&lt;&lt; "This is a test ."
-</code></pre></div></div>
+<div class="highlighter-rouge"><pre class="highlight"><code>./marian/build/marian-decoder -m model.npz -v vocab.en vocab.ro &lt;&lt;&lt; "This is a test ."
+</code></pre>
+</div>
 
 <p>For CPU translation, use Amun:</p>
 
-<div class="highlighter-rouge"><div class="highlight"><pre class="highlight"><code>./marian/build/amun -m model.npz -s vocab.en -t vocab.ro &lt;&lt;&lt; "This is a test ."
-</code></pre></div></div>
+<div class="highlighter-rouge"><pre class="highlight"><code>./marian/build/amun -m model.npz -s vocab.en -t vocab.ro &lt;&lt;&lt; "This is a test ."
+</code></pre>
+</div>
 
 <p>See the <a href="/docs/#mariandecoder">documentation</a> for a full list of command line
 options or the <a href="/examples/translating">examples</a> for an example of how to use

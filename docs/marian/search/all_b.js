@@ -2,7 +2,6 @@ var searchData=
 [
   ['keywords',['keywords',['../namespacemarian_1_1keywords.html',1,'marian']]],
   ['marian',['marian',['../namespacemarian.html',1,'']]],
-  ['maxpooling',['MaxPooling',['../classmarian_1_1MaxPooling.html',1,'marian']]],
   ['marian_20examples',['Marian examples',['../md_marian_src_examples_README.html',1,'']]],
   ['marian_20tests',['Marian tests',['../md_marian_src_tests_README.html',1,'']]],
   ['meannodeop',['MeanNodeOp',['../structmarian_1_1MeanNodeOp.html',1,'marian']]],
@@ -16,7 +15,6 @@ var searchData=
   ['modelbase',['ModelBase',['../classmarian_1_1models_1_1ModelBase.html',1,'marian::models']]],
   ['modelservicetask',['ModelServiceTask',['../structmarian_1_1ModelServiceTask.html',1,'marian']]],
   ['modeltask',['ModelTask',['../structmarian_1_1ModelTask.html',1,'marian']]],
-  ['motorway',['Motorway',['../classmarian_1_1Motorway.html',1,'marian']]],
   ['multicellinput',['MultiCellInput',['../classmarian_1_1rnn_1_1MultiCellInput.html',1,'marian::rnn']]],
   ['multiplicative',['Multiplicative',['../classmarian_1_1rnn_1_1Multiplicative.html',1,'marian::rnn']]],
   ['multnodeop',['MultNodeOp',['../structmarian_1_1MultNodeOp.html',1,'marian']]]

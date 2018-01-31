@@ -183,13 +183,15 @@ of the neural network. See <a href="https://arxiv.org/abs/1607.06450">here</a> f
 
 <p>Layer normalization is turned on by:</p>
 
-<div class="highlighter-rouge"><div class="highlight"><pre class="highlight"><code>--layer-normalization
-</code></pre></div></div>
+<div class="highlighter-rouge"><pre class="highlight"><code>--layer-normalization
+</code></pre>
+</div>
 
 <p>or in the config file with:</p>
 
-<div class="highlighter-rouge"><div class="highlight"><pre class="highlight"><code>layer-normalization: true
-</code></pre></div></div>
+<div class="highlighter-rouge"><pre class="highlight"><code>layer-normalization: true
+</code></pre>
+</div>
 
 <h3 id="tied-embeddings">Tied embeddings</h3>
 
@@ -199,13 +201,15 @@ As <a href="https://arxiv.org/abs/1608.05859">Press&amp;Wolf</a> show, tying tar
 the last layer of the output does not decrease quality and helps saving significant
 amounts of parameters. Activated by:</p>
 
-<div class="highlighter-rouge"><div class="highlight"><pre class="highlight"><code>--tied-embeddings
-</code></pre></div></div>
+<div class="highlighter-rouge"><pre class="highlight"><code>--tied-embeddings
+</code></pre>
+</div>
 
 <p>or</p>
 
-<div class="highlighter-rouge"><div class="highlight"><pre class="highlight"><code>tied-embeddings: true
-</code></pre></div></div>
+<div class="highlighter-rouge"><pre class="highlight"><code>tied-embeddings: true
+</code></pre>
+</div>
 
 <h3 id="deep-decoders">Deep decoders</h3>
 
@@ -216,21 +220,24 @@ contains the attention mechanism) and all other layers have separate depth setti
 
 <p>We set the number of decoder layers with</p>
 
-<div class="highlighter-rouge"><div class="highlight"><pre class="highlight"><code>--dec-depth 4
-</code></pre></div></div>
+<div class="highlighter-rouge"><pre class="highlight"><code>--dec-depth 4
+</code></pre>
+</div>
 
 <p>the number of feedword layers with the cell of the first and the following layers with</p>
 
-<div class="highlighter-rouge"><div class="highlight"><pre class="highlight"><code>--dec-cell-base-depth 4
+<div class="highlighter-rouge"><pre class="highlight"><code>--dec-cell-base-depth 4
 --dec-cell-high-depth 2
-</code></pre></div></div>
+</code></pre>
+</div>
 
 <p>Alternatively, this can again be set in the config file:</p>
 
-<div class="highlighter-rouge"><div class="highlight"><pre class="highlight"><code>dec-depth: 4
+<div class="highlighter-rouge"><pre class="highlight"><code>dec-depth: 4
 dec-cell-base-depth: 4
 dec-cell-high-depth: 4
-</code></pre></div></div>
+</code></pre>
+</div>
 
 <h3 id="deep-encoders">Deep encoders</h3>
 
@@ -239,15 +246,17 @@ with:</p>
 
 <p>We set the number of decoder layers with</p>
 
-<div class="highlighter-rouge"><div class="highlight"><pre class="highlight"><code>--enc-depth 4
+<div class="highlighter-rouge"><pre class="highlight"><code>--enc-depth 4
 --dec-cell-depth 2
-</code></pre></div></div>
+</code></pre>
+</div>
 
 <p>or</p>
 
-<div class="highlighter-rouge"><div class="highlight"><pre class="highlight"><code>enc-depth: 4
+<div class="highlighter-rouge"><pre class="highlight"><code>enc-depth: 4
 enc-cell-depth: 2
-</code></pre></div></div>
+</code></pre>
+</div>
 
 <p>Futhermore, the authors of the Edinburgh paper take a look at different encoder
 types:</p>
@@ -275,13 +284,15 @@ connections improve learning in deeper networks.</p>
 
 <p>We activate residual connection between RNN layers on the command line with</p>
 
-<div class="highlighter-rouge"><div class="highlight"><pre class="highlight"><code>--skip
-</code></pre></div></div>
+<div class="highlighter-rouge"><pre class="highlight"><code>--skip
+</code></pre>
+</div>
 
 <p>or in the config file</p>
 
-<div class="highlighter-rouge"><div class="highlight"><pre class="highlight"><code>skip: true
-</code></pre></div></div>
+<div class="highlighter-rouge"><pre class="highlight"><code>skip: true
+</code></pre>
+</div>
 
 <h3 id="alternative-rnn-cells">Alternative RNN cells</h3>
 
@@ -290,14 +301,16 @@ models (GRU cell seem to work better for the default shallow model).
 The LSTM cell can be chosen separately for the encoder and decoder with the
 following switches</p>
 
-<div class="highlighter-rouge"><div class="highlight"><pre class="highlight"><code>--enc-cell lstm --dec-cell lstm
-</code></pre></div></div>
+<div class="highlighter-rouge"><pre class="highlight"><code>--enc-cell lstm --dec-cell lstm
+</code></pre>
+</div>
 
 <p>or with the yaml config file entries</p>
 
-<div class="highlighter-rouge"><div class="highlight"><pre class="highlight"><code>enc-cell: lstm
+<div class="highlighter-rouge"><pre class="highlight"><code>enc-cell: lstm
 dec-cell: lstm
-</code></pre></div></div>
+</code></pre>
+</div>
 
 <h3 id="putting-it-all-together">Putting it all together</h3>
 
@@ -305,7 +318,7 @@ dec-cell: lstm
  trained earlier. We increase the workspace memory to 6000 MB and create the config
  file as follows:</p>
 
-<div class="highlighter-rouge"><div class="highlight"><pre class="highlight"><code>mkdir -p model.deep
+<div class="highlighter-rouge"><pre class="highlight"><code>mkdir -p model.deep
 
 ./marian-dev/build/marian \
   --type s2s \
@@ -322,12 +335,14 @@ dec-cell: lstm
   --early-stopping 5 --disp-freq 1000 \
   --log model.deep/train.log --valid-log model.deep/valid.log \
   --dump-config &gt; model.deep/config.yml
-</code></pre></div></div>
+</code></pre>
+</div>
 
 <p>As before, we can just use the config file to start our training process:</p>
 
-<div class="highlighter-rouge"><div class="highlight"><pre class="highlight"><code>./marian-dev/build/marian -c model.deep/config.yml
-</code></pre></div></div>
+<div class="highlighter-rouge"><pre class="highlight"><code>./marian-dev/build/marian -c model.deep/config.yml
+</code></pre>
+</div>
 
 <p>Translation is done in the same way as for the shallow models. The model file
 constains information on its own architecture and the parameters can be ommitted

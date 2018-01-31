@@ -188,35 +188,39 @@
 
 <p>Change your current working directory to mtm2017-marian</p>
 
-<div class="highlighter-rouge"><div class="highlight"><pre class="highlight"><code>cd mtm2017-marian
-</code></pre></div></div>
+<div class="highlighter-rouge"><pre class="highlight"><code>cd mtm2017-marian
+</code></pre>
+</div>
 
 <h2 id="checkout-and-compilation">Checkout and Compilation</h2>
 
-<div class="highlighter-rouge"><div class="highlight"><pre class="highlight"><code>git clone https://github.com/marian-nmt/marian-dev
+<div class="highlighter-rouge"><pre class="highlight"><code>git clone https://github.com/marian-nmt/marian-dev
 cd marian-dev
 mkdir build
 cd build
 cmake .. -DCMAKE_BUILD_TYPE=Release
 make -j
-</code></pre></div></div>
+</code></pre>
+</div>
 
 <p>If everything worked correctly you can display the list of options with</p>
 
-<div class="highlighter-rouge"><div class="highlight"><pre class="highlight"><code>./marian --help
-</code></pre></div></div>
+<div class="highlighter-rouge"><pre class="highlight"><code>./marian --help
+</code></pre>
+</div>
 
 <p>And download a couple of useful scripts:</p>
 
 <p>Return to the working directory and download a number of scripts for
 preprocessing and splitting into subwords:</p>
 
-<div class="highlighter-rouge"><div class="highlight"><pre class="highlight"><code>cd ../..
+<div class="highlighter-rouge"><pre class="highlight"><code>cd ../..
 
 git clone https://github.com/marian-nmt/mtm2017-tutorial
 git clone https://github.com/marian-nmt/moses-scripts
 git clone https://github.com/rsennrich/subword-nmt
-</code></pre></div></div>
+</code></pre>
+</div>
 
 <h2 id="tanslate-with-a-pretrained-model">Tanslate with a pretrained model</h2>
 
@@ -224,7 +228,7 @@ git clone https://github.com/rsennrich/subword-nmt
 what each command is doing (normalise-romanian.py and remove-diacritics.py are
 specialized commands for Romanian created by Barry Haddow).</p>
 
-<div class="highlighter-rouge"><div class="highlight"><pre class="highlight"><code>cat mtm2017-tutorial/test/newstest2016.ro \
+<div class="highlighter-rouge"><pre class="highlight"><code>cat mtm2017-tutorial/test/newstest2016.ro \
     | ./moses-scripts/scripts/tokenizer/normalize-punctuation.perl -l ro \
     | ./mtm2017-tutorial/scripts/normalise-romanian.py \
     | ./mtm2017-tutorial/scripts/remove-diacritics.py \
@@ -235,7 +239,8 @@ specialized commands for Romanian created by Barry Haddow).</p>
 cat mtm2017-tutorial/test/newstest2016.en \
     | ./moses-scripts/scripts/tokenizer/normalize-punctuation.perl -l en \
     | ./moses-scripts/scripts/tokenizer/tokenizer.perl -a -l en &gt; pretrained/newstest2016.tok.en
-</code></pre></div></div>
+</code></pre>
+</div>
 
 <p>We can now translate the given test set with the command below. The
 files <code class="highlighter-rouge">vocab.{ro,en}.yml</code> contain the input and output vocabulary, <code class="highlighter-rouge">model.npz</code>
@@ -243,25 +248,28 @@ is the model parameter file in Numpy format. Run the command and check
 if you can infer the model parameters (number of units in the rnn, number of
 layers, etc.).</p>
 
-<div class="highlighter-rouge"><div class="highlight"><pre class="highlight"><code>cat pretrained/newstest2016.tok.tc.bpe.ro | \
+<div class="highlighter-rouge"><pre class="highlight"><code>cat pretrained/newstest2016.tok.tc.bpe.ro | \
   marian-dev/build/s2s -m pretrained/model.npz -v pretrained/vocab.ro.yml pretrained/vocab.en.yml \
   &gt; pretrained/newstest2016.tok.tc.bpe.ro.output
-</code></pre></div></div>
+</code></pre>
+</div>
 
 <p>The output <code class="highlighter-rouge">pretrained/newstest2016.tok.tc.bpe.ro.output</code> needs to be
 post-processed in order to compare it to the tokenized reference.
 We fuse subwords back together, detokenize and uppercase the first letter in each line:</p>
 
-<div class="highlighter-rouge"><div class="highlight"><pre class="highlight"><code>cat pretrained/newstest2016.tok.tc.bpe.ro.output | \
+<div class="highlighter-rouge"><pre class="highlight"><code>cat pretrained/newstest2016.tok.tc.bpe.ro.output | \
   perl -pe 's/@@ //g' | \
   perl ./moses-scripts/scripts/recaser/detruecase.perl \
   &gt; pretrained/newstest2016.tok.ro.output
-</code></pre></div></div>
+</code></pre>
+</div>
 
 <p>After that we can compute the BLEU score for this translation:</p>
 
-<div class="highlighter-rouge"><div class="highlight"><pre class="highlight"><code>perl ./moses-scripts/scripts/generic/multi-bleu.perl pretrained/newstest2016.tok.en &lt; pretrained/newstest2016.tok.ro.output
-</code></pre></div></div>
+<div class="highlighter-rouge"><pre class="highlight"><code>perl ./moses-scripts/scripts/generic/multi-bleu.perl pretrained/newstest2016.tok.en &lt; pretrained/newstest2016.tok.ro.output
+</code></pre>
+</div>
 
 <h2 id="training-your-own-wmt-grade-model">Training your own WMT-grade model</h2>
 
@@ -278,16 +286,17 @@ move on to the following section <em>Training a basic Nematus-style model</em>.<
 
 <p>Download the training data (this includes back-translated data by Rico Sennrich):</p>
 
-<div class="highlighter-rouge"><div class="highlight"><pre class="highlight"><code>mkdir -p data
+<div class="highlighter-rouge"><pre class="highlight"><code>mkdir -p data
 wget http://www.statmt.org/europarl/v7/ro-en.tgz -O data/ro-en.tgz
 wget http://opus.lingfil.uu.se/download.php?f=SETIMES2/en-ro.txt.zip -O data/SETIMES2.ro-en.txt.zip
 wget http://data.statmt.org/rsennrich/wmt16_backtranslations/ro-en/corpus.bt.ro-en.en.gz -O data/corpus.bt.ro-en.en.gz
 wget http://data.statmt.org/rsennrich/wmt16_backtranslations/ro-en/corpus.bt.ro-en.ro.gz -O data/corpus.bt.ro-en.ro.gz
-</code></pre></div></div>
+</code></pre>
+</div>
 
 <p>Unpack and concatenate the training data:</p>
 
-<div class="highlighter-rouge"><div class="highlight"><pre class="highlight"><code>cd data/
+<div class="highlighter-rouge"><pre class="highlight"><code>cd data/
 tar -xf ro-en.tgz
 unzip SETIMES2.ro-en.txt.zip
 gzip -d corpus.bt.ro-en.en.gz corpus.bt.ro-en.ro.gz
@@ -296,11 +305,12 @@ cat europarl-v7.ro-en.en SETIMES2.en-ro.en corpus.bt.ro-en.en &gt; corpus.en
 cat europarl-v7.ro-en.ro SETIMES2.en-ro.ro corpus.bt.ro-en.ro &gt; corpus.ro
 
 cd ..
-</code></pre></div></div>
+</code></pre>
+</div>
 
 <p>Tokenization and other language specific pre-processing steps:</p>
 
-<div class="highlighter-rouge"><div class="highlight"><pre class="highlight"><code>cat data/corpus.ro \
+<div class="highlighter-rouge"><pre class="highlight"><code>cat data/corpus.ro \
     | ./moses-scripts/scripts/tokenizer/normalize-punctuation.perl -l ro \
     | ./mtm2017-tutorial/scripts/normalise-romanian.py \
     | ./mtm2017-tutorial/scripts/remove-diacritics.py \
@@ -330,41 +340,47 @@ cat mtm2017-tutorial/test/newstest2016.ro \
 cat mtm2017-tutorial/test/newstest2016.en \
     | ./moses-scripts/scripts/tokenizer/normalize-punctuation.perl -l en \
     | ./moses-scripts/scripts/tokenizer/tokenizer.perl -threads 4 -a -l en &gt; data/newstest2016.tok.en
-</code></pre></div></div>
+</code></pre>
+</div>
 
 <p>Clean empty and long sentences, and sentences with high source-target ratio
 (training corpus only):</p>
 
-<div class="highlighter-rouge"><div class="highlight"><pre class="highlight"><code>./moses-scripts/scripts/training/clean-corpus-n.perl data/corpus.tok ro en data/corpus.clean.tok 1 80
-</code></pre></div></div>
+<div class="highlighter-rouge"><pre class="highlight"><code>./moses-scripts/scripts/training/clean-corpus-n.perl data/corpus.tok ro en data/corpus.clean.tok 1 80
+</code></pre>
+</div>
 
 <p>Train truecaser:</p>
-<div class="highlighter-rouge"><div class="highlight"><pre class="highlight"><code>./moses-scripts/scripts/recaser/train-truecaser.perl -corpus data/corpus.clean.tok.ro -model data/truecase-model.ro
+<div class="highlighter-rouge"><pre class="highlight"><code>./moses-scripts/scripts/recaser/train-truecaser.perl -corpus data/corpus.clean.tok.ro -model data/truecase-model.ro
 ./moses-scripts/scripts/recaser/train-truecaser.perl -corpus data/corpus.clean.tok.en -model data/truecase-model.en
-</code></pre></div></div>
+</code></pre>
+</div>
 
 <p>Apply truecaser to cleaned training corpus:</p>
 
-<div class="highlighter-rouge"><div class="highlight"><pre class="highlight"><code>for prefix in corpus.clean newsdev2016 newstest2016
+<div class="highlighter-rouge"><pre class="highlight"><code>for prefix in corpus.clean newsdev2016 newstest2016
 do
     ./moses-scripts/scripts/recaser/truecase.perl -model data/truecase-model.ro &lt; data/$prefix.tok.ro &gt; data/$prefix.tc.ro
     ./moses-scripts/scripts/recaser/truecase.perl -model data/truecase-model.en &lt; data/$prefix.tok.en &gt; data/$prefix.tc.en
 done
-</code></pre></div></div>
+</code></pre>
+</div>
 
 <p>Train BPE (<a href="https://arxiv.org/abs/1508.07909">Read here about BPEs</a>)</p>
 
-<div class="highlighter-rouge"><div class="highlight"><pre class="highlight"><code>cat data/corpus.clean.tc.ro data/corpus.clean.tc.en | ./subword-nmt/learn_bpe.py -s 85000 &gt; data/roen.bpe
-</code></pre></div></div>
+<div class="highlighter-rouge"><pre class="highlight"><code>cat data/corpus.clean.tc.ro data/corpus.clean.tc.en | ./subword-nmt/learn_bpe.py -s 85000 &gt; data/roen.bpe
+</code></pre>
+</div>
 
 <p>Apply BPE</p>
 
-<div class="highlighter-rouge"><div class="highlight"><pre class="highlight"><code>for prefix in corpus.clean newsdev2016 newstest2016
+<div class="highlighter-rouge"><pre class="highlight"><code>for prefix in corpus.clean newsdev2016 newstest2016
 do
     ./subword-nmt/apply_bpe.py -c data/roen.bpe &lt; data/$prefix.tc.ro &gt; data/$prefix.bpe.ro
     ./subword-nmt/apply_bpe.py -c data/roen.bpe &lt; data/$prefix.tc.en &gt; data/$prefix.bpe.en
 done
-</code></pre></div></div>
+</code></pre>
+</div>
 
 <h3 id="training-a-basic-nematus-style-model">Training a basic Nematus-style model</h3>
 
@@ -375,20 +391,21 @@ inspect the <code class="highlighter-rouge">--help</code> option to determine wh
 by default, e.g. what’s the default batch size? or what kind of encoder
 is used? is there regularization?</p>
 
-<div class="highlighter-rouge"><div class="highlight"><pre class="highlight"><code>mkdir -p model
+<div class="highlighter-rouge"><pre class="highlight"><code>mkdir -p model
 
 ./marian-dev/build/marian \
   --train-set data/corpus.clean.bpe.ro data/corpus.clean.bpe.en \
   --model model/model.npz \
   --disp-freq 100
-</code></pre></div></div>
+</code></pre>
+</div>
 
 <p>You can kill the training process with the key shortcut <code class="highlighter-rouge">Ctrl+C</code>.</p>
 
 <p>Let’s try a couple of more advanced options (can you infer from the
 help menu what these do?). But first, we will create a config file.</p>
 
-<div class="highlighter-rouge"><div class="highlight"><pre class="highlight"><code>./marian-dev/build/marian \
+<div class="highlighter-rouge"><pre class="highlight"><code>./marian-dev/build/marian \
   --type s2s \
   --train-set data/corpus.clean.bpe.ro data/corpus.clean.bpe.en \
   --valid-set data/newsdev2016.bpe.ro data/newsdev2016.bpe.en \
@@ -401,12 +418,14 @@ help menu what these do?). But first, we will create a config file.</p>
   --early-stopping 5 --disp-freq 1000 \
   --log model/train.log --valid-log model/valid.log \
   --dump-config &gt; model/config.yml
-</code></pre></div></div>
+</code></pre>
+</div>
 
 <p>Now we can just use the config file to start our training process:</p>
 
-<div class="highlighter-rouge"><div class="highlight"><pre class="highlight"><code>./marian-dev/build/marian -c model/config.yml
-</code></pre></div></div>
+<div class="highlighter-rouge"><pre class="highlight"><code>./marian-dev/build/marian -c model/config.yml
+</code></pre>
+</div>
 
 <p>The training process will finish after a long time (these AWS GPUs are quite slow)
 and will result in a model with similar performance to the pretrained one.</p>

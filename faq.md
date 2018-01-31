@@ -119,27 +119,24 @@ The name started out as a joke, but was made official later by public demand.
 
 {:.question}
 #### What are recommended training settings?
+-->
 
 {:.question}
 #### How do I enable multi-GPU training?
--->
-
 You only need to specify the device ids of the GPUs you want to use for training
 (this also works with most other binaries) as `--devices 0 1 2 3` for training
 on four GPUs.
 
 See [the documentation on multi-GPU training](/docs/#multi-gpu-training) for
-more details.
+details.
 
 {:.question}
 #### How do I chose mini-batch size, max-length and workspace memory?
-
 Unfortunately this is quite involved and depends on the type of model, the available
 GPU memory, the number of GPUs, a number of other parameters like the chosen
 optimization algorithm, and the average or maximum sentence length in your
-training corpus (which you should know!).
-
-See [the documentation on that topic](/docs/#workspace-memory) for more details.
+training corpus (which you should know!). See [this part of the
+documentation](/docs/#workspace-memory) for deeper discussion.
 
 {:.question}
 #### How do I use a validation set?
@@ -147,10 +144,10 @@ Just provide `--valid valid.src valid.trg`. Be default this provide sentence-wis
 normalized cross-entropy scores for the validation set every 10,000 iterations.
 You can change the validation frequency to, say 5000, with `--valid-freq 5000` and
 the display frequency to 500 with `--disp-freq 500`.
+See [here](/docs/#validation) for more information.
 
 **Attention:** the validation set needs to have been preprocessed in exactly the same
-manner as your training data. See [the documentation](/docs/#validation) for
-more details.
+manner as your training data.
 
 {:.question}
 #### What types of validation scores are available?
@@ -166,8 +163,8 @@ external validation script.
 #### How to display BLEU, METEOR or TER scores for a validation set?
 Currently this is possible only by using an external validation script.
 Such a script takes a file with the translation of the valiadion set as an
-intput and should run an external tool and return the score. See [this part of
-the documentation](/docs/#validation) for more details.
+intput and should run an external tool and return the score.
+See [here](/docs/#validation) for more information.
 
 {:.question}
 #### How long do I need to train my models?
@@ -254,8 +251,8 @@ Look at [the translation documenation](/docs/#translation) for more advices.
 #### Does Marian support batched translation?
 Yes. This a feature introduced in Marian v1.1.0. Batched translation generates
 translation for whole mini-batches and significantly increases translation
-speed (roughly by a factor of 10 or more). See [this documentation
-section](/docs/#batched-translation) for details.
+speed (roughly by a factor of 10 or more). See [this part of the
+documentation](/docs/#batched-translation) for details.
 
 {:.question}
 #### Can Marian do model ensembling?

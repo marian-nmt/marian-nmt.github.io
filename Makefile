@@ -33,6 +33,7 @@ docs/cmd/%.md: docs/cmd/_template.tmp
 
 # generate documentation
 update-docs: Doxyfile.marian.in marian
+	sed -i -r "s/PROJECT_NUMBER * = .*/PROJECT_NUMBER = $$(cat marian\/VERSION)/" Doxyfile.marian.in
 	doxygen $<
 
 

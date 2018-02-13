@@ -16,26 +16,30 @@ Marian toolkit provides the following tools (click on the name for a list of com
 * [marian-scorer](/docs/cmd/marian-scorer): a tool for rescoring
 * [amun](/docs/cmd/amun): for CPU and GPU translation with Amun and certain Nematus models
 
+
 ### Model types
 
-* `s2s`: Default model type, which supports most of the features provided by
-  the toolkit. The architecture is equivalent to the
+- `s2s`: An RNN-based encoder-decoder model with attention mechanism. The
+  architecture is equivalent to the
+  [DL4MT](https://github.com/nyu-dl/dl4mt-tutorial) or
   [Nematus](https://github.com/EdinburghNLP/nematus) models ([Senrich et al.,
-  2017](https://arxiv.org/abs/1703.04357)), which use the RNN
-  encoder-decoder architecture with an attention mechanism, but not fully
-  compatible with them. Certain models of this type can be converted to models
-  of type Amun.
-* `multi_s2s`: Model of type `s2s`, which uses two or more encoders enabling
-  multi-source neural translation.
-* `transformer`: A new model based on [_Attention is all you need_, Vaswani et
-  al., 2017](https://arxiv.org/abs/1706.03762).
-* `amun`: Model architecture is equivalent to the DL4MT models used in Nematus.
-  Can be decoded with Amun tool as _nematus_ model type.
-* `nematus`: Model architecture is equivalent to deep models developed by the
-  Edinburgh MT group for WMT 2017 using Nematus toolkit. This is the only model
-  type supporting models trained with the Nematus-style layer normalization.
-  Can be decoded with the Amun tool as _nematus2_ model type.
-* `lm`: An RNN language model.
+  2017](https://arxiv.org/abs/1703.04357)), but not compatible with them as we
+  use custom names for matrices and our layer normalization is implemented
+  differently. Specific models of this type can be converted to Amun models.
+- `transformer`: A new model originally proposed by Google [(Vaswani et al.,
+  2017)](https://arxiv.org/abs/1706.03762) based solely on attention
+  mechanisms.
+- `multi-s2s`: As `s2s`, but uses two or more encoders allowing multi-source
+  neural machine translation.
+- `multi-transformer`: As `transformer`, but uses multiple encoders.
+- `amun`: Equivalent to Nematus models unles layer normalization is used. Can
+  be decoded with Amun as _nematus_ model type.
+- `nematus`: Equivalent to deep RNN-based  encoder-decoder models developed by
+  the Edinburgh MT group for WMT 2017 using Nematus toolkit. The only model
+  type that supports models trained with the Nematus-style layer normalization.
+  Can be decoded with Amun as _nematus2_ model type.
+- `lm`: An RNN language model.
+- `lm-transformer`: An transformer-based language model.
 
 
 
@@ -131,7 +135,7 @@ score, for example:
 ### Early stopping
 
 Early stopping is a common technique for deciding when to stop training the
-model based on a heuristic involving a validation set. 
+model based on a heuristic involving a validation set.
 
 By default we use early stopping with patience of 10, i.e. `--early-stopping
 10`. This means that training will finish if the first specified metric in
@@ -251,7 +255,7 @@ use common vocabularies:
 
 Weights are optional and set to 1.0 by default if ommitted.
 
-### Length normalization 
+### Length normalization
 
 We found that using length normalization with a penalty term of 0.6 and a beam
 size of 6 is usually best:
@@ -304,6 +308,7 @@ the model architecture, all parameters have to be set through command-line
 options.
 
 For example, for the [de-en model](http://data.statmt.org/wmt17_systems/en-de/)
+
 this would be:
 
     ./build/marian-decoder \

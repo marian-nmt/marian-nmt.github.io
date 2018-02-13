@@ -1,4 +1,4 @@
 var searchData=
 [
-  ['shape_5fsize',['SHAPE_SIZE',['../namespacemarian.html#a3df798260496f2cf8c2d39272ce213ad',1,'marian']]]
+  ['alignfileidx_5f',['alignFileIdx_',['../classmarian_1_1data_1_1CorpusBase.html#ad922b08474273024ff8d7a1cc34e43ac',1,'marian::data::CorpusBase']]]
 ];

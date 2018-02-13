@@ -3,6 +3,7 @@ var searchData=
   ['elementbinarynodeop',['ElementBinaryNodeOp',['../structmarian_1_1ElementBinaryNodeOp.html',1,'marian']]],
   ['elementwise',['Elementwise',['../classmarian_1_1Elementwise.html',1,'marian']]],
   ['embeddingfactory',['EmbeddingFactory',['../structmarian_1_1EmbeddingFactory.html',1,'marian']]],
+  ['empty',['empty',['../classmarian_1_1data_1_1SentenceTuple.html#a1438c00149d6cb15c2d7e7d2061d53ad',1,'marian::data::SentenceTuple']]],
   ['encoderbase',['EncoderBase',['../classmarian_1_1EncoderBase.html',1,'marian']]],
   ['encoderdecoder',['EncoderDecoder',['../classmarian_1_1EncoderDecoder.html',1,'marian']]],
   ['encoderdecoder_3c_20encoders2s_2c_20decoders2s_20_3e',['EncoderDecoder&lt; EncoderS2S, DecoderS2S &gt;',['../classmarian_1_1EncoderDecoder.html',1,'marian']]],

@@ -10,5 +10,6 @@ var searchData=
   ['poolingwithmaskingop',['PoolingWithMaskingOp',['../classmarian_1_1PoolingWithMaskingOp.html',1,'marian']]],
   ['poolingwrapper',['PoolingWrapper',['../classmarian_1_1PoolingWrapper.html',1,'marian']]],
   ['prelunodeop',['PReLUNodeOp',['../structmarian_1_1PReLUNodeOp.html',1,'marian']]],
-  ['printingstrategy',['PrintingStrategy',['../classmarian_1_1PrintingStrategy.html',1,'marian']]]
+  ['printingstrategy',['PrintingStrategy',['../classmarian_1_1PrintingStrategy.html',1,'marian']]],
+  ['push_5fback',['push_back',['../classmarian_1_1data_1_1SentenceTuple.html#a749e5acf8c894f139153f03abafc5ccb',1,'marian::data::SentenceTuple']]]
 ];

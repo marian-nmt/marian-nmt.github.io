@@ -4,6 +4,7 @@ var searchData=
   ['index',['Index',['../structmarian_1_1keywords_1_1Index.html',1,'marian::keywords']]],
   ['index_3c_20t_2c_20std_3a_3atuple_3c_20t_2c_20types_2e_2e_2e_20_3e_20_3e',['Index&lt; T, std::tuple&lt; T, Types... &gt; &gt;',['../structmarian_1_1keywords_1_1Index_3_01T_00_01std_1_1tuple_3_01T_00_01Types_8_8_8_01_4_01_4.html',1,'marian::keywords']]],
   ['index_3c_20t_2c_20std_3a_3atuple_3c_20u_2c_20types_2e_2e_2e_20_3e_20_3e',['Index&lt; T, std::tuple&lt; U, Types... &gt; &gt;',['../structmarian_1_1keywords_1_1Index_3_01T_00_01std_1_1tuple_3_01U_00_01Types_8_8_8_01_4_01_4.html',1,'marian::keywords']]],
+  ['indices',['indices',['../classmarian_1_1data_1_1SubBatch.html#a5da7bbc559373641e9fd829e85cb3b76',1,'marian::data::SubBatch']]],
   ['input',['Input',['../classmarian_1_1data_1_1Input.html',1,'marian::data::Input'],['../classmarian_1_1data_1_1Input.html#afe8ea48efed6b608c6ba3fcbe6b98111',1,'marian::data::Input::Input()']]],
   ['inputfactory',['InputFactory',['../structmarian_1_1rnn_1_1InputFactory.html',1,'marian::rnn']]],
   ['inputfilestream',['InputFileStream',['../classInputFileStream.html',1,'']]],

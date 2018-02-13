@@ -1,6 +1,6 @@
 var searchData=
 [
-  ['param',['param',['../classmarian_1_1ExpressionGraph.html#a3ed1b4e769bad15d8d766d7d31310f13',1,'marian::ExpressionGraph']]],
-  ['params',['params',['../classmarian_1_1ExpressionGraph.html#a01122decdd8ff42c1c4ed519fd0222c9',1,'marian::ExpressionGraph']]],
-  ['parseoptions',['parseOptions',['../classmarian_1_1ConfigParser.html#a538eb5f3c97b6a25a2fc0c7a8f015425',1,'marian::ConfigParser']]]
+  ['new',['New',['../namespacemarian.html#af27077d144a9eaf77f526e4b538861ef',1,'marian']]],
+  ['next',['next',['../classmarian_1_1data_1_1Corpus.html#a383139a28eb51cc4140e3c97fd0ecebe',1,'marian::data::Corpus']]],
+  ['npzconverter',['NpzConverter',['../classNpzConverter.html#a8f9abbb8916c2e7853887ffa7b8f8b4f',1,'NpzConverter']]]
 ];

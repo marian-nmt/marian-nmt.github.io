@@ -7,6 +7,7 @@ var searchData=
   ['datasetbase_3c_20example_2c_20exampleiterator_2c_20databatch_20_3e',['DatasetBase&lt; Example, ExampleIterator, DataBatch &gt;',['../classmarian_1_1data_1_1DatasetBase.html',1,'marian::data']]],
   ['datasetbase_3c_20sentencetuple_2c_20corpusiterator_2c_20corpusbatch_20_3e',['DatasetBase&lt; SentenceTuple, CorpusIterator, CorpusBatch &gt;',['../classmarian_1_1data_1_1DatasetBase.html',1,'marian::data']]],
   ['datasetbase_3c_20sentencetuple_2c_20textiterator_2c_20corpusbatch_20_3e',['DatasetBase&lt; SentenceTuple, TextIterator, CorpusBatch &gt;',['../classmarian_1_1data_1_1DatasetBase.html',1,'marian::data']]],
+  ['debug',['debug',['../classmarian_1_1data_1_1CorpusBatch.html#ab56b678bb12703ee723949323370fd7f',1,'marian::data::CorpusBatch']]],
   ['decoderbase',['DecoderBase',['../classmarian_1_1DecoderBase.html',1,'marian']]],
   ['decoderfactory',['DecoderFactory',['../classmarian_1_1models_1_1DecoderFactory.html',1,'marian::models']]],
   ['decoderhardatt',['DecoderHardAtt',['../classmarian_1_1DecoderHardAtt.html',1,'marian']]],

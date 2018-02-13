@@ -158,7 +158,7 @@
           </h1>
           <div class="meta">
             <i class="fa fa-clock-o"></i>
-            Last updated: 30 January 2018
+            Last updated: 13 February 2018
           </div>
         </div><!--//doc-header-->
 
@@ -180,24 +180,27 @@
 <h3 id="model-types">Model types</h3>
 
 <ul>
-  <li><code class="highlighter-rouge">s2s</code>: Default model type, which supports most of the features provided by
-the toolkit. The architecture is equivalent to the
+  <li><code class="highlighter-rouge">s2s</code>: An RNN-based encoder-decoder model with attention mechanism. The
+architecture is equivalent to the
+<a href="https://github.com/nyu-dl/dl4mt-tutorial">DL4MT</a> or
 <a href="https://github.com/EdinburghNLP/nematus">Nematus</a> models (<a href="https://arxiv.org/abs/1703.04357">Senrich et al.,
-2017</a>), which use the RNN
-encoder-decoder architecture with an attention mechanism, but not fully
-compatible with them. Certain models of this type can be converted to models
-of type Amun.</li>
-  <li><code class="highlighter-rouge">multi_s2s</code>: Model of type <code class="highlighter-rouge">s2s</code>, which uses two or more encoders enabling
-multi-source neural translation.</li>
-  <li><code class="highlighter-rouge">transformer</code>: A new model based on <a href="https://arxiv.org/abs/1706.03762"><em>Attention is all you need</em>, Vaswani et
-al., 2017</a>.</li>
-  <li><code class="highlighter-rouge">amun</code>: Model architecture is equivalent to the DL4MT models used in Nematus.
-Can be decoded with Amun tool as <em>nematus</em> model type.</li>
-  <li><code class="highlighter-rouge">nematus</code>: Model architecture is equivalent to deep models developed by the
-Edinburgh MT group for WMT 2017 using Nematus toolkit. This is the only model
-type supporting models trained with the Nematus-style layer normalization.
-Can be decoded with the Amun tool as <em>nematus2</em> model type.</li>
+2017</a>), but not compatible with them as we
+use custom names for matrices and our layer normalization is implemented
+differently. Specific models of this type can be converted to Amun models.</li>
+  <li><code class="highlighter-rouge">transformer</code>: A new model originally proposed by Google <a href="https://arxiv.org/abs/1706.03762">(Vaswani et al.,
+2017)</a> based solely on attention
+mechanisms.</li>
+  <li><code class="highlighter-rouge">multi-s2s</code>: As <code class="highlighter-rouge">s2s</code>, but uses two or more encoders allowing multi-source
+neural machine translation.</li>
+  <li><code class="highlighter-rouge">multi-transformer</code>: As <code class="highlighter-rouge">transformer</code>, but uses multiple encoders.</li>
+  <li><code class="highlighter-rouge">amun</code>: Equivalent to Nematus models unles layer normalization is used. Can
+be decoded with Amun as <em>nematus</em> model type.</li>
+  <li><code class="highlighter-rouge">nematus</code>: Equivalent to deep RNN-based  encoder-decoder models developed by
+the Edinburgh MT group for WMT 2017 using Nematus toolkit. The only model
+type that supports models trained with the Nematus-style layer normalization.
+Can be decoded with Amun as <em>nematus2</em> model type.</li>
   <li><code class="highlighter-rouge">lm</code>: An RNN language model.</li>
+  <li><code class="highlighter-rouge">lm-transformer</code>: An transformer-based language model.</li>
 </ul>
 
 <h2 id="training">Training</h2>
@@ -495,8 +498,9 @@ deep models</a> can be decoded with
 the model architecture, all parameters have to be set through command-line
 options.</p>
 
-<p>For example, for the <a href="http://data.statmt.org/wmt17_systems/en-de/">de-en model</a>
-this would be:</p>
+<p>For example, for the <a href="http://data.statmt.org/wmt17_systems/en-de/">de-en model</a></p>
+
+<p>this would be:</p>
 
 <div class="highlighter-rouge"><pre class="highlight"><code>./build/marian-decoder \
     --type nematus \

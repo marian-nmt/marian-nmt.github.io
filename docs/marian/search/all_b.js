@@ -2,6 +2,7 @@ var searchData=
 [
   ['keywords',['keywords',['../namespacemarian_1_1keywords.html',1,'marian']]],
   ['marian',['marian',['../namespacemarian.html',1,'']]],
+  ['mask',['mask',['../classmarian_1_1data_1_1SubBatch.html#ab247d3f0cf9cfd721fe34aaf4eb7a762',1,'marian::data::SubBatch']]],
   ['marian_20examples',['Marian examples',['../md_marian_src_examples_README.html',1,'']]],
   ['marian_20tests',['Marian tests',['../md_marian_src_tests_README.html',1,'']]],
   ['meannodeop',['MeanNodeOp',['../structmarian_1_1MeanNodeOp.html',1,'marian']]],

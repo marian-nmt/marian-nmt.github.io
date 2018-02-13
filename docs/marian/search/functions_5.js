@@ -1,5 +1,6 @@
 var searchData=
 [
-  ['get',['get',['../classmarian_1_1ExpressionGraph.html#a89df066a4abd34e1e999303cc53edd1e',1,'marian::ExpressionGraph']]],
-  ['graphviz',['graphviz',['../classmarian_1_1ExpressionGraph.html#a3bbdbd8964031c78c7825958d1e9c9fe',1,'marian::ExpressionGraph']]]
+  ['fakebatch',['fakeBatch',['../classmarian_1_1data_1_1CorpusBatch.html#a3e5bb6a430c263df7ab267275dcc5631',1,'marian::data::CorpusBatch']]],
+  ['forward',['forward',['../classmarian_1_1ExpressionGraph.html#aa7596e34cc2895cf374ce06d9d5ee370',1,'marian::ExpressionGraph']]],
+  ['front',['front',['../classmarian_1_1data_1_1CorpusBatch.html#a47d93bc1eb7e2d660fe0de99156df6da',1,'marian::data::CorpusBatch']]]
 ];

@@ -8,7 +8,8 @@ latex: true
 ---
 
 ## Overview and command-line options
-Marian toolkit provides the following tools (click on the name for a list of command line options):
+Marian toolkit provides the following tools (click on the name for a list of
+command line options):
 
 * [marian](/docs/cmd/marian): for training models of all types
 * [marian-decoder](/docs/cmd/marian-decoder): for GPU translation with models of all types
@@ -76,9 +77,10 @@ Command-line options overwrite options stored in the configuration file.
 
 ### Multi-GPU training
 
-For multi-GPU training You only need to specify the device ids of the GPUs you want to use for training
-(this also works with most other binaries) as `--devices 0 1 2 3` for training
-on four GPUs. There is no automatic detection of GPUs for now.
+For multi-GPU training You only need to specify the device ids of the GPUs you
+want to use for training (this also works with most other binaries) as
+`--devices 0 1 2 3` for training on four GPUs. There is no automatic detection
+of GPUs for now.
 
 By default, this will use asynchronous SGD (or rather ADAM). For the deeper models
 and the transformer model, we found async SGD to be unreliable and you may want
@@ -170,18 +172,18 @@ convergence and higher-quality translations.
 
 Marian supports various strategies for decaying learning rate
 (`--lr-decay-strategy` option):
-* `epoch`: learning rate will be decayed after each epoch starting from epoch
+- `epoch`: learning rate will be decayed after each epoch starting from epoch
   specified with `--lr-decay-start`
-* `batches`: learning rate will be decayed every `--lr-decay-freq` batches
+- `batches`: learning rate will be decayed every `--lr-decay-freq` batches
   starting after the batch specified with `--lr-decay-start`
-* `stalled`: learning rate will be decayed every time when the first validation
+- `stalled`: learning rate will be decayed every time when the first validation
   metric does not improve for `--lr-decay-start` consecutive validation steps
-* `epoch+stalled`: learning rate will be decayed after the specified number of
+- `epoch+stalled`: learning rate will be decayed after the specified number of
   epochs or stalled validation steps, whichever comes first. The option
   `--lr-decay-start` takes two numbers: for epochs and stalled validation
   steps, respectively
-* `batches+stalled`: as previous strategy, but batches are used instead of
-  epochs
+- `batches+stalled`: as `epoch+stalled`, but the total number of batches is
+  taken into account instead of epochs
 
 Decay factor for learning rate can be specified with `--lr-decay`.
 
@@ -226,6 +228,40 @@ the last workspace size that did not crash. Since setting `--mini-batch-fit`
 guarantees that memory will not grow during training due to batch-size this
 should result in a stable training run and maximal batch size.
 
+
+### Multi-node training
+
+Multi-node training requires an MPI installation with `MPI_THREAD_MULTIPLE` set to
+`true`. A newer version (e.g. OpenMPI 2.X) is highly recommended due to intense
+use of multi-threading.
+
+Command-line options specific to multi-node training:
+
+- `--multi-node` - enable multi-node.
+- `--devices` - set nodes and devices, e.g. `0: 0 1 1: 0` means that node 0 has
+  2 GPUs, with IDs 0 and 1, and node 1 has 1 GPU, with ID 0.
+- `--multi-node-overlap` - overlap communication with computations, default:
+  enabled.
+
+To start multi-node training, except compiling Marian with MPI, you need to
+create a host file and ensure that the nodes can ssh to each other without a
+password. Then you may use the command similar to:
+
+    mpirun -n 2 --hostfile hosts_mpi -tag-output \
+        ./build/marian --devices 0:0 1 1:0 \
+            -m model.npz -t corpus.src corpus.trg -v vocab.src.yml vocab.trg.yml \
+            --multi-node --multi-node-overlap 0
+
+where the host file `hosts_mpi` contains on each line a host on which you want
+to run Marian.
+
+Note that multi-node currently only converges properly with gradient dropping,
+which requires layer normalization. Ideally, add the following line to your run
+script:
+
+    --layer-normalization --dropout-rnn 0.2 --dropout-src 0.1 --dropout-trg 0.1
+
+This is still an experimental feature introduced in version 1.4.0.
 
 
 ## Translation
@@ -276,14 +312,14 @@ options to enable batched translation:
         --mini-batch 64 --maxi-batch-sort src --maxi-batch 100 -w 2500
 
 This does a number of things:
-* Firstly, it enables translation with a mini-batch size of 64, i.e.
+- Firstly, it enables translation with a mini-batch size of 64, i.e.
   translating 64 sentences at once, with a beam-size of 6.
-* It preloads 100 maxi-batches and sorts them according to source sentence
+- It preloads 100 maxi-batches and sorts them according to source sentence
   length, this allows for better packing of the batch and increases translation
   speed quite a bit.
-* We also added an option to use a length-normalization weight of 0.6 (this
+- We also added an option to use a length-normalization weight of 0.6 (this
   usually increases BLEU a bit).
-* The working memory is set to 2500 MB. The default working memory is 512 MB
+- The working memory is set to 2500 MB. The default working memory is 512 MB
   and Marian will increase it to match to requirements during translation, but
   pre-allocating memory makes it usually a bit faster.
 

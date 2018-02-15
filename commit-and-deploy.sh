@@ -11,6 +11,7 @@ git checkout master
 rsync -ca _site/* .
 rm -rf _site
 git add * || true
+git add docs/marian || true
 git commit -a -m 'Commit static pages'
 git push origin master
 git checkout jekyll

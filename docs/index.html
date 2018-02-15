@@ -158,7 +158,7 @@
           </h1>
           <div class="meta">
             <i class="fa fa-clock-o"></i>
-            Last updated: 13 February 2018
+            Last updated: 15 February 2018
           </div>
         </div><!--//doc-header-->
 
@@ -167,7 +167,8 @@
             <div class="content-inner">
 
               <h2 id="overview-and-command-line-options">Overview and command-line options</h2>
-<p>Marian toolkit provides the following tools (click on the name for a list of command line options):</p>
+<p>Marian toolkit provides the following tools (click on the name for a list of
+command line options):</p>
 
 <ul>
   <li><a href="/docs/cmd/marian">marian</a>: for training models of all types</li>
@@ -240,9 +241,10 @@ Nematus-compatible neural machine translation model:</p>
 
 <h3 id="multi-gpu-training">Multi-GPU training</h3>
 
-<p>For multi-GPU training You only need to specify the device ids of the GPUs you want to use for training
-(this also works with most other binaries) as <code class="highlighter-rouge">--devices 0 1 2 3</code> for training
-on four GPUs. There is no automatic detection of GPUs for now.</p>
+<p>For multi-GPU training You only need to specify the device ids of the GPUs you
+want to use for training (this also works with most other binaries) as
+<code class="highlighter-rouge">--devices 0 1 2 3</code> for training on four GPUs. There is no automatic detection
+of GPUs for now.</p>
 
 <p>By default, this will use asynchronous SGD (or rather ADAM). For the deeper models
 and the transformer model, we found async SGD to be unreliable and you may want
@@ -343,8 +345,8 @@ metric does not improve for <code class="highlighter-rouge">--lr-decay-start</co
 epochs or stalled validation steps, whichever comes first. The option
 <code class="highlighter-rouge">--lr-decay-start</code> takes two numbers: for epochs and stalled validation
 steps, respectively</li>
-  <li><code class="highlighter-rouge">batches+stalled</code>: as previous strategy, but batches are used instead of
-epochs</li>
+  <li><code class="highlighter-rouge">batches+stalled</code>: as <code class="highlighter-rouge">epoch+stalled</code>, but the total number of batches is
+taken into account instead of epochs</li>
 </ul>
 
 <p>Decay factor for learning rate can be specified with <code class="highlighter-rouge">--lr-decay</code>.</p>
@@ -388,6 +390,46 @@ model type, depth etc.  Next I use <code class="highlighter-rouge">--mini-batch-
 the last workspace size that did not crash. Since setting <code class="highlighter-rouge">--mini-batch-fit</code>
 guarantees that memory will not grow during training due to batch-size this
 should result in a stable training run and maximal batch size.</p>
+
+<h3 id="multi-node-training">Multi-node training</h3>
+
+<p>Multi-node training requires an MPI installation with <code class="highlighter-rouge">MPI_THREAD_MULTIPLE</code> set to
+<code class="highlighter-rouge">true</code>. A newer version (e.g. OpenMPI 2.X) is highly recommended due to intense
+use of multi-threading.</p>
+
+<p>Command-line options specific to multi-node training:</p>
+
+<ul>
+  <li><code class="highlighter-rouge">--multi-node</code> - enable multi-node.</li>
+  <li><code class="highlighter-rouge">--devices</code> - set nodes and devices, e.g. <code class="highlighter-rouge">0: 0 1 1: 0</code> means that node 0 has
+2 GPUs, with IDs 0 and 1, and node 1 has 1 GPU, with ID 0.</li>
+  <li><code class="highlighter-rouge">--multi-node-overlap</code> - overlap communication with computations, default:
+enabled.</li>
+</ul>
+
+<p>To start multi-node training, except compiling Marian with MPI, you need to
+create a host file and ensure that the nodes can ssh to each other without a
+password. Then you may use the command similar to:</p>
+
+<div class="highlighter-rouge"><pre class="highlight"><code>mpirun -n 2 --hostfile hosts_mpi -tag-output \
+    ./build/marian --devices 0:0 1 1:0 \
+        -m model.npz -t corpus.src corpus.trg -v vocab.src.yml vocab.trg.yml \
+        --multi-node --multi-node-overlap 0
+</code></pre>
+</div>
+
+<p>where the host file <code class="highlighter-rouge">hosts_mpi</code> contains on each line a host on which you want
+to run Marian.</p>
+
+<p>Note that multi-node currently only converges properly with gradient dropping,
+which requires layer normalization. Ideally, add the following line to your run
+script:</p>
+
+<div class="highlighter-rouge"><pre class="highlight"><code>--layer-normalization --dropout-rnn 0.2 --dropout-src 0.1 --dropout-trg 0.1
+</code></pre>
+</div>
+
+<p>This is still an experimental feature introduced in version 1.4.0.</p>
 
 <h2 id="translation">Translation</h2>
 

@@ -12,6 +12,7 @@ var searchData=
   ['modelservicetask',['ModelServiceTask',['../structmarian_1_1ModelServiceTask.html',1,'marian']]],
   ['modeltask',['ModelTask',['../structmarian_1_1ModelTask.html',1,'marian']]],
   ['multicellinput',['MultiCellInput',['../classmarian_1_1rnn_1_1MultiCellInput.html',1,'marian::rnn']]],
+  ['multinodegraphgroup',['MultiNodeGraphGroup',['../classmarian_1_1MultiNodeGraphGroup.html',1,'marian']]],
   ['multiplicative',['Multiplicative',['../classmarian_1_1rnn_1_1Multiplicative.html',1,'marian::rnn']]],
   ['multnodeop',['MultNodeOp',['../structmarian_1_1MultNodeOp.html',1,'marian']]]
 ];

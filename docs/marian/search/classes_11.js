@@ -5,6 +5,7 @@ var searchData=
   ['scalarproductnodeop',['ScalarProductNodeOp',['../structmarian_1_1ScalarProductNodeOp.html',1,'marian']]],
   ['scheduler',['Scheduler',['../classmarian_1_1Scheduler.html',1,'marian']]],
   ['scorecollector',['ScoreCollector',['../classmarian_1_1ScoreCollector.html',1,'marian']]],
+  ['scorecollectornbest',['ScoreCollectorNBest',['../classmarian_1_1ScoreCollectorNBest.html',1,'marian']]],
   ['scorer',['Scorer',['../classmarian_1_1Scorer.html',1,'marian']]],
   ['scorerstate',['ScorerState',['../classmarian_1_1ScorerState.html',1,'marian']]],
   ['scorerwrapper',['ScorerWrapper',['../classmarian_1_1ScorerWrapper.html',1,'marian']]],

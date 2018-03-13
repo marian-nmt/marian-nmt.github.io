@@ -1,4 +1,4 @@
 var searchData=
 [
-  ['zeros',['zeros',['../classmarian_1_1ExpressionGraph.html#a7669418f0034edf87321793c47476672',1,'marian::ExpressionGraph']]]
+  ['validators',['Validators',['../namespacemarian.html#a3fab6c8f46aed8ca7cba1efc3a326731',1,'marian']]]
 ];

@@ -1,4 +1,4 @@
 var searchData=
 [
-  ['weightfileidx_5f',['weightFileIdx_',['../classmarian_1_1data_1_1CorpusBase.html#a516443746c9afaaa65f822b87482acfb',1,'marian::data::CorpusBase']]]
+  ['batchiter_5f',['batchIter_',['../classmarian_1_1MultiNodeGraphGroup.html#af33edb88079b692db2be9da60f461e1d',1,'marian::MultiNodeGraphGroup']]]
 ];

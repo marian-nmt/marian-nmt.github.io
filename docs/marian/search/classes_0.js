@@ -8,11 +8,12 @@ var searchData=
   ['allocationexception',['AllocationException',['../classmarian_1_1AllocationException.html',1,'marian']]],
   ['allocator',['Allocator',['../classmarian_1_1Allocator.html',1,'marian']]],
   ['amun',['Amun',['../classmarian_1_1Amun.html',1,'marian']]],
-  ['array',['Array',['../structmarian_1_1gpu_1_1Array.html',1,'marian::gpu']]],
-  ['array_3c_20int_2c_20n_20_3e',['Array&lt; int, N &gt;',['../structmarian_1_1gpu_1_1Array.html',1,'marian::gpu']]],
+  ['array',['Array',['../structmarian_1_1functional_1_1Array.html',1,'marian::functional']]],
+  ['array_3c_20int_2c_20n_20_3e',['Array&lt; int, N &gt;',['../structmarian_1_1functional_1_1Array.html',1,'marian::functional']]],
   ['assign',['Assign',['../structmarian_1_1functional_1_1Assign.html',1,'marian::functional']]],
   ['assignee',['Assignee',['../structmarian_1_1functional_1_1Assignee.html',1,'marian::functional']]],
   ['asyncgraphgroup',['AsyncGraphGroup',['../classmarian_1_1AsyncGraphGroup.html',1,'marian']]],
   ['asyncgraphgroupdrop',['AsyncGraphGroupDrop',['../classmarian_1_1AsyncGraphGroupDrop.html',1,'marian']]],
-  ['attentionfactory',['AttentionFactory',['../classmarian_1_1rnn_1_1AttentionFactory.html',1,'marian::rnn']]]
+  ['attentionfactory',['AttentionFactory',['../classmarian_1_1rnn_1_1AttentionFactory.html',1,'marian::rnn']]],
+  ['attentionnodeop',['AttentionNodeOp',['../structmarian_1_1rnn_1_1AttentionNodeOp.html',1,'marian::rnn']]]
 ];

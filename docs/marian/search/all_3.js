@@ -1,6 +1,6 @@
 var searchData=
 [
-  ['data',['data',['../classmarian_1_1data_1_1Input.html#a4ab2dc585e463b4dab0e822b2108b977',1,'marian::data::Input']]],
+  ['data',['data',['../classmarian_1_1data_1_1SubBatch.html#a5ed95035662ccb54673f5bcb6180fa5b',1,'marian::data::SubBatch::data()'],['../classmarian_1_1data_1_1Input.html#a4ab2dc585e463b4dab0e822b2108b977',1,'marian::data::Input::data()']]],
   ['databatch',['DataBatch',['../classmarian_1_1data_1_1DataBatch.html',1,'marian::data']]],
   ['dataset',['Dataset',['../classmarian_1_1data_1_1Dataset.html',1,'marian::data']]],
   ['datasetbase',['DatasetBase',['../classmarian_1_1data_1_1DatasetBase.html',1,'marian::data']]],
@@ -19,8 +19,9 @@ var searchData=
   ['dense',['Dense',['../classmarian_1_1mlp_1_1Dense.html',1,'marian::mlp']]],
   ['densefactory',['DenseFactory',['../classmarian_1_1mlp_1_1DenseFactory.html',1,'marian::mlp']]],
   ['destruct',['Destruct',['../classNpzConverter.html#a5546c446fba3083e22e1741a1f08d80f',1,'NpzConverter']]],
-  ['devicecpu',['DeviceCPU',['../classmarian_1_1DeviceCPU.html',1,'marian::DeviceCPU'],['../classDeviceCPU.html',1,'DeviceCPU']]],
-  ['devicegpu',['DeviceGPU',['../classmarian_1_1DeviceGPU.html',1,'marian']]],
+  ['device',['Device',['../classmarian_1_1Device.html',1,'marian::Device'],['../classmarian_1_1gpu_1_1Device.html',1,'marian::gpu::Device'],['../classmarian_1_1cpu_1_1Device.html',1,'marian::cpu::Device']]],
+  ['deviceid',['DeviceId',['../structmarian_1_1DeviceId.html',1,'marian']]],
+  ['devices_5f',['devices_',['../classmarian_1_1MultiNodeGraphGroup.html#ab1f7957b2900e161ba7f759331a3141a',1,'marian::MultiNodeGraphGroup']]],
   ['divnodeop',['DivNodeOp',['../structmarian_1_1DivNodeOp.html',1,'marian']]],
   ['dotbatchednodeop',['DotBatchedNodeOp',['../classmarian_1_1DotBatchedNodeOp.html',1,'marian']]],
   ['dotnodeop',['DotNodeOp',['../classmarian_1_1DotNodeOp.html',1,'marian']]]

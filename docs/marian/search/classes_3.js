@@ -16,8 +16,8 @@ var searchData=
   ['defaultprinting',['DefaultPrinting',['../classmarian_1_1DefaultPrinting.html',1,'marian']]],
   ['dense',['Dense',['../classmarian_1_1mlp_1_1Dense.html',1,'marian::mlp']]],
   ['densefactory',['DenseFactory',['../classmarian_1_1mlp_1_1DenseFactory.html',1,'marian::mlp']]],
-  ['devicecpu',['DeviceCPU',['../classmarian_1_1DeviceCPU.html',1,'marian::DeviceCPU'],['../classDeviceCPU.html',1,'DeviceCPU']]],
-  ['devicegpu',['DeviceGPU',['../classmarian_1_1DeviceGPU.html',1,'marian']]],
+  ['device',['Device',['../classmarian_1_1Device.html',1,'marian::Device'],['../classmarian_1_1gpu_1_1Device.html',1,'marian::gpu::Device'],['../classmarian_1_1cpu_1_1Device.html',1,'marian::cpu::Device']]],
+  ['deviceid',['DeviceId',['../structmarian_1_1DeviceId.html',1,'marian']]],
   ['divnodeop',['DivNodeOp',['../structmarian_1_1DivNodeOp.html',1,'marian']]],
   ['dotbatchednodeop',['DotBatchedNodeOp',['../classmarian_1_1DotBatchedNodeOp.html',1,'marian']]],
   ['dotnodeop',['DotNodeOp',['../classmarian_1_1DotNodeOp.html',1,'marian']]]

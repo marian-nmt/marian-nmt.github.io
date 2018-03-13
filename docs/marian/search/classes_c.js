@@ -6,5 +6,7 @@ var searchData=
   ['node',['Node',['../classmarian_1_1Node.html',1,'marian']]],
   ['norm',['Norm',['../classmarian_1_1Norm.html',1,'marian']]],
   ['npzconverter',['NpzConverter',['../classNpzConverter.html',1,'']]],
-  ['nthelement',['NthElement',['../classmarian_1_1NthElement.html',1,'marian']]]
+  ['nthelement',['NthElement',['../structmarian_1_1NthElement.html',1,'marian']]],
+  ['nthelementcpu',['NthElementCPU',['../classmarian_1_1NthElementCPU.html',1,'marian']]],
+  ['nthelementgpu',['NthElementGPU',['../classmarian_1_1NthElementGPU.html',1,'marian']]]
 ];

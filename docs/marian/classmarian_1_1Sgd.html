@@ -71,6 +71,11 @@ $(function() {
 <div class="title">marian::Sgd Class Reference</div>  </div>
 </div><!--header-->
 <div class="contents">
+
+<p>Stochastic gradient descent optimizer.  
+ <a href="classmarian_1_1Sgd.html#details">More...</a></p>
+
+<p><code>#include &lt;<a class="el" href="optimizers_8h_source.html">optimizers.h</a>&gt;</code></p>
 <div class="dynheader">
 Inheritance diagram for marian::Sgd:</div>
 <div class="dyncontent">
@@ -97,6 +102,12 @@ void&#160;</td><td class="memItemRight" valign="bottom"><b>update</b> (Ptr&lt; <
 <tr class="memitem:a1342cfffb323af02e2c164a633d6104a inherit pub_methods_classmarian_1_1OptimizerBase"><td class="memItemLeft" align="right" valign="top"><a id="a1342cfffb323af02e2c164a633d6104a"></a>
 void&#160;</td><td class="memItemRight" valign="bottom"><b>update</b> (Tensor params, Tensor grads, float multiplyFactor=1.0f)</td></tr>
 <tr class="separator:a1342cfffb323af02e2c164a633d6104a inherit pub_methods_classmarian_1_1OptimizerBase"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a22240d42287670f46f4ef290804d1190 inherit pub_methods_classmarian_1_1OptimizerBase"><td class="memItemLeft" align="right" valign="top"><a id="a22240d42287670f46f4ef290804d1190"></a>
+virtual void&#160;</td><td class="memItemRight" valign="bottom"><b>init</b> (<a class="el" href="classmarian_1_1TrainingState.html">TrainingState</a> &amp;state)</td></tr>
+<tr class="separator:a22240d42287670f46f4ef290804d1190 inherit pub_methods_classmarian_1_1OptimizerBase"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a111754b2dfde27c2b456d5cd783de19d inherit pub_methods_classmarian_1_1OptimizerBase"><td class="memItemLeft" align="right" valign="top"><a id="a111754b2dfde27c2b456d5cd783de19d"></a>
+virtual void&#160;</td><td class="memItemRight" valign="bottom"><b>actAfterLoaded</b> (<a class="el" href="classmarian_1_1TrainingState.html">TrainingState</a> &amp;state)</td></tr>
+<tr class="separator:a111754b2dfde27c2b456d5cd783de19d inherit pub_methods_classmarian_1_1OptimizerBase"><td class="memSeparator" colspan="2">&#160;</td></tr>
 <tr class="memitem:a5d2847b7970dbd952503df5490a71c5f inherit pub_methods_classmarian_1_1OptimizerBase"><td class="memItemLeft" align="right" valign="top"><a id="a5d2847b7970dbd952503df5490a71c5f"></a>
 virtual void&#160;</td><td class="memItemRight" valign="bottom"><b>actAfterEpoch</b> (<a class="el" href="classmarian_1_1TrainingState.html">TrainingState</a> &amp;state)</td></tr>
 <tr class="separator:a5d2847b7970dbd952503df5490a71c5f inherit pub_methods_classmarian_1_1OptimizerBase"><td class="memSeparator" colspan="2">&#160;</td></tr>
@@ -109,6 +120,12 @@ virtual void&#160;</td><td class="memItemRight" valign="bottom"><b>actAfterStall
 <tr class="memitem:a521458bb527ba40170d08baf30386587 inherit pub_methods_classmarian_1_1OptimizerBase"><td class="memItemLeft" align="right" valign="top"><a id="a521458bb527ba40170d08baf30386587"></a>
 void&#160;</td><td class="memItemRight" valign="bottom"><b>setParams</b> (const std::vector&lt; float &gt; &amp;params)</td></tr>
 <tr class="separator:a521458bb527ba40170d08baf30386587 inherit pub_methods_classmarian_1_1OptimizerBase"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a085b295e4dc839d240bc8fd10ae4c97e inherit pub_methods_classmarian_1_1OptimizerBase"><td class="memItemLeft" align="right" valign="top"><a id="a085b295e4dc839d240bc8fd10ae4c97e"></a>
+virtual void&#160;</td><td class="memItemRight" valign="bottom"><b>load</b> (const std::string &amp;name, std::vector&lt; Ptr&lt; <a class="el" href="classmarian_1_1OptimizerBase.html">OptimizerBase</a> &gt;&gt; opts, std::vector&lt; Ptr&lt; <a class="el" href="classmarian_1_1Backend.html">Backend</a> &gt;&gt; backends)</td></tr>
+<tr class="separator:a085b295e4dc839d240bc8fd10ae4c97e inherit pub_methods_classmarian_1_1OptimizerBase"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a733a2173ba8305b4241370db03cd56d6 inherit pub_methods_classmarian_1_1OptimizerBase"><td class="memItemLeft" align="right" valign="top"><a id="a733a2173ba8305b4241370db03cd56d6"></a>
+virtual void&#160;</td><td class="memItemRight" valign="bottom"><b>save</b> (const std::string &amp;name, std::vector&lt; Ptr&lt; <a class="el" href="classmarian_1_1OptimizerBase.html">OptimizerBase</a> &gt;&gt; opts, size_t totalSize)</td></tr>
+<tr class="separator:a733a2173ba8305b4241370db03cd56d6 inherit pub_methods_classmarian_1_1OptimizerBase"><td class="memSeparator" colspan="2">&#160;</td></tr>
 </table><table class="memberdecls">
 <tr class="heading"><td colspan="2"><h2 class="groupheader"><a name="inherited"></a>
 Additional Inherited Members</h2></td></tr>
@@ -123,13 +140,16 @@ float&#160;</td><td class="memItemRight" valign="bottom"><b>multiplyFactor_</b><
 Ptr&lt; <a class="el" href="classmarian_1_1ClipperBase.html">ClipperBase</a> &gt;&#160;</td><td class="memItemRight" valign="bottom"><b>clipper_</b></td></tr>
 <tr class="separator:ac2a86cf5b8691476b891c9a9df99218d inherit pro_attribs_classmarian_1_1OptimizerBase"><td class="memSeparator" colspan="2">&#160;</td></tr>
 </table>
-<hr/>The documentation for this class was generated from the following file:<ul>
+<a name="details" id="details"></a><h2 class="groupheader">Detailed Description</h2>
+<div class="textblock"><p>Stochastic gradient descent optimizer. </p>
+</div><hr/>The documentation for this class was generated from the following files:<ul>
 <li>marian/src/optimizers/<a class="el" href="optimizers_8h_source.html">optimizers.h</a></li>
+<li>marian/src/optimizers/optimizers.cpp</li>
 </ul>
 </div><!-- contents -->
 <!-- start footer part -->
 <hr class="footer"/><address class="footer"><small>
-Generated on Thu Feb 15 2018 09:47:42 for Marian by &#160;<a href="http://www.doxygen.org/index.html">
+Generated on Tue Mar 13 2018 14:16:36 for Marian by &#160;<a href="http://www.doxygen.org/index.html">
 <img class="footer" src="doxygen.png" alt="doxygen"/>
 </a> 1.8.13
 </small></address>

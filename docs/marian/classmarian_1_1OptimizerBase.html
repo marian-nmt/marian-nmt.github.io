@@ -73,6 +73,8 @@ $(function() {
 <div class="title">marian::OptimizerBase Class Reference<span class="mlabels"><span class="mlabel">abstract</span></span></div>  </div>
 </div><!--header-->
 <div class="contents">
+
+<p><code>#include &lt;<a class="el" href="optimizers_8h_source.html">optimizers.h</a>&gt;</code></p>
 <div class="dynheader">
 Inheritance diagram for marian::OptimizerBase:</div>
 <div class="dyncontent">
@@ -80,9 +82,9 @@ Inheritance diagram for marian::OptimizerBase:</div>
   <img src="classmarian_1_1OptimizerBase.png" usemap="#marian::OptimizerBase_map" alt=""/>
   <map id="marian::OptimizerBase_map" name="marian::OptimizerBase_map">
 <area href="classmarian_1_1TrainingObserver.html" alt="marian::TrainingObserver" shape="rect" coords="166,0,322,24"/>
-<area href="classmarian_1_1Adagrad.html" alt="marian::Adagrad" shape="rect" coords="0,112,156,136"/>
-<area href="classmarian_1_1Adam.html" alt="marian::Adam" shape="rect" coords="166,112,322,136"/>
-<area href="classmarian_1_1Sgd.html" alt="marian::Sgd" shape="rect" coords="332,112,488,136"/>
+<area href="classmarian_1_1Adagrad.html" title="Adagrad optimizer. " alt="marian::Adagrad" shape="rect" coords="0,112,156,136"/>
+<area href="classmarian_1_1Adam.html" title="Adam optimizer. " alt="marian::Adam" shape="rect" coords="166,112,322,136"/>
+<area href="classmarian_1_1Sgd.html" title="Stochastic gradient descent optimizer. " alt="marian::Sgd" shape="rect" coords="332,112,488,136"/>
 </map>
  </div></div>
 <table class="memberdecls">
@@ -97,6 +99,12 @@ void&#160;</td><td class="memItemRight" valign="bottom"><b>update</b> (Ptr&lt; <
 <tr class="memitem:a1342cfffb323af02e2c164a633d6104a"><td class="memItemLeft" align="right" valign="top"><a id="a1342cfffb323af02e2c164a633d6104a"></a>
 void&#160;</td><td class="memItemRight" valign="bottom"><b>update</b> (Tensor params, Tensor grads, float multiplyFactor=1.0f)</td></tr>
 <tr class="separator:a1342cfffb323af02e2c164a633d6104a"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a22240d42287670f46f4ef290804d1190"><td class="memItemLeft" align="right" valign="top"><a id="a22240d42287670f46f4ef290804d1190"></a>
+virtual void&#160;</td><td class="memItemRight" valign="bottom"><b>init</b> (<a class="el" href="classmarian_1_1TrainingState.html">TrainingState</a> &amp;state)</td></tr>
+<tr class="separator:a22240d42287670f46f4ef290804d1190"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a111754b2dfde27c2b456d5cd783de19d"><td class="memItemLeft" align="right" valign="top"><a id="a111754b2dfde27c2b456d5cd783de19d"></a>
+virtual void&#160;</td><td class="memItemRight" valign="bottom"><b>actAfterLoaded</b> (<a class="el" href="classmarian_1_1TrainingState.html">TrainingState</a> &amp;state)</td></tr>
+<tr class="separator:a111754b2dfde27c2b456d5cd783de19d"><td class="memSeparator" colspan="2">&#160;</td></tr>
 <tr class="memitem:a5d2847b7970dbd952503df5490a71c5f"><td class="memItemLeft" align="right" valign="top"><a id="a5d2847b7970dbd952503df5490a71c5f"></a>
 virtual void&#160;</td><td class="memItemRight" valign="bottom"><b>actAfterEpoch</b> (<a class="el" href="classmarian_1_1TrainingState.html">TrainingState</a> &amp;state)</td></tr>
 <tr class="separator:a5d2847b7970dbd952503df5490a71c5f"><td class="memSeparator" colspan="2">&#160;</td></tr>
@@ -109,6 +117,12 @@ virtual void&#160;</td><td class="memItemRight" valign="bottom"><b>actAfterStall
 <tr class="memitem:a521458bb527ba40170d08baf30386587"><td class="memItemLeft" align="right" valign="top"><a id="a521458bb527ba40170d08baf30386587"></a>
 void&#160;</td><td class="memItemRight" valign="bottom"><b>setParams</b> (const std::vector&lt; float &gt; &amp;params)</td></tr>
 <tr class="separator:a521458bb527ba40170d08baf30386587"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a085b295e4dc839d240bc8fd10ae4c97e"><td class="memItemLeft" align="right" valign="top"><a id="a085b295e4dc839d240bc8fd10ae4c97e"></a>
+virtual void&#160;</td><td class="memItemRight" valign="bottom"><b>load</b> (const std::string &amp;name, std::vector&lt; Ptr&lt; <a class="el" href="classmarian_1_1OptimizerBase.html">OptimizerBase</a> &gt;&gt; opts, std::vector&lt; Ptr&lt; <a class="el" href="classmarian_1_1Backend.html">Backend</a> &gt;&gt; backends)</td></tr>
+<tr class="separator:a085b295e4dc839d240bc8fd10ae4c97e"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a733a2173ba8305b4241370db03cd56d6"><td class="memItemLeft" align="right" valign="top"><a id="a733a2173ba8305b4241370db03cd56d6"></a>
+virtual void&#160;</td><td class="memItemRight" valign="bottom"><b>save</b> (const std::string &amp;name, std::vector&lt; Ptr&lt; <a class="el" href="classmarian_1_1OptimizerBase.html">OptimizerBase</a> &gt;&gt; opts, size_t totalSize)</td></tr>
+<tr class="separator:a733a2173ba8305b4241370db03cd56d6"><td class="memSeparator" colspan="2">&#160;</td></tr>
 </table><table class="memberdecls">
 <tr class="heading"><td colspan="2"><h2 class="groupheader"><a name="pro-methods"></a>
 Protected Member Functions</h2></td></tr>
@@ -118,6 +132,9 @@ virtual void&#160;</td><td class="memItemRight" valign="bottom"><b>updateImpl</b
 <tr class="memitem:a575ca76ccdfe52b96e37a9690ff63118"><td class="memItemLeft" align="right" valign="top"><a id="a575ca76ccdfe52b96e37a9690ff63118"></a>
 virtual void&#160;</td><td class="memItemRight" valign="bottom"><b>parseParams</b> (const std::vector&lt; float &gt; &amp;params)=0</td></tr>
 <tr class="separator:a575ca76ccdfe52b96e37a9690ff63118"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a8026cf7899350632e4cd86b8e18cc07e"><td class="memItemLeft" align="right" valign="top"><a id="a8026cf7899350632e4cd86b8e18cc07e"></a>
+virtual void&#160;</td><td class="memItemRight" valign="bottom"><b>resetStats</b> ()=0</td></tr>
+<tr class="separator:a8026cf7899350632e4cd86b8e18cc07e"><td class="memSeparator" colspan="2">&#160;</td></tr>
 </table><table class="memberdecls">
 <tr class="heading"><td colspan="2"><h2 class="groupheader"><a name="pro-attribs"></a>
 Protected Attributes</h2></td></tr>
@@ -131,13 +148,15 @@ float&#160;</td><td class="memItemRight" valign="bottom"><b>multiplyFactor_</b><
 Ptr&lt; <a class="el" href="classmarian_1_1ClipperBase.html">ClipperBase</a> &gt;&#160;</td><td class="memItemRight" valign="bottom"><b>clipper_</b></td></tr>
 <tr class="separator:ac2a86cf5b8691476b891c9a9df99218d"><td class="memSeparator" colspan="2">&#160;</td></tr>
 </table>
-<hr/>The documentation for this class was generated from the following file:<ul>
+<a name="details" id="details"></a><h2 class="groupheader">Detailed Description</h2>
+<div class="textblock"><p>Base class for optimizers. </p>
+</div><hr/>The documentation for this class was generated from the following file:<ul>
 <li>marian/src/optimizers/<a class="el" href="optimizers_8h_source.html">optimizers.h</a></li>
 </ul>
 </div><!-- contents -->
 <!-- start footer part -->
 <hr class="footer"/><address class="footer"><small>
-Generated on Thu Feb 15 2018 09:47:42 for Marian by &#160;<a href="http://www.doxygen.org/index.html">
+Generated on Tue Mar 13 2018 14:16:35 for Marian by &#160;<a href="http://www.doxygen.org/index.html">
 <img class="footer" src="doxygen.png" alt="doxygen"/>
 </a> 1.8.13
 </small></address>

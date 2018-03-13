@@ -72,11 +72,6 @@ $(function() {
 <div class="title">marian::ExpressionGraph Class Reference</div>  </div>
 </div><!--header-->
 <div class="contents">
-
-<p>Represents a computation graph of expressions, over which algorithmic differentiation may be performed.  
- <a href="classmarian_1_1ExpressionGraph.html#details">More...</a></p>
-
-<p><code>#include &lt;<a class="el" href="expression__graph_8h_source.html">expression_graph.h</a>&gt;</code></p>
 <div class="dynheader">
 Inheritance diagram for marian::ExpressionGraph:</div>
 <div class="dyncontent">
@@ -94,12 +89,12 @@ Public Member Functions</h2></td></tr>
 <tr class="memitem:a782978d9389b9f1f6de07399954a5925"><td class="memItemLeft" align="right" valign="top"><a id="a782978d9389b9f1f6de07399954a5925"></a>
 void&#160;</td><td class="memItemRight" valign="bottom"><b>setInference</b> (bool inference)</td></tr>
 <tr class="separator:a782978d9389b9f1f6de07399954a5925"><td class="memSeparator" colspan="2">&#160;</td></tr>
-<tr class="memitem:a887b328e3073bbdef1869ae6ff632ca4"><td class="memItemLeft" align="right" valign="top"><a id="a887b328e3073bbdef1869ae6ff632ca4"></a>
-void&#160;</td><td class="memItemRight" valign="bottom"><b>setDevice</b> (size_t device=0)</td></tr>
-<tr class="separator:a887b328e3073bbdef1869ae6ff632ca4"><td class="memSeparator" colspan="2">&#160;</td></tr>
-<tr class="memitem:a6de2782630380b0b2d3a1ded6db5324d"><td class="memItemLeft" align="right" valign="top"><a id="a6de2782630380b0b2d3a1ded6db5324d"></a>
-size_t&#160;</td><td class="memItemRight" valign="bottom"><b>getDevice</b> ()</td></tr>
-<tr class="separator:a6de2782630380b0b2d3a1ded6db5324d"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:adcf8f273d3b1b6a470ca3b63ea3a411e"><td class="memItemLeft" align="right" valign="top"><a id="adcf8f273d3b1b6a470ca3b63ea3a411e"></a>
+void&#160;</td><td class="memItemRight" valign="bottom"><b>setDevice</b> (<a class="el" href="structmarian_1_1DeviceId.html">DeviceId</a> deviceId={0, DeviceType::gpu})</td></tr>
+<tr class="separator:adcf8f273d3b1b6a470ca3b63ea3a411e"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a4d7869fc265fd21d47fbcce5986b6509"><td class="memItemLeft" align="right" valign="top"><a id="a4d7869fc265fd21d47fbcce5986b6509"></a>
+<a class="el" href="structmarian_1_1DeviceId.html">DeviceId</a>&#160;</td><td class="memItemRight" valign="bottom"><b>getDevice</b> ()</td></tr>
+<tr class="separator:a4d7869fc265fd21d47fbcce5986b6509"><td class="memSeparator" colspan="2">&#160;</td></tr>
 <tr class="memitem:a714920827388a0d6f880a90c2e5e5be0"><td class="memItemLeft" align="right" valign="top"><a id="a714920827388a0d6f880a90c2e5e5be0"></a>
 Ptr&lt; <a class="el" href="classmarian_1_1Backend.html">Backend</a> &gt;&#160;</td><td class="memItemRight" valign="bottom"><b>getBackend</b> ()</td></tr>
 <tr class="separator:a714920827388a0d6f880a90c2e5e5be0"><td class="memSeparator" colspan="2">&#160;</td></tr>
@@ -121,8 +116,8 @@ void&#160;</td><td class="memItemRight" valign="bottom"><b>reuseWorkspace</b> (P
 <tr class="memitem:a1ce5fad852cb6d30cfd0a2d729bb44c3"><td class="memItemLeft" align="right" valign="top"><a id="a1ce5fad852cb6d30cfd0a2d729bb44c3"></a>
 bool&#160;</td><td class="memItemRight" valign="bottom"><b>fits</b> ()</td></tr>
 <tr class="separator:a1ce5fad852cb6d30cfd0a2d729bb44c3"><td class="memSeparator" colspan="2">&#160;</td></tr>
-<tr class="memitem:aa7596e34cc2895cf374ce06d9d5ee370"><td class="memItemLeft" align="right" valign="top">void&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classmarian_1_1ExpressionGraph.html#aa7596e34cc2895cf374ce06d9d5ee370">forward</a> ()</td></tr>
-<tr class="memdesc:aa7596e34cc2895cf374ce06d9d5ee370"><td class="mdescLeft">&#160;</td><td class="mdescRight">Perform the forward pass of algorithmic differentiation (AD) on this graph.  <a href="#aa7596e34cc2895cf374ce06d9d5ee370">More...</a><br /></td></tr>
+<tr class="memitem:aa7596e34cc2895cf374ce06d9d5ee370"><td class="memItemLeft" align="right" valign="top"><a id="aa7596e34cc2895cf374ce06d9d5ee370"></a>
+void&#160;</td><td class="memItemRight" valign="bottom"><b>forward</b> ()</td></tr>
 <tr class="separator:aa7596e34cc2895cf374ce06d9d5ee370"><td class="memSeparator" colspan="2">&#160;</td></tr>
 <tr class="memitem:a463586866800f0756b27273b21534ed8"><td class="memItemLeft" align="right" valign="top"><a id="a463586866800f0756b27273b21534ed8"></a>
 void&#160;</td><td class="memItemRight" valign="bottom"><b>checkNan</b> (Tensor t)</td></tr>
@@ -130,42 +125,35 @@ void&#160;</td><td class="memItemRight" valign="bottom"><b>checkNan</b> (Tensor 
 <tr class="memitem:a41337743d6e030cf6b8e2b2e4d39a908"><td class="memItemLeft" align="right" valign="top"><a id="a41337743d6e030cf6b8e2b2e4d39a908"></a>
 void&#160;</td><td class="memItemRight" valign="bottom"><b>forwardNext</b> ()</td></tr>
 <tr class="separator:a41337743d6e030cf6b8e2b2e4d39a908"><td class="memSeparator" colspan="2">&#160;</td></tr>
-<tr class="memitem:ae4be44e38a47b0964a24880078eb16c3"><td class="memItemLeft" align="right" valign="top">void&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classmarian_1_1ExpressionGraph.html#ae4be44e38a47b0964a24880078eb16c3">backward</a> ()</td></tr>
-<tr class="memdesc:ae4be44e38a47b0964a24880078eb16c3"><td class="mdescLeft">&#160;</td><td class="mdescRight">Perform the backward pass of algorithmic differentiation (AD) on this graph.  <a href="#ae4be44e38a47b0964a24880078eb16c3">More...</a><br /></td></tr>
+<tr class="memitem:ae4be44e38a47b0964a24880078eb16c3"><td class="memItemLeft" align="right" valign="top"><a id="ae4be44e38a47b0964a24880078eb16c3"></a>
+void&#160;</td><td class="memItemRight" valign="bottom"><b>backward</b> ()</td></tr>
 <tr class="separator:ae4be44e38a47b0964a24880078eb16c3"><td class="memSeparator" colspan="2">&#160;</td></tr>
-<tr class="memitem:a3bbdbd8964031c78c7825958d1e9c9fe"><td class="memItemLeft" align="right" valign="top">std::string&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classmarian_1_1ExpressionGraph.html#a3bbdbd8964031c78c7825958d1e9c9fe">graphviz</a> ()</td></tr>
-<tr class="memdesc:a3bbdbd8964031c78c7825958d1e9c9fe"><td class="mdescLeft">&#160;</td><td class="mdescRight">Returns a string representing this expression graph in <code>graphviz</code> notation.  <a href="#a3bbdbd8964031c78c7825958d1e9c9fe">More...</a><br /></td></tr>
+<tr class="memitem:a3bbdbd8964031c78c7825958d1e9c9fe"><td class="memItemLeft" align="right" valign="top"><a id="a3bbdbd8964031c78c7825958d1e9c9fe"></a>
+std::string&#160;</td><td class="memItemRight" valign="bottom"><b>graphviz</b> ()</td></tr>
 <tr class="separator:a3bbdbd8964031c78c7825958d1e9c9fe"><td class="memSeparator" colspan="2">&#160;</td></tr>
 <tr class="memitem:a88799e5f11eafccfcd165c4ecee9d04f"><td class="memItemLeft" align="right" valign="top"><a id="a88799e5f11eafccfcd165c4ecee9d04f"></a>
 void&#160;</td><td class="memItemRight" valign="bottom"><b>graphviz</b> (const std::string &amp;filename)</td></tr>
 <tr class="separator:a88799e5f11eafccfcd165c4ecee9d04f"><td class="memSeparator" colspan="2">&#160;</td></tr>
-<tr class="memitem:a3ed1b4e769bad15d8d766d7d31310f13"><td class="memTemplParams" colspan="2">template&lt;typename... Args&gt; </td></tr>
-<tr class="memitem:a3ed1b4e769bad15d8d766d7d31310f13"><td class="memTemplItemLeft" align="right" valign="top"><a class="el" href="namespacemarian.html#a498d8baf75b754011078b890b39c8e12">Expr</a>&#160;</td><td class="memTemplItemRight" valign="bottom"><a class="el" href="classmarian_1_1ExpressionGraph.html#a3ed1b4e769bad15d8d766d7d31310f13">param</a> (std::string name, <a class="el" href="structmarian_1_1Shape.html">Shape</a> shape, Args... args)</td></tr>
-<tr class="memdesc:a3ed1b4e769bad15d8d766d7d31310f13"><td class="mdescLeft">&#160;</td><td class="mdescRight">Constructs a new node representing a parameter in an expression graph.  <a href="#a3ed1b4e769bad15d8d766d7d31310f13">More...</a><br /></td></tr>
-<tr class="separator:a3ed1b4e769bad15d8d766d7d31310f13"><td class="memSeparator" colspan="2">&#160;</td></tr>
-<tr class="memitem:a47df2f08338c32a680186086e7a6afd7"><td class="memTemplParams" colspan="2">template&lt;typename... Args&gt; </td></tr>
-<tr class="memitem:a47df2f08338c32a680186086e7a6afd7"><td class="memTemplItemLeft" align="right" valign="top"><a class="el" href="namespacemarian.html#a498d8baf75b754011078b890b39c8e12">Expr</a>&#160;</td><td class="memTemplItemRight" valign="bottom"><a class="el" href="classmarian_1_1ExpressionGraph.html#a47df2f08338c32a680186086e7a6afd7">constant</a> (<a class="el" href="structmarian_1_1Shape.html">Shape</a> shape, Args... args)</td></tr>
-<tr class="memdesc:a47df2f08338c32a680186086e7a6afd7"><td class="mdescLeft">&#160;</td><td class="mdescRight">Constructs a new node representing a constant in an expression graph.  <a href="#a47df2f08338c32a680186086e7a6afd7">More...</a><br /></td></tr>
-<tr class="separator:a47df2f08338c32a680186086e7a6afd7"><td class="memSeparator" colspan="2">&#160;</td></tr>
-<tr class="memitem:a7fc3b10b10d6ce7db77dcec73ed2d8e9"><td class="memTemplParams" colspan="2">template&lt;typename... Args&gt; </td></tr>
-<tr class="memitem:a7fc3b10b10d6ce7db77dcec73ed2d8e9"><td class="memTemplItemLeft" align="right" valign="top"><a class="el" href="namespacemarian.html#a498d8baf75b754011078b890b39c8e12">Expr</a>&#160;</td><td class="memTemplItemRight" valign="bottom"><a class="el" href="classmarian_1_1ExpressionGraph.html#a7fc3b10b10d6ce7db77dcec73ed2d8e9">ones</a> (Args... args)</td></tr>
-<tr class="memdesc:a7fc3b10b10d6ce7db77dcec73ed2d8e9"><td class="mdescLeft">&#160;</td><td class="mdescRight">Constructs a new node representing a constant (with value 1) in an expression graph.  <a href="#a7fc3b10b10d6ce7db77dcec73ed2d8e9">More...</a><br /></td></tr>
-<tr class="separator:a7fc3b10b10d6ce7db77dcec73ed2d8e9"><td class="memSeparator" colspan="2">&#160;</td></tr>
-<tr class="memitem:a7669418f0034edf87321793c47476672"><td class="memTemplParams" colspan="2">template&lt;typename... Args&gt; </td></tr>
-<tr class="memitem:a7669418f0034edf87321793c47476672"><td class="memTemplItemLeft" align="right" valign="top"><a class="el" href="namespacemarian.html#a498d8baf75b754011078b890b39c8e12">Expr</a>&#160;</td><td class="memTemplItemRight" valign="bottom"><a class="el" href="classmarian_1_1ExpressionGraph.html#a7669418f0034edf87321793c47476672">zeros</a> (Args... args)</td></tr>
-<tr class="memdesc:a7669418f0034edf87321793c47476672"><td class="mdescLeft">&#160;</td><td class="mdescRight">Constructs a new node representing a constant (with value 0) in an expression graph.  <a href="#a7669418f0034edf87321793c47476672">More...</a><br /></td></tr>
-<tr class="separator:a7669418f0034edf87321793c47476672"><td class="memSeparator" colspan="2">&#160;</td></tr>
-<tr class="memitem:a187a176cd6a6b793b6b65dc1a13814e5"><td class="memItemLeft" align="right" valign="top"><a id="a187a176cd6a6b793b6b65dc1a13814e5"></a>
-<a class="el" href="namespacemarian.html#a498d8baf75b754011078b890b39c8e12">Expr</a>&#160;</td><td class="memItemRight" valign="bottom"><b>dropout</b> (float prob, <a class="el" href="structmarian_1_1Shape.html">Shape</a> shape)</td></tr>
-<tr class="separator:a187a176cd6a6b793b6b65dc1a13814e5"><td class="memSeparator" colspan="2">&#160;</td></tr>
-<tr class="memitem:a0816bd611240498f346c3557593b2538"><td class="memItemLeft" align="right" valign="top"><a id="a0816bd611240498f346c3557593b2538"></a>
-<a class="el" href="namespacemarian.html#a498d8baf75b754011078b890b39c8e12">Expr</a>&#160;</td><td class="memItemRight" valign="bottom"><b>gaussian</b> (float mean, float stddev, <a class="el" href="structmarian_1_1Shape.html">Shape</a> shape)</td></tr>
-<tr class="separator:a0816bd611240498f346c3557593b2538"><td class="memSeparator" colspan="2">&#160;</td></tr>
-<tr class="memitem:a89df066a4abd34e1e999303cc53edd1e"><td class="memItemLeft" align="right" valign="top"><a class="el" href="namespacemarian.html#a498d8baf75b754011078b890b39c8e12">Expr</a>&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classmarian_1_1ExpressionGraph.html#a89df066a4abd34e1e999303cc53edd1e">get</a> (std::string name)</td></tr>
-<tr class="memdesc:a89df066a4abd34e1e999303cc53edd1e"><td class="mdescLeft">&#160;</td><td class="mdescRight">Returns the first item in the list with the specified name, if such an item exists.  <a href="#a89df066a4abd34e1e999303cc53edd1e">More...</a><br /></td></tr>
+<tr class="memitem:afe57642b5bd17517d90e1c12fec9620c"><td class="memItemLeft" align="right" valign="top"><a id="afe57642b5bd17517d90e1c12fec9620c"></a>
+<a class="el" href="namespacemarian.html#a498d8baf75b754011078b890b39c8e12">Expr</a>&#160;</td><td class="memItemRight" valign="bottom"><b>param</b> (const std::string &amp;pname, const <a class="el" href="structmarian_1_1Shape.html">Shape</a> &amp;shape, const NodeInitializer &amp;init, bool fixed=false)</td></tr>
+<tr class="separator:afe57642b5bd17517d90e1c12fec9620c"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a2dc4fcf2ecc8c47e85822d63427406f3"><td class="memItemLeft" align="right" valign="top"><a id="a2dc4fcf2ecc8c47e85822d63427406f3"></a>
+<a class="el" href="namespacemarian.html#a498d8baf75b754011078b890b39c8e12">Expr</a>&#160;</td><td class="memItemRight" valign="bottom"><b>constant</b> (const <a class="el" href="structmarian_1_1Shape.html">Shape</a> &amp;shape, const NodeInitializer &amp;init)</td></tr>
+<tr class="separator:a2dc4fcf2ecc8c47e85822d63427406f3"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a3e873afb545254e462aed7d0a45f4c0b"><td class="memItemLeft" align="right" valign="top"><a id="a3e873afb545254e462aed7d0a45f4c0b"></a>
+<a class="el" href="namespacemarian.html#a498d8baf75b754011078b890b39c8e12">Expr</a>&#160;</td><td class="memItemRight" valign="bottom"><b>ones</b> (const <a class="el" href="structmarian_1_1Shape.html">Shape</a> &amp;shape)</td></tr>
+<tr class="separator:a3e873afb545254e462aed7d0a45f4c0b"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a8018b4710b6a6e6d5b1b3505043c097a"><td class="memItemLeft" align="right" valign="top"><a id="a8018b4710b6a6e6d5b1b3505043c097a"></a>
+<a class="el" href="namespacemarian.html#a498d8baf75b754011078b890b39c8e12">Expr</a>&#160;</td><td class="memItemRight" valign="bottom"><b>zeros</b> (const <a class="el" href="structmarian_1_1Shape.html">Shape</a> &amp;shape)</td></tr>
+<tr class="separator:a8018b4710b6a6e6d5b1b3505043c097a"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:ae6575334140ba55cedaf2a5545841464"><td class="memItemLeft" align="right" valign="top"><a id="ae6575334140ba55cedaf2a5545841464"></a>
+<a class="el" href="namespacemarian.html#a498d8baf75b754011078b890b39c8e12">Expr</a>&#160;</td><td class="memItemRight" valign="bottom"><b>dropout</b> (float prob, const <a class="el" href="structmarian_1_1Shape.html">Shape</a> &amp;shape)</td></tr>
+<tr class="separator:ae6575334140ba55cedaf2a5545841464"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a89df066a4abd34e1e999303cc53edd1e"><td class="memItemLeft" align="right" valign="top"><a id="a89df066a4abd34e1e999303cc53edd1e"></a>
+<a class="el" href="namespacemarian.html#a498d8baf75b754011078b890b39c8e12">Expr</a>&#160;</td><td class="memItemRight" valign="bottom"><b>get</b> (std::string name)</td></tr>
 <tr class="separator:a89df066a4abd34e1e999303cc53edd1e"><td class="memSeparator" colspan="2">&#160;</td></tr>
-<tr class="memitem:a01122decdd8ff42c1c4ed519fd0222c9"><td class="memItemLeft" align="right" valign="top">Ptr&lt; <a class="el" href="classmarian_1_1Parameters.html">Parameters</a> &gt; &amp;&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classmarian_1_1ExpressionGraph.html#a01122decdd8ff42c1c4ed519fd0222c9">params</a> ()</td></tr>
-<tr class="memdesc:a01122decdd8ff42c1c4ed519fd0222c9"><td class="mdescLeft">&#160;</td><td class="mdescRight">Gets the list of all parameter nodes of this expression graph.  <a href="#a01122decdd8ff42c1c4ed519fd0222c9">More...</a><br /></td></tr>
+<tr class="memitem:a01122decdd8ff42c1c4ed519fd0222c9"><td class="memItemLeft" align="right" valign="top"><a id="a01122decdd8ff42c1c4ed519fd0222c9"></a>
+Ptr&lt; <a class="el" href="classmarian_1_1Parameters.html">Parameters</a> &gt; &amp;&#160;</td><td class="memItemRight" valign="bottom"><b>params</b> ()</td></tr>
 <tr class="separator:a01122decdd8ff42c1c4ed519fd0222c9"><td class="memSeparator" colspan="2">&#160;</td></tr>
 <tr class="memitem:a95bb5e6efbc99952867e46f5db9dc461"><td class="memItemLeft" align="right" valign="top"><a id="a95bb5e6efbc99952867e46f5db9dc461"></a>
 <a class="el" href="namespacemarian.html#a498d8baf75b754011078b890b39c8e12">Expr</a>&#160;</td><td class="memItemRight" valign="bottom"><b>add</b> (<a class="el" href="namespacemarian.html#a498d8baf75b754011078b890b39c8e12">Expr</a> node)</td></tr>
@@ -180,9 +168,9 @@ template&lt;class... Args&gt; </td></tr>
 <tr class="memitem:a12e72d92651d3eb42762a0fdccf3c560"><td class="memItemLeft" align="right" valign="top"><a id="a12e72d92651d3eb42762a0fdccf3c560"></a>
 void&#160;</td><td class="memItemRight" valign="bottom"><b>free</b> (Tensor &amp;t)</td></tr>
 <tr class="separator:a12e72d92651d3eb42762a0fdccf3c560"><td class="memSeparator" colspan="2">&#160;</td></tr>
-<tr class="memitem:aaa140630c02a596dd9d1d8a75489e535"><td class="memItemLeft" align="right" valign="top"><a id="aaa140630c02a596dd9d1d8a75489e535"></a>
-Ptr&lt; <a class="el" href="classmarian_1_1Allocator.html">Allocator</a>&lt; <a class="el" href="classmarian_1_1DeviceGPU.html">DeviceGPU</a> &gt; &gt;&#160;</td><td class="memItemRight" valign="bottom"><b>allocator</b> ()</td></tr>
-<tr class="separator:aaa140630c02a596dd9d1d8a75489e535"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a952b74f7356f14245cc97ca457af1a94"><td class="memItemLeft" align="right" valign="top"><a id="a952b74f7356f14245cc97ca457af1a94"></a>
+Ptr&lt; <a class="el" href="classmarian_1_1Allocator.html">Allocator</a> &gt;&#160;</td><td class="memItemRight" valign="bottom"><b>allocator</b> ()</td></tr>
+<tr class="separator:a952b74f7356f14245cc97ca457af1a94"><td class="memSeparator" colspan="2">&#160;</td></tr>
 <tr class="memitem:a97c49d6448e774f350083559f02719ad"><td class="memItemLeft" align="right" valign="top"><a id="a97c49d6448e774f350083559f02719ad"></a>
 void&#160;</td><td class="memItemRight" valign="bottom"><b>clear</b> ()</td></tr>
 <tr class="separator:a97c49d6448e774f350083559f02719ad"><td class="memSeparator" colspan="2">&#160;</td></tr>
@@ -211,9 +199,7 @@ Protected Member Functions</h2></td></tr>
 &#160;</td><td class="memItemRight" valign="bottom"><b>ExpressionGraph</b> (<a class="el" href="classmarian_1_1ExpressionGraph.html">ExpressionGraph</a> &amp;&amp;)=delete</td></tr>
 <tr class="separator:ac1669810aad34acc14f6f2e5eea13a9d"><td class="memSeparator" colspan="2">&#160;</td></tr>
 </table>
-<a name="details" id="details"></a><h2 class="groupheader">Detailed Description</h2>
-<div class="textblock"><p>Represents a computation graph of expressions, over which algorithmic differentiation may be performed. </p>
-</div><h2 class="groupheader">Constructor &amp; Destructor Documentation</h2>
+<h2 class="groupheader">Constructor &amp; Destructor Documentation</h2>
 <a id="a40b3f2a4c0bacb782241f321bd1d429c"></a>
 <h2 class="memtitle"><span class="permalink"><a href="#a40b3f2a4c0bacb782241f321bd1d429c">&#9670;&nbsp;</a></span>ExpressionGraph()</h2>
 
@@ -264,338 +250,14 @@ Protected Member Functions</h2></td></tr>
 
 </div>
 </div>
-<a id="ae4be44e38a47b0964a24880078eb16c3"></a>
-<h2 class="memtitle"><span class="permalink"><a href="#ae4be44e38a47b0964a24880078eb16c3">&#9670;&nbsp;</a></span>backward()</h2>
-
-<div class="memitem">
-<div class="memproto">
-<table class="mlabels">
-  <tr>
-  <td class="mlabels-left">
-      <table class="memname">
-        <tr>
-          <td class="memname">void marian::ExpressionGraph::backward </td>
-          <td>(</td>
-          <td class="paramname"></td><td>)</td>
-          <td></td>
-        </tr>
-      </table>
-  </td>
-  <td class="mlabels-right">
-<span class="mlabels"><span class="mlabel">inline</span></span>  </td>
-  </tr>
-</table>
-</div><div class="memdoc">
-
-<p>Perform the backward pass of algorithmic differentiation (AD) on this graph. </p>
-<p>This pass traverses the nodes of this graph in reverse of the order they were created; as each node is traversed, its <code>set_zero_adjoint()</code> method is called.</p>
-<p>Once this has been performed for all nodes, this pass again traverses the nodes, again in reverse creation order; as each node is traversed, its <code><a class="el" href="classmarian_1_1ExpressionGraph.html#ae4be44e38a47b0964a24880078eb16c3" title="Perform the backward pass of algorithmic differentiation (AD) on this graph. ">backward()</a></code> method is called.</p>
-<p>After this method has successfully completed, and that all backward pass computations have been performed. </p>
-
-</div>
-</div>
-<a id="a47df2f08338c32a680186086e7a6afd7"></a>
-<h2 class="memtitle"><span class="permalink"><a href="#a47df2f08338c32a680186086e7a6afd7">&#9670;&nbsp;</a></span>constant()</h2>
-
-<div class="memitem">
-<div class="memproto">
-<div class="memtemplate">
-template&lt;typename... Args&gt; </div>
-<table class="mlabels">
-  <tr>
-  <td class="mlabels-left">
-      <table class="memname">
-        <tr>
-          <td class="memname"><a class="el" href="namespacemarian.html#a498d8baf75b754011078b890b39c8e12">Expr</a> marian::ExpressionGraph::constant </td>
-          <td>(</td>
-          <td class="paramtype"><a class="el" href="structmarian_1_1Shape.html">Shape</a>&#160;</td>
-          <td class="paramname"><em>shape</em>, </td>
-        </tr>
-        <tr>
-          <td class="paramkey"></td>
-          <td></td>
-          <td class="paramtype">Args...&#160;</td>
-          <td class="paramname"><em>args</em>&#160;</td>
-        </tr>
-        <tr>
-          <td></td>
-          <td>)</td>
-          <td></td><td></td>
-        </tr>
-      </table>
-  </td>
-  <td class="mlabels-right">
-<span class="mlabels"><span class="mlabel">inline</span></span>  </td>
-  </tr>
-</table>
-</div><div class="memdoc">
-
-<p>Constructs a new node representing a constant in an expression graph. </p>
-<p>This method does not attach the new constant node to any existing expression graph.</p>
-<dl class="section return"><dt>Returns</dt><dd>a newly constructed constant node </dd></dl>
-
-</div>
-</div>
-<a id="aa7596e34cc2895cf374ce06d9d5ee370"></a>
-<h2 class="memtitle"><span class="permalink"><a href="#aa7596e34cc2895cf374ce06d9d5ee370">&#9670;&nbsp;</a></span>forward()</h2>
-
-<div class="memitem">
-<div class="memproto">
-<table class="mlabels">
-  <tr>
-  <td class="mlabels-left">
-      <table class="memname">
-        <tr>
-          <td class="memname">void marian::ExpressionGraph::forward </td>
-          <td>(</td>
-          <td class="paramname"></td><td>)</td>
-          <td></td>
-        </tr>
-      </table>
-  </td>
-  <td class="mlabels-right">
-<span class="mlabels"><span class="mlabel">inline</span></span>  </td>
-  </tr>
-</table>
-</div><div class="memdoc">
-
-<p>Perform the forward pass of algorithmic differentiation (AD) on this graph. </p>
-<p>This pass traverses the nodes of this graph in the order they were created; as each node is traversed, its <code>allocate()</code> method is called.</p>
-<p>Once allocation is complete for all nodes, this pass again traverses the nodes, in creation order; as each node is traversed, its <code><a class="el" href="classmarian_1_1ExpressionGraph.html#aa7596e34cc2895cf374ce06d9d5ee370" title="Perform the forward pass of algorithmic differentiation (AD) on this graph. ">forward()</a></code> method is called.</p>
-<p>After this method has successfully completed, it is guaranteed that all node allocation has been completed, and that all forward pass computations have been performed. </p>
-
-</div>
-</div>
-<a id="a89df066a4abd34e1e999303cc53edd1e"></a>
-<h2 class="memtitle"><span class="permalink"><a href="#a89df066a4abd34e1e999303cc53edd1e">&#9670;&nbsp;</a></span>get()</h2>
-
-<div class="memitem">
-<div class="memproto">
-<table class="mlabels">
-  <tr>
-  <td class="mlabels-left">
-      <table class="memname">
-        <tr>
-          <td class="memname"><a class="el" href="namespacemarian.html#a498d8baf75b754011078b890b39c8e12">Expr</a> marian::ExpressionGraph::get </td>
-          <td>(</td>
-          <td class="paramtype">std::string&#160;</td>
-          <td class="paramname"><em>name</em></td><td>)</td>
-          <td></td>
-        </tr>
-      </table>
-  </td>
-  <td class="mlabels-right">
-<span class="mlabels"><span class="mlabel">inline</span></span>  </td>
-  </tr>
-</table>
-</div><div class="memdoc">
-
-<p>Returns the first item in the list with the specified name, if such an item exists. </p>
-<p>If no item with the specified name is found in the graph, this method throws an exception.</p>
-<dl class="params"><dt>Parameters</dt><dd>
-  <table class="params">
-    <tr><td class="paramname">name</td><td>Name of the desired expression node</td></tr>
-  </table>
-  </dd>
-</dl>
-<dl class="section return"><dt>Returns</dt><dd>the first item in the list with the specified name, if such an item exists </dd></dl>
-
-</div>
-</div>
-<a id="a3bbdbd8964031c78c7825958d1e9c9fe"></a>
-<h2 class="memtitle"><span class="permalink"><a href="#a3bbdbd8964031c78c7825958d1e9c9fe">&#9670;&nbsp;</a></span>graphviz()</h2>
-
-<div class="memitem">
-<div class="memproto">
-<table class="mlabels">
-  <tr>
-  <td class="mlabels-left">
-      <table class="memname">
-        <tr>
-          <td class="memname">std::string marian::ExpressionGraph::graphviz </td>
-          <td>(</td>
-          <td class="paramname"></td><td>)</td>
-          <td></td>
-        </tr>
-      </table>
-  </td>
-  <td class="mlabels-right">
-<span class="mlabels"><span class="mlabel">inline</span></span>  </td>
-  </tr>
-</table>
-</div><div class="memdoc">
-
-<p>Returns a string representing this expression graph in <code>graphviz</code> notation. </p>
-<p>This string can be used by <code>graphviz</code> tools to visualize the expression graph.</p>
-<dl class="section return"><dt>Returns</dt><dd>a string representing this expression graph in <code>graphviz</code> notation </dd></dl>
-
-</div>
-</div>
-<a id="a7fc3b10b10d6ce7db77dcec73ed2d8e9"></a>
-<h2 class="memtitle"><span class="permalink"><a href="#a7fc3b10b10d6ce7db77dcec73ed2d8e9">&#9670;&nbsp;</a></span>ones()</h2>
-
-<div class="memitem">
-<div class="memproto">
-<div class="memtemplate">
-template&lt;typename... Args&gt; </div>
-<table class="mlabels">
-  <tr>
-  <td class="mlabels-left">
-      <table class="memname">
-        <tr>
-          <td class="memname"><a class="el" href="namespacemarian.html#a498d8baf75b754011078b890b39c8e12">Expr</a> marian::ExpressionGraph::ones </td>
-          <td>(</td>
-          <td class="paramtype">Args...&#160;</td>
-          <td class="paramname"><em>args</em></td><td>)</td>
-          <td></td>
-        </tr>
-      </table>
-  </td>
-  <td class="mlabels-right">
-<span class="mlabels"><span class="mlabel">inline</span></span>  </td>
-  </tr>
-</table>
-</div><div class="memdoc">
-
-<p>Constructs a new node representing a constant (with value 1) in an expression graph. </p>
-<p>This method does not attach the new constant node to any existing expression graph.</p>
-<dl class="params"><dt>Parameters</dt><dd>
-  <table class="params">
-    <tr><td class="paramname">args</td><td>XXX Marcin, what are args here?</td></tr>
-  </table>
-  </dd>
-</dl>
-<dl class="section return"><dt>Returns</dt><dd>a newly constructed constant node </dd></dl>
-
-</div>
-</div>
-<a id="a3ed1b4e769bad15d8d766d7d31310f13"></a>
-<h2 class="memtitle"><span class="permalink"><a href="#a3ed1b4e769bad15d8d766d7d31310f13">&#9670;&nbsp;</a></span>param()</h2>
-
-<div class="memitem">
-<div class="memproto">
-<div class="memtemplate">
-template&lt;typename... Args&gt; </div>
-<table class="mlabels">
-  <tr>
-  <td class="mlabels-left">
-      <table class="memname">
-        <tr>
-          <td class="memname"><a class="el" href="namespacemarian.html#a498d8baf75b754011078b890b39c8e12">Expr</a> marian::ExpressionGraph::param </td>
-          <td>(</td>
-          <td class="paramtype">std::string&#160;</td>
-          <td class="paramname"><em>name</em>, </td>
-        </tr>
-        <tr>
-          <td class="paramkey"></td>
-          <td></td>
-          <td class="paramtype"><a class="el" href="structmarian_1_1Shape.html">Shape</a>&#160;</td>
-          <td class="paramname"><em>shape</em>, </td>
-        </tr>
-        <tr>
-          <td class="paramkey"></td>
-          <td></td>
-          <td class="paramtype">Args...&#160;</td>
-          <td class="paramname"><em>args</em>&#160;</td>
-        </tr>
-        <tr>
-          <td></td>
-          <td>)</td>
-          <td></td><td></td>
-        </tr>
-      </table>
-  </td>
-  <td class="mlabels-right">
-<span class="mlabels"><span class="mlabel">inline</span></span>  </td>
-  </tr>
-</table>
-</div><div class="memdoc">
-
-<p>Constructs a new node representing a parameter in an expression graph. </p>
-<p>This method records the parameter node in a list of parameter nodes, but does not attach the new parameter node to any existing expression graph.</p>
-<dl class="params"><dt>Parameters</dt><dd>
-  <table class="params">
-    <tr><td class="paramname">args</td><td>XXX Marcin, what are args here?</td></tr>
-  </table>
-  </dd>
-</dl>
-<dl class="section return"><dt>Returns</dt><dd>a newly constructed parameter node </dd></dl>
-
-</div>
-</div>
-<a id="a01122decdd8ff42c1c4ed519fd0222c9"></a>
-<h2 class="memtitle"><span class="permalink"><a href="#a01122decdd8ff42c1c4ed519fd0222c9">&#9670;&nbsp;</a></span>params()</h2>
-
-<div class="memitem">
-<div class="memproto">
-<table class="mlabels">
-  <tr>
-  <td class="mlabels-left">
-      <table class="memname">
-        <tr>
-          <td class="memname">Ptr&lt;<a class="el" href="classmarian_1_1Parameters.html">Parameters</a>&gt;&amp; marian::ExpressionGraph::params </td>
-          <td>(</td>
-          <td class="paramname"></td><td>)</td>
-          <td></td>
-        </tr>
-      </table>
-  </td>
-  <td class="mlabels-right">
-<span class="mlabels"><span class="mlabel">inline</span></span>  </td>
-  </tr>
-</table>
-</div><div class="memdoc">
-
-<p>Gets the list of all parameter nodes of this expression graph. </p>
-<dl class="section return"><dt>Returns</dt><dd>the list of all parameter nodes of this expression graph </dd></dl>
-
-</div>
-</div>
-<a id="a7669418f0034edf87321793c47476672"></a>
-<h2 class="memtitle"><span class="permalink"><a href="#a7669418f0034edf87321793c47476672">&#9670;&nbsp;</a></span>zeros()</h2>
-
-<div class="memitem">
-<div class="memproto">
-<div class="memtemplate">
-template&lt;typename... Args&gt; </div>
-<table class="mlabels">
-  <tr>
-  <td class="mlabels-left">
-      <table class="memname">
-        <tr>
-          <td class="memname"><a class="el" href="namespacemarian.html#a498d8baf75b754011078b890b39c8e12">Expr</a> marian::ExpressionGraph::zeros </td>
-          <td>(</td>
-          <td class="paramtype">Args...&#160;</td>
-          <td class="paramname"><em>args</em></td><td>)</td>
-          <td></td>
-        </tr>
-      </table>
-  </td>
-  <td class="mlabels-right">
-<span class="mlabels"><span class="mlabel">inline</span></span>  </td>
-  </tr>
-</table>
-</div><div class="memdoc">
-
-<p>Constructs a new node representing a constant (with value 0) in an expression graph. </p>
-<p>This method does not attach the new constant node to any existing expression graph.</p>
-<dl class="params"><dt>Parameters</dt><dd>
-  <table class="params">
-    <tr><td class="paramname">args</td><td>XXX Marcin, what are args here?</td></tr>
-  </table>
-  </dd>
-</dl>
-<dl class="section return"><dt>Returns</dt><dd>a newly constructed constant node </dd></dl>
-
-</div>
-</div>
-<hr/>The documentation for this class was generated from the following file:<ul>
+<hr/>The documentation for this class was generated from the following files:<ul>
 <li>marian/src/graph/<a class="el" href="expression__graph_8h_source.html">expression_graph.h</a></li>
+<li>marian/src/graph/expression_graph.cpp</li>
 </ul>
 </div><!-- contents -->
 <!-- start footer part -->
 <hr class="footer"/><address class="footer"><small>
-Generated on Thu Feb 15 2018 09:47:42 for Marian by &#160;<a href="http://www.doxygen.org/index.html">
+Generated on Tue Mar 13 2018 14:16:35 for Marian by &#160;<a href="http://www.doxygen.org/index.html">
 <img class="footer" src="doxygen.png" alt="doxygen"/>
 </a> 1.8.13
 </small></address>

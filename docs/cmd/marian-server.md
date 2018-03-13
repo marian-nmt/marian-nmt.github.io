@@ -24,6 +24,7 @@ icon: fa-file-code-o
 ## Model options
 ```
 -m [ --models ] arg                     Paths to model(s) to be loaded
+--ignore-model-config                   Ignore the model configuration saved in npz file
 --type arg (=amun)                      Model type (possible values: amun, nematus, s2s, multi-s2s, transformer)
 --dim-vocabs arg (=0 0)                 Maximum items in vocabulary ordered by rank, 0 uses all items in the provided/created vocabulary file
 --dim-emb arg (=512)                    Size of embedding vector
@@ -38,6 +39,7 @@ icon: fa-file-code-o
 --dec-depth arg (=1)                    Number of decoder layers (s2s)
 --skip                                  Use skip connections (s2s)
 --layer-normalization                   Enable layer normalization
+--right-left                            Train right-to-left model
 --best-deep                             Use Edinburgh deep RNN configuration (s2s)
 --special-vocab arg                     Model-specific special vocabulary ids
 --tied-embeddings                       Tie target embeddings and output embeddings in output layer
@@ -58,6 +60,7 @@ icon: fa-file-code-o
 -n [ --normalize ] [=arg(=1)] (=0)      Divide translation score by pow(translation length, arg) 
 --allow-unk                             Allow unknown words to appear in output
 --max-length arg (=1000)                Maximum length of a sentence in a training sentence pair
+--max-length-crop                       Crop a sentence to max-length instead of ommitting it if longer than max-length
 -d [ --devices ] arg (=0)               GPUs to use for translating
 --mini-batch arg (=1)                   Size of mini-batch used during update
 --maxi-batch arg (=1)                   Number of batches to preload for length-based sorting
@@ -67,4 +70,4 @@ icon: fa-file-code-o
 -p [ --port ] arg (=8080)               Port number for web socket server
 ```
 Version: 
-v1.1.0+c50994d
+v1.3.1+fa824ed

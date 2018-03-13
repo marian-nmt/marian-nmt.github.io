@@ -24,6 +24,7 @@ marian-nmt-website.tgz: build
 
 # generate pages with command-line options
 update-cmds: marian/build $(patsubst %,docs/cmd/%.md,$(COMMANDS))
+update-cmd-files: $(patsubst %,docs/cmd/%.md,$(COMMANDS))
 
 docs/cmd/%.md: docs/cmd/_template.tmp
 	sed "s/<COMMAND>/$*/" $^ > $@
@@ -39,9 +40,9 @@ update-docs: Doxyfile.marian.in marian
 
 # download & compile marian
 marian/build: marian
-	mkdir marian/build && cd marian/build && cmake .. && make -j8
+	mkdir -p marian/build && cd marian/build && cmake .. && make -j8
 marian:
-	git clone https://github.com/marian-nmt/marian-dev.git $@
+	git -C $@ pull || git clone https://github.com/marian-nmt/marian-dev.git $@
 	cd marian; git checkout stable; cd ..
 
 

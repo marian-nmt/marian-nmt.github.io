@@ -24,6 +24,8 @@ icon: fa-file-code-o
 ## Model options
 ```
 -m [ --model ] arg (=model.npz)             Path prefix for model to be saved/resumed
+--pretrained-model arg                      Path prefix for pre-trained model to initialize model weights
+--ignore-model-config                       Ignore the model configuration saved in npz file
 --type arg (=amun)                          Model type (possible values: amun, nematus, s2s, multi-s2s, transformer)
 --dim-vocabs arg (=0 0)                     Maximum items in vocabulary ordered by rank, 0 uses all items in the provided/created vocabulary file
 --dim-emb arg (=512)                        Size of embedding vector
@@ -38,6 +40,7 @@ icon: fa-file-code-o
 --dec-depth arg (=1)                        Number of decoder layers (s2s)
 --skip                                      Use skip connections (s2s)
 --layer-normalization                       Enable layer normalization
+--right-left                                Train right-to-left model
 --best-deep                                 Use Edinburgh deep RNN configuration (s2s)
 --special-vocab arg                         Model-specific special vocabulary ids
 --tied-embeddings                           Tie target embeddings and output embeddings in output layer
@@ -51,6 +54,9 @@ icon: fa-file-code-o
 --dropout-rnn arg (=0)                      Scaling dropout along rnn layers and time (0 = no dropout)
 --dropout-src arg (=0)                      Dropout source words (0 = no dropout)
 --dropout-trg arg (=0)                      Dropout target words (0 = no dropout)
+--grad-dropping-rate arg (=0)               Gradient Dropping rate (0 = no gradient Dropping)
+--grad-dropping-momentum arg (=0)           Gradient Dropping momentum decay rate (0.0 to 1.0)
+--grad-dropping-warmup arg (=100)           Do not apply gradient dropping for the first arg steps
 --transformer-dropout arg (=0)              Dropout between transformer layers (0 = no dropout)
 --transformer-dropout-attention arg (=0)    Dropout for transformer attention (0 = no dropout)
 ```
@@ -64,12 +70,15 @@ icon: fa-file-code-o
 -v [ --vocabs ] arg                         Paths to vocabulary files have to correspond to --train-sets. If this parameter is not supplied we look for vocabulary files 
                                             source.{yml,json} and target.{yml,json}. If these files do not exists they are created
 --max-length arg (=50)                      Maximum length of a sentence in a training sentence pair
+--max-length-crop                           Crop a sentence to max-length instead of ommitting it if longer than max-length
 -e [ --after-epochs ] arg (=0)              Finish after this many epochs, 0 is infinity
 --after-batches arg (=0)                    Finish after this many batch updates, 0 is infinity
 --disp-freq arg (=1000)                     Display information every  arg  updates
 --save-freq arg (=10000)                    Save model file every  arg  updates
 --no-shuffle                                Skip shuffling of training data before each epoch
--T [ --tempdir ] arg (=/tmp)                Directory for temporary (shuffled) files
+-T [ --tempdir ] arg (=/tmp)                Directory for temporary (shuffled) files and database
+--sqlite [=arg(=temporary)]                 Use disk-based sqlite3 database for training corpus storage, default is temporary with path creates persistent storage
+--sqlite-drop                               Drop existing tables in sqlite3 database
 -d [ --devices ] arg (=0)                   GPUs to use for training. Asynchronous SGD is used with multiple devices
 --mini-batch arg (=64)                      Size of mini-batch used during update
 --mini-batch-words arg (=0)                 Set mini-batch size based on words instead of sentences
@@ -126,4 +135,4 @@ icon: fa-file-code-o
 --n-best                                    Generate n-best list
 ```
 Version: 
-v1.1.0+c50994d
+v1.3.1+fa824ed

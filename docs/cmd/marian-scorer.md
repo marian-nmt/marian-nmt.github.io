@@ -24,6 +24,7 @@ icon: fa-file-code-o
 ## Model options
 ```
 -m [ --model ] arg (=model.npz)         Path prefix for model to be saved/resumed
+--ignore-model-config                   Ignore the model configuration saved in npz file
 --type arg (=amun)                      Model type (possible values: amun, nematus, s2s, multi-s2s, transformer)
 --dim-vocabs arg (=0 0)                 Maximum items in vocabulary ordered by rank, 0 uses all items in the provided/created vocabulary file
 --dim-emb arg (=512)                    Size of embedding vector
@@ -38,6 +39,7 @@ icon: fa-file-code-o
 --dec-depth arg (=1)                    Number of decoder layers (s2s)
 --skip                                  Use skip connections (s2s)
 --layer-normalization                   Enable layer normalization
+--right-left                            Train right-to-left model
 --best-deep                             Use Edinburgh deep RNN configuration (s2s)
 --special-vocab arg                     Model-specific special vocabulary ids
 --tied-embeddings                       Tie target embeddings and output embeddings in output layer
@@ -58,6 +60,7 @@ icon: fa-file-code-o
                                         source.{yml,json} and target.{yml,json}. If these files do not exists they are created
 --summary [=arg(=cross-entropy)]        Only print total cost, possible values: cross-entropy (ce-mean), ce-mean-words, ce-sum, perplexity
 --max-length arg (=1000)                Maximum length of a sentence in a training sentence pair
+--max-length-crop                       Crop a sentence to max-length instead of ommitting it if longer than max-length
 -d [ --devices ] arg (=0)               GPUs to use for training. Asynchronous SGD is used with multiple devices
 --mini-batch arg (=64)                  Size of mini-batch used during update
 --mini-batch-words arg (=0)             Set mini-batch size based on words instead of sentences
@@ -65,4 +68,4 @@ icon: fa-file-code-o
 --maxi-batch arg (=100)                 Number of batches to preload for length-based sorting
 ```
 Version: 
-v1.1.0+c50994d
+v1.3.1+fa824ed

@@ -9,6 +9,8 @@ module Jekyll
           path.sub!(/\s*".*"\s*/, '')
       end
       @repo, @path = path.split('/', 2)
+      @repo.strip! unless @repo.nil?
+      @path.strip! unless @path.nil?
     end
 
     def render(context)

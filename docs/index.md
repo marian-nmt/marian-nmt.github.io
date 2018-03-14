@@ -44,6 +44,59 @@ command line options):
 
 
 
+## Installation
+
+Clone a fresh copy from github:
+
+    git clone https://github.com/marian-nmt/marian
+
+The project is a standard CMake out-of-source build:
+
+    cd marian
+    mkdir build
+    cd build
+    cmake ..
+    make -j
+
+If run for the first time, this will also download {% github_link marian-dev %}
+--- the training framework for Marian.
+
+### Custom Boost
+
+Download, compile and install Boost:
+```
+wget https://dl.bintray.com/boostorg/release/1.64.0/source/boost_1_64_0.tar.gz
+tar zxvf boost_1_64_0.tar.gz
+cd boost_1_64_0
+./bootstrap.sh
+./b2 -j16 --prefix=$(pwd) --libdir=$(pwd)/lib64 --layout=system link=static install
+```
+
+To compile Marian training framework with your custom Boost installation:
+```
+cd /path/to/marian-dev
+mkdir build
+cd build
+cmake .. -DBOOST_ROOT=/path/to/boost_1_64_0
+make -j16
+```
+
+Tested on Ubuntu 16.04.3 LTS.
+
+### Non-default CUDA
+
+Specify the path to your CUDA root directory via CMake:
+```
+cd /path/to/marian-dev
+mkdir build
+cd build
+cmake .. -DCUDA_TOOLKIT_ROOT_DIR=/usr/local/cuda-9.1
+make -j16
+
+```
+
+
+
 ## Training
 
 For training NMT models, you want to use `marian` command.

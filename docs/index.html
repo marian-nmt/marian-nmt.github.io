@@ -158,7 +158,7 @@
           </h1>
           <div class="meta">
             <i class="fa fa-clock-o"></i>
-            Last updated: 15 February 2018
+            Last updated: 14 March 2018
           </div>
         </div><!--//doc-header-->
 
@@ -203,6 +203,61 @@ Can be decoded with Amun as <em>nematus2</em> model type.</li>
   <li><code class="highlighter-rouge">lm</code>: An RNN language model.</li>
   <li><code class="highlighter-rouge">lm-transformer</code>: An transformer-based language model.</li>
 </ul>
+
+<h2 id="installation">Installation</h2>
+
+<p>Clone a fresh copy from github:</p>
+
+<div class="highlighter-rouge"><pre class="highlight"><code>git clone https://github.com/marian-nmt/marian
+</code></pre>
+</div>
+
+<p>The project is a standard CMake out-of-source build:</p>
+
+<div class="highlighter-rouge"><pre class="highlight"><code>cd marian
+mkdir build
+cd build
+cmake ..
+make -j
+</code></pre>
+</div>
+
+<p>If run for the first time, this will also download <a class="github-link" href="https://github.com/marian-nmt/marian-dev/tree/master/" target="_blank"><code class="highlighter-rogue">marian-dev/</code></a>
+— the training framework for Marian.</p>
+
+<h3 id="custom-boost">Custom Boost</h3>
+
+<p>Download, compile and install Boost:</p>
+<div class="highlighter-rouge"><pre class="highlight"><code>wget https://dl.bintray.com/boostorg/release/1.64.0/source/boost_1_64_0.tar.gz
+tar zxvf boost_1_64_0.tar.gz
+cd boost_1_64_0
+./bootstrap.sh
+./b2 -j16 --prefix=$(pwd) --libdir=$(pwd)/lib64 --layout=system link=static install
+</code></pre>
+</div>
+
+<p>To compile Marian training framework with your custom Boost installation:</p>
+<div class="highlighter-rouge"><pre class="highlight"><code>cd /path/to/marian-dev
+mkdir build
+cd build
+cmake .. -DBOOST_ROOT=/path/to/boost_1_64_0
+make -j16
+</code></pre>
+</div>
+
+<p>Tested on Ubuntu 16.04.3 LTS.</p>
+
+<h3 id="non-default-cuda">Non-default CUDA</h3>
+
+<p>Specify the path to your CUDA root directory via CMake:</p>
+<div class="highlighter-rouge"><pre class="highlight"><code>cd /path/to/marian-dev
+mkdir build
+cd build
+cmake .. -DCUDA_TOOLKIT_ROOT_DIR=/usr/local/cuda-9.1
+make -j16
+
+</code></pre>
+</div>
 
 <h2 id="training">Training</h2>
 
@@ -562,7 +617,7 @@ options.</p>
 </div>
 
 <p>Alternatively, the model parameters can be added into the model <em>.npz</em> file
-based on the Nematus <em>.json</em> file using the script: <a class="github-link" href="https://github.com/marian-nmt/marian-dev/tree/master/scripts/contrib/inject_model_params.py " target="_blank"><code class="highlighter-rogue">marian-dev/scripts/contrib/inject_model_params.py </code></a>, e.g.:</p>
+based on the Nematus <em>.json</em> file using the script: <a class="github-link" href="https://github.com/marian-nmt/marian-dev/tree/master/scripts/contrib/inject_model_params.py" target="_blank"><code class="highlighter-rogue">marian-dev/scripts/contrib/inject_model_params.py</code></a>, e.g.:</p>
 
 <div class="highlighter-rouge"><pre class="highlight"><code>python inject_model_params.py -m model.npz -j model.npz.json
 </code></pre>
@@ -578,7 +633,7 @@ The only addition is <code class="highlighter-rouge">--port</code> option, which
 </code></pre>
 </div>
 
-<p>An example client written in Python is <a class="github-link" href="https://github.com/marian-nmt/marian-dev/tree/master/scripts/server/client_example.py " target="_blank"><code class="highlighter-rogue">marian-dev/scripts/server/client_example.py </code></a>:</p>
+<p>An example client written in Python is <a class="github-link" href="https://github.com/marian-nmt/marian-dev/tree/master/scripts/server/client_example.py" target="_blank"><code class="highlighter-rogue">marian-dev/scripts/server/client_example.py</code></a>:</p>
 
 <div class="highlighter-rouge"><pre class="highlight"><code>./scripts/server/client_example.py -p 8080 &lt; input.txt
 </code></pre>

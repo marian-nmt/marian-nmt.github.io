@@ -70,9 +70,8 @@ machine translation model.
       --vocabs vocab.en vocab.ro \
       --model model.npz
 
-See the [documentation](/docs/#marian) for a full list of command line options
-or the [examples](/examples/training) for an example of how to train a
-WMT-grade model.
+See the [documentation](/docs/#training) for more details or the
+[examples](/examples/#examples) of how to train different models with Marian.
 
 ### Translating
 
@@ -84,6 +83,6 @@ For CPU translation, use Amun:
 
     ./marian/build/amun -m model.npz -s vocab.en -t vocab.ro <<< "This is a test ."
 
-See the [documentation](/docs/#mariandecoder) for a full list of command line
-options or the [examples](/examples/translating) for an example of how to use
-Edinburgh's WMT models for translation.
+See the [documentation](/docs/#translation) for more details or the
+[examples](/examples/#examples) of how to use Edinburgh's WMT models for
+translation.

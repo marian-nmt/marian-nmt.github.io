@@ -7,7 +7,7 @@ menu: 5
 latex: true
 ---
 
-## Table of content
+## Table of contents
 
 <div id="faq-nav"></div>
 

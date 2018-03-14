@@ -7,6 +7,10 @@ menu: 5
 latex: true
 ---
 
+## Table of content
+
+<div id="faq-nav"></div>
+
 ## Answers
 
 <!-- ///////////////////////////////////////////////////// -->
@@ -26,18 +30,18 @@ available.  Take a look at the [benchmarks](/features/#benchmarks).
 {:.question}
 #### Where can I get Marian?
 Follow the steps in [quick start](/quickstart) to get install Marian from [our
-github repository](https://github.com/marian-nmt/marian)
+github repository](https://github.com/marian-nmt/marian).
 
 {:.question}
 #### Where can I get support?
 There is a Google discussion group available at
 [https://groups.google.com/forum/#!forum/marian-nmt](https://groups.google.com/forum/#!forum/marian-nmt).
-You can send questions to the group by e-mail: `marian-nmt@googlegroups.com`
+You can send questions to the group by e-mail: `marian-nmt@googlegroups.com`.
 
 {:.question}
 #### Where can I report bugs?
 I you believe you have encoutered a bug, please file an issue at
-[https://github.com/marian-nmt/marian/issues](https://github.com/marian-nmt/marian/issues)
+[https://github.com/marian-nmt/marian/issues](https://github.com/marian-nmt/marian/issues).
 
 {:.question}
 #### How should I cite Marian?
@@ -109,7 +113,7 @@ Marian Rejewski's old faculty.
 
 The name started out as a joke, but was made official later by public demand.
 
-
+<br/>
 <!-- ///////////////////////////////////////////////////// -->
 ### Training
 
@@ -182,7 +186,7 @@ Apart from dropout, we also provide `--label-smoothing` as suggested by
 
 {:.question}
 #### Do you have a Google-style transformer model?
-Please take a look at our [transformer
+Yes. Please take a look at our [transformer
 example](https://github.com/marian-nmt/marian-examples/blob/master/transformer/README.md).
 Files and scripts in this folder show how to train a Google-style transformer
 model [Vaswani et al, 2017](https://arxiv.org/abs/1706.03762) on WMT-17 (?)
@@ -211,6 +215,7 @@ configuration](https://arxiv.org/abs/1707.07631) being equivalent to:
 --layer-normalization --tied-embeddings --skip
 ```
 
+<br/>
 <!-- ///////////////////////////////////////////////////// -->
 ### Translation
 
@@ -255,7 +260,7 @@ Yes. Just use `--n-best` and the set `--beam-size 6` for an n-best list size of
 6.
 
 
-
+<br/>
 <!-- ///////////////////////////////////////////////////// -->
 ### Scoring
 

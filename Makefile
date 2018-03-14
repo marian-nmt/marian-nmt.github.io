@@ -6,7 +6,7 @@ COMMANDS = marian marian-decoder marian-server marian-scorer
 
 all: run
 
-run: build update-docs
+run: build
 	bundle exec jekyll serve --skip-initial-build
 
 build:

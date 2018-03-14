@@ -5,13 +5,16 @@
 
         var toc = $.extend({
             heading         : 'h3',
-            appendTo        : this
+            appendTo        : this,
+            topElement      : 'H2',
+            menuAttrib      : 'id="doc-menu" class="nav doc-menu" data-spy="affix"',
+            submenuAttrib   : 'class="nav doc-sub-menu"'
         }, options);
 
         return this.each(function() {
             var $this = $(this);
 
-            var nav = $('<ul id="doc-menu" class="nav doc-menu" data-spy="affix">');
+            var nav = $('<ul ' + toc.menuAttrib + '>');
             var submenu = false;
 
             $this.find( toc.heading ).each(function(i) {
@@ -23,14 +26,14 @@
                                 .text( txt )
                             )
 
-                if (this.nodeName == "H2") {
+                if (this.nodeName == toc.topElement) {
                     nav.append( li );
                     submenu = false;
                 }
                 else {
                     if (! submenu) {
                         nav.find('li').last()
-                            .append( $('<ul class="nav doc-sub-menu">') );
+                            .append( $('<ul ' + toc.submenuAttrib + '>') );
                     }
                     nav.find('li:last-child > ul').append( li );
                     submenu = true;
@@ -46,4 +49,12 @@
 $('.content-inner').ToC({
     heading         : 'h2,h3',
     appendTo        : '#doc-nav'
+});
+
+$('.content-inner').ToC({
+    heading         : 'h3,h4',
+    appendTo        : '#faq-nav',
+    topElement      : 'H3',
+    menuAttrib      : 'id="faq-menu"',
+    submenuAttrib   : 'class="faq-sub-menu"'
 });

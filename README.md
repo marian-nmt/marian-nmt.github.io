@@ -41,7 +41,7 @@ This requires `doxygen` to be installed.
 Pages with command-line options for Marian tools have to be updated manually:
 
     rm docs/cmd/marian*.md
-    make update-cmds
+    make -B update-cmds
 
 This compiles Marian, so GPU is required.
 
@@ -53,7 +53,7 @@ markdown files.
 When all updates have been made and the website can be still generated locally
 *without errors*, you can commit and deploy your changes by running:
 
-    ./commit-and-deploy.sh
+    bash ./commit-and-deploy.sh
 
 The script commit all changes for you with default commit message, but it is
 always better to commit changes on your own beforehand and set a relevant

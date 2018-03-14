@@ -16,10 +16,11 @@
 
             $this.find( toc.heading ).each(function(i) {
                 var id = this.id;
+                var txt = this.textContent.replace(/[.:;-]+$/, '')
                 var li = $('<li>').append(
                             $('<a class="scrollto">')
                                 .attr( 'href', '#' + id )
-                                .text( this.innerHTML.replace(/[.:;-]+$/, '') )
+                                .text( txt )
                             )
 
                 if (this.nodeName == "H2") {

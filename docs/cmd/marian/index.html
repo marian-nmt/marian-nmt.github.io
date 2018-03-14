@@ -154,7 +154,7 @@
           </h1>
           <div class="meta">
             <i class="fa fa-clock-o"></i>
-            Last updated: 13 March 2018
+            Last updated: 14 March 2018
           </div>
         </div><!--//doc-header-->
 
@@ -187,11 +187,11 @@
 --dim-rnn arg (=1024)                       Size of rnn hidden state
 --enc-type arg (=bidirectional)             Type of encoder RNN : bidirectional, bi-unidirectional, alternating (s2s)
 --enc-cell arg (=gru)                       Type of RNN cell: gru, lstm, tanh (s2s)
---enc-cell-depth arg (=1)                   Number of tansitional cells in encoder layers (s2s)
+--enc-cell-depth arg (=1)                   Number of transitional cells in encoder layers (s2s)
 --enc-depth arg (=1)                        Number of encoder layers (s2s)
 --dec-cell arg (=gru)                       Type of RNN cell: gru, lstm, tanh (s2s)
---dec-cell-base-depth arg (=2)              Number of tansitional cells in first decoder layer (s2s)
---dec-cell-high-depth arg (=1)              Number of tansitional cells in next decoder layers (s2s)
+--dec-cell-base-depth arg (=2)              Number of transitional cells in first decoder layer (s2s)
+--dec-cell-high-depth arg (=1)              Number of transitional cells in next decoder layers (s2s)
 --dec-depth arg (=1)                        Number of decoder layers (s2s)
 --skip                                      Use skip connections (s2s)
 --layer-normalization                       Enable layer normalization
@@ -203,6 +203,7 @@
 --tied-embeddings-all                       Tie all embedding layers and output layer
 --transformer-heads arg (=8)                Number of head in multi-head attention (transformer)
 --transformer-dim-ffn arg (=2048)           Size of position-wise feed-forward network (transformer)
+--transformer-ffn-activation arg (=swish)   Activation between filters: swish or relu (transformer)
 --transformer-preprocess arg                Operation before each transformer layer: d = dropout, a = add, n = normalize
 --transformer-postprocess-emb arg (=d)      Operation after transformer embedding layer: d = dropout, a = add, n = normalize
 --transformer-postprocess arg (=dan)        Operation after each transformer layer: d = dropout, a = add, n = normalize
@@ -214,6 +215,7 @@
 --grad-dropping-warmup arg (=100)           Do not apply gradient dropping for the first arg steps
 --transformer-dropout arg (=0)              Dropout between transformer layers (0 = no dropout)
 --transformer-dropout-attention arg (=0)    Dropout for transformer attention (0 = no dropout)
+--transformer-dropout-ffn arg (=0)          Dropout for transformer filter (0 = no dropout)
 </code></pre>
 </div>
 
@@ -223,7 +225,7 @@
 --no-reload                                 Do not load existing model specified in --model arg
 -t [ --train-sets ] arg                     Paths to training corpora: source target
 -v [ --vocabs ] arg                         Paths to vocabulary files have to correspond to --train-sets. If this parameter is not supplied we look for vocabulary files 
-                                            source.{yml,json} and target.{yml,json}. If these files do not exists they are created
+                                            source.{yml,json} and target.{yml,json}. If these files do not exist they are created
 --max-length arg (=50)                      Maximum length of a sentence in a training sentence pair
 --max-length-crop                           Crop a sentence to max-length instead of ommitting it if longer than max-length
 -e [ --after-epochs ] arg (=0)              Finish after this many epochs, 0 is infinity
@@ -231,13 +233,16 @@
 --disp-freq arg (=1000)                     Display information every  arg  updates
 --save-freq arg (=10000)                    Save model file every  arg  updates
 --no-shuffle                                Skip shuffling of training data before each epoch
+--no-restore-corpus                         Skip restoring corpus state after training is restarted
 -T [ --tempdir ] arg (=/tmp)                Directory for temporary (shuffled) files and database
 --sqlite [=arg(=temporary)]                 Use disk-based sqlite3 database for training corpus storage, default is temporary with path creates persistent storage
 --sqlite-drop                               Drop existing tables in sqlite3 database
--d [ --devices ] arg (=0)                   GPUs to use for training. Asynchronous SGD is used with multiple devices
+-d [ --devices ] arg (=0)                   GPU ID(s) to use for training
+--cpu-threads [=arg(=1)] (=0)               Use CPU-based computation with this many independent threads, 0 means GPU-based computation
 --mini-batch arg (=64)                      Size of mini-batch used during update
 --mini-batch-words arg (=0)                 Set mini-batch size based on words instead of sentences
 --mini-batch-fit                            Determine mini-batch size automatically based on sentence-length to fit reserved memory
+--mini-batch-fit-step arg (=10)             Step size for mini-batch-fit statistics
 --maxi-batch arg (=100)                     Number of batches to preload for length-based sorting
 --maxi-batch-sort arg (=trg)                Sorting strategy for maxi-batch: trg (default) src none
 -o [ --optimizer ] arg (=adam)              Optimization algorithm (possible values: sgd, adagrad, adam
@@ -265,10 +270,14 @@
 --guided-alignment arg                      Use guided alignment to guide attention
 --guided-alignment-cost arg (=ce)           Cost type for guided alignment. Possible values: ce (cross-entropy), mse (mean square error), mult (multiplication)
 --guided-alignment-weight arg (=1)          Weight for guided alignment cost
+--data-weighting arg                        File with sentence or word weights
+--data-weighting-type arg (=sentence)       Processing level for data weighting. Possible values: sentence, word
 --embedding-vectors arg                     Paths to files with custom source and target embedding vectors
 --embedding-normalization                   Enable normalization of custom embedding vectors
 --embedding-fix-src                         Fix source embeddings. Affects all encoders
 --embedding-fix-trg                         Fix target embeddings. Affects all decoders
+--multi-node                                Enable multi-node training through MPI
+--multi-node-overlap arg (=1)               Overlap model computations with MPI communication
 </code></pre>
 </div>
 
@@ -291,7 +300,7 @@
 </code></pre>
 </div>
 <p>Version: 
-v1.3.1+fa824ed</p>
+v1.4.0+aa51cce</p>
 
 
             </div><!--//content-inner-->

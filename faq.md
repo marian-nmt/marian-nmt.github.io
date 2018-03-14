@@ -190,41 +190,10 @@ English-German data.
 
 {:.question}
 #### How do I train a model like in Edinburgh's WMT2017 submission?
-Re-using the transformer example from above, you can train a model similar to
-[Edinburgh's WMT2017 submission](http://www.statmt.org/wmt17/pdf/WMT39.pdf) with the following settings:
-
-```
-../build/marian \
-    --model model/model.npz --type s2s \
-    --train-sets data/corpus.bpe.en data/corpus.bpe.de \
-    --max-length 100 \
-    --vocabs model/vocab.ende.yml model/vocab.ende.yml \
-    --mini-batch-fit -w 7000 --maxi-batch 1000 \
-    --early-stopping 10 \
-    --beam-size 6 --normalize 0.6 \
-    --log model/train.log --valid-log model/valid.log \
-    --enc-type bidirectional --enc-depth 1 --enc-cell-depth 4 \
-    --dec-depth 1 --dec-cell-base-depth 8 --dec-cell-high-depth 1 \
-    --tied-embeddings-all --layer-normalization \
-    --dropout-rnn 0.1 --label-smoothing 0.1 \
-    --learn-rate 0.0003 --lr-warmup 16000 --lr-decay-inv-sqrt 16000 --lr-report \
-    --optimizer-params 0.9 0.98 1e-09 --clip-norm 5 \
-    --tied-embeddings-all \
-    --devices $GPUS --sync-sgd --seed 1111 \
-    --valid-freq 5000 --save-freq 5000 --disp-freq 500 \
-    --valid-metrics cross-entropy perplexity translation \
-    --valid-sets data/valid.bpe.en data/valid.bpe.de \
-    --valid-script-path ./scripts/validate.sh \
-    --valid-translation-output data/valid.bpe.en.output --quiet-translation \
-    --valid-mini-batch 64
-```
-
-The variable $GPUS would hold the GPU ids, for instance GPUS="0 1 2 3". As before
-you can increase the workspace if more GPU RAM is available. If you train models
-for ensembling remember to change the seed between training runs to initialize
-models differently.
-
-We will add an example to our examples repository.
+Take a look at the examples we have prepared: {% github_link "Reconstructing
+Edinburgh's WMT17 English-German system" marian-examples/wmt2017-uedin %} and
+{% github_link "Reconstructing top English-German WMT17 system with Marian's
+Transformer model" marian-examples/wmt2017-transformer %}.
 
 {:.question}
 #### How do I train a language model?
@@ -232,6 +201,15 @@ We will add an example to our examples repository.
 {:.question}
 #### How do I train a multi-source model?
 
+{:.question}
+#### What the option `--best-deep` means?
+It is a shortcut for using [the Edinburgh deep RNN
+configuration](https://arxiv.org/abs/1707.07631) being equivalent to:
+```
+--enc-type alternating --enc-cell-depth 2 --enc-depth 4 \
+--dec-cell-base-depth 4 --dec-cell-high-depth 2 --dec-depth 4 \
+--layer-normalization --tied-embeddings --skip
+```
 
 <!-- ///////////////////////////////////////////////////// -->
 ### Translation

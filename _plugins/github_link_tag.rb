@@ -3,6 +3,7 @@ module Jekyll
     def initialize(tag_name, path, tokens)
       super
       path.gsub!(/^\/+|\/+$/, '')
+      path.gsub!(/\n+/, ' ')
       if path =~ /.*"(.+)".*/
           @text = $1
           path.sub!(/\s*".*"\s*/, '')

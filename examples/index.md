@@ -8,28 +8,32 @@ menu: 4
 
 ## Examples
 
-- **{% github_link marian-examples/training-basics %}**: 
+- **{% github_link "Basic example for training" marian-examples/training-basics %}**:
   The scripts for training a [Edinburgh's WMT16
   system](http://www.aclweb.org/anthology/W16-2323) adapted from the
   Romanian-English sample from <https://github.com/rsennrich/wmt16-scripts>.
   The resulting system should be competitive or even slightly better than
   reported in that paper.
-- **{% github_link marian-examples/transformer %}**: 
+
+- **{% github_link "Training a transformer model" marian-examples/transformer %}**:
   An example for training a Google-style transformer model introduced in
   [_Attention is all you need_, Vaswani et al.,
   2017](https://arxiv.org/abs/1706.03762).
-- **{% github_link marian-examples/wmt2017-uedin %}**:
+
+- **{% github_link "Reconstructing Edinburgh's WMT17 English-German system" marian-examples/wmt2017-uedin %}**:
   The scripts show how to train a complete WMT-grade system based on
   [Edinburgh's WMT submission
-  description](http://www.aclweb.org/anthology/W17-4739) for en-de. 
-- **{% github_link marian-examples/wmt2017-transformer %}**:
+  description](http://www.aclweb.org/anthology/W17-4739) for en-de.
+
+- **{% github_link "Reconstructing top WMT17 system with Marian's Transformer model" marian-examples/wmt2017-transformer %}**:
   The scripts show how to train a complete better than (!) WMT-grade system
   based on [Google's Transformer model](https://arxiv.org/abs/1706.03762) and
   [Edinburgh's WMT submission
   description](http://www.aclweb.org/anthology/W17-4739) for en-de.  This
   example is a combination of reproducing Edinburgh's WMT2017 system for en-de
   with Marian and the example for Transformer training.
-- **{% github_link marian-examples/translating-amun %}**: 
+
+- **{% github_link "Translating with Amun" marian-examples/translating-amun %}**:
   The scripts demonstrate how to translate with Amun using Edinburgh's
   German-English WMT2016 single model and ensemble.
 

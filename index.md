@@ -67,7 +67,12 @@ Research and Innovation Programme under grant agreements
 645487 (<a href="http://www.modernmt.eu">Modern MT</a>; 2015-2017),
 644333 (<a href="http://tramooc.eu/">TraMOOC</a>; 2015-2017),
 644402 (<a href="http://www.himl.eu/">HimL</a>; 2015-2017),
-the Amazon Academic Research Awards program, and the World Intellectual
-Property Organization.
+
+the Amazon Academic Research Awards program,
+the World Intellectual Property Organization,
+
+and is based upon work supported in part by the Office of the Director of
+National Intelligence (ODNI), Intelligence Advanced Research Projects Activity
+(IARPA), via contract #FA8650-17-C-9117.
   </p>
 </div>

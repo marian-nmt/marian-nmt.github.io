@@ -8,7 +8,7 @@ menu: 6
 
 ## Citation
 
-Please cite the following [IWSLT paper](http://workshop2016.iwslt.org/downloads/IWSLT_2016_paper_4.pdf)
+Please cite the following [Marian Demo paper](https://arxiv.org/abs/1804.00344)
 if you use Marian (formerly AmuNMT) in your research:
 
 ```tex

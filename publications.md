@@ -13,7 +13,7 @@ if you use Marian (formerly AmuNMT) in your research:
 
 ```tex
 @article{mariannmt,
-  title   = {{Marian}: Fast Neural Machine Translation in {C++}},
+  title   = {Marian: Fast Neural Machine Translation in {C++}},
   author  = {Junczys-Dowmunt, Marcin and Grundkiewicz, Roman and Dwojak, Tomasz
              and Hoang, Hieu and Heafield, Kenneth and Neckermann, Tom
              and Seide, Frank and Germann, Ulrich and Fikri Aji, Alham

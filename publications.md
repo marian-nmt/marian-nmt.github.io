@@ -12,15 +12,15 @@ Please cite the following [IWSLT paper](http://workshop2016.iwslt.org/downloads/
 if you use Marian (formerly AmuNMT) in your research:
 
 ```tex
-@InProceedings{junczys2016neural,
-  title     = {Is Neural Machine Translation Ready for Deployment? A Case Study
-               on 30 Translation Directions},
-  author    = {Junczys-Dowmunt, Marcin and Dwojak, Tomasz and Hoang, Hieu},
-  booktitle = {Proceedings of the 9th International Workshop on Spoken Language
-               Translation (IWSLT)},
-  year      = {2016},
-  address   = {Seattle, WA},
-  url       = {http://workshop2016.iwslt.org/downloads/IWSLT_2016_paper_4.pdf}
+@article{mariannmt,
+  title   = {{Marian}: Fast Neural Machine Translation in {C++}},
+  author  = {Junczys-Dowmunt, Marcin and Grundkiewicz, Roman and Dwojak, Tomasz
+             and Hoang, Hieu and Heafield, Kenneth and Neckermann, Tom
+             and Seide, Frank and Germann, Ulrich and Fikri Aji, Alham
+             and Bogoychev, Nikolay and Martins, Andr\'{e} F. T. and Birch, Alexandra},
+  journal = {arXiv preprint arXiv:1804.00344},
+  year    = {2018},
+  url     = {https://arxiv.org/abs/1804.00344}
 }
 ```
 

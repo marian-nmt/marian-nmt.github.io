@@ -277,8 +277,7 @@ If your model had a different number of inputs (only one for a language model
 or three for a dual-source model) you need to provide all the correct number of
 vocabularies and test set files in corresponding order.
 
-Omitting the `--summary` option will print sentence-wise negative log
-probabilities.
+Omitting the `--summary` option will print sentence-wise log probabilities.
 
 {:.question}
 #### Are Moses-style n-best lists supported?

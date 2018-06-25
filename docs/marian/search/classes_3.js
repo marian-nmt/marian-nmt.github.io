@@ -6,6 +6,7 @@ var searchData=
   ['datasetbase_3c_20example_2c_20exampleiterator_2c_20databatch_20_3e',['DatasetBase&lt; Example, ExampleIterator, DataBatch &gt;',['../classmarian_1_1data_1_1DatasetBase.html',1,'marian::data']]],
   ['datasetbase_3c_20sentencetuple_2c_20corpusiterator_2c_20corpusbatch_20_3e',['DatasetBase&lt; SentenceTuple, CorpusIterator, CorpusBatch &gt;',['../classmarian_1_1data_1_1DatasetBase.html',1,'marian::data']]],
   ['datasetbase_3c_20sentencetuple_2c_20textiterator_2c_20corpusbatch_20_3e',['DatasetBase&lt; SentenceTuple, TextIterator, CorpusBatch &gt;',['../classmarian_1_1data_1_1DatasetBase.html',1,'marian::data']]],
+  ['dataweighting',['DataWeighting',['../classmarian_1_1DataWeighting.html',1,'marian']]],
   ['decoderbase',['DecoderBase',['../classmarian_1_1DecoderBase.html',1,'marian']]],
   ['decoderfactory',['DecoderFactory',['../classmarian_1_1models_1_1DecoderFactory.html',1,'marian::models']]],
   ['decoderhardatt',['DecoderHardAtt',['../classmarian_1_1DecoderHardAtt.html',1,'marian']]],
@@ -20,5 +21,5 @@ var searchData=
   ['deviceid',['DeviceId',['../structmarian_1_1DeviceId.html',1,'marian']]],
   ['divnodeop',['DivNodeOp',['../structmarian_1_1DivNodeOp.html',1,'marian']]],
   ['dotbatchednodeop',['DotBatchedNodeOp',['../classmarian_1_1DotBatchedNodeOp.html',1,'marian']]],
-  ['dotnodeop',['DotNodeOp',['../classmarian_1_1DotNodeOp.html',1,'marian']]]
+  ['dotnodeop',['DotNodeOp',['../classmarian_1_1DotNodeOp.html',1,'marian::DotNodeOp'],['../classmarian_1_1cpu_1_1int16_1_1DotNodeOp.html',1,'marian::cpu::int16::DotNodeOp']]]
 ];

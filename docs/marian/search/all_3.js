@@ -7,6 +7,7 @@ var searchData=
   ['datasetbase_3c_20example_2c_20exampleiterator_2c_20databatch_20_3e',['DatasetBase&lt; Example, ExampleIterator, DataBatch &gt;',['../classmarian_1_1data_1_1DatasetBase.html',1,'marian::data']]],
   ['datasetbase_3c_20sentencetuple_2c_20corpusiterator_2c_20corpusbatch_20_3e',['DatasetBase&lt; SentenceTuple, CorpusIterator, CorpusBatch &gt;',['../classmarian_1_1data_1_1DatasetBase.html',1,'marian::data']]],
   ['datasetbase_3c_20sentencetuple_2c_20textiterator_2c_20corpusbatch_20_3e',['DatasetBase&lt; SentenceTuple, TextIterator, CorpusBatch &gt;',['../classmarian_1_1data_1_1DatasetBase.html',1,'marian::data']]],
+  ['dataweighting',['DataWeighting',['../classmarian_1_1DataWeighting.html',1,'marian']]],
   ['debug',['debug',['../classmarian_1_1data_1_1CorpusBatch.html#ab56b678bb12703ee723949323370fd7f',1,'marian::data::CorpusBatch']]],
   ['decoderbase',['DecoderBase',['../classmarian_1_1DecoderBase.html',1,'marian']]],
   ['decoderfactory',['DecoderFactory',['../classmarian_1_1models_1_1DecoderFactory.html',1,'marian::models']]],
@@ -21,8 +22,8 @@ var searchData=
   ['destruct',['Destruct',['../classNpzConverter.html#a5546c446fba3083e22e1741a1f08d80f',1,'NpzConverter']]],
   ['device',['Device',['../classmarian_1_1Device.html',1,'marian::Device'],['../classmarian_1_1gpu_1_1Device.html',1,'marian::gpu::Device'],['../classmarian_1_1cpu_1_1Device.html',1,'marian::cpu::Device']]],
   ['deviceid',['DeviceId',['../structmarian_1_1DeviceId.html',1,'marian']]],
-  ['devices_5f',['devices_',['../classmarian_1_1MultiNodeGraphGroup.html#ab1f7957b2900e161ba7f759331a3141a',1,'marian::MultiNodeGraphGroup']]],
+  ['devices_5f',['devices_',['../classmarian_1_1MultiNodeGraphGroup.html#ab1f7957b2900e161ba7f759331a3141a',1,'marian::MultiNodeGraphGroup::devices_()'],['../classmarian_1_1MultiNodeGraphGroupSync.html#a0c1a25a8a7842232894eb79d1a0307f4',1,'marian::MultiNodeGraphGroupSync::devices_()']]],
   ['divnodeop',['DivNodeOp',['../structmarian_1_1DivNodeOp.html',1,'marian']]],
   ['dotbatchednodeop',['DotBatchedNodeOp',['../classmarian_1_1DotBatchedNodeOp.html',1,'marian']]],
-  ['dotnodeop',['DotNodeOp',['../classmarian_1_1DotNodeOp.html',1,'marian']]]
+  ['dotnodeop',['DotNodeOp',['../classmarian_1_1DotNodeOp.html',1,'marian::DotNodeOp'],['../classmarian_1_1cpu_1_1int16_1_1DotNodeOp.html',1,'marian::cpu::int16::DotNodeOp']]]
 ];

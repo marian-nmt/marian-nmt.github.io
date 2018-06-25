@@ -22,7 +22,7 @@
  <tr style="height: 56px;">
   <td id="projectalign" style="padding-left: 0.5em;">
    <div id="projectname">Marian
-   &#160;<span id="projectnumber">v1.4.0</span>
+   &#160;<span id="projectnumber">v1.5.0</span>
    </div>
    <div id="projectbrief">A C++ GPU-specific Neural Machine Translation</div>
   </td>
@@ -83,12 +83,15 @@ Inheritance diagram for marian::ExpressionGraph:</div>
 <table class="memberdecls">
 <tr class="heading"><td colspan="2"><h2 class="groupheader"><a name="pub-methods"></a>
 Public Member Functions</h2></td></tr>
-<tr class="memitem:a40b3f2a4c0bacb782241f321bd1d429c"><td class="memItemLeft" align="right" valign="top">&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classmarian_1_1ExpressionGraph.html#a40b3f2a4c0bacb782241f321bd1d429c">ExpressionGraph</a> (bool inference=false)</td></tr>
-<tr class="memdesc:a40b3f2a4c0bacb782241f321bd1d429c"><td class="mdescLeft">&#160;</td><td class="mdescRight">Constructs a new expression graph.  <a href="#a40b3f2a4c0bacb782241f321bd1d429c">More...</a><br /></td></tr>
-<tr class="separator:a40b3f2a4c0bacb782241f321bd1d429c"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a474e5cfd469e9c702d34a72846dc0c1e"><td class="memItemLeft" align="right" valign="top">&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classmarian_1_1ExpressionGraph.html#a474e5cfd469e9c702d34a72846dc0c1e">ExpressionGraph</a> (bool inference=false, bool optimized=false)</td></tr>
+<tr class="memdesc:a474e5cfd469e9c702d34a72846dc0c1e"><td class="mdescLeft">&#160;</td><td class="mdescRight">Constructs a new expression graph.  <a href="#a474e5cfd469e9c702d34a72846dc0c1e">More...</a><br /></td></tr>
+<tr class="separator:a474e5cfd469e9c702d34a72846dc0c1e"><td class="memSeparator" colspan="2">&#160;</td></tr>
 <tr class="memitem:a782978d9389b9f1f6de07399954a5925"><td class="memItemLeft" align="right" valign="top"><a id="a782978d9389b9f1f6de07399954a5925"></a>
 void&#160;</td><td class="memItemRight" valign="bottom"><b>setInference</b> (bool inference)</td></tr>
 <tr class="separator:a782978d9389b9f1f6de07399954a5925"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a0eb63df912b1cfadd15bac8c111e92e8"><td class="memItemLeft" align="right" valign="top"><a id="a0eb63df912b1cfadd15bac8c111e92e8"></a>
+bool&#160;</td><td class="memItemRight" valign="bottom"><b>isInference</b> ()</td></tr>
+<tr class="separator:a0eb63df912b1cfadd15bac8c111e92e8"><td class="memSeparator" colspan="2">&#160;</td></tr>
 <tr class="memitem:adcf8f273d3b1b6a470ca3b63ea3a411e"><td class="memItemLeft" align="right" valign="top"><a id="adcf8f273d3b1b6a470ca3b63ea3a411e"></a>
 void&#160;</td><td class="memItemRight" valign="bottom"><b>setDevice</b> (<a class="el" href="structmarian_1_1DeviceId.html">DeviceId</a> deviceId={0, DeviceType::gpu})</td></tr>
 <tr class="separator:adcf8f273d3b1b6a470ca3b63ea3a411e"><td class="memSeparator" colspan="2">&#160;</td></tr>
@@ -98,6 +101,12 @@ void&#160;</td><td class="memItemRight" valign="bottom"><b>setDevice</b> (<a cla
 <tr class="memitem:a714920827388a0d6f880a90c2e5e5be0"><td class="memItemLeft" align="right" valign="top"><a id="a714920827388a0d6f880a90c2e5e5be0"></a>
 Ptr&lt; <a class="el" href="classmarian_1_1Backend.html">Backend</a> &gt;&#160;</td><td class="memItemRight" valign="bottom"><b>getBackend</b> ()</td></tr>
 <tr class="separator:a714920827388a0d6f880a90c2e5e5be0"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a7c3f9ffe27970578780eea1aee11c62d"><td class="memItemLeft" align="right" valign="top"><a id="a7c3f9ffe27970578780eea1aee11c62d"></a>
+void&#160;</td><td class="memItemRight" valign="bottom"><b>setOptimized</b> (bool optimized)</td></tr>
+<tr class="separator:a7c3f9ffe27970578780eea1aee11c62d"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a89e6b9473634a556ff1d64979f0d0a0c"><td class="memItemLeft" align="right" valign="top"><a id="a89e6b9473634a556ff1d64979f0d0a0c"></a>
+bool&#160;</td><td class="memItemRight" valign="bottom"><b>isOptimized</b> ()</td></tr>
+<tr class="separator:a89e6b9473634a556ff1d64979f0d0a0c"><td class="memSeparator" colspan="2">&#160;</td></tr>
 <tr class="memitem:aec6911dc81df2dfbfb2c3ee6cfa6532a"><td class="memItemLeft" align="right" valign="top"><a id="aec6911dc81df2dfbfb2c3ee6cfa6532a"></a>
 void&#160;</td><td class="memItemRight" valign="bottom"><b>switchParams</b> (const std::string &amp;newNamespace)</td></tr>
 <tr class="separator:aec6911dc81df2dfbfb2c3ee6cfa6532a"><td class="memSeparator" colspan="2">&#160;</td></tr>
@@ -161,13 +170,15 @@ Ptr&lt; <a class="el" href="classmarian_1_1Parameters.html">Parameters</a> &gt; 
 <tr class="memitem:a6ac51867f0abfd22696e85b392f1bfcb"><td class="memItemLeft" align="right" valign="top"><a id="a6ac51867f0abfd22696e85b392f1bfcb"></a>
 void&#160;</td><td class="memItemRight" valign="bottom"><b>remove_top_node</b> (<a class="el" href="namespacemarian.html#a498d8baf75b754011078b890b39c8e12">Expr</a> node)</td></tr>
 <tr class="separator:a6ac51867f0abfd22696e85b392f1bfcb"><td class="memSeparator" colspan="2">&#160;</td></tr>
-<tr class="memitem:a7f7cbec5ff265b942d9a5ba4bf435b41"><td class="memTemplParams" colspan="2"><a id="a7f7cbec5ff265b942d9a5ba4bf435b41"></a>
-template&lt;class... Args&gt; </td></tr>
-<tr class="memitem:a7f7cbec5ff265b942d9a5ba4bf435b41"><td class="memTemplItemLeft" align="right" valign="top">void&#160;</td><td class="memTemplItemRight" valign="bottom"><b>tensor</b> (Tensor &amp;t, Args &amp;&amp;... args)</td></tr>
-<tr class="separator:a7f7cbec5ff265b942d9a5ba4bf435b41"><td class="memSeparator" colspan="2">&#160;</td></tr>
-<tr class="memitem:a12e72d92651d3eb42762a0fdccf3c560"><td class="memItemLeft" align="right" valign="top"><a id="a12e72d92651d3eb42762a0fdccf3c560"></a>
-void&#160;</td><td class="memItemRight" valign="bottom"><b>free</b> (Tensor &amp;t)</td></tr>
-<tr class="separator:a12e72d92651d3eb42762a0fdccf3c560"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:af1f504f7ab335a350ba177cecc279097"><td class="memItemLeft" align="right" valign="top"><a id="af1f504f7ab335a350ba177cecc279097"></a>
+void&#160;</td><td class="memItemRight" valign="bottom"><b>allocateForward</b> (<a class="el" href="namespacemarian.html#a498d8baf75b754011078b890b39c8e12">Expr</a> node)</td></tr>
+<tr class="separator:af1f504f7ab335a350ba177cecc279097"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a2f45dccf37c9fd4686fb86b78e1d08cf"><td class="memItemLeft" align="right" valign="top"><a id="a2f45dccf37c9fd4686fb86b78e1d08cf"></a>
+void&#160;</td><td class="memItemRight" valign="bottom"><b>allocateBackward</b> (<a class="el" href="namespacemarian.html#a498d8baf75b754011078b890b39c8e12">Expr</a> node)</td></tr>
+<tr class="separator:a2f45dccf37c9fd4686fb86b78e1d08cf"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:adbe1cbfe2d56ef20b601e0ee3dba8311"><td class="memItemLeft" align="right" valign="top"><a id="adbe1cbfe2d56ef20b601e0ee3dba8311"></a>
+void&#160;</td><td class="memItemRight" valign="bottom"><b>free</b> (Tensor &amp;tensor)</td></tr>
+<tr class="separator:adbe1cbfe2d56ef20b601e0ee3dba8311"><td class="memSeparator" colspan="2">&#160;</td></tr>
 <tr class="memitem:a952b74f7356f14245cc97ca457af1a94"><td class="memItemLeft" align="right" valign="top"><a id="a952b74f7356f14245cc97ca457af1a94"></a>
 Ptr&lt; <a class="el" href="classmarian_1_1Allocator.html">Allocator</a> &gt;&#160;</td><td class="memItemRight" valign="bottom"><b>allocator</b> ()</td></tr>
 <tr class="separator:a952b74f7356f14245cc97ca457af1a94"><td class="memSeparator" colspan="2">&#160;</td></tr>
@@ -186,6 +197,9 @@ void&#160;</td><td class="memItemRight" valign="bottom"><b>setThrowNaN</b> (bool
 <tr class="memitem:a869cc5d565307e7fc36f3f018e619798"><td class="memItemLeft" align="right" valign="top"><a id="a869cc5d565307e7fc36f3f018e619798"></a>
 void&#160;</td><td class="memItemRight" valign="bottom"><b>load</b> (const std::string &amp;name, bool markReloaded)</td></tr>
 <tr class="separator:a869cc5d565307e7fc36f3f018e619798"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a7c1be99ae9aacebdd15afc26a20c2d53"><td class="memItemLeft" align="right" valign="top"><a id="a7c1be99ae9aacebdd15afc26a20c2d53"></a>
+void&#160;</td><td class="memItemRight" valign="bottom"><b>save</b> (std::vector&lt; cnpy::NpzItem &gt; &amp;npzItems)</td></tr>
+<tr class="separator:a7c1be99ae9aacebdd15afc26a20c2d53"><td class="memSeparator" colspan="2">&#160;</td></tr>
 <tr class="memitem:a760757f21a572d7e80baf2c1cb0d3521"><td class="memItemLeft" align="right" valign="top"><a id="a760757f21a572d7e80baf2c1cb0d3521"></a>
 void&#160;</td><td class="memItemRight" valign="bottom"><b>save</b> (const std::string &amp;name)</td></tr>
 <tr class="separator:a760757f21a572d7e80baf2c1cb0d3521"><td class="memSeparator" colspan="2">&#160;</td></tr>
@@ -200,8 +214,8 @@ Protected Member Functions</h2></td></tr>
 <tr class="separator:ac1669810aad34acc14f6f2e5eea13a9d"><td class="memSeparator" colspan="2">&#160;</td></tr>
 </table>
 <h2 class="groupheader">Constructor &amp; Destructor Documentation</h2>
-<a id="a40b3f2a4c0bacb782241f321bd1d429c"></a>
-<h2 class="memtitle"><span class="permalink"><a href="#a40b3f2a4c0bacb782241f321bd1d429c">&#9670;&nbsp;</a></span>ExpressionGraph()</h2>
+<a id="a474e5cfd469e9c702d34a72846dc0c1e"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#a474e5cfd469e9c702d34a72846dc0c1e">&#9670;&nbsp;</a></span>ExpressionGraph()</h2>
 
 <div class="memitem">
 <div class="memproto">
@@ -210,8 +224,18 @@ Protected Member Functions</h2></td></tr>
           <td class="memname">marian::ExpressionGraph::ExpressionGraph </td>
           <td>(</td>
           <td class="paramtype">bool&#160;</td>
-          <td class="paramname"><em>inference</em> = <code>false</code></td><td>)</td>
+          <td class="paramname"><em>inference</em> = <code>false</code>, </td>
+        </tr>
+        <tr>
+          <td class="paramkey"></td>
           <td></td>
+          <td class="paramtype">bool&#160;</td>
+          <td class="paramname"><em>optimized</em> = <code>false</code>&#160;</td>
+        </tr>
+        <tr>
+          <td></td>
+          <td>)</td>
+          <td></td><td></td>
         </tr>
       </table>
 </div><div class="memdoc">
@@ -257,7 +281,7 @@ Protected Member Functions</h2></td></tr>
 </div><!-- contents -->
 <!-- start footer part -->
 <hr class="footer"/><address class="footer"><small>
-Generated on Wed Apr 18 2018 14:31:07 for Marian by &#160;<a href="http://www.doxygen.org/index.html">
+Generated on Mon Jun 25 2018 10:38:16 for Marian by &#160;<a href="http://www.doxygen.org/index.html">
 <img class="footer" src="doxygen.png" alt="doxygen"/>
 </a> 1.8.13
 </small></address>

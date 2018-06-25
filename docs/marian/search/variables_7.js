@@ -1,6 +1,6 @@
 var searchData=
 [
-  ['schedulermutex_5f',['schedulerMutex_',['../classmarian_1_1MultiNodeGraphGroup.html#aa32a75587c2c31f01dae3bd990abd73b',1,'marian::MultiNodeGraphGroup']]],
+  ['schedulermutex_5f',['schedulerMutex_',['../classmarian_1_1MultiNodeGraphGroup.html#aa32a75587c2c31f01dae3bd990abd73b',1,'marian::MultiNodeGraphGroup::schedulerMutex_()'],['../classmarian_1_1MultiNodeGraphGroupSync.html#ae63707b52564ffc1a7fd0ecf2698a4a8',1,'marian::MultiNodeGraphGroupSync::schedulerMutex_()']]],
   ['servershardbuffercpu_5f',['serverShardBufferCPU_',['../classmarian_1_1MultiNodeGraphGroup.html#aaca55146090dc27eedaf7d1b8aef9a12',1,'marian::MultiNodeGraphGroup']]],
   ['servershardthread_5f',['serverShardThread_',['../classmarian_1_1MultiNodeGraphGroup.html#a858e4728340e16cbcbabbe11786ddff6',1,'marian::MultiNodeGraphGroup']]],
   ['shardgrads_5f',['shardGrads_',['../classmarian_1_1MultiNodeGraphGroup.html#ae782e428f11b35ba7d407cd689425354',1,'marian::MultiNodeGraphGroup']]],

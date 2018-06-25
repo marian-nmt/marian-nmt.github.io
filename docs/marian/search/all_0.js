@@ -7,11 +7,11 @@ var searchData=
   ['addalignmenttosentencetuple',['addAlignmentToSentenceTuple',['../classmarian_1_1data_1_1CorpusBase.html#ab8570b272fb978a28a358f453a29e456',1,'marian::data::CorpusBase']]],
   ['addweightstosentencetuple',['addWeightsToSentenceTuple',['../classmarian_1_1data_1_1CorpusBase.html#a97aaa75826195f640f6ddb162fb3d7cf',1,'marian::data::CorpusBase']]],
   ['addwordstosentencetuple',['addWordsToSentenceTuple',['../classmarian_1_1data_1_1CorpusBase.html#a332f079a04cea45490b79774054da22e',1,'marian::data::CorpusBase']]],
-  ['affinenodeop',['AffineNodeOp',['../classmarian_1_1AffineNodeOp.html',1,'marian']]],
+  ['affinenodeop',['AffineNodeOp',['../classmarian_1_1AffineNodeOp.html',1,'marian::AffineNodeOp'],['../classmarian_1_1cpu_1_1int16_1_1AffineNodeOp.html',1,'marian::cpu::int16::AffineNodeOp']]],
   ['alignfileidx_5f',['alignFileIdx_',['../classmarian_1_1data_1_1CorpusBase.html#ad922b08474273024ff8d7a1cc34e43ac',1,'marian::data::CorpusBase']]],
   ['allocationexception',['AllocationException',['../classmarian_1_1AllocationException.html',1,'marian']]],
   ['allocator',['Allocator',['../classmarian_1_1Allocator.html',1,'marian']]],
-  ['allocators_5f',['allocators_',['../classmarian_1_1MultiNodeGraphGroup.html#a84ff84fbfa935667bb300eeec3398ce3',1,'marian::MultiNodeGraphGroup']]],
+  ['allocators_5f',['allocators_',['../classmarian_1_1MultiNodeGraphGroup.html#a84ff84fbfa935667bb300eeec3398ce3',1,'marian::MultiNodeGraphGroup::allocators_()'],['../classmarian_1_1MultiNodeGraphGroupSync.html#ac5c3d97423382bbeb0dd7cf7d7f49317',1,'marian::MultiNodeGraphGroupSync::allocators_()']]],
   ['amun',['Amun',['../classmarian_1_1Amun.html',1,'marian']]],
   ['array',['Array',['../structmarian_1_1functional_1_1Array.html',1,'marian::functional']]],
   ['array_3c_20int_2c_20n_20_3e',['Array&lt; int, N &gt;',['../structmarian_1_1functional_1_1Array.html',1,'marian::functional']]],
@@ -20,5 +20,7 @@ var searchData=
   ['asyncgraphgroup',['AsyncGraphGroup',['../classmarian_1_1AsyncGraphGroup.html',1,'marian']]],
   ['asyncgraphgroupdrop',['AsyncGraphGroupDrop',['../classmarian_1_1AsyncGraphGroupDrop.html',1,'marian']]],
   ['attentionfactory',['AttentionFactory',['../classmarian_1_1rnn_1_1AttentionFactory.html',1,'marian::rnn']]],
-  ['attentionnodeop',['AttentionNodeOp',['../structmarian_1_1rnn_1_1AttentionNodeOp.html',1,'marian::rnn']]]
+  ['attentionnodeop',['AttentionNodeOp',['../structmarian_1_1rnn_1_1AttentionNodeOp.html',1,'marian::rnn']]],
+  ['autotuner',['AutoTuner',['../classmarian_1_1AutoTuner.html',1,'marian']]],
+  ['autotunerrecorder',['AutoTunerRecorder',['../classmarian_1_1AutoTunerRecorder.html',1,'marian']]]
 ];

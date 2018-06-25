@@ -22,7 +22,7 @@
  <tr style="height: 56px;">
   <td id="projectalign" style="padding-left: 0.5em;">
    <div id="projectname">Marian
-   &#160;<span id="projectnumber">v1.4.0</span>
+   &#160;<span id="projectnumber">v1.5.0</span>
    </div>
    <div id="projectbrief">A C++ GPU-specific Neural Machine Translation</div>
   </td>
@@ -112,6 +112,12 @@ virtual bool&#160;</td><td class="memItemRight" valign="bottom"><b>trainable</b>
 <tr class="memitem:a0af1d5f65be7f857b18370dfa1df1638"><td class="memItemLeft" align="right" valign="top"><a id="a0af1d5f65be7f857b18370dfa1df1638"></a>
 virtual void&#160;</td><td class="memItemRight" valign="bottom"><b>setTrainable</b> (bool)=0</td></tr>
 <tr class="separator:a0af1d5f65be7f857b18370dfa1df1638"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a969e018e3c60a2690a42e190e801ed73"><td class="memItemLeft" align="right" valign="top"><a id="a969e018e3c60a2690a42e190e801ed73"></a>
+virtual bool&#160;</td><td class="memItemRight" valign="bottom"><b>memoize</b> ()=0</td></tr>
+<tr class="separator:a969e018e3c60a2690a42e190e801ed73"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:ab293da564f2c4e653a587cddfa74e73a"><td class="memItemLeft" align="right" valign="top"><a id="ab293da564f2c4e653a587cddfa74e73a"></a>
+virtual void&#160;</td><td class="memItemRight" valign="bottom"><b>setMemoize</b> (bool)=0</td></tr>
+<tr class="separator:ab293da564f2c4e653a587cddfa74e73a"><td class="memSeparator" colspan="2">&#160;</td></tr>
 <tr class="memitem:a394a7e3f35fc90a7d9e717c7512fd2f1"><td class="memItemLeft" align="right" valign="top"><a id="a394a7e3f35fc90a7d9e717c7512fd2f1"></a>
 virtual void&#160;</td><td class="memItemRight" valign="bottom"><b>setId</b> (size_t)=0</td></tr>
 <tr class="separator:a394a7e3f35fc90a7d9e717c7512fd2f1"><td class="memSeparator" colspan="2">&#160;</td></tr>
@@ -124,6 +130,9 @@ virtual Ptr&lt; <a class="el" href="classmarian_1_1ExpressionGraph.html">Express
 <tr class="memitem:aec5a801e7b0c7bc3b0d0956ced52f90b"><td class="memItemLeft" align="right" valign="top"><a id="aec5a801e7b0c7bc3b0d0956ced52f90b"></a>
 virtual const <a class="el" href="structmarian_1_1Shape.html">Shape</a> &amp;&#160;</td><td class="memItemRight" valign="bottom"><b>shape</b> ()=0</td></tr>
 <tr class="separator:aec5a801e7b0c7bc3b0d0956ced52f90b"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a0d26a2f5fb3d96fc6f5a17b9193edf49"><td class="memItemLeft" align="right" valign="top"><a id="a0d26a2f5fb3d96fc6f5a17b9193edf49"></a>
+virtual const Type &amp;&#160;</td><td class="memItemRight" valign="bottom"><b>value_type</b> ()=0</td></tr>
+<tr class="separator:a0d26a2f5fb3d96fc6f5a17b9193edf49"><td class="memSeparator" colspan="2">&#160;</td></tr>
 <tr class="memitem:a8baafc6c50d01876b34404e033ab06ab"><td class="memItemLeft" align="right" valign="top"><a id="a8baafc6c50d01876b34404e033ab06ab"></a>
 virtual std::vector&lt; <a class="el" href="namespacemarian.html#a498d8baf75b754011078b890b39c8e12">Expr</a> &gt; &amp;&#160;</td><td class="memItemRight" valign="bottom"><b>children</b> ()=0</td></tr>
 <tr class="separator:a8baafc6c50d01876b34404e033ab06ab"><td class="memSeparator" colspan="2">&#160;</td></tr>
@@ -175,6 +184,9 @@ virtual size_t&#160;</td><td class="memItemRight" valign="bottom"><b>hash</b> ()
 <tr class="memitem:ad4c7e79abc0ec789d5ff4475d8fd9004"><td class="memItemLeft" align="right" valign="top"><a id="ad4c7e79abc0ec789d5ff4475d8fd9004"></a>
 virtual bool&#160;</td><td class="memItemRight" valign="bottom"><b>equal</b> (<a class="el" href="namespacemarian.html#a498d8baf75b754011078b890b39c8e12">Expr</a>)=0</td></tr>
 <tr class="separator:ad4c7e79abc0ec789d5ff4475d8fd9004"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a1e32102af01bb289ced194b9587871f9"><td class="memItemLeft" align="right" valign="top"><a id="a1e32102af01bb289ced194b9587871f9"></a>
+virtual void&#160;</td><td class="memItemRight" valign="bottom"><b>record</b> (Ptr&lt; <a class="el" href="classmarian_1_1AutoTunerRecorder.html">AutoTunerRecorder</a> &gt;, size_t, bool)=0</td></tr>
+<tr class="separator:a1e32102af01bb289ced194b9587871f9"><td class="memSeparator" colspan="2">&#160;</td></tr>
 </table>
 <a name="details" id="details"></a><h2 class="groupheader">Detailed Description</h2>
 <div class="textblock"><h3>template&lt;class DataType&gt;<br />
@@ -194,7 +206,7 @@ struct marian::Chainable&lt; DataType &gt;</h3>
 </div><!-- contents -->
 <!-- start footer part -->
 <hr class="footer"/><address class="footer"><small>
-Generated on Wed Apr 18 2018 14:31:07 for Marian by &#160;<a href="http://www.doxygen.org/index.html">
+Generated on Mon Jun 25 2018 10:38:16 for Marian by &#160;<a href="http://www.doxygen.org/index.html">
 <img class="footer" src="doxygen.png" alt="doxygen"/>
 </a> 1.8.13
 </small></address>

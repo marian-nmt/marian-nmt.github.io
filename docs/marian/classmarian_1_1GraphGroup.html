@@ -22,7 +22,7 @@
  <tr style="height: 56px;">
   <td id="projectalign" style="padding-left: 0.5em;">
    <div id="projectname">Marian
-   &#160;<span id="projectnumber">v1.4.0</span>
+   &#160;<span id="projectnumber">v1.5.0</span>
    </div>
    <div id="projectbrief">A C++ GPU-specific Neural Machine Translation</div>
   </td>
@@ -72,17 +72,20 @@ $(function() {
 <div class="title">marian::GraphGroup Class Reference<span class="mlabels"><span class="mlabel">abstract</span></span></div>  </div>
 </div><!--header-->
 <div class="contents">
+
+<p><code>#include &lt;<a class="el" href="graph__group_8h_source.html">graph_group.h</a>&gt;</code></p>
 <div class="dynheader">
 Inheritance diagram for marian::GraphGroup:</div>
 <div class="dyncontent">
  <div class="center">
   <img src="classmarian_1_1GraphGroup.png" usemap="#marian::GraphGroup_map" alt=""/>
   <map id="marian::GraphGroup_map" name="marian::GraphGroup_map">
-<area href="classmarian_1_1AsyncGraphGroup.html" alt="marian::AsyncGraphGroup" shape="rect" coords="0,56,190,80"/>
-<area href="classmarian_1_1MultiNodeGraphGroup.html" alt="marian::MultiNodeGraphGroup" shape="rect" coords="200,56,390,80"/>
-<area href="classmarian_1_1SingletonGraph.html" alt="marian::SingletonGraph" shape="rect" coords="400,56,590,80"/>
-<area href="classmarian_1_1SyncGraphGroup.html" alt="marian::SyncGraphGroup" shape="rect" coords="600,56,790,80"/>
-<area href="classmarian_1_1AsyncGraphGroupDrop.html" alt="marian::AsyncGraphGroupDrop" shape="rect" coords="0,112,190,136"/>
+<area href="classmarian_1_1AsyncGraphGroup.html" alt="marian::AsyncGraphGroup" shape="rect" coords="0,56,212,80"/>
+<area href="classmarian_1_1MultiNodeGraphGroup.html" alt="marian::MultiNodeGraphGroup" shape="rect" coords="222,56,434,80"/>
+<area href="classmarian_1_1MultiNodeGraphGroupSync.html" alt="marian::MultiNodeGraphGroupSync" shape="rect" coords="444,56,656,80"/>
+<area href="classmarian_1_1SingletonGraph.html" alt="marian::SingletonGraph" shape="rect" coords="666,56,878,80"/>
+<area href="classmarian_1_1SyncGraphGroup.html" alt="marian::SyncGraphGroup" shape="rect" coords="888,56,1100,80"/>
+<area href="classmarian_1_1AsyncGraphGroupDrop.html" alt="marian::AsyncGraphGroupDrop" shape="rect" coords="0,112,212,136"/>
 </map>
  </div></div>
 <table class="memberdecls">
@@ -97,18 +100,17 @@ virtual void&#160;</td><td class="memItemRight" valign="bottom"><b>update</b> (P
 <tr class="memitem:ac663af7f403dcf97832afbb4cf07a565"><td class="memItemLeft" align="right" valign="top"><a id="ac663af7f403dcf97832afbb4cf07a565"></a>
 virtual void&#160;</td><td class="memItemRight" valign="bottom"><b>load</b> ()=0</td></tr>
 <tr class="separator:ac663af7f403dcf97832afbb4cf07a565"><td class="memSeparator" colspan="2">&#160;</td></tr>
-<tr class="memitem:ade2dd39ba30033ca9ed48b0ac7be039b"><td class="memItemLeft" align="right" valign="top"><a id="ade2dd39ba30033ca9ed48b0ac7be039b"></a>
-virtual void&#160;</td><td class="memItemRight" valign="bottom"><b>save</b> (bool=false)=0</td></tr>
-<tr class="separator:ade2dd39ba30033ca9ed48b0ac7be039b"><td class="memSeparator" colspan="2">&#160;</td></tr>
-<tr class="memitem:a190ff6be8cd4d94b948a3d3c508308da"><td class="memItemLeft" align="right" valign="top"><a id="a190ff6be8cd4d94b948a3d3c508308da"></a>
-virtual void&#160;</td><td class="memItemRight" valign="bottom"><b>wait</b> ()</td></tr>
-<tr class="separator:a190ff6be8cd4d94b948a3d3c508308da"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a1dab9a5f7187122353e5dade3343566c"><td class="memItemLeft" align="right" valign="top"><a id="a1dab9a5f7187122353e5dade3343566c"></a>
+virtual void&#160;</td><td class="memItemRight" valign="bottom"><b>save</b> (bool isFinal=false)=0</td></tr>
+<tr class="separator:a1dab9a5f7187122353e5dade3343566c"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a40a19e76f7bc508d11e72e38eeb2ad45"><td class="memItemLeft" align="right" valign="top"><a id="a40a19e76f7bc508d11e72e38eeb2ad45"></a>
+virtual void&#160;</td><td class="memItemRight" valign="bottom"><b>finalize</b> ()=0</td></tr>
+<tr class="separator:a40a19e76f7bc508d11e72e38eeb2ad45"><td class="memSeparator" colspan="2">&#160;</td></tr>
 <tr class="memitem:afa21a719b99c94240413d418baa16c09"><td class="memItemLeft" align="right" valign="top"><a id="afa21a719b99c94240413d418baa16c09"></a>
 virtual void&#160;</td><td class="memItemRight" valign="bottom"><b>setScheduler</b> (Ptr&lt; <a class="el" href="classmarian_1_1Scheduler.html">Scheduler</a> &gt; scheduler)=0</td></tr>
 <tr class="separator:afa21a719b99c94240413d418baa16c09"><td class="memSeparator" colspan="2">&#160;</td></tr>
-<tr class="memitem:a2654e63f6a13457056c99b1bcb903198"><td class="memItemLeft" align="right" valign="top"><a id="a2654e63f6a13457056c99b1bcb903198"></a>
-virtual Ptr&lt; <a class="el" href="classmarian_1_1data_1_1BatchStats.html">data::BatchStats</a> &gt;&#160;</td><td class="memItemRight" valign="bottom"><b>collectStats</b> ()=0</td></tr>
-<tr class="separator:a2654e63f6a13457056c99b1bcb903198"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a10e066a0b32b78ae688fa88fd9ed6ea2"><td class="memItemLeft" align="right" valign="top">virtual Ptr&lt; <a class="el" href="classmarian_1_1data_1_1BatchStats.html">data::BatchStats</a> &gt;&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classmarian_1_1GraphGroup.html#a10e066a0b32b78ae688fa88fd9ed6ea2">collectStats</a> (Ptr&lt; <a class="el" href="classmarian_1_1ExpressionGraph.html">ExpressionGraph</a> &gt; graph, Ptr&lt; <a class="el" href="classmarian_1_1models_1_1ModelBase.html">models::ModelBase</a> &gt; model, size_t multiplier=1)</td></tr>
+<tr class="separator:a10e066a0b32b78ae688fa88fd9ed6ea2"><td class="memSeparator" colspan="2">&#160;</td></tr>
 </table><table class="memberdecls">
 <tr class="heading"><td colspan="2"><h2 class="groupheader"><a name="pro-attribs"></a>
 Protected Attributes</h2></td></tr>
@@ -121,6 +123,9 @@ Ptr&lt; <a class="el" href="classmarian_1_1OptimizerBase.html">OptimizerBase</a>
 <tr class="memitem:ac75fa5d152da0fcfe14de845ffe0cbcd"><td class="memItemLeft" align="right" valign="top"><a id="ac75fa5d152da0fcfe14de845ffe0cbcd"></a>
 Ptr&lt; <a class="el" href="classmarian_1_1Scheduler.html">Scheduler</a> &gt;&#160;</td><td class="memItemRight" valign="bottom"><b>scheduler_</b></td></tr>
 <tr class="separator:ac75fa5d152da0fcfe14de845ffe0cbcd"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a051e1d549985ef94e73d525ae8435bfb"><td class="memItemLeft" align="right" valign="top"><a id="a051e1d549985ef94e73d525ae8435bfb"></a>
+bool&#160;</td><td class="memItemRight" valign="bottom"><b>finalized_</b> {false}</td></tr>
+<tr class="separator:a051e1d549985ef94e73d525ae8435bfb"><td class="memSeparator" colspan="2">&#160;</td></tr>
 <tr class="memitem:a9d74f7d1113280bff759cb2a1a1d4b45"><td class="memItemLeft" align="right" valign="top"><a id="a9d74f7d1113280bff759cb2a1a1d4b45"></a>
 bool&#160;</td><td class="memItemRight" valign="bottom"><b>scaleLearningRate_</b></td></tr>
 <tr class="separator:a9d74f7d1113280bff759cb2a1a1d4b45"><td class="memSeparator" colspan="2">&#160;</td></tr>
@@ -128,13 +133,59 @@ bool&#160;</td><td class="memItemRight" valign="bottom"><b>scaleLearningRate_</b
 float&#160;</td><td class="memItemRight" valign="bottom"><b>avgBatchWords_</b></td></tr>
 <tr class="separator:a888395fe9d8aa3fe7c2441ff55df4cfd"><td class="memSeparator" colspan="2">&#160;</td></tr>
 </table>
+<a name="details" id="details"></a><h2 class="groupheader">Detailed Description</h2>
+<div class="textblock"><p>Base class for managing the training process across one, multiple gpus, or even multiple machines with multiple gpus. </p>
+</div><h2 class="groupheader">Member Function Documentation</h2>
+<a id="a10e066a0b32b78ae688fa88fd9ed6ea2"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#a10e066a0b32b78ae688fa88fd9ed6ea2">&#9670;&nbsp;</a></span>collectStats()</h2>
+
+<div class="memitem">
+<div class="memproto">
+<table class="mlabels">
+  <tr>
+  <td class="mlabels-left">
+      <table class="memname">
+        <tr>
+          <td class="memname">virtual Ptr&lt;<a class="el" href="classmarian_1_1data_1_1BatchStats.html">data::BatchStats</a>&gt; marian::GraphGroup::collectStats </td>
+          <td>(</td>
+          <td class="paramtype">Ptr&lt; <a class="el" href="classmarian_1_1ExpressionGraph.html">ExpressionGraph</a> &gt;&#160;</td>
+          <td class="paramname"><em>graph</em>, </td>
+        </tr>
+        <tr>
+          <td class="paramkey"></td>
+          <td></td>
+          <td class="paramtype">Ptr&lt; <a class="el" href="classmarian_1_1models_1_1ModelBase.html">models::ModelBase</a> &gt;&#160;</td>
+          <td class="paramname"><em>model</em>, </td>
+        </tr>
+        <tr>
+          <td class="paramkey"></td>
+          <td></td>
+          <td class="paramtype">size_t&#160;</td>
+          <td class="paramname"><em>multiplier</em> = <code>1</code>&#160;</td>
+        </tr>
+        <tr>
+          <td></td>
+          <td>)</td>
+          <td></td><td></td>
+        </tr>
+      </table>
+  </td>
+  <td class="mlabels-right">
+<span class="mlabels"><span class="mlabel">inline</span><span class="mlabel">virtual</span></span>  </td>
+  </tr>
+</table>
+</div><div class="memdoc">
+<p>Determine maximal batch size that can fit into the given workspace so that reallocation does not happen. Rather adjust the batch size based on the stastistics collected here. Activated with <code>--mini-batch-fit</code>. </p>
+
+</div>
+</div>
 <hr/>The documentation for this class was generated from the following file:<ul>
 <li>marian/src/training/<a class="el" href="graph__group_8h_source.html">graph_group.h</a></li>
 </ul>
 </div><!-- contents -->
 <!-- start footer part -->
 <hr class="footer"/><address class="footer"><small>
-Generated on Wed Apr 18 2018 14:31:07 for Marian by &#160;<a href="http://www.doxygen.org/index.html">
+Generated on Mon Jun 25 2018 10:38:17 for Marian by &#160;<a href="http://www.doxygen.org/index.html">
 <img class="footer" src="doxygen.png" alt="doxygen"/>
 </a> 1.8.13
 </small></address>

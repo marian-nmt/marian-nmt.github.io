@@ -1,5 +1,6 @@
 var searchData=
 [
+  ['sampledshortlistgenerator',['SampledShortlistGenerator',['../classmarian_1_1data_1_1SampledShortlistGenerator.html',1,'marian::data']]],
   ['scalaraddnodeop',['ScalarAddNodeOp',['../structmarian_1_1ScalarAddNodeOp.html',1,'marian']]],
   ['scalarmultnodeop',['ScalarMultNodeOp',['../structmarian_1_1ScalarMultNodeOp.html',1,'marian']]],
   ['scalarproductnodeop',['ScalarProductNodeOp',['../structmarian_1_1ScalarProductNodeOp.html',1,'marian']]],
@@ -18,6 +19,8 @@ var searchData=
   ['sgd',['Sgd',['../classmarian_1_1Sgd.html',1,'marian']]],
   ['shape',['Shape',['../structmarian_1_1Shape.html',1,'marian']]],
   ['shiftnodeop',['ShiftNodeOp',['../structmarian_1_1ShiftNodeOp.html',1,'marian']]],
+  ['shortlist',['Shortlist',['../classmarian_1_1data_1_1Shortlist.html',1,'marian::data']]],
+  ['shortlistgenerator',['ShortlistGenerator',['../classmarian_1_1data_1_1ShortlistGenerator.html',1,'marian::data']]],
   ['singlelayerrnn',['SingleLayerRNN',['../classmarian_1_1rnn_1_1SingleLayerRNN.html',1,'marian::rnn']]],
   ['singletongraph',['SingletonGraph',['../classmarian_1_1SingletonGraph.html',1,'marian']]],
   ['slowlstm',['SlowLSTM',['../classmarian_1_1rnn_1_1SlowLSTM.html',1,'marian::rnn']]],
@@ -32,6 +35,7 @@ var searchData=
   ['state',['State',['../structmarian_1_1rnn_1_1State.html',1,'marian::rnn']]],
   ['states',['States',['../classmarian_1_1rnn_1_1States.html',1,'marian::rnn']]],
   ['stepnodeop',['StepNodeOp',['../classmarian_1_1StepNodeOp.html',1,'marian']]],
+  ['stepwise',['Stepwise',['../classmarian_1_1models_1_1Stepwise.html',1,'marian::models']]],
   ['stringcollector',['StringCollector',['../classmarian_1_1StringCollector.html',1,'marian']]],
   ['subbatch',['SubBatch',['../classmarian_1_1data_1_1SubBatch.html',1,'marian::data']]],
   ['sumnodeop',['SumNodeOp',['../structmarian_1_1SumNodeOp.html',1,'marian']]],

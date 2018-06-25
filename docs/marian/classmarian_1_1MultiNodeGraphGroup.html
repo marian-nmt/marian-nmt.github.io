@@ -22,7 +22,7 @@
  <tr style="height: 56px;">
   <td id="projectalign" style="padding-left: 0.5em;">
    <div id="projectname">Marian
-   &#160;<span id="projectnumber">v1.4.0</span>
+   &#160;<span id="projectnumber">v1.5.0</span>
    </div>
    <div id="projectbrief">A C++ GPU-specific Neural Machine Translation</div>
   </td>
@@ -104,13 +104,15 @@ Public Member Functions</h2></td></tr>
 <tr class="separator:a0a014eeee7573962b7c62ed441789103"><td class="memSeparator" colspan="2">&#160;</td></tr>
 <tr class="memitem:a82fbb0b76109d6a992ef02bc4d2a83b0"><td class="memItemLeft" align="right" valign="top">Ptr&lt; <a class="el" href="classmarian_1_1data_1_1BatchStats.html">data::BatchStats</a> &gt;&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classmarian_1_1MultiNodeGraphGroup.html#a82fbb0b76109d6a992ef02bc4d2a83b0">collectStats</a> ()</td></tr>
 <tr class="separator:a82fbb0b76109d6a992ef02bc4d2a83b0"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:aaaaf0cb51d09b5f4a5ef3e34144c550f"><td class="memItemLeft" align="right" valign="top"><a id="aaaaf0cb51d09b5f4a5ef3e34144c550f"></a>
+virtual void&#160;</td><td class="memItemRight" valign="bottom"><b>finalize</b> ()</td></tr>
+<tr class="separator:aaaaf0cb51d09b5f4a5ef3e34144c550f"><td class="memSeparator" colspan="2">&#160;</td></tr>
 <tr class="inherit_header pub_methods_classmarian_1_1GraphGroup"><td colspan="2" onclick="javascript:toggleInherit('pub_methods_classmarian_1_1GraphGroup')"><img src="closed.png" alt="-"/>&#160;Public Member Functions inherited from <a class="el" href="classmarian_1_1GraphGroup.html">marian::GraphGroup</a></td></tr>
 <tr class="memitem:a5d421471110114cb3c6816eb444043df inherit pub_methods_classmarian_1_1GraphGroup"><td class="memItemLeft" align="right" valign="top"><a id="a5d421471110114cb3c6816eb444043df"></a>
 &#160;</td><td class="memItemRight" valign="bottom"><b>GraphGroup</b> (Ptr&lt; <a class="el" href="classmarian_1_1Config.html">Config</a> &gt; options)</td></tr>
 <tr class="separator:a5d421471110114cb3c6816eb444043df inherit pub_methods_classmarian_1_1GraphGroup"><td class="memSeparator" colspan="2">&#160;</td></tr>
-<tr class="memitem:a190ff6be8cd4d94b948a3d3c508308da inherit pub_methods_classmarian_1_1GraphGroup"><td class="memItemLeft" align="right" valign="top"><a id="a190ff6be8cd4d94b948a3d3c508308da"></a>
-virtual void&#160;</td><td class="memItemRight" valign="bottom"><b>wait</b> ()</td></tr>
-<tr class="separator:a190ff6be8cd4d94b948a3d3c508308da inherit pub_methods_classmarian_1_1GraphGroup"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a10e066a0b32b78ae688fa88fd9ed6ea2 inherit pub_methods_classmarian_1_1GraphGroup"><td class="memItemLeft" align="right" valign="top">virtual Ptr&lt; <a class="el" href="classmarian_1_1data_1_1BatchStats.html">data::BatchStats</a> &gt;&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classmarian_1_1GraphGroup.html#a10e066a0b32b78ae688fa88fd9ed6ea2">collectStats</a> (Ptr&lt; <a class="el" href="classmarian_1_1ExpressionGraph.html">ExpressionGraph</a> &gt; graph, Ptr&lt; <a class="el" href="classmarian_1_1models_1_1ModelBase.html">models::ModelBase</a> &gt; model, size_t multiplier=1)</td></tr>
+<tr class="separator:a10e066a0b32b78ae688fa88fd9ed6ea2 inherit pub_methods_classmarian_1_1GraphGroup"><td class="memSeparator" colspan="2">&#160;</td></tr>
 </table><table class="memberdecls">
 <tr class="heading"><td colspan="2"><h2 class="groupheader"><a name="pro-methods"></a>
 Protected Member Functions</h2></td></tr>
@@ -221,6 +223,23 @@ Protected Attributes</h2></td></tr>
 <tr class="separator:aa3c0ac0525593836f70509973483765a"><td class="memSeparator" colspan="2">&#160;</td></tr>
 <tr class="memitem:a97dcaca7866b209d74dedb4dc8c6dab9"><td class="memItemLeft" align="right" valign="top">std::vector&lt; std::condition_variable &gt;&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classmarian_1_1MultiNodeGraphGroup.html#a97dcaca7866b209d74dedb4dc8c6dab9">cvClientCommOverlapBuffersFilled_</a></td></tr>
 <tr class="separator:a97dcaca7866b209d74dedb4dc8c6dab9"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a29a59dc60cec22159e2cd3927d9e3994"><td class="memItemLeft" align="right" valign="top">size_t&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classmarian_1_1MultiNodeGraphGroup.html#a29a59dc60cec22159e2cd3927d9e3994">tau_</a> {1}</td></tr>
+<tr class="separator:a29a59dc60cec22159e2cd3927d9e3994"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:aff6bf63450ebf085bcb43507ab5c71c9"><td class="memItemLeft" align="right" valign="top"><a id="aff6bf63450ebf085bcb43507ab5c71c9"></a>
+std::vector&lt; std::mutex &gt;&#160;</td><td class="memItemRight" valign="bottom"><b>optDelayMutex_</b></td></tr>
+<tr class="separator:aff6bf63450ebf085bcb43507ab5c71c9"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a75d1d8e9b7e09c6c02cc24d3e741c905"><td class="memItemLeft" align="right" valign="top"><a id="a75d1d8e9b7e09c6c02cc24d3e741c905"></a>
+std::vector&lt; size_t &gt;&#160;</td><td class="memItemRight" valign="bottom"><b>delay_count</b></td></tr>
+<tr class="separator:a75d1d8e9b7e09c6c02cc24d3e741c905"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a53595b09c1093d0ee5b19353a20cc856"><td class="memItemLeft" align="right" valign="top"><a id="a53595b09c1093d0ee5b19353a20cc856"></a>
+std::vector&lt; int &gt;&#160;</td><td class="memItemRight" valign="bottom"><b>totalBatchWords</b></td></tr>
+<tr class="separator:a53595b09c1093d0ee5b19353a20cc856"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:ad413550f8b86b3f6a32fe7ea3c2d8996"><td class="memItemLeft" align="right" valign="top"><a id="ad413550f8b86b3f6a32fe7ea3c2d8996"></a>
+std::vector&lt; Tensor &gt;&#160;</td><td class="memItemRight" valign="bottom"><b>accGradients</b></td></tr>
+<tr class="separator:ad413550f8b86b3f6a32fe7ea3c2d8996"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:ac1d6f671df01d785c50354c0bb3bd7f1"><td class="memItemLeft" align="right" valign="top"><a id="ac1d6f671df01d785c50354c0bb3bd7f1"></a>
+std::vector&lt; Tensor &gt;&#160;</td><td class="memItemRight" valign="bottom"><b>accGradientBuffer</b></td></tr>
+<tr class="separator:ac1d6f671df01d785c50354c0bb3bd7f1"><td class="memSeparator" colspan="2">&#160;</td></tr>
 <tr class="inherit_header pro_attribs_classmarian_1_1GraphGroup"><td colspan="2" onclick="javascript:toggleInherit('pro_attribs_classmarian_1_1GraphGroup')"><img src="closed.png" alt="-"/>&#160;Protected Attributes inherited from <a class="el" href="classmarian_1_1GraphGroup.html">marian::GraphGroup</a></td></tr>
 <tr class="memitem:ac0b64371074b8a5654bfae72449c9064 inherit pro_attribs_classmarian_1_1GraphGroup"><td class="memItemLeft" align="right" valign="top"><a id="ac0b64371074b8a5654bfae72449c9064"></a>
 Ptr&lt; <a class="el" href="classmarian_1_1Config.html">Config</a> &gt;&#160;</td><td class="memItemRight" valign="bottom"><b>options_</b></td></tr>
@@ -231,6 +250,9 @@ Ptr&lt; <a class="el" href="classmarian_1_1OptimizerBase.html">OptimizerBase</a>
 <tr class="memitem:ac75fa5d152da0fcfe14de845ffe0cbcd inherit pro_attribs_classmarian_1_1GraphGroup"><td class="memItemLeft" align="right" valign="top"><a id="ac75fa5d152da0fcfe14de845ffe0cbcd"></a>
 Ptr&lt; <a class="el" href="classmarian_1_1Scheduler.html">Scheduler</a> &gt;&#160;</td><td class="memItemRight" valign="bottom"><b>scheduler_</b></td></tr>
 <tr class="separator:ac75fa5d152da0fcfe14de845ffe0cbcd inherit pro_attribs_classmarian_1_1GraphGroup"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a051e1d549985ef94e73d525ae8435bfb inherit pro_attribs_classmarian_1_1GraphGroup"><td class="memItemLeft" align="right" valign="top"><a id="a051e1d549985ef94e73d525ae8435bfb"></a>
+bool&#160;</td><td class="memItemRight" valign="bottom"><b>finalized_</b> {false}</td></tr>
+<tr class="separator:a051e1d549985ef94e73d525ae8435bfb inherit pro_attribs_classmarian_1_1GraphGroup"><td class="memSeparator" colspan="2">&#160;</td></tr>
 <tr class="memitem:a9d74f7d1113280bff759cb2a1a1d4b45 inherit pro_attribs_classmarian_1_1GraphGroup"><td class="memItemLeft" align="right" valign="top"><a id="a9d74f7d1113280bff759cb2a1a1d4b45"></a>
 bool&#160;</td><td class="memItemRight" valign="bottom"><b>scaleLearningRate_</b></td></tr>
 <tr class="separator:a9d74f7d1113280bff759cb2a1a1d4b45 inherit pro_attribs_classmarian_1_1GraphGroup"><td class="memSeparator" colspan="2">&#160;</td></tr>
@@ -240,9 +262,11 @@ float&#160;</td><td class="memItemRight" valign="bottom"><b>avgBatchWords_</b></
 </table><table class="memberdecls">
 <tr class="heading"><td colspan="2"><h2 class="groupheader"><a name="pro-static-attribs"></a>
 Static Protected Attributes</h2></td></tr>
-<tr class="memitem:acc913ff7bf725b97ac8206b7ad8d5303"><td class="memItemLeft" align="right" valign="top">static const int&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classmarian_1_1MultiNodeGraphGroup.html#acc913ff7bf725b97ac8206b7ad8d5303">MPI_TAG_GRAD_PUSH_</a> {0}</td></tr>
+<tr class="memitem:ae31bbe332543625ee1e14e5970aa4382"><td class="memItemLeft" align="right" valign="top">static const int&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classmarian_1_1MultiNodeGraphGroup.html#ae31bbe332543625ee1e14e5970aa4382">MPI_TAG_GRAD_PUSH_MSG_</a> {0}</td></tr>
+<tr class="separator:ae31bbe332543625ee1e14e5970aa4382"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:acc913ff7bf725b97ac8206b7ad8d5303"><td class="memItemLeft" align="right" valign="top">static const int&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classmarian_1_1MultiNodeGraphGroup.html#acc913ff7bf725b97ac8206b7ad8d5303">MPI_TAG_GRAD_PUSH_</a> {5}</td></tr>
 <tr class="separator:acc913ff7bf725b97ac8206b7ad8d5303"><td class="memSeparator" colspan="2">&#160;</td></tr>
-<tr class="memitem:a182b9e38a179e622eb14ba1206f19f49"><td class="memItemLeft" align="right" valign="top">static const int&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classmarian_1_1MultiNodeGraphGroup.html#a182b9e38a179e622eb14ba1206f19f49">MPI_TAG_PARAM_PUSH_</a> {5}</td></tr>
+<tr class="memitem:a182b9e38a179e622eb14ba1206f19f49"><td class="memItemLeft" align="right" valign="top">static const int&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classmarian_1_1MultiNodeGraphGroup.html#a182b9e38a179e622eb14ba1206f19f49">MPI_TAG_PARAM_PUSH_</a> {10}</td></tr>
 <tr class="separator:a182b9e38a179e622eb14ba1206f19f49"><td class="memSeparator" colspan="2">&#160;</td></tr>
 <tr class="memitem:a48416a7c176b01a4c86a2a0d545b20d7"><td class="memItemLeft" align="right" valign="top">static const unsigned int&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classmarian_1_1MultiNodeGraphGroup.html#a48416a7c176b01a4c86a2a0d545b20d7">MSG_INFO_SIZE_</a> {0}</td></tr>
 <tr class="separator:a48416a7c176b01a4c86a2a0d545b20d7"><td class="memSeparator" colspan="2">&#160;</td></tr>
@@ -388,13 +412,11 @@ static const unsigned int&#160;</td><td class="memItemRight" valign="bottom"><b>
       </table>
   </td>
   <td class="mlabels-right">
-<span class="mlabels"><span class="mlabel">inline</span><span class="mlabel">virtual</span></span>  </td>
+<span class="mlabels"><span class="mlabel">inline</span></span>  </td>
   </tr>
 </table>
 </div><div class="memdoc">
 <p>Collect statistics from first client's graph. </p>
-
-<p>Implements <a class="el" href="classmarian_1_1GraphGroup.html">marian::GraphGroup</a>.</p>
 
 </div>
 </div>
@@ -703,6 +725,7 @@ static const unsigned int&#160;</td><td class="memItemRight" valign="bottom"><b>
   </tr>
 </table>
 </div><div class="memdoc">
+<p>LocalOptimizers related variables Allocate new tensor on given GPU and store allocator.</p>
 <p>Allocate new tensor on given GPU and store allocator. </p>
 
 </div>
@@ -1521,7 +1544,7 @@ static const unsigned int&#160;</td><td class="memItemRight" valign="bottom"><b>
   <td class="mlabels-left">
       <table class="memname">
         <tr>
-          <td class="memname">const int marian::MultiNodeGraphGroup::MPI_TAG_GRAD_PUSH_ {0}</td>
+          <td class="memname">const int marian::MultiNodeGraphGroup::MPI_TAG_GRAD_PUSH_ {5}</td>
         </tr>
       </table>
   </td>
@@ -1530,7 +1553,30 @@ static const unsigned int&#160;</td><td class="memItemRight" valign="bottom"><b>
   </tr>
 </table>
 </div><div class="memdoc">
-<p>Flag to indicate that an MPI message contains gradients (client -&gt; server). </p>
+<p>Flag to indicate that an MPI message contains gradient (client -&gt; server). </p>
+
+</div>
+</div>
+<a id="ae31bbe332543625ee1e14e5970aa4382"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#ae31bbe332543625ee1e14e5970aa4382">&#9670;&nbsp;</a></span>MPI_TAG_GRAD_PUSH_MSG_</h2>
+
+<div class="memitem">
+<div class="memproto">
+<table class="mlabels">
+  <tr>
+  <td class="mlabels-left">
+      <table class="memname">
+        <tr>
+          <td class="memname">const int marian::MultiNodeGraphGroup::MPI_TAG_GRAD_PUSH_MSG_ {0}</td>
+        </tr>
+      </table>
+  </td>
+  <td class="mlabels-right">
+<span class="mlabels"><span class="mlabel">static</span><span class="mlabel">protected</span></span>  </td>
+  </tr>
+</table>
+</div><div class="memdoc">
+<p>Flag to indicate that an MPI message contains message info before sending the gradient (client -&gt; server). </p>
 
 </div>
 </div>
@@ -1544,7 +1590,7 @@ static const unsigned int&#160;</td><td class="memItemRight" valign="bottom"><b>
   <td class="mlabels-left">
       <table class="memname">
         <tr>
-          <td class="memname">const int marian::MultiNodeGraphGroup::MPI_TAG_PARAM_PUSH_ {5}</td>
+          <td class="memname">const int marian::MultiNodeGraphGroup::MPI_TAG_PARAM_PUSH_ {10}</td>
         </tr>
       </table>
   </td>
@@ -1902,6 +1948,29 @@ static const unsigned int&#160;</td><td class="memItemRight" valign="bottom"><b>
 
 </div>
 </div>
+<a id="a29a59dc60cec22159e2cd3927d9e3994"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#a29a59dc60cec22159e2cd3927d9e3994">&#9670;&nbsp;</a></span>tau_</h2>
+
+<div class="memitem">
+<div class="memproto">
+<table class="mlabels">
+  <tr>
+  <td class="mlabels-left">
+      <table class="memname">
+        <tr>
+          <td class="memname">size_t marian::MultiNodeGraphGroup::tau_ {1}</td>
+        </tr>
+      </table>
+  </td>
+  <td class="mlabels-right">
+<span class="mlabels"><span class="mlabel">protected</span></span>  </td>
+  </tr>
+</table>
+</div><div class="memdoc">
+<p>Variables for optimizer delay </p>
+
+</div>
+</div>
 <hr/>The documentation for this class was generated from the following files:<ul>
 <li>marian/src/training/<a class="el" href="graph__group__multinode_8h_source.html">graph_group_multinode.h</a></li>
 <li>marian/src/training/graph_group_multinode.cpp</li>
@@ -1909,7 +1978,7 @@ static const unsigned int&#160;</td><td class="memItemRight" valign="bottom"><b>
 </div><!-- contents -->
 <!-- start footer part -->
 <hr class="footer"/><address class="footer"><small>
-Generated on Wed Apr 18 2018 14:31:07 for Marian by &#160;<a href="http://www.doxygen.org/index.html">
+Generated on Mon Jun 25 2018 10:38:17 for Marian by &#160;<a href="http://www.doxygen.org/index.html">
 <img class="footer" src="doxygen.png" alt="doxygen"/>
 </a> 1.8.13
 </small></address>

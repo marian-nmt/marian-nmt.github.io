@@ -3,6 +3,7 @@ var searchData=
   ['parameters',['Parameters',['../classmarian_1_1Parameters.html',1,'marian']]],
   ['paramnode',['ParamNode',['../structmarian_1_1ParamNode.html',1,'marian']]],
   ['parseoptions',['parseOptions',['../classmarian_1_1ConfigParser.html#a538eb5f3c97b6a25a2fc0c7a8f015425',1,'marian::ConfigParser']]],
+  ['perplexityloss',['PerplexityLoss',['../classmarian_1_1PerplexityLoss.html',1,'marian']]],
   ['plusnodeop',['PlusNodeOp',['../structmarian_1_1PlusNodeOp.html',1,'marian']]],
   ['poolingop',['PoolingOp',['../classmarian_1_1PoolingOp.html',1,'marian']]],
   ['poolingwithmaskingop',['PoolingWithMaskingOp',['../classmarian_1_1PoolingWithMaskingOp.html',1,'marian']]],

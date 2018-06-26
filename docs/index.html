@@ -104,6 +104,8 @@
  
 
  
+
+ 
  <li>
    <a class="page-link" href="/quickstart/">Quick start</a>
  </li>
@@ -208,19 +210,17 @@ Can be decoded with Amun as <em>nematus2</em> model type.</li>
 
 <p>Clone a fresh copy from github:</p>
 
-<div class="highlighter-rouge"><pre class="highlight"><code>git clone https://github.com/marian-nmt/marian
-</code></pre>
-</div>
+<div class="highlighter-rouge"><div class="highlight"><pre class="highlight"><code>git clone https://github.com/marian-nmt/marian
+</code></pre></div></div>
 
 <p>The project is a standard CMake out-of-source build:</p>
 
-<div class="highlighter-rouge"><pre class="highlight"><code>cd marian
+<div class="highlighter-rouge"><div class="highlight"><pre class="highlight"><code>cd marian
 mkdir build
 cd build
 cmake ..
 make -j
-</code></pre>
-</div>
+</code></pre></div></div>
 
 <p>If run for the first time, this will also download <a class="github-link" href="https://github.com/marian-nmt/marian-dev/tree/master/" target="_blank"><code class="highlighter-rogue">marian-dev/</code></a>
 — the training framework for Marian.</p>
@@ -228,36 +228,33 @@ make -j
 <h3 id="custom-boost">Custom Boost</h3>
 
 <p>Download, compile and install Boost:</p>
-<div class="highlighter-rouge"><pre class="highlight"><code>wget https://dl.bintray.com/boostorg/release/1.64.0/source/boost_1_64_0.tar.gz
+<div class="highlighter-rouge"><div class="highlight"><pre class="highlight"><code>wget https://dl.bintray.com/boostorg/release/1.64.0/source/boost_1_64_0.tar.gz
 tar zxvf boost_1_64_0.tar.gz
 cd boost_1_64_0
 ./bootstrap.sh
 ./b2 -j16 --prefix=$(pwd) --libdir=$(pwd)/lib64 --layout=system link=static install
-</code></pre>
-</div>
+</code></pre></div></div>
 
 <p>To compile Marian training framework with your custom Boost installation:</p>
-<div class="highlighter-rouge"><pre class="highlight"><code>cd /path/to/marian-dev
+<div class="highlighter-rouge"><div class="highlight"><pre class="highlight"><code>cd /path/to/marian-dev
 mkdir build
 cd build
 cmake .. -DBOOST_ROOT=/path/to/boost_1_64_0
 make -j16
-</code></pre>
-</div>
+</code></pre></div></div>
 
 <p>Tested on Ubuntu 16.04.3 LTS.</p>
 
 <h3 id="non-default-cuda">Non-default CUDA</h3>
 
 <p>Specify the path to your CUDA root directory via CMake:</p>
-<div class="highlighter-rouge"><pre class="highlight"><code>cd /path/to/marian-dev
+<div class="highlighter-rouge"><div class="highlight"><pre class="highlight"><code>cd /path/to/marian-dev
 mkdir build
 cd build
 cmake .. -DCUDA_TOOLKIT_ROOT_DIR=/usr/local/cuda-9.1
 make -j16
 
-</code></pre>
-</div>
+</code></pre></div></div>
 
 <h2 id="training">Training</h2>
 
@@ -266,31 +263,28 @@ Assuming <code class="highlighter-rouge">corpus.en</code> and <code class="highl
 of a English-Romanian parallel corpus, the following command will create a
 Nematus-compatible neural machine translation model:</p>
 
-<div class="highlighter-rouge"><pre class="highlight"><code>./build/marian \
+<div class="highlighter-rouge"><div class="highlight"><pre class="highlight"><code>./build/marian \
     --train-sets corpus.en corpus.ro \
     --vocabs vocab.en vocab.ro \
     --model model.npz
-</code></pre>
-</div>
+</code></pre></div></div>
 
 <p>Command options can be also specified in a configuration file in YAML format:</p>
 
-<div class="language-yaml highlighter-rouge"><pre class="highlight"><code><span class="c1"># config.yml</span>
-<span class="s">train-sets</span><span class="pi">:</span>
+<div class="language-yaml highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="c1"># config.yml</span>
+<span class="na">train-sets</span><span class="pi">:</span>
   <span class="pi">-</span> <span class="s">corpus.en</span>
   <span class="pi">-</span> <span class="s">corpus.ro</span>
-<span class="s">vocabs</span><span class="pi">:</span>
+<span class="na">vocabs</span><span class="pi">:</span>
   <span class="pi">-</span> <span class="s">vocab.en</span>
   <span class="pi">-</span> <span class="s">vocab.ro</span>
-<span class="s">model</span><span class="pi">:</span> <span class="s">model.npz</span>
-</code></pre>
-</div>
+<span class="na">model</span><span class="pi">:</span> <span class="s">model.npz</span>
+</code></pre></div></div>
 
 <p>which simplifies the command to:</p>
 
-<div class="highlighter-rouge"><pre class="highlight"><code>./build/marian -c config.yml
-</code></pre>
-</div>
+<div class="highlighter-rouge"><div class="highlight"><pre class="highlight"><code>./build/marian -c config.yml
+</code></pre></div></div>
 
 <p>Command-line options overwrite options stored in the configuration file.</p>
 
@@ -332,26 +326,24 @@ the same manner as your training data.</p>
 <p>A minimum example of how to validate the model using cross-entropy and
 BLEU score:</p>
 
-<div class="highlighter-rouge"><pre class="highlight"><code>./build/marian \
+<div class="highlighter-rouge"><div class="highlight"><pre class="highlight"><code>./build/marian \
     --train-sets corpus.en corpus.ro \
     --vocabs vocab.en vocab.ro \
     --model model.npz \
     --valid-set dev.en dev.ro \
     --valid-metrics cross-entropy translation \
     --valid-script-path validate.sh
-</code></pre>
-</div>
+</code></pre></div></div>
 
 <p>where <code class="highlighter-rouge">validate.sh</code> is a bash script, which takes the file with output
 translation of <code class="highlighter-rouge">dev.en</code> as the first argument (i.e. <code class="highlighter-rouge">$1</code>) and returns the BLEU
 score, for example:</p>
 
-<div class="language-sh highlighter-rouge"><pre class="highlight"><code><span class="c"># validate.sh</span>
-./postprocess.sh &lt; <span class="nv">$1</span> &gt; file.out 2&gt;/dev/null
+<div class="language-sh highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="c"># validate.sh</span>
+./postprocess.sh &lt; <span class="nv">$1</span> <span class="o">&gt;</span> file.out 2&gt;/dev/null
 ./moses-scripts/scripts/generic/multi-bleu-detok.perl file.ref &lt; file.out 2&gt;/dev/null <span class="se">\</span>
-    | sed -r <span class="s1">'s/BLEU = ([0-9.]+),.*/\1/'</span>
-</code></pre>
-</div>
+    | <span class="nb">sed</span> <span class="nt">-r</span> <span class="s1">'s/BLEU = ([0-9.]+),.*/\1/'</span>
+</code></pre></div></div>
 
 <h3 id="early-stopping">Early stopping</h3>
 
@@ -466,12 +458,11 @@ enabled.</li>
 create a host file and ensure that the nodes can ssh to each other without a
 password. Then you may use the command similar to:</p>
 
-<div class="highlighter-rouge"><pre class="highlight"><code>mpirun -n 2 --hostfile hosts_mpi -tag-output \
+<div class="highlighter-rouge"><div class="highlight"><pre class="highlight"><code>mpirun -n 2 --hostfile hosts_mpi -tag-output \
     ./build/marian --devices 0:0 1 1:0 \
         -m model.npz -t corpus.src corpus.trg -v vocab.src.yml vocab.trg.yml \
         --multi-node --multi-node-overlap 0
-</code></pre>
-</div>
+</code></pre></div></div>
 
 <p>where the host file <code class="highlighter-rouge">hosts_mpi</code> contains on each line a host on which you want
 to run Marian.</p>
@@ -480,9 +471,8 @@ to run Marian.</p>
 which requires layer normalization. Ideally, add the following line to your run
 script:</p>
 
-<div class="highlighter-rouge"><pre class="highlight"><code>--layer-normalization --dropout-rnn 0.2 --dropout-src 0.1 --dropout-trg 0.1
-</code></pre>
-</div>
+<div class="highlighter-rouge"><div class="highlight"><pre class="highlight"><code>--layer-normalization --dropout-rnn 0.2 --dropout-src 0.1 --dropout-trg 0.1
+</code></pre></div></div>
 
 <p>This is still an experimental feature introduced in version 1.4.0.</p>
 
@@ -499,21 +489,19 @@ of Marian is planned.</p>
 
 <p>Basic usage:</p>
 
-<div class="highlighter-rouge"><pre class="highlight"><code>./build/marian-decoder -m model.npz -v vocab.en vocab.ro &lt; input.txt
-</code></pre>
-</div>
+<div class="highlighter-rouge"><div class="highlight"><pre class="highlight"><code>./build/marian-decoder -m model.npz -v vocab.en vocab.ro &lt; input.txt
+</code></pre></div></div>
 
 <h3 id="ensembles">Ensembles</h3>
 
 <p>Models of different types and architectures can be ensembled as long as they
 use common vocabularies:</p>
 
-<div class="highlighter-rouge"><pre class="highlight"><code>./build/marian-decoder \
+<div class="highlighter-rouge"><div class="highlight"><pre class="highlight"><code>./build/marian-decoder \
     --models model1.npz model2.npz model3.npz \
     --weights 0.6 0.2 0.2 \
     --vocabs vocab.en vocab.ro &lt; input.txt
-</code></pre>
-</div>
+</code></pre></div></div>
 
 <p>Weights are optional and set to 1.0 by default if ommitted.</p>
 
@@ -522,9 +510,8 @@ use common vocabularies:</p>
 <p>We found that using length normalization with a penalty term of 0.6 and a beam
 size of 6 is usually best:</p>
 
-<div class="highlighter-rouge"><pre class="highlight"><code>./marian-decoder -m model.npz -v vocab.src.yml vocab.trg.yml -b 6 --normalize=0.6
-</code></pre>
-</div>
+<div class="highlighter-rouge"><div class="highlight"><pre class="highlight"><code>./marian-decoder -m model.npz -v vocab.src.yml vocab.trg.yml -b 6 --normalize=0.6
+</code></pre></div></div>
 
 <p>This rougly follows the settings by Google from their <a href="https://arxiv.org/abs/1706.03762">transformer
 paper</a>.</p>
@@ -536,10 +523,9 @@ translation for whole mini-batches and significantly increases translation
 speed (roughly by a factor of 10 or more). We recommend to use the following
 options to enable batched translation:</p>
 
-<div class="highlighter-rouge"><pre class="highlight"><code>./marian-decoder -m model.npz -v vocab.src.yml vocab.trg.yml -b 6 --normalize=0.6 \
+<div class="highlighter-rouge"><div class="highlight"><pre class="highlight"><code>./marian-decoder -m model.npz -v vocab.src.yml vocab.trg.yml -b 6 --normalize=0.6 \
     --mini-batch 64 --maxi-batch-sort src --maxi-batch 100 -w 2500
-</code></pre>
-</div>
+</code></pre></div></div>
 
 <p>This does a number of things:</p>
 <ul>
@@ -599,7 +585,7 @@ options.</p>
 
 <p>this would be:</p>
 
-<div class="highlighter-rouge"><pre class="highlight"><code>./build/marian-decoder \
+<div class="highlighter-rouge"><div class="highlight"><pre class="highlight"><code>./build/marian-decoder \
     --type nematus \
     --models model/en-de/model.npz \
     --vocabs model/en-de/vocab.en.json model/en-de/vocab.de.json \
@@ -613,15 +599,13 @@ options.</p>
     --dec-cell gru-nematus --enc-cell gru-nematus \
     --tied-embeddings true \
     --layer-normalization true
-</code></pre>
-</div>
+</code></pre></div></div>
 
 <p>Alternatively, the model parameters can be added into the model <em>.npz</em> file
 based on the Nematus <em>.json</em> file using the script: <a class="github-link" href="https://github.com/marian-nmt/marian-dev/tree/master/scripts/contrib/inject_model_params.py" target="_blank"><code class="highlighter-rogue">marian-dev/scripts/contrib/inject_model_params.py</code></a>, e.g.:</p>
 
-<div class="highlighter-rouge"><pre class="highlight"><code>python inject_model_params.py -m model.npz -j model.npz.json
-</code></pre>
-</div>
+<div class="highlighter-rouge"><div class="highlight"><pre class="highlight"><code>python inject_model_params.py -m model.npz -j model.npz.json
+</code></pre></div></div>
 
 <h3 id="marian-web-server">Marian web server</h3>
 
@@ -629,15 +613,13 @@ based on the Nematus <em>.json</em> file using the script: <a class="github-link
 It uses the same command-line options as <code class="highlighter-rouge">marian-decoder</code>.
 The only addition is <code class="highlighter-rouge">--port</code> option, which specifies the port number:</p>
 
-<div class="highlighter-rouge"><pre class="highlight"><code>./build/marian-server --port 8080 -m model.npz -v vocab.en vocab.ro
-</code></pre>
-</div>
+<div class="highlighter-rouge"><div class="highlight"><pre class="highlight"><code>./build/marian-server --port 8080 -m model.npz -v vocab.en vocab.ro
+</code></pre></div></div>
 
 <p>An example client written in Python is <a class="github-link" href="https://github.com/marian-nmt/marian-dev/tree/master/scripts/server/client_example.py" target="_blank"><code class="highlighter-rogue">marian-dev/scripts/server/client_example.py</code></a>:</p>
 
-<div class="highlighter-rouge"><pre class="highlight"><code>./scripts/server/client_example.py -p 8080 &lt; input.txt
-</code></pre>
-</div>
+<div class="highlighter-rouge"><div class="highlight"><pre class="highlight"><code>./scripts/server/client_example.py -p 8080 &lt; input.txt
+</code></pre></div></div>
 
 <h3 id="amun">Amun</h3>
 
@@ -646,18 +628,16 @@ types. Translation can be performed on GPU or CPU or both.</p>
 
 <p>Basic usage:</p>
 
-<div class="highlighter-rouge"><pre class="highlight"><code>./marian/build/amun -m model.npz -s vocab.en -t vocab.ro &lt;&lt;&lt; "This is a test ."
-</code></pre>
-</div>
+<div class="highlighter-rouge"><div class="highlight"><pre class="highlight"><code>./marian/build/amun -m model.npz -s vocab.en -t vocab.ro &lt;&lt;&lt; "This is a test ."
+</code></pre></div></div>
 
 <h2 id="scorer">Scorer</h2>
 
 <p>The <code class="highlighter-rouge">marian-scorer</code> tool is used for scoring (or re-scoring) parallel sentences
 provided as plain texts in two corresponding files:</p>
 
-<div class="highlighter-rouge"><pre class="highlight"><code>./build/marian-scorer -m model.npz -v vocab.ro vocab.en -t file.ro file.en
-</code></pre>
-</div>
+<div class="highlighter-rouge"><div class="highlight"><pre class="highlight"><code>./build/marian-scorer -m model.npz -v vocab.ro vocab.en -t file.ro file.en
+</code></pre></div></div>
 
 <p>A cross-entropy score for each sentence pair is returned by default.</p>
 
@@ -682,9 +662,8 @@ the end.</p>
 <p><a href="/docs/marian/classes.html">The code documentation for Marian toolkit</a> is
 generated using Doxygen. The newest version can be generated locally with CMake:</p>
 
-<div class="highlighter-rouge"><pre class="highlight"><code>mkdir -p build &amp;&amp; cd build &amp;&amp; cmake .. &amp;&amp; make doc
-</code></pre>
-</div>
+<div class="highlighter-rouge"><div class="highlight"><pre class="highlight"><code>mkdir -p build &amp;&amp; cd build &amp;&amp; cmake .. &amp;&amp; make doc
+</code></pre></div></div>
 
 
             </div><!--//content-inner-->

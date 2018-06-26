@@ -104,6 +104,8 @@
  
 
  
+
+ 
  <li>
    <a class="page-link" href="/quickstart/">Quick start</a>
  </li>
@@ -201,7 +203,7 @@ You can send questions to the group by e-mail: <code class="highlighter-rouge">m
 <h4 class="question" id="how-should-i-cite-marian">How should I cite Marian?</h4>
 <p>Please cite the following <a href="https://arxiv.org/abs/1804.00344">Marian Demo paper</a>
 if you use Marian (formerly AmuNMT) in your research:</p>
-<div class="language-tex highlighter-rouge"><pre class="highlight"><code>@InProceedings<span class="p">{</span>mariannmt,
+<div class="language-tex highlighter-rouge"><div class="highlight"><pre class="highlight"><code>@InProceedings<span class="p">{</span>mariannmt,
   title     = <span class="p">{</span>Marian: Fast Neural Machine Translation in <span class="p">{</span>C++<span class="p">}}</span>,
   author    = <span class="p">{</span>Junczys-Dowmunt, Marcin and Grundkiewicz, Roman and
                Dwojak, Tomasz and Hoang, Hieu and Heafield, Kenneth and
@@ -213,8 +215,7 @@ if you use Marian (formerly AmuNMT) in your research:</p>
   address   = <span class="p">{</span>Melbourne, Australia<span class="p">}</span>,
   url       = <span class="p">{</span>https://arxiv.org/abs/1804.00344<span class="p">}</span>
 <span class="p">}</span>
-</code></pre>
-</div>
+</code></pre></div></div>
 <p>There’s also a bunch of publications that use Marian on our
 <a href="/publications">publications</a> page (let us know if you want us to add yours).</p>
 
@@ -348,11 +349,10 @@ English-German data.</p>
 <h4 class="question" id="what-the-option---best-deep-means">What the option <code class="highlighter-rouge">--best-deep</code> means?</h4>
 <p>It is a shortcut for using <a href="https://arxiv.org/abs/1707.07631">the Edinburgh deep RNN
 configuration</a> being equivalent to:</p>
-<div class="highlighter-rouge"><pre class="highlight"><code>--enc-type alternating --enc-cell-depth 2 --enc-depth 4 \
+<div class="highlighter-rouge"><div class="highlight"><pre class="highlight"><code>--enc-type alternating --enc-cell-depth 2 --enc-depth 4 \
 --dec-cell-base-depth 4 --dec-cell-high-depth 2 --dec-depth 4 \
 --layer-normalization --tied-embeddings --skip
-</code></pre>
-</div>
+</code></pre></div></div>
 
 <p><br />
 <!-- ///////////////////////////////////////////////////// --></p>
@@ -362,9 +362,8 @@ configuration</a> being equivalent to:</p>
 <p>We found that using length normalization with a penalty term of 0.6 and a beam
 size of 6 is usually best:</p>
 
-<div class="highlighter-rouge"><pre class="highlight"><code>./marian-decoder -m model.npz -v vocab.src.yml vocab.trg.yml -b 6 --normalize=0.6
-</code></pre>
-</div>
+<div class="highlighter-rouge"><div class="highlight"><pre class="highlight"><code>./marian-decoder -m model.npz -v vocab.src.yml vocab.trg.yml -b 6 --normalize=0.6
+</code></pre></div></div>
 
 <p>Look at <a href="/docs/#translation">the translation documenation</a> for more advices.</p>
 
@@ -400,9 +399,8 @@ adding it if there is demand.</p>
 <p>You may adapt the following command for your model file, vocabularies and a
 test set:</p>
 
-<div class="highlighter-rouge"><pre class="highlight"><code>./marian-scorer -m model.npz -v vocab.src.yml vocab.trg.yml -t test.src test.trg --summary=perplexity
-</code></pre>
-</div>
+<div class="highlighter-rouge"><div class="highlight"><pre class="highlight"><code>./marian-scorer -m model.npz -v vocab.src.yml vocab.trg.yml -t test.src test.trg --summary=perplexity
+</code></pre></div></div>
 
 <p>If your model had a different number of inputs (only one for a language model
 or three for a dual-source model) you need to provide all the correct number of

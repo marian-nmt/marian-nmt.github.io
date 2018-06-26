@@ -45,19 +45,20 @@ I you believe you have encoutered a bug, please file an issue at
 
 {:.question}
 #### How should I cite Marian?
-Currently there is no proper publication for Marian yet (we are working on
-it!). For the moment please cite the following publication which introduces
-Marian's predecessor AmuNMT:
-```
-@InProceedings{junczys2016neural,
-  title     = {Is Neural Machine Translation Ready for Deployment? A Case Study
-               on 30 Translation Directions},
-  author    = {Junczys-Dowmunt, Marcin and Dwojak, Tomasz and Hoang, Hieu},
-  booktitle = {Proceedings of the 9th International Workshop on Spoken Language
-               Translation (IWSLT)},
-  year      = {2016},
-  address   = {Seattle, WA},
-  url       = {http://workshop2016.iwslt.org/downloads/IWSLT_2016_paper_4.pdf}
+Please cite the following [Marian Demo paper](https://arxiv.org/abs/1804.00344)
+if you use Marian (formerly AmuNMT) in your research:
+```tex
+@InProceedings{mariannmt,
+  title     = {Marian: Fast Neural Machine Translation in {C++}},
+  author    = {Junczys-Dowmunt, Marcin and Grundkiewicz, Roman and
+               Dwojak, Tomasz and Hoang, Hieu and Heafield, Kenneth and
+               Neckermann, Tom and Seide, Frank and Germann, Ulrich and
+               Fikri Aji, Alham and Bogoychev, Nikolay and
+               Martins, Andr\'{e} F. T. and Birch, Alexandra},
+  booktitle = {Proceedings of ACL 2018, System Demonstrations},
+  year      = {2018},
+  address   = {Melbourne, Australia},
+  url       = {https://arxiv.org/abs/1804.00344}
 }
 ```
 There's also a bunch of publications that use Marian on our

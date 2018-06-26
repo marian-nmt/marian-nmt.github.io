@@ -12,19 +12,21 @@ Please cite the following [Marian Demo paper](https://arxiv.org/abs/1804.00344)
 if you use Marian (formerly AmuNMT) in your research:
 
 ```tex
-@article{mariannmt,
-  title   = {Marian: Fast Neural Machine Translation in {C++}},
-  author  = {Junczys-Dowmunt, Marcin and Grundkiewicz, Roman and Dwojak, Tomasz
-             and Hoang, Hieu and Heafield, Kenneth and Neckermann, Tom
-             and Seide, Frank and Germann, Ulrich and Fikri Aji, Alham
-             and Bogoychev, Nikolay and Martins, Andr\'{e} F. T. and Birch, Alexandra},
-  journal = {arXiv preprint arXiv:1804.00344},
-  year    = {2018},
-  url     = {https://arxiv.org/abs/1804.00344}
+@InProceedings{mariannmt,
+  title     = {Marian: Fast Neural Machine Translation in {C++}},
+  author    = {Junczys-Dowmunt, Marcin and Grundkiewicz, Roman and
+               Dwojak, Tomasz and Hoang, Hieu and Heafield, Kenneth and
+               Neckermann, Tom and Seide, Frank and Germann, Ulrich and
+               Fikri Aji, Alham and Bogoychev, Nikolay and
+               Martins, Andr\'{e} F. T. and Birch, Alexandra},
+  booktitle = {Proceedings of ACL 2018, System Demonstrations},
+  year      = {2018},
+  address   = {Melbourne, Australia},
+  url       = {https://arxiv.org/abs/1804.00344}
 }
 ```
 
-## Work using Marian/AmuNMT
+## Selected work using Marian/AmuNMT
 
 {% bibliography %}
 

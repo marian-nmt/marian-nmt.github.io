@@ -241,6 +241,27 @@ Marian supports various strategies for decaying learning rate
 Decay factor for learning rate can be specified with `--lr-decay`.
 
 
+
+### Data weighting
+
+Data weighting is commonly used as a domain adaptation technique, which weights
+each data item according to its proximity to the in-domain data.  Marian
+supports sentence and word-level data weighting strategies.
+
+Data weighting requires providing a file with weights.  In sentence weighting
+strategy, each line of that file contains a real-value weight:
+
+```
+./build/marian \
+    -t corpus.{en,de} -v vocab.{en,de} -m model.npz \
+    --data-weighting-type sentence --data-weighting weights.txt
+```
+
+To use word weighting you should choose `--data-weighting-type word`, and each
+line of the weight file should contain as many real-value weights as there are
+words in the corresponding target training sentence.
+
+
 ### Workspace memory
 
 The choice of workspace memory, mini-batch size and max-length is quite

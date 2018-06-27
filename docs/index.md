@@ -8,14 +8,20 @@ latex: true
 ---
 
 ## Overview and command-line options
-Marian toolkit provides the following tools (click on the name for a list of
-command line options):
+Marian toolkit provides the following tools:
 
-* [marian](/docs/cmd/marian): for training models of all types
-* [marian-decoder](/docs/cmd/marian-decoder): for GPU translation with models of all types
-* [marian-server](/docs/cmd/marian-server): a web-socket server providing GPU translation
-* [marian-scorer](/docs/cmd/marian-scorer): a tool for rescoring
-* [amun](/docs/cmd/amun): for CPU and GPU translation with Amun and certain Nematus models
+- [marian](/docs/cmd/marian): for training NMT models and language models
+- [marian-decoder](/docs/cmd/marian-decoder): for CPU and GPU translation using
+  NMT models trained with Marian, and specific models trained with Nematus
+- [marian-server](/docs/cmd/marian-server): a web-socket server providing
+  translation service
+- [marian-scorer](/docs/cmd/marian-scorer): a tool for rescoring parallel text
+  files and n-best lists
+- [amun](/docs/cmd/amun): for CPU and GPU translation using specific models
+  trained with Marian or Nematus
+
+Click on the tool name for a list of command line options.
+
 
 
 ### Model types
@@ -24,18 +30,16 @@ command line options):
   architecture is equivalent to the
   [DL4MT](https://github.com/nyu-dl/dl4mt-tutorial) or
   [Nematus](https://github.com/EdinburghNLP/nematus) models ([Senrich et al.,
-  2017](https://arxiv.org/abs/1703.04357)), but not compatible with them as we
-  use custom names for matrices and our layer normalization is implemented
-  differently. Specific models of this type can be converted to Amun models.
-- `transformer`: A new model originally proposed by Google [(Vaswani et al.,
+  2017](https://arxiv.org/abs/1703.04357)).
+- `transformer`: A model originally proposed by Google [(Vaswani et al.,
   2017)](https://arxiv.org/abs/1706.03762) based solely on attention
   mechanisms.
 - `multi-s2s`: As `s2s`, but uses two or more encoders allowing multi-source
   neural machine translation.
 - `multi-transformer`: As `transformer`, but uses multiple encoders.
-- `amun`: Equivalent to Nematus models unles layer normalization is used. Can
+- `amun`: A model equivalent to Nematus models unless layer normalization is used. Can
   be decoded with Amun as _nematus_ model type.
-- `nematus`: Equivalent to deep RNN-based  encoder-decoder models developed by
+- `nematus`: A model equivalent to deep RNN-based encoder-decoder models developed by
   the Edinburgh MT group for WMT 2017 using Nematus toolkit. The only model
   type that supports models trained with the Nematus-style layer normalization.
   Can be decoded with Amun as _nematus2_ model type.
@@ -128,9 +132,11 @@ which simplifies the command to:
 
 Command-line options overwrite options stored in the configuration file.
 
+
+
 ### Multi-GPU training
 
-For multi-GPU training You only need to specify the device ids of the GPUs you
+For multi-GPU training you only need to specify the device ids of the GPUs you
 want to use for training (this also works with most other binaries) as
 `--devices 0 1 2 3` for training on four GPUs. There is no automatic detection
 of GPUs for now.
@@ -150,6 +156,7 @@ used. This choice makes sense when you realize that synchronous SGD is
 essentially working like a single GPU training process with N times more
 memory. Larger mini-batches in a synchronous setting result in quite stable
 training.
+
 
 
 ### Validation
@@ -201,21 +208,18 @@ later validation steps --- potential overfitting.
 
 ### Dropouts
 
-The numeric values are only provided as examples.
-
 Depending on the model type, Marian support multiple types of dropout.  For
-RNN-based models it supports the `--dropout-rnn 0.2` option which uses
-variational dropout on all RNN inputs and recursive states.
+RNN-based models it supports the `--dropout-rnn 0.2` (the numeric value of 0.2
+is only provided as an example) option which uses variational dropout on all
+RNN inputs and recursive states.
 
-There is also `--dropout-src 0.1` and `--dropout-trg 0.1` which drops out
-entire source and target word positions, respectively. This is an options we
-found to be useful for monolingual settings.
+There is also `--dropout-src` and `--dropout-trg` which drops out entire source
+and target word positions, respectively. This is an options we found to be
+useful for monolingual settings.
 
 For the transformer model the equivalent of `--dropout-rnn 0.2` is
 `--transformer-dropout 0.2`.
 
-Apart from dropout, we also provide `--label-smoothing 0.1` as suggested by
-[Vaswani et al., 2017](https://arxiv.org/abs/1706.03762).
 
 
 ### Decaying learning rate
@@ -224,7 +228,9 @@ Manipulation of learning rate during the training may result in better
 convergence and higher-quality translations.
 
 Marian supports various strategies for decaying learning rate
-(`--lr-decay-strategy` option):
+(`--lr-decay-strategy` option).  Decay factor can be specified with
+`--lr-decay`.
+
 - `epoch`: learning rate will be decayed after each epoch starting from epoch
   specified with `--lr-decay-start`
 - `batches`: learning rate will be decayed every `--lr-decay-freq` batches
@@ -238,7 +244,13 @@ Marian supports various strategies for decaying learning rate
 - `batches+stalled`: as `epoch+stalled`, but the total number of batches is
   taken into account instead of epochs
 
-Decay factor for learning rate can be specified with `--lr-decay`.
+Other learning rate schedules supported by Marian:
+
+- `--lr-warmup`: learning rate will be increased linearly for the specific
+  number of first updates. The start value for learning rate warmup can be
+  specified with `--lr-warmup-start-rate`.
+- `--lr-decay-inv-sqrt`: learning rate will be decreased at `n / sqrt(no.
+  updates)` starting at `n`-th update
 
 
 
@@ -260,6 +272,7 @@ strategy, each line of that file contains a real-value weight:
 To use word weighting you should choose `--data-weighting-type word`, and each
 line of the weight file should contain as many real-value weights as there are
 words in the corresponding target training sentence.
+
 
 
 ### Workspace memory
@@ -303,6 +316,7 @@ guarantees that memory will not grow during training due to batch-size this
 should result in a stable training run and maximal batch size.
 
 
+
 ### Multi-node training
 
 Multi-node training requires an MPI installation with `MPI_THREAD_MULTIPLE` set to
@@ -338,11 +352,15 @@ script:
 This is still an experimental feature introduced in version 1.4.0.
 
 
+
+
 ## Translation
 
-All model types can be decoded with `marian-decoder` and `marian-server`
-command.  Only models of type Amun and certain models of type Nematus can be
-used with the `amun` tool.
+All models trained with `marian` can be decoded with `marian-decoder` and
+`marian-server` command.  Only models of type `amun` and specific deep models of type
+`nematus` can be used with the `amun` tool.
+
+
 
 ### Marian decoder
 
@@ -353,9 +371,11 @@ Basic usage:
 
     ./build/marian-decoder -m model.npz -v vocab.en vocab.ro < input.txt
 
+
+
 ### Ensembles
 
-Models of different types and architectures can be ensembled as long as they
+Models of **different** types and architectures can be ensembled as long as they
 use common vocabularies:
 
     ./build/marian-decoder \
@@ -365,6 +385,8 @@ use common vocabularies:
 
 Weights are optional and set to 1.0 by default if ommitted.
 
+
+
 ### Length normalization
 
 We found that using length normalization with a penalty term of 0.6 and a beam
@@ -372,17 +394,18 @@ size of 6 is usually best:
 
     ./marian-decoder -m model.npz -v vocab.src.yml vocab.trg.yml -b 6 --normalize=0.6
 
-This rougly follows the settings by Google from their [transformer
-paper](https://arxiv.org/abs/1706.03762).
+Different values of length normalization and beam size may work best for
+different language pairs.
+
+
 
 ### Batched translation
 
-This is a feature introduced in Marian v1.1.0. Batched translation generates
-translation for whole mini-batches and significantly increases translation
-speed (roughly by a factor of 10 or more). We recommend to use the following
-options to enable batched translation:
+Batched translation generates translation for whole mini-batches and
+significantly increases translation speed (roughly by a factor of 10 or more).
+We recommend to use the following options to enable batched translation:
 
-    ./marian-decoder -m model.npz -v vocab.src.yml vocab.trg.yml -b 6 --normalize=0.6 \
+    ./marian-decoder -m model.npz -v vocab.src.yml vocab.trg.yml -b 6 --normalize 0.6 \
         --mini-batch 64 --maxi-batch-sort src --maxi-batch 100 -w 2500
 
 This does a number of things:
@@ -409,9 +432,11 @@ Nematus-style Deep RNN | 148.5s | 5.9s |
 Google Transformer | 201.9s | 19.2s |
 {: .table .table-bordered .table-striped }
 
+
+
 ### Nematus models
 
-Certain types of models trained with Nematus, for example the [Edinburgh WMT17
+Only specific types of models trained with Nematus, for example the [Edinburgh WMT17
 deep models](http://data.statmt.org/wmt17_systems/) can be decoded with
 `marian-decoder`.  As such models do not include model parameters specifying
 the model architecture, all parameters have to be set through command-line
@@ -442,11 +467,19 @@ marian-dev/scripts/contrib/inject_model_params.py %}, e.g.:
 
     python inject_model_params.py -m model.npz -j model.npz.json
 
+We do not recommend training models of type `nematus` with Marian. It is much
+more effective to train models of type `s2s`, which provide the same model
+architecture except layer normalization, more features, and faster training.
+
+
+
 ### Marian web server
 
-The `marian-server` command starts a web-socket server for translation.
-It uses the same command-line options as `marian-decoder`.
-The only addition is `--port` option, which specifies the port number:
+The `marian-server` command starts a web-socket server providing CPU and GPU
+translation service that can be requested by a client program written in Python
+or any other programming language.  The server uses the same command-line
+options as `marian-decoder`.  The only addition is `--port` option, which
+specifies the port number:
 
     ./build/marian-server --port 8080 -m model.npz -v vocab.en vocab.ro
 
@@ -455,9 +488,11 @@ marian-dev/scripts/server/client_example.py %}:
 
     ./scripts/server/client_example.py -p 8080 < input.txt
 
+
+
 ### Amun
 
-Amun is a translation tool for certain models of `amun` and `nematus` model
+Amun is a translation tool for specific models of `amun` and `nematus` model
 types. Translation can be performed on GPU or CPU or both.
 
 Basic usage:
@@ -466,24 +501,28 @@ Basic usage:
 
 
 
+
 ## Scorer
 
 The `marian-scorer` tool is used for scoring (or re-scoring) parallel sentences
 provided as plain texts in two corresponding files:
 
-    ./build/marian-scorer -m model.npz -v vocab.ro vocab.en -t file.ro file.en
+    ./build/marian-scorer -m model.npz -v vocab.{en,de} -t file.en file.de
 
 A cross-entropy score for each sentence pair is returned by default.
 
+
+
 ### N-best lists
 
-The scorer does not support n-best lists as an input yet.
+N-best lists can be scored using the following command:
 
-If you want to use the rescorer for for n-best list rescoring you need to
-extract the sentences to a plain text file. If the model is a translation model
-you also need to create a source file that has the correct source sentences in
-the right order and number, i.e. you need to repeat the source sentence as many
-times as there are entries in the corresponding n-best list.
+    ./build/marian-scorer -m model.npz -v vocab.{en,de} \
+        -t file.en.txt file.de.nbest --n-best --n-best-features F0
+
+which add a new score into the n-best list under the feature named _F0_.
+
+
 
 ### Summarized scores
 

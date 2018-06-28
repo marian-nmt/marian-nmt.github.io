@@ -99,6 +99,11 @@ make -j16
 
 ```
 
+### CPU version
+
+Marian CPU version requires [Intel MKL](https://software.intel.com/en-us/mkl)
+or [OpenBLAS](https://www.openblas.net/). Both are free, but MKL is not
+open-sourced. Intel MKL is strongly recommended as it is faster.
 
 
 ## Training

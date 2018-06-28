@@ -13,8 +13,12 @@ latex: true
 
 ## Answers
 
+
+
 <!-- ///////////////////////////////////////////////////// -->
 ### General
+
+
 
 {:.question}
 #### What is Marian?
@@ -91,8 +95,8 @@ for that repository are mostly to **amun**.
 The list of contributors so far:
 
 - Marcin Junczys-Dowmunt, formerly Adam Mickiewicz University in Poznań and University of Edinburgh
-- Roman Grundkiewicz, University of Edinburgh and Adam Mickiewicz University in Poznań
-- Hieu Hoang
+- Roman Grundkiewicz, University of Edinburgh, formerly Adam Mickiewicz University in Poznań
+- Hieu Hoang, University of Edinburgh
 - Tomasz Dwojak, Adam Mickiewicz University in Poznań, formerly University of Edinburgh
 - Ulrich German, University of Edinburgh
 - Alham Aji, University of Edinburgh
@@ -114,17 +118,32 @@ Marian Rejewski's old faculty.
 
 The name started out as a joke, but was made official later by public demand.
 
+
+
+<br/>
+<!-- ///////////////////////////////////////////////////// -->
+### Installation
+
+
+
+{:.question}
+#### Can Marian be run on Windows?
+Not yet. We plan to release a version that can be compiled and run on Windows
+soon.
+
+{:.question}
+#### Can I compile Marian without CUDA?
+Yes. The CPU only version can be compiled by disabling the CUDA library with
+the CMake flag `-DCOMPILE_CUDA=off`. This requires Intel MKL, see
+[here](/docs/#cpu-version) for more details.
+
+
+
 <br/>
 <!-- ///////////////////////////////////////////////////// -->
 ### Training
 
-<!--
-{:.question}
-#### What model types are currently available?
 
-{:.question}
-#### What are recommended training settings?
--->
 
 {:.question}
 #### How do I enable multi-GPU training?
@@ -136,12 +155,121 @@ See [the documentation on multi-GPU training](/docs/#multi-gpu-training) for
 details.
 
 {:.question}
+#### Does Marian support training on CPU?
+Yes, but we do not recommend that as it is much slower than training on GPU.
+
+{:.question}
+#### What are recommended training settings?
+There is no simple answer as the choice of training settings and good
+hyperparameters should depend on the model architecture, language pair, and
+even training data.
+
+You may check our Deep-RNN and Transformer examples for English-German
+[here](/examples/#examples).
+
+{:.question}
 #### How do I chose mini-batch size, max-length and workspace memory?
 Unfortunately this is quite involved and depends on the type of model, the available
 GPU memory, the number of GPUs, a number of other parameters like the chosen
 optimization algorithm, and the average or maximum sentence length in your
 training corpus (which you should know!). See [this part of the
 documentation](/docs/#workspace-memory) for deeper discussion.
+
+{:.question}
+#### How long do I need to train my models?
+This is a difficult question. What I usually do as a rule of thumb is to use a
+validation set as described [here](/docs/#validation) and the default settings
+for `--early-stopping 10` as presented [here](/docs/#early-stopping).
+
+{:.question}
+#### What types of regularization are available?
+Depending on the model type, Marian support multiple types of dropout as
+described [here](/docs/#dropout).
+
+Apart from dropout, we also provide `--label-smoothing` as suggested by
+[Vaswani et al., 2017](https://arxiv.org/abs/1706.03762).
+
+{:.question}
+#### Do you have a Google-style transformer model?
+Yes. Please take a look at our [transformer
+example](https://github.com/marian-nmt/marian-examples/blob/master/transformer/README.md).
+Files and scripts in this folder show how to train a Google-style transformer
+model [Vaswani et al, 2017](https://arxiv.org/abs/1706.03762) on WMT-17 (?)
+English-German data.
+
+{:.question}
+#### How do I train a model like in Edinburgh's WMT2017 submission?
+Take a look at the examples we have prepared: {% github_link "Reconstructing
+Edinburgh's WMT17 English-German system" marian-examples/wmt2017-uedin %} and
+{% github_link "Reconstructing top English-German WMT17 system with Marian's
+Transformer model" marian-examples/wmt2017-transformer %}.
+
+{:.question}
+#### How do I train a character-level model?
+Convolutional character-level NMT models are not yet supported. We are working
+on that.
+
+{:.question}
+#### How do I train a language model?
+Set your monolingual training data file to `--train-sets` and use `--type
+lm` for training a RNN language model or `--type lm-transformer` for training a
+Transformer-based language model.
+
+{:.question}
+#### How do I train a multi-source model?
+Provide two files with source sentences followed by the file with target
+sentence to `--train-sets`, for instance `--train-set file.src1 file.src2
+file.trg` and use `--type multi-s2s` or `--type multi-transformer` to train a
+multi-source RNN-based model or multi-source Transformer model respectively.
+
+There are also `shared-multi-s2s` and `shared-multi-transformer` model types,
+which make encoders sharing their parameters.
+
+{:.question}
+#### What are the details of your multi-source model architectures?
+The multi-source model architecture in Marian is described in [this
+paper](https://arxiv.org/abs/1706.04138). In particular, Section 4.3.
+
+{:.question}
+#### Can I train a model with custom pretrained embeddings?
+Yes. Please check the `--embedding-vectors` option.
+
+{:.question}
+#### What does the `--best-deep` option mean?
+It is a shortcut for using [the Edinburgh deep RNN
+configuration](https://arxiv.org/abs/1707.07631) being equivalent to:
+```
+--enc-type alternating --enc-cell-depth 2 --enc-depth 4 \
+--dec-cell-base-depth 4 --dec-cell-high-depth 2 --dec-depth 4 \
+--layer-normalization --tied-embeddings --skip
+```
+
+{:.question}
+#### Does Marian support multi-node training?
+Yes, but this is still an experimental feature. For details, see the documentation
+[here](/docs/#multi-node-training).
+
+{:.question}
+#### Why there are so many files created while training?
+Marian by default keeps the iteration files that may take up quite a bit of space.
+
+When validation is enabled with any metric, you can use the following settings
+to keep only one model per validation metric that is updated whenever the metric improves:
+
+```
+--valid-metrics perplexity translation
+--valid-set data/valid.src data/valid.trg
+--overwrite --keep-best
+```
+
+
+
+<br/>
+<!-- ///////////////////////////////////////////////////// -->
+### Validation
+
+
+
 
 {:.question}
 #### How do I use a validation set?
@@ -171,54 +299,13 @@ Such a script takes a file with the translation of the valiadion set as an
 intput and should run an external tool and return the score.
 See [here](/docs/#validation) for more information.
 
-{:.question}
-#### How long do I need to train my models?
-This is a difficult question. What I usually do as a rule of thumb is to use a
-validation set as described [here](/docs/#validation) and the default settings
-for `--early-stopping 10` as presented [here](/docs/#early-stopping).
 
-{:.question}
-#### What types of regularization are available?
-Depending on the model type, Marian support multiple types of dropout as
-described [here in the documentation](/docs/#dropout).
-
-Apart from dropout, we also provide `--label-smoothing` as suggested by
-[Vaswani et al., 2017](https://arxiv.org/abs/1706.03762).
-
-{:.question}
-#### Do you have a Google-style transformer model?
-Yes. Please take a look at our [transformer
-example](https://github.com/marian-nmt/marian-examples/blob/master/transformer/README.md).
-Files and scripts in this folder show how to train a Google-style transformer
-model [Vaswani et al, 2017](https://arxiv.org/abs/1706.03762) on WMT-17 (?)
-English-German data.
-
-{:.question}
-#### How do I train a model like in Edinburgh's WMT2017 submission?
-Take a look at the examples we have prepared: {% github_link "Reconstructing
-Edinburgh's WMT17 English-German system" marian-examples/wmt2017-uedin %} and
-{% github_link "Reconstructing top English-German WMT17 system with Marian's
-Transformer model" marian-examples/wmt2017-transformer %}.
-
-{:.question}
-#### How do I train a language model?
-
-{:.question}
-#### How do I train a multi-source model?
-
-{:.question}
-#### What the option `--best-deep` means?
-It is a shortcut for using [the Edinburgh deep RNN
-configuration](https://arxiv.org/abs/1707.07631) being equivalent to:
-```
---enc-type alternating --enc-cell-depth 2 --enc-depth 4 \
---dec-cell-base-depth 4 --dec-cell-high-depth 2 --dec-depth 4 \
---layer-normalization --tied-embeddings --skip
-```
 
 <br/>
 <!-- ///////////////////////////////////////////////////// -->
 ### Translation
+
+
 
 {:.question}
 #### Are there recommended settings for translation?
@@ -230,6 +317,11 @@ size of 6 is usually best:
 ```
 
 Look at [the translation documenation](/docs/#translation) for more advices.
+
+{:.question}
+#### Does Marian support CPU translation?
+Yes, both `marian-decoder` and `amun` allows for decoding on CPU. Marian uses
+Intel MKL for that, see more details [here](/docs/#cpu-version).
 
 {:.question}
 #### Does Marian support batched translation?
@@ -246,24 +338,36 @@ language model to the mix. See [here](/docs/#model-ensembling) for details.
 
 {:.question}
 #### Are there options to deal with placeholders or XML-tags?
-No. This is a difficult issue for neural machine translation and we did not
-have the man power or motivation yet to deal with this.
+Not yet. This is a difficult issue for neural machine translation.
 
 {:.question}
 #### Can I access the attention weights?
-Yes and no. `amun` has options for this, but is restricted to a specific model
-type. `marian-decoder` does not provide this options yet, but we are open to
-adding it if there is demand.
+Yes and no. `marian-decoder` can produce hard alignments from RNN-based NMT
+models using `--alignment`.  `amun` has even more options for this, but is
+restricted to a specific model type.
+
+It is in principle not clear how to actually implement that for the transformer
+as it has a lot of target-to-source attention matrices.
 
 {:.question}
 #### Can I generate n-best lists?
 Yes. Just use `--n-best` and the set `--beam-size 6` for an n-best list size of
 6.
 
+{:.question}
+#### How can I make the decoding faster?
+Marian is already one of the fastest NMT toolkits available. You may further
+speed up the decoding using different model optimization techniques taking an
+inspiration from [our submission](https://arxiv.org/abs/1805.12096) to [the
+WNMT17 shared task](https://sites.google.com/site/wnmt18/shared-task).
+
+
 
 <br/>
 <!-- ///////////////////////////////////////////////////// -->
 ### Scoring
+
+
 
 {:.question}
 #### How can I calculate the perplexity of a test set?
@@ -282,23 +386,33 @@ Omitting the `--summary` option will print sentence-wise log probabilities.
 
 {:.question}
 #### Are Moses-style n-best lists supported?
-Not yet. If you want to use the rescorer for for n-best list rescoring you need
-to extract the sentences to a plain text file. If the model is a translation
-model you also need to create a source file that has the correct source
-sentences in the right order and number, i.e. you need to repeat the source
-sentence as many times as there are entries in the corresponding n-best list.
+Yes. Please use `--n-best` and set your n-best list file as a second argument
+to the `--train-sets` option, the first argument should be a file with source
+sentences.
 
 
-<!--
-### Training
 
-System | 2013 | 2014 | 2015 | 2016
------------|--------|---------|--------|-------
-Edinburgh Deep RNN ([Micelli Barone et al 2017](https://arxiv.org/pdf/1707.07631.pdf)) | - | 23.4 | 26.0 | 31.0
-Transformer 12-layers ([Ramachandran et al. 2017](https://arxiv.org/pdf/1710.05941.pdf)) | 26.1* | 27.8* | 29.8* | 33.3*
-**Marian Transformer 6-layers** (epoch 27!) | 25.5* | 26.7 | 29.5 | 33.2
-**Marian Transformer 6-layers** (epoch 43!) | 25.5* | 26.9 | 29.2 | 33.4
-**Marian Edinburgh Deep RNN** (epoch 9) | 24.8* | 24.9 | 28.4 | 32.7
-**Marian Edinburgh Deep RNN** (epoch 16) | 25.0* | 25.2 | 28.4 | 32.6
+<br/>
+<!-- ///////////////////////////////////////////////////// -->
+### Code
 
--->
+
+
+{:.question}
+#### I would like to contribute to Marian. Where I should start?
+Please take a look into
+[CONTRIBUTING](https://github.com/marian-nmt/marian-dev/blob/master/CONTRIBUTING.md).
+
+I usually recommend looking at the Iris and MNIST examples first and
+familiarise yourself with the computational framework in Marian, and then
+playing with more advanced models.
+
+Any questions related to the code can be asked on [our discussion
+group](https://groups.google.com/forum/#!forum/marian-nmt) or using [Github
+issues](https://github.com/marian-nmt/marian-dev/issues).
+
+{:.question}
+#### Where can I find a documentation for developers?
+We do not have a good code documentation yet. Many classes are documented using
+Doxygen and the generated documentation is available
+([here](/docs/marian/classes.html)).

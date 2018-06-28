@@ -156,7 +156,7 @@
           </h1>
           <div class="meta">
             <i class="fa fa-clock-o"></i>
-            Last updated: 08 November 2017
+            Last updated: 28 June 2018
           </div>
         </div><!--//doc-header-->
 
@@ -172,15 +172,11 @@
   <li>Up to 2x faster training than toolkits based on Theano, Tensorflow, Torch on
 a single GPU</li>
   <li>Multi-GPU training and translation</li>
+  <li>Batched translation on GPU and CPU</li>
+  <li>Different types of models, including deep RNNs and transformers</li>
   <li>Pure C++ implementation with minimal depedencies on external packages (CUDA,
 Boost)</li>
   <li>Optionally static compilation of binaries</li>
-  <li>Different types of models, including deep RNNs, transformer and language model</li>
-  <li>Binary/model-compatible with <a href="https://github.com/EdinburghNLP/nematus">Nematus</a>
-models for certain model types</li>
-  <li>C++ web-socket service for translation</li>
-  <li>CPU translation with Amun for certain model types</li>
-  <li>Batched translation on single and multiple GPU/CPUs with Amun</li>
   <li>Permissive open source license (MIT)</li>
 </ul>
 
@@ -188,8 +184,7 @@ models for certain model types</li>
 <ul>
   <li>Deep RNNs with Deep Transition Cells (<a href="http://aclweb.org/anthology/W17-4710">Miceli Barone et al.
 2017</a>)</li>
-  <li>Transformer models (<a href="https://arxiv.org/abs/1706.03762">Vaswani et al.
-2017</a>)</li>
+  <li>Transformer models (<a href="https://arxiv.org/abs/1706.03762">Vaswani et al.  2017</a>)</li>
   <li>Encoder types: bidirectional, uni-bidirectional, alternating</li>
   <li>LSTM cell instead of GRU</li>
   <li>Layer normalization (<a href="https://arxiv.org/abs/1607.06450">Ba et al. 2016</a>)</li>
@@ -197,7 +192,9 @@ models for certain model types</li>
   <li>Scaling dropout for RNN inputs and states, input and output embeddings (<a href="https://arxiv.org/abs/1512.05287">Gal
 and Ghahramani, 2016</a>)</li>
   <li>Tied embeddings (<a href="https://arxiv.org/abs/1608.05859">Press and Wolf, 2017</a>)</li>
-  <li>Deep RNN language models</li>
+  <li>Dual-source models (<a href="https://arxiv.org/abs/1706.04138">Junczys-Dowmunt and
+Grundkiewicz, 2017</a>)</li>
+  <li>Deep RNN and transformer language models</li>
 </ul>
 
 <h3 id="training-features">Training features</h3>
@@ -206,23 +203,33 @@ and Ghahramani, 2016</a>)</li>
 bounded memory</li>
   <li>Asynchronous/synchronous parallel SGD (data parallelism) with vanilla SGD,
 Adagrad, or Adam</li>
+  <li>Different regularization techniques, such as dropout, exponential smoothing,
+and label smoothing</li>
   <li>Multi-GPU validation and in-training translation</li>
   <li>Exposed optimizer parameters</li>
-  <li>Moving average of parameters</li>
   <li>Decaying and warmup strategies for learning rate</li>
   <li>Custom word embeddings from <a href="https://github.com/dav/word2vec">word2vec</a></li>
   <li>Guided alignment to guide attention</li>
-  <li>Rescoring outputs</li>
+  <li>Language model pretraining</li>
+</ul>
+
+<h3 id="translation-features">Translation features</h3>
+<ul>
+  <li>Batched translation on single and multiple GPU/CPUs</li>
+  <li>Ensembling models of different types</li>
+  <li>C++ web-socket service for translation</li>
+  <li>Length normalization</li>
+  <li>Generating hard alignments from deep RNN models</li>
+  <li>Rescoring n-best lists and parallel files</li>
 </ul>
 
 <h3 id="experimental-features">Experimental features</h3>
 <p>Experimental features are available only in the Marian decoder.</p>
 
 <ul>
-  <li>Dual-source models for Automatic Post Editing (<a href="https://arxiv.org/abs/1706.04138">Junczys-Dowmunt and
-Grundkiewicz, 2017</a>)</li>
   <li>Character-level convolutional models (<a href="https://arxiv.org/abs/1610.03017">Lee et al.
 2017</a>)</li>
+  <li>Multi-node GPU training</li>
 </ul>
 
 <h2 id="benchmarks">Benchmarks</h2>
@@ -289,7 +296,7 @@ architecture.</p>
 
 <p>Marian’s training framework provides multi-GPU training via
 synchronous/asynchronous SGD and data parallelism (copies of the full model on
-each GPU). 
+each GPU).
 We benchmarked the <a href="/examples/training/">Romanian-English example</a> on a machine
 with 8 NVIDIA P100 GPUs. Training speed increases with each GPU instance.
 The increase for synchronous SGD is sub-linear, but it may allow to achieve

@@ -160,7 +160,7 @@
           </h1>
           <div class="meta">
             <i class="fa fa-clock-o"></i>
-            Last updated: 14 March 2018
+            Last updated: 28 June 2018
           </div>
         </div><!--//doc-header-->
 
@@ -169,16 +169,21 @@
             <div class="content-inner">
 
               <h2 id="overview-and-command-line-options">Overview and command-line options</h2>
-<p>Marian toolkit provides the following tools (click on the name for a list of
-command line options):</p>
+<p>Marian toolkit provides the following tools:</p>
 
 <ul>
-  <li><a href="/docs/cmd/marian">marian</a>: for training models of all types</li>
-  <li><a href="/docs/cmd/marian-decoder">marian-decoder</a>: for GPU translation with models of all types</li>
-  <li><a href="/docs/cmd/marian-server">marian-server</a>: a web-socket server providing GPU translation</li>
-  <li><a href="/docs/cmd/marian-scorer">marian-scorer</a>: a tool for rescoring</li>
-  <li><a href="/docs/cmd/amun">amun</a>: for CPU and GPU translation with Amun and certain Nematus models</li>
+  <li><a href="/docs/cmd/marian">marian</a>: for training NMT models and language models</li>
+  <li><a href="/docs/cmd/marian-decoder">marian-decoder</a>: for CPU and GPU translation using
+NMT models trained with Marian, and specific models trained with Nematus</li>
+  <li><a href="/docs/cmd/marian-server">marian-server</a>: a web-socket server providing
+translation service</li>
+  <li><a href="/docs/cmd/marian-scorer">marian-scorer</a>: a tool for rescoring parallel text
+files and n-best lists</li>
+  <li><a href="/docs/cmd/amun">amun</a>: for CPU and GPU translation using specific models
+trained with Marian or Nematus</li>
 </ul>
+
+<p>Click on the tool name for a list of command line options.</p>
 
 <h3 id="model-types">Model types</h3>
 
@@ -187,18 +192,16 @@ command line options):</p>
 architecture is equivalent to the
 <a href="https://github.com/nyu-dl/dl4mt-tutorial">DL4MT</a> or
 <a href="https://github.com/EdinburghNLP/nematus">Nematus</a> models (<a href="https://arxiv.org/abs/1703.04357">Senrich et al.,
-2017</a>), but not compatible with them as we
-use custom names for matrices and our layer normalization is implemented
-differently. Specific models of this type can be converted to Amun models.</li>
-  <li><code class="highlighter-rouge">transformer</code>: A new model originally proposed by Google <a href="https://arxiv.org/abs/1706.03762">(Vaswani et al.,
+2017</a>).</li>
+  <li><code class="highlighter-rouge">transformer</code>: A model originally proposed by Google <a href="https://arxiv.org/abs/1706.03762">(Vaswani et al.,
 2017)</a> based solely on attention
 mechanisms.</li>
   <li><code class="highlighter-rouge">multi-s2s</code>: As <code class="highlighter-rouge">s2s</code>, but uses two or more encoders allowing multi-source
 neural machine translation.</li>
   <li><code class="highlighter-rouge">multi-transformer</code>: As <code class="highlighter-rouge">transformer</code>, but uses multiple encoders.</li>
-  <li><code class="highlighter-rouge">amun</code>: Equivalent to Nematus models unles layer normalization is used. Can
+  <li><code class="highlighter-rouge">amun</code>: A model equivalent to Nematus models unless layer normalization is used. Can
 be decoded with Amun as <em>nematus</em> model type.</li>
-  <li><code class="highlighter-rouge">nematus</code>: Equivalent to deep RNN-based  encoder-decoder models developed by
+  <li><code class="highlighter-rouge">nematus</code>: A model equivalent to deep RNN-based encoder-decoder models developed by
 the Edinburgh MT group for WMT 2017 using Nematus toolkit. The only model
 type that supports models trained with the Nematus-style layer normalization.
 Can be decoded with Amun as <em>nematus2</em> model type.</li>
@@ -256,6 +259,12 @@ make -j16
 
 </code></pre></div></div>
 
+<h3 id="cpu-version">CPU version</h3>
+
+<p>Marian CPU version requires <a href="https://software.intel.com/en-us/mkl">Intel MKL</a>
+or <a href="https://www.openblas.net/">OpenBLAS</a>. Both are free, but MKL is not
+open-sourced. Intel MKL is strongly recommended as it is faster.</p>
+
 <h2 id="training">Training</h2>
 
 <p>For training NMT models, you want to use <code class="highlighter-rouge">marian</code> command.
@@ -290,7 +299,7 @@ Nematus-compatible neural machine translation model:</p>
 
 <h3 id="multi-gpu-training">Multi-GPU training</h3>
 
-<p>For multi-GPU training You only need to specify the device ids of the GPUs you
+<p>For multi-GPU training you only need to specify the device ids of the GPUs you
 want to use for training (this also works with most other binaries) as
 <code class="highlighter-rouge">--devices 0 1 2 3</code> for training on four GPUs. There is no automatic detection
 of GPUs for now.</p>
@@ -358,21 +367,17 @@ later validation steps — potential overfitting.</p>
 
 <h3 id="dropouts">Dropouts</h3>
 
-<p>The numeric values are only provided as examples.</p>
-
 <p>Depending on the model type, Marian support multiple types of dropout.  For
-RNN-based models it supports the <code class="highlighter-rouge">--dropout-rnn 0.2</code> option which uses
-variational dropout on all RNN inputs and recursive states.</p>
+RNN-based models it supports the <code class="highlighter-rouge">--dropout-rnn 0.2</code> (the numeric value of 0.2
+is only provided as an example) option which uses variational dropout on all
+RNN inputs and recursive states.</p>
 
-<p>There is also <code class="highlighter-rouge">--dropout-src 0.1</code> and <code class="highlighter-rouge">--dropout-trg 0.1</code> which drops out
-entire source and target word positions, respectively. This is an options we
-found to be useful for monolingual settings.</p>
+<p>There is also <code class="highlighter-rouge">--dropout-src</code> and <code class="highlighter-rouge">--dropout-trg</code> which drops out entire source
+and target word positions, respectively. This is an options we found to be
+useful for monolingual settings.</p>
 
 <p>For the transformer model the equivalent of <code class="highlighter-rouge">--dropout-rnn 0.2</code> is
 <code class="highlighter-rouge">--transformer-dropout 0.2</code>.</p>
-
-<p>Apart from dropout, we also provide <code class="highlighter-rouge">--label-smoothing 0.1</code> as suggested by
-<a href="https://arxiv.org/abs/1706.03762">Vaswani et al., 2017</a>.</p>
 
 <h3 id="decaying-learning-rate">Decaying learning rate</h3>
 
@@ -380,7 +385,9 @@ found to be useful for monolingual settings.</p>
 convergence and higher-quality translations.</p>
 
 <p>Marian supports various strategies for decaying learning rate
-(<code class="highlighter-rouge">--lr-decay-strategy</code> option):</p>
+(<code class="highlighter-rouge">--lr-decay-strategy</code> option).  Decay factor can be specified with
+<code class="highlighter-rouge">--lr-decay</code>.</p>
+
 <ul>
   <li><code class="highlighter-rouge">epoch</code>: learning rate will be decayed after each epoch starting from epoch
 specified with <code class="highlighter-rouge">--lr-decay-start</code></li>
@@ -396,7 +403,33 @@ steps, respectively</li>
 taken into account instead of epochs</li>
 </ul>
 
-<p>Decay factor for learning rate can be specified with <code class="highlighter-rouge">--lr-decay</code>.</p>
+<p>Other learning rate schedules supported by Marian:</p>
+
+<ul>
+  <li><code class="highlighter-rouge">--lr-warmup</code>: learning rate will be increased linearly for the specific
+number of first updates. The start value for learning rate warmup can be
+specified with <code class="highlighter-rouge">--lr-warmup-start-rate</code>.</li>
+  <li><code class="highlighter-rouge">--lr-decay-inv-sqrt</code>: learning rate will be decreased at <code class="highlighter-rouge">n / sqrt(no.
+updates)</code> starting at <code class="highlighter-rouge">n</code>-th update</li>
+</ul>
+
+<h3 id="data-weighting">Data weighting</h3>
+
+<p>Data weighting is commonly used as a domain adaptation technique, which weights
+each data item according to its proximity to the in-domain data.  Marian
+supports sentence and word-level data weighting strategies.</p>
+
+<p>Data weighting requires providing a file with weights.  In sentence weighting
+strategy, each line of that file contains a real-value weight:</p>
+
+<div class="highlighter-rouge"><div class="highlight"><pre class="highlight"><code>./build/marian \
+    -t corpus.{en,de} -v vocab.{en,de} -m model.npz \
+    --data-weighting-type sentence --data-weighting weights.txt
+</code></pre></div></div>
+
+<p>To use word weighting you should choose <code class="highlighter-rouge">--data-weighting-type word</code>, and each
+line of the weight file should contain as many real-value weights as there are
+words in the corresponding target training sentence.</p>
 
 <h3 id="workspace-memory">Workspace memory</h3>
 
@@ -478,9 +511,9 @@ script:</p>
 
 <h2 id="translation">Translation</h2>
 
-<p>All model types can be decoded with <code class="highlighter-rouge">marian-decoder</code> and <code class="highlighter-rouge">marian-server</code>
-command.  Only models of type Amun and certain models of type Nematus can be
-used with the <code class="highlighter-rouge">amun</code> tool.</p>
+<p>All models trained with <code class="highlighter-rouge">marian</code> can be decoded with <code class="highlighter-rouge">marian-decoder</code> and
+<code class="highlighter-rouge">marian-server</code> command.  Only models of type <code class="highlighter-rouge">amun</code> and specific deep models of type
+<code class="highlighter-rouge">nematus</code> can be used with the <code class="highlighter-rouge">amun</code> tool.</p>
 
 <h3 id="marian-decoder">Marian decoder</h3>
 
@@ -494,7 +527,7 @@ of Marian is planned.</p>
 
 <h3 id="ensembles">Ensembles</h3>
 
-<p>Models of different types and architectures can be ensembled as long as they
+<p>Models of <strong>different</strong> types and architectures can be ensembled as long as they
 use common vocabularies:</p>
 
 <div class="highlighter-rouge"><div class="highlight"><pre class="highlight"><code>./build/marian-decoder \
@@ -513,17 +546,16 @@ size of 6 is usually best:</p>
 <div class="highlighter-rouge"><div class="highlight"><pre class="highlight"><code>./marian-decoder -m model.npz -v vocab.src.yml vocab.trg.yml -b 6 --normalize=0.6
 </code></pre></div></div>
 
-<p>This rougly follows the settings by Google from their <a href="https://arxiv.org/abs/1706.03762">transformer
-paper</a>.</p>
+<p>Different values of length normalization and beam size may work best for
+different language pairs.</p>
 
 <h3 id="batched-translation">Batched translation</h3>
 
-<p>This is a feature introduced in Marian v1.1.0. Batched translation generates
-translation for whole mini-batches and significantly increases translation
-speed (roughly by a factor of 10 or more). We recommend to use the following
-options to enable batched translation:</p>
+<p>Batched translation generates translation for whole mini-batches and
+significantly increases translation speed (roughly by a factor of 10 or more).
+We recommend to use the following options to enable batched translation:</p>
 
-<div class="highlighter-rouge"><div class="highlight"><pre class="highlight"><code>./marian-decoder -m model.npz -v vocab.src.yml vocab.trg.yml -b 6 --normalize=0.6 \
+<div class="highlighter-rouge"><div class="highlight"><pre class="highlight"><code>./marian-decoder -m model.npz -v vocab.src.yml vocab.trg.yml -b 6 --normalize 0.6 \
     --mini-batch 64 --maxi-batch-sort src --maxi-batch 100 -w 2500
 </code></pre></div></div>
 
@@ -575,7 +607,7 @@ with 3000 sentences using 4 Volta GPUs on AWS.</p>
 
 <h3 id="nematus-models">Nematus models</h3>
 
-<p>Certain types of models trained with Nematus, for example the <a href="http://data.statmt.org/wmt17_systems/">Edinburgh WMT17
+<p>Only specific types of models trained with Nematus, for example the <a href="http://data.statmt.org/wmt17_systems/">Edinburgh WMT17
 deep models</a> can be decoded with
 <code class="highlighter-rouge">marian-decoder</code>.  As such models do not include model parameters specifying
 the model architecture, all parameters have to be set through command-line
@@ -607,11 +639,17 @@ based on the Nematus <em>.json</em> file using the script: <a class="github-link
 <div class="highlighter-rouge"><div class="highlight"><pre class="highlight"><code>python inject_model_params.py -m model.npz -j model.npz.json
 </code></pre></div></div>
 
+<p>We do not recommend training models of type <code class="highlighter-rouge">nematus</code> with Marian. It is much
+more effective to train models of type <code class="highlighter-rouge">s2s</code>, which provide the same model
+architecture except layer normalization, more features, and faster training.</p>
+
 <h3 id="marian-web-server">Marian web server</h3>
 
-<p>The <code class="highlighter-rouge">marian-server</code> command starts a web-socket server for translation.
-It uses the same command-line options as <code class="highlighter-rouge">marian-decoder</code>.
-The only addition is <code class="highlighter-rouge">--port</code> option, which specifies the port number:</p>
+<p>The <code class="highlighter-rouge">marian-server</code> command starts a web-socket server providing CPU and GPU
+translation service that can be requested by a client program written in Python
+or any other programming language.  The server uses the same command-line
+options as <code class="highlighter-rouge">marian-decoder</code>.  The only addition is <code class="highlighter-rouge">--port</code> option, which
+specifies the port number:</p>
 
 <div class="highlighter-rouge"><div class="highlight"><pre class="highlight"><code>./build/marian-server --port 8080 -m model.npz -v vocab.en vocab.ro
 </code></pre></div></div>
@@ -623,7 +661,7 @@ The only addition is <code class="highlighter-rouge">--port</code> option, which
 
 <h3 id="amun">Amun</h3>
 
-<p>Amun is a translation tool for certain models of <code class="highlighter-rouge">amun</code> and <code class="highlighter-rouge">nematus</code> model
+<p>Amun is a translation tool for specific models of <code class="highlighter-rouge">amun</code> and <code class="highlighter-rouge">nematus</code> model
 types. Translation can be performed on GPU or CPU or both.</p>
 
 <p>Basic usage:</p>
@@ -636,20 +674,20 @@ types. Translation can be performed on GPU or CPU or both.</p>
 <p>The <code class="highlighter-rouge">marian-scorer</code> tool is used for scoring (or re-scoring) parallel sentences
 provided as plain texts in two corresponding files:</p>
 
-<div class="highlighter-rouge"><div class="highlight"><pre class="highlight"><code>./build/marian-scorer -m model.npz -v vocab.ro vocab.en -t file.ro file.en
+<div class="highlighter-rouge"><div class="highlight"><pre class="highlight"><code>./build/marian-scorer -m model.npz -v vocab.{en,de} -t file.en file.de
 </code></pre></div></div>
 
 <p>A cross-entropy score for each sentence pair is returned by default.</p>
 
 <h3 id="n-best-lists">N-best lists</h3>
 
-<p>The scorer does not support n-best lists as an input yet.</p>
+<p>N-best lists can be scored using the following command:</p>
 
-<p>If you want to use the rescorer for for n-best list rescoring you need to
-extract the sentences to a plain text file. If the model is a translation model
-you also need to create a source file that has the correct source sentences in
-the right order and number, i.e. you need to repeat the source sentence as many
-times as there are entries in the corresponding n-best list.</p>
+<div class="highlighter-rouge"><div class="highlight"><pre class="highlight"><code>./build/marian-scorer -m model.npz -v vocab.{en,de} \
+    -t file.en.txt file.de.nbest --n-best --n-best-features F0
+</code></pre></div></div>
+
+<p>which add a new score into the n-best list under the feature named <em>F0</em>.</p>
 
 <h3 id="summarized-scores">Summarized scores</h3>
 
@@ -687,7 +725,7 @@ generated using Doxygen. The newest version can be generated locally with CMake:
       Mainly developed at the Adam Mickiewicz University in Poznań and at the University of Edinburgh.
     </p>
     <p><a href="https://github.com/marian-nmt/marian">Marian</a> is licensed under the <a href="https://github.com/marian-nmt/marian/LICENSE">MIT license</a>.</p>
-    <small class="copyright">Based on the theme PrettyDocs designed by <a href="http://themes.3rdwavemedia.com/" targe="_blank">Xiaoying Riley</a> with modifications.</small>
+    <p><small class="copyright">Based on the theme PrettyDocs designed by <a href="http://themes.3rdwavemedia.com/" targe="_blank">Xiaoying Riley</a> with modifications.</small></p>
   </div><!--//container-->
 </footer><!--//footer-->
 

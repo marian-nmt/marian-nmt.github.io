@@ -9,55 +9,61 @@ menu: 2
 ## Features
 
 ### Overview
-* Up to 15x faster translation than Nematus and similar toolkits on a single GPU
-* Up to 2x faster training than toolkits based on Theano, Tensorflow, Torch on
+- Up to 15x faster translation than Nematus and similar toolkits on a single GPU
+- Up to 2x faster training than toolkits based on Theano, Tensorflow, Torch on
   a single GPU
-* Multi-GPU training and translation
-* Pure C++ implementation with minimal depedencies on external packages (CUDA,
+- Multi-GPU training and translation
+- Batched translation on GPU and CPU
+- Different types of models, including deep RNNs and transformers
+- Pure C++ implementation with minimal depedencies on external packages (CUDA,
   Boost)
-* Optionally static compilation of binaries
-* Different types of models, including deep RNNs, transformer and language model
-* Binary/model-compatible with [Nematus](https://github.com/EdinburghNLP/nematus)
-  models for certain model types
-* C++ web-socket service for translation
-* CPU translation with Amun for certain model types
-* Batched translation on single and multiple GPU/CPUs with Amun
-* Permissive open source license (MIT)
+- Optionally static compilation of binaries
+- Permissive open source license (MIT)
 
 ### Model features
-* Deep RNNs with Deep Transition Cells ([Miceli Barone et al.
+- Deep RNNs with Deep Transition Cells ([Miceli Barone et al.
   2017](http://aclweb.org/anthology/W17-4710))
-* Transformer models ([Vaswani et al.
-  2017](https://arxiv.org/abs/1706.03762))
-* Encoder types: bidirectional, uni-bidirectional, alternating
-* LSTM cell instead of GRU
-* Layer normalization ([Ba et al. 2016](https://arxiv.org/abs/1607.06450))
-* Residual/skip connections between RNN layers
-* Scaling dropout for RNN inputs and states, input and output embeddings ([Gal
+- Transformer models ([Vaswani et al.  2017](https://arxiv.org/abs/1706.03762))
+- Encoder types: bidirectional, uni-bidirectional, alternating
+- LSTM cell instead of GRU
+- Layer normalization ([Ba et al. 2016](https://arxiv.org/abs/1607.06450))
+- Residual/skip connections between RNN layers
+- Scaling dropout for RNN inputs and states, input and output embeddings ([Gal
   and Ghahramani, 2016](https://arxiv.org/abs/1512.05287))
-* Tied embeddings ([Press and Wolf, 2017](https://arxiv.org/abs/1608.05859))
-* Deep RNN language models
+- Tied embeddings ([Press and Wolf, 2017](https://arxiv.org/abs/1608.05859))
+- Dual-source models ([Junczys-Dowmunt and
+  Grundkiewicz, 2017](https://arxiv.org/abs/1706.04138))
+- Deep RNN and transformer language models
 
 ### Training features
-* Adjusting mini-batch size dynamically to maximize usage of available or
+- Adjusting mini-batch size dynamically to maximize usage of available or
   bounded memory
-* Asynchronous/synchronous parallel SGD (data parallelism) with vanilla SGD,
+- Asynchronous/synchronous parallel SGD (data parallelism) with vanilla SGD,
   Adagrad, or Adam
-* Multi-GPU validation and in-training translation
-* Exposed optimizer parameters
-* Moving average of parameters
-* Decaying and warmup strategies for learning rate
-* Custom word embeddings from [word2vec](https://github.com/dav/word2vec)
-* Guided alignment to guide attention
-* Rescoring outputs
+- Different regularization techniques, such as dropout, exponential smoothing,
+  and label smoothing
+- Multi-GPU validation and in-training translation
+- Exposed optimizer parameters
+- Decaying and warmup strategies for learning rate
+- Custom word embeddings from [word2vec](https://github.com/dav/word2vec)
+- Guided alignment to guide attention
+- Language model pretraining
+
+### Translation features
+- Batched translation on single and multiple GPU/CPUs
+- Ensembling models of different types
+- C++ web-socket service for translation
+- Length normalization
+- Generating hard alignments from deep RNN models
+- Rescoring n-best lists and parallel files
 
 ### Experimental features
 Experimental features are available only in the Marian decoder.
 
-* Dual-source models for Automatic Post Editing ([Junczys-Dowmunt and
-  Grundkiewicz, 2017](https://arxiv.org/abs/1706.04138))
-* Character-level convolutional models ([Lee et al.
+- Character-level convolutional models ([Lee et al.
   2017](https://arxiv.org/abs/1610.03017))
+- Multi-node GPU training
+
 
 ## Benchmarks
 
@@ -123,12 +129,12 @@ architecture.
 
 Marian's training framework provides multi-GPU training via
 synchronous/asynchronous SGD and data parallelism (copies of the full model on
-each GPU). 
+each GPU).
 We benchmarked the [Romanian-English example](/examples/training/) on a machine
 with 8 NVIDIA P100 GPUs. Training speed increases with each GPU instance.
 The increase for synchronous SGD is sub-linear, but it may allow to achieve
 lower cross-entropy score for certain model types, which may be not achievable
-with asynchronous SGD. 
+with asynchronous SGD.
 
 ![Multi GPU]({{ site.baseurl }}/assets/images/multi_gpu.png)
 {: width="90%"}

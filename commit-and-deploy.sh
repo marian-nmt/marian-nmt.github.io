@@ -2,7 +2,7 @@
 
 set -e
 
-make update-docs
+#make update-docs
 git commit -a -m 'Commit local changes to Jekyll sources' || true
 git up
 git push origin jekyll

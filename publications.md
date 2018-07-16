@@ -8,7 +8,7 @@ menu: 6
 
 ## Citation
 
-Please cite the following [Marian Demo paper](https://arxiv.org/abs/1804.00344)
+Please cite the following [Marian Demo paper](http://aclweb.org/anthology/P18-4020)
 if you use Marian (formerly AmuNMT) in your research:
 
 ```tex
@@ -20,9 +20,12 @@ if you use Marian (formerly AmuNMT) in your research:
                Fikri Aji, Alham and Bogoychev, Nikolay and
                Martins, Andr\'{e} F. T. and Birch, Alexandra},
   booktitle = {Proceedings of ACL 2018, System Demonstrations},
+  pages     = {116--121},
+  publisher = {Association for Computational Linguistics},
   year      = {2018},
+  month     = {July},
   address   = {Melbourne, Australia},
-  url       = {https://arxiv.org/abs/1804.00344}
+  url       = {http://www.aclweb.org/anthology/P18-4020}
 }
 ```
 

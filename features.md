@@ -9,57 +9,50 @@ menu: 2
 ## Features
 
 ### Overview
-- Up to 15x faster translation than Nematus and similar toolkits on a single GPU
-- Up to 2x faster training than toolkits based on Theano, Tensorflow, Torch on
-  a single GPU
+- One engine for GPU/CPU training and decoding
+- Pure C++ impelemntation with minimal dependencies on external software: CUDA or MKL, Boost (soon to be removed)
+- 15x faster translation than Nematus on one GPU
+- 2x faster training than other toolkits on one GPU
 - Multi-GPU training and translation
 - Batched translation on GPU and CPU
-- Different types of models, including deep RNNs and transformers
-- Pure C++ implementation with minimal depedencies on external packages (CUDA,
-  Boost)
-- Optionally static compilation of binaries
-- Permissive open source license (MIT)
+- Static compilation, which allows to copy the binary and use anywhere
+- Permissive MIT license
 
 ### Model features
-- Deep RNNs with Deep Transition Cells ([Miceli Barone et al.
-  2017](http://aclweb.org/anthology/W17-4710))
+Model types:
+- Deep RNNs with Deep Transition Cells ([Miceli Barone et al.  2017](http://aclweb.org/anthology/W17-4710))
 - Transformer models ([Vaswani et al.  2017](https://arxiv.org/abs/1706.03762))
-- Encoder types: bidirectional, uni-bidirectional, alternating
-- LSTM cell instead of GRU
-- Layer normalization ([Ba et al. 2016](https://arxiv.org/abs/1607.06450))
-- Residual/skip connections between RNN layers
-- Scaling dropout for RNN inputs and states, input and output embeddings ([Gal
-  and Ghahramani, 2016](https://arxiv.org/abs/1512.05287))
-- Tied embeddings ([Press and Wolf, 2017](https://arxiv.org/abs/1608.05859))
-- Dual-source models ([Junczys-Dowmunt and
-  Grundkiewicz, 2017](https://arxiv.org/abs/1706.04138))
+- Multi-source models ([Junczys-Dowmunt and Grundkiewicz, 2017](https://arxiv.org/abs/1706.04138))
 - Deep RNN and transformer language models
 
+Model features:
+- Bidirectional, uni-bidirectional, or alternating encoders with LSTM or GRU cells
+- Layer normalization ([Ba et al. 2016](https://arxiv.org/abs/1607.06450))
+- Dropouts ([Gal and Ghahramani, 2016](https://arxiv.org/abs/1512.05287))
+- Tied embeddings ([Press and Wolf, 2017](https://arxiv.org/abs/1608.05859))
+- Residual/skip connections
+- Selected models binary compatible with Nematus models
+
 ### Training features
-- Adjusting mini-batch size dynamically to maximize usage of available or
-  bounded memory
-- Asynchronous/synchronous parallel SGD (data parallelism) with vanilla SGD,
-  Adagrad, or Adam
-- Different regularization techniques, such as dropout, exponential smoothing,
-  and label smoothing
+- Dynamically sized mini-batches for maximize memory usage
+- Asynchronous/synchronous multi-GPU training
+- Regularization methods: dropout, exponential smoothing, label smoothing
+- Initialization from pre-trained embeddings, including [word2vec](https://github.com/dav/word2vec) vectors
+- Transfer learning from monolingual data
+- Guided alignment for attention
+- Decaying and warmup strategies for learning rate
 - Multi-GPU validation and in-training translation
 - Exposed optimizer parameters
-- Decaying and warmup strategies for learning rate
-- Custom word embeddings from [word2vec](https://github.com/dav/word2vec)
-- Guided alignment to guide attention
-- Language model pretraining
 
 ### Translation features
 - Batched translation on single and multiple GPU/CPUs
 - Ensembling models of different types
-- C++ web-socket service for translation
-- Length normalization
-- Generating hard alignments from deep RNN models
+- Generating hard alignments during translation
 - Rescoring n-best lists and parallel files
+- C++ web-socket service for translation
 
 ### Experimental features
 Experimental features are available only in the Marian decoder.
-
 - Character-level convolutional models ([Lee et al.
   2017](https://arxiv.org/abs/1610.03017))
 - Multi-node GPU training

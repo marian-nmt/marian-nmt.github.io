@@ -156,7 +156,7 @@
           </h1>
           <div class="meta">
             <i class="fa fa-clock-o"></i>
-            Last updated: 29 June 2018
+            Last updated: 18 July 2018
           </div>
         </div><!--//doc-header-->
 
@@ -168,64 +168,59 @@
 
 <h3 id="overview">Overview</h3>
 <ul>
-  <li>Up to 15x faster translation than Nematus and similar toolkits on a single GPU</li>
-  <li>Up to 2x faster training than toolkits based on Theano, Tensorflow, Torch on
-a single GPU</li>
+  <li>One engine for GPU/CPU training and decoding</li>
+  <li>Pure C++ impelemntation with minimal dependencies on external software: CUDA or MKL, Boost (soon to be removed)</li>
+  <li>15x faster translation than Nematus on one GPU</li>
+  <li>2x faster training than other toolkits on one GPU</li>
   <li>Multi-GPU training and translation</li>
   <li>Batched translation on GPU and CPU</li>
-  <li>Different types of models, including deep RNNs and transformers</li>
-  <li>Pure C++ implementation with minimal depedencies on external packages (CUDA,
-Boost)</li>
-  <li>Optionally static compilation of binaries</li>
-  <li>Permissive open source license (MIT)</li>
+  <li>Static compilation, which allows to copy the binary and use anywhere</li>
+  <li>Permissive MIT license</li>
 </ul>
 
 <h3 id="model-features">Model features</h3>
+<p>Model types:</p>
 <ul>
-  <li>Deep RNNs with Deep Transition Cells (<a href="http://aclweb.org/anthology/W17-4710">Miceli Barone et al.
-2017</a>)</li>
+  <li>Deep RNNs with Deep Transition Cells (<a href="http://aclweb.org/anthology/W17-4710">Miceli Barone et al.  2017</a>)</li>
   <li>Transformer models (<a href="https://arxiv.org/abs/1706.03762">Vaswani et al.  2017</a>)</li>
-  <li>Encoder types: bidirectional, uni-bidirectional, alternating</li>
-  <li>LSTM cell instead of GRU</li>
-  <li>Layer normalization (<a href="https://arxiv.org/abs/1607.06450">Ba et al. 2016</a>)</li>
-  <li>Residual/skip connections between RNN layers</li>
-  <li>Scaling dropout for RNN inputs and states, input and output embeddings (<a href="https://arxiv.org/abs/1512.05287">Gal
-and Ghahramani, 2016</a>)</li>
-  <li>Tied embeddings (<a href="https://arxiv.org/abs/1608.05859">Press and Wolf, 2017</a>)</li>
-  <li>Dual-source models (<a href="https://arxiv.org/abs/1706.04138">Junczys-Dowmunt and
-Grundkiewicz, 2017</a>)</li>
+  <li>Multi-source models (<a href="https://arxiv.org/abs/1706.04138">Junczys-Dowmunt and Grundkiewicz, 2017</a>)</li>
   <li>Deep RNN and transformer language models</li>
+</ul>
+
+<p>Model features:</p>
+<ul>
+  <li>Bidirectional, uni-bidirectional, or alternating encoders with LSTM or GRU cells</li>
+  <li>Layer normalization (<a href="https://arxiv.org/abs/1607.06450">Ba et al. 2016</a>)</li>
+  <li>Dropouts (<a href="https://arxiv.org/abs/1512.05287">Gal and Ghahramani, 2016</a>)</li>
+  <li>Tied embeddings (<a href="https://arxiv.org/abs/1608.05859">Press and Wolf, 2017</a>)</li>
+  <li>Residual/skip connections</li>
+  <li>Selected models binary compatible with Nematus models</li>
 </ul>
 
 <h3 id="training-features">Training features</h3>
 <ul>
-  <li>Adjusting mini-batch size dynamically to maximize usage of available or
-bounded memory</li>
-  <li>Asynchronous/synchronous parallel SGD (data parallelism) with vanilla SGD,
-Adagrad, or Adam</li>
-  <li>Different regularization techniques, such as dropout, exponential smoothing,
-and label smoothing</li>
+  <li>Dynamically sized mini-batches for maximize memory usage</li>
+  <li>Asynchronous/synchronous multi-GPU training</li>
+  <li>Regularization methods: dropout, exponential smoothing, label smoothing</li>
+  <li>Initialization from pre-trained embeddings, including <a href="https://github.com/dav/word2vec">word2vec</a> vectors</li>
+  <li>Transfer learning from monolingual data</li>
+  <li>Guided alignment for attention</li>
+  <li>Decaying and warmup strategies for learning rate</li>
   <li>Multi-GPU validation and in-training translation</li>
   <li>Exposed optimizer parameters</li>
-  <li>Decaying and warmup strategies for learning rate</li>
-  <li>Custom word embeddings from <a href="https://github.com/dav/word2vec">word2vec</a></li>
-  <li>Guided alignment to guide attention</li>
-  <li>Language model pretraining</li>
 </ul>
 
 <h3 id="translation-features">Translation features</h3>
 <ul>
   <li>Batched translation on single and multiple GPU/CPUs</li>
   <li>Ensembling models of different types</li>
-  <li>C++ web-socket service for translation</li>
-  <li>Length normalization</li>
-  <li>Generating hard alignments from deep RNN models</li>
+  <li>Generating hard alignments during translation</li>
   <li>Rescoring n-best lists and parallel files</li>
+  <li>C++ web-socket service for translation</li>
 </ul>
 
 <h3 id="experimental-features">Experimental features</h3>
 <p>Experimental features are available only in the Marian decoder.</p>
-
 <ul>
   <li>Character-level convolutional models (<a href="https://arxiv.org/abs/1610.03017">Lee et al.
 2017</a>)</li>

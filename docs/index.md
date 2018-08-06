@@ -69,9 +69,9 @@ If run for the first time, this will also download {% github_link marian-dev %}
 
 Download, compile and install Boost:
 ```
-wget https://dl.bintray.com/boostorg/release/1.64.0/source/boost_1_64_0.tar.gz
-tar zxvf boost_1_64_0.tar.gz
-cd boost_1_64_0
+wget https://dl.bintray.com/boostorg/release/1.67.0/source/boost_1_67_0.tar.gz
+tar zxvf boost_1_67_0.tar.gz
+cd boost_1_67_0
 ./bootstrap.sh
 ./b2 -j16 --prefix=$(pwd) --libdir=$(pwd)/lib64 --layout=system link=static install
 ```
@@ -81,7 +81,7 @@ To compile Marian training framework with your custom Boost installation:
 cd /path/to/marian-dev
 mkdir build
 cd build
-cmake .. -DBOOST_ROOT=/path/to/boost_1_64_0
+cmake .. -DBOOST_ROOT=/path/to/boost_1_67_0
 make -j16
 ```
 

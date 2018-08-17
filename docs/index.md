@@ -458,23 +458,26 @@ values:
 - `soft`: Alignment weights for all words including EOS tokens. Sets of source
   token weights for target tokens are separated by a whitespace, source token
   weights are separated by a comma.
-
-    echo "now everyone knows" | ./marian-decoder -c config.yml --alignment soft
-    jetzt weiß jeder ||| 0.917065,0.0218936,0.0405725,0.0204688 0.00803049,0.0954254,0.853882,0.0426626 \
-        0.0294334,0.794184,0.00511072,0.171272 0.00743875,0.0147502,0.201069,0.776743
+```
+echo "now everyone knows" | ./marian-decoder -c config.yml --alignment soft
+jetzt weiß jeder ||| 0.917065,0.0218936,0.0405725,0.0204688 0.00803049,0.0954254,0.853882,0.0426626 \
+    0.0294334,0.794184,0.00511072,0.171272 0.00743875,0.0147502,0.201069,0.776743
+```
 
 - `hard` or empty: Word alignments for each target token in the form of Moses
   alignments, i.e. pairs of source and target tokens.
-
-    echo "now everyone knows" | ./marian-decoder -c config.yml --alignment
-    jetzt weiß jeder ||| 0-0 1-2 2-1 3-3
+```
+echo "now everyone knows" | ./marian-decoder -c config.yml --alignment
+jetzt weiß jeder ||| 0-0 1-2 2-1 3-3
+```
 
 - A value in the range 0.0-1.0: Word alignments are generated if the alignment
   weight for a target and source token is higher than or equal to the specified
   value.
-
-    echo "now everyone knows" | ./marian-decoder -c config.yml --alignment 0.1
-    jetzt weiß jeder ||| 0-0 1-2 2-1 2-3 3-2 3-3
+```
+echo "now everyone knows" | ./marian-decoder -c config.yml --alignment 0.1
+jetzt weiß jeder ||| 0-0 1-2 2-1 2-3 3-2 3-3
+```
 
 
 #### Word alignments from Transformer

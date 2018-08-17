@@ -160,7 +160,7 @@
           </h1>
           <div class="meta">
             <i class="fa fa-clock-o"></i>
-            Last updated: 06 August 2018
+            Last updated: 17 August 2018
           </div>
         </div><!--//doc-header-->
 
@@ -168,7 +168,8 @@
           <div class="doc-content">
             <div class="content-inner">
 
-              <h2 id="overview-and-command-line-options">Overview and command-line options</h2>
+              <h2 id="overview">Overview</h2>
+
 <p>Marian toolkit provides the following tools:</p>
 
 <ul>
@@ -183,7 +184,9 @@ files and n-best lists</li>
 trained with Marian or Nematus</li>
 </ul>
 
-<p>Click on the tool name for a list of command line options.</p>
+<h3 id="command-line-options">Command-line options</h3>
+
+<p>Click on the tool name above for a list of command line options.</p>
 
 <h3 id="model-types">Model types</h3>
 
@@ -538,17 +541,6 @@ use common vocabularies:</p>
 
 <p>Weights are optional and set to 1.0 by default if ommitted.</p>
 
-<h3 id="length-normalization">Length normalization</h3>
-
-<p>We found that using length normalization with a penalty term of 0.6 and a beam
-size of 6 is usually best:</p>
-
-<div class="highlighter-rouge"><div class="highlight"><pre class="highlight"><code>./marian-decoder -m model.npz -v vocab.src.yml vocab.trg.yml -b 6 --normalize=0.6
-</code></pre></div></div>
-
-<p>Different values of length normalization and beam size may work best for
-different language pairs.</p>
-
 <h3 id="batched-translation">Batched translation</h3>
 
 <p>Batched translation generates translation for whole mini-batches and
@@ -605,17 +597,70 @@ with 3000 sentences using 4 Volta GPUs on AWS.</p>
   </tbody>
 </table>
 
+<h3 id="marian-web-server">Marian web server</h3>
+
+<p>The <code class="highlighter-rouge">marian-server</code> command starts a web-socket server providing CPU and GPU
+translation service that can be requested by a client program written in Python
+or any other programming language.  The server uses the same command-line
+options as <code class="highlighter-rouge">marian-decoder</code>.  The only addition is <code class="highlighter-rouge">--port</code> option, which
+specifies the port number:</p>
+
+<div class="highlighter-rouge"><div class="highlight"><pre class="highlight"><code>./build/marian-server --port 8080 -m model.npz -v vocab.en vocab.ro
+</code></pre></div></div>
+
+<p>An example client written in Python is <a class="github-link" href="https://github.com/marian-nmt/marian-dev/tree/master/scripts/server/client_example.py" target="_blank"><code class="highlighter-rogue">marian-dev/scripts/server/client_example.py</code></a>:</p>
+
+<div class="highlighter-rouge"><div class="highlight"><pre class="highlight"><code>./scripts/server/client_example.py -p 8080 &lt; input.txt
+</code></pre></div></div>
+
+<h3 id="attention-output">Attention output</h3>
+
+<p><code class="highlighter-rouge">marian-decoder</code> and <code class="highlighter-rouge">marian-scorer</code> can produce attention output or word
+alignments when the <code class="highlighter-rouge">--alignment</code> option is used with one of the following
+values:</p>
+
+<ul>
+  <li><code class="highlighter-rouge">soft</code>: Alignment weights for all words including EOS tokens. Sets of source
+token weights for target tokens are separated by a whitespace, source token
+weights are separated by a comma.
+    <div class="highlighter-rouge"><div class="highlight"><pre class="highlight"><code>echo "now everyone knows" | ./marian-decoder -c config.yml --alignment soft
+jetzt weiß jeder ||| 0.917065,0.0218936,0.0405725,0.0204688 0.00803049,0.0954254,0.853882,0.0426626 \
+  0.0294334,0.794184,0.00511072,0.171272 0.00743875,0.0147502,0.201069,0.776743
+</code></pre></div>    </div>
+  </li>
+  <li><code class="highlighter-rouge">hard</code> or empty: Word alignments for each target token in the form of Moses
+alignments, i.e. pairs of source and target tokens.
+    <div class="highlighter-rouge"><div class="highlight"><pre class="highlight"><code>echo "now everyone knows" | ./marian-decoder -c config.yml --alignment
+jetzt weiß jeder ||| 0-0 1-2 2-1 3-3
+</code></pre></div>    </div>
+  </li>
+  <li>A value in the range 0.0-1.0: Word alignments are generated if the alignment
+weight for a target and source token is higher than or equal to the specified
+value.
+    <div class="highlighter-rouge"><div class="highlight"><pre class="highlight"><code>echo "now everyone knows" | ./marian-decoder -c config.yml --alignment 0.1
+jetzt weiß jeder ||| 0-0 1-2 2-1 2-3 3-2 3-3
+</code></pre></div>    </div>
+  </li>
+</ul>
+
+<h4 id="word-alignments-from-transformer">Word alignments from Transformer</h4>
+
+<p>The transformer has basically 6x8 different alignment matrices, and in theory
+none of these has to be very useful for word alignment purposes.
+We recommend trying training model with guided alignments first
+(<code class="highlighter-rouge">--guided-alignment</code>) so that the model can learn word alignments in one of
+its heads.</p>
+
 <h3 id="nematus-models">Nematus models</h3>
 
 <p>Only specific types of models trained with Nematus, for example the <a href="http://data.statmt.org/wmt17_systems/">Edinburgh WMT17
 deep models</a> can be decoded with
-<code class="highlighter-rouge">marian-decoder</code>.  As such models do not include model parameters specifying
-the model architecture, all parameters have to be set through command-line
-options.</p>
+<code class="highlighter-rouge">marian-decoder</code>.  As such models do not include Marian-specific parameters,
+all parameters related to the model architecture have to be set with
+command-line options.</p>
 
-<p>For example, for the <a href="http://data.statmt.org/wmt17_systems/en-de/">de-en model</a></p>
-
-<p>this would be:</p>
+<p>For example, for the <a href="http://data.statmt.org/wmt17_systems/en-de/">de-en model</a>
+this would be:</p>
 
 <div class="highlighter-rouge"><div class="highlight"><pre class="highlight"><code>./build/marian-decoder \
     --type nematus \
@@ -633,31 +678,18 @@ options.</p>
     --layer-normalization true
 </code></pre></div></div>
 
-<p>Alternatively, the model parameters can be added into the model <em>.npz</em> file
-based on the Nematus <em>.json</em> file using the script: <a class="github-link" href="https://github.com/marian-nmt/marian-dev/tree/master/scripts/contrib/inject_model_params.py" target="_blank"><code class="highlighter-rogue">marian-dev/scripts/contrib/inject_model_params.py</code></a>, e.g.:</p>
+<p>Alternatively, the parameters can be added into the model <em>.npz</em> file based on
+the Nematus <em>.json</em> file using the script: <a class="github-link" href="https://github.com/marian-nmt/marian-dev/tree/master/scripts/contrib/inject_model_params.py" target="_blank"><code class="highlighter-rogue">marian-dev/scripts/contrib/inject_model_params.py</code></a>, e.g.:</p>
 
 <div class="highlighter-rouge"><div class="highlight"><pre class="highlight"><code>python inject_model_params.py -m model.npz -j model.npz.json
 </code></pre></div></div>
 
+<p>Some models released by Edinburgh might require setting other parameters as
+well, for instance <code class="highlighter-rouge">--dim-emb 500</code>.</p>
+
 <p>We do not recommend training models of type <code class="highlighter-rouge">nematus</code> with Marian. It is much
 more effective to train models of type <code class="highlighter-rouge">s2s</code>, which provide the same model
 architecture except layer normalization, more features, and faster training.</p>
-
-<h3 id="marian-web-server">Marian web server</h3>
-
-<p>The <code class="highlighter-rouge">marian-server</code> command starts a web-socket server providing CPU and GPU
-translation service that can be requested by a client program written in Python
-or any other programming language.  The server uses the same command-line
-options as <code class="highlighter-rouge">marian-decoder</code>.  The only addition is <code class="highlighter-rouge">--port</code> option, which
-specifies the port number:</p>
-
-<div class="highlighter-rouge"><div class="highlight"><pre class="highlight"><code>./build/marian-server --port 8080 -m model.npz -v vocab.en vocab.ro
-</code></pre></div></div>
-
-<p>An example client written in Python is <a class="github-link" href="https://github.com/marian-nmt/marian-dev/tree/master/scripts/server/client_example.py" target="_blank"><code class="highlighter-rogue">marian-dev/scripts/server/client_example.py</code></a>:</p>
-
-<div class="highlighter-rouge"><div class="highlight"><pre class="highlight"><code>./scripts/server/client_example.py -p 8080 &lt; input.txt
-</code></pre></div></div>
 
 <h3 id="amun">Amun</h3>
 

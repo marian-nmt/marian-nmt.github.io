@@ -484,9 +484,9 @@ jetzt weiß jeder ||| 0-0 1-2 2-1 2-3 3-2 3-3
 
 The transformer has basically 6x8 different alignment matrices, and in theory
 none of these has to be very useful for word alignment purposes.
-We recommend trying training model with guided alignments first
-(`--guided-alignment`) so that the model can learn word alignments in one of
-its heads.
+<!--We recommend trying training model with guided alignments first-->
+<!--(`--guided-alignment`) so that the model can learn word alignments in one of-->
+<!--its heads.-->
 
 
 

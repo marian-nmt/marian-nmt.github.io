@@ -392,18 +392,6 @@ Weights are optional and set to 1.0 by default if ommitted.
 
 
 
-### Length normalization
-
-We found that using length normalization with a penalty term of 0.6 and a beam
-size of 6 is usually best:
-
-    ./marian-decoder -m model.npz -v vocab.src.yml vocab.trg.yml -b 6 --normalize=0.6
-
-Different values of length normalization and beam size may work best for
-different language pairs.
-
-
-
 ### Batched translation
 
 Batched translation generates translation for whole mini-batches and
@@ -439,16 +427,32 @@ Google Transformer | 201.9s | 19.2s |
 
 
 
+### Marian web server
+
+The `marian-server` command starts a web-socket server providing CPU and GPU
+translation service that can be requested by a client program written in Python
+or any other programming language.  The server uses the same command-line
+options as `marian-decoder`.  The only addition is `--port` option, which
+specifies the port number:
+
+    ./build/marian-server --port 8080 -m model.npz -v vocab.en vocab.ro
+
+An example client written in Python is {% github_link
+marian-dev/scripts/server/client_example.py %}:
+
+    ./scripts/server/client_example.py -p 8080 < input.txt
+
+
+
 ### Nematus models
 
 Only specific types of models trained with Nematus, for example the [Edinburgh WMT17
 deep models](http://data.statmt.org/wmt17_systems/) can be decoded with
-`marian-decoder`.  As such models do not include model parameters specifying
-the model architecture, all parameters have to be set through command-line
-options.
+`marian-decoder`.  As such models do not include Marian-specific parameters,
+all parameters related to the model architecture have to be set with
+command-line options.
 
 For example, for the [de-en model](http://data.statmt.org/wmt17_systems/en-de/)
-
 this would be:
 
     ./build/marian-decoder \
@@ -466,32 +470,18 @@ this would be:
         --tied-embeddings true \
         --layer-normalization true
 
-Alternatively, the model parameters can be added into the model _.npz_ file
-based on the Nematus _.json_ file using the script: {% github_link
+Alternatively, the parameters can be added into the model _.npz_ file based on
+the Nematus _.json_ file using the script: {% github_link
 marian-dev/scripts/contrib/inject_model_params.py %}, e.g.:
 
     python inject_model_params.py -m model.npz -j model.npz.json
 
+Some models released by Edinburgh might require setting other parameters as
+well, for instance `--dim-emb 500`.
+
 We do not recommend training models of type `nematus` with Marian. It is much
 more effective to train models of type `s2s`, which provide the same model
 architecture except layer normalization, more features, and faster training.
-
-
-
-### Marian web server
-
-The `marian-server` command starts a web-socket server providing CPU and GPU
-translation service that can be requested by a client program written in Python
-or any other programming language.  The server uses the same command-line
-options as `marian-decoder`.  The only addition is `--port` option, which
-specifies the port number:
-
-    ./build/marian-server --port 8080 -m model.npz -v vocab.en vocab.ro
-
-An example client written in Python is {% github_link
-marian-dev/scripts/server/client_example.py %}:
-
-    ./scripts/server/client_example.py -p 8080 < input.txt
 
 
 

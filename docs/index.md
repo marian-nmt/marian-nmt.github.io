@@ -285,6 +285,37 @@ words in the corresponding target training sentence.
 
 
 
+### Custom embeddings
+
+Marian can handle custom embedding vectors trained with
+[word2vec](https://github.com/dav/word2vec) or another tool:
+
+```
+./build/marian \
+    -t corpus.{en,de} -v vocab.{en,de} -m model.npz \
+    --embedding-vectors vectors.{en,de} --dim-emb 400
+```
+
+Embedding vectors should be provided in a file in a format similar to the
+word2vec format, with word tokens replaced with words IDs from the relevant
+vocabulary.
+
+Pre-trained vectors need to share the same vocabulary as your training data,
+and ideally should contain vectors for `<unk>` and `</s>` tokens. The easiest
+way to achieve this is to prepare the training data for word2vec w.r.t your
+vocabularies using {% github_link
+marian-dev/scripts/embeddings/prepare_corpus.py %}. Vectors can be prepared or
+trained w.r.t to vocabulary using {% github_link
+marian-dev/scripts/embeddings/process_word2vec.py %}.
+
+Other options for managing embedding vectors:
+
+- `--embedding-fix-src` fixes source embeddings in all encoders
+- `--embedding-fix-trg` fixes target embeddings in all decoders
+- `--embedding-normalization` normalizes vector values into [-1,1] range
+
+
+
 ### Workspace memory
 
 The choice of workspace memory, mini-batch size and max-length is quite

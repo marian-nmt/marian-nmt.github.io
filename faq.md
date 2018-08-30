@@ -137,6 +137,11 @@ Yes. The CPU only version can be compiled by disabling the CUDA library with
 the CMake flag `-DCOMPILE_CUDA=off`. This requires Intel MKL, see
 [here](/docs/#cpu-version) for more details.
 
+{:.question}
+#### Why do I get an error `__CUDACC_VER__ is no longer supported`?
+This issue is Boost related as some Boost versions are not compatible with CUDA
+9.0+.  Updating Boost to 1.65.1+ should solve the compilation error.
+
 
 
 <br/>

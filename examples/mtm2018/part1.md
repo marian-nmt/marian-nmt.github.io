@@ -84,7 +84,7 @@ For more help please refer to our [documentation](/docs) and [FAQ](/faq).
 ## Tools and data
 
 We will also need to download a couple of useful scripts for preprocessing,
-splitting into subwords, getting test sets and prepared examples.
+splitting into subwords, getting test sets.
 
 Return to the working directory and download the scripts:
 
@@ -94,8 +94,6 @@ cd ../..
 git clone https://github.com/marian-nmt/moses-scripts
 git clone https://github.com/rsennrich/subword-nmt
 git clone https://github.com/mjpost/sacreBLEU -b master
-
-git clone https://github.com/marian-nmt/marian-examples
 ```
 
 - - - -

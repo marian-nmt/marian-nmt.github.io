@@ -11,12 +11,15 @@ icon: fa-file-code-o
 -c [ --config ] arg                                  Configuration file(s). If multiple, later overrides earlier.
 -w [ --workspace ] arg (=2048)                       Preallocate  arg  MB of work space
 --log arg                                            Log training process information to file given by  arg
---log-level arg (=info)                              Set verbosity level of logging (trace - debug - info - warn - err(or) - critical - off)
+--log-level arg (=info)                              Set verbosity level of logging (trace - debug - info - warn - 
+                                                     err(or) - critical - off)
 --quiet                                              Suppress all logging to stderr. Logging to files still works
 --quiet-translation                                  Suppress logging for translation
---seed arg (=0)                                      Seed for all random number generators. 0 means initialize randomly
+--seed arg (=0)                                      Seed for all random number generators. 0 means initialize 
+                                                     randomly
 --clip-gemm arg (=0)                                 If not 0 clip GEMM input values to +/- arg
---interpolate-env-vars                               allow the use of environment variables in paths, of the form ${VAR_NAME}
+--interpolate-env-vars                               allow the use of environment variables in paths, of the form 
+                                                     ${VAR_NAME}
 --relative-paths                                     All paths are relative to the config file location
 --dump-config                                        Dump current (modified) configuration to stdout and exit
 --version                                            Print version number and exit
@@ -28,11 +31,13 @@ icon: fa-file-code-o
 -m [ --model ] arg (=model.npz)                      Path prefix for model to be saved/resumed
 --pretrained-model arg                               Path prefix for pre-trained model to initialize model weights
 --ignore-model-config                                Ignore the model configuration saved in npz file
---type arg (=amun)                                   Model type (possible values: amun, nematus, s2s, multi-s2s, transformer)
---dim-vocabs arg (=0 0)                              Maximum items in vocabulary ordered by rank, 0 uses all items in the provided/created vocabulary file
+--type arg (=amun)                                   Model type: amun, nematus, s2s, multi-s2s, transformer
+--dim-vocabs arg (=0 0)                              Maximum items in vocabulary ordered by rank, 0 uses all items 
+                                                     in the provided/created vocabulary file
 --dim-emb arg (=512)                                 Size of embedding vector
 --dim-rnn arg (=1024)                                Size of rnn hidden state
---enc-type arg (=bidirectional)                      Type of encoder RNN : bidirectional, bi-unidirectional, alternating (s2s)
+--enc-type arg (=bidirectional)                      Type of encoder RNN : bidirectional, bi-unidirectional, 
+                                                     alternating (s2s)
 --enc-cell arg (=gru)                                Type of RNN cell: gru, lstm, tanh (s2s)
 --enc-cell-depth arg (=1)                            Number of transitional cells in encoder layers (s2s)
 --enc-depth arg (=1)                                 Number of encoder layers (s2s)
@@ -49,18 +54,27 @@ icon: fa-file-code-o
 --tied-embeddings-src                                Tie source and target embeddings
 --tied-embeddings-all                                Tie all embedding layers and output layer
 --transformer-heads arg (=8)                         Number of heads in multi-head attention (transformer)
---transformer-no-projection                          Omit linear projection after multi-head attention (transformer)
+--transformer-no-projection                          Omit linear projection after multi-head attention 
+                                                     (transformer)
 --transformer-dim-ffn arg (=2048)                    Size of position-wise feed-forward network (transformer)
 --transformer-ffn-depth arg (=2)                     Depth of filters (transformer)
 --transformer-ffn-activation arg (=swish)            Activation between filters: swish or relu (transformer)
---transformer-dim-aan arg (=2048)                    Size of position-wise feed-forward network in AAN (transformer)
+--transformer-dim-aan arg (=2048)                    Size of position-wise feed-forward network in AAN 
+                                                     (transformer)
 --transformer-aan-depth arg (=2)                     Depth of filter for AAN (transformer)
 --transformer-aan-activation arg (=swish)            Activation between filters in AAN: swish or relu (transformer)
 --transformer-aan-nogate                             Omit gate in AAN (transformer)
---transformer-decoder-autoreg arg (=self-attention)  Type of autoregressive layer in transformer decoder: self-attention, average-attention (transformer)
---transformer-preprocess arg                         Operation before each transformer layer: d = dropout, a = add, n = normalize
---transformer-postprocess-emb arg (=d)               Operation after transformer embedding layer: d = dropout, a = add, n = normalize
---transformer-postprocess arg (=dan)                 Operation after each transformer layer: d = dropout, a = add, n = normalize
+--transformer-decoder-autoreg arg (=self-attention)  Type of autoregressive layer in transformer decoder: 
+                                                     self-attention, average-attention (transformer)
+--transformer-tied-layers arg                        List of tied decoder layers (transformer)
+--transformer-guided-alignment-layer arg (=last)     Last or number of layer to use for guided alignment training 
+                                                     in transformer
+--transformer-preprocess arg                         Operation before each transformer layer: d = dropout, a = add,
+                                                     n = normalize
+--transformer-postprocess-emb arg (=d)               Operation after transformer embedding layer: d = dropout, a = 
+                                                     add, n = normalize
+--transformer-postprocess arg (=dan)                 Operation after each transformer layer: d = dropout, a = add, 
+                                                     n = normalize
 --dropout-rnn arg (=0)                               Scaling dropout along rnn layers and time (0 = no dropout)
 --dropout-src arg (=0)                               Dropout source words (0 = no dropout)
 --dropout-trg arg (=0)                               Dropout target words (0 = no dropout)
@@ -74,14 +88,18 @@ icon: fa-file-code-o
 
 ## Training options
 ```
---cost-type arg (=ce-mean)                           Optimization criterion: ce-mean, ce-mean-words, ce-sum, perplexity
+--cost-type arg (=ce-mean)                           Optimization criterion: ce-mean, ce-mean-words, ce-sum, 
+                                                     perplexity
 --overwrite                                          Overwrite model with following checkpoints
 --no-reload                                          Do not load existing model specified in --model arg
 -t [ --train-sets ] arg                              Paths to training corpora: source target
--v [ --vocabs ] arg                                  Paths to vocabulary files have to correspond to --train-sets. If this parameter is not supplied we look for vocabulary files
-                                                     source.{yml,json} and target.{yml,json}. If these files do not exist they are created
+-v [ --vocabs ] arg                                  Paths to vocabulary files have to correspond to --train-sets. 
+                                                     If this parameter is not supplied we look for vocabulary files
+                                                     source.{yml,json} and target.{yml,json}. If these files do not
+                                                     exist they are created
 --max-length arg (=50)                               Maximum length of a sentence in a training sentence pair
---max-length-crop                                    Crop a sentence to max-length instead of ommitting it if longer than max-length
+--max-length-crop                                    Crop a sentence to max-length instead of ommitting it if 
+                                                     longer than max-length
 -e [ --after-epochs ] arg (=0)                       Finish after this many epochs, 0 is infinity
 --after-batches arg (=0)                             Finish after this many batch updates, 0 is infinity
 --disp-freq arg (=1000)                              Display information every  arg  updates
@@ -90,43 +108,57 @@ icon: fa-file-code-o
 --no-shuffle                                         Skip shuffling of training data before each epoch
 --no-restore-corpus                                  Skip restoring corpus state after training is restarted
 -T [ --tempdir ] arg (=/tmp)                         Directory for temporary (shuffled) files and database
---sqlite [=arg(=temporary)]                          Use disk-based sqlite3 database for training corpus storage, default is temporary with path creates persistent storage
+--sqlite [=arg(=temporary)]                          Use disk-based sqlite3 database for training corpus storage, 
+                                                     default is temporary with path creates persistent storage
 --sqlite-drop                                        Drop existing tables in sqlite3 database
 -d [ --devices ] arg (=0)                            GPU ID(s) to use for training
---cpu-threads [=arg(=1)] (=0)                        Use CPU-based computation with this many independent threads, 0 means GPU-based computation
+--cpu-threads [=arg(=1)] (=0)                        Use CPU-based computation with this many independent threads, 
+                                                     0 means GPU-based computation
 --mini-batch arg (=64)                               Size of mini-batch used during update
 --mini-batch-words arg (=0)                          Set mini-batch size based on words instead of sentences
---mini-batch-fit                                     Determine mini-batch size automatically based on sentence-length to fit reserved memory
+--mini-batch-fit                                     Determine mini-batch size automatically based on 
+                                                     sentence-length to fit reserved memory
 --mini-batch-fit-step arg (=10)                      Step size for mini-batch-fit statistics
 --maxi-batch arg (=100)                              Number of batches to preload for length-based sorting
---maxi-batch-sort arg (=trg)                         Sorting strategy for maxi-batch: trg (default) src none
+--maxi-batch-sort arg (=trg)                         Sorting strategy for maxi-batch: trg, src, none
 -o [ --optimizer ] arg (=adam)                       Optimization algorithm (possible values: sgd, adagrad, adam
 --optimizer-params arg                               Parameters for optimization algorithm, e.g. betas for adam
 --optimizer-delay arg (=1)                           SGD update delay, 1 = no delay
 -l [ --learn-rate ] arg (=0.0001)                    Learning rate
 --lr-decay arg (=0)                                  Decay factor for learning rate: lr = lr * arg (0 to disable)
---lr-decay-strategy arg (=epoch+stalled)             Strategy for learning rate decaying (possible values: epoch, batches, stalled, epoch+batches, epoch+stalled)
---lr-decay-start arg (=10 1)                         The first number of epoch/batches/stalled validations to start learning rate decaying
---lr-decay-freq arg (=50000)                         Learning rate decaying frequency for batches, requires --lr-decay-strategy to be batches
---lr-decay-reset-optimizer                           Reset running statistics of optimizer whenever learning rate decays
+--lr-decay-strategy arg (=epoch+stalled)             Strategy for learning rate decaying: epoch, batches, stalled, 
+                                                     epoch+batches, epoch+stalled
+--lr-decay-start arg (=10 1)                         The first number of epoch/batches/stalled validations to start
+                                                     learning rate decaying
+--lr-decay-freq arg (=50000)                         Learning rate decaying frequency for batches, requires 
+                                                     --lr-decay-strategy to be batches
+--lr-decay-reset-optimizer                           Reset running statistics of optimizer whenever learning rate 
+                                                     decays
 --lr-decay-repeat-warmup                             Repeat learning rate warmup when learning rate is decayed
---lr-decay-inv-sqrt arg (=0)                         Decrease learning rate at arg / sqrt(no. updates) starting at arg
+--lr-decay-inv-sqrt arg (=0)                         Decrease learning rate at arg / sqrt(no. updates) starting at 
+                                                     arg
 --lr-warmup arg (=0)                                 Increase learning rate linearly for arg first steps
 --lr-warmup-start-rate arg (=0)                      Start value for learning rate warmup
 --lr-warmup-cycle                                    Apply cyclic warmup
 --lr-warmup-at-reload                                Repeat warmup after interrupted training
 --lr-report                                          Report learning rate for each update
---batch-flexible-lr                                  Scales the learning rate based on the number of words in a mini-batch
---batch-normal-words arg (=1920)                     Set number of words per batch that the learning rate corresponds to. The option is only active when batch-flexible-lr is on
---sync-sgd                                           Use synchronous SGD instead of asynchronous for multi-gpu training
+--batch-flexible-lr                                  Scales the learning rate based on the number of words in a 
+                                                     mini-batch
+--batch-normal-words arg (=1920)                     Set number of words per batch that the learning rate 
+                                                     corresponds to. The option is only active when 
+                                                     batch-flexible-lr is on
+--sync-sgd                                           Use synchronous SGD instead of asynchronous for multi-gpu 
+                                                     training
 --label-smoothing arg (=0)                           Epsilon for label smoothing (0 to disable)
 --clip-norm arg (=1)                                 Clip gradient norm to  arg  (0 to disable)
---exponential-smoothing [=arg(=1e-4)] (=0)           Maintain smoothed version of parameters for validation and saving with smoothing factor arg.  0 to disable.
+--exponential-smoothing [=arg(=1e-4)] (=0)           Maintain smoothed version of parameters for validation and 
+                                                     saving with smoothing factor arg.  0 to disable.
 --guided-alignment arg                               Use guided alignment to guide attention
---guided-alignment-cost arg (=ce)                    Cost type for guided alignment. Possible values: ce (cross-entropy), mse (mean square error), mult (multiplication)
+--guided-alignment-cost arg (=ce)                    Cost type for guided alignment: ce (cross-entropy), mse (mean 
+                                                     square error), mult (multiplication)
 --guided-alignment-weight arg (=1)                   Weight for guided alignment cost
 --data-weighting arg                                 File with sentence or word weights
---data-weighting-type arg (=sentence)                Processing level for data weighting. Possible values: sentence, word
+--data-weighting-type arg (=sentence)                Processing level for data weighting: sentence, word
 --embedding-vectors arg                              Paths to files with custom source and target embedding vectors
 --embedding-normalization                            Enable normalization of custom embedding vectors
 --embedding-fix-src                                  Fix source embeddings. Affects all encoders
@@ -139,12 +171,16 @@ icon: fa-file-code-o
 ```
 --valid-sets arg                                     Paths to validation corpora: source target
 --valid-freq arg (=10000)                            Validate model every  arg  updates
---valid-metrics arg (=cross-entropy)                 Metric to use during validation: cross-entropy, perplexity, valid-script, translation. Multiple metrics can be specified
+--valid-metrics arg (=cross-entropy)                 Metric to use during validation: cross-entropy, perplexity, 
+                                                     valid-script, translation. Multiple metrics can be specified
 --valid-mini-batch arg (=32)                         Size of mini-batch used during validation
 --valid-max-length arg (=1000)                       Maximum length of a sentence in a validating sentence pair
---valid-script-path arg                              Path to external validation script. It should print a single score to stdout. If the option is used with validating 
-                                                     translation, the output translation file will be passed as a first argument 
---early-stopping arg (=10)                           Stop if the first validation metric does not improve for  arg  consecutive validation steps
+--valid-script-path arg                              Path to external validation script. It should print a single 
+                                                     score to stdout. If the option is used with validating 
+                                                     translation, the output translation file will be passed as a 
+                                                     first argument 
+--early-stopping arg (=10)                           Stop if the first validation metric does not improve for  arg 
+                                                     consecutive validation steps
 --keep-best                                          Keep best model for each validation metric
 --valid-log arg                                      Log validation scores to file given by  arg
 --valid-translation-output arg                       Path to store the translation
@@ -156,4 +192,4 @@ icon: fa-file-code-o
 --n-best                                             Generate n-best list
 ```
 Version: 
-v1.5.0+b0283484
+v1.6.0+8856ae9

@@ -13,7 +13,7 @@ icon: fa-cogs
 2. Student machines at MTM: on machines equipped with GPUs (_u-pl21_ to
    _u-pl37_), you need to compile Marian with [a newer
    Boost](/docs/#custom-boost) and disable CPU back-end by adding
-   `-DUSE_CPU=off` to CMake flags.
+   `-DCOMPILE_CPU=off` to CMake flags.
 3. Private laptop or server: on machines with a UNIX system, CUDA and Boost
    installed, just follow installation instructions below. Add
    `-DCOMPILE_CUDA=off` on CPU-only machines with OpenBLAS or MKL installed.
@@ -85,7 +85,7 @@ You should have at least these tools ready to use:
 ### Troubleshooting
 
 - Compilation on a CPU-only machine: add flag `-DCOMPILE_CUDA=off` to the `cmake` command.
-- Skipping compilation of CPU backend: add flag `-DUSE_CPU=off` to the `cmake` command.
+- Skipping compilation of CPU backend: add flag `-DCOMPILE_CPU=off` to the `cmake` command.
 - Boost issues: see [instructions how to compile with custom Boost](/docs/#custom-boost).
 - Other resources you may refer to: [documentation](/docs) and [FAQ](/faq).
 

@@ -272,7 +272,6 @@ this during the labs and download the prepared data:
 ```
 wget data.statmt.org/romang/marian-examples/training-basics.data.tgz
 tar zxvf training-basics.data.tgz
-ls data model
 ```
 
 ### Training command
@@ -425,12 +424,18 @@ Answer the questions:
 - What learning-rate schedule is used?
 - How many models are trained and how are they combined together?
 
+The preprocessed training data can be downloaded from
+[data.statmt.org/romang/marian-examples](http://data.statmt.org/romang/marian-examples/transformer.data.tgz)
+
 ### 2. Deep RNN model
 
 Train a deep RNN-based encoder-decoder model following the example on {%
 github_link "reconstructing Edinburgh's WMT17 English-German system"
 marian-examples/wmt2017-uedin %}. Answer the same questions as in the first
 exercise.
+
+The preprocessed training data can be downloaded from
+[data.statmt.org/romang/marian-examples](http://data.statmt.org/romang/marian-examples/transformer.data.tgz)
 
 ### 3. Language models
 

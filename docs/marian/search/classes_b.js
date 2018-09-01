@@ -1,7 +1,10 @@
 var searchData=
 [
+  ['mappedparameters',['MappedParameters',['../classmarian_1_1MappedParameters.html',1,'marian']]],
+  ['maximumnodeop',['MaximumNodeOp',['../structmarian_1_1MaximumNodeOp.html',1,'marian']]],
   ['meannodeop',['MeanNodeOp',['../structmarian_1_1MeanNodeOp.html',1,'marian']]],
   ['memorypiece',['MemoryPiece',['../classmarian_1_1MemoryPiece.html',1,'marian']]],
+  ['minimumnodeop',['MinimumNodeOp',['../structmarian_1_1MinimumNodeOp.html',1,'marian']]],
   ['minusnodeop',['MinusNodeOp',['../structmarian_1_1MinusNodeOp.html',1,'marian']]],
   ['mlp',['MLP',['../classmarian_1_1mlp_1_1MLP.html',1,'marian::mlp']]],
   ['mlpfactory',['MLPFactory',['../classmarian_1_1mlp_1_1MLPFactory.html',1,'marian::mlp']]],

@@ -22,7 +22,7 @@
  <tr style="height: 56px;">
   <td id="projectalign" style="padding-left: 0.5em;">
    <div id="projectname">Marian
-   &#160;<span id="projectnumber">v1.5.0</span>
+   &#160;<span id="projectnumber">v1.6.0</span>
    </div>
    <div id="projectbrief">A C++ GPU-specific Neural Machine Translation</div>
   </td>
@@ -60,7 +60,7 @@ $(function() {
 
 <div id="nav-path" class="navpath">
   <ul>
-<li class="navelem"><a class="el" href="namespacemarian.html">marian</a></li><li class="navelem"><a class="el" href="classmarian_1_1DecoderStateHardAtt.html">DecoderStateHardAtt</a></li>  </ul>
+<li class="navelem"><b>marian</b></li><li class="navelem"><a class="el" href="classmarian_1_1DecoderStateHardAtt.html">DecoderStateHardAtt</a></li>  </ul>
 </div>
 </div><!-- top -->
 <div class="header">
@@ -84,64 +84,64 @@ Inheritance diagram for marian::DecoderStateHardAtt:</div>
 <table class="memberdecls">
 <tr class="heading"><td colspan="2"><h2 class="groupheader"><a name="pub-methods"></a>
 Public Member Functions</h2></td></tr>
-<tr class="memitem:aebfb88ead9b2587d2f5111c0f681a4a6"><td class="memItemLeft" align="right" valign="top"><a id="aebfb88ead9b2587d2f5111c0f681a4a6"></a>
-&#160;</td><td class="memItemRight" valign="bottom"><b>DecoderStateHardAtt</b> (const <a class="el" href="classmarian_1_1rnn_1_1States.html">rnn::States</a> &amp;states, <a class="el" href="namespacemarian.html#a498d8baf75b754011078b890b39c8e12">Expr</a> probs, std::vector&lt; Ptr&lt; <a class="el" href="classmarian_1_1EncoderState.html">EncoderState</a> &gt;&gt; &amp;encStates, Ptr&lt; <a class="el" href="classmarian_1_1data_1_1CorpusBatch.html">data::CorpusBatch</a> &gt; batch, const std::vector&lt; size_t &gt; &amp;attentionIndices)</td></tr>
-<tr class="separator:aebfb88ead9b2587d2f5111c0f681a4a6"><td class="memSeparator" colspan="2">&#160;</td></tr>
-<tr class="memitem:a3079ba612dee864906cd7c566edf85b8"><td class="memItemLeft" align="right" valign="top"><a id="a3079ba612dee864906cd7c566edf85b8"></a>
-virtual Ptr&lt; <a class="el" href="classmarian_1_1DecoderState.html">DecoderState</a> &gt;&#160;</td><td class="memItemRight" valign="bottom"><b>select</b> (const std::vector&lt; size_t &gt; &amp;selIdx, int beamSize)</td></tr>
-<tr class="separator:a3079ba612dee864906cd7c566edf85b8"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:ae3c841c7847e215381eb79c094b11f14"><td class="memItemLeft" align="right" valign="top"><a id="ae3c841c7847e215381eb79c094b11f14"></a>
+&#160;</td><td class="memItemRight" valign="bottom"><b>DecoderStateHardAtt</b> (const <a class="el" href="classmarian_1_1rnn_1_1States.html">rnn::States</a> &amp;states, Expr logProbs, const std::vector&lt; Ptr&lt; <a class="el" href="classmarian_1_1EncoderState.html">EncoderState</a> &gt;&gt; &amp;encStates, Ptr&lt; <a class="el" href="classmarian_1_1data_1_1CorpusBatch.html">data::CorpusBatch</a> &gt; batch)</td></tr>
+<tr class="separator:ae3c841c7847e215381eb79c094b11f14"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:af7d640766c1b268b8ebbf9281b82853b"><td class="memItemLeft" align="right" valign="top"><a id="af7d640766c1b268b8ebbf9281b82853b"></a>
+virtual Ptr&lt; <a class="el" href="classmarian_1_1DecoderState.html">DecoderState</a> &gt;&#160;</td><td class="memItemRight" valign="bottom"><b>select</b> (const std::vector&lt; size_t &gt; &amp;selIdx, int beamSize) const override</td></tr>
+<tr class="separator:af7d640766c1b268b8ebbf9281b82853b"><td class="memSeparator" colspan="2">&#160;</td></tr>
 <tr class="memitem:afcc7783d427f92534005f363967db1f2"><td class="memItemLeft" align="right" valign="top"><a id="afcc7783d427f92534005f363967db1f2"></a>
 virtual void&#160;</td><td class="memItemRight" valign="bottom"><b>setAttentionIndices</b> (const std::vector&lt; size_t &gt; &amp;attentionIndices)</td></tr>
 <tr class="separator:afcc7783d427f92534005f363967db1f2"><td class="memSeparator" colspan="2">&#160;</td></tr>
 <tr class="memitem:a777750790cb5c41c3d429ef46e01f1ad"><td class="memItemLeft" align="right" valign="top"><a id="a777750790cb5c41c3d429ef46e01f1ad"></a>
 virtual std::vector&lt; size_t &gt; &amp;&#160;</td><td class="memItemRight" valign="bottom"><b>getAttentionIndices</b> ()</td></tr>
 <tr class="separator:a777750790cb5c41c3d429ef46e01f1ad"><td class="memSeparator" colspan="2">&#160;</td></tr>
-<tr class="memitem:a467625af0dfe9d6f08ce69484d4e1799"><td class="memItemLeft" align="right" valign="top"><a id="a467625af0dfe9d6f08ce69484d4e1799"></a>
-virtual void&#160;</td><td class="memItemRight" valign="bottom"><b>blacklist</b> (<a class="el" href="namespacemarian.html#a498d8baf75b754011078b890b39c8e12">Expr</a> totalCosts, Ptr&lt; <a class="el" href="classmarian_1_1data_1_1CorpusBatch.html">data::CorpusBatch</a> &gt; batch)</td></tr>
-<tr class="separator:a467625af0dfe9d6f08ce69484d4e1799"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a27c777fbf69c78d341ef2e23ee562fd6"><td class="memItemLeft" align="right" valign="top"><a id="a27c777fbf69c78d341ef2e23ee562fd6"></a>
+virtual void&#160;</td><td class="memItemRight" valign="bottom"><b>blacklist</b> (Expr totalCosts, Ptr&lt; <a class="el" href="classmarian_1_1data_1_1CorpusBatch.html">data::CorpusBatch</a> &gt; batch) override</td></tr>
+<tr class="separator:a27c777fbf69c78d341ef2e23ee562fd6"><td class="memSeparator" colspan="2">&#160;</td></tr>
 <tr class="inherit_header pub_methods_classmarian_1_1DecoderState"><td colspan="2" onclick="javascript:toggleInherit('pub_methods_classmarian_1_1DecoderState')"><img src="closed.png" alt="-"/>&#160;Public Member Functions inherited from <a class="el" href="classmarian_1_1DecoderState.html">marian::DecoderState</a></td></tr>
-<tr class="memitem:a2cc9c6af8c4732a8fe1d10b55e10942d inherit pub_methods_classmarian_1_1DecoderState"><td class="memItemLeft" align="right" valign="top"><a id="a2cc9c6af8c4732a8fe1d10b55e10942d"></a>
-&#160;</td><td class="memItemRight" valign="bottom"><b>DecoderState</b> (const <a class="el" href="classmarian_1_1rnn_1_1States.html">rnn::States</a> &amp;states, <a class="el" href="namespacemarian.html#a498d8baf75b754011078b890b39c8e12">Expr</a> probs, std::vector&lt; Ptr&lt; <a class="el" href="classmarian_1_1EncoderState.html">EncoderState</a> &gt;&gt; &amp;encStates, Ptr&lt; <a class="el" href="classmarian_1_1data_1_1CorpusBatch.html">data::CorpusBatch</a> &gt; batch)</td></tr>
-<tr class="separator:a2cc9c6af8c4732a8fe1d10b55e10942d inherit pub_methods_classmarian_1_1DecoderState"><td class="memSeparator" colspan="2">&#160;</td></tr>
-<tr class="memitem:afed1f85cd82d4462c49f7107f960a100 inherit pub_methods_classmarian_1_1DecoderState"><td class="memItemLeft" align="right" valign="top"><a id="afed1f85cd82d4462c49f7107f960a100"></a>
-virtual std::vector&lt; Ptr&lt; <a class="el" href="classmarian_1_1EncoderState.html">EncoderState</a> &gt; &gt; &amp;&#160;</td><td class="memItemRight" valign="bottom"><b>getEncoderStates</b> ()</td></tr>
-<tr class="separator:afed1f85cd82d4462c49f7107f960a100 inherit pub_methods_classmarian_1_1DecoderState"><td class="memSeparator" colspan="2">&#160;</td></tr>
-<tr class="memitem:af761b699d78e9545987adc743bc579b8 inherit pub_methods_classmarian_1_1DecoderState"><td class="memItemLeft" align="right" valign="top"><a id="af761b699d78e9545987adc743bc579b8"></a>
-virtual <a class="el" href="namespacemarian.html#a498d8baf75b754011078b890b39c8e12">Expr</a>&#160;</td><td class="memItemRight" valign="bottom"><b>getProbs</b> ()</td></tr>
-<tr class="separator:af761b699d78e9545987adc743bc579b8 inherit pub_methods_classmarian_1_1DecoderState"><td class="memSeparator" colspan="2">&#160;</td></tr>
-<tr class="memitem:a7d99dcec147de0654c049736314e0792 inherit pub_methods_classmarian_1_1DecoderState"><td class="memItemLeft" align="right" valign="top"><a id="a7d99dcec147de0654c049736314e0792"></a>
-virtual void&#160;</td><td class="memItemRight" valign="bottom"><b>setProbs</b> (<a class="el" href="namespacemarian.html#a498d8baf75b754011078b890b39c8e12">Expr</a> probs)</td></tr>
-<tr class="separator:a7d99dcec147de0654c049736314e0792 inherit pub_methods_classmarian_1_1DecoderState"><td class="memSeparator" colspan="2">&#160;</td></tr>
-<tr class="memitem:a7ba0022e125c8392b43423107af33f5b inherit pub_methods_classmarian_1_1DecoderState"><td class="memItemLeft" align="right" valign="top"><a id="a7ba0022e125c8392b43423107af33f5b"></a>
-virtual const <a class="el" href="classmarian_1_1rnn_1_1States.html">rnn::States</a> &amp;&#160;</td><td class="memItemRight" valign="bottom"><b>getStates</b> ()</td></tr>
-<tr class="separator:a7ba0022e125c8392b43423107af33f5b inherit pub_methods_classmarian_1_1DecoderState"><td class="memSeparator" colspan="2">&#160;</td></tr>
-<tr class="memitem:a93f6000b711e4f710f46268e0781eed4 inherit pub_methods_classmarian_1_1DecoderState"><td class="memItemLeft" align="right" valign="top"><a id="a93f6000b711e4f710f46268e0781eed4"></a>
-virtual <a class="el" href="namespacemarian.html#a498d8baf75b754011078b890b39c8e12">Expr</a>&#160;</td><td class="memItemRight" valign="bottom"><b>getTargetEmbeddings</b> ()</td></tr>
-<tr class="separator:a93f6000b711e4f710f46268e0781eed4 inherit pub_methods_classmarian_1_1DecoderState"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a537af43590acf1c934393c705d9c10e6 inherit pub_methods_classmarian_1_1DecoderState"><td class="memItemLeft" align="right" valign="top"><a id="a537af43590acf1c934393c705d9c10e6"></a>
+&#160;</td><td class="memItemRight" valign="bottom"><b>DecoderState</b> (const <a class="el" href="classmarian_1_1rnn_1_1States.html">rnn::States</a> &amp;states, Expr logProbs, const std::vector&lt; Ptr&lt; <a class="el" href="classmarian_1_1EncoderState.html">EncoderState</a> &gt;&gt; &amp;encStates, Ptr&lt; <a class="el" href="classmarian_1_1data_1_1CorpusBatch.html">data::CorpusBatch</a> &gt; batch)</td></tr>
+<tr class="separator:a537af43590acf1c934393c705d9c10e6 inherit pub_methods_classmarian_1_1DecoderState"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a7957cded9a7dd725876aab7c6a246de8 inherit pub_methods_classmarian_1_1DecoderState"><td class="memItemLeft" align="right" valign="top"><a id="a7957cded9a7dd725876aab7c6a246de8"></a>
+virtual const std::vector&lt; Ptr&lt; <a class="el" href="classmarian_1_1EncoderState.html">EncoderState</a> &gt; &gt; &amp;&#160;</td><td class="memItemRight" valign="bottom"><b>getEncoderStates</b> () const</td></tr>
+<tr class="separator:a7957cded9a7dd725876aab7c6a246de8 inherit pub_methods_classmarian_1_1DecoderState"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a2b2182888632784b97317ba710701be7 inherit pub_methods_classmarian_1_1DecoderState"><td class="memItemLeft" align="right" valign="top"><a id="a2b2182888632784b97317ba710701be7"></a>
+virtual Expr&#160;</td><td class="memItemRight" valign="bottom"><b>getLogProbs</b> () const</td></tr>
+<tr class="separator:a2b2182888632784b97317ba710701be7 inherit pub_methods_classmarian_1_1DecoderState"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a378fc469d8ac3f0b73168e617d40385b inherit pub_methods_classmarian_1_1DecoderState"><td class="memItemLeft" align="right" valign="top"><a id="a378fc469d8ac3f0b73168e617d40385b"></a>
+virtual void&#160;</td><td class="memItemRight" valign="bottom"><b>setLogProbs</b> (Expr logProbs)</td></tr>
+<tr class="separator:a378fc469d8ac3f0b73168e617d40385b inherit pub_methods_classmarian_1_1DecoderState"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:aff6c1a6b97b020ea64555eb89cd565d8 inherit pub_methods_classmarian_1_1DecoderState"><td class="memItemLeft" align="right" valign="top"><a id="aff6c1a6b97b020ea64555eb89cd565d8"></a>
+virtual const <a class="el" href="classmarian_1_1rnn_1_1States.html">rnn::States</a> &amp;&#160;</td><td class="memItemRight" valign="bottom"><b>getStates</b> () const</td></tr>
+<tr class="separator:aff6c1a6b97b020ea64555eb89cd565d8 inherit pub_methods_classmarian_1_1DecoderState"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:ae80dced961dfd86b69b646f5f3362106 inherit pub_methods_classmarian_1_1DecoderState"><td class="memItemLeft" align="right" valign="top"><a id="ae80dced961dfd86b69b646f5f3362106"></a>
+virtual Expr&#160;</td><td class="memItemRight" valign="bottom"><b>getTargetEmbeddings</b> () const</td></tr>
+<tr class="separator:ae80dced961dfd86b69b646f5f3362106 inherit pub_methods_classmarian_1_1DecoderState"><td class="memSeparator" colspan="2">&#160;</td></tr>
 <tr class="memitem:a9ba5f20385a0b96e5306dd81bba2a203 inherit pub_methods_classmarian_1_1DecoderState"><td class="memItemLeft" align="right" valign="top"><a id="a9ba5f20385a0b96e5306dd81bba2a203"></a>
-virtual void&#160;</td><td class="memItemRight" valign="bottom"><b>setTargetEmbeddings</b> (<a class="el" href="namespacemarian.html#a498d8baf75b754011078b890b39c8e12">Expr</a> targetEmbeddings)</td></tr>
+virtual void&#160;</td><td class="memItemRight" valign="bottom"><b>setTargetEmbeddings</b> (Expr targetEmbeddings)</td></tr>
 <tr class="separator:a9ba5f20385a0b96e5306dd81bba2a203 inherit pub_methods_classmarian_1_1DecoderState"><td class="memSeparator" colspan="2">&#160;</td></tr>
-<tr class="memitem:a9b146fda29b930ae22bc30929784e84e inherit pub_methods_classmarian_1_1DecoderState"><td class="memItemLeft" align="right" valign="top"><a id="a9b146fda29b930ae22bc30929784e84e"></a>
-virtual <a class="el" href="namespacemarian.html#a498d8baf75b754011078b890b39c8e12">Expr</a>&#160;</td><td class="memItemRight" valign="bottom"><b>getTargetIndices</b> ()</td></tr>
-<tr class="separator:a9b146fda29b930ae22bc30929784e84e inherit pub_methods_classmarian_1_1DecoderState"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:ab6fa62515e37a97c94d71e1c01ea9324 inherit pub_methods_classmarian_1_1DecoderState"><td class="memItemLeft" align="right" valign="top"><a id="ab6fa62515e37a97c94d71e1c01ea9324"></a>
+virtual Expr&#160;</td><td class="memItemRight" valign="bottom"><b>getTargetIndices</b> () const</td></tr>
+<tr class="separator:ab6fa62515e37a97c94d71e1c01ea9324 inherit pub_methods_classmarian_1_1DecoderState"><td class="memSeparator" colspan="2">&#160;</td></tr>
 <tr class="memitem:ac7305d73606fa761c8f76bad2598bf93 inherit pub_methods_classmarian_1_1DecoderState"><td class="memItemLeft" align="right" valign="top"><a id="ac7305d73606fa761c8f76bad2598bf93"></a>
-virtual void&#160;</td><td class="memItemRight" valign="bottom"><b>setTargetIndices</b> (<a class="el" href="namespacemarian.html#a498d8baf75b754011078b890b39c8e12">Expr</a> targetIndices)</td></tr>
+virtual void&#160;</td><td class="memItemRight" valign="bottom"><b>setTargetIndices</b> (Expr targetIndices)</td></tr>
 <tr class="separator:ac7305d73606fa761c8f76bad2598bf93 inherit pub_methods_classmarian_1_1DecoderState"><td class="memSeparator" colspan="2">&#160;</td></tr>
-<tr class="memitem:aa17965a3f9151e8e7afe7c6d9e6b2117 inherit pub_methods_classmarian_1_1DecoderState"><td class="memItemLeft" align="right" valign="top"><a id="aa17965a3f9151e8e7afe7c6d9e6b2117"></a>
-virtual <a class="el" href="namespacemarian.html#a498d8baf75b754011078b890b39c8e12">Expr</a>&#160;</td><td class="memItemRight" valign="bottom"><b>getTargetMask</b> ()</td></tr>
-<tr class="separator:aa17965a3f9151e8e7afe7c6d9e6b2117 inherit pub_methods_classmarian_1_1DecoderState"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a4a433b3fb91b50a6c77cf2a217ab99d8 inherit pub_methods_classmarian_1_1DecoderState"><td class="memItemLeft" align="right" valign="top"><a id="a4a433b3fb91b50a6c77cf2a217ab99d8"></a>
+virtual Expr&#160;</td><td class="memItemRight" valign="bottom"><b>getTargetMask</b> () const</td></tr>
+<tr class="separator:a4a433b3fb91b50a6c77cf2a217ab99d8 inherit pub_methods_classmarian_1_1DecoderState"><td class="memSeparator" colspan="2">&#160;</td></tr>
 <tr class="memitem:ab470f8886435bace93adba3a66f6377d inherit pub_methods_classmarian_1_1DecoderState"><td class="memItemLeft" align="right" valign="top"><a id="ab470f8886435bace93adba3a66f6377d"></a>
-virtual void&#160;</td><td class="memItemRight" valign="bottom"><b>setTargetMask</b> (<a class="el" href="namespacemarian.html#a498d8baf75b754011078b890b39c8e12">Expr</a> targetMask)</td></tr>
+virtual void&#160;</td><td class="memItemRight" valign="bottom"><b>setTargetMask</b> (Expr targetMask)</td></tr>
 <tr class="separator:ab470f8886435bace93adba3a66f6377d inherit pub_methods_classmarian_1_1DecoderState"><td class="memSeparator" colspan="2">&#160;</td></tr>
-<tr class="memitem:a9ab2da41ff8e8565476f83c7870ad46b inherit pub_methods_classmarian_1_1DecoderState"><td class="memItemLeft" align="right" valign="top"><a id="a9ab2da41ff8e8565476f83c7870ad46b"></a>
-virtual const std::vector&lt; size_t &gt; &amp;&#160;</td><td class="memItemRight" valign="bottom"><b>getSourceWords</b> ()</td></tr>
-<tr class="separator:a9ab2da41ff8e8565476f83c7870ad46b inherit pub_methods_classmarian_1_1DecoderState"><td class="memSeparator" colspan="2">&#160;</td></tr>
-<tr class="memitem:af4c41c4da5708aaf194e2ab08efd9d57 inherit pub_methods_classmarian_1_1DecoderState"><td class="memItemLeft" align="right" valign="top"><a id="af4c41c4da5708aaf194e2ab08efd9d57"></a>
-Ptr&lt; <a class="el" href="classmarian_1_1data_1_1CorpusBatch.html">data::CorpusBatch</a> &gt;&#160;</td><td class="memItemRight" valign="bottom"><b>getBatch</b> ()</td></tr>
-<tr class="separator:af4c41c4da5708aaf194e2ab08efd9d57 inherit pub_methods_classmarian_1_1DecoderState"><td class="memSeparator" colspan="2">&#160;</td></tr>
-<tr class="memitem:ac20d82909da4e2f4d4a919eda6f3fea7 inherit pub_methods_classmarian_1_1DecoderState"><td class="memItemLeft" align="right" valign="top"><a id="ac20d82909da4e2f4d4a919eda6f3fea7"></a>
-size_t&#160;</td><td class="memItemRight" valign="bottom"><b>getPosition</b> ()</td></tr>
-<tr class="separator:ac20d82909da4e2f4d4a919eda6f3fea7 inherit pub_methods_classmarian_1_1DecoderState"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a005641b57fe1b6b0be3cd1b71fe3cca5 inherit pub_methods_classmarian_1_1DecoderState"><td class="memItemLeft" align="right" valign="top"><a id="a005641b57fe1b6b0be3cd1b71fe3cca5"></a>
+virtual const std::vector&lt; size_t &gt; &amp;&#160;</td><td class="memItemRight" valign="bottom"><b>getSourceWords</b> () const</td></tr>
+<tr class="separator:a005641b57fe1b6b0be3cd1b71fe3cca5 inherit pub_methods_classmarian_1_1DecoderState"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:aeeafeeaaec74483865cc4098a73d72dc inherit pub_methods_classmarian_1_1DecoderState"><td class="memItemLeft" align="right" valign="top"><a id="aeeafeeaaec74483865cc4098a73d72dc"></a>
+Ptr&lt; <a class="el" href="classmarian_1_1data_1_1CorpusBatch.html">data::CorpusBatch</a> &gt;&#160;</td><td class="memItemRight" valign="bottom"><b>getBatch</b> () const</td></tr>
+<tr class="separator:aeeafeeaaec74483865cc4098a73d72dc inherit pub_methods_classmarian_1_1DecoderState"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a26d4ec46a230c2ca598fea9d23250402 inherit pub_methods_classmarian_1_1DecoderState"><td class="memItemLeft" align="right" valign="top"><a id="a26d4ec46a230c2ca598fea9d23250402"></a>
+size_t&#160;</td><td class="memItemRight" valign="bottom"><b>getPosition</b> () const</td></tr>
+<tr class="separator:a26d4ec46a230c2ca598fea9d23250402 inherit pub_methods_classmarian_1_1DecoderState"><td class="memSeparator" colspan="2">&#160;</td></tr>
 <tr class="memitem:a2f039c77d5b8581fb2e547a12e317f87 inherit pub_methods_classmarian_1_1DecoderState"><td class="memItemLeft" align="right" valign="top"><a id="a2f039c77d5b8581fb2e547a12e317f87"></a>
 void&#160;</td><td class="memItemRight" valign="bottom"><b>setPosition</b> (size_t position)</td></tr>
 <tr class="separator:a2f039c77d5b8581fb2e547a12e317f87 inherit pub_methods_classmarian_1_1DecoderState"><td class="memSeparator" colspan="2">&#160;</td></tr>
@@ -152,27 +152,27 @@ Protected Attributes</h2></td></tr>
 std::vector&lt; size_t &gt;&#160;</td><td class="memItemRight" valign="bottom"><b>attentionIndices_</b></td></tr>
 <tr class="separator:a186190d2399d9182b076420fc7a98649"><td class="memSeparator" colspan="2">&#160;</td></tr>
 <tr class="inherit_header pro_attribs_classmarian_1_1DecoderState"><td colspan="2" onclick="javascript:toggleInherit('pro_attribs_classmarian_1_1DecoderState')"><img src="closed.png" alt="-"/>&#160;Protected Attributes inherited from <a class="el" href="classmarian_1_1DecoderState.html">marian::DecoderState</a></td></tr>
-<tr class="memitem:a09838ecb77262feb0c2370968c38d93b inherit pro_attribs_classmarian_1_1DecoderState"><td class="memItemLeft" align="right" valign="top"><a id="a09838ecb77262feb0c2370968c38d93b"></a>
-std::vector&lt; Ptr&lt; <a class="el" href="classmarian_1_1EncoderState.html">EncoderState</a> &gt; &gt;&#160;</td><td class="memItemRight" valign="bottom"><b>encStates_</b></td></tr>
-<tr class="separator:a09838ecb77262feb0c2370968c38d93b inherit pro_attribs_classmarian_1_1DecoderState"><td class="memSeparator" colspan="2">&#160;</td></tr>
-<tr class="memitem:a67f590c5a27b165002f52f1fcfaa2c5f inherit pro_attribs_classmarian_1_1DecoderState"><td class="memItemLeft" align="right" valign="top"><a id="a67f590c5a27b165002f52f1fcfaa2c5f"></a>
-<a class="el" href="namespacemarian.html#a498d8baf75b754011078b890b39c8e12">Expr</a>&#160;</td><td class="memItemRight" valign="bottom"><b>targetEmbeddings_</b></td></tr>
-<tr class="separator:a67f590c5a27b165002f52f1fcfaa2c5f inherit pro_attribs_classmarian_1_1DecoderState"><td class="memSeparator" colspan="2">&#160;</td></tr>
-<tr class="memitem:a586ad1994ecc984651c412b7fd37cde5 inherit pro_attribs_classmarian_1_1DecoderState"><td class="memItemLeft" align="right" valign="top"><a id="a586ad1994ecc984651c412b7fd37cde5"></a>
-<a class="el" href="namespacemarian.html#a498d8baf75b754011078b890b39c8e12">Expr</a>&#160;</td><td class="memItemRight" valign="bottom"><b>targetMask_</b></td></tr>
-<tr class="separator:a586ad1994ecc984651c412b7fd37cde5 inherit pro_attribs_classmarian_1_1DecoderState"><td class="memSeparator" colspan="2">&#160;</td></tr>
-<tr class="memitem:ab74495b5ae046b7857adc4cf732d0bb8 inherit pro_attribs_classmarian_1_1DecoderState"><td class="memItemLeft" align="right" valign="top"><a id="ab74495b5ae046b7857adc4cf732d0bb8"></a>
-<a class="el" href="namespacemarian.html#a498d8baf75b754011078b890b39c8e12">Expr</a>&#160;</td><td class="memItemRight" valign="bottom"><b>targetIndices_</b></td></tr>
-<tr class="separator:ab74495b5ae046b7857adc4cf732d0bb8 inherit pro_attribs_classmarian_1_1DecoderState"><td class="memSeparator" colspan="2">&#160;</td></tr>
-<tr class="memitem:afc5b2e6aebe1b64a37997344f4be5678 inherit pro_attribs_classmarian_1_1DecoderState"><td class="memItemLeft" align="right" valign="top"><a id="afc5b2e6aebe1b64a37997344f4be5678"></a>
-<a class="el" href="namespacemarian.html#a498d8baf75b754011078b890b39c8e12">Expr</a>&#160;</td><td class="memItemRight" valign="bottom"><b>probs_</b></td></tr>
-<tr class="separator:afc5b2e6aebe1b64a37997344f4be5678 inherit pro_attribs_classmarian_1_1DecoderState"><td class="memSeparator" colspan="2">&#160;</td></tr>
 <tr class="memitem:a999eed11d80cfd9cb80fc63550633062 inherit pro_attribs_classmarian_1_1DecoderState"><td class="memItemLeft" align="right" valign="top"><a id="a999eed11d80cfd9cb80fc63550633062"></a>
 <a class="el" href="classmarian_1_1rnn_1_1States.html">rnn::States</a>&#160;</td><td class="memItemRight" valign="bottom"><b>states_</b></td></tr>
 <tr class="separator:a999eed11d80cfd9cb80fc63550633062 inherit pro_attribs_classmarian_1_1DecoderState"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a8db6fb2e4bfde4c0a55519c64680ce43 inherit pro_attribs_classmarian_1_1DecoderState"><td class="memItemLeft" align="right" valign="top"><a id="a8db6fb2e4bfde4c0a55519c64680ce43"></a>
+Expr&#160;</td><td class="memItemRight" valign="bottom"><b>logProbs_</b></td></tr>
+<tr class="separator:a8db6fb2e4bfde4c0a55519c64680ce43 inherit pro_attribs_classmarian_1_1DecoderState"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a09838ecb77262feb0c2370968c38d93b inherit pro_attribs_classmarian_1_1DecoderState"><td class="memItemLeft" align="right" valign="top"><a id="a09838ecb77262feb0c2370968c38d93b"></a>
+std::vector&lt; Ptr&lt; <a class="el" href="classmarian_1_1EncoderState.html">EncoderState</a> &gt; &gt;&#160;</td><td class="memItemRight" valign="bottom"><b>encStates_</b></td></tr>
+<tr class="separator:a09838ecb77262feb0c2370968c38d93b inherit pro_attribs_classmarian_1_1DecoderState"><td class="memSeparator" colspan="2">&#160;</td></tr>
 <tr class="memitem:a3ae9f15d8f6463651bda02a826a253e5 inherit pro_attribs_classmarian_1_1DecoderState"><td class="memItemLeft" align="right" valign="top"><a id="a3ae9f15d8f6463651bda02a826a253e5"></a>
 Ptr&lt; <a class="el" href="classmarian_1_1data_1_1CorpusBatch.html">data::CorpusBatch</a> &gt;&#160;</td><td class="memItemRight" valign="bottom"><b>batch_</b></td></tr>
 <tr class="separator:a3ae9f15d8f6463651bda02a826a253e5 inherit pro_attribs_classmarian_1_1DecoderState"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a67f590c5a27b165002f52f1fcfaa2c5f inherit pro_attribs_classmarian_1_1DecoderState"><td class="memItemLeft" align="right" valign="top"><a id="a67f590c5a27b165002f52f1fcfaa2c5f"></a>
+Expr&#160;</td><td class="memItemRight" valign="bottom"><b>targetEmbeddings_</b></td></tr>
+<tr class="separator:a67f590c5a27b165002f52f1fcfaa2c5f inherit pro_attribs_classmarian_1_1DecoderState"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a586ad1994ecc984651c412b7fd37cde5 inherit pro_attribs_classmarian_1_1DecoderState"><td class="memItemLeft" align="right" valign="top"><a id="a586ad1994ecc984651c412b7fd37cde5"></a>
+Expr&#160;</td><td class="memItemRight" valign="bottom"><b>targetMask_</b></td></tr>
+<tr class="separator:a586ad1994ecc984651c412b7fd37cde5 inherit pro_attribs_classmarian_1_1DecoderState"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:ab74495b5ae046b7857adc4cf732d0bb8 inherit pro_attribs_classmarian_1_1DecoderState"><td class="memItemLeft" align="right" valign="top"><a id="ab74495b5ae046b7857adc4cf732d0bb8"></a>
+Expr&#160;</td><td class="memItemRight" valign="bottom"><b>targetIndices_</b></td></tr>
+<tr class="separator:ab74495b5ae046b7857adc4cf732d0bb8 inherit pro_attribs_classmarian_1_1DecoderState"><td class="memSeparator" colspan="2">&#160;</td></tr>
 <tr class="memitem:a8e9828281a8680b32951769644e87fdf inherit pro_attribs_classmarian_1_1DecoderState"><td class="memItemLeft" align="right" valign="top"><a id="a8e9828281a8680b32951769644e87fdf"></a>
 size_t&#160;</td><td class="memItemRight" valign="bottom"><b>position_</b> {0}</td></tr>
 <tr class="separator:a8e9828281a8680b32951769644e87fdf inherit pro_attribs_classmarian_1_1DecoderState"><td class="memSeparator" colspan="2">&#160;</td></tr>
@@ -183,7 +183,7 @@ size_t&#160;</td><td class="memItemRight" valign="bottom"><b>position_</b> {0}</
 </div><!-- contents -->
 <!-- start footer part -->
 <hr class="footer"/><address class="footer"><small>
-Generated on Tue Jun 26 2018 21:59:36 for Marian by &#160;<a href="http://www.doxygen.org/index.html">
+Generated on Sat Sep 1 2018 21:25:12 for Marian by &#160;<a href="http://www.doxygen.org/index.html">
 <img class="footer" src="doxygen.png" alt="doxygen"/>
 </a> 1.8.13
 </small></address>

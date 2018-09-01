@@ -6,7 +6,7 @@ var searchData=
   ['lexicalbias',['LexicalBias',['../classmarian_1_1LexicalBias.html',1,'marian']]],
   ['lexicalshortlistgenerator',['LexicalShortlistGenerator',['../classmarian_1_1data_1_1LexicalShortlistGenerator.html',1,'marian::data']]],
   ['lexprobs',['LexProbs',['../classmarian_1_1LexProbs.html',1,'marian']]],
-  ['logitnodeop',['LogitNodeOp',['../structmarian_1_1LogitNodeOp.html',1,'marian']]],
+  ['logaddexpnodeop',['LogAddExpNodeOp',['../structmarian_1_1LogAddExpNodeOp.html',1,'marian']]],
   ['lognodeop',['LogNodeOp',['../structmarian_1_1LogNodeOp.html',1,'marian']]],
   ['logsoftmaxnodeop',['LogSoftmaxNodeOp',['../structmarian_1_1LogSoftmaxNodeOp.html',1,'marian']]],
   ['logsoftmaxstep',['LogsoftmaxStep',['../classmarian_1_1models_1_1LogsoftmaxStep.html',1,'marian::models']]],

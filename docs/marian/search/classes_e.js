@@ -4,7 +4,6 @@ var searchData=
   ['paramnode',['ParamNode',['../structmarian_1_1ParamNode.html',1,'marian']]],
   ['perplexityloss',['PerplexityLoss',['../classmarian_1_1PerplexityLoss.html',1,'marian']]],
   ['plusnodeop',['PlusNodeOp',['../structmarian_1_1PlusNodeOp.html',1,'marian']]],
-  ['poolingop',['PoolingOp',['../classmarian_1_1PoolingOp.html',1,'marian']]],
   ['poolingwithmaskingop',['PoolingWithMaskingOp',['../classmarian_1_1PoolingWithMaskingOp.html',1,'marian']]],
   ['poolingwrapper',['PoolingWrapper',['../classmarian_1_1PoolingWrapper.html',1,'marian']]],
   ['prelunodeop',['PReLUNodeOp',['../structmarian_1_1PReLUNodeOp.html',1,'marian']]],

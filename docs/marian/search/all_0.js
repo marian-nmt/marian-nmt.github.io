@@ -13,6 +13,7 @@ var searchData=
   ['allocator',['Allocator',['../classmarian_1_1Allocator.html',1,'marian']]],
   ['allocators_5f',['allocators_',['../classmarian_1_1MultiNodeGraphGroup.html#a84ff84fbfa935667bb300eeec3398ce3',1,'marian::MultiNodeGraphGroup::allocators_()'],['../classmarian_1_1MultiNodeGraphGroupSync.html#ac5c3d97423382bbeb0dd7cf7d7f49317',1,'marian::MultiNodeGraphGroupSync::allocators_()']]],
   ['amun',['Amun',['../classmarian_1_1Amun.html',1,'marian']]],
+  ['approx',['Approx',['../structmarian_1_1functional_1_1Approx.html',1,'marian::functional']]],
   ['array',['Array',['../structmarian_1_1functional_1_1Array.html',1,'marian::functional']]],
   ['array_3c_20int_2c_20n_20_3e',['Array&lt; int, N &gt;',['../structmarian_1_1functional_1_1Array.html',1,'marian::functional']]],
   ['assign',['Assign',['../structmarian_1_1functional_1_1Assign.html',1,'marian::functional']]],

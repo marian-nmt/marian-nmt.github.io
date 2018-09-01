@@ -22,7 +22,7 @@
  <tr style="height: 56px;">
   <td id="projectalign" style="padding-left: 0.5em;">
    <div id="projectname">Marian
-   &#160;<span id="projectnumber">v1.5.0</span>
+   &#160;<span id="projectnumber">v1.6.0</span>
    </div>
    <div id="projectbrief">A C++ GPU-specific Neural Machine Translation</div>
   </td>
@@ -60,7 +60,7 @@ $(function() {
 
 <div id="nav-path" class="navpath">
   <ul>
-<li class="navelem"><a class="el" href="namespacemarian.html">marian</a></li><li class="navelem"><a class="el" href="classmarian_1_1NthElementCPU.html">NthElementCPU</a></li>  </ul>
+<li class="navelem"><b>marian</b></li><li class="navelem"><a class="el" href="classmarian_1_1NthElementCPU.html">NthElementCPU</a></li>  </ul>
 </div>
 </div><!-- top -->
 <div class="header">
@@ -89,18 +89,18 @@ Public Member Functions</h2></td></tr>
 <tr class="memitem:acdb852bd5fa703aab944467ab6d7a752"><td class="memItemLeft" align="right" valign="top"><a id="acdb852bd5fa703aab944467ab6d7a752"></a>
 &#160;</td><td class="memItemRight" valign="bottom"><b>NthElementCPU</b> (size_t maxBeamSize, size_t maxBatchSize)</td></tr>
 <tr class="separator:acdb852bd5fa703aab944467ab6d7a752"><td class="memSeparator" colspan="2">&#160;</td></tr>
-<tr class="memitem:ab6e0f617162f6dcb8d3f892a2b6bcba6"><td class="memItemLeft" align="right" valign="top"><a id="ab6e0f617162f6dcb8d3f892a2b6bcba6"></a>
-void&#160;</td><td class="memItemRight" valign="bottom"><b>getNBestList</b> (float *probs, const std::vector&lt; int &gt; &amp;batchFirstElementIdxs, const std::vector&lt; int &gt; &amp;cummulatedBeamSizes)</td></tr>
-<tr class="separator:ab6e0f617162f6dcb8d3f892a2b6bcba6"><td class="memSeparator" colspan="2">&#160;</td></tr>
-<tr class="memitem:aef40bbaef9e17d0c0ac82dce8f1a48a9"><td class="memItemLeft" align="right" valign="top"><a id="aef40bbaef9e17d0c0ac82dce8f1a48a9"></a>
-void&#160;</td><td class="memItemRight" valign="bottom"><b>getNBestList</b> (const std::vector&lt; size_t &gt; &amp;beamSizes, Tensor Probs, std::vector&lt; float &gt; &amp;outCosts, std::vector&lt; unsigned &gt; &amp;outKeys, const bool isFirst=false)</td></tr>
-<tr class="separator:aef40bbaef9e17d0c0ac82dce8f1a48a9"><td class="memSeparator" colspan="2">&#160;</td></tr>
-<tr class="memitem:af97d83239279370017aac0c1013a3cc2"><td class="memItemLeft" align="right" valign="top"><a id="af97d83239279370017aac0c1013a3cc2"></a>
-void&#160;</td><td class="memItemRight" valign="bottom"><b>GetPairs</b> (size_t number, std::vector&lt; unsigned &gt; &amp;outKeys, std::vector&lt; float &gt; &amp;outValues)</td></tr>
-<tr class="separator:af97d83239279370017aac0c1013a3cc2"><td class="memSeparator" colspan="2">&#160;</td></tr>
-<tr class="memitem:a0f237d3b59c2c637bc3c6f3a09facc98"><td class="memItemLeft" align="right" valign="top"><a id="a0f237d3b59c2c637bc3c6f3a09facc98"></a>
-void&#160;</td><td class="memItemRight" valign="bottom"><b>getValueByKey</b> (std::vector&lt; float &gt; &amp;out, float *d_in)</td></tr>
-<tr class="separator:a0f237d3b59c2c637bc3c6f3a09facc98"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a84b5f12e63eba091eed4487f86941e39"><td class="memItemLeft" align="right" valign="top"><a id="a84b5f12e63eba091eed4487f86941e39"></a>
+void&#160;</td><td class="memItemRight" valign="bottom"><b>getNBestList</b> (float *logProbs, const std::vector&lt; int &gt; &amp;batchFirstElementIdxs, const std::vector&lt; int &gt; &amp;cummulatedBeamSizes) override</td></tr>
+<tr class="separator:a84b5f12e63eba091eed4487f86941e39"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:ab82fa895072effc8ea7fcd89f4dd0810"><td class="memItemLeft" align="right" valign="top"><a id="ab82fa895072effc8ea7fcd89f4dd0810"></a>
+void&#160;</td><td class="memItemRight" valign="bottom"><b>getNBestList</b> (const std::vector&lt; size_t &gt; &amp;beamSizes, Tensor logProbs, std::vector&lt; float &gt; &amp;outCosts, std::vector&lt; unsigned &gt; &amp;outKeys, const bool isFirst=false) override</td></tr>
+<tr class="separator:ab82fa895072effc8ea7fcd89f4dd0810"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:aa7f4570ad72e33a4286e57686dd190f3"><td class="memItemLeft" align="right" valign="top"><a id="aa7f4570ad72e33a4286e57686dd190f3"></a>
+void&#160;</td><td class="memItemRight" valign="bottom"><b>GetPairs</b> (size_t number, std::vector&lt; unsigned &gt; &amp;outKeys, std::vector&lt; float &gt; &amp;outValues) override</td></tr>
+<tr class="separator:aa7f4570ad72e33a4286e57686dd190f3"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a6cf8a3211df028cc1cb4fdb7143ce1d9"><td class="memItemLeft" align="right" valign="top"><a id="a6cf8a3211df028cc1cb4fdb7143ce1d9"></a>
+void&#160;</td><td class="memItemRight" valign="bottom"><b>getValueByKey</b> (std::vector&lt; float &gt; &amp;out, float *d_in) override</td></tr>
+<tr class="separator:a6cf8a3211df028cc1cb4fdb7143ce1d9"><td class="memSeparator" colspan="2">&#160;</td></tr>
 </table>
 <hr/>The documentation for this class was generated from the following files:<ul>
 <li>marian/src/translator/<a class="el" href="nth__element_8h_source.html">nth_element.h</a></li>
@@ -109,7 +109,7 @@ void&#160;</td><td class="memItemRight" valign="bottom"><b>getValueByKey</b> (st
 </div><!-- contents -->
 <!-- start footer part -->
 <hr class="footer"/><address class="footer"><small>
-Generated on Tue Jun 26 2018 21:59:37 for Marian by &#160;<a href="http://www.doxygen.org/index.html">
+Generated on Sat Sep 1 2018 21:25:12 for Marian by &#160;<a href="http://www.doxygen.org/index.html">
 <img class="footer" src="doxygen.png" alt="doxygen"/>
 </a> 1.8.13
 </small></address>

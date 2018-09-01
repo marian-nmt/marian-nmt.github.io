@@ -15,5 +15,6 @@ var searchData=
   ['encoderstate',['EncoderState',['../classmarian_1_1EncoderState.html',1,'marian']]],
   ['encodertransformer',['EncoderTransformer',['../classmarian_1_1EncoderTransformer.html',1,'marian']]],
   ['expnodeop',['ExpNodeOp',['../structmarian_1_1ExpNodeOp.html',1,'marian']]],
+  ['exponentialsmoothing',['ExponentialSmoothing',['../classmarian_1_1ExponentialSmoothing.html',1,'marian']]],
   ['expressiongraph',['ExpressionGraph',['../classmarian_1_1ExpressionGraph.html',1,'marian']]]
 ];

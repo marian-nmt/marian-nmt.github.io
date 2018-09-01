@@ -1,5 +1,6 @@
 var searchData=
 [
+  ['relu',['ReLU',['../classmarian_1_1rnn_1_1ReLU.html',1,'marian::rnn']]],
   ['relunodeop',['ReLUNodeOp',['../structmarian_1_1ReLUNodeOp.html',1,'marian']]],
   ['rescore',['Rescore',['../classmarian_1_1Rescore.html',1,'marian']]],
   ['rescorer',['Rescorer',['../classmarian_1_1Rescorer.html',1,'marian']]],

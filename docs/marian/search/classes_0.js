@@ -8,6 +8,7 @@ var searchData=
   ['allocationexception',['AllocationException',['../classmarian_1_1AllocationException.html',1,'marian']]],
   ['allocator',['Allocator',['../classmarian_1_1Allocator.html',1,'marian']]],
   ['amun',['Amun',['../classmarian_1_1Amun.html',1,'marian']]],
+  ['approx',['Approx',['../structmarian_1_1functional_1_1Approx.html',1,'marian::functional']]],
   ['array',['Array',['../structmarian_1_1functional_1_1Array.html',1,'marian::functional']]],
   ['array_3c_20int_2c_20n_20_3e',['Array&lt; int, N &gt;',['../structmarian_1_1functional_1_1Array.html',1,'marian::functional']]],
   ['assign',['Assign',['../structmarian_1_1functional_1_1Assign.html',1,'marian::functional']]],

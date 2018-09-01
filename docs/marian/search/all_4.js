@@ -17,6 +17,6 @@ var searchData=
   ['encodertransformer',['EncoderTransformer',['../classmarian_1_1EncoderTransformer.html',1,'marian']]],
   ['execute',['execute',['../classmarian_1_1MultiNodeGraphGroup.html#aee13b3da619fe59e4e1e2be4afc1b10f',1,'marian::MultiNodeGraphGroup::execute()'],['../classmarian_1_1MultiNodeGraphGroupSync.html#a2ca15f4f6b931050f8f2d82117a3434d',1,'marian::MultiNodeGraphGroupSync::execute()']]],
   ['expnodeop',['ExpNodeOp',['../structmarian_1_1ExpNodeOp.html',1,'marian']]],
-  ['expr',['Expr',['../namespacemarian.html#a498d8baf75b754011078b890b39c8e12',1,'marian']]],
+  ['exponentialsmoothing',['ExponentialSmoothing',['../classmarian_1_1ExponentialSmoothing.html',1,'marian']]],
   ['expressiongraph',['ExpressionGraph',['../classmarian_1_1ExpressionGraph.html',1,'marian::ExpressionGraph'],['../classmarian_1_1ExpressionGraph.html#a474e5cfd469e9c702d34a72846dc0c1e',1,'marian::ExpressionGraph::ExpressionGraph()']]]
 ];

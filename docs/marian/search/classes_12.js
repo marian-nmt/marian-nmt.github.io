@@ -17,9 +17,11 @@ var searchData=
   ['trainingstate',['TrainingState',['../classmarian_1_1TrainingState.html',1,'marian']]],
   ['trainmnist',['TrainMNIST',['../classmarian_1_1TrainMNIST.html',1,'marian']]],
   ['transformer',['Transformer',['../classmarian_1_1Transformer.html',1,'marian']]],
+  ['transformer_3c_20decoderbase_20_3e',['Transformer&lt; DecoderBase &gt;',['../classmarian_1_1Transformer.html',1,'marian']]],
+  ['transformer_3c_20encoderbase_20_3e',['Transformer&lt; EncoderBase &gt;',['../classmarian_1_1Transformer.html',1,'marian']]],
   ['transformerstate',['TransformerState',['../classmarian_1_1TransformerState.html',1,'marian']]],
-  ['translatemultigpu',['TranslateMultiGPU',['../classmarian_1_1TranslateMultiGPU.html',1,'marian']]],
-  ['translateservicemultigpu',['TranslateServiceMultiGPU',['../classmarian_1_1TranslateServiceMultiGPU.html',1,'marian']]],
+  ['translate',['Translate',['../classmarian_1_1Translate.html',1,'marian']]],
+  ['translateservice',['TranslateService',['../classmarian_1_1TranslateService.html',1,'marian']]],
   ['translationvalidator',['TranslationValidator',['../classmarian_1_1TranslationValidator.html',1,'marian']]],
   ['transposenodeop',['TransposeNodeOp',['../structmarian_1_1TransposeNodeOp.html',1,'marian']]],
   ['true',['True',['../structmarian_1_1keywords_1_1True.html',1,'marian::keywords']]]

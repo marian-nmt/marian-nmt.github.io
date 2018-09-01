@@ -14,6 +14,7 @@ var searchData=
   ['decoderstate',['DecoderState',['../classmarian_1_1DecoderState.html',1,'marian']]],
   ['decoderstatehardatt',['DecoderStateHardAtt',['../classmarian_1_1DecoderStateHardAtt.html',1,'marian']]],
   ['decodertransformer',['DecoderTransformer',['../classmarian_1_1DecoderTransformer.html',1,'marian']]],
+  ['defaultcommunicator',['DefaultCommunicator',['../classmarian_1_1DefaultCommunicator.html',1,'marian']]],
   ['defaultprinting',['DefaultPrinting',['../classmarian_1_1DefaultPrinting.html',1,'marian']]],
   ['dense',['Dense',['../classmarian_1_1mlp_1_1Dense.html',1,'marian::mlp']]],
   ['densefactory',['DenseFactory',['../classmarian_1_1mlp_1_1DenseFactory.html',1,'marian::mlp']]],

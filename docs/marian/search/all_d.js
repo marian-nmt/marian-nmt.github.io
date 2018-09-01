@@ -8,5 +8,6 @@ var searchData=
   ['output',['Output',['../classmarian_1_1mlp_1_1Output.html',1,'marian::mlp']]],
   ['outputcollector',['OutputCollector',['../classmarian_1_1OutputCollector.html',1,'marian']]],
   ['outputfactory',['OutputFactory',['../classmarian_1_1mlp_1_1OutputFactory.html',1,'marian::mlp']]],
-  ['outputfilestream',['OutputFileStream',['../classOutputFileStream.html',1,'']]]
+  ['outputfilestream',['OutputFileStream',['../classOutputFileStream.html',1,'']]],
+  ['outputprinter',['OutputPrinter',['../classmarian_1_1OutputPrinter.html',1,'marian']]]
 ];

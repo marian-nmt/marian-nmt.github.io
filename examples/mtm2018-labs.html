@@ -1,0 +1,655 @@
+<!--[if IE 8]> <html lang="en" class="ie8"> <![endif]-->
+<!--[if IE 9]> <html lang="en" class="ie9"> <![endif]-->
+<!--[if !IE]><!-->
+<html lang="en">
+<!--<![endif]-->
+
+  <head>
+  <title>
+    
+    Marian :: MT Marathon 2018 Labs
+    
+  </title>
+  <!-- Meta -->
+  <meta charset="utf-8">
+  <meta http-equiv="X-UA-Compatible" content="IE=edge">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <meta name="description" content="Fast Neural Machine Translation in C++">
+
+  <link href='http://fonts.googleapis.com/css?family=Open+Sans:300italic,400italic,600italic,700italic,800italic,400,300,600,700,800' rel='stylesheet' type='text/css'>
+  <!-- Global CSS -->
+  <link rel="stylesheet" href="/assets/plugins/bootstrap/css/bootstrap.min.css">
+  <!-- Plugins CSS -->
+  <link rel="stylesheet" href="/assets/plugins/font-awesome/css/font-awesome.min.css">
+  <link rel="stylesheet" href="/assets/css/pygments/github.css">
+
+  <!-- Theme CSS -->
+  <link id="theme-style" rel="stylesheet" href="/assets/css/styles.css">
+  <!-- HTML5 shim and Respond.js IE8 support of HTML5 elements and media queries -->
+  <!--[if lt IE 9]>
+    <script src="https://oss.maxcdn.com/html5shiv/3.7.2/html5shiv.min.js"></script>
+    <script src="https://oss.maxcdn.com/respond/1.4.2/respond.min.js"></script>
+  <![endif]-->
+
+  <link rel="stylesheet" href="/assets/plugins/github-fork-ribbon-css/gh-fork-ribbon.css" />
+  <!--[if lt IE 9]>
+    <link rel="stylesheet" href="/assets/plugins/github-fork-ribbon-css/gh-fork-ribbon.ie.css" />
+  <![endif]-->
+
+  
+
+  
+  <!-- Global site tag (gtag.js) - Google Analytics -->
+<script async src="https://www.googletagmanager.com/gtag/js?id=UA-109819276-1"></script>
+<script>
+    window.dataLayer = window.dataLayer || [];
+    function gtag() { dataLayer.push(arguments); }
+    gtag('js', new Date());
+    gtag('config', 'UA-109819276-1');
+</script>
+
+  
+
+</head>
+
+
+  <body class="body-blue">
+    <a class="github-fork-ribbon" href="https://github.com/marian-nmt/marian" title="Fork me on GitHub">Fork me on GitHub</a>
+
+    <div class="page-wrapper">
+
+    <header id="header" class="header">
+  <div class="container">
+    <div class="branding">
+      <h1 class="logo">
+        <a href="/">
+          <span aria-hidden="true" class="icon_documents_alt icon"></span>
+          <span class="text-highlight">Marian</span><span class="text-bold">NMT</span>
+        </a>
+      </h1>
+      <p class="description">Fast Neural Machine Translation in C++</p>
+    </div><!--//branding-->
+
+    <ol class="breadcrumb">
+
+
+ 
+
+ 
+
+ 
+
+ 
+
+ 
+
+ 
+
+ 
+
+ 
+
+ 
+
+ 
+
+ 
+
+ 
+
+ 
+
+ 
+
+ 
+
+ 
+ <li>
+   <a class="page-link" href="/quickstart/">Quick start</a>
+ </li>
+ 
+
+ 
+ <li>
+   <a class="page-link" href="/features/">Features &amp; Benchmarks</a>
+ </li>
+ 
+
+ 
+ <li>
+   <a class="page-link" href="/docs/">Documentation</a>
+ </li>
+ 
+
+ 
+ <li>
+   <a class="page-link" href="/examples/">Examples</a>
+ </li>
+ 
+
+ 
+ <li>
+   <a class="page-link" href="/faq">FAQ</a>
+ </li>
+ 
+
+ 
+ <li>
+   <a class="page-link" href="/publications/">Publications</a>
+ </li>
+ 
+
+</ol>
+
+
+  </div><!--//container-->
+</header><!--//header-->
+
+
+    <div class="doc-wrapper">
+      <div class="container">
+
+        <div id="doc-header" class="doc-header text-center">
+          <h1 class="doc-title">
+            
+            <i class="icon fa fa-cogs }}"></i>
+            
+            MT Marathon 2018 Labs
+          </h1>
+          <div class="meta">
+            <i class="fa fa-clock-o"></i>
+            Last updated: 01 September 2018
+          </div>
+        </div><!--//doc-header-->
+
+        <div class="doc-body">
+          <div class="doc-content">
+            <div class="content-inner">
+
+              <h2 id="introduction">Introduction</h2>
+
+<h3 id="environmental-setup">Environmental setup</h3>
+
+<ol>
+  <li>AWS EC2: follow the official MTM 2018 instructions on how to use your
+voucher and start an instance of an AWS virtual machine, then follow
+installation instructions below or use the <a href="">prepared docker files</a>.</li>
+  <li>Student machines at MTM: on machines equipped with GPUs (<em>u-pl21</em> to
+<em>u-pl37</em>), you need to compile Marian with <a href="/docs/#custom-boost">a newer Boost
+version</a> and disable CPU back-end by adding
+<code class="highlighter-rouge">-DCOMPILE_CPU=off</code> to CMake flags.</li>
+  <li>Private laptop or server: on machines with a UNIX system, CUDA and Boost
+installed, just follow installation instructions below. Add
+<code class="highlighter-rouge">-DCOMPILE_CUDA=off</code> on CPU-only machines with OpenBLAS or MKL installed.</li>
+</ol>
+
+<h3 id="about-marian">About Marian</h3>
+
+<p><strong>Marian</strong> is an efficient Neural Machine Translation framework written in pure
+C++ with minimal dependencies. It has mainly been developed at the Adam
+Mickiewicz University in Poznań (AMU) and at the University of Edinburgh.
+It is currently being deployed in multiple European and commercial projects.</p>
+
+<p>Marian is also a Machine Translation Marathon 2016 project that is celebrating
+its second birthday during the current MTM!</p>
+
+<p>More information:</p>
+<ul>
+  <li><a href="/features">Features &amp; benchmarks</a></li>
+  <li><a href="/docs">Documentation</a></li>
+  <li><a href="/faq">FAQ</a></li>
+  <li><a href="https://groups.google.com/forum/#!forum/marian-nmt">Google discussion group</a></li>
+  <li><a href="http://github.com/marian-nmt/marian-dev/issues">GitHub issues</a></li>
+</ul>
+
+<h2 id="installation">Installation</h2>
+
+<p>There are two repositories that marian can be obtained from:
+<code class="highlighter-rouge">marian-nmt/marian</code> and <code class="highlighter-rouge">marian-nmt/marian-dev</code>.  The former includes the
+latest stable release of Marian and Amun — a fast C++ decoder for shallow
+RNN-based encoder-decoder models and a predestor of Marian.  The latter is our
+main development repository.</p>
+
+<p>As Amun adds extra requirements, we suggest using <code class="highlighter-rouge">marian-dev</code> for this
+tutorial.</p>
+
+<h3 id="requirements">Requirements</h3>
+
+<p>Marian can be compiled on machines with NVIDIA GPU devices and CUDA 8.0+ or on
+CPU-only machines.  The CPU version of Marian is compiled automatically if
+OpenBLAS or Intel MKL (suggested) are found.  Compilation either of GPU or CPU
+back-end can be disabled (details below).</p>
+
+<p>Currently the main dependency of Marian is Boost, which should be already
+installed on your machine.</p>
+
+<h3 id="checkout-and-compilation">Checkout and compilation</h3>
+
+<p>To download the repository and compile Marian, run the following commands:</p>
+
+<div class="highlighter-rouge"><div class="highlight"><pre class="highlight"><code>git clone https://github.com/marian-nmt/marian-dev
+cd marian-dev
+mkdir build
+cd build
+cmake .. -DCMAKE_BUILD_TYPE=Release
+make -j
+</code></pre></div></div>
+
+<p>If everything worked correctly you can display the list of options with:</p>
+
+<div class="highlighter-rouge"><div class="highlight"><pre class="highlight"><code>./marian --help |&amp; less
+</code></pre></div></div>
+
+<p>You should have at least these tools ready to use:</p>
+
+<ul>
+  <li><code class="highlighter-rouge">marian</code> - a tool for training NMT and LM models</li>
+  <li><code class="highlighter-rouge">marian-decoder</code> - a translation tool</li>
+  <li><code class="highlighter-rouge">marian-scorer</code> - a tool for scoring parallel texts and n-best lists</li>
+</ul>
+
+<h3 id="troubleshooting">Troubleshooting</h3>
+
+<ul>
+  <li>Compilation on a CPU-only machine: add flag <code class="highlighter-rouge">-DCOMPILE_CUDA=off</code> to the <code class="highlighter-rouge">cmake</code> command.</li>
+  <li>Skipping compilation of CPU backend: add flag <code class="highlighter-rouge">-DCOMPILE_CPU=off</code> to the <code class="highlighter-rouge">cmake</code> command.</li>
+  <li>Boost issues: see <a href="/docs/#custom-boost">instructions how to compile with custom Boost</a>.</li>
+</ul>
+
+<h3 id="tools">Tools</h3>
+
+<p>We will also need to download a couple of useful scripts for preprocessing,
+splitting into subwords, and getting test files.</p>
+
+<p>Return to the working directory and download the scripts:</p>
+
+<div class="highlighter-rouge"><div class="highlight"><pre class="highlight"><code>cd ../..
+git clone https://github.com/marian-nmt/moses-scripts
+git clone https://github.com/rsennrich/subword-nmt
+git clone https://github.com/mjpost/sacreBLEU -b master
+</code></pre></div></div>
+
+<h2 id="translation">Translation</h2>
+
+<p>In the first part of the tutorial you will use Marian to translate with a
+pre-trained model.  We will use the English-German model trained by the
+University of Edinburgh for their submission to the WMT 2016 shared task on
+machine translation of news.  This is a shallow RNN-based encoder-decoder model
+with attention mechanism.</p>
+
+<p>Models for all language pairs can be found
+<a href="http://data.statmt.org/wmt16_systems/">here</a>.</p>
+
+<h3 id="downloading-the-data">Downloading the data</h3>
+
+<p>First, download the model, vocabularies and data needed for preprocessing:</p>
+
+<div class="highlighter-rouge"><div class="highlight"><pre class="highlight"><code>wget -nv -nc -r -e robots=off -nH -np -R *ens* -R *r2l* -R index.html* \
+    http://data.statmt.org/wmt16_systems/en-de/
+</code></pre></div></div>
+
+<p>We will translate the official WMT test set from 2016 and evaluate its translation
+against human references using BLEU.  The test files can be obtained from sacreBLEU:</p>
+
+<div class="highlighter-rouge"><div class="highlight"><pre class="highlight"><code>mkdir data
+./sacreBLEU/sacrebleu.py -t wmt15 -l en-de --echo src &gt; data/newstest2015.ende.en
+./sacreBLEU/sacrebleu.py -t wmt15 -l en-de --echo ref &gt; data/newstest2015.ende.de
+</code></pre></div></div>
+
+<h3 id="data-preprocessing">Data preprocessing</h3>
+
+<p>We will first preprocess test files for translation. Make sure you understand
+what each command is doing.</p>
+
+<div class="highlighter-rouge"><div class="highlight"><pre class="highlight"><code>cat data/newstest2015.ende.en \
+  | ./moses-scripts/scripts/tokenizer/normalize-punctuation.perl -l en \
+  | ./moses-scripts/scripts/tokenizer/tokenizer.perl -l en -penn \
+  | ./moses-scripts/scripts/recaser/truecase.perl -model wmt16_systems/en-de/truecase-model.en \
+  &gt; data/newstest2015.ende.bpe.en
+</code></pre></div></div>
+
+<h3 id="translation-command">Translation command</h3>
+
+<p>We can now translate the given test set with the command below.  The files
+<code class="highlighter-rouge">vocab.{ro,en}.yml</code> contain the input and output vocabulary, <code class="highlighter-rouge">model.npz</code> is the
+model parameter file in Numpy format.  Run the command and check if you can
+infer the model parameters (number of units in the rnn, number of layers,
+etc.).</p>
+
+<div class="highlighter-rouge"><div class="highlight"><pre class="highlight"><code>cat data/newstest2015.ende.bpe.en \
+  | ./marian-dev/build/marian-decoder --models wmt16_systems/en-de/model.npz \
+    --vocabs wmt16_systems/en-de/vocab.{en,de}.json --dim-vocabs 85000 85000 \
+    --type amun --dim-emb 500 \
+  &gt; data/newstest2015.ende.bpe.out
+</code></pre></div></div>
+
+<p>Alternatively, instead of specifying command-line arguments, you can create a config file:</p>
+
+<div class="highlighter-rouge"><div class="highlight"><pre class="highlight"><code># File: config.ende.yml
+type: amun
+models:
+  - wmt16_systems/en-de/model.npz
+dim-emb: 500
+vocabs:
+  - wmt16_systems/en-de/vocab.en.json
+  - wmt16_systems/en-de/vocab.de.json
+dim-vocabs:
+  - 85000
+  - 85000
+</code></pre></div></div>
+
+<p>And provide it to the decoder:</p>
+
+<div class="highlighter-rouge"><div class="highlight"><pre class="highlight"><code>cat data/newstest2015.ende.bpe.en \
+  | ./marian-dev/build/marian-decoder -c config.ende.yml \
+  &gt; data/newstest2015.ende.bpe.out
+</code></pre></div></div>
+
+<p>Note: as in this example we use a model trained by the Nematus toolkit, model
+architecture parameters (e.g. <code class="highlighter-rouge">--dim-emb</code>, which determines the size of embedding
+vectors) need to be provided as command-line options or in a config file.
+Models trained with Marian already contain all information needed.</p>
+
+<p>For multi-GPU translation, just specify device IDs:</p>
+
+<div class="highlighter-rouge"><div class="highlight"><pre class="highlight"><code>./marian-dev/build/marian-decoder -c config.ende.yml --devices 0 1
+</code></pre></div></div>
+
+<p>And for translation on CPU, set the number of threads:</p>
+
+<div class="highlighter-rouge"><div class="highlight"><pre class="highlight"><code>./marian-dev/build/marian-decoder -c config.ende.yml --cpu-threads 4
+</code></pre></div></div>
+
+<h3 id="evaluation">Evaluation</h3>
+
+<p>The output needs to be post-processed in order to compare it to the reference.
+We fuse subwords back together, detokenize and uppercase the first letter in
+each line:</p>
+
+<div class="highlighter-rouge"><div class="highlight"><pre class="highlight"><code>cat data/newstest2015.ende.bpe.out \
+  | ./moses-scripts/scripts/recaser/detruecase.perl \
+  | ./moses-scripts/scripts/tokenizer/detokenizer.perl -l de \
+  &gt; data/newstest2015.ende.out
+</code></pre></div></div>
+
+<p>After that we can compute the BLEU score for this translation:</p>
+
+<div class="highlighter-rouge"><div class="highlight"><pre class="highlight"><code>cat data/newstest2015.ende.out | ./sacreBLEU/sacrebleu.py data/newstest2015.ende.ref
+</code></pre></div></div>
+
+<h3 id="exercise-a">Exercise A</h3>
+
+<p>Using the description of command-line options and information from the
+doumentation, modify the translation command above to achieve the following:</p>
+<ul>
+  <li>Speed up the translation using batched translation.</li>
+  <li>Try to get better translation quality by manipulating the beam size and
+length normalization factor.</li>
+  <li>Output an n-best list with 5 best translation candidates.</li>
+  <li>Generate word alignments and output attention matrices.</li>
+</ul>
+
+<h2 id="training">Training</h2>
+
+<p>In this part of the tutorial we will use the data and scripts prepared for the
+Romanian-English example from <code class="highlighter-rouge">marian-examples</code>.  First, download the repository
+and helper scripts:</p>
+
+<div class="highlighter-rouge"><div class="highlight"><pre class="highlight"><code>git clone https://github.com/marian-nmt/marian-examples
+cd marian-examples/tools
+make
+cd ../training-basics
+</code></pre></div></div>
+
+<p>Instead of running the provided <code class="highlighter-rouge">./run-me.sh</code> and allowing everything to happen
+magically, we will perform main steps one-by-one.</p>
+
+<h3 id="preparing-training-data">Preparing training data</h3>
+
+<p>The training data for a Romanian-English NMT system can be downloaded and
+preprocessed by executing the following scripts:</p>
+
+<div class="highlighter-rouge"><div class="highlight"><pre class="highlight"><code>./scripts/download-files.sh
+./scripts/preprocess-data.sh
+</code></pre></div></div>
+
+<p>Read carefully the second script.  Note, that the preprocessing of training
+data for NMT usually consists of, but is not limited to, the following steps:</p>
+<ul>
+  <li>Word tokenization</li>
+  <li>Cleaning parallel sentences</li>
+  <li>Truecasing</li>
+  <li>Subword segmentation (<a href="https://arxiv.org/abs/1508.07909">read here about BPEs</a>)</li>
+</ul>
+
+<p>Running these scripts may however take a while, therefore I recommend to skip
+this during the labs and download the prepared data:</p>
+
+<div class="highlighter-rouge"><div class="highlight"><pre class="highlight"><code>wget data.statmt.org/romang/marian-examples/training-basics.data.tgz
+tar zxvf training-basics.data.tgz
+</code></pre></div></div>
+
+<h3 id="training-command">Training command</h3>
+
+<p>We can now train a model using our previously created training data. We use
+<code class="highlighter-rouge">model</code> as our output folder and set the display freqency to 100, i.e. a status
+update will be displayed every 100 mini-batch updates).</p>
+
+<div class="highlighter-rouge"><div class="highlight"><pre class="highlight"><code>mkdir -p model
+
+../../marian-dev/build/marian \
+  --model model/model.npz \
+  --train-set data/corpus.clean.bpe.ro data/corpus.clean.bpe.en \
+  --disp-freq 100
+</code></pre></div></div>
+
+<p>Try to inspect the <code class="highlighter-rouge">--help</code> option to determine what kind of model will be
+trained by default, e.g. what’s the default batch size? or what kind of encoder
+is used? is there regularization?</p>
+
+<p>You can kill the training process with the key shortcut <code class="highlighter-rouge">Ctrl+C</code>.</p>
+
+<p>Let’s try a couple of more advanced options.  First, add <code class="highlighter-rouge">--mini-batch-fit</code>,
+which overrides the specified mini-batch size and automatically choses the
+largest mini-batch for a given sentence length that fits the specified
+workspace memory.  The workspace memory needs to be below the size of your GPU
+device as an extra memory is needed for the model itself.</p>
+
+<div class="highlighter-rouge"><div class="highlight"><pre class="highlight"><code>  --mini-batch-fit --workspace 3000 \
+</code></pre></div></div>
+
+<p>We may add layer normalization, exponential smoothing, and dropouts as
+regularization methods:</p>
+
+<div class="highlighter-rouge"><div class="highlight"><pre class="highlight"><code>  --layer-normalization --exponential-smoothing \
+  --dropout-rnn 0.2 --dropout-src 0.1 --dropout-trg 0.1 \
+</code></pre></div></div>
+
+<p>It is useful to monitor the performance of you model during training on
+held-out data.  We provide validation sets for that using <code class="highlighter-rouge">--valid-sets</code> and
+specify what metrics should be computed with <code class="highlighter-rouge">--valid-metrics</code>.  <code class="highlighter-rouge">--valid-freq</code>
+sets the validation frequency.  What validation metrics do we use in this
+example?  Is that BLEU score calculated on the validation set reliable? How we
+can add data postprocessing here?</p>
+
+<p>Attention: the validation set needs to have been preprocessed in exactly the
+same manner as your training data.</p>
+
+<p>Having the validation set specified we can also use the early stopping
+technique to automatically determine when the training has converged and assume
+it is finished.</p>
+
+<div class="highlighter-rouge"><div class="highlight"><pre class="highlight"><code>  --valid-metrics cross-entropy bleu \
+  --valid-sets data/newsdev2016.bpe.ro data/newsdev2016.bpe.en \
+  --valid-freq 10000 \
+  --beam-size 12 --normalize \
+  --early-stopping 5 \
+</code></pre></div></div>
+
+<p>The model will be saved every 10,000 iterations and model checkpoints that
+performs best according to each validation metrics will be kept.</p>
+
+<div class="highlighter-rouge"><div class="highlight"><pre class="highlight"><code>  --save-freq 10000 --overwrite --keep-best \
+</code></pre></div></div>
+<p>Finally, we specify log files for the training and validation.</p>
+
+<div class="highlighter-rouge"><div class="highlight"><pre class="highlight"><code>  --log model/train.log --valid-log model/valid.log \
+</code></pre></div></div>
+
+<p>Putting this all together gives as the command similar to the one below.</p>
+
+<div class="highlighter-rouge"><div class="highlight"><pre class="highlight"><code>../../marian-dev/build/marian \
+  --model model/model.npz --type s2s \
+  --train-sets data/corpus.bpe.ro data/corpus.bpe.en \
+  --vocabs model/vocab.ro.yml model/vocab.en.yml \
+  --mini-batch-fit --workspace 3000 \
+  --layer-normalization --exponential-smoothing \
+  --dropout-rnn 0.2 --dropout-src 0.1 --dropout-trg 0.1 \
+  --valid-metrics cross-entropy bleu \
+  --valid-sets data/newsdev2016.bpe.ro data/newsdev2016.bpe.en \
+  --valid-freq 10000 \
+  --beam-size 12 --normalize 1 \
+  --early-stopping 5 \
+  --save-freq 10000 --overwrite --keep-best \
+  --log model/train.log --valid-log model/valid.log \
+  --devices 0 1 \
+  --disp-freq 1000 --quiet-translation \
+  --seed 1111
+</code></pre></div></div>
+
+<p>The training process will finish after quite a while, depending on the power of
+your GPUs.  On four GeForce GTX 1080 cards this takes about 10 hours.</p>
+
+<h3 id="model-evaluation">Model evaluation</h3>
+
+<p>We can translate the preprocessed test file using the config file generated
+during training:</p>
+
+<div class="highlighter-rouge"><div class="highlight"><pre class="highlight"><code>cat data/newstest2016.bpe.ro \
+  | ../../marian-dev/build/marian-decoder -c model/model.npz.best-translation.npz.decoder.yml \
+    -d 0 1 -b 12 -n 1 \
+  &gt; data/newstest2016.bpe.out
+</code></pre></div></div>
+
+<p>Remember, that the evaluation should be performed on postprocessed output:</p>
+
+<div class="highlighter-rouge"><div class="highlight"><pre class="highlight"><code>cat data/newstest2016.bpe.out \
+  | sed 's/\@\@ //g' \
+  | ../tools/moses-scripts/scripts/recaser/detruecase.perl \
+  | ../tools/moses-scripts/scripts/tokenizer/detokenizer.perl -l en \
+  &gt; data/newstest2016.out
+cat data/newstest2016.out | ./sacreBLEU/sacrebleu.py data/newstest2016.en
+</code></pre></div></div>
+
+<h3 id="exercise-b">Exercise B</h3>
+
+<p>Using the description of command-line options and information from the
+doumentation, modify the training command above to achieve the following:</p>
+<ul>
+  <li>Train a deep RNN model with 4 layers in the encoder and 4 layers in the decoder.</li>
+  <li>Start training with the learning rate of 0.0002 and decrease it by 20% every
+epoch.</li>
+  <li>Validate your model using BLEU on postprocessed data by adding custom
+validation script.</li>
+</ul>
+
+<h2 id="exercises">Exercises</h2>
+
+<p>Exercises are independent and can be performed in any order. Choose one you
+like the most to start with.</p>
+
+<h3 id="1-transformer">1. Transformer</h3>
+
+<p>Train a transformer model following the example on <a class="github-link" href="https://github.com/marian-nmt/marian-examples/tree/master/transformer" target="_blank">training a transformer-based English-German system</a>.
+Answer the questions:</p>
+<ul>
+  <li>How is the training data preprocessed for source and target language?</li>
+  <li>What is the architecture of the network?</li>
+  <li>What regularization methods are applied?</li>
+  <li>What is the mini-batch size?</li>
+  <li>What learning-rate schedule is used?</li>
+  <li>How many models are trained and how are they combined together?</li>
+</ul>
+
+<p>The preprocessed training data can be downloaded from
+<a href="http://data.statmt.org/romang/marian-examples/transformer.data.tgz">data.statmt.org/romang/marian-examples</a></p>
+
+<h3 id="2-deep-rnn-model">2. Deep RNN model</h3>
+
+<p>Train a deep RNN-based encoder-decoder model following the example on <a class="github-link" href="https://github.com/marian-nmt/marian-examples/tree/master/wmt2017-uedin" target="_blank">reconstructing Edinburgh’s WMT17 English-German system</a>. Answer the same questions as in the first
+exercise.</p>
+
+<p>The preprocessed training data can be downloaded from
+<a href="http://data.statmt.org/romang/marian-examples/transformer.data.tgz">data.statmt.org/romang/marian-examples</a></p>
+
+<h3 id="3-language-models">3. Language models</h3>
+
+<p>Based on the training exercise from Part 2 of this tutorial, train a language
+model.  You may use preprocessed target side sentences as your training data.
+During the training validate your model using perplexity on a development set.
+Use <code class="highlighter-rouge">marian-scorer</code> to score new sentences with the created language model.</p>
+
+<h3 id="4-custom-embeddings">4. Custom embeddings</h3>
+
+<p>Train custom embedding vectors using <a href="http://github.com/dav/word2vec">word2vec</a>
+and use them to initialize embeddings in the NMT model from Part 2 of the
+tutorial.  More information can be found in <a href="/docs/#custom-embeddings">the
+documentaion</a>.</p>
+
+<h3 id="5-multi-source-models">5. Multi-source models</h3>
+
+<p>Train a multi-source system for automatic post-editing.  Such a system takes a
+pair of sentences as an input — a sentence in source language and its
+corresponding output from an unknown SMT system in target language — and
+generates an improved translation.  As training data, you may use <a href="http://data.statmt.org/romang/ape-explore/train.tgz">the
+preprocessed data set of artificial
+triplets</a> created for our
+submissions to WMT APE shared tasks in 2017 and 2018.</p>
+
+<!--### 6. N-best list rescoring-->
+<!--### 7. Sentence weighting-->
+<!--### 8. Word alignments from a transformer model-->
+
+
+
+            </div><!--//content-inner-->
+          </div><!--//doc-content-->
+
+          <div class="doc-sidebar hidden-xs">
+            <nav id="doc-nav"></nav>
+          </div><!--//doc-sidebar-->
+
+        </div><!--//doc-body-->
+
+      </div><!--//container-->
+    </div><!--//doc-wrapper-->
+
+    </div><!--//page-wrapper-->
+
+    <footer id="footer" class="footer text-center">
+  <div class="container">
+    <p>
+     Marian - an efficient Neural Machine Translation framework written in pure C++.</br>
+      Mainly developed at the Adam Mickiewicz University in Poznań and at the University of Edinburgh.
+    </p>
+    <p><a href="https://github.com/marian-nmt/marian">Marian</a> is licensed under the <a href="https://github.com/marian-nmt/marian/LICENSE">MIT license</a>.</p>
+    <p><small class="copyright">Based on the theme PrettyDocs designed by <a href="http://themes.3rdwavemedia.com/" targe="_blank">Xiaoying Riley</a> with modifications.</small></p>
+  </div><!--//container-->
+</footer><!--//footer-->
+
+    <!-- Main Javascript -->
+<script type="text/javascript"> localStorage.clear();</script>
+
+<script type="text/javascript" src="/assets/plugins/jquery-1.12.3.min.js"></script>
+<script type="text/javascript" src="/assets/plugins/bootstrap/js/bootstrap.min.js"></script>
+<script type="text/javascript" src="/assets/plugins/jquery-scrollTo/jquery.scrollTo.min.js"></script>
+<script type="text/javascript" src="/assets/plugins/jquery-match-height/jquery.matchHeight-min.js"></script>
+
+<script src="https://cdn.mathjax.org/mathjax/latest/MathJax.js?config=TeX-AMS-MML_HTMLorMML" type="text/javascript"></script>
+
+<script type="text/javascript" src="/assets/js/main.js"></script>
+<script type="text/javascript" src="/assets/js/toc.js"></script>
+
+
+  </body>
+</html>

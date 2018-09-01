@@ -13,5 +13,7 @@ var searchData=
   ['batchwidth',['batchWidth',['../classmarian_1_1data_1_1SubBatch.html#af7f936fc9f96a1135ce68c07f0b890da',1,'marian::data::SubBatch']]],
   ['batchwords',['batchWords',['../classmarian_1_1data_1_1SubBatch.html#a35a3232497a209161a61c3cd8e9e9952',1,'marian::data::SubBatch']]],
   ['beamsearch',['BeamSearch',['../classmarian_1_1BeamSearch.html',1,'marian']]],
-  ['binaryfunctor',['BinaryFunctor',['../structmarian_1_1functional_1_1BinaryFunctor.html',1,'marian::functional']]]
+  ['beamsearchdecoder',['BeamSearchDecoder',['../classmarian_1_1quicksand_1_1BeamSearchDecoder.html',1,'marian::quicksand']]],
+  ['binaryfunctor',['BinaryFunctor',['../structmarian_1_1functional_1_1BinaryFunctor.html',1,'marian::functional']]],
+  ['bleuvalidator',['BleuValidator',['../classmarian_1_1BleuValidator.html',1,'marian']]]
 ];

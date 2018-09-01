@@ -106,6 +106,8 @@
  
 
  
+
+ 
  <li>
    <a class="page-link" href="/quickstart/">Quick start</a>
  </li>
@@ -160,7 +162,7 @@
           </h1>
           <div class="meta">
             <i class="fa fa-clock-o"></i>
-            Last updated: 17 August 2018
+            Last updated: 30 August 2018
           </div>
         </div><!--//doc-header-->
 
@@ -240,6 +242,10 @@ cd boost_1_67_0
 ./bootstrap.sh
 ./b2 -j16 --prefix=$(pwd) --libdir=$(pwd)/lib64 --layout=system link=static install
 </code></pre></div></div>
+
+<p>If Boost can not be compiled on your machine because an error like this occurs:
+_boost error: “none” is not a known value of feature <optimization>_, you may
+try adding `--ignore-site-config` to the `./b2` command.</optimization></p>
 
 <p>To compile Marian training framework with your custom Boost installation:</p>
 <div class="highlighter-rouge"><div class="highlight"><pre class="highlight"><code>cd /path/to/marian-dev
@@ -433,6 +439,34 @@ strategy, each line of that file contains a real-value weight:</p>
 <p>To use word weighting you should choose <code class="highlighter-rouge">--data-weighting-type word</code>, and each
 line of the weight file should contain as many real-value weights as there are
 words in the corresponding target training sentence.</p>
+
+<h3 id="custom-embeddings">Custom embeddings</h3>
+
+<p>Marian can handle custom embedding vectors trained with
+<a href="https://github.com/dav/word2vec">word2vec</a> or another tool:</p>
+
+<div class="highlighter-rouge"><div class="highlight"><pre class="highlight"><code>./build/marian \
+    -t corpus.{en,de} -v vocab.{en,de} -m model.npz \
+    --embedding-vectors vectors.{en,de} --dim-emb 400
+</code></pre></div></div>
+
+<p>Embedding vectors should be provided in a file in a format similar to the
+word2vec format, with word tokens replaced with words IDs from the relevant
+vocabulary.</p>
+
+<p>Pre-trained vectors need to share the same vocabulary as your training data,
+and ideally should contain vectors for <code class="highlighter-rouge">&lt;unk&gt;</code> and <code class="highlighter-rouge">&lt;/s&gt;</code> tokens. The easiest
+way to achieve this is to prepare the training data for word2vec w.r.t your
+vocabularies using <a class="github-link" href="https://github.com/marian-nmt/marian-dev/tree/master/scripts/embeddings/prepare_corpus.py" target="_blank"><code class="highlighter-rogue">marian-dev/scripts/embeddings/prepare_corpus.py</code></a>. Vectors can be prepared or
+trained w.r.t to vocabulary using <a class="github-link" href="https://github.com/marian-nmt/marian-dev/tree/master/scripts/embeddings/process_word2vec.py" target="_blank"><code class="highlighter-rogue">marian-dev/scripts/embeddings/process_word2vec.py</code></a>.</p>
+
+<p>Other options for managing embedding vectors:</p>
+
+<ul>
+  <li><code class="highlighter-rouge">--embedding-fix-src</code> fixes source embeddings in all encoders</li>
+  <li><code class="highlighter-rouge">--embedding-fix-trg</code> fixes target embeddings in all decoders</li>
+  <li><code class="highlighter-rouge">--embedding-normalization</code> normalizes vector values into [-1,1] range</li>
+</ul>
 
 <h3 id="workspace-memory">Workspace memory</h3>
 

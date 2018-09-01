@@ -1,12 +1,14 @@
 var searchData=
 [
   ['keywords',['keywords',['../namespacemarian_1_1keywords.html',1,'marian']]],
-  ['marian',['marian',['../namespacemarian.html',1,'']]],
+  ['mappedparameters',['MappedParameters',['../classmarian_1_1MappedParameters.html',1,'marian']]],
   ['mask',['mask',['../classmarian_1_1data_1_1SubBatch.html#ab247d3f0cf9cfd721fe34aaf4eb7a762',1,'marian::data::SubBatch']]],
+  ['maximumnodeop',['MaximumNodeOp',['../structmarian_1_1MaximumNodeOp.html',1,'marian']]],
   ['marian_20examples',['Marian examples',['../md_marian_src_examples_README.html',1,'']]],
   ['marian_20tests',['Marian tests',['../md_marian_src_tests_README.html',1,'']]],
   ['meannodeop',['MeanNodeOp',['../structmarian_1_1MeanNodeOp.html',1,'marian']]],
   ['memorypiece',['MemoryPiece',['../classmarian_1_1MemoryPiece.html',1,'marian']]],
+  ['minimumnodeop',['MinimumNodeOp',['../structmarian_1_1MinimumNodeOp.html',1,'marian']]],
   ['minusnodeop',['MinusNodeOp',['../structmarian_1_1MinusNodeOp.html',1,'marian']]],
   ['mlp',['MLP',['../classmarian_1_1mlp_1_1MLP.html',1,'marian::mlp']]],
   ['mlpfactory',['MLPFactory',['../classmarian_1_1mlp_1_1MLPFactory.html',1,'marian::mlp']]],

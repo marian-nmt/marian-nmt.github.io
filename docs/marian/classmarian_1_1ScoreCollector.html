@@ -22,7 +22,7 @@
  <tr style="height: 56px;">
   <td id="projectalign" style="padding-left: 0.5em;">
    <div id="projectname">Marian
-   &#160;<span id="projectnumber">v1.5.0</span>
+   &#160;<span id="projectnumber">v1.6.0</span>
    </div>
    <div id="projectbrief">A C++ GPU-specific Neural Machine Translation</div>
   </td>
@@ -60,13 +60,14 @@ $(function() {
 
 <div id="nav-path" class="navpath">
   <ul>
-<li class="navelem"><a class="el" href="namespacemarian.html">marian</a></li><li class="navelem"><a class="el" href="classmarian_1_1ScoreCollector.html">ScoreCollector</a></li>  </ul>
+<li class="navelem"><b>marian</b></li><li class="navelem"><a class="el" href="classmarian_1_1ScoreCollector.html">ScoreCollector</a></li>  </ul>
 </div>
 </div><!-- top -->
 <div class="header">
   <div class="summary">
 <a href="#pub-methods">Public Member Functions</a> &#124;
 <a href="#pro-types">Protected Types</a> &#124;
+<a href="#pro-methods">Protected Member Functions</a> &#124;
 <a href="#pro-attribs">Protected Attributes</a> &#124;
 <a href="classmarian_1_1ScoreCollector-members.html">List of all members</a>  </div>
   <div class="headertitle">
@@ -85,18 +86,30 @@ Inheritance diagram for marian::ScoreCollector:</div>
 <table class="memberdecls">
 <tr class="heading"><td colspan="2"><h2 class="groupheader"><a name="pub-methods"></a>
 Public Member Functions</h2></td></tr>
-<tr class="memitem:a4bb53e4f472943adc687cff30b11eacf"><td class="memItemLeft" align="right" valign="top"><a id="a4bb53e4f472943adc687cff30b11eacf"></a>
+<tr class="memitem:a74edecbddcec992933915e1b4532a45b"><td class="memItemLeft" align="right" valign="top"><a id="a74edecbddcec992933915e1b4532a45b"></a>
+&#160;</td><td class="memItemRight" valign="bottom"><b>ScoreCollector</b> (const Ptr&lt; <a class="el" href="classmarian_1_1Config.html">Config</a> &gt; &amp;options)</td></tr>
+<tr class="separator:a74edecbddcec992933915e1b4532a45b"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a550ae464e8539062648dd18467477654"><td class="memItemLeft" align="right" valign="top"><a id="a550ae464e8539062648dd18467477654"></a>
 virtual void&#160;</td><td class="memItemRight" valign="bottom"><b>Write</b> (long id, const std::string &amp;message)</td></tr>
-<tr class="separator:a4bb53e4f472943adc687cff30b11eacf"><td class="memSeparator" colspan="2">&#160;</td></tr>
-<tr class="memitem:a6cd0c7b1171d7bd4db97a53b792e858b"><td class="memItemLeft" align="right" valign="top"><a id="a6cd0c7b1171d7bd4db97a53b792e858b"></a>
-virtual void&#160;</td><td class="memItemRight" valign="bottom"><b>Write</b> (long id, float value)</td></tr>
-<tr class="separator:a6cd0c7b1171d7bd4db97a53b792e858b"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="separator:a550ae464e8539062648dd18467477654"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a5f3e58ce14338844b8af611eb1ac342f"><td class="memItemLeft" align="right" valign="top"><a id="a5f3e58ce14338844b8af611eb1ac342f"></a>
+virtual void&#160;</td><td class="memItemRight" valign="bottom"><b>Write</b> (long id, float score, const data::SoftAlignment &amp;align={})</td></tr>
+<tr class="separator:a5f3e58ce14338844b8af611eb1ac342f"><td class="memSeparator" colspan="2">&#160;</td></tr>
 </table><table class="memberdecls">
 <tr class="heading"><td colspan="2"><h2 class="groupheader"><a name="pro-types"></a>
 Protected Types</h2></td></tr>
 <tr class="memitem:a320eb39716b04236baefa51f4e9d5a29"><td class="memItemLeft" align="right" valign="top"><a id="a320eb39716b04236baefa51f4e9d5a29"></a>
 typedef std::map&lt; long, std::string &gt;&#160;</td><td class="memItemRight" valign="bottom"><b>Outputs</b></td></tr>
 <tr class="separator:a320eb39716b04236baefa51f4e9d5a29"><td class="memSeparator" colspan="2">&#160;</td></tr>
+</table><table class="memberdecls">
+<tr class="heading"><td colspan="2"><h2 class="groupheader"><a name="pro-methods"></a>
+Protected Member Functions</h2></td></tr>
+<tr class="memitem:a1e5463708ff632fb5b70aedb7e17c363"><td class="memItemLeft" align="right" valign="top"><a id="a1e5463708ff632fb5b70aedb7e17c363"></a>
+std::string&#160;</td><td class="memItemRight" valign="bottom"><b>getAlignment</b> (const data::SoftAlignment &amp;align)</td></tr>
+<tr class="separator:a1e5463708ff632fb5b70aedb7e17c363"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a328ffd9f823db2c018a6563acbb99e72"><td class="memItemLeft" align="right" valign="top"><a id="a328ffd9f823db2c018a6563acbb99e72"></a>
+float&#160;</td><td class="memItemRight" valign="bottom"><b>getAlignmentThreshold</b> (const std::string &amp;str)</td></tr>
+<tr class="separator:a328ffd9f823db2c018a6563acbb99e72"><td class="memSeparator" colspan="2">&#160;</td></tr>
 </table><table class="memberdecls">
 <tr class="heading"><td colspan="2"><h2 class="groupheader"><a name="pro-attribs"></a>
 Protected Attributes</h2></td></tr>
@@ -112,14 +125,21 @@ boost::mutex&#160;</td><td class="memItemRight" valign="bottom"><b>mutex_</b></t
 <tr class="memitem:afb3b293c00d7e2b48fa65a32ac7461b7"><td class="memItemLeft" align="right" valign="top"><a id="afb3b293c00d7e2b48fa65a32ac7461b7"></a>
 Outputs&#160;</td><td class="memItemRight" valign="bottom"><b>outputs_</b></td></tr>
 <tr class="separator:afb3b293c00d7e2b48fa65a32ac7461b7"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a9d76c3db842b36291fd54cee3f8db887"><td class="memItemLeft" align="right" valign="top"><a id="a9d76c3db842b36291fd54cee3f8db887"></a>
+std::string&#160;</td><td class="memItemRight" valign="bottom"><b>alignment_</b></td></tr>
+<tr class="separator:a9d76c3db842b36291fd54cee3f8db887"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a026b1da9671de53831eeebb383ba1fe2"><td class="memItemLeft" align="right" valign="top"><a id="a026b1da9671de53831eeebb383ba1fe2"></a>
+float&#160;</td><td class="memItemRight" valign="bottom"><b>alignmentThreshold_</b> {0.f}</td></tr>
+<tr class="separator:a026b1da9671de53831eeebb383ba1fe2"><td class="memSeparator" colspan="2">&#160;</td></tr>
 </table>
-<hr/>The documentation for this class was generated from the following file:<ul>
+<hr/>The documentation for this class was generated from the following files:<ul>
 <li>marian/src/rescorer/<a class="el" href="score__collector_8h_source.html">score_collector.h</a></li>
+<li>marian/src/rescorer/score_collector.cpp</li>
 </ul>
 </div><!-- contents -->
 <!-- start footer part -->
 <hr class="footer"/><address class="footer"><small>
-Generated on Tue Jun 26 2018 21:59:37 for Marian by &#160;<a href="http://www.doxygen.org/index.html">
+Generated on Sat Sep 1 2018 21:25:13 for Marian by &#160;<a href="http://www.doxygen.org/index.html">
 <img class="footer" src="doxygen.png" alt="doxygen"/>
 </a> 1.8.13
 </small></address>

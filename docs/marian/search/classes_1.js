@@ -7,5 +7,7 @@ var searchData=
   ['batchgenerator_3c_20corpusbase_20_3e',['BatchGenerator&lt; CorpusBase &gt;',['../classmarian_1_1data_1_1BatchGenerator.html',1,'marian::data']]],
   ['batchstats',['BatchStats',['../classmarian_1_1data_1_1BatchStats.html',1,'marian::data']]],
   ['beamsearch',['BeamSearch',['../classmarian_1_1BeamSearch.html',1,'marian']]],
-  ['binaryfunctor',['BinaryFunctor',['../structmarian_1_1functional_1_1BinaryFunctor.html',1,'marian::functional']]]
+  ['beamsearchdecoder',['BeamSearchDecoder',['../classmarian_1_1quicksand_1_1BeamSearchDecoder.html',1,'marian::quicksand']]],
+  ['binaryfunctor',['BinaryFunctor',['../structmarian_1_1functional_1_1BinaryFunctor.html',1,'marian::functional']]],
+  ['bleuvalidator',['BleuValidator',['../classmarian_1_1BleuValidator.html',1,'marian']]]
 ];

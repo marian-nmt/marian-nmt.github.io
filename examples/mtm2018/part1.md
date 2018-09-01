@@ -5,15 +5,18 @@ permalink: /examples/mtm2018/part1
 icon: fa-cogs
 ---
 
-## About the tutorial
+## Environment setup
 
-The tutorial should work with Marian version 1.2+
-
-<!--### Setting up your machine-->
-
-<!--- AWS EC2-->
-<!--- Machines in labs-->
-<!--- Private laptop/server-->
+1. AWS EC2: follow the official MTM 2018 instructions on how to use your
+   voucher and start an instance of an AWS virtual machine, then follow
+   installation instructions below or use the [prepared docker files]().
+2. Student machines at MTM: on machines equipped with GPUs (_u-pl21_ to
+   _u-pl37_), you need to compile Marian with [a newer
+   Boost](/docs/#custom-boost) and disable CPU back-end by adding
+   `-DUSE_CPU=off` to CMake flags.
+3. Private laptop or server: on machines with a UNIX system, CUDA and Boost
+   installed, just follow installation instructions below. Add
+   `-DCOMPILE_CUDA=off` on CPU-only machines with OpenBLAS or MKL installed.
 
 
 ## About Marian
@@ -26,26 +29,33 @@ It is currently being deployed in multiple European and commercial projects.
 Marian is also a Machine Translation Marathon 2016 project that is celebrating
 its second birthday during the current MTM!
 
+More information:
+- [Features & benchmarks](/features)
+- [Documentation](/docs)
+- [FAQ](/faq)
+- [Google discussion group](https://groups.google.com/forum/#!forum/marian-nmt)
+- [GitHub issues](http://github.com/marian-nmt/marian-dev/issues)
 
 ## Installation
 
-There are two repositories that marian can be obtained from: `marian-nmt/marian`
-and `marian-nmt/marian-dev`.  The former includes Amun --- a fast C++ decoder for
-shallow RNN-based encoder-decoder models and a predestor of Marian --- and the
-latest stable release of Marian.  The latter is our main development
-repository.
+There are two repositories that marian can be obtained from:
+`marian-nmt/marian` and `marian-nmt/marian-dev`.  The former includes the
+latest stable release of Marian and Amun --- a fast C++ decoder for shallow
+RNN-based encoder-decoder models and a predestor of Marian.  The latter is our
+main development repository.
 
-As Amun adds extra requirements, we suggest using `marian-dev` for the purpose
-of this tutorial.
+As Amun adds extra requirements, we suggest using `marian-dev` for this
+tutorial.
 
 ### Requirements
 
 Marian can be compiled on machines with NVIDIA GPU devices and CUDA 8.0+ or on
 CPU-only machines.  The CPU version of Marian is compiled automatically if
-OpenBLAS or Intel MKL (suggested).  Compilation either of GPU or CPU back-end
-can be disabled (details below).
+OpenBLAS or Intel MKL (suggested) are found.  Compilation either of GPU or CPU
+back-end can be disabled (details below).
 
-Currently the main dependency of Marian is Boost.
+Currently the main dependency of Marian is Boost, which should be already
+installed on your machine.
 
 ### Checkout and compilation
 
@@ -77,8 +87,7 @@ You should have at least these tools ready to use:
 - Compilation on a CPU-only machine: add flag `-DCOMPILE_CUDA=off` to the `cmake` command.
 - Skipping compilation of CPU backend: add flag `-DUSE_CPU=off` to the `cmake` command.
 - Boost issues: see [instructions how to compile with custom Boost](/docs/#custom-boost).
-
-For more help please refer to our [documentation](/docs) and [FAQ](/faq).
+- Other resources you may refer to: [documentation](/docs) and [FAQ](/faq).
 
 
 ## Tools and data

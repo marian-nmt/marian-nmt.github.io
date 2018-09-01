@@ -1,9 +1,108 @@
 ---
 layout: docs
-title: MTM2018 Labs - Part 2
-permalink: /examples/mtm2018/part2
+title: MT Marathon 2018 Labs
+permalink: /examples/mtm2018-labs
 icon: fa-cogs
 ---
+
+## Introduction
+
+### Environmental setup
+
+1. AWS EC2: follow the official MTM 2018 instructions on how to use your
+   voucher and start an instance of an AWS virtual machine, then follow
+   installation instructions below or use the [prepared docker files]().
+2. Student machines at MTM: on machines equipped with GPUs (_u-pl21_ to
+   _u-pl37_), you need to compile Marian with [a newer Boost
+   version](/docs/#custom-boost) and disable CPU back-end by adding
+   `-DCOMPILE_CPU=off` to CMake flags.
+3. Private laptop or server: on machines with a UNIX system, CUDA and Boost
+   installed, just follow installation instructions below. Add
+   `-DCOMPILE_CUDA=off` on CPU-only machines with OpenBLAS or MKL installed.
+
+### About Marian
+
+**Marian** is an efficient Neural Machine Translation framework written in pure
+C++ with minimal dependencies. It has mainly been developed at the Adam
+Mickiewicz University in Poznań (AMU) and at the University of Edinburgh.
+It is currently being deployed in multiple European and commercial projects.
+
+Marian is also a Machine Translation Marathon 2016 project that is celebrating
+its second birthday during the current MTM!
+
+More information:
+- [Features & benchmarks](/features)
+- [Documentation](/docs)
+- [FAQ](/faq)
+- [Google discussion group](https://groups.google.com/forum/#!forum/marian-nmt)
+- [GitHub issues](http://github.com/marian-nmt/marian-dev/issues)
+
+## Installation
+
+There are two repositories that marian can be obtained from:
+`marian-nmt/marian` and `marian-nmt/marian-dev`.  The former includes the
+latest stable release of Marian and Amun --- a fast C++ decoder for shallow
+RNN-based encoder-decoder models and a predestor of Marian.  The latter is our
+main development repository.
+
+As Amun adds extra requirements, we suggest using `marian-dev` for this
+tutorial.
+
+### Requirements
+
+Marian can be compiled on machines with NVIDIA GPU devices and CUDA 8.0+ or on
+CPU-only machines.  The CPU version of Marian is compiled automatically if
+OpenBLAS or Intel MKL (suggested) are found.  Compilation either of GPU or CPU
+back-end can be disabled (details below).
+
+Currently the main dependency of Marian is Boost, which should be already
+installed on your machine.
+
+### Checkout and compilation
+
+To download the repository and compile Marian, run the following commands:
+
+```
+git clone https://github.com/marian-nmt/marian-dev
+cd marian-dev
+mkdir build
+cd build
+cmake .. -DCMAKE_BUILD_TYPE=Release
+make -j
+```
+
+If everything worked correctly you can display the list of options with:
+
+```
+./marian --help |& less
+```
+
+You should have at least these tools ready to use:
+
+- `marian` - a tool for training NMT and LM models
+- `marian-decoder` - a translation tool
+- `marian-scorer` - a tool for scoring parallel texts and n-best lists
+
+### Troubleshooting
+
+- Compilation on a CPU-only machine: add flag `-DCOMPILE_CUDA=off` to the `cmake` command.
+- Skipping compilation of CPU backend: add flag `-DCOMPILE_CPU=off` to the `cmake` command.
+- Boost issues: see [instructions how to compile with custom Boost](/docs/#custom-boost).
+
+
+### Tools
+
+We will also need to download a couple of useful scripts for preprocessing,
+splitting into subwords, and getting test files.
+
+Return to the working directory and download the scripts:
+
+```
+cd ../..
+git clone https://github.com/marian-nmt/moses-scripts
+git clone https://github.com/rsennrich/subword-nmt
+git clone https://github.com/mjpost/sacreBLEU -b master
+```
 
 ## Translation
 
@@ -104,7 +203,7 @@ And for translation on CPU, set the number of threads:
 ./marian-dev/build/marian-decoder -c config.ende.yml --cpu-threads 4
 ```
 
-### Data postprocessing and evaluation
+### Evaluation
 
 The output needs to be post-processed in order to compare it to the reference.
 We fuse subwords back together, detokenize and uppercase the first letter in
@@ -128,11 +227,10 @@ cat data/newstest2015.ende.out | ./sacreBLEU/sacrebleu.py data/newstest2015.ende
 Using the description of command-line options and information from the
 doumentation, modify the translation command above to achieve the following:
 - Speed up the translation using batched translation.
-- Get better translation by manipulating the beam size and length normalization
-  factor.
+- Try to get better translation quality by manipulating the beam size and
+  length normalization factor.
 - Output an n-best list with 5 best translation candidates.
-- Generate word alignment and output attention matrices.
-
+- Generate word alignments and output attention matrices.
 
 
 ## Training
@@ -276,7 +374,7 @@ The training process will finish after quite a while, depending on the power of
 your GPUs.  On four GeForce GTX 1080 cards this takes about 10 hours.
 
 
-### Evaluation
+### Model evaluation
 
 We can translate the preprocessed test file using the config file generated
 during training:
@@ -309,8 +407,56 @@ doumentation, modify the training command above to achieve the following:
 - Validate your model using BLEU on postprocessed data by adding custom
   validation script.
 
-- - - -
 
-Back to **[Part 1: Prerequisites](/examples/mtm2018/part1/)**
+## Exercises
 
-Continue with **[Part 3: Exercises](/examples/mtm2018/part3/)**
+Exercises are independent and can be performed in any order. Choose one you
+like the most to start with.
+
+### 1. Transformer
+
+Train a transformer model following the example on {% github_link "training a
+transformer-based English-German system" marian-examples/transformer %}.
+Answer the questions:
+- How is the training data preprocessed for source and target language?
+- What is the architecture of the network?
+- What regularization methods are applied?
+- What is the mini-batch size?
+- What learning-rate schedule is used?
+- How many models are trained and how are they combined together?
+
+### 2. Deep RNN model
+
+Train a deep RNN-based encoder-decoder model following the example on {%
+github_link "reconstructing Edinburgh's WMT17 English-German system"
+marian-examples/wmt2017-uedin %}. Answer the same questions as in the first
+exercise.
+
+### 3. Language models
+
+Based on the training exercise from Part 2 of this tutorial, train a language
+model.  You may use preprocessed target side sentences as your training data.
+During the training validate your model using perplexity on a development set.
+Use `marian-scorer` to score new sentences with the created language model.
+
+### 4. Custom embeddings
+
+Train custom embedding vectors using [word2vec](http://github.com/dav/word2vec)
+and use them to initialize embeddings in the NMT model from Part 2 of the
+tutorial.  More information can be found in [the
+documentaion](/docs/#custom-embeddings).
+
+### 5. Multi-source models
+
+Train a multi-source system for automatic post-editing.  Such a system takes a
+pair of sentences as an input --- a sentence in source language and its
+corresponding output from an unknown SMT system in target language --- and
+generates an improved translation.  As training data, you may use [the
+preprocessed data set of artificial
+triplets](http://data.statmt.org/romang/ape-explore/train.tgz) created for our
+submissions to WMT APE shared tasks in 2017 and 2018.
+
+<!--### 6. N-best list rescoring-->
+<!--### 7. Sentence weighting-->
+<!--### 8. Word alignments from a transformer model-->
+

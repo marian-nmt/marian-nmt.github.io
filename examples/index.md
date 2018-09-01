@@ -42,12 +42,11 @@ menu: 4
 
 ### MT Marathon 2018 Labs
 
-- **[Part 1: Prerequisites](/examples/mtm2018/part1)**: Setting up lab machines,
-  downloading and compiling Marian.
-- **[Part 2: Basics](/examples/mtm2018/part2)**: Translation with a pretrained
-  model, preparing training data, training a basic NMT model.
-- **[Part 3: Exercises](/examples/mtm2018/part3)**: List of exercises covering
-  different features and model architectures available in Marian.
+**[The Machine Translation Marathon 2018 Labs](/examples/mtm2018-labs)** is a
+Marian tutorial that covers topics like downloading and compiling Marian,
+translating with a pretrained model, preparing training data and training a
+basic NMT model, and contains list of exercises introducing different features
+and model architectures available in Marian.
 
 ### MT Marathon 2017 Tutorial
 

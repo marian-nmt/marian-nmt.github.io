@@ -10,8 +10,26 @@ icon: fa-cogs
 ### Environmental setup
 
 1. AWS EC2: follow the official MTM 2018 instructions on how to use your
-   voucher and start an instance of an AWS virtual machine, then follow
-   installation instructions below or use the [prepared docker files]().
+   voucher and start an instance of _p2.xlarge_ using the prepared Marian NMT
+   AMI following the instructions below:
+
+        Go to 'My Account' -> 'Credits'
+          Insert Promo Code, rewrite Captcha and click 'Redeem'
+        Go to 'Services' -> 'EC2'
+          Go to 'Key Pairs' under 'NETWORK & SECURITY' and add your public key
+        Choose the region, e.g. 'EU (Frankfurt)'
+        Go to 'Services' -> 'EC2'
+          Go to 'Limits'
+          Make sure your current limit for p2.xlarge is 1 or more
+          Request limit increase otherwise
+        Go to 'Services' -> 'EC2'
+          Click 'Launch Instance'
+          Choose 'Marian NMT AMI (Ubuntu 16.04 LTS) Version X'
+          Choose p2.xlarge as Instance Type
+          Add 40GBs EBS volume
+          ... continue with default options
+        Connect to the instance
+
 2. Student machines at MTM: on machines equipped with GPUs (_u-pl21_ to
    _u-pl37_), you need to compile Marian with [a newer Boost
    version](/docs/#custom-boost) and disable CPU back-end by adding
@@ -464,4 +482,3 @@ submissions to WMT APE shared tasks in 2017 and 2018.
 <!--### 6. N-best list rescoring-->
 <!--### 7. Sentence weighting-->
 <!--### 8. Word alignments from a transformer model-->
-

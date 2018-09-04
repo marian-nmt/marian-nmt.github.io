@@ -158,7 +158,7 @@
           </h1>
           <div class="meta">
             <i class="fa fa-clock-o"></i>
-            Last updated: 01 September 2018
+            Last updated: 04 September 2018
           </div>
         </div><!--//doc-header-->
 
@@ -171,9 +171,29 @@
 <h3 id="environmental-setup">Environmental setup</h3>
 
 <ol>
-  <li>AWS EC2: follow the official MTM 2018 instructions on how to use your
-voucher and start an instance of an AWS virtual machine, then follow
-installation instructions below or use the <a href="">prepared docker files</a>.</li>
+  <li>
+    <p>AWS EC2: follow the official MTM 2018 instructions on how to use your
+voucher and start an instance of <em>p2.xlarge</em> using the prepared Marian NMT
+AMI following the instructions below:</p>
+
+    <div class="highlighter-rouge"><div class="highlight"><pre class="highlight"><code> Go to 'My Account' -&gt; 'Credits'
+   Insert Promo Code, rewrite Captcha and click 'Redeem'
+ Go to 'Services' -&gt; 'EC2'
+   Go to 'Key Pairs' under 'NETWORK &amp; SECURITY' and add your public key
+ Choose the region, e.g. 'EU (Frankfurt)'
+ Go to 'Services' -&gt; 'EC2'
+   Go to 'Limits'
+   Make sure your current limit for p2.xlarge is 1 or more
+   Request limit increase otherwise
+ Go to 'Services' -&gt; 'EC2'
+   Click 'Launch Instance'
+   Choose 'Marian NMT AMI (Ubuntu 16.04 LTS) Version X'
+   Choose p2.xlarge as Instance Type
+   Add 40GBs EBS volume
+   ... continue with default options
+ Connect to the instance
+</code></pre></div>    </div>
+  </li>
   <li>Student machines at MTM: on machines equipped with GPUs (<em>u-pl21</em> to
 <em>u-pl37</em>), you need to compile Marian with <a href="/docs/#custom-boost">a newer Boost
 version</a> and disable CPU back-end by adding
@@ -609,7 +629,6 @@ submissions to WMT APE shared tasks in 2017 and 2018.</p>
 <!--### 6. N-best list rescoring-->
 <!--### 7. Sentence weighting-->
 <!--### 8. Word alignments from a transformer model-->
-
 
 
             </div><!--//content-inner-->

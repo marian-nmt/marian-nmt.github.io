@@ -9,9 +9,14 @@ icon: fa-cogs
 
 ### Environmental setup
 
-1. AWS EC2: follow the official MTM 2018 instructions on how to use your
-   voucher and start an instance of _p2.xlarge_ using the prepared Marian NMT
-   AMI following the instructions below:
+1. Private laptop or server (if you have access to): on machines with a UNIX
+   system, CUDA and Boost installed, just follow installation instructions
+   below. Add `-DCOMPILE_CUDA=off` on CPU-only machines with OpenBLAS or MKL
+   installed.
+
+2. AWS EC2 (if you have already increased your limit for _p2.xlarge_
+   instances): follow the official MTM 2018 instructions on how to use your
+   voucher and start an instance of _p2.xlarge_ using the prepared Marian AMI:
 
         Go to 'My Account' -> 'Credits'
           Insert Promo Code, rewrite Captcha and click 'Redeem'
@@ -24,19 +29,30 @@ icon: fa-cogs
           Request limit increase otherwise
         Go to 'Services' -> 'EC2'
           Click 'Launch Instance'
-          Choose 'Marian NMT AMI (Ubuntu 16.04 LTS) Version X'
+          Choose 'Marian NMT AMI (Ubuntu 16.04 LTS) Version XYZ'
           Choose p2.xlarge as Instance Type
           Add 40GBs EBS volume
           ... continue with default options
-        Connect to the instance
+        Test connection: `ping <YOUR-INSTANCE-IP>`
+          Update your Security Group settings if it fails
+        Connect to your instance
 
-2. Student machines at MTM: on machines equipped with GPUs (_u-pl21_ to
-   _u-pl37_), you need to compile Marian with [a newer Boost
-   version](/docs/#custom-boost) and disable CPU back-end by adding
-   `-DCOMPILE_CPU=off` to CMake flags.
-3. Private laptop or server: on machines with a UNIX system, CUDA and Boost
-   installed, just follow installation instructions below. Add
-   `-DCOMPILE_CUDA=off` on CPU-only machines with OpenBLAS or MKL installed.
+3. Cluster at UFAL (during the MTM 2018 lab): follow the instructions:
+
+        # Connect to cluster
+        ssh <YOUR-USER>@geri.ms.mff.cuni.cz
+        ssh sol<X>
+        # Request a GPU device
+        qrsh -q gpu-ms.q -l gpu=1,gpu_ram=8G -pty yes bash
+        # Add CUDA paths to your ~/.bashrc
+        cp ~/.bashrc ~/.bashrc.bac
+        echo -e 'export CUDA_HOME=/opt/cuda/9.2 \n
+            export PATH=$PATH:/opt/cuda/9.2/bin \n
+            export LD_LIBRARY_PATH=$LD_LIBRARY_PATH:/opt/cuda/9.2/lib64 \n'
+            >> ~/.bashrc
+        # Refresh paths
+        . ~/.bashrc
+        # Continue with the tutorial
 
 ### About Marian
 
@@ -303,7 +319,7 @@ mkdir -p model
 
 ../../marian-dev/build/marian \
   --model model/model.npz \
-  --train-set data/corpus.clean.bpe.ro data/corpus.clean.bpe.en \
+  --train-set data/corpus.bpe.ro data/corpus.bpe.en \
   --disp-freq 100
 ```
 
@@ -331,15 +347,17 @@ regularization methods:
   --dropout-rnn 0.2 --dropout-src 0.1 --dropout-trg 0.1 \
 ```
 
-It is useful to monitor the performance of you model during training on
+It is useful to monitor the performance of your model during training on
 held-out data.  We provide validation sets for that using `--valid-sets` and
 specify what metrics should be computed with `--valid-metrics`.  `--valid-freq`
-sets the validation frequency.  What validation metrics do we use in this
-example?  Is that BLEU score calculated on the validation set reliable? How we
-can add data postprocessing here?
+sets the validation frequency.
 
 Attention: the validation set needs to have been preprocessed in exactly the
 same manner as your training data.
+
+What validation metrics do we use in the example below?  Is that BLEU score
+calculated on the validation set reliable? How we can add data postprocessing
+here?
 
 Having the validation set specified we can also use the early stopping
 technique to automatically determine when the training has converged and assume

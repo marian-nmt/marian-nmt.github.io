@@ -177,7 +177,7 @@ cat data/newstest2015.ende.en \
   | ./moses-scripts/scripts/tokenizer/normalize-punctuation.perl -l en \
   | ./moses-scripts/scripts/tokenizer/tokenizer.perl -l en -penn \
   | ./moses-scripts/scripts/recaser/truecase.perl -model wmt16_systems/en-de/truecase-model.en \
-  | ./subword-nmt/subword_nmt/apply_bpe.py -c wmt16_systems/en-de/en-de.bpe \
+  | ./subword-nmt/subword_nmt/apply_bpe.py -c wmt16_systems/en-de/ende.bpe
   > data/newstest2015.ende.bpe.en
 ```
 
@@ -246,6 +246,7 @@ each line:
 
 ```
 cat data/newstest2015.ende.bpe.out \
+  | sed 's/@@ //g' \
   | ./moses-scripts/scripts/recaser/detruecase.perl \
   | ./moses-scripts/scripts/tokenizer/detokenizer.perl -l de \
   > data/newstest2015.ende.out

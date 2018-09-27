@@ -594,7 +594,7 @@ A cross-entropy score for each sentence pair is returned by default.
 N-best lists can be scored using the following command:
 
     ./build/marian-scorer -m model.npz -v vocab.{en,de} \
-        -t file.en.txt file.de.nbest --n-best --n-best-features F0
+        -t file.en.txt file.de.nbest --n-best --n-best-feature F0
 
 which add a new score into the n-best list under the feature named _F0_.
 

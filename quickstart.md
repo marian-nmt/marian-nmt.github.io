@@ -29,6 +29,8 @@ from source.
  * Boost 1.54
  * CUDA 7.5
 
+Please note that CUDA 10.0+ require CMake 3.12.2+ due to some bugs in earlier versions.
+
 ### CPU version
 
 The CPU-only version will automatically be compiled if CUDA cannot be detected by CMake.

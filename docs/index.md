@@ -341,7 +341,7 @@ memory if required and potentially exceed available memory, resulting in a
 crash. Workspace memory is always rounded to multiples of 512 MB.
 
 `--mini-batch-fit` overrides the specified mini-batch size and automatically
-choses the largest mini-batch for a given sentence length that fits the
+chooses the largest mini-batch for a given sentence length that fits the
 specified memory. When `--mini-batch-fit` is set, memory requirements are
 guaranteed to fit into the specified workspace. Choosing a too small workspace
 will result in small mini-batches which can prohibit learning.
@@ -428,7 +428,7 @@ use common vocabularies:
         --weights 0.6 0.2 0.2 \
         --vocabs vocab.en vocab.ro < input.txt
 
-Weights are optional and set to 1.0 by default if ommitted.
+Weights are optional and set to 1.0 by default if omitted.
 
 
 

@@ -72,7 +72,7 @@ after running `cmake ..` first.
 
 ### Static compilation
 
-Marian can be built statically enabling `USE_STATIC_LIBS` flag:
+Marian will be compiled statically if the flag `USE_STATIC_LIBS` is set:
 
     cd build
     cmake .. -DUSE_STATIC_LIBS=on
@@ -485,6 +485,16 @@ Basic usage:
 
 
 
+### N-best lists
+
+To generate n-best list with, say 10, best translations for each input
+sentence, add `--n-best` and `--beam-size `10` to the list of command-line
+arguments:
+
+    ./build/marian-decoder -m model.npz -v vocab.en vocab.ro --beam-size 10 --n-best < input.txt
+
+
+
 ### Ensembles
 
 Models of **different** types and architectures can be ensembled as long as they
@@ -534,23 +544,6 @@ Google Transformer | 201.9s | 19.2s |
 
 
 
-### Web server
-
-The `marian-server` command starts a web-socket server providing CPU and GPU
-translation service that can be requested by a client program written in Python
-or any other programming language.  The server uses the same command-line
-options as `marian-decoder`.  The only addition is `--port` option, which
-specifies the port number:
-
-    ./build/marian-server --port 8080 -m model.npz -v vocab.en vocab.ro
-
-An example client written in Python is {% github_link
-marian-dev/scripts/server/client_example.py %}:
-
-    ./scripts/server/client_example.py -p 8080 < input.txt
-
-
-
 ### Attention output
 
 `marian-decoder` and `marian-scorer` can produce attention output or word
@@ -585,10 +578,26 @@ jetzt weiß jeder ||| 0-0 1-2 2-1 2-3 3-2 3-3
 #### Word alignments from Transformer
 
 The transformer has basically 6x8 different alignment matrices, and in theory
-none of these has to be very useful for word alignment purposes.
-<!--We recommend trying training model with guided alignments first-->
-<!--(`--guided-alignment`) so that the model can learn word alignments in one of-->
-<!--its heads.-->
+none of these has to be very useful for word alignment purposes.  We recommend
+training model with guided alignments first (`--guided-alignment`) so that the
+model can learn word alignments in one of its heads.
+
+
+
+### Web server
+
+The `marian-server` command starts a web-socket server providing CPU and GPU
+translation service that can be requested by a client program written in Python
+or any other programming language.  The server uses the same command-line
+options as `marian-decoder`.  The only addition is `--port` option, which
+specifies the port number:
+
+    ./build/marian-server --port 8080 -m model.npz -v vocab.en vocab.ro
+
+An example client written in Python is {% github_link
+marian-dev/scripts/server/client_example.py %}:
+
+    ./scripts/server/client_example.py -p 8080 < input.txt
 
 
 
@@ -628,15 +637,16 @@ Some models released by Edinburgh might require setting other parameters as
 well, for instance `--dim-emb 500`.
 
 We do not recommend training models of type `nematus` with Marian. It is much
-more effective to train models of type `s2s`, which provide the same model
-architecture except layer normalization, more features, and faster training.
+more efficient to train `s2s` models, which provide the same model architecture
+(except layer normalization), more features, and faster training.
 
 
 
 ### Amun
 
-Amun is a translation tool for specific models of `amun` and `nematus` model
-types. Translation can be performed on GPU or CPU or both.
+Amun is a translation tool for `amun` and `nematus` model types only and is now
+available from the separate repository: {% github_link amun %}.  Translation
+with Amun can be performed on GPU or CPU or both.
 
 Basic usage:
 
@@ -656,7 +666,7 @@ A cross-entropy score for each sentence pair is returned by default.
 
 
 
-### N-best lists
+### Scoring n-best lists
 
 N-best lists can be scored using the following command:
 
@@ -664,13 +674,6 @@ N-best lists can be scored using the following command:
         -t file.en.txt file.de.nbest --n-best --n-best-feature F0
 
 which add a new score into the n-best list under the feature named _F0_.
-
-
-
-### Summarized scores
-
-The scorer can report summarized score (cross-entropy or perplexity) for an
-entire test set with option `--summary`.
 
 
 
@@ -684,6 +687,13 @@ pair of sentences:
 
 The feature works out-of-the-box for RNN models, while Transformer models need
 to be trained with guided alignments.
+
+
+
+### Summarized scores
+
+The scorer can report summarized score (cross-entropy or perplexity) for an
+entire test set with option `--summary`.
 
 
 

@@ -37,16 +37,14 @@ Click on the tool name above for a list of command line options.
   [Nematus](https://github.com/EdinburghNLP/nematus) models ([Senrich et al.,
   2017](https://arxiv.org/abs/1703.04357)).
 - `transformer`: A model originally proposed by Google [(Vaswani et al.,
-  2017)](https://arxiv.org/abs/1706.03762) based solely on attention
-  mechanisms.
+  2017)](https://arxiv.org/abs/1706.03762) based solely on attention mechanisms.
 - `multi-s2s`: As `s2s`, but uses two or more encoders allowing multi-source
   neural machine translation.
 - `multi-transformer`: As `transformer`, but uses multiple encoders.
-- `amun`: A model equivalent to Nematus models unless layer normalization is used. Can
-  be decoded with Amun as _nematus_ model type.
-- `nematus`: A model equivalent to deep RNN-based encoder-decoder models developed by
-  the Edinburgh MT group for WMT 2017 using Nematus toolkit. The only model
-  type that supports models trained with the Nematus-style layer normalization.
+- `amun`: A model equivalent to Nematus models unless layer normalization is
+  used. Can be decoded with Amun as _nematus_ model type.
+- `nematus`: A model type developed for decoding deep RNN-based encoder-decoder
+  models created by the Edinburgh MT group for WMT 2017 using Nematus toolkit.
   Can be decoded with Amun as _nematus2_ model type.
 - `lm`: An RNN language model.
 - `lm-transformer`: An transformer-based language model.
@@ -67,8 +65,8 @@ The project is a standard CMake out-of-source build:
     cmake ..
     make -j
 
-If run for the first time, this will also download {% github_link marian-dev %}
---- the training framework for Marian.
+If run for the first time, this will also download {% github_link
+marian-examples %} --- the repository with Marian examples.
 
 ### Custom Boost
 
@@ -110,17 +108,17 @@ make -j16
 
 ### CPU version
 
-Marian CPU version requires [Intel MKL](https://software.intel.com/en-us/mkl)
-or [OpenBLAS](https://www.openblas.net/). Both are free, but MKL is not
+Marian CPU version requires [Intel MKL](https://software.intel.com/en-us/mkl) or
+[OpenBLAS](https://www.openblas.net/). Both are free, but MKL is not
 open-sourced. Intel MKL is strongly recommended as it is faster.
 
 
 ## Training
 
-For training NMT models, you want to use `marian` command.
-Assuming `corpus.en` and `corpus.ro` are corresponding and preprocessed files
-of a English-Romanian parallel corpus, the following command will create a
-Nematus-compatible neural machine translation model:
+For training NMT models, you want to use `marian` command.  Assuming `corpus.en`
+and `corpus.ro` are corresponding and preprocessed files of a English-Romanian
+parallel corpus, the following command will create a Nematus-compatible neural
+machine translation model:
 
     ./build/marian \
         --train-sets corpus.en corpus.ro \
@@ -155,21 +153,62 @@ want to use for training (this also works with most other binaries) as
 `--devices 0 1 2 3` for training on four GPUs. There is no automatic detection
 of GPUs for now.
 
-By default, this will use asynchronous SGD (or rather ADAM). For the deeper models
-and the transformer model, we found async SGD to be unreliable and you may want
-to use a synchronous SGD variant by setting `--sync-sgd`.
+By default, this will use asynchronous SGD (or rather ADAM). For the deeper
+models and the transformer model, we found async SGD to be unreliable and you
+may want to use a synchronous SGD variant by setting `--sync-sgd`.
 
-For asynchronous SGD, the mini-batch size is used locally, i.e. `--mini-batch 64`
-means 64 sentences per GPU worker.
+For asynchronous SGD, the mini-batch size is used locally, i.e. `--mini-batch
+64` means 64 sentences per GPU worker.
 
 For synchronous SGD, the mini-batch size is used globally and will be divided
 across the number of workers. This means that for synchronous SGD the effective
 mini-batch can be set N times larger for N GPUs. A mini-batch size of
 `--mini-batch 256` will mean a mini-batch of 64 per worker if four GPUs are
 used. This choice makes sense when you realize that synchronous SGD is
-essentially working like a single GPU training process with N times more
-memory. Larger mini-batches in a synchronous setting result in quite stable
-training.
+essentially working like a single GPU training process with N times more memory.
+Larger mini-batches in a synchronous setting result in quite stable training.
+
+
+
+### Workspace memory
+
+The choice of workspace memory, mini-batch size and max-length is quite involved
+and depends on the type of model, the available GPU memory, the number of GPUs,
+a number of other parameters like the chosen optimization algorithm, and the
+average or maximum sentence length in your training corpus (which you should
+know!).
+
+The option `--workspace` sets the size of the memory available for the forward
+and backward step of the training procedure. This does not include model size
+and optimizer parameters that are allocated outsize workspace. Hence you cannot
+allocate all GPU memory to workspace. If you are not happy with default values
+this is a trial and error process.
+
+Setting `--mini-batch 64 --max-length 100` will generate batches that contain
+always 64 sentences (or less if the corpus is smaller) of up to a length of 100
+tokens. Sentences longer than that are filtered out. Marian will grow workspace
+memory if required and potentially exceed available memory, resulting in a
+crash. Workspace memory is always rounded to multiples of 512 MB.
+
+`--mini-batch-fit` overrides the specified mini-batch size and automatically
+chooses the largest mini-batch for a given sentence length that fits the
+specified memory. When `--mini-batch-fit` is set, memory requirements are
+guaranteed to fit into the specified workspace. Choosing a too small workspace
+will result in small mini-batches which can prohibit learning.
+
+#### My rules of thumb
+
+For shallow models I usually set the working memory to values between 3500 and
+6000 (MB), e.g.  `--workspace 5500` and then use `--mini-batch-fit` which
+automatically tries to make the best use of the specified memory size,
+mini-batch size and sentence length.
+
+For very deep models, I first set all other parameters like `--max-length 100`,
+model type, depth etc.  Next I use `--mini-batch-fit` and try to max out
+`--workspace` until I get a crash due to insufficient memory. I then revert to
+the last workspace size that did not crash. Since setting `--mini-batch-fit`
+guarantees that memory will not grow during training due to batch-size this
+should result in a stable training run and maximal batch size.
 
 
 
@@ -182,11 +221,11 @@ set every 10,000 iterations.  You can change the validation frequency to, say
 5000, with `--valid-freq 5000` and the display frequency to 500 with
 `--disp-freq 500`.
 
-**Attention:** the validation set needs to have been preprocessed in exactly
-the same manner as your training data.
+**Attention:** the validation set needs to have been preprocessed in exactly the
+same manner as your training data.
 
-A minimum example of how to validate the model using cross-entropy and
-BLEU score:
+A minimum example of how to validate the model using cross-entropy and BLEU
+score:
 
     ./build/marian \
         --train-sets corpus.en corpus.ro \
@@ -206,6 +245,7 @@ score, for example:
 ./moses-scripts/scripts/generic/multi-bleu-detok.perl file.ref < file.out 2>/dev/null \
     | sed -r 's/BLEU = ([0-9.]+),.*/\1/'
 ```
+
 
 
 ### Early stopping
@@ -317,48 +357,6 @@ Other options for managing embedding vectors:
 - `--embedding-fix-src` fixes source embeddings in all encoders
 - `--embedding-fix-trg` fixes target embeddings in all decoders
 - `--embedding-normalization` normalizes vector values into [-1,1] range
-
-
-
-### Workspace memory
-
-The choice of workspace memory, mini-batch size and max-length is quite
-involved and depends on the type of model, the available GPU memory, the number
-of GPUs, a number of other parameters like the chosen optimization algorithm,
-and the average or maximum sentence length in your training corpus (which you
-should know!).
-
-The options `--workspace 4000` sets the size of the memory available for the
-forward and backward step of the training procedure. This does not include
-model size and optimizer parameters that are allocated outsize workspace. Hence
-you cannot allocate all GPU memory to workspace. If you are not happy with
-default values this is a trial and error process.
-
-Setting `--mini-batch 64 --max-length 100` will generate batches that contain
-always 64 sentences (or less if the corpus is smaller) of up to a length of 100
-tokens. Sentences longer than that are filtered out. Marian will grow workspace
-memory if required and potentially exceed available memory, resulting in a
-crash. Workspace memory is always rounded to multiples of 512 MB.
-
-`--mini-batch-fit` overrides the specified mini-batch size and automatically
-chooses the largest mini-batch for a given sentence length that fits the
-specified memory. When `--mini-batch-fit` is set, memory requirements are
-guaranteed to fit into the specified workspace. Choosing a too small workspace
-will result in small mini-batches which can prohibit learning.
-
-#### My rules of thumb
-
-For shallow models I usually set the working memory to values between 3500 and
-6000 (MB), e.g. `--workspace 5500` and then use `--mini-batch-fit` which
-automatically tries to make the best use of the specified memory size,
-mini-batch size and sentence length.
-
-For very deep models, I first set all other parameters like `--max-length 100`,
-model type, depth etc.  Next I use `--mini-batch-fit` and try to max out
-`--workspace` until I get a crash due to insufficient memory. I then revert to
-the last workspace size that did not crash. Since setting `--mini-batch-fit`
-guarantees that memory will not grow during training due to batch-size this
-should result in a stable training run and maximal batch size.
 
 
 

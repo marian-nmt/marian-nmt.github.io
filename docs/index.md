@@ -65,21 +65,18 @@ The project is a standard CMake out-of-source build:
     cmake ..
     make -j
 
-If run for the first time, this will also download {% github_link
-marian-examples %} --- the repository with Marian examples.
-
+The complete list of compilation options in the form of CMake flags can be
+obtained by running `cmake -LH` or `cmake -LAH` from the `build` directory
+after running `cmake ..` first.
 
 
 ### Static compilation
 
-Marian can be built statically enabling `USE_STATIC_LIBS` CMake flag:
+Marian can be built statically enabling `USE_STATIC_LIBS` flag:
 
     cd build
     cmake .. -DUSE_STATIC_LIBS=on
     make -j
-
-The complete list of CMake flags can be obtained running `cmake -LH` or `cmake
--LAH` from the `build` directory after running `cmake ..` first.
 
 
 
@@ -129,11 +126,12 @@ open-sourced. Intel MKL is strongly recommended as it is faster.
 
 
 
-### SentencePiece compilation
+### SentencePiece
 
 Compilation with SentencePiece that is built-it in Marian v1.6.2+ can be
-enabled by setting `-DUSE_SENTENCEPIECE=on` to CMake flags and requires the
-Protobuf library.  On Ubuntu, you would need to install couple of packages:
+enabled by adding `-DUSE_SENTENCEPIECE=on` to the CMake command and requires
+the Protobuf library.  On Ubuntu, you would need to install a couple of
+packages:
 
     # Ubuntu 14.04 LTS (Trusty Tahr):
     sudo apt-get install libprotobuf8 protobuf-compiler libprotobuf-dev
@@ -155,7 +153,7 @@ You may also compile Protobuf from source. For Ubuntu 16.04 LTS, version 2.6.1
     make -j
     make install
 
-and set the following CMake variables in Marian compilation:
+and set the following CMake flags in Marian compilation:
 
     mkdir build
     cd build
@@ -318,9 +316,7 @@ score, for example:
 - `bleu-detok` - computes BLEU score on postprocessed validation sets. Requires
   SentencePiece and Marian v1.6.2+.
 
-
-
-### Early stopping
+#### Early stopping
 
 Early stopping is a common technique for deciding when to stop training the
 model based on a heuristic involving a validation set.
@@ -538,7 +534,7 @@ Google Transformer | 201.9s | 19.2s |
 
 
 
-### Marian web server
+### Web server
 
 The `marian-server` command starts a web-socket server providing CPU and GPU
 translation service that can be requested by a client program written in Python
@@ -673,9 +669,21 @@ which add a new score into the n-best list under the feature named _F0_.
 
 ### Summarized scores
 
-The scorer can be also used to summarize scores (option `--summary`). It can
-calculate cross-entropy and perplexity for a whole test set and report it at
-the end.
+The scorer can report summarized score (cross-entropy or perplexity) for an
+entire test set with option `--summary`.
+
+
+
+### Word aligner
+
+The scorer can be used as a word aligner that generates word alignments for a
+pair of sentences:
+
+    ./build/marian-scorer -m model.npz -v vocab.{en,de} \
+        -t file.en.txt file.de.txt --alignment
+
+The feature works out-of-the-box for RNN models, while Transformer models need
+to be trained with guided alignments.
 
 
 

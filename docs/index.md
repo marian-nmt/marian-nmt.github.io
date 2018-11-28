@@ -68,6 +68,8 @@ The project is a standard CMake out-of-source build:
 If run for the first time, this will also download {% github_link
 marian-examples %} --- the repository with Marian examples.
 
+
+
 ### Custom Boost
 
 Download, compile and install Boost:
@@ -94,23 +96,68 @@ make -j16
 
 Tested on Ubuntu 16.04.3 LTS.
 
+
+
 ### Non-default CUDA
 
 Specify the path to your CUDA root directory via CMake:
+
 ```
 cd /path/to/marian-dev
 mkdir build
 cd build
 cmake .. -DCUDA_TOOLKIT_ROOT_DIR=/usr/local/cuda-9.1
 make -j16
-
 ```
+
+
 
 ### CPU version
 
 Marian CPU version requires [Intel MKL](https://software.intel.com/en-us/mkl) or
 [OpenBLAS](https://www.openblas.net/). Both are free, but MKL is not
 open-sourced. Intel MKL is strongly recommended as it is faster.
+
+
+
+### SentencePiece compilation
+
+Compilation with SentencePiece that is built-it in Marian v1.6.2+ can be
+enabled by setting `-DUSE_SENTENCEPIECE=on` to CMake flags and requires the
+Protobuf library.  On Ubuntu, you would need to install couple of packages:
+
+    # Ubuntu 14.04 LTS (Trusty Tahr):
+    sudo apt-get install libprotobuf8 protobuf-compiler libprotobuf-dev
+
+    # Ubuntu 16.04 LTS (Xenial Xerus):
+    sudo apt-get install libprotobuf9v5 protobuf-compiler libprotobuf-dev
+
+    # Ubuntu 17.10 (Artful Aardvark) and Later:
+    sudo apt-get install libprotobuf10 protobuf-compiler libprotobuf-dev
+
+You may also compile Protobuf from source. For Ubuntu 16.04 LTS, version 2.6.1
+(or possibly newer) works:
+
+    wget https://github.com/protocolbuffers/protobuf/releases/download/v2.6.1/protobuf-cpp-2.6.1.zip
+    unzip protobuf-cpp-2.6.1.zip
+    cd protobuf-2.6.1
+    ./autogen.sh
+    ./configure --prefix $(pwd)
+    make -j
+    make install
+
+and set the following CMake variables in Marian compilation:
+
+    mkdir build
+    cd build
+    cmake .. -DUSE_SENTENCEPIECE=on \
+        -DPROTOBUF_LIBRARY=/path/to/protobuf-2.6.1/lib/libprotobuf.so \
+        -DPROTOBUF_INCLUDE_DIR=/path/to/protobuf-2.6.1/include \
+        -DPROTOBUF_PROTOC_EXECUTABLE=/path/to/protobuf-2.6.1/bin/protoc
+
+For more details see the documentation in the SentencePiece repo:
+https://github.com/marian-nmt/sentencepiece#c-from-source
+
 
 
 ## Training

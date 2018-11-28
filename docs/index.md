@@ -70,7 +70,13 @@ marian-examples %} --- the repository with Marian examples.
 
 
 
-### CMake flags
+### Static compilation
+
+Marian can be built statically enabling `USE_STATIC_LIBS` CMake flag:
+
+    cd build
+    cmake .. -DUSE_STATIC_LIBS=on
+    make -j
 
 The complete list of CMake flags can be obtained running `cmake -LH` or `cmake
 -LAH` from the `build` directory after running `cmake ..` first.
@@ -80,26 +86,24 @@ The complete list of CMake flags can be obtained running `cmake -LH` or `cmake
 ### Custom Boost
 
 Download, compile and install Boost:
-```
-wget https://dl.bintray.com/boostorg/release/1.67.0/source/boost_1_67_0.tar.gz
-tar zxvf boost_1_67_0.tar.gz
-cd boost_1_67_0
-./bootstrap.sh
-./b2 -j16 --prefix=$(pwd) --libdir=$(pwd)/lib64 --layout=system link=static install
-```
+
+    wget https://dl.bintray.com/boostorg/release/1.67.0/source/boost_1_67_0.tar.gz
+    tar zxvf boost_1_67_0.tar.gz
+    cd boost_1_67_0
+    ./bootstrap.sh
+    ./b2 -j16 --prefix=$(pwd) --libdir=$(pwd)/lib64 --layout=system link=static install
 
 If Boost can not be compiled on your machine because an error like this occurs:
 _boost error: "none" is not a known value of feature <optimization>_, you may
 try adding `--ignore-site-config` to the `./b2` command.
 
 To compile Marian training framework with your custom Boost installation:
-```
-cd /path/to/marian-dev
-mkdir build
-cd build
-cmake .. -DBOOST_ROOT=/path/to/boost_1_67_0
-make -j16
-```
+
+    cd /path/to/marian-dev
+    mkdir build
+    cd build
+    cmake .. -DBOOST_ROOT=/path/to/boost_1_67_0
+    make -j16
 
 Tested on Ubuntu 16.04.3 LTS.
 
@@ -109,13 +113,11 @@ Tested on Ubuntu 16.04.3 LTS.
 
 Specify the path to your CUDA root directory via CMake:
 
-```
-cd /path/to/marian-dev
-mkdir build
-cd build
-cmake .. -DCUDA_TOOLKIT_ROOT_DIR=/usr/local/cuda-9.1
-make -j16
-```
+    cd /path/to/marian-dev
+    mkdir build
+    cd build
+    cmake .. -DCUDA_TOOLKIT_ROOT_DIR=/usr/local/cuda-9.1
+    make -j16
 
 
 

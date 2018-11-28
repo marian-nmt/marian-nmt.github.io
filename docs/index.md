@@ -70,6 +70,13 @@ marian-examples %} --- the repository with Marian examples.
 
 
 
+### CMake flags
+
+The complete list of CMake flags can be obtained running `cmake -LH` or `cmake
+-LAH` from the `build` directory after running `cmake ..` first.
+
+
+
 ### Custom Boost
 
 Download, compile and install Boost:

@@ -94,7 +94,7 @@ Download, compile and install Boost:
     ./b2 -j16 --prefix=$(pwd) --libdir=$(pwd)/lib64 --layout=system link=static install
 
 If Boost can not be compiled on your machine because an error like this occurs:
-_boost error: "none" is not a known value of feature <optimization>_, you may
+_boost error "none" is not a known value of feature <optimization\>_, you may
 try adding `--ignore-site-config` to the `./b2` command.
 
 To compile Marian training framework with your custom Boost installation:

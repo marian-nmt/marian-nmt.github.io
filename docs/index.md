@@ -246,6 +246,22 @@ score, for example:
     | sed -r 's/BLEU = ([0-9.]+),.*/\1/'
 ```
 
+#### Metrics
+
+- `cross-entropy` - computes the sentence-wise normalized cross-entropy score.
+- `ce-mean-words` - computes the mean word cross-entropy score.
+- `valid-script` - executes the script specified with `--valid-script-path`.
+  The script is expected to return a score as a floating-point number.
+- `translation` - executes the script specified with `--valid-script-path`
+  passing the name of the file with translation of the source validation set as
+  the first argument (e.g. `$1` in Bash script, `sys.argv[1]` in Python, etc.).
+  The script is expected to return a score as a floating-point number.
+- `bleu` - computes BLEU score on raw validation sets. Those are usually
+  tokenized and BPE-segmented, so the score is overestimated, and should never
+  be used to report your BLEU scores in a research paper.
+- `bleu-detok` - computes BLEU score on postprocessed validation sets. Requires
+  SentencePiece and Marian v1.6.2+.
+
 
 
 ### Early stopping
@@ -258,6 +274,7 @@ By default we use early stopping with patience of 10, i.e. `--early-stopping
 `--valid-metrics` did not improve (stalled) for 10 consecutive validation
 steps. Usually this will signal convergence or --- if the scores get worse with
 later validation steps --- potential overfitting.
+
 
 
 ### Dropouts

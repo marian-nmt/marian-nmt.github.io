@@ -329,23 +329,33 @@ later validation steps --- potential overfitting.
 
 
 
-### Dropouts
+### Regularization
+
+Marian has several regularization techniques implemented that help to prevent
+model overfitting, such as dropouts ([Gal and Ghahramani,
+2016](https://arxiv.org/abs/1512.05287)), label smoothing ([Vaswani et al.
+2017](https://arxiv.org/abs/1706.03762)), and [exponential
+smoothing](https://en.wikipedia.org/wiki/Exponential_smoothing) for network
+parameters.
+
+#### Dropouts
 
 Depending on the model type, Marian support multiple types of dropout.  For
 RNN-based models it supports the `--dropout-rnn 0.2` (the numeric value of 0.2
 is only provided as an example) option which uses variational dropout on all
 RNN inputs and recursive states.
 
-There is also `--dropout-src` and `--dropout-trg` which drops out entire source
-and target word positions, respectively. This is an options we found to be
-useful for monolingual settings.
+Options `--dropout-src` and `--dropout-trg` set the probability to drop out
+entire source or target word positions, respectively. These dropouts are useful
+for monolingual tasks.
 
 For the transformer model the equivalent of `--dropout-rnn 0.2` is
-`--transformer-dropout 0.2`.
+`--transformer-dropout 0.2`. There are also two other dropouts for transformer
+attention and transformer filter.
 
 
 
-### Decaying learning rate
+### Learning rate scheduling
 
 Manipulation of learning rate during the training may result in better
 convergence and higher-quality translations.
@@ -483,9 +493,7 @@ Basic usage:
 
     ./build/marian-decoder -m model.npz -v vocab.en vocab.ro < input.txt
 
-
-
-### N-best lists
+#### N-best lists
 
 To generate n-best list with, say 10, best translations for each input
 sentence, add `--n-best` and `--beam-size `10` to the list of command-line
@@ -493,9 +501,7 @@ arguments:
 
     ./build/marian-decoder -m model.npz -v vocab.en vocab.ro --beam-size 10 --n-best < input.txt
 
-
-
-### Ensembles
+#### Ensembles
 
 Models of **different** types and architectures can be ensembled as long as they
 use common vocabularies:

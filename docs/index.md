@@ -66,8 +66,8 @@ The project is a standard CMake out-of-source build:
     make -j
 
 The complete list of compilation options in the form of CMake flags can be
-obtained by running `cmake -LH` or `cmake -LAH` from the `build` directory
-after running `cmake ..` first.
+obtained by running `cmake -LH -N` or `cmake -LAH -N` from the `build`
+directory after running `cmake ..` first.
 
 
 ### Static compilation

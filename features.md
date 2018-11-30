@@ -29,6 +29,7 @@ menu: 2
 - Training on raw texts using built-in [SentencePiece](https://github.com/google/sentencepiece) for data processing
 - Dynamically sized mini-batches for maximum memory usage
 - Asynchronous/synchronous multi-GPU training
+- Large mini-batches even on a single GPU via cumulative/delayed updates
 - Regularization methods: dropout ([Gal and Ghahramani, 2016](https://arxiv.org/abs/1512.05287)), exponential and smoothing
 - Transfer learning from monolingual data, and pre-trained embeddings from [word2vec](https://github.com/dav/word2vec) vectors
 - Guided alignment for attention

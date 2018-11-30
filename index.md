@@ -34,7 +34,7 @@ permalink: /
       <i class="fa fa-github"></i>
       Download from GitHub
     </a>
-    <a class="btn btn-primary btn-cta btn-blue" style="width: 220px" href="https://twitter.com/marian_nmt?ref_src=twsrc%5Etfw" target="_blank">
+    <a class="btn btn-primary btn-cta btn-blue" style="width: 230px" href="https://twitter.com/marian_nmt?ref_src=twsrc%5Etfw" target="_blank">
       <i class="fa fa-twitter"></i>
       Follow Marian on Twitter
     </a>

@@ -20,6 +20,13 @@ menu: 4
   [_Attention is all you need_, Vaswani et al.,
   2017](https://arxiv.org/abs/1706.03762).
 
+- **{% github_link "Training on raw texts with built-in SentencePiece" marian-examples/training-basics-sentencepiece %}**:
+  The example shows how to use Taku Kudo's
+  [SentencePiece](https://github.com/google/sentencepiece) and Matt Post's
+  [SacreBLEU](https://github.com/mjpost/sacreBLEU) to greatly simplify the
+  training and evaluation process by providing ways to have reversible hidden
+  preprocessing and repeatable evaluation.
+
 - **{% github_link "Reconstructing Edinburgh's WMT17 English-German system" marian-examples/wmt2017-uedin %}**:
   The scripts show how to train a complete WMT-grade system based on
   [Edinburgh's WMT submission

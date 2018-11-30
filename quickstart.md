@@ -15,31 +15,37 @@ For Ubuntu 16.04 the standard packages should work. On newer versions of
 Ubuntu, e.g. 16.10, there may be problems due to incompatibilities of the
 default g++ compiler and CUDA.
 
- * CMake 3.5.1
- * GCC/G++ 5.4
- * Boost 1.58
- * CUDA 8.0
+ - CMake 3.5.1
+ - GCC/G++ 5.4
+ - Boost 1.58
+ - CUDA 8.0
 
 **Ubuntu 14.04 LTS (tested).**
 A newer CMake version than the default version is required and can be installed
 from source.
 
- * CMake 3.5.1 (due to CUDA related bugs in earlier versions)
- * GCC/G++ 4.9
- * Boost 1.54
- * CUDA 7.5
+ - CMake 3.5.1 (due to CUDA related bugs in earlier versions)
+ - GCC/G++ 4.9
+ - Boost 1.54
+ - CUDA 7.5
 
-Please note that CUDA 10.0+ require CMake 3.12.2+ due to some bugs in earlier versions.
+Notes:
+
+  1. CUDA 9.0+ requires Boost 1.65.1+
+  1. CUDA 10.0+ requires CMake 3.12.2+ due to some bugs in earlier versions
 
 ### CPU version
 
-The CPU-only version will automatically be compiled if CUDA cannot be detected by CMake.
-Only the translator will be compiled, the training framework is strictily GPU-based.
+In Amun, the CPU-only version will automatically be compiled if CUDA cannot be
+detected by CMake.  The Amun CPU version should be a lot more forgiving
+concerning GCC/G++ or Boost versions.  We tested it on different machines and
+distributions, and the only requirement that needs to be installed is CMake
+3.5.1.
 
-Tested on different machines and distributions:
+Marian CPU decoder also requires [Intel
+MKL](https://software.intel.com/en-us/mkl) (recommended) or
+[OpenBLAS](https://www.openblas.net/).
 
- * CMake 3.5.1
- * The CPU version should be a lot more forgiving concerning GCC/G++ or Boost versions.
 
 ## Installation
 
@@ -55,8 +61,8 @@ The project is a standard CMake out-of-source build:
     cmake ..
     make -j
 
-If run for the first time, this will also download _marian-dev_ -- the training
-framework for Marian.
+If run for the first time, this will also download {% github_link
+marian-examples %} -- the repository with training and translation examples.
 
 ## Running Marian
 
@@ -75,13 +81,13 @@ machine translation model.
 See the [documentation](/docs/#training) for more details or the
 [examples](/examples/#examples) of how to train different models with Marian.
 
-### Translating
+### Translation
 
 If a trained model is available, run:
 
     ./marian/build/marian-decoder -m model.npz -v vocab.en vocab.ro <<< "This is a test ."
 
-For CPU translation, use Amun:
+For faster CPU translation using shallow RNN models, use Amun:
 
     ./marian/build/amun -m model.npz -s vocab.en -t vocab.ro <<< "This is a test ."
 

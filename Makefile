@@ -1,5 +1,6 @@
 
-COMMANDS = marian marian-decoder marian-server marian-scorer
+COMMANDS = marian marian-decoder marian-server marian-scorer marian-vocab marian-conv
+CMDFILES = $(patsubst %,docs/cmd/%.md,$(COMMANDS))
 
 .PHONY: build clean update-cmds update-docs install run zip
 
@@ -23,12 +24,11 @@ marian-nmt-website.tgz: build
 	tar zcf $@ _site
 
 # generate pages with command-line options
-update-cmds: marian/build $(patsubst %,docs/cmd/%.md,$(COMMANDS))
-update-cmd-files: $(patsubst %,docs/cmd/%.md,$(COMMANDS))
+update-cmds: marian/build $(CMDFILES)
 
 docs/cmd/%.md: docs/cmd/_template.tmp
 	sed "s/<COMMAND>/$*/" $^ > $@
-	./marian/build/$* -h 2>&1 | bash _scripts/help2markdown.sh >> $@
+	./marian/build/$* -h 2>&1 | bash _scripts/help2markdown.sh | python _scripts/wrap_help.py >> $@
 	echo "Version: " >> $@
 	./marian/build/marian --version >> $@ 2>&1
 

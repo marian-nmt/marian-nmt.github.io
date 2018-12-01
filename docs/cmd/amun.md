@@ -5,8 +5,9 @@ permalink: /docs/cmd/amun/
 icon: fa-file-code-o
 ---
 
+## amun
 
-## General options
+### General options
 ```
 -c [ --config ] arg                   Configuration file
 -i [ --input-file ] arg               Take input from a file instead of stdin
@@ -53,7 +54,7 @@ icon: fa-file-code-o
                                       err(or) - critical - off).
 ```
 
-## Search options
+### Search options
 ```
 -b [ --beam-size ] arg (=12)          Decoding beam-size
 -n [ --normalize ]                    Normalize scores by translation length
@@ -64,7 +65,7 @@ icon: fa-file-code-o
 --n-best                              Output n-best list with n = beam-size
 ```
 
-## Configuration meta options
+### Configuration meta options
 ```
 --relative-paths                      All paths are relative to the config
                                       file location

@@ -7,14 +7,14 @@
   <head>
   <title>
     
-    Marian :: Second post
+    Marian :: Command-line options for marian-vocab
     
   </title>
   <!-- Meta -->
   <meta charset="utf-8">
   <meta http-equiv="X-UA-Compatible" content="IE=edge">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <meta name="description" content="Lorem ipsum dolor sit amet, consectetur adipiscing elit. Pellentesque finibus est scelerisque dapibus luctus. Integer sollicitudin tortor ex, eget luctus qua...">
+  <meta name="description" content="Fast Neural Machine Translation in C++">
 
   <link href='http://fonts.googleapis.com/css?family=Open+Sans:300italic,400italic,600italic,700italic,800italic,400,300,600,700,800' rel='stylesheet' type='text/css'>
   <!-- Global CSS -->
@@ -155,11 +155,14 @@
 
         <div id="doc-header" class="doc-header text-center">
           <h1 class="doc-title">
-            Second post
+            
+            <i class="icon fa fa-file-code-o }}"></i>
+            
+            Command-line options for marian-vocab
           </h1>
           <div class="meta">
             <i class="fa fa-clock-o"></i>
-            Published: 25 June 2018
+            Last updated: 01 December 2018
           </div>
         </div><!--//doc-header-->
 
@@ -167,20 +170,22 @@
           <div class="doc-content">
             <div class="content-inner">
 
-              <p>Lorem ipsum dolor sit amet, consectetur adipiscing elit. Pellentesque finibus est scelerisque dapibus luctus. Integer sollicitudin tortor ex, eget luctus quam euismod sed. Donec odio turpis, iaculis vitae nisl ac, blandit sagittis mauris. Donec nisi arcu, dignissim in nisi ac, efficitur commodo magna. Nullam tempor elit sit amet odio sodales, ac suscipit metus tincidunt. Mauris nisl ante, tincidunt vel posuere sit amet, auctor eu lacus. In sit amet porttitor purus. Nunc blandit felis id mauris consectetur dignissim. Duis auctor faucibus tellus, eu facilisis massa egestas ac. Morbi a velit ex. Cras sodales, nunc eget molestie euismod, purus neque ultrices velit, vel aliquam erat nulla auctor metus. Cras dictum volutpat lacus, dictum tristique ante ornare vel. Nam sagittis lacus nisl, id porta nisi pharetra ut. In eget ex id nunc auctor scelerisque. Donec varius tristique dapibus. Proin tempus nisi at bibendum rhoncus.</p>
+              <h2 id="marian-vocab">marian-vocab</h2>
+<p>Version: 
+v1.7.0 67124f8 2018-11-28 13:04:30 +0000</p>
 
-<p>An example of <a href="/2018/06/17/first-post.html">a link to other post</a>.</p>
+<p>Usage: <code class="highlighter-rouge">./marian/build/marian-vocab [OPTIONS]</code></p>
 
-<h2 id="subtitle-1">Subtitle 1</h2>
+<h3 id="allowed-options">Allowed options</h3>
+<div class="highlighter-rouge"><div class="highlight"><pre class="highlight"><code>-h,--help                   Print this help message and exit
+--version                   Print the version number and exit
+-m,--max-size UINT=0        Generate only UINT most common vocabulary items
+</code></pre></div></div>
 
-<p>Vivamus fringilla turpis at sollicitudin condimentum. Class aptent taciti sociosqu ad litora torquent per conubia nostra, per inceptos himenaeos. Aliquam erat volutpat. Integer id odio at massa viverra congue. Nam ultrices posuere leo, volutpat scelerisque velit convallis sed. Suspendisse tortor eros, malesuada eu justo nec, suscipit posuere turpis. Curabitur enim lacus, fermentum eu faucibus varius, efficitur vitae elit. Aliquam eu pellentesque tellus.</p>
-
-<p>… which is shown in the screenshot below:
-<img src="https://marian-nmt.github.io//assets/images/multi_gpu.png" alt="My helpful screenshot" /></p>
-
-<h2 id="subtitle-2">Subtitle 2</h2>
-
-<p>Sed feugiat, lacus et vehicula mattis, ligula ante eleifend sapien, at interdum nulla erat sed nunc. Ut ut nibh non dui varius ullamcorper et at lorem. Pellentesque pretium metus eu tellus sagittis venenatis. Interdum et malesuada fames ac ante ipsum primis in faucibus. Maecenas aliquam mollis lorem, vitae sollicitudin mauris consectetur ut. Aenean facilisis est mauris, non porttitor mi rhoncus ut. Duis dictum est orci, a rutrum metus sodales viverra. Praesent id commodo odio. Pellentesque ut libero id nulla varius elementum ac eu velit. Donec tincidunt vel nisi at tincidunt.</p>
+<h3 id="examples">Examples</h3>
+<div class="highlighter-rouge"><div class="highlight"><pre class="highlight"><code>./marian-vocab &lt; text.src &gt; vocab.yml
+cat text.src text.trg | ./marian-vocab &gt; vocab.yml
+</code></pre></div></div>
 
 
             </div><!--//content-inner-->

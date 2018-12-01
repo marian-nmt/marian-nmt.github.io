@@ -104,6 +104,10 @@
  
 
  
+
+ 
+
+ 
  <li>
    <a class="page-link" href="/quickstart/">Quick start</a>
  </li>
@@ -158,7 +162,7 @@
           </h1>
           <div class="meta">
             <i class="fa fa-clock-o"></i>
-            Last updated: 18 July 2018
+            Last updated: 30 November 2018
           </div>
         </div><!--//doc-header-->
 
@@ -170,63 +174,46 @@
 
 <h3 id="overview">Overview</h3>
 <ul>
+  <li>Pure C++ implementation</li>
   <li>One engine for GPU/CPU training and decoding</li>
-  <li>Pure C++ impelemntation with minimal dependencies on external software: CUDA or MKL, Boost (soon to be removed)</li>
-  <li>15x faster translation than Nematus on one GPU</li>
-  <li>2x faster training than other toolkits on one GPU</li>
-  <li>Multi-GPU training and translation</li>
-  <li>Batched translation on GPU and CPU</li>
-  <li>Static compilation, which allows to copy the binary and use anywhere</li>
+  <li>Fast multi-GPU training and batched translation on GPU/CPU</li>
+  <li>Minimal dependencies on external software: CUDA or MKL, and Boost (soon to be removed)</li>
+  <li>Static compilation: compile once, copy the binary and use anywhere</li>
   <li>Permissive MIT license</li>
 </ul>
 
 <h3 id="model-features">Model features</h3>
-<p>Model types:</p>
 <ul>
   <li>Deep RNNs with Deep Transition Cells (<a href="http://aclweb.org/anthology/W17-4710">Miceli Barone et al.  2017</a>)</li>
   <li>Transformer models (<a href="https://arxiv.org/abs/1706.03762">Vaswani et al.  2017</a>)</li>
   <li>Multi-source models (<a href="https://arxiv.org/abs/1706.04138">Junczys-Dowmunt and Grundkiewicz, 2017</a>)</li>
-  <li>Deep RNN and transformer language models</li>
-</ul>
-
-<p>Model features:</p>
-<ul>
-  <li>Bidirectional, uni-bidirectional, or alternating encoders with LSTM or GRU cells</li>
-  <li>Layer normalization (<a href="https://arxiv.org/abs/1607.06450">Ba et al. 2016</a>)</li>
-  <li>Dropouts (<a href="https://arxiv.org/abs/1512.05287">Gal and Ghahramani, 2016</a>)</li>
-  <li>Tied embeddings (<a href="https://arxiv.org/abs/1608.05859">Press and Wolf, 2017</a>)</li>
-  <li>Residual/skip connections</li>
-  <li>Selected models binary compatible with Nematus models</li>
+  <li>RNN and transformer-based language models</li>
+  <li>Other features: layer normalization (<a href="https://arxiv.org/abs/1607.06450">Ba et al.  2016</a>),
+tied embeddings (<a href="https://arxiv.org/abs/1608.05859">Press and Wolf, 2017</a>),
+residual/skip connections</li>
 </ul>
 
 <h3 id="training-features">Training features</h3>
 <ul>
-  <li>Dynamically sized mini-batches for maximize memory usage</li>
+  <li>Training on raw texts using built-in <a href="https://github.com/google/sentencepiece">SentencePiece</a> for data processing</li>
+  <li>Dynamically sized mini-batches for maximum memory usage</li>
   <li>Asynchronous/synchronous multi-GPU training</li>
-  <li>Regularization methods: dropout, exponential smoothing, label smoothing</li>
-  <li>Initialization from pre-trained embeddings, including <a href="https://github.com/dav/word2vec">word2vec</a> vectors</li>
-  <li>Transfer learning from monolingual data</li>
+  <li>Large mini-batches even on a single GPU via cumulative/delayed updates</li>
+  <li>Regularization methods: dropout (<a href="https://arxiv.org/abs/1512.05287">Gal and Ghahramani, 2016</a>), exponential and smoothing</li>
+  <li>Transfer learning from monolingual data, and pre-trained embeddings from <a href="https://github.com/dav/word2vec">word2vec</a> vectors</li>
   <li>Guided alignment for attention</li>
+  <li>Sentence-level and word-level data weighting</li>
   <li>Decaying and warmup strategies for learning rate</li>
-  <li>Multi-GPU validation and in-training translation</li>
-  <li>Exposed optimizer parameters</li>
+  <li>Efficient multi-GPU validation and in-training translation</li>
 </ul>
 
 <h3 id="translation-features">Translation features</h3>
 <ul>
   <li>Batched translation on single and multiple GPU/CPUs</li>
-  <li>Ensembling models of different types</li>
-  <li>Generating hard alignments during translation</li>
+  <li>Ensembles of models of different types</li>
+  <li>Generating word alignments and attention output</li>
   <li>Rescoring n-best lists and parallel files</li>
-  <li>C++ web-socket service for translation</li>
-</ul>
-
-<h3 id="experimental-features">Experimental features</h3>
-<p>Experimental features are available only in the Marian decoder.</p>
-<ul>
-  <li>Character-level convolutional models (<a href="https://arxiv.org/abs/1610.03017">Lee et al.
-2017</a>)</li>
-  <li>Multi-node GPU training</li>
+  <li>C++ web-socket server</li>
 </ul>
 
 <h2 id="benchmarks">Benchmarks</h2>
@@ -239,40 +226,39 @@ the <a href="http://workshop2016.iwslt.org/downloads/IWSLT_2016_paper_4.pdf">IWS
 <p><img src="/assets/images/translation_speed.png" alt="Translation speed #1" /></p>
 
 <p>We ran our experiments on an Intel Xeon E5-2620 2.40GHz server with four NVIDIA
-GeForce GTX 1080 GPUs.We present the words-per-second ratio for our NMT models
-using Marian and Nematus, executed on the CPU and GPU. For the CPU version we
-use 16 threads, translating one sentence per thread. We restrict the number of
-OpenBLAS threads to 1 per main Nematus thread. For the GPU version of Nematus
-we use 5 processes to maximize GPU saturation. As a baseline, the phrase-based
-model reaches 455 words per second using 16 threads.</p>
+GeForce GTX 1080 GPUs.  We present the words-per-second ratio for our NMT
+models using Amun and Nematus, executed on the CPU and GPU.  For the CPU
+version we use 16 threads, translating one sentence per thread.  We restrict
+the number of OpenBLAS threads to 1 per main Nematus thread.  For the GPU
+version of Nematus we use 5 processes to maximize GPU saturation.  As a
+baseline, the phrase-based model reaches 455 words per second using 16 threads.</p>
 
 <p>The CPU-bound execution of Nematus reaches 47 words per second while the
-GPU-bound achieved 270 words per second. In similar settings, CPU-bound Marian
-is three times faster than Nematus CPU, but three times slower than Moses. With
-vocabulary selection (systems with asteriks) we can nearly double the speed of
-Marian CPU. The GPU-executed version of Marian is more than three times faster
-than Nematus and nearly twice as fast as Moses, achieving 865 words per second,
-with vocabulary selection we reach 1,192. Even the speed of the CPU version
-would already allow to replace a Moses-based SMT system with an Marian-based
-NMT system in a production environment without severely affecting translation
-throughput.</p>
+GPU-bound achieved 270 words per second.  In similar settings, CPU-bound Marian
+is three times faster than Nematus CPU, but three times slower than Moses.
+With vocabulary selection (systems with asteriks) we can nearly double the
+speed of Amun CPU.  The GPU-executed version of Amun is more than three times
+faster than Nematus and nearly twice as fast as Moses, achieving 865 words per
+second, with vocabulary selection we reach 1,192.  Even the speed of the CPU
+version would already allow to replace a Moses-based SMT system with an
+Marian-based NMT system in a production environment without severely affecting
+translation throughput.</p>
 
 <p><img src="/assets/images/translation_speed2.png" alt="Translation speed #2" /></p>
 
 <p>Amun also features “batched” translation, i.e. multiple sentences are being
-translated at once on a single GPU. Since computation time for matrix products
+translated at once on a single GPU.  Since computation time for matrix products
 on the GPU increases sub-linearly with regard to matrix size, we can take
 advantage of this by pushing multiple translation through the neural network.
 For the same models as above and a batch-size of 200 (beam-size 5) we achieve
-over 5000 words per second on one GPU. This scales linearly to the number of
+over 5000 words per second on one GPU.  This scales linearly to the number of
 GPUs used. As before, the asteriks marks systems with vocabulary filtering.
 Systems “Single” and “Single*” are the same as two best systems in the first
 graph.</p>
 
 <h3 id="training-speed">Training speed</h3>
 
-<p>We also compare training speed between a number of popular toolkits and Marian.
-As Marian is still early work, we expect speed to improve with future optimizations.
+<p>We also compare training speed between a number of popular toolkits and Marian (v.1.0.0).
 The numbers reported in this section have been computed on a single GPU.</p>
 
 <div class="multiple-images">
@@ -280,32 +266,28 @@ The numbers reported in this section have been computed on a single GPU.</p>
   <img att="Training speed #2" src="/assets/images/train.speed1024.png" />
 </div>
 
-<p>We compare models with standard settings and comparable embedding, hidden layer and batch sizes.
-The first graph corresponds to the model parameters described in the
-<a href="https://arxiv.org/abs/1701.02810">OpenNMT paper</a>,
-the second corresponds to Nematus default settings for embedding and hidden layer
-sizes. In both cases we use a vocabulary size of 32,000 subword units. The models were trained
-on German-English WMT data. Nematus-array is Nematus run with the new Cuda backend libgpuarray.
-Blue bars describe training speed on a NVIDIA GTX 1080 GPU, green bars on a Titan X with Pascal
-architecture.</p>
+<p>We compare models with standard settings and comparable embedding, hidden layer
+and batch sizes.  The first graph corresponds to the model parameters described
+in the <a href="https://arxiv.org/abs/1701.02810">OpenNMT paper</a>, the second
+corresponds to Nematus default settings for embedding and hidden layer sizes.
+In both cases we use a vocabulary size of 32,000 subword units. The models were
+trained on German-English WMT data. Nematus-array is Nematus run with the new
+Cuda backend libgpuarray.  Blue bars describe training speed on a NVIDIA GTX
+1080 GPU, green bars on a Titan X with Pascal architecture.</p>
 
 <h3 id="multi-gpu-training">Multi-GPU training</h3>
 
-<p>Marian’s training framework provides multi-GPU training via
-synchronous/asynchronous SGD and data parallelism (copies of the full model on
-each GPU).
-We benchmarked the <a href="/examples/training/">Romanian-English example</a> on a machine
-with 8 NVIDIA P100 GPUs. Training speed increases with each GPU instance.
-The increase for synchronous SGD is sub-linear, but it may allow to achieve
-lower cross-entropy score for certain model types, which may be not achievable
-with asynchronous SGD.</p>
+<p>We demonstrate the training speed as thousands of source tokens per second for
+different model types trained with Marian v1.5 (see the <a href="http://www.aclweb.org/anthology/P18-4020">Marian demonstration
+paper</a> for more details).</p>
 
-<p width="90%"><img src="/assets/images/multi_gpu.png" alt="Multi GPU" /></p>
+<p width="65%"><img src="/assets/images/multi_gpu_models.png" alt="Multi GPU for different model types" /></p>
 
-<p>Our current version of asynchronous SGD is delay-free, i.e. that all (sharded)
-gradients are propagated to all GPUs for each update. In the future we will
-introduce delayed updates which should result in a more linear performance
-increase with each additional GPU.</p>
+<p>All model types benefit from using more GPUs. Scaling is not linear (dashed
+lines), but close. The tokens-per-second rate (w/s) for Nematus on the same
+data on a single GPU is about 2800 w/s for the shallow model. Nematus does not
+have multi-GPU training. Marian achieves about 4 times faster training on a
+single GPU and about 30 times faster training on 8 GPUs for identical models.</p>
 
 
             </div><!--//content-inner-->

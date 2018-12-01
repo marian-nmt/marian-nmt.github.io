@@ -108,6 +108,10 @@
  
 
  
+
+ 
+
+ 
  <li>
    <a class="page-link" href="/quickstart/">Quick start</a>
  </li>
@@ -162,7 +166,7 @@
           </h1>
           <div class="meta">
             <i class="fa fa-clock-o"></i>
-            Last updated: 06 November 2018
+            Last updated: 01 December 2018
           </div>
         </div><!--//doc-header-->
 
@@ -180,8 +184,10 @@
 NMT models trained with Marian, and specific models trained with Nematus</li>
   <li><a href="/docs/cmd/marian-server">marian-server</a>: a web-socket server providing
 translation service</li>
-  <li><a href="/docs/cmd/marian-scorer">marian-scorer</a>: a tool for rescoring parallel text
-files and n-best lists</li>
+  <li><a href="/docs/cmd/marian-scorer">marian-scorer</a>: for rescoring parallel text files
+and n-best lists</li>
+  <li><a href="/docs/cmd/marian-vocab">marian-vocab</a>: for creating a vocabulary from text
+given on STDIN</li>
   <li><a href="/docs/cmd/amun">amun</a>: for CPU and GPU translation using specific models
 trained with Marian or Nematus</li>
 </ul>
@@ -199,16 +205,14 @@ architecture is equivalent to the
 <a href="https://github.com/EdinburghNLP/nematus">Nematus</a> models (<a href="https://arxiv.org/abs/1703.04357">Senrich et al.,
 2017</a>).</li>
   <li><code class="highlighter-rouge">transformer</code>: A model originally proposed by Google <a href="https://arxiv.org/abs/1706.03762">(Vaswani et al.,
-2017)</a> based solely on attention
-mechanisms.</li>
+2017)</a> based solely on attention mechanisms.</li>
   <li><code class="highlighter-rouge">multi-s2s</code>: As <code class="highlighter-rouge">s2s</code>, but uses two or more encoders allowing multi-source
 neural machine translation.</li>
   <li><code class="highlighter-rouge">multi-transformer</code>: As <code class="highlighter-rouge">transformer</code>, but uses multiple encoders.</li>
-  <li><code class="highlighter-rouge">amun</code>: A model equivalent to Nematus models unless layer normalization is used. Can
-be decoded with Amun as <em>nematus</em> model type.</li>
-  <li><code class="highlighter-rouge">nematus</code>: A model equivalent to deep RNN-based encoder-decoder models developed by
-the Edinburgh MT group for WMT 2017 using Nematus toolkit. The only model
-type that supports models trained with the Nematus-style layer normalization.
+  <li><code class="highlighter-rouge">amun</code>: A model equivalent to Nematus models unless layer normalization is
+used. Can be decoded with Amun as <em>nematus</em> model type.</li>
+  <li><code class="highlighter-rouge">nematus</code>: A model type developed for decoding deep RNN-based encoder-decoder
+models created by the Edinburgh MT group for WMT 2017 using Nematus toolkit.
 Can be decoded with Amun as <em>nematus2</em> model type.</li>
   <li><code class="highlighter-rouge">lm</code>: An RNN language model.</li>
   <li><code class="highlighter-rouge">lm-transformer</code>: An transformer-based language model.</li>
@@ -230,12 +234,23 @@ cmake ..
 make -j
 </code></pre></div></div>
 
-<p>If run for the first time, this will also download <a class="github-link" href="https://github.com/marian-nmt/marian-dev/tree/master/" target="_blank"><code class="highlighter-rogue">marian-dev/</code></a>
-— the training framework for Marian.</p>
+<p>The complete list of compilation options in the form of CMake flags can be
+obtained by running <code class="highlighter-rouge">cmake -LH -N</code> or <code class="highlighter-rouge">cmake -LAH -N</code> from the <code class="highlighter-rouge">build</code>
+directory after running <code class="highlighter-rouge">cmake ..</code> first.</p>
+
+<h3 id="static-compilation">Static compilation</h3>
+
+<p>Marian will be compiled statically if the flag <code class="highlighter-rouge">USE_STATIC_LIBS</code> is set:</p>
+
+<div class="highlighter-rouge"><div class="highlight"><pre class="highlight"><code>cd build
+cmake .. -DUSE_STATIC_LIBS=on
+make -j
+</code></pre></div></div>
 
 <h3 id="custom-boost">Custom Boost</h3>
 
 <p>Download, compile and install Boost:</p>
+
 <div class="highlighter-rouge"><div class="highlight"><pre class="highlight"><code>wget https://dl.bintray.com/boostorg/release/1.67.0/source/boost_1_67_0.tar.gz
 tar zxvf boost_1_67_0.tar.gz
 cd boost_1_67_0
@@ -244,10 +259,11 @@ cd boost_1_67_0
 </code></pre></div></div>
 
 <p>If Boost can not be compiled on your machine because an error like this occurs:
-_boost error: “none” is not a known value of feature <optimization>_, you may
-try adding `--ignore-site-config` to the `./b2` command.</optimization></p>
+<em>boost error “none” is not a known value of feature &lt;optimization&gt;</em>, you may
+try adding <code class="highlighter-rouge">--ignore-site-config</code> to the <code class="highlighter-rouge">./b2</code> command.</p>
 
 <p>To compile Marian training framework with your custom Boost installation:</p>
+
 <div class="highlighter-rouge"><div class="highlight"><pre class="highlight"><code>cd /path/to/marian-dev
 mkdir build
 cd build
@@ -260,26 +276,68 @@ make -j16
 <h3 id="non-default-cuda">Non-default CUDA</h3>
 
 <p>Specify the path to your CUDA root directory via CMake:</p>
+
 <div class="highlighter-rouge"><div class="highlight"><pre class="highlight"><code>cd /path/to/marian-dev
 mkdir build
 cd build
 cmake .. -DCUDA_TOOLKIT_ROOT_DIR=/usr/local/cuda-9.1
 make -j16
-
 </code></pre></div></div>
 
 <h3 id="cpu-version">CPU version</h3>
 
-<p>Marian CPU version requires <a href="https://software.intel.com/en-us/mkl">Intel MKL</a>
-or <a href="https://www.openblas.net/">OpenBLAS</a>. Both are free, but MKL is not
+<p>Marian CPU version requires <a href="https://software.intel.com/en-us/mkl">Intel MKL</a> or
+<a href="https://www.openblas.net/">OpenBLAS</a>. Both are free, but MKL is not
 open-sourced. Intel MKL is strongly recommended as it is faster.</p>
+
+<h3 id="sentencepiece">SentencePiece</h3>
+
+<p>Compilation with SentencePiece that is built-it in Marian v1.6.2+ can be
+enabled by adding <code class="highlighter-rouge">-DUSE_SENTENCEPIECE=on</code> to the CMake command and requires
+the Protobuf library.  On Ubuntu, you would need to install a couple of
+packages:</p>
+
+<div class="highlighter-rouge"><div class="highlight"><pre class="highlight"><code># Ubuntu 14.04 LTS (Trusty Tahr):
+sudo apt-get install libprotobuf8 protobuf-compiler libprotobuf-dev
+
+# Ubuntu 16.04 LTS (Xenial Xerus):
+sudo apt-get install libprotobuf9v5 protobuf-compiler libprotobuf-dev
+
+# Ubuntu 17.10 (Artful Aardvark) and Later:
+sudo apt-get install libprotobuf10 protobuf-compiler libprotobuf-dev
+</code></pre></div></div>
+
+<p>You may also compile Protobuf from source. For Ubuntu 16.04 LTS, version 2.6.1
+(or possibly newer) works:</p>
+
+<div class="highlighter-rouge"><div class="highlight"><pre class="highlight"><code>wget https://github.com/protocolbuffers/protobuf/releases/download/v2.6.1/protobuf-cpp-2.6.1.zip
+unzip protobuf-cpp-2.6.1.zip
+cd protobuf-2.6.1
+./autogen.sh
+./configure --prefix $(pwd)
+make -j
+make install
+</code></pre></div></div>
+
+<p>and set the following CMake flags in Marian compilation:</p>
+
+<div class="highlighter-rouge"><div class="highlight"><pre class="highlight"><code>mkdir build
+cd build
+cmake .. -DUSE_SENTENCEPIECE=on \
+    -DPROTOBUF_LIBRARY=/path/to/protobuf-2.6.1/lib/libprotobuf.so \
+    -DPROTOBUF_INCLUDE_DIR=/path/to/protobuf-2.6.1/include \
+    -DPROTOBUF_PROTOC_EXECUTABLE=/path/to/protobuf-2.6.1/bin/protoc
+</code></pre></div></div>
+
+<p>For more details see the documentation in the SentencePiece repo:
+https://github.com/marian-nmt/sentencepiece#c-from-source</p>
 
 <h2 id="training">Training</h2>
 
-<p>For training NMT models, you want to use <code class="highlighter-rouge">marian</code> command.
-Assuming <code class="highlighter-rouge">corpus.en</code> and <code class="highlighter-rouge">corpus.ro</code> are corresponding and preprocessed files
-of a English-Romanian parallel corpus, the following command will create a
-Nematus-compatible neural machine translation model:</p>
+<p>For training NMT models, you want to use <code class="highlighter-rouge">marian</code> command.  Assuming <code class="highlighter-rouge">corpus.en</code>
+and <code class="highlighter-rouge">corpus.ro</code> are corresponding and preprocessed files of a English-Romanian
+parallel corpus, the following command will create a Nematus-compatible neural
+machine translation model:</p>
 
 <div class="highlighter-rouge"><div class="highlight"><pre class="highlight"><code>./build/marian \
     --train-sets corpus.en corpus.ro \
@@ -313,21 +371,60 @@ want to use for training (this also works with most other binaries) as
 <code class="highlighter-rouge">--devices 0 1 2 3</code> for training on four GPUs. There is no automatic detection
 of GPUs for now.</p>
 
-<p>By default, this will use asynchronous SGD (or rather ADAM). For the deeper models
-and the transformer model, we found async SGD to be unreliable and you may want
-to use a synchronous SGD variant by setting <code class="highlighter-rouge">--sync-sgd</code>.</p>
+<p>By default, this will use asynchronous SGD (or rather ADAM). For the deeper
+models and the transformer model, we found async SGD to be unreliable and you
+may want to use a synchronous SGD variant by setting <code class="highlighter-rouge">--sync-sgd</code>.</p>
 
-<p>For asynchronous SGD, the mini-batch size is used locally, i.e. <code class="highlighter-rouge">--mini-batch 64</code>
-means 64 sentences per GPU worker.</p>
+<p>For asynchronous SGD, the mini-batch size is used locally, i.e. <code class="highlighter-rouge">--mini-batch
+64</code> means 64 sentences per GPU worker.</p>
 
 <p>For synchronous SGD, the mini-batch size is used globally and will be divided
 across the number of workers. This means that for synchronous SGD the effective
 mini-batch can be set N times larger for N GPUs. A mini-batch size of
 <code class="highlighter-rouge">--mini-batch 256</code> will mean a mini-batch of 64 per worker if four GPUs are
 used. This choice makes sense when you realize that synchronous SGD is
-essentially working like a single GPU training process with N times more
-memory. Larger mini-batches in a synchronous setting result in quite stable
-training.</p>
+essentially working like a single GPU training process with N times more memory.
+Larger mini-batches in a synchronous setting result in quite stable training.</p>
+
+<h3 id="workspace-memory">Workspace memory</h3>
+
+<p>The choice of workspace memory, mini-batch size and max-length is quite involved
+and depends on the type of model, the available GPU memory, the number of GPUs,
+a number of other parameters like the chosen optimization algorithm, and the
+average or maximum sentence length in your training corpus (which you should
+know!).</p>
+
+<p>The option <code class="highlighter-rouge">--workspace</code> sets the size of the memory available for the forward
+and backward step of the training procedure. This does not include model size
+and optimizer parameters that are allocated outsize workspace. Hence you cannot
+allocate all GPU memory to workspace. If you are not happy with default values
+this is a trial and error process.</p>
+
+<p>Setting <code class="highlighter-rouge">--mini-batch 64 --max-length 100</code> will generate batches that contain
+always 64 sentences (or less if the corpus is smaller) of up to a length of 100
+tokens. Sentences longer than that are filtered out. Marian will grow workspace
+memory if required and potentially exceed available memory, resulting in a
+crash. Workspace memory is always rounded to multiples of 512 MB.</p>
+
+<p><code class="highlighter-rouge">--mini-batch-fit</code> overrides the specified mini-batch size and automatically
+chooses the largest mini-batch for a given sentence length that fits the
+specified memory. When <code class="highlighter-rouge">--mini-batch-fit</code> is set, memory requirements are
+guaranteed to fit into the specified workspace. Choosing a too small workspace
+will result in small mini-batches which can prohibit learning.</p>
+
+<h4 id="my-rules-of-thumb">My rules of thumb</h4>
+
+<p>For shallow models I usually set the working memory to values between 3500 and
+6000 (MB), e.g.  <code class="highlighter-rouge">--workspace 5500</code> and then use <code class="highlighter-rouge">--mini-batch-fit</code> which
+automatically tries to make the best use of the specified memory size,
+mini-batch size and sentence length.</p>
+
+<p>For very deep models, I first set all other parameters like <code class="highlighter-rouge">--max-length 100</code>,
+model type, depth etc.  Next I use <code class="highlighter-rouge">--mini-batch-fit</code> and try to max out
+<code class="highlighter-rouge">--workspace</code> until I get a crash due to insufficient memory. I then revert to
+the last workspace size that did not crash. Since setting <code class="highlighter-rouge">--mini-batch-fit</code>
+guarantees that memory will not grow during training due to batch-size this
+should result in a stable training run and maximal batch size.</p>
 
 <h3 id="validation">Validation</h3>
 
@@ -338,11 +435,11 @@ set every 10,000 iterations.  You can change the validation frequency to, say
 5000, with <code class="highlighter-rouge">--valid-freq 5000</code> and the display frequency to 500 with
 <code class="highlighter-rouge">--disp-freq 500</code>.</p>
 
-<p><strong>Attention:</strong> the validation set needs to have been preprocessed in exactly
-the same manner as your training data.</p>
+<p><strong>Attention:</strong> the validation set needs to have been preprocessed in exactly the
+same manner as your training data.</p>
 
-<p>A minimum example of how to validate the model using cross-entropy and
-BLEU score:</p>
+<p>A minimum example of how to validate the model using cross-entropy and BLEU
+score:</p>
 
 <div class="highlighter-rouge"><div class="highlight"><pre class="highlight"><code>./build/marian \
     --train-sets corpus.en corpus.ro \
@@ -363,7 +460,25 @@ score, for example:</p>
     | <span class="nb">sed</span> <span class="nt">-r</span> <span class="s1">'s/BLEU = ([0-9.]+),.*/\1/'</span>
 </code></pre></div></div>
 
-<h3 id="early-stopping">Early stopping</h3>
+<h4 id="metrics">Metrics</h4>
+
+<ul>
+  <li><code class="highlighter-rouge">cross-entropy</code> - computes the sentence-wise normalized cross-entropy score.</li>
+  <li><code class="highlighter-rouge">ce-mean-words</code> - computes the mean word cross-entropy score.</li>
+  <li><code class="highlighter-rouge">valid-script</code> - executes the script specified with <code class="highlighter-rouge">--valid-script-path</code>.
+The script is expected to return a score as a floating-point number.</li>
+  <li><code class="highlighter-rouge">translation</code> - executes the script specified with <code class="highlighter-rouge">--valid-script-path</code>
+passing the name of the file with translation of the source validation set as
+the first argument (e.g. <code class="highlighter-rouge">$1</code> in Bash script, <code class="highlighter-rouge">sys.argv[1]</code> in Python, etc.).
+The script is expected to return a score as a floating-point number.</li>
+  <li><code class="highlighter-rouge">bleu</code> - computes BLEU score on raw validation sets. Those are usually
+tokenized and BPE-segmented, so the score is overestimated, and should never
+be used to report your BLEU scores in a research paper.</li>
+  <li><code class="highlighter-rouge">bleu-detok</code> - computes BLEU score on postprocessed validation sets. Requires
+SentencePiece and Marian v1.6.2+.</li>
+</ul>
+
+<h4 id="early-stopping">Early stopping</h4>
 
 <p>Early stopping is a common technique for deciding when to stop training the
 model based on a heuristic involving a validation set.</p>
@@ -374,21 +489,31 @@ model based on a heuristic involving a validation set.</p>
 steps. Usually this will signal convergence or — if the scores get worse with
 later validation steps — potential overfitting.</p>
 
-<h3 id="dropouts">Dropouts</h3>
+<h3 id="regularization">Regularization</h3>
+
+<p>Marian has several regularization techniques implemented that help to prevent
+model overfitting, such as dropouts (<a href="https://arxiv.org/abs/1512.05287">Gal and Ghahramani,
+2016</a>), label smoothing (<a href="https://arxiv.org/abs/1706.03762">Vaswani et al.
+2017</a>), and <a href="https://en.wikipedia.org/wiki/Exponential_smoothing">exponential
+smoothing</a> for network
+parameters.</p>
+
+<h4 id="dropouts">Dropouts</h4>
 
 <p>Depending on the model type, Marian support multiple types of dropout.  For
 RNN-based models it supports the <code class="highlighter-rouge">--dropout-rnn 0.2</code> (the numeric value of 0.2
 is only provided as an example) option which uses variational dropout on all
 RNN inputs and recursive states.</p>
 
-<p>There is also <code class="highlighter-rouge">--dropout-src</code> and <code class="highlighter-rouge">--dropout-trg</code> which drops out entire source
-and target word positions, respectively. This is an options we found to be
-useful for monolingual settings.</p>
+<p>Options <code class="highlighter-rouge">--dropout-src</code> and <code class="highlighter-rouge">--dropout-trg</code> set the probability to drop out
+entire source or target word positions, respectively. These dropouts are useful
+for monolingual tasks.</p>
 
 <p>For the transformer model the equivalent of <code class="highlighter-rouge">--dropout-rnn 0.2</code> is
-<code class="highlighter-rouge">--transformer-dropout 0.2</code>.</p>
+<code class="highlighter-rouge">--transformer-dropout 0.2</code>. There are also two other dropouts for transformer
+attention and transformer filter.</p>
 
-<h3 id="decaying-learning-rate">Decaying learning rate</h3>
+<h3 id="learning-rate-scheduling">Learning rate scheduling</h3>
 
 <p>Manipulation of learning rate during the training may result in better
 convergence and higher-quality translations.</p>
@@ -468,46 +593,6 @@ trained w.r.t to vocabulary using <a class="github-link" href="https://github.co
   <li><code class="highlighter-rouge">--embedding-normalization</code> normalizes vector values into [-1,1] range</li>
 </ul>
 
-<h3 id="workspace-memory">Workspace memory</h3>
-
-<p>The choice of workspace memory, mini-batch size and max-length is quite
-involved and depends on the type of model, the available GPU memory, the number
-of GPUs, a number of other parameters like the chosen optimization algorithm,
-and the average or maximum sentence length in your training corpus (which you
-should know!).</p>
-
-<p>The options <code class="highlighter-rouge">--workspace 4000</code> sets the size of the memory available for the
-forward and backward step of the training procedure. This does not include
-model size and optimizer parameters that are allocated outsize workspace. Hence
-you cannot allocate all GPU memory to workspace. If you are not happy with
-default values this is a trial and error process.</p>
-
-<p>Setting <code class="highlighter-rouge">--mini-batch 64 --max-length 100</code> will generate batches that contain
-always 64 sentences (or less if the corpus is smaller) of up to a length of 100
-tokens. Sentences longer than that are filtered out. Marian will grow workspace
-memory if required and potentially exceed available memory, resulting in a
-crash. Workspace memory is always rounded to multiples of 512 MB.</p>
-
-<p><code class="highlighter-rouge">--mini-batch-fit</code> overrides the specified mini-batch size and automatically
-chooses the largest mini-batch for a given sentence length that fits the
-specified memory. When <code class="highlighter-rouge">--mini-batch-fit</code> is set, memory requirements are
-guaranteed to fit into the specified workspace. Choosing a too small workspace
-will result in small mini-batches which can prohibit learning.</p>
-
-<h4 id="my-rules-of-thumb">My rules of thumb</h4>
-
-<p>For shallow models I usually set the working memory to values between 3500 and
-6000 (MB), e.g. <code class="highlighter-rouge">--workspace 5500</code> and then use <code class="highlighter-rouge">--mini-batch-fit</code> which
-automatically tries to make the best use of the specified memory size,
-mini-batch size and sentence length.</p>
-
-<p>For very deep models, I first set all other parameters like <code class="highlighter-rouge">--max-length 100</code>,
-model type, depth etc.  Next I use <code class="highlighter-rouge">--mini-batch-fit</code> and try to max out
-<code class="highlighter-rouge">--workspace</code> until I get a crash due to insufficient memory. I then revert to
-the last workspace size that did not crash. Since setting <code class="highlighter-rouge">--mini-batch-fit</code>
-guarantees that memory will not grow during training due to batch-size this
-should result in a stable training run and maximal batch size.</p>
-
 <h3 id="multi-node-training">Multi-node training</h3>
 
 <p>Multi-node training requires an MPI installation with <code class="highlighter-rouge">MPI_THREAD_MULTIPLE</code> set to
@@ -562,7 +647,16 @@ of Marian is planned.</p>
 <div class="highlighter-rouge"><div class="highlight"><pre class="highlight"><code>./build/marian-decoder -m model.npz -v vocab.en vocab.ro &lt; input.txt
 </code></pre></div></div>
 
-<h3 id="ensembles">Ensembles</h3>
+<h4 id="n-best-lists">N-best lists</h4>
+
+<p>To generate n-best list with, say 10, best translations for each input
+sentence, add <code class="highlighter-rouge">--n-best</code> and <code class="highlighter-rouge">--beam-size </code>10` to the list of command-line
+arguments:</p>
+
+<div class="highlighter-rouge"><div class="highlight"><pre class="highlight"><code>./build/marian-decoder -m model.npz -v vocab.en vocab.ro --beam-size 10 --n-best &lt; input.txt
+</code></pre></div></div>
+
+<h4 id="ensembles">Ensembles</h4>
 
 <p>Models of <strong>different</strong> types and architectures can be ensembled as long as they
 use common vocabularies:</p>
@@ -631,22 +725,6 @@ with 3000 sentences using 4 Volta GPUs on AWS.</p>
   </tbody>
 </table>
 
-<h3 id="marian-web-server">Marian web server</h3>
-
-<p>The <code class="highlighter-rouge">marian-server</code> command starts a web-socket server providing CPU and GPU
-translation service that can be requested by a client program written in Python
-or any other programming language.  The server uses the same command-line
-options as <code class="highlighter-rouge">marian-decoder</code>.  The only addition is <code class="highlighter-rouge">--port</code> option, which
-specifies the port number:</p>
-
-<div class="highlighter-rouge"><div class="highlight"><pre class="highlight"><code>./build/marian-server --port 8080 -m model.npz -v vocab.en vocab.ro
-</code></pre></div></div>
-
-<p>An example client written in Python is <a class="github-link" href="https://github.com/marian-nmt/marian-dev/tree/master/scripts/server/client_example.py" target="_blank"><code class="highlighter-rogue">marian-dev/scripts/server/client_example.py</code></a>:</p>
-
-<div class="highlighter-rouge"><div class="highlight"><pre class="highlight"><code>./scripts/server/client_example.py -p 8080 &lt; input.txt
-</code></pre></div></div>
-
 <h3 id="attention-output">Attention output</h3>
 
 <p><code class="highlighter-rouge">marian-decoder</code> and <code class="highlighter-rouge">marian-scorer</code> can produce attention output or word
@@ -680,10 +758,25 @@ jetzt weiß jeder ||| 0-0 1-2 2-1 2-3 3-2 3-3
 <h4 id="word-alignments-from-transformer">Word alignments from Transformer</h4>
 
 <p>The transformer has basically 6x8 different alignment matrices, and in theory
-none of these has to be very useful for word alignment purposes.
-<!--We recommend trying training model with guided alignments first-->
-<!--(`--guided-alignment`) so that the model can learn word alignments in one of-->
-<!--its heads.--></p>
+none of these has to be very useful for word alignment purposes.  We recommend
+training model with guided alignments first (<code class="highlighter-rouge">--guided-alignment</code>) so that the
+model can learn word alignments in one of its heads.</p>
+
+<h3 id="web-server">Web server</h3>
+
+<p>The <code class="highlighter-rouge">marian-server</code> command starts a web-socket server providing CPU and GPU
+translation service that can be requested by a client program written in Python
+or any other programming language.  The server uses the same command-line
+options as <code class="highlighter-rouge">marian-decoder</code>.  The only addition is <code class="highlighter-rouge">--port</code> option, which
+specifies the port number:</p>
+
+<div class="highlighter-rouge"><div class="highlight"><pre class="highlight"><code>./build/marian-server --port 8080 -m model.npz -v vocab.en vocab.ro
+</code></pre></div></div>
+
+<p>An example client written in Python is <a class="github-link" href="https://github.com/marian-nmt/marian-dev/tree/master/scripts/server/client_example.py" target="_blank"><code class="highlighter-rogue">marian-dev/scripts/server/client_example.py</code></a>:</p>
+
+<div class="highlighter-rouge"><div class="highlight"><pre class="highlight"><code>./scripts/server/client_example.py -p 8080 &lt; input.txt
+</code></pre></div></div>
 
 <h3 id="nematus-models">Nematus models</h3>
 
@@ -722,13 +815,14 @@ the Nematus <em>.json</em> file using the script: <a class="github-link" href="h
 well, for instance <code class="highlighter-rouge">--dim-emb 500</code>.</p>
 
 <p>We do not recommend training models of type <code class="highlighter-rouge">nematus</code> with Marian. It is much
-more effective to train models of type <code class="highlighter-rouge">s2s</code>, which provide the same model
-architecture except layer normalization, more features, and faster training.</p>
+more efficient to train <code class="highlighter-rouge">s2s</code> models, which provide the same model architecture
+(except layer normalization), more features, and faster training.</p>
 
 <h3 id="amun">Amun</h3>
 
-<p>Amun is a translation tool for specific models of <code class="highlighter-rouge">amun</code> and <code class="highlighter-rouge">nematus</code> model
-types. Translation can be performed on GPU or CPU or both.</p>
+<p>Amun is a translation tool for <code class="highlighter-rouge">amun</code> and <code class="highlighter-rouge">nematus</code> model types only and is now
+available from the separate repository: <a class="github-link" href="https://github.com/marian-nmt/amun/tree/master/" target="_blank"><code class="highlighter-rogue">amun/</code></a>.  Translation
+with Amun can be performed on GPU or CPU or both.</p>
 
 <p>Basic usage:</p>
 
@@ -745,7 +839,7 @@ provided as plain texts in two corresponding files:</p>
 
 <p>A cross-entropy score for each sentence pair is returned by default.</p>
 
-<h3 id="n-best-lists">N-best lists</h3>
+<h3 id="scoring-n-best-lists">Scoring n-best lists</h3>
 
 <p>N-best lists can be scored using the following command:</p>
 
@@ -755,11 +849,22 @@ provided as plain texts in two corresponding files:</p>
 
 <p>which add a new score into the n-best list under the feature named <em>F0</em>.</p>
 
+<h3 id="word-aligner">Word aligner</h3>
+
+<p>The scorer can be used as a word aligner that generates word alignments for a
+pair of sentences:</p>
+
+<div class="highlighter-rouge"><div class="highlight"><pre class="highlight"><code>./build/marian-scorer -m model.npz -v vocab.{en,de} \
+    -t file.en.txt file.de.txt --alignment
+</code></pre></div></div>
+
+<p>The feature works out-of-the-box for RNN models, while Transformer models need
+to be trained with guided alignments.</p>
+
 <h3 id="summarized-scores">Summarized scores</h3>
 
-<p>The scorer can be also used to summarize scores (option <code class="highlighter-rouge">--summary</code>). It can
-calculate cross-entropy and perplexity for a whole test set and report it at
-the end.</p>
+<p>The scorer can report summarized score (cross-entropy or perplexity) for an
+entire test set with option <code class="highlighter-rouge">--summary</code>.</p>
 
 <h2 id="code-documentation">Code documentation</h2>
 

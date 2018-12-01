@@ -104,6 +104,10 @@
  
 
  
+
+ 
+
+ 
  <li>
    <a class="page-link" href="/quickstart/">Quick start</a>
  </li>
@@ -158,7 +162,7 @@
           </h1>
           <div class="meta">
             <i class="fa fa-clock-o"></i>
-            Last updated: 06 November 2018
+            Last updated: 30 November 2018
           </div>
         </div><!--//doc-header-->
 
@@ -193,19 +197,24 @@ from source.</p>
   <li>CUDA 7.5</li>
 </ul>
 
-<p>Please note that CUDA 10.0+ require CMake 3.12.2+ due to some bugs in earlier versions.</p>
+<p>Notes:</p>
+
+<ol>
+  <li>CUDA 9.0+ requires Boost 1.65.1+</li>
+  <li>CUDA 10.0+ requires CMake 3.12.2+ due to some bugs in earlier versions</li>
+</ol>
 
 <h3 id="cpu-version">CPU version</h3>
 
-<p>The CPU-only version will automatically be compiled if CUDA cannot be detected by CMake.
-Only the translator will be compiled, the training framework is strictily GPU-based.</p>
+<p>In Amun, the CPU-only version will automatically be compiled if CUDA cannot be
+detected by CMake.  The Amun CPU version should be a lot more forgiving
+concerning GCC/G++ or Boost versions.  We tested it on different machines and
+distributions, and the only requirement that needs to be installed is CMake
+3.5.1.</p>
 
-<p>Tested on different machines and distributions:</p>
-
-<ul>
-  <li>CMake 3.5.1</li>
-  <li>The CPU version should be a lot more forgiving concerning GCC/G++ or Boost versions.</li>
-</ul>
+<p>Marian CPU decoder also requires <a href="https://software.intel.com/en-us/mkl">Intel
+MKL</a> (recommended) or
+<a href="https://www.openblas.net/">OpenBLAS</a>.</p>
 
 <h2 id="installation">Installation</h2>
 
@@ -223,8 +232,7 @@ cmake ..
 make -j
 </code></pre></div></div>
 
-<p>If run for the first time, this will also download <em>marian-dev</em> – the training
-framework for Marian.</p>
+<p>If run for the first time, this will also download <a class="github-link" href="https://github.com/marian-nmt/marian-examples/tree/master/" target="_blank"><code class="highlighter-rogue">marian-examples/</code></a> – the repository with training and translation examples.</p>
 
 <h2 id="running-marian">Running Marian</h2>
 
@@ -244,14 +252,14 @@ machine translation model.</p>
 <p>See the <a href="/docs/#training">documentation</a> for more details or the
 <a href="/examples/#examples">examples</a> of how to train different models with Marian.</p>
 
-<h3 id="translating">Translating</h3>
+<h3 id="translation">Translation</h3>
 
 <p>If a trained model is available, run:</p>
 
 <div class="highlighter-rouge"><div class="highlight"><pre class="highlight"><code>./marian/build/marian-decoder -m model.npz -v vocab.en vocab.ro &lt;&lt;&lt; "This is a test ."
 </code></pre></div></div>
 
-<p>For CPU translation, use Amun:</p>
+<p>For faster CPU translation using shallow RNN models, use Amun:</p>
 
 <div class="highlighter-rouge"><div class="highlight"><pre class="highlight"><code>./marian/build/amun -m model.npz -s vocab.en -t vocab.ro &lt;&lt;&lt; "This is a test ."
 </code></pre></div></div>

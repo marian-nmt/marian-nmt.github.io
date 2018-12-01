@@ -16,8 +16,10 @@ Marian toolkit provides the following tools:
   NMT models trained with Marian, and specific models trained with Nematus
 - [marian-server](/docs/cmd/marian-server): a web-socket server providing
   translation service
-- [marian-scorer](/docs/cmd/marian-scorer): a tool for rescoring parallel text
-  files and n-best lists
+- [marian-scorer](/docs/cmd/marian-scorer): for rescoring parallel text files
+  and n-best lists
+- [marian-vocab](/docs/cmd/marian-vocab): for creating a vocabulary from text
+  given on STDIN
 - [amun](/docs/cmd/amun): for CPU and GPU translation using specific models
   trained with Marian or Nematus
 

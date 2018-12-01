@@ -5,42 +5,46 @@ permalink: /docs/cmd/marian/
 icon: fa-file-code-o
 ---
 
+## marian
+Version:
+v1.7.0 67124f8 2018-11-28 13:04:30 +0000
+
 Usage: `./marian/build/marian [OPTIONS]`
 
-## General options
+### General options
 ```
 -h,--help                             Print this help message and exit
 --version                             Print the version number and exit
 -c,--config VECTOR ...                Configuration file(s). If multiple, later overrides earlier
 -w,--workspace UINT=2048              Preallocate  arg  MB of work space
 --log TEXT                            Log training process information to file given by  arg
---log-level TEXT=info                 Set verbosity level of logging: trace, debug, info, warn, 
+--log-level TEXT=info                 Set verbosity level of logging: trace, debug, info, warn,
                                       err(or), critical, off
 --log-time-zone TEXT                  Set time zone for the date shown on logging
 --quiet                               Suppress all logging to stderr. Logging to files still works
 --quiet-translation                   Suppress logging for translation
---seed UINT                           Seed for all random number generators. 0 means initialize 
+--seed UINT                           Seed for all random number generators. 0 means initialize
                                       randomly
 --clip-gemm FLOAT                     If not 0 clip GEMM input values to +/- arg
---interpolate-env-vars                allow the use of environment variables in paths, of the form 
+--interpolate-env-vars                allow the use of environment variables in paths, of the form
                                       ${VAR_NAME}
 --relative-paths                      All paths are relative to the config file location
---dump-config TEXT                    Dump current (modified) configuration to stdout and exit. 
+--dump-config TEXT                    Dump current (modified) configuration to stdout and exit.
                                       Possible values: full, minimal
 ```
 
-## Model options
+### Model options
 ```
--m,--model TEXT=model.npz             Path prefix for model to be saved/resumed. Supported file 
+-m,--model TEXT=model.npz             Path prefix for model to be saved/resumed. Supported file
                                       extensions: .npz, .bin
 --pretrained-model TEXT               Path prefix for pre-trained model to initialize model weights
 --ignore-model-config                 Ignore the model configuration saved in npz file
 --type TEXT=amun                      Model type: amun, nematus, s2s, multi-s2s, transformer
---dim-vocabs VECTOR=0,0 ...           Maximum items in vocabulary ordered by rank, 0 uses all 
+--dim-vocabs VECTOR=0,0 ...           Maximum items in vocabulary ordered by rank, 0 uses all
                                       items in the provided/created vocabulary file
 --dim-emb INT=512                     Size of embedding vector
 --dim-rnn INT=1024                    Size of rnn hidden state
---enc-type TEXT=bidirectional         Type of encoder RNN : bidirectional, bi-unidirectional, 
+--enc-type TEXT=bidirectional         Type of encoder RNN : bidirectional, bi-unidirectional,
                                       alternating (s2s)
 --enc-cell TEXT=gru                   Type of RNN cell: gru, lstm, tanh (s2s)
 --enc-cell-depth INT=1                Number of transitional cells in encoder layers (s2s)
@@ -58,30 +62,30 @@ Usage: `./marian/build/marian [OPTIONS]`
 --tied-embeddings-src                 Tie source and target embeddings
 --tied-embeddings-all                 Tie all embedding layers and output layer
 --transformer-heads INT=8             Number of heads in multi-head attention (transformer)
---transformer-no-projection           Omit linear projection after multi-head attention 
+--transformer-no-projection           Omit linear projection after multi-head attention
                                       (transformer)
 --transformer-dim-ffn INT=2048        Size of position-wise feed-forward network (transformer)
 --transformer-ffn-depth INT=2         Depth of filters (transformer)
 --transformer-ffn-activation TEXT=swish
                                       Activation between filters: swish or relu (transformer)
---transformer-dim-aan INT=2048        Size of position-wise feed-forward network in AAN 
+--transformer-dim-aan INT=2048        Size of position-wise feed-forward network in AAN
                                       (transformer)
 --transformer-aan-depth INT=2         Depth of filter for AAN (transformer)
 --transformer-aan-activation TEXT=swish
                                       Activation between filters in AAN: swish or relu (transformer)
 --transformer-aan-nogate              Omit gate in AAN (transformer)
 --transformer-decoder-autoreg TEXT=self-attention
-                                      Type of autoregressive layer in transformer decoder: 
+                                      Type of autoregressive layer in transformer decoder:
                                       self-attention, average-attention (transformer)
 --transformer-tied-layers VECTOR ...  List of tied decoder layers (transformer)
 --transformer-guided-alignment-layer TEXT=last
-                                      Last or number of layer to use for guided alignment training 
+                                      Last or number of layer to use for guided alignment training
                                       in transformer
---transformer-preprocess TEXT         Operation before each transformer layer: d = dropout, a = 
+--transformer-preprocess TEXT         Operation before each transformer layer: d = dropout, a =
                                       add, n = normalize
---transformer-postprocess-emb TEXT=d  Operation after transformer embedding layer: d = dropout, a 
+--transformer-postprocess-emb TEXT=d  Operation after transformer embedding layer: d = dropout, a
                                       = add, n = normalize
---transformer-postprocess TEXT=dan    Operation after each transformer layer: d = dropout, a = 
+--transformer-postprocess TEXT=dan    Operation after each transformer layer: d = dropout, a =
                                       add, n = normalize
 --dropout-rnn FLOAT                   Scaling dropout along rnn layers and time (0 = no dropout)
 --dropout-src FLOAT                   Dropout source words (0 = no dropout)
@@ -94,84 +98,84 @@ Usage: `./marian/build/marian [OPTIONS]`
 --transformer-dropout-ffn FLOAT       Dropout for transformer filter (0 = no dropout)
 ```
 
-## Training options
+### Training options
 ```
---cost-type TEXT=ce-mean              Optimization criterion: ce-mean, ce-mean-words, ce-sum, 
+--cost-type TEXT=ce-mean              Optimization criterion: ce-mean, ce-mean-words, ce-sum,
                                       perplexity
---overwrite                           Do not create model checkpoints, only overwrite main model 
+--overwrite                           Do not create model checkpoints, only overwrite main model
                                       file with last checkpoint. Reduces disk usage
 --no-reload                           Do not load existing model specified in --model arg
 -t,--train-sets VECTOR ...            Paths to training corpora: source target
--v,--vocabs VECTOR ...                Paths to vocabulary files have to correspond to 
-                                      --train-sets. If this parameter is not supplied we look for 
-                                      vocabulary files source.{yml,json} and target.{yml,json}. 
+-v,--vocabs VECTOR ...                Paths to vocabulary files have to correspond to
+                                      --train-sets. If this parameter is not supplied we look for
+                                      vocabulary files source.{yml,json} and target.{yml,json}.
                                       If these files do not exist they are created
 -e,--after-epochs UINT                Finish after this many epochs, 0 is infinity
 --after-batches UINT                  Finish after this many batch updates, 0 is infinity
---disp-freq TEXT=1000u                Display information every  arg  updates (append 't' for 
+--disp-freq TEXT=1000u                Display information every  arg  updates (append 't' for
                                       every  arg  target labels)
 --disp-first UINT                     Display nformation for the first  arg  updates
 --disp-label-counts                   Display label counts when logging loss progress
---save-freq TEXT=10000u               Save model file every  arg  updates (append 't' for every  
+--save-freq TEXT=10000u               Save model file every  arg  updates (append 't' for every
                                       arg  target labels)
 --max-length UINT=50                  Maximum length of a sentence in a training sentence pair
---max-length-crop                     Crop a sentence to max-length instead of ommitting it if 
+--max-length-crop                     Crop a sentence to max-length instead of ommitting it if
                                       longer than max-length
 --no-shuffle                          Skip shuffling of training data before each epoch
 --no-restore-corpus                   Skip restoring corpus state after training is restarted
 -T,--tempdir TEXT=/tmp                Directory for temporary (shuffled) files and database
---sqlite TEXT                         Use disk-based sqlite3 database for training corpus storage, 
+--sqlite TEXT                         Use disk-based sqlite3 database for training corpus storage,
                                       default is temporary with path creates persistent storage
 --sqlite-drop                         Drop existing tables in sqlite3 database
--d,--devices VECTOR=0 ...             Specifies GPU ID(s) to use for training. Defaults to 
+-d,--devices VECTOR=0 ...             Specifies GPU ID(s) to use for training. Defaults to
                                       0..num-devices-1
---num-devices UINT                    Number of GPUs to use for this process. Defaults to 
+--num-devices UINT                    Number of GPUs to use for this process. Defaults to
                                       length(devices) or 1
---cpu-threads UINT=0                  Use CPU-based computation with this many independent 
+--cpu-threads UINT=0                  Use CPU-based computation with this many independent
                                       threads, 0 means GPU-based computation
 --mini-batch INT=64                   Size of mini-batch used during update
 --mini-batch-words INT                Set mini-batch size based on words instead of sentences
---mini-batch-fit                      Determine mini-batch size automatically based on 
+--mini-batch-fit                      Determine mini-batch size automatically based on
                                       sentence-length to fit reserved memory
 --mini-batch-fit-step UINT=10         Step size for mini-batch-fit statistics
 --maxi-batch INT=100                  Number of batches to preload for length-based sorting
---maxi-batch-sort TEXT=trg            Sorting strategy for maxi-batch: none, src, trg (not 
+--maxi-batch-sort TEXT=trg            Sorting strategy for maxi-batch: none, src, trg (not
                                       available for decoder)
 --shuffle-in-ram                      Keep shuffled corpus in RAM, do not write to temp file
 -o,--optimizer TEXT=adam              Optimization algorithm: sgd, adagrad, adam
 --optimizer-params VECTOR ...         Parameters for optimization algorithm, e.g. betas for adam
 --optimizer-delay UINT=1              SGD update delay, 1 = no delay
---sync-sgd                            Use synchronous SGD instead of asynchronous for multi-gpu 
+--sync-sgd                            Use synchronous SGD instead of asynchronous for multi-gpu
                                       training
 -l,--learn-rate FLOAT=0.0001          Learning rate
 --lr-report                           Report learning rate for each update
---lr-decay FLOAT                      Per-update decay factor for learning rate: lr <- lr * arg (0 
+--lr-decay FLOAT                      Per-update decay factor for learning rate: lr <- lr * arg (0
                                       to disable)
 --lr-decay-strategy TEXT=epoch+stalled
-                                      Strategy for learning rate decaying: epoch, batches, 
+                                      Strategy for learning rate decaying: epoch, batches,
                                       stalled, epoch+batches, epoch+stalled
---lr-decay-start VECTOR=10,1 ...      The first number of (epoch, batches, stalled) validations to 
+--lr-decay-start VECTOR=10,1 ...      The first number of (epoch, batches, stalled) validations to
                                       start learning rate decaying (tuple)
---lr-decay-freq UINT=50000            Learning rate decaying frequency for batches, requires 
+--lr-decay-freq UINT=50000            Learning rate decaying frequency for batches, requires
                                       --lr-decay-strategy to be batches
---lr-decay-reset-optimizer            Reset running statistics of optimizer whenever learning rate 
+--lr-decay-reset-optimizer            Reset running statistics of optimizer whenever learning rate
                                       decays
 --lr-decay-repeat-warmup              Repeat learning rate warmup when learning rate is decayed
---lr-decay-inv-sqrt TEXT=0            Decrease learning rate at arg / sqrt(no. batches) starting 
-                                      at arg  (append 't' or 'e' for sqrt(target labels or 
+--lr-decay-inv-sqrt TEXT=0            Decrease learning rate at arg / sqrt(no. batches) starting
+                                      at arg  (append 't' or 'e' for sqrt(target labels or
                                       epochs))
---lr-warmup TEXT=0                    Increase learning rate linearly for  arg  first batches 
+--lr-warmup TEXT=0                    Increase learning rate linearly for  arg  first batches
                                       (append 't' for  arg  first target labels)
 --lr-warmup-start-rate FLOAT          Start value for learning rate warmup
 --lr-warmup-cycle                     Apply cyclic warmup
 --lr-warmup-at-reload                 Repeat warmup after interrupted training
 --label-smoothing FLOAT               Epsilon for label smoothing (0 to disable)
 --clip-norm FLOAT=1                   Clip gradient norm to  argcli.add<int>(0 to disable)
---exponential-smoothing FLOAT=0       Maintain smoothed version of parameters for validation and 
+--exponential-smoothing FLOAT=0       Maintain smoothed version of parameters for validation and
                                       saving with smoothing factor. 0 to disable
---guided-alignment TEXT=none          Path to a file with word alignments. Use guided alignment to 
+--guided-alignment TEXT=none          Path to a file with word alignments. Use guided alignment to
                                       guide attention or 'none'
---guided-alignment-cost TEXT=mse      Cost type for guided alignment: ce (cross-entropy), mse 
+--guided-alignment-cost TEXT=mse      Cost type for guided alignment: ce (cross-entropy), mse
                                       (mean square error), mult (multiplication)
 --guided-alignment-weight FLOAT=0.1   Weight for guided alignment cost
 --data-weighting TEXT                 Path to a file with sentence or word weights
@@ -180,31 +184,31 @@ Usage: `./marian/build/marian [OPTIONS]`
 --embedding-normalization             Normalize values from custom embedding vectors to [-1, 1]
 --embedding-fix-src                   Fix source embeddings. Affects all encoders
 --embedding-fix-trg                   Fix target embeddings. Affects all decoders
---multi-node                          Enable asynchronous multi-node training through MPI (and 
+--multi-node                          Enable asynchronous multi-node training through MPI (and
                                       legacy sync if combined with --sync-sgd)
 --multi-node-overlap=true             Overlap model computations with MPI communication
 --ulr=false                           Enable ULR (Universal Language Representation)
---ulr-query-vectors TEXT              Path to file with universal sources embeddings from 
+--ulr-query-vectors TEXT              Path to file with universal sources embeddings from
                                       projection into universal space
---ulr-keys-vectors TEXT               Path to file with universal sources embeddings of traget 
+--ulr-keys-vectors TEXT               Path to file with universal sources embeddings of traget
                                       keys from projection into universal space
 --ulr-trainable-transformation=false  Make Query Transformation Matrix A trainable
 --ulr-dim-emb INT                     ULR monolingual embeddings dimension
 --ulr-dropout FLOAT=0                 ULR dropout on embeddings attentions. Default is no dropout
---ulr-softmax-temperature FLOAT=1     ULR softmax temperature to control randomness of 
+--ulr-softmax-temperature FLOAT=1     ULR softmax temperature to control randomness of
                                       predictions. Deafult is 1.0: no temperature
 ```
 
-## Validation set options
+### Validation set options
 ```
 --valid-sets VECTOR ...               Paths to validation corpora: source target
---valid-freq TEXT=10000u              Validate model every  arg  updates (append 't' for every  
+--valid-freq TEXT=10000u              Validate model every  arg  updates (append 't' for every
                                       arg  target labels)
 --valid-metrics VECTOR=cross-entropy ...
-                                      Metric to use during validation: cross-entropy, 
-                                      ce-mean-words, perplexity, valid-script,  translation, 
+                                      Metric to use during validation: cross-entropy,
+                                      ce-mean-words, perplexity, valid-script,  translation,
                                       bleu, bleu-detok. Multiple metrics can be specified
---early-stopping UINT=10              Stop if the first validation metric does not improve for  
+--early-stopping UINT=10              Stop if the first validation metric does not improve for
                                       arg  consecutive validation steps
 -b,--beam-size UINT=12                Beam size used during search with validating translator
 -n,--normalize FLOAT=0                Divide translation score by pow(translation length, arg)
@@ -214,13 +218,11 @@ Usage: `./marian/build/marian [OPTIONS]`
 --n-best                              Generate n-best list
 --valid-mini-batch INT=32             Size of mini-batch used during validation
 --valid-max-length UINT=1000          Maximum length of a sentence in a validating sentence pair
---valid-script-path TEXT              Path to external validation script. It should print a single 
-                                      score to stdout. If the option is used with validating 
-                                      translation, the output translation file will be passed as 
+--valid-script-path TEXT              Path to external validation script. It should print a single
+                                      score to stdout. If the option is used with validating
+                                      translation, the output translation file will be passed as
                                       a first argument
 --valid-translation-output TEXT       Path to store the translation
 --keep-best                           Keep best model for each validation metric
 --valid-log TEXT                      Log validation scores to file given by  arg
 ```
-Version: 
-v1.7.0 67124f8 2018-11-28 13:04:30 +0000

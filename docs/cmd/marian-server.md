@@ -5,9 +5,13 @@ permalink: /docs/cmd/marian-server/
 icon: fa-file-code-o
 ---
 
+## marian-server
+Version: 
+v1.7.0 67124f8 2018-11-28 13:04:30 +0000
+
 Usage: `./marian/build/marian-server [OPTIONS]`
 
-## General options
+### General options
 ```
 -h,--help                             Print this help message and exit
 --version                             Print the version number and exit
@@ -29,62 +33,7 @@ Usage: `./marian/build/marian-server [OPTIONS]`
                                       Possible values: full, minimal
 ```
 
-## Model options
-```
--m,--models VECTOR ...                Paths to model(s) to be loaded. Supported file extensions: 
-                                      .npz, .bin
---ignore-model-config                 Ignore the model configuration saved in npz file
---type TEXT=amun                      Model type: amun, nematus, s2s, multi-s2s, transformer
---dim-vocabs VECTOR=0,0 ...           Maximum items in vocabulary ordered by rank, 0 uses all 
-                                      items in the provided/created vocabulary file
---dim-emb INT=512                     Size of embedding vector
---dim-rnn INT=1024                    Size of rnn hidden state
---enc-type TEXT=bidirectional         Type of encoder RNN : bidirectional, bi-unidirectional, 
-                                      alternating (s2s)
---enc-cell TEXT=gru                   Type of RNN cell: gru, lstm, tanh (s2s)
---enc-cell-depth INT=1                Number of transitional cells in encoder layers (s2s)
---enc-depth INT=1                     Number of encoder layers (s2s)
---dec-cell TEXT=gru                   Type of RNN cell: gru, lstm, tanh (s2s)
---dec-cell-base-depth INT=2           Number of transitional cells in first decoder layer (s2s)
---dec-cell-high-depth INT=1           Number of transitional cells in next decoder layers (s2s)
---dec-depth INT=1                     Number of decoder layers (s2s)
---skip                                Use skip connections (s2s)
---layer-normalization                 Enable layer normalization
---right-left                          Train right-to-left model
---best-deep                           Use Edinburgh deep RNN configuration (s2s)
---special-vocab VECTOR ...            Model-specific special vocabulary ids
---tied-embeddings                     Tie target embeddings and output embeddings in output layer
---tied-embeddings-src                 Tie source and target embeddings
---tied-embeddings-all                 Tie all embedding layers and output layer
---transformer-heads INT=8             Number of heads in multi-head attention (transformer)
---transformer-no-projection           Omit linear projection after multi-head attention 
-                                      (transformer)
---transformer-dim-ffn INT=2048        Size of position-wise feed-forward network (transformer)
---transformer-ffn-depth INT=2         Depth of filters (transformer)
---transformer-ffn-activation TEXT=swish
-                                      Activation between filters: swish or relu (transformer)
---transformer-dim-aan INT=2048        Size of position-wise feed-forward network in AAN 
-                                      (transformer)
---transformer-aan-depth INT=2         Depth of filter for AAN (transformer)
---transformer-aan-activation TEXT=swish
-                                      Activation between filters in AAN: swish or relu (transformer)
---transformer-aan-nogate              Omit gate in AAN (transformer)
---transformer-decoder-autoreg TEXT=self-attention
-                                      Type of autoregressive layer in transformer decoder: 
-                                      self-attention, average-attention (transformer)
---transformer-tied-layers VECTOR ...  List of tied decoder layers (transformer)
---transformer-guided-alignment-layer TEXT=last
-                                      Last or number of layer to use for guided alignment training 
-                                      in transformer
---transformer-preprocess TEXT         Operation before each transformer layer: d = dropout, a = 
-                                      add, n = normalize
---transformer-postprocess-emb TEXT=d  Operation after transformer embedding layer: d = dropout, a 
-                                      = add, n = normalize
---transformer-postprocess TEXT=dan    Operation after each transformer layer: d = dropout, a = 
-                                      add, n = normalize
-```
-
-## Translator options
+### Translator options
 ```
 -i,--input VECTOR=stdin ...           Paths to input file(s), stdin by default
 -o,--output TEXT=stdout               Paths to output file(s), stdout by default
@@ -129,5 +78,3 @@ Usage: `./marian/build/marian-server [OPTIONS]`
 --ulr-softmax-temperature FLOAT=1     ULR softmax temperature to control randomness of 
                                       predictions. Deafult is 1.0: no temperature
 ```
-Version: 
-v1.7.0 67124f8 2018-11-28 13:04:30 +0000

@@ -5,9 +5,13 @@ permalink: /docs/cmd/marian-conv/
 icon: fa-file-code-o
 ---
 
+## marian-conv
+Version: 
+v1.7.0 67124f8 2018-11-28 13:04:30 +0000
+
 Usage: `./marian/build/marian-conv [OPTIONS]`
 
-## Allowed options
+### Allowed options
 ```
 -h,--help                   Print this help message and exit
 --version                   Print the version number and exit
@@ -15,9 +19,8 @@ Usage: `./marian/build/marian-conv [OPTIONS]`
 -t,--to TEXT=model.bin      Output model
 ```
 
-Examples:
-```
+### Examples
+```
 ./marian-conv -f model.npz -t model.bin
 ```
-Version: 
-v1.7.0 67124f8 2018-11-28 13:04:30 +0000
+

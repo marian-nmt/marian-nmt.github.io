@@ -28,9 +28,10 @@ update-cmds: marian/build $(CMDFILES)
 
 docs/cmd/%.md: docs/cmd/_template.tmp
 	sed "s/<COMMAND>/$*/" $^ > $@
-	./marian/build/$* -h 2>&1 | bash _scripts/help2markdown.sh | python _scripts/wrap_help.py >> $@
 	echo "Version: " >> $@
 	./marian/build/marian --version >> $@ 2>&1
+	echo "" >> $@
+	./marian/build/$* -h 2>&1 | bash _scripts/help2markdown.sh | python _scripts/wrap_help.py >> $@
 
 # generate documentation
 update-docs: Doxyfile.marian.in marian

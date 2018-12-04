@@ -55,6 +55,15 @@ permalink: /
   {% endfor %}
 </div><!--//cards-->
 
+<h4> Companies and organizations using Marian </h4>
+<div class="logos-wrapper row">
+  {% for logo in site.data.logos %}
+  <div class="logos-item col-md-4 col-sm-6 col-xs-6">
+    <a href="{{ logo.url }}"><img class="logos-image" alt="{{ logo.name }}" src="{{ logo.img }}" /></a>
+  </div>
+  {% endfor %}
+</div><!--//logos-->
+
 <h4> Acknowledgements </h4>
 <div class="intro">
   <p>

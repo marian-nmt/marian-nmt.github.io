@@ -57,9 +57,12 @@ permalink: /
 
 <h4> Companies and organizations using Marian </h4>
 <div class="logos-wrapper row">
-  {% for logo in site.data.logos %}
+  {% assign logos = site.data.logos | sort: 'name' %}
+  {% for logo in logos %}
   <div class="logos-item col-md-4 col-sm-6 col-xs-6">
-    <a href="{{ logo.url }}"><img class="logos-image" alt="{{ logo.name }}" src="{{ logo.img }}" /></a>
+    <a class="logos-link" href="http://{{ logo.url }}">
+      <img class="logos-image" alt="{{ logo.name }}" src="{{ logo.img }}" />
+    </a>
   </div>
   {% endfor %}
 </div><!--//logos-->

@@ -20,12 +20,11 @@ permalink: /
   <p>
   Main features:
   <ul>
-    <li> Fast multi-gpu training and translation </li>
+    <li> Fast multi-GPU training and batched GPU/CPU translation </li>
     <li> Efficient pure C++ implementation </li>
-    <li> Different model types: deep RNNs, transformer and LMs </li>
-    <li> Compatible with Nematus </li>
+    <li> State-of-the-art NMT architectures: deep RNNs and transformer models </li>
     <li> Permissive open source license (MIT) </li>
-    <li> <a href="{{ site.baseurl }}../features"> and much more... </a> </li>
+    <li> <a href="{{ site.baseurl }}../features"> and much more! </a> </li>
   </ul>
   </p>
 
@@ -42,7 +41,6 @@ permalink: /
 </div><!--//intro-->
 
 <div id="cards-wrapper" class="cards-wrapper row">
-
   {% for card in site.data.cards %}
   <div class="item item-{{ card.color }} col-md-4 col-sm-6 col-xs-6">
     <div class="item-inner">
@@ -55,7 +53,6 @@ permalink: /
     </div><!--//item-inner-->
   </div><!--//item-->
   {% endfor %}
-
 </div><!--//cards-->
 
 <h4> Acknowledgements </h4>

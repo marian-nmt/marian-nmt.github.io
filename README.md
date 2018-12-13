@@ -45,6 +45,10 @@ Pages with command-line options for Marian tools have to be updated manually:
 
 This compiles Marian, so GPU is required.
 
+### Logos
+
+Put a logo image into `assets/logos/` and update `_data/logos.yml`.
+
 
 ## Deployment
 

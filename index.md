@@ -20,9 +20,9 @@ permalink: /
   <p>
   Main features:
   <ul>
-    <li> Fast multi-GPU training and batched GPU/CPU translation </li>
     <li> Efficient pure C++ implementation </li>
-    <li> State-of-the-art NMT architectures: deep RNNs and transformer models </li>
+    <li> Fast multi-GPU training and GPU/CPU translation </li>
+    <li> State-of-the-art NMT architectures: deep RNN and transformer models </li>
     <li> Permissive open source license (MIT) </li>
     <li> <a href="{{ site.baseurl }}../features"> and much more! </a> </li>
   </ul>

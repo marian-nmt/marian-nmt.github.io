@@ -398,11 +398,9 @@ supports sentence and word-level data weighting strategies.
 Data weighting requires providing a file with weights.  In sentence weighting
 strategy, each line of that file contains a real-value weight:
 
-```
-./build/marian \
-    -t corpus.{en,de} -v vocab.{en,de} -m model.npz \
-    --data-weighting-type sentence --data-weighting weights.txt
-```
+    ./build/marian \
+        -t corpus.{en,de} -v vocab.{en,de} -m model.npz \
+        --data-weighting-type sentence --data-weighting weights.txt
 
 To use word weighting you should choose `--data-weighting-type word`, and each
 line of the weight file should contain as many real-value weights as there are
@@ -415,11 +413,9 @@ words in the corresponding target training sentence.
 Marian can handle custom embedding vectors trained with
 [word2vec](https://github.com/dav/word2vec) or another tool:
 
-```
-./build/marian \
-    -t corpus.{en,de} -v vocab.{en,de} -m model.npz \
-    --embedding-vectors vectors.{en,de} --dim-emb 400
-```
+    ./build/marian \
+        -t corpus.{en,de} -v vocab.{en,de} -m model.npz \
+        --embedding-vectors vectors.{en,de} --dim-emb 400
 
 Embedding vectors should be provided in a file in a format similar to the
 word2vec format, with word tokens replaced with words IDs from the relevant
@@ -438,6 +434,40 @@ Other options for managing embedding vectors:
 - `--embedding-fix-src` fixes source embeddings in all encoders
 - `--embedding-fix-trg` fixes target embeddings in all decoders
 - `--embedding-normalization` normalizes vector values into [-1,1] range
+
+
+
+### Guided alignment
+
+Training with guided alignment may improve alignments produced by RNN models
+(`--type amun` or `s2s`) and is mandatory to obtain useful word alignments from
+Transformers (`--type transformer`).  Guided alignment training requires
+providing a file with pre-calculated word alignments for the entire training
+corpus, for example:
+
+    ./build/marian \
+        -t corpus.{en,de} -v vocab.{en,de} -m model.npz \
+        --guided-alignment corpus.align
+
+The file _corpus.align_ from the example can be generated using the
+[fast_align](https://github.com/clab/fast_align) word aligner (please refer to
+their repository for installation instructions):
+
+    paste corpus.en corpus.de | sed 's/\t/ ||| ' > corpus.en-de
+    fast_align/build/fast_align -vdo -i corpus.en-de > forward.align
+    fast_align/build/fast_align -vdor -i corpus.en-de > reverse.align
+    fast_align/build/atools -c grow-diag-final -i forward.align -j reverse.align > corpus.align
+
+or a RNN model and `marian-scorer`, for example:
+
+    ./build/marian-scorer -m model.npz -v vocab.{en,de} -t corpus.en corpus.de > corpus.align
+
+Marian has a few more options related to guided alignment training:
+
+- `--guided-alignment-cost` - cost type for guided alignment
+- `--guided-alignment-weight` - weight for guided alignment cost
+- `--transformer-guided-alignment-layer` - number of layer to use for guided
+  alignment training; only for training transformer models
 
 
 

@@ -7,62 +7,13 @@ icon: fa-cogs
 
 ## Introduction
 
-### Environmental setup
-
-1. Private laptop or server (if you have access to): on machines with a UNIX
-   system, CUDA and Boost installed, just follow installation instructions
-   below. Add `-DCOMPILE_CUDA=off` on CPU-only machines with OpenBLAS or MKL
-   installed.
-
-2. AWS EC2 (if you have already increased your limit for _p2.xlarge_
-   instances): follow the official MTM 2018 instructions on how to use your
-   voucher and start an instance of _p2.xlarge_ using the prepared Marian AMI:
-
-        Go to 'My Account' -> 'Credits'
-          Insert Promo Code, rewrite Captcha and click 'Redeem'
-        Go to 'Services' -> 'EC2'
-          Go to 'Key Pairs' under 'NETWORK & SECURITY' and add your public key
-        Choose the region, e.g. 'EU (Frankfurt)'
-        Go to 'Services' -> 'EC2'
-          Go to 'Limits'
-          Make sure your current limit for p2.xlarge is 1 or more
-          Request limit increase otherwise
-        Go to 'Services' -> 'EC2'
-          Click 'Launch Instance'
-          Choose 'Marian NMT AMI (Ubuntu 16.04 LTS) Version XYZ'
-          Choose p2.xlarge as Instance Type
-          Add 40GBs EBS volume
-          ... continue with default options
-        Test connection: `ping <YOUR-INSTANCE-IP>`
-          Update your Security Group settings if it fails
-        Connect to your instance
-
-3. Cluster at UFAL (during the MTM 2018 lab): follow the instructions:
-
-        # Connect to cluster
-        ssh <YOUR-USER>@geri.ms.mff.cuni.cz
-        ssh sol<X>
-        # Request a GPU device
-        qrsh -q gpu-ms.q -l gpu=1,gpu_ram=8G -pty yes bash
-        # Add CUDA paths to your ~/.bashrc
-        cp ~/.bashrc ~/.bashrc.bac
-        echo -e 'export CUDA_HOME=/opt/cuda/9.2 \n
-            export PATH=$PATH:/opt/cuda/9.2/bin \n
-            export LD_LIBRARY_PATH=$LD_LIBRARY_PATH:/opt/cuda/9.2/lib64 \n' \
-            >> ~/.bashrc
-        # Refresh paths
-        . ~/.bashrc
-        # Continue with the tutorial
-
-### About Marian
-
 **Marian** is an efficient Neural Machine Translation framework written in pure
 C++ with minimal dependencies. It has mainly been developed at the Adam
 Mickiewicz University in Poznań (AMU) and at the University of Edinburgh.
 It is currently being deployed in multiple European and commercial projects.
 
 Marian is also a Machine Translation Marathon 2016 project that is celebrating
-its second birthday during the current MTM!
+its second birthday during the MTM 2018!
 
 More information:
 - [Features & benchmarks](/features)
@@ -255,7 +206,7 @@ cat data/newstest2015.ende.bpe.out \
 After that we can compute the BLEU score for this translation:
 
 ```
-cat data/newstest2015.ende.out | ./sacreBLEU/sacrebleu.py data/newstest2015.ende.ref
+cat data/newstest2015.ende.out | ./sacreBLEU/sacrebleu.py data/newstest2015.ende.de
 ```
 
 ### Exercise A
@@ -321,7 +272,7 @@ mkdir -p model
 
 ../../marian-dev/build/marian \
   --model model/model.npz \
-  --train-set data/corpus.bpe.ro data/corpus.bpe.en \
+  --train-sets data/corpus.bpe.ro data/corpus.bpe.en \
   --disp-freq 100
 ```
 

@@ -166,7 +166,7 @@
           </h1>
           <div class="meta">
             <i class="fa fa-clock-o"></i>
-            Last updated: 01 December 2018
+            Last updated: 18 January 2019
           </div>
         </div><!--//doc-header-->
 
@@ -591,6 +591,43 @@ trained w.r.t to vocabulary using <a class="github-link" href="https://github.co
   <li><code class="highlighter-rouge">--embedding-fix-src</code> fixes source embeddings in all encoders</li>
   <li><code class="highlighter-rouge">--embedding-fix-trg</code> fixes target embeddings in all decoders</li>
   <li><code class="highlighter-rouge">--embedding-normalization</code> normalizes vector values into [-1,1] range</li>
+</ul>
+
+<h3 id="guided-alignment">Guided alignment</h3>
+
+<p>Training with guided alignment may improve alignments produced by RNN models
+(<code class="highlighter-rouge">--type amun</code> or <code class="highlighter-rouge">s2s</code>) and is mandatory to obtain useful word alignments from
+Transformers (<code class="highlighter-rouge">--type transformer</code>).  Guided alignment training requires
+providing a file with pre-calculated word alignments for the entire training
+corpus, for example:</p>
+
+<div class="highlighter-rouge"><div class="highlight"><pre class="highlight"><code>./build/marian \
+    -t corpus.{en,de} -v vocab.{en,de} -m model.npz \
+    --guided-alignment corpus.align
+</code></pre></div></div>
+
+<p>The file <em>corpus.align</em> from the example can be generated using the
+<a href="https://github.com/clab/fast_align">fast_align</a> word aligner (please refer to
+their repository for installation instructions):</p>
+
+<div class="highlighter-rouge"><div class="highlight"><pre class="highlight"><code>paste corpus.en corpus.de | sed 's/\t/ ||| ' &gt; corpus.en-de
+fast_align/build/fast_align -vdo -i corpus.en-de &gt; forward.align
+fast_align/build/fast_align -vdor -i corpus.en-de &gt; reverse.align
+fast_align/build/atools -c grow-diag-final -i forward.align -j reverse.align &gt; corpus.align
+</code></pre></div></div>
+
+<p>or a RNN model and <code class="highlighter-rouge">marian-scorer</code>, for example:</p>
+
+<div class="highlighter-rouge"><div class="highlight"><pre class="highlight"><code>./build/marian-scorer -m model.npz -v vocab.{en,de} -t corpus.en corpus.de &gt; corpus.align
+</code></pre></div></div>
+
+<p>Marian has a few more options related to guided alignment training:</p>
+
+<ul>
+  <li><code class="highlighter-rouge">--guided-alignment-cost</code> - cost type for guided alignment</li>
+  <li><code class="highlighter-rouge">--guided-alignment-weight</code> - weight for guided alignment cost</li>
+  <li><code class="highlighter-rouge">--transformer-guided-alignment-layer</code> - number of layer to use for guided
+alignment training; only for training transformer models</li>
 </ul>
 
 <h3 id="multi-node-training">Multi-node training</h3>

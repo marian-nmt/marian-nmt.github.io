@@ -622,6 +622,32 @@ model can learn word alignments in one of its heads.
 
 
 
+### Lexical shortlists
+
+With a lexical shortlist the output vocabulary is restricted to a small subset
+of translation candidates, which can improve CPU-bound efficiency. A shortlist
+file, say _lex.s2t_, can be passed to the decoder using the `--shortlist`
+option, for example:
+
+    ./build/marian-decoder -m model.npz -v vocab.en vocab.de \
+        --shortlist lex.s2t 100 75 < input.txt
+
+The second and third arguments are optional, and mean that the output
+vocabulary will be restricted to the 100 most frequent target words and the 75
+most probable translations for every source word in a batch.
+
+Lexical shortlist files can be generated with {% github_link
+marian-dev/scripts/shortlist/generate_shortlists.pl %}, for example:
+
+    perl generate_shortlists.pl --bindir /path/to/bin -s corpus.en -t corpus.de
+
+where _corpus.en_ and _corpus.de_ are preprocessed training data, and the `bin`
+directory contains `fast_align` and `atools` from
+[fast_align](https://github.com/clab/fast_align) and `extract_lex` from
+[extract-lex](https://github.com/marian-nmt/extract-lex).
+
+
+
 ### Web server
 
 The `marian-server` command starts a web-socket server providing CPU and GPU

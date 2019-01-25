@@ -166,7 +166,7 @@
           </h1>
           <div class="meta">
             <i class="fa fa-clock-o"></i>
-            Last updated: 18 January 2019
+            Last updated: 24 January 2019
           </div>
         </div><!--//doc-header-->
 
@@ -798,6 +798,31 @@ jetzt weiß jeder ||| 0-0 1-2 2-1 2-3 3-2 3-3
 none of these has to be very useful for word alignment purposes.  We recommend
 training model with guided alignments first (<code class="highlighter-rouge">--guided-alignment</code>) so that the
 model can learn word alignments in one of its heads.</p>
+
+<h3 id="lexical-shortlists">Lexical shortlists</h3>
+
+<p>With a lexical shortlist the output vocabulary is restricted to a small subset
+of translation candidates, which can improve CPU-bound efficiency. A shortlist
+file, say <em>lex.s2t</em>, can be passed to the decoder using the <code class="highlighter-rouge">--shortlist</code>
+option, for example:</p>
+
+<div class="highlighter-rouge"><div class="highlight"><pre class="highlight"><code>./build/marian-decoder -m model.npz -v vocab.en vocab.de \
+    --shortlist lex.s2t 100 75 &lt; input.txt
+</code></pre></div></div>
+
+<p>The second and third arguments are optional, and mean that the output
+vocabulary will be restricted to the 100 most frequent target words and the 75
+most probable translations for every source word in a batch.</p>
+
+<p>Lexical shortlist files can be generated with <a class="github-link" href="https://github.com/marian-nmt/marian-dev/tree/master/scripts/shortlist/generate_shortlists.pl" target="_blank"><code class="highlighter-rogue">marian-dev/scripts/shortlist/generate_shortlists.pl</code></a>, for example:</p>
+
+<div class="highlighter-rouge"><div class="highlight"><pre class="highlight"><code>perl generate_shortlists.pl --bindir /path/to/bin -s corpus.en -t corpus.de
+</code></pre></div></div>
+
+<p>where <em>corpus.en</em> and <em>corpus.de</em> are preprocessed training data, and the <code class="highlighter-rouge">bin</code>
+directory contains <code class="highlighter-rouge">fast_align</code> and <code class="highlighter-rouge">atools</code> from
+<a href="https://github.com/clab/fast_align">fast_align</a> and <code class="highlighter-rouge">extract_lex</code> from
+<a href="https://github.com/marian-nmt/extract-lex">extract-lex</a>.</p>
 
 <h3 id="web-server">Web server</h3>
 

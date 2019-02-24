@@ -61,7 +61,7 @@ permalink: /
   {% for logo in logos %}
   <div class="logos-item col-md-4 col-sm-6 col-xs-6">
     <a class="logos-link" href="http://{{ logo.url }}">
-      <img class="logos-image" alt="{{ logo.name }}" src="{{ logo.img }}" />
+      <img class="logos-image" alt="{{ logo.name }}" title="{{ logo.name }}" src="{{ logo.img }}" />
     </a>
   </div>
   {% endfor %}

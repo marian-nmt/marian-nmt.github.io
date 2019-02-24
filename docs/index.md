@@ -398,11 +398,9 @@ supports sentence and word-level data weighting strategies.
 Data weighting requires providing a file with weights.  In sentence weighting
 strategy, each line of that file contains a real-value weight:
 
-```
-./build/marian \
-    -t corpus.{en,de} -v vocab.{en,de} -m model.npz \
-    --data-weighting-type sentence --data-weighting weights.txt
-```
+    ./build/marian \
+        -t corpus.{en,de} -v vocab.{en,de} -m model.npz \
+        --data-weighting-type sentence --data-weighting weights.txt
 
 To use word weighting you should choose `--data-weighting-type word`, and each
 line of the weight file should contain as many real-value weights as there are
@@ -415,11 +413,9 @@ words in the corresponding target training sentence.
 Marian can handle custom embedding vectors trained with
 [word2vec](https://github.com/dav/word2vec) or another tool:
 
-```
-./build/marian \
-    -t corpus.{en,de} -v vocab.{en,de} -m model.npz \
-    --embedding-vectors vectors.{en,de} --dim-emb 400
-```
+    ./build/marian \
+        -t corpus.{en,de} -v vocab.{en,de} -m model.npz \
+        --embedding-vectors vectors.{en,de} --dim-emb 400
 
 Embedding vectors should be provided in a file in a format similar to the
 word2vec format, with word tokens replaced with words IDs from the relevant
@@ -438,6 +434,40 @@ Other options for managing embedding vectors:
 - `--embedding-fix-src` fixes source embeddings in all encoders
 - `--embedding-fix-trg` fixes target embeddings in all decoders
 - `--embedding-normalization` normalizes vector values into [-1,1] range
+
+
+
+### Guided alignment
+
+Training with guided alignment may improve alignments produced by RNN models
+(`--type amun` or `s2s`) and is mandatory to obtain useful word alignments from
+Transformers (`--type transformer`).  Guided alignment training requires
+providing a file with pre-calculated word alignments for the entire training
+corpus, for example:
+
+    ./build/marian \
+        -t corpus.{en,de} -v vocab.{en,de} -m model.npz \
+        --guided-alignment corpus.align
+
+The file _corpus.align_ from the example can be generated using the
+[fast_align](https://github.com/clab/fast_align) word aligner (please refer to
+their repository for installation instructions):
+
+    paste corpus.en corpus.de | sed 's/\t/ ||| ' > corpus.en-de
+    fast_align/build/fast_align -vdo -i corpus.en-de > forward.align
+    fast_align/build/fast_align -vdor -i corpus.en-de > reverse.align
+    fast_align/build/atools -c grow-diag-final -i forward.align -j reverse.align > corpus.align
+
+or a RNN model and `marian-scorer`, for example:
+
+    ./build/marian-scorer -m model.npz -v vocab.{en,de} -t corpus.en corpus.de > corpus.align
+
+Marian has a few more options related to guided alignment training:
+
+- `--guided-alignment-cost` - cost type for guided alignment
+- `--guided-alignment-weight` - weight for guided alignment cost
+- `--transformer-guided-alignment-layer` - number of layer to use for guided
+  alignment training; only for training transformer models
 
 
 
@@ -589,6 +619,32 @@ The transformer has basically 6x8 different alignment matrices, and in theory
 none of these has to be very useful for word alignment purposes.  We recommend
 training model with guided alignments first (`--guided-alignment`) so that the
 model can learn word alignments in one of its heads.
+
+
+
+### Lexical shortlists
+
+With a lexical shortlist the output vocabulary is restricted to a small subset
+of translation candidates, which can improve CPU-bound efficiency. A shortlist
+file, say _lex.s2t_, can be passed to the decoder using the `--shortlist`
+option, for example:
+
+    ./build/marian-decoder -m model.npz -v vocab.en vocab.de \
+        --shortlist lex.s2t 100 75 < input.txt
+
+The second and third arguments are optional, and mean that the output
+vocabulary will be restricted to the 100 most frequent target words and the 75
+most probable translations for every source word in a batch.
+
+Lexical shortlist files can be generated with {% github_link
+marian-dev/scripts/shortlist/generate_shortlists.pl %}, for example:
+
+    perl generate_shortlists.pl --bindir /path/to/bin -s corpus.en -t corpus.de
+
+where _corpus.en_ and _corpus.de_ are preprocessed training data, and the `bin`
+directory contains `fast_align` and `atools` from
+[fast_align](https://github.com/clab/fast_align) and `extract_lex` from
+[extract-lex](https://github.com/marian-nmt/extract-lex).
 
 
 

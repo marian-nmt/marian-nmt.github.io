@@ -162,7 +162,7 @@
           </h1>
           <div class="meta">
             <i class="fa fa-clock-o"></i>
-            Last updated: 30 November 2018
+            Last updated: 12 August 2019
           </div>
         </div><!--//doc-header-->
 
@@ -176,8 +176,8 @@
 
 <p><strong>Ubuntu 16.04 LTS (tested and recommended).</strong>
 For Ubuntu 16.04 the standard packages should work. On newer versions of
-Ubuntu, e.g. 16.10, there may be problems due to incompatibilities of the
-default g++ compiler and CUDA.</p>
+Ubuntu, there may be problems due to incompatibilities of the default g++
+compiler and CUDA.</p>
 
 <ul>
   <li>CMake 3.5.1</li>
@@ -206,15 +206,58 @@ from source.</p>
 
 <h3 id="cpu-version">CPU version</h3>
 
-<p>In Amun, the CPU-only version will automatically be compiled if CUDA cannot be
-detected by CMake.  The Amun CPU version should be a lot more forgiving
-concerning GCC/G++ or Boost versions.  We tested it on different machines and
-distributions, and the only requirement that needs to be installed is CMake
-3.5.1.</p>
+<p>A Marian CPU build requires <a href="https://software.intel.com/en-us/mkl">Intel MKL</a>
+(recommended) or <a href="https://www.openblas.net/">OpenBLAS</a>.
+It can be enabled by adding <code class="highlighter-rouge">-DCOMPILE_CPU=on</code> to the CMake command.</p>
 
-<p>Marian CPU decoder also requires <a href="https://software.intel.com/en-us/mkl">Intel
-MKL</a> (recommended) or
-<a href="https://www.openblas.net/">OpenBLAS</a>.</p>
+<h3 id="required-ubuntu-packages">Required Ubuntu packages</h3>
+
+<p>Assuming a fresh Ubuntu LTS installation with CUDA, the following packages need to be
+installed to compile Marian with minimal dependencies:</p>
+
+<ul>
+  <li>
+    <p>Ubuntu 18.04 + CUDA 9.2 (defaults are gcc 7.3.0, Boost 1.65):</p>
+
+    <div class="highlighter-rouge"><div class="highlight"><pre class="highlight"><code>sudo apt-get install git cmake build-essential libboost-all-dev
+</code></pre></div>    </div>
+  </li>
+  <li>
+    <p>Ubuntu 16.04 + CUDA 9.2 (gcc 5.4.0, Boost 1.58):</p>
+
+    <div class="highlighter-rouge"><div class="highlight"><pre class="highlight"><code>sudo apt-get install git cmake build-essential libboost-all-dev zlib1g-dev
+</code></pre></div>    </div>
+  </li>
+  <li>
+    <p>Ubuntu 14.04 + CUDA 8.0 (gcc 4.8.4, Boost 1.54)</p>
+
+    <div class="highlighter-rouge"><div class="highlight"><pre class="highlight"><code>sudo apt-get install git cmake3 build-essential libboost-all-dev
+</code></pre></div>    </div>
+  </li>
+</ul>
+
+<p>Additional packages can be installed to compile the server, built-in SentencePiece and with TCMalloc support:</p>
+
+<ul>
+  <li>
+    <p>Ubuntu 18.04 + CUDA 9.2 (defaults are gcc 7.3.0, Boost 1.65):</p>
+
+    <div class="highlighter-rouge"><div class="highlight"><pre class="highlight"><code>sudo apt-get install libprotobuf10 protobuf-compiler libprotobuf-dev openssl libssl-dev libgoogle-perftools-dev
+</code></pre></div>    </div>
+  </li>
+  <li>
+    <p>Ubuntu 16.04 + CUDA 9.2 (gcc 5.4.0, Boost 1.58):</p>
+
+    <div class="highlighter-rouge"><div class="highlight"><pre class="highlight"><code>sudo apt-get install libprotobuf9v5 protobuf-compiler libprotobuf-dev openssl libssl-dev libgoogle-perftools-dev
+</code></pre></div>    </div>
+  </li>
+  <li>
+    <p>Ubuntu 14.04 + CUDA 8.0 (gcc 4.8.4, Boost 1.54)</p>
+
+    <div class="highlighter-rouge"><div class="highlight"><pre class="highlight"><code>sudo apt-get install libprotobuf8 protobuf-compiler libprotobuf-dev openssl libssl-dev libgoogle-perftools-dev
+</code></pre></div>    </div>
+  </li>
+</ul>
 
 <h2 id="installation">Installation</h2>
 

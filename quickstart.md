@@ -41,7 +41,7 @@ A Marian CPU build requires [Intel MKL](https://software.intel.com/en-us/mkl)
 It can be enabled by adding `-DCOMPILE_CPU=on` to the CMake command.
 
 
-### Required Ubuntu packages
+### Ubuntu packages
 
 Assuming a fresh Ubuntu LTS installation with CUDA, the following packages need to be
 installed to compile Marian with minimal dependencies:
@@ -59,20 +59,8 @@ installed to compile Marian with minimal dependencies:
       sudo apt-get install git cmake3 build-essential libboost-all-dev
 
 
-Additional packages can be installed to compile the server, built-in SentencePiece and with TCMalloc support:
-
-* Ubuntu 18.04 + CUDA 9.2 (defaults are gcc 7.3.0, Boost 1.65):
-
-      sudo apt-get install libprotobuf10 protobuf-compiler libprotobuf-dev openssl libssl-dev libgoogle-perftools-dev
-
-* Ubuntu 16.04 + CUDA 9.2 (gcc 5.4.0, Boost 1.58):
-
-      sudo apt-get install libprotobuf9v5 protobuf-compiler libprotobuf-dev openssl libssl-dev libgoogle-perftools-dev
-
-* Ubuntu 14.04 + CUDA 8.0 (gcc 4.8.4, Boost 1.54)
-
-      sudo apt-get install libprotobuf8 protobuf-compiler libprotobuf-dev openssl libssl-dev libgoogle-perftools-dev
-
+[Additional packages](/docs/#ubuntu-packages) can be installed to compile with
+the web server, built-in SentencePiece and TCMalloc support.
 
 
 ## Installation

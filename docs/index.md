@@ -72,6 +72,27 @@ obtained by running `cmake -LH -N` or `cmake -LAH -N` from the `build`
 directory after running `cmake ..` first.
 
 
+
+### Ubuntu packages
+
+Assuming a fresh Ubuntu LTS installation with CUDA, the following packages need
+to be installed to compile with all features, including the web server,
+built-in SentencePiece and TCMalloc support:git cmake3 build-essential libboost-all-dev
+
+* Ubuntu 18.04 + CUDA 9.2 (defaults are gcc 7.3.0, Boost 1.65):
+
+      sudo apt-get install git cmake build-essential libboost-all-dev libprotobuf10 protobuf-compiler libprotobuf-dev openssl libssl-dev libgoogle-perftools-dev
+
+* Ubuntu 16.04 + CUDA 9.2 (gcc 5.4.0, Boost 1.58):
+
+      sudo apt-get install git cmake build-essential libboost-all-dev zlib1g-dev libprotobuf9v5 protobuf-compiler libprotobuf-dev openssl libssl-dev libgoogle-perftools-dev
+
+* Ubuntu 14.04 + CUDA 8.0 (gcc 4.8.4, Boost 1.54)
+
+      sudo apt-get install git cmake3 build-essential libboost-all-dev libprotobuf8 protobuf-compiler libprotobuf-dev openssl libssl-dev libgoogle-perftools-dev
+
+
+
 ### Static compilation
 
 Marian will be compiled statically if the flag `USE_STATIC_LIBS` is set:
@@ -125,6 +146,8 @@ Specify the path to your CUDA root directory via CMake:
 Marian CPU version requires [Intel MKL](https://software.intel.com/en-us/mkl) or
 [OpenBLAS](https://www.openblas.net/). Both are free, but MKL is not
 open-sourced. Intel MKL is strongly recommended as it is faster.
+
+A CPU build can be enabled by adding `-DCOMPILE_CPU=on` to the CMake command.
 
 
 

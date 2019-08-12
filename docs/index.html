@@ -166,7 +166,7 @@
           </h1>
           <div class="meta">
             <i class="fa fa-clock-o"></i>
-            Last updated: 24 January 2019
+            Last updated: 12 August 2019
           </div>
         </div><!--//doc-header-->
 
@@ -238,6 +238,33 @@ make -j
 obtained by running <code class="highlighter-rouge">cmake -LH -N</code> or <code class="highlighter-rouge">cmake -LAH -N</code> from the <code class="highlighter-rouge">build</code>
 directory after running <code class="highlighter-rouge">cmake ..</code> first.</p>
 
+<h3 id="ubuntu-packages">Ubuntu packages</h3>
+
+<p>Assuming a fresh Ubuntu LTS installation with CUDA, the following packages need
+to be installed to compile with all features, including the web server,
+built-in SentencePiece and TCMalloc support:git cmake3 build-essential libboost-all-dev</p>
+
+<ul>
+  <li>
+    <p>Ubuntu 18.04 + CUDA 9.2 (defaults are gcc 7.3.0, Boost 1.65):</p>
+
+    <div class="highlighter-rouge"><div class="highlight"><pre class="highlight"><code>sudo apt-get install git cmake build-essential libboost-all-dev libprotobuf10 protobuf-compiler libprotobuf-dev openssl libssl-dev libgoogle-perftools-dev
+</code></pre></div>    </div>
+  </li>
+  <li>
+    <p>Ubuntu 16.04 + CUDA 9.2 (gcc 5.4.0, Boost 1.58):</p>
+
+    <div class="highlighter-rouge"><div class="highlight"><pre class="highlight"><code>sudo apt-get install git cmake build-essential libboost-all-dev zlib1g-dev libprotobuf9v5 protobuf-compiler libprotobuf-dev openssl libssl-dev libgoogle-perftools-dev
+</code></pre></div>    </div>
+  </li>
+  <li>
+    <p>Ubuntu 14.04 + CUDA 8.0 (gcc 4.8.4, Boost 1.54)</p>
+
+    <div class="highlighter-rouge"><div class="highlight"><pre class="highlight"><code>sudo apt-get install git cmake3 build-essential libboost-all-dev libprotobuf8 protobuf-compiler libprotobuf-dev openssl libssl-dev libgoogle-perftools-dev
+</code></pre></div>    </div>
+  </li>
+</ul>
+
 <h3 id="static-compilation">Static compilation</h3>
 
 <p>Marian will be compiled statically if the flag <code class="highlighter-rouge">USE_STATIC_LIBS</code> is set:</p>
@@ -289,6 +316,8 @@ make -j16
 <p>Marian CPU version requires <a href="https://software.intel.com/en-us/mkl">Intel MKL</a> or
 <a href="https://www.openblas.net/">OpenBLAS</a>. Both are free, but MKL is not
 open-sourced. Intel MKL is strongly recommended as it is faster.</p>
+
+<p>A CPU build can be enabled by adding <code class="highlighter-rouge">-DCOMPILE_CPU=on</code> to the CMake command.</p>
 
 <h3 id="sentencepiece">SentencePiece</h3>
 

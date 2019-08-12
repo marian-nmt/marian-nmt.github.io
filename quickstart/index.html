@@ -210,7 +210,7 @@ from source.</p>
 (recommended) or <a href="https://www.openblas.net/">OpenBLAS</a>.
 It can be enabled by adding <code class="highlighter-rouge">-DCOMPILE_CPU=on</code> to the CMake command.</p>
 
-<h3 id="required-ubuntu-packages">Required Ubuntu packages</h3>
+<h3 id="ubuntu-packages">Ubuntu packages</h3>
 
 <p>Assuming a fresh Ubuntu LTS installation with CUDA, the following packages need to be
 installed to compile Marian with minimal dependencies:</p>
@@ -236,28 +236,8 @@ installed to compile Marian with minimal dependencies:</p>
   </li>
 </ul>
 
-<p>Additional packages can be installed to compile the server, built-in SentencePiece and with TCMalloc support:</p>
-
-<ul>
-  <li>
-    <p>Ubuntu 18.04 + CUDA 9.2 (defaults are gcc 7.3.0, Boost 1.65):</p>
-
-    <div class="highlighter-rouge"><div class="highlight"><pre class="highlight"><code>sudo apt-get install libprotobuf10 protobuf-compiler libprotobuf-dev openssl libssl-dev libgoogle-perftools-dev
-</code></pre></div>    </div>
-  </li>
-  <li>
-    <p>Ubuntu 16.04 + CUDA 9.2 (gcc 5.4.0, Boost 1.58):</p>
-
-    <div class="highlighter-rouge"><div class="highlight"><pre class="highlight"><code>sudo apt-get install libprotobuf9v5 protobuf-compiler libprotobuf-dev openssl libssl-dev libgoogle-perftools-dev
-</code></pre></div>    </div>
-  </li>
-  <li>
-    <p>Ubuntu 14.04 + CUDA 8.0 (gcc 4.8.4, Boost 1.54)</p>
-
-    <div class="highlighter-rouge"><div class="highlight"><pre class="highlight"><code>sudo apt-get install libprotobuf8 protobuf-compiler libprotobuf-dev openssl libssl-dev libgoogle-perftools-dev
-</code></pre></div>    </div>
-  </li>
-</ul>
+<p><a href="/docs/#ubuntu-packages">Additional packages</a> can be installed to compile with
+the web server, built-in SentencePiece and TCMalloc support.</p>
 
 <h2 id="installation">Installation</h2>
 
@@ -275,7 +255,7 @@ cmake ..
 make -j
 </code></pre></div></div>
 
-<p>If run for the first time, this will also download <a class="github-link" href="https://github.com/marian-nmt/marian-examples/tree/master/" target="_blank"><code class="highlighter-rogue">marian-examples/</code></a> – the repository with training and translation examples.</p>
+<p>If run for the first time, this will also download several submodule repositories.</p>
 
 <h2 id="running-marian">Running Marian</h2>
 

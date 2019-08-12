@@ -77,8 +77,7 @@ The project is a standard CMake out-of-source build:
     cmake ..
     make -j
 
-If run for the first time, this will also download {% github_link
-marian-examples %} -- the repository with training and translation examples.
+If run for the first time, this will also download several submodule repositories.
 
 ## Running Marian
 

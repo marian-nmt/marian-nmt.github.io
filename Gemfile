@@ -10,13 +10,14 @@ ruby RUBY_VERSION
 # This will help ensure the proper Jekyll version is running.
 # Happy Jekylling!
 
-gem "jekyll"
+gem "jekyll", ">= 3.6.3"
 gem "jekyll-scholar"
 gem "jekyll-last-modified-at"
 gem "jekyll-twitter-plugin"
 
 gem "git-up"
 
+gem "ffi", ">= 1.9.24"
 gem "less"
 gem "therubyracer"
 gem "json"

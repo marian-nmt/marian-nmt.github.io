@@ -4,11 +4,19 @@ The website is build with Jekyll - a static site generator.
 The content is created and updated on branch `jekyll`, then the static pages
 are generated with Jekyll and stored in branch `master`.
 
+
 We use custom theme, which is not supported by automatic GitHub Pages
 generator. The static files have to be generated locally before deploying.
 
 
 ## Local build
+
+If cloning the repository for the first time, download the remote branch:
+
+    git clone https://github.com/marian-nmt/marian-nmt.github.io
+    cd marian-nmt.github.io
+    git fetch origin jekyll
+    git checkout jekyll
 
 To build the website locally you need to install `ruby` with gem `bundler`.
 
@@ -53,7 +61,7 @@ markdown files.
 When all updates have been made and the website can be still generated locally
 *without errors*, you can commit and deploy your changes by running:
 
-    bash ./commit-and-deploy.sh
+    bash -v ./commit-and-deploy.sh
 
 The script commit all changes for you with default commit message, but it is
 always better to commit changes on your own beforehand and set a relevant

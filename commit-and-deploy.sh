@@ -9,7 +9,7 @@ git push origin jekyll
 JEKYLL_ENV=production bundle exec jekyll build
 git checkout master
 rsync -ca _site/* .
-rm -rf _site
+rm -rf _site *~
 git add * || true
 git add docs/marian || true
 git commit -a -m 'Commit static pages'

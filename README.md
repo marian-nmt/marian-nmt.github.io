@@ -75,3 +75,5 @@ message.
 | `[Text](/permalink/)` | An active link to another subpage of the website identified by its permalink. |
 | `{% github_link <repository>/<path/to/file> %}` | An active link to a file/directory `<path/to/file>` in the given repository, i.e. `http://marian-nmt.github.io/marian/<repository>/tree/master/<path/to/file>`. |
 | `{% github_link "clickable text" <repository>/<path/to/file> %}` | An active link to a file/directory `<path/to/file>` in the given repository with `clickable text`. |
+| `[Text](/link){:target="_blank"}` | Opens the linked document in a new window or tab. |
+| `$$ x_{i}^{j} $$` | A LaTeX mathematical formula. |

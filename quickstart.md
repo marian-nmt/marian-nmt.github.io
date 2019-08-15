@@ -59,8 +59,8 @@ installed to compile Marian with minimal dependencies:
       sudo apt-get install git cmake3 build-essential libboost-all-dev
 
 
-[Additional packages](/docs/#ubuntu-packages) can be installed to compile with
-the web server, built-in SentencePiece and TCMalloc support.
+Additional [packages](/docs/#ubuntu-packages) can be installed to compile
+Marian with the web server, built-in SentencePiece and TCMalloc support.
 
 
 ## Installation

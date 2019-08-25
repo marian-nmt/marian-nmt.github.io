@@ -47,7 +47,15 @@ menu: 4
 
 ## Tutorials
 
-### MT Marathon 2018 Labs
+### MT Marathon 2019 Efficiency
+
+**[The Machine Translation Marathon 2019 Tutorial](/examples/mtm2019)** shows
+how to do efficient neural machine translation using the Marian toolkit by
+optimizing the speed, accuracy and use of resources for training and decoding
+of NMT models.
+
+
+### MT Marathon 2018 Intro
 
 **[The Machine Translation Marathon 2018 Labs](/examples/mtm2018-labs)** is a
 Marian tutorial that covers topics like downloading and compiling Marian,

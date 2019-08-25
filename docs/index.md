@@ -145,7 +145,18 @@ Specify the path to your CUDA root directory via CMake:
 
 Marian CPU version requires [Intel MKL](https://software.intel.com/en-us/mkl) or
 [OpenBLAS](https://www.openblas.net/). Both are free, but MKL is not
-open-sourced. Intel MKL is strongly recommended as it is faster.
+open-sourced. Intel MKL is strongly recommended as it is faster. On Ubuntu
+16.04 it can be installed using the following steps:
+
+```
+wget https://apt.repos.intel.com/intel-gpg-keys/GPG-PUB-KEY-INTEL-SW-PRODUCTS-2019.PUB
+sudo apt-key add GPG-PUB-KEY-INTEL-SW-PRODUCTS-2019.PUB
+sudo sh -c 'echo deb https://apt.repos.intel.com/mkl all main > /etc/apt/sources.list.d/intel-mkl.list'
+sudo apt-get update
+sudo apt-get install intel-mkl-64bit-2019.4-XYZ
+```
+
+Where _XYZ_ is the revision number.
 
 A CPU build can be enabled by adding `-DCOMPILE_CPU=on` to the CMake command.
 

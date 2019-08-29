@@ -1,0 +1,666 @@
+<!--[if IE 8]> <html lang="en" class="ie8"> <![endif]-->
+<!--[if IE 9]> <html lang="en" class="ie9"> <![endif]-->
+<!--[if !IE]><!-->
+<html lang="en">
+<!--<![endif]-->
+
+  <head>
+  <title>
+    
+    Marian :: MT Marathon 2019
+    
+  </title>
+  <!-- Meta -->
+  <meta charset="utf-8">
+  <meta http-equiv="X-UA-Compatible" content="IE=edge">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <meta name="description" content="Fast Neural Machine Translation in C++">
+
+  <link href='http://fonts.googleapis.com/css?family=Open+Sans:300italic,400italic,600italic,700italic,800italic,400,300,600,700,800' rel='stylesheet' type='text/css'>
+  <!-- Global CSS -->
+  <link rel="stylesheet" href="/assets/plugins/bootstrap/css/bootstrap.min.css">
+  <!-- Plugins CSS -->
+  <link rel="stylesheet" href="/assets/plugins/font-awesome/css/font-awesome.min.css">
+  <link rel="stylesheet" href="/assets/css/pygments/github.css">
+
+  <!-- Theme CSS -->
+  <link id="theme-style" rel="stylesheet" href="/assets/css/styles.css">
+  <!-- HTML5 shim and Respond.js IE8 support of HTML5 elements and media queries -->
+  <!--[if lt IE 9]>
+    <script src="https://oss.maxcdn.com/html5shiv/3.7.2/html5shiv.min.js"></script>
+    <script src="https://oss.maxcdn.com/respond/1.4.2/respond.min.js"></script>
+  <![endif]-->
+
+  <link rel="stylesheet" href="/assets/plugins/github-fork-ribbon-css/gh-fork-ribbon.css" />
+  <!--[if lt IE 9]>
+    <link rel="stylesheet" href="/assets/plugins/github-fork-ribbon-css/gh-fork-ribbon.ie.css" />
+  <![endif]-->
+
+  
+
+  
+  <!-- Global site tag (gtag.js) - Google Analytics -->
+<script async src="https://www.googletagmanager.com/gtag/js?id=UA-109819276-1"></script>
+<script>
+    window.dataLayer = window.dataLayer || [];
+    function gtag() { dataLayer.push(arguments); }
+    gtag('js', new Date());
+    gtag('config', 'UA-109819276-1');
+</script>
+
+  
+
+</head>
+
+
+  <body class="body-blue">
+    <a class="github-fork-ribbon" href="https://github.com/marian-nmt/marian" title="Fork me on GitHub">Fork me on GitHub</a>
+
+    <div class="page-wrapper">
+
+    <header id="header" class="header">
+  <div class="container">
+    <div class="branding">
+      <h1 class="logo">
+        <a href="/">
+          <span aria-hidden="true" class="icon_documents_alt icon"></span>
+          <span class="text-highlight">Marian</span><span class="text-bold">NMT</span>
+        </a>
+      </h1>
+      <p class="description">Fast Neural Machine Translation in C++</p>
+    </div><!--//branding-->
+
+    <ol class="breadcrumb">
+
+
+ 
+
+ 
+
+ 
+
+ 
+
+ 
+
+ 
+
+ 
+
+ 
+
+ 
+
+ 
+
+ 
+
+ 
+
+ 
+
+ 
+
+ 
+
+ 
+
+ 
+
+ 
+
+ 
+ <li>
+   <a class="page-link" href="/quickstart/">Quick start</a>
+ </li>
+ 
+
+ 
+ <li>
+   <a class="page-link" href="/features/">Features &amp; Benchmarks</a>
+ </li>
+ 
+
+ 
+ <li>
+   <a class="page-link" href="/docs/">Documentation</a>
+ </li>
+ 
+
+ 
+ <li>
+   <a class="page-link" href="/examples/">Examples</a>
+ </li>
+ 
+
+ 
+ <li>
+   <a class="page-link" href="/faq">FAQ</a>
+ </li>
+ 
+
+ 
+ <li>
+   <a class="page-link" href="/publications/">Publications</a>
+ </li>
+ 
+
+</ol>
+
+
+  </div><!--//container-->
+</header><!--//header-->
+
+
+    <div class="doc-wrapper">
+      <div class="container">
+
+        <div id="doc-header" class="doc-header text-center">
+          <h1 class="doc-title">
+            
+            <i class="icon fa fa-cogs }}"></i>
+            
+            MT Marathon 2019
+          </h1>
+          <div class="meta">
+            <i class="fa fa-clock-o"></i>
+            Last updated: 29 August 2019
+          </div>
+        </div><!--//doc-header-->
+
+        <div class="doc-body">
+          <div class="doc-content">
+            <div class="content-inner">
+
+              <h2 id="introduction">Introduction</h2>
+
+<p>In this tutorial we will learn how to do efficient neural machine translation
+using the Marian toolkit by optimizing the speed, accuracy and use of resources
+for training and decoding of NMT models.</p>
+
+<p>No background knowledge about Marian is required, but if you are completely new
+to neural machine translation and Marian, you may take a look at at <a href="/mtm2018-labs">the
+introductory tutorial to Marian</a> first.  We assume that a reader
+is familiar with basic Linux commands.</p>
+
+<p>The tutorial requires Marian in version v1.7.12+, which is currently only
+available in the <a href="https://github.com/marian-nmt/marian-dev">marian-dev</a>
+repository.  However, most parts are also pplicable for older versions of
+Marian.</p>
+
+<p>More information about Marian:</p>
+<ul>
+  <li><a href="/features">Features &amp; benchmarks</a></li>
+  <li><a href="/docs">Documentation</a></li>
+  <li><a href="/faq">FAQ</a></li>
+  <li><a href="https://groups.google.com/forum/#!forum/marian-nmt">Google discussion group</a></li>
+  <li><a href="http://github.com/marian-nmt/marian-dev/issues">GitHub issues</a></li>
+</ul>
+
+<h3 id="installation">Installation</h3>
+
+<p>Marian can be compiled on machines with NVIDIA GPU devices and CUDA 8.0+ or on
+CPU-only machines.  For this tutorial we need Marian compiled with support for
+CPU and SentencePiece.  This requires installing <a href="/docs/#cpu-version">Intel
+MKL</a> and <a href="/docs/#sentencepiece">Protocol Buffers</a> first.</p>
+
+<p>To download the repository and compile Marian, run the following commands:</p>
+
+<div class="highlighter-rouge"><div class="highlight"><pre class="highlight"><code>git clone https://github.com/marian-nmt/marian-dev
+cd marian-dev
+mkdir build
+cd build
+cmake .. -DCMAKE_BUILD_TYPE=Release -DUSE_SENTENCEPIECE=on -DCOMPILE_CPU=on
+make -j
+cd ../..
+</code></pre></div></div>
+
+<p>If everything worked correctly you can display the list of options with:</p>
+
+<div class="highlighter-rouge"><div class="highlight"><pre class="highlight"><code>./marian-dev/build/marian --help |&amp; less
+</code></pre></div></div>
+
+<h3 id="models-and-data">Models and data</h3>
+
+<p>First we need to download models and data (611MB) that we will use for the tutorial:</p>
+
+<div class="highlighter-rouge"><div class="highlight"><pre class="highlight"><code>wget http://data.statmt.org/romang/marian-examples/marian-tutorial-mtm19.tgz
+tar zxvf marian-tutorial-mtm19.tgz
+cd marian-tutorial-mtm19
+</code></pre></div></div>
+
+<p>This will give you the following files:</p>
+
+<div class="highlighter-rouge"><div class="highlight"><pre class="highlight"><code>marian-tutorial-mtm19
+├ 1_decoding
+│   ├ data
+│   │   ├ newstest2013.de
+│   │   ├ newstest2013.en
+│   │   ├ newstest2014.de
+│   │   └ newstest2014.en
+│   ├ model.npz
+│   ├ run-me.sh
+│   └ vocab.spm
+├ 2_training
+│   ├ config.yml
+│   ├ download-data.sh
+│   ├ run-me.sh
+│   └ train.log
+├ 3_student
+│   ├ data
+│   │   ├ newstest2014.bpe.en
+│   │   ├ newstest2014.de
+│   ├ lex.s2t
+│   ├ model.student.base
+│   │   └ model.npz
+│   ├ model.student.small
+│   │   └ model.npz
+│   ├ model.student.small.aan.nogate.noffn
+│   │   └ model.npz
+│   ├ run-me.sh
+│   └ vocab.ende.yml
+├ detruecase.perl
+└ multi-bleu.perl
+</code></pre></div></div>
+
+<h2 id="1-decoding">1. Decoding</h2>
+
+<p>For this part of the tutorial we will use an RNN model trained on <a href="https://nlp.stanford.edu/projects/nmt/">the WMT’14
+English-German corpus provided by the Stanford NLP
+Group</a> pre-processed with a true-caser
+and SentencePiece-based subword segmentation.  The model is in the
+<code class="highlighter-rouge">marian-tutorial-mtm19/1_decoding</code> folder.</p>
+
+<p>Models trained with Marian can be decoded using the <code class="highlighter-rouge">marian-decoder</code> command.
+The basic usage requires specifying paths to the model and vocabularies:</p>
+
+<div class="highlighter-rouge"><div class="highlight"><pre class="highlight"><code>~/marian-dev/build/marian-decoder -m model.npz -v vocab.spm vocab.spm &lt; data/newstest2014.en &gt; output.de
+</code></pre></div></div>
+
+<p>where <code class="highlighter-rouge">newstest2014.en</code> is an input file with pre-processed source sentences
+and <code class="highlighter-rouge">output.de</code> is an output file with translations.</p>
+
+<p>Now we want to calculate the speed and quality of the translation. Marian
+already prints the total time required to translate the input file (exclusive
+of loading times of models and vocabularies) at the end of the decoding, for
+example:</p>
+
+<blockquote>
+  <p>[2019-08-25 13:17:33] Total time: 119.24629s wall</p>
+</blockquote>
+
+<p>To estimate the quality, we need to run a BLEU scorer:</p>
+
+<div class="highlighter-rouge"><div class="highlight"><pre class="highlight"><code>cat output.en | ../multi-bleu.perl newstest2014.en
+</code></pre></div></div>
+
+<p>This should display:</p>
+
+<blockquote>
+  <p>BLEU = 23.90, 56.0/29.6/17.7/11.1 (BP=1.000, ratio=1.003, hyp_len=59469, ref_len=59297)</p>
+</blockquote>
+
+<h3 id="batched-decoding">Batched decoding</h3>
+
+<p>Batched decoding parallelizes translation of multiple sentences.  It generates
+translation for whole mini-batches and significantly increases translation
+speed, roughly by a factor of 10 or more.</p>
+
+<p>In Marian there are a couple of options that are important for batched
+translation:</p>
+
+<ul>
+  <li><code class="highlighter-rouge">--mini-batch</code> enables translation with a mini-batch size of <em>N</em>, i.e.
+translating <em>N</em> sentences at once.</li>
+  <li><code class="highlighter-rouge">--maxi-batch</code> preloads <em>M</em> maxi-batches, i.e. <em>M</em> x <em>N</em> sentences.</li>
+  <li><code class="highlighter-rouge">--mini-batch-sort</code> sorts them according to source sentence length, this
+allows for better packing of the batch.</li>
+  <li><code class="highlighter-rouge">--mini-batch-words</code> allows to specify the size of a mini-batch in terms of a
+number of words, not a number of sentences.</li>
+</ul>
+
+<p>An important option is also <code class="highlighter-rouge">--workspace</code> or <code class="highlighter-rouge">-w</code>, which set the working
+memory.  The default working memory is 512 MB and Marian will increase it to
+match to requirements during translation, but pre-allocating memory makes it
+usually a bit faster.</p>
+
+<p>Last but not least, you can also parallelize translation by running it on
+multiple GPUs using the <code class="highlighter-rouge">--device</code> option.</p>
+
+<div class="callout-block callout-success">
+<div class="icon-holder">
+<i class="icon fa fas fa-thumbs-up"></i>
+</div><!--//icon-holder-->
+<div class="content">
+<h4 class="callout-title">Task 1</h4>
+
+<p>
+Translate <i>newstest2014.en</i> using different settings for batched
+translation, compare decoding times, and complete the table below.
+</p>
+<p>
+Which parameter improves the translation speed the most? Are you getting
+exactly the same outputs from line-by-line and batched translation?
+</p>
+
+</div><!--//content-->
+</div>
+<!--//callout-block-->
+
+<table class="table table-bordered table-striped">
+  <thead>
+    <tr>
+      <th>System</th>
+      <th style="text-align: right">Speed (sec.)</th>
+    </tr>
+  </thead>
+  <tbody>
+    <tr>
+      <td>Line-by-line translation</td>
+      <td style="text-align: right"> </td>
+    </tr>
+    <tr>
+      <td>Adding mini-batch of 32</td>
+      <td style="text-align: right"> </td>
+    </tr>
+    <tr>
+      <td>Switching to mini-batch of 64</td>
+      <td style="text-align: right"> </td>
+    </tr>
+    <tr>
+      <td>Increasing workspace to 4GB</td>
+      <td style="text-align: right"> </td>
+    </tr>
+    <tr>
+      <td>Adding maxi-batch of 1000</td>
+      <td style="text-align: right"> </td>
+    </tr>
+    <tr>
+      <td>Adding mini-batch-words of 2000</td>
+      <td style="text-align: right"> </td>
+    </tr>
+  </tbody>
+</table>
+
+<h3 id="optimizing-parameters">Optimizing parameters</h3>
+
+<p>There are a few options that impact the translation speed and quality, and beam
+size is one of the most important. It determines a number of translation
+hypotheses considered for each input word. Exploring too few hypotheses per
+word may lead to a globally suboptimal translation, while using too large beam
+size may increase resource usage and computation time without improving the
+translation quality that much.</p>
+
+<p>Options that can be easily tuned include:</p>
+
+<ul>
+  <li><code class="highlighter-rouge">--beam-size</code> determines a number of translation hypotheses explored at each
+step of the beam search algorithm. Common beam sizes are 8 to 12, depending
+on the model.</li>
+  <li><code class="highlighter-rouge">--max-length-factor</code> sets maximum target length as source length times
+factor. The default value is 3.</li>
+  <li><code class="highlighter-rouge">--normalize</code> divides translation score by the translation length to the
+power of <script type="math/tex">\alpha</script>.</li>
+</ul>
+
+<div class="callout-block callout-success">
+<div class="icon-holder">
+<i class="icon fa fas fa-thumbs-up"></i>
+</div><!--//icon-holder-->
+<div class="content">
+<h4 class="callout-title">Task 2</h4>
+
+<p>
+Explore different configurations of the beam size and maximum length factor and
+try to improve the translation time, keeping BLEU at a good level.  Then grid
+search the value of the length normalization parameter on <i>newstest2013</i>
+and check if the improvement of BLEU transfers into the <i>newstest2014.de</i>.
+</p>
+
+<p>
+What are the reasonable values for the beam size? What relative speed
+improvement can be achieved by manipulating the maximum sentence length? What
+is a danger of using too small value for the maximum length factor?
+</p>
+
+</div><!--//content-->
+</div>
+<!--//callout-block-->
+
+<p>This can be done with a simple bash script:</p>
+
+<div class="highlighter-rouge"><div class="highlight"><pre class="highlight"><code>for i in 1 2 4 8 12 24; do
+    ~/marian-dev/build/marian-decoder -b $i [OTHER OPTIONS] &lt; data/newstest2013.en &gt; output.b$i.de
+done
+</code></pre></div></div>
+
+<p>A reasonable values to consider for <code class="highlighter-rouge">--max-length-factor</code> are in a range of 1.2
+to 3. The normalization parameter <script type="math/tex">\alpha</script> can be grid searched for values in
+a range of 0.2 to 2.</p>
+
+<h3 id="back-translation">Back-translation</h3>
+
+<p>Generation of <a href="https://www.aclweb.org/anthology/P16-1009">back-translations</a>
+often require translation of a large amount of monolingual data (sometimes even
+hundreds of millions of sentences), so optimizing this process can save you
+quite a lot of time.</p>
+
+<ol>
+  <li>If your dataset is large, consider splitting it into smaller chunks (see
+<a href="https://www.gnu.org/software/coreutils/manual/html_node/split-invocation.html">GNU split</a>)
+and translate the chunks sequentially. This will not make your translation
+faster, but more stable.</li>
+  <li>Use batched translation and adjust your decoding parameters too speed up the
+translation.</li>
+  <li>Because monolingual data, especially if it come from web crawling, can
+contain very long sentences, use smaller <code class="highlighter-rouge">--max-length</code> and turn on
+<code class="highlighter-rouge">--max-length-crop</code>.</li>
+  <li>Use sampled <a href="https://aclweb.org/anthology/D18-1045">back-translations</a> with
+<code class="highlighter-rouge">--output-sampling</code>.</li>
+</ol>
+
+<p>To test sampled translations, run several times:</p>
+
+<div class="highlighter-rouge"><div class="highlight"><pre class="highlight"><code>head data/newstest2014.en | ~/marian-dev/build/marian-decoder -m model.npz -v vocab.spm vocab.spm \
+  --output-sampling
+</code></pre></div></div>
+
+<h2 id="2-training">2. Training</h2>
+
+<p>An efficient training of an NMT model might mean minimizing the training time
+or improving the convergence. This is also choosing a model architecture that
+is best suited for yours needs.</p>
+
+<h3 id="model-architecture">Model architecture</h3>
+
+<p>Transformer models often offer best quality, but are also more difficult to
+train than RNNs, and need more careful setting of training parameters.
+A good starting point for finding a good set of training hyper-parameters is
+<a href="https://github.com/marian-nmt/marian-examples">our repository with Marian
+examples</a>.</p>
+
+<p>Since version 1.7.12 Marian provides the <code class="highlighter-rouge">--task</code> option, which provides
+pre-defined options for <em>transformer-base</em>, and <em>transformer-big</em>:</p>
+
+<div class="highlighter-rouge"><div class="highlight"><pre class="highlight"><code>~/marian-dev/build/marian --task transformer-base --dump-config expand
+</code></pre></div></div>
+
+<p>You should keep in mind that those settings are just a starting point and they
+should be adjusted for your scenario. For example, a low-resource scenario will
+probably require stronger regularization, etc.</p>
+
+<h3 id="gpu-memory">GPU memory</h3>
+
+<p>Training of some model architectures like Transformer may benefit from large
+mini-batches.</p>
+
+<p><code class="highlighter-rouge">--mini-batch-fit</code> overrides the specified mini-batch size and automatically
+chooses the largest mini-batch for a given sentence length that fits the
+specified memory. When <code class="highlighter-rouge">--mini-batch-fit</code> is set, memory requirements are
+guaranteed to fit into the specified workspace. Choosing a too small workspace
+will result in small mini-batches which can prohibit learning.</p>
+
+<p>In multi-GPU setting, a synchronous training (<code class="highlighter-rouge">--sync-sgd</code>) can also serve as a
+method to increase the effective size of mini-batches.</p>
+
+<p>The option <code class="highlighter-rouge">--workspace</code> sets the size of the memory available for the forward
+and backward step of the training procedure. This does not include model size
+and optimizer parameters that are allocated outsize workspace. Hence you cannot
+allocate all GPU memory to workspace.</p>
+
+<p>It is a bit tricky to determine the effective size of a mini-batch with
+dynamically sized mini-batches. An alternative is to operate in terms of the
+total workspace size that is used to generate mini-batches for one update,
+which can be calculated with the following formula:</p>
+
+<script type="math/tex; mode=display">\text{Workspace (MB)} \times \text{Number of GPUs} \times \text{Delayed updates}</script>
+
+<p>Cumulative or <a href="https://www.aclweb.org/anthology/D18-1332">delayed gradient
+updates</a> increase the effective
+batch size, or the amount of data used at each step of training.  It can be
+enabled with <code class="highlighter-rouge">--optimizer-delay N</code>.</p>
+
+<div class="callout-block callout-success">
+<div class="icon-holder">
+<i class="icon fa fas fa-thumbs-up"></i>
+</div><!--//icon-holder-->
+<div class="content">
+<h4 class="callout-title">Task 3</h4>
+<p>
+Setup training of a <i>transformer-base</i> model with the total workspace of
+ca. 48 GB per update, and calculate the average size of mini-batches from
+training logs.
+</p>
+</div><!--//content-->
+</div>
+<!--//callout-block-->
+
+<p>Download the training data:</p>
+
+<div class="highlighter-rouge"><div class="highlight"><pre class="highlight"><code>cd ../2_training
+bash download-data.sh
+</code></pre></div></div>
+
+<p>Start with the following command and set <code class="highlighter-rouge">--workspace</code>, <code class="highlighter-rouge">--device</code> and
+<code class="highlighter-rouge">--optimizer-delay</code> options:</p>
+
+<div class="highlighter-rouge"><div class="highlight"><pre class="highlight"><code>~/marian-dev/build/marian --task transformer-base -c config.yml
+</code></pre></div></div>
+
+<p>The optimal values for these options will differ depending on the number of
+GPUs and available memory per single GPU.</p>
+
+<h2 id="3-teacher-student">3. Teacher-student</h2>
+
+<p>Knowledge distillation approaches, like <a href="https://www.aclweb.org/anthology/D16-1139">the teacher-student
+method</a>, are used for training a
+smaller student model to perform better by learning from a larger teacher
+model.</p>
+
+<p>In NMT it might mean training a strong (and slow) ensemble of Transformer
+models as a teacher, then translating an entire source side of the training
+data with the teacher, and finally training a small (and fast) model on
+original source and translated target data. The student model has usually worse
+BLEU, but is much faster. A useful side effect of the teacher-student learning
+is an improved performance of the student with smaller beam sizes.</p>
+
+<p>More details can be found in our paper on <a href="https://www.aclweb.org/anthology/W18-2716">cost-effective and high-quality NMT
+with Marian</a>.</p>
+
+<h3 id="cpu-decoding">CPU decoding</h3>
+
+<p>The teacher-student method enables efficient translation on CPU.  A couple of
+things can speed it up more:</p>
+
+<ul>
+  <li>Batched translation as presented in the first part of the tutorial.</li>
+  <li>A <a href="/docs/#lexical-shortlists">lexical shortlist</a> restricts the output
+vocabulary to a small subset of translation candidates for each words.</li>
+  <li>Auto-tuning of matrix product implementation with <code class="highlighter-rouge">--optimize</code>.</li>
+</ul>
+
+<p>The <code class="highlighter-rouge">--cpu-threads</code> option turns on the decoding on CPU.</p>
+
+<div class="callout-block callout-success">
+<div class="icon-holder">
+<i class="icon fa fas fa-thumbs-up"></i>
+</div><!--//icon-holder-->
+<div class="content">
+<h4 class="callout-title">Task 4</h4>
+<p>
+Experiment with different settings for decoding on a single CPU. Check
+different student models, batched translation, lexical shortlists and
+auto-tuning.
+</p>
+<p>
+How does a student model perform with the beam size of 1? What is the speed
+improvement on CPU and GPU from a shortlist? Is there any improvement from the
+auto-tunner?  What are architectures of student models and how large are they?
+</p>
+</div><!--//content-->
+</div>
+<!--//callout-block-->
+
+<p>The models can be found in the <code class="highlighter-rouge">./3_student</code> folder. They have been trained on
+true-cased and BPE-segmented data, so require pre- and post-processing:</p>
+
+<div class="highlighter-rouge"><div class="highlight"><pre class="highlight"><code>cd ../3_student
+cat data/newstest2014.bpe.en \
+    | ~/marian-dev/build/marian-decoder -m model.student.small/model.npz -v vocab.ende.yml vocab.ende.yml \
+        -d 0 --cpu-threads 1 \
+        --mini-batch 64 --maxi-batch 100 \
+        -b 1 --max-length-factor 1.5 -n 0.6 \
+    | perl -pe 's/@@ //g' \
+    | ../detruecase.perl \
+    | ../multi-bleu.perl data/newstest2014.de
+</code></pre></div></div>
+
+<p>The shortlist file is <code class="highlighter-rouge">3_student/data/lex.s2t</code>. Model-specific parameters can
+be read from a <code class="highlighter-rouge">model.npz</code> file using the script
+<code class="highlighter-rouge">marian-dev/scripts/contrib/model_info.py</code>.</p>
+
+<p>That’s all for now. Hope you have found something useful here!</p>
+
+
+
+            </div><!--//content-inner-->
+          </div><!--//doc-content-->
+
+          <div class="doc-sidebar hidden-xs">
+            <nav id="doc-nav"></nav>
+          </div><!--//doc-sidebar-->
+
+        </div><!--//doc-body-->
+
+      </div><!--//container-->
+    </div><!--//doc-wrapper-->
+
+    </div><!--//page-wrapper-->
+
+    <footer id="footer" class="footer text-center">
+  <div class="container">
+    <p>
+     Marian - an efficient Neural Machine Translation framework written in pure C++.</br>
+      Mainly developed at the Adam Mickiewicz University in Poznań and at the University of Edinburgh.
+    </p>
+    <p><a href="https://github.com/marian-nmt/marian">Marian</a> is licensed under the <a href="https://github.com/marian-nmt/marian/LICENSE">MIT license</a>.</p>
+    <p><small class="copyright">Based on the theme PrettyDocs designed by <a href="http://themes.3rdwavemedia.com/" targe="_blank">Xiaoying Riley</a> with modifications.</small></p>
+  </div><!--//container-->
+</footer><!--//footer-->
+
+    <!-- Main Javascript -->
+<script type="text/javascript"> localStorage.clear();</script>
+
+<script type="text/javascript" src="/assets/plugins/jquery-1.12.3.min.js"></script>
+<script type="text/javascript" src="/assets/plugins/bootstrap/js/bootstrap.min.js"></script>
+<script type="text/javascript" src="/assets/plugins/jquery-scrollTo/jquery.scrollTo.min.js"></script>
+<script type="text/javascript" src="/assets/plugins/jquery-match-height/jquery.matchHeight-min.js"></script>
+
+<script src="https://cdn.mathjax.org/mathjax/latest/MathJax.js?config=TeX-AMS-MML_HTMLorMML" type="text/javascript"></script>
+
+<script type="text/javascript" src="/assets/js/main.js"></script>
+<script type="text/javascript" src="/assets/js/toc.js"></script>
+
+
+  </body>
+</html>

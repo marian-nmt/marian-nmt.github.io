@@ -537,7 +537,9 @@ script:
 
     --layer-normalization --dropout-rnn 0.2 --dropout-src 0.1 --dropout-trg 0.1
 
-This is still an experimental feature introduced in version 1.4.0.
+**Warning**: The API described above refers to the experimental feature
+introduced in version 1.4.0. It is depreciated at least since version 1.7.0.
+The newest multi-node API is not documented yet.
 
 
 

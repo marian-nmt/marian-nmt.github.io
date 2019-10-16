@@ -79,6 +79,7 @@ The project is a standard CMake out-of-source build:
 
 If run for the first time, this will also download several submodule repositories.
 
+
 ## Running Marian
 
 ### Training
@@ -109,3 +110,12 @@ For faster CPU translation using shallow RNN models, use Amun:
 See the [documentation](/docs/#translation) for more details or the
 [examples](/examples/#examples) of how to use Edinburgh's WMT models for
 translation.
+
+
+## Resources
+
+- [User Documentation](/docs) and [FAQ](/faq)
+- [Google Discussion Group](https://groups.google.com/forum/#!forum/marian-nmt)
+- Issues on GitHub repositories: [marian](https://github.com/marian-nmt/marian)
+  and [marian-dev](https://github.com/marian-nmt/marian-dev)
+

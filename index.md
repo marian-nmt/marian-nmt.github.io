@@ -55,13 +55,15 @@ permalink: /
 <a name="users"/>
 <h4> Companies using Marian for their Neural Machine Translation services </h4>
 
-<div class="logos-wrapper row">
+<div class="logos-wrapper">
+<div class="row">
   <a target="_blank" class="logos-link" href="http://www.microsoft.com">
     <img style="width: 400px" alt="Microsoft" title="Microsoft" src="{{ site.baseurl }}/../assets/logos/microsoft-alpha.png">
   </a>
   <a target="_blank" class="logos-link" href="http://translator.microsoft.com">
     <img style="width: 100px" alt="Microsoft Translator" title="Microsoft Translator" src="{{ site.baseurl }}/../assets/logos/ms-translator.png">
   </a>
+</div>
   <br/>
   All other trademarks are the property of their respective owners.
 </div>
@@ -80,7 +82,7 @@ permalink: /
 
 <h4> Acknowledgements </h4>
 <div class="intro">
-<p> 
+<p>
 Marian is mainly being developed by the <a target="_blank" href="http://translator.microsoft.com">Microsoft Translator</a> team.
 The development of Marian received funding from the European Union's Horizon 2020
 Research and Innovation Programme under grant agreements

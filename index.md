@@ -7,14 +7,11 @@ permalink: /
 <div class="intro">
   <p>
   <b>Marian</b> is an efficient Neural Machine Translation framework written
-  in pure C++ with minimal dependencies. It has mainly been developed at the
-  Adam Mickiewicz University in Poznań (AMU) and at the University of Edinburgh.
+  in pure C++ with minimal dependencies. It is mainly being developed by the <a target="_blank" href="http://translator.microsoft.com">Microsoft Translator</a> team. Many academic (mainly the University of Edinburgh and in the past the Adam Mickiewicz University in Poznań) and commercial <a target="_blank" href="https://github.com/marian-nmt/marian-dev/graphs/contributors">contributors</a> help with its development.
   </p>
 
   <p>
-  It is currently being deployed in multiple European projects and is the main
-  translation and training engine behind the neural MT launch at the
-  <a href="http://www.wipo.int/pressroom/en/articles/2016/article_0014.html">World Intellectual Property Organization</a>.
+  It is currently the engine behind the <a href="http://translator.microsoft.com">Microsoft Translator</a> Neural Machine Translation services and being deployed by many companies, organzations and research projects (see <a href="#users">below</a> for an incomplete list).
   </p>
 
   <p>
@@ -55,12 +52,26 @@ permalink: /
   {% endfor %}
 </div><!--//cards-->
 
-<h4> Companies and organizations using Marian </h4>
+<a name="users"/>
+<h4> Companies using Marian for their Neural Machine Translation services </h4>
+
+<div class="logos-wrapper row">
+  <a target="_blank" class="logos-link" href="http://www.microsoft.com">
+    <img style="width: 500px" alt="Microsoft" title="Microsoft" src="{{ site.baseurl }}/../assets/logos/microsoft-alpha.png">
+  </a>
+  <a target="_blank" class="logos-link" href="http://translator.microsoft.com">
+    <img style="width: 100px" alt="Microsoft Translator" title="Microsoft Translator" src="{{ site.baseurl }}/../assets/logos/ms-translator.png">
+  </a>
+  <br/>
+  All other trademarks are the property of their respective owners.
+</div>
+
+<!--h4> Other companies, organizations and projects using Marian </h4-->
 <div class="logos-wrapper row">
   {% assign logos = site.data.logos | sort: 'name' %}
   {% for logo in logos %}
   <div class="logos-item col-md-4 col-sm-6 col-xs-6">
-    <a class="logos-link" href="http://{{ logo.url }}">
+    <a target="_blank" class="logos-link" href="http://{{ logo.url }}">
       <img class="logos-image" alt="{{ logo.name }}" title="{{ logo.name }}" src="{{ logo.img }}" />
     </a>
   </div>
@@ -69,14 +80,15 @@ permalink: /
 
 <h4> Acknowledgements </h4>
 <div class="intro">
-  <p>
+<p> 
+Marian is mainly being developed by the <a target="_blank" href="http://translator.microsoft.com">Microsoft Translator</a> team.
 The development of Marian received funding from the European Union's Horizon 2020
 Research and Innovation Programme under grant agreements
-688139 (<a href="http://www.summa-project.eu">SUMMA</a>; 2016-2019),
-645487 (<a href="http://www.modernmt.eu">Modern MT</a>; 2015-2017),
-644333 (<a href="http://tramooc.eu/">TraMOOC</a>; 2015-2017),
-644402 (<a href="http://www.himl.eu/">HimL</a>; 2015-2017),
-825303 (<a href="https://browser.mt/">Bergamot</a>; 2019-2021),
+688139 (<a target="_blank" href="http://www.summa-project.eu">SUMMA</a>; 2016-2019),
+645487 (<a target="_blank" href="http://www.modernmt.eu">Modern MT</a>; 2015-2017),
+644333 (<a target="_blank" href="http://tramooc.eu/">TraMOOC</a>; 2015-2017),
+644402 (<a target="_blank" href="http://www.himl.eu/">HimL</a>; 2015-2017),
+825303 (<a target="_blank" href="https://browser.mt/">Bergamot</a>; 2019-2021),
 
 the Amazon Academic Research Awards program,
 the World Intellectual Property Organization,

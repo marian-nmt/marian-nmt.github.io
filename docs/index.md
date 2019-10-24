@@ -72,6 +72,27 @@ obtained by running `cmake -LH -N` or `cmake -LAH -N` from the `build`
 directory after running `cmake ..` first.
 
 
+
+### Ubuntu packages
+
+Assuming a fresh Ubuntu LTS installation with CUDA, the following packages need
+to be installed to compile with all features, including the web server,
+built-in SentencePiece and TCMalloc support:git cmake3 build-essential libboost-all-dev
+
+* Ubuntu 18.04 + CUDA 9.2 (defaults are gcc 7.3.0, Boost 1.65):
+
+      sudo apt-get install git cmake build-essential libboost-all-dev libprotobuf10 protobuf-compiler libprotobuf-dev openssl libssl-dev libgoogle-perftools-dev
+
+* Ubuntu 16.04 + CUDA 9.2 (gcc 5.4.0, Boost 1.58):
+
+      sudo apt-get install git cmake build-essential libboost-all-dev zlib1g-dev libprotobuf9v5 protobuf-compiler libprotobuf-dev openssl libssl-dev libgoogle-perftools-dev
+
+* Ubuntu 14.04 + CUDA 8.0 (gcc 4.8.4, Boost 1.54)
+
+      sudo apt-get install git cmake3 build-essential libboost-all-dev libprotobuf8 protobuf-compiler libprotobuf-dev openssl libssl-dev libgoogle-perftools-dev
+
+
+
 ### Static compilation
 
 Marian will be compiled statically if the flag `USE_STATIC_LIBS` is set:
@@ -124,7 +145,20 @@ Specify the path to your CUDA root directory via CMake:
 
 Marian CPU version requires [Intel MKL](https://software.intel.com/en-us/mkl) or
 [OpenBLAS](https://www.openblas.net/). Both are free, but MKL is not
-open-sourced. Intel MKL is strongly recommended as it is faster.
+open-sourced. Intel MKL is strongly recommended as it is faster. On Ubuntu
+16.04 it can be installed using the following steps:
+
+```
+wget https://apt.repos.intel.com/intel-gpg-keys/GPG-PUB-KEY-INTEL-SW-PRODUCTS-2019.PUB
+sudo apt-key add GPG-PUB-KEY-INTEL-SW-PRODUCTS-2019.PUB
+sudo sh -c 'echo deb https://apt.repos.intel.com/mkl all main > /etc/apt/sources.list.d/intel-mkl.list'
+sudo apt-get update
+sudo apt-get install intel-mkl-64bit-2019.4-XYZ
+```
+
+Where _XYZ_ is the revision number.
+
+A CPU build can be enabled by adding `-DCOMPILE_CPU=on` to the CMake command.
 
 
 
@@ -503,7 +537,9 @@ script:
 
     --layer-normalization --dropout-rnn 0.2 --dropout-src 0.1 --dropout-trg 0.1
 
-This is still an experimental feature introduced in version 1.4.0.
+**Warning**: The API described above refers to the experimental feature
+introduced in version 1.4.0. It is depreciated at least since version 1.7.0.
+The newest multi-node API is not documented yet.
 
 
 

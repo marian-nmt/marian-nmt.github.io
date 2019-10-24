@@ -2,7 +2,7 @@
 COMMANDS = marian marian-decoder marian-server marian-scorer marian-vocab marian-conv
 CMDFILES = $(patsubst %,docs/cmd/%.md,$(COMMANDS))
 
-.PHONY: build clean update-cmds update-docs install run zip
+.PHONY: build clean update-cmds update-docs install run zip Gamefile.lock
 
 
 all: run

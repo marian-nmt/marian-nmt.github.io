@@ -53,7 +53,7 @@ permalink: /
 </div><!--//cards-->
 
 <a name="users"/>
-<h4> Companies using Marian for their Neural Machine Translation services </h4>
+<h4> Companies and Organizations using Marian for Neural Machine Translation</h4>
 
 <div class="logos-wrapper">
 <div class="row">

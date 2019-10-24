@@ -11,7 +11,7 @@ permalink: /
   </p>
 
   <p>
-  It is currently the engine behind the <a href="http://translator.microsoft.com">Microsoft Translator</a> Neural Machine Translation services and being deployed by many companies, organzations and research projects (see <a href="#users">below</a> for an incomplete list).
+  It is currently the engine behind the <a href="http://translator.microsoft.com">Microsoft Translator</a> Neural Machine Translation services and being deployed by many companies, organizations and research projects (see <a href="#users">below</a> for an incomplete list).
   </p>
 
   <p>
@@ -57,7 +57,7 @@ permalink: /
 
 <div class="logos-wrapper row">
   <a target="_blank" class="logos-link" href="http://www.microsoft.com">
-    <img style="width: 500px" alt="Microsoft" title="Microsoft" src="{{ site.baseurl }}/../assets/logos/microsoft-alpha.png">
+    <img style="width: 400px" alt="Microsoft" title="Microsoft" src="{{ site.baseurl }}/../assets/logos/microsoft-alpha.png">
   </a>
   <a target="_blank" class="logos-link" href="http://translator.microsoft.com">
     <img style="width: 100px" alt="Microsoft Translator" title="Microsoft Translator" src="{{ site.baseurl }}/../assets/logos/ms-translator.png">

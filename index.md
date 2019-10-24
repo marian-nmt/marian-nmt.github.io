@@ -7,7 +7,7 @@ permalink: /
 <div class="intro">
   <p>
   <b>Marian</b> is an efficient Neural Machine Translation framework written
-  in pure C++ with minimal dependencies. It is mainly being developed by the <a target="_blank" href="http://translator.microsoft.com">Microsoft Translator</a> team. Many academic (mainly the University of Edinburgh and in the past the Adam Mickiewicz University in Poznań) and commercial <a target="_blank" href="https://github.com/marian-nmt/marian-dev/graphs/contributors">contributors</a> help with its development.
+  in pure C++ with minimal dependencies. It is mainly being developed by the <a target="_blank" href="http://translator.microsoft.com">Microsoft Translator</a> team. Many academic (most notably the University of Edinburgh and in the past the Adam Mickiewicz University in Poznań) and commercial <a target="_blank" href="https://github.com/marian-nmt/marian-dev/graphs/contributors">contributors</a> help with its development.
   </p>
 
   <p>

@@ -53,9 +53,9 @@ permalink: /
 </div><!--//cards-->
 
 <a name="users"/>
-<h4> Companies and Organizations using Marian for Neural Machine Translation</h4>
-
+<h4> Companies and Organizations using Marian</h4>
 <div class="logos-wrapper">
+<p>If you would like to have your logo and link added to this list please add a comment with pointers which logo to use to this <a target="_blank" href="https://github.com/marian-nmt/marian/issues/230">GitHub issue</a>.</p>
 <div class="row">
   <a target="_blank" class="logos-link" href="http://www.microsoft.com">
     <img style="width: 400px" alt="Microsoft" title="Microsoft" src="{{ site.baseurl }}/../assets/logos/microsoft-alpha.png">
@@ -68,7 +68,6 @@ permalink: /
   All other trademarks are the property of their respective owners.
 </div>
 
-<!--h4> Other companies, organizations and projects using Marian </h4-->
 <div class="logos-wrapper row">
   {% assign logos = site.data.logos | sort: 'name' %}
   {% for logo in logos %}
@@ -78,7 +77,7 @@ permalink: /
     </a>
   </div>
   {% endfor %}
-</div><!--//logos-->
+  </div><!--//logos-->
 
 <h4> Acknowledgements </h4>
 <div class="intro">

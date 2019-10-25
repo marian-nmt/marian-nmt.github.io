@@ -19,7 +19,7 @@ permalink: /
   <ul>
     <li> Efficient pure C++ implementation </li>
     <li> Fast multi-GPU training and GPU/CPU translation </li>
-    <li> State-of-the-art NMT architectures: deep RNN and transformer </li>
+    <li> State-of-the-art NMT architectures: deep RNN and Transformer </li>
     <li> Permissive open source license (MIT) </li>
     <li> <a href="{{ site.baseurl }}../features"> more details... </a> </li>
   </ul>
@@ -53,9 +53,8 @@ permalink: /
 </div><!--//cards-->
 
 <a name="users"/>
-<h4> Companies and Organizations using Marian</h4>
+<h4> Companies and Organizations using Marian*</h4>
 <div class="logos-wrapper">
-<p>If you would like to have your logo and link added to this list please add a comment with pointers which logo to use to this <a target="_blank" href="https://github.com/marian-nmt/marian/issues/230">GitHub issue</a>.</p>
 <div class="row">
   <a target="_blank" class="logos-link" href="http://www.microsoft.com">
     <img style="width: 400px; margin: 15px" alt="Microsoft" title="Microsoft" src="{{ site.baseurl }}/../assets/logos/microsoft-alpha.png">
@@ -78,6 +77,10 @@ permalink: /
   </div>
   {% endfor %}
   </div><!--//logos-->
+
+<div class="intro">
+<p>*) If you would like to have your logo and link added to this list please add a comment with pointers which logo to use to this <a target="_blank" href="https://github.com/marian-nmt/marian/issues/230">GitHub issue</a>.</p>
+</div>
 
 <h4> Acknowledgements </h4>
 <div class="intro">

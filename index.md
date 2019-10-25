@@ -83,7 +83,7 @@ permalink: /
 <h4> Acknowledgements </h4>
 <div class="intro">
 <p>
-Marian is mainly being developed by the <a target="_blank" href="http://translator.microsoft.com">Microsoft Translator</a> team.
+Marian is mainly being developed by the <a target="_blank" href="http://translator.microsoft.com">Microsoft Translator</a> team and many academic and commercial contributors.
 The development of Marian received funding from the European Union's Horizon 2020
 Research and Innovation Programme under grant agreements
 688139 (<a target="_blank" href="http://www.summa-project.eu">SUMMA</a>; 2016-2019),

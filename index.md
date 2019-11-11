@@ -52,7 +52,7 @@ permalink: /
   {% endfor %}
 </div><!--//cards-->
 
-<h4> Companies and organizations using Marian*</h4>
+<h4 id="users"> Companies and organizations using Marian*</h4>
 <div id="logos-ms" class="logos-wrapper">
   <div class="row">
     <a target="_blank" class="logos-link" href="http://www.microsoft.com">
@@ -95,5 +95,5 @@ the World Intellectual Property Organization,
 and is based upon work supported in part by the Office of the Director of
 National Intelligence (ODNI), Intelligence Advanced Research Projects Activity
 (IARPA), via contract #FA8650-17-C-9117.
-  </p>
+</p>
 </div>

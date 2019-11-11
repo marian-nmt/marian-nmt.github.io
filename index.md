@@ -52,20 +52,15 @@ permalink: /
   {% endfor %}
 </div><!--//cards-->
 
-<a name="users"/>
-<h4> Companies and Organizations using Marian*</h4>
-<div class="logos-wrapper">
-<div class="row">
-  <a target="_blank" class="logos-link" href="http://www.microsoft.com">
-    <img style="width: 400px; margin: 15px" alt="Microsoft" title="Microsoft" src="{{ site.baseurl }}/../assets/logos/microsoft-alpha.png">
-  </a> 
-  <!--a target="_blank" class="logos-link" href="http://translator.microsoft.com">
-    <img style="width: 100px" alt="Microsoft Translator" title="Microsoft Translator" src="{{ site.baseurl }}/../assets/logos/ms-translator.png">
-  </a-->
-</div>
-  <br/>
-  All other trademarks are the property of their respective owners.
-</div>
+<h4> Companies and organizations using Marian*</h4>
+<div id="logos-ms" class="logos-wrapper">
+  <div class="row">
+    <a target="_blank" class="logos-link" href="http://www.microsoft.com">
+      <img style="width: 300px; margin: 15px" alt="Microsoft" title="Microsoft" src="assets/logos/microsoft-alpha.png">
+    </a>
+  </div>
+  <p>All other trademarks are the property of their respective owners.</p>
+</div><!--//logos-ms-->
 
 <div class="logos-wrapper row">
   {% assign logos = site.data.logos | sort: 'name' %}
@@ -76,10 +71,10 @@ permalink: /
     </a>
   </div>
   {% endfor %}
-  </div><!--//logos-->
+</div><!--//logos-wrapper-->
 
-<div class="intro">
-<p>*) If you would like to have your logo and link added to this list please add a comment with pointers which logo to use to this <a target="_blank" href="https://github.com/marian-nmt/marian/issues/230">GitHub issue</a>.</p>
+<div class="intro footnote">
+  <p>*) If you would like to have your logo and link added to this list please add a comment with pointers which logo to use to <a target="_blank" href="https://github.com/marian-nmt/marian/issues/230">this thread</a>.</p>
 </div>
 
 <h4> Acknowledgements </h4>

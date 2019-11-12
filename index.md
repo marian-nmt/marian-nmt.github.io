@@ -52,7 +52,7 @@ permalink: /
   {% endfor %}
 </div><!--//cards-->
 
-<h4 id="users"> Companies and organizations using Marian*</h4>
+<h4 id="users"> Companies and organizations using Marian</h4>
 <div id="logos-ms" class="logos-wrapper">
   <div class="row">
     <a target="_blank" class="logos-link" href="http://www.microsoft.com">
@@ -74,7 +74,7 @@ permalink: /
 </div><!--//logos-wrapper-->
 
 <div class="intro footnote">
-  <p>*) If you would like to have your logo and link added to this list please add a comment with pointers which logo to use to <a target="_blank" href="https://github.com/marian-nmt/marian/issues/230">this thread</a>.</p>
+  <p>If you would like to have your logo and link added to this list please add a comment with pointers which logo to use to <a target="_blank" href="https://github.com/marian-nmt/marian/issues/230">this thread</a>.</p>
 </div>
 
 <h4> Acknowledgements </h4>
@@ -82,7 +82,7 @@ permalink: /
 <p>
 Marian is mainly being developed by the <a target="_blank" href="http://translator.microsoft.com">Microsoft Translator</a> team and many academic and commercial contributors.
 The development of Marian received funding from the European Union's Horizon 2020
-Research and Innovation Programme under grant agreements
+Research and Innovation Programme under grant agreements No
 688139 (<a target="_blank" href="http://www.summa-project.eu">SUMMA</a>; 2016-2019),
 645487 (<a target="_blank" href="http://www.modernmt.eu">Modern MT</a>; 2015-2017),
 644333 (<a target="_blank" href="http://tramooc.eu/">TraMOOC</a>; 2015-2017),

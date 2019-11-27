@@ -91,9 +91,11 @@ Research and Innovation Programme under grant agreements No
 
 the Amazon Academic Research Awards program,
 the World Intellectual Property Organization,
+a collaboration with Intel,
 
 and is based upon work supported in part by the Office of the Director of
 National Intelligence (ODNI), Intelligence Advanced Research Projects Activity
 (IARPA), via contract #FA8650-17-C-9117.
+Intel and the Intel logo are trademarks of Intel Corporation in the U.S. and other countries.
 </p>
 </div>

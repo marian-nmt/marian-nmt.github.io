@@ -53,6 +53,10 @@ Pages with command-line options for Marian tools have to be updated manually:
 
 This compiles Marian, so GPU is required.
 
+### Logos
+
+Put a logo image into `assets/logos/` and update `_data/logos.yml`.
+
 
 ## Deployment
 
@@ -73,7 +77,7 @@ message.
 | Tag | Description |
 | --- | --- |
 | `[Text](/permalink/)` | An active link to another subpage of the website identified by its permalink. |
-| `{% github_link <repository>/<path/to/file> %}` | An active link to a file/directory `<path/to/file>` in the given repository, i.e. `http://marian-nmt.github.io/marian/<repository>/tree/master/<path/to/file>`. |
+| `{% github_link <repository>/<path/to/file> %}` | An active link to a file/directory `<path/to/file>` in the given repository, i.e. `http://github.com/marian-nmt/<repository>/tree/master/<path/to/file>`. |
 | `{% github_link "clickable text" <repository>/<path/to/file> %}` | An active link to a file/directory `<path/to/file>` in the given repository with `clickable text`. |
 | `[Text](/link){:target="_blank"}` | Opens the linked document in a new window or tab. |
 | `$$ x_{i}^{j} $$` | A LaTeX mathematical formula. |

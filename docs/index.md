@@ -91,6 +91,9 @@ built-in SentencePiece and TCMalloc support:git cmake3 build-essential libboost-
 
       sudo apt-get install git cmake3 build-essential libboost-all-dev libprotobuf8 protobuf-compiler libprotobuf-dev openssl libssl-dev libgoogle-perftools-dev
 
+Please see the [GCC/CUDA compatibility
+table](https://github.com/marian-nmt/marian-dev/issues/526) if you experience
+compilation issues with different versions of GCC and CUDA.
 
 
 ### Static compilation

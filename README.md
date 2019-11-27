@@ -27,7 +27,7 @@ On Ubuntu 16.04 you can run:
 
 Then, install gem dependencies:
 
-    make install
+    bundle install
 
 Finally, build the website (it will be generated in `_site` folder) and run a
 local development server:

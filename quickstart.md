@@ -61,7 +61,7 @@ The project is a standard CMake out-of-source build:
     mkdir build
     cd build
     cmake ..
-    make -j
+    make -j4
 
 If run for the first time, this will also download several submodule repositories.
 

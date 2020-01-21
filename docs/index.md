@@ -65,7 +65,7 @@ The project is a standard CMake out-of-source build:
     mkdir build
     cd build
     cmake ..
-    make -j
+    make -j4
 
 The complete list of compilation options in the form of CMake flags can be
 obtained by running `cmake -LH -N` or `cmake -LAH -N` from the `build`
@@ -102,7 +102,7 @@ Marian will be compiled statically if the flag `USE_STATIC_LIBS` is set:
 
     cd build
     cmake .. -DUSE_STATIC_LIBS=on
-    make -j
+    make -j4
 
 
 
@@ -126,7 +126,7 @@ To compile Marian training framework with your custom Boost installation:
     mkdir build
     cd build
     cmake .. -DBOOST_ROOT=/path/to/boost_1_67_0
-    make -j16
+    make -j4
 
 Tested on Ubuntu 16.04.3 LTS.
 
@@ -140,7 +140,7 @@ Specify the path to your CUDA root directory via CMake:
     mkdir build
     cd build
     cmake .. -DCUDA_TOOLKIT_ROOT_DIR=/usr/local/cuda-9.1
-    make -j16
+    make -j4
 
 
 
@@ -189,7 +189,7 @@ You may also compile Protobuf from source. For Ubuntu 16.04 LTS, version 2.6.1
     cd protobuf-2.6.1
     ./autogen.sh
     ./configure --prefix $(pwd)
-    make -j
+    make -j4
     make install
 
 and set the following CMake flags in Marian compilation:

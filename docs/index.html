@@ -168,7 +168,7 @@
           </h1>
           <div class="meta">
             <i class="fa fa-clock-o"></i>
-            Last updated: 27 November 2019
+            Last updated: 21 January 2020
           </div>
         </div><!--//doc-header-->
 
@@ -655,7 +655,7 @@ corpus, for example:</p>
 <a href="https://github.com/clab/fast_align">fast_align</a> word aligner (please refer to
 their repository for installation instructions):</p>
 
-<div class="highlighter-rouge"><div class="highlight"><pre class="highlight"><code>paste corpus.en corpus.de | sed 's/\t/ ||| ' &gt; corpus.en-de
+<div class="highlighter-rouge"><div class="highlight"><pre class="highlight"><code>paste corpus.en corpus.de | sed 's/\t/ ||| /g' &gt; corpus.en-de
 fast_align/build/fast_align -vdo -i corpus.en-de &gt; forward.align
 fast_align/build/fast_align -vdor -i corpus.en-de &gt; reverse.align
 fast_align/build/atools -c grow-diag-final -i forward.align -j reverse.align &gt; corpus.align

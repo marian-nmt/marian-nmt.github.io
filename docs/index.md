@@ -490,7 +490,7 @@ The file _corpus.align_ from the example can be generated using the
 [fast_align](https://github.com/clab/fast_align) word aligner (please refer to
 their repository for installation instructions):
 
-    paste corpus.en corpus.de | sed 's/\t/ ||| ' > corpus.en-de
+    paste corpus.en corpus.de | sed 's/\t/ ||| /g' > corpus.en-de
     fast_align/build/fast_align -vdo -i corpus.en-de > forward.align
     fast_align/build/fast_align -vdor -i corpus.en-de > reverse.align
     fast_align/build/atools -c grow-diag-final -i forward.align -j reverse.align > corpus.align

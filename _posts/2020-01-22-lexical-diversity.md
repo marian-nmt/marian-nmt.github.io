@@ -50,7 +50,7 @@ For the years WMT15 to WMT18 we also have the other half of the test sets, the h
 
 [![Trend on natural reference]({{ "/assets/images/blog/ld/fig3.ttr.inv.png" }})](/assets/images/blog/ld/fig3.ttr.inv.png){:target="_blank"}
 
-Here we finally see something quite significant: over all four years the natural target is more lexically diverse than all the MT systems, by quite some margin. I verified that this is the case for a number more translation pairs and the results is the same. Unfortunately, in this setup we do not have human-created translations in the mix, so we can only compare apples to slightly different apples across the different time-based plots. 
+Here we finally see something quite significant: over all four years the natural target is lexically more diverse than all the MT systems, by quite some margin. I verified that this is the case for a number more translation pairs and the results is the same. Unfortunately, in this setup we do not have human-created translations in the mix, so we can only compare apples to slightly different apples across the different time-based plots. 
 
 
 ## Conclusions?

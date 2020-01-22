@@ -4,7 +4,7 @@ title: "Is MT really lexically less diverse than human translation?"
 published: true
 ---
 
-## What got me interested in lexical diversity of MT outputs
+## What got me interested in lexical diversity of MT outputs?
 
 This blog post describes my journey into the rabbit hole that is lexical diversity of machine translation outputs. I got interested in the topic after attending MT Summit 2019 in Dublin last year and listening to two intriguing talks, one by Eva Vanmassenhove ([Vanmassenhove et al. 2019](https://www.aclweb.org/anthology/W19-6622/){:target="_blank"} ) and one by Antonio Toral ([Toral 2019](https://www.aclweb.org/anthology/W19-6627/){:target="_blank"})  -- which then went on to win the best paper award at that conference for his talk. 
 
@@ -13,7 +13,7 @@ Both papers conclude -- among other observations -- that machine translation out
 
 The reason I grew interested in lexical diversity (LD) is my curiosity if this easily (?) measurable property can be used for something practical. If LD indeed reliably separates natural text from human translationese and human translationese from machine translationese as these works suggest then there might be applications to identifying machine-translated content in large parallel corpora or at least the directionality of human translations (looking at gradients of LD on both sides compared to other document pairs with gradients pointing in other directions). Or we might be able to subselect training corpora to have larger LD, potentially increasing the LD of our MT systems if that is actually a desired property. 
 
-## WMT or it didn't happen
+## WMT or it didn't happen!
 
 I have been vocally critical of work that uses artificially small data for testing research hypotheses. By "artificially small" I mean cases where lots of data is actually available, but only a small corpus is chosen for experiments with little to no justification. I am also of the opinion that question about capabilities of MT have to be measured on capable MT models. Toy models trained on toy data result in toy answers. 
 

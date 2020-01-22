@@ -176,25 +176,7 @@
 <p>Both papers conclude – among other observations – that machine translation outputs demonstrate lower lexical diversity as measured by various existing metrics than human translations. Machine translation and human translations in turn demonstrate lower lexical diversity than human-written text that was naturally composed in the same target language. I like both papers a lot for the approaches they take in analyzing their data, but both have problems in their choice of analyzed MT systems and modeling decisions.  <a href="https://www.aclweb.org/anthology/W19-6622/" target="_blank">Vanmassenhove et al. (2019)</a> create MT systems that due to small data and lack of subword segmentation are likely to show lower lexical diversity. <a href="https://www.aclweb.org/anthology/W19-6627/" target="_blank">Toral (2019)</a> includes a number of state-of-the-art systems (at their time of creation), but in my opinion too few to be able to infer that MT is generally lexically less diverse than human translations (the main focus of that work is Post-Editese though). 
 <a href="https://www.aclweb.org/anthology/W19-6622/" target="_blank">Vanmassenhove et al. (2019)</a>  look at two translation directions (en-fr, en-es) with small training corpora (ca. 100K sentences) and three MT flavors (SMT, NMT-RNN, NMT-Transformer) with and without back-translation, 12 systems altogether. <a href="https://www.aclweb.org/anthology/W19-6627/" target="_blank">Toral (2019)</a> compares 18 systems on 6 language pairs, one of them can be considered close to current state-of-the-art (zh-en). Both use type-token ration (TTR) as one of their metrics. I will do the same in this post. Type-token ratio is just the number of unique lexical item in the text divided by the number of running tokens. For data sets of the same length this is probably a reasonable diversity measure. In my repository I also have code for using MTLD, but I saw no strongly differing results while MTLD feels unreasonably complicated and numerically ill-defined (+inf for perfect LD?).</p>
 
-<p>«««&lt; HEAD
-The research questions in these two papers sparked my interest, but I am mostly curious if lexical diversity (LD) – this apparently easily measurable property – can be used for something practical. If LD indeed reliably separates natural text from human translationese and human translationese from machine translationese as these works suggest then there might be applications to identifying machine-translated content in large parallel corpora or at least the directionality of human translations (looking at gradients of LD on both sides compared to other document pairs with gradients pointing in other directions). Or we might be able to subselect training corpora to have larger LD, potentially increasing the LD of our MT systems if that is actually a desired property. To get a better feeling for LD, let’s go large-scale!
-=======
-The research questions in these two papers sparked my interest, but the reason I grew interested in lexical diversity (LD) is my curiosity if this easily (?) measurable property can be used for something practical. If LD indeed reliably separates natural text from human translationese and human translationese from machine translationese as these works suggest then there might be applications to identifying machine-translated content in large parallel corpora or at least the directionality of human translations (looking at gradients of LD on both sides compared to other document pairs with gradients pointing in other directions). Or we might be able to subselect training corpora to have larger LD, potentially increasing the LD of our MT systems if that is actually a desired property.</p>
-<blockquote>
-  <blockquote>
-    <blockquote>
-      <blockquote>
-        <blockquote>
-          <blockquote>
-            <blockquote>
-              <p>blog</p>
-            </blockquote>
-          </blockquote>
-        </blockquote>
-      </blockquote>
-    </blockquote>
-  </blockquote>
-</blockquote>
+<p>The research questions in these two papers sparked my interest, but I am mostly curious if lexical diversity (LD) – this apparently easily measurable property – can be used for something practical. If LD indeed reliably separates natural text from human translationese and human translationese from machine translationese as these works suggest then there might be applications to identifying machine-translated content in large parallel corpora or at least the directionality of human translations (looking at gradients of LD on both sides compared to other document pairs with gradients pointing in other directions). Or we might be able to subselect training corpora to have larger LD, potentially increasing the LD of our MT systems if that is actually a desired property. To get a better feeling for LD, let’s go large-scale!</p>
 
 <h2 id="wmt-or-it-didnt-happen">WMT or it didn’t happen!</h2>
 

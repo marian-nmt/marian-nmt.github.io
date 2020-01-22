@@ -65,7 +65,7 @@ The project is a standard CMake out-of-source build:
     mkdir build
     cd build
     cmake ..
-    make -j
+    make -j4
 
 The complete list of compilation options in the form of CMake flags can be
 obtained by running `cmake -LH -N` or `cmake -LAH -N` from the `build`
@@ -91,6 +91,9 @@ built-in SentencePiece and TCMalloc support:git cmake3 build-essential libboost-
 
       sudo apt-get install git cmake3 build-essential libboost-all-dev libprotobuf8 protobuf-compiler libprotobuf-dev openssl libssl-dev libgoogle-perftools-dev
 
+Please see the [GCC/CUDA compatibility
+table](https://github.com/marian-nmt/marian-dev/issues/526) if you experience
+compilation issues with different versions of GCC and CUDA.
 
 
 ### Static compilation
@@ -99,7 +102,7 @@ Marian will be compiled statically if the flag `USE_STATIC_LIBS` is set:
 
     cd build
     cmake .. -DUSE_STATIC_LIBS=on
-    make -j
+    make -j4
 
 
 
@@ -123,7 +126,7 @@ To compile Marian training framework with your custom Boost installation:
     mkdir build
     cd build
     cmake .. -DBOOST_ROOT=/path/to/boost_1_67_0
-    make -j16
+    make -j4
 
 Tested on Ubuntu 16.04.3 LTS.
 
@@ -137,7 +140,7 @@ Specify the path to your CUDA root directory via CMake:
     mkdir build
     cd build
     cmake .. -DCUDA_TOOLKIT_ROOT_DIR=/usr/local/cuda-9.1
-    make -j16
+    make -j4
 
 
 
@@ -186,7 +189,7 @@ You may also compile Protobuf from source. For Ubuntu 16.04 LTS, version 2.6.1
     cd protobuf-2.6.1
     ./autogen.sh
     ./configure --prefix $(pwd)
-    make -j
+    make -j4
     make install
 
 and set the following CMake flags in Marian compilation:
@@ -487,7 +490,7 @@ The file _corpus.align_ from the example can be generated using the
 [fast_align](https://github.com/clab/fast_align) word aligner (please refer to
 their repository for installation instructions):
 
-    paste corpus.en corpus.de | sed 's/\t/ ||| ' > corpus.en-de
+    paste corpus.en corpus.de | sed 's/\t/ ||| /g' > corpus.en-de
     fast_align/build/fast_align -vdo -i corpus.en-de > forward.align
     fast_align/build/fast_align -vdor -i corpus.en-de > reverse.align
     fast_align/build/atools -c grow-diag-final -i forward.align -j reverse.align > corpus.align

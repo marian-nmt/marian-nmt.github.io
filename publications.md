@@ -29,14 +29,21 @@ if you use Marian (formerly AmuNMT) in your research:
 }
 ```
 
-## Selected work using Marian/AmuNMT
+## Selected papers
+
+Selected papers on the Marian NMT Tootlkit:
 
 {% bibliography %}
 
-See [papers citing the Marian/AmuNMT toolkit on Google Scholar](https://scholar.google.co.uk/scholar?oi=bibs&hl=en&cites=14488488693117480286&as_sdt=5).
+See more papers citing
+[Marian](https://scholar.google.co.uk/scholar?oi=bibs&hl=en&cites=6156277269319504697)
+and
+[Amun](https://scholar.google.co.uk/scholar?oi=bibs&hl=en&cites=14488488693117480286)
+on Google Scholar.
 
 ## Press
 
+* [Neural Machine Translation Enabling Human Parity Innovations In the Cloud](https://www.microsoft.com/en-us/translator/blog/2019/06/17/neural-machine-translation-enabling-human-parity-innovations-in-the-cloud/)
 * [Neural Conquers Patent Translation in Major WIPO Roll-out](https://slator.com/technology/neural-conquers-patent-translation-in-major-wipo-roll-out/) on [Slator](https://slator.com)
 * [WIPO Develops Cutting-Edge Translation Tool For Patent Documents](http://www.wipo.int/pressroom/en/articles/2016/article_0014.html)
 

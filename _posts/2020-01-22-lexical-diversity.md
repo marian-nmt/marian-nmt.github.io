@@ -64,4 +64,4 @@ So, can LD be useful for anything? Hard to say for now. I see some hope for iden
 As for the main question from the post title: I think we need to be precise that the lexical diversity of WMT outputs is similar to that of WMT test set references. There is the very real possibility that WMT translations are of a lower quality than other translations although they have been ordered from professional agencies etc. I have no evidence for or against that. However, these results also mean that claims of generally lower lexical diversity for MT are potentially doubtful. For one of the most important and biggest MT competitions and its test sets they would be wrong. 
 
 
-{% include comments.html issue-number="312" %}
+{% include comments.html issue-number="26" %}

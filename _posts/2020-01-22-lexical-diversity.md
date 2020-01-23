@@ -3,7 +3,6 @@ layout: posts
 title: "Is MT really lexically less diverse than human translation?"
 published: true
 excerpt: This blog post describes my journey into the rabbit hole that is lexical diversity of machine translation outputs. We take a look at lexical diversity of WMT19 systems and test sets.
-author: emjotde
 ---
 
 ## What got me interested in lexical diversity of MT outputs?
@@ -63,3 +62,6 @@ Natural text is clearly more diverse than MT output, but this comes with a BIG g
 So, can LD be useful for anything? Hard to say for now. I see some hope for identifying natural text versus translationese, whether it comes from machines or humans. 
 
 As for the main question from the post title: I think we need to be precise that the lexical diversity of WMT outputs is similar to that of WMT test set references. There is the very real possibility that WMT translations are of a lower quality than other translations although they have been ordered from professional agencies etc. I have no evidence for or against that. However, these results also mean that claims of generally lower lexical diversity for MT are potentially doubtful. For one of the most important and biggest MT competitions and its test sets they would be wrong. 
+
+
+{% include comments.html issue-number="312" %}

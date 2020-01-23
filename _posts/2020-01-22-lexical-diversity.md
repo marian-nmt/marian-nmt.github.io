@@ -3,6 +3,7 @@ layout: posts
 title: "Is MT really lexically less diverse than human translation?"
 published: true
 excerpt: This blog post describes my journey into the rabbit hole that is lexical diversity of machine translation outputs. We take a look at lexical diversity of WMT19 systems and test sets.
+author: emjotde
 ---
 
 ## What got me interested in lexical diversity of MT outputs?

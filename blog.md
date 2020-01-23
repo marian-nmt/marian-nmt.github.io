@@ -1,8 +1,9 @@
 ---
-layout: docs
+layout: blog
 title: Blog
 permalink: /blog
 icon: fa-pencil-square-o
+menu: 7
 ---
 
   {% for post in site.posts %}

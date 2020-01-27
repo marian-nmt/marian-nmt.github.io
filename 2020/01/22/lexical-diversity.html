@@ -22,6 +22,7 @@
   <!-- Plugins CSS -->
   <link rel="stylesheet" href="/assets/plugins/font-awesome/css/font-awesome.min.css">
   <link rel="stylesheet" href="/assets/css/pygments/github.css">
+  <link rel="stylesheet" href="/assets/plugins/lightbox/lightbox.css">
 
   <!-- Theme CSS -->
   <link id="theme-style" rel="stylesheet" href="/assets/css/styles.css">
@@ -177,8 +178,8 @@
 
 <p>This blog post describes my journey into the rabbit hole (actually now it’s a <a href="https://www.sciencealert.com/this-massive-tunnel-in-south-america-was-dug-by-ancient-mega-sloths">giant ground sloth burrow</a>) that is lexical diversity of machine translation outputs. I got interested in the topic after attending MT Summit 2019 in Dublin last year and listening to two intriguing talks, one by Eva Vanmassenhove (<a href="https://www.aclweb.org/anthology/W19-6622/" target="_blank">Vanmassenhove et al. 2019</a> ) and one by Antonio Toral (<a href="https://www.aclweb.org/anthology/W19-6627/" target="_blank">Toral 2019</a>)  – who then went on to win the best paper award at that conference for his talk.</p>
 
-<p>Both papers conclude – among other observations – that machine translation outputs demonstrate lower lexical diversity as measured by various existing metrics than human translations. Machine translation and human translations in turn demonstrate lower lexical diversity than human-written text that was naturally composed in the same target language. I like both papers a lot for the approaches they take in analyzing their data, but both have problems in their choice of analyzed MT systems and modeling decisions. <a href="https://www.aclweb.org/anthology/W19-6622/" target="_blank">Vanmassenhove et al. (2019)</a> create MT systems that due to smaller data and lack of subword segmentation are likely to show lower lexical diversity, more on that below. <a href="https://www.aclweb.org/anthology/W19-6627/" target="_blank">Toral (2019)</a> includes a number of state-of-the-art systems (at their time of creation), but in my opinion too few to be able to infer that MT is generally lexically less diverse than human translations (the main focus of that work is Post-Editese though). 
-<a href="https://www.aclweb.org/anthology/W19-6627/" target="_blank">Toral (2019)</a> compares 18 systems on 6 language pairs, one of them can be considered close to current state-of-the-art (zh-en). 
+<p>Both papers conclude – among other observations – that machine translation outputs demonstrate lower lexical diversity as measured by various existing metrics than human translations. Machine translation and human translations in turn demonstrate lower lexical diversity than human-written text that was naturally composed in the same target language. I like both papers a lot for the approaches they take in analyzing their data, but both have problems in their choice of analyzed MT systems and modeling decisions. <a href="https://www.aclweb.org/anthology/W19-6622/" target="_blank">Vanmassenhove et al. (2019)</a> create MT systems that due to smaller data and lack of subword segmentation are likely to show lower lexical diversity, more on that below. <a href="https://www.aclweb.org/anthology/W19-6627/" target="_blank">Toral (2019)</a> includes a number of state-of-the-art systems (at their time of creation), but in my opinion too few to be able to infer that MT is generally lexically less diverse than human translations (the main focus of that work is Post-Editese though).
+<a href="https://www.aclweb.org/anthology/W19-6627/" target="_blank">Toral (2019)</a> compares 18 systems on 6 language pairs, one of them can be considered close to current state-of-the-art (zh-en).
 <a href="https://www.aclweb.org/anthology/W19-6622/" target="_blank">Vanmassenhove et al. (2019)</a>  look at two translation directions (en-fr, en-es) with small training corpora (ca. 1 million sentences) and three MT flavors (SMT, NMT-RNN, NMT-Transformer) with and without back-translation, 12 systems altogether.</p>
 
 <p><strong>Correction</strong>: I wrote in an earlier version of the post that <a href="https://www.aclweb.org/anthology/W19-6622/" target="_blank">Vanmassenhove et al. (2019)</a> used 100K sentences of training data; that is incorrect. I looked at the wrong table and mixed up vocabulary size and training data size.</p>
@@ -215,7 +216,7 @@
 
 <p><a href="https://www.aclweb.org/anthology/W19-6622/" target="_blank">Vanmassenhove et al. (2019)</a> do something clever (which I didn’t realize while writing about that in the first version of the post): they side-step the problem by not using subwords. This helps them to nearly completely avoid the spurious copy and hallucinated words issue (the SMT system can still copy, it’s built into the decoder). So, measurement-wise they are golden, no noise to worry about.</p>
 
-<p>However, that comes at a cost: disabling the source of noise for NMT by not using subwords means they also disabled the NMT system’s ability to do creative word formation and morphology, as well as transliteration or justified copying and unknown word handling. These are clearly mechanisms that are responsible for potentially increased lexical diversity. Assuming a beneficial word to noise ratio for subwords in general (otherwise, why would we use them?), that would mean that an NMT system without subwords is likely operating at a lower-bound of capability to generate lexically diverse output compared to similar systems with subwords. This is further excerbated by the now huge softmax distribution over the target vocabulary (&gt;100K items from a relatively small training corpus with many undertrained long tail observations). Note how this is more problematic than the situation from <a href="https://www.aclweb.org/anthology/W19-6627/" target="_blank">Toral (2019)</a>: there the MT systems are potentially at an advantage due to ignoring the noise, but they are measured to be lower than human-created translations anyway, so all is good. Here the MT system outputs are measured to have lower LD than the human translations, but the modeling decisions put that at a lower bound for potential MT systems. The reported numbers are correct for the given systems, but we probably cannot generalize based on that to any other MT systems unless they have been trained in a similar way.</p>
+<p>However, that comes at a cost: disabling the source of noise for NMT by not using subwords means they also disabled the NMT system’s ability to do creative word formation and morphology, as well as transliteration or justified copying and unknown word handling. These are clearly mechanisms that are responsible for potentially increased lexical diversity. Assuming a beneficial word to noise ratio for subwords in general (otherwise, why would we use them?), that would mean that an NMT system without subwords is likely operating at a lower bound of capability to generate lexically diverse output compared to similar systems with subwords. This is further excerbated by the now huge softmax distribution over the target vocabulary (&gt;100K items from a relatively small training corpus with many undertrained long tail observations). Note how this is more problematic than the situation from <a href="https://www.aclweb.org/anthology/W19-6627/" target="_blank">Toral (2019)</a>: there the MT systems are potentially at an advantage due to ignoring the noise, but they are measured to be lower than human-created translations anyway, so all is good. Here the MT system outputs are measured to have lower LD than the human translations, but the modeling decisions put that at a lower bound for potential MT systems. The reported numbers are correct for the given systems, but we probably cannot generalize based on that to any other MT systems unless they have been trained in a similar way.</p>
 
 <p>So, how do we measure the LD of practical MT systems then? I am proposing the following modifications to either TTR or MTLD (works for both) for machine translation:</p>
 <ul>
@@ -303,17 +304,17 @@
 
 <h2 id="lexical-diversity-results-for-wmt19-systems">Lexical diversity results for WMT19 systems</h2>
 
-<p>So, let’s first look at (l)cTTR for all the WMT19 translation directions and the human-created references. Below (click the image for full size) you can see one box plot per translation direction. The red dot marks the LD of the human reference set. The box plot spans multiple MT systems from most to least lexically diverse as measured by TTR.</p>
+<p>So, let’s first look at (l)cTTR for all the WMT19 translation directions and the human-created references. Below (click the image for full size) you can see one box plot per translation direction. The red dot marks the LD of the human reference set. The box plot spans multiple MT systems from most to least lexically diverse as measured by (l)cTTR.</p>
 
-<p><a href="/assets/images/blog/ld/fig1.lcttr.png" target="_blank"><img alt="lcTTR for WMT19" src="/assets/images/blog/ld/fig1.lcttr.png" /></a></p>
+<p><a href="/assets/images/blog/ld/fig1.lcttr.png"><img alt="lcTTR for WMT19" src="/assets/images/blog/ld/fig1.lcttr.png" /></a></p>
 
-<p>We can see immediately that only in one case the human reference is the most lexically diverse according to the partially denoised metric (en-de). There are usually a couple of MT systems in the competition that display more lexical diversity than the human reference. I some cases the majority of MT systems is more diverse than the reference; This is interesting. For WMT19 at least, it seems there would be no reliable way to successfully tell apart MT from the human translated test set using (l)cTTR as a measure. Again, the results for translation into English are probably reliable, so should be EN-DE.</p>
+<p>We can see immediately that only in one case the human reference is the most lexically diverse according to the partially denoised metric (en-de). There are usually a couple of MT systems in the competition that display more lexical diversity than the human reference. In some cases the majority of MT systems is more diverse than the reference; This is interesting. For WMT19 at least, it seems there would be no reliable way to successfully tell apart MT from the human translated test set using (l)cTTR as a measure. Again, the results for translation into English are probably reliable, so should be EN-DE.</p>
 
 <p>Additional results and plots:</p>
 <ul>
-  <li><a href="/assets/images/blog/ld/fig1.lcmtld.png" target="_blank">box plot with (l)cMTLD</a></li>
-  <li><a href="/assets/images/blog/ld/fig1.ttr.png" target="_blank">box plot with TTR</a> (no denoising, old results)</li>
-  <li><a href="/assets/images/blog/ld/fig1.mtld.png" target="_blank">box plot with MTLD</a> (no denoising)</li>
+  <li><a href="/assets/images/blog/ld/fig1.lcmtld.png">box plot with (l)cMTLD</a></li>
+  <li><a href="/assets/images/blog/ld/fig1.ttr.png">box plot with TTR</a> (no denoising, old results)</li>
+  <li><a href="/assets/images/blog/ld/fig1.mtld.png">box plot with MTLD</a> (no denoising)</li>
 </ul>
 
 <p>It seems that denoising moves the references up in the box plots but not high enough to escape the previous observations. Also MTLD variants seem to see the references as more diverse than TTR variants.</p>
@@ -372,7 +373,7 @@
 
 <p>As for the main question from the post title: I think we need to be precise that the lexical diversity of WMT outputs is similar to that of WMT test set references. There is the very real possibility that WMT translations are of a lower quality than other translations although they have been ordered from professional agencies etc. I have no evidence for or against that. However, these results also mean that claims of generally lower lexical diversity for MT are potentially doubtful. For one of the most important and biggest MT competitions and its test sets they would be wrong.</p>
 
-<p>I would like to especially emphasize this point: <strong>Better-quality MT system might be more reliable candidates for correct lexical diversity calculation as there seems to be way less noise.</strong>. This might be something that deserves its own blog post. Something like: How good does your MT system need to bo in order to be able to reason about MT?</p>
+<p>I would like to especially emphasize this point: <strong>Better-quality MT system might be more reliable candidates for correct lexical diversity calculation as there seems to be way less noise.</strong> This might be something that deserves its own blog post. Something like: How good does your MT system need to be in order to be able to reason about MT?</p>
 
 <p>OK, that’s it.</p>
 
@@ -423,11 +424,12 @@
 <script type="text/javascript" src="/assets/plugins/jquery-scrollTo/jquery.scrollTo.min.js"></script>
 <script type="text/javascript" src="/assets/plugins/jquery-match-height/jquery.matchHeight-min.js"></script>
 
-<script src="https://cdn.mathjax.org/mathjax/latest/MathJax.js?config=TeX-AMS-MML_HTMLorMML" type="text/javascript"></script>
+<script type="text/javascript" src="https://cdn.mathjax.org/mathjax/latest/MathJax.js?config=TeX-AMS-MML_HTMLorMML"></script>
 
 <script type="text/javascript" src="/assets/js/main.js"></script>
 <script type="text/javascript" src="/assets/js/toc.js"></script>
 
 
+    <script type="text/javascript" src="/assets/plugins/lightbox/lightbox.js"></script>
   </body>
 </html>

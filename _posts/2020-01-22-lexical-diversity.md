@@ -59,7 +59,6 @@ The lexicalized versions have problems I haven't solved yet: among the WMT langu
 
 For the English frequency list I collected counts from all of WMT monolingual English news data. I set the minimal frequency for valid target vocabulary items to 5 (1M vocabulary items remain) and the threshold for allowed copies to 1000 (50K items). No good justification here, these are nice round numbers and when I looked through the included/excluded words it seemed decent enough. 
 
-
 |         |  lcTTR |  MTLD | lcMTLD |
 |---------|:------:|:-----:|:------:|
 | TTR     |  0.83  | 0.46  | 0.13   |
@@ -79,7 +78,7 @@ I am again omitting numbers for EN-* out of laziness. Here we do not have the wo
 
 ## Lexical diversity results for WMT19 systems
 
-So, let's first look at (l)cTTR for all the WMT19 translation directions and the human-created references. Below (click the image for full size) you can see one box plot per translation direction. The red dot marks the LD of the human reference set. The box plot spans multiple MT systems from most to least lexically diverse as measured by (l)cTTR. 
+So, let's first look at (l)cTTR for all the WMT19 translation directions and the human-created references. Below (click the image for full size) you can see one box plot per translation direction. The red dot marks the LD of the human reference set. The box plot spans multiple MT systems from most to least lexically diverse as measured by (l)cTTR.
 
 <a href="{{ site.baseurl }}/assets/images/blog/ld/fig1.lcttr.png" target="_blank"><img alt="lcTTR for WMT19" src="{{ site.baseurl }}/assets/images/blog/ld/fig1.lcttr.png"/></a>
 
@@ -96,7 +95,7 @@ It seems that denoising moves the references up in the box plots but not high en
 
 During the discussion time after the mentioned talks, the question of the meaning of lexical diversity was raised. Is higher LD actually better in general? Does lower LD stand for more consistency etc. Can we draw conclusions about lexical diversity and translation quality? Are more diverse MT outputs better than less diverse ones? Luckily, we can use WMT19 data to shed some light at that question as well. The system-level human judgments are available for download and we are looking at normalized z-Scores (x-axis) versus (l)cTTR (y-axis) for all language pairs in the figure below (click for full size). 
 
-[![correlation with human judgement]({{ "/assets/images/blog/ld/fig2.ttr.png" }})](/assets/images/blog/ld/fig2.ttr.png){:target="_blank"}
+[![correlation with human judgment]({{ "/assets/images/blog/ld/fig2.ttr.png" }})](/assets/images/blog/ld/fig2.ttr.png){:target="_blank"}
 
 Additional results and plots:
 * <a href="{{ site.baseurl }}/assets/images/blog/ld/fig2.mtld.png" target="_blank">correlation plot of Human eval and (l)cMTLD</a>
@@ -123,7 +122,6 @@ Additional results and plots:
 
 Here we finally see something quite significant: over all four years the natural target is lexically more diverse than all the MT systems, by quite some margin. I verified that this is the case for a number more translation pairs and the results are the same. Unfortunately, in this setup we do not have human-created translations in the mix, so we can only compare apples to slightly different apples across the different time-based plots. 
 
-
 ## Conclusions?
 
 What can we conclude? A number of things:
@@ -142,6 +140,5 @@ As for the main question from the post title: I think we need to be precise that
 I would like to especially emphasize this point: **Better-quality MT system might be more reliable candidates for correct lexical diversity calculation as there seems to be way less noise.** This might be something that deserves its own blog post. Something like: How good does your MT system need to be in order to be able to reason about MT?
 
 OK, that's it.
-
 
 {% include comments.html issue-number="26" %}

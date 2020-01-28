@@ -22,6 +22,7 @@
   <!-- Plugins CSS -->
   <link rel="stylesheet" href="/assets/plugins/font-awesome/css/font-awesome.min.css">
   <link rel="stylesheet" href="/assets/css/pygments/github.css">
+  <link rel="stylesheet" href="/assets/plugins/lightbox/lightbox.css">
 
   <!-- Theme CSS -->
   <link id="theme-style" rel="stylesheet" href="/assets/css/styles.css">
@@ -177,8 +178,8 @@
 
 <p>This blog post describes my journey into the rabbit hole (actually now it’s a <a href="https://www.sciencealert.com/this-massive-tunnel-in-south-america-was-dug-by-ancient-mega-sloths">giant ground sloth burrow</a>) that is lexical diversity of machine translation outputs. I got interested in the topic after attending MT Summit 2019 in Dublin last year and listening to two intriguing talks, one by Eva Vanmassenhove (<a href="https://www.aclweb.org/anthology/W19-6622/" target="_blank">Vanmassenhove et al. 2019</a> ) and one by Antonio Toral (<a href="https://www.aclweb.org/anthology/W19-6627/" target="_blank">Toral 2019</a>)  – who then went on to win the best paper award at that conference for his talk.</p>
 
-<p>Both papers conclude – among other observations – that machine translation outputs demonstrate lower lexical diversity as measured by various existing metrics than human translations. Machine translation and human translations in turn demonstrate lower lexical diversity than human-written text that was naturally composed in the same target language. I like both papers a lot for the approaches they take in analyzing their data, but both have problems in their choice of analyzed MT systems and modeling decisions. <a href="https://www.aclweb.org/anthology/W19-6622/" target="_blank">Vanmassenhove et al. (2019)</a> create MT systems that due to smaller data and lack of subword segmentation are likely to show lower lexical diversity, more on that below. <a href="https://www.aclweb.org/anthology/W19-6627/" target="_blank">Toral (2019)</a> includes a number of state-of-the-art systems (at their time of creation), but in my opinion too few to be able to infer that MT is generally lexically less diverse than human translations (the main focus of that work is Post-Editese though). 
-<a href="https://www.aclweb.org/anthology/W19-6627/" target="_blank">Toral (2019)</a> compares 18 systems on 6 language pairs, one of them can be considered close to current state-of-the-art (zh-en). 
+<p>Both papers conclude – among other observations – that machine translation outputs demonstrate lower lexical diversity as measured by various existing metrics than human translations. Machine translation and human translations in turn demonstrate lower lexical diversity than human-written text that was naturally composed in the same target language. I like both papers a lot for the approaches they take in analyzing their data, but both have problems in their choice of analyzed MT systems and modeling decisions. <a href="https://www.aclweb.org/anthology/W19-6622/" target="_blank">Vanmassenhove et al. (2019)</a> create MT systems that due to smaller data and lack of subword segmentation are likely to show lower lexical diversity, more on that below. <a href="https://www.aclweb.org/anthology/W19-6627/" target="_blank">Toral (2019)</a> includes a number of state-of-the-art systems (at their time of creation), but in my opinion too few to be able to infer that MT is generally lexically less diverse than human translations (the main focus of that work is Post-Editese though).
+<a href="https://www.aclweb.org/anthology/W19-6627/" target="_blank">Toral (2019)</a> compares 18 systems on 6 language pairs, one of them can be considered close to current state-of-the-art (zh-en).
 <a href="https://www.aclweb.org/anthology/W19-6622/" target="_blank">Vanmassenhove et al. (2019)</a>  look at two translation directions (en-fr, en-es) with small training corpora (ca. 1 million sentences) and three MT flavors (SMT, NMT-RNN, NMT-Transformer) with and without back-translation, 12 systems altogether.</p>
 
 <p><strong>Correction</strong>: I wrote in an earlier version of the post that <a href="https://www.aclweb.org/anthology/W19-6622/" target="_blank">Vanmassenhove et al. (2019)</a> used 100K sentences of training data; that is incorrect. I looked at the wrong table and mixed up vocabulary size and training data size.</p>
@@ -305,15 +306,15 @@
 
 <p>So, let’s first look at (l)cTTR for all the WMT19 translation directions and the human-created references. Below (click the image for full size) you can see one box plot per translation direction. The red dot marks the LD of the human reference set. The box plot spans multiple MT systems from most to least lexically diverse as measured by (l)cTTR.</p>
 
-<p><a href="/assets/images/blog/ld/fig1.lcttr.png" target="_blank"><img alt="lcTTR for WMT19" src="/assets/images/blog/ld/fig1.lcttr.png" /></a></p>
+<p><a href="/assets/images/blog/ld/fig1.lcttr.png"><img alt="lcTTR for WMT19" src="/assets/images/blog/ld/fig1.lcttr.png" /></a></p>
 
 <p>We can see immediately that only in one case the human reference is the most lexically diverse according to the partially denoised metric (en-de). There are usually a couple of MT systems in the competition that display more lexical diversity than the human reference. In some cases the majority of MT systems is more diverse than the reference; This is interesting. For WMT19 at least, it seems there would be no reliable way to successfully tell apart MT from the human translated test set using (l)cTTR as a measure. Again, the results for translation into English are probably reliable, so should be EN-DE.</p>
 
 <p>Additional results and plots:</p>
 <ul>
-  <li><a href="/assets/images/blog/ld/fig1.lcmtld.png" target="_blank">box plot with (l)cMTLD</a></li>
-  <li><a href="/assets/images/blog/ld/fig1.ttr.png" target="_blank">box plot with TTR</a> (no denoising, old results)</li>
-  <li><a href="/assets/images/blog/ld/fig1.mtld.png" target="_blank">box plot with MTLD</a> (no denoising)</li>
+  <li><a href="/assets/images/blog/ld/fig1.lcmtld.png">box plot with (l)cMTLD</a></li>
+  <li><a href="/assets/images/blog/ld/fig1.ttr.png">box plot with TTR</a> (no denoising, old results)</li>
+  <li><a href="/assets/images/blog/ld/fig1.mtld.png">box plot with MTLD</a> (no denoising)</li>
 </ul>
 
 <p>It seems that denoising moves the references up in the box plots but not high enough to escape the previous observations. Also MTLD variants seem to see the references as more diverse than TTR variants.</p>
@@ -423,11 +424,12 @@
 <script type="text/javascript" src="/assets/plugins/jquery-scrollTo/jquery.scrollTo.min.js"></script>
 <script type="text/javascript" src="/assets/plugins/jquery-match-height/jquery.matchHeight-min.js"></script>
 
-<script src="https://cdn.mathjax.org/mathjax/latest/MathJax.js?config=TeX-AMS-MML_HTMLorMML" type="text/javascript"></script>
+<script type="text/javascript" src="https://cdn.mathjax.org/mathjax/latest/MathJax.js?config=TeX-AMS-MML_HTMLorMML"></script>
 
 <script type="text/javascript" src="/assets/js/main.js"></script>
 <script type="text/javascript" src="/assets/js/toc.js"></script>
 
 
+    <script type="text/javascript" src="/assets/plugins/lightbox/lightbox.js"></script>
   </body>
 </html>

@@ -81,3 +81,4 @@ message.
 | `{% github_link "clickable text" <repository>/<path/to/file> %}` | An active link to a file/directory `<path/to/file>` in the given repository with `clickable text`. |
 | `[Text](/link){:target="_blank"}` | Opens the linked document in a new window or tab. |
 | `$$ x_{i}^{j} $$` | A LaTeX mathematical formula. |
+| `[Text](/path/to/an/image){:.no-lightbox}` | Disable the automatic image box. |

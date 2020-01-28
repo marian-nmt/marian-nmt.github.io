@@ -8,3 +8,4 @@ See the github page for docs: http://ashleydw.github.io/lightbox
 Contributing
 ----
 Instead of modifying the JavaScript files directly, you should instead modify the coffeescript file and run the grunt task.
+https://jekyllcodex.org/without-plugin/lightbox/#

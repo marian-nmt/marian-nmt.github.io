@@ -2,7 +2,8 @@
 
 The website is build with Jekyll - a static site generator.
 The content is created and updated on branch `jekyll`, then the static pages
-are generated with Jekyll and stored in branch `master`.
+are generated with Jekyll and stored in branch `master`. Please **do not update
+files directly in `master`**.
 
 
 We use custom theme, which is not supported by automatic GitHub Pages

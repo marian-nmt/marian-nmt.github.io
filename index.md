@@ -92,6 +92,7 @@ Research and Innovation Programme under grant agreements No
 
 the Amazon Academic Research Awards program,
 the World Intellectual Property Organization,
+the eBay Research and University Partnership for Technology program,
 a collaboration with Intel,
 
 and is based upon work supported in part by the Office of the Director of

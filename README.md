@@ -56,7 +56,8 @@ This compiles Marian, so GPU is required.
 
 ### Logos
 
-Put a logo image into `assets/logos/` and update `_data/logos.yml`.
+Put a logo image into `assets/logos/` and update `_data/logos.yml`.  Use a PNG
+image with transparent background.
 
 
 ## Deployment

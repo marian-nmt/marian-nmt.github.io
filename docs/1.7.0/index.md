@@ -10,33 +10,27 @@ latex: true
 ## Overview
 
 Version:
-v1.9.1 95c65bb 2020-03-17 03:30:49 +0000
+v1.7.0 67124f8 2018-11-28 13:04:30 +0000
 
 Marian toolkit provides the following tools:
 
-- [marian](/docs/cmd/marian): training NMT models and language models.
-- [marian-decoder](/docs/cmd/marian-decoder): CPU and GPU translation using NMT
-  models trained with Marian.
+- [marian](/docs/cmd/marian): for training NMT models and language models
+- [marian-decoder](/docs/cmd/marian-decoder): for CPU and GPU translation using
+  NMT models trained with Marian, and specific models trained with Nematus
 - [marian-server](/docs/cmd/marian-server): a web-socket server providing
-  translation service.
-- [marian-scorer](/docs/cmd/marian-scorer): rescoring parallel text files and
-  n-best lists.
-- [marian-vocab](/docs/cmd/marian-vocab): creating a vocabulary from text given
-  on STDIN.
-- [marian-conv](/docs/cmd/marian-vocab): converting a model into a binary
-  format.
-
-The [amun](/docs/cmd/amun) tool offering CPU and GPU translation with specific
-Marian and Nematus models, which used to be a part of Marian, has been moved to
-its separate repository and is available from:
-[https://github.com/marian-nmt/amun](https://github.com/marian-nmt/amun)
+  translation service
+- [marian-scorer](/docs/cmd/marian-scorer): for rescoring parallel text files
+  and n-best lists
+- [marian-vocab](/docs/cmd/marian-vocab): for creating a vocabulary from text
+  given on STDIN
+- [amun](/docs/cmd/amun): for CPU and GPU translation using specific models
+  trained with Marian or Nematus
 
 
 
 ### Command-line options
 
-Click on the tool name above for a list of command line options. See options
-for [previous releases](/docs/cmd).
+Click on the tool name above for a list of command line options.
 
 
 
@@ -70,8 +64,9 @@ Clone a fresh copy from github:
 
 The project is a standard CMake out-of-source build:
 
-    mkdir marian/build
-    cd marian/build
+    cd marian
+    mkdir build
+    cd build
     cmake ..
     make -j4
 
@@ -85,7 +80,7 @@ directory after running `cmake ..` first.
 
 Assuming a fresh Ubuntu LTS installation with CUDA, the following packages need
 to be installed to compile with all features, including the web server,
-built-in SentencePiece and TCMalloc support.
+built-in SentencePiece and TCMalloc support:git cmake3 build-essential libboost-all-dev
 
 * Ubuntu 18.04 + CUDA 9.2 (defaults are gcc 7.3.0, Boost 1.65):
 
@@ -137,9 +132,6 @@ To compile Marian training framework with your custom Boost installation:
     make -j4
 
 Tested on Ubuntu 16.04.3 LTS.
-
-Since 1.9.0, Boost is only required if you compile the web server tool
-supplying `-DCOMPILE_SERVER=on` to the CMake command.
 
 
 
@@ -519,6 +511,45 @@ Marian has a few more options related to guided alignment training:
 
 
 
+### Multi-node training
+
+Multi-node training requires an MPI installation with `MPI_THREAD_MULTIPLE` set to
+`true`. A newer version (e.g. OpenMPI 2.X) is highly recommended due to intense
+use of multi-threading.
+
+Command-line options specific to multi-node training:
+
+- `--multi-node` - enable multi-node.
+- `--devices` - set nodes and devices, e.g. `0: 0 1 1: 0` means that node 0 has
+  2 GPUs, with IDs 0 and 1, and node 1 has 1 GPU, with ID 0.
+- `--multi-node-overlap` - overlap communication with computations, default:
+  enabled.
+
+To start multi-node training, except compiling Marian with MPI, you need to
+create a host file and ensure that the nodes can ssh to each other without a
+password. Then you may use the command similar to:
+
+    mpirun -n 2 --hostfile hosts_mpi -tag-output \
+        ./build/marian --devices 0:0 1 1:0 \
+            -m model.npz -t corpus.src corpus.trg -v vocab.src.yml vocab.trg.yml \
+            --multi-node --multi-node-overlap 0
+
+where the host file `hosts_mpi` contains on each line a host on which you want
+to run Marian.
+
+Note that multi-node currently only converges properly with gradient dropping,
+which requires layer normalization. Ideally, add the following line to your run
+script:
+
+    --layer-normalization --dropout-rnn 0.2 --dropout-src 0.1 --dropout-trg 0.1
+
+**Warning**: The API described above refers to the experimental feature
+introduced in version 1.4.0. It is depreciated at least since version 1.7.0.
+The newest multi-node API is not documented yet.
+
+
+
+
 ## Translation
 
 All models trained with `marian` can be decoded with `marian-decoder` and
@@ -714,6 +745,19 @@ well, for instance `--dim-emb 500`.
 We do not recommend training models of type `nematus` with Marian. It is much
 more efficient to train `s2s` models, which provide the same model architecture
 (except layer normalization), more features, and faster training.
+
+
+
+### Amun
+
+Amun is a translation tool for `amun` and `nematus` model types only and is now
+available from the separate repository: {% github_link amun %}.  Translation
+with Amun can be performed on GPU or CPU or both.
+
+Basic usage:
+
+    ./marian/build/amun -m model.npz -s vocab.en -t vocab.ro <<< "This is a test ."
+
 
 
 

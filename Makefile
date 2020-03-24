@@ -1,4 +1,7 @@
 
+SHELL := /bin/bash
+
+MARIAN   = marian/build
 COMMANDS = marian marian-decoder marian-server marian-scorer marian-vocab marian-conv
 CMDFILES = $(patsubst %,docs/cmd/%.md,$(COMMANDS))
 
@@ -24,14 +27,14 @@ marian-nmt-website.tgz: build
 	tar zcf $@ _site
 
 # generate pages with command-line options
-update-cmds: marian/build $(CMDFILES)
+update-cmds: $(MARIAN) $(CMDFILES)
 
 docs/cmd/%.md: docs/cmd/_template.tmp
 	sed "s/<COMMAND>/$*/" $^ > $@
 	echo "Version: " >> $@
-	./marian/build/marian --version >> $@ 2>&1
+	$(MARIAN)/marian --version >> $@ 2>&1
 	echo "" >> $@
-	./marian/build/$* -h 2>&1 | bash _scripts/help2markdown.sh | python _scripts/wrap_help.py >> $@
+	$(MARIAN)/$* -h 2>&1 | bash _scripts/help2markdown.sh | python _scripts/wrap_help.py >> $@
 
 # generate documentation
 update-docs: Doxyfile.marian.in marian

@@ -109,6 +109,20 @@
  
 
  
+
+ 
+
+ 
+
+ 
+
+ 
+
+ 
+
+ 
+
+ 
  <li>
    <a class="page-link" href="/quickstart/">Quick start</a>
  </li>
@@ -117,6 +131,18 @@
  
  <li>
    <a class="page-link" href="/features/">Features &amp; Benchmarks</a>
+ </li>
+ 
+
+ 
+ <li>
+   <a class="page-link" href="/docs/">Documentation</a>
+ </li>
+ 
+
+ 
+ <li>
+   <a class="page-link" href="/docs/cmd/">Command-line options</a>
  </li>
  
 
@@ -169,7 +195,7 @@
           </h1>
           <div class="meta">
             <i class="fa fa-clock-o"></i>
-            Last updated: 21 January 2020
+            Last updated: 24 March 2020
           </div>
         </div><!--//doc-header-->
 
@@ -188,7 +214,6 @@ compiler and CUDA. Minimal requirements:</p>
 <ul>
   <li>CMake 3.5.1</li>
   <li>GCC/G++ 5.4</li>
-  <li>Boost 1.65.1</li>
   <li>CUDA 9.0 or newer</li>
 </ul>
 
@@ -196,6 +221,7 @@ compiler and CUDA. Minimal requirements:</p>
 
 <ul>
   <li>CUDA 10.0+ requires CMake 3.12.2+ due to some bugs in earlier versions</li>
+  <li>Compiling the web-server tool requires also Boost 1.65.1+</li>
 </ul>
 
 <h3 id="cpu-version">CPU version</h3>
@@ -211,15 +237,15 @@ installed to compile Marian with minimal dependencies:</p>
 
 <ul>
   <li>
-    <p>Ubuntu 18.04 + CUDA 9.2 (defaults are gcc 7.3.0, Boost 1.65):</p>
+    <p>Ubuntu 18.04 + CUDA 9.2 (defaults are gcc 7.3.0):</p>
 
-    <div class="highlighter-rouge"><div class="highlight"><pre class="highlight"><code>sudo apt-get install git cmake build-essential libboost-all-dev
+    <div class="highlighter-rouge"><div class="highlight"><pre class="highlight"><code>sudo apt-get install git cmake build-essential
 </code></pre></div>    </div>
   </li>
   <li>
-    <p>Ubuntu 16.04 + CUDA 9.2 (gcc 5.4.0, Boost 1.58):</p>
+    <p>Ubuntu 16.04 + CUDA 9.2 (gcc 5.4.0):</p>
 
-    <div class="highlighter-rouge"><div class="highlight"><pre class="highlight"><code>sudo apt-get install git cmake build-essential libboost-all-dev zlib1g-dev
+    <div class="highlighter-rouge"><div class="highlight"><pre class="highlight"><code>sudo apt-get install git cmake build-essential zlib1g-dev
 </code></pre></div>    </div>
   </li>
 </ul>
@@ -236,9 +262,8 @@ Marian with the web server, built-in SentencePiece and TCMalloc support.</p>
 
 <p>The project is a standard CMake out-of-source build:</p>
 
-<div class="highlighter-rouge"><div class="highlight"><pre class="highlight"><code>cd marian
-mkdir build
-cd build
+<div class="highlighter-rouge"><div class="highlight"><pre class="highlight"><code>mkdir marian/build
+cd marian/build
 cmake ..
 make -j4
 </code></pre></div></div>

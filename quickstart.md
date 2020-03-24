@@ -16,12 +16,12 @@ compiler and CUDA. Minimal requirements:
 
  - CMake 3.5.1
  - GCC/G++ 5.4
- - Boost 1.65.1
  - CUDA 9.0 or newer
 
 Notes:
 
 * CUDA 10.0+ requires CMake 3.12.2+ due to some bugs in earlier versions
+* Compiling the web-server tool requires also Boost 1.65.1+
 
 
 ### CPU version
@@ -36,13 +36,13 @@ It can be enabled by adding `-DCOMPILE_CPU=on` to the CMake command.
 Assuming a fresh Ubuntu LTS installation with CUDA, the following packages need to be
 installed to compile Marian with minimal dependencies:
 
-* Ubuntu 18.04 + CUDA 9.2 (defaults are gcc 7.3.0, Boost 1.65):
+* Ubuntu 18.04 + CUDA 9.2 (defaults are gcc 7.3.0):
 
-      sudo apt-get install git cmake build-essential libboost-all-dev
+      sudo apt-get install git cmake build-essential
 
-* Ubuntu 16.04 + CUDA 9.2 (gcc 5.4.0, Boost 1.58):
+* Ubuntu 16.04 + CUDA 9.2 (gcc 5.4.0):
 
-      sudo apt-get install git cmake build-essential libboost-all-dev zlib1g-dev
+      sudo apt-get install git cmake build-essential zlib1g-dev
 
 
 Additional [packages](/docs/#ubuntu-packages) can be installed to compile
@@ -57,9 +57,8 @@ Clone a fresh copy from github:
 
 The project is a standard CMake out-of-source build:
 
-    cd marian
-    mkdir build
-    cd build
+    mkdir marian/build
+    cd marian/build
     cmake ..
     make -j4
 

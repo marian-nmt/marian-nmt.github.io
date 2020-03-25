@@ -95,7 +95,9 @@ built-in SentencePiece and TCMalloc support.
 
       sudo apt-get install git cmake build-essential libboost-all-dev zlib1g-dev libprotobuf9v5 protobuf-compiler libprotobuf-dev openssl libssl-dev libgoogle-perftools-dev
 
-* Ubuntu 14.04 + CUDA 8.0 (gcc 4.8.4, Boost 1.54)
+* Ubuntu 14.04: gcc 4.8.4 and CUDA 8.0 that are available from the default
+  package repositories are no longer supported, so first install gcc-5, g++-5
+  and CUDA 9.0 or higher, then:
 
       sudo apt-get install git cmake3 build-essential libboost-all-dev libprotobuf8 protobuf-compiler libprotobuf-dev openssl libssl-dev libgoogle-perftools-dev
 

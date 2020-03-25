@@ -1,7 +1,7 @@
 ---
 layout: docs
 title: Command-line options for marian-vocab
-permalink: /docs/cmd/marian-vocab/
+permalink: /docs/cmd/1.7.0/marian-vocab/
 icon: fa-file-code-o
 ---
 

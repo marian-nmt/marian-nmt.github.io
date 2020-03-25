@@ -1,7 +1,7 @@
 ---
 layout: docs
 title: Command-line options for marian-decoder
-permalink: /docs/cmd/marian-decoder/
+permalink: /docs/cmd/1.7.0/marian-decoder/
 icon: fa-file-code-o
 ---
 

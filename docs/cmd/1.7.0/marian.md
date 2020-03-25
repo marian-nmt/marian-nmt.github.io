@@ -1,7 +1,7 @@
 ---
 layout: docs
 title: Command-line options for marian
-permalink: /docs/cmd/marian/
+permalink: /docs/cmd/1.7.0/marian/
 icon: fa-file-code-o
 ---
 

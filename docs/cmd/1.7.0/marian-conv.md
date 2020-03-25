@@ -1,7 +1,7 @@
 ---
 layout: docs
 title: Command-line options for marian-conv
-permalink: /docs/cmd/marian-conv/
+permalink: /docs/cmd/1.7.0/marian-conv/
 icon: fa-file-code-o
 ---
 

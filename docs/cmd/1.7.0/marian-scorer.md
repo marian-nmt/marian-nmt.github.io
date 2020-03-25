@@ -1,7 +1,7 @@
 ---
 layout: docs
 title: Command-line options for marian-scorer
-permalink: /docs/cmd/marian-scorer/
+permalink: /docs/cmd/1.7.0/marian-scorer/
 icon: fa-file-code-o
 ---
 

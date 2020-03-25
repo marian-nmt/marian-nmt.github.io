@@ -1,7 +1,7 @@
 ---
 layout: docs
 title: Documentation
-permalink: /docs/1.7.0
+permalink: /docs/1.7.0/
 icon: fa-file-code-o
 latex: true
 ---
@@ -13,14 +13,14 @@ v1.7.0 67124f8 2018-11-28 13:04:30 +0000
 
 Marian toolkit provides the following tools:
 
-- [marian](/docs/cmd/marian): for training NMT models and language models
-- [marian-decoder](/docs/cmd/marian-decoder): for CPU and GPU translation using
+- [marian](/docs/cmd/1.7.0/marian): for training NMT models and language models
+- [marian-decoder](/docs/cmd/1.7.0/marian-decoder): for CPU and GPU translation using
   NMT models trained with Marian, and specific models trained with Nematus
-- [marian-server](/docs/cmd/marian-server): a web-socket server providing
+- [marian-server](/docs/cmd/1.7.0/marian-server): a web-socket server providing
   translation service
-- [marian-scorer](/docs/cmd/marian-scorer): for rescoring parallel text files
+- [marian-scorer](/docs/cmd/1.7.0/marian-scorer): for rescoring parallel text files
   and n-best lists
-- [marian-vocab](/docs/cmd/marian-vocab): for creating a vocabulary from text
+- [marian-vocab](/docs/cmd/1.7.0/marian-vocab): for creating a vocabulary from text
   given on STDIN
 - [amun](/docs/cmd/amun): for CPU and GPU translation using specific models
   trained with Marian or Nematus

@@ -3,8 +3,6 @@ layout: docs
 title: Command-line options
 permalink: /docs/cmd/
 icon: fa-file-code-o
-menu: 3
-latex: true
 ---
 
 ## Tools

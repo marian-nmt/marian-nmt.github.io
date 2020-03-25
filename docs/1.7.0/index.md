@@ -1,9 +1,8 @@
 ---
 layout: docs
 title: Documentation
-permalink: /docs/
+permalink: /docs/1.7.0
 icon: fa-file-code-o
-menu: 3
 latex: true
 ---
 

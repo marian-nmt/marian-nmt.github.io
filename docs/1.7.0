@@ -202,33 +202,27 @@
               <h2 id="overview">Overview</h2>
 
 <p>Version:
-v1.9.1 95c65bb 2020-03-17 03:30:49 +0000</p>
+v1.7.0 67124f8 2018-11-28 13:04:30 +0000</p>
 
 <p>Marian toolkit provides the following tools:</p>
 
 <ul>
-  <li><a href="/docs/cmd/marian">marian</a>: training NMT models and language models.</li>
-  <li><a href="/docs/cmd/marian-decoder">marian-decoder</a>: CPU and GPU translation using NMT
-models trained with Marian.</li>
+  <li><a href="/docs/cmd/marian">marian</a>: for training NMT models and language models</li>
+  <li><a href="/docs/cmd/marian-decoder">marian-decoder</a>: for CPU and GPU translation using
+NMT models trained with Marian, and specific models trained with Nematus</li>
   <li><a href="/docs/cmd/marian-server">marian-server</a>: a web-socket server providing
-translation service.</li>
-  <li><a href="/docs/cmd/marian-scorer">marian-scorer</a>: rescoring parallel text files and
-n-best lists.</li>
-  <li><a href="/docs/cmd/marian-vocab">marian-vocab</a>: creating a vocabulary from text given
-on STDIN.</li>
-  <li><a href="/docs/cmd/marian-vocab">marian-conv</a>: converting a model into a binary
-format.</li>
+translation service</li>
+  <li><a href="/docs/cmd/marian-scorer">marian-scorer</a>: for rescoring parallel text files
+and n-best lists</li>
+  <li><a href="/docs/cmd/marian-vocab">marian-vocab</a>: for creating a vocabulary from text
+given on STDIN</li>
+  <li><a href="/docs/cmd/amun">amun</a>: for CPU and GPU translation using specific models
+trained with Marian or Nematus</li>
 </ul>
-
-<p>The <a href="/docs/cmd/amun">amun</a> tool offering CPU and GPU translation with specific
-Marian and Nematus models, which used to be a part of Marian, has been moved to
-its separate repository and is available from:
-<a href="https://github.com/marian-nmt/amun">https://github.com/marian-nmt/amun</a></p>
 
 <h3 id="command-line-options">Command-line options</h3>
 
-<p>Click on the tool name above for a list of command line options. See options
-for <a href="/docs/cmd">previous releases</a>.</p>
+<p>Click on the tool name above for a list of command line options.</p>
 
 <h3 id="model-types">Model types</h3>
 
@@ -261,8 +255,9 @@ Can be decoded with Amun as <em>nematus2</em> model type.</li>
 
 <p>The project is a standard CMake out-of-source build:</p>
 
-<div class="highlighter-rouge"><div class="highlight"><pre class="highlight"><code>mkdir marian/build
-cd marian/build
+<div class="highlighter-rouge"><div class="highlight"><pre class="highlight"><code>cd marian
+mkdir build
+cd build
 cmake ..
 make -j4
 </code></pre></div></div>
@@ -275,7 +270,7 @@ directory after running <code class="highlighter-rouge">cmake ..</code> first.</
 
 <p>Assuming a fresh Ubuntu LTS installation with CUDA, the following packages need
 to be installed to compile with all features, including the web server,
-built-in SentencePiece and TCMalloc support.</p>
+built-in SentencePiece and TCMalloc support:git cmake3 build-essential libboost-all-dev</p>
 
 <ul>
   <li>
@@ -291,9 +286,7 @@ built-in SentencePiece and TCMalloc support.</p>
 </code></pre></div>    </div>
   </li>
   <li>
-    <p>Ubuntu 14.04: gcc 4.8.4 and CUDA 8.0 that are available from the default
-package repositories are no longer supported, so first install gcc-5, g++-5
-and CUDA 9.0 or higher, then:</p>
+    <p>Ubuntu 14.04 + CUDA 8.0 (gcc 4.8.4, Boost 1.54)</p>
 
     <div class="highlighter-rouge"><div class="highlight"><pre class="highlight"><code>sudo apt-get install git cmake3 build-essential libboost-all-dev libprotobuf8 protobuf-compiler libprotobuf-dev openssl libssl-dev libgoogle-perftools-dev
 </code></pre></div>    </div>
@@ -338,9 +331,6 @@ make -j4
 </code></pre></div></div>
 
 <p>Tested on Ubuntu 16.04.3 LTS.</p>
-
-<p>Since 1.9.0, Boost is only required if you compile the web server tool
-supplying <code class="highlighter-rouge">-DCOMPILE_SERVER=on</code> to the CMake command.</p>
 
 <h3 id="non-default-cuda">Non-default CUDA</h3>
 
@@ -711,6 +701,46 @@ fast_align/build/atools -c grow-diag-final -i forward.align -j reverse.align &gt
 alignment training; only for training transformer models</li>
 </ul>
 
+<h3 id="multi-node-training">Multi-node training</h3>
+
+<p>Multi-node training requires an MPI installation with <code class="highlighter-rouge">MPI_THREAD_MULTIPLE</code> set to
+<code class="highlighter-rouge">true</code>. A newer version (e.g. OpenMPI 2.X) is highly recommended due to intense
+use of multi-threading.</p>
+
+<p>Command-line options specific to multi-node training:</p>
+
+<ul>
+  <li><code class="highlighter-rouge">--multi-node</code> - enable multi-node.</li>
+  <li><code class="highlighter-rouge">--devices</code> - set nodes and devices, e.g. <code class="highlighter-rouge">0: 0 1 1: 0</code> means that node 0 has
+2 GPUs, with IDs 0 and 1, and node 1 has 1 GPU, with ID 0.</li>
+  <li><code class="highlighter-rouge">--multi-node-overlap</code> - overlap communication with computations, default:
+enabled.</li>
+</ul>
+
+<p>To start multi-node training, except compiling Marian with MPI, you need to
+create a host file and ensure that the nodes can ssh to each other without a
+password. Then you may use the command similar to:</p>
+
+<div class="highlighter-rouge"><div class="highlight"><pre class="highlight"><code>mpirun -n 2 --hostfile hosts_mpi -tag-output \
+    ./build/marian --devices 0:0 1 1:0 \
+        -m model.npz -t corpus.src corpus.trg -v vocab.src.yml vocab.trg.yml \
+        --multi-node --multi-node-overlap 0
+</code></pre></div></div>
+
+<p>where the host file <code class="highlighter-rouge">hosts_mpi</code> contains on each line a host on which you want
+to run Marian.</p>
+
+<p>Note that multi-node currently only converges properly with gradient dropping,
+which requires layer normalization. Ideally, add the following line to your run
+script:</p>
+
+<div class="highlighter-rouge"><div class="highlight"><pre class="highlight"><code>--layer-normalization --dropout-rnn 0.2 --dropout-src 0.1 --dropout-trg 0.1
+</code></pre></div></div>
+
+<p><strong>Warning</strong>: The API described above refers to the experimental feature
+introduced in version 1.4.0. It is depreciated at least since version 1.7.0.
+The newest multi-node API is not documented yet.</p>
+
 <h2 id="translation">Translation</h2>
 
 <p>All models trained with <code class="highlighter-rouge">marian</code> can be decoded with <code class="highlighter-rouge">marian-decoder</code> and
@@ -922,6 +952,17 @@ well, for instance <code class="highlighter-rouge">--dim-emb 500</code>.</p>
 <p>We do not recommend training models of type <code class="highlighter-rouge">nematus</code> with Marian. It is much
 more efficient to train <code class="highlighter-rouge">s2s</code> models, which provide the same model architecture
 (except layer normalization), more features, and faster training.</p>
+
+<h3 id="amun">Amun</h3>
+
+<p>Amun is a translation tool for <code class="highlighter-rouge">amun</code> and <code class="highlighter-rouge">nematus</code> model types only and is now
+available from the separate repository: <a class="github-link" href="https://github.com/marian-nmt/amun/tree/master/" target="_blank"><code class="highlighter-rogue">amun/</code></a>.  Translation
+with Amun can be performed on GPU or CPU or both.</p>
+
+<p>Basic usage:</p>
+
+<div class="highlighter-rouge"><div class="highlight"><pre class="highlight"><code>./marian/build/amun -m model.npz -s vocab.en -t vocab.ro &lt;&lt;&lt; "This is a test ."
+</code></pre></div></div>
 
 <h2 id="scorer">Scorer</h2>
 

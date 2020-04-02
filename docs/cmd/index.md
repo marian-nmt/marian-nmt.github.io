@@ -29,7 +29,7 @@ v1.9.1 95c65bb 2020-03-17 03:30:49 +0000
   n-best lists.
 - [marian-vocab](/docs/cmd/marian-vocab): creating a vocabulary from text given
   on STDIN.
-- [marian-conv](/docs/cmd/marian-vocab): converting a model into a binary
+- [marian-conv](/docs/cmd/marian-conv): converting a model into a binary
   format.
 
 

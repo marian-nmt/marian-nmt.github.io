@@ -23,7 +23,7 @@ Marian toolkit provides the following tools:
   n-best lists.
 - [marian-vocab](/docs/cmd/marian-vocab): creating a vocabulary from text given
   on STDIN.
-- [marian-conv](/docs/cmd/marian-vocab): converting a model into a binary
+- [marian-conv](/docs/cmd/marian-conv): converting a model into a binary
   format.
 
 The [amun](/docs/cmd/amun) tool offering CPU and GPU translation with specific

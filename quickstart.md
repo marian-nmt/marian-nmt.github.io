@@ -86,11 +86,12 @@ See the [documentation](/docs/#training) for more details or the
 
 If a trained model is available, run:
 
-    ./marian/build/marian-decoder -m model.npz -v vocab.en vocab.ro <<< "This is a test ."
+    echo "This is a test." | ./marian/build/marian-decoder -m model.npz -v vocab.en vocab.ro
 
-For faster CPU translation using shallow RNN models, use Amun:
+For translation on CPU, add `--cpu-threads N` (assuming Marian has been
+compiled with CPU support):
 
-    ./marian/build/amun -m model.npz -s vocab.en -t vocab.ro <<< "This is a test ."
+    echo "This is a test." | ./marian/build/marian-decoder -m model.npz -v vocab.en vocab.ro --cpu-threads 1
 
 See the [documentation](/docs/#translation) for more details or the
 [examples](/examples/#examples) of how to use Edinburgh's WMT models for

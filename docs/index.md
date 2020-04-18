@@ -15,7 +15,7 @@ v1.9.1 95c65bb 2020-03-17 03:30:49 +0000
 Marian toolkit provides the following tools:
 
 - [marian](/docs/cmd/marian): training NMT models and language models.
-- [marian-decoder](/docs/cmd/marian-decoder): CPU and GPU translation using NMT
+- [marian-decoder](/docs/cmd/marian-decoder): CPU and GPU translation with NMT
   models trained with Marian.
 - [marian-server](/docs/cmd/marian-server): a web-socket server providing
   translation service.
@@ -531,16 +531,19 @@ All models trained with `marian` can be decoded with `marian-decoder` and
 
 ### Marian decoder
 
-Currently, `marian-decoder` supports only translation on GPUs. A CPU version
-of Marian is planned.
+`marian-decoder` supports translation on GPUs and CPUs. By default it
+translates on the first available GPU, which can be changed with the
+`--devices` option.  Basic usage:
 
-Basic usage:
+    ./build/marian-decoder -m model.npz -v vocab.en vocab.ro --devices 0 1 < input.txt
 
-    ./build/marian-decoder -m model.npz -v vocab.en vocab.ro < input.txt
+Decoding on CPU(s) is performed if `--cpu-threads N` is added:
+
+    ./build/marian-decoder -m model.npz -v vocab.en vocab.ro --cpu-threads 1 < input.txt
 
 #### N-best lists
 
-To generate n-best list with, say 10, best translations for each input
+To generate an n-best list with, say 10, best translations for each input
 sentence, add `--n-best` and `--beam-size `10` to the list of command-line
 arguments:
 
@@ -726,7 +729,7 @@ provided as plain texts in two corresponding files:
 
     ./build/marian-scorer -m model.npz -v vocab.{en,de} -t file.en file.de
 
-A cross-entropy score for each sentence pair is returned by default.
+This will print log probabilities for each sentence pair.
 
 
 
@@ -737,7 +740,7 @@ N-best lists can be scored using the following command:
     ./build/marian-scorer -m model.npz -v vocab.{en,de} \
         -t file.en.txt file.de.nbest --n-best --n-best-feature F0
 
-which add a new score into the n-best list under the feature named _F0_.
+which adds a new score into the n-best list under the feature named _F0_.
 
 
 
@@ -750,8 +753,8 @@ pair of sentences:
         -t file.en.txt file.de.txt --alignment
 
 The feature works out-of-the-box for RNN models, while Transformer models need
-to be trained with guided alignments.
-
+to be trained with guided alignments (see
+[this](#word-alignments-from-transformer) section).
 
 
 ### Summarized scores

@@ -189,7 +189,7 @@
           </h1>
           <div class="meta">
             <i class="fa fa-clock-o"></i>
-            Last updated: 02 April 2020
+            Last updated: 18 April 2020
           </div>
         </div><!--//doc-header-->
 
@@ -206,7 +206,7 @@ v1.9.1 95c65bb 2020-03-17 03:30:49 +0000</p>
 
 <ul>
   <li><a href="/docs/cmd/marian">marian</a>: training NMT models and language models.</li>
-  <li><a href="/docs/cmd/marian-decoder">marian-decoder</a>: CPU and GPU translation using NMT
+  <li><a href="/docs/cmd/marian-decoder">marian-decoder</a>: CPU and GPU translation with NMT
 models trained with Marian.</li>
   <li><a href="/docs/cmd/marian-server">marian-server</a>: a web-socket server providing
 translation service.</li>
@@ -717,17 +717,21 @@ alignment training; only for training transformer models</li>
 
 <h3 id="marian-decoder">Marian decoder</h3>
 
-<p>Currently, <code class="highlighter-rouge">marian-decoder</code> supports only translation on GPUs. A CPU version
-of Marian is planned.</p>
+<p><code class="highlighter-rouge">marian-decoder</code> supports translation on GPUs and CPUs. By default it
+translates on the first available GPU, which can be changed with the
+<code class="highlighter-rouge">--devices</code> option.  Basic usage:</p>
 
-<p>Basic usage:</p>
+<div class="highlighter-rouge"><div class="highlight"><pre class="highlight"><code>./build/marian-decoder -m model.npz -v vocab.en vocab.ro --devices 0 1 &lt; input.txt
+</code></pre></div></div>
 
-<div class="highlighter-rouge"><div class="highlight"><pre class="highlight"><code>./build/marian-decoder -m model.npz -v vocab.en vocab.ro &lt; input.txt
+<p>Decoding on CPU(s) is performed if <code class="highlighter-rouge">--cpu-threads N</code> is added:</p>
+
+<div class="highlighter-rouge"><div class="highlight"><pre class="highlight"><code>./build/marian-decoder -m model.npz -v vocab.en vocab.ro --cpu-threads 1 &lt; input.txt
 </code></pre></div></div>
 
 <h4 id="n-best-lists">N-best lists</h4>
 
-<p>To generate n-best list with, say 10, best translations for each input
+<p>To generate an n-best list with, say 10, best translations for each input
 sentence, add <code class="highlighter-rouge">--n-best</code> and <code class="highlighter-rouge">--beam-size </code>10` to the list of command-line
 arguments:</p>
 
@@ -929,7 +933,7 @@ provided as plain texts in two corresponding files:</p>
 <div class="highlighter-rouge"><div class="highlight"><pre class="highlight"><code>./build/marian-scorer -m model.npz -v vocab.{en,de} -t file.en file.de
 </code></pre></div></div>
 
-<p>A cross-entropy score for each sentence pair is returned by default.</p>
+<p>This will print log probabilities for each sentence pair.</p>
 
 <h3 id="scoring-n-best-lists">Scoring n-best lists</h3>
 
@@ -939,7 +943,7 @@ provided as plain texts in two corresponding files:</p>
     -t file.en.txt file.de.nbest --n-best --n-best-feature F0
 </code></pre></div></div>
 
-<p>which add a new score into the n-best list under the feature named <em>F0</em>.</p>
+<p>which adds a new score into the n-best list under the feature named <em>F0</em>.</p>
 
 <h3 id="word-aligner">Word aligner</h3>
 
@@ -951,7 +955,8 @@ pair of sentences:</p>
 </code></pre></div></div>
 
 <p>The feature works out-of-the-box for RNN models, while Transformer models need
-to be trained with guided alignments.</p>
+to be trained with guided alignments (see
+<a href="#word-alignments-from-transformer">this</a> section).</p>
 
 <h3 id="summarized-scores">Summarized scores</h3>
 

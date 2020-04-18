@@ -185,7 +185,7 @@
           </h1>
           <div class="meta">
             <i class="fa fa-clock-o"></i>
-            Last updated: 24 March 2020
+            Last updated: 18 April 2020
           </div>
         </div><!--//doc-header-->
 
@@ -282,12 +282,13 @@ machine translation model.</p>
 
 <p>If a trained model is available, run:</p>
 
-<div class="highlighter-rouge"><div class="highlight"><pre class="highlight"><code>./marian/build/marian-decoder -m model.npz -v vocab.en vocab.ro &lt;&lt;&lt; "This is a test ."
+<div class="highlighter-rouge"><div class="highlight"><pre class="highlight"><code>echo "This is a test." | ./marian/build/marian-decoder -m model.npz -v vocab.en vocab.ro
 </code></pre></div></div>
 
-<p>For faster CPU translation using shallow RNN models, use Amun:</p>
+<p>For translation on CPU, add <code class="highlighter-rouge">--cpu-threads N</code> (assuming Marian has been
+compiled with CPU support):</p>
 
-<div class="highlighter-rouge"><div class="highlight"><pre class="highlight"><code>./marian/build/amun -m model.npz -s vocab.en -t vocab.ro &lt;&lt;&lt; "This is a test ."
+<div class="highlighter-rouge"><div class="highlight"><pre class="highlight"><code>echo "This is a test." | ./marian/build/marian-decoder -m model.npz -v vocab.en vocab.ro --cpu-threads 1
 </code></pre></div></div>
 
 <p>See the <a href="/docs/#translation">documentation</a> for more details or the

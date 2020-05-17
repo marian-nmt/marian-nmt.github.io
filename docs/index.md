@@ -87,7 +87,11 @@ Assuming a fresh Ubuntu LTS installation with CUDA, the following packages need
 to be installed to compile with all features, including the web server,
 built-in SentencePiece and TCMalloc support.
 
-* Ubuntu 18.04 + CUDA 9.2 (defaults are gcc 7.3.0, Boost 1.65):
+* Ubuntu 20.04 + CUDA 10.1 (defaults are gcc 9.3.0, Boost 1.71):
+
+      sudo apt-get install git cmake build-essential libboost-all-dev libprotobuf17 protobuf-compiler libprotobuf-dev openssl libssl-dev libgoogle-perftools-dev
+
+* Ubuntu 18.04 + CUDA 9.2 (gcc 7.3.0, Boost 1.65):
 
       sudo apt-get install git cmake build-essential libboost-all-dev libprotobuf10 protobuf-compiler libprotobuf-dev openssl libssl-dev libgoogle-perftools-dev
 
@@ -162,19 +166,23 @@ Specify the path to your CUDA root directory via CMake:
 Marian CPU version requires [Intel MKL](https://software.intel.com/en-us/mkl) or
 [OpenBLAS](https://www.openblas.net/). Both are free, but MKL is not
 open-sourced. Intel MKL is strongly recommended as it is faster. On Ubuntu
-16.04 it can be installed using the following steps:
+16.04 and newer it can be installed from [the APT repositories](https://software.intel.com/content/www/us/en/develop/articles/installing-intel-free-libs-and-python-apt-repo.html):
 
-```
-wget https://apt.repos.intel.com/intel-gpg-keys/GPG-PUB-KEY-INTEL-SW-PRODUCTS-2019.PUB
-sudo apt-key add GPG-PUB-KEY-INTEL-SW-PRODUCTS-2019.PUB
-sudo sh -c 'echo deb https://apt.repos.intel.com/mkl all main > /etc/apt/sources.list.d/intel-mkl.list'
-sudo apt-get update
-sudo apt-get install intel-mkl-64bit-2019.4-XYZ
-```
+    wget -qO https://apt.repos.intel.com/intel-gpg-keys/GPG-PUB-KEY-INTEL-SW-PRODUCTS-2019.PUB | sudo apt-get add -
+    sudo sh -c 'echo deb https://apt.repos.intel.com/mkl all main > /etc/apt/sources.list.d/intel-mkl.list'
+    sudo apt-get update
+    sudo apt-get install intel-mkl-64bit-2020.0-088
 
-Where _XYZ_ is the revision number.
+For more details see [the official instructions](https://software.intel.com/content/www/us/en/develop/articles/installing-intel-free-libs-and-python-apt-repo.html).
 
-A CPU build can be enabled by adding `-DCOMPILE_CPU=on` to the CMake command.
+A CPU build needs to be enabled by adding `-DCOMPILE_CPU=on` to the CMake
+command:
+
+    cd /path/to/marian-dev
+    mkdir -p build
+    cd build
+    cmake .. -DCOMPILE_CPU=on
+    make -j4
 
 
 
@@ -185,17 +193,20 @@ enabled by adding `-DUSE_SENTENCEPIECE=on` to the CMake command and requires
 the Protobuf library.  On Ubuntu, you would need to install a couple of
 packages:
 
-    # Ubuntu 14.04 LTS (Trusty Tahr):
-    sudo apt-get install libprotobuf8 protobuf-compiler libprotobuf-dev
+    # Ubuntu 20.04 (Focal Fossa):
+    sudo apt-get install libprotobuf17 protobuf-compiler libprotobuf-dev
+
+    # Ubuntu 18.04 (Bionic Beaver):
+    sudo apt-get install libprotobuf10 protobuf-compiler libprotobuf-dev
 
     # Ubuntu 16.04 LTS (Xenial Xerus):
     sudo apt-get install libprotobuf9v5 protobuf-compiler libprotobuf-dev
 
-    # Ubuntu 17.10 (Artful Aardvark) and Later:
-    sudo apt-get install libprotobuf10 protobuf-compiler libprotobuf-dev
+    # Ubuntu 14.04 LTS (Trusty Tahr):
+    sudo apt-get install libprotobuf8 protobuf-compiler libprotobuf-dev
 
 You may also compile Protobuf from source. For Ubuntu 16.04 LTS, version 2.6.1
-(or possibly newer) works:
+(and possibly newer) works:
 
     wget https://github.com/protocolbuffers/protobuf/releases/download/v2.6.1/protobuf-cpp-2.6.1.zip
     unzip protobuf-cpp-2.6.1.zip

@@ -36,7 +36,7 @@ It can be enabled by adding `-DCOMPILE_CPU=on` to the CMake command.
 Assuming a fresh Ubuntu LTS installation with CUDA, the following packages need to be
 installed to compile Marian with minimal dependencies:
 
-* Ubuntu 18.04 + CUDA 9.2 (defaults are gcc 7.3.0):
+* Ubuntu 18.04 (or newer) + CUDA 9.2 (the default is gcc 7.3.0):
 
       sudo apt-get install git cmake build-essential
 

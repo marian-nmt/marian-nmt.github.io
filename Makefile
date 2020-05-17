@@ -17,6 +17,7 @@ build:
 	bundle exec jekyll build
 
 install: Gemfile.lock
+	bundle install
 Gemfile.lock: Gemfile
 	bundle update
 

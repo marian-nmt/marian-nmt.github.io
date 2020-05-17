@@ -5,7 +5,7 @@ MARIAN   = marian/build
 COMMANDS = marian marian-decoder marian-server marian-scorer marian-vocab marian-conv
 CMDFILES = $(patsubst %,docs/cmd/%.md,$(COMMANDS))
 
-.PHONY: build clean update-cmds update-docs install run zip Gamefile.lock
+.PHONY: build clean update-gems update-cmds update-docs install run zip Gamefile.lock
 
 
 all: run
@@ -16,9 +16,9 @@ run: build
 build:
 	bundle exec jekyll build
 
-install: Gemfile.lock
+install: Gemfile
 	bundle install
-Gemfile.lock: Gemfile
+update-gems: Gemfile
 	bundle update
 
 

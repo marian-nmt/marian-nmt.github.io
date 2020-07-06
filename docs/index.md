@@ -168,7 +168,7 @@ Marian CPU version requires [Intel MKL](https://software.intel.com/en-us/mkl) or
 open-sourced. Intel MKL is strongly recommended as it is faster. On Ubuntu
 16.04 and newer it can be installed from [the APT repositories](https://software.intel.com/content/www/us/en/develop/articles/installing-intel-free-libs-and-python-apt-repo.html):
 
-    wget -qO https://apt.repos.intel.com/intel-gpg-keys/GPG-PUB-KEY-INTEL-SW-PRODUCTS-2019.PUB | sudo apt-get add -
+    wget -qO- 'https://apt.repos.intel.com/intel-gpg-keys/GPG-PUB-KEY-INTEL-SW-PRODUCTS-2019.PUB' | sudo apt-key add -
     sudo sh -c 'echo deb https://apt.repos.intel.com/mkl all main > /etc/apt/sources.list.d/intel-mkl.list'
     sudo apt-get update
     sudo apt-get install intel-mkl-64bit-2020.0-088

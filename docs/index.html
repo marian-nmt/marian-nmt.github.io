@@ -189,7 +189,7 @@
           </h1>
           <div class="meta">
             <i class="fa fa-clock-o"></i>
-            Last updated: 18 April 2020
+            Last updated: 06 July 2020
           </div>
         </div><!--//doc-header-->
 
@@ -277,7 +277,13 @@ built-in SentencePiece and TCMalloc support.</p>
 
 <ul>
   <li>
-    <p>Ubuntu 18.04 + CUDA 9.2 (defaults are gcc 7.3.0, Boost 1.65):</p>
+    <p>Ubuntu 20.04 + CUDA 10.1 (defaults are gcc 9.3.0, Boost 1.71):</p>
+
+    <div class="highlighter-rouge"><div class="highlight"><pre class="highlight"><code>sudo apt-get install git cmake build-essential libboost-all-dev libprotobuf17 protobuf-compiler libprotobuf-dev openssl libssl-dev libgoogle-perftools-dev
+</code></pre></div>    </div>
+  </li>
+  <li>
+    <p>Ubuntu 18.04 + CUDA 9.2 (gcc 7.3.0, Boost 1.65):</p>
 
     <div class="highlighter-rouge"><div class="highlight"><pre class="highlight"><code>sudo apt-get install git cmake build-essential libboost-all-dev libprotobuf10 protobuf-compiler libprotobuf-dev openssl libssl-dev libgoogle-perftools-dev
 </code></pre></div>    </div>
@@ -356,18 +362,25 @@ make -j4
 <p>Marian CPU version requires <a href="https://software.intel.com/en-us/mkl">Intel MKL</a> or
 <a href="https://www.openblas.net/">OpenBLAS</a>. Both are free, but MKL is not
 open-sourced. Intel MKL is strongly recommended as it is faster. On Ubuntu
-16.04 it can be installed using the following steps:</p>
+16.04 and newer it can be installed from <a href="https://software.intel.com/content/www/us/en/develop/articles/installing-intel-free-libs-and-python-apt-repo.html">the APT repositories</a>:</p>
 
-<div class="highlighter-rouge"><div class="highlight"><pre class="highlight"><code>wget https://apt.repos.intel.com/intel-gpg-keys/GPG-PUB-KEY-INTEL-SW-PRODUCTS-2019.PUB
-sudo apt-key add GPG-PUB-KEY-INTEL-SW-PRODUCTS-2019.PUB
+<div class="highlighter-rouge"><div class="highlight"><pre class="highlight"><code>wget -qO- 'https://apt.repos.intel.com/intel-gpg-keys/GPG-PUB-KEY-INTEL-SW-PRODUCTS-2019.PUB' | sudo apt-key add -
 sudo sh -c 'echo deb https://apt.repos.intel.com/mkl all main &gt; /etc/apt/sources.list.d/intel-mkl.list'
 sudo apt-get update
-sudo apt-get install intel-mkl-64bit-2019.4-XYZ
+sudo apt-get install intel-mkl-64bit-2020.0-088
 </code></pre></div></div>
 
-<p>Where <em>XYZ</em> is the revision number.</p>
+<p>For more details see <a href="https://software.intel.com/content/www/us/en/develop/articles/installing-intel-free-libs-and-python-apt-repo.html">the official instructions</a>.</p>
 
-<p>A CPU build can be enabled by adding <code class="highlighter-rouge">-DCOMPILE_CPU=on</code> to the CMake command.</p>
+<p>A CPU build needs to be enabled by adding <code class="highlighter-rouge">-DCOMPILE_CPU=on</code> to the CMake
+command:</p>
+
+<div class="highlighter-rouge"><div class="highlight"><pre class="highlight"><code>cd /path/to/marian-dev
+mkdir -p build
+cd build
+cmake .. -DCOMPILE_CPU=on
+make -j4
+</code></pre></div></div>
 
 <h3 id="sentencepiece">SentencePiece</h3>
 
@@ -376,18 +389,21 @@ enabled by adding <code class="highlighter-rouge">-DUSE_SENTENCEPIECE=on</code> 
 the Protobuf library.  On Ubuntu, you would need to install a couple of
 packages:</p>
 
-<div class="highlighter-rouge"><div class="highlight"><pre class="highlight"><code># Ubuntu 14.04 LTS (Trusty Tahr):
-sudo apt-get install libprotobuf8 protobuf-compiler libprotobuf-dev
+<div class="highlighter-rouge"><div class="highlight"><pre class="highlight"><code># Ubuntu 20.04 (Focal Fossa):
+sudo apt-get install libprotobuf17 protobuf-compiler libprotobuf-dev
+
+# Ubuntu 18.04 (Bionic Beaver):
+sudo apt-get install libprotobuf10 protobuf-compiler libprotobuf-dev
 
 # Ubuntu 16.04 LTS (Xenial Xerus):
 sudo apt-get install libprotobuf9v5 protobuf-compiler libprotobuf-dev
 
-# Ubuntu 17.10 (Artful Aardvark) and Later:
-sudo apt-get install libprotobuf10 protobuf-compiler libprotobuf-dev
+# Ubuntu 14.04 LTS (Trusty Tahr):
+sudo apt-get install libprotobuf8 protobuf-compiler libprotobuf-dev
 </code></pre></div></div>
 
 <p>You may also compile Protobuf from source. For Ubuntu 16.04 LTS, version 2.6.1
-(or possibly newer) works:</p>
+(and possibly newer) works:</p>
 
 <div class="highlighter-rouge"><div class="highlight"><pre class="highlight"><code>wget https://github.com/protocolbuffers/protobuf/releases/download/v2.6.1/protobuf-cpp-2.6.1.zip
 unzip protobuf-cpp-2.6.1.zip

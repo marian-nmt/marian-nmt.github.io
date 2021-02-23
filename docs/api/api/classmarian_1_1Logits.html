@@ -1,0 +1,359 @@
+
+
+<!DOCTYPE html>
+<html class="writer-html5" lang="en" >
+<head>
+  <meta charset="utf-8" />
+  
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  
+  <title>Class Logits &mdash; Marian NMT v1.10.1 2021-02-23 documentation</title>
+  
+
+  
+  <link rel="stylesheet" href="../_static/css/theme.css" type="text/css" />
+  <link rel="stylesheet" href="../_static/pygments.css" type="text/css" />
+  <link rel="stylesheet" href="../_static/css/custom.css" type="text/css" />
+  <link rel="stylesheet" href="../_static/collapsible-lists/css/tree_view.css" type="text/css" />
+
+  
+  
+
+  
+  
+
+  
+    <link rel="canonical" href="http://marian-nmt.github.io/docs/api/api/classmarian_1_1Logits.html" />
+
+  
+  <!--[if lt IE 9]>
+    <script src="../_static/js/html5shiv.min.js"></script>
+  <![endif]-->
+  
+    
+      <script type="text/javascript" id="documentation_options" data-url_root="../" src="../_static/documentation_options.js"></script>
+        <script src="../_static/jquery.js"></script>
+        <script src="../_static/underscore.js"></script>
+        <script src="../_static/doctools.js"></script>
+        <script src="../_static/language_data.js"></script>
+        <script src="../_static/collapsible-lists/js/CollapsibleLists.compressed.js"></script>
+        <script src="../_static/collapsible-lists/js/apply-collapsible-lists.js"></script>
+    
+    <script type="text/javascript" src="../_static/js/theme.js"></script>
+
+    
+    <link rel="index" title="Index" href="../genindex.html" />
+    <link rel="search" title="Search" href="../search.html" />
+    <link rel="next" title="Class LSH" href="classmarian_1_1LSH.html" />
+    <link rel="prev" title="Class LayerBase" href="classmarian_1_1LayerBase.html" /> 
+</head>
+
+<body class="wy-body-for-nav">
+
+   
+  <div class="wy-grid-for-nav">
+    
+    <nav data-toggle="wy-nav-shift" class="wy-nav-side">
+      <div class="wy-side-scroll">
+        <div class="wy-side-nav-search" >
+          
+
+          
+            <a href="../index.html" class="icon icon-home"> Marian NMT
+          
+
+          
+          </a>
+
+          
+            
+            
+              <div class="version">
+                v1.10.1
+              </div>
+            
+          
+
+          
+<div role="search">
+  <form id="rtd-search-form" class="wy-form" action="../search.html" method="get">
+    <input type="text" name="q" placeholder="Search docs" />
+    <input type="hidden" name="check_keywords" value="yes" />
+    <input type="hidden" name="area" value="default" />
+  </form>
+</div>
+
+          
+        </div>
+
+        
+        <div class="wy-menu wy-menu-vertical" data-spy="affix" role="navigation" aria-label="main navigation">
+          
+            
+            
+              
+            
+            
+              <p class="caption"><span class="caption-text">Contents:</span></p>
+<ul>
+<li class="toctree-l1"><a class="reference internal" href="../install.html">Installation</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../graph.html">Expression graphs</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../operators.html">Graph operations</a></li>
+<li class="toctree-l1"><a class="reference internal" href="library_index.html">Library API</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../contributing.html">How to contribute to Marian</a></li>
+</ul>
+
+            
+          
+        </div>
+        
+      </div>
+    </nav>
+
+    <section data-toggle="wy-nav-shift" class="wy-nav-content-wrap">
+
+      
+      <nav class="wy-nav-top" aria-label="top navigation">
+        
+          <i data-toggle="wy-nav-top" class="fa fa-bars"></i>
+          <a href="../index.html">Marian NMT</a>
+        
+      </nav>
+
+
+      <div class="wy-nav-content">
+        
+        <div class="rst-content">
+        
+          
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+<div role="navigation" aria-label="breadcrumbs navigation">
+
+  <ul class="wy-breadcrumbs">
+    
+      <li><a href="../index.html" class="icon icon-home"></a> &raquo;</li>
+        
+          <li><a href="library_index.html">Library API</a> &raquo;</li>
+        
+      <li>Class Logits</li>
+    
+    
+      <li class="wy-breadcrumbs-aside">
+        
+          
+            <a href="../_sources/api/classmarian_1_1Logits.rst.txt" rel="nofollow"> View page source</a>
+          
+        
+      </li>
+    
+  </ul>
+
+  
+  <hr/>
+</div>
+          <div role="main" class="document" itemscope="itemscope" itemtype="http://schema.org/Article">
+           <div itemprop="articleBody">
+            
+  <div class="section" id="class-logits">
+<span id="exhale-class-classmarian-1-1logits"></span><h1>Class Logits<a class="headerlink" href="#class-logits" title="Permalink to this headline">¶</a></h1>
+<ul class="simple">
+<li><p>Defined in <a class="reference internal" href="file_src_layers_generic.h.html#file-src-layers-generic-h"><span class="std std-ref">File generic.h</span></a></p></li>
+</ul>
+<div class="section" id="nested-relationships">
+<h2>Nested Relationships<a class="headerlink" href="#nested-relationships" title="Permalink to this headline">¶</a></h2>
+<div class="section" id="nested-types">
+<h3>Nested Types<a class="headerlink" href="#nested-types" title="Permalink to this headline">¶</a></h3>
+<ul class="simple">
+<li><p><a class="reference internal" href="structmarian_1_1Logits_1_1MaskedFactorIndices.html#exhale-struct-structmarian-1-1logits-1-1maskedfactorindices"><span class="std std-ref">Struct Logits::MaskedFactorIndices</span></a></p></li>
+</ul>
+</div>
+</div>
+<div class="section" id="class-documentation">
+<h2>Class Documentation<a class="headerlink" href="#class-documentation" title="Permalink to this headline">¶</a></h2>
+<dl class="class">
+<dt id="_CPPv4N6marian6LogitsE">
+<span id="_CPPv3N6marian6LogitsE"></span><span id="_CPPv2N6marian6LogitsE"></span><span id="marian::Logits"></span><span class="target" id="classmarian_1_1Logits"></span><em class="property">class </em><code class="sig-name descname">Logits</code><a class="headerlink" href="#_CPPv4N6marian6LogitsE" title="Permalink to this definition">¶</a><br /></dt>
+<dd><div class="breathe-sectiondef docutils container">
+<p class="breathe-sectiondef-title rubric">Public Functions</p>
+<dl class="function">
+<dt id="_CPPv4N6marian6Logits6LogitsEv">
+<span id="_CPPv3N6marian6Logits6LogitsEv"></span><span id="_CPPv2N6marian6Logits6LogitsEv"></span><span id="marian::Logits::Logits"></span><span class="target" id="classmarian_1_1Logits_1a7d97a001100e978b5d2e95be7a195e5b"></span><code class="sig-name descname">Logits</code><span class="sig-paren">(</span><span class="sig-paren">)</span><a class="headerlink" href="#_CPPv4N6marian6Logits6LogitsEv" title="Permalink to this definition">¶</a><br /></dt>
+<dd></dd></dl>
+
+<dl class="function">
+<dt id="_CPPv4N6marian6Logits6LogitsE3PtrI12RationalLossE">
+<span id="_CPPv3N6marian6Logits6LogitsE3PtrI12RationalLossE"></span><span id="_CPPv2N6marian6Logits6LogitsE3PtrI12RationalLossE"></span><span id="marian::Logits::Logits__Ptr:RationalLoss:"></span><span class="target" id="classmarian_1_1Logits_1a3b9e7bc7d1dc1dbff2be267c15eb4035"></span><code class="sig-name descname">Logits</code><span class="sig-paren">(</span><a class="reference internal" href="typedef_definitions_8h_1ad1a373be43a00ef9ce35666145137b08.html#_CPPv4N6marian3PtrE" title="marian::Ptr">Ptr</a>&lt;<a class="reference internal" href="classmarian_1_1RationalLoss.html#_CPPv4N6marian12RationalLossE" title="marian::RationalLoss">RationalLoss</a>&gt; <em>logits</em><span class="sig-paren">)</span><a class="headerlink" href="#_CPPv4N6marian6Logits6LogitsE3PtrI12RationalLossE" title="Permalink to this definition">¶</a><br /></dt>
+<dd></dd></dl>
+
+<dl class="function">
+<dt id="_CPPv4N6marian6Logits6LogitsE4Expr">
+<span id="_CPPv3N6marian6Logits6LogitsE4Expr"></span><span id="_CPPv2N6marian6Logits6LogitsE4Expr"></span><span id="marian::Logits::Logits__Expr"></span><span class="target" id="classmarian_1_1Logits_1aca746036bbe4fc2eb5194d3604943bd0"></span><code class="sig-name descname">Logits</code><span class="sig-paren">(</span><a class="reference internal" href="typedef_definitions_8h_1ac8ecc2cc66a7afcc6da94a9bbde5eaa7.html#_CPPv4N6marian4ExprE" title="marian::Expr">Expr</a> <em>logits</em><span class="sig-paren">)</span><a class="headerlink" href="#_CPPv4N6marian6Logits6LogitsE4Expr" title="Permalink to this definition">¶</a><br /></dt>
+<dd></dd></dl>
+
+<dl class="function">
+<dt id="_CPPv4N6marian6Logits6LogitsERRNSt6vectorI3PtrI12RationalLossEEE3PtrI13FactoredVocabE">
+<span id="_CPPv3N6marian6Logits6LogitsERRNSt6vectorI3PtrI12RationalLossEEE3PtrI13FactoredVocabE"></span><span id="_CPPv2N6marian6Logits6LogitsERRNSt6vectorI3PtrI12RationalLossEEE3PtrI13FactoredVocabE"></span><span id="marian::Logits::Logits__std::vector:Ptr:RationalLoss::RR.Ptr:FactoredVocab:"></span><span class="target" id="classmarian_1_1Logits_1a838b21223fa4a5d99058f05cf0641954"></span><code class="sig-name descname">Logits</code><span class="sig-paren">(</span><a class="reference internal" href="function_expression__operators_8cpp_1af4e69a5f7167b63522135a1f6b8a5dd8.html#_CPPv4N6marianStE4Expri" title="marian::std">std</a>::vector&lt;<a class="reference internal" href="typedef_definitions_8h_1ad1a373be43a00ef9ce35666145137b08.html#_CPPv4N6marian3PtrE" title="marian::Ptr">Ptr</a>&lt;<a class="reference internal" href="classmarian_1_1RationalLoss.html#_CPPv4N6marian12RationalLossE" title="marian::RationalLoss">RationalLoss</a>&gt;&gt; &amp;&amp;<em>logits</em>, <a class="reference internal" href="typedef_definitions_8h_1ad1a373be43a00ef9ce35666145137b08.html#_CPPv4N6marian3PtrE" title="marian::Ptr">Ptr</a>&lt;<a class="reference internal" href="classmarian_1_1FactoredVocab.html#_CPPv4N6marian13FactoredVocabE" title="marian::FactoredVocab">FactoredVocab</a>&gt; <em>embeddingFactorMapping</em><span class="sig-paren">)</span><a class="headerlink" href="#_CPPv4N6marian6Logits6LogitsERRNSt6vectorI3PtrI12RationalLossEEE3PtrI13FactoredVocabE" title="Permalink to this definition">¶</a><br /></dt>
+<dd></dd></dl>
+
+<dl class="function">
+<dt id="_CPPv4NK6marian6Logits9getLogitsEv">
+<span id="_CPPv3NK6marian6Logits9getLogitsEv"></span><span id="_CPPv2NK6marian6Logits9getLogitsEv"></span><span id="marian::Logits::getLogitsC"></span><span class="target" id="classmarian_1_1Logits_1a4a9e90b3d8857349d0bff0627c8737c3"></span><a class="reference internal" href="typedef_definitions_8h_1ac8ecc2cc66a7afcc6da94a9bbde5eaa7.html#_CPPv4N6marian4ExprE" title="marian::Expr">Expr</a> <code class="sig-name descname">getLogits</code><span class="sig-paren">(</span><span class="sig-paren">)</span> <em class="property">const</em><a class="headerlink" href="#_CPPv4NK6marian6Logits9getLogitsEv" title="Permalink to this definition">¶</a><br /></dt>
+<dd></dd></dl>
+
+<dl class="function">
+<dt id="_CPPv4NK6marian6Logits17getFactoredLogitsE6size_t3PtrIN4data9ShortlistEERKNSt6vectorI9IndexTypeEE6size_t">
+<span id="_CPPv3NK6marian6Logits17getFactoredLogitsE6size_t3PtrIN4data9ShortlistEERKNSt6vectorI9IndexTypeEE6size_t"></span><span id="_CPPv2NK6marian6Logits17getFactoredLogitsE6size_t3PtrIN4data9ShortlistEERKNSt6vectorI9IndexTypeEE6size_t"></span><span id="marian::Logits::getFactoredLogits__s.Ptr:data::Shortlist:.std::vector:IndexType:CR.sC"></span><span class="target" id="classmarian_1_1Logits_1ab38992e2278e55bde54da07328e748ab"></span><a class="reference internal" href="typedef_definitions_8h_1ac8ecc2cc66a7afcc6da94a9bbde5eaa7.html#_CPPv4N6marian4ExprE" title="marian::Expr">Expr</a> <code class="sig-name descname">getFactoredLogits</code><span class="sig-paren">(</span>size_t <em>groupIndex</em>, <a class="reference internal" href="typedef_definitions_8h_1ad1a373be43a00ef9ce35666145137b08.html#_CPPv4N6marian3PtrE" title="marian::Ptr">Ptr</a>&lt;data::<a class="reference internal" href="classmarian_1_1data_1_1Shortlist.html#_CPPv4N6marian4data9ShortlistE" title="marian::data::Shortlist">Shortlist</a>&gt; <em>shortlist</em> = nullptr, <em class="property">const</em> <a class="reference internal" href="function_expression__operators_8cpp_1af4e69a5f7167b63522135a1f6b8a5dd8.html#_CPPv4N6marianStE4Expri" title="marian::std">std</a>::vector&lt;<a class="reference internal" href="typedef_definitions_8h_1af472f150bf0d608c36430a11b2f1b49c.html#_CPPv4N6marian9IndexTypeE" title="marian::IndexType">IndexType</a>&gt; &amp;<em>hypIndices</em> = {}, size_t <em>beamSize</em> = 0<span class="sig-paren">)</span> <em class="property">const</em><a class="headerlink" href="#_CPPv4NK6marian6Logits17getFactoredLogitsE6size_t3PtrIN4data9ShortlistEERKNSt6vectorI9IndexTypeEE6size_t" title="Permalink to this definition">¶</a><br /></dt>
+<dd></dd></dl>
+
+<dl class="function">
+<dt id="_CPPv4NK6marian6Logits17applyLossFunctionERK5WordsRKNSt8functionIF4Expr4Expr4ExprEEE">
+<span id="_CPPv3NK6marian6Logits17applyLossFunctionERK5WordsRKNSt8functionIF4Expr4Expr4ExprEEE"></span><span id="_CPPv2NK6marian6Logits17applyLossFunctionERK5WordsRKNSt8functionIF4Expr4Expr4ExprEEE"></span><span class="target" id="classmarian_1_1Logits_1a857a354a092132f5eddd9edb09c09ce0"></span><a class="reference internal" href="typedef_definitions_8h_1ac8ecc2cc66a7afcc6da94a9bbde5eaa7.html#_CPPv4N6marian4ExprE" title="marian::Expr">Expr</a> <code class="sig-name descname">applyLossFunction</code><span class="sig-paren">(</span><em class="property">const</em> <a class="reference internal" href="typedef_data_2types_8h_1a81f026d9529d47fd44a64a27954775fd.html#_CPPv4N6marian5WordsE" title="marian::Words">Words</a> &amp;<em>labels</em>, <em class="property">const</em> <a class="reference internal" href="function_expression__operators_8cpp_1af4e69a5f7167b63522135a1f6b8a5dd8.html#_CPPv4N6marianStE4Expri" title="marian::std">std</a>::function&lt;<a class="reference internal" href="typedef_definitions_8h_1ac8ecc2cc66a7afcc6da94a9bbde5eaa7.html#_CPPv4N6marian4ExprE" title="marian::Expr">Expr</a><span class="sig-paren">(</span><a class="reference internal" href="typedef_definitions_8h_1ac8ecc2cc66a7afcc6da94a9bbde5eaa7.html#_CPPv4N6marian4ExprE" title="marian::Expr">Expr</a>, <a class="reference internal" href="typedef_definitions_8h_1ac8ecc2cc66a7afcc6da94a9bbde5eaa7.html#_CPPv4N6marian4ExprE" title="marian::Expr">Expr</a><span class="sig-paren">)</span>&gt; &amp;<em>lossFn</em><span class="sig-paren">)</span> <em class="property">const</em><a class="headerlink" href="#_CPPv4NK6marian6Logits17applyLossFunctionERK5WordsRKNSt8functionIF4Expr4Expr4ExprEEE" title="Permalink to this definition">¶</a><br /></dt>
+<dd></dd></dl>
+
+<dl class="function">
+<dt id="_CPPv4NK6marian6Logits18applyUnaryFunctionERKNSt8functionIF4Expr4ExprEEE">
+<span id="_CPPv3NK6marian6Logits18applyUnaryFunctionERKNSt8functionIF4Expr4ExprEEE"></span><span id="_CPPv2NK6marian6Logits18applyUnaryFunctionERKNSt8functionIF4Expr4ExprEEE"></span><span class="target" id="classmarian_1_1Logits_1af1e7582852b9556f2b22c42169d08598"></span><a class="reference internal" href="#_CPPv4N6marian6LogitsE" title="marian::Logits">Logits</a> <code class="sig-name descname">applyUnaryFunction</code><span class="sig-paren">(</span><em class="property">const</em> <a class="reference internal" href="function_expression__operators_8cpp_1af4e69a5f7167b63522135a1f6b8a5dd8.html#_CPPv4N6marianStE4Expri" title="marian::std">std</a>::function&lt;<a class="reference internal" href="typedef_definitions_8h_1ac8ecc2cc66a7afcc6da94a9bbde5eaa7.html#_CPPv4N6marian4ExprE" title="marian::Expr">Expr</a><span class="sig-paren">(</span><a class="reference internal" href="typedef_definitions_8h_1ac8ecc2cc66a7afcc6da94a9bbde5eaa7.html#_CPPv4N6marian4ExprE" title="marian::Expr">Expr</a><span class="sig-paren">)</span>&gt; &amp;<em>f</em><span class="sig-paren">)</span> <em class="property">const</em><a class="headerlink" href="#_CPPv4NK6marian6Logits18applyUnaryFunctionERKNSt8functionIF4Expr4ExprEEE" title="Permalink to this definition">¶</a><br /></dt>
+<dd></dd></dl>
+
+<dl class="function">
+<dt id="_CPPv4NK6marian6Logits19applyUnaryFunctionsERKNSt8functionIF4Expr4ExprEEERKNSt8functionIF4Expr4ExprEEE">
+<span id="_CPPv3NK6marian6Logits19applyUnaryFunctionsERKNSt8functionIF4Expr4ExprEEERKNSt8functionIF4Expr4ExprEEE"></span><span id="_CPPv2NK6marian6Logits19applyUnaryFunctionsERKNSt8functionIF4Expr4ExprEEERKNSt8functionIF4Expr4ExprEEE"></span><span class="target" id="classmarian_1_1Logits_1abede34821366912a9d85d80a60ce226b"></span><a class="reference internal" href="#_CPPv4N6marian6LogitsE" title="marian::Logits">Logits</a> <code class="sig-name descname">applyUnaryFunctions</code><span class="sig-paren">(</span><em class="property">const</em> <a class="reference internal" href="function_expression__operators_8cpp_1af4e69a5f7167b63522135a1f6b8a5dd8.html#_CPPv4N6marianStE4Expri" title="marian::std">std</a>::function&lt;<a class="reference internal" href="typedef_definitions_8h_1ac8ecc2cc66a7afcc6da94a9bbde5eaa7.html#_CPPv4N6marian4ExprE" title="marian::Expr">Expr</a><span class="sig-paren">(</span><a class="reference internal" href="typedef_definitions_8h_1ac8ecc2cc66a7afcc6da94a9bbde5eaa7.html#_CPPv4N6marian4ExprE" title="marian::Expr">Expr</a><span class="sig-paren">)</span>&gt; &amp;<em>f1</em>, <em class="property">const</em> <a class="reference internal" href="function_expression__operators_8cpp_1af4e69a5f7167b63522135a1f6b8a5dd8.html#_CPPv4N6marianStE4Expri" title="marian::std">std</a>::function&lt;<a class="reference internal" href="typedef_definitions_8h_1ac8ecc2cc66a7afcc6da94a9bbde5eaa7.html#_CPPv4N6marian4ExprE" title="marian::Expr">Expr</a><span class="sig-paren">(</span><a class="reference internal" href="typedef_definitions_8h_1ac8ecc2cc66a7afcc6da94a9bbde5eaa7.html#_CPPv4N6marian4ExprE" title="marian::Expr">Expr</a><span class="sig-paren">)</span>&gt; &amp;<em>fother</em><span class="sig-paren">)</span> <em class="property">const</em><a class="headerlink" href="#_CPPv4NK6marian6Logits19applyUnaryFunctionsERKNSt8functionIF4Expr4ExprEEERKNSt8functionIF4Expr4ExprEEE" title="Permalink to this definition">¶</a><br /></dt>
+<dd></dd></dl>
+
+<dl class="function">
+<dt id="_CPPv4NK6marian6Logits14factorizeWordsERK5Words">
+<span id="_CPPv3NK6marian6Logits14factorizeWordsERK5Words"></span><span id="_CPPv2NK6marian6Logits14factorizeWordsERK5Words"></span><span id="marian::Logits::factorizeWords__WordsCRC"></span><span class="target" id="classmarian_1_1Logits_1a4f55514c23af584e5ef7d99bcb06c0c2"></span><a class="reference internal" href="function_expression__operators_8cpp_1af4e69a5f7167b63522135a1f6b8a5dd8.html#_CPPv4N6marianStE4Expri" title="marian::std">std</a>::vector&lt;<a class="reference internal" href="#_CPPv4N6marian6LogitsE" title="marian::Logits">Logits</a>::<a class="reference internal" href="#_CPPv4N6marian6Logits19MaskedFactorIndicesE" title="marian::Logits::MaskedFactorIndices">MaskedFactorIndices</a>&gt; <code class="sig-name descname">factorizeWords</code><span class="sig-paren">(</span><em class="property">const</em> <a class="reference internal" href="typedef_data_2types_8h_1a81f026d9529d47fd44a64a27954775fd.html#_CPPv4N6marian5WordsE" title="marian::Words">Words</a> &amp;<em>words</em><span class="sig-paren">)</span> <em class="property">const</em><a class="headerlink" href="#_CPPv4NK6marian6Logits14factorizeWordsERK5Words" title="Permalink to this definition">¶</a><br /></dt>
+<dd></dd></dl>
+
+<dl class="function">
+<dt id="_CPPv4NK6marian6Logits23getFactoredLogitsTensorE6size_t">
+<span id="_CPPv3NK6marian6Logits23getFactoredLogitsTensorE6size_t"></span><span id="_CPPv2NK6marian6Logits23getFactoredLogitsTensorE6size_t"></span><span id="marian::Logits::getFactoredLogitsTensor__sC"></span><span class="target" id="classmarian_1_1Logits_1aad29f474251bfc5633a1a8d944a23c3d"></span>Tensor <code class="sig-name descname">getFactoredLogitsTensor</code><span class="sig-paren">(</span>size_t <em>factorGroup</em><span class="sig-paren">)</span> <em class="property">const</em><a class="headerlink" href="#_CPPv4NK6marian6Logits23getFactoredLogitsTensorE6size_t" title="Permalink to this definition">¶</a><br /></dt>
+<dd></dd></dl>
+
+<dl class="function">
+<dt id="_CPPv4NK6marian6Logits18getNumFactorGroupsEv">
+<span id="_CPPv3NK6marian6Logits18getNumFactorGroupsEv"></span><span id="_CPPv2NK6marian6Logits18getNumFactorGroupsEv"></span><span id="marian::Logits::getNumFactorGroupsC"></span><span class="target" id="classmarian_1_1Logits_1adb8c6bd567c5115b05a44fd87a66884e"></span>size_t <code class="sig-name descname">getNumFactorGroups</code><span class="sig-paren">(</span><span class="sig-paren">)</span> <em class="property">const</em><a class="headerlink" href="#_CPPv4NK6marian6Logits18getNumFactorGroupsEv" title="Permalink to this definition">¶</a><br /></dt>
+<dd></dd></dl>
+
+<dl class="function">
+<dt id="_CPPv4NK6marian6Logits5emptyEv">
+<span id="_CPPv3NK6marian6Logits5emptyEv"></span><span id="_CPPv2NK6marian6Logits5emptyEv"></span><span id="marian::Logits::emptyC"></span><span class="target" id="classmarian_1_1Logits_1a47361df3e0777e0d4242a48a1e6c37e8"></span>bool <code class="sig-name descname">empty</code><span class="sig-paren">(</span><span class="sig-paren">)</span> <em class="property">const</em><a class="headerlink" href="#_CPPv4NK6marian6Logits5emptyEv" title="Permalink to this definition">¶</a><br /></dt>
+<dd></dd></dl>
+
+<dl class="function">
+<dt id="_CPPv4NK6marian6Logits10withCountsERK4Expr">
+<span id="_CPPv3NK6marian6Logits10withCountsERK4Expr"></span><span id="_CPPv2NK6marian6Logits10withCountsERK4Expr"></span><span id="marian::Logits::withCounts__ExprCRC"></span><span class="target" id="classmarian_1_1Logits_1a7b717c72a1109d4448b0574be0b71095"></span><a class="reference internal" href="#_CPPv4N6marian6LogitsE" title="marian::Logits">Logits</a> <code class="sig-name descname">withCounts</code><span class="sig-paren">(</span><em class="property">const</em> <a class="reference internal" href="typedef_definitions_8h_1ac8ecc2cc66a7afcc6da94a9bbde5eaa7.html#_CPPv4N6marian4ExprE" title="marian::Expr">Expr</a> &amp;<em>count</em><span class="sig-paren">)</span> <em class="property">const</em><a class="headerlink" href="#_CPPv4NK6marian6Logits10withCountsERK4Expr" title="Permalink to this definition">¶</a><br /></dt>
+<dd></dd></dl>
+
+</div>
+<dl class="class">
+<dt id="_CPPv4N6marian6Logits19MaskedFactorIndicesE">
+<span id="_CPPv3N6marian6Logits19MaskedFactorIndicesE"></span><span id="_CPPv2N6marian6Logits19MaskedFactorIndicesE"></span><span id="marian::Logits::MaskedFactorIndices"></span><span class="target" id="structmarian_1_1Logits_1_1MaskedFactorIndices"></span><em class="property">struct </em><code class="sig-name descname">MaskedFactorIndices</code><a class="headerlink" href="#_CPPv4N6marian6Logits19MaskedFactorIndicesE" title="Permalink to this definition">¶</a><br /></dt>
+<dd><div class="breathe-sectiondef docutils container">
+<p class="breathe-sectiondef-title rubric">Public Functions</p>
+<dl class="function">
+<dt id="_CPPv4N6marian6Logits19MaskedFactorIndices7reserveE6size_t">
+<span id="_CPPv3N6marian6Logits19MaskedFactorIndices7reserveE6size_t"></span><span id="_CPPv2N6marian6Logits19MaskedFactorIndices7reserveE6size_t"></span><span id="marian::Logits::MaskedFactorIndices::reserve__s"></span><span class="target" id="structmarian_1_1Logits_1_1MaskedFactorIndices_1ad3455daf28a0d7273c61a2682b1ff749"></span>void <code class="sig-name descname">reserve</code><span class="sig-paren">(</span>size_t <em>n</em><span class="sig-paren">)</span><a class="headerlink" href="#_CPPv4N6marian6Logits19MaskedFactorIndices7reserveE6size_t" title="Permalink to this definition">¶</a><br /></dt>
+<dd></dd></dl>
+
+<dl class="function">
+<dt id="_CPPv4N6marian6Logits19MaskedFactorIndices9push_backE6size_t">
+<span id="_CPPv3N6marian6Logits19MaskedFactorIndices9push_backE6size_t"></span><span id="_CPPv2N6marian6Logits19MaskedFactorIndices9push_backE6size_t"></span><span id="marian::Logits::MaskedFactorIndices::push_back__s"></span><span class="target" id="structmarian_1_1Logits_1_1MaskedFactorIndices_1a977bd3f4b218bb423b1d59acfb31ae37"></span>void <code class="sig-name descname">push_back</code><span class="sig-paren">(</span>size_t <em>factorIndex</em><span class="sig-paren">)</span><a class="headerlink" href="#_CPPv4N6marian6Logits19MaskedFactorIndices9push_backE6size_t" title="Permalink to this definition">¶</a><br /></dt>
+<dd></dd></dl>
+
+<dl class="function">
+<dt id="_CPPv4N6marian6Logits19MaskedFactorIndices19MaskedFactorIndicesEv">
+<span id="_CPPv3N6marian6Logits19MaskedFactorIndices19MaskedFactorIndicesEv"></span><span id="_CPPv2N6marian6Logits19MaskedFactorIndices19MaskedFactorIndicesEv"></span><span id="marian::Logits::MaskedFactorIndices::MaskedFactorIndices"></span><span class="target" id="structmarian_1_1Logits_1_1MaskedFactorIndices_1acf603a7d0508b5ffd65391de76a88b76"></span><code class="sig-name descname">MaskedFactorIndices</code><span class="sig-paren">(</span><span class="sig-paren">)</span><a class="headerlink" href="#_CPPv4N6marian6Logits19MaskedFactorIndices19MaskedFactorIndicesEv" title="Permalink to this definition">¶</a><br /></dt>
+<dd></dd></dl>
+
+<dl class="function">
+<dt id="_CPPv4N6marian6Logits19MaskedFactorIndices19MaskedFactorIndicesERK5Words">
+<span id="_CPPv3N6marian6Logits19MaskedFactorIndices19MaskedFactorIndicesERK5Words"></span><span id="_CPPv2N6marian6Logits19MaskedFactorIndices19MaskedFactorIndicesERK5Words"></span><span id="marian::Logits::MaskedFactorIndices::MaskedFactorIndices__WordsCR"></span><span class="target" id="structmarian_1_1Logits_1_1MaskedFactorIndices_1a5cdf984052f63e2c0ed50c58afe426fa"></span><code class="sig-name descname">MaskedFactorIndices</code><span class="sig-paren">(</span><em class="property">const</em> <a class="reference internal" href="typedef_data_2types_8h_1a81f026d9529d47fd44a64a27954775fd.html#_CPPv4N6marian5WordsE" title="marian::Words">Words</a> &amp;<em>words</em><span class="sig-paren">)</span><a class="headerlink" href="#_CPPv4N6marian6Logits19MaskedFactorIndices19MaskedFactorIndicesERK5Words" title="Permalink to this definition">¶</a><br /></dt>
+<dd></dd></dl>
+
+</div>
+<div class="breathe-sectiondef docutils container">
+<p class="breathe-sectiondef-title rubric">Public Members</p>
+<dl class="member">
+<dt id="_CPPv4N6marian6Logits19MaskedFactorIndices7indicesE">
+<span id="_CPPv3N6marian6Logits19MaskedFactorIndices7indicesE"></span><span id="_CPPv2N6marian6Logits19MaskedFactorIndices7indicesE"></span><span id="marian::Logits::MaskedFactorIndices::indices__std::vector:WordIndex:"></span><span class="target" id="structmarian_1_1Logits_1_1MaskedFactorIndices_1ab5697d577b7a309bac392f2b7715b21a"></span><a class="reference internal" href="function_expression__operators_8cpp_1af4e69a5f7167b63522135a1f6b8a5dd8.html#_CPPv4N6marianStE4Expri" title="marian::std">std</a>::vector&lt;<a class="reference internal" href="typedef_data_2types_8h_1ae7167b339fc21c2985d7f2ddef03d25e.html#_CPPv4N6marian9WordIndexE" title="marian::WordIndex">WordIndex</a>&gt; <code class="sig-name descname">indices</code><a class="headerlink" href="#_CPPv4N6marian6Logits19MaskedFactorIndices7indicesE" title="Permalink to this definition">¶</a><br /></dt>
+<dd></dd></dl>
+
+<dl class="member">
+<dt id="_CPPv4N6marian6Logits19MaskedFactorIndices5masksE">
+<span id="_CPPv3N6marian6Logits19MaskedFactorIndices5masksE"></span><span id="_CPPv2N6marian6Logits19MaskedFactorIndices5masksE"></span><span id="marian::Logits::MaskedFactorIndices::masks__std::vector:float:"></span><span class="target" id="structmarian_1_1Logits_1_1MaskedFactorIndices_1a84452d619bb1e24898cb9576869411d3"></span><a class="reference internal" href="function_expression__operators_8cpp_1af4e69a5f7167b63522135a1f6b8a5dd8.html#_CPPv4N6marianStE4Expri" title="marian::std">std</a>::vector&lt;float&gt; <code class="sig-name descname">masks</code><a class="headerlink" href="#_CPPv4N6marian6Logits19MaskedFactorIndices5masksE" title="Permalink to this definition">¶</a><br /></dt>
+<dd></dd></dl>
+
+</div>
+</dd></dl>
+
+</dd></dl>
+
+</div>
+</div>
+
+
+           </div>
+           
+          </div>
+          <footer>
+    <div class="rst-footer-buttons" role="navigation" aria-label="footer navigation">
+        <a href="classmarian_1_1LSH.html" class="btn btn-neutral float-right" title="Class LSH" accesskey="n" rel="next">Next <span class="fa fa-arrow-circle-right" aria-hidden="true"></span></a>
+        <a href="classmarian_1_1LayerBase.html" class="btn btn-neutral float-left" title="Class LayerBase" accesskey="p" rel="prev"><span class="fa fa-arrow-circle-left" aria-hidden="true"></span> Previous</a>
+    </div>
+
+  <hr/>
+
+  <div role="contentinfo">
+    <p>
+        &#169; Copyright 2021, Marian NMT Team.
+
+    </p>
+  </div>
+    
+    
+    
+    Built with <a href="https://www.sphinx-doc.org/">Sphinx</a> using a
+    
+    <a href="https://github.com/readthedocs/sphinx_rtd_theme">theme</a>
+    
+    provided by <a href="https://readthedocs.org">Read the Docs</a>. 
+
+</footer>
+        </div>
+      </div>
+
+    </section>
+
+  </div>
+  
+
+  <script type="text/javascript">
+      jQuery(function () {
+          SphinxRtdTheme.Navigation.enable(true);
+      });
+  </script>
+
+  
+  
+    
+   
+
+</body>
+</html>

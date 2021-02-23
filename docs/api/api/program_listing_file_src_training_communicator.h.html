@@ -1,0 +1,475 @@
+
+
+<!DOCTYPE html>
+<html class="writer-html5" lang="en" >
+<head>
+  <meta charset="utf-8" />
+  
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  
+  <title>Program Listing for File communicator.h &mdash; Marian NMT v1.10.1 2021-02-23 documentation</title>
+  
+
+  
+  <link rel="stylesheet" href="../_static/css/theme.css" type="text/css" />
+  <link rel="stylesheet" href="../_static/pygments.css" type="text/css" />
+  <link rel="stylesheet" href="../_static/css/custom.css" type="text/css" />
+  <link rel="stylesheet" href="../_static/collapsible-lists/css/tree_view.css" type="text/css" />
+
+  
+  
+
+  
+  
+
+  
+    <link rel="canonical" href="http://marian-nmt.github.io/docs/api/api/program_listing_file_src_training_communicator.h.html" />
+
+  
+  <!--[if lt IE 9]>
+    <script src="../_static/js/html5shiv.min.js"></script>
+  <![endif]-->
+  
+    
+      <script type="text/javascript" id="documentation_options" data-url_root="../" src="../_static/documentation_options.js"></script>
+        <script src="../_static/jquery.js"></script>
+        <script src="../_static/underscore.js"></script>
+        <script src="../_static/doctools.js"></script>
+        <script src="../_static/language_data.js"></script>
+        <script src="../_static/collapsible-lists/js/CollapsibleLists.compressed.js"></script>
+        <script src="../_static/collapsible-lists/js/apply-collapsible-lists.js"></script>
+    
+    <script type="text/javascript" src="../_static/js/theme.js"></script>
+
+    
+    <link rel="index" title="Index" href="../genindex.html" />
+    <link rel="search" title="Search" href="../search.html" /> 
+</head>
+
+<body class="wy-body-for-nav">
+
+   
+  <div class="wy-grid-for-nav">
+    
+    <nav data-toggle="wy-nav-shift" class="wy-nav-side">
+      <div class="wy-side-scroll">
+        <div class="wy-side-nav-search" >
+          
+
+          
+            <a href="../index.html" class="icon icon-home"> Marian NMT
+          
+
+          
+          </a>
+
+          
+            
+            
+              <div class="version">
+                v1.10.1
+              </div>
+            
+          
+
+          
+<div role="search">
+  <form id="rtd-search-form" class="wy-form" action="../search.html" method="get">
+    <input type="text" name="q" placeholder="Search docs" />
+    <input type="hidden" name="check_keywords" value="yes" />
+    <input type="hidden" name="area" value="default" />
+  </form>
+</div>
+
+          
+        </div>
+
+        
+        <div class="wy-menu wy-menu-vertical" data-spy="affix" role="navigation" aria-label="main navigation">
+          
+            
+            
+              
+            
+            
+              <p class="caption"><span class="caption-text">Contents:</span></p>
+<ul>
+<li class="toctree-l1"><a class="reference internal" href="../install.html">Installation</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../graph.html">Expression graphs</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../operators.html">Graph operations</a></li>
+<li class="toctree-l1"><a class="reference internal" href="library_index.html">Library API</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../contributing.html">How to contribute to Marian</a></li>
+</ul>
+
+            
+          
+        </div>
+        
+      </div>
+    </nav>
+
+    <section data-toggle="wy-nav-shift" class="wy-nav-content-wrap">
+
+      
+      <nav class="wy-nav-top" aria-label="top navigation">
+        
+          <i data-toggle="wy-nav-top" class="fa fa-bars"></i>
+          <a href="../index.html">Marian NMT</a>
+        
+      </nav>
+
+
+      <div class="wy-nav-content">
+        
+        <div class="rst-content">
+        
+          
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+<div role="navigation" aria-label="breadcrumbs navigation">
+
+  <ul class="wy-breadcrumbs">
+    
+      <li><a href="../index.html" class="icon icon-home"></a> &raquo;</li>
+        
+      <li>Program Listing for File communicator.h</li>
+    
+    
+      <li class="wy-breadcrumbs-aside">
+        
+          
+            <a href="../_sources/api/program_listing_file_src_training_communicator.h.rst.txt" rel="nofollow"> View page source</a>
+          
+        
+      </li>
+    
+  </ul>
+
+  
+  <hr/>
+</div>
+          <div role="main" class="document" itemscope="itemscope" itemtype="http://schema.org/Article">
+           <div itemprop="articleBody">
+            
+  <div class="section" id="program-listing-for-file-communicator-h">
+<span id="program-listing-file-src-training-communicator-h"></span><h1>Program Listing for File communicator.h<a class="headerlink" href="#program-listing-for-file-communicator-h" title="Permalink to this headline">¶</a></h1>
+<p>↰ <a class="reference internal" href="file_src_training_communicator.h.html#file-src-training-communicator-h"><span class="std std-ref">Return to documentation for file</span></a> (<code class="docutils literal notranslate"><span class="pre">src/training/communicator.h</span></code>)</p>
+<div class="highlight-cpp notranslate"><div class="highlight"><pre><span></span><span class="cp">#pragma once</span>
+
+<span class="c1">// clang-format off</span>
+<span class="cp">#include</span> <span class="cpf">&quot;graph/expression_graph.h&quot;</span><span class="cp"></span>
+<span class="cp">#include</span> <span class="cpf">&quot;functional/functional.h&quot;</span><span class="cp"></span>
+<span class="cp">#include</span> <span class="cpf">&quot;tensors/tensor_operators.h&quot;</span><span class="cp"></span>
+<span class="cp">#include</span> <span class="cpf">&quot;optimizers/optimizers.h&quot;</span><span class="cp"></span>
+<span class="cp">#if MPI_FOUND</span>
+<span class="cp">#ifdef __GNUC__</span>
+<span class="cp">#pragma GCC diagnostic push</span>
+<span class="cp">#pragma GCC diagnostic ignored &quot;-Wsuggest-override&quot;</span>
+<span class="cp">#endif</span>
+<span class="cp">#undef HOST</span>
+<span class="cp">#define OMPI_SKIP_MPICXX 1 </span><span class="c1">// Fixes compilation with GCC8+ https://github.com/open-mpi/ompi/issues/5157</span>
+<span class="cp">#include</span> <span class="cpf">&quot;mpi.h&quot;</span><span class="cp"></span>
+<span class="cp">#ifdef __GNUC__</span>
+<span class="cp">#pragma GCC diagnostic pop</span>
+<span class="cp">#endif</span>
+<span class="cp">#endif</span>
+<span class="c1">// clang-format on</span>
+
+<span class="k">namespace</span> <span class="n">marian</span> <span class="p">{</span>
+
+<span class="k">struct</span><span class="cm">/*interface*/</span> <span class="n">IMPIWrapper</span><span class="p">;</span> <span class="c1">// @TODO: Should we use a separate header, or move this declaration up here?</span>
+
+<span class="c1">// This interface implements the cross-GPU operations for distributed training within a single box.</span>
+<span class="k">class</span> <span class="nc">ICommunicator</span> <span class="p">{</span>
+<span class="k">protected</span><span class="o">:</span>
+  <span class="k">const</span> <span class="n">std</span><span class="o">::</span><span class="n">vector</span><span class="o">&lt;</span><span class="n">Ptr</span><span class="o">&lt;</span><span class="n">ExpressionGraph</span><span class="o">&gt;&gt;</span> <span class="n">graphs_</span><span class="p">;</span>
+
+<span class="k">public</span><span class="o">:</span>
+  <span class="n">ICommunicator</span><span class="p">(</span><span class="k">const</span> <span class="n">std</span><span class="o">::</span><span class="n">vector</span><span class="o">&lt;</span><span class="n">Ptr</span><span class="o">&lt;</span><span class="n">ExpressionGraph</span><span class="o">&gt;&gt;&amp;</span> <span class="n">graphs</span><span class="p">)</span>
+      <span class="o">:</span> <span class="n">graphs_</span><span class="p">(</span><span class="n">graphs</span><span class="p">)</span> <span class="p">{}</span>
+
+  <span class="k">virtual</span> <span class="o">~</span><span class="n">ICommunicator</span><span class="p">()</span> <span class="p">{}</span>
+
+  <span class="c1">// helper to apply a function to each local graph, in parallel threads</span>
+  <span class="k">typedef</span> <span class="n">std</span><span class="o">::</span><span class="n">function</span><span class="o">&lt;</span><span class="kt">void</span><span class="p">(</span><span class="kt">size_t</span><span class="p">,</span> <span class="kt">size_t</span> <span class="cm">/*shardBegin*/</span><span class="p">,</span> <span class="kt">size_t</span> <span class="cm">/*shardEnd*/</span><span class="p">)</span><span class="o">&gt;</span> <span class="n">ForeachFunc</span><span class="p">;</span>
+  <span class="k">virtual</span> <span class="kt">void</span> <span class="n">foreach</span><span class="p">(</span><span class="k">const</span> <span class="n">ForeachFunc</span><span class="o">&amp;</span> <span class="n">func</span><span class="p">,</span> <span class="kt">bool</span> <span class="n">parallel</span> <span class="o">=</span> <span class="nb">true</span><span class="p">)</span> <span class="k">const</span> <span class="o">=</span> <span class="mi">0</span><span class="p">;</span>
+  <span class="c1">// @TODO: We probably can still share foreach() between the two implementations. Just need to move some helper functions from the .cu file.</span>
+
+  <span class="k">virtual</span> <span class="kt">void</span> <span class="n">scatterReduceAndResetGrads</span><span class="p">()</span> <span class="k">const</span> <span class="o">=</span> <span class="mi">0</span><span class="p">;</span> <span class="c1">// reduce param gradients and scatter into gradient shards</span>
+  <span class="k">virtual</span> <span class="kt">void</span> <span class="n">allGatherParams</span><span class="p">()</span> <span class="k">const</span> <span class="o">=</span> <span class="mi">0</span><span class="p">;</span>     <span class="c1">// redistribute value shards into param values</span>
+
+  <span class="k">virtual</span> <span class="kt">void</span> <span class="n">swapParams</span><span class="p">(</span><span class="k">const</span> <span class="n">std</span><span class="o">::</span><span class="n">vector</span><span class="o">&lt;</span><span class="n">Tensor</span><span class="o">&gt;&amp;</span> <span class="n">paramShards</span><span class="p">)</span> <span class="k">const</span> <span class="o">=</span> <span class="mi">0</span><span class="p">;</span>
+
+  <span class="k">virtual</span> <span class="kt">void</span> <span class="n">scatterState</span><span class="p">(</span><span class="k">const</span> <span class="n">std</span><span class="o">::</span><span class="n">vector</span><span class="o">&lt;</span><span class="kt">float</span><span class="o">&gt;&amp;</span> <span class="n">data</span><span class="p">,</span> <span class="k">const</span> <span class="n">OptimizerBase</span><span class="o">::</span><span class="n">ScatterStateSetFunc</span><span class="o">&amp;</span> <span class="n">setFn</span><span class="p">)</span> <span class="k">const</span> <span class="o">=</span> <span class="mi">0</span><span class="p">;</span>
+  <span class="k">virtual</span> <span class="n">std</span><span class="o">::</span><span class="n">vector</span><span class="o">&lt;</span><span class="kt">float</span><span class="o">&gt;</span> <span class="n">gatherState</span><span class="p">(</span><span class="k">const</span> <span class="n">OptimizerBase</span><span class="o">::</span><span class="n">GatherStateGetFunc</span><span class="o">&amp;</span> <span class="n">getFn</span><span class="p">)</span> <span class="k">const</span> <span class="o">=</span> <span class="mi">0</span><span class="p">;</span>
+<span class="p">};</span>
+
+<span class="c1">// Abstracts MPI operations, allowing alternative implementations (specifically fake (for debugging) and NCCL.</span>
+<span class="c1">// This implements the MPI APIs we use here, with the following modifications:</span>
+<span class="c1">//  * aborts with ABORT() instead of returning an error</span>
+<span class="c1">//  * swapped out some strange MPI-specific data types to more correct C++ ones where appropriate</span>
+<span class="cp">#if MPI_FOUND</span>
+<span class="cp">#else</span>
+<span class="k">enum</span> <span class="nc">MPI_Comm</span> <span class="p">{</span> <span class="n">MPI_COMM_WORLD</span> <span class="p">};</span>
+<span class="k">enum</span> <span class="nc">MPI_Datatype</span> <span class="p">{</span> <span class="n">MPI_FLOAT</span><span class="p">,</span> <span class="n">MPI_UNSIGNED_LONG_LONG</span><span class="p">,</span> <span class="n">MPI_UNSIGNED_LONG</span><span class="p">,</span> <span class="n">MPI_BYTE</span> <span class="p">};</span>
+<span class="k">enum</span> <span class="nc">MPI_Op</span> <span class="p">{</span> <span class="n">MPI_SUM</span> <span class="p">};</span>
+<span class="k">struct</span> <span class="nc">MPI_Status</span> <span class="p">{</span> <span class="kt">int</span> <span class="n">MPI_SOURCE</span><span class="p">;</span> <span class="p">};</span>
+<span class="cp">#define MPI_ANY_SOURCE ((size_t)-2)</span>
+<span class="cp">#define MPI_STATUS_IGNORE ((MPI_Status*)nullptr)</span>
+<span class="cp">#endif</span>
+<span class="k">struct</span><span class="cm">/*interface*/</span> <span class="n">IMPIWrapper</span>
+<span class="p">{</span>
+  <span class="k">virtual</span> <span class="kt">size_t</span> <span class="n">myMPIRank</span><span class="p">()</span> <span class="k">const</span> <span class="o">=</span> <span class="mi">0</span><span class="p">;</span>
+  <span class="k">virtual</span> <span class="kt">size_t</span> <span class="n">numMPIProcesses</span><span class="p">()</span> <span class="k">const</span> <span class="o">=</span> <span class="mi">0</span><span class="p">;</span>
+  <span class="k">virtual</span> <span class="kt">void</span> <span class="n">barrier</span><span class="p">(</span><span class="n">MPI_Comm</span> <span class="n">comm</span> <span class="o">=</span> <span class="n">MPI_COMM_WORLD</span><span class="p">)</span> <span class="k">const</span> <span class="o">=</span> <span class="mi">0</span><span class="p">;</span>
+  <span class="k">virtual</span> <span class="kt">void</span> <span class="n">bCast</span><span class="p">(</span><span class="kt">void</span><span class="o">*</span> <span class="n">buf</span><span class="p">,</span> <span class="kt">size_t</span> <span class="n">count</span><span class="p">,</span> <span class="n">MPI_Datatype</span> <span class="n">datatype</span><span class="p">,</span> <span class="kt">size_t</span> <span class="n">rootRank</span> <span class="o">=</span> <span class="mi">0</span><span class="p">,</span> <span class="n">MPI_Comm</span> <span class="n">comm</span> <span class="o">=</span> <span class="n">MPI_COMM_WORLD</span><span class="p">)</span> <span class="k">const</span> <span class="o">=</span> <span class="mi">0</span><span class="p">;</span>
+  <span class="k">virtual</span> <span class="kt">void</span> <span class="n">sSend</span><span class="p">(</span><span class="kt">void</span><span class="o">*</span> <span class="n">buf</span><span class="p">,</span> <span class="kt">size_t</span> <span class="n">count</span><span class="p">,</span> <span class="n">MPI_Datatype</span> <span class="n">datatype</span><span class="p">,</span> <span class="kt">size_t</span> <span class="n">destRank</span><span class="p">,</span> <span class="kt">int</span> <span class="n">tag</span><span class="p">,</span> <span class="n">MPI_Comm</span> <span class="n">comm</span> <span class="o">=</span> <span class="n">MPI_COMM_WORLD</span><span class="p">)</span> <span class="k">const</span> <span class="o">=</span> <span class="mi">0</span><span class="p">;</span>
+  <span class="k">virtual</span> <span class="kt">void</span> <span class="n">recv</span><span class="p">(</span><span class="kt">void</span><span class="o">*</span> <span class="n">buf</span><span class="p">,</span> <span class="kt">size_t</span> <span class="n">count</span><span class="p">,</span> <span class="n">MPI_Datatype</span> <span class="n">datatype</span><span class="p">,</span> <span class="kt">size_t</span> <span class="n">sourceRank</span><span class="p">,</span> <span class="kt">int</span> <span class="n">tag</span><span class="p">,</span> <span class="n">MPI_Comm</span> <span class="n">comm</span> <span class="o">=</span> <span class="n">MPI_COMM_WORLD</span><span class="p">,</span> <span class="n">MPI_Status</span><span class="o">*</span> <span class="n">status</span> <span class="o">=</span> <span class="n">MPI_STATUS_IGNORE</span><span class="p">)</span> <span class="k">const</span> <span class="o">=</span> <span class="mi">0</span><span class="p">;</span>
+  <span class="k">virtual</span> <span class="kt">void</span> <span class="n">allReduce</span><span class="p">(</span><span class="k">const</span> <span class="kt">void</span><span class="o">*</span> <span class="n">sendbuf</span><span class="p">,</span> <span class="kt">void</span><span class="o">*</span> <span class="n">recvbuf</span><span class="p">,</span> <span class="kt">size_t</span> <span class="n">count</span><span class="p">,</span> <span class="n">MPI_Datatype</span> <span class="n">datatype</span><span class="p">,</span> <span class="n">MPI_Op</span> <span class="n">op</span><span class="p">,</span> <span class="n">MPI_Comm</span> <span class="n">comm</span> <span class="o">=</span> <span class="n">MPI_COMM_WORLD</span><span class="p">)</span> <span class="k">const</span> <span class="o">=</span> <span class="mi">0</span><span class="p">;</span>
+  <span class="k">virtual</span> <span class="kt">void</span> <span class="n">finalize</span><span class="p">()</span> <span class="o">=</span> <span class="mi">0</span><span class="p">;</span>
+  <span class="k">static</span> <span class="k">const</span> <span class="kt">size_t</span> <span class="n">RECV_ANY_SOURCE</span> <span class="o">=</span> <span class="p">(</span><span class="kt">size_t</span><span class="p">)</span><span class="n">MPI_ANY_SOURCE</span><span class="p">;</span>
+  <span class="c1">// helper templates</span>
+<span class="k">private</span><span class="o">:</span>
+  <span class="k">static</span> <span class="n">MPI_Datatype</span> <span class="n">getDataType</span><span class="p">(</span><span class="k">const</span> <span class="kt">float</span><span class="o">*</span><span class="p">)</span>              <span class="p">{</span> <span class="k">return</span> <span class="n">MPI_FLOAT</span><span class="p">;</span> <span class="p">}</span>
+  <span class="k">static</span> <span class="n">MPI_Datatype</span> <span class="n">getDataType</span><span class="p">(</span><span class="k">const</span> <span class="kt">unsigned</span> <span class="kt">long</span><span class="o">*</span><span class="p">)</span>      <span class="p">{</span> <span class="k">return</span> <span class="n">MPI_UNSIGNED_LONG</span><span class="p">;</span> <span class="p">}</span>
+  <span class="k">static</span> <span class="n">MPI_Datatype</span> <span class="n">getDataType</span><span class="p">(</span><span class="k">const</span> <span class="kt">unsigned</span> <span class="kt">long</span> <span class="kt">long</span><span class="o">*</span><span class="p">)</span> <span class="p">{</span> <span class="k">return</span> <span class="n">MPI_UNSIGNED_LONG_LONG</span><span class="p">;</span> <span class="p">}</span>
+<span class="k">public</span><span class="o">:</span>
+  <span class="k">template</span><span class="o">&lt;</span><span class="k">typename</span> <span class="nc">T</span><span class="o">&gt;</span>
+  <span class="kt">void</span> <span class="n">bCast</span><span class="p">(</span><span class="n">std</span><span class="o">::</span><span class="n">vector</span><span class="o">&lt;</span><span class="n">T</span><span class="o">&gt;&amp;</span> <span class="n">v</span><span class="p">,</span> <span class="kt">size_t</span> <span class="n">rootRank</span> <span class="o">=</span> <span class="mi">0</span><span class="p">,</span> <span class="n">MPI_Comm</span> <span class="n">comm</span> <span class="o">=</span> <span class="n">MPI_COMM_WORLD</span><span class="p">)</span> <span class="p">{</span>
+    <span class="kt">unsigned</span> <span class="kt">long</span> <span class="kt">long</span> <span class="n">vecLen</span> <span class="o">=</span> <span class="p">(</span><span class="kt">unsigned</span> <span class="kt">long</span> <span class="kt">long</span><span class="p">)</span><span class="n">v</span><span class="p">.</span><span class="n">size</span><span class="p">();</span> <span class="c1">// only value from rootRank is used here</span>
+    <span class="n">bCast</span><span class="p">(</span><span class="o">&amp;</span><span class="n">vecLen</span><span class="p">,</span> <span class="mi">1</span><span class="p">,</span> <span class="n">getDataType</span><span class="p">(</span><span class="o">&amp;</span><span class="n">vecLen</span><span class="p">),</span> <span class="n">rootRank</span><span class="p">,</span> <span class="n">comm</span><span class="p">);</span>
+    <span class="n">v</span><span class="p">.</span><span class="n">resize</span><span class="p">(</span><span class="n">vecLen</span><span class="p">);</span>
+    <span class="n">bCast</span><span class="p">(</span><span class="n">v</span><span class="p">.</span><span class="n">data</span><span class="p">(),</span> <span class="n">v</span><span class="p">.</span><span class="n">size</span><span class="p">(),</span> <span class="n">getDataType</span><span class="p">(</span><span class="n">v</span><span class="p">.</span><span class="n">data</span><span class="p">()),</span> <span class="n">rootRank</span><span class="p">,</span> <span class="n">comm</span><span class="p">);</span>
+  <span class="p">}</span>
+  <span class="n">std</span><span class="o">::</span><span class="n">string</span> <span class="n">idStr</span><span class="p">()</span> <span class="k">const</span><span class="p">;</span>
+<span class="p">};</span>
+
+<span class="n">Ptr</span><span class="o">&lt;</span><span class="n">IMPIWrapper</span><span class="o">&gt;</span> <span class="n">initMPI</span><span class="p">(</span><span class="kt">bool</span> <span class="n">multiThreaded</span><span class="p">);</span>
+<span class="kt">void</span> <span class="nf">finalizeMPI</span><span class="p">(</span><span class="n">Ptr</span><span class="o">&lt;</span><span class="n">IMPIWrapper</span><span class="o">&gt;&amp;&amp;</span><span class="p">);</span>
+
+<span class="c1">// DefaultCommunicator is used when we cannot use NCCLCommunicator, e.g. if it is not compiled in</span>
+<span class="k">class</span> <span class="nc">DefaultCommunicator</span> <span class="o">:</span> <span class="k">public</span> <span class="n">ICommunicator</span> <span class="p">{</span>
+<span class="k">private</span><span class="o">:</span>
+  <span class="n">std</span><span class="o">::</span><span class="n">vector</span><span class="o">&lt;</span><span class="n">Ptr</span><span class="o">&lt;</span><span class="n">TensorAllocator</span><span class="o">&gt;&gt;</span> <span class="n">paramsAllocs_</span><span class="p">;</span>
+  <span class="n">std</span><span class="o">::</span><span class="n">vector</span><span class="o">&lt;</span><span class="n">Tensor</span><span class="o">&gt;</span> <span class="n">tmpTensors_</span><span class="p">;</span>
+
+  <span class="kt">void</span> <span class="nf">lazyInit</span><span class="p">()</span> <span class="p">{</span>
+    <span class="k">if</span><span class="p">(</span><span class="n">tmpTensors_</span><span class="p">.</span><span class="n">size</span><span class="p">()</span> <span class="o">==</span> <span class="mi">0</span><span class="p">)</span> <span class="p">{</span>
+      <span class="kt">int</span> <span class="n">totalSize</span> <span class="o">=</span> <span class="p">(</span><span class="kt">int</span><span class="p">)</span><span class="n">graphs_</span><span class="p">[</span><span class="mi">0</span><span class="p">]</span><span class="o">-&gt;</span><span class="n">params</span><span class="p">()</span><span class="o">-&gt;</span><span class="n">vals</span><span class="p">()</span><span class="o">-&gt;</span><span class="n">size</span><span class="p">();</span>
+      <span class="kt">int</span> <span class="n">shardSize</span> <span class="o">=</span> <span class="p">(</span><span class="kt">int</span><span class="p">)</span><span class="n">ceil</span><span class="p">(</span><span class="n">totalSize</span> <span class="o">/</span> <span class="p">(</span><span class="kt">float</span><span class="p">)</span><span class="n">graphs_</span><span class="p">.</span><span class="n">size</span><span class="p">());</span>
+
+      <span class="kt">int</span> <span class="n">pos</span> <span class="o">=</span> <span class="mi">0</span><span class="p">;</span>
+      <span class="k">for</span><span class="p">(</span><span class="k">auto</span> <span class="nl">graph</span> <span class="p">:</span> <span class="n">graphs_</span><span class="p">)</span> <span class="p">{</span>
+        <span class="kt">int</span> <span class="n">__size__</span> <span class="o">=</span> <span class="n">std</span><span class="o">::</span><span class="n">min</span><span class="p">(</span><span class="n">shardSize</span><span class="p">,</span> <span class="n">totalSize</span><span class="p">);</span>
+
+        <span class="k">auto</span> <span class="n">paramsAlloc</span> <span class="o">=</span> <span class="n">New</span><span class="o">&lt;</span><span class="n">TensorAllocator</span><span class="o">&gt;</span><span class="p">(</span><span class="n">graph</span><span class="o">-&gt;</span><span class="n">getBackend</span><span class="p">());</span>
+        <span class="n">paramsAllocs_</span><span class="p">.</span><span class="n">push_back</span><span class="p">(</span><span class="n">paramsAlloc</span><span class="p">);</span>
+
+        <span class="n">paramsAlloc</span><span class="o">-&gt;</span><span class="n">reserveExact</span><span class="p">(</span><span class="n">__size__</span> <span class="o">*</span> <span class="k">sizeof</span><span class="p">(</span><span class="kt">float</span><span class="p">));</span>
+
+        <span class="n">Tensor</span> <span class="n">tmp</span><span class="p">;</span>
+
+        <span class="n">paramsAlloc</span><span class="o">-&gt;</span><span class="n">allocate</span><span class="p">(</span><span class="n">tmp</span><span class="p">,</span> <span class="p">{</span><span class="mi">1</span><span class="p">,</span> <span class="n">__size__</span><span class="p">});</span>
+        <span class="n">tmpTensors_</span><span class="p">.</span><span class="n">push_back</span><span class="p">(</span><span class="n">tmp</span><span class="p">);</span>
+
+        <span class="c1">// move to next shard</span>
+        <span class="n">pos</span> <span class="o">+=</span> <span class="n">__size__</span><span class="p">;</span>
+        <span class="n">totalSize</span> <span class="o">-=</span> <span class="n">__size__</span><span class="p">;</span>
+      <span class="p">}</span>
+    <span class="p">}</span>
+  <span class="p">}</span>
+
+<span class="k">public</span><span class="o">:</span>
+  <span class="n">DefaultCommunicator</span><span class="p">(</span><span class="k">const</span> <span class="n">std</span><span class="o">::</span><span class="n">vector</span><span class="o">&lt;</span><span class="n">Ptr</span><span class="o">&lt;</span><span class="n">ExpressionGraph</span><span class="o">&gt;&gt;&amp;</span> <span class="n">graphs</span><span class="p">,</span> <span class="n">Ptr</span><span class="o">&lt;</span><span class="n">IMPIWrapper</span><span class="o">&gt;</span> <span class="n">mpi</span><span class="p">)</span>
+      <span class="o">:</span> <span class="n">ICommunicator</span><span class="p">(</span><span class="n">graphs</span><span class="p">)</span> <span class="p">{</span>
+    <span class="n">ABORT_IF</span><span class="p">(</span><span class="n">mpi</span> <span class="o">&amp;&amp;</span> <span class="n">mpi</span><span class="o">-&gt;</span><span class="n">numMPIProcesses</span><span class="p">()</span> <span class="o">!=</span> <span class="mi">1</span><span class="p">,</span> <span class="s">&quot;DefaultCommunicator does not support multi-process MPI&quot;</span><span class="p">);</span>
+  <span class="p">}</span>
+
+  <span class="o">~</span><span class="n">DefaultCommunicator</span><span class="p">()</span> <span class="k">override</span> <span class="p">{}</span>
+
+  <span class="kt">void</span> <span class="n">foreach</span><span class="p">(</span><span class="k">const</span> <span class="n">ForeachFunc</span><span class="o">&amp;</span> <span class="n">func</span><span class="p">,</span> <span class="kt">bool</span> <span class="n">parallel</span> <span class="o">=</span> <span class="nb">true</span><span class="p">)</span> <span class="k">const</span> <span class="k">override</span> <span class="p">{</span>
+    <span class="n">parallel</span> <span class="o">&amp;=</span> <span class="n">graphs_</span><span class="p">.</span><span class="n">size</span><span class="p">()</span> <span class="o">&gt;</span> <span class="mi">1</span><span class="p">;</span>
+
+    <span class="kt">size_t</span> <span class="n">totalSize</span> <span class="o">=</span> <span class="n">graphs_</span><span class="p">[</span><span class="mi">0</span><span class="p">]</span><span class="o">-&gt;</span><span class="n">params</span><span class="p">()</span><span class="o">-&gt;</span><span class="n">vals</span><span class="p">()</span><span class="o">-&gt;</span><span class="n">size</span><span class="p">();</span>
+    <span class="kt">size_t</span> <span class="n">shardSize</span> <span class="o">=</span> <span class="p">(</span><span class="kt">size_t</span><span class="p">)</span><span class="n">ceil</span><span class="p">(</span><span class="n">totalSize</span> <span class="o">/</span> <span class="p">(</span><span class="kt">float</span><span class="p">)</span><span class="n">graphs_</span><span class="p">.</span><span class="n">size</span><span class="p">());</span>
+
+    <span class="kt">size_t</span> <span class="n">pos</span> <span class="o">=</span> <span class="mi">0</span><span class="p">;</span>
+    <span class="n">std</span><span class="o">::</span><span class="n">vector</span><span class="o">&lt;</span><span class="n">std</span><span class="o">::</span><span class="kr">thread</span><span class="o">&gt;</span> <span class="n">group</span><span class="p">;</span>
+    <span class="c1">// iterate over all shards</span>
+    <span class="k">for</span><span class="p">(</span><span class="kt">size_t</span> <span class="n">idx</span> <span class="o">=</span> <span class="mi">0</span><span class="p">;</span> <span class="n">idx</span> <span class="o">&lt;</span> <span class="n">graphs_</span><span class="p">.</span><span class="n">size</span><span class="p">();</span> <span class="o">++</span><span class="n">idx</span><span class="p">)</span> <span class="p">{</span>
+      <span class="kt">size_t</span> <span class="n">size</span> <span class="o">=</span> <span class="n">std</span><span class="o">::</span><span class="n">min</span><span class="p">(</span><span class="n">shardSize</span><span class="p">,</span> <span class="n">totalSize</span><span class="p">);</span>
+
+      <span class="k">if</span> <span class="p">(</span><span class="n">parallel</span><span class="p">)</span>
+        <span class="n">group</span><span class="p">.</span><span class="n">emplace_back</span><span class="p">(</span><span class="n">func</span><span class="p">,</span> <span class="n">idx</span><span class="p">,</span> <span class="n">pos</span><span class="p">,</span> <span class="n">pos</span><span class="o">+</span><span class="n">size</span><span class="p">);</span>
+      <span class="k">else</span>
+        <span class="nf">func</span><span class="p">(</span><span class="n">idx</span><span class="p">,</span> <span class="n">pos</span><span class="p">,</span> <span class="n">pos</span><span class="o">+</span><span class="n">size</span><span class="p">);</span>
+
+      <span class="n">pos</span> <span class="o">+=</span> <span class="n">size</span><span class="p">;</span>
+      <span class="n">totalSize</span> <span class="o">-=</span> <span class="n">size</span><span class="p">;</span>
+    <span class="p">}</span>
+    <span class="k">for</span><span class="p">(</span><span class="k">auto</span><span class="o">&amp;</span> <span class="nl">t</span> <span class="p">:</span> <span class="n">group</span><span class="p">)</span> <span class="c1">// (note: group is empty is not parallel)</span>
+      <span class="n">t</span><span class="p">.</span><span class="n">join</span><span class="p">();</span>
+  <span class="p">}</span>
+
+  <span class="kt">void</span> <span class="n">scatterReduceAndResetGrads</span><span class="p">()</span> <span class="k">const</span> <span class="k">override</span> <span class="p">{</span>
+    <span class="k">const_cast</span><span class="o">&lt;</span><span class="n">DefaultCommunicator</span><span class="o">*&gt;</span><span class="p">(</span><span class="k">this</span><span class="p">)</span><span class="o">-&gt;</span><span class="n">lazyInit</span><span class="p">();</span>
+
+    <span class="c1">// Gather gradients from different devices into current gradient shards</span>
+    <span class="k">auto</span> <span class="n">scatter</span> <span class="o">=</span> <span class="p">[</span><span class="k">this</span><span class="p">](</span><span class="kt">size_t</span> <span class="n">idx</span><span class="p">,</span> <span class="kt">size_t</span> <span class="n">begin</span><span class="p">,</span> <span class="kt">size_t</span> <span class="n">end</span><span class="p">)</span> <span class="p">{</span>
+      <span class="k">auto</span> <span class="n">curGrad</span> <span class="o">=</span> <span class="n">graphs_</span><span class="p">[</span><span class="n">idx</span><span class="p">]</span><span class="o">-&gt;</span><span class="n">params</span><span class="p">()</span><span class="o">-&gt;</span><span class="n">grads</span><span class="p">()</span><span class="o">-&gt;</span><span class="n">subtensor</span><span class="p">(</span><span class="n">begin</span><span class="p">,</span> <span class="n">end</span><span class="o">-</span><span class="n">begin</span><span class="p">);</span>
+
+      <span class="c1">// collect and sum gradients</span>
+      <span class="k">for</span><span class="p">(</span><span class="k">auto</span> <span class="nl">graph</span> <span class="p">:</span> <span class="n">graphs_</span><span class="p">)</span> <span class="p">{</span>
+        <span class="k">if</span><span class="p">(</span><span class="n">graph</span> <span class="o">!=</span> <span class="n">graphs_</span><span class="p">[</span><span class="n">idx</span><span class="p">])</span> <span class="p">{</span>
+          <span class="k">auto</span> <span class="n">subGrad</span> <span class="o">=</span> <span class="n">graph</span><span class="o">-&gt;</span><span class="n">params</span><span class="p">()</span><span class="o">-&gt;</span><span class="n">grads</span><span class="p">()</span><span class="o">-&gt;</span><span class="n">subtensor</span><span class="p">(</span><span class="n">begin</span><span class="p">,</span> <span class="n">end</span> <span class="o">-</span> <span class="n">begin</span><span class="p">);</span>
+          <span class="n">tmpTensors_</span><span class="p">[</span><span class="n">idx</span><span class="p">]</span><span class="o">-&gt;</span><span class="n">copyFrom</span><span class="p">(</span><span class="n">subGrad</span><span class="p">);</span>
+
+          <span class="k">using</span> <span class="k">namespace</span> <span class="n">functional</span><span class="p">;</span>
+          <span class="n">Element</span><span class="p">(</span><span class="n">_1</span> <span class="o">=</span> <span class="n">_1</span> <span class="o">+</span> <span class="n">_2</span><span class="p">,</span> <span class="n">curGrad</span><span class="p">,</span> <span class="n">tmpTensors_</span><span class="p">[</span><span class="n">idx</span><span class="p">]);</span>
+        <span class="p">}</span>
+      <span class="p">}</span>
+    <span class="p">};</span>
+
+    <span class="c1">// reset gradients outside current shard</span>
+    <span class="k">auto</span> <span class="n">reset</span> <span class="o">=</span> <span class="p">[</span><span class="k">this</span><span class="p">](</span><span class="kt">size_t</span> <span class="n">idx</span><span class="p">,</span> <span class="kt">size_t</span> <span class="n">begin</span><span class="p">,</span> <span class="kt">size_t</span> <span class="n">end</span><span class="p">)</span> <span class="p">{</span>
+      <span class="k">auto</span> <span class="n">grad</span> <span class="o">=</span> <span class="n">graphs_</span><span class="p">[</span><span class="n">idx</span><span class="p">]</span><span class="o">-&gt;</span><span class="n">params</span><span class="p">()</span><span class="o">-&gt;</span><span class="n">grads</span><span class="p">();</span>
+      <span class="k">if</span> <span class="p">(</span><span class="n">begin</span> <span class="o">&gt;</span> <span class="mi">0</span><span class="p">)</span>
+        <span class="n">grad</span><span class="o">-&gt;</span><span class="n">subtensor</span><span class="p">(</span><span class="mi">0</span><span class="p">,</span> <span class="n">begin</span><span class="p">)</span><span class="o">-&gt;</span><span class="n">set</span><span class="p">(</span><span class="mi">0</span><span class="p">);</span>
+      <span class="k">if</span> <span class="p">(</span><span class="n">end</span> <span class="o">&lt;</span> <span class="n">grad</span><span class="o">-&gt;</span><span class="n">size</span><span class="p">())</span>
+        <span class="n">grad</span><span class="o">-&gt;</span><span class="n">subtensor</span><span class="p">(</span><span class="n">end</span><span class="p">,</span> <span class="n">grad</span><span class="o">-&gt;</span><span class="n">size</span><span class="p">()</span><span class="o">-</span><span class="n">end</span><span class="p">)</span><span class="o">-&gt;</span><span class="n">set</span><span class="p">(</span><span class="mi">0</span><span class="p">);</span>
+    <span class="p">};</span>
+
+    <span class="n">foreach</span><span class="p">(</span><span class="n">scatter</span><span class="p">);</span>
+    <span class="n">foreach</span><span class="p">(</span><span class="n">reset</span><span class="p">);</span>
+  <span class="p">}</span>
+
+  <span class="kt">void</span> <span class="n">allGatherParams</span><span class="p">()</span> <span class="k">const</span> <span class="k">override</span> <span class="p">{</span>
+
+    <span class="c1">// Update all graphs with parameter shard</span>
+    <span class="k">auto</span> <span class="n">gather</span> <span class="o">=</span> <span class="p">[</span><span class="k">this</span><span class="p">](</span><span class="kt">size_t</span> <span class="n">idx</span><span class="p">,</span> <span class="kt">size_t</span> <span class="n">begin</span><span class="p">,</span> <span class="kt">size_t</span> <span class="n">end</span><span class="p">)</span> <span class="p">{</span>
+      <span class="k">auto</span> <span class="n">getShard</span> <span class="o">=</span> <span class="p">[</span><span class="o">&amp;</span><span class="p">](</span><span class="n">Ptr</span><span class="o">&lt;</span><span class="n">ExpressionGraph</span><span class="o">&gt;</span> <span class="n">graph</span><span class="p">)</span> <span class="p">{</span>
+        <span class="k">return</span> <span class="n">graph</span><span class="o">-&gt;</span><span class="n">params</span><span class="p">()</span><span class="o">-&gt;</span><span class="n">vals</span><span class="p">()</span><span class="o">-&gt;</span><span class="n">subtensor</span><span class="p">(</span><span class="n">begin</span><span class="p">,</span> <span class="n">end</span><span class="o">-</span><span class="n">begin</span><span class="p">);</span>
+      <span class="p">};</span>
+      <span class="k">auto</span> <span class="n">curShard</span> <span class="o">=</span> <span class="n">getShard</span><span class="p">(</span><span class="n">graphs_</span><span class="p">[</span><span class="n">idx</span><span class="p">]);</span>
+
+      <span class="c1">// Copy parameter shard to each graph</span>
+      <span class="k">for</span><span class="p">(</span><span class="k">auto</span> <span class="nl">graph</span> <span class="p">:</span> <span class="n">graphs_</span><span class="p">)</span> <span class="p">{</span>
+        <span class="k">if</span><span class="p">(</span><span class="n">graph</span> <span class="o">!=</span> <span class="n">graphs_</span><span class="p">[</span><span class="n">idx</span><span class="p">])</span> <span class="p">{</span>
+          <span class="k">auto</span> <span class="n">subShard</span> <span class="o">=</span> <span class="n">getShard</span><span class="p">(</span><span class="n">graph</span><span class="p">);</span>
+          <span class="n">subShard</span><span class="o">-&gt;</span><span class="n">copyFrom</span><span class="p">(</span><span class="n">curShard</span><span class="p">);</span>
+        <span class="p">}</span>
+      <span class="p">}</span>
+    <span class="p">};</span>
+
+    <span class="n">foreach</span><span class="p">(</span><span class="n">gather</span><span class="p">);</span>
+  <span class="p">}</span>
+
+  <span class="kt">void</span> <span class="n">swapParams</span><span class="p">(</span><span class="k">const</span> <span class="n">std</span><span class="o">::</span><span class="n">vector</span><span class="o">&lt;</span><span class="n">Tensor</span><span class="o">&gt;&amp;</span> <span class="n">paramShards</span><span class="p">)</span> <span class="k">const</span> <span class="k">override</span> <span class="p">{</span>
+    <span class="c1">// Update all graphs with parameter shard</span>
+    <span class="k">auto</span> <span class="n">gather</span> <span class="o">=</span> <span class="p">[</span><span class="k">this</span><span class="p">,</span> <span class="n">paramShards</span><span class="p">](</span><span class="kt">size_t</span> <span class="n">idx</span><span class="p">,</span> <span class="kt">size_t</span> <span class="n">begin</span><span class="p">,</span> <span class="kt">size_t</span> <span class="n">end</span><span class="p">)</span> <span class="p">{</span>
+      <span class="n">ABORT_IF</span><span class="p">(</span><span class="n">end</span> <span class="o">-</span> <span class="n">begin</span> <span class="o">!=</span> <span class="n">paramShards</span><span class="p">[</span><span class="n">idx</span><span class="p">]</span><span class="o">-&gt;</span><span class="n">size</span><span class="p">(),</span> <span class="s">&quot;inconsistent shard size (swapParams, [{}], {} vs {})??&quot;</span><span class="p">,</span> <span class="n">idx</span><span class="p">,</span> <span class="n">end</span><span class="o">-</span><span class="n">begin</span><span class="p">,</span> <span class="n">paramShards</span><span class="p">[</span><span class="n">idx</span><span class="p">]</span><span class="o">-&gt;</span><span class="n">size</span><span class="p">());</span>
+      <span class="c1">// Copy parameter shard to each graph, apart from last graph</span>
+      <span class="k">for</span><span class="p">(</span><span class="kt">int</span> <span class="n">i</span> <span class="o">=</span> <span class="mi">0</span><span class="p">;</span> <span class="n">i</span> <span class="o">&lt;</span> <span class="p">(</span><span class="kt">int</span><span class="p">)</span><span class="n">graphs_</span><span class="p">.</span><span class="n">size</span><span class="p">()</span> <span class="o">-</span> <span class="mi">1</span><span class="p">;</span> <span class="o">++</span><span class="n">i</span><span class="p">)</span> <span class="p">{</span>
+        <span class="k">auto</span> <span class="n">subParam</span> <span class="o">=</span> <span class="n">graphs_</span><span class="p">[</span><span class="n">i</span><span class="p">]</span><span class="o">-&gt;</span><span class="n">params</span><span class="p">()</span><span class="o">-&gt;</span><span class="n">vals</span><span class="p">()</span><span class="o">-&gt;</span><span class="n">subtensor</span><span class="p">(</span><span class="n">begin</span><span class="p">,</span> <span class="n">paramShards</span><span class="p">[</span><span class="n">idx</span><span class="p">]</span><span class="o">-&gt;</span><span class="n">size</span><span class="p">());</span>
+        <span class="n">subParam</span><span class="o">-&gt;</span><span class="n">copyFrom</span><span class="p">(</span><span class="n">paramShards</span><span class="p">[</span><span class="n">idx</span><span class="p">]);</span>
+      <span class="p">}</span>
+
+      <span class="c1">// Swap shard with corresponding share from last graph</span>
+      <span class="k">auto</span> <span class="n">subParamLast</span> <span class="o">=</span> <span class="n">graphs_</span><span class="p">.</span><span class="n">back</span><span class="p">()</span><span class="o">-&gt;</span><span class="n">params</span><span class="p">()</span><span class="o">-&gt;</span><span class="n">vals</span><span class="p">()</span><span class="o">-&gt;</span><span class="n">subtensor</span><span class="p">(</span><span class="n">begin</span><span class="p">,</span> <span class="n">paramShards</span><span class="p">[</span><span class="n">idx</span><span class="p">]</span><span class="o">-&gt;</span><span class="n">size</span><span class="p">());</span>
+      <span class="n">paramShards</span><span class="p">[</span><span class="n">idx</span><span class="p">]</span><span class="o">-&gt;</span><span class="n">swap</span><span class="p">(</span><span class="n">subParamLast</span><span class="p">);</span>
+    <span class="p">};</span>
+    <span class="c1">// Execute for each shard</span>
+    <span class="n">foreach</span><span class="p">(</span><span class="n">gather</span><span class="p">);</span>
+  <span class="p">}</span>
+
+  <span class="kt">void</span> <span class="n">scatterState</span><span class="p">(</span><span class="k">const</span> <span class="n">std</span><span class="o">::</span><span class="n">vector</span><span class="o">&lt;</span><span class="kt">float</span><span class="o">&gt;&amp;</span> <span class="n">data</span><span class="p">,</span> <span class="k">const</span> <span class="n">OptimizerBase</span><span class="o">::</span><span class="n">ScatterStateSetFunc</span><span class="o">&amp;</span> <span class="n">setFn</span><span class="p">)</span> <span class="k">const</span> <span class="k">override</span> <span class="p">{</span>
+    <span class="kt">size_t</span> <span class="n">dataSize</span> <span class="o">=</span> <span class="n">data</span><span class="p">.</span><span class="n">size</span><span class="p">();</span>
+    <span class="kt">size_t</span> <span class="n">numLocalDevices</span> <span class="o">=</span> <span class="n">graphs_</span><span class="p">.</span><span class="n">size</span><span class="p">();</span>
+    <span class="kt">size_t</span> <span class="n">shardSize</span> <span class="o">=</span> <span class="p">(</span><span class="n">dataSize</span> <span class="o">+</span> <span class="n">numLocalDevices</span> <span class="o">-</span> <span class="mi">1</span><span class="p">)</span> <span class="o">/</span> <span class="n">numLocalDevices</span><span class="p">;</span><span class="c1">// (size_t)(ceil(dataSize / (float)numLocalDevices));</span>
+    <span class="k">for</span><span class="p">(</span><span class="kt">size_t</span> <span class="n">localDeviceIndex</span> <span class="o">=</span> <span class="mi">0</span><span class="p">;</span> <span class="n">localDeviceIndex</span> <span class="o">&lt;</span> <span class="n">numLocalDevices</span><span class="p">;</span> <span class="n">localDeviceIndex</span><span class="o">++</span><span class="p">)</span> <span class="p">{</span>
+      <span class="kt">size_t</span> <span class="n">begin</span> <span class="o">=</span> <span class="n">localDeviceIndex</span> <span class="o">*</span> <span class="n">shardSize</span><span class="p">;</span>
+      <span class="kt">size_t</span> <span class="n">end</span>   <span class="o">=</span> <span class="n">std</span><span class="o">::</span><span class="n">min</span><span class="p">(</span><span class="n">begin</span> <span class="o">+</span> <span class="n">shardSize</span><span class="p">,</span> <span class="n">dataSize</span><span class="p">);</span>
+      <span class="n">setFn</span><span class="p">(</span><span class="n">localDeviceIndex</span><span class="p">,</span> <span class="n">data</span><span class="p">.</span><span class="n">begin</span><span class="p">()</span> <span class="o">+</span> <span class="n">begin</span><span class="p">,</span> <span class="n">data</span><span class="p">.</span><span class="n">begin</span><span class="p">()</span> <span class="o">+</span> <span class="n">end</span><span class="p">);</span>
+    <span class="p">}</span>
+  <span class="p">}</span>
+
+  <span class="n">std</span><span class="o">::</span><span class="n">vector</span><span class="o">&lt;</span><span class="kt">float</span><span class="o">&gt;</span> <span class="n">gatherState</span><span class="p">(</span><span class="k">const</span> <span class="n">OptimizerBase</span><span class="o">::</span><span class="n">GatherStateGetFunc</span><span class="o">&amp;</span> <span class="n">getFn</span><span class="p">)</span> <span class="k">const</span> <span class="k">override</span> <span class="p">{</span>
+    <span class="n">std</span><span class="o">::</span><span class="n">vector</span><span class="o">&lt;</span><span class="kt">float</span><span class="o">&gt;</span> <span class="n">data</span><span class="p">;</span> <span class="c1">// we know the size here</span>
+    <span class="k">for</span> <span class="p">(</span><span class="kt">size_t</span> <span class="n">localDeviceIndex</span> <span class="o">=</span> <span class="mi">0</span><span class="p">;</span> <span class="n">localDeviceIndex</span> <span class="o">&lt;</span> <span class="n">graphs_</span><span class="p">.</span><span class="n">size</span><span class="p">();</span> <span class="n">localDeviceIndex</span><span class="o">++</span><span class="p">)</span> <span class="p">{</span>
+      <span class="n">std</span><span class="o">::</span><span class="n">vector</span><span class="o">&lt;</span><span class="kt">float</span><span class="o">&gt;</span> <span class="n">tmp</span> <span class="o">=</span> <span class="n">getFn</span><span class="p">(</span><span class="n">localDeviceIndex</span><span class="p">);</span>
+      <span class="n">data</span><span class="p">.</span><span class="n">insert</span><span class="p">(</span><span class="n">data</span><span class="p">.</span><span class="n">end</span><span class="p">(),</span> <span class="n">tmp</span><span class="p">.</span><span class="n">begin</span><span class="p">(),</span> <span class="n">tmp</span><span class="p">.</span><span class="n">end</span><span class="p">());</span>
+    <span class="p">}</span>
+    <span class="n">ABORT_IF</span><span class="p">(</span><span class="n">data</span><span class="p">.</span><span class="n">size</span><span class="p">()</span> <span class="o">!=</span> <span class="n">graphs_</span><span class="p">[</span><span class="mi">0</span><span class="p">]</span><span class="o">-&gt;</span><span class="n">params</span><span class="p">()</span><span class="o">-&gt;</span><span class="n">vals</span><span class="p">()</span><span class="o">-&gt;</span><span class="n">size</span><span class="p">(),</span> <span class="s">&quot;gathering wrong amount of data??&quot;</span><span class="p">);</span>
+    <span class="k">return</span> <span class="n">data</span><span class="p">;</span>
+  <span class="p">}</span>
+<span class="p">};</span>
+
+<span class="n">Ptr</span><span class="o">&lt;</span><span class="n">ICommunicator</span><span class="o">&gt;</span> <span class="n">createCommunicator</span><span class="p">(</span>
+    <span class="k">const</span> <span class="n">std</span><span class="o">::</span><span class="n">vector</span><span class="o">&lt;</span><span class="n">Ptr</span><span class="o">&lt;</span><span class="n">ExpressionGraph</span><span class="o">&gt;&gt;&amp;</span> <span class="n">graphs</span><span class="p">,</span>
+    <span class="kt">bool</span> <span class="n">noNccl</span><span class="p">,</span> <span class="n">Ptr</span><span class="o">&lt;</span><span class="n">IMPIWrapper</span><span class="o">&gt;</span> <span class="n">mpi</span><span class="p">);</span>
+
+<span class="p">}</span>  <span class="c1">// namespace marian</span>
+</pre></div>
+</div>
+</div>
+
+
+           </div>
+           
+          </div>
+          <footer>
+
+  <hr/>
+
+  <div role="contentinfo">
+    <p>
+        &#169; Copyright 2021, Marian NMT Team.
+
+    </p>
+  </div>
+    
+    
+    
+    Built with <a href="https://www.sphinx-doc.org/">Sphinx</a> using a
+    
+    <a href="https://github.com/readthedocs/sphinx_rtd_theme">theme</a>
+    
+    provided by <a href="https://readthedocs.org">Read the Docs</a>. 
+
+</footer>
+        </div>
+      </div>
+
+    </section>
+
+  </div>
+  
+
+  <script type="text/javascript">
+      jQuery(function () {
+          SphinxRtdTheme.Navigation.enable(true);
+      });
+  </script>
+
+  
+  
+    
+   
+
+</body>
+</html>

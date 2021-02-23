@@ -1,0 +1,333 @@
+
+
+<!DOCTYPE html>
+<html class="writer-html5" lang="en" >
+<head>
+  <meta charset="utf-8" />
+  
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  
+  <title>Program Listing for File factory.h &mdash; Marian NMT v1.10.1 2021-02-23 documentation</title>
+  
+
+  
+  <link rel="stylesheet" href="../_static/css/theme.css" type="text/css" />
+  <link rel="stylesheet" href="../_static/pygments.css" type="text/css" />
+  <link rel="stylesheet" href="../_static/css/custom.css" type="text/css" />
+  <link rel="stylesheet" href="../_static/collapsible-lists/css/tree_view.css" type="text/css" />
+
+  
+  
+
+  
+  
+
+  
+    <link rel="canonical" href="http://marian-nmt.github.io/docs/api/api/program_listing_file_src_layers_factory.h.html" />
+
+  
+  <!--[if lt IE 9]>
+    <script src="../_static/js/html5shiv.min.js"></script>
+  <![endif]-->
+  
+    
+      <script type="text/javascript" id="documentation_options" data-url_root="../" src="../_static/documentation_options.js"></script>
+        <script src="../_static/jquery.js"></script>
+        <script src="../_static/underscore.js"></script>
+        <script src="../_static/doctools.js"></script>
+        <script src="../_static/language_data.js"></script>
+        <script src="../_static/collapsible-lists/js/CollapsibleLists.compressed.js"></script>
+        <script src="../_static/collapsible-lists/js/apply-collapsible-lists.js"></script>
+    
+    <script type="text/javascript" src="../_static/js/theme.js"></script>
+
+    
+    <link rel="index" title="Index" href="../genindex.html" />
+    <link rel="search" title="Search" href="../search.html" /> 
+</head>
+
+<body class="wy-body-for-nav">
+
+   
+  <div class="wy-grid-for-nav">
+    
+    <nav data-toggle="wy-nav-shift" class="wy-nav-side">
+      <div class="wy-side-scroll">
+        <div class="wy-side-nav-search" >
+          
+
+          
+            <a href="../index.html" class="icon icon-home"> Marian NMT
+          
+
+          
+          </a>
+
+          
+            
+            
+              <div class="version">
+                v1.10.1
+              </div>
+            
+          
+
+          
+<div role="search">
+  <form id="rtd-search-form" class="wy-form" action="../search.html" method="get">
+    <input type="text" name="q" placeholder="Search docs" />
+    <input type="hidden" name="check_keywords" value="yes" />
+    <input type="hidden" name="area" value="default" />
+  </form>
+</div>
+
+          
+        </div>
+
+        
+        <div class="wy-menu wy-menu-vertical" data-spy="affix" role="navigation" aria-label="main navigation">
+          
+            
+            
+              
+            
+            
+              <p class="caption"><span class="caption-text">Contents:</span></p>
+<ul>
+<li class="toctree-l1"><a class="reference internal" href="../install.html">Installation</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../graph.html">Expression graphs</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../operators.html">Graph operations</a></li>
+<li class="toctree-l1"><a class="reference internal" href="library_index.html">Library API</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../contributing.html">How to contribute to Marian</a></li>
+</ul>
+
+            
+          
+        </div>
+        
+      </div>
+    </nav>
+
+    <section data-toggle="wy-nav-shift" class="wy-nav-content-wrap">
+
+      
+      <nav class="wy-nav-top" aria-label="top navigation">
+        
+          <i data-toggle="wy-nav-top" class="fa fa-bars"></i>
+          <a href="../index.html">Marian NMT</a>
+        
+      </nav>
+
+
+      <div class="wy-nav-content">
+        
+        <div class="rst-content">
+        
+          
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+<div role="navigation" aria-label="breadcrumbs navigation">
+
+  <ul class="wy-breadcrumbs">
+    
+      <li><a href="../index.html" class="icon icon-home"></a> &raquo;</li>
+        
+      <li>Program Listing for File factory.h</li>
+    
+    
+      <li class="wy-breadcrumbs-aside">
+        
+          
+            <a href="../_sources/api/program_listing_file_src_layers_factory.h.rst.txt" rel="nofollow"> View page source</a>
+          
+        
+      </li>
+    
+  </ul>
+
+  
+  <hr/>
+</div>
+          <div role="main" class="document" itemscope="itemscope" itemtype="http://schema.org/Article">
+           <div itemprop="articleBody">
+            
+  <div class="section" id="program-listing-for-file-factory-h">
+<span id="program-listing-file-src-layers-factory-h"></span><h1>Program Listing for File factory.h<a class="headerlink" href="#program-listing-for-file-factory-h" title="Permalink to this headline">¶</a></h1>
+<p>↰ <a class="reference internal" href="file_src_layers_factory.h.html#file-src-layers-factory-h"><span class="std std-ref">Return to documentation for file</span></a> (<code class="docutils literal notranslate"><span class="pre">src/layers/factory.h</span></code>)</p>
+<div class="highlight-cpp notranslate"><div class="highlight"><pre><span></span><span class="cp">#pragma once</span>
+
+<span class="cp">#include</span> <span class="cpf">&quot;marian.h&quot;</span><span class="cp"></span>
+
+<span class="k">namespace</span> <span class="n">marian</span> <span class="p">{</span>
+
+<span class="k">class</span> <span class="nc">Factory</span> <span class="o">:</span> <span class="k">public</span> <span class="n">std</span><span class="o">::</span><span class="n">enable_shared_from_this</span><span class="o">&lt;</span><span class="n">Factory</span><span class="o">&gt;</span> <span class="p">{</span>
+<span class="k">protected</span><span class="o">:</span>
+  <span class="n">Ptr</span><span class="o">&lt;</span><span class="n">Options</span><span class="o">&gt;</span> <span class="n">options_</span><span class="p">;</span>
+
+<span class="k">public</span><span class="o">:</span>
+  <span class="c1">// construct with empty options</span>
+  <span class="n">Factory</span><span class="p">()</span> <span class="o">:</span> <span class="n">options_</span><span class="p">(</span><span class="n">New</span><span class="o">&lt;</span><span class="n">Options</span><span class="o">&gt;</span><span class="p">())</span> <span class="p">{}</span>
+  <span class="c1">// construct with options</span>
+  <span class="n">Factory</span><span class="p">(</span><span class="n">Ptr</span><span class="o">&lt;</span><span class="n">Options</span><span class="o">&gt;</span> <span class="n">options</span><span class="p">)</span> <span class="o">:</span> <span class="n">Factory</span><span class="p">()</span> <span class="p">{</span>
+    <span class="n">options_</span><span class="o">-&gt;</span><span class="n">merge</span><span class="p">(</span><span class="n">options</span><span class="p">);</span>
+  <span class="p">}</span>
+  <span class="c1">// construct with one or more individual option parameters</span>
+  <span class="c1">// Factory(&quot;var1&quot;, val1, &quot;var2&quot;, val2, ...)</span>
+  <span class="k">template</span> <span class="o">&lt;</span><span class="k">typename</span> <span class="nc">T</span><span class="p">,</span> <span class="k">typename</span><span class="p">...</span> <span class="n">Args</span><span class="o">&gt;</span>
+  <span class="n">Factory</span><span class="p">(</span><span class="k">const</span> <span class="n">std</span><span class="o">::</span><span class="n">string</span><span class="o">&amp;</span> <span class="n">key</span><span class="p">,</span> <span class="n">T</span> <span class="n">value</span><span class="p">,</span> <span class="n">Args</span><span class="o">&amp;&amp;</span><span class="p">...</span> <span class="n">moreArgs</span><span class="p">)</span> <span class="o">:</span> <span class="n">Factory</span><span class="p">()</span> <span class="p">{</span>
+    <span class="n">setOpts</span><span class="p">(</span><span class="n">key</span><span class="p">,</span> <span class="n">value</span><span class="p">,</span> <span class="n">std</span><span class="o">::</span><span class="n">forward</span><span class="o">&lt;</span><span class="n">Args</span><span class="o">&gt;</span><span class="p">(</span><span class="n">moreArgs</span><span class="p">)...);</span>
+  <span class="p">}</span>
+  <span class="c1">// construct with options and one or more individual option parameters</span>
+  <span class="c1">// Factory(options, &quot;var1&quot;, val1, &quot;var2&quot;, val2, ...)</span>
+  <span class="k">template</span> <span class="o">&lt;</span><span class="k">typename</span><span class="p">...</span> <span class="n">Args</span><span class="o">&gt;</span>
+  <span class="n">Factory</span><span class="p">(</span><span class="n">Ptr</span><span class="o">&lt;</span><span class="n">Options</span><span class="o">&gt;</span> <span class="n">options</span><span class="p">,</span> <span class="n">Args</span><span class="o">&amp;&amp;</span><span class="p">...</span> <span class="n">args</span><span class="p">)</span> <span class="o">:</span> <span class="n">Factory</span><span class="p">(</span><span class="n">options</span><span class="p">)</span> <span class="p">{</span>
+    <span class="n">setOpts</span><span class="p">(</span><span class="n">std</span><span class="o">::</span><span class="n">forward</span><span class="o">&lt;</span><span class="n">Args</span><span class="o">&gt;</span><span class="p">(</span><span class="n">args</span><span class="p">)...);</span>
+  <span class="p">}</span>
+  <span class="n">Factory</span><span class="p">(</span><span class="k">const</span> <span class="n">Factory</span><span class="o">&amp;</span> <span class="n">factory</span><span class="p">)</span> <span class="o">=</span> <span class="k">default</span><span class="p">;</span>
+
+  <span class="k">virtual</span> <span class="o">~</span><span class="n">Factory</span><span class="p">()</span> <span class="p">{}</span>
+
+  <span class="n">std</span><span class="o">::</span><span class="n">string</span> <span class="n">asYamlString</span><span class="p">()</span> <span class="p">{</span> <span class="k">return</span> <span class="n">options_</span><span class="o">-&gt;</span><span class="n">asYamlString</span><span class="p">();</span> <span class="p">}</span>
+
+  <span class="c1">// retrieve an option</span>
+  <span class="c1">// auto val = opt&lt;T&gt;(&quot;var&quot;);</span>
+  <span class="k">template</span> <span class="o">&lt;</span><span class="k">typename</span> <span class="nc">T</span><span class="o">&gt;</span>
+  <span class="n">T</span> <span class="n">opt</span><span class="p">(</span><span class="k">const</span> <span class="kt">char</span><span class="o">*</span> <span class="k">const</span> <span class="n">key</span><span class="p">)</span> <span class="p">{</span> <span class="k">return</span> <span class="n">options_</span><span class="o">-&gt;</span><span class="n">get</span><span class="o">&lt;</span><span class="n">T</span><span class="o">&gt;</span><span class="p">(</span><span class="n">key</span><span class="p">);</span> <span class="p">}</span>
+
+  <span class="k">template</span> <span class="o">&lt;</span><span class="k">typename</span> <span class="nc">T</span><span class="o">&gt;</span>
+  <span class="n">T</span> <span class="n">opt</span><span class="p">(</span><span class="k">const</span> <span class="kt">char</span><span class="o">*</span> <span class="k">const</span> <span class="n">key</span><span class="p">,</span> <span class="n">T</span> <span class="n">defaultValue</span><span class="p">)</span> <span class="p">{</span> <span class="k">return</span> <span class="n">options_</span><span class="o">-&gt;</span><span class="n">get</span><span class="o">&lt;</span><span class="n">T</span><span class="o">&gt;</span><span class="p">(</span><span class="n">key</span><span class="p">,</span> <span class="n">defaultValue</span><span class="p">);</span> <span class="p">}</span>
+
+  <span class="k">template</span> <span class="o">&lt;</span><span class="k">typename</span> <span class="nc">T</span><span class="o">&gt;</span>
+  <span class="n">T</span> <span class="n">opt</span><span class="p">(</span><span class="k">const</span> <span class="n">std</span><span class="o">::</span><span class="n">string</span><span class="o">&amp;</span> <span class="n">key</span><span class="p">)</span> <span class="p">{</span> <span class="k">return</span> <span class="n">options_</span><span class="o">-&gt;</span><span class="n">get</span><span class="o">&lt;</span><span class="n">T</span><span class="o">&gt;</span><span class="p">(</span><span class="n">key</span><span class="p">.</span><span class="n">c_str</span><span class="p">());</span> <span class="p">}</span>
+
+  <span class="k">template</span> <span class="o">&lt;</span><span class="k">typename</span> <span class="nc">T</span><span class="o">&gt;</span>
+  <span class="n">T</span> <span class="n">opt</span><span class="p">(</span><span class="k">const</span> <span class="n">std</span><span class="o">::</span><span class="n">string</span><span class="o">&amp;</span> <span class="n">key</span><span class="p">,</span> <span class="n">T</span> <span class="n">defaultValue</span><span class="p">)</span> <span class="p">{</span> <span class="k">return</span> <span class="n">options_</span><span class="o">-&gt;</span><span class="n">get</span><span class="o">&lt;</span><span class="n">T</span><span class="o">&gt;</span><span class="p">(</span><span class="n">key</span><span class="p">.</span><span class="n">c_str</span><span class="p">(),</span> <span class="n">defaultValue</span><span class="p">);</span> <span class="p">}</span>
+
+  <span class="c1">// set a single option</span>
+  <span class="c1">// setOpt(&quot;var&quot;, val);</span>
+  <span class="k">template</span> <span class="o">&lt;</span><span class="k">typename</span> <span class="nc">T</span><span class="o">&gt;</span>
+  <span class="kt">void</span> <span class="n">setOpt</span><span class="p">(</span><span class="k">const</span> <span class="n">std</span><span class="o">::</span><span class="n">string</span><span class="o">&amp;</span> <span class="n">key</span><span class="p">,</span> <span class="n">T</span> <span class="n">value</span><span class="p">)</span> <span class="p">{</span> <span class="n">options_</span><span class="o">-&gt;</span><span class="n">set</span><span class="p">(</span><span class="n">key</span><span class="p">,</span> <span class="n">value</span><span class="p">);</span> <span class="p">}</span>
+
+  <span class="c1">// set one or more options at once</span>
+  <span class="c1">// setOpts(&quot;var1&quot;, val1, &quot;var2&quot;, val2, ...);</span>
+  <span class="k">template</span> <span class="o">&lt;</span><span class="k">typename</span> <span class="nc">T</span><span class="p">,</span> <span class="k">typename</span><span class="p">...</span> <span class="n">Args</span><span class="o">&gt;</span>
+  <span class="kt">void</span> <span class="n">setOpts</span><span class="p">(</span><span class="k">const</span> <span class="n">std</span><span class="o">::</span><span class="n">string</span><span class="o">&amp;</span> <span class="n">key</span><span class="p">,</span> <span class="n">T</span> <span class="n">value</span><span class="p">,</span> <span class="n">Args</span><span class="o">&amp;&amp;</span><span class="p">...</span> <span class="n">moreArgs</span><span class="p">)</span> <span class="p">{</span> <span class="n">options_</span><span class="o">-&gt;</span><span class="n">set</span><span class="p">(</span><span class="n">key</span><span class="p">,</span> <span class="n">value</span><span class="p">,</span> <span class="n">std</span><span class="o">::</span><span class="n">forward</span><span class="o">&lt;</span><span class="n">Args</span><span class="o">&gt;</span><span class="p">(</span><span class="n">moreArgs</span><span class="p">)...);</span> <span class="p">}</span>
+
+  <span class="kt">void</span> <span class="n">mergeOpts</span><span class="p">(</span><span class="n">Ptr</span><span class="o">&lt;</span><span class="n">Options</span><span class="o">&gt;</span> <span class="n">options</span><span class="p">)</span> <span class="p">{</span> <span class="n">options_</span><span class="o">-&gt;</span><span class="n">merge</span><span class="p">(</span><span class="n">options</span><span class="p">);</span> <span class="p">}</span>
+
+  <span class="k">template</span> <span class="o">&lt;</span><span class="k">class</span> <span class="nc">Cast</span><span class="o">&gt;</span>
+  <span class="kr">inline</span> <span class="n">Ptr</span><span class="o">&lt;</span><span class="n">Cast</span><span class="o">&gt;</span> <span class="n">as</span><span class="p">()</span> <span class="p">{</span> <span class="k">return</span> <span class="n">std</span><span class="o">::</span><span class="n">dynamic_pointer_cast</span><span class="o">&lt;</span><span class="n">Cast</span><span class="o">&gt;</span><span class="p">(</span><span class="n">shared_from_this</span><span class="p">());</span> <span class="p">}</span>
+
+  <span class="c1">// @TODO: this fails with &#39;target type must be a pointer or reference to a defined class&#39;</span>
+  <span class="c1">//template &lt;class Cast&gt;</span>
+  <span class="c1">//inline bool is() { return dynamic_cast&lt;Cast&gt;(this) != nullptr; }</span>
+  <span class="k">template</span> <span class="o">&lt;</span><span class="k">class</span> <span class="nc">Cast</span><span class="o">&gt;</span>
+  <span class="kr">inline</span> <span class="kt">bool</span> <span class="n">is</span><span class="p">()</span> <span class="p">{</span> <span class="k">return</span> <span class="n">std</span><span class="o">::</span><span class="n">dynamic_pointer_cast</span><span class="o">&lt;</span><span class="n">Cast</span><span class="o">&gt;</span><span class="p">(</span><span class="n">shared_from_this</span><span class="p">())</span> <span class="o">!=</span> <span class="k">nullptr</span><span class="p">;</span> <span class="p">}</span>
+<span class="p">};</span>
+
+<span class="c1">// simplest form of Factory that just passes on options to the constructor of a layer type</span>
+<span class="k">template</span><span class="o">&lt;</span><span class="k">class</span> <span class="nc">Class</span><span class="o">&gt;</span>
+<span class="k">struct</span> <span class="nc">ConstructingFactory</span> <span class="o">:</span> <span class="k">public</span> <span class="n">Factory</span> <span class="p">{</span>
+  <span class="k">using</span> <span class="n">Factory</span><span class="o">::</span><span class="n">Factory</span><span class="p">;</span>
+
+  <span class="n">Ptr</span><span class="o">&lt;</span><span class="n">Class</span><span class="o">&gt;</span> <span class="n">construct</span><span class="p">(</span><span class="n">Ptr</span><span class="o">&lt;</span><span class="n">ExpressionGraph</span><span class="o">&gt;</span> <span class="n">graph</span><span class="p">)</span> <span class="p">{</span>
+    <span class="k">return</span> <span class="n">New</span><span class="o">&lt;</span><span class="n">Class</span><span class="o">&gt;</span><span class="p">(</span><span class="n">graph</span><span class="p">,</span> <span class="n">options_</span><span class="p">);</span>
+  <span class="p">}</span>
+<span class="p">};</span>
+
+<span class="k">template</span> <span class="o">&lt;</span><span class="k">class</span> <span class="nc">BaseFactory</span><span class="o">&gt;</span> <span class="c1">// where BaseFactory : Factory</span>
+<span class="k">class</span> <span class="nc">Accumulator</span> <span class="o">:</span> <span class="k">public</span> <span class="n">BaseFactory</span> <span class="p">{</span>
+  <span class="k">typedef</span> <span class="n">BaseFactory</span> <span class="n">Factory</span><span class="p">;</span>
+
+<span class="k">public</span><span class="o">:</span>
+  <span class="n">Accumulator</span><span class="p">()</span> <span class="o">:</span> <span class="n">Factory</span><span class="p">()</span> <span class="p">{}</span>
+  <span class="n">Accumulator</span><span class="p">(</span><span class="n">Ptr</span><span class="o">&lt;</span><span class="n">Options</span><span class="o">&gt;</span> <span class="n">options</span><span class="p">)</span> <span class="o">:</span> <span class="n">Factory</span><span class="p">(</span><span class="n">options</span><span class="p">)</span> <span class="p">{}</span>
+  <span class="k">template</span> <span class="o">&lt;</span><span class="k">typename</span><span class="p">...</span> <span class="n">Args</span><span class="o">&gt;</span>
+  <span class="n">Accumulator</span><span class="p">(</span><span class="n">Ptr</span><span class="o">&lt;</span><span class="n">Options</span><span class="o">&gt;</span> <span class="n">options</span><span class="p">,</span> <span class="n">Args</span><span class="o">&amp;&amp;</span><span class="p">...</span> <span class="n">moreArgs</span><span class="p">)</span> <span class="o">:</span> <span class="n">Factory</span><span class="p">(</span><span class="n">options</span><span class="p">,</span> <span class="n">std</span><span class="o">::</span><span class="n">forward</span><span class="o">&lt;</span><span class="n">Args</span><span class="o">&gt;</span><span class="p">(</span><span class="n">moreArgs</span><span class="p">)...)</span> <span class="p">{}</span>
+  <span class="k">template</span> <span class="o">&lt;</span><span class="k">typename</span> <span class="nc">T</span><span class="p">,</span> <span class="k">typename</span><span class="p">...</span> <span class="n">Args</span><span class="o">&gt;</span>
+  <span class="n">Accumulator</span><span class="p">(</span><span class="k">const</span> <span class="n">std</span><span class="o">::</span><span class="n">string</span><span class="o">&amp;</span> <span class="n">key</span><span class="p">,</span> <span class="n">T</span> <span class="n">value</span><span class="p">,</span> <span class="n">Args</span><span class="o">&amp;&amp;</span><span class="p">...</span> <span class="n">moreArgs</span><span class="p">)</span> <span class="o">:</span> <span class="n">Factory</span><span class="p">(</span><span class="n">key</span><span class="p">,</span> <span class="n">value</span><span class="p">,</span> <span class="n">std</span><span class="o">::</span><span class="n">forward</span><span class="o">&lt;</span><span class="n">Args</span><span class="o">&gt;</span><span class="p">(</span><span class="n">moreArgs</span><span class="p">)...)</span> <span class="p">{}</span>
+  <span class="n">Accumulator</span><span class="p">(</span><span class="k">const</span> <span class="n">Factory</span><span class="o">&amp;</span> <span class="n">factory</span><span class="p">)</span> <span class="o">:</span> <span class="n">Factory</span><span class="p">(</span><span class="n">factory</span><span class="p">)</span> <span class="p">{}</span>
+  <span class="n">Accumulator</span><span class="p">(</span><span class="k">const</span> <span class="n">Accumulator</span><span class="o">&amp;</span><span class="p">)</span> <span class="o">=</span> <span class="k">default</span><span class="p">;</span>
+  <span class="n">Accumulator</span><span class="p">(</span><span class="n">Accumulator</span><span class="o">&amp;&amp;</span><span class="p">)</span> <span class="o">=</span> <span class="k">default</span><span class="p">;</span>
+
+  <span class="c1">// deprecated chaining syntax</span>
+  <span class="k">template</span> <span class="o">&lt;</span><span class="k">typename</span> <span class="nc">T</span><span class="o">&gt;</span>
+  <span class="n">Accumulator</span><span class="o">&amp;</span> <span class="k">operator</span><span class="p">()(</span><span class="k">const</span> <span class="n">std</span><span class="o">::</span><span class="n">string</span><span class="o">&amp;</span> <span class="n">key</span><span class="p">,</span> <span class="n">T</span> <span class="n">value</span><span class="p">)</span> <span class="p">{</span>
+    <span class="n">Factory</span><span class="o">::</span><span class="n">setOpt</span><span class="p">(</span><span class="n">key</span><span class="p">,</span> <span class="n">value</span><span class="p">);</span>
+    <span class="k">return</span> <span class="o">*</span><span class="k">this</span><span class="p">;</span>
+  <span class="p">}</span>
+
+  <span class="n">Accumulator</span><span class="o">&amp;</span> <span class="k">operator</span><span class="p">()(</span><span class="n">Ptr</span><span class="o">&lt;</span><span class="n">Options</span><span class="o">&gt;</span> <span class="n">options</span><span class="p">)</span> <span class="p">{</span>
+    <span class="n">Factory</span><span class="o">::</span><span class="n">mergeOpts</span><span class="p">(</span><span class="n">options</span><span class="p">);</span>
+    <span class="k">return</span> <span class="o">*</span><span class="k">this</span><span class="p">;</span>
+  <span class="p">}</span>
+
+  <span class="n">Accumulator</span><span class="o">&lt;</span><span class="n">Factory</span><span class="o">&gt;</span> <span class="n">clone</span><span class="p">()</span> <span class="p">{</span>
+    <span class="k">return</span> <span class="n">Accumulator</span><span class="o">&lt;</span><span class="n">Factory</span><span class="o">&gt;</span><span class="p">(</span><span class="n">Factory</span><span class="o">::</span><span class="n">clone</span><span class="p">());</span>
+  <span class="p">}</span>
+<span class="p">};</span>
+<span class="p">}</span>  <span class="c1">// namespace marian</span>
+</pre></div>
+</div>
+</div>
+
+
+           </div>
+           
+          </div>
+          <footer>
+
+  <hr/>
+
+  <div role="contentinfo">
+    <p>
+        &#169; Copyright 2021, Marian NMT Team.
+
+    </p>
+  </div>
+    
+    
+    
+    Built with <a href="https://www.sphinx-doc.org/">Sphinx</a> using a
+    
+    <a href="https://github.com/readthedocs/sphinx_rtd_theme">theme</a>
+    
+    provided by <a href="https://readthedocs.org">Read the Docs</a>. 
+
+</footer>
+        </div>
+      </div>
+
+    </section>
+
+  </div>
+  
+
+  <script type="text/javascript">
+      jQuery(function () {
+          SphinxRtdTheme.Navigation.enable(true);
+      });
+  </script>
+
+  
+  
+    
+   
+
+</body>
+</html>

@@ -1,0 +1,323 @@
+
+
+<!DOCTYPE html>
+<html class="writer-html5" lang="en" >
+<head>
+  <meta charset="utf-8" />
+  
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  
+  <title>Class ScoreCollector &mdash; Marian NMT v1.10.1 2021-02-23 documentation</title>
+  
+
+  
+  <link rel="stylesheet" href="../_static/css/theme.css" type="text/css" />
+  <link rel="stylesheet" href="../_static/pygments.css" type="text/css" />
+  <link rel="stylesheet" href="../_static/css/custom.css" type="text/css" />
+  <link rel="stylesheet" href="../_static/collapsible-lists/css/tree_view.css" type="text/css" />
+
+  
+  
+
+  
+  
+
+  
+    <link rel="canonical" href="http://marian-nmt.github.io/docs/api/api/classmarian_1_1ScoreCollector.html" />
+
+  
+  <!--[if lt IE 9]>
+    <script src="../_static/js/html5shiv.min.js"></script>
+  <![endif]-->
+  
+    
+      <script type="text/javascript" id="documentation_options" data-url_root="../" src="../_static/documentation_options.js"></script>
+        <script src="../_static/jquery.js"></script>
+        <script src="../_static/underscore.js"></script>
+        <script src="../_static/doctools.js"></script>
+        <script src="../_static/language_data.js"></script>
+        <script src="../_static/collapsible-lists/js/CollapsibleLists.compressed.js"></script>
+        <script src="../_static/collapsible-lists/js/apply-collapsible-lists.js"></script>
+    
+    <script type="text/javascript" src="../_static/js/theme.js"></script>
+
+    
+    <link rel="index" title="Index" href="../genindex.html" />
+    <link rel="search" title="Search" href="../search.html" />
+    <link rel="next" title="Class ScoreCollectorNBest" href="classmarian_1_1ScoreCollectorNBest.html" />
+    <link rel="prev" title="Class Scheduler" href="classmarian_1_1Scheduler.html" /> 
+</head>
+
+<body class="wy-body-for-nav">
+
+   
+  <div class="wy-grid-for-nav">
+    
+    <nav data-toggle="wy-nav-shift" class="wy-nav-side">
+      <div class="wy-side-scroll">
+        <div class="wy-side-nav-search" >
+          
+
+          
+            <a href="../index.html" class="icon icon-home"> Marian NMT
+          
+
+          
+          </a>
+
+          
+            
+            
+              <div class="version">
+                v1.10.1
+              </div>
+            
+          
+
+          
+<div role="search">
+  <form id="rtd-search-form" class="wy-form" action="../search.html" method="get">
+    <input type="text" name="q" placeholder="Search docs" />
+    <input type="hidden" name="check_keywords" value="yes" />
+    <input type="hidden" name="area" value="default" />
+  </form>
+</div>
+
+          
+        </div>
+
+        
+        <div class="wy-menu wy-menu-vertical" data-spy="affix" role="navigation" aria-label="main navigation">
+          
+            
+            
+              
+            
+            
+              <p class="caption"><span class="caption-text">Contents:</span></p>
+<ul>
+<li class="toctree-l1"><a class="reference internal" href="../install.html">Installation</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../graph.html">Expression graphs</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../operators.html">Graph operations</a></li>
+<li class="toctree-l1"><a class="reference internal" href="library_index.html">Library API</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../contributing.html">How to contribute to Marian</a></li>
+</ul>
+
+            
+          
+        </div>
+        
+      </div>
+    </nav>
+
+    <section data-toggle="wy-nav-shift" class="wy-nav-content-wrap">
+
+      
+      <nav class="wy-nav-top" aria-label="top navigation">
+        
+          <i data-toggle="wy-nav-top" class="fa fa-bars"></i>
+          <a href="../index.html">Marian NMT</a>
+        
+      </nav>
+
+
+      <div class="wy-nav-content">
+        
+        <div class="rst-content">
+        
+          
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+<div role="navigation" aria-label="breadcrumbs navigation">
+
+  <ul class="wy-breadcrumbs">
+    
+      <li><a href="../index.html" class="icon icon-home"></a> &raquo;</li>
+        
+          <li><a href="library_index.html">Library API</a> &raquo;</li>
+        
+      <li>Class ScoreCollector</li>
+    
+    
+      <li class="wy-breadcrumbs-aside">
+        
+          
+            <a href="../_sources/api/classmarian_1_1ScoreCollector.rst.txt" rel="nofollow"> View page source</a>
+          
+        
+      </li>
+    
+  </ul>
+
+  
+  <hr/>
+</div>
+          <div role="main" class="document" itemscope="itemscope" itemtype="http://schema.org/Article">
+           <div itemprop="articleBody">
+            
+  <div class="section" id="class-scorecollector">
+<span id="exhale-class-classmarian-1-1scorecollector"></span><h1>Class ScoreCollector<a class="headerlink" href="#class-scorecollector" title="Permalink to this headline">¶</a></h1>
+<ul class="simple">
+<li><p>Defined in <a class="reference internal" href="file_src_rescorer_score_collector.h.html#file-src-rescorer-score-collector-h"><span class="std std-ref">File score_collector.h</span></a></p></li>
+</ul>
+<div class="section" id="inheritance-relationships">
+<h2>Inheritance Relationships<a class="headerlink" href="#inheritance-relationships" title="Permalink to this headline">¶</a></h2>
+<div class="section" id="derived-type">
+<h3>Derived Type<a class="headerlink" href="#derived-type" title="Permalink to this headline">¶</a></h3>
+<ul class="simple">
+<li><p><code class="docutils literal notranslate"><span class="pre">public</span> <span class="pre">marian::ScoreCollectorNBest</span></code> (<a class="reference internal" href="classmarian_1_1ScoreCollectorNBest.html#exhale-class-classmarian-1-1scorecollectornbest"><span class="std std-ref">Class ScoreCollectorNBest</span></a>)</p></li>
+</ul>
+</div>
+</div>
+<div class="section" id="class-documentation">
+<h2>Class Documentation<a class="headerlink" href="#class-documentation" title="Permalink to this headline">¶</a></h2>
+<dl class="class">
+<dt id="_CPPv4N6marian14ScoreCollectorE">
+<span id="_CPPv3N6marian14ScoreCollectorE"></span><span id="_CPPv2N6marian14ScoreCollectorE"></span><span id="marian::ScoreCollector"></span><span class="target" id="classmarian_1_1ScoreCollector"></span><em class="property">class </em><code class="sig-name descname">ScoreCollector</code><a class="headerlink" href="#_CPPv4N6marian14ScoreCollectorE" title="Permalink to this definition">¶</a><br /></dt>
+<dd><p>Subclassed by <a class="reference internal" href="classmarian_1_1ScoreCollectorNBest.html#classmarian_1_1ScoreCollectorNBest"><span class="std std-ref">marian::ScoreCollectorNBest</span></a></p>
+<div class="breathe-sectiondef docutils container">
+<p class="breathe-sectiondef-title rubric">Public Functions</p>
+<dl class="function">
+<dt id="_CPPv4N6marian14ScoreCollector14ScoreCollectorERK3PtrI7OptionsE">
+<span id="_CPPv3N6marian14ScoreCollector14ScoreCollectorERK3PtrI7OptionsE"></span><span id="_CPPv2N6marian14ScoreCollector14ScoreCollectorERK3PtrI7OptionsE"></span><span id="marian::ScoreCollector::ScoreCollector__Ptr:Options:CR"></span><span class="target" id="classmarian_1_1ScoreCollector_1a0d77a2f3940f3a467041a6a3e26e1867"></span><code class="sig-name descname">ScoreCollector</code><span class="sig-paren">(</span><em class="property">const</em> <a class="reference internal" href="typedef_definitions_8h_1ad1a373be43a00ef9ce35666145137b08.html#_CPPv4N6marian3PtrE" title="marian::Ptr">Ptr</a>&lt;<a class="reference internal" href="classmarian_1_1Options.html#_CPPv4N6marian7OptionsE" title="marian::Options">Options</a>&gt; &amp;<em>options</em><span class="sig-paren">)</span><a class="headerlink" href="#_CPPv4N6marian14ScoreCollector14ScoreCollectorERK3PtrI7OptionsE" title="Permalink to this definition">¶</a><br /></dt>
+<dd></dd></dl>
+
+<dl class="function">
+<dt id="_CPPv4N6marian14ScoreCollectorD0Ev">
+<span id="_CPPv3N6marian14ScoreCollectorD0Ev"></span><span id="_CPPv2N6marian14ScoreCollectorD0Ev"></span><span id="marian::ScoreCollector::~ScoreCollector"></span><span class="target" id="classmarian_1_1ScoreCollector_1afea545f2d84f5dd502af7c183ecac6e2"></span><em class="property">virtual</em> <code class="sig-name descname">~ScoreCollector</code><span class="sig-paren">(</span><span class="sig-paren">)</span><a class="headerlink" href="#_CPPv4N6marian14ScoreCollectorD0Ev" title="Permalink to this definition">¶</a><br /></dt>
+<dd></dd></dl>
+
+<dl class="function">
+<dt id="_CPPv4N6marian14ScoreCollector5WriteElRKNSt6stringE">
+<span id="_CPPv3N6marian14ScoreCollector5WriteElRKNSt6stringE"></span><span id="_CPPv2N6marian14ScoreCollector5WriteElRKNSt6stringE"></span><span id="marian::ScoreCollector::Write__l.ssCR"></span><span class="target" id="classmarian_1_1ScoreCollector_1a550ae464e8539062648dd18467477654"></span>void <code class="sig-name descname">Write</code><span class="sig-paren">(</span>long <em>id</em>, <em class="property">const</em> <a class="reference internal" href="function_expression__operators_8cpp_1af4e69a5f7167b63522135a1f6b8a5dd8.html#_CPPv4N6marianStE4Expri" title="marian::std">std</a>::string &amp;<em>message</em><span class="sig-paren">)</span><a class="headerlink" href="#_CPPv4N6marian14ScoreCollector5WriteElRKNSt6stringE" title="Permalink to this definition">¶</a><br /></dt>
+<dd></dd></dl>
+
+<dl class="function">
+<dt id="_CPPv4N6marian14ScoreCollector5WriteElfRKN4data13SoftAlignmentERKNSt6vectorIfEE">
+<span id="_CPPv3N6marian14ScoreCollector5WriteElfRKN4data13SoftAlignmentERKNSt6vectorIfEE"></span><span id="_CPPv2N6marian14ScoreCollector5WriteElfRKN4data13SoftAlignmentERKNSt6vectorIfEE"></span><span id="marian::ScoreCollector::Write__l.float.data::SoftAlignmentCR.std::vector:float:CR"></span><span class="target" id="classmarian_1_1ScoreCollector_1acfb963d306e376ac2b84eb103c6f8131"></span>void <code class="sig-name descname">Write</code><span class="sig-paren">(</span>long <em>id</em>, float <em>score</em>, <em class="property">const</em> data::<a class="reference internal" href="typedef_namespacemarian_1_1data_1a4d0403cac7bae941e64a05874e817582.html#_CPPv4N6marian4data13SoftAlignmentE" title="marian::data::SoftAlignment">SoftAlignment</a> &amp;<em>align</em> = {}, <em class="property">const</em> <a class="reference internal" href="function_expression__operators_8cpp_1af4e69a5f7167b63522135a1f6b8a5dd8.html#_CPPv4N6marianStE4Expri" title="marian::std">std</a>::vector&lt;float&gt; &amp;<em>wordScores</em> = {}<span class="sig-paren">)</span><a class="headerlink" href="#_CPPv4N6marian14ScoreCollector5WriteElfRKN4data13SoftAlignmentERKNSt6vectorIfEE" title="Permalink to this definition">¶</a><br /></dt>
+<dd></dd></dl>
+
+</div>
+<div class="breathe-sectiondef docutils container">
+<p class="breathe-sectiondef-title rubric">Protected Types</p>
+<dl class="type">
+<dt id="_CPPv4N6marian14ScoreCollector7OutputsE">
+<span id="_CPPv3N6marian14ScoreCollector7OutputsE"></span><span id="_CPPv2N6marian14ScoreCollector7OutputsE"></span><span id="marian::ScoreCollector::Outputs"></span><span class="target" id="classmarian_1_1ScoreCollector_1a320eb39716b04236baefa51f4e9d5a29"></span><em class="property">typedef </em><a class="reference internal" href="function_expression__operators_8cpp_1af4e69a5f7167b63522135a1f6b8a5dd8.html#_CPPv4N6marianStE4Expri" title="marian::std">std</a>::map&lt;long, <a class="reference internal" href="function_expression__operators_8cpp_1af4e69a5f7167b63522135a1f6b8a5dd8.html#_CPPv4N6marianStE4Expri" title="marian::std">std</a>::string&gt; <code class="sig-name descname">Outputs</code><a class="headerlink" href="#_CPPv4N6marian14ScoreCollector7OutputsE" title="Permalink to this definition">¶</a><br /></dt>
+<dd></dd></dl>
+
+</div>
+<div class="breathe-sectiondef docutils container">
+<p class="breathe-sectiondef-title rubric">Protected Functions</p>
+<dl class="function">
+<dt id="_CPPv4N6marian14ScoreCollector12getAlignmentERKN4data13SoftAlignmentE">
+<span id="_CPPv3N6marian14ScoreCollector12getAlignmentERKN4data13SoftAlignmentE"></span><span id="_CPPv2N6marian14ScoreCollector12getAlignmentERKN4data13SoftAlignmentE"></span><span id="marian::ScoreCollector::getAlignment__data::SoftAlignmentCR"></span><span class="target" id="classmarian_1_1ScoreCollector_1a1e5463708ff632fb5b70aedb7e17c363"></span><a class="reference internal" href="function_expression__operators_8cpp_1af4e69a5f7167b63522135a1f6b8a5dd8.html#_CPPv4N6marianStE4Expri" title="marian::std">std</a>::string <code class="sig-name descname">getAlignment</code><span class="sig-paren">(</span><em class="property">const</em> data::<a class="reference internal" href="typedef_namespacemarian_1_1data_1a4d0403cac7bae941e64a05874e817582.html#_CPPv4N6marian4data13SoftAlignmentE" title="marian::data::SoftAlignment">SoftAlignment</a> &amp;<em>align</em><span class="sig-paren">)</span><a class="headerlink" href="#_CPPv4N6marian14ScoreCollector12getAlignmentERKN4data13SoftAlignmentE" title="Permalink to this definition">¶</a><br /></dt>
+<dd></dd></dl>
+
+<dl class="function">
+<dt id="_CPPv4N6marian14ScoreCollector21getAlignmentThresholdERKNSt6stringE">
+<span id="_CPPv3N6marian14ScoreCollector21getAlignmentThresholdERKNSt6stringE"></span><span id="_CPPv2N6marian14ScoreCollector21getAlignmentThresholdERKNSt6stringE"></span><span id="marian::ScoreCollector::getAlignmentThreshold__ssCR"></span><span class="target" id="classmarian_1_1ScoreCollector_1a328ffd9f823db2c018a6563acbb99e72"></span>float <code class="sig-name descname">getAlignmentThreshold</code><span class="sig-paren">(</span><em class="property">const</em> <a class="reference internal" href="function_expression__operators_8cpp_1af4e69a5f7167b63522135a1f6b8a5dd8.html#_CPPv4N6marianStE4Expri" title="marian::std">std</a>::string &amp;<em>str</em><span class="sig-paren">)</span><a class="headerlink" href="#_CPPv4N6marian14ScoreCollector21getAlignmentThresholdERKNSt6stringE" title="Permalink to this definition">¶</a><br /></dt>
+<dd></dd></dl>
+
+</div>
+<div class="breathe-sectiondef docutils container">
+<p class="breathe-sectiondef-title rubric">Protected Attributes</p>
+<dl class="member">
+<dt id="_CPPv4N6marian14ScoreCollector7nextId_E">
+<span id="_CPPv3N6marian14ScoreCollector7nextId_E"></span><span id="_CPPv2N6marian14ScoreCollector7nextId_E"></span><span id="marian::ScoreCollector::nextId___l"></span><span class="target" id="classmarian_1_1ScoreCollector_1a68bf9186c90c33a7c44d263e58610f3b"></span>long <code class="sig-name descname">nextId_</code> = {0}<a class="headerlink" href="#_CPPv4N6marian14ScoreCollector7nextId_E" title="Permalink to this definition">¶</a><br /></dt>
+<dd></dd></dl>
+
+<dl class="member">
+<dt id="_CPPv4N6marian14ScoreCollector8outStrm_E">
+<span id="_CPPv3N6marian14ScoreCollector8outStrm_E"></span><span id="_CPPv2N6marian14ScoreCollector8outStrm_E"></span><span id="marian::ScoreCollector::outStrm___UPtr:os:"></span><span class="target" id="classmarian_1_1ScoreCollector_1ac0e407caf75049c2f988acd38a373455"></span><a class="reference internal" href="typedef_definitions_8h_1aef1c1bbe14b70285b1e8f7653f134cb1.html#_CPPv4N6marian4UPtrE" title="marian::UPtr">UPtr</a>&lt;<a class="reference internal" href="function_expression__operators_8cpp_1af4e69a5f7167b63522135a1f6b8a5dd8.html#_CPPv4N6marianStE4Expri" title="marian::std">std</a>::ostream&gt; <code class="sig-name descname">outStrm_</code><a class="headerlink" href="#_CPPv4N6marian14ScoreCollector8outStrm_E" title="Permalink to this definition">¶</a><br /></dt>
+<dd></dd></dl>
+
+<dl class="member">
+<dt id="_CPPv4N6marian14ScoreCollector6mutex_E">
+<span id="_CPPv3N6marian14ScoreCollector6mutex_E"></span><span id="_CPPv2N6marian14ScoreCollector6mutex_E"></span><span id="marian::ScoreCollector::mutex___std::mutex"></span><span class="target" id="classmarian_1_1ScoreCollector_1a9d84e19d5a7d72a3351f5d60fd8ac3c5"></span><a class="reference internal" href="function_expression__operators_8cpp_1af4e69a5f7167b63522135a1f6b8a5dd8.html#_CPPv4N6marianStE4Expri" title="marian::std">std</a>::mutex <code class="sig-name descname">mutex_</code><a class="headerlink" href="#_CPPv4N6marian14ScoreCollector6mutex_E" title="Permalink to this definition">¶</a><br /></dt>
+<dd></dd></dl>
+
+<dl class="member">
+<dt id="_CPPv4N6marian14ScoreCollector8outputs_E">
+<span id="_CPPv3N6marian14ScoreCollector8outputs_E"></span><span id="_CPPv2N6marian14ScoreCollector8outputs_E"></span><span id="marian::ScoreCollector::outputs___Outputs"></span><span class="target" id="classmarian_1_1ScoreCollector_1afb3b293c00d7e2b48fa65a32ac7461b7"></span><a class="reference internal" href="#_CPPv4N6marian14ScoreCollector7OutputsE" title="marian::ScoreCollector::Outputs">Outputs</a> <code class="sig-name descname">outputs_</code><a class="headerlink" href="#_CPPv4N6marian14ScoreCollector8outputs_E" title="Permalink to this definition">¶</a><br /></dt>
+<dd></dd></dl>
+
+<dl class="member">
+<dt id="_CPPv4N6marian14ScoreCollector10alignment_E">
+<span id="_CPPv3N6marian14ScoreCollector10alignment_E"></span><span id="_CPPv2N6marian14ScoreCollector10alignment_E"></span><span id="marian::ScoreCollector::alignment___ss"></span><span class="target" id="classmarian_1_1ScoreCollector_1a9d76c3db842b36291fd54cee3f8db887"></span><a class="reference internal" href="function_expression__operators_8cpp_1af4e69a5f7167b63522135a1f6b8a5dd8.html#_CPPv4N6marianStE4Expri" title="marian::std">std</a>::string <code class="sig-name descname">alignment_</code><a class="headerlink" href="#_CPPv4N6marian14ScoreCollector10alignment_E" title="Permalink to this definition">¶</a><br /></dt>
+<dd></dd></dl>
+
+<dl class="member">
+<dt id="_CPPv4N6marian14ScoreCollector19alignmentThreshold_E">
+<span id="_CPPv3N6marian14ScoreCollector19alignmentThreshold_E"></span><span id="_CPPv2N6marian14ScoreCollector19alignmentThreshold_E"></span><span id="marian::ScoreCollector::alignmentThreshold___float"></span><span class="target" id="classmarian_1_1ScoreCollector_1a026b1da9671de53831eeebb383ba1fe2"></span>float <code class="sig-name descname">alignmentThreshold_</code> = {0.f}<a class="headerlink" href="#_CPPv4N6marian14ScoreCollector19alignmentThreshold_E" title="Permalink to this definition">¶</a><br /></dt>
+<dd></dd></dl>
+
+</div>
+</dd></dl>
+
+</div>
+</div>
+
+
+           </div>
+           
+          </div>
+          <footer>
+    <div class="rst-footer-buttons" role="navigation" aria-label="footer navigation">
+        <a href="classmarian_1_1ScoreCollectorNBest.html" class="btn btn-neutral float-right" title="Class ScoreCollectorNBest" accesskey="n" rel="next">Next <span class="fa fa-arrow-circle-right" aria-hidden="true"></span></a>
+        <a href="classmarian_1_1Scheduler.html" class="btn btn-neutral float-left" title="Class Scheduler" accesskey="p" rel="prev"><span class="fa fa-arrow-circle-left" aria-hidden="true"></span> Previous</a>
+    </div>
+
+  <hr/>
+
+  <div role="contentinfo">
+    <p>
+        &#169; Copyright 2021, Marian NMT Team.
+
+    </p>
+  </div>
+    
+    
+    
+    Built with <a href="https://www.sphinx-doc.org/">Sphinx</a> using a
+    
+    <a href="https://github.com/readthedocs/sphinx_rtd_theme">theme</a>
+    
+    provided by <a href="https://readthedocs.org">Read the Docs</a>. 
+
+</footer>
+        </div>
+      </div>
+
+    </section>
+
+  </div>
+  
+
+  <script type="text/javascript">
+      jQuery(function () {
+          SphinxRtdTheme.Navigation.enable(true);
+      });
+  </script>
+
+  
+  
+    
+   
+
+</body>
+</html>

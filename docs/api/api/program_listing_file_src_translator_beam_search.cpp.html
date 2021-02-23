@@ -1,0 +1,735 @@
+
+
+<!DOCTYPE html>
+<html class="writer-html5" lang="en" >
+<head>
+  <meta charset="utf-8" />
+  
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  
+  <title>Program Listing for File beam_search.cpp &mdash; Marian NMT v1.10.1 2021-02-23 documentation</title>
+  
+
+  
+  <link rel="stylesheet" href="../_static/css/theme.css" type="text/css" />
+  <link rel="stylesheet" href="../_static/pygments.css" type="text/css" />
+  <link rel="stylesheet" href="../_static/css/custom.css" type="text/css" />
+  <link rel="stylesheet" href="../_static/collapsible-lists/css/tree_view.css" type="text/css" />
+
+  
+  
+
+  
+  
+
+  
+    <link rel="canonical" href="http://marian-nmt.github.io/docs/api/api/program_listing_file_src_translator_beam_search.cpp.html" />
+
+  
+  <!--[if lt IE 9]>
+    <script src="../_static/js/html5shiv.min.js"></script>
+  <![endif]-->
+  
+    
+      <script type="text/javascript" id="documentation_options" data-url_root="../" src="../_static/documentation_options.js"></script>
+        <script src="../_static/jquery.js"></script>
+        <script src="../_static/underscore.js"></script>
+        <script src="../_static/doctools.js"></script>
+        <script src="../_static/language_data.js"></script>
+        <script src="../_static/collapsible-lists/js/CollapsibleLists.compressed.js"></script>
+        <script src="../_static/collapsible-lists/js/apply-collapsible-lists.js"></script>
+    
+    <script type="text/javascript" src="../_static/js/theme.js"></script>
+
+    
+    <link rel="index" title="Index" href="../genindex.html" />
+    <link rel="search" title="Search" href="../search.html" /> 
+</head>
+
+<body class="wy-body-for-nav">
+
+   
+  <div class="wy-grid-for-nav">
+    
+    <nav data-toggle="wy-nav-shift" class="wy-nav-side">
+      <div class="wy-side-scroll">
+        <div class="wy-side-nav-search" >
+          
+
+          
+            <a href="../index.html" class="icon icon-home"> Marian NMT
+          
+
+          
+          </a>
+
+          
+            
+            
+              <div class="version">
+                v1.10.1
+              </div>
+            
+          
+
+          
+<div role="search">
+  <form id="rtd-search-form" class="wy-form" action="../search.html" method="get">
+    <input type="text" name="q" placeholder="Search docs" />
+    <input type="hidden" name="check_keywords" value="yes" />
+    <input type="hidden" name="area" value="default" />
+  </form>
+</div>
+
+          
+        </div>
+
+        
+        <div class="wy-menu wy-menu-vertical" data-spy="affix" role="navigation" aria-label="main navigation">
+          
+            
+            
+              
+            
+            
+              <p class="caption"><span class="caption-text">Contents:</span></p>
+<ul>
+<li class="toctree-l1"><a class="reference internal" href="../install.html">Installation</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../graph.html">Expression graphs</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../operators.html">Graph operations</a></li>
+<li class="toctree-l1"><a class="reference internal" href="library_index.html">Library API</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../contributing.html">How to contribute to Marian</a></li>
+</ul>
+
+            
+          
+        </div>
+        
+      </div>
+    </nav>
+
+    <section data-toggle="wy-nav-shift" class="wy-nav-content-wrap">
+
+      
+      <nav class="wy-nav-top" aria-label="top navigation">
+        
+          <i data-toggle="wy-nav-top" class="fa fa-bars"></i>
+          <a href="../index.html">Marian NMT</a>
+        
+      </nav>
+
+
+      <div class="wy-nav-content">
+        
+        <div class="rst-content">
+        
+          
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+<div role="navigation" aria-label="breadcrumbs navigation">
+
+  <ul class="wy-breadcrumbs">
+    
+      <li><a href="../index.html" class="icon icon-home"></a> &raquo;</li>
+        
+      <li>Program Listing for File beam_search.cpp</li>
+    
+    
+      <li class="wy-breadcrumbs-aside">
+        
+          
+            <a href="../_sources/api/program_listing_file_src_translator_beam_search.cpp.rst.txt" rel="nofollow"> View page source</a>
+          
+        
+      </li>
+    
+  </ul>
+
+  
+  <hr/>
+</div>
+          <div role="main" class="document" itemscope="itemscope" itemtype="http://schema.org/Article">
+           <div itemprop="articleBody">
+            
+  <div class="section" id="program-listing-for-file-beam-search-cpp">
+<span id="program-listing-file-src-translator-beam-search-cpp"></span><h1>Program Listing for File beam_search.cpp<a class="headerlink" href="#program-listing-for-file-beam-search-cpp" title="Permalink to this headline">¶</a></h1>
+<p>↰ <a class="reference internal" href="file_src_translator_beam_search.cpp.html#file-src-translator-beam-search-cpp"><span class="std std-ref">Return to documentation for file</span></a> (<code class="docutils literal notranslate"><span class="pre">src/translator/beam_search.cpp</span></code>)</p>
+<div class="highlight-cpp notranslate"><div class="highlight"><pre><span></span><span class="cp">#include</span> <span class="cpf">&quot;translator/beam_search.h&quot;</span><span class="cp"></span>
+
+<span class="cp">#include</span> <span class="cpf">&quot;data/factored_vocab.h&quot;</span><span class="cp"></span>
+<span class="cp">#include</span> <span class="cpf">&quot;translator/helpers.h&quot;</span><span class="cp"></span>
+<span class="cp">#include</span> <span class="cpf">&quot;translator/nth_element.h&quot;</span><span class="cp"></span>
+<span class="cp">#include</span> <span class="cpf">&quot;data/shortlist.h&quot;</span><span class="cp"></span>
+
+<span class="k">namespace</span> <span class="n">marian</span> <span class="p">{</span>
+
+<span class="c1">// combine new expandedPathScores and previous beams into new set of beams</span>
+<span class="n">Beams</span> <span class="n">BeamSearch</span><span class="o">::</span><span class="n">toHyps</span><span class="p">(</span><span class="k">const</span> <span class="n">std</span><span class="o">::</span><span class="n">vector</span><span class="o">&lt;</span><span class="kt">unsigned</span> <span class="kt">int</span><span class="o">&gt;&amp;</span> <span class="n">nBestKeys</span><span class="p">,</span> <span class="c1">// [currentDimBatch, beamSize] flattened -&gt; ((batchIdx, beamHypIdx) flattened, word idx) flattened</span>
+                         <span class="k">const</span> <span class="n">std</span><span class="o">::</span><span class="n">vector</span><span class="o">&lt;</span><span class="kt">float</span><span class="o">&gt;&amp;</span> <span class="n">nBestPathScores</span><span class="p">,</span>  <span class="c1">// [currentDimBatch, beamSize] flattened</span>
+                         <span class="k">const</span> <span class="kt">size_t</span> <span class="n">nBestBeamSize</span><span class="p">,</span> <span class="c1">// for interpretation of nBestKeys</span>
+                         <span class="k">const</span> <span class="kt">size_t</span> <span class="n">vocabSize</span><span class="p">,</span>     <span class="c1">// ditto.</span>
+                         <span class="k">const</span> <span class="n">Beams</span><span class="o">&amp;</span> <span class="n">beams</span><span class="p">,</span>
+                         <span class="k">const</span> <span class="n">std</span><span class="o">::</span><span class="n">vector</span><span class="o">&lt;</span><span class="n">Ptr</span><span class="o">&lt;</span><span class="n">ScorerState</span> <span class="cm">/*const*/</span><span class="o">&gt;&gt;&amp;</span> <span class="n">states</span><span class="p">,</span>
+                         <span class="n">Ptr</span><span class="o">&lt;</span><span class="n">data</span><span class="o">::</span><span class="n">CorpusBatch</span> <span class="cm">/*const*/</span><span class="o">&gt;</span> <span class="n">batch</span><span class="p">,</span> <span class="c1">// for alignments only</span>
+                         <span class="n">Ptr</span><span class="o">&lt;</span><span class="n">FactoredVocab</span><span class="cm">/*const*/</span><span class="o">&gt;</span> <span class="n">factoredVocab</span><span class="p">,</span> <span class="kt">size_t</span> <span class="n">factorGroup</span><span class="p">,</span>
+                         <span class="k">const</span> <span class="n">std</span><span class="o">::</span><span class="n">vector</span><span class="o">&lt;</span><span class="kt">bool</span><span class="o">&gt;&amp;</span> <span class="n">dropBatchEntries</span><span class="p">,</span> <span class="c1">// [origDimBatch] - empty source batch entries are marked with true, should be cleared after first use.</span>
+                         <span class="k">const</span> <span class="n">std</span><span class="o">::</span><span class="n">vector</span><span class="o">&lt;</span><span class="n">IndexType</span><span class="o">&gt;&amp;</span> <span class="n">batchIdxMap</span><span class="p">)</span> <span class="k">const</span> <span class="p">{</span> <span class="c1">// [origBatchIdx -&gt; currentBatchIdx]</span>
+  <span class="n">std</span><span class="o">::</span><span class="n">vector</span><span class="o">&lt;</span><span class="kt">float</span><span class="o">&gt;</span> <span class="n">align</span><span class="p">;</span> <span class="c1">// collects alignment information from the last executed time step</span>
+  <span class="k">if</span><span class="p">(</span><span class="n">options_</span><span class="o">-&gt;</span><span class="n">hasAndNotEmpty</span><span class="p">(</span><span class="s">&quot;alignment&quot;</span><span class="p">)</span> <span class="o">&amp;&amp;</span> <span class="n">factorGroup</span> <span class="o">==</span> <span class="mi">0</span><span class="p">)</span>
+    <span class="n">align</span> <span class="o">=</span> <span class="n">scorers_</span><span class="p">[</span><span class="mi">0</span><span class="p">]</span><span class="o">-&gt;</span><span class="n">getAlignment</span><span class="p">();</span> <span class="c1">// [beam depth * max src length * current batch size] -&gt; P(s|t); use alignments from the first scorer, even if ensemble,</span>
+
+  <span class="k">const</span> <span class="k">auto</span> <span class="n">origDimBatch</span> <span class="o">=</span> <span class="n">beams</span><span class="p">.</span><span class="n">size</span><span class="p">();</span> <span class="c1">// see function search for definition of origDimBatch and currentDimBatch etc.</span>
+  <span class="n">Beams</span> <span class="nf">newBeams</span><span class="p">(</span><span class="n">origDimBatch</span><span class="p">);</span>           <span class="c1">// return value of this function goes here. There are always origDimBatch beams.</span>
+
+  <span class="c1">// create a reverse batchMap to obtain original batchIdx in the starting batch size</span>
+  <span class="c1">// and calculate the current batch size based on non-empty beams</span>
+  <span class="n">std</span><span class="o">::</span><span class="n">vector</span><span class="o">&lt;</span><span class="n">IndexType</span><span class="o">&gt;</span> <span class="n">reverseBatchIdxMap</span><span class="p">;</span> <span class="c1">// empty if not purging batch entries</span>
+  <span class="kt">size_t</span> <span class="n">currentDimBatch</span> <span class="o">=</span> <span class="n">beams</span><span class="p">.</span><span class="n">size</span><span class="p">();</span>
+  <span class="k">if</span><span class="p">(</span><span class="n">PURGE_BATCH</span><span class="p">)</span> <span class="p">{</span>
+    <span class="n">reverseBatchIdxMap</span><span class="p">.</span><span class="n">resize</span><span class="p">(</span><span class="n">batchIdxMap</span><span class="p">.</span><span class="n">size</span><span class="p">());</span> <span class="c1">// adjust size if doing batch purging.</span>
+    <span class="n">currentDimBatch</span> <span class="o">=</span> <span class="mi">0</span><span class="p">;</span>
+    <span class="k">for</span><span class="p">(</span><span class="kt">int</span> <span class="n">i</span> <span class="o">=</span> <span class="mi">0</span><span class="p">;</span> <span class="n">i</span> <span class="o">&lt;</span> <span class="n">batchIdxMap</span><span class="p">.</span><span class="n">size</span><span class="p">();</span> <span class="o">++</span><span class="n">i</span><span class="p">)</span> <span class="p">{</span>
+      <span class="n">reverseBatchIdxMap</span><span class="p">[</span><span class="n">batchIdxMap</span><span class="p">[</span><span class="n">i</span><span class="p">]]</span> <span class="o">=</span> <span class="n">i</span><span class="p">;</span> <span class="c1">// reverse batch index mapping, multiple occurences get overwritten with the last one,</span>
+                                              <span class="c1">// which is expected due to down-shifting</span>
+      <span class="k">if</span><span class="p">(</span><span class="o">!</span><span class="n">beams</span><span class="p">[</span><span class="n">i</span><span class="p">].</span><span class="n">empty</span><span class="p">())</span>
+        <span class="n">currentDimBatch</span><span class="o">++</span><span class="p">;</span>
+    <span class="p">}</span>
+  <span class="p">}</span>
+
+  <span class="k">for</span><span class="p">(</span><span class="kt">size_t</span> <span class="n">i</span> <span class="o">=</span> <span class="mi">0</span><span class="p">;</span> <span class="n">i</span> <span class="o">&lt;</span> <span class="n">nBestKeys</span><span class="p">.</span><span class="n">size</span><span class="p">();</span> <span class="o">++</span><span class="n">i</span><span class="p">)</span> <span class="p">{</span> <span class="c1">// [currentDimBatch, beamSize] flattened</span>
+    <span class="c1">// Keys encode batchIdx, beamHypIdx, and word index in the entire beam.</span>
+    <span class="c1">// They can be between 0 and (vocabSize * nBestBeamSize * batchSize)-1.</span>
+    <span class="c1">// (beamHypIdx refers to the GPU tensors, *not* the beams[] array; they are not the same in case of purging)</span>
+    <span class="k">const</span> <span class="k">auto</span>  <span class="n">key</span> <span class="o">=</span> <span class="n">nBestKeys</span><span class="p">[</span><span class="n">i</span><span class="p">];</span>
+
+    <span class="c1">// decompose key into individual indices (batchIdx, beamHypIdx, wordIdx)</span>
+    <span class="k">const</span> <span class="k">auto</span> <span class="n">beamHypIdx</span>      <span class="o">=</span> <span class="p">(</span><span class="n">key</span> <span class="o">/</span> <span class="n">vocabSize</span><span class="p">)</span> <span class="o">%</span> <span class="n">nBestBeamSize</span><span class="p">;</span>
+    <span class="k">const</span> <span class="k">auto</span> <span class="n">currentBatchIdx</span> <span class="o">=</span> <span class="p">(</span><span class="n">key</span> <span class="o">/</span> <span class="n">vocabSize</span><span class="p">)</span> <span class="o">/</span> <span class="n">nBestBeamSize</span><span class="p">;</span>
+    <span class="k">const</span> <span class="k">auto</span> <span class="n">origBatchIdx</span>    <span class="o">=</span> <span class="n">reverseBatchIdxMap</span><span class="p">.</span><span class="n">empty</span><span class="p">()</span> <span class="o">?</span> <span class="nl">currentBatchIdx</span> <span class="p">:</span> <span class="n">reverseBatchIdxMap</span><span class="p">[</span><span class="n">currentBatchIdx</span><span class="p">];</span> <span class="c1">// map currentBatchIdx back into original position within starting maximal batch size, required to find correct beam</span>
+
+    <span class="kt">bool</span> <span class="n">dropHyp</span> <span class="o">=</span> <span class="o">!</span><span class="n">dropBatchEntries</span><span class="p">.</span><span class="n">empty</span><span class="p">()</span> <span class="o">&amp;&amp;</span> <span class="n">dropBatchEntries</span><span class="p">[</span><span class="n">origBatchIdx</span><span class="p">]</span> <span class="o">&amp;&amp;</span> <span class="n">factorGroup</span> <span class="o">==</span> <span class="mi">0</span><span class="p">;</span>
+
+    <span class="n">WordIndex</span> <span class="n">wordIdx</span><span class="p">;</span>
+    <span class="k">if</span><span class="p">(</span><span class="n">dropHyp</span><span class="p">)</span> <span class="p">{</span> <span class="c1">// if we force=drop the hypothesis, assign EOS, otherwise the expected word id.</span>
+      <span class="k">if</span><span class="p">(</span><span class="n">factoredVocab</span><span class="p">)</span> <span class="p">{</span> <span class="c1">// when using factoredVocab, extract the EOS lemma index from the word id, we predicting factors one by one here, hence lemma only</span>
+        <span class="n">std</span><span class="o">::</span><span class="n">vector</span><span class="o">&lt;</span><span class="kt">size_t</span><span class="o">&gt;</span> <span class="n">eosFactors</span><span class="p">;</span>
+        <span class="n">factoredVocab</span><span class="o">-&gt;</span><span class="n">word2factors</span><span class="p">(</span><span class="n">factoredVocab</span><span class="o">-&gt;</span><span class="n">getEosId</span><span class="p">(),</span> <span class="n">eosFactors</span><span class="p">);</span>
+        <span class="n">wordIdx</span> <span class="o">=</span> <span class="p">(</span><span class="n">WordIndex</span><span class="p">)</span><span class="n">eosFactors</span><span class="p">[</span><span class="mi">0</span><span class="p">];</span>
+      <span class="p">}</span> <span class="k">else</span> <span class="p">{</span> <span class="c1">// without factoredVocab lemma index and word index are the same. Safe cruising.</span>
+        <span class="n">wordIdx</span> <span class="o">=</span> <span class="n">trgVocab_</span><span class="o">-&gt;</span><span class="n">getEosId</span><span class="p">().</span><span class="n">toWordIndex</span><span class="p">();</span>
+      <span class="p">}</span>
+    <span class="p">}</span> <span class="k">else</span> <span class="p">{</span> <span class="c1">// we are not dropping anything, just assign the normal index</span>
+      <span class="n">wordIdx</span> <span class="o">=</span> <span class="p">(</span><span class="n">WordIndex</span><span class="p">)(</span><span class="n">key</span> <span class="o">%</span> <span class="n">vocabSize</span><span class="p">);</span>
+    <span class="p">}</span>
+
+    <span class="c1">// @TODO: We currently assign a log probability of 0 to all beam entries of the dropped batch entry, instead it might be a good idea to use</span>
+    <span class="c1">// the per Hyp pathScore without the current expansion (a bit hard to obtain).</span>
+    <span class="c1">// For the case where we drop empty inputs, 0 is fine. For other use cases like a forced stop, the penultimate pathScore might be better.</span>
+    <span class="c1">// For the empty hyp this would naturally result in 0, too.</span>
+    <span class="k">const</span> <span class="kt">float</span> <span class="n">pathScore</span> <span class="o">=</span> <span class="n">dropHyp</span> <span class="o">?</span> <span class="mf">0.f</span> <span class="o">:</span> <span class="n">nBestPathScores</span><span class="p">[</span><span class="n">i</span><span class="p">];</span> <span class="c1">// 0 (Prob = 1, maximum score) if dropped or expanded path score for (batchIdx, beamHypIdx, word)</span>
+
+    <span class="k">const</span> <span class="k">auto</span><span class="o">&amp;</span> <span class="n">beam</span> <span class="o">=</span> <span class="n">beams</span><span class="p">[</span><span class="n">origBatchIdx</span><span class="p">];</span>
+    <span class="k">auto</span><span class="o">&amp;</span> <span class="n">newBeam</span> <span class="o">=</span> <span class="n">newBeams</span><span class="p">[</span><span class="n">origBatchIdx</span><span class="p">];</span> <span class="c1">// extended hypotheses are going to be placed in this new beam</span>
+
+    <span class="k">if</span><span class="p">(</span><span class="n">newBeam</span><span class="p">.</span><span class="n">size</span><span class="p">()</span> <span class="o">&gt;=</span> <span class="n">beam</span><span class="p">.</span><span class="n">size</span><span class="p">())</span> <span class="c1">// getNBestList() generates N for all batch entries incl. those that already have a narrower beam</span>
+      <span class="k">continue</span><span class="p">;</span>
+    <span class="k">if</span><span class="p">(</span><span class="n">pathScore</span> <span class="o">==</span> <span class="n">INVALID_PATH_SCORE</span><span class="p">)</span> <span class="c1">// (dummy slot or word that cannot be expanded by current factor)</span>
+      <span class="k">continue</span><span class="p">;</span>
+
+    <span class="n">ABORT_IF</span><span class="p">(</span><span class="n">pathScore</span> <span class="o">&lt;</span> <span class="n">INVALID_PATH_SCORE</span><span class="p">,</span> <span class="s">&quot;Actual pathScore ({}) is lower than INVALID_PATH_SCORE ({})??&quot;</span><span class="p">,</span> <span class="n">pathScore</span><span class="p">,</span> <span class="n">INVALID_PATH_SCORE</span><span class="p">);</span> <span class="c1">// This should not happen in valid situations. Currently the only smaller value would be -inf (effect of overflow in summation?)</span>
+    <span class="n">ABORT_IF</span><span class="p">(</span><span class="n">beamHypIdx</span> <span class="o">&gt;=</span> <span class="n">beam</span><span class="p">.</span><span class="n">size</span><span class="p">(),</span> <span class="s">&quot;Out of bounds beamHypIdx??&quot;</span><span class="p">);</span> <span class="c1">// effectively this is equivalent to ABORT_IF(beams[origBatchIdx].empty(), ...)</span>
+
+    <span class="c1">// map wordIdx to word</span>
+    <span class="k">auto</span> <span class="n">prevBeamHypIdx</span> <span class="o">=</span> <span class="n">beamHypIdx</span><span class="p">;</span> <span class="c1">// back pointer</span>
+    <span class="k">auto</span> <span class="n">prevHyp</span> <span class="o">=</span> <span class="n">beam</span><span class="p">[</span><span class="n">prevBeamHypIdx</span><span class="p">];</span>
+    <span class="n">Word</span> <span class="n">word</span><span class="p">;</span>
+    <span class="c1">// If short list has been set, then wordIdx is an index into the short-listed word set,</span>
+    <span class="c1">// rather than the true word index.</span>
+    <span class="k">auto</span> <span class="n">shortlist</span> <span class="o">=</span> <span class="n">scorers_</span><span class="p">[</span><span class="mi">0</span><span class="p">]</span><span class="o">-&gt;</span><span class="n">getShortlist</span><span class="p">();</span>
+    <span class="k">if</span> <span class="p">(</span><span class="n">factoredVocab</span><span class="p">)</span> <span class="p">{</span>
+      <span class="c1">// For factored decoding, the word is built over multiple decoding steps,</span>
+      <span class="c1">// starting with the lemma, then adding factors one by one.</span>
+      <span class="k">if</span> <span class="p">(</span><span class="n">factorGroup</span> <span class="o">==</span> <span class="mi">0</span><span class="p">)</span> <span class="p">{</span>
+        <span class="n">word</span> <span class="o">=</span> <span class="n">factoredVocab</span><span class="o">-&gt;</span><span class="n">lemma2Word</span><span class="p">(</span><span class="n">shortlist</span> <span class="o">?</span> <span class="n">shortlist</span><span class="o">-&gt;</span><span class="n">reverseMap</span><span class="p">(</span><span class="n">wordIdx</span><span class="p">)</span> <span class="o">:</span> <span class="n">wordIdx</span><span class="p">);</span> <span class="c1">// @BUGBUG: reverseMap is only correct if factoredVocab_-&gt;getGroupRange(0).first == 0</span>
+        <span class="n">std</span><span class="o">::</span><span class="n">vector</span><span class="o">&lt;</span><span class="kt">size_t</span><span class="o">&gt;</span> <span class="n">factorIndices</span><span class="p">;</span> <span class="n">factoredVocab</span><span class="o">-&gt;</span><span class="n">word2factors</span><span class="p">(</span><span class="n">word</span><span class="p">,</span> <span class="n">factorIndices</span><span class="p">);</span>
+        <span class="c1">//LOG(info, &quot;{} + {} ({}) -&gt; {} -&gt; {}&quot;,</span>
+        <span class="c1">//    factoredVocab-&gt;decode(prevHyp-&gt;tracebackWords()),</span>
+        <span class="c1">//    factoredVocab-&gt;word2string(word), factorIndices[0], prevHyp-&gt;getPathScore(), pathScore);</span>
+      <span class="p">}</span>
+      <span class="k">else</span> <span class="p">{</span>
+        <span class="c1">//LOG(info, &quot;{} |{} ({}) = {} ({}) -&gt; {} -&gt; {}&quot;,</span>
+        <span class="c1">//    factoredVocab-&gt;decodeForDiagnostics(beam[beamHypIdx]-&gt;tracebackWords()),</span>
+        <span class="c1">//    factoredVocab-&gt;getFactorGroupPrefix(factorGroup), factorGroup,</span>
+        <span class="c1">//    factoredVocab-&gt;getFactorName(factorGroup, wordIdx), wordIdx,</span>
+        <span class="c1">//    prevHyp-&gt;getPathScore(), pathScore);</span>
+        <span class="n">word</span> <span class="o">=</span> <span class="n">beam</span><span class="p">[</span><span class="n">beamHypIdx</span><span class="p">]</span><span class="o">-&gt;</span><span class="n">getWord</span><span class="p">();</span>
+        <span class="n">ABORT_IF</span><span class="p">(</span><span class="o">!</span><span class="n">factoredVocab</span><span class="o">-&gt;</span><span class="n">canExpandFactoredWord</span><span class="p">(</span><span class="n">word</span><span class="p">,</span> <span class="n">factorGroup</span><span class="p">),</span>
+                  <span class="s">&quot;A word without this factor snuck through to here??&quot;</span><span class="p">);</span>
+        <span class="n">word</span> <span class="o">=</span> <span class="n">factoredVocab</span><span class="o">-&gt;</span><span class="n">expandFactoredWord</span><span class="p">(</span><span class="n">word</span><span class="p">,</span> <span class="n">factorGroup</span><span class="p">,</span> <span class="n">wordIdx</span><span class="p">);</span>
+        <span class="n">prevBeamHypIdx</span> <span class="o">=</span> <span class="n">prevHyp</span><span class="o">-&gt;</span><span class="n">getPrevStateIndex</span><span class="p">();</span>
+        <span class="n">prevHyp</span> <span class="o">=</span> <span class="n">prevHyp</span><span class="o">-&gt;</span><span class="n">getPrevHyp</span><span class="p">();</span> <span class="c1">// short-circuit the backpointer, so that the traceback does not contain partially factored words</span>
+      <span class="p">}</span>
+    <span class="p">}</span>
+    <span class="k">else</span> <span class="k">if</span> <span class="p">(</span><span class="n">shortlist</span><span class="p">)</span>
+      <span class="n">word</span> <span class="o">=</span> <span class="n">Word</span><span class="o">::</span><span class="n">fromWordIndex</span><span class="p">(</span><span class="n">shortlist</span><span class="o">-&gt;</span><span class="n">reverseMap</span><span class="p">(</span><span class="n">wordIdx</span><span class="p">));</span>
+    <span class="k">else</span>
+      <span class="n">word</span> <span class="o">=</span> <span class="n">Word</span><span class="o">::</span><span class="n">fromWordIndex</span><span class="p">(</span><span class="n">wordIdx</span><span class="p">);</span>
+
+    <span class="k">auto</span> <span class="n">hyp</span> <span class="o">=</span> <span class="n">Hypothesis</span><span class="o">::</span><span class="n">New</span><span class="p">(</span><span class="n">prevHyp</span><span class="p">,</span> <span class="n">word</span><span class="p">,</span> <span class="n">prevBeamHypIdx</span><span class="p">,</span> <span class="n">pathScore</span><span class="p">);</span>
+
+    <span class="c1">// Set score breakdown for n-best lists</span>
+    <span class="k">if</span><span class="p">(</span><span class="n">options_</span><span class="o">-&gt;</span><span class="n">get</span><span class="o">&lt;</span><span class="kt">bool</span><span class="o">&gt;</span><span class="p">(</span><span class="s">&quot;n-best&quot;</span><span class="p">))</span> <span class="p">{</span>
+      <span class="k">auto</span> <span class="n">breakDown</span> <span class="o">=</span> <span class="n">beam</span><span class="p">[</span><span class="n">beamHypIdx</span><span class="p">]</span><span class="o">-&gt;</span><span class="n">getScoreBreakdown</span><span class="p">();</span>
+      <span class="n">ABORT_IF</span><span class="p">(</span><span class="n">factoredVocab</span> <span class="o">&amp;&amp;</span> <span class="n">factorGroup</span> <span class="o">&gt;</span> <span class="mi">0</span> <span class="o">&amp;&amp;</span> <span class="o">!</span><span class="n">factoredVocab</span><span class="o">-&gt;</span><span class="n">canExpandFactoredWord</span><span class="p">(</span><span class="n">word</span><span class="p">,</span> <span class="n">factorGroup</span><span class="p">),</span>
+               <span class="s">&quot;A word without this factor snuck through to here??&quot;</span><span class="p">);</span>
+      <span class="n">breakDown</span><span class="p">.</span><span class="n">resize</span><span class="p">(</span><span class="n">states</span><span class="p">.</span><span class="n">size</span><span class="p">(),</span> <span class="mi">0</span><span class="p">);</span> <span class="c1">// at start, this is empty, so this will set the initial score to 0</span>
+      <span class="k">for</span><span class="p">(</span><span class="kt">size_t</span> <span class="n">j</span> <span class="o">=</span> <span class="mi">0</span><span class="p">;</span> <span class="n">j</span> <span class="o">&lt;</span> <span class="n">states</span><span class="p">.</span><span class="n">size</span><span class="p">();</span> <span class="o">++</span><span class="n">j</span><span class="p">)</span> <span class="p">{</span>
+        <span class="k">auto</span> <span class="n">lval</span> <span class="o">=</span> <span class="n">states</span><span class="p">[</span><span class="n">j</span><span class="p">]</span><span class="o">-&gt;</span><span class="n">getLogProbs</span><span class="p">().</span><span class="n">getFactoredLogitsTensor</span><span class="p">(</span><span class="n">factorGroup</span><span class="p">);</span> <span class="c1">// [maxBeamSize, 1, currentDimBatch, dimFactorVocab]</span>
+        <span class="c1">// The flatting happens based on actual (current) batch size and batch index computed with batch-pruning as we are looking into the pruned tensor</span>
+        <span class="kt">size_t</span> <span class="n">flattenedLogitIndex</span> <span class="o">=</span> <span class="p">(</span><span class="n">beamHypIdx</span> <span class="o">*</span> <span class="n">currentDimBatch</span> <span class="o">+</span> <span class="n">currentBatchIdx</span><span class="p">)</span> <span class="o">*</span> <span class="n">vocabSize</span> <span class="o">+</span> <span class="n">wordIdx</span><span class="p">;</span>  <span class="c1">// (beam idx, batch idx, word idx); note: beam and batch are transposed, compared to &#39;key&#39;</span>
+
+        <span class="c1">// @TODO: use a function on shape() to index, or new method val-&gt;at({i1, i2, i3, i4}) with broadcasting</span>
+        <span class="n">ABORT_IF</span><span class="p">(</span><span class="n">lval</span><span class="o">-&gt;</span><span class="n">shape</span><span class="p">()</span> <span class="o">!=</span> <span class="n">Shape</span><span class="p">({(</span><span class="kt">int</span><span class="p">)</span><span class="n">nBestBeamSize</span><span class="p">,</span> <span class="mi">1</span><span class="p">,</span> <span class="p">(</span><span class="kt">int</span><span class="p">)</span><span class="n">currentDimBatch</span><span class="p">,</span> <span class="p">(</span><span class="kt">int</span><span class="p">)</span><span class="n">vocabSize</span><span class="p">})</span> <span class="o">&amp;&amp;</span>
+                 <span class="p">(</span><span class="n">beamHypIdx</span> <span class="o">==</span> <span class="mi">0</span> <span class="o">&amp;&amp;</span> <span class="n">lval</span><span class="o">-&gt;</span><span class="n">shape</span><span class="p">()</span> <span class="o">!=</span> <span class="n">Shape</span><span class="p">({</span><span class="mi">1</span><span class="p">,</span> <span class="mi">1</span><span class="p">,</span> <span class="p">(</span><span class="kt">int</span><span class="p">)</span><span class="n">currentDimBatch</span><span class="p">,</span> <span class="p">(</span><span class="kt">int</span><span class="p">)</span><span class="n">vocabSize</span><span class="p">})),</span>
+                 <span class="s">&quot;Unexpected shape of logits?? {} != {}&quot;</span><span class="p">,</span> <span class="n">lval</span><span class="o">-&gt;</span><span class="n">shape</span><span class="p">(),</span> <span class="n">Shape</span><span class="p">({(</span><span class="kt">int</span><span class="p">)</span><span class="n">nBestBeamSize</span><span class="p">,</span> <span class="mi">1</span><span class="p">,</span> <span class="p">(</span><span class="kt">int</span><span class="p">)</span><span class="n">currentDimBatch</span><span class="p">,</span> <span class="p">(</span><span class="kt">int</span><span class="p">)</span><span class="n">vocabSize</span><span class="p">}));</span>
+
+        <span class="n">breakDown</span><span class="p">[</span><span class="n">j</span><span class="p">]</span> <span class="o">+=</span> <span class="n">lval</span><span class="o">-&gt;</span><span class="n">get</span><span class="p">(</span><span class="n">flattenedLogitIndex</span><span class="p">);</span>
+      <span class="p">}</span>
+      <span class="n">hyp</span><span class="o">-&gt;</span><span class="n">setScoreBreakdown</span><span class="p">(</span><span class="n">breakDown</span><span class="p">);</span>
+    <span class="p">}</span>
+
+    <span class="c1">// Set alignments</span>
+    <span class="k">if</span><span class="p">(</span><span class="o">!</span><span class="n">align</span><span class="p">.</span><span class="n">empty</span><span class="p">())</span>
+      <span class="n">hyp</span><span class="o">-&gt;</span><span class="n">setAlignment</span><span class="p">(</span><span class="n">getAlignmentsForHypothesis</span><span class="p">(</span><span class="n">align</span><span class="p">,</span> <span class="n">batch</span><span class="p">,</span> <span class="p">(</span><span class="kt">int</span><span class="p">)</span><span class="n">beamHypIdx</span><span class="p">,</span> <span class="p">(</span><span class="kt">int</span><span class="p">)</span><span class="n">currentBatchIdx</span><span class="p">,</span> <span class="p">(</span><span class="kt">int</span><span class="p">)</span><span class="n">origBatchIdx</span><span class="p">,</span> <span class="p">(</span><span class="kt">int</span><span class="p">)</span><span class="n">currentDimBatch</span><span class="p">));</span>
+    <span class="k">else</span> <span class="c1">// not first factor: just copy</span>
+      <span class="n">hyp</span><span class="o">-&gt;</span><span class="n">setAlignment</span><span class="p">(</span><span class="n">beam</span><span class="p">[</span><span class="n">beamHypIdx</span><span class="p">]</span><span class="o">-&gt;</span><span class="n">getAlignment</span><span class="p">());</span>
+
+    <span class="n">newBeam</span><span class="p">.</span><span class="n">push_back</span><span class="p">(</span><span class="n">hyp</span><span class="p">);</span>
+  <span class="p">}</span>
+
+  <span class="c1">// if factored vocab and this is not the first factor, we need to</span>
+  <span class="c1">// also propagate factored hypotheses that do not get expanded in this step because they don&#39;t have this factor</span>
+  <span class="k">if</span> <span class="p">(</span><span class="n">factorGroup</span> <span class="o">&gt;</span> <span class="mi">0</span><span class="p">)</span> <span class="p">{</span>
+    <span class="k">for</span> <span class="p">(</span><span class="kt">size_t</span> <span class="n">batchIdx</span> <span class="o">=</span> <span class="mi">0</span><span class="p">;</span> <span class="n">batchIdx</span> <span class="o">&lt;</span> <span class="n">beams</span><span class="p">.</span><span class="n">size</span><span class="p">();</span> <span class="n">batchIdx</span><span class="o">++</span><span class="p">)</span> <span class="p">{</span>
+      <span class="k">const</span> <span class="k">auto</span><span class="o">&amp;</span> <span class="n">beam</span> <span class="o">=</span> <span class="n">beams</span><span class="p">[</span><span class="n">batchIdx</span><span class="p">];</span>
+      <span class="k">auto</span><span class="o">&amp;</span> <span class="n">newBeam</span> <span class="o">=</span> <span class="n">newBeams</span><span class="p">[</span><span class="n">batchIdx</span><span class="p">];</span>
+      <span class="k">for</span> <span class="p">(</span><span class="k">const</span> <span class="k">auto</span><span class="o">&amp;</span> <span class="nl">beamHyp</span> <span class="p">:</span> <span class="n">beam</span><span class="p">)</span> <span class="p">{</span>
+        <span class="k">auto</span> <span class="n">word</span> <span class="o">=</span> <span class="n">beamHyp</span><span class="o">-&gt;</span><span class="n">getWord</span><span class="p">();</span>
+        <span class="c1">//LOG(info, &quot;Checking {}&quot;, factoredVocab-&gt;word2string(word));</span>
+        <span class="k">if</span> <span class="p">(</span><span class="n">factoredVocab</span><span class="o">-&gt;</span><span class="n">canExpandFactoredWord</span><span class="p">(</span><span class="n">word</span><span class="p">,</span> <span class="n">factorGroup</span><span class="p">))</span> <span class="c1">// handled above</span>
+          <span class="k">continue</span><span class="p">;</span>
+        <span class="c1">//LOG(info, &quot;Forwarded {}&quot;, factoredVocab-&gt;word2string(word));</span>
+        <span class="n">newBeam</span><span class="p">.</span><span class="n">push_back</span><span class="p">(</span><span class="n">beamHyp</span><span class="p">);</span>
+      <span class="p">}</span>
+      <span class="k">if</span> <span class="p">(</span><span class="n">newBeam</span><span class="p">.</span><span class="n">size</span><span class="p">()</span> <span class="o">&gt;</span> <span class="n">beam</span><span class="p">.</span><span class="n">size</span><span class="p">())</span> <span class="p">{</span>
+        <span class="c1">//LOG(info, &quot;Size {}, sorting...&quot;, newBeam.size());</span>
+        <span class="n">std</span><span class="o">::</span><span class="n">nth_element</span><span class="p">(</span><span class="n">newBeam</span><span class="p">.</span><span class="n">begin</span><span class="p">(),</span> <span class="n">newBeam</span><span class="p">.</span><span class="n">begin</span><span class="p">()</span> <span class="o">+</span> <span class="n">beam</span><span class="p">.</span><span class="n">size</span><span class="p">(),</span> <span class="n">newBeam</span><span class="p">.</span><span class="n">end</span><span class="p">(),</span> <span class="p">[](</span><span class="n">Hypothesis</span><span class="o">::</span><span class="n">PtrType</span> <span class="n">a</span><span class="p">,</span> <span class="n">Hypothesis</span><span class="o">::</span><span class="n">PtrType</span> <span class="n">b</span><span class="p">)</span> <span class="p">{</span>
+          <span class="k">return</span> <span class="n">a</span><span class="o">-&gt;</span><span class="n">getPathScore</span><span class="p">()</span> <span class="o">&gt;</span> <span class="n">b</span><span class="o">-&gt;</span><span class="n">getPathScore</span><span class="p">();</span> <span class="c1">// (sort highest score first)</span>
+        <span class="p">});</span>
+        <span class="c1">//LOG(info, &quot;Size {}, sorted...&quot;, newBeam.size());</span>
+        <span class="n">newBeam</span><span class="p">.</span><span class="n">resize</span><span class="p">(</span><span class="n">beam</span><span class="p">.</span><span class="n">size</span><span class="p">());</span>
+      <span class="p">}</span>
+    <span class="p">}</span>
+  <span class="p">}</span>
+  <span class="k">return</span> <span class="n">newBeams</span><span class="p">;</span>
+<span class="p">}</span>
+
+<span class="n">std</span><span class="o">::</span><span class="n">vector</span><span class="o">&lt;</span><span class="kt">float</span><span class="o">&gt;</span> <span class="n">BeamSearch</span><span class="o">::</span><span class="n">getAlignmentsForHypothesis</span><span class="p">(</span> <span class="c1">// -&gt; P(s|t) for current t and given beam and batch dim</span>
+    <span class="k">const</span> <span class="n">std</span><span class="o">::</span><span class="n">vector</span><span class="o">&lt;</span><span class="kt">float</span><span class="o">&gt;</span> <span class="n">alignAll</span><span class="p">,</span> <span class="c1">// [beam depth, max src length, batch size, 1], flattened vector of all attention probablities</span>
+    <span class="n">Ptr</span><span class="o">&lt;</span><span class="n">data</span><span class="o">::</span><span class="n">CorpusBatch</span><span class="o">&gt;</span> <span class="n">batch</span><span class="p">,</span>
+    <span class="kt">int</span> <span class="n">beamHypIdx</span><span class="p">,</span>
+    <span class="kt">int</span> <span class="n">currentBatchIdx</span><span class="p">,</span>
+    <span class="kt">int</span> <span class="n">origBatchIdx</span><span class="p">,</span>
+    <span class="kt">int</span> <span class="n">currentDimBatch</span><span class="p">)</span> <span class="k">const</span> <span class="p">{</span>
+  <span class="c1">// Let&#39;s B be the beam size, N be the number of batched sentences,</span>
+  <span class="c1">// and L the number of words in the longest sentence in the batch.</span>
+  <span class="c1">// The alignment vector:</span>
+  <span class="c1">//</span>
+  <span class="c1">// if(first)</span>
+  <span class="c1">//   * has length of N x L if it&#39;s the first beam</span>
+  <span class="c1">//   * stores elements in the following order:</span>
+  <span class="c1">//     beam1 = [word1-batch1, word1-batch2, ..., word2-batch1, ...]</span>
+  <span class="c1">// else</span>
+  <span class="c1">//   * has length of N x L x B</span>
+  <span class="c1">//   * stores elements in the following order:</span>
+  <span class="c1">//     beams = [beam1, beam2, ..., beam_n]</span>
+  <span class="c1">//</span>
+  <span class="c1">// The mask vector is always of length N x L and has 1/0s stored like</span>
+  <span class="c1">// in a single beam, i.e.:</span>
+  <span class="c1">//   * [word1-batch1, word1-batch2, ..., word2-batch1, ...]</span>
+  <span class="c1">//</span>
+
+  <span class="kt">size_t</span> <span class="n">origDimBatch</span> <span class="o">=</span> <span class="n">batch</span><span class="o">-&gt;</span><span class="n">size</span><span class="p">();</span>  <span class="c1">// number of sentences in batch</span>
+  <span class="kt">size_t</span> <span class="n">batchWidth</span>   <span class="o">=</span> <span class="n">batch</span><span class="o">-&gt;</span><span class="n">width</span><span class="p">();</span> <span class="c1">// max src length</span>
+
+  <span class="c1">// loop over words of batch entry &#39;currentBatchIdx&#39; and beam entry &#39;beamHypIdx&#39;</span>
+  <span class="n">std</span><span class="o">::</span><span class="n">vector</span><span class="o">&lt;</span><span class="kt">float</span><span class="o">&gt;</span> <span class="n">align</span><span class="p">;</span>
+  <span class="k">for</span><span class="p">(</span><span class="kt">size_t</span> <span class="n">srcPos</span> <span class="o">=</span> <span class="mi">0</span><span class="p">;</span> <span class="n">srcPos</span> <span class="o">&lt;</span> <span class="n">batchWidth</span><span class="p">;</span> <span class="o">++</span><span class="n">srcPos</span><span class="p">)</span> <span class="p">{</span> <span class="c1">// loop over source positions</span>
+    <span class="c1">// We are looking into the probabilites from an actual tensor, hence we need to use currentDimBatch and currentBatchIdx.</span>
+    <span class="kt">size_t</span> <span class="n">currentAttIdx</span> <span class="o">=</span> <span class="p">(</span><span class="n">batchWidth</span> <span class="o">*</span> <span class="n">beamHypIdx</span> <span class="o">+</span> <span class="n">srcPos</span><span class="p">)</span> <span class="o">*</span> <span class="n">currentDimBatch</span> <span class="o">+</span> <span class="n">currentBatchIdx</span><span class="p">;</span> <span class="c1">// = flatten [beam index, s, batch index, 0]</span>
+
+    <span class="c1">// We are looking into the mask from the orginal batch, hence we need to use origDmBatch and origBatchIdx.</span>
+    <span class="kt">size_t</span> <span class="n">origAttIdx</span>  <span class="o">=</span> <span class="p">(</span><span class="n">batchWidth</span> <span class="o">*</span> <span class="n">beamHypIdx</span> <span class="o">+</span> <span class="n">srcPos</span><span class="p">)</span> <span class="o">*</span> <span class="n">origDimBatch</span> <span class="o">+</span> <span class="n">origBatchIdx</span><span class="p">;;</span> <span class="c1">// = flatten [beam index, s, batch index, 0]</span>
+    <span class="kt">size_t</span> <span class="n">origMaskIdx</span> <span class="o">=</span> <span class="n">origAttIdx</span> <span class="o">%</span> <span class="p">(</span><span class="n">batchWidth</span> <span class="o">*</span> <span class="n">origDimBatch</span><span class="p">);</span> <span class="c1">// == batchIdx + (batchSize * srcPos) = flatten [0, s, batch index, 0]</span>
+
+    <span class="c1">// If the original position is not masked out used the corresponding current attention score.</span>
+    <span class="k">if</span><span class="p">(</span><span class="n">batch</span><span class="o">-&gt;</span><span class="n">front</span><span class="p">()</span><span class="o">-&gt;</span><span class="n">mask</span><span class="p">()[</span><span class="n">origMaskIdx</span><span class="p">]</span> <span class="o">!=</span> <span class="mi">0</span><span class="p">)</span>
+      <span class="n">align</span><span class="p">.</span><span class="n">emplace_back</span><span class="p">(</span><span class="n">alignAll</span><span class="p">[</span><span class="n">currentAttIdx</span><span class="p">]);</span>
+  <span class="p">}</span>
+  <span class="k">return</span> <span class="n">align</span><span class="p">;</span>
+<span class="p">}</span>
+
+<span class="c1">// remove all beam entries that have reached EOS</span>
+<span class="n">Beams</span> <span class="n">BeamSearch</span><span class="o">::</span><span class="n">purgeBeams</span><span class="p">(</span><span class="k">const</span> <span class="n">Beams</span><span class="o">&amp;</span> <span class="n">beams</span><span class="p">,</span> <span class="cm">/*in/out=*/</span><span class="n">std</span><span class="o">::</span><span class="n">vector</span><span class="o">&lt;</span><span class="n">IndexType</span><span class="o">&gt;&amp;</span> <span class="n">batchIdxMap</span><span class="p">)</span> <span class="p">{</span>
+  <span class="k">const</span> <span class="k">auto</span> <span class="n">trgEosId</span> <span class="o">=</span> <span class="n">trgVocab_</span><span class="o">-&gt;</span><span class="n">getEosId</span><span class="p">();</span>
+  <span class="n">Beams</span> <span class="n">newBeams</span><span class="p">;</span>
+  <span class="kt">size_t</span> <span class="n">beamIdx</span> <span class="o">=</span> <span class="mi">0</span><span class="p">;</span> <span class="c1">// beam index</span>
+  <span class="k">for</span><span class="p">(</span><span class="k">auto</span> <span class="nl">beam</span> <span class="p">:</span> <span class="n">beams</span><span class="p">)</span> <span class="p">{</span>
+    <span class="n">Beam</span> <span class="n">newBeam</span><span class="p">;</span> <span class="c1">// a beam of surviving hyps</span>
+    <span class="k">for</span><span class="p">(</span><span class="k">auto</span> <span class="nl">hyp</span> <span class="p">:</span> <span class="n">beam</span><span class="p">)</span>
+      <span class="k">if</span><span class="p">(</span><span class="n">hyp</span><span class="o">-&gt;</span><span class="n">getWord</span><span class="p">()</span> <span class="o">!=</span> <span class="n">trgEosId</span><span class="p">)</span> <span class="c1">// if this hyp is not finished,</span>
+        <span class="n">newBeam</span><span class="p">.</span><span class="n">push_back</span><span class="p">(</span><span class="n">hyp</span><span class="p">);</span>      <span class="c1">// move over to beam of surviving hyps</span>
+
+    <span class="k">if</span><span class="p">(</span><span class="n">PURGE_BATCH</span><span class="p">)</span>
+      <span class="k">if</span><span class="p">(</span><span class="n">newBeam</span><span class="p">.</span><span class="n">empty</span><span class="p">()</span> <span class="o">&amp;&amp;</span> <span class="o">!</span><span class="n">beam</span><span class="p">.</span><span class="n">empty</span><span class="p">())</span> <span class="p">{</span>      <span class="c1">// previous beam had hyps, but all were finished in this step, newBeam will now stay empty</span>
+        <span class="k">for</span><span class="p">(</span><span class="kt">size_t</span> <span class="n">i</span> <span class="o">=</span> <span class="n">beamIdx</span> <span class="o">+</span> <span class="mi">1</span><span class="p">;</span> <span class="n">i</span> <span class="o">&lt;</span> <span class="n">beams</span><span class="p">.</span><span class="n">size</span><span class="p">();</span> <span class="o">++</span><span class="n">i</span><span class="p">)</span> <span class="c1">// for all entries above this beam</span>
+          <span class="n">batchIdxMap</span><span class="p">[</span><span class="n">i</span><span class="p">]</span> <span class="o">=</span> <span class="n">batchIdxMap</span><span class="p">[</span><span class="n">i</span><span class="p">]</span> <span class="o">-</span> <span class="mi">1</span><span class="p">;</span>  <span class="c1">// make them look at one batch index below, as the current entry will be removed from the batch.</span>
+    <span class="p">}</span>
+
+    <span class="n">newBeams</span><span class="p">.</span><span class="n">push_back</span><span class="p">(</span><span class="n">newBeam</span><span class="p">);</span>
+    <span class="n">beamIdx</span><span class="o">++</span><span class="p">;</span> <span class="c1">// move to next beam index</span>
+  <span class="p">}</span>
+  <span class="k">return</span> <span class="n">newBeams</span><span class="p">;</span>
+<span class="p">}</span>
+
+<span class="c1">//**********************************************************************</span>
+<span class="c1">// main decoding function</span>
+<span class="n">Histories</span> <span class="n">BeamSearch</span><span class="o">::</span><span class="n">search</span><span class="p">(</span><span class="n">Ptr</span><span class="o">&lt;</span><span class="n">ExpressionGraph</span><span class="o">&gt;</span> <span class="n">graph</span><span class="p">,</span> <span class="n">Ptr</span><span class="o">&lt;</span><span class="n">data</span><span class="o">::</span><span class="n">CorpusBatch</span><span class="o">&gt;</span> <span class="n">batch</span><span class="p">)</span> <span class="p">{</span>
+  <span class="k">auto</span> <span class="n">factoredVocab</span> <span class="o">=</span> <span class="n">trgVocab_</span><span class="o">-&gt;</span><span class="n">tryAs</span><span class="o">&lt;</span><span class="n">FactoredVocab</span><span class="o">&gt;</span><span class="p">();</span>
+  <span class="kt">size_t</span> <span class="n">numFactorGroups</span> <span class="o">=</span> <span class="n">factoredVocab</span> <span class="o">?</span> <span class="n">factoredVocab</span><span class="o">-&gt;</span><span class="n">getNumGroups</span><span class="p">()</span> <span class="o">:</span> <span class="mi">1</span><span class="p">;</span>
+  <span class="k">if</span> <span class="p">(</span><span class="n">numFactorGroups</span> <span class="o">==</span> <span class="mi">1</span><span class="p">)</span> <span class="c1">// if no factors then we didn&#39;t need this object in the first place</span>
+    <span class="n">factoredVocab</span><span class="p">.</span><span class="n">reset</span><span class="p">();</span>
+
+  <span class="c1">// We will use the prefix &quot;origBatch...&quot; whenever we refer to batch dimensions of the original batch. These do not change during search.</span>
+  <span class="c1">// We will use the prefix &quot;currentBatch..&quot; whenever we refer to batch dimension that can change due to batch-pruning.</span>
+  <span class="k">const</span> <span class="kt">int</span> <span class="n">origDimBatch</span> <span class="o">=</span> <span class="p">(</span><span class="kt">int</span><span class="p">)</span><span class="n">batch</span><span class="o">-&gt;</span><span class="n">size</span><span class="p">();</span>
+  <span class="k">const</span> <span class="k">auto</span> <span class="n">trgEosId</span> <span class="o">=</span> <span class="n">trgVocab_</span><span class="o">-&gt;</span><span class="n">getEosId</span><span class="p">();</span>
+  <span class="k">const</span> <span class="k">auto</span> <span class="n">trgUnkId</span> <span class="o">=</span> <span class="n">trgVocab_</span><span class="o">-&gt;</span><span class="n">getUnkId</span><span class="p">();</span>
+
+  <span class="k">auto</span> <span class="n">getNBestList</span> <span class="o">=</span> <span class="n">createGetNBestListFn</span><span class="p">(</span><span class="n">beamSize_</span><span class="p">,</span> <span class="n">origDimBatch</span><span class="p">,</span> <span class="n">graph</span><span class="o">-&gt;</span><span class="n">getDeviceId</span><span class="p">());</span>
+
+  <span class="k">for</span><span class="p">(</span><span class="k">auto</span> <span class="nl">scorer</span> <span class="p">:</span> <span class="n">scorers_</span><span class="p">)</span> <span class="p">{</span>
+    <span class="n">scorer</span><span class="o">-&gt;</span><span class="n">clear</span><span class="p">(</span><span class="n">graph</span><span class="p">);</span>
+  <span class="p">}</span>
+
+  <span class="n">Histories</span> <span class="n">histories</span><span class="p">(</span><span class="n">origDimBatch</span><span class="p">);</span>
+  <span class="k">for</span><span class="p">(</span><span class="kt">int</span> <span class="n">i</span> <span class="o">=</span> <span class="mi">0</span><span class="p">;</span> <span class="n">i</span> <span class="o">&lt;</span> <span class="n">origDimBatch</span><span class="p">;</span> <span class="o">++</span><span class="n">i</span><span class="p">)</span> <span class="p">{</span>
+    <span class="kt">size_t</span> <span class="n">sentId</span> <span class="o">=</span> <span class="n">batch</span><span class="o">-&gt;</span><span class="n">getSentenceIds</span><span class="p">()[</span><span class="n">i</span><span class="p">];</span>
+    <span class="n">histories</span><span class="p">[</span><span class="n">i</span><span class="p">]</span> <span class="o">=</span> <span class="n">New</span><span class="o">&lt;</span><span class="n">History</span><span class="o">&gt;</span><span class="p">(</span><span class="n">sentId</span><span class="p">,</span>
+                                <span class="n">options_</span><span class="o">-&gt;</span><span class="n">get</span><span class="o">&lt;</span><span class="kt">float</span><span class="o">&gt;</span><span class="p">(</span><span class="s">&quot;normalize&quot;</span><span class="p">),</span>
+                                <span class="n">options_</span><span class="o">-&gt;</span><span class="n">get</span><span class="o">&lt;</span><span class="kt">float</span><span class="o">&gt;</span><span class="p">(</span><span class="s">&quot;word-penalty&quot;</span><span class="p">));</span>
+  <span class="p">}</span>
+
+  <span class="c1">// start states</span>
+  <span class="n">std</span><span class="o">::</span><span class="n">vector</span><span class="o">&lt;</span><span class="n">Ptr</span><span class="o">&lt;</span><span class="n">ScorerState</span><span class="o">&gt;&gt;</span> <span class="n">states</span><span class="p">;</span>
+  <span class="k">for</span><span class="p">(</span><span class="k">auto</span> <span class="nl">scorer</span> <span class="p">:</span> <span class="n">scorers_</span><span class="p">)</span> <span class="p">{</span>
+    <span class="n">states</span><span class="p">.</span><span class="n">push_back</span><span class="p">(</span><span class="n">scorer</span><span class="o">-&gt;</span><span class="n">startState</span><span class="p">(</span><span class="n">graph</span><span class="p">,</span> <span class="n">batch</span><span class="p">));</span>
+  <span class="p">}</span>
+
+  <span class="c1">// create one beam per batch entry with sentence-start hypothesis</span>
+  <span class="n">Beams</span> <span class="n">beams</span><span class="p">(</span><span class="n">origDimBatch</span><span class="p">,</span> <span class="n">Beam</span><span class="p">(</span><span class="n">beamSize_</span><span class="p">,</span> <span class="n">Hypothesis</span><span class="o">::</span><span class="n">New</span><span class="p">()));</span> <span class="c1">// array [origDimBatch] of array [maxBeamSize] of Hypothesis, keeps full size through search.</span>
+                                                                 <span class="c1">// batch purging is determined from an empty sub-beam.</span>
+  <span class="n">std</span><span class="o">::</span><span class="n">vector</span><span class="o">&lt;</span><span class="n">IndexType</span><span class="o">&gt;</span> <span class="n">batchIdxMap</span><span class="p">(</span><span class="n">origDimBatch</span><span class="p">);</span> <span class="c1">// Record at which batch entry a beam is looking.</span>
+                                                    <span class="c1">// By default that corresponds to position in array,</span>
+                                                    <span class="c1">// but shifts in the course of removing batch entries when they are finished.</span>
+
+  <span class="k">const</span> <span class="n">std</span><span class="o">::</span><span class="n">vector</span><span class="o">&lt;</span><span class="kt">bool</span><span class="o">&gt;</span> <span class="n">emptyBatchEntries</span><span class="p">;</span> <span class="c1">// used for recording if there are empty input batch entries</span>
+  <span class="k">for</span><span class="p">(</span><span class="kt">int</span> <span class="n">origBatchIdx</span> <span class="o">=</span> <span class="mi">0</span><span class="p">;</span> <span class="n">origBatchIdx</span> <span class="o">&lt;</span> <span class="n">origDimBatch</span><span class="p">;</span> <span class="o">++</span><span class="n">origBatchIdx</span><span class="p">)</span> <span class="p">{</span>
+    <span class="n">batchIdxMap</span><span class="p">[</span><span class="n">origBatchIdx</span><span class="p">]</span> <span class="o">=</span> <span class="n">origBatchIdx</span><span class="p">;</span> <span class="c1">// map to same position on initialization</span>
+    <span class="k">auto</span><span class="o">&amp;</span> <span class="n">beam</span> <span class="o">=</span> <span class="n">beams</span><span class="p">[</span><span class="n">origBatchIdx</span><span class="p">];</span>
+    <span class="n">histories</span><span class="p">[</span><span class="n">origBatchIdx</span><span class="p">]</span><span class="o">-&gt;</span><span class="n">add</span><span class="p">(</span><span class="n">beam</span><span class="p">,</span> <span class="n">trgEosId</span><span class="p">);</span> <span class="c1">// add beams with start-hypotheses to traceback grid</span>
+
+    <span class="c1">// Mark batch entries that consist only of source &lt;EOS&gt; i.e. these are empty lines. They will be forced to EOS and purged from batch</span>
+    <span class="k">const</span> <span class="k">auto</span><span class="o">&amp;</span> <span class="n">srcEosId</span> <span class="o">=</span> <span class="n">batch</span><span class="o">-&gt;</span><span class="n">front</span><span class="p">()</span><span class="o">-&gt;</span><span class="n">vocab</span><span class="p">()</span><span class="o">-&gt;</span><span class="n">getEosId</span><span class="p">();</span>
+    <span class="k">const_cast</span><span class="o">&lt;</span><span class="n">std</span><span class="o">::</span><span class="n">vector</span><span class="o">&lt;</span><span class="kt">bool</span><span class="o">&gt;&amp;&gt;</span><span class="p">(</span><span class="n">emptyBatchEntries</span><span class="p">).</span><span class="n">push_back</span><span class="p">(</span><span class="n">batch</span><span class="o">-&gt;</span><span class="n">front</span><span class="p">()</span><span class="o">-&gt;</span><span class="n">data</span><span class="p">()[</span><span class="n">origBatchIdx</span><span class="p">]</span> <span class="o">==</span> <span class="n">srcEosId</span><span class="p">);</span> <span class="c1">// const_cast during construction</span>
+  <span class="p">}</span>
+
+  <span class="c1">// determine index of UNK in the log prob vectors if we want to suppress it in the decoding process</span>
+  <span class="kt">int</span> <span class="n">unkColId</span> <span class="o">=</span> <span class="mi">-1</span><span class="p">;</span>
+  <span class="k">if</span> <span class="p">(</span><span class="n">trgUnkId</span> <span class="o">!=</span> <span class="n">Word</span><span class="o">::</span><span class="n">NONE</span> <span class="o">&amp;&amp;</span> <span class="o">!</span><span class="n">options_</span><span class="o">-&gt;</span><span class="n">get</span><span class="o">&lt;</span><span class="kt">bool</span><span class="o">&gt;</span><span class="p">(</span><span class="s">&quot;allow-unk&quot;</span><span class="p">,</span> <span class="nb">false</span><span class="p">))</span> <span class="p">{</span> <span class="c1">// do we need to suppress unk?</span>
+    <span class="n">unkColId</span> <span class="o">=</span> <span class="n">factoredVocab</span> <span class="o">?</span> <span class="n">factoredVocab</span><span class="o">-&gt;</span><span class="n">getUnkIndex</span><span class="p">()</span> <span class="o">:</span> <span class="n">trgUnkId</span><span class="p">.</span><span class="n">toWordIndex</span><span class="p">();</span> <span class="c1">// what&#39;s the raw index of unk in the log prob vector?</span>
+    <span class="k">auto</span> <span class="n">shortlist</span> <span class="o">=</span> <span class="n">scorers_</span><span class="p">[</span><span class="mi">0</span><span class="p">]</span><span class="o">-&gt;</span><span class="n">getShortlist</span><span class="p">();</span>      <span class="c1">// first shortlist is generally ok, @TODO: make sure they are the same across scorers?</span>
+    <span class="k">if</span> <span class="p">(</span><span class="n">shortlist</span><span class="p">)</span>
+      <span class="n">unkColId</span> <span class="o">=</span> <span class="n">shortlist</span><span class="o">-&gt;</span><span class="n">tryForwardMap</span><span class="p">(</span><span class="n">unkColId</span><span class="p">);</span> <span class="c1">// use shifted postion of unk in case of using a shortlist, shortlist may have removed unk which results in -1</span>
+  <span class="p">}</span>
+
+  <span class="c1">// the decoding process updates the following state information in each output time step:</span>
+  <span class="c1">//  - beams: array [origDimBatch] of array [maxBeamSize] of Hypothesis</span>
+  <span class="c1">//     - current output time step&#39;s set of active hypotheses, aka active search space</span>
+  <span class="c1">//  - states[.]: ScorerState</span>
+  <span class="c1">//     - NN state; one per scorer, e.g. 2 for ensemble of 2</span>
+  <span class="c1">// and it forms the following return value</span>
+  <span class="c1">//  - histories: array [origDimBatch] of History</span>
+  <span class="c1">//    with History: vector [t] of array [maxBeamSize] of Hypothesis</span>
+  <span class="c1">//    with Hypothesis: (last word, aggregate score, prev Hypothesis)</span>
+
+  <span class="n">IndexType</span> <span class="n">currentDimBatch</span> <span class="o">=</span> <span class="n">origDimBatch</span><span class="p">;</span>
+  <span class="k">auto</span> <span class="n">prevBatchIdxMap</span> <span class="o">=</span> <span class="n">batchIdxMap</span><span class="p">;</span> <span class="c1">// [origBatchIdx -&gt; currentBatchIdx] but shifted by one time step</span>
+  <span class="c1">// main loop over output time steps</span>
+  <span class="k">for</span> <span class="p">(</span><span class="kt">size_t</span> <span class="n">t</span> <span class="o">=</span> <span class="mi">0</span><span class="p">;</span> <span class="p">;</span> <span class="n">t</span><span class="o">++</span><span class="p">)</span> <span class="p">{</span>
+    <span class="n">ABORT_IF</span><span class="p">(</span><span class="n">origDimBatch</span> <span class="o">!=</span> <span class="n">beams</span><span class="p">.</span><span class="n">size</span><span class="p">(),</span> <span class="s">&quot;Lost a batch entry??&quot;</span><span class="p">);</span>
+    <span class="c1">// determine beam size for next output time step, as max over still-active sentences</span>
+    <span class="c1">// E.g. if all batch entries are down from beam 5 to no more than 4 surviving hyps, then</span>
+    <span class="c1">// switch to beam of 4 for all. If all are done, then beam ends up being 0, and we are done.</span>
+    <span class="kt">size_t</span> <span class="n">maxBeamSize</span> <span class="o">=</span> <span class="mi">0</span><span class="p">;</span> <span class="c1">// @TODO: is there some std::algorithm for this?</span>
+    <span class="k">for</span><span class="p">(</span><span class="k">auto</span><span class="o">&amp;</span> <span class="nl">beam</span> <span class="p">:</span> <span class="n">beams</span><span class="p">)</span>
+      <span class="k">if</span><span class="p">(</span><span class="n">beam</span><span class="p">.</span><span class="n">size</span><span class="p">()</span> <span class="o">&gt;</span> <span class="n">maxBeamSize</span><span class="p">)</span>
+        <span class="n">maxBeamSize</span> <span class="o">=</span> <span class="n">beam</span><span class="p">.</span><span class="n">size</span><span class="p">();</span>
+
+    <span class="c1">// done if all batch entries have reached EOS on all beam entries</span>
+    <span class="k">if</span> <span class="p">(</span><span class="n">maxBeamSize</span> <span class="o">==</span> <span class="mi">0</span><span class="p">)</span>
+      <span class="k">break</span><span class="p">;</span>
+
+    <span class="k">for</span> <span class="p">(</span><span class="kt">size_t</span> <span class="n">factorGroup</span> <span class="o">=</span> <span class="mi">0</span><span class="p">;</span> <span class="n">factorGroup</span> <span class="o">&lt;</span> <span class="n">numFactorGroups</span><span class="p">;</span> <span class="n">factorGroup</span><span class="o">++</span><span class="p">)</span> <span class="p">{</span>
+      <span class="c1">// for factored vocabs, we do one factor at a time, but without updating the scorer for secondary factors</span>
+
+      <span class="c1">//**********************************************************************</span>
+      <span class="c1">// create constant containing previous path scores for current beam</span>
+      <span class="c1">// Also create mapping of hyp indices, for reordering the decoder-state tensors.</span>
+      <span class="n">std</span><span class="o">::</span><span class="n">vector</span><span class="o">&lt;</span><span class="n">IndexType</span><span class="o">&gt;</span> <span class="n">batchIndices</span><span class="p">;</span>    <span class="c1">// [1,           1, currentDimBatch, 1] indices of currently used batch indices with regard to current, actual tensors</span>
+      <span class="n">std</span><span class="o">::</span><span class="n">vector</span><span class="o">&lt;</span><span class="n">IndexType</span><span class="o">&gt;</span> <span class="n">hypIndices</span><span class="p">;</span>      <span class="c1">// [maxBeamSize, 1, currentDimBatch, 1] (flattened) tensor index ((beamHypIdx, batchIdx), flattened) of prev hyp that a hyp originated from</span>
+      <span class="n">std</span><span class="o">::</span><span class="n">vector</span><span class="o">&lt;</span><span class="n">Word</span><span class="o">&gt;</span> <span class="n">prevWords</span><span class="p">;</span>            <span class="c1">// [maxBeamSize, 1, currentDimBatch, 1] (flattened) word that a hyp ended in, for advancing the decoder-model&#39;s history</span>
+      <span class="n">Expr</span> <span class="n">prevPathScores</span><span class="p">;</span>                    <span class="c1">// [maxBeamSize, 1, currentDimBatch, 1], path score that a hyp ended in (last axis will broadcast into vocab size when adding expandedPathScores)</span>
+
+      <span class="kt">bool</span> <span class="n">anyCanExpand</span> <span class="o">=</span> <span class="nb">false</span><span class="p">;</span> <span class="c1">// stays false if all hyps are invalid factor expansions</span>
+      <span class="k">if</span><span class="p">(</span><span class="n">t</span> <span class="o">==</span> <span class="mi">0</span> <span class="o">&amp;&amp;</span> <span class="n">factorGroup</span> <span class="o">==</span> <span class="mi">0</span><span class="p">)</span> <span class="p">{</span> <span class="c1">// no scores yet</span>
+        <span class="n">prevPathScores</span> <span class="o">=</span> <span class="n">graph</span><span class="o">-&gt;</span><span class="n">constant</span><span class="p">({</span><span class="mi">1</span><span class="p">,</span> <span class="mi">1</span><span class="p">,</span> <span class="mi">1</span><span class="p">,</span> <span class="mi">1</span><span class="p">},</span> <span class="n">inits</span><span class="o">::</span><span class="n">fromValue</span><span class="p">(</span><span class="mi">0</span><span class="p">));</span>
+        <span class="n">anyCanExpand</span> <span class="o">=</span> <span class="nb">true</span><span class="p">;</span>
+
+        <span class="c1">// at the beginning all batch entries are used</span>
+        <span class="n">batchIndices</span><span class="p">.</span><span class="n">resize</span><span class="p">(</span><span class="n">origDimBatch</span><span class="p">);</span>
+        <span class="n">std</span><span class="o">::</span><span class="n">iota</span><span class="p">(</span><span class="n">batchIndices</span><span class="p">.</span><span class="n">begin</span><span class="p">(),</span> <span class="n">batchIndices</span><span class="p">.</span><span class="n">end</span><span class="p">(),</span> <span class="mi">0</span><span class="p">);</span>
+      <span class="p">}</span> <span class="k">else</span> <span class="p">{</span>
+        <span class="k">if</span><span class="p">(</span><span class="n">factorGroup</span> <span class="o">==</span> <span class="mi">0</span><span class="p">)</span>                                                              <span class="c1">// only factorGroup==0 can subselect neural state</span>
+          <span class="k">for</span><span class="p">(</span><span class="kt">int</span> <span class="n">currentBatchIdx</span> <span class="o">=</span> <span class="mi">0</span><span class="p">;</span> <span class="n">currentBatchIdx</span> <span class="o">&lt;</span> <span class="n">beams</span><span class="p">.</span><span class="n">size</span><span class="p">();</span> <span class="o">++</span><span class="n">currentBatchIdx</span><span class="p">)</span> <span class="c1">// loop over batch entries (active sentences)</span>
+            <span class="k">if</span><span class="p">(</span><span class="o">!</span><span class="n">beams</span><span class="p">[</span><span class="n">currentBatchIdx</span><span class="p">].</span><span class="n">empty</span><span class="p">()</span> <span class="o">||</span> <span class="o">!</span><span class="n">PURGE_BATCH</span><span class="p">)</span>                           <span class="c1">// for each beam check</span>
+              <span class="n">batchIndices</span><span class="p">.</span><span class="n">push_back</span><span class="p">(</span><span class="n">prevBatchIdxMap</span><span class="p">[</span><span class="n">currentBatchIdx</span><span class="p">]);</span>                   <span class="c1">// which batch entries were active in previous step</span>
+
+        <span class="n">std</span><span class="o">::</span><span class="n">vector</span><span class="o">&lt;</span><span class="kt">float</span><span class="o">&gt;</span> <span class="n">prevScores</span><span class="p">;</span>
+        <span class="k">for</span><span class="p">(</span><span class="kt">size_t</span> <span class="n">beamHypIdx</span> <span class="o">=</span> <span class="mi">0</span><span class="p">;</span> <span class="n">beamHypIdx</span> <span class="o">&lt;</span> <span class="n">maxBeamSize</span><span class="p">;</span> <span class="o">++</span><span class="n">beamHypIdx</span><span class="p">)</span> <span class="p">{</span> <span class="c1">// loop over globally maximal beam-size (maxBeamSize)</span>
+          <span class="k">for</span><span class="p">(</span><span class="kt">int</span> <span class="n">origBatchIdx</span> <span class="o">=</span> <span class="mi">0</span><span class="p">;</span> <span class="n">origBatchIdx</span> <span class="o">&lt;</span> <span class="n">origDimBatch</span><span class="p">;</span> <span class="o">++</span><span class="n">origBatchIdx</span><span class="p">)</span> <span class="p">{</span> <span class="c1">// loop over all batch entries (active and inactive)</span>
+            <span class="k">auto</span><span class="o">&amp;</span> <span class="n">beam</span> <span class="o">=</span> <span class="n">beams</span><span class="p">[</span><span class="n">origBatchIdx</span><span class="p">];</span>
+            <span class="k">if</span><span class="p">(</span><span class="n">beamHypIdx</span> <span class="o">&lt;</span> <span class="n">beam</span><span class="p">.</span><span class="n">size</span><span class="p">())</span> <span class="p">{</span>
+              <span class="k">auto</span> <span class="n">hyp</span> <span class="o">=</span> <span class="n">beam</span><span class="p">[</span><span class="n">beamHypIdx</span><span class="p">];</span>
+              <span class="k">auto</span> <span class="n">word</span> <span class="o">=</span> <span class="n">hyp</span><span class="o">-&gt;</span><span class="n">getWord</span><span class="p">();</span>
+              <span class="k">auto</span> <span class="n">canExpand</span> <span class="o">=</span> <span class="p">(</span><span class="o">!</span><span class="n">factoredVocab</span> <span class="o">||</span> <span class="n">factoredVocab</span><span class="o">-&gt;</span><span class="n">canExpandFactoredWord</span><span class="p">(</span><span class="n">hyp</span><span class="o">-&gt;</span><span class="n">getWord</span><span class="p">(),</span> <span class="n">factorGroup</span><span class="p">));</span>
+              <span class="c1">//LOG(info, &quot;[{}, {}] Can expand {} with {} -&gt; {}&quot;, batchIdx, beamHypIdx, (*batch-&gt;back()-&gt;vocab())[hyp-&gt;getWord()], factorGroup, canExpand);</span>
+              <span class="n">anyCanExpand</span> <span class="o">|=</span> <span class="n">canExpand</span><span class="p">;</span>
+
+              <span class="k">auto</span> <span class="n">currentBatchIdx</span> <span class="o">=</span> <span class="n">origBatchIdx</span><span class="p">;</span>
+              <span class="k">if</span><span class="p">(</span><span class="n">PURGE_BATCH</span><span class="p">)</span> <span class="p">{</span>
+                <span class="k">if</span><span class="p">(</span><span class="n">factorGroup</span> <span class="o">==</span> <span class="mi">0</span><span class="p">)</span>
+                  <span class="n">currentBatchIdx</span> <span class="o">=</span> <span class="n">prevBatchIdxMap</span><span class="p">[</span><span class="n">origBatchIdx</span><span class="p">];</span> <span class="c1">// subselection may happen for factorGroup == 0</span>
+                <span class="k">else</span>
+                  <span class="n">currentBatchIdx</span> <span class="o">=</span> <span class="n">batchIdxMap</span><span class="p">[</span><span class="n">origBatchIdx</span><span class="p">];</span>     <span class="c1">// no subselection happens for factorGroup &gt; 0,</span>
+                                                                   <span class="c1">// but we treat it like a next step, since a step</span>
+                                                                   <span class="c1">// happened for factorGroup == 0</span>
+              <span class="p">}</span>
+
+              <span class="k">auto</span> <span class="n">hypIndex</span> <span class="o">=</span> <span class="p">(</span><span class="n">IndexType</span><span class="p">)(</span><span class="n">hyp</span><span class="o">-&gt;</span><span class="n">getPrevStateIndex</span><span class="p">()</span> <span class="o">*</span> <span class="n">currentDimBatch</span> <span class="o">+</span> <span class="n">currentBatchIdx</span><span class="p">);</span> <span class="c1">// (beamHypIdx, batchIdx), flattened, for index_select() operation</span>
+
+              <span class="n">hypIndices</span><span class="p">.</span><span class="n">push_back</span><span class="p">(</span><span class="n">hypIndex</span><span class="p">);</span> <span class="c1">// (beamHypIdx, batchIdx), flattened as said above.</span>
+              <span class="n">prevWords</span> <span class="p">.</span><span class="n">push_back</span><span class="p">(</span><span class="n">word</span><span class="p">);</span>
+              <span class="n">prevScores</span><span class="p">.</span><span class="n">push_back</span><span class="p">(</span><span class="n">canExpand</span> <span class="o">?</span> <span class="n">hyp</span><span class="o">-&gt;</span><span class="n">getPathScore</span><span class="p">()</span> <span class="o">:</span> <span class="n">INVALID_PATH_SCORE</span><span class="p">);</span>
+            <span class="p">}</span> <span class="k">else</span> <span class="p">{</span>  <span class="c1">// pad to maxBeamSize (dummy hypothesis)</span>
+              <span class="k">if</span><span class="p">(</span><span class="o">!</span><span class="n">PURGE_BATCH</span> <span class="o">||</span> <span class="o">!</span><span class="n">beam</span><span class="p">.</span><span class="n">empty</span><span class="p">())</span> <span class="p">{</span> <span class="c1">// but only if we are not pruning and the beam is not deactivated yet</span>
+                <span class="n">hypIndices</span><span class="p">.</span><span class="n">push_back</span><span class="p">(</span><span class="mi">0</span><span class="p">);</span>
+                <span class="n">prevWords</span><span class="p">.</span><span class="n">push_back</span><span class="p">(</span><span class="n">trgEosId</span><span class="p">);</span>    <span class="c1">// (unused, but must be valid)</span>
+                <span class="n">prevScores</span><span class="p">.</span><span class="n">push_back</span><span class="p">((</span><span class="kt">float</span><span class="p">)</span><span class="n">INVALID_PATH_SCORE</span><span class="p">);</span>
+              <span class="p">}</span>
+            <span class="p">}</span>
+          <span class="p">}</span>
+        <span class="p">}</span>
+        <span class="k">if</span><span class="p">(</span><span class="n">factorGroup</span> <span class="o">==</span> <span class="mi">0</span><span class="p">)</span>
+          <span class="n">currentDimBatch</span> <span class="o">=</span> <span class="p">(</span><span class="n">IndexType</span><span class="p">)</span> <span class="n">batchIndices</span><span class="p">.</span><span class="n">size</span><span class="p">();</span> <span class="c1">// keep batch size constant for all factor groups in a time step</span>
+        <span class="n">prevPathScores</span> <span class="o">=</span> <span class="n">graph</span><span class="o">-&gt;</span><span class="n">constant</span><span class="p">({(</span><span class="kt">int</span><span class="p">)</span><span class="n">maxBeamSize</span><span class="p">,</span> <span class="mi">1</span><span class="p">,</span> <span class="p">(</span><span class="kt">int</span><span class="p">)</span><span class="n">currentDimBatch</span><span class="p">,</span> <span class="mi">1</span><span class="p">},</span> <span class="n">inits</span><span class="o">::</span><span class="n">fromVector</span><span class="p">(</span><span class="n">prevScores</span><span class="p">));</span>
+      <span class="p">}</span>
+      <span class="k">if</span> <span class="p">(</span><span class="o">!</span><span class="n">anyCanExpand</span><span class="p">)</span> <span class="c1">// all words cannot expand this factor: skip</span>
+        <span class="k">continue</span><span class="p">;</span>
+
+      <span class="c1">//**********************************************************************</span>
+      <span class="c1">// compute expanded path scores with word prediction probs from all scorers</span>
+      <span class="k">auto</span> <span class="n">expandedPathScores</span> <span class="o">=</span> <span class="n">prevPathScores</span><span class="p">;</span> <span class="c1">// will become [maxBeamSize, 1, currDimBatch, dimVocab]</span>
+      <span class="n">Expr</span> <span class="n">logProbs</span><span class="p">;</span>
+      <span class="k">for</span><span class="p">(</span><span class="kt">size_t</span> <span class="n">i</span> <span class="o">=</span> <span class="mi">0</span><span class="p">;</span> <span class="n">i</span> <span class="o">&lt;</span> <span class="n">scorers_</span><span class="p">.</span><span class="n">size</span><span class="p">();</span> <span class="o">++</span><span class="n">i</span><span class="p">)</span> <span class="p">{</span>
+        <span class="k">if</span> <span class="p">(</span><span class="n">factorGroup</span> <span class="o">==</span> <span class="mi">0</span><span class="p">)</span> <span class="p">{</span>
+          <span class="c1">// compute output probabilities for current output time step</span>
+          <span class="c1">//  - uses hypIndices[index in beam, 1, batch index, 1] to reorder scorer state to reflect the top-N in beams[][]</span>
+          <span class="c1">//  - adds prevWords [index in beam, 1, batch index, 1] to the scorer&#39;s target history</span>
+          <span class="c1">//  - performs one step of the scorer</span>
+          <span class="c1">//  - returns new NN state for use in next output time step</span>
+          <span class="c1">//  - returns vector of prediction probabilities over output vocab via newState</span>
+          <span class="c1">// update state in-place for next output time step</span>
+          <span class="c1">//if (t &gt; 0) for (size_t kk = 0; kk &lt; prevWords.size(); kk++)</span>
+          <span class="c1">//  LOG(info, &quot;prevWords[{},{}]={} -&gt; {}&quot;, t/numFactorGroups, factorGroup,</span>
+          <span class="c1">//      factoredVocab ? factoredVocab-&gt;word2string(prevWords[kk]) : (*batch-&gt;back()-&gt;vocab())[prevWords[kk]],</span>
+          <span class="c1">//      prevScores[kk]);</span>
+          <span class="n">states</span><span class="p">[</span><span class="n">i</span><span class="p">]</span> <span class="o">=</span> <span class="n">scorers_</span><span class="p">[</span><span class="n">i</span><span class="p">]</span><span class="o">-&gt;</span><span class="n">step</span><span class="p">(</span><span class="n">graph</span><span class="p">,</span> <span class="n">states</span><span class="p">[</span><span class="n">i</span><span class="p">],</span> <span class="n">hypIndices</span><span class="p">,</span> <span class="n">prevWords</span><span class="p">,</span> <span class="n">batchIndices</span><span class="p">,</span> <span class="p">(</span><span class="kt">int</span><span class="p">)</span><span class="n">maxBeamSize</span><span class="p">);</span>
+          <span class="k">if</span> <span class="p">(</span><span class="n">numFactorGroups</span> <span class="o">==</span> <span class="mi">1</span><span class="p">)</span> <span class="c1">// @TODO: this branch can go away</span>
+            <span class="n">logProbs</span> <span class="o">=</span> <span class="n">states</span><span class="p">[</span><span class="n">i</span><span class="p">]</span><span class="o">-&gt;</span><span class="n">getLogProbs</span><span class="p">().</span><span class="n">getLogits</span><span class="p">();</span> <span class="c1">// [maxBeamSize, 1, currentDimBatch, dimVocab]</span>
+          <span class="k">else</span>
+          <span class="p">{</span>
+            <span class="k">auto</span> <span class="n">shortlist</span> <span class="o">=</span> <span class="n">scorers_</span><span class="p">[</span><span class="n">i</span><span class="p">]</span><span class="o">-&gt;</span><span class="n">getShortlist</span><span class="p">();</span>
+            <span class="n">logProbs</span> <span class="o">=</span> <span class="n">states</span><span class="p">[</span><span class="n">i</span><span class="p">]</span><span class="o">-&gt;</span><span class="n">getLogProbs</span><span class="p">().</span><span class="n">getFactoredLogits</span><span class="p">(</span><span class="n">factorGroup</span><span class="p">,</span> <span class="n">shortlist</span><span class="p">);</span> <span class="c1">// [maxBeamSize, 1, currentDimBatch, dimVocab]</span>
+          <span class="p">}</span>
+        <span class="p">}</span>
+        <span class="k">else</span> <span class="p">{</span>
+          <span class="c1">// add secondary factors</span>
+          <span class="c1">// For those, we don&#39;t update the decoder-model state in any way.</span>
+          <span class="c1">// Instead, we just keep expanding with the factors.</span>
+          <span class="c1">// We will have temporary Word entries in hyps with some factors set to FACTOR_NOT_SPECIFIED.</span>
+          <span class="c1">// For some lemmas, a factor is not applicable. For those, the factor score is the same (zero)</span>
+          <span class="c1">// for all factor values. This would thus unnecessarily pollute the beam with identical copies,</span>
+          <span class="c1">// and push out other hypotheses. Hence, we exclude those here by setting the path score to</span>
+          <span class="c1">// INVALID_PATH_SCORE. Instead, toHyps() explicitly propagates those hyps by simply copying the</span>
+          <span class="c1">// previous hypothesis.</span>
+          <span class="n">logProbs</span> <span class="o">=</span> <span class="n">states</span><span class="p">[</span><span class="n">i</span><span class="p">]</span><span class="o">-&gt;</span><span class="n">getLogProbs</span><span class="p">().</span><span class="n">getFactoredLogits</span><span class="p">(</span><span class="n">factorGroup</span><span class="p">,</span> <span class="cm">/*shortlist=*/</span> <span class="k">nullptr</span><span class="p">,</span> <span class="n">hypIndices</span><span class="p">,</span> <span class="n">maxBeamSize</span><span class="p">);</span> <span class="c1">// [maxBeamSize, 1, currentDimBatch, dimVocab]</span>
+        <span class="p">}</span>
+        <span class="c1">// expand all hypotheses, [maxBeamSize, 1, currentDimBatch, 1] -&gt; [maxBeamSize, 1, currentDimBatch, dimVocab]</span>
+        <span class="n">expandedPathScores</span> <span class="o">=</span> <span class="n">expandedPathScores</span> <span class="o">+</span> <span class="n">scorers_</span><span class="p">[</span><span class="n">i</span><span class="p">]</span><span class="o">-&gt;</span><span class="n">getWeight</span><span class="p">()</span> <span class="o">*</span> <span class="n">logProbs</span><span class="p">;</span>
+      <span class="p">}</span>
+
+      <span class="c1">// make beams continuous</span>
+      <span class="n">expandedPathScores</span> <span class="o">=</span> <span class="n">swapAxes</span><span class="p">(</span><span class="n">expandedPathScores</span><span class="p">,</span> <span class="mi">0</span><span class="p">,</span> <span class="mi">2</span><span class="p">);</span> <span class="c1">// -&gt; [currentDimBatch, 1, maxBeamSize, dimVocab]</span>
+
+      <span class="c1">// perform NN computation</span>
+      <span class="k">if</span><span class="p">(</span><span class="n">t</span> <span class="o">==</span> <span class="mi">0</span> <span class="o">&amp;&amp;</span> <span class="n">factorGroup</span> <span class="o">==</span> <span class="mi">0</span><span class="p">)</span>
+        <span class="n">graph</span><span class="o">-&gt;</span><span class="n">forward</span><span class="p">();</span>
+      <span class="k">else</span>
+        <span class="n">graph</span><span class="o">-&gt;</span><span class="n">forwardNext</span><span class="p">();</span>
+
+      <span class="c1">//**********************************************************************</span>
+      <span class="c1">// suppress specific symbols if not at right positions</span>
+      <span class="k">if</span><span class="p">(</span><span class="n">unkColId</span> <span class="o">!=</span> <span class="mi">-1</span> <span class="o">&amp;&amp;</span> <span class="n">factorGroup</span> <span class="o">==</span> <span class="mi">0</span><span class="p">)</span>
+        <span class="n">suppressWord</span><span class="p">(</span><span class="n">expandedPathScores</span><span class="p">,</span> <span class="n">unkColId</span><span class="p">);</span>
+      <span class="k">for</span><span class="p">(</span><span class="k">auto</span> <span class="nl">state</span> <span class="p">:</span> <span class="n">states</span><span class="p">)</span>
+        <span class="n">state</span><span class="o">-&gt;</span><span class="n">blacklist</span><span class="p">(</span><span class="n">expandedPathScores</span><span class="p">,</span> <span class="n">batch</span><span class="p">);</span>
+
+      <span class="c1">//**********************************************************************</span>
+      <span class="c1">// perform beam search</span>
+
+      <span class="c1">// find N best amongst the (maxBeamSize * dimVocab) hypotheses</span>
+      <span class="n">std</span><span class="o">::</span><span class="n">vector</span><span class="o">&lt;</span><span class="kt">unsigned</span> <span class="kt">int</span><span class="o">&gt;</span> <span class="n">nBestKeys</span><span class="p">;</span> <span class="c1">// [currentDimBatch, maxBeamSize] flattened -&gt; (batchIdx, beamHypIdx, word idx) flattened</span>
+      <span class="n">std</span><span class="o">::</span><span class="n">vector</span><span class="o">&lt;</span><span class="kt">float</span><span class="o">&gt;</span> <span class="n">nBestPathScores</span><span class="p">;</span>  <span class="c1">// [currentDimBatch, maxBeamSize] flattened</span>
+      <span class="n">getNBestList</span><span class="p">(</span><span class="cm">/*in*/</span>   <span class="n">expandedPathScores</span><span class="o">-&gt;</span><span class="n">val</span><span class="p">(),</span>   <span class="c1">// [currentDimBatch, 1, maxBeamSize, dimVocab or dimShortlist]</span>
+                  <span class="cm">/*N=*/</span>    <span class="n">maxBeamSize</span><span class="p">,</span>                 <span class="c1">// desired beam size</span>
+                  <span class="cm">/*out*/</span>   <span class="n">nBestPathScores</span><span class="p">,</span>
+                   <span class="cm">/*out*/</span>  <span class="n">nBestKeys</span><span class="p">,</span>
+                  <span class="cm">/*first=*/</span><span class="n">t</span> <span class="o">==</span> <span class="mi">0</span> <span class="o">&amp;&amp;</span> <span class="n">factorGroup</span> <span class="o">==</span> <span class="mi">0</span><span class="p">);</span> <span class="c1">// @TODO: this is only used for checking presently, and should be removed altogether</span>
+      <span class="c1">// Now, nBestPathScores contain N-best expandedPathScores for each batch and beam,</span>
+      <span class="c1">// and nBestKeys for each their original location (batchIdx, beamHypIdx, word).</span>
+
+      <span class="c1">// combine N-best sets with existing search space (beams) to updated search space</span>
+      <span class="n">beams</span> <span class="o">=</span> <span class="n">toHyps</span><span class="p">(</span><span class="n">nBestKeys</span><span class="p">,</span> <span class="n">nBestPathScores</span><span class="p">,</span>
+                     <span class="cm">/*nBestBeamSize*/</span><span class="n">expandedPathScores</span><span class="o">-&gt;</span><span class="n">shape</span><span class="p">()[</span><span class="mi">-2</span><span class="p">],</span> <span class="c1">// used for interpretation of keys</span>
+                     <span class="cm">/*vocabSize=*/</span><span class="n">expandedPathScores</span><span class="o">-&gt;</span><span class="n">shape</span><span class="p">()[</span><span class="mi">-1</span><span class="p">],</span>    <span class="c1">// used for interpretation of keys</span>
+                     <span class="n">beams</span><span class="p">,</span>
+                     <span class="n">states</span><span class="p">,</span>            <span class="c1">// used for keeping track of per-ensemble-member path score</span>
+                     <span class="n">batch</span><span class="p">,</span>             <span class="c1">// only used for propagating alignment info</span>
+                     <span class="n">factoredVocab</span><span class="p">,</span> <span class="n">factorGroup</span><span class="p">,</span>
+                     <span class="n">emptyBatchEntries</span><span class="p">,</span> <span class="c1">// [origDimBatch] - empty source batch entries are marked with true</span>
+                     <span class="n">batchIdxMap</span><span class="p">);</span>      <span class="c1">// used to create a reverse batch index map to recover original batch indices for this step</span>
+    <span class="p">}</span> <span class="c1">// END FOR factorGroup = 0 .. numFactorGroups-1</span>
+
+    <span class="n">prevBatchIdxMap</span> <span class="o">=</span> <span class="n">batchIdxMap</span><span class="p">;</span> <span class="c1">// save current batchIdx map to be used in next step; we are then going to look one step back</span>
+
+    <span class="c1">// remove all hyps that end in EOS</span>
+    <span class="c1">// The position of a hyp in the beam may change.</span>
+    <span class="c1">// in/out = shifts the batch index map if a beam gets fully purged</span>
+    <span class="k">const</span> <span class="k">auto</span> <span class="n">purgedNewBeams</span> <span class="o">=</span> <span class="n">purgeBeams</span><span class="p">(</span><span class="n">beams</span><span class="p">,</span> <span class="cm">/*in/out=*/</span><span class="n">batchIdxMap</span><span class="p">);</span>
+
+    <span class="c1">// add updated search space (beams) to our return value</span>
+    <span class="kt">bool</span> <span class="n">maxLengthReached</span> <span class="o">=</span> <span class="nb">false</span><span class="p">;</span>
+    <span class="k">for</span><span class="p">(</span><span class="kt">int</span> <span class="n">batchIdx</span> <span class="o">=</span> <span class="mi">0</span><span class="p">;</span> <span class="n">batchIdx</span> <span class="o">&lt;</span> <span class="n">origDimBatch</span><span class="p">;</span> <span class="o">++</span><span class="n">batchIdx</span><span class="p">)</span> <span class="p">{</span>
+      <span class="c1">// if this batch entry has surviving hyps then add them to the traceback grid</span>
+      <span class="k">if</span><span class="p">(</span><span class="o">!</span><span class="n">beams</span><span class="p">[</span><span class="n">batchIdx</span><span class="p">].</span><span class="n">empty</span><span class="p">())</span> <span class="p">{</span> <span class="c1">// if the beam is not empty expand the history object associated with the beam</span>
+        <span class="k">if</span> <span class="p">(</span><span class="n">histories</span><span class="p">[</span><span class="n">batchIdx</span><span class="p">]</span><span class="o">-&gt;</span><span class="n">size</span><span class="p">()</span> <span class="o">&gt;=</span> <span class="n">options_</span><span class="o">-&gt;</span><span class="n">get</span><span class="o">&lt;</span><span class="kt">float</span><span class="o">&gt;</span><span class="p">(</span><span class="s">&quot;max-length-factor&quot;</span><span class="p">)</span> <span class="o">*</span> <span class="n">batch</span><span class="o">-&gt;</span><span class="n">front</span><span class="p">()</span><span class="o">-&gt;</span><span class="n">batchWidth</span><span class="p">())</span>
+          <span class="n">maxLengthReached</span> <span class="o">=</span> <span class="nb">true</span><span class="p">;</span>
+        <span class="n">histories</span><span class="p">[</span><span class="n">batchIdx</span><span class="p">]</span><span class="o">-&gt;</span><span class="n">add</span><span class="p">(</span><span class="n">beams</span><span class="p">[</span><span class="n">batchIdx</span><span class="p">],</span> <span class="n">trgEosId</span><span class="p">,</span> <span class="n">purgedNewBeams</span><span class="p">[</span><span class="n">batchIdx</span><span class="p">].</span><span class="n">empty</span><span class="p">()</span> <span class="o">||</span> <span class="n">maxLengthReached</span><span class="p">);</span>
+      <span class="p">}</span>
+    <span class="p">}</span>
+    <span class="k">if</span> <span class="p">(</span><span class="n">maxLengthReached</span><span class="p">)</span> <span class="c1">// early exit if max length limit was reached</span>
+      <span class="k">break</span><span class="p">;</span>
+
+    <span class="c1">// this is the search space for the next output time step</span>
+    <span class="n">beams</span> <span class="o">=</span> <span class="n">purgedNewBeams</span><span class="p">;</span>
+  <span class="p">}</span> <span class="c1">// end of main loop over output time steps</span>
+
+  <span class="k">return</span> <span class="n">histories</span><span class="p">;</span> <span class="c1">// [origDimBatch][t][N best hyps]</span>
+<span class="p">}</span>
+
+<span class="p">}</span>  <span class="c1">// namespace marian</span>
+</pre></div>
+</div>
+</div>
+
+
+           </div>
+           
+          </div>
+          <footer>
+
+  <hr/>
+
+  <div role="contentinfo">
+    <p>
+        &#169; Copyright 2021, Marian NMT Team.
+
+    </p>
+  </div>
+    
+    
+    
+    Built with <a href="https://www.sphinx-doc.org/">Sphinx</a> using a
+    
+    <a href="https://github.com/readthedocs/sphinx_rtd_theme">theme</a>
+    
+    provided by <a href="https://readthedocs.org">Read the Docs</a>. 
+
+</footer>
+        </div>
+      </div>
+
+    </section>
+
+  </div>
+  
+
+  <script type="text/javascript">
+      jQuery(function () {
+          SphinxRtdTheme.Navigation.enable(true);
+      });
+  </script>
+
+  
+  
+    
+   
+
+</body>
+</html>

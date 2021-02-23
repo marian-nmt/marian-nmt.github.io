@@ -1,0 +1,32 @@
+
+.. _program_listing_file_src_tensors_cpu_backend.h:
+
+Program Listing for File backend.h
+==================================
+
+|exhale_lsh| :ref:`Return to documentation for file <file_src_tensors_cpu_backend.h>` (``src/tensors/cpu/backend.h``)
+
+.. |exhale_lsh| unicode:: U+021B0 .. UPWARDS ARROW WITH TIP LEFTWARDS
+
+.. code-block:: cpp
+
+   #pragma once
+   
+   #include <functional>
+   #include <random>
+   
+   #include "common/config.h"
+   #include "tensors/backend.h"
+   
+   namespace marian {
+   namespace cpu {
+   
+   class Backend : public marian::Backend {
+   public:
+     Backend(DeviceId deviceId, size_t seed) : marian::Backend(deviceId, seed) {}
+     void setDevice() override {}
+     void synchronize() override {}
+   };
+   
+   }  // namespace cpu
+   }  // namespace marian

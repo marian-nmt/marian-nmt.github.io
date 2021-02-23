@@ -1,0 +1,373 @@
+
+
+<!DOCTYPE html>
+<html class="writer-html5" lang="en" >
+<head>
+  <meta charset="utf-8" />
+  
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  
+  <title>File expression_operators.cpp &mdash; Marian NMT v1.10.1 2021-02-23 documentation</title>
+  
+
+  
+  <link rel="stylesheet" href="../_static/css/theme.css" type="text/css" />
+  <link rel="stylesheet" href="../_static/pygments.css" type="text/css" />
+  <link rel="stylesheet" href="../_static/css/custom.css" type="text/css" />
+  <link rel="stylesheet" href="../_static/collapsible-lists/css/tree_view.css" type="text/css" />
+
+  
+  
+
+  
+  
+
+  
+    <link rel="canonical" href="http://marian-nmt.github.io/docs/api/api/file_src_graph_expression_operators.cpp.html" />
+
+  
+  <!--[if lt IE 9]>
+    <script src="../_static/js/html5shiv.min.js"></script>
+  <![endif]-->
+  
+    
+      <script type="text/javascript" id="documentation_options" data-url_root="../" src="../_static/documentation_options.js"></script>
+        <script src="../_static/jquery.js"></script>
+        <script src="../_static/underscore.js"></script>
+        <script src="../_static/doctools.js"></script>
+        <script src="../_static/language_data.js"></script>
+        <script src="../_static/collapsible-lists/js/CollapsibleLists.compressed.js"></script>
+        <script src="../_static/collapsible-lists/js/apply-collapsible-lists.js"></script>
+    
+    <script type="text/javascript" src="../_static/js/theme.js"></script>
+
+    
+    <link rel="index" title="Index" href="../genindex.html" />
+    <link rel="search" title="Search" href="../search.html" /> 
+</head>
+
+<body class="wy-body-for-nav">
+
+   
+  <div class="wy-grid-for-nav">
+    
+    <nav data-toggle="wy-nav-shift" class="wy-nav-side">
+      <div class="wy-side-scroll">
+        <div class="wy-side-nav-search" >
+          
+
+          
+            <a href="../index.html" class="icon icon-home"> Marian NMT
+          
+
+          
+          </a>
+
+          
+            
+            
+              <div class="version">
+                v1.10.1
+              </div>
+            
+          
+
+          
+<div role="search">
+  <form id="rtd-search-form" class="wy-form" action="../search.html" method="get">
+    <input type="text" name="q" placeholder="Search docs" />
+    <input type="hidden" name="check_keywords" value="yes" />
+    <input type="hidden" name="area" value="default" />
+  </form>
+</div>
+
+          
+        </div>
+
+        
+        <div class="wy-menu wy-menu-vertical" data-spy="affix" role="navigation" aria-label="main navigation">
+          
+            
+            
+              
+            
+            
+              <p class="caption"><span class="caption-text">Contents:</span></p>
+<ul>
+<li class="toctree-l1"><a class="reference internal" href="../install.html">Installation</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../graph.html">Expression graphs</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../operators.html">Graph operations</a></li>
+<li class="toctree-l1"><a class="reference internal" href="library_index.html">Library API</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../contributing.html">How to contribute to Marian</a></li>
+</ul>
+
+            
+          
+        </div>
+        
+      </div>
+    </nav>
+
+    <section data-toggle="wy-nav-shift" class="wy-nav-content-wrap">
+
+      
+      <nav class="wy-nav-top" aria-label="top navigation">
+        
+          <i data-toggle="wy-nav-top" class="fa fa-bars"></i>
+          <a href="../index.html">Marian NMT</a>
+        
+      </nav>
+
+
+      <div class="wy-nav-content">
+        
+        <div class="rst-content">
+        
+          
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+<div role="navigation" aria-label="breadcrumbs navigation">
+
+  <ul class="wy-breadcrumbs">
+    
+      <li><a href="../index.html" class="icon icon-home"></a> &raquo;</li>
+        
+      <li>File expression_operators.cpp</li>
+    
+    
+      <li class="wy-breadcrumbs-aside">
+        
+          
+            <a href="../_sources/api/file_src_graph_expression_operators.cpp.rst.txt" rel="nofollow"> View page source</a>
+          
+        
+      </li>
+    
+  </ul>
+
+  
+  <hr/>
+</div>
+          <div role="main" class="document" itemscope="itemscope" itemtype="http://schema.org/Article">
+           <div itemprop="articleBody">
+            
+  <div class="section" id="file-expression-operators-cpp">
+<span id="file-src-graph-expression-operators-cpp"></span><h1>File expression_operators.cpp<a class="headerlink" href="#file-expression-operators-cpp" title="Permalink to this headline">¶</a></h1>
+<p>↰ <a class="reference internal" href="dir_src_graph.html#dir-src-graph"><span class="std std-ref">Parent directory</span></a> (<code class="docutils literal notranslate"><span class="pre">src/graph</span></code>)</p>
+<div class="contents local topic" id="contents">
+<p class="topic-title">Contents</p>
+<ul class="simple">
+<li><p><a class="reference internal" href="#definition-src-graph-expression-operators-cpp" id="id1">Definition (<code class="docutils literal notranslate"><span class="pre">src/graph/expression_operators.cpp</span></code>)</a></p></li>
+<li><p><a class="reference internal" href="#includes" id="id2">Includes</a></p></li>
+<li><p><a class="reference internal" href="#namespaces" id="id3">Namespaces</a></p></li>
+<li><p><a class="reference internal" href="#functions" id="id4">Functions</a></p></li>
+</ul>
+</div>
+<div class="section" id="definition-src-graph-expression-operators-cpp">
+<h2>Definition (<code class="docutils literal notranslate"><span class="pre">src/graph/expression_operators.cpp</span></code>)<a class="headerlink" href="#definition-src-graph-expression-operators-cpp" title="Permalink to this headline">¶</a></h2>
+<div class="toctree-wrapper compound">
+<ul>
+<li class="toctree-l1"><a class="reference internal" href="program_listing_file_src_graph_expression_operators.cpp.html">Program Listing for File expression_operators.cpp</a></li>
+</ul>
+</div>
+</div>
+<div class="section" id="includes">
+<h2>Includes<a class="headerlink" href="#includes" title="Permalink to this headline">¶</a></h2>
+<ul class="simple">
+<li><p><code class="docutils literal notranslate"><span class="pre">graph/auto_tuner.h</span></code> (<a class="reference internal" href="file_src_graph_auto_tuner.h.html#file-src-graph-auto-tuner-h"><span class="std std-ref">File auto_tuner.h</span></a>)</p></li>
+<li><p><code class="docutils literal notranslate"><span class="pre">graph/expression_operators.h</span></code> (<a class="reference internal" href="file_src_graph_expression_operators.h.html#file-src-graph-expression-operators-h"><span class="std std-ref">File expression_operators.h</span></a>)</p></li>
+<li><p><code class="docutils literal notranslate"><span class="pre">graph/node_operators.h</span></code> (<a class="reference internal" href="file_src_graph_node_operators.h.html#file-src-graph-node-operators-h"><span class="std std-ref">File node_operators.h</span></a>)</p></li>
+<li><p><code class="docutils literal notranslate"><span class="pre">graph/node_operators_binary.h</span></code> (<a class="reference internal" href="file_src_graph_node_operators_binary.h.html#file-src-graph-node-operators-binary-h"><span class="std std-ref">File node_operators_binary.h</span></a>)</p></li>
+<li><p><code class="docutils literal notranslate"><span class="pre">graph/node_operators_tuple.h</span></code> (<a class="reference internal" href="file_src_graph_node_operators_tuple.h.html#file-src-graph-node-operators-tuple-h"><span class="std std-ref">File node_operators_tuple.h</span></a>)</p></li>
+<li><p><code class="docutils literal notranslate"><span class="pre">graph/node_operators_unary.h</span></code> (<a class="reference internal" href="file_src_graph_node_operators_unary.h.html#file-src-graph-node-operators-unary-h"><span class="std std-ref">File node_operators_unary.h</span></a>)</p></li>
+<li><p><code class="docutils literal notranslate"><span class="pre">layers/constructors.h</span></code> (<a class="reference internal" href="file_src_layers_constructors.h.html#file-src-layers-constructors-h"><span class="std std-ref">File constructors.h</span></a>)</p></li>
+<li><p><code class="docutils literal notranslate"><span class="pre">tensors/cpu/fbgemm/expanded_gemm.h</span></code> (<a class="reference internal" href="file_src_tensors_cpu_fbgemm_expanded_gemm.h.html#file-src-tensors-cpu-fbgemm-expanded-gemm-h"><span class="std std-ref">File expanded_gemm.h</span></a>)</p></li>
+<li><p><code class="docutils literal notranslate"><span class="pre">tensors/cpu/intgemm_interface.h</span></code> (<a class="reference internal" href="file_src_tensors_cpu_intgemm_interface.h.html#file-src-tensors-cpu-intgemm-interface-h"><span class="std std-ref">File intgemm_interface.h</span></a>)</p></li>
+</ul>
+</div>
+<div class="section" id="namespaces">
+<h2>Namespaces<a class="headerlink" href="#namespaces" title="Permalink to this headline">¶</a></h2>
+<ul class="simple">
+<li><p><a class="reference internal" href="namespace_marian.html#namespace-marian"><span class="std std-ref">Namespace marian</span></a></p></li>
+</ul>
+</div>
+<div class="section" id="functions">
+<h2>Functions<a class="headerlink" href="#functions" title="Permalink to this headline">¶</a></h2>
+<ul class="simple">
+<li><p><a class="reference internal" href="function_expression__operators_8cpp_1a247c3d1a66ae3779bb305e0241b15659.html#exhale-function-expression-operators-8cpp-1a247c3d1a66ae3779bb305e0241b15659"><span class="std std-ref">Function marian::abs</span></a></p></li>
+<li><p><a class="reference internal" href="function_expression__operators_8cpp_1a89d86443be2ade33299d11ae9c922eee.html#exhale-function-expression-operators-8cpp-1a89d86443be2ade33299d11ae9c922eee"><span class="std std-ref">Function marian::affine</span></a></p></li>
+<li><p><a class="reference internal" href="function_expression__operators_8cpp_1a376617bd4169270b0a56e2a014dae125.html#exhale-function-expression-operators-8cpp-1a376617bd4169270b0a56e2a014dae125"><span class="std std-ref">Function marian::affineDefault</span></a></p></li>
+<li><p><a class="reference internal" href="function_expression__operators_8cpp_1a96df4a73fd51e4cfa0e4bfd5880c4638.html#exhale-function-expression-operators-8cpp-1a96df4a73fd51e4cfa0e4bfd5880c4638"><span class="std std-ref">Function marian::argmax</span></a></p></li>
+<li><p><a class="reference internal" href="function_expression__operators_8cpp_1ac95a218644148d6228d1a4605f81f755.html#exhale-function-expression-operators-8cpp-1ac95a218644148d6228d1a4605f81f755"><span class="std std-ref">Function marian::argmin</span></a></p></li>
+<li><p><a class="reference internal" href="function_expression__operators_8cpp_1affec02cd0371fdc7b9f0cb2cec41caf9.html#exhale-function-expression-operators-8cpp-1affec02cd0371fdc7b9f0cb2cec41caf9"><span class="std std-ref">Function marian::atleast_1d</span></a></p></li>
+<li><p><a class="reference internal" href="function_expression__operators_8cpp_1a16776ccd4347264acfef29f79eb9b69a.html#exhale-function-expression-operators-8cpp-1a16776ccd4347264acfef29f79eb9b69a"><span class="std std-ref">Function marian::atleast_2d</span></a></p></li>
+<li><p><a class="reference internal" href="function_expression__operators_8cpp_1a6142fa643610fcd6cd46efda39585343.html#exhale-function-expression-operators-8cpp-1a6142fa643610fcd6cd46efda39585343"><span class="std std-ref">Function marian::atleast_3d</span></a></p></li>
+<li><p><a class="reference internal" href="function_expression__operators_8cpp_1a9aab1df151ade496a7f065ee09420356.html#exhale-function-expression-operators-8cpp-1a9aab1df151ade496a7f065ee09420356"><span class="std std-ref">Function marian::atleast_4d</span></a></p></li>
+<li><p><a class="reference internal" href="function_expression__operators_8cpp_1a55b37c4cb8fbd63ee42dc2db448af741.html#exhale-function-expression-operators-8cpp-1a55b37c4cb8fbd63ee42dc2db448af741"><span class="std std-ref">Function marian::atleast_nd</span></a></p></li>
+<li><p><a class="reference internal" href="function_expression__operators_8cpp_1a95ed05328c828c21b80531da39889f19.html#exhale-function-expression-operators-8cpp-1a95ed05328c828c21b80531da39889f19"><span class="std std-ref">Function marian::bdot</span></a></p></li>
+<li><p><a class="reference internal" href="function_expression__operators_8cpp_1abef1be339fa848d4cf8df6f0025a6c82.html#exhale-function-expression-operators-8cpp-1abef1be339fa848d4cf8df6f0025a6c82"><span class="std std-ref">Function marian::cast</span></a></p></li>
+<li><p><a class="reference internal" href="function_expression__operators_8cpp_1aabeb1257895f40fb9915414b53d2c9c8.html#exhale-function-expression-operators-8cpp-1aabeb1257895f40fb9915414b53d2c9c8"><span class="std std-ref">Function marian::checkpoint</span></a></p></li>
+<li><p><a class="reference internal" href="function_expression__operators_8cpp_1a2461e8c55452e9925ef7bfe37be173ee.html#exhale-function-expression-operators-8cpp-1a2461e8c55452e9925ef7bfe37be173ee"><span class="std std-ref">Function marian::clip</span></a></p></li>
+<li><p><a class="reference internal" href="function_expression__operators_8cpp_1adcc839a9ec74e371f50f52b708fed66f.html#exhale-function-expression-operators-8cpp-1adcc839a9ec74e371f50f52b708fed66f"><span class="std std-ref">Function marian::clipGradient</span></a></p></li>
+<li><p><a class="reference internal" href="function_expression__operators_8cpp_1a8710eb7495c947ccb2d72a70999f47cf.html#exhale-function-expression-operators-8cpp-1a8710eb7495c947ccb2d72a70999f47cf"><span class="std std-ref">Function marian::concatenate</span></a></p></li>
+<li><p><a class="reference internal" href="function_expression__operators_8cpp_1abbc428cb1d9ef582097005a621ece2ed.html#exhale-function-expression-operators-8cpp-1abbc428cb1d9ef582097005a621ece2ed"><span class="std std-ref">Function marian::cross_entropy</span></a></p></li>
+<li><p><a class="reference internal" href="function_expression__operators_8cpp_1a84f614cc936407b7232ee4b660b28c2a.html#exhale-function-expression-operators-8cpp-1a84f614cc936407b7232ee4b660b28c2a"><span class="std std-ref">Function marian::csr_dot</span></a></p></li>
+<li><p><a class="reference internal" href="function_expression__operators_8cpp_1aaf5fd0b4d648cffd76cbc27ca6edf820.html#exhale-function-expression-operators-8cpp-1aaf5fd0b4d648cffd76cbc27ca6edf820"><span class="std std-ref">Function marian::debug</span></a></p></li>
+<li><p><a class="reference internal" href="function_expression__operators_8cpp_1af2b8743713a2d996611c7f353a1dfb4d.html#exhale-function-expression-operators-8cpp-1af2b8743713a2d996611c7f353a1dfb4d"><span class="std std-ref">Function marian::dot</span></a></p></li>
+<li><p><a class="reference internal" href="function_expression__operators_8cpp_1a14df288fa83cef9f2cc83024cf093ee2.html#exhale-function-expression-operators-8cpp-1a14df288fa83cef9f2cc83024cf093ee2"><span class="std std-ref">Function marian::dot_csr</span></a></p></li>
+<li><p><a class="reference internal" href="function_expression__operators_8cpp_1a9840c89d81aaa0ba7ab80745808587c1.html#exhale-function-expression-operators-8cpp-1a9840c89d81aaa0ba7ab80745808587c1"><span class="std std-ref">Function marian::eq(Expr, Expr)</span></a></p></li>
+<li><p><a class="reference internal" href="function_expression__operators_8cpp_1ac41e52582bd5c32c66c57fffd6fbaf91.html#exhale-function-expression-operators-8cpp-1ac41e52582bd5c32c66c57fffd6fbaf91"><span class="std std-ref">Function marian::eq(float, Expr)</span></a></p></li>
+<li><p><a class="reference internal" href="function_expression__operators_8cpp_1a107bc63e0bfe3d4823b8b4d0ba91c413.html#exhale-function-expression-operators-8cpp-1a107bc63e0bfe3d4823b8b4d0ba91c413"><span class="std std-ref">Function marian::eq(Expr, float)</span></a></p></li>
+<li><p><a class="reference internal" href="function_expression__operators_8cpp_1a4d47fe908c56b6de5c71209339461321.html#exhale-function-expression-operators-8cpp-1a4d47fe908c56b6de5c71209339461321"><span class="std std-ref">Function marian::exp</span></a></p></li>
+<li><p><a class="reference internal" href="function_expression__operators_8cpp_1aea8d2acadf0d96f6e455addd57cba80d.html#exhale-function-expression-operators-8cpp-1aea8d2acadf0d96f6e455addd57cba80d"><span class="std std-ref">Function marian::flatten</span></a></p></li>
+<li><p><a class="reference internal" href="function_expression__operators_8cpp_1a0706b3b85da5139ad28f0ea08f472d09.html#exhale-function-expression-operators-8cpp-1a0706b3b85da5139ad28f0ea08f472d09"><span class="std std-ref">Function marian::flatten_2d</span></a></p></li>
+<li><p><a class="reference internal" href="function_expression__operators_8cpp_1a9a1b506457b4700c2a42442b78a9df51.html#exhale-function-expression-operators-8cpp-1a9a1b506457b4700c2a42442b78a9df51"><span class="std std-ref">Function marian::gather</span></a></p></li>
+<li><p><a class="reference internal" href="function_expression__operators_8cpp_1aeb11683e8b3dc2ffdc866d195f15536d.html#exhale-function-expression-operators-8cpp-1aeb11683e8b3dc2ffdc866d195f15536d"><span class="std std-ref">Function marian::ge(Expr, Expr)</span></a></p></li>
+<li><p><a class="reference internal" href="function_expression__operators_8cpp_1a6a3648b889481efcd454d0ab15ac6588.html#exhale-function-expression-operators-8cpp-1a6a3648b889481efcd454d0ab15ac6588"><span class="std std-ref">Function marian::ge(float, Expr)</span></a></p></li>
+<li><p><a class="reference internal" href="function_expression__operators_8cpp_1aba117744912cea9c77b87cf93062ea47.html#exhale-function-expression-operators-8cpp-1aba117744912cea9c77b87cf93062ea47"><span class="std std-ref">Function marian::ge(Expr, float)</span></a></p></li>
+<li><p><a class="reference internal" href="function_expression__operators_8cpp_1a51015234e8b26d504f65a25767246c21.html#exhale-function-expression-operators-8cpp-1a51015234e8b26d504f65a25767246c21"><span class="std std-ref">Function marian::gelu(const std::vector&lt;Expr&gt;&amp;)</span></a></p></li>
+<li><p><a class="reference internal" href="function_expression__operators_8cpp_1ad688784b99a7ad88cb808614dcd46760.html#exhale-function-expression-operators-8cpp-1ad688784b99a7ad88cb808614dcd46760"><span class="std std-ref">Function marian::gelu(Expr)</span></a></p></li>
+<li><p><a class="reference internal" href="function_expression__operators_8cpp_1a20e2d8a39dc3d87e2a98675678a89c06.html#exhale-function-expression-operators-8cpp-1a20e2d8a39dc3d87e2a98675678a89c06"><span class="std std-ref">Function marian::gt(Expr, Expr)</span></a></p></li>
+<li><p><a class="reference internal" href="function_expression__operators_8cpp_1ab359dcd0901c9e29d93a8548b29d09d1.html#exhale-function-expression-operators-8cpp-1ab359dcd0901c9e29d93a8548b29d09d1"><span class="std std-ref">Function marian::gt(float, Expr)</span></a></p></li>
+<li><p><a class="reference internal" href="function_expression__operators_8cpp_1aa94225519d7ed355e847bfb6ce626b48.html#exhale-function-expression-operators-8cpp-1aa94225519d7ed355e847bfb6ce626b48"><span class="std std-ref">Function marian::gt(Expr, float)</span></a></p></li>
+<li><p><a class="reference internal" href="function_expression__operators_8cpp_1a94f04e4cab6c53cfcf5d0b85fe177c24.html#exhale-function-expression-operators-8cpp-1a94f04e4cab6c53cfcf5d0b85fe177c24"><span class="std std-ref">Function marian::highway(Expr, Expr, Expr)</span></a></p></li>
+<li><p><a class="reference internal" href="function_expression__operators_8cpp_1abd89b8bb04fc7710c1c5e382740646c0.html#exhale-function-expression-operators-8cpp-1abd89b8bb04fc7710c1c5e382740646c0"><span class="std std-ref">Function marian::highway(const std::string, Expr)</span></a></p></li>
+<li><p><a class="reference internal" href="function_expression__operators_8cpp_1adde699f22f8d4add0bd3aad995ed0383.html#exhale-function-expression-operators-8cpp-1adde699f22f8d4add0bd3aad995ed0383"><span class="std std-ref">Function marian::index_select(Expr, int, Expr)</span></a></p></li>
+<li><p><a class="reference internal" href="function_expression__operators_8cpp_1a0ba48a39f71fbbdc932da379656bbb78.html#exhale-function-expression-operators-8cpp-1a0ba48a39f71fbbdc932da379656bbb78"><span class="std std-ref">Function marian::index_select(Expr, int, const std::vector&lt;IndexType&gt;&amp;)</span></a></p></li>
+<li><p><a class="reference internal" href="function_expression__operators_8cpp_1a36c12f574de1693c10f24e3d7d27d642.html#exhale-function-expression-operators-8cpp-1a36c12f574de1693c10f24e3d7d27d642"><span class="std std-ref">Function marian::lambda(const std::vector&lt;Expr&gt;&amp;, Shape, Type, LambdaNodeFunctor, LambdaNodeFunctor)</span></a></p></li>
+<li><p><a class="reference internal" href="function_expression__operators_8cpp_1ae577eebbc7937eda647d63bf2da33de3.html#exhale-function-expression-operators-8cpp-1ae577eebbc7937eda647d63bf2da33de3"><span class="std std-ref">Function marian::lambda(const std::vector&lt;Expr&gt;&amp;, Shape, Type, LambdaNodeFunctor)</span></a></p></li>
+<li><p><a class="reference internal" href="function_expression__operators_8cpp_1af49f134fba970b5147bc84dcfddbc75f.html#exhale-function-expression-operators-8cpp-1af49f134fba970b5147bc84dcfddbc75f"><span class="std std-ref">Function marian::layerNorm(Expr, Expr, Expr, float)</span></a></p></li>
+<li><p><a class="reference internal" href="function_expression__operators_8cpp_1abb3676f66feabc9e535ac1247334874d.html#exhale-function-expression-operators-8cpp-1abb3676f66feabc9e535ac1247334874d"><span class="std std-ref">Function marian::le(Expr, Expr)</span></a></p></li>
+<li><p><a class="reference internal" href="function_expression__operators_8cpp_1a9daf4bd671714273a7f84e075c2700c7.html#exhale-function-expression-operators-8cpp-1a9daf4bd671714273a7f84e075c2700c7"><span class="std std-ref">Function marian::le(float, Expr)</span></a></p></li>
+<li><p><a class="reference internal" href="function_expression__operators_8cpp_1a3cadec94f28c90208347409178bc544d.html#exhale-function-expression-operators-8cpp-1a3cadec94f28c90208347409178bc544d"><span class="std std-ref">Function marian::le(Expr, float)</span></a></p></li>
+<li><p><a class="reference internal" href="function_expression__operators_8cpp_1a6324058246310ebc1dea7908adbdca25.html#exhale-function-expression-operators-8cpp-1a6324058246310ebc1dea7908adbdca25"><span class="std std-ref">Function marian::leakyrelu(const std::vector&lt;Expr&gt;&amp;)</span></a></p></li>
+<li><p><a class="reference internal" href="function_expression__operators_8cpp_1a7f39b829252ccb999f3af21c42108f75.html#exhale-function-expression-operators-8cpp-1a7f39b829252ccb999f3af21c42108f75"><span class="std std-ref">Function marian::leakyrelu(Expr)</span></a></p></li>
+<li><p><a class="reference internal" href="function_expression__operators_8cpp_1a0f3132fbaaaf9a5f2c1cbf6e3ad8f5f5.html#exhale-function-expression-operators-8cpp-1a0f3132fbaaaf9a5f2c1cbf6e3ad8f5f5"><span class="std std-ref">Function marian::log</span></a></p></li>
+<li><p><a class="reference internal" href="function_expression__operators_8cpp_1ab1affffa9fcf8d76f57a13ac6704cd51.html#exhale-function-expression-operators-8cpp-1ab1affffa9fcf8d76f57a13ac6704cd51"><span class="std std-ref">Function marian::logaddexp</span></a></p></li>
+<li><p><a class="reference internal" href="function_expression__operators_8cpp_1a471a2cbd15b4094528a1643abc814bb6.html#exhale-function-expression-operators-8cpp-1a471a2cbd15b4094528a1643abc814bb6"><span class="std std-ref">Function marian::logsoftmax</span></a></p></li>
+<li><p><a class="reference internal" href="function_expression__operators_8cpp_1a858c5f759093938220f00226edd02247.html#exhale-function-expression-operators-8cpp-1a858c5f759093938220f00226edd02247"><span class="std std-ref">Function marian::logsumexp</span></a></p></li>
+<li><p><a class="reference internal" href="function_expression__operators_8cpp_1a17cdd4cc7c3fb4c937a6c835e808a61b.html#exhale-function-expression-operators-8cpp-1a17cdd4cc7c3fb4c937a6c835e808a61b"><span class="std std-ref">Function marian::lt(Expr, Expr)</span></a></p></li>
+<li><p><a class="reference internal" href="function_expression__operators_8cpp_1a7d27e013c78deda690e0a2986f6af290.html#exhale-function-expression-operators-8cpp-1a7d27e013c78deda690e0a2986f6af290"><span class="std std-ref">Function marian::lt(float, Expr)</span></a></p></li>
+<li><p><a class="reference internal" href="function_expression__operators_8cpp_1a180aa98b74e982c6d87e96f0d2773f07.html#exhale-function-expression-operators-8cpp-1a180aa98b74e982c6d87e96f0d2773f07"><span class="std std-ref">Function marian::lt(Expr, float)</span></a></p></li>
+<li><p><a class="reference internal" href="function_expression__operators_8cpp_1a828452c93bee4b92f7aa2c53b7f78dde.html#exhale-function-expression-operators-8cpp-1a828452c93bee4b92f7aa2c53b7f78dde"><span class="std std-ref">Function marian::max</span></a></p></li>
+<li><p><a class="reference internal" href="function_expression__operators_8cpp_1ad1c437771a00186d692d0a342c0d7eab.html#exhale-function-expression-operators-8cpp-1ad1c437771a00186d692d0a342c0d7eab"><span class="std std-ref">Function marian::maximum(Expr, Expr)</span></a></p></li>
+<li><p><a class="reference internal" href="function_expression__operators_8cpp_1a22921ebac3eb952f6602491a185d463c.html#exhale-function-expression-operators-8cpp-1a22921ebac3eb952f6602491a185d463c"><span class="std std-ref">Function marian::maximum(float, Expr)</span></a></p></li>
+<li><p><a class="reference internal" href="function_expression__operators_8cpp_1a72b5c8ccd800cbaa6d9c58967beec40a.html#exhale-function-expression-operators-8cpp-1a72b5c8ccd800cbaa6d9c58967beec40a"><span class="std std-ref">Function marian::maximum(Expr, float)</span></a></p></li>
+<li><p><a class="reference internal" href="function_expression__operators_8cpp_1af203628b35861559f1687c857b2100b0.html#exhale-function-expression-operators-8cpp-1af203628b35861559f1687c857b2100b0"><span class="std std-ref">Function marian::mean</span></a></p></li>
+<li><p><a class="reference internal" href="function_expression__operators_8cpp_1a024e36063e34ad4613eb84fe7f136424.html#exhale-function-expression-operators-8cpp-1a024e36063e34ad4613eb84fe7f136424"><span class="std std-ref">Function marian::min</span></a></p></li>
+<li><p><a class="reference internal" href="function_expression__operators_8cpp_1a85a4b7053da95db2e3df542bc9c47f86.html#exhale-function-expression-operators-8cpp-1a85a4b7053da95db2e3df542bc9c47f86"><span class="std std-ref">Function marian::minimum(Expr, Expr)</span></a></p></li>
+<li><p><a class="reference internal" href="function_expression__operators_8cpp_1abb92aca9af7871eef4e8ec4b7ad77de7.html#exhale-function-expression-operators-8cpp-1abb92aca9af7871eef4e8ec4b7ad77de7"><span class="std std-ref">Function marian::minimum(float, Expr)</span></a></p></li>
+<li><p><a class="reference internal" href="function_expression__operators_8cpp_1a8006a9dbffbb2c5d9a3e9fdc35f01c70.html#exhale-function-expression-operators-8cpp-1a8006a9dbffbb2c5d9a3e9fdc35f01c70"><span class="std std-ref">Function marian::minimum(Expr, float)</span></a></p></li>
+<li><p><a class="reference internal" href="function_expression__operators_8cpp_1a568ceebf155e0a24b3f9cd9a292623c2.html#exhale-function-expression-operators-8cpp-1a568ceebf155e0a24b3f9cd9a292623c2"><span class="std std-ref">Function marian::ne(Expr, Expr)</span></a></p></li>
+<li><p><a class="reference internal" href="function_expression__operators_8cpp_1ad6dc0116a6018a167b8f2989c5b1624d.html#exhale-function-expression-operators-8cpp-1ad6dc0116a6018a167b8f2989c5b1624d"><span class="std std-ref">Function marian::ne(float, Expr)</span></a></p></li>
+<li><p><a class="reference internal" href="function_expression__operators_8cpp_1ace72a57133457133e60beed9438db6eb.html#exhale-function-expression-operators-8cpp-1ace72a57133457133e60beed9438db6eb"><span class="std std-ref">Function marian::ne(Expr, float)</span></a></p></li>
+<li><p><a class="reference internal" href="function_expression__operators_8cpp_1a6aaf9b9fe6f3717c4319e926330f2c22.html#exhale-function-expression-operators-8cpp-1a6aaf9b9fe6f3717c4319e926330f2c22"><span class="std std-ref">Function marian::operator*(Expr, Expr)</span></a></p></li>
+<li><p><a class="reference internal" href="function_expression__operators_8cpp_1a9733ed505673313bd944e7e04ce7b606.html#exhale-function-expression-operators-8cpp-1a9733ed505673313bd944e7e04ce7b606"><span class="std std-ref">Function marian::operator*(float, Expr)</span></a></p></li>
+<li><p><a class="reference internal" href="function_expression__operators_8cpp_1a80d27bc20c3653d6d7882f9087f10390.html#exhale-function-expression-operators-8cpp-1a80d27bc20c3653d6d7882f9087f10390"><span class="std std-ref">Function marian::operator*(Expr, float)</span></a></p></li>
+<li><p><a class="reference internal" href="function_expression__operators_8cpp_1a4634bf0330cd2ba9cdfcdc868aff5f31.html#exhale-function-expression-operators-8cpp-1a4634bf0330cd2ba9cdfcdc868aff5f31"><span class="std std-ref">Function marian::operator+(Expr, Expr)</span></a></p></li>
+<li><p><a class="reference internal" href="function_expression__operators_8cpp_1a6987ca2c3590a14cdd96999e01593600.html#exhale-function-expression-operators-8cpp-1a6987ca2c3590a14cdd96999e01593600"><span class="std std-ref">Function marian::operator+(Expr, float)</span></a></p></li>
+<li><p><a class="reference internal" href="function_expression__operators_8cpp_1a24de4feecfaaf554c1a0a5221de2a5dc.html#exhale-function-expression-operators-8cpp-1a24de4feecfaaf554c1a0a5221de2a5dc"><span class="std std-ref">Function marian::operator+(float, Expr)</span></a></p></li>
+<li><p><a class="reference internal" href="function_expression__operators_8cpp_1ae39f821d2f92647251cfb015fe07f4db.html#exhale-function-expression-operators-8cpp-1ae39f821d2f92647251cfb015fe07f4db"><span class="std std-ref">Function marian::operator-(Expr)</span></a></p></li>
+<li><p><a class="reference internal" href="function_expression__operators_8cpp_1a95ebcb81d4b23c6c11463de49ba1b3cb.html#exhale-function-expression-operators-8cpp-1a95ebcb81d4b23c6c11463de49ba1b3cb"><span class="std std-ref">Function marian::operator-(Expr, Expr)</span></a></p></li>
+<li><p><a class="reference internal" href="function_expression__operators_8cpp_1a30a0eed503c8c667b2c66f5ee8c9c6b5.html#exhale-function-expression-operators-8cpp-1a30a0eed503c8c667b2c66f5ee8c9c6b5"><span class="std std-ref">Function marian::operator-(Expr, float)</span></a></p></li>
+<li><p><a class="reference internal" href="function_expression__operators_8cpp_1a4980c825bcd4d4fd369cce025dc9e45e.html#exhale-function-expression-operators-8cpp-1a4980c825bcd4d4fd369cce025dc9e45e"><span class="std std-ref">Function marian::operator-(float, Expr)</span></a></p></li>
+<li><p><a class="reference internal" href="function_expression__operators_8cpp_1a1b719c7a542512dbc5a589f92114be62.html#exhale-function-expression-operators-8cpp-1a1b719c7a542512dbc5a589f92114be62"><span class="std std-ref">Function marian::operator/(Expr, Expr)</span></a></p></li>
+<li><p><a class="reference internal" href="function_expression__operators_8cpp_1a4d70c319f9e3a8de38cb564fd92c9944.html#exhale-function-expression-operators-8cpp-1a4d70c319f9e3a8de38cb564fd92c9944"><span class="std std-ref">Function marian::operator/(Expr, float)</span></a></p></li>
+<li><p><a class="reference internal" href="function_expression__operators_8cpp_1a06c2e6bdcd86d1d0466591b05cc7c0d0.html#exhale-function-expression-operators-8cpp-1a06c2e6bdcd86d1d0466591b05cc7c0d0"><span class="std std-ref">Function marian::operator/(float, Expr)</span></a></p></li>
+<li><p><a class="reference internal" href="function_expression__operators_8cpp_1afeb896b290f83406831bedaa11ca83d2.html#exhale-function-expression-operators-8cpp-1afeb896b290f83406831bedaa11ca83d2"><span class="std std-ref">Function marian::plus</span></a></p></li>
+<li><p><a class="reference internal" href="function_expression__operators_8cpp_1a3d680ab3dc41dc4f78531ae5904d720a.html#exhale-function-expression-operators-8cpp-1a3d680ab3dc41dc4f78531ae5904d720a"><span class="std std-ref">Function marian::prelu(const std::vector&lt;Expr&gt;&amp;, float)</span></a></p></li>
+<li><p><a class="reference internal" href="function_expression__operators_8cpp_1a8475d64f8491b3bc5322b1dc0738b70d.html#exhale-function-expression-operators-8cpp-1a8475d64f8491b3bc5322b1dc0738b70d"><span class="std std-ref">Function marian::prelu(Expr, float)</span></a></p></li>
+<li><p><a class="reference internal" href="function_expression__operators_8cpp_1a496c8540bee48ca9d3d914f23ea299c0.html#exhale-function-expression-operators-8cpp-1a496c8540bee48ca9d3d914f23ea299c0"><span class="std std-ref">Function marian::prod</span></a></p></li>
+<li><p><a class="reference internal" href="function_expression__operators_8cpp_1a0594af020fe0304dbcee0c041ffc4606.html#exhale-function-expression-operators-8cpp-1a0594af020fe0304dbcee0c041ffc4606"><span class="std std-ref">Function marian::relu(const std::vector&lt;Expr&gt;&amp;)</span></a></p></li>
+<li><p><a class="reference internal" href="function_expression__operators_8cpp_1a6228f7e46aeed337e3886df6446b7840.html#exhale-function-expression-operators-8cpp-1a6228f7e46aeed337e3886df6446b7840"><span class="std std-ref">Function marian::relu(Expr)</span></a></p></li>
+<li><p><a class="reference internal" href="function_expression__operators_8cpp_1a5564a84835091f18e6f3359cf43803ad.html#exhale-function-expression-operators-8cpp-1a5564a84835091f18e6f3359cf43803ad"><span class="std std-ref">Function marian::repeat</span></a></p></li>
+<li><p><a class="reference internal" href="function_expression__operators_8cpp_1acd984f43188d0ae23c2a6ef13ae5293f.html#exhale-function-expression-operators-8cpp-1acd984f43188d0ae23c2a6ef13ae5293f"><span class="std std-ref">Function marian::reshape</span></a></p></li>
+<li><p><a class="reference internal" href="function_expression__operators_8cpp_1a39840fd6ea8d2076d85a76768968608a.html#exhale-function-expression-operators-8cpp-1a39840fd6ea8d2076d85a76768968608a"><span class="std std-ref">Function marian::scalar_product</span></a></p></li>
+<li><p><a class="reference internal" href="function_expression__operators_8cpp_1a6848af5dd7c6347b41eabf8d429edb79.html#exhale-function-expression-operators-8cpp-1a6848af5dd7c6347b41eabf8d429edb79"><span class="std std-ref">Function marian::shift</span></a></p></li>
+<li><p><a class="reference internal" href="function_expression__operators_8cpp_1a67ae6339f25dfd24dc15729263cfcd6e.html#exhale-function-expression-operators-8cpp-1a67ae6339f25dfd24dc15729263cfcd6e"><span class="std std-ref">Function marian::sigmoid(const std::vector&lt;Expr&gt;&amp;)</span></a></p></li>
+<li><p><a class="reference internal" href="function_expression__operators_8cpp_1a04db6b8cee7d71439a7bc3dca0d0620e.html#exhale-function-expression-operators-8cpp-1a04db6b8cee7d71439a7bc3dca0d0620e"><span class="std std-ref">Function marian::sigmoid(Expr)</span></a></p></li>
+<li><p><a class="reference internal" href="function_expression__operators_8cpp_1a2548565a400350763ae946f8e421c8a1.html#exhale-function-expression-operators-8cpp-1a2548565a400350763ae946f8e421c8a1"><span class="std std-ref">Function marian::sin</span></a></p></li>
+<li><p><a class="reference internal" href="function_expression__operators_8cpp_1af50bd853673136e012a49ce9b0a8a570.html#exhale-function-expression-operators-8cpp-1af50bd853673136e012a49ce9b0a8a570"><span class="std std-ref">Function marian::slice(Expr, int, Slice)</span></a></p></li>
+<li><p><a class="reference internal" href="function_expression__operators_8cpp_1a4d36cd4f684e715d9476bec5a1fae576.html#exhale-function-expression-operators-8cpp-1a4d36cd4f684e715d9476bec5a1fae576"><span class="std std-ref">Function marian::sliceCopy</span></a></p></li>
+<li><p><a class="reference internal" href="function_expression__operators_8cpp_1a73d1223ed39903fde995941da1404e8d.html#exhale-function-expression-operators-8cpp-1a73d1223ed39903fde995941da1404e8d"><span class="std std-ref">Function marian::sliceView</span></a></p></li>
+<li><p><a class="reference internal" href="function_expression__operators_8cpp_1a52cfd17601753332e55afab80be09af5.html#exhale-function-expression-operators-8cpp-1a52cfd17601753332e55afab80be09af5"><span class="std std-ref">Function marian::softmax(Expr, int)</span></a></p></li>
+<li><p><a class="reference internal" href="function_expression__operators_8cpp_1a232d7acb9dc4154a2b0b9ecb0fb70f6d.html#exhale-function-expression-operators-8cpp-1a232d7acb9dc4154a2b0b9ecb0fb70f6d"><span class="std std-ref">Function marian::softmax(Expr, Expr, int)</span></a></p></li>
+<li><p><a class="reference internal" href="function_expression__operators_8cpp_1a3ae8b527d7780f7e47ab61e1d90746e8.html#exhale-function-expression-operators-8cpp-1a3ae8b527d7780f7e47ab61e1d90746e8"><span class="std std-ref">Function marian::sqrt</span></a></p></li>
+<li><p><a class="reference internal" href="function_expression__operators_8cpp_1a953e6df1fb209a142e066a2546d88c8a.html#exhale-function-expression-operators-8cpp-1a953e6df1fb209a142e066a2546d88c8a"><span class="std std-ref">Function marian::square</span></a></p></li>
+<li><p><a class="reference internal" href="function_expression__operators_8cpp_1af4e69a5f7167b63522135a1f6b8a5dd8.html#exhale-function-expression-operators-8cpp-1af4e69a5f7167b63522135a1f6b8a5dd8"><span class="std std-ref">Function marian::std</span></a></p></li>
+<li><p><a class="reference internal" href="function_expression__operators_8cpp_1a41b4d9d51d461220e8fb7ee104c6124e.html#exhale-function-expression-operators-8cpp-1a41b4d9d51d461220e8fb7ee104c6124e"><span class="std std-ref">Function marian::stopGradient</span></a></p></li>
+<li><p><a class="reference internal" href="function_expression__operators_8cpp_1ae095fc5c0ccaf070542e1ebeed2a7a6b.html#exhale-function-expression-operators-8cpp-1ae095fc5c0ccaf070542e1ebeed2a7a6b"><span class="std std-ref">Function marian::sum</span></a></p></li>
+<li><p><a class="reference internal" href="function_expression__operators_8cpp_1aefbe924ba733a7b40b94aa17391ddda7.html#exhale-function-expression-operators-8cpp-1aefbe924ba733a7b40b94aa17391ddda7"><span class="std std-ref">Function marian::swapAxes</span></a></p></li>
+<li><p><a class="reference internal" href="function_expression__operators_8cpp_1a00bc56ca69e09f0b52d7c63230bd8640.html#exhale-function-expression-operators-8cpp-1a00bc56ca69e09f0b52d7c63230bd8640"><span class="std std-ref">Function marian::swish(const std::vector&lt;Expr&gt;&amp;)</span></a></p></li>
+<li><p><a class="reference internal" href="function_expression__operators_8cpp_1a93a88db6ed117a3fa1d47c3882fb49a7.html#exhale-function-expression-operators-8cpp-1a93a88db6ed117a3fa1d47c3882fb49a7"><span class="std std-ref">Function marian::swish(Expr)</span></a></p></li>
+<li><p><a class="reference internal" href="function_expression__operators_8cpp_1ade13653d12eb44b6c9f672a3e5f0c503.html#exhale-function-expression-operators-8cpp-1ade13653d12eb44b6c9f672a3e5f0c503"><span class="std std-ref">Function marian::tanh(const std::vector&lt;Expr&gt;&amp;)</span></a></p></li>
+<li><p><a class="reference internal" href="function_expression__operators_8cpp_1abd11cbed1ed28d77f0ea4a6790cb04af.html#exhale-function-expression-operators-8cpp-1abd11cbed1ed28d77f0ea4a6790cb04af"><span class="std std-ref">Function marian::topk</span></a></p></li>
+<li><p><a class="reference internal" href="function_expression__operators_8cpp_1a830155997eace3326839ebd5cad3c678.html#exhale-function-expression-operators-8cpp-1a830155997eace3326839ebd5cad3c678"><span class="std std-ref">Function marian::transpose(Expr, const std::vector&lt;int&gt;&amp;)</span></a></p></li>
+<li><p><a class="reference internal" href="function_expression__operators_8cpp_1a00669690ef16ce9b1bde5ee9d1b77ac6.html#exhale-function-expression-operators-8cpp-1a00669690ef16ce9b1bde5ee9d1b77ac6"><span class="std std-ref">Function marian::transpose(Expr)</span></a></p></li>
+<li><p><a class="reference internal" href="function_expression__operators_8cpp_1a4398ef3bf30eef506062894640043e1b.html#exhale-function-expression-operators-8cpp-1a4398ef3bf30eef506062894640043e1b"><span class="std std-ref">Function marian::unlikelihood</span></a></p></li>
+<li><p><a class="reference internal" href="function_expression__operators_8cpp_1aec7e718cddba13a46350230258d18936.html#exhale-function-expression-operators-8cpp-1aec7e718cddba13a46350230258d18936"><span class="std std-ref">Function marian::var</span></a></p></li>
+<li><p><a class="reference internal" href="function_expression__operators_8cpp_1a3b21892509ae063b827262d97e7bd30f.html#exhale-function-expression-operators-8cpp-1a3b21892509ae063b827262d97e7bd30f"><span class="std std-ref">Function marian::weighted_average</span></a></p></li>
+</ul>
+</div>
+</div>
+
+
+           </div>
+           
+          </div>
+          <footer>
+
+  <hr/>
+
+  <div role="contentinfo">
+    <p>
+        &#169; Copyright 2021, Marian NMT Team.
+
+    </p>
+  </div>
+    
+    
+    
+    Built with <a href="https://www.sphinx-doc.org/">Sphinx</a> using a
+    
+    <a href="https://github.com/readthedocs/sphinx_rtd_theme">theme</a>
+    
+    provided by <a href="https://readthedocs.org">Read the Docs</a>. 
+
+</footer>
+        </div>
+      </div>
+
+    </section>
+
+  </div>
+  
+
+  <script type="text/javascript">
+      jQuery(function () {
+          SphinxRtdTheme.Navigation.enable(true);
+      });
+  </script>
+
+  
+  
+    
+   
+
+</body>
+</html>

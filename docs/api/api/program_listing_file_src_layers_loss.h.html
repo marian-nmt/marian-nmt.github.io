@@ -1,0 +1,594 @@
+
+
+<!DOCTYPE html>
+<html class="writer-html5" lang="en" >
+<head>
+  <meta charset="utf-8" />
+  
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  
+  <title>Program Listing for File loss.h &mdash; Marian NMT v1.10.1 2021-02-23 documentation</title>
+  
+
+  
+  <link rel="stylesheet" href="../_static/css/theme.css" type="text/css" />
+  <link rel="stylesheet" href="../_static/pygments.css" type="text/css" />
+  <link rel="stylesheet" href="../_static/css/custom.css" type="text/css" />
+  <link rel="stylesheet" href="../_static/collapsible-lists/css/tree_view.css" type="text/css" />
+
+  
+  
+
+  
+  
+
+  
+    <link rel="canonical" href="http://marian-nmt.github.io/docs/api/api/program_listing_file_src_layers_loss.h.html" />
+
+  
+  <!--[if lt IE 9]>
+    <script src="../_static/js/html5shiv.min.js"></script>
+  <![endif]-->
+  
+    
+      <script type="text/javascript" id="documentation_options" data-url_root="../" src="../_static/documentation_options.js"></script>
+        <script src="../_static/jquery.js"></script>
+        <script src="../_static/underscore.js"></script>
+        <script src="../_static/doctools.js"></script>
+        <script src="../_static/language_data.js"></script>
+        <script src="../_static/collapsible-lists/js/CollapsibleLists.compressed.js"></script>
+        <script src="../_static/collapsible-lists/js/apply-collapsible-lists.js"></script>
+    
+    <script type="text/javascript" src="../_static/js/theme.js"></script>
+
+    
+    <link rel="index" title="Index" href="../genindex.html" />
+    <link rel="search" title="Search" href="../search.html" /> 
+</head>
+
+<body class="wy-body-for-nav">
+
+   
+  <div class="wy-grid-for-nav">
+    
+    <nav data-toggle="wy-nav-shift" class="wy-nav-side">
+      <div class="wy-side-scroll">
+        <div class="wy-side-nav-search" >
+          
+
+          
+            <a href="../index.html" class="icon icon-home"> Marian NMT
+          
+
+          
+          </a>
+
+          
+            
+            
+              <div class="version">
+                v1.10.1
+              </div>
+            
+          
+
+          
+<div role="search">
+  <form id="rtd-search-form" class="wy-form" action="../search.html" method="get">
+    <input type="text" name="q" placeholder="Search docs" />
+    <input type="hidden" name="check_keywords" value="yes" />
+    <input type="hidden" name="area" value="default" />
+  </form>
+</div>
+
+          
+        </div>
+
+        
+        <div class="wy-menu wy-menu-vertical" data-spy="affix" role="navigation" aria-label="main navigation">
+          
+            
+            
+              
+            
+            
+              <p class="caption"><span class="caption-text">Contents:</span></p>
+<ul>
+<li class="toctree-l1"><a class="reference internal" href="../install.html">Installation</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../graph.html">Expression graphs</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../operators.html">Graph operations</a></li>
+<li class="toctree-l1"><a class="reference internal" href="library_index.html">Library API</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../contributing.html">How to contribute to Marian</a></li>
+</ul>
+
+            
+          
+        </div>
+        
+      </div>
+    </nav>
+
+    <section data-toggle="wy-nav-shift" class="wy-nav-content-wrap">
+
+      
+      <nav class="wy-nav-top" aria-label="top navigation">
+        
+          <i data-toggle="wy-nav-top" class="fa fa-bars"></i>
+          <a href="../index.html">Marian NMT</a>
+        
+      </nav>
+
+
+      <div class="wy-nav-content">
+        
+        <div class="rst-content">
+        
+          
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+<div role="navigation" aria-label="breadcrumbs navigation">
+
+  <ul class="wy-breadcrumbs">
+    
+      <li><a href="../index.html" class="icon icon-home"></a> &raquo;</li>
+        
+      <li>Program Listing for File loss.h</li>
+    
+    
+      <li class="wy-breadcrumbs-aside">
+        
+          
+            <a href="../_sources/api/program_listing_file_src_layers_loss.h.rst.txt" rel="nofollow"> View page source</a>
+          
+        
+      </li>
+    
+  </ul>
+
+  
+  <hr/>
+</div>
+          <div role="main" class="document" itemscope="itemscope" itemtype="http://schema.org/Article">
+           <div itemprop="articleBody">
+            
+  <div class="section" id="program-listing-for-file-loss-h">
+<span id="program-listing-file-src-layers-loss-h"></span><h1>Program Listing for File loss.h<a class="headerlink" href="#program-listing-for-file-loss-h" title="Permalink to this headline">¶</a></h1>
+<p>↰ <a class="reference internal" href="file_src_layers_loss.h.html#file-src-layers-loss-h"><span class="std std-ref">Return to documentation for file</span></a> (<code class="docutils literal notranslate"><span class="pre">src/layers/loss.h</span></code>)</p>
+<div class="highlight-cpp notranslate"><div class="highlight"><pre><span></span><span class="cp">#pragma once</span>
+
+<span class="cp">#include</span> <span class="cpf">&quot;graph/expression_operators.h&quot;</span><span class="cp"></span>
+<span class="cp">#include</span> <span class="cpf">&quot;layers/generic.h&quot;</span><span class="c1"> // for Logits (Frank&#39;s factor hack)</span><span class="cp"></span>
+<span class="cp">#include</span> <span class="cpf">&quot;data/types.h&quot;</span><span class="cp"></span>
+
+<span class="k">namespace</span> <span class="n">marian</span> <span class="p">{</span>
+
+<span class="k">class</span> <span class="nc">RationalLoss</span> <span class="p">{</span>
+<span class="k">protected</span><span class="o">:</span>
+  <span class="n">Expr</span> <span class="n">loss_</span><span class="p">;</span>  <span class="c1">// numerator</span>
+  <span class="n">Expr</span> <span class="n">count_</span><span class="p">;</span> <span class="c1">// denominator</span>
+
+  <span class="n">RationalLoss</span><span class="p">()</span> <span class="o">=</span> <span class="k">default</span><span class="p">;</span> <span class="c1">// protected</span>
+
+<span class="k">public</span><span class="o">:</span>
+  <span class="n">RationalLoss</span><span class="p">(</span><span class="n">Expr</span> <span class="n">loss</span><span class="p">,</span> <span class="n">Expr</span> <span class="n">count</span><span class="p">)</span>
+  <span class="o">:</span> <span class="n">loss_</span><span class="p">(</span><span class="n">loss</span><span class="p">),</span> <span class="n">count_</span><span class="p">(</span><span class="n">count</span><span class="p">)</span> <span class="p">{}</span>
+
+  <span class="n">RationalLoss</span><span class="p">(</span><span class="n">Expr</span> <span class="n">loss</span><span class="p">,</span> <span class="kt">float</span> <span class="n">count</span><span class="p">)</span>
+  <span class="o">:</span> <span class="n">loss_</span><span class="p">(</span><span class="n">loss</span><span class="p">),</span>
+    <span class="n">count_</span><span class="p">(</span><span class="n">constant_like</span><span class="p">(</span><span class="n">loss</span><span class="p">,</span> <span class="n">inits</span><span class="o">::</span><span class="n">fromValue</span><span class="p">(</span><span class="n">count</span><span class="p">)))</span> <span class="p">{}</span>
+
+  <span class="n">RationalLoss</span><span class="p">(</span><span class="k">const</span> <span class="n">RationalLoss</span><span class="o">&amp;</span> <span class="n">other</span><span class="p">)</span>
+  <span class="o">:</span> <span class="n">loss_</span><span class="p">(</span><span class="n">other</span><span class="p">.</span><span class="n">loss_</span><span class="p">),</span> <span class="n">count_</span><span class="p">(</span><span class="n">other</span><span class="p">.</span><span class="n">count_</span><span class="p">)</span> <span class="p">{}</span>
+
+  <span class="k">virtual</span> <span class="o">~</span><span class="n">RationalLoss</span><span class="p">()</span> <span class="o">=</span> <span class="k">default</span><span class="p">;</span>
+
+  <span class="n">Expr</span> <span class="nf">loss</span><span class="p">()</span> <span class="k">const</span> <span class="p">{</span> <span class="k">return</span> <span class="n">loss_</span><span class="p">;</span> <span class="p">}</span>
+
+  <span class="c1">// @TODO: remove this function, as it does not add too much value over loss()-&gt;get(...)</span>
+  <span class="k">template</span> <span class="o">&lt;</span><span class="k">typename</span> <span class="nc">T</span><span class="o">&gt;</span>
+  <span class="kt">void</span> <span class="n">loss</span><span class="p">(</span><span class="n">std</span><span class="o">::</span><span class="n">vector</span><span class="o">&lt;</span><span class="n">T</span><span class="o">&gt;&amp;</span> <span class="n">losses</span><span class="p">)</span> <span class="k">const</span> <span class="p">{</span>
+    <span class="n">ABORT_IF</span><span class="p">(</span><span class="o">!</span><span class="n">loss_</span><span class="p">,</span> <span class="s">&quot;Loss has not been defined&quot;</span><span class="p">);</span>
+    <span class="n">loss_</span><span class="o">-&gt;</span><span class="n">val</span><span class="p">()</span><span class="o">-&gt;</span><span class="n">get</span><span class="p">(</span><span class="n">losses</span><span class="p">);</span>
+  <span class="p">}</span>
+
+  <span class="k">template</span> <span class="o">&lt;</span><span class="k">typename</span> <span class="nc">T</span><span class="o">&gt;</span>
+  <span class="n">T</span> <span class="n">loss</span><span class="p">()</span> <span class="k">const</span> <span class="p">{</span> <span class="c1">// this will fail if loss is not a single value</span>
+    <span class="n">ABORT_IF</span><span class="p">(</span><span class="o">!</span><span class="n">loss_</span><span class="p">,</span> <span class="s">&quot;Loss has not been defined&quot;</span><span class="p">);</span>
+    <span class="k">return</span> <span class="n">loss_</span><span class="o">-&gt;</span><span class="n">val</span><span class="p">()</span><span class="o">-&gt;</span><span class="n">scalar</span><span class="o">&lt;</span><span class="n">T</span><span class="o">&gt;</span><span class="p">();</span>
+  <span class="p">}</span>
+
+  <span class="n">Expr</span> <span class="n">count</span><span class="p">()</span> <span class="k">const</span> <span class="p">{</span> <span class="k">return</span> <span class="n">count_</span><span class="p">;</span> <span class="p">}</span>
+
+  <span class="c1">// @TODO: remove this function, as it does not add too much value over count()-&gt;get(...)</span>
+  <span class="k">template</span> <span class="o">&lt;</span><span class="k">typename</span> <span class="nc">T</span><span class="o">&gt;</span>
+  <span class="kt">void</span> <span class="n">count</span><span class="p">(</span><span class="n">std</span><span class="o">::</span><span class="n">vector</span><span class="o">&lt;</span><span class="n">T</span><span class="o">&gt;&amp;</span> <span class="n">labels</span><span class="p">)</span> <span class="k">const</span> <span class="p">{</span>
+    <span class="n">ABORT_IF</span><span class="p">(</span><span class="o">!</span><span class="n">count_</span><span class="p">,</span> <span class="s">&quot;Labels have not been defined&quot;</span><span class="p">);</span>
+    <span class="n">count_</span><span class="o">-&gt;</span><span class="n">val</span><span class="p">()</span><span class="o">-&gt;</span><span class="n">get</span><span class="p">(</span><span class="n">labels</span><span class="p">);</span>
+  <span class="p">}</span>
+
+  <span class="k">template</span> <span class="o">&lt;</span><span class="k">typename</span> <span class="nc">T</span><span class="o">&gt;</span>
+  <span class="n">T</span> <span class="n">count</span><span class="p">()</span> <span class="k">const</span> <span class="p">{</span> <span class="c1">// this will fail if loss is not a single value</span>
+    <span class="n">ABORT_IF</span><span class="p">(</span><span class="o">!</span><span class="n">count_</span><span class="p">,</span> <span class="s">&quot;Labels have not been defined&quot;</span><span class="p">);</span>
+    <span class="k">return</span> <span class="n">count_</span><span class="o">-&gt;</span><span class="n">val</span><span class="p">()</span><span class="o">-&gt;</span><span class="n">scalar</span><span class="o">&lt;</span><span class="n">T</span><span class="o">&gt;</span><span class="p">();</span>
+  <span class="p">}</span>
+
+  <span class="c1">// @TODO: add a funtion for returning maybe ratio?</span>
+
+  <span class="kt">size_t</span> <span class="n">size</span><span class="p">()</span> <span class="k">const</span> <span class="p">{</span>
+    <span class="n">ABORT_IF</span><span class="p">(</span><span class="o">!</span><span class="n">count_</span><span class="p">,</span> <span class="s">&quot;Labels have not been defined&quot;</span><span class="p">);</span>
+    <span class="k">return</span> <span class="n">count_</span><span class="o">-&gt;</span><span class="n">shape</span><span class="p">().</span><span class="n">elements</span><span class="p">();</span>
+  <span class="p">}</span>
+<span class="p">};</span>
+
+<span class="k">struct</span> <span class="nc">StaticLoss</span> <span class="p">{</span>
+  <span class="kt">float</span> <span class="n">loss</span><span class="p">;</span>  <span class="c1">// numerator</span>
+  <span class="kt">float</span> <span class="n">count</span><span class="p">;</span> <span class="c1">// denominator</span>
+
+  <span class="n">StaticLoss</span><span class="p">()</span> <span class="o">:</span> <span class="n">loss</span><span class="p">(</span><span class="mf">0.f</span><span class="p">),</span> <span class="n">count</span><span class="p">(</span><span class="mf">0.f</span><span class="p">)</span> <span class="p">{}</span>
+
+  <span class="n">StaticLoss</span><span class="p">(</span><span class="k">const</span> <span class="n">RationalLoss</span><span class="o">&amp;</span> <span class="n">dynamic</span><span class="p">)</span>
+  <span class="o">:</span> <span class="n">loss</span><span class="p">(</span><span class="n">dynamic</span><span class="p">.</span><span class="n">loss</span><span class="o">&lt;</span><span class="kt">float</span><span class="o">&gt;</span><span class="p">()),</span> <span class="n">count</span><span class="p">(</span><span class="n">dynamic</span><span class="p">.</span><span class="n">count</span><span class="o">&lt;</span><span class="kt">float</span><span class="o">&gt;</span><span class="p">())</span> <span class="p">{}</span>
+
+  <span class="n">StaticLoss</span> <span class="k">operator</span> <span class="o">+</span><span class="p">(</span><span class="k">const</span> <span class="n">StaticLoss</span><span class="o">&amp;</span> <span class="n">other</span><span class="p">)</span> <span class="k">const</span> <span class="p">{</span>
+    <span class="n">StaticLoss</span> <span class="nf">res</span><span class="p">(</span><span class="o">*</span><span class="k">this</span><span class="p">);</span>
+    <span class="n">res</span> <span class="o">+=</span> <span class="n">other</span><span class="p">;</span>
+    <span class="k">return</span> <span class="n">res</span><span class="p">;</span>
+  <span class="p">}</span>
+
+  <span class="n">StaticLoss</span><span class="o">&amp;</span> <span class="k">operator</span> <span class="o">+=</span><span class="p">(</span><span class="k">const</span> <span class="n">StaticLoss</span><span class="o">&amp;</span> <span class="n">other</span><span class="p">)</span> <span class="p">{</span>
+    <span class="n">loss</span> <span class="o">=</span> <span class="n">loss</span> <span class="o">+</span> <span class="n">other</span><span class="p">.</span><span class="n">loss</span><span class="p">;</span>
+    <span class="n">count</span> <span class="o">=</span> <span class="n">count</span> <span class="o">+</span> <span class="n">other</span><span class="p">.</span><span class="n">count</span><span class="p">;</span>
+    <span class="k">return</span> <span class="o">*</span><span class="k">this</span><span class="p">;</span>
+  <span class="p">}</span>
+
+  <span class="kt">void</span> <span class="n">reset</span><span class="p">()</span> <span class="p">{</span>
+    <span class="n">loss</span> <span class="o">=</span> <span class="mf">0.f</span><span class="p">;</span>
+    <span class="n">count</span> <span class="o">=</span> <span class="mf">0.f</span><span class="p">;</span>
+  <span class="p">}</span>
+<span class="p">};</span>
+
+<span class="k">class</span> <span class="nc">MultiRationalLoss</span> <span class="o">:</span> <span class="k">public</span> <span class="n">RationalLoss</span> <span class="p">{</span>
+<span class="k">protected</span><span class="o">:</span>
+  <span class="n">std</span><span class="o">::</span><span class="n">vector</span><span class="o">&lt;</span><span class="n">RationalLoss</span><span class="o">&gt;</span> <span class="n">partialLosses_</span><span class="p">;</span>
+
+  <span class="k">virtual</span> <span class="n">Expr</span> <span class="n">accumulateLoss</span><span class="p">(</span><span class="k">const</span> <span class="n">RationalLoss</span><span class="o">&amp;</span> <span class="n">current</span><span class="p">)</span> <span class="o">=</span> <span class="mi">0</span><span class="p">;</span>
+
+  <span class="k">virtual</span> <span class="n">Expr</span> <span class="n">accumulateCount</span><span class="p">(</span><span class="k">const</span> <span class="n">RationalLoss</span><span class="o">&amp;</span> <span class="n">current</span><span class="p">)</span> <span class="o">=</span> <span class="mi">0</span><span class="p">;</span>
+
+<span class="k">public</span><span class="o">:</span>
+  <span class="n">MultiRationalLoss</span><span class="p">()</span> <span class="o">:</span> <span class="n">RationalLoss</span><span class="p">()</span> <span class="p">{}</span>
+
+  <span class="n">MultiRationalLoss</span><span class="p">(</span><span class="k">const</span> <span class="n">RationalLoss</span><span class="o">&amp;</span> <span class="n">rl</span><span class="p">)</span> <span class="o">:</span> <span class="n">RationalLoss</span><span class="p">()</span> <span class="p">{</span>
+    <span class="n">push_back</span><span class="p">(</span><span class="n">rl</span><span class="p">);</span>
+  <span class="p">}</span>
+
+  <span class="k">virtual</span> <span class="kt">void</span> <span class="n">push_back</span><span class="p">(</span><span class="k">const</span> <span class="n">RationalLoss</span><span class="o">&amp;</span> <span class="n">current</span><span class="p">)</span> <span class="p">{</span>
+    <span class="n">loss_</span>   <span class="o">=</span> <span class="n">accumulateLoss</span><span class="p">(</span><span class="n">current</span><span class="p">);</span>
+    <span class="n">count_</span> <span class="o">=</span>  <span class="n">accumulateCount</span><span class="p">(</span><span class="n">current</span><span class="p">);</span>
+    <span class="n">partialLosses_</span><span class="p">.</span><span class="n">push_back</span><span class="p">(</span><span class="n">current</span><span class="p">);</span>
+  <span class="p">}</span>
+
+  <span class="k">const</span> <span class="n">RationalLoss</span><span class="o">&amp;</span> <span class="k">operator</span><span class="p">[](</span><span class="kt">size_t</span> <span class="n">i</span><span class="p">)</span> <span class="p">{</span>
+    <span class="k">return</span> <span class="n">partialLosses_</span><span class="p">[</span><span class="n">i</span><span class="p">];</span>
+  <span class="p">}</span>
+
+  <span class="k">auto</span> <span class="n">begin</span><span class="p">()</span> <span class="o">-&gt;</span> <span class="k">decltype</span><span class="p">(</span><span class="n">partialLosses_</span><span class="p">.</span><span class="n">begin</span><span class="p">())</span> <span class="k">const</span> <span class="p">{</span>
+    <span class="k">return</span> <span class="n">partialLosses_</span><span class="p">.</span><span class="n">begin</span><span class="p">();</span>
+  <span class="p">}</span>
+
+  <span class="k">auto</span> <span class="n">end</span><span class="p">()</span> <span class="o">-&gt;</span> <span class="k">decltype</span><span class="p">(</span><span class="n">partialLosses_</span><span class="p">.</span><span class="n">end</span><span class="p">())</span> <span class="k">const</span> <span class="p">{</span>
+    <span class="k">return</span> <span class="n">partialLosses_</span><span class="p">.</span><span class="n">end</span><span class="p">();</span>
+  <span class="p">}</span>
+
+  <span class="kt">size_t</span> <span class="n">size</span><span class="p">()</span> <span class="k">const</span> <span class="p">{</span>
+    <span class="k">return</span> <span class="n">partialLosses_</span><span class="p">.</span><span class="n">size</span><span class="p">();</span>
+  <span class="p">}</span>
+
+<span class="p">};</span>
+
+<span class="k">class</span> <span class="nc">SumMultiRationalLoss</span> <span class="o">:</span> <span class="k">public</span> <span class="n">MultiRationalLoss</span> <span class="p">{</span>
+<span class="k">private</span><span class="o">:</span>
+  <span class="k">virtual</span> <span class="n">Expr</span> <span class="n">accumulateLoss</span><span class="p">(</span><span class="k">const</span> <span class="n">RationalLoss</span><span class="o">&amp;</span> <span class="n">current</span><span class="p">)</span> <span class="k">override</span> <span class="p">{</span>
+    <span class="k">if</span><span class="p">(</span><span class="n">loss_</span><span class="p">)</span>
+      <span class="k">return</span> <span class="n">loss_</span> <span class="o">+</span> <span class="n">current</span><span class="p">.</span><span class="n">loss</span><span class="p">();</span>
+    <span class="k">else</span>
+      <span class="k">return</span> <span class="n">current</span><span class="p">.</span><span class="n">loss</span><span class="p">();</span>
+  <span class="p">}</span>
+
+  <span class="k">virtual</span> <span class="n">Expr</span> <span class="n">accumulateCount</span><span class="p">(</span><span class="k">const</span> <span class="n">RationalLoss</span><span class="o">&amp;</span> <span class="n">current</span><span class="p">)</span> <span class="k">override</span> <span class="p">{</span>
+    <span class="k">if</span><span class="p">(</span><span class="n">count_</span><span class="p">)</span>
+      <span class="k">return</span> <span class="n">count_</span> <span class="o">+</span> <span class="n">current</span><span class="p">.</span><span class="n">count</span><span class="p">();</span>
+    <span class="k">else</span>
+      <span class="k">return</span> <span class="n">current</span><span class="p">.</span><span class="n">count</span><span class="p">();</span>
+  <span class="p">}</span>
+
+<span class="k">public</span><span class="o">:</span>
+  <span class="n">SumMultiRationalLoss</span><span class="p">()</span> <span class="o">:</span> <span class="n">MultiRationalLoss</span><span class="p">()</span> <span class="p">{}</span>
+  <span class="n">SumMultiRationalLoss</span><span class="p">(</span><span class="k">const</span> <span class="n">RationalLoss</span><span class="o">&amp;</span> <span class="n">rl</span><span class="p">)</span> <span class="o">:</span> <span class="n">MultiRationalLoss</span><span class="p">(</span><span class="n">rl</span><span class="p">)</span> <span class="p">{}</span>
+<span class="p">};</span>
+
+<span class="k">class</span> <span class="nc">ScaledMultiRationalLoss</span> <span class="o">:</span> <span class="k">public</span> <span class="n">MultiRationalLoss</span> <span class="p">{</span>
+<span class="k">private</span><span class="o">:</span>
+  <span class="k">virtual</span> <span class="n">Expr</span> <span class="n">accumulateLoss</span><span class="p">(</span><span class="k">const</span> <span class="n">RationalLoss</span><span class="o">&amp;</span> <span class="n">current</span><span class="p">)</span> <span class="k">override</span> <span class="p">{</span>
+    <span class="k">if</span><span class="p">(</span><span class="n">loss_</span><span class="p">)</span> <span class="p">{</span>
+      <span class="k">const</span> <span class="k">auto</span><span class="o">&amp;</span> <span class="n">first</span> <span class="o">=</span> <span class="n">partialLosses_</span><span class="p">.</span><span class="n">front</span><span class="p">();</span>
+      <span class="k">return</span> <span class="n">loss_</span> <span class="o">+</span> <span class="n">current</span><span class="p">.</span><span class="n">loss</span><span class="p">()</span> <span class="o">*</span> <span class="n">first</span><span class="p">.</span><span class="n">count</span><span class="p">()</span> <span class="o">/</span> <span class="n">current</span><span class="p">.</span><span class="n">count</span><span class="p">();</span> <span class="c1">// scale up/down to match scale of first loss</span>
+    <span class="p">}</span> <span class="k">else</span> <span class="p">{</span>
+      <span class="k">return</span> <span class="n">current</span><span class="p">.</span><span class="n">loss</span><span class="p">();</span> <span class="c1">// first reference loss, keeps to scale with this one</span>
+    <span class="p">}</span>
+  <span class="p">}</span>
+
+  <span class="k">virtual</span> <span class="n">Expr</span> <span class="n">accumulateCount</span><span class="p">(</span><span class="k">const</span> <span class="n">RationalLoss</span><span class="o">&amp;</span> <span class="n">current</span><span class="p">)</span> <span class="k">override</span> <span class="p">{</span>
+    <span class="k">if</span><span class="p">(</span><span class="n">count_</span><span class="p">)</span> <span class="p">{</span>
+      <span class="k">return</span> <span class="n">count_</span><span class="p">;</span> <span class="c1">// Keep first label count // or: count_ + first.count() / current.count();</span>
+    <span class="p">}</span> <span class="k">else</span> <span class="p">{</span>
+      <span class="k">return</span> <span class="n">current</span><span class="p">.</span><span class="n">count</span><span class="p">();</span> <span class="c1">// This is the first loss</span>
+    <span class="p">}</span>
+  <span class="p">}</span>
+
+<span class="k">public</span><span class="o">:</span>
+  <span class="n">ScaledMultiRationalLoss</span><span class="p">()</span> <span class="o">:</span> <span class="n">MultiRationalLoss</span><span class="p">()</span> <span class="p">{}</span>
+  <span class="n">ScaledMultiRationalLoss</span><span class="p">(</span><span class="k">const</span> <span class="n">RationalLoss</span><span class="o">&amp;</span> <span class="n">rl</span><span class="p">)</span> <span class="o">:</span> <span class="n">MultiRationalLoss</span><span class="p">(</span><span class="n">rl</span><span class="p">)</span> <span class="p">{}</span>
+<span class="p">};</span>
+
+<span class="k">class</span> <span class="nc">MeanMultiRationalLoss</span> <span class="o">:</span> <span class="k">public</span> <span class="n">MultiRationalLoss</span> <span class="p">{</span>
+<span class="k">private</span><span class="o">:</span>
+  <span class="k">virtual</span> <span class="n">Expr</span> <span class="n">accumulateLoss</span><span class="p">(</span><span class="k">const</span> <span class="n">RationalLoss</span><span class="o">&amp;</span> <span class="n">current</span><span class="p">)</span> <span class="k">override</span> <span class="p">{</span>
+    <span class="k">if</span><span class="p">(</span><span class="n">loss_</span><span class="p">)</span>
+      <span class="k">return</span> <span class="n">loss_</span> <span class="o">+</span> <span class="n">current</span><span class="p">.</span><span class="n">loss</span><span class="p">()</span> <span class="o">/</span> <span class="n">current</span><span class="p">.</span><span class="n">count</span><span class="p">();</span>
+    <span class="k">else</span>
+      <span class="k">return</span> <span class="n">current</span><span class="p">.</span><span class="n">loss</span><span class="p">()</span> <span class="o">/</span> <span class="n">current</span><span class="p">.</span><span class="n">count</span><span class="p">();</span>
+  <span class="p">}</span>
+
+  <span class="k">virtual</span> <span class="n">Expr</span> <span class="n">accumulateCount</span><span class="p">(</span><span class="k">const</span> <span class="n">RationalLoss</span><span class="o">&amp;</span> <span class="n">current</span><span class="p">)</span> <span class="k">override</span> <span class="p">{</span>
+    <span class="k">if</span><span class="p">(</span><span class="n">count_</span><span class="p">)</span>
+      <span class="k">return</span> <span class="n">count_</span><span class="p">;</span> <span class="c1">// keep the existing &#39;1&#39;</span>
+    <span class="k">else</span>
+      <span class="k">return</span> <span class="n">current</span><span class="p">.</span><span class="n">count</span><span class="p">()</span><span class="o">-&gt;</span><span class="n">graph</span><span class="p">()</span><span class="o">-&gt;</span><span class="n">ones</span><span class="p">({</span><span class="mi">1</span><span class="p">},</span> <span class="n">current</span><span class="p">.</span><span class="n">loss</span><span class="p">()</span><span class="o">-&gt;</span><span class="n">value_type</span><span class="p">());</span> <span class="c1">// just &#39;1&#39; as labels are factored into loss_</span>
+  <span class="p">}</span>
+
+<span class="k">public</span><span class="o">:</span>
+  <span class="n">MeanMultiRationalLoss</span><span class="p">()</span> <span class="o">:</span> <span class="n">MultiRationalLoss</span><span class="p">()</span> <span class="p">{}</span>
+  <span class="n">MeanMultiRationalLoss</span><span class="p">(</span><span class="k">const</span> <span class="n">RationalLoss</span><span class="o">&amp;</span> <span class="n">rl</span><span class="p">)</span> <span class="o">:</span> <span class="n">MultiRationalLoss</span><span class="p">(</span><span class="n">rl</span><span class="p">)</span> <span class="p">{}</span>
+<span class="p">};</span>
+
+<span class="n">Ptr</span><span class="o">&lt;</span><span class="n">MultiRationalLoss</span><span class="o">&gt;</span> <span class="n">newMultiLoss</span><span class="p">(</span><span class="n">Ptr</span><span class="o">&lt;</span><span class="n">Options</span><span class="o">&gt;</span> <span class="n">options</span><span class="p">);</span>
+
+<span class="c1">//***********************************************************************************//</span>
+<span class="c1">// This needs to be refactored. Currently easiest route for backwards compat, but</span>
+<span class="c1">// still feels somewhat hacky.</span>
+
+<span class="k">class</span> <span class="nc">LabelwiseLoss</span> <span class="p">{</span>
+<span class="k">protected</span><span class="o">:</span>
+  <span class="n">std</span><span class="o">::</span><span class="n">vector</span><span class="o">&lt;</span><span class="kt">int</span><span class="o">&gt;</span> <span class="n">axes_</span><span class="p">;</span>
+
+  <span class="k">virtual</span> <span class="n">Expr</span> <span class="n">compute</span><span class="p">(</span><span class="n">Logits</span> <span class="n">logits</span><span class="p">,</span> <span class="k">const</span> <span class="n">Words</span><span class="o">&amp;</span> <span class="n">labels</span><span class="p">,</span>
+                       <span class="n">Expr</span> <span class="n">mask</span> <span class="o">=</span> <span class="k">nullptr</span><span class="p">,</span> <span class="n">Expr</span> <span class="n">labelWeights</span> <span class="o">=</span> <span class="k">nullptr</span><span class="p">)</span> <span class="o">=</span> <span class="mi">0</span><span class="p">;</span>
+
+  <span class="c1">// label counts are available, reduce together with loss to obtain counts</span>
+  <span class="n">RationalLoss</span> <span class="nf">reduce</span><span class="p">(</span><span class="n">Expr</span> <span class="n">loss</span><span class="p">,</span> <span class="n">Expr</span> <span class="n">labels</span><span class="p">)</span> <span class="p">{</span>
+    <span class="n">ABORT_IF</span><span class="p">(</span><span class="o">!</span><span class="n">loss</span><span class="p">,</span> <span class="s">&quot;Loss has not been computed&quot;</span><span class="p">);</span>
+    <span class="n">ABORT_IF</span><span class="p">(</span><span class="o">!</span><span class="n">labels</span><span class="p">,</span> <span class="s">&quot;Labels have not been computed&quot;</span><span class="p">);</span>
+
+    <span class="n">Expr</span> <span class="n">lossSum</span>   <span class="o">=</span> <span class="n">cast</span><span class="p">(</span><span class="n">loss</span><span class="p">,</span> <span class="n">Type</span><span class="o">::</span><span class="n">float32</span><span class="p">);</span>   <span class="c1">// accumulate in float32</span>
+    <span class="n">Expr</span> <span class="n">labelsSum</span> <span class="o">=</span> <span class="n">cast</span><span class="p">(</span><span class="n">labels</span><span class="p">,</span> <span class="n">Type</span><span class="o">::</span><span class="n">float32</span><span class="p">);</span> <span class="c1">// accumulate in float32</span>
+    <span class="k">for</span><span class="p">(</span><span class="kt">int</span> <span class="n">i</span> <span class="o">=</span> <span class="mi">0</span><span class="p">;</span> <span class="n">i</span> <span class="o">&lt;</span> <span class="n">axes_</span><span class="p">.</span><span class="n">size</span><span class="p">();</span> <span class="o">++</span><span class="n">i</span><span class="p">)</span> <span class="p">{</span>
+      <span class="n">lossSum</span>   <span class="o">=</span> <span class="n">sum</span><span class="p">(</span><span class="n">lossSum</span><span class="p">,</span> <span class="n">axes_</span><span class="p">[</span><span class="n">i</span><span class="p">]);</span>
+      <span class="n">labelsSum</span> <span class="o">=</span> <span class="n">sum</span><span class="p">(</span><span class="n">labelsSum</span><span class="p">,</span> <span class="n">axes_</span><span class="p">[</span><span class="n">i</span><span class="p">]);</span>
+    <span class="p">}</span>
+
+    <span class="k">return</span> <span class="n">RationalLoss</span><span class="p">(</span><span class="n">lossSum</span><span class="p">,</span> <span class="n">labelsSum</span><span class="p">);</span>
+  <span class="p">}</span>
+
+  <span class="c1">// label counts are not available, assume every element of tensor corresponds to label count 1</span>
+  <span class="n">RationalLoss</span> <span class="nf">reduce</span><span class="p">(</span><span class="n">Expr</span> <span class="n">loss</span><span class="p">)</span> <span class="p">{</span>
+    <span class="n">ABORT_IF</span><span class="p">(</span><span class="o">!</span><span class="n">loss</span><span class="p">,</span> <span class="s">&quot;Loss has not been computed&quot;</span><span class="p">);</span>
+
+    <span class="n">Expr</span>  <span class="n">lossSum</span>    <span class="o">=</span> <span class="n">cast</span><span class="p">(</span><span class="n">loss</span><span class="p">,</span> <span class="n">Type</span><span class="o">::</span><span class="n">float32</span><span class="p">);</span>
+    <span class="k">for</span><span class="p">(</span><span class="kt">int</span> <span class="n">i</span> <span class="o">=</span> <span class="mi">0</span><span class="p">;</span> <span class="n">i</span> <span class="o">&lt;</span> <span class="n">axes_</span><span class="p">.</span><span class="n">size</span><span class="p">();</span> <span class="o">++</span><span class="n">i</span><span class="p">)</span>
+      <span class="n">lossSum</span> <span class="o">=</span> <span class="n">sum</span><span class="p">(</span><span class="n">lossSum</span><span class="p">,</span> <span class="n">axes_</span><span class="p">[</span><span class="n">i</span><span class="p">]);</span>
+
+    <span class="c1">// reduction factor tells how over how many labels we reduced in total.</span>
+    <span class="kt">float</span> <span class="n">reducedLabels</span> <span class="o">=</span> <span class="p">(</span><span class="kt">float</span><span class="p">)</span><span class="n">loss</span><span class="o">-&gt;</span><span class="n">shape</span><span class="p">().</span><span class="n">elements</span><span class="p">()</span> <span class="o">/</span> <span class="p">(</span><span class="kt">float</span><span class="p">)</span><span class="n">lossSum</span><span class="o">-&gt;</span><span class="n">shape</span><span class="p">().</span><span class="n">elements</span><span class="p">();</span>
+    <span class="k">return</span> <span class="n">RationalLoss</span><span class="p">(</span><span class="n">lossSum</span><span class="p">,</span> <span class="n">reducedLabels</span><span class="p">);</span>
+  <span class="p">}</span>
+
+<span class="k">public</span><span class="o">:</span>
+  <span class="n">LabelwiseLoss</span><span class="p">(</span><span class="k">const</span> <span class="n">std</span><span class="o">::</span><span class="n">vector</span><span class="o">&lt;</span><span class="kt">int</span><span class="o">&gt;&amp;</span> <span class="n">axes</span><span class="p">)</span>
+  <span class="o">:</span> <span class="n">axes_</span><span class="p">(</span><span class="n">axes</span><span class="p">)</span> <span class="p">{</span> <span class="p">}</span>
+
+  <span class="k">virtual</span> <span class="n">RationalLoss</span> <span class="n">apply</span><span class="p">(</span><span class="n">Logits</span> <span class="n">logits</span><span class="p">,</span> <span class="k">const</span> <span class="n">Words</span><span class="o">&amp;</span> <span class="n">labels</span><span class="p">,</span>
+                             <span class="n">Expr</span> <span class="n">mask</span> <span class="o">=</span> <span class="k">nullptr</span><span class="p">,</span> <span class="n">Expr</span> <span class="n">labelWeights</span> <span class="o">=</span> <span class="k">nullptr</span><span class="p">)</span> <span class="p">{</span>
+    <span class="n">Expr</span> <span class="n">loss</span> <span class="o">=</span> <span class="n">compute</span><span class="p">(</span><span class="n">logits</span><span class="p">,</span> <span class="n">labels</span><span class="p">,</span> <span class="n">mask</span><span class="p">,</span> <span class="n">labelWeights</span><span class="p">);</span>
+
+    <span class="k">if</span><span class="p">(</span><span class="n">mask</span><span class="p">)</span>
+      <span class="k">return</span> <span class="n">reduce</span><span class="p">(</span><span class="n">loss</span><span class="p">,</span> <span class="n">mask</span><span class="p">);</span> <span class="c1">// mask can be used as element-wise label count with broadcasting</span>
+    <span class="k">else</span>
+      <span class="k">return</span> <span class="n">reduce</span><span class="p">(</span><span class="n">loss</span><span class="p">);</span> <span class="c1">// we have no mask, assume all items are labels</span>
+  <span class="p">}</span>
+<span class="p">};</span>
+
+<span class="k">class</span> <span class="nc">CrossEntropyLoss</span> <span class="o">:</span> <span class="k">public</span> <span class="n">LabelwiseLoss</span> <span class="p">{</span>
+<span class="k">public</span><span class="o">:</span>
+  <span class="n">CrossEntropyLoss</span><span class="p">(</span><span class="kt">float</span> <span class="n">labelSmoothing</span><span class="p">,</span> <span class="kt">float</span> <span class="n">factorWeight</span><span class="p">)</span>
+  <span class="o">:</span> <span class="n">CrossEntropyLoss</span><span class="p">(</span><span class="cm">/*axes=*/</span><span class="p">{</span><span class="mi">-2</span><span class="p">,</span> <span class="mi">-3</span><span class="p">},</span> <span class="n">labelSmoothing</span><span class="p">,</span> <span class="n">factorWeight</span><span class="p">)</span> <span class="p">{}</span> <span class="c1">// cross-entropy already reduces over axis -1</span>
+
+  <span class="n">CrossEntropyLoss</span><span class="p">(</span><span class="k">const</span> <span class="n">std</span><span class="o">::</span><span class="n">vector</span><span class="o">&lt;</span><span class="kt">int</span><span class="o">&gt;&amp;</span> <span class="n">axes</span><span class="p">,</span> <span class="kt">float</span> <span class="n">labelSmoothing</span><span class="p">,</span> <span class="kt">float</span> <span class="n">factorWeight</span><span class="p">)</span>
+  <span class="o">:</span> <span class="n">LabelwiseLoss</span><span class="p">(</span><span class="n">axes</span><span class="p">),</span> <span class="c1">// cross-entropy already reduces over axis -1</span>
+    <span class="n">labelSmoothing_</span><span class="p">(</span><span class="n">labelSmoothing</span><span class="p">),</span> <span class="n">factorWeight_</span><span class="p">(</span><span class="n">factorWeight</span><span class="p">)</span> <span class="p">{}</span>
+
+  <span class="k">virtual</span> <span class="o">~</span><span class="n">CrossEntropyLoss</span><span class="p">()</span> <span class="p">{}</span>
+<span class="k">protected</span><span class="o">:</span>
+  <span class="kt">float</span> <span class="n">labelSmoothing_</span><span class="p">;</span> <span class="c1">// interpolation factor for label smoothing, see below</span>
+  <span class="kt">float</span> <span class="n">factorWeight_</span><span class="p">;</span>   <span class="c1">// give extra weight to factors</span>
+
+  <span class="k">virtual</span> <span class="n">Expr</span> <span class="n">compute</span><span class="p">(</span><span class="n">Logits</span> <span class="n">logits</span><span class="p">,</span> <span class="k">const</span> <span class="n">Words</span><span class="o">&amp;</span> <span class="n">labels</span><span class="p">,</span>
+                       <span class="n">Expr</span> <span class="n">mask</span> <span class="o">=</span> <span class="k">nullptr</span><span class="p">,</span> <span class="n">Expr</span> <span class="n">labelWeights</span> <span class="o">=</span> <span class="k">nullptr</span><span class="p">)</span> <span class="k">override</span> <span class="p">{</span>
+    <span class="c1">// logits may be factored; in that case, the getLoss() function computes one loss for each, and sums them up</span>
+    <span class="kt">int</span> <span class="n">inFactor</span> <span class="o">=</span> <span class="nb">false</span><span class="p">;</span>
+    <span class="k">auto</span> <span class="n">ce</span> <span class="o">=</span> <span class="n">logits</span><span class="p">.</span><span class="n">applyLossFunction</span><span class="p">(</span><span class="n">labels</span><span class="p">,</span> <span class="p">[</span><span class="o">&amp;</span><span class="p">](</span><span class="n">Expr</span> <span class="n">logits</span><span class="p">,</span> <span class="n">Expr</span> <span class="n">indices</span><span class="p">)</span> <span class="p">{</span>
+      <span class="n">logits</span> <span class="o">=</span> <span class="n">atleast_3d</span><span class="p">(</span><span class="n">logits</span><span class="p">);</span> <span class="c1">// we always assume a time and batch dimension exists.</span>
+      <span class="c1">// for bert training or classification the time dimension is lost.</span>
+      <span class="c1">// Here safeguard against 2d classifier output, adds 1 on the left, non-op.</span>
+
+      <span class="n">Expr</span> <span class="n">ce</span> <span class="o">=</span> <span class="n">cross_entropy</span><span class="p">(</span><span class="n">logits</span><span class="p">,</span> <span class="n">indices</span><span class="p">,</span> <span class="n">inFactor</span> <span class="o">?</span> <span class="mf">0.f</span> <span class="o">:</span> <span class="n">labelSmoothing_</span><span class="p">,</span> <span class="n">Type</span><span class="o">::</span><span class="n">float32</span><span class="p">);</span>
+      <span class="k">if</span> <span class="p">(</span><span class="n">inFactor</span> <span class="o">&amp;&amp;</span> <span class="n">factorWeight_</span> <span class="o">!=</span> <span class="mf">1.0f</span><span class="p">)</span> <span class="p">{</span>
+        <span class="n">LOG_ONCE</span><span class="p">(</span><span class="n">info</span><span class="p">,</span> <span class="s">&quot;scaling factor losses with weight {}&quot;</span><span class="p">,</span> <span class="n">factorWeight_</span><span class="p">);</span>
+        <span class="n">ce</span> <span class="o">=</span> <span class="n">ce</span> <span class="o">*</span> <span class="n">factorWeight_</span><span class="p">;</span>
+      <span class="p">}</span>
+      <span class="n">inFactor</span> <span class="o">=</span> <span class="nb">true</span><span class="p">;</span>
+      <span class="k">return</span> <span class="n">ce</span><span class="p">;</span>
+    <span class="p">});</span>
+
+    <span class="k">if</span><span class="p">(</span><span class="n">mask</span><span class="p">)</span>
+      <span class="n">ce</span> <span class="o">=</span> <span class="n">ce</span> <span class="o">*</span> <span class="n">cast</span><span class="p">(</span><span class="n">mask</span><span class="p">,</span> <span class="n">Type</span><span class="o">::</span><span class="n">float32</span><span class="p">);</span>
+
+    <span class="k">if</span><span class="p">(</span><span class="n">labelWeights</span><span class="p">)</span> <span class="p">{</span>
+      <span class="c1">// We currently do not know how to use target factors and word-level label weights together</span>
+      <span class="kt">bool</span> <span class="n">wordlevel</span> <span class="o">=</span> <span class="n">labelWeights</span><span class="o">-&gt;</span><span class="n">shape</span><span class="p">()[</span><span class="mi">-3</span><span class="p">]</span> <span class="o">&gt;</span> <span class="mi">1</span><span class="p">;</span> <span class="c1">// Time-dimension is not trivially 1, hence we have word-level weights.</span>
+      <span class="n">ABORT_IF</span><span class="p">(</span><span class="n">wordlevel</span> <span class="o">&amp;&amp;</span> <span class="n">logits</span><span class="p">.</span><span class="n">getNumFactorGroups</span><span class="p">()</span> <span class="o">&gt;</span> <span class="mi">1</span><span class="p">,</span> <span class="s">&quot;CE loss with word-level label weights is not implemented for factors&quot;</span><span class="p">);</span>
+      <span class="n">ce</span> <span class="o">=</span> <span class="n">ce</span> <span class="o">*</span> <span class="n">cast</span><span class="p">(</span><span class="n">labelWeights</span><span class="p">,</span> <span class="n">Type</span><span class="o">::</span><span class="n">float32</span><span class="p">);</span>
+    <span class="p">}</span>
+
+    <span class="k">return</span> <span class="n">ce</span><span class="p">;</span>
+  <span class="p">}</span>
+<span class="p">};</span>
+
+
+<span class="k">class</span> <span class="nc">SequenceUnlikelihoodLoss</span> <span class="o">:</span> <span class="k">public</span> <span class="n">CrossEntropyLoss</span> <span class="p">{</span>
+<span class="k">public</span><span class="o">:</span>
+  <span class="n">SequenceUnlikelihoodLoss</span><span class="p">(</span><span class="kt">float</span> <span class="n">labelSmoothing</span><span class="p">,</span> <span class="kt">float</span> <span class="n">factorWeight</span><span class="p">)</span>
+  <span class="o">:</span> <span class="n">CrossEntropyLoss</span><span class="p">(</span><span class="n">labelSmoothing</span><span class="p">,</span> <span class="n">factorWeight</span><span class="p">)</span> <span class="p">{}</span> <span class="c1">// cross-entropy already reduces over axis -1</span>
+
+  <span class="n">SequenceUnlikelihoodLoss</span><span class="p">(</span><span class="k">const</span> <span class="n">std</span><span class="o">::</span><span class="n">vector</span><span class="o">&lt;</span><span class="kt">int</span><span class="o">&gt;&amp;</span> <span class="n">axes</span><span class="p">,</span> <span class="kt">float</span> <span class="n">labelSmoothing</span><span class="p">,</span> <span class="kt">float</span> <span class="n">factorWeight</span><span class="p">)</span>
+  <span class="o">:</span> <span class="n">CrossEntropyLoss</span><span class="p">(</span><span class="n">axes</span><span class="p">,</span> <span class="n">labelSmoothing</span><span class="p">,</span> <span class="n">factorWeight</span><span class="p">)</span> <span class="p">{}</span>
+
+<span class="k">protected</span><span class="o">:</span>
+  <span class="k">virtual</span> <span class="n">Expr</span> <span class="n">compute</span><span class="p">(</span><span class="n">Logits</span> <span class="n">logits</span><span class="p">,</span> <span class="k">const</span> <span class="n">Words</span><span class="o">&amp;</span> <span class="n">labels</span><span class="p">,</span>
+                       <span class="n">Expr</span> <span class="n">mask</span> <span class="o">=</span> <span class="k">nullptr</span><span class="p">,</span> <span class="n">Expr</span> <span class="n">labelWeights</span> <span class="o">=</span> <span class="k">nullptr</span><span class="p">)</span> <span class="k">override</span> <span class="p">{</span>
+    <span class="k">auto</span> <span class="n">ce</span> <span class="o">=</span> <span class="n">CrossEntropyLoss</span><span class="o">::</span><span class="n">compute</span><span class="p">(</span><span class="n">logits</span><span class="p">,</span> <span class="n">labels</span><span class="p">,</span> <span class="n">mask</span><span class="p">,</span> <span class="cm">/*labelWeights=*/</span><span class="k">nullptr</span><span class="p">);</span> <span class="c1">// don&#39;t pass label-weights to CE</span>
+    <span class="k">if</span><span class="p">(</span><span class="o">!</span><span class="n">labelWeights</span><span class="p">)</span>
+      <span class="k">return</span> <span class="n">ce</span><span class="p">;</span> <span class="c1">// for validation, @TODO: maybe put rather abort or LOG_ONCE(warn, ...)?</span>
+
+    <span class="c1">// We currently do not know how to use target factors and word-level label weights together</span>
+    <span class="n">ABORT_IF</span><span class="p">(</span><span class="n">logits</span><span class="p">.</span><span class="n">getNumFactorGroups</span><span class="p">()</span> <span class="o">&gt;</span> <span class="mi">1</span><span class="p">,</span> <span class="s">&quot;Unlikelihood loss is not implemented for factors&quot;</span><span class="p">);</span>
+
+    <span class="n">ABORT_IF</span><span class="p">(</span><span class="o">!</span><span class="n">mask</span><span class="p">,</span> <span class="s">&quot;mask is required&quot;</span><span class="p">);</span> <span class="c1">// @TODO: check this, it seems weights for padding are by default 1, which would make this obsolete.</span>
+    <span class="c1">// use label weights, where 1 is GOOD and 0 is BAD. After inversion here, now 1 marks BAD, mask again to eliminate padding (might be obsolete)</span>
+    <span class="k">auto</span> <span class="n">errorMask</span> <span class="o">=</span> <span class="p">(</span><span class="mf">1.f</span> <span class="o">-</span> <span class="n">cast</span><span class="p">(</span><span class="n">labelWeights</span><span class="p">,</span> <span class="n">Type</span><span class="o">::</span><span class="n">float32</span><span class="p">))</span> <span class="o">*</span> <span class="n">cast</span><span class="p">(</span><span class="n">mask</span><span class="p">,</span> <span class="n">Type</span><span class="o">::</span><span class="n">float32</span><span class="p">);</span>
+
+    <span class="k">auto</span> <span class="n">ceUl</span> <span class="o">=</span> <span class="n">logits</span><span class="p">.</span><span class="n">applyLossFunction</span><span class="p">(</span><span class="n">labels</span><span class="p">,</span> <span class="p">[</span><span class="o">&amp;</span><span class="p">](</span><span class="n">Expr</span> <span class="n">logits</span><span class="p">,</span> <span class="n">Expr</span> <span class="n">indices</span><span class="p">)</span> <span class="p">{</span>
+      <span class="k">return</span> <span class="nf">cast</span><span class="p">(</span><span class="n">unlikelihood</span><span class="p">(</span><span class="n">logits</span><span class="p">,</span> <span class="n">indices</span><span class="p">),</span> <span class="n">Type</span><span class="o">::</span><span class="n">float32</span><span class="p">);</span>
+    <span class="p">});</span>
+
+    <span class="c1">// compute if want to use CE or UL. If there are no errors train with CE, otherwise train _only on_ the errors with UL. This is the &quot;mixed&quot; training</span>
+    <span class="c1">// schedule from https://arxiv.org/abs/1908.04319. Providing labels with or without error scores we can easily switch between CE and UL.</span>
+    <span class="k">auto</span> <span class="n">onlyCe</span>  <span class="o">=</span> <span class="n">eq</span><span class="p">(</span><span class="n">sum</span><span class="p">(</span><span class="n">errorMask</span><span class="p">,</span> <span class="cm">/*axis=*/</span><span class="mi">-3</span><span class="p">),</span> <span class="mf">0.f</span><span class="p">);</span> <span class="c1">// [1, 1, dimBatch, 1] - equal 1 if no errors are present</span>
+    <span class="n">ceUl</span>         <span class="o">=</span> <span class="n">errorMask</span> <span class="o">*</span> <span class="n">ceUl</span><span class="p">;</span>                     <span class="c1">// don&#39;t use for correct label or padding</span>
+
+    <span class="k">auto</span> <span class="n">cost</span>    <span class="o">=</span> <span class="n">onlyCe</span> <span class="o">*</span> <span class="n">ce</span> <span class="o">+</span> <span class="p">(</span><span class="mf">1.f</span> <span class="o">-</span> <span class="n">onlyCe</span><span class="p">)</span> <span class="o">*</span> <span class="n">ceUl</span><span class="p">;</span>  <span class="c1">// ce or unlikelihood part are never simultanously used as cost per batch entry</span>
+
+    <span class="k">return</span> <span class="n">cost</span><span class="p">;</span>
+  <span class="p">}</span>
+<span class="p">};</span>
+
+<span class="k">class</span> <span class="nc">RescorerLoss</span> <span class="o">:</span> <span class="k">public</span> <span class="n">CrossEntropyLoss</span> <span class="p">{</span>
+<span class="k">private</span><span class="o">:</span>
+  <span class="kt">bool</span> <span class="n">wordScores_</span><span class="p">{</span><span class="nb">false</span><span class="p">};</span>  <span class="c1">// compute word-level log probabilities</span>
+
+<span class="k">public</span><span class="o">:</span>
+  <span class="c1">// For sentence-wise CE reduce only over time axis.</span>
+  <span class="c1">// For word-level CE do not reduce over any axis.</span>
+  <span class="n">RescorerLoss</span><span class="p">(</span><span class="kt">bool</span> <span class="n">wordScores</span><span class="p">)</span>
+      <span class="o">:</span> <span class="n">CrossEntropyLoss</span><span class="p">(</span><span class="cm">/*axes=*/</span><span class="n">wordScores</span> <span class="o">?</span> <span class="n">std</span><span class="o">::</span><span class="n">vector</span><span class="o">&lt;</span><span class="kt">int</span><span class="o">&gt;</span><span class="p">({})</span> <span class="o">:</span> <span class="n">std</span><span class="o">::</span><span class="n">vector</span><span class="o">&lt;</span><span class="kt">int</span><span class="o">&gt;</span><span class="p">({</span><span class="mi">-3</span><span class="p">}),</span>
+                         <span class="cm">/*smoothing=*/</span><span class="mf">0.f</span><span class="p">,</span>
+                         <span class="cm">/*factorWeight=*/</span><span class="mf">1.0f</span><span class="p">),</span>
+        <span class="n">wordScores_</span><span class="p">(</span><span class="n">wordScores</span><span class="p">)</span> <span class="p">{}</span>
+
+  <span class="k">virtual</span> <span class="n">RationalLoss</span> <span class="n">apply</span><span class="p">(</span><span class="n">Logits</span> <span class="n">logits</span><span class="p">,</span>
+                             <span class="k">const</span> <span class="n">Words</span><span class="o">&amp;</span> <span class="n">labels</span><span class="p">,</span>
+                             <span class="n">Expr</span> <span class="n">mask</span> <span class="o">=</span> <span class="k">nullptr</span><span class="p">,</span>
+                             <span class="n">Expr</span> <span class="n">labelWeights</span> <span class="o">=</span> <span class="k">nullptr</span><span class="p">)</span> <span class="k">override</span> <span class="p">{</span>
+    <span class="k">auto</span> <span class="n">loss</span> <span class="o">=</span> <span class="n">CrossEntropyLoss</span><span class="o">::</span><span class="n">compute</span><span class="p">(</span><span class="n">logits</span><span class="p">,</span> <span class="n">labels</span><span class="p">,</span> <span class="n">mask</span><span class="p">,</span> <span class="n">labelWeights</span><span class="p">);</span>
+
+    <span class="k">if</span><span class="p">(</span><span class="o">!</span><span class="n">wordScores_</span><span class="p">)</span> <span class="p">{</span>  <span class="c1">// for sentence-level CE, reduce loss and labels as in cross-entropy</span>
+      <span class="k">return</span> <span class="nf">reduce</span><span class="p">(</span><span class="n">loss</span><span class="p">,</span> <span class="n">mask</span><span class="p">);</span>
+    <span class="p">}</span> <span class="k">else</span> <span class="p">{</span>  <span class="c1">// for word-level CE, reduce labels only to get sentence lengths</span>
+      <span class="n">ABORT_IF</span><span class="p">(</span><span class="o">!</span><span class="n">loss</span><span class="p">,</span> <span class="s">&quot;Loss has not been computed&quot;</span><span class="p">);</span>
+      <span class="n">ABORT_IF</span><span class="p">(</span><span class="o">!</span><span class="n">mask</span><span class="p">,</span> <span class="s">&quot;Word-level CE from rescorer must have mask&quot;</span><span class="p">);</span>
+
+      <span class="n">Expr</span> <span class="n">labelsSum</span> <span class="o">=</span> <span class="n">cast</span><span class="p">(</span><span class="n">mask</span><span class="p">,</span> <span class="n">Type</span><span class="o">::</span><span class="n">float32</span><span class="p">);</span>  <span class="c1">// accumulate in float32</span>
+      <span class="n">labelsSum</span> <span class="o">=</span> <span class="n">sum</span><span class="p">(</span><span class="n">labelsSum</span><span class="p">,</span> <span class="mi">-3</span><span class="p">);</span>              <span class="c1">// reduce over time axis to get sentence lengths</span>
+      <span class="k">return</span> <span class="nf">RationalLoss</span><span class="p">(</span><span class="n">loss</span><span class="p">,</span> <span class="n">labelsSum</span><span class="p">);</span>
+    <span class="p">}</span>
+  <span class="p">}</span>
+<span class="p">};</span>
+
+
+<span class="n">Ptr</span><span class="o">&lt;</span><span class="n">LabelwiseLoss</span><span class="o">&gt;</span> <span class="n">newLoss</span><span class="p">(</span><span class="n">Ptr</span><span class="o">&lt;</span><span class="n">Options</span><span class="o">&gt;</span> <span class="n">options</span><span class="p">,</span> <span class="kt">bool</span> <span class="n">inference</span><span class="p">);</span>
+
+<span class="p">}</span>  <span class="c1">// namespace marian</span>
+</pre></div>
+</div>
+</div>
+
+
+           </div>
+           
+          </div>
+          <footer>
+
+  <hr/>
+
+  <div role="contentinfo">
+    <p>
+        &#169; Copyright 2021, Marian NMT Team.
+
+    </p>
+  </div>
+    
+    
+    
+    Built with <a href="https://www.sphinx-doc.org/">Sphinx</a> using a
+    
+    <a href="https://github.com/readthedocs/sphinx_rtd_theme">theme</a>
+    
+    provided by <a href="https://readthedocs.org">Read the Docs</a>. 
+
+</footer>
+        </div>
+      </div>
+
+    </section>
+
+  </div>
+  
+
+  <script type="text/javascript">
+      jQuery(function () {
+          SphinxRtdTheme.Navigation.enable(true);
+      });
+  </script>
+
+  
+  
+    
+   
+
+</body>
+</html>

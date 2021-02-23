@@ -1,0 +1,52 @@
+
+.. _program_listing_file_src_microsoft_cosmos.h:
+
+Program Listing for File cosmos.h
+=================================
+
+|exhale_lsh| :ref:`Return to documentation for file <file_src_microsoft_cosmos.h>` (``src/microsoft/cosmos.h``)
+
+.. |exhale_lsh| unicode:: U+021B0 .. UPWARDS ARROW WITH TIP LEFTWARDS
+
+.. code-block:: cpp
+
+   #pragma once
+   
+   #include <memory>
+   #include <string>
+   #include <vector>
+   
+   namespace marian {
+   
+   template <typename T>
+   using Ptr = std::shared_ptr<T>;
+   
+   namespace cosmos {
+     class Embedder;
+   
+     class MarianEmbedder {
+       private:
+         Ptr<Embedder> embedder_;
+   
+       public:
+         MarianEmbedder();
+   
+         std::vector<std::vector<float>> embed(const std::string& input);
+   
+         bool load(const std::string& modelPath, const std::string& vocabPath);
+     };
+   
+     class MarianCosineScorer {
+       private:
+         Ptr<Embedder> embedder_;
+   
+       public:
+         MarianCosineScorer();
+   
+         std::vector<float> score(const std::string& input1, const std::string& input2);
+         
+         bool load(const std::string& modelPath, const std::string& vocabPath);
+     };
+   }
+   
+   }

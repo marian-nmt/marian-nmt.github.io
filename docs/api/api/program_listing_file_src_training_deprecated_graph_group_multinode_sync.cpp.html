@@ -1,0 +1,441 @@
+
+
+<!DOCTYPE html>
+<html class="writer-html5" lang="en" >
+<head>
+  <meta charset="utf-8" />
+  
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  
+  <title>Program Listing for File graph_group_multinode_sync.cpp &mdash; Marian NMT v1.10.1 2021-02-23 documentation</title>
+  
+
+  
+  <link rel="stylesheet" href="../_static/css/theme.css" type="text/css" />
+  <link rel="stylesheet" href="../_static/pygments.css" type="text/css" />
+  <link rel="stylesheet" href="../_static/css/custom.css" type="text/css" />
+  <link rel="stylesheet" href="../_static/collapsible-lists/css/tree_view.css" type="text/css" />
+
+  
+  
+
+  
+  
+
+  
+    <link rel="canonical" href="http://marian-nmt.github.io/docs/api/api/program_listing_file_src_training_deprecated_graph_group_multinode_sync.cpp.html" />
+
+  
+  <!--[if lt IE 9]>
+    <script src="../_static/js/html5shiv.min.js"></script>
+  <![endif]-->
+  
+    
+      <script type="text/javascript" id="documentation_options" data-url_root="../" src="../_static/documentation_options.js"></script>
+        <script src="../_static/jquery.js"></script>
+        <script src="../_static/underscore.js"></script>
+        <script src="../_static/doctools.js"></script>
+        <script src="../_static/language_data.js"></script>
+        <script src="../_static/collapsible-lists/js/CollapsibleLists.compressed.js"></script>
+        <script src="../_static/collapsible-lists/js/apply-collapsible-lists.js"></script>
+    
+    <script type="text/javascript" src="../_static/js/theme.js"></script>
+
+    
+    <link rel="index" title="Index" href="../genindex.html" />
+    <link rel="search" title="Search" href="../search.html" /> 
+</head>
+
+<body class="wy-body-for-nav">
+
+   
+  <div class="wy-grid-for-nav">
+    
+    <nav data-toggle="wy-nav-shift" class="wy-nav-side">
+      <div class="wy-side-scroll">
+        <div class="wy-side-nav-search" >
+          
+
+          
+            <a href="../index.html" class="icon icon-home"> Marian NMT
+          
+
+          
+          </a>
+
+          
+            
+            
+              <div class="version">
+                v1.10.1
+              </div>
+            
+          
+
+          
+<div role="search">
+  <form id="rtd-search-form" class="wy-form" action="../search.html" method="get">
+    <input type="text" name="q" placeholder="Search docs" />
+    <input type="hidden" name="check_keywords" value="yes" />
+    <input type="hidden" name="area" value="default" />
+  </form>
+</div>
+
+          
+        </div>
+
+        
+        <div class="wy-menu wy-menu-vertical" data-spy="affix" role="navigation" aria-label="main navigation">
+          
+            
+            
+              
+            
+            
+              <p class="caption"><span class="caption-text">Contents:</span></p>
+<ul>
+<li class="toctree-l1"><a class="reference internal" href="../install.html">Installation</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../graph.html">Expression graphs</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../operators.html">Graph operations</a></li>
+<li class="toctree-l1"><a class="reference internal" href="library_index.html">Library API</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../contributing.html">How to contribute to Marian</a></li>
+</ul>
+
+            
+          
+        </div>
+        
+      </div>
+    </nav>
+
+    <section data-toggle="wy-nav-shift" class="wy-nav-content-wrap">
+
+      
+      <nav class="wy-nav-top" aria-label="top navigation">
+        
+          <i data-toggle="wy-nav-top" class="fa fa-bars"></i>
+          <a href="../index.html">Marian NMT</a>
+        
+      </nav>
+
+
+      <div class="wy-nav-content">
+        
+        <div class="rst-content">
+        
+          
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+<div role="navigation" aria-label="breadcrumbs navigation">
+
+  <ul class="wy-breadcrumbs">
+    
+      <li><a href="../index.html" class="icon icon-home"></a> &raquo;</li>
+        
+      <li>Program Listing for File graph_group_multinode_sync.cpp</li>
+    
+    
+      <li class="wy-breadcrumbs-aside">
+        
+          
+            <a href="../_sources/api/program_listing_file_src_training_deprecated_graph_group_multinode_sync.cpp.rst.txt" rel="nofollow"> View page source</a>
+          
+        
+      </li>
+    
+  </ul>
+
+  
+  <hr/>
+</div>
+          <div role="main" class="document" itemscope="itemscope" itemtype="http://schema.org/Article">
+           <div itemprop="articleBody">
+            
+  <div class="section" id="program-listing-for-file-graph-group-multinode-sync-cpp">
+<span id="program-listing-file-src-training-deprecated-graph-group-multinode-sync-cpp"></span><h1>Program Listing for File graph_group_multinode_sync.cpp<a class="headerlink" href="#program-listing-for-file-graph-group-multinode-sync-cpp" title="Permalink to this headline">¶</a></h1>
+<p>↰ <a class="reference internal" href="file_src_training_deprecated_graph_group_multinode_sync.cpp.html#file-src-training-deprecated-graph-group-multinode-sync-cpp"><span class="std std-ref">Return to documentation for file</span></a> (<code class="docutils literal notranslate"><span class="pre">src/training/deprecated/graph_group_multinode_sync.cpp</span></code>)</p>
+<div class="highlight-cpp notranslate"><div class="highlight"><pre><span></span><span class="cp">#include</span> <span class="cpf">&quot;training/graph_group_multinode_sync.h&quot;</span><span class="cp"></span>
+<span class="cp">#include</span> <span class="cpf">&quot;functional/functional.h&quot;</span><span class="cp"></span>
+<span class="cp">#include</span> <span class="cpf">&quot;tensors/tensor_operators.h&quot;</span><span class="cp"></span>
+
+<span class="k">namespace</span> <span class="n">marian</span> <span class="p">{</span>
+
+<span class="kt">void</span> <span class="n">MultiNodeGraphGroupSync</span><span class="o">::</span><span class="n">updateAvgParams</span><span class="p">(</span><span class="n">Tensor</span> <span class="n">paramsAvg</span><span class="p">,</span>
+                                              <span class="n">Tensor</span> <span class="n">params</span><span class="p">,</span>
+                                              <span class="kt">size_t</span> <span class="n">batches</span><span class="p">)</span> <span class="p">{</span>
+  <span class="k">using</span> <span class="k">namespace</span> <span class="n">functional</span><span class="p">;</span>
+  <span class="kt">float</span> <span class="n">decay</span>
+      <span class="o">=</span> <span class="n">std</span><span class="o">::</span><span class="n">max</span><span class="p">(</span><span class="n">mvDecay_</span><span class="p">,</span> <span class="mf">1.f</span> <span class="o">-</span> <span class="p">(</span><span class="kt">float</span><span class="p">)(</span><span class="n">batches</span> <span class="o">+</span> <span class="mi">1</span><span class="p">)</span> <span class="o">/</span> <span class="p">(</span><span class="kt">float</span><span class="p">)(</span><span class="n">batches</span> <span class="o">+</span> <span class="mi">10</span><span class="p">));</span>
+  <span class="n">Element</span><span class="p">(</span><span class="n">_1</span> <span class="o">=</span> <span class="p">((</span><span class="mf">1.f</span> <span class="o">-</span> <span class="n">decay</span><span class="p">)</span> <span class="o">*</span> <span class="n">_1</span><span class="p">)</span> <span class="o">+</span> <span class="p">(</span><span class="n">decay</span> <span class="o">*</span> <span class="n">_2</span><span class="p">),</span> <span class="n">paramsAvg</span><span class="p">,</span> <span class="n">params</span><span class="p">);</span>
+<span class="p">}</span>
+
+<span class="kt">void</span> <span class="n">MultiNodeGraphGroupSync</span><span class="o">::</span><span class="n">setScheduler</span><span class="p">(</span><span class="n">Ptr</span><span class="o">&lt;</span><span class="n">Scheduler</span><span class="o">&gt;</span> <span class="n">scheduler</span><span class="p">)</span> <span class="p">{</span>
+  <span class="n">scheduler_</span> <span class="o">=</span> <span class="n">scheduler</span><span class="p">;</span>
+  <span class="c1">// optimizer has to be registered last to see a change of learning rate</span>
+  <span class="n">scheduler_</span><span class="o">-&gt;</span><span class="n">registerTrainingObserver</span><span class="p">(</span><span class="n">scheduler_</span><span class="p">);</span>
+
+  <span class="n">scheduler_</span><span class="o">-&gt;</span><span class="n">registerTrainingObserver</span><span class="p">(</span><span class="n">syncOptimizer_</span><span class="p">);</span>
+<span class="p">}</span>
+
+<span class="n">Tensor</span> <span class="n">MultiNodeGraphGroupSync</span><span class="o">::</span><span class="n">newTensor</span><span class="p">(</span><span class="kt">int</span> <span class="n">size</span><span class="p">,</span> <span class="n">Ptr</span><span class="o">&lt;</span><span class="n">Backend</span><span class="o">&gt;</span> <span class="n">backend</span><span class="p">)</span> <span class="p">{</span>
+  <span class="n">Tensor</span> <span class="n">t</span><span class="p">;</span>
+  <span class="n">Ptr</span><span class="o">&lt;</span><span class="n">TensorAllocator</span><span class="o">&gt;</span> <span class="n">allocator</span> <span class="o">=</span> <span class="n">New</span><span class="o">&lt;</span><span class="n">TensorAllocator</span><span class="o">&gt;</span><span class="p">(</span><span class="n">backend</span><span class="p">);</span>
+  <span class="n">allocator</span><span class="o">-&gt;</span><span class="n">reserveExact</span><span class="p">(</span><span class="n">size</span> <span class="o">*</span> <span class="k">sizeof</span><span class="p">(</span><span class="kt">float</span><span class="p">));</span>
+  <span class="n">allocator</span><span class="o">-&gt;</span><span class="n">allocate</span><span class="p">(</span><span class="n">t</span><span class="p">,</span> <span class="p">{</span><span class="mi">1</span><span class="p">,</span> <span class="n">size</span><span class="p">});</span>
+  <span class="n">allocators_</span><span class="p">.</span><span class="n">push_back</span><span class="p">(</span><span class="n">allocator</span><span class="p">);</span>
+  <span class="k">return</span> <span class="n">t</span><span class="p">;</span>
+<span class="p">}</span>
+
+<span class="kt">void</span> <span class="n">MultiNodeGraphGroupSync</span><span class="o">::</span><span class="n">init</span><span class="p">(</span><span class="n">Ptr</span><span class="o">&lt;</span><span class="n">data</span><span class="o">::</span><span class="n">Batch</span><span class="o">&gt;</span> <span class="n">batch</span><span class="p">)</span> <span class="p">{</span>
+  <span class="c1">// Setup clients and shards</span>
+  <span class="n">setupClients</span><span class="p">(</span><span class="n">batch</span><span class="p">);</span>
+  <span class="kt">int</span> <span class="n">network_size</span> <span class="o">=</span> <span class="p">(</span><span class="kt">int</span><span class="p">)</span><span class="n">clientGraphs_</span><span class="p">[</span><span class="mi">0</span><span class="p">]</span><span class="o">-&gt;</span><span class="n">params</span><span class="p">()</span><span class="o">-&gt;</span><span class="n">vals</span><span class="p">()</span><span class="o">-&gt;</span><span class="n">size</span><span class="p">();</span>
+  <span class="n">LOG</span><span class="p">(</span><span class="n">info</span><span class="p">,</span> <span class="s">&quot;model size = {} float params&quot;</span><span class="p">,</span> <span class="n">network_size</span><span class="p">);</span>
+  <span class="k">if</span><span class="p">(</span><span class="n">movingAvg_</span><span class="p">)</span>
+    <span class="n">paramsAvg_</span> <span class="o">=</span> <span class="n">newTensor</span><span class="p">(</span><span class="n">network_size</span><span class="p">,</span> <span class="n">clientGraphs_</span><span class="p">.</span><span class="n">back</span><span class="p">()</span><span class="o">-&gt;</span><span class="n">getBackend</span><span class="p">());</span>
+
+  <span class="c1">// setup sync sgd storage, We keep the summed gradient on Node 0</span>
+  <span class="n">sumGradientBuffer</span> <span class="o">=</span> <span class="n">newTensor</span><span class="p">(</span><span class="n">network_size</span><span class="p">,</span> <span class="n">clientGraphs_</span><span class="p">[</span><span class="mi">0</span><span class="p">]</span><span class="o">-&gt;</span><span class="n">getBackend</span><span class="p">());</span>
+  <span class="n">accGradientsSync</span> <span class="o">=</span> <span class="n">newTensor</span><span class="p">(</span><span class="n">network_size</span><span class="p">,</span> <span class="n">clientGraphs_</span><span class="p">[</span><span class="mi">0</span><span class="p">]</span><span class="o">-&gt;</span><span class="n">getBackend</span><span class="p">());</span>
+<span class="p">}</span>
+
+<span class="kt">void</span> <span class="n">MultiNodeGraphGroupSync</span><span class="o">::</span><span class="n">initCPUArrays</span><span class="p">()</span> <span class="p">{</span>
+  <span class="n">accGradientsSync_cpu</span>
+      <span class="o">=</span> <span class="n">std</span><span class="o">::</span><span class="n">vector</span><span class="o">&lt;</span><span class="kt">float</span><span class="o">&gt;</span><span class="p">(</span><span class="n">clientGraphs_</span><span class="p">[</span><span class="mi">0</span><span class="p">]</span><span class="o">-&gt;</span><span class="n">params</span><span class="p">()</span><span class="o">-&gt;</span><span class="n">vals</span><span class="p">()</span><span class="o">-&gt;</span><span class="n">size</span><span class="p">());</span>
+  <span class="n">receiveBuffer_cpu</span>
+      <span class="o">=</span> <span class="n">std</span><span class="o">::</span><span class="n">vector</span><span class="o">&lt;</span><span class="kt">float</span><span class="o">&gt;</span><span class="p">(</span><span class="n">clientGraphs_</span><span class="p">[</span><span class="mi">0</span><span class="p">]</span><span class="o">-&gt;</span><span class="n">params</span><span class="p">()</span><span class="o">-&gt;</span><span class="n">vals</span><span class="p">()</span><span class="o">-&gt;</span><span class="n">size</span><span class="p">());</span>
+<span class="p">}</span>
+
+<span class="kt">void</span> <span class="n">MultiNodeGraphGroupSync</span><span class="o">::</span><span class="n">setupClients</span><span class="p">(</span><span class="n">Ptr</span><span class="o">&lt;</span><span class="n">data</span><span class="o">::</span><span class="n">Batch</span><span class="o">&gt;</span> <span class="n">batch</span><span class="p">)</span> <span class="p">{</span>
+  <span class="n">runBatchThroughClientGraphs</span><span class="p">(</span><span class="n">batch</span><span class="p">);</span>
+  <span class="n">initCPUArrays</span><span class="p">();</span>
+<span class="p">}</span>
+
+<span class="kt">void</span> <span class="n">MultiNodeGraphGroupSync</span><span class="o">::</span><span class="n">runBatchThroughClientGraphs</span><span class="p">(</span>
+    <span class="n">Ptr</span><span class="o">&lt;</span><span class="n">data</span><span class="o">::</span><span class="n">Batch</span><span class="o">&gt;</span> <span class="n">batch</span><span class="p">)</span> <span class="p">{</span>
+  <span class="k">for</span><span class="p">(</span><span class="kt">int</span> <span class="n">i</span> <span class="o">=</span> <span class="mi">0</span><span class="p">;</span> <span class="n">i</span> <span class="o">&lt;</span> <span class="n">devices_</span><span class="p">.</span><span class="n">size</span><span class="p">();</span> <span class="n">i</span><span class="o">++</span><span class="p">)</span> <span class="p">{</span>
+    <span class="n">THREAD_GUARD</span><span class="p">(</span><span class="n">clientBuilders_</span><span class="p">[</span><span class="n">i</span><span class="p">]</span><span class="o">-&gt;</span><span class="n">build</span><span class="p">(</span><span class="n">clientGraphs_</span><span class="p">[</span><span class="n">i</span><span class="p">],</span> <span class="n">batch</span><span class="p">);</span>
+                 <span class="n">clientGraphs_</span><span class="p">[</span><span class="n">i</span><span class="p">]</span><span class="o">-&gt;</span><span class="n">forward</span><span class="p">();</span>
+                 <span class="n">clientGraphs_</span><span class="p">[</span><span class="n">i</span><span class="p">]</span><span class="o">-&gt;</span><span class="n">getBackend</span><span class="p">()</span><span class="o">-&gt;</span><span class="n">synchronize</span><span class="p">(););</span>
+  <span class="p">}</span>
+<span class="p">}</span>
+
+<span class="kt">void</span> <span class="n">MultiNodeGraphGroupSync</span><span class="o">::</span><span class="n">sumGRAD</span><span class="p">(</span><span class="n">Tensor</span> <span class="n">gradient</span><span class="p">)</span> <span class="p">{</span>
+  <span class="n">std</span><span class="o">::</span><span class="n">lock_guard</span><span class="o">&lt;</span><span class="n">std</span><span class="o">::</span><span class="n">mutex</span><span class="o">&gt;</span> <span class="n">guard</span><span class="p">(</span><span class="n">sumGradientMutex_</span><span class="p">);</span>
+  <span class="n">sumGradientBuffer</span><span class="o">-&gt;</span><span class="n">copyFrom</span><span class="p">(</span><span class="n">gradient</span><span class="p">);</span>
+  <span class="k">using</span> <span class="k">namespace</span> <span class="n">functional</span><span class="p">;</span>  <span class="c1">//@TODO makes more sense to do that on the CPU i</span>
+                               <span class="c1">// think</span>
+  <span class="n">Element</span><span class="p">(</span><span class="n">_1</span> <span class="o">+=</span> <span class="n">_2</span><span class="p">,</span> <span class="n">accGradientsSync</span><span class="p">,</span> <span class="n">sumGradientBuffer</span><span class="p">);</span>
+<span class="p">}</span>
+
+<span class="kt">void</span> <span class="n">MultiNodeGraphGroupSync</span><span class="o">::</span><span class="n">sendReceiveUpdateSync</span><span class="p">()</span> <span class="p">{</span>
+  <span class="k">auto</span> <span class="n">network_size</span> <span class="o">=</span> <span class="n">accGradientsSync_cpu</span><span class="p">.</span><span class="n">size</span><span class="p">();</span> <span class="c1">// @TODO: get this from accGradientSync (not CPU), it is more direct</span>
+
+  <span class="c1">// Copy the data to the CPU</span>
+  <span class="n">accGradientsSync</span><span class="o">-&gt;</span><span class="n">get</span><span class="p">(</span><span class="n">accGradientsSync_cpu</span><span class="p">);</span>
+
+  <span class="c1">// Wait until all nodes are ready</span>
+  <span class="n">mpi_</span><span class="o">-&gt;</span><span class="n">barrier</span><span class="p">();</span>
+
+  <span class="n">mpi_</span><span class="o">-&gt;</span><span class="n">allReduce</span><span class="p">(</span><span class="n">accGradientsSync_cpu</span><span class="p">.</span><span class="n">data</span><span class="p">(),</span>  <span class="c1">// CPU buffers</span>
+                  <span class="n">receiveBuffer_cpu</span><span class="p">.</span><span class="n">data</span><span class="p">(),</span>
+                  <span class="n">network_size</span><span class="p">,</span>
+                  <span class="n">MPI_FLOAT</span><span class="p">,</span>
+                  <span class="n">MPI_SUM</span><span class="p">);</span>
+
+  <span class="c1">// Copy the data back to the GPU and do optimizer update</span>
+  <span class="c1">// Do update with last GPU to distribute the memory</span>
+  <span class="n">clientGraphs_</span><span class="p">.</span><span class="n">back</span><span class="p">()</span><span class="o">-&gt;</span><span class="n">params</span><span class="p">()</span><span class="o">-&gt;</span><span class="n">grads</span><span class="p">()</span><span class="o">-&gt;</span><span class="n">set</span><span class="p">(</span><span class="n">receiveBuffer_cpu</span><span class="p">);</span>
+
+  <span class="c1">// Perform optimizer step</span>
+  <span class="n">syncOptimizer_</span><span class="o">-&gt;</span><span class="n">update</span><span class="p">(</span><span class="n">clientGraphs_</span><span class="p">.</span><span class="n">back</span><span class="p">());</span>
+
+  <span class="k">if</span><span class="p">(</span><span class="n">movingAvg_</span><span class="p">)</span>
+    <span class="n">updateAvgParams</span><span class="p">(</span><span class="n">paramsAvg_</span><span class="p">,</span>
+                    <span class="n">clientGraphs_</span><span class="p">.</span><span class="n">back</span><span class="p">()</span><span class="o">-&gt;</span><span class="n">params</span><span class="p">()</span><span class="o">-&gt;</span><span class="n">vals</span><span class="p">(),</span>
+                    <span class="n">scheduler_</span><span class="o">-&gt;</span><span class="n">numberOfBatches</span><span class="p">());</span>
+
+  <span class="c1">// Distribute the graph to the rest of the devices</span>
+  <span class="n">std</span><span class="o">::</span><span class="n">vector</span><span class="o">&lt;</span><span class="n">std</span><span class="o">::</span><span class="kr">thread</span><span class="o">&gt;</span> <span class="n">threads</span><span class="p">;</span>
+  <span class="k">for</span><span class="p">(</span><span class="kt">int</span> <span class="n">idx</span> <span class="o">=</span> <span class="mi">0</span><span class="p">;</span> <span class="n">idx</span> <span class="o">&lt;</span> <span class="n">devices_</span><span class="p">.</span><span class="n">size</span><span class="p">()</span> <span class="o">-</span> <span class="mi">1</span><span class="p">;</span> <span class="n">idx</span><span class="o">++</span><span class="p">)</span> <span class="p">{</span>
+    <span class="n">threads</span><span class="p">.</span><span class="n">emplace_back</span><span class="p">(</span><span class="n">std</span><span class="o">::</span><span class="kr">thread</span><span class="p">(</span>
+        <span class="p">[</span><span class="o">=</span><span class="p">](</span><span class="kt">int</span> <span class="n">idx</span><span class="p">)</span> <span class="p">{</span>
+          <span class="n">clientGraphs_</span><span class="p">[</span><span class="n">idx</span><span class="p">]</span><span class="o">-&gt;</span><span class="n">params</span><span class="p">()</span><span class="o">-&gt;</span><span class="n">vals</span><span class="p">()</span><span class="o">-&gt;</span><span class="n">copyFrom</span><span class="p">(</span>
+              <span class="n">clientGraphs_</span><span class="p">.</span><span class="n">back</span><span class="p">()</span><span class="o">-&gt;</span><span class="n">params</span><span class="p">()</span><span class="o">-&gt;</span><span class="n">vals</span><span class="p">());</span>
+        <span class="p">},</span>
+        <span class="n">idx</span><span class="p">));</span>
+  <span class="p">}</span>
+  <span class="k">for</span><span class="p">(</span><span class="k">auto</span><span class="o">&amp;&amp;</span> <span class="nl">t</span> <span class="p">:</span> <span class="n">threads</span><span class="p">)</span> <span class="p">{</span>
+    <span class="n">t</span><span class="p">.</span><span class="n">join</span><span class="p">();</span>
+  <span class="p">}</span>
+
+  <span class="c1">// set the accumulating buffers to zero;</span>
+  <span class="n">accGradientsSync</span><span class="o">-&gt;</span><span class="n">set</span><span class="p">(</span><span class="mi">0</span><span class="p">);</span>
+  <span class="n">std</span><span class="o">::</span><span class="n">fill</span><span class="p">(</span><span class="n">accGradientsSync_cpu</span><span class="p">.</span><span class="n">begin</span><span class="p">(),</span> <span class="n">accGradientsSync_cpu</span><span class="p">.</span><span class="n">end</span><span class="p">(),</span> <span class="mf">0.0f</span><span class="p">);</span>
+  <span class="n">std</span><span class="o">::</span><span class="n">fill</span><span class="p">(</span><span class="n">receiveBuffer_cpu</span><span class="p">.</span><span class="n">begin</span><span class="p">(),</span> <span class="n">receiveBuffer_cpu</span><span class="p">.</span><span class="n">end</span><span class="p">(),</span> <span class="mf">0.0f</span><span class="p">);</span>
+  <span class="c1">// @TODO:</span>
+  <span class="c1">//  - these fill() calls are not necessary</span>
+  <span class="c1">//  - can accGradientsSync_cpu and receiveBuffer_cpu be the same buffer? Then change allReduce() to single-argument function.</span>
+<span class="p">}</span>
+
+<span class="kt">void</span> <span class="n">MultiNodeGraphGroupSync</span><span class="o">::</span><span class="n">execute</span><span class="p">(</span><span class="n">Ptr</span><span class="o">&lt;</span><span class="n">data</span><span class="o">::</span><span class="n">Batch</span><span class="o">&gt;</span> <span class="n">fullBatch</span><span class="p">)</span> <span class="p">{</span>
+  <span class="k">if</span><span class="p">(</span><span class="o">!</span><span class="n">initialized_</span><span class="p">)</span> <span class="p">{</span>
+    <span class="n">init</span><span class="p">(</span><span class="n">fullBatch</span><span class="p">);</span>
+    <span class="n">initialized_</span> <span class="o">=</span> <span class="nb">true</span><span class="p">;</span>
+  <span class="p">}</span>
+
+  <span class="n">std</span><span class="o">::</span><span class="n">vector</span><span class="o">&lt;</span><span class="n">Ptr</span><span class="o">&lt;</span><span class="n">data</span><span class="o">::</span><span class="n">Batch</span><span class="o">&gt;&gt;</span> <span class="n">batches</span> <span class="o">=</span> <span class="n">fullBatch</span><span class="o">-&gt;</span><span class="n">split</span><span class="p">(</span><span class="n">devices_</span><span class="p">.</span><span class="n">size</span><span class="p">());</span>
+
+  <span class="k">static</span> <span class="kt">int</span> <span class="n">t</span> <span class="o">=</span> <span class="mi">0</span><span class="p">;</span>
+
+  <span class="k">static</span> <span class="n">StaticLoss</span> <span class="n">loss</span><span class="p">;</span>
+  <span class="k">static</span> <span class="kt">size_t</span> <span class="n">num_seen_words</span> <span class="o">=</span> <span class="mi">0</span><span class="p">;</span>
+  <span class="k">static</span> <span class="kt">size_t</span> <span class="n">num_seen_sentences</span> <span class="o">=</span> <span class="mi">0</span><span class="p">;</span>
+
+  <span class="p">{</span>
+    <span class="k">auto</span> <span class="n">task</span> <span class="o">=</span> <span class="p">[</span><span class="k">this</span><span class="p">,</span> <span class="n">batches</span><span class="p">](</span><span class="kt">int</span> <span class="n">my_id</span><span class="p">)</span> <span class="p">{</span>
+      <span class="k">auto</span> <span class="n">batch</span> <span class="o">=</span> <span class="n">batches</span><span class="p">[</span><span class="n">my_id</span><span class="p">];</span>
+      <span class="k">auto</span> <span class="n">graph</span> <span class="o">=</span> <span class="n">clientGraphs_</span><span class="p">[</span><span class="n">my_id</span><span class="p">];</span>
+      <span class="k">auto</span> <span class="n">builder</span> <span class="o">=</span> <span class="n">clientBuilders_</span><span class="p">[</span><span class="n">my_id</span><span class="p">];</span>
+
+      <span class="k">auto</span> <span class="n">lossNode</span> <span class="o">=</span> <span class="n">builder</span><span class="o">-&gt;</span><span class="n">build</span><span class="p">(</span><span class="n">graph</span><span class="p">,</span> <span class="n">batch</span><span class="p">);</span>
+
+      <span class="k">if</span><span class="p">(</span><span class="n">t</span> <span class="o">==</span> <span class="mi">0</span><span class="p">)</span> <span class="p">{</span>
+        <span class="k">if</span><span class="p">(</span><span class="n">my_id</span> <span class="o">!=</span> <span class="mi">0</span><span class="p">)</span>
+          <span class="n">graph</span><span class="o">-&gt;</span><span class="n">params</span><span class="p">()</span><span class="o">-&gt;</span><span class="n">vals</span><span class="p">()</span><span class="o">-&gt;</span><span class="n">copyFrom</span><span class="p">(</span><span class="n">clientGraphs_</span><span class="p">[</span><span class="mi">0</span><span class="p">]</span><span class="o">-&gt;</span><span class="n">params</span><span class="p">()</span><span class="o">-&gt;</span><span class="n">vals</span><span class="p">());</span>
+      <span class="p">}</span>
+
+      <span class="n">graph</span><span class="o">-&gt;</span><span class="n">forward</span><span class="p">();</span>
+      <span class="p">{</span>
+        <span class="n">std</span><span class="o">::</span><span class="n">lock_guard</span><span class="o">&lt;</span><span class="n">std</span><span class="o">::</span><span class="n">mutex</span><span class="o">&gt;</span> <span class="n">guard</span><span class="p">(</span><span class="n">sumCostMutex_</span><span class="p">);</span>
+        <span class="n">loss</span> <span class="o">+=</span> <span class="o">*</span><span class="n">lossNode</span><span class="p">;</span>
+        <span class="n">num_seen_words</span> <span class="o">+=</span> <span class="n">batch</span><span class="o">-&gt;</span><span class="n">words</span><span class="p">();</span>
+        <span class="n">num_seen_sentences</span> <span class="o">+=</span> <span class="n">batch</span><span class="o">-&gt;</span><span class="n">size</span><span class="p">();</span>
+      <span class="p">}</span>
+      <span class="n">graph</span><span class="o">-&gt;</span><span class="n">backward</span><span class="p">();</span>
+
+      <span class="n">graph</span><span class="o">-&gt;</span><span class="n">getBackend</span><span class="p">()</span>
+          <span class="o">-&gt;</span><span class="n">synchronize</span><span class="p">();</span>  <span class="c1">//@Alham do you know why we need this here?</span>
+
+      <span class="n">sumGRAD</span><span class="p">(</span><span class="n">graph</span><span class="o">-&gt;</span><span class="n">params</span><span class="p">()</span><span class="o">-&gt;</span><span class="n">grads</span><span class="p">());</span>
+    <span class="p">};</span>
+
+    <span class="n">ThreadPool</span> <span class="nf">pool</span><span class="p">(</span><span class="n">devices_</span><span class="p">.</span><span class="n">size</span><span class="p">(),</span> <span class="n">devices_</span><span class="p">.</span><span class="n">size</span><span class="p">());</span>
+    <span class="k">for</span><span class="p">(</span><span class="kt">int</span> <span class="n">idx</span> <span class="o">=</span> <span class="mi">0</span><span class="p">;</span> <span class="n">idx</span> <span class="o">&lt;</span> <span class="n">devices_</span><span class="p">.</span><span class="n">size</span><span class="p">();</span> <span class="o">++</span><span class="n">idx</span><span class="p">)</span>
+      <span class="n">pool</span><span class="p">.</span><span class="n">enqueue</span><span class="p">(</span><span class="n">task</span><span class="p">,</span> <span class="n">idx</span><span class="p">);</span>
+  <span class="p">}</span>
+
+  <span class="k">if</span><span class="p">(</span><span class="n">t</span> <span class="o">%</span> <span class="n">tau_</span> <span class="o">==</span> <span class="mi">0</span><span class="p">)</span>
+    <span class="n">sendReceiveUpdateSync</span><span class="p">();</span>
+
+  <span class="n">t</span><span class="o">++</span><span class="p">;</span>
+
+  <span class="c1">// Run scheduler (if enabled)</span>
+  <span class="k">if</span><span class="p">(</span><span class="n">t</span> <span class="o">%</span> <span class="n">tau_</span> <span class="o">==</span> <span class="mi">0</span> <span class="o">&amp;&amp;</span> <span class="n">scheduler_</span><span class="p">)</span> <span class="p">{</span>
+    <span class="k">if</span><span class="p">(</span><span class="n">tau_</span> <span class="o">&gt;</span> <span class="mi">1</span><span class="p">)</span> <span class="p">{</span>
+      <span class="n">std</span><span class="o">::</span><span class="n">vector</span><span class="o">&lt;</span><span class="kt">size_t</span><span class="o">&gt;</span> <span class="n">fakeLength</span> <span class="o">=</span> <span class="p">{</span><span class="mi">1</span><span class="p">,</span> <span class="mi">1</span><span class="p">};</span>
+      <span class="k">auto</span> <span class="n">fb</span> <span class="o">=</span> <span class="n">data</span><span class="o">::</span><span class="n">CorpusBatch</span><span class="o">::</span><span class="n">fakeBatch</span><span class="p">(</span><span class="n">fakeLength</span><span class="p">,</span> <span class="n">std</span><span class="o">::</span><span class="n">vector</span><span class="o">&lt;</span><span class="n">Ptr</span><span class="o">&lt;</span><span class="n">Vocab</span><span class="o">&gt;&gt;</span><span class="p">(),</span> <span class="n">num_seen_sentences</span><span class="p">,</span> <span class="nb">NULL</span><span class="p">);</span>
+      <span class="n">fb</span><span class="o">-&gt;</span><span class="n">front</span><span class="p">()</span><span class="o">-&gt;</span><span class="n">setWords</span><span class="p">(</span><span class="n">num_seen_words</span><span class="p">);</span>
+      <span class="n">scheduler_</span><span class="o">-&gt;</span><span class="n">update</span><span class="p">(</span><span class="n">loss</span><span class="p">,</span> <span class="n">fb</span><span class="p">);</span>
+    <span class="p">}</span> <span class="k">else</span> <span class="p">{</span>
+      <span class="n">scheduler_</span><span class="o">-&gt;</span><span class="n">update</span><span class="p">(</span><span class="n">loss</span><span class="p">,</span> <span class="n">fullBatch</span><span class="p">);</span>
+    <span class="p">}</span>
+
+    <span class="n">num_seen_words</span> <span class="o">=</span> <span class="mi">0</span><span class="p">;</span>
+    <span class="n">num_seen_sentences</span> <span class="o">=</span> <span class="mi">0</span><span class="p">;</span>
+    <span class="n">loss</span><span class="p">.</span><span class="n">reset</span><span class="p">();</span>
+
+    <span class="k">if</span><span class="p">((</span><span class="n">scheduler_</span><span class="o">-&gt;</span><span class="n">saving</span><span class="p">()</span> <span class="o">||</span> <span class="n">scheduler_</span><span class="o">-&gt;</span><span class="n">validating</span><span class="p">()))</span> <span class="p">{</span>
+      <span class="c1">// wait until other nodes are ready</span>
+      <span class="n">mpi_</span><span class="o">-&gt;</span><span class="n">barrier</span><span class="p">();</span>
+
+      <span class="c1">// TODO: Saving is broken</span>
+      <span class="c1">// if(mpi_-&gt;myMPIRank() == 0 &amp;&amp; scheduler_-&gt;saving())</span>
+      <span class="c1">//  this-&gt;save(graph);</span>
+
+      <span class="k">if</span><span class="p">(</span><span class="n">mpi_</span><span class="o">-&gt;</span><span class="n">myMPIRank</span><span class="p">()</span> <span class="o">==</span> <span class="mi">0</span> <span class="o">&amp;&amp;</span> <span class="n">scheduler_</span><span class="o">-&gt;</span><span class="n">validating</span><span class="p">())</span> <span class="p">{</span>
+        <span class="c1">// temporarily save current params</span>
+        <span class="k">if</span><span class="p">(</span><span class="n">movingAvg_</span><span class="p">)</span>
+          <span class="n">accGradientsSync</span><span class="o">-&gt;</span><span class="n">copyFrom</span><span class="p">(</span><span class="n">clientGraphs_</span><span class="p">[</span><span class="mi">0</span><span class="p">]</span><span class="o">-&gt;</span><span class="n">params</span><span class="p">()</span><span class="o">-&gt;</span><span class="n">vals</span><span class="p">());</span>
+
+        <span class="k">if</span><span class="p">(</span><span class="n">movingAvg_</span><span class="p">)</span>
+          <span class="k">for</span><span class="p">(</span><span class="k">auto</span> <span class="nl">graph</span> <span class="p">:</span> <span class="n">clientGraphs_</span><span class="p">)</span>
+            <span class="n">graph</span><span class="o">-&gt;</span><span class="n">params</span><span class="p">()</span><span class="o">-&gt;</span><span class="n">vals</span><span class="p">()</span><span class="o">-&gt;</span><span class="n">copyFrom</span><span class="p">(</span><span class="n">paramsAvg_</span><span class="p">);</span>
+
+        <span class="n">scheduler_</span><span class="o">-&gt;</span><span class="n">validate</span><span class="p">(</span><span class="n">clientGraphs_</span><span class="p">);</span>
+
+        <span class="k">if</span><span class="p">(</span><span class="n">movingAvg_</span><span class="p">)</span>
+          <span class="k">for</span><span class="p">(</span><span class="k">auto</span> <span class="nl">graph</span> <span class="p">:</span> <span class="n">clientGraphs_</span><span class="p">)</span>
+            <span class="n">graph</span><span class="o">-&gt;</span><span class="n">params</span><span class="p">()</span><span class="o">-&gt;</span><span class="n">vals</span><span class="p">()</span><span class="o">-&gt;</span><span class="n">copyFrom</span><span class="p">(</span><span class="n">accGradientsSync</span><span class="p">);</span>
+      <span class="p">}</span>
+
+      <span class="c1">// inform other nodes to continue</span>
+      <span class="n">mpi_</span><span class="o">-&gt;</span><span class="n">barrier</span><span class="p">();</span>
+    <span class="p">}</span>
+  <span class="p">}</span>
+<span class="p">}</span>
+<span class="p">}</span>  <span class="c1">// namespace marian</span>
+</pre></div>
+</div>
+</div>
+
+
+           </div>
+           
+          </div>
+          <footer>
+
+  <hr/>
+
+  <div role="contentinfo">
+    <p>
+        &#169; Copyright 2021, Marian NMT Team.
+
+    </p>
+  </div>
+    
+    
+    
+    Built with <a href="https://www.sphinx-doc.org/">Sphinx</a> using a
+    
+    <a href="https://github.com/readthedocs/sphinx_rtd_theme">theme</a>
+    
+    provided by <a href="https://readthedocs.org">Read the Docs</a>. 
+
+</footer>
+        </div>
+      </div>
+
+    </section>
+
+  </div>
+  
+
+  <script type="text/javascript">
+      jQuery(function () {
+          SphinxRtdTheme.Navigation.enable(true);
+      });
+  </script>
+
+  
+  
+    
+   
+
+</body>
+</html>

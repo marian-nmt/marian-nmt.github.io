@@ -1,0 +1,39 @@
+
+.. _program_listing_file_src_common_binary.h:
+
+Program Listing for File binary.h
+=================================
+
+|exhale_lsh| :ref:`Return to documentation for file <file_src_common_binary.h>` (``src/common/binary.h``)
+
+.. |exhale_lsh| unicode:: U+021B0 .. UPWARDS ARROW WITH TIP LEFTWARDS
+
+.. code-block:: cpp
+
+   #pragma once
+   
+   #include "common/io_item.h"
+   
+   #include <string>
+   #include <vector>
+   
+   namespace marian {
+   
+   const static int BINARY_FILE_VERSION = 1;
+   
+   namespace io {
+   namespace binary {
+   
+   void loadItems(const void* current,
+                  std::vector<io::Item>& items,
+                  bool mapped = false);
+   void loadItems(const std::string& fileName, std::vector<io::Item>& items);
+   
+   io::Item getItem(const void* current, const std::string& vName);
+   io::Item getItem(const std::string& fileName, const std::string& vName);
+   
+   void saveItems(const std::string& fileName, const std::vector<io::Item>& items);
+   
+   }  // namespace binary
+   }  // namespace io
+   }  // namespace marian

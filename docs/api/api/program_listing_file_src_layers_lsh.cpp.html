@@ -1,0 +1,350 @@
+
+
+<!DOCTYPE html>
+<html class="writer-html5" lang="en" >
+<head>
+  <meta charset="utf-8" />
+  
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  
+  <title>Program Listing for File lsh.cpp &mdash; Marian NMT v1.10.1 2021-02-23 documentation</title>
+  
+
+  
+  <link rel="stylesheet" href="../_static/css/theme.css" type="text/css" />
+  <link rel="stylesheet" href="../_static/pygments.css" type="text/css" />
+  <link rel="stylesheet" href="../_static/css/custom.css" type="text/css" />
+  <link rel="stylesheet" href="../_static/collapsible-lists/css/tree_view.css" type="text/css" />
+
+  
+  
+
+  
+  
+
+  
+    <link rel="canonical" href="http://marian-nmt.github.io/docs/api/api/program_listing_file_src_layers_lsh.cpp.html" />
+
+  
+  <!--[if lt IE 9]>
+    <script src="../_static/js/html5shiv.min.js"></script>
+  <![endif]-->
+  
+    
+      <script type="text/javascript" id="documentation_options" data-url_root="../" src="../_static/documentation_options.js"></script>
+        <script src="../_static/jquery.js"></script>
+        <script src="../_static/underscore.js"></script>
+        <script src="../_static/doctools.js"></script>
+        <script src="../_static/language_data.js"></script>
+        <script src="../_static/collapsible-lists/js/CollapsibleLists.compressed.js"></script>
+        <script src="../_static/collapsible-lists/js/apply-collapsible-lists.js"></script>
+    
+    <script type="text/javascript" src="../_static/js/theme.js"></script>
+
+    
+    <link rel="index" title="Index" href="../genindex.html" />
+    <link rel="search" title="Search" href="../search.html" /> 
+</head>
+
+<body class="wy-body-for-nav">
+
+   
+  <div class="wy-grid-for-nav">
+    
+    <nav data-toggle="wy-nav-shift" class="wy-nav-side">
+      <div class="wy-side-scroll">
+        <div class="wy-side-nav-search" >
+          
+
+          
+            <a href="../index.html" class="icon icon-home"> Marian NMT
+          
+
+          
+          </a>
+
+          
+            
+            
+              <div class="version">
+                v1.10.1
+              </div>
+            
+          
+
+          
+<div role="search">
+  <form id="rtd-search-form" class="wy-form" action="../search.html" method="get">
+    <input type="text" name="q" placeholder="Search docs" />
+    <input type="hidden" name="check_keywords" value="yes" />
+    <input type="hidden" name="area" value="default" />
+  </form>
+</div>
+
+          
+        </div>
+
+        
+        <div class="wy-menu wy-menu-vertical" data-spy="affix" role="navigation" aria-label="main navigation">
+          
+            
+            
+              
+            
+            
+              <p class="caption"><span class="caption-text">Contents:</span></p>
+<ul>
+<li class="toctree-l1"><a class="reference internal" href="../install.html">Installation</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../graph.html">Expression graphs</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../operators.html">Graph operations</a></li>
+<li class="toctree-l1"><a class="reference internal" href="library_index.html">Library API</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../contributing.html">How to contribute to Marian</a></li>
+</ul>
+
+            
+          
+        </div>
+        
+      </div>
+    </nav>
+
+    <section data-toggle="wy-nav-shift" class="wy-nav-content-wrap">
+
+      
+      <nav class="wy-nav-top" aria-label="top navigation">
+        
+          <i data-toggle="wy-nav-top" class="fa fa-bars"></i>
+          <a href="../index.html">Marian NMT</a>
+        
+      </nav>
+
+
+      <div class="wy-nav-content">
+        
+        <div class="rst-content">
+        
+          
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+<div role="navigation" aria-label="breadcrumbs navigation">
+
+  <ul class="wy-breadcrumbs">
+    
+      <li><a href="../index.html" class="icon icon-home"></a> &raquo;</li>
+        
+      <li>Program Listing for File lsh.cpp</li>
+    
+    
+      <li class="wy-breadcrumbs-aside">
+        
+          
+            <a href="../_sources/api/program_listing_file_src_layers_lsh.cpp.rst.txt" rel="nofollow"> View page source</a>
+          
+        
+      </li>
+    
+  </ul>
+
+  
+  <hr/>
+</div>
+          <div role="main" class="document" itemscope="itemscope" itemtype="http://schema.org/Article">
+           <div itemprop="articleBody">
+            
+  <div class="section" id="program-listing-for-file-lsh-cpp">
+<span id="program-listing-file-src-layers-lsh-cpp"></span><h1>Program Listing for File lsh.cpp<a class="headerlink" href="#program-listing-for-file-lsh-cpp" title="Permalink to this headline">¶</a></h1>
+<p>↰ <a class="reference internal" href="file_src_layers_lsh.cpp.html#file-src-layers-lsh-cpp"><span class="std std-ref">Return to documentation for file</span></a> (<code class="docutils literal notranslate"><span class="pre">src/layers/lsh.cpp</span></code>)</p>
+<div class="highlight-cpp notranslate"><div class="highlight"><pre><span></span><span class="cp">#include</span> <span class="cpf">&quot;layers/lsh.h&quot;</span><span class="cp"></span>
+<span class="cp">#include</span> <span class="cpf">&quot;graph/expression_operators.h&quot;</span><span class="cp"></span>
+<span class="cp">#include</span> <span class="cpf">&quot;tensors/cpu/prod_blas.h&quot;</span><span class="cp"></span>
+
+<span class="cp">#if BLAS_FOUND</span>
+<span class="cp">#include</span> <span class="cpf">&quot;3rd_party/faiss/IndexLSH.h&quot;</span><span class="cp"></span>
+<span class="cp">#endif</span>
+
+<span class="k">namespace</span> <span class="n">marian</span> <span class="p">{</span>
+
+<span class="n">Expr</span> <span class="n">LSH</span><span class="o">::</span><span class="n">apply</span><span class="p">(</span><span class="n">Expr</span> <span class="n">input</span><span class="p">,</span> <span class="n">Expr</span> <span class="n">W</span><span class="p">,</span> <span class="n">Expr</span> <span class="n">b</span><span class="p">)</span> <span class="p">{</span>
+  <span class="k">auto</span> <span class="n">idx</span> <span class="o">=</span> <span class="n">search</span><span class="p">(</span><span class="n">input</span><span class="p">,</span> <span class="n">W</span><span class="p">);</span>
+  <span class="k">return</span> <span class="nf">affine</span><span class="p">(</span><span class="n">idx</span><span class="p">,</span> <span class="n">input</span><span class="p">,</span> <span class="n">W</span><span class="p">,</span> <span class="n">b</span><span class="p">);</span>
+<span class="p">}</span>
+
+<span class="n">Expr</span> <span class="n">LSH</span><span class="o">::</span><span class="n">search</span><span class="p">(</span><span class="n">Expr</span> <span class="n">query</span><span class="p">,</span> <span class="n">Expr</span> <span class="n">values</span><span class="p">)</span> <span class="p">{</span>
+<span class="cp">#if BLAS_FOUND</span>
+  <span class="n">ABORT_IF</span><span class="p">(</span><span class="n">query</span><span class="o">-&gt;</span><span class="n">graph</span><span class="p">()</span><span class="o">-&gt;</span><span class="n">getDeviceId</span><span class="p">().</span><span class="n">type</span> <span class="o">==</span> <span class="n">DeviceType</span><span class="o">::</span><span class="n">gpu</span><span class="p">,</span>
+           <span class="s">&quot;LSH index (--output-approx-knn) currently not implemented for GPU&quot;</span><span class="p">);</span>
+
+  <span class="k">auto</span> <span class="n">kShape</span> <span class="o">=</span> <span class="n">query</span><span class="o">-&gt;</span><span class="n">shape</span><span class="p">();</span>
+  <span class="n">kShape</span><span class="p">.</span><span class="n">set</span><span class="p">(</span><span class="mi">-1</span><span class="p">,</span> <span class="n">k_</span><span class="p">);</span>
+
+  <span class="k">auto</span> <span class="n">forward</span> <span class="o">=</span> <span class="p">[</span><span class="k">this</span><span class="p">](</span><span class="n">Expr</span> <span class="n">out</span><span class="p">,</span> <span class="k">const</span> <span class="n">std</span><span class="o">::</span><span class="n">vector</span><span class="o">&lt;</span><span class="n">Expr</span><span class="o">&gt;&amp;</span> <span class="n">inputs</span><span class="p">)</span> <span class="p">{</span>
+    <span class="k">auto</span> <span class="n">query</span>  <span class="o">=</span> <span class="n">inputs</span><span class="p">[</span><span class="mi">0</span><span class="p">];</span>
+    <span class="k">auto</span> <span class="n">values</span> <span class="o">=</span> <span class="n">inputs</span><span class="p">[</span><span class="mi">1</span><span class="p">];</span>
+
+    <span class="kt">int</span> <span class="n">dim</span> <span class="o">=</span> <span class="n">values</span><span class="o">-&gt;</span><span class="n">shape</span><span class="p">()[</span><span class="mi">-1</span><span class="p">];</span>
+
+    <span class="k">if</span><span class="p">(</span><span class="o">!</span><span class="n">index_</span> <span class="o">||</span> <span class="n">indexHash_</span> <span class="o">!=</span> <span class="n">values</span><span class="o">-&gt;</span><span class="n">hash</span><span class="p">())</span> <span class="p">{</span>
+      <span class="n">LOG</span><span class="p">(</span><span class="n">info</span><span class="p">,</span> <span class="s">&quot;Building LSH index for vector dim {} and with hash size {} bits&quot;</span><span class="p">,</span> <span class="n">dim</span><span class="p">,</span> <span class="n">nbits_</span><span class="p">);</span>
+      <span class="n">index_</span><span class="p">.</span><span class="n">reset</span><span class="p">(</span><span class="k">new</span> <span class="n">faiss</span><span class="o">::</span><span class="n">IndexLSH</span><span class="p">(</span><span class="n">dim</span><span class="p">,</span> <span class="n">nbits_</span><span class="p">,</span>
+                                       <span class="cm">/*rotate=*/</span><span class="n">dim</span> <span class="o">!=</span> <span class="n">nbits_</span><span class="p">,</span>
+                                       <span class="cm">/*train_thesholds*/</span><span class="nb">false</span><span class="p">));</span>
+      <span class="kt">int</span> <span class="n">vRows</span> <span class="o">=</span> <span class="n">values</span><span class="o">-&gt;</span><span class="n">shape</span><span class="p">().</span><span class="n">elements</span><span class="p">()</span> <span class="o">/</span> <span class="n">dim</span><span class="p">;</span>
+      <span class="n">index_</span><span class="o">-&gt;</span><span class="n">train</span><span class="p">(</span><span class="n">vRows</span><span class="p">,</span> <span class="n">values</span><span class="o">-&gt;</span><span class="n">val</span><span class="p">()</span><span class="o">-&gt;</span><span class="n">data</span><span class="o">&lt;</span><span class="kt">float</span><span class="o">&gt;</span><span class="p">());</span>
+      <span class="n">index_</span><span class="o">-&gt;</span><span class="n">add</span><span class="p">(</span>  <span class="n">vRows</span><span class="p">,</span> <span class="n">values</span><span class="o">-&gt;</span><span class="n">val</span><span class="p">()</span><span class="o">-&gt;</span><span class="n">data</span><span class="o">&lt;</span><span class="kt">float</span><span class="o">&gt;</span><span class="p">());</span>
+      <span class="n">indexHash_</span> <span class="o">=</span> <span class="n">values</span><span class="o">-&gt;</span><span class="n">hash</span><span class="p">();</span>
+    <span class="p">}</span>
+
+    <span class="kt">int</span> <span class="n">qRows</span> <span class="o">=</span> <span class="n">query</span><span class="o">-&gt;</span><span class="n">shape</span><span class="p">().</span><span class="n">elements</span><span class="p">()</span> <span class="o">/</span> <span class="n">dim</span><span class="p">;</span>
+    <span class="n">std</span><span class="o">::</span><span class="n">vector</span><span class="o">&lt;</span><span class="kt">float</span><span class="o">&gt;</span> <span class="n">distances</span><span class="p">(</span><span class="n">qRows</span> <span class="o">*</span> <span class="n">k_</span><span class="p">);</span>
+    <span class="n">std</span><span class="o">::</span><span class="n">vector</span><span class="o">&lt;</span><span class="n">faiss</span><span class="o">::</span><span class="n">Index</span><span class="o">::</span><span class="n">idx_t</span><span class="o">&gt;</span> <span class="n">ids</span><span class="p">(</span><span class="n">qRows</span> <span class="o">*</span> <span class="n">k_</span><span class="p">);</span>
+
+    <span class="n">index_</span><span class="o">-&gt;</span><span class="n">search</span><span class="p">(</span><span class="n">qRows</span><span class="p">,</span> <span class="n">query</span><span class="o">-&gt;</span><span class="n">val</span><span class="p">()</span><span class="o">-&gt;</span><span class="n">data</span><span class="o">&lt;</span><span class="kt">float</span><span class="o">&gt;</span><span class="p">(),</span> <span class="n">k_</span><span class="p">,</span>
+                   <span class="n">distances</span><span class="p">.</span><span class="n">data</span><span class="p">(),</span> <span class="n">ids</span><span class="p">.</span><span class="n">data</span><span class="p">());</span>
+
+    <span class="n">std</span><span class="o">::</span><span class="n">vector</span><span class="o">&lt;</span><span class="n">IndexType</span><span class="o">&gt;</span> <span class="n">vOut</span><span class="p">;</span>
+    <span class="n">vOut</span><span class="p">.</span><span class="n">reserve</span><span class="p">(</span><span class="n">ids</span><span class="p">.</span><span class="n">size</span><span class="p">());</span>
+    <span class="k">for</span><span class="p">(</span><span class="k">auto</span> <span class="nl">id</span> <span class="p">:</span> <span class="n">ids</span><span class="p">)</span>
+      <span class="n">vOut</span><span class="p">.</span><span class="n">push_back</span><span class="p">((</span><span class="n">IndexType</span><span class="p">)</span><span class="n">id</span><span class="p">);</span>
+
+    <span class="n">out</span><span class="o">-&gt;</span><span class="n">val</span><span class="p">()</span><span class="o">-&gt;</span><span class="n">set</span><span class="p">(</span><span class="n">vOut</span><span class="p">);</span>
+  <span class="p">};</span>
+
+  <span class="k">return</span> <span class="nf">lambda</span><span class="p">({</span><span class="n">query</span><span class="p">,</span> <span class="n">values</span><span class="p">},</span> <span class="n">kShape</span><span class="p">,</span> <span class="n">Type</span><span class="o">::</span><span class="n">uint32</span><span class="p">,</span> <span class="n">forward</span><span class="p">);</span>
+<span class="cp">#else</span>
+  <span class="n">query</span><span class="p">;</span> <span class="n">values</span><span class="p">;</span>
+  <span class="n">ABORT</span><span class="p">(</span><span class="s">&quot;LSH output layer requires a CPU BLAS library&quot;</span><span class="p">);</span>
+<span class="cp">#endif</span>
+<span class="p">}</span>
+
+<span class="n">Expr</span> <span class="n">LSH</span><span class="o">::</span><span class="n">affine</span><span class="p">(</span><span class="n">Expr</span> <span class="n">idx</span><span class="p">,</span> <span class="n">Expr</span> <span class="n">input</span><span class="p">,</span> <span class="n">Expr</span> <span class="n">W</span><span class="p">,</span> <span class="n">Expr</span> <span class="n">b</span><span class="p">)</span> <span class="p">{</span>
+  <span class="k">auto</span> <span class="n">outShape</span> <span class="o">=</span> <span class="n">input</span><span class="o">-&gt;</span><span class="n">shape</span><span class="p">();</span>
+  <span class="kt">int</span> <span class="n">dimVoc</span>    <span class="o">=</span> <span class="n">W</span><span class="o">-&gt;</span><span class="n">shape</span><span class="p">()[</span><span class="mi">-2</span><span class="p">];</span>
+  <span class="n">outShape</span><span class="p">.</span><span class="n">set</span><span class="p">(</span><span class="mi">-1</span><span class="p">,</span> <span class="n">dimVoc</span><span class="p">);</span>
+
+  <span class="k">auto</span> <span class="n">forward</span> <span class="o">=</span> <span class="p">[</span><span class="k">this</span><span class="p">](</span><span class="n">Expr</span> <span class="n">out</span><span class="p">,</span> <span class="k">const</span> <span class="n">std</span><span class="o">::</span><span class="n">vector</span><span class="o">&lt;</span><span class="n">Expr</span><span class="o">&gt;&amp;</span> <span class="n">inputs</span><span class="p">)</span> <span class="p">{</span>
+    <span class="k">auto</span> <span class="n">lowest</span> <span class="o">=</span> <span class="n">NumericLimits</span><span class="o">&lt;</span><span class="kt">float</span><span class="o">&gt;</span><span class="p">(</span><span class="n">out</span><span class="o">-&gt;</span><span class="n">value_type</span><span class="p">()).</span><span class="n">lowest</span><span class="p">;</span>
+    <span class="n">out</span><span class="o">-&gt;</span><span class="n">val</span><span class="p">()</span><span class="o">-&gt;</span><span class="n">set</span><span class="p">(</span><span class="n">lowest</span><span class="p">);</span>
+
+    <span class="kt">int</span> <span class="n">dimIn</span>   <span class="o">=</span> <span class="n">inputs</span><span class="p">[</span><span class="mi">1</span><span class="p">]</span><span class="o">-&gt;</span><span class="n">shape</span><span class="p">()[</span><span class="mi">-1</span><span class="p">];</span>
+    <span class="kt">int</span> <span class="n">dimOut</span>  <span class="o">=</span> <span class="n">out</span><span class="o">-&gt;</span><span class="n">shape</span><span class="p">()[</span><span class="mi">-1</span><span class="p">];</span>
+    <span class="kt">int</span> <span class="n">dimRows</span> <span class="o">=</span> <span class="n">out</span><span class="o">-&gt;</span><span class="n">shape</span><span class="p">().</span><span class="n">elements</span><span class="p">()</span> <span class="o">/</span> <span class="n">dimOut</span><span class="p">;</span>
+
+    <span class="k">auto</span> <span class="n">outPtr</span>   <span class="o">=</span> <span class="n">out</span><span class="o">-&gt;</span><span class="n">val</span><span class="p">()</span><span class="o">-&gt;</span><span class="n">data</span><span class="o">&lt;</span><span class="kt">float</span><span class="o">&gt;</span><span class="p">();</span>
+    <span class="k">auto</span> <span class="n">idxPtr</span>   <span class="o">=</span> <span class="n">inputs</span><span class="p">[</span><span class="mi">0</span><span class="p">]</span><span class="o">-&gt;</span><span class="n">val</span><span class="p">()</span><span class="o">-&gt;</span><span class="n">data</span><span class="o">&lt;</span><span class="kt">uint32_t</span><span class="o">&gt;</span><span class="p">();</span>
+    <span class="k">auto</span> <span class="n">queryPtr</span> <span class="o">=</span> <span class="n">inputs</span><span class="p">[</span><span class="mi">1</span><span class="p">]</span><span class="o">-&gt;</span><span class="n">val</span><span class="p">()</span><span class="o">-&gt;</span><span class="n">data</span><span class="o">&lt;</span><span class="kt">float</span><span class="o">&gt;</span><span class="p">();</span>
+    <span class="k">auto</span> <span class="n">WPtr</span>     <span class="o">=</span> <span class="n">inputs</span><span class="p">[</span><span class="mi">2</span><span class="p">]</span><span class="o">-&gt;</span><span class="n">val</span><span class="p">()</span><span class="o">-&gt;</span><span class="n">data</span><span class="o">&lt;</span><span class="kt">float</span><span class="o">&gt;</span><span class="p">();</span>
+    <span class="k">auto</span> <span class="n">bPtr</span>     <span class="o">=</span> <span class="n">inputs</span><span class="p">.</span><span class="n">size</span><span class="p">()</span> <span class="o">&gt;</span> <span class="mi">3</span> <span class="o">?</span> <span class="n">inputs</span><span class="p">[</span><span class="mi">3</span><span class="p">]</span><span class="o">-&gt;</span><span class="n">val</span><span class="p">()</span><span class="o">-&gt;</span><span class="n">data</span><span class="o">&lt;</span><span class="kt">float</span><span class="o">&gt;</span><span class="p">()</span> <span class="o">:</span> <span class="k">nullptr</span><span class="p">;</span> <span class="c1">// nullptr if no bias given</span>
+
+    <span class="k">for</span><span class="p">(</span><span class="kt">int</span> <span class="n">row</span> <span class="o">=</span> <span class="mi">0</span><span class="p">;</span> <span class="n">row</span> <span class="o">&lt;</span> <span class="n">dimRows</span><span class="p">;</span> <span class="o">++</span><span class="n">row</span><span class="p">)</span> <span class="p">{</span>
+      <span class="k">auto</span> <span class="n">currIdxPtr</span>    <span class="o">=</span> <span class="n">idxPtr</span>   <span class="o">+</span> <span class="n">row</span> <span class="o">*</span> <span class="n">k_</span><span class="p">;</span>     <span class="c1">// move to next batch of k entries</span>
+      <span class="k">auto</span> <span class="n">currQueryPtr</span>  <span class="o">=</span> <span class="n">queryPtr</span> <span class="o">+</span> <span class="n">row</span> <span class="o">*</span> <span class="n">dimIn</span><span class="p">;</span>  <span class="c1">// move to next input query vector</span>
+      <span class="k">auto</span> <span class="n">currOutPtr</span>    <span class="o">=</span> <span class="n">outPtr</span>   <span class="o">+</span> <span class="n">row</span> <span class="o">*</span> <span class="n">dimOut</span><span class="p">;</span> <span class="c1">// move to next output position vector (of vocabulary size)</span>
+      <span class="k">for</span><span class="p">(</span><span class="kt">int</span> <span class="n">k</span> <span class="o">=</span> <span class="mi">0</span><span class="p">;</span> <span class="n">k</span> <span class="o">&lt;</span> <span class="n">k_</span><span class="p">;</span> <span class="n">k</span><span class="o">++</span><span class="p">)</span> <span class="p">{</span>
+        <span class="kt">int</span> <span class="n">relPos</span> <span class="o">=</span> <span class="n">currIdxPtr</span><span class="p">[</span><span class="n">k</span><span class="p">];</span>                   <span class="c1">// k-th best vocabulay item</span>
+        <span class="k">auto</span> <span class="n">currWPtr</span>      <span class="o">=</span> <span class="n">WPtr</span> <span class="o">+</span> <span class="n">relPos</span> <span class="o">*</span> <span class="n">dimIn</span><span class="p">;</span>   <span class="c1">// offset for k-th best embedding</span>
+        <span class="n">currOutPtr</span><span class="p">[</span><span class="n">relPos</span><span class="p">]</span> <span class="o">=</span> <span class="n">bPtr</span> <span class="o">?</span> <span class="n">bPtr</span><span class="p">[</span><span class="n">relPos</span><span class="p">]</span> <span class="o">:</span> <span class="mi">0</span><span class="p">;</span> <span class="c1">// write bias value to position, init to 0 if no bias given</span>
+
+        <span class="c1">// proceed one vector product at a time writing to the correct position</span>
+        <span class="n">sgemm</span><span class="p">(</span><span class="nb">false</span><span class="p">,</span> <span class="nb">true</span><span class="p">,</span> <span class="mi">1</span><span class="p">,</span> <span class="mi">1</span><span class="p">,</span> <span class="n">dimIn</span><span class="p">,</span> <span class="mf">1.0f</span><span class="p">,</span> <span class="n">currQueryPtr</span><span class="p">,</span> <span class="n">dimIn</span><span class="p">,</span> <span class="n">currWPtr</span><span class="p">,</span> <span class="n">dimIn</span><span class="p">,</span> <span class="mf">1.0f</span><span class="p">,</span> <span class="o">&amp;</span><span class="n">currOutPtr</span><span class="p">[</span><span class="n">relPos</span><span class="p">],</span> <span class="mi">1</span><span class="p">);</span>
+      <span class="p">}</span>
+    <span class="p">}</span>
+  <span class="p">};</span>
+
+  <span class="n">std</span><span class="o">::</span><span class="n">vector</span><span class="o">&lt;</span><span class="n">Expr</span><span class="o">&gt;</span> <span class="n">nodes</span> <span class="o">=</span> <span class="p">{</span><span class="n">idx</span><span class="p">,</span> <span class="n">input</span><span class="p">,</span> <span class="n">W</span><span class="p">};</span>
+  <span class="k">if</span><span class="p">(</span><span class="n">b</span><span class="p">)</span> <span class="c1">// bias is optional</span>
+    <span class="n">nodes</span><span class="p">.</span><span class="n">push_back</span><span class="p">(</span><span class="n">b</span><span class="p">);</span>
+
+  <span class="k">return</span> <span class="nf">lambda</span><span class="p">(</span><span class="n">nodes</span><span class="p">,</span>
+                <span class="n">outShape</span><span class="p">,</span>
+                <span class="n">input</span><span class="o">-&gt;</span><span class="n">value_type</span><span class="p">(),</span>
+                <span class="n">forward</span><span class="p">);</span>
+<span class="p">}</span>
+
+<span class="c1">// @TODO: alternative version which does the same as above with Marian operators, currently missing &quot;scatter&quot;.</span>
+<span class="c1">// this uses more memory and likely to be slower. Would make sense to have a scatter node that actually creates</span>
+<span class="c1">// the node instead of relying on an existing node, e.g. scatter(shape, defaultValue, axis, indices, values);</span>
+<span class="cp">#if 0</span><span class="c"></span>
+<span class="c">Expr LSH::affine(Expr idx, Expr input, Expr W, Expr b) {</span>
+<span class="c">  int dim  = input-&gt;shape()[-1];</span>
+<span class="c">  int bch  = idx-&gt;shape().elements() / k;</span>
+
+<span class="c">  auto W = reshape(rows(Wt_, flatten(idx)), {bch, k, dim}); // [rows, k, dim]</span>
+<span class="c">  auto b = reshape(cols(b_,  flatten(idx)), {bch, 1,   k}); // [rows, 1,   k]</span>
+
+<span class="c">  auto aff = reshape(bdot(reshape(input, {bch, 1, dim}), W, false, true) + b, idx-&gt;shape()); // [beam, time, batch, k]</span>
+
+<span class="c">  int dimVoc  = Wt_-&gt;shape()[-2];</span>
+<span class="c">  auto oShape = input-&gt;shape();</span>
+<span class="c">  oShape.set(-1, dimVoc);</span>
+<span class="c">  auto lowest = graph_-&gt;constant(oShape,</span>
+<span class="c">                                 inits::fromValue(NumericLimits&lt;float&gt;(input-&gt;value_type()).lowest),</span>
+<span class="c">                                 input-&gt;value_type());</span>
+<span class="c">  return scatter(lowest, -1, idx, aff);</span>
+<span class="c">}</span>
+<span class="cp">#endif</span>
+
+<span class="p">}</span>  <span class="c1">// namespace marian</span>
+</pre></div>
+</div>
+</div>
+
+
+           </div>
+           
+          </div>
+          <footer>
+
+  <hr/>
+
+  <div role="contentinfo">
+    <p>
+        &#169; Copyright 2021, Marian NMT Team.
+
+    </p>
+  </div>
+    
+    
+    
+    Built with <a href="https://www.sphinx-doc.org/">Sphinx</a> using a
+    
+    <a href="https://github.com/readthedocs/sphinx_rtd_theme">theme</a>
+    
+    provided by <a href="https://readthedocs.org">Read the Docs</a>. 
+
+</footer>
+        </div>
+      </div>
+
+    </section>
+
+  </div>
+  
+
+  <script type="text/javascript">
+      jQuery(function () {
+          SphinxRtdTheme.Navigation.enable(true);
+      });
+  </script>
+
+  
+  
+    
+   
+
+</body>
+</html>

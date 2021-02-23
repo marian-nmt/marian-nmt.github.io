@@ -1,0 +1,314 @@
+
+
+<!DOCTYPE html>
+<html class="writer-html5" lang="en" >
+<head>
+  <meta charset="utf-8" />
+  
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  
+  <title>Program Listing for File word2vec_reader.h &mdash; Marian NMT v1.10.1 2021-02-23 documentation</title>
+  
+
+  
+  <link rel="stylesheet" href="../_static/css/theme.css" type="text/css" />
+  <link rel="stylesheet" href="../_static/pygments.css" type="text/css" />
+  <link rel="stylesheet" href="../_static/css/custom.css" type="text/css" />
+  <link rel="stylesheet" href="../_static/collapsible-lists/css/tree_view.css" type="text/css" />
+
+  
+  
+
+  
+  
+
+  
+    <link rel="canonical" href="http://marian-nmt.github.io/docs/api/api/program_listing_file_src_layers_word2vec_reader.h.html" />
+
+  
+  <!--[if lt IE 9]>
+    <script src="../_static/js/html5shiv.min.js"></script>
+  <![endif]-->
+  
+    
+      <script type="text/javascript" id="documentation_options" data-url_root="../" src="../_static/documentation_options.js"></script>
+        <script src="../_static/jquery.js"></script>
+        <script src="../_static/underscore.js"></script>
+        <script src="../_static/doctools.js"></script>
+        <script src="../_static/language_data.js"></script>
+        <script src="../_static/collapsible-lists/js/CollapsibleLists.compressed.js"></script>
+        <script src="../_static/collapsible-lists/js/apply-collapsible-lists.js"></script>
+    
+    <script type="text/javascript" src="../_static/js/theme.js"></script>
+
+    
+    <link rel="index" title="Index" href="../genindex.html" />
+    <link rel="search" title="Search" href="../search.html" /> 
+</head>
+
+<body class="wy-body-for-nav">
+
+   
+  <div class="wy-grid-for-nav">
+    
+    <nav data-toggle="wy-nav-shift" class="wy-nav-side">
+      <div class="wy-side-scroll">
+        <div class="wy-side-nav-search" >
+          
+
+          
+            <a href="../index.html" class="icon icon-home"> Marian NMT
+          
+
+          
+          </a>
+
+          
+            
+            
+              <div class="version">
+                v1.10.1
+              </div>
+            
+          
+
+          
+<div role="search">
+  <form id="rtd-search-form" class="wy-form" action="../search.html" method="get">
+    <input type="text" name="q" placeholder="Search docs" />
+    <input type="hidden" name="check_keywords" value="yes" />
+    <input type="hidden" name="area" value="default" />
+  </form>
+</div>
+
+          
+        </div>
+
+        
+        <div class="wy-menu wy-menu-vertical" data-spy="affix" role="navigation" aria-label="main navigation">
+          
+            
+            
+              
+            
+            
+              <p class="caption"><span class="caption-text">Contents:</span></p>
+<ul>
+<li class="toctree-l1"><a class="reference internal" href="../install.html">Installation</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../graph.html">Expression graphs</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../operators.html">Graph operations</a></li>
+<li class="toctree-l1"><a class="reference internal" href="library_index.html">Library API</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../contributing.html">How to contribute to Marian</a></li>
+</ul>
+
+            
+          
+        </div>
+        
+      </div>
+    </nav>
+
+    <section data-toggle="wy-nav-shift" class="wy-nav-content-wrap">
+
+      
+      <nav class="wy-nav-top" aria-label="top navigation">
+        
+          <i data-toggle="wy-nav-top" class="fa fa-bars"></i>
+          <a href="../index.html">Marian NMT</a>
+        
+      </nav>
+
+
+      <div class="wy-nav-content">
+        
+        <div class="rst-content">
+        
+          
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+<div role="navigation" aria-label="breadcrumbs navigation">
+
+  <ul class="wy-breadcrumbs">
+    
+      <li><a href="../index.html" class="icon icon-home"></a> &raquo;</li>
+        
+      <li>Program Listing for File word2vec_reader.h</li>
+    
+    
+      <li class="wy-breadcrumbs-aside">
+        
+          
+            <a href="../_sources/api/program_listing_file_src_layers_word2vec_reader.h.rst.txt" rel="nofollow"> View page source</a>
+          
+        
+      </li>
+    
+  </ul>
+
+  
+  <hr/>
+</div>
+          <div role="main" class="document" itemscope="itemscope" itemtype="http://schema.org/Article">
+           <div itemprop="articleBody">
+            
+  <div class="section" id="program-listing-for-file-word2vec-reader-h">
+<span id="program-listing-file-src-layers-word2vec-reader-h"></span><h1>Program Listing for File word2vec_reader.h<a class="headerlink" href="#program-listing-for-file-word2vec-reader-h" title="Permalink to this headline">¶</a></h1>
+<p>↰ <a class="reference internal" href="file_src_layers_word2vec_reader.h.html#file-src-layers-word2vec-reader-h"><span class="std std-ref">Return to documentation for file</span></a> (<code class="docutils literal notranslate"><span class="pre">src/layers/word2vec_reader.h</span></code>)</p>
+<div class="highlight-cpp notranslate"><div class="highlight"><pre><span></span><span class="cp">#pragma once</span>
+
+<span class="cp">#include</span> <span class="cpf">&quot;marian.h&quot;</span><span class="cp"></span>
+
+<span class="cp">#include</span> <span class="cpf">&quot;common/logging.h&quot;</span><span class="cp"></span>
+
+<span class="cp">#include</span> <span class="cpf">&lt;fstream&gt;</span><span class="cp"></span>
+<span class="cp">#include</span> <span class="cpf">&lt;string&gt;</span><span class="cp"></span>
+<span class="cp">#include</span> <span class="cpf">&lt;vector&gt;</span><span class="cp"></span>
+
+<span class="k">namespace</span> <span class="n">marian</span> <span class="p">{</span>
+
+<span class="k">class</span> <span class="nc">Word2VecReader</span> <span class="p">{</span>
+<span class="k">public</span><span class="o">:</span>
+  <span class="n">Word2VecReader</span><span class="p">()</span> <span class="p">{}</span>
+
+  <span class="n">std</span><span class="o">::</span><span class="n">vector</span><span class="o">&lt;</span><span class="kt">float</span><span class="o">&gt;</span> <span class="n">read</span><span class="p">(</span><span class="k">const</span> <span class="n">std</span><span class="o">::</span><span class="n">string</span><span class="o">&amp;</span> <span class="n">fileName</span><span class="p">,</span> <span class="kt">int</span> <span class="n">dimVoc</span><span class="p">,</span> <span class="kt">int</span> <span class="n">dimEmb</span><span class="p">)</span> <span class="p">{</span>
+    <span class="n">LOG</span><span class="p">(</span><span class="n">info</span><span class="p">,</span> <span class="s">&quot;[data] Loading embedding vectors from {}&quot;</span><span class="p">,</span> <span class="n">fileName</span><span class="p">);</span>
+
+    <span class="n">io</span><span class="o">::</span><span class="n">InputFileStream</span> <span class="n">embFile</span><span class="p">(</span><span class="n">fileName</span><span class="p">);</span>
+
+    <span class="n">std</span><span class="o">::</span><span class="n">string</span> <span class="n">line</span><span class="p">;</span>
+    <span class="n">std</span><span class="o">::</span><span class="n">vector</span><span class="o">&lt;</span><span class="n">std</span><span class="o">::</span><span class="n">string</span><span class="o">&gt;</span> <span class="n">values</span><span class="p">;</span>
+    <span class="n">values</span><span class="p">.</span><span class="n">reserve</span><span class="p">(</span><span class="n">dimEmb</span><span class="p">);</span>
+
+    <span class="c1">// The first line contains two values: the number of words in the</span>
+    <span class="c1">// vocabulary and the length of embedding vectors</span>
+    <span class="n">io</span><span class="o">::</span><span class="n">getline</span><span class="p">(</span><span class="n">embFile</span><span class="p">,</span> <span class="n">line</span><span class="p">);</span>
+    <span class="n">utils</span><span class="o">::</span><span class="n">split</span><span class="p">(</span><span class="n">line</span><span class="p">,</span> <span class="n">values</span><span class="p">);</span>
+    <span class="n">ABORT_IF</span><span class="p">(</span><span class="n">values</span><span class="p">.</span><span class="n">size</span><span class="p">()</span> <span class="o">!=</span> <span class="mi">2</span><span class="p">,</span>
+             <span class="s">&quot;Unexpected format of the first line of the embedding file&quot;</span><span class="p">);</span>
+    <span class="n">ABORT_IF</span><span class="p">(</span><span class="n">stoi</span><span class="p">(</span><span class="n">values</span><span class="p">[</span><span class="mi">1</span><span class="p">])</span> <span class="o">!=</span> <span class="n">dimEmb</span><span class="p">,</span>
+             <span class="s">&quot;Unexpected length of embedding vectors&quot;</span><span class="p">);</span>
+
+    <span class="c1">// Read embedding vectors into a map</span>
+    <span class="n">std</span><span class="o">::</span><span class="n">unordered_map</span><span class="o">&lt;</span><span class="n">WordIndex</span><span class="p">,</span> <span class="n">std</span><span class="o">::</span><span class="n">vector</span><span class="o">&lt;</span><span class="kt">float</span><span class="o">&gt;&gt;</span> <span class="n">word2vec</span><span class="p">;</span>
+    <span class="k">while</span><span class="p">(</span><span class="n">io</span><span class="o">::</span><span class="n">getline</span><span class="p">(</span><span class="n">embFile</span><span class="p">,</span> <span class="n">line</span><span class="p">))</span> <span class="p">{</span>
+      <span class="n">values</span><span class="p">.</span><span class="n">clear</span><span class="p">();</span>
+      <span class="n">utils</span><span class="o">::</span><span class="n">split</span><span class="p">(</span><span class="n">line</span><span class="p">,</span> <span class="n">values</span><span class="p">);</span>
+
+      <span class="n">WordIndex</span> <span class="n">word</span> <span class="o">=</span> <span class="n">std</span><span class="o">::</span><span class="n">stoi</span><span class="p">(</span><span class="n">values</span><span class="p">.</span><span class="n">front</span><span class="p">());</span>
+      <span class="k">if</span><span class="p">(</span><span class="n">word</span> <span class="o">&gt;=</span> <span class="p">(</span><span class="kt">size_t</span><span class="p">)</span><span class="n">dimVoc</span><span class="p">)</span>
+        <span class="k">continue</span><span class="p">;</span>
+
+      <span class="n">word2vec</span><span class="p">[</span><span class="n">word</span><span class="p">].</span><span class="n">reserve</span><span class="p">(</span><span class="n">dimEmb</span><span class="p">);</span>
+      <span class="n">std</span><span class="o">::</span><span class="n">transform</span><span class="p">(</span><span class="n">values</span><span class="p">.</span><span class="n">begin</span><span class="p">()</span> <span class="o">+</span> <span class="mi">1</span><span class="p">,</span>
+                     <span class="n">values</span><span class="p">.</span><span class="n">end</span><span class="p">(),</span>
+                     <span class="n">std</span><span class="o">::</span><span class="n">back_inserter</span><span class="p">(</span><span class="n">word2vec</span><span class="p">[</span><span class="n">word</span><span class="p">]),</span>
+                     <span class="p">[](</span><span class="k">const</span> <span class="n">std</span><span class="o">::</span><span class="n">string</span><span class="o">&amp;</span> <span class="n">s</span><span class="p">)</span> <span class="p">{</span> <span class="k">return</span> <span class="n">std</span><span class="o">::</span><span class="n">stof</span><span class="p">(</span><span class="n">s</span><span class="p">);</span> <span class="p">});</span>
+    <span class="p">}</span>
+
+    <span class="c1">// Initialize final flat vector for embeddings</span>
+    <span class="n">std</span><span class="o">::</span><span class="n">vector</span><span class="o">&lt;</span><span class="kt">float</span><span class="o">&gt;</span> <span class="n">embs</span><span class="p">;</span>
+    <span class="n">embs</span><span class="p">.</span><span class="n">reserve</span><span class="p">(</span><span class="n">dimVoc</span> <span class="o">*</span> <span class="n">dimEmb</span><span class="p">);</span>
+
+    <span class="c1">// Populate output vector with embedding</span>
+    <span class="k">for</span><span class="p">(</span><span class="n">WordIndex</span> <span class="n">word</span> <span class="o">=</span> <span class="mi">0</span><span class="p">;</span> <span class="n">word</span> <span class="o">&lt;</span> <span class="p">(</span><span class="n">WordIndex</span><span class="p">)</span><span class="n">dimVoc</span><span class="p">;</span> <span class="o">++</span><span class="n">word</span><span class="p">)</span> <span class="p">{</span>
+      <span class="c1">// For words not occuring in the file use uniform distribution</span>
+      <span class="k">if</span><span class="p">(</span><span class="n">word2vec</span><span class="p">.</span><span class="n">find</span><span class="p">(</span><span class="n">word</span><span class="p">)</span> <span class="o">==</span> <span class="n">word2vec</span><span class="p">.</span><span class="n">end</span><span class="p">())</span> <span class="p">{</span>
+        <span class="k">auto</span> <span class="n">randVals</span> <span class="o">=</span> <span class="n">randomEmbeddings</span><span class="p">(</span><span class="n">dimVoc</span><span class="p">,</span> <span class="n">dimEmb</span><span class="p">);</span>
+        <span class="n">embs</span><span class="p">.</span><span class="n">insert</span><span class="p">(</span><span class="n">embs</span><span class="p">.</span><span class="n">end</span><span class="p">(),</span> <span class="n">randVals</span><span class="p">.</span><span class="n">begin</span><span class="p">(),</span> <span class="n">randVals</span><span class="p">.</span><span class="n">end</span><span class="p">());</span>
+      <span class="p">}</span> <span class="k">else</span> <span class="p">{</span>
+        <span class="n">embs</span><span class="p">.</span><span class="n">insert</span><span class="p">(</span><span class="n">embs</span><span class="p">.</span><span class="n">end</span><span class="p">(),</span> <span class="n">word2vec</span><span class="p">[</span><span class="n">word</span><span class="p">].</span><span class="n">begin</span><span class="p">(),</span> <span class="n">word2vec</span><span class="p">[</span><span class="n">word</span><span class="p">].</span><span class="n">end</span><span class="p">());</span>
+      <span class="p">}</span>
+    <span class="p">}</span>
+
+    <span class="n">embs</span><span class="p">.</span><span class="n">resize</span><span class="p">(</span><span class="n">dimVoc</span> <span class="o">*</span> <span class="n">dimEmb</span><span class="p">,</span> <span class="mi">0</span><span class="p">);</span> <span class="c1">// @TODO: is it correct to zero out the remaining embeddings?</span>
+    <span class="k">return</span> <span class="n">embs</span><span class="p">;</span>
+  <span class="p">}</span>
+
+<span class="k">private</span><span class="o">:</span>
+  <span class="n">std</span><span class="o">::</span><span class="n">vector</span><span class="o">&lt;</span><span class="kt">float</span><span class="o">&gt;</span> <span class="n">randomEmbeddings</span><span class="p">(</span><span class="kt">int</span> <span class="n">dimVoc</span><span class="p">,</span> <span class="kt">int</span> <span class="n">dimEmb</span><span class="p">)</span> <span class="p">{</span>
+    <span class="n">std</span><span class="o">::</span><span class="n">vector</span><span class="o">&lt;</span><span class="kt">float</span><span class="o">&gt;</span> <span class="n">values</span><span class="p">;</span>
+    <span class="n">values</span><span class="p">.</span><span class="n">resize</span><span class="p">(</span><span class="n">dimEmb</span><span class="p">);</span>
+    <span class="c1">// Glorot numal distribution</span>
+    <span class="kt">float</span> <span class="n">scale</span> <span class="o">=</span> <span class="n">sqrtf</span><span class="p">(</span><span class="mf">2.0f</span> <span class="o">/</span> <span class="p">(</span><span class="n">dimVoc</span> <span class="o">+</span> <span class="n">dimEmb</span><span class="p">));</span>
+
+    <span class="c1">// @TODO: switch to new random generator back-end.</span>
+    <span class="c1">// This is rarly used however.</span>
+    <span class="n">std</span><span class="o">::</span><span class="n">random_device</span> <span class="n">rd</span><span class="p">;</span>
+    <span class="n">std</span><span class="o">::</span><span class="n">mt19937</span> <span class="n">engine</span><span class="p">(</span><span class="n">rd</span><span class="p">());</span>
+
+    <span class="n">std</span><span class="o">::</span><span class="n">normal_distribution</span><span class="o">&lt;</span><span class="kt">float</span><span class="o">&gt;</span> <span class="n">d</span><span class="p">(</span><span class="mi">0</span><span class="p">,</span> <span class="n">scale</span><span class="p">);</span>
+    <span class="k">auto</span> <span class="n">gen</span> <span class="o">=</span> <span class="p">[</span><span class="o">&amp;</span><span class="n">d</span><span class="p">,</span> <span class="o">&amp;</span><span class="n">engine</span><span class="p">]</span> <span class="p">()</span> <span class="p">{</span>
+       <span class="k">return</span> <span class="nf">d</span><span class="p">(</span><span class="n">engine</span><span class="p">);</span>
+    <span class="p">};</span>
+
+    <span class="n">std</span><span class="o">::</span><span class="n">generate</span><span class="p">(</span><span class="n">values</span><span class="p">.</span><span class="n">begin</span><span class="p">(),</span> <span class="n">values</span><span class="p">.</span><span class="n">end</span><span class="p">(),</span> <span class="n">gen</span><span class="p">);</span>
+
+    <span class="k">return</span> <span class="n">values</span><span class="p">;</span>
+  <span class="p">}</span>
+<span class="p">};</span>
+
+<span class="p">}</span>  <span class="c1">// namespace marian</span>
+</pre></div>
+</div>
+</div>
+
+
+           </div>
+           
+          </div>
+          <footer>
+
+  <hr/>
+
+  <div role="contentinfo">
+    <p>
+        &#169; Copyright 2021, Marian NMT Team.
+
+    </p>
+  </div>
+    
+    
+    
+    Built with <a href="https://www.sphinx-doc.org/">Sphinx</a> using a
+    
+    <a href="https://github.com/readthedocs/sphinx_rtd_theme">theme</a>
+    
+    provided by <a href="https://readthedocs.org">Read the Docs</a>. 
+
+</footer>
+        </div>
+      </div>
+
+    </section>
+
+  </div>
+  
+
+  <script type="text/javascript">
+      jQuery(function () {
+          SphinxRtdTheme.Navigation.enable(true);
+      });
+  </script>
+
+  
+  
+    
+   
+
+</body>
+</html>

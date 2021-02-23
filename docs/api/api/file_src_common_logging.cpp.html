@@ -1,0 +1,280 @@
+
+
+<!DOCTYPE html>
+<html class="writer-html5" lang="en" >
+<head>
+  <meta charset="utf-8" />
+  
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  
+  <title>File logging.cpp &mdash; Marian NMT v1.10.1 2021-02-23 documentation</title>
+  
+
+  
+  <link rel="stylesheet" href="../_static/css/theme.css" type="text/css" />
+  <link rel="stylesheet" href="../_static/pygments.css" type="text/css" />
+  <link rel="stylesheet" href="../_static/css/custom.css" type="text/css" />
+  <link rel="stylesheet" href="../_static/collapsible-lists/css/tree_view.css" type="text/css" />
+
+  
+  
+
+  
+  
+
+  
+    <link rel="canonical" href="http://marian-nmt.github.io/docs/api/api/file_src_common_logging.cpp.html" />
+
+  
+  <!--[if lt IE 9]>
+    <script src="../_static/js/html5shiv.min.js"></script>
+  <![endif]-->
+  
+    
+      <script type="text/javascript" id="documentation_options" data-url_root="../" src="../_static/documentation_options.js"></script>
+        <script src="../_static/jquery.js"></script>
+        <script src="../_static/underscore.js"></script>
+        <script src="../_static/doctools.js"></script>
+        <script src="../_static/language_data.js"></script>
+        <script src="../_static/collapsible-lists/js/CollapsibleLists.compressed.js"></script>
+        <script src="../_static/collapsible-lists/js/apply-collapsible-lists.js"></script>
+    
+    <script type="text/javascript" src="../_static/js/theme.js"></script>
+
+    
+    <link rel="index" title="Index" href="../genindex.html" />
+    <link rel="search" title="Search" href="../search.html" /> 
+</head>
+
+<body class="wy-body-for-nav">
+
+   
+  <div class="wy-grid-for-nav">
+    
+    <nav data-toggle="wy-nav-shift" class="wy-nav-side">
+      <div class="wy-side-scroll">
+        <div class="wy-side-nav-search" >
+          
+
+          
+            <a href="../index.html" class="icon icon-home"> Marian NMT
+          
+
+          
+          </a>
+
+          
+            
+            
+              <div class="version">
+                v1.10.1
+              </div>
+            
+          
+
+          
+<div role="search">
+  <form id="rtd-search-form" class="wy-form" action="../search.html" method="get">
+    <input type="text" name="q" placeholder="Search docs" />
+    <input type="hidden" name="check_keywords" value="yes" />
+    <input type="hidden" name="area" value="default" />
+  </form>
+</div>
+
+          
+        </div>
+
+        
+        <div class="wy-menu wy-menu-vertical" data-spy="affix" role="navigation" aria-label="main navigation">
+          
+            
+            
+              
+            
+            
+              <p class="caption"><span class="caption-text">Contents:</span></p>
+<ul>
+<li class="toctree-l1"><a class="reference internal" href="../install.html">Installation</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../graph.html">Expression graphs</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../operators.html">Graph operations</a></li>
+<li class="toctree-l1"><a class="reference internal" href="library_index.html">Library API</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../contributing.html">How to contribute to Marian</a></li>
+</ul>
+
+            
+          
+        </div>
+        
+      </div>
+    </nav>
+
+    <section data-toggle="wy-nav-shift" class="wy-nav-content-wrap">
+
+      
+      <nav class="wy-nav-top" aria-label="top navigation">
+        
+          <i data-toggle="wy-nav-top" class="fa fa-bars"></i>
+          <a href="../index.html">Marian NMT</a>
+        
+      </nav>
+
+
+      <div class="wy-nav-content">
+        
+        <div class="rst-content">
+        
+          
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+<div role="navigation" aria-label="breadcrumbs navigation">
+
+  <ul class="wy-breadcrumbs">
+    
+      <li><a href="../index.html" class="icon icon-home"></a> &raquo;</li>
+        
+      <li>File logging.cpp</li>
+    
+    
+      <li class="wy-breadcrumbs-aside">
+        
+          
+            <a href="../_sources/api/file_src_common_logging.cpp.rst.txt" rel="nofollow"> View page source</a>
+          
+        
+      </li>
+    
+  </ul>
+
+  
+  <hr/>
+</div>
+          <div role="main" class="document" itemscope="itemscope" itemtype="http://schema.org/Article">
+           <div itemprop="articleBody">
+            
+  <div class="section" id="file-logging-cpp">
+<span id="file-src-common-logging-cpp"></span><h1>File logging.cpp<a class="headerlink" href="#file-logging-cpp" title="Permalink to this headline">¶</a></h1>
+<p>↰ <a class="reference internal" href="dir_src_common.html#dir-src-common"><span class="std std-ref">Parent directory</span></a> (<code class="docutils literal notranslate"><span class="pre">src/common</span></code>)</p>
+<div class="contents local topic" id="contents">
+<p class="topic-title">Contents</p>
+<ul class="simple">
+<li><p><a class="reference internal" href="#definition-src-common-logging-cpp" id="id1">Definition (<code class="docutils literal notranslate"><span class="pre">src/common/logging.cpp</span></code>)</a></p></li>
+<li><p><a class="reference internal" href="#includes" id="id2">Includes</a></p></li>
+<li><p><a class="reference internal" href="#namespaces" id="id3">Namespaces</a></p></li>
+<li><p><a class="reference internal" href="#functions" id="id4">Functions</a></p></li>
+<li><p><a class="reference internal" href="#defines" id="id5">Defines</a></p></li>
+<li><p><a class="reference internal" href="#variables" id="id6">Variables</a></p></li>
+</ul>
+</div>
+<div class="section" id="definition-src-common-logging-cpp">
+<h2>Definition (<code class="docutils literal notranslate"><span class="pre">src/common/logging.cpp</span></code>)<a class="headerlink" href="#definition-src-common-logging-cpp" title="Permalink to this headline">¶</a></h2>
+<div class="toctree-wrapper compound">
+<ul>
+<li class="toctree-l1"><a class="reference internal" href="program_listing_file_src_common_logging.cpp.html">Program Listing for File logging.cpp</a></li>
+</ul>
+</div>
+</div>
+<div class="section" id="includes">
+<h2>Includes<a class="headerlink" href="#includes" title="Permalink to this headline">¶</a></h2>
+<ul class="simple">
+<li><p><code class="docutils literal notranslate"><span class="pre">3rd_party/ExceptionWithCallStack.h</span></code></p></li>
+<li><p><code class="docutils literal notranslate"><span class="pre">common/config.h</span></code> (<a class="reference internal" href="file_src_common_config.h.html#file-src-common-config-h"><span class="std std-ref">File config.h</span></a>)</p></li>
+<li><p><code class="docutils literal notranslate"><span class="pre">logging.h</span></code> (<a class="reference internal" href="file_src_common_logging.h.html#file-src-common-logging-h"><span class="std std-ref">File logging.h</span></a>)</p></li>
+<li><p><code class="docutils literal notranslate"><span class="pre">spdlog/sinks/null_sink.h</span></code></p></li>
+<li><p><code class="docutils literal notranslate"><span class="pre">stdlib.h</span></code></p></li>
+<li><p><code class="docutils literal notranslate"><span class="pre">time.h</span></code></p></li>
+</ul>
+</div>
+<div class="section" id="namespaces">
+<h2>Namespaces<a class="headerlink" href="#namespaces" title="Permalink to this headline">¶</a></h2>
+<ul class="simple">
+<li><p><a class="reference internal" href="namespace_marian.html#namespace-marian"><span class="std std-ref">Namespace marian</span></a></p></li>
+</ul>
+</div>
+<div class="section" id="functions">
+<h2>Functions<a class="headerlink" href="#functions" title="Permalink to this headline">¶</a></h2>
+<ul class="simple">
+<li><p><a class="reference internal" href="function_logging_8cpp_1a6364e335ccd9179a6cb1443fec2bea5b.html#exhale-function-logging-8cpp-1a6364e335ccd9179a6cb1443fec2bea5b"><span class="std std-ref">Function createLoggers(const marian::Config *)</span></a></p></li>
+<li><p><a class="reference internal" href="function_logging_8cpp_1a1cfc3e90f5932f02446baf33d5002bf3.html#exhale-function-logging-8cpp-1a1cfc3e90f5932f02446baf33d5002bf3"><span class="std std-ref">Function createStderrLogger(const std::string&amp;, const std::string&amp;, const std::vector&lt;std::string&gt;&amp;, bool)</span></a></p></li>
+<li><p><a class="reference internal" href="function_logging_8cpp_1a40523eae4579cc090ffda450828af65c.html#exhale-function-logging-8cpp-1a40523eae4579cc090ffda450828af65c"><span class="std std-ref">Function marian::__attribute__</span></a></p></li>
+<li><p><a class="reference internal" href="function_logging_8cpp_1aa44bb2e867e6ee2eb3ca412d3598acb9.html#exhale-function-logging-8cpp-1aa44bb2e867e6ee2eb3ca412d3598acb9"><span class="std std-ref">Function marian::getThrowExceptionOnAbort</span></a></p></li>
+<li><p><a class="reference internal" href="function_logging_8cpp_1a35076c983d9fc174120c6bec6e7986e5.html#exhale-function-logging-8cpp-1a35076c983d9fc174120c6bec6e7986e5"><span class="std std-ref">Function marian::setThrowExceptionOnAbort</span></a></p></li>
+<li><p><a class="reference internal" href="function_logging_8cpp_1a1eacf1d79fb71f930b2c86ea8aa935f1.html#exhale-function-logging-8cpp-1a1eacf1d79fb71f930b2c86ea8aa935f1"><span class="std std-ref">Function setErrorHandlers</span></a></p></li>
+<li><p><a class="reference internal" href="function_logging_8cpp_1aedd4f9e441fc046ae5f17635b8a1948f.html#exhale-function-logging-8cpp-1aedd4f9e441fc046ae5f17635b8a1948f"><span class="std std-ref">Function setLoggingLevel</span></a></p></li>
+<li><p><a class="reference internal" href="function_logging_8cpp_1af4103a53e834e19b8d95f67a2247186f.html#exhale-function-logging-8cpp-1af4103a53e834e19b8d95f67a2247186f"><span class="std std-ref">Function switchtoMultinodeLogging(std::string)</span></a></p></li>
+<li><p><a class="reference internal" href="function_logging_8cpp_1a6e00ce5c588ed2eee8647dcbd9afb42e.html#exhale-function-logging-8cpp-1a6e00ce5c588ed2eee8647dcbd9afb42e"><span class="std std-ref">Function unhandledException</span></a></p></li>
+</ul>
+</div>
+<div class="section" id="defines">
+<h2>Defines<a class="headerlink" href="#defines" title="Permalink to this headline">¶</a></h2>
+<ul class="simple">
+<li><p><a class="reference internal" href="define_logging_8cpp_1afb04fed0d9040c896727b9326d634570.html#exhale-define-logging-8cpp-1afb04fed0d9040c896727b9326d634570"><span class="std std-ref">Define noinline</span></a></p></li>
+</ul>
+</div>
+<div class="section" id="variables">
+<h2>Variables<a class="headerlink" href="#variables" title="Permalink to this headline">¶</a></h2>
+<ul class="simple">
+<li><p><a class="reference internal" href="variable_logging_8cpp_1ad9e255be0e802d3f0f9cfcd4bf10dcb4.html#exhale-variable-logging-8cpp-1ad9e255be0e802d3f0f9cfcd4bf10dcb4"><span class="std std-ref">Variable marian::throwExceptionOnAbort</span></a></p></li>
+</ul>
+</div>
+</div>
+
+
+           </div>
+           
+          </div>
+          <footer>
+
+  <hr/>
+
+  <div role="contentinfo">
+    <p>
+        &#169; Copyright 2021, Marian NMT Team.
+
+    </p>
+  </div>
+    
+    
+    
+    Built with <a href="https://www.sphinx-doc.org/">Sphinx</a> using a
+    
+    <a href="https://github.com/readthedocs/sphinx_rtd_theme">theme</a>
+    
+    provided by <a href="https://readthedocs.org">Read the Docs</a>. 
+
+</footer>
+        </div>
+      </div>
+
+    </section>
+
+  </div>
+  
+
+  <script type="text/javascript">
+      jQuery(function () {
+          SphinxRtdTheme.Navigation.enable(true);
+      });
+  </script>
+
+  
+  
+    
+   
+
+</body>
+</html>

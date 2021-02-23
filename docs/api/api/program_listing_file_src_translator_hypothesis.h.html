@@ -1,0 +1,321 @@
+
+
+<!DOCTYPE html>
+<html class="writer-html5" lang="en" >
+<head>
+  <meta charset="utf-8" />
+  
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  
+  <title>Program Listing for File hypothesis.h &mdash; Marian NMT v1.10.1 2021-02-23 documentation</title>
+  
+
+  
+  <link rel="stylesheet" href="../_static/css/theme.css" type="text/css" />
+  <link rel="stylesheet" href="../_static/pygments.css" type="text/css" />
+  <link rel="stylesheet" href="../_static/css/custom.css" type="text/css" />
+  <link rel="stylesheet" href="../_static/collapsible-lists/css/tree_view.css" type="text/css" />
+
+  
+  
+
+  
+  
+
+  
+    <link rel="canonical" href="http://marian-nmt.github.io/docs/api/api/program_listing_file_src_translator_hypothesis.h.html" />
+
+  
+  <!--[if lt IE 9]>
+    <script src="../_static/js/html5shiv.min.js"></script>
+  <![endif]-->
+  
+    
+      <script type="text/javascript" id="documentation_options" data-url_root="../" src="../_static/documentation_options.js"></script>
+        <script src="../_static/jquery.js"></script>
+        <script src="../_static/underscore.js"></script>
+        <script src="../_static/doctools.js"></script>
+        <script src="../_static/language_data.js"></script>
+        <script src="../_static/collapsible-lists/js/CollapsibleLists.compressed.js"></script>
+        <script src="../_static/collapsible-lists/js/apply-collapsible-lists.js"></script>
+    
+    <script type="text/javascript" src="../_static/js/theme.js"></script>
+
+    
+    <link rel="index" title="Index" href="../genindex.html" />
+    <link rel="search" title="Search" href="../search.html" /> 
+</head>
+
+<body class="wy-body-for-nav">
+
+   
+  <div class="wy-grid-for-nav">
+    
+    <nav data-toggle="wy-nav-shift" class="wy-nav-side">
+      <div class="wy-side-scroll">
+        <div class="wy-side-nav-search" >
+          
+
+          
+            <a href="../index.html" class="icon icon-home"> Marian NMT
+          
+
+          
+          </a>
+
+          
+            
+            
+              <div class="version">
+                v1.10.1
+              </div>
+            
+          
+
+          
+<div role="search">
+  <form id="rtd-search-form" class="wy-form" action="../search.html" method="get">
+    <input type="text" name="q" placeholder="Search docs" />
+    <input type="hidden" name="check_keywords" value="yes" />
+    <input type="hidden" name="area" value="default" />
+  </form>
+</div>
+
+          
+        </div>
+
+        
+        <div class="wy-menu wy-menu-vertical" data-spy="affix" role="navigation" aria-label="main navigation">
+          
+            
+            
+              
+            
+            
+              <p class="caption"><span class="caption-text">Contents:</span></p>
+<ul>
+<li class="toctree-l1"><a class="reference internal" href="../install.html">Installation</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../graph.html">Expression graphs</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../operators.html">Graph operations</a></li>
+<li class="toctree-l1"><a class="reference internal" href="library_index.html">Library API</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../contributing.html">How to contribute to Marian</a></li>
+</ul>
+
+            
+          
+        </div>
+        
+      </div>
+    </nav>
+
+    <section data-toggle="wy-nav-shift" class="wy-nav-content-wrap">
+
+      
+      <nav class="wy-nav-top" aria-label="top navigation">
+        
+          <i data-toggle="wy-nav-top" class="fa fa-bars"></i>
+          <a href="../index.html">Marian NMT</a>
+        
+      </nav>
+
+
+      <div class="wy-nav-content">
+        
+        <div class="rst-content">
+        
+          
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+<div role="navigation" aria-label="breadcrumbs navigation">
+
+  <ul class="wy-breadcrumbs">
+    
+      <li><a href="../index.html" class="icon icon-home"></a> &raquo;</li>
+        
+      <li>Program Listing for File hypothesis.h</li>
+    
+    
+      <li class="wy-breadcrumbs-aside">
+        
+          
+            <a href="../_sources/api/program_listing_file_src_translator_hypothesis.h.rst.txt" rel="nofollow"> View page source</a>
+          
+        
+      </li>
+    
+  </ul>
+
+  
+  <hr/>
+</div>
+          <div role="main" class="document" itemscope="itemscope" itemtype="http://schema.org/Article">
+           <div itemprop="articleBody">
+            
+  <div class="section" id="program-listing-for-file-hypothesis-h">
+<span id="program-listing-file-src-translator-hypothesis-h"></span><h1>Program Listing for File hypothesis.h<a class="headerlink" href="#program-listing-for-file-hypothesis-h" title="Permalink to this headline">¶</a></h1>
+<p>↰ <a class="reference internal" href="file_src_translator_hypothesis.h.html#file-src-translator-hypothesis-h"><span class="std std-ref">Return to documentation for file</span></a> (<code class="docutils literal notranslate"><span class="pre">src/translator/hypothesis.h</span></code>)</p>
+<div class="highlight-cpp notranslate"><div class="highlight"><pre><span></span><span class="cp">#pragma once</span>
+<span class="cp">#include</span> <span class="cpf">&lt;memory&gt;</span><span class="cp"></span>
+
+<span class="cp">#include</span> <span class="cpf">&quot;common/definitions.h&quot;</span><span class="cp"></span>
+<span class="cp">#include</span> <span class="cpf">&quot;data/alignment.h&quot;</span><span class="cp"></span>
+
+<span class="k">namespace</span> <span class="n">marian</span> <span class="p">{</span>
+
+<span class="c1">// one single (partial or full) hypothesis in beam search</span>
+<span class="c1">// key elements:</span>
+<span class="c1">//  - the word that this hyp ends with</span>
+<span class="c1">//  - the aggregate score up to and including the word</span>
+<span class="c1">//  - back pointer to previous hypothesis for traceback</span>
+<span class="k">class</span> <span class="nc">Hypothesis</span> <span class="p">{</span>
+<span class="k">public</span><span class="o">:</span>
+  <span class="k">typedef</span> <span class="n">IPtr</span><span class="o">&lt;</span><span class="n">Hypothesis</span><span class="o">&gt;</span> <span class="n">PtrType</span><span class="p">;</span>
+
+<span class="k">private</span><span class="o">:</span>
+  <span class="c1">// Constructors are private, use Hypothesis::New(...)</span>
+
+  <span class="n">Hypothesis</span><span class="p">()</span> <span class="o">:</span> <span class="n">prevHyp_</span><span class="p">(</span><span class="k">nullptr</span><span class="p">),</span> <span class="n">prevBeamHypIdx_</span><span class="p">(</span><span class="mi">0</span><span class="p">),</span> <span class="n">word_</span><span class="p">(</span><span class="n">Word</span><span class="o">::</span><span class="n">ZERO</span><span class="p">),</span> <span class="n">pathScore_</span><span class="p">(</span><span class="mf">0.0</span><span class="p">)</span> <span class="p">{}</span>
+
+  <span class="n">Hypothesis</span><span class="p">(</span><span class="k">const</span> <span class="n">PtrType</span> <span class="n">prevHyp</span><span class="p">,</span>
+             <span class="n">Word</span> <span class="n">word</span><span class="p">,</span>
+             <span class="kt">size_t</span> <span class="n">prevBeamHypIdx</span><span class="p">,</span> <span class="c1">// beam-hyp index that this hypothesis originated from</span>
+             <span class="kt">float</span> <span class="n">pathScore</span><span class="p">)</span>
+      <span class="o">:</span> <span class="n">prevHyp_</span><span class="p">(</span><span class="n">prevHyp</span><span class="p">),</span> <span class="n">prevBeamHypIdx_</span><span class="p">(</span><span class="n">prevBeamHypIdx</span><span class="p">),</span> <span class="n">word_</span><span class="p">(</span><span class="n">word</span><span class="p">),</span> <span class="n">pathScore_</span><span class="p">(</span><span class="n">pathScore</span><span class="p">)</span> <span class="p">{}</span>
+
+<span class="k">public</span><span class="o">:</span>
+ <span class="c1">// Use this whenever creating a pointer to MemoryPiece</span>
+ <span class="k">template</span> <span class="o">&lt;</span><span class="k">class</span> <span class="p">...</span><span class="n">Args</span><span class="o">&gt;</span>
+ <span class="k">static</span> <span class="n">PtrType</span> <span class="n">New</span><span class="p">(</span><span class="n">Args</span><span class="o">&amp;&amp;</span> <span class="p">...</span><span class="n">args</span><span class="p">)</span> <span class="p">{</span>
+   <span class="k">return</span> <span class="nf">PtrType</span><span class="p">(</span><span class="k">new</span> <span class="n">Hypothesis</span><span class="p">(</span><span class="n">std</span><span class="o">::</span><span class="n">forward</span><span class="o">&lt;</span><span class="n">Args</span><span class="o">&gt;</span><span class="p">(</span><span class="n">args</span><span class="p">)...));</span>
+ <span class="p">}</span>
+
+  <span class="k">const</span> <span class="n">PtrType</span> <span class="n">getPrevHyp</span><span class="p">()</span> <span class="k">const</span> <span class="p">{</span> <span class="k">return</span> <span class="n">prevHyp_</span><span class="p">;</span> <span class="p">}</span>
+
+  <span class="n">Word</span> <span class="n">getWord</span><span class="p">()</span> <span class="k">const</span> <span class="p">{</span> <span class="k">return</span> <span class="n">word_</span><span class="p">;</span> <span class="p">}</span>
+
+  <span class="kt">size_t</span> <span class="n">getPrevStateIndex</span><span class="p">()</span> <span class="k">const</span> <span class="p">{</span> <span class="k">return</span> <span class="n">prevBeamHypIdx_</span><span class="p">;</span> <span class="p">}</span>
+
+  <span class="kt">float</span> <span class="n">getPathScore</span><span class="p">()</span> <span class="k">const</span> <span class="p">{</span> <span class="k">return</span> <span class="n">pathScore_</span><span class="p">;</span> <span class="p">}</span>
+
+  <span class="k">const</span> <span class="n">std</span><span class="o">::</span><span class="n">vector</span><span class="o">&lt;</span><span class="kt">float</span><span class="o">&gt;&amp;</span> <span class="n">getScoreBreakdown</span><span class="p">()</span> <span class="p">{</span> <span class="k">return</span> <span class="n">scoreBreakdown_</span><span class="p">;</span> <span class="p">}</span>
+  <span class="kt">void</span> <span class="n">setScoreBreakdown</span><span class="p">(</span><span class="k">const</span> <span class="n">std</span><span class="o">::</span><span class="n">vector</span><span class="o">&lt;</span><span class="kt">float</span><span class="o">&gt;&amp;</span> <span class="n">scoreBreakdown</span><span class="p">)</span> <span class="p">{</span> <span class="n">scoreBreakdown_</span> <span class="o">=</span> <span class="n">scoreBreakdown</span><span class="p">;</span> <span class="p">}</span>
+
+  <span class="k">const</span> <span class="n">std</span><span class="o">::</span><span class="n">vector</span><span class="o">&lt;</span><span class="kt">float</span><span class="o">&gt;&amp;</span> <span class="n">getAlignment</span><span class="p">()</span> <span class="p">{</span> <span class="k">return</span> <span class="n">alignment_</span><span class="p">;</span> <span class="p">}</span>
+  <span class="kt">void</span> <span class="n">setAlignment</span><span class="p">(</span><span class="k">const</span> <span class="n">std</span><span class="o">::</span><span class="n">vector</span><span class="o">&lt;</span><span class="kt">float</span><span class="o">&gt;&amp;</span> <span class="n">align</span><span class="p">)</span> <span class="p">{</span> <span class="n">alignment_</span> <span class="o">=</span> <span class="n">align</span><span class="p">;</span> <span class="p">};</span>
+
+  <span class="c1">// trace back paths referenced from this hypothesis</span>
+  <span class="n">Words</span> <span class="nf">tracebackWords</span><span class="p">()</span> <span class="p">{</span>
+    <span class="n">Words</span> <span class="n">targetWords</span><span class="p">;</span>
+    <span class="k">for</span><span class="p">(</span><span class="k">auto</span> <span class="n">hyp</span> <span class="o">=</span> <span class="k">this</span><span class="p">;</span> <span class="n">hyp</span><span class="o">-&gt;</span><span class="n">getPrevHyp</span><span class="p">();</span> <span class="n">hyp</span> <span class="o">=</span> <span class="n">hyp</span><span class="o">-&gt;</span><span class="n">getPrevHyp</span><span class="p">().</span><span class="n">get</span><span class="p">())</span> <span class="p">{</span>
+      <span class="n">targetWords</span><span class="p">.</span><span class="n">push_back</span><span class="p">(</span><span class="n">hyp</span><span class="o">-&gt;</span><span class="n">getWord</span><span class="p">());</span>
+    <span class="p">}</span>
+    <span class="n">std</span><span class="o">::</span><span class="n">reverse</span><span class="p">(</span><span class="n">targetWords</span><span class="p">.</span><span class="n">begin</span><span class="p">(),</span> <span class="n">targetWords</span><span class="p">.</span><span class="n">end</span><span class="p">());</span>
+    <span class="k">return</span> <span class="n">targetWords</span><span class="p">;</span>
+  <span class="p">}</span>
+
+  <span class="c1">// calculate word-level scores for each target word by de-aggregating the path score</span>
+  <span class="n">std</span><span class="o">::</span><span class="n">vector</span><span class="o">&lt;</span><span class="kt">float</span><span class="o">&gt;</span> <span class="n">tracebackWordScores</span><span class="p">()</span> <span class="p">{</span>
+    <span class="n">std</span><span class="o">::</span><span class="n">vector</span><span class="o">&lt;</span><span class="kt">float</span><span class="o">&gt;</span> <span class="n">scores</span><span class="p">;</span>
+    <span class="c1">// traverse hypotheses backward</span>
+    <span class="k">for</span><span class="p">(</span><span class="k">auto</span> <span class="n">hyp</span> <span class="o">=</span> <span class="k">this</span><span class="p">;</span> <span class="n">hyp</span><span class="o">-&gt;</span><span class="n">getPrevHyp</span><span class="p">();</span> <span class="n">hyp</span> <span class="o">=</span> <span class="n">hyp</span><span class="o">-&gt;</span><span class="n">getPrevHyp</span><span class="p">().</span><span class="n">get</span><span class="p">())</span> <span class="p">{</span>
+      <span class="c1">// a path score is a cumulative score including scores from all preceding hypotheses (words),</span>
+      <span class="c1">// so calculate a word-level score by subtracting the previous path score from the current path score</span>
+      <span class="k">auto</span> <span class="n">prevPathScore</span> <span class="o">=</span> <span class="n">hyp</span><span class="o">-&gt;</span><span class="n">getPrevHyp</span><span class="p">()</span> <span class="o">?</span> <span class="n">hyp</span><span class="o">-&gt;</span><span class="n">getPrevHyp</span><span class="p">().</span><span class="n">get</span><span class="p">()</span><span class="o">-&gt;</span><span class="nl">pathScore_</span> <span class="p">:</span> <span class="mf">0.f</span><span class="p">;</span>
+      <span class="n">scores</span><span class="p">.</span><span class="n">push_back</span><span class="p">(</span><span class="n">hyp</span><span class="o">-&gt;</span><span class="n">pathScore_</span> <span class="o">-</span> <span class="n">prevPathScore</span><span class="p">);</span>
+    <span class="p">}</span>
+    <span class="n">std</span><span class="o">::</span><span class="n">reverse</span><span class="p">(</span><span class="n">scores</span><span class="p">.</span><span class="n">begin</span><span class="p">(),</span> <span class="n">scores</span><span class="p">.</span><span class="n">end</span><span class="p">());</span>
+    <span class="k">return</span> <span class="n">scores</span><span class="p">;</span>
+  <span class="p">}</span>
+
+  <span class="c1">// get soft alignments [t][s] -&gt; P(s|t) for each target word starting from the hyp one</span>
+  <span class="k">typedef</span> <span class="n">data</span><span class="o">::</span><span class="n">SoftAlignment</span> <span class="n">SoftAlignment</span><span class="p">;</span>
+  <span class="n">SoftAlignment</span> <span class="nf">tracebackAlignment</span><span class="p">()</span> <span class="p">{</span>
+    <span class="n">SoftAlignment</span> <span class="n">align</span><span class="p">;</span>
+    <span class="k">for</span><span class="p">(</span><span class="k">auto</span> <span class="n">hyp</span> <span class="o">=</span> <span class="k">this</span><span class="p">;</span> <span class="n">hyp</span><span class="o">-&gt;</span><span class="n">getPrevHyp</span><span class="p">();</span> <span class="n">hyp</span> <span class="o">=</span> <span class="n">hyp</span><span class="o">-&gt;</span><span class="n">getPrevHyp</span><span class="p">().</span><span class="n">get</span><span class="p">())</span> <span class="p">{</span>
+      <span class="n">align</span><span class="p">.</span><span class="n">push_back</span><span class="p">(</span><span class="n">hyp</span><span class="o">-&gt;</span><span class="n">getAlignment</span><span class="p">());</span>
+    <span class="p">}</span>
+    <span class="n">std</span><span class="o">::</span><span class="n">reverse</span><span class="p">(</span><span class="n">align</span><span class="p">.</span><span class="n">begin</span><span class="p">(),</span> <span class="n">align</span><span class="p">.</span><span class="n">end</span><span class="p">());</span>
+    <span class="k">return</span> <span class="n">align</span><span class="p">;</span>  <span class="c1">// [t][s] -&gt; P(s|t)</span>
+  <span class="p">}</span>
+
+<span class="k">private</span><span class="o">:</span>
+  <span class="k">const</span> <span class="n">PtrType</span> <span class="n">prevHyp_</span><span class="p">;</span>
+  <span class="k">const</span> <span class="kt">size_t</span> <span class="n">prevBeamHypIdx_</span><span class="p">;</span>
+  <span class="k">const</span> <span class="n">Word</span> <span class="n">word_</span><span class="p">;</span>
+  <span class="k">const</span> <span class="kt">float</span> <span class="n">pathScore_</span><span class="p">;</span>
+
+  <span class="n">std</span><span class="o">::</span><span class="n">vector</span><span class="o">&lt;</span><span class="kt">float</span><span class="o">&gt;</span> <span class="n">scoreBreakdown_</span><span class="p">;</span> <span class="c1">// [num scorers]</span>
+  <span class="n">std</span><span class="o">::</span><span class="n">vector</span><span class="o">&lt;</span><span class="kt">float</span><span class="o">&gt;</span> <span class="n">alignment_</span><span class="p">;</span>
+
+  <span class="n">ENABLE_INTRUSIVE_PTR</span><span class="p">(</span><span class="n">Hypothesis</span><span class="p">)</span>
+<span class="p">};</span>
+
+<span class="k">typedef</span> <span class="n">std</span><span class="o">::</span><span class="n">vector</span><span class="o">&lt;</span><span class="n">IPtr</span><span class="o">&lt;</span><span class="n">Hypothesis</span><span class="o">&gt;&gt;</span> <span class="n">Beam</span><span class="p">;</span>                <span class="c1">// Beam = vector [beamSize] of hypotheses</span>
+<span class="k">typedef</span> <span class="n">std</span><span class="o">::</span><span class="n">vector</span><span class="o">&lt;</span><span class="n">Beam</span><span class="o">&gt;</span> <span class="n">Beams</span><span class="p">;</span>                          <span class="c1">// Beams = vector [batchDim] of vector [beamSize] of hypotheses</span>
+<span class="k">typedef</span> <span class="n">std</span><span class="o">::</span><span class="n">tuple</span><span class="o">&lt;</span><span class="n">Words</span><span class="p">,</span> <span class="n">IPtr</span><span class="o">&lt;</span><span class="n">Hypothesis</span><span class="o">&gt;</span><span class="p">,</span> <span class="kt">float</span><span class="o">&gt;</span> <span class="n">Result</span><span class="p">;</span> <span class="c1">// (word ids for hyp, hyp, normalized sentence score for hyp)</span>
+<span class="k">typedef</span> <span class="n">std</span><span class="o">::</span><span class="n">vector</span><span class="o">&lt;</span><span class="n">Result</span><span class="o">&gt;</span> <span class="n">NBestList</span><span class="p">;</span>                    <span class="c1">// sorted vector of (word ids, hyp, sent score) tuples</span>
+<span class="p">}</span>  <span class="c1">// namespace marian</span>
+</pre></div>
+</div>
+</div>
+
+
+           </div>
+           
+          </div>
+          <footer>
+
+  <hr/>
+
+  <div role="contentinfo">
+    <p>
+        &#169; Copyright 2021, Marian NMT Team.
+
+    </p>
+  </div>
+    
+    
+    
+    Built with <a href="https://www.sphinx-doc.org/">Sphinx</a> using a
+    
+    <a href="https://github.com/readthedocs/sphinx_rtd_theme">theme</a>
+    
+    provided by <a href="https://readthedocs.org">Read the Docs</a>. 
+
+</footer>
+        </div>
+      </div>
+
+    </section>
+
+  </div>
+  
+
+  <script type="text/javascript">
+      jQuery(function () {
+          SphinxRtdTheme.Navigation.enable(true);
+      });
+  </script>
+
+  
+  
+    
+   
+
+</body>
+</html>

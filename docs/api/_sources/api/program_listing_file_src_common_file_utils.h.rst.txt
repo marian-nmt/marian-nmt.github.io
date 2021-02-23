@@ -1,0 +1,30 @@
+
+.. _program_listing_file_src_common_file_utils.h:
+
+Program Listing for File file_utils.h
+=====================================
+
+|exhale_lsh| :ref:`Return to documentation for file <file_src_common_file_utils.h>` (``src/common/file_utils.h``)
+
+.. |exhale_lsh| unicode:: U+021B0 .. UPWARDS ARROW WITH TIP LEFTWARDS
+
+.. code-block:: cpp
+
+   #pragma once
+   
+   #include <string>
+   #include <vector>
+   
+   #include "common/file_stream.h"
+   
+   namespace marian {
+   namespace fileutils {
+   
+   void cut(const std::string& tsvIn,
+            Ptr<io::TemporaryFile> tsvOut,
+            const std::vector<size_t>& fields,
+            size_t numFields,
+            const std::string& sep = "\t");
+   
+   }  // namespace utils
+   }  // namespace marian

@@ -1,0 +1,293 @@
+
+
+<!DOCTYPE html>
+<html class="writer-html5" lang="en" >
+<head>
+  <meta charset="utf-8" />
+  
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  
+  <title>Class CrossEntropyLoss &mdash; Marian NMT v1.10.1 2021-02-23 documentation</title>
+  
+
+  
+  <link rel="stylesheet" href="../_static/css/theme.css" type="text/css" />
+  <link rel="stylesheet" href="../_static/pygments.css" type="text/css" />
+  <link rel="stylesheet" href="../_static/css/custom.css" type="text/css" />
+  <link rel="stylesheet" href="../_static/collapsible-lists/css/tree_view.css" type="text/css" />
+
+  
+  
+
+  
+  
+
+  
+    <link rel="canonical" href="http://marian-nmt.github.io/docs/api/api/classmarian_1_1CrossEntropyLoss.html" />
+
+  
+  <!--[if lt IE 9]>
+    <script src="../_static/js/html5shiv.min.js"></script>
+  <![endif]-->
+  
+    
+      <script type="text/javascript" id="documentation_options" data-url_root="../" src="../_static/documentation_options.js"></script>
+        <script src="../_static/jquery.js"></script>
+        <script src="../_static/underscore.js"></script>
+        <script src="../_static/doctools.js"></script>
+        <script src="../_static/language_data.js"></script>
+        <script src="../_static/collapsible-lists/js/CollapsibleLists.compressed.js"></script>
+        <script src="../_static/collapsible-lists/js/apply-collapsible-lists.js"></script>
+    
+    <script type="text/javascript" src="../_static/js/theme.js"></script>
+
+    
+    <link rel="index" title="Index" href="../genindex.html" />
+    <link rel="search" title="Search" href="../search.html" />
+    <link rel="next" title="Class CrossEntropyNodeOp" href="classmarian_1_1CrossEntropyNodeOp.html" />
+    <link rel="prev" title="Class WrappedDevice" href="classmarian_1_1cpu_1_1WrappedDevice.html" /> 
+</head>
+
+<body class="wy-body-for-nav">
+
+   
+  <div class="wy-grid-for-nav">
+    
+    <nav data-toggle="wy-nav-shift" class="wy-nav-side">
+      <div class="wy-side-scroll">
+        <div class="wy-side-nav-search" >
+          
+
+          
+            <a href="../index.html" class="icon icon-home"> Marian NMT
+          
+
+          
+          </a>
+
+          
+            
+            
+              <div class="version">
+                v1.10.1
+              </div>
+            
+          
+
+          
+<div role="search">
+  <form id="rtd-search-form" class="wy-form" action="../search.html" method="get">
+    <input type="text" name="q" placeholder="Search docs" />
+    <input type="hidden" name="check_keywords" value="yes" />
+    <input type="hidden" name="area" value="default" />
+  </form>
+</div>
+
+          
+        </div>
+
+        
+        <div class="wy-menu wy-menu-vertical" data-spy="affix" role="navigation" aria-label="main navigation">
+          
+            
+            
+              
+            
+            
+              <p class="caption"><span class="caption-text">Contents:</span></p>
+<ul>
+<li class="toctree-l1"><a class="reference internal" href="../install.html">Installation</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../graph.html">Expression graphs</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../operators.html">Graph operations</a></li>
+<li class="toctree-l1"><a class="reference internal" href="library_index.html">Library API</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../contributing.html">How to contribute to Marian</a></li>
+</ul>
+
+            
+          
+        </div>
+        
+      </div>
+    </nav>
+
+    <section data-toggle="wy-nav-shift" class="wy-nav-content-wrap">
+
+      
+      <nav class="wy-nav-top" aria-label="top navigation">
+        
+          <i data-toggle="wy-nav-top" class="fa fa-bars"></i>
+          <a href="../index.html">Marian NMT</a>
+        
+      </nav>
+
+
+      <div class="wy-nav-content">
+        
+        <div class="rst-content">
+        
+          
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+<div role="navigation" aria-label="breadcrumbs navigation">
+
+  <ul class="wy-breadcrumbs">
+    
+      <li><a href="../index.html" class="icon icon-home"></a> &raquo;</li>
+        
+          <li><a href="library_index.html">Library API</a> &raquo;</li>
+        
+      <li>Class CrossEntropyLoss</li>
+    
+    
+      <li class="wy-breadcrumbs-aside">
+        
+          
+            <a href="../_sources/api/classmarian_1_1CrossEntropyLoss.rst.txt" rel="nofollow"> View page source</a>
+          
+        
+      </li>
+    
+  </ul>
+
+  
+  <hr/>
+</div>
+          <div role="main" class="document" itemscope="itemscope" itemtype="http://schema.org/Article">
+           <div itemprop="articleBody">
+            
+  <div class="section" id="class-crossentropyloss">
+<span id="exhale-class-classmarian-1-1crossentropyloss"></span><h1>Class CrossEntropyLoss<a class="headerlink" href="#class-crossentropyloss" title="Permalink to this headline">¶</a></h1>
+<ul class="simple">
+<li><p>Defined in <a class="reference internal" href="file_src_layers_loss.h.html#file-src-layers-loss-h"><span class="std std-ref">File loss.h</span></a></p></li>
+</ul>
+<div class="section" id="inheritance-relationships">
+<h2>Inheritance Relationships<a class="headerlink" href="#inheritance-relationships" title="Permalink to this headline">¶</a></h2>
+<div class="section" id="base-type">
+<h3>Base Type<a class="headerlink" href="#base-type" title="Permalink to this headline">¶</a></h3>
+<ul class="simple">
+<li><p><code class="docutils literal notranslate"><span class="pre">public</span> <span class="pre">marian::LabelwiseLoss</span></code> (<a class="reference internal" href="classmarian_1_1LabelwiseLoss.html#exhale-class-classmarian-1-1labelwiseloss"><span class="std std-ref">Class LabelwiseLoss</span></a>)</p></li>
+</ul>
+</div>
+<div class="section" id="derived-types">
+<h3>Derived Types<a class="headerlink" href="#derived-types" title="Permalink to this headline">¶</a></h3>
+<ul class="simple">
+<li><p><code class="docutils literal notranslate"><span class="pre">public</span> <span class="pre">marian::RescorerLoss</span></code> (<a class="reference internal" href="classmarian_1_1RescorerLoss.html#exhale-class-classmarian-1-1rescorerloss"><span class="std std-ref">Class RescorerLoss</span></a>)</p></li>
+<li><p><code class="docutils literal notranslate"><span class="pre">public</span> <span class="pre">marian::SequenceUnlikelihoodLoss</span></code> (<a class="reference internal" href="classmarian_1_1SequenceUnlikelihoodLoss.html#exhale-class-classmarian-1-1sequenceunlikelihoodloss"><span class="std std-ref">Class SequenceUnlikelihoodLoss</span></a>)</p></li>
+</ul>
+</div>
+</div>
+<div class="section" id="class-documentation">
+<h2>Class Documentation<a class="headerlink" href="#class-documentation" title="Permalink to this headline">¶</a></h2>
+<dl class="class">
+<dt id="_CPPv4N6marian16CrossEntropyLossE">
+<span id="_CPPv3N6marian16CrossEntropyLossE"></span><span id="_CPPv2N6marian16CrossEntropyLossE"></span><span id="marian::CrossEntropyLoss"></span><span class="target" id="classmarian_1_1CrossEntropyLoss"></span><em class="property">class </em><code class="sig-name descname">CrossEntropyLoss</code> : <em class="property">public</em> marian::<a class="reference internal" href="classmarian_1_1LabelwiseLoss.html#_CPPv4N6marian13LabelwiseLossE" title="marian::LabelwiseLoss">LabelwiseLoss</a><a class="headerlink" href="#_CPPv4N6marian16CrossEntropyLossE" title="Permalink to this definition">¶</a><br /></dt>
+<dd><p>Cross entropy loss across last axis, summed up over batch and time dimensions. </p>
+<p>Subclassed by <a class="reference internal" href="classmarian_1_1RescorerLoss.html#classmarian_1_1RescorerLoss"><span class="std std-ref">marian::RescorerLoss</span></a>, <a class="reference internal" href="classmarian_1_1SequenceUnlikelihoodLoss.html#classmarian_1_1SequenceUnlikelihoodLoss"><span class="std std-ref">marian::SequenceUnlikelihoodLoss</span></a></p>
+<div class="breathe-sectiondef docutils container">
+<p class="breathe-sectiondef-title rubric">Public Functions</p>
+<dl class="function">
+<dt id="_CPPv4N6marian16CrossEntropyLoss16CrossEntropyLossEff">
+<span id="_CPPv3N6marian16CrossEntropyLoss16CrossEntropyLossEff"></span><span id="_CPPv2N6marian16CrossEntropyLoss16CrossEntropyLossEff"></span><span id="marian::CrossEntropyLoss::CrossEntropyLoss__float.float"></span><span class="target" id="classmarian_1_1CrossEntropyLoss_1af894386ea08381538b20a5c1f6c6f81a"></span><code class="sig-name descname">CrossEntropyLoss</code><span class="sig-paren">(</span>float <em>labelSmoothing</em>, float <em>factorWeight</em><span class="sig-paren">)</span><a class="headerlink" href="#_CPPv4N6marian16CrossEntropyLoss16CrossEntropyLossEff" title="Permalink to this definition">¶</a><br /></dt>
+<dd></dd></dl>
+
+<dl class="function">
+<dt id="_CPPv4N6marian16CrossEntropyLoss16CrossEntropyLossERKNSt6vectorIiEEff">
+<span id="_CPPv3N6marian16CrossEntropyLoss16CrossEntropyLossERKNSt6vectorIiEEff"></span><span id="_CPPv2N6marian16CrossEntropyLoss16CrossEntropyLossERKNSt6vectorIiEEff"></span><span id="marian::CrossEntropyLoss::CrossEntropyLoss__std::vector:i:CR.float.float"></span><span class="target" id="classmarian_1_1CrossEntropyLoss_1a68a320e4e84621be96ebee04ed24b6ee"></span><code class="sig-name descname">CrossEntropyLoss</code><span class="sig-paren">(</span><em class="property">const</em> <a class="reference internal" href="function_expression__operators_8cpp_1af4e69a5f7167b63522135a1f6b8a5dd8.html#_CPPv4N6marianStE4Expri" title="marian::std">std</a>::vector&lt;int&gt; &amp;<em>axes</em>, float <em>labelSmoothing</em>, float <em>factorWeight</em><span class="sig-paren">)</span><a class="headerlink" href="#_CPPv4N6marian16CrossEntropyLoss16CrossEntropyLossERKNSt6vectorIiEEff" title="Permalink to this definition">¶</a><br /></dt>
+<dd></dd></dl>
+
+<dl class="function">
+<dt id="_CPPv4N6marian16CrossEntropyLossD0Ev">
+<span id="_CPPv3N6marian16CrossEntropyLossD0Ev"></span><span id="_CPPv2N6marian16CrossEntropyLossD0Ev"></span><span id="marian::CrossEntropyLoss::~CrossEntropyLoss"></span><span class="target" id="classmarian_1_1CrossEntropyLoss_1afccfaf9f650fc298043f92e300f35deb"></span><em class="property">virtual</em> <code class="sig-name descname">~CrossEntropyLoss</code><span class="sig-paren">(</span><span class="sig-paren">)</span><a class="headerlink" href="#_CPPv4N6marian16CrossEntropyLossD0Ev" title="Permalink to this definition">¶</a><br /></dt>
+<dd></dd></dl>
+
+</div>
+<div class="breathe-sectiondef docutils container">
+<p class="breathe-sectiondef-title rubric">Protected Functions</p>
+<dl class="function">
+<dt id="_CPPv4N6marian16CrossEntropyLoss7computeE6LogitsRK5Words4Expr4Expr">
+<span id="_CPPv3N6marian16CrossEntropyLoss7computeE6LogitsRK5Words4Expr4Expr"></span><span id="_CPPv2N6marian16CrossEntropyLoss7computeE6LogitsRK5Words4Expr4Expr"></span><span id="marian::CrossEntropyLoss::compute__Logits.WordsCR.Expr.Expr"></span><span class="target" id="classmarian_1_1CrossEntropyLoss_1aae3751d3cef97bc48c15a4f7afd606a4"></span><em class="property">virtual</em> <a class="reference internal" href="typedef_definitions_8h_1ac8ecc2cc66a7afcc6da94a9bbde5eaa7.html#_CPPv4N6marian4ExprE" title="marian::Expr">Expr</a> <code class="sig-name descname">compute</code><span class="sig-paren">(</span><a class="reference internal" href="classmarian_1_1Logits.html#_CPPv4N6marian6LogitsE" title="marian::Logits">Logits</a> <em>logits</em>, <em class="property">const</em> <a class="reference internal" href="typedef_data_2types_8h_1a81f026d9529d47fd44a64a27954775fd.html#_CPPv4N6marian5WordsE" title="marian::Words">Words</a> &amp;<em>labels</em>, <a class="reference internal" href="typedef_definitions_8h_1ac8ecc2cc66a7afcc6da94a9bbde5eaa7.html#_CPPv4N6marian4ExprE" title="marian::Expr">Expr</a> <em>mask</em> = nullptr, <a class="reference internal" href="typedef_definitions_8h_1ac8ecc2cc66a7afcc6da94a9bbde5eaa7.html#_CPPv4N6marian4ExprE" title="marian::Expr">Expr</a> <em>labelWeights</em> = nullptr<span class="sig-paren">)</span><a class="headerlink" href="#_CPPv4N6marian16CrossEntropyLoss7computeE6LogitsRK5Words4Expr4Expr" title="Permalink to this definition">¶</a><br /></dt>
+<dd></dd></dl>
+
+</div>
+<div class="breathe-sectiondef docutils container">
+<p class="breathe-sectiondef-title rubric">Protected Attributes</p>
+<dl class="member">
+<dt id="_CPPv4N6marian16CrossEntropyLoss15labelSmoothing_E">
+<span id="_CPPv3N6marian16CrossEntropyLoss15labelSmoothing_E"></span><span id="_CPPv2N6marian16CrossEntropyLoss15labelSmoothing_E"></span><span id="marian::CrossEntropyLoss::labelSmoothing___float"></span><span class="target" id="classmarian_1_1CrossEntropyLoss_1a8c2074dab20fbcd9998c19773a300ce1"></span>float <code class="sig-name descname">labelSmoothing_</code><a class="headerlink" href="#_CPPv4N6marian16CrossEntropyLoss15labelSmoothing_E" title="Permalink to this definition">¶</a><br /></dt>
+<dd></dd></dl>
+
+<dl class="member">
+<dt id="_CPPv4N6marian16CrossEntropyLoss13factorWeight_E">
+<span id="_CPPv3N6marian16CrossEntropyLoss13factorWeight_E"></span><span id="_CPPv2N6marian16CrossEntropyLoss13factorWeight_E"></span><span id="marian::CrossEntropyLoss::factorWeight___float"></span><span class="target" id="classmarian_1_1CrossEntropyLoss_1ab69674df0707447527bd859ff51e471d"></span>float <code class="sig-name descname">factorWeight_</code><a class="headerlink" href="#_CPPv4N6marian16CrossEntropyLoss13factorWeight_E" title="Permalink to this definition">¶</a><br /></dt>
+<dd></dd></dl>
+
+</div>
+</dd></dl>
+
+</div>
+</div>
+
+
+           </div>
+           
+          </div>
+          <footer>
+    <div class="rst-footer-buttons" role="navigation" aria-label="footer navigation">
+        <a href="classmarian_1_1CrossEntropyNodeOp.html" class="btn btn-neutral float-right" title="Class CrossEntropyNodeOp" accesskey="n" rel="next">Next <span class="fa fa-arrow-circle-right" aria-hidden="true"></span></a>
+        <a href="classmarian_1_1cpu_1_1WrappedDevice.html" class="btn btn-neutral float-left" title="Class WrappedDevice" accesskey="p" rel="prev"><span class="fa fa-arrow-circle-left" aria-hidden="true"></span> Previous</a>
+    </div>
+
+  <hr/>
+
+  <div role="contentinfo">
+    <p>
+        &#169; Copyright 2021, Marian NMT Team.
+
+    </p>
+  </div>
+    
+    
+    
+    Built with <a href="https://www.sphinx-doc.org/">Sphinx</a> using a
+    
+    <a href="https://github.com/readthedocs/sphinx_rtd_theme">theme</a>
+    
+    provided by <a href="https://readthedocs.org">Read the Docs</a>. 
+
+</footer>
+        </div>
+      </div>
+
+    </section>
+
+  </div>
+  
+
+  <script type="text/javascript">
+      jQuery(function () {
+          SphinxRtdTheme.Navigation.enable(true);
+      });
+  </script>
+
+  
+  
+    
+   
+
+</body>
+</html>

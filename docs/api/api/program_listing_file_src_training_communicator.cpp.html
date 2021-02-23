@@ -1,0 +1,429 @@
+
+
+<!DOCTYPE html>
+<html class="writer-html5" lang="en" >
+<head>
+  <meta charset="utf-8" />
+  
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  
+  <title>Program Listing for File communicator.cpp &mdash; Marian NMT v1.10.1 2021-02-23 documentation</title>
+  
+
+  
+  <link rel="stylesheet" href="../_static/css/theme.css" type="text/css" />
+  <link rel="stylesheet" href="../_static/pygments.css" type="text/css" />
+  <link rel="stylesheet" href="../_static/css/custom.css" type="text/css" />
+  <link rel="stylesheet" href="../_static/collapsible-lists/css/tree_view.css" type="text/css" />
+
+  
+  
+
+  
+  
+
+  
+    <link rel="canonical" href="http://marian-nmt.github.io/docs/api/api/program_listing_file_src_training_communicator.cpp.html" />
+
+  
+  <!--[if lt IE 9]>
+    <script src="../_static/js/html5shiv.min.js"></script>
+  <![endif]-->
+  
+    
+      <script type="text/javascript" id="documentation_options" data-url_root="../" src="../_static/documentation_options.js"></script>
+        <script src="../_static/jquery.js"></script>
+        <script src="../_static/underscore.js"></script>
+        <script src="../_static/doctools.js"></script>
+        <script src="../_static/language_data.js"></script>
+        <script src="../_static/collapsible-lists/js/CollapsibleLists.compressed.js"></script>
+        <script src="../_static/collapsible-lists/js/apply-collapsible-lists.js"></script>
+    
+    <script type="text/javascript" src="../_static/js/theme.js"></script>
+
+    
+    <link rel="index" title="Index" href="../genindex.html" />
+    <link rel="search" title="Search" href="../search.html" /> 
+</head>
+
+<body class="wy-body-for-nav">
+
+   
+  <div class="wy-grid-for-nav">
+    
+    <nav data-toggle="wy-nav-shift" class="wy-nav-side">
+      <div class="wy-side-scroll">
+        <div class="wy-side-nav-search" >
+          
+
+          
+            <a href="../index.html" class="icon icon-home"> Marian NMT
+          
+
+          
+          </a>
+
+          
+            
+            
+              <div class="version">
+                v1.10.1
+              </div>
+            
+          
+
+          
+<div role="search">
+  <form id="rtd-search-form" class="wy-form" action="../search.html" method="get">
+    <input type="text" name="q" placeholder="Search docs" />
+    <input type="hidden" name="check_keywords" value="yes" />
+    <input type="hidden" name="area" value="default" />
+  </form>
+</div>
+
+          
+        </div>
+
+        
+        <div class="wy-menu wy-menu-vertical" data-spy="affix" role="navigation" aria-label="main navigation">
+          
+            
+            
+              
+            
+            
+              <p class="caption"><span class="caption-text">Contents:</span></p>
+<ul>
+<li class="toctree-l1"><a class="reference internal" href="../install.html">Installation</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../graph.html">Expression graphs</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../operators.html">Graph operations</a></li>
+<li class="toctree-l1"><a class="reference internal" href="library_index.html">Library API</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../contributing.html">How to contribute to Marian</a></li>
+</ul>
+
+            
+          
+        </div>
+        
+      </div>
+    </nav>
+
+    <section data-toggle="wy-nav-shift" class="wy-nav-content-wrap">
+
+      
+      <nav class="wy-nav-top" aria-label="top navigation">
+        
+          <i data-toggle="wy-nav-top" class="fa fa-bars"></i>
+          <a href="../index.html">Marian NMT</a>
+        
+      </nav>
+
+
+      <div class="wy-nav-content">
+        
+        <div class="rst-content">
+        
+          
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+<div role="navigation" aria-label="breadcrumbs navigation">
+
+  <ul class="wy-breadcrumbs">
+    
+      <li><a href="../index.html" class="icon icon-home"></a> &raquo;</li>
+        
+      <li>Program Listing for File communicator.cpp</li>
+    
+    
+      <li class="wy-breadcrumbs-aside">
+        
+          
+            <a href="../_sources/api/program_listing_file_src_training_communicator.cpp.rst.txt" rel="nofollow"> View page source</a>
+          
+        
+      </li>
+    
+  </ul>
+
+  
+  <hr/>
+</div>
+          <div role="main" class="document" itemscope="itemscope" itemtype="http://schema.org/Article">
+           <div itemprop="articleBody">
+            
+  <div class="section" id="program-listing-for-file-communicator-cpp">
+<span id="program-listing-file-src-training-communicator-cpp"></span><h1>Program Listing for File communicator.cpp<a class="headerlink" href="#program-listing-for-file-communicator-cpp" title="Permalink to this headline">¶</a></h1>
+<p>↰ <a class="reference internal" href="file_src_training_communicator.cpp.html#file-src-training-communicator-cpp"><span class="std std-ref">Return to documentation for file</span></a> (<code class="docutils literal notranslate"><span class="pre">src/training/communicator.cpp</span></code>)</p>
+<div class="highlight-cpp notranslate"><div class="highlight"><pre><span></span><span class="cp">#include</span> <span class="cpf">&quot;training/communicator.h&quot;</span><span class="cp"></span>
+<span class="cp">#include</span> <span class="cpf">&quot;common/utils.h&quot;</span><span class="cp"></span>
+
+<span class="cp">#if defined(CUDA_FOUND) &amp;&amp; defined(USE_NCCL)</span>
+<span class="cp">#include</span> <span class="cpf">&quot;training/communicator_nccl.h&quot;</span><span class="cp"></span>
+<span class="cp">#endif</span>
+
+<span class="cp">#if MPI_FOUND</span>
+<span class="cp">#include</span> <span class="cpf">&quot;mpi.h&quot;</span><span class="cp"></span>
+<span class="cp">#endif</span>
+
+<span class="k">namespace</span> <span class="n">marian</span> <span class="p">{</span>
+
+<span class="n">Ptr</span><span class="o">&lt;</span><span class="n">ICommunicator</span><span class="o">&gt;</span> <span class="n">createCommunicator</span><span class="p">(</span>
+  <span class="k">const</span> <span class="n">std</span><span class="o">::</span><span class="n">vector</span><span class="o">&lt;</span><span class="n">Ptr</span><span class="o">&lt;</span><span class="n">ExpressionGraph</span><span class="o">&gt;&gt;&amp;</span> <span class="n">graphs</span><span class="p">,</span>
+  <span class="kt">bool</span> <span class="n">noNccl</span><span class="p">,</span> <span class="n">Ptr</span><span class="o">&lt;</span><span class="n">IMPIWrapper</span><span class="o">&gt;</span> <span class="n">mpi</span><span class="p">)</span> <span class="p">{</span>
+  <span class="n">mpi</span><span class="p">;</span>
+<span class="cp">#if defined(CUDA_FOUND) &amp;&amp; defined(USE_NCCL)</span>
+  <span class="k">if</span><span class="p">(</span><span class="n">noNccl</span><span class="p">)</span> <span class="p">{</span>
+    <span class="n">LOG</span><span class="p">(</span><span class="n">warn</span><span class="p">,</span> <span class="s">&quot;[comm] NCCL communicator overridden&quot;</span><span class="p">);</span>
+    <span class="k">return</span> <span class="n">New</span><span class="o">&lt;</span><span class="n">DefaultCommunicator</span><span class="o">&gt;</span><span class="p">(</span><span class="n">graphs</span><span class="p">,</span> <span class="n">mpi</span><span class="p">);</span>
+  <span class="p">}</span>
+
+  <span class="c1">// if at least one of the devices is not a gpu, fall-back to default</span>
+  <span class="k">for</span><span class="p">(</span><span class="k">auto</span><span class="o">&amp;</span> <span class="nl">graph</span> <span class="p">:</span> <span class="n">graphs</span><span class="p">)</span> <span class="p">{</span>
+    <span class="k">if</span><span class="p">(</span><span class="n">graph</span><span class="o">-&gt;</span><span class="n">getBackend</span><span class="p">()</span><span class="o">-&gt;</span><span class="n">getDeviceId</span><span class="p">().</span><span class="n">type</span> <span class="o">==</span> <span class="n">DeviceType</span><span class="o">::</span><span class="n">cpu</span><span class="p">)</span> <span class="p">{</span>
+      <span class="k">return</span> <span class="n">New</span><span class="o">&lt;</span><span class="n">DefaultCommunicator</span><span class="o">&gt;</span><span class="p">(</span><span class="n">graphs</span><span class="p">,</span> <span class="n">mpi</span><span class="p">);</span>
+    <span class="p">}</span>
+  <span class="p">}</span>
+
+  <span class="kt">size_t</span> <span class="n">d</span> <span class="o">=</span> <span class="n">graphs</span><span class="p">.</span><span class="n">size</span><span class="p">();</span>
+  <span class="k">if</span><span class="p">((</span><span class="n">d</span> <span class="o">&amp;</span> <span class="p">(</span><span class="n">d</span> <span class="o">-</span> <span class="mi">1</span><span class="p">))</span> <span class="o">!=</span> <span class="mi">0</span><span class="p">)</span> <span class="p">{</span>
+    <span class="n">LOG</span><span class="p">(</span><span class="n">warn</span><span class="p">,</span>
+        <span class="s">&quot;[comm] Number of devices {} is not a power of 2 and communication &quot;</span>
+        <span class="s">&quot;might be slow with NCCL&quot;</span><span class="p">,</span>
+        <span class="n">d</span><span class="p">);</span>
+    <span class="n">LOG</span><span class="p">(</span><span class="n">warn</span><span class="p">,</span> <span class="s">&quot;[comm] You can switch off NCCL with --no-nccl option&quot;</span><span class="p">,</span> <span class="n">d</span><span class="p">);</span>
+  <span class="p">}</span>
+
+  <span class="c1">// the actual implementation is inside communicator.cu</span>
+  <span class="k">return</span> <span class="n">New</span><span class="o">&lt;</span><span class="n">NCCLCommunicator</span><span class="o">&gt;</span><span class="p">(</span><span class="n">graphs</span><span class="p">,</span> <span class="n">mpi</span><span class="p">);</span>
+<span class="cp">#else </span><span class="c1">// no CUDA or no NCCL</span>
+  <span class="n">noNccl</span><span class="p">;</span> <span class="c1">// (unused)</span>
+  <span class="k">return</span> <span class="n">New</span><span class="o">&lt;</span><span class="n">DefaultCommunicator</span><span class="o">&gt;</span><span class="p">(</span><span class="n">graphs</span><span class="p">,</span> <span class="n">mpi</span><span class="p">);</span>
+<span class="cp">#endif</span>
+<span class="p">}</span>
+
+<span class="n">std</span><span class="o">::</span><span class="n">string</span> <span class="n">IMPIWrapper</span><span class="o">::</span><span class="n">idStr</span><span class="p">()</span> <span class="k">const</span> <span class="p">{</span> <span class="c1">// helper to identify the node in logs</span>
+  <span class="n">std</span><span class="o">::</span><span class="n">string</span> <span class="n">hostname</span><span class="p">;</span> <span class="kt">int</span> <span class="n">pid</span><span class="p">;</span> <span class="n">std</span><span class="o">::</span><span class="n">tie</span>
+  <span class="p">(</span><span class="n">hostname</span><span class="p">,</span> <span class="n">pid</span><span class="p">)</span> <span class="o">=</span> <span class="n">utils</span><span class="o">::</span><span class="n">hostnameAndProcessId</span><span class="p">();</span>
+  <span class="k">return</span> <span class="n">hostname</span> <span class="o">+</span> <span class="s">&quot;:&quot;</span> <span class="o">+</span> <span class="n">std</span><span class="o">::</span><span class="n">to_string</span><span class="p">(</span><span class="n">pid</span><span class="p">)</span> <span class="o">+</span> <span class="s">&quot; MPI rank &quot;</span> <span class="o">+</span> <span class="n">std</span><span class="o">::</span><span class="n">to_string</span><span class="p">(</span><span class="n">myMPIRank</span><span class="p">())</span> <span class="o">+</span> <span class="s">&quot; out of &quot;</span> <span class="o">+</span> <span class="n">std</span><span class="o">::</span><span class="n">to_string</span><span class="p">(</span><span class="n">numMPIProcesses</span><span class="p">());</span>
+<span class="p">}</span>
+
+<span class="cp">#if MPI_FOUND</span>
+<span class="c1">// wrapper for MPI calls</span>
+<span class="c1">// Since MPI can only be initialized once, only one instance of this class can exist.</span>
+<span class="k">class</span> <span class="nc">MPIWrapper</span> <span class="o">:</span> <span class="k">public</span> <span class="n">IMPIWrapper</span>
+<span class="p">{</span>
+  <span class="kt">int</span> <span class="n">my_rank_</span><span class="p">;</span>         <span class="c1">// MPI rank of this node</span>
+  <span class="kt">int</span> <span class="n">comm_world_size_</span><span class="p">;</span> <span class="c1">// Number of nodes in MPI world (cluster)</span>
+
+  <span class="kt">void</span> <span class="nf">handleError</span><span class="p">(</span><span class="kt">int</span> <span class="n">mpiRetval</span><span class="p">,</span> <span class="k">const</span> <span class="kt">char</span><span class="o">*</span> <span class="n">exprString</span><span class="p">)</span> <span class="k">const</span> <span class="p">{</span> <span class="c1">// call this with the return value of all MPI calls to report errors</span>
+    <span class="k">if</span> <span class="p">(</span><span class="n">mpiRetval</span> <span class="o">!=</span> <span class="n">MPI_SUCCESS</span><span class="p">)</span> <span class="p">{</span>
+      <span class="kt">char</span> <span class="n">errStr</span><span class="p">[</span><span class="n">MPI_MAX_ERROR_STRING</span> <span class="o">+</span> <span class="mi">1</span><span class="p">]</span> <span class="o">=</span> <span class="p">{</span> <span class="mi">0</span> <span class="p">};</span>
+      <span class="kt">int</span> <span class="n">resultLen</span> <span class="o">=</span> <span class="mi">0</span><span class="p">;</span>
+      <span class="n">MPI_Error_string</span><span class="p">(</span><span class="n">mpiRetval</span><span class="p">,</span> <span class="o">&amp;</span><span class="n">errStr</span><span class="p">[</span><span class="mi">0</span><span class="p">],</span> <span class="o">&amp;</span><span class="n">resultLen</span><span class="p">);</span>
+      <span class="n">errStr</span><span class="p">[</span><span class="n">resultLen</span><span class="p">]</span> <span class="o">=</span> <span class="mi">0</span><span class="p">;</span> <span class="c1">// (@TODO: needed?)</span>
+      <span class="n">ABORT</span><span class="p">(</span><span class="s">&quot;MPI call failed with code {} &#39;{}&#39; on node {}: {}&quot;</span><span class="p">,</span> <span class="n">mpiRetval</span><span class="p">,</span> <span class="n">errStr</span><span class="p">,</span> <span class="n">my_rank_</span><span class="p">,</span> <span class="n">exprString</span><span class="p">);</span> <span class="c1">// @TODO: also log host name, which is involved on Windows</span>
+    <span class="p">}</span>
+  <span class="p">}</span>
+<span class="cp">#define HANDLE_MPI_ERROR(expr) (handleError(expr, #expr)) </span><span class="c1">// call through a macro so we can also log the failed expression itself</span>
+
+<span class="k">public</span><span class="o">:</span>
+  <span class="n">MPIWrapper</span><span class="p">(</span><span class="kt">bool</span> <span class="n">multiThreaded</span><span class="p">)</span> <span class="p">{</span>
+    <span class="kt">int</span> <span class="n">requiredThreadingMode</span> <span class="o">=</span> <span class="n">multiThreaded</span> <span class="o">?</span> <span class="nl">MPI_THREAD_MULTIPLE</span> <span class="p">:</span> <span class="n">MPI_THREAD_FUNNELED</span><span class="p">;</span> <span class="c1">// FUNNELED means only one thread ever calls MPI</span>
+
+    <span class="kt">int</span> <span class="n">argc</span> <span class="o">=</span> <span class="mi">1</span><span class="p">;</span> <span class="kt">char</span><span class="o">*</span> <span class="n">argv</span><span class="p">[]</span> <span class="o">=</span> <span class="p">{</span> <span class="k">const_cast</span><span class="o">&lt;</span><span class="kt">char</span><span class="o">*&gt;</span><span class="p">(</span><span class="s">&quot;this.exe&quot;</span><span class="p">)</span> <span class="p">};</span> <span class="kt">char</span><span class="o">**</span> <span class="n">argvp</span> <span class="o">=</span> <span class="n">argv</span><span class="p">;</span> <span class="c1">// dummy argc/argv since MPI_Init needs something here</span>
+    <span class="kt">int</span> <span class="n">providedThreadingMode</span><span class="p">;</span>
+    <span class="n">HANDLE_MPI_ERROR</span><span class="p">(</span><span class="n">MPI_Init_thread</span><span class="p">(</span><span class="o">&amp;</span><span class="n">argc</span><span class="p">,</span> <span class="o">&amp;</span><span class="n">argvp</span><span class="p">,</span> <span class="n">MPI_THREAD_MULTIPLE</span><span class="p">,</span> <span class="o">&amp;</span><span class="n">providedThreadingMode</span><span class="p">));</span>
+    <span class="n">MPI_Comm_set_errhandler</span><span class="p">(</span><span class="n">MPI_COMM_WORLD</span><span class="p">,</span> <span class="n">MPI_ERRORS_RETURN</span><span class="p">);</span> <span class="c1">// have errors reported as return codes</span>
+
+    <span class="n">MPI_Comm_size</span><span class="p">(</span><span class="n">MPI_COMM_WORLD</span><span class="p">,</span> <span class="o">&amp;</span><span class="n">comm_world_size_</span><span class="p">);</span>
+    <span class="n">MPI_Comm_rank</span><span class="p">(</span><span class="n">MPI_COMM_WORLD</span><span class="p">,</span> <span class="o">&amp;</span><span class="n">my_rank_</span><span class="p">);</span>
+
+    <span class="n">ABORT_IF</span><span class="p">(</span><span class="n">comm_world_size_</span> <span class="o">&gt;</span> <span class="mi">1</span> <span class="o">&amp;&amp;</span> <span class="n">providedThreadingMode</span> <span class="o">&lt;</span> <span class="n">requiredThreadingMode</span><span class="p">,</span>
+      <span class="s">&quot;Your version of MPI does not support multi-threaded communication.&quot;</span><span class="p">);</span>
+
+    <span class="c1">// patch logging pattern to include the MPI rank, so that we can associate error messages with nodes</span>
+    <span class="k">if</span> <span class="p">(</span><span class="n">numMPIProcesses</span><span class="p">()</span> <span class="o">&gt;</span> <span class="mi">1</span><span class="p">)</span> <span class="p">{</span>
+      <span class="n">std</span><span class="o">::</span><span class="n">string</span> <span class="n">rankStr</span> <span class="o">=</span> <span class="n">std</span><span class="o">::</span><span class="n">to_string</span><span class="p">(</span><span class="n">MPIWrapper</span><span class="o">::</span><span class="n">myMPIRank</span><span class="p">());</span>
+      <span class="n">std</span><span class="o">::</span><span class="n">string</span> <span class="n">maxRankStr</span> <span class="o">=</span> <span class="n">std</span><span class="o">::</span><span class="n">to_string</span><span class="p">(</span><span class="n">MPIWrapper</span><span class="o">::</span><span class="n">numMPIProcesses</span><span class="p">()</span> <span class="mi">-1</span><span class="p">);</span>
+      <span class="k">while</span> <span class="p">(</span><span class="n">rankStr</span><span class="p">.</span><span class="n">size</span><span class="p">()</span> <span class="o">&lt;</span> <span class="n">maxRankStr</span><span class="p">.</span><span class="n">size</span><span class="p">())</span> <span class="c1">// pad so that logs across MPI processes line up nicely</span>
+        <span class="n">rankStr</span><span class="p">.</span><span class="n">insert</span><span class="p">(</span><span class="n">rankStr</span><span class="p">.</span><span class="n">begin</span><span class="p">(),</span> <span class="sc">&#39; &#39;</span><span class="p">);</span>
+      <span class="n">switchtoMultinodeLogging</span><span class="p">(</span><span class="n">rankStr</span><span class="p">);</span>
+    <span class="p">}</span>
+
+    <span class="c1">// log hostnames in order, and test</span>
+    <span class="k">for</span> <span class="p">(</span><span class="kt">size_t</span> <span class="n">r</span> <span class="o">=</span> <span class="mi">0</span><span class="p">;</span> <span class="n">r</span> <span class="o">&lt;</span> <span class="n">numMPIProcesses</span><span class="p">();</span> <span class="n">r</span><span class="o">++</span><span class="p">)</span> <span class="p">{</span>
+      <span class="n">MPIWrapper</span><span class="o">::</span><span class="n">barrier</span><span class="p">();</span>
+      <span class="k">if</span> <span class="p">(</span><span class="n">r</span> <span class="o">==</span> <span class="n">MPIWrapper</span><span class="o">::</span><span class="n">myMPIRank</span><span class="p">()</span> <span class="o">&amp;&amp;</span> <span class="n">MPIWrapper</span><span class="o">::</span><span class="n">numMPIProcesses</span><span class="p">()</span> <span class="o">&gt;</span> <span class="mi">1</span><span class="p">)</span> <span class="p">{</span>
+        <span class="n">std</span><span class="o">::</span><span class="n">string</span> <span class="n">hostname</span><span class="p">;</span> <span class="kt">int</span> <span class="n">pid</span><span class="p">;</span> <span class="n">std</span><span class="o">::</span><span class="n">tie</span>
+        <span class="p">(</span><span class="n">hostname</span><span class="p">,</span> <span class="n">pid</span><span class="p">)</span> <span class="o">=</span> <span class="n">utils</span><span class="o">::</span><span class="n">hostnameAndProcessId</span><span class="p">();</span>
+        <span class="n">LOG</span><span class="p">(</span><span class="n">info</span><span class="p">,</span> <span class="s">&quot;[mpi] Initialized as rank {} out of {} processes on {} as process {}&quot;</span><span class="p">,</span>
+                  <span class="n">MPIWrapper</span><span class="o">::</span><span class="n">myMPIRank</span><span class="p">(),</span> <span class="n">MPIWrapper</span><span class="o">::</span><span class="n">numMPIProcesses</span><span class="p">(),</span> <span class="n">hostname</span><span class="p">,</span> <span class="n">pid</span><span class="p">);</span>
+      <span class="p">}</span>
+      <span class="n">MPIWrapper</span><span class="o">::</span><span class="n">barrier</span><span class="p">();</span>
+    <span class="p">}</span>
+  <span class="p">}</span>
+
+  <span class="k">virtual</span> <span class="kt">size_t</span> <span class="n">myMPIRank</span><span class="p">()</span>        <span class="k">const</span> <span class="k">override</span> <span class="p">{</span> <span class="k">return</span> <span class="p">(</span><span class="kt">size_t</span><span class="p">)</span><span class="n">my_rank_</span><span class="p">;</span> <span class="p">};</span>
+  <span class="k">virtual</span> <span class="kt">size_t</span> <span class="n">numMPIProcesses</span><span class="p">()</span> <span class="k">const</span> <span class="k">override</span> <span class="p">{</span> <span class="k">return</span> <span class="p">(</span><span class="kt">size_t</span><span class="p">)</span><span class="n">comm_world_size_</span><span class="p">;</span> <span class="p">};</span>
+
+  <span class="k">virtual</span> <span class="kt">void</span> <span class="n">barrier</span><span class="p">(</span><span class="n">MPI_Comm</span> <span class="n">comm</span> <span class="o">=</span> <span class="n">MPI_COMM_WORLD</span><span class="p">)</span> <span class="k">const</span> <span class="k">override</span> <span class="p">{</span>
+    <span class="n">HANDLE_MPI_ERROR</span><span class="p">(</span><span class="n">MPI_Barrier</span><span class="p">(</span><span class="n">comm</span><span class="p">));</span>
+  <span class="p">}</span>
+  <span class="k">virtual</span> <span class="kt">void</span> <span class="n">bCast</span><span class="p">(</span><span class="kt">void</span><span class="o">*</span> <span class="n">buf</span><span class="p">,</span> <span class="kt">size_t</span> <span class="n">count</span><span class="p">,</span> <span class="n">MPI_Datatype</span> <span class="n">datatype</span><span class="p">,</span> <span class="kt">size_t</span> <span class="n">rootRank</span><span class="p">,</span> <span class="n">MPI_Comm</span> <span class="n">comm</span> <span class="o">=</span> <span class="n">MPI_COMM_WORLD</span><span class="p">)</span> <span class="k">const</span> <span class="k">override</span> <span class="p">{</span>
+    <span class="n">HANDLE_MPI_ERROR</span><span class="p">(</span><span class="n">MPI_Bcast</span><span class="p">(</span><span class="n">buf</span><span class="p">,</span> <span class="p">(</span><span class="kt">int</span><span class="p">)</span><span class="n">count</span><span class="p">,</span> <span class="n">datatype</span><span class="p">,</span> <span class="p">(</span><span class="kt">int</span><span class="p">)</span><span class="n">rootRank</span><span class="p">,</span> <span class="n">comm</span><span class="p">));</span>
+  <span class="p">}</span>
+  <span class="k">virtual</span> <span class="kt">void</span> <span class="n">sSend</span><span class="p">(</span><span class="kt">void</span><span class="o">*</span> <span class="n">buf</span><span class="p">,</span> <span class="kt">size_t</span> <span class="n">count</span><span class="p">,</span> <span class="n">MPI_Datatype</span> <span class="n">datatype</span><span class="p">,</span> <span class="kt">size_t</span> <span class="n">destRank</span><span class="p">,</span> <span class="kt">int</span> <span class="n">tag</span><span class="p">,</span> <span class="n">MPI_Comm</span> <span class="n">comm</span><span class="p">)</span> <span class="k">const</span> <span class="k">override</span> <span class="p">{</span>
+    <span class="n">HANDLE_MPI_ERROR</span><span class="p">(</span><span class="n">MPI_Ssend</span><span class="p">(</span><span class="n">buf</span><span class="p">,</span> <span class="p">(</span><span class="kt">int</span><span class="p">)</span><span class="n">count</span><span class="p">,</span> <span class="n">datatype</span><span class="p">,</span> <span class="p">(</span><span class="kt">int</span><span class="p">)</span><span class="n">destRank</span><span class="p">,</span> <span class="n">tag</span><span class="p">,</span> <span class="n">comm</span><span class="p">));</span>
+  <span class="p">}</span>
+  <span class="k">virtual</span> <span class="kt">void</span> <span class="n">recv</span><span class="p">(</span><span class="kt">void</span><span class="o">*</span> <span class="n">buf</span><span class="p">,</span> <span class="kt">size_t</span> <span class="n">count</span><span class="p">,</span> <span class="n">MPI_Datatype</span> <span class="n">datatype</span><span class="p">,</span> <span class="kt">size_t</span> <span class="n">sourceRank</span><span class="p">,</span> <span class="kt">int</span> <span class="n">tag</span><span class="p">,</span> <span class="n">MPI_Comm</span> <span class="n">comm</span><span class="p">,</span> <span class="n">MPI_Status</span><span class="o">*</span> <span class="n">status</span><span class="p">)</span> <span class="k">const</span> <span class="k">override</span> <span class="p">{</span>
+    <span class="n">HANDLE_MPI_ERROR</span><span class="p">(</span><span class="n">MPI_Recv</span><span class="p">(</span><span class="n">buf</span><span class="p">,</span> <span class="p">(</span><span class="kt">int</span><span class="p">)</span><span class="n">count</span><span class="p">,</span> <span class="n">datatype</span><span class="p">,</span> <span class="p">(</span><span class="kt">int</span><span class="p">)</span><span class="n">sourceRank</span><span class="p">,</span> <span class="n">tag</span><span class="p">,</span> <span class="n">comm</span><span class="p">,</span> <span class="n">status</span><span class="p">));</span>
+  <span class="p">}</span>
+  <span class="k">virtual</span> <span class="kt">void</span> <span class="n">allReduce</span><span class="p">(</span><span class="k">const</span> <span class="kt">void</span><span class="o">*</span> <span class="n">sendbuf</span><span class="p">,</span> <span class="kt">void</span><span class="o">*</span> <span class="n">recvbuf</span><span class="p">,</span> <span class="kt">size_t</span> <span class="n">count</span><span class="p">,</span> <span class="n">MPI_Datatype</span> <span class="n">datatype</span><span class="p">,</span> <span class="n">MPI_Op</span> <span class="n">op</span><span class="p">,</span> <span class="n">MPI_Comm</span> <span class="n">comm</span><span class="p">)</span> <span class="k">const</span> <span class="k">override</span> <span class="p">{</span>
+    <span class="k">if</span> <span class="p">(</span><span class="n">sendbuf</span> <span class="o">==</span> <span class="n">recvbuf</span><span class="p">)</span>
+      <span class="n">sendbuf</span> <span class="o">=</span> <span class="n">MPI_IN_PLACE</span><span class="p">;</span> <span class="c1">// MSMPI requires this</span>
+    <span class="n">HANDLE_MPI_ERROR</span><span class="p">(</span><span class="n">MPI_Allreduce</span><span class="p">(</span><span class="n">sendbuf</span><span class="p">,</span> <span class="n">recvbuf</span><span class="p">,</span> <span class="p">(</span><span class="kt">int</span><span class="p">)</span><span class="n">count</span><span class="p">,</span> <span class="n">datatype</span><span class="p">,</span> <span class="n">op</span><span class="p">,</span> <span class="n">comm</span><span class="p">));</span>
+  <span class="p">}</span>
+  <span class="k">virtual</span> <span class="kt">void</span> <span class="n">finalize</span><span class="p">()</span> <span class="k">override</span> <span class="p">{</span>
+    <span class="n">HANDLE_MPI_ERROR</span><span class="p">(</span><span class="n">MPI_Finalize</span><span class="p">());</span>
+  <span class="p">}</span>
+<span class="p">};</span>
+<span class="cp">#endif</span>
+
+<span class="c1">// dummy MPI wrapper that implements only one process without actual operations</span>
+<span class="c1">// This is used when not compiling under MPI.</span>
+<span class="k">class</span> <span class="nc">FakeMPIWrapper</span> <span class="o">:</span> <span class="k">public</span> <span class="n">IMPIWrapper</span>
+<span class="p">{</span>
+<span class="k">public</span><span class="o">:</span>
+  <span class="n">FakeMPIWrapper</span><span class="p">(</span><span class="kt">bool</span><span class="p">)</span> <span class="p">{</span>
+    <span class="n">LOG</span><span class="p">(</span><span class="n">info</span><span class="p">,</span> <span class="s">&quot;[comm] Compiled without MPI support. Running as a single process on {}&quot;</span><span class="p">,</span> <span class="n">utils</span><span class="o">::</span><span class="n">hostnameAndProcessId</span><span class="p">().</span><span class="n">first</span><span class="p">);</span>
+  <span class="p">}</span>
+  <span class="k">virtual</span> <span class="o">~</span><span class="n">FakeMPIWrapper</span><span class="p">()</span> <span class="p">{}</span>
+  <span class="k">virtual</span> <span class="kt">size_t</span> <span class="n">myMPIRank</span><span class="p">()</span> <span class="k">const</span> <span class="k">override</span> <span class="p">{</span> <span class="k">return</span> <span class="mi">0</span><span class="p">;</span> <span class="p">};</span>
+  <span class="k">virtual</span> <span class="kt">size_t</span> <span class="n">numMPIProcesses</span><span class="p">()</span> <span class="k">const</span> <span class="k">override</span> <span class="p">{</span> <span class="k">return</span> <span class="mi">1</span><span class="p">;</span> <span class="p">};</span>
+
+<span class="cp">#pragma warning(push)</span>
+<span class="cp">#pragma warning(disable: 4100) </span><span class="c1">// unreferenced formal parameter</span>
+  <span class="c1">// most functions are no-ops when applied to a single process</span>
+  <span class="k">virtual</span> <span class="kt">void</span> <span class="n">barrier</span><span class="p">(</span><span class="n">MPI_Comm</span> <span class="n">comm</span><span class="p">)</span> <span class="k">const</span> <span class="k">override</span> <span class="p">{</span>
+    <span class="n">comm</span><span class="p">;</span>
+  <span class="p">}</span>
+  <span class="k">virtual</span> <span class="kt">void</span> <span class="n">bCast</span><span class="p">(</span><span class="kt">void</span><span class="o">*</span> <span class="n">buf</span><span class="p">,</span> <span class="kt">size_t</span> <span class="n">count</span><span class="p">,</span> <span class="n">MPI_Datatype</span> <span class="n">datatype</span><span class="p">,</span> <span class="kt">size_t</span> <span class="n">rootRank</span><span class="p">,</span> <span class="n">MPI_Comm</span> <span class="n">comm</span><span class="p">)</span> <span class="k">const</span> <span class="k">override</span> <span class="p">{</span>
+    <span class="n">buf</span><span class="p">;</span> <span class="n">count</span><span class="p">;</span> <span class="n">datatype</span><span class="p">;</span> <span class="n">rootRank</span><span class="p">;</span> <span class="n">comm</span><span class="p">;</span>
+  <span class="p">}</span>
+  <span class="k">virtual</span> <span class="kt">void</span> <span class="n">sSend</span><span class="p">(</span><span class="kt">void</span><span class="o">*</span> <span class="n">buf</span><span class="p">,</span> <span class="kt">size_t</span> <span class="n">count</span><span class="p">,</span> <span class="n">MPI_Datatype</span> <span class="n">datatype</span><span class="p">,</span> <span class="kt">size_t</span> <span class="n">destRank</span><span class="p">,</span> <span class="kt">int</span> <span class="n">tag</span><span class="p">,</span> <span class="n">MPI_Comm</span> <span class="n">comm</span><span class="p">)</span> <span class="k">const</span> <span class="k">override</span> <span class="p">{</span>
+    <span class="n">buf</span><span class="p">;</span> <span class="n">count</span><span class="p">;</span> <span class="n">datatype</span><span class="p">;</span> <span class="n">destRank</span><span class="p">;</span> <span class="n">tag</span><span class="p">;</span> <span class="n">comm</span><span class="p">;</span>
+  <span class="p">}</span>
+  <span class="k">virtual</span> <span class="kt">void</span> <span class="n">recv</span><span class="p">(</span><span class="kt">void</span><span class="o">*</span> <span class="n">buf</span><span class="p">,</span> <span class="kt">size_t</span> <span class="n">count</span><span class="p">,</span> <span class="n">MPI_Datatype</span> <span class="n">datatype</span><span class="p">,</span> <span class="kt">size_t</span> <span class="n">sourceRank</span><span class="p">,</span> <span class="kt">int</span> <span class="n">tag</span><span class="p">,</span> <span class="n">MPI_Comm</span> <span class="n">comm</span><span class="p">,</span> <span class="n">MPI_Status</span><span class="o">*</span> <span class="n">status</span><span class="p">)</span> <span class="k">const</span> <span class="k">override</span> <span class="p">{</span>
+    <span class="n">buf</span><span class="p">;</span> <span class="n">count</span><span class="p">;</span> <span class="n">datatype</span><span class="p">;</span> <span class="n">sourceRank</span><span class="p">;</span> <span class="n">tag</span><span class="p">;</span> <span class="n">comm</span><span class="p">;</span>
+    <span class="c1">// @TODO: fill in status</span>
+    <span class="n">ABORT_IF</span><span class="p">(</span><span class="n">status</span> <span class="o">!=</span> <span class="n">MPI_STATUS_IGNORE</span><span class="p">,</span> <span class="s">&quot;FakeMPIWrapper::recv() does not yet implement returning a status object&quot;</span><span class="p">);</span>
+  <span class="p">}</span>
+  <span class="k">virtual</span> <span class="kt">void</span> <span class="n">allReduce</span><span class="p">(</span><span class="k">const</span> <span class="kt">void</span><span class="o">*</span> <span class="n">sendbuf</span><span class="p">,</span> <span class="kt">void</span><span class="o">*</span> <span class="n">recvbuf</span><span class="p">,</span> <span class="kt">size_t</span> <span class="n">count</span><span class="p">,</span> <span class="n">MPI_Datatype</span> <span class="n">datatype</span><span class="p">,</span> <span class="n">MPI_Op</span> <span class="n">op</span><span class="p">,</span> <span class="n">MPI_Comm</span> <span class="n">comm</span><span class="p">)</span> <span class="k">const</span> <span class="k">override</span> <span class="p">{</span>
+    <span class="n">count</span><span class="p">;</span> <span class="n">datatype</span><span class="p">;</span> <span class="n">op</span><span class="p">;</span> <span class="n">comm</span><span class="p">;</span>
+    <span class="c1">// @TODO: There is only one place where this is called with sendbuf != recvbuf, which is sync multi-node.</span>
+    <span class="c1">//        I think that can be changed to use the same buffer. Then we should change this API</span>
+    <span class="c1">//        to only accept one parameter, and remove this error check can be removed.</span>
+    <span class="n">ABORT_IF</span><span class="p">(</span><span class="n">sendbuf</span> <span class="o">!=</span> <span class="n">recvbuf</span><span class="p">,</span> <span class="s">&quot;FakeMPIWrapper::allReduce() only implemented for in-place operation&quot;</span><span class="p">);</span> <span class="c1">// otherwise it&#39;s not a no-op, we must copy data</span>
+  <span class="p">}</span>
+<span class="cp">#pragma warning(pop)</span>
+  <span class="k">virtual</span> <span class="kt">void</span> <span class="n">finalize</span><span class="p">()</span> <span class="k">override</span> <span class="p">{</span> <span class="p">}</span>
+<span class="p">};</span>
+
+<span class="c1">// create instance of the singleton MPI wrapper</span>
+<span class="k">static</span> <span class="n">Ptr</span><span class="o">&lt;</span><span class="n">IMPIWrapper</span><span class="o">&gt;</span> <span class="n">s_mpi</span><span class="p">;</span>    <span class="c1">// singleton instance of MPI wrapper</span>
+<span class="k">static</span> <span class="kt">size_t</span> <span class="n">s_mpiUseCount</span><span class="p">;</span>      <span class="c1">// how many times has this wrapper been instantiated?</span>
+<span class="k">static</span> <span class="kt">bool</span> <span class="n">s_mpiIsMultiThreaded</span><span class="p">;</span> <span class="c1">// multi-threading mode of this instance</span>
+
+<span class="n">Ptr</span><span class="o">&lt;</span><span class="n">IMPIWrapper</span><span class="o">&gt;</span> <span class="n">initMPI</span><span class="p">(</span><span class="kt">bool</span> <span class="n">multiThreaded</span><span class="p">)</span> <span class="p">{</span>
+  <span class="k">if</span> <span class="p">(</span><span class="o">!</span><span class="n">s_mpi</span><span class="p">)</span> <span class="p">{</span>
+<span class="cp">#if MPI_FOUND</span>
+    <span class="n">s_mpi</span> <span class="o">=</span> <span class="n">New</span><span class="o">&lt;</span><span class="n">MPIWrapper</span><span class="o">&gt;</span><span class="p">(</span><span class="n">multiThreaded</span><span class="p">);</span>
+<span class="cp">#else</span>
+    <span class="n">s_mpi</span> <span class="o">=</span> <span class="n">New</span><span class="o">&lt;</span><span class="n">FakeMPIWrapper</span><span class="o">&gt;</span><span class="p">(</span><span class="n">multiThreaded</span><span class="p">);</span>
+<span class="cp">#endif</span>
+    <span class="n">s_mpiIsMultiThreaded</span> <span class="o">=</span> <span class="n">multiThreaded</span><span class="p">;</span>
+  <span class="p">}</span>
+  <span class="k">else</span> <span class="p">{</span>
+    <span class="n">ABORT_IF</span><span class="p">(</span><span class="n">s_mpiIsMultiThreaded</span> <span class="o">!=</span> <span class="n">multiThreaded</span><span class="p">,</span> <span class="s">&quot;attempted to reinitialize MPI with different multi-threading mode&quot;</span><span class="p">);</span>
+  <span class="p">}</span>
+  <span class="n">s_mpiUseCount</span><span class="o">++</span><span class="p">;</span>
+  <span class="k">return</span> <span class="n">s_mpi</span><span class="p">;</span>
+<span class="p">}</span>
+
+<span class="kt">void</span> <span class="n">finalizeMPI</span><span class="p">(</span><span class="n">Ptr</span><span class="o">&lt;</span><span class="n">IMPIWrapper</span><span class="o">&gt;&amp;&amp;</span> <span class="n">mpi</span><span class="p">)</span> <span class="p">{</span>
+  <span class="n">ABORT_IF</span><span class="p">(</span><span class="n">mpi</span> <span class="o">==</span> <span class="k">nullptr</span> <span class="o">||</span> <span class="n">mpi</span> <span class="o">!=</span> <span class="n">s_mpi</span><span class="p">,</span> <span class="s">&quot;attempted to finalize an inconsistent MPI instance. This should not be possible.&quot;</span><span class="p">);</span>
+  <span class="n">mpi</span> <span class="o">=</span> <span class="k">nullptr</span><span class="p">;</span> <span class="c1">// destruct caller&#39;s handle</span>
+  <span class="n">ABORT_IF</span><span class="p">(</span><span class="n">s_mpiUseCount</span> <span class="o">==</span> <span class="mi">0</span><span class="p">,</span> <span class="s">&quot;finalize called too many times. This should not be possible.&quot;</span><span class="p">);</span>
+  <span class="k">if</span> <span class="p">(</span><span class="n">s_mpiUseCount</span> <span class="o">==</span> <span class="mi">1</span><span class="p">)</span> <span class="p">{</span> <span class="c1">// last call finalizes MPI, i.e. tells MPI that we sucessfully completed computation</span>
+    <span class="n">ABORT_IF</span><span class="p">(</span><span class="n">s_mpi</span><span class="p">.</span><span class="n">use_count</span><span class="p">()</span> <span class="o">!=</span> <span class="mi">1</span><span class="p">,</span> <span class="s">&quot;dangling reference to MPI??&quot;</span><span class="p">);</span> <span class="c1">// caller kept another shared_ptr to this instance</span>
+    <span class="n">s_mpi</span><span class="o">-&gt;</span><span class="n">finalize</span><span class="p">();</span> <span class="c1">// signal successful completion to MPI</span>
+    <span class="n">s_mpi</span> <span class="o">=</span> <span class="k">nullptr</span><span class="p">;</span>   <span class="c1">// release the singleton instance upon last finalization</span>
+  <span class="p">}</span>
+  <span class="n">s_mpiUseCount</span><span class="o">--</span><span class="p">;</span>
+<span class="p">}</span>
+
+<span class="p">}</span>  <span class="c1">// namespace marian</span>
+</pre></div>
+</div>
+</div>
+
+
+           </div>
+           
+          </div>
+          <footer>
+
+  <hr/>
+
+  <div role="contentinfo">
+    <p>
+        &#169; Copyright 2021, Marian NMT Team.
+
+    </p>
+  </div>
+    
+    
+    
+    Built with <a href="https://www.sphinx-doc.org/">Sphinx</a> using a
+    
+    <a href="https://github.com/readthedocs/sphinx_rtd_theme">theme</a>
+    
+    provided by <a href="https://readthedocs.org">Read the Docs</a>. 
+
+</footer>
+        </div>
+      </div>
+
+    </section>
+
+  </div>
+  
+
+  <script type="text/javascript">
+      jQuery(function () {
+          SphinxRtdTheme.Navigation.enable(true);
+      });
+  </script>
+
+  
+  
+    
+   
+
+</body>
+</html>

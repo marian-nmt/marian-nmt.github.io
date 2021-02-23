@@ -1,0 +1,538 @@
+
+
+<!DOCTYPE html>
+<html class="writer-html5" lang="en" >
+<head>
+  <meta charset="utf-8" />
+  
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  
+  <title>Program Listing for File config.cpp &mdash; Marian NMT v1.10.1 2021-02-23 documentation</title>
+  
+
+  
+  <link rel="stylesheet" href="../_static/css/theme.css" type="text/css" />
+  <link rel="stylesheet" href="../_static/pygments.css" type="text/css" />
+  <link rel="stylesheet" href="../_static/css/custom.css" type="text/css" />
+  <link rel="stylesheet" href="../_static/collapsible-lists/css/tree_view.css" type="text/css" />
+
+  
+  
+
+  
+  
+
+  
+    <link rel="canonical" href="http://marian-nmt.github.io/docs/api/api/program_listing_file_src_common_config.cpp.html" />
+
+  
+  <!--[if lt IE 9]>
+    <script src="../_static/js/html5shiv.min.js"></script>
+  <![endif]-->
+  
+    
+      <script type="text/javascript" id="documentation_options" data-url_root="../" src="../_static/documentation_options.js"></script>
+        <script src="../_static/jquery.js"></script>
+        <script src="../_static/underscore.js"></script>
+        <script src="../_static/doctools.js"></script>
+        <script src="../_static/language_data.js"></script>
+        <script src="../_static/collapsible-lists/js/CollapsibleLists.compressed.js"></script>
+        <script src="../_static/collapsible-lists/js/apply-collapsible-lists.js"></script>
+    
+    <script type="text/javascript" src="../_static/js/theme.js"></script>
+
+    
+    <link rel="index" title="Index" href="../genindex.html" />
+    <link rel="search" title="Search" href="../search.html" /> 
+</head>
+
+<body class="wy-body-for-nav">
+
+   
+  <div class="wy-grid-for-nav">
+    
+    <nav data-toggle="wy-nav-shift" class="wy-nav-side">
+      <div class="wy-side-scroll">
+        <div class="wy-side-nav-search" >
+          
+
+          
+            <a href="../index.html" class="icon icon-home"> Marian NMT
+          
+
+          
+          </a>
+
+          
+            
+            
+              <div class="version">
+                v1.10.1
+              </div>
+            
+          
+
+          
+<div role="search">
+  <form id="rtd-search-form" class="wy-form" action="../search.html" method="get">
+    <input type="text" name="q" placeholder="Search docs" />
+    <input type="hidden" name="check_keywords" value="yes" />
+    <input type="hidden" name="area" value="default" />
+  </form>
+</div>
+
+          
+        </div>
+
+        
+        <div class="wy-menu wy-menu-vertical" data-spy="affix" role="navigation" aria-label="main navigation">
+          
+            
+            
+              
+            
+            
+              <p class="caption"><span class="caption-text">Contents:</span></p>
+<ul>
+<li class="toctree-l1"><a class="reference internal" href="../install.html">Installation</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../graph.html">Expression graphs</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../operators.html">Graph operations</a></li>
+<li class="toctree-l1"><a class="reference internal" href="library_index.html">Library API</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../contributing.html">How to contribute to Marian</a></li>
+</ul>
+
+            
+          
+        </div>
+        
+      </div>
+    </nav>
+
+    <section data-toggle="wy-nav-shift" class="wy-nav-content-wrap">
+
+      
+      <nav class="wy-nav-top" aria-label="top navigation">
+        
+          <i data-toggle="wy-nav-top" class="fa fa-bars"></i>
+          <a href="../index.html">Marian NMT</a>
+        
+      </nav>
+
+
+      <div class="wy-nav-content">
+        
+        <div class="rst-content">
+        
+          
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+<div role="navigation" aria-label="breadcrumbs navigation">
+
+  <ul class="wy-breadcrumbs">
+    
+      <li><a href="../index.html" class="icon icon-home"></a> &raquo;</li>
+        
+      <li>Program Listing for File config.cpp</li>
+    
+    
+      <li class="wy-breadcrumbs-aside">
+        
+          
+            <a href="../_sources/api/program_listing_file_src_common_config.cpp.rst.txt" rel="nofollow"> View page source</a>
+          
+        
+      </li>
+    
+  </ul>
+
+  
+  <hr/>
+</div>
+          <div role="main" class="document" itemscope="itemscope" itemtype="http://schema.org/Article">
+           <div itemprop="articleBody">
+            
+  <div class="section" id="program-listing-for-file-config-cpp">
+<span id="program-listing-file-src-common-config-cpp"></span><h1>Program Listing for File config.cpp<a class="headerlink" href="#program-listing-for-file-config-cpp" title="Permalink to this headline">¶</a></h1>
+<p>↰ <a class="reference internal" href="file_src_common_config.cpp.html#file-src-common-config-cpp"><span class="std std-ref">Return to documentation for file</span></a> (<code class="docutils literal notranslate"><span class="pre">src/common/config.cpp</span></code>)</p>
+<div class="highlight-cpp notranslate"><div class="highlight"><pre><span></span><span class="cp">#include</span> <span class="cpf">&quot;common/config.h&quot;</span><span class="cp"></span>
+<span class="cp">#include</span> <span class="cpf">&quot;common/config_parser.h&quot;</span><span class="cp"></span>
+<span class="cp">#include</span> <span class="cpf">&quot;common/file_stream.h&quot;</span><span class="cp"></span>
+<span class="cp">#include</span> <span class="cpf">&quot;common/logging.h&quot;</span><span class="cp"></span>
+<span class="cp">#include</span> <span class="cpf">&quot;common/options.h&quot;</span><span class="cp"></span>
+<span class="cp">#include</span> <span class="cpf">&quot;common/regex.h&quot;</span><span class="cp"></span>
+<span class="cp">#include</span> <span class="cpf">&quot;common/utils.h&quot;</span><span class="cp"></span>
+<span class="cp">#include</span> <span class="cpf">&quot;common/version.h&quot;</span><span class="cp"></span>
+
+<span class="cp">#include</span> <span class="cpf">&lt;algorithm&gt;</span><span class="cp"></span>
+<span class="cp">#include</span> <span class="cpf">&lt;set&gt;</span><span class="cp"></span>
+<span class="cp">#include</span> <span class="cpf">&lt;string&gt;</span><span class="cp"></span>
+
+<span class="k">namespace</span> <span class="n">marian</span> <span class="p">{</span>
+
+<span class="c1">// @TODO: keep seed in a single place, now it is kept here and in Config/Options</span>
+<span class="kt">size_t</span> <span class="n">Config</span><span class="o">::</span><span class="n">seed</span> <span class="o">=</span> <span class="p">(</span><span class="kt">size_t</span><span class="p">)</span><span class="n">time</span><span class="p">(</span><span class="mi">0</span><span class="p">);</span>
+
+
+<span class="n">Config</span><span class="o">::</span><span class="n">Config</span><span class="p">(</span><span class="n">ConfigParser</span> <span class="k">const</span><span class="o">&amp;</span> <span class="n">cp</span><span class="p">)</span> <span class="p">{</span>
+  <span class="n">initialize</span><span class="p">(</span><span class="n">cp</span><span class="p">);</span>
+<span class="p">}</span>
+
+<span class="n">Config</span><span class="o">::</span><span class="n">Config</span><span class="p">(</span><span class="kt">int</span> <span class="n">argc</span><span class="p">,</span> <span class="kt">char</span><span class="o">**</span> <span class="n">argv</span><span class="p">,</span> <span class="n">cli</span><span class="o">::</span><span class="n">mode</span> <span class="n">mode</span><span class="p">,</span> <span class="kt">bool</span> <span class="n">validate</span> <span class="cm">/*= true*/</span><span class="p">)</span>
+  <span class="o">:</span> <span class="n">Config</span><span class="p">(</span><span class="n">ConfigParser</span><span class="p">(</span><span class="n">argc</span><span class="p">,</span> <span class="n">argv</span><span class="p">,</span> <span class="n">mode</span><span class="p">,</span> <span class="n">validate</span><span class="p">))</span> <span class="p">{}</span>
+
+<span class="n">Config</span><span class="o">::</span><span class="n">Config</span><span class="p">(</span><span class="k">const</span> <span class="n">Config</span><span class="o">&amp;</span> <span class="n">other</span><span class="p">)</span> <span class="o">:</span> <span class="n">config_</span><span class="p">(</span><span class="n">YAML</span><span class="o">::</span><span class="n">Clone</span><span class="p">(</span><span class="n">other</span><span class="p">.</span><span class="n">config_</span><span class="p">))</span> <span class="p">{}</span>
+<span class="n">Config</span><span class="o">::</span><span class="n">Config</span><span class="p">(</span><span class="k">const</span> <span class="n">Options</span><span class="o">&amp;</span> <span class="n">options</span><span class="p">)</span> <span class="o">:</span> <span class="n">config_</span><span class="p">(</span><span class="n">options</span><span class="p">.</span><span class="n">cloneToYamlNode</span><span class="p">())</span> <span class="p">{}</span>
+
+<span class="kt">void</span> <span class="n">Config</span><span class="o">::</span><span class="n">initialize</span><span class="p">(</span><span class="n">ConfigParser</span> <span class="k">const</span><span class="o">&amp;</span> <span class="n">cp</span><span class="p">)</span> <span class="p">{</span>
+  <span class="n">config_</span> <span class="o">=</span> <span class="n">YAML</span><span class="o">::</span><span class="n">Clone</span><span class="p">(</span><span class="n">cp</span><span class="p">.</span><span class="n">getConfig</span><span class="p">());</span>
+  <span class="n">cli</span><span class="o">::</span><span class="n">mode</span> <span class="n">mode</span> <span class="o">=</span> <span class="n">cp</span><span class="p">.</span><span class="n">getMode</span><span class="p">();</span>
+
+  <span class="n">createLoggers</span><span class="p">(</span><span class="k">this</span><span class="p">);</span>
+
+  <span class="c1">// echo version and command line</span>
+  <span class="n">LOG</span><span class="p">(</span><span class="n">info</span><span class="p">,</span> <span class="s">&quot;[marian] Marian {}&quot;</span><span class="p">,</span> <span class="n">buildVersion</span><span class="p">());</span>
+  <span class="n">std</span><span class="o">::</span><span class="n">string</span> <span class="n">cmdLine</span> <span class="o">=</span> <span class="n">cp</span><span class="p">.</span><span class="n">cmdLine</span><span class="p">();</span>
+  <span class="n">std</span><span class="o">::</span><span class="n">string</span> <span class="n">hostname</span><span class="p">;</span> <span class="kt">int</span> <span class="n">pid</span><span class="p">;</span> <span class="n">std</span><span class="o">::</span><span class="n">tie</span>
+  <span class="p">(</span><span class="n">hostname</span><span class="p">,</span> <span class="n">pid</span><span class="p">)</span> <span class="o">=</span> <span class="n">utils</span><span class="o">::</span><span class="n">hostnameAndProcessId</span><span class="p">();</span>
+  <span class="n">LOG</span><span class="p">(</span><span class="n">info</span><span class="p">,</span> <span class="s">&quot;[marian] Running on {} as process {} with command line:&quot;</span><span class="p">,</span> <span class="n">hostname</span><span class="p">,</span> <span class="n">pid</span><span class="p">);</span>
+  <span class="n">LOG</span><span class="p">(</span><span class="n">info</span><span class="p">,</span> <span class="s">&quot;[marian] {}&quot;</span><span class="p">,</span> <span class="n">cmdLine</span><span class="p">);</span>
+
+  <span class="c1">// set random seed</span>
+  <span class="k">if</span><span class="p">(</span><span class="n">get</span><span class="o">&lt;</span><span class="kt">size_t</span><span class="o">&gt;</span><span class="p">(</span><span class="s">&quot;seed&quot;</span><span class="p">)</span> <span class="o">==</span> <span class="mi">0</span><span class="p">)</span> <span class="p">{</span>
+    <span class="n">seed</span> <span class="o">=</span> <span class="p">(</span><span class="kt">size_t</span><span class="p">)</span><span class="n">time</span><span class="p">(</span><span class="mi">0</span><span class="p">);</span>
+  <span class="p">}</span> <span class="k">else</span> <span class="p">{</span>
+    <span class="n">seed</span> <span class="o">=</span> <span class="n">get</span><span class="o">&lt;</span><span class="kt">size_t</span><span class="o">&gt;</span><span class="p">(</span><span class="s">&quot;seed&quot;</span><span class="p">);</span>
+  <span class="p">}</span>
+
+  <span class="c1">// load model parameters</span>
+  <span class="kt">bool</span> <span class="n">loaded</span> <span class="o">=</span> <span class="nb">false</span><span class="p">;</span>
+  <span class="k">if</span><span class="p">(</span><span class="n">mode</span> <span class="o">==</span> <span class="n">cli</span><span class="o">::</span><span class="n">mode</span><span class="o">::</span><span class="n">translation</span> <span class="o">||</span> <span class="n">mode</span> <span class="o">==</span> <span class="n">cli</span><span class="o">::</span><span class="n">mode</span><span class="o">::</span><span class="n">server</span><span class="p">)</span> <span class="p">{</span>
+    <span class="k">auto</span> <span class="n">model</span> <span class="o">=</span> <span class="n">get</span><span class="o">&lt;</span><span class="n">std</span><span class="o">::</span><span class="n">vector</span><span class="o">&lt;</span><span class="n">std</span><span class="o">::</span><span class="n">string</span><span class="o">&gt;&gt;</span><span class="p">(</span><span class="s">&quot;models&quot;</span><span class="p">)[</span><span class="mi">0</span><span class="p">];</span>
+    <span class="k">try</span> <span class="p">{</span>
+      <span class="k">if</span><span class="p">(</span><span class="o">!</span><span class="n">get</span><span class="o">&lt;</span><span class="kt">bool</span><span class="o">&gt;</span><span class="p">(</span><span class="s">&quot;ignore-model-config&quot;</span><span class="p">))</span>
+        <span class="n">loaded</span> <span class="o">=</span> <span class="n">loadModelParameters</span><span class="p">(</span><span class="n">model</span><span class="p">);</span>
+    <span class="p">}</span> <span class="k">catch</span><span class="p">(</span><span class="n">std</span><span class="o">::</span><span class="n">runtime_error</span><span class="o">&amp;</span> <span class="p">)</span> <span class="p">{</span>
+      <span class="n">LOG</span><span class="p">(</span><span class="n">info</span><span class="p">,</span> <span class="s">&quot;[config] No model configuration found in model file&quot;</span><span class="p">);</span>
+    <span class="p">}</span>
+  <span class="p">}</span>
+  <span class="c1">// if cli::mode::training or cli::mode::scoring</span>
+  <span class="k">else</span> <span class="p">{</span>
+    <span class="k">auto</span> <span class="n">model</span> <span class="o">=</span> <span class="n">get</span><span class="o">&lt;</span><span class="n">std</span><span class="o">::</span><span class="n">string</span><span class="o">&gt;</span><span class="p">(</span><span class="s">&quot;model&quot;</span><span class="p">);</span>
+    <span class="k">if</span><span class="p">(</span><span class="n">filesystem</span><span class="o">::</span><span class="n">exists</span><span class="p">(</span><span class="n">model</span><span class="p">)</span> <span class="o">&amp;&amp;</span> <span class="o">!</span><span class="n">get</span><span class="o">&lt;</span><span class="kt">bool</span><span class="o">&gt;</span><span class="p">(</span><span class="s">&quot;no-reload&quot;</span><span class="p">))</span> <span class="p">{</span>
+      <span class="k">try</span> <span class="p">{</span>
+        <span class="k">if</span><span class="p">(</span><span class="o">!</span><span class="n">get</span><span class="o">&lt;</span><span class="kt">bool</span><span class="o">&gt;</span><span class="p">(</span><span class="s">&quot;ignore-model-config&quot;</span><span class="p">))</span>
+          <span class="n">loaded</span> <span class="o">=</span> <span class="n">loadModelParameters</span><span class="p">(</span><span class="n">model</span><span class="p">);</span>
+      <span class="p">}</span> <span class="k">catch</span><span class="p">(</span><span class="n">std</span><span class="o">::</span><span class="n">runtime_error</span><span class="o">&amp;</span><span class="p">)</span> <span class="p">{</span>
+        <span class="n">LOG</span><span class="p">(</span><span class="n">info</span><span class="p">,</span> <span class="s">&quot;[config] No model configuration found in model file&quot;</span><span class="p">);</span>
+      <span class="p">}</span>
+    <span class="p">}</span>
+  <span class="p">}</span>
+
+  <span class="c1">// guess --tsv-fields, i.e. the number of fields in a TSV input, if not set</span>
+  <span class="k">if</span><span class="p">(</span><span class="n">get</span><span class="o">&lt;</span><span class="kt">bool</span><span class="o">&gt;</span><span class="p">(</span><span class="s">&quot;tsv&quot;</span><span class="p">)</span> <span class="o">&amp;&amp;</span> <span class="n">get</span><span class="o">&lt;</span><span class="kt">size_t</span><span class="o">&gt;</span><span class="p">(</span><span class="s">&quot;tsv-fields&quot;</span><span class="p">)</span> <span class="o">==</span> <span class="mi">0</span><span class="p">)</span> <span class="p">{</span>
+    <span class="kt">size_t</span> <span class="n">tsvFields</span> <span class="o">=</span> <span class="mi">0</span><span class="p">;</span>
+
+    <span class="c1">// use the length of --input-types if given</span>
+    <span class="k">auto</span> <span class="n">inputTypes</span> <span class="o">=</span> <span class="n">get</span><span class="o">&lt;</span><span class="n">std</span><span class="o">::</span><span class="n">vector</span><span class="o">&lt;</span><span class="n">std</span><span class="o">::</span><span class="n">string</span><span class="o">&gt;&gt;</span><span class="p">(</span><span class="s">&quot;input-types&quot;</span><span class="p">);</span>
+    <span class="k">if</span><span class="p">(</span><span class="o">!</span><span class="n">inputTypes</span><span class="p">.</span><span class="n">empty</span><span class="p">())</span> <span class="p">{</span>
+      <span class="n">tsvFields</span> <span class="o">=</span> <span class="n">inputTypes</span><span class="p">.</span><span class="n">size</span><span class="p">();</span>
+    <span class="p">}</span> <span class="k">else</span> <span class="p">{</span>
+      <span class="k">if</span><span class="p">(</span><span class="n">loaded</span><span class="p">)</span> <span class="p">{</span>
+        <span class="c1">// model.npz has properly set vocab dimensions in special:model.yml,</span>
+        <span class="c1">// so we may use them to determine the number of streams</span>
+        <span class="k">for</span><span class="p">(</span><span class="k">auto</span> <span class="nl">dim</span> <span class="p">:</span> <span class="n">get</span><span class="o">&lt;</span><span class="n">std</span><span class="o">::</span><span class="n">vector</span><span class="o">&lt;</span><span class="kt">size_t</span><span class="o">&gt;&gt;</span><span class="p">(</span><span class="s">&quot;dim-vocabs&quot;</span><span class="p">))</span>
+          <span class="k">if</span><span class="p">(</span><span class="n">dim</span> <span class="o">!=</span> <span class="mi">0</span><span class="p">)</span>  <span class="c1">// language models have a fake extra vocab</span>
+            <span class="o">++</span><span class="n">tsvFields</span><span class="p">;</span>
+        <span class="c1">// For translation there is no target stream</span>
+        <span class="k">if</span><span class="p">((</span><span class="n">mode</span> <span class="o">==</span> <span class="n">cli</span><span class="o">::</span><span class="n">mode</span><span class="o">::</span><span class="n">translation</span> <span class="o">||</span> <span class="n">mode</span> <span class="o">==</span> <span class="n">cli</span><span class="o">::</span><span class="n">mode</span><span class="o">::</span><span class="n">server</span><span class="p">)</span> <span class="o">&amp;&amp;</span> <span class="n">tsvFields</span> <span class="o">&gt;</span> <span class="mi">1</span><span class="p">)</span>
+          <span class="o">--</span><span class="n">tsvFields</span><span class="p">;</span>
+      <span class="p">}</span> <span class="k">else</span> <span class="p">{</span>
+        <span class="c1">// If parameters from model.npz special:model.yml were not loaded,</span>
+        <span class="c1">// guess the number of inputs and outputs based on the model type name.</span>
+        <span class="c1">// TODO: This is very britle, find a better solution</span>
+        <span class="k">auto</span> <span class="n">modelType</span> <span class="o">=</span> <span class="n">get</span><span class="o">&lt;</span><span class="n">std</span><span class="o">::</span><span class="n">string</span><span class="o">&gt;</span><span class="p">(</span><span class="s">&quot;type&quot;</span><span class="p">);</span>
+
+        <span class="n">tsvFields</span> <span class="o">=</span> <span class="mi">1</span><span class="p">;</span>
+        <span class="k">if</span><span class="p">(</span><span class="n">modelType</span><span class="p">.</span><span class="n">find</span><span class="p">(</span><span class="s">&quot;multi-&quot;</span><span class="p">,</span> <span class="mi">0</span><span class="p">)</span> <span class="o">!=</span> <span class="n">std</span><span class="o">::</span><span class="n">string</span><span class="o">::</span><span class="n">npos</span><span class="p">)</span>  <span class="c1">// is a dual-source model</span>
+          <span class="n">tsvFields</span> <span class="o">+=</span> <span class="mi">1</span><span class="p">;</span>
+        <span class="k">if</span><span class="p">(</span><span class="n">mode</span> <span class="o">==</span> <span class="n">cli</span><span class="o">::</span><span class="n">mode</span><span class="o">::</span><span class="n">training</span> <span class="o">||</span> <span class="n">mode</span> <span class="o">==</span> <span class="n">cli</span><span class="o">::</span><span class="n">mode</span><span class="o">::</span><span class="n">scoring</span><span class="p">)</span>
+          <span class="k">if</span><span class="p">(</span><span class="n">modelType</span><span class="p">.</span><span class="n">rfind</span><span class="p">(</span><span class="s">&quot;lm&quot;</span><span class="p">,</span> <span class="mi">0</span><span class="p">)</span> <span class="o">!=</span> <span class="mi">0</span><span class="p">)</span>  <span class="c1">// unless it is a language model</span>
+            <span class="n">tsvFields</span> <span class="o">+=</span> <span class="mi">1</span><span class="p">;</span>
+      <span class="p">}</span>
+
+      <span class="c1">// count fields with guided-alignment or data-weighting too</span>
+      <span class="k">if</span><span class="p">(</span><span class="n">mode</span> <span class="o">==</span> <span class="n">cli</span><span class="o">::</span><span class="n">mode</span><span class="o">::</span><span class="n">training</span><span class="p">)</span> <span class="p">{</span>
+        <span class="k">if</span><span class="p">(</span><span class="n">has</span><span class="p">(</span><span class="s">&quot;guided-alignment&quot;</span><span class="p">)</span> <span class="o">&amp;&amp;</span> <span class="n">get</span><span class="o">&lt;</span><span class="n">std</span><span class="o">::</span><span class="n">string</span><span class="o">&gt;</span><span class="p">(</span><span class="s">&quot;guided-alignment&quot;</span><span class="p">)</span> <span class="o">!=</span> <span class="s">&quot;none&quot;</span><span class="p">)</span>
+          <span class="n">tsvFields</span> <span class="o">+=</span> <span class="mi">1</span><span class="p">;</span>
+        <span class="k">if</span><span class="p">(</span><span class="n">has</span><span class="p">(</span><span class="s">&quot;data-weighting&quot;</span><span class="p">)</span> <span class="o">&amp;&amp;</span> <span class="o">!</span><span class="n">get</span><span class="o">&lt;</span><span class="n">std</span><span class="o">::</span><span class="n">string</span><span class="o">&gt;</span><span class="p">(</span><span class="s">&quot;data-weighting&quot;</span><span class="p">).</span><span class="n">empty</span><span class="p">())</span>
+          <span class="n">tsvFields</span> <span class="o">+=</span> <span class="mi">1</span><span class="p">;</span>
+      <span class="p">}</span>
+    <span class="p">}</span>
+
+    <span class="n">config_</span><span class="p">[</span><span class="s">&quot;tsv-fields&quot;</span><span class="p">]</span> <span class="o">=</span> <span class="n">tsvFields</span><span class="p">;</span>
+  <span class="p">}</span>
+
+  <span class="c1">// echo full configuration</span>
+  <span class="n">log</span><span class="p">();</span>
+
+  <span class="c1">// Log version of Marian that has been used to create the model.</span>
+  <span class="c1">//</span>
+  <span class="c1">// Key &quot;version&quot; is present only if loaded from model parameters and is not</span>
+  <span class="c1">// related to --version flag</span>
+  <span class="k">if</span><span class="p">(</span><span class="n">has</span><span class="p">(</span><span class="s">&quot;version&quot;</span><span class="p">))</span> <span class="p">{</span>
+    <span class="k">auto</span> <span class="n">version</span> <span class="o">=</span> <span class="n">get</span><span class="o">&lt;</span><span class="n">std</span><span class="o">::</span><span class="n">string</span><span class="o">&gt;</span><span class="p">(</span><span class="s">&quot;version&quot;</span><span class="p">);</span>
+
+    <span class="k">if</span><span class="p">(</span><span class="n">mode</span> <span class="o">==</span> <span class="n">cli</span><span class="o">::</span><span class="n">mode</span><span class="o">::</span><span class="n">training</span> <span class="o">&amp;&amp;</span> <span class="n">version</span> <span class="o">!=</span> <span class="n">buildVersion</span><span class="p">())</span>
+      <span class="n">LOG</span><span class="p">(</span><span class="n">info</span><span class="p">,</span>
+          <span class="s">&quot;[config] Loaded model has been created with Marian {}, &quot;</span>
+          <span class="s">&quot;will be overwritten with current version {} at saving&quot;</span><span class="p">,</span>
+          <span class="n">version</span><span class="p">,</span>
+          <span class="n">buildVersion</span><span class="p">());</span>
+    <span class="k">else</span>
+      <span class="nf">LOG</span><span class="p">(</span><span class="n">info</span><span class="p">,</span> <span class="s">&quot;[config] Loaded model has been created with Marian {}&quot;</span><span class="p">,</span> <span class="n">version</span><span class="p">);</span>
+
+    <span class="c1">// Remove &quot;version&quot; from config to make it consistent among different start-up scenarios</span>
+    <span class="n">config_</span><span class="p">.</span><span class="n">remove</span><span class="p">(</span><span class="s">&quot;version&quot;</span><span class="p">);</span>
+  <span class="p">}</span>
+  <span class="c1">// If this is a newly started training</span>
+  <span class="k">else</span> <span class="k">if</span><span class="p">(</span><span class="n">mode</span> <span class="o">==</span> <span class="n">cli</span><span class="o">::</span><span class="n">mode</span><span class="o">::</span><span class="n">training</span><span class="p">)</span> <span class="p">{</span>
+    <span class="n">LOG</span><span class="p">(</span><span class="n">info</span><span class="p">,</span> <span class="s">&quot;[config] Model is being created with Marian {}&quot;</span><span class="p">,</span> <span class="n">buildVersion</span><span class="p">());</span>
+  <span class="p">}</span>
+<span class="p">}</span>
+
+<span class="kt">bool</span> <span class="n">Config</span><span class="o">::</span><span class="n">has</span><span class="p">(</span><span class="k">const</span> <span class="n">std</span><span class="o">::</span><span class="n">string</span><span class="o">&amp;</span> <span class="n">key</span><span class="p">)</span> <span class="k">const</span> <span class="p">{</span>
+  <span class="k">return</span> <span class="n">config_</span><span class="p">[</span><span class="n">key</span><span class="p">];</span>
+<span class="p">}</span>
+
+<span class="n">YAML</span><span class="o">::</span><span class="n">Node</span> <span class="n">Config</span><span class="o">::</span><span class="k">operator</span><span class="p">[](</span><span class="k">const</span> <span class="n">std</span><span class="o">::</span><span class="n">string</span><span class="o">&amp;</span> <span class="n">key</span><span class="p">)</span> <span class="k">const</span> <span class="p">{</span>
+  <span class="k">return</span> <span class="nf">get</span><span class="p">(</span><span class="n">key</span><span class="p">);</span>
+<span class="p">}</span>
+
+<span class="n">YAML</span><span class="o">::</span><span class="n">Node</span> <span class="n">Config</span><span class="o">::</span><span class="n">get</span><span class="p">(</span><span class="k">const</span> <span class="n">std</span><span class="o">::</span><span class="n">string</span><span class="o">&amp;</span> <span class="n">key</span><span class="p">)</span> <span class="k">const</span> <span class="p">{</span>
+  <span class="k">return</span> <span class="n">config_</span><span class="p">[</span><span class="n">key</span><span class="p">];</span>
+<span class="p">}</span>
+
+<span class="k">const</span> <span class="n">YAML</span><span class="o">::</span><span class="n">Node</span><span class="o">&amp;</span> <span class="n">Config</span><span class="o">::</span><span class="n">get</span><span class="p">()</span> <span class="k">const</span> <span class="p">{</span>
+  <span class="k">return</span> <span class="n">config_</span><span class="p">;</span>
+<span class="p">}</span>
+
+<span class="n">YAML</span><span class="o">::</span><span class="n">Node</span><span class="o">&amp;</span> <span class="n">Config</span><span class="o">::</span><span class="n">get</span><span class="p">()</span> <span class="p">{</span>
+  <span class="k">return</span> <span class="n">config_</span><span class="p">;</span>
+<span class="p">}</span>
+
+<span class="kt">void</span> <span class="n">Config</span><span class="o">::</span><span class="n">save</span><span class="p">(</span><span class="k">const</span> <span class="n">std</span><span class="o">::</span><span class="n">string</span><span class="o">&amp;</span> <span class="n">name</span><span class="p">)</span> <span class="p">{</span>
+  <span class="n">io</span><span class="o">::</span><span class="n">OutputFileStream</span> <span class="n">out</span><span class="p">(</span><span class="n">name</span><span class="p">);</span>
+  <span class="n">out</span> <span class="o">&lt;&lt;</span> <span class="o">*</span><span class="k">this</span><span class="p">;</span>
+<span class="p">}</span>
+
+<span class="kt">bool</span> <span class="n">Config</span><span class="o">::</span><span class="n">loadModelParameters</span><span class="p">(</span><span class="k">const</span> <span class="n">std</span><span class="o">::</span><span class="n">string</span><span class="o">&amp;</span> <span class="n">name</span><span class="p">)</span> <span class="p">{</span>
+  <span class="n">YAML</span><span class="o">::</span><span class="n">Node</span> <span class="n">config</span><span class="p">;</span>
+  <span class="n">io</span><span class="o">::</span><span class="n">getYamlFromModel</span><span class="p">(</span><span class="n">config</span><span class="p">,</span> <span class="s">&quot;special:model.yml&quot;</span><span class="p">,</span> <span class="n">name</span><span class="p">);</span>
+  <span class="k">override</span><span class="p">(</span><span class="n">config</span><span class="p">);</span>
+  <span class="k">return</span> <span class="nb">true</span><span class="p">;</span>
+<span class="p">}</span>
+
+<span class="kt">bool</span> <span class="n">Config</span><span class="o">::</span><span class="n">loadModelParameters</span><span class="p">(</span><span class="k">const</span> <span class="kt">void</span><span class="o">*</span> <span class="n">ptr</span><span class="p">)</span> <span class="p">{</span>
+  <span class="n">YAML</span><span class="o">::</span><span class="n">Node</span> <span class="n">config</span><span class="p">;</span>
+  <span class="n">io</span><span class="o">::</span><span class="n">getYamlFromModel</span><span class="p">(</span><span class="n">config</span><span class="p">,</span> <span class="s">&quot;special:model.yml&quot;</span><span class="p">,</span> <span class="n">ptr</span><span class="p">);</span>
+  <span class="k">override</span><span class="p">(</span><span class="n">config</span><span class="p">);</span>
+  <span class="k">return</span> <span class="nb">true</span><span class="p">;</span>
+<span class="p">}</span>
+
+<span class="kt">void</span> <span class="n">Config</span><span class="o">::</span><span class="k">override</span><span class="p">(</span><span class="k">const</span> <span class="n">YAML</span><span class="o">::</span><span class="n">Node</span><span class="o">&amp;</span> <span class="n">params</span><span class="p">)</span> <span class="p">{</span>
+  <span class="k">for</span><span class="p">(</span><span class="k">auto</span><span class="o">&amp;</span> <span class="nl">it</span> <span class="p">:</span> <span class="n">params</span><span class="p">)</span> <span class="p">{</span>
+    <span class="n">config_</span><span class="p">[</span><span class="n">it</span><span class="p">.</span><span class="n">first</span><span class="p">.</span><span class="n">as</span><span class="o">&lt;</span><span class="n">std</span><span class="o">::</span><span class="n">string</span><span class="o">&gt;</span><span class="p">()]</span> <span class="o">=</span> <span class="n">it</span><span class="p">.</span><span class="n">second</span><span class="p">;</span>
+  <span class="p">}</span>
+<span class="p">}</span>
+
+<span class="kt">void</span> <span class="n">Config</span><span class="o">::</span><span class="n">log</span><span class="p">()</span> <span class="p">{</span>
+  <span class="n">YAML</span><span class="o">::</span><span class="n">Emitter</span> <span class="n">out</span><span class="p">;</span>
+  <span class="n">cli</span><span class="o">::</span><span class="n">OutputYaml</span><span class="p">(</span><span class="n">config_</span><span class="p">,</span> <span class="n">out</span><span class="p">);</span>
+  <span class="n">std</span><span class="o">::</span><span class="n">string</span> <span class="n">configString</span> <span class="o">=</span> <span class="n">out</span><span class="p">.</span><span class="n">c_str</span><span class="p">();</span>
+
+  <span class="c1">// print YAML prepending each line with [config]</span>
+  <span class="k">auto</span> <span class="n">lines</span> <span class="o">=</span> <span class="n">utils</span><span class="o">::</span><span class="n">split</span><span class="p">(</span><span class="n">configString</span><span class="p">,</span> <span class="s">&quot;</span><span class="se">\n</span><span class="s">&quot;</span><span class="p">);</span>
+  <span class="k">for</span><span class="p">(</span><span class="k">auto</span><span class="o">&amp;</span> <span class="nl">line</span> <span class="p">:</span> <span class="n">lines</span><span class="p">)</span>
+    <span class="n">LOG</span><span class="p">(</span><span class="n">info</span><span class="p">,</span> <span class="s">&quot;[config] {}&quot;</span><span class="p">,</span> <span class="n">line</span><span class="p">);</span>
+<span class="p">}</span>
+
+<span class="c1">// Parse the device-spec parameters (--num-devices, --devices, --cpu-threads) into an array of</span>
+<span class="c1">// size_t For multi-node, this returns the devices vector for the given rank, where &quot;devices&quot; really</span>
+<span class="c1">// refers to how many graph instances are used (for CPU, that is the number of threads).</span>
+<span class="c1">//</span>
+<span class="c1">// For CPU, specify --cpu-threads.</span>
+<span class="c1">//</span>
+<span class="c1">// For GPU, specify either --num-devices or --devices.</span>
+<span class="c1">//</span>
+<span class="c1">// For single-MPI-process GPU, if both are given, --num-devices must be equal to size of --devices.</span>
+<span class="c1">//</span>
+<span class="c1">// For multi-MPI-process GPU, if --devices is equal to --num-devices, then the device set is shared</span>
+<span class="c1">// across all nodes. Alternatively, it can contain a multiple of --num-devices entries. In that</span>
+<span class="c1">// case, devices lists the set of MPI-process-local GPUs for all MPI processes, concatenated. This</span>
+<span class="c1">// last form must be used when running a multi-MPI-process MPI job on a single machine with multiple</span>
+<span class="c1">// GPUs.</span>
+<span class="c1">//</span>
+<span class="c1">// Examples:</span>
+<span class="c1">//  - CPU:</span>
+<span class="c1">//    --cpu-threads 8</span>
+<span class="c1">//  - single MPI process, single GPU:</span>
+<span class="c1">//    [no option given]  // will use device 0</span>
+<span class="c1">//    --num-devices 1    // same</span>
+<span class="c1">//    --devices 2        // will use device 2</span>
+<span class="c1">//  - single MPI process, multiple GPU:</span>
+<span class="c1">//    --num-devices 4    // will use devices 0, 1, 2, and 3</span>
+<span class="c1">//    --devices 0 1 2 3  // same</span>
+<span class="c1">//    --devices 4 5 6 7  // will use devices 4, 5, 6, and 7</span>
+<span class="c1">//  - multiple MPI processes, multiple GPU:</span>
+<span class="c1">//    --num-devices 4   // will use devices 0, 1, 2, and 3 in all MPI process, respectively</span>
+<span class="c1">//    --devices 4 5 6 7 // will use devices 4, 5, 6, and 7 in all MPI process, respectively</span>
+<span class="c1">//    --num-devices 1 --devices 0 1 2 3 4 5 6 7 // this is a 8-process job on a single machine;</span>
+<span class="c1">//                                              // MPI processes 0..7 use devices 0..7, respectively</span>
+<span class="c1">//    --num-devices 4 --devices 0 1 2 3 4 5 6 7 // this is a 2-process job on a single machine;</span>
+<span class="c1">//                                              // MPI process 0 uses 0..3, and MPI process 1 uses 4..7</span>
+<span class="n">std</span><span class="o">::</span><span class="n">vector</span><span class="o">&lt;</span><span class="n">DeviceId</span><span class="o">&gt;</span> <span class="n">Config</span><span class="o">::</span><span class="n">getDevices</span><span class="p">(</span><span class="n">Ptr</span><span class="o">&lt;</span><span class="n">Options</span><span class="o">&gt;</span> <span class="n">options</span><span class="p">,</span>
+                                         <span class="kt">size_t</span> <span class="n">myMPIRank</span> <span class="cm">/*= 0*/</span><span class="p">,</span>
+                                         <span class="kt">size_t</span> <span class="n">numMPIProcesses</span> <span class="cm">/*= 1*/</span><span class="p">)</span> <span class="p">{</span>
+  <span class="n">std</span><span class="o">::</span><span class="n">vector</span><span class="o">&lt;</span><span class="n">DeviceId</span><span class="o">&gt;</span> <span class="n">devices</span><span class="p">;</span>
+  <span class="k">auto</span> <span class="n">devicesArg</span> <span class="o">=</span> <span class="n">options</span><span class="o">-&gt;</span><span class="n">get</span><span class="o">&lt;</span><span class="n">std</span><span class="o">::</span><span class="n">vector</span><span class="o">&lt;</span><span class="n">std</span><span class="o">::</span><span class="n">string</span><span class="o">&gt;&gt;</span><span class="p">(</span><span class="s">&quot;devices&quot;</span><span class="p">);</span>
+
+  <span class="c1">// CPU: devices[] just enumerate the threads (note: --devices refers to GPUs, and is thus ignored)</span>
+  <span class="k">if</span><span class="p">(</span><span class="n">options</span><span class="o">-&gt;</span><span class="n">get</span><span class="o">&lt;</span><span class="kt">size_t</span><span class="o">&gt;</span><span class="p">(</span><span class="s">&quot;cpu-threads&quot;</span><span class="p">)</span> <span class="o">&gt;</span> <span class="mi">0</span><span class="p">)</span> <span class="p">{</span>
+    <span class="k">for</span><span class="p">(</span><span class="kt">size_t</span> <span class="n">i</span> <span class="o">=</span> <span class="mi">0</span><span class="p">;</span> <span class="n">i</span> <span class="o">&lt;</span> <span class="n">options</span><span class="o">-&gt;</span><span class="n">get</span><span class="o">&lt;</span><span class="kt">size_t</span><span class="o">&gt;</span><span class="p">(</span><span class="s">&quot;cpu-threads&quot;</span><span class="p">);</span> <span class="o">++</span><span class="n">i</span><span class="p">)</span>
+      <span class="n">devices</span><span class="p">.</span><span class="n">push_back</span><span class="p">({</span><span class="n">i</span><span class="p">,</span> <span class="n">DeviceType</span><span class="o">::</span><span class="n">cpu</span><span class="p">});</span>
+  <span class="p">}</span>
+  <span class="c1">// GPU: devices[] are interpreted in a more complex way</span>
+  <span class="k">else</span> <span class="p">{</span>
+    <span class="kt">size_t</span> <span class="n">numDevices</span> <span class="o">=</span> <span class="n">options</span><span class="o">-&gt;</span><span class="n">get</span><span class="o">&lt;</span><span class="kt">size_t</span><span class="o">&gt;</span><span class="p">(</span><span class="s">&quot;num-devices&quot;</span><span class="p">,</span> <span class="mi">0</span><span class="p">);</span>
+    <span class="n">std</span><span class="o">::</span><span class="n">vector</span><span class="o">&lt;</span><span class="kt">size_t</span><span class="o">&gt;</span> <span class="n">deviceNos</span><span class="p">;</span>
+    <span class="k">for</span><span class="p">(</span><span class="k">auto</span> <span class="nl">d</span> <span class="p">:</span> <span class="n">devicesArg</span><span class="p">)</span>
+      <span class="n">deviceNos</span><span class="p">.</span><span class="n">push_back</span><span class="p">((</span><span class="kt">size_t</span><span class="p">)</span><span class="n">std</span><span class="o">::</span><span class="n">stoull</span><span class="p">(</span><span class="n">d</span><span class="p">));</span>
+
+    <span class="c1">// if devices[] is empty then default to 0..N-1, where N = numDevices or 1</span>
+    <span class="k">if</span> <span class="p">(</span><span class="n">deviceNos</span><span class="p">.</span><span class="n">empty</span><span class="p">())</span> <span class="p">{</span>
+      <span class="k">if</span><span class="p">(</span><span class="n">numDevices</span> <span class="o">==</span> <span class="mi">0</span><span class="p">)</span>  <span class="c1">// if neither is given, then we default to 1 device, which is device[0]</span>
+        <span class="n">numDevices</span> <span class="o">=</span> <span class="mi">1</span><span class="p">;</span>
+      <span class="k">for</span><span class="p">(</span><span class="kt">size_t</span> <span class="n">i</span> <span class="o">=</span> <span class="mi">0</span><span class="p">;</span> <span class="n">i</span> <span class="o">&lt;</span> <span class="n">numDevices</span><span class="p">;</span> <span class="o">++</span><span class="n">i</span><span class="p">)</span> <span class="c1">// default to 0..N-1</span>
+        <span class="n">deviceNos</span><span class="p">.</span><span class="n">push_back</span><span class="p">(</span><span class="n">i</span><span class="p">);</span>
+    <span class="p">}</span>
+    <span class="c1">// devices[] is not empty</span>
+    <span class="k">else</span> <span class="k">if</span><span class="p">(</span><span class="n">numDevices</span> <span class="o">==</span> <span class="mi">0</span><span class="p">)</span> <span class="c1">// if device list then num devices defaults to list size</span>
+      <span class="n">numDevices</span> <span class="o">=</span> <span class="n">deviceNos</span><span class="p">.</span><span class="n">size</span><span class="p">();</span> <span class="c1">// default to #devices</span>
+
+    <span class="c1">// If multiple MPI processes then we can either have one set of devices shared across all</span>
+    <span class="c1">// MPI-processes, or the full list across all MPI processes concatenated.  E.g. --num-devices 1</span>
+    <span class="c1">// --devices 0 2 4 5 means 4 processes using devices 0, 2, 4, and 5, respectively.  In that</span>
+    <span class="c1">// case, we cut out and return our own slice. In the above example, for MPI process 1, we would</span>
+    <span class="c1">// return {2}.</span>
+
+    <span class="c1">// special-case the error message (also caught indirectly below, but with a msg that is</span>
+    <span class="c1">// confusing when one does not run multi-node)</span>
+    <span class="k">if</span><span class="p">(</span><span class="n">numMPIProcesses</span> <span class="o">==</span> <span class="mi">1</span><span class="p">)</span>
+      <span class="c1">// same as requiring numPerMPIProcessDeviceNos == 1</span>
+      <span class="c1">// @TODO: improve logging message as devices[] and numDevices are not informative for the user</span>
+      <span class="n">ABORT_IF</span><span class="p">(</span><span class="n">numDevices</span> <span class="o">!=</span> <span class="n">deviceNos</span><span class="p">.</span><span class="n">size</span><span class="p">(),</span> <span class="s">&quot;devices[] size must be equal to numDevices&quot;</span><span class="p">);</span>
+
+    <span class="c1">// how many lists concatenated in devices[]? Allowed is either 1 (=shared) or numWorkers</span>
+    <span class="kt">size_t</span> <span class="n">numPerMPIProcessDeviceNos</span> <span class="o">=</span> <span class="n">deviceNos</span><span class="p">.</span><span class="n">size</span><span class="p">()</span> <span class="o">/</span> <span class="n">numDevices</span><span class="p">;</span>
+    <span class="c1">// @TODO: improve logging message as devices[] and numDevices are not informative for the user</span>
+    <span class="n">ABORT_IF</span><span class="p">(</span><span class="n">numDevices</span> <span class="o">*</span> <span class="n">numPerMPIProcessDeviceNos</span> <span class="o">!=</span> <span class="n">deviceNos</span><span class="p">.</span><span class="n">size</span><span class="p">(),</span>
+             <span class="s">&quot;devices[] size must be equal to or a multiple of numDevices&quot;</span><span class="p">);</span>  <span class="c1">// (check that it is a</span>
+                                                                              <span class="c1">// multiple)</span>
+
+    <span class="c1">// if multiple concatenated lists are given, slice out the one for myMPIRank</span>
+    <span class="k">if</span><span class="p">(</span><span class="n">numPerMPIProcessDeviceNos</span> <span class="o">!=</span> <span class="mi">1</span><span class="p">)</span> <span class="p">{</span>
+      <span class="n">ABORT_IF</span><span class="p">(</span><span class="n">numPerMPIProcessDeviceNos</span> <span class="o">!=</span> <span class="n">numMPIProcesses</span><span class="p">,</span>
+               <span class="s">&quot;devices[] must either list a shared set of devices, or one set per MPI process&quot;</span><span class="p">);</span>
+      <span class="n">deviceNos</span><span class="p">.</span><span class="n">erase</span><span class="p">(</span><span class="n">deviceNos</span><span class="p">.</span><span class="n">begin</span><span class="p">(),</span> <span class="n">deviceNos</span><span class="p">.</span><span class="n">begin</span><span class="p">()</span> <span class="o">+</span> <span class="n">myMPIRank</span> <span class="o">*</span> <span class="n">numDevices</span><span class="p">);</span>
+      <span class="n">deviceNos</span><span class="p">.</span><span class="n">resize</span><span class="p">(</span><span class="n">numDevices</span><span class="p">);</span>
+    <span class="p">}</span>
+    <span class="c1">// form the final vector</span>
+    <span class="k">for</span><span class="p">(</span><span class="k">auto</span> <span class="nl">d</span> <span class="p">:</span> <span class="n">deviceNos</span><span class="p">)</span>
+      <span class="n">devices</span><span class="p">.</span><span class="n">push_back</span><span class="p">({</span> <span class="n">d</span><span class="p">,</span> <span class="n">DeviceType</span><span class="o">::</span><span class="n">gpu</span> <span class="p">});</span>
+  <span class="p">}</span>
+<span class="cp">#ifdef MPI_FOUND</span>
+  <span class="k">for</span><span class="p">(</span><span class="k">auto</span> <span class="nl">d</span> <span class="p">:</span> <span class="n">devices</span><span class="p">)</span>
+    <span class="n">LOG</span><span class="p">(</span><span class="n">info</span><span class="p">,</span> <span class="s">&quot;[MPI rank {} out of {}]: {}[{}]&quot;</span><span class="p">,</span>
+        <span class="n">myMPIRank</span><span class="p">,</span> <span class="n">numMPIProcesses</span><span class="p">,</span> <span class="n">d</span><span class="p">.</span><span class="n">type</span> <span class="o">==</span> <span class="n">DeviceType</span><span class="o">::</span><span class="n">cpu</span> <span class="o">?</span> <span class="s">&quot;CPU&quot;</span> <span class="o">:</span> <span class="s">&quot;GPU&quot;</span><span class="p">,</span> <span class="n">d</span><span class="p">.</span><span class="n">no</span><span class="p">);</span>
+<span class="cp">#endif</span>
+  <span class="k">return</span> <span class="n">devices</span><span class="p">;</span>
+<span class="p">}</span>
+
+<span class="n">Ptr</span><span class="o">&lt;</span><span class="n">Options</span><span class="o">&gt;</span>
+<span class="n">parseOptions</span><span class="p">(</span><span class="kt">int</span> <span class="n">argc</span><span class="p">,</span> <span class="kt">char</span><span class="o">**</span> <span class="n">argv</span><span class="p">,</span> <span class="n">cli</span><span class="o">::</span><span class="n">mode</span> <span class="n">mode</span><span class="p">,</span> <span class="kt">bool</span> <span class="n">validate</span><span class="p">){</span>
+  <span class="n">ConfigParser</span> <span class="nf">cp</span><span class="p">(</span><span class="n">mode</span><span class="p">);</span>
+  <span class="k">return</span> <span class="n">cp</span><span class="p">.</span><span class="n">parseOptions</span><span class="p">(</span><span class="n">argc</span><span class="p">,</span> <span class="n">argv</span><span class="p">,</span> <span class="n">validate</span><span class="p">);</span>
+<span class="p">}</span>
+
+<span class="n">std</span><span class="o">::</span><span class="n">ostream</span><span class="o">&amp;</span> <span class="k">operator</span><span class="o">&lt;&lt;</span><span class="p">(</span><span class="n">std</span><span class="o">::</span><span class="n">ostream</span><span class="o">&amp;</span> <span class="n">out</span><span class="p">,</span> <span class="k">const</span> <span class="n">Config</span><span class="o">&amp;</span> <span class="n">config</span><span class="p">)</span> <span class="p">{</span>
+  <span class="n">YAML</span><span class="o">::</span><span class="n">Emitter</span> <span class="n">outYaml</span><span class="p">;</span>
+  <span class="n">cli</span><span class="o">::</span><span class="n">OutputYaml</span><span class="p">(</span><span class="n">config</span><span class="p">.</span><span class="n">get</span><span class="p">(),</span> <span class="n">outYaml</span><span class="p">);</span>
+  <span class="n">out</span> <span class="o">&lt;&lt;</span> <span class="n">outYaml</span><span class="p">.</span><span class="n">c_str</span><span class="p">();</span>
+  <span class="k">return</span> <span class="n">out</span><span class="p">;</span>
+<span class="p">}</span>
+
+<span class="p">}</span>  <span class="c1">// namespace marian</span>
+</pre></div>
+</div>
+</div>
+
+
+           </div>
+           
+          </div>
+          <footer>
+
+  <hr/>
+
+  <div role="contentinfo">
+    <p>
+        &#169; Copyright 2021, Marian NMT Team.
+
+    </p>
+  </div>
+    
+    
+    
+    Built with <a href="https://www.sphinx-doc.org/">Sphinx</a> using a
+    
+    <a href="https://github.com/readthedocs/sphinx_rtd_theme">theme</a>
+    
+    provided by <a href="https://readthedocs.org">Read the Docs</a>. 
+
+</footer>
+        </div>
+      </div>
+
+    </section>
+
+  </div>
+  
+
+  <script type="text/javascript">
+      jQuery(function () {
+          SphinxRtdTheme.Navigation.enable(true);
+      });
+  </script>
+
+  
+  
+    
+   
+
+</body>
+</html>

@@ -1,0 +1,586 @@
+
+
+<!DOCTYPE html>
+<html class="writer-html5" lang="en" >
+<head>
+  <meta charset="utf-8" />
+  
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  
+  <title>Class Node &mdash; Marian NMT v1.10.1 2021-02-23 documentation</title>
+  
+
+  
+  <link rel="stylesheet" href="../_static/css/theme.css" type="text/css" />
+  <link rel="stylesheet" href="../_static/pygments.css" type="text/css" />
+  <link rel="stylesheet" href="../_static/css/custom.css" type="text/css" />
+  <link rel="stylesheet" href="../_static/collapsible-lists/css/tree_view.css" type="text/css" />
+
+  
+  
+
+  
+  
+
+  
+    <link rel="canonical" href="http://marian-nmt.github.io/docs/api/api/classmarian_1_1Node.html" />
+
+  
+  <!--[if lt IE 9]>
+    <script src="../_static/js/html5shiv.min.js"></script>
+  <![endif]-->
+  
+    
+      <script type="text/javascript" id="documentation_options" data-url_root="../" src="../_static/documentation_options.js"></script>
+        <script src="../_static/jquery.js"></script>
+        <script src="../_static/underscore.js"></script>
+        <script src="../_static/doctools.js"></script>
+        <script src="../_static/language_data.js"></script>
+        <script src="../_static/collapsible-lists/js/CollapsibleLists.compressed.js"></script>
+        <script src="../_static/collapsible-lists/js/apply-collapsible-lists.js"></script>
+    
+    <script type="text/javascript" src="../_static/js/theme.js"></script>
+
+    
+    <link rel="index" title="Index" href="../genindex.html" />
+    <link rel="search" title="Search" href="../search.html" />
+    <link rel="next" title="Class Norm" href="classmarian_1_1Norm.html" />
+    <link rel="prev" title="Class Nematus" href="classmarian_1_1Nematus.html" /> 
+</head>
+
+<body class="wy-body-for-nav">
+
+   
+  <div class="wy-grid-for-nav">
+    
+    <nav data-toggle="wy-nav-shift" class="wy-nav-side">
+      <div class="wy-side-scroll">
+        <div class="wy-side-nav-search" >
+          
+
+          
+            <a href="../index.html" class="icon icon-home"> Marian NMT
+          
+
+          
+          </a>
+
+          
+            
+            
+              <div class="version">
+                v1.10.1
+              </div>
+            
+          
+
+          
+<div role="search">
+  <form id="rtd-search-form" class="wy-form" action="../search.html" method="get">
+    <input type="text" name="q" placeholder="Search docs" />
+    <input type="hidden" name="check_keywords" value="yes" />
+    <input type="hidden" name="area" value="default" />
+  </form>
+</div>
+
+          
+        </div>
+
+        
+        <div class="wy-menu wy-menu-vertical" data-spy="affix" role="navigation" aria-label="main navigation">
+          
+            
+            
+              
+            
+            
+              <p class="caption"><span class="caption-text">Contents:</span></p>
+<ul>
+<li class="toctree-l1"><a class="reference internal" href="../install.html">Installation</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../graph.html">Expression graphs</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../operators.html">Graph operations</a></li>
+<li class="toctree-l1"><a class="reference internal" href="library_index.html">Library API</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../contributing.html">How to contribute to Marian</a></li>
+</ul>
+
+            
+          
+        </div>
+        
+      </div>
+    </nav>
+
+    <section data-toggle="wy-nav-shift" class="wy-nav-content-wrap">
+
+      
+      <nav class="wy-nav-top" aria-label="top navigation">
+        
+          <i data-toggle="wy-nav-top" class="fa fa-bars"></i>
+          <a href="../index.html">Marian NMT</a>
+        
+      </nav>
+
+
+      <div class="wy-nav-content">
+        
+        <div class="rst-content">
+        
+          
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+<div role="navigation" aria-label="breadcrumbs navigation">
+
+  <ul class="wy-breadcrumbs">
+    
+      <li><a href="../index.html" class="icon icon-home"></a> &raquo;</li>
+        
+          <li><a href="library_index.html">Library API</a> &raquo;</li>
+        
+      <li>Class Node</li>
+    
+    
+      <li class="wy-breadcrumbs-aside">
+        
+          
+            <a href="../_sources/api/classmarian_1_1Node.rst.txt" rel="nofollow"> View page source</a>
+          
+        
+      </li>
+    
+  </ul>
+
+  
+  <hr/>
+</div>
+          <div role="main" class="document" itemscope="itemscope" itemtype="http://schema.org/Article">
+           <div itemprop="articleBody">
+            
+  <div class="section" id="class-node">
+<span id="exhale-class-classmarian-1-1node"></span><h1>Class Node<a class="headerlink" href="#class-node" title="Permalink to this headline">¶</a></h1>
+<ul class="simple">
+<li><p>Defined in <a class="reference internal" href="file_src_graph_node.h.html#file-src-graph-node-h"><span class="std std-ref">File node.h</span></a></p></li>
+</ul>
+<div class="section" id="inheritance-relationships">
+<h2>Inheritance Relationships<a class="headerlink" href="#inheritance-relationships" title="Permalink to this headline">¶</a></h2>
+<div class="section" id="base-type">
+<h3>Base Type<a class="headerlink" href="#base-type" title="Permalink to this headline">¶</a></h3>
+<ul class="simple">
+<li><p><code class="docutils literal notranslate"><span class="pre">public</span> <span class="pre">marian::Chainable&lt;</span> <span class="pre">Tensor</span> <span class="pre">&gt;</span></code> (<a class="reference internal" href="classmarian_1_1Chainable.html#exhale-class-classmarian-1-1chainable"><span class="std std-ref">Template Class Chainable</span></a>)</p></li>
+</ul>
+</div>
+<div class="section" id="derived-types">
+<h3>Derived Types<a class="headerlink" href="#derived-types" title="Permalink to this headline">¶</a></h3>
+<ul class="simple">
+<li><p><code class="docutils literal notranslate"><span class="pre">public</span> <span class="pre">marian::ConstantNode</span></code> (<a class="reference internal" href="structmarian_1_1ConstantNode.html#exhale-struct-structmarian-1-1constantnode"><span class="std std-ref">Struct ConstantNode</span></a>)</p></li>
+<li><p><code class="docutils literal notranslate"><span class="pre">public</span> <span class="pre">marian::NaryNodeOp</span></code> (<a class="reference internal" href="structmarian_1_1NaryNodeOp.html#exhale-struct-structmarian-1-1narynodeop"><span class="std std-ref">Struct NaryNodeOp</span></a>)</p></li>
+<li><p><code class="docutils literal notranslate"><span class="pre">public</span> <span class="pre">marian::ParamNode</span></code> (<a class="reference internal" href="structmarian_1_1ParamNode.html#exhale-struct-structmarian-1-1paramnode"><span class="std std-ref">Struct ParamNode</span></a>)</p></li>
+</ul>
+</div>
+</div>
+<div class="section" id="class-documentation">
+<h2>Class Documentation<a class="headerlink" href="#class-documentation" title="Permalink to this headline">¶</a></h2>
+<dl class="class">
+<dt id="_CPPv4N6marian4NodeE">
+<span id="_CPPv3N6marian4NodeE"></span><span id="_CPPv2N6marian4NodeE"></span><span id="marian::Node"></span><span class="target" id="classmarian_1_1Node"></span><em class="property">class </em><code class="sig-name descname">Node</code> : <em class="property">public</em> marian::<a class="reference internal" href="classmarian_1_1Chainable.html#_CPPv4I0EN6marian9ChainableE" title="marian::Chainable">Chainable</a>&lt;Tensor&gt;<a class="headerlink" href="#_CPPv4N6marian4NodeE" title="Permalink to this definition">¶</a><br /></dt>
+<dd><p>Main node class for computation graph, implements most common functions demanded by <a class="reference internal" href="classmarian_1_1Chainable.html#classmarian_1_1Chainable"><span class="std std-ref">Chainable</span></a>. </p>
+<p>Each operation in a computation graph is a node. </p>
+<p>Subclassed by <a class="reference internal" href="structmarian_1_1ConstantNode.html#structmarian_1_1ConstantNode"><span class="std std-ref">marian::ConstantNode</span></a>, <a class="reference internal" href="structmarian_1_1NaryNodeOp.html#structmarian_1_1NaryNodeOp"><span class="std std-ref">marian::NaryNodeOp</span></a>, <a class="reference internal" href="structmarian_1_1ParamNode.html#structmarian_1_1ParamNode"><span class="std std-ref">marian::ParamNode</span></a></p>
+<div class="breathe-sectiondef docutils container">
+<p class="breathe-sectiondef-title rubric">Public Functions</p>
+<dl class="function">
+<dt id="_CPPv4N6marian4Node4NodeE3PtrI15ExpressionGraphERK5ShapeRK4Type">
+<span id="_CPPv3N6marian4Node4NodeE3PtrI15ExpressionGraphERK5ShapeRK4Type"></span><span id="_CPPv2N6marian4Node4NodeE3PtrI15ExpressionGraphERK5ShapeRK4Type"></span><span id="marian::Node::Node__Ptr:ExpressionGraph:.ShapeCR.TypeCR"></span><span class="target" id="classmarian_1_1Node_1a8039cc1c7f2366d2cea883d4809da822"></span><code class="sig-name descname">Node</code><span class="sig-paren">(</span><a class="reference internal" href="typedef_definitions_8h_1ad1a373be43a00ef9ce35666145137b08.html#_CPPv4N6marian3PtrE" title="marian::Ptr">Ptr</a>&lt;<a class="reference internal" href="classmarian_1_1ExpressionGraph.html#_CPPv4N6marian15ExpressionGraphE" title="marian::ExpressionGraph">ExpressionGraph</a>&gt; <em>graph</em>, <em class="property">const</em> <a class="reference internal" href="structmarian_1_1Shape.html#_CPPv4N6marian5ShapeE" title="marian::Shape">Shape</a> &amp;<em>shape</em>, <em class="property">const</em> <a class="reference internal" href="enum_common_2types_8h_1a2b75d1cec1d73f6a07a1fc4f93604c81.html#_CPPv4N6marian4TypeE" title="marian::Type">Type</a> &amp;<em>valueType</em> = <a class="reference internal" href="enum_common_2types_8h_1a2b75d1cec1d73f6a07a1fc4f93604c81.html#_CPPv4N6marian4TypeE" title="marian::Type">Type</a>::float32<span class="sig-paren">)</span><a class="headerlink" href="#_CPPv4N6marian4Node4NodeE3PtrI15ExpressionGraphERK5ShapeRK4Type" title="Permalink to this definition">¶</a><br /></dt>
+<dd></dd></dl>
+
+<dl class="function">
+<dt id="_CPPv4N6marian4NodeD0Ev">
+<span id="_CPPv3N6marian4NodeD0Ev"></span><span id="_CPPv2N6marian4NodeD0Ev"></span><span id="marian::Node::~Node"></span><span class="target" id="classmarian_1_1Node_1a67ea4aa875ae1fe2143ac9e4dae75c73"></span><em class="property">virtual</em> <code class="sig-name descname">~Node</code><span class="sig-paren">(</span><span class="sig-paren">)</span><a class="headerlink" href="#_CPPv4N6marian4NodeD0Ev" title="Permalink to this definition">¶</a><br /></dt>
+<dd></dd></dl>
+
+<dl class="function">
+<dt id="_CPPv4N6marian4Node6scalarEv">
+<span id="_CPPv3N6marian4Node6scalarEv"></span><span id="_CPPv2N6marian4Node6scalarEv"></span><span id="marian::Node::scalar"></span><span class="target" id="classmarian_1_1Node_1a48289fdcc38bc6d41d0f0503fc954838"></span>float <code class="sig-name descname">scalar</code><span class="sig-paren">(</span><span class="sig-paren">)</span><a class="headerlink" href="#_CPPv4N6marian4Node6scalarEv" title="Permalink to this definition">¶</a><br /></dt>
+<dd></dd></dl>
+
+<dl class="function">
+<dt id="_CPPv4N6marian4Node10forwardOpsEv">
+<span id="_CPPv3N6marian4Node10forwardOpsEv"></span><span id="_CPPv2N6marian4Node10forwardOpsEv"></span><span id="marian::Node::forwardOps"></span><span class="target" id="classmarian_1_1Node_1ad8398cb0dc34cb97e095093f82303817"></span><em class="property">virtual</em> <a class="reference internal" href="typedef_chainable_8h_1a4956376218cc236016c20bc4071470da.html#_CPPv4N6marian7NodeOpsE" title="marian::NodeOps">NodeOps</a> <code class="sig-name descname">forwardOps</code><span class="sig-paren">(</span><span class="sig-paren">)</span><a class="headerlink" href="#_CPPv4N6marian4Node10forwardOpsEv" title="Permalink to this definition">¶</a><br /></dt>
+<dd></dd></dl>
+
+<dl class="function">
+<dt id="_CPPv4N6marian4Node11backwardOpsEv">
+<span id="_CPPv3N6marian4Node11backwardOpsEv"></span><span id="_CPPv2N6marian4Node11backwardOpsEv"></span><span id="marian::Node::backwardOps"></span><span class="target" id="classmarian_1_1Node_1a06ed05e3dd051e179ee0a0f4236a3780"></span><em class="property">virtual</em> <a class="reference internal" href="typedef_chainable_8h_1a4956376218cc236016c20bc4071470da.html#_CPPv4N6marian7NodeOpsE" title="marian::NodeOps">NodeOps</a> <code class="sig-name descname">backwardOps</code><span class="sig-paren">(</span><span class="sig-paren">)</span><a class="headerlink" href="#_CPPv4N6marian4Node11backwardOpsEv" title="Permalink to this definition">¶</a><br /></dt>
+<dd></dd></dl>
+
+<dl class="function">
+<dt id="_CPPv4N6marian4Node10runForwardERK7NodeOps">
+<span id="_CPPv3N6marian4Node10runForwardERK7NodeOps"></span><span id="_CPPv2N6marian4Node10runForwardERK7NodeOps"></span><span id="marian::Node::runForward__NodeOpsCR"></span><span class="target" id="classmarian_1_1Node_1a2ca87895ccb70368ff3c7168816c860c"></span><em class="property">virtual</em> void <code class="sig-name descname">runForward</code><span class="sig-paren">(</span><em class="property">const</em> <a class="reference internal" href="typedef_chainable_8h_1a4956376218cc236016c20bc4071470da.html#_CPPv4N6marian7NodeOpsE" title="marian::NodeOps">NodeOps</a> &amp;<em>ops</em><span class="sig-paren">)</span><a class="headerlink" href="#_CPPv4N6marian4Node10runForwardERK7NodeOps" title="Permalink to this definition">¶</a><br /></dt>
+<dd></dd></dl>
+
+<dl class="function">
+<dt id="_CPPv4N6marian4Node11runBackwardERK7NodeOps">
+<span id="_CPPv3N6marian4Node11runBackwardERK7NodeOps"></span><span id="_CPPv2N6marian4Node11runBackwardERK7NodeOps"></span><span id="marian::Node::runBackward__NodeOpsCR"></span><span class="target" id="classmarian_1_1Node_1a7738def79b94994bd20cf8762ff2fd0c"></span><em class="property">virtual</em> void <code class="sig-name descname">runBackward</code><span class="sig-paren">(</span><em class="property">const</em> <a class="reference internal" href="typedef_chainable_8h_1a4956376218cc236016c20bc4071470da.html#_CPPv4N6marian7NodeOpsE" title="marian::NodeOps">NodeOps</a> &amp;<em>ops</em><span class="sig-paren">)</span><a class="headerlink" href="#_CPPv4N6marian4Node11runBackwardERK7NodeOps" title="Permalink to this definition">¶</a><br /></dt>
+<dd></dd></dl>
+
+<dl class="function">
+<dt id="_CPPv4N6marian4Node7forwardEv">
+<span id="_CPPv3N6marian4Node7forwardEv"></span><span id="_CPPv2N6marian4Node7forwardEv"></span><span id="marian::Node::forward"></span><span class="target" id="classmarian_1_1Node_1a2ce4723c4b0ac1bafbb3678ffc01ca14"></span>void <code class="sig-name descname">forward</code><span class="sig-paren">(</span><span class="sig-paren">)</span><a class="headerlink" href="#_CPPv4N6marian4Node7forwardEv" title="Permalink to this definition">¶</a><br /></dt>
+<dd></dd></dl>
+
+<dl class="function">
+<dt id="_CPPv4N6marian4Node8backwardEv">
+<span id="_CPPv3N6marian4Node8backwardEv"></span><span id="_CPPv2N6marian4Node8backwardEv"></span><span id="marian::Node::backward"></span><span class="target" id="classmarian_1_1Node_1a885bf93fb3473c4208abd881da9d03b7"></span>void <code class="sig-name descname">backward</code><span class="sig-paren">(</span><span class="sig-paren">)</span><a class="headerlink" href="#_CPPv4N6marian4Node8backwardEv" title="Permalink to this definition">¶</a><br /></dt>
+<dd></dd></dl>
+
+<dl class="function">
+<dt id="_CPPv4N6marian4Node9trainableEv">
+<span id="_CPPv3N6marian4Node9trainableEv"></span><span id="_CPPv2N6marian4Node9trainableEv"></span><span id="marian::Node::trainable"></span><span class="target" id="classmarian_1_1Node_1a151d73441996a642a74fb864f7df8ea7"></span><em class="property">virtual</em> bool <code class="sig-name descname">trainable</code><span class="sig-paren">(</span><span class="sig-paren">)</span><a class="headerlink" href="#_CPPv4N6marian4Node9trainableEv" title="Permalink to this definition">¶</a><br /></dt>
+<dd></dd></dl>
+
+<dl class="function">
+<dt id="_CPPv4N6marian4Node12setTrainableEb">
+<span id="_CPPv3N6marian4Node12setTrainableEb"></span><span id="_CPPv2N6marian4Node12setTrainableEb"></span><span id="marian::Node::setTrainable__b"></span><span class="target" id="classmarian_1_1Node_1a58cf4c1b641bdcee1c0deae1d53cffe4"></span><em class="property">virtual</em> void <code class="sig-name descname">setTrainable</code><span class="sig-paren">(</span>bool <em>trainable</em><span class="sig-paren">)</span><a class="headerlink" href="#_CPPv4N6marian4Node12setTrainableEb" title="Permalink to this definition">¶</a><br /></dt>
+<dd></dd></dl>
+
+<dl class="function">
+<dt id="_CPPv4N6marian4Node7memoizeEv">
+<span id="_CPPv3N6marian4Node7memoizeEv"></span><span id="_CPPv2N6marian4Node7memoizeEv"></span><span id="marian::Node::memoize"></span><span class="target" id="classmarian_1_1Node_1ac2086a11b1d85b644821085506c828d6"></span><em class="property">virtual</em> bool <code class="sig-name descname">memoize</code><span class="sig-paren">(</span><span class="sig-paren">)</span><a class="headerlink" href="#_CPPv4N6marian4Node7memoizeEv" title="Permalink to this definition">¶</a><br /></dt>
+<dd></dd></dl>
+
+<dl class="function">
+<dt id="_CPPv4N6marian4Node10setMemoizeEb">
+<span id="_CPPv3N6marian4Node10setMemoizeEb"></span><span id="_CPPv2N6marian4Node10setMemoizeEb"></span><span id="marian::Node::setMemoize__b"></span><span class="target" id="classmarian_1_1Node_1a1ac3e0a2295a718da549d80ecbd83edb"></span><em class="property">virtual</em> void <code class="sig-name descname">setMemoize</code><span class="sig-paren">(</span>bool <em>memoize</em><span class="sig-paren">)</span><a class="headerlink" href="#_CPPv4N6marian4Node10setMemoizeEb" title="Permalink to this definition">¶</a><br /></dt>
+<dd></dd></dl>
+
+<dl class="function">
+<dt id="_CPPv4N6marian4Node5setIdE6size_t">
+<span id="_CPPv3N6marian4Node5setIdE6size_t"></span><span id="_CPPv2N6marian4Node5setIdE6size_t"></span><span id="marian::Node::setId__s"></span><span class="target" id="classmarian_1_1Node_1a7ef404cbbf4f3a8dc5d13949d57517b3"></span><em class="property">virtual</em> void <code class="sig-name descname">setId</code><span class="sig-paren">(</span>size_t <em>id</em><span class="sig-paren">)</span><a class="headerlink" href="#_CPPv4N6marian4Node5setIdE6size_t" title="Permalink to this definition">¶</a><br /></dt>
+<dd></dd></dl>
+
+<dl class="function">
+<dt id="_CPPv4N6marian4Node5getIdEv">
+<span id="_CPPv3N6marian4Node5getIdEv"></span><span id="_CPPv2N6marian4Node5getIdEv"></span><span id="marian::Node::getId"></span><span class="target" id="classmarian_1_1Node_1ab3680ae77e10f298e94596603a291ebb"></span><em class="property">virtual</em> size_t <code class="sig-name descname">getId</code><span class="sig-paren">(</span><span class="sig-paren">)</span><a class="headerlink" href="#_CPPv4N6marian4Node5getIdEv" title="Permalink to this definition">¶</a><br /></dt>
+<dd></dd></dl>
+
+<dl class="function">
+<dt id="_CPPv4N6marian4Node13increaseEdgesE6size_t">
+<span id="_CPPv3N6marian4Node13increaseEdgesE6size_t"></span><span id="_CPPv2N6marian4Node13increaseEdgesE6size_t"></span><span id="marian::Node::increaseEdges__s"></span><span class="target" id="classmarian_1_1Node_1a762868fac80689771dde19f36827cebc"></span><em class="property">virtual</em> void <code class="sig-name descname">increaseEdges</code><span class="sig-paren">(</span>size_t <em>edges</em> = 1<span class="sig-paren">)</span><a class="headerlink" href="#_CPPv4N6marian4Node13increaseEdgesE6size_t" title="Permalink to this definition">¶</a><br /></dt>
+<dd></dd></dl>
+
+<dl class="function">
+<dt id="_CPPv4N6marian4Node13decreaseEdgesE6size_t">
+<span id="_CPPv3N6marian4Node13decreaseEdgesE6size_t"></span><span id="_CPPv2N6marian4Node13decreaseEdgesE6size_t"></span><span id="marian::Node::decreaseEdges__s"></span><span class="target" id="classmarian_1_1Node_1a182d9b696c98f16f72fd3f9db3d1f827"></span><em class="property">virtual</em> void <code class="sig-name descname">decreaseEdges</code><span class="sig-paren">(</span>size_t <em>edges</em> = 1<span class="sig-paren">)</span><a class="headerlink" href="#_CPPv4N6marian4Node13decreaseEdgesE6size_t" title="Permalink to this definition">¶</a><br /></dt>
+<dd></dd></dl>
+
+<dl class="function">
+<dt id="_CPPv4N6marian4Node5edgesEv">
+<span id="_CPPv3N6marian4Node5edgesEv"></span><span id="_CPPv2N6marian4Node5edgesEv"></span><span id="marian::Node::edges"></span><span class="target" id="classmarian_1_1Node_1a872b4c21379f8fea84a023d822b0a7f5"></span><em class="property">virtual</em> size_t <code class="sig-name descname">edges</code><span class="sig-paren">(</span><span class="sig-paren">)</span><a class="headerlink" href="#_CPPv4N6marian4Node5edgesEv" title="Permalink to this definition">¶</a><br /></dt>
+<dd></dd></dl>
+
+<dl class="function">
+<dt id="_CPPv4N6marian4Node5graphEv">
+<span id="_CPPv3N6marian4Node5graphEv"></span><span id="_CPPv2N6marian4Node5graphEv"></span><span id="marian::Node::graph"></span><span class="target" id="classmarian_1_1Node_1ab1ffd0fbd42f7d1a1f96a673f7422b20"></span><em class="property">virtual</em> <a class="reference internal" href="typedef_definitions_8h_1ad1a373be43a00ef9ce35666145137b08.html#_CPPv4N6marian3PtrE" title="marian::Ptr">Ptr</a>&lt;<a class="reference internal" href="classmarian_1_1ExpressionGraph.html#_CPPv4N6marian15ExpressionGraphE" title="marian::ExpressionGraph">ExpressionGraph</a>&gt; <code class="sig-name descname">graph</code><span class="sig-paren">(</span><span class="sig-paren">)</span><a class="headerlink" href="#_CPPv4N6marian4Node5graphEv" title="Permalink to this definition">¶</a><br /></dt>
+<dd></dd></dl>
+
+<dl class="function">
+<dt id="_CPPv4N6marian4Node5debugERKNSt6stringE">
+<span id="_CPPv3N6marian4Node5debugERKNSt6stringE"></span><span id="_CPPv2N6marian4Node5debugERKNSt6stringE"></span><span id="marian::Node::debug__ssCR"></span><span class="target" id="classmarian_1_1Node_1aecb587b84224d425bc3f0693efe189d5"></span><em class="property">virtual</em> void <code class="sig-name descname">debug</code><span class="sig-paren">(</span><em class="property">const</em> <a class="reference internal" href="function_expression__operators_8cpp_1af4e69a5f7167b63522135a1f6b8a5dd8.html#_CPPv4N6marianStE4Expri" title="marian::std">std</a>::string &amp;<em>message</em><span class="sig-paren">)</span><a class="headerlink" href="#_CPPv4N6marian4Node5debugERKNSt6stringE" title="Permalink to this definition">¶</a><br /></dt>
+<dd></dd></dl>
+
+<dl class="function">
+<dt id="_CPPv4N6marian4Node16marked_for_debugEv">
+<span id="_CPPv3N6marian4Node16marked_for_debugEv"></span><span id="_CPPv2N6marian4Node16marked_for_debugEv"></span><span id="marian::Node::marked_for_debug"></span><span class="target" id="classmarian_1_1Node_1a55317cca06b57221e6c970de6cbb04cc"></span><em class="property">virtual</em> bool <code class="sig-name descname">marked_for_debug</code><span class="sig-paren">(</span><span class="sig-paren">)</span><a class="headerlink" href="#_CPPv4N6marian4Node16marked_for_debugEv" title="Permalink to this definition">¶</a><br /></dt>
+<dd></dd></dl>
+
+<dl class="function">
+<dt id="_CPPv4N6marian4Node13debug_messageEv">
+<span id="_CPPv3N6marian4Node13debug_messageEv"></span><span id="_CPPv2N6marian4Node13debug_messageEv"></span><span id="marian::Node::debug_message"></span><span class="target" id="classmarian_1_1Node_1ac20c00829a363f516cd75457929989cc"></span><em class="property">virtual</em> <em class="property">const</em> <a class="reference internal" href="function_expression__operators_8cpp_1af4e69a5f7167b63522135a1f6b8a5dd8.html#_CPPv4N6marianStE4Expri" title="marian::std">std</a>::string &amp;<code class="sig-name descname">debug_message</code><span class="sig-paren">(</span><span class="sig-paren">)</span><a class="headerlink" href="#_CPPv4N6marian4Node13debug_messageEv" title="Permalink to this definition">¶</a><br /></dt>
+<dd></dd></dl>
+
+<dl class="function">
+<dt id="_CPPv4N6marian4Node8allocateEv">
+<span id="_CPPv3N6marian4Node8allocateEv"></span><span id="_CPPv2N6marian4Node8allocateEv"></span><span id="marian::Node::allocate"></span><span class="target" id="classmarian_1_1Node_1a7b1d1dddc2122d1d17496e3dc07f126f"></span>void <code class="sig-name descname">allocate</code><span class="sig-paren">(</span><span class="sig-paren">)</span><a class="headerlink" href="#_CPPv4N6marian4Node8allocateEv" title="Permalink to this definition">¶</a><br /></dt>
+<dd></dd></dl>
+
+<dl class="function">
+<dt id="_CPPv4N6marian4Node4freeEv">
+<span id="_CPPv3N6marian4Node4freeEv"></span><span id="_CPPv2N6marian4Node4freeEv"></span><span id="marian::Node::free"></span><span class="target" id="classmarian_1_1Node_1a5a6d9516879bb21b659a6280d80141f5"></span>void <code class="sig-name descname">free</code><span class="sig-paren">(</span><span class="sig-paren">)</span><a class="headerlink" href="#_CPPv4N6marian4Node4freeEv" title="Permalink to this definition">¶</a><br /></dt>
+<dd></dd></dl>
+
+<dl class="function">
+<dt id="_CPPv4N6marian4Node4initEv">
+<span id="_CPPv3N6marian4Node4initEv"></span><span id="_CPPv2N6marian4Node4initEv"></span><span id="marian::Node::init"></span><span class="target" id="classmarian_1_1Node_1ab138558b92ee01099f56994da7b769e3"></span><em class="property">virtual</em> void <code class="sig-name descname">init</code><span class="sig-paren">(</span><span class="sig-paren">)</span><a class="headerlink" href="#_CPPv4N6marian4Node4initEv" title="Permalink to this definition">¶</a><br /></dt>
+<dd></dd></dl>
+
+<dl class="function">
+<dt id="_CPPv4N6marian4Node14init_dependentEv">
+<span id="_CPPv3N6marian4Node14init_dependentEv"></span><span id="_CPPv2N6marian4Node14init_dependentEv"></span><span id="marian::Node::init_dependent"></span><span class="target" id="classmarian_1_1Node_1a9ca430c5829c7a2c82bb65e68833f09f"></span>void <code class="sig-name descname">init_dependent</code><span class="sig-paren">(</span><span class="sig-paren">)</span><a class="headerlink" href="#_CPPv4N6marian4Node14init_dependentEv" title="Permalink to this definition">¶</a><br /></dt>
+<dd><p>Initialization for backward step of top node in computation graph. </p>
+<p>Allocates memory and sets gradient to 1 (df/df == 1). </p>
+</dd></dl>
+
+<dl class="function">
+<dt id="_CPPv4N6marian4Node16set_zero_adjointEv">
+<span id="_CPPv3N6marian4Node16set_zero_adjointEv"></span><span id="_CPPv2N6marian4Node16set_zero_adjointEv"></span><span id="marian::Node::set_zero_adjoint"></span><span class="target" id="classmarian_1_1Node_1a1a04b0fdfd674b8ae98c1ad4b62d48ee"></span>void <code class="sig-name descname">set_zero_adjoint</code><span class="sig-paren">(</span><span class="sig-paren">)</span><a class="headerlink" href="#_CPPv4N6marian4Node16set_zero_adjointEv" title="Permalink to this definition">¶</a><br /></dt>
+<dd><p>Initialization for backward step of any non-top node in computation graph. </p>
+<p>Allocates memory and sets gradient to 0 for further accumulation of gradients from all parents. </p>
+</dd></dl>
+
+<dl class="function">
+<dt id="_CPPv4N6marian4Node3valEv">
+<span id="_CPPv3N6marian4Node3valEv"></span><span id="_CPPv2N6marian4Node3valEv"></span><span id="marian::Node::val"></span><span class="target" id="classmarian_1_1Node_1a3ceae4f16ba43dbcfdafbc0dd90a0b3c"></span><em class="property">virtual</em> Tensor &amp;<code class="sig-name descname">val</code><span class="sig-paren">(</span><span class="sig-paren">)</span><a class="headerlink" href="#_CPPv4N6marian4Node3valEv" title="Permalink to this definition">¶</a><br /></dt>
+<dd></dd></dl>
+
+<dl class="function">
+<dt id="_CPPv4N6marian4Node4gradEv">
+<span id="_CPPv3N6marian4Node4gradEv"></span><span id="_CPPv2N6marian4Node4gradEv"></span><span id="marian::Node::grad"></span><span class="target" id="classmarian_1_1Node_1a2576c7e5662aba86c0adaeb20116a4a3"></span><em class="property">virtual</em> Tensor &amp;<code class="sig-name descname">grad</code><span class="sig-paren">(</span><span class="sig-paren">)</span><a class="headerlink" href="#_CPPv4N6marian4Node4gradEv" title="Permalink to this definition">¶</a><br /></dt>
+<dd></dd></dl>
+
+<dl class="function">
+<dt id="_CPPv4N6marian4Node5shapeEv">
+<span id="_CPPv3N6marian4Node5shapeEv"></span><span id="_CPPv2N6marian4Node5shapeEv"></span><span id="marian::Node::shape"></span><span class="target" id="classmarian_1_1Node_1a10cee8d1bf36e72cb20994dcea95ac7a"></span><em class="property">virtual</em> <em class="property">const</em> <a class="reference internal" href="structmarian_1_1Shape.html#_CPPv4N6marian5ShapeE" title="marian::Shape">Shape</a> &amp;<code class="sig-name descname">shape</code><span class="sig-paren">(</span><span class="sig-paren">)</span><a class="headerlink" href="#_CPPv4N6marian4Node5shapeEv" title="Permalink to this definition">¶</a><br /></dt>
+<dd></dd></dl>
+
+<dl class="function">
+<dt id="_CPPv4N6marian4Node10value_typeEv">
+<span id="_CPPv3N6marian4Node10value_typeEv"></span><span id="_CPPv2N6marian4Node10value_typeEv"></span><span id="marian::Node::value_type"></span><span class="target" id="classmarian_1_1Node_1a6da5c45e1edabf4662c5984828d8936d"></span><em class="property">virtual</em> <em class="property">const</em> <a class="reference internal" href="enum_common_2types_8h_1a2b75d1cec1d73f6a07a1fc4f93604c81.html#_CPPv4N6marian4TypeE" title="marian::Type">Type</a> &amp;<code class="sig-name descname">value_type</code><span class="sig-paren">(</span><span class="sig-paren">)</span><a class="headerlink" href="#_CPPv4N6marian4Node10value_typeEv" title="Permalink to this definition">¶</a><br /></dt>
+<dd></dd></dl>
+
+<dl class="function">
+<dt id="_CPPv4N6marian4Node8set_nameERKNSt6stringE">
+<span id="_CPPv3N6marian4Node8set_nameERKNSt6stringE"></span><span id="_CPPv2N6marian4Node8set_nameERKNSt6stringE"></span><span id="marian::Node::set_name__ssCR"></span><span class="target" id="classmarian_1_1Node_1ac4d71abe84979286bedf4762d65e5755"></span>void <code class="sig-name descname">set_name</code><span class="sig-paren">(</span><em class="property">const</em> <a class="reference internal" href="function_expression__operators_8cpp_1af4e69a5f7167b63522135a1f6b8a5dd8.html#_CPPv4N6marianStE4Expri" title="marian::std">std</a>::string &amp;<em>name</em><span class="sig-paren">)</span><a class="headerlink" href="#_CPPv4N6marian4Node8set_nameERKNSt6stringE" title="Permalink to this definition">¶</a><br /></dt>
+<dd></dd></dl>
+
+<dl class="function">
+<dt id="_CPPv4NK6marian4Node4nameEv">
+<span id="_CPPv3NK6marian4Node4nameEv"></span><span id="_CPPv2NK6marian4Node4nameEv"></span><span id="marian::Node::nameC"></span><span class="target" id="classmarian_1_1Node_1a5679b09ba684afa0b16fbe14ad3164a5"></span><em class="property">const</em> <a class="reference internal" href="function_expression__operators_8cpp_1af4e69a5f7167b63522135a1f6b8a5dd8.html#_CPPv4N6marianStE4Expri" title="marian::std">std</a>::string &amp;<code class="sig-name descname">name</code><span class="sig-paren">(</span><span class="sig-paren">)</span> <em class="property">const</em><a class="headerlink" href="#_CPPv4NK6marian4Node4nameEv" title="Permalink to this definition">¶</a><br /></dt>
+<dd></dd></dl>
+
+<dl class="function">
+<dt id="_CPPv4N6marian4Node4formEv">
+<span id="_CPPv3N6marian4Node4formEv"></span><span id="_CPPv2N6marian4Node4formEv"></span><span id="marian::Node::form"></span><span class="target" id="classmarian_1_1Node_1aaa1e008186d5778be48a4de64f241478"></span><em class="property">virtual</em> <em class="property">const</em> <a class="reference internal" href="function_expression__operators_8cpp_1af4e69a5f7167b63522135a1f6b8a5dd8.html#_CPPv4N6marianStE4Expri" title="marian::std">std</a>::string <code class="sig-name descname">form</code><span class="sig-paren">(</span><span class="sig-paren">)</span><a class="headerlink" href="#_CPPv4N6marian4Node4formEv" title="Permalink to this definition">¶</a><br /></dt>
+<dd></dd></dl>
+
+<dl class="function">
+<dt id="_CPPv4N6marian4Node5colorEv">
+<span id="_CPPv3N6marian4Node5colorEv"></span><span id="_CPPv2N6marian4Node5colorEv"></span><span id="marian::Node::color"></span><span class="target" id="classmarian_1_1Node_1a9cc31b6a57048e16176430e079722e26"></span><em class="property">virtual</em> <em class="property">const</em> <a class="reference internal" href="function_expression__operators_8cpp_1af4e69a5f7167b63522135a1f6b8a5dd8.html#_CPPv4N6marianStE4Expri" title="marian::std">std</a>::string <code class="sig-name descname">color</code><span class="sig-paren">(</span><span class="sig-paren">)</span><a class="headerlink" href="#_CPPv4N6marian4Node5colorEv" title="Permalink to this definition">¶</a><br /></dt>
+<dd></dd></dl>
+
+<dl class="function">
+<dt id="_CPPv4N6marian4Node5labelEv">
+<span id="_CPPv3N6marian4Node5labelEv"></span><span id="_CPPv2N6marian4Node5labelEv"></span><span id="marian::Node::label"></span><span class="target" id="classmarian_1_1Node_1ae60256f85b9aa5fbf6175a1c10f07297"></span><em class="property">virtual</em> <em class="property">const</em> <a class="reference internal" href="function_expression__operators_8cpp_1af4e69a5f7167b63522135a1f6b8a5dd8.html#_CPPv4N6marianStE4Expri" title="marian::std">std</a>::string <code class="sig-name descname">label</code><span class="sig-paren">(</span><span class="sig-paren">)</span><a class="headerlink" href="#_CPPv4N6marian4Node5labelEv" title="Permalink to this definition">¶</a><br /></dt>
+<dd></dd></dl>
+
+<dl class="function">
+<dt id="_CPPv4N6marian4Node8graphvizEv">
+<span id="_CPPv3N6marian4Node8graphvizEv"></span><span id="_CPPv2N6marian4Node8graphvizEv"></span><span id="marian::Node::graphviz"></span><span class="target" id="classmarian_1_1Node_1aa462cb4675f73ac4e8b6d624ad20cdba"></span><em class="property">virtual</em> <a class="reference internal" href="function_expression__operators_8cpp_1af4e69a5f7167b63522135a1f6b8a5dd8.html#_CPPv4N6marianStE4Expri" title="marian::std">std</a>::string <code class="sig-name descname">graphviz</code><span class="sig-paren">(</span><span class="sig-paren">)</span><a class="headerlink" href="#_CPPv4N6marian4Node8graphvizEv" title="Permalink to this definition">¶</a><br /></dt>
+<dd></dd></dl>
+
+<dl class="function">
+<dt id="_CPPv4N6marian4Node8childrenEv">
+<span id="_CPPv3N6marian4Node8childrenEv"></span><span id="_CPPv2N6marian4Node8childrenEv"></span><span id="marian::Node::children"></span><span class="target" id="classmarian_1_1Node_1a076697fd2b3c8b9b35f527cf978a6b18"></span><em class="property">virtual</em> <a class="reference internal" href="function_expression__operators_8cpp_1af4e69a5f7167b63522135a1f6b8a5dd8.html#_CPPv4N6marianStE4Expri" title="marian::std">std</a>::vector&lt;<a class="reference internal" href="typedef_definitions_8h_1ac8ecc2cc66a7afcc6da94a9bbde5eaa7.html#_CPPv4N6marian4ExprE" title="marian::Expr">Expr</a>&gt; &amp;<code class="sig-name descname">children</code><span class="sig-paren">(</span><span class="sig-paren">)</span><a class="headerlink" href="#_CPPv4N6marian4Node8childrenEv" title="Permalink to this definition">¶</a><br /></dt>
+<dd></dd></dl>
+
+<dl class="function">
+<dt id="_CPPv4N6marian4Node5childE6size_t">
+<span id="_CPPv3N6marian4Node5childE6size_t"></span><span id="_CPPv2N6marian4Node5childE6size_t"></span><span id="marian::Node::child__s"></span><span class="target" id="classmarian_1_1Node_1a91b6c41e1071d96e55bac3de28db476b"></span><em class="property">virtual</em> <a class="reference internal" href="typedef_definitions_8h_1ac8ecc2cc66a7afcc6da94a9bbde5eaa7.html#_CPPv4N6marian4ExprE" title="marian::Expr">Expr</a> <code class="sig-name descname">child</code><span class="sig-paren">(</span>size_t <em>i</em><span class="sig-paren">)</span><a class="headerlink" href="#_CPPv4N6marian4Node5childE6size_t" title="Permalink to this definition">¶</a><br /></dt>
+<dd></dd></dl>
+
+<dl class="function">
+<dt id="_CPPv4N6marian4Node10getBackendEv">
+<span id="_CPPv3N6marian4Node10getBackendEv"></span><span id="_CPPv2N6marian4Node10getBackendEv"></span><span id="marian::Node::getBackend"></span><span class="target" id="classmarian_1_1Node_1a10c5c0945b96ac79a88964cb61f0c91b"></span><a class="reference internal" href="typedef_definitions_8h_1ad1a373be43a00ef9ce35666145137b08.html#_CPPv4N6marian3PtrE" title="marian::Ptr">Ptr</a>&lt;<a class="reference internal" href="classmarian_1_1Backend.html#_CPPv4N6marian7BackendE" title="marian::Backend">Backend</a>&gt; <code class="sig-name descname">getBackend</code><span class="sig-paren">(</span><span class="sig-paren">)</span><a class="headerlink" href="#_CPPv4N6marian4Node10getBackendEv" title="Permalink to this definition">¶</a><br /></dt>
+<dd></dd></dl>
+
+<dl class="function">
+<dt id="_CPPv4N6marian4Node6recordE3PtrI17AutoTunerRecorderE6size_tb">
+<span id="_CPPv3N6marian4Node6recordE3PtrI17AutoTunerRecorderE6size_tb"></span><span id="_CPPv2N6marian4Node6recordE3PtrI17AutoTunerRecorderE6size_tb"></span><span id="marian::Node::record__Ptr:AutoTunerRecorder:.s.b"></span><span class="target" id="classmarian_1_1Node_1a77a2eb6c8c6dfde4b4ad67e768f152dc"></span>void <code class="sig-name descname">record</code><span class="sig-paren">(</span><a class="reference internal" href="typedef_definitions_8h_1ad1a373be43a00ef9ce35666145137b08.html#_CPPv4N6marian3PtrE" title="marian::Ptr">Ptr</a>&lt;<a class="reference internal" href="classmarian_1_1AutoTunerRecorder.html#_CPPv4N6marian17AutoTunerRecorderE" title="marian::AutoTunerRecorder">AutoTunerRecorder</a>&gt; <em>recorder</em>, size_t <em>recorderHash</em>, bool <em>stop</em><span class="sig-paren">)</span><a class="headerlink" href="#_CPPv4N6marian4Node6recordE3PtrI17AutoTunerRecorderE6size_tb" title="Permalink to this definition">¶</a><br /></dt>
+<dd></dd></dl>
+
+<dl class="function">
+<dt id="_CPPv4N6marian4Node14markCheckpointEv">
+<span id="_CPPv3N6marian4Node14markCheckpointEv"></span><span id="_CPPv2N6marian4Node14markCheckpointEv"></span><span id="marian::Node::markCheckpoint"></span><span class="target" id="classmarian_1_1Node_1a78d10864b6bf792e12e5f79910c1f53a"></span><em class="property">virtual</em> void <code class="sig-name descname">markCheckpoint</code><span class="sig-paren">(</span><span class="sig-paren">)</span><a class="headerlink" href="#_CPPv4N6marian4Node14markCheckpointEv" title="Permalink to this definition">¶</a><br /></dt>
+<dd></dd></dl>
+
+<dl class="function">
+<dt id="_CPPv4NK6marian4Node12isCheckpointEv">
+<span id="_CPPv3NK6marian4Node12isCheckpointEv"></span><span id="_CPPv2NK6marian4Node12isCheckpointEv"></span><span id="marian::Node::isCheckpointC"></span><span class="target" id="classmarian_1_1Node_1a2ac65f2579479e6e29819a4e2f4ca076"></span><em class="property">virtual</em> bool <code class="sig-name descname">isCheckpoint</code><span class="sig-paren">(</span><span class="sig-paren">)</span> <em class="property">const</em><a class="headerlink" href="#_CPPv4NK6marian4Node12isCheckpointEv" title="Permalink to this definition">¶</a><br /></dt>
+<dd></dd></dl>
+
+<dl class="function">
+<dt id="_CPPv4N6marian4Node10setSubtapeE3PtrINSt4listI4ExprEEE">
+<span id="_CPPv3N6marian4Node10setSubtapeE3PtrINSt4listI4ExprEEE"></span><span id="_CPPv2N6marian4Node10setSubtapeE3PtrINSt4listI4ExprEEE"></span><span id="marian::Node::setSubtape__Ptr:std::list:Expr::"></span><span class="target" id="classmarian_1_1Node_1afce17f6a709b64e488cecf66153acf06"></span><em class="property">virtual</em> void <code class="sig-name descname">setSubtape</code><span class="sig-paren">(</span><a class="reference internal" href="typedef_definitions_8h_1ad1a373be43a00ef9ce35666145137b08.html#_CPPv4N6marian3PtrE" title="marian::Ptr">Ptr</a>&lt;<a class="reference internal" href="function_expression__operators_8cpp_1af4e69a5f7167b63522135a1f6b8a5dd8.html#_CPPv4N6marianStE4Expri" title="marian::std">std</a>::list&lt;<a class="reference internal" href="typedef_definitions_8h_1ac8ecc2cc66a7afcc6da94a9bbde5eaa7.html#_CPPv4N6marian4ExprE" title="marian::Expr">Expr</a>&gt;&gt; <em>subtape</em><span class="sig-paren">)</span><a class="headerlink" href="#_CPPv4N6marian4Node10setSubtapeE3PtrINSt4listI4ExprEEE" title="Permalink to this definition">¶</a><br /></dt>
+<dd></dd></dl>
+
+<dl class="function">
+<dt id="_CPPv4N6marian4Node10getSubtapeEv">
+<span id="_CPPv3N6marian4Node10getSubtapeEv"></span><span id="_CPPv2N6marian4Node10getSubtapeEv"></span><span id="marian::Node::getSubtape"></span><span class="target" id="classmarian_1_1Node_1aea5479ca7019120464751fdb6ffd3fc1"></span><em class="property">virtual</em> <a class="reference internal" href="typedef_definitions_8h_1ad1a373be43a00ef9ce35666145137b08.html#_CPPv4N6marian3PtrE" title="marian::Ptr">Ptr</a>&lt;<a class="reference internal" href="function_expression__operators_8cpp_1af4e69a5f7167b63522135a1f6b8a5dd8.html#_CPPv4N6marianStE4Expri" title="marian::std">std</a>::list&lt;<a class="reference internal" href="typedef_definitions_8h_1ac8ecc2cc66a7afcc6da94a9bbde5eaa7.html#_CPPv4N6marian4ExprE" title="marian::Expr">Expr</a>&gt;&gt; <code class="sig-name descname">getSubtape</code><span class="sig-paren">(</span><span class="sig-paren">)</span><a class="headerlink" href="#_CPPv4N6marian4Node10getSubtapeEv" title="Permalink to this definition">¶</a><br /></dt>
+<dd></dd></dl>
+
+</div>
+<div class="breathe-sectiondef docutils container">
+<p class="breathe-sectiondef-title rubric">Protected Attributes</p>
+<dl class="member">
+<dt id="_CPPv4N6marian4Node3id_E">
+<span id="_CPPv3N6marian4Node3id_E"></span><span id="_CPPv2N6marian4Node3id_E"></span><span id="marian::Node::id___s"></span><span class="target" id="classmarian_1_1Node_1aa088753e0e801e0d5cfe8161a1781f3d"></span>size_t <code class="sig-name descname">id_</code> = {0}<a class="headerlink" href="#_CPPv4N6marian4Node3id_E" title="Permalink to this definition">¶</a><br /></dt>
+<dd></dd></dl>
+
+<dl class="member">
+<dt id="_CPPv4N6marian4Node6edges_E">
+<span id="_CPPv3N6marian4Node6edges_E"></span><span id="_CPPv2N6marian4Node6edges_E"></span><span id="marian::Node::edges___s"></span><span class="target" id="classmarian_1_1Node_1aece3097fea8e6ba25623a2c942d50fa8"></span>size_t <code class="sig-name descname">edges_</code> = {0}<a class="headerlink" href="#_CPPv4N6marian4Node6edges_E" title="Permalink to this definition">¶</a><br /></dt>
+<dd></dd></dl>
+
+<dl class="member">
+<dt id="_CPPv4N6marian4Node10trainable_E">
+<span id="_CPPv3N6marian4Node10trainable_E"></span><span id="_CPPv2N6marian4Node10trainable_E"></span><span id="marian::Node::trainable___b"></span><span class="target" id="classmarian_1_1Node_1a2be04ac02fd33f507b55ab5915cad5cc"></span>bool <code class="sig-name descname">trainable_</code> = {true}<a class="headerlink" href="#_CPPv4N6marian4Node10trainable_E" title="Permalink to this definition">¶</a><br /></dt>
+<dd></dd></dl>
+
+<dl class="member">
+<dt id="_CPPv4N6marian4Node8destroy_E">
+<span id="_CPPv3N6marian4Node8destroy_E"></span><span id="_CPPv2N6marian4Node8destroy_E"></span><span id="marian::Node::destroy___b"></span><span class="target" id="classmarian_1_1Node_1aa83237be30a1afc0f0423b23d534d2d3"></span>bool <code class="sig-name descname">destroy_</code> = {true}<a class="headerlink" href="#_CPPv4N6marian4Node8destroy_E" title="Permalink to this definition">¶</a><br /></dt>
+<dd></dd></dl>
+
+<dl class="member">
+<dt id="_CPPv4N6marian4Node8memoize_E">
+<span id="_CPPv3N6marian4Node8memoize_E"></span><span id="_CPPv2N6marian4Node8memoize_E"></span><span id="marian::Node::memoize___b"></span><span class="target" id="classmarian_1_1Node_1a42846118a202a0a45faeabaf295b2816"></span>bool <code class="sig-name descname">memoize_</code> = {false}<a class="headerlink" href="#_CPPv4N6marian4Node8memoize_E" title="Permalink to this definition">¶</a><br /></dt>
+<dd></dd></dl>
+
+<dl class="member">
+<dt id="_CPPv4N6marian4Node9children_E">
+<span id="_CPPv3N6marian4Node9children_E"></span><span id="_CPPv2N6marian4Node9children_E"></span><span id="marian::Node::children___std::vector:Expr:"></span><span class="target" id="classmarian_1_1Node_1a4d44ab201d96c0f283188bcc91f64b1d"></span><a class="reference internal" href="function_expression__operators_8cpp_1af4e69a5f7167b63522135a1f6b8a5dd8.html#_CPPv4N6marianStE4Expri" title="marian::std">std</a>::vector&lt;<a class="reference internal" href="typedef_definitions_8h_1ac8ecc2cc66a7afcc6da94a9bbde5eaa7.html#_CPPv4N6marian4ExprE" title="marian::Expr">Expr</a>&gt; <code class="sig-name descname">children_</code><a class="headerlink" href="#_CPPv4N6marian4Node9children_E" title="Permalink to this definition">¶</a><br /></dt>
+<dd></dd></dl>
+
+<dl class="member">
+<dt id="_CPPv4N6marian4Node6graph_E">
+<span id="_CPPv3N6marian4Node6graph_E"></span><span id="_CPPv2N6marian4Node6graph_E"></span><span id="marian::Node::graph___Weak:ExpressionGraph:"></span><span class="target" id="classmarian_1_1Node_1ace278ed3e34d2ac833a0a1cf48ae3337"></span><a class="reference internal" href="typedef_definitions_8h_1acde6307b95538fbf82548c2e1108ccf4.html#_CPPv4N6marian4WeakE" title="marian::Weak">Weak</a>&lt;<a class="reference internal" href="classmarian_1_1ExpressionGraph.html#_CPPv4N6marian15ExpressionGraphE" title="marian::ExpressionGraph">ExpressionGraph</a>&gt; <code class="sig-name descname">graph_</code><a class="headerlink" href="#_CPPv4N6marian4Node6graph_E" title="Permalink to this definition">¶</a><br /></dt>
+<dd></dd></dl>
+
+<dl class="member">
+<dt id="_CPPv4N6marian4Node6shape_E">
+<span id="_CPPv3N6marian4Node6shape_E"></span><span id="_CPPv2N6marian4Node6shape_E"></span><span id="marian::Node::shape___Shape"></span><span class="target" id="classmarian_1_1Node_1a54d7d94c76c2b943959a8e902a12b015"></span><a class="reference internal" href="structmarian_1_1Shape.html#_CPPv4N6marian5ShapeE" title="marian::Shape">Shape</a> <code class="sig-name descname">shape_</code> = {1, 1, 1, 1}<a class="headerlink" href="#_CPPv4N6marian4Node6shape_E" title="Permalink to this definition">¶</a><br /></dt>
+<dd></dd></dl>
+
+<dl class="member">
+<dt id="_CPPv4N6marian4Node10valueType_E">
+<span id="_CPPv3N6marian4Node10valueType_E"></span><span id="_CPPv2N6marian4Node10valueType_E"></span><span id="marian::Node::valueType___Type"></span><span class="target" id="classmarian_1_1Node_1a21df1ea85090262044da135323333b14"></span><a class="reference internal" href="enum_common_2types_8h_1a2b75d1cec1d73f6a07a1fc4f93604c81.html#_CPPv4N6marian4TypeE" title="marian::Type">Type</a> <code class="sig-name descname">valueType_</code> = {<a class="reference internal" href="enum_common_2types_8h_1a2b75d1cec1d73f6a07a1fc4f93604c81.html#_CPPv4N6marian4TypeE" title="marian::Type">Type</a>::float32}<a class="headerlink" href="#_CPPv4N6marian4Node10valueType_E" title="Permalink to this definition">¶</a><br /></dt>
+<dd></dd></dl>
+
+<dl class="member">
+<dt id="_CPPv4N6marian4Node5name_E">
+<span id="_CPPv3N6marian4Node5name_E"></span><span id="_CPPv2N6marian4Node5name_E"></span><span id="marian::Node::name___ss"></span><span class="target" id="classmarian_1_1Node_1ad09fba82157b376108163b8575971d09"></span><a class="reference internal" href="function_expression__operators_8cpp_1af4e69a5f7167b63522135a1f6b8a5dd8.html#_CPPv4N6marianStE4Expri" title="marian::std">std</a>::string <code class="sig-name descname">name_</code> = {&quot;none&quot;}<a class="headerlink" href="#_CPPv4N6marian4Node5name_E" title="Permalink to this definition">¶</a><br /></dt>
+<dd></dd></dl>
+
+<dl class="member">
+<dt id="_CPPv4N6marian4Node4val_E">
+<span id="_CPPv3N6marian4Node4val_E"></span><span id="_CPPv2N6marian4Node4val_E"></span><span id="marian::Node::val___Tensor"></span><span class="target" id="classmarian_1_1Node_1ab64614c39ead91341c3d485dd0817cab"></span>Tensor <code class="sig-name descname">val_</code> = {nullptr}<a class="headerlink" href="#_CPPv4N6marian4Node4val_E" title="Permalink to this definition">¶</a><br /></dt>
+<dd></dd></dl>
+
+<dl class="member">
+<dt id="_CPPv4N6marian4Node4adj_E">
+<span id="_CPPv3N6marian4Node4adj_E"></span><span id="_CPPv2N6marian4Node4adj_E"></span><span id="marian::Node::adj___Tensor"></span><span class="target" id="classmarian_1_1Node_1a13a0badd98010fdd2536cb5d055ade5a"></span>Tensor <code class="sig-name descname">adj_</code> = {nullptr}<a class="headerlink" href="#_CPPv4N6marian4Node4adj_E" title="Permalink to this definition">¶</a><br /></dt>
+<dd></dd></dl>
+
+<dl class="member">
+<dt id="_CPPv4N6marian4Node15markedForDebug_E">
+<span id="_CPPv3N6marian4Node15markedForDebug_E"></span><span id="_CPPv2N6marian4Node15markedForDebug_E"></span><span id="marian::Node::markedForDebug___b"></span><span class="target" id="classmarian_1_1Node_1a666eca0dd7946a8438f71f0e14c0155c"></span>bool <code class="sig-name descname">markedForDebug_</code> = {false}<a class="headerlink" href="#_CPPv4N6marian4Node15markedForDebug_E" title="Permalink to this definition">¶</a><br /></dt>
+<dd></dd></dl>
+
+<dl class="member">
+<dt id="_CPPv4N6marian4Node13debugMessage_E">
+<span id="_CPPv3N6marian4Node13debugMessage_E"></span><span id="_CPPv2N6marian4Node13debugMessage_E"></span><span id="marian::Node::debugMessage___ss"></span><span class="target" id="classmarian_1_1Node_1a98e7e9a443d642dc1aeadb2f015a12e0"></span><a class="reference internal" href="function_expression__operators_8cpp_1af4e69a5f7167b63522135a1f6b8a5dd8.html#_CPPv4N6marianStE4Expri" title="marian::std">std</a>::string <code class="sig-name descname">debugMessage_</code><a class="headerlink" href="#_CPPv4N6marian4Node13debugMessage_E" title="Permalink to this definition">¶</a><br /></dt>
+<dd></dd></dl>
+
+<dl class="member">
+<dt id="_CPPv4N6marian4Node8subtape_E">
+<span id="_CPPv3N6marian4Node8subtape_E"></span><span id="_CPPv2N6marian4Node8subtape_E"></span><span id="marian::Node::subtape___Ptr:std::list:Expr::"></span><span class="target" id="classmarian_1_1Node_1ad3f8201b12d1d79691034273c631e224"></span><a class="reference internal" href="typedef_definitions_8h_1ad1a373be43a00ef9ce35666145137b08.html#_CPPv4N6marian3PtrE" title="marian::Ptr">Ptr</a>&lt;<a class="reference internal" href="function_expression__operators_8cpp_1af4e69a5f7167b63522135a1f6b8a5dd8.html#_CPPv4N6marianStE4Expri" title="marian::std">std</a>::list&lt;<a class="reference internal" href="typedef_definitions_8h_1ac8ecc2cc66a7afcc6da94a9bbde5eaa7.html#_CPPv4N6marian4ExprE" title="marian::Expr">Expr</a>&gt;&gt; <code class="sig-name descname">subtape_</code><a class="headerlink" href="#_CPPv4N6marian4Node8subtape_E" title="Permalink to this definition">¶</a><br /></dt>
+<dd></dd></dl>
+
+<dl class="member">
+<dt id="_CPPv4N6marian4Node13isCheckpoint_E">
+<span id="_CPPv3N6marian4Node13isCheckpoint_E"></span><span id="_CPPv2N6marian4Node13isCheckpoint_E"></span><span id="marian::Node::isCheckpoint___b"></span><span class="target" id="classmarian_1_1Node_1a79ab254abd3ee334d83bcf47f722984f"></span>bool <code class="sig-name descname">isCheckpoint_</code> = {false}<a class="headerlink" href="#_CPPv4N6marian4Node13isCheckpoint_E" title="Permalink to this definition">¶</a><br /></dt>
+<dd></dd></dl>
+
+<dl class="member">
+<dt id="_CPPv4N6marian4Node9recorder_E">
+<span id="_CPPv3N6marian4Node9recorder_E"></span><span id="_CPPv2N6marian4Node9recorder_E"></span><span id="marian::Node::recorder___Ptr:AutoTunerRecorder:"></span><span class="target" id="classmarian_1_1Node_1a027ab36b6e0e7c881f400f1ab9868eae"></span><a class="reference internal" href="typedef_definitions_8h_1ad1a373be43a00ef9ce35666145137b08.html#_CPPv4N6marian3PtrE" title="marian::Ptr">Ptr</a>&lt;<a class="reference internal" href="classmarian_1_1AutoTunerRecorder.html#_CPPv4N6marian17AutoTunerRecorderE" title="marian::AutoTunerRecorder">AutoTunerRecorder</a>&gt; <code class="sig-name descname">recorder_</code><a class="headerlink" href="#_CPPv4N6marian4Node9recorder_E" title="Permalink to this definition">¶</a><br /></dt>
+<dd></dd></dl>
+
+<dl class="member">
+<dt id="_CPPv4N6marian4Node13recorderHash_E">
+<span id="_CPPv3N6marian4Node13recorderHash_E"></span><span id="_CPPv2N6marian4Node13recorderHash_E"></span><span id="marian::Node::recorderHash___s"></span><span class="target" id="classmarian_1_1Node_1ac602ee95158f1b588c13a7a92bc90724"></span>size_t <code class="sig-name descname">recorderHash_</code><a class="headerlink" href="#_CPPv4N6marian4Node13recorderHash_E" title="Permalink to this definition">¶</a><br /></dt>
+<dd></dd></dl>
+
+<dl class="member">
+<dt id="_CPPv4N6marian4Node13recorderStop_E">
+<span id="_CPPv3N6marian4Node13recorderStop_E"></span><span id="_CPPv2N6marian4Node13recorderStop_E"></span><span id="marian::Node::recorderStop___b"></span><span class="target" id="classmarian_1_1Node_1af1a0d0e16111b36aa5a4a20358ac7352"></span>bool <code class="sig-name descname">recorderStop_</code><a class="headerlink" href="#_CPPv4N6marian4Node13recorderStop_E" title="Permalink to this definition">¶</a><br /></dt>
+<dd></dd></dl>
+
+</div>
+</dd></dl>
+
+</div>
+</div>
+
+
+           </div>
+           
+          </div>
+          <footer>
+    <div class="rst-footer-buttons" role="navigation" aria-label="footer navigation">
+        <a href="classmarian_1_1Norm.html" class="btn btn-neutral float-right" title="Class Norm" accesskey="n" rel="next">Next <span class="fa fa-arrow-circle-right" aria-hidden="true"></span></a>
+        <a href="classmarian_1_1Nematus.html" class="btn btn-neutral float-left" title="Class Nematus" accesskey="p" rel="prev"><span class="fa fa-arrow-circle-left" aria-hidden="true"></span> Previous</a>
+    </div>
+
+  <hr/>
+
+  <div role="contentinfo">
+    <p>
+        &#169; Copyright 2021, Marian NMT Team.
+
+    </p>
+  </div>
+    
+    
+    
+    Built with <a href="https://www.sphinx-doc.org/">Sphinx</a> using a
+    
+    <a href="https://github.com/readthedocs/sphinx_rtd_theme">theme</a>
+    
+    provided by <a href="https://readthedocs.org">Read the Docs</a>. 
+
+</footer>
+        </div>
+      </div>
+
+    </section>
+
+  </div>
+  
+
+  <script type="text/javascript">
+      jQuery(function () {
+          SphinxRtdTheme.Navigation.enable(true);
+      });
+  </script>
+
+  
+  
+    
+   
+
+</body>
+</html>

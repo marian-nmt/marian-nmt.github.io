@@ -1,0 +1,29 @@
+
+.. _program_listing_file_src_command_marian_scorer.cpp:
+
+Program Listing for File marian_scorer.cpp
+==========================================
+
+|exhale_lsh| :ref:`Return to documentation for file <file_src_command_marian_scorer.cpp>` (``src/command/marian_scorer.cpp``)
+
+.. |exhale_lsh| unicode:: U+021B0 .. UPWARDS ARROW WITH TIP LEFTWARDS
+
+.. code-block:: cpp
+
+   #include "marian.h"
+   
+   #include "models/model_task.h"
+   #include "rescorer/rescorer.h"
+   #include "common/timer.h"
+   
+   int main(int argc, char** argv) {
+     using namespace marian;
+   
+     auto options = parseOptions(argc, argv, cli::mode::scoring);
+   
+     timer::Timer timer;
+     New<Rescore<Rescorer>>(options)->run();
+     LOG(info, "Total time: {:.5f}s wall", timer.elapsed());
+   
+     return 0;
+   }

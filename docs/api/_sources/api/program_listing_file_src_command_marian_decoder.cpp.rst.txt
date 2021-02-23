@@ -1,0 +1,31 @@
+
+.. _program_listing_file_src_command_marian_decoder.cpp:
+
+Program Listing for File marian_decoder.cpp
+===========================================
+
+|exhale_lsh| :ref:`Return to documentation for file <file_src_command_marian_decoder.cpp>` (``src/command/marian_decoder.cpp``)
+
+.. |exhale_lsh| unicode:: U+021B0 .. UPWARDS ARROW WITH TIP LEFTWARDS
+
+.. code-block:: cpp
+
+   #include "marian.h"
+   #include "translator/beam_search.h"
+   #include "translator/translator.h"
+   #include "common/timer.h"
+   #ifdef _WIN32
+   #include <Windows.h>
+   #endif
+   
+   int main(int argc, char** argv) {
+     using namespace marian;
+     auto options = parseOptions(argc, argv, cli::mode::translation);
+     auto task = New<Translate<BeamSearch>>(options);
+   
+     timer::Timer timer;
+     task->run();
+     LOG(info, "Total time: {:.5f}s wall", timer.elapsed());
+   
+     return 0;
+   }

@@ -1,0 +1,282 @@
+
+
+<!DOCTYPE html>
+<html class="writer-html5" lang="en" >
+<head>
+  <meta charset="utf-8" />
+  
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  
+  <title>Class TrainingObserver &mdash; Marian NMT v1.10.1 2021-02-23 documentation</title>
+  
+
+  
+  <link rel="stylesheet" href="../_static/css/theme.css" type="text/css" />
+  <link rel="stylesheet" href="../_static/pygments.css" type="text/css" />
+  <link rel="stylesheet" href="../_static/css/custom.css" type="text/css" />
+  <link rel="stylesheet" href="../_static/collapsible-lists/css/tree_view.css" type="text/css" />
+
+  
+  
+
+  
+  
+
+  
+    <link rel="canonical" href="http://marian-nmt.github.io/docs/api/api/classmarian_1_1TrainingObserver.html" />
+
+  
+  <!--[if lt IE 9]>
+    <script src="../_static/js/html5shiv.min.js"></script>
+  <![endif]-->
+  
+    
+      <script type="text/javascript" id="documentation_options" data-url_root="../" src="../_static/documentation_options.js"></script>
+        <script src="../_static/jquery.js"></script>
+        <script src="../_static/underscore.js"></script>
+        <script src="../_static/doctools.js"></script>
+        <script src="../_static/language_data.js"></script>
+        <script src="../_static/collapsible-lists/js/CollapsibleLists.compressed.js"></script>
+        <script src="../_static/collapsible-lists/js/apply-collapsible-lists.js"></script>
+    
+    <script type="text/javascript" src="../_static/js/theme.js"></script>
+
+    
+    <link rel="index" title="Index" href="../genindex.html" />
+    <link rel="search" title="Search" href="../search.html" />
+    <link rel="next" title="Class TrainingState" href="classmarian_1_1TrainingState.html" />
+    <link rel="prev" title="Template Class Train" href="classmarian_1_1Train.html" /> 
+</head>
+
+<body class="wy-body-for-nav">
+
+   
+  <div class="wy-grid-for-nav">
+    
+    <nav data-toggle="wy-nav-shift" class="wy-nav-side">
+      <div class="wy-side-scroll">
+        <div class="wy-side-nav-search" >
+          
+
+          
+            <a href="../index.html" class="icon icon-home"> Marian NMT
+          
+
+          
+          </a>
+
+          
+            
+            
+              <div class="version">
+                v1.10.1
+              </div>
+            
+          
+
+          
+<div role="search">
+  <form id="rtd-search-form" class="wy-form" action="../search.html" method="get">
+    <input type="text" name="q" placeholder="Search docs" />
+    <input type="hidden" name="check_keywords" value="yes" />
+    <input type="hidden" name="area" value="default" />
+  </form>
+</div>
+
+          
+        </div>
+
+        
+        <div class="wy-menu wy-menu-vertical" data-spy="affix" role="navigation" aria-label="main navigation">
+          
+            
+            
+              
+            
+            
+              <p class="caption"><span class="caption-text">Contents:</span></p>
+<ul>
+<li class="toctree-l1"><a class="reference internal" href="../install.html">Installation</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../graph.html">Expression graphs</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../operators.html">Graph operations</a></li>
+<li class="toctree-l1"><a class="reference internal" href="library_index.html">Library API</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../contributing.html">How to contribute to Marian</a></li>
+</ul>
+
+            
+          
+        </div>
+        
+      </div>
+    </nav>
+
+    <section data-toggle="wy-nav-shift" class="wy-nav-content-wrap">
+
+      
+      <nav class="wy-nav-top" aria-label="top navigation">
+        
+          <i data-toggle="wy-nav-top" class="fa fa-bars"></i>
+          <a href="../index.html">Marian NMT</a>
+        
+      </nav>
+
+
+      <div class="wy-nav-content">
+        
+        <div class="rst-content">
+        
+          
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+<div role="navigation" aria-label="breadcrumbs navigation">
+
+  <ul class="wy-breadcrumbs">
+    
+      <li><a href="../index.html" class="icon icon-home"></a> &raquo;</li>
+        
+          <li><a href="library_index.html">Library API</a> &raquo;</li>
+        
+      <li>Class TrainingObserver</li>
+    
+    
+      <li class="wy-breadcrumbs-aside">
+        
+          
+            <a href="../_sources/api/classmarian_1_1TrainingObserver.rst.txt" rel="nofollow"> View page source</a>
+          
+        
+      </li>
+    
+  </ul>
+
+  
+  <hr/>
+</div>
+          <div role="main" class="document" itemscope="itemscope" itemtype="http://schema.org/Article">
+           <div itemprop="articleBody">
+            
+  <div class="section" id="class-trainingobserver">
+<span id="exhale-class-classmarian-1-1trainingobserver"></span><h1>Class TrainingObserver<a class="headerlink" href="#class-trainingobserver" title="Permalink to this headline">¶</a></h1>
+<ul class="simple">
+<li><p>Defined in <a class="reference internal" href="file_src_training_training_state.h.html#file-src-training-training-state-h"><span class="std std-ref">File training_state.h</span></a></p></li>
+</ul>
+<div class="section" id="inheritance-relationships">
+<h2>Inheritance Relationships<a class="headerlink" href="#inheritance-relationships" title="Permalink to this headline">¶</a></h2>
+<div class="section" id="derived-types">
+<h3>Derived Types<a class="headerlink" href="#derived-types" title="Permalink to this headline">¶</a></h3>
+<ul class="simple">
+<li><p><code class="docutils literal notranslate"><span class="pre">public</span> <span class="pre">marian::data::CorpusBatchGenerator</span></code> (<a class="reference internal" href="classmarian_1_1data_1_1CorpusBatchGenerator.html#exhale-class-classmarian-1-1data-1-1corpusbatchgenerator"><span class="std std-ref">Class CorpusBatchGenerator</span></a>)</p></li>
+<li><p><code class="docutils literal notranslate"><span class="pre">public</span> <span class="pre">marian::OptimizerBase</span></code> (<a class="reference internal" href="classmarian_1_1OptimizerBase.html#exhale-class-classmarian-1-1optimizerbase"><span class="std std-ref">Class OptimizerBase</span></a>)</p></li>
+<li><p><code class="docutils literal notranslate"><span class="pre">public</span> <span class="pre">marian::Scheduler</span></code> (<a class="reference internal" href="classmarian_1_1Scheduler.html#exhale-class-classmarian-1-1scheduler"><span class="std std-ref">Class Scheduler</span></a>)</p></li>
+<li><p><code class="docutils literal notranslate"><span class="pre">public</span> <span class="pre">marian::ValidatorBase</span></code> (<a class="reference internal" href="classmarian_1_1ValidatorBase.html#exhale-class-classmarian-1-1validatorbase"><span class="std std-ref">Class ValidatorBase</span></a>)</p></li>
+</ul>
+</div>
+</div>
+<div class="section" id="class-documentation">
+<h2>Class Documentation<a class="headerlink" href="#class-documentation" title="Permalink to this headline">¶</a></h2>
+<dl class="class">
+<dt id="_CPPv4N6marian16TrainingObserverE">
+<span id="_CPPv3N6marian16TrainingObserverE"></span><span id="_CPPv2N6marian16TrainingObserverE"></span><span id="marian::TrainingObserver"></span><span class="target" id="classmarian_1_1TrainingObserver"></span><em class="property">class </em><code class="sig-name descname">TrainingObserver</code><a class="headerlink" href="#_CPPv4N6marian16TrainingObserverE" title="Permalink to this definition">¶</a><br /></dt>
+<dd><p>Subclassed by <a class="reference internal" href="classmarian_1_1data_1_1CorpusBatchGenerator.html#classmarian_1_1data_1_1CorpusBatchGenerator"><span class="std std-ref">marian::data::CorpusBatchGenerator</span></a>, <a class="reference internal" href="classmarian_1_1OptimizerBase.html#classmarian_1_1OptimizerBase"><span class="std std-ref">marian::OptimizerBase</span></a>, <a class="reference internal" href="classmarian_1_1Scheduler.html#classmarian_1_1Scheduler"><span class="std std-ref">marian::Scheduler</span></a>, <a class="reference internal" href="classmarian_1_1ValidatorBase.html#classmarian_1_1ValidatorBase"><span class="std std-ref">marian::ValidatorBase</span></a></p>
+<div class="breathe-sectiondef docutils container">
+<p class="breathe-sectiondef-title rubric">Public Functions</p>
+<dl class="function">
+<dt id="_CPPv4N6marian16TrainingObserverD0Ev">
+<span id="_CPPv3N6marian16TrainingObserverD0Ev"></span><span id="_CPPv2N6marian16TrainingObserverD0Ev"></span><span id="marian::TrainingObserver::~TrainingObserver"></span><span class="target" id="classmarian_1_1TrainingObserver_1a15693a63bfb505057ba517adf95b6f52"></span><em class="property">virtual</em> <code class="sig-name descname">~TrainingObserver</code><span class="sig-paren">(</span><span class="sig-paren">)</span><a class="headerlink" href="#_CPPv4N6marian16TrainingObserverD0Ev" title="Permalink to this definition">¶</a><br /></dt>
+<dd></dd></dl>
+
+<dl class="function">
+<dt id="_CPPv4N6marian16TrainingObserver4initER13TrainingState">
+<span id="_CPPv3N6marian16TrainingObserver4initER13TrainingState"></span><span id="_CPPv2N6marian16TrainingObserver4initER13TrainingState"></span><span id="marian::TrainingObserver::init__TrainingStateR"></span><span class="target" id="classmarian_1_1TrainingObserver_1a68c94e64b49b81281f13005a65a39871"></span><em class="property">virtual</em> void <code class="sig-name descname">init</code><span class="sig-paren">(</span><a class="reference internal" href="classmarian_1_1TrainingState.html#_CPPv4N6marian13TrainingStateE" title="marian::TrainingState">TrainingState</a>&amp;<span class="sig-paren">)</span><a class="headerlink" href="#_CPPv4N6marian16TrainingObserver4initER13TrainingState" title="Permalink to this definition">¶</a><br /></dt>
+<dd></dd></dl>
+
+<dl class="function">
+<dt id="_CPPv4N6marian16TrainingObserver13actAfterEpochER13TrainingState">
+<span id="_CPPv3N6marian16TrainingObserver13actAfterEpochER13TrainingState"></span><span id="_CPPv2N6marian16TrainingObserver13actAfterEpochER13TrainingState"></span><span id="marian::TrainingObserver::actAfterEpoch__TrainingStateR"></span><span class="target" id="classmarian_1_1TrainingObserver_1ab0a96b75844662348b7f08d5d79d078e"></span><em class="property">virtual</em> void <code class="sig-name descname">actAfterEpoch</code><span class="sig-paren">(</span><a class="reference internal" href="classmarian_1_1TrainingState.html#_CPPv4N6marian13TrainingStateE" title="marian::TrainingState">TrainingState</a>&amp;<span class="sig-paren">)</span><a class="headerlink" href="#_CPPv4N6marian16TrainingObserver13actAfterEpochER13TrainingState" title="Permalink to this definition">¶</a><br /></dt>
+<dd></dd></dl>
+
+<dl class="function">
+<dt id="_CPPv4N6marian16TrainingObserver15actAfterBatchesER13TrainingState">
+<span id="_CPPv3N6marian16TrainingObserver15actAfterBatchesER13TrainingState"></span><span id="_CPPv2N6marian16TrainingObserver15actAfterBatchesER13TrainingState"></span><span id="marian::TrainingObserver::actAfterBatches__TrainingStateR"></span><span class="target" id="classmarian_1_1TrainingObserver_1ad947f44dc4f880e5ac64f421ecf8236f"></span><em class="property">virtual</em> void <code class="sig-name descname">actAfterBatches</code><span class="sig-paren">(</span><a class="reference internal" href="classmarian_1_1TrainingState.html#_CPPv4N6marian13TrainingStateE" title="marian::TrainingState">TrainingState</a>&amp;<span class="sig-paren">)</span><a class="headerlink" href="#_CPPv4N6marian16TrainingObserver15actAfterBatchesER13TrainingState" title="Permalink to this definition">¶</a><br /></dt>
+<dd></dd></dl>
+
+<dl class="function">
+<dt id="_CPPv4N6marian16TrainingObserver15actAfterStalledER13TrainingState">
+<span id="_CPPv3N6marian16TrainingObserver15actAfterStalledER13TrainingState"></span><span id="_CPPv2N6marian16TrainingObserver15actAfterStalledER13TrainingState"></span><span id="marian::TrainingObserver::actAfterStalled__TrainingStateR"></span><span class="target" id="classmarian_1_1TrainingObserver_1a408377477e7fc89182c384a3e0b6493c"></span><em class="property">virtual</em> void <code class="sig-name descname">actAfterStalled</code><span class="sig-paren">(</span><a class="reference internal" href="classmarian_1_1TrainingState.html#_CPPv4N6marian13TrainingStateE" title="marian::TrainingState">TrainingState</a>&amp;<span class="sig-paren">)</span><a class="headerlink" href="#_CPPv4N6marian16TrainingObserver15actAfterStalledER13TrainingState" title="Permalink to this definition">¶</a><br /></dt>
+<dd></dd></dl>
+
+<dl class="function">
+<dt id="_CPPv4N6marian16TrainingObserver14actAfterLoadedER13TrainingState">
+<span id="_CPPv3N6marian16TrainingObserver14actAfterLoadedER13TrainingState"></span><span id="_CPPv2N6marian16TrainingObserver14actAfterLoadedER13TrainingState"></span><span id="marian::TrainingObserver::actAfterLoaded__TrainingStateR"></span><span class="target" id="classmarian_1_1TrainingObserver_1a1d4733ab5a1f7aa81794dfdc4d2cd13f"></span><em class="property">virtual</em> void <code class="sig-name descname">actAfterLoaded</code><span class="sig-paren">(</span><a class="reference internal" href="classmarian_1_1TrainingState.html#_CPPv4N6marian13TrainingStateE" title="marian::TrainingState">TrainingState</a>&amp;<span class="sig-paren">)</span><a class="headerlink" href="#_CPPv4N6marian16TrainingObserver14actAfterLoadedER13TrainingState" title="Permalink to this definition">¶</a><br /></dt>
+<dd></dd></dl>
+
+</div>
+</dd></dl>
+
+</div>
+</div>
+
+
+           </div>
+           
+          </div>
+          <footer>
+    <div class="rst-footer-buttons" role="navigation" aria-label="footer navigation">
+        <a href="classmarian_1_1TrainingState.html" class="btn btn-neutral float-right" title="Class TrainingState" accesskey="n" rel="next">Next <span class="fa fa-arrow-circle-right" aria-hidden="true"></span></a>
+        <a href="classmarian_1_1Train.html" class="btn btn-neutral float-left" title="Template Class Train" accesskey="p" rel="prev"><span class="fa fa-arrow-circle-left" aria-hidden="true"></span> Previous</a>
+    </div>
+
+  <hr/>
+
+  <div role="contentinfo">
+    <p>
+        &#169; Copyright 2021, Marian NMT Team.
+
+    </p>
+  </div>
+    
+    
+    
+    Built with <a href="https://www.sphinx-doc.org/">Sphinx</a> using a
+    
+    <a href="https://github.com/readthedocs/sphinx_rtd_theme">theme</a>
+    
+    provided by <a href="https://readthedocs.org">Read the Docs</a>. 
+
+</footer>
+        </div>
+      </div>
+
+    </section>
+
+  </div>
+  
+
+  <script type="text/javascript">
+      jQuery(function () {
+          SphinxRtdTheme.Navigation.enable(true);
+      });
+  </script>
+
+  
+  
+    
+   
+
+</body>
+</html>

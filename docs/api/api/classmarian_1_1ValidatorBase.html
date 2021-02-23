@@ -1,0 +1,327 @@
+
+
+<!DOCTYPE html>
+<html class="writer-html5" lang="en" >
+<head>
+  <meta charset="utf-8" />
+  
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  
+  <title>Class ValidatorBase &mdash; Marian NMT v1.10.1 2021-02-23 documentation</title>
+  
+
+  
+  <link rel="stylesheet" href="../_static/css/theme.css" type="text/css" />
+  <link rel="stylesheet" href="../_static/pygments.css" type="text/css" />
+  <link rel="stylesheet" href="../_static/css/custom.css" type="text/css" />
+  <link rel="stylesheet" href="../_static/collapsible-lists/css/tree_view.css" type="text/css" />
+
+  
+  
+
+  
+  
+
+  
+    <link rel="canonical" href="http://marian-nmt.github.io/docs/api/api/classmarian_1_1ValidatorBase.html" />
+
+  
+  <!--[if lt IE 9]>
+    <script src="../_static/js/html5shiv.min.js"></script>
+  <![endif]-->
+  
+    
+      <script type="text/javascript" id="documentation_options" data-url_root="../" src="../_static/documentation_options.js"></script>
+        <script src="../_static/jquery.js"></script>
+        <script src="../_static/underscore.js"></script>
+        <script src="../_static/doctools.js"></script>
+        <script src="../_static/language_data.js"></script>
+        <script src="../_static/collapsible-lists/js/CollapsibleLists.compressed.js"></script>
+        <script src="../_static/collapsible-lists/js/apply-collapsible-lists.js"></script>
+    
+    <script type="text/javascript" src="../_static/js/theme.js"></script>
+
+    
+    <link rel="index" title="Index" href="../genindex.html" />
+    <link rel="search" title="Search" href="../search.html" />
+    <link rel="next" title="Class VectorCollector" href="classmarian_1_1VectorCollector.html" />
+    <link rel="prev" title="Template Class Validator" href="classmarian_1_1Validator.html" /> 
+</head>
+
+<body class="wy-body-for-nav">
+
+   
+  <div class="wy-grid-for-nav">
+    
+    <nav data-toggle="wy-nav-shift" class="wy-nav-side">
+      <div class="wy-side-scroll">
+        <div class="wy-side-nav-search" >
+          
+
+          
+            <a href="../index.html" class="icon icon-home"> Marian NMT
+          
+
+          
+          </a>
+
+          
+            
+            
+              <div class="version">
+                v1.10.1
+              </div>
+            
+          
+
+          
+<div role="search">
+  <form id="rtd-search-form" class="wy-form" action="../search.html" method="get">
+    <input type="text" name="q" placeholder="Search docs" />
+    <input type="hidden" name="check_keywords" value="yes" />
+    <input type="hidden" name="area" value="default" />
+  </form>
+</div>
+
+          
+        </div>
+
+        
+        <div class="wy-menu wy-menu-vertical" data-spy="affix" role="navigation" aria-label="main navigation">
+          
+            
+            
+              
+            
+            
+              <p class="caption"><span class="caption-text">Contents:</span></p>
+<ul>
+<li class="toctree-l1"><a class="reference internal" href="../install.html">Installation</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../graph.html">Expression graphs</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../operators.html">Graph operations</a></li>
+<li class="toctree-l1"><a class="reference internal" href="library_index.html">Library API</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../contributing.html">How to contribute to Marian</a></li>
+</ul>
+
+            
+          
+        </div>
+        
+      </div>
+    </nav>
+
+    <section data-toggle="wy-nav-shift" class="wy-nav-content-wrap">
+
+      
+      <nav class="wy-nav-top" aria-label="top navigation">
+        
+          <i data-toggle="wy-nav-top" class="fa fa-bars"></i>
+          <a href="../index.html">Marian NMT</a>
+        
+      </nav>
+
+
+      <div class="wy-nav-content">
+        
+        <div class="rst-content">
+        
+          
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+<div role="navigation" aria-label="breadcrumbs navigation">
+
+  <ul class="wy-breadcrumbs">
+    
+      <li><a href="../index.html" class="icon icon-home"></a> &raquo;</li>
+        
+          <li><a href="library_index.html">Library API</a> &raquo;</li>
+        
+      <li>Class ValidatorBase</li>
+    
+    
+      <li class="wy-breadcrumbs-aside">
+        
+          
+            <a href="../_sources/api/classmarian_1_1ValidatorBase.rst.txt" rel="nofollow"> View page source</a>
+          
+        
+      </li>
+    
+  </ul>
+
+  
+  <hr/>
+</div>
+          <div role="main" class="document" itemscope="itemscope" itemtype="http://schema.org/Article">
+           <div itemprop="articleBody">
+            
+  <div class="section" id="class-validatorbase">
+<span id="exhale-class-classmarian-1-1validatorbase"></span><h1>Class ValidatorBase<a class="headerlink" href="#class-validatorbase" title="Permalink to this headline">¶</a></h1>
+<ul class="simple">
+<li><p>Defined in <a class="reference internal" href="file_src_training_validator.h.html#file-src-training-validator-h"><span class="std std-ref">File validator.h</span></a></p></li>
+</ul>
+<div class="section" id="inheritance-relationships">
+<h2>Inheritance Relationships<a class="headerlink" href="#inheritance-relationships" title="Permalink to this headline">¶</a></h2>
+<div class="section" id="base-type">
+<h3>Base Type<a class="headerlink" href="#base-type" title="Permalink to this headline">¶</a></h3>
+<ul class="simple">
+<li><p><code class="docutils literal notranslate"><span class="pre">public</span> <span class="pre">marian::TrainingObserver</span></code> (<a class="reference internal" href="classmarian_1_1TrainingObserver.html#exhale-class-classmarian-1-1trainingobserver"><span class="std std-ref">Class TrainingObserver</span></a>)</p></li>
+</ul>
+</div>
+<div class="section" id="derived-types">
+<h3>Derived Types<a class="headerlink" href="#derived-types" title="Permalink to this headline">¶</a></h3>
+<ul class="simple">
+<li><p><code class="docutils literal notranslate"><span class="pre">public</span> <span class="pre">marian::Validator&lt;</span> <span class="pre">DataSet,</span> <span class="pre">BuilderType</span> <span class="pre">&gt;</span></code> (<a class="reference internal" href="classmarian_1_1Validator.html#exhale-class-classmarian-1-1validator"><span class="std std-ref">Template Class Validator</span></a>)</p></li>
+<li><p><code class="docutils literal notranslate"><span class="pre">public</span> <span class="pre">marian::Validator&lt;</span> <span class="pre">data::Corpus,</span> <span class="pre">models::ICriterionFunction</span> <span class="pre">&gt;</span></code> (<a class="reference internal" href="classmarian_1_1Validator.html#exhale-class-classmarian-1-1validator"><span class="std std-ref">Template Class Validator</span></a>)</p></li>
+<li><p><code class="docutils literal notranslate"><span class="pre">public</span> <span class="pre">marian::Validator&lt;</span> <span class="pre">data::Corpus,</span> <span class="pre">models::IModel</span> <span class="pre">&gt;</span></code> (<a class="reference internal" href="classmarian_1_1Validator.html#exhale-class-classmarian-1-1validator"><span class="std std-ref">Template Class Validator</span></a>)</p></li>
+<li><p><code class="docutils literal notranslate"><span class="pre">public</span> <span class="pre">marian::Validator&lt;</span> <span class="pre">data::MNISTData,</span> <span class="pre">models::IModel</span> <span class="pre">&gt;</span></code> (<a class="reference internal" href="classmarian_1_1Validator.html#exhale-class-classmarian-1-1validator"><span class="std std-ref">Template Class Validator</span></a>)</p></li>
+</ul>
+</div>
+</div>
+<div class="section" id="class-documentation">
+<h2>Class Documentation<a class="headerlink" href="#class-documentation" title="Permalink to this headline">¶</a></h2>
+<dl class="class">
+<dt id="_CPPv4N6marian13ValidatorBaseE">
+<span id="_CPPv3N6marian13ValidatorBaseE"></span><span id="_CPPv2N6marian13ValidatorBaseE"></span><span id="marian::ValidatorBase"></span><span class="target" id="classmarian_1_1ValidatorBase"></span><em class="property">class </em><code class="sig-name descname">ValidatorBase</code> : <em class="property">public</em> marian::<a class="reference internal" href="classmarian_1_1TrainingObserver.html#_CPPv4N6marian16TrainingObserverE" title="marian::TrainingObserver">TrainingObserver</a><a class="headerlink" href="#_CPPv4N6marian13ValidatorBaseE" title="Permalink to this definition">¶</a><br /></dt>
+<dd><p>Base class for validators. </p>
+<p>Subclassed by <a class="reference internal" href="classmarian_1_1Validator.html#classmarian_1_1Validator"><span class="std std-ref">marian::Validator&lt; DataSet, BuilderType &gt;</span></a>, <a class="reference internal" href="classmarian_1_1Validator.html#classmarian_1_1Validator"><span class="std std-ref">marian::Validator&lt; data::Corpus, models::ICriterionFunction &gt;</span></a>, <a class="reference internal" href="classmarian_1_1Validator.html#classmarian_1_1Validator"><span class="std std-ref">marian::Validator&lt; data::Corpus, models::IModel &gt;</span></a>, <a class="reference internal" href="classmarian_1_1Validator.html#classmarian_1_1Validator"><span class="std std-ref">marian::Validator&lt; data::MNISTData, models::IModel &gt;</span></a></p>
+<div class="breathe-sectiondef docutils container">
+<p class="breathe-sectiondef-title rubric">Public Functions</p>
+<dl class="function">
+<dt id="_CPPv4N6marian13ValidatorBase13ValidatorBaseEb">
+<span id="_CPPv3N6marian13ValidatorBase13ValidatorBaseEb"></span><span id="_CPPv2N6marian13ValidatorBase13ValidatorBaseEb"></span><span id="marian::ValidatorBase::ValidatorBase__b"></span><span class="target" id="classmarian_1_1ValidatorBase_1a2590efef214db3ae7738796791ef9b59"></span><code class="sig-name descname">ValidatorBase</code><span class="sig-paren">(</span>bool <em>lowerIsBetter</em><span class="sig-paren">)</span><a class="headerlink" href="#_CPPv4N6marian13ValidatorBase13ValidatorBaseEb" title="Permalink to this definition">¶</a><br /></dt>
+<dd></dd></dl>
+
+<dl class="function">
+<dt id="_CPPv4N6marian13ValidatorBaseD0Ev">
+<span id="_CPPv3N6marian13ValidatorBaseD0Ev"></span><span id="_CPPv2N6marian13ValidatorBaseD0Ev"></span><span id="marian::ValidatorBase::~ValidatorBase"></span><span class="target" id="classmarian_1_1ValidatorBase_1a63000344d7ffdd6699136320e43ac500"></span><em class="property">virtual</em> <code class="sig-name descname">~ValidatorBase</code><span class="sig-paren">(</span><span class="sig-paren">)</span><a class="headerlink" href="#_CPPv4N6marian13ValidatorBaseD0Ev" title="Permalink to this definition">¶</a><br /></dt>
+<dd></dd></dl>
+
+<dl class="function">
+<dt id="_CPPv4N6marian13ValidatorBase8validateERKNSt6vectorI3PtrI15ExpressionGraphEEE3PtrIK13TrainingStateE">
+<span id="_CPPv3N6marian13ValidatorBase8validateERKNSt6vectorI3PtrI15ExpressionGraphEEE3PtrIK13TrainingStateE"></span><span id="_CPPv2N6marian13ValidatorBase8validateERKNSt6vectorI3PtrI15ExpressionGraphEEE3PtrIK13TrainingStateE"></span><span id="marian::ValidatorBase::validate__std::vector:Ptr:ExpressionGraph::CR.Ptr:TrainingStateC:"></span><span class="target" id="classmarian_1_1ValidatorBase_1a6b8fac1bde828770e80169dd587cff9d"></span><em class="property">virtual</em> float <code class="sig-name descname">validate</code><span class="sig-paren">(</span><em class="property">const</em> <a class="reference internal" href="function_expression__operators_8cpp_1af4e69a5f7167b63522135a1f6b8a5dd8.html#_CPPv4N6marianStE4Expri" title="marian::std">std</a>::vector&lt;<a class="reference internal" href="typedef_definitions_8h_1ad1a373be43a00ef9ce35666145137b08.html#_CPPv4N6marian3PtrE" title="marian::Ptr">Ptr</a>&lt;<a class="reference internal" href="classmarian_1_1ExpressionGraph.html#_CPPv4N6marian15ExpressionGraphE" title="marian::ExpressionGraph">ExpressionGraph</a>&gt;&gt; &amp;<em>graphs</em>, <a class="reference internal" href="typedef_definitions_8h_1ad1a373be43a00ef9ce35666145137b08.html#_CPPv4N6marian3PtrE" title="marian::Ptr">Ptr</a>&lt;<em class="property">const</em> <a class="reference internal" href="classmarian_1_1TrainingState.html#_CPPv4N6marian13TrainingStateE" title="marian::TrainingState">TrainingState</a>&gt; <em>state</em><span class="sig-paren">)</span> = 0<a class="headerlink" href="#_CPPv4N6marian13ValidatorBase8validateERKNSt6vectorI3PtrI15ExpressionGraphEEE3PtrIK13TrainingStateE" title="Permalink to this definition">¶</a><br /></dt>
+<dd></dd></dl>
+
+<dl class="function">
+<dt id="_CPPv4N6marian13ValidatorBase4typeEv">
+<span id="_CPPv3N6marian13ValidatorBase4typeEv"></span><span id="_CPPv2N6marian13ValidatorBase4typeEv"></span><span id="marian::ValidatorBase::type"></span><span class="target" id="classmarian_1_1ValidatorBase_1a2ac2cb3c21a09cf4182fb74d7f738228"></span><em class="property">virtual</em> <a class="reference internal" href="function_expression__operators_8cpp_1af4e69a5f7167b63522135a1f6b8a5dd8.html#_CPPv4N6marianStE4Expri" title="marian::std">std</a>::string <code class="sig-name descname">type</code><span class="sig-paren">(</span><span class="sig-paren">)</span> = 0<a class="headerlink" href="#_CPPv4N6marian13ValidatorBase4typeEv" title="Permalink to this definition">¶</a><br /></dt>
+<dd></dd></dl>
+
+<dl class="function">
+<dt id="_CPPv4N6marian13ValidatorBase8lastBestEv">
+<span id="_CPPv3N6marian13ValidatorBase8lastBestEv"></span><span id="_CPPv2N6marian13ValidatorBase8lastBestEv"></span><span id="marian::ValidatorBase::lastBest"></span><span class="target" id="classmarian_1_1ValidatorBase_1a3c06154cb989baa22d5c4946b958375d"></span>float <code class="sig-name descname">lastBest</code><span class="sig-paren">(</span><span class="sig-paren">)</span><a class="headerlink" href="#_CPPv4N6marian13ValidatorBase8lastBestEv" title="Permalink to this definition">¶</a><br /></dt>
+<dd></dd></dl>
+
+<dl class="function">
+<dt id="_CPPv4N6marian13ValidatorBase7stalledEv">
+<span id="_CPPv3N6marian13ValidatorBase7stalledEv"></span><span id="_CPPv2N6marian13ValidatorBase7stalledEv"></span><span id="marian::ValidatorBase::stalled"></span><span class="target" id="classmarian_1_1ValidatorBase_1a969550b5ed0531ab0a73ffe1935afe1d"></span>size_t <code class="sig-name descname">stalled</code><span class="sig-paren">(</span><span class="sig-paren">)</span><a class="headerlink" href="#_CPPv4N6marian13ValidatorBase7stalledEv" title="Permalink to this definition">¶</a><br /></dt>
+<dd></dd></dl>
+
+<dl class="function">
+<dt id="_CPPv4N6marian13ValidatorBase9initScoreEv">
+<span id="_CPPv3N6marian13ValidatorBase9initScoreEv"></span><span id="_CPPv2N6marian13ValidatorBase9initScoreEv"></span><span id="marian::ValidatorBase::initScore"></span><span class="target" id="classmarian_1_1ValidatorBase_1a765987e79d0307ee65eb2827b621d39a"></span>float <code class="sig-name descname">initScore</code><span class="sig-paren">(</span><span class="sig-paren">)</span><a class="headerlink" href="#_CPPv4N6marian13ValidatorBase9initScoreEv" title="Permalink to this definition">¶</a><br /></dt>
+<dd></dd></dl>
+
+<dl class="function">
+<dt id="_CPPv4N6marian13ValidatorBase14actAfterLoadedER13TrainingState">
+<span id="_CPPv3N6marian13ValidatorBase14actAfterLoadedER13TrainingState"></span><span id="_CPPv2N6marian13ValidatorBase14actAfterLoadedER13TrainingState"></span><span id="marian::ValidatorBase::actAfterLoaded__TrainingStateR"></span><span class="target" id="classmarian_1_1ValidatorBase_1aa4ab43076a82c6412aa6b3bd70df955f"></span>void <code class="sig-name descname">actAfterLoaded</code><span class="sig-paren">(</span><a class="reference internal" href="classmarian_1_1TrainingState.html#_CPPv4N6marian13TrainingStateE" title="marian::TrainingState">TrainingState</a> &amp;<em>state</em><span class="sig-paren">)</span><a class="headerlink" href="#_CPPv4N6marian13ValidatorBase14actAfterLoadedER13TrainingState" title="Permalink to this definition">¶</a><br /></dt>
+<dd></dd></dl>
+
+</div>
+<div class="breathe-sectiondef docutils container">
+<p class="breathe-sectiondef-title rubric">Protected Attributes</p>
+<dl class="member">
+<dt id="_CPPv4N6marian13ValidatorBase14lowerIsBetter_E">
+<span id="_CPPv3N6marian13ValidatorBase14lowerIsBetter_E"></span><span id="_CPPv2N6marian13ValidatorBase14lowerIsBetter_E"></span><span id="marian::ValidatorBase::lowerIsBetter___b"></span><span class="target" id="classmarian_1_1ValidatorBase_1a2c9e9cc3650f3a3ec18a186c118141da"></span>bool <code class="sig-name descname">lowerIsBetter_</code> = {true}<a class="headerlink" href="#_CPPv4N6marian13ValidatorBase14lowerIsBetter_E" title="Permalink to this definition">¶</a><br /></dt>
+<dd></dd></dl>
+
+<dl class="member">
+<dt id="_CPPv4N6marian13ValidatorBase9lastBest_E">
+<span id="_CPPv3N6marian13ValidatorBase9lastBest_E"></span><span id="_CPPv2N6marian13ValidatorBase9lastBest_E"></span><span id="marian::ValidatorBase::lastBest___float"></span><span class="target" id="classmarian_1_1ValidatorBase_1af5089c2031ebf97fd920e51c74e6a27d"></span>float <code class="sig-name descname">lastBest_</code><a class="headerlink" href="#_CPPv4N6marian13ValidatorBase9lastBest_E" title="Permalink to this definition">¶</a><br /></dt>
+<dd></dd></dl>
+
+<dl class="member">
+<dt id="_CPPv4N6marian13ValidatorBase8stalled_E">
+<span id="_CPPv3N6marian13ValidatorBase8stalled_E"></span><span id="_CPPv2N6marian13ValidatorBase8stalled_E"></span><span id="marian::ValidatorBase::stalled___s"></span><span class="target" id="classmarian_1_1ValidatorBase_1af95f2df2d488cbd8d8b23504e66ede5c"></span>size_t <code class="sig-name descname">stalled_</code> = {0}<a class="headerlink" href="#_CPPv4N6marian13ValidatorBase8stalled_E" title="Permalink to this definition">¶</a><br /></dt>
+<dd></dd></dl>
+
+<dl class="member">
+<dt id="_CPPv4N6marian13ValidatorBase6mutex_E">
+<span id="_CPPv3N6marian13ValidatorBase6mutex_E"></span><span id="_CPPv2N6marian13ValidatorBase6mutex_E"></span><span id="marian::ValidatorBase::mutex___std::mutex"></span><span class="target" id="classmarian_1_1ValidatorBase_1aa303145eb372780b601a14e8b9547635"></span><a class="reference internal" href="function_expression__operators_8cpp_1af4e69a5f7167b63522135a1f6b8a5dd8.html#_CPPv4N6marianStE4Expri" title="marian::std">std</a>::mutex <code class="sig-name descname">mutex_</code><a class="headerlink" href="#_CPPv4N6marian13ValidatorBase6mutex_E" title="Permalink to this definition">¶</a><br /></dt>
+<dd></dd></dl>
+
+<dl class="member">
+<dt id="_CPPv4N6marian13ValidatorBase11threadPool_E">
+<span id="_CPPv3N6marian13ValidatorBase11threadPool_E"></span><span id="_CPPv2N6marian13ValidatorBase11threadPool_E"></span><span id="marian::ValidatorBase::threadPool___ThreadPool"></span><span class="target" id="classmarian_1_1ValidatorBase_1a2d19107c8fc6bd62d8438484546c577b"></span>ThreadPool <code class="sig-name descname">threadPool_</code><a class="headerlink" href="#_CPPv4N6marian13ValidatorBase11threadPool_E" title="Permalink to this definition">¶</a><br /></dt>
+<dd></dd></dl>
+
+</div>
+</dd></dl>
+
+</div>
+</div>
+
+
+           </div>
+           
+          </div>
+          <footer>
+    <div class="rst-footer-buttons" role="navigation" aria-label="footer navigation">
+        <a href="classmarian_1_1VectorCollector.html" class="btn btn-neutral float-right" title="Class VectorCollector" accesskey="n" rel="next">Next <span class="fa fa-arrow-circle-right" aria-hidden="true"></span></a>
+        <a href="classmarian_1_1Validator.html" class="btn btn-neutral float-left" title="Template Class Validator" accesskey="p" rel="prev"><span class="fa fa-arrow-circle-left" aria-hidden="true"></span> Previous</a>
+    </div>
+
+  <hr/>
+
+  <div role="contentinfo">
+    <p>
+        &#169; Copyright 2021, Marian NMT Team.
+
+    </p>
+  </div>
+    
+    
+    
+    Built with <a href="https://www.sphinx-doc.org/">Sphinx</a> using a
+    
+    <a href="https://github.com/readthedocs/sphinx_rtd_theme">theme</a>
+    
+    provided by <a href="https://readthedocs.org">Read the Docs</a>. 
+
+</footer>
+        </div>
+      </div>
+
+    </section>
+
+  </div>
+  
+
+  <script type="text/javascript">
+      jQuery(function () {
+          SphinxRtdTheme.Navigation.enable(true);
+      });
+  </script>
+
+  
+  
+    
+   
+
+</body>
+</html>

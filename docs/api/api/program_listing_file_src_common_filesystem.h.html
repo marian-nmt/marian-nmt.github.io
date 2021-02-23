@@ -1,0 +1,339 @@
+
+
+<!DOCTYPE html>
+<html class="writer-html5" lang="en" >
+<head>
+  <meta charset="utf-8" />
+  
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  
+  <title>Program Listing for File filesystem.h &mdash; Marian NMT v1.10.1 2021-02-23 documentation</title>
+  
+
+  
+  <link rel="stylesheet" href="../_static/css/theme.css" type="text/css" />
+  <link rel="stylesheet" href="../_static/pygments.css" type="text/css" />
+  <link rel="stylesheet" href="../_static/css/custom.css" type="text/css" />
+  <link rel="stylesheet" href="../_static/collapsible-lists/css/tree_view.css" type="text/css" />
+
+  
+  
+
+  
+  
+
+  
+    <link rel="canonical" href="http://marian-nmt.github.io/docs/api/api/program_listing_file_src_common_filesystem.h.html" />
+
+  
+  <!--[if lt IE 9]>
+    <script src="../_static/js/html5shiv.min.js"></script>
+  <![endif]-->
+  
+    
+      <script type="text/javascript" id="documentation_options" data-url_root="../" src="../_static/documentation_options.js"></script>
+        <script src="../_static/jquery.js"></script>
+        <script src="../_static/underscore.js"></script>
+        <script src="../_static/doctools.js"></script>
+        <script src="../_static/language_data.js"></script>
+        <script src="../_static/collapsible-lists/js/CollapsibleLists.compressed.js"></script>
+        <script src="../_static/collapsible-lists/js/apply-collapsible-lists.js"></script>
+    
+    <script type="text/javascript" src="../_static/js/theme.js"></script>
+
+    
+    <link rel="index" title="Index" href="../genindex.html" />
+    <link rel="search" title="Search" href="../search.html" /> 
+</head>
+
+<body class="wy-body-for-nav">
+
+   
+  <div class="wy-grid-for-nav">
+    
+    <nav data-toggle="wy-nav-shift" class="wy-nav-side">
+      <div class="wy-side-scroll">
+        <div class="wy-side-nav-search" >
+          
+
+          
+            <a href="../index.html" class="icon icon-home"> Marian NMT
+          
+
+          
+          </a>
+
+          
+            
+            
+              <div class="version">
+                v1.10.1
+              </div>
+            
+          
+
+          
+<div role="search">
+  <form id="rtd-search-form" class="wy-form" action="../search.html" method="get">
+    <input type="text" name="q" placeholder="Search docs" />
+    <input type="hidden" name="check_keywords" value="yes" />
+    <input type="hidden" name="area" value="default" />
+  </form>
+</div>
+
+          
+        </div>
+
+        
+        <div class="wy-menu wy-menu-vertical" data-spy="affix" role="navigation" aria-label="main navigation">
+          
+            
+            
+              
+            
+            
+              <p class="caption"><span class="caption-text">Contents:</span></p>
+<ul>
+<li class="toctree-l1"><a class="reference internal" href="../install.html">Installation</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../graph.html">Expression graphs</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../operators.html">Graph operations</a></li>
+<li class="toctree-l1"><a class="reference internal" href="library_index.html">Library API</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../contributing.html">How to contribute to Marian</a></li>
+</ul>
+
+            
+          
+        </div>
+        
+      </div>
+    </nav>
+
+    <section data-toggle="wy-nav-shift" class="wy-nav-content-wrap">
+
+      
+      <nav class="wy-nav-top" aria-label="top navigation">
+        
+          <i data-toggle="wy-nav-top" class="fa fa-bars"></i>
+          <a href="../index.html">Marian NMT</a>
+        
+      </nav>
+
+
+      <div class="wy-nav-content">
+        
+        <div class="rst-content">
+        
+          
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+<div role="navigation" aria-label="breadcrumbs navigation">
+
+  <ul class="wy-breadcrumbs">
+    
+      <li><a href="../index.html" class="icon icon-home"></a> &raquo;</li>
+        
+      <li>Program Listing for File filesystem.h</li>
+    
+    
+      <li class="wy-breadcrumbs-aside">
+        
+          
+            <a href="../_sources/api/program_listing_file_src_common_filesystem.h.rst.txt" rel="nofollow"> View page source</a>
+          
+        
+      </li>
+    
+  </ul>
+
+  
+  <hr/>
+</div>
+          <div role="main" class="document" itemscope="itemscope" itemtype="http://schema.org/Article">
+           <div itemprop="articleBody">
+            
+  <div class="section" id="program-listing-for-file-filesystem-h">
+<span id="program-listing-file-src-common-filesystem-h"></span><h1>Program Listing for File filesystem.h<a class="headerlink" href="#program-listing-for-file-filesystem-h" title="Permalink to this headline">¶</a></h1>
+<p>↰ <a class="reference internal" href="file_src_common_filesystem.h.html#file-src-common-filesystem-h"><span class="std std-ref">Return to documentation for file</span></a> (<code class="docutils literal notranslate"><span class="pre">src/common/filesystem.h</span></code>)</p>
+<div class="highlight-cpp notranslate"><div class="highlight"><pre><span></span><span class="cp">#pragma once</span>
+
+<span class="c1">// This is a shallow wrapper around a filesystem path library.</span>
+<span class="c1">// We used this to wrap boost::filesystem, now we are wrapping</span>
+<span class="c1">// Pathie, a small open source lib.</span>
+
+<span class="c1">// @TODO: go back to canonical names for functions and objects</span>
+<span class="c1">// as specified in C++17 so it becomes easy to move in the future</span>
+
+<span class="c1">// Even when compiling with clang, __GNUC__ may be defined, so</span>
+<span class="c1">// we need to add some extra checks to avoid compile errors with</span>
+<span class="c1">// respect to -Wsuggest-override.</span>
+<span class="cp">#ifdef __GNUC__</span>
+<span class="cp">#  pragma GCC diagnostic push</span>
+<span class="cp">#  pragma GCC diagnostic ignored &quot;-Wunused-value&quot;</span>
+<span class="cp">#  if defined(__has_warning)</span>
+<span class="cp">#    if __has_warning(&quot;-Wsuggest-override&quot;)</span>
+<span class="cp">#      pragma GCC diagnostic ignored &quot;-Wsuggest-override&quot;</span>
+<span class="cp">#    endif</span>
+<span class="cp">#  else</span>
+<span class="cp">#    pragma GCC diagnostic ignored &quot;-Wsuggest-override&quot;</span>
+<span class="cp">#  endif</span>
+<span class="cp">#endif</span>
+
+<span class="cp">#include</span> <span class="cpf">&quot;3rd_party/pathie-cpp/include/path.hpp&quot;</span><span class="c1">  // @TODO: update to latest Pathie</span><span class="cp"></span>
+<span class="cp">#include</span> <span class="cpf">&quot;3rd_party/pathie-cpp/include/errors.hpp&quot;</span><span class="cp"></span>
+
+<span class="cp">#ifdef __GNUC__</span>
+<span class="cp">#pragma GCC diagnostic pop</span>
+<span class="cp">#endif</span>
+
+<span class="k">namespace</span> <span class="n">marian</span> <span class="p">{</span>
+<span class="k">namespace</span> <span class="n">filesystem</span> <span class="p">{</span>
+
+  <span class="kt">bool</span> <span class="nf">is_fifo</span><span class="p">(</span><span class="kt">char</span> <span class="k">const</span><span class="o">*</span> <span class="n">path</span><span class="p">);</span>
+  <span class="kt">bool</span> <span class="nf">is_fifo</span><span class="p">(</span><span class="n">std</span><span class="o">::</span><span class="n">string</span> <span class="k">const</span><span class="o">&amp;</span> <span class="n">path</span><span class="p">);</span>
+
+  <span class="k">class</span> <span class="nc">Path</span> <span class="p">{</span>
+    <span class="k">private</span><span class="o">:</span>
+      <span class="n">Pathie</span><span class="o">::</span><span class="n">Path</span> <span class="n">path</span><span class="p">;</span>
+
+    <span class="k">public</span><span class="o">:</span>
+      <span class="n">Path</span><span class="p">()</span> <span class="p">{}</span>
+      <span class="n">Path</span><span class="p">(</span><span class="k">const</span> <span class="n">Path</span><span class="o">&amp;</span> <span class="n">p</span><span class="p">)</span> <span class="o">:</span> <span class="n">path</span><span class="p">{</span><span class="n">p</span><span class="p">.</span><span class="n">path</span><span class="p">}</span> <span class="p">{}</span>
+      <span class="n">Path</span><span class="o">&amp;</span> <span class="k">operator</span><span class="o">=</span><span class="p">(</span><span class="k">const</span> <span class="n">Path</span><span class="o">&amp;</span> <span class="n">p</span><span class="p">)</span> <span class="o">=</span> <span class="k">default</span><span class="p">;</span>
+      <span class="n">Path</span><span class="p">(</span><span class="k">const</span> <span class="n">std</span><span class="o">::</span><span class="n">string</span><span class="o">&amp;</span> <span class="n">s</span><span class="p">)</span> <span class="o">:</span> <span class="n">path</span><span class="p">{</span><span class="n">s</span><span class="p">}</span> <span class="p">{}</span>
+      <span class="n">Path</span><span class="p">(</span><span class="k">const</span> <span class="n">Pathie</span><span class="o">::</span><span class="n">Path</span><span class="o">&amp;</span> <span class="n">p</span><span class="p">)</span> <span class="o">:</span> <span class="n">path</span><span class="p">{</span><span class="n">p</span><span class="p">}</span> <span class="p">{}</span>
+
+      <span class="n">Path</span> <span class="n">parentPath</span><span class="p">()</span> <span class="k">const</span> <span class="p">{</span>
+        <span class="k">return</span> <span class="nf">Path</span><span class="p">(</span><span class="n">path</span><span class="p">.</span><span class="n">parent</span><span class="p">());</span>
+      <span class="p">}</span>
+
+      <span class="n">Path</span> <span class="n">filename</span><span class="p">()</span> <span class="k">const</span> <span class="p">{</span>
+        <span class="k">return</span> <span class="nf">Path</span><span class="p">(</span><span class="n">path</span><span class="p">.</span><span class="n">basename</span><span class="p">());</span>
+      <span class="p">}</span>
+
+      <span class="n">Path</span> <span class="n">extension</span><span class="p">()</span> <span class="k">const</span> <span class="p">{</span>
+        <span class="k">return</span> <span class="nf">Path</span><span class="p">(</span><span class="n">path</span><span class="p">.</span><span class="n">extension</span><span class="p">());</span>
+      <span class="p">}</span>
+
+      <span class="kt">bool</span> <span class="n">empty</span><span class="p">()</span> <span class="k">const</span> <span class="p">{</span>
+        <span class="k">return</span> <span class="n">path</span><span class="p">.</span><span class="n">str</span><span class="p">().</span><span class="n">empty</span><span class="p">();</span>
+      <span class="p">}</span>
+
+      <span class="k">const</span> <span class="n">Pathie</span><span class="o">::</span><span class="n">Path</span><span class="o">&amp;</span> <span class="n">getImpl</span><span class="p">()</span> <span class="k">const</span> <span class="p">{</span>
+        <span class="k">return</span> <span class="n">path</span><span class="p">;</span>
+      <span class="p">}</span>
+
+      <span class="k">operator</span> <span class="n">std</span><span class="o">::</span><span class="n">string</span><span class="p">()</span> <span class="k">const</span> <span class="p">{</span>
+        <span class="k">return</span> <span class="n">path</span><span class="p">.</span><span class="n">str</span><span class="p">();</span>
+      <span class="p">}</span>
+
+      <span class="n">std</span><span class="o">::</span><span class="n">string</span> <span class="n">string</span><span class="p">()</span> <span class="k">const</span> <span class="p">{</span>
+        <span class="k">return</span> <span class="n">path</span><span class="p">.</span><span class="n">str</span><span class="p">();</span>
+      <span class="p">}</span>
+
+      <span class="kt">bool</span> <span class="k">operator</span><span class="o">==</span><span class="p">(</span><span class="k">const</span> <span class="n">Path</span><span class="o">&amp;</span> <span class="n">p</span><span class="p">)</span> <span class="k">const</span> <span class="p">{</span>
+        <span class="k">return</span> <span class="n">path</span> <span class="o">==</span> <span class="n">p</span><span class="p">.</span><span class="n">path</span><span class="p">;</span>
+      <span class="p">}</span>
+
+      <span class="kt">bool</span> <span class="k">operator</span><span class="o">!=</span><span class="p">(</span><span class="k">const</span> <span class="n">Path</span><span class="o">&amp;</span> <span class="n">p</span><span class="p">)</span> <span class="k">const</span> <span class="p">{</span>
+        <span class="k">return</span> <span class="n">path</span> <span class="o">!=</span> <span class="n">p</span><span class="p">.</span><span class="n">path</span><span class="p">;</span>
+      <span class="p">}</span>
+  <span class="p">};</span>
+
+  <span class="k">static</span> <span class="kr">inline</span> <span class="n">Path</span> <span class="n">currentPath</span><span class="p">()</span> <span class="p">{</span>
+    <span class="k">return</span> <span class="nf">Path</span><span class="p">(</span><span class="n">Pathie</span><span class="o">::</span><span class="n">Path</span><span class="o">::</span><span class="n">pwd</span><span class="p">());</span>
+  <span class="p">}</span>
+
+  <span class="k">static</span> <span class="kr">inline</span> <span class="n">Path</span> <span class="n">canonical</span><span class="p">(</span><span class="k">const</span> <span class="n">Path</span><span class="o">&amp;</span> <span class="n">p</span><span class="p">,</span> <span class="k">const</span> <span class="n">Path</span><span class="o">&amp;</span> <span class="n">base</span><span class="p">)</span> <span class="p">{</span>
+    <span class="c1">// create absolute base path</span>
+    <span class="k">return</span> <span class="n">p</span><span class="p">.</span><span class="n">getImpl</span><span class="p">().</span><span class="n">absolute</span><span class="p">(</span><span class="n">base</span><span class="p">.</span><span class="n">getImpl</span><span class="p">()).</span><span class="n">expand</span><span class="p">();</span>
+  <span class="p">}</span>
+
+  <span class="k">static</span> <span class="kr">inline</span> <span class="n">Path</span> <span class="n">relative</span><span class="p">(</span><span class="k">const</span> <span class="n">Path</span><span class="o">&amp;</span> <span class="n">p</span><span class="p">,</span> <span class="k">const</span> <span class="n">Path</span><span class="o">&amp;</span> <span class="n">base</span><span class="p">)</span> <span class="p">{</span>
+    <span class="c1">// create a path relative to the base path</span>
+    <span class="k">return</span> <span class="n">p</span><span class="p">.</span><span class="n">getImpl</span><span class="p">().</span><span class="n">absolute</span><span class="p">().</span><span class="n">expand</span><span class="p">().</span><span class="n">relative</span><span class="p">(</span><span class="n">base</span><span class="p">.</span><span class="n">getImpl</span><span class="p">().</span><span class="n">absolute</span><span class="p">().</span><span class="n">expand</span><span class="p">());</span>
+  <span class="p">}</span>
+
+  <span class="k">static</span> <span class="kr">inline</span> <span class="kt">bool</span> <span class="n">exists</span><span class="p">(</span><span class="k">const</span> <span class="n">Path</span><span class="o">&amp;</span> <span class="n">p</span><span class="p">)</span> <span class="p">{</span>
+    <span class="k">return</span> <span class="n">p</span><span class="p">.</span><span class="n">getImpl</span><span class="p">().</span><span class="n">exists</span><span class="p">();</span>
+  <span class="p">}</span>
+
+  <span class="k">static</span> <span class="kr">inline</span> <span class="kt">size_t</span> <span class="n">fileSize</span><span class="p">(</span><span class="k">const</span> <span class="n">Path</span><span class="o">&amp;</span> <span class="n">p</span><span class="p">)</span> <span class="p">{</span>
+    <span class="k">return</span> <span class="n">p</span><span class="p">.</span><span class="n">getImpl</span><span class="p">().</span><span class="n">size</span><span class="p">();</span>
+  <span class="p">}</span>
+
+  <span class="k">static</span> <span class="kr">inline</span> <span class="kt">bool</span> <span class="n">isDirectory</span><span class="p">(</span><span class="k">const</span> <span class="n">Path</span><span class="o">&amp;</span> <span class="n">p</span><span class="p">)</span> <span class="p">{</span>
+    <span class="k">return</span> <span class="n">p</span><span class="p">.</span><span class="n">getImpl</span><span class="p">().</span><span class="n">is_directory</span><span class="p">();</span>
+  <span class="p">}</span>
+
+  <span class="k">static</span> <span class="kr">inline</span> <span class="n">Path</span> <span class="k">operator</span><span class="o">/</span> <span class="p">(</span><span class="k">const</span> <span class="n">Path</span><span class="o">&amp;</span> <span class="n">lhs</span><span class="p">,</span> <span class="k">const</span> <span class="n">Path</span><span class="o">&amp;</span> <span class="n">rhs</span><span class="p">)</span> <span class="p">{</span>
+    <span class="k">return</span> <span class="nf">Path</span><span class="p">(</span><span class="n">lhs</span><span class="p">.</span><span class="n">getImpl</span><span class="p">()</span> <span class="o">/</span> <span class="n">rhs</span><span class="p">.</span><span class="n">getImpl</span><span class="p">());</span>
+  <span class="p">}</span>
+
+  <span class="k">using</span> <span class="n">FilesystemError</span> <span class="o">=</span> <span class="n">Pathie</span><span class="o">::</span><span class="n">PathieError</span><span class="p">;</span>
+
+<span class="p">}</span>  <span class="c1">// namespace filesystem</span>
+<span class="p">}</span>  <span class="c1">// namespace marian</span>
+</pre></div>
+</div>
+</div>
+
+
+           </div>
+           
+          </div>
+          <footer>
+
+  <hr/>
+
+  <div role="contentinfo">
+    <p>
+        &#169; Copyright 2021, Marian NMT Team.
+
+    </p>
+  </div>
+    
+    
+    
+    Built with <a href="https://www.sphinx-doc.org/">Sphinx</a> using a
+    
+    <a href="https://github.com/readthedocs/sphinx_rtd_theme">theme</a>
+    
+    provided by <a href="https://readthedocs.org">Read the Docs</a>. 
+
+</footer>
+        </div>
+      </div>
+
+    </section>
+
+  </div>
+  
+
+  <script type="text/javascript">
+      jQuery(function () {
+          SphinxRtdTheme.Navigation.enable(true);
+      });
+  </script>
+
+  
+  
+    
+   
+
+</body>
+</html>

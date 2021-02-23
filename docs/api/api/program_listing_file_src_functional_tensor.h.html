@@ -1,0 +1,434 @@
+
+
+<!DOCTYPE html>
+<html class="writer-html5" lang="en" >
+<head>
+  <meta charset="utf-8" />
+  
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  
+  <title>Program Listing for File tensor.h &mdash; Marian NMT v1.10.1 2021-02-23 documentation</title>
+  
+
+  
+  <link rel="stylesheet" href="../_static/css/theme.css" type="text/css" />
+  <link rel="stylesheet" href="../_static/pygments.css" type="text/css" />
+  <link rel="stylesheet" href="../_static/css/custom.css" type="text/css" />
+  <link rel="stylesheet" href="../_static/collapsible-lists/css/tree_view.css" type="text/css" />
+
+  
+  
+
+  
+  
+
+  
+    <link rel="canonical" href="http://marian-nmt.github.io/docs/api/api/program_listing_file_src_functional_tensor.h.html" />
+
+  
+  <!--[if lt IE 9]>
+    <script src="../_static/js/html5shiv.min.js"></script>
+  <![endif]-->
+  
+    
+      <script type="text/javascript" id="documentation_options" data-url_root="../" src="../_static/documentation_options.js"></script>
+        <script src="../_static/jquery.js"></script>
+        <script src="../_static/underscore.js"></script>
+        <script src="../_static/doctools.js"></script>
+        <script src="../_static/language_data.js"></script>
+        <script src="../_static/collapsible-lists/js/CollapsibleLists.compressed.js"></script>
+        <script src="../_static/collapsible-lists/js/apply-collapsible-lists.js"></script>
+    
+    <script type="text/javascript" src="../_static/js/theme.js"></script>
+
+    
+    <link rel="index" title="Index" href="../genindex.html" />
+    <link rel="search" title="Search" href="../search.html" /> 
+</head>
+
+<body class="wy-body-for-nav">
+
+   
+  <div class="wy-grid-for-nav">
+    
+    <nav data-toggle="wy-nav-shift" class="wy-nav-side">
+      <div class="wy-side-scroll">
+        <div class="wy-side-nav-search" >
+          
+
+          
+            <a href="../index.html" class="icon icon-home"> Marian NMT
+          
+
+          
+          </a>
+
+          
+            
+            
+              <div class="version">
+                v1.10.1
+              </div>
+            
+          
+
+          
+<div role="search">
+  <form id="rtd-search-form" class="wy-form" action="../search.html" method="get">
+    <input type="text" name="q" placeholder="Search docs" />
+    <input type="hidden" name="check_keywords" value="yes" />
+    <input type="hidden" name="area" value="default" />
+  </form>
+</div>
+
+          
+        </div>
+
+        
+        <div class="wy-menu wy-menu-vertical" data-spy="affix" role="navigation" aria-label="main navigation">
+          
+            
+            
+              
+            
+            
+              <p class="caption"><span class="caption-text">Contents:</span></p>
+<ul>
+<li class="toctree-l1"><a class="reference internal" href="../install.html">Installation</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../graph.html">Expression graphs</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../operators.html">Graph operations</a></li>
+<li class="toctree-l1"><a class="reference internal" href="library_index.html">Library API</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../contributing.html">How to contribute to Marian</a></li>
+</ul>
+
+            
+          
+        </div>
+        
+      </div>
+    </nav>
+
+    <section data-toggle="wy-nav-shift" class="wy-nav-content-wrap">
+
+      
+      <nav class="wy-nav-top" aria-label="top navigation">
+        
+          <i data-toggle="wy-nav-top" class="fa fa-bars"></i>
+          <a href="../index.html">Marian NMT</a>
+        
+      </nav>
+
+
+      <div class="wy-nav-content">
+        
+        <div class="rst-content">
+        
+          
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+<div role="navigation" aria-label="breadcrumbs navigation">
+
+  <ul class="wy-breadcrumbs">
+    
+      <li><a href="../index.html" class="icon icon-home"></a> &raquo;</li>
+        
+      <li>Program Listing for File tensor.h</li>
+    
+    
+      <li class="wy-breadcrumbs-aside">
+        
+          
+            <a href="../_sources/api/program_listing_file_src_functional_tensor.h.rst.txt" rel="nofollow"> View page source</a>
+          
+        
+      </li>
+    
+  </ul>
+
+  
+  <hr/>
+</div>
+          <div role="main" class="document" itemscope="itemscope" itemtype="http://schema.org/Article">
+           <div itemprop="articleBody">
+            
+  <div class="section" id="program-listing-for-file-tensor-h">
+<span id="program-listing-file-src-functional-tensor-h"></span><h1>Program Listing for File tensor.h<a class="headerlink" href="#program-listing-for-file-tensor-h" title="Permalink to this headline">¶</a></h1>
+<p>↰ <a class="reference internal" href="file_src_functional_tensor.h.html#file-src-functional-tensor-h"><span class="std std-ref">Return to documentation for file</span></a> (<code class="docutils literal notranslate"><span class="pre">src/functional/tensor.h</span></code>)</p>
+<div class="highlight-cpp notranslate"><div class="highlight"><pre><span></span><span class="cp">#pragma once</span>
+
+<span class="cp">#include</span> <span class="cpf">&quot;functional/array.h&quot;</span><span class="cp"></span>
+<span class="cp">#include</span> <span class="cpf">&quot;functional/shape.h&quot;</span><span class="cp"></span>
+<span class="cp">#include</span> <span class="cpf">&quot;tensors/tensor.h&quot;</span><span class="cp"></span>
+
+<span class="k">namespace</span> <span class="n">marian</span> <span class="p">{</span>
+<span class="k">namespace</span> <span class="n">functional</span> <span class="p">{</span>
+
+<span class="c1">// By default for single valued types like float do nothing. Usually the number of elements in a tensor</span>
+<span class="c1">// is correctly mirrored in the shape object. Only special multi-element types like float32x4 (4 floats),</span>
+<span class="c1">// float32x8 (8 floats) and half2 (2 half) require special handling done by specializations below.</span>
+<span class="c1">// Similar for multi-element integer types to be added later.</span>
+<span class="k">template</span> <span class="o">&lt;</span><span class="k">typename</span> <span class="nc">T</span><span class="o">&gt;</span>
+<span class="kr">inline</span> <span class="n">marian</span><span class="o">::</span><span class="n">Shape</span> <span class="n">adapt</span><span class="p">(</span><span class="k">const</span> <span class="n">marian</span><span class="o">::</span><span class="n">Shape</span><span class="o">&amp;</span> <span class="n">shape</span><span class="p">)</span> <span class="p">{</span>
+  <span class="k">return</span> <span class="n">shape</span><span class="p">;</span>
+<span class="p">}</span>
+
+<span class="c1">// modify last shape dimension to automatically map to a larger stride. We are moving now by 4 floats</span>
+<span class="c1">// at once and need to stop earlier. This is a shallow typecast to bascially an array of 4 floats.</span>
+
+<span class="cp">#ifndef __CUDACC__ </span><span class="c1">// vectorized types not available from .cu files</span>
+
+<span class="k">template</span> <span class="o">&lt;&gt;</span>
+<span class="kr">inline</span> <span class="n">marian</span><span class="o">::</span><span class="n">Shape</span> <span class="n">adapt</span><span class="o">&lt;</span><span class="n">float32x4</span><span class="o">&gt;</span><span class="p">(</span><span class="k">const</span> <span class="n">marian</span><span class="o">::</span><span class="n">Shape</span><span class="o">&amp;</span> <span class="n">shape</span><span class="p">)</span> <span class="p">{</span>
+  <span class="n">ABORT_IF</span><span class="p">(</span><span class="n">shape</span><span class="p">[</span><span class="mi">-1</span><span class="p">]</span> <span class="o">%</span> <span class="mi">4</span> <span class="o">!=</span> <span class="mi">0</span><span class="p">,</span>
+           <span class="s">&quot;Last dim ({}) is not a multiple of 4 while converting to Tensor&lt;float32x4&gt;&quot;</span><span class="p">,</span>
+           <span class="n">shape</span><span class="p">[</span><span class="mi">-1</span><span class="p">]);</span>
+
+  <span class="n">marian</span><span class="o">::</span><span class="n">Shape</span> <span class="n">x4Shape</span> <span class="o">=</span> <span class="n">shape</span><span class="p">;</span>
+  <span class="n">x4Shape</span><span class="p">.</span><span class="n">set</span><span class="p">(</span><span class="mi">-1</span><span class="p">,</span> <span class="n">shape</span><span class="p">[</span><span class="mi">-1</span><span class="p">]</span> <span class="o">/</span> <span class="mi">4</span><span class="p">);</span>
+  <span class="k">return</span> <span class="n">x4Shape</span><span class="p">;</span>
+<span class="p">}</span>
+<span class="cp">#ifdef __AVX__</span>
+<span class="k">template</span> <span class="o">&lt;&gt;</span>
+<span class="kr">inline</span> <span class="n">marian</span><span class="o">::</span><span class="n">Shape</span> <span class="n">adapt</span><span class="o">&lt;</span><span class="n">float32x8</span><span class="o">&gt;</span><span class="p">(</span><span class="k">const</span> <span class="n">marian</span><span class="o">::</span><span class="n">Shape</span><span class="o">&amp;</span> <span class="n">shape</span><span class="p">)</span> <span class="p">{</span>
+  <span class="n">ABORT_IF</span><span class="p">(</span><span class="n">shape</span><span class="p">[</span><span class="mi">-1</span><span class="p">]</span> <span class="o">%</span> <span class="mi">8</span> <span class="o">!=</span> <span class="mi">0</span><span class="p">,</span>
+           <span class="s">&quot;Last dim ({}) is not a multiple of 8 while converting to Tensor&lt;float32x8&gt;&quot;</span><span class="p">,</span>
+           <span class="n">shape</span><span class="p">[</span><span class="mi">-1</span><span class="p">]);</span>
+
+  <span class="n">marian</span><span class="o">::</span><span class="n">Shape</span> <span class="n">x8Shape</span> <span class="o">=</span> <span class="n">shape</span><span class="p">;</span>
+  <span class="n">x8Shape</span><span class="p">.</span><span class="n">set</span><span class="p">(</span><span class="mi">-1</span><span class="p">,</span> <span class="n">shape</span><span class="p">[</span><span class="mi">-1</span><span class="p">]</span> <span class="o">/</span> <span class="mi">8</span><span class="p">);</span>
+  <span class="k">return</span> <span class="n">x8Shape</span><span class="p">;</span>
+<span class="p">}</span>
+<span class="cp">#endif</span>
+<span class="cp">#endif</span>
+
+<span class="k">template</span> <span class="o">&lt;</span><span class="k">typename</span> <span class="nc">T</span><span class="p">,</span> <span class="k">const</span> <span class="kt">int</span> <span class="n">D</span><span class="o">&gt;</span>
+<span class="k">struct</span> <span class="nc">View</span> <span class="p">{</span>
+  <span class="n">T</span><span class="o">*</span> <span class="n">data_</span><span class="p">;</span>
+  <span class="n">ConstantShape</span><span class="o">&lt;</span><span class="n">D</span><span class="o">&gt;</span> <span class="n">shape_</span><span class="p">;</span>
+
+  <span class="n">HOST_DEVICE</span> <span class="nf">View</span><span class="p">()</span> <span class="p">{}</span>
+
+  <span class="n">HOST_DEVICE</span> <span class="nf">View</span><span class="p">(</span><span class="n">T</span><span class="o">*</span> <span class="n">ptr</span><span class="p">,</span> <span class="k">const</span> <span class="n">ConstantShape</span><span class="o">&lt;</span><span class="n">D</span><span class="o">&gt;&amp;</span> <span class="n">shape</span><span class="p">)</span>
+      <span class="o">:</span> <span class="n">data_</span><span class="p">(</span><span class="n">ptr</span><span class="p">),</span> <span class="n">shape_</span><span class="p">(</span><span class="n">shape</span><span class="p">)</span> <span class="p">{}</span>
+
+  <span class="n">HOST</span> <span class="nf">View</span><span class="p">(</span><span class="n">marian</span><span class="o">::</span><span class="n">Tensor</span> <span class="n">t</span><span class="p">)</span> <span class="o">:</span> <span class="n">data_</span><span class="p">(</span><span class="n">t</span><span class="o">-&gt;</span><span class="n">data</span><span class="o">&lt;</span><span class="n">T</span><span class="o">&gt;</span><span class="p">()),</span> <span class="n">shape_</span><span class="p">(</span><span class="n">adapt</span><span class="o">&lt;</span><span class="n">T</span><span class="o">&gt;</span><span class="p">(</span><span class="n">t</span><span class="o">-&gt;</span><span class="n">shape</span><span class="p">()))</span> <span class="p">{}</span>
+
+  <span class="n">HOST_DEVICE_INLINE</span> <span class="n">T</span><span class="o">&amp;</span> <span class="k">operator</span><span class="p">[](</span><span class="kt">size_t</span> <span class="n">i</span><span class="p">)</span> <span class="p">{</span>
+     <span class="k">return</span> <span class="n">data_</span><span class="p">[</span><span class="n">shape_</span><span class="p">.</span><span class="n">index</span><span class="p">((</span><span class="kt">int</span><span class="p">)</span><span class="n">i</span><span class="p">)];</span>
+  <span class="p">}</span>
+
+  <span class="n">HOST_DEVICE_INLINE</span> <span class="k">const</span> <span class="n">T</span><span class="o">&amp;</span> <span class="k">operator</span><span class="p">[](</span><span class="kt">size_t</span> <span class="n">i</span><span class="p">)</span> <span class="k">const</span> <span class="p">{</span>
+     <span class="k">return</span> <span class="n">data_</span><span class="p">[</span><span class="n">shape_</span><span class="p">.</span><span class="n">index</span><span class="p">(</span><span class="n">i</span><span class="p">)];</span>
+  <span class="p">}</span>
+
+  <span class="n">HOST_DEVICE_INLINE</span> <span class="n">T</span><span class="o">&amp;</span> <span class="k">operator</span><span class="p">[](</span><span class="k">const</span> <span class="n">Array</span><span class="o">&lt;</span><span class="kt">int</span><span class="p">,</span> <span class="n">D</span><span class="o">&gt;&amp;</span> <span class="n">indices</span><span class="p">)</span> <span class="p">{</span>
+    <span class="k">return</span> <span class="n">data_</span><span class="p">[</span><span class="n">shape_</span><span class="p">.</span><span class="n">index</span><span class="p">(</span><span class="n">indices</span><span class="p">)];</span>
+  <span class="p">}</span>
+
+  <span class="n">HOST_DEVICE_INLINE</span> <span class="k">const</span> <span class="n">T</span><span class="o">&amp;</span> <span class="k">operator</span><span class="p">[](</span><span class="k">const</span> <span class="n">Array</span><span class="o">&lt;</span><span class="kt">int</span><span class="p">,</span> <span class="n">D</span><span class="o">&gt;&amp;</span> <span class="n">indices</span><span class="p">)</span> <span class="k">const</span> <span class="p">{</span>
+     <span class="k">return</span> <span class="n">data_</span><span class="p">[</span><span class="n">shape_</span><span class="p">.</span><span class="n">index</span><span class="p">(</span><span class="n">indices</span><span class="p">)];</span>
+  <span class="p">}</span>
+
+  <span class="n">HOST_DEVICE_INLINE</span> <span class="n">T</span><span class="o">*</span> <span class="n">data</span><span class="p">()</span> <span class="p">{</span> <span class="k">return</span> <span class="n">data_</span><span class="p">;</span> <span class="p">}</span>
+  <span class="n">HOST_DEVICE_INLINE</span> <span class="k">const</span> <span class="n">T</span><span class="o">*</span> <span class="n">data</span><span class="p">()</span> <span class="k">const</span> <span class="p">{</span> <span class="k">return</span> <span class="n">data_</span><span class="p">;</span> <span class="p">}</span>
+
+  <span class="n">HOST_DEVICE_INLINE</span> <span class="n">ConstantShape</span><span class="o">&lt;</span><span class="n">D</span><span class="o">&gt;&amp;</span> <span class="n">shape</span><span class="p">()</span> <span class="p">{</span> <span class="k">return</span> <span class="n">shape_</span><span class="p">;</span> <span class="p">}</span>
+  <span class="n">HOST_DEVICE_INLINE</span> <span class="k">const</span> <span class="n">ConstantShape</span><span class="o">&lt;</span><span class="n">D</span><span class="o">&gt;&amp;</span> <span class="n">shape</span><span class="p">()</span> <span class="k">const</span> <span class="p">{</span> <span class="k">return</span> <span class="n">shape_</span><span class="p">;</span> <span class="p">}</span>
+
+  <span class="n">HOST_DEVICE_INLINE</span> <span class="kt">size_t</span> <span class="n">size</span><span class="p">()</span> <span class="k">const</span> <span class="p">{</span> <span class="k">return</span> <span class="n">shape_</span><span class="p">.</span><span class="n">elements</span><span class="p">();</span> <span class="p">}</span>
+
+  <span class="c1">// @TODO: This is code duplication from marian::Tensor</span>
+  <span class="n">std</span><span class="o">::</span><span class="n">string</span> <span class="n">debug</span><span class="p">(</span><span class="kt">int</span> <span class="n">precision</span> <span class="o">=</span> <span class="mi">8</span><span class="p">,</span> <span class="kt">int</span> <span class="n">dispCols</span> <span class="o">=</span> <span class="mi">5</span><span class="p">)</span> <span class="p">{</span>
+    <span class="n">std</span><span class="o">::</span><span class="n">stringstream</span> <span class="n">strm</span><span class="p">;</span>
+    <span class="n">assert</span><span class="p">(</span><span class="n">shape_</span><span class="p">.</span><span class="n">size</span><span class="p">());</span>
+
+    <span class="n">strm</span> <span class="o">&lt;&lt;</span> <span class="n">shape_</span><span class="p">;</span>
+    <span class="n">strm</span> <span class="o">&lt;&lt;</span> <span class="s">&quot; type=&quot;</span> <span class="o">&lt;&lt;</span> <span class="n">request</span><span class="o">&lt;</span><span class="n">T</span><span class="o">&gt;</span><span class="p">();</span>
+    <span class="n">strm</span> <span class="o">&lt;&lt;</span> <span class="s">&quot; ptr=&quot;</span> <span class="o">&lt;&lt;</span> <span class="p">(</span><span class="kt">size_t</span><span class="p">)</span><span class="n">data_</span><span class="p">;</span>
+    <span class="n">strm</span> <span class="o">&lt;&lt;</span> <span class="n">std</span><span class="o">::</span><span class="n">endl</span><span class="p">;</span>
+
+    <span class="kt">size_t</span> <span class="n">totSize</span> <span class="o">=</span> <span class="n">shape_</span><span class="p">.</span><span class="n">elements</span><span class="p">();</span>
+    <span class="n">std</span><span class="o">::</span><span class="n">vector</span><span class="o">&lt;</span><span class="n">T</span><span class="o">&gt;</span> <span class="n">values</span><span class="p">(</span><span class="n">totSize</span><span class="p">);</span>
+    <span class="k">for</span><span class="p">(</span><span class="kt">int</span> <span class="n">i</span> <span class="o">=</span> <span class="mi">0</span><span class="p">;</span> <span class="n">i</span> <span class="o">&lt;</span> <span class="n">size</span><span class="p">();</span> <span class="o">++</span><span class="n">i</span><span class="p">)</span>
+      <span class="n">values</span><span class="p">[</span><span class="n">i</span><span class="p">]</span> <span class="o">=</span> <span class="k">operator</span><span class="p">[](</span><span class="n">i</span><span class="p">);</span>
+
+    <span class="kt">int</span> <span class="n">colWidth</span>  <span class="o">=</span> <span class="n">precision</span> <span class="o">+</span> <span class="mi">4</span><span class="p">;</span>
+    <span class="n">strm</span> <span class="o">&lt;&lt;</span> <span class="n">std</span><span class="o">::</span><span class="n">fixed</span> <span class="o">&lt;&lt;</span> <span class="n">std</span><span class="o">::</span><span class="n">setprecision</span><span class="p">(</span><span class="n">precision</span><span class="p">)</span> <span class="o">&lt;&lt;</span> <span class="n">std</span><span class="o">::</span><span class="n">setfill</span><span class="p">(</span><span class="sc">&#39; &#39;</span><span class="p">);</span>
+
+    <span class="k">for</span><span class="p">(</span><span class="kt">int</span> <span class="n">i</span> <span class="o">=</span> <span class="mi">0</span><span class="p">;</span> <span class="n">i</span> <span class="o">&lt;</span> <span class="n">values</span><span class="p">.</span><span class="n">size</span><span class="p">();</span> <span class="o">++</span><span class="n">i</span><span class="p">)</span> <span class="p">{</span>
+      <span class="n">Array</span><span class="o">&lt;</span><span class="kt">int</span><span class="p">,</span> <span class="n">D</span><span class="o">&gt;</span> <span class="n">dims</span><span class="p">;</span>
+      <span class="n">shape</span><span class="p">().</span><span class="n">dims</span><span class="p">(</span><span class="n">i</span><span class="p">,</span> <span class="n">dims</span><span class="p">);</span>
+
+      <span class="kt">bool</span> <span class="n">disp</span> <span class="o">=</span> <span class="nb">true</span><span class="p">;</span>
+      <span class="k">for</span><span class="p">(</span><span class="kt">int</span> <span class="n">j</span> <span class="o">=</span> <span class="mi">0</span><span class="p">;</span> <span class="n">j</span> <span class="o">&lt;</span> <span class="n">dims</span><span class="p">.</span><span class="n">size</span><span class="p">();</span> <span class="o">++</span><span class="n">j</span><span class="p">)</span>
+        <span class="n">disp</span> <span class="o">=</span> <span class="n">disp</span> <span class="o">&amp;&amp;</span> <span class="p">(</span><span class="n">dims</span><span class="p">[</span><span class="n">j</span><span class="p">]</span> <span class="o">&lt;</span> <span class="n">dispCols</span> <span class="o">||</span> <span class="n">dims</span><span class="p">[</span><span class="n">j</span><span class="p">]</span> <span class="o">&gt;=</span> <span class="n">shape</span><span class="p">()[</span><span class="n">j</span><span class="p">]</span> <span class="o">-</span> <span class="n">dispCols</span><span class="p">);</span>
+
+      <span class="k">if</span><span class="p">(</span><span class="n">disp</span><span class="p">)</span> <span class="p">{</span>
+        <span class="k">if</span><span class="p">(</span><span class="n">dims</span><span class="p">.</span><span class="n">back</span><span class="p">()</span> <span class="o">==</span> <span class="mi">0</span><span class="p">)</span> <span class="p">{</span>
+          <span class="kt">bool</span> <span class="n">par</span> <span class="o">=</span> <span class="nb">true</span><span class="p">;</span>
+          <span class="n">std</span><span class="o">::</span><span class="n">vector</span><span class="o">&lt;</span><span class="n">std</span><span class="o">::</span><span class="n">string</span><span class="o">&gt;</span> <span class="n">p</span><span class="p">;</span>
+          <span class="k">for</span><span class="p">(</span><span class="kt">int</span> <span class="n">j</span> <span class="o">=</span> <span class="p">(</span><span class="kt">int</span><span class="p">)</span><span class="n">dims</span><span class="p">.</span><span class="n">size</span><span class="p">()</span> <span class="o">-</span> <span class="mi">1</span><span class="p">;</span> <span class="n">j</span> <span class="o">&gt;=</span> <span class="mi">0</span><span class="p">;</span> <span class="o">--</span><span class="n">j</span><span class="p">)</span> <span class="p">{</span>
+            <span class="k">if</span><span class="p">(</span><span class="n">dims</span><span class="p">[</span><span class="n">j</span><span class="p">]</span> <span class="o">!=</span> <span class="mi">0</span><span class="p">)</span>
+              <span class="n">par</span> <span class="o">=</span> <span class="nb">false</span><span class="p">;</span>
+
+            <span class="n">p</span><span class="p">.</span><span class="n">push_back</span><span class="p">(</span><span class="n">par</span> <span class="o">?</span> <span class="s">&quot;[&quot;</span> <span class="o">:</span> <span class="s">&quot; &quot;</span><span class="p">);</span>
+          <span class="p">}</span>
+          <span class="k">for</span><span class="p">(</span><span class="k">auto</span> <span class="n">it</span> <span class="o">=</span> <span class="n">p</span><span class="p">.</span><span class="n">rbegin</span><span class="p">();</span> <span class="n">it</span> <span class="o">!=</span> <span class="n">p</span><span class="p">.</span><span class="n">rend</span><span class="p">();</span> <span class="o">++</span><span class="n">it</span><span class="p">)</span>
+            <span class="n">strm</span> <span class="o">&lt;&lt;</span> <span class="o">*</span><span class="n">it</span><span class="p">;</span>
+          <span class="n">strm</span> <span class="o">&lt;&lt;</span> <span class="s">&quot; &quot;</span><span class="p">;</span>
+        <span class="p">}</span>
+
+        <span class="n">strm</span> <span class="o">&lt;&lt;</span> <span class="n">std</span><span class="o">::</span><span class="n">setw</span><span class="p">(</span><span class="n">colWidth</span><span class="p">);</span>
+        <span class="n">strm</span> <span class="o">&lt;&lt;</span> <span class="n">values</span><span class="p">[</span><span class="n">i</span><span class="p">];</span>
+        <span class="n">strm</span> <span class="o">&lt;&lt;</span> <span class="s">&quot; &quot;</span><span class="p">;</span>
+
+        <span class="k">if</span><span class="p">(</span><span class="n">dims</span><span class="p">.</span><span class="n">back</span><span class="p">()</span> <span class="o">+</span> <span class="mi">1</span> <span class="o">==</span> <span class="n">shape</span><span class="p">().</span><span class="n">back</span><span class="p">())</span> <span class="p">{</span>
+          <span class="k">for</span><span class="p">(</span><span class="kt">int</span> <span class="n">j</span> <span class="o">=</span> <span class="p">(</span><span class="kt">int</span><span class="p">)</span><span class="n">dims</span><span class="p">.</span><span class="n">size</span><span class="p">()</span> <span class="o">-</span> <span class="mi">1</span><span class="p">;</span> <span class="n">j</span> <span class="o">&gt;=</span> <span class="mi">0</span><span class="p">;</span> <span class="o">--</span><span class="n">j</span><span class="p">)</span> <span class="p">{</span>
+            <span class="k">if</span><span class="p">(</span><span class="n">dims</span><span class="p">[</span><span class="n">j</span><span class="p">]</span> <span class="o">+</span> <span class="mi">1</span> <span class="o">!=</span> <span class="n">shape</span><span class="p">()[</span><span class="n">j</span><span class="p">])</span>
+              <span class="k">break</span><span class="p">;</span>
+            <span class="n">strm</span> <span class="o">&lt;&lt;</span> <span class="s">&quot;]&quot;</span><span class="p">;</span>
+          <span class="p">}</span>
+          <span class="n">strm</span> <span class="o">&lt;&lt;</span> <span class="n">std</span><span class="o">::</span><span class="n">endl</span><span class="p">;</span>
+        <span class="p">}</span>
+
+        <span class="kt">bool</span> <span class="n">prev</span> <span class="o">=</span> <span class="nb">true</span><span class="p">;</span>
+        <span class="k">for</span><span class="p">(</span><span class="kt">int</span> <span class="n">j</span> <span class="o">=</span> <span class="p">(</span><span class="kt">int</span><span class="p">)</span><span class="n">dims</span><span class="p">.</span><span class="n">size</span><span class="p">()</span> <span class="o">-</span> <span class="mi">1</span><span class="p">;</span> <span class="n">j</span> <span class="o">&gt;=</span> <span class="mi">0</span><span class="p">;</span> <span class="o">--</span><span class="n">j</span><span class="p">)</span> <span class="p">{</span>
+          <span class="k">if</span><span class="p">(</span><span class="n">j</span> <span class="o">&lt;</span> <span class="p">(</span><span class="kt">int</span><span class="p">)</span><span class="n">dims</span><span class="p">.</span><span class="n">size</span><span class="p">()</span> <span class="o">-</span> <span class="mi">1</span><span class="p">)</span>
+            <span class="n">prev</span> <span class="o">=</span> <span class="n">prev</span> <span class="o">&amp;&amp;</span> <span class="n">dims</span><span class="p">[</span><span class="n">j</span> <span class="o">+</span> <span class="mi">1</span><span class="p">]</span> <span class="o">+</span> <span class="mi">1</span> <span class="o">==</span> <span class="n">shape</span><span class="p">()[</span><span class="n">j</span> <span class="o">+</span> <span class="mi">1</span><span class="p">];</span>
+          <span class="k">if</span><span class="p">(</span><span class="n">prev</span> <span class="o">&amp;&amp;</span> <span class="n">dims</span><span class="p">[</span><span class="n">j</span><span class="p">]</span> <span class="o">+</span> <span class="mi">1</span> <span class="o">==</span> <span class="n">dispCols</span> <span class="o">&amp;&amp;</span> <span class="n">shape</span><span class="p">()[</span><span class="n">j</span><span class="p">]</span> <span class="o">&gt;</span> <span class="mi">2</span> <span class="o">*</span> <span class="n">dispCols</span><span class="p">)</span> <span class="p">{</span>
+            <span class="k">if</span><span class="p">(</span><span class="n">j</span> <span class="o">&lt;</span> <span class="p">(</span><span class="kt">int</span><span class="p">)</span><span class="n">dims</span><span class="p">.</span><span class="n">size</span><span class="p">()</span> <span class="o">-</span> <span class="mi">1</span><span class="p">)</span>
+              <span class="k">for</span><span class="p">(</span><span class="kt">int</span> <span class="n">k</span> <span class="o">=</span> <span class="mi">0</span><span class="p">;</span> <span class="n">k</span> <span class="o">&lt;=</span> <span class="n">j</span><span class="p">;</span> <span class="o">++</span><span class="n">k</span><span class="p">)</span>
+                <span class="n">strm</span> <span class="o">&lt;&lt;</span> <span class="s">&quot; &quot;</span><span class="p">;</span>
+            <span class="n">strm</span> <span class="o">&lt;&lt;</span> <span class="s">&quot;... &quot;</span><span class="p">;</span>
+            <span class="k">if</span><span class="p">(</span><span class="n">j</span> <span class="o">&lt;</span> <span class="p">(</span><span class="kt">int</span><span class="p">)</span><span class="n">dims</span><span class="p">.</span><span class="n">size</span><span class="p">()</span> <span class="o">-</span> <span class="mi">1</span><span class="p">)</span>
+              <span class="n">strm</span> <span class="o">&lt;&lt;</span> <span class="n">std</span><span class="o">::</span><span class="n">endl</span><span class="p">;</span>
+            <span class="k">break</span><span class="p">;</span>
+          <span class="p">}</span>
+        <span class="p">}</span>
+      <span class="p">}</span>
+    <span class="p">}</span>
+    <span class="n">strm</span> <span class="o">&lt;&lt;</span> <span class="n">std</span><span class="o">::</span><span class="n">endl</span><span class="p">;</span>
+    <span class="k">return</span> <span class="n">strm</span><span class="p">.</span><span class="n">str</span><span class="p">();</span>
+  <span class="p">}</span>
+<span class="p">};</span>
+
+<span class="c1">// @TODO: Attempts at correct slicing, not supported anywhere yet.</span>
+<span class="cp">#if 0</span><span class="c"></span>
+<span class="c">template &lt;typename T, const int D&gt;</span>
+<span class="c">HOST_DEVICE_INLINE View&lt;T, D&gt; slice(View&lt;T, D&gt; view, const Array&lt;Slice, D&gt;&amp; slices) {</span>
+<span class="c">  const auto&amp; slicedShape = view.shape().slice(slices);</span>
+<span class="c">  return View&lt;T, D&gt;(view.data(), slicedShape);</span>
+<span class="c">}</span>
+
+<span class="c">// template &lt;typename T, const int D, class ...Slices&gt;</span>
+<span class="c">// View&lt;T, D&gt; slice(View&lt;T, D&gt; view,</span>
+<span class="c">//                  const Slices&amp;... slices) {</span>
+<span class="c">//   return slice(view, {slices...});</span>
+<span class="c">// }</span>
+
+<span class="c">template &lt;typename T&gt;</span>
+<span class="c">HOST_DEVICE_INLINE View&lt;T, 1&gt; slice(View&lt;T, 1&gt;&amp; view,</span>
+<span class="c">                         const Slice&amp; slice0) {</span>
+<span class="c">  return slice(view, {slice0});</span>
+<span class="c">}</span>
+
+<span class="c">template &lt;typename T&gt;</span>
+<span class="c">HOST_DEVICE_INLINE View&lt;T, 2&gt; slice(View&lt;T, 2&gt;&amp; view,</span>
+<span class="c">                         const Slice&amp; slice0,</span>
+<span class="c">                         const Slice&amp; slice1) {</span>
+<span class="c">  return slice(view, {slice0, slice1});</span>
+<span class="c">}</span>
+
+<span class="c">template &lt;typename T&gt;</span>
+<span class="c">HOST_DEVICE_INLINE View&lt;T, 3&gt; slice(View&lt;T, 3&gt;&amp; view,</span>
+<span class="c">                        const Slice&amp; slice0,</span>
+<span class="c">                        const Slice&amp; slice1,</span>
+<span class="c">                        const Slice&amp; slice2) {</span>
+<span class="c">  return slice(view, {slice0, slice1, slice2});</span>
+<span class="c">}</span>
+
+<span class="c">template &lt;typename T&gt;</span>
+<span class="c">HOST_DEVICE_INLINE View&lt;T, 4&gt; slice(View&lt;T, 4&gt;&amp; view,</span>
+<span class="c">                         const Slice&amp; slice0,</span>
+<span class="c">                         const Slice&amp; slice1,</span>
+<span class="c">                         const Slice&amp; slice2,</span>
+<span class="c">                         const Slice&amp; slice3) {</span>
+<span class="c">  return slice(view, {slice0, slice1, slice2, slice3});</span>
+<span class="c">}</span>
+
+<span class="c">// template &lt;typename T, const int D1, const int D2&gt;</span>
+<span class="c">// View&lt;T, D2&gt; reshape(View&lt;T, D1&gt;&amp; view, const ConstantShape&lt;D2&gt;&amp; shape) {</span>
+<span class="c">//   auto reshaped = view.shape().reshape(shape);</span>
+<span class="c">//   return View&lt;T, D2&gt;(view.data(), reshaped);</span>
+<span class="c">// }</span>
+<span class="cp">#endif</span>
+
+<span class="k">template</span> <span class="o">&lt;</span><span class="k">typename</span> <span class="nc">T</span><span class="o">&gt;</span>
+<span class="k">using</span> <span class="n">Tensor</span> <span class="o">=</span> <span class="n">View</span><span class="o">&lt;</span><span class="n">T</span><span class="p">,</span> <span class="n">CONST_SHAPE_DIMS</span><span class="o">&gt;</span><span class="p">;</span>
+
+<span class="p">}</span>  <span class="c1">// namespace functional</span>
+<span class="p">}</span>  <span class="c1">// namespace marian</span>
+</pre></div>
+</div>
+</div>
+
+
+           </div>
+           
+          </div>
+          <footer>
+
+  <hr/>
+
+  <div role="contentinfo">
+    <p>
+        &#169; Copyright 2021, Marian NMT Team.
+
+    </p>
+  </div>
+    
+    
+    
+    Built with <a href="https://www.sphinx-doc.org/">Sphinx</a> using a
+    
+    <a href="https://github.com/readthedocs/sphinx_rtd_theme">theme</a>
+    
+    provided by <a href="https://readthedocs.org">Read the Docs</a>. 
+
+</footer>
+        </div>
+      </div>
+
+    </section>
+
+  </div>
+  
+
+  <script type="text/javascript">
+      jQuery(function () {
+          SphinxRtdTheme.Navigation.enable(true);
+      });
+  </script>
+
+  
+  
+    
+   
+
+</body>
+</html>

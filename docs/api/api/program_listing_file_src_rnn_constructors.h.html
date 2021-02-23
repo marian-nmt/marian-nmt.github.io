@@ -1,0 +1,420 @@
+
+
+<!DOCTYPE html>
+<html class="writer-html5" lang="en" >
+<head>
+  <meta charset="utf-8" />
+  
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  
+  <title>Program Listing for File constructors.h &mdash; Marian NMT v1.10.1 2021-02-23 documentation</title>
+  
+
+  
+  <link rel="stylesheet" href="../_static/css/theme.css" type="text/css" />
+  <link rel="stylesheet" href="../_static/pygments.css" type="text/css" />
+  <link rel="stylesheet" href="../_static/css/custom.css" type="text/css" />
+  <link rel="stylesheet" href="../_static/collapsible-lists/css/tree_view.css" type="text/css" />
+
+  
+  
+
+  
+  
+
+  
+    <link rel="canonical" href="http://marian-nmt.github.io/docs/api/api/program_listing_file_src_rnn_constructors.h.html" />
+
+  
+  <!--[if lt IE 9]>
+    <script src="../_static/js/html5shiv.min.js"></script>
+  <![endif]-->
+  
+    
+      <script type="text/javascript" id="documentation_options" data-url_root="../" src="../_static/documentation_options.js"></script>
+        <script src="../_static/jquery.js"></script>
+        <script src="../_static/underscore.js"></script>
+        <script src="../_static/doctools.js"></script>
+        <script src="../_static/language_data.js"></script>
+        <script src="../_static/collapsible-lists/js/CollapsibleLists.compressed.js"></script>
+        <script src="../_static/collapsible-lists/js/apply-collapsible-lists.js"></script>
+    
+    <script type="text/javascript" src="../_static/js/theme.js"></script>
+
+    
+    <link rel="index" title="Index" href="../genindex.html" />
+    <link rel="search" title="Search" href="../search.html" /> 
+</head>
+
+<body class="wy-body-for-nav">
+
+   
+  <div class="wy-grid-for-nav">
+    
+    <nav data-toggle="wy-nav-shift" class="wy-nav-side">
+      <div class="wy-side-scroll">
+        <div class="wy-side-nav-search" >
+          
+
+          
+            <a href="../index.html" class="icon icon-home"> Marian NMT
+          
+
+          
+          </a>
+
+          
+            
+            
+              <div class="version">
+                v1.10.1
+              </div>
+            
+          
+
+          
+<div role="search">
+  <form id="rtd-search-form" class="wy-form" action="../search.html" method="get">
+    <input type="text" name="q" placeholder="Search docs" />
+    <input type="hidden" name="check_keywords" value="yes" />
+    <input type="hidden" name="area" value="default" />
+  </form>
+</div>
+
+          
+        </div>
+
+        
+        <div class="wy-menu wy-menu-vertical" data-spy="affix" role="navigation" aria-label="main navigation">
+          
+            
+            
+              
+            
+            
+              <p class="caption"><span class="caption-text">Contents:</span></p>
+<ul>
+<li class="toctree-l1"><a class="reference internal" href="../install.html">Installation</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../graph.html">Expression graphs</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../operators.html">Graph operations</a></li>
+<li class="toctree-l1"><a class="reference internal" href="library_index.html">Library API</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../contributing.html">How to contribute to Marian</a></li>
+</ul>
+
+            
+          
+        </div>
+        
+      </div>
+    </nav>
+
+    <section data-toggle="wy-nav-shift" class="wy-nav-content-wrap">
+
+      
+      <nav class="wy-nav-top" aria-label="top navigation">
+        
+          <i data-toggle="wy-nav-top" class="fa fa-bars"></i>
+          <a href="../index.html">Marian NMT</a>
+        
+      </nav>
+
+
+      <div class="wy-nav-content">
+        
+        <div class="rst-content">
+        
+          
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+<div role="navigation" aria-label="breadcrumbs navigation">
+
+  <ul class="wy-breadcrumbs">
+    
+      <li><a href="../index.html" class="icon icon-home"></a> &raquo;</li>
+        
+      <li>Program Listing for File constructors.h</li>
+    
+    
+      <li class="wy-breadcrumbs-aside">
+        
+          
+            <a href="../_sources/api/program_listing_file_src_rnn_constructors.h.rst.txt" rel="nofollow"> View page source</a>
+          
+        
+      </li>
+    
+  </ul>
+
+  
+  <hr/>
+</div>
+          <div role="main" class="document" itemscope="itemscope" itemtype="http://schema.org/Article">
+           <div itemprop="articleBody">
+            
+  <div class="section" id="program-listing-for-file-constructors-h">
+<span id="program-listing-file-src-rnn-constructors-h"></span><h1>Program Listing for File constructors.h<a class="headerlink" href="#program-listing-for-file-constructors-h" title="Permalink to this headline">¶</a></h1>
+<p>↰ <a class="reference internal" href="file_src_rnn_constructors.h.html#file-src-rnn-constructors-h"><span class="std std-ref">Return to documentation for file</span></a> (<code class="docutils literal notranslate"><span class="pre">src/rnn/constructors.h</span></code>)</p>
+<div class="highlight-cpp notranslate"><div class="highlight"><pre><span></span><span class="cp">#pragma once</span>
+
+<span class="cp">#include</span> <span class="cpf">&quot;layers/factory.h&quot;</span><span class="cp"></span>
+<span class="cp">#include</span> <span class="cpf">&quot;marian.h&quot;</span><span class="cp"></span>
+<span class="cp">#include</span> <span class="cpf">&quot;rnn/rnn.h&quot;</span><span class="cp"></span>
+
+<span class="k">namespace</span> <span class="n">marian</span> <span class="p">{</span>
+<span class="k">namespace</span> <span class="n">rnn</span> <span class="p">{</span>
+
+<span class="k">typedef</span> <span class="n">Factory</span> <span class="n">StackableFactory</span><span class="p">;</span>
+<span class="c1">//struct StackableFactory : public Factory {StackableFactory</span>
+<span class="c1">//  using Factory::Factory;</span>
+<span class="c1">//</span>
+<span class="c1">//  virtual ~StackableFactory() {}</span>
+<span class="c1">//</span>
+<span class="c1">//  template &lt;typename Cast&gt;</span>
+<span class="c1">//  inline Ptr&lt;Cast&gt; as() {</span>
+<span class="c1">//    return std::dynamic_pointer_cast&lt;Cast&gt;(shared_from_this());</span>
+<span class="c1">//  }</span>
+<span class="c1">//</span>
+<span class="c1">//  template &lt;typename Cast&gt;</span>
+<span class="c1">//  inline bool is() {</span>
+<span class="c1">//    return as&lt;Cast&gt;() != nullptr;</span>
+<span class="c1">//  }</span>
+<span class="c1">//};</span>
+
+<span class="k">struct</span> <span class="nc">InputFactory</span> <span class="o">:</span> <span class="k">public</span> <span class="n">StackableFactory</span> <span class="p">{</span>
+  <span class="k">virtual</span> <span class="n">Ptr</span><span class="o">&lt;</span><span class="n">CellInput</span><span class="o">&gt;</span> <span class="n">construct</span><span class="p">(</span><span class="n">Ptr</span><span class="o">&lt;</span><span class="n">ExpressionGraph</span><span class="o">&gt;</span> <span class="n">graph</span><span class="p">)</span> <span class="o">=</span> <span class="mi">0</span><span class="p">;</span>
+<span class="p">};</span>
+
+<span class="k">class</span> <span class="nc">CellFactory</span> <span class="o">:</span> <span class="k">public</span> <span class="n">StackableFactory</span> <span class="p">{</span>
+<span class="k">protected</span><span class="o">:</span>
+  <span class="n">std</span><span class="o">::</span><span class="n">vector</span><span class="o">&lt;</span><span class="n">std</span><span class="o">::</span><span class="n">function</span><span class="o">&lt;</span><span class="n">Expr</span><span class="p">(</span><span class="n">Ptr</span><span class="o">&lt;</span><span class="n">rnn</span><span class="o">::</span><span class="n">RNN</span><span class="o">&gt;</span><span class="p">)</span><span class="o">&gt;&gt;</span> <span class="n">inputs_</span><span class="p">;</span>
+
+<span class="k">public</span><span class="o">:</span>
+  <span class="k">virtual</span> <span class="n">Ptr</span><span class="o">&lt;</span><span class="n">Cell</span><span class="o">&gt;</span> <span class="n">construct</span><span class="p">(</span><span class="n">Ptr</span><span class="o">&lt;</span><span class="n">ExpressionGraph</span><span class="o">&gt;</span> <span class="n">graph</span><span class="p">)</span> <span class="p">{</span>
+    <span class="n">std</span><span class="o">::</span><span class="n">string</span> <span class="n">type</span> <span class="o">=</span> <span class="n">options_</span><span class="o">-&gt;</span><span class="n">get</span><span class="o">&lt;</span><span class="n">std</span><span class="o">::</span><span class="n">string</span><span class="o">&gt;</span><span class="p">(</span><span class="s">&quot;type&quot;</span><span class="p">);</span>
+    <span class="k">if</span><span class="p">(</span><span class="n">type</span> <span class="o">==</span> <span class="s">&quot;gru&quot;</span><span class="p">)</span> <span class="p">{</span>
+      <span class="k">auto</span> <span class="n">cell</span> <span class="o">=</span> <span class="n">New</span><span class="o">&lt;</span><span class="n">GRU</span><span class="o">&gt;</span><span class="p">(</span><span class="n">graph</span><span class="p">,</span> <span class="n">options_</span><span class="p">);</span>
+      <span class="n">cell</span><span class="o">-&gt;</span><span class="n">setLazyInputs</span><span class="p">(</span><span class="n">inputs_</span><span class="p">);</span>
+      <span class="k">return</span> <span class="n">cell</span><span class="p">;</span>
+    <span class="p">}</span> <span class="k">else</span> <span class="k">if</span><span class="p">(</span><span class="n">type</span> <span class="o">==</span> <span class="s">&quot;gru-nematus&quot;</span><span class="p">)</span> <span class="p">{</span>
+      <span class="k">auto</span> <span class="n">cell</span> <span class="o">=</span> <span class="n">New</span><span class="o">&lt;</span><span class="n">GRUNematus</span><span class="o">&gt;</span><span class="p">(</span><span class="n">graph</span><span class="p">,</span> <span class="n">options_</span><span class="p">);</span>
+      <span class="n">cell</span><span class="o">-&gt;</span><span class="n">setLazyInputs</span><span class="p">(</span><span class="n">inputs_</span><span class="p">);</span>
+      <span class="k">return</span> <span class="n">cell</span><span class="p">;</span>
+    <span class="p">}</span> <span class="k">else</span> <span class="k">if</span><span class="p">(</span><span class="n">type</span> <span class="o">==</span> <span class="s">&quot;lstm&quot;</span><span class="p">)</span> <span class="p">{</span>
+      <span class="k">auto</span> <span class="n">cell</span> <span class="o">=</span> <span class="n">New</span><span class="o">&lt;</span><span class="n">LSTM</span><span class="o">&gt;</span><span class="p">(</span><span class="n">graph</span><span class="p">,</span> <span class="n">options_</span><span class="p">);</span>
+      <span class="n">cell</span><span class="o">-&gt;</span><span class="n">setLazyInputs</span><span class="p">(</span><span class="n">inputs_</span><span class="p">);</span>
+      <span class="k">return</span> <span class="n">cell</span><span class="p">;</span>
+    <span class="p">}</span> <span class="k">else</span> <span class="k">if</span><span class="p">(</span><span class="n">type</span> <span class="o">==</span> <span class="s">&quot;mlstm&quot;</span><span class="p">)</span> <span class="p">{</span>
+      <span class="k">auto</span> <span class="n">cell</span> <span class="o">=</span> <span class="n">New</span><span class="o">&lt;</span><span class="n">MLSTM</span><span class="o">&gt;</span><span class="p">(</span><span class="n">graph</span><span class="p">,</span> <span class="n">options_</span><span class="p">);</span>
+      <span class="n">cell</span><span class="o">-&gt;</span><span class="n">setLazyInputs</span><span class="p">(</span><span class="n">inputs_</span><span class="p">);</span>
+      <span class="k">return</span> <span class="n">cell</span><span class="p">;</span>
+    <span class="p">}</span> <span class="k">else</span> <span class="k">if</span><span class="p">(</span><span class="n">type</span> <span class="o">==</span> <span class="s">&quot;mgru&quot;</span><span class="p">)</span> <span class="p">{</span>
+      <span class="k">auto</span> <span class="n">cell</span> <span class="o">=</span> <span class="n">New</span><span class="o">&lt;</span><span class="n">MGRU</span><span class="o">&gt;</span><span class="p">(</span><span class="n">graph</span><span class="p">,</span> <span class="n">options_</span><span class="p">);</span>
+      <span class="n">cell</span><span class="o">-&gt;</span><span class="n">setLazyInputs</span><span class="p">(</span><span class="n">inputs_</span><span class="p">);</span>
+      <span class="k">return</span> <span class="n">cell</span><span class="p">;</span>
+    <span class="p">}</span> <span class="k">else</span> <span class="k">if</span><span class="p">(</span><span class="n">type</span> <span class="o">==</span> <span class="s">&quot;tanh&quot;</span><span class="p">)</span> <span class="p">{</span>
+      <span class="k">auto</span> <span class="n">cell</span> <span class="o">=</span> <span class="n">New</span><span class="o">&lt;</span><span class="n">Tanh</span><span class="o">&gt;</span><span class="p">(</span><span class="n">graph</span><span class="p">,</span> <span class="n">options_</span><span class="p">);</span>
+      <span class="n">cell</span><span class="o">-&gt;</span><span class="n">setLazyInputs</span><span class="p">(</span><span class="n">inputs_</span><span class="p">);</span>
+      <span class="k">return</span> <span class="n">cell</span><span class="p">;</span>
+    <span class="p">}</span> <span class="k">else</span> <span class="k">if</span><span class="p">(</span><span class="n">type</span> <span class="o">==</span> <span class="s">&quot;relu&quot;</span><span class="p">)</span> <span class="p">{</span>
+      <span class="k">auto</span> <span class="n">cell</span> <span class="o">=</span> <span class="n">New</span><span class="o">&lt;</span><span class="n">ReLU</span><span class="o">&gt;</span><span class="p">(</span><span class="n">graph</span><span class="p">,</span> <span class="n">options_</span><span class="p">);</span>
+      <span class="n">cell</span><span class="o">-&gt;</span><span class="n">setLazyInputs</span><span class="p">(</span><span class="n">inputs_</span><span class="p">);</span>
+      <span class="k">return</span> <span class="n">cell</span><span class="p">;</span>
+    <span class="p">}</span> <span class="k">else</span> <span class="k">if</span><span class="p">(</span><span class="n">type</span> <span class="o">==</span> <span class="s">&quot;sru&quot;</span><span class="p">)</span> <span class="p">{</span>
+      <span class="k">auto</span> <span class="n">cell</span> <span class="o">=</span> <span class="n">New</span><span class="o">&lt;</span><span class="n">SRU</span><span class="o">&gt;</span><span class="p">(</span><span class="n">graph</span><span class="p">,</span> <span class="n">options_</span><span class="p">);</span>
+      <span class="n">cell</span><span class="o">-&gt;</span><span class="n">setLazyInputs</span><span class="p">(</span><span class="n">inputs_</span><span class="p">);</span>
+      <span class="k">return</span> <span class="n">cell</span><span class="p">;</span>
+    <span class="p">}</span> <span class="k">else</span> <span class="k">if</span><span class="p">(</span><span class="n">type</span> <span class="o">==</span> <span class="s">&quot;ssru&quot;</span><span class="p">)</span> <span class="p">{</span>
+      <span class="k">auto</span> <span class="n">cell</span> <span class="o">=</span> <span class="n">New</span><span class="o">&lt;</span><span class="n">SSRU</span><span class="o">&gt;</span><span class="p">(</span><span class="n">graph</span><span class="p">,</span> <span class="n">options_</span><span class="p">);</span>
+      <span class="n">cell</span><span class="o">-&gt;</span><span class="n">setLazyInputs</span><span class="p">(</span><span class="n">inputs_</span><span class="p">);</span>
+      <span class="k">return</span> <span class="n">cell</span><span class="p">;</span>
+    <span class="p">}</span> <span class="k">else</span> <span class="p">{</span>
+      <span class="n">ABORT</span><span class="p">(</span><span class="s">&quot;Unknown RNN cell type&quot;</span><span class="p">);</span>
+    <span class="p">}</span>
+  <span class="p">}</span>
+
+  <span class="n">CellFactory</span> <span class="n">clone</span><span class="p">()</span> <span class="p">{</span>
+    <span class="n">CellFactory</span> <span class="n">aClone</span><span class="p">;</span>
+    <span class="n">aClone</span><span class="p">.</span><span class="n">options_</span><span class="o">-&gt;</span><span class="n">merge</span><span class="p">(</span><span class="n">options_</span><span class="p">);</span>
+    <span class="n">aClone</span><span class="p">.</span><span class="n">inputs_</span> <span class="o">=</span> <span class="n">inputs_</span><span class="p">;</span>
+    <span class="k">return</span> <span class="n">aClone</span><span class="p">;</span>
+  <span class="p">}</span>
+
+  <span class="k">virtual</span> <span class="kt">void</span> <span class="n">add_input</span><span class="p">(</span><span class="n">std</span><span class="o">::</span><span class="n">function</span><span class="o">&lt;</span><span class="n">Expr</span><span class="p">(</span><span class="n">Ptr</span><span class="o">&lt;</span><span class="n">rnn</span><span class="o">::</span><span class="n">RNN</span><span class="o">&gt;</span><span class="p">)</span><span class="o">&gt;</span> <span class="n">func</span><span class="p">)</span> <span class="p">{</span>
+    <span class="n">inputs_</span><span class="p">.</span><span class="n">push_back</span><span class="p">(</span><span class="n">func</span><span class="p">);</span>
+  <span class="p">}</span>
+
+  <span class="k">virtual</span> <span class="kt">void</span> <span class="n">add_input</span><span class="p">(</span><span class="n">Expr</span> <span class="n">input</span><span class="p">)</span> <span class="p">{</span>
+    <span class="n">inputs_</span><span class="p">.</span><span class="n">push_back</span><span class="p">([</span><span class="n">input</span><span class="p">](</span><span class="n">Ptr</span><span class="o">&lt;</span><span class="n">rnn</span><span class="o">::</span><span class="n">RNN</span><span class="o">&gt;</span> <span class="cm">/*rnn*/</span><span class="p">)</span> <span class="p">{</span> <span class="k">return</span> <span class="n">input</span><span class="p">;</span> <span class="p">});</span>
+  <span class="p">}</span>
+<span class="p">};</span>
+
+<span class="k">typedef</span> <span class="n">Accumulator</span><span class="o">&lt;</span><span class="n">CellFactory</span><span class="o">&gt;</span> <span class="n">cell</span><span class="p">;</span>
+
+<span class="k">class</span> <span class="nc">StackedCellFactory</span> <span class="o">:</span> <span class="k">public</span> <span class="n">CellFactory</span> <span class="p">{</span>
+<span class="k">protected</span><span class="o">:</span>
+  <span class="n">std</span><span class="o">::</span><span class="n">vector</span><span class="o">&lt;</span><span class="n">Ptr</span><span class="o">&lt;</span><span class="n">StackableFactory</span><span class="o">&gt;&gt;</span> <span class="n">stackableFactories_</span><span class="p">;</span>
+
+<span class="k">public</span><span class="o">:</span>
+  <span class="n">Ptr</span><span class="o">&lt;</span><span class="n">Cell</span><span class="o">&gt;</span> <span class="n">construct</span><span class="p">(</span><span class="n">Ptr</span><span class="o">&lt;</span><span class="n">ExpressionGraph</span><span class="o">&gt;</span> <span class="n">graph</span><span class="p">)</span> <span class="k">override</span> <span class="p">{</span>
+    <span class="k">auto</span> <span class="n">stacked</span> <span class="o">=</span> <span class="n">New</span><span class="o">&lt;</span><span class="n">StackedCell</span><span class="o">&gt;</span><span class="p">(</span><span class="n">graph</span><span class="p">,</span> <span class="n">options_</span><span class="p">);</span>
+
+    <span class="kt">int</span> <span class="n">lastDimInput</span> <span class="o">=</span> <span class="n">options_</span><span class="o">-&gt;</span><span class="n">get</span><span class="o">&lt;</span><span class="kt">int</span><span class="o">&gt;</span><span class="p">(</span><span class="s">&quot;dimInput&quot;</span><span class="p">);</span>
+
+    <span class="k">for</span><span class="p">(</span><span class="kt">size_t</span> <span class="n">i</span> <span class="o">=</span> <span class="mi">0</span><span class="p">;</span> <span class="n">i</span> <span class="o">&lt;</span> <span class="n">stackableFactories_</span><span class="p">.</span><span class="n">size</span><span class="p">();</span> <span class="o">++</span><span class="n">i</span><span class="p">)</span> <span class="p">{</span>
+      <span class="k">auto</span> <span class="n">sf</span> <span class="o">=</span> <span class="n">stackableFactories_</span><span class="p">[</span><span class="n">i</span><span class="p">];</span>
+
+      <span class="k">if</span><span class="p">(</span><span class="n">sf</span><span class="o">-&gt;</span><span class="n">is</span><span class="o">&lt;</span><span class="n">CellFactory</span><span class="o">&gt;</span><span class="p">())</span> <span class="p">{</span>
+        <span class="k">auto</span> <span class="n">cellFactory</span> <span class="o">=</span> <span class="n">sf</span><span class="o">-&gt;</span><span class="n">as</span><span class="o">&lt;</span><span class="n">CellFactory</span><span class="o">&gt;</span><span class="p">();</span>
+        <span class="n">cellFactory</span><span class="o">-&gt;</span><span class="n">mergeOpts</span><span class="p">(</span><span class="n">options_</span><span class="p">);</span>
+
+        <span class="n">sf</span><span class="o">-&gt;</span><span class="n">setOpt</span><span class="p">(</span><span class="s">&quot;dimInput&quot;</span><span class="p">,</span> <span class="n">lastDimInput</span><span class="p">);</span>
+        <span class="n">lastDimInput</span> <span class="o">=</span> <span class="mi">0</span><span class="p">;</span>
+
+        <span class="k">if</span><span class="p">(</span><span class="n">i</span> <span class="o">==</span> <span class="mi">0</span><span class="p">)</span>
+          <span class="k">for</span><span class="p">(</span><span class="k">auto</span> <span class="nl">f</span> <span class="p">:</span> <span class="n">inputs_</span><span class="p">)</span>
+            <span class="n">cellFactory</span><span class="o">-&gt;</span><span class="n">add_input</span><span class="p">(</span><span class="n">f</span><span class="p">);</span>
+
+        <span class="n">stacked</span><span class="o">-&gt;</span><span class="n">push_back</span><span class="p">(</span><span class="n">cellFactory</span><span class="o">-&gt;</span><span class="n">construct</span><span class="p">(</span><span class="n">graph</span><span class="p">));</span>
+      <span class="p">}</span> <span class="k">else</span> <span class="p">{</span>
+        <span class="k">auto</span> <span class="n">inputFactory</span> <span class="o">=</span> <span class="n">sf</span><span class="o">-&gt;</span><span class="n">as</span><span class="o">&lt;</span><span class="n">InputFactory</span><span class="o">&gt;</span><span class="p">();</span>
+        <span class="n">inputFactory</span><span class="o">-&gt;</span><span class="n">mergeOpts</span><span class="p">(</span><span class="n">options_</span><span class="p">);</span>
+        <span class="k">auto</span> <span class="n">input</span> <span class="o">=</span> <span class="n">inputFactory</span><span class="o">-&gt;</span><span class="n">construct</span><span class="p">(</span><span class="n">graph</span><span class="p">);</span>
+        <span class="n">stacked</span><span class="o">-&gt;</span><span class="n">push_back</span><span class="p">(</span><span class="n">input</span><span class="p">);</span>
+        <span class="n">lastDimInput</span> <span class="o">+=</span> <span class="n">input</span><span class="o">-&gt;</span><span class="n">dimOutput</span><span class="p">();</span>
+      <span class="p">}</span>
+    <span class="p">}</span>
+    <span class="k">return</span> <span class="n">stacked</span><span class="p">;</span>
+  <span class="p">}</span>
+
+  <span class="k">template</span> <span class="o">&lt;</span><span class="k">class</span> <span class="nc">F</span><span class="o">&gt;</span>
+  <span class="n">Accumulator</span><span class="o">&lt;</span><span class="n">StackedCellFactory</span><span class="o">&gt;</span> <span class="n">push_back</span><span class="p">(</span><span class="k">const</span> <span class="n">F</span><span class="o">&amp;</span> <span class="n">f</span><span class="p">)</span> <span class="p">{</span>
+    <span class="n">stackableFactories_</span><span class="p">.</span><span class="n">push_back</span><span class="p">(</span><span class="n">New</span><span class="o">&lt;</span><span class="n">F</span><span class="o">&gt;</span><span class="p">(</span><span class="n">f</span><span class="p">));</span>
+    <span class="k">return</span> <span class="n">Accumulator</span><span class="o">&lt;</span><span class="n">StackedCellFactory</span><span class="o">&gt;</span><span class="p">(</span><span class="o">*</span><span class="k">this</span><span class="p">);</span>
+  <span class="p">}</span>
+<span class="p">};</span>
+
+<span class="k">typedef</span> <span class="n">Accumulator</span><span class="o">&lt;</span><span class="n">StackedCellFactory</span><span class="o">&gt;</span> <span class="n">stacked_cell</span><span class="p">;</span>
+
+<span class="k">class</span> <span class="nc">RNNFactory</span> <span class="o">:</span> <span class="k">public</span> <span class="n">Factory</span> <span class="p">{</span>
+  <span class="k">using</span> <span class="n">Factory</span><span class="o">::</span><span class="n">Factory</span><span class="p">;</span>
+<span class="k">protected</span><span class="o">:</span>
+  <span class="n">std</span><span class="o">::</span><span class="n">vector</span><span class="o">&lt;</span><span class="n">Ptr</span><span class="o">&lt;</span><span class="n">CellFactory</span><span class="o">&gt;&gt;</span> <span class="n">layerFactories_</span><span class="p">;</span>
+
+<span class="k">public</span><span class="o">:</span>
+  <span class="n">Ptr</span><span class="o">&lt;</span><span class="n">RNN</span><span class="o">&gt;</span> <span class="n">construct</span><span class="p">(</span><span class="n">Ptr</span><span class="o">&lt;</span><span class="n">ExpressionGraph</span><span class="o">&gt;</span> <span class="n">graph</span><span class="p">)</span> <span class="p">{</span>
+    <span class="k">auto</span> <span class="n">rnn</span> <span class="o">=</span> <span class="n">New</span><span class="o">&lt;</span><span class="n">RNN</span><span class="o">&gt;</span><span class="p">(</span><span class="n">graph</span><span class="p">,</span> <span class="n">options_</span><span class="p">);</span>
+    <span class="k">for</span><span class="p">(</span><span class="kt">size_t</span> <span class="n">i</span> <span class="o">=</span> <span class="mi">0</span><span class="p">;</span> <span class="n">i</span> <span class="o">&lt;</span> <span class="n">layerFactories_</span><span class="p">.</span><span class="n">size</span><span class="p">();</span> <span class="o">++</span><span class="n">i</span><span class="p">)</span> <span class="p">{</span>
+      <span class="k">auto</span> <span class="n">lf</span> <span class="o">=</span> <span class="n">layerFactories_</span><span class="p">[</span><span class="n">i</span><span class="p">];</span>
+
+      <span class="n">lf</span><span class="o">-&gt;</span><span class="n">mergeOpts</span><span class="p">(</span><span class="n">options_</span><span class="p">);</span>
+      <span class="k">if</span><span class="p">(</span><span class="n">i</span> <span class="o">&gt;</span> <span class="mi">0</span><span class="p">)</span> <span class="p">{</span>
+        <span class="kt">int</span> <span class="n">dimInput</span>
+            <span class="o">=</span> <span class="n">layerFactories_</span><span class="p">[</span><span class="n">i</span> <span class="o">-</span> <span class="mi">1</span><span class="p">]</span><span class="o">-&gt;</span><span class="n">opt</span><span class="o">&lt;</span><span class="kt">int</span><span class="o">&gt;</span><span class="p">(</span><span class="s">&quot;dimState&quot;</span><span class="p">)</span>
+              <span class="o">+</span> <span class="n">lf</span><span class="o">-&gt;</span><span class="n">opt</span><span class="o">&lt;</span><span class="kt">int</span><span class="o">&gt;</span><span class="p">(</span><span class="s">&quot;dimInputExtra&quot;</span><span class="p">,</span> <span class="mi">0</span><span class="p">);</span>
+
+        <span class="n">lf</span><span class="o">-&gt;</span><span class="n">setOpt</span><span class="p">(</span><span class="s">&quot;dimInput&quot;</span><span class="p">,</span> <span class="n">dimInput</span><span class="p">);</span>
+      <span class="p">}</span>
+
+      <span class="k">if</span><span class="p">((</span><span class="n">rnn</span><span class="o">::</span><span class="n">dir</span><span class="p">)</span><span class="n">opt</span><span class="o">&lt;</span><span class="kt">int</span><span class="o">&gt;</span><span class="p">(</span><span class="s">&quot;direction&quot;</span><span class="p">,</span> <span class="p">(</span><span class="kt">int</span><span class="p">)</span><span class="n">rnn</span><span class="o">::</span><span class="n">dir</span><span class="o">::</span><span class="n">forward</span><span class="p">)</span>
+         <span class="o">==</span> <span class="n">rnn</span><span class="o">::</span><span class="n">dir</span><span class="o">::</span><span class="n">alternating_forward</span><span class="p">)</span> <span class="p">{</span>
+        <span class="k">if</span><span class="p">(</span><span class="n">i</span> <span class="o">%</span> <span class="mi">2</span> <span class="o">==</span> <span class="mi">0</span><span class="p">)</span>
+          <span class="n">lf</span><span class="o">-&gt;</span><span class="n">setOpt</span><span class="p">(</span><span class="s">&quot;direction&quot;</span><span class="p">,</span> <span class="p">(</span><span class="kt">int</span><span class="p">)</span><span class="n">rnn</span><span class="o">::</span><span class="n">dir</span><span class="o">::</span><span class="n">forward</span><span class="p">);</span>
+        <span class="k">else</span>
+          <span class="n">lf</span><span class="o">-&gt;</span><span class="n">setOpt</span><span class="p">(</span><span class="s">&quot;direction&quot;</span><span class="p">,</span> <span class="p">(</span><span class="kt">int</span><span class="p">)</span><span class="n">rnn</span><span class="o">::</span><span class="n">dir</span><span class="o">::</span><span class="n">backward</span><span class="p">);</span>
+      <span class="p">}</span>
+
+      <span class="k">if</span><span class="p">((</span><span class="n">rnn</span><span class="o">::</span><span class="n">dir</span><span class="p">)</span><span class="n">opt</span><span class="o">&lt;</span><span class="kt">int</span><span class="o">&gt;</span><span class="p">(</span><span class="s">&quot;direction&quot;</span><span class="p">,</span> <span class="p">(</span><span class="kt">int</span><span class="p">)</span><span class="n">rnn</span><span class="o">::</span><span class="n">dir</span><span class="o">::</span><span class="n">forward</span><span class="p">)</span>
+         <span class="o">==</span> <span class="n">rnn</span><span class="o">::</span><span class="n">dir</span><span class="o">::</span><span class="n">alternating_backward</span><span class="p">)</span> <span class="p">{</span>
+        <span class="k">if</span><span class="p">(</span><span class="n">i</span> <span class="o">%</span> <span class="mi">2</span> <span class="o">==</span> <span class="mi">1</span><span class="p">)</span>
+          <span class="n">lf</span><span class="o">-&gt;</span><span class="n">setOpt</span><span class="p">(</span><span class="s">&quot;direction&quot;</span><span class="p">,</span> <span class="p">(</span><span class="kt">int</span><span class="p">)</span><span class="n">rnn</span><span class="o">::</span><span class="n">dir</span><span class="o">::</span><span class="n">forward</span><span class="p">);</span>
+        <span class="k">else</span>
+          <span class="n">lf</span><span class="o">-&gt;</span><span class="n">setOpt</span><span class="p">(</span><span class="s">&quot;direction&quot;</span><span class="p">,</span> <span class="p">(</span><span class="kt">int</span><span class="p">)</span><span class="n">rnn</span><span class="o">::</span><span class="n">dir</span><span class="o">::</span><span class="n">backward</span><span class="p">);</span>
+      <span class="p">}</span>
+
+      <span class="n">rnn</span><span class="o">-&gt;</span><span class="n">push_back</span><span class="p">(</span><span class="n">lf</span><span class="o">-&gt;</span><span class="n">construct</span><span class="p">(</span><span class="n">graph</span><span class="p">));</span>
+    <span class="p">}</span>
+    <span class="k">return</span> <span class="n">rnn</span><span class="p">;</span>
+  <span class="p">}</span>
+
+  <span class="k">template</span> <span class="o">&lt;</span><span class="k">class</span> <span class="nc">F</span><span class="o">&gt;</span>
+  <span class="n">Accumulator</span><span class="o">&lt;</span><span class="n">RNNFactory</span><span class="o">&gt;</span> <span class="n">push_back</span><span class="p">(</span><span class="k">const</span> <span class="n">F</span><span class="o">&amp;</span> <span class="n">f</span><span class="p">)</span> <span class="p">{</span>
+    <span class="n">layerFactories_</span><span class="p">.</span><span class="n">push_back</span><span class="p">(</span><span class="n">New</span><span class="o">&lt;</span><span class="n">F</span><span class="o">&gt;</span><span class="p">(</span><span class="n">f</span><span class="p">));</span>
+    <span class="k">return</span> <span class="n">Accumulator</span><span class="o">&lt;</span><span class="n">RNNFactory</span><span class="o">&gt;</span><span class="p">(</span><span class="o">*</span><span class="k">this</span><span class="p">);</span>
+  <span class="p">}</span>
+
+  <span class="n">RNNFactory</span> <span class="n">clone</span><span class="p">()</span> <span class="p">{</span>
+    <span class="n">RNNFactory</span> <span class="n">aClone</span><span class="p">;</span>
+    <span class="n">aClone</span><span class="p">.</span><span class="n">options_</span><span class="o">-&gt;</span><span class="n">merge</span><span class="p">(</span><span class="n">options_</span><span class="p">);</span>
+    <span class="k">for</span><span class="p">(</span><span class="k">auto</span> <span class="nl">lf</span> <span class="p">:</span> <span class="n">layerFactories_</span><span class="p">)</span>
+      <span class="n">aClone</span><span class="p">.</span><span class="n">push_back</span><span class="p">(</span><span class="n">lf</span><span class="o">-&gt;</span><span class="n">clone</span><span class="p">());</span>
+    <span class="k">return</span> <span class="n">aClone</span><span class="p">;</span>
+  <span class="p">}</span>
+<span class="p">};</span>
+
+<span class="k">typedef</span> <span class="n">Accumulator</span><span class="o">&lt;</span><span class="n">RNNFactory</span><span class="o">&gt;</span> <span class="n">rnn</span><span class="p">;</span>
+<span class="p">}</span>  <span class="c1">// namespace rnn</span>
+<span class="p">}</span>  <span class="c1">// namespace marian</span>
+</pre></div>
+</div>
+</div>
+
+
+           </div>
+           
+          </div>
+          <footer>
+
+  <hr/>
+
+  <div role="contentinfo">
+    <p>
+        &#169; Copyright 2021, Marian NMT Team.
+
+    </p>
+  </div>
+    
+    
+    
+    Built with <a href="https://www.sphinx-doc.org/">Sphinx</a> using a
+    
+    <a href="https://github.com/readthedocs/sphinx_rtd_theme">theme</a>
+    
+    provided by <a href="https://readthedocs.org">Read the Docs</a>. 
+
+</footer>
+        </div>
+      </div>
+
+    </section>
+
+  </div>
+  
+
+  <script type="text/javascript">
+      jQuery(function () {
+          SphinxRtdTheme.Navigation.enable(true);
+      });
+  </script>
+
+  
+  
+    
+   
+
+</body>
+</html>

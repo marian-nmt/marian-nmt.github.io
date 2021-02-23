@@ -1,0 +1,278 @@
+
+
+<!DOCTYPE html>
+<html class="writer-html5" lang="en" >
+<head>
+  <meta charset="utf-8" />
+  
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  
+  <title>Program Listing for File signal_handling.cpp &mdash; Marian NMT v1.10.1 2021-02-23 documentation</title>
+  
+
+  
+  <link rel="stylesheet" href="../_static/css/theme.css" type="text/css" />
+  <link rel="stylesheet" href="../_static/pygments.css" type="text/css" />
+  <link rel="stylesheet" href="../_static/css/custom.css" type="text/css" />
+  <link rel="stylesheet" href="../_static/collapsible-lists/css/tree_view.css" type="text/css" />
+
+  
+  
+
+  
+  
+
+  
+    <link rel="canonical" href="http://marian-nmt.github.io/docs/api/api/program_listing_file_src_common_signal_handling.cpp.html" />
+
+  
+  <!--[if lt IE 9]>
+    <script src="../_static/js/html5shiv.min.js"></script>
+  <![endif]-->
+  
+    
+      <script type="text/javascript" id="documentation_options" data-url_root="../" src="../_static/documentation_options.js"></script>
+        <script src="../_static/jquery.js"></script>
+        <script src="../_static/underscore.js"></script>
+        <script src="../_static/doctools.js"></script>
+        <script src="../_static/language_data.js"></script>
+        <script src="../_static/collapsible-lists/js/CollapsibleLists.compressed.js"></script>
+        <script src="../_static/collapsible-lists/js/apply-collapsible-lists.js"></script>
+    
+    <script type="text/javascript" src="../_static/js/theme.js"></script>
+
+    
+    <link rel="index" title="Index" href="../genindex.html" />
+    <link rel="search" title="Search" href="../search.html" /> 
+</head>
+
+<body class="wy-body-for-nav">
+
+   
+  <div class="wy-grid-for-nav">
+    
+    <nav data-toggle="wy-nav-shift" class="wy-nav-side">
+      <div class="wy-side-scroll">
+        <div class="wy-side-nav-search" >
+          
+
+          
+            <a href="../index.html" class="icon icon-home"> Marian NMT
+          
+
+          
+          </a>
+
+          
+            
+            
+              <div class="version">
+                v1.10.1
+              </div>
+            
+          
+
+          
+<div role="search">
+  <form id="rtd-search-form" class="wy-form" action="../search.html" method="get">
+    <input type="text" name="q" placeholder="Search docs" />
+    <input type="hidden" name="check_keywords" value="yes" />
+    <input type="hidden" name="area" value="default" />
+  </form>
+</div>
+
+          
+        </div>
+
+        
+        <div class="wy-menu wy-menu-vertical" data-spy="affix" role="navigation" aria-label="main navigation">
+          
+            
+            
+              
+            
+            
+              <p class="caption"><span class="caption-text">Contents:</span></p>
+<ul>
+<li class="toctree-l1"><a class="reference internal" href="../install.html">Installation</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../graph.html">Expression graphs</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../operators.html">Graph operations</a></li>
+<li class="toctree-l1"><a class="reference internal" href="library_index.html">Library API</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../contributing.html">How to contribute to Marian</a></li>
+</ul>
+
+            
+          
+        </div>
+        
+      </div>
+    </nav>
+
+    <section data-toggle="wy-nav-shift" class="wy-nav-content-wrap">
+
+      
+      <nav class="wy-nav-top" aria-label="top navigation">
+        
+          <i data-toggle="wy-nav-top" class="fa fa-bars"></i>
+          <a href="../index.html">Marian NMT</a>
+        
+      </nav>
+
+
+      <div class="wy-nav-content">
+        
+        <div class="rst-content">
+        
+          
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+<div role="navigation" aria-label="breadcrumbs navigation">
+
+  <ul class="wy-breadcrumbs">
+    
+      <li><a href="../index.html" class="icon icon-home"></a> &raquo;</li>
+        
+      <li>Program Listing for File signal_handling.cpp</li>
+    
+    
+      <li class="wy-breadcrumbs-aside">
+        
+          
+            <a href="../_sources/api/program_listing_file_src_common_signal_handling.cpp.rst.txt" rel="nofollow"> View page source</a>
+          
+        
+      </li>
+    
+  </ul>
+
+  
+  <hr/>
+</div>
+          <div role="main" class="document" itemscope="itemscope" itemtype="http://schema.org/Article">
+           <div itemprop="articleBody">
+            
+  <div class="section" id="program-listing-for-file-signal-handling-cpp">
+<span id="program-listing-file-src-common-signal-handling-cpp"></span><h1>Program Listing for File signal_handling.cpp<a class="headerlink" href="#program-listing-for-file-signal-handling-cpp" title="Permalink to this headline">¶</a></h1>
+<p>↰ <a class="reference internal" href="file_src_common_signal_handling.cpp.html#file-src-common-signal-handling-cpp"><span class="std std-ref">Return to documentation for file</span></a> (<code class="docutils literal notranslate"><span class="pre">src/common/signal_handling.cpp</span></code>)</p>
+<div class="highlight-cpp notranslate"><div class="highlight"><pre><span></span><span class="cp">#include</span> <span class="cpf">&quot;common/logging.h&quot;</span><span class="cp"></span>
+<span class="cp">#include</span> <span class="cpf">&quot;signal_handling.h&quot;</span><span class="cp"></span>
+
+<span class="c1">// The simplest (and recommended) way to handle signals is to simply set a flag</span>
+<span class="c1">// in the signal handler and check that flag later.</span>
+<span class="c1">//</span>
+<span class="c1">// We provide setSignalFlag as the most generic signal handler. This handler uses a</span>
+<span class="c1">// single sig_atomic_t as a bit field. On Linux, sig_atomic_t is equivalent to a signed int,</span>
+<span class="c1">// theoretically providing 32 binary flags; in practice, most likely signals for which we may</span>
+<span class="c1">// want to install signal handlers are</span>
+<span class="c1">// - SIGTERM (15): which by default signals the request for a graceful shutdown</span>
+<span class="c1">// - SIGUSR1 (10): intended for custom use, default action in Linux is termination</span>
+<span class="c1">// - SIGUSR2 (12): intended for custom use, default action in Linux is termination</span>
+<span class="c1">// - SIGINT (2): interrupt from the console</span>
+<span class="c1">// Just to be safe, we accommodate signals up to signal No. 30.</span>
+
+<span class="c1">// In addition, we also provide requestSaveAndExit() and saveAndExit() as a signal</span>
+<span class="c1">// handler/checker for graceful shutdown requests during training.</span>
+<span class="k">constexpr</span> <span class="kt">int</span> <span class="n">maxSignalForSetSignalFlag</span><span class="p">{</span><span class="mi">30</span><span class="p">};</span>
+
+<span class="c1">// Make sure sig_atomic_t is large enough as a bit field for our purposes.</span>
+<span class="c1">// That said, I&#39;m not aware of any platform where this would be a problem.</span>
+<span class="k">static_assert</span><span class="p">(</span><span class="n">SIG_ATOMIC_MAX</span> <span class="o">&gt;</span> <span class="p">(</span><span class="mi">1U</span><span class="o">&lt;&lt;</span><span class="n">maxSignalForSetSignalFlag</span><span class="p">),</span>
+              <span class="s">&quot;sig_atomic_type is too small for signal flags on this platform.&quot;</span><span class="p">);</span>
+
+<span class="k">namespace</span> <span class="n">marian</span><span class="p">{</span>
+<span class="k">volatile</span> <span class="n">std</span><span class="o">::</span><span class="kt">sig_atomic_t</span> <span class="n">sigflags_</span><span class="p">{</span><span class="mi">0</span><span class="p">};</span>
+<span class="k">volatile</span> <span class="n">std</span><span class="o">::</span><span class="kt">sig_atomic_t</span> <span class="n">saveAndExit_</span><span class="p">{</span><span class="mi">0</span><span class="p">};</span>
+
+<span class="kt">void</span> <span class="nf">setSignalFlag</span><span class="p">(</span><span class="kt">int</span> <span class="n">sig</span><span class="p">)</span> <span class="p">{</span>
+  <span class="c1">// sigflags_ is an int type serving as a bit filed for flags corresponding</span>
+  <span class="c1">// to signals (lower or equeal to maxSignalForSetSignalFlag). We set the</span>
+  <span class="c1">// flag by a binary or (|=) of the bit field and an int value with exactly</span>
+  <span class="c1">// one bit set (s^sig).</span>
+  <span class="n">sigflags_</span> <span class="o">|=</span> <span class="p">(</span><span class="mi">1</span><span class="o">&lt;&lt;</span><span class="n">sig</span><span class="p">);</span>
+<span class="p">}</span>
+
+<span class="c1">// Check if the flag for the signal sig is set in the bit field sigflags_</span>
+<span class="kt">bool</span> <span class="nf">getSignalFlag</span><span class="p">(</span><span class="k">const</span> <span class="kt">int</span> <span class="n">sig</span><span class="p">)</span> <span class="p">{</span>
+  <span class="n">ABORT_IF</span><span class="p">(</span><span class="n">sig</span> <span class="o">&gt;</span> <span class="n">maxSignalForSetSignalFlag</span><span class="p">,</span>
+           <span class="s">&quot;Signal out of range (must be &lt; {}, is {}).&quot;</span><span class="p">,</span> <span class="n">maxSignalForSetSignalFlag</span><span class="p">,</span> <span class="n">sig</span><span class="p">);</span>
+  <span class="c1">// Do bitwise AND between sigflags_ and an int value that has exactly one bit set that</span>
+  <span class="c1">// corresponds to the signal in question. If the bit is set (see setSignalFlag above),</span>
+  <span class="c1">// the bitwise AND will return a non-zero integer, if it is not set, the result will</span>
+  <span class="c1">// be zero.</span>
+  <span class="k">return</span> <span class="p">(</span><span class="n">sigflags_</span> <span class="o">&amp;</span> <span class="p">(</span><span class="mi">1</span><span class="o">&lt;&lt;</span><span class="n">sig</span><span class="p">))</span> <span class="o">!=</span> <span class="mi">0</span><span class="p">;</span>
+<span class="p">}</span>
+
+<span class="kt">void</span> <span class="nf">requestSaveAndExit</span><span class="p">(</span><span class="kt">int</span> <span class="n">sig</span><span class="p">)</span> <span class="p">{</span>
+  <span class="n">setSignalFlag</span><span class="p">(</span><span class="n">sig</span><span class="p">);</span>         <span class="c1">// keep track of triggering signal</span>
+  <span class="n">saveAndExit_</span> <span class="o">=</span> <span class="mi">1</span><span class="p">;</span> <span class="c1">// set flag to exit gracefully</span>
+<span class="p">}</span>
+
+<span class="kt">bool</span> <span class="nf">saveAndExitRequested</span><span class="p">()</span> <span class="p">{</span>
+  <span class="k">return</span> <span class="n">saveAndExit_</span> <span class="o">==</span> <span class="mi">1</span><span class="p">;</span>
+<span class="p">}</span>
+
+<span class="p">}</span>
+</pre></div>
+</div>
+</div>
+
+
+           </div>
+           
+          </div>
+          <footer>
+
+  <hr/>
+
+  <div role="contentinfo">
+    <p>
+        &#169; Copyright 2021, Marian NMT Team.
+
+    </p>
+  </div>
+    
+    
+    
+    Built with <a href="https://www.sphinx-doc.org/">Sphinx</a> using a
+    
+    <a href="https://github.com/readthedocs/sphinx_rtd_theme">theme</a>
+    
+    provided by <a href="https://readthedocs.org">Read the Docs</a>. 
+
+</footer>
+        </div>
+      </div>
+
+    </section>
+
+  </div>
+  
+
+  <script type="text/javascript">
+      jQuery(function () {
+          SphinxRtdTheme.Navigation.enable(true);
+      });
+  </script>
+
+  
+  
+    
+   
+
+</body>
+</html>

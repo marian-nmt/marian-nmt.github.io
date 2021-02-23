@@ -1,0 +1,305 @@
+
+
+<!DOCTYPE html>
+<html class="writer-html5" lang="en" >
+<head>
+  <meta charset="utf-8" />
+  
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  
+  <title>Class ModelQuantizer &mdash; Marian NMT v1.10.1 2021-02-23 documentation</title>
+  
+
+  
+  <link rel="stylesheet" href="../_static/css/theme.css" type="text/css" />
+  <link rel="stylesheet" href="../_static/pygments.css" type="text/css" />
+  <link rel="stylesheet" href="../_static/css/custom.css" type="text/css" />
+  <link rel="stylesheet" href="../_static/collapsible-lists/css/tree_view.css" type="text/css" />
+
+  
+  
+
+  
+  
+
+  
+    <link rel="canonical" href="http://marian-nmt.github.io/docs/api/api/classmarian_1_1ModelQuantizer.html" />
+
+  
+  <!--[if lt IE 9]>
+    <script src="../_static/js/html5shiv.min.js"></script>
+  <![endif]-->
+  
+    
+      <script type="text/javascript" id="documentation_options" data-url_root="../" src="../_static/documentation_options.js"></script>
+        <script src="../_static/jquery.js"></script>
+        <script src="../_static/underscore.js"></script>
+        <script src="../_static/doctools.js"></script>
+        <script src="../_static/language_data.js"></script>
+        <script src="../_static/collapsible-lists/js/CollapsibleLists.compressed.js"></script>
+        <script src="../_static/collapsible-lists/js/apply-collapsible-lists.js"></script>
+    
+    <script type="text/javascript" src="../_static/js/theme.js"></script>
+
+    
+    <link rel="index" title="Index" href="../genindex.html" />
+    <link rel="search" title="Search" href="../search.html" />
+    <link rel="next" title="Class ClassifierFactory" href="classmarian_1_1models_1_1ClassifierFactory.html" />
+    <link rel="prev" title="Class MNISTAccuracyValidator" href="classmarian_1_1MNISTAccuracyValidator.html" /> 
+</head>
+
+<body class="wy-body-for-nav">
+
+   
+  <div class="wy-grid-for-nav">
+    
+    <nav data-toggle="wy-nav-shift" class="wy-nav-side">
+      <div class="wy-side-scroll">
+        <div class="wy-side-nav-search" >
+          
+
+          
+            <a href="../index.html" class="icon icon-home"> Marian NMT
+          
+
+          
+          </a>
+
+          
+            
+            
+              <div class="version">
+                v1.10.1
+              </div>
+            
+          
+
+          
+<div role="search">
+  <form id="rtd-search-form" class="wy-form" action="../search.html" method="get">
+    <input type="text" name="q" placeholder="Search docs" />
+    <input type="hidden" name="check_keywords" value="yes" />
+    <input type="hidden" name="area" value="default" />
+  </form>
+</div>
+
+          
+        </div>
+
+        
+        <div class="wy-menu wy-menu-vertical" data-spy="affix" role="navigation" aria-label="main navigation">
+          
+            
+            
+              
+            
+            
+              <p class="caption"><span class="caption-text">Contents:</span></p>
+<ul>
+<li class="toctree-l1"><a class="reference internal" href="../install.html">Installation</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../graph.html">Expression graphs</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../operators.html">Graph operations</a></li>
+<li class="toctree-l1"><a class="reference internal" href="library_index.html">Library API</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../contributing.html">How to contribute to Marian</a></li>
+</ul>
+
+            
+          
+        </div>
+        
+      </div>
+    </nav>
+
+    <section data-toggle="wy-nav-shift" class="wy-nav-content-wrap">
+
+      
+      <nav class="wy-nav-top" aria-label="top navigation">
+        
+          <i data-toggle="wy-nav-top" class="fa fa-bars"></i>
+          <a href="../index.html">Marian NMT</a>
+        
+      </nav>
+
+
+      <div class="wy-nav-content">
+        
+        <div class="rst-content">
+        
+          
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+<div role="navigation" aria-label="breadcrumbs navigation">
+
+  <ul class="wy-breadcrumbs">
+    
+      <li><a href="../index.html" class="icon icon-home"></a> &raquo;</li>
+        
+          <li><a href="library_index.html">Library API</a> &raquo;</li>
+        
+      <li>Class ModelQuantizer</li>
+    
+    
+      <li class="wy-breadcrumbs-aside">
+        
+          
+            <a href="../_sources/api/classmarian_1_1ModelQuantizer.rst.txt" rel="nofollow"> View page source</a>
+          
+        
+      </li>
+    
+  </ul>
+
+  
+  <hr/>
+</div>
+          <div role="main" class="document" itemscope="itemscope" itemtype="http://schema.org/Article">
+           <div itemprop="articleBody">
+            
+  <div class="section" id="class-modelquantizer">
+<span id="exhale-class-classmarian-1-1modelquantizer"></span><h1>Class ModelQuantizer<a class="headerlink" href="#class-modelquantizer" title="Permalink to this headline">¶</a></h1>
+<ul class="simple">
+<li><p>Defined in <a class="reference internal" href="file_src_optimizers_quantizer.h.html#file-src-optimizers-quantizer-h"><span class="std std-ref">File quantizer.h</span></a></p></li>
+</ul>
+<div class="section" id="class-documentation">
+<h2>Class Documentation<a class="headerlink" href="#class-documentation" title="Permalink to this headline">¶</a></h2>
+<dl class="class">
+<dt id="_CPPv4N6marian14ModelQuantizerE">
+<span id="_CPPv3N6marian14ModelQuantizerE"></span><span id="_CPPv2N6marian14ModelQuantizerE"></span><span id="marian::ModelQuantizer"></span><span class="target" id="classmarian_1_1ModelQuantizer"></span><em class="property">class </em><code class="sig-name descname">ModelQuantizer</code><a class="headerlink" href="#_CPPv4N6marian14ModelQuantizerE" title="Permalink to this definition">¶</a><br /></dt>
+<dd><div class="breathe-sectiondef docutils container">
+<p class="breathe-sectiondef-title rubric">Public Functions</p>
+<dl class="function">
+<dt id="_CPPv4N6marian14ModelQuantizer14ModelQuantizerE3PtrI7OptionsE">
+<span id="_CPPv3N6marian14ModelQuantizer14ModelQuantizerE3PtrI7OptionsE"></span><span id="_CPPv2N6marian14ModelQuantizer14ModelQuantizerE3PtrI7OptionsE"></span><span id="marian::ModelQuantizer::ModelQuantizer__Ptr:Options:"></span><span class="target" id="classmarian_1_1ModelQuantizer_1a90a3461315ee185fcd07ff65318c6203"></span><code class="sig-name descname">ModelQuantizer</code><span class="sig-paren">(</span><a class="reference internal" href="typedef_definitions_8h_1ad1a373be43a00ef9ce35666145137b08.html#_CPPv4N6marian3PtrE" title="marian::Ptr">Ptr</a>&lt;<a class="reference internal" href="classmarian_1_1Options.html#_CPPv4N6marian7OptionsE" title="marian::Options">Options</a>&gt; <em>options</em><span class="sig-paren">)</span><a class="headerlink" href="#_CPPv4N6marian14ModelQuantizer14ModelQuantizerE3PtrI7OptionsE" title="Permalink to this definition">¶</a><br /></dt>
+<dd></dd></dl>
+
+<dl class="function">
+<dt id="_CPPv4N6marian14ModelQuantizer8quantizeE3PtrI15ExpressionGraphE">
+<span id="_CPPv3N6marian14ModelQuantizer8quantizeE3PtrI15ExpressionGraphE"></span><span id="_CPPv2N6marian14ModelQuantizer8quantizeE3PtrI15ExpressionGraphE"></span><span id="marian::ModelQuantizer::quantize__Ptr:ExpressionGraph:"></span><span class="target" id="classmarian_1_1ModelQuantizer_1ae34a634176afe5524829793b5c68cf18"></span>void <code class="sig-name descname">quantize</code><span class="sig-paren">(</span><a class="reference internal" href="typedef_definitions_8h_1ad1a373be43a00ef9ce35666145137b08.html#_CPPv4N6marian3PtrE" title="marian::Ptr">Ptr</a>&lt;<a class="reference internal" href="classmarian_1_1ExpressionGraph.html#_CPPv4N6marian15ExpressionGraphE" title="marian::ExpressionGraph">ExpressionGraph</a>&gt; <em>graph</em><span class="sig-paren">)</span><a class="headerlink" href="#_CPPv4N6marian14ModelQuantizer8quantizeE3PtrI15ExpressionGraphE" title="Permalink to this definition">¶</a><br /></dt>
+<dd></dd></dl>
+
+</div>
+<div class="breathe-sectiondef docutils container">
+<p class="breathe-sectiondef-title rubric">Protected Functions</p>
+<dl class="function">
+<dt id="_CPPv4N6marian14ModelQuantizer12quantizeImplE6Tensor">
+<span id="_CPPv3N6marian14ModelQuantizer12quantizeImplE6Tensor"></span><span id="_CPPv2N6marian14ModelQuantizer12quantizeImplE6Tensor"></span><span id="marian::ModelQuantizer::quantizeImpl__Tensor"></span><span class="target" id="classmarian_1_1ModelQuantizer_1aae83f24dc939be78b7afb016dd033b48"></span>void <code class="sig-name descname">quantizeImpl</code><span class="sig-paren">(</span>Tensor <em>t</em><span class="sig-paren">)</span><a class="headerlink" href="#_CPPv4N6marian14ModelQuantizer12quantizeImplE6Tensor" title="Permalink to this definition">¶</a><br /></dt>
+<dd></dd></dl>
+
+</div>
+<div class="breathe-sectiondef docutils container">
+<p class="breathe-sectiondef-title rubric">Protected Attributes</p>
+<dl class="member">
+<dt id="_CPPv4N6marian14ModelQuantizer5bits_E">
+<span id="_CPPv3N6marian14ModelQuantizer5bits_E"></span><span id="_CPPv2N6marian14ModelQuantizer5bits_E"></span><span id="marian::ModelQuantizer::bits___s"></span><span class="target" id="classmarian_1_1ModelQuantizer_1abbebdbd7fa6ee2876a138f010e90ceda"></span>size_t <code class="sig-name descname">bits_</code><a class="headerlink" href="#_CPPv4N6marian14ModelQuantizer5bits_E" title="Permalink to this definition">¶</a><br /></dt>
+<dd></dd></dl>
+
+<dl class="member">
+<dt id="_CPPv4N6marian14ModelQuantizer9optSteps_E">
+<span id="_CPPv3N6marian14ModelQuantizer9optSteps_E"></span><span id="_CPPv2N6marian14ModelQuantizer9optSteps_E"></span><span id="marian::ModelQuantizer::optSteps___s"></span><span class="target" id="classmarian_1_1ModelQuantizer_1a16fcab910577e19cf71a90e573de90cd"></span>size_t <code class="sig-name descname">optSteps_</code><a class="headerlink" href="#_CPPv4N6marian14ModelQuantizer9optSteps_E" title="Permalink to this definition">¶</a><br /></dt>
+<dd></dd></dl>
+
+<dl class="member">
+<dt id="_CPPv4N6marian14ModelQuantizer10quantBias_E">
+<span id="_CPPv3N6marian14ModelQuantizer10quantBias_E"></span><span id="_CPPv2N6marian14ModelQuantizer10quantBias_E"></span><span id="marian::ModelQuantizer::quantBias___b"></span><span class="target" id="classmarian_1_1ModelQuantizer_1ab72c0c199ae8157bf1898803ee568c71"></span>bool <code class="sig-name descname">quantBias_</code><a class="headerlink" href="#_CPPv4N6marian14ModelQuantizer10quantBias_E" title="Permalink to this definition">¶</a><br /></dt>
+<dd></dd></dl>
+
+<dl class="member">
+<dt id="_CPPv4N6marian14ModelQuantizer9logQuant_E">
+<span id="_CPPv3N6marian14ModelQuantizer9logQuant_E"></span><span id="_CPPv2N6marian14ModelQuantizer9logQuant_E"></span><span id="marian::ModelQuantizer::logQuant___b"></span><span class="target" id="classmarian_1_1ModelQuantizer_1a34f70436888e2b7a678bec8bb47e3e45"></span>bool <code class="sig-name descname">logQuant_</code><a class="headerlink" href="#_CPPv4N6marian14ModelQuantizer9logQuant_E" title="Permalink to this definition">¶</a><br /></dt>
+<dd></dd></dl>
+
+<dl class="member">
+<dt id="_CPPv4N6marian14ModelQuantizer13isFirstError_E">
+<span id="_CPPv3N6marian14ModelQuantizer13isFirstError_E"></span><span id="_CPPv2N6marian14ModelQuantizer13isFirstError_E"></span><span id="marian::ModelQuantizer::isFirstError___b"></span><span class="target" id="classmarian_1_1ModelQuantizer_1aadfe5dd56a7c145362cf4c28e950705c"></span>bool <code class="sig-name descname">isFirstError_</code><a class="headerlink" href="#_CPPv4N6marian14ModelQuantizer13isFirstError_E" title="Permalink to this definition">¶</a><br /></dt>
+<dd></dd></dl>
+
+<dl class="member">
+<dt id="_CPPv4N6marian14ModelQuantizer11allocators_E">
+<span id="_CPPv3N6marian14ModelQuantizer11allocators_E"></span><span id="_CPPv2N6marian14ModelQuantizer11allocators_E"></span><span id="marian::ModelQuantizer::allocators___std::vector:Ptr:TensorAllocator::"></span><span class="target" id="classmarian_1_1ModelQuantizer_1ae7afe606aa36919691936322ce6e3e9e"></span><a class="reference internal" href="function_expression__operators_8cpp_1af4e69a5f7167b63522135a1f6b8a5dd8.html#_CPPv4N6marianStE4Expri" title="marian::std">std</a>::vector&lt;<a class="reference internal" href="typedef_definitions_8h_1ad1a373be43a00ef9ce35666145137b08.html#_CPPv4N6marian3PtrE" title="marian::Ptr">Ptr</a>&lt;<a class="reference internal" href="classmarian_1_1TensorAllocator.html#_CPPv4N6marian15TensorAllocatorE" title="marian::TensorAllocator">TensorAllocator</a>&gt;&gt; <code class="sig-name descname">allocators_</code><a class="headerlink" href="#_CPPv4N6marian14ModelQuantizer11allocators_E" title="Permalink to this definition">¶</a><br /></dt>
+<dd></dd></dl>
+
+<dl class="member">
+<dt id="_CPPv4N6marian14ModelQuantizer14errorResidual_E">
+<span id="_CPPv3N6marian14ModelQuantizer14errorResidual_E"></span><span id="_CPPv2N6marian14ModelQuantizer14errorResidual_E"></span><span id="marian::ModelQuantizer::errorResidual___Tensor"></span><span class="target" id="classmarian_1_1ModelQuantizer_1ab066edb763417ddc17bb830adbedb60d"></span>Tensor <code class="sig-name descname">errorResidual_</code><a class="headerlink" href="#_CPPv4N6marian14ModelQuantizer14errorResidual_E" title="Permalink to this definition">¶</a><br /></dt>
+<dd></dd></dl>
+
+<dl class="member">
+<dt id="_CPPv4N6marian14ModelQuantizer6delta_E">
+<span id="_CPPv3N6marian14ModelQuantizer6delta_E"></span><span id="_CPPv2N6marian14ModelQuantizer6delta_E"></span><span id="marian::ModelQuantizer::delta___Tensor"></span><span class="target" id="classmarian_1_1ModelQuantizer_1a1e873e07c24363400e918beacd0fc234"></span>Tensor <code class="sig-name descname">delta_</code><a class="headerlink" href="#_CPPv4N6marian14ModelQuantizer6delta_E" title="Permalink to this definition">¶</a><br /></dt>
+<dd></dd></dl>
+
+<dl class="member">
+<dt id="_CPPv4N6marian14ModelQuantizer8tempVar_E">
+<span id="_CPPv3N6marian14ModelQuantizer8tempVar_E"></span><span id="_CPPv2N6marian14ModelQuantizer8tempVar_E"></span><span id="marian::ModelQuantizer::tempVar___Tensor"></span><span class="target" id="classmarian_1_1ModelQuantizer_1a9b958d120a5988fab5229ee439183d38"></span>Tensor <code class="sig-name descname">tempVar_</code><a class="headerlink" href="#_CPPv4N6marian14ModelQuantizer8tempVar_E" title="Permalink to this definition">¶</a><br /></dt>
+<dd></dd></dl>
+
+</div>
+</dd></dl>
+
+</div>
+</div>
+
+
+           </div>
+           
+          </div>
+          <footer>
+    <div class="rst-footer-buttons" role="navigation" aria-label="footer navigation">
+        <a href="classmarian_1_1models_1_1ClassifierFactory.html" class="btn btn-neutral float-right" title="Class ClassifierFactory" accesskey="n" rel="next">Next <span class="fa fa-arrow-circle-right" aria-hidden="true"></span></a>
+        <a href="classmarian_1_1MNISTAccuracyValidator.html" class="btn btn-neutral float-left" title="Class MNISTAccuracyValidator" accesskey="p" rel="prev"><span class="fa fa-arrow-circle-left" aria-hidden="true"></span> Previous</a>
+    </div>
+
+  <hr/>
+
+  <div role="contentinfo">
+    <p>
+        &#169; Copyright 2021, Marian NMT Team.
+
+    </p>
+  </div>
+    
+    
+    
+    Built with <a href="https://www.sphinx-doc.org/">Sphinx</a> using a
+    
+    <a href="https://github.com/readthedocs/sphinx_rtd_theme">theme</a>
+    
+    provided by <a href="https://readthedocs.org">Read the Docs</a>. 
+
+</footer>
+        </div>
+      </div>
+
+    </section>
+
+  </div>
+  
+
+  <script type="text/javascript">
+      jQuery(function () {
+          SphinxRtdTheme.Navigation.enable(true);
+      });
+  </script>
+
+  
+  
+    
+   
+
+</body>
+</html>

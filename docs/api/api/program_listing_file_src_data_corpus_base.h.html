@@ -1,0 +1,637 @@
+
+
+<!DOCTYPE html>
+<html class="writer-html5" lang="en" >
+<head>
+  <meta charset="utf-8" />
+  
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  
+  <title>Program Listing for File corpus_base.h &mdash; Marian NMT v1.10.1 2021-02-23 documentation</title>
+  
+
+  
+  <link rel="stylesheet" href="../_static/css/theme.css" type="text/css" />
+  <link rel="stylesheet" href="../_static/pygments.css" type="text/css" />
+  <link rel="stylesheet" href="../_static/css/custom.css" type="text/css" />
+  <link rel="stylesheet" href="../_static/collapsible-lists/css/tree_view.css" type="text/css" />
+
+  
+  
+
+  
+  
+
+  
+    <link rel="canonical" href="http://marian-nmt.github.io/docs/api/api/program_listing_file_src_data_corpus_base.h.html" />
+
+  
+  <!--[if lt IE 9]>
+    <script src="../_static/js/html5shiv.min.js"></script>
+  <![endif]-->
+  
+    
+      <script type="text/javascript" id="documentation_options" data-url_root="../" src="../_static/documentation_options.js"></script>
+        <script src="../_static/jquery.js"></script>
+        <script src="../_static/underscore.js"></script>
+        <script src="../_static/doctools.js"></script>
+        <script src="../_static/language_data.js"></script>
+        <script src="../_static/collapsible-lists/js/CollapsibleLists.compressed.js"></script>
+        <script src="../_static/collapsible-lists/js/apply-collapsible-lists.js"></script>
+    
+    <script type="text/javascript" src="../_static/js/theme.js"></script>
+
+    
+    <link rel="index" title="Index" href="../genindex.html" />
+    <link rel="search" title="Search" href="../search.html" /> 
+</head>
+
+<body class="wy-body-for-nav">
+
+   
+  <div class="wy-grid-for-nav">
+    
+    <nav data-toggle="wy-nav-shift" class="wy-nav-side">
+      <div class="wy-side-scroll">
+        <div class="wy-side-nav-search" >
+          
+
+          
+            <a href="../index.html" class="icon icon-home"> Marian NMT
+          
+
+          
+          </a>
+
+          
+            
+            
+              <div class="version">
+                v1.10.1
+              </div>
+            
+          
+
+          
+<div role="search">
+  <form id="rtd-search-form" class="wy-form" action="../search.html" method="get">
+    <input type="text" name="q" placeholder="Search docs" />
+    <input type="hidden" name="check_keywords" value="yes" />
+    <input type="hidden" name="area" value="default" />
+  </form>
+</div>
+
+          
+        </div>
+
+        
+        <div class="wy-menu wy-menu-vertical" data-spy="affix" role="navigation" aria-label="main navigation">
+          
+            
+            
+              
+            
+            
+              <p class="caption"><span class="caption-text">Contents:</span></p>
+<ul>
+<li class="toctree-l1"><a class="reference internal" href="../install.html">Installation</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../graph.html">Expression graphs</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../operators.html">Graph operations</a></li>
+<li class="toctree-l1"><a class="reference internal" href="library_index.html">Library API</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../contributing.html">How to contribute to Marian</a></li>
+</ul>
+
+            
+          
+        </div>
+        
+      </div>
+    </nav>
+
+    <section data-toggle="wy-nav-shift" class="wy-nav-content-wrap">
+
+      
+      <nav class="wy-nav-top" aria-label="top navigation">
+        
+          <i data-toggle="wy-nav-top" class="fa fa-bars"></i>
+          <a href="../index.html">Marian NMT</a>
+        
+      </nav>
+
+
+      <div class="wy-nav-content">
+        
+        <div class="rst-content">
+        
+          
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+<div role="navigation" aria-label="breadcrumbs navigation">
+
+  <ul class="wy-breadcrumbs">
+    
+      <li><a href="../index.html" class="icon icon-home"></a> &raquo;</li>
+        
+      <li>Program Listing for File corpus_base.h</li>
+    
+    
+      <li class="wy-breadcrumbs-aside">
+        
+          
+            <a href="../_sources/api/program_listing_file_src_data_corpus_base.h.rst.txt" rel="nofollow"> View page source</a>
+          
+        
+      </li>
+    
+  </ul>
+
+  
+  <hr/>
+</div>
+          <div role="main" class="document" itemscope="itemscope" itemtype="http://schema.org/Article">
+           <div itemprop="articleBody">
+            
+  <div class="section" id="program-listing-for-file-corpus-base-h">
+<span id="program-listing-file-src-data-corpus-base-h"></span><h1>Program Listing for File corpus_base.h<a class="headerlink" href="#program-listing-for-file-corpus-base-h" title="Permalink to this headline">¶</a></h1>
+<p>↰ <a class="reference internal" href="file_src_data_corpus_base.h.html#file-src-data-corpus-base-h"><span class="std std-ref">Return to documentation for file</span></a> (<code class="docutils literal notranslate"><span class="pre">src/data/corpus_base.h</span></code>)</p>
+<div class="highlight-cpp notranslate"><div class="highlight"><pre><span></span><span class="cp">#pragma once</span>
+
+<span class="cp">#include</span> <span class="cpf">&quot;common/definitions.h&quot;</span><span class="cp"></span>
+<span class="cp">#include</span> <span class="cpf">&quot;common/file_stream.h&quot;</span><span class="cp"></span>
+<span class="cp">#include</span> <span class="cpf">&quot;common/options.h&quot;</span><span class="cp"></span>
+<span class="cp">#include</span> <span class="cpf">&quot;common/utils.h&quot;</span><span class="cp"></span>
+<span class="cp">#include</span> <span class="cpf">&quot;data/alignment.h&quot;</span><span class="cp"></span>
+<span class="cp">#include</span> <span class="cpf">&quot;data/iterator_facade.h&quot;</span><span class="cp"></span>
+<span class="cp">#include</span> <span class="cpf">&quot;data/batch.h&quot;</span><span class="cp"></span>
+<span class="cp">#include</span> <span class="cpf">&quot;data/dataset.h&quot;</span><span class="cp"></span>
+<span class="cp">#include</span> <span class="cpf">&quot;data/rng_engine.h&quot;</span><span class="cp"></span>
+<span class="cp">#include</span> <span class="cpf">&quot;data/vocab.h&quot;</span><span class="cp"></span>
+
+<span class="k">namespace</span> <span class="n">marian</span> <span class="p">{</span>
+<span class="k">namespace</span> <span class="n">data</span> <span class="p">{</span>
+
+<span class="k">class</span> <span class="nc">SentenceTuple</span> <span class="p">{</span>
+<span class="k">private</span><span class="o">:</span>
+  <span class="kt">size_t</span> <span class="n">id_</span><span class="p">;</span>
+  <span class="n">std</span><span class="o">::</span><span class="n">vector</span><span class="o">&lt;</span><span class="n">Words</span><span class="o">&gt;</span> <span class="n">tuple_</span><span class="p">;</span>    <span class="c1">// [stream index][step index]</span>
+  <span class="n">std</span><span class="o">::</span><span class="n">vector</span><span class="o">&lt;</span><span class="kt">float</span><span class="o">&gt;</span> <span class="n">weights_</span><span class="p">;</span>  <span class="c1">// [stream index]</span>
+  <span class="n">WordAlignment</span> <span class="n">alignment_</span><span class="p">;</span>
+
+<span class="k">public</span><span class="o">:</span>
+  <span class="k">typedef</span> <span class="n">Words</span> <span class="n">value_type</span><span class="p">;</span>
+
+  <span class="n">SentenceTuple</span><span class="p">(</span><span class="kt">size_t</span> <span class="n">id</span><span class="p">)</span> <span class="o">:</span> <span class="n">id_</span><span class="p">(</span><span class="n">id</span><span class="p">)</span> <span class="p">{}</span>
+
+  <span class="o">~</span><span class="n">SentenceTuple</span><span class="p">()</span> <span class="p">{</span> <span class="n">tuple_</span><span class="p">.</span><span class="n">clear</span><span class="p">();</span> <span class="p">}</span>
+
+  <span class="kt">size_t</span> <span class="n">getId</span><span class="p">()</span> <span class="k">const</span> <span class="p">{</span> <span class="k">return</span> <span class="n">id_</span><span class="p">;</span> <span class="p">}</span>
+
+  <span class="kt">void</span> <span class="n">push_back</span><span class="p">(</span><span class="k">const</span> <span class="n">Words</span><span class="o">&amp;</span> <span class="n">words</span><span class="p">)</span> <span class="p">{</span> <span class="n">tuple_</span><span class="p">.</span><span class="n">push_back</span><span class="p">(</span><span class="n">words</span><span class="p">);</span> <span class="p">}</span>
+
+  <span class="kt">size_t</span> <span class="n">size</span><span class="p">()</span> <span class="k">const</span> <span class="p">{</span> <span class="k">return</span> <span class="n">tuple_</span><span class="p">.</span><span class="n">size</span><span class="p">();</span> <span class="p">}</span>
+
+  <span class="n">Words</span><span class="o">&amp;</span> <span class="k">operator</span><span class="p">[](</span><span class="kt">size_t</span> <span class="n">i</span><span class="p">)</span> <span class="p">{</span> <span class="k">return</span> <span class="n">tuple_</span><span class="p">[</span><span class="n">i</span><span class="p">];</span> <span class="p">}</span>
+  <span class="k">const</span> <span class="n">Words</span><span class="o">&amp;</span> <span class="k">operator</span><span class="p">[](</span><span class="kt">size_t</span> <span class="n">i</span><span class="p">)</span> <span class="k">const</span> <span class="p">{</span> <span class="k">return</span> <span class="n">tuple_</span><span class="p">[</span><span class="n">i</span><span class="p">];</span> <span class="p">}</span>
+
+  <span class="n">Words</span><span class="o">&amp;</span> <span class="n">back</span><span class="p">()</span> <span class="p">{</span> <span class="k">return</span> <span class="n">tuple_</span><span class="p">.</span><span class="n">back</span><span class="p">();</span> <span class="p">}</span>
+  <span class="k">const</span> <span class="n">Words</span><span class="o">&amp;</span> <span class="n">back</span><span class="p">()</span> <span class="k">const</span> <span class="p">{</span> <span class="k">return</span> <span class="n">tuple_</span><span class="p">.</span><span class="n">back</span><span class="p">();</span> <span class="p">}</span>
+
+  <span class="kt">bool</span> <span class="n">empty</span><span class="p">()</span> <span class="k">const</span> <span class="p">{</span> <span class="k">return</span> <span class="n">tuple_</span><span class="p">.</span><span class="n">empty</span><span class="p">();</span> <span class="p">}</span>
+
+  <span class="k">auto</span> <span class="n">begin</span><span class="p">()</span> <span class="k">const</span> <span class="o">-&gt;</span> <span class="k">decltype</span><span class="p">(</span><span class="n">tuple_</span><span class="p">.</span><span class="n">begin</span><span class="p">())</span> <span class="p">{</span> <span class="k">return</span> <span class="n">tuple_</span><span class="p">.</span><span class="n">begin</span><span class="p">();</span> <span class="p">}</span>
+  <span class="k">auto</span> <span class="n">end</span><span class="p">()</span> <span class="k">const</span> <span class="o">-&gt;</span> <span class="k">decltype</span><span class="p">(</span><span class="n">tuple_</span><span class="p">.</span><span class="n">end</span><span class="p">())</span> <span class="p">{</span> <span class="k">return</span> <span class="n">tuple_</span><span class="p">.</span><span class="n">end</span><span class="p">();</span> <span class="p">}</span>
+
+  <span class="k">auto</span> <span class="n">rbegin</span><span class="p">()</span> <span class="k">const</span> <span class="o">-&gt;</span> <span class="k">decltype</span><span class="p">(</span><span class="n">tuple_</span><span class="p">.</span><span class="n">rbegin</span><span class="p">())</span> <span class="p">{</span> <span class="k">return</span> <span class="n">tuple_</span><span class="p">.</span><span class="n">rbegin</span><span class="p">();</span> <span class="p">}</span>
+  <span class="k">auto</span> <span class="n">rend</span><span class="p">()</span> <span class="k">const</span> <span class="o">-&gt;</span> <span class="k">decltype</span><span class="p">(</span><span class="n">tuple_</span><span class="p">.</span><span class="n">rend</span><span class="p">())</span> <span class="p">{</span> <span class="k">return</span> <span class="n">tuple_</span><span class="p">.</span><span class="n">rend</span><span class="p">();</span> <span class="p">}</span>
+
+  <span class="k">const</span> <span class="n">std</span><span class="o">::</span><span class="n">vector</span><span class="o">&lt;</span><span class="kt">float</span><span class="o">&gt;&amp;</span> <span class="n">getWeights</span><span class="p">()</span> <span class="k">const</span> <span class="p">{</span> <span class="k">return</span> <span class="n">weights_</span><span class="p">;</span> <span class="p">}</span>
+
+  <span class="kt">void</span> <span class="n">setWeights</span><span class="p">(</span><span class="k">const</span> <span class="n">std</span><span class="o">::</span><span class="n">vector</span><span class="o">&lt;</span><span class="kt">float</span><span class="o">&gt;&amp;</span> <span class="n">weights</span><span class="p">);</span>
+
+  <span class="k">const</span> <span class="n">WordAlignment</span><span class="o">&amp;</span> <span class="n">getAlignment</span><span class="p">()</span> <span class="k">const</span> <span class="p">{</span> <span class="k">return</span> <span class="n">alignment_</span><span class="p">;</span> <span class="p">}</span>
+  <span class="kt">void</span> <span class="n">setAlignment</span><span class="p">(</span><span class="k">const</span> <span class="n">WordAlignment</span><span class="o">&amp;</span> <span class="n">alignment</span><span class="p">)</span> <span class="p">{</span> <span class="n">alignment_</span> <span class="o">=</span> <span class="n">alignment</span><span class="p">;</span> <span class="p">}</span>
+<span class="p">};</span>
+
+<span class="k">class</span> <span class="nc">SubBatch</span> <span class="p">{</span>
+<span class="k">private</span><span class="o">:</span>
+  <span class="n">Words</span> <span class="n">indices_</span><span class="p">;</span>
+  <span class="n">std</span><span class="o">::</span><span class="n">vector</span><span class="o">&lt;</span><span class="kt">float</span><span class="o">&gt;</span> <span class="n">mask_</span><span class="p">;</span>
+
+  <span class="kt">size_t</span> <span class="n">size_</span><span class="p">;</span>
+  <span class="kt">size_t</span> <span class="n">width_</span><span class="p">;</span>
+  <span class="kt">size_t</span> <span class="n">words_</span><span class="p">;</span>
+
+  <span class="n">Ptr</span><span class="o">&lt;</span><span class="k">const</span> <span class="n">Vocab</span><span class="o">&gt;</span> <span class="n">vocab_</span><span class="p">;</span>
+  <span class="c1">// ... TODO: add the length information (remember it)</span>
+
+<span class="k">public</span><span class="o">:</span>
+  <span class="n">SubBatch</span><span class="p">(</span><span class="kt">size_t</span> <span class="n">size</span><span class="p">,</span> <span class="kt">size_t</span> <span class="n">width</span><span class="p">,</span> <span class="k">const</span> <span class="n">Ptr</span><span class="o">&lt;</span><span class="k">const</span> <span class="n">Vocab</span><span class="o">&gt;&amp;</span> <span class="n">vocab</span><span class="p">)</span>
+    <span class="o">:</span> <span class="n">indices_</span><span class="p">(</span><span class="n">size</span> <span class="o">*</span> <span class="n">width</span><span class="p">,</span> <span class="n">vocab</span> <span class="o">?</span> <span class="n">vocab</span><span class="o">-&gt;</span><span class="n">getEosId</span><span class="p">()</span> <span class="o">:</span> <span class="n">Word</span><span class="o">::</span><span class="n">ZERO</span><span class="p">),</span> <span class="c1">// note: for gaps, we must use a valid index</span>
+    <span class="n">mask_</span><span class="p">(</span><span class="n">size</span> <span class="o">*</span> <span class="n">width</span><span class="p">,</span> <span class="mi">0</span><span class="p">),</span>
+    <span class="n">size_</span><span class="p">(</span><span class="n">size</span><span class="p">),</span>
+    <span class="n">width_</span><span class="p">(</span><span class="n">width</span><span class="p">),</span>
+    <span class="n">words_</span><span class="p">(</span><span class="mi">0</span><span class="p">),</span>
+    <span class="n">vocab_</span><span class="p">(</span><span class="n">vocab</span><span class="p">)</span> <span class="p">{}</span>
+
+  <span class="n">Words</span><span class="o">&amp;</span> <span class="n">data</span><span class="p">()</span> <span class="p">{</span> <span class="k">return</span> <span class="n">indices_</span><span class="p">;</span> <span class="p">}</span>
+  <span class="k">const</span> <span class="n">Words</span><span class="o">&amp;</span> <span class="n">data</span><span class="p">()</span> <span class="k">const</span> <span class="p">{</span> <span class="k">return</span> <span class="n">indices_</span><span class="p">;</span> <span class="p">}</span>
+  <span class="kt">size_t</span> <span class="n">locate</span><span class="p">(</span><span class="kt">size_t</span> <span class="n">batchIdx</span><span class="p">,</span> <span class="kt">size_t</span> <span class="n">wordPos</span><span class="p">)</span> <span class="k">const</span> <span class="p">{</span> <span class="k">return</span> <span class="nf">locate</span><span class="p">(</span><span class="n">batchIdx</span><span class="p">,</span> <span class="n">wordPos</span><span class="p">,</span> <span class="n">size_</span><span class="p">);</span> <span class="p">}</span>
+  <span class="k">static</span> <span class="kt">size_t</span> <span class="n">locate</span><span class="p">(</span><span class="kt">size_t</span> <span class="n">batchIdx</span><span class="p">,</span> <span class="kt">size_t</span> <span class="n">wordPos</span><span class="p">,</span> <span class="kt">size_t</span> <span class="n">batchSize</span><span class="p">)</span> <span class="p">{</span> <span class="k">return</span> <span class="n">wordPos</span> <span class="o">*</span> <span class="n">batchSize</span> <span class="o">+</span> <span class="n">batchIdx</span><span class="p">;</span> <span class="p">}</span>
+  <span class="n">std</span><span class="o">::</span><span class="n">vector</span><span class="o">&lt;</span><span class="kt">float</span><span class="o">&gt;&amp;</span> <span class="n">mask</span><span class="p">()</span> <span class="p">{</span> <span class="k">return</span> <span class="n">mask_</span><span class="p">;</span> <span class="p">}</span>
+  <span class="k">const</span> <span class="n">std</span><span class="o">::</span><span class="n">vector</span><span class="o">&lt;</span><span class="kt">float</span><span class="o">&gt;&amp;</span> <span class="n">mask</span><span class="p">()</span> <span class="k">const</span> <span class="p">{</span> <span class="k">return</span> <span class="n">mask_</span><span class="p">;</span> <span class="p">}</span>
+
+  <span class="k">const</span> <span class="n">Ptr</span><span class="o">&lt;</span><span class="k">const</span> <span class="n">Vocab</span><span class="o">&gt;&amp;</span> <span class="n">vocab</span><span class="p">()</span> <span class="k">const</span> <span class="p">{</span> <span class="k">return</span> <span class="n">vocab_</span><span class="p">;</span> <span class="p">}</span>
+
+  <span class="kt">size_t</span> <span class="n">batchSize</span><span class="p">()</span> <span class="k">const</span> <span class="p">{</span> <span class="k">return</span> <span class="n">size_</span><span class="p">;</span> <span class="p">}</span>
+  <span class="kt">size_t</span> <span class="n">batchWidth</span><span class="p">()</span> <span class="k">const</span> <span class="p">{</span> <span class="k">return</span> <span class="n">width_</span><span class="p">;</span> <span class="p">};</span>
+  <span class="kt">size_t</span> <span class="nf">batchWords</span><span class="p">()</span> <span class="k">const</span> <span class="p">{</span> <span class="k">return</span> <span class="n">words_</span><span class="p">;</span> <span class="p">}</span>
+
+  <span class="n">std</span><span class="o">::</span><span class="n">vector</span><span class="o">&lt;</span><span class="n">Ptr</span><span class="o">&lt;</span><span class="n">SubBatch</span><span class="o">&gt;&gt;</span> <span class="n">split</span><span class="p">(</span><span class="kt">size_t</span> <span class="n">n</span><span class="p">,</span> <span class="kt">size_t</span> <span class="n">sizeLimit</span> <span class="cm">/*or SIZE_MAX*/</span><span class="p">)</span> <span class="k">const</span> <span class="p">{</span>
+    <span class="n">ABORT_IF</span><span class="p">(</span><span class="n">size_</span> <span class="o">==</span> <span class="mi">0</span><span class="p">,</span> <span class="s">&quot;Encountered sub-batch size of 0&quot;</span><span class="p">);</span>
+
+    <span class="k">auto</span> <span class="n">size</span> <span class="o">=</span> <span class="n">std</span><span class="o">::</span><span class="n">min</span><span class="p">(</span><span class="n">size_</span><span class="p">,</span> <span class="n">sizeLimit</span><span class="p">);</span> <span class="c1">// if limit is given then pretend the batch only has that many sentences</span>
+    <span class="kt">size_t</span> <span class="n">targetSubSize</span> <span class="o">=</span> <span class="p">(</span><span class="kt">size_t</span><span class="p">)(</span><span class="n">std</span><span class="o">::</span><span class="n">ceil</span><span class="p">(</span><span class="n">size</span> <span class="o">/</span> <span class="p">(</span><span class="kt">float</span><span class="p">)</span><span class="n">n</span><span class="p">));</span> <span class="c1">// aim at forming sub-batches of this #sentences</span>
+
+    <span class="n">std</span><span class="o">::</span><span class="n">vector</span><span class="o">&lt;</span><span class="n">Ptr</span><span class="o">&lt;</span><span class="n">SubBatch</span><span class="o">&gt;&gt;</span> <span class="n">splits</span><span class="p">;</span>
+    <span class="k">for</span><span class="p">(</span><span class="kt">size_t</span> <span class="n">pos</span> <span class="o">=</span> <span class="mi">0</span><span class="p">;</span> <span class="n">pos</span> <span class="o">&lt;</span> <span class="n">size</span><span class="p">;</span> <span class="n">pos</span> <span class="o">+=</span> <span class="n">targetSubSize</span><span class="p">)</span> <span class="p">{</span> <span class="c1">// loop over ranges of size targetSubSize to form sub-batches of this size</span>
+      <span class="kt">size_t</span> <span class="n">subSize</span> <span class="o">=</span> <span class="n">std</span><span class="o">::</span><span class="n">min</span><span class="p">(</span><span class="n">targetSubSize</span><span class="p">,</span> <span class="n">size</span> <span class="o">-</span> <span class="n">pos</span><span class="p">);</span> <span class="c1">// actual number of sentences can be smaller at the end</span>
+
+      <span class="c1">// determine actual width (=max length) of this sub-batch, which may be smaller than the overall max length</span>
+      <span class="kt">size_t</span> <span class="n">subWidth</span> <span class="o">=</span> <span class="mi">0</span><span class="p">;</span>
+      <span class="k">for</span><span class="p">(</span><span class="kt">size_t</span> <span class="n">s</span> <span class="o">=</span> <span class="mi">0</span><span class="p">;</span> <span class="n">s</span> <span class="o">&lt;</span> <span class="n">width_</span><span class="p">;</span> <span class="o">++</span><span class="n">s</span><span class="p">)</span> <span class="p">{</span>
+        <span class="k">for</span><span class="p">(</span><span class="kt">size_t</span> <span class="n">b</span> <span class="o">=</span> <span class="mi">0</span><span class="p">;</span> <span class="n">b</span> <span class="o">&lt;</span> <span class="n">subSize</span><span class="p">;</span> <span class="o">++</span><span class="n">b</span><span class="p">)</span> <span class="p">{</span>
+          <span class="k">if</span><span class="p">(</span><span class="n">mask_</span><span class="p">[</span><span class="n">locate</span><span class="p">(</span><span class="cm">/*batchIdx=*/</span><span class="n">pos</span> <span class="o">+</span> <span class="n">b</span><span class="p">,</span> <span class="cm">/*wordPos=*/</span><span class="n">s</span><span class="p">)]</span> <span class="o">!=</span> <span class="mi">0</span><span class="p">)</span>   <span class="c1">// s * size_ + (pos + b)</span>
+            <span class="k">if</span> <span class="p">(</span><span class="n">subWidth</span> <span class="o">&lt;</span> <span class="n">s</span> <span class="o">+</span> <span class="mi">1</span><span class="p">)</span>
+              <span class="n">subWidth</span> <span class="o">=</span> <span class="n">s</span> <span class="o">+</span> <span class="mi">1</span><span class="p">;</span>
+        <span class="p">}</span>
+      <span class="p">}</span>
+
+      <span class="c1">// create sub-batch</span>
+      <span class="k">auto</span> <span class="n">sb</span> <span class="o">=</span> <span class="n">New</span><span class="o">&lt;</span><span class="n">SubBatch</span><span class="o">&gt;</span><span class="p">(</span><span class="n">subSize</span><span class="p">,</span> <span class="n">subWidth</span><span class="p">,</span> <span class="n">vocab_</span><span class="p">);</span>
+
+      <span class="kt">size_t</span> <span class="n">words</span> <span class="o">=</span> <span class="mi">0</span><span class="p">;</span>
+      <span class="k">for</span><span class="p">(</span><span class="kt">size_t</span> <span class="n">s</span> <span class="o">=</span> <span class="mi">0</span><span class="p">;</span> <span class="n">s</span> <span class="o">&lt;</span> <span class="n">subWidth</span><span class="p">;</span> <span class="o">++</span><span class="n">s</span><span class="p">)</span> <span class="p">{</span>
+        <span class="k">for</span><span class="p">(</span><span class="kt">size_t</span> <span class="n">b</span> <span class="o">=</span> <span class="mi">0</span><span class="p">;</span> <span class="n">b</span> <span class="o">&lt;</span> <span class="n">subSize</span><span class="p">;</span> <span class="o">++</span><span class="n">b</span><span class="p">)</span> <span class="p">{</span>
+          <span class="n">sb</span><span class="o">-&gt;</span><span class="n">data</span><span class="p">()[</span><span class="n">locate</span><span class="p">(</span><span class="cm">/*batchIdx=*/</span><span class="n">b</span><span class="p">,</span> <span class="cm">/*wordPos=*/</span><span class="n">s</span><span class="p">,</span> <span class="cm">/*batchSize=*/</span><span class="n">subSize</span><span class="p">)</span><span class="cm">/*s * subSize + b*/</span><span class="p">]</span> <span class="o">=</span> <span class="n">indices_</span><span class="p">[</span><span class="n">locate</span><span class="p">(</span><span class="cm">/*batchIdx=*/</span><span class="n">pos</span> <span class="o">+</span> <span class="n">b</span><span class="p">,</span> <span class="cm">/*wordPos=*/</span><span class="n">s</span><span class="p">)];</span> <span class="c1">// s * size_ + (pos + b)</span>
+          <span class="n">sb</span><span class="o">-&gt;</span><span class="n">mask</span><span class="p">()[</span><span class="n">locate</span><span class="p">(</span><span class="cm">/*batchIdx=*/</span><span class="n">b</span><span class="p">,</span> <span class="cm">/*wordPos=*/</span><span class="n">s</span><span class="p">,</span> <span class="cm">/*batchSize=*/</span><span class="n">subSize</span><span class="p">)</span><span class="cm">/*s * subSize + b*/</span><span class="p">]</span> <span class="o">=</span>    <span class="n">mask_</span><span class="p">[</span><span class="n">locate</span><span class="p">(</span><span class="cm">/*batchIdx=*/</span><span class="n">pos</span> <span class="o">+</span> <span class="n">b</span><span class="p">,</span> <span class="cm">/*wordPos=*/</span><span class="n">s</span><span class="p">)];</span> <span class="c1">// s * size_ + (pos + b)</span>
+
+          <span class="k">if</span><span class="p">(</span><span class="n">mask_</span><span class="p">[</span><span class="n">locate</span><span class="p">(</span><span class="cm">/*batchIdx=*/</span><span class="n">pos</span> <span class="o">+</span> <span class="n">b</span><span class="p">,</span> <span class="cm">/*wordPos=*/</span><span class="n">s</span><span class="p">)</span><span class="cm">/*s * size_ + (pos + b)*/</span><span class="p">]</span> <span class="o">!=</span> <span class="mi">0</span><span class="p">)</span>
+            <span class="n">words</span><span class="o">++</span><span class="p">;</span>
+        <span class="p">}</span>
+      <span class="p">}</span>
+      <span class="n">sb</span><span class="o">-&gt;</span><span class="n">setWords</span><span class="p">(</span><span class="n">words</span><span class="p">);</span>
+
+      <span class="n">splits</span><span class="p">.</span><span class="n">push_back</span><span class="p">(</span><span class="n">sb</span><span class="p">);</span>
+    <span class="p">}</span>
+    <span class="k">return</span> <span class="n">splits</span><span class="p">;</span>
+  <span class="p">}</span>
+
+  <span class="kt">void</span> <span class="n">setWords</span><span class="p">(</span><span class="kt">size_t</span> <span class="n">words</span><span class="p">)</span> <span class="p">{</span> <span class="n">words_</span> <span class="o">=</span> <span class="n">words</span><span class="p">;</span> <span class="p">}</span>
+
+  <span class="c1">// experimental: hide inline-fix source tokens from cross attention</span>
+  <span class="n">std</span><span class="o">::</span><span class="n">vector</span><span class="o">&lt;</span><span class="kt">float</span><span class="o">&gt;</span> <span class="n">crossMaskWithInlineFixSourceSuppressed</span><span class="p">()</span> <span class="k">const</span><span class="p">;</span>
+<span class="p">};</span>
+
+<span class="k">class</span> <span class="nc">CorpusBatch</span> <span class="o">:</span> <span class="k">public</span> <span class="n">Batch</span> <span class="p">{</span>
+<span class="k">protected</span><span class="o">:</span>
+  <span class="n">std</span><span class="o">::</span><span class="n">vector</span><span class="o">&lt;</span><span class="n">Ptr</span><span class="o">&lt;</span><span class="n">SubBatch</span><span class="o">&gt;&gt;</span> <span class="n">subBatches_</span><span class="p">;</span>
+  <span class="n">std</span><span class="o">::</span><span class="n">vector</span><span class="o">&lt;</span><span class="kt">float</span><span class="o">&gt;</span> <span class="n">guidedAlignment_</span><span class="p">;</span> <span class="c1">// [max source len, batch size, max target len] flattened</span>
+  <span class="n">std</span><span class="o">::</span><span class="n">vector</span><span class="o">&lt;</span><span class="kt">float</span><span class="o">&gt;</span> <span class="n">dataWeights_</span><span class="p">;</span>
+
+<span class="k">public</span><span class="o">:</span>
+  <span class="n">CorpusBatch</span><span class="p">(</span><span class="k">const</span> <span class="n">std</span><span class="o">::</span><span class="n">vector</span><span class="o">&lt;</span><span class="n">Ptr</span><span class="o">&lt;</span><span class="n">SubBatch</span><span class="o">&gt;&gt;&amp;</span> <span class="n">subBatches</span><span class="p">)</span>
+    <span class="o">:</span> <span class="n">subBatches_</span><span class="p">(</span><span class="n">subBatches</span><span class="p">)</span> <span class="p">{}</span>
+
+  <span class="n">Ptr</span><span class="o">&lt;</span><span class="n">SubBatch</span><span class="o">&gt;</span> <span class="k">operator</span><span class="p">[](</span><span class="kt">size_t</span> <span class="n">i</span><span class="p">)</span> <span class="k">const</span> <span class="p">{</span> <span class="k">return</span> <span class="n">subBatches_</span><span class="p">[</span><span class="n">i</span><span class="p">];</span> <span class="p">}</span>
+
+  <span class="n">Ptr</span><span class="o">&lt;</span><span class="n">SubBatch</span><span class="o">&gt;</span> <span class="n">front</span><span class="p">()</span> <span class="p">{</span> <span class="k">return</span> <span class="n">subBatches_</span><span class="p">.</span><span class="n">front</span><span class="p">();</span> <span class="p">}</span>
+
+  <span class="n">Ptr</span><span class="o">&lt;</span><span class="n">SubBatch</span><span class="o">&gt;</span> <span class="n">back</span><span class="p">()</span> <span class="p">{</span> <span class="k">return</span> <span class="n">subBatches_</span><span class="p">.</span><span class="n">back</span><span class="p">();</span> <span class="p">}</span>
+
+  <span class="kt">size_t</span> <span class="n">size</span><span class="p">()</span> <span class="k">const</span> <span class="k">override</span> <span class="p">{</span> <span class="k">return</span> <span class="n">subBatches_</span><span class="p">[</span><span class="mi">0</span><span class="p">]</span><span class="o">-&gt;</span><span class="n">batchSize</span><span class="p">();</span> <span class="p">}</span>
+
+  <span class="kt">size_t</span> <span class="n">words</span><span class="p">(</span><span class="kt">int</span> <span class="n">which</span> <span class="o">=</span> <span class="mi">0</span><span class="p">)</span> <span class="k">const</span> <span class="k">override</span> <span class="p">{</span>
+    <span class="k">return</span> <span class="n">subBatches_</span><span class="p">[</span><span class="n">which</span> <span class="o">&gt;=</span> <span class="mi">0</span> <span class="o">?</span> <span class="nl">which</span>
+      <span class="p">:</span> <span class="n">which</span> <span class="o">+</span> <span class="p">(</span><span class="kt">ptrdiff_t</span><span class="p">)</span><span class="n">subBatches_</span><span class="p">.</span><span class="n">size</span><span class="p">()]</span>
+      <span class="o">-&gt;</span><span class="n">batchWords</span><span class="p">();</span>
+  <span class="p">}</span>
+
+  <span class="kt">size_t</span> <span class="n">width</span><span class="p">()</span> <span class="k">const</span> <span class="k">override</span> <span class="p">{</span> <span class="k">return</span> <span class="n">subBatches_</span><span class="p">[</span><span class="mi">0</span><span class="p">]</span><span class="o">-&gt;</span><span class="n">batchWidth</span><span class="p">();</span> <span class="p">}</span>
+
+  <span class="kt">size_t</span> <span class="n">sizeTrg</span><span class="p">()</span> <span class="k">const</span> <span class="k">override</span> <span class="p">{</span> <span class="k">return</span> <span class="n">subBatches_</span><span class="p">.</span><span class="n">back</span><span class="p">()</span><span class="o">-&gt;</span><span class="n">batchSize</span><span class="p">();</span> <span class="p">}</span>
+
+  <span class="kt">size_t</span> <span class="n">wordsTrg</span><span class="p">()</span> <span class="k">const</span> <span class="k">override</span> <span class="p">{</span> <span class="k">return</span> <span class="n">subBatches_</span><span class="p">.</span><span class="n">back</span><span class="p">()</span><span class="o">-&gt;</span><span class="n">batchWords</span><span class="p">();</span> <span class="p">};</span>
+
+  <span class="kt">size_t</span> <span class="nf">widthTrg</span><span class="p">()</span> <span class="k">const</span> <span class="k">override</span> <span class="p">{</span> <span class="k">return</span> <span class="n">subBatches_</span><span class="p">.</span><span class="n">back</span><span class="p">()</span><span class="o">-&gt;</span><span class="n">batchWidth</span><span class="p">();</span> <span class="p">};</span>
+
+  <span class="kt">size_t</span> <span class="nf">sets</span><span class="p">()</span> <span class="k">const</span> <span class="p">{</span> <span class="k">return</span> <span class="n">subBatches_</span><span class="p">.</span><span class="n">size</span><span class="p">();</span> <span class="p">}</span>
+
+  <span class="k">static</span> <span class="n">Ptr</span><span class="o">&lt;</span><span class="n">CorpusBatch</span><span class="o">&gt;</span> <span class="n">fakeBatch</span><span class="p">(</span><span class="k">const</span> <span class="n">std</span><span class="o">::</span><span class="n">vector</span><span class="o">&lt;</span><span class="kt">size_t</span><span class="o">&gt;&amp;</span> <span class="n">lengths</span><span class="p">,</span>
+      <span class="k">const</span> <span class="n">std</span><span class="o">::</span><span class="n">vector</span><span class="o">&lt;</span><span class="n">Ptr</span><span class="o">&lt;</span><span class="n">Vocab</span><span class="o">&gt;&gt;&amp;</span> <span class="n">vocabs</span><span class="p">,</span>
+      <span class="kt">size_t</span> <span class="n">batchSize</span><span class="p">,</span>
+      <span class="n">Ptr</span><span class="o">&lt;</span><span class="n">Options</span><span class="o">&gt;</span> <span class="n">options</span><span class="p">)</span> <span class="p">{</span>
+    <span class="n">std</span><span class="o">::</span><span class="n">vector</span><span class="o">&lt;</span><span class="n">Ptr</span><span class="o">&lt;</span><span class="n">SubBatch</span><span class="o">&gt;&gt;</span> <span class="n">batches</span><span class="p">;</span>
+
+    <span class="kt">size_t</span> <span class="n">batchIndex</span> <span class="o">=</span> <span class="mi">0</span><span class="p">;</span>
+    <span class="k">for</span><span class="p">(</span><span class="k">auto</span> <span class="nl">len</span> <span class="p">:</span> <span class="n">lengths</span><span class="p">)</span> <span class="p">{</span>
+      <span class="k">auto</span> <span class="n">sb</span> <span class="o">=</span> <span class="n">New</span><span class="o">&lt;</span><span class="n">SubBatch</span><span class="o">&gt;</span><span class="p">(</span><span class="n">batchSize</span><span class="p">,</span> <span class="n">len</span><span class="p">,</span> <span class="n">vocabs</span><span class="p">[</span><span class="n">batchIndex</span><span class="p">]);</span>
+      <span class="c1">// set word indices to random values (not actually needed with current version  --@marcinjd: please confirm)</span>
+      <span class="n">std</span><span class="o">::</span><span class="n">transform</span><span class="p">(</span><span class="n">sb</span><span class="o">-&gt;</span><span class="n">data</span><span class="p">().</span><span class="n">begin</span><span class="p">(),</span> <span class="n">sb</span><span class="o">-&gt;</span><span class="n">data</span><span class="p">().</span><span class="n">end</span><span class="p">(),</span> <span class="n">sb</span><span class="o">-&gt;</span><span class="n">data</span><span class="p">().</span><span class="n">begin</span><span class="p">(),</span>
+          <span class="p">[</span><span class="o">&amp;</span><span class="p">](</span><span class="n">Word</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="n">Word</span> <span class="p">{</span> <span class="k">return</span> <span class="n">vocabs</span><span class="p">[</span><span class="n">batchIndex</span><span class="p">]</span><span class="o">-&gt;</span><span class="n">randWord</span><span class="p">();</span> <span class="p">});</span>
+      <span class="c1">// mask: no items ask being masked out</span>
+      <span class="n">std</span><span class="o">::</span><span class="n">fill</span><span class="p">(</span><span class="n">sb</span><span class="o">-&gt;</span><span class="n">mask</span><span class="p">().</span><span class="n">begin</span><span class="p">(),</span> <span class="n">sb</span><span class="o">-&gt;</span><span class="n">mask</span><span class="p">().</span><span class="n">end</span><span class="p">(),</span> <span class="mf">1.f</span><span class="p">);</span>
+      <span class="n">batchIndex</span><span class="o">++</span><span class="p">;</span>
+
+      <span class="n">batches</span><span class="p">.</span><span class="n">push_back</span><span class="p">(</span><span class="n">sb</span><span class="p">);</span>
+    <span class="p">}</span>
+
+    <span class="k">auto</span> <span class="n">batch</span> <span class="o">=</span> <span class="n">New</span><span class="o">&lt;</span><span class="n">CorpusBatch</span><span class="o">&gt;</span><span class="p">(</span><span class="n">batches</span><span class="p">);</span>
+
+    <span class="k">if</span><span class="p">(</span><span class="o">!</span><span class="n">options</span><span class="p">)</span>
+      <span class="k">return</span> <span class="n">batch</span><span class="p">;</span>
+
+    <span class="k">if</span><span class="p">(</span><span class="n">options</span><span class="o">-&gt;</span><span class="n">get</span><span class="p">(</span><span class="s">&quot;guided-alignment&quot;</span><span class="p">,</span> <span class="n">std</span><span class="o">::</span><span class="n">string</span><span class="p">(</span><span class="s">&quot;none&quot;</span><span class="p">))</span> <span class="o">!=</span> <span class="s">&quot;none&quot;</span><span class="p">)</span> <span class="p">{</span>
+      <span class="c1">// @TODO: if &gt; 1 encoder, verify that all encoders have the same sentence lengths</span>
+      <span class="n">std</span><span class="o">::</span><span class="n">vector</span><span class="o">&lt;</span><span class="kt">float</span><span class="o">&gt;</span> <span class="n">alignment</span><span class="p">(</span><span class="n">batchSize</span> <span class="o">*</span> <span class="n">lengths</span><span class="p">.</span><span class="n">front</span><span class="p">()</span> <span class="o">*</span> <span class="n">lengths</span><span class="p">.</span><span class="n">back</span><span class="p">(),</span>
+          <span class="mf">0.f</span><span class="p">);</span>
+      <span class="n">batch</span><span class="o">-&gt;</span><span class="n">setGuidedAlignment</span><span class="p">(</span><span class="n">std</span><span class="o">::</span><span class="n">move</span><span class="p">(</span><span class="n">alignment</span><span class="p">));</span>
+    <span class="p">}</span>
+
+    <span class="k">if</span><span class="p">(</span><span class="n">options</span><span class="o">-&gt;</span><span class="n">hasAndNotEmpty</span><span class="p">(</span><span class="s">&quot;data-weighting&quot;</span><span class="p">))</span> <span class="p">{</span>
+      <span class="k">auto</span> <span class="n">weightsSize</span> <span class="o">=</span> <span class="n">batchSize</span><span class="p">;</span>
+      <span class="k">if</span><span class="p">(</span><span class="n">options</span><span class="o">-&gt;</span><span class="n">get</span><span class="o">&lt;</span><span class="n">std</span><span class="o">::</span><span class="n">string</span><span class="o">&gt;</span><span class="p">(</span><span class="s">&quot;data-weighting-type&quot;</span><span class="p">)</span> <span class="o">!=</span> <span class="s">&quot;sentence&quot;</span><span class="p">)</span>
+        <span class="n">weightsSize</span> <span class="o">*=</span> <span class="n">lengths</span><span class="p">.</span><span class="n">back</span><span class="p">();</span>
+      <span class="n">std</span><span class="o">::</span><span class="n">vector</span><span class="o">&lt;</span><span class="kt">float</span><span class="o">&gt;</span> <span class="n">weights</span><span class="p">(</span><span class="n">weightsSize</span><span class="p">,</span> <span class="mf">1.f</span><span class="p">);</span>
+      <span class="n">batch</span><span class="o">-&gt;</span><span class="n">setDataWeights</span><span class="p">(</span><span class="n">weights</span><span class="p">);</span>
+    <span class="p">}</span>
+
+    <span class="k">return</span> <span class="n">batch</span><span class="p">;</span>
+  <span class="p">}</span>
+
+  <span class="n">std</span><span class="o">::</span><span class="n">vector</span><span class="o">&lt;</span><span class="n">Ptr</span><span class="o">&lt;</span><span class="n">Batch</span><span class="o">&gt;&gt;</span> <span class="n">split</span><span class="p">(</span><span class="kt">size_t</span> <span class="n">n</span><span class="p">,</span> <span class="kt">size_t</span> <span class="n">sizeLimit</span> <span class="cm">/*=SIZE_MAX*/</span><span class="p">)</span> <span class="k">override</span> <span class="p">{</span>
+    <span class="n">ABORT_IF</span><span class="p">(</span><span class="n">size</span><span class="p">()</span> <span class="o">==</span> <span class="mi">0</span><span class="p">,</span> <span class="s">&quot;Encoutered batch size of 0&quot;</span><span class="p">);</span>
+
+    <span class="n">std</span><span class="o">::</span><span class="n">vector</span><span class="o">&lt;</span><span class="n">std</span><span class="o">::</span><span class="n">vector</span><span class="o">&lt;</span><span class="n">Ptr</span><span class="o">&lt;</span><span class="n">SubBatch</span><span class="o">&gt;&gt;&gt;</span> <span class="n">subs</span><span class="p">;</span> <span class="c1">// [subBatchIndex][streamIndex]</span>
+    <span class="c1">// split each stream separately</span>
+    <span class="k">for</span><span class="p">(</span><span class="k">auto</span> <span class="nl">batchStream</span> <span class="p">:</span> <span class="n">subBatches_</span><span class="p">)</span> <span class="p">{</span>
+      <span class="kt">size_t</span> <span class="n">i</span> <span class="o">=</span> <span class="mi">0</span><span class="p">;</span> <span class="c1">// index into split batch</span>
+      <span class="k">for</span><span class="p">(</span><span class="k">auto</span> <span class="nl">splitSubBatch</span> <span class="p">:</span> <span class="n">batchStream</span><span class="o">-&gt;</span><span class="n">split</span><span class="p">(</span><span class="n">n</span><span class="p">,</span> <span class="n">sizeLimit</span><span class="p">))</span> <span class="p">{</span> <span class="c1">// splits a batch into pieces, can also change width</span>
+        <span class="k">if</span><span class="p">(</span><span class="n">subs</span><span class="p">.</span><span class="n">size</span><span class="p">()</span> <span class="o">&lt;=</span> <span class="n">i</span><span class="p">)</span>
+          <span class="n">subs</span><span class="p">.</span><span class="n">resize</span><span class="p">(</span><span class="n">i</span> <span class="o">+</span> <span class="mi">1</span><span class="p">);</span>
+        <span class="n">subs</span><span class="p">[</span><span class="n">i</span><span class="o">++</span><span class="p">].</span><span class="n">push_back</span><span class="p">(</span><span class="n">splitSubBatch</span><span class="p">);</span> <span class="c1">// this forms tuples across streams</span>
+      <span class="p">}</span>
+    <span class="p">}</span>
+
+    <span class="c1">// create batches from split subbatches</span>
+    <span class="n">std</span><span class="o">::</span><span class="n">vector</span><span class="o">&lt;</span><span class="n">Ptr</span><span class="o">&lt;</span><span class="n">Batch</span><span class="o">&gt;&gt;</span> <span class="n">splits</span><span class="p">;</span>
+    <span class="k">for</span><span class="p">(</span><span class="k">auto</span> <span class="nl">subBatches</span> <span class="p">:</span> <span class="n">subs</span><span class="p">)</span>
+      <span class="n">splits</span><span class="p">.</span><span class="n">push_back</span><span class="p">(</span><span class="n">New</span><span class="o">&lt;</span><span class="n">CorpusBatch</span><span class="o">&gt;</span><span class="p">(</span><span class="n">subBatches</span><span class="p">));</span>
+
+    <span class="c1">// set sentence indices in split batches</span>
+    <span class="kt">size_t</span> <span class="n">pos</span> <span class="o">=</span> <span class="mi">0</span><span class="p">;</span>
+    <span class="k">for</span><span class="p">(</span><span class="k">auto</span> <span class="nl">split</span> <span class="p">:</span> <span class="n">splits</span><span class="p">)</span> <span class="p">{</span>
+      <span class="n">std</span><span class="o">::</span><span class="n">vector</span><span class="o">&lt;</span><span class="kt">size_t</span><span class="o">&gt;</span> <span class="n">ids</span><span class="p">;</span>
+      <span class="k">for</span><span class="p">(</span><span class="kt">size_t</span> <span class="n">i</span> <span class="o">=</span> <span class="n">pos</span><span class="p">;</span> <span class="n">i</span> <span class="o">&lt;</span> <span class="n">pos</span> <span class="o">+</span> <span class="n">split</span><span class="o">-&gt;</span><span class="n">size</span><span class="p">();</span> <span class="o">++</span><span class="n">i</span><span class="p">)</span>
+        <span class="n">ids</span><span class="p">.</span><span class="n">push_back</span><span class="p">(</span><span class="n">sentenceIds_</span><span class="p">[</span><span class="n">i</span><span class="p">]);</span>
+      <span class="n">split</span><span class="o">-&gt;</span><span class="n">setSentenceIds</span><span class="p">(</span><span class="n">ids</span><span class="p">);</span>
+      <span class="n">pos</span> <span class="o">+=</span> <span class="n">split</span><span class="o">-&gt;</span><span class="n">size</span><span class="p">();</span>
+    <span class="p">}</span>
+
+    <span class="k">if</span><span class="p">(</span><span class="o">!</span><span class="n">guidedAlignment_</span><span class="p">.</span><span class="n">empty</span><span class="p">())</span> <span class="p">{</span>
+      <span class="kt">size_t</span> <span class="n">oldTrgWords</span> <span class="o">=</span> <span class="n">back</span><span class="p">()</span><span class="o">-&gt;</span><span class="n">batchWidth</span><span class="p">();</span>
+      <span class="kt">size_t</span> <span class="n">oldSize</span> <span class="o">=</span> <span class="n">size</span><span class="p">();</span>
+
+      <span class="n">pos</span> <span class="o">=</span> <span class="mi">0</span><span class="p">;</span>
+      <span class="k">for</span><span class="p">(</span><span class="k">auto</span> <span class="nl">split</span> <span class="p">:</span> <span class="n">splits</span><span class="p">)</span> <span class="p">{</span>
+        <span class="k">auto</span> <span class="n">cb</span> <span class="o">=</span> <span class="n">std</span><span class="o">::</span><span class="n">static_pointer_cast</span><span class="o">&lt;</span><span class="n">CorpusBatch</span><span class="o">&gt;</span><span class="p">(</span><span class="n">split</span><span class="p">);</span>
+        <span class="kt">size_t</span> <span class="n">srcWords</span> <span class="o">=</span> <span class="n">cb</span><span class="o">-&gt;</span><span class="n">front</span><span class="p">()</span><span class="o">-&gt;</span><span class="n">batchWidth</span><span class="p">();</span>
+        <span class="kt">size_t</span> <span class="n">trgWords</span> <span class="o">=</span> <span class="n">cb</span><span class="o">-&gt;</span><span class="n">back</span><span class="p">()</span><span class="o">-&gt;</span><span class="n">batchWidth</span><span class="p">();</span>
+        <span class="kt">size_t</span> <span class="n">dimBatch</span> <span class="o">=</span> <span class="n">cb</span><span class="o">-&gt;</span><span class="n">size</span><span class="p">();</span>
+
+        <span class="n">std</span><span class="o">::</span><span class="n">vector</span><span class="o">&lt;</span><span class="kt">float</span><span class="o">&gt;</span> <span class="n">aligns</span><span class="p">(</span><span class="n">srcWords</span> <span class="o">*</span> <span class="n">dimBatch</span> <span class="o">*</span> <span class="n">trgWords</span><span class="p">,</span> <span class="mf">0.f</span><span class="p">);</span>
+
+        <span class="k">for</span><span class="p">(</span><span class="kt">size_t</span> <span class="n">i</span> <span class="o">=</span> <span class="mi">0</span><span class="p">;</span> <span class="n">i</span> <span class="o">&lt;</span> <span class="n">dimBatch</span><span class="p">;</span> <span class="o">++</span><span class="n">i</span><span class="p">)</span> <span class="p">{</span>
+          <span class="kt">size_t</span> <span class="n">bi</span> <span class="o">=</span> <span class="n">i</span> <span class="o">+</span> <span class="n">pos</span><span class="p">;</span>
+          <span class="k">for</span><span class="p">(</span><span class="kt">size_t</span> <span class="n">sid</span> <span class="o">=</span> <span class="mi">0</span><span class="p">;</span> <span class="n">sid</span> <span class="o">&lt;</span> <span class="n">srcWords</span><span class="p">;</span> <span class="o">++</span><span class="n">sid</span><span class="p">)</span> <span class="p">{</span>
+            <span class="k">for</span><span class="p">(</span><span class="kt">size_t</span> <span class="n">tid</span> <span class="o">=</span> <span class="mi">0</span><span class="p">;</span> <span class="n">tid</span> <span class="o">&lt;</span> <span class="n">trgWords</span><span class="p">;</span> <span class="o">++</span><span class="n">tid</span><span class="p">)</span> <span class="p">{</span>
+              <span class="kt">size_t</span> <span class="n">bidx</span> <span class="o">=</span> <span class="n">sid</span> <span class="o">*</span> <span class="n">oldSize</span>  <span class="o">*</span> <span class="n">oldTrgWords</span> <span class="o">+</span> <span class="n">bi</span> <span class="o">*</span> <span class="n">oldTrgWords</span> <span class="o">+</span> <span class="n">tid</span><span class="p">;</span> <span class="c1">// [sid, bi, tid]</span>
+              <span class="kt">size_t</span> <span class="n">idx</span>  <span class="o">=</span> <span class="n">sid</span> <span class="o">*</span> <span class="n">dimBatch</span> <span class="o">*</span>    <span class="n">trgWords</span> <span class="o">+</span>  <span class="n">i</span> <span class="o">*</span>    <span class="n">trgWords</span> <span class="o">+</span> <span class="n">tid</span><span class="p">;</span>
+              <span class="n">aligns</span><span class="p">[</span><span class="n">idx</span><span class="p">]</span> <span class="o">=</span> <span class="n">guidedAlignment_</span><span class="p">[</span><span class="n">bidx</span><span class="p">];</span>
+            <span class="p">}</span>
+          <span class="p">}</span>
+        <span class="p">}</span>
+        <span class="n">cb</span><span class="o">-&gt;</span><span class="n">setGuidedAlignment</span><span class="p">(</span><span class="n">std</span><span class="o">::</span><span class="n">move</span><span class="p">(</span><span class="n">aligns</span><span class="p">));</span>
+        <span class="n">pos</span> <span class="o">+=</span> <span class="n">dimBatch</span><span class="p">;</span>
+      <span class="p">}</span>
+    <span class="p">}</span>
+
+    <span class="c1">// restore data weights in split batches</span>
+    <span class="n">pos</span> <span class="o">=</span> <span class="mi">0</span><span class="p">;</span>
+    <span class="k">if</span><span class="p">(</span><span class="o">!</span><span class="n">dataWeights_</span><span class="p">.</span><span class="n">empty</span><span class="p">())</span> <span class="p">{</span>
+      <span class="kt">size_t</span> <span class="n">oldSize</span> <span class="o">=</span> <span class="n">size</span><span class="p">();</span>
+
+      <span class="k">for</span><span class="p">(</span><span class="k">auto</span> <span class="nl">split</span> <span class="p">:</span> <span class="n">splits</span><span class="p">)</span> <span class="p">{</span>
+        <span class="k">auto</span> <span class="n">cb</span> <span class="o">=</span> <span class="n">std</span><span class="o">::</span><span class="n">static_pointer_cast</span><span class="o">&lt;</span><span class="n">CorpusBatch</span><span class="o">&gt;</span><span class="p">(</span><span class="n">split</span><span class="p">);</span>
+        <span class="kt">size_t</span> <span class="n">width</span> <span class="o">=</span> <span class="mi">1</span><span class="p">;</span>                   <span class="c1">// One weight per sentence in case of sentence-level weights</span>
+        <span class="k">if</span><span class="p">(</span><span class="n">dataWeights_</span><span class="p">.</span><span class="n">size</span><span class="p">()</span> <span class="o">!=</span> <span class="n">oldSize</span><span class="p">)</span>  <span class="c1">// if number of weights does not correspond to number of sentences we have word-level weights</span>
+          <span class="n">width</span> <span class="o">=</span> <span class="n">cb</span><span class="o">-&gt;</span><span class="n">back</span><span class="p">()</span><span class="o">-&gt;</span><span class="n">batchWidth</span><span class="p">();</span> <span class="c1">// splitting also affects width, hence we need to accomodate this here</span>
+        <span class="n">std</span><span class="o">::</span><span class="n">vector</span><span class="o">&lt;</span><span class="kt">float</span><span class="o">&gt;</span> <span class="n">ws</span><span class="p">(</span><span class="n">width</span> <span class="o">*</span> <span class="n">split</span><span class="o">-&gt;</span><span class="n">size</span><span class="p">(),</span> <span class="mf">1.0f</span><span class="p">);</span>
+
+        <span class="c1">// this needs to be split along the batch dimension</span>
+        <span class="c1">// which is here the innermost dimension.</span>
+        <span class="c1">// Should work for sentence-based weights, too.</span>
+        <span class="k">for</span><span class="p">(</span><span class="kt">size_t</span> <span class="n">s</span> <span class="o">=</span> <span class="mi">0</span><span class="p">;</span> <span class="n">s</span> <span class="o">&lt;</span> <span class="n">width</span><span class="p">;</span> <span class="o">++</span><span class="n">s</span><span class="p">)</span> <span class="p">{</span>
+          <span class="k">for</span><span class="p">(</span><span class="kt">size_t</span> <span class="n">b</span> <span class="o">=</span> <span class="mi">0</span><span class="p">;</span> <span class="n">b</span> <span class="o">&lt;</span> <span class="n">split</span><span class="o">-&gt;</span><span class="n">size</span><span class="p">();</span> <span class="o">++</span><span class="n">b</span><span class="p">)</span> <span class="p">{</span>
+            <span class="n">ws</span><span class="p">[</span><span class="n">s</span> <span class="o">*</span> <span class="n">split</span><span class="o">-&gt;</span><span class="n">size</span><span class="p">()</span> <span class="o">+</span> <span class="n">b</span><span class="p">]</span> <span class="o">=</span> <span class="n">dataWeights_</span><span class="p">[</span><span class="n">s</span> <span class="o">*</span> <span class="n">oldSize</span> <span class="o">+</span> <span class="n">b</span> <span class="o">+</span> <span class="n">pos</span><span class="p">];</span> <span class="c1">// @TODO: use locate() as well</span>
+          <span class="p">}</span>
+        <span class="p">}</span>
+        <span class="n">split</span><span class="o">-&gt;</span><span class="n">setDataWeights</span><span class="p">(</span><span class="n">ws</span><span class="p">);</span>
+        <span class="n">pos</span> <span class="o">+=</span> <span class="n">split</span><span class="o">-&gt;</span><span class="n">size</span><span class="p">();</span>
+      <span class="p">}</span>
+    <span class="p">}</span>
+
+    <span class="k">return</span> <span class="n">splits</span><span class="p">;</span>
+  <span class="p">}</span>
+
+  <span class="k">const</span> <span class="n">std</span><span class="o">::</span><span class="n">vector</span><span class="o">&lt;</span><span class="kt">float</span><span class="o">&gt;&amp;</span> <span class="n">getGuidedAlignment</span><span class="p">()</span> <span class="k">const</span> <span class="p">{</span> <span class="k">return</span> <span class="n">guidedAlignment_</span><span class="p">;</span> <span class="p">}</span>  <span class="c1">// [dimSrcWords, dimBatch, dimTrgWords] flattened</span>
+  <span class="kt">void</span> <span class="n">setGuidedAlignment</span><span class="p">(</span><span class="n">std</span><span class="o">::</span><span class="n">vector</span><span class="o">&lt;</span><span class="kt">float</span><span class="o">&gt;&amp;&amp;</span> <span class="n">aln</span><span class="p">)</span> <span class="k">override</span> <span class="p">{</span>
+    <span class="n">guidedAlignment_</span> <span class="o">=</span> <span class="n">std</span><span class="o">::</span><span class="n">move</span><span class="p">(</span><span class="n">aln</span><span class="p">);</span>
+  <span class="p">}</span>
+
+  <span class="kt">size_t</span> <span class="n">locateInGuidedAlignments</span><span class="p">(</span><span class="kt">size_t</span> <span class="n">b</span><span class="p">,</span> <span class="kt">size_t</span> <span class="n">s</span><span class="p">,</span> <span class="kt">size_t</span> <span class="n">t</span><span class="p">)</span> <span class="p">{</span>
+    <span class="k">return</span> <span class="p">((</span><span class="n">s</span> <span class="o">*</span> <span class="n">size</span><span class="p">())</span> <span class="o">+</span> <span class="n">b</span><span class="p">)</span> <span class="o">*</span> <span class="n">widthTrg</span><span class="p">()</span> <span class="o">+</span> <span class="n">t</span><span class="p">;</span>
+  <span class="p">}</span>
+
+  <span class="n">std</span><span class="o">::</span><span class="n">vector</span><span class="o">&lt;</span><span class="kt">float</span><span class="o">&gt;&amp;</span> <span class="n">getDataWeights</span><span class="p">()</span> <span class="p">{</span> <span class="k">return</span> <span class="n">dataWeights_</span><span class="p">;</span> <span class="p">}</span>
+  <span class="kt">void</span> <span class="n">setDataWeights</span><span class="p">(</span><span class="k">const</span> <span class="n">std</span><span class="o">::</span><span class="n">vector</span><span class="o">&lt;</span><span class="kt">float</span><span class="o">&gt;&amp;</span> <span class="n">weights</span><span class="p">)</span> <span class="k">override</span> <span class="p">{</span>
+    <span class="n">dataWeights_</span> <span class="o">=</span> <span class="n">weights</span><span class="p">;</span>
+  <span class="p">}</span>
+
+  <span class="kt">void</span> <span class="n">debug</span><span class="p">(</span><span class="kt">bool</span> <span class="n">printIndices</span> <span class="o">=</span> <span class="nb">false</span><span class="p">)</span> <span class="k">override</span> <span class="p">{</span> <span class="c1">// prints word string if subbatch has vocab and</span>
+    <span class="c1">// printIndices == false otherwise only numeric indices</span>
+    <span class="n">std</span><span class="o">::</span><span class="n">cerr</span> <span class="o">&lt;&lt;</span> <span class="s">&quot;batches: &quot;</span> <span class="o">&lt;&lt;</span> <span class="n">sets</span><span class="p">()</span> <span class="o">&lt;&lt;</span> <span class="n">std</span><span class="o">::</span><span class="n">endl</span><span class="p">;</span>
+
+    <span class="k">if</span><span class="p">(</span><span class="o">!</span><span class="n">sentenceIds_</span><span class="p">.</span><span class="n">empty</span><span class="p">())</span> <span class="p">{</span>
+      <span class="n">std</span><span class="o">::</span><span class="n">cerr</span> <span class="o">&lt;&lt;</span> <span class="s">&quot;indices: &quot;</span><span class="p">;</span>
+      <span class="k">for</span><span class="p">(</span><span class="k">auto</span> <span class="nl">id</span> <span class="p">:</span> <span class="n">sentenceIds_</span><span class="p">)</span>
+        <span class="n">std</span><span class="o">::</span><span class="n">cerr</span> <span class="o">&lt;&lt;</span> <span class="n">id</span> <span class="o">&lt;&lt;</span> <span class="s">&quot; &quot;</span><span class="p">;</span>
+      <span class="n">std</span><span class="o">::</span><span class="n">cerr</span> <span class="o">&lt;&lt;</span> <span class="n">std</span><span class="o">::</span><span class="n">endl</span><span class="p">;</span>
+    <span class="p">}</span>
+
+    <span class="kt">size_t</span> <span class="n">subBatchIndex</span> <span class="o">=</span> <span class="mi">0</span><span class="p">;</span>
+    <span class="k">for</span><span class="p">(</span><span class="k">auto</span> <span class="nl">sb</span> <span class="p">:</span> <span class="n">subBatches_</span><span class="p">)</span> <span class="p">{</span>
+      <span class="n">std</span><span class="o">::</span><span class="n">cerr</span> <span class="o">&lt;&lt;</span> <span class="s">&quot;stream &quot;</span> <span class="o">&lt;&lt;</span> <span class="n">subBatchIndex</span><span class="o">++</span> <span class="o">&lt;&lt;</span> <span class="s">&quot;: &quot;</span> <span class="o">&lt;&lt;</span> <span class="n">std</span><span class="o">::</span><span class="n">endl</span><span class="p">;</span>
+      <span class="k">const</span> <span class="k">auto</span><span class="o">&amp;</span> <span class="n">vocab</span> <span class="o">=</span> <span class="n">sb</span><span class="o">-&gt;</span><span class="n">vocab</span><span class="p">();</span>
+      <span class="k">for</span><span class="p">(</span><span class="kt">size_t</span> <span class="n">s</span> <span class="o">=</span> <span class="mi">0</span><span class="p">;</span> <span class="n">s</span> <span class="o">&lt;</span> <span class="n">sb</span><span class="o">-&gt;</span><span class="n">batchWidth</span><span class="p">();</span> <span class="n">s</span><span class="o">++</span><span class="p">)</span> <span class="p">{</span>
+        <span class="n">std</span><span class="o">::</span><span class="n">cerr</span> <span class="o">&lt;&lt;</span> <span class="s">&quot;</span><span class="se">\t</span><span class="s"> w: &quot;</span><span class="p">;</span>
+        <span class="k">for</span><span class="p">(</span><span class="kt">size_t</span> <span class="n">b</span> <span class="o">=</span> <span class="mi">0</span><span class="p">;</span> <span class="n">b</span> <span class="o">&lt;</span> <span class="n">sb</span><span class="o">-&gt;</span><span class="n">batchSize</span><span class="p">();</span> <span class="n">b</span><span class="o">++</span><span class="p">)</span> <span class="p">{</span>
+          <span class="n">Word</span> <span class="n">w</span> <span class="o">=</span> <span class="n">sb</span><span class="o">-&gt;</span><span class="n">data</span><span class="p">()[</span><span class="n">sb</span><span class="o">-&gt;</span><span class="n">locate</span><span class="p">(</span><span class="cm">/*batchIdx=*/</span><span class="n">b</span><span class="p">,</span> <span class="cm">/*wordPos=*/</span><span class="n">s</span><span class="p">)];</span> <span class="c1">// s * sb-&gt;batchSize() + b;</span>
+          <span class="k">if</span> <span class="p">(</span><span class="n">vocab</span> <span class="o">&amp;&amp;</span> <span class="o">!</span><span class="n">printIndices</span><span class="p">)</span>
+            <span class="n">std</span><span class="o">::</span><span class="n">cerr</span> <span class="o">&lt;&lt;</span> <span class="p">(</span><span class="o">*</span><span class="n">vocab</span><span class="p">)[</span><span class="n">w</span><span class="p">]</span> <span class="o">&lt;&lt;</span> <span class="s">&quot; &quot;</span><span class="p">;</span>
+          <span class="k">else</span>
+            <span class="n">std</span><span class="o">::</span><span class="n">cerr</span> <span class="o">&lt;&lt;</span> <span class="n">w</span><span class="p">.</span><span class="n">toString</span><span class="p">()</span> <span class="o">&lt;&lt;</span> <span class="s">&quot; &quot;</span><span class="p">;</span> <span class="c1">// if not loaded then print numeric id instead</span>
+        <span class="p">}</span>
+        <span class="n">std</span><span class="o">::</span><span class="n">cerr</span> <span class="o">&lt;&lt;</span> <span class="n">std</span><span class="o">::</span><span class="n">endl</span><span class="p">;</span>
+      <span class="p">}</span>
+    <span class="p">}</span>
+
+    <span class="k">if</span><span class="p">(</span><span class="o">!</span><span class="n">dataWeights_</span><span class="p">.</span><span class="n">empty</span><span class="p">())</span> <span class="p">{</span>
+      <span class="n">std</span><span class="o">::</span><span class="n">cerr</span> <span class="o">&lt;&lt;</span> <span class="s">&quot;weights: &quot;</span><span class="p">;</span>
+      <span class="k">for</span><span class="p">(</span><span class="k">auto</span> <span class="nl">w</span> <span class="p">:</span> <span class="n">dataWeights_</span><span class="p">)</span>
+        <span class="n">std</span><span class="o">::</span><span class="n">cerr</span> <span class="o">&lt;&lt;</span> <span class="n">w</span> <span class="o">&lt;&lt;</span> <span class="s">&quot; &quot;</span><span class="p">;</span>
+      <span class="n">std</span><span class="o">::</span><span class="n">cerr</span> <span class="o">&lt;&lt;</span> <span class="n">std</span><span class="o">::</span><span class="n">endl</span><span class="p">;</span>
+    <span class="p">}</span>
+  <span class="p">}</span>
+<span class="p">};</span>
+
+<span class="k">class</span> <span class="nc">CorpusIterator</span><span class="p">;</span>
+
+<span class="k">class</span> <span class="nc">CorpusBase</span> <span class="o">:</span> <span class="k">public</span> <span class="n">DatasetBase</span><span class="o">&lt;</span><span class="n">SentenceTuple</span><span class="p">,</span> <span class="n">CorpusIterator</span><span class="p">,</span> <span class="n">CorpusBatch</span><span class="o">&gt;</span><span class="p">,</span> <span class="k">public</span> <span class="n">RNGEngine</span> <span class="p">{</span>
+<span class="k">public</span><span class="o">:</span>
+  <span class="k">typedef</span> <span class="n">SentenceTuple</span> <span class="n">Sample</span><span class="p">;</span>
+
+  <span class="n">CorpusBase</span><span class="p">(</span><span class="n">Ptr</span><span class="o">&lt;</span><span class="n">Options</span><span class="o">&gt;</span> <span class="n">options</span><span class="p">,</span> <span class="kt">bool</span> <span class="n">translate</span> <span class="o">=</span> <span class="nb">false</span><span class="p">);</span>
+
+  <span class="n">CorpusBase</span><span class="p">(</span><span class="k">const</span> <span class="n">std</span><span class="o">::</span><span class="n">vector</span><span class="o">&lt;</span><span class="n">std</span><span class="o">::</span><span class="n">string</span><span class="o">&gt;&amp;</span> <span class="n">paths</span><span class="p">,</span>
+      <span class="k">const</span> <span class="n">std</span><span class="o">::</span><span class="n">vector</span><span class="o">&lt;</span><span class="n">Ptr</span><span class="o">&lt;</span><span class="n">Vocab</span><span class="o">&gt;&gt;&amp;</span> <span class="n">vocabs</span><span class="p">,</span>
+      <span class="n">Ptr</span><span class="o">&lt;</span><span class="n">Options</span><span class="o">&gt;</span> <span class="n">options</span><span class="p">);</span>
+
+  <span class="k">virtual</span> <span class="o">~</span><span class="n">CorpusBase</span><span class="p">()</span> <span class="p">{}</span>
+  <span class="k">virtual</span> <span class="n">std</span><span class="o">::</span><span class="n">vector</span><span class="o">&lt;</span><span class="n">Ptr</span><span class="o">&lt;</span><span class="n">Vocab</span><span class="o">&gt;&gt;&amp;</span> <span class="n">getVocabs</span><span class="p">()</span> <span class="o">=</span> <span class="mi">0</span><span class="p">;</span>
+
+<span class="k">protected</span><span class="o">:</span>
+  <span class="n">std</span><span class="o">::</span><span class="n">vector</span><span class="o">&lt;</span><span class="n">UPtr</span><span class="o">&lt;</span><span class="n">std</span><span class="o">::</span><span class="n">istream</span><span class="o">&gt;&gt;</span> <span class="n">files_</span><span class="p">;</span>
+  <span class="n">std</span><span class="o">::</span><span class="n">vector</span><span class="o">&lt;</span><span class="n">Ptr</span><span class="o">&lt;</span><span class="n">Vocab</span><span class="o">&gt;&gt;</span> <span class="n">vocabs_</span><span class="p">;</span>
+
+  <span class="n">std</span><span class="o">::</span><span class="n">vector</span><span class="o">&lt;</span><span class="kt">bool</span><span class="o">&gt;</span> <span class="n">addEOS_</span><span class="p">;</span>
+
+  <span class="kt">size_t</span> <span class="n">pos_</span><span class="p">{</span><span class="mi">0</span><span class="p">};</span>
+
+  <span class="kt">size_t</span> <span class="n">maxLength_</span><span class="p">{</span><span class="mi">0</span><span class="p">};</span>
+  <span class="kt">bool</span> <span class="n">maxLengthCrop_</span><span class="p">{</span><span class="nb">false</span><span class="p">};</span>
+  <span class="kt">bool</span> <span class="n">rightLeft_</span><span class="p">{</span><span class="nb">false</span><span class="p">};</span>
+
+  <span class="kt">bool</span> <span class="n">tsv_</span><span class="p">{</span><span class="nb">false</span><span class="p">};</span>  <span class="c1">// true if the input is a single file with tab-separated values</span>
+  <span class="kt">size_t</span> <span class="n">tsvNumInputFields_</span><span class="p">{</span><span class="mi">0</span><span class="p">};</span>  <span class="c1">// number of fields from the TSV input that are associated</span>
+                                  <span class="c1">// with vocabs, i.e. excluding fields with alignment or</span>
+                                  <span class="c1">// weights, only if --tsv</span>
+  <span class="k">static</span> <span class="kt">size_t</span> <span class="n">getNumberOfTSVInputFields</span><span class="p">(</span><span class="n">Ptr</span><span class="o">&lt;</span><span class="n">Options</span><span class="o">&gt;</span> <span class="n">options</span><span class="p">);</span>
+
+  <span class="kt">int</span> <span class="n">weightFileIdx_</span><span class="p">{</span><span class="mi">-1</span><span class="p">};</span>
+
+  <span class="kt">int</span> <span class="n">alignFileIdx_</span><span class="p">{</span><span class="mi">-1</span><span class="p">};</span>
+
+  <span class="kt">void</span> <span class="nf">initEOS</span><span class="p">(</span><span class="kt">bool</span> <span class="n">training</span><span class="p">);</span>
+
+  <span class="kt">void</span> <span class="nf">addWordsToSentenceTuple</span><span class="p">(</span><span class="k">const</span> <span class="n">std</span><span class="o">::</span><span class="n">string</span><span class="o">&amp;</span> <span class="n">line</span><span class="p">,</span> <span class="kt">size_t</span> <span class="n">batchIndex</span><span class="p">,</span> <span class="n">SentenceTuple</span><span class="o">&amp;</span> <span class="n">tup</span><span class="p">)</span> <span class="k">const</span><span class="p">;</span>
+  <span class="kt">void</span> <span class="nf">addAlignmentToSentenceTuple</span><span class="p">(</span><span class="k">const</span> <span class="n">std</span><span class="o">::</span><span class="n">string</span><span class="o">&amp;</span> <span class="n">line</span><span class="p">,</span> <span class="n">SentenceTuple</span><span class="o">&amp;</span> <span class="n">tup</span><span class="p">)</span> <span class="k">const</span><span class="p">;</span>
+  <span class="kt">void</span> <span class="nf">addWeightsToSentenceTuple</span><span class="p">(</span><span class="k">const</span> <span class="n">std</span><span class="o">::</span><span class="n">string</span><span class="o">&amp;</span> <span class="n">line</span><span class="p">,</span> <span class="n">SentenceTuple</span><span class="o">&amp;</span> <span class="n">tup</span><span class="p">)</span> <span class="k">const</span><span class="p">;</span>
+
+  <span class="kt">void</span> <span class="nf">addAlignmentsToBatch</span><span class="p">(</span><span class="n">Ptr</span><span class="o">&lt;</span><span class="n">CorpusBatch</span><span class="o">&gt;</span> <span class="n">batch</span><span class="p">,</span> <span class="k">const</span> <span class="n">std</span><span class="o">::</span><span class="n">vector</span><span class="o">&lt;</span><span class="n">Sample</span><span class="o">&gt;&amp;</span> <span class="n">batchVector</span><span class="p">);</span>
+
+  <span class="kt">void</span> <span class="nf">addWeightsToBatch</span><span class="p">(</span><span class="n">Ptr</span><span class="o">&lt;</span><span class="n">CorpusBatch</span><span class="o">&gt;</span> <span class="n">batch</span><span class="p">,</span> <span class="k">const</span> <span class="n">std</span><span class="o">::</span><span class="n">vector</span><span class="o">&lt;</span><span class="n">Sample</span><span class="o">&gt;&amp;</span> <span class="n">batchVector</span><span class="p">);</span>
+<span class="p">};</span>
+
+<span class="k">class</span> <span class="nc">CorpusIterator</span> <span class="o">:</span> <span class="k">public</span> <span class="n">IteratorFacade</span><span class="o">&lt;</span><span class="n">CorpusIterator</span><span class="p">,</span> <span class="n">SentenceTuple</span><span class="o">&gt;</span> <span class="p">{</span>
+<span class="k">public</span><span class="o">:</span>
+  <span class="n">CorpusIterator</span><span class="p">();</span>
+  <span class="k">explicit</span> <span class="nf">CorpusIterator</span><span class="p">(</span><span class="n">CorpusBase</span><span class="o">*</span> <span class="n">corpus</span><span class="p">);</span>
+
+<span class="k">private</span><span class="o">:</span>
+  <span class="kt">void</span> <span class="n">increment</span><span class="p">()</span> <span class="k">override</span><span class="p">;</span>
+
+  <span class="kt">bool</span> <span class="nf">equal</span><span class="p">(</span><span class="n">CorpusIterator</span> <span class="k">const</span><span class="o">&amp;</span> <span class="n">other</span><span class="p">)</span> <span class="k">const</span> <span class="k">override</span><span class="p">;</span>
+
+  <span class="k">const</span> <span class="n">SentenceTuple</span><span class="o">&amp;</span> <span class="n">dereference</span><span class="p">()</span> <span class="k">const</span> <span class="k">override</span><span class="p">;</span>
+
+  <span class="n">CorpusBase</span><span class="o">*</span> <span class="n">corpus_</span><span class="p">;</span>
+
+  <span class="kt">long</span> <span class="kt">long</span> <span class="kt">int</span> <span class="n">pos_</span><span class="p">;</span>
+  <span class="n">SentenceTuple</span> <span class="n">tup_</span><span class="p">;</span>
+<span class="p">};</span>
+<span class="p">}</span>  <span class="c1">// namespace data</span>
+<span class="p">}</span>  <span class="c1">// namespace marian</span>
+</pre></div>
+</div>
+</div>
+
+
+           </div>
+           
+          </div>
+          <footer>
+
+  <hr/>
+
+  <div role="contentinfo">
+    <p>
+        &#169; Copyright 2021, Marian NMT Team.
+
+    </p>
+  </div>
+    
+    
+    
+    Built with <a href="https://www.sphinx-doc.org/">Sphinx</a> using a
+    
+    <a href="https://github.com/readthedocs/sphinx_rtd_theme">theme</a>
+    
+    provided by <a href="https://readthedocs.org">Read the Docs</a>. 
+
+</footer>
+        </div>
+      </div>
+
+    </section>
+
+  </div>
+  
+
+  <script type="text/javascript">
+      jQuery(function () {
+          SphinxRtdTheme.Navigation.enable(true);
+      });
+  </script>
+
+  
+  
+    
+   
+
+</body>
+</html>

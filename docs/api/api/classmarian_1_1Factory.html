@@ -1,0 +1,356 @@
+
+
+<!DOCTYPE html>
+<html class="writer-html5" lang="en" >
+<head>
+  <meta charset="utf-8" />
+  
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  
+  <title>Class Factory &mdash; Marian NMT v1.10.1 2021-02-23 documentation</title>
+  
+
+  
+  <link rel="stylesheet" href="../_static/css/theme.css" type="text/css" />
+  <link rel="stylesheet" href="../_static/pygments.css" type="text/css" />
+  <link rel="stylesheet" href="../_static/css/custom.css" type="text/css" />
+  <link rel="stylesheet" href="../_static/collapsible-lists/css/tree_view.css" type="text/css" />
+
+  
+  
+
+  
+  
+
+  
+    <link rel="canonical" href="http://marian-nmt.github.io/docs/api/api/classmarian_1_1Factory.html" />
+
+  
+  <!--[if lt IE 9]>
+    <script src="../_static/js/html5shiv.min.js"></script>
+  <![endif]-->
+  
+    
+      <script type="text/javascript" id="documentation_options" data-url_root="../" src="../_static/documentation_options.js"></script>
+        <script src="../_static/jquery.js"></script>
+        <script src="../_static/underscore.js"></script>
+        <script src="../_static/doctools.js"></script>
+        <script src="../_static/language_data.js"></script>
+        <script src="../_static/collapsible-lists/js/CollapsibleLists.compressed.js"></script>
+        <script src="../_static/collapsible-lists/js/apply-collapsible-lists.js"></script>
+    
+    <script type="text/javascript" src="../_static/js/theme.js"></script>
+
+    
+    <link rel="index" title="Index" href="../genindex.html" />
+    <link rel="search" title="Search" href="../search.html" />
+    <link rel="next" title="Class FakeMPIWrapper" href="classmarian_1_1FakeMPIWrapper.html" />
+    <link rel="prev" title="Class FactoredVocab::WordLUT" href="classmarian_1_1FactoredVocab_1_1WordLUT.html" /> 
+</head>
+
+<body class="wy-body-for-nav">
+
+   
+  <div class="wy-grid-for-nav">
+    
+    <nav data-toggle="wy-nav-shift" class="wy-nav-side">
+      <div class="wy-side-scroll">
+        <div class="wy-side-nav-search" >
+          
+
+          
+            <a href="../index.html" class="icon icon-home"> Marian NMT
+          
+
+          
+          </a>
+
+          
+            
+            
+              <div class="version">
+                v1.10.1
+              </div>
+            
+          
+
+          
+<div role="search">
+  <form id="rtd-search-form" class="wy-form" action="../search.html" method="get">
+    <input type="text" name="q" placeholder="Search docs" />
+    <input type="hidden" name="check_keywords" value="yes" />
+    <input type="hidden" name="area" value="default" />
+  </form>
+</div>
+
+          
+        </div>
+
+        
+        <div class="wy-menu wy-menu-vertical" data-spy="affix" role="navigation" aria-label="main navigation">
+          
+            
+            
+              
+            
+            
+              <p class="caption"><span class="caption-text">Contents:</span></p>
+<ul>
+<li class="toctree-l1"><a class="reference internal" href="../install.html">Installation</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../graph.html">Expression graphs</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../operators.html">Graph operations</a></li>
+<li class="toctree-l1"><a class="reference internal" href="library_index.html">Library API</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../contributing.html">How to contribute to Marian</a></li>
+</ul>
+
+            
+          
+        </div>
+        
+      </div>
+    </nav>
+
+    <section data-toggle="wy-nav-shift" class="wy-nav-content-wrap">
+
+      
+      <nav class="wy-nav-top" aria-label="top navigation">
+        
+          <i data-toggle="wy-nav-top" class="fa fa-bars"></i>
+          <a href="../index.html">Marian NMT</a>
+        
+      </nav>
+
+
+      <div class="wy-nav-content">
+        
+        <div class="rst-content">
+        
+          
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+<div role="navigation" aria-label="breadcrumbs navigation">
+
+  <ul class="wy-breadcrumbs">
+    
+      <li><a href="../index.html" class="icon icon-home"></a> &raquo;</li>
+        
+          <li><a href="library_index.html">Library API</a> &raquo;</li>
+        
+      <li>Class Factory</li>
+    
+    
+      <li class="wy-breadcrumbs-aside">
+        
+          
+            <a href="../_sources/api/classmarian_1_1Factory.rst.txt" rel="nofollow"> View page source</a>
+          
+        
+      </li>
+    
+  </ul>
+
+  
+  <hr/>
+</div>
+          <div role="main" class="document" itemscope="itemscope" itemtype="http://schema.org/Article">
+           <div itemprop="articleBody">
+            
+  <div class="section" id="class-factory">
+<span id="exhale-class-classmarian-1-1factory"></span><h1>Class Factory<a class="headerlink" href="#class-factory" title="Permalink to this headline">¶</a></h1>
+<ul class="simple">
+<li><p>Defined in <a class="reference internal" href="file_src_layers_factory.h.html#file-src-layers-factory-h"><span class="std std-ref">File factory.h</span></a></p></li>
+</ul>
+<div class="section" id="inheritance-relationships">
+<h2>Inheritance Relationships<a class="headerlink" href="#inheritance-relationships" title="Permalink to this headline">¶</a></h2>
+<div class="section" id="base-type">
+<h3>Base Type<a class="headerlink" href="#base-type" title="Permalink to this headline">¶</a></h3>
+<ul class="simple">
+<li><p><code class="docutils literal notranslate"><span class="pre">public</span> <span class="pre">std::enable_shared_from_this&lt;</span> <span class="pre">Factory</span> <span class="pre">&gt;</span></code></p></li>
+</ul>
+</div>
+<div class="section" id="derived-types">
+<h3>Derived Types<a class="headerlink" href="#derived-types" title="Permalink to this headline">¶</a></h3>
+<ul class="simple">
+<li><p><code class="docutils literal notranslate"><span class="pre">public</span> <span class="pre">marian::ConstructingFactory&lt;</span> <span class="pre">Class</span> <span class="pre">&gt;</span></code> (<a class="reference internal" href="structmarian_1_1ConstructingFactory.html#exhale-struct-structmarian-1-1constructingfactory"><span class="std std-ref">Template Struct ConstructingFactory</span></a>)</p></li>
+<li><p><code class="docutils literal notranslate"><span class="pre">public</span> <span class="pre">marian::mlp::LayerFactory</span></code> (<a class="reference internal" href="structmarian_1_1mlp_1_1LayerFactory.html#exhale-struct-structmarian-1-1mlp-1-1layerfactory"><span class="std std-ref">Struct LayerFactory</span></a>)</p></li>
+<li><p><code class="docutils literal notranslate"><span class="pre">public</span> <span class="pre">marian::mlp::LogitLayerFactory</span></code> (<a class="reference internal" href="structmarian_1_1mlp_1_1LogitLayerFactory.html#exhale-struct-structmarian-1-1mlp-1-1logitlayerfactory"><span class="std std-ref">Struct LogitLayerFactory</span></a>)</p></li>
+<li><p><code class="docutils literal notranslate"><span class="pre">public</span> <span class="pre">marian::mlp::MLPFactory</span></code> (<a class="reference internal" href="classmarian_1_1mlp_1_1MLPFactory.html#exhale-class-classmarian-1-1mlp-1-1mlpfactory"><span class="std std-ref">Class MLPFactory</span></a>)</p></li>
+<li><p><code class="docutils literal notranslate"><span class="pre">public</span> <span class="pre">marian::models::ClassifierFactory</span></code> (<a class="reference internal" href="classmarian_1_1models_1_1ClassifierFactory.html#exhale-class-classmarian-1-1models-1-1classifierfactory"><span class="std std-ref">Class ClassifierFactory</span></a>)</p></li>
+<li><p><code class="docutils literal notranslate"><span class="pre">public</span> <span class="pre">marian::models::DecoderFactory</span></code> (<a class="reference internal" href="classmarian_1_1models_1_1DecoderFactory.html#exhale-class-classmarian-1-1models-1-1decoderfactory"><span class="std std-ref">Class DecoderFactory</span></a>)</p></li>
+<li><p><code class="docutils literal notranslate"><span class="pre">public</span> <span class="pre">marian::models::EncoderClassifierFactory</span></code> (<a class="reference internal" href="classmarian_1_1models_1_1EncoderClassifierFactory.html#exhale-class-classmarian-1-1models-1-1encoderclassifierfactory"><span class="std std-ref">Class EncoderClassifierFactory</span></a>)</p></li>
+<li><p><code class="docutils literal notranslate"><span class="pre">public</span> <span class="pre">marian::models::EncoderDecoderFactory</span></code> (<a class="reference internal" href="classmarian_1_1models_1_1EncoderDecoderFactory.html#exhale-class-classmarian-1-1models-1-1encoderdecoderfactory"><span class="std std-ref">Class EncoderDecoderFactory</span></a>)</p></li>
+<li><p><code class="docutils literal notranslate"><span class="pre">public</span> <span class="pre">marian::models::EncoderFactory</span></code> (<a class="reference internal" href="classmarian_1_1models_1_1EncoderFactory.html#exhale-class-classmarian-1-1models-1-1encoderfactory"><span class="std std-ref">Class EncoderFactory</span></a>)</p></li>
+<li><p><code class="docutils literal notranslate"><span class="pre">public</span> <span class="pre">marian::models::EncoderPoolerFactory</span></code> (<a class="reference internal" href="classmarian_1_1models_1_1EncoderPoolerFactory.html#exhale-class-classmarian-1-1models-1-1encoderpoolerfactory"><span class="std std-ref">Class EncoderPoolerFactory</span></a>)</p></li>
+<li><p><code class="docutils literal notranslate"><span class="pre">public</span> <span class="pre">marian::models::PoolerFactory</span></code> (<a class="reference internal" href="classmarian_1_1models_1_1PoolerFactory.html#exhale-class-classmarian-1-1models-1-1poolerfactory"><span class="std std-ref">Class PoolerFactory</span></a>)</p></li>
+<li><p><code class="docutils literal notranslate"><span class="pre">public</span> <span class="pre">marian::rnn::CellFactory</span></code> (<a class="reference internal" href="classmarian_1_1rnn_1_1CellFactory.html#exhale-class-classmarian-1-1rnn-1-1cellfactory"><span class="std std-ref">Class CellFactory</span></a>)</p></li>
+<li><p><code class="docutils literal notranslate"><span class="pre">public</span> <span class="pre">marian::rnn::InputFactory</span></code> (<a class="reference internal" href="structmarian_1_1rnn_1_1InputFactory.html#exhale-struct-structmarian-1-1rnn-1-1inputfactory"><span class="std std-ref">Struct InputFactory</span></a>)</p></li>
+<li><p><code class="docutils literal notranslate"><span class="pre">public</span> <span class="pre">marian::rnn::RNNFactory</span></code> (<a class="reference internal" href="classmarian_1_1rnn_1_1RNNFactory.html#exhale-class-classmarian-1-1rnn-1-1rnnfactory"><span class="std std-ref">Class RNNFactory</span></a>)</p></li>
+</ul>
+</div>
+</div>
+<div class="section" id="class-documentation">
+<h2>Class Documentation<a class="headerlink" href="#class-documentation" title="Permalink to this headline">¶</a></h2>
+<dl class="class">
+<dt id="_CPPv4N6marian7FactoryE">
+<span id="_CPPv3N6marian7FactoryE"></span><span id="_CPPv2N6marian7FactoryE"></span><span id="marian::Factory"></span><span class="target" id="classmarian_1_1Factory"></span><em class="property">class </em><code class="sig-name descname">Factory</code> : <em class="property">public</em> <a class="reference internal" href="function_expression__operators_8cpp_1af4e69a5f7167b63522135a1f6b8a5dd8.html#_CPPv4N6marianStE4Expri" title="marian::std">std</a>::enable_shared_from_this&lt;<a class="reference internal" href="#_CPPv4N6marian7FactoryE" title="marian::Factory">Factory</a>&gt;<a class="headerlink" href="#_CPPv4N6marian7FactoryE" title="Permalink to this definition">¶</a><br /></dt>
+<dd><p>Subclassed by <a class="reference internal" href="structmarian_1_1ConstructingFactory.html#structmarian_1_1ConstructingFactory"><span class="std std-ref">marian::ConstructingFactory&lt; Class &gt;</span></a>, <a class="reference internal" href="structmarian_1_1mlp_1_1LayerFactory.html#structmarian_1_1mlp_1_1LayerFactory"><span class="std std-ref">marian::mlp::LayerFactory</span></a>, <a class="reference internal" href="structmarian_1_1mlp_1_1LogitLayerFactory.html#structmarian_1_1mlp_1_1LogitLayerFactory"><span class="std std-ref">marian::mlp::LogitLayerFactory</span></a>, <a class="reference internal" href="classmarian_1_1mlp_1_1MLPFactory.html#classmarian_1_1mlp_1_1MLPFactory"><span class="std std-ref">marian::mlp::MLPFactory</span></a>, <a class="reference internal" href="classmarian_1_1models_1_1ClassifierFactory.html#classmarian_1_1models_1_1ClassifierFactory"><span class="std std-ref">marian::models::ClassifierFactory</span></a>, <a class="reference internal" href="classmarian_1_1models_1_1DecoderFactory.html#classmarian_1_1models_1_1DecoderFactory"><span class="std std-ref">marian::models::DecoderFactory</span></a>, <a class="reference internal" href="classmarian_1_1models_1_1EncoderClassifierFactory.html#classmarian_1_1models_1_1EncoderClassifierFactory"><span class="std std-ref">marian::models::EncoderClassifierFactory</span></a>, <a class="reference internal" href="classmarian_1_1models_1_1EncoderDecoderFactory.html#classmarian_1_1models_1_1EncoderDecoderFactory"><span class="std std-ref">marian::models::EncoderDecoderFactory</span></a>, <a class="reference internal" href="classmarian_1_1models_1_1EncoderFactory.html#classmarian_1_1models_1_1EncoderFactory"><span class="std std-ref">marian::models::EncoderFactory</span></a>, <a class="reference internal" href="classmarian_1_1models_1_1EncoderPoolerFactory.html#classmarian_1_1models_1_1EncoderPoolerFactory"><span class="std std-ref">marian::models::EncoderPoolerFactory</span></a>, <a class="reference internal" href="classmarian_1_1models_1_1PoolerFactory.html#classmarian_1_1models_1_1PoolerFactory"><span class="std std-ref">marian::models::PoolerFactory</span></a>, <a class="reference internal" href="classmarian_1_1rnn_1_1CellFactory.html#classmarian_1_1rnn_1_1CellFactory"><span class="std std-ref">marian::rnn::CellFactory</span></a>, <a class="reference internal" href="structmarian_1_1rnn_1_1InputFactory.html#structmarian_1_1rnn_1_1InputFactory"><span class="std std-ref">marian::rnn::InputFactory</span></a>, <a class="reference internal" href="classmarian_1_1rnn_1_1RNNFactory.html#classmarian_1_1rnn_1_1RNNFactory"><span class="std std-ref">marian::rnn::RNNFactory</span></a></p>
+<div class="breathe-sectiondef docutils container">
+<p class="breathe-sectiondef-title rubric">Public Functions</p>
+<dl class="function">
+<dt id="_CPPv4N6marian7Factory7FactoryEv">
+<span id="_CPPv3N6marian7Factory7FactoryEv"></span><span id="_CPPv2N6marian7Factory7FactoryEv"></span><span id="marian::Factory::Factory"></span><span class="target" id="classmarian_1_1Factory_1a47bb7d577f6d18563e9aba8dc71e0b20"></span><code class="sig-name descname">Factory</code><span class="sig-paren">(</span><span class="sig-paren">)</span><a class="headerlink" href="#_CPPv4N6marian7Factory7FactoryEv" title="Permalink to this definition">¶</a><br /></dt>
+<dd></dd></dl>
+
+<dl class="function">
+<dt id="_CPPv4N6marian7Factory7FactoryE3PtrI7OptionsE">
+<span id="_CPPv3N6marian7Factory7FactoryE3PtrI7OptionsE"></span><span id="_CPPv2N6marian7Factory7FactoryE3PtrI7OptionsE"></span><span id="marian::Factory::Factory__Ptr:Options:"></span><span class="target" id="classmarian_1_1Factory_1aecbd9ee3e50e669753a32dd9a1a88a63"></span><code class="sig-name descname">Factory</code><span class="sig-paren">(</span><a class="reference internal" href="typedef_definitions_8h_1ad1a373be43a00ef9ce35666145137b08.html#_CPPv4N6marian3PtrE" title="marian::Ptr">Ptr</a>&lt;<a class="reference internal" href="classmarian_1_1Options.html#_CPPv4N6marian7OptionsE" title="marian::Options">Options</a>&gt; <em>options</em><span class="sig-paren">)</span><a class="headerlink" href="#_CPPv4N6marian7Factory7FactoryE3PtrI7OptionsE" title="Permalink to this definition">¶</a><br /></dt>
+<dd></dd></dl>
+
+<dl class="function">
+<dt id="_CPPv4I0DpEN6marian7Factory7FactoryERKNSt6stringE1TDpRR4Args">
+<span id="_CPPv3I0DpEN6marian7Factory7FactoryERKNSt6stringE1TDpRR4Args"></span><span id="_CPPv2I0DpEN6marian7Factory7FactoryERKNSt6stringE1TDpRR4Args"></span><span class="target" id="classmarian_1_1Factory_1a82a2e515fb5875e2ec968c6a6224ef99"></span>template&lt;typename <code class="sig-name descname">T</code>, typename ...<code class="sig-name descname">Args</code>&gt;<br /><code class="sig-name descname">Factory</code><span class="sig-paren">(</span><em class="property">const</em> <a class="reference internal" href="function_expression__operators_8cpp_1af4e69a5f7167b63522135a1f6b8a5dd8.html#_CPPv4N6marianStE4Expri" title="marian::std">std</a>::string &amp;<em>key</em>, <a class="reference internal" href="#_CPPv4I0DpEN6marian7Factory7FactoryERKNSt6stringE1TDpRR4Args" title="marian::Factory::Factory::T">T</a> <em>value</em>, <a class="reference internal" href="#_CPPv4I0DpEN6marian7Factory7FactoryERKNSt6stringE1TDpRR4Args" title="marian::Factory::Factory::Args">Args</a>&amp;&amp;... <em>moreArgs</em><span class="sig-paren">)</span><a class="headerlink" href="#_CPPv4I0DpEN6marian7Factory7FactoryERKNSt6stringE1TDpRR4Args" title="Permalink to this definition">¶</a><br /></dt>
+<dd></dd></dl>
+
+<dl class="function">
+<dt id="_CPPv4IDpEN6marian7Factory7FactoryE3PtrI7OptionsEDpRR4Args">
+<span id="_CPPv3IDpEN6marian7Factory7FactoryE3PtrI7OptionsEDpRR4Args"></span><span id="_CPPv2IDpEN6marian7Factory7FactoryE3PtrI7OptionsEDpRR4Args"></span><span class="target" id="classmarian_1_1Factory_1a95dc421f3a690c5b95843dde5691d1ae"></span>template&lt;typename ...<code class="sig-name descname">Args</code>&gt;<br /><code class="sig-name descname">Factory</code><span class="sig-paren">(</span><a class="reference internal" href="typedef_definitions_8h_1ad1a373be43a00ef9ce35666145137b08.html#_CPPv4N6marian3PtrE" title="marian::Ptr">Ptr</a>&lt;<a class="reference internal" href="classmarian_1_1Options.html#_CPPv4N6marian7OptionsE" title="marian::Options">Options</a>&gt; <em>options</em>, <a class="reference internal" href="#_CPPv4IDpEN6marian7Factory7FactoryE3PtrI7OptionsEDpRR4Args" title="marian::Factory::Factory::Args">Args</a>&amp;&amp;... <em>args</em><span class="sig-paren">)</span><a class="headerlink" href="#_CPPv4IDpEN6marian7Factory7FactoryE3PtrI7OptionsEDpRR4Args" title="Permalink to this definition">¶</a><br /></dt>
+<dd></dd></dl>
+
+<dl class="function">
+<dt id="_CPPv4N6marian7Factory7FactoryERK7Factory">
+<span id="_CPPv3N6marian7Factory7FactoryERK7Factory"></span><span id="_CPPv2N6marian7Factory7FactoryERK7Factory"></span><span id="marian::Factory::Factory__FactoryCR"></span><span class="target" id="classmarian_1_1Factory_1ab4b326be1652f9e4f0b4a49a5c6f3809"></span><code class="sig-name descname">Factory</code><span class="sig-paren">(</span><em class="property">const</em> <a class="reference internal" href="#_CPPv4N6marian7Factory7FactoryEv" title="marian::Factory::Factory">Factory</a> &amp;<em>factory</em><span class="sig-paren">)</span><a class="headerlink" href="#_CPPv4N6marian7Factory7FactoryERK7Factory" title="Permalink to this definition">¶</a><br /></dt>
+<dd></dd></dl>
+
+<dl class="function">
+<dt id="_CPPv4N6marian7FactoryD0Ev">
+<span id="_CPPv3N6marian7FactoryD0Ev"></span><span id="_CPPv2N6marian7FactoryD0Ev"></span><span id="marian::Factory::~Factory"></span><span class="target" id="classmarian_1_1Factory_1a88d85aadc4ff96b0f691ae2c2a738ba1"></span><em class="property">virtual</em> <code class="sig-name descname">~Factory</code><span class="sig-paren">(</span><span class="sig-paren">)</span><a class="headerlink" href="#_CPPv4N6marian7FactoryD0Ev" title="Permalink to this definition">¶</a><br /></dt>
+<dd></dd></dl>
+
+<dl class="function">
+<dt id="_CPPv4N6marian7Factory12asYamlStringEv">
+<span id="_CPPv3N6marian7Factory12asYamlStringEv"></span><span id="_CPPv2N6marian7Factory12asYamlStringEv"></span><span id="marian::Factory::asYamlString"></span><span class="target" id="classmarian_1_1Factory_1adcab21fd688c700bf6f051a128767a1c"></span><a class="reference internal" href="function_expression__operators_8cpp_1af4e69a5f7167b63522135a1f6b8a5dd8.html#_CPPv4N6marianStE4Expri" title="marian::std">std</a>::string <code class="sig-name descname">asYamlString</code><span class="sig-paren">(</span><span class="sig-paren">)</span><a class="headerlink" href="#_CPPv4N6marian7Factory12asYamlStringEv" title="Permalink to this definition">¶</a><br /></dt>
+<dd></dd></dl>
+
+<dl class="function">
+<dt id="_CPPv4I0EN6marian7Factory3optE1TPCKc">
+<span id="_CPPv3I0EN6marian7Factory3optEPCKc"></span><span id="_CPPv2I0EN6marian7Factory3optEPCKc"></span><span class="target" id="classmarian_1_1Factory_1a4ec25b5fb491eac53becdc51c50731e1"></span>template&lt;typename <code class="sig-name descname">T</code>&gt;<br /><a class="reference internal" href="#_CPPv4I0EN6marian7Factory3optE1TPCKc" title="marian::Factory::opt::T">T</a> <code class="sig-name descname">opt</code><span class="sig-paren">(</span><em class="property">const</em> char *<em class="property">const</em> <em>key</em><span class="sig-paren">)</span><a class="headerlink" href="#_CPPv4I0EN6marian7Factory3optE1TPCKc" title="Permalink to this definition">¶</a><br /></dt>
+<dd></dd></dl>
+
+<dl class="function">
+<dt id="_CPPv4I0EN6marian7Factory3optE1TPCKc1T">
+<span id="_CPPv3I0EN6marian7Factory3optEPCKc1T"></span><span id="_CPPv2I0EN6marian7Factory3optEPCKc1T"></span><span class="target" id="classmarian_1_1Factory_1ad858e5dc70859fb4cb836d982425f960"></span>template&lt;typename <code class="sig-name descname">T</code>&gt;<br /><a class="reference internal" href="#_CPPv4I0EN6marian7Factory3optE1TPCKc" title="marian::Factory::opt::T">T</a> <code class="sig-name descname">opt</code><span class="sig-paren">(</span><em class="property">const</em> char *<em class="property">const</em> <em>key</em>, <a class="reference internal" href="#_CPPv4I0EN6marian7Factory3optE1TPCKc" title="marian::Factory::opt::T">T</a> <em>defaultValue</em><span class="sig-paren">)</span><a class="headerlink" href="#_CPPv4I0EN6marian7Factory3optE1TPCKc1T" title="Permalink to this definition">¶</a><br /></dt>
+<dd></dd></dl>
+
+<dl class="function">
+<dt id="_CPPv4I0EN6marian7Factory3optE1TRKNSt6stringE">
+<span id="_CPPv3I0EN6marian7Factory3optERKNSt6stringE"></span><span id="_CPPv2I0EN6marian7Factory3optERKNSt6stringE"></span><span class="target" id="classmarian_1_1Factory_1abc51a49edfa544441e7b187a0176d107"></span>template&lt;typename <code class="sig-name descname">T</code>&gt;<br /><a class="reference internal" href="#_CPPv4I0EN6marian7Factory3optE1TPCKc" title="marian::Factory::opt::T">T</a> <code class="sig-name descname">opt</code><span class="sig-paren">(</span><em class="property">const</em> <a class="reference internal" href="function_expression__operators_8cpp_1af4e69a5f7167b63522135a1f6b8a5dd8.html#_CPPv4N6marianStE4Expri" title="marian::std">std</a>::string &amp;<em>key</em><span class="sig-paren">)</span><a class="headerlink" href="#_CPPv4I0EN6marian7Factory3optE1TRKNSt6stringE" title="Permalink to this definition">¶</a><br /></dt>
+<dd></dd></dl>
+
+<dl class="function">
+<dt id="_CPPv4I0EN6marian7Factory3optE1TRKNSt6stringE1T">
+<span id="_CPPv3I0EN6marian7Factory3optERKNSt6stringE1T"></span><span id="_CPPv2I0EN6marian7Factory3optERKNSt6stringE1T"></span><span class="target" id="classmarian_1_1Factory_1af818963ee25402cc6ef601d6ed711d19"></span>template&lt;typename <code class="sig-name descname">T</code>&gt;<br /><a class="reference internal" href="#_CPPv4I0EN6marian7Factory3optE1TPCKc" title="marian::Factory::opt::T">T</a> <code class="sig-name descname">opt</code><span class="sig-paren">(</span><em class="property">const</em> <a class="reference internal" href="function_expression__operators_8cpp_1af4e69a5f7167b63522135a1f6b8a5dd8.html#_CPPv4N6marianStE4Expri" title="marian::std">std</a>::string &amp;<em>key</em>, <a class="reference internal" href="#_CPPv4I0EN6marian7Factory3optE1TPCKc" title="marian::Factory::opt::T">T</a> <em>defaultValue</em><span class="sig-paren">)</span><a class="headerlink" href="#_CPPv4I0EN6marian7Factory3optE1TRKNSt6stringE1T" title="Permalink to this definition">¶</a><br /></dt>
+<dd></dd></dl>
+
+<dl class="function">
+<dt id="_CPPv4I0EN6marian7Factory6setOptEvRKNSt6stringE1T">
+<span id="_CPPv3I0EN6marian7Factory6setOptERKNSt6stringE1T"></span><span id="_CPPv2I0EN6marian7Factory6setOptERKNSt6stringE1T"></span><span class="target" id="classmarian_1_1Factory_1ae8c93e261eb4dc181bda7a68b06e3179"></span>template&lt;typename <code class="sig-name descname">T</code>&gt;<br />void <code class="sig-name descname">setOpt</code><span class="sig-paren">(</span><em class="property">const</em> <a class="reference internal" href="function_expression__operators_8cpp_1af4e69a5f7167b63522135a1f6b8a5dd8.html#_CPPv4N6marianStE4Expri" title="marian::std">std</a>::string &amp;<em>key</em>, <a class="reference internal" href="#_CPPv4I0EN6marian7Factory6setOptEvRKNSt6stringE1T" title="marian::Factory::setOpt::T">T</a> <em>value</em><span class="sig-paren">)</span><a class="headerlink" href="#_CPPv4I0EN6marian7Factory6setOptEvRKNSt6stringE1T" title="Permalink to this definition">¶</a><br /></dt>
+<dd></dd></dl>
+
+<dl class="function">
+<dt id="_CPPv4I0DpEN6marian7Factory7setOptsEvRKNSt6stringE1TDpRR4Args">
+<span id="_CPPv3I0DpEN6marian7Factory7setOptsERKNSt6stringE1TDpRR4Args"></span><span id="_CPPv2I0DpEN6marian7Factory7setOptsERKNSt6stringE1TDpRR4Args"></span><span class="target" id="classmarian_1_1Factory_1a251c177ab9c72d2d67cce0e2238fd162"></span>template&lt;typename <code class="sig-name descname">T</code>, typename ...<code class="sig-name descname">Args</code>&gt;<br />void <code class="sig-name descname">setOpts</code><span class="sig-paren">(</span><em class="property">const</em> <a class="reference internal" href="function_expression__operators_8cpp_1af4e69a5f7167b63522135a1f6b8a5dd8.html#_CPPv4N6marianStE4Expri" title="marian::std">std</a>::string &amp;<em>key</em>, <a class="reference internal" href="#_CPPv4I0DpEN6marian7Factory7setOptsEvRKNSt6stringE1TDpRR4Args" title="marian::Factory::setOpts::T">T</a> <em>value</em>, <a class="reference internal" href="#_CPPv4I0DpEN6marian7Factory7setOptsEvRKNSt6stringE1TDpRR4Args" title="marian::Factory::setOpts::Args">Args</a>&amp;&amp;... <em>moreArgs</em><span class="sig-paren">)</span><a class="headerlink" href="#_CPPv4I0DpEN6marian7Factory7setOptsEvRKNSt6stringE1TDpRR4Args" title="Permalink to this definition">¶</a><br /></dt>
+<dd></dd></dl>
+
+<dl class="function">
+<dt id="_CPPv4N6marian7Factory9mergeOptsE3PtrI7OptionsE">
+<span id="_CPPv3N6marian7Factory9mergeOptsE3PtrI7OptionsE"></span><span id="_CPPv2N6marian7Factory9mergeOptsE3PtrI7OptionsE"></span><span id="marian::Factory::mergeOpts__Ptr:Options:"></span><span class="target" id="classmarian_1_1Factory_1acbdda1a451d3a590db41a50a8b6fa407"></span>void <code class="sig-name descname">mergeOpts</code><span class="sig-paren">(</span><a class="reference internal" href="typedef_definitions_8h_1ad1a373be43a00ef9ce35666145137b08.html#_CPPv4N6marian3PtrE" title="marian::Ptr">Ptr</a>&lt;<a class="reference internal" href="classmarian_1_1Options.html#_CPPv4N6marian7OptionsE" title="marian::Options">Options</a>&gt; <em>options</em><span class="sig-paren">)</span><a class="headerlink" href="#_CPPv4N6marian7Factory9mergeOptsE3PtrI7OptionsE" title="Permalink to this definition">¶</a><br /></dt>
+<dd></dd></dl>
+
+<dl class="function">
+<dt id="_CPPv4I0EN6marian7Factory2asE3PtrI4CastEv">
+<span id="_CPPv3I0EN6marian7Factory2asEv"></span><span id="_CPPv2I0EN6marian7Factory2asEv"></span><span class="target" id="classmarian_1_1Factory_1a7edfe8867b1017c025d26d58b2655248"></span>template&lt;class <code class="sig-name descname">Cast</code>&gt;<br /><a class="reference internal" href="typedef_definitions_8h_1ad1a373be43a00ef9ce35666145137b08.html#_CPPv4N6marian3PtrE" title="marian::Ptr">Ptr</a>&lt;<a class="reference internal" href="#_CPPv4I0EN6marian7Factory2asE3PtrI4CastEv" title="marian::Factory::as::Cast">Cast</a>&gt; <code class="sig-name descname">as</code><span class="sig-paren">(</span><span class="sig-paren">)</span><a class="headerlink" href="#_CPPv4I0EN6marian7Factory2asE3PtrI4CastEv" title="Permalink to this definition">¶</a><br /></dt>
+<dd></dd></dl>
+
+<dl class="function">
+<dt id="_CPPv4I0EN6marian7Factory2isEbv">
+<span id="_CPPv3I0EN6marian7Factory2isEv"></span><span id="_CPPv2I0EN6marian7Factory2isEv"></span><span class="target" id="classmarian_1_1Factory_1a7393e27f06313ea0c2f947577f5a0c85"></span>template&lt;class <code class="sig-name descname">Cast</code>&gt;<br />bool <code class="sig-name descname">is</code><span class="sig-paren">(</span><span class="sig-paren">)</span><a class="headerlink" href="#_CPPv4I0EN6marian7Factory2isEbv" title="Permalink to this definition">¶</a><br /></dt>
+<dd></dd></dl>
+
+</div>
+<div class="breathe-sectiondef docutils container">
+<p class="breathe-sectiondef-title rubric">Protected Attributes</p>
+<dl class="member">
+<dt id="_CPPv4N6marian7Factory8options_E">
+<span id="_CPPv3N6marian7Factory8options_E"></span><span id="_CPPv2N6marian7Factory8options_E"></span><span id="marian::Factory::options___Ptr:Options:"></span><span class="target" id="classmarian_1_1Factory_1a9bb7f7a432f482665443b33a38cb433a"></span><a class="reference internal" href="typedef_definitions_8h_1ad1a373be43a00ef9ce35666145137b08.html#_CPPv4N6marian3PtrE" title="marian::Ptr">Ptr</a>&lt;<a class="reference internal" href="classmarian_1_1Options.html#_CPPv4N6marian7OptionsE" title="marian::Options">Options</a>&gt; <code class="sig-name descname">options_</code><a class="headerlink" href="#_CPPv4N6marian7Factory8options_E" title="Permalink to this definition">¶</a><br /></dt>
+<dd></dd></dl>
+
+</div>
+</dd></dl>
+
+</div>
+</div>
+
+
+           </div>
+           
+          </div>
+          <footer>
+    <div class="rst-footer-buttons" role="navigation" aria-label="footer navigation">
+        <a href="classmarian_1_1FakeMPIWrapper.html" class="btn btn-neutral float-right" title="Class FakeMPIWrapper" accesskey="n" rel="next">Next <span class="fa fa-arrow-circle-right" aria-hidden="true"></span></a>
+        <a href="classmarian_1_1FactoredVocab_1_1WordLUT.html" class="btn btn-neutral float-left" title="Class FactoredVocab::WordLUT" accesskey="p" rel="prev"><span class="fa fa-arrow-circle-left" aria-hidden="true"></span> Previous</a>
+    </div>
+
+  <hr/>
+
+  <div role="contentinfo">
+    <p>
+        &#169; Copyright 2021, Marian NMT Team.
+
+    </p>
+  </div>
+    
+    
+    
+    Built with <a href="https://www.sphinx-doc.org/">Sphinx</a> using a
+    
+    <a href="https://github.com/readthedocs/sphinx_rtd_theme">theme</a>
+    
+    provided by <a href="https://readthedocs.org">Read the Docs</a>. 
+
+</footer>
+        </div>
+      </div>
+
+    </section>
+
+  </div>
+  
+
+  <script type="text/javascript">
+      jQuery(function () {
+          SphinxRtdTheme.Navigation.enable(true);
+      });
+  </script>
+
+  
+  
+    
+   
+
+</body>
+</html>

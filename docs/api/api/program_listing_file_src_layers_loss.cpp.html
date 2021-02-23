@@ -1,0 +1,258 @@
+
+
+<!DOCTYPE html>
+<html class="writer-html5" lang="en" >
+<head>
+  <meta charset="utf-8" />
+  
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  
+  <title>Program Listing for File loss.cpp &mdash; Marian NMT v1.10.1 2021-02-23 documentation</title>
+  
+
+  
+  <link rel="stylesheet" href="../_static/css/theme.css" type="text/css" />
+  <link rel="stylesheet" href="../_static/pygments.css" type="text/css" />
+  <link rel="stylesheet" href="../_static/css/custom.css" type="text/css" />
+  <link rel="stylesheet" href="../_static/collapsible-lists/css/tree_view.css" type="text/css" />
+
+  
+  
+
+  
+  
+
+  
+    <link rel="canonical" href="http://marian-nmt.github.io/docs/api/api/program_listing_file_src_layers_loss.cpp.html" />
+
+  
+  <!--[if lt IE 9]>
+    <script src="../_static/js/html5shiv.min.js"></script>
+  <![endif]-->
+  
+    
+      <script type="text/javascript" id="documentation_options" data-url_root="../" src="../_static/documentation_options.js"></script>
+        <script src="../_static/jquery.js"></script>
+        <script src="../_static/underscore.js"></script>
+        <script src="../_static/doctools.js"></script>
+        <script src="../_static/language_data.js"></script>
+        <script src="../_static/collapsible-lists/js/CollapsibleLists.compressed.js"></script>
+        <script src="../_static/collapsible-lists/js/apply-collapsible-lists.js"></script>
+    
+    <script type="text/javascript" src="../_static/js/theme.js"></script>
+
+    
+    <link rel="index" title="Index" href="../genindex.html" />
+    <link rel="search" title="Search" href="../search.html" /> 
+</head>
+
+<body class="wy-body-for-nav">
+
+   
+  <div class="wy-grid-for-nav">
+    
+    <nav data-toggle="wy-nav-shift" class="wy-nav-side">
+      <div class="wy-side-scroll">
+        <div class="wy-side-nav-search" >
+          
+
+          
+            <a href="../index.html" class="icon icon-home"> Marian NMT
+          
+
+          
+          </a>
+
+          
+            
+            
+              <div class="version">
+                v1.10.1
+              </div>
+            
+          
+
+          
+<div role="search">
+  <form id="rtd-search-form" class="wy-form" action="../search.html" method="get">
+    <input type="text" name="q" placeholder="Search docs" />
+    <input type="hidden" name="check_keywords" value="yes" />
+    <input type="hidden" name="area" value="default" />
+  </form>
+</div>
+
+          
+        </div>
+
+        
+        <div class="wy-menu wy-menu-vertical" data-spy="affix" role="navigation" aria-label="main navigation">
+          
+            
+            
+              
+            
+            
+              <p class="caption"><span class="caption-text">Contents:</span></p>
+<ul>
+<li class="toctree-l1"><a class="reference internal" href="../install.html">Installation</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../graph.html">Expression graphs</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../operators.html">Graph operations</a></li>
+<li class="toctree-l1"><a class="reference internal" href="library_index.html">Library API</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../contributing.html">How to contribute to Marian</a></li>
+</ul>
+
+            
+          
+        </div>
+        
+      </div>
+    </nav>
+
+    <section data-toggle="wy-nav-shift" class="wy-nav-content-wrap">
+
+      
+      <nav class="wy-nav-top" aria-label="top navigation">
+        
+          <i data-toggle="wy-nav-top" class="fa fa-bars"></i>
+          <a href="../index.html">Marian NMT</a>
+        
+      </nav>
+
+
+      <div class="wy-nav-content">
+        
+        <div class="rst-content">
+        
+          
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+<div role="navigation" aria-label="breadcrumbs navigation">
+
+  <ul class="wy-breadcrumbs">
+    
+      <li><a href="../index.html" class="icon icon-home"></a> &raquo;</li>
+        
+      <li>Program Listing for File loss.cpp</li>
+    
+    
+      <li class="wy-breadcrumbs-aside">
+        
+          
+            <a href="../_sources/api/program_listing_file_src_layers_loss.cpp.rst.txt" rel="nofollow"> View page source</a>
+          
+        
+      </li>
+    
+  </ul>
+
+  
+  <hr/>
+</div>
+          <div role="main" class="document" itemscope="itemscope" itemtype="http://schema.org/Article">
+           <div itemprop="articleBody">
+            
+  <div class="section" id="program-listing-for-file-loss-cpp">
+<span id="program-listing-file-src-layers-loss-cpp"></span><h1>Program Listing for File loss.cpp<a class="headerlink" href="#program-listing-for-file-loss-cpp" title="Permalink to this headline">¶</a></h1>
+<p>↰ <a class="reference internal" href="file_src_layers_loss.cpp.html#file-src-layers-loss-cpp"><span class="std std-ref">Return to documentation for file</span></a> (<code class="docutils literal notranslate"><span class="pre">src/layers/loss.cpp</span></code>)</p>
+<div class="highlight-cpp notranslate"><div class="highlight"><pre><span></span><span class="cp">#include</span> <span class="cpf">&quot;layers/loss.h&quot;</span><span class="cp"></span>
+
+<span class="k">namespace</span> <span class="n">marian</span> <span class="p">{</span>
+
+<span class="c1">// @TODO, simplify this. Currently here for back-compat</span>
+<span class="n">Ptr</span><span class="o">&lt;</span><span class="n">LabelwiseLoss</span><span class="o">&gt;</span> <span class="n">newLoss</span><span class="p">(</span><span class="n">Ptr</span><span class="o">&lt;</span><span class="n">Options</span><span class="o">&gt;</span> <span class="n">options</span><span class="p">,</span> <span class="kt">bool</span> <span class="n">inference</span><span class="p">)</span> <span class="p">{</span>
+  <span class="kt">float</span> <span class="n">smoothing</span> <span class="o">=</span> <span class="n">inference</span> <span class="o">?</span> <span class="mf">0.f</span> <span class="o">:</span> <span class="n">options</span><span class="o">-&gt;</span><span class="n">get</span><span class="o">&lt;</span><span class="kt">float</span><span class="o">&gt;</span><span class="p">(</span><span class="s">&quot;label-smoothing&quot;</span><span class="p">);</span>
+  <span class="kt">float</span> <span class="n">factorWeight</span> <span class="o">=</span> <span class="n">options</span><span class="o">-&gt;</span><span class="n">get</span><span class="o">&lt;</span><span class="kt">float</span><span class="o">&gt;</span><span class="p">(</span><span class="s">&quot;factor-weight&quot;</span><span class="p">,</span> <span class="mf">1.0f</span><span class="p">);</span>
+  <span class="n">std</span><span class="o">::</span><span class="n">string</span> <span class="n">costType</span> <span class="o">=</span> <span class="n">options</span><span class="o">-&gt;</span><span class="n">get</span><span class="o">&lt;</span><span class="n">std</span><span class="o">::</span><span class="n">string</span><span class="o">&gt;</span><span class="p">(</span><span class="s">&quot;cost-type&quot;</span><span class="p">,</span> <span class="s">&quot;ce-mean&quot;</span><span class="p">);</span>
+  <span class="kt">bool</span> <span class="n">unlikelihood</span> <span class="o">=</span> <span class="n">options</span><span class="o">-&gt;</span><span class="n">get</span><span class="o">&lt;</span><span class="kt">bool</span><span class="o">&gt;</span><span class="p">(</span><span class="s">&quot;unlikelihood-loss&quot;</span><span class="p">,</span> <span class="nb">false</span><span class="p">);</span>
+
+  <span class="k">if</span><span class="p">(</span><span class="n">costType</span> <span class="o">==</span> <span class="s">&quot;ce-rescore&quot;</span><span class="p">)</span> <span class="p">{</span>  <span class="c1">// per-batch-item scores (while ce-mean reduces over batch)</span>
+    <span class="kt">bool</span> <span class="n">wordScores</span> <span class="o">=</span> <span class="n">options</span><span class="o">-&gt;</span><span class="n">get</span><span class="o">&lt;</span><span class="kt">bool</span><span class="o">&gt;</span><span class="p">(</span><span class="s">&quot;word-scores&quot;</span><span class="p">,</span> <span class="nb">false</span><span class="p">);</span>
+    <span class="k">return</span> <span class="n">New</span><span class="o">&lt;</span><span class="n">RescorerLoss</span><span class="o">&gt;</span><span class="p">(</span><span class="n">wordScores</span><span class="p">);</span>
+  <span class="p">}</span> <span class="k">else</span> <span class="k">if</span><span class="p">(</span><span class="n">unlikelihood</span><span class="p">)</span> <span class="p">{</span>
+    <span class="n">ABORT_IF</span><span class="p">(</span><span class="o">!</span><span class="n">options</span><span class="o">-&gt;</span><span class="n">hasAndNotEmpty</span><span class="p">(</span><span class="s">&quot;data-weighting&quot;</span><span class="p">)</span>
+             <span class="o">&amp;&amp;</span> <span class="n">options</span><span class="o">-&gt;</span><span class="n">get</span><span class="o">&lt;</span><span class="n">std</span><span class="o">::</span><span class="n">string</span><span class="o">&gt;</span><span class="p">(</span><span class="s">&quot;data-weighting-type&quot;</span><span class="p">)</span> <span class="o">!=</span> <span class="s">&quot;word&quot;</span><span class="p">,</span>
+             <span class="s">&quot;Unlikelihood loss training requires error annotation in form of per-target-label scores&quot;</span><span class="p">);</span>
+    <span class="k">return</span> <span class="n">New</span><span class="o">&lt;</span><span class="n">SequenceUnlikelihoodLoss</span><span class="o">&gt;</span><span class="p">(</span><span class="n">smoothing</span><span class="p">,</span> <span class="n">factorWeight</span><span class="p">);</span> <span class="c1">// this is a mix of CE-loss and unlikelihood less depending on values given for data-weighting</span>
+  <span class="p">}</span> <span class="k">else</span> <span class="p">{</span>  <span class="c1">// same as ce-mean  --@TODO: better check all allowed values, and fail for invalid ones. E.g. what about ce-sum?</span>
+    <span class="k">return</span> <span class="n">New</span><span class="o">&lt;</span><span class="n">CrossEntropyLoss</span><span class="o">&gt;</span><span class="p">(</span><span class="n">smoothing</span><span class="p">,</span> <span class="n">factorWeight</span><span class="p">);</span>
+  <span class="p">}</span>
+<span class="p">}</span>
+
+<span class="c1">// see loss.h for detailed explanations of each class</span>
+<span class="n">Ptr</span><span class="o">&lt;</span><span class="n">MultiRationalLoss</span><span class="o">&gt;</span> <span class="n">newMultiLoss</span><span class="p">(</span><span class="n">Ptr</span><span class="o">&lt;</span><span class="n">Options</span><span class="o">&gt;</span> <span class="n">options</span><span class="p">)</span> <span class="p">{</span>
+    <span class="n">std</span><span class="o">::</span><span class="n">string</span> <span class="n">multiLossType</span> <span class="o">=</span> <span class="n">options</span><span class="o">-&gt;</span><span class="n">get</span><span class="o">&lt;</span><span class="n">std</span><span class="o">::</span><span class="n">string</span><span class="o">&gt;</span><span class="p">(</span><span class="s">&quot;multi-loss-type&quot;</span><span class="p">,</span> <span class="s">&quot;sum&quot;</span><span class="p">);</span>
+    <span class="k">if</span><span class="p">(</span><span class="n">multiLossType</span> <span class="o">==</span> <span class="s">&quot;sum&quot;</span><span class="p">)</span>         <span class="c1">// sum of sums</span>
+      <span class="k">return</span> <span class="n">New</span><span class="o">&lt;</span><span class="n">SumMultiRationalLoss</span><span class="o">&gt;</span><span class="p">();</span>
+    <span class="k">else</span> <span class="nf">if</span><span class="p">(</span><span class="n">multiLossType</span> <span class="o">==</span> <span class="s">&quot;scaled&quot;</span><span class="p">)</span> <span class="c1">// sum of scaled sums, first element is reference scale</span>
+      <span class="k">return</span> <span class="n">New</span><span class="o">&lt;</span><span class="n">ScaledMultiRationalLoss</span><span class="o">&gt;</span><span class="p">();</span>
+    <span class="k">else</span> <span class="nf">if</span><span class="p">(</span><span class="n">multiLossType</span> <span class="o">==</span> <span class="s">&quot;mean&quot;</span><span class="p">)</span>   <span class="c1">// sum of means</span>
+      <span class="k">return</span> <span class="n">New</span><span class="o">&lt;</span><span class="n">MeanMultiRationalLoss</span><span class="o">&gt;</span><span class="p">();</span>
+    <span class="k">else</span>
+      <span class="nf">ABORT</span><span class="p">(</span><span class="s">&quot;Unknown multi-loss-type {}&quot;</span><span class="p">,</span> <span class="n">multiLossType</span><span class="p">);</span>
+<span class="p">}</span>
+
+<span class="p">}</span>  <span class="c1">// namespace marian</span>
+</pre></div>
+</div>
+</div>
+
+
+           </div>
+           
+          </div>
+          <footer>
+
+  <hr/>
+
+  <div role="contentinfo">
+    <p>
+        &#169; Copyright 2021, Marian NMT Team.
+
+    </p>
+  </div>
+    
+    
+    
+    Built with <a href="https://www.sphinx-doc.org/">Sphinx</a> using a
+    
+    <a href="https://github.com/readthedocs/sphinx_rtd_theme">theme</a>
+    
+    provided by <a href="https://readthedocs.org">Read the Docs</a>. 
+
+</footer>
+        </div>
+      </div>
+
+    </section>
+
+  </div>
+  
+
+  <script type="text/javascript">
+      jQuery(function () {
+          SphinxRtdTheme.Navigation.enable(true);
+      });
+  </script>
+
+  
+  
+    
+   
+
+</body>
+</html>

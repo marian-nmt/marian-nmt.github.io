@@ -1,0 +1,737 @@
+
+
+<!DOCTYPE html>
+<html class="writer-html5" lang="en" >
+<head>
+  <meta charset="utf-8" />
+  
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  
+  <title>Program Listing for File graph_group_sync.cpp &mdash; Marian NMT v1.10.1 2021-02-23 documentation</title>
+  
+
+  
+  <link rel="stylesheet" href="../_static/css/theme.css" type="text/css" />
+  <link rel="stylesheet" href="../_static/pygments.css" type="text/css" />
+  <link rel="stylesheet" href="../_static/css/custom.css" type="text/css" />
+  <link rel="stylesheet" href="../_static/collapsible-lists/css/tree_view.css" type="text/css" />
+
+  
+  
+
+  
+  
+
+  
+    <link rel="canonical" href="http://marian-nmt.github.io/docs/api/api/program_listing_file_src_training_graph_group_sync.cpp.html" />
+
+  
+  <!--[if lt IE 9]>
+    <script src="../_static/js/html5shiv.min.js"></script>
+  <![endif]-->
+  
+    
+      <script type="text/javascript" id="documentation_options" data-url_root="../" src="../_static/documentation_options.js"></script>
+        <script src="../_static/jquery.js"></script>
+        <script src="../_static/underscore.js"></script>
+        <script src="../_static/doctools.js"></script>
+        <script src="../_static/language_data.js"></script>
+        <script src="../_static/collapsible-lists/js/CollapsibleLists.compressed.js"></script>
+        <script src="../_static/collapsible-lists/js/apply-collapsible-lists.js"></script>
+    
+    <script type="text/javascript" src="../_static/js/theme.js"></script>
+
+    
+    <link rel="index" title="Index" href="../genindex.html" />
+    <link rel="search" title="Search" href="../search.html" /> 
+</head>
+
+<body class="wy-body-for-nav">
+
+   
+  <div class="wy-grid-for-nav">
+    
+    <nav data-toggle="wy-nav-shift" class="wy-nav-side">
+      <div class="wy-side-scroll">
+        <div class="wy-side-nav-search" >
+          
+
+          
+            <a href="../index.html" class="icon icon-home"> Marian NMT
+          
+
+          
+          </a>
+
+          
+            
+            
+              <div class="version">
+                v1.10.1
+              </div>
+            
+          
+
+          
+<div role="search">
+  <form id="rtd-search-form" class="wy-form" action="../search.html" method="get">
+    <input type="text" name="q" placeholder="Search docs" />
+    <input type="hidden" name="check_keywords" value="yes" />
+    <input type="hidden" name="area" value="default" />
+  </form>
+</div>
+
+          
+        </div>
+
+        
+        <div class="wy-menu wy-menu-vertical" data-spy="affix" role="navigation" aria-label="main navigation">
+          
+            
+            
+              
+            
+            
+              <p class="caption"><span class="caption-text">Contents:</span></p>
+<ul>
+<li class="toctree-l1"><a class="reference internal" href="../install.html">Installation</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../graph.html">Expression graphs</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../operators.html">Graph operations</a></li>
+<li class="toctree-l1"><a class="reference internal" href="library_index.html">Library API</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../contributing.html">How to contribute to Marian</a></li>
+</ul>
+
+            
+          
+        </div>
+        
+      </div>
+    </nav>
+
+    <section data-toggle="wy-nav-shift" class="wy-nav-content-wrap">
+
+      
+      <nav class="wy-nav-top" aria-label="top navigation">
+        
+          <i data-toggle="wy-nav-top" class="fa fa-bars"></i>
+          <a href="../index.html">Marian NMT</a>
+        
+      </nav>
+
+
+      <div class="wy-nav-content">
+        
+        <div class="rst-content">
+        
+          
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+<div role="navigation" aria-label="breadcrumbs navigation">
+
+  <ul class="wy-breadcrumbs">
+    
+      <li><a href="../index.html" class="icon icon-home"></a> &raquo;</li>
+        
+      <li>Program Listing for File graph_group_sync.cpp</li>
+    
+    
+      <li class="wy-breadcrumbs-aside">
+        
+          
+            <a href="../_sources/api/program_listing_file_src_training_graph_group_sync.cpp.rst.txt" rel="nofollow"> View page source</a>
+          
+        
+      </li>
+    
+  </ul>
+
+  
+  <hr/>
+</div>
+          <div role="main" class="document" itemscope="itemscope" itemtype="http://schema.org/Article">
+           <div itemprop="articleBody">
+            
+  <div class="section" id="program-listing-for-file-graph-group-sync-cpp">
+<span id="program-listing-file-src-training-graph-group-sync-cpp"></span><h1>Program Listing for File graph_group_sync.cpp<a class="headerlink" href="#program-listing-for-file-graph-group-sync-cpp" title="Permalink to this headline">¶</a></h1>
+<p>↰ <a class="reference internal" href="file_src_training_graph_group_sync.cpp.html#file-src-training-graph-group-sync-cpp"><span class="std std-ref">Return to documentation for file</span></a> (<code class="docutils literal notranslate"><span class="pre">src/training/graph_group_sync.cpp</span></code>)</p>
+<div class="highlight-cpp notranslate"><div class="highlight"><pre><span></span><span class="cp">#include</span> <span class="cpf">&quot;training/graph_group_sync.h&quot;</span><span class="cp"></span>
+
+<span class="k">namespace</span> <span class="n">marian</span> <span class="p">{</span>
+
+<span class="n">SyncGraphGroup</span><span class="o">::</span><span class="n">SyncGraphGroup</span><span class="p">(</span><span class="n">Ptr</span><span class="o">&lt;</span><span class="n">Options</span><span class="o">&gt;</span> <span class="n">config</span><span class="p">,</span> <span class="n">Ptr</span><span class="o">&lt;</span><span class="n">IMPIWrapper</span><span class="o">&gt;</span> <span class="n">mpi</span><span class="p">)</span>
+    <span class="o">:</span> <span class="n">GraphGroup</span><span class="p">(</span><span class="n">config</span><span class="p">),</span> <span class="n">ExponentialSmoothing</span><span class="p">(</span><span class="n">config</span><span class="p">),</span>
+      <span class="n">delay_</span><span class="p">{</span><span class="n">options_</span><span class="o">-&gt;</span><span class="n">get</span><span class="o">&lt;</span><span class="kt">double</span><span class="o">&gt;</span><span class="p">(</span><span class="s">&quot;optimizer-delay&quot;</span><span class="p">)},</span> <span class="n">mpi_</span><span class="p">(</span><span class="n">mpi</span><span class="p">)</span> <span class="p">{</span> <span class="c1">// @TODO: rename delay_ to something else; delay means delayed updated, not accumulation</span>
+
+  <span class="n">devices_</span> <span class="o">=</span> <span class="n">Config</span><span class="o">::</span><span class="n">getDevices</span><span class="p">(</span><span class="n">options_</span><span class="p">,</span> <span class="n">mpi_</span><span class="o">-&gt;</span><span class="n">myMPIRank</span><span class="p">(),</span> <span class="n">mpi_</span><span class="o">-&gt;</span><span class="n">numMPIProcesses</span><span class="p">());</span>
+  <span class="k">for</span><span class="p">(</span><span class="k">auto</span> <span class="nl">device</span> <span class="p">:</span> <span class="n">devices_</span><span class="p">)</span> <span class="p">{</span>
+    <span class="k">auto</span> <span class="n">graph</span> <span class="o">=</span> <span class="n">New</span><span class="o">&lt;</span><span class="n">ExpressionGraph</span><span class="o">&gt;</span><span class="p">();</span>
+    <span class="n">graph</span><span class="o">-&gt;</span><span class="n">setDevice</span><span class="p">(</span><span class="n">device</span><span class="p">);</span>
+    <span class="n">graph</span><span class="o">-&gt;</span><span class="n">setCheckpointing</span><span class="p">(</span><span class="n">options_</span><span class="o">-&gt;</span><span class="n">get</span><span class="o">&lt;</span><span class="kt">bool</span><span class="o">&gt;</span><span class="p">(</span><span class="s">&quot;gradient-checkpointing&quot;</span><span class="p">));</span>
+    <span class="n">graph</span><span class="o">-&gt;</span><span class="n">reserveWorkspaceMB</span><span class="p">(</span><span class="n">options_</span><span class="o">-&gt;</span><span class="n">get</span><span class="o">&lt;</span><span class="kt">size_t</span><span class="o">&gt;</span><span class="p">(</span><span class="s">&quot;workspace&quot;</span><span class="p">));</span>
+
+    <span class="n">graphs_</span><span class="p">.</span><span class="n">push_back</span><span class="p">(</span><span class="n">graph</span><span class="p">);</span>
+    <span class="n">shardOpt_</span><span class="p">.</span><span class="n">push_back</span><span class="p">(</span><span class="n">Optimizer</span><span class="p">(</span><span class="n">options_</span><span class="p">));</span>
+    <span class="n">builders_</span><span class="p">.</span><span class="n">push_back</span><span class="p">(</span><span class="n">models</span><span class="o">::</span><span class="n">createCriterionFunctionFromOptions</span><span class="p">(</span><span class="n">options_</span><span class="p">,</span> <span class="n">models</span><span class="o">::</span><span class="n">usage</span><span class="o">::</span><span class="n">training</span><span class="p">));</span>
+  <span class="p">}</span>
+
+  <span class="c1">// Note: We may well end up with only one MPI process or only one graph per worker.</span>
+  <span class="c1">// This part of the code will not special-case any of this here.</span>
+  <span class="c1">// Rather, it is assumed that the communicator knows to reduce unnecessary transfers to no-ops.</span>
+  <span class="n">comm_</span> <span class="o">=</span> <span class="n">createCommunicator</span><span class="p">(</span><span class="n">graphs_</span><span class="p">,</span> <span class="cm">/*noNccl=*/</span><span class="n">options_</span><span class="o">-&gt;</span><span class="n">get</span><span class="o">&lt;</span><span class="kt">bool</span><span class="o">&gt;</span><span class="p">(</span><span class="s">&quot;no-nccl&quot;</span><span class="p">,</span> <span class="nb">false</span><span class="p">),</span> <span class="cm">/*mpi=*/</span><span class="n">mpi_</span><span class="p">);</span>
+
+  <span class="k">auto</span> <span class="n">formattedDeviceType</span> <span class="o">=</span> <span class="n">utils</span><span class="o">::</span><span class="n">utf8ToUpper</span><span class="p">(</span><span class="n">devices_</span><span class="p">.</span><span class="n">front</span><span class="p">().</span><span class="n">typeAsString</span><span class="p">())</span> <span class="o">+</span> <span class="s">&quot;s&quot;</span><span class="p">;</span>
+  <span class="k">if</span> <span class="p">(</span><span class="n">mpi_</span><span class="o">-&gt;</span><span class="n">numMPIProcesses</span><span class="p">()</span> <span class="o">&gt;</span> <span class="mi">1</span><span class="p">)</span>
+    <span class="n">LOG</span><span class="p">(</span><span class="n">info</span><span class="p">,</span> <span class="s">&quot;[training] Using {} {}, distributed over {} MPI processes&quot;</span><span class="p">,</span> <span class="n">mpi_</span><span class="o">-&gt;</span><span class="n">numMPIProcesses</span><span class="p">()</span> <span class="o">*</span> <span class="n">devices_</span><span class="p">.</span><span class="n">size</span><span class="p">(),</span> <span class="n">formattedDeviceType</span><span class="p">,</span> <span class="n">mpi_</span><span class="o">-&gt;</span><span class="n">numMPIProcesses</span><span class="p">());</span>
+  <span class="k">else</span>
+    <span class="nf">LOG</span><span class="p">(</span><span class="n">info</span><span class="p">,</span> <span class="s">&quot;[training] Using {} {}&quot;</span><span class="p">,</span> <span class="n">devices_</span><span class="p">.</span><span class="n">size</span><span class="p">(),</span> <span class="n">formattedDeviceType</span><span class="p">);</span>
+<span class="p">}</span>
+
+<span class="kt">void</span> <span class="n">SyncGraphGroup</span><span class="o">::</span><span class="n">setScheduler</span><span class="p">(</span><span class="n">Ptr</span><span class="o">&lt;</span><span class="n">Scheduler</span><span class="o">&gt;</span> <span class="n">scheduler</span><span class="p">)</span> <span class="cm">/*override*/</span> <span class="p">{</span>
+  <span class="n">validate</span><span class="p">();</span>
+  <span class="n">scheduler_</span> <span class="o">=</span> <span class="n">scheduler</span><span class="p">;</span>
+  <span class="c1">// optimizer has to be registered last to see changes of learning rate</span>
+  <span class="c1">// @TODO: ^^Fix this comment. Either it refers to the scheduler, or it should be moved. Which one?</span>
+  <span class="n">scheduler_</span><span class="o">-&gt;</span><span class="n">registerTrainingObserver</span><span class="p">(</span><span class="n">scheduler_</span><span class="p">);</span>
+
+  <span class="k">for</span><span class="p">(</span><span class="k">auto</span> <span class="nl">opt</span> <span class="p">:</span> <span class="n">shardOpt_</span><span class="p">)</span>
+    <span class="n">scheduler_</span><span class="o">-&gt;</span><span class="n">registerTrainingObserver</span><span class="p">(</span><span class="n">opt</span><span class="p">);</span>
+<span class="p">}</span>
+
+<span class="kt">void</span> <span class="n">SyncGraphGroup</span><span class="o">::</span><span class="n">initialize</span><span class="p">(</span><span class="k">const</span> <span class="n">Ptr</span><span class="o">&lt;</span><span class="n">data</span><span class="o">::</span><span class="n">Batch</span><span class="o">&gt;&amp;</span> <span class="n">exampleBatch</span><span class="p">)</span> <span class="p">{</span>
+  <span class="c1">// Initialize graphs with random weights in one forward step</span>
+  <span class="c1">// Also allocate and clear the gradients</span>
+  <span class="n">comm_</span><span class="o">-&gt;</span><span class="n">foreach</span><span class="p">([</span><span class="o">&amp;</span><span class="p">](</span><span class="kt">size_t</span> <span class="n">i</span><span class="p">,</span> <span class="kt">size_t</span> <span class="cm">/*begin*/</span><span class="p">,</span> <span class="kt">size_t</span> <span class="cm">/*end*/</span><span class="p">)</span> <span class="p">{</span>
+    <span class="n">builders_</span><span class="p">[</span><span class="n">i</span><span class="p">]</span><span class="o">-&gt;</span><span class="n">build</span><span class="p">(</span><span class="n">graphs_</span><span class="p">[</span><span class="n">i</span><span class="p">],</span> <span class="n">exampleBatch</span><span class="p">);</span>
+    <span class="n">graphs_</span><span class="p">[</span><span class="n">i</span><span class="p">]</span><span class="o">-&gt;</span><span class="n">forward</span><span class="p">();</span>
+    <span class="n">graphs_</span><span class="p">[</span><span class="n">i</span><span class="p">]</span><span class="o">-&gt;</span><span class="n">params</span><span class="p">()</span><span class="o">-&gt;</span><span class="n">allocateBackward</span><span class="p">();</span>
+    <span class="n">graphs_</span><span class="p">[</span><span class="n">i</span><span class="p">]</span><span class="o">-&gt;</span><span class="n">params</span><span class="p">()</span><span class="o">-&gt;</span><span class="n">set_zero_adjoint</span><span class="p">();</span>
+  <span class="p">});</span>
+
+  <span class="c1">// Copy weights from 0-th graph to all other graphs</span>
+  <span class="c1">// to have equal weights across devices</span>
+  <span class="n">comm_</span><span class="o">-&gt;</span><span class="n">foreach</span><span class="p">([</span><span class="o">&amp;</span><span class="p">](</span><span class="kt">size_t</span> <span class="n">i</span><span class="p">,</span> <span class="kt">size_t</span> <span class="cm">/*begin*/</span><span class="p">,</span> <span class="kt">size_t</span> <span class="cm">/*end*/</span><span class="p">)</span> <span class="p">{</span>
+    <span class="k">if</span> <span class="p">(</span><span class="n">i</span> <span class="o">&gt;</span> <span class="mi">0</span><span class="p">)</span>
+      <span class="n">graphs_</span><span class="p">[</span><span class="n">i</span><span class="p">]</span><span class="o">-&gt;</span><span class="n">params</span><span class="p">()</span><span class="o">-&gt;</span><span class="n">vals</span><span class="p">()</span><span class="o">-&gt;</span><span class="n">copyFrom</span><span class="p">(</span><span class="n">graphs_</span><span class="p">[</span><span class="mi">0</span><span class="p">]</span><span class="o">-&gt;</span><span class="n">params</span><span class="p">()</span><span class="o">-&gt;</span><span class="n">vals</span><span class="p">());</span>
+  <span class="p">});</span>
+<span class="p">}</span>
+
+<span class="kt">void</span> <span class="n">SyncGraphGroup</span><span class="o">::</span><span class="n">initializeAvg</span><span class="p">()</span> <span class="p">{</span>
+  <span class="n">Ptr</span><span class="o">&lt;</span><span class="n">ExpressionGraph</span><span class="o">&gt;</span> <span class="n">graphAvg</span><span class="p">;</span> <span class="c1">// CPU-side temp</span>
+  <span class="n">std</span><span class="o">::</span><span class="n">string</span> <span class="n">name</span> <span class="o">=</span> <span class="n">options_</span><span class="o">-&gt;</span><span class="n">get</span><span class="o">&lt;</span><span class="n">std</span><span class="o">::</span><span class="n">string</span><span class="o">&gt;</span><span class="p">(</span><span class="s">&quot;model&quot;</span><span class="p">);</span>
+  <span class="n">std</span><span class="o">::</span><span class="n">string</span> <span class="n">suffix</span> <span class="o">=</span> <span class="n">name</span><span class="p">.</span><span class="n">substr</span><span class="p">(</span><span class="n">name</span><span class="p">.</span><span class="n">size</span><span class="p">()</span> <span class="o">-</span> <span class="mi">4</span><span class="p">);</span>
+  <span class="n">ABORT_IF</span><span class="p">(</span><span class="n">suffix</span> <span class="o">!=</span> <span class="s">&quot;.npz&quot;</span> <span class="o">&amp;&amp;</span> <span class="n">suffix</span> <span class="o">!=</span> <span class="s">&quot;.bin&quot;</span><span class="p">,</span> <span class="s">&quot;Unknown model suffix {}&quot;</span><span class="p">,</span> <span class="n">suffix</span><span class="p">);</span>
+
+  <span class="k">if</span><span class="p">(</span><span class="n">filesystem</span><span class="o">::</span><span class="n">exists</span><span class="p">(</span><span class="n">name</span> <span class="o">+</span> <span class="s">&quot;.orig&quot;</span> <span class="o">+</span> <span class="n">suffix</span><span class="p">))</span> <span class="p">{</span>
+    <span class="c1">// Load the averaged parameters into a temporary graph</span>
+    <span class="n">graphAvg</span> <span class="o">=</span> <span class="n">New</span><span class="o">&lt;</span><span class="n">ExpressionGraph</span><span class="o">&gt;</span><span class="p">();</span>
+    <span class="n">graphAvg</span><span class="o">-&gt;</span><span class="n">setDevice</span><span class="p">({</span><span class="mi">0</span><span class="p">,</span> <span class="n">DeviceType</span><span class="o">::</span><span class="n">cpu</span><span class="p">});</span>
+
+    <span class="c1">// load model through builder to activate model specific loading functions.</span>
+    <span class="c1">// This is important if a model is overloading Model::load(...) and e.g.</span>
+    <span class="c1">// mapping matrix names as in Amun.h</span>
+    <span class="k">auto</span> <span class="n">builder</span> <span class="o">=</span> <span class="n">models</span><span class="o">::</span><span class="n">createCriterionFunctionFromOptions</span><span class="p">(</span><span class="n">options_</span><span class="p">,</span> <span class="n">models</span><span class="o">::</span><span class="n">usage</span><span class="o">::</span><span class="n">training</span><span class="p">);</span>
+    <span class="n">builder</span><span class="o">-&gt;</span><span class="n">load</span><span class="p">(</span><span class="n">graphAvg</span><span class="p">,</span> <span class="n">name</span><span class="p">,</span> <span class="nb">false</span><span class="p">);</span>
+    <span class="n">graphAvg</span><span class="o">-&gt;</span><span class="n">forward</span><span class="p">();</span> <span class="c1">// initialize parameters if needed</span>
+  <span class="p">}</span>
+
+  <span class="k">auto</span> <span class="n">init</span> <span class="o">=</span> <span class="p">[</span><span class="o">&amp;</span><span class="p">](</span><span class="kt">size_t</span> <span class="n">localDeviceIndex</span><span class="p">,</span> <span class="kt">size_t</span> <span class="n">begin</span><span class="p">,</span> <span class="kt">size_t</span> <span class="n">end</span><span class="p">)</span> <span class="p">{</span>
+    <span class="kt">size_t</span> <span class="n">size</span> <span class="o">=</span> <span class="n">end</span><span class="o">-</span><span class="n">begin</span><span class="p">;</span>
+
+    <span class="c1">// get the device-specific allocator</span>
+    <span class="k">auto</span> <span class="n">paramsAllocator</span> <span class="o">=</span> <span class="n">New</span><span class="o">&lt;</span><span class="n">TensorAllocator</span><span class="o">&gt;</span><span class="p">(</span><span class="n">graphs_</span><span class="p">[</span><span class="n">localDeviceIndex</span><span class="p">]</span><span class="o">-&gt;</span><span class="n">getBackend</span><span class="p">());</span>
+    <span class="n">paramsAllocs_</span><span class="p">[</span><span class="n">localDeviceIndex</span><span class="p">]</span> <span class="o">=</span> <span class="n">paramsAllocator</span><span class="p">;</span>
+
+    <span class="n">paramsAllocator</span><span class="o">-&gt;</span><span class="n">reserveExact</span><span class="p">(</span><span class="n">size</span> <span class="o">*</span> <span class="k">sizeof</span><span class="p">(</span><span class="kt">float</span><span class="p">));</span>
+
+    <span class="n">Tensor</span> <span class="n">paramAvg</span><span class="p">;</span>
+    <span class="n">paramsAllocator</span><span class="o">-&gt;</span><span class="n">allocate</span><span class="p">(</span><span class="n">paramAvg</span><span class="p">,</span> <span class="p">{</span><span class="mi">1</span><span class="p">,</span> <span class="p">(</span><span class="kt">int</span><span class="p">)</span><span class="n">size</span><span class="p">});</span>
+    <span class="n">paramsAvg_</span><span class="p">[</span><span class="n">localDeviceIndex</span><span class="p">]</span> <span class="o">=</span> <span class="n">paramAvg</span><span class="p">;</span>
+
+    <span class="k">if</span><span class="p">(</span><span class="n">graphAvg</span><span class="p">)</span>
+      <span class="n">paramAvg</span><span class="o">-&gt;</span><span class="n">copyFrom</span><span class="p">(</span><span class="n">graphAvg</span>  <span class="o">-&gt;</span><span class="n">params</span><span class="p">()</span><span class="o">-&gt;</span><span class="n">vals</span><span class="p">()</span><span class="o">-&gt;</span><span class="n">subtensor</span><span class="p">(</span><span class="n">begin</span><span class="p">,</span> <span class="n">size</span><span class="p">));</span>
+    <span class="k">else</span>
+      <span class="n">paramAvg</span><span class="o">-&gt;</span><span class="n">copyFrom</span><span class="p">(</span><span class="n">graphs_</span><span class="p">[</span><span class="mi">0</span><span class="p">]</span><span class="o">-&gt;</span><span class="n">params</span><span class="p">()</span><span class="o">-&gt;</span><span class="n">vals</span><span class="p">()</span><span class="o">-&gt;</span><span class="n">subtensor</span><span class="p">(</span><span class="n">begin</span><span class="p">,</span> <span class="n">size</span><span class="p">));</span>
+
+    <span class="c1">// note: for multi-node, graphAvg and graphs_[0] contain a complete copy, from which</span>
+    <span class="c1">// each MPI process copies only part into its respective shard(s)</span>
+  <span class="p">};</span>
+
+  <span class="n">paramsAllocs_</span><span class="p">.</span><span class="n">resize</span><span class="p">(</span><span class="n">graphs_</span><span class="p">.</span><span class="n">size</span><span class="p">());</span> <span class="c1">// allocators</span>
+  <span class="n">paramsAvg_</span><span class="p">.</span><span class="n">resize</span><span class="p">(</span><span class="n">graphs_</span><span class="p">.</span><span class="n">size</span><span class="p">());</span>    <span class="c1">// averaged parameters (shards; distributed over MPI processes if applicable)</span>
+  <span class="n">comm_</span><span class="o">-&gt;</span><span class="n">foreach</span><span class="p">(</span><span class="n">init</span><span class="p">,</span> <span class="cm">/*parallel=*/</span><span class="nb">false</span><span class="p">);</span> <span class="c1">// @TODO: is sequential operation necessary here? (is the allocation stuff sufficiently reentrant or thread-separated?)</span>
+<span class="p">}</span>
+
+<span class="n">Ptr</span><span class="o">&lt;</span><span class="n">data</span><span class="o">::</span><span class="n">BatchStats</span><span class="o">&gt;</span> <span class="n">SyncGraphGroup</span><span class="o">::</span><span class="n">collectStats</span><span class="p">(</span><span class="k">const</span> <span class="n">std</span><span class="o">::</span><span class="n">vector</span><span class="o">&lt;</span><span class="n">Ptr</span><span class="o">&lt;</span><span class="n">Vocab</span><span class="o">&gt;&gt;&amp;</span> <span class="n">vocabs</span><span class="p">)</span> <span class="p">{</span>
+  <span class="c1">// This function determines the granularity in which the reader provides data.</span>
+  <span class="c1">// If no mini-batch-fit, then user provides a constant number. It reads that much. We won&#39;t get into this function.</span>
+  <span class="c1">// If mini-batch-fit, then we get here and set miniBatchFitMultiplier_. Then...</span>
+  <span class="c1">// If dynamic MB scaling, then we want fine-grained minibatches of the size of one GPU.</span>
+  <span class="c1">// If not, we prefer a single large batch that can be split into equal-size parts over GPUs,</span>
+  <span class="c1">// so that we have perfect load balancing and read precisely as much as we need (no waste).</span>
+  <span class="kt">double</span> <span class="n">multiplier</span> <span class="o">=</span> <span class="n">devices_</span><span class="p">.</span><span class="n">size</span><span class="p">()</span> <span class="o">*</span> <span class="n">mpi_</span><span class="o">-&gt;</span><span class="n">numMPIProcesses</span><span class="p">()</span> <span class="o">*</span> <span class="n">delay_</span><span class="p">;</span>
+  <span class="kt">bool</span> <span class="n">isDynamic</span> <span class="o">=</span> <span class="n">scheduler_</span><span class="o">-&gt;</span><span class="n">isDynamicMBSizeScaling</span><span class="p">();</span>
+  <span class="kt">double</span> <span class="n">readerMultiplier</span> <span class="o">=</span> <span class="n">isDynamic</span> <span class="o">?</span> <span class="mf">1.</span> <span class="o">:</span> <span class="n">multiplier</span><span class="p">;</span> <span class="c1">// multiplier applied already by reader</span>
+  <span class="n">updateMultiplier_</span> <span class="o">=</span> <span class="n">isDynamic</span> <span class="o">?</span> <span class="nl">multiplier</span> <span class="p">:</span> <span class="mf">1.</span><span class="p">;</span>       <span class="c1">// multiplier applied later in update()</span>
+  <span class="k">return</span> <span class="n">GraphGroup</span><span class="o">::</span><span class="n">collectStats</span><span class="p">(</span><span class="n">graphs_</span><span class="p">[</span><span class="mi">0</span><span class="p">],</span> <span class="n">builders_</span><span class="p">[</span><span class="mi">0</span><span class="p">],</span> <span class="n">vocabs</span><span class="p">,</span> <span class="n">readerMultiplier</span><span class="p">);</span>
+<span class="p">}</span>
+
+<span class="c1">// helper for MB scaling: quantize the ratio with a given error margin</span>
+<span class="k">static</span> <span class="kt">double</span> <span class="n">roundUpRatio</span><span class="p">(</span><span class="kt">double</span> <span class="n">ratio</span><span class="p">)</span> <span class="p">{</span>
+  <span class="k">if</span> <span class="p">(</span><span class="n">ratio</span> <span class="o">==</span> <span class="mi">0</span><span class="p">)</span>
+    <span class="k">return</span> <span class="n">ratio</span><span class="p">;</span>
+  <span class="c1">// find largest power of two that fits into ratio</span>
+  <span class="kt">double</span> <span class="n">p</span> <span class="o">=</span> <span class="mi">1</span><span class="p">;</span>
+  <span class="k">while</span> <span class="p">(</span><span class="n">p</span><span class="o">*</span><span class="mi">2</span> <span class="o">&lt;</span> <span class="n">ratio</span><span class="p">)</span>
+    <span class="n">p</span> <span class="o">*=</span> <span class="mi">2</span><span class="p">;</span>
+  <span class="c1">// round up to nearest multiple of a largest power of 2 where relative error is within margin</span>
+  <span class="c1">// 25% error margin seems acceptable:</span>
+  <span class="c1">//  - using a 25% larger MB size should not break convergence</span>
+  <span class="c1">//  - @TODO: not using the first 25% of the next block is OK since those are dominated by data exchange</span>
+  <span class="kt">double</span> <span class="n">maxError</span> <span class="o">=</span> <span class="mf">0.25</span><span class="p">;</span>
+  <span class="k">while</span> <span class="p">(</span><span class="n">p</span> <span class="o">&gt;=</span> <span class="mi">1</span><span class="p">)</span> <span class="p">{</span>
+    <span class="kt">double</span> <span class="n">proposedRatio</span> <span class="o">=</span> <span class="n">ceil</span><span class="p">(</span><span class="n">ratio</span> <span class="o">/</span> <span class="n">p</span><span class="p">)</span> <span class="o">*</span> <span class="n">p</span><span class="p">;</span>
+    <span class="kt">double</span> <span class="n">error</span> <span class="o">=</span> <span class="p">(</span><span class="n">proposedRatio</span> <span class="o">-</span> <span class="n">ratio</span><span class="p">)</span> <span class="o">/</span> <span class="n">ratio</span><span class="p">;</span>
+    <span class="k">if</span> <span class="p">(</span><span class="n">fabs</span><span class="p">(</span><span class="n">error</span><span class="p">)</span> <span class="o">&lt;=</span> <span class="n">maxError</span><span class="p">)</span>
+      <span class="k">return</span> <span class="n">proposedRatio</span><span class="p">;</span>
+    <span class="n">p</span> <span class="o">/=</span> <span class="mi">2</span><span class="p">;</span>
+  <span class="p">}</span>
+  <span class="k">return</span> <span class="n">ratio</span><span class="p">;</span>
+<span class="p">}</span>
+
+<span class="c1">// helper routine that handles accumulation and load-balancing of sub-batches to fill all devices</span>
+<span class="c1">// It adds &#39;newBatch&#39; to &#39;pendingBatches_&#39;, and if sufficient batches have been queued, then</span>
+<span class="c1">// returns &#39;pendingBatches_&#39; in &#39;subBatches&#39; and resets it. If not, it returns false.</span>
+<span class="kt">bool</span> <span class="n">SyncGraphGroup</span><span class="o">::</span><span class="n">tryGetSubBatches</span><span class="p">(</span><span class="n">Ptr</span><span class="o">&lt;</span><span class="n">data</span><span class="o">::</span><span class="n">Batch</span><span class="o">&gt;</span> <span class="n">newBatch</span><span class="p">,</span>
+    <span class="n">std</span><span class="o">::</span><span class="n">vector</span><span class="o">&lt;</span><span class="n">Ptr</span><span class="o">&lt;</span><span class="n">data</span><span class="o">::</span><span class="n">Batch</span><span class="o">&gt;&gt;&amp;</span> <span class="n">subBatches</span><span class="p">,</span> <span class="kt">size_t</span><span class="o">&amp;</span> <span class="n">numReadBatches</span><span class="p">)</span> <span class="p">{</span>
+  <span class="c1">// The reader delivers in chunks of these sizes, according to case:</span>
+  <span class="c1">//  - no dynamic MB-size scaling:</span>
+  <span class="c1">//     - reader batch size = update batch size, with...</span>
+  <span class="c1">//     - mini-batch-fit:</span>
+  <span class="c1">//        - update batch size = what fits into all GPUs, times decay_ to allow experimenting with fractional sizes</span>
+  <span class="c1">//     - no mini-batch-fit:</span>
+  <span class="c1">//        - update batch size = user-specified size (user guarantees that it fits if distributed over delay_ GPUs)</span>
+  <span class="c1">//  - dynamic MB-size scaling:</span>
+  <span class="c1">//     - update batch size = aggregate reader batch size * (dynamic progress-based ratio * reference adjustment), with...</span>
+  <span class="c1">//     - mini-batch-fit:</span>
+  <span class="c1">//        - aggregate reader batch size = equal to what fits into one GPU * warpSize * delay_</span>
+  <span class="c1">//     - no mini-batch-fit:</span>
+  <span class="c1">//        - aggregate reader batch size = user-specified size (user guarantees that it fits if distributed over delay_ GPUs)</span>
+  <span class="c1">//     - reference adjustment =</span>
+  <span class="c1">//        - reference batch size specified: (reference batch size / typical aggregate reader batch size)</span>
+  <span class="c1">//        - no ref size specified: 1</span>
+
+  <span class="kt">size_t</span> <span class="n">warpSize</span> <span class="o">=</span> <span class="n">devices_</span><span class="p">.</span><span class="n">size</span><span class="p">()</span> <span class="o">*</span> <span class="n">mpi_</span><span class="o">-&gt;</span><span class="n">numMPIProcesses</span><span class="p">();</span> <span class="c1">// warp := set of batches processed concurrently across GPus and workers</span>
+
+  <span class="c1">// if not dynamic then return the big batch, but first split it over GPUs as it may be too large</span>
+  <span class="k">if</span> <span class="p">(</span><span class="o">!</span><span class="n">scheduler_</span><span class="o">-&gt;</span><span class="n">isDynamicMBSizeScaling</span><span class="p">())</span> <span class="p">{</span>
+    <span class="c1">// If mini-batch-fit, then the read batch is (devices_.size() * mpi_-&gt;numMPIProcesses() * delay_)</span>
+    <span class="c1">// times what fits one GPU. If not mini-batch-fit, it is whatever the user has specified, which</span>
+    <span class="c1">// is the user&#39;s responsibility to guarantee that it fits into &#39;delay_&#39; warps.</span>
+    <span class="c1">// Distribute evenly over all GPUs we have, using multiple warps if needed.</span>
+    <span class="kt">size_t</span> <span class="n">numWarps</span> <span class="o">=</span> <span class="p">(</span><span class="kt">size_t</span><span class="p">)</span><span class="n">ceil</span><span class="p">(</span><span class="n">delay_</span><span class="p">);</span>
+    <span class="n">subBatches</span> <span class="o">=</span> <span class="n">newBatch</span><span class="o">-&gt;</span><span class="n">split</span><span class="p">(</span><span class="n">numWarps</span> <span class="o">*</span> <span class="n">warpSize</span><span class="p">);</span>
+    <span class="n">numReadBatches</span> <span class="o">=</span> <span class="mi">1</span><span class="p">;</span>
+    <span class="k">return</span> <span class="nb">true</span><span class="p">;</span>
+  <span class="p">}</span>
+  <span class="n">LOG_ONCE</span><span class="p">(</span><span class="n">info</span><span class="p">,</span> <span class="s">&quot;[training] Dynamic mini-batch scaling enabled&quot;</span><span class="p">);</span>
+
+  <span class="c1">// if dynamic and mini-batch-fit, then we get batches in the size of what fits into one GPU</span>
+  <span class="n">pendingBatches_</span><span class="p">.</span><span class="n">push_back</span><span class="p">(</span><span class="n">newBatch</span><span class="p">);</span>
+
+  <span class="c1">// what ratio (how many batches in reader&#39;s batch size) do we want, based on current training progress schedule?</span>
+  <span class="kt">double</span> <span class="n">ratio</span> <span class="o">=</span> <span class="n">scheduler_</span><span class="o">-&gt;</span><span class="n">getDynamicMBSizeMultiplier</span><span class="p">();</span>
+
+  <span class="c1">// relative to what base? (what does ratio == 1 mean)</span>
+  <span class="n">ratio</span> <span class="o">*=</span> <span class="n">updateMultiplier_</span><span class="p">;</span> <span class="c1">// if mini-batch-fit, this is = warpSize * delay_, otherwise 1</span>
+
+  <span class="c1">// If a reference is given, then at progress == mbWarmup.n (ratio=1), we would like to have refBatchLabels instead of whichever</span>
+  <span class="c1">// the actual batch size is. Since we cannot know the future actual batch sizes that will be delivered</span>
+  <span class="c1">// by the reader, we approximate them with (typicalTrgBatchWords * updateMultiplier), and scale ratio accordingly.</span>
+  <span class="k">auto</span> <span class="n">refBatchLabels</span> <span class="o">=</span> <span class="n">options_</span><span class="o">-&gt;</span><span class="n">get</span><span class="o">&lt;</span><span class="kt">size_t</span><span class="o">&gt;</span><span class="p">(</span><span class="s">&quot;mini-batch-words&quot;</span><span class="p">);</span>
+  <span class="k">if</span> <span class="p">(</span><span class="n">refBatchLabels</span> <span class="o">!=</span> <span class="mi">0</span><span class="p">)</span> <span class="p">{</span>
+    <span class="n">LOG_ONCE</span><span class="p">(</span><span class="n">info</span><span class="p">,</span> <span class="s">&quot;[scheduler] Scaling to {} reference labels, using actual-batch-word estimate of {}&quot;</span><span class="p">,</span> <span class="n">refBatchLabels</span><span class="p">,</span> <span class="n">typicalTrgBatchWords_</span><span class="p">);</span>
+    <span class="n">ABORT_IF</span><span class="p">(</span><span class="n">typicalTrgBatchWords_</span> <span class="o">==</span> <span class="mi">0</span><span class="p">,</span> <span class="s">&quot;Dynamic scaling with words target requires MB size to be known in words&quot;</span><span class="p">);</span> <span class="c1">// happens if MB size is specified in sentences</span>
+    <span class="n">ratio</span> <span class="o">*=</span> <span class="p">(</span><span class="kt">double</span><span class="p">)</span><span class="n">refBatchLabels</span> <span class="o">/</span> <span class="p">(</span><span class="kt">double</span><span class="p">)(</span><span class="n">typicalTrgBatchWords_</span> <span class="o">*</span> <span class="n">updateMultiplier_</span><span class="p">);</span>
+  <span class="p">}</span>
+
+  <span class="c1">// round up to full batches if within a certain error margin  --@BUGBUG: Not invariant w.r.t. GPU size, as ratio is relative to what fits into 1 GPU</span>
+  <span class="n">ratio</span> <span class="o">=</span> <span class="n">roundUpRatio</span><span class="p">(</span><span class="n">ratio</span><span class="p">);</span>
+
+  <span class="k">if</span> <span class="p">(</span><span class="n">pendingBatches_</span><span class="p">.</span><span class="n">size</span><span class="p">()</span> <span class="o">&lt;</span> <span class="n">ratio</span><span class="p">)</span>
+    <span class="k">return</span> <span class="nb">false</span><span class="p">;</span> <span class="c1">// not enough data yet</span>
+
+  <span class="c1">// now we have enough to fill at least &#39;ratio&#39; batches</span>
+  <span class="c1">// @BUGBUG: We do not handle the case that fixed MB size * ratio exceeds GPU memory (we&#39;d need to split that).</span>
+
+  <span class="n">numReadBatches</span> <span class="o">=</span> <span class="n">pendingBatches_</span><span class="p">.</span><span class="n">size</span><span class="p">();</span> <span class="c1">// remember original batch-counter increment from reader (which is not always the same as subBatches.size() in the end)</span>
+
+  <span class="c1">// in fact, we got too much, so make up for it by shortening all batches to accurately reflect desired ratio</span>
+  <span class="c1">// e.g. ratio = 3.3 for 4 batches -&gt; Reduce each by 3.3/4</span>
+  <span class="c1">// Alternatively, we could just shorten the last &#39;warp&#39;, but that would not be invariant to warp size.</span>
+  <span class="k">for</span> <span class="p">(</span><span class="k">auto</span><span class="o">&amp;</span> <span class="nl">batch</span> <span class="p">:</span> <span class="n">pendingBatches_</span><span class="p">)</span> <span class="p">{</span>
+    <span class="k">auto</span> <span class="n">reducedBatchSize</span> <span class="o">=</span> <span class="p">(</span><span class="kt">size_t</span><span class="p">)</span><span class="n">ceil</span><span class="p">((</span><span class="kt">double</span><span class="p">)</span><span class="n">batch</span><span class="o">-&gt;</span><span class="n">size</span><span class="p">()</span> <span class="o">*</span> <span class="n">ratio</span> <span class="o">/</span> <span class="p">(</span><span class="kt">double</span><span class="p">)</span><span class="n">pendingBatches_</span><span class="p">.</span><span class="n">size</span><span class="p">());</span>
+    <span class="kt">size_t</span> <span class="n">minSize</span> <span class="o">=</span> <span class="mi">1</span><span class="p">;</span>
+    <span class="k">if</span> <span class="p">(</span><span class="n">pendingBatches_</span><span class="p">.</span><span class="n">size</span><span class="p">()</span> <span class="o">==</span> <span class="mi">1</span><span class="p">)</span> <span class="p">{</span> <span class="c1">// enforce a minimum (only needed/correct if still in first batch)</span>
+      <span class="kt">size_t</span> <span class="n">minTrgWords</span> <span class="o">=</span> <span class="mi">256</span><span class="p">;</span>        <span class="c1">// don&#39;t go below this number of target words, as it seems excessive  --@TODO: parameterize?</span>
+      <span class="n">minSize</span> <span class="o">=</span> <span class="mi">1</span> <span class="o">+</span> <span class="p">(</span><span class="n">minTrgWords</span> <span class="o">*</span> <span class="n">batch</span><span class="o">-&gt;</span><span class="n">size</span><span class="p">()</span> <span class="o">-</span> <span class="mi">1</span><span class="p">)</span> <span class="o">/</span> <span class="n">batch</span><span class="o">-&gt;</span><span class="n">wordsTrg</span><span class="p">();</span> <span class="c1">// approximately convert minTrgWords into a #sentences</span>
+    <span class="p">}</span>
+    <span class="n">reducedBatchSize</span> <span class="o">=</span> <span class="n">std</span><span class="o">::</span><span class="n">max</span><span class="p">(</span><span class="n">reducedBatchSize</span><span class="p">,</span> <span class="n">minSize</span><span class="p">);</span>
+    <span class="k">if</span> <span class="p">(</span><span class="n">reducedBatchSize</span> <span class="o">&lt;</span> <span class="n">batch</span><span class="o">-&gt;</span><span class="n">size</span><span class="p">())</span>
+      <span class="n">batch</span> <span class="o">=</span> <span class="n">batch</span><span class="o">-&gt;</span><span class="n">split</span><span class="p">(</span><span class="cm">/*numSubBatches=*/</span><span class="mi">1</span><span class="p">,</span> <span class="n">reducedBatchSize</span><span class="p">).</span><span class="n">front</span><span class="p">();</span>
+  <span class="p">}</span>
+
+  <span class="c1">// load-balance: distribute the last numWarps-group&#39;s batches over GPUs</span>
+  <span class="c1">// This is tricky since batches do not have the same length, therefore we can only split, but not merge.</span>
+  <span class="k">auto</span> <span class="n">numWarps</span> <span class="o">=</span> <span class="p">(</span><span class="n">pendingBatches_</span><span class="p">.</span><span class="n">size</span><span class="p">()</span> <span class="o">-</span> <span class="mi">1</span><span class="p">)</span> <span class="o">/</span> <span class="n">warpSize</span> <span class="o">+</span> <span class="mi">1</span><span class="p">;</span> <span class="c1">// = ceil(#buffers / (#GPUs * #workers))</span>
+  <span class="k">auto</span> <span class="n">availableDevices</span> <span class="o">=</span> <span class="n">numWarps</span> <span class="o">*</span> <span class="n">warpSize</span><span class="p">;</span> <span class="c1">// we will run this many GPUs: better use them all</span>
+  <span class="k">if</span> <span class="p">(</span><span class="n">pendingBatches_</span><span class="p">.</span><span class="n">size</span><span class="p">()</span> <span class="o">&lt;</span> <span class="n">availableDevices</span><span class="p">)</span> <span class="p">{</span>
+    <span class="c1">// last warp does not use all available GPUs: try to re-balance</span>
+    <span class="k">auto</span> <span class="n">fullWarpsBatches</span> <span class="o">=</span> <span class="p">(</span><span class="n">numWarps</span> <span class="o">-</span> <span class="mi">1</span><span class="p">)</span> <span class="o">*</span> <span class="n">warpSize</span><span class="p">;</span> <span class="c1">// number of batches in all but the last warp. Those warps that are fully used.</span>
+    <span class="k">auto</span> <span class="n">lastWarpSize</span> <span class="o">=</span> <span class="n">pendingBatches_</span><span class="p">.</span><span class="n">size</span><span class="p">()</span> <span class="o">-</span> <span class="n">fullWarpsBatches</span><span class="p">;</span> <span class="c1">// the last warp is possibly not fully used</span>
+    <span class="c1">//LOG(info, &quot;attempting to redistribute last {} batches over {} devices&quot;, lastWarpSize, warpSize);</span>
+    <span class="k">auto</span> <span class="n">splitInto</span> <span class="o">=</span> <span class="n">warpSize</span> <span class="o">/</span> <span class="n">lastWarpSize</span><span class="p">;</span>
+    <span class="k">if</span> <span class="p">(</span><span class="n">splitInto</span> <span class="o">&gt;</span> <span class="mi">1</span><span class="p">)</span> <span class="p">{</span> <span class="c1">// unfortunately we can only split in integer ratios</span>
+      <span class="c1">// split each of last numWarps&#39;s batches into &#39;splitInto&#39; batches</span>
+      <span class="c1">// pop them first</span>
+      <span class="n">std</span><span class="o">::</span><span class="n">vector</span><span class="o">&lt;</span><span class="n">Ptr</span><span class="o">&lt;</span><span class="n">data</span><span class="o">::</span><span class="n">Batch</span><span class="o">&gt;&gt;</span> <span class="n">batchesToSplit</span><span class="p">;</span>
+      <span class="k">while</span> <span class="p">(</span><span class="n">pendingBatches_</span><span class="p">.</span><span class="n">size</span><span class="p">()</span> <span class="o">&gt;</span> <span class="n">fullWarpsBatches</span><span class="p">)</span> <span class="p">{</span>
+        <span class="n">batchesToSplit</span><span class="p">.</span><span class="n">push_back</span><span class="p">(</span><span class="n">pendingBatches_</span><span class="p">.</span><span class="n">back</span><span class="p">());</span>
+        <span class="n">pendingBatches_</span><span class="p">.</span><span class="n">pop_back</span><span class="p">();</span>
+      <span class="p">}</span>
+      <span class="c1">// now split them and push them back</span>
+      <span class="k">for</span> <span class="p">(</span><span class="k">auto</span><span class="o">&amp;</span> <span class="nl">batchToSplit</span> <span class="p">:</span> <span class="n">batchesToSplit</span><span class="p">)</span> <span class="p">{</span>
+        <span class="c1">//LOG(info, &quot;{}-way splitting batchToSplit with size {}&quot;, splitInto, batchToSplit-&gt;size());</span>
+        <span class="k">auto</span> <span class="n">splitBatches</span> <span class="o">=</span> <span class="n">batchToSplit</span><span class="o">-&gt;</span><span class="n">split</span><span class="p">(</span><span class="n">splitInto</span><span class="p">);</span>
+        <span class="k">for</span> <span class="p">(</span><span class="k">auto</span><span class="o">&amp;</span> <span class="nl">splitBatch</span> <span class="p">:</span> <span class="n">splitBatches</span><span class="p">)</span> <span class="p">{</span>
+          <span class="c1">//LOG(info, &quot; -&gt; getting batchToSplit with size {}&quot;, splitBatch-&gt;size());</span>
+          <span class="n">pendingBatches_</span><span class="p">.</span><span class="n">push_back</span><span class="p">(</span><span class="n">splitBatch</span><span class="p">);</span>
+        <span class="p">}</span>
+      <span class="p">}</span>
+    <span class="p">}</span>
+    <span class="n">ABORT_IF</span><span class="p">(</span><span class="n">pendingBatches_</span><span class="p">.</span><span class="n">size</span><span class="p">()</span> <span class="o">&gt;</span> <span class="n">availableDevices</span><span class="p">,</span> <span class="s">&quot;somehow split into too many batches??&quot;</span><span class="p">);</span>
+  <span class="p">}</span>
+  <span class="n">subBatches</span> <span class="o">=</span> <span class="n">std</span><span class="o">::</span><span class="n">move</span><span class="p">(</span><span class="n">pendingBatches_</span><span class="p">);</span>
+
+  <span class="c1">// @TODO: sort by width, so that in case of delay &gt; 1, each GPU gets about the same size</span>
+  <span class="k">return</span> <span class="nb">true</span><span class="p">;</span>
+<span class="p">}</span>
+
+<span class="kt">void</span> <span class="n">SyncGraphGroup</span><span class="o">::</span><span class="n">update</span><span class="p">(</span><span class="n">Ptr</span><span class="o">&lt;</span><span class="n">data</span><span class="o">::</span><span class="n">Batch</span><span class="o">&gt;</span> <span class="n">newBatch</span><span class="p">)</span> <span class="cm">/*override*/</span> <span class="p">{</span>
+  <span class="n">validate</span><span class="p">();</span>
+
+  <span class="n">std</span><span class="o">::</span><span class="n">vector</span><span class="o">&lt;</span><span class="n">Ptr</span><span class="o">&lt;</span><span class="n">data</span><span class="o">::</span><span class="n">Batch</span><span class="o">&gt;&gt;</span> <span class="n">subBatches</span><span class="p">;</span>
+  <span class="kt">size_t</span> <span class="n">numReadBatches</span><span class="p">;</span> <span class="c1">// actual #batches delivered by reader, for restoring from checkpoint   --@TODO: reader should checkpoint itself; should not go via the scheduler</span>
+  <span class="kt">bool</span> <span class="n">gotSubBatches</span> <span class="o">=</span> <span class="n">tryGetSubBatches</span><span class="p">(</span><span class="n">newBatch</span><span class="p">,</span> <span class="n">subBatches</span><span class="p">,</span> <span class="n">numReadBatches</span><span class="p">);</span>
+
+  <span class="c1">// not enough data yet: return right away</span>
+  <span class="k">if</span> <span class="p">(</span><span class="o">!</span><span class="n">gotSubBatches</span><span class="p">)</span>
+    <span class="k">return</span><span class="p">;</span>
+
+  <span class="n">update</span><span class="p">(</span><span class="n">subBatches</span><span class="p">,</span> <span class="n">numReadBatches</span><span class="p">);</span>
+<span class="p">}</span>
+
+<span class="kt">void</span> <span class="n">SyncGraphGroup</span><span class="o">::</span><span class="n">update</span><span class="p">(</span><span class="n">std</span><span class="o">::</span><span class="n">vector</span><span class="o">&lt;</span><span class="n">Ptr</span><span class="o">&lt;</span><span class="n">data</span><span class="o">::</span><span class="n">Batch</span><span class="o">&gt;&gt;</span> <span class="n">subBatches</span><span class="p">,</span> <span class="kt">size_t</span> <span class="n">numReadBatches</span><span class="p">)</span> <span class="p">{</span>
+  <span class="c1">// determine num words for dynamic hyper-parameter adjustment</span>
+  <span class="c1">// @TODO: We can return these directly from tryGetSubBatches()</span>
+  <span class="kt">size_t</span> <span class="n">batchSize</span> <span class="o">=</span> <span class="mi">0</span><span class="p">;</span>
+  <span class="kt">size_t</span> <span class="n">batchTrgWords</span> <span class="o">=</span> <span class="mi">0</span><span class="p">;</span>
+  <span class="k">for</span> <span class="p">(</span><span class="k">const</span> <span class="k">auto</span><span class="o">&amp;</span> <span class="nl">batch</span> <span class="p">:</span> <span class="n">subBatches</span><span class="p">)</span> <span class="p">{</span>
+    <span class="n">batchSize</span>     <span class="o">+=</span> <span class="n">batch</span><span class="o">-&gt;</span><span class="n">size</span><span class="p">();</span>
+    <span class="n">batchTrgWords</span> <span class="o">+=</span> <span class="n">batch</span><span class="o">-&gt;</span><span class="n">wordsTrg</span><span class="p">();</span>
+  <span class="p">}</span>
+
+  <span class="c1">// Helper to access the subBatches array</span>
+  <span class="k">auto</span> <span class="n">getSubBatch</span> <span class="o">=</span> <span class="p">[</span><span class="o">&amp;</span><span class="p">](</span><span class="kt">size_t</span> <span class="n">warp</span><span class="p">,</span> <span class="kt">size_t</span> <span class="n">localDeviceIndex</span><span class="p">,</span> <span class="kt">size_t</span> <span class="n">rank</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="n">Ptr</span><span class="o">&lt;</span><span class="n">data</span><span class="o">::</span><span class="n">Batch</span><span class="o">&gt;</span> <span class="p">{</span>
+    <span class="c1">// Warp should be slowest changing dimension. If subBatches are sorted by</span>
+    <span class="c1">// length, then grouping sentences of similar length into the same delay step can</span>
+    <span class="c1">// reduce unnecessary time spent in padding.</span>
+    <span class="k">auto</span> <span class="n">index</span> <span class="o">=</span> <span class="p">(</span><span class="n">warp</span> <span class="o">*</span> <span class="n">mpi_</span><span class="o">-&gt;</span><span class="n">numMPIProcesses</span><span class="p">()</span> <span class="o">+</span> <span class="n">rank</span><span class="p">)</span> <span class="o">*</span> <span class="n">devices_</span><span class="p">.</span><span class="n">size</span><span class="p">()</span> <span class="o">+</span> <span class="n">localDeviceIndex</span><span class="p">;</span>
+    <span class="k">if</span> <span class="p">(</span><span class="n">index</span> <span class="o">&lt;</span> <span class="n">subBatches</span><span class="p">.</span><span class="n">size</span><span class="p">())</span>
+      <span class="k">return</span> <span class="n">subBatches</span><span class="p">[</span><span class="n">index</span><span class="p">];</span>
+    <span class="k">else</span>
+      <span class="k">return</span> <span class="k">nullptr</span><span class="p">;</span> <span class="c1">// null if we reached beyond the end</span>
+  <span class="p">};</span>
+
+  <span class="c1">// Helper to quantize the model</span>
+  <span class="k">auto</span> <span class="n">quantizeModel</span> <span class="o">=</span> <span class="p">[</span><span class="o">&amp;</span><span class="p">](</span><span class="kt">size_t</span> <span class="n">idx</span><span class="p">,</span> <span class="kt">size_t</span> <span class="cm">/*begin*/</span><span class="p">,</span> <span class="kt">size_t</span> <span class="cm">/*end*/</span><span class="p">)</span> <span class="p">{</span>
+    <span class="n">quantizers_</span><span class="p">[</span><span class="n">idx</span><span class="p">]</span><span class="o">-&gt;</span><span class="n">quantize</span><span class="p">(</span><span class="n">graphs_</span><span class="p">[</span><span class="n">idx</span><span class="p">]);</span>
+  <span class="p">};</span>
+
+  <span class="c1">// Upon very first execution, reset everything</span>
+  <span class="k">if</span><span class="p">(</span><span class="n">first_</span><span class="p">)</span> <span class="p">{</span>
+    <span class="n">LOG</span><span class="p">(</span><span class="n">info</span><span class="p">,</span> <span class="s">&quot;[training] Batches are processed as {} process(es) x {} devices/process&quot;</span><span class="p">,</span>
+        <span class="n">mpi_</span><span class="o">-&gt;</span><span class="n">numMPIProcesses</span><span class="p">(),</span> <span class="n">devices_</span><span class="p">.</span><span class="n">size</span><span class="p">());</span>
+    <span class="n">initialize</span><span class="p">(</span><span class="n">subBatches</span><span class="p">.</span><span class="n">front</span><span class="p">());</span>
+    <span class="k">if</span><span class="p">(</span><span class="n">mvAvg_</span> <span class="o">&amp;&amp;</span> <span class="n">paramsAvg_</span><span class="p">.</span><span class="n">empty</span><span class="p">())</span>
+      <span class="n">initializeAvg</span><span class="p">();</span>
+
+    <span class="c1">// initialize model quantization</span>
+    <span class="k">if</span> <span class="p">(</span><span class="n">options_</span><span class="o">-&gt;</span><span class="n">get</span><span class="o">&lt;</span><span class="kt">size_t</span><span class="o">&gt;</span><span class="p">(</span><span class="s">&quot;quantize-bits&quot;</span><span class="p">)</span> <span class="o">&gt;</span> <span class="mi">0</span><span class="p">)</span> <span class="p">{</span>
+      <span class="k">for</span> <span class="p">(</span><span class="kt">int</span> <span class="n">idx</span> <span class="o">=</span> <span class="mi">0</span><span class="p">;</span> <span class="n">idx</span> <span class="o">&lt;</span> <span class="n">graphs_</span><span class="p">.</span><span class="n">size</span><span class="p">();</span> <span class="n">idx</span><span class="o">++</span><span class="p">)</span>
+    <span class="n">quantizers_</span><span class="p">.</span><span class="n">push_back</span><span class="p">(</span><span class="n">New</span><span class="o">&lt;</span><span class="n">ModelQuantizer</span><span class="o">&gt;</span><span class="p">(</span><span class="n">options_</span><span class="p">));</span>
+      <span class="n">comm_</span><span class="o">-&gt;</span><span class="n">foreach</span><span class="p">(</span><span class="n">quantizeModel</span><span class="p">);</span>
+    <span class="p">}</span>
+
+    <span class="n">first_</span> <span class="o">=</span> <span class="nb">false</span><span class="p">;</span>
+  <span class="p">}</span>
+
+  <span class="c1">// Compute gradients</span>
+  <span class="n">std</span><span class="o">::</span><span class="n">vector</span><span class="o">&lt;</span><span class="n">StaticLoss</span><span class="o">&gt;</span> <span class="n">localDeviceLosses</span><span class="p">(</span><span class="n">devices_</span><span class="p">.</span><span class="n">size</span><span class="p">());</span> <span class="c1">// [local device index] aggregate cost for each local device</span>
+  <span class="n">comm_</span><span class="o">-&gt;</span><span class="n">foreach</span><span class="p">([</span><span class="o">&amp;</span><span class="p">](</span><span class="kt">size_t</span> <span class="n">localDeviceIndex</span><span class="p">,</span> <span class="kt">size_t</span> <span class="cm">/*begin*/</span><span class="p">,</span> <span class="kt">size_t</span> <span class="cm">/*end*/</span><span class="p">)</span> <span class="p">{</span> <span class="c1">// parallel across devices. Aggregate for warp &gt; 1.</span>
+    <span class="k">auto</span> <span class="n">graph</span> <span class="o">=</span> <span class="n">graphs_</span><span class="p">[</span><span class="n">localDeviceIndex</span><span class="p">];</span>
+    <span class="c1">// reset gradient  --presently done outside</span>
+    <span class="c1">//graph-&gt;params()-&gt;allocateBackward();</span>
+    <span class="c1">//graph-&gt;params()-&gt;set_zero_adjoint();</span>
+    <span class="c1">// This happens in multiple steps if there are more subbatches than devices.</span>
+    <span class="k">for</span> <span class="p">(</span><span class="kt">size_t</span> <span class="n">warp</span> <span class="o">=</span> <span class="mi">0</span><span class="p">;</span> <span class="p">;</span> <span class="n">warp</span><span class="o">++</span><span class="p">)</span> <span class="p">{</span>
+      <span class="c1">// Execute single forward/backward step</span>
+      <span class="k">auto</span> <span class="n">subBatch</span> <span class="o">=</span> <span class="n">getSubBatch</span><span class="p">(</span><span class="n">warp</span><span class="p">,</span> <span class="n">localDeviceIndex</span><span class="p">,</span> <span class="n">mpi_</span><span class="o">-&gt;</span><span class="n">myMPIRank</span><span class="p">());</span>
+      <span class="k">if</span> <span class="p">(</span><span class="o">!</span><span class="n">subBatch</span><span class="p">)</span>
+        <span class="k">break</span><span class="p">;</span>
+
+      <span class="k">auto</span> <span class="n">rationalLoss</span> <span class="o">=</span> <span class="n">builders_</span><span class="p">[</span><span class="n">localDeviceIndex</span><span class="p">]</span><span class="o">-&gt;</span><span class="n">build</span><span class="p">(</span><span class="n">graph</span><span class="p">,</span> <span class="n">subBatch</span><span class="p">);</span>
+      <span class="n">graph</span><span class="o">-&gt;</span><span class="n">forward</span><span class="p">();</span>
+
+      <span class="n">localDeviceLosses</span><span class="p">[</span><span class="n">localDeviceIndex</span><span class="p">]</span> <span class="o">+=</span> <span class="o">*</span><span class="n">rationalLoss</span><span class="p">;</span>
+      <span class="n">graph</span><span class="o">-&gt;</span><span class="n">backward</span><span class="p">(</span><span class="cm">/*zero=*/</span><span class="nb">false</span><span class="p">);</span> <span class="c1">// (gradients are reset before we get here)</span>
+    <span class="p">}</span>
+  <span class="p">});</span>
+  <span class="c1">// At this point, each device on each MPI process has a gradient aggregated over a subset of the sub-batches.</span>
+
+  <span class="c1">// Update parameter shard with gradient shard</span>
+  <span class="k">auto</span> <span class="n">update</span> <span class="o">=</span> <span class="p">[</span><span class="o">&amp;</span><span class="p">](</span><span class="kt">size_t</span> <span class="n">idx</span><span class="p">,</span> <span class="kt">size_t</span> <span class="n">begin</span><span class="p">,</span> <span class="kt">size_t</span> <span class="n">end</span><span class="p">)</span> <span class="p">{</span>
+    <span class="k">auto</span> <span class="n">curGrad</span> <span class="o">=</span> <span class="n">graphs_</span><span class="p">[</span><span class="n">idx</span><span class="p">]</span><span class="o">-&gt;</span><span class="n">params</span><span class="p">()</span><span class="o">-&gt;</span><span class="n">grads</span><span class="p">()</span><span class="o">-&gt;</span><span class="n">subtensor</span><span class="p">(</span><span class="n">begin</span><span class="p">,</span> <span class="n">end</span><span class="o">-</span><span class="n">begin</span><span class="p">);</span>
+    <span class="k">auto</span> <span class="n">curParam</span> <span class="o">=</span> <span class="n">graphs_</span><span class="p">[</span><span class="n">idx</span><span class="p">]</span><span class="o">-&gt;</span><span class="n">params</span><span class="p">()</span><span class="o">-&gt;</span><span class="n">vals</span><span class="p">()</span><span class="o">-&gt;</span><span class="n">subtensor</span><span class="p">(</span><span class="n">begin</span><span class="p">,</span> <span class="n">end</span><span class="o">-</span><span class="n">begin</span><span class="p">);</span>
+
+    <span class="c1">// actual model update</span>
+    <span class="k">auto</span> <span class="n">updateTrgWords</span> <span class="o">=</span>
+        <span class="cm">/*if*/</span><span class="p">(</span><span class="n">options_</span><span class="o">-&gt;</span><span class="n">get</span><span class="o">&lt;</span><span class="n">std</span><span class="o">::</span><span class="n">string</span><span class="o">&gt;</span><span class="p">(</span><span class="s">&quot;cost-type&quot;</span><span class="p">)</span> <span class="o">==</span> <span class="s">&quot;ce-sum&quot;</span><span class="p">)</span> <span class="o">?</span>
+          <span class="n">batchTrgWords</span> <span class="c1">// total number of labels across all GPUs and nodes</span>
+        <span class="cm">/*else*/</span><span class="o">:</span>
+          <span class="n">OptimizerBase</span><span class="o">::</span><span class="n">mbSizeNotProvided</span><span class="p">;</span>
+    <span class="n">shardOpt_</span><span class="p">[</span><span class="n">idx</span><span class="p">]</span><span class="o">-&gt;</span><span class="n">update</span><span class="p">(</span><span class="n">curParam</span><span class="p">,</span> <span class="n">curGrad</span><span class="p">,</span> <span class="n">updateTrgWords</span><span class="p">);</span>
+    <span class="n">curGrad</span><span class="o">-&gt;</span><span class="n">set</span><span class="p">(</span><span class="mf">0.f</span><span class="p">);</span>
+
+    <span class="k">if</span><span class="p">(</span><span class="n">mvAvg_</span><span class="p">)</span>
+      <span class="n">updateAvgParams</span><span class="p">(</span>
+          <span class="n">paramsAvg_</span><span class="p">[</span><span class="n">idx</span><span class="p">],</span> <span class="n">curParam</span><span class="p">,</span> <span class="n">scheduler_</span><span class="o">-&gt;</span><span class="n">numberOfBatches</span><span class="p">(),</span> <span class="n">updateTrgWords</span><span class="p">);</span>
+  <span class="p">};</span>
+
+  <span class="c1">// cost across all local devices (scheduler will aggregate cross-process)</span>
+  <span class="n">StaticLoss</span> <span class="n">localLoss</span> <span class="o">=</span> <span class="n">std</span><span class="o">::</span><span class="n">accumulate</span><span class="p">(</span><span class="n">localDeviceLosses</span><span class="p">.</span><span class="n">begin</span><span class="p">(),</span> <span class="n">localDeviceLosses</span><span class="p">.</span><span class="n">end</span><span class="p">(),</span> <span class="n">StaticLoss</span><span class="p">());</span>
+
+  <span class="c1">// model update</span>
+  <span class="k">if</span> <span class="p">(</span><span class="n">std</span><span class="o">::</span><span class="n">isfinite</span><span class="p">(</span><span class="n">localLoss</span><span class="p">.</span><span class="n">loss</span><span class="p">)</span> <span class="o">||</span> <span class="n">mpi_</span><span class="o">-&gt;</span><span class="n">numMPIProcesses</span><span class="p">()</span> <span class="o">&gt;</span> <span class="mi">1</span><span class="p">)</span> <span class="p">{</span> <span class="c1">// guard against NaN (except with MPI, as this simple way could hang it)</span>
+    <span class="n">comm_</span><span class="o">-&gt;</span><span class="n">scatterReduceAndResetGrads</span><span class="p">();</span> <span class="c1">// reduce gradients across all devices and MPI nodes into shards</span>
+    <span class="n">comm_</span><span class="o">-&gt;</span><span class="n">foreach</span><span class="p">(</span><span class="n">update</span><span class="p">);</span>              <span class="c1">// per-shard model-update</span>
+    <span class="n">comm_</span><span class="o">-&gt;</span><span class="n">allGatherParams</span><span class="p">();</span>            <span class="c1">// distribute param value shards back</span>
+
+    <span class="c1">// Re-add the error residual from previous quantization,</span>
+    <span class="c1">// then re-quantize the model back and update the error residual</span>
+    <span class="k">if</span> <span class="p">(</span><span class="n">options_</span><span class="o">-&gt;</span><span class="n">get</span><span class="o">&lt;</span><span class="kt">size_t</span><span class="o">&gt;</span><span class="p">(</span><span class="s">&quot;quantize-bits&quot;</span><span class="p">)</span> <span class="o">&gt;</span> <span class="mi">0</span><span class="p">)</span>
+      <span class="n">comm_</span><span class="o">-&gt;</span><span class="n">foreach</span><span class="p">(</span><span class="n">quantizeModel</span><span class="p">);</span>
+  <span class="p">}</span>
+  <span class="k">else</span>
+    <span class="n">LOG</span><span class="p">(</span><span class="n">info</span><span class="p">,</span> <span class="s">&quot;[training] skipping {}-th update due to loss being {}&quot;</span><span class="p">,</span> <span class="n">scheduler_</span><span class="o">-&gt;</span><span class="n">numberOfBatches</span><span class="p">(),</span> <span class="n">localLoss</span><span class="p">.</span><span class="n">loss</span><span class="p">);</span>
+
+  <span class="k">if</span><span class="p">(</span><span class="n">scheduler_</span><span class="p">)</span> <span class="p">{</span>
+    <span class="c1">// track and log localLoss</span>
+    <span class="n">scheduler_</span><span class="o">-&gt;</span><span class="n">update</span><span class="p">(</span><span class="n">localLoss</span><span class="p">,</span> <span class="n">numReadBatches</span><span class="p">,</span> <span class="n">batchSize</span><span class="p">,</span> <span class="n">batchTrgWords</span><span class="p">,</span> <span class="n">mpi_</span><span class="p">);</span>
+
+    <span class="c1">// save intermediate model (and optimizer state) to file</span>
+    <span class="k">if</span><span class="p">(</span><span class="n">scheduler_</span><span class="o">-&gt;</span><span class="n">saving</span><span class="p">())</span>
+      <span class="n">save</span><span class="p">();</span>
+
+    <span class="c1">// process valid data set</span>
+    <span class="c1">// This may save a model as well.</span>
+    <span class="k">if</span><span class="p">(</span><span class="n">scheduler_</span><span class="o">-&gt;</span><span class="n">validating</span><span class="p">())</span> <span class="p">{</span>
+      <span class="n">swapParamsAvg</span><span class="p">();</span>
+      <span class="k">if</span> <span class="p">(</span><span class="n">isMainProcess</span><span class="p">())</span>
+        <span class="n">scheduler_</span><span class="o">-&gt;</span><span class="n">validate</span><span class="p">(</span><span class="n">graphs_</span><span class="p">);</span>
+      <span class="n">swapParamsAvg</span><span class="p">();</span>
+    <span class="p">}</span>
+  <span class="p">}</span>
+<span class="p">}</span>
+
+<span class="kt">void</span> <span class="n">SyncGraphGroup</span><span class="o">::</span><span class="n">load</span><span class="p">()</span> <span class="cm">/*override*/</span> <span class="p">{</span>
+  <span class="n">validate</span><span class="p">();</span>
+
+  <span class="c1">// This function loads the main parameters in the graphs.</span>
+  <span class="c1">// In case of exponential smoothing, we also need to restore paramsAvg_.</span>
+  <span class="c1">// That is done lazily inside initializeAvg(), see there.</span>
+
+  <span class="k">if</span><span class="p">(</span><span class="o">!</span><span class="n">options_</span><span class="o">-&gt;</span><span class="n">get</span><span class="o">&lt;</span><span class="kt">bool</span><span class="o">&gt;</span><span class="p">(</span><span class="s">&quot;no-reload&quot;</span><span class="p">))</span> <span class="p">{</span>
+    <span class="n">std</span><span class="o">::</span><span class="n">string</span> <span class="n">name</span> <span class="o">=</span> <span class="n">options_</span><span class="o">-&gt;</span><span class="n">get</span><span class="o">&lt;</span><span class="n">std</span><span class="o">::</span><span class="n">string</span><span class="o">&gt;</span><span class="p">(</span><span class="s">&quot;model&quot;</span><span class="p">);</span>
+
+    <span class="k">if</span><span class="p">(</span><span class="n">filesystem</span><span class="o">::</span><span class="n">exists</span><span class="p">(</span><span class="n">name</span><span class="p">))</span> <span class="p">{</span>
+      <span class="k">if</span><span class="p">(</span><span class="n">scheduler_</span><span class="p">)</span>
+        <span class="n">scheduler_</span><span class="o">-&gt;</span><span class="n">load</span><span class="p">(</span><span class="n">name</span><span class="p">);</span>
+
+      <span class="n">std</span><span class="o">::</span><span class="n">string</span> <span class="n">nameGraph</span> <span class="o">=</span> <span class="n">name</span><span class="p">;</span>
+      <span class="n">std</span><span class="o">::</span><span class="n">string</span> <span class="n">suffix</span> <span class="o">=</span> <span class="n">name</span><span class="p">.</span><span class="n">substr</span><span class="p">(</span><span class="n">name</span><span class="p">.</span><span class="n">size</span><span class="p">()</span> <span class="o">-</span> <span class="mi">4</span><span class="p">);</span>
+      <span class="n">ABORT_IF</span><span class="p">(</span><span class="n">suffix</span> <span class="o">!=</span> <span class="s">&quot;.npz&quot;</span> <span class="o">&amp;&amp;</span> <span class="n">suffix</span> <span class="o">!=</span> <span class="s">&quot;.bin&quot;</span><span class="p">,</span> <span class="s">&quot;Unknown model suffix {}&quot;</span><span class="p">,</span> <span class="n">suffix</span><span class="p">);</span>
+
+      <span class="k">if</span><span class="p">(</span><span class="n">mvAvg_</span> <span class="o">&amp;&amp;</span> <span class="n">filesystem</span><span class="o">::</span><span class="n">exists</span><span class="p">(</span><span class="n">name</span> <span class="o">+</span> <span class="s">&quot;.orig&quot;</span> <span class="o">+</span> <span class="n">suffix</span><span class="p">))</span>
+        <span class="c1">// Load the original parameters from model.npz.orig.npz</span>
+        <span class="n">nameGraph</span> <span class="o">+=</span> <span class="s">&quot;.orig&quot;</span> <span class="o">+</span> <span class="n">suffix</span><span class="p">;</span>
+
+      <span class="kt">size_t</span> <span class="n">i</span> <span class="o">=</span> <span class="mi">0</span><span class="p">;</span>
+      <span class="k">for</span><span class="p">(</span><span class="k">auto</span> <span class="nl">graph</span> <span class="p">:</span> <span class="n">graphs_</span><span class="p">)</span>
+        <span class="n">builders_</span><span class="p">[</span><span class="n">i</span><span class="o">++</span><span class="p">]</span><span class="o">-&gt;</span><span class="n">load</span><span class="p">(</span><span class="n">graph</span><span class="p">,</span> <span class="n">nameGraph</span><span class="p">);</span> <span class="c1">// we just load it N times from disk (it&#39;ll be in disk cache after the first)</span>
+
+      <span class="c1">// @TODO: probably we want to have the list of DeviceIds as an attribute</span>
+      <span class="n">std</span><span class="o">::</span><span class="n">vector</span><span class="o">&lt;</span><span class="n">Ptr</span><span class="o">&lt;</span><span class="n">Backend</span><span class="o">&gt;&gt;</span> <span class="n">backends</span><span class="p">;</span>
+      <span class="k">for</span><span class="p">(</span><span class="k">auto</span> <span class="nl">graph</span> <span class="p">:</span> <span class="n">graphs_</span><span class="p">)</span>
+        <span class="n">backends</span><span class="p">.</span><span class="n">push_back</span><span class="p">(</span><span class="n">graph</span><span class="o">-&gt;</span><span class="n">getBackend</span><span class="p">());</span>
+      <span class="n">shardOpt_</span><span class="p">[</span><span class="mi">0</span><span class="p">]</span><span class="o">-&gt;</span><span class="n">load</span><span class="p">(</span><span class="n">name</span> <span class="o">+</span> <span class="s">&quot;.optimizer.npz&quot;</span><span class="p">,</span> <span class="n">shardOpt_</span><span class="p">,</span> <span class="n">backends</span><span class="p">,</span> <span class="c1">// keep npz suffix for optimize checkpoint</span>
+        <span class="p">[</span><span class="o">&amp;</span><span class="p">](</span><span class="k">const</span> <span class="n">std</span><span class="o">::</span><span class="n">vector</span><span class="o">&lt;</span><span class="kt">float</span><span class="o">&gt;&amp;</span> <span class="n">optimizerStateVector</span><span class="p">,</span> <span class="k">const</span> <span class="n">OptimizerBase</span><span class="o">::</span><span class="n">ScatterStateSetFunc</span><span class="o">&amp;</span> <span class="n">setShardFn</span><span class="p">)</span> <span class="p">{</span>
+          <span class="n">comm_</span><span class="o">-&gt;</span><span class="n">scatterState</span><span class="p">(</span><span class="n">optimizerStateVector</span><span class="p">,</span> <span class="n">setShardFn</span><span class="p">);</span>
+        <span class="p">});</span>
+      <span class="n">LOG</span><span class="p">(</span><span class="n">info</span><span class="p">,</span> <span class="s">&quot;[training] Model reloaded from {}&quot;</span><span class="p">,</span> <span class="n">name</span><span class="p">);</span>
+    <span class="p">}</span> <span class="k">else</span> <span class="k">if</span><span class="p">(</span><span class="n">options_</span><span class="o">-&gt;</span><span class="n">hasAndNotEmpty</span><span class="p">(</span><span class="s">&quot;pretrained-model&quot;</span><span class="p">))</span> <span class="p">{</span>
+      <span class="n">std</span><span class="o">::</span><span class="n">string</span> <span class="n">nameInit</span> <span class="o">=</span> <span class="n">options_</span><span class="o">-&gt;</span><span class="n">get</span><span class="o">&lt;</span><span class="n">std</span><span class="o">::</span><span class="n">string</span><span class="o">&gt;</span><span class="p">(</span><span class="s">&quot;pretrained-model&quot;</span><span class="p">);</span>
+      <span class="n">LOG</span><span class="p">(</span><span class="n">info</span><span class="p">,</span>
+          <span class="s">&quot;[training] Initializing model weights with the pre-trained model {}&quot;</span><span class="p">,</span>
+          <span class="n">nameInit</span><span class="p">);</span>
+
+      <span class="kt">size_t</span> <span class="n">i</span> <span class="o">=</span> <span class="mi">0</span><span class="p">;</span>
+      <span class="k">for</span><span class="p">(</span><span class="k">auto</span> <span class="nl">graph</span> <span class="p">:</span> <span class="n">graphs_</span><span class="p">)</span>
+        <span class="n">builders_</span><span class="p">[</span><span class="n">i</span><span class="o">++</span><span class="p">]</span><span class="o">-&gt;</span><span class="n">load</span><span class="p">(</span><span class="n">graph</span><span class="p">,</span> <span class="n">nameInit</span><span class="p">,</span> <span class="nb">false</span><span class="p">);</span>
+    <span class="p">}</span>
+  <span class="p">}</span>
+<span class="p">}</span>
+
+<span class="kt">void</span> <span class="n">SyncGraphGroup</span><span class="o">::</span><span class="n">save</span><span class="p">(</span><span class="kt">bool</span> <span class="k">final</span><span class="p">)</span> <span class="cm">/*override*/</span> <span class="p">{</span>
+  <span class="c1">// validate(); @TODO: get rid of this everywhere (SyncGraphGroup)</span>
+  <span class="n">barrier</span><span class="p">();</span> <span class="c1">// (for better grouping of log messages)</span>
+  <span class="c1">// do final validation</span>
+  <span class="k">if</span><span class="p">(</span><span class="k">final</span> <span class="o">&amp;&amp;</span> <span class="n">scheduler_</span><span class="p">)</span> <span class="p">{</span>
+    <span class="c1">// bring the smoothed model in</span>
+    <span class="c1">// Note that it is sharded. For multi-node, it is sharded over multiple machines, so this is a network access.</span>
+    <span class="c1">// Also note that the swap must run on all MPI processes concurrently, although only one actually validates.</span>
+    <span class="n">swapParamsAvg</span><span class="p">();</span>
+    <span class="k">if</span> <span class="p">(</span><span class="n">isMainProcess</span><span class="p">())</span> <span class="c1">// in multi-node, only first MPI process saves the model (they are all identical)</span>
+      <span class="n">scheduler_</span><span class="o">-&gt;</span><span class="n">validate</span><span class="p">(</span><span class="n">graphs_</span><span class="p">,</span> <span class="nb">true</span><span class="p">);</span>
+    <span class="n">swapParamsAvg</span><span class="p">();</span>
+  <span class="p">}</span>
+
+  <span class="c1">// @TODO: put all this in one place, in new branch this is already localized in one place and class, this is a quick hack which will be</span>
+  <span class="c1">// done better after the next merge. Not doing this in other graph_groups as this would only make the merge harder.</span>
+  <span class="c1">// Determine model suffix *.npz or *.bin, then use the same suffix for all following models saved.</span>
+  <span class="n">std</span><span class="o">::</span><span class="n">string</span> <span class="n">name</span> <span class="o">=</span> <span class="n">options_</span><span class="o">-&gt;</span><span class="n">get</span><span class="o">&lt;</span><span class="n">std</span><span class="o">::</span><span class="n">string</span><span class="o">&gt;</span><span class="p">(</span><span class="s">&quot;model&quot;</span><span class="p">);</span>
+  <span class="n">std</span><span class="o">::</span><span class="n">string</span> <span class="n">suffix</span> <span class="o">=</span> <span class="n">name</span><span class="p">.</span><span class="n">substr</span><span class="p">(</span><span class="n">name</span><span class="p">.</span><span class="n">size</span><span class="p">()</span> <span class="o">-</span> <span class="mi">4</span><span class="p">);</span>
+  <span class="n">ABORT_IF</span><span class="p">(</span><span class="n">suffix</span> <span class="o">!=</span> <span class="s">&quot;.npz&quot;</span> <span class="o">&amp;&amp;</span> <span class="n">suffix</span> <span class="o">!=</span> <span class="s">&quot;.bin&quot;</span><span class="p">,</span> <span class="s">&quot;Unknown model suffix {}&quot;</span><span class="p">,</span> <span class="n">suffix</span><span class="p">);</span>
+
+  <span class="n">barrier</span><span class="p">();</span> <span class="c1">// (for better grouping of log messages)</span>
+  <span class="c1">// if smoothing then save original (unsmoothed) parameters as well</span>
+  <span class="k">if</span><span class="p">(</span><span class="n">mvAvg_</span> <span class="o">&amp;&amp;</span> <span class="n">paramsAvg_</span><span class="p">.</span><span class="n">size</span><span class="p">()</span> <span class="o">&gt;</span> <span class="mi">0</span> <span class="o">&amp;&amp;</span> <span class="n">isMainProcess</span><span class="p">())</span> <span class="c1">// only save from one MPI process</span>
+    <span class="c1">// Save the original parameters in model.npz.orig.npz</span>
+    <span class="n">builders_</span><span class="p">[</span><span class="mi">0</span><span class="p">]</span><span class="o">-&gt;</span><span class="n">save</span><span class="p">(</span><span class="n">graphs_</span><span class="p">[</span><span class="mi">0</span><span class="p">],</span> <span class="n">name</span> <span class="o">+</span> <span class="s">&quot;.orig&quot;</span> <span class="o">+</span> <span class="n">suffix</span><span class="p">,</span> <span class="nb">true</span><span class="p">);</span>
+
+  <span class="c1">// Temporarily switch to the averaged parameters</span>
+  <span class="c1">// Note: the smoothed model is sharded across GPUs, and across MPI processes if applicable. This brings it into MPI process[*].device[*]</span>
+  <span class="n">swapParamsAvg</span><span class="p">();</span>
+
+  <span class="c1">// save main model file</span>
+  <span class="k">if</span> <span class="p">(</span><span class="n">isMainProcess</span><span class="p">())</span> <span class="p">{</span> <span class="c1">// only save from one MPI process</span>
+    <span class="c1">// if not overwrite then save a copy with number of updates in the model pathname</span>
+    <span class="k">if</span><span class="p">(</span><span class="o">!</span><span class="n">options_</span><span class="o">-&gt;</span><span class="n">get</span><span class="o">&lt;</span><span class="kt">bool</span><span class="o">&gt;</span><span class="p">(</span><span class="s">&quot;overwrite&quot;</span><span class="p">)</span> <span class="o">&amp;&amp;</span> <span class="o">!</span><span class="k">final</span><span class="p">)</span> <span class="p">{</span>
+      <span class="n">std</span><span class="o">::</span><span class="n">string</span> <span class="n">numberOfBatches</span>
+          <span class="o">=</span> <span class="n">scheduler_</span> <span class="o">?</span> <span class="n">std</span><span class="o">::</span><span class="n">to_string</span><span class="p">(</span><span class="n">scheduler_</span><span class="o">-&gt;</span><span class="n">numberOfBatches</span><span class="p">())</span>
+                       <span class="o">:</span> <span class="s">&quot;unknown&quot;</span><span class="p">;</span>
+      <span class="n">std</span><span class="o">::</span><span class="n">string</span> <span class="n">nameOverwrite</span> <span class="o">=</span> <span class="n">name</span><span class="p">;</span>
+      <span class="n">nameOverwrite</span><span class="p">.</span><span class="n">replace</span><span class="p">(</span><span class="n">name</span><span class="p">.</span><span class="n">size</span><span class="p">()</span> <span class="o">-</span> <span class="mi">4</span><span class="p">,</span> <span class="mi">4</span><span class="p">,</span> <span class="s">&quot;.iter&quot;</span> <span class="o">+</span> <span class="n">numberOfBatches</span> <span class="o">+</span> <span class="n">suffix</span><span class="p">);</span> <span class="c1">// @TODO: use insert?</span>
+      <span class="n">builders_</span><span class="p">[</span><span class="mi">0</span><span class="p">]</span><span class="o">-&gt;</span><span class="n">save</span><span class="p">(</span><span class="n">graphs_</span><span class="p">[</span><span class="mi">0</span><span class="p">],</span> <span class="n">nameOverwrite</span><span class="p">);</span>
+    <span class="p">}</span>
+    <span class="c1">// save main model file</span>
+    <span class="n">builders_</span><span class="p">[</span><span class="mi">0</span><span class="p">]</span><span class="o">-&gt;</span><span class="n">save</span><span class="p">(</span><span class="n">graphs_</span><span class="p">[</span><span class="mi">0</span><span class="p">],</span> <span class="n">name</span><span class="p">,</span> <span class="nb">true</span><span class="p">);</span>
+    <span class="c1">// save scheduler-related state</span>
+    <span class="k">if</span> <span class="p">(</span><span class="n">scheduler_</span><span class="p">)</span>
+      <span class="n">scheduler_</span><span class="o">-&gt;</span><span class="n">save</span><span class="p">(</span><span class="n">name</span><span class="p">);</span>
+  <span class="p">}</span>
+
+  <span class="c1">// Switch back to the original parameters</span>
+  <span class="n">swapParamsAvg</span><span class="p">();</span>
+
+  <span class="n">barrier</span><span class="p">();</span> <span class="c1">// (for better grouping of log messages)</span>
+
+  <span class="c1">// persist optimizer state</span>
+  <span class="n">shardOpt_</span><span class="p">[</span><span class="mi">0</span><span class="p">]</span><span class="o">-&gt;</span><span class="n">save</span><span class="p">(</span><span class="n">name</span> <span class="o">+</span> <span class="s">&quot;.optimizer.npz&quot;</span><span class="p">,</span> <span class="n">shardOpt_</span><span class="p">,</span>
+    <span class="p">[</span><span class="o">&amp;</span><span class="p">](</span><span class="k">const</span> <span class="n">OptimizerBase</span><span class="o">::</span><span class="n">GatherStateGetFunc</span><span class="o">&amp;</span> <span class="n">getShardFn</span><span class="p">)</span> <span class="p">{</span>
+      <span class="k">return</span> <span class="n">comm_</span><span class="o">-&gt;</span><span class="n">gatherState</span><span class="p">(</span><span class="n">getShardFn</span><span class="p">);</span>
+    <span class="p">},</span>
+    <span class="n">isMainProcess</span><span class="p">());</span>
+
+  <span class="n">barrier</span><span class="p">();</span> <span class="c1">// (for better grouping of log messages)</span>
+<span class="p">}</span>
+
+<span class="kt">void</span> <span class="n">SyncGraphGroup</span><span class="o">::</span><span class="n">finalize</span><span class="p">()</span> <span class="cm">/*override*/</span> <span class="p">{</span>
+  <span class="n">validate</span><span class="p">();</span>
+  <span class="n">Base</span><span class="o">::</span><span class="n">finalize</span><span class="p">();</span>
+<span class="p">}</span>
+
+<span class="p">}</span>  <span class="c1">// namespace marian</span>
+</pre></div>
+</div>
+</div>
+
+
+           </div>
+           
+          </div>
+          <footer>
+
+  <hr/>
+
+  <div role="contentinfo">
+    <p>
+        &#169; Copyright 2021, Marian NMT Team.
+
+    </p>
+  </div>
+    
+    
+    
+    Built with <a href="https://www.sphinx-doc.org/">Sphinx</a> using a
+    
+    <a href="https://github.com/readthedocs/sphinx_rtd_theme">theme</a>
+    
+    provided by <a href="https://readthedocs.org">Read the Docs</a>. 
+
+</footer>
+        </div>
+      </div>
+
+    </section>
+
+  </div>
+  
+
+  <script type="text/javascript">
+      jQuery(function () {
+          SphinxRtdTheme.Navigation.enable(true);
+      });
+  </script>
+
+  
+  
+    
+   
+
+</body>
+</html>

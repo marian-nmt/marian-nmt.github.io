@@ -1,0 +1,399 @@
+
+
+<!DOCTYPE html>
+<html class="writer-html5" lang="en" >
+<head>
+  <meta charset="utf-8" />
+  
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  
+  <title>Program Listing for File expression_graph_onnx_exporter.cpp &mdash; Marian NMT v1.10.1 2021-02-23 documentation</title>
+  
+
+  
+  <link rel="stylesheet" href="../_static/css/theme.css" type="text/css" />
+  <link rel="stylesheet" href="../_static/pygments.css" type="text/css" />
+  <link rel="stylesheet" href="../_static/css/custom.css" type="text/css" />
+  <link rel="stylesheet" href="../_static/collapsible-lists/css/tree_view.css" type="text/css" />
+
+  
+  
+
+  
+  
+
+  
+    <link rel="canonical" href="http://marian-nmt.github.io/docs/api/api/program_listing_file_src_onnx_expression_graph_onnx_exporter.cpp.html" />
+
+  
+  <!--[if lt IE 9]>
+    <script src="../_static/js/html5shiv.min.js"></script>
+  <![endif]-->
+  
+    
+      <script type="text/javascript" id="documentation_options" data-url_root="../" src="../_static/documentation_options.js"></script>
+        <script src="../_static/jquery.js"></script>
+        <script src="../_static/underscore.js"></script>
+        <script src="../_static/doctools.js"></script>
+        <script src="../_static/language_data.js"></script>
+        <script src="../_static/collapsible-lists/js/CollapsibleLists.compressed.js"></script>
+        <script src="../_static/collapsible-lists/js/apply-collapsible-lists.js"></script>
+    
+    <script type="text/javascript" src="../_static/js/theme.js"></script>
+
+    
+    <link rel="index" title="Index" href="../genindex.html" />
+    <link rel="search" title="Search" href="../search.html" /> 
+</head>
+
+<body class="wy-body-for-nav">
+
+   
+  <div class="wy-grid-for-nav">
+    
+    <nav data-toggle="wy-nav-shift" class="wy-nav-side">
+      <div class="wy-side-scroll">
+        <div class="wy-side-nav-search" >
+          
+
+          
+            <a href="../index.html" class="icon icon-home"> Marian NMT
+          
+
+          
+          </a>
+
+          
+            
+            
+              <div class="version">
+                v1.10.1
+              </div>
+            
+          
+
+          
+<div role="search">
+  <form id="rtd-search-form" class="wy-form" action="../search.html" method="get">
+    <input type="text" name="q" placeholder="Search docs" />
+    <input type="hidden" name="check_keywords" value="yes" />
+    <input type="hidden" name="area" value="default" />
+  </form>
+</div>
+
+          
+        </div>
+
+        
+        <div class="wy-menu wy-menu-vertical" data-spy="affix" role="navigation" aria-label="main navigation">
+          
+            
+            
+              
+            
+            
+              <p class="caption"><span class="caption-text">Contents:</span></p>
+<ul>
+<li class="toctree-l1"><a class="reference internal" href="../install.html">Installation</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../graph.html">Expression graphs</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../operators.html">Graph operations</a></li>
+<li class="toctree-l1"><a class="reference internal" href="library_index.html">Library API</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../contributing.html">How to contribute to Marian</a></li>
+</ul>
+
+            
+          
+        </div>
+        
+      </div>
+    </nav>
+
+    <section data-toggle="wy-nav-shift" class="wy-nav-content-wrap">
+
+      
+      <nav class="wy-nav-top" aria-label="top navigation">
+        
+          <i data-toggle="wy-nav-top" class="fa fa-bars"></i>
+          <a href="../index.html">Marian NMT</a>
+        
+      </nav>
+
+
+      <div class="wy-nav-content">
+        
+        <div class="rst-content">
+        
+          
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+<div role="navigation" aria-label="breadcrumbs navigation">
+
+  <ul class="wy-breadcrumbs">
+    
+      <li><a href="../index.html" class="icon icon-home"></a> &raquo;</li>
+        
+      <li>Program Listing for File expression_graph_onnx_exporter.cpp</li>
+    
+    
+      <li class="wy-breadcrumbs-aside">
+        
+          
+            <a href="../_sources/api/program_listing_file_src_onnx_expression_graph_onnx_exporter.cpp.rst.txt" rel="nofollow"> View page source</a>
+          
+        
+      </li>
+    
+  </ul>
+
+  
+  <hr/>
+</div>
+          <div role="main" class="document" itemscope="itemscope" itemtype="http://schema.org/Article">
+           <div itemprop="articleBody">
+            
+  <div class="section" id="program-listing-for-file-expression-graph-onnx-exporter-cpp">
+<span id="program-listing-file-src-onnx-expression-graph-onnx-exporter-cpp"></span><h1>Program Listing for File expression_graph_onnx_exporter.cpp<a class="headerlink" href="#program-listing-for-file-expression-graph-onnx-exporter-cpp" title="Permalink to this headline">¶</a></h1>
+<p>↰ <a class="reference internal" href="file_src_onnx_expression_graph_onnx_exporter.cpp.html#file-src-onnx-expression-graph-onnx-exporter-cpp"><span class="std std-ref">Return to documentation for file</span></a> (<code class="docutils literal notranslate"><span class="pre">src/onnx/expression_graph_onnx_exporter.cpp</span></code>)</p>
+<div class="highlight-cpp notranslate"><div class="highlight"><pre><span></span><span class="cp">#ifdef USE_ONNX</span>
+
+<span class="cp">#include</span> <span class="cpf">&quot;onnx/expression_graph_onnx_exporter.h&quot;</span><span class="cp"></span>
+
+<span class="cp">#include</span> <span class="cpf">&quot;models/model_factory.h&quot;</span><span class="cp"></span>
+<span class="cp">#include</span> <span class="cpf">&quot;models/encoder_decoder.h&quot;</span><span class="cp"></span>
+<span class="cp">#include</span> <span class="cpf">&quot;data/corpus_base.h&quot;</span><span class="cp"></span>
+<span class="cp">#include</span> <span class="cpf">&quot;tensors/cpu/fbgemm/expression_graph_packable.h&quot;</span><span class="cp"></span>
+
+<span class="cp">#include</span> <span class="cpf">&lt;memory&gt;</span><span class="cp"></span>
+
+<span class="k">namespace</span> <span class="n">marian</span> <span class="p">{</span>
+  <span class="c1">// The goal is to export three functions:</span>
+  <span class="c1">//  - encode_source(): encodes the source</span>
+  <span class="c1">//                     output: encoder_state</span>
+  <span class="c1">//  - decode_first(): resets decoder state and performs the first decoding step</span>
+  <span class="c1">//                    main output: log prob vector for step 0</span>
+  <span class="c1">//  - decode_next(): performs a subsequent decoding step (called repeatedly)</span>
+  <span class="c1">//                   main output: log prob vector</span>
+  <span class="c1">// This is done by generating the tape for encoding followed by the first two decoding steps.</span>
+  <span class="c1">// As we do this, we remember the Exprs on the tape that are the inputs and the outputs</span>
+  <span class="c1">// of the three functions.</span>
+  <span class="c1">// Since not all Marian operations have a 1:1 ONNX counterpart, the tape now get rewritten</span>
+  <span class="c1">// such that it only consists of operations that ONNX has.</span>
+  <span class="c1">// Now we cut out three sub-graphs from the tape. Each sub-graph represents one</span>
+  <span class="c1">// of the three functions. The sub-graph is delimited by the inputs and outputs we remembered above.</span>
+  <span class="c1">// Limitations:</span>
+  <span class="c1">//  - Inner recurrences, e.g. an RNN encoder, are not supported, since we cannot export control flow to ONNX.</span>
+  <span class="c1">//  - Dynamic objects that depend on the input are not supported.</span>
+  <span class="c1">//    For example constants whose shape depends on the input length.</span>
+  <span class="c1">//    That&#39;s why we had to change the sinusoidal embeddings from a constant to a computation.</span>
+  <span class="c1">//  - The input length is represented by a &quot;unique&quot; dimension value (97). This brittle.</span>
+  <span class="c1">//    That dimension value must not occur naturally in the model.</span>
+  <span class="c1">//    That dimension must also not be used in dimension calculations.</span>
+  <span class="c1">//    E.g. the exporter does not recognize if a constant is added to it, or if it gets multiplied.</span>
+  <span class="kt">void</span> <span class="n">ExpressionGraphONNXExporter</span><span class="o">::</span><span class="n">exportToONNX</span><span class="p">(</span><span class="k">const</span> <span class="n">std</span><span class="o">::</span><span class="n">string</span><span class="o">&amp;</span> <span class="n">modelToPrefix</span><span class="p">,</span> <span class="n">Ptr</span><span class="o">&lt;</span><span class="n">Options</span><span class="o">&gt;</span> <span class="n">modelOptions</span><span class="p">,</span> <span class="k">const</span> <span class="n">std</span><span class="o">::</span><span class="n">vector</span><span class="o">&lt;</span><span class="n">std</span><span class="o">::</span><span class="n">string</span><span class="o">&gt;&amp;</span> <span class="n">vocabPaths</span><span class="p">)</span>
+  <span class="p">{</span>
+    <span class="k">auto</span> <span class="n">graph</span> <span class="o">=</span> <span class="n">shared_from_this</span><span class="p">();</span>
+
+    <span class="c1">// get the model and the vocabularies</span>
+    <span class="k">auto</span> <span class="n">model</span> <span class="o">=</span> <span class="n">std</span><span class="o">::</span><span class="n">dynamic_pointer_cast</span><span class="o">&lt;</span><span class="n">IEncoderDecoder</span><span class="o">&gt;</span><span class="p">(</span><span class="n">models</span><span class="o">::</span><span class="n">createModelFromOptions</span><span class="p">(</span><span class="n">modelOptions</span><span class="p">,</span> <span class="n">models</span><span class="o">::</span><span class="n">usage</span><span class="o">::</span><span class="n">translation</span><span class="p">));</span>
+    <span class="n">std</span><span class="o">::</span><span class="n">vector</span><span class="o">&lt;</span><span class="n">Ptr</span><span class="o">&lt;</span><span class="n">Vocab</span><span class="o">&gt;&gt;</span> <span class="n">vocabs</span><span class="p">;</span>
+    <span class="k">for</span> <span class="p">(</span><span class="k">auto</span> <span class="nl">vocabPath</span> <span class="p">:</span> <span class="n">vocabPaths</span><span class="p">)</span> <span class="p">{</span>
+      <span class="n">Ptr</span><span class="o">&lt;</span><span class="n">Vocab</span><span class="o">&gt;</span> <span class="n">vocab</span> <span class="o">=</span> <span class="n">New</span><span class="o">&lt;</span><span class="n">Vocab</span><span class="o">&gt;</span><span class="p">(</span><span class="n">modelOptions</span><span class="p">,</span> <span class="n">vocabs</span><span class="p">.</span><span class="n">size</span><span class="p">());</span>
+      <span class="n">vocab</span><span class="o">-&gt;</span><span class="n">load</span><span class="p">(</span><span class="n">vocabPath</span><span class="p">,</span> <span class="n">INT_MAX</span><span class="p">);</span>
+      <span class="n">vocabs</span><span class="p">.</span><span class="n">emplace_back</span><span class="p">(</span><span class="n">vocab</span><span class="p">);</span>
+    <span class="p">}</span>
+    <span class="n">setInference</span><span class="p">(</span><span class="nb">true</span><span class="p">);</span>  <span class="c1">// note: must also set &quot;inference&quot; parameter on options</span>
+
+    <span class="c1">// if we must suppress &lt;unk&gt;, we do that by patching the bias</span>
+    <span class="k">const</span> <span class="k">auto</span> <span class="n">trgUnkId</span> <span class="o">=</span> <span class="n">vocabs</span><span class="p">.</span><span class="n">back</span><span class="p">()</span><span class="o">-&gt;</span><span class="n">getUnkId</span><span class="p">();</span>
+    <span class="kt">int</span> <span class="n">unkColId</span> <span class="o">=</span> <span class="mi">-1</span><span class="p">;</span>
+    <span class="k">if</span> <span class="p">(</span><span class="n">trgUnkId</span> <span class="o">!=</span> <span class="n">Word</span><span class="o">::</span><span class="n">NONE</span> <span class="o">&amp;&amp;</span> <span class="o">!</span><span class="n">modelOptions</span><span class="o">-&gt;</span><span class="n">get</span><span class="o">&lt;</span><span class="kt">bool</span><span class="o">&gt;</span><span class="p">(</span><span class="s">&quot;allow-unk&quot;</span><span class="p">,</span> <span class="nb">false</span><span class="p">))</span> <span class="p">{</span> <span class="c1">// do we need to suppress unk?</span>
+      <span class="n">unkColId</span> <span class="o">=</span> <span class="n">trgUnkId</span><span class="p">.</span><span class="n">toWordIndex</span><span class="p">();</span> <span class="c1">// what&#39;s the raw index of unk in the log prob vector?</span>
+      <span class="c1">// find the bias</span>
+      <span class="k">const</span> <span class="n">std</span><span class="o">::</span><span class="n">string</span> <span class="n">outputBiasName</span> <span class="o">=</span> <span class="s">&quot;decoder_ff_logit_out_b&quot;</span><span class="p">;</span>
+      <span class="k">auto</span> <span class="n">outputBias</span> <span class="o">=</span> <span class="n">graph</span><span class="o">-&gt;</span><span class="n">get</span><span class="p">(</span><span class="n">outputBiasName</span><span class="p">);</span>
+      <span class="k">auto</span> <span class="n">outputBiasVal</span> <span class="o">=</span> <span class="n">outputBias</span><span class="o">-&gt;</span><span class="n">val</span><span class="p">();</span>
+      <span class="n">std</span><span class="o">::</span><span class="n">vector</span><span class="o">&lt;</span><span class="kt">float</span><span class="o">&gt;</span> <span class="n">outputBiasVec</span><span class="p">;</span>
+      <span class="n">outputBiasVal</span><span class="o">-&gt;</span><span class="n">get</span><span class="p">(</span><span class="n">outputBiasVec</span><span class="p">);</span>
+      <span class="n">outputBiasVec</span><span class="p">[</span><span class="n">unkColId</span><span class="p">]</span> <span class="o">=</span> <span class="o">-</span><span class="n">std</span><span class="o">::</span><span class="n">numeric_limits</span><span class="o">&lt;</span><span class="kt">float</span><span class="o">&gt;::</span><span class="n">infinity</span><span class="p">();</span>
+      <span class="n">outputBiasVal</span><span class="o">-&gt;</span><span class="n">set</span><span class="p">(</span><span class="n">outputBiasVec</span><span class="p">);</span>
+    <span class="p">}</span>
+
+    <span class="c1">// the input length is represented by a value that hopefully is not used elsewhere</span>
+    <span class="k">const</span> <span class="kt">size_t</span> <span class="n">sentinelDim</span> <span class="o">=</span> <span class="mi">97</span><span class="p">;</span>  <span class="c1">// who uses prime numbers as dimensions anyways!</span>
+    <span class="kt">size_t</span> <span class="n">numEncoders</span> <span class="o">=</span> <span class="n">vocabs</span><span class="p">.</span><span class="n">size</span><span class="p">()</span> <span class="o">-</span> <span class="mi">1</span><span class="p">;</span>  <span class="c1">// @TODO: test this exporter for &gt;1 encoder</span>
+
+    <span class="c1">// some helper functions</span>
+    <span class="k">auto</span> <span class="n">extractInputByName</span> <span class="o">=</span> <span class="p">[</span><span class="o">&amp;</span><span class="p">](</span><span class="k">const</span> <span class="n">std</span><span class="o">::</span><span class="n">string</span><span class="o">&amp;</span> <span class="n">name</span><span class="p">)</span> <span class="p">{</span>
+      <span class="k">auto</span> <span class="n">expr</span> <span class="o">=</span> <span class="n">tryFindForwardNodeByName</span><span class="p">(</span><span class="n">name</span><span class="p">);</span>
+      <span class="n">ABORT_IF</span><span class="p">(</span><span class="o">!</span><span class="n">expr</span><span class="p">,</span> <span class="s">&quot;Unexpectedly could not find input node named {}&quot;</span><span class="p">,</span> <span class="n">name</span><span class="p">);</span>
+      <span class="n">expr</span><span class="o">-&gt;</span><span class="n">set_name</span><span class="p">(</span><span class="s">&quot;none&quot;</span><span class="p">);</span> <span class="c1">// and nuke the name, as it will be created again in step()</span>
+      <span class="k">return</span> <span class="n">std</span><span class="o">::</span><span class="n">make_pair</span><span class="p">(</span><span class="n">name</span><span class="p">,</span> <span class="n">expr</span><span class="p">);</span>
+    <span class="p">};</span>
+    <span class="k">auto</span> <span class="n">extractEmbeddingInputs</span> <span class="o">=</span> <span class="p">[</span><span class="o">&amp;</span><span class="p">](</span><span class="kt">bool</span> <span class="n">forEncoder</span><span class="p">)</span> <span class="p">{</span>
+      <span class="c1">// embedding inputs must be found by name, since Marian does not clearly separate batch and Expr version of the batch</span>
+      <span class="n">std</span><span class="o">::</span><span class="n">vector</span><span class="o">&lt;</span><span class="n">std</span><span class="o">::</span><span class="n">pair</span><span class="o">&lt;</span><span class="n">std</span><span class="o">::</span><span class="n">string</span><span class="p">,</span> <span class="n">Expr</span><span class="o">&gt;&gt;</span> <span class="n">embeddingInputs</span><span class="p">;</span>
+      <span class="k">for</span> <span class="p">(</span><span class="kt">size_t</span> <span class="n">i</span> <span class="o">=</span> <span class="mi">0</span><span class="p">;</span> <span class="n">i</span> <span class="o">&lt;</span> <span class="n">numEncoders</span><span class="p">;</span> <span class="n">i</span><span class="o">++</span><span class="p">)</span> <span class="p">{</span>
+        <span class="c1">// inputs must be found by name, since Marian does not clearly separate batch and Expr version of the batch</span>
+        <span class="n">std</span><span class="o">::</span><span class="n">string</span> <span class="n">inputName</span> <span class="o">=</span> <span class="s">&quot;data_&quot;</span> <span class="o">+</span> <span class="n">std</span><span class="o">::</span><span class="n">to_string</span><span class="p">(</span><span class="n">i</span><span class="p">);</span>
+        <span class="n">embeddingInputs</span><span class="p">.</span><span class="n">push_back</span><span class="p">(</span><span class="n">extractInputByName</span><span class="p">(</span><span class="n">inputName</span><span class="p">));</span>
+        <span class="k">if</span> <span class="p">(</span><span class="n">forEncoder</span><span class="p">)</span> <span class="p">{</span>
+          <span class="n">embeddingInputs</span><span class="p">.</span><span class="n">push_back</span><span class="p">(</span><span class="n">extractInputByName</span><span class="p">(</span><span class="n">inputName</span> <span class="o">+</span> <span class="s">&quot;_mask&quot;</span><span class="p">));</span>
+          <span class="n">embeddingInputs</span><span class="p">.</span><span class="n">push_back</span><span class="p">(</span><span class="n">extractInputByName</span><span class="p">(</span><span class="n">inputName</span> <span class="o">+</span> <span class="s">&quot;_posrange&quot;</span><span class="p">));</span>
+        <span class="p">}</span>
+      <span class="p">}</span>
+      <span class="k">return</span> <span class="n">embeddingInputs</span><span class="p">;</span>
+    <span class="p">};</span>
+    <span class="k">auto</span> <span class="n">extractStates</span> <span class="o">=</span> <span class="p">[</span><span class="o">&amp;</span><span class="p">](</span><span class="n">Ptr</span><span class="o">&lt;</span><span class="n">DecoderState</span><span class="o">&gt;</span> <span class="n">decoderState</span><span class="p">)</span> <span class="p">{</span>
+      <span class="n">std</span><span class="o">::</span><span class="n">vector</span><span class="o">&lt;</span><span class="n">Expr</span><span class="o">&gt;</span> <span class="n">states</span><span class="p">;</span>  <span class="c1">// all decoder-state Exprs in a long list</span>
+      <span class="k">for</span> <span class="p">(</span><span class="k">const</span> <span class="k">auto</span><span class="o">&amp;</span> <span class="nl">d</span> <span class="p">:</span> <span class="n">decoderState</span><span class="o">-&gt;</span><span class="n">getStates</span><span class="p">())</span> <span class="p">{</span>
+        <span class="n">states</span><span class="p">.</span><span class="n">push_back</span><span class="p">(</span><span class="n">d</span><span class="p">.</span><span class="n">output</span><span class="p">);</span>
+        <span class="n">states</span><span class="p">.</span><span class="n">push_back</span><span class="p">(</span><span class="n">d</span><span class="p">.</span><span class="n">cell</span><span class="p">);</span>
+      <span class="p">}</span>
+      <span class="k">return</span> <span class="n">states</span><span class="p">;</span>
+    <span class="p">};</span>
+
+    <span class="c1">// run a fake batch through the encoder (this goes into encode_source()) and create decoder start states</span>
+    <span class="c1">// This adds the operations to the tape.</span>
+    <span class="n">std</span><span class="o">::</span><span class="n">vector</span><span class="o">&lt;</span><span class="n">Ptr</span><span class="o">&lt;</span><span class="n">data</span><span class="o">::</span><span class="n">SubBatch</span><span class="o">&gt;&gt;</span> <span class="n">subBatches</span><span class="p">;</span>
+    <span class="k">for</span> <span class="p">(</span><span class="kt">size_t</span> <span class="n">batchIndex</span> <span class="o">=</span> <span class="mi">0</span><span class="p">;</span> <span class="n">batchIndex</span> <span class="o">&lt;</span> <span class="n">numEncoders</span><span class="p">;</span> <span class="n">batchIndex</span><span class="o">++</span><span class="p">)</span> <span class="p">{</span>
+      <span class="k">auto</span> <span class="n">sb</span> <span class="o">=</span> <span class="n">New</span><span class="o">&lt;</span><span class="n">data</span><span class="o">::</span><span class="n">SubBatch</span><span class="o">&gt;</span><span class="p">(</span><span class="mi">1</span><span class="p">,</span> <span class="n">sentinelDim</span><span class="p">,</span> <span class="n">vocabs</span><span class="p">[</span><span class="n">batchIndex</span><span class="p">]);</span>
+      <span class="c1">// set word indices to random values</span>
+      <span class="n">std</span><span class="o">::</span><span class="n">transform</span><span class="p">(</span><span class="n">sb</span><span class="o">-&gt;</span><span class="n">data</span><span class="p">().</span><span class="n">begin</span><span class="p">(),</span> <span class="n">sb</span><span class="o">-&gt;</span><span class="n">data</span><span class="p">().</span><span class="n">end</span><span class="p">(),</span> <span class="n">sb</span><span class="o">-&gt;</span><span class="n">data</span><span class="p">().</span><span class="n">begin</span><span class="p">(),</span>
+        <span class="p">[</span><span class="o">&amp;</span><span class="p">](</span><span class="n">Word</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="n">Word</span> <span class="p">{</span> <span class="k">return</span> <span class="n">vocabs</span><span class="p">[</span><span class="n">batchIndex</span><span class="p">]</span><span class="o">-&gt;</span><span class="n">randWord</span><span class="p">();</span> <span class="p">});</span>
+      <span class="c1">// mask: no items ask being masked out</span>
+      <span class="n">std</span><span class="o">::</span><span class="n">fill</span><span class="p">(</span><span class="n">sb</span><span class="o">-&gt;</span><span class="n">mask</span><span class="p">().</span><span class="n">begin</span><span class="p">(),</span> <span class="n">sb</span><span class="o">-&gt;</span><span class="n">mask</span><span class="p">().</span><span class="n">end</span><span class="p">(),</span> <span class="mf">1.f</span><span class="p">);</span>
+      <span class="n">subBatches</span><span class="p">.</span><span class="n">push_back</span><span class="p">(</span><span class="n">std</span><span class="o">::</span><span class="n">move</span><span class="p">(</span><span class="n">sb</span><span class="p">));</span>
+    <span class="p">}</span>
+    <span class="k">auto</span> <span class="n">batch</span> <span class="o">=</span> <span class="n">New</span><span class="o">&lt;</span><span class="n">data</span><span class="o">::</span><span class="n">CorpusBatch</span><span class="o">&gt;</span><span class="p">(</span><span class="n">subBatches</span><span class="p">);</span>
+    <span class="k">auto</span> <span class="n">startState</span> <span class="o">=</span> <span class="n">model</span><span class="o">-&gt;</span><span class="n">startState</span><span class="p">(</span><span class="n">graph</span><span class="p">,</span> <span class="n">batch</span><span class="p">);</span>
+
+    <span class="c1">// fish out the embedding inputs by name and neutralize the names</span>
+    <span class="c1">// These constitute the inputs for the graph we are cutting out for encode_source().</span>
+    <span class="k">auto</span> <span class="n">encoderEmbeddingInputs</span> <span class="o">=</span> <span class="n">extractEmbeddingInputs</span><span class="p">(</span><span class="cm">/*forEncoder=*/</span><span class="nb">true</span><span class="p">);</span>
+    <span class="n">std</span><span class="o">::</span><span class="n">vector</span><span class="o">&lt;</span><span class="n">std</span><span class="o">::</span><span class="n">pair</span><span class="o">&lt;</span><span class="n">std</span><span class="o">::</span><span class="n">string</span><span class="p">,</span> <span class="n">Expr</span><span class="o">&gt;&gt;</span> <span class="n">encoderContexts</span><span class="p">;</span>
+    <span class="k">for</span> <span class="p">(</span><span class="k">const</span> <span class="k">auto</span><span class="o">&amp;</span> <span class="nl">e</span> <span class="p">:</span> <span class="n">startState</span><span class="o">-&gt;</span><span class="n">getEncoderStates</span><span class="p">())</span>
+      <span class="n">encoderContexts</span><span class="p">.</span><span class="n">push_back</span><span class="p">(</span><span class="n">std</span><span class="o">::</span><span class="n">make_pair</span><span class="p">(</span><span class="s">&quot;encoder_context_&quot;</span> <span class="o">+</span> <span class="n">std</span><span class="o">::</span><span class="n">to_string</span><span class="p">(</span><span class="n">encoderContexts</span><span class="p">.</span><span class="n">size</span><span class="p">()),</span> <span class="n">e</span><span class="o">-&gt;</span><span class="n">getContext</span><span class="p">()));</span>
+
+    <span class="c1">// run it further until the first prediction --&gt; decode_first()</span>
+    <span class="c1">// This adds more operations to the tape.</span>
+    <span class="k">auto</span> <span class="n">decodeFirstState</span> <span class="o">=</span> <span class="n">model</span><span class="o">-&gt;</span><span class="n">step</span><span class="p">(</span><span class="n">graph</span><span class="p">,</span> <span class="n">startState</span><span class="p">,</span> <span class="cm">/*hypIndices=*/</span><span class="p">{},</span>
+      <span class="cm">/*words=*/</span><span class="p">{},</span> <span class="cm">/*batchIndices=*/</span><span class="p">{</span> <span class="mi">0</span> <span class="p">},</span> <span class="cm">/*beamSize=*/</span><span class="mi">1</span><span class="p">);</span>
+    <span class="k">auto</span> <span class="n">decodeFirstPosRangeInput</span> <span class="o">=</span> <span class="n">extractInputByName</span><span class="p">(</span><span class="s">&quot;data_&quot;</span> <span class="o">+</span> <span class="n">std</span><span class="o">::</span><span class="n">to_string</span><span class="p">(</span><span class="n">numEncoders</span><span class="p">)</span> <span class="o">+</span> <span class="s">&quot;_posrange&quot;</span><span class="p">);</span>
+
+    <span class="c1">// run it further until the next prediction --&gt; decode_next()</span>
+    <span class="c1">// This adds more operations to the tape.</span>
+    <span class="k">auto</span> <span class="n">decodeNextState</span> <span class="o">=</span> <span class="n">model</span><span class="o">-&gt;</span><span class="n">step</span><span class="p">(</span><span class="n">graph</span><span class="p">,</span> <span class="n">decodeFirstState</span><span class="p">,</span> <span class="cm">/*hypIndices=*/</span><span class="p">{},</span>
+      <span class="cm">/*words=*/</span><span class="p">{</span> <span class="n">vocabs</span><span class="p">.</span><span class="n">back</span><span class="p">()</span><span class="o">-&gt;</span><span class="n">randWord</span><span class="p">()</span> <span class="p">},</span> <span class="cm">/*batchIndices=*/</span><span class="p">{</span> <span class="mi">0</span> <span class="p">},</span> <span class="cm">/*beamSize=*/</span><span class="mi">1</span><span class="p">);</span>
+    <span class="k">auto</span> <span class="n">decodeNextEmbeddingInput</span> <span class="o">=</span> <span class="n">extractEmbeddingInputs</span><span class="p">(</span><span class="cm">/*forEncoder=*/</span><span class="nb">false</span><span class="p">);</span>
+    <span class="k">auto</span> <span class="n">decodeNextPosRangeInput</span> <span class="o">=</span> <span class="n">extractInputByName</span><span class="p">(</span><span class="s">&quot;data_&quot;</span> <span class="o">+</span> <span class="n">std</span><span class="o">::</span><span class="n">to_string</span><span class="p">(</span><span class="n">numEncoders</span><span class="p">)</span> <span class="o">+</span> <span class="s">&quot;_posrange&quot;</span><span class="p">);</span>
+
+    <span class="n">ABORT_IF</span><span class="p">(</span><span class="n">encoderContexts</span><span class="p">.</span><span class="n">size</span><span class="p">()</span> <span class="o">!=</span> <span class="n">numEncoders</span><span class="p">,</span> <span class="s">&quot;Unexpected mismatch in number of encoders??&quot;</span><span class="p">);</span>
+
+    <span class="c1">// create a descriptor for the three functions, which consists of</span>
+    <span class="c1">//  - function name</span>
+    <span class="c1">//  - list of inputs and outputs, as name-Expr pairs</span>
+    <span class="n">FunctionDefs</span> <span class="n">functionDefs</span><span class="p">;</span>
+
+    <span class="n">std</span><span class="o">::</span><span class="n">vector</span><span class="o">&lt;</span><span class="n">std</span><span class="o">::</span><span class="n">pair</span><span class="o">&lt;</span><span class="n">std</span><span class="o">::</span><span class="n">string</span><span class="p">,</span> <span class="n">Expr</span><span class="o">&gt;&gt;</span> <span class="n">inputs</span><span class="p">;</span>
+    <span class="n">std</span><span class="o">::</span><span class="n">vector</span><span class="o">&lt;</span><span class="n">std</span><span class="o">::</span><span class="n">pair</span><span class="o">&lt;</span><span class="n">std</span><span class="o">::</span><span class="n">string</span><span class="p">,</span> <span class="n">Expr</span><span class="o">&gt;&gt;</span> <span class="n">outputs</span><span class="p">;</span>
+
+    <span class="c1">// descriptor for encode_source(data_0, data_0_mask) -&gt; encoder_context_0</span>
+    <span class="n">inputs</span> <span class="o">=</span> <span class="n">encoderEmbeddingInputs</span><span class="p">;</span>
+    <span class="n">outputs</span> <span class="o">=</span> <span class="n">encoderContexts</span><span class="p">;</span>
+    <span class="n">functionDefs</span><span class="p">[</span><span class="s">&quot;encode_source&quot;</span><span class="p">]</span> <span class="o">=</span> <span class="n">std</span><span class="o">::</span><span class="n">make_pair</span><span class="p">(</span><span class="n">std</span><span class="o">::</span><span class="n">move</span><span class="p">(</span><span class="n">inputs</span><span class="p">),</span> <span class="n">std</span><span class="o">::</span><span class="n">move</span><span class="p">(</span><span class="n">outputs</span><span class="p">));</span>
+
+    <span class="c1">// descriptor for decode_first(data_1_posrange, encoder_context_0, data_0_mask) -&gt; logits, out_decoder_state_0, out_decoder_state_1, ...</span>
+    <span class="n">inputs</span><span class="p">.</span><span class="n">emplace_back</span><span class="p">(</span><span class="n">decodeFirstPosRangeInput</span><span class="p">);</span>
+    <span class="k">for</span> <span class="p">(</span><span class="kt">size_t</span> <span class="n">i</span> <span class="o">=</span> <span class="mi">0</span><span class="p">;</span> <span class="n">i</span> <span class="o">&lt;</span> <span class="n">numEncoders</span><span class="p">;</span> <span class="n">i</span><span class="o">++</span><span class="p">)</span> <span class="p">{</span>
+      <span class="n">inputs</span><span class="p">.</span><span class="n">emplace_back</span><span class="p">(</span><span class="n">encoderContexts</span><span class="p">[</span><span class="n">i</span><span class="p">]);</span>
+      <span class="n">inputs</span><span class="p">.</span><span class="n">emplace_back</span><span class="p">(</span><span class="n">encoderEmbeddingInputs</span><span class="p">[</span><span class="mi">1</span><span class="o">+</span><span class="mi">2</span><span class="o">*</span><span class="n">i</span><span class="p">]);</span>
+    <span class="p">}</span>
+    <span class="n">outputs</span><span class="p">.</span><span class="n">emplace_back</span><span class="p">(</span><span class="n">std</span><span class="o">::</span><span class="n">make_pair</span><span class="p">(</span><span class="s">&quot;first_logits&quot;</span><span class="p">,</span> <span class="n">decodeFirstState</span><span class="o">-&gt;</span><span class="n">getLogProbs</span><span class="p">().</span><span class="n">getLogits</span><span class="p">()));</span>
+    <span class="k">for</span> <span class="p">(</span><span class="k">const</span> <span class="k">auto</span><span class="o">&amp;</span> <span class="nl">dss</span> <span class="p">:</span> <span class="n">extractStates</span><span class="p">(</span><span class="n">decodeFirstState</span><span class="p">))</span>
+      <span class="n">outputs</span><span class="p">.</span><span class="n">emplace_back</span><span class="p">(</span><span class="n">std</span><span class="o">::</span><span class="n">make_pair</span><span class="p">(</span><span class="s">&quot;first_decoder_state_&quot;</span> <span class="o">+</span> <span class="n">std</span><span class="o">::</span><span class="n">to_string</span><span class="p">(</span><span class="n">outputs</span><span class="p">.</span><span class="n">size</span><span class="p">()</span><span class="mi">-1</span><span class="p">),</span> <span class="n">dss</span><span class="p">));</span>
+    <span class="n">functionDefs</span><span class="p">[</span><span class="s">&quot;decode_first&quot;</span><span class="p">]</span> <span class="o">=</span> <span class="n">std</span><span class="o">::</span><span class="n">make_pair</span><span class="p">(</span><span class="n">std</span><span class="o">::</span><span class="n">move</span><span class="p">(</span><span class="n">inputs</span><span class="p">),</span> <span class="n">std</span><span class="o">::</span><span class="n">move</span><span class="p">(</span><span class="n">outputs</span><span class="p">));</span>
+
+    <span class="c1">// descriptor for decode_next(prev_word, data_1_posrange, encoder_context_0, data_0_mask, decoder_state_0, decoder_state_1, ...) -&gt; logits, decoder_state_0, decoder_state_1, ...</span>
+    <span class="n">inputs</span><span class="p">.</span><span class="n">emplace_back</span><span class="p">(</span><span class="n">std</span><span class="o">::</span><span class="n">make_pair</span><span class="p">(</span><span class="s">&quot;prev_word&quot;</span><span class="p">,</span> <span class="n">decodeNextEmbeddingInput</span><span class="p">[</span><span class="mi">0</span><span class="p">].</span><span class="n">second</span><span class="p">));</span>
+    <span class="n">inputs</span><span class="p">.</span><span class="n">emplace_back</span><span class="p">(</span><span class="n">decodeNextPosRangeInput</span><span class="p">);</span>
+    <span class="k">for</span> <span class="p">(</span><span class="kt">size_t</span> <span class="n">i</span> <span class="o">=</span> <span class="mi">0</span><span class="p">;</span> <span class="n">i</span> <span class="o">&lt;</span> <span class="n">numEncoders</span><span class="p">;</span> <span class="n">i</span><span class="o">++</span><span class="p">)</span> <span class="p">{</span>
+      <span class="n">inputs</span><span class="p">.</span><span class="n">emplace_back</span><span class="p">(</span><span class="n">encoderContexts</span><span class="p">[</span><span class="n">i</span><span class="p">]);</span>
+      <span class="n">inputs</span><span class="p">.</span><span class="n">emplace_back</span><span class="p">(</span><span class="n">encoderEmbeddingInputs</span><span class="p">[</span><span class="mi">1</span> <span class="o">+</span> <span class="mi">2</span> <span class="o">*</span> <span class="n">i</span><span class="p">]);</span>
+    <span class="p">}</span>
+    <span class="k">for</span> <span class="p">(</span><span class="k">const</span> <span class="k">auto</span><span class="o">&amp;</span> <span class="nl">dss</span> <span class="p">:</span> <span class="n">extractStates</span><span class="p">(</span><span class="n">decodeFirstState</span><span class="p">))</span>
+      <span class="n">inputs</span><span class="p">.</span><span class="n">emplace_back</span><span class="p">(</span><span class="n">std</span><span class="o">::</span><span class="n">make_pair</span><span class="p">(</span><span class="s">&quot;decoder_state_&quot;</span> <span class="o">+</span> <span class="n">std</span><span class="o">::</span><span class="n">to_string</span><span class="p">(</span><span class="n">inputs</span><span class="p">.</span><span class="n">size</span><span class="p">()</span> <span class="o">-</span> <span class="p">(</span><span class="n">numEncoders</span><span class="o">*</span><span class="mi">2</span> <span class="o">+</span> <span class="mi">2</span><span class="p">)),</span> <span class="n">dss</span><span class="p">));</span>
+    <span class="n">outputs</span><span class="p">.</span><span class="n">emplace_back</span><span class="p">(</span><span class="n">std</span><span class="o">::</span><span class="n">make_pair</span><span class="p">(</span><span class="s">&quot;next_logits&quot;</span><span class="p">,</span> <span class="n">decodeNextState</span><span class="o">-&gt;</span><span class="n">getLogProbs</span><span class="p">().</span><span class="n">getLogits</span><span class="p">()));</span>
+    <span class="k">for</span> <span class="p">(</span><span class="k">const</span> <span class="k">auto</span><span class="o">&amp;</span> <span class="nl">dss</span> <span class="p">:</span> <span class="n">extractStates</span><span class="p">(</span><span class="n">decodeNextState</span><span class="p">))</span>
+      <span class="n">outputs</span><span class="p">.</span><span class="n">emplace_back</span><span class="p">(</span><span class="n">std</span><span class="o">::</span><span class="n">make_pair</span><span class="p">(</span><span class="s">&quot;next_decoder_state_&quot;</span> <span class="o">+</span> <span class="n">std</span><span class="o">::</span><span class="n">to_string</span><span class="p">(</span><span class="n">outputs</span><span class="p">.</span><span class="n">size</span><span class="p">()</span> <span class="o">-</span> <span class="mi">1</span><span class="p">),</span> <span class="n">dss</span><span class="p">));</span>
+    <span class="n">functionDefs</span><span class="p">[</span><span class="s">&quot;decode_next&quot;</span><span class="p">]</span> <span class="o">=</span> <span class="n">std</span><span class="o">::</span><span class="n">make_pair</span><span class="p">(</span><span class="n">std</span><span class="o">::</span><span class="n">move</span><span class="p">(</span><span class="n">inputs</span><span class="p">),</span> <span class="n">std</span><span class="o">::</span><span class="n">move</span><span class="p">(</span><span class="n">outputs</span><span class="p">));</span>
+
+    <span class="c1">// now export the sub-graph as given by the function descriptor</span>
+    <span class="n">serializeToONNX</span><span class="p">(</span><span class="n">modelToPrefix</span><span class="p">,</span> <span class="n">std</span><span class="o">::</span><span class="n">move</span><span class="p">(</span><span class="n">functionDefs</span><span class="p">),</span> <span class="n">sentinelDim</span><span class="p">);</span>
+  <span class="p">}</span>
+<span class="p">}</span>
+
+<span class="cp">#endif</span>
+</pre></div>
+</div>
+</div>
+
+
+           </div>
+           
+          </div>
+          <footer>
+
+  <hr/>
+
+  <div role="contentinfo">
+    <p>
+        &#169; Copyright 2021, Marian NMT Team.
+
+    </p>
+  </div>
+    
+    
+    
+    Built with <a href="https://www.sphinx-doc.org/">Sphinx</a> using a
+    
+    <a href="https://github.com/readthedocs/sphinx_rtd_theme">theme</a>
+    
+    provided by <a href="https://readthedocs.org">Read the Docs</a>. 
+
+</footer>
+        </div>
+      </div>
+
+    </section>
+
+  </div>
+  
+
+  <script type="text/javascript">
+      jQuery(function () {
+          SphinxRtdTheme.Navigation.enable(true);
+      });
+  </script>
+
+  
+  
+    
+   
+
+</body>
+</html>

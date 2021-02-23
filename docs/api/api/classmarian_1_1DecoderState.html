@@ -1,0 +1,382 @@
+
+
+<!DOCTYPE html>
+<html class="writer-html5" lang="en" >
+<head>
+  <meta charset="utf-8" />
+  
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  
+  <title>Class DecoderState &mdash; Marian NMT v1.10.1 2021-02-23 documentation</title>
+  
+
+  
+  <link rel="stylesheet" href="../_static/css/theme.css" type="text/css" />
+  <link rel="stylesheet" href="../_static/pygments.css" type="text/css" />
+  <link rel="stylesheet" href="../_static/css/custom.css" type="text/css" />
+  <link rel="stylesheet" href="../_static/collapsible-lists/css/tree_view.css" type="text/css" />
+
+  
+  
+
+  
+  
+
+  
+    <link rel="canonical" href="http://marian-nmt.github.io/docs/api/api/classmarian_1_1DecoderState.html" />
+
+  
+  <!--[if lt IE 9]>
+    <script src="../_static/js/html5shiv.min.js"></script>
+  <![endif]-->
+  
+    
+      <script type="text/javascript" id="documentation_options" data-url_root="../" src="../_static/documentation_options.js"></script>
+        <script src="../_static/jquery.js"></script>
+        <script src="../_static/underscore.js"></script>
+        <script src="../_static/doctools.js"></script>
+        <script src="../_static/language_data.js"></script>
+        <script src="../_static/collapsible-lists/js/CollapsibleLists.compressed.js"></script>
+        <script src="../_static/collapsible-lists/js/apply-collapsible-lists.js"></script>
+    
+    <script type="text/javascript" src="../_static/js/theme.js"></script>
+
+    
+    <link rel="index" title="Index" href="../genindex.html" />
+    <link rel="search" title="Search" href="../search.html" />
+    <link rel="next" title="Class DecoderTransformer" href="classmarian_1_1DecoderTransformer.html" />
+    <link rel="prev" title="Class DecoderS2S" href="classmarian_1_1DecoderS2S.html" /> 
+</head>
+
+<body class="wy-body-for-nav">
+
+   
+  <div class="wy-grid-for-nav">
+    
+    <nav data-toggle="wy-nav-shift" class="wy-nav-side">
+      <div class="wy-side-scroll">
+        <div class="wy-side-nav-search" >
+          
+
+          
+            <a href="../index.html" class="icon icon-home"> Marian NMT
+          
+
+          
+          </a>
+
+          
+            
+            
+              <div class="version">
+                v1.10.1
+              </div>
+            
+          
+
+          
+<div role="search">
+  <form id="rtd-search-form" class="wy-form" action="../search.html" method="get">
+    <input type="text" name="q" placeholder="Search docs" />
+    <input type="hidden" name="check_keywords" value="yes" />
+    <input type="hidden" name="area" value="default" />
+  </form>
+</div>
+
+          
+        </div>
+
+        
+        <div class="wy-menu wy-menu-vertical" data-spy="affix" role="navigation" aria-label="main navigation">
+          
+            
+            
+              
+            
+            
+              <p class="caption"><span class="caption-text">Contents:</span></p>
+<ul>
+<li class="toctree-l1"><a class="reference internal" href="../install.html">Installation</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../graph.html">Expression graphs</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../operators.html">Graph operations</a></li>
+<li class="toctree-l1"><a class="reference internal" href="library_index.html">Library API</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../contributing.html">How to contribute to Marian</a></li>
+</ul>
+
+            
+          
+        </div>
+        
+      </div>
+    </nav>
+
+    <section data-toggle="wy-nav-shift" class="wy-nav-content-wrap">
+
+      
+      <nav class="wy-nav-top" aria-label="top navigation">
+        
+          <i data-toggle="wy-nav-top" class="fa fa-bars"></i>
+          <a href="../index.html">Marian NMT</a>
+        
+      </nav>
+
+
+      <div class="wy-nav-content">
+        
+        <div class="rst-content">
+        
+          
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+<div role="navigation" aria-label="breadcrumbs navigation">
+
+  <ul class="wy-breadcrumbs">
+    
+      <li><a href="../index.html" class="icon icon-home"></a> &raquo;</li>
+        
+          <li><a href="library_index.html">Library API</a> &raquo;</li>
+        
+      <li>Class DecoderState</li>
+    
+    
+      <li class="wy-breadcrumbs-aside">
+        
+          
+            <a href="../_sources/api/classmarian_1_1DecoderState.rst.txt" rel="nofollow"> View page source</a>
+          
+        
+      </li>
+    
+  </ul>
+
+  
+  <hr/>
+</div>
+          <div role="main" class="document" itemscope="itemscope" itemtype="http://schema.org/Article">
+           <div itemprop="articleBody">
+            
+  <div class="section" id="class-decoderstate">
+<span id="exhale-class-classmarian-1-1decoderstate"></span><h1>Class DecoderState<a class="headerlink" href="#class-decoderstate" title="Permalink to this headline">¶</a></h1>
+<ul class="simple">
+<li><p>Defined in <a class="reference internal" href="file_src_models_states.h.html#file-src-models-states-h"><span class="std std-ref">File states.h</span></a></p></li>
+</ul>
+<div class="section" id="inheritance-relationships">
+<h2>Inheritance Relationships<a class="headerlink" href="#inheritance-relationships" title="Permalink to this headline">¶</a></h2>
+<div class="section" id="derived-type">
+<h3>Derived Type<a class="headerlink" href="#derived-type" title="Permalink to this headline">¶</a></h3>
+<ul class="simple">
+<li><p><code class="docutils literal notranslate"><span class="pre">public</span> <span class="pre">marian::TransformerState</span></code> (<a class="reference internal" href="classmarian_1_1TransformerState.html#exhale-class-classmarian-1-1transformerstate"><span class="std std-ref">Class TransformerState</span></a>)</p></li>
+</ul>
+</div>
+</div>
+<div class="section" id="class-documentation">
+<h2>Class Documentation<a class="headerlink" href="#class-documentation" title="Permalink to this headline">¶</a></h2>
+<dl class="class">
+<dt id="_CPPv4N6marian12DecoderStateE">
+<span id="_CPPv3N6marian12DecoderStateE"></span><span id="_CPPv2N6marian12DecoderStateE"></span><span id="marian::DecoderState"></span><span class="target" id="classmarian_1_1DecoderState"></span><em class="property">class </em><code class="sig-name descname">DecoderState</code><a class="headerlink" href="#_CPPv4N6marian12DecoderStateE" title="Permalink to this definition">¶</a><br /></dt>
+<dd><p>Subclassed by <a class="reference internal" href="classmarian_1_1TransformerState.html#classmarian_1_1TransformerState"><span class="std std-ref">marian::TransformerState</span></a></p>
+<div class="breathe-sectiondef docutils container">
+<p class="breathe-sectiondef-title rubric">Public Functions</p>
+<dl class="function">
+<dt id="_CPPv4N6marian12DecoderState12DecoderStateERKN3rnn6StatesE6LogitsRKNSt6vectorI3PtrI12EncoderStateEEE3PtrIN4data11CorpusBatchEE">
+<span id="_CPPv3N6marian12DecoderState12DecoderStateERKN3rnn6StatesE6LogitsRKNSt6vectorI3PtrI12EncoderStateEEE3PtrIN4data11CorpusBatchEE"></span><span id="_CPPv2N6marian12DecoderState12DecoderStateERKN3rnn6StatesE6LogitsRKNSt6vectorI3PtrI12EncoderStateEEE3PtrIN4data11CorpusBatchEE"></span><span id="marian::DecoderState::DecoderState__rnn::StatesCR.Logits.std::vector:Ptr:EncoderState::CR.Ptr:data::CorpusBatch:"></span><span class="target" id="classmarian_1_1DecoderState_1ae1a0679189599934e680b069aee9e458"></span><code class="sig-name descname">DecoderState</code><span class="sig-paren">(</span><em class="property">const</em> rnn::<a class="reference internal" href="classmarian_1_1rnn_1_1States.html#_CPPv4N6marian3rnn6StatesE" title="marian::rnn::States">States</a> &amp;<em>states</em>, <a class="reference internal" href="classmarian_1_1Logits.html#_CPPv4N6marian6LogitsE" title="marian::Logits">Logits</a> <em>logProbs</em>, <em class="property">const</em> <a class="reference internal" href="function_expression__operators_8cpp_1af4e69a5f7167b63522135a1f6b8a5dd8.html#_CPPv4N6marianStE4Expri" title="marian::std">std</a>::vector&lt;<a class="reference internal" href="typedef_definitions_8h_1ad1a373be43a00ef9ce35666145137b08.html#_CPPv4N6marian3PtrE" title="marian::Ptr">Ptr</a>&lt;<a class="reference internal" href="classmarian_1_1EncoderState.html#_CPPv4N6marian12EncoderStateE" title="marian::EncoderState">EncoderState</a>&gt;&gt; &amp;<em>encStates</em>, <a class="reference internal" href="typedef_definitions_8h_1ad1a373be43a00ef9ce35666145137b08.html#_CPPv4N6marian3PtrE" title="marian::Ptr">Ptr</a>&lt;data::<a class="reference internal" href="classmarian_1_1data_1_1CorpusBatch.html#_CPPv4N6marian4data11CorpusBatchE" title="marian::data::CorpusBatch">CorpusBatch</a>&gt; <em>batch</em><span class="sig-paren">)</span><a class="headerlink" href="#_CPPv4N6marian12DecoderState12DecoderStateERKN3rnn6StatesE6LogitsRKNSt6vectorI3PtrI12EncoderStateEEE3PtrIN4data11CorpusBatchEE" title="Permalink to this definition">¶</a><br /></dt>
+<dd></dd></dl>
+
+<dl class="function">
+<dt id="_CPPv4N6marian12DecoderStateD0Ev">
+<span id="_CPPv3N6marian12DecoderStateD0Ev"></span><span id="_CPPv2N6marian12DecoderStateD0Ev"></span><span id="marian::DecoderState::~DecoderState"></span><span class="target" id="classmarian_1_1DecoderState_1a193445c0ff0c954f386a46020df386c3"></span><em class="property">virtual</em> <code class="sig-name descname">~DecoderState</code><span class="sig-paren">(</span><span class="sig-paren">)</span><a class="headerlink" href="#_CPPv4N6marian12DecoderStateD0Ev" title="Permalink to this definition">¶</a><br /></dt>
+<dd></dd></dl>
+
+<dl class="function">
+<dt id="_CPPv4NK6marian12DecoderState16getEncoderStatesEv">
+<span id="_CPPv3NK6marian12DecoderState16getEncoderStatesEv"></span><span id="_CPPv2NK6marian12DecoderState16getEncoderStatesEv"></span><span id="marian::DecoderState::getEncoderStatesC"></span><span class="target" id="classmarian_1_1DecoderState_1a7957cded9a7dd725876aab7c6a246de8"></span><em class="property">virtual</em> <em class="property">const</em> <a class="reference internal" href="function_expression__operators_8cpp_1af4e69a5f7167b63522135a1f6b8a5dd8.html#_CPPv4N6marianStE4Expri" title="marian::std">std</a>::vector&lt;<a class="reference internal" href="typedef_definitions_8h_1ad1a373be43a00ef9ce35666145137b08.html#_CPPv4N6marian3PtrE" title="marian::Ptr">Ptr</a>&lt;<a class="reference internal" href="classmarian_1_1EncoderState.html#_CPPv4N6marian12EncoderStateE" title="marian::EncoderState">EncoderState</a>&gt;&gt; &amp;<code class="sig-name descname">getEncoderStates</code><span class="sig-paren">(</span><span class="sig-paren">)</span> <em class="property">const</em><a class="headerlink" href="#_CPPv4NK6marian12DecoderState16getEncoderStatesEv" title="Permalink to this definition">¶</a><br /></dt>
+<dd></dd></dl>
+
+<dl class="function">
+<dt id="_CPPv4NK6marian12DecoderState11getLogProbsEv">
+<span id="_CPPv3NK6marian12DecoderState11getLogProbsEv"></span><span id="_CPPv2NK6marian12DecoderState11getLogProbsEv"></span><span id="marian::DecoderState::getLogProbsC"></span><span class="target" id="classmarian_1_1DecoderState_1a90d26dc1f1e41fb474087344521033bd"></span><em class="property">virtual</em> <a class="reference internal" href="classmarian_1_1Logits.html#_CPPv4N6marian6LogitsE" title="marian::Logits">Logits</a> <code class="sig-name descname">getLogProbs</code><span class="sig-paren">(</span><span class="sig-paren">)</span> <em class="property">const</em><a class="headerlink" href="#_CPPv4NK6marian12DecoderState11getLogProbsEv" title="Permalink to this definition">¶</a><br /></dt>
+<dd></dd></dl>
+
+<dl class="function">
+<dt id="_CPPv4N6marian12DecoderState11setLogProbsE6Logits">
+<span id="_CPPv3N6marian12DecoderState11setLogProbsE6Logits"></span><span id="_CPPv2N6marian12DecoderState11setLogProbsE6Logits"></span><span id="marian::DecoderState::setLogProbs__Logits"></span><span class="target" id="classmarian_1_1DecoderState_1ad2a3188eb8ab9b3709b17148f79e09da"></span><em class="property">virtual</em> void <code class="sig-name descname">setLogProbs</code><span class="sig-paren">(</span><a class="reference internal" href="classmarian_1_1Logits.html#_CPPv4N6marian6LogitsE" title="marian::Logits">Logits</a> <em>logProbs</em><span class="sig-paren">)</span><a class="headerlink" href="#_CPPv4N6marian12DecoderState11setLogProbsE6Logits" title="Permalink to this definition">¶</a><br /></dt>
+<dd></dd></dl>
+
+<dl class="function">
+<dt id="_CPPv4NK6marian12DecoderState6selectERKNSt6vectorI9IndexTypeEERKNSt6vectorI9IndexTypeEEi">
+<span id="_CPPv3NK6marian12DecoderState6selectERKNSt6vectorI9IndexTypeEERKNSt6vectorI9IndexTypeEEi"></span><span id="_CPPv2NK6marian12DecoderState6selectERKNSt6vectorI9IndexTypeEERKNSt6vectorI9IndexTypeEEi"></span><span id="marian::DecoderState::select__std::vector:IndexType:CR.std::vector:IndexType:CR.iC"></span><span class="target" id="classmarian_1_1DecoderState_1a37146e8897b8ce6e2b97ac9a8a46c4b0"></span><em class="property">virtual</em> <a class="reference internal" href="typedef_definitions_8h_1ad1a373be43a00ef9ce35666145137b08.html#_CPPv4N6marian3PtrE" title="marian::Ptr">Ptr</a>&lt;<a class="reference internal" href="#_CPPv4N6marian12DecoderStateE" title="marian::DecoderState">DecoderState</a>&gt; <code class="sig-name descname">select</code><span class="sig-paren">(</span><em class="property">const</em> <a class="reference internal" href="function_expression__operators_8cpp_1af4e69a5f7167b63522135a1f6b8a5dd8.html#_CPPv4N6marianStE4Expri" title="marian::std">std</a>::vector&lt;<a class="reference internal" href="typedef_definitions_8h_1af472f150bf0d608c36430a11b2f1b49c.html#_CPPv4N6marian9IndexTypeE" title="marian::IndexType">IndexType</a>&gt; &amp;<em>hypIndices</em>, <em class="property">const</em> <a class="reference internal" href="function_expression__operators_8cpp_1af4e69a5f7167b63522135a1f6b8a5dd8.html#_CPPv4N6marianStE4Expri" title="marian::std">std</a>::vector&lt;<a class="reference internal" href="typedef_definitions_8h_1af472f150bf0d608c36430a11b2f1b49c.html#_CPPv4N6marian9IndexTypeE" title="marian::IndexType">IndexType</a>&gt; &amp;<em>batchIndices</em>, int <em>beamSize</em><span class="sig-paren">)</span> <em class="property">const</em><a class="headerlink" href="#_CPPv4NK6marian12DecoderState6selectERKNSt6vectorI9IndexTypeEERKNSt6vectorI9IndexTypeEEi" title="Permalink to this definition">¶</a><br /></dt>
+<dd></dd></dl>
+
+<dl class="function">
+<dt id="_CPPv4NK6marian12DecoderState9getStatesEv">
+<span id="_CPPv3NK6marian12DecoderState9getStatesEv"></span><span id="_CPPv2NK6marian12DecoderState9getStatesEv"></span><span id="marian::DecoderState::getStatesC"></span><span class="target" id="classmarian_1_1DecoderState_1aff6c1a6b97b020ea64555eb89cd565d8"></span><em class="property">virtual</em> <em class="property">const</em> rnn::<a class="reference internal" href="classmarian_1_1rnn_1_1States.html#_CPPv4N6marian3rnn6StatesE" title="marian::rnn::States">States</a> &amp;<code class="sig-name descname">getStates</code><span class="sig-paren">(</span><span class="sig-paren">)</span> <em class="property">const</em><a class="headerlink" href="#_CPPv4NK6marian12DecoderState9getStatesEv" title="Permalink to this definition">¶</a><br /></dt>
+<dd></dd></dl>
+
+<dl class="function">
+<dt id="_CPPv4NK6marian12DecoderState26getTargetHistoryEmbeddingsEv">
+<span id="_CPPv3NK6marian12DecoderState26getTargetHistoryEmbeddingsEv"></span><span id="_CPPv2NK6marian12DecoderState26getTargetHistoryEmbeddingsEv"></span><span id="marian::DecoderState::getTargetHistoryEmbeddingsC"></span><span class="target" id="classmarian_1_1DecoderState_1a7a524dd9716fe253ca45f9f60ea1873f"></span><em class="property">virtual</em> <a class="reference internal" href="typedef_definitions_8h_1ac8ecc2cc66a7afcc6da94a9bbde5eaa7.html#_CPPv4N6marian4ExprE" title="marian::Expr">Expr</a> <code class="sig-name descname">getTargetHistoryEmbeddings</code><span class="sig-paren">(</span><span class="sig-paren">)</span> <em class="property">const</em><a class="headerlink" href="#_CPPv4NK6marian12DecoderState26getTargetHistoryEmbeddingsEv" title="Permalink to this definition">¶</a><br /></dt>
+<dd></dd></dl>
+
+<dl class="function">
+<dt id="_CPPv4N6marian12DecoderState26setTargetHistoryEmbeddingsE4Expr">
+<span id="_CPPv3N6marian12DecoderState26setTargetHistoryEmbeddingsE4Expr"></span><span id="_CPPv2N6marian12DecoderState26setTargetHistoryEmbeddingsE4Expr"></span><span id="marian::DecoderState::setTargetHistoryEmbeddings__Expr"></span><span class="target" id="classmarian_1_1DecoderState_1aad117ad30931a7f48fef80df7315a127"></span><em class="property">virtual</em> void <code class="sig-name descname">setTargetHistoryEmbeddings</code><span class="sig-paren">(</span><a class="reference internal" href="typedef_definitions_8h_1ac8ecc2cc66a7afcc6da94a9bbde5eaa7.html#_CPPv4N6marian4ExprE" title="marian::Expr">Expr</a> <em>targetHistoryEmbeddings</em><span class="sig-paren">)</span><a class="headerlink" href="#_CPPv4N6marian12DecoderState26setTargetHistoryEmbeddingsE4Expr" title="Permalink to this definition">¶</a><br /></dt>
+<dd></dd></dl>
+
+<dl class="function">
+<dt id="_CPPv4NK6marian12DecoderState14getTargetWordsEv">
+<span id="_CPPv3NK6marian12DecoderState14getTargetWordsEv"></span><span id="_CPPv2NK6marian12DecoderState14getTargetWordsEv"></span><span id="marian::DecoderState::getTargetWordsC"></span><span class="target" id="classmarian_1_1DecoderState_1a1c1c9f9a182f283470fa1abceb93b811"></span><em class="property">virtual</em> <em class="property">const</em> <a class="reference internal" href="typedef_data_2types_8h_1a81f026d9529d47fd44a64a27954775fd.html#_CPPv4N6marian5WordsE" title="marian::Words">Words</a> &amp;<code class="sig-name descname">getTargetWords</code><span class="sig-paren">(</span><span class="sig-paren">)</span> <em class="property">const</em><a class="headerlink" href="#_CPPv4NK6marian12DecoderState14getTargetWordsEv" title="Permalink to this definition">¶</a><br /></dt>
+<dd></dd></dl>
+
+<dl class="function">
+<dt id="_CPPv4N6marian12DecoderState14setTargetWordsERK5Words">
+<span id="_CPPv3N6marian12DecoderState14setTargetWordsERK5Words"></span><span id="_CPPv2N6marian12DecoderState14setTargetWordsERK5Words"></span><span id="marian::DecoderState::setTargetWords__WordsCR"></span><span class="target" id="classmarian_1_1DecoderState_1a5c33b5f3f0f02fc07c94715297b2ab3a"></span><em class="property">virtual</em> void <code class="sig-name descname">setTargetWords</code><span class="sig-paren">(</span><em class="property">const</em> <a class="reference internal" href="typedef_data_2types_8h_1a81f026d9529d47fd44a64a27954775fd.html#_CPPv4N6marian5WordsE" title="marian::Words">Words</a> &amp;<em>targetWords</em><span class="sig-paren">)</span><a class="headerlink" href="#_CPPv4N6marian12DecoderState14setTargetWordsERK5Words" title="Permalink to this definition">¶</a><br /></dt>
+<dd></dd></dl>
+
+<dl class="function">
+<dt id="_CPPv4NK6marian12DecoderState13getTargetMaskEv">
+<span id="_CPPv3NK6marian12DecoderState13getTargetMaskEv"></span><span id="_CPPv2NK6marian12DecoderState13getTargetMaskEv"></span><span id="marian::DecoderState::getTargetMaskC"></span><span class="target" id="classmarian_1_1DecoderState_1a4a433b3fb91b50a6c77cf2a217ab99d8"></span><em class="property">virtual</em> <a class="reference internal" href="typedef_definitions_8h_1ac8ecc2cc66a7afcc6da94a9bbde5eaa7.html#_CPPv4N6marian4ExprE" title="marian::Expr">Expr</a> <code class="sig-name descname">getTargetMask</code><span class="sig-paren">(</span><span class="sig-paren">)</span> <em class="property">const</em><a class="headerlink" href="#_CPPv4NK6marian12DecoderState13getTargetMaskEv" title="Permalink to this definition">¶</a><br /></dt>
+<dd></dd></dl>
+
+<dl class="function">
+<dt id="_CPPv4N6marian12DecoderState13setTargetMaskE4Expr">
+<span id="_CPPv3N6marian12DecoderState13setTargetMaskE4Expr"></span><span id="_CPPv2N6marian12DecoderState13setTargetMaskE4Expr"></span><span id="marian::DecoderState::setTargetMask__Expr"></span><span class="target" id="classmarian_1_1DecoderState_1ab470f8886435bace93adba3a66f6377d"></span><em class="property">virtual</em> void <code class="sig-name descname">setTargetMask</code><span class="sig-paren">(</span><a class="reference internal" href="typedef_definitions_8h_1ac8ecc2cc66a7afcc6da94a9bbde5eaa7.html#_CPPv4N6marian4ExprE" title="marian::Expr">Expr</a> <em>targetMask</em><span class="sig-paren">)</span><a class="headerlink" href="#_CPPv4N6marian12DecoderState13setTargetMaskE4Expr" title="Permalink to this definition">¶</a><br /></dt>
+<dd></dd></dl>
+
+<dl class="function">
+<dt id="_CPPv4NK6marian12DecoderState14getSourceWordsEv">
+<span id="_CPPv3NK6marian12DecoderState14getSourceWordsEv"></span><span id="_CPPv2NK6marian12DecoderState14getSourceWordsEv"></span><span id="marian::DecoderState::getSourceWordsC"></span><span class="target" id="classmarian_1_1DecoderState_1a23c07046ae6e270e497b617b873a8e42"></span><em class="property">virtual</em> <em class="property">const</em> <a class="reference internal" href="typedef_data_2types_8h_1a81f026d9529d47fd44a64a27954775fd.html#_CPPv4N6marian5WordsE" title="marian::Words">Words</a> &amp;<code class="sig-name descname">getSourceWords</code><span class="sig-paren">(</span><span class="sig-paren">)</span> <em class="property">const</em><a class="headerlink" href="#_CPPv4NK6marian12DecoderState14getSourceWordsEv" title="Permalink to this definition">¶</a><br /></dt>
+<dd></dd></dl>
+
+<dl class="function">
+<dt id="_CPPv4NK6marian12DecoderState8getBatchEv">
+<span id="_CPPv3NK6marian12DecoderState8getBatchEv"></span><span id="_CPPv2NK6marian12DecoderState8getBatchEv"></span><span id="marian::DecoderState::getBatchC"></span><span class="target" id="classmarian_1_1DecoderState_1aeeafeeaaec74483865cc4098a73d72dc"></span><a class="reference internal" href="typedef_definitions_8h_1ad1a373be43a00ef9ce35666145137b08.html#_CPPv4N6marian3PtrE" title="marian::Ptr">Ptr</a>&lt;data::<a class="reference internal" href="classmarian_1_1data_1_1CorpusBatch.html#_CPPv4N6marian4data11CorpusBatchE" title="marian::data::CorpusBatch">CorpusBatch</a>&gt; <code class="sig-name descname">getBatch</code><span class="sig-paren">(</span><span class="sig-paren">)</span> <em class="property">const</em><a class="headerlink" href="#_CPPv4NK6marian12DecoderState8getBatchEv" title="Permalink to this definition">¶</a><br /></dt>
+<dd></dd></dl>
+
+<dl class="function">
+<dt id="_CPPv4NK6marian12DecoderState11getPositionEv">
+<span id="_CPPv3NK6marian12DecoderState11getPositionEv"></span><span id="_CPPv2NK6marian12DecoderState11getPositionEv"></span><span id="marian::DecoderState::getPositionC"></span><span class="target" id="classmarian_1_1DecoderState_1a26d4ec46a230c2ca598fea9d23250402"></span>size_t <code class="sig-name descname">getPosition</code><span class="sig-paren">(</span><span class="sig-paren">)</span> <em class="property">const</em><a class="headerlink" href="#_CPPv4NK6marian12DecoderState11getPositionEv" title="Permalink to this definition">¶</a><br /></dt>
+<dd></dd></dl>
+
+<dl class="function">
+<dt id="_CPPv4N6marian12DecoderState11setPositionE6size_t">
+<span id="_CPPv3N6marian12DecoderState11setPositionE6size_t"></span><span id="_CPPv2N6marian12DecoderState11setPositionE6size_t"></span><span id="marian::DecoderState::setPosition__s"></span><span class="target" id="classmarian_1_1DecoderState_1a2f039c77d5b8581fb2e547a12e317f87"></span>void <code class="sig-name descname">setPosition</code><span class="sig-paren">(</span>size_t <em>position</em><span class="sig-paren">)</span><a class="headerlink" href="#_CPPv4N6marian12DecoderState11setPositionE6size_t" title="Permalink to this definition">¶</a><br /></dt>
+<dd></dd></dl>
+
+<dl class="function">
+<dt id="_CPPv4N6marian12DecoderState9blacklistE4Expr3PtrIN4data11CorpusBatchEE">
+<span id="_CPPv3N6marian12DecoderState9blacklistE4Expr3PtrIN4data11CorpusBatchEE"></span><span id="_CPPv2N6marian12DecoderState9blacklistE4Expr3PtrIN4data11CorpusBatchEE"></span><span id="marian::DecoderState::blacklist__Expr.Ptr:data::CorpusBatch:"></span><span class="target" id="classmarian_1_1DecoderState_1a7e1f969861dec180c362d28986492c12"></span><em class="property">virtual</em> void <code class="sig-name descname">blacklist</code><span class="sig-paren">(</span><a class="reference internal" href="typedef_definitions_8h_1ac8ecc2cc66a7afcc6da94a9bbde5eaa7.html#_CPPv4N6marian4ExprE" title="marian::Expr">Expr</a>, <a class="reference internal" href="typedef_definitions_8h_1ad1a373be43a00ef9ce35666145137b08.html#_CPPv4N6marian3PtrE" title="marian::Ptr">Ptr</a>&lt;data::<a class="reference internal" href="classmarian_1_1data_1_1CorpusBatch.html#_CPPv4N6marian4data11CorpusBatchE" title="marian::data::CorpusBatch">CorpusBatch</a>&gt;<span class="sig-paren">)</span><a class="headerlink" href="#_CPPv4N6marian12DecoderState9blacklistE4Expr3PtrIN4data11CorpusBatchEE" title="Permalink to this definition">¶</a><br /></dt>
+<dd></dd></dl>
+
+</div>
+<div class="breathe-sectiondef docutils container">
+<p class="breathe-sectiondef-title rubric">Protected Attributes</p>
+<dl class="member">
+<dt id="_CPPv4N6marian12DecoderState7states_E">
+<span id="_CPPv3N6marian12DecoderState7states_E"></span><span id="_CPPv2N6marian12DecoderState7states_E"></span><span id="marian::DecoderState::states___rnn::States"></span><span class="target" id="classmarian_1_1DecoderState_1a999eed11d80cfd9cb80fc63550633062"></span>rnn::<a class="reference internal" href="classmarian_1_1rnn_1_1States.html#_CPPv4N6marian3rnn6StatesE" title="marian::rnn::States">States</a> <code class="sig-name descname">states_</code><a class="headerlink" href="#_CPPv4N6marian12DecoderState7states_E" title="Permalink to this definition">¶</a><br /></dt>
+<dd></dd></dl>
+
+<dl class="member">
+<dt id="_CPPv4N6marian12DecoderState9logProbs_E">
+<span id="_CPPv3N6marian12DecoderState9logProbs_E"></span><span id="_CPPv2N6marian12DecoderState9logProbs_E"></span><span id="marian::DecoderState::logProbs___Logits"></span><span class="target" id="classmarian_1_1DecoderState_1aa3a081dec4fe60f0503cffa6e0f0f220"></span><a class="reference internal" href="classmarian_1_1Logits.html#_CPPv4N6marian6LogitsE" title="marian::Logits">Logits</a> <code class="sig-name descname">logProbs_</code><a class="headerlink" href="#_CPPv4N6marian12DecoderState9logProbs_E" title="Permalink to this definition">¶</a><br /></dt>
+<dd></dd></dl>
+
+<dl class="member">
+<dt id="_CPPv4N6marian12DecoderState10encStates_E">
+<span id="_CPPv3N6marian12DecoderState10encStates_E"></span><span id="_CPPv2N6marian12DecoderState10encStates_E"></span><span id="marian::DecoderState::encStates___std::vector:Ptr:EncoderState::"></span><span class="target" id="classmarian_1_1DecoderState_1a09838ecb77262feb0c2370968c38d93b"></span><a class="reference internal" href="function_expression__operators_8cpp_1af4e69a5f7167b63522135a1f6b8a5dd8.html#_CPPv4N6marianStE4Expri" title="marian::std">std</a>::vector&lt;<a class="reference internal" href="typedef_definitions_8h_1ad1a373be43a00ef9ce35666145137b08.html#_CPPv4N6marian3PtrE" title="marian::Ptr">Ptr</a>&lt;<a class="reference internal" href="classmarian_1_1EncoderState.html#_CPPv4N6marian12EncoderStateE" title="marian::EncoderState">EncoderState</a>&gt;&gt; <code class="sig-name descname">encStates_</code><a class="headerlink" href="#_CPPv4N6marian12DecoderState10encStates_E" title="Permalink to this definition">¶</a><br /></dt>
+<dd></dd></dl>
+
+<dl class="member">
+<dt id="_CPPv4N6marian12DecoderState6batch_E">
+<span id="_CPPv3N6marian12DecoderState6batch_E"></span><span id="_CPPv2N6marian12DecoderState6batch_E"></span><span id="marian::DecoderState::batch___Ptr:data::CorpusBatch:"></span><span class="target" id="classmarian_1_1DecoderState_1a3ae9f15d8f6463651bda02a826a253e5"></span><a class="reference internal" href="typedef_definitions_8h_1ad1a373be43a00ef9ce35666145137b08.html#_CPPv4N6marian3PtrE" title="marian::Ptr">Ptr</a>&lt;data::<a class="reference internal" href="classmarian_1_1data_1_1CorpusBatch.html#_CPPv4N6marian4data11CorpusBatchE" title="marian::data::CorpusBatch">CorpusBatch</a>&gt; <code class="sig-name descname">batch_</code><a class="headerlink" href="#_CPPv4N6marian12DecoderState6batch_E" title="Permalink to this definition">¶</a><br /></dt>
+<dd></dd></dl>
+
+<dl class="member">
+<dt id="_CPPv4N6marian12DecoderState24targetHistoryEmbeddings_E">
+<span id="_CPPv3N6marian12DecoderState24targetHistoryEmbeddings_E"></span><span id="_CPPv2N6marian12DecoderState24targetHistoryEmbeddings_E"></span><span id="marian::DecoderState::targetHistoryEmbeddings___Expr"></span><span class="target" id="classmarian_1_1DecoderState_1a67b1a555e78b3bae9a3157436ab96831"></span><a class="reference internal" href="typedef_definitions_8h_1ac8ecc2cc66a7afcc6da94a9bbde5eaa7.html#_CPPv4N6marian4ExprE" title="marian::Expr">Expr</a> <code class="sig-name descname">targetHistoryEmbeddings_</code><a class="headerlink" href="#_CPPv4N6marian12DecoderState24targetHistoryEmbeddings_E" title="Permalink to this definition">¶</a><br /></dt>
+<dd></dd></dl>
+
+<dl class="member">
+<dt id="_CPPv4N6marian12DecoderState11targetMask_E">
+<span id="_CPPv3N6marian12DecoderState11targetMask_E"></span><span id="_CPPv2N6marian12DecoderState11targetMask_E"></span><span id="marian::DecoderState::targetMask___Expr"></span><span class="target" id="classmarian_1_1DecoderState_1a586ad1994ecc984651c412b7fd37cde5"></span><a class="reference internal" href="typedef_definitions_8h_1ac8ecc2cc66a7afcc6da94a9bbde5eaa7.html#_CPPv4N6marian4ExprE" title="marian::Expr">Expr</a> <code class="sig-name descname">targetMask_</code><a class="headerlink" href="#_CPPv4N6marian12DecoderState11targetMask_E" title="Permalink to this definition">¶</a><br /></dt>
+<dd></dd></dl>
+
+<dl class="member">
+<dt id="_CPPv4N6marian12DecoderState12targetWords_E">
+<span id="_CPPv3N6marian12DecoderState12targetWords_E"></span><span id="_CPPv2N6marian12DecoderState12targetWords_E"></span><span id="marian::DecoderState::targetWords___Words"></span><span class="target" id="classmarian_1_1DecoderState_1a45da1c335a840ed7e89d1b6cbdd387ac"></span><a class="reference internal" href="typedef_data_2types_8h_1a81f026d9529d47fd44a64a27954775fd.html#_CPPv4N6marian5WordsE" title="marian::Words">Words</a> <code class="sig-name descname">targetWords_</code><a class="headerlink" href="#_CPPv4N6marian12DecoderState12targetWords_E" title="Permalink to this definition">¶</a><br /></dt>
+<dd></dd></dl>
+
+<dl class="member">
+<dt id="_CPPv4N6marian12DecoderState9position_E">
+<span id="_CPPv3N6marian12DecoderState9position_E"></span><span id="_CPPv2N6marian12DecoderState9position_E"></span><span id="marian::DecoderState::position___s"></span><span class="target" id="classmarian_1_1DecoderState_1a8e9828281a8680b32951769644e87fdf"></span>size_t <code class="sig-name descname">position_</code> = {0}<a class="headerlink" href="#_CPPv4N6marian12DecoderState9position_E" title="Permalink to this definition">¶</a><br /></dt>
+<dd></dd></dl>
+
+</div>
+</dd></dl>
+
+</div>
+</div>
+
+
+           </div>
+           
+          </div>
+          <footer>
+    <div class="rst-footer-buttons" role="navigation" aria-label="footer navigation">
+        <a href="classmarian_1_1DecoderTransformer.html" class="btn btn-neutral float-right" title="Class DecoderTransformer" accesskey="n" rel="next">Next <span class="fa fa-arrow-circle-right" aria-hidden="true"></span></a>
+        <a href="classmarian_1_1DecoderS2S.html" class="btn btn-neutral float-left" title="Class DecoderS2S" accesskey="p" rel="prev"><span class="fa fa-arrow-circle-left" aria-hidden="true"></span> Previous</a>
+    </div>
+
+  <hr/>
+
+  <div role="contentinfo">
+    <p>
+        &#169; Copyright 2021, Marian NMT Team.
+
+    </p>
+  </div>
+    
+    
+    
+    Built with <a href="https://www.sphinx-doc.org/">Sphinx</a> using a
+    
+    <a href="https://github.com/readthedocs/sphinx_rtd_theme">theme</a>
+    
+    provided by <a href="https://readthedocs.org">Read the Docs</a>. 
+
+</footer>
+        </div>
+      </div>
+
+    </section>
+
+  </div>
+  
+
+  <script type="text/javascript">
+      jQuery(function () {
+          SphinxRtdTheme.Navigation.enable(true);
+      });
+  </script>
+
+  
+  
+    
+   
+
+</body>
+</html>

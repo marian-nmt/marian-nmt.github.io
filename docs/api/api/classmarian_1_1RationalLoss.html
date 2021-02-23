@@ -1,0 +1,329 @@
+
+
+<!DOCTYPE html>
+<html class="writer-html5" lang="en" >
+<head>
+  <meta charset="utf-8" />
+  
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  
+  <title>Class RationalLoss &mdash; Marian NMT v1.10.1 2021-02-23 documentation</title>
+  
+
+  
+  <link rel="stylesheet" href="../_static/css/theme.css" type="text/css" />
+  <link rel="stylesheet" href="../_static/pygments.css" type="text/css" />
+  <link rel="stylesheet" href="../_static/css/custom.css" type="text/css" />
+  <link rel="stylesheet" href="../_static/collapsible-lists/css/tree_view.css" type="text/css" />
+
+  
+  
+
+  
+  
+
+  
+    <link rel="canonical" href="http://marian-nmt.github.io/docs/api/api/classmarian_1_1RationalLoss.html" />
+
+  
+  <!--[if lt IE 9]>
+    <script src="../_static/js/html5shiv.min.js"></script>
+  <![endif]-->
+  
+    
+      <script type="text/javascript" id="documentation_options" data-url_root="../" src="../_static/documentation_options.js"></script>
+        <script src="../_static/jquery.js"></script>
+        <script src="../_static/underscore.js"></script>
+        <script src="../_static/doctools.js"></script>
+        <script src="../_static/language_data.js"></script>
+        <script src="../_static/collapsible-lists/js/CollapsibleLists.compressed.js"></script>
+        <script src="../_static/collapsible-lists/js/apply-collapsible-lists.js"></script>
+    
+    <script type="text/javascript" src="../_static/js/theme.js"></script>
+
+    
+    <link rel="index" title="Index" href="../genindex.html" />
+    <link rel="search" title="Search" href="../search.html" />
+    <link rel="next" title="Template Class Rescore" href="classmarian_1_1Rescore.html" />
+    <link rel="prev" title="Class RandomGenerator" href="classmarian_1_1RandomGenerator.html" /> 
+</head>
+
+<body class="wy-body-for-nav">
+
+   
+  <div class="wy-grid-for-nav">
+    
+    <nav data-toggle="wy-nav-shift" class="wy-nav-side">
+      <div class="wy-side-scroll">
+        <div class="wy-side-nav-search" >
+          
+
+          
+            <a href="../index.html" class="icon icon-home"> Marian NMT
+          
+
+          
+          </a>
+
+          
+            
+            
+              <div class="version">
+                v1.10.1
+              </div>
+            
+          
+
+          
+<div role="search">
+  <form id="rtd-search-form" class="wy-form" action="../search.html" method="get">
+    <input type="text" name="q" placeholder="Search docs" />
+    <input type="hidden" name="check_keywords" value="yes" />
+    <input type="hidden" name="area" value="default" />
+  </form>
+</div>
+
+          
+        </div>
+
+        
+        <div class="wy-menu wy-menu-vertical" data-spy="affix" role="navigation" aria-label="main navigation">
+          
+            
+            
+              
+            
+            
+              <p class="caption"><span class="caption-text">Contents:</span></p>
+<ul>
+<li class="toctree-l1"><a class="reference internal" href="../install.html">Installation</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../graph.html">Expression graphs</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../operators.html">Graph operations</a></li>
+<li class="toctree-l1"><a class="reference internal" href="library_index.html">Library API</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../contributing.html">How to contribute to Marian</a></li>
+</ul>
+
+            
+          
+        </div>
+        
+      </div>
+    </nav>
+
+    <section data-toggle="wy-nav-shift" class="wy-nav-content-wrap">
+
+      
+      <nav class="wy-nav-top" aria-label="top navigation">
+        
+          <i data-toggle="wy-nav-top" class="fa fa-bars"></i>
+          <a href="../index.html">Marian NMT</a>
+        
+      </nav>
+
+
+      <div class="wy-nav-content">
+        
+        <div class="rst-content">
+        
+          
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+<div role="navigation" aria-label="breadcrumbs navigation">
+
+  <ul class="wy-breadcrumbs">
+    
+      <li><a href="../index.html" class="icon icon-home"></a> &raquo;</li>
+        
+          <li><a href="library_index.html">Library API</a> &raquo;</li>
+        
+      <li>Class RationalLoss</li>
+    
+    
+      <li class="wy-breadcrumbs-aside">
+        
+          
+            <a href="../_sources/api/classmarian_1_1RationalLoss.rst.txt" rel="nofollow"> View page source</a>
+          
+        
+      </li>
+    
+  </ul>
+
+  
+  <hr/>
+</div>
+          <div role="main" class="document" itemscope="itemscope" itemtype="http://schema.org/Article">
+           <div itemprop="articleBody">
+            
+  <div class="section" id="class-rationalloss">
+<span id="exhale-class-classmarian-1-1rationalloss"></span><h1>Class RationalLoss<a class="headerlink" href="#class-rationalloss" title="Permalink to this headline">¶</a></h1>
+<ul class="simple">
+<li><p>Defined in <a class="reference internal" href="file_src_layers_loss.h.html#file-src-layers-loss-h"><span class="std std-ref">File loss.h</span></a></p></li>
+</ul>
+<div class="section" id="inheritance-relationships">
+<h2>Inheritance Relationships<a class="headerlink" href="#inheritance-relationships" title="Permalink to this headline">¶</a></h2>
+<div class="section" id="derived-type">
+<h3>Derived Type<a class="headerlink" href="#derived-type" title="Permalink to this headline">¶</a></h3>
+<ul class="simple">
+<li><p><code class="docutils literal notranslate"><span class="pre">public</span> <span class="pre">marian::MultiRationalLoss</span></code> (<a class="reference internal" href="classmarian_1_1MultiRationalLoss.html#exhale-class-classmarian-1-1multirationalloss"><span class="std std-ref">Class MultiRationalLoss</span></a>)</p></li>
+</ul>
+</div>
+</div>
+<div class="section" id="class-documentation">
+<h2>Class Documentation<a class="headerlink" href="#class-documentation" title="Permalink to this headline">¶</a></h2>
+<dl class="class">
+<dt id="_CPPv4N6marian12RationalLossE">
+<span id="_CPPv3N6marian12RationalLossE"></span><span id="_CPPv2N6marian12RationalLossE"></span><span id="marian::RationalLoss"></span><span class="target" id="classmarian_1_1RationalLoss"></span><em class="property">class </em><code class="sig-name descname">RationalLoss</code><a class="headerlink" href="#_CPPv4N6marian12RationalLossE" title="Permalink to this definition">¶</a><br /></dt>
+<dd><p>We represent loss as pair of expressions, where loss_ is usually a sum of all accumulated loss values per label and count_ is the total number of labels over which the loss was collected. </p>
+<p>These two values can then be used to represent various cost variants - for instance label-wise cross-entropy or perplexity. Optimization is only performed with regard to the summed loss_.</p>
+<p>Since both, loss_ and count_ are dynamic graph nodes they can be further combined into larger structures. See multi-objective losses below.</p>
+<p>&#64;TODO: This seems also used to hold a pair of (logits, mask) </p>
+<p>Subclassed by <a class="reference internal" href="classmarian_1_1MultiRationalLoss.html#classmarian_1_1MultiRationalLoss"><span class="std std-ref">marian::MultiRationalLoss</span></a></p>
+<div class="breathe-sectiondef docutils container">
+<p class="breathe-sectiondef-title rubric">Public Functions</p>
+<dl class="function">
+<dt id="_CPPv4N6marian12RationalLoss12RationalLossE4Expr4Expr">
+<span id="_CPPv3N6marian12RationalLoss12RationalLossE4Expr4Expr"></span><span id="_CPPv2N6marian12RationalLoss12RationalLossE4Expr4Expr"></span><span id="marian::RationalLoss::RationalLoss__Expr.Expr"></span><span class="target" id="classmarian_1_1RationalLoss_1adeb0990aaa357015c5dfc8af6620fb7a"></span><code class="sig-name descname">RationalLoss</code><span class="sig-paren">(</span><a class="reference internal" href="typedef_definitions_8h_1ac8ecc2cc66a7afcc6da94a9bbde5eaa7.html#_CPPv4N6marian4ExprE" title="marian::Expr">Expr</a> <em>loss</em>, <a class="reference internal" href="typedef_definitions_8h_1ac8ecc2cc66a7afcc6da94a9bbde5eaa7.html#_CPPv4N6marian4ExprE" title="marian::Expr">Expr</a> <em>count</em><span class="sig-paren">)</span><a class="headerlink" href="#_CPPv4N6marian12RationalLoss12RationalLossE4Expr4Expr" title="Permalink to this definition">¶</a><br /></dt>
+<dd></dd></dl>
+
+<dl class="function">
+<dt id="_CPPv4N6marian12RationalLoss12RationalLossE4Exprf">
+<span id="_CPPv3N6marian12RationalLoss12RationalLossE4Exprf"></span><span id="_CPPv2N6marian12RationalLoss12RationalLossE4Exprf"></span><span id="marian::RationalLoss::RationalLoss__Expr.float"></span><span class="target" id="classmarian_1_1RationalLoss_1a521847db0979ff35a97ff8ca9074f2fd"></span><code class="sig-name descname">RationalLoss</code><span class="sig-paren">(</span><a class="reference internal" href="typedef_definitions_8h_1ac8ecc2cc66a7afcc6da94a9bbde5eaa7.html#_CPPv4N6marian4ExprE" title="marian::Expr">Expr</a> <em>loss</em>, float <em>count</em><span class="sig-paren">)</span><a class="headerlink" href="#_CPPv4N6marian12RationalLoss12RationalLossE4Exprf" title="Permalink to this definition">¶</a><br /></dt>
+<dd></dd></dl>
+
+<dl class="function">
+<dt id="_CPPv4N6marian12RationalLoss12RationalLossERK12RationalLoss">
+<span id="_CPPv3N6marian12RationalLoss12RationalLossERK12RationalLoss"></span><span id="_CPPv2N6marian12RationalLoss12RationalLossERK12RationalLoss"></span><span id="marian::RationalLoss::RationalLoss__RationalLossCR"></span><span class="target" id="classmarian_1_1RationalLoss_1a41050995cd2b1382186a95aaaa05e815"></span><code class="sig-name descname">RationalLoss</code><span class="sig-paren">(</span><em class="property">const</em> <a class="reference internal" href="#_CPPv4N6marian12RationalLoss12RationalLossEv" title="marian::RationalLoss::RationalLoss">RationalLoss</a> &amp;<em>other</em><span class="sig-paren">)</span><a class="headerlink" href="#_CPPv4N6marian12RationalLoss12RationalLossERK12RationalLoss" title="Permalink to this definition">¶</a><br /></dt>
+<dd></dd></dl>
+
+<dl class="function">
+<dt id="_CPPv4N6marian12RationalLossD0Ev">
+<span id="_CPPv3N6marian12RationalLossD0Ev"></span><span id="_CPPv2N6marian12RationalLossD0Ev"></span><span id="marian::RationalLoss::~RationalLoss"></span><span class="target" id="classmarian_1_1RationalLoss_1a2f119e03b1cb03ab842e043607079bb4"></span><em class="property">virtual</em> <code class="sig-name descname">~RationalLoss</code><span class="sig-paren">(</span><span class="sig-paren">)</span><a class="headerlink" href="#_CPPv4N6marian12RationalLossD0Ev" title="Permalink to this definition">¶</a><br /></dt>
+<dd></dd></dl>
+
+<dl class="function">
+<dt id="_CPPv4NK6marian12RationalLoss4lossEv">
+<span id="_CPPv3NK6marian12RationalLoss4lossEv"></span><span id="_CPPv2NK6marian12RationalLoss4lossEv"></span><span id="marian::RationalLoss::lossC"></span><span class="target" id="classmarian_1_1RationalLoss_1a4413c616d0837f0870ac8b3daf304834"></span><a class="reference internal" href="typedef_definitions_8h_1ac8ecc2cc66a7afcc6da94a9bbde5eaa7.html#_CPPv4N6marian4ExprE" title="marian::Expr">Expr</a> <code class="sig-name descname">loss</code><span class="sig-paren">(</span><span class="sig-paren">)</span> <em class="property">const</em><a class="headerlink" href="#_CPPv4NK6marian12RationalLoss4lossEv" title="Permalink to this definition">¶</a><br /></dt>
+<dd></dd></dl>
+
+<dl class="function">
+<dt id="_CPPv4I0ENK6marian12RationalLoss4lossEvRNSt6vectorI1TEE">
+<span id="_CPPv3I0ENK6marian12RationalLoss4lossERNSt6vectorI1TEE"></span><span id="_CPPv2I0ENK6marian12RationalLoss4lossERNSt6vectorI1TEE"></span><span class="target" id="classmarian_1_1RationalLoss_1acc42b13d82106bf8d80445cd58960fb6"></span>template&lt;typename <code class="sig-name descname">T</code>&gt;<br />void <code class="sig-name descname">loss</code><span class="sig-paren">(</span><a class="reference internal" href="function_expression__operators_8cpp_1af4e69a5f7167b63522135a1f6b8a5dd8.html#_CPPv4N6marianStE4Expri" title="marian::std">std</a>::vector&lt;<a class="reference internal" href="#_CPPv4I0ENK6marian12RationalLoss4lossEvRNSt6vectorI1TEE" title="marian::RationalLoss::loss::T">T</a>&gt; &amp;<em>losses</em><span class="sig-paren">)</span> <em class="property">const</em><a class="headerlink" href="#_CPPv4I0ENK6marian12RationalLoss4lossEvRNSt6vectorI1TEE" title="Permalink to this definition">¶</a><br /></dt>
+<dd></dd></dl>
+
+<dl class="function">
+<dt id="_CPPv4I0ENK6marian12RationalLoss4lossE1Tv">
+<span id="_CPPv3I0ENK6marian12RationalLoss4lossEv"></span><span id="_CPPv2I0ENK6marian12RationalLoss4lossEv"></span><span class="target" id="classmarian_1_1RationalLoss_1ac0949c4afbf2f9811978ead67cabb3a5"></span>template&lt;typename <code class="sig-name descname">T</code>&gt;<br /><a class="reference internal" href="#_CPPv4I0ENK6marian12RationalLoss4lossEvRNSt6vectorI1TEE" title="marian::RationalLoss::loss::T">T</a> <code class="sig-name descname">loss</code><span class="sig-paren">(</span><span class="sig-paren">)</span> <em class="property">const</em><a class="headerlink" href="#_CPPv4I0ENK6marian12RationalLoss4lossE1Tv" title="Permalink to this definition">¶</a><br /></dt>
+<dd></dd></dl>
+
+<dl class="function">
+<dt id="_CPPv4NK6marian12RationalLoss5countEv">
+<span id="_CPPv3NK6marian12RationalLoss5countEv"></span><span id="_CPPv2NK6marian12RationalLoss5countEv"></span><span id="marian::RationalLoss::countC"></span><span class="target" id="classmarian_1_1RationalLoss_1a7ef0ed2326fc50da071b8dc4c8d130c7"></span><a class="reference internal" href="typedef_definitions_8h_1ac8ecc2cc66a7afcc6da94a9bbde5eaa7.html#_CPPv4N6marian4ExprE" title="marian::Expr">Expr</a> <code class="sig-name descname">count</code><span class="sig-paren">(</span><span class="sig-paren">)</span> <em class="property">const</em><a class="headerlink" href="#_CPPv4NK6marian12RationalLoss5countEv" title="Permalink to this definition">¶</a><br /></dt>
+<dd></dd></dl>
+
+<dl class="function">
+<dt id="_CPPv4I0ENK6marian12RationalLoss5countEvRNSt6vectorI1TEE">
+<span id="_CPPv3I0ENK6marian12RationalLoss5countERNSt6vectorI1TEE"></span><span id="_CPPv2I0ENK6marian12RationalLoss5countERNSt6vectorI1TEE"></span><span class="target" id="classmarian_1_1RationalLoss_1a52312475d1b01c40fbc664a2e519e6a3"></span>template&lt;typename <code class="sig-name descname">T</code>&gt;<br />void <code class="sig-name descname">count</code><span class="sig-paren">(</span><a class="reference internal" href="function_expression__operators_8cpp_1af4e69a5f7167b63522135a1f6b8a5dd8.html#_CPPv4N6marianStE4Expri" title="marian::std">std</a>::vector&lt;<a class="reference internal" href="#_CPPv4I0ENK6marian12RationalLoss5countEvRNSt6vectorI1TEE" title="marian::RationalLoss::count::T">T</a>&gt; &amp;<em>labels</em><span class="sig-paren">)</span> <em class="property">const</em><a class="headerlink" href="#_CPPv4I0ENK6marian12RationalLoss5countEvRNSt6vectorI1TEE" title="Permalink to this definition">¶</a><br /></dt>
+<dd></dd></dl>
+
+<dl class="function">
+<dt id="_CPPv4I0ENK6marian12RationalLoss5countE1Tv">
+<span id="_CPPv3I0ENK6marian12RationalLoss5countEv"></span><span id="_CPPv2I0ENK6marian12RationalLoss5countEv"></span><span class="target" id="classmarian_1_1RationalLoss_1af691eda175c78bb2a63be2289c0a06b5"></span>template&lt;typename <code class="sig-name descname">T</code>&gt;<br /><a class="reference internal" href="#_CPPv4I0ENK6marian12RationalLoss5countEvRNSt6vectorI1TEE" title="marian::RationalLoss::count::T">T</a> <code class="sig-name descname">count</code><span class="sig-paren">(</span><span class="sig-paren">)</span> <em class="property">const</em><a class="headerlink" href="#_CPPv4I0ENK6marian12RationalLoss5countE1Tv" title="Permalink to this definition">¶</a><br /></dt>
+<dd></dd></dl>
+
+<dl class="function">
+<dt id="_CPPv4NK6marian12RationalLoss4sizeEv">
+<span id="_CPPv3NK6marian12RationalLoss4sizeEv"></span><span id="_CPPv2NK6marian12RationalLoss4sizeEv"></span><span id="marian::RationalLoss::sizeC"></span><span class="target" id="classmarian_1_1RationalLoss_1a7c921044ad2b9c68745e48c5384aac42"></span>size_t <code class="sig-name descname">size</code><span class="sig-paren">(</span><span class="sig-paren">)</span> <em class="property">const</em><a class="headerlink" href="#_CPPv4NK6marian12RationalLoss4sizeEv" title="Permalink to this definition">¶</a><br /></dt>
+<dd></dd></dl>
+
+</div>
+<div class="breathe-sectiondef docutils container">
+<p class="breathe-sectiondef-title rubric">Protected Functions</p>
+<dl class="function">
+<dt id="_CPPv4N6marian12RationalLoss12RationalLossEv">
+<span id="_CPPv3N6marian12RationalLoss12RationalLossEv"></span><span id="_CPPv2N6marian12RationalLoss12RationalLossEv"></span><span id="marian::RationalLoss::RationalLoss"></span><span class="target" id="classmarian_1_1RationalLoss_1a35d3374f5c345c6ce7ffeb215f0b93f5"></span><code class="sig-name descname">RationalLoss</code><span class="sig-paren">(</span><span class="sig-paren">)</span><a class="headerlink" href="#_CPPv4N6marian12RationalLoss12RationalLossEv" title="Permalink to this definition">¶</a><br /></dt>
+<dd></dd></dl>
+
+</div>
+<div class="breathe-sectiondef docutils container">
+<p class="breathe-sectiondef-title rubric">Protected Attributes</p>
+<dl class="member">
+<dt id="_CPPv4N6marian12RationalLoss5loss_E">
+<span id="_CPPv3N6marian12RationalLoss5loss_E"></span><span id="_CPPv2N6marian12RationalLoss5loss_E"></span><span id="marian::RationalLoss::loss___Expr"></span><span class="target" id="classmarian_1_1RationalLoss_1a9d5edb8b0cd6974e730c1f4e1212b79e"></span><a class="reference internal" href="typedef_definitions_8h_1ac8ecc2cc66a7afcc6da94a9bbde5eaa7.html#_CPPv4N6marian4ExprE" title="marian::Expr">Expr</a> <code class="sig-name descname">loss_</code><a class="headerlink" href="#_CPPv4N6marian12RationalLoss5loss_E" title="Permalink to this definition">¶</a><br /></dt>
+<dd></dd></dl>
+
+<dl class="member">
+<dt id="_CPPv4N6marian12RationalLoss6count_E">
+<span id="_CPPv3N6marian12RationalLoss6count_E"></span><span id="_CPPv2N6marian12RationalLoss6count_E"></span><span id="marian::RationalLoss::count___Expr"></span><span class="target" id="classmarian_1_1RationalLoss_1a57155f7a421a02b3f8539573fa7fe1ba"></span><a class="reference internal" href="typedef_definitions_8h_1ac8ecc2cc66a7afcc6da94a9bbde5eaa7.html#_CPPv4N6marian4ExprE" title="marian::Expr">Expr</a> <code class="sig-name descname">count_</code><a class="headerlink" href="#_CPPv4N6marian12RationalLoss6count_E" title="Permalink to this definition">¶</a><br /></dt>
+<dd></dd></dl>
+
+</div>
+</dd></dl>
+
+</div>
+</div>
+
+
+           </div>
+           
+          </div>
+          <footer>
+    <div class="rst-footer-buttons" role="navigation" aria-label="footer navigation">
+        <a href="classmarian_1_1Rescore.html" class="btn btn-neutral float-right" title="Template Class Rescore" accesskey="n" rel="next">Next <span class="fa fa-arrow-circle-right" aria-hidden="true"></span></a>
+        <a href="classmarian_1_1RandomGenerator.html" class="btn btn-neutral float-left" title="Class RandomGenerator" accesskey="p" rel="prev"><span class="fa fa-arrow-circle-left" aria-hidden="true"></span> Previous</a>
+    </div>
+
+  <hr/>
+
+  <div role="contentinfo">
+    <p>
+        &#169; Copyright 2021, Marian NMT Team.
+
+    </p>
+  </div>
+    
+    
+    
+    Built with <a href="https://www.sphinx-doc.org/">Sphinx</a> using a
+    
+    <a href="https://github.com/readthedocs/sphinx_rtd_theme">theme</a>
+    
+    provided by <a href="https://readthedocs.org">Read the Docs</a>. 
+
+</footer>
+        </div>
+      </div>
+
+    </section>
+
+  </div>
+  
+
+  <script type="text/javascript">
+      jQuery(function () {
+          SphinxRtdTheme.Navigation.enable(true);
+      });
+  </script>
+
+  
+  
+    
+   
+
+</body>
+</html>

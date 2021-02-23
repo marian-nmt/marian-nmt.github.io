@@ -1,0 +1,428 @@
+
+
+<!DOCTYPE html>
+<html class="writer-html5" lang="en" >
+<head>
+  <meta charset="utf-8" />
+  
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  
+  <title>Program Listing for File optimizers.h &mdash; Marian NMT v1.10.1 2021-02-23 documentation</title>
+  
+
+  
+  <link rel="stylesheet" href="../_static/css/theme.css" type="text/css" />
+  <link rel="stylesheet" href="../_static/pygments.css" type="text/css" />
+  <link rel="stylesheet" href="../_static/css/custom.css" type="text/css" />
+  <link rel="stylesheet" href="../_static/collapsible-lists/css/tree_view.css" type="text/css" />
+
+  
+  
+
+  
+  
+
+  
+    <link rel="canonical" href="http://marian-nmt.github.io/docs/api/api/program_listing_file_src_optimizers_optimizers.h.html" />
+
+  
+  <!--[if lt IE 9]>
+    <script src="../_static/js/html5shiv.min.js"></script>
+  <![endif]-->
+  
+    
+      <script type="text/javascript" id="documentation_options" data-url_root="../" src="../_static/documentation_options.js"></script>
+        <script src="../_static/jquery.js"></script>
+        <script src="../_static/underscore.js"></script>
+        <script src="../_static/doctools.js"></script>
+        <script src="../_static/language_data.js"></script>
+        <script src="../_static/collapsible-lists/js/CollapsibleLists.compressed.js"></script>
+        <script src="../_static/collapsible-lists/js/apply-collapsible-lists.js"></script>
+    
+    <script type="text/javascript" src="../_static/js/theme.js"></script>
+
+    
+    <link rel="index" title="Index" href="../genindex.html" />
+    <link rel="search" title="Search" href="../search.html" /> 
+</head>
+
+<body class="wy-body-for-nav">
+
+   
+  <div class="wy-grid-for-nav">
+    
+    <nav data-toggle="wy-nav-shift" class="wy-nav-side">
+      <div class="wy-side-scroll">
+        <div class="wy-side-nav-search" >
+          
+
+          
+            <a href="../index.html" class="icon icon-home"> Marian NMT
+          
+
+          
+          </a>
+
+          
+            
+            
+              <div class="version">
+                v1.10.1
+              </div>
+            
+          
+
+          
+<div role="search">
+  <form id="rtd-search-form" class="wy-form" action="../search.html" method="get">
+    <input type="text" name="q" placeholder="Search docs" />
+    <input type="hidden" name="check_keywords" value="yes" />
+    <input type="hidden" name="area" value="default" />
+  </form>
+</div>
+
+          
+        </div>
+
+        
+        <div class="wy-menu wy-menu-vertical" data-spy="affix" role="navigation" aria-label="main navigation">
+          
+            
+            
+              
+            
+            
+              <p class="caption"><span class="caption-text">Contents:</span></p>
+<ul>
+<li class="toctree-l1"><a class="reference internal" href="../install.html">Installation</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../graph.html">Expression graphs</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../operators.html">Graph operations</a></li>
+<li class="toctree-l1"><a class="reference internal" href="library_index.html">Library API</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../contributing.html">How to contribute to Marian</a></li>
+</ul>
+
+            
+          
+        </div>
+        
+      </div>
+    </nav>
+
+    <section data-toggle="wy-nav-shift" class="wy-nav-content-wrap">
+
+      
+      <nav class="wy-nav-top" aria-label="top navigation">
+        
+          <i data-toggle="wy-nav-top" class="fa fa-bars"></i>
+          <a href="../index.html">Marian NMT</a>
+        
+      </nav>
+
+
+      <div class="wy-nav-content">
+        
+        <div class="rst-content">
+        
+          
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+<div role="navigation" aria-label="breadcrumbs navigation">
+
+  <ul class="wy-breadcrumbs">
+    
+      <li><a href="../index.html" class="icon icon-home"></a> &raquo;</li>
+        
+      <li>Program Listing for File optimizers.h</li>
+    
+    
+      <li class="wy-breadcrumbs-aside">
+        
+          
+            <a href="../_sources/api/program_listing_file_src_optimizers_optimizers.h.rst.txt" rel="nofollow"> View page source</a>
+          
+        
+      </li>
+    
+  </ul>
+
+  
+  <hr/>
+</div>
+          <div role="main" class="document" itemscope="itemscope" itemtype="http://schema.org/Article">
+           <div itemprop="articleBody">
+            
+  <div class="section" id="program-listing-for-file-optimizers-h">
+<span id="program-listing-file-src-optimizers-optimizers-h"></span><h1>Program Listing for File optimizers.h<a class="headerlink" href="#program-listing-for-file-optimizers-h" title="Permalink to this headline">¶</a></h1>
+<p>↰ <a class="reference internal" href="file_src_optimizers_optimizers.h.html#file-src-optimizers-optimizers-h"><span class="std std-ref">Return to documentation for file</span></a> (<code class="docutils literal notranslate"><span class="pre">src/optimizers/optimizers.h</span></code>)</p>
+<div class="highlight-cpp notranslate"><div class="highlight"><pre><span></span><span class="cp">#pragma once</span>
+
+<span class="cp">#include</span> <span class="cpf">&quot;common/options.h&quot;</span><span class="cp"></span>
+<span class="cp">#include</span> <span class="cpf">&quot;graph/expression_graph.h&quot;</span><span class="cp"></span>
+<span class="cp">#include</span> <span class="cpf">&quot;optimizers/clippers.h&quot;</span><span class="cp"></span>
+<span class="cp">#include</span> <span class="cpf">&quot;tensors/backend.h&quot;</span><span class="cp"></span>
+<span class="cp">#include</span> <span class="cpf">&quot;tensors/tensor.h&quot;</span><span class="cp"></span>
+<span class="cp">#include</span> <span class="cpf">&quot;training/training_state.h&quot;</span><span class="cp"></span>
+
+<span class="cp">#include</span> <span class="cpf">&lt;algorithm&gt;</span><span class="cp"></span>
+<span class="cp">#include</span> <span class="cpf">&lt;map&gt;</span><span class="cp"></span>
+<span class="cp">#include</span> <span class="cpf">&lt;memory&gt;</span><span class="cp"></span>
+
+<span class="k">namespace</span> <span class="n">marian</span> <span class="p">{</span>
+
+<span class="k">class</span> <span class="nc">OptimizerBase</span> <span class="o">:</span> <span class="k">public</span> <span class="n">TrainingObserver</span> <span class="p">{</span>
+<span class="k">public</span><span class="o">:</span>
+  <span class="n">OptimizerBase</span><span class="p">(</span><span class="kt">float</span> <span class="n">eta</span><span class="p">,</span> <span class="kt">size_t</span> <span class="n">refMBWordsParam</span><span class="p">,</span> <span class="n">Ptr</span><span class="o">&lt;</span><span class="n">ClipperBase</span><span class="o">&gt;</span> <span class="n">clipper</span><span class="p">)</span>
+      <span class="o">:</span> <span class="n">eta_</span><span class="p">(</span><span class="n">eta</span><span class="p">),</span> <span class="n">refMBWordsParam_</span><span class="p">(</span><span class="n">refMBWordsParam</span><span class="p">),</span> <span class="n">clipper_</span><span class="p">(</span><span class="n">clipper</span><span class="p">)</span> <span class="p">{</span>
+
+    <span class="c1">// automatic learning-rate adjustment</span>
+    <span class="c1">// If users provide, in addition to the hyper-parameters, a reference minibatch size,</span>
+    <span class="c1">// that these hyper-parameters were originally tuned for, then the learning-rate gets</span>
+    <span class="c1">// adjusted accordingly. Note: Requires user to also use ce-sum criterion.</span>
+    <span class="k">if</span> <span class="p">(</span><span class="n">refMBWordsParam_</span> <span class="o">!=</span> <span class="mi">0</span><span class="p">)</span>
+      <span class="n">LOG</span><span class="p">(</span><span class="n">info</span><span class="p">,</span> <span class="s">&quot;[optimizers] Learning rate gets automatically adjusted as if minibatch size was {}&quot;</span><span class="p">,</span> <span class="n">refMBWordsParam_</span><span class="p">);</span>
+  <span class="p">}</span>
+
+  <span class="k">virtual</span> <span class="o">~</span><span class="n">OptimizerBase</span><span class="p">()</span> <span class="p">{}</span>
+
+  <span class="k">static</span> <span class="k">constexpr</span> <span class="kt">size_t</span> <span class="n">mbSizeNotProvided</span> <span class="o">=</span> <span class="n">SIZE_MAX</span><span class="p">;</span>
+
+  <span class="kt">void</span> <span class="nf">update</span><span class="p">(</span><span class="n">Ptr</span><span class="o">&lt;</span><span class="n">ExpressionGraph</span><span class="o">&gt;</span> <span class="n">graph</span><span class="p">,</span> <span class="kt">size_t</span> <span class="n">mbSize</span> <span class="o">=</span> <span class="n">mbSizeNotProvided</span><span class="p">)</span> <span class="p">{</span>
+    <span class="n">Tensor</span> <span class="n">p</span> <span class="o">=</span> <span class="n">graph</span><span class="o">-&gt;</span><span class="n">params</span><span class="p">()</span><span class="o">-&gt;</span><span class="n">vals</span><span class="p">();</span>
+    <span class="n">Tensor</span> <span class="n">g</span> <span class="o">=</span> <span class="n">graph</span><span class="o">-&gt;</span><span class="n">params</span><span class="p">()</span><span class="o">-&gt;</span><span class="n">grads</span><span class="p">();</span>
+
+    <span class="n">update</span><span class="p">(</span><span class="n">p</span><span class="p">,</span> <span class="n">g</span><span class="p">,</span> <span class="n">mbSize</span><span class="p">);</span>
+  <span class="p">}</span>
+
+  <span class="kt">void</span> <span class="nf">update</span><span class="p">(</span><span class="n">Tensor</span> <span class="n">params</span><span class="p">,</span> <span class="n">Tensor</span> <span class="n">grads</span><span class="p">,</span> <span class="kt">size_t</span> <span class="n">mbSize</span> <span class="o">=</span> <span class="n">mbSizeNotProvided</span><span class="p">)</span> <span class="p">{</span>
+    <span class="k">if</span><span class="p">(</span><span class="n">clipper_</span><span class="p">)</span>
+      <span class="n">clipper_</span><span class="o">-&gt;</span><span class="n">clip</span><span class="p">(</span><span class="n">grads</span><span class="p">);</span> <span class="c1">//@BUGBUG: take into account actual mini-batch size since gradients are not normalized</span>
+
+    <span class="kt">size_t</span> <span class="n">refMBWords</span> <span class="o">=</span> <span class="n">refMBWordsParam_</span><span class="p">;</span>
+    <span class="k">if</span> <span class="p">(</span><span class="n">refMBWords</span> <span class="o">==</span> <span class="mi">0</span><span class="p">)</span> <span class="p">{</span> <span class="c1">// optimizer not configured to use hyper-parameter auto-adjustment</span>
+      <span class="n">refMBWords</span> <span class="o">=</span> <span class="n">mbSize</span> <span class="o">=</span> <span class="mi">1</span><span class="p">;</span> <span class="c1">// neutral settings that keep the standard behavior</span>
+    <span class="p">}</span>
+    <span class="k">else</span> <span class="p">{</span> <span class="c1">// optimizer is configured to auto-adjust hyper-parameters</span>
+      <span class="n">ABORT_IF</span><span class="p">(</span><span class="n">mbSize</span> <span class="o">==</span> <span class="n">mbSizeNotProvided</span><span class="p">,</span> <span class="s">&quot;Using rational optimizer auto-adjustment with trainer that does not provide MB size&quot;</span><span class="p">);</span>
+      <span class="c1">// note: this behavior is only meaningful if using the ce-sum criterion</span>
+    <span class="p">}</span>
+
+    <span class="n">updateImpl</span><span class="p">(</span><span class="n">params</span><span class="p">,</span> <span class="n">grads</span><span class="p">,</span> <span class="n">mbSize</span><span class="p">,</span> <span class="n">refMBWords</span><span class="p">);</span>
+  <span class="p">}</span>
+
+  <span class="k">virtual</span> <span class="kt">void</span> <span class="n">init</span><span class="p">(</span><span class="n">TrainingState</span><span class="o">&amp;</span> <span class="n">state</span><span class="p">)</span> <span class="k">override</span> <span class="p">{</span>
+    <span class="n">eta_</span> <span class="o">=</span> <span class="n">state</span><span class="p">.</span><span class="n">eta</span><span class="p">;</span>
+  <span class="p">}</span>
+  <span class="k">virtual</span> <span class="kt">void</span> <span class="n">actAfterLoaded</span><span class="p">(</span><span class="n">TrainingState</span><span class="o">&amp;</span> <span class="n">state</span><span class="p">)</span> <span class="k">override</span> <span class="p">{</span>
+    <span class="n">eta_</span> <span class="o">=</span> <span class="n">state</span><span class="p">.</span><span class="n">eta</span><span class="p">;</span>
+  <span class="p">}</span>
+  <span class="k">virtual</span> <span class="kt">void</span> <span class="n">actAfterEpoch</span><span class="p">(</span><span class="n">TrainingState</span><span class="o">&amp;</span> <span class="n">state</span><span class="p">)</span> <span class="k">override</span> <span class="p">{</span>
+    <span class="n">eta_</span> <span class="o">=</span> <span class="n">state</span><span class="p">.</span><span class="n">eta</span><span class="p">;</span>
+    <span class="k">if</span><span class="p">(</span><span class="n">state</span><span class="p">.</span><span class="n">reset</span><span class="p">)</span>
+      <span class="n">resetStats</span><span class="p">();</span>
+  <span class="p">}</span>
+  <span class="k">virtual</span> <span class="kt">void</span> <span class="n">actAfterBatches</span><span class="p">(</span><span class="n">TrainingState</span><span class="o">&amp;</span> <span class="n">state</span><span class="p">)</span> <span class="k">override</span> <span class="p">{</span>
+    <span class="n">eta_</span> <span class="o">=</span> <span class="n">state</span><span class="p">.</span><span class="n">eta</span><span class="p">;</span>
+    <span class="k">if</span><span class="p">(</span><span class="n">state</span><span class="p">.</span><span class="n">reset</span><span class="p">)</span>
+      <span class="n">resetStats</span><span class="p">();</span>
+  <span class="p">}</span>
+  <span class="k">virtual</span> <span class="kt">void</span> <span class="n">actAfterStalled</span><span class="p">(</span><span class="n">TrainingState</span><span class="o">&amp;</span> <span class="n">state</span><span class="p">)</span> <span class="k">override</span> <span class="p">{</span>
+    <span class="n">eta_</span> <span class="o">=</span> <span class="n">state</span><span class="p">.</span><span class="n">eta</span><span class="p">;</span>
+    <span class="k">if</span><span class="p">(</span><span class="n">state</span><span class="p">.</span><span class="n">reset</span><span class="p">)</span>
+      <span class="n">resetStats</span><span class="p">();</span>
+  <span class="p">}</span>
+
+  <span class="k">virtual</span> <span class="kt">void</span> <span class="n">setParams</span><span class="p">(</span><span class="k">const</span> <span class="n">std</span><span class="o">::</span><span class="n">vector</span><span class="o">&lt;</span><span class="kt">float</span><span class="o">&gt;&amp;</span> <span class="n">params</span><span class="p">)</span> <span class="o">=</span> <span class="mi">0</span><span class="p">;</span>
+
+  <span class="k">typedef</span> <span class="n">std</span><span class="o">::</span><span class="n">function</span><span class="o">&lt;</span><span class="kt">void</span><span class="p">(</span><span class="kt">size_t</span> <span class="cm">/*localDeviceIndex*/</span><span class="p">,</span>
+                             <span class="n">std</span><span class="o">::</span><span class="n">vector</span><span class="o">&lt;</span><span class="kt">float</span><span class="o">&gt;::</span><span class="n">const_iterator</span> <span class="cm">/*begin*/</span><span class="p">,</span>
+                             <span class="n">std</span><span class="o">::</span><span class="n">vector</span><span class="o">&lt;</span><span class="kt">float</span><span class="o">&gt;::</span><span class="n">const_iterator</span> <span class="cm">/*end*/</span><span class="p">)</span><span class="o">&gt;</span> <span class="n">ScatterStateSetFunc</span><span class="p">;</span>
+  <span class="k">typedef</span> <span class="n">std</span><span class="o">::</span><span class="n">function</span><span class="o">&lt;</span><span class="n">std</span><span class="o">::</span><span class="n">vector</span><span class="o">&lt;</span><span class="kt">float</span><span class="o">&gt;</span><span class="p">(</span><span class="kt">size_t</span> <span class="cm">/*localDeviceIndex*/</span><span class="p">)</span><span class="o">&gt;</span> <span class="n">GatherStateGetFunc</span><span class="p">;</span>
+
+  <span class="k">typedef</span> <span class="n">std</span><span class="o">::</span><span class="n">function</span><span class="o">&lt;</span><span class="kt">void</span><span class="p">(</span><span class="k">const</span> <span class="n">std</span><span class="o">::</span><span class="n">vector</span><span class="o">&lt;</span><span class="kt">float</span><span class="o">&gt;&amp;</span> <span class="cm">/*data*/</span><span class="p">,</span> <span class="k">const</span> <span class="n">ScatterStateSetFunc</span><span class="o">&amp;</span> <span class="cm">/*setFn*/</span><span class="p">)</span><span class="o">&gt;</span> <span class="n">ScatterStateFunc</span><span class="p">;</span>
+  <span class="k">typedef</span> <span class="n">std</span><span class="o">::</span><span class="n">function</span><span class="o">&lt;</span><span class="n">std</span><span class="o">::</span><span class="n">vector</span><span class="o">&lt;</span><span class="kt">float</span><span class="o">&gt;</span><span class="p">(</span><span class="k">const</span> <span class="n">GatherStateGetFunc</span><span class="o">&amp;</span> <span class="cm">/*getFn*/</span><span class="p">)</span><span class="o">&gt;</span> <span class="n">GatherStateFunc</span><span class="p">;</span>
+
+  <span class="k">virtual</span> <span class="kt">void</span> <span class="n">load</span><span class="p">(</span><span class="k">const</span> <span class="n">std</span><span class="o">::</span><span class="n">string</span><span class="o">&amp;</span> <span class="cm">/*name*/</span><span class="p">,</span>
+                    <span class="k">const</span> <span class="n">std</span><span class="o">::</span><span class="n">vector</span><span class="o">&lt;</span><span class="n">Ptr</span><span class="o">&lt;</span><span class="n">OptimizerBase</span><span class="o">&gt;&gt;&amp;</span> <span class="cm">/*opts*/</span><span class="p">,</span>
+                    <span class="k">const</span> <span class="n">std</span><span class="o">::</span><span class="n">vector</span><span class="o">&lt;</span><span class="n">Ptr</span><span class="o">&lt;</span><span class="n">Backend</span><span class="o">&gt;&gt;&amp;</span> <span class="cm">/*backends*/</span><span class="p">,</span>
+                    <span class="k">const</span> <span class="n">ScatterStateFunc</span><span class="o">&amp;</span> <span class="cm">/*scatterFn*/</span><span class="p">)</span> <span class="p">{}</span>
+  <span class="k">virtual</span> <span class="kt">void</span> <span class="n">save</span><span class="p">(</span><span class="k">const</span> <span class="n">std</span><span class="o">::</span><span class="n">string</span><span class="o">&amp;</span> <span class="cm">/*name*/</span><span class="p">,</span>
+                    <span class="k">const</span> <span class="n">std</span><span class="o">::</span><span class="n">vector</span><span class="o">&lt;</span><span class="n">Ptr</span><span class="o">&lt;</span><span class="n">OptimizerBase</span><span class="o">&gt;&gt;&amp;</span> <span class="cm">/*opts*/</span><span class="p">,</span>
+                    <span class="k">const</span> <span class="n">GatherStateFunc</span><span class="o">&amp;</span> <span class="cm">/*gatherFn*/</span><span class="p">,</span>
+                    <span class="kt">bool</span> <span class="cm">/*isMainProcess*/</span> <span class="o">=</span> <span class="nb">true</span><span class="p">)</span> <span class="p">{}</span>
+
+<span class="k">protected</span><span class="o">:</span>
+  <span class="k">virtual</span> <span class="kt">void</span> <span class="n">updateImpl</span><span class="p">(</span><span class="n">Tensor</span> <span class="n">params</span><span class="p">,</span> <span class="n">Tensor</span> <span class="n">grads</span><span class="p">,</span> <span class="kt">size_t</span> <span class="n">actualMBSize</span><span class="p">,</span> <span class="kt">size_t</span> <span class="n">refMBWords</span><span class="p">)</span> <span class="o">=</span> <span class="mi">0</span><span class="p">;</span>
+  <span class="k">virtual</span> <span class="kt">void</span> <span class="n">resetStats</span><span class="p">()</span> <span class="o">=</span> <span class="mi">0</span><span class="p">;</span>
+
+  <span class="c1">// Learning rate</span>
+  <span class="kt">float</span> <span class="n">eta_</span><span class="p">;</span>
+  <span class="c1">// Reference MB size. This enables automatic adjustment of optimizer hyper-parameters to MB size.</span>
+  <span class="kt">size_t</span> <span class="n">refMBWordsParam_</span><span class="p">{</span><span class="mi">0</span><span class="p">};</span> <span class="c1">// 0 means no adjustment</span>
+  <span class="c1">// Clip gradient norm</span>
+  <span class="n">Ptr</span><span class="o">&lt;</span><span class="n">ClipperBase</span><span class="o">&gt;</span> <span class="n">clipper_</span><span class="p">;</span>
+<span class="p">};</span>
+
+<span class="k">class</span> <span class="nc">Sgd</span> <span class="o">:</span> <span class="k">public</span> <span class="n">OptimizerBase</span> <span class="p">{</span>
+<span class="k">public</span><span class="o">:</span>
+  <span class="n">Sgd</span><span class="p">(</span><span class="kt">float</span> <span class="n">eta</span><span class="p">,</span> <span class="kt">size_t</span> <span class="n">refMBWordsParam</span> <span class="o">=</span> <span class="mi">0</span><span class="p">,</span> <span class="n">Ptr</span><span class="o">&lt;</span><span class="n">ClipperBase</span><span class="o">&gt;</span> <span class="n">clipper</span> <span class="o">=</span> <span class="k">nullptr</span><span class="p">)</span>
+      <span class="o">:</span> <span class="n">OptimizerBase</span><span class="p">(</span><span class="n">eta</span><span class="p">,</span> <span class="n">refMBWordsParam</span><span class="p">,</span> <span class="n">clipper</span><span class="p">)</span> <span class="p">{}</span>
+  <span class="k">virtual</span> <span class="o">~</span><span class="n">Sgd</span><span class="p">()</span> <span class="p">{}</span>
+  <span class="k">virtual</span> <span class="kt">void</span> <span class="n">setParams</span><span class="p">(</span><span class="k">const</span> <span class="n">std</span><span class="o">::</span><span class="n">vector</span><span class="o">&lt;</span><span class="kt">float</span><span class="o">&gt;&amp;</span> <span class="cm">/*params*/</span><span class="p">)</span> <span class="k">override</span> <span class="p">{}</span>
+<span class="k">private</span><span class="o">:</span>
+  <span class="kt">void</span> <span class="n">updateImpl</span><span class="p">(</span><span class="n">Tensor</span> <span class="n">params</span><span class="p">,</span> <span class="n">Tensor</span> <span class="n">grads</span><span class="p">,</span> <span class="kt">size_t</span> <span class="n">actualMBSize</span><span class="p">,</span> <span class="kt">size_t</span> <span class="n">refMBWords</span><span class="p">)</span> <span class="k">override</span><span class="p">;</span>
+
+  <span class="k">virtual</span> <span class="kt">void</span> <span class="n">resetStats</span><span class="p">()</span> <span class="k">override</span> <span class="p">{}</span>
+<span class="p">};</span>
+
+<span class="k">class</span> <span class="nc">Adagrad</span> <span class="o">:</span> <span class="k">public</span> <span class="n">OptimizerBase</span> <span class="p">{</span>
+<span class="k">public</span><span class="o">:</span>
+  <span class="n">Adagrad</span><span class="p">(</span><span class="kt">float</span> <span class="n">eta</span><span class="p">,</span> <span class="kt">size_t</span> <span class="n">refMBWordsParam</span> <span class="o">=</span> <span class="mi">0</span><span class="p">,</span> <span class="n">Ptr</span><span class="o">&lt;</span><span class="n">ClipperBase</span><span class="o">&gt;</span> <span class="n">clipper</span> <span class="o">=</span> <span class="k">nullptr</span><span class="p">)</span>
+      <span class="o">:</span> <span class="n">OptimizerBase</span><span class="p">(</span><span class="n">eta</span><span class="p">,</span> <span class="n">refMBWordsParam</span><span class="p">,</span> <span class="n">clipper</span><span class="p">)</span> <span class="p">{}</span>
+
+  <span class="kt">void</span> <span class="n">load</span><span class="p">(</span><span class="k">const</span> <span class="n">std</span><span class="o">::</span><span class="n">string</span><span class="o">&amp;</span> <span class="n">name</span><span class="p">,</span>
+            <span class="k">const</span> <span class="n">std</span><span class="o">::</span><span class="n">vector</span><span class="o">&lt;</span><span class="n">Ptr</span><span class="o">&lt;</span><span class="n">OptimizerBase</span><span class="o">&gt;&gt;&amp;</span> <span class="n">opts</span><span class="p">,</span>
+            <span class="k">const</span> <span class="n">std</span><span class="o">::</span><span class="n">vector</span><span class="o">&lt;</span><span class="n">Ptr</span><span class="o">&lt;</span><span class="n">Backend</span><span class="o">&gt;&gt;&amp;</span> <span class="n">backends</span><span class="p">,</span>
+            <span class="k">const</span> <span class="n">ScatterStateFunc</span><span class="o">&amp;</span> <span class="n">scatterFn</span><span class="p">)</span> <span class="k">override</span><span class="p">;</span>
+  <span class="kt">void</span> <span class="nf">save</span><span class="p">(</span><span class="k">const</span> <span class="n">std</span><span class="o">::</span><span class="n">string</span><span class="o">&amp;</span> <span class="n">name</span><span class="p">,</span>
+            <span class="k">const</span> <span class="n">std</span><span class="o">::</span><span class="n">vector</span><span class="o">&lt;</span><span class="n">Ptr</span><span class="o">&lt;</span><span class="n">OptimizerBase</span><span class="o">&gt;&gt;&amp;</span> <span class="n">opts</span><span class="p">,</span>
+            <span class="k">const</span> <span class="n">GatherStateFunc</span><span class="o">&amp;</span> <span class="n">gatherFn</span><span class="p">,</span>
+            <span class="kt">bool</span> <span class="cm">/*isMainProcess*/</span> <span class="o">=</span> <span class="nb">true</span><span class="p">)</span> <span class="k">override</span><span class="p">;</span>
+
+  <span class="kt">void</span> <span class="nf">setParams</span><span class="p">(</span><span class="k">const</span> <span class="n">std</span><span class="o">::</span><span class="n">vector</span><span class="o">&lt;</span><span class="kt">float</span><span class="o">&gt;&amp;</span> <span class="n">params</span><span class="p">)</span> <span class="k">override</span> <span class="p">{</span>
+    <span class="k">if</span><span class="p">(</span><span class="n">params</span><span class="p">.</span><span class="n">size</span><span class="p">()</span> <span class="o">&gt;</span> <span class="mi">0</span><span class="p">)</span>
+      <span class="n">eps_</span> <span class="o">=</span> <span class="n">params</span><span class="p">[</span><span class="mi">0</span><span class="p">];</span>
+  <span class="p">}</span>
+
+<span class="k">private</span><span class="o">:</span>
+  <span class="kt">void</span> <span class="n">updateImpl</span><span class="p">(</span><span class="n">Tensor</span> <span class="n">params</span><span class="p">,</span> <span class="n">Tensor</span> <span class="n">grads</span><span class="p">,</span> <span class="kt">size_t</span> <span class="n">actualMBSize</span><span class="p">,</span> <span class="kt">size_t</span> <span class="n">refMBWords</span><span class="p">)</span> <span class="k">override</span><span class="p">;</span>
+  <span class="kt">void</span> <span class="nf">resetStats</span><span class="p">()</span> <span class="k">override</span><span class="p">;</span>
+
+  <span class="kt">float</span> <span class="n">eps_</span> <span class="o">=</span> <span class="mf">1e-8f</span><span class="p">;</span>
+  <span class="n">Ptr</span><span class="o">&lt;</span><span class="n">TensorAllocator</span><span class="o">&gt;</span> <span class="n">alloc_</span><span class="p">;</span>
+  <span class="n">Tensor</span> <span class="n">gt_</span><span class="p">;</span>
+<span class="p">};</span>
+
+<span class="k">class</span> <span class="nc">Adam</span> <span class="o">:</span> <span class="k">public</span> <span class="n">OptimizerBase</span> <span class="p">{</span>
+<span class="k">public</span><span class="o">:</span>
+  <span class="n">Adam</span><span class="p">(</span><span class="kt">float</span> <span class="n">eta</span><span class="p">,</span> <span class="kt">size_t</span> <span class="n">refMBWordsParam</span> <span class="o">=</span> <span class="mi">0</span><span class="p">,</span> <span class="n">Ptr</span><span class="o">&lt;</span><span class="n">ClipperBase</span><span class="o">&gt;</span> <span class="n">clipper</span> <span class="o">=</span> <span class="k">nullptr</span><span class="p">)</span>
+      <span class="o">:</span> <span class="n">OptimizerBase</span><span class="p">(</span><span class="n">eta</span><span class="p">,</span> <span class="n">refMBWordsParam</span><span class="p">,</span> <span class="n">clipper</span><span class="p">)</span> <span class="p">{}</span>
+
+  <span class="kt">void</span> <span class="n">load</span><span class="p">(</span><span class="k">const</span> <span class="n">std</span><span class="o">::</span><span class="n">string</span><span class="o">&amp;</span> <span class="n">name</span><span class="p">,</span>
+            <span class="k">const</span> <span class="n">std</span><span class="o">::</span><span class="n">vector</span><span class="o">&lt;</span><span class="n">Ptr</span><span class="o">&lt;</span><span class="n">OptimizerBase</span><span class="o">&gt;&gt;&amp;</span> <span class="n">opts</span><span class="p">,</span>
+            <span class="k">const</span> <span class="n">std</span><span class="o">::</span><span class="n">vector</span><span class="o">&lt;</span><span class="n">Ptr</span><span class="o">&lt;</span><span class="n">Backend</span><span class="o">&gt;&gt;&amp;</span> <span class="n">backends</span><span class="p">,</span>
+            <span class="k">const</span> <span class="n">ScatterStateFunc</span><span class="o">&amp;</span> <span class="n">scatterFn</span><span class="p">)</span> <span class="k">override</span><span class="p">;</span>
+  <span class="kt">void</span> <span class="nf">save</span><span class="p">(</span><span class="k">const</span> <span class="n">std</span><span class="o">::</span><span class="n">string</span><span class="o">&amp;</span> <span class="n">name</span><span class="p">,</span>
+            <span class="k">const</span> <span class="n">std</span><span class="o">::</span><span class="n">vector</span><span class="o">&lt;</span><span class="n">Ptr</span><span class="o">&lt;</span><span class="n">OptimizerBase</span><span class="o">&gt;&gt;&amp;</span> <span class="n">opts</span><span class="p">,</span>
+            <span class="k">const</span> <span class="n">GatherStateFunc</span><span class="o">&amp;</span> <span class="n">gatherFn</span><span class="p">,</span>
+            <span class="kt">bool</span> <span class="n">isMainProcess</span> <span class="o">=</span> <span class="nb">true</span><span class="p">)</span> <span class="k">override</span><span class="p">;</span>
+
+<span class="k">private</span><span class="o">:</span>
+  <span class="kt">void</span> <span class="n">updateImpl</span><span class="p">(</span><span class="n">Tensor</span> <span class="n">params</span><span class="p">,</span> <span class="n">Tensor</span> <span class="n">grads</span><span class="p">,</span> <span class="kt">size_t</span> <span class="n">actualMBSize</span><span class="p">,</span> <span class="kt">size_t</span> <span class="n">refMBWords</span><span class="p">)</span> <span class="k">override</span><span class="p">;</span>
+  <span class="kt">void</span> <span class="nf">resetStats</span><span class="p">()</span> <span class="k">override</span><span class="p">;</span>
+
+  <span class="c1">// Adam parameters:</span>
+  <span class="c1">// [beta1, beta2, eps, w, refMBWords]</span>
+  <span class="k">virtual</span> <span class="kt">void</span> <span class="n">setParams</span><span class="p">(</span><span class="k">const</span> <span class="n">std</span><span class="o">::</span><span class="n">vector</span><span class="o">&lt;</span><span class="kt">float</span><span class="o">&gt;&amp;</span> <span class="n">params</span><span class="p">)</span> <span class="k">override</span> <span class="p">{</span>
+    <span class="k">if</span><span class="p">(</span><span class="n">params</span><span class="p">.</span><span class="n">size</span><span class="p">()</span> <span class="o">&gt;</span> <span class="mi">0</span><span class="p">)</span>
+      <span class="n">beta1_</span> <span class="o">=</span> <span class="n">params</span><span class="p">[</span><span class="mi">0</span><span class="p">];</span>
+    <span class="k">if</span><span class="p">(</span><span class="n">params</span><span class="p">.</span><span class="n">size</span><span class="p">()</span> <span class="o">&gt;</span> <span class="mi">1</span><span class="p">)</span>
+      <span class="n">beta2_</span> <span class="o">=</span> <span class="n">params</span><span class="p">[</span><span class="mi">1</span><span class="p">];</span>
+    <span class="k">if</span><span class="p">(</span><span class="n">params</span><span class="p">.</span><span class="n">size</span><span class="p">()</span> <span class="o">&gt;</span> <span class="mi">2</span><span class="p">)</span>
+      <span class="n">eps_</span> <span class="o">=</span> <span class="n">params</span><span class="p">[</span><span class="mi">2</span><span class="p">];</span>
+
+    <span class="c1">// weighted decay for AdamW, to be explored, disabled by default</span>
+    <span class="k">if</span><span class="p">(</span><span class="n">params</span><span class="p">.</span><span class="n">size</span><span class="p">()</span> <span class="o">&gt;</span> <span class="mi">3</span><span class="p">)</span>
+      <span class="n">w_</span> <span class="o">=</span> <span class="n">params</span><span class="p">[</span><span class="mi">3</span><span class="p">];</span> <span class="c1">// default (disabled): 0</span>
+  <span class="p">}</span>
+
+  <span class="c1">// hyper-parameters</span>
+  <span class="kt">float</span> <span class="n">beta1_</span> <span class="o">=</span> <span class="mf">0.9f</span><span class="p">;</span>
+  <span class="kt">float</span> <span class="n">beta2_</span> <span class="o">=</span> <span class="mf">0.999f</span><span class="p">;</span>
+  <span class="kt">float</span> <span class="n">eps_</span> <span class="o">=</span> <span class="mf">1e-8f</span><span class="p">;</span>
+  <span class="kt">float</span> <span class="n">w_</span> <span class="o">=</span> <span class="mf">0.0f</span><span class="p">;</span>
+
+  <span class="c1">// CPU-side running accumulators</span>
+  <span class="kt">double</span> <span class="n">denom1_</span> <span class="o">=</span> <span class="mi">0</span><span class="p">;</span>
+  <span class="kt">double</span> <span class="n">denom2_</span> <span class="o">=</span> <span class="mi">0</span><span class="p">;</span>
+
+  <span class="c1">// GPU-side running accumulators</span>
+  <span class="n">Ptr</span><span class="o">&lt;</span><span class="n">TensorAllocator</span><span class="o">&gt;</span> <span class="n">alloc_</span><span class="p">;</span>
+  <span class="n">Tensor</span> <span class="n">mt_</span><span class="p">;</span>
+  <span class="n">Tensor</span> <span class="n">vt_</span><span class="p">;</span>
+<span class="p">};</span>
+
+<span class="k">template</span> <span class="o">&lt;</span><span class="k">class</span> <span class="nc">Algorithm</span><span class="o">&gt;</span>
+<span class="n">Ptr</span><span class="o">&lt;</span><span class="n">OptimizerBase</span><span class="o">&gt;</span> <span class="n">Optimizer</span><span class="p">(</span><span class="kt">float</span> <span class="n">eta</span><span class="p">,</span> <span class="kt">size_t</span> <span class="n">refMBWordsParam</span> <span class="o">=</span> <span class="mi">0</span><span class="p">,</span>
+                             <span class="n">Ptr</span><span class="o">&lt;</span><span class="n">ClipperBase</span><span class="o">&gt;</span> <span class="n">clipper</span> <span class="o">=</span> <span class="k">nullptr</span><span class="p">,</span>
+                             <span class="n">std</span><span class="o">::</span><span class="n">vector</span><span class="o">&lt;</span><span class="kt">float</span><span class="o">&gt;</span> <span class="n">params</span> <span class="o">=</span> <span class="p">{})</span> <span class="p">{</span>
+  <span class="k">auto</span> <span class="n">opt</span> <span class="o">=</span> <span class="n">Ptr</span><span class="o">&lt;</span><span class="n">OptimizerBase</span><span class="o">&gt;</span><span class="p">(</span><span class="k">new</span> <span class="n">Algorithm</span><span class="p">(</span><span class="n">eta</span><span class="p">,</span> <span class="n">refMBWordsParam</span><span class="p">,</span> <span class="n">clipper</span><span class="p">));</span>
+  <span class="n">opt</span><span class="o">-&gt;</span><span class="n">setParams</span><span class="p">(</span><span class="n">params</span><span class="p">);</span>
+  <span class="k">return</span> <span class="n">opt</span><span class="p">;</span>
+<span class="p">}</span>
+
+<span class="n">Ptr</span><span class="o">&lt;</span><span class="n">OptimizerBase</span><span class="o">&gt;</span> <span class="n">Optimizer</span><span class="p">(</span><span class="n">Ptr</span><span class="o">&lt;</span><span class="n">Options</span><span class="o">&gt;</span> <span class="n">options</span><span class="p">);</span>
+<span class="p">}</span>  <span class="c1">// namespace marian</span>
+</pre></div>
+</div>
+</div>
+
+
+           </div>
+           
+          </div>
+          <footer>
+
+  <hr/>
+
+  <div role="contentinfo">
+    <p>
+        &#169; Copyright 2021, Marian NMT Team.
+
+    </p>
+  </div>
+    
+    
+    
+    Built with <a href="https://www.sphinx-doc.org/">Sphinx</a> using a
+    
+    <a href="https://github.com/readthedocs/sphinx_rtd_theme">theme</a>
+    
+    provided by <a href="https://readthedocs.org">Read the Docs</a>. 
+
+</footer>
+        </div>
+      </div>
+
+    </section>
+
+  </div>
+  
+
+  <script type="text/javascript">
+      jQuery(function () {
+          SphinxRtdTheme.Navigation.enable(true);
+      });
+  </script>
+
+  
+  
+    
+   
+
+</body>
+</html>

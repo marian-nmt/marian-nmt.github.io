@@ -1,0 +1,351 @@
+
+
+<!DOCTYPE html>
+<html class="writer-html5" lang="en" >
+<head>
+  <meta charset="utf-8" />
+  
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  
+  <title>Program Listing for File graph_group_async_drop.cpp &mdash; Marian NMT v1.10.1 2021-02-23 documentation</title>
+  
+
+  
+  <link rel="stylesheet" href="../_static/css/theme.css" type="text/css" />
+  <link rel="stylesheet" href="../_static/pygments.css" type="text/css" />
+  <link rel="stylesheet" href="../_static/css/custom.css" type="text/css" />
+  <link rel="stylesheet" href="../_static/collapsible-lists/css/tree_view.css" type="text/css" />
+
+  
+  
+
+  
+  
+
+  
+    <link rel="canonical" href="http://marian-nmt.github.io/docs/api/api/program_listing_file_src_training_deprecated_graph_group_async_drop.cpp.html" />
+
+  
+  <!--[if lt IE 9]>
+    <script src="../_static/js/html5shiv.min.js"></script>
+  <![endif]-->
+  
+    
+      <script type="text/javascript" id="documentation_options" data-url_root="../" src="../_static/documentation_options.js"></script>
+        <script src="../_static/jquery.js"></script>
+        <script src="../_static/underscore.js"></script>
+        <script src="../_static/doctools.js"></script>
+        <script src="../_static/language_data.js"></script>
+        <script src="../_static/collapsible-lists/js/CollapsibleLists.compressed.js"></script>
+        <script src="../_static/collapsible-lists/js/apply-collapsible-lists.js"></script>
+    
+    <script type="text/javascript" src="../_static/js/theme.js"></script>
+
+    
+    <link rel="index" title="Index" href="../genindex.html" />
+    <link rel="search" title="Search" href="../search.html" /> 
+</head>
+
+<body class="wy-body-for-nav">
+
+   
+  <div class="wy-grid-for-nav">
+    
+    <nav data-toggle="wy-nav-shift" class="wy-nav-side">
+      <div class="wy-side-scroll">
+        <div class="wy-side-nav-search" >
+          
+
+          
+            <a href="../index.html" class="icon icon-home"> Marian NMT
+          
+
+          
+          </a>
+
+          
+            
+            
+              <div class="version">
+                v1.10.1
+              </div>
+            
+          
+
+          
+<div role="search">
+  <form id="rtd-search-form" class="wy-form" action="../search.html" method="get">
+    <input type="text" name="q" placeholder="Search docs" />
+    <input type="hidden" name="check_keywords" value="yes" />
+    <input type="hidden" name="area" value="default" />
+  </form>
+</div>
+
+          
+        </div>
+
+        
+        <div class="wy-menu wy-menu-vertical" data-spy="affix" role="navigation" aria-label="main navigation">
+          
+            
+            
+              
+            
+            
+              <p class="caption"><span class="caption-text">Contents:</span></p>
+<ul>
+<li class="toctree-l1"><a class="reference internal" href="../install.html">Installation</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../graph.html">Expression graphs</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../operators.html">Graph operations</a></li>
+<li class="toctree-l1"><a class="reference internal" href="library_index.html">Library API</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../contributing.html">How to contribute to Marian</a></li>
+</ul>
+
+            
+          
+        </div>
+        
+      </div>
+    </nav>
+
+    <section data-toggle="wy-nav-shift" class="wy-nav-content-wrap">
+
+      
+      <nav class="wy-nav-top" aria-label="top navigation">
+        
+          <i data-toggle="wy-nav-top" class="fa fa-bars"></i>
+          <a href="../index.html">Marian NMT</a>
+        
+      </nav>
+
+
+      <div class="wy-nav-content">
+        
+        <div class="rst-content">
+        
+          
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+<div role="navigation" aria-label="breadcrumbs navigation">
+
+  <ul class="wy-breadcrumbs">
+    
+      <li><a href="../index.html" class="icon icon-home"></a> &raquo;</li>
+        
+      <li>Program Listing for File graph_group_async_drop.cpp</li>
+    
+    
+      <li class="wy-breadcrumbs-aside">
+        
+          
+            <a href="../_sources/api/program_listing_file_src_training_deprecated_graph_group_async_drop.cpp.rst.txt" rel="nofollow"> View page source</a>
+          
+        
+      </li>
+    
+  </ul>
+
+  
+  <hr/>
+</div>
+          <div role="main" class="document" itemscope="itemscope" itemtype="http://schema.org/Article">
+           <div itemprop="articleBody">
+            
+  <div class="section" id="program-listing-for-file-graph-group-async-drop-cpp">
+<span id="program-listing-file-src-training-deprecated-graph-group-async-drop-cpp"></span><h1>Program Listing for File graph_group_async_drop.cpp<a class="headerlink" href="#program-listing-for-file-graph-group-async-drop-cpp" title="Permalink to this headline">¶</a></h1>
+<p>↰ <a class="reference internal" href="file_src_training_deprecated_graph_group_async_drop.cpp.html#file-src-training-deprecated-graph-group-async-drop-cpp"><span class="std std-ref">Return to documentation for file</span></a> (<code class="docutils literal notranslate"><span class="pre">src/training/deprecated/graph_group_async_drop.cpp</span></code>)</p>
+<div class="highlight-cpp notranslate"><div class="highlight"><pre><span></span><span class="cp">#include</span> <span class="cpf">&quot;training/graph_group_async_drop.h&quot;</span><span class="cp"></span>
+<span class="cp">#include</span> <span class="cpf">&quot;training/graph_group_async.h&quot;</span><span class="cp"></span>
+
+<span class="cp">#include</span> <span class="cpf">&quot;functional/functional.h&quot;</span><span class="cp"></span>
+<span class="cp">#include</span> <span class="cpf">&quot;tensors/tensor_operators.h&quot;</span><span class="cp"></span>
+<span class="cp">#include</span> <span class="cpf">&quot;training/gradient_dropping/dropper.h&quot;</span><span class="cp"></span>
+<span class="cp">#include</span> <span class="cpf">&quot;training/gradient_dropping/sparse_tensor.h&quot;</span><span class="cp"></span>
+
+<span class="k">namespace</span> <span class="n">marian</span> <span class="p">{</span>
+
+<span class="kt">void</span> <span class="n">AsyncGraphGroupDrop</span><span class="o">::</span><span class="n">fetchParams</span><span class="p">(</span><span class="n">Tensor</span> <span class="n">oldParams</span><span class="p">,</span>
+                                      <span class="k">const</span> <span class="n">std</span><span class="o">::</span><span class="n">vector</span><span class="o">&lt;</span><span class="n">Tensor</span><span class="o">&gt;&amp;</span> <span class="n">params</span><span class="p">,</span>
+                                      <span class="kt">int</span> <span class="n">device_id</span><span class="p">)</span> <span class="p">{</span>
+  <span class="c1">// Full fetch when fetching moving average OR still in warm-up period.</span>
+  <span class="k">if</span><span class="p">(</span><span class="o">&amp;</span><span class="n">params</span> <span class="o">==</span> <span class="o">&amp;</span><span class="n">paramsAvg_</span> <span class="o">||</span> <span class="n">fetchStep_</span><span class="p">[</span><span class="n">device_id</span><span class="p">]</span><span class="o">++</span> <span class="o">&lt;=</span> <span class="n">dropping_warmup</span><span class="p">)</span> <span class="p">{</span>
+    <span class="n">AsyncGraphGroup</span><span class="o">::</span><span class="n">fetchParams</span><span class="p">(</span><span class="n">oldParams</span><span class="p">,</span> <span class="n">params</span><span class="p">,</span> <span class="n">device_id</span><span class="p">);</span>
+    <span class="k">return</span><span class="p">;</span>
+  <span class="p">}</span>
+
+  <span class="n">std</span><span class="o">::</span><span class="n">vector</span><span class="o">&lt;</span><span class="n">std</span><span class="o">::</span><span class="kr">thread</span><span class="o">&gt;</span> <span class="n">threads</span><span class="p">;</span>
+  <span class="kt">int</span> <span class="n">pos</span> <span class="o">=</span> <span class="mi">0</span><span class="p">;</span>
+  <span class="k">for</span><span class="p">(</span><span class="kt">int</span> <span class="n">idx</span> <span class="o">=</span> <span class="mi">0</span><span class="p">;</span> <span class="n">idx</span> <span class="o">&lt;</span> <span class="n">devices_</span><span class="p">.</span><span class="n">size</span><span class="p">();</span> <span class="n">idx</span><span class="o">++</span><span class="p">)</span> <span class="p">{</span>
+    <span class="n">threads</span><span class="p">.</span><span class="n">emplace_back</span><span class="p">(</span><span class="n">std</span><span class="o">::</span><span class="kr">thread</span><span class="p">(</span>
+        <span class="p">[</span><span class="o">=</span><span class="p">](</span><span class="kt">int</span> <span class="n">idx</span><span class="p">,</span> <span class="kt">int</span> <span class="n">pos</span><span class="p">)</span> <span class="p">{</span>
+          <span class="k">auto</span> <span class="n">sparseGrad</span> <span class="o">=</span> <span class="n">sparseGrads_</span><span class="p">[</span><span class="n">device_id</span><span class="p">][</span><span class="n">idx</span><span class="p">];</span>
+          <span class="k">auto</span> <span class="n">sparseShard</span> <span class="o">=</span> <span class="n">sparseShards_</span><span class="p">[</span><span class="n">device_id</span><span class="p">][</span><span class="n">idx</span><span class="p">];</span>
+
+          <span class="c1">// individual mutex per-shard</span>
+          <span class="n">std</span><span class="o">::</span><span class="n">lock_guard</span><span class="o">&lt;</span><span class="n">std</span><span class="o">::</span><span class="n">mutex</span><span class="o">&gt;</span> <span class="n">guard</span><span class="p">(</span><span class="n">shardSync_</span><span class="p">[</span><span class="n">idx</span><span class="p">]);</span>
+
+          <span class="n">sparseShard</span><span class="o">-&gt;</span><span class="n">gather</span><span class="p">(</span><span class="n">params</span><span class="p">[</span><span class="n">idx</span><span class="p">]);</span>
+          <span class="n">sparseGrad</span><span class="o">-&gt;</span><span class="n">copyFrom</span><span class="p">(</span><span class="n">sparseShard</span><span class="p">);</span>
+          <span class="n">sparseGrad</span><span class="o">-&gt;</span><span class="n">scatterUpdate</span><span class="p">(</span>
+              <span class="n">oldParams</span><span class="o">-&gt;</span><span class="n">subtensor</span><span class="p">((</span><span class="kt">int</span><span class="p">)</span><span class="n">pos</span><span class="p">,</span> <span class="p">(</span><span class="kt">int</span><span class="p">)</span><span class="n">params</span><span class="p">[</span><span class="n">idx</span><span class="p">]</span><span class="o">-&gt;</span><span class="n">size</span><span class="p">()));</span>
+        <span class="p">},</span>
+        <span class="n">idx</span><span class="p">,</span>
+        <span class="n">pos</span><span class="p">));</span>
+
+    <span class="n">pos</span> <span class="o">+=</span> <span class="n">shardSize_</span><span class="p">;</span>
+  <span class="p">}</span>
+  <span class="k">for</span><span class="p">(</span><span class="kt">size_t</span> <span class="n">i</span> <span class="o">=</span> <span class="mi">0</span><span class="p">;</span> <span class="n">i</span> <span class="o">&lt;</span> <span class="n">threads</span><span class="p">.</span><span class="n">size</span><span class="p">();</span> <span class="n">i</span><span class="o">++</span><span class="p">)</span>
+    <span class="n">threads</span><span class="p">[</span><span class="n">i</span><span class="p">].</span><span class="n">join</span><span class="p">();</span>
+<span class="p">}</span>
+
+<span class="kt">void</span> <span class="n">AsyncGraphGroupDrop</span><span class="o">::</span><span class="n">pushGradients</span><span class="p">(</span><span class="n">Tensor</span> <span class="n">newGrads</span><span class="p">,</span>
+                                        <span class="kt">int</span> <span class="n">device_id</span><span class="p">)</span> <span class="p">{</span>
+  <span class="k">if</span><span class="p">(</span><span class="n">pushStep_</span><span class="p">[</span><span class="n">device_id</span><span class="p">]</span><span class="o">++</span> <span class="o">&lt;</span> <span class="n">dropping_warmup</span><span class="p">)</span> <span class="p">{</span>
+    <span class="n">AsyncGraphGroup</span><span class="o">::</span><span class="n">pushGradients</span><span class="p">(</span><span class="n">newGrads</span><span class="p">,</span> <span class="n">device_id</span><span class="p">);</span>
+    <span class="k">return</span><span class="p">;</span>
+  <span class="p">}</span>
+
+  <span class="c1">// add instead of copy?</span>
+  <span class="n">std</span><span class="o">::</span><span class="n">vector</span><span class="o">&lt;</span><span class="n">std</span><span class="o">::</span><span class="kr">thread</span><span class="o">&gt;</span> <span class="n">threads</span><span class="p">;</span>
+  <span class="kt">int</span> <span class="n">pos</span> <span class="o">=</span> <span class="mi">0</span><span class="p">;</span>
+  <span class="k">for</span><span class="p">(</span><span class="kt">int</span> <span class="n">idx</span> <span class="o">=</span> <span class="mi">0</span><span class="p">;</span> <span class="n">idx</span> <span class="o">&lt;</span> <span class="n">devices_</span><span class="p">.</span><span class="n">size</span><span class="p">();</span> <span class="n">idx</span><span class="o">++</span><span class="p">)</span> <span class="p">{</span>
+    <span class="n">threads</span><span class="p">.</span><span class="n">emplace_back</span><span class="p">(</span><span class="n">std</span><span class="o">::</span><span class="kr">thread</span><span class="p">(</span>
+        <span class="p">[</span><span class="o">=</span><span class="p">](</span><span class="kt">int</span> <span class="n">idx</span><span class="p">,</span> <span class="kt">int</span> <span class="n">pos</span><span class="p">)</span> <span class="p">{</span>
+          <span class="k">auto</span> <span class="n">dropper</span> <span class="o">=</span> <span class="n">droppers_</span><span class="p">[</span><span class="n">device_id</span><span class="p">][</span><span class="n">idx</span><span class="p">];</span>
+          <span class="k">auto</span> <span class="n">sparseGrad</span> <span class="o">=</span> <span class="n">sparseGrads_</span><span class="p">[</span><span class="n">device_id</span><span class="p">][</span><span class="n">idx</span><span class="p">];</span>
+          <span class="k">auto</span> <span class="n">sparseShard</span> <span class="o">=</span> <span class="n">sparseShards_</span><span class="p">[</span><span class="n">device_id</span><span class="p">][</span><span class="n">idx</span><span class="p">];</span>
+          <span class="k">auto</span> <span class="n">tensor</span> <span class="o">=</span> <span class="n">newGrads</span><span class="o">-&gt;</span><span class="n">subtensor</span><span class="p">((</span><span class="kt">int</span><span class="p">)</span><span class="n">pos</span><span class="p">,</span> <span class="p">(</span><span class="kt">int</span><span class="p">)</span><span class="n">grads_</span><span class="p">[</span><span class="n">idx</span><span class="p">]</span><span class="o">-&gt;</span><span class="n">size</span><span class="p">());</span>
+          <span class="c1">// individual mutex per-shard</span>
+          <span class="n">std</span><span class="o">::</span><span class="n">lock_guard</span><span class="o">&lt;</span><span class="n">std</span><span class="o">::</span><span class="n">mutex</span><span class="o">&gt;</span> <span class="n">guard</span><span class="p">(</span><span class="n">shardSync_</span><span class="p">[</span><span class="n">idx</span><span class="p">]);</span>
+
+          <span class="c1">// drop the gradients</span>
+          <span class="n">dropper</span><span class="o">-&gt;</span><span class="n">dropGraph</span><span class="p">(</span>
+              <span class="n">tensor</span><span class="p">,</span> <span class="n">sparseGrad</span><span class="p">,</span> <span class="n">droping_rate</span><span class="p">,</span> <span class="n">dropping_momentum</span><span class="p">);</span>
+
+          <span class="c1">// send the sharded sparse tensor</span>
+          <span class="n">sparseShard</span><span class="o">-&gt;</span><span class="n">copyFrom</span><span class="p">(</span><span class="n">sparseGrad</span><span class="p">);</span>
+
+          <span class="c1">// convert back to dense, store it in grads_[idx]</span>
+          <span class="c1">// sparseShard indices is equal to the indices of the sparse gradient</span>
+          <span class="c1">// which will be used for sparse fetching</span>
+          <span class="n">sparseShard</span><span class="o">-&gt;</span><span class="n">toDense</span><span class="p">(</span><span class="n">grads_</span><span class="p">[</span><span class="n">idx</span><span class="p">]);</span>
+
+          <span class="c1">// optimize</span>
+          <span class="n">shardOpt_</span><span class="p">[</span><span class="n">idx</span><span class="p">]</span><span class="o">-&gt;</span><span class="n">update</span><span class="p">(</span><span class="n">params_</span><span class="p">[</span><span class="n">idx</span><span class="p">],</span> <span class="n">grads_</span><span class="p">[</span><span class="n">idx</span><span class="p">]);</span>
+
+          <span class="k">if</span><span class="p">(</span><span class="n">mvAvg_</span><span class="p">)</span>
+            <span class="n">updateAvgParams</span><span class="p">(</span>
+                <span class="n">paramsAvg_</span><span class="p">[</span><span class="n">idx</span><span class="p">],</span> <span class="n">params_</span><span class="p">[</span><span class="n">idx</span><span class="p">],</span> <span class="n">scheduler_</span><span class="o">-&gt;</span><span class="n">numberOfBatches</span><span class="p">());</span>
+        <span class="p">},</span>
+        <span class="n">idx</span><span class="p">,</span>
+        <span class="n">pos</span><span class="p">));</span>
+
+    <span class="n">pos</span> <span class="o">+=</span> <span class="n">shardSize_</span><span class="p">;</span>
+  <span class="p">}</span>
+  <span class="k">for</span><span class="p">(</span><span class="k">auto</span><span class="o">&amp;&amp;</span> <span class="nl">t</span> <span class="p">:</span> <span class="n">threads</span><span class="p">)</span>
+    <span class="n">t</span><span class="p">.</span><span class="n">join</span><span class="p">();</span>
+<span class="p">}</span>
+
+<span class="kt">void</span> <span class="n">AsyncGraphGroupDrop</span><span class="o">::</span><span class="n">init</span><span class="p">(</span><span class="n">Ptr</span><span class="o">&lt;</span><span class="n">data</span><span class="o">::</span><span class="n">Batch</span><span class="o">&gt;</span> <span class="n">batch</span><span class="p">)</span> <span class="p">{</span>
+  <span class="n">AsyncGraphGroup</span><span class="o">::</span><span class="n">init</span><span class="p">(</span><span class="n">batch</span><span class="p">);</span>
+  <span class="c1">// extra inits for gradient dropping</span>
+  <span class="k">if</span><span class="p">(</span><span class="n">drop_first</span><span class="p">)</span> <span class="p">{</span>
+    <span class="k">for</span><span class="p">(</span><span class="kt">int</span> <span class="n">i</span> <span class="o">=</span> <span class="mi">0</span><span class="p">;</span> <span class="n">i</span> <span class="o">&lt;</span> <span class="n">devices_</span><span class="p">.</span><span class="n">size</span><span class="p">();</span> <span class="n">i</span><span class="o">++</span><span class="p">)</span> <span class="p">{</span>
+      <span class="c1">// warm-up counter</span>
+      <span class="n">fetchStep_</span><span class="p">.</span><span class="n">push_back</span><span class="p">(</span><span class="mi">0</span><span class="p">);</span>
+      <span class="n">pushStep_</span><span class="p">.</span><span class="n">push_back</span><span class="p">(</span><span class="mi">0</span><span class="p">);</span>
+      <span class="n">fetch_ready</span><span class="p">.</span><span class="n">push_back</span><span class="p">(</span><span class="nb">false</span><span class="p">);</span>
+
+      <span class="c1">// Size of the sparse tensor</span>
+      <span class="kt">int</span> <span class="n">totalSize</span> <span class="o">=</span> <span class="p">(</span><span class="kt">int</span><span class="p">)</span><span class="n">graphs_</span><span class="p">[</span><span class="mi">0</span><span class="p">]</span><span class="o">-&gt;</span><span class="n">params</span><span class="p">()</span><span class="o">-&gt;</span><span class="n">vals</span><span class="p">()</span><span class="o">-&gt;</span><span class="n">size</span><span class="p">();</span>
+      <span class="kt">int</span> <span class="n">sparseCap</span> <span class="o">=</span> <span class="p">(</span><span class="kt">int</span><span class="p">)(</span><span class="n">totalSize</span> <span class="o">*</span> <span class="mf">1.2</span> <span class="o">*</span> <span class="p">(</span><span class="mf">1.0</span> <span class="o">-</span> <span class="n">droping_rate</span><span class="p">));</span>
+
+      <span class="c1">// prepare droppers</span>
+      <span class="n">std</span><span class="o">::</span><span class="n">vector</span><span class="o">&lt;</span><span class="n">GradientDrop</span><span class="o">&gt;</span> <span class="n">tmpDropper</span><span class="p">;</span>
+      <span class="k">for</span><span class="p">(</span><span class="k">auto</span> <span class="nl">device</span> <span class="p">:</span> <span class="n">devices_</span><span class="p">)</span> <span class="p">{</span>
+        <span class="n">device</span><span class="p">;</span> <span class="c1">// @TODO: &#39;device&#39; is not used. Is this nested loop correct?</span>
+        <span class="n">tmpDropper</span><span class="p">.</span><span class="n">push_back</span><span class="p">(</span><span class="n">PrepareGradientDrop</span><span class="p">(</span><span class="n">graphs_</span><span class="p">[</span><span class="n">i</span><span class="p">]</span><span class="o">-&gt;</span><span class="n">getDeviceId</span><span class="p">()));</span>
+      <span class="p">}</span>
+      <span class="n">droppers_</span><span class="p">.</span><span class="n">push_back</span><span class="p">(</span><span class="n">tmpDropper</span><span class="p">);</span>
+
+      <span class="c1">// sparsetensor to store sparsified gradients per-device per-shard</span>
+      <span class="n">std</span><span class="o">::</span><span class="n">vector</span><span class="o">&lt;</span><span class="n">SparseTensor</span><span class="o">&gt;</span> <span class="n">tmp</span><span class="p">;</span>
+      <span class="k">for</span><span class="p">(</span><span class="kt">int</span> <span class="n">j</span> <span class="o">=</span> <span class="mi">0</span><span class="p">;</span> <span class="n">j</span> <span class="o">&lt;</span> <span class="n">devices_</span><span class="p">.</span><span class="n">size</span><span class="p">();</span> <span class="n">j</span><span class="o">++</span><span class="p">)</span>
+        <span class="n">tmp</span><span class="p">.</span><span class="n">push_back</span><span class="p">(</span><span class="n">SparseTensor</span><span class="p">(</span><span class="k">new</span> <span class="n">SparseTensorBase</span><span class="p">(</span>
+            <span class="n">sparseCap</span> <span class="o">/</span> <span class="p">(</span><span class="kt">int</span><span class="p">)</span><span class="n">devices_</span><span class="p">.</span><span class="n">size</span><span class="p">(),</span> <span class="n">graphs_</span><span class="p">[</span><span class="n">i</span><span class="p">]</span><span class="o">-&gt;</span><span class="n">getBackend</span><span class="p">())));</span>
+      <span class="n">sparseGrads_</span><span class="p">.</span><span class="n">push_back</span><span class="p">(</span><span class="n">tmp</span><span class="p">);</span>
+
+      <span class="n">std</span><span class="o">::</span><span class="n">vector</span><span class="o">&lt;</span><span class="n">SparseTensor</span><span class="o">&gt;</span> <span class="n">tmp2</span><span class="p">;</span>
+      <span class="k">for</span><span class="p">(</span><span class="kt">int</span> <span class="n">j</span> <span class="o">=</span> <span class="mi">0</span><span class="p">;</span> <span class="n">j</span> <span class="o">&lt;</span> <span class="n">devices_</span><span class="p">.</span><span class="n">size</span><span class="p">();</span> <span class="n">j</span><span class="o">++</span><span class="p">)</span>
+        <span class="n">tmp2</span><span class="p">.</span><span class="n">push_back</span><span class="p">(</span><span class="n">SparseTensor</span><span class="p">(</span><span class="k">new</span> <span class="n">SparseTensorBase</span><span class="p">(</span>
+            <span class="n">sparseCap</span> <span class="o">/</span> <span class="p">(</span><span class="kt">int</span><span class="p">)</span><span class="n">devices_</span><span class="p">.</span><span class="n">size</span><span class="p">(),</span> <span class="n">graphs_</span><span class="p">[</span><span class="n">j</span><span class="p">]</span><span class="o">-&gt;</span><span class="n">getBackend</span><span class="p">())));</span>
+      <span class="n">sparseShards_</span><span class="p">.</span><span class="n">push_back</span><span class="p">(</span><span class="n">tmp2</span><span class="p">);</span>
+    <span class="p">}</span>
+    <span class="n">drop_first</span> <span class="o">=</span> <span class="nb">false</span><span class="p">;</span>
+  <span class="p">}</span>
+<span class="p">}</span>
+<span class="p">}</span>  <span class="c1">// namespace marian</span>
+</pre></div>
+</div>
+</div>
+
+
+           </div>
+           
+          </div>
+          <footer>
+
+  <hr/>
+
+  <div role="contentinfo">
+    <p>
+        &#169; Copyright 2021, Marian NMT Team.
+
+    </p>
+  </div>
+    
+    
+    
+    Built with <a href="https://www.sphinx-doc.org/">Sphinx</a> using a
+    
+    <a href="https://github.com/readthedocs/sphinx_rtd_theme">theme</a>
+    
+    provided by <a href="https://readthedocs.org">Read the Docs</a>. 
+
+</footer>
+        </div>
+      </div>
+
+    </section>
+
+  </div>
+  
+
+  <script type="text/javascript">
+      jQuery(function () {
+          SphinxRtdTheme.Navigation.enable(true);
+      });
+  </script>
+
+  
+  
+    
+   
+
+</body>
+</html>

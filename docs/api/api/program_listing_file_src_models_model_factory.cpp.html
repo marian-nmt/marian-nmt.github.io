@@ -1,0 +1,644 @@
+
+
+<!DOCTYPE html>
+<html class="writer-html5" lang="en" >
+<head>
+  <meta charset="utf-8" />
+  
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  
+  <title>Program Listing for File model_factory.cpp &mdash; Marian NMT v1.10.1 2021-02-23 documentation</title>
+  
+
+  
+  <link rel="stylesheet" href="../_static/css/theme.css" type="text/css" />
+  <link rel="stylesheet" href="../_static/pygments.css" type="text/css" />
+  <link rel="stylesheet" href="../_static/css/custom.css" type="text/css" />
+  <link rel="stylesheet" href="../_static/collapsible-lists/css/tree_view.css" type="text/css" />
+
+  
+  
+
+  
+  
+
+  
+    <link rel="canonical" href="http://marian-nmt.github.io/docs/api/api/program_listing_file_src_models_model_factory.cpp.html" />
+
+  
+  <!--[if lt IE 9]>
+    <script src="../_static/js/html5shiv.min.js"></script>
+  <![endif]-->
+  
+    
+      <script type="text/javascript" id="documentation_options" data-url_root="../" src="../_static/documentation_options.js"></script>
+        <script src="../_static/jquery.js"></script>
+        <script src="../_static/underscore.js"></script>
+        <script src="../_static/doctools.js"></script>
+        <script src="../_static/language_data.js"></script>
+        <script src="../_static/collapsible-lists/js/CollapsibleLists.compressed.js"></script>
+        <script src="../_static/collapsible-lists/js/apply-collapsible-lists.js"></script>
+    
+    <script type="text/javascript" src="../_static/js/theme.js"></script>
+
+    
+    <link rel="index" title="Index" href="../genindex.html" />
+    <link rel="search" title="Search" href="../search.html" /> 
+</head>
+
+<body class="wy-body-for-nav">
+
+   
+  <div class="wy-grid-for-nav">
+    
+    <nav data-toggle="wy-nav-shift" class="wy-nav-side">
+      <div class="wy-side-scroll">
+        <div class="wy-side-nav-search" >
+          
+
+          
+            <a href="../index.html" class="icon icon-home"> Marian NMT
+          
+
+          
+          </a>
+
+          
+            
+            
+              <div class="version">
+                v1.10.1
+              </div>
+            
+          
+
+          
+<div role="search">
+  <form id="rtd-search-form" class="wy-form" action="../search.html" method="get">
+    <input type="text" name="q" placeholder="Search docs" />
+    <input type="hidden" name="check_keywords" value="yes" />
+    <input type="hidden" name="area" value="default" />
+  </form>
+</div>
+
+          
+        </div>
+
+        
+        <div class="wy-menu wy-menu-vertical" data-spy="affix" role="navigation" aria-label="main navigation">
+          
+            
+            
+              
+            
+            
+              <p class="caption"><span class="caption-text">Contents:</span></p>
+<ul>
+<li class="toctree-l1"><a class="reference internal" href="../install.html">Installation</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../graph.html">Expression graphs</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../operators.html">Graph operations</a></li>
+<li class="toctree-l1"><a class="reference internal" href="library_index.html">Library API</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../contributing.html">How to contribute to Marian</a></li>
+</ul>
+
+            
+          
+        </div>
+        
+      </div>
+    </nav>
+
+    <section data-toggle="wy-nav-shift" class="wy-nav-content-wrap">
+
+      
+      <nav class="wy-nav-top" aria-label="top navigation">
+        
+          <i data-toggle="wy-nav-top" class="fa fa-bars"></i>
+          <a href="../index.html">Marian NMT</a>
+        
+      </nav>
+
+
+      <div class="wy-nav-content">
+        
+        <div class="rst-content">
+        
+          
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+<div role="navigation" aria-label="breadcrumbs navigation">
+
+  <ul class="wy-breadcrumbs">
+    
+      <li><a href="../index.html" class="icon icon-home"></a> &raquo;</li>
+        
+      <li>Program Listing for File model_factory.cpp</li>
+    
+    
+      <li class="wy-breadcrumbs-aside">
+        
+          
+            <a href="../_sources/api/program_listing_file_src_models_model_factory.cpp.rst.txt" rel="nofollow"> View page source</a>
+          
+        
+      </li>
+    
+  </ul>
+
+  
+  <hr/>
+</div>
+          <div role="main" class="document" itemscope="itemscope" itemtype="http://schema.org/Article">
+           <div itemprop="articleBody">
+            
+  <div class="section" id="program-listing-for-file-model-factory-cpp">
+<span id="program-listing-file-src-models-model-factory-cpp"></span><h1>Program Listing for File model_factory.cpp<a class="headerlink" href="#program-listing-for-file-model-factory-cpp" title="Permalink to this headline">¶</a></h1>
+<p>↰ <a class="reference internal" href="file_src_models_model_factory.cpp.html#file-src-models-model-factory-cpp"><span class="std std-ref">Return to documentation for file</span></a> (<code class="docutils literal notranslate"><span class="pre">src/models/model_factory.cpp</span></code>)</p>
+<div class="highlight-cpp notranslate"><div class="highlight"><pre><span></span><span class="cp">#include</span> <span class="cpf">&quot;marian.h&quot;</span><span class="cp"></span>
+
+<span class="cp">#include</span> <span class="cpf">&quot;models/model_factory.h&quot;</span><span class="cp"></span>
+<span class="cp">#include</span> <span class="cpf">&quot;models/encoder_decoder.h&quot;</span><span class="cp"></span>
+<span class="cp">#include</span> <span class="cpf">&quot;models/encoder_classifier.h&quot;</span><span class="cp"></span>
+<span class="cp">#include</span> <span class="cpf">&quot;models/bert.h&quot;</span><span class="cp"></span>
+
+<span class="cp">#include</span> <span class="cpf">&quot;models/costs.h&quot;</span><span class="cp"></span>
+
+<span class="cp">#include</span> <span class="cpf">&quot;models/amun.h&quot;</span><span class="cp"></span>
+<span class="cp">#include</span> <span class="cpf">&quot;models/nematus.h&quot;</span><span class="cp"></span>
+<span class="cp">#include</span> <span class="cpf">&quot;models/s2s.h&quot;</span><span class="cp"></span>
+<span class="cp">#include</span> <span class="cpf">&quot;models/laser.h&quot;</span><span class="cp"></span>
+<span class="cp">#include</span> <span class="cpf">&quot;models/transformer_factory.h&quot;</span><span class="cp"></span>
+
+<span class="cp">#ifdef CUDNN</span>
+<span class="cp">#include</span> <span class="cpf">&quot;models/char_s2s.h&quot;</span><span class="cp"></span>
+<span class="cp">#endif</span>
+
+<span class="cp">#ifdef COMPILE_EXAMPLES</span>
+<span class="cp">#include</span> <span class="cpf">&quot;examples/mnist/model.h&quot;</span><span class="cp"></span>
+<span class="cp">#ifdef CUDNN</span>
+<span class="cp">#include</span> <span class="cpf">&quot;examples/mnist/model_lenet.h&quot;</span><span class="cp"></span>
+<span class="cp">#endif</span>
+<span class="cp">#endif</span>
+
+<span class="k">namespace</span> <span class="n">marian</span> <span class="p">{</span>
+<span class="k">namespace</span> <span class="n">models</span> <span class="p">{</span>
+
+<span class="n">Ptr</span><span class="o">&lt;</span><span class="n">EncoderBase</span><span class="o">&gt;</span> <span class="n">EncoderFactory</span><span class="o">::</span><span class="n">construct</span><span class="p">(</span><span class="n">Ptr</span><span class="o">&lt;</span><span class="n">ExpressionGraph</span><span class="o">&gt;</span> <span class="n">graph</span><span class="p">)</span> <span class="p">{</span>
+  <span class="k">if</span><span class="p">(</span><span class="n">options_</span><span class="o">-&gt;</span><span class="n">get</span><span class="o">&lt;</span><span class="n">std</span><span class="o">::</span><span class="n">string</span><span class="o">&gt;</span><span class="p">(</span><span class="s">&quot;type&quot;</span><span class="p">)</span> <span class="o">==</span> <span class="s">&quot;s2s&quot;</span><span class="p">)</span>
+    <span class="k">return</span> <span class="n">New</span><span class="o">&lt;</span><span class="n">EncoderS2S</span><span class="o">&gt;</span><span class="p">(</span><span class="n">graph</span><span class="p">,</span> <span class="n">options_</span><span class="p">);</span>
+
+  <span class="k">if</span><span class="p">(</span><span class="n">options_</span><span class="o">-&gt;</span><span class="n">get</span><span class="o">&lt;</span><span class="n">std</span><span class="o">::</span><span class="n">string</span><span class="o">&gt;</span><span class="p">(</span><span class="s">&quot;type&quot;</span><span class="p">)</span> <span class="o">==</span> <span class="s">&quot;laser&quot;</span> <span class="o">||</span> <span class="n">options_</span><span class="o">-&gt;</span><span class="n">get</span><span class="o">&lt;</span><span class="n">std</span><span class="o">::</span><span class="n">string</span><span class="o">&gt;</span><span class="p">(</span><span class="s">&quot;type&quot;</span><span class="p">)</span> <span class="o">==</span> <span class="s">&quot;laser-sim&quot;</span><span class="p">)</span>
+    <span class="k">return</span> <span class="n">New</span><span class="o">&lt;</span><span class="n">EncoderLaser</span><span class="o">&gt;</span><span class="p">(</span><span class="n">graph</span><span class="p">,</span> <span class="n">options_</span><span class="p">);</span>
+
+<span class="cp">#ifdef CUDNN</span>
+  <span class="k">if</span><span class="p">(</span><span class="n">options_</span><span class="o">-&gt;</span><span class="n">get</span><span class="o">&lt;</span><span class="n">std</span><span class="o">::</span><span class="n">string</span><span class="o">&gt;</span><span class="p">(</span><span class="s">&quot;type&quot;</span><span class="p">)</span> <span class="o">==</span> <span class="s">&quot;char-s2s&quot;</span><span class="p">)</span>
+    <span class="k">return</span> <span class="n">New</span><span class="o">&lt;</span><span class="n">CharS2SEncoder</span><span class="o">&gt;</span><span class="p">(</span><span class="n">graph</span><span class="p">,</span> <span class="n">options_</span><span class="p">);</span>
+<span class="cp">#endif</span>
+
+  <span class="k">if</span><span class="p">(</span><span class="n">options_</span><span class="o">-&gt;</span><span class="n">get</span><span class="o">&lt;</span><span class="n">std</span><span class="o">::</span><span class="n">string</span><span class="o">&gt;</span><span class="p">(</span><span class="s">&quot;type&quot;</span><span class="p">)</span> <span class="o">==</span> <span class="s">&quot;transformer&quot;</span><span class="p">)</span>
+    <span class="k">return</span> <span class="n">NewEncoderTransformer</span><span class="p">(</span><span class="n">graph</span><span class="p">,</span> <span class="n">options_</span><span class="p">);</span>
+
+  <span class="k">if</span><span class="p">(</span><span class="n">options_</span><span class="o">-&gt;</span><span class="n">get</span><span class="o">&lt;</span><span class="n">std</span><span class="o">::</span><span class="n">string</span><span class="o">&gt;</span><span class="p">(</span><span class="s">&quot;type&quot;</span><span class="p">)</span> <span class="o">==</span> <span class="s">&quot;bert-encoder&quot;</span><span class="p">)</span>
+    <span class="k">return</span> <span class="n">New</span><span class="o">&lt;</span><span class="n">BertEncoder</span><span class="o">&gt;</span><span class="p">(</span><span class="n">graph</span><span class="p">,</span> <span class="n">options_</span><span class="p">);</span>
+
+  <span class="n">ABORT</span><span class="p">(</span><span class="s">&quot;Unknown encoder type&quot;</span><span class="p">);</span>
+<span class="p">}</span>
+
+<span class="n">Ptr</span><span class="o">&lt;</span><span class="n">DecoderBase</span><span class="o">&gt;</span> <span class="n">DecoderFactory</span><span class="o">::</span><span class="n">construct</span><span class="p">(</span><span class="n">Ptr</span><span class="o">&lt;</span><span class="n">ExpressionGraph</span><span class="o">&gt;</span> <span class="n">graph</span><span class="p">)</span> <span class="p">{</span>
+  <span class="k">if</span><span class="p">(</span><span class="n">options_</span><span class="o">-&gt;</span><span class="n">get</span><span class="o">&lt;</span><span class="n">std</span><span class="o">::</span><span class="n">string</span><span class="o">&gt;</span><span class="p">(</span><span class="s">&quot;type&quot;</span><span class="p">)</span> <span class="o">==</span> <span class="s">&quot;s2s&quot;</span><span class="p">)</span>
+    <span class="k">return</span> <span class="n">New</span><span class="o">&lt;</span><span class="n">DecoderS2S</span><span class="o">&gt;</span><span class="p">(</span><span class="n">graph</span><span class="p">,</span> <span class="n">options_</span><span class="p">);</span>
+  <span class="k">if</span><span class="p">(</span><span class="n">options_</span><span class="o">-&gt;</span><span class="n">get</span><span class="o">&lt;</span><span class="n">std</span><span class="o">::</span><span class="n">string</span><span class="o">&gt;</span><span class="p">(</span><span class="s">&quot;type&quot;</span><span class="p">)</span> <span class="o">==</span> <span class="s">&quot;transformer&quot;</span><span class="p">)</span>
+    <span class="k">return</span> <span class="n">NewDecoderTransformer</span><span class="p">(</span><span class="n">graph</span><span class="p">,</span> <span class="n">options_</span><span class="p">);</span>
+  <span class="n">ABORT</span><span class="p">(</span><span class="s">&quot;Unknown decoder type&quot;</span><span class="p">);</span>
+<span class="p">}</span>
+
+<span class="n">Ptr</span><span class="o">&lt;</span><span class="n">ClassifierBase</span><span class="o">&gt;</span> <span class="n">ClassifierFactory</span><span class="o">::</span><span class="n">construct</span><span class="p">(</span><span class="n">Ptr</span><span class="o">&lt;</span><span class="n">ExpressionGraph</span><span class="o">&gt;</span> <span class="n">graph</span><span class="p">)</span> <span class="p">{</span>
+  <span class="k">if</span><span class="p">(</span><span class="n">options_</span><span class="o">-&gt;</span><span class="n">get</span><span class="o">&lt;</span><span class="n">std</span><span class="o">::</span><span class="n">string</span><span class="o">&gt;</span><span class="p">(</span><span class="s">&quot;type&quot;</span><span class="p">)</span> <span class="o">==</span> <span class="s">&quot;bert-masked-lm&quot;</span><span class="p">)</span>
+    <span class="k">return</span> <span class="n">New</span><span class="o">&lt;</span><span class="n">BertMaskedLM</span><span class="o">&gt;</span><span class="p">(</span><span class="n">graph</span><span class="p">,</span> <span class="n">options_</span><span class="p">);</span>
+  <span class="k">else</span> <span class="nf">if</span><span class="p">(</span><span class="n">options_</span><span class="o">-&gt;</span><span class="n">get</span><span class="o">&lt;</span><span class="n">std</span><span class="o">::</span><span class="n">string</span><span class="o">&gt;</span><span class="p">(</span><span class="s">&quot;type&quot;</span><span class="p">)</span> <span class="o">==</span> <span class="s">&quot;bert-classifier&quot;</span><span class="p">)</span>
+    <span class="k">return</span> <span class="n">New</span><span class="o">&lt;</span><span class="n">BertClassifier</span><span class="o">&gt;</span><span class="p">(</span><span class="n">graph</span><span class="p">,</span> <span class="n">options_</span><span class="p">);</span>
+  <span class="k">else</span>
+    <span class="nf">ABORT</span><span class="p">(</span><span class="s">&quot;Unknown classifier type&quot;</span><span class="p">);</span>
+<span class="p">}</span>
+
+<span class="n">Ptr</span><span class="o">&lt;</span><span class="n">PoolerBase</span><span class="o">&gt;</span> <span class="n">PoolerFactory</span><span class="o">::</span><span class="n">construct</span><span class="p">(</span><span class="n">Ptr</span><span class="o">&lt;</span><span class="n">ExpressionGraph</span><span class="o">&gt;</span> <span class="n">graph</span><span class="p">)</span> <span class="p">{</span>
+  <span class="k">if</span><span class="p">(</span><span class="n">options_</span><span class="o">-&gt;</span><span class="n">get</span><span class="o">&lt;</span><span class="n">std</span><span class="o">::</span><span class="n">string</span><span class="o">&gt;</span><span class="p">(</span><span class="s">&quot;type&quot;</span><span class="p">)</span> <span class="o">==</span> <span class="s">&quot;max-pooler&quot;</span><span class="p">)</span>
+    <span class="k">return</span> <span class="n">New</span><span class="o">&lt;</span><span class="n">MaxPooler</span><span class="o">&gt;</span><span class="p">(</span><span class="n">graph</span><span class="p">,</span> <span class="n">options_</span><span class="p">);</span>
+  <span class="k">if</span><span class="p">(</span><span class="n">options_</span><span class="o">-&gt;</span><span class="n">get</span><span class="o">&lt;</span><span class="n">std</span><span class="o">::</span><span class="n">string</span><span class="o">&gt;</span><span class="p">(</span><span class="s">&quot;type&quot;</span><span class="p">)</span> <span class="o">==</span> <span class="s">&quot;slice-pooler&quot;</span><span class="p">)</span>
+    <span class="k">return</span> <span class="n">New</span><span class="o">&lt;</span><span class="n">SlicePooler</span><span class="o">&gt;</span><span class="p">(</span><span class="n">graph</span><span class="p">,</span> <span class="n">options_</span><span class="p">);</span>
+  <span class="k">else</span> <span class="nf">if</span><span class="p">(</span><span class="n">options_</span><span class="o">-&gt;</span><span class="n">get</span><span class="o">&lt;</span><span class="n">std</span><span class="o">::</span><span class="n">string</span><span class="o">&gt;</span><span class="p">(</span><span class="s">&quot;type&quot;</span><span class="p">)</span> <span class="o">==</span> <span class="s">&quot;sim-pooler&quot;</span><span class="p">)</span>
+    <span class="k">return</span> <span class="n">New</span><span class="o">&lt;</span><span class="n">SimPooler</span><span class="o">&gt;</span><span class="p">(</span><span class="n">graph</span><span class="p">,</span> <span class="n">options_</span><span class="p">);</span>
+  <span class="k">else</span>
+    <span class="nf">ABORT</span><span class="p">(</span><span class="s">&quot;Unknown pooler type&quot;</span><span class="p">);</span>
+<span class="p">}</span>
+
+<span class="n">Ptr</span><span class="o">&lt;</span><span class="n">IModel</span><span class="o">&gt;</span> <span class="n">EncoderDecoderFactory</span><span class="o">::</span><span class="n">construct</span><span class="p">(</span><span class="n">Ptr</span><span class="o">&lt;</span><span class="n">ExpressionGraph</span><span class="o">&gt;</span> <span class="n">graph</span><span class="p">)</span> <span class="p">{</span>
+  <span class="n">Ptr</span><span class="o">&lt;</span><span class="n">EncoderDecoder</span><span class="o">&gt;</span> <span class="n">encdec</span><span class="p">;</span>
+  <span class="k">if</span><span class="p">(</span><span class="n">options_</span><span class="o">-&gt;</span><span class="n">get</span><span class="o">&lt;</span><span class="n">std</span><span class="o">::</span><span class="n">string</span><span class="o">&gt;</span><span class="p">(</span><span class="s">&quot;type&quot;</span><span class="p">)</span> <span class="o">==</span> <span class="s">&quot;amun&quot;</span><span class="p">)</span>
+    <span class="n">encdec</span> <span class="o">=</span> <span class="n">New</span><span class="o">&lt;</span><span class="n">Amun</span><span class="o">&gt;</span><span class="p">(</span><span class="n">graph</span><span class="p">,</span> <span class="n">options_</span><span class="p">);</span>
+  <span class="k">else</span> <span class="nf">if</span><span class="p">(</span><span class="n">options_</span><span class="o">-&gt;</span><span class="n">get</span><span class="o">&lt;</span><span class="n">std</span><span class="o">::</span><span class="n">string</span><span class="o">&gt;</span><span class="p">(</span><span class="s">&quot;type&quot;</span><span class="p">)</span> <span class="o">==</span> <span class="s">&quot;nematus&quot;</span><span class="p">)</span>
+    <span class="n">encdec</span> <span class="o">=</span> <span class="n">New</span><span class="o">&lt;</span><span class="n">Nematus</span><span class="o">&gt;</span><span class="p">(</span><span class="n">graph</span><span class="p">,</span> <span class="n">options_</span><span class="p">);</span>
+  <span class="k">else</span>
+    <span class="n">encdec</span> <span class="o">=</span> <span class="n">New</span><span class="o">&lt;</span><span class="n">EncoderDecoder</span><span class="o">&gt;</span><span class="p">(</span><span class="n">graph</span><span class="p">,</span> <span class="n">options_</span><span class="p">);</span>
+
+  <span class="k">for</span><span class="p">(</span><span class="k">auto</span><span class="o">&amp;</span> <span class="nl">ef</span> <span class="p">:</span> <span class="n">encoders_</span><span class="p">)</span>
+    <span class="n">encdec</span><span class="o">-&gt;</span><span class="n">push_back</span><span class="p">(</span><span class="n">ef</span><span class="p">(</span><span class="n">options_</span><span class="p">).</span><span class="n">construct</span><span class="p">(</span><span class="n">graph</span><span class="p">));</span>
+
+  <span class="k">for</span><span class="p">(</span><span class="k">auto</span><span class="o">&amp;</span> <span class="nl">df</span> <span class="p">:</span> <span class="n">decoders_</span><span class="p">)</span>
+    <span class="n">encdec</span><span class="o">-&gt;</span><span class="n">push_back</span><span class="p">(</span><span class="n">df</span><span class="p">(</span><span class="n">options_</span><span class="p">).</span><span class="n">construct</span><span class="p">(</span><span class="n">graph</span><span class="p">));</span>
+
+  <span class="k">return</span> <span class="n">encdec</span><span class="p">;</span>
+<span class="p">}</span>
+
+<span class="n">Ptr</span><span class="o">&lt;</span><span class="n">IModel</span><span class="o">&gt;</span> <span class="n">EncoderClassifierFactory</span><span class="o">::</span><span class="n">construct</span><span class="p">(</span><span class="n">Ptr</span><span class="o">&lt;</span><span class="n">ExpressionGraph</span><span class="o">&gt;</span> <span class="n">graph</span><span class="p">)</span> <span class="p">{</span>
+  <span class="n">Ptr</span><span class="o">&lt;</span><span class="n">EncoderClassifier</span><span class="o">&gt;</span> <span class="n">enccls</span><span class="p">;</span>
+  <span class="k">if</span><span class="p">(</span><span class="n">options_</span><span class="o">-&gt;</span><span class="n">get</span><span class="o">&lt;</span><span class="n">std</span><span class="o">::</span><span class="n">string</span><span class="o">&gt;</span><span class="p">(</span><span class="s">&quot;type&quot;</span><span class="p">)</span> <span class="o">==</span> <span class="s">&quot;bert&quot;</span><span class="p">)</span>
+    <span class="n">enccls</span> <span class="o">=</span> <span class="n">New</span><span class="o">&lt;</span><span class="n">BertEncoderClassifier</span><span class="o">&gt;</span><span class="p">(</span><span class="n">options_</span><span class="p">);</span>
+  <span class="k">else</span> <span class="nf">if</span><span class="p">(</span><span class="n">options_</span><span class="o">-&gt;</span><span class="n">get</span><span class="o">&lt;</span><span class="n">std</span><span class="o">::</span><span class="n">string</span><span class="o">&gt;</span><span class="p">(</span><span class="s">&quot;type&quot;</span><span class="p">)</span> <span class="o">==</span> <span class="s">&quot;bert-classifier&quot;</span><span class="p">)</span>
+    <span class="n">enccls</span> <span class="o">=</span> <span class="n">New</span><span class="o">&lt;</span><span class="n">BertEncoderClassifier</span><span class="o">&gt;</span><span class="p">(</span><span class="n">options_</span><span class="p">);</span>
+  <span class="k">else</span>
+    <span class="n">enccls</span> <span class="o">=</span> <span class="n">New</span><span class="o">&lt;</span><span class="n">EncoderClassifier</span><span class="o">&gt;</span><span class="p">(</span><span class="n">options_</span><span class="p">);</span>
+
+  <span class="k">for</span><span class="p">(</span><span class="k">auto</span><span class="o">&amp;</span> <span class="nl">ef</span> <span class="p">:</span> <span class="n">encoders_</span><span class="p">)</span>
+    <span class="n">enccls</span><span class="o">-&gt;</span><span class="n">push_back</span><span class="p">(</span><span class="n">ef</span><span class="p">(</span><span class="n">options_</span><span class="p">).</span><span class="n">construct</span><span class="p">(</span><span class="n">graph</span><span class="p">));</span>
+
+  <span class="k">for</span><span class="p">(</span><span class="k">auto</span><span class="o">&amp;</span> <span class="nl">cf</span> <span class="p">:</span> <span class="n">classifiers_</span><span class="p">)</span>
+    <span class="n">enccls</span><span class="o">-&gt;</span><span class="n">push_back</span><span class="p">(</span><span class="n">cf</span><span class="p">(</span><span class="n">options_</span><span class="p">).</span><span class="n">construct</span><span class="p">(</span><span class="n">graph</span><span class="p">));</span>
+
+  <span class="k">return</span> <span class="n">enccls</span><span class="p">;</span>
+<span class="p">}</span>
+
+<span class="n">Ptr</span><span class="o">&lt;</span><span class="n">IModel</span><span class="o">&gt;</span> <span class="n">EncoderPoolerFactory</span><span class="o">::</span><span class="n">construct</span><span class="p">(</span><span class="n">Ptr</span><span class="o">&lt;</span><span class="n">ExpressionGraph</span><span class="o">&gt;</span> <span class="n">graph</span><span class="p">)</span> <span class="p">{</span>
+  <span class="n">Ptr</span><span class="o">&lt;</span><span class="n">EncoderPooler</span><span class="o">&gt;</span> <span class="n">encpool</span> <span class="o">=</span> <span class="n">New</span><span class="o">&lt;</span><span class="n">EncoderPooler</span><span class="o">&gt;</span><span class="p">(</span><span class="n">options_</span><span class="p">);</span>
+
+  <span class="k">for</span><span class="p">(</span><span class="k">auto</span><span class="o">&amp;</span> <span class="nl">ef</span> <span class="p">:</span> <span class="n">encoders_</span><span class="p">)</span>
+    <span class="n">encpool</span><span class="o">-&gt;</span><span class="n">push_back</span><span class="p">(</span><span class="n">ef</span><span class="p">(</span><span class="n">options_</span><span class="p">).</span><span class="n">construct</span><span class="p">(</span><span class="n">graph</span><span class="p">));</span>
+
+  <span class="k">for</span><span class="p">(</span><span class="k">auto</span><span class="o">&amp;</span> <span class="nl">pl</span> <span class="p">:</span> <span class="n">poolers_</span><span class="p">)</span>
+    <span class="n">encpool</span><span class="o">-&gt;</span><span class="n">push_back</span><span class="p">(</span><span class="n">pl</span><span class="p">(</span><span class="n">options_</span><span class="p">).</span><span class="n">construct</span><span class="p">(</span><span class="n">graph</span><span class="p">));</span>
+
+  <span class="k">return</span> <span class="n">encpool</span><span class="p">;</span>
+<span class="p">}</span>
+
+<span class="n">Ptr</span><span class="o">&lt;</span><span class="n">IModel</span><span class="o">&gt;</span> <span class="n">createBaseModelByType</span><span class="p">(</span><span class="n">std</span><span class="o">::</span><span class="n">string</span> <span class="n">type</span><span class="p">,</span> <span class="n">usage</span> <span class="n">use</span><span class="p">,</span> <span class="n">Ptr</span><span class="o">&lt;</span><span class="n">Options</span><span class="o">&gt;</span> <span class="n">options</span><span class="p">)</span> <span class="p">{</span>
+  <span class="n">Ptr</span><span class="o">&lt;</span><span class="n">ExpressionGraph</span><span class="o">&gt;</span> <span class="n">graph</span> <span class="o">=</span> <span class="k">nullptr</span><span class="p">;</span> <span class="c1">// graph unknown at this stage</span>
+  <span class="c1">// clang-format off</span>
+
+  <span class="kt">bool</span> <span class="n">trainEmbedderRank</span> <span class="o">=</span> <span class="n">options</span><span class="o">-&gt;</span><span class="n">hasAndNotEmpty</span><span class="p">(</span><span class="s">&quot;train-embedder-rank&quot;</span><span class="p">);</span>
+  <span class="k">if</span><span class="p">(</span><span class="n">use</span> <span class="o">==</span> <span class="n">usage</span><span class="o">::</span><span class="n">embedding</span> <span class="o">||</span> <span class="n">trainEmbedderRank</span><span class="p">)</span> <span class="p">{</span> <span class="c1">// hijacking an EncoderDecoder model for embedding only</span>
+
+    <span class="k">auto</span> <span class="n">dimVocabs</span> <span class="o">=</span> <span class="n">options</span><span class="o">-&gt;</span><span class="n">get</span><span class="o">&lt;</span><span class="n">std</span><span class="o">::</span><span class="n">vector</span><span class="o">&lt;</span><span class="kt">int</span><span class="o">&gt;&gt;</span><span class="p">(</span><span class="s">&quot;dim-vocabs&quot;</span><span class="p">);</span>
+    <span class="kt">size_t</span> <span class="n">fields</span> <span class="o">=</span> <span class="n">trainEmbedderRank</span> <span class="o">?</span> <span class="n">dimVocabs</span><span class="p">.</span><span class="n">size</span><span class="p">()</span> <span class="o">:</span> <span class="mi">0</span><span class="p">;</span>
+    <span class="kt">int</span> <span class="n">dimVocab</span> <span class="o">=</span> <span class="n">dimVocabs</span><span class="p">[</span><span class="mi">0</span><span class="p">];</span>
+
+    <span class="n">Ptr</span><span class="o">&lt;</span><span class="n">Options</span><span class="o">&gt;</span> <span class="n">newOptions</span><span class="p">;</span>
+    <span class="k">if</span><span class="p">(</span><span class="n">options</span><span class="o">-&gt;</span><span class="n">get</span><span class="o">&lt;</span><span class="kt">bool</span><span class="o">&gt;</span><span class="p">(</span><span class="s">&quot;compute-similarity&quot;</span><span class="p">,</span> <span class="nb">false</span><span class="p">))</span> <span class="p">{</span>
+      <span class="n">newOptions</span> <span class="o">=</span> <span class="n">options</span><span class="o">-&gt;</span><span class="n">with</span><span class="p">(</span><span class="s">&quot;usage&quot;</span><span class="p">,</span> <span class="n">use</span><span class="p">,</span>
+                                 <span class="s">&quot;original-type&quot;</span><span class="p">,</span> <span class="n">type</span><span class="p">,</span>
+                                 <span class="s">&quot;input-types&quot;</span><span class="p">,</span> <span class="n">std</span><span class="o">::</span><span class="n">vector</span><span class="o">&lt;</span><span class="n">std</span><span class="o">::</span><span class="n">string</span><span class="o">&gt;</span><span class="p">({</span><span class="s">&quot;sequence&quot;</span><span class="p">,</span> <span class="s">&quot;sequence&quot;</span><span class="p">}),</span>
+                                 <span class="s">&quot;dim-vocabs&quot;</span><span class="p">,</span> <span class="n">std</span><span class="o">::</span><span class="n">vector</span><span class="o">&lt;</span><span class="kt">int</span><span class="o">&gt;</span><span class="p">(</span><span class="mi">2</span><span class="p">,</span> <span class="n">dimVocab</span><span class="p">));</span>
+    <span class="p">}</span> <span class="k">else</span> <span class="k">if</span><span class="p">(</span><span class="n">trainEmbedderRank</span><span class="p">)</span> <span class="p">{</span>
+       <span class="n">newOptions</span> <span class="o">=</span> <span class="n">options</span><span class="o">-&gt;</span><span class="n">with</span><span class="p">(</span><span class="s">&quot;usage&quot;</span><span class="p">,</span> <span class="n">use</span><span class="p">,</span>
+                                  <span class="s">&quot;original-type&quot;</span><span class="p">,</span> <span class="n">type</span><span class="p">,</span>
+                                  <span class="s">&quot;input-types&quot;</span><span class="p">,</span> <span class="n">std</span><span class="o">::</span><span class="n">vector</span><span class="o">&lt;</span><span class="n">std</span><span class="o">::</span><span class="n">string</span><span class="o">&gt;</span><span class="p">(</span><span class="n">fields</span><span class="p">,</span> <span class="s">&quot;sequence&quot;</span><span class="p">),</span>
+                                  <span class="s">&quot;dim-vocabs&quot;</span><span class="p">,</span> <span class="n">std</span><span class="o">::</span><span class="n">vector</span><span class="o">&lt;</span><span class="kt">int</span><span class="o">&gt;</span><span class="p">(</span><span class="n">fields</span><span class="p">,</span> <span class="n">dimVocab</span><span class="p">));</span>
+    <span class="p">}</span> <span class="k">else</span> <span class="p">{</span>
+      <span class="n">newOptions</span> <span class="o">=</span> <span class="n">options</span><span class="o">-&gt;</span><span class="n">with</span><span class="p">(</span><span class="s">&quot;usage&quot;</span><span class="p">,</span> <span class="n">use</span><span class="p">,</span>
+                                 <span class="s">&quot;original-type&quot;</span><span class="p">,</span> <span class="n">type</span><span class="p">,</span>
+                                 <span class="s">&quot;input-types&quot;</span><span class="p">,</span> <span class="n">std</span><span class="o">::</span><span class="n">vector</span><span class="o">&lt;</span><span class="n">std</span><span class="o">::</span><span class="n">string</span><span class="o">&gt;</span><span class="p">({</span><span class="s">&quot;sequence&quot;</span><span class="p">}),</span>
+                                 <span class="s">&quot;dim-vocabs&quot;</span><span class="p">,</span> <span class="n">std</span><span class="o">::</span><span class="n">vector</span><span class="o">&lt;</span><span class="kt">int</span><span class="o">&gt;</span><span class="p">(</span><span class="mi">1</span><span class="p">,</span> <span class="n">dimVocab</span><span class="p">));</span>
+    <span class="p">}</span>
+
+    <span class="k">auto</span> <span class="n">res</span> <span class="o">=</span> <span class="n">New</span><span class="o">&lt;</span><span class="n">EncoderPooler</span><span class="o">&gt;</span><span class="p">(</span><span class="n">newOptions</span><span class="p">);</span>
+    <span class="k">if</span><span class="p">(</span><span class="n">options</span><span class="o">-&gt;</span><span class="n">get</span><span class="o">&lt;</span><span class="kt">bool</span><span class="o">&gt;</span><span class="p">(</span><span class="s">&quot;compute-similarity&quot;</span><span class="p">,</span> <span class="nb">false</span><span class="p">))</span> <span class="p">{</span>
+      <span class="n">res</span><span class="o">-&gt;</span><span class="n">push_back</span><span class="p">(</span><span class="n">models</span><span class="o">::</span><span class="n">encoder</span><span class="p">(</span><span class="n">newOptions</span><span class="o">-&gt;</span><span class="n">with</span><span class="p">(</span><span class="s">&quot;index&quot;</span><span class="p">,</span> <span class="mi">0</span><span class="p">)).</span><span class="n">construct</span><span class="p">(</span><span class="n">graph</span><span class="p">));</span>
+      <span class="n">res</span><span class="o">-&gt;</span><span class="n">push_back</span><span class="p">(</span><span class="n">models</span><span class="o">::</span><span class="n">encoder</span><span class="p">(</span><span class="n">newOptions</span><span class="o">-&gt;</span><span class="n">with</span><span class="p">(</span><span class="s">&quot;index&quot;</span><span class="p">,</span> <span class="mi">1</span><span class="p">)).</span><span class="n">construct</span><span class="p">(</span><span class="n">graph</span><span class="p">));</span>
+      <span class="n">res</span><span class="o">-&gt;</span><span class="n">push_back</span><span class="p">(</span><span class="n">New</span><span class="o">&lt;</span><span class="n">SimPooler</span><span class="o">&gt;</span><span class="p">(</span><span class="n">graph</span><span class="p">,</span> <span class="n">newOptions</span><span class="o">-&gt;</span><span class="n">with</span><span class="p">(</span><span class="s">&quot;type&quot;</span><span class="p">,</span> <span class="s">&quot;sim-pooler&quot;</span><span class="p">)));</span>
+    <span class="p">}</span> <span class="k">else</span> <span class="k">if</span><span class="p">(</span><span class="n">trainEmbedderRank</span><span class="p">)</span> <span class="p">{</span>
+      <span class="n">LOG</span><span class="p">(</span><span class="n">info</span><span class="p">,</span> <span class="s">&quot;Using {} input fields for embedder ranking training&quot;</span><span class="p">,</span> <span class="n">fields</span><span class="p">);</span>
+      <span class="k">for</span><span class="p">(</span><span class="kt">int</span> <span class="n">i</span> <span class="o">=</span> <span class="mi">0</span><span class="p">;</span> <span class="n">i</span> <span class="o">&lt;</span> <span class="n">fields</span><span class="p">;</span> <span class="o">++</span><span class="n">i</span><span class="p">)</span>
+        <span class="n">res</span><span class="o">-&gt;</span><span class="n">push_back</span><span class="p">(</span><span class="n">models</span><span class="o">::</span><span class="n">encoder</span><span class="p">(</span><span class="n">newOptions</span><span class="o">-&gt;</span><span class="n">with</span><span class="p">(</span><span class="s">&quot;index&quot;</span><span class="p">,</span> <span class="n">i</span><span class="p">)).</span><span class="n">construct</span><span class="p">(</span><span class="n">graph</span><span class="p">));</span>
+      <span class="n">res</span><span class="o">-&gt;</span><span class="n">push_back</span><span class="p">(</span><span class="n">New</span><span class="o">&lt;</span><span class="n">SimPooler</span><span class="o">&gt;</span><span class="p">(</span><span class="n">graph</span><span class="p">,</span> <span class="n">newOptions</span><span class="o">-&gt;</span><span class="n">with</span><span class="p">(</span><span class="s">&quot;type&quot;</span><span class="p">,</span> <span class="s">&quot;sim-pooler&quot;</span><span class="p">)));</span>
+    <span class="p">}</span> <span class="k">else</span> <span class="p">{</span>
+      <span class="n">res</span><span class="o">-&gt;</span><span class="n">push_back</span><span class="p">(</span><span class="n">models</span><span class="o">::</span><span class="n">encoder</span><span class="p">(</span><span class="n">newOptions</span><span class="o">-&gt;</span><span class="n">with</span><span class="p">(</span><span class="s">&quot;index&quot;</span><span class="p">,</span> <span class="mi">0</span><span class="p">)).</span><span class="n">construct</span><span class="p">(</span><span class="n">graph</span><span class="p">));</span>
+      <span class="k">if</span><span class="p">(</span><span class="n">type</span> <span class="o">==</span> <span class="s">&quot;laser&quot;</span><span class="p">)</span>
+        <span class="n">res</span><span class="o">-&gt;</span><span class="n">push_back</span><span class="p">(</span><span class="n">New</span><span class="o">&lt;</span><span class="n">MaxPooler</span><span class="o">&gt;</span><span class="p">(</span><span class="n">graph</span><span class="p">,</span> <span class="n">newOptions</span><span class="o">-&gt;</span><span class="n">with</span><span class="p">(</span><span class="s">&quot;type&quot;</span><span class="p">,</span> <span class="s">&quot;max-pooler&quot;</span><span class="p">)));</span>
+      <span class="k">else</span>
+        <span class="n">res</span><span class="o">-&gt;</span><span class="n">push_back</span><span class="p">(</span><span class="n">New</span><span class="o">&lt;</span><span class="n">SlicePooler</span><span class="o">&gt;</span><span class="p">(</span><span class="n">graph</span><span class="p">,</span> <span class="n">newOptions</span><span class="o">-&gt;</span><span class="n">with</span><span class="p">(</span><span class="s">&quot;type&quot;</span><span class="p">,</span> <span class="s">&quot;slice-pooler&quot;</span><span class="p">)));</span>
+    <span class="p">}</span>
+
+    <span class="k">return</span> <span class="n">res</span><span class="p">;</span>
+  <span class="p">}</span>
+
+  <span class="k">if</span><span class="p">(</span><span class="n">type</span> <span class="o">==</span> <span class="s">&quot;s2s&quot;</span> <span class="o">||</span> <span class="n">type</span> <span class="o">==</span> <span class="s">&quot;amun&quot;</span> <span class="o">||</span> <span class="n">type</span> <span class="o">==</span> <span class="s">&quot;nematus&quot;</span><span class="p">)</span> <span class="p">{</span>
+    <span class="k">return</span> <span class="n">models</span><span class="o">::</span><span class="n">encoder_decoder</span><span class="p">(</span><span class="n">options</span><span class="o">-&gt;</span><span class="n">with</span><span class="p">(</span>
+         <span class="s">&quot;usage&quot;</span><span class="p">,</span> <span class="n">use</span><span class="p">,</span>
+         <span class="s">&quot;original-type&quot;</span><span class="p">,</span> <span class="n">type</span><span class="p">))</span>
+        <span class="p">.</span><span class="n">push_back</span><span class="p">(</span><span class="n">models</span><span class="o">::</span><span class="n">encoder</span><span class="p">()(</span><span class="s">&quot;type&quot;</span><span class="p">,</span> <span class="s">&quot;s2s&quot;</span><span class="p">))</span>
+        <span class="p">.</span><span class="n">push_back</span><span class="p">(</span><span class="n">models</span><span class="o">::</span><span class="n">decoder</span><span class="p">()(</span><span class="s">&quot;type&quot;</span><span class="p">,</span> <span class="s">&quot;s2s&quot;</span><span class="p">))</span>
+        <span class="p">.</span><span class="n">construct</span><span class="p">(</span><span class="n">graph</span><span class="p">);</span>
+  <span class="p">}</span>
+
+  <span class="k">else</span> <span class="k">if</span><span class="p">(</span><span class="n">type</span> <span class="o">==</span> <span class="s">&quot;transformer&quot;</span><span class="p">)</span> <span class="p">{</span>
+<span class="cp">#if 1</span>
+    <span class="k">auto</span> <span class="n">newOptions</span> <span class="o">=</span> <span class="n">options</span><span class="o">-&gt;</span><span class="n">with</span><span class="p">(</span><span class="s">&quot;usage&quot;</span><span class="p">,</span> <span class="n">use</span><span class="p">);</span>
+    <span class="k">auto</span> <span class="n">res</span> <span class="o">=</span> <span class="n">New</span><span class="o">&lt;</span><span class="n">EncoderDecoder</span><span class="o">&gt;</span><span class="p">(</span><span class="n">graph</span><span class="p">,</span> <span class="n">newOptions</span><span class="p">);</span>
+    <span class="n">res</span><span class="o">-&gt;</span><span class="n">push_back</span><span class="p">(</span><span class="n">New</span><span class="o">&lt;</span><span class="n">EncoderTransformer</span><span class="o">&gt;</span><span class="p">(</span><span class="n">graph</span><span class="p">,</span> <span class="n">newOptions</span><span class="o">-&gt;</span><span class="n">with</span><span class="p">(</span><span class="s">&quot;type&quot;</span><span class="p">,</span> <span class="s">&quot;transformer&quot;</span><span class="p">)));</span>
+    <span class="n">res</span><span class="o">-&gt;</span><span class="n">push_back</span><span class="p">(</span><span class="n">New</span><span class="o">&lt;</span><span class="n">DecoderTransformer</span><span class="o">&gt;</span><span class="p">(</span><span class="n">graph</span><span class="p">,</span> <span class="n">newOptions</span><span class="o">-&gt;</span><span class="n">with</span><span class="p">(</span><span class="s">&quot;type&quot;</span><span class="p">,</span> <span class="s">&quot;transformer&quot;</span><span class="p">)));</span>
+    <span class="k">return</span> <span class="n">res</span><span class="p">;</span>
+<span class="cp">#else</span>
+    <span class="k">return</span> <span class="n">models</span><span class="o">::</span><span class="n">encoder_decoder</span><span class="p">(</span><span class="n">options</span><span class="o">-&gt;</span><span class="n">with</span><span class="p">(</span>
+         <span class="s">&quot;usage&quot;</span><span class="p">,</span> <span class="n">use</span><span class="p">))</span>
+        <span class="p">.</span><span class="n">push_back</span><span class="p">(</span><span class="n">models</span><span class="o">::</span><span class="n">encoder</span><span class="p">()(</span><span class="s">&quot;type&quot;</span><span class="p">,</span> <span class="s">&quot;transformer&quot;</span><span class="p">))</span>
+        <span class="p">.</span><span class="n">push_back</span><span class="p">(</span><span class="n">models</span><span class="o">::</span><span class="n">decoder</span><span class="p">()(</span><span class="s">&quot;type&quot;</span><span class="p">,</span> <span class="s">&quot;transformer&quot;</span><span class="p">))</span>
+        <span class="p">.</span><span class="n">construct</span><span class="p">(</span><span class="n">graph</span><span class="p">);</span>
+<span class="cp">#endif</span>
+  <span class="p">}</span>
+
+  <span class="k">else</span> <span class="k">if</span><span class="p">(</span><span class="n">type</span> <span class="o">==</span> <span class="s">&quot;transformer_s2s&quot;</span><span class="p">)</span> <span class="p">{</span>
+    <span class="k">return</span> <span class="n">models</span><span class="o">::</span><span class="n">encoder_decoder</span><span class="p">()(</span><span class="n">options</span><span class="p">)</span>
+        <span class="p">(</span><span class="s">&quot;usage&quot;</span><span class="p">,</span> <span class="n">use</span><span class="p">)</span>
+        <span class="p">(</span><span class="s">&quot;original-type&quot;</span><span class="p">,</span> <span class="n">type</span><span class="p">)</span>
+        <span class="p">.</span><span class="n">push_back</span><span class="p">(</span><span class="n">models</span><span class="o">::</span><span class="n">encoder</span><span class="p">()(</span><span class="s">&quot;type&quot;</span><span class="p">,</span> <span class="s">&quot;transformer&quot;</span><span class="p">))</span>
+        <span class="p">.</span><span class="n">push_back</span><span class="p">(</span><span class="n">models</span><span class="o">::</span><span class="n">decoder</span><span class="p">()(</span><span class="s">&quot;type&quot;</span><span class="p">,</span> <span class="s">&quot;s2s&quot;</span><span class="p">))</span>
+        <span class="p">.</span><span class="n">construct</span><span class="p">(</span><span class="n">graph</span><span class="p">);</span>
+  <span class="p">}</span>
+
+  <span class="k">else</span> <span class="k">if</span><span class="p">(</span><span class="n">type</span> <span class="o">==</span> <span class="s">&quot;lm&quot;</span><span class="p">)</span> <span class="p">{</span>
+    <span class="k">auto</span> <span class="n">idx</span> <span class="o">=</span> <span class="n">options</span><span class="o">-&gt;</span><span class="n">has</span><span class="p">(</span><span class="s">&quot;index&quot;</span><span class="p">)</span> <span class="o">?</span> <span class="n">options</span><span class="o">-&gt;</span><span class="n">get</span><span class="o">&lt;</span><span class="kt">size_t</span><span class="o">&gt;</span><span class="p">(</span><span class="s">&quot;index&quot;</span><span class="p">)</span> <span class="o">:</span> <span class="mi">0</span><span class="p">;</span>
+    <span class="n">std</span><span class="o">::</span><span class="n">vector</span><span class="o">&lt;</span><span class="kt">int</span><span class="o">&gt;</span> <span class="n">dimVocabs</span> <span class="o">=</span> <span class="n">options</span><span class="o">-&gt;</span><span class="n">get</span><span class="o">&lt;</span><span class="n">std</span><span class="o">::</span><span class="n">vector</span><span class="o">&lt;</span><span class="kt">int</span><span class="o">&gt;&gt;</span><span class="p">(</span><span class="s">&quot;dim-vocabs&quot;</span><span class="p">);</span>
+    <span class="kt">int</span> <span class="n">vocab</span> <span class="o">=</span> <span class="n">dimVocabs</span><span class="p">[</span><span class="mi">0</span><span class="p">];</span>
+    <span class="n">dimVocabs</span><span class="p">.</span><span class="n">resize</span><span class="p">(</span><span class="n">idx</span> <span class="o">+</span> <span class="mi">1</span><span class="p">);</span>
+    <span class="n">std</span><span class="o">::</span><span class="n">fill</span><span class="p">(</span><span class="n">dimVocabs</span><span class="p">.</span><span class="n">begin</span><span class="p">(),</span> <span class="n">dimVocabs</span><span class="p">.</span><span class="n">end</span><span class="p">(),</span> <span class="n">vocab</span><span class="p">);</span>
+
+    <span class="k">return</span> <span class="n">models</span><span class="o">::</span><span class="n">encoder_decoder</span><span class="p">(</span><span class="n">options</span><span class="o">-&gt;</span><span class="n">with</span><span class="p">(</span>
+         <span class="s">&quot;usage&quot;</span><span class="p">,</span> <span class="n">use</span><span class="p">,</span>
+         <span class="s">&quot;type&quot;</span><span class="p">,</span> <span class="s">&quot;s2s&quot;</span><span class="p">,</span>
+         <span class="s">&quot;original-type&quot;</span><span class="p">,</span> <span class="n">type</span><span class="p">))</span>
+        <span class="p">.</span><span class="n">push_back</span><span class="p">(</span><span class="n">models</span><span class="o">::</span><span class="n">decoder</span><span class="p">()</span>
+                   <span class="p">(</span><span class="s">&quot;index&quot;</span><span class="p">,</span> <span class="n">idx</span><span class="p">)</span>
+                   <span class="p">(</span><span class="s">&quot;dim-vocabs&quot;</span><span class="p">,</span> <span class="n">dimVocabs</span><span class="p">))</span>
+        <span class="p">.</span><span class="n">construct</span><span class="p">(</span><span class="n">graph</span><span class="p">);</span>
+  <span class="p">}</span>
+
+  <span class="k">else</span> <span class="k">if</span><span class="p">(</span><span class="n">type</span> <span class="o">==</span> <span class="s">&quot;multi-s2s&quot;</span><span class="p">)</span> <span class="p">{</span>
+    <span class="kt">size_t</span> <span class="n">numEncoders</span> <span class="o">=</span> <span class="mi">2</span><span class="p">;</span>
+    <span class="k">auto</span> <span class="n">ms2sFactory</span> <span class="o">=</span> <span class="n">models</span><span class="o">::</span><span class="n">encoder_decoder</span><span class="p">()(</span><span class="n">options</span><span class="p">)</span>
+        <span class="p">(</span><span class="s">&quot;usage&quot;</span><span class="p">,</span> <span class="n">use</span><span class="p">)</span>
+        <span class="p">(</span><span class="s">&quot;type&quot;</span><span class="p">,</span> <span class="s">&quot;s2s&quot;</span><span class="p">)</span>
+        <span class="p">(</span><span class="s">&quot;original-type&quot;</span><span class="p">,</span> <span class="n">type</span><span class="p">);</span>
+
+    <span class="k">for</span><span class="p">(</span><span class="kt">size_t</span> <span class="n">i</span> <span class="o">=</span> <span class="mi">0</span><span class="p">;</span> <span class="n">i</span> <span class="o">&lt;</span> <span class="n">numEncoders</span><span class="p">;</span> <span class="o">++</span><span class="n">i</span><span class="p">)</span> <span class="p">{</span>
+      <span class="k">auto</span> <span class="n">prefix</span> <span class="o">=</span> <span class="s">&quot;encoder&quot;</span> <span class="o">+</span> <span class="n">std</span><span class="o">::</span><span class="n">to_string</span><span class="p">(</span><span class="n">i</span> <span class="o">+</span> <span class="mi">1</span><span class="p">);</span>
+      <span class="n">ms2sFactory</span><span class="p">.</span><span class="n">push_back</span><span class="p">(</span><span class="n">models</span><span class="o">::</span><span class="n">encoder</span><span class="p">()(</span><span class="s">&quot;prefix&quot;</span><span class="p">,</span> <span class="n">prefix</span><span class="p">)(</span><span class="s">&quot;index&quot;</span><span class="p">,</span> <span class="n">i</span><span class="p">));</span>
+    <span class="p">}</span>
+
+    <span class="n">ms2sFactory</span><span class="p">.</span><span class="n">push_back</span><span class="p">(</span><span class="n">models</span><span class="o">::</span><span class="n">decoder</span><span class="p">()(</span><span class="s">&quot;index&quot;</span><span class="p">,</span> <span class="n">numEncoders</span><span class="p">));</span>
+
+    <span class="k">return</span> <span class="n">ms2sFactory</span><span class="p">.</span><span class="n">construct</span><span class="p">(</span><span class="n">graph</span><span class="p">);</span>
+  <span class="p">}</span>
+
+  <span class="k">else</span> <span class="k">if</span><span class="p">(</span><span class="n">type</span> <span class="o">==</span> <span class="s">&quot;shared-multi-s2s&quot;</span><span class="p">)</span> <span class="p">{</span>
+    <span class="kt">size_t</span> <span class="n">numEncoders</span> <span class="o">=</span> <span class="mi">2</span><span class="p">;</span>
+    <span class="k">auto</span> <span class="n">ms2sFactory</span> <span class="o">=</span> <span class="n">models</span><span class="o">::</span><span class="n">encoder_decoder</span><span class="p">()(</span><span class="n">options</span><span class="p">)</span>
+        <span class="p">(</span><span class="s">&quot;usage&quot;</span><span class="p">,</span> <span class="n">use</span><span class="p">)</span>
+        <span class="p">(</span><span class="s">&quot;type&quot;</span><span class="p">,</span> <span class="s">&quot;s2s&quot;</span><span class="p">)</span>
+        <span class="p">(</span><span class="s">&quot;original-type&quot;</span><span class="p">,</span> <span class="n">type</span><span class="p">);</span>
+
+    <span class="k">for</span><span class="p">(</span><span class="kt">size_t</span> <span class="n">i</span> <span class="o">=</span> <span class="mi">0</span><span class="p">;</span> <span class="n">i</span> <span class="o">&lt;</span> <span class="n">numEncoders</span><span class="p">;</span> <span class="o">++</span><span class="n">i</span><span class="p">)</span> <span class="p">{</span>
+      <span class="k">auto</span> <span class="n">prefix</span> <span class="o">=</span> <span class="s">&quot;encoder&quot;</span><span class="p">;</span>
+      <span class="n">ms2sFactory</span><span class="p">.</span><span class="n">push_back</span><span class="p">(</span><span class="n">models</span><span class="o">::</span><span class="n">encoder</span><span class="p">()(</span><span class="s">&quot;prefix&quot;</span><span class="p">,</span> <span class="n">prefix</span><span class="p">)(</span><span class="s">&quot;index&quot;</span><span class="p">,</span> <span class="n">i</span><span class="p">));</span>
+    <span class="p">}</span>
+
+    <span class="n">ms2sFactory</span><span class="p">.</span><span class="n">push_back</span><span class="p">(</span><span class="n">models</span><span class="o">::</span><span class="n">decoder</span><span class="p">()(</span><span class="s">&quot;index&quot;</span><span class="p">,</span> <span class="n">numEncoders</span><span class="p">));</span>
+
+    <span class="k">return</span> <span class="n">ms2sFactory</span><span class="p">.</span><span class="n">construct</span><span class="p">(</span><span class="n">graph</span><span class="p">);</span>
+  <span class="p">}</span>
+
+  <span class="k">else</span> <span class="k">if</span><span class="p">(</span><span class="n">type</span> <span class="o">==</span> <span class="s">&quot;multi-transformer&quot;</span><span class="p">)</span> <span class="p">{</span>
+    <span class="kt">size_t</span> <span class="n">numEncoders</span> <span class="o">=</span> <span class="mi">2</span><span class="p">;</span>
+    <span class="k">auto</span> <span class="n">mtransFactory</span> <span class="o">=</span> <span class="n">models</span><span class="o">::</span><span class="n">encoder_decoder</span><span class="p">()(</span><span class="n">options</span><span class="p">)</span>
+        <span class="p">(</span><span class="s">&quot;usage&quot;</span><span class="p">,</span> <span class="n">use</span><span class="p">)</span>
+        <span class="p">(</span><span class="s">&quot;type&quot;</span><span class="p">,</span> <span class="s">&quot;transformer&quot;</span><span class="p">)</span>
+        <span class="p">(</span><span class="s">&quot;original-type&quot;</span><span class="p">,</span> <span class="n">type</span><span class="p">);</span>
+
+    <span class="k">for</span><span class="p">(</span><span class="kt">size_t</span> <span class="n">i</span> <span class="o">=</span> <span class="mi">0</span><span class="p">;</span> <span class="n">i</span> <span class="o">&lt;</span> <span class="n">numEncoders</span><span class="p">;</span> <span class="o">++</span><span class="n">i</span><span class="p">)</span> <span class="p">{</span>
+      <span class="k">auto</span> <span class="n">prefix</span> <span class="o">=</span> <span class="s">&quot;encoder&quot;</span> <span class="o">+</span> <span class="n">std</span><span class="o">::</span><span class="n">to_string</span><span class="p">(</span><span class="n">i</span> <span class="o">+</span> <span class="mi">1</span><span class="p">);</span>
+      <span class="n">mtransFactory</span><span class="p">.</span><span class="n">push_back</span><span class="p">(</span><span class="n">models</span><span class="o">::</span><span class="n">encoder</span><span class="p">()(</span><span class="s">&quot;prefix&quot;</span><span class="p">,</span> <span class="n">prefix</span><span class="p">)(</span><span class="s">&quot;index&quot;</span><span class="p">,</span> <span class="n">i</span><span class="p">));</span>
+    <span class="p">}</span>
+    <span class="n">mtransFactory</span><span class="p">.</span><span class="n">push_back</span><span class="p">(</span><span class="n">models</span><span class="o">::</span><span class="n">decoder</span><span class="p">()(</span><span class="s">&quot;index&quot;</span><span class="p">,</span> <span class="n">numEncoders</span><span class="p">));</span>
+
+    <span class="k">return</span> <span class="n">mtransFactory</span><span class="p">.</span><span class="n">construct</span><span class="p">(</span><span class="n">graph</span><span class="p">);</span>
+  <span class="p">}</span>
+
+  <span class="k">else</span> <span class="k">if</span><span class="p">(</span><span class="n">type</span> <span class="o">==</span> <span class="s">&quot;shared-multi-transformer&quot;</span><span class="p">)</span> <span class="p">{</span>
+    <span class="kt">size_t</span> <span class="n">numEncoders</span> <span class="o">=</span> <span class="mi">2</span><span class="p">;</span>
+    <span class="k">auto</span> <span class="n">mtransFactory</span> <span class="o">=</span> <span class="n">models</span><span class="o">::</span><span class="n">encoder_decoder</span><span class="p">()(</span><span class="n">options</span><span class="p">)</span>
+        <span class="p">(</span><span class="s">&quot;usage&quot;</span><span class="p">,</span> <span class="n">use</span><span class="p">)</span>
+        <span class="p">(</span><span class="s">&quot;type&quot;</span><span class="p">,</span> <span class="s">&quot;transformer&quot;</span><span class="p">)</span>
+        <span class="p">(</span><span class="s">&quot;original-type&quot;</span><span class="p">,</span> <span class="n">type</span><span class="p">);</span>
+
+    <span class="k">for</span><span class="p">(</span><span class="kt">size_t</span> <span class="n">i</span> <span class="o">=</span> <span class="mi">0</span><span class="p">;</span> <span class="n">i</span> <span class="o">&lt;</span> <span class="n">numEncoders</span><span class="p">;</span> <span class="o">++</span><span class="n">i</span><span class="p">)</span> <span class="p">{</span>
+      <span class="k">auto</span> <span class="n">prefix</span> <span class="o">=</span> <span class="s">&quot;encoder&quot;</span><span class="p">;</span>
+      <span class="n">mtransFactory</span><span class="p">.</span><span class="n">push_back</span><span class="p">(</span><span class="n">models</span><span class="o">::</span><span class="n">encoder</span><span class="p">()(</span><span class="s">&quot;prefix&quot;</span><span class="p">,</span> <span class="n">prefix</span><span class="p">)(</span><span class="s">&quot;index&quot;</span><span class="p">,</span> <span class="n">i</span><span class="p">));</span>
+    <span class="p">}</span>
+    <span class="n">mtransFactory</span><span class="p">.</span><span class="n">push_back</span><span class="p">(</span><span class="n">models</span><span class="o">::</span><span class="n">decoder</span><span class="p">()(</span><span class="s">&quot;index&quot;</span><span class="p">,</span> <span class="n">numEncoders</span><span class="p">));</span>
+
+    <span class="k">return</span> <span class="n">mtransFactory</span><span class="p">.</span><span class="n">construct</span><span class="p">(</span><span class="n">graph</span><span class="p">);</span>
+  <span class="p">}</span>
+
+  <span class="k">else</span> <span class="k">if</span><span class="p">(</span><span class="n">type</span> <span class="o">==</span> <span class="s">&quot;lm-transformer&quot;</span><span class="p">)</span> <span class="p">{</span>
+    <span class="k">auto</span> <span class="n">idx</span> <span class="o">=</span> <span class="n">options</span><span class="o">-&gt;</span><span class="n">has</span><span class="p">(</span><span class="s">&quot;index&quot;</span><span class="p">)</span> <span class="o">?</span> <span class="n">options</span><span class="o">-&gt;</span><span class="n">get</span><span class="o">&lt;</span><span class="kt">size_t</span><span class="o">&gt;</span><span class="p">(</span><span class="s">&quot;index&quot;</span><span class="p">)</span> <span class="o">:</span> <span class="mi">0</span><span class="p">;</span>
+    <span class="n">std</span><span class="o">::</span><span class="n">vector</span><span class="o">&lt;</span><span class="kt">int</span><span class="o">&gt;</span> <span class="n">dimVocabs</span> <span class="o">=</span> <span class="n">options</span><span class="o">-&gt;</span><span class="n">get</span><span class="o">&lt;</span><span class="n">std</span><span class="o">::</span><span class="n">vector</span><span class="o">&lt;</span><span class="kt">int</span><span class="o">&gt;&gt;</span><span class="p">(</span><span class="s">&quot;dim-vocabs&quot;</span><span class="p">);</span>
+    <span class="kt">int</span> <span class="n">vocab</span> <span class="o">=</span> <span class="n">dimVocabs</span><span class="p">[</span><span class="mi">0</span><span class="p">];</span>
+    <span class="n">dimVocabs</span><span class="p">.</span><span class="n">resize</span><span class="p">(</span><span class="n">idx</span> <span class="o">+</span> <span class="mi">1</span><span class="p">);</span>
+    <span class="n">std</span><span class="o">::</span><span class="n">fill</span><span class="p">(</span><span class="n">dimVocabs</span><span class="p">.</span><span class="n">begin</span><span class="p">(),</span> <span class="n">dimVocabs</span><span class="p">.</span><span class="n">end</span><span class="p">(),</span> <span class="n">vocab</span><span class="p">);</span>
+
+    <span class="k">return</span> <span class="n">models</span><span class="o">::</span><span class="n">encoder_decoder</span><span class="p">()(</span><span class="n">options</span><span class="p">)</span>
+        <span class="p">(</span><span class="s">&quot;usage&quot;</span><span class="p">,</span> <span class="n">use</span><span class="p">)</span>
+        <span class="p">(</span><span class="s">&quot;type&quot;</span><span class="p">,</span> <span class="s">&quot;transformer&quot;</span><span class="p">)</span>
+        <span class="p">(</span><span class="s">&quot;original-type&quot;</span><span class="p">,</span> <span class="n">type</span><span class="p">)</span>
+        <span class="p">.</span><span class="n">push_back</span><span class="p">(</span><span class="n">models</span><span class="o">::</span><span class="n">decoder</span><span class="p">()</span>
+                   <span class="p">(</span><span class="s">&quot;index&quot;</span><span class="p">,</span> <span class="n">idx</span><span class="p">)</span>
+                   <span class="p">(</span><span class="s">&quot;dim-vocabs&quot;</span><span class="p">,</span> <span class="n">dimVocabs</span><span class="p">))</span>
+        <span class="p">.</span><span class="n">construct</span><span class="p">(</span><span class="n">graph</span><span class="p">);</span>
+  <span class="p">}</span>
+
+  <span class="k">else</span> <span class="k">if</span><span class="p">(</span><span class="n">type</span> <span class="o">==</span> <span class="s">&quot;bert&quot;</span><span class="p">)</span> <span class="p">{</span>                      <span class="c1">// for full BERT training</span>
+    <span class="k">return</span> <span class="n">models</span><span class="o">::</span><span class="n">encoder_classifier</span><span class="p">()(</span><span class="n">options</span><span class="p">)</span> <span class="c1">//</span>
+        <span class="p">(</span><span class="s">&quot;original-type&quot;</span><span class="p">,</span> <span class="s">&quot;bert&quot;</span><span class="p">)</span>                <span class="c1">// so we can query this</span>
+        <span class="p">(</span><span class="s">&quot;usage&quot;</span><span class="p">,</span> <span class="n">use</span><span class="p">)</span>                           <span class="c1">//</span>
+        <span class="p">.</span><span class="n">push_back</span><span class="p">(</span><span class="n">models</span><span class="o">::</span><span class="n">encoder</span><span class="p">()</span>             <span class="c1">//</span>
+                   <span class="p">(</span><span class="s">&quot;type&quot;</span><span class="p">,</span> <span class="s">&quot;bert-encoder&quot;</span><span class="p">)</span>      <span class="c1">// close to original transformer encoder</span>
+                   <span class="p">(</span><span class="s">&quot;index&quot;</span><span class="p">,</span> <span class="mi">0</span><span class="p">))</span>                 <span class="c1">//</span>
+        <span class="p">.</span><span class="n">push_back</span><span class="p">(</span><span class="n">models</span><span class="o">::</span><span class="n">classifier</span><span class="p">()</span>          <span class="c1">//</span>
+                   <span class="p">(</span><span class="s">&quot;prefix&quot;</span><span class="p">,</span> <span class="s">&quot;masked-lm&quot;</span><span class="p">)</span>       <span class="c1">// prefix for parameter names</span>
+                   <span class="p">(</span><span class="s">&quot;type&quot;</span><span class="p">,</span> <span class="s">&quot;bert-masked-lm&quot;</span><span class="p">)</span>    <span class="c1">//</span>
+                   <span class="p">(</span><span class="s">&quot;index&quot;</span><span class="p">,</span> <span class="mi">0</span><span class="p">))</span>                 <span class="c1">// multi-task learning with MaskedLM</span>
+        <span class="p">.</span><span class="n">push_back</span><span class="p">(</span><span class="n">models</span><span class="o">::</span><span class="n">classifier</span><span class="p">()</span>          <span class="c1">//</span>
+                   <span class="p">(</span><span class="s">&quot;prefix&quot;</span><span class="p">,</span> <span class="s">&quot;next-sentence&quot;</span><span class="p">)</span>   <span class="c1">// prefix for parameter names</span>
+                   <span class="p">(</span><span class="s">&quot;type&quot;</span><span class="p">,</span> <span class="s">&quot;bert-classifier&quot;</span><span class="p">)</span>   <span class="c1">//</span>
+                   <span class="p">(</span><span class="s">&quot;index&quot;</span><span class="p">,</span> <span class="mi">1</span><span class="p">))</span>                 <span class="c1">// next sentence prediction</span>
+        <span class="p">.</span><span class="n">construct</span><span class="p">(</span><span class="n">graph</span><span class="p">);</span>
+  <span class="p">}</span>
+
+  <span class="k">else</span> <span class="k">if</span><span class="p">(</span><span class="n">type</span> <span class="o">==</span> <span class="s">&quot;bert-classifier&quot;</span><span class="p">)</span> <span class="p">{</span>           <span class="c1">// for BERT fine-tuning on non-BERT classification task</span>
+    <span class="k">return</span> <span class="n">models</span><span class="o">::</span><span class="n">encoder_classifier</span><span class="p">()(</span><span class="n">options</span><span class="p">)</span> <span class="c1">//</span>
+        <span class="p">(</span><span class="s">&quot;original-type&quot;</span><span class="p">,</span> <span class="s">&quot;bert-classifier&quot;</span><span class="p">)</span>     <span class="c1">// so we can query this if needed</span>
+        <span class="p">(</span><span class="s">&quot;usage&quot;</span><span class="p">,</span> <span class="n">use</span><span class="p">)</span>                           <span class="c1">//</span>
+        <span class="p">.</span><span class="n">push_back</span><span class="p">(</span><span class="n">models</span><span class="o">::</span><span class="n">encoder</span><span class="p">()</span>             <span class="c1">//</span>
+                   <span class="p">(</span><span class="s">&quot;type&quot;</span><span class="p">,</span> <span class="s">&quot;bert-encoder&quot;</span><span class="p">)</span>      <span class="c1">//</span>
+                   <span class="p">(</span><span class="s">&quot;index&quot;</span><span class="p">,</span> <span class="mi">0</span><span class="p">))</span>                 <span class="c1">// close to original transformer encoder</span>
+        <span class="p">.</span><span class="n">push_back</span><span class="p">(</span><span class="n">models</span><span class="o">::</span><span class="n">classifier</span><span class="p">()</span>          <span class="c1">//</span>
+                   <span class="p">(</span><span class="s">&quot;type&quot;</span><span class="p">,</span> <span class="s">&quot;bert-classifier&quot;</span><span class="p">)</span>   <span class="c1">//</span>
+                   <span class="p">(</span><span class="s">&quot;index&quot;</span><span class="p">,</span> <span class="mi">1</span><span class="p">))</span>                 <span class="c1">// next sentence prediction</span>
+        <span class="p">.</span><span class="n">construct</span><span class="p">(</span><span class="n">graph</span><span class="p">);</span>
+  <span class="p">}</span>
+
+<span class="cp">#ifdef COMPILE_EXAMPLES</span>
+  <span class="k">else</span> <span class="k">if</span><span class="p">(</span><span class="n">type</span> <span class="o">==</span> <span class="s">&quot;mnist-ffnn&quot;</span><span class="p">)</span>
+    <span class="k">return</span> <span class="n">New</span><span class="o">&lt;</span><span class="n">MnistFeedForwardNet</span><span class="o">&gt;</span><span class="p">(</span><span class="n">options</span><span class="p">);</span>
+<span class="cp">#endif</span>
+<span class="cp">#ifdef CUDNN</span>
+<span class="cp">#ifdef COMPILE_EXAMPLES</span>
+  <span class="k">else</span> <span class="nf">if</span><span class="p">(</span><span class="n">type</span> <span class="o">==</span> <span class="s">&quot;mnist-lenet&quot;</span><span class="p">)</span>
+    <span class="k">return</span> <span class="n">New</span><span class="o">&lt;</span><span class="n">MnistLeNet</span><span class="o">&gt;</span><span class="p">(</span><span class="n">options</span><span class="p">);</span>
+<span class="cp">#endif</span>
+  <span class="k">else</span> <span class="nf">if</span><span class="p">(</span><span class="n">type</span> <span class="o">==</span> <span class="s">&quot;char-s2s&quot;</span><span class="p">)</span> <span class="p">{</span>
+    <span class="k">return</span> <span class="n">models</span><span class="o">::</span><span class="n">encoder_decoder</span><span class="p">()(</span><span class="n">options</span><span class="p">)</span>
+        <span class="p">(</span><span class="s">&quot;usage&quot;</span><span class="p">,</span> <span class="n">use</span><span class="p">)</span>
+        <span class="p">(</span><span class="s">&quot;original-type&quot;</span><span class="p">,</span> <span class="n">type</span><span class="p">)</span>
+        <span class="p">.</span><span class="n">push_back</span><span class="p">(</span><span class="n">models</span><span class="o">::</span><span class="n">encoder</span><span class="p">()(</span><span class="s">&quot;type&quot;</span><span class="p">,</span> <span class="s">&quot;char-s2s&quot;</span><span class="p">))</span>
+        <span class="p">.</span><span class="n">push_back</span><span class="p">(</span><span class="n">models</span><span class="o">::</span><span class="n">decoder</span><span class="p">()(</span><span class="s">&quot;type&quot;</span><span class="p">,</span> <span class="s">&quot;s2s&quot;</span><span class="p">))</span>
+        <span class="p">.</span><span class="n">construct</span><span class="p">(</span><span class="n">graph</span><span class="p">);</span>
+  <span class="p">}</span>
+<span class="cp">#endif</span>
+
+  <span class="c1">// clang-format on</span>
+  <span class="k">else</span>
+    <span class="nf">ABORT</span><span class="p">(</span><span class="s">&quot;Unknown model type: {}&quot;</span><span class="p">,</span> <span class="n">type</span><span class="p">);</span>
+<span class="p">}</span>
+
+<span class="n">Ptr</span><span class="o">&lt;</span><span class="n">IModel</span><span class="o">&gt;</span> <span class="n">createModelFromOptions</span><span class="p">(</span><span class="n">Ptr</span><span class="o">&lt;</span><span class="n">Options</span><span class="o">&gt;</span> <span class="n">options</span><span class="p">,</span> <span class="n">usage</span> <span class="n">use</span><span class="p">)</span> <span class="p">{</span>
+  <span class="n">std</span><span class="o">::</span><span class="n">string</span> <span class="n">type</span> <span class="o">=</span> <span class="n">options</span><span class="o">-&gt;</span><span class="n">get</span><span class="o">&lt;</span><span class="n">std</span><span class="o">::</span><span class="n">string</span><span class="o">&gt;</span><span class="p">(</span><span class="s">&quot;type&quot;</span><span class="p">);</span>
+  <span class="k">auto</span> <span class="n">baseModel</span> <span class="o">=</span> <span class="n">createBaseModelByType</span><span class="p">(</span><span class="n">type</span><span class="p">,</span> <span class="n">use</span><span class="p">,</span> <span class="n">options</span><span class="p">);</span>
+
+  <span class="c1">// add (log)softmax if requested</span>
+  <span class="k">if</span> <span class="p">(</span><span class="n">use</span> <span class="o">==</span> <span class="n">usage</span><span class="o">::</span><span class="n">translation</span><span class="p">)</span> <span class="p">{</span>
+    <span class="k">if</span><span class="p">(</span><span class="n">std</span><span class="o">::</span><span class="n">dynamic_pointer_cast</span><span class="o">&lt;</span><span class="n">EncoderDecoder</span><span class="o">&gt;</span><span class="p">(</span><span class="n">baseModel</span><span class="p">))</span> <span class="p">{</span>
+      <span class="k">if</span><span class="p">(</span><span class="n">options</span><span class="o">-&gt;</span><span class="n">get</span><span class="o">&lt;</span><span class="kt">bool</span><span class="o">&gt;</span><span class="p">(</span><span class="s">&quot;output-sampling&quot;</span><span class="p">,</span> <span class="nb">false</span><span class="p">))</span>
+        <span class="k">return</span> <span class="n">New</span><span class="o">&lt;</span><span class="n">Stepwise</span><span class="o">&gt;</span><span class="p">(</span><span class="n">std</span><span class="o">::</span><span class="n">dynamic_pointer_cast</span><span class="o">&lt;</span><span class="n">EncoderDecoder</span><span class="o">&gt;</span><span class="p">(</span><span class="n">baseModel</span><span class="p">),</span> <span class="n">New</span><span class="o">&lt;</span><span class="n">GumbelSoftmaxStep</span><span class="o">&gt;</span><span class="p">());</span>
+      <span class="k">else</span>
+        <span class="k">return</span> <span class="n">New</span><span class="o">&lt;</span><span class="n">Stepwise</span><span class="o">&gt;</span><span class="p">(</span><span class="n">std</span><span class="o">::</span><span class="n">dynamic_pointer_cast</span><span class="o">&lt;</span><span class="n">EncoderDecoder</span><span class="o">&gt;</span><span class="p">(</span><span class="n">baseModel</span><span class="p">),</span> <span class="n">New</span><span class="o">&lt;</span><span class="n">LogSoftmaxStep</span><span class="o">&gt;</span><span class="p">());</span>
+    <span class="p">}</span>
+<span class="cp">#ifdef COMPILE_EXAMPLES</span>
+    <span class="c1">// note: &#39;usage::translation&#39; here means &#39;inference&#39;</span>
+    <span class="k">else</span> <span class="k">if</span> <span class="p">(</span><span class="n">std</span><span class="o">::</span><span class="n">dynamic_pointer_cast</span><span class="o">&lt;</span><span class="n">MnistFeedForwardNet</span><span class="o">&gt;</span><span class="p">(</span><span class="n">baseModel</span><span class="p">))</span>
+      <span class="k">return</span> <span class="n">New</span><span class="o">&lt;</span><span class="n">Scorer</span><span class="o">&gt;</span><span class="p">(</span><span class="n">baseModel</span><span class="p">,</span> <span class="n">New</span><span class="o">&lt;</span><span class="n">MNISTLogsoftmax</span><span class="o">&gt;</span><span class="p">());</span>
+<span class="cp">#ifdef CUDNN</span>
+    <span class="k">else</span> <span class="nf">if</span> <span class="p">(</span><span class="n">std</span><span class="o">::</span><span class="n">dynamic_pointer_cast</span><span class="o">&lt;</span><span class="n">MnistLeNet</span><span class="o">&gt;</span><span class="p">(</span><span class="n">baseModel</span><span class="p">))</span>
+      <span class="k">return</span> <span class="n">New</span><span class="o">&lt;</span><span class="n">Scorer</span><span class="o">&gt;</span><span class="p">(</span><span class="n">baseModel</span><span class="p">,</span> <span class="n">New</span><span class="o">&lt;</span><span class="n">MNISTLogsoftmax</span><span class="o">&gt;</span><span class="p">());</span>
+<span class="cp">#endif</span>
+<span class="cp">#endif</span>
+    <span class="k">else</span>
+      <span class="nf">ABORT</span><span class="p">(</span><span class="s">&quot;&#39;usage&#39; parameter &#39;translation&#39; cannot be applied to model type: {}&quot;</span><span class="p">,</span> <span class="n">type</span><span class="p">);</span>
+  <span class="p">}</span>
+  <span class="k">else</span> <span class="k">if</span> <span class="p">(</span><span class="n">use</span> <span class="o">==</span> <span class="n">usage</span><span class="o">::</span><span class="n">raw</span> <span class="o">||</span> <span class="n">use</span> <span class="o">==</span> <span class="n">usage</span><span class="o">::</span><span class="n">embedding</span><span class="p">)</span>
+    <span class="k">return</span> <span class="n">baseModel</span><span class="p">;</span>
+  <span class="k">else</span>
+    <span class="nf">ABORT</span><span class="p">(</span><span class="s">&quot;&#39;Usage&#39; parameter must be &#39;translation&#39; or &#39;raw&#39;&quot;</span><span class="p">);</span>
+<span class="p">}</span>
+
+<span class="n">Ptr</span><span class="o">&lt;</span><span class="n">ICriterionFunction</span><span class="o">&gt;</span> <span class="n">createCriterionFunctionFromOptions</span><span class="p">(</span><span class="n">Ptr</span><span class="o">&lt;</span><span class="n">Options</span><span class="o">&gt;</span> <span class="n">options</span><span class="p">,</span> <span class="n">usage</span> <span class="n">use</span><span class="p">)</span> <span class="p">{</span>
+  <span class="n">std</span><span class="o">::</span><span class="n">string</span> <span class="n">type</span> <span class="o">=</span> <span class="n">options</span><span class="o">-&gt;</span><span class="n">get</span><span class="o">&lt;</span><span class="n">std</span><span class="o">::</span><span class="n">string</span><span class="o">&gt;</span><span class="p">(</span><span class="s">&quot;type&quot;</span><span class="p">);</span>
+  <span class="k">auto</span> <span class="n">baseModel</span> <span class="o">=</span> <span class="n">createBaseModelByType</span><span class="p">(</span><span class="n">type</span><span class="p">,</span> <span class="n">use</span><span class="p">,</span> <span class="n">options</span><span class="p">);</span>
+
+  <span class="c1">// add cost function</span>
+  <span class="n">ABORT_IF</span><span class="p">(</span><span class="n">use</span> <span class="o">!=</span> <span class="n">usage</span><span class="o">::</span><span class="n">training</span> <span class="o">&amp;&amp;</span> <span class="n">use</span> <span class="o">!=</span> <span class="n">usage</span><span class="o">::</span><span class="n">scoring</span><span class="p">,</span> <span class="s">&quot;&#39;Usage&#39; parameter must be &#39;training&#39; or &#39;scoring&#39;&quot;</span><span class="p">);</span>
+  <span class="c1">// note: usage::scoring means &quot;score the loss function&quot;, hence it uses a Trainer (not Scorer, which is for decoding)</span>
+  <span class="c1">// @TODO: Should we define a new class that does not compute gradients?</span>
+  <span class="k">if</span> <span class="p">(</span><span class="n">std</span><span class="o">::</span><span class="n">dynamic_pointer_cast</span><span class="o">&lt;</span><span class="n">EncoderDecoder</span><span class="o">&gt;</span><span class="p">(</span><span class="n">baseModel</span><span class="p">))</span>
+    <span class="k">return</span> <span class="n">New</span><span class="o">&lt;</span><span class="n">Trainer</span><span class="o">&gt;</span><span class="p">(</span><span class="n">baseModel</span><span class="p">,</span> <span class="n">New</span><span class="o">&lt;</span><span class="n">EncoderDecoderCECost</span><span class="o">&gt;</span><span class="p">(</span><span class="n">options</span><span class="p">));</span>
+  <span class="k">else</span> <span class="nf">if</span> <span class="p">(</span><span class="n">std</span><span class="o">::</span><span class="n">dynamic_pointer_cast</span><span class="o">&lt;</span><span class="n">EncoderClassifier</span><span class="o">&gt;</span><span class="p">(</span><span class="n">baseModel</span><span class="p">))</span>
+    <span class="k">return</span> <span class="n">New</span><span class="o">&lt;</span><span class="n">Trainer</span><span class="o">&gt;</span><span class="p">(</span><span class="n">baseModel</span><span class="p">,</span> <span class="n">New</span><span class="o">&lt;</span><span class="n">EncoderClassifierCECost</span><span class="o">&gt;</span><span class="p">(</span><span class="n">options</span><span class="p">));</span>
+<span class="cp">#ifdef COMPILE_EXAMPLES</span>
+  <span class="c1">// @TODO: examples should be compiled optionally</span>
+  <span class="k">else</span> <span class="nf">if</span> <span class="p">(</span><span class="n">std</span><span class="o">::</span><span class="n">dynamic_pointer_cast</span><span class="o">&lt;</span><span class="n">MnistFeedForwardNet</span><span class="o">&gt;</span><span class="p">(</span><span class="n">baseModel</span><span class="p">))</span>
+    <span class="k">return</span> <span class="n">New</span><span class="o">&lt;</span><span class="n">Trainer</span><span class="o">&gt;</span><span class="p">(</span><span class="n">baseModel</span><span class="p">,</span> <span class="n">New</span><span class="o">&lt;</span><span class="n">MNISTCrossEntropyCost</span><span class="o">&gt;</span><span class="p">());</span>
+<span class="cp">#ifdef CUDNN</span>
+  <span class="k">else</span> <span class="nf">if</span> <span class="p">(</span><span class="n">std</span><span class="o">::</span><span class="n">dynamic_pointer_cast</span><span class="o">&lt;</span><span class="n">MnistLeNet</span><span class="o">&gt;</span><span class="p">(</span><span class="n">baseModel</span><span class="p">))</span>
+    <span class="k">return</span> <span class="n">New</span><span class="o">&lt;</span><span class="n">Trainer</span><span class="o">&gt;</span><span class="p">(</span><span class="n">baseModel</span><span class="p">,</span> <span class="n">New</span><span class="o">&lt;</span><span class="n">MNISTCrossEntropyCost</span><span class="o">&gt;</span><span class="p">());</span>
+<span class="cp">#endif</span>
+<span class="cp">#endif</span>
+  <span class="k">else</span> <span class="nf">if</span> <span class="p">(</span><span class="n">std</span><span class="o">::</span><span class="n">dynamic_pointer_cast</span><span class="o">&lt;</span><span class="n">EncoderPooler</span><span class="o">&gt;</span><span class="p">(</span><span class="n">baseModel</span><span class="p">))</span>
+    <span class="k">return</span> <span class="n">New</span><span class="o">&lt;</span><span class="n">Trainer</span><span class="o">&gt;</span><span class="p">(</span><span class="n">baseModel</span><span class="p">,</span> <span class="n">New</span><span class="o">&lt;</span><span class="n">EncoderPoolerRankCost</span><span class="o">&gt;</span><span class="p">(</span><span class="n">options</span><span class="p">));</span>
+  <span class="k">else</span>
+    <span class="nf">ABORT</span><span class="p">(</span><span class="s">&quot;Criterion function unknown for model type: {}&quot;</span><span class="p">,</span> <span class="n">type</span><span class="p">);</span>
+<span class="p">}</span>
+
+<span class="p">}</span>  <span class="c1">// namespace models</span>
+<span class="p">}</span>  <span class="c1">// namespace marian</span>
+</pre></div>
+</div>
+</div>
+
+
+           </div>
+           
+          </div>
+          <footer>
+
+  <hr/>
+
+  <div role="contentinfo">
+    <p>
+        &#169; Copyright 2021, Marian NMT Team.
+
+    </p>
+  </div>
+    
+    
+    
+    Built with <a href="https://www.sphinx-doc.org/">Sphinx</a> using a
+    
+    <a href="https://github.com/readthedocs/sphinx_rtd_theme">theme</a>
+    
+    provided by <a href="https://readthedocs.org">Read the Docs</a>. 
+
+</footer>
+        </div>
+      </div>
+
+    </section>
+
+  </div>
+  
+
+  <script type="text/javascript">
+      jQuery(function () {
+          SphinxRtdTheme.Navigation.enable(true);
+      });
+  </script>
+
+  
+  
+    
+   
+
+</body>
+</html>

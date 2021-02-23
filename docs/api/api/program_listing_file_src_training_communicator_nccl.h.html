@@ -1,0 +1,574 @@
+
+
+<!DOCTYPE html>
+<html class="writer-html5" lang="en" >
+<head>
+  <meta charset="utf-8" />
+  
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  
+  <title>Program Listing for File communicator_nccl.h &mdash; Marian NMT v1.10.1 2021-02-23 documentation</title>
+  
+
+  
+  <link rel="stylesheet" href="../_static/css/theme.css" type="text/css" />
+  <link rel="stylesheet" href="../_static/pygments.css" type="text/css" />
+  <link rel="stylesheet" href="../_static/css/custom.css" type="text/css" />
+  <link rel="stylesheet" href="../_static/collapsible-lists/css/tree_view.css" type="text/css" />
+
+  
+  
+
+  
+  
+
+  
+    <link rel="canonical" href="http://marian-nmt.github.io/docs/api/api/program_listing_file_src_training_communicator_nccl.h.html" />
+
+  
+  <!--[if lt IE 9]>
+    <script src="../_static/js/html5shiv.min.js"></script>
+  <![endif]-->
+  
+    
+      <script type="text/javascript" id="documentation_options" data-url_root="../" src="../_static/documentation_options.js"></script>
+        <script src="../_static/jquery.js"></script>
+        <script src="../_static/underscore.js"></script>
+        <script src="../_static/doctools.js"></script>
+        <script src="../_static/language_data.js"></script>
+        <script src="../_static/collapsible-lists/js/CollapsibleLists.compressed.js"></script>
+        <script src="../_static/collapsible-lists/js/apply-collapsible-lists.js"></script>
+    
+    <script type="text/javascript" src="../_static/js/theme.js"></script>
+
+    
+    <link rel="index" title="Index" href="../genindex.html" />
+    <link rel="search" title="Search" href="../search.html" /> 
+</head>
+
+<body class="wy-body-for-nav">
+
+   
+  <div class="wy-grid-for-nav">
+    
+    <nav data-toggle="wy-nav-shift" class="wy-nav-side">
+      <div class="wy-side-scroll">
+        <div class="wy-side-nav-search" >
+          
+
+          
+            <a href="../index.html" class="icon icon-home"> Marian NMT
+          
+
+          
+          </a>
+
+          
+            
+            
+              <div class="version">
+                v1.10.1
+              </div>
+            
+          
+
+          
+<div role="search">
+  <form id="rtd-search-form" class="wy-form" action="../search.html" method="get">
+    <input type="text" name="q" placeholder="Search docs" />
+    <input type="hidden" name="check_keywords" value="yes" />
+    <input type="hidden" name="area" value="default" />
+  </form>
+</div>
+
+          
+        </div>
+
+        
+        <div class="wy-menu wy-menu-vertical" data-spy="affix" role="navigation" aria-label="main navigation">
+          
+            
+            
+              
+            
+            
+              <p class="caption"><span class="caption-text">Contents:</span></p>
+<ul>
+<li class="toctree-l1"><a class="reference internal" href="../install.html">Installation</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../graph.html">Expression graphs</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../operators.html">Graph operations</a></li>
+<li class="toctree-l1"><a class="reference internal" href="library_index.html">Library API</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../contributing.html">How to contribute to Marian</a></li>
+</ul>
+
+            
+          
+        </div>
+        
+      </div>
+    </nav>
+
+    <section data-toggle="wy-nav-shift" class="wy-nav-content-wrap">
+
+      
+      <nav class="wy-nav-top" aria-label="top navigation">
+        
+          <i data-toggle="wy-nav-top" class="fa fa-bars"></i>
+          <a href="../index.html">Marian NMT</a>
+        
+      </nav>
+
+
+      <div class="wy-nav-content">
+        
+        <div class="rst-content">
+        
+          
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+<div role="navigation" aria-label="breadcrumbs navigation">
+
+  <ul class="wy-breadcrumbs">
+    
+      <li><a href="../index.html" class="icon icon-home"></a> &raquo;</li>
+        
+      <li>Program Listing for File communicator_nccl.h</li>
+    
+    
+      <li class="wy-breadcrumbs-aside">
+        
+          
+            <a href="../_sources/api/program_listing_file_src_training_communicator_nccl.h.rst.txt" rel="nofollow"> View page source</a>
+          
+        
+      </li>
+    
+  </ul>
+
+  
+  <hr/>
+</div>
+          <div role="main" class="document" itemscope="itemscope" itemtype="http://schema.org/Article">
+           <div itemprop="articleBody">
+            
+  <div class="section" id="program-listing-for-file-communicator-nccl-h">
+<span id="program-listing-file-src-training-communicator-nccl-h"></span><h1>Program Listing for File communicator_nccl.h<a class="headerlink" href="#program-listing-for-file-communicator-nccl-h" title="Permalink to this headline">¶</a></h1>
+<p>↰ <a class="reference internal" href="file_src_training_communicator_nccl.h.html#file-src-training-communicator-nccl-h"><span class="std std-ref">Return to documentation for file</span></a> (<code class="docutils literal notranslate"><span class="pre">src/training/communicator_nccl.h</span></code>)</p>
+<div class="highlight-cpp notranslate"><div class="highlight"><pre><span></span><span class="c1">// @TODO: rename to communicator_nccl.h</span>
+<span class="c1">// Note: This must only be included if defined(CUDA_FOUND) &amp;&amp; defined(USE_NCCL)</span>
+<span class="cp">#include</span> <span class="cpf">&quot;training/communicator.h&quot;</span><span class="cp"></span>
+<span class="cp">#include</span> <span class="cpf">&quot;3rd_party/threadpool.h&quot;</span><span class="cp"></span>
+<span class="cp">#include</span> <span class="cpf">&quot;tensors/gpu/cuda_helpers.h&quot;</span><span class="cp"></span>
+
+<span class="cp">#include</span> <span class="cpf">&quot;common/timer.h&quot;</span><span class="cp"></span>
+
+<span class="c1">// Generated by NCCL make files in build/nccl/include;</span>
+<span class="c1">// include dir has been set in CMake files. NCCL add version number etc.</span>
+<span class="cp">#include</span> <span class="cpf">&quot;nccl.h&quot;</span><span class="cp"></span>
+<span class="cp">#include</span> <span class="cpf">&lt;cuda_runtime.h&gt;</span><span class="cp"></span>
+
+<span class="cp">#if (NCCL_MAJOR&lt;3 || NCCL_MINOR&lt;2)</span>
+<span class="cp">#define ncclGetVersion(pv) (*(pv) = (NCCL_MAJOR * 1000 + NCCL_MINOR * 100 + NCCL_PATCH))</span>
+<span class="cp">#endif</span>
+
+<span class="cp">#include</span> <span class="cpf">&lt;signal.h&gt;</span><span class="c1"> // HACK</span><span class="cp"></span>
+<span class="cp">#include</span> <span class="cpf">&lt;sys/types.h&gt;</span><span class="cp"></span>
+<span class="cp">#include</span> <span class="cpf">&lt;sys/syscall.h&gt;</span><span class="cp"></span>
+<span class="kt">pid_t</span> <span class="nf">gettid</span><span class="p">(</span><span class="kt">void</span><span class="p">){</span> <span class="k">return</span> <span class="n">syscall</span><span class="p">(</span><span class="n">SYS_gettid</span><span class="p">);</span> <span class="p">}</span>
+
+<span class="k">namespace</span> <span class="n">marian</span> <span class="p">{</span>
+
+<span class="k">class</span> <span class="nc">NCCLCommunicator</span> <span class="o">:</span> <span class="k">public</span> <span class="n">ICommunicator</span> <span class="p">{</span>
+<span class="k">private</span><span class="o">:</span>
+  <span class="n">std</span><span class="o">::</span><span class="n">vector</span><span class="o">&lt;</span><span class="n">ncclComm_t</span><span class="o">&gt;</span> <span class="n">comms_</span><span class="p">;</span>     <span class="c1">// [device index]</span>
+  <span class="n">std</span><span class="o">::</span><span class="n">vector</span><span class="o">&lt;</span><span class="n">cudaStream_t</span><span class="o">&gt;</span> <span class="n">streams_</span><span class="p">;</span> <span class="c1">// [device index]</span>
+  <span class="n">std</span><span class="o">::</span><span class="n">vector</span><span class="o">&lt;</span><span class="kt">int</span><span class="o">&gt;</span> <span class="n">devices_</span><span class="p">;</span>          <span class="c1">// [device index]</span>
+  <span class="n">Ptr</span><span class="o">&lt;</span><span class="n">IMPIWrapper</span><span class="o">&gt;</span> <span class="n">mpi_</span><span class="p">;</span> <span class="c1">// (may be null)</span>
+  <span class="k">mutable</span> <span class="n">ThreadPool</span> <span class="n">threadPool_</span><span class="p">;</span>
+  <span class="k">mutable</span> <span class="n">std</span><span class="o">::</span><span class="n">vector</span><span class="o">&lt;</span><span class="n">std</span><span class="o">::</span><span class="n">future</span><span class="o">&lt;</span><span class="kt">void</span><span class="o">&gt;&gt;</span> <span class="n">threadResults_</span><span class="p">;</span> <span class="c1">// [device index]</span>
+
+  <span class="kt">void</span> <span class="nf">groupStart</span><span class="p">()</span> <span class="k">const</span> <span class="p">{</span> <span class="n">NCCL_CHECK</span><span class="p">(</span><span class="n">ncclGroupStart</span><span class="p">());</span> <span class="p">}</span> <span class="c1">// helpers to make sure we check the error</span>
+  <span class="kt">void</span> <span class="nf">groupEnd</span><span class="p">()</span>   <span class="k">const</span> <span class="p">{</span> <span class="n">NCCL_CHECK</span><span class="p">(</span><span class="n">ncclGroupEnd</span><span class="p">());</span>   <span class="p">}</span>
+
+  <span class="kt">void</span> <span class="nf">synchronizeAll</span><span class="p">()</span> <span class="k">const</span> <span class="p">{</span>
+    <span class="k">for</span><span class="p">(</span><span class="kt">int</span> <span class="n">i</span> <span class="o">=</span> <span class="mi">0</span><span class="p">;</span> <span class="n">i</span> <span class="o">&lt;</span> <span class="n">graphs_</span><span class="p">.</span><span class="n">size</span><span class="p">();</span> <span class="o">++</span><span class="n">i</span><span class="p">)</span> <span class="p">{</span>
+      <span class="n">CUDA_CHECK</span><span class="p">(</span><span class="n">cudaSetDevice</span><span class="p">(</span><span class="n">devices_</span><span class="p">[</span><span class="n">i</span><span class="p">]));</span>
+      <span class="n">CUDA_CHECK</span><span class="p">(</span><span class="n">cudaStreamSynchronize</span><span class="p">(</span><span class="n">streams_</span><span class="p">[</span><span class="n">i</span><span class="p">]));</span>
+      <span class="c1">// @TODO: why do we sync the CPU, and not the GPU?</span>
+      <span class="c1">//  - cudaEventRecord() an event on the nccl stream</span>
+      <span class="c1">//  - submit a cudaStreamWaitEvent() into our compute stream (=NULL stream)</span>
+      <span class="c1">// cf. https://github.com/pytorch/pytorch/blob/master/torch/lib/c10d/ProcessGroupNCCL.cpp</span>
+    <span class="p">}</span>
+  <span class="p">}</span>
+
+  <span class="kt">void</span> <span class="nf">synchronizeAllOnNullStream</span><span class="p">()</span> <span class="k">const</span> <span class="p">{</span>
+    <span class="k">for</span> <span class="p">(</span><span class="kt">int</span> <span class="n">i</span> <span class="o">=</span> <span class="mi">0</span><span class="p">;</span> <span class="n">i</span> <span class="o">&lt;</span> <span class="n">graphs_</span><span class="p">.</span><span class="n">size</span><span class="p">();</span> <span class="o">++</span><span class="n">i</span><span class="p">)</span> <span class="p">{</span>
+      <span class="k">auto</span> <span class="n">backend</span> <span class="o">=</span> <span class="n">graphs_</span><span class="p">[</span><span class="n">i</span><span class="p">]</span><span class="o">-&gt;</span><span class="n">params</span><span class="p">()</span><span class="o">-&gt;</span><span class="n">vals</span><span class="p">()</span><span class="o">-&gt;</span><span class="n">getBackend</span><span class="p">();</span>
+      <span class="n">backend</span><span class="o">-&gt;</span><span class="n">setDevice</span><span class="p">();</span>
+      <span class="n">backend</span><span class="o">-&gt;</span><span class="n">synchronize</span><span class="p">();</span> <span class="c1">// note: synchronize() does not set the device by itself</span>
+    <span class="p">}</span>
+  <span class="p">}</span>
+
+  <span class="n">std</span><span class="o">::</span><span class="n">string</span> <span class="n">mpiIdStr</span><span class="p">()</span> <span class="k">const</span> <span class="p">{</span> <span class="c1">// (for logging)</span>
+    <span class="k">return</span> <span class="n">mpi_</span> <span class="o">?</span> <span class="n">mpi_</span><span class="o">-&gt;</span><span class="n">idStr</span><span class="p">()</span> <span class="o">:</span> <span class="s">&quot;&quot;</span><span class="p">;</span>
+  <span class="p">}</span>
+
+  <span class="kt">size_t</span> <span class="n">myNcclRank</span><span class="p">(</span><span class="kt">size_t</span> <span class="n">localDeviceIndex</span><span class="p">)</span> <span class="k">const</span> <span class="p">{</span> <span class="c1">// map local device index to a global rank</span>
+    <span class="k">if</span> <span class="p">(</span><span class="n">mpi_</span><span class="p">)</span>
+      <span class="k">return</span> <span class="n">mpi_</span><span class="o">-&gt;</span><span class="n">myMPIRank</span><span class="p">()</span> <span class="o">*</span> <span class="n">devices_</span><span class="p">.</span><span class="n">size</span><span class="p">()</span> <span class="o">+</span> <span class="n">localDeviceIndex</span><span class="p">;</span>
+    <span class="k">else</span>
+      <span class="k">return</span> <span class="n">localDeviceIndex</span><span class="p">;</span>
+  <span class="p">}</span>
+
+  <span class="kt">size_t</span> <span class="n">numNcclRanks</span><span class="p">()</span> <span class="k">const</span> <span class="p">{</span> <span class="c1">// total number of devices across all MPI processes</span>
+    <span class="k">if</span> <span class="p">(</span><span class="n">mpi_</span><span class="p">)</span>
+      <span class="k">return</span> <span class="n">mpi_</span><span class="o">-&gt;</span><span class="n">numMPIProcesses</span><span class="p">()</span> <span class="o">*</span> <span class="n">devices_</span><span class="p">.</span><span class="n">size</span><span class="p">();</span>
+    <span class="k">else</span>
+      <span class="k">return</span> <span class="n">devices_</span><span class="p">.</span><span class="n">size</span><span class="p">();</span>
+  <span class="p">}</span>
+
+  <span class="kt">size_t</span> <span class="n">dataSize</span><span class="p">()</span> <span class="k">const</span> <span class="p">{</span> <span class="c1">// total number of floats that comprise the concatenated parameter and gradient vector</span>
+    <span class="k">return</span> <span class="n">graphs_</span><span class="p">[</span><span class="mi">0</span><span class="p">]</span><span class="o">-&gt;</span><span class="n">params</span><span class="p">()</span><span class="o">-&gt;</span><span class="n">vals</span><span class="p">()</span><span class="o">-&gt;</span><span class="n">size</span><span class="p">();</span>
+  <span class="p">}</span>
+
+  <span class="c1">// determine the (max) shard size</span>
+  <span class="c1">// All shards except the last one have this size.</span>
+  <span class="c1">// Presently, even all shards must have identical size, due to a limitation in NCCL we have not yet worked around.</span>
+  <span class="kt">size_t</span> <span class="n">shardSize</span><span class="p">()</span> <span class="k">const</span> <span class="p">{</span>
+    <span class="kt">size_t</span> <span class="n">numShards</span> <span class="o">=</span> <span class="n">numNcclRanks</span><span class="p">();</span>
+    <span class="kt">size_t</span> <span class="n">size</span> <span class="o">=</span> <span class="p">(</span><span class="n">dataSize</span><span class="p">()</span> <span class="o">+</span> <span class="n">numShards</span> <span class="o">-</span> <span class="mi">1</span><span class="p">)</span> <span class="o">/</span> <span class="n">numShards</span><span class="p">;</span>
+<span class="cp">#if 1 </span><span class="c1">// for now, all shards must have the same size, since NCCL does not allow a sub-slice for the last shard</span>
+    <span class="n">ABORT_IF</span><span class="p">(</span><span class="n">size</span> <span class="o">*</span> <span class="n">numShards</span> <span class="o">!=</span> <span class="n">dataSize</span><span class="p">(),</span> <span class="s">&quot;presently, all shards must have the same size&quot;</span><span class="p">);</span>
+<span class="cp">#endif</span>
+    <span class="k">return</span> <span class="n">size</span><span class="p">;</span>
+  <span class="p">}</span>
+
+  <span class="c1">// determine the index range (begin, end) of a shard</span>
+  <span class="n">std</span><span class="o">::</span><span class="n">pair</span><span class="o">&lt;</span><span class="kt">size_t</span><span class="p">,</span> <span class="kt">size_t</span><span class="o">&gt;</span> <span class="n">ncclRankShardRange</span><span class="p">(</span><span class="kt">size_t</span> <span class="n">rank</span><span class="p">)</span> <span class="k">const</span> <span class="p">{</span>
+    <span class="kt">size_t</span> <span class="n">size</span> <span class="o">=</span> <span class="n">shardSize</span><span class="p">();</span>
+    <span class="kt">size_t</span> <span class="n">begin</span> <span class="o">=</span> <span class="n">rank</span> <span class="o">*</span> <span class="n">size</span><span class="p">;</span>
+    <span class="kt">size_t</span> <span class="n">end</span> <span class="o">=</span> <span class="n">begin</span> <span class="o">+</span> <span class="n">size</span><span class="p">;</span>
+    <span class="n">end</span> <span class="o">=</span> <span class="n">std</span><span class="o">::</span><span class="n">min</span><span class="p">(</span><span class="n">end</span><span class="p">,</span> <span class="n">dataSize</span><span class="p">());</span> <span class="c1">// clip last shard. Note: Presently this never happens, since shardSize() enforces uniform shard size.</span>
+    <span class="k">return</span><span class="p">{</span> <span class="n">begin</span><span class="p">,</span> <span class="n">end</span> <span class="p">};</span>
+  <span class="p">}</span>
+
+  <span class="c1">// determine the index range (begin, end) of a shard</span>
+  <span class="n">std</span><span class="o">::</span><span class="n">pair</span><span class="o">&lt;</span><span class="kt">size_t</span><span class="p">,</span> <span class="kt">size_t</span><span class="o">&gt;</span> <span class="n">localShardRange</span><span class="p">(</span><span class="kt">size_t</span> <span class="n">localDeviceIndex</span><span class="p">)</span> <span class="k">const</span> <span class="p">{</span>
+    <span class="k">return</span> <span class="nf">ncclRankShardRange</span><span class="p">(</span><span class="n">myNcclRank</span><span class="p">(</span><span class="n">localDeviceIndex</span><span class="p">));</span>
+  <span class="p">}</span>
+
+  <span class="k">static</span> <span class="n">std</span><span class="o">::</span><span class="n">string</span> <span class="n">ncclVersionString</span><span class="p">()</span> <span class="p">{</span>
+    <span class="kt">int</span> <span class="n">ncclVersion</span> <span class="o">=</span> <span class="mi">0</span><span class="p">;</span>
+    <span class="n">ncclGetVersion</span><span class="p">(</span><span class="o">&amp;</span><span class="n">ncclVersion</span><span class="p">);</span>
+    <span class="k">return</span> <span class="n">std</span><span class="o">::</span><span class="n">to_string</span><span class="p">(</span><span class="n">ncclVersion</span><span class="o">/</span><span class="mi">1000</span><span class="p">)</span> <span class="o">+</span> <span class="s">&quot;.&quot;</span> <span class="o">+</span> <span class="n">std</span><span class="o">::</span><span class="n">to_string</span><span class="p">((</span><span class="n">ncclVersion</span><span class="o">/</span><span class="mi">100</span><span class="p">)</span><span class="o">%</span><span class="mi">10</span><span class="p">)</span> <span class="o">+</span> <span class="s">&quot;.&quot;</span> <span class="o">+</span> <span class="n">std</span><span class="o">::</span><span class="n">to_string</span><span class="p">(</span><span class="n">ncclVersion</span><span class="o">%</span><span class="mi">100</span><span class="p">);</span>
+  <span class="p">}</span>
+
+  <span class="kt">void</span> <span class="n">mpiBarrier</span><span class="p">()</span> <span class="k">const</span> <span class="p">{</span>
+    <span class="k">if</span> <span class="p">(</span><span class="n">mpi_</span><span class="p">)</span>
+      <span class="n">mpi_</span><span class="o">-&gt;</span><span class="n">barrier</span><span class="p">();</span>
+  <span class="p">}</span>
+
+  <span class="c1">// helper class to temporarily block a UNIX signal</span>
+  <span class="k">class</span> <span class="nc">BlockSignal</span> <span class="p">{</span>
+    <span class="k">typedef</span> <span class="n">std</span><span class="o">::</span><span class="n">function</span><span class="o">&lt;</span><span class="kt">void</span><span class="p">(</span><span class="kt">int</span><span class="p">,</span> <span class="k">const</span> <span class="kt">sigset_t</span><span class="o">*</span><span class="p">,</span> <span class="kt">sigset_t</span><span class="o">*</span><span class="p">)</span><span class="o">&gt;</span> <span class="n">SigMaskFn</span><span class="p">;</span>
+    <span class="n">SigMaskFn</span> <span class="n">sigMaskFn_</span><span class="p">;</span> <span class="c1">// function to set the mask, thread or proc</span>
+    <span class="kt">sigset_t</span> <span class="n">oldSigSet_</span><span class="p">;</span>  <span class="c1">// old set to restore the signal</span>
+  <span class="k">public</span><span class="o">:</span>
+    <span class="n">BlockSignal</span><span class="p">(</span><span class="kt">int</span> <span class="n">signal</span><span class="p">,</span> <span class="k">const</span> <span class="n">SigMaskFn</span><span class="o">&amp;</span> <span class="n">sigMaskFn</span><span class="p">)</span> <span class="o">:</span> <span class="n">sigMaskFn_</span><span class="p">(</span><span class="n">sigMaskFn</span><span class="p">)</span> <span class="p">{</span>
+      <span class="kt">sigset_t</span> <span class="n">newSigSet</span><span class="p">;</span>
+      <span class="n">sigemptyset</span><span class="p">(</span><span class="o">&amp;</span><span class="n">newSigSet</span><span class="p">);</span>
+      <span class="n">sigaddset</span><span class="p">(</span><span class="o">&amp;</span><span class="n">newSigSet</span><span class="p">,</span> <span class="n">signal</span><span class="p">);</span> <span class="c1">// block signal by setting it in the blocked-signal mask</span>
+      <span class="n">sigMaskFn_</span><span class="p">(</span><span class="n">SIG_BLOCK</span><span class="p">,</span> <span class="o">&amp;</span><span class="n">newSigSet</span><span class="p">,</span> <span class="o">&amp;</span><span class="n">oldSigSet_</span><span class="p">);</span>
+    <span class="p">}</span>
+    <span class="o">~</span><span class="n">BlockSignal</span><span class="p">()</span> <span class="p">{</span>
+      <span class="n">sigMaskFn_</span><span class="p">(</span><span class="n">SIG_BLOCK</span><span class="p">,</span> <span class="o">&amp;</span><span class="n">oldSigSet_</span><span class="p">,</span> <span class="k">nullptr</span><span class="p">);</span> <span class="c1">// restore old signal mask</span>
+    <span class="p">}</span>
+  <span class="p">};</span>
+
+<span class="k">public</span><span class="o">:</span>
+  <span class="c1">// a NCCLCommunicator is bound to a set of graphs, one per GPU device</span>
+  <span class="c1">// If MPI is used, then each MPI process has an instance of this class for its specific</span>
+  <span class="c1">// set of GPU devices, which are communicating with each other. The total number of GPUs</span>
+  <span class="c1">// involved in the NCCL communication setup is (#MPI processes) x (#GPUs per process).</span>
+  <span class="n">NCCLCommunicator</span><span class="p">(</span><span class="k">const</span> <span class="n">std</span><span class="o">::</span><span class="n">vector</span><span class="o">&lt;</span><span class="n">Ptr</span><span class="o">&lt;</span><span class="n">ExpressionGraph</span><span class="o">&gt;&gt;&amp;</span> <span class="n">graphs</span><span class="p">,</span> <span class="n">Ptr</span><span class="o">&lt;</span><span class="n">IMPIWrapper</span><span class="o">&gt;</span> <span class="n">mpi</span><span class="p">)</span>
+      <span class="o">:</span> <span class="n">ICommunicator</span><span class="p">(</span><span class="n">graphs</span><span class="p">),</span>
+        <span class="n">comms_</span><span class="p">(</span><span class="n">graphs</span><span class="p">.</span><span class="n">size</span><span class="p">()),</span>
+        <span class="n">streams_</span><span class="p">(</span><span class="n">graphs</span><span class="p">.</span><span class="n">size</span><span class="p">()),</span>
+        <span class="n">devices_</span><span class="p">(</span><span class="n">graphs</span><span class="p">.</span><span class="n">size</span><span class="p">()),</span>
+        <span class="n">mpi_</span><span class="p">(</span><span class="n">mpi</span><span class="p">),</span>
+        <span class="n">threadPool_</span><span class="p">(</span><span class="n">graphs</span><span class="p">.</span><span class="n">size</span><span class="p">(),</span> <span class="n">graphs</span><span class="p">.</span><span class="n">size</span><span class="p">()),</span> <span class="n">threadResults_</span><span class="p">(</span><span class="n">graphs</span><span class="p">.</span><span class="n">size</span><span class="p">())</span> <span class="p">{</span>
+    <span class="n">mpiBarrier</span><span class="p">();</span> <span class="c1">// barrier to group the multiple log messages from MPI processes</span>
+    <span class="n">LOG</span><span class="p">(</span><span class="n">info</span><span class="p">,</span> <span class="s">&quot;[comm] Using NCCL {} {}for GPU communication&quot;</span><span class="p">,</span>
+        <span class="n">ncclVersionString</span><span class="p">(),</span>
+        <span class="p">(</span><span class="n">mpi_</span> <span class="o">&amp;&amp;</span> <span class="n">mpi_</span><span class="o">-&gt;</span><span class="n">numMPIProcesses</span><span class="p">()</span> <span class="o">&gt;</span> <span class="mi">1</span><span class="p">)</span> <span class="o">?</span> <span class="s">&quot;and MPI &quot;</span> <span class="o">:</span> <span class="s">&quot;&quot;</span><span class="p">);</span>
+    <span class="n">mpiBarrier</span><span class="p">();</span> <span class="c1">// (synchronize the log messages)</span>
+
+    <span class="c1">// set up our local devices</span>
+    <span class="k">for</span><span class="p">(</span><span class="kt">int</span> <span class="n">i</span> <span class="o">=</span> <span class="mi">0</span><span class="p">;</span> <span class="n">i</span> <span class="o">&lt;</span> <span class="n">graphs_</span><span class="p">.</span><span class="n">size</span><span class="p">();</span> <span class="o">++</span><span class="n">i</span><span class="p">)</span> <span class="p">{</span>
+      <span class="k">auto</span> <span class="n">device</span> <span class="o">=</span> <span class="n">graphs_</span><span class="p">[</span><span class="n">i</span><span class="p">]</span><span class="o">-&gt;</span><span class="n">getBackend</span><span class="p">()</span><span class="o">-&gt;</span><span class="n">getDeviceId</span><span class="p">();</span>
+
+      <span class="n">ABORT_IF</span><span class="p">(</span><span class="n">device</span><span class="p">.</span><span class="n">type</span> <span class="o">!=</span> <span class="n">DeviceType</span><span class="o">::</span><span class="n">gpu</span><span class="p">,</span>
+               <span class="s">&quot;NCCL communicator can only be used with GPUs&quot;</span><span class="p">);</span>
+
+      <span class="n">devices_</span><span class="p">[</span><span class="n">i</span><span class="p">]</span> <span class="o">=</span> <span class="n">device</span><span class="p">.</span><span class="n">no</span><span class="p">;</span>
+      <span class="n">CUDA_CHECK</span><span class="p">(</span><span class="n">cudaSetDevice</span><span class="p">(</span><span class="n">devices_</span><span class="p">[</span><span class="n">i</span><span class="p">]));</span>
+      <span class="n">CUDA_CHECK</span><span class="p">(</span><span class="n">cudaStreamCreate</span><span class="p">(</span><span class="o">&amp;</span><span class="n">streams_</span><span class="p">[</span><span class="n">i</span><span class="p">]));</span>
+    <span class="p">}</span>
+
+    <span class="c1">// Note: due to a bug in NCCL 2.3.5, NCCL&#39;s allocation of shared memory intermittently fails with</span>
+    <span class="c1">//          Failed, NCCL error 2 &#39;unhandled system error&#39; - ncclGroupEnd()</span>
+    <span class="c1">//          include/shm.h:26 NCCL WARN Unable to allocate shared memory (4263936 bytes) : Interrupted system call</span>
+    <span class="c1">// This is caused by SIGPROF signals being raised, causing EINTR, which NCCL does not handle.</span>
+    <span class="c1">// Reported as Issue #137 on the NCCL Github, and supposedly fixed for 2.3.7 (to be verified).</span>
+    <span class="c1">// To work around, we disable the SIGPROF signal during NCCL initialization.</span>
+<span class="cp">#define SIG_BAD 27 </span><span class="c1">// SIGPROF</span>
+    <span class="n">BlockSignal</span> <span class="n">blockThread</span><span class="p">(</span><span class="n">SIG_BAD</span><span class="p">,</span> <span class="n">pthread_sigmask</span><span class="p">);</span> <span class="c1">// Note: I don&#39;t know yet which of these two makes the difference.</span>
+    <span class="n">BlockSignal</span> <span class="nf">blockProc</span><span class="p">(</span><span class="n">SIG_BAD</span><span class="p">,</span> <span class="n">sigprocmask</span><span class="p">);</span>       <span class="c1">// So for now just block both.</span>
+
+    <span class="c1">// set up NCCL</span>
+    <span class="c1">// Since we want to use MPI, we cannot use NCCL&#39;s handy convenience function. Instead, we must go the laborious route.</span>
+    <span class="c1">// cf. https://docs.nvidia.com/deeplearning/sdk/nccl-developer-guide/index.html#multidevprothrd</span>
+
+    <span class="c1">// generate NCCL unique ID at one process and broadcast to all</span>
+    <span class="n">ncclUniqueId</span> <span class="n">uniqueId</span> <span class="o">=</span> <span class="p">{</span> <span class="mi">0</span> <span class="p">};</span>
+    <span class="k">if</span> <span class="p">(</span><span class="o">!</span><span class="n">mpi_</span> <span class="o">||</span> <span class="n">mpi</span><span class="o">-&gt;</span><span class="n">myMPIRank</span><span class="p">()</span> <span class="o">==</span> <span class="mi">0</span><span class="p">)</span>
+      <span class="n">NCCL_CHECK</span><span class="p">(</span><span class="n">ncclGetUniqueId</span><span class="p">(</span><span class="o">&amp;</span><span class="n">uniqueId</span><span class="p">));</span>
+
+    <span class="k">if</span> <span class="p">(</span><span class="n">mpi_</span><span class="p">)</span> <span class="p">{</span>
+      <span class="k">static_assert</span><span class="p">(</span><span class="k">sizeof</span><span class="p">(</span><span class="n">uniqueId</span><span class="p">)</span> <span class="o">==</span> <span class="n">NCCL_UNIQUE_ID_BYTES</span><span class="p">,</span> <span class="s">&quot;wrong NCCL_UNIQUE_ID_BYTES??&quot;</span><span class="p">);</span> <span class="c1">// (this value is used in NVidia examples)</span>
+      <span class="n">mpi_</span><span class="o">-&gt;</span><span class="n">bCast</span><span class="p">(</span><span class="o">&amp;</span><span class="n">uniqueId</span><span class="p">,</span> <span class="k">sizeof</span><span class="p">(</span><span class="n">uniqueId</span><span class="p">),</span> <span class="n">MPI_BYTE</span><span class="p">,</span> <span class="mi">0</span><span class="p">);</span>
+    <span class="p">}</span>
+
+    <span class="n">groupStart</span><span class="p">();</span>
+    <span class="k">for</span> <span class="p">(</span><span class="kt">int</span> <span class="n">localDeviceIndex</span> <span class="o">=</span> <span class="mi">0</span><span class="p">;</span> <span class="n">localDeviceIndex</span> <span class="o">&lt;</span> <span class="n">devices_</span><span class="p">.</span><span class="n">size</span><span class="p">();</span> <span class="n">localDeviceIndex</span><span class="o">++</span><span class="p">)</span> <span class="p">{</span>
+      <span class="n">CUDA_CHECK</span><span class="p">(</span><span class="n">cudaSetDevice</span><span class="p">(</span><span class="n">devices_</span><span class="p">[</span><span class="n">localDeviceIndex</span><span class="p">]));</span>
+      <span class="n">NCCL_CHECK</span><span class="p">(</span><span class="n">ncclCommInitRank</span><span class="p">(</span><span class="o">&amp;</span><span class="n">comms_</span><span class="p">[</span><span class="n">localDeviceIndex</span><span class="p">],</span> <span class="n">numNcclRanks</span><span class="p">(),</span> <span class="n">uniqueId</span><span class="p">,</span> <span class="n">myNcclRank</span><span class="p">(</span><span class="n">localDeviceIndex</span><span class="p">)));</span>
+    <span class="p">}</span>
+    <span class="n">groupEnd</span><span class="p">();</span>
+
+    <span class="n">mpiBarrier</span><span class="p">();</span> <span class="c1">// (synchronize the log messages)</span>
+    <span class="n">LOG</span><span class="p">(</span><span class="n">info</span><span class="p">,</span> <span class="s">&quot;[comm] NCCLCommunicator constructed successfully&quot;</span><span class="p">);</span>
+    <span class="n">mpiBarrier</span><span class="p">();</span> <span class="c1">// (synchronize the log messages)</span>
+  <span class="p">}</span>
+
+  <span class="o">~</span><span class="n">NCCLCommunicator</span><span class="p">()</span> <span class="k">override</span> <span class="p">{</span>
+    <span class="k">for</span><span class="p">(</span><span class="kt">int</span> <span class="n">i</span> <span class="o">=</span> <span class="mi">0</span><span class="p">;</span> <span class="n">i</span> <span class="o">&lt;</span> <span class="n">devices_</span><span class="p">.</span><span class="n">size</span><span class="p">();</span> <span class="o">++</span><span class="n">i</span><span class="p">)</span> <span class="p">{</span>
+      <span class="n">cudaSetDevice</span><span class="p">(</span><span class="n">devices_</span><span class="p">[</span><span class="n">i</span><span class="p">]);</span>
+      <span class="n">cudaStreamDestroy</span><span class="p">(</span><span class="n">streams_</span><span class="p">[</span><span class="n">i</span><span class="p">]);</span>
+      <span class="n">ncclCommDestroy</span><span class="p">(</span><span class="n">comms_</span><span class="p">[</span><span class="n">i</span><span class="p">]);</span>
+    <span class="p">}</span>
+  <span class="p">}</span>
+
+  <span class="kt">void</span> <span class="n">foreach</span><span class="p">(</span><span class="k">const</span> <span class="n">ForeachFunc</span><span class="o">&amp;</span> <span class="n">func</span><span class="p">,</span> <span class="kt">bool</span> <span class="n">parallel</span> <span class="o">=</span> <span class="nb">true</span><span class="p">)</span> <span class="k">const</span> <span class="k">override</span> <span class="p">{</span>
+    <span class="n">parallel</span> <span class="o">&amp;=</span> <span class="n">graphs_</span><span class="p">.</span><span class="n">size</span><span class="p">()</span> <span class="o">&gt;</span> <span class="mi">1</span><span class="p">;</span>
+
+    <span class="k">for</span><span class="p">(</span><span class="kt">size_t</span> <span class="n">i</span> <span class="o">=</span> <span class="mi">0</span><span class="p">;</span> <span class="n">i</span> <span class="o">&lt;</span> <span class="n">graphs_</span><span class="p">.</span><span class="n">size</span><span class="p">();</span> <span class="o">++</span><span class="n">i</span><span class="p">)</span> <span class="p">{</span>
+      <span class="kt">size_t</span> <span class="n">begin</span><span class="p">,</span> <span class="n">end</span><span class="p">;</span> <span class="n">std</span><span class="o">::</span><span class="n">tie</span>
+      <span class="p">(</span><span class="n">begin</span><span class="p">,</span> <span class="n">end</span><span class="p">)</span> <span class="o">=</span> <span class="n">localShardRange</span><span class="p">(</span><span class="n">i</span><span class="p">);</span>
+      <span class="k">if</span> <span class="p">(</span><span class="n">parallel</span><span class="p">)</span>
+        <span class="n">threadResults_</span><span class="p">[</span><span class="n">i</span><span class="p">]</span> <span class="o">=</span> <span class="n">threadPool_</span><span class="p">.</span><span class="n">enqueue</span><span class="p">(</span><span class="n">func</span><span class="p">,</span> <span class="n">i</span><span class="p">,</span> <span class="n">begin</span><span class="p">,</span> <span class="n">end</span><span class="p">);</span>
+      <span class="k">else</span>
+        <span class="nf">func</span><span class="p">(</span><span class="n">i</span><span class="p">,</span> <span class="n">begin</span><span class="p">,</span> <span class="n">end</span><span class="p">);</span>
+    <span class="p">}</span>
+    <span class="k">if</span> <span class="p">(</span><span class="n">parallel</span><span class="p">)</span>
+      <span class="k">for</span><span class="p">(</span><span class="kt">size_t</span> <span class="n">i</span> <span class="o">=</span> <span class="mi">0</span><span class="p">;</span> <span class="n">i</span> <span class="o">&lt;</span> <span class="n">graphs_</span><span class="p">.</span><span class="n">size</span><span class="p">();</span> <span class="o">++</span><span class="n">i</span><span class="p">)</span>
+        <span class="n">threadResults_</span><span class="p">[</span><span class="n">i</span><span class="p">].</span><span class="n">wait</span><span class="p">();</span>
+  <span class="p">}</span>
+
+  <span class="kt">void</span> <span class="n">scatterReduceAndResetGrads</span><span class="p">()</span> <span class="k">const</span> <span class="k">override</span> <span class="p">{</span>
+    <span class="n">synchronizeAllOnNullStream</span><span class="p">();</span>
+
+    <span class="n">groupStart</span><span class="p">();</span>
+    <span class="k">for</span><span class="p">(</span><span class="kt">int</span> <span class="n">i</span> <span class="o">=</span> <span class="mi">0</span><span class="p">;</span> <span class="n">i</span> <span class="o">&lt;</span> <span class="n">graphs_</span><span class="p">.</span><span class="n">size</span><span class="p">();</span> <span class="o">++</span><span class="n">i</span><span class="p">)</span> <span class="p">{</span>
+      <span class="kt">size_t</span> <span class="n">begin</span><span class="p">,</span> <span class="n">end</span><span class="p">;</span> <span class="n">std</span><span class="o">::</span><span class="n">tie</span>
+      <span class="p">(</span><span class="n">begin</span><span class="p">,</span> <span class="n">end</span><span class="p">)</span> <span class="o">=</span> <span class="n">localShardRange</span><span class="p">(</span><span class="n">i</span><span class="p">);</span>
+
+      <span class="k">auto</span> <span class="n">grads</span> <span class="o">=</span> <span class="n">graphs_</span><span class="p">[</span><span class="n">i</span><span class="p">]</span><span class="o">-&gt;</span><span class="n">params</span><span class="p">()</span><span class="o">-&gt;</span><span class="n">grads</span><span class="p">();</span>
+      <span class="k">const</span> <span class="k">auto</span><span class="o">*</span> <span class="n">sendbuf</span> <span class="o">=</span> <span class="n">grads</span><span class="o">-&gt;</span><span class="n">data</span><span class="p">();</span>
+      <span class="k">auto</span><span class="o">*</span>       <span class="n">recvbuf</span> <span class="o">=</span> <span class="n">grads</span><span class="o">-&gt;</span><span class="n">subtensor</span><span class="p">(</span><span class="n">begin</span><span class="p">,</span> <span class="n">end</span><span class="o">-</span><span class="n">begin</span><span class="p">)</span><span class="o">-&gt;</span><span class="n">data</span><span class="p">();</span>
+      <span class="kt">size_t</span>      <span class="n">bufsize</span> <span class="o">=</span> <span class="n">shardSize</span><span class="p">();</span>
+      <span class="n">ABORT_IF</span><span class="p">(</span><span class="n">grads</span><span class="o">-&gt;</span><span class="n">subtensor</span><span class="p">(</span><span class="n">begin</span><span class="p">,</span> <span class="n">end</span><span class="o">-</span><span class="n">begin</span><span class="p">)</span><span class="o">-&gt;</span><span class="n">size</span><span class="p">()</span> <span class="o">!=</span> <span class="n">bufsize</span><span class="p">,</span> <span class="s">&quot;unexpected subtensor size??&quot;</span><span class="p">);</span>
+
+      <span class="n">NCCL_CHECK</span><span class="p">(</span><span class="n">ncclReduceScatter</span><span class="p">(</span><span class="n">sendbuf</span><span class="p">,</span> <span class="n">recvbuf</span><span class="p">,</span> <span class="n">bufsize</span><span class="p">,</span> <span class="n">ncclFloat</span><span class="p">,</span> <span class="n">ncclSum</span><span class="p">,</span> <span class="n">comms_</span><span class="p">[</span><span class="n">i</span><span class="p">],</span> <span class="n">streams_</span><span class="p">[</span><span class="n">i</span><span class="p">]));</span>
+    <span class="p">}</span>
+    <span class="n">groupEnd</span><span class="p">();</span>
+    <span class="n">synchronizeAll</span><span class="p">();</span>
+
+    <span class="c1">// reset gradients</span>
+    <span class="c1">// In the future, we can keep quantization residuals here straight in the grads themselves.</span>
+    <span class="k">auto</span> <span class="n">resetGrads</span> <span class="o">=</span> <span class="p">[</span><span class="o">&amp;</span><span class="p">](</span><span class="kt">size_t</span> <span class="n">i</span><span class="p">,</span> <span class="kt">size_t</span> <span class="n">begin</span><span class="p">,</span> <span class="kt">size_t</span> <span class="n">end</span><span class="p">)</span> <span class="p">{</span>
+      <span class="k">auto</span> <span class="n">grads</span> <span class="o">=</span> <span class="n">graphs_</span><span class="p">[</span><span class="n">i</span><span class="p">]</span><span class="o">-&gt;</span><span class="n">params</span><span class="p">()</span><span class="o">-&gt;</span><span class="n">grads</span><span class="p">();</span>
+      <span class="k">auto</span> <span class="n">size</span> <span class="o">=</span> <span class="n">grads</span><span class="o">-&gt;</span><span class="n">size</span><span class="p">();</span>
+      <span class="c1">// reset everything outside the shard that we reduce in</span>
+      <span class="k">if</span> <span class="p">(</span><span class="n">begin</span> <span class="o">&gt;</span> <span class="mi">0</span><span class="p">)</span>
+        <span class="n">grads</span><span class="o">-&gt;</span><span class="n">subtensor</span><span class="p">(</span><span class="mi">0</span><span class="p">,</span> <span class="n">begin</span><span class="p">)</span><span class="o">-&gt;</span><span class="n">set</span><span class="p">(</span><span class="mf">0.f</span><span class="p">);</span>
+      <span class="k">if</span> <span class="p">(</span><span class="n">end</span> <span class="o">&lt;</span> <span class="n">size</span><span class="p">)</span>
+        <span class="n">grads</span><span class="o">-&gt;</span><span class="n">subtensor</span><span class="p">(</span><span class="n">end</span><span class="p">,</span> <span class="n">size</span> <span class="o">-</span> <span class="n">end</span><span class="p">)</span><span class="o">-&gt;</span><span class="n">set</span><span class="p">(</span><span class="mf">0.f</span><span class="p">);</span>
+    <span class="p">};</span>
+    <span class="n">foreach</span><span class="p">(</span><span class="n">resetGrads</span><span class="p">);</span>
+  <span class="p">}</span>
+
+  <span class="c1">// This distributes all 64 model shards to all 64 GPUs.</span>
+  <span class="c1">// @TODO: For unknown reasons, this takes longer than any other operation incl. scatterReduceAndResetGrads().</span>
+  <span class="c1">//        But both should have the same number of data transfers of the same size.</span>
+  <span class="kt">void</span> <span class="n">allGatherParams</span><span class="p">()</span> <span class="k">const</span> <span class="k">override</span> <span class="p">{</span>
+    <span class="n">synchronizeAllOnNullStream</span><span class="p">();</span>
+
+    <span class="n">groupStart</span><span class="p">();</span>
+    <span class="k">for</span><span class="p">(</span><span class="kt">int</span> <span class="n">i</span> <span class="o">=</span> <span class="mi">0</span><span class="p">;</span> <span class="n">i</span> <span class="o">&lt;</span> <span class="n">graphs_</span><span class="p">.</span><span class="n">size</span><span class="p">();</span> <span class="o">++</span><span class="n">i</span><span class="p">)</span> <span class="p">{</span>
+      <span class="kt">size_t</span> <span class="n">begin</span><span class="p">,</span> <span class="n">end</span><span class="p">;</span> <span class="n">std</span><span class="o">::</span><span class="n">tie</span>
+      <span class="p">(</span><span class="n">begin</span><span class="p">,</span> <span class="n">end</span><span class="p">)</span> <span class="o">=</span> <span class="n">localShardRange</span><span class="p">(</span><span class="n">i</span><span class="p">);</span>
+
+      <span class="k">auto</span> <span class="n">vals</span> <span class="o">=</span> <span class="n">graphs_</span><span class="p">[</span><span class="n">i</span><span class="p">]</span><span class="o">-&gt;</span><span class="n">params</span><span class="p">()</span><span class="o">-&gt;</span><span class="n">vals</span><span class="p">();</span>
+      <span class="k">const</span> <span class="k">auto</span><span class="o">*</span> <span class="n">sendbuf</span> <span class="o">=</span> <span class="n">vals</span><span class="o">-&gt;</span><span class="n">subtensor</span><span class="p">(</span><span class="n">begin</span><span class="p">,</span> <span class="n">end</span><span class="o">-</span><span class="n">begin</span><span class="p">)</span><span class="o">-&gt;</span><span class="n">data</span><span class="p">();</span>
+      <span class="kt">void</span><span class="o">*</span>       <span class="n">recvbuf</span> <span class="o">=</span> <span class="n">vals</span><span class="o">-&gt;</span><span class="n">data</span><span class="p">();</span>
+      <span class="kt">size_t</span>      <span class="n">bufsize</span> <span class="o">=</span> <span class="n">shardSize</span><span class="p">();</span>
+
+      <span class="n">NCCL_CHECK</span><span class="p">(</span><span class="n">ncclAllGather</span><span class="p">(</span><span class="n">sendbuf</span><span class="p">,</span> <span class="n">recvbuf</span><span class="p">,</span> <span class="n">bufsize</span><span class="p">,</span> <span class="n">ncclFloat</span><span class="p">,</span> <span class="n">comms_</span><span class="p">[</span><span class="n">i</span><span class="p">],</span> <span class="n">streams_</span><span class="p">[</span><span class="n">i</span><span class="p">]));</span>
+    <span class="p">}</span>
+    <span class="n">groupEnd</span><span class="p">();</span>
+    <span class="n">synchronizeAll</span><span class="p">();</span>
+  <span class="p">}</span>
+
+  <span class="c1">// swap distributed paramShards with model params()</span>
+  <span class="c1">// It is assumed that all model params() on all devices and MPI processes are identical.</span>
+  <span class="c1">// This is used for the smoothed parameters.</span>
+  <span class="kt">void</span> <span class="n">swapParams</span><span class="p">(</span><span class="k">const</span> <span class="n">std</span><span class="o">::</span><span class="n">vector</span><span class="o">&lt;</span><span class="n">Tensor</span><span class="o">&gt;&amp;</span> <span class="n">distributedParamShards</span><span class="p">)</span> <span class="k">const</span> <span class="k">override</span> <span class="p">{</span>
+    <span class="c1">// get everything onto the CPU</span>
+    <span class="k">auto</span> <span class="n">distributedParams</span> <span class="o">=</span> <span class="n">gatherState</span><span class="p">([</span><span class="o">&amp;</span><span class="p">](</span><span class="kt">size_t</span> <span class="n">localDeviceIndex</span><span class="p">)</span> <span class="p">{</span>
+      <span class="n">std</span><span class="o">::</span><span class="n">vector</span><span class="o">&lt;</span><span class="kt">float</span><span class="o">&gt;</span> <span class="n">tmp</span><span class="p">;</span>
+      <span class="n">distributedParamShards</span><span class="p">[</span><span class="n">localDeviceIndex</span><span class="p">]</span><span class="o">-&gt;</span><span class="n">get</span><span class="p">(</span><span class="n">tmp</span><span class="p">);</span>
+      <span class="k">return</span> <span class="n">tmp</span><span class="p">;</span>
+    <span class="p">});</span>
+    <span class="c1">// Now all MPI processes hold an identical copy of a concatenation of all distributedParamShards[] across local and remote devices.</span>
+    <span class="n">std</span><span class="o">::</span><span class="n">vector</span><span class="o">&lt;</span><span class="kt">float</span><span class="o">&gt;</span> <span class="n">localParams</span><span class="p">;</span>
+    <span class="n">graphs_</span><span class="p">[</span><span class="mi">0</span><span class="p">]</span><span class="o">-&gt;</span><span class="n">params</span><span class="p">()</span><span class="o">-&gt;</span><span class="n">vals</span><span class="p">()</span><span class="o">-&gt;</span><span class="n">get</span><span class="p">(</span><span class="n">localParams</span><span class="p">);</span>
+    <span class="c1">// Now all MPI processes hold an identical copy of params() (remember, we assumed all devices hold the same params()).</span>
+    <span class="n">ABORT_IF</span><span class="p">(</span><span class="n">distributedParams</span><span class="p">.</span><span class="n">size</span><span class="p">()</span> <span class="o">!=</span> <span class="n">localParams</span><span class="p">.</span><span class="n">size</span><span class="p">(),</span> <span class="s">&quot;distributed sharded and local params have different size??&quot;</span><span class="p">);</span>
+
+    <span class="c1">// swap</span>
+    <span class="n">std</span><span class="o">::</span><span class="n">swap</span><span class="p">(</span><span class="n">distributedParams</span><span class="p">,</span> <span class="n">localParams</span><span class="p">);</span>
+
+    <span class="c1">// distribute it back</span>
+    <span class="n">scatterState</span><span class="p">(</span><span class="n">distributedParams</span><span class="p">,</span> <span class="p">[</span><span class="o">&amp;</span><span class="p">](</span><span class="kt">size_t</span> <span class="n">localDeviceIndex</span><span class="p">,</span>
+                                        <span class="n">std</span><span class="o">::</span><span class="n">vector</span><span class="o">&lt;</span><span class="kt">float</span><span class="o">&gt;::</span><span class="n">const_iterator</span> <span class="n">begin</span><span class="p">,</span>
+                                        <span class="n">std</span><span class="o">::</span><span class="n">vector</span><span class="o">&lt;</span><span class="kt">float</span><span class="o">&gt;::</span><span class="n">const_iterator</span> <span class="n">end</span><span class="p">){</span>
+      <span class="n">ABORT_IF</span><span class="p">(</span><span class="n">distributedParamShards</span><span class="p">[</span><span class="n">localDeviceIndex</span><span class="p">]</span><span class="o">-&gt;</span><span class="n">size</span><span class="p">()</span> <span class="o">!=</span> <span class="n">end</span><span class="o">-</span><span class="n">begin</span><span class="p">,</span> <span class="s">&quot;swapParams size mismatch??&quot;</span><span class="p">);</span> <span class="c1">// @TODO: move check to set()</span>
+      <span class="n">distributedParamShards</span><span class="p">[</span><span class="n">localDeviceIndex</span><span class="p">]</span><span class="o">-&gt;</span><span class="n">set</span><span class="p">(</span><span class="n">std</span><span class="o">::</span><span class="n">vector</span><span class="o">&lt;</span><span class="kt">float</span><span class="o">&gt;</span><span class="p">(</span><span class="n">begin</span><span class="p">,</span> <span class="n">end</span><span class="p">));</span> <span class="c1">// @TODO: directly pass iterators to set()</span>
+    <span class="p">});</span>
+    <span class="k">for</span> <span class="p">(</span><span class="k">auto</span><span class="o">&amp;</span> <span class="nl">graph</span> <span class="p">:</span> <span class="n">graphs_</span><span class="p">)</span> <span class="c1">// broadcast to every local graph</span>
+      <span class="n">graph</span><span class="o">-&gt;</span><span class="n">params</span><span class="p">()</span><span class="o">-&gt;</span><span class="n">vals</span><span class="p">()</span><span class="o">-&gt;</span><span class="n">set</span><span class="p">(</span><span class="n">localParams</span><span class="p">);</span>
+  <span class="p">}</span>
+
+  <span class="c1">// Distribute a single CPU-side vector to shards across multiple devices and MPI processes.</span>
+  <span class="c1">// This is used when restoring optimizer state, which is sharded, and as part of swapParams().</span>
+  <span class="c1">// It is assumed that all MPI processes get the same data() passed. Hence, no MPI transfers are needed here.</span>
+  <span class="kt">void</span> <span class="n">scatterState</span><span class="p">(</span><span class="k">const</span> <span class="n">std</span><span class="o">::</span><span class="n">vector</span><span class="o">&lt;</span><span class="kt">float</span><span class="o">&gt;&amp;</span> <span class="n">data</span><span class="p">,</span> <span class="k">const</span> <span class="n">OptimizerBase</span><span class="o">::</span><span class="n">ScatterStateSetFunc</span><span class="o">&amp;</span> <span class="n">setFn</span><span class="p">)</span> <span class="k">const</span> <span class="k">override</span> <span class="p">{</span>
+    <span class="kt">size_t</span> <span class="n">dataSize</span> <span class="o">=</span> <span class="n">data</span><span class="p">.</span><span class="n">size</span><span class="p">();</span>
+    <span class="kt">size_t</span> <span class="n">numShards</span> <span class="o">=</span> <span class="n">numNcclRanks</span><span class="p">();</span>
+    <span class="kt">size_t</span> <span class="n">shardSize</span> <span class="o">=</span> <span class="p">(</span><span class="n">dataSize</span> <span class="o">+</span> <span class="n">numShards</span> <span class="o">-</span> <span class="mi">1</span><span class="p">)</span> <span class="o">/</span> <span class="n">numShards</span><span class="p">;</span>
+    <span class="k">for</span><span class="p">(</span><span class="kt">size_t</span> <span class="n">localDeviceIndex</span> <span class="o">=</span> <span class="mi">0</span><span class="p">;</span> <span class="n">localDeviceIndex</span> <span class="o">&lt;</span> <span class="n">graphs_</span><span class="p">.</span><span class="n">size</span><span class="p">();</span> <span class="n">localDeviceIndex</span><span class="o">++</span><span class="p">)</span> <span class="p">{</span>
+      <span class="c1">// We only slice out data that is kept in our MPI process. Remember that all MPI processes receive the same, complete data.</span>
+      <span class="k">auto</span> <span class="n">ncclRank</span> <span class="o">=</span> <span class="n">myNcclRank</span><span class="p">(</span><span class="n">localDeviceIndex</span><span class="p">);</span>
+      <span class="kt">size_t</span> <span class="n">begin</span> <span class="o">=</span> <span class="n">ncclRank</span> <span class="o">*</span> <span class="n">shardSize</span><span class="p">;</span>
+      <span class="kt">size_t</span> <span class="n">end</span>   <span class="o">=</span> <span class="n">std</span><span class="o">::</span><span class="n">min</span><span class="p">(</span><span class="n">begin</span> <span class="o">+</span> <span class="n">shardSize</span><span class="p">,</span> <span class="n">dataSize</span><span class="p">);</span>
+      <span class="n">setFn</span><span class="p">(</span><span class="n">localDeviceIndex</span><span class="p">,</span> <span class="n">data</span><span class="p">.</span><span class="n">begin</span><span class="p">()</span> <span class="o">+</span> <span class="n">begin</span><span class="p">,</span> <span class="n">data</span><span class="p">.</span><span class="n">begin</span><span class="p">()</span> <span class="o">+</span> <span class="n">end</span><span class="p">);</span>
+    <span class="p">}</span>
+  <span class="p">}</span>
+
+  <span class="c1">// Collect shards across multiple devices and MPI processes in the NCCL configuration into a single CPU-side vector.</span>
+  <span class="c1">// This is used when persisting optimizer state, which is sharded, and as part of swapParams().</span>
+  <span class="n">std</span><span class="o">::</span><span class="n">vector</span><span class="o">&lt;</span><span class="kt">float</span><span class="o">&gt;</span> <span class="n">gatherState</span><span class="p">(</span><span class="k">const</span> <span class="n">OptimizerBase</span><span class="o">::</span><span class="n">GatherStateGetFunc</span><span class="o">&amp;</span> <span class="n">getFn</span><span class="p">)</span> <span class="k">const</span> <span class="k">override</span> <span class="p">{</span>
+    <span class="n">std</span><span class="o">::</span><span class="n">vector</span><span class="o">&lt;</span><span class="kt">float</span><span class="o">&gt;</span> <span class="n">tmp</span><span class="p">;</span> <span class="c1">// (temp buffer used multiple times)</span>
+    <span class="c1">// first, concatenate over all local devices</span>
+    <span class="n">std</span><span class="o">::</span><span class="n">vector</span><span class="o">&lt;</span><span class="kt">float</span><span class="o">&gt;</span> <span class="n">localData</span><span class="p">;</span>
+    <span class="k">for</span><span class="p">(</span><span class="kt">size_t</span> <span class="n">localDeviceIndex</span> <span class="o">=</span> <span class="mi">0</span><span class="p">;</span> <span class="n">localDeviceIndex</span> <span class="o">&lt;</span> <span class="n">graphs_</span><span class="p">.</span><span class="n">size</span><span class="p">();</span> <span class="n">localDeviceIndex</span><span class="o">++</span><span class="p">)</span> <span class="p">{</span>
+      <span class="n">tmp</span> <span class="o">=</span> <span class="n">getFn</span><span class="p">(</span><span class="n">localDeviceIndex</span><span class="p">);</span>
+      <span class="n">localData</span><span class="p">.</span><span class="n">insert</span><span class="p">(</span><span class="n">localData</span><span class="p">.</span><span class="n">end</span><span class="p">(),</span> <span class="n">tmp</span><span class="p">.</span><span class="n">begin</span><span class="p">(),</span> <span class="n">tmp</span><span class="p">.</span><span class="n">end</span><span class="p">());</span>
+    <span class="p">}</span>
+    <span class="c1">// second, concatenate across MPI processes</span>
+    <span class="c1">// Note that all local devices occupy consecutive ncclRanks in order.</span>
+    <span class="n">std</span><span class="o">::</span><span class="n">vector</span><span class="o">&lt;</span><span class="kt">float</span><span class="o">&gt;</span> <span class="n">data</span><span class="p">;</span>
+    <span class="k">if</span> <span class="p">(</span><span class="n">mpi_</span><span class="p">)</span> <span class="p">{</span>
+      <span class="c1">// push one rank&#39;s data at a time using broadcast</span>
+      <span class="k">for</span><span class="p">(</span><span class="kt">size_t</span> <span class="n">mpiRank</span> <span class="o">=</span> <span class="mi">0</span><span class="p">;</span> <span class="n">mpiRank</span> <span class="o">&lt;</span> <span class="n">mpi_</span><span class="o">-&gt;</span><span class="n">numMPIProcesses</span><span class="p">();</span> <span class="n">mpiRank</span><span class="o">++</span><span class="p">)</span> <span class="p">{</span>
+        <span class="c1">// broadcast mpiRank&#39;s localData to all</span>
+        <span class="k">if</span><span class="p">(</span><span class="n">mpiRank</span> <span class="o">==</span> <span class="n">mpi_</span><span class="o">-&gt;</span><span class="n">myMPIRank</span><span class="p">())</span>
+          <span class="n">tmp</span> <span class="o">=</span> <span class="n">localData</span><span class="p">;</span>
+        <span class="n">mpi_</span><span class="o">-&gt;</span><span class="n">bCast</span><span class="p">(</span><span class="n">tmp</span><span class="p">,</span> <span class="cm">/*rootRank=*/</span><span class="n">mpiRank</span><span class="p">);</span>
+        <span class="c1">// now all ranks have the same slice: concatenate (we will end up with the same on all MPI processes)</span>
+        <span class="n">data</span><span class="p">.</span><span class="n">insert</span><span class="p">(</span><span class="n">data</span><span class="p">.</span><span class="n">end</span><span class="p">(),</span> <span class="n">tmp</span><span class="p">.</span><span class="n">begin</span><span class="p">(),</span> <span class="n">tmp</span><span class="p">.</span><span class="n">end</span><span class="p">());</span>
+      <span class="p">}</span>
+    <span class="p">}</span>
+    <span class="k">else</span> <span class="p">{</span> <span class="c1">// no MPI: localData is the complete result already</span>
+      <span class="n">data</span> <span class="o">=</span> <span class="n">std</span><span class="o">::</span><span class="n">move</span><span class="p">(</span><span class="n">localData</span><span class="p">);</span>
+    <span class="p">}</span>
+    <span class="k">return</span> <span class="n">data</span><span class="p">;</span>
+  <span class="p">}</span>
+<span class="p">};</span>
+
+<span class="p">}</span>  <span class="c1">// namespace marian</span>
+</pre></div>
+</div>
+</div>
+
+
+           </div>
+           
+          </div>
+          <footer>
+
+  <hr/>
+
+  <div role="contentinfo">
+    <p>
+        &#169; Copyright 2021, Marian NMT Team.
+
+    </p>
+  </div>
+    
+    
+    
+    Built with <a href="https://www.sphinx-doc.org/">Sphinx</a> using a
+    
+    <a href="https://github.com/readthedocs/sphinx_rtd_theme">theme</a>
+    
+    provided by <a href="https://readthedocs.org">Read the Docs</a>. 
+
+</footer>
+        </div>
+      </div>
+
+    </section>
+
+  </div>
+  
+
+  <script type="text/javascript">
+      jQuery(function () {
+          SphinxRtdTheme.Navigation.enable(true);
+      });
+  </script>
+
+  
+  
+    
+   
+
+</body>
+</html>

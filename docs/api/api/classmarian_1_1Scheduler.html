@@ -1,0 +1,353 @@
+
+
+<!DOCTYPE html>
+<html class="writer-html5" lang="en" >
+<head>
+  <meta charset="utf-8" />
+  
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  
+  <title>Class Scheduler &mdash; Marian NMT v1.10.1 2021-02-23 documentation</title>
+  
+
+  
+  <link rel="stylesheet" href="../_static/css/theme.css" type="text/css" />
+  <link rel="stylesheet" href="../_static/pygments.css" type="text/css" />
+  <link rel="stylesheet" href="../_static/css/custom.css" type="text/css" />
+  <link rel="stylesheet" href="../_static/collapsible-lists/css/tree_view.css" type="text/css" />
+
+  
+  
+
+  
+  
+
+  
+    <link rel="canonical" href="http://marian-nmt.github.io/docs/api/api/classmarian_1_1Scheduler.html" />
+
+  
+  <!--[if lt IE 9]>
+    <script src="../_static/js/html5shiv.min.js"></script>
+  <![endif]-->
+  
+    
+      <script type="text/javascript" id="documentation_options" data-url_root="../" src="../_static/documentation_options.js"></script>
+        <script src="../_static/jquery.js"></script>
+        <script src="../_static/underscore.js"></script>
+        <script src="../_static/doctools.js"></script>
+        <script src="../_static/language_data.js"></script>
+        <script src="../_static/collapsible-lists/js/CollapsibleLists.compressed.js"></script>
+        <script src="../_static/collapsible-lists/js/apply-collapsible-lists.js"></script>
+    
+    <script type="text/javascript" src="../_static/js/theme.js"></script>
+
+    
+    <link rel="index" title="Index" href="../genindex.html" />
+    <link rel="search" title="Search" href="../search.html" />
+    <link rel="next" title="Class ScoreCollector" href="classmarian_1_1ScoreCollector.html" />
+    <link rel="prev" title="Class ScaledMultiRationalLoss" href="classmarian_1_1ScaledMultiRationalLoss.html" /> 
+</head>
+
+<body class="wy-body-for-nav">
+
+   
+  <div class="wy-grid-for-nav">
+    
+    <nav data-toggle="wy-nav-shift" class="wy-nav-side">
+      <div class="wy-side-scroll">
+        <div class="wy-side-nav-search" >
+          
+
+          
+            <a href="../index.html" class="icon icon-home"> Marian NMT
+          
+
+          
+          </a>
+
+          
+            
+            
+              <div class="version">
+                v1.10.1
+              </div>
+            
+          
+
+          
+<div role="search">
+  <form id="rtd-search-form" class="wy-form" action="../search.html" method="get">
+    <input type="text" name="q" placeholder="Search docs" />
+    <input type="hidden" name="check_keywords" value="yes" />
+    <input type="hidden" name="area" value="default" />
+  </form>
+</div>
+
+          
+        </div>
+
+        
+        <div class="wy-menu wy-menu-vertical" data-spy="affix" role="navigation" aria-label="main navigation">
+          
+            
+            
+              
+            
+            
+              <p class="caption"><span class="caption-text">Contents:</span></p>
+<ul>
+<li class="toctree-l1"><a class="reference internal" href="../install.html">Installation</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../graph.html">Expression graphs</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../operators.html">Graph operations</a></li>
+<li class="toctree-l1"><a class="reference internal" href="library_index.html">Library API</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../contributing.html">How to contribute to Marian</a></li>
+</ul>
+
+            
+          
+        </div>
+        
+      </div>
+    </nav>
+
+    <section data-toggle="wy-nav-shift" class="wy-nav-content-wrap">
+
+      
+      <nav class="wy-nav-top" aria-label="top navigation">
+        
+          <i data-toggle="wy-nav-top" class="fa fa-bars"></i>
+          <a href="../index.html">Marian NMT</a>
+        
+      </nav>
+
+
+      <div class="wy-nav-content">
+        
+        <div class="rst-content">
+        
+          
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+<div role="navigation" aria-label="breadcrumbs navigation">
+
+  <ul class="wy-breadcrumbs">
+    
+      <li><a href="../index.html" class="icon icon-home"></a> &raquo;</li>
+        
+          <li><a href="library_index.html">Library API</a> &raquo;</li>
+        
+      <li>Class Scheduler</li>
+    
+    
+      <li class="wy-breadcrumbs-aside">
+        
+          
+            <a href="../_sources/api/classmarian_1_1Scheduler.rst.txt" rel="nofollow"> View page source</a>
+          
+        
+      </li>
+    
+  </ul>
+
+  
+  <hr/>
+</div>
+          <div role="main" class="document" itemscope="itemscope" itemtype="http://schema.org/Article">
+           <div itemprop="articleBody">
+            
+  <div class="section" id="class-scheduler">
+<span id="exhale-class-classmarian-1-1scheduler"></span><h1>Class Scheduler<a class="headerlink" href="#class-scheduler" title="Permalink to this headline">¶</a></h1>
+<ul class="simple">
+<li><p>Defined in <a class="reference internal" href="file_src_training_scheduler.h.html#file-src-training-scheduler-h"><span class="std std-ref">File scheduler.h</span></a></p></li>
+</ul>
+<div class="section" id="inheritance-relationships">
+<h2>Inheritance Relationships<a class="headerlink" href="#inheritance-relationships" title="Permalink to this headline">¶</a></h2>
+<div class="section" id="base-type">
+<h3>Base Type<a class="headerlink" href="#base-type" title="Permalink to this headline">¶</a></h3>
+<ul class="simple">
+<li><p><code class="docutils literal notranslate"><span class="pre">public</span> <span class="pre">marian::TrainingObserver</span></code> (<a class="reference internal" href="classmarian_1_1TrainingObserver.html#exhale-class-classmarian-1-1trainingobserver"><span class="std std-ref">Class TrainingObserver</span></a>)</p></li>
+</ul>
+</div>
+</div>
+<div class="section" id="class-documentation">
+<h2>Class Documentation<a class="headerlink" href="#class-documentation" title="Permalink to this headline">¶</a></h2>
+<dl class="class">
+<dt id="_CPPv4N6marian9SchedulerE">
+<span id="_CPPv3N6marian9SchedulerE"></span><span id="_CPPv2N6marian9SchedulerE"></span><span id="marian::Scheduler"></span><span class="target" id="classmarian_1_1Scheduler"></span><em class="property">class </em><code class="sig-name descname">Scheduler</code> : <em class="property">public</em> marian::<a class="reference internal" href="classmarian_1_1TrainingObserver.html#_CPPv4N6marian16TrainingObserverE" title="marian::TrainingObserver">TrainingObserver</a><a class="headerlink" href="#_CPPv4N6marian9SchedulerE" title="Permalink to this definition">¶</a><br /></dt>
+<dd><div class="breathe-sectiondef docutils container">
+<p class="breathe-sectiondef-title rubric">Public Functions</p>
+<dl class="function">
+<dt id="_CPPv4N6marian9Scheduler9SchedulerE3PtrI7OptionsE3PtrI13TrainingStateE">
+<span id="_CPPv3N6marian9Scheduler9SchedulerE3PtrI7OptionsE3PtrI13TrainingStateE"></span><span id="_CPPv2N6marian9Scheduler9SchedulerE3PtrI7OptionsE3PtrI13TrainingStateE"></span><span id="marian::Scheduler::Scheduler__Ptr:Options:.Ptr:TrainingState:"></span><span class="target" id="classmarian_1_1Scheduler_1a2597d9f679a826e9b2d715342177ff7b"></span><code class="sig-name descname">Scheduler</code><span class="sig-paren">(</span><a class="reference internal" href="typedef_definitions_8h_1ad1a373be43a00ef9ce35666145137b08.html#_CPPv4N6marian3PtrE" title="marian::Ptr">Ptr</a>&lt;<a class="reference internal" href="classmarian_1_1Options.html#_CPPv4N6marian7OptionsE" title="marian::Options">Options</a>&gt; <em>options</em>, <a class="reference internal" href="typedef_definitions_8h_1ad1a373be43a00ef9ce35666145137b08.html#_CPPv4N6marian3PtrE" title="marian::Ptr">Ptr</a>&lt;<a class="reference internal" href="classmarian_1_1TrainingState.html#_CPPv4N6marian13TrainingStateE" title="marian::TrainingState">TrainingState</a>&gt; <em>state</em><span class="sig-paren">)</span><a class="headerlink" href="#_CPPv4N6marian9Scheduler9SchedulerE3PtrI7OptionsE3PtrI13TrainingStateE" title="Permalink to this definition">¶</a><br /></dt>
+<dd></dd></dl>
+
+<dl class="function">
+<dt id="_CPPv4NK6marian9Scheduler22isDynamicMBSizeScalingEv">
+<span id="_CPPv3NK6marian9Scheduler22isDynamicMBSizeScalingEv"></span><span id="_CPPv2NK6marian9Scheduler22isDynamicMBSizeScalingEv"></span><span id="marian::Scheduler::isDynamicMBSizeScalingC"></span><span class="target" id="classmarian_1_1Scheduler_1ae3586715aff504a67894ff8554a8fe88"></span>bool <code class="sig-name descname">isDynamicMBSizeScaling</code><span class="sig-paren">(</span><span class="sig-paren">)</span> <em class="property">const</em><a class="headerlink" href="#_CPPv4NK6marian9Scheduler22isDynamicMBSizeScalingEv" title="Permalink to this definition">¶</a><br /></dt>
+<dd></dd></dl>
+
+<dl class="function">
+<dt id="_CPPv4NK6marian9Scheduler26getDynamicMBSizeMultiplierEv">
+<span id="_CPPv3NK6marian9Scheduler26getDynamicMBSizeMultiplierEv"></span><span id="_CPPv2NK6marian9Scheduler26getDynamicMBSizeMultiplierEv"></span><span id="marian::Scheduler::getDynamicMBSizeMultiplierC"></span><span class="target" id="classmarian_1_1Scheduler_1a2bb24519378a6c7509754de99dfa7be3"></span>double <code class="sig-name descname">getDynamicMBSizeMultiplier</code><span class="sig-paren">(</span><span class="sig-paren">)</span> <em class="property">const</em><a class="headerlink" href="#_CPPv4NK6marian9Scheduler26getDynamicMBSizeMultiplierEv" title="Permalink to this definition">¶</a><br /></dt>
+<dd></dd></dl>
+
+<dl class="function">
+<dt id="_CPPv4N6marian9Scheduler9keepGoingEv">
+<span id="_CPPv3N6marian9Scheduler9keepGoingEv"></span><span id="_CPPv2N6marian9Scheduler9keepGoingEv"></span><span id="marian::Scheduler::keepGoing"></span><span class="target" id="classmarian_1_1Scheduler_1aba753b2a2b38fccb207739cc94a71181"></span>bool <code class="sig-name descname">keepGoing</code><span class="sig-paren">(</span><span class="sig-paren">)</span><a class="headerlink" href="#_CPPv4N6marian9Scheduler9keepGoingEv" title="Permalink to this definition">¶</a><br /></dt>
+<dd></dd></dl>
+
+<dl class="function">
+<dt id="_CPPv4N6marian9Scheduler13increaseEpochEv">
+<span id="_CPPv3N6marian9Scheduler13increaseEpochEv"></span><span id="_CPPv2N6marian9Scheduler13increaseEpochEv"></span><span id="marian::Scheduler::increaseEpoch"></span><span class="target" id="classmarian_1_1Scheduler_1a3d226accdec11e683d2492851764b1cc"></span>void <code class="sig-name descname">increaseEpoch</code><span class="sig-paren">(</span><span class="sig-paren">)</span><a class="headerlink" href="#_CPPv4N6marian9Scheduler13increaseEpochEv" title="Permalink to this definition">¶</a><br /></dt>
+<dd></dd></dl>
+
+<dl class="function">
+<dt id="_CPPv4N6marian9Scheduler7startedEv">
+<span id="_CPPv3N6marian9Scheduler7startedEv"></span><span id="_CPPv2N6marian9Scheduler7startedEv"></span><span id="marian::Scheduler::started"></span><span class="target" id="classmarian_1_1Scheduler_1a516fbc6ab2f006e7e5469d021c370778"></span>void <code class="sig-name descname">started</code><span class="sig-paren">(</span><span class="sig-paren">)</span><a class="headerlink" href="#_CPPv4N6marian9Scheduler7startedEv" title="Permalink to this definition">¶</a><br /></dt>
+<dd></dd></dl>
+
+<dl class="function">
+<dt id="_CPPv4N6marian9Scheduler8finishedEv">
+<span id="_CPPv3N6marian9Scheduler8finishedEv"></span><span id="_CPPv2N6marian9Scheduler8finishedEv"></span><span id="marian::Scheduler::finished"></span><span class="target" id="classmarian_1_1Scheduler_1ae108fdcd48ee3477b2e200cc60c3a7fa"></span>void <code class="sig-name descname">finished</code><span class="sig-paren">(</span><span class="sig-paren">)</span><a class="headerlink" href="#_CPPv4N6marian9Scheduler8finishedEv" title="Permalink to this definition">¶</a><br /></dt>
+<dd></dd></dl>
+
+<dl class="function">
+<dt id="_CPPv4N6marian9Scheduler12addValidatorE3PtrI13ValidatorBaseE">
+<span id="_CPPv3N6marian9Scheduler12addValidatorE3PtrI13ValidatorBaseE"></span><span id="_CPPv2N6marian9Scheduler12addValidatorE3PtrI13ValidatorBaseE"></span><span id="marian::Scheduler::addValidator__Ptr:ValidatorBase:"></span><span class="target" id="classmarian_1_1Scheduler_1a67e25eca520c62c2c1b3dc926693a259"></span>void <code class="sig-name descname">addValidator</code><span class="sig-paren">(</span><a class="reference internal" href="typedef_definitions_8h_1ad1a373be43a00ef9ce35666145137b08.html#_CPPv4N6marian3PtrE" title="marian::Ptr">Ptr</a>&lt;<a class="reference internal" href="classmarian_1_1ValidatorBase.html#_CPPv4N6marian13ValidatorBaseE" title="marian::ValidatorBase">ValidatorBase</a>&gt; <em>validator</em><span class="sig-paren">)</span><a class="headerlink" href="#_CPPv4N6marian9Scheduler12addValidatorE3PtrI13ValidatorBaseE" title="Permalink to this definition">¶</a><br /></dt>
+<dd></dd></dl>
+
+<dl class="function">
+<dt id="_CPPv4N6marian9Scheduler10validatingEv">
+<span id="_CPPv3N6marian9Scheduler10validatingEv"></span><span id="_CPPv2N6marian9Scheduler10validatingEv"></span><span id="marian::Scheduler::validating"></span><span class="target" id="classmarian_1_1Scheduler_1a07c115fe1d296850be14476c7aff3f57"></span>bool <code class="sig-name descname">validating</code><span class="sig-paren">(</span><span class="sig-paren">)</span><a class="headerlink" href="#_CPPv4N6marian9Scheduler10validatingEv" title="Permalink to this definition">¶</a><br /></dt>
+<dd></dd></dl>
+
+<dl class="function">
+<dt id="_CPPv4N6marian9Scheduler6savingEv">
+<span id="_CPPv3N6marian9Scheduler6savingEv"></span><span id="_CPPv2N6marian9Scheduler6savingEv"></span><span id="marian::Scheduler::saving"></span><span class="target" id="classmarian_1_1Scheduler_1a58636754a78fd834d780844561cb3efe"></span>bool <code class="sig-name descname">saving</code><span class="sig-paren">(</span><span class="sig-paren">)</span><a class="headerlink" href="#_CPPv4N6marian9Scheduler6savingEv" title="Permalink to this definition">¶</a><br /></dt>
+<dd></dd></dl>
+
+<dl class="function">
+<dt id="_CPPv4N6marian9Scheduler8validateERKNSt6vectorI3PtrI15ExpressionGraphEEEb">
+<span id="_CPPv3N6marian9Scheduler8validateERKNSt6vectorI3PtrI15ExpressionGraphEEEb"></span><span id="_CPPv2N6marian9Scheduler8validateERKNSt6vectorI3PtrI15ExpressionGraphEEEb"></span><span id="marian::Scheduler::validate__std::vector:Ptr:ExpressionGraph::CR.b"></span><span class="target" id="classmarian_1_1Scheduler_1aa40cce7301e88c520999e98a71ba17dc"></span>void <code class="sig-name descname">validate</code><span class="sig-paren">(</span><em class="property">const</em> <a class="reference internal" href="function_expression__operators_8cpp_1af4e69a5f7167b63522135a1f6b8a5dd8.html#_CPPv4N6marianStE4Expri" title="marian::std">std</a>::vector&lt;<a class="reference internal" href="typedef_definitions_8h_1ad1a373be43a00ef9ce35666145137b08.html#_CPPv4N6marian3PtrE" title="marian::Ptr">Ptr</a>&lt;<a class="reference internal" href="classmarian_1_1ExpressionGraph.html#_CPPv4N6marian15ExpressionGraphE" title="marian::ExpressionGraph">ExpressionGraph</a>&gt;&gt; &amp;<em>graphs</em>, bool <em>isFinal</em> = false<span class="sig-paren">)</span><a class="headerlink" href="#_CPPv4N6marian9Scheduler8validateERKNSt6vectorI3PtrI15ExpressionGraphEEEb" title="Permalink to this definition">¶</a><br /></dt>
+<dd></dd></dl>
+
+<dl class="function">
+<dt id="_CPPv4N6marian9Scheduler7stalledEv">
+<span id="_CPPv3N6marian9Scheduler7stalledEv"></span><span id="_CPPv2N6marian9Scheduler7stalledEv"></span><span id="marian::Scheduler::stalled"></span><span class="target" id="classmarian_1_1Scheduler_1a6fd50a773a825e32a874d733408b2350"></span>size_t <code class="sig-name descname">stalled</code><span class="sig-paren">(</span><span class="sig-paren">)</span><a class="headerlink" href="#_CPPv4N6marian9Scheduler7stalledEv" title="Permalink to this definition">¶</a><br /></dt>
+<dd></dd></dl>
+
+<dl class="function">
+<dt id="_CPPv4N6marian9Scheduler6updateE10StaticLoss3PtrIN4data5BatchEE">
+<span id="_CPPv3N6marian9Scheduler6updateE10StaticLoss3PtrIN4data5BatchEE"></span><span id="_CPPv2N6marian9Scheduler6updateE10StaticLoss3PtrIN4data5BatchEE"></span><span id="marian::Scheduler::update__StaticLoss.Ptr:data::Batch:"></span><span class="target" id="classmarian_1_1Scheduler_1ab330ce7368c947e7f7a2b842a78e854d"></span>void <code class="sig-name descname">update</code><span class="sig-paren">(</span><a class="reference internal" href="structmarian_1_1StaticLoss.html#_CPPv4N6marian10StaticLossE" title="marian::StaticLoss">StaticLoss</a> <em>rationalLoss</em>, <a class="reference internal" href="typedef_definitions_8h_1ad1a373be43a00ef9ce35666145137b08.html#_CPPv4N6marian3PtrE" title="marian::Ptr">Ptr</a>&lt;data::<a class="reference internal" href="classmarian_1_1data_1_1Batch.html#_CPPv4N6marian4data5BatchE" title="marian::data::Batch">Batch</a>&gt; <em>batch</em><span class="sig-paren">)</span><a class="headerlink" href="#_CPPv4N6marian9Scheduler6updateE10StaticLoss3PtrIN4data5BatchEE" title="Permalink to this definition">¶</a><br /></dt>
+<dd></dd></dl>
+
+<dl class="function">
+<dt id="_CPPv4N6marian9Scheduler6updateE10StaticLoss6size_t6size_t6size_t3PtrI11IMPIWrapperE">
+<span id="_CPPv3N6marian9Scheduler6updateE10StaticLoss6size_t6size_t6size_t3PtrI11IMPIWrapperE"></span><span id="_CPPv2N6marian9Scheduler6updateE10StaticLoss6size_t6size_t6size_t3PtrI11IMPIWrapperE"></span><span id="marian::Scheduler::update__StaticLoss.s.s.s.Ptr:IMPIWrapper:"></span><span class="target" id="classmarian_1_1Scheduler_1a533968e41e0abda2f4029e499ab23f94"></span>void <code class="sig-name descname">update</code><span class="sig-paren">(</span><a class="reference internal" href="structmarian_1_1StaticLoss.html#_CPPv4N6marian10StaticLossE" title="marian::StaticLoss">StaticLoss</a> <em>rationalLoss</em>, size_t <em>numReadBatches</em>, size_t <em>batchSize</em>, size_t <em>batchLabels</em>, <a class="reference internal" href="typedef_definitions_8h_1ad1a373be43a00ef9ce35666145137b08.html#_CPPv4N6marian3PtrE" title="marian::Ptr">Ptr</a>&lt;IMPIWrapper&gt; <em>mpi</em> = nullptr<span class="sig-paren">)</span><a class="headerlink" href="#_CPPv4N6marian9Scheduler6updateE10StaticLoss6size_t6size_t6size_t3PtrI11IMPIWrapperE" title="Permalink to this definition">¶</a><br /></dt>
+<dd></dd></dl>
+
+<dl class="function">
+<dt id="_CPPv4N6marian9Scheduler4loadERKNSt6stringE">
+<span id="_CPPv3N6marian9Scheduler4loadERKNSt6stringE"></span><span id="_CPPv2N6marian9Scheduler4loadERKNSt6stringE"></span><span id="marian::Scheduler::load__ssCR"></span><span class="target" id="classmarian_1_1Scheduler_1a5f5b77ce1aa5241a9a3d7d07e76b571a"></span>void <code class="sig-name descname">load</code><span class="sig-paren">(</span><em class="property">const</em> <a class="reference internal" href="function_expression__operators_8cpp_1af4e69a5f7167b63522135a1f6b8a5dd8.html#_CPPv4N6marianStE4Expri" title="marian::std">std</a>::string &amp;<em>name</em><span class="sig-paren">)</span><a class="headerlink" href="#_CPPv4N6marian9Scheduler4loadERKNSt6stringE" title="Permalink to this definition">¶</a><br /></dt>
+<dd></dd></dl>
+
+<dl class="function">
+<dt id="_CPPv4N6marian9Scheduler4saveERKNSt6stringE">
+<span id="_CPPv3N6marian9Scheduler4saveERKNSt6stringE"></span><span id="_CPPv2N6marian9Scheduler4saveERKNSt6stringE"></span><span id="marian::Scheduler::save__ssCR"></span><span class="target" id="classmarian_1_1Scheduler_1a9646b51bddc9bd5a244c4636e1c14dbe"></span>void <code class="sig-name descname">save</code><span class="sig-paren">(</span><em class="property">const</em> <a class="reference internal" href="function_expression__operators_8cpp_1af4e69a5f7167b63522135a1f6b8a5dd8.html#_CPPv4N6marianStE4Expri" title="marian::std">std</a>::string &amp;<em>name</em><span class="sig-paren">)</span><a class="headerlink" href="#_CPPv4N6marian9Scheduler4saveERKNSt6stringE" title="Permalink to this definition">¶</a><br /></dt>
+<dd></dd></dl>
+
+<dl class="function">
+<dt id="_CPPv4N6marian9Scheduler15numberOfBatchesEv">
+<span id="_CPPv3N6marian9Scheduler15numberOfBatchesEv"></span><span id="_CPPv2N6marian9Scheduler15numberOfBatchesEv"></span><span id="marian::Scheduler::numberOfBatches"></span><span class="target" id="classmarian_1_1Scheduler_1a256331036de2e7f3f3c0fe07f1109f8f"></span>size_t <code class="sig-name descname">numberOfBatches</code><span class="sig-paren">(</span><span class="sig-paren">)</span><a class="headerlink" href="#_CPPv4N6marian9Scheduler15numberOfBatchesEv" title="Permalink to this definition">¶</a><br /></dt>
+<dd></dd></dl>
+
+<dl class="function">
+<dt id="_CPPv4N6marian9Scheduler24registerTrainingObserverE3PtrI16TrainingObserverE">
+<span id="_CPPv3N6marian9Scheduler24registerTrainingObserverE3PtrI16TrainingObserverE"></span><span id="_CPPv2N6marian9Scheduler24registerTrainingObserverE3PtrI16TrainingObserverE"></span><span id="marian::Scheduler::registerTrainingObserver__Ptr:TrainingObserver:"></span><span class="target" id="classmarian_1_1Scheduler_1a0ec85a3a370133c0fdbdd7e36f81b7d8"></span>void <code class="sig-name descname">registerTrainingObserver</code><span class="sig-paren">(</span><a class="reference internal" href="typedef_definitions_8h_1ad1a373be43a00ef9ce35666145137b08.html#_CPPv4N6marian3PtrE" title="marian::Ptr">Ptr</a>&lt;<a class="reference internal" href="classmarian_1_1TrainingObserver.html#_CPPv4N6marian16TrainingObserverE" title="marian::TrainingObserver">TrainingObserver</a>&gt; <em>observer</em><span class="sig-paren">)</span><a class="headerlink" href="#_CPPv4N6marian9Scheduler24registerTrainingObserverE3PtrI16TrainingObserverE" title="Permalink to this definition">¶</a><br /></dt>
+<dd></dd></dl>
+
+<dl class="function">
+<dt id="_CPPv4N6marian9Scheduler13actAfterEpochER13TrainingState">
+<span id="_CPPv3N6marian9Scheduler13actAfterEpochER13TrainingState"></span><span id="_CPPv2N6marian9Scheduler13actAfterEpochER13TrainingState"></span><span id="marian::Scheduler::actAfterEpoch__TrainingStateR"></span><span class="target" id="classmarian_1_1Scheduler_1aad1734dcd8640b9000e01a0f57a9d373"></span>void <code class="sig-name descname">actAfterEpoch</code><span class="sig-paren">(</span><a class="reference internal" href="classmarian_1_1TrainingState.html#_CPPv4N6marian13TrainingStateE" title="marian::TrainingState">TrainingState</a> &amp;<em>state</em><span class="sig-paren">)</span><a class="headerlink" href="#_CPPv4N6marian9Scheduler13actAfterEpochER13TrainingState" title="Permalink to this definition">¶</a><br /></dt>
+<dd></dd></dl>
+
+<dl class="function">
+<dt id="_CPPv4N6marian9Scheduler15actAfterBatchesER13TrainingState">
+<span id="_CPPv3N6marian9Scheduler15actAfterBatchesER13TrainingState"></span><span id="_CPPv2N6marian9Scheduler15actAfterBatchesER13TrainingState"></span><span id="marian::Scheduler::actAfterBatches__TrainingStateR"></span><span class="target" id="classmarian_1_1Scheduler_1a6d2213d1b3a0941387620200ed06dad1"></span>void <code class="sig-name descname">actAfterBatches</code><span class="sig-paren">(</span><a class="reference internal" href="classmarian_1_1TrainingState.html#_CPPv4N6marian13TrainingStateE" title="marian::TrainingState">TrainingState</a> &amp;<em>state</em><span class="sig-paren">)</span><a class="headerlink" href="#_CPPv4N6marian9Scheduler15actAfterBatchesER13TrainingState" title="Permalink to this definition">¶</a><br /></dt>
+<dd></dd></dl>
+
+<dl class="function">
+<dt id="_CPPv4N6marian9Scheduler15actAfterStalledER13TrainingState">
+<span id="_CPPv3N6marian9Scheduler15actAfterStalledER13TrainingState"></span><span id="_CPPv2N6marian9Scheduler15actAfterStalledER13TrainingState"></span><span id="marian::Scheduler::actAfterStalled__TrainingStateR"></span><span class="target" id="classmarian_1_1Scheduler_1a986c5eedaa6ed9a74f114f87144a9beb"></span>void <code class="sig-name descname">actAfterStalled</code><span class="sig-paren">(</span><a class="reference internal" href="classmarian_1_1TrainingState.html#_CPPv4N6marian13TrainingStateE" title="marian::TrainingState">TrainingState</a> &amp;<em>state</em><span class="sig-paren">)</span><a class="headerlink" href="#_CPPv4N6marian9Scheduler15actAfterStalledER13TrainingState" title="Permalink to this definition">¶</a><br /></dt>
+<dd></dd></dl>
+
+</div>
+</dd></dl>
+
+</div>
+</div>
+
+
+           </div>
+           
+          </div>
+          <footer>
+    <div class="rst-footer-buttons" role="navigation" aria-label="footer navigation">
+        <a href="classmarian_1_1ScoreCollector.html" class="btn btn-neutral float-right" title="Class ScoreCollector" accesskey="n" rel="next">Next <span class="fa fa-arrow-circle-right" aria-hidden="true"></span></a>
+        <a href="classmarian_1_1ScaledMultiRationalLoss.html" class="btn btn-neutral float-left" title="Class ScaledMultiRationalLoss" accesskey="p" rel="prev"><span class="fa fa-arrow-circle-left" aria-hidden="true"></span> Previous</a>
+    </div>
+
+  <hr/>
+
+  <div role="contentinfo">
+    <p>
+        &#169; Copyright 2021, Marian NMT Team.
+
+    </p>
+  </div>
+    
+    
+    
+    Built with <a href="https://www.sphinx-doc.org/">Sphinx</a> using a
+    
+    <a href="https://github.com/readthedocs/sphinx_rtd_theme">theme</a>
+    
+    provided by <a href="https://readthedocs.org">Read the Docs</a>. 
+
+</footer>
+        </div>
+      </div>
+
+    </section>
+
+  </div>
+  
+
+  <script type="text/javascript">
+      jQuery(function () {
+          SphinxRtdTheme.Navigation.enable(true);
+      });
+  </script>
+
+  
+  
+    
+   
+
+</body>
+</html>

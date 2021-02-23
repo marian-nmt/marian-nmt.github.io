@@ -1,0 +1,40 @@
+
+.. _program_listing_file_src_common_file_utils.cpp:
+
+Program Listing for File file_utils.cpp
+=======================================
+
+|exhale_lsh| :ref:`Return to documentation for file <file_src_common_file_utils.cpp>` (``src/common/file_utils.cpp``)
+
+.. |exhale_lsh| unicode:: U+021B0 .. UPWARDS ARROW WITH TIP LEFTWARDS
+
+.. code-block:: cpp
+
+   #include "common/file_utils.h"
+   #include "common/utils.h"
+   
+   namespace marian {
+   namespace fileutils {
+   
+   void cut(const std::string& tsvIn,
+            Ptr<io::TemporaryFile> tsvOut,
+            const std::vector<size_t>& fields,
+            size_t numFields,
+            const std::string& sep /*= "\t"*/) {
+     std::vector<std::string> tsvFields(numFields);
+     std::string line;
+     io::InputFileStream ioIn(tsvIn);
+     while(getline(ioIn, line)) {
+       tsvFields.clear();
+       utils::splitTsv(line, tsvFields, numFields);  // split tab-separated fields
+       for(size_t i = 0; i < fields.size(); ++i) {
+         *tsvOut << tsvFields[fields[i]];
+         if(i < fields.size() - 1)
+           *tsvOut << sep;  // concatenating fields with the custom separator
+       }
+       *tsvOut << std::endl;
+     }
+   };
+   
+   }  // namespace fileutils
+   }  // namespace marian

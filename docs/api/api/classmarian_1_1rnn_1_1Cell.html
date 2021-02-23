@@ -1,0 +1,307 @@
+
+
+<!DOCTYPE html>
+<html class="writer-html5" lang="en" >
+<head>
+  <meta charset="utf-8" />
+  
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  
+  <title>Class Cell &mdash; Marian NMT v1.10.1 2021-02-23 documentation</title>
+  
+
+  
+  <link rel="stylesheet" href="../_static/css/theme.css" type="text/css" />
+  <link rel="stylesheet" href="../_static/pygments.css" type="text/css" />
+  <link rel="stylesheet" href="../_static/css/custom.css" type="text/css" />
+  <link rel="stylesheet" href="../_static/collapsible-lists/css/tree_view.css" type="text/css" />
+
+  
+  
+
+  
+  
+
+  
+    <link rel="canonical" href="http://marian-nmt.github.io/docs/api/api/classmarian_1_1rnn_1_1Cell.html" />
+
+  
+  <!--[if lt IE 9]>
+    <script src="../_static/js/html5shiv.min.js"></script>
+  <![endif]-->
+  
+    
+      <script type="text/javascript" id="documentation_options" data-url_root="../" src="../_static/documentation_options.js"></script>
+        <script src="../_static/jquery.js"></script>
+        <script src="../_static/underscore.js"></script>
+        <script src="../_static/doctools.js"></script>
+        <script src="../_static/language_data.js"></script>
+        <script src="../_static/collapsible-lists/js/CollapsibleLists.compressed.js"></script>
+        <script src="../_static/collapsible-lists/js/apply-collapsible-lists.js"></script>
+    
+    <script type="text/javascript" src="../_static/js/theme.js"></script>
+
+    
+    <link rel="index" title="Index" href="../genindex.html" />
+    <link rel="search" title="Search" href="../search.html" />
+    <link rel="next" title="Class CellFactory" href="classmarian_1_1rnn_1_1CellFactory.html" />
+    <link rel="prev" title="Class AttentionFactory" href="classmarian_1_1rnn_1_1AttentionFactory.html" /> 
+</head>
+
+<body class="wy-body-for-nav">
+
+   
+  <div class="wy-grid-for-nav">
+    
+    <nav data-toggle="wy-nav-shift" class="wy-nav-side">
+      <div class="wy-side-scroll">
+        <div class="wy-side-nav-search" >
+          
+
+          
+            <a href="../index.html" class="icon icon-home"> Marian NMT
+          
+
+          
+          </a>
+
+          
+            
+            
+              <div class="version">
+                v1.10.1
+              </div>
+            
+          
+
+          
+<div role="search">
+  <form id="rtd-search-form" class="wy-form" action="../search.html" method="get">
+    <input type="text" name="q" placeholder="Search docs" />
+    <input type="hidden" name="check_keywords" value="yes" />
+    <input type="hidden" name="area" value="default" />
+  </form>
+</div>
+
+          
+        </div>
+
+        
+        <div class="wy-menu wy-menu-vertical" data-spy="affix" role="navigation" aria-label="main navigation">
+          
+            
+            
+              
+            
+            
+              <p class="caption"><span class="caption-text">Contents:</span></p>
+<ul>
+<li class="toctree-l1"><a class="reference internal" href="../install.html">Installation</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../graph.html">Expression graphs</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../operators.html">Graph operations</a></li>
+<li class="toctree-l1"><a class="reference internal" href="library_index.html">Library API</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../contributing.html">How to contribute to Marian</a></li>
+</ul>
+
+            
+          
+        </div>
+        
+      </div>
+    </nav>
+
+    <section data-toggle="wy-nav-shift" class="wy-nav-content-wrap">
+
+      
+      <nav class="wy-nav-top" aria-label="top navigation">
+        
+          <i data-toggle="wy-nav-top" class="fa fa-bars"></i>
+          <a href="../index.html">Marian NMT</a>
+        
+      </nav>
+
+
+      <div class="wy-nav-content">
+        
+        <div class="rst-content">
+        
+          
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+<div role="navigation" aria-label="breadcrumbs navigation">
+
+  <ul class="wy-breadcrumbs">
+    
+      <li><a href="../index.html" class="icon icon-home"></a> &raquo;</li>
+        
+          <li><a href="library_index.html">Library API</a> &raquo;</li>
+        
+      <li>Class Cell</li>
+    
+    
+      <li class="wy-breadcrumbs-aside">
+        
+          
+            <a href="../_sources/api/classmarian_1_1rnn_1_1Cell.rst.txt" rel="nofollow"> View page source</a>
+          
+        
+      </li>
+    
+  </ul>
+
+  
+  <hr/>
+</div>
+          <div role="main" class="document" itemscope="itemscope" itemtype="http://schema.org/Article">
+           <div itemprop="articleBody">
+            
+  <div class="section" id="class-cell">
+<span id="exhale-class-classmarian-1-1rnn-1-1cell"></span><h1>Class Cell<a class="headerlink" href="#class-cell" title="Permalink to this headline">¶</a></h1>
+<ul class="simple">
+<li><p>Defined in <a class="reference internal" href="file_src_rnn_types.h.html#file-src-rnn-types-h"><span class="std std-ref">File types.h</span></a></p></li>
+</ul>
+<div class="section" id="inheritance-relationships">
+<h2>Inheritance Relationships<a class="headerlink" href="#inheritance-relationships" title="Permalink to this headline">¶</a></h2>
+<div class="section" id="base-type">
+<h3>Base Type<a class="headerlink" href="#base-type" title="Permalink to this headline">¶</a></h3>
+<ul class="simple">
+<li><p><code class="docutils literal notranslate"><span class="pre">public</span> <span class="pre">marian::rnn::Stackable</span></code> (<a class="reference internal" href="classmarian_1_1rnn_1_1Stackable.html#exhale-class-classmarian-1-1rnn-1-1stackable"><span class="std std-ref">Class Stackable</span></a>)</p></li>
+</ul>
+</div>
+<div class="section" id="derived-types">
+<h3>Derived Types<a class="headerlink" href="#derived-types" title="Permalink to this headline">¶</a></h3>
+<ul class="simple">
+<li><p><code class="docutils literal notranslate"><span class="pre">public</span> <span class="pre">marian::rnn::FastLSTM</span></code> (<a class="reference internal" href="classmarian_1_1rnn_1_1FastLSTM.html#exhale-class-classmarian-1-1rnn-1-1fastlstm"><span class="std std-ref">Class FastLSTM</span></a>)</p></li>
+<li><p><code class="docutils literal notranslate"><span class="pre">public</span> <span class="pre">marian::rnn::GRU</span></code> (<a class="reference internal" href="classmarian_1_1rnn_1_1GRU.html#exhale-class-classmarian-1-1rnn-1-1gru"><span class="std std-ref">Class GRU</span></a>)</p></li>
+<li><p><code class="docutils literal notranslate"><span class="pre">public</span> <span class="pre">marian::rnn::GRUNematus</span></code> (<a class="reference internal" href="classmarian_1_1rnn_1_1GRUNematus.html#exhale-class-classmarian-1-1rnn-1-1grunematus"><span class="std std-ref">Class GRUNematus</span></a>)</p></li>
+<li><p><code class="docutils literal notranslate"><span class="pre">public</span> <span class="pre">marian::rnn::ReLU</span></code> (<a class="reference internal" href="classmarian_1_1rnn_1_1ReLU.html#exhale-class-classmarian-1-1rnn-1-1relu"><span class="std std-ref">Class ReLU</span></a>)</p></li>
+<li><p><code class="docutils literal notranslate"><span class="pre">public</span> <span class="pre">marian::rnn::SlowLSTM</span></code> (<a class="reference internal" href="classmarian_1_1rnn_1_1SlowLSTM.html#exhale-class-classmarian-1-1rnn-1-1slowlstm"><span class="std std-ref">Class SlowLSTM</span></a>)</p></li>
+<li><p><code class="docutils literal notranslate"><span class="pre">public</span> <span class="pre">marian::rnn::SRU</span></code> (<a class="reference internal" href="classmarian_1_1rnn_1_1SRU.html#exhale-class-classmarian-1-1rnn-1-1sru"><span class="std std-ref">Class SRU</span></a>)</p></li>
+<li><p><code class="docutils literal notranslate"><span class="pre">public</span> <span class="pre">marian::rnn::SSRU</span></code> (<a class="reference internal" href="classmarian_1_1rnn_1_1SSRU.html#exhale-class-classmarian-1-1rnn-1-1ssru"><span class="std std-ref">Class SSRU</span></a>)</p></li>
+<li><p><code class="docutils literal notranslate"><span class="pre">public</span> <span class="pre">marian::rnn::StackedCell</span></code> (<a class="reference internal" href="classmarian_1_1rnn_1_1StackedCell.html#exhale-class-classmarian-1-1rnn-1-1stackedcell"><span class="std std-ref">Class StackedCell</span></a>)</p></li>
+<li><p><code class="docutils literal notranslate"><span class="pre">public</span> <span class="pre">marian::rnn::Tanh</span></code> (<a class="reference internal" href="classmarian_1_1rnn_1_1Tanh.html#exhale-class-classmarian-1-1rnn-1-1tanh"><span class="std std-ref">Class Tanh</span></a>)</p></li>
+<li><p><code class="docutils literal notranslate"><span class="pre">public</span> <span class="pre">marian::rnn::TestLSTM</span></code> (<a class="reference internal" href="classmarian_1_1rnn_1_1TestLSTM.html#exhale-class-classmarian-1-1rnn-1-1testlstm"><span class="std std-ref">Class TestLSTM</span></a>)</p></li>
+</ul>
+</div>
+</div>
+<div class="section" id="class-documentation">
+<h2>Class Documentation<a class="headerlink" href="#class-documentation" title="Permalink to this headline">¶</a></h2>
+<dl class="class">
+<dt id="_CPPv4N6marian3rnn4CellE">
+<span id="_CPPv3N6marian3rnn4CellE"></span><span id="_CPPv2N6marian3rnn4CellE"></span><span id="marian::rnn::Cell"></span><span class="target" id="classmarian_1_1rnn_1_1Cell"></span><em class="property">class </em><code class="sig-name descname">Cell</code> : <em class="property">public</em> marian::rnn::<a class="reference internal" href="classmarian_1_1rnn_1_1Stackable.html#_CPPv4N6marian3rnn9StackableE" title="marian::rnn::Stackable">Stackable</a><a class="headerlink" href="#_CPPv4N6marian3rnn4CellE" title="Permalink to this definition">¶</a><br /></dt>
+<dd><p>Subclassed by <a class="reference internal" href="classmarian_1_1rnn_1_1FastLSTM.html#classmarian_1_1rnn_1_1FastLSTM"><span class="std std-ref">marian::rnn::FastLSTM</span></a>, <a class="reference internal" href="classmarian_1_1rnn_1_1GRU.html#classmarian_1_1rnn_1_1GRU"><span class="std std-ref">marian::rnn::GRU</span></a>, <a class="reference internal" href="classmarian_1_1rnn_1_1GRUNematus.html#classmarian_1_1rnn_1_1GRUNematus"><span class="std std-ref">marian::rnn::GRUNematus</span></a>, <a class="reference internal" href="classmarian_1_1rnn_1_1ReLU.html#classmarian_1_1rnn_1_1ReLU"><span class="std std-ref">marian::rnn::ReLU</span></a>, <a class="reference internal" href="classmarian_1_1rnn_1_1SlowLSTM.html#classmarian_1_1rnn_1_1SlowLSTM"><span class="std std-ref">marian::rnn::SlowLSTM</span></a>, <a class="reference internal" href="classmarian_1_1rnn_1_1SRU.html#classmarian_1_1rnn_1_1SRU"><span class="std std-ref">marian::rnn::SRU</span></a>, <a class="reference internal" href="classmarian_1_1rnn_1_1SSRU.html#classmarian_1_1rnn_1_1SSRU"><span class="std std-ref">marian::rnn::SSRU</span></a>, <a class="reference internal" href="classmarian_1_1rnn_1_1StackedCell.html#classmarian_1_1rnn_1_1StackedCell"><span class="std std-ref">marian::rnn::StackedCell</span></a>, <a class="reference internal" href="classmarian_1_1rnn_1_1Tanh.html#classmarian_1_1rnn_1_1Tanh"><span class="std std-ref">marian::rnn::Tanh</span></a>, <a class="reference internal" href="classmarian_1_1rnn_1_1TestLSTM.html#classmarian_1_1rnn_1_1TestLSTM"><span class="std std-ref">marian::rnn::TestLSTM</span></a></p>
+<div class="breathe-sectiondef docutils container">
+<p class="breathe-sectiondef-title rubric">Public Functions</p>
+<dl class="function">
+<dt id="_CPPv4N6marian3rnn4Cell4CellE3PtrI7OptionsE">
+<span id="_CPPv3N6marian3rnn4Cell4CellE3PtrI7OptionsE"></span><span id="_CPPv2N6marian3rnn4Cell4CellE3PtrI7OptionsE"></span><span id="marian::rnn::Cell::Cell__Ptr:Options:"></span><span class="target" id="classmarian_1_1rnn_1_1Cell_1acc392c8adfb002c17993f02e6d3085a6"></span><code class="sig-name descname">Cell</code><span class="sig-paren">(</span><a class="reference internal" href="typedef_definitions_8h_1ad1a373be43a00ef9ce35666145137b08.html#_CPPv4N6marian3PtrE" title="marian::Ptr">Ptr</a>&lt;<a class="reference internal" href="classmarian_1_1Options.html#_CPPv4N6marian7OptionsE" title="marian::Options">Options</a>&gt; <em>options</em><span class="sig-paren">)</span><a class="headerlink" href="#_CPPv4N6marian3rnn4Cell4CellE3PtrI7OptionsE" title="Permalink to this definition">¶</a><br /></dt>
+<dd></dd></dl>
+
+<dl class="function">
+<dt id="_CPPv4N6marian3rnn4Cell5applyENSt6vectorI4ExprEE5State4Expr">
+<span id="_CPPv3N6marian3rnn4Cell5applyENSt6vectorI4ExprEE5State4Expr"></span><span id="_CPPv2N6marian3rnn4Cell5applyENSt6vectorI4ExprEE5State4Expr"></span><span id="marian::rnn::Cell::apply__std::vector:Expr:.State.Expr"></span><span class="target" id="classmarian_1_1rnn_1_1Cell_1a88c852cfe707ab973aa30780bd8e66bc"></span><a class="reference internal" href="structmarian_1_1rnn_1_1State.html#_CPPv4N6marian3rnn5StateE" title="marian::rnn::State">State</a> <code class="sig-name descname">apply</code><span class="sig-paren">(</span><a class="reference internal" href="function_expression__operators_8cpp_1af4e69a5f7167b63522135a1f6b8a5dd8.html#_CPPv4N6marianStE4Expri" title="marian::std">std</a>::vector&lt;<a class="reference internal" href="typedef_definitions_8h_1ac8ecc2cc66a7afcc6da94a9bbde5eaa7.html#_CPPv4N6marian4ExprE" title="marian::Expr">Expr</a>&gt; <em>inputs</em>, <a class="reference internal" href="structmarian_1_1rnn_1_1State.html#_CPPv4N6marian3rnn5StateE" title="marian::rnn::State">State</a> <em>state</em>, <a class="reference internal" href="typedef_definitions_8h_1ac8ecc2cc66a7afcc6da94a9bbde5eaa7.html#_CPPv4N6marian4ExprE" title="marian::Expr">Expr</a> <em>mask</em> = nullptr<span class="sig-paren">)</span><a class="headerlink" href="#_CPPv4N6marian3rnn4Cell5applyENSt6vectorI4ExprEE5State4Expr" title="Permalink to this definition">¶</a><br /></dt>
+<dd></dd></dl>
+
+<dl class="function">
+<dt id="_CPPv4N6marian3rnn4Cell13getLazyInputsE3PtrIN3rnn3RNNEE">
+<span id="_CPPv3N6marian3rnn4Cell13getLazyInputsE3PtrIN3rnn3RNNEE"></span><span id="_CPPv2N6marian3rnn4Cell13getLazyInputsE3PtrIN3rnn3RNNEE"></span><span id="marian::rnn::Cell::getLazyInputs__Ptr:rnn::RNN:"></span><span class="target" id="classmarian_1_1rnn_1_1Cell_1a982be20556f9ba25eb76714ef264efeb"></span><em class="property">virtual</em> <a class="reference internal" href="function_expression__operators_8cpp_1af4e69a5f7167b63522135a1f6b8a5dd8.html#_CPPv4N6marianStE4Expri" title="marian::std">std</a>::vector&lt;<a class="reference internal" href="typedef_definitions_8h_1ac8ecc2cc66a7afcc6da94a9bbde5eaa7.html#_CPPv4N6marian4ExprE" title="marian::Expr">Expr</a>&gt; <code class="sig-name descname">getLazyInputs</code><span class="sig-paren">(</span><a class="reference internal" href="typedef_definitions_8h_1ad1a373be43a00ef9ce35666145137b08.html#_CPPv4N6marian3PtrE" title="marian::Ptr">Ptr</a>&lt;rnn::RNN&gt; <em>parent</em><span class="sig-paren">)</span><a class="headerlink" href="#_CPPv4N6marian3rnn4Cell13getLazyInputsE3PtrIN3rnn3RNNEE" title="Permalink to this definition">¶</a><br /></dt>
+<dd></dd></dl>
+
+<dl class="function">
+<dt>
+<span class="target" id="classmarian_1_1rnn_1_1Cell_1a3561734479d2121025c5e3f834ce2397"></span><code class="sig-name descname">virtual void marian::rnn::Cell::setLazyInputs(std::vector&lt; std::function&lt;  Expr (Ptr&lt; rnn::RNN &gt;)&gt;, lazy)</code></dt>
+<dd></dd></dl>
+
+<dl class="function">
+<dt id="_CPPv4N6marian3rnn4Cell10applyInputENSt6vectorI4ExprEE">
+<span id="_CPPv3N6marian3rnn4Cell10applyInputENSt6vectorI4ExprEE"></span><span id="_CPPv2N6marian3rnn4Cell10applyInputENSt6vectorI4ExprEE"></span><span id="marian::rnn::Cell::applyInput__std::vector:Expr:"></span><span class="target" id="classmarian_1_1rnn_1_1Cell_1a8e02cc3d239bc9947cd3200ff2995a01"></span><em class="property">virtual</em> <a class="reference internal" href="function_expression__operators_8cpp_1af4e69a5f7167b63522135a1f6b8a5dd8.html#_CPPv4N6marianStE4Expri" title="marian::std">std</a>::vector&lt;<a class="reference internal" href="typedef_definitions_8h_1ac8ecc2cc66a7afcc6da94a9bbde5eaa7.html#_CPPv4N6marian4ExprE" title="marian::Expr">Expr</a>&gt; <code class="sig-name descname">applyInput</code><span class="sig-paren">(</span><a class="reference internal" href="function_expression__operators_8cpp_1af4e69a5f7167b63522135a1f6b8a5dd8.html#_CPPv4N6marianStE4Expri" title="marian::std">std</a>::vector&lt;<a class="reference internal" href="typedef_definitions_8h_1ac8ecc2cc66a7afcc6da94a9bbde5eaa7.html#_CPPv4N6marian4ExprE" title="marian::Expr">Expr</a>&gt; <em>inputs</em><span class="sig-paren">)</span> = 0<a class="headerlink" href="#_CPPv4N6marian3rnn4Cell10applyInputENSt6vectorI4ExprEE" title="Permalink to this definition">¶</a><br /></dt>
+<dd></dd></dl>
+
+<dl class="function">
+<dt id="_CPPv4N6marian3rnn4Cell10applyStateENSt6vectorI4ExprEE5State4Expr">
+<span id="_CPPv3N6marian3rnn4Cell10applyStateENSt6vectorI4ExprEE5State4Expr"></span><span id="_CPPv2N6marian3rnn4Cell10applyStateENSt6vectorI4ExprEE5State4Expr"></span><span id="marian::rnn::Cell::applyState__std::vector:Expr:.State.Expr"></span><span class="target" id="classmarian_1_1rnn_1_1Cell_1a4bd1bce7cf42fcc48387488e218af257"></span><em class="property">virtual</em> <a class="reference internal" href="structmarian_1_1rnn_1_1State.html#_CPPv4N6marian3rnn5StateE" title="marian::rnn::State">State</a> <code class="sig-name descname">applyState</code><span class="sig-paren">(</span><a class="reference internal" href="function_expression__operators_8cpp_1af4e69a5f7167b63522135a1f6b8a5dd8.html#_CPPv4N6marianStE4Expri" title="marian::std">std</a>::vector&lt;<a class="reference internal" href="typedef_definitions_8h_1ac8ecc2cc66a7afcc6da94a9bbde5eaa7.html#_CPPv4N6marian4ExprE" title="marian::Expr">Expr</a>&gt;, <a class="reference internal" href="structmarian_1_1rnn_1_1State.html#_CPPv4N6marian3rnn5StateE" title="marian::rnn::State">State</a>, <a class="reference internal" href="typedef_definitions_8h_1ac8ecc2cc66a7afcc6da94a9bbde5eaa7.html#_CPPv4N6marian4ExprE" title="marian::Expr">Expr</a> = nullptr<span class="sig-paren">)</span> = 0<a class="headerlink" href="#_CPPv4N6marian3rnn4Cell10applyStateENSt6vectorI4ExprEE5State4Expr" title="Permalink to this definition">¶</a><br /></dt>
+<dd></dd></dl>
+
+<dl class="function">
+<dt id="_CPPv4N6marian3rnn4Cell5clearEv">
+<span id="_CPPv3N6marian3rnn4Cell5clearEv"></span><span id="_CPPv2N6marian3rnn4Cell5clearEv"></span><span id="marian::rnn::Cell::clear"></span><span class="target" id="classmarian_1_1rnn_1_1Cell_1aa18e23b86c3e7bb013c4be510f4eea60"></span><em class="property">virtual</em> void <code class="sig-name descname">clear</code><span class="sig-paren">(</span><span class="sig-paren">)</span><a class="headerlink" href="#_CPPv4N6marian3rnn4Cell5clearEv" title="Permalink to this definition">¶</a><br /></dt>
+<dd></dd></dl>
+
+</div>
+<div class="breathe-sectiondef docutils container">
+<p class="breathe-sectiondef-title rubric">Protected Attributes</p>
+<dl class="member">
+<dt id="_CPPv4N6marian3rnn4Cell11lazyInputs_E">
+<span id="_CPPv3N6marian3rnn4Cell11lazyInputs_E"></span><span id="_CPPv2N6marian3rnn4Cell11lazyInputs_E"></span><span class="target" id="classmarian_1_1rnn_1_1Cell_1ad77a8ad9d648096996887ea57faa6fe2"></span><a class="reference internal" href="function_expression__operators_8cpp_1af4e69a5f7167b63522135a1f6b8a5dd8.html#_CPPv4N6marianStE4Expri" title="marian::std">std</a>::vector&lt;<a class="reference internal" href="function_expression__operators_8cpp_1af4e69a5f7167b63522135a1f6b8a5dd8.html#_CPPv4N6marianStE4Expri" title="marian::std">std</a>::function&lt;<a class="reference internal" href="typedef_definitions_8h_1ac8ecc2cc66a7afcc6da94a9bbde5eaa7.html#_CPPv4N6marian4ExprE" title="marian::Expr">Expr</a><span class="sig-paren">(</span><a class="reference internal" href="typedef_definitions_8h_1ad1a373be43a00ef9ce35666145137b08.html#_CPPv4N6marian3PtrE" title="marian::Ptr">Ptr</a>&lt;rnn::RNN&gt;<span class="sig-paren">)</span>&gt;&gt; <code class="sig-name descname">lazyInputs_</code><a class="headerlink" href="#_CPPv4N6marian3rnn4Cell11lazyInputs_E" title="Permalink to this definition">¶</a><br /></dt>
+<dd></dd></dl>
+
+</div>
+</dd></dl>
+
+</div>
+</div>
+
+
+           </div>
+           
+          </div>
+          <footer>
+    <div class="rst-footer-buttons" role="navigation" aria-label="footer navigation">
+        <a href="classmarian_1_1rnn_1_1CellFactory.html" class="btn btn-neutral float-right" title="Class CellFactory" accesskey="n" rel="next">Next <span class="fa fa-arrow-circle-right" aria-hidden="true"></span></a>
+        <a href="classmarian_1_1rnn_1_1AttentionFactory.html" class="btn btn-neutral float-left" title="Class AttentionFactory" accesskey="p" rel="prev"><span class="fa fa-arrow-circle-left" aria-hidden="true"></span> Previous</a>
+    </div>
+
+  <hr/>
+
+  <div role="contentinfo">
+    <p>
+        &#169; Copyright 2021, Marian NMT Team.
+
+    </p>
+  </div>
+    
+    
+    
+    Built with <a href="https://www.sphinx-doc.org/">Sphinx</a> using a
+    
+    <a href="https://github.com/readthedocs/sphinx_rtd_theme">theme</a>
+    
+    provided by <a href="https://readthedocs.org">Read the Docs</a>. 
+
+</footer>
+        </div>
+      </div>
+
+    </section>
+
+  </div>
+  
+
+  <script type="text/javascript">
+      jQuery(function () {
+          SphinxRtdTheme.Navigation.enable(true);
+      });
+  </script>
+
+  
+  
+    
+   
+
+</body>
+</html>

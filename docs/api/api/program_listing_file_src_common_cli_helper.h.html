@@ -1,0 +1,357 @@
+
+
+<!DOCTYPE html>
+<html class="writer-html5" lang="en" >
+<head>
+  <meta charset="utf-8" />
+  
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  
+  <title>Program Listing for File cli_helper.h &mdash; Marian NMT v1.10.1 2021-02-23 documentation</title>
+  
+
+  
+  <link rel="stylesheet" href="../_static/css/theme.css" type="text/css" />
+  <link rel="stylesheet" href="../_static/pygments.css" type="text/css" />
+  <link rel="stylesheet" href="../_static/css/custom.css" type="text/css" />
+  <link rel="stylesheet" href="../_static/collapsible-lists/css/tree_view.css" type="text/css" />
+
+  
+  
+
+  
+  
+
+  
+    <link rel="canonical" href="http://marian-nmt.github.io/docs/api/api/program_listing_file_src_common_cli_helper.h.html" />
+
+  
+  <!--[if lt IE 9]>
+    <script src="../_static/js/html5shiv.min.js"></script>
+  <![endif]-->
+  
+    
+      <script type="text/javascript" id="documentation_options" data-url_root="../" src="../_static/documentation_options.js"></script>
+        <script src="../_static/jquery.js"></script>
+        <script src="../_static/underscore.js"></script>
+        <script src="../_static/doctools.js"></script>
+        <script src="../_static/language_data.js"></script>
+        <script src="../_static/collapsible-lists/js/CollapsibleLists.compressed.js"></script>
+        <script src="../_static/collapsible-lists/js/apply-collapsible-lists.js"></script>
+    
+    <script type="text/javascript" src="../_static/js/theme.js"></script>
+
+    
+    <link rel="index" title="Index" href="../genindex.html" />
+    <link rel="search" title="Search" href="../search.html" /> 
+</head>
+
+<body class="wy-body-for-nav">
+
+   
+  <div class="wy-grid-for-nav">
+    
+    <nav data-toggle="wy-nav-shift" class="wy-nav-side">
+      <div class="wy-side-scroll">
+        <div class="wy-side-nav-search" >
+          
+
+          
+            <a href="../index.html" class="icon icon-home"> Marian NMT
+          
+
+          
+          </a>
+
+          
+            
+            
+              <div class="version">
+                v1.10.1
+              </div>
+            
+          
+
+          
+<div role="search">
+  <form id="rtd-search-form" class="wy-form" action="../search.html" method="get">
+    <input type="text" name="q" placeholder="Search docs" />
+    <input type="hidden" name="check_keywords" value="yes" />
+    <input type="hidden" name="area" value="default" />
+  </form>
+</div>
+
+          
+        </div>
+
+        
+        <div class="wy-menu wy-menu-vertical" data-spy="affix" role="navigation" aria-label="main navigation">
+          
+            
+            
+              
+            
+            
+              <p class="caption"><span class="caption-text">Contents:</span></p>
+<ul>
+<li class="toctree-l1"><a class="reference internal" href="../install.html">Installation</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../graph.html">Expression graphs</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../operators.html">Graph operations</a></li>
+<li class="toctree-l1"><a class="reference internal" href="library_index.html">Library API</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../contributing.html">How to contribute to Marian</a></li>
+</ul>
+
+            
+          
+        </div>
+        
+      </div>
+    </nav>
+
+    <section data-toggle="wy-nav-shift" class="wy-nav-content-wrap">
+
+      
+      <nav class="wy-nav-top" aria-label="top navigation">
+        
+          <i data-toggle="wy-nav-top" class="fa fa-bars"></i>
+          <a href="../index.html">Marian NMT</a>
+        
+      </nav>
+
+
+      <div class="wy-nav-content">
+        
+        <div class="rst-content">
+        
+          
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+<div role="navigation" aria-label="breadcrumbs navigation">
+
+  <ul class="wy-breadcrumbs">
+    
+      <li><a href="../index.html" class="icon icon-home"></a> &raquo;</li>
+        
+      <li>Program Listing for File cli_helper.h</li>
+    
+    
+      <li class="wy-breadcrumbs-aside">
+        
+          
+            <a href="../_sources/api/program_listing_file_src_common_cli_helper.h.rst.txt" rel="nofollow"> View page source</a>
+          
+        
+      </li>
+    
+  </ul>
+
+  
+  <hr/>
+</div>
+          <div role="main" class="document" itemscope="itemscope" itemtype="http://schema.org/Article">
+           <div itemprop="articleBody">
+            
+  <div class="section" id="program-listing-for-file-cli-helper-h">
+<span id="program-listing-file-src-common-cli-helper-h"></span><h1>Program Listing for File cli_helper.h<a class="headerlink" href="#program-listing-for-file-cli-helper-h" title="Permalink to this headline">¶</a></h1>
+<p>↰ <a class="reference internal" href="file_src_common_cli_helper.h.html#file-src-common-cli-helper-h"><span class="std std-ref">Return to documentation for file</span></a> (<code class="docutils literal notranslate"><span class="pre">src/common/cli_helper.h</span></code>)</p>
+<div class="highlight-cpp notranslate"><div class="highlight"><pre><span></span><span class="cp">#pragma once</span>
+
+<span class="cp">#include</span> <span class="cpf">&lt;string&gt;</span><span class="cp"></span>
+
+<span class="cp">#include</span> <span class="cpf">&quot;3rd_party/yaml-cpp/yaml.h&quot;</span><span class="cp"></span>
+<span class="cp">#include</span> <span class="cpf">&quot;common/logging.h&quot;</span><span class="cp"></span>
+
+<span class="k">namespace</span> <span class="n">marian</span> <span class="p">{</span>
+<span class="k">namespace</span> <span class="n">cli</span> <span class="p">{</span>
+
+<span class="c1">// helper to replace environment-variable expressions of the form ${VARNAME} in</span>
+<span class="c1">// a string</span>
+<span class="k">static</span> <span class="kr">inline</span> <span class="n">std</span><span class="o">::</span><span class="n">string</span> <span class="n">interpolateEnvVars</span><span class="p">(</span><span class="n">std</span><span class="o">::</span><span class="n">string</span> <span class="n">str</span><span class="p">)</span> <span class="p">{</span>
+  <span class="c1">// temporary workaround for MS-internal PhillyOnAzure cluster: warm storage</span>
+  <span class="c1">// presently has the form /hdfs/VC instead of /{gfs,hdfs}/CLUSTER/VC</span>
+
+  <span class="c1">// Catch stdin/stdout and do not process</span>
+  <span class="k">if</span><span class="p">(</span><span class="n">str</span> <span class="o">==</span> <span class="s">&quot;stdin&quot;</span> <span class="o">||</span> <span class="n">str</span> <span class="o">==</span> <span class="s">&quot;stdout&quot;</span><span class="p">)</span> <span class="p">{</span>
+    <span class="k">return</span> <span class="n">str</span><span class="p">;</span>
+  <span class="p">}</span>
+
+<span class="cp">#if 1</span>
+  <span class="k">if</span><span class="p">(</span><span class="n">getenv</span><span class="p">(</span><span class="s">&quot;PHILLY_JOB_ID&quot;</span><span class="p">))</span> <span class="p">{</span>
+    <span class="k">const</span> <span class="kt">char</span><span class="o">*</span> <span class="n">cluster</span> <span class="o">=</span> <span class="n">getenv</span><span class="p">(</span><span class="s">&quot;PHILLY_CLUSTER&quot;</span><span class="p">);</span>
+    <span class="k">const</span> <span class="kt">char</span><span class="o">*</span> <span class="n">vc</span> <span class="o">=</span> <span class="n">getenv</span><span class="p">(</span><span class="s">&quot;PHILLY_VC&quot;</span><span class="p">);</span>
+    <span class="c1">// this environment variable exists when running on the cluster</span>
+    <span class="k">if</span><span class="p">(</span><span class="n">cluster</span> <span class="o">&amp;&amp;</span> <span class="n">vc</span><span class="p">)</span> <span class="p">{</span>
+      <span class="k">static</span> <span class="k">const</span> <span class="n">std</span><span class="o">::</span><span class="n">string</span> <span class="n">s_gfsPrefix</span>
+          <span class="o">=</span> <span class="n">std</span><span class="o">::</span><span class="n">string</span><span class="p">(</span><span class="s">&quot;/gfs/&quot;</span><span class="p">)</span> <span class="o">+</span> <span class="n">cluster</span> <span class="o">+</span> <span class="s">&quot;/&quot;</span> <span class="o">+</span> <span class="n">vc</span> <span class="o">+</span> <span class="s">&quot;/&quot;</span><span class="p">;</span>
+      <span class="k">static</span> <span class="k">const</span> <span class="n">std</span><span class="o">::</span><span class="n">string</span> <span class="n">s_hdfsPrefix</span>
+          <span class="o">=</span> <span class="n">std</span><span class="o">::</span><span class="n">string</span><span class="p">(</span><span class="s">&quot;/hdfs/&quot;</span><span class="p">)</span> <span class="o">+</span> <span class="n">cluster</span> <span class="o">+</span> <span class="s">&quot;/&quot;</span> <span class="o">+</span> <span class="n">vc</span> <span class="o">+</span> <span class="s">&quot;/&quot;</span><span class="p">;</span>
+      <span class="k">if</span><span class="p">(</span><span class="n">str</span><span class="p">.</span><span class="n">find</span><span class="p">(</span><span class="n">s_gfsPrefix</span><span class="p">)</span> <span class="o">==</span> <span class="mi">0</span><span class="p">)</span>
+        <span class="n">str</span> <span class="o">=</span> <span class="n">std</span><span class="o">::</span><span class="n">string</span><span class="p">(</span><span class="s">&quot;/hdfs/&quot;</span><span class="p">)</span> <span class="o">+</span> <span class="n">vc</span> <span class="o">+</span> <span class="s">&quot;/&quot;</span> <span class="o">+</span> <span class="n">str</span><span class="p">.</span><span class="n">substr</span><span class="p">(</span><span class="n">s_gfsPrefix</span><span class="p">.</span><span class="n">size</span><span class="p">());</span>
+      <span class="k">else</span> <span class="nf">if</span><span class="p">(</span><span class="n">str</span><span class="p">.</span><span class="n">find</span><span class="p">(</span><span class="n">s_hdfsPrefix</span><span class="p">)</span> <span class="o">==</span> <span class="mi">0</span><span class="p">)</span>
+        <span class="n">str</span> <span class="o">=</span> <span class="n">std</span><span class="o">::</span><span class="n">string</span><span class="p">(</span><span class="s">&quot;/hdfs/&quot;</span><span class="p">)</span> <span class="o">+</span> <span class="n">vc</span> <span class="o">+</span> <span class="s">&quot;/&quot;</span>
+              <span class="o">+</span> <span class="n">str</span><span class="p">.</span><span class="n">substr</span><span class="p">(</span><span class="n">s_hdfsPrefix</span><span class="p">.</span><span class="n">size</span><span class="p">());</span>
+    <span class="p">}</span>
+  <span class="p">}</span>
+<span class="cp">#endif</span>
+  <span class="k">for</span><span class="p">(;;)</span> <span class="p">{</span>
+    <span class="k">const</span> <span class="k">auto</span> <span class="n">pos</span> <span class="o">=</span> <span class="n">str</span><span class="p">.</span><span class="n">find</span><span class="p">(</span><span class="s">&quot;${&quot;</span><span class="p">);</span>
+    <span class="k">if</span><span class="p">(</span><span class="n">pos</span> <span class="o">==</span> <span class="n">std</span><span class="o">::</span><span class="n">string</span><span class="o">::</span><span class="n">npos</span><span class="p">)</span>
+      <span class="k">return</span> <span class="n">str</span><span class="p">;</span>
+    <span class="k">const</span> <span class="k">auto</span> <span class="n">epos</span> <span class="o">=</span> <span class="n">str</span><span class="p">.</span><span class="n">find</span><span class="p">(</span><span class="s">&quot;}&quot;</span><span class="p">,</span> <span class="n">pos</span> <span class="o">+</span> <span class="mi">2</span><span class="p">);</span>
+    <span class="n">ABORT_IF</span><span class="p">(</span><span class="n">epos</span> <span class="o">==</span> <span class="n">std</span><span class="o">::</span><span class="n">string</span><span class="o">::</span><span class="n">npos</span><span class="p">,</span>
+             <span class="s">&quot;interpolate-env-vars option: ${{ without matching }} in &#39;{}&#39;&quot;</span><span class="p">,</span>
+             <span class="n">str</span><span class="p">.</span><span class="n">c_str</span><span class="p">());</span>
+    <span class="c1">// isolate the variable name</span>
+    <span class="k">const</span> <span class="k">auto</span> <span class="n">var</span> <span class="o">=</span> <span class="n">str</span><span class="p">.</span><span class="n">substr</span><span class="p">(</span><span class="n">pos</span> <span class="o">+</span> <span class="mi">2</span><span class="p">,</span> <span class="n">epos</span> <span class="o">-</span> <span class="p">(</span><span class="n">pos</span> <span class="o">+</span> <span class="mi">2</span><span class="p">));</span>
+    <span class="k">const</span> <span class="k">auto</span> <span class="n">val</span> <span class="o">=</span> <span class="n">getenv</span><span class="p">(</span><span class="n">var</span><span class="p">.</span><span class="n">c_str</span><span class="p">());</span>
+    <span class="n">ABORT_IF</span><span class="p">(</span><span class="o">!</span><span class="n">val</span><span class="p">,</span>
+             <span class="s">&quot;interpolate-env-vars option: environment variable &#39;{}&#39; not &quot;</span>
+             <span class="s">&quot;defined in &#39;{}&#39;&quot;</span><span class="p">,</span>
+             <span class="n">var</span><span class="p">.</span><span class="n">c_str</span><span class="p">(),</span>
+             <span class="n">str</span><span class="p">.</span><span class="n">c_str</span><span class="p">());</span>
+    <span class="c1">// replace it; then try again for further replacements</span>
+    <span class="n">str</span> <span class="o">=</span> <span class="n">str</span><span class="p">.</span><span class="n">substr</span><span class="p">(</span><span class="mi">0</span><span class="p">,</span> <span class="n">pos</span><span class="p">)</span> <span class="o">+</span> <span class="n">val</span> <span class="o">+</span> <span class="n">str</span><span class="p">.</span><span class="n">substr</span><span class="p">(</span><span class="n">epos</span> <span class="o">+</span> <span class="mi">1</span><span class="p">);</span>
+  <span class="p">}</span>
+<span class="p">}</span>
+
+<span class="c1">// Helper to implement interpolate-env-vars and relative-paths options</span>
+<span class="k">static</span> <span class="kr">inline</span> <span class="kt">void</span> <span class="n">processPaths</span><span class="p">(</span>
+    <span class="n">YAML</span><span class="o">::</span><span class="n">Node</span><span class="o">&amp;</span> <span class="n">node</span><span class="p">,</span>
+    <span class="k">const</span> <span class="n">std</span><span class="o">::</span><span class="n">function</span><span class="o">&lt;</span><span class="n">std</span><span class="o">::</span><span class="n">string</span><span class="p">(</span><span class="n">std</span><span class="o">::</span><span class="n">string</span><span class="p">)</span><span class="o">&gt;&amp;</span> <span class="n">TransformPath</span><span class="p">,</span>
+    <span class="k">const</span> <span class="n">std</span><span class="o">::</span><span class="n">set</span><span class="o">&lt;</span><span class="n">std</span><span class="o">::</span><span class="n">string</span><span class="o">&gt;&amp;</span> <span class="n">PATHS</span><span class="p">,</span>
+    <span class="kt">bool</span> <span class="n">isPath</span> <span class="o">=</span> <span class="nb">false</span><span class="p">,</span>
+    <span class="k">const</span> <span class="n">std</span><span class="o">::</span><span class="n">string</span> <span class="n">parentKey</span> <span class="o">=</span> <span class="s">&quot;&quot;</span><span class="p">)</span> <span class="p">{</span>
+  <span class="c1">// For a scalar node (leaves in the config), just transform the path</span>
+  <span class="k">if</span><span class="p">(</span><span class="n">isPath</span> <span class="o">&amp;&amp;</span> <span class="n">node</span><span class="p">.</span><span class="n">IsScalar</span><span class="p">())</span> <span class="p">{</span>
+    <span class="n">std</span><span class="o">::</span><span class="n">string</span> <span class="n">nodePath</span> <span class="o">=</span> <span class="n">node</span><span class="p">.</span><span class="n">as</span><span class="o">&lt;</span><span class="n">std</span><span class="o">::</span><span class="n">string</span><span class="o">&gt;</span><span class="p">();</span>
+    <span class="k">if</span><span class="p">(</span><span class="o">!</span><span class="n">nodePath</span><span class="p">.</span><span class="n">empty</span><span class="p">())</span>
+      <span class="n">node</span> <span class="o">=</span> <span class="n">TransformPath</span><span class="p">(</span><span class="n">nodePath</span><span class="p">);</span>
+  <span class="p">}</span>
+  <span class="c1">// For a sequence node, recursively iterate each value</span>
+  <span class="k">else</span> <span class="k">if</span><span class="p">(</span><span class="n">node</span><span class="p">.</span><span class="n">IsSequence</span><span class="p">())</span> <span class="p">{</span>
+    <span class="k">for</span><span class="p">(</span><span class="k">auto</span><span class="o">&amp;&amp;</span> <span class="nl">sub</span> <span class="p">:</span> <span class="n">node</span><span class="p">)</span> <span class="p">{</span>
+      <span class="n">processPaths</span><span class="p">(</span><span class="n">sub</span><span class="p">,</span> <span class="n">TransformPath</span><span class="p">,</span> <span class="n">PATHS</span><span class="p">,</span> <span class="n">isPath</span><span class="p">);</span>
+
+      <span class="c1">// Exception for the shortlist option, which keeps a path and three numbers;</span>
+      <span class="c1">// we want to process the path only and keep the rest untouched</span>
+      <span class="k">if</span><span class="p">(</span><span class="n">isPath</span> <span class="o">&amp;&amp;</span> <span class="n">parentKey</span> <span class="o">==</span> <span class="s">&quot;shortlist&quot;</span><span class="p">)</span>
+        <span class="k">break</span><span class="p">;</span>
+    <span class="p">}</span>
+  <span class="p">}</span>
+  <span class="c1">// For a map node that is not a path, recursively iterate each value</span>
+  <span class="k">else</span> <span class="k">if</span><span class="p">(</span><span class="o">!</span><span class="n">isPath</span> <span class="o">&amp;&amp;</span> <span class="n">node</span><span class="p">.</span><span class="n">IsMap</span><span class="p">())</span> <span class="p">{</span>
+    <span class="k">for</span><span class="p">(</span><span class="k">auto</span><span class="o">&amp;&amp;</span> <span class="nl">sub</span> <span class="p">:</span> <span class="n">node</span><span class="p">)</span> <span class="p">{</span>
+      <span class="n">std</span><span class="o">::</span><span class="n">string</span> <span class="n">key</span> <span class="o">=</span> <span class="n">sub</span><span class="p">.</span><span class="n">first</span><span class="p">.</span><span class="n">as</span><span class="o">&lt;</span><span class="n">std</span><span class="o">::</span><span class="n">string</span><span class="o">&gt;</span><span class="p">();</span>
+      <span class="c1">// Exception for the sqlite option, which has a special value of &#39;temporary&#39;</span>
+      <span class="k">if</span><span class="p">(</span><span class="n">key</span> <span class="o">==</span> <span class="s">&quot;sqlite&quot;</span> <span class="o">&amp;&amp;</span> <span class="n">sub</span><span class="p">.</span><span class="n">second</span><span class="p">.</span><span class="n">as</span><span class="o">&lt;</span><span class="n">std</span><span class="o">::</span><span class="n">string</span><span class="o">&gt;</span><span class="p">()</span> <span class="o">==</span> <span class="s">&quot;temporary&quot;</span><span class="p">)</span>
+        <span class="k">continue</span><span class="p">;</span>
+      <span class="n">processPaths</span><span class="p">(</span><span class="n">sub</span><span class="p">.</span><span class="n">second</span><span class="p">,</span> <span class="n">TransformPath</span><span class="p">,</span> <span class="n">PATHS</span><span class="p">,</span> <span class="n">PATHS</span><span class="p">.</span><span class="n">count</span><span class="p">(</span><span class="n">key</span><span class="p">)</span> <span class="o">&gt;</span> <span class="mi">0</span><span class="p">,</span> <span class="n">key</span><span class="p">);</span>
+    <span class="p">}</span>
+  <span class="p">}</span>
+<span class="p">}</span>
+
+<span class="c1">// helper to convert a YAML node recursively into a string</span>
+<span class="c1">//</span>
+<span class="c1">// TODO: create a helper function that converts a YAML node into a string</span>
+<span class="c1">// without an emitter; consider extracting YAML-related helper functions to a</span>
+<span class="c1">// separate file</span>
+<span class="c1">// TODO: Look for Frank&#39;s function that does that.</span>
+<span class="k">static</span> <span class="kt">void</span> <span class="n">OutputYaml</span><span class="p">(</span><span class="k">const</span> <span class="n">YAML</span><span class="o">::</span><span class="n">Node</span> <span class="n">node</span><span class="p">,</span> <span class="n">YAML</span><span class="o">::</span><span class="n">Emitter</span><span class="o">&amp;</span> <span class="n">out</span><span class="p">)</span> <span class="p">{</span>
+  <span class="n">std</span><span class="o">::</span><span class="n">set</span><span class="o">&lt;</span><span class="n">std</span><span class="o">::</span><span class="n">string</span><span class="o">&gt;</span> <span class="n">sorter</span><span class="p">;</span>
+  <span class="k">switch</span><span class="p">(</span><span class="n">node</span><span class="p">.</span><span class="n">Type</span><span class="p">())</span> <span class="p">{</span>
+    <span class="k">case</span> <span class="n">YAML</span><span class="o">::</span><span class="n">NodeType</span><span class="o">::</span><span class="nl">Null</span><span class="p">:</span> <span class="n">out</span> <span class="o">&lt;&lt;</span> <span class="n">node</span><span class="p">;</span> <span class="k">break</span><span class="p">;</span>
+    <span class="k">case</span> <span class="n">YAML</span><span class="o">::</span><span class="n">NodeType</span><span class="o">::</span><span class="nl">Scalar</span><span class="p">:</span> <span class="n">out</span> <span class="o">&lt;&lt;</span> <span class="n">node</span><span class="p">;</span> <span class="k">break</span><span class="p">;</span>
+    <span class="k">case</span> <span class="n">YAML</span><span class="o">::</span><span class="n">NodeType</span><span class="o">::</span><span class="nl">Sequence</span><span class="p">:</span>
+      <span class="n">out</span> <span class="o">&lt;&lt;</span> <span class="n">YAML</span><span class="o">::</span><span class="n">BeginSeq</span><span class="p">;</span>
+      <span class="k">for</span><span class="p">(</span><span class="k">auto</span><span class="o">&amp;&amp;</span> <span class="nl">n</span> <span class="p">:</span> <span class="n">node</span><span class="p">)</span>
+        <span class="n">OutputYaml</span><span class="p">(</span><span class="n">n</span><span class="p">,</span> <span class="n">out</span><span class="p">);</span>
+      <span class="n">out</span> <span class="o">&lt;&lt;</span> <span class="n">YAML</span><span class="o">::</span><span class="n">EndSeq</span><span class="p">;</span>
+      <span class="k">break</span><span class="p">;</span>
+    <span class="k">case</span> <span class="n">YAML</span><span class="o">::</span><span class="n">NodeType</span><span class="o">::</span><span class="nl">Map</span><span class="p">:</span>
+      <span class="k">for</span><span class="p">(</span><span class="k">auto</span><span class="o">&amp;</span> <span class="nl">n</span> <span class="p">:</span> <span class="n">node</span><span class="p">)</span>
+        <span class="n">sorter</span><span class="p">.</span><span class="n">insert</span><span class="p">(</span><span class="n">n</span><span class="p">.</span><span class="n">first</span><span class="p">.</span><span class="n">as</span><span class="o">&lt;</span><span class="n">std</span><span class="o">::</span><span class="n">string</span><span class="o">&gt;</span><span class="p">());</span>
+      <span class="n">out</span> <span class="o">&lt;&lt;</span> <span class="n">YAML</span><span class="o">::</span><span class="n">BeginMap</span><span class="p">;</span>
+      <span class="k">for</span><span class="p">(</span><span class="k">auto</span><span class="o">&amp;</span> <span class="nl">key</span> <span class="p">:</span> <span class="n">sorter</span><span class="p">)</span> <span class="p">{</span>
+        <span class="n">out</span> <span class="o">&lt;&lt;</span> <span class="n">YAML</span><span class="o">::</span><span class="n">Key</span><span class="p">;</span>
+        <span class="n">out</span> <span class="o">&lt;&lt;</span> <span class="n">key</span><span class="p">;</span>
+        <span class="n">out</span> <span class="o">&lt;&lt;</span> <span class="n">YAML</span><span class="o">::</span><span class="n">Value</span><span class="p">;</span>
+        <span class="n">OutputYaml</span><span class="p">(</span><span class="n">node</span><span class="p">[</span><span class="n">key</span><span class="p">],</span> <span class="n">out</span><span class="p">);</span>
+      <span class="p">}</span>
+      <span class="n">out</span> <span class="o">&lt;&lt;</span> <span class="n">YAML</span><span class="o">::</span><span class="n">EndMap</span><span class="p">;</span>
+      <span class="k">break</span><span class="p">;</span>
+    <span class="k">case</span> <span class="n">YAML</span><span class="o">::</span><span class="n">NodeType</span><span class="o">::</span><span class="nl">Undefined</span><span class="p">:</span> <span class="n">out</span> <span class="o">&lt;&lt;</span> <span class="n">node</span><span class="p">;</span> <span class="k">break</span><span class="p">;</span>
+  <span class="p">}</span>
+<span class="p">}</span>
+
+<span class="c1">// Change relative paths to absolute paths relative to the config file&#39;s</span>
+<span class="c1">// directory</span>
+<span class="kt">void</span> <span class="n">makeAbsolutePaths</span><span class="p">(</span><span class="n">YAML</span><span class="o">::</span><span class="n">Node</span><span class="o">&amp;</span> <span class="n">config</span><span class="p">,</span>
+                       <span class="k">const</span> <span class="n">std</span><span class="o">::</span><span class="n">string</span><span class="o">&amp;</span> <span class="n">configPath</span><span class="p">,</span>
+                       <span class="k">const</span> <span class="n">std</span><span class="o">::</span><span class="n">set</span><span class="o">&lt;</span><span class="n">std</span><span class="o">::</span><span class="n">string</span><span class="o">&gt;&amp;</span> <span class="n">PATHS</span><span class="p">);</span>
+
+<span class="p">}</span>  <span class="c1">// namespace cli</span>
+<span class="p">}</span>  <span class="c1">// namespace marian</span>
+</pre></div>
+</div>
+</div>
+
+
+           </div>
+           
+          </div>
+          <footer>
+
+  <hr/>
+
+  <div role="contentinfo">
+    <p>
+        &#169; Copyright 2021, Marian NMT Team.
+
+    </p>
+  </div>
+    
+    
+    
+    Built with <a href="https://www.sphinx-doc.org/">Sphinx</a> using a
+    
+    <a href="https://github.com/readthedocs/sphinx_rtd_theme">theme</a>
+    
+    provided by <a href="https://readthedocs.org">Read the Docs</a>. 
+
+</footer>
+        </div>
+      </div>
+
+    </section>
+
+  </div>
+  
+
+  <script type="text/javascript">
+      jQuery(function () {
+          SphinxRtdTheme.Navigation.enable(true);
+      });
+  </script>
+
+  
+  
+    
+   
+
+</body>
+</html>

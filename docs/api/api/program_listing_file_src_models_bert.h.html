@@ -1,0 +1,559 @@
+
+
+<!DOCTYPE html>
+<html class="writer-html5" lang="en" >
+<head>
+  <meta charset="utf-8" />
+  
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  
+  <title>Program Listing for File bert.h &mdash; Marian NMT v1.10.1 2021-02-23 documentation</title>
+  
+
+  
+  <link rel="stylesheet" href="../_static/css/theme.css" type="text/css" />
+  <link rel="stylesheet" href="../_static/pygments.css" type="text/css" />
+  <link rel="stylesheet" href="../_static/css/custom.css" type="text/css" />
+  <link rel="stylesheet" href="../_static/collapsible-lists/css/tree_view.css" type="text/css" />
+
+  
+  
+
+  
+  
+
+  
+    <link rel="canonical" href="http://marian-nmt.github.io/docs/api/api/program_listing_file_src_models_bert.h.html" />
+
+  
+  <!--[if lt IE 9]>
+    <script src="../_static/js/html5shiv.min.js"></script>
+  <![endif]-->
+  
+    
+      <script type="text/javascript" id="documentation_options" data-url_root="../" src="../_static/documentation_options.js"></script>
+        <script src="../_static/jquery.js"></script>
+        <script src="../_static/underscore.js"></script>
+        <script src="../_static/doctools.js"></script>
+        <script src="../_static/language_data.js"></script>
+        <script src="../_static/collapsible-lists/js/CollapsibleLists.compressed.js"></script>
+        <script src="../_static/collapsible-lists/js/apply-collapsible-lists.js"></script>
+    
+    <script type="text/javascript" src="../_static/js/theme.js"></script>
+
+    
+    <link rel="index" title="Index" href="../genindex.html" />
+    <link rel="search" title="Search" href="../search.html" /> 
+</head>
+
+<body class="wy-body-for-nav">
+
+   
+  <div class="wy-grid-for-nav">
+    
+    <nav data-toggle="wy-nav-shift" class="wy-nav-side">
+      <div class="wy-side-scroll">
+        <div class="wy-side-nav-search" >
+          
+
+          
+            <a href="../index.html" class="icon icon-home"> Marian NMT
+          
+
+          
+          </a>
+
+          
+            
+            
+              <div class="version">
+                v1.10.1
+              </div>
+            
+          
+
+          
+<div role="search">
+  <form id="rtd-search-form" class="wy-form" action="../search.html" method="get">
+    <input type="text" name="q" placeholder="Search docs" />
+    <input type="hidden" name="check_keywords" value="yes" />
+    <input type="hidden" name="area" value="default" />
+  </form>
+</div>
+
+          
+        </div>
+
+        
+        <div class="wy-menu wy-menu-vertical" data-spy="affix" role="navigation" aria-label="main navigation">
+          
+            
+            
+              
+            
+            
+              <p class="caption"><span class="caption-text">Contents:</span></p>
+<ul>
+<li class="toctree-l1"><a class="reference internal" href="../install.html">Installation</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../graph.html">Expression graphs</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../operators.html">Graph operations</a></li>
+<li class="toctree-l1"><a class="reference internal" href="library_index.html">Library API</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../contributing.html">How to contribute to Marian</a></li>
+</ul>
+
+            
+          
+        </div>
+        
+      </div>
+    </nav>
+
+    <section data-toggle="wy-nav-shift" class="wy-nav-content-wrap">
+
+      
+      <nav class="wy-nav-top" aria-label="top navigation">
+        
+          <i data-toggle="wy-nav-top" class="fa fa-bars"></i>
+          <a href="../index.html">Marian NMT</a>
+        
+      </nav>
+
+
+      <div class="wy-nav-content">
+        
+        <div class="rst-content">
+        
+          
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+<div role="navigation" aria-label="breadcrumbs navigation">
+
+  <ul class="wy-breadcrumbs">
+    
+      <li><a href="../index.html" class="icon icon-home"></a> &raquo;</li>
+        
+      <li>Program Listing for File bert.h</li>
+    
+    
+      <li class="wy-breadcrumbs-aside">
+        
+          
+            <a href="../_sources/api/program_listing_file_src_models_bert.h.rst.txt" rel="nofollow"> View page source</a>
+          
+        
+      </li>
+    
+  </ul>
+
+  
+  <hr/>
+</div>
+          <div role="main" class="document" itemscope="itemscope" itemtype="http://schema.org/Article">
+           <div itemprop="articleBody">
+            
+  <div class="section" id="program-listing-for-file-bert-h">
+<span id="program-listing-file-src-models-bert-h"></span><h1>Program Listing for File bert.h<a class="headerlink" href="#program-listing-for-file-bert-h" title="Permalink to this headline">¶</a></h1>
+<p>↰ <a class="reference internal" href="file_src_models_bert.h.html#file-src-models-bert-h"><span class="std std-ref">Return to documentation for file</span></a> (<code class="docutils literal notranslate"><span class="pre">src/models/bert.h</span></code>)</p>
+<div class="highlight-cpp notranslate"><div class="highlight"><pre><span></span><span class="cp">#pragma once</span>
+
+<span class="cp">#include</span> <span class="cpf">&quot;data/corpus_base.h&quot;</span><span class="cp"></span>
+<span class="cp">#include</span> <span class="cpf">&quot;models/encoder_classifier.h&quot;</span><span class="cp"></span>
+<span class="cp">#include</span> <span class="cpf">&quot;models/transformer.h&quot;</span><span class="c1">   // @BUGBUG: transformer.h is large and was meant to be compiled separately</span><span class="cp"></span>
+<span class="cp">#include</span> <span class="cpf">&quot;data/rng_engine.h&quot;</span><span class="cp"></span>
+
+<span class="k">namespace</span> <span class="n">marian</span> <span class="p">{</span>
+
+<span class="k">namespace</span> <span class="n">data</span> <span class="p">{</span>
+
+<span class="k">class</span> <span class="nc">BertBatch</span> <span class="o">:</span> <span class="k">public</span> <span class="n">CorpusBatch</span> <span class="p">{</span>
+<span class="k">private</span><span class="o">:</span>
+  <span class="n">std</span><span class="o">::</span><span class="n">vector</span><span class="o">&lt;</span><span class="n">IndexType</span><span class="o">&gt;</span> <span class="n">maskedPositions_</span><span class="p">;</span>
+  <span class="n">Words</span> <span class="n">maskedWords_</span><span class="p">;</span>
+  <span class="n">std</span><span class="o">::</span><span class="n">vector</span><span class="o">&lt;</span><span class="n">IndexType</span><span class="o">&gt;</span> <span class="n">sentenceIndices_</span><span class="p">;</span>
+
+  <span class="n">std</span><span class="o">::</span><span class="n">string</span> <span class="n">maskSymbol_</span><span class="p">;</span>
+  <span class="n">std</span><span class="o">::</span><span class="n">string</span> <span class="n">sepSymbol_</span><span class="p">;</span>
+  <span class="n">std</span><span class="o">::</span><span class="n">string</span> <span class="n">clsSymbol_</span><span class="p">;</span>
+
+  <span class="c1">// Selects a random word from the vocabulary</span>
+  <span class="n">std</span><span class="o">::</span><span class="n">unique_ptr</span><span class="o">&lt;</span><span class="n">std</span><span class="o">::</span><span class="n">uniform_int_distribution</span><span class="o">&lt;</span><span class="n">WordIndex</span><span class="o">&gt;&gt;</span> <span class="n">randomWord_</span><span class="p">;</span>
+
+  <span class="c1">// Selects a random integer between 0 and 99</span>
+  <span class="n">std</span><span class="o">::</span><span class="n">unique_ptr</span><span class="o">&lt;</span><span class="n">std</span><span class="o">::</span><span class="n">uniform_real_distribution</span><span class="o">&lt;</span><span class="kt">float</span><span class="o">&gt;&gt;</span> <span class="n">randomPercent_</span><span class="p">;</span>
+
+  <span class="c1">// Word ids of words that should not be masked, e.g. separators, padding</span>
+  <span class="n">std</span><span class="o">::</span><span class="n">unordered_set</span><span class="o">&lt;</span><span class="n">Word</span><span class="o">&gt;</span> <span class="n">dontMask_</span><span class="p">;</span>
+
+  <span class="c1">// Masking function, i.e. replaces a chosen word with either</span>
+  <span class="c1">// a [MASK] symbol, itself or a random word</span>
+  <span class="n">Word</span> <span class="nf">maskOut</span><span class="p">(</span><span class="n">Word</span> <span class="n">word</span><span class="p">,</span> <span class="n">Word</span> <span class="n">mask</span><span class="p">,</span> <span class="n">std</span><span class="o">::</span><span class="n">mt19937</span><span class="o">&amp;</span> <span class="n">engine</span><span class="p">)</span> <span class="p">{</span>
+    <span class="k">auto</span> <span class="n">subBatch</span> <span class="o">=</span> <span class="n">subBatches_</span><span class="p">.</span><span class="n">front</span><span class="p">();</span>
+
+    <span class="c1">// @TODO: turn those threshold into parameters, adjustable from command line</span>
+    <span class="kt">float</span> <span class="n">r</span> <span class="o">=</span> <span class="p">(</span><span class="o">*</span><span class="n">randomPercent_</span><span class="p">)(</span><span class="n">engine</span><span class="p">);</span>
+    <span class="k">if</span> <span class="p">(</span><span class="n">r</span> <span class="o">&lt;</span> <span class="mf">0.1f</span><span class="p">)</span> <span class="p">{</span> <span class="c1">// for 10% of cases return same word</span>
+      <span class="k">return</span> <span class="n">word</span><span class="p">;</span>
+    <span class="p">}</span> <span class="k">else</span> <span class="k">if</span> <span class="p">(</span><span class="n">r</span> <span class="o">&lt;</span> <span class="mf">0.2f</span><span class="p">)</span> <span class="p">{</span> <span class="c1">// for 10% return random word</span>
+      <span class="n">Word</span> <span class="n">randWord</span> <span class="o">=</span> <span class="n">Word</span><span class="o">::</span><span class="n">fromWordIndex</span><span class="p">((</span><span class="o">*</span><span class="n">randomWord_</span><span class="p">)(</span><span class="n">engine</span><span class="p">));</span>
+      <span class="k">if</span><span class="p">(</span><span class="n">dontMask_</span><span class="p">.</span><span class="n">count</span><span class="p">(</span><span class="n">randWord</span><span class="p">)</span> <span class="o">&gt;</span> <span class="mi">0</span><span class="p">)</span> <span class="c1">// some words, e.g. [CLS] or &lt;/s&gt;, may not be used as random words</span>
+        <span class="k">return</span> <span class="n">mask</span><span class="p">;</span>                    <span class="c1">// for those, return the mask symbol instead</span>
+      <span class="k">else</span>
+        <span class="k">return</span> <span class="n">randWord</span><span class="p">;</span>                <span class="c1">// else return the random word</span>
+    <span class="p">}</span> <span class="k">else</span> <span class="p">{</span> <span class="c1">// for 80% of words apply mask symbol</span>
+      <span class="k">return</span> <span class="n">mask</span><span class="p">;</span>
+    <span class="p">}</span>
+  <span class="p">}</span>
+
+<span class="k">public</span><span class="o">:</span>
+
+  <span class="c1">// Takes a corpus batch, random engine (for deterministic behavior) and the masking percentage.</span>
+  <span class="c1">// Also sets special vocabulary items given on command line.</span>
+  <span class="n">BertBatch</span><span class="p">(</span><span class="n">Ptr</span><span class="o">&lt;</span><span class="n">CorpusBatch</span><span class="o">&gt;</span> <span class="n">batch</span><span class="p">,</span>
+            <span class="n">std</span><span class="o">::</span><span class="n">mt19937</span><span class="o">&amp;</span> <span class="n">engine</span><span class="p">,</span>
+            <span class="kt">float</span> <span class="n">maskFraction</span><span class="p">,</span>
+            <span class="k">const</span> <span class="n">std</span><span class="o">::</span><span class="n">string</span><span class="o">&amp;</span> <span class="n">maskSymbol</span><span class="p">,</span>
+            <span class="k">const</span> <span class="n">std</span><span class="o">::</span><span class="n">string</span><span class="o">&amp;</span> <span class="n">sepSymbol</span><span class="p">,</span>
+            <span class="k">const</span> <span class="n">std</span><span class="o">::</span><span class="n">string</span><span class="o">&amp;</span> <span class="n">clsSymbol</span><span class="p">,</span>
+            <span class="kt">int</span> <span class="n">dimTypeVocab</span><span class="p">)</span>
+    <span class="o">:</span> <span class="n">CorpusBatch</span><span class="p">(</span><span class="o">*</span><span class="n">batch</span><span class="p">),</span>
+      <span class="n">maskSymbol_</span><span class="p">(</span><span class="n">maskSymbol</span><span class="p">),</span> <span class="n">sepSymbol_</span><span class="p">(</span><span class="n">sepSymbol</span><span class="p">),</span> <span class="n">clsSymbol_</span><span class="p">(</span><span class="n">clsSymbol</span><span class="p">)</span> <span class="p">{</span>
+
+    <span class="c1">// BERT expects a textual first stream and a second stream with class labels</span>
+    <span class="k">auto</span> <span class="n">subBatch</span> <span class="o">=</span> <span class="n">subBatches_</span><span class="p">.</span><span class="n">front</span><span class="p">();</span>
+    <span class="k">const</span> <span class="k">auto</span><span class="o">&amp;</span> <span class="n">vocab</span> <span class="o">=</span> <span class="o">*</span><span class="n">subBatch</span><span class="o">-&gt;</span><span class="n">vocab</span><span class="p">();</span>
+
+    <span class="c1">// Initialize to sample random vocab id</span>
+    <span class="n">randomWord_</span><span class="p">.</span><span class="n">reset</span><span class="p">(</span><span class="k">new</span> <span class="n">std</span><span class="o">::</span><span class="n">uniform_int_distribution</span><span class="o">&lt;</span><span class="n">WordIndex</span><span class="o">&gt;</span><span class="p">(</span><span class="mi">0</span><span class="p">,</span> <span class="p">(</span><span class="n">WordIndex</span><span class="p">)</span><span class="n">vocab</span><span class="p">.</span><span class="n">size</span><span class="p">()));</span>
+
+    <span class="c1">// Intialize to sample random percentage</span>
+    <span class="n">randomPercent_</span><span class="p">.</span><span class="n">reset</span><span class="p">(</span><span class="k">new</span> <span class="n">std</span><span class="o">::</span><span class="n">uniform_real_distribution</span><span class="o">&lt;</span><span class="kt">float</span><span class="o">&gt;</span><span class="p">(</span><span class="mf">0.f</span><span class="p">,</span> <span class="mf">1.f</span><span class="p">));</span>
+
+    <span class="k">auto</span><span class="o">&amp;</span> <span class="n">words</span> <span class="o">=</span> <span class="n">subBatch</span><span class="o">-&gt;</span><span class="n">data</span><span class="p">();</span>
+
+    <span class="c1">// Get word id of special symbols</span>
+    <span class="n">Word</span> <span class="n">maskId</span>  <span class="o">=</span> <span class="n">vocab</span><span class="p">[</span><span class="n">maskSymbol_</span><span class="p">];</span>
+    <span class="n">Word</span> <span class="n">clsId</span>   <span class="o">=</span> <span class="n">vocab</span><span class="p">[</span><span class="n">clsSymbol_</span><span class="p">];</span>
+    <span class="n">Word</span> <span class="n">sepId</span>   <span class="o">=</span> <span class="n">vocab</span><span class="p">[</span><span class="n">sepSymbol_</span><span class="p">];</span>
+
+    <span class="n">ABORT_IF</span><span class="p">(</span><span class="n">maskId</span> <span class="o">==</span> <span class="n">vocab</span><span class="p">.</span><span class="n">getUnkId</span><span class="p">(),</span>
+             <span class="s">&quot;BERT masking symbol {} not found in vocabulary&quot;</span><span class="p">,</span> <span class="n">maskSymbol_</span><span class="p">);</span>
+
+    <span class="n">ABORT_IF</span><span class="p">(</span><span class="n">sepId</span> <span class="o">==</span> <span class="n">vocab</span><span class="p">.</span><span class="n">getUnkId</span><span class="p">(),</span>
+             <span class="s">&quot;BERT separator symbol {} not found in vocabulary&quot;</span><span class="p">,</span> <span class="n">sepSymbol_</span><span class="p">);</span>
+
+    <span class="n">ABORT_IF</span><span class="p">(</span><span class="n">clsId</span> <span class="o">==</span> <span class="n">vocab</span><span class="p">.</span><span class="n">getUnkId</span><span class="p">(),</span>
+             <span class="s">&quot;BERT class symbol {} not found in vocabulary&quot;</span><span class="p">,</span> <span class="n">clsSymbol_</span><span class="p">);</span>
+
+    <span class="n">dontMask_</span><span class="p">.</span><span class="n">insert</span><span class="p">(</span><span class="n">clsId</span><span class="p">);</span> <span class="c1">// don&#39;t mask class token</span>
+    <span class="n">dontMask_</span><span class="p">.</span><span class="n">insert</span><span class="p">(</span><span class="n">sepId</span><span class="p">);</span> <span class="c1">// don&#39;t mask separator token</span>
+    <span class="n">dontMask_</span><span class="p">.</span><span class="n">insert</span><span class="p">(</span><span class="n">vocab</span><span class="p">.</span><span class="n">getEosId</span><span class="p">());</span> <span class="c1">// don&#39;t mask &lt;/s&gt;</span>
+    <span class="c1">// it&#39;s ok to mask &lt;unk&gt;</span>
+
+    <span class="n">std</span><span class="o">::</span><span class="n">vector</span><span class="o">&lt;</span><span class="kt">int</span><span class="o">&gt;</span> <span class="n">selected</span><span class="p">;</span>
+    <span class="n">selected</span><span class="p">.</span><span class="n">reserve</span><span class="p">(</span><span class="n">words</span><span class="p">.</span><span class="n">size</span><span class="p">());</span>
+    <span class="k">for</span><span class="p">(</span><span class="kt">int</span> <span class="n">i</span> <span class="o">=</span> <span class="mi">0</span><span class="p">;</span> <span class="n">i</span> <span class="o">&lt;</span> <span class="n">words</span><span class="p">.</span><span class="n">size</span><span class="p">();</span> <span class="o">++</span><span class="n">i</span><span class="p">)</span> <span class="c1">// collect words among which we will mask</span>
+      <span class="k">if</span><span class="p">(</span><span class="n">dontMask_</span><span class="p">.</span><span class="n">count</span><span class="p">(</span><span class="n">words</span><span class="p">[</span><span class="n">i</span><span class="p">])</span> <span class="o">==</span> <span class="mi">0</span><span class="p">)</span>  <span class="c1">// do not add indices of special words</span>
+        <span class="n">selected</span><span class="p">.</span><span class="n">push_back</span><span class="p">(</span><span class="n">i</span><span class="p">);</span>
+    <span class="n">std</span><span class="o">::</span><span class="n">shuffle</span><span class="p">(</span><span class="n">selected</span><span class="p">.</span><span class="n">begin</span><span class="p">(),</span> <span class="n">selected</span><span class="p">.</span><span class="n">end</span><span class="p">(),</span> <span class="n">engine</span><span class="p">);</span> <span class="c1">// randomize positions</span>
+    <span class="n">selected</span><span class="p">.</span><span class="n">resize</span><span class="p">((</span><span class="kt">size_t</span><span class="p">)</span><span class="n">std</span><span class="o">::</span><span class="n">ceil</span><span class="p">(</span><span class="n">selected</span><span class="p">.</span><span class="n">size</span><span class="p">()</span> <span class="o">*</span> <span class="n">maskFraction</span><span class="p">));</span> <span class="c1">// select first x percent from shuffled indices</span>
+
+    <span class="k">for</span><span class="p">(</span><span class="kt">int</span> <span class="nl">i</span> <span class="p">:</span> <span class="n">selected</span><span class="p">)</span> <span class="p">{</span>
+      <span class="n">maskedPositions_</span><span class="p">.</span><span class="n">push_back</span><span class="p">(</span><span class="n">i</span><span class="p">);</span>                <span class="c1">// where is the original word?</span>
+      <span class="n">maskedWords_</span><span class="p">.</span><span class="n">push_back</span><span class="p">(</span><span class="n">words</span><span class="p">[</span><span class="n">i</span><span class="p">]);</span>             <span class="c1">// what is the original word?</span>
+      <span class="n">words</span><span class="p">[</span><span class="n">i</span><span class="p">]</span> <span class="o">=</span> <span class="n">maskOut</span><span class="p">(</span><span class="n">words</span><span class="p">[</span><span class="n">i</span><span class="p">],</span> <span class="n">maskId</span><span class="p">,</span> <span class="n">engine</span><span class="p">);</span> <span class="c1">// mask that position</span>
+    <span class="p">}</span>
+
+    <span class="n">annotateSentenceIndices</span><span class="p">(</span><span class="n">dimTypeVocab</span><span class="p">);</span>
+  <span class="p">}</span>
+
+  <span class="n">BertBatch</span><span class="p">(</span><span class="n">Ptr</span><span class="o">&lt;</span><span class="n">CorpusBatch</span><span class="o">&gt;</span> <span class="n">batch</span><span class="p">,</span>
+            <span class="k">const</span> <span class="n">std</span><span class="o">::</span><span class="n">string</span><span class="o">&amp;</span> <span class="n">sepSymbol</span><span class="p">,</span>
+            <span class="k">const</span> <span class="n">std</span><span class="o">::</span><span class="n">string</span><span class="o">&amp;</span> <span class="n">clsSymbol</span><span class="p">,</span>
+            <span class="kt">int</span> <span class="n">dimTypeVocab</span><span class="p">)</span>
+    <span class="o">:</span> <span class="n">CorpusBatch</span><span class="p">(</span><span class="o">*</span><span class="n">batch</span><span class="p">),</span>
+      <span class="n">maskSymbol_</span><span class="p">(</span><span class="s">&quot;dummy&quot;</span><span class="p">),</span> <span class="n">sepSymbol_</span><span class="p">(</span><span class="n">sepSymbol</span><span class="p">),</span> <span class="n">clsSymbol_</span><span class="p">(</span><span class="n">clsSymbol</span><span class="p">)</span> <span class="p">{</span>
+    <span class="n">annotateSentenceIndices</span><span class="p">(</span><span class="n">dimTypeVocab</span><span class="p">);</span>
+  <span class="p">}</span>
+
+  <span class="kt">void</span> <span class="n">annotateSentenceIndices</span><span class="p">(</span><span class="kt">int</span> <span class="n">dimTypeVocab</span><span class="p">)</span> <span class="p">{</span>
+    <span class="c1">// BERT expects a textual first stream and a second stream with class labels</span>
+    <span class="k">auto</span> <span class="n">subBatch</span> <span class="o">=</span> <span class="n">subBatches_</span><span class="p">.</span><span class="n">front</span><span class="p">();</span>
+    <span class="k">const</span> <span class="k">auto</span><span class="o">&amp;</span> <span class="n">vocab</span> <span class="o">=</span> <span class="o">*</span><span class="n">subBatch</span><span class="o">-&gt;</span><span class="n">vocab</span><span class="p">();</span>
+    <span class="k">auto</span><span class="o">&amp;</span> <span class="n">words</span> <span class="o">=</span> <span class="n">subBatch</span><span class="o">-&gt;</span><span class="n">data</span><span class="p">();</span>
+
+    <span class="c1">// Get word id of special symbols</span>
+    <span class="n">Word</span> <span class="n">sepId</span>   <span class="o">=</span> <span class="n">vocab</span><span class="p">[</span><span class="n">sepSymbol_</span><span class="p">];</span>
+    <span class="n">ABORT_IF</span><span class="p">(</span><span class="n">sepId</span> <span class="o">==</span> <span class="n">vocab</span><span class="p">.</span><span class="n">getUnkId</span><span class="p">(),</span>
+             <span class="s">&quot;BERT separator symbol {} not found in vocabulary&quot;</span><span class="p">,</span> <span class="n">sepSymbol_</span><span class="p">);</span>
+
+    <span class="kt">int</span> <span class="n">dimBatch</span> <span class="o">=</span> <span class="p">(</span><span class="kt">int</span><span class="p">)</span><span class="n">subBatch</span><span class="o">-&gt;</span><span class="n">batchSize</span><span class="p">();</span>
+    <span class="kt">int</span> <span class="n">dimWords</span> <span class="o">=</span> <span class="p">(</span><span class="kt">int</span><span class="p">)</span><span class="n">subBatch</span><span class="o">-&gt;</span><span class="n">batchWidth</span><span class="p">();</span>
+
+    <span class="k">const</span> <span class="kt">size_t</span> <span class="n">maxSentPos</span> <span class="o">=</span> <span class="n">dimTypeVocab</span><span class="p">;</span>
+
+    <span class="c1">// create indices for BERT sentence embeddings A and B</span>
+    <span class="n">sentenceIndices_</span><span class="p">.</span><span class="n">resize</span><span class="p">(</span><span class="n">words</span><span class="p">.</span><span class="n">size</span><span class="p">());</span> <span class="c1">// each word is either in sentence A or B</span>
+    <span class="n">std</span><span class="o">::</span><span class="n">vector</span><span class="o">&lt;</span><span class="n">IndexType</span><span class="o">&gt;</span> <span class="n">sentPos</span><span class="p">(</span><span class="n">dimBatch</span><span class="p">,</span> <span class="mi">0</span><span class="p">);</span> <span class="c1">// initialize each batch entry with being A [0]</span>
+    <span class="k">for</span><span class="p">(</span><span class="kt">int</span> <span class="n">i</span> <span class="o">=</span> <span class="mi">0</span><span class="p">;</span> <span class="n">i</span> <span class="o">&lt;</span> <span class="n">dimWords</span><span class="p">;</span> <span class="o">++</span><span class="n">i</span><span class="p">)</span> <span class="p">{</span>   <span class="c1">// advance word-wise</span>
+      <span class="k">for</span><span class="p">(</span><span class="kt">int</span> <span class="n">j</span> <span class="o">=</span> <span class="mi">0</span><span class="p">;</span> <span class="n">j</span> <span class="o">&lt;</span> <span class="n">dimBatch</span><span class="p">;</span> <span class="o">++</span><span class="n">j</span><span class="p">)</span> <span class="p">{</span> <span class="c1">// scan batch-wise</span>
+        <span class="kt">int</span> <span class="n">k</span> <span class="o">=</span> <span class="n">i</span> <span class="o">*</span> <span class="n">dimBatch</span> <span class="o">+</span> <span class="n">j</span><span class="p">;</span>
+        <span class="n">sentenceIndices_</span><span class="p">[</span><span class="n">k</span><span class="p">]</span> <span class="o">=</span> <span class="n">sentPos</span><span class="p">[</span><span class="n">j</span><span class="p">];</span> <span class="c1">// set to current sentence position for batch entry, max position 1.</span>
+        <span class="k">if</span><span class="p">(</span><span class="n">words</span><span class="p">[</span><span class="n">k</span><span class="p">]</span> <span class="o">==</span> <span class="n">sepId</span> <span class="o">&amp;&amp;</span> <span class="n">sentPos</span><span class="p">[</span><span class="n">j</span><span class="p">]</span> <span class="o">&lt;</span> <span class="n">maxSentPos</span><span class="p">)</span> <span class="p">{</span> <span class="c1">// if current word is a separator and not beyond range</span>
+          <span class="n">sentPos</span><span class="p">[</span><span class="n">j</span><span class="p">]</span><span class="o">++</span><span class="p">;</span>                   <span class="c1">// then increase sentence position for batch entry (to B [1])</span>
+        <span class="p">}</span>
+      <span class="p">}</span>
+    <span class="p">}</span>
+  <span class="p">}</span>
+
+  <span class="k">const</span> <span class="n">std</span><span class="o">::</span><span class="n">vector</span><span class="o">&lt;</span><span class="n">IndexType</span><span class="o">&gt;&amp;</span> <span class="n">bertMaskedPositions</span><span class="p">()</span> <span class="p">{</span> <span class="k">return</span> <span class="n">maskedPositions_</span><span class="p">;</span> <span class="p">}</span>
+  <span class="k">const</span> <span class="n">Words</span><span class="o">&amp;</span> <span class="n">bertMaskedWords</span><span class="p">()</span> <span class="p">{</span> <span class="k">return</span> <span class="n">maskedWords_</span><span class="p">;</span> <span class="p">}</span>
+  <span class="k">const</span> <span class="n">std</span><span class="o">::</span><span class="n">vector</span><span class="o">&lt;</span><span class="n">IndexType</span><span class="o">&gt;&amp;</span> <span class="n">bertSentenceIndices</span><span class="p">()</span> <span class="p">{</span> <span class="k">return</span> <span class="n">sentenceIndices_</span><span class="p">;</span> <span class="p">}</span>
+<span class="p">};</span>
+
+<span class="p">}</span>
+
+<span class="k">class</span> <span class="nc">BertEncoderClassifier</span> <span class="o">:</span> <span class="k">public</span> <span class="n">EncoderClassifier</span><span class="p">,</span> <span class="k">public</span> <span class="n">data</span><span class="o">::</span><span class="n">RNGEngine</span> <span class="p">{</span> <span class="c1">// @TODO: this random engine is not being serialized right now</span>
+<span class="k">public</span><span class="o">:</span>
+  <span class="n">BertEncoderClassifier</span><span class="p">(</span><span class="n">Ptr</span><span class="o">&lt;</span><span class="n">Options</span><span class="o">&gt;</span> <span class="n">options</span><span class="p">)</span>
+  <span class="o">:</span> <span class="n">EncoderClassifier</span><span class="p">(</span><span class="n">options</span><span class="p">)</span> <span class="p">{}</span>
+
+  <span class="n">std</span><span class="o">::</span><span class="n">vector</span><span class="o">&lt;</span><span class="n">Ptr</span><span class="o">&lt;</span><span class="n">ClassifierState</span><span class="o">&gt;&gt;</span> <span class="n">apply</span><span class="p">(</span><span class="n">Ptr</span><span class="o">&lt;</span><span class="n">ExpressionGraph</span><span class="o">&gt;</span> <span class="n">graph</span><span class="p">,</span> <span class="n">Ptr</span><span class="o">&lt;</span><span class="n">data</span><span class="o">::</span><span class="n">CorpusBatch</span><span class="o">&gt;</span> <span class="n">batch</span><span class="p">,</span> <span class="kt">bool</span> <span class="n">clearGraph</span><span class="p">)</span> <span class="k">override</span> <span class="p">{</span>
+    <span class="n">std</span><span class="o">::</span><span class="n">string</span> <span class="n">modelType</span> <span class="o">=</span> <span class="n">opt</span><span class="o">&lt;</span><span class="n">std</span><span class="o">::</span><span class="n">string</span><span class="o">&gt;</span><span class="p">(</span><span class="s">&quot;type&quot;</span><span class="p">);</span>
+    <span class="kt">int</span> <span class="n">dimTypeVocab</span> <span class="o">=</span> <span class="n">opt</span><span class="o">&lt;</span><span class="kt">int</span><span class="o">&gt;</span><span class="p">(</span><span class="s">&quot;bert-type-vocab-size&quot;</span><span class="p">);</span>
+
+    <span class="c1">// intercept batch and annotate with BERT-specific concepts</span>
+    <span class="n">Ptr</span><span class="o">&lt;</span><span class="n">data</span><span class="o">::</span><span class="n">BertBatch</span><span class="o">&gt;</span> <span class="n">bertBatch</span><span class="p">;</span>
+    <span class="k">if</span><span class="p">(</span><span class="n">modelType</span> <span class="o">==</span> <span class="s">&quot;bert&quot;</span><span class="p">)</span> <span class="p">{</span> <span class="c1">// full BERT pre-training</span>
+      <span class="n">bertBatch</span> <span class="o">=</span> <span class="n">New</span><span class="o">&lt;</span><span class="n">data</span><span class="o">::</span><span class="n">BertBatch</span><span class="o">&gt;</span><span class="p">(</span><span class="n">batch</span><span class="p">,</span>
+                                       <span class="n">eng_</span><span class="p">,</span>
+                                       <span class="n">opt</span><span class="o">&lt;</span><span class="kt">float</span><span class="o">&gt;</span><span class="p">(</span><span class="s">&quot;bert-masking-fraction&quot;</span><span class="p">,</span> <span class="mf">0.15f</span><span class="p">),</span> <span class="c1">// 15% by default according to paper</span>
+                                       <span class="n">opt</span><span class="o">&lt;</span><span class="n">std</span><span class="o">::</span><span class="n">string</span><span class="o">&gt;</span><span class="p">(</span><span class="s">&quot;bert-mask-symbol&quot;</span><span class="p">),</span>
+                                       <span class="n">opt</span><span class="o">&lt;</span><span class="n">std</span><span class="o">::</span><span class="n">string</span><span class="o">&gt;</span><span class="p">(</span><span class="s">&quot;bert-sep-symbol&quot;</span><span class="p">),</span>
+                                       <span class="n">opt</span><span class="o">&lt;</span><span class="n">std</span><span class="o">::</span><span class="n">string</span><span class="o">&gt;</span><span class="p">(</span><span class="s">&quot;bert-class-symbol&quot;</span><span class="p">),</span>
+                                       <span class="n">dimTypeVocab</span><span class="p">);</span>
+    <span class="p">}</span> <span class="k">else</span> <span class="k">if</span><span class="p">(</span><span class="n">modelType</span> <span class="o">==</span> <span class="s">&quot;bert-classifier&quot;</span><span class="p">)</span> <span class="p">{</span> <span class="c1">// we are probably fine-tuning a BERT model for a classification task</span>
+      <span class="n">bertBatch</span> <span class="o">=</span> <span class="n">New</span><span class="o">&lt;</span><span class="n">data</span><span class="o">::</span><span class="n">BertBatch</span><span class="o">&gt;</span><span class="p">(</span><span class="n">batch</span><span class="p">,</span>
+                                       <span class="n">opt</span><span class="o">&lt;</span><span class="n">std</span><span class="o">::</span><span class="n">string</span><span class="o">&gt;</span><span class="p">(</span><span class="s">&quot;bert-sep-symbol&quot;</span><span class="p">),</span>
+                                       <span class="n">opt</span><span class="o">&lt;</span><span class="n">std</span><span class="o">::</span><span class="n">string</span><span class="o">&gt;</span><span class="p">(</span><span class="s">&quot;bert-class-symbol&quot;</span><span class="p">),</span>
+                                       <span class="n">dimTypeVocab</span><span class="p">);</span> <span class="c1">// only annotate sentence separators</span>
+    <span class="p">}</span> <span class="k">else</span> <span class="p">{</span>
+      <span class="n">ABORT</span><span class="p">(</span><span class="s">&quot;Unknown BERT-style model: {}&quot;</span><span class="p">,</span> <span class="n">modelType</span><span class="p">);</span>
+    <span class="p">}</span>
+
+    <span class="k">return</span> <span class="n">EncoderClassifier</span><span class="o">::</span><span class="n">apply</span><span class="p">(</span><span class="n">graph</span><span class="p">,</span> <span class="n">bertBatch</span><span class="p">,</span> <span class="n">clearGraph</span><span class="p">);</span>
+  <span class="p">}</span>
+
+  <span class="c1">// for externally created BertBatch for instance in BertValidator</span>
+  <span class="n">std</span><span class="o">::</span><span class="n">vector</span><span class="o">&lt;</span><span class="n">Ptr</span><span class="o">&lt;</span><span class="n">ClassifierState</span><span class="o">&gt;&gt;</span> <span class="n">apply</span><span class="p">(</span><span class="n">Ptr</span><span class="o">&lt;</span><span class="n">ExpressionGraph</span><span class="o">&gt;</span> <span class="n">graph</span><span class="p">,</span> <span class="n">Ptr</span><span class="o">&lt;</span><span class="n">data</span><span class="o">::</span><span class="n">BertBatch</span><span class="o">&gt;</span> <span class="n">bertBatch</span><span class="p">,</span> <span class="kt">bool</span> <span class="n">clearGraph</span><span class="p">)</span> <span class="p">{</span>
+    <span class="k">return</span> <span class="n">EncoderClassifier</span><span class="o">::</span><span class="n">apply</span><span class="p">(</span><span class="n">graph</span><span class="p">,</span> <span class="n">bertBatch</span><span class="p">,</span> <span class="n">clearGraph</span><span class="p">);</span>
+  <span class="p">}</span>
+<span class="p">};</span>
+
+<span class="k">class</span> <span class="nc">BertEncoder</span> <span class="o">:</span> <span class="k">public</span> <span class="n">EncoderTransformer</span> <span class="p">{</span>
+  <span class="k">using</span> <span class="n">EncoderTransformer</span><span class="o">::</span><span class="n">EncoderTransformer</span><span class="p">;</span>
+<span class="k">public</span><span class="o">:</span>
+  <span class="n">Expr</span> <span class="n">addSentenceEmbeddings</span><span class="p">(</span><span class="n">Expr</span> <span class="n">embeddings</span><span class="p">,</span>
+                             <span class="n">Ptr</span><span class="o">&lt;</span><span class="n">data</span><span class="o">::</span><span class="n">CorpusBatch</span><span class="o">&gt;</span> <span class="n">batch</span><span class="p">,</span>
+                             <span class="kt">bool</span> <span class="n">learnedPosEmbeddings</span><span class="p">)</span> <span class="k">const</span> <span class="p">{</span>
+    <span class="n">Ptr</span><span class="o">&lt;</span><span class="n">data</span><span class="o">::</span><span class="n">BertBatch</span><span class="o">&gt;</span> <span class="n">bertBatch</span> <span class="o">=</span> <span class="n">std</span><span class="o">::</span><span class="n">dynamic_pointer_cast</span><span class="o">&lt;</span><span class="n">data</span><span class="o">::</span><span class="n">BertBatch</span><span class="o">&gt;</span><span class="p">(</span><span class="n">batch</span><span class="p">);</span>
+    <span class="n">ABORT_IF</span><span class="p">(</span><span class="o">!</span><span class="n">bertBatch</span><span class="p">,</span> <span class="s">&quot;Batch must be BertBatch for BERT training or fine-tuning&quot;</span><span class="p">);</span>
+
+    <span class="kt">int</span> <span class="n">dimEmb</span> <span class="o">=</span> <span class="n">embeddings</span><span class="o">-&gt;</span><span class="n">shape</span><span class="p">()[</span><span class="mi">-1</span><span class="p">];</span>
+    <span class="kt">int</span> <span class="n">dimBatch</span> <span class="o">=</span> <span class="n">embeddings</span><span class="o">-&gt;</span><span class="n">shape</span><span class="p">()[</span><span class="mi">-2</span><span class="p">];</span>
+    <span class="kt">int</span> <span class="n">dimWords</span> <span class="o">=</span> <span class="n">embeddings</span><span class="o">-&gt;</span><span class="n">shape</span><span class="p">()[</span><span class="mi">-3</span><span class="p">];</span>
+
+    <span class="kt">int</span> <span class="n">dimTypeVocab</span> <span class="o">=</span> <span class="n">opt</span><span class="o">&lt;</span><span class="kt">int</span><span class="o">&gt;</span><span class="p">(</span><span class="s">&quot;bert-type-vocab-size&quot;</span><span class="p">,</span> <span class="mi">2</span><span class="p">);</span>
+
+    <span class="n">Expr</span> <span class="n">signal</span><span class="p">;</span>
+    <span class="k">if</span><span class="p">(</span><span class="n">learnedPosEmbeddings</span><span class="p">)</span> <span class="p">{</span>
+      <span class="k">auto</span> <span class="n">sentenceEmbeddings</span> <span class="o">=</span> <span class="n">embedding</span><span class="p">()</span>
+                               <span class="p">(</span><span class="s">&quot;prefix&quot;</span><span class="p">,</span> <span class="s">&quot;Wtype&quot;</span><span class="p">)</span>
+                               <span class="p">(</span><span class="s">&quot;dimVocab&quot;</span><span class="p">,</span> <span class="n">dimTypeVocab</span><span class="p">)</span> <span class="c1">// sentence A or sentence B</span>
+                               <span class="p">(</span><span class="s">&quot;dimEmb&quot;</span><span class="p">,</span> <span class="n">dimEmb</span><span class="p">)</span>
+                               <span class="p">.</span><span class="n">construct</span><span class="p">(</span><span class="n">graph_</span><span class="p">);</span>
+      <span class="n">signal</span> <span class="o">=</span> <span class="n">sentenceEmbeddings</span><span class="o">-&gt;</span><span class="n">applyIndices</span><span class="p">(</span><span class="n">bertBatch</span><span class="o">-&gt;</span><span class="n">bertSentenceIndices</span><span class="p">(),</span> <span class="p">{</span><span class="n">dimWords</span><span class="p">,</span> <span class="n">dimBatch</span><span class="p">,</span> <span class="n">dimEmb</span><span class="p">});</span>
+    <span class="p">}</span> <span class="k">else</span> <span class="p">{</span>
+      <span class="c1">// @TODO: factory for positional embeddings?</span>
+      <span class="c1">// constant sinusoidal position embeddings, no backprob</span>
+      <span class="k">auto</span> <span class="n">sentenceEmbeddingsExpr</span> <span class="o">=</span> <span class="n">graph_</span><span class="o">-&gt;</span><span class="n">constant</span><span class="p">({</span><span class="mi">2</span><span class="p">,</span> <span class="n">dimEmb</span><span class="p">},</span> <span class="n">inits</span><span class="o">::</span><span class="n">sinusoidalPositionEmbeddings</span><span class="p">(</span><span class="mi">0</span><span class="p">));</span>
+      <span class="n">signal</span> <span class="o">=</span> <span class="n">rows</span><span class="p">(</span><span class="n">sentenceEmbeddingsExpr</span><span class="p">,</span> <span class="n">bertBatch</span><span class="o">-&gt;</span><span class="n">bertSentenceIndices</span><span class="p">());</span>
+      <span class="n">signal</span> <span class="o">=</span> <span class="n">reshape</span><span class="p">(</span><span class="n">signal</span><span class="p">,</span> <span class="p">{</span><span class="n">dimWords</span><span class="p">,</span> <span class="n">dimBatch</span><span class="p">,</span> <span class="n">dimEmb</span><span class="p">});</span>
+    <span class="p">}</span>
+
+    <span class="k">return</span> <span class="n">embeddings</span> <span class="o">+</span> <span class="n">signal</span><span class="p">;</span>
+  <span class="p">}</span>
+
+  <span class="k">virtual</span> <span class="n">Expr</span> <span class="n">addSpecialEmbeddings</span><span class="p">(</span><span class="n">Expr</span> <span class="n">input</span><span class="p">,</span> <span class="kt">int</span> <span class="n">start</span> <span class="o">=</span> <span class="mi">0</span><span class="p">,</span> <span class="n">Ptr</span><span class="o">&lt;</span><span class="n">data</span><span class="o">::</span><span class="n">CorpusBatch</span><span class="o">&gt;</span> <span class="n">batch</span> <span class="o">=</span> <span class="k">nullptr</span><span class="p">)</span> <span class="k">const</span> <span class="k">override</span> <span class="p">{</span>
+    <span class="kt">bool</span> <span class="n">trainPosEmbeddings</span> <span class="o">=</span> <span class="n">opt</span><span class="o">&lt;</span><span class="kt">bool</span><span class="o">&gt;</span><span class="p">(</span><span class="s">&quot;transformer-train-position-embeddings&quot;</span><span class="p">,</span> <span class="nb">true</span><span class="p">);</span>
+    <span class="kt">bool</span> <span class="n">trainTypeEmbeddings</span> <span class="o">=</span> <span class="n">opt</span><span class="o">&lt;</span><span class="kt">bool</span><span class="o">&gt;</span><span class="p">(</span><span class="s">&quot;bert-train-type-embeddings&quot;</span><span class="p">,</span> <span class="nb">true</span><span class="p">);</span>
+    <span class="n">input</span> <span class="o">=</span> <span class="n">addPositionalEmbeddings</span><span class="p">(</span><span class="n">input</span><span class="p">,</span> <span class="n">start</span><span class="p">,</span> <span class="n">trainPosEmbeddings</span><span class="p">);</span>
+    <span class="n">input</span> <span class="o">=</span> <span class="n">addSentenceEmbeddings</span><span class="p">(</span><span class="n">input</span><span class="p">,</span> <span class="n">batch</span><span class="p">,</span> <span class="n">trainTypeEmbeddings</span><span class="p">);</span>
+    <span class="k">return</span> <span class="n">input</span><span class="p">;</span>
+  <span class="p">}</span>
+<span class="p">};</span>
+
+<span class="k">class</span> <span class="nc">BertClassifier</span> <span class="o">:</span> <span class="k">public</span> <span class="n">ClassifierBase</span> <span class="p">{</span>
+  <span class="k">using</span> <span class="n">ClassifierBase</span><span class="o">::</span><span class="n">ClassifierBase</span><span class="p">;</span>
+<span class="k">public</span><span class="o">:</span>
+  <span class="n">Ptr</span><span class="o">&lt;</span><span class="n">ClassifierState</span><span class="o">&gt;</span> <span class="n">apply</span><span class="p">(</span><span class="n">Ptr</span><span class="o">&lt;</span><span class="n">ExpressionGraph</span><span class="o">&gt;</span> <span class="n">graph</span><span class="p">,</span> <span class="n">Ptr</span><span class="o">&lt;</span><span class="n">data</span><span class="o">::</span><span class="n">CorpusBatch</span><span class="o">&gt;</span> <span class="n">batch</span><span class="p">,</span> <span class="k">const</span> <span class="n">std</span><span class="o">::</span><span class="n">vector</span><span class="o">&lt;</span><span class="n">Ptr</span><span class="o">&lt;</span><span class="n">EncoderState</span><span class="o">&gt;&gt;&amp;</span> <span class="n">encoderStates</span><span class="p">)</span> <span class="k">override</span> <span class="p">{</span>
+    <span class="n">ABORT_IF</span><span class="p">(</span><span class="n">encoderStates</span><span class="p">.</span><span class="n">size</span><span class="p">()</span> <span class="o">!=</span> <span class="mi">1</span><span class="p">,</span> <span class="s">&quot;Currently we only support a single encoder BERT model&quot;</span><span class="p">);</span>
+
+    <span class="k">auto</span> <span class="n">context</span> <span class="o">=</span> <span class="n">encoderStates</span><span class="p">[</span><span class="mi">0</span><span class="p">]</span><span class="o">-&gt;</span><span class="n">getContext</span><span class="p">();</span>
+    <span class="k">auto</span> <span class="n">classEmbeddings</span> <span class="o">=</span> <span class="n">slice</span><span class="p">(</span><span class="n">context</span><span class="p">,</span> <span class="cm">/*axis=*/</span><span class="mi">-3</span><span class="p">,</span> <span class="cm">/*i=*/</span><span class="mi">0</span><span class="p">);</span> <span class="c1">// [CLS] symbol is first symbol in each sequence</span>
+
+    <span class="kt">int</span> <span class="n">dimModel</span> <span class="o">=</span> <span class="n">classEmbeddings</span><span class="o">-&gt;</span><span class="n">shape</span><span class="p">()[</span><span class="mi">-1</span><span class="p">];</span>
+    <span class="kt">int</span> <span class="n">dimTrgCls</span> <span class="o">=</span> <span class="n">opt</span><span class="o">&lt;</span><span class="n">std</span><span class="o">::</span><span class="n">vector</span><span class="o">&lt;</span><span class="kt">int</span><span class="o">&gt;&gt;</span><span class="p">(</span><span class="s">&quot;dim-vocabs&quot;</span><span class="p">)[</span><span class="n">batchIndex_</span><span class="p">];</span> <span class="c1">// Target vocab is used as class labels</span>
+
+    <span class="k">auto</span> <span class="n">output</span> <span class="o">=</span> <span class="n">mlp</span><span class="o">::</span><span class="n">mlp</span><span class="p">()</span>                                          <span class="c1">//</span>
+                    <span class="p">.</span><span class="n">push_back</span><span class="p">(</span><span class="n">mlp</span><span class="o">::</span><span class="n">dense</span><span class="p">()</span>                           <span class="c1">//</span>
+                                 <span class="p">(</span><span class="s">&quot;prefix&quot;</span><span class="p">,</span> <span class="n">prefix_</span> <span class="o">+</span> <span class="s">&quot;_ff_logit_l1&quot;</span><span class="p">)</span> <span class="c1">//</span>
+                                 <span class="p">(</span><span class="s">&quot;dim&quot;</span><span class="p">,</span> <span class="n">dimModel</span><span class="p">)</span>                    <span class="c1">//</span>
+                                 <span class="p">(</span><span class="s">&quot;activation&quot;</span><span class="p">,</span> <span class="p">(</span><span class="kt">int</span><span class="p">)</span><span class="n">mlp</span><span class="o">::</span><span class="n">act</span><span class="o">::</span><span class="n">tanh</span><span class="p">))</span>      <span class="c1">// @TODO: do we actually need this?</span>
+                    <span class="p">.</span><span class="n">push_back</span><span class="p">(</span><span class="n">mlp</span><span class="o">::</span><span class="n">output</span><span class="p">()</span>                          <span class="c1">//</span>
+                                 <span class="p">(</span><span class="s">&quot;dim&quot;</span><span class="p">,</span> <span class="n">dimTrgCls</span><span class="p">))</span>                  <span class="c1">//</span>
+                                 <span class="p">(</span><span class="s">&quot;prefix&quot;</span><span class="p">,</span> <span class="n">prefix_</span> <span class="o">+</span> <span class="s">&quot;_ff_logit_l2&quot;</span><span class="p">)</span> <span class="c1">//</span>
+                    <span class="p">.</span><span class="n">construct</span><span class="p">(</span><span class="n">graph</span><span class="p">);</span>
+
+    <span class="k">auto</span> <span class="n">logits</span> <span class="o">=</span> <span class="n">output</span><span class="o">-&gt;</span><span class="n">apply</span><span class="p">(</span><span class="n">classEmbeddings</span><span class="p">);</span> <span class="c1">// class logits for each batch entry</span>
+
+    <span class="k">auto</span> <span class="n">state</span> <span class="o">=</span> <span class="n">New</span><span class="o">&lt;</span><span class="n">ClassifierState</span><span class="o">&gt;</span><span class="p">();</span>
+    <span class="n">state</span><span class="o">-&gt;</span><span class="n">setLogProbs</span><span class="p">(</span><span class="n">logits</span><span class="p">);</span>
+
+    <span class="c1">// Filled externally, for BERT these are NextSentence prediction labels</span>
+    <span class="k">const</span> <span class="k">auto</span><span class="o">&amp;</span> <span class="n">classLabels</span> <span class="o">=</span> <span class="p">(</span><span class="o">*</span><span class="n">batch</span><span class="p">)[</span><span class="n">batchIndex_</span><span class="p">]</span><span class="o">-&gt;</span><span class="n">data</span><span class="p">();</span>
+    <span class="n">state</span><span class="o">-&gt;</span><span class="n">setTargetWords</span><span class="p">(</span><span class="n">classLabels</span><span class="p">);</span>
+
+    <span class="k">return</span> <span class="n">state</span><span class="p">;</span>
+  <span class="p">}</span>
+
+  <span class="k">virtual</span> <span class="kt">void</span> <span class="n">clear</span><span class="p">()</span> <span class="k">override</span> <span class="p">{}</span>
+<span class="p">};</span>
+
+<span class="k">class</span> <span class="nc">BertMaskedLM</span> <span class="o">:</span> <span class="k">public</span> <span class="n">ClassifierBase</span> <span class="p">{</span>
+  <span class="k">using</span> <span class="n">ClassifierBase</span><span class="o">::</span><span class="n">ClassifierBase</span><span class="p">;</span>
+<span class="k">public</span><span class="o">:</span>
+  <span class="n">Ptr</span><span class="o">&lt;</span><span class="n">ClassifierState</span><span class="o">&gt;</span> <span class="n">apply</span><span class="p">(</span><span class="n">Ptr</span><span class="o">&lt;</span><span class="n">ExpressionGraph</span><span class="o">&gt;</span> <span class="n">graph</span><span class="p">,</span> <span class="n">Ptr</span><span class="o">&lt;</span><span class="n">data</span><span class="o">::</span><span class="n">CorpusBatch</span><span class="o">&gt;</span> <span class="n">batch</span><span class="p">,</span> <span class="k">const</span> <span class="n">std</span><span class="o">::</span><span class="n">vector</span><span class="o">&lt;</span><span class="n">Ptr</span><span class="o">&lt;</span><span class="n">EncoderState</span><span class="o">&gt;&gt;&amp;</span> <span class="n">encoderStates</span><span class="p">)</span> <span class="k">override</span> <span class="p">{</span>
+    <span class="n">Ptr</span><span class="o">&lt;</span><span class="n">data</span><span class="o">::</span><span class="n">BertBatch</span><span class="o">&gt;</span> <span class="n">bertBatch</span> <span class="o">=</span> <span class="n">std</span><span class="o">::</span><span class="n">dynamic_pointer_cast</span><span class="o">&lt;</span><span class="n">data</span><span class="o">::</span><span class="n">BertBatch</span><span class="o">&gt;</span><span class="p">(</span><span class="n">batch</span><span class="p">);</span>
+
+    <span class="n">ABORT_IF</span><span class="p">(</span><span class="o">!</span><span class="n">bertBatch</span><span class="p">,</span> <span class="s">&quot;Batch must be BertBatch for BERT training&quot;</span><span class="p">);</span>
+    <span class="n">ABORT_IF</span><span class="p">(</span><span class="n">encoderStates</span><span class="p">.</span><span class="n">size</span><span class="p">()</span> <span class="o">!=</span> <span class="mi">1</span><span class="p">,</span> <span class="s">&quot;Currently we only support a single encoder BERT model&quot;</span><span class="p">);</span>
+
+    <span class="k">auto</span> <span class="n">context</span> <span class="o">=</span> <span class="n">encoderStates</span><span class="p">[</span><span class="mi">0</span><span class="p">]</span><span class="o">-&gt;</span><span class="n">getContext</span><span class="p">();</span>
+
+    <span class="k">auto</span> <span class="n">bertMaskedPositions</span>    <span class="o">=</span> <span class="n">graph</span><span class="o">-&gt;</span><span class="n">indices</span><span class="p">(</span><span class="n">bertBatch</span><span class="o">-&gt;</span><span class="n">bertMaskedPositions</span><span class="p">());</span> <span class="c1">// positions in batch of masked entries</span>
+    <span class="k">const</span> <span class="k">auto</span><span class="o">&amp;</span> <span class="n">bertMaskedWords</span> <span class="o">=</span> <span class="n">bertBatch</span><span class="o">-&gt;</span><span class="n">bertMaskedWords</span><span class="p">();</span>   <span class="c1">// vocab ids of entries that have been masked</span>
+
+    <span class="kt">int</span> <span class="n">dimModel</span> <span class="o">=</span> <span class="n">context</span><span class="o">-&gt;</span><span class="n">shape</span><span class="p">()[</span><span class="mi">-1</span><span class="p">];</span>
+    <span class="kt">int</span> <span class="n">dimBatch</span> <span class="o">=</span> <span class="n">context</span><span class="o">-&gt;</span><span class="n">shape</span><span class="p">()[</span><span class="mi">-2</span><span class="p">];</span>
+    <span class="kt">int</span> <span class="n">dimTime</span>  <span class="o">=</span> <span class="n">context</span><span class="o">-&gt;</span><span class="n">shape</span><span class="p">()[</span><span class="mi">-3</span><span class="p">];</span>
+
+    <span class="k">auto</span> <span class="n">maskedContext</span> <span class="o">=</span> <span class="n">rows</span><span class="p">(</span><span class="n">reshape</span><span class="p">(</span><span class="n">context</span><span class="p">,</span> <span class="p">{</span><span class="n">dimBatch</span> <span class="o">*</span> <span class="n">dimTime</span><span class="p">,</span> <span class="n">dimModel</span><span class="p">}),</span> <span class="n">bertMaskedPositions</span><span class="p">);</span> <span class="c1">// subselect stuff that has actually been masked out</span>
+
+    <span class="kt">int</span> <span class="n">dimVoc</span> <span class="o">=</span> <span class="n">opt</span><span class="o">&lt;</span><span class="n">std</span><span class="o">::</span><span class="n">vector</span><span class="o">&lt;</span><span class="kt">int</span><span class="o">&gt;&gt;</span><span class="p">(</span><span class="s">&quot;dim-vocabs&quot;</span><span class="p">)[</span><span class="n">batchIndex_</span><span class="p">];</span>
+
+    <span class="k">auto</span> <span class="n">layer1</span> <span class="o">=</span> <span class="n">mlp</span><span class="o">::</span><span class="n">mlp</span><span class="p">()</span>
+      <span class="p">.</span><span class="n">push_back</span><span class="p">(</span><span class="n">mlp</span><span class="o">::</span><span class="n">dense</span><span class="p">()</span>
+                 <span class="p">(</span><span class="s">&quot;prefix&quot;</span><span class="p">,</span> <span class="n">prefix_</span> <span class="o">+</span> <span class="s">&quot;_ff_logit_l1&quot;</span><span class="p">)</span>
+                 <span class="p">(</span><span class="s">&quot;dim&quot;</span><span class="p">,</span> <span class="n">dimModel</span><span class="p">))</span>
+                 <span class="p">.</span><span class="n">construct</span><span class="p">(</span><span class="n">graph</span><span class="p">);</span>
+
+    <span class="k">auto</span> <span class="n">intermediate</span> <span class="o">=</span> <span class="n">layer1</span><span class="o">-&gt;</span><span class="n">apply</span><span class="p">(</span><span class="n">maskedContext</span><span class="p">);</span>
+
+    <span class="n">std</span><span class="o">::</span><span class="n">string</span> <span class="n">activationType</span> <span class="o">=</span> <span class="n">opt</span><span class="o">&lt;</span><span class="n">std</span><span class="o">::</span><span class="n">string</span><span class="o">&gt;</span><span class="p">(</span><span class="s">&quot;transformer-ffn-activation&quot;</span><span class="p">);</span>
+    <span class="k">if</span><span class="p">(</span><span class="n">activationType</span> <span class="o">==</span> <span class="s">&quot;relu&quot;</span><span class="p">)</span>
+      <span class="n">intermediate</span> <span class="o">=</span> <span class="n">relu</span><span class="p">(</span><span class="n">intermediate</span><span class="p">);</span>
+    <span class="k">else</span> <span class="nf">if</span><span class="p">(</span><span class="n">activationType</span> <span class="o">==</span> <span class="s">&quot;swish&quot;</span><span class="p">)</span>
+      <span class="n">intermediate</span> <span class="o">=</span> <span class="n">swish</span><span class="p">(</span><span class="n">intermediate</span><span class="p">);</span>
+    <span class="k">else</span> <span class="nf">if</span><span class="p">(</span><span class="n">activationType</span> <span class="o">==</span> <span class="s">&quot;gelu&quot;</span><span class="p">)</span>
+      <span class="n">intermediate</span> <span class="o">=</span> <span class="n">gelu</span><span class="p">(</span><span class="n">intermediate</span><span class="p">);</span>
+    <span class="k">else</span>
+      <span class="nf">ABORT</span><span class="p">(</span><span class="s">&quot;Activation function {} not supported in BERT masked LM&quot;</span><span class="p">,</span> <span class="n">activationType</span><span class="p">);</span>
+
+    <span class="k">auto</span> <span class="n">gamma</span> <span class="o">=</span> <span class="n">graph</span><span class="o">-&gt;</span><span class="n">param</span><span class="p">(</span><span class="n">prefix_</span> <span class="o">+</span> <span class="s">&quot;_ff_ln_scale&quot;</span><span class="p">,</span> <span class="p">{</span><span class="mi">1</span><span class="p">,</span> <span class="n">dimModel</span><span class="p">},</span> <span class="n">inits</span><span class="o">::</span><span class="n">ones</span><span class="p">());</span>
+    <span class="k">auto</span> <span class="n">beta</span>  <span class="o">=</span> <span class="n">graph</span><span class="o">-&gt;</span><span class="n">param</span><span class="p">(</span><span class="n">prefix_</span> <span class="o">+</span> <span class="s">&quot;_ff_ln_bias&quot;</span><span class="p">,</span>  <span class="p">{</span><span class="mi">1</span><span class="p">,</span> <span class="n">dimModel</span><span class="p">},</span> <span class="n">inits</span><span class="o">::</span><span class="n">zeros</span><span class="p">());</span>
+    <span class="n">intermediate</span> <span class="o">=</span> <span class="n">layerNorm</span><span class="p">(</span><span class="n">intermediate</span><span class="p">,</span> <span class="n">gamma</span><span class="p">,</span> <span class="n">beta</span><span class="p">);</span>
+
+    <span class="k">auto</span> <span class="n">layer2</span> <span class="o">=</span> <span class="n">mlp</span><span class="o">::</span><span class="n">mlp</span><span class="p">()</span>
+      <span class="p">.</span><span class="n">push_back</span><span class="p">(</span><span class="n">mlp</span><span class="o">::</span><span class="n">output</span><span class="p">(</span>
+                  <span class="s">&quot;prefix&quot;</span><span class="p">,</span> <span class="n">prefix_</span> <span class="o">+</span> <span class="s">&quot;_ff_logit_l2&quot;</span><span class="p">,</span>
+                  <span class="s">&quot;dim&quot;</span><span class="p">,</span> <span class="n">dimVoc</span><span class="p">)</span>
+                 <span class="p">.</span><span class="n">tieTransposed</span><span class="p">(</span><span class="s">&quot;Wemb&quot;</span><span class="p">))</span>
+      <span class="p">.</span><span class="n">construct</span><span class="p">(</span><span class="n">graph</span><span class="p">);</span>
+
+    <span class="k">auto</span> <span class="n">logits</span> <span class="o">=</span> <span class="n">layer2</span><span class="o">-&gt;</span><span class="n">apply</span><span class="p">(</span><span class="n">intermediate</span><span class="p">);</span> <span class="c1">// [-4: beam depth=1, -3: max length, -2: batch size, -1: vocab dim]</span>
+
+    <span class="k">auto</span> <span class="n">state</span> <span class="o">=</span> <span class="n">New</span><span class="o">&lt;</span><span class="n">ClassifierState</span><span class="o">&gt;</span><span class="p">();</span>
+    <span class="n">state</span><span class="o">-&gt;</span><span class="n">setLogProbs</span><span class="p">(</span><span class="n">logits</span><span class="p">);</span>
+    <span class="n">state</span><span class="o">-&gt;</span><span class="n">setTargetWords</span><span class="p">(</span><span class="n">bertMaskedWords</span><span class="p">);</span>
+
+    <span class="k">return</span> <span class="n">state</span><span class="p">;</span>
+  <span class="p">}</span>
+
+  <span class="k">virtual</span> <span class="kt">void</span> <span class="n">clear</span><span class="p">()</span> <span class="k">override</span> <span class="p">{}</span>
+<span class="p">};</span>
+
+<span class="p">}</span>
+</pre></div>
+</div>
+</div>
+
+
+           </div>
+           
+          </div>
+          <footer>
+
+  <hr/>
+
+  <div role="contentinfo">
+    <p>
+        &#169; Copyright 2021, Marian NMT Team.
+
+    </p>
+  </div>
+    
+    
+    
+    Built with <a href="https://www.sphinx-doc.org/">Sphinx</a> using a
+    
+    <a href="https://github.com/readthedocs/sphinx_rtd_theme">theme</a>
+    
+    provided by <a href="https://readthedocs.org">Read the Docs</a>. 
+
+</footer>
+        </div>
+      </div>
+
+    </section>
+
+  </div>
+  
+
+  <script type="text/javascript">
+      jQuery(function () {
+          SphinxRtdTheme.Navigation.enable(true);
+      });
+  </script>
+
+  
+  
+    
+   
+
+</body>
+</html>

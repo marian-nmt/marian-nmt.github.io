@@ -1,0 +1,171 @@
+
+.. _program_listing_file_src_training_deprecated_graph_group_multinode_sync.h:
+
+Program Listing for File graph_group_multinode_sync.h
+=====================================================
+
+|exhale_lsh| :ref:`Return to documentation for file <file_src_training_deprecated_graph_group_multinode_sync.h>` (``src/training/deprecated/graph_group_multinode_sync.h``)
+
+.. |exhale_lsh| unicode:: U+021B0 .. UPWARDS ARROW WITH TIP LEFTWARDS
+
+.. code-block:: cpp
+
+   #pragma once
+   
+   #include "training/graph_group.h"
+   #include "training/communicator.h"
+   #include "3rd_party/threadpool.h"
+   
+   #include <condition_variable>
+   #include <future>
+   #include <thread>
+   
+   namespace marian {
+   
+   class MultiNodeGraphGroupSync : public MultiNodeGraphGroupBase {
+     using Base = MultiNodeGraphGroupBase;
+   public:
+     virtual void setScheduler(Ptr<Scheduler> scheduler) override;
+   
+   private:
+     // General variables.
+   
+     bool initialized_{false};
+   
+     std::vector<Ptr<TensorAllocator>> allocators_;
+   
+     // Client variables.
+   
+     std::mutex mutexClientInit_;
+   
+     std::mutex schedulerMutex_;
+   
+     size_t batchIter_ = 0;
+   
+     // Communication variables.
+   
+     std::vector<int> numberClientsOfNodes_;  //@TODO not used for now, but might
+                                              // be useful maybe?
+   
+     size_t tau_{1};
+     std::mutex sumGradientMutex_;
+     std::mutex updateParamsMutex_;
+     std::mutex sumCostMutex_;
+     Tensor accGradientsSync;
+     Tensor sumGradientBuffer;
+     Tensor paramsAvg_;
+     std::vector<float> accGradientsSync_cpu;
+     std::vector<float> receiveBuffer_cpu;
+   
+     Ptr<OptimizerBase> syncOptimizer_;
+   
+     std::vector<std::mutex> optDelayMutex_;
+     std::vector<size_t> delay_count;
+     std::vector<int> totalBatchWords;
+     std::vector<Tensor> accGradients, accGradientBuffer;
+   
+     bool movingAvg_{false};
+     float mvDecay_{1e-4f};
+   
+     Tensor newTensor(int size, Ptr<Backend> backend);
+   
+     /*
+      * exponential smoothing
+      */
+     void updateAvgParams(Tensor paramsAvg, Tensor params, size_t batches);
+   
+     virtual void init(Ptr<data::Batch> batch);
+   
+     void setupClients(Ptr<data::Batch> batch);
+   
+     void runBatchThroughClientGraphs(Ptr<data::Batch> batch);
+   
+     void initCPUArrays();
+   
+     void sumGRAD(Tensor gradient);
+   
+     void sendReceiveUpdateSync();
+   
+     void execute(Ptr<data::Batch> batch);
+   
+   public:
+     MultiNodeGraphGroupSync(Ptr<Options> options, Ptr<IMPIWrapper> mpi)
+         : Base(options, mpi),
+           tau_{(size_t)options_->get<double>("optimizer-delay")},
+           syncOptimizer_{Optimizer(options_)},
+           movingAvg_{options_->get<float>("exponential-smoothing") > 0},
+           mvDecay_{options_->get<float>("exponential-smoothing")} {
+     }
+   
+     void update(Ptr<data::Batch> batch) override {
+       validate();
+       if(batchIter_ % mpi_->numMPIProcesses() == mpi_->myMPIRank()) {  // Only take batch assigned to this node
+         execute(batch);
+       }
+       batchIter_++;
+     }
+   
+     void load() override {
+       if(!options_->get<bool>("no-reload")) {
+         std::string name = options_->get<std::string>("model");
+   
+         if(filesystem::exists(name)) {
+           if(scheduler_)
+             scheduler_->load(name);
+           size_t i = 0;
+           for(auto graph : clientGraphs_)
+             clientBuilders_[i++]->load(graph, name);
+         } else if(options_->hasAndNotEmpty("pretrained-model")) {
+           std::string init = options_->get<std::string>("pretrained-model");
+           LOG(info,
+               "Initialize model weights with the pre-trained model {}",
+               init);
+           size_t i = 0;
+           for(auto graph : clientGraphs_)
+             clientBuilders_[i++]->load(graph, init, false);
+         }
+       }
+     }
+   
+     void save(bool final = false) override { save(clientGraphs_[0], final); }
+   
+     void save(Ptr<ExpressionGraph> graph, bool final = false) {
+       int idx = 0;
+       for(int i = 0; i < clientGraphs_.size(); ++i) {
+         if(graph == clientGraphs_[i]) {
+           idx = i;
+           break;
+         }
+       }
+   
+       if(options_->get<bool>("overwrite")) {
+         std::string name = options_->get<std::string>("model");
+   
+         clientBuilders_[idx]->save(clientGraphs_[idx], name, true);
+         if(scheduler_)
+           scheduler_->save(name);
+       } else {
+         std::string name = options_->get<std::string>("model");
+   
+         if(!final) {
+           std::string numberOfBatches
+               = scheduler_ ? std::to_string(scheduler_->numberOfBatches())
+                            : "unknown";
+           std::string nameOverwrite = name;
+           nameOverwrite.replace(
+               name.size() - 4, 4, ".iter" + numberOfBatches + ".npz");
+           clientBuilders_[idx]->save(clientGraphs_[idx], nameOverwrite);
+         }
+   
+         clientBuilders_[idx]->save(clientGraphs_[idx], name, true);
+         if(scheduler_)
+           scheduler_->save(name);
+       }
+     }
+   
+     Ptr<data::BatchStats> collectStats(const std::vector<Ptr<Vocab>>& vocabs) {
+       return GraphGroup::collectStats(
+           clientGraphs_[0], clientBuilders_[0], vocabs, (double)devices_.size());
+     }
+   };
+   }  // namespace marian

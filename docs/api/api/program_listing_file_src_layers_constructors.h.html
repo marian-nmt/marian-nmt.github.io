@@ -1,0 +1,412 @@
+
+
+<!DOCTYPE html>
+<html class="writer-html5" lang="en" >
+<head>
+  <meta charset="utf-8" />
+  
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  
+  <title>Program Listing for File constructors.h &mdash; Marian NMT v1.10.1 2021-02-23 documentation</title>
+  
+
+  
+  <link rel="stylesheet" href="../_static/css/theme.css" type="text/css" />
+  <link rel="stylesheet" href="../_static/pygments.css" type="text/css" />
+  <link rel="stylesheet" href="../_static/css/custom.css" type="text/css" />
+  <link rel="stylesheet" href="../_static/collapsible-lists/css/tree_view.css" type="text/css" />
+
+  
+  
+
+  
+  
+
+  
+    <link rel="canonical" href="http://marian-nmt.github.io/docs/api/api/program_listing_file_src_layers_constructors.h.html" />
+
+  
+  <!--[if lt IE 9]>
+    <script src="../_static/js/html5shiv.min.js"></script>
+  <![endif]-->
+  
+    
+      <script type="text/javascript" id="documentation_options" data-url_root="../" src="../_static/documentation_options.js"></script>
+        <script src="../_static/jquery.js"></script>
+        <script src="../_static/underscore.js"></script>
+        <script src="../_static/doctools.js"></script>
+        <script src="../_static/language_data.js"></script>
+        <script src="../_static/collapsible-lists/js/CollapsibleLists.compressed.js"></script>
+        <script src="../_static/collapsible-lists/js/apply-collapsible-lists.js"></script>
+    
+    <script type="text/javascript" src="../_static/js/theme.js"></script>
+
+    
+    <link rel="index" title="Index" href="../genindex.html" />
+    <link rel="search" title="Search" href="../search.html" /> 
+</head>
+
+<body class="wy-body-for-nav">
+
+   
+  <div class="wy-grid-for-nav">
+    
+    <nav data-toggle="wy-nav-shift" class="wy-nav-side">
+      <div class="wy-side-scroll">
+        <div class="wy-side-nav-search" >
+          
+
+          
+            <a href="../index.html" class="icon icon-home"> Marian NMT
+          
+
+          
+          </a>
+
+          
+            
+            
+              <div class="version">
+                v1.10.1
+              </div>
+            
+          
+
+          
+<div role="search">
+  <form id="rtd-search-form" class="wy-form" action="../search.html" method="get">
+    <input type="text" name="q" placeholder="Search docs" />
+    <input type="hidden" name="check_keywords" value="yes" />
+    <input type="hidden" name="area" value="default" />
+  </form>
+</div>
+
+          
+        </div>
+
+        
+        <div class="wy-menu wy-menu-vertical" data-spy="affix" role="navigation" aria-label="main navigation">
+          
+            
+            
+              
+            
+            
+              <p class="caption"><span class="caption-text">Contents:</span></p>
+<ul>
+<li class="toctree-l1"><a class="reference internal" href="../install.html">Installation</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../graph.html">Expression graphs</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../operators.html">Graph operations</a></li>
+<li class="toctree-l1"><a class="reference internal" href="library_index.html">Library API</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../contributing.html">How to contribute to Marian</a></li>
+</ul>
+
+            
+          
+        </div>
+        
+      </div>
+    </nav>
+
+    <section data-toggle="wy-nav-shift" class="wy-nav-content-wrap">
+
+      
+      <nav class="wy-nav-top" aria-label="top navigation">
+        
+          <i data-toggle="wy-nav-top" class="fa fa-bars"></i>
+          <a href="../index.html">Marian NMT</a>
+        
+      </nav>
+
+
+      <div class="wy-nav-content">
+        
+        <div class="rst-content">
+        
+          
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+<div role="navigation" aria-label="breadcrumbs navigation">
+
+  <ul class="wy-breadcrumbs">
+    
+      <li><a href="../index.html" class="icon icon-home"></a> &raquo;</li>
+        
+      <li>Program Listing for File constructors.h</li>
+    
+    
+      <li class="wy-breadcrumbs-aside">
+        
+          
+            <a href="../_sources/api/program_listing_file_src_layers_constructors.h.rst.txt" rel="nofollow"> View page source</a>
+          
+        
+      </li>
+    
+  </ul>
+
+  
+  <hr/>
+</div>
+          <div role="main" class="document" itemscope="itemscope" itemtype="http://schema.org/Article">
+           <div itemprop="articleBody">
+            
+  <div class="section" id="program-listing-for-file-constructors-h">
+<span id="program-listing-file-src-layers-constructors-h"></span><h1>Program Listing for File constructors.h<a class="headerlink" href="#program-listing-for-file-constructors-h" title="Permalink to this headline">¶</a></h1>
+<p>↰ <a class="reference internal" href="file_src_layers_constructors.h.html#file-src-layers-constructors-h"><span class="std std-ref">Return to documentation for file</span></a> (<code class="docutils literal notranslate"><span class="pre">src/layers/constructors.h</span></code>)</p>
+<div class="highlight-cpp notranslate"><div class="highlight"><pre><span></span><span class="cp">#pragma once</span>
+
+<span class="cp">#include</span> <span class="cpf">&quot;layers/factory.h&quot;</span><span class="cp"></span>
+<span class="cp">#include</span> <span class="cpf">&quot;layers/generic.h&quot;</span><span class="cp"></span>
+
+<span class="k">namespace</span> <span class="n">marian</span> <span class="p">{</span>
+<span class="k">namespace</span> <span class="n">mlp</span> <span class="p">{</span>
+
+<span class="k">struct</span> <span class="nc">LayerFactory</span> <span class="o">:</span> <span class="k">public</span> <span class="n">Factory</span> <span class="p">{</span>
+  <span class="k">virtual</span> <span class="n">Ptr</span><span class="o">&lt;</span><span class="n">IUnaryLayer</span><span class="o">&gt;</span> <span class="n">construct</span><span class="p">(</span><span class="n">Ptr</span><span class="o">&lt;</span><span class="n">ExpressionGraph</span><span class="o">&gt;</span> <span class="n">graph</span><span class="p">)</span> <span class="o">=</span> <span class="mi">0</span><span class="p">;</span>
+<span class="p">};</span>
+
+<span class="k">class</span> <span class="nc">DenseFactory</span> <span class="o">:</span> <span class="k">public</span> <span class="n">LayerFactory</span> <span class="p">{</span>
+<span class="k">public</span><span class="o">:</span>
+  <span class="n">Ptr</span><span class="o">&lt;</span><span class="n">IUnaryLayer</span><span class="o">&gt;</span> <span class="n">construct</span><span class="p">(</span><span class="n">Ptr</span><span class="o">&lt;</span><span class="n">ExpressionGraph</span><span class="o">&gt;</span> <span class="n">graph</span><span class="p">)</span> <span class="k">override</span> <span class="p">{</span>
+    <span class="k">return</span> <span class="n">New</span><span class="o">&lt;</span><span class="n">Dense</span><span class="o">&gt;</span><span class="p">(</span><span class="n">graph</span><span class="p">,</span> <span class="n">options_</span><span class="p">);</span>
+  <span class="p">}</span>
+
+  <span class="n">DenseFactory</span> <span class="n">clone</span><span class="p">()</span> <span class="p">{</span>
+    <span class="n">DenseFactory</span> <span class="n">aClone</span><span class="p">;</span>
+    <span class="n">aClone</span><span class="p">.</span><span class="n">options_</span><span class="o">-&gt;</span><span class="n">merge</span><span class="p">(</span><span class="n">options_</span><span class="p">);</span>
+    <span class="k">return</span> <span class="n">aClone</span><span class="p">;</span>
+  <span class="p">}</span>
+<span class="p">};</span>
+
+<span class="c1">// @TODO: change naming convention</span>
+<span class="k">typedef</span> <span class="n">Accumulator</span><span class="o">&lt;</span><span class="n">DenseFactory</span><span class="o">&gt;</span> <span class="n">dense</span><span class="p">;</span>
+
+<span class="k">struct</span> <span class="nc">LogitLayerFactory</span> <span class="o">:</span> <span class="k">public</span> <span class="n">Factory</span> <span class="p">{</span>
+  <span class="k">using</span> <span class="n">Factory</span><span class="o">::</span><span class="n">Factory</span><span class="p">;</span>
+  <span class="k">virtual</span> <span class="n">Ptr</span><span class="o">&lt;</span><span class="n">IUnaryLogitLayer</span><span class="o">&gt;</span> <span class="n">construct</span><span class="p">(</span><span class="n">Ptr</span><span class="o">&lt;</span><span class="n">ExpressionGraph</span><span class="o">&gt;</span> <span class="n">graph</span><span class="p">)</span> <span class="o">=</span> <span class="mi">0</span><span class="p">;</span>
+<span class="p">};</span>
+
+<span class="c1">// @TODO: In the long run, I hope we can get rid of the abstract factories altogether.</span>
+<span class="k">class</span> <span class="nc">OutputFactory</span> <span class="o">:</span> <span class="k">public</span> <span class="n">LogitLayerFactory</span> <span class="p">{</span>
+  <span class="k">using</span> <span class="n">LogitLayerFactory</span><span class="o">::</span><span class="n">LogitLayerFactory</span><span class="p">;</span>
+<span class="k">protected</span><span class="o">:</span>
+  <span class="n">std</span><span class="o">::</span><span class="n">string</span> <span class="n">tiedTransposedName_</span><span class="p">;</span>
+  <span class="n">Ptr</span><span class="o">&lt;</span><span class="n">data</span><span class="o">::</span><span class="n">Shortlist</span><span class="o">&gt;</span> <span class="n">shortlist_</span><span class="p">;</span>
+
+<span class="k">public</span><span class="o">:</span>
+  <span class="n">Accumulator</span><span class="o">&lt;</span><span class="n">OutputFactory</span><span class="o">&gt;</span> <span class="n">tieTransposed</span><span class="p">(</span><span class="k">const</span> <span class="n">std</span><span class="o">::</span><span class="n">string</span><span class="o">&amp;</span> <span class="n">tied</span><span class="p">)</span> <span class="p">{</span>
+    <span class="n">tiedTransposedName_</span> <span class="o">=</span> <span class="n">tied</span><span class="p">;</span>
+    <span class="k">return</span> <span class="n">Accumulator</span><span class="o">&lt;</span><span class="n">OutputFactory</span><span class="o">&gt;</span><span class="p">(</span><span class="o">*</span><span class="k">this</span><span class="p">);</span>
+  <span class="p">}</span>
+
+  <span class="kt">void</span> <span class="n">setShortlist</span><span class="p">(</span><span class="n">Ptr</span><span class="o">&lt;</span><span class="n">data</span><span class="o">::</span><span class="n">Shortlist</span><span class="o">&gt;</span> <span class="n">shortlist</span><span class="p">)</span> <span class="p">{</span>
+    <span class="n">shortlist_</span> <span class="o">=</span> <span class="n">shortlist</span><span class="p">;</span>
+  <span class="p">}</span>
+
+  <span class="n">Ptr</span><span class="o">&lt;</span><span class="n">IUnaryLogitLayer</span><span class="o">&gt;</span> <span class="n">construct</span><span class="p">(</span><span class="n">Ptr</span><span class="o">&lt;</span><span class="n">ExpressionGraph</span><span class="o">&gt;</span> <span class="n">graph</span><span class="p">)</span> <span class="k">override</span> <span class="p">{</span>
+    <span class="k">auto</span> <span class="n">output</span> <span class="o">=</span> <span class="n">New</span><span class="o">&lt;</span><span class="n">Output</span><span class="o">&gt;</span><span class="p">(</span><span class="n">graph</span><span class="p">,</span> <span class="n">options_</span><span class="p">);</span>
+    <span class="n">output</span><span class="o">-&gt;</span><span class="n">tieTransposed</span><span class="p">(</span><span class="n">graph</span><span class="o">-&gt;</span><span class="n">get</span><span class="p">(</span><span class="n">tiedTransposedName_</span><span class="p">));</span>
+    <span class="n">output</span><span class="o">-&gt;</span><span class="n">setShortlist</span><span class="p">(</span><span class="n">shortlist_</span><span class="p">);</span>
+    <span class="k">return</span> <span class="n">output</span><span class="p">;</span>
+  <span class="p">}</span>
+
+  <span class="n">OutputFactory</span> <span class="n">clone</span><span class="p">()</span> <span class="p">{</span>
+    <span class="n">OutputFactory</span> <span class="n">aClone</span><span class="p">;</span>
+    <span class="n">aClone</span><span class="p">.</span><span class="n">options_</span><span class="o">-&gt;</span><span class="n">merge</span><span class="p">(</span><span class="n">options_</span><span class="p">);</span>
+    <span class="n">aClone</span><span class="p">.</span><span class="n">tiedTransposedName_</span> <span class="o">=</span> <span class="n">tiedTransposedName_</span><span class="p">;</span>
+    <span class="n">aClone</span><span class="p">.</span><span class="n">shortlist_</span> <span class="o">=</span> <span class="n">shortlist_</span><span class="p">;</span>
+    <span class="k">return</span> <span class="n">aClone</span><span class="p">;</span>
+  <span class="p">}</span>
+<span class="p">};</span>
+
+<span class="c1">// @TODO: change naming convention</span>
+<span class="k">typedef</span> <span class="n">Accumulator</span><span class="o">&lt;</span><span class="n">OutputFactory</span><span class="o">&gt;</span> <span class="n">output</span><span class="p">;</span>
+
+<span class="k">class</span> <span class="nc">MLP</span> <span class="o">:</span> <span class="k">public</span> <span class="n">IUnaryLogitLayer</span><span class="p">,</span> <span class="k">public</span> <span class="n">IHasShortList</span> <span class="p">{</span>
+<span class="k">protected</span><span class="o">:</span>
+  <span class="n">Ptr</span><span class="o">&lt;</span><span class="n">ExpressionGraph</span><span class="o">&gt;</span> <span class="n">graph_</span><span class="p">;</span>
+  <span class="n">Ptr</span><span class="o">&lt;</span><span class="n">Options</span><span class="o">&gt;</span> <span class="n">options_</span><span class="p">;</span>
+
+  <span class="n">std</span><span class="o">::</span><span class="n">vector</span><span class="o">&lt;</span><span class="n">Ptr</span><span class="o">&lt;</span><span class="n">IUnaryLayer</span><span class="o">&gt;&gt;</span> <span class="n">layers_</span><span class="p">;</span>
+
+<span class="k">public</span><span class="o">:</span>
+  <span class="n">MLP</span><span class="p">(</span><span class="n">Ptr</span><span class="o">&lt;</span><span class="n">ExpressionGraph</span><span class="o">&gt;</span> <span class="n">graph</span><span class="p">,</span> <span class="n">Ptr</span><span class="o">&lt;</span><span class="n">Options</span><span class="o">&gt;</span> <span class="n">options</span><span class="p">)</span>
+      <span class="o">:</span> <span class="n">graph_</span><span class="p">(</span><span class="n">graph</span><span class="p">),</span> <span class="n">options_</span><span class="p">(</span><span class="n">options</span><span class="p">)</span> <span class="p">{}</span>
+
+  <span class="n">Expr</span> <span class="n">apply</span><span class="p">(</span><span class="k">const</span> <span class="n">std</span><span class="o">::</span><span class="n">vector</span><span class="o">&lt;</span><span class="n">Expr</span><span class="o">&gt;&amp;</span> <span class="n">av</span><span class="p">)</span> <span class="k">override</span> <span class="p">{</span>
+    <span class="n">Expr</span> <span class="n">output</span><span class="p">;</span>
+    <span class="k">if</span><span class="p">(</span><span class="n">av</span><span class="p">.</span><span class="n">size</span><span class="p">()</span> <span class="o">==</span> <span class="mi">1</span><span class="p">)</span>
+      <span class="n">output</span> <span class="o">=</span> <span class="n">layers_</span><span class="p">[</span><span class="mi">0</span><span class="p">]</span><span class="o">-&gt;</span><span class="n">apply</span><span class="p">(</span><span class="n">av</span><span class="p">[</span><span class="mi">0</span><span class="p">]);</span>
+    <span class="k">else</span>
+      <span class="n">output</span> <span class="o">=</span> <span class="n">layers_</span><span class="p">[</span><span class="mi">0</span><span class="p">]</span><span class="o">-&gt;</span><span class="n">apply</span><span class="p">(</span><span class="n">av</span><span class="p">);</span>
+
+    <span class="k">for</span><span class="p">(</span><span class="kt">size_t</span> <span class="n">i</span> <span class="o">=</span> <span class="mi">1</span><span class="p">;</span> <span class="n">i</span> <span class="o">&lt;</span> <span class="n">layers_</span><span class="p">.</span><span class="n">size</span><span class="p">();</span> <span class="o">++</span><span class="n">i</span><span class="p">)</span>
+      <span class="n">output</span> <span class="o">=</span> <span class="n">layers_</span><span class="p">[</span><span class="n">i</span><span class="p">]</span><span class="o">-&gt;</span><span class="n">apply</span><span class="p">(</span><span class="n">output</span><span class="p">);</span>
+
+    <span class="k">return</span> <span class="n">output</span><span class="p">;</span>
+  <span class="p">}</span>
+
+  <span class="n">Logits</span> <span class="n">applyAsLogits</span><span class="p">(</span><span class="k">const</span> <span class="n">std</span><span class="o">::</span><span class="n">vector</span><span class="o">&lt;</span><span class="n">Expr</span><span class="o">&gt;&amp;</span> <span class="n">av</span><span class="p">)</span> <span class="k">override</span> <span class="p">{</span>
+    <span class="c1">// same as apply() except  for the last layer, we invoke applyAsLogits(), which has a different return type</span>
+    <span class="k">auto</span> <span class="n">lastLayer</span> <span class="o">=</span> <span class="n">std</span><span class="o">::</span><span class="n">dynamic_pointer_cast</span><span class="o">&lt;</span><span class="n">IUnaryLogitLayer</span><span class="o">&gt;</span><span class="p">(</span><span class="n">layers_</span><span class="p">.</span><span class="n">back</span><span class="p">());</span>
+    <span class="n">ABORT_IF</span><span class="p">(</span><span class="o">!</span><span class="n">lastLayer</span><span class="p">,</span> <span class="s">&quot;MLP::applyAsLogits() was called on an MLP whose last layer is not an IUnaryLogitLayer&quot;</span><span class="p">);</span>
+    <span class="k">if</span> <span class="p">(</span><span class="n">layers_</span><span class="p">.</span><span class="n">size</span><span class="p">()</span> <span class="o">==</span> <span class="mi">1</span><span class="p">)</span> <span class="p">{</span>
+      <span class="k">if</span> <span class="p">(</span><span class="n">av</span><span class="p">.</span><span class="n">size</span><span class="p">()</span> <span class="o">==</span> <span class="mi">1</span><span class="p">)</span>
+        <span class="k">return</span> <span class="n">lastLayer</span><span class="o">-&gt;</span><span class="n">applyAsLogits</span><span class="p">(</span><span class="n">av</span><span class="p">[</span><span class="mi">0</span><span class="p">]);</span>
+      <span class="k">else</span>
+        <span class="k">return</span> <span class="n">lastLayer</span><span class="o">-&gt;</span><span class="n">applyAsLogits</span><span class="p">(</span><span class="n">av</span><span class="p">);</span>
+    <span class="p">}</span>
+    <span class="k">else</span> <span class="p">{</span>
+      <span class="n">Expr</span> <span class="n">output</span><span class="p">;</span>
+      <span class="k">if</span> <span class="p">(</span><span class="n">av</span><span class="p">.</span><span class="n">size</span><span class="p">()</span> <span class="o">==</span> <span class="mi">1</span><span class="p">)</span>
+        <span class="n">output</span> <span class="o">=</span> <span class="n">layers_</span><span class="p">[</span><span class="mi">0</span><span class="p">]</span><span class="o">-&gt;</span><span class="n">apply</span><span class="p">(</span><span class="n">av</span><span class="p">[</span><span class="mi">0</span><span class="p">]);</span>
+      <span class="k">else</span>
+        <span class="n">output</span> <span class="o">=</span> <span class="n">layers_</span><span class="p">[</span><span class="mi">0</span><span class="p">]</span><span class="o">-&gt;</span><span class="n">apply</span><span class="p">(</span><span class="n">av</span><span class="p">);</span>
+      <span class="k">for</span> <span class="p">(</span><span class="kt">size_t</span> <span class="n">i</span> <span class="o">=</span> <span class="mi">1</span><span class="p">;</span> <span class="n">i</span> <span class="o">&lt;</span> <span class="n">layers_</span><span class="p">.</span><span class="n">size</span><span class="p">()</span> <span class="o">-</span> <span class="mi">1</span><span class="p">;</span> <span class="o">++</span><span class="n">i</span><span class="p">)</span>
+        <span class="n">output</span> <span class="o">=</span> <span class="n">layers_</span><span class="p">[</span><span class="n">i</span><span class="p">]</span><span class="o">-&gt;</span><span class="n">apply</span><span class="p">(</span><span class="n">output</span><span class="p">);</span>
+      <span class="k">return</span> <span class="n">lastLayer</span><span class="o">-&gt;</span><span class="n">applyAsLogits</span><span class="p">(</span><span class="n">output</span><span class="p">);</span>
+    <span class="p">}</span>
+  <span class="p">}</span>
+
+  <span class="n">Expr</span> <span class="n">apply</span><span class="p">(</span><span class="n">Expr</span> <span class="n">e</span><span class="p">)</span> <span class="k">override</span> <span class="p">{</span> <span class="k">return</span> <span class="nf">apply</span><span class="p">(</span><span class="n">std</span><span class="o">::</span><span class="n">vector</span><span class="o">&lt;</span><span class="n">Expr</span><span class="o">&gt;</span><span class="p">{</span> <span class="n">e</span> <span class="p">});</span> <span class="p">}</span>
+  <span class="n">Logits</span> <span class="n">applyAsLogits</span><span class="p">(</span><span class="n">Expr</span> <span class="n">e</span><span class="p">)</span> <span class="k">override</span> <span class="p">{</span> <span class="k">return</span> <span class="nf">applyAsLogits</span><span class="p">(</span><span class="n">std</span><span class="o">::</span><span class="n">vector</span><span class="o">&lt;</span><span class="n">Expr</span><span class="o">&gt;</span><span class="p">{</span> <span class="n">e</span> <span class="p">});</span> <span class="p">}</span>
+
+  <span class="kt">void</span> <span class="n">push_back</span><span class="p">(</span><span class="n">Ptr</span><span class="o">&lt;</span><span class="n">IUnaryLayer</span><span class="o">&gt;</span> <span class="n">layer</span><span class="p">)</span> <span class="p">{</span> <span class="n">layers_</span><span class="p">.</span><span class="n">push_back</span><span class="p">(</span><span class="n">layer</span><span class="p">);</span> <span class="p">}</span>
+  <span class="kt">void</span> <span class="n">push_back</span><span class="p">(</span><span class="n">Ptr</span><span class="o">&lt;</span><span class="n">IUnaryLogitLayer</span><span class="o">&gt;</span> <span class="n">layer</span><span class="p">)</span> <span class="p">{</span> <span class="n">layers_</span><span class="p">.</span><span class="n">push_back</span><span class="p">(</span><span class="n">layer</span><span class="p">);</span> <span class="p">}</span>
+
+  <span class="kt">void</span> <span class="n">setShortlist</span><span class="p">(</span><span class="n">Ptr</span><span class="o">&lt;</span><span class="n">data</span><span class="o">::</span><span class="n">Shortlist</span><span class="o">&gt;</span> <span class="n">shortlist</span><span class="p">)</span> <span class="k">override</span> <span class="k">final</span> <span class="p">{</span>
+    <span class="k">auto</span> <span class="n">p</span> <span class="o">=</span> <span class="n">tryAsHasShortlist</span><span class="p">();</span>
+    <span class="n">ABORT_IF</span><span class="p">(</span><span class="o">!</span><span class="n">p</span><span class="p">,</span> <span class="s">&quot;setShortlist() called on an MLP with an output layer that does not support short lists&quot;</span><span class="p">);</span>
+    <span class="n">p</span><span class="o">-&gt;</span><span class="n">setShortlist</span><span class="p">(</span><span class="n">shortlist</span><span class="p">);</span>
+  <span class="p">}</span>
+
+  <span class="kt">void</span> <span class="n">clear</span><span class="p">()</span> <span class="k">override</span> <span class="k">final</span> <span class="p">{</span>
+    <span class="k">auto</span> <span class="n">p</span> <span class="o">=</span> <span class="n">tryAsHasShortlist</span><span class="p">();</span>
+    <span class="k">if</span> <span class="p">(</span><span class="n">p</span><span class="p">)</span>
+      <span class="n">p</span><span class="o">-&gt;</span><span class="n">clear</span><span class="p">();</span>
+  <span class="p">}</span>
+<span class="k">private</span><span class="o">:</span>
+  <span class="n">Ptr</span><span class="o">&lt;</span><span class="n">IHasShortList</span><span class="o">&gt;</span> <span class="n">tryAsHasShortlist</span><span class="p">()</span> <span class="k">const</span> <span class="p">{</span> <span class="k">return</span> <span class="n">std</span><span class="o">::</span><span class="n">dynamic_pointer_cast</span><span class="o">&lt;</span><span class="n">IHasShortList</span><span class="o">&gt;</span><span class="p">(</span><span class="n">layers_</span><span class="p">.</span><span class="n">back</span><span class="p">());</span> <span class="p">}</span>
+<span class="p">};</span>
+
+<span class="k">class</span> <span class="nc">MLPFactory</span> <span class="o">:</span> <span class="k">public</span> <span class="n">Factory</span> <span class="p">{</span>
+  <span class="k">using</span> <span class="n">Factory</span><span class="o">::</span><span class="n">Factory</span><span class="p">;</span>
+<span class="k">private</span><span class="o">:</span>
+  <span class="n">std</span><span class="o">::</span><span class="n">vector</span><span class="o">&lt;</span><span class="n">Ptr</span><span class="o">&lt;</span><span class="n">LayerFactory</span><span class="o">&gt;&gt;</span> <span class="n">layers_</span><span class="p">;</span>
+
+<span class="k">public</span><span class="o">:</span>
+  <span class="n">Ptr</span><span class="o">&lt;</span><span class="n">MLP</span><span class="o">&gt;</span> <span class="n">construct</span><span class="p">(</span><span class="n">Ptr</span><span class="o">&lt;</span><span class="n">ExpressionGraph</span><span class="o">&gt;</span> <span class="n">graph</span><span class="p">)</span> <span class="p">{</span>
+    <span class="k">auto</span> <span class="n">mlp</span> <span class="o">=</span> <span class="n">New</span><span class="o">&lt;</span><span class="n">MLP</span><span class="o">&gt;</span><span class="p">(</span><span class="n">graph</span><span class="p">,</span> <span class="n">options_</span><span class="p">);</span>
+    <span class="k">for</span><span class="p">(</span><span class="k">auto</span> <span class="nl">layer</span> <span class="p">:</span> <span class="n">layers_</span><span class="p">)</span> <span class="p">{</span>
+      <span class="n">layer</span><span class="o">-&gt;</span><span class="n">mergeOpts</span><span class="p">(</span><span class="n">options_</span><span class="p">);</span>
+      <span class="n">mlp</span><span class="o">-&gt;</span><span class="n">push_back</span><span class="p">(</span><span class="n">layer</span><span class="o">-&gt;</span><span class="n">construct</span><span class="p">(</span><span class="n">graph</span><span class="p">));</span>
+    <span class="p">}</span>
+    <span class="k">return</span> <span class="n">mlp</span><span class="p">;</span>
+  <span class="p">}</span>
+
+  <span class="k">template</span> <span class="o">&lt;</span><span class="k">class</span> <span class="nc">LF</span><span class="o">&gt;</span>
+  <span class="n">Accumulator</span><span class="o">&lt;</span><span class="n">MLPFactory</span><span class="o">&gt;</span> <span class="n">push_back</span><span class="p">(</span><span class="k">const</span> <span class="n">LF</span><span class="o">&amp;</span> <span class="n">lf</span><span class="p">)</span> <span class="p">{</span>
+    <span class="n">layers_</span><span class="p">.</span><span class="n">push_back</span><span class="p">(</span><span class="n">New</span><span class="o">&lt;</span><span class="n">LF</span><span class="o">&gt;</span><span class="p">(</span><span class="n">lf</span><span class="p">));</span>
+    <span class="k">return</span> <span class="n">Accumulator</span><span class="o">&lt;</span><span class="n">MLPFactory</span><span class="o">&gt;</span><span class="p">(</span><span class="o">*</span><span class="k">this</span><span class="p">);</span>
+  <span class="p">}</span>
+
+  <span class="c1">// Special case for last layer, which may be a IUnaryLogitLayer. Requires some hackery,</span>
+  <span class="c1">// which will go away if we get rid of the abstract factories, and instead just construct</span>
+  <span class="c1">// all layers immediately, which is my long-term goal for Marian.</span>
+<span class="k">private</span><span class="o">:</span>
+  <span class="k">template</span><span class="o">&lt;</span><span class="k">class</span> <span class="nc">WrappedFactory</span><span class="o">&gt;</span>
+  <span class="k">class</span> <span class="nc">AsLayerFactory</span> <span class="o">:</span> <span class="k">public</span> <span class="n">LayerFactory</span> <span class="p">{</span>
+      <span class="n">WrappedFactory</span> <span class="n">us</span><span class="p">;</span>
+  <span class="k">public</span><span class="o">:</span>
+      <span class="n">AsLayerFactory</span><span class="p">(</span><span class="k">const</span> <span class="n">WrappedFactory</span><span class="o">&amp;</span> <span class="n">wrapped</span><span class="p">)</span> <span class="o">:</span> <span class="n">us</span><span class="p">(</span><span class="n">wrapped</span><span class="p">)</span> <span class="p">{}</span>
+      <span class="n">Ptr</span><span class="o">&lt;</span><span class="n">IUnaryLayer</span><span class="o">&gt;</span> <span class="n">construct</span><span class="p">(</span><span class="n">Ptr</span><span class="o">&lt;</span><span class="n">ExpressionGraph</span><span class="o">&gt;</span> <span class="n">graph</span><span class="p">)</span> <span class="k">override</span> <span class="k">final</span> <span class="p">{</span>
+          <span class="k">auto</span> <span class="n">p</span> <span class="o">=</span> <span class="n">std</span><span class="o">::</span><span class="n">static_pointer_cast</span><span class="o">&lt;</span><span class="n">IUnaryLayer</span><span class="o">&gt;</span><span class="p">(</span><span class="n">us</span><span class="p">.</span><span class="n">construct</span><span class="p">(</span><span class="n">graph</span><span class="p">));</span>
+          <span class="n">ABORT_IF</span><span class="p">(</span><span class="o">!</span><span class="n">p</span><span class="p">,</span> <span class="s">&quot;Attempted to cast a Factory to LayerFactory that isn&#39;t one&quot;</span><span class="p">);</span>
+          <span class="k">return</span> <span class="n">p</span><span class="p">;</span>
+      <span class="p">}</span>
+  <span class="p">};</span>
+  <span class="k">template</span><span class="o">&lt;</span><span class="k">class</span> <span class="nc">WrappedFactory</span><span class="o">&gt;</span>
+  <span class="k">static</span> <span class="kr">inline</span> <span class="n">AsLayerFactory</span><span class="o">&lt;</span><span class="n">WrappedFactory</span><span class="o">&gt;</span> <span class="n">asLayerFactory</span><span class="p">(</span><span class="k">const</span> <span class="n">WrappedFactory</span><span class="o">&amp;</span> <span class="n">wrapped</span><span class="p">)</span> <span class="p">{</span> <span class="k">return</span> <span class="n">wrapped</span><span class="p">;</span> <span class="p">}</span>
+<span class="k">public</span><span class="o">:</span>
+  <span class="n">Accumulator</span><span class="o">&lt;</span><span class="n">MLPFactory</span><span class="o">&gt;</span> <span class="n">push_back</span><span class="p">(</span><span class="k">const</span> <span class="n">Accumulator</span><span class="o">&lt;</span><span class="n">OutputFactory</span><span class="o">&gt;&amp;</span> <span class="n">lf</span><span class="p">)</span> <span class="p">{</span>
+    <span class="n">push_back</span><span class="p">(</span><span class="n">AsLayerFactory</span><span class="o">&lt;</span><span class="n">OutputFactory</span><span class="o">&gt;</span><span class="p">(</span><span class="n">lf</span><span class="p">));</span>
+    <span class="c1">//layers_.push_back(New&lt;AsLayerFactory&lt;OutputFactory&gt;&gt;(asLayerFactory((OutputFactory&amp;)lf)));</span>
+    <span class="k">return</span> <span class="n">Accumulator</span><span class="o">&lt;</span><span class="n">MLPFactory</span><span class="o">&gt;</span><span class="p">(</span><span class="o">*</span><span class="k">this</span><span class="p">);</span>
+  <span class="p">}</span>
+<span class="p">};</span>
+
+<span class="c1">// @TODO: change naming convention.</span>
+<span class="k">typedef</span> <span class="n">Accumulator</span><span class="o">&lt;</span><span class="n">MLPFactory</span><span class="o">&gt;</span> <span class="n">mlp</span><span class="p">;</span>
+<span class="p">}</span>  <span class="c1">// namespace mlp</span>
+
+<span class="k">typedef</span> <span class="n">ConstructingFactory</span><span class="o">&lt;</span><span class="n">Embedding</span><span class="o">&gt;</span> <span class="n">EmbeddingFactory</span><span class="p">;</span>
+<span class="k">typedef</span> <span class="n">ConstructingFactory</span><span class="o">&lt;</span><span class="n">ULREmbedding</span><span class="o">&gt;</span> <span class="n">ULREmbeddingFactory</span><span class="p">;</span>
+
+<span class="k">typedef</span> <span class="n">Accumulator</span><span class="o">&lt;</span><span class="n">EmbeddingFactory</span><span class="o">&gt;</span> <span class="n">embedding</span><span class="p">;</span>
+<span class="k">typedef</span> <span class="n">Accumulator</span><span class="o">&lt;</span><span class="n">ULREmbeddingFactory</span><span class="o">&gt;</span> <span class="n">ulr_embedding</span><span class="p">;</span>
+<span class="p">}</span>  <span class="c1">// namespace marian</span>
+</pre></div>
+</div>
+</div>
+
+
+           </div>
+           
+          </div>
+          <footer>
+
+  <hr/>
+
+  <div role="contentinfo">
+    <p>
+        &#169; Copyright 2021, Marian NMT Team.
+
+    </p>
+  </div>
+    
+    
+    
+    Built with <a href="https://www.sphinx-doc.org/">Sphinx</a> using a
+    
+    <a href="https://github.com/readthedocs/sphinx_rtd_theme">theme</a>
+    
+    provided by <a href="https://readthedocs.org">Read the Docs</a>. 
+
+</footer>
+        </div>
+      </div>
+
+    </section>
+
+  </div>
+  
+
+  <script type="text/javascript">
+      jQuery(function () {
+          SphinxRtdTheme.Navigation.enable(true);
+      });
+  </script>
+
+  
+  
+    
+   
+
+</body>
+</html>

@@ -1,0 +1,523 @@
+
+
+<!DOCTYPE html>
+<html class="writer-html5" lang="en" >
+<head>
+  <meta charset="utf-8" />
+  
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  
+  <title>Program Listing for File corpus.cpp &mdash; Marian NMT v1.10.1 2021-02-23 documentation</title>
+  
+
+  
+  <link rel="stylesheet" href="../_static/css/theme.css" type="text/css" />
+  <link rel="stylesheet" href="../_static/pygments.css" type="text/css" />
+  <link rel="stylesheet" href="../_static/css/custom.css" type="text/css" />
+  <link rel="stylesheet" href="../_static/collapsible-lists/css/tree_view.css" type="text/css" />
+
+  
+  
+
+  
+  
+
+  
+    <link rel="canonical" href="http://marian-nmt.github.io/docs/api/api/program_listing_file_src_data_corpus.cpp.html" />
+
+  
+  <!--[if lt IE 9]>
+    <script src="../_static/js/html5shiv.min.js"></script>
+  <![endif]-->
+  
+    
+      <script type="text/javascript" id="documentation_options" data-url_root="../" src="../_static/documentation_options.js"></script>
+        <script src="../_static/jquery.js"></script>
+        <script src="../_static/underscore.js"></script>
+        <script src="../_static/doctools.js"></script>
+        <script src="../_static/language_data.js"></script>
+        <script src="../_static/collapsible-lists/js/CollapsibleLists.compressed.js"></script>
+        <script src="../_static/collapsible-lists/js/apply-collapsible-lists.js"></script>
+    
+    <script type="text/javascript" src="../_static/js/theme.js"></script>
+
+    
+    <link rel="index" title="Index" href="../genindex.html" />
+    <link rel="search" title="Search" href="../search.html" /> 
+</head>
+
+<body class="wy-body-for-nav">
+
+   
+  <div class="wy-grid-for-nav">
+    
+    <nav data-toggle="wy-nav-shift" class="wy-nav-side">
+      <div class="wy-side-scroll">
+        <div class="wy-side-nav-search" >
+          
+
+          
+            <a href="../index.html" class="icon icon-home"> Marian NMT
+          
+
+          
+          </a>
+
+          
+            
+            
+              <div class="version">
+                v1.10.1
+              </div>
+            
+          
+
+          
+<div role="search">
+  <form id="rtd-search-form" class="wy-form" action="../search.html" method="get">
+    <input type="text" name="q" placeholder="Search docs" />
+    <input type="hidden" name="check_keywords" value="yes" />
+    <input type="hidden" name="area" value="default" />
+  </form>
+</div>
+
+          
+        </div>
+
+        
+        <div class="wy-menu wy-menu-vertical" data-spy="affix" role="navigation" aria-label="main navigation">
+          
+            
+            
+              
+            
+            
+              <p class="caption"><span class="caption-text">Contents:</span></p>
+<ul>
+<li class="toctree-l1"><a class="reference internal" href="../install.html">Installation</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../graph.html">Expression graphs</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../operators.html">Graph operations</a></li>
+<li class="toctree-l1"><a class="reference internal" href="library_index.html">Library API</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../contributing.html">How to contribute to Marian</a></li>
+</ul>
+
+            
+          
+        </div>
+        
+      </div>
+    </nav>
+
+    <section data-toggle="wy-nav-shift" class="wy-nav-content-wrap">
+
+      
+      <nav class="wy-nav-top" aria-label="top navigation">
+        
+          <i data-toggle="wy-nav-top" class="fa fa-bars"></i>
+          <a href="../index.html">Marian NMT</a>
+        
+      </nav>
+
+
+      <div class="wy-nav-content">
+        
+        <div class="rst-content">
+        
+          
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+<div role="navigation" aria-label="breadcrumbs navigation">
+
+  <ul class="wy-breadcrumbs">
+    
+      <li><a href="../index.html" class="icon icon-home"></a> &raquo;</li>
+        
+      <li>Program Listing for File corpus.cpp</li>
+    
+    
+      <li class="wy-breadcrumbs-aside">
+        
+          
+            <a href="../_sources/api/program_listing_file_src_data_corpus.cpp.rst.txt" rel="nofollow"> View page source</a>
+          
+        
+      </li>
+    
+  </ul>
+
+  
+  <hr/>
+</div>
+          <div role="main" class="document" itemscope="itemscope" itemtype="http://schema.org/Article">
+           <div itemprop="articleBody">
+            
+  <div class="section" id="program-listing-for-file-corpus-cpp">
+<span id="program-listing-file-src-data-corpus-cpp"></span><h1>Program Listing for File corpus.cpp<a class="headerlink" href="#program-listing-for-file-corpus-cpp" title="Permalink to this headline">¶</a></h1>
+<p>↰ <a class="reference internal" href="file_src_data_corpus.cpp.html#file-src-data-corpus-cpp"><span class="std std-ref">Return to documentation for file</span></a> (<code class="docutils literal notranslate"><span class="pre">src/data/corpus.cpp</span></code>)</p>
+<div class="highlight-cpp notranslate"><div class="highlight"><pre><span></span><span class="cp">#include</span> <span class="cpf">&quot;data/corpus.h&quot;</span><span class="cp"></span>
+
+<span class="cp">#include</span> <span class="cpf">&lt;numeric&gt;</span><span class="cp"></span>
+<span class="cp">#include</span> <span class="cpf">&lt;random&gt;</span><span class="cp"></span>
+
+<span class="cp">#include</span> <span class="cpf">&quot;common/utils.h&quot;</span><span class="cp"></span>
+<span class="cp">#include</span> <span class="cpf">&quot;common/filesystem.h&quot;</span><span class="cp"></span>
+
+<span class="cp">#include</span> <span class="cpf">&quot;data/corpus.h&quot;</span><span class="cp"></span>
+
+<span class="k">namespace</span> <span class="n">marian</span> <span class="p">{</span>
+<span class="k">namespace</span> <span class="n">data</span> <span class="p">{</span>
+
+<span class="n">Corpus</span><span class="o">::</span><span class="n">Corpus</span><span class="p">(</span><span class="n">Ptr</span><span class="o">&lt;</span><span class="n">Options</span><span class="o">&gt;</span> <span class="n">options</span><span class="p">,</span> <span class="kt">bool</span> <span class="n">translate</span> <span class="cm">/*= false*/</span><span class="p">)</span>
+    <span class="o">:</span> <span class="n">CorpusBase</span><span class="p">(</span><span class="n">options</span><span class="p">,</span> <span class="n">translate</span><span class="p">),</span>
+        <span class="n">shuffleInRAM_</span><span class="p">(</span><span class="n">options_</span><span class="o">-&gt;</span><span class="n">get</span><span class="o">&lt;</span><span class="kt">bool</span><span class="o">&gt;</span><span class="p">(</span><span class="s">&quot;shuffle-in-ram&quot;</span><span class="p">,</span> <span class="nb">false</span><span class="p">)),</span>
+        <span class="n">allCapsEvery_</span><span class="p">(</span><span class="n">options_</span><span class="o">-&gt;</span><span class="n">get</span><span class="o">&lt;</span><span class="kt">size_t</span><span class="o">&gt;</span><span class="p">(</span><span class="s">&quot;all-caps-every&quot;</span><span class="p">,</span> <span class="mi">0</span><span class="p">)),</span>
+        <span class="n">titleCaseEvery_</span><span class="p">(</span><span class="n">options_</span><span class="o">-&gt;</span><span class="n">get</span><span class="o">&lt;</span><span class="kt">size_t</span><span class="o">&gt;</span><span class="p">(</span><span class="s">&quot;english-title-case-every&quot;</span><span class="p">,</span> <span class="mi">0</span><span class="p">))</span> <span class="p">{}</span>
+
+<span class="n">Corpus</span><span class="o">::</span><span class="n">Corpus</span><span class="p">(</span><span class="n">std</span><span class="o">::</span><span class="n">vector</span><span class="o">&lt;</span><span class="n">std</span><span class="o">::</span><span class="n">string</span><span class="o">&gt;</span> <span class="n">paths</span><span class="p">,</span>
+               <span class="n">std</span><span class="o">::</span><span class="n">vector</span><span class="o">&lt;</span><span class="n">Ptr</span><span class="o">&lt;</span><span class="n">Vocab</span><span class="o">&gt;&gt;</span> <span class="n">vocabs</span><span class="p">,</span>
+               <span class="n">Ptr</span><span class="o">&lt;</span><span class="n">Options</span><span class="o">&gt;</span> <span class="n">options</span><span class="p">)</span>
+    <span class="o">:</span> <span class="n">CorpusBase</span><span class="p">(</span><span class="n">paths</span><span class="p">,</span> <span class="n">vocabs</span><span class="p">,</span> <span class="n">options</span><span class="p">),</span>
+        <span class="n">shuffleInRAM_</span><span class="p">(</span><span class="n">options_</span><span class="o">-&gt;</span><span class="n">get</span><span class="o">&lt;</span><span class="kt">bool</span><span class="o">&gt;</span><span class="p">(</span><span class="s">&quot;shuffle-in-ram&quot;</span><span class="p">,</span> <span class="nb">false</span><span class="p">)),</span>
+        <span class="n">allCapsEvery_</span><span class="p">(</span><span class="n">options_</span><span class="o">-&gt;</span><span class="n">get</span><span class="o">&lt;</span><span class="kt">size_t</span><span class="o">&gt;</span><span class="p">(</span><span class="s">&quot;all-caps-every&quot;</span><span class="p">,</span> <span class="mi">0</span><span class="p">)),</span>
+        <span class="n">titleCaseEvery_</span><span class="p">(</span><span class="n">options_</span><span class="o">-&gt;</span><span class="n">get</span><span class="o">&lt;</span><span class="kt">size_t</span><span class="o">&gt;</span><span class="p">(</span><span class="s">&quot;english-title-case-every&quot;</span><span class="p">,</span> <span class="mi">0</span><span class="p">))</span> <span class="p">{}</span>
+
+<span class="kt">void</span> <span class="n">Corpus</span><span class="o">::</span><span class="n">preprocessLine</span><span class="p">(</span><span class="n">std</span><span class="o">::</span><span class="n">string</span><span class="o">&amp;</span> <span class="n">line</span><span class="p">,</span> <span class="kt">size_t</span> <span class="n">streamId</span><span class="p">)</span> <span class="p">{</span>
+  <span class="k">if</span> <span class="p">(</span><span class="n">allCapsEvery_</span> <span class="o">!=</span> <span class="mi">0</span> <span class="o">&amp;&amp;</span> <span class="n">pos_</span> <span class="o">%</span> <span class="n">allCapsEvery_</span> <span class="o">==</span> <span class="mi">0</span> <span class="o">&amp;&amp;</span> <span class="o">!</span><span class="n">inference_</span><span class="p">)</span> <span class="p">{</span>
+    <span class="n">line</span> <span class="o">=</span> <span class="n">vocabs_</span><span class="p">[</span><span class="n">streamId</span><span class="p">]</span><span class="o">-&gt;</span><span class="n">toUpper</span><span class="p">(</span><span class="n">line</span><span class="p">);</span>
+    <span class="k">if</span> <span class="p">(</span><span class="n">streamId</span> <span class="o">==</span> <span class="mi">0</span><span class="p">)</span>
+      <span class="n">LOG_ONCE</span><span class="p">(</span><span class="n">info</span><span class="p">,</span> <span class="s">&quot;[data] Source all-caps&#39;ed line to: {}&quot;</span><span class="p">,</span> <span class="n">line</span><span class="p">);</span>
+    <span class="k">else</span>
+      <span class="nf">LOG_ONCE</span><span class="p">(</span><span class="n">info</span><span class="p">,</span> <span class="s">&quot;[data] Target all-caps&#39;ed line to: {}&quot;</span><span class="p">,</span> <span class="n">line</span><span class="p">);</span>
+  <span class="p">}</span>
+  <span class="k">else</span> <span class="k">if</span> <span class="p">(</span><span class="n">titleCaseEvery_</span> <span class="o">!=</span> <span class="mi">0</span> <span class="o">&amp;&amp;</span> <span class="n">pos_</span> <span class="o">%</span> <span class="n">titleCaseEvery_</span> <span class="o">==</span> <span class="mi">1</span> <span class="o">&amp;&amp;</span> <span class="o">!</span><span class="n">inference_</span> <span class="o">&amp;&amp;</span> <span class="n">streamId</span> <span class="o">==</span> <span class="mi">0</span><span class="p">)</span> <span class="p">{</span>
+    <span class="c1">// Only applied to stream 0 (source) since this feature is aimed at robustness against</span>
+    <span class="c1">// title case in the source (and not at translating into title case).</span>
+    <span class="c1">// Note: It is user&#39;s responsibility to not enable this if the source language is not English.</span>
+    <span class="n">line</span> <span class="o">=</span> <span class="n">vocabs_</span><span class="p">[</span><span class="n">streamId</span><span class="p">]</span><span class="o">-&gt;</span><span class="n">toEnglishTitleCase</span><span class="p">(</span><span class="n">line</span><span class="p">);</span>
+    <span class="k">if</span> <span class="p">(</span><span class="n">streamId</span> <span class="o">==</span> <span class="mi">0</span><span class="p">)</span>
+      <span class="n">LOG_ONCE</span><span class="p">(</span><span class="n">info</span><span class="p">,</span> <span class="s">&quot;[data] Source English-title-case&#39;d line to: {}&quot;</span><span class="p">,</span> <span class="n">line</span><span class="p">);</span>
+    <span class="k">else</span>
+      <span class="nf">LOG_ONCE</span><span class="p">(</span><span class="n">info</span><span class="p">,</span> <span class="s">&quot;[data] Target English-title-case&#39;d line to: {}&quot;</span><span class="p">,</span> <span class="n">line</span><span class="p">);</span>
+  <span class="p">}</span>
+<span class="p">}</span>
+
+<span class="n">SentenceTuple</span> <span class="n">Corpus</span><span class="o">::</span><span class="n">next</span><span class="p">()</span> <span class="p">{</span>
+  <span class="c1">// Used for handling TSV inputs</span>
+  <span class="c1">// Determine the total number of fields including alignments or weights</span>
+  <span class="k">auto</span> <span class="n">tsvNumAllFields</span> <span class="o">=</span> <span class="n">tsvNumInputFields_</span><span class="p">;</span>
+  <span class="k">if</span><span class="p">(</span><span class="n">alignFileIdx_</span> <span class="o">&gt;</span> <span class="mi">-1</span><span class="p">)</span>
+    <span class="o">++</span><span class="n">tsvNumAllFields</span><span class="p">;</span>
+  <span class="k">if</span><span class="p">(</span><span class="n">weightFileIdx_</span> <span class="o">&gt;</span> <span class="mi">-1</span><span class="p">)</span>
+    <span class="o">++</span><span class="n">tsvNumAllFields</span><span class="p">;</span>
+  <span class="n">std</span><span class="o">::</span><span class="n">vector</span><span class="o">&lt;</span><span class="n">std</span><span class="o">::</span><span class="n">string</span><span class="o">&gt;</span> <span class="n">fields</span><span class="p">(</span><span class="n">tsvNumAllFields</span><span class="p">);</span>
+
+  <span class="k">for</span><span class="p">(;;)</span> <span class="p">{</span> <span class="c1">// (this is a retry loop for skipping invalid sentences)</span>
+    <span class="c1">// get index of the current sentence</span>
+    <span class="kt">size_t</span> <span class="n">curId</span> <span class="o">=</span> <span class="n">pos_</span><span class="p">;</span> <span class="c1">// note: at end, pos_  == total size</span>
+    <span class="c1">// if corpus has been shuffled, ids_ contains sentence indexes</span>
+    <span class="k">if</span><span class="p">(</span><span class="n">pos_</span> <span class="o">&lt;</span> <span class="n">ids_</span><span class="p">.</span><span class="n">size</span><span class="p">())</span>
+      <span class="n">curId</span> <span class="o">=</span> <span class="n">ids_</span><span class="p">[</span><span class="n">pos_</span><span class="p">];</span>
+    <span class="n">pos_</span><span class="o">++</span><span class="p">;</span>
+
+    <span class="c1">// fill up the sentence tuple with sentences from all input files</span>
+    <span class="n">SentenceTuple</span> <span class="nf">tup</span><span class="p">(</span><span class="n">curId</span><span class="p">);</span>
+    <span class="kt">size_t</span> <span class="n">eofsHit</span> <span class="o">=</span> <span class="mi">0</span><span class="p">;</span>
+    <span class="kt">size_t</span> <span class="n">numStreams</span> <span class="o">=</span> <span class="n">corpusInRAM_</span><span class="p">.</span><span class="n">empty</span><span class="p">()</span> <span class="o">?</span> <span class="n">files_</span><span class="p">.</span><span class="n">size</span><span class="p">()</span> <span class="o">:</span> <span class="n">corpusInRAM_</span><span class="p">.</span><span class="n">size</span><span class="p">();</span>
+    <span class="k">for</span><span class="p">(</span><span class="kt">size_t</span> <span class="n">i</span> <span class="o">=</span> <span class="mi">0</span><span class="p">;</span> <span class="n">i</span> <span class="o">&lt;</span> <span class="n">numStreams</span><span class="p">;</span> <span class="o">++</span><span class="n">i</span><span class="p">)</span> <span class="p">{</span>
+      <span class="n">std</span><span class="o">::</span><span class="n">string</span> <span class="n">line</span><span class="p">;</span>
+
+      <span class="c1">// fetch line, from cached copy in RAM or actual file</span>
+      <span class="k">if</span> <span class="p">(</span><span class="o">!</span><span class="n">corpusInRAM_</span><span class="p">.</span><span class="n">empty</span><span class="p">())</span> <span class="p">{</span>
+        <span class="k">if</span> <span class="p">(</span><span class="n">curId</span> <span class="o">&lt;</span> <span class="n">corpusInRAM_</span><span class="p">[</span><span class="n">i</span><span class="p">].</span><span class="n">size</span><span class="p">())</span>
+          <span class="n">line</span> <span class="o">=</span> <span class="n">corpusInRAM_</span><span class="p">[</span><span class="n">i</span><span class="p">][</span><span class="n">curId</span><span class="p">];</span>
+        <span class="k">else</span> <span class="p">{</span>
+          <span class="n">eofsHit</span><span class="o">++</span><span class="p">;</span>
+          <span class="k">continue</span><span class="p">;</span>
+        <span class="p">}</span>
+      <span class="p">}</span>
+      <span class="k">else</span> <span class="p">{</span>
+        <span class="kt">bool</span> <span class="n">gotLine</span> <span class="o">=</span> <span class="n">io</span><span class="o">::</span><span class="n">getline</span><span class="p">(</span><span class="o">*</span><span class="n">files_</span><span class="p">[</span><span class="n">i</span><span class="p">],</span> <span class="n">line</span><span class="p">).</span><span class="n">good</span><span class="p">();</span>
+        <span class="k">if</span><span class="p">(</span><span class="o">!</span><span class="n">gotLine</span><span class="p">)</span> <span class="p">{</span>
+          <span class="n">eofsHit</span><span class="o">++</span><span class="p">;</span>
+          <span class="k">continue</span><span class="p">;</span>
+        <span class="p">}</span>
+      <span class="p">}</span>
+
+      <span class="k">if</span><span class="p">(</span><span class="n">i</span> <span class="o">&gt;</span> <span class="mi">0</span> <span class="o">&amp;&amp;</span> <span class="n">i</span> <span class="o">==</span> <span class="n">alignFileIdx_</span><span class="p">)</span> <span class="p">{</span>
+        <span class="n">addAlignmentToSentenceTuple</span><span class="p">(</span><span class="n">line</span><span class="p">,</span> <span class="n">tup</span><span class="p">);</span>
+      <span class="p">}</span> <span class="k">else</span> <span class="k">if</span><span class="p">(</span><span class="n">i</span> <span class="o">&gt;</span> <span class="mi">0</span> <span class="o">&amp;&amp;</span> <span class="n">i</span> <span class="o">==</span> <span class="n">weightFileIdx_</span><span class="p">)</span> <span class="p">{</span>
+        <span class="n">addWeightsToSentenceTuple</span><span class="p">(</span><span class="n">line</span><span class="p">,</span> <span class="n">tup</span><span class="p">);</span>
+      <span class="p">}</span> <span class="k">else</span> <span class="p">{</span>
+        <span class="k">if</span><span class="p">(</span><span class="n">tsv_</span><span class="p">)</span> <span class="p">{</span>  <span class="c1">// split TSV input and add each field into the sentence tuple</span>
+          <span class="n">utils</span><span class="o">::</span><span class="n">splitTsv</span><span class="p">(</span><span class="n">line</span><span class="p">,</span> <span class="n">fields</span><span class="p">,</span> <span class="n">tsvNumAllFields</span><span class="p">);</span>
+          <span class="kt">size_t</span> <span class="n">shift</span> <span class="o">=</span> <span class="mi">0</span><span class="p">;</span>
+          <span class="k">for</span><span class="p">(</span><span class="kt">size_t</span> <span class="n">j</span> <span class="o">=</span> <span class="mi">0</span><span class="p">;</span> <span class="n">j</span> <span class="o">&lt;</span> <span class="n">tsvNumAllFields</span><span class="p">;</span> <span class="o">++</span><span class="n">j</span><span class="p">)</span> <span class="p">{</span>
+            <span class="c1">// index j needs to be shifted to get the proper vocab index if guided-alignment or</span>
+            <span class="c1">// data-weighting are preceding source or target sequences in TSV input</span>
+            <span class="k">if</span><span class="p">(</span><span class="n">j</span> <span class="o">==</span> <span class="n">alignFileIdx_</span> <span class="o">||</span> <span class="n">j</span> <span class="o">==</span> <span class="n">weightFileIdx_</span><span class="p">)</span> <span class="p">{</span>
+              <span class="o">++</span><span class="n">shift</span><span class="p">;</span>
+            <span class="p">}</span> <span class="k">else</span> <span class="p">{</span>
+              <span class="kt">size_t</span> <span class="n">vocabId</span> <span class="o">=</span> <span class="n">j</span> <span class="o">-</span> <span class="n">shift</span><span class="p">;</span>
+              <span class="n">preprocessLine</span><span class="p">(</span><span class="n">fields</span><span class="p">[</span><span class="n">j</span><span class="p">],</span> <span class="n">vocabId</span><span class="p">);</span>
+              <span class="n">addWordsToSentenceTuple</span><span class="p">(</span><span class="n">fields</span><span class="p">[</span><span class="n">j</span><span class="p">],</span> <span class="n">vocabId</span><span class="p">,</span> <span class="n">tup</span><span class="p">);</span>
+            <span class="p">}</span>
+          <span class="p">}</span>
+
+          <span class="c1">// weights are added last to the sentence tuple, because this runs a validation that needs</span>
+          <span class="c1">// length of the target sequence</span>
+          <span class="k">if</span><span class="p">(</span><span class="n">alignFileIdx_</span> <span class="o">&gt;</span> <span class="mi">-1</span><span class="p">)</span>
+            <span class="n">addAlignmentToSentenceTuple</span><span class="p">(</span><span class="n">fields</span><span class="p">[</span><span class="n">alignFileIdx_</span><span class="p">],</span> <span class="n">tup</span><span class="p">);</span>
+          <span class="k">if</span><span class="p">(</span><span class="n">weightFileIdx_</span> <span class="o">&gt;</span> <span class="mi">-1</span><span class="p">)</span>
+            <span class="n">addWeightsToSentenceTuple</span><span class="p">(</span><span class="n">fields</span><span class="p">[</span><span class="n">weightFileIdx_</span><span class="p">],</span> <span class="n">tup</span><span class="p">);</span>
+
+        <span class="p">}</span> <span class="k">else</span> <span class="p">{</span>
+          <span class="n">preprocessLine</span><span class="p">(</span><span class="n">line</span><span class="p">,</span> <span class="n">i</span><span class="p">);</span>
+          <span class="n">addWordsToSentenceTuple</span><span class="p">(</span><span class="n">line</span><span class="p">,</span> <span class="n">i</span><span class="p">,</span> <span class="n">tup</span><span class="p">);</span>
+        <span class="p">}</span>
+      <span class="p">}</span>
+    <span class="p">}</span>
+
+    <span class="k">if</span> <span class="p">(</span><span class="n">eofsHit</span> <span class="o">==</span> <span class="n">numStreams</span><span class="p">)</span>
+      <span class="k">return</span> <span class="n">SentenceTuple</span><span class="p">(</span><span class="mi">0</span><span class="p">);</span>
+    <span class="n">ABORT_IF</span><span class="p">(</span><span class="n">eofsHit</span> <span class="o">!=</span> <span class="mi">0</span><span class="p">,</span> <span class="s">&quot;not all input files have the same number of lines&quot;</span><span class="p">);</span>
+
+    <span class="c1">// check if all streams are valid, that is, non-empty and no longer than maximum allowed length</span>
+    <span class="k">if</span><span class="p">(</span><span class="n">std</span><span class="o">::</span><span class="n">all_of</span><span class="p">(</span><span class="n">tup</span><span class="p">.</span><span class="n">begin</span><span class="p">(),</span> <span class="n">tup</span><span class="p">.</span><span class="n">end</span><span class="p">(),</span> <span class="p">[</span><span class="o">=</span><span class="p">](</span><span class="k">const</span> <span class="n">Words</span><span class="o">&amp;</span> <span class="n">words</span><span class="p">)</span> <span class="p">{</span>
+         <span class="k">return</span> <span class="n">words</span><span class="p">.</span><span class="n">size</span><span class="p">()</span> <span class="o">&gt;</span> <span class="mi">0</span> <span class="o">&amp;&amp;</span> <span class="n">words</span><span class="p">.</span><span class="n">size</span><span class="p">()</span> <span class="o">&lt;=</span> <span class="n">maxLength_</span><span class="p">;</span>
+       <span class="p">}))</span>
+      <span class="k">return</span> <span class="n">tup</span><span class="p">;</span>
+
+    <span class="c1">// otherwise skip this sentence and try the next one</span>
+    <span class="c1">// @TODO: tail recursion?</span>
+  <span class="p">}</span>
+<span class="p">}</span>
+
+<span class="c1">// reset and initialize shuffled reading</span>
+<span class="c1">// Call either reset() or shuffle().</span>
+<span class="c1">// @TODO: merge with reset() below to clarify mutual exclusiveness with reset()</span>
+<span class="kt">void</span> <span class="n">Corpus</span><span class="o">::</span><span class="n">shuffle</span><span class="p">()</span> <span class="p">{</span>
+  <span class="n">shuffleData</span><span class="p">(</span><span class="n">paths_</span><span class="p">);</span>
+<span class="p">}</span>
+
+<span class="c1">// reset to regular, non-shuffled reading</span>
+<span class="c1">// Call either reset() or shuffle().</span>
+<span class="c1">// @TODO: make shuffle() private, instad pass a shuffle() flag to reset(), to clarify mutual</span>
+<span class="c1">// exclusiveness with shuffle()</span>
+<span class="kt">void</span> <span class="n">Corpus</span><span class="o">::</span><span class="n">reset</span><span class="p">()</span> <span class="p">{</span>
+  <span class="n">corpusInRAM_</span><span class="p">.</span><span class="n">clear</span><span class="p">();</span>
+  <span class="n">ids_</span><span class="p">.</span><span class="n">clear</span><span class="p">();</span>
+  <span class="k">if</span> <span class="p">(</span><span class="n">pos_</span> <span class="o">==</span> <span class="mi">0</span><span class="p">)</span> <span class="c1">// no data read yet</span>
+    <span class="k">return</span><span class="p">;</span>
+  <span class="n">pos_</span> <span class="o">=</span> <span class="mi">0</span><span class="p">;</span>
+  <span class="k">for</span> <span class="p">(</span><span class="kt">size_t</span> <span class="n">i</span> <span class="o">=</span> <span class="mi">0</span><span class="p">;</span> <span class="n">i</span> <span class="o">&lt;</span> <span class="n">paths_</span><span class="p">.</span><span class="n">size</span><span class="p">();</span> <span class="o">++</span><span class="n">i</span><span class="p">)</span> <span class="p">{</span>
+      <span class="k">if</span><span class="p">(</span><span class="n">paths_</span><span class="p">[</span><span class="n">i</span><span class="p">]</span> <span class="o">==</span> <span class="s">&quot;stdin&quot;</span> <span class="o">||</span> <span class="n">paths_</span><span class="p">[</span><span class="n">i</span><span class="p">]</span> <span class="o">==</span> <span class="s">&quot;-&quot;</span><span class="p">)</span> <span class="p">{</span>
+        <span class="n">files_</span><span class="p">[</span><span class="n">i</span><span class="p">].</span><span class="n">reset</span><span class="p">(</span><span class="k">new</span> <span class="n">std</span><span class="o">::</span><span class="n">istream</span><span class="p">(</span><span class="n">std</span><span class="o">::</span><span class="n">cin</span><span class="p">.</span><span class="n">rdbuf</span><span class="p">()));</span>
+        <span class="c1">// Probably not necessary, unless there are some buffers</span>
+        <span class="c1">// that we want flushed.</span>
+      <span class="p">}</span>
+      <span class="k">else</span> <span class="p">{</span>
+        <span class="n">ABORT_IF</span><span class="p">(</span><span class="n">files_</span><span class="p">[</span><span class="n">i</span><span class="p">]</span> <span class="o">&amp;&amp;</span> <span class="n">filesystem</span><span class="o">::</span><span class="n">is_fifo</span><span class="p">(</span><span class="n">paths_</span><span class="p">[</span><span class="n">i</span><span class="p">]),</span>
+                 <span class="s">&quot;File &#39;&quot;</span><span class="p">,</span> <span class="n">paths_</span><span class="p">[</span><span class="n">i</span><span class="p">],</span> <span class="s">&quot;&#39; is a pipe and cannot be re-opened.&quot;</span><span class="p">);</span>
+        <span class="c1">// Do NOT reset named pipes; that closes them and triggers a SIGPIPE</span>
+        <span class="c1">// (lost pipe) at the writing end, which may do whatever it wants</span>
+        <span class="c1">// in this situation.</span>
+        <span class="n">files_</span><span class="p">[</span><span class="n">i</span><span class="p">].</span><span class="n">reset</span><span class="p">(</span><span class="k">new</span> <span class="n">io</span><span class="o">::</span><span class="n">InputFileStream</span><span class="p">(</span><span class="n">paths_</span><span class="p">[</span><span class="n">i</span><span class="p">]));</span>
+      <span class="p">}</span>
+    <span class="p">}</span>
+<span class="p">}</span>
+
+<span class="kt">void</span> <span class="n">Corpus</span><span class="o">::</span><span class="n">restore</span><span class="p">(</span><span class="n">Ptr</span><span class="o">&lt;</span><span class="n">TrainingState</span><span class="o">&gt;</span> <span class="n">ts</span><span class="p">)</span> <span class="p">{</span>
+  <span class="n">setRNGState</span><span class="p">(</span><span class="n">ts</span><span class="o">-&gt;</span><span class="n">seedCorpus</span><span class="p">);</span>
+<span class="p">}</span>
+
+<span class="kt">void</span> <span class="n">Corpus</span><span class="o">::</span><span class="n">shuffleData</span><span class="p">(</span><span class="k">const</span> <span class="n">std</span><span class="o">::</span><span class="n">vector</span><span class="o">&lt;</span><span class="n">std</span><span class="o">::</span><span class="n">string</span><span class="o">&gt;&amp;</span> <span class="n">paths</span><span class="p">)</span> <span class="p">{</span>
+  <span class="n">LOG</span><span class="p">(</span><span class="n">info</span><span class="p">,</span> <span class="s">&quot;[data] Shuffling data&quot;</span><span class="p">);</span>
+
+  <span class="n">ABORT_IF</span><span class="p">(</span><span class="n">tsv_</span> <span class="o">&amp;&amp;</span> <span class="p">(</span><span class="n">paths</span><span class="p">[</span><span class="mi">0</span><span class="p">]</span> <span class="o">==</span> <span class="s">&quot;stdin&quot;</span> <span class="o">||</span> <span class="n">paths</span><span class="p">[</span><span class="mi">0</span><span class="p">]</span> <span class="o">==</span> <span class="s">&quot;-&quot;</span><span class="p">),</span>
+           <span class="s">&quot;Shuffling training data from STDIN is not supported. Add --no-shuffle or provide &quot;</span>
+           <span class="s">&quot;training sets with --train-sets&quot;</span><span class="p">);</span>
+
+  <span class="kt">size_t</span> <span class="n">numStreams</span> <span class="o">=</span> <span class="n">paths</span><span class="p">.</span><span class="n">size</span><span class="p">();</span>
+
+  <span class="kt">size_t</span> <span class="n">numSentences</span><span class="p">;</span>
+  <span class="n">std</span><span class="o">::</span><span class="n">vector</span><span class="o">&lt;</span><span class="n">std</span><span class="o">::</span><span class="n">vector</span><span class="o">&lt;</span><span class="n">std</span><span class="o">::</span><span class="n">string</span><span class="o">&gt;&gt;</span> <span class="n">corpus</span><span class="p">(</span><span class="n">numStreams</span><span class="p">);</span> <span class="c1">// [stream][id]</span>
+  <span class="k">if</span> <span class="p">(</span><span class="o">!</span><span class="n">corpusInRAM_</span><span class="p">.</span><span class="n">empty</span><span class="p">())</span> <span class="p">{</span> <span class="c1">// when caching, we use what we have instead</span>
+    <span class="n">corpus</span> <span class="o">=</span> <span class="n">std</span><span class="o">::</span><span class="n">move</span><span class="p">(</span><span class="n">corpusInRAM_</span><span class="p">);</span> <span class="c1">// temporarily move ownership here, will be moved back</span>
+    <span class="n">numSentences</span> <span class="o">=</span> <span class="n">corpus</span><span class="p">[</span><span class="mi">0</span><span class="p">].</span><span class="n">size</span><span class="p">();</span>
+  <span class="p">}</span>
+  <span class="k">else</span> <span class="p">{</span>
+    <span class="n">files_</span><span class="p">.</span><span class="n">resize</span><span class="p">(</span><span class="n">numStreams</span><span class="p">);</span>
+    <span class="k">for</span><span class="p">(</span><span class="kt">size_t</span> <span class="n">i</span> <span class="o">=</span> <span class="mi">0</span><span class="p">;</span> <span class="n">i</span> <span class="o">&lt;</span> <span class="n">numStreams</span><span class="p">;</span> <span class="o">++</span><span class="n">i</span><span class="p">)</span> <span class="p">{</span>
+      <span class="n">UPtr</span><span class="o">&lt;</span><span class="n">io</span><span class="o">::</span><span class="n">InputFileStream</span><span class="o">&gt;</span> <span class="n">strm</span><span class="p">(</span><span class="k">new</span> <span class="n">io</span><span class="o">::</span><span class="n">InputFileStream</span><span class="p">(</span><span class="n">paths</span><span class="p">[</span><span class="n">i</span><span class="p">]));</span>
+      <span class="n">strm</span><span class="o">-&gt;</span><span class="n">setbufsize</span><span class="p">(</span><span class="mi">10000000</span><span class="p">);</span>  <span class="c1">// huge read-ahead buffer to avoid network round-trips</span>
+      <span class="n">files_</span><span class="p">[</span><span class="n">i</span><span class="p">]</span> <span class="o">=</span> <span class="n">std</span><span class="o">::</span><span class="n">move</span><span class="p">(</span><span class="n">strm</span><span class="p">);</span>
+    <span class="p">}</span>
+
+    <span class="c1">// read entire corpus into RAM</span>
+    <span class="n">std</span><span class="o">::</span><span class="n">string</span> <span class="n">lineBuf</span><span class="p">;</span>
+    <span class="k">for</span> <span class="p">(;;)</span> <span class="p">{</span>
+      <span class="kt">size_t</span> <span class="n">eofsHit</span> <span class="o">=</span> <span class="mi">0</span><span class="p">;</span>
+      <span class="k">for</span><span class="p">(</span><span class="kt">size_t</span> <span class="n">i</span> <span class="o">=</span> <span class="mi">0</span><span class="p">;</span> <span class="n">i</span> <span class="o">&lt;</span> <span class="n">numStreams</span><span class="p">;</span> <span class="o">++</span><span class="n">i</span><span class="p">)</span> <span class="p">{</span>
+        <span class="kt">bool</span> <span class="n">gotLine</span> <span class="o">=</span> <span class="n">io</span><span class="o">::</span><span class="n">getline</span><span class="p">(</span><span class="o">*</span><span class="n">files_</span><span class="p">[</span><span class="n">i</span><span class="p">],</span> <span class="n">lineBuf</span><span class="p">).</span><span class="n">good</span><span class="p">();</span>
+        <span class="k">if</span> <span class="p">(</span><span class="n">gotLine</span><span class="p">)</span>
+          <span class="n">corpus</span><span class="p">[</span><span class="n">i</span><span class="p">].</span><span class="n">push_back</span><span class="p">(</span><span class="n">lineBuf</span><span class="p">);</span>
+        <span class="k">else</span>
+          <span class="n">eofsHit</span><span class="o">++</span><span class="p">;</span>
+      <span class="p">}</span>
+      <span class="k">if</span> <span class="p">(</span><span class="n">eofsHit</span> <span class="o">==</span> <span class="n">numStreams</span><span class="p">)</span>
+        <span class="k">break</span><span class="p">;</span>
+      <span class="n">ABORT_IF</span><span class="p">(</span><span class="n">eofsHit</span> <span class="o">!=</span> <span class="mi">0</span><span class="p">,</span> <span class="s">&quot;Not all input files have the same number of lines&quot;</span><span class="p">);</span>
+    <span class="p">}</span>
+    <span class="n">files_</span><span class="p">.</span><span class="n">clear</span><span class="p">();</span>
+    <span class="n">numSentences</span> <span class="o">=</span> <span class="n">corpus</span><span class="p">[</span><span class="mi">0</span><span class="p">].</span><span class="n">size</span><span class="p">();</span>
+    <span class="n">LOG</span><span class="p">(</span><span class="n">info</span><span class="p">,</span> <span class="s">&quot;[data] Done reading {} sentences&quot;</span><span class="p">,</span> <span class="n">utils</span><span class="o">::</span><span class="n">withCommas</span><span class="p">(</span><span class="n">numSentences</span><span class="p">));</span>
+  <span class="p">}</span>
+
+  <span class="c1">// randomize sequence ids, and remember them</span>
+  <span class="n">ids_</span><span class="p">.</span><span class="n">resize</span><span class="p">(</span><span class="n">numSentences</span><span class="p">);</span>
+  <span class="n">std</span><span class="o">::</span><span class="n">iota</span><span class="p">(</span><span class="n">ids_</span><span class="p">.</span><span class="n">begin</span><span class="p">(),</span> <span class="n">ids_</span><span class="p">.</span><span class="n">end</span><span class="p">(),</span> <span class="mi">0</span><span class="p">);</span>
+  <span class="n">std</span><span class="o">::</span><span class="n">shuffle</span><span class="p">(</span><span class="n">ids_</span><span class="p">.</span><span class="n">begin</span><span class="p">(),</span> <span class="n">ids_</span><span class="p">.</span><span class="n">end</span><span class="p">(),</span> <span class="n">eng_</span><span class="p">);</span>
+
+  <span class="k">if</span> <span class="p">(</span><span class="n">shuffleInRAM_</span><span class="p">)</span> <span class="p">{</span>
+    <span class="c1">// when shuffling in RAM, we keep no files_, instead but the data itself</span>
+    <span class="n">corpusInRAM_</span> <span class="o">=</span> <span class="n">std</span><span class="o">::</span><span class="n">move</span><span class="p">(</span><span class="n">corpus</span><span class="p">);</span>
+    <span class="n">LOG</span><span class="p">(</span><span class="n">info</span><span class="p">,</span> <span class="s">&quot;[data] Done shuffling {} sentences (cached in RAM)&quot;</span><span class="p">,</span> <span class="n">utils</span><span class="o">::</span><span class="n">withCommas</span><span class="p">(</span><span class="n">numSentences</span><span class="p">));</span>
+  <span class="p">}</span>
+  <span class="k">else</span> <span class="p">{</span>
+    <span class="c1">// create temp files that contain the data in randomized order</span>
+    <span class="n">tempFiles_</span><span class="p">.</span><span class="n">resize</span><span class="p">(</span><span class="n">numStreams</span><span class="p">);</span>
+    <span class="k">for</span><span class="p">(</span><span class="kt">size_t</span> <span class="n">i</span> <span class="o">=</span> <span class="mi">0</span><span class="p">;</span> <span class="n">i</span> <span class="o">&lt;</span> <span class="n">numStreams</span><span class="p">;</span> <span class="o">++</span><span class="n">i</span><span class="p">)</span> <span class="p">{</span>
+      <span class="n">tempFiles_</span><span class="p">[</span><span class="n">i</span><span class="p">].</span><span class="n">reset</span><span class="p">(</span><span class="k">new</span> <span class="n">io</span><span class="o">::</span><span class="n">TemporaryFile</span><span class="p">(</span><span class="n">options_</span><span class="o">-&gt;</span><span class="n">get</span><span class="o">&lt;</span><span class="n">std</span><span class="o">::</span><span class="n">string</span><span class="o">&gt;</span><span class="p">(</span><span class="s">&quot;tempdir&quot;</span><span class="p">)));</span>
+      <span class="n">io</span><span class="o">::</span><span class="n">TemporaryFile</span> <span class="o">&amp;</span><span class="n">out</span> <span class="o">=</span> <span class="o">*</span><span class="n">tempFiles_</span><span class="p">[</span><span class="n">i</span><span class="p">];</span>
+      <span class="k">const</span> <span class="k">auto</span><span class="o">&amp;</span> <span class="n">corpusStream</span> <span class="o">=</span> <span class="n">corpus</span><span class="p">[</span><span class="n">i</span><span class="p">];</span>
+      <span class="k">for</span><span class="p">(</span><span class="k">auto</span> <span class="nl">id</span> <span class="p">:</span> <span class="n">ids_</span><span class="p">)</span> <span class="p">{</span>
+        <span class="n">out</span> <span class="o">&lt;&lt;</span> <span class="n">corpusStream</span><span class="p">[</span><span class="n">id</span><span class="p">]</span> <span class="o">&lt;&lt;</span> <span class="n">std</span><span class="o">::</span><span class="n">endl</span><span class="p">;</span>
+      <span class="p">}</span>
+    <span class="p">}</span>
+
+    <span class="c1">// replace files_[] by the tempfiles we just created</span>
+    <span class="n">files_</span><span class="p">.</span><span class="n">resize</span><span class="p">(</span><span class="n">numStreams</span><span class="p">);</span>
+    <span class="k">for</span><span class="p">(</span><span class="kt">size_t</span> <span class="n">i</span> <span class="o">=</span> <span class="mi">0</span><span class="p">;</span> <span class="n">i</span> <span class="o">&lt;</span> <span class="n">numStreams</span><span class="p">;</span> <span class="o">++</span><span class="n">i</span><span class="p">)</span> <span class="p">{</span>
+      <span class="k">auto</span> <span class="n">inputStream</span> <span class="o">=</span> <span class="n">tempFiles_</span><span class="p">[</span><span class="n">i</span><span class="p">]</span><span class="o">-&gt;</span><span class="n">getInputStream</span><span class="p">();</span>
+      <span class="n">inputStream</span><span class="o">-&gt;</span><span class="n">setbufsize</span><span class="p">(</span><span class="mi">10000000</span><span class="p">);</span>
+      <span class="n">files_</span><span class="p">[</span><span class="n">i</span><span class="p">]</span> <span class="o">=</span> <span class="n">std</span><span class="o">::</span><span class="n">move</span><span class="p">(</span><span class="n">inputStream</span><span class="p">);</span>
+    <span class="p">}</span>
+    <span class="n">LOG</span><span class="p">(</span><span class="n">info</span><span class="p">,</span> <span class="s">&quot;[data] Done shuffling {} sentences to temp files&quot;</span><span class="p">,</span> <span class="n">utils</span><span class="o">::</span><span class="n">withCommas</span><span class="p">(</span><span class="n">numSentences</span><span class="p">));</span>
+  <span class="p">}</span>
+  <span class="n">pos_</span> <span class="o">=</span> <span class="mi">0</span><span class="p">;</span>
+<span class="p">}</span>
+
+<span class="n">CorpusBase</span><span class="o">::</span><span class="n">batch_ptr</span> <span class="n">Corpus</span><span class="o">::</span><span class="n">toBatch</span><span class="p">(</span><span class="k">const</span> <span class="n">std</span><span class="o">::</span><span class="n">vector</span><span class="o">&lt;</span><span class="n">Sample</span><span class="o">&gt;&amp;</span> <span class="n">batchVector</span><span class="p">)</span> <span class="p">{</span>
+  <span class="kt">size_t</span> <span class="n">batchSize</span> <span class="o">=</span> <span class="n">batchVector</span><span class="p">.</span><span class="n">size</span><span class="p">();</span>
+
+  <span class="n">std</span><span class="o">::</span><span class="n">vector</span><span class="o">&lt;</span><span class="kt">size_t</span><span class="o">&gt;</span> <span class="n">sentenceIds</span><span class="p">;</span>
+
+  <span class="n">std</span><span class="o">::</span><span class="n">vector</span><span class="o">&lt;</span><span class="kt">int</span><span class="o">&gt;</span> <span class="n">maxDims</span><span class="p">;</span>      <span class="c1">// @TODO: What&#39;s this? widths? maxLengths?</span>
+  <span class="k">for</span><span class="p">(</span><span class="k">auto</span><span class="o">&amp;</span> <span class="nl">ex</span> <span class="p">:</span> <span class="n">batchVector</span><span class="p">)</span> <span class="p">{</span>  <span class="c1">// @TODO: rename &#39;ex&#39; to &#39;sample&#39; or &#39;sentenceTuple&#39;</span>
+    <span class="k">if</span><span class="p">(</span><span class="n">maxDims</span><span class="p">.</span><span class="n">size</span><span class="p">()</span> <span class="o">&lt;</span> <span class="n">ex</span><span class="p">.</span><span class="n">size</span><span class="p">())</span>
+      <span class="n">maxDims</span><span class="p">.</span><span class="n">resize</span><span class="p">(</span><span class="n">ex</span><span class="p">.</span><span class="n">size</span><span class="p">(),</span> <span class="mi">0</span><span class="p">);</span>
+    <span class="k">for</span><span class="p">(</span><span class="kt">size_t</span> <span class="n">i</span> <span class="o">=</span> <span class="mi">0</span><span class="p">;</span> <span class="n">i</span> <span class="o">&lt;</span> <span class="n">ex</span><span class="p">.</span><span class="n">size</span><span class="p">();</span> <span class="o">++</span><span class="n">i</span><span class="p">)</span> <span class="p">{</span>
+      <span class="k">if</span><span class="p">(</span><span class="n">ex</span><span class="p">[</span><span class="n">i</span><span class="p">].</span><span class="n">size</span><span class="p">()</span> <span class="o">&gt;</span> <span class="p">(</span><span class="kt">size_t</span><span class="p">)</span><span class="n">maxDims</span><span class="p">[</span><span class="n">i</span><span class="p">])</span>
+        <span class="n">maxDims</span><span class="p">[</span><span class="n">i</span><span class="p">]</span> <span class="o">=</span> <span class="p">(</span><span class="kt">int</span><span class="p">)</span><span class="n">ex</span><span class="p">[</span><span class="n">i</span><span class="p">].</span><span class="n">size</span><span class="p">();</span>
+    <span class="p">}</span>
+    <span class="n">sentenceIds</span><span class="p">.</span><span class="n">push_back</span><span class="p">(</span><span class="n">ex</span><span class="p">.</span><span class="n">getId</span><span class="p">());</span>
+  <span class="p">}</span>
+
+  <span class="n">std</span><span class="o">::</span><span class="n">vector</span><span class="o">&lt;</span><span class="n">Ptr</span><span class="o">&lt;</span><span class="n">SubBatch</span><span class="o">&gt;&gt;</span> <span class="n">subBatches</span><span class="p">;</span>
+  <span class="k">for</span><span class="p">(</span><span class="kt">size_t</span> <span class="n">j</span> <span class="o">=</span> <span class="mi">0</span><span class="p">;</span> <span class="n">j</span> <span class="o">&lt;</span> <span class="n">maxDims</span><span class="p">.</span><span class="n">size</span><span class="p">();</span> <span class="o">++</span><span class="n">j</span><span class="p">)</span> <span class="p">{</span>
+    <span class="n">subBatches</span><span class="p">.</span><span class="n">emplace_back</span><span class="p">(</span><span class="n">New</span><span class="o">&lt;</span><span class="n">SubBatch</span><span class="o">&gt;</span><span class="p">(</span><span class="n">batchSize</span><span class="p">,</span> <span class="n">maxDims</span><span class="p">[</span><span class="n">j</span><span class="p">],</span> <span class="n">vocabs_</span><span class="p">[</span><span class="n">j</span><span class="p">]));</span>
+  <span class="p">}</span>
+
+  <span class="n">std</span><span class="o">::</span><span class="n">vector</span><span class="o">&lt;</span><span class="kt">size_t</span><span class="o">&gt;</span> <span class="n">words</span><span class="p">(</span><span class="n">maxDims</span><span class="p">.</span><span class="n">size</span><span class="p">(),</span> <span class="mi">0</span><span class="p">);</span>
+  <span class="k">for</span><span class="p">(</span><span class="kt">size_t</span> <span class="n">b</span> <span class="o">=</span> <span class="mi">0</span><span class="p">;</span> <span class="n">b</span> <span class="o">&lt;</span> <span class="n">batchSize</span><span class="p">;</span> <span class="o">++</span><span class="n">b</span><span class="p">)</span> <span class="p">{</span>                    <span class="c1">// loop over batch entries</span>
+    <span class="k">for</span><span class="p">(</span><span class="kt">size_t</span> <span class="n">j</span> <span class="o">=</span> <span class="mi">0</span><span class="p">;</span> <span class="n">j</span> <span class="o">&lt;</span> <span class="n">maxDims</span><span class="p">.</span><span class="n">size</span><span class="p">();</span> <span class="o">++</span><span class="n">j</span><span class="p">)</span> <span class="p">{</span>             <span class="c1">// loop over streams</span>
+      <span class="k">auto</span> <span class="n">subBatch</span> <span class="o">=</span> <span class="n">subBatches</span><span class="p">[</span><span class="n">j</span><span class="p">];</span>
+      <span class="k">for</span><span class="p">(</span><span class="kt">size_t</span> <span class="n">s</span> <span class="o">=</span> <span class="mi">0</span><span class="p">;</span> <span class="n">s</span> <span class="o">&lt;</span> <span class="n">batchVector</span><span class="p">[</span><span class="n">b</span><span class="p">][</span><span class="n">j</span><span class="p">].</span><span class="n">size</span><span class="p">();</span> <span class="o">++</span><span class="n">s</span><span class="p">)</span> <span class="p">{</span> <span class="c1">// loop over word positions</span>
+        <span class="n">subBatch</span><span class="o">-&gt;</span><span class="n">data</span><span class="p">()[</span><span class="n">subBatch</span><span class="o">-&gt;</span><span class="n">locate</span><span class="p">(</span><span class="cm">/*batchIdx=*/</span><span class="n">b</span><span class="p">,</span> <span class="cm">/*wordPos=*/</span><span class="n">s</span><span class="p">)</span><span class="cm">/*s * batchSize + b*/</span><span class="p">]</span> <span class="o">=</span> <span class="n">batchVector</span><span class="p">[</span><span class="n">b</span><span class="p">][</span><span class="n">j</span><span class="p">][</span><span class="n">s</span><span class="p">];</span>
+        <span class="n">subBatch</span><span class="o">-&gt;</span><span class="n">mask</span><span class="p">()[</span><span class="n">subBatch</span><span class="o">-&gt;</span><span class="n">locate</span><span class="p">(</span><span class="cm">/*batchIdx=*/</span><span class="n">b</span><span class="p">,</span> <span class="cm">/*wordPos=*/</span><span class="n">s</span><span class="p">)</span><span class="cm">/*s * batchSize + b*/</span><span class="p">]</span> <span class="o">=</span> <span class="mf">1.f</span><span class="p">;</span>
+        <span class="n">words</span><span class="p">[</span><span class="n">j</span><span class="p">]</span><span class="o">++</span><span class="p">;</span>
+      <span class="p">}</span>
+    <span class="p">}</span>
+  <span class="p">}</span>
+
+  <span class="k">for</span><span class="p">(</span><span class="kt">size_t</span> <span class="n">j</span> <span class="o">=</span> <span class="mi">0</span><span class="p">;</span> <span class="n">j</span> <span class="o">&lt;</span> <span class="n">maxDims</span><span class="p">.</span><span class="n">size</span><span class="p">();</span> <span class="o">++</span><span class="n">j</span><span class="p">)</span>
+    <span class="n">subBatches</span><span class="p">[</span><span class="n">j</span><span class="p">]</span><span class="o">-&gt;</span><span class="n">setWords</span><span class="p">(</span><span class="n">words</span><span class="p">[</span><span class="n">j</span><span class="p">]);</span>
+
+  <span class="k">auto</span> <span class="n">batch</span> <span class="o">=</span> <span class="n">batch_ptr</span><span class="p">(</span><span class="k">new</span> <span class="n">batch_type</span><span class="p">(</span><span class="n">subBatches</span><span class="p">));</span>
+  <span class="n">batch</span><span class="o">-&gt;</span><span class="n">setSentenceIds</span><span class="p">(</span><span class="n">sentenceIds</span><span class="p">);</span>
+
+  <span class="c1">// Add prepared word alignments and weights if they are available</span>
+  <span class="k">if</span><span class="p">(</span><span class="n">alignFileIdx_</span> <span class="o">&gt;</span> <span class="mi">-1</span> <span class="o">&amp;&amp;</span> <span class="n">options_</span><span class="o">-&gt;</span><span class="n">get</span><span class="p">(</span><span class="s">&quot;guided-alignment&quot;</span><span class="p">,</span> <span class="n">std</span><span class="o">::</span><span class="n">string</span><span class="p">(</span><span class="s">&quot;none&quot;</span><span class="p">))</span> <span class="o">!=</span> <span class="s">&quot;none&quot;</span><span class="p">)</span>
+    <span class="n">addAlignmentsToBatch</span><span class="p">(</span><span class="n">batch</span><span class="p">,</span> <span class="n">batchVector</span><span class="p">);</span>
+  <span class="k">if</span><span class="p">(</span><span class="n">weightFileIdx_</span> <span class="o">&gt;</span> <span class="mi">-1</span> <span class="o">&amp;&amp;</span> <span class="n">options_</span><span class="o">-&gt;</span><span class="n">hasAndNotEmpty</span><span class="p">(</span><span class="s">&quot;data-weighting&quot;</span><span class="p">))</span>
+    <span class="n">addWeightsToBatch</span><span class="p">(</span><span class="n">batch</span><span class="p">,</span> <span class="n">batchVector</span><span class="p">);</span>
+
+  <span class="k">return</span> <span class="n">batch</span><span class="p">;</span>
+<span class="p">}</span>
+
+<span class="p">}</span>  <span class="c1">// namespace data</span>
+<span class="p">}</span>  <span class="c1">// namespace marian</span>
+</pre></div>
+</div>
+</div>
+
+
+           </div>
+           
+          </div>
+          <footer>
+
+  <hr/>
+
+  <div role="contentinfo">
+    <p>
+        &#169; Copyright 2021, Marian NMT Team.
+
+    </p>
+  </div>
+    
+    
+    
+    Built with <a href="https://www.sphinx-doc.org/">Sphinx</a> using a
+    
+    <a href="https://github.com/readthedocs/sphinx_rtd_theme">theme</a>
+    
+    provided by <a href="https://readthedocs.org">Read the Docs</a>. 
+
+</footer>
+        </div>
+      </div>
+
+    </section>
+
+  </div>
+  
+
+  <script type="text/javascript">
+      jQuery(function () {
+          SphinxRtdTheme.Navigation.enable(true);
+      });
+  </script>
+
+  
+  
+    
+   
+
+</body>
+</html>

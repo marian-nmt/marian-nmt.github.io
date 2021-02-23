@@ -1,0 +1,35 @@
+
+.. _program_listing_file_src_translator_helpers.h:
+
+Program Listing for File helpers.h
+==================================
+
+|exhale_lsh| :ref:`Return to documentation for file <file_src_translator_helpers.h>` (``src/translator/helpers.h``)
+
+.. |exhale_lsh| unicode:: U+021B0 .. UPWARDS ARROW WITH TIP LEFTWARDS
+
+.. code-block:: cpp
+
+   /* All or part of this file was contributed by Intel under license:
+    *   Copyright (C) 2017-2018 Intel Corporation
+    *   SPDX-License-Identifier: MIT
+    */
+   
+   #pragma once
+   
+   #include "graph/expression_graph.h"
+   
+   namespace marian {
+   
+   namespace cpu {
+   
+   void suppressWord(Expr logProbs, WordIndex wordIndex);
+   }
+   
+   namespace gpu {
+   
+   void suppressWord(Expr logProbs, WordIndex wordIndex);
+   }
+   
+   void suppressWord(Expr logProbs, WordIndex wordIndex);
+   }  // namespace marian

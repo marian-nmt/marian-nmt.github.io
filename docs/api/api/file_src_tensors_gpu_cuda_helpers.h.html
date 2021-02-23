@@ -1,0 +1,279 @@
+
+
+<!DOCTYPE html>
+<html class="writer-html5" lang="en" >
+<head>
+  <meta charset="utf-8" />
+  
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  
+  <title>File cuda_helpers.h &mdash; Marian NMT v1.10.1 2021-02-23 documentation</title>
+  
+
+  
+  <link rel="stylesheet" href="../_static/css/theme.css" type="text/css" />
+  <link rel="stylesheet" href="../_static/pygments.css" type="text/css" />
+  <link rel="stylesheet" href="../_static/css/custom.css" type="text/css" />
+  <link rel="stylesheet" href="../_static/collapsible-lists/css/tree_view.css" type="text/css" />
+
+  
+  
+
+  
+  
+
+  
+    <link rel="canonical" href="http://marian-nmt.github.io/docs/api/api/file_src_tensors_gpu_cuda_helpers.h.html" />
+
+  
+  <!--[if lt IE 9]>
+    <script src="../_static/js/html5shiv.min.js"></script>
+  <![endif]-->
+  
+    
+      <script type="text/javascript" id="documentation_options" data-url_root="../" src="../_static/documentation_options.js"></script>
+        <script src="../_static/jquery.js"></script>
+        <script src="../_static/underscore.js"></script>
+        <script src="../_static/doctools.js"></script>
+        <script src="../_static/language_data.js"></script>
+        <script src="../_static/collapsible-lists/js/CollapsibleLists.compressed.js"></script>
+        <script src="../_static/collapsible-lists/js/apply-collapsible-lists.js"></script>
+    
+    <script type="text/javascript" src="../_static/js/theme.js"></script>
+
+    
+    <link rel="index" title="Index" href="../genindex.html" />
+    <link rel="search" title="Search" href="../search.html" /> 
+</head>
+
+<body class="wy-body-for-nav">
+
+   
+  <div class="wy-grid-for-nav">
+    
+    <nav data-toggle="wy-nav-shift" class="wy-nav-side">
+      <div class="wy-side-scroll">
+        <div class="wy-side-nav-search" >
+          
+
+          
+            <a href="../index.html" class="icon icon-home"> Marian NMT
+          
+
+          
+          </a>
+
+          
+            
+            
+              <div class="version">
+                v1.10.1
+              </div>
+            
+          
+
+          
+<div role="search">
+  <form id="rtd-search-form" class="wy-form" action="../search.html" method="get">
+    <input type="text" name="q" placeholder="Search docs" />
+    <input type="hidden" name="check_keywords" value="yes" />
+    <input type="hidden" name="area" value="default" />
+  </form>
+</div>
+
+          
+        </div>
+
+        
+        <div class="wy-menu wy-menu-vertical" data-spy="affix" role="navigation" aria-label="main navigation">
+          
+            
+            
+              
+            
+            
+              <p class="caption"><span class="caption-text">Contents:</span></p>
+<ul>
+<li class="toctree-l1"><a class="reference internal" href="../install.html">Installation</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../graph.html">Expression graphs</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../operators.html">Graph operations</a></li>
+<li class="toctree-l1"><a class="reference internal" href="library_index.html">Library API</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../contributing.html">How to contribute to Marian</a></li>
+</ul>
+
+            
+          
+        </div>
+        
+      </div>
+    </nav>
+
+    <section data-toggle="wy-nav-shift" class="wy-nav-content-wrap">
+
+      
+      <nav class="wy-nav-top" aria-label="top navigation">
+        
+          <i data-toggle="wy-nav-top" class="fa fa-bars"></i>
+          <a href="../index.html">Marian NMT</a>
+        
+      </nav>
+
+
+      <div class="wy-nav-content">
+        
+        <div class="rst-content">
+        
+          
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+<div role="navigation" aria-label="breadcrumbs navigation">
+
+  <ul class="wy-breadcrumbs">
+    
+      <li><a href="../index.html" class="icon icon-home"></a> &raquo;</li>
+        
+      <li>File cuda_helpers.h</li>
+    
+    
+      <li class="wy-breadcrumbs-aside">
+        
+          
+            <a href="../_sources/api/file_src_tensors_gpu_cuda_helpers.h.rst.txt" rel="nofollow"> View page source</a>
+          
+        
+      </li>
+    
+  </ul>
+
+  
+  <hr/>
+</div>
+          <div role="main" class="document" itemscope="itemscope" itemtype="http://schema.org/Article">
+           <div itemprop="articleBody">
+            
+  <div class="section" id="file-cuda-helpers-h">
+<span id="file-src-tensors-gpu-cuda-helpers-h"></span><h1>File cuda_helpers.h<a class="headerlink" href="#file-cuda-helpers-h" title="Permalink to this headline">¶</a></h1>
+<p>↰ <a class="reference internal" href="dir_src_tensors_gpu.html#dir-src-tensors-gpu"><span class="std std-ref">Parent directory</span></a> (<code class="docutils literal notranslate"><span class="pre">src/tensors/gpu</span></code>)</p>
+<div class="contents local topic" id="contents">
+<p class="topic-title">Contents</p>
+<ul class="simple">
+<li><p><a class="reference internal" href="#definition-src-tensors-gpu-cuda-helpers-h" id="id1">Definition (<code class="docutils literal notranslate"><span class="pre">src/tensors/gpu/cuda_helpers.h</span></code>)</a></p></li>
+<li><p><a class="reference internal" href="#includes" id="id2">Includes</a></p></li>
+<li><p><a class="reference internal" href="#included-by" id="id3">Included By</a></p></li>
+<li><p><a class="reference internal" href="#functions" id="id4">Functions</a></p></li>
+<li><p><a class="reference internal" href="#defines" id="id5">Defines</a></p></li>
+<li><p><a class="reference internal" href="#variables" id="id6">Variables</a></p></li>
+</ul>
+</div>
+<div class="section" id="definition-src-tensors-gpu-cuda-helpers-h">
+<h2>Definition (<code class="docutils literal notranslate"><span class="pre">src/tensors/gpu/cuda_helpers.h</span></code>)<a class="headerlink" href="#definition-src-tensors-gpu-cuda-helpers-h" title="Permalink to this headline">¶</a></h2>
+<div class="toctree-wrapper compound">
+<ul>
+<li class="toctree-l1"><a class="reference internal" href="program_listing_file_src_tensors_gpu_cuda_helpers.h.html">Program Listing for File cuda_helpers.h</a></li>
+</ul>
+</div>
+</div>
+<div class="section" id="includes">
+<h2>Includes<a class="headerlink" href="#includes" title="Permalink to this headline">¶</a></h2>
+<ul class="simple">
+<li><p><code class="docutils literal notranslate"><span class="pre">common/logging.h</span></code> (<a class="reference internal" href="file_src_common_logging.h.html#file-src-common-logging-h"><span class="std std-ref">File logging.h</span></a>)</p></li>
+<li><p><code class="docutils literal notranslate"><span class="pre">common/types.h</span></code> (<a class="reference internal" href="file_src_common_types.h.html#file-src-common-types-h"><span class="std std-ref">File types.h</span></a>)</p></li>
+<li><p><code class="docutils literal notranslate"><span class="pre">cuda_runtime.h</span></code></p></li>
+</ul>
+</div>
+<div class="section" id="included-by">
+<h2>Included By<a class="headerlink" href="#included-by" title="Permalink to this headline">¶</a></h2>
+<ul class="simple">
+<li><p><a class="reference internal" href="file_src_tensors_gpu_add_all.h.html#file-src-tensors-gpu-add-all-h"><span class="std std-ref">File add_all.h</span></a></p></li>
+<li><p><a class="reference internal" href="file_src_tensors_gpu_backend.h.html#file-src-tensors-gpu-backend-h"><span class="std std-ref">File backend.h</span></a></p></li>
+<li><p><a class="reference internal" href="file_src_tensors_gpu_prod.cpp.html#file-src-tensors-gpu-prod-cpp"><span class="std std-ref">File prod.cpp</span></a></p></li>
+<li><p><a class="reference internal" href="file_src_training_communicator_nccl.h.html#file-src-training-communicator-nccl-h"><span class="std std-ref">File communicator_nccl.h</span></a></p></li>
+</ul>
+</div>
+<div class="section" id="functions">
+<h2>Functions<a class="headerlink" href="#functions" title="Permalink to this headline">¶</a></h2>
+<ul class="simple">
+<li><p><a class="reference internal" href="function_cuda__helpers_8h_1aa99c5fb63f0a3516d74e54afb71c700d.html#exhale-function-cuda-helpers-8h-1aa99c5fb63f0a3516d74e54afb71c700d"><span class="std std-ref">Template Function CudaCopy</span></a></p></li>
+<li><p><a class="reference internal" href="function_cuda__helpers_8h_1a3b6e998791ca32d6abbf3bd6550fb9ad.html#exhale-function-cuda-helpers-8h-1a3b6e998791ca32d6abbf3bd6550fb9ad"><span class="std std-ref">Function gpuAssert</span></a></p></li>
+</ul>
+</div>
+<div class="section" id="defines">
+<h2>Defines<a class="headerlink" href="#defines" title="Permalink to this headline">¶</a></h2>
+<ul class="simple">
+<li><p><a class="reference internal" href="define_cuda__helpers_8h_1a835db836b6461ad838d2210d9c8a0eb6.html#exhale-define-cuda-helpers-8h-1a835db836b6461ad838d2210d9c8a0eb6"><span class="std std-ref">Define CUBLAS_CHECK</span></a></p></li>
+<li><p><a class="reference internal" href="define_cuda__helpers_8h_1a5de5985bc35df4587cd62ba61a57f3b6.html#exhale-define-cuda-helpers-8h-1a5de5985bc35df4587cd62ba61a57f3b6"><span class="std std-ref">Define CUDA_CHECK</span></a></p></li>
+<li><p><a class="reference internal" href="define_cuda__helpers_8h_1a0c71fd918e978f573e989620124235ad.html#exhale-define-cuda-helpers-8h-1a0c71fd918e978f573e989620124235ad"><span class="std std-ref">Define CUDA_FLT_MAX</span></a></p></li>
+<li><p><a class="reference internal" href="define_cuda__helpers_8h_1ab790743c9f5eca0a6739bdbcda259064.html#exhale-define-cuda-helpers-8h-1ab790743c9f5eca0a6739bdbcda259064"><span class="std std-ref">Define CURAND_CHECK</span></a></p></li>
+<li><p><a class="reference internal" href="define_cuda__helpers_8h_1ad73a21afb4d41b1f0b2dd8af4fb5ef83.html#exhale-define-cuda-helpers-8h-1ad73a21afb4d41b1f0b2dd8af4fb5ef83"><span class="std std-ref">Define CUSPARSE_CHECK</span></a></p></li>
+<li><p><a class="reference internal" href="define_cuda__helpers_8h_1aec553eb29015362e4eefe4e6450cd125.html#exhale-define-cuda-helpers-8h-1aec553eb29015362e4eefe4e6450cd125"><span class="std std-ref">Define NCCL_CHECK</span></a></p></li>
+</ul>
+</div>
+<div class="section" id="variables">
+<h2>Variables<a class="headerlink" href="#variables" title="Permalink to this headline">¶</a></h2>
+<ul class="simple">
+<li><p><a class="reference internal" href="variable_cuda__helpers_8h_1a59aecc705cc40b88d6a56f5178955bc6.html#exhale-variable-cuda-helpers-8h-1a59aecc705cc40b88d6a56f5178955bc6"><span class="std std-ref">Variable MAX_BLOCKS</span></a></p></li>
+<li><p><a class="reference internal" href="variable_cuda__helpers_8h_1a2386d222e1a6187210271bfff7468e1a.html#exhale-variable-cuda-helpers-8h-1a2386d222e1a6187210271bfff7468e1a"><span class="std std-ref">Variable MAX_THREADS</span></a></p></li>
+</ul>
+</div>
+</div>
+
+
+           </div>
+           
+          </div>
+          <footer>
+
+  <hr/>
+
+  <div role="contentinfo">
+    <p>
+        &#169; Copyright 2021, Marian NMT Team.
+
+    </p>
+  </div>
+    
+    
+    
+    Built with <a href="https://www.sphinx-doc.org/">Sphinx</a> using a
+    
+    <a href="https://github.com/readthedocs/sphinx_rtd_theme">theme</a>
+    
+    provided by <a href="https://readthedocs.org">Read the Docs</a>. 
+
+</footer>
+        </div>
+      </div>
+
+    </section>
+
+  </div>
+  
+
+  <script type="text/javascript">
+      jQuery(function () {
+          SphinxRtdTheme.Navigation.enable(true);
+      });
+  </script>
+
+  
+  
+    
+   
+
+</body>
+</html>

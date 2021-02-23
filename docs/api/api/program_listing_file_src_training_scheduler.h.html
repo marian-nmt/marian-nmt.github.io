@@ -1,0 +1,815 @@
+
+
+<!DOCTYPE html>
+<html class="writer-html5" lang="en" >
+<head>
+  <meta charset="utf-8" />
+  
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  
+  <title>Program Listing for File scheduler.h &mdash; Marian NMT v1.10.1 2021-02-23 documentation</title>
+  
+
+  
+  <link rel="stylesheet" href="../_static/css/theme.css" type="text/css" />
+  <link rel="stylesheet" href="../_static/pygments.css" type="text/css" />
+  <link rel="stylesheet" href="../_static/css/custom.css" type="text/css" />
+  <link rel="stylesheet" href="../_static/collapsible-lists/css/tree_view.css" type="text/css" />
+
+  
+  
+
+  
+  
+
+  
+    <link rel="canonical" href="http://marian-nmt.github.io/docs/api/api/program_listing_file_src_training_scheduler.h.html" />
+
+  
+  <!--[if lt IE 9]>
+    <script src="../_static/js/html5shiv.min.js"></script>
+  <![endif]-->
+  
+    
+      <script type="text/javascript" id="documentation_options" data-url_root="../" src="../_static/documentation_options.js"></script>
+        <script src="../_static/jquery.js"></script>
+        <script src="../_static/underscore.js"></script>
+        <script src="../_static/doctools.js"></script>
+        <script src="../_static/language_data.js"></script>
+        <script src="../_static/collapsible-lists/js/CollapsibleLists.compressed.js"></script>
+        <script src="../_static/collapsible-lists/js/apply-collapsible-lists.js"></script>
+    
+    <script type="text/javascript" src="../_static/js/theme.js"></script>
+
+    
+    <link rel="index" title="Index" href="../genindex.html" />
+    <link rel="search" title="Search" href="../search.html" /> 
+</head>
+
+<body class="wy-body-for-nav">
+
+   
+  <div class="wy-grid-for-nav">
+    
+    <nav data-toggle="wy-nav-shift" class="wy-nav-side">
+      <div class="wy-side-scroll">
+        <div class="wy-side-nav-search" >
+          
+
+          
+            <a href="../index.html" class="icon icon-home"> Marian NMT
+          
+
+          
+          </a>
+
+          
+            
+            
+              <div class="version">
+                v1.10.1
+              </div>
+            
+          
+
+          
+<div role="search">
+  <form id="rtd-search-form" class="wy-form" action="../search.html" method="get">
+    <input type="text" name="q" placeholder="Search docs" />
+    <input type="hidden" name="check_keywords" value="yes" />
+    <input type="hidden" name="area" value="default" />
+  </form>
+</div>
+
+          
+        </div>
+
+        
+        <div class="wy-menu wy-menu-vertical" data-spy="affix" role="navigation" aria-label="main navigation">
+          
+            
+            
+              
+            
+            
+              <p class="caption"><span class="caption-text">Contents:</span></p>
+<ul>
+<li class="toctree-l1"><a class="reference internal" href="../install.html">Installation</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../graph.html">Expression graphs</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../operators.html">Graph operations</a></li>
+<li class="toctree-l1"><a class="reference internal" href="library_index.html">Library API</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../contributing.html">How to contribute to Marian</a></li>
+</ul>
+
+            
+          
+        </div>
+        
+      </div>
+    </nav>
+
+    <section data-toggle="wy-nav-shift" class="wy-nav-content-wrap">
+
+      
+      <nav class="wy-nav-top" aria-label="top navigation">
+        
+          <i data-toggle="wy-nav-top" class="fa fa-bars"></i>
+          <a href="../index.html">Marian NMT</a>
+        
+      </nav>
+
+
+      <div class="wy-nav-content">
+        
+        <div class="rst-content">
+        
+          
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+<div role="navigation" aria-label="breadcrumbs navigation">
+
+  <ul class="wy-breadcrumbs">
+    
+      <li><a href="../index.html" class="icon icon-home"></a> &raquo;</li>
+        
+      <li>Program Listing for File scheduler.h</li>
+    
+    
+      <li class="wy-breadcrumbs-aside">
+        
+          
+            <a href="../_sources/api/program_listing_file_src_training_scheduler.h.rst.txt" rel="nofollow"> View page source</a>
+          
+        
+      </li>
+    
+  </ul>
+
+  
+  <hr/>
+</div>
+          <div role="main" class="document" itemscope="itemscope" itemtype="http://schema.org/Article">
+           <div itemprop="articleBody">
+            
+  <div class="section" id="program-listing-for-file-scheduler-h">
+<span id="program-listing-file-src-training-scheduler-h"></span><h1>Program Listing for File scheduler.h<a class="headerlink" href="#program-listing-for-file-scheduler-h" title="Permalink to this headline">¶</a></h1>
+<p>↰ <a class="reference internal" href="file_src_training_scheduler.h.html#file-src-training-scheduler-h"><span class="std std-ref">Return to documentation for file</span></a> (<code class="docutils literal notranslate"><span class="pre">src/training/scheduler.h</span></code>)</p>
+<div class="highlight-cpp notranslate"><div class="highlight"><pre><span></span><span class="cp">#pragma once</span>
+
+<span class="cp">#include</span> <span class="cpf">&quot;common/options.h&quot;</span><span class="cp"></span>
+<span class="cp">#include</span> <span class="cpf">&quot;common/signal_handling.h&quot;</span><span class="cp"></span>
+<span class="cp">#include</span> <span class="cpf">&quot;training/training_state.h&quot;</span><span class="cp"></span>
+<span class="cp">#include</span> <span class="cpf">&quot;training/validator.h&quot;</span><span class="cp"></span>
+<span class="cp">#include</span> <span class="cpf">&quot;training/communicator.h&quot;</span><span class="cp"></span>
+<span class="cp">#include</span> <span class="cpf">&quot;layers/loss.h&quot;</span><span class="cp"></span>
+
+<span class="k">namespace</span> <span class="n">marian</span> <span class="p">{</span>
+
+<span class="k">class</span> <span class="nc">Scheduler</span> <span class="o">:</span> <span class="k">public</span> <span class="n">TrainingObserver</span> <span class="p">{</span>
+<span class="k">private</span><span class="o">:</span>
+  <span class="n">Ptr</span><span class="o">&lt;</span><span class="n">Options</span><span class="o">&gt;</span> <span class="n">options_</span><span class="p">;</span>
+  <span class="n">Ptr</span><span class="o">&lt;</span><span class="n">TrainingState</span><span class="o">&gt;</span> <span class="n">state_</span><span class="p">;</span>
+  <span class="n">std</span><span class="o">::</span><span class="n">vector</span><span class="o">&lt;</span><span class="n">Ptr</span><span class="o">&lt;</span><span class="n">ValidatorBase</span><span class="o">&gt;&gt;</span> <span class="n">validators_</span><span class="p">;</span>
+
+  <span class="kt">bool</span> <span class="n">first_</span><span class="p">{</span><span class="nb">true</span><span class="p">};</span>        <span class="c1">// true if this is the first update after renewing the training</span>
+  <span class="n">SchedulingParameter</span> <span class="n">logicalEpoch_</span><span class="p">;</span>
+  <span class="kt">size_t</span> <span class="n">logicalEpochWidth_</span><span class="p">{</span><span class="mi">0</span><span class="p">};</span>
+
+  <span class="n">timer</span><span class="o">::</span><span class="n">Timer</span> <span class="n">timer_</span><span class="p">;</span>
+  <span class="n">timer</span><span class="o">::</span><span class="n">Timer</span> <span class="n">heartBeatTimer_</span><span class="p">;</span>
+
+  <span class="c1">// The variable helps to keep track of the end of the current epoch</span>
+  <span class="c1">// (regardless if it&#39;s the 1st or nth epoch and if it&#39;s a new or continued training),</span>
+  <span class="c1">// which indicates the end of the training data stream from STDIN</span>
+  <span class="kt">bool</span> <span class="n">endOfStdin_</span><span class="p">{</span><span class="nb">false</span><span class="p">};</span>  <span class="c1">// true at the end of the epoch if training from STDIN;</span>
+
+  <span class="c1">// determine scheduled LR decay factor (--lr-decay-inv-sqrt option)</span>
+  <span class="kt">float</span> <span class="nf">getScheduledLRDecayFactor</span><span class="p">(</span><span class="k">const</span> <span class="n">TrainingState</span><span class="o">&amp;</span> <span class="n">state</span><span class="p">)</span> <span class="k">const</span> <span class="p">{</span>
+    <span class="k">auto</span> <span class="n">args</span> <span class="o">=</span> <span class="n">options_</span><span class="o">-&gt;</span><span class="n">get</span><span class="o">&lt;</span><span class="n">std</span><span class="o">::</span><span class="n">vector</span><span class="o">&lt;</span><span class="n">std</span><span class="o">::</span><span class="n">string</span><span class="o">&gt;&gt;</span><span class="p">(</span><span class="s">&quot;lr-decay-inv-sqrt&quot;</span><span class="p">);</span>
+    <span class="n">ABORT_IF</span><span class="p">(</span><span class="n">args</span><span class="p">.</span><span class="n">empty</span><span class="p">()</span> <span class="o">||</span> <span class="n">args</span><span class="p">.</span><span class="n">size</span><span class="p">()</span> <span class="o">&gt;</span> <span class="mi">2</span><span class="p">,</span> <span class="s">&quot;--lr-decay-inv-sqrt argument must be one or two numbers with units&quot;</span><span class="p">);</span>
+    <span class="k">auto</span> <span class="n">decayGoogle</span> <span class="o">=</span> <span class="n">SchedulingParameter</span><span class="o">::</span><span class="n">parse</span><span class="p">(</span><span class="n">args</span><span class="p">[</span><span class="mi">0</span><span class="p">]);</span>
+    <span class="kt">size_t</span> <span class="n">progress</span> <span class="o">=</span> <span class="n">state</span><span class="p">.</span><span class="n">getProgressIn</span><span class="p">(</span><span class="n">decayGoogle</span><span class="p">.</span><span class="n">unit</span><span class="p">);</span>
+    <span class="kt">size_t</span> <span class="n">start</span> <span class="o">=</span> <span class="n">decayGoogle</span><span class="p">.</span><span class="n">n</span><span class="p">;</span>
+    <span class="k">if</span> <span class="p">(</span><span class="n">args</span><span class="p">.</span><span class="n">size</span><span class="p">()</span> <span class="o">&gt;</span> <span class="mi">1</span><span class="p">)</span> <span class="p">{</span>
+      <span class="k">auto</span> <span class="n">decayStart</span> <span class="o">=</span> <span class="n">SchedulingParameter</span><span class="o">::</span><span class="n">parse</span><span class="p">(</span><span class="n">args</span><span class="p">[</span><span class="mi">1</span><span class="p">]);</span>
+      <span class="n">ABORT_IF</span><span class="p">(</span><span class="n">decayStart</span> <span class="o">&amp;&amp;</span> <span class="n">decayStart</span><span class="p">.</span><span class="n">unit</span> <span class="o">!=</span> <span class="n">decayGoogle</span><span class="p">.</span><span class="n">unit</span><span class="p">,</span>
+               <span class="s">&quot;both --lr-decay-inv-sqrt arguments must have the same unit&quot;</span><span class="p">);</span>
+      <span class="n">start</span> <span class="o">=</span> <span class="n">decayStart</span><span class="p">.</span><span class="n">n</span><span class="p">;</span>
+    <span class="p">}</span>
+    <span class="k">if</span> <span class="p">(</span><span class="n">decayGoogle</span> <span class="o">&amp;&amp;</span> <span class="n">progress</span> <span class="o">&gt;</span> <span class="n">start</span><span class="p">)</span> <span class="p">{</span>
+      <span class="n">progress</span> <span class="o">=</span> <span class="n">progress</span> <span class="o">-</span> <span class="n">start</span> <span class="o">+</span> <span class="n">decayGoogle</span><span class="p">.</span><span class="n">n</span><span class="p">;</span> <span class="c1">// shift so that we get 1 at progress==start</span>
+      <span class="k">return</span> <span class="p">(</span><span class="kt">float</span><span class="p">)(</span><span class="n">std</span><span class="o">::</span><span class="n">sqrt</span><span class="p">((</span><span class="kt">double</span><span class="p">)</span><span class="n">decayGoogle</span><span class="p">.</span><span class="n">n</span> <span class="o">/</span> <span class="p">(</span><span class="kt">double</span><span class="p">)</span><span class="n">progress</span><span class="p">));</span>
+    <span class="p">}</span>
+    <span class="k">else</span>
+      <span class="k">return</span> <span class="mf">1.f</span><span class="p">;</span>
+  <span class="p">}</span>
+
+  <span class="c1">// update current learning rate in state.eta</span>
+  <span class="c1">// This considers</span>
+  <span class="c1">//  - base LR (--learn-rate)</span>
+  <span class="c1">//  - LR warm-up (--lr-warmup, --lr=warmup-start-rate)</span>
+  <span class="c1">//  - scheduled LR decay (--lr-decay-inv-sqrt)</span>
+  <span class="c1">//  - state-based LR decay (--lr-decay, --lr-decay-strategy)</span>
+  <span class="kt">void</span> <span class="nf">updateLearningRate</span><span class="p">(</span><span class="n">TrainingState</span><span class="o">&amp;</span> <span class="n">state</span><span class="p">)</span> <span class="k">const</span> <span class="p">{</span>
+    <span class="kt">float</span> <span class="n">baselr</span> <span class="o">=</span> <span class="n">options_</span><span class="o">-&gt;</span><span class="n">get</span><span class="o">&lt;</span><span class="kt">float</span><span class="o">&gt;</span><span class="p">(</span><span class="s">&quot;learn-rate&quot;</span><span class="p">);</span>
+
+    <span class="c1">// warm-up factor</span>
+    <span class="kt">float</span> <span class="n">warmupFactor</span> <span class="o">=</span> <span class="mf">1.f</span><span class="p">;</span>
+    <span class="k">auto</span> <span class="n">warmupParam</span> <span class="o">=</span> <span class="n">SchedulingParameter</span><span class="o">::</span><span class="n">parse</span><span class="p">(</span><span class="n">options_</span><span class="o">-&gt;</span><span class="n">get</span><span class="o">&lt;</span><span class="n">std</span><span class="o">::</span><span class="n">string</span><span class="o">&gt;</span><span class="p">(</span><span class="s">&quot;lr-warmup&quot;</span><span class="p">));</span>
+    <span class="k">if</span><span class="p">(</span><span class="n">warmupParam</span><span class="p">)</span> <span class="p">{</span>
+      <span class="n">ABORT_IF</span><span class="p">(</span><span class="n">state</span><span class="p">.</span><span class="n">warmupStart</span> <span class="o">&amp;&amp;</span> <span class="n">state</span><span class="p">.</span><span class="n">warmupStart</span><span class="p">.</span><span class="n">unit</span> <span class="o">!=</span> <span class="n">warmupParam</span><span class="p">.</span><span class="n">unit</span><span class="p">,</span>
+               <span class="s">&quot;lr-warmup and warmup-start must have the same unit&quot;</span><span class="p">);</span>
+      <span class="k">auto</span> <span class="n">bno</span> <span class="o">=</span> <span class="n">state</span><span class="p">.</span><span class="n">getProgressIn</span><span class="p">(</span><span class="n">warmupParam</span><span class="p">.</span><span class="n">unit</span><span class="p">)</span> <span class="o">-</span> <span class="n">state</span><span class="p">.</span><span class="n">warmupStart</span><span class="p">.</span><span class="n">n</span><span class="p">;</span>
+      <span class="n">warmupFactor</span> <span class="o">=</span> <span class="n">std</span><span class="o">::</span><span class="n">min</span><span class="p">(</span><span class="mf">1.f</span><span class="p">,</span> <span class="p">(</span><span class="kt">float</span><span class="p">)</span><span class="n">bno</span> <span class="o">/</span> <span class="p">(</span><span class="kt">float</span><span class="p">)</span><span class="n">warmupParam</span><span class="p">.</span><span class="n">n</span><span class="p">);</span>
+    <span class="p">}</span>
+
+    <span class="c1">// TODO: why lr-warmup-start-rate is extracted from options_ instead of using state.warmupStart?</span>
+    <span class="kt">float</span> <span class="n">lrStart</span> <span class="o">=</span> <span class="n">options_</span><span class="o">-&gt;</span><span class="n">get</span><span class="o">&lt;</span><span class="kt">float</span><span class="o">&gt;</span><span class="p">(</span><span class="s">&quot;lr-warmup-start-rate&quot;</span><span class="p">);</span>
+    <span class="n">baselr</span> <span class="o">=</span> <span class="n">lrStart</span> <span class="o">+</span> <span class="p">(</span><span class="n">baselr</span> <span class="o">-</span> <span class="n">lrStart</span><span class="p">)</span> <span class="o">*</span> <span class="n">warmupFactor</span><span class="p">;</span> <span class="c1">// linear interpolation between</span>
+                                                          <span class="c1">// lr-warmup-start-rate to learn-rate</span>
+
+    <span class="c1">// schedule-based decay factor (--lr-decay-inv-sqrt)</span>
+    <span class="kt">float</span> <span class="n">scheduledDecayFactor</span> <span class="o">=</span> <span class="n">getScheduledLRDecayFactor</span><span class="p">(</span><span class="n">state</span><span class="p">);</span>
+    <span class="n">baselr</span> <span class="o">=</span> <span class="n">baselr</span> <span class="o">*</span> <span class="n">scheduledDecayFactor</span><span class="p">;</span>
+
+    <span class="c1">// factor in state-based decay and set final LR as state.eta</span>
+    <span class="n">state</span><span class="p">.</span><span class="n">updateEta</span><span class="p">(</span><span class="n">baselr</span><span class="p">);</span>
+  <span class="p">}</span>
+
+  <span class="n">std</span><span class="o">::</span><span class="n">string</span> <span class="n">formatLoss</span><span class="p">(</span><span class="n">std</span><span class="o">::</span><span class="n">string</span> <span class="n">lossType</span><span class="p">,</span>
+                         <span class="kt">bool</span> <span class="n">dispLabelCounts</span><span class="p">,</span>
+                         <span class="kt">size_t</span> <span class="n">batchLabels</span><span class="p">,</span>
+                         <span class="n">Ptr</span><span class="o">&lt;</span><span class="n">TrainingState</span><span class="o">&gt;</span> <span class="n">state</span><span class="p">)</span> <span class="p">{</span>
+    <span class="n">std</span><span class="o">::</span><span class="n">stringstream</span> <span class="n">ss</span><span class="p">;</span>
+    <span class="n">ss</span> <span class="o">&lt;&lt;</span> <span class="s">&quot;Cost &quot;</span><span class="p">;</span>
+    <span class="n">ss</span> <span class="o">&lt;&lt;</span> <span class="n">std</span><span class="o">::</span><span class="n">setprecision</span><span class="p">(</span><span class="mi">8</span><span class="p">)</span> <span class="o">&lt;&lt;</span> <span class="n">std</span><span class="o">::</span><span class="n">fixed</span><span class="p">;</span>
+
+    <span class="c1">// @TODO: put a single loss formatting function into loss.h and reuse here to avoid code duplication</span>
+    <span class="c1">// @TODO: use dispLabelCounts with any display type?</span>
+    <span class="c1">// @TODO: bugbug cost-type ce-mean-words with multi-loss-type mean divides too much in display</span>
+    <span class="k">if</span><span class="p">(</span><span class="n">lossType</span> <span class="o">==</span> <span class="s">&quot;ce-mean-words&quot;</span><span class="p">)</span> <span class="p">{</span>
+      <span class="n">ss</span> <span class="o">&lt;&lt;</span> <span class="n">state</span><span class="o">-&gt;</span><span class="n">costSum</span> <span class="o">/</span> <span class="n">state</span><span class="o">-&gt;</span><span class="n">costCount</span><span class="p">;</span>
+    <span class="p">}</span> <span class="k">else</span> <span class="k">if</span><span class="p">(</span><span class="n">lossType</span> <span class="o">==</span> <span class="s">&quot;ce-sum&quot;</span> <span class="o">&amp;&amp;</span> <span class="n">dispLabelCounts</span><span class="p">)</span> <span class="p">{</span>
+      <span class="n">ss</span> <span class="o">&lt;&lt;</span> <span class="n">state</span><span class="o">-&gt;</span><span class="n">costSum</span> <span class="o">/</span> <span class="n">state</span><span class="o">-&gt;</span><span class="n">costCount</span>
+         <span class="o">&lt;&lt;</span> <span class="s">&quot; * &quot;</span> <span class="o">&lt;&lt;</span> <span class="n">utils</span><span class="o">::</span><span class="n">withCommas</span><span class="p">(</span><span class="n">state</span><span class="o">-&gt;</span><span class="n">costCount</span><span class="p">);</span>
+      <span class="k">if</span><span class="p">(</span><span class="n">batchLabels</span> <span class="o">&gt;</span> <span class="mi">0</span><span class="p">)</span>
+         <span class="n">ss</span> <span class="o">&lt;&lt;</span> <span class="s">&quot; @ &quot;</span> <span class="o">&lt;&lt;</span> <span class="n">utils</span><span class="o">::</span><span class="n">withCommas</span><span class="p">(</span><span class="n">batchLabels</span><span class="p">);</span>
+      <span class="n">ss</span> <span class="o">&lt;&lt;</span> <span class="s">&quot; after &quot;</span> <span class="o">&lt;&lt;</span> <span class="n">utils</span><span class="o">::</span><span class="n">withCommas</span><span class="p">(</span><span class="n">state</span><span class="o">-&gt;</span><span class="n">labelsTotal</span><span class="p">);</span>
+    <span class="p">}</span> <span class="k">else</span> <span class="k">if</span><span class="p">(</span><span class="n">lossType</span> <span class="o">==</span> <span class="s">&quot;ce-sum&quot;</span> <span class="o">&amp;&amp;</span> <span class="o">!</span><span class="n">dispLabelCounts</span><span class="p">)</span> <span class="p">{</span>
+      <span class="n">ss</span> <span class="o">&lt;&lt;</span> <span class="n">state</span><span class="o">-&gt;</span><span class="n">costSum</span> <span class="o">/</span> <span class="n">state</span><span class="o">-&gt;</span><span class="n">updatesDisp</span><span class="p">;</span> <span class="c1">// average over batches</span>
+    <span class="p">}</span> <span class="k">else</span> <span class="k">if</span><span class="p">(</span><span class="n">lossType</span> <span class="o">==</span> <span class="s">&quot;perplexity&quot;</span><span class="p">)</span> <span class="p">{</span>
+      <span class="n">ss</span> <span class="o">&lt;&lt;</span> <span class="n">std</span><span class="o">::</span><span class="n">exp</span><span class="p">(</span><span class="n">state</span><span class="o">-&gt;</span><span class="n">costSum</span> <span class="o">/</span> <span class="n">state</span><span class="o">-&gt;</span><span class="n">costCount</span><span class="p">);</span>
+    <span class="p">}</span> <span class="k">else</span> <span class="k">if</span><span class="p">(</span><span class="n">lossType</span> <span class="o">==</span> <span class="s">&quot;cross-entropy&quot;</span> <span class="o">||</span> <span class="n">lossType</span> <span class="o">==</span> <span class="s">&quot;ce-mean&quot;</span><span class="p">)</span> <span class="p">{</span> <span class="c1">// backwards-compat, @TODO: get rid of this?</span>
+      <span class="n">ss</span> <span class="o">&lt;&lt;</span> <span class="n">state</span><span class="o">-&gt;</span><span class="n">costSum</span> <span class="o">/</span> <span class="n">state</span><span class="o">-&gt;</span><span class="n">samplesDisp</span><span class="p">;</span>
+    <span class="p">}</span> <span class="k">else</span> <span class="p">{</span>
+      <span class="n">ABORT</span><span class="p">(</span><span class="s">&quot;Unknown loss type {}&quot;</span><span class="p">,</span> <span class="n">lossType</span><span class="p">);</span>
+    <span class="p">}</span>
+
+    <span class="k">return</span> <span class="n">ss</span><span class="p">.</span><span class="n">str</span><span class="p">();</span>
+  <span class="p">}</span>
+
+  <span class="c1">// Here we calculate the logical epoch as defined by the user, by default this will be just a traditional data epoch.</span>
+  <span class="c1">// We understand a data epoch as a complete pass throught the training data as far as that information is available.</span>
+  <span class="c1">// By contrast, a logical epoch is defined somewhat indepdently of the number of data passes as by the number of seen updates or labels</span>
+  <span class="c1">// or as a multitude of data epochs.</span>
+  <span class="kt">float</span> <span class="n">calculateLogicalEpoch</span><span class="p">()</span> <span class="p">{</span>
+    <span class="k">if</span><span class="p">(</span><span class="n">logicalEpoch_</span><span class="p">.</span><span class="n">unit</span> <span class="o">==</span> <span class="n">SchedulingUnit</span><span class="o">::</span><span class="n">epochs</span><span class="p">)</span>
+      <span class="k">return</span> <span class="p">(</span><span class="kt">float</span><span class="p">)</span><span class="n">state_</span><span class="o">-&gt;</span><span class="n">epochs</span> <span class="o">/</span> <span class="p">(</span><span class="kt">float</span><span class="p">)</span><span class="n">logicalEpoch_</span><span class="p">.</span><span class="n">n</span><span class="p">;</span>      <span class="c1">// logical epoch as multiple of n data epochs</span>
+    <span class="k">else</span> <span class="nf">if</span><span class="p">(</span><span class="n">logicalEpoch_</span><span class="p">.</span><span class="n">unit</span> <span class="o">==</span> <span class="n">SchedulingUnit</span><span class="o">::</span><span class="n">trgLabels</span><span class="p">)</span>
+      <span class="k">return</span> <span class="p">(</span><span class="kt">float</span><span class="p">)</span><span class="n">state_</span><span class="o">-&gt;</span><span class="n">labelsTotal</span> <span class="o">/</span> <span class="p">(</span><span class="kt">float</span><span class="p">)</span><span class="n">logicalEpoch_</span><span class="p">.</span><span class="n">n</span><span class="p">;</span> <span class="c1">// logical epoch as multiple of n labels</span>
+    <span class="k">else</span> <span class="nf">if</span><span class="p">(</span><span class="n">logicalEpoch_</span><span class="p">.</span><span class="n">unit</span> <span class="o">==</span> <span class="n">SchedulingUnit</span><span class="o">::</span><span class="n">updates</span><span class="p">)</span>
+      <span class="k">return</span> <span class="p">(</span><span class="kt">float</span><span class="p">)</span><span class="n">state_</span><span class="o">-&gt;</span><span class="n">batches</span> <span class="o">/</span> <span class="p">(</span><span class="kt">float</span><span class="p">)</span><span class="n">logicalEpoch_</span><span class="p">.</span><span class="n">n</span><span class="p">;</span>     <span class="c1">// logical epoch as multiple of n gradient updates (not actually batches @TODO: change name)</span>
+    <span class="k">else</span>
+      <span class="nf">ABORT</span><span class="p">(</span><span class="s">&quot;Unknown scheduling unit occurred in logical epoch&quot;</span><span class="p">);</span> <span class="c1">// shouldn&#39;t really happen unless we add a new unit in the corresponding enum</span>
+  <span class="p">}</span>
+
+  <span class="c1">// Formatting for logical epochs</span>
+  <span class="n">std</span><span class="o">::</span><span class="n">string</span> <span class="n">formatLogicalEpoch</span><span class="p">()</span> <span class="p">{</span>
+    <span class="k">return</span> <span class="n">fmt</span><span class="o">::</span><span class="n">format</span><span class="p">(</span><span class="s">&quot;{:.&quot;</span> <span class="o">+</span> <span class="n">std</span><span class="o">::</span><span class="n">to_string</span><span class="p">(</span><span class="n">logicalEpochWidth_</span><span class="p">)</span> <span class="o">+</span> <span class="s">&quot;f}&quot;</span><span class="p">,</span> <span class="n">calculateLogicalEpoch</span><span class="p">());</span>
+  <span class="p">}</span>
+
+<span class="k">public</span><span class="o">:</span>
+  <span class="n">Scheduler</span><span class="p">(</span><span class="n">Ptr</span><span class="o">&lt;</span><span class="n">Options</span><span class="o">&gt;</span> <span class="n">options</span><span class="p">,</span> <span class="n">Ptr</span><span class="o">&lt;</span><span class="n">TrainingState</span><span class="o">&gt;</span> <span class="n">state</span><span class="p">)</span>
+      <span class="o">:</span> <span class="n">options_</span><span class="p">(</span><span class="n">options</span><span class="p">),</span> <span class="n">state_</span><span class="p">(</span><span class="n">state</span><span class="p">)</span> <span class="p">{</span>
+
+    <span class="c1">// parse logical-epoch parameters</span>
+    <span class="k">auto</span> <span class="n">logicalEpochStr</span> <span class="o">=</span> <span class="n">options</span><span class="o">-&gt;</span><span class="n">get</span><span class="o">&lt;</span><span class="n">std</span><span class="o">::</span><span class="n">vector</span><span class="o">&lt;</span><span class="n">std</span><span class="o">::</span><span class="n">string</span><span class="o">&gt;&gt;</span><span class="p">(</span><span class="s">&quot;logical-epoch&quot;</span><span class="p">,</span> <span class="p">{</span><span class="s">&quot;1e&quot;</span><span class="p">,</span> <span class="s">&quot;0&quot;</span><span class="p">});</span>
+    <span class="n">ABORT_IF</span><span class="p">(</span><span class="n">logicalEpochStr</span><span class="p">.</span><span class="n">empty</span><span class="p">(),</span> <span class="s">&quot;Logical epoch information is missing?&quot;</span><span class="p">);</span>
+
+    <span class="n">logicalEpoch_</span> <span class="o">=</span> <span class="n">SchedulingParameter</span><span class="o">::</span><span class="n">parse</span><span class="p">(</span><span class="n">logicalEpochStr</span><span class="p">[</span><span class="mi">0</span><span class="p">]);</span>
+
+    <span class="c1">// here we deduce the floating point width to be used in formatLogicalEpoch()</span>
+    <span class="k">if</span><span class="p">(</span><span class="n">logicalEpochStr</span><span class="p">.</span><span class="n">size</span><span class="p">()</span> <span class="o">&gt;</span> <span class="mi">1</span><span class="p">)</span> <span class="p">{</span> <span class="c1">// if the width is given, just use that</span>
+      <span class="n">logicalEpochWidth_</span> <span class="o">=</span> <span class="n">std</span><span class="o">::</span><span class="n">stoul</span><span class="p">(</span><span class="n">logicalEpochStr</span><span class="p">[</span><span class="mi">1</span><span class="p">]);</span>
+    <span class="p">}</span> <span class="k">else</span> <span class="p">{</span> <span class="c1">// the width is not given so we deduce a suitable display width</span>
+      <span class="k">if</span><span class="p">(</span><span class="n">logicalEpoch_</span><span class="p">.</span><span class="n">unit</span> <span class="o">==</span> <span class="n">SchedulingUnit</span><span class="o">::</span><span class="n">epochs</span> <span class="o">&amp;&amp;</span> <span class="n">logicalEpoch_</span><span class="p">.</span><span class="n">n</span> <span class="o">==</span> <span class="mi">1</span><span class="p">)</span>
+        <span class="n">logicalEpochWidth_</span> <span class="o">=</span> <span class="mi">0</span><span class="p">;</span> <span class="c1">// for a data epoch, output is an integer and looks like before this feature was introduced</span>
+      <span class="k">else</span>
+        <span class="n">logicalEpochWidth_</span> <span class="o">=</span> <span class="mi">3</span><span class="p">;</span> <span class="c1">// all other outputs can be fractional, hence floating point format. We choose</span>
+                                <span class="c1">// 3 as a default which corresponds to a multiplier of 1000 (3 orders of magnitude).</span>
+    <span class="p">}</span>
+
+    <span class="n">ABORT_IF</span><span class="p">(</span><span class="n">state_</span><span class="o">-&gt;</span><span class="n">factor</span> <span class="o">!=</span> <span class="mi">1</span><span class="p">,</span> <span class="s">&quot;state.factor unexpectedly not 1 at this point??&quot;</span><span class="p">);</span>
+    <span class="n">updateLearningRate</span><span class="p">(</span><span class="o">*</span><span class="n">state</span><span class="p">);</span>
+  <span class="p">}</span>
+
+  <span class="c1">// test if any parameters specify dynamic MB scaling</span>
+  <span class="kt">bool</span> <span class="n">isDynamicMBSizeScaling</span><span class="p">()</span> <span class="k">const</span> <span class="p">{</span>
+    <span class="k">auto</span> <span class="n">mbWarmup</span> <span class="o">=</span> <span class="n">SchedulingParameter</span><span class="o">::</span><span class="n">parse</span><span class="p">(</span><span class="n">options_</span><span class="o">-&gt;</span><span class="n">get</span><span class="o">&lt;</span><span class="n">std</span><span class="o">::</span><span class="n">string</span><span class="o">&gt;</span><span class="p">(</span><span class="s">&quot;mini-batch-warmup&quot;</span><span class="p">));</span>
+    <span class="k">auto</span> <span class="n">mbTracking</span> <span class="o">=</span> <span class="n">options_</span><span class="o">-&gt;</span><span class="n">get</span><span class="o">&lt;</span><span class="kt">bool</span><span class="o">&gt;</span><span class="p">(</span><span class="s">&quot;mini-batch-track-lr&quot;</span><span class="p">);</span>
+    <span class="k">return</span> <span class="n">mbWarmup</span> <span class="o">||</span> <span class="n">mbTracking</span><span class="p">;</span>
+  <span class="p">}</span>
+
+  <span class="c1">// determine dynamic MB scaling factor</span>
+  <span class="kt">double</span> <span class="n">getDynamicMBSizeMultiplier</span><span class="p">()</span> <span class="k">const</span> <span class="p">{</span>
+    <span class="kt">double</span> <span class="n">ratio</span> <span class="o">=</span> <span class="mf">1.0</span><span class="p">;</span>
+
+    <span class="k">auto</span> <span class="n">mbWarmup</span> <span class="o">=</span> <span class="n">SchedulingParameter</span><span class="o">::</span><span class="n">parse</span><span class="p">(</span><span class="n">options_</span><span class="o">-&gt;</span><span class="n">get</span><span class="o">&lt;</span><span class="n">std</span><span class="o">::</span><span class="n">string</span><span class="o">&gt;</span><span class="p">(</span><span class="s">&quot;mini-batch-warmup&quot;</span><span class="p">));</span>
+    <span class="k">if</span> <span class="p">(</span><span class="n">mbWarmup</span><span class="p">)</span> <span class="p">{</span>
+      <span class="c1">// mini-batch-warmup</span>
+      <span class="n">LOG_ONCE</span><span class="p">(</span><span class="n">info</span><span class="p">,</span> <span class="s">&quot;[scheduler] Mini-batch size warmup {}&quot;</span><span class="p">,</span> <span class="n">std</span><span class="o">::</span><span class="n">string</span><span class="p">(</span><span class="n">mbWarmup</span><span class="p">));</span>
+      <span class="c1">// This ramps up MB size at start, relative to progress within warm-up period.</span>
+      <span class="kt">size_t</span> <span class="n">progress</span> <span class="o">=</span> <span class="n">state_</span><span class="o">-&gt;</span><span class="n">getProgressIn</span><span class="p">(</span><span class="n">mbWarmup</span><span class="p">.</span><span class="n">unit</span><span class="p">);</span> <span class="c1">// number of updates/labels processed</span>
+      <span class="k">auto</span> <span class="n">progressRatio</span> <span class="o">=</span> <span class="p">(</span><span class="kt">double</span><span class="p">)</span><span class="n">progress</span> <span class="o">/</span> <span class="p">(</span><span class="kt">double</span><span class="p">)</span><span class="n">mbWarmup</span><span class="p">.</span><span class="n">n</span><span class="p">;</span> <span class="c1">// where are we relatively within target warm-up period</span>
+      <span class="c1">// if unit is labels, then account for the fact that our increment itself is not constant</span>
+      <span class="k">if</span> <span class="p">(</span><span class="n">mbWarmup</span><span class="p">.</span><span class="n">unit</span> <span class="o">==</span> <span class="n">SchedulingUnit</span><span class="o">::</span><span class="n">trgLabels</span><span class="p">)</span>
+        <span class="n">progressRatio</span> <span class="o">=</span> <span class="n">std</span><span class="o">::</span><span class="n">sqrt</span><span class="p">(</span><span class="n">progressRatio</span><span class="p">);</span>
+      <span class="k">if</span> <span class="p">(</span><span class="n">progressRatio</span> <span class="o">&lt;</span> <span class="mi">1</span><span class="p">)</span>
+        <span class="n">ratio</span> <span class="o">*=</span> <span class="n">progressRatio</span><span class="p">;</span>
+    <span class="p">}</span>
+
+    <span class="c1">// dynamic MB-size tracking with learning rate</span>
+    <span class="c1">// As LR goes down, MB gets ramped up by the same ratio, which has been found to be safe.</span>
+    <span class="k">auto</span> <span class="n">mbTracking</span> <span class="o">=</span> <span class="n">options_</span><span class="o">-&gt;</span><span class="n">get</span><span class="o">&lt;</span><span class="kt">bool</span><span class="o">&gt;</span><span class="p">(</span><span class="s">&quot;mini-batch-track-lr&quot;</span><span class="p">);</span>
+    <span class="k">if</span> <span class="p">(</span><span class="n">mbTracking</span><span class="p">)</span> <span class="p">{</span>
+      <span class="k">auto</span> <span class="n">lrFactor</span> <span class="o">=</span> <span class="n">getScheduledLRDecayFactor</span><span class="p">(</span><span class="o">*</span><span class="n">state_</span><span class="p">)</span> <span class="o">*</span> <span class="n">state_</span><span class="o">-&gt;</span><span class="n">factor</span><span class="p">;</span> <span class="c1">// (don&#39;t include lr-warmup)</span>
+      <span class="k">if</span> <span class="p">(</span><span class="n">lrFactor</span> <span class="o">!=</span> <span class="mi">1</span><span class="p">)</span>
+        <span class="n">LOG_ONCE</span><span class="p">(</span><span class="n">info</span><span class="p">,</span> <span class="s">&quot;[scheduler] Dynamic mini-batch size adjustment enabled and kicking in&quot;</span><span class="p">);</span>
+      <span class="n">ratio</span> <span class="o">/=</span> <span class="n">lrFactor</span><span class="p">;</span>
+    <span class="p">}</span>
+    <span class="k">return</span> <span class="n">ratio</span><span class="p">;</span>
+  <span class="p">}</span>
+
+  <span class="kt">bool</span> <span class="n">keepGoing</span><span class="p">()</span> <span class="p">{</span>
+    <span class="k">if</span><span class="p">(</span><span class="n">saveAndExitRequested</span><span class="p">())</span> <span class="c1">// via SIGTERM</span>
+      <span class="k">return</span> <span class="nb">false</span><span class="p">;</span>
+
+<span class="cp">#if 1  </span><span class="c1">// @TODO: to be removed once we deprecate after-epochs and after-batches</span>
+    <span class="c1">// stop if it reached the maximum number of epochs</span>
+    <span class="kt">size_t</span> <span class="n">stopAfterEpochs</span> <span class="o">=</span> <span class="n">options_</span><span class="o">-&gt;</span><span class="n">get</span><span class="o">&lt;</span><span class="kt">size_t</span><span class="o">&gt;</span><span class="p">(</span><span class="s">&quot;after-epochs&quot;</span><span class="p">);</span>
+    <span class="k">if</span><span class="p">(</span><span class="n">stopAfterEpochs</span> <span class="o">&gt;</span> <span class="mi">0</span> <span class="o">&amp;&amp;</span> <span class="n">calculateLogicalEpoch</span><span class="p">()</span> <span class="o">&gt;</span> <span class="n">stopAfterEpochs</span><span class="p">)</span>
+      <span class="k">return</span> <span class="nb">false</span><span class="p">;</span>
+
+    <span class="c1">// stop if it reached the maximum number of batch updates</span>
+    <span class="kt">size_t</span> <span class="n">stopAfterBatches</span> <span class="o">=</span> <span class="n">options_</span><span class="o">-&gt;</span><span class="n">get</span><span class="o">&lt;</span><span class="kt">size_t</span><span class="o">&gt;</span><span class="p">(</span><span class="s">&quot;after-batches&quot;</span><span class="p">);</span>
+    <span class="k">if</span><span class="p">(</span><span class="n">stopAfterBatches</span> <span class="o">&gt;</span> <span class="mi">0</span> <span class="o">&amp;&amp;</span> <span class="n">state_</span><span class="o">-&gt;</span><span class="n">batches</span> <span class="o">&gt;=</span> <span class="n">stopAfterBatches</span><span class="p">)</span>
+      <span class="k">return</span> <span class="nb">false</span><span class="p">;</span>
+<span class="cp">#endif</span>
+
+    <span class="c1">// get list of stopping criteria e.g. &quot;10e,300Ku,20Gt&quot; (10 epochs, 300,000 updates, 20 billion target labels)</span>
+    <span class="c1">// and stop for whatever criterion hits first.</span>
+    <span class="n">std</span><span class="o">::</span><span class="n">vector</span><span class="o">&lt;</span><span class="n">std</span><span class="o">::</span><span class="n">string</span><span class="o">&gt;</span> <span class="n">stoppingCriteria</span> <span class="o">=</span> <span class="n">utils</span><span class="o">::</span><span class="n">split</span><span class="p">(</span><span class="n">options_</span><span class="o">-&gt;</span><span class="n">get</span><span class="o">&lt;</span><span class="n">std</span><span class="o">::</span><span class="n">string</span><span class="o">&gt;</span><span class="p">(</span><span class="s">&quot;after&quot;</span><span class="p">),</span> <span class="s">&quot;,&quot;</span><span class="p">);</span>
+    <span class="k">for</span><span class="p">(</span><span class="k">auto</span> <span class="nl">stoppingCriterionString</span> <span class="p">:</span> <span class="n">stoppingCriteria</span><span class="p">)</span> <span class="p">{</span>
+      <span class="n">SchedulingParameter</span> <span class="n">stoppingCriterion</span> <span class="o">=</span> <span class="n">SchedulingParameter</span><span class="o">::</span><span class="n">parse</span><span class="p">(</span><span class="n">stoppingCriterionString</span><span class="p">);</span>
+      <span class="k">if</span><span class="p">(</span><span class="n">stoppingCriterion</span><span class="p">.</span><span class="n">n</span> <span class="o">&gt;</span> <span class="mi">0</span><span class="p">)</span> <span class="p">{</span> <span class="c1">// is any stopping criterion defined?</span>
+        <span class="k">if</span><span class="p">(</span><span class="n">stoppingCriterion</span><span class="p">.</span><span class="n">unit</span> <span class="o">==</span> <span class="n">SchedulingUnit</span><span class="o">::</span><span class="n">epochs</span>    <span class="o">&amp;&amp;</span> <span class="n">calculateLogicalEpoch</span><span class="p">()</span> <span class="o">&gt;</span>  <span class="n">stoppingCriterion</span><span class="p">.</span><span class="n">n</span><span class="p">)</span> <span class="k">return</span> <span class="nb">false</span><span class="p">;</span>
+        <span class="k">if</span><span class="p">(</span><span class="n">stoppingCriterion</span><span class="p">.</span><span class="n">unit</span> <span class="o">==</span> <span class="n">SchedulingUnit</span><span class="o">::</span><span class="n">updates</span>   <span class="o">&amp;&amp;</span> <span class="n">state_</span><span class="o">-&gt;</span><span class="n">batches</span>         <span class="o">&gt;=</span> <span class="n">stoppingCriterion</span><span class="p">.</span><span class="n">n</span><span class="p">)</span> <span class="k">return</span> <span class="nb">false</span><span class="p">;</span>
+        <span class="k">if</span><span class="p">(</span><span class="n">stoppingCriterion</span><span class="p">.</span><span class="n">unit</span> <span class="o">==</span> <span class="n">SchedulingUnit</span><span class="o">::</span><span class="n">trgLabels</span> <span class="o">&amp;&amp;</span> <span class="n">state_</span><span class="o">-&gt;</span><span class="n">labelsTotal</span>     <span class="o">&gt;=</span> <span class="n">stoppingCriterion</span><span class="p">.</span><span class="n">n</span><span class="p">)</span> <span class="k">return</span> <span class="nb">false</span><span class="p">;</span>
+      <span class="p">}</span>
+    <span class="p">}</span>
+
+    <span class="c1">// stop if the first validator did not improve for a given number of checks</span>
+    <span class="kt">size_t</span> <span class="n">stopAfterStalled</span> <span class="o">=</span> <span class="n">options_</span><span class="o">-&gt;</span><span class="n">get</span><span class="o">&lt;</span><span class="kt">size_t</span><span class="o">&gt;</span><span class="p">(</span><span class="s">&quot;early-stopping&quot;</span><span class="p">);</span>
+    <span class="k">if</span><span class="p">(</span><span class="n">stopAfterStalled</span> <span class="o">&gt;</span> <span class="mi">0</span> <span class="o">&amp;&amp;</span> <span class="o">!</span><span class="n">validators_</span><span class="p">.</span><span class="n">empty</span><span class="p">()</span>
+       <span class="o">&amp;&amp;</span> <span class="n">stalled</span><span class="p">()</span> <span class="o">&gt;=</span> <span class="n">stopAfterStalled</span><span class="p">)</span>
+      <span class="k">return</span> <span class="nb">false</span><span class="p">;</span>
+
+    <span class="c1">// stop if data streaming from STDIN is stopped</span>
+    <span class="k">if</span><span class="p">(</span><span class="n">endOfStdin_</span><span class="p">)</span>
+      <span class="k">return</span> <span class="nb">false</span><span class="p">;</span>
+
+    <span class="k">return</span> <span class="nb">true</span><span class="p">;</span>
+  <span class="p">}</span>
+
+  <span class="kt">void</span> <span class="n">increaseEpoch</span><span class="p">()</span> <span class="p">{</span>
+    <span class="n">LOG</span><span class="p">(</span><span class="n">info</span><span class="p">,</span> <span class="s">&quot;Seen {} samples&quot;</span><span class="p">,</span> <span class="n">state_</span><span class="o">-&gt;</span><span class="n">samplesEpoch</span><span class="p">);</span>
+    <span class="n">state_</span><span class="o">-&gt;</span><span class="n">newEpoch</span><span class="p">();</span>
+    <span class="k">if</span><span class="p">(</span><span class="n">std</span><span class="o">::</span><span class="n">to_string</span><span class="p">(</span><span class="n">logicalEpoch_</span><span class="p">)</span> <span class="o">==</span> <span class="s">&quot;1e&quot;</span><span class="p">)</span>
+      <span class="n">LOG</span><span class="p">(</span><span class="n">info</span><span class="p">,</span> <span class="s">&quot;Starting epoch {}&quot;</span><span class="p">,</span> <span class="n">state_</span><span class="o">-&gt;</span><span class="n">epochs</span><span class="p">);</span>
+    <span class="k">else</span>
+      <span class="nf">LOG</span><span class="p">(</span><span class="n">info</span><span class="p">,</span> <span class="s">&quot;Starting data epoch {} in logical epoch {}&quot;</span><span class="p">,</span> <span class="n">state_</span><span class="o">-&gt;</span><span class="n">epochs</span><span class="p">,</span> <span class="n">formatLogicalEpoch</span><span class="p">());</span>
+  <span class="p">}</span>
+
+  <span class="kt">void</span> <span class="n">started</span><span class="p">()</span> <span class="p">{</span> <span class="n">LOG</span><span class="p">(</span><span class="n">info</span><span class="p">,</span> <span class="s">&quot;Training started&quot;</span><span class="p">);</span> <span class="p">}</span>
+  <span class="kt">void</span> <span class="n">finished</span><span class="p">()</span> <span class="p">{</span>
+    <span class="k">if</span> <span class="p">(</span><span class="n">saveAndExitRequested</span><span class="p">())</span>
+      <span class="n">LOG</span><span class="p">(</span><span class="n">info</span><span class="p">,</span> <span class="s">&quot;Training interrupted (via signal).&quot;</span><span class="p">);</span>
+    <span class="k">else</span>
+      <span class="nf">LOG</span><span class="p">(</span><span class="n">info</span><span class="p">,</span> <span class="s">&quot;Training finished&quot;</span><span class="p">);</span>
+  <span class="p">}</span>
+
+  <span class="kt">void</span> <span class="n">addValidator</span><span class="p">(</span><span class="n">Ptr</span><span class="o">&lt;</span><span class="n">ValidatorBase</span><span class="o">&gt;</span> <span class="n">validator</span><span class="p">)</span> <span class="p">{</span>
+    <span class="n">validators_</span><span class="p">.</span><span class="n">push_back</span><span class="p">(</span><span class="n">validator</span><span class="p">);</span>
+
+    <span class="n">registerTrainingObserver</span><span class="p">(</span><span class="n">validators_</span><span class="p">.</span><span class="n">back</span><span class="p">());</span>
+    <span class="k">if</span><span class="p">(</span><span class="o">!</span><span class="n">state_</span><span class="o">-&gt;</span><span class="n">loaded</span><span class="p">)</span> <span class="p">{</span>
+      <span class="n">state_</span><span class="o">-&gt;</span><span class="n">validators</span><span class="p">[</span><span class="n">validator</span><span class="o">-&gt;</span><span class="n">type</span><span class="p">()][</span><span class="s">&quot;last-best&quot;</span><span class="p">]</span> <span class="o">=</span> <span class="n">validator</span><span class="o">-&gt;</span><span class="n">initScore</span><span class="p">();</span>
+      <span class="n">state_</span><span class="o">-&gt;</span><span class="n">validators</span><span class="p">[</span><span class="n">validator</span><span class="o">-&gt;</span><span class="n">type</span><span class="p">()][</span><span class="s">&quot;stalled&quot;</span><span class="p">]</span> <span class="o">=</span> <span class="mi">0</span><span class="p">;</span>
+    <span class="p">}</span>
+    <span class="k">if</span><span class="p">(</span><span class="n">validators_</span><span class="p">.</span><span class="n">size</span><span class="p">()</span> <span class="o">==</span> <span class="mi">1</span><span class="p">)</span>
+      <span class="n">state_</span><span class="o">-&gt;</span><span class="n">validator</span> <span class="o">=</span> <span class="n">validator</span><span class="o">-&gt;</span><span class="n">type</span><span class="p">();</span>
+  <span class="p">}</span>
+
+  <span class="kt">bool</span> <span class="n">validating</span><span class="p">()</span> <span class="p">{</span>
+    <span class="k">return</span> <span class="p">(</span><span class="o">!</span><span class="n">validators_</span><span class="p">.</span><span class="n">empty</span><span class="p">()</span>
+            <span class="o">&amp;&amp;</span> <span class="n">state_</span><span class="o">-&gt;</span><span class="n">enteredNewPeriodOf</span><span class="p">(</span><span class="n">options_</span><span class="o">-&gt;</span><span class="n">get</span><span class="o">&lt;</span><span class="n">std</span><span class="o">::</span><span class="n">string</span><span class="o">&gt;</span><span class="p">(</span><span class="s">&quot;valid-freq&quot;</span><span class="p">))</span>
+            <span class="o">&amp;&amp;</span> <span class="n">keepGoing</span><span class="p">());</span>
+  <span class="p">}</span>
+
+  <span class="kt">bool</span> <span class="n">saving</span><span class="p">()</span> <span class="p">{</span>
+    <span class="k">return</span> <span class="n">state_</span><span class="o">-&gt;</span><span class="n">enteredNewPeriodOf</span><span class="p">(</span><span class="n">options_</span><span class="o">-&gt;</span><span class="n">get</span><span class="o">&lt;</span><span class="n">std</span><span class="o">::</span><span class="n">string</span><span class="o">&gt;</span><span class="p">(</span><span class="s">&quot;save-freq&quot;</span><span class="p">));</span>
+  <span class="p">}</span>
+
+  <span class="kt">void</span> <span class="n">validate</span><span class="p">(</span><span class="k">const</span> <span class="n">std</span><span class="o">::</span><span class="n">vector</span><span class="o">&lt;</span><span class="n">Ptr</span><span class="o">&lt;</span><span class="n">ExpressionGraph</span><span class="o">&gt;&gt;&amp;</span> <span class="n">graphs</span><span class="p">,</span>
+                <span class="kt">bool</span> <span class="n">isFinal</span> <span class="o">=</span> <span class="nb">false</span><span class="p">)</span> <span class="p">{</span>
+    <span class="c1">// Do not validate if already validated (for instance, after the model is loaded)</span>
+    <span class="c1">// or if validation is scheduled for another update, or when a graceful shutdown</span>
+    <span class="c1">// was requested.</span>
+    <span class="k">if</span><span class="p">(</span><span class="n">saveAndExitRequested</span><span class="p">()</span>
+       <span class="o">||</span> <span class="n">state_</span><span class="o">-&gt;</span><span class="n">validated</span> <span class="c1">// already validated (in resumed training, for example)</span>
+       <span class="o">||</span> <span class="p">(</span><span class="o">!</span><span class="n">state_</span><span class="o">-&gt;</span><span class="n">enteredNewPeriodOf</span><span class="p">(</span><span class="n">options_</span><span class="o">-&gt;</span><span class="n">get</span><span class="o">&lt;</span><span class="n">std</span><span class="o">::</span><span class="n">string</span><span class="o">&gt;</span><span class="p">(</span><span class="s">&quot;valid-freq&quot;</span><span class="p">))</span> <span class="o">&amp;&amp;</span> <span class="o">!</span><span class="n">isFinal</span><span class="p">))</span> <span class="c1">// not now</span>
+      <span class="k">return</span><span class="p">;</span>
+
+    <span class="kt">bool</span> <span class="n">firstValidator</span> <span class="o">=</span> <span class="nb">true</span><span class="p">;</span>
+    <span class="k">for</span><span class="p">(</span><span class="k">auto</span> <span class="nl">validator</span> <span class="p">:</span> <span class="n">validators_</span><span class="p">)</span> <span class="p">{</span>
+      <span class="k">if</span><span class="p">(</span><span class="o">!</span><span class="n">validator</span><span class="p">)</span>
+        <span class="k">continue</span><span class="p">;</span>
+
+      <span class="kt">size_t</span> <span class="n">stalledPrev</span> <span class="o">=</span> <span class="n">validator</span><span class="o">-&gt;</span><span class="n">stalled</span><span class="p">();</span>
+      <span class="kt">float</span> <span class="n">value</span> <span class="o">=</span> <span class="n">validator</span><span class="o">-&gt;</span><span class="n">validate</span><span class="p">(</span><span class="n">graphs</span><span class="p">,</span> <span class="n">state_</span><span class="p">);</span>
+      <span class="k">if</span><span class="p">(</span><span class="n">validator</span><span class="o">-&gt;</span><span class="n">stalled</span><span class="p">()</span> <span class="o">&gt;</span> <span class="mi">0</span><span class="p">)</span> <span class="p">{</span>
+        <span class="n">LOG_VALID</span><span class="p">(</span><span class="n">info</span><span class="p">,</span>
+                  <span class="s">&quot;Ep. {} : Up. {} : {} : {} : stalled {} times (last best: {})&quot;</span><span class="p">,</span>
+                  <span class="n">formatLogicalEpoch</span><span class="p">(),</span>
+                  <span class="n">state_</span><span class="o">-&gt;</span><span class="n">batches</span><span class="p">,</span>
+                  <span class="n">validator</span><span class="o">-&gt;</span><span class="n">type</span><span class="p">(),</span>
+                  <span class="n">value</span><span class="p">,</span>
+                  <span class="n">validator</span><span class="o">-&gt;</span><span class="n">stalled</span><span class="p">(),</span> <span class="n">validator</span><span class="o">-&gt;</span><span class="n">lastBest</span><span class="p">());</span>
+      <span class="p">}</span> <span class="k">else</span> <span class="p">{</span>
+        <span class="n">LOG_VALID</span><span class="p">(</span><span class="n">info</span><span class="p">,</span>
+                  <span class="s">&quot;Ep. {} : Up. {} : {} : {} : new best&quot;</span><span class="p">,</span>
+                  <span class="n">formatLogicalEpoch</span><span class="p">(),</span>
+                  <span class="n">state_</span><span class="o">-&gt;</span><span class="n">batches</span><span class="p">,</span>
+                  <span class="n">validator</span><span class="o">-&gt;</span><span class="n">type</span><span class="p">(),</span>
+                  <span class="n">value</span><span class="p">);</span>
+
+        <span class="k">if</span><span class="p">(</span><span class="n">firstValidator</span><span class="p">)</span>
+          <span class="n">state_</span><span class="o">-&gt;</span><span class="n">validBest</span> <span class="o">=</span> <span class="n">value</span><span class="p">;</span>
+      <span class="p">}</span>
+
+      <span class="n">state_</span><span class="o">-&gt;</span><span class="n">validators</span><span class="p">[</span><span class="n">validator</span><span class="o">-&gt;</span><span class="n">type</span><span class="p">()][</span><span class="s">&quot;last-best&quot;</span><span class="p">]</span>
+          <span class="o">=</span> <span class="n">validator</span><span class="o">-&gt;</span><span class="n">lastBest</span><span class="p">();</span>
+      <span class="n">state_</span><span class="o">-&gt;</span><span class="n">validators</span><span class="p">[</span><span class="n">validator</span><span class="o">-&gt;</span><span class="n">type</span><span class="p">()][</span><span class="s">&quot;stalled&quot;</span><span class="p">]</span> <span class="o">=</span> <span class="n">validator</span><span class="o">-&gt;</span><span class="n">stalled</span><span class="p">();</span>
+
+      <span class="c1">// notify training observers if the first validator did not improve</span>
+      <span class="k">if</span><span class="p">(</span><span class="n">firstValidator</span> <span class="o">&amp;&amp;</span> <span class="n">validator</span><span class="o">-&gt;</span><span class="n">stalled</span><span class="p">()</span> <span class="o">&gt;</span> <span class="n">stalledPrev</span><span class="p">)</span>
+        <span class="n">state_</span><span class="o">-&gt;</span><span class="n">newStalled</span><span class="p">(</span><span class="n">validator</span><span class="o">-&gt;</span><span class="n">stalled</span><span class="p">());</span>
+      <span class="n">firstValidator</span> <span class="o">=</span> <span class="nb">false</span><span class="p">;</span>
+    <span class="p">}</span>
+
+    <span class="n">state_</span><span class="o">-&gt;</span><span class="n">validated</span> <span class="o">=</span> <span class="nb">true</span><span class="p">;</span>
+  <span class="p">}</span>
+
+  <span class="kt">size_t</span> <span class="n">stalled</span><span class="p">()</span> <span class="p">{</span>
+    <span class="k">if</span><span class="p">(</span><span class="o">!</span><span class="n">validators_</span><span class="p">.</span><span class="n">empty</span><span class="p">())</span>
+      <span class="k">if</span><span class="p">(</span><span class="n">validators_</span><span class="p">[</span><span class="mi">0</span><span class="p">])</span>
+        <span class="k">return</span> <span class="n">validators_</span><span class="p">[</span><span class="mi">0</span><span class="p">]</span><span class="o">-&gt;</span><span class="n">stalled</span><span class="p">();</span>
+    <span class="k">return</span> <span class="mi">0</span><span class="p">;</span>
+  <span class="p">}</span>
+
+  <span class="kt">void</span> <span class="n">update</span><span class="p">(</span><span class="n">StaticLoss</span> <span class="n">rationalLoss</span><span class="p">,</span> <span class="n">Ptr</span><span class="o">&lt;</span><span class="n">data</span><span class="o">::</span><span class="n">Batch</span><span class="o">&gt;</span> <span class="n">batch</span><span class="p">)</span> <span class="p">{</span>
+    <span class="n">update</span><span class="p">(</span><span class="n">rationalLoss</span><span class="p">,</span> <span class="cm">/*numReadBatches=*/</span><span class="mi">1</span><span class="p">,</span> <span class="cm">/*batchSize=*/</span><span class="n">batch</span><span class="o">-&gt;</span><span class="n">size</span><span class="p">(),</span> <span class="cm">/*batchLabels=*/</span><span class="n">batch</span><span class="o">-&gt;</span><span class="n">wordsTrg</span><span class="p">());</span>
+  <span class="p">}</span>
+
+  <span class="c1">// @TODO: go back to function which takes batch as an argument? The current arguments make it hard</span>
+  <span class="c1">// to choose which subbatch should be used for speed display. For sequence-classifiers it&#39;s more interesting</span>
+  <span class="c1">// to see the source-words consumed rather than the labels.</span>
+  <span class="kt">void</span> <span class="n">update</span><span class="p">(</span><span class="n">StaticLoss</span> <span class="n">rationalLoss</span><span class="p">,</span>
+              <span class="kt">size_t</span> <span class="n">numReadBatches</span><span class="p">,</span> <span class="c1">// number of batches read by the reader (for seeking in case of restart)</span>
+              <span class="kt">size_t</span> <span class="n">batchSize</span><span class="p">,</span>      <span class="c1">// total number of sentences in batch</span>
+              <span class="kt">size_t</span> <span class="n">batchLabels</span><span class="p">,</span>    <span class="c1">// total number of target words in batch</span>
+              <span class="n">Ptr</span><span class="o">&lt;</span><span class="n">IMPIWrapper</span><span class="o">&gt;</span> <span class="n">mpi</span> <span class="o">=</span> <span class="k">nullptr</span><span class="p">)</span> <span class="p">{</span>
+    <span class="n">state_</span><span class="o">-&gt;</span><span class="n">rememberPreviousProgress</span><span class="p">();</span>  <span class="c1">// note: epoch increases happen at the wrong place, hence</span>
+                                         <span class="c1">// -freq parameters do not support epoch units</span>
+    <span class="n">state_</span><span class="o">-&gt;</span><span class="n">validated</span> <span class="o">=</span> <span class="nb">false</span><span class="p">;</span>
+
+    <span class="c1">// Since batchLabels is counted across all MPI processes, we also should temporarily</span>
+    <span class="c1">// extrapolate cost across MPI processes, to have numbers in the right range.</span>
+    <span class="c1">// When doing the actual log, we then aggregate across MPI processes to get the accurate number.</span>
+    <span class="k">if</span><span class="p">(</span><span class="n">mpi</span><span class="p">)</span>
+      <span class="n">rationalLoss</span><span class="p">.</span><span class="n">loss</span> <span class="o">*=</span> <span class="n">mpi</span><span class="o">-&gt;</span><span class="n">numMPIProcesses</span><span class="p">();</span>
+
+    <span class="c1">// @BUGBUG: rationalLoss.count is float, not a count. Possible solution: make (costSum, costCount) a StaticLoss object as well</span>
+    <span class="n">state_</span><span class="o">-&gt;</span><span class="n">costSum</span>      <span class="o">+=</span> <span class="n">rationalLoss</span><span class="p">.</span><span class="n">loss</span><span class="p">;</span>   <span class="c1">// aggregate sum cost since last display</span>
+    <span class="n">state_</span><span class="o">-&gt;</span><span class="n">costCount</span>    <span class="o">+=</span> <span class="p">(</span><span class="kt">size_t</span><span class="p">)</span><span class="n">rationalLoss</span><span class="p">.</span><span class="n">count</span><span class="p">;</span> <span class="c1">// cost gets normalized w.r.t. this in display</span>
+
+    <span class="n">state_</span><span class="o">-&gt;</span><span class="n">updatesDisp</span>  <span class="o">+=</span> <span class="mi">1</span><span class="p">;</span>
+    <span class="n">state_</span><span class="o">-&gt;</span><span class="n">samplesDisp</span>  <span class="o">+=</span> <span class="n">batchSize</span><span class="p">;</span>
+    <span class="n">state_</span><span class="o">-&gt;</span><span class="n">wordsDisp</span>    <span class="o">+=</span> <span class="n">batchLabels</span><span class="p">;</span>  <span class="c1">//@TODO: this is wrong        // words at given input processed since last display, for speed display</span>
+
+    <span class="n">state_</span><span class="o">-&gt;</span><span class="n">samplesEpoch</span> <span class="o">+=</span> <span class="n">batchSize</span><span class="p">;</span>          <span class="c1">// sentences processed in this epoch</span>
+    <span class="c1">// @BUGBUG: rationalLoss.count is float, not a count</span>
+    <span class="n">state_</span><span class="o">-&gt;</span><span class="n">labelsTotal</span>  <span class="o">+=</span> <span class="p">(</span><span class="kt">size_t</span><span class="p">)</span><span class="n">rationalLoss</span><span class="p">.</span><span class="n">count</span><span class="p">;</span> <span class="c1">// total labels processed</span>
+
+    <span class="n">state_</span><span class="o">-&gt;</span><span class="n">newUpdate</span><span class="p">(</span><span class="n">numReadBatches</span><span class="p">);</span>
+
+    <span class="c1">// reconstruct sum cost, for displaying epoch-level averages instead of minibatch-level</span>
+    <span class="k">auto</span> <span class="n">lossType</span> <span class="o">=</span> <span class="n">options_</span><span class="o">-&gt;</span><span class="n">get</span><span class="o">&lt;</span><span class="n">std</span><span class="o">::</span><span class="n">string</span><span class="o">&gt;</span><span class="p">(</span><span class="s">&quot;cost-type&quot;</span><span class="p">);</span>
+    <span class="k">auto</span> <span class="n">dispLabelCounts</span> <span class="o">=</span> <span class="n">options_</span><span class="o">-&gt;</span><span class="n">get</span><span class="o">&lt;</span><span class="kt">bool</span><span class="o">&gt;</span><span class="p">(</span><span class="s">&quot;disp-label-counts&quot;</span><span class="p">);</span>  <span class="c1">// if true then show as &quot;cost per label * number of labels&quot;</span>
+
+    <span class="k">if</span><span class="p">(</span><span class="n">state_</span><span class="o">-&gt;</span><span class="n">enteredNewPeriodOf</span><span class="p">(</span><span class="n">options_</span><span class="o">-&gt;</span><span class="n">get</span><span class="o">&lt;</span><span class="n">std</span><span class="o">::</span><span class="n">string</span><span class="o">&gt;</span><span class="p">(</span><span class="s">&quot;disp-freq&quot;</span><span class="p">))</span> <span class="o">||</span>
+       <span class="n">state_</span><span class="o">-&gt;</span><span class="n">batches</span> <span class="o">&lt;=</span> <span class="n">options_</span><span class="o">-&gt;</span><span class="n">get</span><span class="o">&lt;</span><span class="kt">size_t</span><span class="o">&gt;</span><span class="p">(</span><span class="s">&quot;disp-first&quot;</span><span class="p">))</span> <span class="p">{</span>
+      <span class="c1">// if MPI then aggregate precise cost across workers</span>
+      <span class="k">if</span><span class="p">(</span><span class="n">mpi</span><span class="p">)</span> <span class="p">{</span>
+        <span class="n">state_</span><span class="o">-&gt;</span><span class="n">costSum</span> <span class="o">/=</span> <span class="n">mpi</span><span class="o">-&gt;</span><span class="n">numMPIProcesses</span><span class="p">();</span> <span class="c1">// undo the extra scaling</span>
+        <span class="n">mpi</span><span class="o">-&gt;</span><span class="n">allReduce</span><span class="p">(</span><span class="o">&amp;</span><span class="n">state_</span><span class="o">-&gt;</span><span class="n">costSum</span><span class="p">,</span> <span class="o">&amp;</span><span class="n">state_</span><span class="o">-&gt;</span><span class="n">costSum</span><span class="p">,</span> <span class="mi">1</span><span class="p">,</span> <span class="n">MPI_FLOAT</span><span class="p">,</span> <span class="n">MPI_SUM</span><span class="p">);</span>
+      <span class="p">}</span>
+
+      <span class="k">if</span><span class="p">(</span><span class="n">mpi</span> <span class="o">&amp;&amp;</span> <span class="n">mpi</span><span class="o">-&gt;</span><span class="n">myMPIRank</span><span class="p">()</span> <span class="o">!=</span> <span class="mi">0</span><span class="p">)</span> <span class="p">{</span>
+        <span class="c1">// skip the report on alternate worker processes</span>
+      <span class="p">}</span> <span class="k">else</span> <span class="k">if</span><span class="p">(</span><span class="n">options_</span><span class="o">-&gt;</span><span class="n">get</span><span class="o">&lt;</span><span class="kt">bool</span><span class="o">&gt;</span><span class="p">(</span><span class="s">&quot;lr-report&quot;</span><span class="p">))</span> <span class="p">{</span>
+        <span class="n">LOG</span><span class="p">(</span><span class="n">info</span><span class="p">,</span>
+            <span class="s">&quot;Ep. {} : Up. {} : Sen. {} : {} : Time {:.2f}s : {:.2f} words/s : L.r. {:.4e}&quot;</span><span class="p">,</span>
+            <span class="n">formatLogicalEpoch</span><span class="p">(),</span>
+            <span class="n">state_</span><span class="o">-&gt;</span><span class="n">batches</span><span class="p">,</span>
+            <span class="n">utils</span><span class="o">::</span><span class="n">withCommas</span><span class="p">(</span><span class="n">state_</span><span class="o">-&gt;</span><span class="n">samplesEpoch</span><span class="p">),</span>
+            <span class="n">formatLoss</span><span class="p">(</span><span class="n">lossType</span><span class="p">,</span> <span class="n">dispLabelCounts</span><span class="p">,</span> <span class="n">batchLabels</span><span class="p">,</span> <span class="n">state_</span><span class="p">),</span>
+            <span class="n">timer_</span><span class="p">.</span><span class="n">elapsed</span><span class="p">(),</span>
+            <span class="n">state_</span><span class="o">-&gt;</span><span class="n">wordsDisp</span> <span class="o">/</span> <span class="n">timer_</span><span class="p">.</span><span class="n">elapsed</span><span class="p">(),</span>
+            <span class="n">state_</span><span class="o">-&gt;</span><span class="n">eta</span><span class="p">);</span>
+      <span class="p">}</span> <span class="k">else</span> <span class="p">{</span>
+        <span class="n">LOG</span><span class="p">(</span><span class="n">info</span><span class="p">,</span>
+            <span class="s">&quot;Ep. {} : Up. {} : Sen. {} : {} : Time {:.2f}s : {:.2f} words/s&quot;</span><span class="p">,</span>
+            <span class="n">formatLogicalEpoch</span><span class="p">(),</span>
+            <span class="n">state_</span><span class="o">-&gt;</span><span class="n">batches</span><span class="p">,</span>
+            <span class="n">utils</span><span class="o">::</span><span class="n">withCommas</span><span class="p">(</span><span class="n">state_</span><span class="o">-&gt;</span><span class="n">samplesEpoch</span><span class="p">),</span>
+            <span class="n">formatLoss</span><span class="p">(</span><span class="n">lossType</span><span class="p">,</span> <span class="n">dispLabelCounts</span><span class="p">,</span> <span class="mi">0</span><span class="p">,</span> <span class="n">state_</span><span class="p">),</span> <span class="c1">// ignore batchLabels</span>
+            <span class="n">timer_</span><span class="p">.</span><span class="n">elapsed</span><span class="p">(),</span>
+            <span class="n">state_</span><span class="o">-&gt;</span><span class="n">wordsDisp</span> <span class="o">/</span> <span class="n">timer_</span><span class="p">.</span><span class="n">elapsed</span><span class="p">());</span>
+      <span class="p">}</span>
+
+
+      <span class="n">timer_</span><span class="p">.</span><span class="n">start</span><span class="p">();</span>
+      <span class="n">state_</span><span class="o">-&gt;</span><span class="n">costSum</span>      <span class="o">=</span> <span class="mi">0</span><span class="p">;</span>
+      <span class="n">state_</span><span class="o">-&gt;</span><span class="n">costCount</span>    <span class="o">=</span> <span class="mi">0</span><span class="p">;</span>
+
+      <span class="n">state_</span><span class="o">-&gt;</span><span class="n">updatesDisp</span>  <span class="o">=</span> <span class="mi">0</span><span class="p">;</span>
+      <span class="n">state_</span><span class="o">-&gt;</span><span class="n">samplesDisp</span>  <span class="o">=</span> <span class="mi">0</span><span class="p">;</span>
+      <span class="n">state_</span><span class="o">-&gt;</span><span class="n">wordsDisp</span>    <span class="o">=</span> <span class="mi">0</span><span class="p">;</span>
+    <span class="p">}</span>
+
+    <span class="c1">// progress heartbeat for MS-internal Philly compute cluster</span>
+    <span class="c1">// This environment variable exists when running on the cluster.</span>
+    <span class="k">using</span> <span class="k">namespace</span> <span class="n">std</span><span class="o">::</span><span class="n">chrono</span><span class="p">;</span>
+    <span class="k">if</span><span class="p">((</span><span class="o">!</span><span class="n">mpi</span> <span class="o">||</span> <span class="n">mpi</span><span class="o">-&gt;</span><span class="n">myMPIRank</span><span class="p">()</span> <span class="o">==</span> <span class="mi">0</span><span class="p">)</span> <span class="o">&amp;&amp;</span> <span class="n">getenv</span><span class="p">(</span><span class="s">&quot;PHILLY_JOB_ID&quot;</span><span class="p">)</span>
+       <span class="o">&amp;&amp;</span> <span class="n">heartBeatTimer_</span><span class="p">.</span><span class="n">elapsed</span><span class="o">&lt;</span><span class="n">std</span><span class="o">::</span><span class="n">chrono</span><span class="o">::</span><span class="n">minutes</span><span class="o">&gt;</span><span class="p">()</span> <span class="o">&gt;=</span> <span class="mi">10</span><span class="p">)</span> <span class="p">{</span>
+      <span class="n">printf</span><span class="p">(</span><span class="s">&quot;PROGRESS: %.2f%%</span><span class="se">\n</span><span class="s">EVALERR: %.7f%%</span><span class="se">\n</span><span class="s">&quot;</span><span class="p">,</span>
+          <span class="p">(</span><span class="kt">double</span><span class="p">)</span><span class="n">calculateLogicalEpoch</span><span class="p">(),</span>
+          <span class="n">state_</span><span class="o">-&gt;</span><span class="n">costSum</span> <span class="o">/</span> <span class="p">(</span><span class="n">state_</span><span class="o">-&gt;</span><span class="n">costCount</span> <span class="o">?</span> <span class="n">state_</span><span class="o">-&gt;</span><span class="nl">costCount</span> <span class="p">:</span> <span class="mi">1</span><span class="p">)</span> <span class="o">/</span> <span class="p">(</span><span class="n">mpi</span> <span class="o">?</span> <span class="n">mpi</span><span class="o">-&gt;</span><span class="n">numMPIProcesses</span><span class="p">()</span> <span class="o">:</span> <span class="mi">1</span><span class="p">));</span>
+      <span class="n">fflush</span><span class="p">(</span><span class="n">stdout</span><span class="p">);</span>
+      <span class="n">std</span><span class="o">::</span><span class="n">cout</span> <span class="o">&lt;&lt;</span> <span class="s">&quot;MBSIZE: &quot;</span> <span class="o">&lt;&lt;</span> <span class="n">batchLabels</span> <span class="o">&lt;&lt;</span> <span class="s">&quot; after &quot;</span> <span class="o">&lt;&lt;</span> <span class="n">state_</span><span class="o">-&gt;</span><span class="n">batches</span> <span class="o">&lt;&lt;</span> <span class="s">&quot; updates = &quot;</span> <span class="o">&lt;&lt;</span> <span class="n">state_</span><span class="o">-&gt;</span><span class="n">labelsTotal</span> <span class="o">&lt;&lt;</span> <span class="s">&quot; labels&quot;</span> <span class="o">&lt;&lt;</span> <span class="n">std</span><span class="o">::</span><span class="n">endl</span> <span class="o">&lt;&lt;</span> <span class="n">std</span><span class="o">::</span><span class="n">flush</span><span class="p">;</span>
+      <span class="n">heartBeatTimer_</span><span class="p">.</span><span class="n">start</span><span class="p">();</span>
+    <span class="p">}</span>
+  <span class="p">}</span>
+
+  <span class="kt">void</span> <span class="n">load</span><span class="p">(</span><span class="k">const</span> <span class="n">std</span><span class="o">::</span><span class="n">string</span><span class="o">&amp;</span> <span class="n">name</span><span class="p">)</span> <span class="p">{</span>
+    <span class="n">std</span><span class="o">::</span><span class="n">string</span> <span class="n">nameYaml</span> <span class="o">=</span> <span class="n">name</span> <span class="o">+</span> <span class="s">&quot;.progress.yml&quot;</span><span class="p">;</span>
+    <span class="k">if</span><span class="p">(</span><span class="n">filesystem</span><span class="o">::</span><span class="n">exists</span><span class="p">(</span><span class="n">nameYaml</span><span class="p">))</span>
+      <span class="n">state_</span><span class="o">-&gt;</span><span class="n">load</span><span class="p">(</span><span class="n">nameYaml</span><span class="p">);</span>
+
+    <span class="k">if</span><span class="p">(</span><span class="n">options_</span><span class="o">-&gt;</span><span class="n">get</span><span class="o">&lt;</span><span class="kt">bool</span><span class="o">&gt;</span><span class="p">(</span><span class="s">&quot;no-restore-corpus&quot;</span><span class="p">))</span> <span class="p">{</span>
+      <span class="n">state_</span><span class="o">-&gt;</span><span class="n">samplesEpoch</span> <span class="o">=</span> <span class="mi">0</span><span class="p">;</span>
+      <span class="n">state_</span><span class="o">-&gt;</span><span class="n">costSum</span>      <span class="o">=</span> <span class="mi">0</span><span class="p">;</span>
+      <span class="n">state_</span><span class="o">-&gt;</span><span class="n">costCount</span>    <span class="o">=</span> <span class="mi">0</span><span class="p">;</span>
+
+      <span class="n">state_</span><span class="o">-&gt;</span><span class="n">updatesDisp</span>  <span class="o">=</span> <span class="mi">0</span><span class="p">;</span>
+      <span class="n">state_</span><span class="o">-&gt;</span><span class="n">samplesDisp</span>  <span class="o">=</span> <span class="mi">0</span><span class="p">;</span>
+      <span class="n">state_</span><span class="o">-&gt;</span><span class="n">wordsDisp</span>    <span class="o">=</span> <span class="mi">0</span><span class="p">;</span>
+    <span class="p">}</span>
+
+    <span class="k">if</span><span class="p">(</span><span class="n">options_</span><span class="o">-&gt;</span><span class="n">get</span><span class="o">&lt;</span><span class="kt">bool</span><span class="o">&gt;</span><span class="p">(</span><span class="s">&quot;valid-reset-stalled&quot;</span><span class="p">))</span> <span class="p">{</span>
+      <span class="n">state_</span><span class="o">-&gt;</span><span class="n">stalled</span>      <span class="o">=</span> <span class="mi">0</span><span class="p">;</span>
+      <span class="n">state_</span><span class="o">-&gt;</span><span class="n">maxStalled</span>   <span class="o">=</span> <span class="mi">0</span><span class="p">;</span>
+      <span class="k">for</span><span class="p">(</span><span class="k">const</span> <span class="k">auto</span><span class="o">&amp;</span> <span class="nl">validator</span> <span class="p">:</span> <span class="n">validators_</span><span class="p">)</span> <span class="p">{</span>
+        <span class="n">state_</span><span class="o">-&gt;</span><span class="n">validators</span><span class="p">[</span><span class="n">validator</span><span class="o">-&gt;</span><span class="n">type</span><span class="p">()][</span><span class="s">&quot;stalled&quot;</span><span class="p">]</span> <span class="o">=</span> <span class="mi">0</span><span class="p">;</span>
+      <span class="p">}</span>
+    <span class="p">}</span>
+
+    <span class="n">state_</span><span class="o">-&gt;</span><span class="n">newLoad</span><span class="p">();</span>
+  <span class="p">}</span>
+
+  <span class="kt">void</span> <span class="n">save</span><span class="p">(</span><span class="k">const</span> <span class="n">std</span><span class="o">::</span><span class="n">string</span><span class="o">&amp;</span> <span class="n">name</span><span class="p">)</span> <span class="p">{</span>
+    <span class="c1">// Save config options</span>
+    <span class="n">std</span><span class="o">::</span><span class="n">ofstream</span> <span class="n">fout</span><span class="p">(</span><span class="n">name</span> <span class="o">+</span> <span class="s">&quot;.yml&quot;</span><span class="p">);</span>
+    <span class="n">fout</span> <span class="o">&lt;&lt;</span> <span class="n">options_</span><span class="o">-&gt;</span><span class="n">asYamlString</span><span class="p">();</span>
+    <span class="c1">// Save training progress</span>
+    <span class="n">state_</span><span class="o">-&gt;</span><span class="n">save</span><span class="p">(</span><span class="n">name</span> <span class="o">+</span> <span class="s">&quot;.progress.yml&quot;</span><span class="p">);</span>
+  <span class="p">}</span>
+
+  <span class="kt">size_t</span> <span class="n">numberOfBatches</span><span class="p">()</span> <span class="p">{</span> <span class="k">return</span> <span class="n">state_</span><span class="o">-&gt;</span><span class="n">batches</span><span class="p">;</span> <span class="p">}</span>
+
+  <span class="kt">void</span> <span class="n">registerTrainingObserver</span><span class="p">(</span><span class="n">Ptr</span><span class="o">&lt;</span><span class="n">TrainingObserver</span><span class="o">&gt;</span> <span class="n">observer</span><span class="p">)</span> <span class="p">{</span>
+    <span class="n">state_</span><span class="o">-&gt;</span><span class="n">registerObserver</span><span class="p">(</span><span class="n">observer</span><span class="p">);</span>
+  <span class="p">}</span>
+
+  <span class="kt">void</span> <span class="n">actAfterEpoch</span><span class="p">(</span><span class="n">TrainingState</span><span class="o">&amp;</span> <span class="n">state</span><span class="p">)</span> <span class="k">override</span> <span class="p">{</span>
+    <span class="c1">// stop if data streaming from STDIN is stopped for a TSV input</span>
+    <span class="n">std</span><span class="o">::</span><span class="n">string</span> <span class="n">firstPath</span> <span class="o">=</span> <span class="n">options_</span><span class="o">-&gt;</span><span class="n">get</span><span class="o">&lt;</span><span class="n">std</span><span class="o">::</span><span class="n">vector</span><span class="o">&lt;</span><span class="n">std</span><span class="o">::</span><span class="n">string</span><span class="o">&gt;&gt;</span><span class="p">(</span><span class="s">&quot;train-sets&quot;</span><span class="p">)[</span><span class="mi">0</span><span class="p">];</span>
+    <span class="k">if</span><span class="p">(</span><span class="n">options_</span><span class="o">-&gt;</span><span class="n">get</span><span class="o">&lt;</span><span class="kt">bool</span><span class="o">&gt;</span><span class="p">(</span><span class="s">&quot;tsv&quot;</span><span class="p">,</span> <span class="nb">false</span><span class="p">)</span> <span class="o">&amp;&amp;</span> <span class="p">(</span><span class="n">firstPath</span> <span class="o">==</span> <span class="s">&quot;stdin&quot;</span> <span class="o">||</span> <span class="n">firstPath</span> <span class="o">==</span> <span class="s">&quot;-&quot;</span><span class="p">))</span>
+      <span class="n">endOfStdin_</span> <span class="o">=</span> <span class="nb">true</span><span class="p">;</span>
+
+    <span class="kt">float</span> <span class="n">factor</span> <span class="o">=</span> <span class="n">options_</span><span class="o">-&gt;</span><span class="n">get</span><span class="o">&lt;</span><span class="kt">float</span><span class="o">&gt;</span><span class="p">(</span><span class="s">&quot;lr-decay&quot;</span><span class="p">);</span>
+
+    <span class="n">updateLearningRate</span><span class="p">(</span><span class="n">state</span><span class="p">);</span>
+
+    <span class="k">if</span><span class="p">(</span><span class="n">factor</span> <span class="o">&gt;</span> <span class="mf">0.0</span><span class="p">)</span> <span class="p">{</span>
+      <span class="kt">bool</span> <span class="n">decay</span> <span class="o">=</span> <span class="nb">false</span><span class="p">;</span>
+      <span class="k">auto</span> <span class="n">strategy</span> <span class="o">=</span> <span class="n">options_</span><span class="o">-&gt;</span><span class="n">get</span><span class="o">&lt;</span><span class="n">std</span><span class="o">::</span><span class="n">string</span><span class="o">&gt;</span><span class="p">(</span><span class="s">&quot;lr-decay-strategy&quot;</span><span class="p">);</span>
+      <span class="n">state</span><span class="p">.</span><span class="n">reset</span> <span class="o">=</span> <span class="nb">false</span><span class="p">;</span>
+
+      <span class="k">if</span><span class="p">(</span><span class="n">strategy</span> <span class="o">==</span> <span class="s">&quot;epoch&quot;</span> <span class="o">||</span> <span class="n">strategy</span> <span class="o">==</span> <span class="s">&quot;epoch+batches&quot;</span>
+         <span class="o">||</span> <span class="n">strategy</span> <span class="o">==</span> <span class="s">&quot;epoch+stalled&quot;</span><span class="p">)</span> <span class="p">{</span>
+        <span class="kt">size_t</span> <span class="n">startEpoch</span>
+            <span class="o">=</span> <span class="n">options_</span><span class="o">-&gt;</span><span class="n">get</span><span class="o">&lt;</span><span class="n">std</span><span class="o">::</span><span class="n">vector</span><span class="o">&lt;</span><span class="kt">size_t</span><span class="o">&gt;&gt;</span><span class="p">(</span><span class="s">&quot;lr-decay-start&quot;</span><span class="p">).</span><span class="n">front</span><span class="p">();</span>
+        <span class="k">if</span><span class="p">(</span><span class="n">startEpoch</span> <span class="o">&amp;&amp;</span> <span class="n">state</span><span class="p">.</span><span class="n">epochs</span> <span class="o">&gt;=</span> <span class="n">startEpoch</span><span class="p">)</span>
+          <span class="n">decay</span> <span class="o">=</span> <span class="nb">true</span><span class="p">;</span>
+      <span class="p">}</span>
+
+      <span class="k">if</span><span class="p">(</span><span class="n">strategy</span> <span class="o">==</span> <span class="s">&quot;epoch+batches&quot;</span><span class="p">)</span> <span class="p">{</span>
+        <span class="kt">size_t</span> <span class="n">startBatches</span>
+            <span class="o">=</span> <span class="n">options_</span><span class="o">-&gt;</span><span class="n">get</span><span class="o">&lt;</span><span class="n">std</span><span class="o">::</span><span class="n">vector</span><span class="o">&lt;</span><span class="kt">size_t</span><span class="o">&gt;&gt;</span><span class="p">(</span><span class="s">&quot;lr-decay-start&quot;</span><span class="p">)[</span><span class="mi">1</span><span class="p">];</span>
+        <span class="k">if</span><span class="p">(</span><span class="n">startBatches</span> <span class="o">&amp;&amp;</span> <span class="n">state</span><span class="p">.</span><span class="n">batches</span> <span class="o">&gt;=</span> <span class="n">startBatches</span><span class="p">)</span>
+          <span class="n">decay</span> <span class="o">=</span> <span class="nb">true</span><span class="p">;</span>
+      <span class="p">}</span>
+      <span class="k">if</span><span class="p">(</span><span class="n">strategy</span> <span class="o">==</span> <span class="s">&quot;epoch+stalled&quot;</span><span class="p">)</span> <span class="p">{</span>
+        <span class="kt">size_t</span> <span class="n">startStalled</span>
+            <span class="o">=</span> <span class="n">options_</span><span class="o">-&gt;</span><span class="n">get</span><span class="o">&lt;</span><span class="n">std</span><span class="o">::</span><span class="n">vector</span><span class="o">&lt;</span><span class="kt">size_t</span><span class="o">&gt;&gt;</span><span class="p">(</span><span class="s">&quot;lr-decay-start&quot;</span><span class="p">)[</span><span class="mi">1</span><span class="p">];</span>
+        <span class="k">if</span><span class="p">(</span><span class="n">startStalled</span> <span class="o">&amp;&amp;</span> <span class="n">state</span><span class="p">.</span><span class="n">maxStalled</span> <span class="o">&gt;=</span> <span class="n">startStalled</span><span class="p">)</span>
+          <span class="n">decay</span> <span class="o">=</span> <span class="nb">true</span><span class="p">;</span>
+      <span class="p">}</span>
+
+      <span class="k">if</span><span class="p">(</span><span class="n">decay</span><span class="p">)</span> <span class="p">{</span>
+        <span class="n">state</span><span class="p">.</span><span class="n">factor</span> <span class="o">*=</span> <span class="n">factor</span><span class="p">;</span>
+        <span class="n">updateLearningRate</span><span class="p">(</span><span class="n">state</span><span class="p">);</span>
+        <span class="n">LOG</span><span class="p">(</span><span class="n">info</span><span class="p">,</span> <span class="s">&quot;Decaying learning rate to {} in epoch {}&quot;</span><span class="p">,</span> <span class="n">state</span><span class="p">.</span><span class="n">eta</span><span class="p">,</span> <span class="n">state</span><span class="p">.</span><span class="n">epochs</span><span class="p">);</span>
+
+        <span class="n">state</span><span class="p">.</span><span class="n">reset</span> <span class="o">=</span> <span class="n">options_</span><span class="o">-&gt;</span><span class="n">get</span><span class="o">&lt;</span><span class="kt">bool</span><span class="o">&gt;</span><span class="p">(</span><span class="s">&quot;lr-decay-reset-optimizer&quot;</span><span class="p">);</span>
+        <span class="k">if</span><span class="p">(</span><span class="n">state</span><span class="p">.</span><span class="n">reset</span><span class="p">)</span>
+          <span class="n">LOG</span><span class="p">(</span><span class="n">info</span><span class="p">,</span> <span class="s">&quot;Resetting optimizer statistics&quot;</span><span class="p">);</span>
+
+        <span class="k">if</span><span class="p">(</span><span class="n">options_</span><span class="o">-&gt;</span><span class="n">get</span><span class="o">&lt;</span><span class="kt">bool</span><span class="o">&gt;</span><span class="p">(</span><span class="s">&quot;lr-decay-repeat-warmup&quot;</span><span class="p">))</span> <span class="p">{</span>
+          <span class="n">LOG</span><span class="p">(</span><span class="n">info</span><span class="p">,</span> <span class="s">&quot;Restarting learning rate warmup&quot;</span><span class="p">);</span>
+          <span class="n">state</span><span class="p">.</span><span class="n">warmupStart</span><span class="p">.</span><span class="n">n</span> <span class="o">=</span> <span class="n">state</span><span class="p">.</span><span class="n">getProgressIn</span><span class="p">(</span><span class="n">SchedulingParameter</span><span class="o">::</span><span class="n">parse</span><span class="p">(</span><span class="n">options_</span><span class="o">-&gt;</span><span class="n">get</span><span class="o">&lt;</span><span class="n">std</span><span class="o">::</span><span class="n">string</span><span class="o">&gt;</span><span class="p">(</span><span class="s">&quot;lr-warmup&quot;</span><span class="p">)).</span><span class="n">unit</span><span class="p">);</span>
+        <span class="p">}</span>
+      <span class="p">}</span>
+    <span class="p">}</span>
+  <span class="p">}</span>
+
+  <span class="kt">void</span> <span class="n">actAfterBatches</span><span class="p">(</span><span class="n">TrainingState</span><span class="o">&amp;</span> <span class="n">state</span><span class="p">)</span> <span class="k">override</span> <span class="p">{</span>
+    <span class="kt">float</span> <span class="n">factor</span> <span class="o">=</span> <span class="n">options_</span><span class="o">-&gt;</span><span class="n">get</span><span class="o">&lt;</span><span class="kt">float</span><span class="o">&gt;</span><span class="p">(</span><span class="s">&quot;lr-decay&quot;</span><span class="p">);</span>
+    <span class="n">state</span><span class="p">.</span><span class="n">reset</span> <span class="o">=</span> <span class="nb">false</span><span class="p">;</span>
+
+    <span class="n">updateLearningRate</span><span class="p">(</span><span class="n">state</span><span class="p">);</span>
+
+    <span class="k">if</span><span class="p">(</span><span class="n">factor</span> <span class="o">&gt;</span> <span class="mf">0.0</span><span class="p">)</span> <span class="p">{</span>
+      <span class="k">if</span><span class="p">(</span><span class="n">options_</span><span class="o">-&gt;</span><span class="n">get</span><span class="o">&lt;</span><span class="n">std</span><span class="o">::</span><span class="n">string</span><span class="o">&gt;</span><span class="p">(</span><span class="s">&quot;lr-decay-strategy&quot;</span><span class="p">)</span> <span class="o">==</span> <span class="s">&quot;batches&quot;</span><span class="p">)</span> <span class="p">{</span>
+        <span class="kt">size_t</span> <span class="n">start</span> <span class="o">=</span> <span class="n">options_</span><span class="o">-&gt;</span><span class="n">get</span><span class="o">&lt;</span><span class="n">std</span><span class="o">::</span><span class="n">vector</span><span class="o">&lt;</span><span class="kt">size_t</span><span class="o">&gt;&gt;</span><span class="p">(</span><span class="s">&quot;lr-decay-start&quot;</span><span class="p">).</span><span class="n">front</span><span class="p">();</span>
+        <span class="kt">size_t</span> <span class="n">freq</span>  <span class="o">=</span> <span class="n">options_</span><span class="o">-&gt;</span><span class="n">get</span><span class="o">&lt;</span><span class="kt">size_t</span><span class="o">&gt;</span><span class="p">(</span><span class="s">&quot;lr-decay-freq&quot;</span><span class="p">);</span> <span class="c1">// note: unlike e.g. disp-freq, this is always in batches</span>
+
+        <span class="k">if</span><span class="p">(</span><span class="n">start</span> <span class="o">&gt;</span> <span class="mi">0</span> <span class="o">&amp;&amp;</span> <span class="n">freq</span> <span class="o">&gt;</span> <span class="mi">0</span> <span class="o">&amp;&amp;</span> <span class="n">state</span><span class="p">.</span><span class="n">batches</span> <span class="o">&gt;=</span> <span class="n">start</span>
+           <span class="o">&amp;&amp;</span> <span class="p">((</span><span class="n">state</span><span class="p">.</span><span class="n">batches</span> <span class="o">-</span> <span class="n">start</span><span class="p">)</span> <span class="o">%</span> <span class="n">freq</span> <span class="o">==</span> <span class="mi">0</span><span class="p">))</span> <span class="p">{</span>
+          <span class="n">state</span><span class="p">.</span><span class="n">factor</span> <span class="o">*=</span> <span class="n">factor</span><span class="p">;</span>
+          <span class="n">updateLearningRate</span><span class="p">(</span><span class="n">state</span><span class="p">);</span>
+          <span class="n">LOG</span><span class="p">(</span><span class="n">info</span><span class="p">,</span> <span class="s">&quot;Decaying learning rate to {} after {} batches&quot;</span><span class="p">,</span> <span class="n">state</span><span class="p">.</span><span class="n">eta</span><span class="p">,</span> <span class="n">state</span><span class="p">.</span><span class="n">batches</span><span class="p">);</span>
+
+          <span class="n">state</span><span class="p">.</span><span class="n">reset</span> <span class="o">=</span> <span class="n">options_</span><span class="o">-&gt;</span><span class="n">get</span><span class="o">&lt;</span><span class="kt">bool</span><span class="o">&gt;</span><span class="p">(</span><span class="s">&quot;lr-decay-reset-optimizer&quot;</span><span class="p">);</span>
+          <span class="k">if</span><span class="p">(</span><span class="n">state</span><span class="p">.</span><span class="n">reset</span><span class="p">)</span>
+            <span class="n">LOG</span><span class="p">(</span><span class="n">info</span><span class="p">,</span> <span class="s">&quot;Resetting optimizer statistics&quot;</span><span class="p">);</span>
+
+          <span class="k">if</span><span class="p">(</span><span class="n">options_</span><span class="o">-&gt;</span><span class="n">get</span><span class="o">&lt;</span><span class="kt">bool</span><span class="o">&gt;</span><span class="p">(</span><span class="s">&quot;lr-decay-repeat-warmup&quot;</span><span class="p">))</span> <span class="p">{</span>
+            <span class="n">LOG</span><span class="p">(</span><span class="n">info</span><span class="p">,</span> <span class="s">&quot;Restarting learning rate warmup&quot;</span><span class="p">);</span>
+            <span class="c1">// TODO: avoid repeating this many times and minimize calls to options_-&gt;get</span>
+            <span class="n">state</span><span class="p">.</span><span class="n">warmupStart</span><span class="p">.</span><span class="n">n</span> <span class="o">=</span> <span class="n">state</span><span class="p">.</span><span class="n">getProgressIn</span><span class="p">(</span><span class="n">SchedulingParameter</span><span class="o">::</span><span class="n">parse</span><span class="p">(</span><span class="n">options_</span><span class="o">-&gt;</span><span class="n">get</span><span class="o">&lt;</span><span class="n">std</span><span class="o">::</span><span class="n">string</span><span class="o">&gt;</span><span class="p">(</span><span class="s">&quot;lr-warmup&quot;</span><span class="p">)).</span><span class="n">unit</span><span class="p">);</span>
+          <span class="p">}</span>
+        <span class="p">}</span>
+      <span class="p">}</span>
+    <span class="p">}</span>
+
+    <span class="k">if</span><span class="p">(</span><span class="n">first_</span> <span class="o">&amp;&amp;</span> <span class="n">options_</span><span class="o">-&gt;</span><span class="n">get</span><span class="o">&lt;</span><span class="kt">bool</span><span class="o">&gt;</span><span class="p">(</span><span class="s">&quot;lr-warmup-at-reload&quot;</span><span class="p">))</span> <span class="p">{</span>
+      <span class="n">LOG</span><span class="p">(</span><span class="n">info</span><span class="p">,</span> <span class="s">&quot;Restarting learning rate warmup&quot;</span><span class="p">);</span>
+      <span class="n">state</span><span class="p">.</span><span class="n">warmupStart</span><span class="p">.</span><span class="n">n</span> <span class="o">=</span> <span class="n">state</span><span class="p">.</span><span class="n">getProgressIn</span><span class="p">(</span><span class="n">SchedulingParameter</span><span class="o">::</span><span class="n">parse</span><span class="p">(</span><span class="n">options_</span><span class="o">-&gt;</span><span class="n">get</span><span class="o">&lt;</span><span class="n">std</span><span class="o">::</span><span class="n">string</span><span class="o">&gt;</span><span class="p">(</span><span class="s">&quot;lr-warmup&quot;</span><span class="p">)).</span><span class="n">unit</span><span class="p">);</span>
+    <span class="p">}</span>
+
+    <span class="k">if</span><span class="p">(</span><span class="n">options_</span><span class="o">-&gt;</span><span class="n">get</span><span class="o">&lt;</span><span class="kt">bool</span><span class="o">&gt;</span><span class="p">(</span><span class="s">&quot;lr-warmup-cycle&quot;</span><span class="p">))</span> <span class="p">{</span>
+      <span class="k">if</span><span class="p">(</span><span class="n">state_</span><span class="o">-&gt;</span><span class="n">enteredNewPeriodOf</span><span class="p">(</span><span class="n">options_</span><span class="o">-&gt;</span><span class="n">get</span><span class="o">&lt;</span><span class="n">std</span><span class="o">::</span><span class="n">string</span><span class="o">&gt;</span><span class="p">(</span><span class="s">&quot;lr-warmup&quot;</span><span class="p">)))</span>
+        <span class="n">state</span><span class="p">.</span><span class="n">warmupStart</span><span class="p">.</span><span class="n">n</span> <span class="o">=</span> <span class="n">state</span><span class="p">.</span><span class="n">getProgressIn</span><span class="p">(</span><span class="n">SchedulingParameter</span><span class="o">::</span><span class="n">parse</span><span class="p">(</span><span class="n">options_</span><span class="o">-&gt;</span><span class="n">get</span><span class="o">&lt;</span><span class="n">std</span><span class="o">::</span><span class="n">string</span><span class="o">&gt;</span><span class="p">(</span><span class="s">&quot;lr-warmup&quot;</span><span class="p">)).</span><span class="n">unit</span><span class="p">);</span>
+    <span class="p">}</span>
+
+    <span class="n">first_</span> <span class="o">=</span> <span class="nb">false</span><span class="p">;</span>
+  <span class="p">}</span>
+
+  <span class="kt">void</span> <span class="n">actAfterStalled</span><span class="p">(</span><span class="n">TrainingState</span><span class="o">&amp;</span> <span class="n">state</span><span class="p">)</span> <span class="k">override</span> <span class="p">{</span>
+    <span class="kt">float</span> <span class="n">factor</span> <span class="o">=</span> <span class="n">options_</span><span class="o">-&gt;</span><span class="n">get</span><span class="o">&lt;</span><span class="kt">float</span><span class="o">&gt;</span><span class="p">(</span><span class="s">&quot;lr-decay&quot;</span><span class="p">);</span>
+    <span class="n">state</span><span class="p">.</span><span class="n">reset</span> <span class="o">=</span> <span class="nb">false</span><span class="p">;</span>
+
+    <span class="n">updateLearningRate</span><span class="p">(</span><span class="n">state</span><span class="p">);</span>
+
+    <span class="k">if</span><span class="p">(</span><span class="n">factor</span> <span class="o">&gt;</span> <span class="mf">0.0</span><span class="p">)</span> <span class="p">{</span>
+      <span class="k">if</span><span class="p">(</span><span class="n">options_</span><span class="o">-&gt;</span><span class="n">get</span><span class="o">&lt;</span><span class="n">std</span><span class="o">::</span><span class="n">string</span><span class="o">&gt;</span><span class="p">(</span><span class="s">&quot;lr-decay-strategy&quot;</span><span class="p">)</span> <span class="o">==</span> <span class="s">&quot;stalled&quot;</span><span class="p">)</span> <span class="p">{</span>
+        <span class="kt">size_t</span> <span class="n">startStalled</span> <span class="o">=</span> <span class="n">options_</span><span class="o">-&gt;</span><span class="n">get</span><span class="o">&lt;</span><span class="n">std</span><span class="o">::</span><span class="n">vector</span><span class="o">&lt;</span><span class="kt">size_t</span><span class="o">&gt;&gt;</span><span class="p">(</span><span class="s">&quot;lr-decay-start&quot;</span><span class="p">).</span><span class="n">front</span><span class="p">();</span>
+        <span class="k">if</span><span class="p">(</span><span class="n">startStalled</span> <span class="o">&amp;&amp;</span> <span class="n">state</span><span class="p">.</span><span class="n">stalled</span> <span class="o">&amp;&amp;</span> <span class="n">state</span><span class="p">.</span><span class="n">stalled</span> <span class="o">%</span> <span class="n">startStalled</span> <span class="o">==</span> <span class="mi">0</span><span class="p">)</span> <span class="p">{</span>
+          <span class="n">state</span><span class="p">.</span><span class="n">factor</span> <span class="o">*=</span> <span class="n">factor</span><span class="p">;</span>
+          <span class="n">updateLearningRate</span><span class="p">(</span><span class="n">state</span><span class="p">);</span>
+          <span class="n">LOG</span><span class="p">(</span><span class="n">info</span><span class="p">,</span>
+              <span class="s">&quot;Decaying learning rate to {} after having stalled {} time(s)&quot;</span><span class="p">,</span>
+              <span class="n">state</span><span class="p">.</span><span class="n">eta</span><span class="p">,</span>
+              <span class="n">state</span><span class="p">.</span><span class="n">stalled</span><span class="p">);</span>
+
+          <span class="n">state</span><span class="p">.</span><span class="n">reset</span> <span class="o">=</span> <span class="n">options_</span><span class="o">-&gt;</span><span class="n">get</span><span class="o">&lt;</span><span class="kt">bool</span><span class="o">&gt;</span><span class="p">(</span><span class="s">&quot;lr-decay-reset-optimizer&quot;</span><span class="p">);</span>
+          <span class="k">if</span><span class="p">(</span><span class="n">state</span><span class="p">.</span><span class="n">reset</span><span class="p">)</span>
+            <span class="n">LOG</span><span class="p">(</span><span class="n">info</span><span class="p">,</span> <span class="s">&quot;Resetting optimizer statistics&quot;</span><span class="p">);</span>
+
+          <span class="k">if</span><span class="p">(</span><span class="n">options_</span><span class="o">-&gt;</span><span class="n">get</span><span class="o">&lt;</span><span class="kt">bool</span><span class="o">&gt;</span><span class="p">(</span><span class="s">&quot;lr-decay-repeat-warmup&quot;</span><span class="p">))</span> <span class="p">{</span>
+            <span class="n">LOG</span><span class="p">(</span><span class="n">info</span><span class="p">,</span> <span class="s">&quot;Restarting learning rate warmup&quot;</span><span class="p">);</span>
+            <span class="n">state</span><span class="p">.</span><span class="n">warmupStart</span><span class="p">.</span><span class="n">n</span> <span class="o">=</span> <span class="n">state</span><span class="p">.</span><span class="n">getProgressIn</span><span class="p">(</span><span class="n">SchedulingParameter</span><span class="o">::</span><span class="n">parse</span><span class="p">(</span><span class="n">options_</span><span class="o">-&gt;</span><span class="n">get</span><span class="o">&lt;</span><span class="n">std</span><span class="o">::</span><span class="n">string</span><span class="o">&gt;</span><span class="p">(</span><span class="s">&quot;lr-warmup&quot;</span><span class="p">)).</span><span class="n">unit</span><span class="p">);</span>
+          <span class="p">}</span>
+        <span class="p">}</span>
+      <span class="p">}</span>
+    <span class="p">}</span>
+  <span class="p">}</span>
+<span class="p">};</span>
+<span class="p">}</span>  <span class="c1">// namespace marian</span>
+</pre></div>
+</div>
+</div>
+
+
+           </div>
+           
+          </div>
+          <footer>
+
+  <hr/>
+
+  <div role="contentinfo">
+    <p>
+        &#169; Copyright 2021, Marian NMT Team.
+
+    </p>
+  </div>
+    
+    
+    
+    Built with <a href="https://www.sphinx-doc.org/">Sphinx</a> using a
+    
+    <a href="https://github.com/readthedocs/sphinx_rtd_theme">theme</a>
+    
+    provided by <a href="https://readthedocs.org">Read the Docs</a>. 
+
+</footer>
+        </div>
+      </div>
+
+    </section>
+
+  </div>
+  
+
+  <script type="text/javascript">
+      jQuery(function () {
+          SphinxRtdTheme.Navigation.enable(true);
+      });
+  </script>
+
+  
+  
+    
+   
+
+</body>
+</html>

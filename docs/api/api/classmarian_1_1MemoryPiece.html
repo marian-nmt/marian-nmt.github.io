@@ -1,0 +1,298 @@
+
+
+<!DOCTYPE html>
+<html class="writer-html5" lang="en" >
+<head>
+  <meta charset="utf-8" />
+  
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  
+  <title>Class MemoryPiece &mdash; Marian NMT v1.10.1 2021-02-23 documentation</title>
+  
+
+  
+  <link rel="stylesheet" href="../_static/css/theme.css" type="text/css" />
+  <link rel="stylesheet" href="../_static/pygments.css" type="text/css" />
+  <link rel="stylesheet" href="../_static/css/custom.css" type="text/css" />
+  <link rel="stylesheet" href="../_static/collapsible-lists/css/tree_view.css" type="text/css" />
+
+  
+  
+
+  
+  
+
+  
+    <link rel="canonical" href="http://marian-nmt.github.io/docs/api/api/classmarian_1_1MemoryPiece.html" />
+
+  
+  <!--[if lt IE 9]>
+    <script src="../_static/js/html5shiv.min.js"></script>
+  <![endif]-->
+  
+    
+      <script type="text/javascript" id="documentation_options" data-url_root="../" src="../_static/documentation_options.js"></script>
+        <script src="../_static/jquery.js"></script>
+        <script src="../_static/underscore.js"></script>
+        <script src="../_static/doctools.js"></script>
+        <script src="../_static/language_data.js"></script>
+        <script src="../_static/collapsible-lists/js/CollapsibleLists.compressed.js"></script>
+        <script src="../_static/collapsible-lists/js/apply-collapsible-lists.js"></script>
+    
+    <script type="text/javascript" src="../_static/js/theme.js"></script>
+
+    
+    <link rel="index" title="Index" href="../genindex.html" />
+    <link rel="search" title="Search" href="../search.html" />
+    <link rel="next" title="Class Dense" href="classmarian_1_1mlp_1_1Dense.html" />
+    <link rel="prev" title="Class MeanMultiRationalLoss" href="classmarian_1_1MeanMultiRationalLoss.html" /> 
+</head>
+
+<body class="wy-body-for-nav">
+
+   
+  <div class="wy-grid-for-nav">
+    
+    <nav data-toggle="wy-nav-shift" class="wy-nav-side">
+      <div class="wy-side-scroll">
+        <div class="wy-side-nav-search" >
+          
+
+          
+            <a href="../index.html" class="icon icon-home"> Marian NMT
+          
+
+          
+          </a>
+
+          
+            
+            
+              <div class="version">
+                v1.10.1
+              </div>
+            
+          
+
+          
+<div role="search">
+  <form id="rtd-search-form" class="wy-form" action="../search.html" method="get">
+    <input type="text" name="q" placeholder="Search docs" />
+    <input type="hidden" name="check_keywords" value="yes" />
+    <input type="hidden" name="area" value="default" />
+  </form>
+</div>
+
+          
+        </div>
+
+        
+        <div class="wy-menu wy-menu-vertical" data-spy="affix" role="navigation" aria-label="main navigation">
+          
+            
+            
+              
+            
+            
+              <p class="caption"><span class="caption-text">Contents:</span></p>
+<ul>
+<li class="toctree-l1"><a class="reference internal" href="../install.html">Installation</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../graph.html">Expression graphs</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../operators.html">Graph operations</a></li>
+<li class="toctree-l1"><a class="reference internal" href="library_index.html">Library API</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../contributing.html">How to contribute to Marian</a></li>
+</ul>
+
+            
+          
+        </div>
+        
+      </div>
+    </nav>
+
+    <section data-toggle="wy-nav-shift" class="wy-nav-content-wrap">
+
+      
+      <nav class="wy-nav-top" aria-label="top navigation">
+        
+          <i data-toggle="wy-nav-top" class="fa fa-bars"></i>
+          <a href="../index.html">Marian NMT</a>
+        
+      </nav>
+
+
+      <div class="wy-nav-content">
+        
+        <div class="rst-content">
+        
+          
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+<div role="navigation" aria-label="breadcrumbs navigation">
+
+  <ul class="wy-breadcrumbs">
+    
+      <li><a href="../index.html" class="icon icon-home"></a> &raquo;</li>
+        
+          <li><a href="library_index.html">Library API</a> &raquo;</li>
+        
+      <li>Class MemoryPiece</li>
+    
+    
+      <li class="wy-breadcrumbs-aside">
+        
+          
+            <a href="../_sources/api/classmarian_1_1MemoryPiece.rst.txt" rel="nofollow"> View page source</a>
+          
+        
+      </li>
+    
+  </ul>
+
+  
+  <hr/>
+</div>
+          <div role="main" class="document" itemscope="itemscope" itemtype="http://schema.org/Article">
+           <div itemprop="articleBody">
+            
+  <div class="section" id="class-memorypiece">
+<span id="exhale-class-classmarian-1-1memorypiece"></span><h1>Class MemoryPiece<a class="headerlink" href="#class-memorypiece" title="Permalink to this headline">¶</a></h1>
+<ul class="simple">
+<li><p>Defined in <a class="reference internal" href="file_src_tensors_memory_piece.h.html#file-src-tensors-memory-piece-h"><span class="std std-ref">File memory_piece.h</span></a></p></li>
+</ul>
+<div class="section" id="class-documentation">
+<h2>Class Documentation<a class="headerlink" href="#class-documentation" title="Permalink to this headline">¶</a></h2>
+<dl class="class">
+<dt id="_CPPv4N6marian11MemoryPieceE">
+<span id="_CPPv3N6marian11MemoryPieceE"></span><span id="_CPPv2N6marian11MemoryPieceE"></span><span id="marian::MemoryPiece"></span><span class="target" id="classmarian_1_1MemoryPiece"></span><em class="property">class </em><code class="sig-name descname">MemoryPiece</code><a class="headerlink" href="#_CPPv4N6marian11MemoryPieceE" title="Permalink to this definition">¶</a><br /></dt>
+<dd><div class="breathe-sectiondef docutils container">
+<p class="breathe-sectiondef-title rubric">Public Types</p>
+<dl class="type">
+<dt id="_CPPv4N6marian11MemoryPiece7PtrTypeE">
+<span id="_CPPv3N6marian11MemoryPiece7PtrTypeE"></span><span id="_CPPv2N6marian11MemoryPiece7PtrTypeE"></span><span id="marian::MemoryPiece::PtrType"></span><span class="target" id="classmarian_1_1MemoryPiece_1a1ef09a75c5c86207768937d9e220ca8a"></span><em class="property">typedef </em><a class="reference internal" href="typedef_definitions_8h_1a74108979eb2c77c6154dd176649ae9b7.html#_CPPv4N6marian4IPtrE" title="marian::IPtr">IPtr</a>&lt;<a class="reference internal" href="#_CPPv4N6marian11MemoryPieceE" title="marian::MemoryPiece">MemoryPiece</a>&gt; <code class="sig-name descname">PtrType</code><a class="headerlink" href="#_CPPv4N6marian11MemoryPiece7PtrTypeE" title="Permalink to this definition">¶</a><br /></dt>
+<dd></dd></dl>
+
+</div>
+<div class="breathe-sectiondef docutils container">
+<p class="breathe-sectiondef-title rubric">Public Functions</p>
+<dl class="function">
+<dt id="_CPPv4NK6marian11MemoryPiece4dataEv">
+<span id="_CPPv3NK6marian11MemoryPiece4dataEv"></span><span id="_CPPv2NK6marian11MemoryPiece4dataEv"></span><span id="marian::MemoryPiece::dataC"></span><span class="target" id="classmarian_1_1MemoryPiece_1af46d3d6454f1f6134d41b2340aa346c3"></span>uint8_t *<code class="sig-name descname">data</code><span class="sig-paren">(</span><span class="sig-paren">)</span> <em class="property">const</em><a class="headerlink" href="#_CPPv4NK6marian11MemoryPiece4dataEv" title="Permalink to this definition">¶</a><br /></dt>
+<dd></dd></dl>
+
+<dl class="function">
+<dt id="_CPPv4N6marian11MemoryPiece4dataEv">
+<span id="_CPPv3N6marian11MemoryPiece4dataEv"></span><span id="_CPPv2N6marian11MemoryPiece4dataEv"></span><span id="marian::MemoryPiece::data"></span><span class="target" id="classmarian_1_1MemoryPiece_1a461a9514e360280b05c673b636a9a520"></span>uint8_t *<code class="sig-name descname">data</code><span class="sig-paren">(</span><span class="sig-paren">)</span><a class="headerlink" href="#_CPPv4N6marian11MemoryPiece4dataEv" title="Permalink to this definition">¶</a><br /></dt>
+<dd></dd></dl>
+
+<dl class="function">
+<dt id="_CPPv4I0ENK6marian11MemoryPiece4dataEP1Tv">
+<span id="_CPPv3I0ENK6marian11MemoryPiece4dataEv"></span><span id="_CPPv2I0ENK6marian11MemoryPiece4dataEv"></span><span class="target" id="classmarian_1_1MemoryPiece_1a25698c2f964034cac0280bc825f5499e"></span>template&lt;typename <code class="sig-name descname">T</code>&gt;<br /><a class="reference internal" href="#_CPPv4I0ENK6marian11MemoryPiece4dataEP1Tv" title="marian::MemoryPiece::data::T">T</a> *<code class="sig-name descname">data</code><span class="sig-paren">(</span><span class="sig-paren">)</span> <em class="property">const</em><a class="headerlink" href="#_CPPv4I0ENK6marian11MemoryPiece4dataEP1Tv" title="Permalink to this definition">¶</a><br /></dt>
+<dd></dd></dl>
+
+<dl class="function">
+<dt id="_CPPv4I0EN6marian11MemoryPiece4dataEP1Tv">
+<span id="_CPPv3I0EN6marian11MemoryPiece4dataEv"></span><span id="_CPPv2I0EN6marian11MemoryPiece4dataEv"></span><span class="target" id="classmarian_1_1MemoryPiece_1a0c9f72987a00ba70a45152d8e6c6eac7"></span>template&lt;typename <code class="sig-name descname">T</code>&gt;<br /><a class="reference internal" href="#_CPPv4I0ENK6marian11MemoryPiece4dataEP1Tv" title="marian::MemoryPiece::data::T">T</a> *<code class="sig-name descname">data</code><span class="sig-paren">(</span><span class="sig-paren">)</span><a class="headerlink" href="#_CPPv4I0EN6marian11MemoryPiece4dataEP1Tv" title="Permalink to this definition">¶</a><br /></dt>
+<dd></dd></dl>
+
+<dl class="function">
+<dt id="_CPPv4NK6marian11MemoryPiece4sizeEv">
+<span id="_CPPv3NK6marian11MemoryPiece4sizeEv"></span><span id="_CPPv2NK6marian11MemoryPiece4sizeEv"></span><span id="marian::MemoryPiece::sizeC"></span><span class="target" id="classmarian_1_1MemoryPiece_1a6fd41f22a96f76a5ec5264567b68b227"></span>size_t <code class="sig-name descname">size</code><span class="sig-paren">(</span><span class="sig-paren">)</span> <em class="property">const</em><a class="headerlink" href="#_CPPv4NK6marian11MemoryPiece4sizeEv" title="Permalink to this definition">¶</a><br /></dt>
+<dd></dd></dl>
+
+<dl class="function">
+<dt id="_CPPv4N6marian11MemoryPiece3setEP7uint8_t6size_t">
+<span id="_CPPv3N6marian11MemoryPiece3setEP7uint8_t6size_t"></span><span id="_CPPv2N6marian11MemoryPiece3setEP7uint8_t6size_t"></span><span id="marian::MemoryPiece::set__uint8_tP.s"></span><span class="target" id="classmarian_1_1MemoryPiece_1ad6c2de9229ec366096095f1e0d815a14"></span>void <code class="sig-name descname">set</code><span class="sig-paren">(</span>uint8_t *<em>data</em>, size_t <em>size</em><span class="sig-paren">)</span><a class="headerlink" href="#_CPPv4N6marian11MemoryPiece3setEP7uint8_t6size_t" title="Permalink to this definition">¶</a><br /></dt>
+<dd></dd></dl>
+
+<dl class="function">
+<dt id="_CPPv4N6marian11MemoryPiece6setPtrEP7uint8_t">
+<span id="_CPPv3N6marian11MemoryPiece6setPtrEP7uint8_t"></span><span id="_CPPv2N6marian11MemoryPiece6setPtrEP7uint8_t"></span><span id="marian::MemoryPiece::setPtr__uint8_tP"></span><span class="target" id="classmarian_1_1MemoryPiece_1af604e9210fb8472d86e0a69deaf75280"></span>void <code class="sig-name descname">setPtr</code><span class="sig-paren">(</span>uint8_t *<em>data</em><span class="sig-paren">)</span><a class="headerlink" href="#_CPPv4N6marian11MemoryPiece6setPtrEP7uint8_t" title="Permalink to this definition">¶</a><br /></dt>
+<dd></dd></dl>
+
+</div>
+<div class="breathe-sectiondef docutils container">
+<p class="breathe-sectiondef-title rubric">Public Static Functions</p>
+<dl class="function">
+<dt id="_CPPv4IDpEN6marian11MemoryPiece3NewE7PtrTypeDpRR4Args">
+<span id="_CPPv3IDpEN6marian11MemoryPiece3NewEDpRR4Args"></span><span id="_CPPv2IDpEN6marian11MemoryPiece3NewEDpRR4Args"></span><span class="target" id="classmarian_1_1MemoryPiece_1a87ff948124d71b2e0ecd71928b253ca3"></span>template&lt;class ...<code class="sig-name descname">Args</code>&gt;<br /><em class="property">static</em> <a class="reference internal" href="#_CPPv4N6marian11MemoryPiece7PtrTypeE" title="marian::MemoryPiece::PtrType">PtrType</a> <code class="sig-name descname">New</code><span class="sig-paren">(</span><a class="reference internal" href="#_CPPv4IDpEN6marian11MemoryPiece3NewE7PtrTypeDpRR4Args" title="marian::MemoryPiece::New::Args">Args</a>&amp;&amp;... <em>args</em><span class="sig-paren">)</span><a class="headerlink" href="#_CPPv4IDpEN6marian11MemoryPiece3NewE7PtrTypeDpRR4Args" title="Permalink to this definition">¶</a><br /></dt>
+<dd></dd></dl>
+
+</div>
+<div class="breathe-sectiondef docutils container">
+<p class="breathe-sectiondef-title rubric">Friends</p>
+<dl class="function">
+<dt id="_CPPv4lsRNSt7ostreamEK11MemoryPiece">
+<span id="_CPPv3lsRNSt7ostreamEK11MemoryPiece"></span><span id="_CPPv2lsRNSt7ostreamEK11MemoryPiece"></span><span id="lshift-operator__osR.MemoryPieceC"></span><span class="target" id="classmarian_1_1MemoryPiece_1a7e471c8646d94ead440a78e87769b284"></span>std::ostream &amp;<code class="sig-name descname">operator&lt;&lt;</code><span class="sig-paren">(</span>std::ostream &amp;<em>out</em>, <em class="property">const</em> MemoryPiece <em>mp</em><span class="sig-paren">)</span><a class="headerlink" href="#_CPPv4lsRNSt7ostreamEK11MemoryPiece" title="Permalink to this definition">¶</a><br /></dt>
+<dd></dd></dl>
+
+</div>
+</dd></dl>
+
+</div>
+</div>
+
+
+           </div>
+           
+          </div>
+          <footer>
+    <div class="rst-footer-buttons" role="navigation" aria-label="footer navigation">
+        <a href="classmarian_1_1mlp_1_1Dense.html" class="btn btn-neutral float-right" title="Class Dense" accesskey="n" rel="next">Next <span class="fa fa-arrow-circle-right" aria-hidden="true"></span></a>
+        <a href="classmarian_1_1MeanMultiRationalLoss.html" class="btn btn-neutral float-left" title="Class MeanMultiRationalLoss" accesskey="p" rel="prev"><span class="fa fa-arrow-circle-left" aria-hidden="true"></span> Previous</a>
+    </div>
+
+  <hr/>
+
+  <div role="contentinfo">
+    <p>
+        &#169; Copyright 2021, Marian NMT Team.
+
+    </p>
+  </div>
+    
+    
+    
+    Built with <a href="https://www.sphinx-doc.org/">Sphinx</a> using a
+    
+    <a href="https://github.com/readthedocs/sphinx_rtd_theme">theme</a>
+    
+    provided by <a href="https://readthedocs.org">Read the Docs</a>. 
+
+</footer>
+        </div>
+      </div>
+
+    </section>
+
+  </div>
+  
+
+  <script type="text/javascript">
+      jQuery(function () {
+          SphinxRtdTheme.Navigation.enable(true);
+      });
+  </script>
+
+  
+  
+    
+   
+
+</body>
+</html>

@@ -1,0 +1,285 @@
+
+
+<!DOCTYPE html>
+<html class="writer-html5" lang="en" >
+<head>
+  <meta charset="utf-8" />
+  
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  
+  <title>Program Listing for File char_s2s.h &mdash; Marian NMT v1.10.1 2021-02-23 documentation</title>
+  
+
+  
+  <link rel="stylesheet" href="../_static/css/theme.css" type="text/css" />
+  <link rel="stylesheet" href="../_static/pygments.css" type="text/css" />
+  <link rel="stylesheet" href="../_static/css/custom.css" type="text/css" />
+  <link rel="stylesheet" href="../_static/collapsible-lists/css/tree_view.css" type="text/css" />
+
+  
+  
+
+  
+  
+
+  
+    <link rel="canonical" href="http://marian-nmt.github.io/docs/api/api/program_listing_file_src_models_char_s2s.h.html" />
+
+  
+  <!--[if lt IE 9]>
+    <script src="../_static/js/html5shiv.min.js"></script>
+  <![endif]-->
+  
+    
+      <script type="text/javascript" id="documentation_options" data-url_root="../" src="../_static/documentation_options.js"></script>
+        <script src="../_static/jquery.js"></script>
+        <script src="../_static/underscore.js"></script>
+        <script src="../_static/doctools.js"></script>
+        <script src="../_static/language_data.js"></script>
+        <script src="../_static/collapsible-lists/js/CollapsibleLists.compressed.js"></script>
+        <script src="../_static/collapsible-lists/js/apply-collapsible-lists.js"></script>
+    
+    <script type="text/javascript" src="../_static/js/theme.js"></script>
+
+    
+    <link rel="index" title="Index" href="../genindex.html" />
+    <link rel="search" title="Search" href="../search.html" /> 
+</head>
+
+<body class="wy-body-for-nav">
+
+   
+  <div class="wy-grid-for-nav">
+    
+    <nav data-toggle="wy-nav-shift" class="wy-nav-side">
+      <div class="wy-side-scroll">
+        <div class="wy-side-nav-search" >
+          
+
+          
+            <a href="../index.html" class="icon icon-home"> Marian NMT
+          
+
+          
+          </a>
+
+          
+            
+            
+              <div class="version">
+                v1.10.1
+              </div>
+            
+          
+
+          
+<div role="search">
+  <form id="rtd-search-form" class="wy-form" action="../search.html" method="get">
+    <input type="text" name="q" placeholder="Search docs" />
+    <input type="hidden" name="check_keywords" value="yes" />
+    <input type="hidden" name="area" value="default" />
+  </form>
+</div>
+
+          
+        </div>
+
+        
+        <div class="wy-menu wy-menu-vertical" data-spy="affix" role="navigation" aria-label="main navigation">
+          
+            
+            
+              
+            
+            
+              <p class="caption"><span class="caption-text">Contents:</span></p>
+<ul>
+<li class="toctree-l1"><a class="reference internal" href="../install.html">Installation</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../graph.html">Expression graphs</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../operators.html">Graph operations</a></li>
+<li class="toctree-l1"><a class="reference internal" href="library_index.html">Library API</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../contributing.html">How to contribute to Marian</a></li>
+</ul>
+
+            
+          
+        </div>
+        
+      </div>
+    </nav>
+
+    <section data-toggle="wy-nav-shift" class="wy-nav-content-wrap">
+
+      
+      <nav class="wy-nav-top" aria-label="top navigation">
+        
+          <i data-toggle="wy-nav-top" class="fa fa-bars"></i>
+          <a href="../index.html">Marian NMT</a>
+        
+      </nav>
+
+
+      <div class="wy-nav-content">
+        
+        <div class="rst-content">
+        
+          
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+<div role="navigation" aria-label="breadcrumbs navigation">
+
+  <ul class="wy-breadcrumbs">
+    
+      <li><a href="../index.html" class="icon icon-home"></a> &raquo;</li>
+        
+      <li>Program Listing for File char_s2s.h</li>
+    
+    
+      <li class="wy-breadcrumbs-aside">
+        
+          
+            <a href="../_sources/api/program_listing_file_src_models_char_s2s.h.rst.txt" rel="nofollow"> View page source</a>
+          
+        
+      </li>
+    
+  </ul>
+
+  
+  <hr/>
+</div>
+          <div role="main" class="document" itemscope="itemscope" itemtype="http://schema.org/Article">
+           <div itemprop="articleBody">
+            
+  <div class="section" id="program-listing-for-file-char-s2s-h">
+<span id="program-listing-file-src-models-char-s2s-h"></span><h1>Program Listing for File char_s2s.h<a class="headerlink" href="#program-listing-for-file-char-s2s-h" title="Permalink to this headline">¶</a></h1>
+<p>↰ <a class="reference internal" href="file_src_models_char_s2s.h.html#file-src-models-char-s2s-h"><span class="std std-ref">Return to documentation for file</span></a> (<code class="docutils literal notranslate"><span class="pre">src/models/char_s2s.h</span></code>)</p>
+<div class="highlight-cpp notranslate"><div class="highlight"><pre><span></span><span class="cp">#pragma once</span>
+
+<span class="cp">#include</span> <span class="cpf">&quot;marian.h&quot;</span><span class="cp"></span>
+
+<span class="cp">#include</span> <span class="cpf">&quot;layers/convolution.h&quot;</span><span class="cp"></span>
+<span class="cp">#include</span> <span class="cpf">&quot;models/s2s.h&quot;</span><span class="cp"></span>
+
+<span class="k">namespace</span> <span class="n">marian</span> <span class="p">{</span>
+
+<span class="k">class</span> <span class="nc">CharS2SEncoder</span> <span class="o">:</span> <span class="k">public</span> <span class="n">EncoderS2S</span> <span class="p">{</span>
+  <span class="k">using</span> <span class="n">EncoderS2S</span><span class="o">::</span><span class="n">EncoderS2S</span><span class="p">;</span>
+
+<span class="k">public</span><span class="o">:</span>
+  <span class="k">virtual</span> <span class="n">Ptr</span><span class="o">&lt;</span><span class="n">EncoderState</span><span class="o">&gt;</span> <span class="n">build</span><span class="p">(</span><span class="n">Ptr</span><span class="o">&lt;</span><span class="n">ExpressionGraph</span><span class="o">&gt;</span> <span class="n">graph</span><span class="p">,</span>
+                                  <span class="n">Ptr</span><span class="o">&lt;</span><span class="n">data</span><span class="o">::</span><span class="n">CorpusBatch</span><span class="o">&gt;</span> <span class="n">batch</span><span class="p">)</span> <span class="k">override</span> <span class="p">{</span>
+    <span class="n">graph_</span> <span class="o">=</span> <span class="n">graph</span><span class="p">;</span>
+    <span class="c1">// select embeddings that occur in the batch</span>
+    <span class="n">Expr</span> <span class="n">batchEmbeddings</span><span class="p">,</span> <span class="n">batchMask</span><span class="p">;</span> <span class="n">std</span><span class="o">::</span><span class="n">tie</span>
+    <span class="p">(</span><span class="n">batchEmbeddings</span><span class="p">,</span> <span class="n">batchMask</span><span class="p">)</span> <span class="o">=</span> <span class="n">getEmbeddingLayer</span><span class="p">()</span><span class="o">-&gt;</span><span class="n">apply</span><span class="p">(</span><span class="n">batch</span><span class="o">-&gt;</span><span class="n">front</span><span class="p">());</span>
+
+    <span class="kt">int</span> <span class="n">dimEmb</span> <span class="o">=</span> <span class="n">opt</span><span class="o">&lt;</span><span class="kt">int</span><span class="o">&gt;</span><span class="p">(</span><span class="s">&quot;dim-emb&quot;</span><span class="p">);</span>
+    <span class="k">auto</span> <span class="n">convSizes</span> <span class="o">=</span> <span class="n">options_</span><span class="o">-&gt;</span><span class="n">get</span><span class="o">&lt;</span><span class="n">std</span><span class="o">::</span><span class="n">vector</span><span class="o">&lt;</span><span class="kt">int</span><span class="o">&gt;&gt;</span><span class="p">(</span><span class="s">&quot;char-conv-filters-num&quot;</span><span class="p">);</span>
+    <span class="k">auto</span> <span class="n">convWidths</span>
+        <span class="o">=</span> <span class="n">options_</span><span class="o">-&gt;</span><span class="n">get</span><span class="o">&lt;</span><span class="n">std</span><span class="o">::</span><span class="n">vector</span><span class="o">&lt;</span><span class="kt">int</span><span class="o">&gt;&gt;</span><span class="p">(</span><span class="s">&quot;char-conv-filters-widths&quot;</span><span class="p">);</span>
+    <span class="kt">int</span> <span class="n">stride</span> <span class="o">=</span> <span class="n">opt</span><span class="o">&lt;</span><span class="kt">int</span><span class="o">&gt;</span><span class="p">(</span><span class="s">&quot;char-stride&quot;</span><span class="p">);</span>
+    <span class="kt">int</span> <span class="n">highwayNum</span> <span class="o">=</span> <span class="n">opt</span><span class="o">&lt;</span><span class="kt">int</span><span class="o">&gt;</span><span class="p">(</span><span class="s">&quot;char-highway&quot;</span><span class="p">);</span>
+
+    <span class="k">auto</span> <span class="n">conved</span> <span class="o">=</span> <span class="n">CharConvPooling</span><span class="p">(</span>
+        <span class="n">prefix_</span> <span class="o">+</span> <span class="s">&quot;conv_pooling&quot;</span><span class="p">,</span> <span class="n">dimEmb</span><span class="p">,</span> <span class="n">convWidths</span><span class="p">,</span> <span class="n">convSizes</span><span class="p">,</span> <span class="n">stride</span><span class="p">)(</span>
+        <span class="n">batchEmbeddings</span><span class="p">,</span> <span class="n">batchMask</span><span class="p">);</span>
+
+    <span class="k">auto</span> <span class="n">inHighway</span> <span class="o">=</span> <span class="n">conved</span><span class="p">;</span>
+    <span class="k">for</span><span class="p">(</span><span class="kt">int</span> <span class="n">i</span> <span class="o">=</span> <span class="mi">0</span><span class="p">;</span> <span class="n">i</span> <span class="o">&lt;</span> <span class="n">highwayNum</span><span class="p">;</span> <span class="o">++</span><span class="n">i</span><span class="p">)</span> <span class="p">{</span>
+      <span class="n">inHighway</span> <span class="o">=</span> <span class="n">highway</span><span class="p">(</span><span class="n">prefix_</span> <span class="o">+</span> <span class="s">&quot;_&quot;</span> <span class="o">+</span> <span class="n">std</span><span class="o">::</span><span class="n">to_string</span><span class="p">(</span><span class="n">i</span><span class="p">),</span> <span class="n">inHighway</span><span class="p">);</span>
+    <span class="p">}</span>
+
+    <span class="n">Expr</span> <span class="n">stridedMask</span> <span class="o">=</span> <span class="n">getStridedMask</span><span class="p">(</span><span class="n">graph</span><span class="p">,</span> <span class="n">batch</span><span class="p">,</span> <span class="n">stride</span><span class="p">);</span>
+    <span class="n">Expr</span> <span class="n">context</span> <span class="o">=</span> <span class="n">applyEncoderRNN</span><span class="p">(</span>
+        <span class="n">graph</span><span class="p">,</span> <span class="n">inHighway</span><span class="p">,</span> <span class="n">stridedMask</span><span class="p">,</span> <span class="n">opt</span><span class="o">&lt;</span><span class="n">std</span><span class="o">::</span><span class="n">string</span><span class="o">&gt;</span><span class="p">(</span><span class="s">&quot;enc-type&quot;</span><span class="p">));</span>
+
+    <span class="k">return</span> <span class="n">New</span><span class="o">&lt;</span><span class="n">EncoderState</span><span class="o">&gt;</span><span class="p">(</span><span class="n">context</span><span class="p">,</span> <span class="n">stridedMask</span><span class="p">,</span> <span class="n">batch</span><span class="p">);</span>
+  <span class="p">}</span>
+
+<span class="k">protected</span><span class="o">:</span>
+  <span class="n">Expr</span> <span class="n">getStridedMask</span><span class="p">(</span><span class="n">Ptr</span><span class="o">&lt;</span><span class="n">ExpressionGraph</span><span class="o">&gt;</span> <span class="n">graph</span><span class="p">,</span>
+                      <span class="n">Ptr</span><span class="o">&lt;</span><span class="n">data</span><span class="o">::</span><span class="n">CorpusBatch</span><span class="o">&gt;</span> <span class="n">batch</span><span class="p">,</span>
+                      <span class="kt">int</span> <span class="n">stride</span><span class="p">)</span> <span class="p">{</span>
+    <span class="k">auto</span> <span class="n">subBatch</span> <span class="o">=</span> <span class="p">(</span><span class="o">*</span><span class="n">batch</span><span class="p">)[</span><span class="n">batchIndex_</span><span class="p">];</span>
+
+    <span class="kt">size_t</span> <span class="n">dimBatch</span> <span class="o">=</span> <span class="n">subBatch</span><span class="o">-&gt;</span><span class="n">batchSize</span><span class="p">();</span>
+
+    <span class="n">std</span><span class="o">::</span><span class="n">vector</span><span class="o">&lt;</span><span class="kt">float</span><span class="o">&gt;</span> <span class="n">strided</span><span class="p">;</span>
+    <span class="k">for</span><span class="p">(</span><span class="kt">size_t</span> <span class="n">wordIdx</span> <span class="o">=</span> <span class="mi">0</span><span class="p">;</span> <span class="n">wordIdx</span> <span class="o">&lt;</span> <span class="n">subBatch</span><span class="o">-&gt;</span><span class="n">mask</span><span class="p">().</span><span class="n">size</span><span class="p">();</span>
+        <span class="n">wordIdx</span> <span class="o">+=</span> <span class="n">stride</span> <span class="o">*</span> <span class="n">dimBatch</span><span class="p">)</span> <span class="p">{</span>
+      <span class="k">for</span><span class="p">(</span><span class="kt">size_t</span> <span class="n">j</span> <span class="o">=</span> <span class="n">wordIdx</span><span class="p">;</span> <span class="n">j</span> <span class="o">&lt;</span> <span class="n">wordIdx</span> <span class="o">+</span> <span class="n">dimBatch</span><span class="p">;</span> <span class="o">++</span><span class="n">j</span><span class="p">)</span> <span class="p">{</span>
+        <span class="n">strided</span><span class="p">.</span><span class="n">push_back</span><span class="p">(</span><span class="n">subBatch</span><span class="o">-&gt;</span><span class="n">mask</span><span class="p">()[</span><span class="n">j</span><span class="p">]);</span>
+      <span class="p">}</span>
+    <span class="p">}</span>
+    <span class="kt">size_t</span> <span class="n">dimWords</span> <span class="o">=</span> <span class="n">strided</span><span class="p">.</span><span class="n">size</span><span class="p">()</span> <span class="o">/</span> <span class="n">dimBatch</span><span class="p">;</span>
+    <span class="k">auto</span> <span class="n">stridedMask</span>
+        <span class="o">=</span> <span class="n">graph</span><span class="o">-&gt;</span><span class="n">constant</span><span class="p">({(</span><span class="kt">int</span><span class="p">)</span><span class="n">dimWords</span><span class="p">,</span> <span class="p">(</span><span class="kt">int</span><span class="p">)</span><span class="n">dimBatch</span><span class="p">,</span> <span class="mi">1</span><span class="p">},</span> <span class="n">inits</span><span class="o">::</span><span class="n">fromVector</span><span class="p">(</span><span class="n">strided</span><span class="p">));</span>
+    <span class="k">return</span> <span class="n">stridedMask</span><span class="p">;</span>
+  <span class="p">}</span>
+<span class="p">};</span>
+<span class="p">}</span>  <span class="c1">// namespace marian</span>
+</pre></div>
+</div>
+</div>
+
+
+           </div>
+           
+          </div>
+          <footer>
+
+  <hr/>
+
+  <div role="contentinfo">
+    <p>
+        &#169; Copyright 2021, Marian NMT Team.
+
+    </p>
+  </div>
+    
+    
+    
+    Built with <a href="https://www.sphinx-doc.org/">Sphinx</a> using a
+    
+    <a href="https://github.com/readthedocs/sphinx_rtd_theme">theme</a>
+    
+    provided by <a href="https://readthedocs.org">Read the Docs</a>. 
+
+</footer>
+        </div>
+      </div>
+
+    </section>
+
+  </div>
+  
+
+  <script type="text/javascript">
+      jQuery(function () {
+          SphinxRtdTheme.Navigation.enable(true);
+      });
+  </script>
+
+  
+  
+    
+   
+
+</body>
+</html>

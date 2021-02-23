@@ -1,0 +1,865 @@
+
+
+<!DOCTYPE html>
+<html class="writer-html5" lang="en" >
+<head>
+  <meta charset="utf-8" />
+  
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  
+  <title>Program Listing for File packed_gemm.cpp &mdash; Marian NMT v1.10.1 2021-02-23 documentation</title>
+  
+
+  
+  <link rel="stylesheet" href="../_static/css/theme.css" type="text/css" />
+  <link rel="stylesheet" href="../_static/pygments.css" type="text/css" />
+  <link rel="stylesheet" href="../_static/css/custom.css" type="text/css" />
+  <link rel="stylesheet" href="../_static/collapsible-lists/css/tree_view.css" type="text/css" />
+
+  
+  
+
+  
+  
+
+  
+    <link rel="canonical" href="http://marian-nmt.github.io/docs/api/api/program_listing_file_src_tensors_cpu_fbgemm_packed_gemm.cpp.html" />
+
+  
+  <!--[if lt IE 9]>
+    <script src="../_static/js/html5shiv.min.js"></script>
+  <![endif]-->
+  
+    
+      <script type="text/javascript" id="documentation_options" data-url_root="../" src="../_static/documentation_options.js"></script>
+        <script src="../_static/jquery.js"></script>
+        <script src="../_static/underscore.js"></script>
+        <script src="../_static/doctools.js"></script>
+        <script src="../_static/language_data.js"></script>
+        <script src="../_static/collapsible-lists/js/CollapsibleLists.compressed.js"></script>
+        <script src="../_static/collapsible-lists/js/apply-collapsible-lists.js"></script>
+    
+    <script type="text/javascript" src="../_static/js/theme.js"></script>
+
+    
+    <link rel="index" title="Index" href="../genindex.html" />
+    <link rel="search" title="Search" href="../search.html" /> 
+</head>
+
+<body class="wy-body-for-nav">
+
+   
+  <div class="wy-grid-for-nav">
+    
+    <nav data-toggle="wy-nav-shift" class="wy-nav-side">
+      <div class="wy-side-scroll">
+        <div class="wy-side-nav-search" >
+          
+
+          
+            <a href="../index.html" class="icon icon-home"> Marian NMT
+          
+
+          
+          </a>
+
+          
+            
+            
+              <div class="version">
+                v1.10.1
+              </div>
+            
+          
+
+          
+<div role="search">
+  <form id="rtd-search-form" class="wy-form" action="../search.html" method="get">
+    <input type="text" name="q" placeholder="Search docs" />
+    <input type="hidden" name="check_keywords" value="yes" />
+    <input type="hidden" name="area" value="default" />
+  </form>
+</div>
+
+          
+        </div>
+
+        
+        <div class="wy-menu wy-menu-vertical" data-spy="affix" role="navigation" aria-label="main navigation">
+          
+            
+            
+              
+            
+            
+              <p class="caption"><span class="caption-text">Contents:</span></p>
+<ul>
+<li class="toctree-l1"><a class="reference internal" href="../install.html">Installation</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../graph.html">Expression graphs</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../operators.html">Graph operations</a></li>
+<li class="toctree-l1"><a class="reference internal" href="library_index.html">Library API</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../contributing.html">How to contribute to Marian</a></li>
+</ul>
+
+            
+          
+        </div>
+        
+      </div>
+    </nav>
+
+    <section data-toggle="wy-nav-shift" class="wy-nav-content-wrap">
+
+      
+      <nav class="wy-nav-top" aria-label="top navigation">
+        
+          <i data-toggle="wy-nav-top" class="fa fa-bars"></i>
+          <a href="../index.html">Marian NMT</a>
+        
+      </nav>
+
+
+      <div class="wy-nav-content">
+        
+        <div class="rst-content">
+        
+          
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+<div role="navigation" aria-label="breadcrumbs navigation">
+
+  <ul class="wy-breadcrumbs">
+    
+      <li><a href="../index.html" class="icon icon-home"></a> &raquo;</li>
+        
+      <li>Program Listing for File packed_gemm.cpp</li>
+    
+    
+      <li class="wy-breadcrumbs-aside">
+        
+          
+            <a href="../_sources/api/program_listing_file_src_tensors_cpu_fbgemm_packed_gemm.cpp.rst.txt" rel="nofollow"> View page source</a>
+          
+        
+      </li>
+    
+  </ul>
+
+  
+  <hr/>
+</div>
+          <div role="main" class="document" itemscope="itemscope" itemtype="http://schema.org/Article">
+           <div itemprop="articleBody">
+            
+  <div class="section" id="program-listing-for-file-packed-gemm-cpp">
+<span id="program-listing-file-src-tensors-cpu-fbgemm-packed-gemm-cpp"></span><h1>Program Listing for File packed_gemm.cpp<a class="headerlink" href="#program-listing-for-file-packed-gemm-cpp" title="Permalink to this headline">¶</a></h1>
+<p>↰ <a class="reference internal" href="file_src_tensors_cpu_fbgemm_packed_gemm.cpp.html#file-src-tensors-cpu-fbgemm-packed-gemm-cpp"><span class="std std-ref">Return to documentation for file</span></a> (<code class="docutils literal notranslate"><span class="pre">src/tensors/cpu/fbgemm/packed_gemm.cpp</span></code>)</p>
+<div class="highlight-cpp notranslate"><div class="highlight"><pre><span></span><span class="cp">#include</span> <span class="cpf">&quot;packed_gemm.h&quot;</span><span class="cp"></span>
+<span class="cp">#include</span> <span class="cpf">&quot;tensors/tensor_allocator.h&quot;</span><span class="cp"></span>
+<span class="cp">#include</span> <span class="cpf">&quot;tensors/tensor_operators.h&quot;</span><span class="cp"></span>
+
+<span class="cp">#include</span> <span class="cpf">&lt;emmintrin.h&gt;</span><span class="cp"></span>
+<span class="cp">#include</span> <span class="cpf">&lt;immintrin.h&gt;</span><span class="cp"></span>
+<span class="cp">#include</span> <span class="cpf">&lt;tmmintrin.h&gt;</span><span class="cp"></span>
+<span class="cp">#include</span> <span class="cpf">&lt;xmmintrin.h&gt;</span><span class="cp"></span>
+<span class="cp">#include</span> <span class="cpf">&lt;cassert&gt;</span><span class="cp"></span>
+<span class="cp">#include</span> <span class="cpf">&lt;cstddef&gt;</span><span class="cp"></span>
+<span class="cp">#include</span> <span class="cpf">&lt;unordered_map&gt;</span><span class="cp"></span>
+<span class="c1">//#include &lt;chrono&gt;</span>
+
+<span class="cp">#if USE_FBGEMM</span>
+<span class="cp">#ifdef _MSC_VER</span>
+<span class="cp">#pragma warning(disable: 4505) </span><span class="c1">// &#39;fbgemmAlignedAlloc&#39; in fbgemm.h: unreferenced local function has been removed (missing &#39;static inline&#39;)</span>
+<span class="cp">#pragma warning(disable: 4251) </span><span class="c1">// &#39;fbgemm::CompressedSparseColumn::colptr_&#39;: class &#39;std::vector&lt;int,std::allocator&lt;_Ty&gt;&gt;&#39; needs to have dll-interface to be used by clients of class &#39;fbgemm::CompressedSparseColumn&#39;</span>
+<span class="cp">#pragma warning(disable: 4661) </span><span class="c1">// &#39;fbgemm::PackMatrix&lt;fbgemm::PackBMatrix&lt;int8_t,int32_t&gt;,int8_t,int32_t&gt;::PackMatrix(int32_t,int32_t,inpType *,int,const fbgemm::BlockingFactors *)&#39;: no suitable definition provided for explicit template instantiation request</span>
+<span class="cp">#pragma warning(disable: 4244) </span><span class="c1">// fbgemm\quantutils.h(51): warning C4244: &#39;return&#39;: conversion from &#39;const _Ty&#39; to &#39;T2&#39;, possible loss of data</span>
+<span class="cp">#pragma warning(disable: 4717) </span><span class="c1">// &#39;fbgemm::PackMatrix&lt;fbgemm::PackAWithQuantRowOffset&lt;unsigned char,int&gt;,unsigned char,int&gt;::isThisLastKBlock&#39;: recursive on all control paths, function will cause runtime stack overflow</span>
+<span class="c1">// the following does not work; need to manually disable them in Linker options</span>
+<span class="c1">//#pragma comment(linker, &quot;/ignore:4049&quot;) // locally defined symbol ...asmjit... imported</span>
+<span class="c1">//#pragma comment(linker, &quot;/ignore:4217&quot;) // locally defined symbol ...asmjit... imported</span>
+<span class="cp">#endif</span>
+
+<span class="cp">#ifdef __GNUC__</span>
+<span class="cp">#pragma GCC diagnostic push</span>
+<span class="cp">#pragma GCC diagnostic ignored &quot;-Wunused-variable&quot;</span>
+<span class="cp">#endif</span>
+<span class="cp">#include</span> <span class="cpf">&quot;3rd_party/fbgemm/include/fbgemm/FbgemmFP16.h&quot;</span><span class="cp"></span>
+<span class="cp">#include</span> <span class="cpf">&quot;3rd_party/fbgemm/include/fbgemm/QuantUtils.h&quot;</span><span class="cp"></span>
+<span class="cp">#include</span> <span class="cpf">&quot;3rd_party/fbgemm/include/fbgemm/Fbgemm.h&quot;</span><span class="cp"></span>
+<span class="cp">#ifdef __GNUC__</span>
+<span class="cp">#pragma GCC diagnostic pop</span>
+<span class="cp">#endif</span>
+
+<span class="cp">#ifdef _OPENMP</span>
+<span class="cp">#include</span> <span class="cpf">&lt;omp.h&gt;</span><span class="cp"></span>
+<span class="cp">#endif</span>
+
+<span class="cp">#if MKL_FOUND</span>
+<span class="cp">#include</span> <span class="cpf">&lt;mkl.h&gt;</span><span class="cp"></span>
+<span class="cp">#include</span> <span class="cpf">&lt;mkl_types.h&gt;</span><span class="cp"></span>
+<span class="cp">#endif</span>
+
+<span class="k">using</span> <span class="k">namespace</span> <span class="n">fbgemm</span><span class="p">;</span>
+<span class="cp">#endif </span><span class="c1">// USE_FBGEMM</span>
+
+<span class="k">namespace</span> <span class="n">marian</span> <span class="p">{</span>
+<span class="k">namespace</span> <span class="n">cpu</span> <span class="p">{</span>
+<span class="k">namespace</span> <span class="n">variant</span> <span class="p">{</span> <span class="c1">// Variants of GEMM implementations</span>
+
+<span class="cp">#if USE_FBGEMM</span>
+<span class="c1">// initialize with a dummy</span>
+<span class="c1">// When this class is instantiated,</span>
+<span class="c1">// the actual packing operation is happening. If we create this instance every time we call GEMM,</span>
+<span class="c1">// we are doing packing every time and very slow.</span>
+<span class="c1">// In Caffe2, the operator is stateful and hold an instance of this.</span>
+<span class="c1">// But, we don&#39;t have any logic for this in marian. We can only cache a tensor (which means a memory chunk).</span>
+<span class="c1">// So, for now, we keep the packed memory on our own 1D tensor, then when we call GEMM,</span>
+<span class="c1">// we just reuse this instance again and again by replacing the class members (including memory pointer). Eventually,</span>
+<span class="c1">// I will add a new constructor to the class in FBGEMM which accepts</span>
+<span class="c1">// pre - allocated and pre - packed memory as a parameter.After it&#39;s done,</span>
+<span class="c1">// this temporary buffer will be removed.</span>
+<span class="c1">// When constructing this dummy buffer, ones are used for all the parameters to allocate minimum amount of memory.</span>
+<span class="c1">//</span>
+<span class="c1">// In a multi marian instance setting (as a dynamic library),</span>
+<span class="c1">// different marian instances should not share this variable.</span>
+<span class="k">static</span> <span class="k">thread_local</span> <span class="n">PackedGemmMatrixFP16</span> <span class="n">packedPlaceholder</span><span class="p">(</span><span class="mi">1</span><span class="p">,</span> <span class="mi">1</span><span class="p">,</span> <span class="mi">1</span><span class="p">,</span> <span class="mi">1</span><span class="p">,</span> <span class="mi">1</span><span class="p">,</span> <span class="mi">1</span><span class="p">,</span> <span class="mi">1</span><span class="p">,</span> <span class="mi">1</span><span class="p">);</span>
+
+<span class="c1">// Copied code from fbgemm. It&#39;s padding required from some kernel in FBGEMM</span>
+<span class="c1">// Verbatim - &#39;required by sw pipelined kernels&#39;</span>
+<span class="c1">// https://github.com/marian-nmt/FBGEMM/blob/master/include/fbgemm/FbgemmFP16.h#L109</span>
+<span class="k">const</span> <span class="kt">int</span> <span class="n">PACK16_PADDING</span> <span class="o">=</span> <span class="mi">1024</span><span class="p">;</span>
+
+<span class="c1">// This is a memory space to store auxiliary variables for FBGEMM (e.g. block row, block column, kernel_ncol_blocks and etc.)</span>
+<span class="k">const</span> <span class="kt">int</span> <span class="n">PACK16_SPECIALMEM</span> <span class="o">=</span> <span class="mi">256</span><span class="p">;</span>
+
+<span class="c1">// This is the maximum value of FP16 type. There is a template type implementation, but it doesn&#39;t work on windows.</span>
+<span class="c1">// To keep the consistent result, just use the constant value instead of #ifdef _MSC_VER.</span>
+<span class="c1">// Template type implementation: float FP16_MAX = NumericLimits&lt;float&gt;(Type::float16).max;</span>
+<span class="k">const</span> <span class="kt">float</span> <span class="n">FP16_MAX</span> <span class="o">=</span> <span class="mf">65504.f</span><span class="p">;</span>
+
+<span class="c1">// This function clips a value into a [min, max] range</span>
+<span class="kr">inline</span> <span class="kt">float</span> <span class="n">clip</span><span class="p">(</span><span class="kt">float</span> <span class="n">value</span><span class="p">,</span> <span class="kt">float</span> <span class="n">min</span><span class="p">,</span> <span class="kt">float</span> <span class="n">max</span><span class="p">)</span> <span class="p">{</span>
+  <span class="k">return</span> <span class="n">std</span><span class="o">::</span><span class="n">max</span><span class="p">(</span><span class="n">min</span><span class="p">,</span> <span class="n">std</span><span class="o">::</span><span class="n">min</span><span class="p">(</span><span class="n">value</span><span class="p">,</span> <span class="n">max</span><span class="p">));</span>
+<span class="p">}</span>
+
+<span class="c1">// This is copied from FBGEMM code</span>
+<span class="c1">// A better way?</span>
+<span class="c1">// will be removed, when FBGEMM api is changed</span>
+<span class="c1">// blocked row-major format address arithmetic</span>
+<span class="c1">//</span>
+<span class="c1">// Returns the memory address in the packed (block formatted) matrix array of a specific element</span>
+<span class="c1">// indexed by the original non-packed array.</span>
+<span class="c1">//</span>
+<span class="c1">// @param r_ row index in the original matrix</span>
+<span class="c1">// @param c_ column index in the original matrix</span>
+<span class="c1">// @param brow_ row wide block index</span>
+<span class="c1">// @param bcol_ column wide block index</span>
+<span class="c1">// @param nbrow_ number of blocks in row</span>
+<span class="c1">// @param nbcol_ number of blocks in column</span>
+<span class="c1">// @param last_brow_ row number of the last block</span>
+<span class="kr">inline</span> <span class="kt">uint64_t</span> <span class="n">addr</span><span class="p">(</span><span class="k">const</span> <span class="kt">int</span> <span class="n">r_</span><span class="p">,</span>
+                     <span class="k">const</span> <span class="kt">int</span> <span class="n">c_</span><span class="p">,</span>
+                     <span class="k">const</span> <span class="kt">int</span> <span class="n">brow_</span><span class="p">,</span>
+                     <span class="k">const</span> <span class="kt">int</span> <span class="n">bcol_</span><span class="p">,</span>
+                     <span class="k">const</span> <span class="kt">int</span> <span class="n">nbrow_</span><span class="p">,</span>
+                     <span class="k">const</span> <span class="kt">int</span> <span class="n">nbcol_</span><span class="p">,</span>
+                     <span class="k">const</span> <span class="kt">int</span> <span class="n">last_brow_</span><span class="p">)</span> <span class="p">{</span>
+  <span class="kt">uint64_t</span> <span class="n">r</span> <span class="o">=</span> <span class="p">(</span><span class="kt">uint64_t</span><span class="p">)</span><span class="n">r_</span><span class="p">;</span>
+  <span class="kt">uint64_t</span> <span class="n">c</span> <span class="o">=</span> <span class="p">(</span><span class="kt">uint64_t</span><span class="p">)</span><span class="n">c_</span><span class="p">;</span>
+
+  <span class="kt">uint64_t</span> <span class="n">block_row_id</span> <span class="o">=</span> <span class="n">r</span> <span class="o">/</span> <span class="n">brow_</span><span class="p">;</span>
+  <span class="kt">uint64_t</span> <span class="n">brow_offset</span> <span class="o">=</span> <span class="p">(</span><span class="n">block_row_id</span> <span class="o">*</span> <span class="n">nbcol_</span><span class="p">)</span> <span class="o">*</span> <span class="p">(</span><span class="n">brow_</span> <span class="o">*</span> <span class="n">bcol_</span><span class="p">);</span>
+  <span class="kt">uint64_t</span> <span class="n">block_col_id</span> <span class="o">=</span> <span class="n">c</span> <span class="o">/</span> <span class="n">bcol_</span><span class="p">;</span>
+  <span class="kt">uint64_t</span> <span class="n">bcol_offset</span>
+      <span class="o">=</span> <span class="n">block_col_id</span> <span class="o">*</span> <span class="p">((</span><span class="n">block_row_id</span> <span class="o">!=</span> <span class="n">nbrow_</span> <span class="o">-</span> <span class="mi">1</span><span class="p">)</span> <span class="o">?</span> <span class="p">(</span><span class="n">brow_</span> <span class="o">*</span> <span class="n">bcol_</span><span class="p">)</span> <span class="o">:</span> <span class="p">(</span><span class="n">last_brow_</span> <span class="o">*</span> <span class="n">bcol_</span><span class="p">));</span>
+  <span class="kt">uint64_t</span> <span class="n">block_offset</span> <span class="o">=</span> <span class="n">brow_offset</span> <span class="o">+</span> <span class="n">bcol_offset</span><span class="p">;</span>
+  <span class="kt">uint64_t</span> <span class="n">inblock_offset</span> <span class="o">=</span> <span class="n">r</span> <span class="o">%</span> <span class="n">brow_</span> <span class="o">*</span> <span class="n">bcol_</span> <span class="o">+</span> <span class="n">c</span> <span class="o">%</span> <span class="n">bcol_</span><span class="p">;</span>
+
+  <span class="kt">uint64_t</span> <span class="n">index</span> <span class="o">=</span> <span class="n">block_offset</span> <span class="o">+</span> <span class="n">inblock_offset</span><span class="p">;</span>
+  <span class="k">return</span> <span class="n">index</span><span class="p">;</span>
+<span class="p">}</span>
+
+<span class="c1">// Returns a value in 2D array with the row, column index (i, j) and transposed flag.</span>
+<span class="c1">// The number of rows and columns needs to be passed.</span>
+<span class="c1">// The transposed flag indicates if the underlying data needs to be accessed in a tranposed layout or not.</span>
+<span class="kr">inline</span> <span class="kt">float</span> <span class="n">getVal2dArr</span><span class="p">(</span><span class="k">const</span> <span class="kt">float</span><span class="o">*</span> <span class="n">data</span><span class="p">,</span> <span class="kt">size_t</span> <span class="n">i</span><span class="p">,</span> <span class="kt">size_t</span> <span class="n">j</span><span class="p">,</span> <span class="kt">size_t</span> <span class="n">rows</span><span class="p">,</span> <span class="kt">size_t</span> <span class="n">cols</span><span class="p">,</span> <span class="kt">bool</span> <span class="n">transposed</span><span class="p">)</span> <span class="p">{</span>
+  <span class="n">ABORT_IF</span><span class="p">(</span><span class="n">i</span> <span class="o">&gt;=</span> <span class="n">rows</span><span class="p">,</span> <span class="s">&quot;Row index {} exceeds the number of rows {}.&quot;</span><span class="p">,</span> <span class="n">i</span><span class="p">,</span> <span class="n">rows</span><span class="p">);</span>
+  <span class="n">ABORT_IF</span><span class="p">(</span><span class="n">j</span> <span class="o">&gt;=</span> <span class="n">cols</span><span class="p">,</span> <span class="s">&quot;Column index {} exceeds the number of columns {}.&quot;</span><span class="p">,</span> <span class="n">j</span><span class="p">,</span> <span class="n">cols</span><span class="p">);</span>
+  <span class="k">return</span> <span class="n">transposed</span> <span class="o">?</span> <span class="n">data</span><span class="p">[</span><span class="n">j</span> <span class="o">*</span> <span class="n">rows</span> <span class="o">+</span> <span class="n">i</span><span class="p">]</span> <span class="o">:</span> <span class="n">data</span><span class="p">[</span><span class="n">i</span> <span class="o">*</span> <span class="n">cols</span> <span class="o">+</span> <span class="n">j</span><span class="p">];</span>
+<span class="p">}</span>
+
+<span class="c1">// Memory blocking factors (parameters) for packing into AVX2 int8</span>
+<span class="k">static</span> <span class="k">const</span> <span class="n">fbgemm</span><span class="o">::</span><span class="n">BlockingFactors</span> <span class="n">Packed8Avx2BlockingFactors</span> <span class="o">=</span> <span class="p">{</span>
+    <span class="n">PackingTraits</span><span class="o">&lt;</span><span class="kt">int8_t</span><span class="p">,</span> <span class="kt">int32_t</span><span class="p">,</span> <span class="n">inst_set_t</span><span class="o">::</span><span class="n">avx2</span><span class="o">&gt;::</span><span class="n">MR</span><span class="p">,</span>
+    <span class="n">PackingTraits</span><span class="o">&lt;</span><span class="kt">int8_t</span><span class="p">,</span> <span class="kt">int32_t</span><span class="p">,</span> <span class="n">inst_set_t</span><span class="o">::</span><span class="n">avx2</span><span class="o">&gt;::</span><span class="n">NR</span><span class="p">,</span>
+    <span class="n">PackingTraits</span><span class="o">&lt;</span><span class="kt">int8_t</span><span class="p">,</span> <span class="kt">int32_t</span><span class="p">,</span> <span class="n">inst_set_t</span><span class="o">::</span><span class="n">avx2</span><span class="o">&gt;::</span><span class="n">NR_MIN</span><span class="p">,</span>
+    <span class="n">PackingTraits</span><span class="o">&lt;</span><span class="kt">int8_t</span><span class="p">,</span> <span class="kt">int32_t</span><span class="p">,</span> <span class="n">inst_set_t</span><span class="o">::</span><span class="n">avx2</span><span class="o">&gt;::</span><span class="n">ROW_INTERLEAVE</span><span class="p">,</span>
+    <span class="n">PackingTraits</span><span class="o">&lt;</span><span class="kt">int8_t</span><span class="p">,</span> <span class="kt">int32_t</span><span class="p">,</span> <span class="n">inst_set_t</span><span class="o">::</span><span class="n">avx2</span><span class="o">&gt;::</span><span class="n">MCB</span><span class="p">,</span>
+    <span class="n">PackingTraits</span><span class="o">&lt;</span><span class="kt">int8_t</span><span class="p">,</span> <span class="kt">int32_t</span><span class="p">,</span> <span class="n">inst_set_t</span><span class="o">::</span><span class="n">avx2</span><span class="o">&gt;::</span><span class="n">KCB</span><span class="p">,</span>
+    <span class="n">PackingTraits</span><span class="o">&lt;</span><span class="kt">int8_t</span><span class="p">,</span> <span class="kt">int32_t</span><span class="p">,</span> <span class="n">inst_set_t</span><span class="o">::</span><span class="n">avx2</span><span class="o">&gt;::</span><span class="n">NCB</span>
+<span class="p">};</span>
+
+<span class="c1">// Memory blocking factors (parameters) for packing into AVX512 int8</span>
+<span class="k">static</span> <span class="k">const</span> <span class="n">fbgemm</span><span class="o">::</span><span class="n">BlockingFactors</span> <span class="n">Packed8Avx512BlockingFactors</span> <span class="o">=</span> <span class="p">{</span>
+    <span class="n">PackingTraits</span><span class="o">&lt;</span><span class="kt">int8_t</span><span class="p">,</span> <span class="kt">int32_t</span><span class="p">,</span> <span class="n">inst_set_t</span><span class="o">::</span><span class="n">avx512</span><span class="o">&gt;::</span><span class="n">MR</span><span class="p">,</span>
+    <span class="n">PackingTraits</span><span class="o">&lt;</span><span class="kt">int8_t</span><span class="p">,</span> <span class="kt">int32_t</span><span class="p">,</span> <span class="n">inst_set_t</span><span class="o">::</span><span class="n">avx512</span><span class="o">&gt;::</span><span class="n">NR</span><span class="p">,</span>
+    <span class="n">PackingTraits</span><span class="o">&lt;</span><span class="kt">int8_t</span><span class="p">,</span> <span class="kt">int32_t</span><span class="p">,</span> <span class="n">inst_set_t</span><span class="o">::</span><span class="n">avx512</span><span class="o">&gt;::</span><span class="n">NR_MIN</span><span class="p">,</span>
+    <span class="n">PackingTraits</span><span class="o">&lt;</span><span class="kt">int8_t</span><span class="p">,</span> <span class="kt">int32_t</span><span class="p">,</span> <span class="n">inst_set_t</span><span class="o">::</span><span class="n">avx512</span><span class="o">&gt;::</span><span class="n">ROW_INTERLEAVE</span><span class="p">,</span>
+    <span class="n">PackingTraits</span><span class="o">&lt;</span><span class="kt">int8_t</span><span class="p">,</span> <span class="kt">int32_t</span><span class="p">,</span> <span class="n">inst_set_t</span><span class="o">::</span><span class="n">avx512</span><span class="o">&gt;::</span><span class="n">MCB</span><span class="p">,</span>
+    <span class="n">PackingTraits</span><span class="o">&lt;</span><span class="kt">int8_t</span><span class="p">,</span> <span class="kt">int32_t</span><span class="p">,</span> <span class="n">inst_set_t</span><span class="o">::</span><span class="n">avx512</span><span class="o">&gt;::</span><span class="n">KCB</span><span class="p">,</span>
+    <span class="n">PackingTraits</span><span class="o">&lt;</span><span class="kt">int8_t</span><span class="p">,</span> <span class="kt">int32_t</span><span class="p">,</span> <span class="n">inst_set_t</span><span class="o">::</span><span class="n">avx512</span><span class="o">&gt;::</span><span class="n">NCB</span>
+<span class="p">};</span>
+
+<span class="c1">// This function returns the correct blocking factors structure for given packing type.</span>
+<span class="kr">inline</span> <span class="k">const</span> <span class="n">fbgemm</span><span class="o">::</span><span class="n">BlockingFactors</span><span class="o">*</span> <span class="n">getBlockingFactors</span><span class="p">(</span><span class="n">marian</span><span class="o">::</span><span class="n">Type</span> <span class="n">packType</span><span class="p">)</span> <span class="p">{</span>
+  <span class="k">if</span><span class="p">(</span><span class="n">packType</span> <span class="o">==</span> <span class="n">Type</span><span class="o">::</span><span class="n">packed8avx2</span><span class="p">)</span> <span class="p">{</span>
+    <span class="k">return</span> <span class="o">&amp;</span><span class="n">Packed8Avx2BlockingFactors</span><span class="p">;</span>
+  <span class="p">}</span> <span class="k">else</span> <span class="k">if</span><span class="p">(</span><span class="n">packType</span> <span class="o">==</span> <span class="n">Type</span><span class="o">::</span><span class="n">packed8avx512</span><span class="p">)</span> <span class="p">{</span>
+    <span class="k">return</span> <span class="o">&amp;</span><span class="n">Packed8Avx512BlockingFactors</span><span class="p">;</span>
+  <span class="p">}</span> <span class="k">else</span> <span class="p">{</span>
+    <span class="n">ABORT</span><span class="p">(</span><span class="s">&quot;Only avx2 and avx512 instruction sets are supported for int8. {}&quot;</span><span class="p">,</span> <span class="n">packType</span><span class="p">);</span>
+  <span class="p">}</span>
+<span class="p">}</span>
+
+<span class="c1">// Returns the byte size of packed matrix in fp16. It&#39;s calculated by fbgemm&#39;s internal logic due to the paddings and different layouts.</span>
+<span class="c1">// Packing with fp16 only targets AVX2 instruction sets for now.</span>
+<span class="c1">// See &#39;3rd_party/fbgemm/include/fbgemm/FbgemmFP16.h&#39;.</span>
+<span class="c1">// shape: shape of the tensor to be packed</span>
+<span class="c1">// transpose: the matrix is transposed</span>
+<span class="c1">// packsize (out): the size of the packed matrix in byte</span>
+<span class="kt">void</span> <span class="n">fbgemmPacked16PackInfo</span><span class="p">(</span><span class="k">const</span> <span class="n">marian</span><span class="o">::</span><span class="n">Shape</span><span class="o">&amp;</span> <span class="n">shape</span><span class="p">,</span>
+                            <span class="k">const</span> <span class="kt">bool</span> <span class="n">transpose</span><span class="p">,</span>
+                            <span class="kt">uint64_t</span><span class="o">&amp;</span> <span class="n">packsize</span><span class="p">)</span> <span class="p">{</span>
+  <span class="kt">int</span> <span class="n">nrow</span><span class="p">,</span> <span class="n">ncol</span><span class="p">,</span> <span class="n">kernel_ncol_blocks</span><span class="p">,</span> <span class="n">brow</span> <span class="o">=</span> <span class="mi">512</span><span class="p">,</span> <span class="n">bcol</span><span class="p">,</span> <span class="n">last_brow</span><span class="p">,</span> <span class="n">nbrow</span><span class="p">,</span> <span class="n">nbcol</span><span class="p">;</span>
+  <span class="n">fbgemmPacked16PackInfo</span><span class="p">(</span><span class="n">shape</span><span class="p">,</span> <span class="n">transpose</span><span class="p">,</span> <span class="n">nrow</span><span class="p">,</span> <span class="n">ncol</span><span class="p">,</span> <span class="n">kernel_ncol_blocks</span><span class="p">,</span> <span class="n">brow</span><span class="p">,</span> <span class="n">bcol</span><span class="p">,</span> <span class="n">last_brow</span><span class="p">,</span> <span class="n">nbrow</span><span class="p">,</span> <span class="n">nbcol</span><span class="p">,</span> <span class="n">packsize</span><span class="p">);</span>
+<span class="p">}</span>
+
+<span class="c1">// Returns the byte size of packed matrix in fp16. It&#39;s calculated by fbgemm&#39;s internal logic due to the paddings and different layouts.</span>
+<span class="c1">// This function returns some other extra variables</span>
+<span class="c1">// Packing with fp16 only targets AVX2 instruction sets for now.</span>
+<span class="c1">// See &#39;3rd_party/fbgemm/include/fbgemm/FbgemmFP16.h&#39;.</span>
+<span class="c1">// shape: shape of the tensor to be packed</span>
+<span class="c1">// transpose: the matrix is transposed</span>
+<span class="c1">// nrow (out): the number of rows</span>
+<span class="c1">// ncol (out): the number of columns</span>
+<span class="c1">// kernel_ncol_blocks (out): the number of column blocks</span>
+<span class="c1">// brow (out): the number of rows in a block</span>
+<span class="c1">// bcol (out): the number of columns in a block</span>
+<span class="c1">// last_brow (out): the number of rows in the last block</span>
+<span class="c1">// nbrow (out): row index in a block</span>
+<span class="c1">// nbcol (out): column index in a block</span>
+<span class="c1">// packsize (out): the size of the packed matrix in byte</span>
+<span class="kt">void</span> <span class="n">fbgemmPacked16PackInfo</span><span class="p">(</span><span class="k">const</span> <span class="n">marian</span><span class="o">::</span><span class="n">Shape</span><span class="o">&amp;</span> <span class="n">shape</span><span class="p">,</span>
+                            <span class="k">const</span> <span class="kt">bool</span> <span class="n">transpose</span><span class="p">,</span>
+                            <span class="kt">int</span><span class="o">&amp;</span> <span class="n">nrow</span><span class="p">,</span>
+                            <span class="kt">int</span><span class="o">&amp;</span> <span class="n">ncol</span><span class="p">,</span>
+                            <span class="kt">int</span><span class="o">&amp;</span> <span class="n">kernel_ncol_blocks</span><span class="p">,</span>
+                            <span class="kt">int</span><span class="o">&amp;</span> <span class="n">brow</span><span class="p">,</span>
+                            <span class="kt">int</span><span class="o">&amp;</span> <span class="n">bcol</span><span class="p">,</span>
+                            <span class="kt">int</span><span class="o">&amp;</span> <span class="n">last_brow</span><span class="p">,</span>
+                            <span class="kt">int</span><span class="o">&amp;</span> <span class="n">nbrow</span><span class="p">,</span>
+                            <span class="kt">int</span><span class="o">&amp;</span> <span class="n">nbcol</span><span class="p">,</span>
+                            <span class="kt">uint64_t</span><span class="o">&amp;</span> <span class="n">packsize</span><span class="p">)</span> <span class="p">{</span>
+  <span class="n">nrow</span> <span class="o">=</span> <span class="n">transpose</span> <span class="o">?</span> <span class="n">shape</span><span class="p">[</span><span class="mi">1</span><span class="p">]</span> <span class="o">:</span> <span class="n">shape</span><span class="p">[</span><span class="mi">0</span><span class="p">];</span>
+  <span class="n">ncol</span> <span class="o">=</span> <span class="n">transpose</span> <span class="o">?</span> <span class="n">shape</span><span class="p">[</span><span class="mi">0</span><span class="p">]</span> <span class="o">:</span> <span class="n">shape</span><span class="p">[</span><span class="mi">1</span><span class="p">];</span>
+  <span class="n">kernel_ncol_blocks</span> <span class="o">=</span> <span class="mi">2</span><span class="p">;</span>
+  <span class="n">brow</span> <span class="o">=</span> <span class="mi">512</span><span class="p">;</span>
+  <span class="n">bcol</span> <span class="o">=</span> <span class="mi">8</span> <span class="o">*</span> <span class="n">kernel_ncol_blocks</span><span class="p">;</span>
+  <span class="n">last_brow</span> <span class="o">=</span> <span class="n">nrow</span> <span class="o">%</span> <span class="n">brow</span> <span class="o">==</span> <span class="mi">0</span> <span class="o">?</span> <span class="nl">brow</span> <span class="p">:</span> <span class="n">nrow</span> <span class="o">%</span> <span class="n">brow</span><span class="p">;</span>
+  <span class="n">nbrow</span> <span class="o">=</span> <span class="n">nrow</span> <span class="o">%</span> <span class="n">brow</span> <span class="o">==</span> <span class="mi">0</span> <span class="o">?</span> <span class="n">nrow</span> <span class="o">/</span> <span class="nl">brow</span> <span class="p">:</span> <span class="p">(</span><span class="n">nrow</span> <span class="o">+</span> <span class="n">brow</span><span class="p">)</span> <span class="o">/</span> <span class="n">brow</span><span class="p">;</span>
+  <span class="n">nbcol</span> <span class="o">=</span> <span class="n">ncol</span> <span class="o">%</span> <span class="n">bcol</span> <span class="o">==</span> <span class="mi">0</span> <span class="o">?</span> <span class="n">ncol</span> <span class="o">/</span> <span class="nl">bcol</span> <span class="p">:</span> <span class="p">(</span><span class="n">ncol</span> <span class="o">+</span> <span class="n">bcol</span><span class="p">)</span> <span class="o">/</span> <span class="n">bcol</span><span class="p">;</span>
+  <span class="n">ABORT_IF</span><span class="p">(</span><span class="n">ncol</span> <span class="o">%</span> <span class="n">bcol</span> <span class="o">!=</span> <span class="mi">0</span><span class="p">,</span> <span class="s">&quot;ncol (number of columns) should be multiple of 16. {}&quot;</span><span class="p">,</span> <span class="n">ncol</span><span class="p">);</span>
+  <span class="n">packsize</span> <span class="o">=</span> <span class="p">((</span><span class="n">nbrow</span> <span class="o">*</span> <span class="n">brow</span><span class="p">)</span> <span class="o">*</span> <span class="p">(</span><span class="n">nbcol</span> <span class="o">*</span> <span class="n">bcol</span><span class="p">))</span> <span class="o">*</span> <span class="k">sizeof</span><span class="p">(</span><span class="n">fbgemm</span><span class="o">::</span><span class="n">float16</span><span class="p">)</span> <span class="o">+</span> <span class="n">PACK16_PADDING</span>
+             <span class="o">+</span> <span class="n">PACK16_SPECIALMEM</span><span class="p">;</span>
+<span class="p">}</span>
+
+<span class="c1">// Returns the byte size of packed matrix in int8. It&#39;s calculated by fbgemm&#39;s internal logic due to the paddings and different layouts.</span>
+<span class="c1">// See &#39;3rd_party/fbgemm/src/PackBMatrix.cc&#39;.</span>
+<span class="c1">// shape: shape of the tensor to be packed</span>
+<span class="c1">// packType: Type to be packed - packed8avx2 or packed8avx512</span>
+<span class="c1">// transpose: the matrix is transposed</span>
+<span class="c1">// nrow (out): the number of rows</span>
+<span class="c1">// ncol (out): the number of columns</span>
+<span class="c1">// packsize (out): the size of the packed matrix in byte</span>
+<span class="kt">void</span> <span class="n">fbgemmPacked8PackInfo</span><span class="p">(</span><span class="k">const</span> <span class="n">marian</span><span class="o">::</span><span class="n">Shape</span><span class="o">&amp;</span> <span class="n">shape</span><span class="p">,</span>
+                           <span class="k">const</span> <span class="n">marian</span><span class="o">::</span><span class="n">Type</span> <span class="n">packType</span><span class="p">,</span>
+                           <span class="k">const</span> <span class="kt">bool</span> <span class="n">transpose</span><span class="p">,</span>
+                           <span class="kt">int</span><span class="o">&amp;</span> <span class="n">nrow</span><span class="p">,</span>
+                           <span class="kt">int</span><span class="o">&amp;</span> <span class="n">ncol</span><span class="p">,</span>
+                           <span class="kt">uint64_t</span><span class="o">&amp;</span> <span class="n">packsize</span><span class="p">)</span> <span class="p">{</span>
+    <span class="c1">// Should be 2D - weight matrix</span>
+    <span class="n">ABORT_IF</span><span class="p">(</span><span class="n">shape</span><span class="p">.</span><span class="n">size</span><span class="p">()</span> <span class="o">!=</span> <span class="mi">2</span><span class="p">,</span>
+            <span class="s">&quot;Weight Matrix should be 2D&quot;</span><span class="p">);</span>
+    <span class="n">nrow</span> <span class="o">=</span> <span class="n">transpose</span> <span class="o">?</span> <span class="n">shape</span><span class="p">[</span><span class="mi">1</span><span class="p">]</span> <span class="o">:</span> <span class="n">shape</span><span class="p">[</span><span class="mi">0</span><span class="p">];</span>
+    <span class="n">ncol</span> <span class="o">=</span> <span class="n">transpose</span> <span class="o">?</span> <span class="n">shape</span><span class="p">[</span><span class="mi">0</span><span class="p">]</span> <span class="o">:</span> <span class="n">shape</span><span class="p">[</span><span class="mi">1</span><span class="p">];</span>
+
+    <span class="k">const</span> <span class="n">fbgemm</span><span class="o">::</span><span class="n">BlockingFactors</span><span class="o">*</span> <span class="n">params</span> <span class="o">=</span> <span class="n">getBlockingFactors</span><span class="p">(</span><span class="n">packType</span><span class="p">);</span>
+
+    <span class="n">packsize</span> <span class="o">=</span> <span class="n">fbgemm</span><span class="o">::</span><span class="n">PackMatrix</span><span class="o">&lt;</span><span class="n">fbgemm</span><span class="o">::</span><span class="n">PackBMatrix</span><span class="o">&lt;</span><span class="kt">int8_t</span><span class="o">&gt;</span><span class="p">,</span> <span class="kt">int8_t</span><span class="o">&gt;::</span><span class="n">packedBufferSize</span><span class="p">(</span>
+        <span class="n">transpose</span> <span class="o">?</span> <span class="n">shape</span><span class="p">[</span><span class="mi">1</span><span class="p">]</span> <span class="o">:</span> <span class="n">shape</span><span class="p">[</span><span class="mi">0</span><span class="p">],</span>
+        <span class="n">transpose</span> <span class="o">?</span> <span class="n">shape</span><span class="p">[</span><span class="mi">0</span><span class="p">]</span> <span class="o">:</span> <span class="n">shape</span><span class="p">[</span><span class="mi">1</span><span class="p">],</span> <span class="n">params</span><span class="p">);</span>
+    <span class="c1">// add extra space for storing some other variables specific to B matrix</span>
+    <span class="c1">// quantization sacles: 1 per column and float</span>
+    <span class="c1">// quantization offset: 1 per column and int32</span>
+    <span class="c1">// column offsets: 1 per column and int32</span>
+    <span class="n">packsize</span> <span class="o">+=</span> <span class="n">ncol</span> <span class="o">*</span> <span class="p">(</span><span class="k">sizeof</span><span class="p">(</span><span class="kt">float</span><span class="p">)</span> <span class="o">+</span> <span class="k">sizeof</span><span class="p">(</span><span class="kt">int32_t</span><span class="p">)</span> <span class="o">+</span> <span class="k">sizeof</span><span class="p">(</span><span class="kt">int32_t</span><span class="p">));</span>
+<span class="p">}</span>
+
+<span class="c1">// This function computes the offset values for each column which are used for compensating the remainders of quantized values</span>
+<span class="c1">// More detailed math is avilable in the FBGEMM&#39;s blog - https://engineering.fb.com/ml-applications/fbgemm/</span>
+<span class="kr">inline</span> <span class="kt">void</span> <span class="n">colOffsetsWithZeroPtS8acc32</span><span class="p">(</span>
+    <span class="kt">bool</span> <span class="n">transpose</span><span class="p">,</span>
+    <span class="kt">int</span> <span class="n">K</span><span class="p">,</span>
+    <span class="kt">int</span> <span class="n">N</span><span class="p">,</span>
+    <span class="k">const</span> <span class="kt">int8_t</span><span class="o">*</span> <span class="n">Bint8</span><span class="p">,</span>
+    <span class="k">const</span> <span class="kt">int32_t</span><span class="o">*</span> <span class="n">B_zero_point</span><span class="p">,</span>
+    <span class="kt">int32_t</span><span class="o">*</span> <span class="n">col_offsets</span><span class="p">,</span>
+    <span class="kt">int</span> <span class="n">ncols_per_quant_group</span><span class="p">)</span> <span class="p">{</span>
+  <span class="k">for</span> <span class="p">(</span><span class="kt">int</span> <span class="n">n</span> <span class="o">=</span> <span class="mi">0</span><span class="p">;</span> <span class="n">n</span> <span class="o">&lt;</span> <span class="n">N</span><span class="p">;</span> <span class="o">++</span><span class="n">n</span><span class="p">)</span> <span class="p">{</span>
+    <span class="kt">int32_t</span> <span class="n">sum</span> <span class="o">=</span> <span class="mi">0</span><span class="p">;</span>
+    <span class="k">for</span> <span class="p">(</span><span class="kt">int</span> <span class="n">k</span> <span class="o">=</span> <span class="mi">0</span><span class="p">;</span> <span class="n">k</span> <span class="o">&lt;</span> <span class="n">K</span><span class="p">;</span> <span class="o">++</span><span class="n">k</span><span class="p">)</span> <span class="p">{</span>
+      <span class="n">sum</span> <span class="o">+=</span> <span class="n">transpose</span> <span class="o">?</span> <span class="n">Bint8</span><span class="p">[</span><span class="n">k</span> <span class="o">+</span> <span class="n">n</span> <span class="o">*</span> <span class="n">K</span><span class="p">]</span> <span class="o">:</span> <span class="n">Bint8</span><span class="p">[</span><span class="n">k</span> <span class="o">*</span> <span class="n">N</span> <span class="o">+</span> <span class="n">n</span><span class="p">];</span>
+    <span class="p">}</span>
+    <span class="n">col_offsets</span><span class="p">[</span><span class="n">n</span><span class="p">]</span> <span class="o">=</span> <span class="n">sum</span> <span class="o">-</span> <span class="n">B_zero_point</span><span class="p">[</span><span class="n">n</span> <span class="o">/</span> <span class="n">ncols_per_quant_group</span><span class="p">]</span> <span class="o">*</span> <span class="n">K</span><span class="p">;</span>
+  <span class="p">}</span>
+<span class="p">}</span>
+
+<span class="c1">// Pack a matrix (fp16) into cache utilization efficient way (block format) into fp16</span>
+<span class="c1">// out: output tensor - packed format</span>
+<span class="c1">// inData: input tensor data - pointer of float data</span>
+<span class="c1">// transpose: the matrix is transposed</span>
+<span class="c1">// nrow: the number of rows</span>
+<span class="c1">// ncol: the number of columns</span>
+<span class="c1">// kernel_ncol_blocks: the number of column blocks</span>
+<span class="c1">// brow: the number of rows in a block</span>
+<span class="c1">// bcol: the number of columns in a block</span>
+<span class="c1">// last_brow: the number of rows in the last block</span>
+<span class="c1">// nbrow: row index in a block</span>
+<span class="c1">// nbcol: column index in a block</span>
+<span class="c1">// packsize: the size of the packed matrix</span>
+<span class="c1">//          (the number of fp16 elements + padding (1024) + extra temporary memory (256))</span>
+<span class="kt">void</span> <span class="n">fbgemmPacked16Pack</span><span class="p">(</span><span class="n">marian</span><span class="o">::</span><span class="n">Tensor</span> <span class="n">out</span><span class="p">,</span>
+                        <span class="k">const</span> <span class="kt">float</span><span class="o">*</span> <span class="n">inData</span><span class="p">,</span> <span class="c1">// Packing is only available for 2D weight matrix in Marian. Otherwise, it&#39;s aborted in expanded_gemm.h.</span>
+                        <span class="k">const</span> <span class="kt">bool</span> <span class="n">transpose</span><span class="p">,</span>
+                        <span class="k">const</span> <span class="kt">int</span> <span class="n">nrow</span><span class="p">,</span>
+                        <span class="k">const</span> <span class="kt">int</span> <span class="n">ncol</span><span class="p">,</span>
+                        <span class="k">const</span> <span class="kt">int</span> <span class="n">kernel_ncol_blocks</span><span class="p">,</span>
+                        <span class="k">const</span> <span class="kt">int</span> <span class="n">brow</span><span class="p">,</span>
+                        <span class="k">const</span> <span class="kt">int</span> <span class="n">bcol</span><span class="p">,</span>
+                        <span class="k">const</span> <span class="kt">int</span> <span class="n">last_brow</span><span class="p">,</span>
+                        <span class="k">const</span> <span class="kt">int</span> <span class="n">nbrow</span><span class="p">,</span>
+                        <span class="k">const</span> <span class="kt">int</span> <span class="n">nbcol</span><span class="p">,</span>
+                        <span class="k">const</span> <span class="kt">uint64_t</span> <span class="n">packsize</span><span class="p">)</span> <span class="p">{</span>
+  <span class="c1">// initialize memory</span>
+  <span class="kt">uint8_t</span><span class="o">*</span> <span class="n">outmemorg</span> <span class="o">=</span> <span class="n">out</span><span class="o">-&gt;</span><span class="n">data</span><span class="o">&lt;</span><span class="kt">uint8_t</span><span class="o">&gt;</span><span class="p">();</span>
+  <span class="k">for</span><span class="p">(</span><span class="k">auto</span> <span class="n">i</span> <span class="o">=</span> <span class="mi">0</span><span class="p">;</span> <span class="n">i</span> <span class="o">&lt;</span> <span class="n">packsize</span><span class="p">;</span> <span class="n">i</span><span class="o">++</span><span class="p">)</span> <span class="p">{</span>
+    <span class="n">outmemorg</span><span class="p">[</span><span class="n">i</span><span class="p">]</span> <span class="o">=</span> <span class="mi">0</span><span class="p">;</span>
+  <span class="p">}</span>
+  <span class="c1">// save the other auxiliary variables</span>
+  <span class="kt">uint64_t</span><span class="o">*</span> <span class="n">auxmemsize</span> <span class="o">=</span> <span class="p">(</span><span class="kt">uint64_t</span><span class="o">*</span><span class="p">)</span><span class="n">outmemorg</span><span class="p">;</span>
+  <span class="n">auxmemsize</span><span class="p">[</span><span class="mi">0</span><span class="p">]</span> <span class="o">=</span> <span class="n">packsize</span><span class="p">;</span>
+  <span class="c1">// save FBGEMM related parameters into the header of the allocated memory by marian</span>
+  <span class="kt">int32_t</span> <span class="n">header</span><span class="p">[</span><span class="mi">8</span><span class="p">];</span>
+  <span class="n">header</span><span class="p">[</span><span class="mi">0</span><span class="p">]</span> <span class="o">=</span> <span class="n">nrow</span><span class="p">;</span>
+  <span class="n">header</span><span class="p">[</span><span class="mi">1</span><span class="p">]</span> <span class="o">=</span> <span class="n">ncol</span><span class="p">;</span>
+  <span class="n">header</span><span class="p">[</span><span class="mi">2</span><span class="p">]</span> <span class="o">=</span> <span class="n">kernel_ncol_blocks</span><span class="p">;</span>
+  <span class="n">header</span><span class="p">[</span><span class="mi">3</span><span class="p">]</span> <span class="o">=</span> <span class="n">brow</span><span class="p">;</span>
+  <span class="n">header</span><span class="p">[</span><span class="mi">4</span><span class="p">]</span> <span class="o">=</span> <span class="n">bcol</span><span class="p">;</span>
+  <span class="n">header</span><span class="p">[</span><span class="mi">5</span><span class="p">]</span> <span class="o">=</span> <span class="n">last_brow</span><span class="p">;</span>
+  <span class="n">header</span><span class="p">[</span><span class="mi">6</span><span class="p">]</span> <span class="o">=</span> <span class="n">nbrow</span><span class="p">;</span>
+  <span class="n">header</span><span class="p">[</span><span class="mi">7</span><span class="p">]</span> <span class="o">=</span> <span class="n">nbcol</span><span class="p">;</span>
+  <span class="n">memcpy</span><span class="p">(</span><span class="n">auxmemsize</span> <span class="o">+</span> <span class="mi">1</span><span class="p">,</span> <span class="n">header</span><span class="p">,</span> <span class="k">sizeof</span><span class="p">(</span><span class="n">header</span><span class="p">));</span>
+  <span class="c1">// cast to float16</span>
+  <span class="n">fbgemm</span><span class="o">::</span><span class="n">float16</span><span class="o">*</span> <span class="n">outmem</span> <span class="o">=</span> <span class="p">(</span><span class="n">fbgemm</span><span class="o">::</span><span class="n">float16</span><span class="o">*</span><span class="p">)(</span><span class="n">outmemorg</span> <span class="o">+</span> <span class="mi">256</span><span class="p">);</span>
+  <span class="n">fbgemm</span><span class="o">::</span><span class="n">float16</span><span class="o">*</span> <span class="n">dummy</span> <span class="o">=</span> <span class="k">new</span> <span class="n">fbgemm</span><span class="o">::</span><span class="n">float16</span><span class="p">;</span>
+  <span class="c1">// pack the matrix</span>
+  <span class="k">for</span><span class="p">(</span><span class="kt">int</span> <span class="n">i</span> <span class="o">=</span> <span class="mi">0</span><span class="p">;</span> <span class="n">i</span> <span class="o">&lt;</span> <span class="n">nrow</span><span class="p">;</span> <span class="n">i</span><span class="o">++</span><span class="p">)</span> <span class="p">{</span>
+    <span class="k">for</span><span class="p">(</span><span class="kt">int</span> <span class="n">j</span> <span class="o">=</span> <span class="mi">0</span><span class="p">;</span> <span class="n">j</span> <span class="o">&lt;</span> <span class="n">ncol</span><span class="p">;</span> <span class="n">j</span><span class="o">++</span><span class="p">)</span> <span class="p">{</span>
+      <span class="kt">float</span> <span class="n">src</span> <span class="o">=</span> <span class="n">clip</span><span class="p">(</span><span class="n">transpose</span> <span class="o">?</span> <span class="n">inData</span><span class="p">[</span><span class="n">i</span> <span class="o">+</span> <span class="n">nrow</span> <span class="o">*</span> <span class="n">j</span><span class="p">]</span> <span class="o">:</span> <span class="n">inData</span><span class="p">[</span><span class="n">i</span> <span class="o">*</span> <span class="n">ncol</span> <span class="o">+</span> <span class="n">j</span><span class="p">],</span> <span class="o">-</span><span class="n">FP16_MAX</span><span class="p">,</span> <span class="n">FP16_MAX</span><span class="p">);</span>
+      <span class="n">outmem</span><span class="p">[</span><span class="n">addr</span><span class="p">(</span><span class="n">i</span><span class="p">,</span> <span class="n">j</span><span class="p">,</span> <span class="n">brow</span><span class="p">,</span> <span class="n">bcol</span><span class="p">,</span> <span class="n">nbrow</span><span class="p">,</span> <span class="n">nbcol</span><span class="p">,</span> <span class="n">last_brow</span><span class="p">)]</span> <span class="o">=</span> <span class="n">tconv</span><span class="p">(</span><span class="n">src</span><span class="p">,</span> <span class="o">*</span><span class="n">dummy</span><span class="p">);</span>
+    <span class="p">}</span>
+  <span class="p">}</span>
+  <span class="k">delete</span> <span class="n">dummy</span><span class="p">;</span>
+<span class="p">}</span>
+
+<span class="c1">// Pack a matrix (int8) into cache utilization efficient way (block format) together with quantization into int8</span>
+<span class="c1">// out: output tensor - packed format and quantized into int8</span>
+<span class="c1">// inData: input tensor data - pointer of float data</span>
+<span class="c1">// packType: Type to be packed - packed8avx2 or packed8avx512</span>
+<span class="c1">// transpose: the matrix is transposed</span>
+<span class="c1">// nrow: the number of rows</span>
+<span class="c1">// ncol: the number of columns</span>
+<span class="c1">// packsize: the size of the packed matrix</span>
+<span class="c1">//          (the size of int8 packed B from fbgemm:PackAWithQuantRowOffset + quantization scale, offset and zero point)</span>
+<span class="c1">// quantRangeStdDevs: the range to be quantized for the original float data in multiples standard deviation</span>
+<span class="c1">//                    the default value is 0.0f which means min/max quantization</span>
+<span class="c1">//                    only a half range of normal int8 which is [-64, 63] used to avoid overflow</span>
+<span class="c1">//                    during the accumulation in VPMADDUBSW instruction</span>
+<span class="c1">//                    https://intel.github.io/mkl-dnn/dev_guide_int8_computations.html</span>
+<span class="c1">//                    (e.g. 3.f means the original tensor is quantized</span>
+<span class="c1">//                    from [mean - 3.f * standard deviation, mean + 3.f * standard deviation] to [-64, 63])</span>
+<span class="kt">void</span> <span class="n">fbgemmPacked8Pack</span><span class="p">(</span><span class="n">marian</span><span class="o">::</span><span class="n">Tensor</span> <span class="n">out</span><span class="p">,</span>
+                       <span class="k">const</span> <span class="kt">float</span><span class="o">*</span> <span class="n">inData</span><span class="p">,</span>
+                       <span class="k">const</span> <span class="n">marian</span><span class="o">::</span><span class="n">Type</span> <span class="n">packType</span><span class="p">,</span>
+                       <span class="k">const</span> <span class="kt">bool</span> <span class="n">transpose</span><span class="p">,</span>
+                       <span class="k">const</span> <span class="kt">int</span> <span class="n">nrow</span><span class="p">,</span>
+                       <span class="k">const</span> <span class="kt">int</span> <span class="n">ncol</span><span class="p">,</span>
+                       <span class="k">const</span> <span class="kt">uint64_t</span> <span class="n">packsize</span><span class="p">,</span>
+                       <span class="k">const</span> <span class="kt">float</span> <span class="n">quantRangeStdDevs</span><span class="p">)</span> <span class="p">{</span>
+  <span class="kt">int</span> <span class="n">k</span> <span class="o">=</span> <span class="n">nrow</span><span class="p">;</span>
+  <span class="kt">int</span> <span class="n">n</span> <span class="o">=</span> <span class="n">ncol</span><span class="p">;</span>
+  <span class="kt">int</span> <span class="n">len</span> <span class="o">=</span> <span class="n">k</span> <span class="o">*</span> <span class="n">n</span><span class="p">;</span>
+
+  <span class="c1">// 1. collect stats for each column</span>
+  <span class="kt">float</span><span class="o">*</span> <span class="n">quantScaleB</span> <span class="o">=</span> <span class="k">new</span> <span class="kt">float</span><span class="p">[</span><span class="n">n</span><span class="p">];</span>
+  <span class="kt">int32_t</span><span class="o">*</span> <span class="n">quantZeropointB</span> <span class="o">=</span> <span class="k">new</span> <span class="kt">int32_t</span><span class="p">[</span><span class="n">n</span><span class="p">];</span>
+
+  <span class="k">const</span> <span class="kt">float</span><span class="o">*</span> <span class="n">data</span> <span class="o">=</span> <span class="n">inData</span><span class="p">;</span>
+  <span class="kt">float</span> <span class="n">val</span> <span class="o">=</span> <span class="mi">0</span><span class="p">;</span>
+
+  <span class="c1">// Use half of the quantization range to prevent overflow of VPMADDUBSW</span>
+  <span class="k">constexpr</span> <span class="k">static</span> <span class="kt">int</span> <span class="n">quantizedRange</span> <span class="o">=</span> <span class="mi">127</span><span class="p">;</span>
+  <span class="k">constexpr</span> <span class="k">static</span> <span class="kt">int</span> <span class="n">quantizedMax</span> <span class="o">=</span> <span class="mi">63</span><span class="p">;</span>
+
+  <span class="c1">// This routine compute the quantization range for each column - either one of min/max range or quantRangeStdDevs sigma range.</span>
+  <span class="k">for</span> <span class="p">(</span><span class="kt">size_t</span> <span class="n">jj</span> <span class="o">=</span> <span class="mi">0</span><span class="p">;</span> <span class="n">jj</span> <span class="o">&lt;</span> <span class="n">n</span><span class="p">;</span> <span class="n">jj</span><span class="o">++</span><span class="p">)</span> <span class="p">{</span> <span class="c1">// for each column, collect stats (min/max or mean/std.dev.)</span>
+    <span class="kt">float</span> <span class="n">min</span> <span class="o">=</span> <span class="n">std</span><span class="o">::</span><span class="n">numeric_limits</span><span class="o">&lt;</span><span class="kt">float</span><span class="o">&gt;::</span><span class="n">max</span><span class="p">(),</span> <span class="n">max</span> <span class="o">=</span> <span class="n">std</span><span class="o">::</span><span class="n">numeric_limits</span><span class="o">&lt;</span><span class="kt">float</span><span class="o">&gt;::</span><span class="n">lowest</span><span class="p">();</span>
+    <span class="kt">double</span> <span class="n">mean</span> <span class="o">=</span> <span class="mi">0</span><span class="p">,</span> <span class="n">sqrSum</span> <span class="o">=</span> <span class="mi">0</span><span class="p">;</span>
+    <span class="k">for</span> <span class="p">(</span><span class="kt">size_t</span> <span class="n">ii</span> <span class="o">=</span> <span class="mi">0</span><span class="p">;</span> <span class="n">ii</span> <span class="o">&lt;</span> <span class="n">k</span><span class="p">;</span> <span class="n">ii</span><span class="o">++</span><span class="p">)</span> <span class="p">{</span> <span class="c1">// in a column, go throuhg all the rows and collect stats</span>
+      <span class="n">val</span> <span class="o">=</span> <span class="n">getVal2dArr</span><span class="p">(</span><span class="n">data</span><span class="p">,</span> <span class="n">ii</span><span class="p">,</span> <span class="n">jj</span><span class="p">,</span> <span class="n">k</span><span class="p">,</span> <span class="n">n</span><span class="p">,</span> <span class="n">transpose</span><span class="p">);</span>
+      <span class="c1">// If quantRangeStdDevs is 0.f, min/max values of the columns is used as a quantization range</span>
+      <span class="k">if</span><span class="p">(</span><span class="n">quantRangeStdDevs</span> <span class="o">==</span> <span class="mf">0.f</span><span class="p">)</span> <span class="p">{</span>
+        <span class="k">if</span><span class="p">(</span><span class="n">min</span> <span class="o">&gt;</span> <span class="n">val</span><span class="p">)</span>
+          <span class="n">min</span> <span class="o">=</span> <span class="n">val</span><span class="p">;</span>
+        <span class="k">if</span><span class="p">(</span><span class="n">max</span> <span class="o">&lt;</span> <span class="n">val</span><span class="p">)</span>
+          <span class="n">max</span> <span class="o">=</span> <span class="n">val</span><span class="p">;</span>
+      <span class="p">}</span> <span class="k">else</span> <span class="p">{</span>
+        <span class="c1">// Quantize by std.dev. range</span>
+        <span class="n">mean</span> <span class="o">+=</span> <span class="n">val</span><span class="p">;</span>
+        <span class="n">sqrSum</span> <span class="o">+=</span> <span class="n">val</span> <span class="o">*</span> <span class="n">val</span><span class="p">;</span>
+      <span class="p">}</span>
+    <span class="p">}</span>
+    <span class="c1">// If a quantization range (in multiples of std. dev.) is given with a non-zero value,</span>
+    <span class="c1">// it calculate the range for this column (different quantization scale/offset are used for each column)</span>
+    <span class="k">if</span><span class="p">(</span><span class="n">quantRangeStdDevs</span> <span class="o">!=</span> <span class="mf">0.f</span><span class="p">)</span> <span class="p">{</span>
+      <span class="n">mean</span> <span class="o">/=</span> <span class="n">k</span><span class="p">;</span>
+      <span class="n">sqrSum</span> <span class="o">/=</span> <span class="n">k</span><span class="p">;</span>
+      <span class="n">sqrSum</span> <span class="o">-=</span> <span class="n">mean</span> <span class="o">*</span> <span class="n">mean</span><span class="p">;</span>
+      <span class="n">sqrSum</span> <span class="o">=</span> <span class="n">sqrt</span><span class="p">(</span><span class="n">sqrSum</span><span class="p">);</span>
+      <span class="n">min</span> <span class="o">=</span> <span class="p">(</span><span class="kt">float</span><span class="p">)(</span><span class="n">mean</span> <span class="o">-</span> <span class="n">quantRangeStdDevs</span> <span class="o">*</span> <span class="n">sqrSum</span><span class="p">);</span>
+      <span class="n">max</span> <span class="o">=</span> <span class="p">(</span><span class="kt">float</span><span class="p">)(</span><span class="n">mean</span> <span class="o">+</span> <span class="n">quantRangeStdDevs</span> <span class="o">*</span> <span class="n">sqrSum</span><span class="p">);</span>
+    <span class="p">}</span>
+    <span class="c1">// based on the quantization range, this computes the scale and offset for the quantization</span>
+    <span class="n">quantScaleB</span><span class="p">[</span><span class="n">jj</span><span class="p">]</span> <span class="o">=</span> <span class="p">(</span><span class="n">max</span> <span class="o">-</span> <span class="n">min</span><span class="p">)</span> <span class="o">/</span> <span class="n">quantizedRange</span><span class="p">;</span>
+    <span class="n">quantZeropointB</span><span class="p">[</span><span class="n">jj</span><span class="p">]</span> <span class="o">=</span> <span class="p">(</span><span class="kt">int32_t</span><span class="p">)(</span><span class="n">quantizedMax</span> <span class="o">-</span> <span class="n">max</span> <span class="o">/</span> <span class="n">quantScaleB</span><span class="p">[</span><span class="n">jj</span><span class="p">]);</span>
+  <span class="p">}</span>
+
+  <span class="c1">// 2. quantize</span>
+  <span class="kt">int8_t</span><span class="o">*</span> <span class="n">quantized</span> <span class="o">=</span> <span class="mi">0</span><span class="p">;</span>
+<span class="cp">#ifdef _MSC_VER</span>
+  <span class="n">quantized</span> <span class="o">=</span> <span class="p">(</span><span class="kt">int8_t</span><span class="o">*</span><span class="p">)</span><span class="n">_aligned_malloc</span><span class="p">(</span><span class="n">len</span><span class="p">,</span> <span class="mi">256</span><span class="p">);</span>
+<span class="cp">#else</span>
+  <span class="kt">int</span> <span class="n">result</span> <span class="o">=</span> <span class="n">posix_memalign</span><span class="p">((</span><span class="kt">void</span><span class="o">**</span><span class="p">)</span><span class="o">&amp;</span><span class="n">quantized</span><span class="p">,</span> <span class="mi">256</span><span class="p">,</span> <span class="n">len</span><span class="p">);</span> <span class="n">result</span><span class="p">;</span>
+  <span class="n">assert</span><span class="p">(</span><span class="n">result</span> <span class="o">==</span> <span class="mi">0</span><span class="p">);</span>
+<span class="cp">#endif</span>
+  <span class="k">for</span> <span class="p">(</span><span class="kt">int</span> <span class="n">jj</span> <span class="o">=</span> <span class="mi">0</span><span class="p">;</span> <span class="n">jj</span> <span class="o">&lt;</span> <span class="n">n</span><span class="p">;</span> <span class="n">jj</span><span class="o">++</span><span class="p">)</span> <span class="p">{</span>
+    <span class="n">TensorQuantizationParams</span> <span class="n">bQuantParam</span><span class="p">;</span>
+    <span class="n">bQuantParam</span><span class="p">.</span><span class="n">scale</span> <span class="o">=</span> <span class="n">quantScaleB</span><span class="p">[</span><span class="n">jj</span><span class="p">];</span>
+    <span class="n">bQuantParam</span><span class="p">.</span><span class="n">zero_point</span> <span class="o">=</span> <span class="n">quantZeropointB</span><span class="p">[</span><span class="n">jj</span><span class="p">];</span>
+    <span class="n">bQuantParam</span><span class="p">.</span><span class="n">precision</span> <span class="o">=</span> <span class="mi">7</span><span class="p">;</span>  <span class="c1">// Use half of the quantization range to prevent overflow of VPMADDUBSW</span>
+
+    <span class="k">if</span> <span class="p">(</span><span class="n">transpose</span><span class="p">)</span>
+      <span class="n">fbgemm</span><span class="o">::</span><span class="n">Quantize</span><span class="o">&lt;</span><span class="kt">int8_t</span><span class="o">&gt;</span><span class="p">(</span><span class="n">data</span> <span class="o">+</span> <span class="n">jj</span> <span class="o">*</span> <span class="n">k</span><span class="p">,</span> <span class="n">quantized</span> <span class="o">+</span> <span class="n">jj</span> <span class="o">*</span> <span class="n">k</span><span class="p">,</span> <span class="n">k</span><span class="p">,</span> <span class="n">bQuantParam</span><span class="p">);</span>
+    <span class="k">else</span> <span class="p">{</span>
+      <span class="k">for</span> <span class="p">(</span><span class="kt">int</span> <span class="n">ii</span> <span class="o">=</span> <span class="mi">0</span><span class="p">;</span> <span class="n">ii</span> <span class="o">&lt;</span> <span class="n">k</span><span class="p">;</span> <span class="n">ii</span><span class="o">++</span><span class="p">)</span> <span class="p">{</span>
+        <span class="n">quantized</span><span class="p">[</span><span class="n">ii</span><span class="o">*</span><span class="n">n</span> <span class="o">+</span> <span class="n">jj</span><span class="p">]</span> <span class="o">=</span> <span class="n">fbgemm</span><span class="o">::</span><span class="n">Quantize</span><span class="o">&lt;</span><span class="kt">int8_t</span><span class="o">&gt;</span><span class="p">(</span><span class="n">data</span><span class="p">[</span><span class="n">ii</span><span class="o">*</span><span class="n">n</span> <span class="o">+</span> <span class="n">jj</span><span class="p">],</span> <span class="n">bQuantParam</span><span class="p">);</span>
+      <span class="p">}</span>
+    <span class="p">}</span>
+  <span class="p">}</span>
+
+  <span class="c1">// 3. compute column offsets</span>
+  <span class="kt">int32_t</span><span class="o">*</span> <span class="n">colOffsets</span> <span class="o">=</span> <span class="k">new</span> <span class="kt">int32_t</span><span class="p">[</span><span class="n">n</span><span class="p">];</span>
+  <span class="n">colOffsetsWithZeroPtS8acc32</span><span class="p">(</span><span class="n">transpose</span><span class="p">,</span> <span class="n">k</span><span class="p">,</span> <span class="n">n</span><span class="p">,</span> <span class="n">quantized</span><span class="p">,</span> <span class="n">quantZeropointB</span><span class="p">,</span> <span class="n">colOffsets</span><span class="p">,</span> <span class="mi">1</span><span class="p">);</span>
+
+
+  <span class="kt">int8_t</span><span class="o">*</span> <span class="n">packedBuf</span> <span class="o">=</span> <span class="n">out</span><span class="o">-&gt;</span><span class="n">data</span><span class="o">&lt;</span><span class="kt">int8_t</span><span class="o">&gt;</span><span class="p">();</span>
+  <span class="k">for</span><span class="p">(</span><span class="k">auto</span> <span class="n">i</span> <span class="o">=</span> <span class="mi">0</span><span class="p">;</span> <span class="n">i</span> <span class="o">&lt;</span> <span class="n">packsize</span><span class="p">;</span> <span class="n">i</span><span class="o">++</span><span class="p">)</span> <span class="p">{</span>
+    <span class="n">packedBuf</span><span class="p">[</span><span class="n">i</span><span class="p">]</span> <span class="o">=</span> <span class="mi">0</span><span class="p">;</span>
+  <span class="p">}</span>
+
+  <span class="c1">// 4. packing</span>
+  <span class="k">const</span> <span class="n">fbgemm</span><span class="o">::</span><span class="n">BlockingFactors</span><span class="o">*</span> <span class="n">params</span> <span class="o">=</span> <span class="n">getBlockingFactors</span><span class="p">(</span><span class="n">packType</span><span class="p">);</span>
+
+  <span class="n">PackBMatrix</span><span class="o">&lt;</span><span class="kt">int8_t</span><span class="o">&gt;</span> <span class="n">packedBN</span><span class="p">(</span>
+      <span class="n">transpose</span> <span class="o">?</span> <span class="n">matrix_op_t</span><span class="o">::</span><span class="nl">Transpose</span> <span class="p">:</span> <span class="n">matrix_op_t</span><span class="o">::</span><span class="n">NoTranspose</span><span class="p">,</span>
+      <span class="n">nrow</span><span class="p">,</span> <span class="n">ncol</span><span class="p">,</span> <span class="n">quantized</span><span class="p">,</span> <span class="n">transpose</span> <span class="o">?</span> <span class="nl">nrow</span> <span class="p">:</span> <span class="n">ncol</span><span class="p">,</span> <span class="n">packedBuf</span><span class="p">,</span> <span class="mi">1</span><span class="p">,</span> <span class="n">params</span><span class="p">);</span>
+
+  <span class="c1">// copy quantization scale</span>
+  <span class="n">memcpy</span><span class="p">(</span><span class="n">packedBuf</span> <span class="o">+</span> <span class="p">(</span><span class="n">packsize</span> <span class="o">-</span> <span class="n">n</span> <span class="o">*</span> <span class="p">(</span><span class="k">sizeof</span><span class="p">(</span><span class="kt">float</span><span class="p">)</span> <span class="o">+</span> <span class="k">sizeof</span><span class="p">(</span><span class="kt">int32_t</span><span class="p">)</span> <span class="o">+</span> <span class="k">sizeof</span><span class="p">(</span><span class="kt">int32_t</span><span class="p">))),</span> <span class="n">quantScaleB</span><span class="p">,</span> <span class="n">n</span> <span class="o">*</span> <span class="k">sizeof</span><span class="p">(</span><span class="kt">float</span><span class="p">));</span>
+  <span class="c1">// copy quantization offset</span>
+  <span class="n">memcpy</span><span class="p">(</span><span class="n">packedBuf</span> <span class="o">+</span> <span class="p">(</span><span class="n">packsize</span> <span class="o">-</span> <span class="n">n</span> <span class="o">*</span> <span class="p">(</span><span class="k">sizeof</span><span class="p">(</span><span class="kt">int32_t</span><span class="p">)</span> <span class="o">+</span> <span class="k">sizeof</span><span class="p">(</span><span class="kt">int32_t</span><span class="p">))),</span> <span class="n">quantZeropointB</span><span class="p">,</span> <span class="n">n</span> <span class="o">*</span> <span class="k">sizeof</span><span class="p">(</span><span class="kt">int32_t</span><span class="p">));</span>
+  <span class="c1">// copy column offsets to the memory</span>
+  <span class="n">memcpy</span><span class="p">(</span><span class="n">packedBuf</span> <span class="o">+</span> <span class="p">(</span><span class="n">packsize</span> <span class="o">-</span> <span class="n">n</span> <span class="o">*</span> <span class="k">sizeof</span><span class="p">(</span><span class="kt">int32_t</span><span class="p">)),</span> <span class="n">colOffsets</span><span class="p">,</span> <span class="n">n</span> <span class="o">*</span> <span class="k">sizeof</span><span class="p">(</span><span class="kt">int32_t</span><span class="p">));</span>
+
+<span class="cp">#ifdef _MSC_VER</span>
+  <span class="n">_aligned_free</span><span class="p">(</span><span class="n">quantized</span><span class="p">);</span>
+<span class="cp">#else</span>
+  <span class="n">free</span><span class="p">(</span><span class="n">quantized</span><span class="p">);</span>
+<span class="cp">#endif</span>
+  <span class="k">delete</span><span class="p">[]</span> <span class="n">colOffsets</span><span class="p">;</span>
+  <span class="k">delete</span><span class="p">[]</span> <span class="n">quantScaleB</span><span class="p">;</span>
+  <span class="k">delete</span><span class="p">[]</span> <span class="n">quantZeropointB</span><span class="p">;</span>
+<span class="p">}</span>
+
+<span class="c1">// GEMM operation on the packed B matrix</span>
+<span class="c1">// C: output matrix</span>
+<span class="c1">// A: A matrix</span>
+<span class="c1">// B: B matrix (packed)</span>
+<span class="c1">// m: the number of rows in A and C</span>
+<span class="c1">// n: the number of columns in B and C</span>
+<span class="c1">// transA: transpose of A matrix</span>
+<span class="c1">// B is already packed. So, we don&#39;t need transB</span>
+<span class="kt">void</span> <span class="n">fbgemmPacked16Gemm</span><span class="p">(</span><span class="n">marian</span><span class="o">::</span><span class="n">Tensor</span> <span class="n">C</span><span class="p">,</span>
+                        <span class="k">const</span> <span class="n">marian</span><span class="o">::</span><span class="n">Tensor</span> <span class="n">A</span><span class="p">,</span>
+                        <span class="k">const</span> <span class="n">marian</span><span class="o">::</span><span class="n">Tensor</span> <span class="n">B</span><span class="p">,</span>
+                        <span class="k">const</span> <span class="n">marian</span><span class="o">::</span><span class="n">Tensor</span> <span class="n">bias</span><span class="p">,</span>
+                        <span class="k">const</span> <span class="kt">size_t</span> <span class="n">m</span><span class="p">,</span>
+                        <span class="k">const</span> <span class="kt">size_t</span> <span class="n">n</span><span class="p">,</span>
+                        <span class="k">const</span> <span class="kt">int</span> <span class="n">transA</span><span class="p">)</span> <span class="p">{</span>
+  <span class="c1">// row major</span>
+  <span class="c1">// keep the original mem</span>
+  <span class="n">fbgemm</span><span class="o">::</span><span class="n">float16</span><span class="o">*</span> <span class="n">pmat</span> <span class="o">=</span> <span class="n">packedPlaceholder</span><span class="p">.</span><span class="n">pmat_</span><span class="p">;</span>
+  <span class="c1">// retreive aux fields from the memory</span>
+  <span class="kt">uint64_t</span><span class="o">*</span> <span class="n">packedmemSize</span> <span class="o">=</span> <span class="p">(</span><span class="kt">uint64_t</span><span class="o">*</span><span class="p">)</span><span class="n">B</span><span class="o">-&gt;</span><span class="n">data</span><span class="p">();</span>
+  <span class="n">packedPlaceholder</span><span class="p">.</span><span class="n">size_</span> <span class="o">=</span> <span class="n">packedmemSize</span><span class="p">[</span><span class="mi">0</span><span class="p">];</span>
+  <span class="kt">int32_t</span> <span class="n">header</span><span class="p">[</span><span class="mi">8</span><span class="p">];</span>
+  <span class="n">memcpy</span><span class="p">(</span><span class="n">header</span><span class="p">,</span> <span class="n">packedmemSize</span> <span class="o">+</span> <span class="mi">1</span><span class="p">,</span> <span class="k">sizeof</span><span class="p">(</span><span class="n">header</span><span class="p">));</span>
+  <span class="n">packedPlaceholder</span><span class="p">.</span><span class="n">nrow_</span> <span class="o">=</span> <span class="n">header</span><span class="p">[</span><span class="mi">0</span><span class="p">];</span>
+  <span class="n">packedPlaceholder</span><span class="p">.</span><span class="n">ncol_</span> <span class="o">=</span> <span class="n">header</span><span class="p">[</span><span class="mi">1</span><span class="p">];</span>
+  <span class="n">packedPlaceholder</span><span class="p">.</span><span class="n">kernel_ncol_blocks_</span> <span class="o">=</span> <span class="n">header</span><span class="p">[</span><span class="mi">2</span><span class="p">];</span>
+  <span class="n">packedPlaceholder</span><span class="p">.</span><span class="n">brow_</span> <span class="o">=</span> <span class="n">header</span><span class="p">[</span><span class="mi">3</span><span class="p">];</span>
+  <span class="n">packedPlaceholder</span><span class="p">.</span><span class="n">bcol_</span> <span class="o">=</span> <span class="n">header</span><span class="p">[</span><span class="mi">4</span><span class="p">];</span>
+  <span class="n">packedPlaceholder</span><span class="p">.</span><span class="n">last_brow_</span> <span class="o">=</span> <span class="n">header</span><span class="p">[</span><span class="mi">5</span><span class="p">];</span>
+  <span class="n">packedPlaceholder</span><span class="p">.</span><span class="n">nbrow_</span> <span class="o">=</span> <span class="n">header</span><span class="p">[</span><span class="mi">6</span><span class="p">];</span>
+  <span class="n">packedPlaceholder</span><span class="p">.</span><span class="n">nbcol_</span> <span class="o">=</span> <span class="n">header</span><span class="p">[</span><span class="mi">7</span><span class="p">];</span>
+
+  <span class="c1">// packed matrix</span>
+  <span class="n">packedPlaceholder</span><span class="p">.</span><span class="n">pmat_</span> <span class="o">=</span> <span class="p">(</span><span class="n">fbgemm</span><span class="o">::</span><span class="n">float16</span><span class="o">*</span><span class="p">)(</span><span class="n">B</span><span class="o">-&gt;</span><span class="n">data</span><span class="o">&lt;</span><span class="kt">uint8_t</span><span class="o">&gt;</span><span class="p">()</span> <span class="o">+</span> <span class="mi">256</span><span class="p">);</span>
+
+  <span class="k">if</span><span class="p">(</span><span class="n">bias</span> <span class="o">!=</span> <span class="k">nullptr</span><span class="p">)</span> <span class="p">{</span>
+<span class="cp">#if MKL_FOUND</span>
+    <span class="k">for</span><span class="p">(</span><span class="kt">int</span> <span class="n">i</span> <span class="o">=</span> <span class="mi">0</span><span class="p">;</span> <span class="n">i</span> <span class="o">&lt;</span> <span class="n">m</span><span class="p">;</span> <span class="o">++</span><span class="n">i</span><span class="p">)</span> <span class="p">{</span>
+      <span class="n">mkl_somatcopy</span><span class="p">(</span><span class="sc">&#39;R&#39;</span><span class="p">,</span> <span class="sc">&#39;N&#39;</span><span class="p">,</span> <span class="mi">1</span><span class="p">,</span> <span class="n">n</span><span class="p">,</span> <span class="mi">1</span><span class="p">,</span> <span class="n">bias</span><span class="o">-&gt;</span><span class="n">data</span><span class="p">(),</span> <span class="n">n</span><span class="p">,</span> <span class="n">C</span><span class="o">-&gt;</span><span class="n">data</span><span class="p">()</span> <span class="o">+</span> <span class="n">n</span> <span class="o">*</span> <span class="n">i</span><span class="p">,</span> <span class="n">n</span><span class="p">);</span>
+    <span class="p">}</span>
+<span class="cp">#else</span>
+    <span class="k">for</span><span class="p">(</span><span class="kt">int</span> <span class="n">i</span> <span class="o">=</span> <span class="mi">0</span><span class="p">;</span> <span class="n">i</span> <span class="o">&lt;</span> <span class="n">m</span><span class="p">;</span> <span class="o">++</span><span class="n">i</span><span class="p">)</span> <span class="p">{</span>
+      <span class="n">std</span><span class="o">::</span><span class="n">copy</span><span class="p">(</span><span class="n">bias</span><span class="o">-&gt;</span><span class="n">data</span><span class="p">(),</span> <span class="n">bias</span><span class="o">-&gt;</span><span class="n">data</span><span class="p">()</span> <span class="o">+</span> <span class="n">n</span><span class="p">,</span> <span class="n">C</span><span class="o">-&gt;</span><span class="n">data</span><span class="p">()</span> <span class="o">+</span> <span class="n">n</span> <span class="o">*</span> <span class="n">i</span><span class="p">);</span>
+    <span class="p">}</span>
+<span class="cp">#endif</span>
+  <span class="p">}</span>
+
+<span class="cp">#ifdef _OPENMP</span>
+<span class="cp">#pragma omp parallel</span>
+<span class="cp">#endif</span>
+  <span class="p">{</span>
+<span class="cp">#ifdef _OPENMP</span>
+    <span class="kt">int</span> <span class="n">num_threads</span> <span class="o">=</span> <span class="n">omp_get_num_threads</span><span class="p">();</span>
+    <span class="kt">int</span> <span class="n">tid</span> <span class="o">=</span> <span class="n">omp_get_thread_num</span><span class="p">();</span>
+<span class="cp">#else</span>
+    <span class="kt">int</span> <span class="n">num_threads</span> <span class="o">=</span> <span class="mi">1</span><span class="p">;</span>
+    <span class="kt">int</span> <span class="n">tid</span> <span class="o">=</span> <span class="mi">0</span><span class="p">;</span>
+<span class="cp">#endif</span>
+    <span class="n">fbgemm</span><span class="o">::</span><span class="n">cblas_gemm_compute</span><span class="p">(</span><span class="n">transA</span> <span class="o">?</span> <span class="n">matrix_op_t</span><span class="o">::</span><span class="nl">Transpose</span> <span class="p">:</span> <span class="n">matrix_op_t</span><span class="o">::</span><span class="n">NoTranspose</span><span class="p">,</span>
+                      <span class="p">(</span><span class="kt">int</span><span class="p">)</span><span class="n">m</span><span class="p">,</span>
+                      <span class="n">A</span><span class="o">-&gt;</span><span class="n">data</span><span class="p">(),</span>
+                      <span class="n">packedPlaceholder</span><span class="p">,</span>
+                      <span class="n">bias</span> <span class="o">!=</span> <span class="k">nullptr</span> <span class="o">?</span> <span class="mf">1.0f</span> <span class="o">:</span> <span class="mf">0.0f</span><span class="p">,</span>
+                      <span class="n">C</span><span class="o">-&gt;</span><span class="n">data</span><span class="p">(),</span>
+                      <span class="n">tid</span><span class="p">,</span>
+                      <span class="n">num_threads</span><span class="p">);</span>
+  <span class="p">}</span>
+
+  <span class="c1">// return back the original mem</span>
+  <span class="n">packedPlaceholder</span><span class="p">.</span><span class="n">pmat_</span> <span class="o">=</span> <span class="n">pmat</span><span class="p">;</span>
+<span class="p">}</span>
+
+<span class="c1">// GEMM operation on the packed B matrix in 8 bit integers</span>
+<span class="c1">// C: output matrix</span>
+<span class="c1">// A: A matrix</span>
+<span class="c1">// B: B matrix (packed)</span>
+<span class="c1">// m: the number of rows in A and C</span>
+<span class="c1">// n: the number of columns in B and C</span>
+<span class="c1">// k: the number of columns in A and the number of rows in B</span>
+<span class="c1">// transA: whether A matrix is transposed or not</span>
+<span class="c1">// transB: whether B matrix is transposed or not</span>
+<span class="kt">void</span> <span class="n">fbgemmPacked8Gemm</span><span class="p">(</span><span class="n">marian</span><span class="o">::</span><span class="n">Tensor</span> <span class="n">C</span><span class="p">,</span>
+                       <span class="k">const</span> <span class="n">marian</span><span class="o">::</span><span class="n">Tensor</span> <span class="n">A</span><span class="p">,</span>
+                       <span class="k">const</span> <span class="n">marian</span><span class="o">::</span><span class="n">Tensor</span> <span class="n">B</span><span class="p">,</span>
+                       <span class="k">const</span> <span class="kt">size_t</span> <span class="n">m</span><span class="p">,</span>
+                       <span class="k">const</span> <span class="kt">size_t</span> <span class="n">n</span><span class="p">,</span>
+                       <span class="k">const</span> <span class="kt">size_t</span> <span class="n">k</span><span class="p">,</span>
+                       <span class="k">const</span> <span class="kt">int</span> <span class="n">transA</span><span class="p">,</span>
+                       <span class="k">const</span> <span class="kt">int</span> <span class="n">transB</span><span class="p">)</span> <span class="p">{</span>
+  <span class="c1">// pack type</span>
+  <span class="n">marian</span><span class="o">::</span><span class="n">Type</span> <span class="n">packType</span> <span class="o">=</span> <span class="n">B</span><span class="o">-&gt;</span><span class="n">type</span><span class="p">();</span>
+
+  <span class="k">const</span> <span class="n">fbgemm</span><span class="o">::</span><span class="n">BlockingFactors</span><span class="o">*</span> <span class="n">params</span> <span class="o">=</span> <span class="n">getBlockingFactors</span><span class="p">(</span><span class="n">packType</span><span class="p">);</span>
+
+  <span class="c1">// Check if the packed format matches with the available AVX instruction set in the machine</span>
+  <span class="k">const</span> <span class="kt">bool</span> <span class="n">avx512Support</span> <span class="o">=</span> <span class="n">fbgemmHasAvx512Support</span><span class="p">();</span>
+  <span class="k">if</span><span class="p">((</span><span class="n">packType</span> <span class="o">==</span> <span class="n">Type</span><span class="o">::</span><span class="n">packed8avx2</span> <span class="o">&amp;&amp;</span> <span class="n">avx512Support</span><span class="p">)</span>
+     <span class="o">||</span> <span class="p">(</span><span class="n">packType</span> <span class="o">==</span> <span class="n">Type</span><span class="o">::</span><span class="n">packed8avx512</span> <span class="o">&amp;&amp;</span> <span class="o">!</span><span class="n">avx512Support</span><span class="p">))</span> <span class="p">{</span>
+    <span class="n">ABORT</span><span class="p">(</span><span class="s">&quot;FBGEMM doesn&#39;t allow to use {} packing order on {} CPUs&quot;</span><span class="p">,</span>
+          <span class="n">packType</span> <span class="o">==</span> <span class="n">Type</span><span class="o">::</span><span class="n">packed8avx2</span> <span class="o">?</span> <span class="s">&quot;AVX2&quot;</span> <span class="o">:</span> <span class="s">&quot;AVX512&quot;</span><span class="p">,</span>
+          <span class="n">avx512Support</span> <span class="o">?</span> <span class="s">&quot;AVX512&quot;</span> <span class="o">:</span> <span class="s">&quot;AVX2&quot;</span><span class="p">);</span>
+  <span class="p">}</span>
+
+  <span class="c1">// compute range to quantize A (activations) - (min/max quantization)</span>
+  <span class="kt">float</span> <span class="n">minA</span> <span class="o">=</span> <span class="n">std</span><span class="o">::</span><span class="n">numeric_limits</span><span class="o">&lt;</span><span class="kt">float</span><span class="o">&gt;::</span><span class="n">max</span><span class="p">(),</span> <span class="n">maxA</span> <span class="o">=</span> <span class="n">std</span><span class="o">::</span><span class="n">numeric_limits</span><span class="o">&lt;</span><span class="kt">float</span><span class="o">&gt;::</span><span class="n">lowest</span><span class="p">();</span>
+
+  <span class="kt">int</span> <span class="n">elemA</span> <span class="o">=</span> <span class="n">A</span><span class="o">-&gt;</span><span class="n">shape</span><span class="p">().</span><span class="n">elements</span><span class="p">();</span>
+  <span class="kt">float</span><span class="o">*</span> <span class="n">dataA</span> <span class="o">=</span> <span class="n">A</span><span class="o">-&gt;</span><span class="n">data</span><span class="p">();</span>
+  <span class="c1">// AVX based find min/max</span>
+  <span class="n">FindMinMax</span><span class="p">(</span><span class="n">dataA</span><span class="p">,</span> <span class="o">&amp;</span><span class="n">minA</span><span class="p">,</span> <span class="o">&amp;</span><span class="n">maxA</span><span class="p">,</span> <span class="n">elemA</span><span class="p">);</span>
+
+  <span class="kt">float</span> <span class="n">quantScaleA</span> <span class="o">=</span> <span class="p">(</span><span class="n">maxA</span> <span class="o">-</span> <span class="n">minA</span><span class="p">)</span> <span class="o">/</span> <span class="mi">255</span><span class="p">;</span>
+  <span class="kt">int32_t</span> <span class="n">quantZeropointA</span> <span class="o">=</span> <span class="p">(</span><span class="kt">int32_t</span><span class="p">)(</span><span class="mi">255</span> <span class="o">-</span> <span class="n">maxA</span> <span class="o">/</span> <span class="n">quantScaleA</span><span class="p">);</span>
+
+  <span class="c1">// To avoid any repeated memory allocation and deallocation, make the scratch buffer variables static thread_local</span>
+  <span class="c1">// In a multi-threaded situation, heap access lock for the memory allocation/free could</span>
+  <span class="c1">// makes all the threads are blocked by each other. (heap contention)</span>
+  <span class="k">const</span> <span class="kt">size_t</span> <span class="n">sizeBufA</span> <span class="o">=</span> <span class="n">params</span><span class="o">-&gt;</span><span class="n">KCB</span> <span class="o">*</span> <span class="n">params</span><span class="o">-&gt;</span><span class="n">MCB</span><span class="p">;</span>
+  <span class="k">static</span> <span class="k">thread_local</span> <span class="n">std</span><span class="o">::</span><span class="n">vector</span><span class="o">&lt;</span><span class="kt">uint8_t</span><span class="o">&gt;</span> <span class="n">packedBufA</span><span class="p">;</span>
+  <span class="k">if</span> <span class="p">(</span><span class="n">packedBufA</span><span class="p">.</span><span class="n">size</span><span class="p">()</span> <span class="o">&lt;</span> <span class="n">sizeBufA</span><span class="p">)</span>
+      <span class="n">packedBufA</span><span class="p">.</span><span class="n">resize</span><span class="p">(</span><span class="n">sizeBufA</span><span class="p">);</span>
+  <span class="k">const</span> <span class="kt">size_t</span> <span class="n">sizeRowOffsetBufA</span> <span class="o">=</span> <span class="n">PackAWithQuantRowOffset</span><span class="o">&lt;</span><span class="kt">uint8_t</span><span class="o">&gt;::</span><span class="n">rowOffsetBufferSize</span><span class="p">();</span>
+  <span class="k">static</span> <span class="k">thread_local</span> <span class="n">std</span><span class="o">::</span><span class="n">vector</span><span class="o">&lt;</span><span class="kt">int32_t</span><span class="o">&gt;</span> <span class="n">rowOffsetBufA</span><span class="p">;</span>
+  <span class="k">if</span> <span class="p">(</span><span class="n">rowOffsetBufA</span><span class="p">.</span><span class="n">size</span><span class="p">()</span> <span class="o">&lt;</span> <span class="n">sizeRowOffsetBufA</span><span class="p">)</span>
+      <span class="n">rowOffsetBufA</span><span class="p">.</span><span class="n">resize</span><span class="p">(</span><span class="n">sizeRowOffsetBufA</span><span class="p">);</span>
+
+  <span class="n">PackAWithQuantRowOffset</span><span class="o">&lt;</span><span class="kt">uint8_t</span><span class="o">&gt;</span> <span class="n">packA</span><span class="p">(</span>
+      <span class="n">transA</span> <span class="o">?</span> <span class="n">matrix_op_t</span><span class="o">::</span><span class="nl">Transpose</span> <span class="p">:</span> <span class="n">matrix_op_t</span><span class="o">::</span><span class="n">NoTranspose</span><span class="p">,</span>
+      <span class="p">(</span><span class="kt">int32_t</span><span class="p">)(</span><span class="n">transA</span> <span class="o">?</span> <span class="nl">k</span> <span class="p">:</span> <span class="n">m</span><span class="p">),</span>
+      <span class="p">(</span><span class="kt">int32_t</span><span class="p">)(</span><span class="n">transA</span> <span class="o">?</span> <span class="nl">m</span> <span class="p">:</span> <span class="n">k</span><span class="p">),</span>
+      <span class="n">A</span><span class="o">-&gt;</span><span class="n">data</span><span class="p">(),</span>
+      <span class="p">(</span><span class="kt">int32_t</span><span class="p">)(</span><span class="n">transA</span> <span class="o">?</span> <span class="nl">m</span> <span class="p">:</span> <span class="n">k</span><span class="p">),</span>
+      <span class="c1">// buffer for packed matrix, pass a pre-allocated memory to avoid additional allocation/deallocation inside fbgemm</span>
+      <span class="n">packedBufA</span><span class="p">.</span><span class="n">data</span><span class="p">(),</span>
+      <span class="n">quantScaleA</span><span class="p">,</span>
+      <span class="n">quantZeropointA</span><span class="p">,</span>
+      <span class="mi">1</span><span class="p">,</span> <span class="cm">/*groups*/</span>
+      <span class="n">rowOffsetBufA</span><span class="p">.</span><span class="n">data</span><span class="p">(),</span>
+      <span class="n">params</span><span class="p">);</span>
+
+  <span class="c1">// packed matrix size of B</span>
+  <span class="kt">int</span> <span class="n">packSizeB</span> <span class="o">=</span> <span class="n">PackMatrix</span><span class="o">&lt;</span><span class="n">PackBMatrix</span><span class="o">&lt;</span><span class="kt">int8_t</span><span class="o">&gt;</span><span class="p">,</span> <span class="kt">int8_t</span><span class="o">&gt;::</span><span class="n">packedBufferSize</span><span class="p">((</span><span class="kt">int32_t</span><span class="p">)</span><span class="n">k</span><span class="p">,</span> <span class="p">(</span><span class="kt">int32_t</span><span class="p">)</span><span class="n">n</span><span class="p">);</span>
+
+  <span class="c1">// retrieve B matrix</span>
+  <span class="kt">int8_t</span><span class="o">*</span> <span class="n">dataB</span> <span class="o">=</span> <span class="n">B</span><span class="o">-&gt;</span><span class="n">data</span><span class="o">&lt;</span><span class="kt">int8_t</span><span class="o">&gt;</span><span class="p">();</span>
+
+  <span class="c1">// To avoid any repeated memory allocation and deallocation, make the scratch buffer variables static thread_local</span>
+  <span class="c1">// In a multi-threaded situation, heap access lock for the memory allocation/free could</span>
+  <span class="c1">// makes all the threads are blocked by each other. (heap contention)</span>
+  <span class="k">static</span> <span class="k">thread_local</span> <span class="n">std</span><span class="o">::</span><span class="n">vector</span><span class="o">&lt;</span><span class="kt">float</span><span class="o">&gt;</span> <span class="n">quantScaleB</span><span class="p">;</span>
+  <span class="k">if</span> <span class="p">(</span><span class="n">quantScaleB</span><span class="p">.</span><span class="n">size</span><span class="p">()</span> <span class="o">&lt;</span> <span class="n">n</span><span class="p">)</span>
+    <span class="n">quantScaleB</span><span class="p">.</span><span class="n">resize</span><span class="p">(</span><span class="n">n</span><span class="p">);</span>
+  <span class="n">memcpy</span><span class="p">(</span><span class="n">quantScaleB</span><span class="p">.</span><span class="n">data</span><span class="p">(),</span> <span class="n">dataB</span> <span class="o">+</span> <span class="n">packSizeB</span><span class="p">,</span> <span class="n">n</span> <span class="o">*</span> <span class="k">sizeof</span><span class="p">(</span><span class="kt">float</span><span class="p">));</span>
+
+  <span class="k">static</span> <span class="k">thread_local</span> <span class="n">std</span><span class="o">::</span><span class="n">vector</span><span class="o">&lt;</span><span class="kt">int32_t</span><span class="o">&gt;</span> <span class="n">quantZeropointB</span><span class="p">;</span>
+  <span class="k">if</span> <span class="p">(</span><span class="n">quantZeropointB</span><span class="p">.</span><span class="n">size</span><span class="p">()</span> <span class="o">&lt;</span> <span class="n">n</span><span class="p">)</span>
+    <span class="n">quantZeropointB</span><span class="p">.</span><span class="n">resize</span><span class="p">(</span><span class="n">n</span><span class="p">);</span>
+  <span class="n">memcpy</span><span class="p">(</span><span class="n">quantZeropointB</span><span class="p">.</span><span class="n">data</span><span class="p">(),</span> <span class="n">dataB</span> <span class="o">+</span> <span class="n">packSizeB</span> <span class="o">+</span> <span class="n">n</span> <span class="o">*</span> <span class="k">sizeof</span><span class="p">(</span><span class="kt">float</span><span class="p">),</span> <span class="n">n</span> <span class="o">*</span> <span class="k">sizeof</span><span class="p">(</span><span class="kt">int32_t</span><span class="p">));</span>
+
+  <span class="k">static</span> <span class="k">thread_local</span> <span class="n">std</span><span class="o">::</span><span class="n">vector</span><span class="o">&lt;</span><span class="kt">int32_t</span><span class="o">&gt;</span> <span class="n">colOffsetsB</span><span class="p">;</span>
+  <span class="k">if</span> <span class="p">(</span><span class="n">colOffsetsB</span><span class="p">.</span><span class="n">size</span><span class="p">()</span> <span class="o">&lt;</span> <span class="n">n</span><span class="p">)</span>
+    <span class="n">colOffsetsB</span><span class="p">.</span><span class="n">resize</span><span class="p">(</span><span class="n">n</span><span class="p">);</span>
+  <span class="n">memcpy</span><span class="p">(</span><span class="n">colOffsetsB</span><span class="p">.</span><span class="n">data</span><span class="p">(),</span> <span class="n">dataB</span> <span class="o">+</span> <span class="n">packSizeB</span> <span class="o">+</span> <span class="n">n</span> <span class="o">*</span> <span class="p">(</span><span class="k">sizeof</span><span class="p">(</span><span class="kt">float</span><span class="p">)</span> <span class="o">+</span> <span class="k">sizeof</span><span class="p">(</span><span class="kt">int32_t</span><span class="p">)),</span> <span class="n">n</span> <span class="o">*</span> <span class="k">sizeof</span><span class="p">(</span><span class="kt">int32_t</span><span class="p">));</span>
+
+  <span class="n">DoNothing</span><span class="o">&lt;</span><span class="kt">float</span><span class="p">,</span> <span class="kt">float</span><span class="o">&gt;</span> <span class="n">doNothingObj</span><span class="p">{};</span>
+  <span class="n">ReQuantizeForFloat</span><span class="o">&lt;</span><span class="nb">false</span><span class="p">,</span> <span class="n">QuantizationGranularity</span><span class="o">::</span><span class="n">OUT_CHANNEL</span><span class="o">&gt;</span> <span class="n">outputProcObj</span><span class="p">(</span>
+      <span class="n">doNothingObj</span><span class="p">,</span>
+      <span class="n">quantScaleA</span><span class="p">,</span>
+      <span class="n">quantScaleB</span><span class="p">.</span><span class="n">data</span><span class="p">(),</span>
+      <span class="n">quantZeropointA</span><span class="p">,</span>
+      <span class="n">quantZeropointB</span><span class="p">.</span><span class="n">data</span><span class="p">(),</span>
+      <span class="n">packA</span><span class="p">.</span><span class="n">getRowOffsetBuffer</span><span class="p">(),</span>
+      <span class="n">colOffsetsB</span><span class="p">.</span><span class="n">data</span><span class="p">(),</span>
+      <span class="k">nullptr</span><span class="p">,</span>
+      <span class="p">(</span><span class="n">std</span><span class="o">::</span><span class="kt">uint32_t</span><span class="p">)</span> <span class="n">n</span><span class="p">);</span>
+
+  <span class="n">PackBMatrix</span><span class="o">&lt;</span><span class="kt">int8_t</span><span class="o">&gt;</span> <span class="n">repackedB</span><span class="p">(</span>
+    <span class="n">transB</span> <span class="o">?</span> <span class="n">matrix_op_t</span><span class="o">::</span><span class="nl">Transpose</span> <span class="p">:</span> <span class="n">matrix_op_t</span><span class="o">::</span><span class="n">NoTranspose</span><span class="p">,</span> <span class="p">(</span><span class="kt">int32_t</span><span class="p">)</span> <span class="n">k</span><span class="p">,</span> <span class="p">(</span><span class="kt">int32_t</span><span class="p">)</span> <span class="n">n</span><span class="p">,</span> <span class="n">dataB</span><span class="p">,</span> <span class="p">(</span><span class="kt">int32_t</span><span class="p">)</span> <span class="p">(</span><span class="n">transB</span> <span class="o">?</span> <span class="nl">k</span> <span class="p">:</span> <span class="n">n</span><span class="p">),</span> <span class="mi">1</span><span class="p">,</span> <span class="n">params</span><span class="p">);</span>
+
+  <span class="c1">// gemm computation</span>
+  <span class="n">fbgemmPacked</span><span class="p">(</span><span class="n">packA</span><span class="p">,</span> <span class="n">repackedB</span><span class="p">,</span> <span class="n">C</span><span class="o">-&gt;</span><span class="n">data</span><span class="p">(),</span> <span class="p">(</span><span class="kt">int32_t</span><span class="o">*</span><span class="p">)</span><span class="n">C</span><span class="o">-&gt;</span><span class="n">data</span><span class="p">(),</span> <span class="p">(</span><span class="kt">int32_t</span><span class="p">)</span> <span class="n">n</span><span class="p">,</span> <span class="n">outputProcObj</span><span class="p">,</span> <span class="mi">0</span><span class="p">,</span> <span class="mi">1</span><span class="p">,</span> <span class="n">params</span><span class="p">);</span>
+<span class="p">}</span>
+
+<span class="cp">#endif </span><span class="c1">// USE_FBGEMM</span>
+
+<span class="p">}</span>  <span class="c1">// namespace variant</span>
+<span class="p">}</span>  <span class="c1">// namespace cpu</span>
+<span class="p">}</span>  <span class="c1">// namespace marian</span>
+</pre></div>
+</div>
+</div>
+
+
+           </div>
+           
+          </div>
+          <footer>
+
+  <hr/>
+
+  <div role="contentinfo">
+    <p>
+        &#169; Copyright 2021, Marian NMT Team.
+
+    </p>
+  </div>
+    
+    
+    
+    Built with <a href="https://www.sphinx-doc.org/">Sphinx</a> using a
+    
+    <a href="https://github.com/readthedocs/sphinx_rtd_theme">theme</a>
+    
+    provided by <a href="https://readthedocs.org">Read the Docs</a>. 
+
+</footer>
+        </div>
+      </div>
+
+    </section>
+
+  </div>
+  
+
+  <script type="text/javascript">
+      jQuery(function () {
+          SphinxRtdTheme.Navigation.enable(true);
+      });
+  </script>
+
+  
+  
+    
+   
+
+</body>
+</html>

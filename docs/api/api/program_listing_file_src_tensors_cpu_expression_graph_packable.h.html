@@ -1,0 +1,486 @@
+
+
+<!DOCTYPE html>
+<html class="writer-html5" lang="en" >
+<head>
+  <meta charset="utf-8" />
+  
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  
+  <title>Program Listing for File expression_graph_packable.h &mdash; Marian NMT v1.10.1 2021-02-23 documentation</title>
+  
+
+  
+  <link rel="stylesheet" href="../_static/css/theme.css" type="text/css" />
+  <link rel="stylesheet" href="../_static/pygments.css" type="text/css" />
+  <link rel="stylesheet" href="../_static/css/custom.css" type="text/css" />
+  <link rel="stylesheet" href="../_static/collapsible-lists/css/tree_view.css" type="text/css" />
+
+  
+  
+
+  
+  
+
+  
+    <link rel="canonical" href="http://marian-nmt.github.io/docs/api/api/program_listing_file_src_tensors_cpu_expression_graph_packable.h.html" />
+
+  
+  <!--[if lt IE 9]>
+    <script src="../_static/js/html5shiv.min.js"></script>
+  <![endif]-->
+  
+    
+      <script type="text/javascript" id="documentation_options" data-url_root="../" src="../_static/documentation_options.js"></script>
+        <script src="../_static/jquery.js"></script>
+        <script src="../_static/underscore.js"></script>
+        <script src="../_static/doctools.js"></script>
+        <script src="../_static/language_data.js"></script>
+        <script src="../_static/collapsible-lists/js/CollapsibleLists.compressed.js"></script>
+        <script src="../_static/collapsible-lists/js/apply-collapsible-lists.js"></script>
+    
+    <script type="text/javascript" src="../_static/js/theme.js"></script>
+
+    
+    <link rel="index" title="Index" href="../genindex.html" />
+    <link rel="search" title="Search" href="../search.html" /> 
+</head>
+
+<body class="wy-body-for-nav">
+
+   
+  <div class="wy-grid-for-nav">
+    
+    <nav data-toggle="wy-nav-shift" class="wy-nav-side">
+      <div class="wy-side-scroll">
+        <div class="wy-side-nav-search" >
+          
+
+          
+            <a href="../index.html" class="icon icon-home"> Marian NMT
+          
+
+          
+          </a>
+
+          
+            
+            
+              <div class="version">
+                v1.10.1
+              </div>
+            
+          
+
+          
+<div role="search">
+  <form id="rtd-search-form" class="wy-form" action="../search.html" method="get">
+    <input type="text" name="q" placeholder="Search docs" />
+    <input type="hidden" name="check_keywords" value="yes" />
+    <input type="hidden" name="area" value="default" />
+  </form>
+</div>
+
+          
+        </div>
+
+        
+        <div class="wy-menu wy-menu-vertical" data-spy="affix" role="navigation" aria-label="main navigation">
+          
+            
+            
+              
+            
+            
+              <p class="caption"><span class="caption-text">Contents:</span></p>
+<ul>
+<li class="toctree-l1"><a class="reference internal" href="../install.html">Installation</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../graph.html">Expression graphs</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../operators.html">Graph operations</a></li>
+<li class="toctree-l1"><a class="reference internal" href="library_index.html">Library API</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../contributing.html">How to contribute to Marian</a></li>
+</ul>
+
+            
+          
+        </div>
+        
+      </div>
+    </nav>
+
+    <section data-toggle="wy-nav-shift" class="wy-nav-content-wrap">
+
+      
+      <nav class="wy-nav-top" aria-label="top navigation">
+        
+          <i data-toggle="wy-nav-top" class="fa fa-bars"></i>
+          <a href="../index.html">Marian NMT</a>
+        
+      </nav>
+
+
+      <div class="wy-nav-content">
+        
+        <div class="rst-content">
+        
+          
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+<div role="navigation" aria-label="breadcrumbs navigation">
+
+  <ul class="wy-breadcrumbs">
+    
+      <li><a href="../index.html" class="icon icon-home"></a> &raquo;</li>
+        
+      <li>Program Listing for File expression_graph_packable.h</li>
+    
+    
+      <li class="wy-breadcrumbs-aside">
+        
+          
+            <a href="../_sources/api/program_listing_file_src_tensors_cpu_expression_graph_packable.h.rst.txt" rel="nofollow"> View page source</a>
+          
+        
+      </li>
+    
+  </ul>
+
+  
+  <hr/>
+</div>
+          <div role="main" class="document" itemscope="itemscope" itemtype="http://schema.org/Article">
+           <div itemprop="articleBody">
+            
+  <div class="section" id="program-listing-for-file-expression-graph-packable-h">
+<span id="program-listing-file-src-tensors-cpu-expression-graph-packable-h"></span><h1>Program Listing for File expression_graph_packable.h<a class="headerlink" href="#program-listing-for-file-expression-graph-packable-h" title="Permalink to this headline">¶</a></h1>
+<p>↰ <a class="reference internal" href="file_src_tensors_cpu_expression_graph_packable.h.html#file-src-tensors-cpu-expression-graph-packable-h"><span class="std std-ref">Return to documentation for file</span></a> (<code class="docutils literal notranslate"><span class="pre">src/tensors/cpu/expression_graph_packable.h</span></code>)</p>
+<div class="highlight-cpp notranslate"><div class="highlight"><pre><span></span><span class="cp">#pragma once</span>
+
+<span class="cp">#include</span> <span class="cpf">&quot;graph/expression_graph.h&quot;</span><span class="cp"></span>
+<span class="cp">#include</span> <span class="cpf">&quot;fbgemm/packed_gemm.h&quot;</span><span class="cp"></span>
+<span class="cp">#include</span> <span class="cpf">&quot;tensors/cpu/integer_common.h&quot;</span><span class="cp"></span>
+
+<span class="k">namespace</span> <span class="n">marian</span> <span class="p">{</span>
+  <span class="k">namespace</span> <span class="n">cpu</span> <span class="p">{</span>
+    <span class="kt">void</span> <span class="nf">Transpose10</span><span class="p">(</span><span class="n">marian</span><span class="o">::</span><span class="n">Tensor</span> <span class="n">out</span><span class="p">,</span> <span class="k">const</span> <span class="n">marian</span><span class="o">::</span><span class="n">Tensor</span> <span class="n">in</span><span class="p">);</span>
+  <span class="p">}</span>
+<span class="p">}</span>
+
+<span class="k">namespace</span> <span class="n">marian</span> <span class="p">{</span>
+
+
+<span class="c1">// When FBGEMM based packed GEMM is used, some weight matrices need to be packed offline.</span>
+<span class="c1">// The decision which weights can be packed or not should be done walking through the graph.</span>
+<span class="c1">// This requires some more changes, but we temporarily do this just by name (&quot;_W&quot;) of the weights.</span>
+<span class="c1">// And, this introduces a low level packed_gemm.h apis interact with high level graph class.</span>
+<span class="c1">// So, we make a subclass of ExpressionGraph and put those immature codes in this class.</span>
+<span class="c1">// We will improve this in the near future.</span>
+<span class="k">class</span> <span class="nc">ExpressionGraphPackable</span> <span class="o">:</span> <span class="k">public</span> <span class="n">ExpressionGraph</span> <span class="p">{</span>
+<span class="k">public</span><span class="o">:</span>
+  <span class="n">ExpressionGraphPackable</span><span class="p">()</span>
+    <span class="o">:</span> <span class="n">ExpressionGraph</span><span class="p">(</span> <span class="cm">/* inference =  */</span> <span class="nb">true</span><span class="p">)</span> <span class="p">{}</span> <span class="c1">// Packable expression graph only supports inference</span>
+
+  <span class="k">virtual</span> <span class="o">~</span><span class="n">ExpressionGraphPackable</span><span class="p">()</span> <span class="p">{}</span>
+
+  <span class="c1">// Convert model weights into packed format and save to IO items.</span>
+  <span class="c1">// @TODO: review this</span>
+  <span class="kt">void</span> <span class="n">packAndSave</span><span class="p">(</span><span class="k">const</span> <span class="n">std</span><span class="o">::</span><span class="n">string</span><span class="o">&amp;</span> <span class="n">name</span><span class="p">,</span> <span class="k">const</span> <span class="n">std</span><span class="o">::</span><span class="n">string</span><span class="o">&amp;</span> <span class="n">meta</span><span class="p">,</span> <span class="n">Type</span> <span class="n">gemmElementType</span> <span class="o">=</span> <span class="n">Type</span><span class="o">::</span><span class="n">float32</span><span class="p">,</span> <span class="n">Type</span> <span class="n">saveElementType</span> <span class="o">=</span> <span class="n">Type</span><span class="o">::</span><span class="n">float32</span><span class="p">)</span> <span class="p">{</span>
+    <span class="n">std</span><span class="o">::</span><span class="n">vector</span><span class="o">&lt;</span><span class="n">io</span><span class="o">::</span><span class="n">Item</span><span class="o">&gt;</span> <span class="n">ioItems</span><span class="p">;</span>
+
+    <span class="c1">// sorted by name in std::map</span>
+    <span class="k">for</span> <span class="p">(</span><span class="k">auto</span> <span class="nl">p</span> <span class="p">:</span> <span class="n">params</span><span class="p">()</span><span class="o">-&gt;</span><span class="n">getMap</span><span class="p">())</span> <span class="p">{</span>
+      <span class="n">std</span><span class="o">::</span><span class="n">string</span> <span class="n">pName</span> <span class="o">=</span> <span class="n">p</span><span class="p">.</span><span class="n">first</span><span class="p">;</span>
+
+      <span class="k">if</span> <span class="p">(</span><span class="o">!</span><span class="n">namespace_</span><span class="p">.</span><span class="n">empty</span><span class="p">())</span> <span class="p">{</span>
+        <span class="k">if</span> <span class="p">(</span><span class="n">pName</span><span class="p">.</span><span class="n">substr</span><span class="p">(</span><span class="mi">0</span><span class="p">,</span> <span class="n">namespace_</span><span class="p">.</span><span class="n">size</span><span class="p">()</span> <span class="o">+</span> <span class="mi">2</span><span class="p">)</span> <span class="o">==</span> <span class="n">namespace_</span> <span class="o">+</span> <span class="s">&quot;::&quot;</span><span class="p">)</span>
+          <span class="n">pName</span> <span class="o">=</span> <span class="n">pName</span><span class="p">.</span><span class="n">substr</span><span class="p">(</span><span class="n">namespace_</span><span class="p">.</span><span class="n">size</span><span class="p">()</span> <span class="o">+</span> <span class="mi">2</span><span class="p">);</span>
+      <span class="p">}</span>
+
+      <span class="n">Tensor</span> <span class="n">val</span> <span class="o">=</span> <span class="n">p</span><span class="p">.</span><span class="n">second</span><span class="o">-&gt;</span><span class="n">val</span><span class="p">();</span>
+
+      <span class="c1">// save as packed format</span>
+      <span class="c1">// @TODO Hardcoded to find packable weights</span>
+      <span class="c1">// int8 - all the weights used for affine op and dot op</span>
+      <span class="c1">// fp16 - all the weights used for affine op</span>
+      <span class="k">if</span> <span class="p">((</span><span class="n">gemmElementType</span> <span class="o">==</span> <span class="n">Type</span><span class="o">::</span><span class="n">packed8avx2</span> <span class="o">||</span> <span class="n">gemmElementType</span> <span class="o">==</span> <span class="n">Type</span><span class="o">::</span><span class="n">packed8avx512</span><span class="p">)</span>
+        <span class="o">&amp;&amp;</span> <span class="p">(</span><span class="n">pName</span><span class="p">.</span><span class="n">find</span><span class="p">(</span><span class="s">&quot;_W&quot;</span><span class="p">)</span> <span class="o">==</span> <span class="n">pName</span><span class="p">.</span><span class="n">length</span><span class="p">()</span> <span class="o">-</span> <span class="mi">3</span> <span class="o">||</span> <span class="n">pName</span><span class="p">.</span><span class="n">find</span><span class="p">(</span><span class="s">&quot;_W&quot;</span><span class="p">)</span> <span class="o">==</span> <span class="n">pName</span><span class="p">.</span><span class="n">length</span><span class="p">()</span> <span class="o">-</span> <span class="mi">2</span><span class="p">))</span> <span class="p">{</span>
+<span class="cp">#if USE_FBGEMM</span>
+        <span class="k">using</span> <span class="k">namespace</span> <span class="n">marian</span><span class="o">::</span><span class="n">cpu</span><span class="o">::</span><span class="n">variant</span><span class="p">;</span>
+        <span class="c1">// packing information - size</span>
+        <span class="kt">int</span> <span class="n">nrow</span><span class="p">;</span>
+        <span class="kt">int</span> <span class="n">ncol</span><span class="p">;</span>
+        <span class="kt">uint64_t</span> <span class="n">packsize</span><span class="p">;</span>
+
+        <span class="n">fbgemmPacked8PackInfo</span><span class="p">(</span><span class="n">val</span><span class="o">-&gt;</span><span class="n">shape</span><span class="p">(),</span>
+                              <span class="n">gemmElementType</span><span class="p">,</span>
+                              <span class="n">pName</span><span class="p">.</span><span class="n">find</span><span class="p">(</span><span class="s">&quot;Wemb&quot;</span><span class="p">)</span> <span class="o">!=</span> <span class="n">std</span><span class="o">::</span><span class="n">string</span><span class="o">::</span><span class="n">npos</span><span class="p">,</span>
+                              <span class="n">nrow</span><span class="p">,</span>
+                              <span class="n">ncol</span><span class="p">,</span>
+                              <span class="n">packsize</span><span class="p">);</span>
+
+        <span class="k">auto</span> <span class="n">allocator</span> <span class="o">=</span> <span class="n">New</span><span class="o">&lt;</span><span class="n">TensorAllocator</span><span class="o">&gt;</span><span class="p">(</span><span class="n">getBackend</span><span class="p">());</span>
+
+        <span class="c1">// buffer tensor to save packed matrix</span>
+        <span class="n">Tensor</span> <span class="n">packedTensor</span><span class="p">;</span>
+        <span class="n">allocator</span><span class="o">-&gt;</span><span class="n">allocate</span><span class="p">(</span><span class="n">packedTensor</span><span class="p">,</span> <span class="p">{</span> <span class="mi">1</span><span class="p">,</span> <span class="p">(</span><span class="kt">int32_t</span><span class="p">)</span><span class="n">packsize</span> <span class="p">},</span> <span class="n">Type</span><span class="o">::</span><span class="n">uint8</span><span class="p">);</span>
+
+        <span class="c1">//Pack B matrix into int8</span>
+        <span class="n">fbgemmPacked8Pack</span><span class="p">(</span><span class="n">packedTensor</span><span class="p">,</span>
+                          <span class="n">val</span><span class="o">-&gt;</span><span class="n">data</span><span class="p">(),</span>
+                          <span class="n">gemmElementType</span><span class="p">,</span>
+                          <span class="n">pName</span><span class="p">.</span><span class="n">find</span><span class="p">(</span><span class="s">&quot;Wemb&quot;</span><span class="p">)</span> <span class="o">!=</span> <span class="n">std</span><span class="o">::</span><span class="n">string</span><span class="o">::</span><span class="n">npos</span><span class="p">,</span>
+                          <span class="n">nrow</span><span class="p">,</span>
+                          <span class="n">ncol</span><span class="p">,</span>
+                          <span class="n">packsize</span><span class="p">);</span>
+        <span class="n">io</span><span class="o">::</span><span class="n">Item</span> <span class="n">item</span><span class="p">;</span>
+        <span class="n">item</span><span class="p">.</span><span class="n">name</span> <span class="o">=</span> <span class="n">pName</span><span class="p">;</span>
+        <span class="n">item</span><span class="p">.</span><span class="n">shape</span> <span class="o">=</span> <span class="n">val</span><span class="o">-&gt;</span><span class="n">shape</span><span class="p">();</span>
+        <span class="n">item</span><span class="p">.</span><span class="n">type</span> <span class="o">=</span> <span class="n">gemmElementType</span><span class="p">;</span>
+
+        <span class="c1">// Use the actual memory as this will be aligned and padded.</span>
+        <span class="c1">// When memory mapping this is required. Shape keeps track of</span>
+        <span class="c1">// tensor size. Saving to *.npz will cut to size.</span>
+        <span class="k">auto</span> <span class="n">mem</span> <span class="o">=</span> <span class="n">packedTensor</span><span class="o">-&gt;</span><span class="n">memory</span><span class="p">();</span>
+        <span class="n">item</span><span class="p">.</span><span class="n">bytes</span><span class="p">.</span><span class="n">resize</span><span class="p">(</span><span class="n">mem</span><span class="o">-&gt;</span><span class="n">size</span><span class="p">());</span>
+        <span class="n">copy</span><span class="p">(</span><span class="n">backend_</span><span class="p">,</span> <span class="n">mem</span><span class="o">-&gt;</span><span class="n">data</span><span class="o">&lt;</span><span class="kt">char</span><span class="o">&gt;</span><span class="p">(),</span> <span class="n">mem</span><span class="o">-&gt;</span><span class="n">data</span><span class="o">&lt;</span><span class="kt">char</span><span class="o">&gt;</span><span class="p">()</span> <span class="o">+</span> <span class="n">mem</span><span class="o">-&gt;</span><span class="n">size</span><span class="p">(),</span> <span class="n">item</span><span class="p">.</span><span class="n">bytes</span><span class="p">.</span><span class="n">data</span><span class="p">());</span>
+
+        <span class="n">ioItems</span><span class="p">.</span><span class="n">emplace_back</span><span class="p">(</span><span class="n">std</span><span class="o">::</span><span class="n">move</span><span class="p">(</span><span class="n">item</span><span class="p">));</span>
+<span class="cp">#else</span>
+        <span class="n">ABORT</span><span class="p">(</span><span class="s">&quot;Packed type {} only supported when compiled with -DUSE_FBGEMM=on&quot;</span><span class="p">,</span> <span class="n">gemmElementType</span><span class="p">);</span>
+<span class="cp">#endif</span>
+      <span class="c1">// fp16 quantization option</span>
+      <span class="p">}</span> <span class="k">else</span> <span class="k">if</span> <span class="p">(</span><span class="n">gemmElementType</span> <span class="o">==</span> <span class="n">Type</span><span class="o">::</span><span class="n">packed16</span> <span class="o">&amp;&amp;</span> <span class="n">pName</span><span class="p">.</span><span class="n">find</span><span class="p">(</span><span class="s">&quot;_W&quot;</span><span class="p">)</span> <span class="o">==</span> <span class="n">pName</span><span class="p">.</span><span class="n">length</span><span class="p">()</span> <span class="o">-</span> <span class="mi">3</span><span class="p">)</span> <span class="p">{</span>
+<span class="cp">#if USE_FBGEMM</span>
+        <span class="k">using</span> <span class="k">namespace</span> <span class="n">marian</span><span class="o">::</span><span class="n">cpu</span><span class="o">::</span><span class="n">variant</span><span class="p">;</span>
+
+        <span class="c1">// packing information</span>
+        <span class="kt">int</span> <span class="n">nrow</span><span class="p">,</span> <span class="n">ncol</span><span class="p">,</span> <span class="n">kernel_ncol_blocks</span><span class="p">,</span> <span class="n">brow</span><span class="p">,</span> <span class="n">bcol</span><span class="p">,</span> <span class="n">last_brow</span><span class="p">,</span> <span class="n">nbrow</span><span class="p">,</span> <span class="n">nbcol</span><span class="p">;</span>
+        <span class="kt">uint64_t</span> <span class="n">packsize</span><span class="p">;</span>
+
+        <span class="n">fbgemmPacked16PackInfo</span><span class="p">(</span><span class="n">val</span><span class="o">-&gt;</span><span class="n">shape</span><span class="p">(),</span>
+          <span class="nb">false</span><span class="p">,</span>
+          <span class="n">nrow</span><span class="p">,</span>
+          <span class="n">ncol</span><span class="p">,</span>
+          <span class="n">kernel_ncol_blocks</span><span class="p">,</span>
+          <span class="n">brow</span><span class="p">,</span>
+          <span class="n">bcol</span><span class="p">,</span>
+          <span class="n">last_brow</span><span class="p">,</span>
+          <span class="n">nbrow</span><span class="p">,</span>
+          <span class="n">nbcol</span><span class="p">,</span>
+          <span class="n">packsize</span><span class="p">);</span>
+
+        <span class="k">auto</span> <span class="n">allocator</span> <span class="o">=</span> <span class="n">New</span><span class="o">&lt;</span><span class="n">TensorAllocator</span><span class="o">&gt;</span><span class="p">(</span><span class="n">getBackend</span><span class="p">());</span>
+
+        <span class="n">Tensor</span> <span class="n">packedTensor</span><span class="p">;</span>
+        <span class="n">allocator</span><span class="o">-&gt;</span><span class="n">allocate</span><span class="p">(</span><span class="n">packedTensor</span><span class="p">,</span> <span class="p">{</span> <span class="mi">1</span><span class="p">,</span> <span class="p">(</span><span class="kt">int32_t</span><span class="p">)</span><span class="n">packsize</span> <span class="p">},</span> <span class="n">Type</span><span class="o">::</span><span class="n">uint8</span><span class="p">);</span>
+
+        <span class="c1">// fbgemmPacked16Pack</span>
+        <span class="n">fbgemmPacked16Pack</span><span class="p">(</span><span class="n">packedTensor</span><span class="p">,</span>
+          <span class="n">val</span><span class="o">-&gt;</span><span class="n">data</span><span class="p">(),</span>
+          <span class="nb">false</span><span class="p">,</span>
+          <span class="n">nrow</span><span class="p">,</span>
+          <span class="n">ncol</span><span class="p">,</span>
+          <span class="n">kernel_ncol_blocks</span><span class="p">,</span>
+          <span class="n">brow</span><span class="p">,</span>
+          <span class="n">bcol</span><span class="p">,</span>
+          <span class="n">last_brow</span><span class="p">,</span>
+          <span class="n">nbrow</span><span class="p">,</span>
+          <span class="n">nbcol</span><span class="p">,</span>
+          <span class="n">packsize</span><span class="p">);</span>
+        <span class="n">io</span><span class="o">::</span><span class="n">Item</span> <span class="n">item</span><span class="p">;</span>
+        <span class="n">item</span><span class="p">.</span><span class="n">name</span> <span class="o">=</span> <span class="n">pName</span><span class="p">;</span>
+        <span class="n">item</span><span class="p">.</span><span class="n">shape</span> <span class="o">=</span> <span class="n">val</span><span class="o">-&gt;</span><span class="n">shape</span><span class="p">();</span>
+        <span class="n">item</span><span class="p">.</span><span class="n">type</span> <span class="o">=</span> <span class="n">Type</span><span class="o">::</span><span class="n">packed16</span><span class="p">;</span>
+
+        <span class="c1">// Use the actual memory as this will be aligned and padded.</span>
+        <span class="c1">// When memory mapping this is required. Shape keeps track of</span>
+        <span class="c1">// tensor size. Saving to *.npz will cut to size.</span>
+        <span class="k">auto</span> <span class="n">mem</span> <span class="o">=</span> <span class="n">packedTensor</span><span class="o">-&gt;</span><span class="n">memory</span><span class="p">();</span>
+        <span class="n">item</span><span class="p">.</span><span class="n">bytes</span><span class="p">.</span><span class="n">resize</span><span class="p">(</span><span class="n">mem</span><span class="o">-&gt;</span><span class="n">size</span><span class="p">());</span>
+        <span class="n">copy</span><span class="p">(</span><span class="n">backend_</span><span class="p">,</span> <span class="n">mem</span><span class="o">-&gt;</span><span class="n">data</span><span class="o">&lt;</span><span class="kt">char</span><span class="o">&gt;</span><span class="p">(),</span> <span class="n">mem</span><span class="o">-&gt;</span><span class="n">data</span><span class="o">&lt;</span><span class="kt">char</span><span class="o">&gt;</span><span class="p">()</span> <span class="o">+</span> <span class="n">mem</span><span class="o">-&gt;</span><span class="n">size</span><span class="p">(),</span> <span class="n">item</span><span class="p">.</span><span class="n">bytes</span><span class="p">.</span><span class="n">data</span><span class="p">());</span>
+
+        <span class="n">ioItems</span><span class="p">.</span><span class="n">emplace_back</span><span class="p">(</span><span class="n">std</span><span class="o">::</span><span class="n">move</span><span class="p">(</span><span class="n">item</span><span class="p">));</span>
+<span class="cp">#else</span>
+        <span class="n">ABORT</span><span class="p">(</span><span class="s">&quot;Packed type {} only supported when compiled with -DUSE_FBGEMM=on&quot;</span><span class="p">,</span> <span class="n">gemmElementType</span><span class="p">);</span>
+<span class="cp">#endif</span>
+      <span class="p">}</span> <span class="k">else</span> <span class="k">if</span> <span class="p">(</span><span class="n">isIntgemm</span><span class="p">(</span><span class="n">gemmElementType</span><span class="p">)</span> <span class="o">&amp;&amp;</span>
+      <span class="p">(</span><span class="n">pName</span><span class="p">.</span><span class="n">find</span><span class="p">(</span><span class="s">&quot;_W&quot;</span><span class="p">)</span> <span class="o">==</span> <span class="n">pName</span><span class="p">.</span><span class="n">length</span><span class="p">()</span> <span class="o">-</span> <span class="mi">3</span> <span class="o">||</span> <span class="n">pName</span><span class="p">.</span><span class="n">find</span><span class="p">(</span><span class="s">&quot;_W&quot;</span><span class="p">)</span> <span class="o">==</span> <span class="n">pName</span><span class="p">.</span><span class="n">length</span><span class="p">()</span> <span class="o">-</span> <span class="mi">2</span> <span class="cm">/* || pName.find(&quot;Wemb&quot;) != std::string::npos*/</span><span class="p">))</span> <span class="p">{</span>
+<span class="cp">#if COMPILE_CPU</span>
+        <span class="k">using</span> <span class="n">cpu</span><span class="o">::</span><span class="n">integer</span><span class="o">::</span><span class="n">cols</span><span class="p">;</span>
+        <span class="k">using</span> <span class="n">cpu</span><span class="o">::</span><span class="n">integer</span><span class="o">::</span><span class="n">rows</span><span class="p">;</span>
+        <span class="k">auto</span> <span class="n">allocator</span> <span class="o">=</span> <span class="n">New</span><span class="o">&lt;</span><span class="n">TensorAllocator</span><span class="o">&gt;</span><span class="p">(</span><span class="n">getBackend</span><span class="p">());</span>
+
+        <span class="n">Tensor</span> <span class="n">paramMat</span><span class="p">;</span> <span class="c1">//This allocates extra 4 bytes at the end because of gemmElementType</span>
+        <span class="n">allocator</span><span class="o">-&gt;</span><span class="n">allocate</span><span class="p">(</span><span class="n">paramMat</span><span class="p">,</span> <span class="n">val</span><span class="o">-&gt;</span><span class="n">shape</span><span class="p">(),</span> <span class="n">gemmElementType</span><span class="p">);</span>
+
+        <span class="c1">// Compute QuantMultiplier, compress matrix and store quantMult at the end.</span>
+        <span class="c1">// We need to tranpose first, because of our architecture independet format requiring a transposed matrix</span>
+        <span class="n">Tensor</span> <span class="n">tmp</span><span class="p">;</span>
+        <span class="n">allocator</span><span class="o">-&gt;</span><span class="n">allocate</span><span class="p">(</span><span class="n">tmp</span><span class="p">,</span> <span class="n">val</span><span class="o">-&gt;</span><span class="n">shape</span><span class="p">(),</span> <span class="n">val</span><span class="o">-&gt;</span><span class="n">type</span><span class="p">());</span>
+        <span class="n">cpu</span><span class="o">::</span><span class="n">Transpose10</span><span class="p">(</span><span class="n">tmp</span><span class="p">,</span> <span class="n">val</span><span class="p">);</span>
+
+        <span class="k">if</span><span class="p">(</span><span class="n">sizeOf</span><span class="p">(</span><span class="n">gemmElementType</span><span class="p">)</span> <span class="o">==</span> <span class="mi">1</span><span class="p">)</span> <span class="p">{</span> <span class="c1">// is 8-bit Intgemm type</span>
+          <span class="kt">float</span> <span class="n">quantMult</span> <span class="o">=</span> <span class="n">cpu</span><span class="o">::</span><span class="n">integer</span><span class="o">::</span><span class="n">computeQuantMult</span><span class="o">&lt;</span><span class="n">Type</span><span class="o">::</span><span class="n">intgemm8</span><span class="o">&gt;</span><span class="p">(</span><span class="n">val</span><span class="p">);</span>
+
+          <span class="c1">// Hardware-specific conversions which allow to implement memory-mapping and avoid conversion at runtime</span>
+          <span class="n">cpu</span><span class="o">::</span><span class="n">integer</span><span class="o">::</span><span class="n">passOrAbort</span><span class="p">(</span><span class="n">gemmElementType</span><span class="p">);</span> <span class="c1">// Check if the hardware supports the GEMM type</span>
+          <span class="k">if</span><span class="p">(</span><span class="n">isSsse3</span><span class="p">(</span><span class="n">gemmElementType</span><span class="p">))</span> <span class="p">{</span>
+            <span class="n">intgemm</span><span class="o">::</span><span class="n">ssse3</span><span class="o">::</span><span class="n">Kernels8</span><span class="o">::</span><span class="n">PrepareBTransposed</span><span class="p">(</span><span class="n">tmp</span><span class="o">-&gt;</span><span class="n">data</span><span class="p">(),</span> <span class="cm">/*input*/</span>
+                                                    <span class="n">paramMat</span><span class="o">-&gt;</span><span class="n">data</span><span class="o">&lt;</span><span class="kt">int8_t</span><span class="o">&gt;</span><span class="p">(),</span> <span class="cm">/*output*/</span>
+                                                    <span class="n">quantMult</span><span class="p">,</span> <span class="cm">/*Quant Mult*/</span>
+                                                    <span class="n">rows</span><span class="p">(</span><span class="n">val</span><span class="p">),</span>
+                                                    <span class="n">cols</span><span class="p">(</span><span class="n">val</span><span class="p">));</span>
+          <span class="p">}</span> <span class="k">else</span> <span class="k">if</span><span class="p">(</span><span class="n">isAvx2</span><span class="p">(</span><span class="n">gemmElementType</span><span class="p">))</span> <span class="p">{</span>
+            <span class="n">intgemm</span><span class="o">::</span><span class="n">avx2</span><span class="o">::</span><span class="n">Kernels8</span><span class="o">::</span><span class="n">PrepareBTransposed</span><span class="p">(</span><span class="n">tmp</span><span class="o">-&gt;</span><span class="n">data</span><span class="p">(),</span> <span class="cm">/*input*/</span>
+                                                   <span class="n">paramMat</span><span class="o">-&gt;</span><span class="n">data</span><span class="o">&lt;</span><span class="kt">int8_t</span><span class="o">&gt;</span><span class="p">(),</span> <span class="cm">/*output*/</span>
+                                                   <span class="n">quantMult</span><span class="p">,</span> <span class="cm">/*Quant Mult*/</span>
+                                                   <span class="n">rows</span><span class="p">(</span><span class="n">val</span><span class="p">),</span>
+                                                   <span class="n">cols</span><span class="p">(</span><span class="n">val</span><span class="p">));</span>
+          <span class="p">}</span> <span class="k">else</span> <span class="k">if</span><span class="p">(</span><span class="n">isAvx512</span><span class="p">(</span><span class="n">gemmElementType</span><span class="p">))</span> <span class="p">{</span>
+            <span class="n">intgemm</span><span class="o">::</span><span class="n">avx512bw</span><span class="o">::</span><span class="n">Kernels8</span><span class="o">::</span><span class="n">PrepareBTransposed</span><span class="p">(</span><span class="n">tmp</span><span class="o">-&gt;</span><span class="n">data</span><span class="p">(),</span> <span class="cm">/*input*/</span>
+                                                     <span class="n">paramMat</span><span class="o">-&gt;</span><span class="n">data</span><span class="o">&lt;</span><span class="kt">int8_t</span><span class="o">&gt;</span><span class="p">(),</span> <span class="cm">/*output*/</span>
+                                                     <span class="n">quantMult</span><span class="p">,</span> <span class="cm">/*Quant Mult*/</span>
+                                                     <span class="n">rows</span><span class="p">(</span><span class="n">val</span><span class="p">),</span>
+                                                     <span class="n">cols</span><span class="p">(</span><span class="n">val</span><span class="p">));</span>
+          <span class="p">}</span> <span class="k">else</span> <span class="p">{</span>
+            <span class="n">ABORT_IF</span><span class="p">(</span><span class="n">gemmElementType</span> <span class="o">!=</span> <span class="n">Type</span><span class="o">::</span><span class="n">intgemm8</span><span class="p">,</span> <span class="s">&quot;Type {} is not supported&quot;</span><span class="p">,</span> <span class="n">gemmElementType</span><span class="p">);</span> <span class="c1">// shouldn&#39;t really happen, but let&#39;s make sure</span>
+            <span class="n">intgemm</span><span class="o">::</span><span class="n">Int8</span><span class="o">::</span><span class="n">PrepareA</span><span class="p">(</span><span class="n">tmp</span><span class="o">-&gt;</span><span class="n">data</span><span class="p">(),</span> <span class="cm">/*input*/</span>
+                                    <span class="n">paramMat</span><span class="o">-&gt;</span><span class="n">data</span><span class="o">&lt;</span><span class="kt">int8_t</span><span class="o">&gt;</span><span class="p">(),</span> <span class="cm">/*output*/</span>
+                                    <span class="n">quantMult</span><span class="p">,</span> <span class="cm">/*Quant Mult*/</span>
+                                    <span class="n">rows</span><span class="p">(</span><span class="n">val</span><span class="p">),</span>
+                                    <span class="n">cols</span><span class="p">(</span><span class="n">val</span><span class="p">));</span>
+          <span class="p">}</span>
+          <span class="c1">//Put the quantMult at the back of the tensor</span>
+          <span class="n">cpu</span><span class="o">::</span><span class="n">integer</span><span class="o">::</span><span class="n">getQuantMult</span><span class="o">&lt;</span><span class="n">Type</span><span class="o">::</span><span class="n">intgemm8</span><span class="o">&gt;</span><span class="p">(</span><span class="n">paramMat</span><span class="p">)</span> <span class="o">=</span> <span class="n">quantMult</span><span class="p">;</span>
+
+        <span class="p">}</span> <span class="k">else</span> <span class="k">if</span><span class="p">(</span><span class="n">sizeOf</span><span class="p">(</span><span class="n">gemmElementType</span><span class="p">)</span> <span class="o">==</span> <span class="mi">2</span><span class="p">)</span> <span class="p">{</span> <span class="c1">// is 16-bit Intgemm type</span>
+          <span class="kt">float</span> <span class="n">quantMult</span> <span class="o">=</span> <span class="n">cpu</span><span class="o">::</span><span class="n">integer</span><span class="o">::</span><span class="n">computeQuantMult</span><span class="o">&lt;</span><span class="n">Type</span><span class="o">::</span><span class="n">intgemm16</span><span class="o">&gt;</span><span class="p">(</span><span class="n">val</span><span class="p">);</span>
+
+           <span class="c1">// Hardware-specific conversions which allow to implement memory-mapping and avoid conversion at runtime</span>
+           <span class="n">cpu</span><span class="o">::</span><span class="n">integer</span><span class="o">::</span><span class="n">passOrAbort</span><span class="p">(</span><span class="n">gemmElementType</span><span class="p">);</span> <span class="c1">// Check if the hardware supports the GEMM type</span>
+          <span class="k">if</span><span class="p">(</span><span class="n">isSse2</span><span class="p">(</span><span class="n">gemmElementType</span><span class="p">))</span> <span class="p">{</span>
+            <span class="n">intgemm</span><span class="o">::</span><span class="n">sse2</span><span class="o">::</span><span class="n">Kernels16</span><span class="o">::</span><span class="n">PrepareBTransposed</span><span class="p">(</span><span class="n">tmp</span><span class="o">-&gt;</span><span class="n">data</span><span class="p">(),</span> <span class="cm">/*input*/</span>
+                                                    <span class="n">paramMat</span><span class="o">-&gt;</span><span class="n">data</span><span class="o">&lt;</span><span class="kt">int16_t</span><span class="o">&gt;</span><span class="p">(),</span> <span class="cm">/*output*/</span>
+                                                    <span class="n">quantMult</span><span class="p">,</span> <span class="cm">/*Quant Mult*/</span>
+                                                    <span class="n">rows</span><span class="p">(</span><span class="n">val</span><span class="p">),</span>
+                                                    <span class="n">cols</span><span class="p">(</span><span class="n">val</span><span class="p">));</span>
+          <span class="p">}</span> <span class="k">else</span> <span class="k">if</span><span class="p">(</span><span class="n">isAvx2</span><span class="p">(</span><span class="n">gemmElementType</span><span class="p">))</span> <span class="p">{</span>
+            <span class="n">intgemm</span><span class="o">::</span><span class="n">avx2</span><span class="o">::</span><span class="n">Kernels16</span><span class="o">::</span><span class="n">PrepareBTransposed</span><span class="p">(</span><span class="n">tmp</span><span class="o">-&gt;</span><span class="n">data</span><span class="p">(),</span> <span class="cm">/*input*/</span>
+                                                    <span class="n">paramMat</span><span class="o">-&gt;</span><span class="n">data</span><span class="o">&lt;</span><span class="kt">int16_t</span><span class="o">&gt;</span><span class="p">(),</span> <span class="cm">/*output*/</span>
+                                                    <span class="n">quantMult</span><span class="p">,</span> <span class="cm">/*Quant Mult*/</span>
+                                                    <span class="n">rows</span><span class="p">(</span><span class="n">val</span><span class="p">),</span>
+                                                    <span class="n">cols</span><span class="p">(</span><span class="n">val</span><span class="p">));</span>
+          <span class="p">}</span> <span class="k">else</span> <span class="k">if</span><span class="p">(</span><span class="n">isAvx512</span><span class="p">(</span><span class="n">gemmElementType</span><span class="p">))</span> <span class="p">{</span>
+            <span class="n">intgemm</span><span class="o">::</span><span class="n">avx512bw</span><span class="o">::</span><span class="n">Kernels16</span><span class="o">::</span><span class="n">PrepareBTransposed</span><span class="p">(</span><span class="n">tmp</span><span class="o">-&gt;</span><span class="n">data</span><span class="p">(),</span> <span class="cm">/*input*/</span>
+                                                      <span class="n">paramMat</span><span class="o">-&gt;</span><span class="n">data</span><span class="o">&lt;</span><span class="kt">int16_t</span><span class="o">&gt;</span><span class="p">(),</span> <span class="cm">/*output*/</span>
+                                                      <span class="n">quantMult</span><span class="p">,</span> <span class="cm">/*Quant Mult*/</span>
+                                                      <span class="n">rows</span><span class="p">(</span><span class="n">val</span><span class="p">),</span>
+                                                      <span class="n">cols</span><span class="p">(</span><span class="n">val</span><span class="p">));</span>
+          <span class="p">}</span> <span class="k">else</span> <span class="p">{</span>
+            <span class="n">ABORT_IF</span><span class="p">(</span><span class="n">gemmElementType</span> <span class="o">!=</span> <span class="n">Type</span><span class="o">::</span><span class="n">intgemm16</span><span class="p">,</span> <span class="s">&quot;Type {} is not supported&quot;</span><span class="p">,</span> <span class="n">gemmElementType</span><span class="p">);</span> <span class="c1">// shouldn&#39;t really happen, but let&#39;s make sure</span>
+            <span class="n">intgemm</span><span class="o">::</span><span class="n">Int16</span><span class="o">::</span><span class="n">PrepareA</span><span class="p">(</span><span class="n">tmp</span><span class="o">-&gt;</span><span class="n">data</span><span class="p">(),</span> <span class="cm">/*input*/</span>
+                                     <span class="n">paramMat</span><span class="o">-&gt;</span><span class="n">data</span><span class="o">&lt;</span><span class="kt">int16_t</span><span class="o">&gt;</span><span class="p">(),</span> <span class="cm">/*output*/</span>
+                                     <span class="n">quantMult</span><span class="p">,</span> <span class="cm">/*Quant Mult*/</span>
+                                     <span class="n">rows</span><span class="p">(</span><span class="n">val</span><span class="p">),</span>
+                                     <span class="n">cols</span><span class="p">(</span><span class="n">val</span><span class="p">));</span>
+          <span class="p">}</span>
+          <span class="c1">//Put the quantMult at the back of the tensor</span>
+          <span class="n">cpu</span><span class="o">::</span><span class="n">integer</span><span class="o">::</span><span class="n">getQuantMult</span><span class="o">&lt;</span><span class="n">Type</span><span class="o">::</span><span class="n">intgemm16</span><span class="o">&gt;</span><span class="p">(</span><span class="n">paramMat</span><span class="p">)</span> <span class="o">=</span> <span class="n">quantMult</span><span class="p">;</span>
+
+        <span class="p">}</span> <span class="k">else</span> <span class="p">{</span>
+          <span class="n">ABORT</span><span class="p">(</span><span class="s">&quot;Incorrect Intgemm type size: {}&quot;</span><span class="p">,</span> <span class="n">sizeOf</span><span class="p">(</span><span class="n">gemmElementType</span><span class="p">));</span>
+        <span class="p">}</span>
+
+        <span class="c1">//Save... Same as the fbgemm case</span>
+        <span class="n">io</span><span class="o">::</span><span class="n">Item</span> <span class="n">item</span><span class="p">;</span>
+        <span class="n">item</span><span class="p">.</span><span class="n">name</span> <span class="o">=</span> <span class="n">pName</span><span class="p">;</span>
+        <span class="n">item</span><span class="p">.</span><span class="n">shape</span> <span class="o">=</span> <span class="n">val</span><span class="o">-&gt;</span><span class="n">shape</span><span class="p">();</span>
+        <span class="n">item</span><span class="p">.</span><span class="n">type</span> <span class="o">=</span> <span class="n">gemmElementType</span><span class="p">;</span>
+
+        <span class="k">auto</span> <span class="n">mem</span> <span class="o">=</span> <span class="n">paramMat</span><span class="o">-&gt;</span><span class="n">memory</span><span class="p">();</span>
+        <span class="n">item</span><span class="p">.</span><span class="n">bytes</span><span class="p">.</span><span class="n">resize</span><span class="p">(</span><span class="n">mem</span><span class="o">-&gt;</span><span class="n">size</span><span class="p">());</span>
+        <span class="n">copy</span><span class="p">(</span><span class="n">backend_</span><span class="p">,</span> <span class="n">mem</span><span class="o">-&gt;</span><span class="n">data</span><span class="o">&lt;</span><span class="kt">char</span><span class="o">&gt;</span><span class="p">(),</span> <span class="n">mem</span><span class="o">-&gt;</span><span class="n">data</span><span class="o">&lt;</span><span class="kt">char</span><span class="o">&gt;</span><span class="p">()</span> <span class="o">+</span> <span class="n">mem</span><span class="o">-&gt;</span><span class="n">size</span><span class="p">(),</span> <span class="n">item</span><span class="p">.</span><span class="n">bytes</span><span class="p">.</span><span class="n">data</span><span class="p">());</span>
+        <span class="n">ioItems</span><span class="p">.</span><span class="n">emplace_back</span><span class="p">(</span><span class="n">std</span><span class="o">::</span><span class="n">move</span><span class="p">(</span><span class="n">item</span><span class="p">));</span>
+<span class="cp">#else</span>
+        <span class="n">ABORT</span><span class="p">(</span><span class="s">&quot;Packed type {} only supported when compiled with -DCOMPILE_CPU=on&quot;</span><span class="p">,</span> <span class="n">gemmElementType</span><span class="p">);</span>
+<span class="cp">#endif</span>
+      <span class="p">}</span> <span class="k">else</span> <span class="p">{</span>
+        <span class="n">ABORT_IF</span><span class="p">(</span><span class="n">saveElementType</span> <span class="o">!=</span> <span class="n">Type</span><span class="o">::</span><span class="n">float32</span><span class="p">,</span> <span class="s">&quot;We currently do not know how to save matrices as {}&quot;</span><span class="p">,</span> <span class="n">saveElementType</span><span class="p">);</span>
+        <span class="n">io</span><span class="o">::</span><span class="n">Item</span> <span class="n">item</span><span class="p">;</span>
+        <span class="n">val</span><span class="o">-&gt;</span><span class="n">get</span><span class="p">(</span><span class="n">item</span><span class="p">,</span> <span class="n">pName</span><span class="p">);</span>
+        <span class="n">item</span><span class="p">.</span><span class="n">convert</span><span class="p">(</span><span class="n">saveElementType</span><span class="p">);</span>
+        <span class="n">ioItems</span><span class="p">.</span><span class="n">emplace_back</span><span class="p">(</span><span class="n">std</span><span class="o">::</span><span class="n">move</span><span class="p">(</span><span class="n">item</span><span class="p">));</span>
+      <span class="p">}</span>
+    <span class="p">}</span>
+
+    <span class="k">if</span> <span class="p">(</span><span class="o">!</span><span class="n">meta</span><span class="p">.</span><span class="n">empty</span><span class="p">())</span>
+      <span class="n">io</span><span class="o">::</span><span class="n">addMetaToItems</span><span class="p">(</span><span class="n">meta</span><span class="p">,</span> <span class="s">&quot;special:model.yml&quot;</span><span class="p">,</span> <span class="n">ioItems</span><span class="p">);</span>
+    <span class="n">io</span><span class="o">::</span><span class="n">saveItems</span><span class="p">(</span><span class="n">name</span><span class="p">,</span> <span class="n">ioItems</span><span class="p">);</span>
+  <span class="p">}</span>
+<span class="p">};</span>
+
+<span class="p">}</span>  <span class="c1">// namespace marian</span>
+</pre></div>
+</div>
+</div>
+
+
+           </div>
+           
+          </div>
+          <footer>
+
+  <hr/>
+
+  <div role="contentinfo">
+    <p>
+        &#169; Copyright 2021, Marian NMT Team.
+
+    </p>
+  </div>
+    
+    
+    
+    Built with <a href="https://www.sphinx-doc.org/">Sphinx</a> using a
+    
+    <a href="https://github.com/readthedocs/sphinx_rtd_theme">theme</a>
+    
+    provided by <a href="https://readthedocs.org">Read the Docs</a>. 
+
+</footer>
+        </div>
+      </div>
+
+    </section>
+
+  </div>
+  
+
+  <script type="text/javascript">
+      jQuery(function () {
+          SphinxRtdTheme.Navigation.enable(true);
+      });
+  </script>
+
+  
+  
+    
+   
+
+</body>
+</html>

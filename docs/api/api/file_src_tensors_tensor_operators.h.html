@@ -1,0 +1,344 @@
+
+
+<!DOCTYPE html>
+<html class="writer-html5" lang="en" >
+<head>
+  <meta charset="utf-8" />
+  
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  
+  <title>File tensor_operators.h &mdash; Marian NMT v1.10.1 2021-02-23 documentation</title>
+  
+
+  
+  <link rel="stylesheet" href="../_static/css/theme.css" type="text/css" />
+  <link rel="stylesheet" href="../_static/pygments.css" type="text/css" />
+  <link rel="stylesheet" href="../_static/css/custom.css" type="text/css" />
+  <link rel="stylesheet" href="../_static/collapsible-lists/css/tree_view.css" type="text/css" />
+
+  
+  
+
+  
+  
+
+  
+    <link rel="canonical" href="http://marian-nmt.github.io/docs/api/api/file_src_tensors_tensor_operators.h.html" />
+
+  
+  <!--[if lt IE 9]>
+    <script src="../_static/js/html5shiv.min.js"></script>
+  <![endif]-->
+  
+    
+      <script type="text/javascript" id="documentation_options" data-url_root="../" src="../_static/documentation_options.js"></script>
+        <script src="../_static/jquery.js"></script>
+        <script src="../_static/underscore.js"></script>
+        <script src="../_static/doctools.js"></script>
+        <script src="../_static/language_data.js"></script>
+        <script src="../_static/collapsible-lists/js/CollapsibleLists.compressed.js"></script>
+        <script src="../_static/collapsible-lists/js/apply-collapsible-lists.js"></script>
+    
+    <script type="text/javascript" src="../_static/js/theme.js"></script>
+
+    
+    <link rel="index" title="Index" href="../genindex.html" />
+    <link rel="search" title="Search" href="../search.html" /> 
+</head>
+
+<body class="wy-body-for-nav">
+
+   
+  <div class="wy-grid-for-nav">
+    
+    <nav data-toggle="wy-nav-shift" class="wy-nav-side">
+      <div class="wy-side-scroll">
+        <div class="wy-side-nav-search" >
+          
+
+          
+            <a href="../index.html" class="icon icon-home"> Marian NMT
+          
+
+          
+          </a>
+
+          
+            
+            
+              <div class="version">
+                v1.10.1
+              </div>
+            
+          
+
+          
+<div role="search">
+  <form id="rtd-search-form" class="wy-form" action="../search.html" method="get">
+    <input type="text" name="q" placeholder="Search docs" />
+    <input type="hidden" name="check_keywords" value="yes" />
+    <input type="hidden" name="area" value="default" />
+  </form>
+</div>
+
+          
+        </div>
+
+        
+        <div class="wy-menu wy-menu-vertical" data-spy="affix" role="navigation" aria-label="main navigation">
+          
+            
+            
+              
+            
+            
+              <p class="caption"><span class="caption-text">Contents:</span></p>
+<ul>
+<li class="toctree-l1"><a class="reference internal" href="../install.html">Installation</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../graph.html">Expression graphs</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../operators.html">Graph operations</a></li>
+<li class="toctree-l1"><a class="reference internal" href="library_index.html">Library API</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../contributing.html">How to contribute to Marian</a></li>
+</ul>
+
+            
+          
+        </div>
+        
+      </div>
+    </nav>
+
+    <section data-toggle="wy-nav-shift" class="wy-nav-content-wrap">
+
+      
+      <nav class="wy-nav-top" aria-label="top navigation">
+        
+          <i data-toggle="wy-nav-top" class="fa fa-bars"></i>
+          <a href="../index.html">Marian NMT</a>
+        
+      </nav>
+
+
+      <div class="wy-nav-content">
+        
+        <div class="rst-content">
+        
+          
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+<div role="navigation" aria-label="breadcrumbs navigation">
+
+  <ul class="wy-breadcrumbs">
+    
+      <li><a href="../index.html" class="icon icon-home"></a> &raquo;</li>
+        
+      <li>File tensor_operators.h</li>
+    
+    
+      <li class="wy-breadcrumbs-aside">
+        
+          
+            <a href="../_sources/api/file_src_tensors_tensor_operators.h.rst.txt" rel="nofollow"> View page source</a>
+          
+        
+      </li>
+    
+  </ul>
+
+  
+  <hr/>
+</div>
+          <div role="main" class="document" itemscope="itemscope" itemtype="http://schema.org/Article">
+           <div itemprop="articleBody">
+            
+  <div class="section" id="file-tensor-operators-h">
+<span id="file-src-tensors-tensor-operators-h"></span><h1>File tensor_operators.h<a class="headerlink" href="#file-tensor-operators-h" title="Permalink to this headline">¶</a></h1>
+<p>↰ <a class="reference internal" href="dir_src_tensors.html#dir-src-tensors"><span class="std std-ref">Parent directory</span></a> (<code class="docutils literal notranslate"><span class="pre">src/tensors</span></code>)</p>
+<div class="contents local topic" id="contents">
+<p class="topic-title">Contents</p>
+<ul class="simple">
+<li><p><a class="reference internal" href="#definition-src-tensors-tensor-operators-h" id="id1">Definition (<code class="docutils literal notranslate"><span class="pre">src/tensors/tensor_operators.h</span></code>)</a></p></li>
+<li><p><a class="reference internal" href="#includes" id="id2">Includes</a></p></li>
+<li><p><a class="reference internal" href="#included-by" id="id3">Included By</a></p></li>
+<li><p><a class="reference internal" href="#namespaces" id="id4">Namespaces</a></p></li>
+<li><p><a class="reference internal" href="#functions" id="id5">Functions</a></p></li>
+<li><p><a class="reference internal" href="#variables" id="id6">Variables</a></p></li>
+</ul>
+</div>
+<div class="section" id="definition-src-tensors-tensor-operators-h">
+<h2>Definition (<code class="docutils literal notranslate"><span class="pre">src/tensors/tensor_operators.h</span></code>)<a class="headerlink" href="#definition-src-tensors-tensor-operators-h" title="Permalink to this headline">¶</a></h2>
+<div class="toctree-wrapper compound">
+<ul>
+<li class="toctree-l1"><a class="reference internal" href="program_listing_file_src_tensors_tensor_operators.h.html">Program Listing for File tensor_operators.h</a></li>
+</ul>
+</div>
+</div>
+<div class="section" id="includes">
+<h2>Includes<a class="headerlink" href="#includes" title="Permalink to this headline">¶</a></h2>
+<ul class="simple">
+<li><p><code class="docutils literal notranslate"><span class="pre">algorithm</span></code> (<a class="reference internal" href="file_src_tensors_gpu_algorithm.h.html#file-src-tensors-gpu-algorithm-h"><span class="std std-ref">File algorithm.h</span></a>)</p></li>
+<li><p><code class="docutils literal notranslate"><span class="pre">common/definitions.h</span></code> (<a class="reference internal" href="file_src_common_definitions.h.html#file-src-common-definitions-h"><span class="std std-ref">File definitions.h</span></a>)</p></li>
+<li><p><code class="docutils literal notranslate"><span class="pre">functional/shape.h</span></code> (<a class="reference internal" href="file_src_functional_shape.h.html#file-src-functional-shape-h"><span class="std std-ref">File shape.h</span></a>)</p></li>
+<li><p><code class="docutils literal notranslate"><span class="pre">functional/tensor.h</span></code> (<a class="reference internal" href="file_src_functional_tensor.h.html#file-src-functional-tensor-h"><span class="std std-ref">File tensor.h</span></a>)</p></li>
+<li><p><code class="docutils literal notranslate"><span class="pre">functional/tmp.h</span></code> (<a class="reference internal" href="file_src_functional_tmp.h.html#file-src-functional-tmp-h"><span class="std std-ref">File tmp.h</span></a>)</p></li>
+<li><p><code class="docutils literal notranslate"><span class="pre">tensors/allocator.h</span></code> (<a class="reference internal" href="file_src_tensors_allocator.h.html#file-src-tensors-allocator-h"><span class="std std-ref">File allocator.h</span></a>)</p></li>
+<li><p><code class="docutils literal notranslate"><span class="pre">tensors/cpu/add.h</span></code> (<a class="reference internal" href="file_src_tensors_cpu_add.h.html#file-src-tensors-cpu-add-h"><span class="std std-ref">File add.h</span></a>)</p></li>
+<li><p><code class="docutils literal notranslate"><span class="pre">tensors/cpu/element.h</span></code> (<a class="reference internal" href="file_src_tensors_cpu_element.h.html#file-src-tensors-cpu-element-h"><span class="std std-ref">File element.h</span></a>)</p></li>
+<li><p><code class="docutils literal notranslate"><span class="pre">tensors/dispatch.h</span></code> (<a class="reference internal" href="file_src_tensors_dispatch.h.html#file-src-tensors-dispatch-h"><span class="std std-ref">File dispatch.h</span></a>)</p></li>
+<li><p><code class="docutils literal notranslate"><span class="pre">tensors/tensor.h</span></code> (<a class="reference internal" href="file_src_tensors_tensor.h.html#file-src-tensors-tensor-h"><span class="std std-ref">File tensor.h</span></a>)</p></li>
+</ul>
+</div>
+<div class="section" id="included-by">
+<h2>Included By<a class="headerlink" href="#included-by" title="Permalink to this headline">¶</a></h2>
+<ul class="simple">
+<li><p><a class="reference internal" href="file_src_graph_expression_graph.cpp.html#file-src-graph-expression-graph-cpp"><span class="std std-ref">File expression_graph.cpp</span></a></p></li>
+<li><p><a class="reference internal" href="file_src_graph_node_initializers.cpp.html#file-src-graph-node-initializers-cpp"><span class="std std-ref">File node_initializers.cpp</span></a></p></li>
+<li><p><a class="reference internal" href="file_src_graph_node_initializers.h.html#file-src-graph-node-initializers-h"><span class="std std-ref">File node_initializers.h</span></a></p></li>
+<li><p><a class="reference internal" href="file_src_graph_node_operators.cpp.html#file-src-graph-node-operators-cpp"><span class="std std-ref">File node_operators.cpp</span></a></p></li>
+<li><p><a class="reference internal" href="file_src_graph_node_operators_binary.h.html#file-src-graph-node-operators-binary-h"><span class="std std-ref">File node_operators_binary.h</span></a></p></li>
+<li><p><a class="reference internal" href="file_src_graph_node_operators_unary.h.html#file-src-graph-node-operators-unary-h"><span class="std std-ref">File node_operators_unary.h</span></a></p></li>
+<li><p><a class="reference internal" href="file_src_optimizers_clippers.cpp.html#file-src-optimizers-clippers-cpp"><span class="std std-ref">File clippers.cpp</span></a></p></li>
+<li><p><a class="reference internal" href="file_src_optimizers_optimizers.cpp.html#file-src-optimizers-optimizers-cpp"><span class="std std-ref">File optimizers.cpp</span></a></p></li>
+<li><p><a class="reference internal" href="file_src_optimizers_quantizer.cpp.html#file-src-optimizers-quantizer-cpp"><span class="std std-ref">File quantizer.cpp</span></a></p></li>
+<li><p><a class="reference internal" href="file_src_optimizers_quantizer.h.html#file-src-optimizers-quantizer-h"><span class="std std-ref">File quantizer.h</span></a></p></li>
+<li><p><a class="reference internal" href="file_src_rnn_attention.cpp.html#file-src-rnn-attention-cpp"><span class="std std-ref">File attention.cpp</span></a></p></li>
+<li><p><a class="reference internal" href="file_src_rnn_cells.cpp.html#file-src-rnn-cells-cpp"><span class="std std-ref">File cells.cpp</span></a></p></li>
+<li><p><a class="reference internal" href="file_src_tensors_cpu_fbgemm_packed_gemm.cpp.html#file-src-tensors-cpu-fbgemm-packed-gemm-cpp"><span class="std std-ref">File packed_gemm.cpp</span></a></p></li>
+<li><p><a class="reference internal" href="file_src_tensors_cpu_integer_common.h.html#file-src-tensors-cpu-integer-common-h"><span class="std std-ref">File integer_common.h</span></a></p></li>
+<li><p><a class="reference internal" href="file_src_tensors_cpu_tensor_operators.cpp.html#file-src-tensors-cpu-tensor-operators-cpp"><span class="std std-ref">File tensor_operators.cpp</span></a></p></li>
+<li><p><a class="reference internal" href="file_src_tensors_cpu_topk.cpp.html#file-src-tensors-cpu-topk-cpp"><span class="std std-ref">File topk.cpp</span></a></p></li>
+<li><p><a class="reference internal" href="file_src_tensors_gpu_add_all.h.html#file-src-tensors-gpu-add-all-h"><span class="std std-ref">File add_all.h</span></a></p></li>
+<li><p><a class="reference internal" href="file_src_tensors_gpu_prod.h.html#file-src-tensors-gpu-prod-h"><span class="std std-ref">File prod.h</span></a></p></li>
+<li><p><a class="reference internal" href="file_src_tensors_rand.cpp.html#file-src-tensors-rand-cpp"><span class="std std-ref">File rand.cpp</span></a></p></li>
+<li><p><a class="reference internal" href="file_src_tensors_tensor.cpp.html#file-src-tensors-tensor-cpp"><span class="std std-ref">File tensor.cpp</span></a></p></li>
+<li><p><a class="reference internal" href="file_src_training_communicator.h.html#file-src-training-communicator-h"><span class="std std-ref">File communicator.h</span></a></p></li>
+<li><p><a class="reference internal" href="file_src_training_deprecated_gradient_dropping_dropper.h.html#file-src-training-deprecated-gradient-dropping-dropper-h"><span class="std std-ref">File dropper.h</span></a></p></li>
+<li><p><a class="reference internal" href="file_src_training_deprecated_gradient_dropping_sparse_tensor.h.html#file-src-training-deprecated-gradient-dropping-sparse-tensor-h"><span class="std std-ref">File sparse_tensor.h</span></a></p></li>
+<li><p><a class="reference internal" href="file_src_training_deprecated_graph_group_async_drop.cpp.html#file-src-training-deprecated-graph-group-async-drop-cpp"><span class="std std-ref">File graph_group_async_drop.cpp</span></a></p></li>
+<li><p><a class="reference internal" href="file_src_training_deprecated_graph_group_multinode.cpp.html#file-src-training-deprecated-graph-group-multinode-cpp"><span class="std std-ref">File graph_group_multinode.cpp</span></a></p></li>
+<li><p><a class="reference internal" href="file_src_training_deprecated_graph_group_multinode_sync.cpp.html#file-src-training-deprecated-graph-group-multinode-sync-cpp"><span class="std std-ref">File graph_group_multinode_sync.cpp</span></a></p></li>
+<li><p><a class="reference internal" href="file_src_training_exponential_smoothing.h.html#file-src-training-exponential-smoothing-h"><span class="std std-ref">File exponential_smoothing.h</span></a></p></li>
+<li><p><a class="reference internal" href="file_src_training_graph_group_async.cpp.html#file-src-training-graph-group-async-cpp"><span class="std std-ref">File graph_group_async.cpp</span></a></p></li>
+</ul>
+</div>
+<div class="section" id="namespaces">
+<h2>Namespaces<a class="headerlink" href="#namespaces" title="Permalink to this headline">¶</a></h2>
+<ul class="simple">
+<li><p><a class="reference internal" href="namespace_marian.html#namespace-marian"><span class="std std-ref">Namespace marian</span></a></p></li>
+<li><p><a class="reference internal" href="namespace_marian__cpu.html#namespace-marian-cpu"><span class="std std-ref">Namespace marian::cpu</span></a></p></li>
+</ul>
+</div>
+<div class="section" id="functions">
+<h2>Functions<a class="headerlink" href="#functions" title="Permalink to this headline">¶</a></h2>
+<ul class="simple">
+<li><p><a class="reference internal" href="function_tensor__operators_8h_1aabc7938a8b29a7cff600b120077bf255.html#exhale-function-tensor-operators-8h-1aabc7938a8b29a7cff600b120077bf255"><span class="std std-ref">Template Function marian::Add(Functor, float, marian::Tensor, Tensors…)</span></a></p></li>
+<li><p><a class="reference internal" href="function_tensor__operators_8h_1af285cb3d727a2b162c71259554d867fb.html#exhale-function-tensor-operators-8h-1af285cb3d727a2b162c71259554d867fb"><span class="std std-ref">Template Function marian::Add(Functor, marian::Tensor, Tensors…)</span></a></p></li>
+<li><p><a class="reference internal" href="function_tensor__operators_8h_1ae1aa3d1e7e389f5f18520367bb960a89.html#exhale-function-tensor-operators-8h-1ae1aa3d1e7e389f5f18520367bb960a89"><span class="std std-ref">Template Function marian::Aggregate</span></a></p></li>
+<li><p><a class="reference internal" href="function_tensor__operators_8h_1a4c84f0bb391dee1b570e271bb2d5c7d2.html#exhale-function-tensor-operators-8h-1a4c84f0bb391dee1b570e271bb2d5c7d2"><span class="std std-ref">Function marian::Bernoulli</span></a></p></li>
+<li><p><a class="reference internal" href="function_tensor__operators_8h_1a7138443dae419d453e105482094a1bae.html#exhale-function-tensor-operators-8h-1a7138443dae419d453e105482094a1bae"><span class="std std-ref">Template Function marian::copy</span></a></p></li>
+<li><p><a class="reference internal" href="function_tensor__operators_8h_1a91dd91b8579831067b74ff4664428c92.html#exhale-function-tensor-operators-8h-1a91dd91b8579831067b74ff4664428c92"><span class="std std-ref">Function marian::cpu::Deconcatenate(std::vector&lt;marian::Tensor&gt;&amp;, const marian::Tensor, int)</span></a></p></li>
+<li><p><a class="reference internal" href="function_tensor__operators_8h_1a2ea1e7c1161e5b8960408af33cc7752b.html#exhale-function-tensor-operators-8h-1a2ea1e7c1161e5b8960408af33cc7752b"><span class="std std-ref">Function marian::cpu::LSTMCellBackward(std::vector&lt;marian::Tensor&gt;, std::vector&lt;marian::Tensor&gt;, marian::Tensor)</span></a></p></li>
+<li><p><a class="reference internal" href="function_tensor__operators_8h_1afa8498969f5976fc59a22e8bc3a32d8a.html#exhale-function-tensor-operators-8h-1afa8498969f5976fc59a22e8bc3a32d8a"><span class="std std-ref">Function marian::cpu::LSTMOutputBackward(std::vector&lt;marian::Tensor&gt;, std::vector&lt;marian::Tensor&gt;, marian::Tensor)</span></a></p></li>
+<li><p><a class="reference internal" href="function_tensor__operators_8h_1ad9b5bce26f55cfac97f173eed4bacab5.html#exhale-function-tensor-operators-8h-1ad9b5bce26f55cfac97f173eed4bacab5"><span class="std std-ref">Function marian::Deconcatenate</span></a></p></li>
+<li><p><a class="reference internal" href="function_tensor__operators_8h_1ac89dcc7abcd7900e297521cf16be0e62.html#exhale-function-tensor-operators-8h-1ac89dcc7abcd7900e297521cf16be0e62"><span class="std std-ref">Function marian::DISPATCH2(LSTMCellForward, marian::Tensor, std::vector&lt;marian::Tensor&gt;)</span></a></p></li>
+<li><p><a class="reference internal" href="function_tensor__operators_8h_1a10066c8d1e384ff2bddfa88f1b9e875d.html#exhale-function-tensor-operators-8h-1a10066c8d1e384ff2bddfa88f1b9e875d"><span class="std std-ref">Function marian::DISPATCH2(CopyCast, marian::Tensor, const marian::Tensor)</span></a></p></li>
+<li><p><a class="reference internal" href="function_tensor__operators_8h_1a36edcd6a6e0f51a5df99df5c5cee348c.html#exhale-function-tensor-operators-8h-1a36edcd6a6e0f51a5df99df5c5cee348c"><span class="std std-ref">Function marian::DISPATCH3(CopyRows, marian::Tensor, const marian::Tensor, const marian::Tensor)</span></a></p></li>
+<li><p><a class="reference internal" href="function_tensor__operators_8h_1ab207434bda771d41a22ad42aecd6d832.html#exhale-function-tensor-operators-8h-1ab207434bda771d41a22ad42aecd6d832"><span class="std std-ref">Function marian::DISPATCH3(CopyCols, marian::Tensor, const marian::Tensor, const marian::Tensor)</span></a></p></li>
+<li><p><a class="reference internal" href="function_tensor__operators_8h_1a9dcde38124b2b5323d3a8f1164aa90f5.html#exhale-function-tensor-operators-8h-1a9dcde38124b2b5323d3a8f1164aa90f5"><span class="std std-ref">Function marian::DISPATCH3(GRUFastForward, marian::Tensor, std::vector&lt;marian::Tensor&gt;, bool)</span></a></p></li>
+<li><p><a class="reference internal" href="function_tensor__operators_8h_1a14c88023d37fec819219e248c186a4db.html#exhale-function-tensor-operators-8h-1a14c88023d37fec819219e248c186a4db"><span class="std std-ref">Function marian::DISPATCH3(SoftmaxGrad, marian::Tensor, marian::Tensor, marian::Tensor)</span></a></p></li>
+<li><p><a class="reference internal" href="function_tensor__operators_8h_1a3f3394dc5d63d723d9b40aa4cd5b7c82.html#exhale-function-tensor-operators-8h-1a3f3394dc5d63d723d9b40aa4cd5b7c82"><span class="std std-ref">Function marian::DISPATCH3(LogSoftmaxGrad, marian::Tensor, marian::Tensor, marian::Tensor)</span></a></p></li>
+<li><p><a class="reference internal" href="function_tensor__operators_8h_1a8aa3370b164d2dc5794beeea7e3bd477.html#exhale-function-tensor-operators-8h-1a8aa3370b164d2dc5794beeea7e3bd477"><span class="std std-ref">Function marian::DISPATCH3(TransposeNDGrad, marian::Tensor, marian::Tensor, const std::vector&lt;int&gt;&amp;)</span></a></p></li>
+<li><p><a class="reference internal" href="function_tensor__operators_8h_1aa5b3ac40c02a5ace3fce797b886a55b6.html#exhale-function-tensor-operators-8h-1aa5b3ac40c02a5ace3fce797b886a55b6"><span class="std std-ref">Function marian::DISPATCH4(ShiftGrad, marian::Tensor, marian::Tensor, marian::Shape, bool)</span></a></p></li>
+<li><p><a class="reference internal" href="function_tensor__operators_8h_1a5c0b04d4bc9ce43fa6c0fe9a58bf3019.html#exhale-function-tensor-operators-8h-1a5c0b04d4bc9ce43fa6c0fe9a58bf3019"><span class="std std-ref">Function marian::DISPATCH4(HighwayForward, marian::Tensor, const marian::Tensor, const marian::Tensor, const marian::Tensor)</span></a></p></li>
+<li><p><a class="reference internal" href="function_tensor__operators_8h_1aab7b90290ced90fb0684ef1d0bdb28a7.html#exhale-function-tensor-operators-8h-1aab7b90290ced90fb0684ef1d0bdb28a7"><span class="std std-ref">Function marian::DISPATCH4(Select, marian::Tensor, const marian::Tensor, const marian::Tensor, int)</span></a></p></li>
+<li><p><a class="reference internal" href="function_tensor__operators_8h_1a386dd09855c15e3164606a77068448a7.html#exhale-function-tensor-operators-8h-1a386dd09855c15e3164606a77068448a7"><span class="std std-ref">Function marian::DISPATCH4(Att, marian::Tensor, marian::Tensor, marian::Tensor, marian::Tensor)</span></a></p></li>
+<li><p><a class="reference internal" href="function_tensor__operators_8h_1af778bcf1d71b7d165eef7c855681c49c.html#exhale-function-tensor-operators-8h-1af778bcf1d71b7d165eef7c855681c49c"><span class="std std-ref">Function marian::DISPATCH4(IsNaN, const, Ptr&lt;Allocator&gt;, bool&amp;, bool&amp;)</span></a></p></li>
+<li><p><a class="reference internal" href="function_tensor__operators_8h_1ab5e6f7a9119c4bb37aa45d1e3dcb3e13.html#exhale-function-tensor-operators-8h-1ab5e6f7a9119c4bb37aa45d1e3dcb3e13"><span class="std std-ref">Function marian::DISPATCH5(LayerNormalization, marian::Tensor, marian::Tensor, marian::Tensor, marian::Tensor, float)</span></a></p></li>
+<li><p><a class="reference internal" href="function_tensor__operators_8h_1ace855cd10b8dd9d3cdb4786453f167d1.html#exhale-function-tensor-operators-8h-1ace855cd10b8dd9d3cdb4786453f167d1"><span class="std std-ref">Function marian::DISPATCH5(PoolingWithMaskingForward, marian::Tensor, marian::Tensor, marian::Tensor, int, bool)</span></a></p></li>
+<li><p><a class="reference internal" href="function_tensor__operators_8h_1aead0ba87ff5ecdbb74b31edb7e053188.html#exhale-function-tensor-operators-8h-1aead0ba87ff5ecdbb74b31edb7e053188"><span class="std std-ref">Function marian::DISPATCH5(CrossEntropyPickBackward, marian::Tensor, marian::Tensor, marian::Tensor, marian::Tensor, float)</span></a></p></li>
+<li><p><a class="reference internal" href="function_tensor__operators_8h_1a99a97ec86003336577c1b90560f18518.html#exhale-function-tensor-operators-8h-1a99a97ec86003336577c1b90560f18518"><span class="std std-ref">Function marian::DISPATCH7(TopK, marian::Tensor, marian::Tensor, Ptr&lt;Allocator&gt;, const marian::Tensor, int, int, bool)</span></a></p></li>
+<li><p><a class="reference internal" href="function_tensor__operators_8h_1a95134a8376f602acfa6dd5f78a59f159.html#exhale-function-tensor-operators-8h-1a95134a8376f602acfa6dd5f78a59f159"><span class="std std-ref">Function marian::DISPATCH7(Prod, marian::Tensor, const marian::Tensor&amp;, const marian::Tensor&amp;, bool, bool, float, float)</span></a></p></li>
+<li><p><a class="reference internal" href="function_tensor__operators_8h_1a18c76e2332a373177ee62fa7a1deb98b.html#exhale-function-tensor-operators-8h-1a18c76e2332a373177ee62fa7a1deb98b"><span class="std std-ref">Function marian::DISPATCH9</span></a></p></li>
+<li><p><a class="reference internal" href="function_tensor__operators_8h_1a749eb2d6c376f6c038eaddba30748936.html#exhale-function-tensor-operators-8h-1a749eb2d6c376f6c038eaddba30748936"><span class="std std-ref">Function marian::Dropout</span></a></p></li>
+<li><p><a class="reference internal" href="function_tensor__operators_8h_1a1861d3e3f78e0a444805424d47ae17a7.html#exhale-function-tensor-operators-8h-1a1861d3e3f78e0a444805424d47ae17a7"><span class="std std-ref">Template Function marian::Element</span></a></p></li>
+<li><p><a class="reference internal" href="function_tensor__operators_8h_1a045bae58dce1d113da4e75232798c76b.html#exhale-function-tensor-operators-8h-1a045bae58dce1d113da4e75232798c76b"><span class="std std-ref">Function marian::GRUFastBackward</span></a></p></li>
+<li><p><a class="reference internal" href="function_tensor__operators_8h_1a9ebd3582991085e4b6b469eb69ccb04e.html#exhale-function-tensor-operators-8h-1a9ebd3582991085e4b6b469eb69ccb04e"><span class="std std-ref">Function marian::L2Norm</span></a></p></li>
+<li><p><a class="reference internal" href="function_tensor__operators_8h_1a4c583e97ede9ba5992db4f7cadf46019.html#exhale-function-tensor-operators-8h-1a4c583e97ede9ba5992db4f7cadf46019"><span class="std std-ref">Function marian::LayerNormalizationGrad</span></a></p></li>
+<li><p><a class="reference internal" href="function_tensor__operators_8h_1a951d30ed15faebc03ef60355b23f464c.html#exhale-function-tensor-operators-8h-1a951d30ed15faebc03ef60355b23f464c"><span class="std std-ref">Function marian::LSTMCellBackward</span></a></p></li>
+<li><p><a class="reference internal" href="function_tensor__operators_8h_1a4c7793c2f97ee08430e7950690539460.html#exhale-function-tensor-operators-8h-1a4c7793c2f97ee08430e7950690539460"><span class="std std-ref">Function marian::LSTMOutputBackward</span></a></p></li>
+<li><p><a class="reference internal" href="function_tensor__operators_8h_1ad2ab57159b989c772b295fd6f7fd197b.html#exhale-function-tensor-operators-8h-1ad2ab57159b989c772b295fd6f7fd197b"><span class="std std-ref">Template Function marian::Reduce(Functor, float, marian::Tensor, Tensors…)</span></a></p></li>
+<li><p><a class="reference internal" href="function_tensor__operators_8h_1aac603197ea49853d41e59eeaa64a22df.html#exhale-function-tensor-operators-8h-1aac603197ea49853d41e59eeaa64a22df"><span class="std std-ref">Template Function marian::Reduce(Functor, marian::Tensor, Tensors…)</span></a></p></li>
+<li><p><a class="reference internal" href="function_tensor__operators_8h_1ac7c4237e2fa04fdb9a49565d3d27d18e.html#exhale-function-tensor-operators-8h-1ac7c4237e2fa04fdb9a49565d3d27d18e"><span class="std std-ref">Template Function marian::Reduce(Functor, AggFunctor, float, marian::Tensor, Tensors…)</span></a></p></li>
+</ul>
+</div>
+<div class="section" id="variables">
+<h2>Variables<a class="headerlink" href="#variables" title="Permalink to this headline">¶</a></h2>
+<ul class="simple">
+<li><p><a class="reference internal" href="variable_tensor__operators_8h_1adfb3735ec3d96ebea0c187a17e5f6222.html#exhale-variable-tensor-operators-8h-1adfb3735ec3d96ebea0c187a17e5f6222"><span class="std std-ref">Variable marian::bool</span></a></p></li>
+<li><p><a class="reference internal" href="variable_tensor__operators_8h_1ab3974a53795fb9732b4fac9665980792.html#exhale-variable-tensor-operators-8h-1ab3974a53795fb9732b4fac9665980792"><span class="std std-ref">Variable marian::float</span></a></p></li>
+<li><p><a class="reference internal" href="variable_tensor__operators_8h_1a6b4179ae4ebaf6457808496bec74a363.html#exhale-variable-tensor-operators-8h-1a6b4179ae4ebaf6457808496bec74a363"><span class="std std-ref">Variable marian::int</span></a></p></li>
+<li><p><a class="reference internal" href="variable_tensor__operators_8h_1a3cba6918b820165493e16494100a7695.html#exhale-variable-tensor-operators-8h-1a3cba6918b820165493e16494100a7695"><span class="std std-ref">Template Variable marian::Ptr&lt; Allocator &gt;</span></a></p></li>
+</ul>
+</div>
+</div>
+
+
+           </div>
+           
+          </div>
+          <footer>
+
+  <hr/>
+
+  <div role="contentinfo">
+    <p>
+        &#169; Copyright 2021, Marian NMT Team.
+
+    </p>
+  </div>
+    
+    
+    
+    Built with <a href="https://www.sphinx-doc.org/">Sphinx</a> using a
+    
+    <a href="https://github.com/readthedocs/sphinx_rtd_theme">theme</a>
+    
+    provided by <a href="https://readthedocs.org">Read the Docs</a>. 
+
+</footer>
+        </div>
+      </div>
+
+    </section>
+
+  </div>
+  
+
+  <script type="text/javascript">
+      jQuery(function () {
+          SphinxRtdTheme.Navigation.enable(true);
+      });
+  </script>
+
+  
+  
+    
+   
+
+</body>
+</html>

@@ -1,0 +1,785 @@
+
+
+<!DOCTYPE html>
+<html class="writer-html5" lang="en" >
+<head>
+  <meta charset="utf-8" />
+  
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  
+  <title>Program Listing for File expression_graph.h &mdash; Marian NMT v1.10.1 2021-02-23 documentation</title>
+  
+
+  
+  <link rel="stylesheet" href="../_static/css/theme.css" type="text/css" />
+  <link rel="stylesheet" href="../_static/pygments.css" type="text/css" />
+  <link rel="stylesheet" href="../_static/css/custom.css" type="text/css" />
+  <link rel="stylesheet" href="../_static/collapsible-lists/css/tree_view.css" type="text/css" />
+
+  
+  
+
+  
+  
+
+  
+    <link rel="canonical" href="http://marian-nmt.github.io/docs/api/api/program_listing_file_src_graph_expression_graph.h.html" />
+
+  
+  <!--[if lt IE 9]>
+    <script src="../_static/js/html5shiv.min.js"></script>
+  <![endif]-->
+  
+    
+      <script type="text/javascript" id="documentation_options" data-url_root="../" src="../_static/documentation_options.js"></script>
+        <script src="../_static/jquery.js"></script>
+        <script src="../_static/underscore.js"></script>
+        <script src="../_static/doctools.js"></script>
+        <script src="../_static/language_data.js"></script>
+        <script src="../_static/collapsible-lists/js/CollapsibleLists.compressed.js"></script>
+        <script src="../_static/collapsible-lists/js/apply-collapsible-lists.js"></script>
+    
+    <script type="text/javascript" src="../_static/js/theme.js"></script>
+
+    
+    <link rel="index" title="Index" href="../genindex.html" />
+    <link rel="search" title="Search" href="../search.html" /> 
+</head>
+
+<body class="wy-body-for-nav">
+
+   
+  <div class="wy-grid-for-nav">
+    
+    <nav data-toggle="wy-nav-shift" class="wy-nav-side">
+      <div class="wy-side-scroll">
+        <div class="wy-side-nav-search" >
+          
+
+          
+            <a href="../index.html" class="icon icon-home"> Marian NMT
+          
+
+          
+          </a>
+
+          
+            
+            
+              <div class="version">
+                v1.10.1
+              </div>
+            
+          
+
+          
+<div role="search">
+  <form id="rtd-search-form" class="wy-form" action="../search.html" method="get">
+    <input type="text" name="q" placeholder="Search docs" />
+    <input type="hidden" name="check_keywords" value="yes" />
+    <input type="hidden" name="area" value="default" />
+  </form>
+</div>
+
+          
+        </div>
+
+        
+        <div class="wy-menu wy-menu-vertical" data-spy="affix" role="navigation" aria-label="main navigation">
+          
+            
+            
+              
+            
+            
+              <p class="caption"><span class="caption-text">Contents:</span></p>
+<ul>
+<li class="toctree-l1"><a class="reference internal" href="../install.html">Installation</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../graph.html">Expression graphs</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../operators.html">Graph operations</a></li>
+<li class="toctree-l1"><a class="reference internal" href="library_index.html">Library API</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../contributing.html">How to contribute to Marian</a></li>
+</ul>
+
+            
+          
+        </div>
+        
+      </div>
+    </nav>
+
+    <section data-toggle="wy-nav-shift" class="wy-nav-content-wrap">
+
+      
+      <nav class="wy-nav-top" aria-label="top navigation">
+        
+          <i data-toggle="wy-nav-top" class="fa fa-bars"></i>
+          <a href="../index.html">Marian NMT</a>
+        
+      </nav>
+
+
+      <div class="wy-nav-content">
+        
+        <div class="rst-content">
+        
+          
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+<div role="navigation" aria-label="breadcrumbs navigation">
+
+  <ul class="wy-breadcrumbs">
+    
+      <li><a href="../index.html" class="icon icon-home"></a> &raquo;</li>
+        
+      <li>Program Listing for File expression_graph.h</li>
+    
+    
+      <li class="wy-breadcrumbs-aside">
+        
+          
+            <a href="../_sources/api/program_listing_file_src_graph_expression_graph.h.rst.txt" rel="nofollow"> View page source</a>
+          
+        
+      </li>
+    
+  </ul>
+
+  
+  <hr/>
+</div>
+          <div role="main" class="document" itemscope="itemscope" itemtype="http://schema.org/Article">
+           <div itemprop="articleBody">
+            
+  <div class="section" id="program-listing-for-file-expression-graph-h">
+<span id="program-listing-file-src-graph-expression-graph-h"></span><h1>Program Listing for File expression_graph.h<a class="headerlink" href="#program-listing-for-file-expression-graph-h" title="Permalink to this headline">¶</a></h1>
+<p>↰ <a class="reference internal" href="file_src_graph_expression_graph.h.html#file-src-graph-expression-graph-h"><span class="std std-ref">Return to documentation for file</span></a> (<code class="docutils literal notranslate"><span class="pre">src/graph/expression_graph.h</span></code>)</p>
+<div class="highlight-cpp notranslate"><div class="highlight"><pre><span></span><span class="cp">#pragma once</span>
+
+<span class="cp">#include</span> <span class="cpf">&quot;common/config.h&quot;</span><span class="cp"></span>
+<span class="cp">#include</span> <span class="cpf">&quot;common/definitions.h&quot;</span><span class="cp"></span>
+
+<span class="cp">#include</span> <span class="cpf">&quot;tensors/backend.h&quot;</span><span class="cp"></span>
+<span class="cp">#include</span> <span class="cpf">&quot;tensors/tensor_allocator.h&quot;</span><span class="cp"></span>
+
+<span class="cp">#include</span> <span class="cpf">&quot;graph/chainable.h&quot;</span><span class="cp"></span>
+<span class="cp">#include</span> <span class="cpf">&quot;graph/node_initializers.h&quot;</span><span class="cp"></span>
+<span class="cp">#include</span> <span class="cpf">&quot;graph/node_operators.h&quot;</span><span class="cp"></span>
+<span class="cp">#include</span> <span class="cpf">&quot;graph/parameters.h&quot;</span><span class="cp"></span>
+
+<span class="cp">#include</span> <span class="cpf">&lt;map&gt;</span><span class="cp"></span>
+<span class="cp">#include</span> <span class="cpf">&lt;unordered_set&gt;</span><span class="cp"></span>
+
+<span class="k">namespace</span> <span class="n">marian</span> <span class="p">{</span>
+
+<span class="k">template</span> <span class="o">&lt;</span><span class="k">class</span> <span class="nc">T</span><span class="p">,</span> <span class="k">typename</span><span class="p">...</span> <span class="n">Args</span><span class="o">&gt;</span>
+<span class="n">Expr</span> <span class="n">Expression</span><span class="p">(</span><span class="n">Args</span><span class="o">&amp;&amp;</span><span class="p">...</span> <span class="n">args</span><span class="p">);</span>
+
+<span class="k">class</span> <span class="nc">Tensors</span> <span class="p">{</span>
+<span class="k">private</span><span class="o">:</span>
+  <span class="n">Ptr</span><span class="o">&lt;</span><span class="n">TensorAllocator</span><span class="o">&gt;</span> <span class="n">tensors_</span><span class="p">;</span>
+  <span class="n">Ptr</span><span class="o">&lt;</span><span class="n">TensorAllocator</span><span class="o">&gt;</span> <span class="n">cache_</span><span class="p">;</span>
+
+  <span class="k">typedef</span> <span class="n">std</span><span class="o">::</span><span class="n">unordered_map</span><span class="o">&lt;</span><span class="kt">size_t</span><span class="p">,</span> <span class="n">std</span><span class="o">::</span><span class="n">vector</span><span class="o">&lt;</span><span class="n">WExpr</span><span class="o">&gt;&gt;</span> <span class="n">WeakMemory</span><span class="p">;</span>
+  <span class="k">typedef</span> <span class="n">std</span><span class="o">::</span><span class="n">unordered_map</span><span class="o">&lt;</span><span class="kt">size_t</span><span class="p">,</span> <span class="n">std</span><span class="o">::</span><span class="n">vector</span><span class="o">&lt;</span><span class="n">Expr</span><span class="o">&gt;&gt;</span> <span class="n">Memory</span><span class="p">;</span>
+
+  <span class="n">Ptr</span><span class="o">&lt;</span><span class="n">WeakMemory</span><span class="o">&gt;</span> <span class="n">shortterm_</span><span class="p">;</span>
+  <span class="n">Ptr</span><span class="o">&lt;</span><span class="n">Memory</span><span class="o">&gt;</span> <span class="n">longterm_</span><span class="p">;</span>
+
+<span class="k">public</span><span class="o">:</span>
+  <span class="n">Tensors</span><span class="p">(</span><span class="n">Ptr</span><span class="o">&lt;</span><span class="n">Backend</span><span class="o">&gt;</span> <span class="n">backend</span><span class="p">)</span>
+      <span class="o">:</span> <span class="n">tensors_</span><span class="p">(</span><span class="n">New</span><span class="o">&lt;</span><span class="n">TensorAllocator</span><span class="o">&gt;</span><span class="p">(</span><span class="n">backend</span><span class="p">)),</span>
+        <span class="n">cache_</span><span class="p">(</span><span class="n">New</span><span class="o">&lt;</span><span class="n">TensorAllocator</span><span class="o">&gt;</span><span class="p">(</span><span class="n">backend</span><span class="p">)),</span>
+        <span class="n">shortterm_</span><span class="p">(</span><span class="n">New</span><span class="o">&lt;</span><span class="n">WeakMemory</span><span class="o">&gt;</span><span class="p">()),</span>
+        <span class="n">longterm_</span><span class="p">(</span><span class="n">New</span><span class="o">&lt;</span><span class="n">Memory</span><span class="o">&gt;</span><span class="p">())</span> <span class="p">{}</span>
+
+  <span class="n">Tensors</span><span class="p">(</span><span class="n">Ptr</span><span class="o">&lt;</span><span class="n">Backend</span><span class="o">&gt;</span> <span class="n">backend</span><span class="p">,</span> <span class="n">Ptr</span><span class="o">&lt;</span><span class="n">Device</span><span class="o">&gt;</span> <span class="n">device</span><span class="p">)</span>
+      <span class="o">:</span> <span class="n">tensors_</span><span class="p">(</span><span class="n">New</span><span class="o">&lt;</span><span class="n">TensorAllocator</span><span class="o">&gt;</span><span class="p">(</span><span class="n">backend</span><span class="p">,</span> <span class="n">device</span><span class="p">)),</span>
+        <span class="n">cache_</span><span class="p">(</span><span class="n">New</span><span class="o">&lt;</span><span class="n">TensorAllocator</span><span class="o">&gt;</span><span class="p">(</span><span class="n">backend</span><span class="p">)),</span>
+        <span class="n">shortterm_</span><span class="p">(</span><span class="n">New</span><span class="o">&lt;</span><span class="n">WeakMemory</span><span class="o">&gt;</span><span class="p">()),</span>
+        <span class="n">longterm_</span><span class="p">(</span><span class="n">New</span><span class="o">&lt;</span><span class="n">Memory</span><span class="o">&gt;</span><span class="p">())</span> <span class="p">{}</span>
+
+  <span class="kt">void</span> <span class="n">reserve</span><span class="p">(</span><span class="kt">size_t</span> <span class="n">bytes</span><span class="p">)</span> <span class="p">{</span> <span class="n">tensors_</span><span class="o">-&gt;</span><span class="n">reserve</span><span class="p">(</span><span class="n">bytes</span><span class="p">);</span> <span class="p">}</span>
+
+  <span class="kt">void</span> <span class="n">throwAtReallocation</span><span class="p">(</span><span class="kt">bool</span> <span class="n">throwAtRealloc</span><span class="p">)</span> <span class="p">{</span>
+    <span class="n">tensors_</span><span class="o">-&gt;</span><span class="n">throwAtReallocation</span><span class="p">(</span><span class="n">throwAtRealloc</span><span class="p">);</span>
+  <span class="p">}</span>
+
+  <span class="kt">void</span> <span class="n">allocateForward</span><span class="p">(</span><span class="n">Expr</span> <span class="n">node</span><span class="p">)</span> <span class="p">{</span>
+    <span class="k">if</span><span class="p">(</span><span class="o">!</span><span class="n">node</span><span class="o">-&gt;</span><span class="n">val</span><span class="p">())</span> <span class="p">{</span>
+      <span class="k">if</span><span class="p">(</span><span class="n">node</span><span class="o">-&gt;</span><span class="n">memoize</span><span class="p">())</span>
+        <span class="n">cache_</span><span class="o">-&gt;</span><span class="n">allocate</span><span class="p">(</span><span class="n">node</span><span class="o">-&gt;</span><span class="n">val</span><span class="p">(),</span> <span class="n">node</span><span class="o">-&gt;</span><span class="n">shape</span><span class="p">(),</span> <span class="n">node</span><span class="o">-&gt;</span><span class="n">value_type</span><span class="p">());</span>
+      <span class="k">else</span>
+        <span class="n">tensors_</span><span class="o">-&gt;</span><span class="n">allocate</span><span class="p">(</span><span class="n">node</span><span class="o">-&gt;</span><span class="n">val</span><span class="p">(),</span> <span class="n">node</span><span class="o">-&gt;</span><span class="n">shape</span><span class="p">(),</span> <span class="n">node</span><span class="o">-&gt;</span><span class="n">value_type</span><span class="p">());</span>
+    <span class="p">}</span>
+  <span class="p">}</span>
+
+  <span class="kt">void</span> <span class="n">allocateBackward</span><span class="p">(</span><span class="n">Expr</span> <span class="n">node</span><span class="p">)</span> <span class="p">{</span>
+    <span class="k">if</span><span class="p">(</span><span class="o">!</span><span class="n">node</span><span class="o">-&gt;</span><span class="n">grad</span><span class="p">())</span>
+      <span class="n">tensors_</span><span class="o">-&gt;</span><span class="n">allocate</span><span class="p">(</span><span class="n">node</span><span class="o">-&gt;</span><span class="n">grad</span><span class="p">(),</span> <span class="n">node</span><span class="o">-&gt;</span><span class="n">shape</span><span class="p">(),</span> <span class="n">node</span><span class="o">-&gt;</span><span class="n">value_type</span><span class="p">());</span>
+  <span class="p">}</span>
+
+  <span class="kt">void</span> <span class="n">free</span><span class="p">(</span><span class="k">const</span> <span class="n">Tensor</span><span class="o">&amp;</span> <span class="n">tensor</span><span class="p">)</span> <span class="p">{</span> <span class="n">tensors_</span><span class="o">-&gt;</span><span class="n">free</span><span class="p">(</span><span class="n">tensor</span><span class="p">);</span> <span class="p">}</span>
+
+  <span class="n">Ptr</span><span class="o">&lt;</span><span class="n">Allocator</span><span class="o">&gt;</span>       <span class="n">getAllocator</span><span class="p">()</span> <span class="p">{</span> <span class="k">return</span> <span class="n">tensors_</span><span class="o">-&gt;</span><span class="n">allocator</span><span class="p">();</span> <span class="p">}</span>
+  <span class="n">Ptr</span><span class="o">&lt;</span><span class="n">TensorAllocator</span><span class="o">&gt;</span> <span class="n">getTensorAllocator</span><span class="p">()</span> <span class="p">{</span> <span class="k">return</span> <span class="n">tensors_</span><span class="p">;</span> <span class="p">}</span>
+
+  <span class="n">Expr</span> <span class="n">findOrRemember</span><span class="p">(</span><span class="n">Expr</span> <span class="n">node</span><span class="p">)</span> <span class="p">{</span>
+    <span class="kt">size_t</span> <span class="n">hash</span> <span class="o">=</span> <span class="n">node</span><span class="o">-&gt;</span><span class="n">hash</span><span class="p">();</span>
+    <span class="c1">// memoize constant nodes that are not parameters</span>
+    <span class="c1">// parameters are already memoized in the graph itself</span>
+    <span class="k">if</span><span class="p">(</span><span class="n">node</span><span class="o">-&gt;</span><span class="n">type</span><span class="p">()</span> <span class="o">!=</span> <span class="s">&quot;param&quot;</span> <span class="o">&amp;&amp;</span> <span class="n">node</span><span class="o">-&gt;</span><span class="n">memoize</span><span class="p">())</span> <span class="p">{</span>
+      <span class="k">auto</span> <span class="n">it</span> <span class="o">=</span> <span class="n">longterm_</span><span class="o">-&gt;</span><span class="n">find</span><span class="p">(</span><span class="n">hash</span><span class="p">);</span>
+      <span class="k">if</span><span class="p">(</span><span class="n">it</span> <span class="o">!=</span> <span class="n">longterm_</span><span class="o">-&gt;</span><span class="n">end</span><span class="p">())</span> <span class="p">{</span>
+        <span class="k">for</span><span class="p">(</span><span class="k">auto</span> <span class="nl">found</span> <span class="p">:</span> <span class="n">it</span><span class="o">-&gt;</span><span class="n">second</span><span class="p">)</span> <span class="p">{</span>
+          <span class="k">return</span> <span class="n">found</span><span class="p">;</span>
+          <span class="c1">// @TODO: check why below code does not work for certain nodes and</span>
+          <span class="c1">// autotuning.</span>
+          <span class="c1">// if(node-&gt;equal(found)) {</span>
+          <span class="c1">// std::cerr &lt;&lt; &quot;found memoized&quot; &lt;&lt; std::endl;</span>
+          <span class="c1">// return found;</span>
+          <span class="c1">//}</span>
+        <span class="p">}</span>
+      <span class="p">}</span>
+      <span class="p">(</span><span class="o">*</span><span class="n">longterm_</span><span class="p">)[</span><span class="n">hash</span><span class="p">].</span><span class="n">push_back</span><span class="p">(</span><span class="n">node</span><span class="p">);</span>
+    <span class="p">}</span>
+
+    <span class="k">auto</span> <span class="n">it</span> <span class="o">=</span> <span class="n">shortterm_</span><span class="o">-&gt;</span><span class="n">find</span><span class="p">(</span><span class="n">hash</span><span class="p">);</span>
+    <span class="k">if</span><span class="p">(</span><span class="n">it</span> <span class="o">!=</span> <span class="n">shortterm_</span><span class="o">-&gt;</span><span class="n">end</span><span class="p">())</span> <span class="p">{</span>
+      <span class="k">for</span><span class="p">(</span><span class="k">auto</span> <span class="nl">found</span> <span class="p">:</span> <span class="n">it</span><span class="o">-&gt;</span><span class="n">second</span><span class="p">)</span> <span class="p">{</span>
+        <span class="k">if</span><span class="p">(</span><span class="n">node</span><span class="o">-&gt;</span><span class="n">equal</span><span class="p">(</span><span class="n">found</span><span class="p">))</span> <span class="p">{</span>
+          <span class="k">return</span> <span class="n">found</span><span class="p">;</span>
+        <span class="p">}</span>
+      <span class="p">}</span>
+    <span class="p">}</span>
+    <span class="p">(</span><span class="o">*</span><span class="n">shortterm_</span><span class="p">)[</span><span class="n">hash</span><span class="p">].</span><span class="n">push_back</span><span class="p">(</span><span class="n">node</span><span class="p">.</span><span class="n">get</span><span class="p">());</span> <span class="c1">// weakPtr</span>
+    <span class="k">return</span> <span class="k">nullptr</span><span class="p">;</span>
+  <span class="p">}</span>
+
+  <span class="kt">void</span> <span class="n">clear</span><span class="p">()</span> <span class="p">{</span>
+    <span class="n">tensors_</span><span class="o">-&gt;</span><span class="n">clear</span><span class="p">();</span>
+    <span class="n">shortterm_</span><span class="o">-&gt;</span><span class="n">clear</span><span class="p">();</span>
+  <span class="p">}</span>
+
+  <span class="kt">void</span> <span class="n">clearShorttermMemory</span><span class="p">()</span> <span class="p">{</span> <span class="n">shortterm_</span><span class="o">-&gt;</span><span class="n">clear</span><span class="p">();</span> <span class="p">}</span>
+
+  <span class="kt">void</span> <span class="n">clearLongtermMemory</span><span class="p">()</span> <span class="p">{</span> <span class="n">longterm_</span><span class="o">-&gt;</span><span class="n">clear</span><span class="p">();</span> <span class="p">}</span>
+<span class="p">};</span>
+
+<span class="k">typedef</span> <span class="n">std</span><span class="o">::</span><span class="n">map</span><span class="o">&lt;</span><span class="n">Type</span><span class="p">,</span> <span class="n">Ptr</span><span class="o">&lt;</span><span class="n">Parameters</span><span class="o">&gt;&gt;</span> <span class="n">ElementTypeParamsMap</span><span class="p">;</span> <span class="c1">// keep it sorted, hence map not unordered map</span>
+
+<span class="k">class</span> <span class="nc">ExpressionGraph</span> <span class="o">:</span> <span class="k">public</span> <span class="n">std</span><span class="o">::</span><span class="n">enable_shared_from_this</span><span class="o">&lt;</span><span class="n">ExpressionGraph</span><span class="o">&gt;</span> <span class="p">{</span>
+  <span class="kt">size_t</span> <span class="n">count_</span><span class="p">{</span><span class="mi">0</span><span class="p">};</span>
+
+  <span class="n">std</span><span class="o">::</span><span class="n">unordered_set</span><span class="o">&lt;</span><span class="n">Expr</span><span class="o">&gt;</span> <span class="n">topNodes_</span><span class="p">;</span> <span class="c1">// current set of roots. In the end, all but one must have been consumed.</span>
+
+<span class="k">protected</span><span class="o">:</span>  <span class="c1">// (these are protected, not private, for ONNX exporting)</span>
+  <span class="n">std</span><span class="o">::</span><span class="n">list</span><span class="o">&lt;</span><span class="n">Expr</span><span class="o">&gt;</span> <span class="n">nodesForward_</span><span class="p">;</span>
+  <span class="n">std</span><span class="o">::</span><span class="n">list</span><span class="o">&lt;</span><span class="n">Expr</span><span class="o">&gt;</span> <span class="n">nodesBackward_</span><span class="p">;</span>
+
+  <span class="c1">// Holds memory and expressions that correspond to temporary expressions.</span>
+  <span class="c1">// This gets cleared before a new graph is built.</span>
+  <span class="n">Ptr</span><span class="o">&lt;</span><span class="n">Tensors</span><span class="o">&gt;</span> <span class="n">tensors_</span><span class="p">;</span>
+<span class="k">private</span><span class="o">:</span>
+
+  <span class="n">std</span><span class="o">::</span><span class="n">unordered_map</span><span class="o">&lt;</span><span class="kt">size_t</span><span class="p">,</span> <span class="n">std</span><span class="o">::</span><span class="n">vector</span><span class="o">&lt;</span><span class="n">Expr</span><span class="o">&gt;&gt;</span> <span class="n">memoized_</span><span class="p">;</span>
+
+  <span class="n">Type</span> <span class="n">defaultElementType_</span><span class="p">{</span><span class="n">Type</span><span class="o">::</span><span class="n">float32</span><span class="p">};</span> <span class="c1">// Type used for storing parameters, currently all parameters have to have the same type</span>
+
+  <span class="kt">bool</span> <span class="n">inferenceOnly_</span><span class="p">{</span><span class="nb">false</span><span class="p">};</span>
+
+  <span class="kt">bool</span> <span class="n">checkpointing_</span><span class="p">{</span><span class="nb">false</span><span class="p">};</span> <span class="c1">// use gradient checkpointing if true</span>
+
+  <span class="kt">bool</span> <span class="n">reloaded_</span><span class="p">{</span><span class="nb">false</span><span class="p">};</span>
+
+  <span class="kt">bool</span> <span class="n">throwNaN_</span><span class="p">{</span><span class="nb">false</span><span class="p">};</span>
+
+<span class="k">protected</span><span class="o">:</span>
+  <span class="c1">// Delete, copy and move constructors</span>
+  <span class="n">ExpressionGraph</span><span class="p">(</span><span class="k">const</span> <span class="n">ExpressionGraph</span><span class="o">&amp;</span><span class="p">)</span> <span class="o">=</span> <span class="k">delete</span><span class="p">;</span>
+  <span class="n">ExpressionGraph</span><span class="p">(</span><span class="n">ExpressionGraph</span><span class="o">&amp;&amp;</span><span class="p">)</span> <span class="o">=</span> <span class="k">delete</span><span class="p">;</span>
+
+  <span class="c1">// Holds memory and expressions that correspond to graph parameters</span>
+  <span class="c1">// Now we can have multiple types of parameters in a separate parameters object per value type.</span>
+  <span class="c1">// This is currently only accessible through private functions during loading, will abort during training</span>
+  <span class="c1">// when params() is called (e.g. optimizer) and there is more or other types than the default parameter type.</span>
+  <span class="c1">// Currently the only usecase is inference. Trying to access params() for non-default parameter type is going</span>
+  <span class="c1">// to abort. Inference does not need to access a whole set of parameters.</span>
+  <span class="n">ElementTypeParamsMap</span> <span class="n">paramsByElementType_</span><span class="p">;</span>
+  <span class="n">Ptr</span><span class="o">&lt;</span><span class="n">Backend</span><span class="o">&gt;</span> <span class="n">backend_</span><span class="p">;</span>
+
+  <span class="n">std</span><span class="o">::</span><span class="n">string</span> <span class="n">namespace_</span><span class="p">;</span>
+
+<span class="k">public</span><span class="o">:</span>
+  <span class="n">ExpressionGraph</span><span class="p">(</span><span class="kt">bool</span> <span class="n">inference</span> <span class="o">=</span> <span class="nb">false</span><span class="p">);</span>
+
+  <span class="k">virtual</span> <span class="o">~</span><span class="n">ExpressionGraph</span><span class="p">()</span> <span class="p">{</span>
+    <span class="n">clear</span><span class="p">();</span>
+    <span class="k">for</span><span class="p">(</span><span class="k">auto</span> <span class="nl">kvParams</span> <span class="p">:</span> <span class="n">paramsByElementType_</span><span class="p">)</span>
+      <span class="n">kvParams</span><span class="p">.</span><span class="n">second</span><span class="o">-&gt;</span><span class="n">clear</span><span class="p">();</span>
+  <span class="p">}</span>
+
+  <span class="k">virtual</span> <span class="kt">void</span> <span class="n">setDevice</span><span class="p">(</span><span class="n">DeviceId</span> <span class="n">deviceId</span> <span class="o">=</span> <span class="p">{</span><span class="mi">0</span><span class="p">,</span> <span class="n">DeviceType</span><span class="o">::</span><span class="n">gpu</span><span class="p">},</span>
+                         <span class="n">Ptr</span><span class="o">&lt;</span><span class="n">Device</span><span class="o">&gt;</span> <span class="n">device</span> <span class="o">=</span> <span class="k">nullptr</span><span class="p">);</span>
+
+  <span class="n">DeviceId</span> <span class="nf">getDeviceId</span><span class="p">()</span> <span class="p">{</span> <span class="k">return</span> <span class="n">backend_</span><span class="o">-&gt;</span><span class="n">getDeviceId</span><span class="p">();</span> <span class="p">}</span>
+
+  <span class="n">Ptr</span><span class="o">&lt;</span><span class="n">Backend</span><span class="o">&gt;</span> <span class="n">getBackend</span><span class="p">()</span> <span class="p">{</span> <span class="k">return</span> <span class="n">backend_</span><span class="p">;</span> <span class="p">}</span>
+
+  <span class="kt">void</span> <span class="n">setInference</span><span class="p">(</span><span class="kt">bool</span> <span class="n">inference</span><span class="p">)</span> <span class="p">{</span> <span class="n">inferenceOnly_</span> <span class="o">=</span> <span class="n">inference</span><span class="p">;</span> <span class="p">}</span>
+  <span class="kt">bool</span> <span class="n">isInference</span><span class="p">()</span> <span class="p">{</span> <span class="k">return</span> <span class="n">inferenceOnly_</span><span class="p">;</span> <span class="p">}</span>
+
+  <span class="kt">void</span> <span class="n">setCheckpointing</span><span class="p">(</span><span class="kt">bool</span> <span class="n">checkpointing</span><span class="p">)</span> <span class="p">{</span> <span class="n">checkpointing_</span> <span class="o">=</span> <span class="n">checkpointing</span><span class="p">;</span> <span class="p">}</span>
+  <span class="kt">bool</span> <span class="n">isCheckpointing</span><span class="p">()</span> <span class="p">{</span> <span class="k">return</span> <span class="n">checkpointing_</span><span class="p">;</span> <span class="p">}</span>
+
+  <span class="kt">void</span> <span class="n">switchParams</span><span class="p">(</span><span class="k">const</span> <span class="n">std</span><span class="o">::</span><span class="n">string</span><span class="o">&amp;</span> <span class="n">newNamespace</span><span class="p">)</span> <span class="p">{</span>
+    <span class="n">namespace_</span> <span class="o">=</span> <span class="n">newNamespace</span><span class="p">;</span>
+  <span class="p">}</span>
+
+  <span class="k">virtual</span> <span class="kt">void</span> <span class="n">copyParams</span><span class="p">(</span><span class="n">Ptr</span><span class="o">&lt;</span><span class="n">ExpressionGraph</span><span class="o">&gt;</span> <span class="n">graph</span><span class="p">)</span> <span class="p">{</span>
+    <span class="k">for</span><span class="p">(</span><span class="k">auto</span> <span class="nl">p</span> <span class="p">:</span> <span class="o">*</span><span class="n">graph</span><span class="o">-&gt;</span><span class="n">params</span><span class="p">())</span>
+      <span class="n">param</span><span class="p">(</span><span class="n">p</span><span class="o">-&gt;</span><span class="n">name</span><span class="p">(),</span> <span class="n">p</span><span class="o">-&gt;</span><span class="n">shape</span><span class="p">(),</span> <span class="n">inits</span><span class="o">::</span><span class="n">fromTensor</span><span class="p">(</span><span class="n">p</span><span class="o">-&gt;</span><span class="n">val</span><span class="p">()),</span> <span class="n">p</span><span class="o">-&gt;</span><span class="n">value_type</span><span class="p">());</span>
+    <span class="n">forward</span><span class="p">();</span> <span class="c1">// this will allocate parameters, execute the intializers and therefore copy parameter values</span>
+  <span class="p">}</span>
+
+  <span class="kt">void</span> <span class="n">reserveWorkspaceMB</span><span class="p">(</span><span class="kt">size_t</span> <span class="n">num</span><span class="p">)</span> <span class="p">{</span>
+    <span class="kt">size_t</span> <span class="n">bytes</span> <span class="o">=</span> <span class="n">num</span> <span class="o">*</span> <span class="mi">1024</span> <span class="o">*</span> <span class="mi">1024</span> <span class="o">-</span> <span class="mi">1</span><span class="p">;</span>
+    <span class="n">tensors_</span><span class="o">-&gt;</span><span class="n">reserve</span><span class="p">(</span><span class="n">bytes</span><span class="p">);</span>
+  <span class="p">}</span>
+
+  <span class="kt">void</span> <span class="n">reuseWorkspace</span><span class="p">(</span><span class="n">Ptr</span><span class="o">&lt;</span><span class="n">ExpressionGraph</span><span class="o">&gt;</span> <span class="n">graph</span><span class="p">)</span> <span class="p">{</span>
+    <span class="n">tensors_</span> <span class="o">=</span> <span class="n">graph</span><span class="o">-&gt;</span><span class="n">tensors_</span><span class="p">;</span>
+  <span class="p">}</span>
+
+  <span class="kt">void</span> <span class="n">backprop</span><span class="p">()</span> <span class="p">{</span>
+    <span class="n">forward</span><span class="p">();</span>
+    <span class="n">backward</span><span class="p">();</span>
+  <span class="p">}</span>
+
+  <span class="kt">bool</span> <span class="n">fits</span><span class="p">()</span> <span class="p">{</span>
+    <span class="k">try</span> <span class="p">{</span>
+      <span class="n">tensors_</span><span class="o">-&gt;</span><span class="n">throwAtReallocation</span><span class="p">(</span><span class="nb">true</span><span class="p">);</span>
+      <span class="n">backprop</span><span class="p">();</span>
+      <span class="n">tensors_</span><span class="o">-&gt;</span><span class="n">throwAtReallocation</span><span class="p">(</span><span class="nb">false</span><span class="p">);</span>
+    <span class="p">}</span> <span class="k">catch</span><span class="p">(</span><span class="n">AllocationException</span><span class="o">&amp;</span><span class="p">)</span> <span class="p">{</span>
+      <span class="n">tensors_</span><span class="o">-&gt;</span><span class="n">throwAtReallocation</span><span class="p">(</span><span class="nb">false</span><span class="p">);</span>
+      <span class="k">return</span> <span class="nb">false</span><span class="p">;</span>
+    <span class="p">}</span>
+    <span class="k">return</span> <span class="nb">true</span><span class="p">;</span>
+  <span class="p">}</span>
+
+  <span class="kt">void</span> <span class="n">checkNaN</span><span class="p">(</span><span class="n">Tensor</span> <span class="n">t</span><span class="p">,</span> <span class="kt">bool</span><span class="o">&amp;</span> <span class="n">isNaN</span><span class="p">,</span> <span class="kt">bool</span><span class="o">&amp;</span> <span class="n">isInf</span><span class="p">);</span>
+
+  <span class="kt">void</span> <span class="nf">forward</span><span class="p">()</span> <span class="p">{</span>
+    <span class="k">for</span><span class="p">(</span><span class="k">auto</span> <span class="nl">kvParams</span> <span class="p">:</span> <span class="n">paramsByElementType_</span><span class="p">)</span>
+      <span class="n">kvParams</span><span class="p">.</span><span class="n">second</span><span class="o">-&gt;</span><span class="n">allocateForward</span><span class="p">();</span>
+    <span class="n">forwardNext</span><span class="p">();</span>
+  <span class="p">}</span>
+
+  <span class="kt">void</span> <span class="nf">forwardNext</span><span class="p">();</span>
+  <span class="kt">void</span> <span class="nf">forward</span><span class="p">(</span><span class="n">std</span><span class="o">::</span><span class="n">list</span><span class="o">&lt;</span><span class="n">Expr</span><span class="o">&gt;&amp;</span> <span class="n">forwardTape</span><span class="p">,</span> <span class="kt">bool</span> <span class="n">finalPass</span><span class="p">);</span>
+
+  <span class="kt">void</span> <span class="nf">backward</span><span class="p">(</span><span class="kt">bool</span> <span class="n">reset</span> <span class="o">=</span> <span class="nb">true</span><span class="p">,</span> <span class="kt">float</span> <span class="n">clipValue</span> <span class="o">=</span> <span class="mf">0.f</span><span class="p">);</span>
+
+  <span class="n">std</span><span class="o">::</span><span class="n">string</span> <span class="n">graphviz</span><span class="p">()</span> <span class="p">{</span>
+    <span class="n">std</span><span class="o">::</span><span class="n">stringstream</span> <span class="n">ss</span><span class="p">;</span>
+    <span class="n">ss</span> <span class="o">&lt;&lt;</span> <span class="s">&quot;digraph ExpressionGraph {&quot;</span> <span class="o">&lt;&lt;</span> <span class="n">std</span><span class="o">::</span><span class="n">endl</span><span class="p">;</span>
+    <span class="c1">// ss &lt;&lt; &quot;graph[splines=ortho]&quot; &lt;&lt; std::endl;</span>
+    <span class="n">ss</span> <span class="o">&lt;&lt;</span> <span class="s">&quot;rankdir=LR&quot;</span> <span class="o">&lt;&lt;</span> <span class="n">std</span><span class="o">::</span><span class="n">endl</span><span class="p">;</span>
+
+    <span class="k">auto</span> <span class="n">it</span> <span class="o">=</span> <span class="n">nodesForward_</span><span class="p">.</span><span class="n">rbegin</span><span class="p">();</span>
+    <span class="k">while</span><span class="p">(</span><span class="n">it</span> <span class="o">!=</span> <span class="n">nodesForward_</span><span class="p">.</span><span class="n">rend</span><span class="p">())</span> <span class="p">{</span>
+      <span class="k">auto</span> <span class="n">v</span> <span class="o">=</span> <span class="o">*</span><span class="n">it</span><span class="p">;</span>
+      <span class="n">ss</span> <span class="o">&lt;&lt;</span> <span class="n">v</span><span class="o">-&gt;</span><span class="n">graphviz</span><span class="p">();</span>
+      <span class="n">it</span><span class="o">++</span><span class="p">;</span>
+    <span class="p">}</span>
+
+    <span class="n">ss</span> <span class="o">&lt;&lt;</span> <span class="s">&quot;}&quot;</span> <span class="o">&lt;&lt;</span> <span class="n">std</span><span class="o">::</span><span class="n">endl</span><span class="p">;</span>
+    <span class="k">return</span> <span class="n">ss</span><span class="p">.</span><span class="n">str</span><span class="p">();</span>
+  <span class="p">}</span>
+
+  <span class="kt">void</span> <span class="n">graphviz</span><span class="p">(</span><span class="k">const</span> <span class="n">std</span><span class="o">::</span><span class="n">string</span><span class="o">&amp;</span> <span class="n">filename</span><span class="p">)</span> <span class="p">{</span>
+    <span class="n">std</span><span class="o">::</span><span class="n">ofstream</span> <span class="n">dot</span><span class="p">(</span><span class="n">filename</span><span class="p">);</span>
+    <span class="n">dot</span> <span class="o">&lt;&lt;</span> <span class="n">graphviz</span><span class="p">();</span>
+    <span class="n">dot</span><span class="p">.</span><span class="n">close</span><span class="p">();</span>
+  <span class="p">}</span>
+
+<span class="k">private</span><span class="o">:</span>
+
+  <span class="c1">// Find the named parameter and its typed parent parameter object (params) and return both.</span>
+  <span class="c1">// If the parameter is not found return the parent parameter object that the parameter should be added to.</span>
+  <span class="c1">// Return [nullptr, nullptr] if no matching parent parameter object exists.</span>
+  <span class="n">std</span><span class="o">::</span><span class="n">tuple</span><span class="o">&lt;</span><span class="n">Expr</span><span class="p">,</span> <span class="n">Ptr</span><span class="o">&lt;</span><span class="n">Parameters</span><span class="o">&gt;&gt;</span> <span class="n">findParams</span><span class="p">(</span><span class="k">const</span> <span class="n">std</span><span class="o">::</span><span class="n">string</span><span class="o">&amp;</span> <span class="n">name</span><span class="p">,</span>
+                                               <span class="n">Type</span> <span class="n">elementType</span><span class="p">,</span>
+                                               <span class="kt">bool</span> <span class="n">typeSpecified</span><span class="p">)</span> <span class="k">const</span> <span class="p">{</span>
+    <span class="n">Expr</span> <span class="n">p</span><span class="p">;</span> <span class="n">Ptr</span><span class="o">&lt;</span><span class="n">Parameters</span><span class="o">&gt;</span> <span class="n">params</span><span class="p">;</span>
+    <span class="k">if</span><span class="p">(</span><span class="n">typeSpecified</span><span class="p">)</span> <span class="p">{</span> <span class="c1">// type has been specified, so we are only allowed to look for a parameter with that type</span>
+      <span class="k">auto</span> <span class="n">it</span> <span class="o">=</span> <span class="n">paramsByElementType_</span><span class="p">.</span><span class="n">find</span><span class="p">(</span><span class="n">elementType</span><span class="p">);</span>
+      <span class="k">if</span><span class="p">(</span><span class="n">it</span> <span class="o">!=</span> <span class="n">paramsByElementType_</span><span class="p">.</span><span class="n">end</span><span class="p">())</span> <span class="p">{</span>
+        <span class="n">params</span> <span class="o">=</span> <span class="n">it</span><span class="o">-&gt;</span><span class="n">second</span><span class="p">;</span>
+        <span class="n">p</span> <span class="o">=</span> <span class="n">params</span><span class="o">-&gt;</span><span class="n">get</span><span class="p">(</span><span class="n">name</span><span class="p">);</span>
+      <span class="p">}</span>
+    <span class="p">}</span> <span class="k">else</span> <span class="p">{</span> <span class="c1">// type has not been specified, so we take any type as long as the name matches</span>
+      <span class="k">for</span><span class="p">(</span><span class="k">auto</span> <span class="nl">kvParams</span> <span class="p">:</span> <span class="n">paramsByElementType_</span><span class="p">)</span> <span class="p">{</span>
+        <span class="n">p</span> <span class="o">=</span> <span class="n">kvParams</span><span class="p">.</span><span class="n">second</span><span class="o">-&gt;</span><span class="n">get</span><span class="p">(</span><span class="n">name</span><span class="p">);</span>
+
+        <span class="k">if</span><span class="p">(</span><span class="n">p</span><span class="p">)</span> <span class="p">{</span> <span class="c1">// p has been found, return with matching params object</span>
+          <span class="n">params</span> <span class="o">=</span> <span class="n">kvParams</span><span class="p">.</span><span class="n">second</span><span class="p">;</span>
+          <span class="k">break</span><span class="p">;</span>
+        <span class="p">}</span>
+
+        <span class="k">if</span><span class="p">(</span><span class="n">kvParams</span><span class="p">.</span><span class="n">first</span> <span class="o">==</span> <span class="n">elementType</span><span class="p">)</span> <span class="c1">// even if p has not been found, set the params object to be returned</span>
+          <span class="n">params</span> <span class="o">=</span> <span class="n">kvParams</span><span class="p">.</span><span class="n">second</span><span class="p">;</span>
+      <span class="p">}</span>
+    <span class="p">}</span>
+
+    <span class="k">return</span> <span class="n">std</span><span class="o">::</span><span class="n">make_tuple</span><span class="p">(</span><span class="n">p</span><span class="p">,</span> <span class="n">params</span><span class="p">);</span>
+  <span class="p">}</span>
+
+  <span class="n">Expr</span> <span class="n">param</span><span class="p">(</span><span class="k">const</span> <span class="n">std</span><span class="o">::</span><span class="n">string</span><span class="o">&amp;</span> <span class="n">pname</span><span class="p">,</span>
+             <span class="k">const</span> <span class="n">Shape</span><span class="o">&amp;</span> <span class="n">shape</span><span class="p">,</span>
+             <span class="k">const</span> <span class="n">Ptr</span><span class="o">&lt;</span><span class="n">inits</span><span class="o">::</span><span class="n">NodeInitializer</span><span class="o">&gt;&amp;</span> <span class="n">init</span><span class="p">,</span>
+             <span class="k">const</span> <span class="n">Type</span> <span class="n">elementType</span><span class="p">,</span>
+             <span class="kt">bool</span> <span class="n">fixed</span><span class="p">,</span>
+             <span class="kt">bool</span> <span class="n">typeSpecified</span><span class="p">)</span> <span class="p">{</span>
+    <span class="n">std</span><span class="o">::</span><span class="n">string</span> <span class="n">name</span> <span class="o">=</span> <span class="n">pname</span><span class="p">;</span>
+    <span class="k">if</span><span class="p">(</span><span class="o">!</span><span class="n">namespace_</span><span class="p">.</span><span class="n">empty</span><span class="p">())</span>
+      <span class="n">name</span> <span class="o">=</span> <span class="n">namespace_</span> <span class="o">+</span> <span class="s">&quot;::&quot;</span> <span class="o">+</span> <span class="n">name</span><span class="p">;</span>
+
+    <span class="n">Expr</span> <span class="n">p</span><span class="p">;</span> <span class="n">Ptr</span><span class="o">&lt;</span><span class="n">Parameters</span><span class="o">&gt;</span> <span class="n">params</span><span class="p">;</span> <span class="n">std</span><span class="o">::</span><span class="n">tie</span>
+    <span class="p">(</span><span class="n">p</span><span class="p">,</span> <span class="n">params</span><span class="p">)</span> <span class="o">=</span> <span class="n">findParams</span><span class="p">(</span><span class="n">name</span><span class="p">,</span> <span class="n">elementType</span><span class="p">,</span> <span class="n">typeSpecified</span><span class="p">);</span>
+
+    <span class="k">if</span><span class="p">(</span><span class="o">!</span><span class="n">params</span><span class="p">)</span> <span class="p">{</span>
+      <span class="n">params</span> <span class="o">=</span> <span class="n">New</span><span class="o">&lt;</span><span class="n">Parameters</span><span class="o">&gt;</span><span class="p">(</span><span class="n">elementType</span><span class="p">);</span>
+      <span class="n">params</span><span class="o">-&gt;</span><span class="n">init</span><span class="p">(</span><span class="n">backend_</span><span class="p">);</span>
+      <span class="n">paramsByElementType_</span><span class="p">.</span><span class="n">insert</span><span class="p">({</span><span class="n">elementType</span><span class="p">,</span> <span class="n">params</span><span class="p">});</span>
+    <span class="p">}</span> <span class="k">else</span> <span class="p">{</span>
+      <span class="k">if</span><span class="p">(</span><span class="n">p</span><span class="p">)</span> <span class="p">{</span>
+        <span class="c1">// if yes add to tape and return</span>
+        <span class="n">ABORT_IF</span><span class="p">(</span><span class="n">shape</span> <span class="o">!=</span> <span class="n">p</span><span class="o">-&gt;</span><span class="n">shape</span><span class="p">(),</span>
+                 <span class="s">&quot;Requested shape {} for existing parameter &#39;{}&#39; does not match &quot;</span>
+                 <span class="s">&quot;original shape {}&quot;</span><span class="p">,</span>
+                 <span class="n">shape</span><span class="p">,</span>
+                 <span class="n">name</span><span class="p">,</span>
+                 <span class="n">p</span><span class="o">-&gt;</span><span class="n">shape</span><span class="p">());</span>
+
+        <span class="n">p</span><span class="o">-&gt;</span><span class="n">setTrainable</span><span class="p">(</span><span class="o">!</span><span class="n">fixed</span><span class="p">);</span>
+        <span class="n">add</span><span class="p">(</span><span class="n">p</span><span class="p">);</span>
+        <span class="k">return</span> <span class="n">p</span><span class="p">;</span>
+      <span class="p">}</span>
+    <span class="p">}</span>
+
+    <span class="c1">// if graph was reloaded do not allow creation of new parameters</span>
+    <span class="n">ABORT_IF</span><span class="p">(</span><span class="n">reloaded_</span><span class="p">,</span>
+             <span class="s">&quot;Graph was reloaded and parameter &#39;{}&#39; with type {} (specified: {}) is newly created&quot;</span><span class="p">,</span>
+             <span class="n">name</span><span class="p">,</span> <span class="n">elementType</span><span class="p">,</span> <span class="n">typeSpecified</span><span class="p">);</span>
+
+    <span class="c1">// if not check if name is not taken by other node</span>
+    <span class="k">auto</span> <span class="n">other</span> <span class="o">=</span> <span class="n">get</span><span class="p">(</span><span class="n">name</span><span class="p">);</span>
+    <span class="n">ABORT_IF</span><span class="p">(</span><span class="n">other</span><span class="p">,</span> <span class="s">&quot;Parameter with name &#39;{}&#39; already exists and has type {}&quot;</span><span class="p">,</span> <span class="n">name</span><span class="p">,</span> <span class="n">other</span><span class="o">-&gt;</span><span class="n">value_type</span><span class="p">());</span>
+
+    <span class="c1">// create parameter node (adds to tape)</span>
+    <span class="n">p</span> <span class="o">=</span> <span class="n">Expression</span><span class="o">&lt;</span><span class="n">ParamNode</span><span class="o">&gt;</span><span class="p">(</span><span class="n">shared_from_this</span><span class="p">(),</span> <span class="n">shape</span><span class="p">,</span> <span class="n">init</span><span class="p">,</span> <span class="n">elementType</span><span class="p">,</span> <span class="n">fixed</span><span class="p">);</span>
+    <span class="n">LOG</span><span class="p">(</span><span class="n">debug</span><span class="p">,</span> <span class="s">&quot;Created parameter {} with shape {} and type {}&quot;</span><span class="p">,</span> <span class="n">name</span><span class="p">,</span> <span class="n">shape</span><span class="p">,</span> <span class="n">elementType</span><span class="p">);</span>
+
+    <span class="c1">// set name and id and add to list of parameters</span>
+    <span class="n">p</span><span class="o">-&gt;</span><span class="n">set_name</span><span class="p">(</span><span class="n">name</span><span class="p">);</span>
+    <span class="n">params</span><span class="o">-&gt;</span><span class="n">add</span><span class="p">(</span><span class="n">p</span><span class="p">,</span> <span class="n">name</span><span class="p">);</span>
+
+    <span class="k">return</span> <span class="n">p</span><span class="p">;</span>
+  <span class="p">}</span>
+
+<span class="k">public</span><span class="o">:</span>
+  <span class="n">Expr</span> <span class="n">param</span><span class="p">(</span><span class="k">const</span> <span class="n">std</span><span class="o">::</span><span class="n">string</span><span class="o">&amp;</span> <span class="n">pname</span><span class="p">,</span>
+             <span class="k">const</span> <span class="n">Shape</span><span class="o">&amp;</span> <span class="n">shape</span><span class="p">,</span>
+             <span class="k">const</span> <span class="n">Ptr</span><span class="o">&lt;</span><span class="n">inits</span><span class="o">::</span><span class="n">NodeInitializer</span><span class="o">&gt;&amp;</span> <span class="n">init</span><span class="p">,</span>
+             <span class="k">const</span> <span class="n">Type</span> <span class="n">elementType</span><span class="p">,</span>
+             <span class="kt">bool</span> <span class="n">fixed</span> <span class="o">=</span> <span class="nb">false</span><span class="p">)</span> <span class="p">{</span>
+    <span class="c1">// this param is called with a specified type</span>
+    <span class="k">return</span> <span class="nf">param</span><span class="p">(</span><span class="n">pname</span><span class="p">,</span> <span class="n">shape</span><span class="p">,</span> <span class="n">init</span><span class="p">,</span> <span class="n">elementType</span><span class="p">,</span> <span class="n">fixed</span><span class="p">,</span> <span class="cm">/*typeSpecified=*/</span><span class="nb">true</span><span class="p">);</span>
+  <span class="p">}</span>
+
+  <span class="n">Expr</span> <span class="n">param</span><span class="p">(</span><span class="k">const</span> <span class="n">std</span><span class="o">::</span><span class="n">string</span><span class="o">&amp;</span> <span class="n">pname</span><span class="p">,</span>
+             <span class="k">const</span> <span class="n">Shape</span><span class="o">&amp;</span> <span class="n">shape</span><span class="p">,</span>
+             <span class="k">const</span> <span class="n">Ptr</span><span class="o">&lt;</span><span class="n">inits</span><span class="o">::</span><span class="n">NodeInitializer</span><span class="o">&gt;&amp;</span> <span class="n">init</span><span class="p">,</span>
+             <span class="kt">bool</span> <span class="n">fixed</span> <span class="o">=</span> <span class="nb">false</span><span class="p">)</span> <span class="p">{</span>
+    <span class="c1">// since this param is called without a specified type, we assume defaultElementType but allow to check for a different type</span>
+    <span class="k">return</span> <span class="nf">param</span><span class="p">(</span><span class="n">pname</span><span class="p">,</span> <span class="n">shape</span><span class="p">,</span> <span class="n">init</span><span class="p">,</span> <span class="n">defaultElementType_</span><span class="p">,</span> <span class="n">fixed</span><span class="p">,</span> <span class="cm">/*typeSpecified=*/</span><span class="nb">false</span><span class="p">);</span>
+  <span class="p">}</span>
+
+  <span class="n">Expr</span> <span class="n">constant</span><span class="p">(</span><span class="k">const</span> <span class="n">Shape</span><span class="o">&amp;</span> <span class="n">shape</span><span class="p">,</span>
+                <span class="k">const</span> <span class="n">Ptr</span><span class="o">&lt;</span><span class="n">inits</span><span class="o">::</span><span class="n">NodeInitializer</span><span class="o">&gt;&amp;</span> <span class="n">init</span><span class="p">,</span>
+                <span class="n">Type</span> <span class="n">elementType</span><span class="p">)</span> <span class="p">{</span>
+    <span class="k">return</span> <span class="n">Expression</span><span class="o">&lt;</span><span class="n">ConstantNode</span><span class="o">&gt;</span><span class="p">(</span><span class="n">shared_from_this</span><span class="p">(),</span> <span class="n">shape</span><span class="p">,</span> <span class="n">init</span><span class="p">,</span> <span class="n">elementType</span><span class="p">);</span>
+  <span class="p">}</span>
+
+  <span class="n">Expr</span> <span class="n">constant</span><span class="p">(</span><span class="k">const</span> <span class="n">Shape</span><span class="o">&amp;</span> <span class="n">shape</span><span class="p">,</span>
+                <span class="k">const</span> <span class="n">Ptr</span><span class="o">&lt;</span><span class="n">inits</span><span class="o">::</span><span class="n">NodeInitializer</span><span class="o">&gt;&amp;</span> <span class="n">init</span><span class="p">)</span> <span class="p">{</span>
+    <span class="k">return</span> <span class="n">Expression</span><span class="o">&lt;</span><span class="n">ConstantNode</span><span class="o">&gt;</span><span class="p">(</span><span class="n">shared_from_this</span><span class="p">(),</span> <span class="n">shape</span><span class="p">,</span> <span class="n">init</span><span class="p">,</span> <span class="n">defaultElementType_</span><span class="p">);</span>
+  <span class="p">}</span>
+
+  <span class="c1">// @TODO: add version with iterators</span>
+  <span class="c1">// shortcut to turn vector of indices to integer tensor, to be used with operators</span>
+  <span class="c1">// like rows or select</span>
+  <span class="n">Expr</span> <span class="n">indices</span><span class="p">(</span><span class="k">const</span> <span class="n">std</span><span class="o">::</span><span class="n">vector</span><span class="o">&lt;</span><span class="n">IndexType</span><span class="o">&gt;&amp;</span> <span class="n">indicesVector</span><span class="p">)</span> <span class="p">{</span>
+    <span class="k">return</span> <span class="nf">constant</span><span class="p">({(</span><span class="kt">int</span><span class="p">)</span><span class="n">indicesVector</span><span class="p">.</span><span class="n">size</span><span class="p">()},</span>
+                    <span class="n">inits</span><span class="o">::</span><span class="n">fromVector</span><span class="p">(</span><span class="n">indicesVector</span><span class="p">),</span>
+                    <span class="n">Type</span><span class="o">::</span><span class="n">uint32</span><span class="p">);</span>
+  <span class="p">}</span>
+  <span class="c1">// this version sets up the shape such that the indices are in a given axis</span>
+  <span class="c1">// Use this if you want to pass these indices to gather().</span>
+  <span class="c1">// indexee shape = (3, 2, 5, 2); axis = 1 -&gt; resulting shape = (1, size of indicesVector, 1, 1)</span>
+  <span class="n">Expr</span> <span class="n">indices</span><span class="p">(</span><span class="k">const</span> <span class="n">std</span><span class="o">::</span><span class="n">vector</span><span class="o">&lt;</span><span class="n">IndexType</span><span class="o">&gt;&amp;</span> <span class="n">indicesVector</span><span class="p">,</span> <span class="n">Expr</span> <span class="n">indexee</span><span class="p">,</span> <span class="kt">int</span> <span class="n">axis</span> <span class="o">=</span> <span class="mi">-1</span><span class="p">)</span> <span class="p">{</span>
+    <span class="n">Shape</span> <span class="n">shape</span><span class="p">;</span>
+    <span class="n">shape</span><span class="p">.</span><span class="n">resize</span><span class="p">(</span><span class="n">indexee</span><span class="o">-&gt;</span><span class="n">shape</span><span class="p">().</span><span class="n">size</span><span class="p">());</span>
+    <span class="n">shape</span><span class="p">.</span><span class="n">set</span><span class="p">(</span><span class="n">axis</span><span class="p">,</span> <span class="n">indicesVector</span><span class="p">.</span><span class="n">size</span><span class="p">());</span>
+    <span class="k">return</span> <span class="nf">constant</span><span class="p">(</span><span class="n">Shape</span><span class="p">(</span><span class="n">shape</span><span class="p">),</span>
+                    <span class="n">inits</span><span class="o">::</span><span class="n">fromVector</span><span class="p">(</span><span class="n">indicesVector</span><span class="p">),</span>
+                    <span class="n">Type</span><span class="o">::</span><span class="n">uint32</span><span class="p">);</span>
+  <span class="p">}</span>
+
+  <span class="n">Expr</span> <span class="n">ones</span><span class="p">(</span><span class="k">const</span> <span class="n">Shape</span><span class="o">&amp;</span> <span class="n">shape</span><span class="p">,</span> <span class="n">Type</span> <span class="n">elementType</span><span class="p">)</span> <span class="p">{</span>
+    <span class="k">return</span> <span class="nf">constant</span><span class="p">(</span><span class="n">shape</span><span class="p">,</span> <span class="n">inits</span><span class="o">::</span><span class="n">ones</span><span class="p">(),</span> <span class="n">elementType</span><span class="p">);</span>
+  <span class="p">}</span>
+  <span class="n">Expr</span> <span class="n">ones</span><span class="p">(</span><span class="k">const</span> <span class="n">Shape</span><span class="o">&amp;</span> <span class="n">shape</span><span class="p">)</span> <span class="p">{</span>
+    <span class="k">return</span> <span class="nf">constant</span><span class="p">(</span><span class="n">shape</span><span class="p">,</span> <span class="n">inits</span><span class="o">::</span><span class="n">ones</span><span class="p">(),</span> <span class="n">defaultElementType_</span><span class="p">);</span>
+  <span class="p">}</span>
+
+  <span class="n">Expr</span> <span class="n">zeros</span><span class="p">(</span><span class="k">const</span> <span class="n">Shape</span><span class="o">&amp;</span> <span class="n">shape</span><span class="p">,</span> <span class="n">Type</span> <span class="n">elementType</span><span class="p">)</span> <span class="p">{</span>
+    <span class="k">return</span> <span class="nf">constant</span><span class="p">(</span><span class="n">shape</span><span class="p">,</span> <span class="n">inits</span><span class="o">::</span><span class="n">zeros</span><span class="p">(),</span> <span class="n">elementType</span><span class="p">);</span>
+  <span class="p">}</span>
+  <span class="n">Expr</span> <span class="n">zeros</span><span class="p">(</span><span class="k">const</span> <span class="n">Shape</span><span class="o">&amp;</span> <span class="n">shape</span><span class="p">)</span> <span class="p">{</span>
+    <span class="k">return</span> <span class="nf">constant</span><span class="p">(</span><span class="n">shape</span><span class="p">,</span> <span class="n">inits</span><span class="o">::</span><span class="n">zeros</span><span class="p">(),</span> <span class="n">defaultElementType_</span><span class="p">);</span>
+  <span class="p">}</span>
+
+  <span class="c1">// prob = dropProb, e.g. 0.1 means 90% of values are kept</span>
+  <span class="n">Expr</span> <span class="n">dropoutMask</span><span class="p">(</span><span class="kt">float</span> <span class="n">dropProb</span><span class="p">,</span> <span class="k">const</span> <span class="n">Shape</span><span class="o">&amp;</span> <span class="n">shape</span><span class="p">,</span> <span class="n">Type</span> <span class="n">elementType</span><span class="p">);</span>
+  <span class="n">Expr</span> <span class="nf">dropoutMask</span><span class="p">(</span><span class="kt">float</span> <span class="n">dropProb</span><span class="p">,</span> <span class="k">const</span> <span class="n">Shape</span><span class="o">&amp;</span> <span class="n">shape</span><span class="p">);</span>
+
+  <span class="n">Expr</span> <span class="nf">get</span><span class="p">(</span><span class="n">std</span><span class="o">::</span><span class="n">string</span> <span class="n">name</span><span class="p">)</span> <span class="p">{</span>
+    <span class="k">if</span><span class="p">(</span><span class="o">!</span><span class="n">namespace_</span><span class="p">.</span><span class="n">empty</span><span class="p">())</span>
+      <span class="n">name</span> <span class="o">=</span> <span class="n">namespace_</span> <span class="o">+</span> <span class="s">&quot;::&quot;</span> <span class="o">+</span> <span class="n">name</span><span class="p">;</span>
+    <span class="n">Expr</span> <span class="n">p</span><span class="p">;</span> <span class="n">Ptr</span><span class="o">&lt;</span><span class="n">Parameters</span><span class="o">&gt;</span> <span class="n">params</span><span class="p">;</span> <span class="n">std</span><span class="o">::</span><span class="n">tie</span>
+    <span class="p">(</span><span class="n">p</span><span class="p">,</span> <span class="n">params</span><span class="p">)</span> <span class="o">=</span> <span class="n">findParams</span><span class="p">(</span><span class="n">name</span><span class="p">,</span> <span class="n">defaultElementType_</span><span class="p">,</span> <span class="cm">/*specifiedType=*/</span><span class="nb">false</span><span class="p">);</span>
+    <span class="k">return</span> <span class="n">p</span><span class="p">;</span>
+  <span class="p">}</span>
+
+  <span class="n">Expr</span> <span class="nf">get</span><span class="p">(</span><span class="n">std</span><span class="o">::</span><span class="n">string</span> <span class="n">name</span><span class="p">,</span> <span class="n">Type</span> <span class="n">specifiedElementType</span><span class="p">)</span> <span class="p">{</span>
+    <span class="k">if</span><span class="p">(</span><span class="o">!</span><span class="n">namespace_</span><span class="p">.</span><span class="n">empty</span><span class="p">())</span>
+      <span class="n">name</span> <span class="o">=</span> <span class="n">namespace_</span> <span class="o">+</span> <span class="s">&quot;::&quot;</span> <span class="o">+</span> <span class="n">name</span><span class="p">;</span>
+    <span class="n">Expr</span> <span class="n">p</span><span class="p">;</span> <span class="n">Ptr</span><span class="o">&lt;</span><span class="n">Parameters</span><span class="o">&gt;</span> <span class="n">params</span><span class="p">;</span> <span class="n">std</span><span class="o">::</span><span class="n">tie</span>
+    <span class="p">(</span><span class="n">p</span><span class="p">,</span> <span class="n">params</span><span class="p">)</span> <span class="o">=</span> <span class="n">findParams</span><span class="p">(</span><span class="n">name</span><span class="p">,</span> <span class="n">specifiedElementType</span><span class="p">,</span> <span class="cm">/*specifiedType=*/</span><span class="nb">true</span><span class="p">);</span>
+    <span class="k">return</span> <span class="n">p</span><span class="p">;</span>
+  <span class="p">}</span>
+
+  <span class="n">Ptr</span><span class="o">&lt;</span><span class="n">Parameters</span><span class="o">&gt;&amp;</span> <span class="n">params</span><span class="p">()</span> <span class="p">{</span>
+    <span class="c1">// There are no parameter objects, that&#39;s weird.</span>
+    <span class="n">ABORT_IF</span><span class="p">(</span><span class="n">paramsByElementType_</span><span class="p">.</span><span class="n">empty</span><span class="p">(),</span> <span class="s">&quot;No parameter object has been created&quot;</span><span class="p">);</span>
+
+    <span class="c1">// Safeguard against accessing parameters from the outside with multiple parameter types, not yet supported</span>
+    <span class="n">ABORT_IF</span><span class="p">(</span><span class="n">paramsByElementType_</span><span class="p">.</span><span class="n">size</span><span class="p">()</span> <span class="o">&gt;</span> <span class="mi">1</span><span class="p">,</span> <span class="s">&quot;Calling of params() is currently not supported with multiple ({}) parameters&quot;</span><span class="p">,</span> <span class="n">paramsByElementType_</span><span class="p">.</span><span class="n">size</span><span class="p">());</span>
+
+    <span class="c1">// Safeguard against accessing parameters from the outside with other than default parameter type, not yet supported</span>
+    <span class="k">auto</span> <span class="n">it</span> <span class="o">=</span> <span class="n">paramsByElementType_</span><span class="p">.</span><span class="n">find</span><span class="p">(</span><span class="n">defaultElementType_</span><span class="p">);</span>
+    <span class="n">ABORT_IF</span><span class="p">(</span><span class="n">it</span> <span class="o">==</span> <span class="n">paramsByElementType_</span><span class="p">.</span><span class="n">end</span><span class="p">(),</span> <span class="s">&quot;Parameter object for type {} does not exist&quot;</span><span class="p">,</span> <span class="n">defaultElementType_</span><span class="p">);</span>
+
+    <span class="k">return</span> <span class="n">it</span><span class="o">-&gt;</span><span class="n">second</span><span class="p">;</span>
+  <span class="p">}</span>
+
+  <span class="kt">void</span> <span class="n">setDefaultElementType</span><span class="p">(</span><span class="n">Type</span> <span class="n">defaultElementType</span><span class="p">)</span> <span class="p">{</span>
+    <span class="n">ABORT_IF</span><span class="p">(</span><span class="o">!</span><span class="n">paramsByElementType_</span><span class="p">.</span><span class="n">empty</span><span class="p">()</span> <span class="o">&amp;&amp;</span> <span class="n">defaultElementType</span> <span class="o">!=</span> <span class="n">defaultElementType_</span><span class="p">,</span>
+             <span class="s">&quot;Parameter objects already exist, cannot change default type from {} to {}&quot;</span><span class="p">,</span>
+             <span class="n">defaultElementType_</span><span class="p">,</span> <span class="n">defaultElementType</span><span class="p">);</span>
+    <span class="n">defaultElementType_</span> <span class="o">=</span> <span class="n">defaultElementType</span><span class="p">;</span>
+  <span class="p">}</span>
+
+  <span class="n">Expr</span> <span class="n">add</span><span class="p">(</span><span class="n">Expr</span> <span class="n">node</span><span class="p">);</span>
+
+  <span class="kt">void</span> <span class="nf">allocateForward</span><span class="p">(</span><span class="n">Expr</span> <span class="n">node</span><span class="p">)</span> <span class="p">{</span>
+    <span class="k">if</span><span class="p">(</span><span class="n">tensors_</span><span class="p">)</span>
+      <span class="n">tensors_</span><span class="o">-&gt;</span><span class="n">allocateForward</span><span class="p">(</span><span class="n">node</span><span class="p">);</span>
+  <span class="p">}</span>
+
+  <span class="kt">void</span> <span class="nf">allocateBackward</span><span class="p">(</span><span class="n">Expr</span> <span class="n">node</span><span class="p">)</span> <span class="p">{</span>
+    <span class="k">if</span><span class="p">(</span><span class="n">tensors_</span><span class="p">)</span>
+      <span class="n">tensors_</span><span class="o">-&gt;</span><span class="n">allocateBackward</span><span class="p">(</span><span class="n">node</span><span class="p">);</span>
+  <span class="p">}</span>
+
+  <span class="kt">void</span> <span class="nf">free</span><span class="p">(</span><span class="k">const</span> <span class="n">Tensor</span><span class="o">&amp;</span> <span class="n">tensor</span><span class="p">)</span> <span class="p">{</span>
+    <span class="k">if</span><span class="p">(</span><span class="n">tensors_</span><span class="p">)</span>
+      <span class="n">tensors_</span><span class="o">-&gt;</span><span class="n">free</span><span class="p">(</span><span class="n">tensor</span><span class="p">);</span>
+  <span class="p">}</span>
+
+  <span class="c1">// Returns the memory allocator of the graph workspace, allocates row unstructured memory (but 256-byte aligned)</span>
+  <span class="n">Ptr</span><span class="o">&lt;</span><span class="n">Allocator</span><span class="o">&gt;</span> <span class="n">allocator</span><span class="p">()</span> <span class="p">{</span> <span class="k">return</span> <span class="n">tensors_</span><span class="o">-&gt;</span><span class="n">getAllocator</span><span class="p">();</span> <span class="p">}</span> <span class="c1">// @TODO: rename this to getAllocator();</span>
+
+  <span class="c1">// Returns the tensor allocator of the graph workspace, different from above as proper tensor objects are allocated</span>
+  <span class="n">Ptr</span><span class="o">&lt;</span><span class="n">TensorAllocator</span><span class="o">&gt;</span> <span class="n">getTensorAllocator</span><span class="p">()</span> <span class="p">{</span> <span class="k">return</span> <span class="n">tensors_</span><span class="o">-&gt;</span><span class="n">getTensorAllocator</span><span class="p">();</span> <span class="p">}</span>
+
+  <span class="kt">void</span> <span class="n">clear</span><span class="p">()</span> <span class="p">{</span>
+    <span class="c1">// clear everything apart from parameters and memoized nodes</span>
+    <span class="n">count_</span> <span class="o">=</span> <span class="mi">0</span><span class="p">;</span>
+    <span class="n">nodesForward_</span><span class="p">.</span><span class="n">clear</span><span class="p">();</span>
+    <span class="n">nodesBackward_</span><span class="p">.</span><span class="n">clear</span><span class="p">();</span>
+
+    <span class="n">topNodes_</span><span class="p">.</span><span class="n">clear</span><span class="p">();</span>
+
+    <span class="n">tensors_</span><span class="o">-&gt;</span><span class="n">clear</span><span class="p">();</span>
+  <span class="p">}</span>
+
+  <span class="kt">void</span> <span class="n">setReloaded</span><span class="p">(</span><span class="kt">bool</span> <span class="n">reloaded</span><span class="p">)</span> <span class="p">{</span> <span class="n">reloaded_</span> <span class="o">=</span> <span class="n">reloaded</span><span class="p">;</span> <span class="p">}</span>
+
+  <span class="kt">void</span> <span class="n">setThrowNaN</span><span class="p">(</span><span class="kt">bool</span> <span class="n">throwNaN</span><span class="p">)</span> <span class="p">{</span> <span class="n">throwNaN_</span> <span class="o">=</span> <span class="n">throwNaN</span><span class="p">;</span> <span class="p">}</span>
+  <span class="kt">bool</span> <span class="n">getThrowNaN</span><span class="p">()</span> <span class="p">{</span> <span class="k">return</span> <span class="n">throwNaN_</span><span class="p">;</span> <span class="p">}</span>
+
+<span class="k">public</span><span class="o">:</span>
+  <span class="c1">// loading from array of io::Items</span>
+  <span class="kt">void</span> <span class="n">load</span><span class="p">(</span><span class="n">std</span><span class="o">::</span><span class="n">vector</span><span class="o">&lt;</span><span class="n">io</span><span class="o">::</span><span class="n">Item</span><span class="o">&gt;&amp;</span> <span class="n">ioItems</span><span class="p">,</span> <span class="kt">bool</span> <span class="n">markReloaded</span> <span class="o">=</span> <span class="nb">true</span><span class="p">)</span> <span class="p">{</span>
+    <span class="n">setReloaded</span><span class="p">(</span><span class="nb">false</span><span class="p">);</span>
+    <span class="k">for</span><span class="p">(</span><span class="k">auto</span><span class="o">&amp;</span> <span class="nl">item</span> <span class="p">:</span> <span class="n">ioItems</span><span class="p">)</span> <span class="p">{</span>
+      <span class="n">std</span><span class="o">::</span><span class="n">string</span> <span class="n">pName</span> <span class="o">=</span> <span class="n">item</span><span class="p">.</span><span class="n">name</span><span class="p">;</span>
+      <span class="c1">// skip over special parameters starting with &quot;special:&quot;</span>
+      <span class="k">if</span><span class="p">(</span><span class="n">pName</span><span class="p">.</span><span class="n">substr</span><span class="p">(</span><span class="mi">0</span><span class="p">,</span> <span class="mi">8</span><span class="p">)</span> <span class="o">==</span> <span class="s">&quot;special:&quot;</span><span class="p">)</span>
+        <span class="k">continue</span><span class="p">;</span>
+
+      <span class="c1">// if during loading the loaded type is of the same type class as the default element type, allow conversion;</span>
+      <span class="c1">// otherwise keep the loaded type. This is used when e.g. loading a float32 model as a float16 model as both</span>
+      <span class="c1">// have type class TypeClass::float_type.</span>
+      <span class="k">auto</span> <span class="n">loadElementType</span> <span class="o">=</span> <span class="n">isSameTypeClass</span><span class="p">(</span><span class="n">item</span><span class="p">.</span><span class="n">type</span><span class="p">,</span> <span class="n">defaultElementType_</span><span class="p">)</span> <span class="o">?</span> <span class="nl">defaultElementType_</span> <span class="p">:</span> <span class="n">item</span><span class="p">.</span><span class="n">type</span><span class="p">;</span>
+      <span class="n">param</span><span class="p">(</span><span class="n">pName</span><span class="p">,</span> <span class="n">item</span><span class="p">.</span><span class="n">shape</span><span class="p">,</span> <span class="n">inits</span><span class="o">::</span><span class="n">fromItem</span><span class="p">(</span><span class="n">item</span><span class="p">),</span> <span class="n">loadElementType</span><span class="p">,</span> <span class="cm">/*fixed=*/</span><span class="nb">false</span><span class="p">);</span>
+    <span class="p">}</span>
+    <span class="k">if</span><span class="p">(</span><span class="n">markReloaded</span><span class="p">)</span>
+      <span class="n">setReloaded</span><span class="p">(</span><span class="nb">true</span><span class="p">);</span>
+  <span class="p">}</span>
+
+  <span class="kt">void</span> <span class="n">load</span><span class="p">(</span><span class="k">const</span> <span class="n">std</span><span class="o">::</span><span class="n">string</span><span class="o">&amp;</span> <span class="n">name</span><span class="p">,</span> <span class="kt">bool</span> <span class="n">markReloaded</span> <span class="o">=</span> <span class="nb">true</span><span class="p">)</span> <span class="p">{</span>
+    <span class="n">LOG</span><span class="p">(</span><span class="n">info</span><span class="p">,</span> <span class="s">&quot;Loading model from {}&quot;</span><span class="p">,</span> <span class="n">name</span><span class="p">);</span>
+    <span class="k">auto</span> <span class="n">items</span> <span class="o">=</span> <span class="n">io</span><span class="o">::</span><span class="n">loadItems</span><span class="p">(</span><span class="n">name</span><span class="p">);</span>
+    <span class="n">load</span><span class="p">(</span><span class="n">items</span><span class="p">,</span> <span class="n">markReloaded</span><span class="p">);</span>
+  <span class="p">}</span>
+
+  <span class="kt">void</span> <span class="n">load</span><span class="p">(</span><span class="k">const</span> <span class="kt">void</span><span class="o">*</span> <span class="n">ptr</span><span class="p">,</span> <span class="kt">bool</span> <span class="n">markReloaded</span> <span class="o">=</span> <span class="nb">true</span><span class="p">)</span> <span class="p">{</span>
+    <span class="n">LOG</span><span class="p">(</span><span class="n">info</span><span class="p">,</span> <span class="s">&quot;Loading model from buffer at {}&quot;</span><span class="p">,</span> <span class="n">ptr</span><span class="p">);</span>
+    <span class="k">auto</span> <span class="n">items</span> <span class="o">=</span> <span class="n">io</span><span class="o">::</span><span class="n">loadItems</span><span class="p">(</span><span class="n">ptr</span><span class="p">);</span>
+    <span class="n">load</span><span class="p">(</span><span class="n">items</span><span class="p">,</span> <span class="n">markReloaded</span><span class="p">);</span>
+  <span class="p">}</span>
+
+  <span class="kt">void</span> <span class="n">mmap</span><span class="p">(</span><span class="k">const</span> <span class="kt">void</span><span class="o">*</span> <span class="n">ptr</span><span class="p">,</span> <span class="kt">bool</span> <span class="n">markReloaded</span> <span class="o">=</span> <span class="nb">true</span><span class="p">)</span> <span class="p">{</span>
+    <span class="n">ABORT_IF</span><span class="p">(</span><span class="n">backend_</span><span class="o">-&gt;</span><span class="n">getDeviceId</span><span class="p">().</span><span class="n">type</span> <span class="o">!=</span> <span class="n">DeviceType</span><span class="o">::</span><span class="n">cpu</span> <span class="o">||</span> <span class="o">!</span><span class="n">inferenceOnly_</span><span class="p">,</span>
+             <span class="s">&quot;Memory mapping only supported for CPU inference mode&quot;</span><span class="p">);</span>
+
+    <span class="n">LOG</span><span class="p">(</span><span class="n">info</span><span class="p">,</span> <span class="s">&quot;Memory mapping model at {}&quot;</span><span class="p">,</span> <span class="n">ptr</span><span class="p">);</span>
+    <span class="k">auto</span> <span class="n">items</span> <span class="o">=</span> <span class="n">io</span><span class="o">::</span><span class="n">mmapItems</span><span class="p">(</span><span class="n">ptr</span><span class="p">);</span>
+
+    <span class="c1">// Deal with default parameter set object that might not be a mapped object.</span>
+    <span class="c1">// This gets assigned during ExpressionGraph::setDevice(...) and by default</span>
+    <span class="c1">// would contain allocated tensors. Here we replace it with a mmapped version.</span>
+    <span class="k">auto</span> <span class="n">it</span> <span class="o">=</span> <span class="n">paramsByElementType_</span><span class="p">.</span><span class="n">find</span><span class="p">(</span><span class="n">defaultElementType_</span><span class="p">);</span>
+    <span class="k">if</span><span class="p">(</span><span class="n">it</span> <span class="o">!=</span> <span class="n">paramsByElementType_</span><span class="p">.</span><span class="n">end</span><span class="p">())</span> <span class="p">{</span>
+      <span class="c1">// there is parameter object for that type</span>
+      <span class="k">auto</span> <span class="n">defaultParams</span> <span class="o">=</span> <span class="n">std</span><span class="o">::</span><span class="n">dynamic_pointer_cast</span><span class="o">&lt;</span><span class="n">MappedParameters</span><span class="o">&gt;</span><span class="p">(</span><span class="n">it</span><span class="o">-&gt;</span><span class="n">second</span><span class="p">);</span>
+      <span class="k">if</span><span class="p">(</span><span class="o">!</span><span class="n">defaultParams</span><span class="p">)</span> <span class="p">{</span>
+        <span class="c1">// but it&#39;s not mapped, so delete it and replace it with a mapped version</span>
+        <span class="n">defaultParams</span> <span class="o">=</span> <span class="n">New</span><span class="o">&lt;</span><span class="n">MappedParameters</span><span class="o">&gt;</span><span class="p">(</span><span class="n">defaultElementType_</span><span class="p">);</span>
+        <span class="n">defaultParams</span><span class="o">-&gt;</span><span class="n">init</span><span class="p">(</span><span class="n">backend_</span><span class="p">);</span>
+        <span class="n">paramsByElementType_</span><span class="p">[</span><span class="n">defaultElementType_</span><span class="p">]</span> <span class="o">=</span> <span class="n">defaultParams</span><span class="p">;</span>
+      <span class="p">}</span>
+    <span class="p">}</span>
+
+
+    <span class="c1">// pre-populate parameters by type</span>
+    <span class="k">for</span><span class="p">(</span><span class="k">auto</span><span class="o">&amp;</span> <span class="nl">item</span> <span class="p">:</span> <span class="n">items</span><span class="p">)</span> <span class="p">{</span>
+      <span class="k">auto</span> <span class="n">it1</span> <span class="o">=</span> <span class="n">paramsByElementType_</span><span class="p">.</span><span class="n">find</span><span class="p">(</span><span class="n">item</span><span class="p">.</span><span class="n">type</span><span class="p">);</span>
+      <span class="k">if</span><span class="p">(</span><span class="n">it1</span> <span class="o">==</span> <span class="n">paramsByElementType_</span><span class="p">.</span><span class="n">end</span><span class="p">())</span> <span class="p">{</span>
+        <span class="k">auto</span> <span class="n">params</span> <span class="o">=</span> <span class="n">New</span><span class="o">&lt;</span><span class="n">MappedParameters</span><span class="o">&gt;</span><span class="p">(</span><span class="n">item</span><span class="p">.</span><span class="n">type</span><span class="p">);</span>
+        <span class="n">params</span><span class="o">-&gt;</span><span class="n">init</span><span class="p">(</span><span class="n">backend_</span><span class="p">);</span>
+        <span class="n">paramsByElementType_</span><span class="p">.</span><span class="n">insert</span><span class="p">({</span><span class="n">item</span><span class="p">.</span><span class="n">type</span><span class="p">,</span> <span class="n">params</span><span class="p">});</span>
+      <span class="p">}</span>
+    <span class="p">}</span>
+
+    <span class="n">load</span><span class="p">(</span><span class="n">items</span><span class="p">,</span> <span class="n">markReloaded</span><span class="p">);</span>
+  <span class="p">}</span>
+
+<span class="k">public</span><span class="o">:</span>
+  <span class="c1">// convert all parameters into an array of io::Item elements, for saving</span>
+  <span class="kt">void</span> <span class="n">save</span><span class="p">(</span><span class="n">std</span><span class="o">::</span><span class="n">vector</span><span class="o">&lt;</span><span class="n">io</span><span class="o">::</span><span class="n">Item</span><span class="o">&gt;&amp;</span> <span class="n">ioItems</span><span class="p">,</span> <span class="n">Type</span> <span class="n">saveElementType</span> <span class="o">=</span> <span class="n">Type</span><span class="o">::</span><span class="n">float32</span><span class="p">);</span>
+
+  <span class="kt">void</span> <span class="nf">save</span><span class="p">(</span><span class="k">const</span> <span class="n">std</span><span class="o">::</span><span class="n">string</span><span class="o">&amp;</span> <span class="n">name</span><span class="p">,</span> <span class="k">const</span> <span class="n">std</span><span class="o">::</span><span class="n">string</span><span class="o">&amp;</span> <span class="n">meta</span> <span class="o">=</span> <span class="s">&quot;&quot;</span><span class="p">,</span> <span class="n">Type</span> <span class="n">saveElementType</span> <span class="o">=</span> <span class="n">Type</span><span class="o">::</span><span class="n">float32</span><span class="p">)</span> <span class="p">{</span>
+    <span class="n">std</span><span class="o">::</span><span class="n">vector</span><span class="o">&lt;</span><span class="n">io</span><span class="o">::</span><span class="n">Item</span><span class="o">&gt;</span> <span class="n">ioItems</span><span class="p">;</span>
+    <span class="n">save</span><span class="p">(</span><span class="n">ioItems</span><span class="p">,</span> <span class="n">saveElementType</span><span class="p">);</span>
+    <span class="k">if</span><span class="p">(</span><span class="o">!</span><span class="n">meta</span><span class="p">.</span><span class="n">empty</span><span class="p">())</span>
+      <span class="n">io</span><span class="o">::</span><span class="n">addMetaToItems</span><span class="p">(</span><span class="n">meta</span><span class="p">,</span> <span class="s">&quot;special:model.yml&quot;</span><span class="p">,</span> <span class="n">ioItems</span><span class="p">);</span>
+    <span class="n">io</span><span class="o">::</span><span class="n">saveItems</span><span class="p">(</span><span class="n">name</span><span class="p">,</span> <span class="n">ioItems</span><span class="p">);</span>
+  <span class="p">}</span>
+<span class="p">};</span>
+
+<span class="k">template</span> <span class="o">&lt;</span><span class="k">class</span> <span class="nc">T</span><span class="p">,</span> <span class="k">typename</span><span class="p">...</span> <span class="n">Args</span><span class="o">&gt;</span>
+<span class="n">Expr</span> <span class="n">Expression</span><span class="p">(</span><span class="n">Args</span><span class="o">&amp;&amp;</span><span class="p">...</span> <span class="n">args</span><span class="p">)</span> <span class="p">{</span>
+  <span class="k">auto</span> <span class="n">e</span> <span class="o">=</span> <span class="n">Expr</span><span class="p">(</span><span class="k">new</span> <span class="n">T</span><span class="p">(</span><span class="n">std</span><span class="o">::</span><span class="n">forward</span><span class="o">&lt;</span><span class="n">Args</span><span class="o">&gt;</span><span class="p">(</span><span class="n">args</span><span class="p">)...));</span>
+  <span class="k">return</span> <span class="n">e</span><span class="o">-&gt;</span><span class="n">graph</span><span class="p">()</span><span class="o">-&gt;</span><span class="n">add</span><span class="p">(</span><span class="n">e</span><span class="p">);</span>
+<span class="p">}</span>
+<span class="p">}</span>  <span class="c1">// namespace marian</span>
+</pre></div>
+</div>
+</div>
+
+
+           </div>
+           
+          </div>
+          <footer>
+
+  <hr/>
+
+  <div role="contentinfo">
+    <p>
+        &#169; Copyright 2021, Marian NMT Team.
+
+    </p>
+  </div>
+    
+    
+    
+    Built with <a href="https://www.sphinx-doc.org/">Sphinx</a> using a
+    
+    <a href="https://github.com/readthedocs/sphinx_rtd_theme">theme</a>
+    
+    provided by <a href="https://readthedocs.org">Read the Docs</a>. 
+
+</footer>
+        </div>
+      </div>
+
+    </section>
+
+  </div>
+  
+
+  <script type="text/javascript">
+      jQuery(function () {
+          SphinxRtdTheme.Navigation.enable(true);
+      });
+  </script>
+
+  
+  
+    
+   
+
+</body>
+</html>

@@ -1,0 +1,298 @@
+
+
+<!DOCTYPE html>
+<html class="writer-html5" lang="en" >
+<head>
+  <meta charset="utf-8" />
+  
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  
+  <title>Class ScorerWrapper &mdash; Marian NMT v1.10.1 2021-02-23 documentation</title>
+  
+
+  
+  <link rel="stylesheet" href="../_static/css/theme.css" type="text/css" />
+  <link rel="stylesheet" href="../_static/pygments.css" type="text/css" />
+  <link rel="stylesheet" href="../_static/css/custom.css" type="text/css" />
+  <link rel="stylesheet" href="../_static/collapsible-lists/css/tree_view.css" type="text/css" />
+
+  
+  
+
+  
+  
+
+  
+    <link rel="canonical" href="http://marian-nmt.github.io/docs/api/api/classmarian_1_1ScorerWrapper.html" />
+
+  
+  <!--[if lt IE 9]>
+    <script src="../_static/js/html5shiv.min.js"></script>
+  <![endif]-->
+  
+    
+      <script type="text/javascript" id="documentation_options" data-url_root="../" src="../_static/documentation_options.js"></script>
+        <script src="../_static/jquery.js"></script>
+        <script src="../_static/underscore.js"></script>
+        <script src="../_static/doctools.js"></script>
+        <script src="../_static/language_data.js"></script>
+        <script src="../_static/collapsible-lists/js/CollapsibleLists.compressed.js"></script>
+        <script src="../_static/collapsible-lists/js/apply-collapsible-lists.js"></script>
+    
+    <script type="text/javascript" src="../_static/js/theme.js"></script>
+
+    
+    <link rel="index" title="Index" href="../genindex.html" />
+    <link rel="search" title="Search" href="../search.html" />
+    <link rel="next" title="Class ScorerWrapperState" href="classmarian_1_1ScorerWrapperState.html" />
+    <link rel="prev" title="Class ScorerState" href="classmarian_1_1ScorerState.html" /> 
+</head>
+
+<body class="wy-body-for-nav">
+
+   
+  <div class="wy-grid-for-nav">
+    
+    <nav data-toggle="wy-nav-shift" class="wy-nav-side">
+      <div class="wy-side-scroll">
+        <div class="wy-side-nav-search" >
+          
+
+          
+            <a href="../index.html" class="icon icon-home"> Marian NMT
+          
+
+          
+          </a>
+
+          
+            
+            
+              <div class="version">
+                v1.10.1
+              </div>
+            
+          
+
+          
+<div role="search">
+  <form id="rtd-search-form" class="wy-form" action="../search.html" method="get">
+    <input type="text" name="q" placeholder="Search docs" />
+    <input type="hidden" name="check_keywords" value="yes" />
+    <input type="hidden" name="area" value="default" />
+  </form>
+</div>
+
+          
+        </div>
+
+        
+        <div class="wy-menu wy-menu-vertical" data-spy="affix" role="navigation" aria-label="main navigation">
+          
+            
+            
+              
+            
+            
+              <p class="caption"><span class="caption-text">Contents:</span></p>
+<ul>
+<li class="toctree-l1"><a class="reference internal" href="../install.html">Installation</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../graph.html">Expression graphs</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../operators.html">Graph operations</a></li>
+<li class="toctree-l1"><a class="reference internal" href="library_index.html">Library API</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../contributing.html">How to contribute to Marian</a></li>
+</ul>
+
+            
+          
+        </div>
+        
+      </div>
+    </nav>
+
+    <section data-toggle="wy-nav-shift" class="wy-nav-content-wrap">
+
+      
+      <nav class="wy-nav-top" aria-label="top navigation">
+        
+          <i data-toggle="wy-nav-top" class="fa fa-bars"></i>
+          <a href="../index.html">Marian NMT</a>
+        
+      </nav>
+
+
+      <div class="wy-nav-content">
+        
+        <div class="rst-content">
+        
+          
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+<div role="navigation" aria-label="breadcrumbs navigation">
+
+  <ul class="wy-breadcrumbs">
+    
+      <li><a href="../index.html" class="icon icon-home"></a> &raquo;</li>
+        
+          <li><a href="library_index.html">Library API</a> &raquo;</li>
+        
+      <li>Class ScorerWrapper</li>
+    
+    
+      <li class="wy-breadcrumbs-aside">
+        
+          
+            <a href="../_sources/api/classmarian_1_1ScorerWrapper.rst.txt" rel="nofollow"> View page source</a>
+          
+        
+      </li>
+    
+  </ul>
+
+  
+  <hr/>
+</div>
+          <div role="main" class="document" itemscope="itemscope" itemtype="http://schema.org/Article">
+           <div itemprop="articleBody">
+            
+  <div class="section" id="class-scorerwrapper">
+<span id="exhale-class-classmarian-1-1scorerwrapper"></span><h1>Class ScorerWrapper<a class="headerlink" href="#class-scorerwrapper" title="Permalink to this headline">¶</a></h1>
+<ul class="simple">
+<li><p>Defined in <a class="reference internal" href="file_src_translator_scorers.h.html#file-src-translator-scorers-h"><span class="std std-ref">File scorers.h</span></a></p></li>
+</ul>
+<div class="section" id="inheritance-relationships">
+<h2>Inheritance Relationships<a class="headerlink" href="#inheritance-relationships" title="Permalink to this headline">¶</a></h2>
+<div class="section" id="base-type">
+<h3>Base Type<a class="headerlink" href="#base-type" title="Permalink to this headline">¶</a></h3>
+<ul class="simple">
+<li><p><code class="docutils literal notranslate"><span class="pre">public</span> <span class="pre">marian::Scorer</span></code> (<a class="reference internal" href="classmarian_1_1Scorer.html#exhale-class-classmarian-1-1scorer"><span class="std std-ref">Class Scorer</span></a>)</p></li>
+</ul>
+</div>
+</div>
+<div class="section" id="class-documentation">
+<h2>Class Documentation<a class="headerlink" href="#class-documentation" title="Permalink to this headline">¶</a></h2>
+<dl class="class">
+<dt id="_CPPv4N6marian13ScorerWrapperE">
+<span id="_CPPv3N6marian13ScorerWrapperE"></span><span id="_CPPv2N6marian13ScorerWrapperE"></span><span id="marian::ScorerWrapper"></span><span class="target" id="classmarian_1_1ScorerWrapper"></span><em class="property">class </em><code class="sig-name descname">ScorerWrapper</code> : <em class="property">public</em> marian::<a class="reference internal" href="classmarian_1_1Scorer.html#_CPPv4N6marian6ScorerE" title="marian::Scorer">Scorer</a><a class="headerlink" href="#_CPPv4N6marian13ScorerWrapperE" title="Permalink to this definition">¶</a><br /></dt>
+<dd><div class="breathe-sectiondef docutils container">
+<p class="breathe-sectiondef-title rubric">Public Functions</p>
+<dl class="function">
+<dt id="_CPPv4N6marian13ScorerWrapper13ScorerWrapperE3PtrIN6models6IModelEERKNSt6stringEfRKNSt6stringE">
+<span id="_CPPv3N6marian13ScorerWrapper13ScorerWrapperE3PtrIN6models6IModelEERKNSt6stringEfRKNSt6stringE"></span><span id="_CPPv2N6marian13ScorerWrapper13ScorerWrapperE3PtrIN6models6IModelEERKNSt6stringEfRKNSt6stringE"></span><span id="marian::ScorerWrapper::ScorerWrapper__Ptr:models::IModel:.ssCR.float.ssCR"></span><span class="target" id="classmarian_1_1ScorerWrapper_1a0397733eda6751d3d8eff775bffe7229"></span><code class="sig-name descname">ScorerWrapper</code><span class="sig-paren">(</span><a class="reference internal" href="typedef_definitions_8h_1ad1a373be43a00ef9ce35666145137b08.html#_CPPv4N6marian3PtrE" title="marian::Ptr">Ptr</a>&lt;models::IModel&gt; <em>encdec</em>, <em class="property">const</em> <a class="reference internal" href="function_expression__operators_8cpp_1af4e69a5f7167b63522135a1f6b8a5dd8.html#_CPPv4N6marianStE4Expri" title="marian::std">std</a>::string &amp;<em>name</em>, float <em>weight</em>, <em class="property">const</em> <a class="reference internal" href="function_expression__operators_8cpp_1af4e69a5f7167b63522135a1f6b8a5dd8.html#_CPPv4N6marianStE4Expri" title="marian::std">std</a>::string &amp;<em>fname</em><span class="sig-paren">)</span><a class="headerlink" href="#_CPPv4N6marian13ScorerWrapper13ScorerWrapperE3PtrIN6models6IModelEERKNSt6stringEfRKNSt6stringE" title="Permalink to this definition">¶</a><br /></dt>
+<dd></dd></dl>
+
+<dl class="function">
+<dt id="_CPPv4N6marian13ScorerWrapper13ScorerWrapperE3PtrIN6models6IModelEERKNSt6stringEfPKv">
+<span id="_CPPv3N6marian13ScorerWrapper13ScorerWrapperE3PtrIN6models6IModelEERKNSt6stringEfPKv"></span><span id="_CPPv2N6marian13ScorerWrapper13ScorerWrapperE3PtrIN6models6IModelEERKNSt6stringEfPKv"></span><span id="marian::ScorerWrapper::ScorerWrapper__Ptr:models::IModel:.ssCR.float.voidCP"></span><span class="target" id="classmarian_1_1ScorerWrapper_1ae88dd5d90a0fbf5f4df42d184610e902"></span><code class="sig-name descname">ScorerWrapper</code><span class="sig-paren">(</span><a class="reference internal" href="typedef_definitions_8h_1ad1a373be43a00ef9ce35666145137b08.html#_CPPv4N6marian3PtrE" title="marian::Ptr">Ptr</a>&lt;models::IModel&gt; <em>encdec</em>, <em class="property">const</em> <a class="reference internal" href="function_expression__operators_8cpp_1af4e69a5f7167b63522135a1f6b8a5dd8.html#_CPPv4N6marianStE4Expri" title="marian::std">std</a>::string &amp;<em>name</em>, float <em>weight</em>, <em class="property">const</em> void *<em>ptr</em><span class="sig-paren">)</span><a class="headerlink" href="#_CPPv4N6marian13ScorerWrapper13ScorerWrapperE3PtrIN6models6IModelEERKNSt6stringEfPKv" title="Permalink to this definition">¶</a><br /></dt>
+<dd></dd></dl>
+
+<dl class="function">
+<dt id="_CPPv4N6marian13ScorerWrapperD0Ev">
+<span id="_CPPv3N6marian13ScorerWrapperD0Ev"></span><span id="_CPPv2N6marian13ScorerWrapperD0Ev"></span><span id="marian::ScorerWrapper::~ScorerWrapper"></span><span class="target" id="classmarian_1_1ScorerWrapper_1a68490d545d82242905ba4328da920764"></span><em class="property">virtual</em> <code class="sig-name descname">~ScorerWrapper</code><span class="sig-paren">(</span><span class="sig-paren">)</span><a class="headerlink" href="#_CPPv4N6marian13ScorerWrapperD0Ev" title="Permalink to this definition">¶</a><br /></dt>
+<dd></dd></dl>
+
+<dl class="function">
+<dt id="_CPPv4N6marian13ScorerWrapper4initE3PtrI15ExpressionGraphE">
+<span id="_CPPv3N6marian13ScorerWrapper4initE3PtrI15ExpressionGraphE"></span><span id="_CPPv2N6marian13ScorerWrapper4initE3PtrI15ExpressionGraphE"></span><span id="marian::ScorerWrapper::init__Ptr:ExpressionGraph:"></span><span class="target" id="classmarian_1_1ScorerWrapper_1a7c2ebac6fe73fb87b18156c738941d0b"></span><em class="property">virtual</em> void <code class="sig-name descname">init</code><span class="sig-paren">(</span><a class="reference internal" href="typedef_definitions_8h_1ad1a373be43a00ef9ce35666145137b08.html#_CPPv4N6marian3PtrE" title="marian::Ptr">Ptr</a>&lt;<a class="reference internal" href="classmarian_1_1ExpressionGraph.html#_CPPv4N6marian15ExpressionGraphE" title="marian::ExpressionGraph">ExpressionGraph</a>&gt; <em>graph</em><span class="sig-paren">)</span><a class="headerlink" href="#_CPPv4N6marian13ScorerWrapper4initE3PtrI15ExpressionGraphE" title="Permalink to this definition">¶</a><br /></dt>
+<dd></dd></dl>
+
+<dl class="function">
+<dt id="_CPPv4N6marian13ScorerWrapper5clearE3PtrI15ExpressionGraphE">
+<span id="_CPPv3N6marian13ScorerWrapper5clearE3PtrI15ExpressionGraphE"></span><span id="_CPPv2N6marian13ScorerWrapper5clearE3PtrI15ExpressionGraphE"></span><span id="marian::ScorerWrapper::clear__Ptr:ExpressionGraph:"></span><span class="target" id="classmarian_1_1ScorerWrapper_1aabd3df484cd7e8b38909a784b05525cd"></span><em class="property">virtual</em> void <code class="sig-name descname">clear</code><span class="sig-paren">(</span><a class="reference internal" href="typedef_definitions_8h_1ad1a373be43a00ef9ce35666145137b08.html#_CPPv4N6marian3PtrE" title="marian::Ptr">Ptr</a>&lt;<a class="reference internal" href="classmarian_1_1ExpressionGraph.html#_CPPv4N6marian15ExpressionGraphE" title="marian::ExpressionGraph">ExpressionGraph</a>&gt; <em>graph</em><span class="sig-paren">)</span><a class="headerlink" href="#_CPPv4N6marian13ScorerWrapper5clearE3PtrI15ExpressionGraphE" title="Permalink to this definition">¶</a><br /></dt>
+<dd></dd></dl>
+
+<dl class="function">
+<dt id="_CPPv4N6marian13ScorerWrapper10startStateE3PtrI15ExpressionGraphE3PtrIN4data11CorpusBatchEE">
+<span id="_CPPv3N6marian13ScorerWrapper10startStateE3PtrI15ExpressionGraphE3PtrIN4data11CorpusBatchEE"></span><span id="_CPPv2N6marian13ScorerWrapper10startStateE3PtrI15ExpressionGraphE3PtrIN4data11CorpusBatchEE"></span><span id="marian::ScorerWrapper::startState__Ptr:ExpressionGraph:.Ptr:data::CorpusBatch:"></span><span class="target" id="classmarian_1_1ScorerWrapper_1af5e8fd8bac0a6a234a99e4a60f2927d3"></span><em class="property">virtual</em> <a class="reference internal" href="typedef_definitions_8h_1ad1a373be43a00ef9ce35666145137b08.html#_CPPv4N6marian3PtrE" title="marian::Ptr">Ptr</a>&lt;<a class="reference internal" href="classmarian_1_1ScorerState.html#_CPPv4N6marian11ScorerStateE" title="marian::ScorerState">ScorerState</a>&gt; <code class="sig-name descname">startState</code><span class="sig-paren">(</span><a class="reference internal" href="typedef_definitions_8h_1ad1a373be43a00ef9ce35666145137b08.html#_CPPv4N6marian3PtrE" title="marian::Ptr">Ptr</a>&lt;<a class="reference internal" href="classmarian_1_1ExpressionGraph.html#_CPPv4N6marian15ExpressionGraphE" title="marian::ExpressionGraph">ExpressionGraph</a>&gt; <em>graph</em>, <a class="reference internal" href="typedef_definitions_8h_1ad1a373be43a00ef9ce35666145137b08.html#_CPPv4N6marian3PtrE" title="marian::Ptr">Ptr</a>&lt;data::<a class="reference internal" href="classmarian_1_1data_1_1CorpusBatch.html#_CPPv4N6marian4data11CorpusBatchE" title="marian::data::CorpusBatch">CorpusBatch</a>&gt; <em>batch</em><span class="sig-paren">)</span><a class="headerlink" href="#_CPPv4N6marian13ScorerWrapper10startStateE3PtrI15ExpressionGraphE3PtrIN4data11CorpusBatchEE" title="Permalink to this definition">¶</a><br /></dt>
+<dd></dd></dl>
+
+<dl class="function">
+<dt id="_CPPv4N6marian13ScorerWrapper4stepE3PtrI15ExpressionGraphE3PtrI11ScorerStateERKNSt6vectorI9IndexTypeEERK5WordsRKNSt6vectorI9IndexTypeEEi">
+<span id="_CPPv3N6marian13ScorerWrapper4stepE3PtrI15ExpressionGraphE3PtrI11ScorerStateERKNSt6vectorI9IndexTypeEERK5WordsRKNSt6vectorI9IndexTypeEEi"></span><span id="_CPPv2N6marian13ScorerWrapper4stepE3PtrI15ExpressionGraphE3PtrI11ScorerStateERKNSt6vectorI9IndexTypeEERK5WordsRKNSt6vectorI9IndexTypeEEi"></span><span id="marian::ScorerWrapper::step__Ptr:ExpressionGraph:.Ptr:ScorerState:.std::vector:IndexType:CR.WordsCR.std::vector:IndexType:CR.i"></span><span class="target" id="classmarian_1_1ScorerWrapper_1ac4600f3cb6950a70d1296b2a794e1246"></span><em class="property">virtual</em> <a class="reference internal" href="typedef_definitions_8h_1ad1a373be43a00ef9ce35666145137b08.html#_CPPv4N6marian3PtrE" title="marian::Ptr">Ptr</a>&lt;<a class="reference internal" href="classmarian_1_1ScorerState.html#_CPPv4N6marian11ScorerStateE" title="marian::ScorerState">ScorerState</a>&gt; <code class="sig-name descname">step</code><span class="sig-paren">(</span><a class="reference internal" href="typedef_definitions_8h_1ad1a373be43a00ef9ce35666145137b08.html#_CPPv4N6marian3PtrE" title="marian::Ptr">Ptr</a>&lt;<a class="reference internal" href="classmarian_1_1ExpressionGraph.html#_CPPv4N6marian15ExpressionGraphE" title="marian::ExpressionGraph">ExpressionGraph</a>&gt; <em>graph</em>, <a class="reference internal" href="typedef_definitions_8h_1ad1a373be43a00ef9ce35666145137b08.html#_CPPv4N6marian3PtrE" title="marian::Ptr">Ptr</a>&lt;<a class="reference internal" href="classmarian_1_1ScorerState.html#_CPPv4N6marian11ScorerStateE" title="marian::ScorerState">ScorerState</a>&gt; <em>state</em>, <em class="property">const</em> <a class="reference internal" href="function_expression__operators_8cpp_1af4e69a5f7167b63522135a1f6b8a5dd8.html#_CPPv4N6marianStE4Expri" title="marian::std">std</a>::vector&lt;<a class="reference internal" href="typedef_definitions_8h_1af472f150bf0d608c36430a11b2f1b49c.html#_CPPv4N6marian9IndexTypeE" title="marian::IndexType">IndexType</a>&gt; &amp;<em>hypIndices</em>, <em class="property">const</em> <a class="reference internal" href="typedef_data_2types_8h_1a81f026d9529d47fd44a64a27954775fd.html#_CPPv4N6marian5WordsE" title="marian::Words">Words</a> &amp;<em>words</em>, <em class="property">const</em> <a class="reference internal" href="function_expression__operators_8cpp_1af4e69a5f7167b63522135a1f6b8a5dd8.html#_CPPv4N6marianStE4Expri" title="marian::std">std</a>::vector&lt;<a class="reference internal" href="typedef_definitions_8h_1af472f150bf0d608c36430a11b2f1b49c.html#_CPPv4N6marian9IndexTypeE" title="marian::IndexType">IndexType</a>&gt; &amp;<em>batchIndices</em>, int <em>beamSize</em><span class="sig-paren">)</span><a class="headerlink" href="#_CPPv4N6marian13ScorerWrapper4stepE3PtrI15ExpressionGraphE3PtrI11ScorerStateERKNSt6vectorI9IndexTypeEERK5WordsRKNSt6vectorI9IndexTypeEEi" title="Permalink to this definition">¶</a><br /></dt>
+<dd></dd></dl>
+
+<dl class="function">
+<dt id="_CPPv4N6marian13ScorerWrapper21setShortlistGeneratorE3PtrIKN4data18ShortlistGeneratorEE">
+<span id="_CPPv3N6marian13ScorerWrapper21setShortlistGeneratorE3PtrIKN4data18ShortlistGeneratorEE"></span><span id="_CPPv2N6marian13ScorerWrapper21setShortlistGeneratorE3PtrIKN4data18ShortlistGeneratorEE"></span><span id="marian::ScorerWrapper::setShortlistGenerator__Ptr:data::ShortlistGeneratorC:"></span><span class="target" id="classmarian_1_1ScorerWrapper_1ae2d15fb184f4fc7ff06554cc09a0f6d9"></span><em class="property">virtual</em> void <code class="sig-name descname">setShortlistGenerator</code><span class="sig-paren">(</span><a class="reference internal" href="typedef_definitions_8h_1ad1a373be43a00ef9ce35666145137b08.html#_CPPv4N6marian3PtrE" title="marian::Ptr">Ptr</a>&lt;<em class="property">const</em> data::<a class="reference internal" href="classmarian_1_1data_1_1ShortlistGenerator.html#_CPPv4N6marian4data18ShortlistGeneratorE" title="marian::data::ShortlistGenerator">ShortlistGenerator</a>&gt; <em>shortlistGenerator</em><span class="sig-paren">)</span><a class="headerlink" href="#_CPPv4N6marian13ScorerWrapper21setShortlistGeneratorE3PtrIKN4data18ShortlistGeneratorEE" title="Permalink to this definition">¶</a><br /></dt>
+<dd></dd></dl>
+
+<dl class="function">
+<dt id="_CPPv4N6marian13ScorerWrapper12getShortlistEv">
+<span id="_CPPv3N6marian13ScorerWrapper12getShortlistEv"></span><span id="_CPPv2N6marian13ScorerWrapper12getShortlistEv"></span><span id="marian::ScorerWrapper::getShortlist"></span><span class="target" id="classmarian_1_1ScorerWrapper_1a181ffcd40e9b9d67a0a5c1e5e0c3a6cf"></span><em class="property">virtual</em> <a class="reference internal" href="typedef_definitions_8h_1ad1a373be43a00ef9ce35666145137b08.html#_CPPv4N6marian3PtrE" title="marian::Ptr">Ptr</a>&lt;data::<a class="reference internal" href="classmarian_1_1data_1_1Shortlist.html#_CPPv4N6marian4data9ShortlistE" title="marian::data::Shortlist">Shortlist</a>&gt; <code class="sig-name descname">getShortlist</code><span class="sig-paren">(</span><span class="sig-paren">)</span><a class="headerlink" href="#_CPPv4N6marian13ScorerWrapper12getShortlistEv" title="Permalink to this definition">¶</a><br /></dt>
+<dd></dd></dl>
+
+<dl class="function">
+<dt id="_CPPv4N6marian13ScorerWrapper12getAlignmentEv">
+<span id="_CPPv3N6marian13ScorerWrapper12getAlignmentEv"></span><span id="_CPPv2N6marian13ScorerWrapper12getAlignmentEv"></span><span id="marian::ScorerWrapper::getAlignment"></span><span class="target" id="classmarian_1_1ScorerWrapper_1afae5219ffd6307139a93fc5ce233f8eb"></span><em class="property">virtual</em> <a class="reference internal" href="function_expression__operators_8cpp_1af4e69a5f7167b63522135a1f6b8a5dd8.html#_CPPv4N6marianStE4Expri" title="marian::std">std</a>::vector&lt;float&gt; <code class="sig-name descname">getAlignment</code><span class="sig-paren">(</span><span class="sig-paren">)</span><a class="headerlink" href="#_CPPv4N6marian13ScorerWrapper12getAlignmentEv" title="Permalink to this definition">¶</a><br /></dt>
+<dd></dd></dl>
+
+</div>
+</dd></dl>
+
+</div>
+</div>
+
+
+           </div>
+           
+          </div>
+          <footer>
+    <div class="rst-footer-buttons" role="navigation" aria-label="footer navigation">
+        <a href="classmarian_1_1ScorerWrapperState.html" class="btn btn-neutral float-right" title="Class ScorerWrapperState" accesskey="n" rel="next">Next <span class="fa fa-arrow-circle-right" aria-hidden="true"></span></a>
+        <a href="classmarian_1_1ScorerState.html" class="btn btn-neutral float-left" title="Class ScorerState" accesskey="p" rel="prev"><span class="fa fa-arrow-circle-left" aria-hidden="true"></span> Previous</a>
+    </div>
+
+  <hr/>
+
+  <div role="contentinfo">
+    <p>
+        &#169; Copyright 2021, Marian NMT Team.
+
+    </p>
+  </div>
+    
+    
+    
+    Built with <a href="https://www.sphinx-doc.org/">Sphinx</a> using a
+    
+    <a href="https://github.com/readthedocs/sphinx_rtd_theme">theme</a>
+    
+    provided by <a href="https://readthedocs.org">Read the Docs</a>. 
+
+</footer>
+        </div>
+      </div>
+
+    </section>
+
+  </div>
+  
+
+  <script type="text/javascript">
+      jQuery(function () {
+          SphinxRtdTheme.Navigation.enable(true);
+      });
+  </script>
+
+  
+  
+    
+   
+
+</body>
+</html>

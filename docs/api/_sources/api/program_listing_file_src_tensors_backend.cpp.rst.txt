@@ -1,0 +1,32 @@
+
+.. _program_listing_file_src_tensors_backend.cpp:
+
+Program Listing for File backend.cpp
+====================================
+
+|exhale_lsh| :ref:`Return to documentation for file <file_src_tensors_backend.cpp>` (``src/tensors/backend.cpp``)
+
+.. |exhale_lsh| unicode:: U+021B0 .. UPWARDS ARROW WITH TIP LEFTWARDS
+
+.. code-block:: cpp
+
+   #include "tensors/backend.h"
+   
+   #ifdef CUDA_FOUND
+   #include "tensors/gpu/backend.h"
+   #pragma warning(disable:4505) // "unreferenced local function has been removed" in cuda\v9.2\include\cuda_fp16.hpp
+   #endif
+   
+   #include "tensors/cpu/backend.h"
+   
+   namespace marian {
+   
+   Ptr<Backend> BackendByDeviceId(DeviceId deviceId, size_t seed) {
+   #ifdef CUDA_FOUND
+     if(deviceId.type == DeviceType::gpu)
+       return New<gpu::Backend>(deviceId, seed);
+     else
+   #endif
+       return New<cpu::Backend>(deviceId, seed);
+   }
+   }  // namespace marian

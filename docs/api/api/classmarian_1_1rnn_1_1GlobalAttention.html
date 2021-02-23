@@ -1,0 +1,283 @@
+
+
+<!DOCTYPE html>
+<html class="writer-html5" lang="en" >
+<head>
+  <meta charset="utf-8" />
+  
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  
+  <title>Class GlobalAttention &mdash; Marian NMT v1.10.1 2021-02-23 documentation</title>
+  
+
+  
+  <link rel="stylesheet" href="../_static/css/theme.css" type="text/css" />
+  <link rel="stylesheet" href="../_static/pygments.css" type="text/css" />
+  <link rel="stylesheet" href="../_static/css/custom.css" type="text/css" />
+  <link rel="stylesheet" href="../_static/collapsible-lists/css/tree_view.css" type="text/css" />
+
+  
+  
+
+  
+  
+
+  
+    <link rel="canonical" href="http://marian-nmt.github.io/docs/api/api/classmarian_1_1rnn_1_1GlobalAttention.html" />
+
+  
+  <!--[if lt IE 9]>
+    <script src="../_static/js/html5shiv.min.js"></script>
+  <![endif]-->
+  
+    
+      <script type="text/javascript" id="documentation_options" data-url_root="../" src="../_static/documentation_options.js"></script>
+        <script src="../_static/jquery.js"></script>
+        <script src="../_static/underscore.js"></script>
+        <script src="../_static/doctools.js"></script>
+        <script src="../_static/language_data.js"></script>
+        <script src="../_static/collapsible-lists/js/CollapsibleLists.compressed.js"></script>
+        <script src="../_static/collapsible-lists/js/apply-collapsible-lists.js"></script>
+    
+    <script type="text/javascript" src="../_static/js/theme.js"></script>
+
+    
+    <link rel="index" title="Index" href="../genindex.html" />
+    <link rel="search" title="Search" href="../search.html" />
+    <link rel="next" title="Class GRU" href="classmarian_1_1rnn_1_1GRU.html" />
+    <link rel="prev" title="Class FastLSTM" href="classmarian_1_1rnn_1_1FastLSTM.html" /> 
+</head>
+
+<body class="wy-body-for-nav">
+
+   
+  <div class="wy-grid-for-nav">
+    
+    <nav data-toggle="wy-nav-shift" class="wy-nav-side">
+      <div class="wy-side-scroll">
+        <div class="wy-side-nav-search" >
+          
+
+          
+            <a href="../index.html" class="icon icon-home"> Marian NMT
+          
+
+          
+          </a>
+
+          
+            
+            
+              <div class="version">
+                v1.10.1
+              </div>
+            
+          
+
+          
+<div role="search">
+  <form id="rtd-search-form" class="wy-form" action="../search.html" method="get">
+    <input type="text" name="q" placeholder="Search docs" />
+    <input type="hidden" name="check_keywords" value="yes" />
+    <input type="hidden" name="area" value="default" />
+  </form>
+</div>
+
+          
+        </div>
+
+        
+        <div class="wy-menu wy-menu-vertical" data-spy="affix" role="navigation" aria-label="main navigation">
+          
+            
+            
+              
+            
+            
+              <p class="caption"><span class="caption-text">Contents:</span></p>
+<ul>
+<li class="toctree-l1"><a class="reference internal" href="../install.html">Installation</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../graph.html">Expression graphs</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../operators.html">Graph operations</a></li>
+<li class="toctree-l1"><a class="reference internal" href="library_index.html">Library API</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../contributing.html">How to contribute to Marian</a></li>
+</ul>
+
+            
+          
+        </div>
+        
+      </div>
+    </nav>
+
+    <section data-toggle="wy-nav-shift" class="wy-nav-content-wrap">
+
+      
+      <nav class="wy-nav-top" aria-label="top navigation">
+        
+          <i data-toggle="wy-nav-top" class="fa fa-bars"></i>
+          <a href="../index.html">Marian NMT</a>
+        
+      </nav>
+
+
+      <div class="wy-nav-content">
+        
+        <div class="rst-content">
+        
+          
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+<div role="navigation" aria-label="breadcrumbs navigation">
+
+  <ul class="wy-breadcrumbs">
+    
+      <li><a href="../index.html" class="icon icon-home"></a> &raquo;</li>
+        
+          <li><a href="library_index.html">Library API</a> &raquo;</li>
+        
+      <li>Class GlobalAttention</li>
+    
+    
+      <li class="wy-breadcrumbs-aside">
+        
+          
+            <a href="../_sources/api/classmarian_1_1rnn_1_1GlobalAttention.rst.txt" rel="nofollow"> View page source</a>
+          
+        
+      </li>
+    
+  </ul>
+
+  
+  <hr/>
+</div>
+          <div role="main" class="document" itemscope="itemscope" itemtype="http://schema.org/Article">
+           <div itemprop="articleBody">
+            
+  <div class="section" id="class-globalattention">
+<span id="exhale-class-classmarian-1-1rnn-1-1globalattention"></span><h1>Class GlobalAttention<a class="headerlink" href="#class-globalattention" title="Permalink to this headline">¶</a></h1>
+<ul class="simple">
+<li><p>Defined in <a class="reference internal" href="file_src_rnn_attention.h.html#file-src-rnn-attention-h"><span class="std std-ref">File attention.h</span></a></p></li>
+</ul>
+<div class="section" id="inheritance-relationships">
+<h2>Inheritance Relationships<a class="headerlink" href="#inheritance-relationships" title="Permalink to this headline">¶</a></h2>
+<div class="section" id="base-type">
+<h3>Base Type<a class="headerlink" href="#base-type" title="Permalink to this headline">¶</a></h3>
+<ul class="simple">
+<li><p><code class="docutils literal notranslate"><span class="pre">public</span> <span class="pre">marian::rnn::CellInput</span></code> (<a class="reference internal" href="classmarian_1_1rnn_1_1CellInput.html#exhale-class-classmarian-1-1rnn-1-1cellinput"><span class="std std-ref">Class CellInput</span></a>)</p></li>
+</ul>
+</div>
+</div>
+<div class="section" id="class-documentation">
+<h2>Class Documentation<a class="headerlink" href="#class-documentation" title="Permalink to this headline">¶</a></h2>
+<dl class="class">
+<dt id="_CPPv4N6marian3rnn15GlobalAttentionE">
+<span id="_CPPv3N6marian3rnn15GlobalAttentionE"></span><span id="_CPPv2N6marian3rnn15GlobalAttentionE"></span><span id="marian::rnn::GlobalAttention"></span><span class="target" id="classmarian_1_1rnn_1_1GlobalAttention"></span><em class="property">class </em><code class="sig-name descname">GlobalAttention</code> : <em class="property">public</em> marian::rnn::<a class="reference internal" href="classmarian_1_1rnn_1_1CellInput.html#_CPPv4N6marian3rnn9CellInputE" title="marian::rnn::CellInput">CellInput</a><a class="headerlink" href="#_CPPv4N6marian3rnn15GlobalAttentionE" title="Permalink to this definition">¶</a><br /></dt>
+<dd><div class="breathe-sectiondef docutils container">
+<p class="breathe-sectiondef-title rubric">Public Functions</p>
+<dl class="function">
+<dt id="_CPPv4N6marian3rnn15GlobalAttention15GlobalAttentionE3PtrI15ExpressionGraphE3PtrI7OptionsE3PtrI12EncoderStateE">
+<span id="_CPPv3N6marian3rnn15GlobalAttention15GlobalAttentionE3PtrI15ExpressionGraphE3PtrI7OptionsE3PtrI12EncoderStateE"></span><span id="_CPPv2N6marian3rnn15GlobalAttention15GlobalAttentionE3PtrI15ExpressionGraphE3PtrI7OptionsE3PtrI12EncoderStateE"></span><span id="marian::rnn::GlobalAttention::GlobalAttention__Ptr:ExpressionGraph:.Ptr:Options:.Ptr:EncoderState:"></span><span class="target" id="classmarian_1_1rnn_1_1GlobalAttention_1ab5e4f0df89d2569d44a28696de3ace0f"></span><code class="sig-name descname">GlobalAttention</code><span class="sig-paren">(</span><a class="reference internal" href="typedef_definitions_8h_1ad1a373be43a00ef9ce35666145137b08.html#_CPPv4N6marian3PtrE" title="marian::Ptr">Ptr</a>&lt;<a class="reference internal" href="classmarian_1_1ExpressionGraph.html#_CPPv4N6marian15ExpressionGraphE" title="marian::ExpressionGraph">ExpressionGraph</a>&gt; <em>graph</em>, <a class="reference internal" href="typedef_definitions_8h_1ad1a373be43a00ef9ce35666145137b08.html#_CPPv4N6marian3PtrE" title="marian::Ptr">Ptr</a>&lt;<a class="reference internal" href="classmarian_1_1Options.html#_CPPv4N6marian7OptionsE" title="marian::Options">Options</a>&gt; <em>options</em>, <a class="reference internal" href="typedef_definitions_8h_1ad1a373be43a00ef9ce35666145137b08.html#_CPPv4N6marian3PtrE" title="marian::Ptr">Ptr</a>&lt;<a class="reference internal" href="classmarian_1_1EncoderState.html#_CPPv4N6marian12EncoderStateE" title="marian::EncoderState">EncoderState</a>&gt; <em>encState</em><span class="sig-paren">)</span><a class="headerlink" href="#_CPPv4N6marian3rnn15GlobalAttention15GlobalAttentionE3PtrI15ExpressionGraphE3PtrI7OptionsE3PtrI12EncoderStateE" title="Permalink to this definition">¶</a><br /></dt>
+<dd></dd></dl>
+
+<dl class="function">
+<dt id="_CPPv4N6marian3rnn15GlobalAttention5applyE5State">
+<span id="_CPPv3N6marian3rnn15GlobalAttention5applyE5State"></span><span id="_CPPv2N6marian3rnn15GlobalAttention5applyE5State"></span><span id="marian::rnn::GlobalAttention::apply__State"></span><span class="target" id="classmarian_1_1rnn_1_1GlobalAttention_1ace6cf529a97bd2a5e0440f5ca1863153"></span><a class="reference internal" href="typedef_definitions_8h_1ac8ecc2cc66a7afcc6da94a9bbde5eaa7.html#_CPPv4N6marian4ExprE" title="marian::Expr">Expr</a> <code class="sig-name descname">apply</code><span class="sig-paren">(</span><a class="reference internal" href="structmarian_1_1rnn_1_1State.html#_CPPv4N6marian3rnn5StateE" title="marian::rnn::State">State</a> <em>state</em><span class="sig-paren">)</span><a class="headerlink" href="#_CPPv4N6marian3rnn15GlobalAttention5applyE5State" title="Permalink to this definition">¶</a><br /></dt>
+<dd></dd></dl>
+
+<dl class="function">
+<dt id="_CPPv4N6marian3rnn15GlobalAttention11getContextsEv">
+<span id="_CPPv3N6marian3rnn15GlobalAttention11getContextsEv"></span><span id="_CPPv2N6marian3rnn15GlobalAttention11getContextsEv"></span><span id="marian::rnn::GlobalAttention::getContexts"></span><span class="target" id="classmarian_1_1rnn_1_1GlobalAttention_1abeae4a963a85ca1642c387d241cec5ad"></span><a class="reference internal" href="function_expression__operators_8cpp_1af4e69a5f7167b63522135a1f6b8a5dd8.html#_CPPv4N6marianStE4Expri" title="marian::std">std</a>::vector&lt;<a class="reference internal" href="typedef_definitions_8h_1ac8ecc2cc66a7afcc6da94a9bbde5eaa7.html#_CPPv4N6marian4ExprE" title="marian::Expr">Expr</a>&gt; &amp;<code class="sig-name descname">getContexts</code><span class="sig-paren">(</span><span class="sig-paren">)</span><a class="headerlink" href="#_CPPv4N6marian3rnn15GlobalAttention11getContextsEv" title="Permalink to this definition">¶</a><br /></dt>
+<dd></dd></dl>
+
+<dl class="function">
+<dt id="_CPPv4N6marian3rnn15GlobalAttention10getContextEv">
+<span id="_CPPv3N6marian3rnn15GlobalAttention10getContextEv"></span><span id="_CPPv2N6marian3rnn15GlobalAttention10getContextEv"></span><span id="marian::rnn::GlobalAttention::getContext"></span><span class="target" id="classmarian_1_1rnn_1_1GlobalAttention_1ad518e4c82f56b8f95393dffa2df2288b"></span><a class="reference internal" href="typedef_definitions_8h_1ac8ecc2cc66a7afcc6da94a9bbde5eaa7.html#_CPPv4N6marian4ExprE" title="marian::Expr">Expr</a> <code class="sig-name descname">getContext</code><span class="sig-paren">(</span><span class="sig-paren">)</span><a class="headerlink" href="#_CPPv4N6marian3rnn15GlobalAttention10getContextEv" title="Permalink to this definition">¶</a><br /></dt>
+<dd></dd></dl>
+
+<dl class="function">
+<dt id="_CPPv4N6marian3rnn15GlobalAttention13getAlignmentsEv">
+<span id="_CPPv3N6marian3rnn15GlobalAttention13getAlignmentsEv"></span><span id="_CPPv2N6marian3rnn15GlobalAttention13getAlignmentsEv"></span><span id="marian::rnn::GlobalAttention::getAlignments"></span><span class="target" id="classmarian_1_1rnn_1_1GlobalAttention_1a7fab38ad7965922a7e8eb26f0d4906af"></span><a class="reference internal" href="function_expression__operators_8cpp_1af4e69a5f7167b63522135a1f6b8a5dd8.html#_CPPv4N6marianStE4Expri" title="marian::std">std</a>::vector&lt;<a class="reference internal" href="typedef_definitions_8h_1ac8ecc2cc66a7afcc6da94a9bbde5eaa7.html#_CPPv4N6marian4ExprE" title="marian::Expr">Expr</a>&gt; &amp;<code class="sig-name descname">getAlignments</code><span class="sig-paren">(</span><span class="sig-paren">)</span><a class="headerlink" href="#_CPPv4N6marian3rnn15GlobalAttention13getAlignmentsEv" title="Permalink to this definition">¶</a><br /></dt>
+<dd></dd></dl>
+
+<dl class="function">
+<dt id="_CPPv4N6marian3rnn15GlobalAttention5clearEv">
+<span id="_CPPv3N6marian3rnn15GlobalAttention5clearEv"></span><span id="_CPPv2N6marian3rnn15GlobalAttention5clearEv"></span><span id="marian::rnn::GlobalAttention::clear"></span><span class="target" id="classmarian_1_1rnn_1_1GlobalAttention_1ad424cf197f760ec2069f39f9e56fe5b0"></span><em class="property">virtual</em> void <code class="sig-name descname">clear</code><span class="sig-paren">(</span><span class="sig-paren">)</span><a class="headerlink" href="#_CPPv4N6marian3rnn15GlobalAttention5clearEv" title="Permalink to this definition">¶</a><br /></dt>
+<dd></dd></dl>
+
+<dl class="function">
+<dt id="_CPPv4N6marian3rnn15GlobalAttention9dimOutputEv">
+<span id="_CPPv3N6marian3rnn15GlobalAttention9dimOutputEv"></span><span id="_CPPv2N6marian3rnn15GlobalAttention9dimOutputEv"></span><span id="marian::rnn::GlobalAttention::dimOutput"></span><span class="target" id="classmarian_1_1rnn_1_1GlobalAttention_1acb8546143cf325153309e5af1cbf3fb7"></span>int <code class="sig-name descname">dimOutput</code><span class="sig-paren">(</span><span class="sig-paren">)</span><a class="headerlink" href="#_CPPv4N6marian3rnn15GlobalAttention9dimOutputEv" title="Permalink to this definition">¶</a><br /></dt>
+<dd></dd></dl>
+
+</div>
+</dd></dl>
+
+</div>
+</div>
+
+
+           </div>
+           
+          </div>
+          <footer>
+    <div class="rst-footer-buttons" role="navigation" aria-label="footer navigation">
+        <a href="classmarian_1_1rnn_1_1GRU.html" class="btn btn-neutral float-right" title="Class GRU" accesskey="n" rel="next">Next <span class="fa fa-arrow-circle-right" aria-hidden="true"></span></a>
+        <a href="classmarian_1_1rnn_1_1FastLSTM.html" class="btn btn-neutral float-left" title="Class FastLSTM" accesskey="p" rel="prev"><span class="fa fa-arrow-circle-left" aria-hidden="true"></span> Previous</a>
+    </div>
+
+  <hr/>
+
+  <div role="contentinfo">
+    <p>
+        &#169; Copyright 2021, Marian NMT Team.
+
+    </p>
+  </div>
+    
+    
+    
+    Built with <a href="https://www.sphinx-doc.org/">Sphinx</a> using a
+    
+    <a href="https://github.com/readthedocs/sphinx_rtd_theme">theme</a>
+    
+    provided by <a href="https://readthedocs.org">Read the Docs</a>. 
+
+</footer>
+        </div>
+      </div>
+
+    </section>
+
+  </div>
+  
+
+  <script type="text/javascript">
+      jQuery(function () {
+          SphinxRtdTheme.Navigation.enable(true);
+      });
+  </script>
+
+  
+  
+    
+   
+
+</body>
+</html>

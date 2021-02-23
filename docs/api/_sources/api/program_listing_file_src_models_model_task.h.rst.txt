@@ -1,0 +1,28 @@
+
+.. _program_listing_file_src_models_model_task.h:
+
+Program Listing for File model_task.h
+=====================================
+
+|exhale_lsh| :ref:`Return to documentation for file <file_src_models_model_task.h>` (``src/models/model_task.h``)
+
+.. |exhale_lsh| unicode:: U+021B0 .. UPWARDS ARROW WITH TIP LEFTWARDS
+
+.. code-block:: cpp
+
+   #pragma once
+   
+   #include <string>
+   
+   namespace marian {
+   
+   struct ModelTask {
+     virtual ~ModelTask() {}
+     virtual void run() = 0;
+   };
+   
+   struct ModelServiceTask {
+     virtual ~ModelServiceTask() {}
+     virtual std::string run(const std::string&) = 0;
+   };
+   }  // namespace marian

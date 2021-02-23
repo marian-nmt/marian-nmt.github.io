@@ -1,0 +1,417 @@
+
+
+<!DOCTYPE html>
+<html class="writer-html5" lang="en" >
+<head>
+  <meta charset="utf-8" />
+  
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  
+  <title>Program Listing for File file_stream.cpp &mdash; Marian NMT v1.10.1 2021-02-23 documentation</title>
+  
+
+  
+  <link rel="stylesheet" href="../_static/css/theme.css" type="text/css" />
+  <link rel="stylesheet" href="../_static/pygments.css" type="text/css" />
+  <link rel="stylesheet" href="../_static/css/custom.css" type="text/css" />
+  <link rel="stylesheet" href="../_static/collapsible-lists/css/tree_view.css" type="text/css" />
+
+  
+  
+
+  
+  
+
+  
+    <link rel="canonical" href="http://marian-nmt.github.io/docs/api/api/program_listing_file_src_common_file_stream.cpp.html" />
+
+  
+  <!--[if lt IE 9]>
+    <script src="../_static/js/html5shiv.min.js"></script>
+  <![endif]-->
+  
+    
+      <script type="text/javascript" id="documentation_options" data-url_root="../" src="../_static/documentation_options.js"></script>
+        <script src="../_static/jquery.js"></script>
+        <script src="../_static/underscore.js"></script>
+        <script src="../_static/doctools.js"></script>
+        <script src="../_static/language_data.js"></script>
+        <script src="../_static/collapsible-lists/js/CollapsibleLists.compressed.js"></script>
+        <script src="../_static/collapsible-lists/js/apply-collapsible-lists.js"></script>
+    
+    <script type="text/javascript" src="../_static/js/theme.js"></script>
+
+    
+    <link rel="index" title="Index" href="../genindex.html" />
+    <link rel="search" title="Search" href="../search.html" /> 
+</head>
+
+<body class="wy-body-for-nav">
+
+   
+  <div class="wy-grid-for-nav">
+    
+    <nav data-toggle="wy-nav-shift" class="wy-nav-side">
+      <div class="wy-side-scroll">
+        <div class="wy-side-nav-search" >
+          
+
+          
+            <a href="../index.html" class="icon icon-home"> Marian NMT
+          
+
+          
+          </a>
+
+          
+            
+            
+              <div class="version">
+                v1.10.1
+              </div>
+            
+          
+
+          
+<div role="search">
+  <form id="rtd-search-form" class="wy-form" action="../search.html" method="get">
+    <input type="text" name="q" placeholder="Search docs" />
+    <input type="hidden" name="check_keywords" value="yes" />
+    <input type="hidden" name="area" value="default" />
+  </form>
+</div>
+
+          
+        </div>
+
+        
+        <div class="wy-menu wy-menu-vertical" data-spy="affix" role="navigation" aria-label="main navigation">
+          
+            
+            
+              
+            
+            
+              <p class="caption"><span class="caption-text">Contents:</span></p>
+<ul>
+<li class="toctree-l1"><a class="reference internal" href="../install.html">Installation</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../graph.html">Expression graphs</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../operators.html">Graph operations</a></li>
+<li class="toctree-l1"><a class="reference internal" href="library_index.html">Library API</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../contributing.html">How to contribute to Marian</a></li>
+</ul>
+
+            
+          
+        </div>
+        
+      </div>
+    </nav>
+
+    <section data-toggle="wy-nav-shift" class="wy-nav-content-wrap">
+
+      
+      <nav class="wy-nav-top" aria-label="top navigation">
+        
+          <i data-toggle="wy-nav-top" class="fa fa-bars"></i>
+          <a href="../index.html">Marian NMT</a>
+        
+      </nav>
+
+
+      <div class="wy-nav-content">
+        
+        <div class="rst-content">
+        
+          
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+<div role="navigation" aria-label="breadcrumbs navigation">
+
+  <ul class="wy-breadcrumbs">
+    
+      <li><a href="../index.html" class="icon icon-home"></a> &raquo;</li>
+        
+      <li>Program Listing for File file_stream.cpp</li>
+    
+    
+      <li class="wy-breadcrumbs-aside">
+        
+          
+            <a href="../_sources/api/program_listing_file_src_common_file_stream.cpp.rst.txt" rel="nofollow"> View page source</a>
+          
+        
+      </li>
+    
+  </ul>
+
+  
+  <hr/>
+</div>
+          <div role="main" class="document" itemscope="itemscope" itemtype="http://schema.org/Article">
+           <div itemprop="articleBody">
+            
+  <div class="section" id="program-listing-for-file-file-stream-cpp">
+<span id="program-listing-file-src-common-file-stream-cpp"></span><h1>Program Listing for File file_stream.cpp<a class="headerlink" href="#program-listing-for-file-file-stream-cpp" title="Permalink to this headline">¶</a></h1>
+<p>↰ <a class="reference internal" href="file_src_common_file_stream.cpp.html#file-src-common-file-stream-cpp"><span class="std std-ref">Return to documentation for file</span></a> (<code class="docutils literal notranslate"><span class="pre">src/common/file_stream.cpp</span></code>)</p>
+<div class="highlight-cpp notranslate"><div class="highlight"><pre><span></span><span class="cp">#include</span> <span class="cpf">&quot;common/file_stream.h&quot;</span><span class="cp"></span>
+<span class="cp">#include</span> <span class="cpf">&quot;common/utils.h&quot;</span><span class="cp"></span>
+
+<span class="cp">#include</span> <span class="cpf">&lt;streambuf&gt;</span><span class="cp"></span>
+<span class="cp">#include</span> <span class="cpf">&lt;string&gt;</span><span class="cp"></span>
+<span class="cp">#include</span> <span class="cpf">&lt;vector&gt;</span><span class="cp"></span>
+<span class="cp">#include</span> <span class="cpf">&lt;cstdio&gt;</span><span class="cp"></span>
+<span class="cp">#ifdef _MSC_VER</span>
+<span class="cp">#include</span> <span class="cpf">&lt;io.h&gt;</span><span class="cp"></span>
+<span class="cp">#include</span> <span class="cpf">&lt;windows.h&gt;</span><span class="cp"></span>
+<span class="cp">#include</span> <span class="cpf">&lt;fcntl.h&gt;</span><span class="cp"></span>
+<span class="cp">#include</span> <span class="cpf">&lt;stdlib.h&gt;</span><span class="cp"></span>
+<span class="cp">#else</span>
+<span class="cp">#include</span> <span class="cpf">&lt;sys/types.h&gt;</span><span class="cp"></span>
+<span class="cp">#include</span> <span class="cpf">&lt;unistd.h&gt;</span><span class="cp"></span>
+<span class="cp">#endif</span>
+
+<span class="k">namespace</span> <span class="n">marian</span> <span class="p">{</span>
+<span class="k">namespace</span> <span class="n">io</span> <span class="p">{</span>
+
+<span class="n">InputFileStream</span><span class="o">::</span><span class="n">InputFileStream</span><span class="p">(</span><span class="k">const</span> <span class="n">std</span><span class="o">::</span><span class="n">string</span> <span class="o">&amp;</span><span class="n">file</span><span class="p">)</span>
+    <span class="o">:</span> <span class="n">std</span><span class="o">::</span><span class="n">istream</span><span class="p">(</span><span class="nb">NULL</span><span class="p">)</span> <span class="p">{</span>
+  <span class="c1">// the special syntax &quot;command |&quot; starts command in a sh shell and reads out its result</span>
+  <span class="k">if</span> <span class="p">(</span><span class="n">marian</span><span class="o">::</span><span class="n">utils</span><span class="o">::</span><span class="n">endsWith</span><span class="p">(</span><span class="n">file</span><span class="p">,</span> <span class="s">&quot;|&quot;</span><span class="p">))</span> <span class="p">{</span>
+<span class="cp">#ifdef __unix__</span>
+    <span class="k">auto</span> <span class="n">command</span> <span class="o">=</span> <span class="n">file</span><span class="p">.</span><span class="n">substr</span><span class="p">(</span><span class="mi">0</span><span class="p">,</span> <span class="n">file</span><span class="p">.</span><span class="n">size</span><span class="p">()</span> <span class="o">-</span> <span class="mi">1</span><span class="p">);</span>
+    <span class="c1">// open as a pipe</span>
+    <span class="n">pipe_</span> <span class="o">=</span> <span class="n">popen</span><span class="p">(</span><span class="n">command</span><span class="p">.</span><span class="n">c_str</span><span class="p">(),</span> <span class="s">&quot;r&quot;</span><span class="p">);</span>
+    <span class="n">ABORT_IF</span><span class="p">(</span><span class="o">!</span><span class="n">pipe_</span><span class="p">,</span> <span class="s">&quot;Command failed to execute ({}): {}&quot;</span><span class="p">,</span> <span class="n">errno</span><span class="p">,</span> <span class="n">command</span><span class="p">);</span>
+    <span class="c1">// there is no official way to construct a filebuf from a FILE* or fd, so we use /proc/{pid}/fd/{fd}</span>
+    <span class="c1">// For now, this only works on Linux. There are similar workarounds for Windows.</span>
+    <span class="n">file_</span> <span class="o">=</span> <span class="s">&quot;/proc/&quot;</span> <span class="o">+</span> <span class="n">std</span><span class="o">::</span><span class="n">to_string</span><span class="p">(</span><span class="n">getpid</span><span class="p">())</span> <span class="o">+</span> <span class="s">&quot;/fd/&quot;</span> <span class="o">+</span> <span class="n">std</span><span class="o">::</span><span class="n">to_string</span><span class="p">(</span><span class="n">fileno</span><span class="p">(</span><span class="n">pipe_</span><span class="p">));</span>
+<span class="cp">#else</span>
+    <span class="n">ABORT</span><span class="p">(</span><span class="s">&quot;Pipe syntax not supported in this build of Marian: {}&quot;</span><span class="p">,</span> <span class="n">file</span><span class="p">);</span>
+<span class="cp">#endif</span>
+  <span class="p">}</span> <span class="k">else</span> <span class="p">{</span>
+    <span class="n">ABORT_IF</span><span class="p">(</span><span class="o">!</span><span class="n">marian</span><span class="o">::</span><span class="n">filesystem</span><span class="o">::</span><span class="n">exists</span><span class="p">(</span><span class="n">file</span><span class="p">),</span> <span class="s">&quot;File &#39;{}&#39; does not exist&quot;</span><span class="p">,</span> <span class="n">file</span><span class="p">);</span>
+    <span class="n">file_</span> <span class="o">=</span> <span class="n">file</span><span class="p">;</span>
+  <span class="p">}</span>
+  <span class="n">streamBuf1_</span><span class="p">.</span><span class="n">reset</span><span class="p">(</span><span class="k">new</span> <span class="n">std</span><span class="o">::</span><span class="n">filebuf</span><span class="p">());</span>
+  <span class="k">auto</span> <span class="n">ret</span> <span class="o">=</span> <span class="k">static_cast</span><span class="o">&lt;</span><span class="n">std</span><span class="o">::</span><span class="n">filebuf</span><span class="o">*&gt;</span><span class="p">(</span><span class="n">streamBuf1_</span><span class="p">.</span><span class="n">get</span><span class="p">())</span><span class="o">-&gt;</span><span class="n">open</span><span class="p">(</span><span class="n">file_</span><span class="p">.</span><span class="n">string</span><span class="p">().</span><span class="n">c_str</span><span class="p">(),</span> <span class="n">std</span><span class="o">::</span><span class="n">ios</span><span class="o">::</span><span class="n">in</span> <span class="o">|</span> <span class="n">std</span><span class="o">::</span><span class="n">ios</span><span class="o">::</span><span class="n">binary</span><span class="p">);</span>
+  <span class="n">ABORT_IF</span><span class="p">(</span><span class="o">!</span><span class="n">ret</span><span class="p">,</span> <span class="s">&quot;Error opening file ({}): {}&quot;</span><span class="p">,</span> <span class="n">errno</span><span class="p">,</span> <span class="n">file_</span><span class="p">.</span><span class="n">string</span><span class="p">());</span>
+  <span class="n">ABORT_IF</span><span class="p">(</span><span class="n">ret</span> <span class="o">!=</span> <span class="n">streamBuf1_</span><span class="p">.</span><span class="n">get</span><span class="p">(),</span> <span class="s">&quot;Return value is not equal to streambuf pointer, that is weird&quot;</span><span class="p">);</span>
+
+  <span class="c1">// insert .gz decompression</span>
+  <span class="k">if</span><span class="p">(</span><span class="n">marian</span><span class="o">::</span><span class="n">utils</span><span class="o">::</span><span class="n">endsWith</span><span class="p">(</span><span class="n">file</span><span class="p">,</span> <span class="s">&quot;.gz&quot;</span><span class="p">))</span> <span class="p">{</span>
+    <span class="n">streamBuf2_</span> <span class="o">=</span> <span class="n">std</span><span class="o">::</span><span class="n">move</span><span class="p">(</span><span class="n">streamBuf1_</span><span class="p">);</span>
+    <span class="n">streamBuf1_</span><span class="p">.</span><span class="n">reset</span><span class="p">(</span><span class="k">new</span> <span class="n">zstr</span><span class="o">::</span><span class="n">istreambuf</span><span class="p">(</span><span class="n">streamBuf2_</span><span class="p">.</span><span class="n">get</span><span class="p">()));</span>
+  <span class="p">}</span>
+
+  <span class="c1">// initialize the underlying istream</span>
+  <span class="k">this</span><span class="o">-&gt;</span><span class="n">init</span><span class="p">(</span><span class="n">streamBuf1_</span><span class="p">.</span><span class="n">get</span><span class="p">());</span>
+<span class="p">}</span>
+
+<span class="n">InputFileStream</span><span class="o">::~</span><span class="n">InputFileStream</span><span class="p">()</span> <span class="p">{</span>
+<span class="cp">#ifdef __unix__  </span><span class="c1">// (pipe syntax is only supported on UNIX-like OS)</span>
+  <span class="k">if</span> <span class="p">(</span><span class="n">pipe_</span><span class="p">)</span>
+    <span class="n">pclose</span><span class="p">(</span><span class="n">pipe_</span><span class="p">);</span>  <span class="c1">// non-NULL if pipe syntax was used</span>
+<span class="cp">#endif</span>
+<span class="p">}</span>
+
+<span class="kt">bool</span> <span class="n">InputFileStream</span><span class="o">::</span><span class="n">empty</span><span class="p">()</span> <span class="p">{</span>
+  <span class="k">return</span> <span class="k">this</span><span class="o">-&gt;</span><span class="n">peek</span><span class="p">()</span> <span class="o">==</span> <span class="n">std</span><span class="o">::</span><span class="n">ifstream</span><span class="o">::</span><span class="n">traits_type</span><span class="o">::</span><span class="n">eof</span><span class="p">();</span>
+<span class="p">}</span>
+
+<span class="kt">void</span> <span class="n">InputFileStream</span><span class="o">::</span><span class="n">setbufsize</span><span class="p">(</span><span class="kt">size_t</span> <span class="n">size</span><span class="p">)</span> <span class="p">{</span>
+  <span class="n">rdbuf</span><span class="p">()</span><span class="o">-&gt;</span><span class="n">pubsetbuf</span><span class="p">(</span><span class="mi">0</span><span class="p">,</span> <span class="mi">0</span><span class="p">);</span>
+  <span class="n">readBuf_</span><span class="p">.</span><span class="n">resize</span><span class="p">(</span><span class="n">size</span><span class="p">);</span>
+  <span class="n">rdbuf</span><span class="p">()</span><span class="o">-&gt;</span><span class="n">pubsetbuf</span><span class="p">(</span><span class="n">readBuf_</span><span class="p">.</span><span class="n">data</span><span class="p">(),</span> <span class="n">readBuf_</span><span class="p">.</span><span class="n">size</span><span class="p">());</span>
+<span class="p">}</span>
+
+<span class="n">std</span><span class="o">::</span><span class="n">string</span> <span class="n">InputFileStream</span><span class="o">::</span><span class="n">getFileName</span><span class="p">()</span> <span class="k">const</span> <span class="p">{</span>
+  <span class="k">return</span> <span class="n">file_</span><span class="p">.</span><span class="n">string</span><span class="p">();</span>
+<span class="p">}</span>
+
+<span class="c1">// wrapper around std::getline() that handles Windows input files with extra CR</span>
+<span class="c1">// chars at the line end</span>
+<span class="n">std</span><span class="o">::</span><span class="n">istream</span> <span class="o">&amp;</span><span class="n">getline</span><span class="p">(</span><span class="n">std</span><span class="o">::</span><span class="n">istream</span> <span class="o">&amp;</span><span class="n">in</span><span class="p">,</span> <span class="n">std</span><span class="o">::</span><span class="n">string</span> <span class="o">&amp;</span><span class="n">line</span><span class="p">)</span> <span class="p">{</span>
+  <span class="n">std</span><span class="o">::</span><span class="n">getline</span><span class="p">(</span><span class="n">in</span><span class="p">,</span> <span class="n">line</span><span class="p">);</span>
+  <span class="c1">// bad() seems to be correct here. Should not abort on EOF.</span>
+  <span class="n">ABORT_IF</span><span class="p">(</span><span class="n">in</span><span class="p">.</span><span class="n">bad</span><span class="p">(),</span> <span class="s">&quot;Error reading from stream&quot;</span><span class="p">);</span>
+  <span class="c1">// strip terminal CR if present</span>
+  <span class="k">if</span><span class="p">(</span><span class="n">in</span> <span class="o">&amp;&amp;</span> <span class="o">!</span><span class="n">line</span><span class="p">.</span><span class="n">empty</span><span class="p">()</span> <span class="o">&amp;&amp;</span> <span class="n">line</span><span class="p">.</span><span class="n">back</span><span class="p">()</span> <span class="o">==</span> <span class="n">in</span><span class="p">.</span><span class="n">widen</span><span class="p">(</span><span class="sc">&#39;\r&#39;</span><span class="p">))</span>
+    <span class="n">line</span><span class="p">.</span><span class="n">pop_back</span><span class="p">();</span>
+  <span class="k">return</span> <span class="n">in</span><span class="p">;</span>
+<span class="p">}</span>
+<span class="n">OutputFileStream</span><span class="o">::</span><span class="n">OutputFileStream</span><span class="p">(</span><span class="k">const</span> <span class="n">std</span><span class="o">::</span><span class="n">string</span> <span class="o">&amp;</span><span class="n">file</span><span class="p">)</span>
+    <span class="o">:</span> <span class="n">std</span><span class="o">::</span><span class="n">ostream</span><span class="p">(</span><span class="nb">NULL</span><span class="p">),</span> <span class="n">file_</span><span class="p">(</span><span class="n">file</span><span class="p">)</span> <span class="p">{</span>
+  <span class="n">streamBuf1_</span><span class="p">.</span><span class="n">reset</span><span class="p">(</span><span class="k">new</span> <span class="n">std</span><span class="o">::</span><span class="n">filebuf</span><span class="p">());</span>
+  <span class="k">auto</span> <span class="n">ret</span> <span class="o">=</span> <span class="k">static_cast</span><span class="o">&lt;</span><span class="n">std</span><span class="o">::</span><span class="n">filebuf</span><span class="o">*&gt;</span><span class="p">(</span><span class="n">streamBuf1_</span><span class="p">.</span><span class="n">get</span><span class="p">())</span><span class="o">-&gt;</span><span class="n">open</span><span class="p">(</span><span class="n">file</span><span class="p">.</span><span class="n">c_str</span><span class="p">(),</span> <span class="n">std</span><span class="o">::</span><span class="n">ios</span><span class="o">::</span><span class="n">out</span> <span class="o">|</span> <span class="n">std</span><span class="o">::</span><span class="n">ios_base</span><span class="o">::</span><span class="n">binary</span><span class="p">);</span>
+  <span class="n">ABORT_IF</span><span class="p">(</span><span class="o">!</span><span class="n">ret</span><span class="p">,</span> <span class="s">&quot;File cannot be opened&quot;</span><span class="p">,</span> <span class="n">file</span><span class="p">);</span>
+  <span class="n">ABORT_IF</span><span class="p">(</span><span class="n">ret</span> <span class="o">!=</span> <span class="n">streamBuf1_</span><span class="p">.</span><span class="n">get</span><span class="p">(),</span> <span class="s">&quot;Return value is not equal to streambuf pointer, that is weird&quot;</span><span class="p">);</span>
+
+  <span class="k">if</span><span class="p">(</span><span class="n">file_</span><span class="p">.</span><span class="n">extension</span><span class="p">()</span> <span class="o">==</span> <span class="n">marian</span><span class="o">::</span><span class="n">filesystem</span><span class="o">::</span><span class="n">Path</span><span class="p">(</span><span class="s">&quot;.gz&quot;</span><span class="p">))</span> <span class="p">{</span>
+    <span class="n">streamBuf2_</span><span class="p">.</span><span class="n">reset</span><span class="p">(</span><span class="k">new</span> <span class="n">zstr</span><span class="o">::</span><span class="n">ostreambuf</span><span class="p">(</span><span class="n">streamBuf1_</span><span class="p">.</span><span class="n">get</span><span class="p">()));</span>
+    <span class="k">this</span><span class="o">-&gt;</span><span class="n">init</span><span class="p">(</span><span class="n">streamBuf2_</span><span class="p">.</span><span class="n">get</span><span class="p">());</span>
+  <span class="p">}</span> <span class="k">else</span> <span class="p">{</span>
+    <span class="k">this</span><span class="o">-&gt;</span><span class="n">init</span><span class="p">(</span><span class="n">streamBuf1_</span><span class="p">.</span><span class="n">get</span><span class="p">());</span>
+  <span class="p">}</span>
+<span class="p">}</span>
+
+<span class="n">OutputFileStream</span><span class="o">::</span><span class="n">OutputFileStream</span><span class="p">()</span>
+    <span class="o">:</span> <span class="n">std</span><span class="o">::</span><span class="n">ostream</span><span class="p">(</span><span class="nb">NULL</span><span class="p">)</span> <span class="p">{}</span>
+
+<span class="n">OutputFileStream</span><span class="o">::~</span><span class="n">OutputFileStream</span><span class="p">()</span> <span class="p">{</span>
+  <span class="k">this</span><span class="o">-&gt;</span><span class="n">flush</span><span class="p">();</span>
+<span class="p">}</span>
+
+<span class="n">std</span><span class="o">::</span><span class="n">string</span> <span class="n">OutputFileStream</span><span class="o">::</span><span class="n">getFileName</span><span class="p">()</span> <span class="k">const</span> <span class="p">{</span>
+  <span class="k">return</span> <span class="n">file_</span><span class="p">.</span><span class="n">string</span><span class="p">();</span>
+<span class="p">}</span>
+
+<span class="n">TemporaryFile</span><span class="o">::</span><span class="n">TemporaryFile</span><span class="p">(</span><span class="k">const</span> <span class="n">std</span><span class="o">::</span><span class="n">string</span> <span class="o">&amp;</span><span class="n">base</span><span class="p">,</span> <span class="kt">bool</span> <span class="n">earlyUnlink</span><span class="p">)</span>
+    <span class="o">:</span> <span class="n">OutputFileStream</span><span class="p">(),</span> <span class="n">unlink_</span><span class="p">(</span><span class="n">earlyUnlink</span><span class="p">)</span> <span class="p">{</span>
+  <span class="n">std</span><span class="o">::</span><span class="n">string</span> <span class="n">baseTemp</span><span class="p">(</span><span class="n">base</span><span class="p">);</span>
+  <span class="n">NormalizeTempPrefix</span><span class="p">(</span><span class="n">baseTemp</span><span class="p">);</span>
+  <span class="n">MakeTemp</span><span class="p">(</span><span class="n">baseTemp</span><span class="p">);</span>
+
+  <span class="n">inSteam_</span> <span class="o">=</span> <span class="n">UPtr</span><span class="o">&lt;</span><span class="n">io</span><span class="o">::</span><span class="n">InputFileStream</span><span class="o">&gt;</span><span class="p">(</span><span class="k">new</span> <span class="n">io</span><span class="o">::</span><span class="n">InputFileStream</span><span class="p">(</span><span class="n">file_</span><span class="p">.</span><span class="n">string</span><span class="p">()));</span>
+  <span class="k">if</span><span class="p">(</span><span class="n">unlink_</span><span class="p">)</span> <span class="p">{</span>
+    <span class="n">ABORT_IF</span><span class="p">(</span><span class="n">remove</span><span class="p">(</span><span class="n">file_</span><span class="p">.</span><span class="n">string</span><span class="p">().</span><span class="n">c_str</span><span class="p">()),</span> <span class="s">&quot;Error while deleting &#39;{}&#39;&quot;</span><span class="p">,</span> <span class="n">file_</span><span class="p">.</span><span class="n">string</span><span class="p">());</span>
+  <span class="p">}</span>
+<span class="p">}</span>
+
+<span class="n">TemporaryFile</span><span class="o">::~</span><span class="n">TemporaryFile</span><span class="p">()</span> <span class="p">{</span>
+  <span class="k">if</span><span class="p">(</span><span class="o">!</span><span class="n">unlink_</span><span class="p">)</span>
+    <span class="c1">// We do not check for errors here as this is the destructor and we cannot really fix an error anyway.</span>
+    <span class="n">remove</span><span class="p">(</span><span class="n">file_</span><span class="p">.</span><span class="n">string</span><span class="p">().</span><span class="n">c_str</span><span class="p">()),</span> <span class="s">&quot;Error while deleting &#39;{}&#39;&quot;</span><span class="p">,</span> <span class="n">file_</span><span class="p">.</span><span class="n">string</span><span class="p">();</span>
+<span class="p">}</span>
+
+<span class="kt">void</span> <span class="n">TemporaryFile</span><span class="o">::</span><span class="n">NormalizeTempPrefix</span><span class="p">(</span><span class="n">std</span><span class="o">::</span><span class="n">string</span> <span class="o">&amp;</span><span class="n">base</span><span class="p">)</span> <span class="k">const</span> <span class="p">{</span>
+  <span class="k">if</span><span class="p">(</span><span class="n">base</span><span class="p">.</span><span class="n">empty</span><span class="p">())</span>
+    <span class="k">return</span><span class="p">;</span>
+
+<span class="cp">#ifdef _MSC_VER</span>
+  <span class="k">if</span><span class="p">(</span><span class="n">base</span><span class="p">.</span><span class="n">substr</span><span class="p">(</span><span class="mi">0</span><span class="p">,</span> <span class="mi">4</span><span class="p">)</span> <span class="o">==</span> <span class="s">&quot;/tmp&quot;</span><span class="p">)</span>
+    <span class="n">base</span> <span class="o">=</span> <span class="n">getenv</span><span class="p">(</span><span class="s">&quot;TMP&quot;</span><span class="p">);</span>
+<span class="cp">#else</span>
+  <span class="k">if</span><span class="p">(</span><span class="n">base</span><span class="p">[</span><span class="n">base</span><span class="p">.</span><span class="n">size</span><span class="p">()</span> <span class="o">-</span> <span class="mi">1</span><span class="p">]</span> <span class="o">==</span> <span class="sc">&#39;/&#39;</span><span class="p">)</span>
+    <span class="k">return</span><span class="p">;</span>
+  <span class="k">struct</span> <span class="nc">stat</span> <span class="n">sb</span><span class="p">;</span>
+  <span class="c1">// It&#39;s fine for it to not exist.</span>
+  <span class="k">if</span><span class="p">(</span><span class="n">stat</span><span class="p">(</span><span class="n">base</span><span class="p">.</span><span class="n">c_str</span><span class="p">(),</span> <span class="o">&amp;</span><span class="n">sb</span><span class="p">)</span> <span class="o">==</span> <span class="mi">-1</span><span class="p">)</span>
+    <span class="k">return</span><span class="p">;</span>
+  <span class="k">if</span><span class="p">(</span><span class="n">S_ISDIR</span><span class="p">(</span><span class="n">sb</span><span class="p">.</span><span class="n">st_mode</span><span class="p">))</span>
+    <span class="n">base</span> <span class="o">+=</span> <span class="sc">&#39;/&#39;</span><span class="p">;</span>
+<span class="cp">#endif</span>
+<span class="p">}</span>
+<span class="kt">void</span> <span class="n">TemporaryFile</span><span class="o">::</span><span class="n">MakeTemp</span><span class="p">(</span><span class="k">const</span> <span class="n">std</span><span class="o">::</span><span class="n">string</span> <span class="o">&amp;</span><span class="n">base</span><span class="p">)</span> <span class="p">{</span>
+<span class="cp">#ifdef _MSC_VER</span>
+  <span class="kt">char</span> <span class="o">*</span><span class="n">name</span> <span class="o">=</span> <span class="n">tempnam</span><span class="p">(</span><span class="n">base</span><span class="p">.</span><span class="n">c_str</span><span class="p">(),</span> <span class="s">&quot;marian.&quot;</span><span class="p">);</span>
+  <span class="n">ABORT_IF</span><span class="p">(</span><span class="n">name</span> <span class="o">==</span> <span class="nb">NULL</span><span class="p">,</span> <span class="s">&quot;Error while making a temporary based on &#39;{}&#39;&quot;</span><span class="p">,</span> <span class="n">base</span><span class="p">);</span>
+
+  <span class="kt">int</span> <span class="n">oflag</span> <span class="o">=</span> <span class="n">_O_RDWR</span> <span class="o">|</span> <span class="n">_O_CREAT</span> <span class="o">|</span> <span class="n">_O_EXCL</span><span class="p">;</span>
+  <span class="k">if</span><span class="p">(</span><span class="n">unlink_</span><span class="p">)</span>
+    <span class="n">oflag</span> <span class="o">|=</span> <span class="n">_O_TEMPORARY</span><span class="p">;</span>
+
+  <span class="kt">int</span> <span class="n">fd</span> <span class="o">=</span> <span class="n">open</span><span class="p">(</span><span class="n">name</span><span class="p">,</span> <span class="n">oflag</span><span class="p">,</span> <span class="n">_S_IREAD</span> <span class="o">|</span> <span class="n">_S_IWRITE</span><span class="p">);</span>
+  <span class="n">ABORT_IF</span><span class="p">(</span><span class="n">fd</span> <span class="o">==</span> <span class="mi">-1</span><span class="p">,</span> <span class="s">&quot;Error while making a temporary based on &#39;{}&#39;&quot;</span><span class="p">,</span> <span class="n">base</span><span class="p">);</span>
+
+<span class="cp">#else</span>
+  <span class="c1">// create temp file</span>
+  <span class="n">std</span><span class="o">::</span><span class="n">string</span> <span class="n">name</span><span class="p">(</span><span class="n">base</span><span class="p">);</span>
+  <span class="n">name</span> <span class="o">+=</span> <span class="s">&quot;marian.XXXXXX&quot;</span><span class="p">;</span>
+  <span class="n">name</span><span class="p">.</span><span class="n">push_back</span><span class="p">(</span><span class="mi">0</span><span class="p">);</span>
+  <span class="kt">int</span> <span class="n">fd</span> <span class="o">=</span> <span class="n">mkstemp</span><span class="p">(</span><span class="o">&amp;</span><span class="n">name</span><span class="p">[</span><span class="mi">0</span><span class="p">]);</span>
+  <span class="n">ABORT_IF</span><span class="p">(</span><span class="n">fd</span> <span class="o">==</span> <span class="mi">-1</span><span class="p">,</span> <span class="s">&quot;Error creating temp file {}&quot;</span><span class="p">,</span> <span class="n">name</span><span class="p">);</span>
+
+  <span class="n">file_</span> <span class="o">=</span> <span class="n">name</span><span class="p">;</span>
+<span class="cp">#endif</span>
+
+  <span class="c1">// open again with c++</span>
+  <span class="n">streamBuf1_</span><span class="p">.</span><span class="n">reset</span><span class="p">(</span><span class="k">new</span> <span class="n">std</span><span class="o">::</span><span class="n">filebuf</span><span class="p">());</span>
+  <span class="k">auto</span> <span class="n">ret</span> <span class="o">=</span> <span class="k">static_cast</span><span class="o">&lt;</span><span class="n">std</span><span class="o">::</span><span class="n">filebuf</span><span class="o">*&gt;</span><span class="p">(</span><span class="n">streamBuf1_</span><span class="p">.</span><span class="n">get</span><span class="p">())</span><span class="o">-&gt;</span><span class="n">open</span><span class="p">(</span><span class="n">name</span><span class="p">,</span> <span class="n">std</span><span class="o">::</span><span class="n">ios</span><span class="o">::</span><span class="n">out</span> <span class="o">|</span> <span class="n">std</span><span class="o">::</span><span class="n">ios_base</span><span class="o">::</span><span class="n">binary</span><span class="p">);</span>
+  <span class="n">ABORT_IF</span><span class="p">(</span><span class="o">!</span><span class="n">streamBuf1_</span><span class="p">,</span> <span class="s">&quot;File {} cannot be temp opened&quot;</span><span class="p">,</span> <span class="n">name</span><span class="p">);</span>
+  <span class="n">ABORT_IF</span><span class="p">(</span><span class="n">ret</span> <span class="o">!=</span> <span class="n">streamBuf1_</span><span class="p">.</span><span class="n">get</span><span class="p">(),</span> <span class="s">&quot;Return value ({}) is not equal to streambuf pointer ({}), that is weird.&quot;</span><span class="p">,</span> <span class="p">(</span><span class="kt">size_t</span><span class="p">)</span><span class="n">ret</span><span class="p">,</span> <span class="p">(</span><span class="kt">size_t</span><span class="p">)</span><span class="n">streamBuf1_</span><span class="p">.</span><span class="n">get</span><span class="p">());</span>
+
+  <span class="k">this</span><span class="o">-&gt;</span><span class="n">init</span><span class="p">(</span><span class="n">streamBuf1_</span><span class="p">.</span><span class="n">get</span><span class="p">());</span>
+
+  <span class="c1">// close original file descriptor</span>
+  <span class="n">ABORT_IF</span><span class="p">(</span><span class="n">close</span><span class="p">(</span><span class="n">fd</span><span class="p">),</span> <span class="s">&quot;Can&#39;t close file descriptor&quot;</span><span class="p">,</span> <span class="n">name</span><span class="p">);</span>
+
+<span class="cp">#ifdef _MSC_VER</span>
+  <span class="n">free</span><span class="p">(</span><span class="n">name</span><span class="p">);</span>
+<span class="cp">#endif</span>
+<span class="p">}</span>
+
+<span class="n">UPtr</span><span class="o">&lt;</span><span class="n">InputFileStream</span><span class="o">&gt;</span> <span class="n">TemporaryFile</span><span class="o">::</span><span class="n">getInputStream</span><span class="p">()</span> <span class="p">{</span>
+  <span class="k">return</span> <span class="n">std</span><span class="o">::</span><span class="n">move</span><span class="p">(</span><span class="n">inSteam_</span><span class="p">);</span>
+<span class="p">}</span>
+
+<span class="n">std</span><span class="o">::</span><span class="n">string</span> <span class="n">TemporaryFile</span><span class="o">::</span><span class="n">getFileName</span><span class="p">()</span> <span class="k">const</span> <span class="p">{</span>
+  <span class="k">return</span> <span class="n">file_</span><span class="p">.</span><span class="n">string</span><span class="p">();</span>
+<span class="p">}</span>
+
+<span class="p">}</span>  <span class="c1">// namespace io</span>
+<span class="p">}</span>  <span class="c1">// namespace marian</span>
+</pre></div>
+</div>
+</div>
+
+
+           </div>
+           
+          </div>
+          <footer>
+
+  <hr/>
+
+  <div role="contentinfo">
+    <p>
+        &#169; Copyright 2021, Marian NMT Team.
+
+    </p>
+  </div>
+    
+    
+    
+    Built with <a href="https://www.sphinx-doc.org/">Sphinx</a> using a
+    
+    <a href="https://github.com/readthedocs/sphinx_rtd_theme">theme</a>
+    
+    provided by <a href="https://readthedocs.org">Read the Docs</a>. 
+
+</footer>
+        </div>
+      </div>
+
+    </section>
+
+  </div>
+  
+
+  <script type="text/javascript">
+      jQuery(function () {
+          SphinxRtdTheme.Navigation.enable(true);
+      });
+  </script>
+
+  
+  
+    
+   
+
+</body>
+</html>

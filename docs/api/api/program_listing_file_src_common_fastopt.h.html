@@ -1,0 +1,607 @@
+
+
+<!DOCTYPE html>
+<html class="writer-html5" lang="en" >
+<head>
+  <meta charset="utf-8" />
+  
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  
+  <title>Program Listing for File fastopt.h &mdash; Marian NMT v1.10.1 2021-02-23 documentation</title>
+  
+
+  
+  <link rel="stylesheet" href="../_static/css/theme.css" type="text/css" />
+  <link rel="stylesheet" href="../_static/pygments.css" type="text/css" />
+  <link rel="stylesheet" href="../_static/css/custom.css" type="text/css" />
+  <link rel="stylesheet" href="../_static/collapsible-lists/css/tree_view.css" type="text/css" />
+
+  
+  
+
+  
+  
+
+  
+    <link rel="canonical" href="http://marian-nmt.github.io/docs/api/api/program_listing_file_src_common_fastopt.h.html" />
+
+  
+  <!--[if lt IE 9]>
+    <script src="../_static/js/html5shiv.min.js"></script>
+  <![endif]-->
+  
+    
+      <script type="text/javascript" id="documentation_options" data-url_root="../" src="../_static/documentation_options.js"></script>
+        <script src="../_static/jquery.js"></script>
+        <script src="../_static/underscore.js"></script>
+        <script src="../_static/doctools.js"></script>
+        <script src="../_static/language_data.js"></script>
+        <script src="../_static/collapsible-lists/js/CollapsibleLists.compressed.js"></script>
+        <script src="../_static/collapsible-lists/js/apply-collapsible-lists.js"></script>
+    
+    <script type="text/javascript" src="../_static/js/theme.js"></script>
+
+    
+    <link rel="index" title="Index" href="../genindex.html" />
+    <link rel="search" title="Search" href="../search.html" /> 
+</head>
+
+<body class="wy-body-for-nav">
+
+   
+  <div class="wy-grid-for-nav">
+    
+    <nav data-toggle="wy-nav-shift" class="wy-nav-side">
+      <div class="wy-side-scroll">
+        <div class="wy-side-nav-search" >
+          
+
+          
+            <a href="../index.html" class="icon icon-home"> Marian NMT
+          
+
+          
+          </a>
+
+          
+            
+            
+              <div class="version">
+                v1.10.1
+              </div>
+            
+          
+
+          
+<div role="search">
+  <form id="rtd-search-form" class="wy-form" action="../search.html" method="get">
+    <input type="text" name="q" placeholder="Search docs" />
+    <input type="hidden" name="check_keywords" value="yes" />
+    <input type="hidden" name="area" value="default" />
+  </form>
+</div>
+
+          
+        </div>
+
+        
+        <div class="wy-menu wy-menu-vertical" data-spy="affix" role="navigation" aria-label="main navigation">
+          
+            
+            
+              
+            
+            
+              <p class="caption"><span class="caption-text">Contents:</span></p>
+<ul>
+<li class="toctree-l1"><a class="reference internal" href="../install.html">Installation</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../graph.html">Expression graphs</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../operators.html">Graph operations</a></li>
+<li class="toctree-l1"><a class="reference internal" href="library_index.html">Library API</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../contributing.html">How to contribute to Marian</a></li>
+</ul>
+
+            
+          
+        </div>
+        
+      </div>
+    </nav>
+
+    <section data-toggle="wy-nav-shift" class="wy-nav-content-wrap">
+
+      
+      <nav class="wy-nav-top" aria-label="top navigation">
+        
+          <i data-toggle="wy-nav-top" class="fa fa-bars"></i>
+          <a href="../index.html">Marian NMT</a>
+        
+      </nav>
+
+
+      <div class="wy-nav-content">
+        
+        <div class="rst-content">
+        
+          
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+<div role="navigation" aria-label="breadcrumbs navigation">
+
+  <ul class="wy-breadcrumbs">
+    
+      <li><a href="../index.html" class="icon icon-home"></a> &raquo;</li>
+        
+      <li>Program Listing for File fastopt.h</li>
+    
+    
+      <li class="wy-breadcrumbs-aside">
+        
+          
+            <a href="../_sources/api/program_listing_file_src_common_fastopt.h.rst.txt" rel="nofollow"> View page source</a>
+          
+        
+      </li>
+    
+  </ul>
+
+  
+  <hr/>
+</div>
+          <div role="main" class="document" itemscope="itemscope" itemtype="http://schema.org/Article">
+           <div itemprop="articleBody">
+            
+  <div class="section" id="program-listing-for-file-fastopt-h">
+<span id="program-listing-file-src-common-fastopt-h"></span><h1>Program Listing for File fastopt.h<a class="headerlink" href="#program-listing-for-file-fastopt-h" title="Permalink to this headline">¶</a></h1>
+<p>↰ <a class="reference internal" href="file_src_common_fastopt.h.html#file-src-common-fastopt-h"><span class="std std-ref">Return to documentation for file</span></a> (<code class="docutils literal notranslate"><span class="pre">src/common/fastopt.h</span></code>)</p>
+<div class="highlight-cpp notranslate"><div class="highlight"><pre><span></span><span class="cp">#pragma once</span>
+
+<span class="cp">#include</span> <span class="cpf">&quot;common/definitions.h&quot;</span><span class="cp"></span>
+<span class="cp">#include</span> <span class="cpf">&quot;3rd_party/any_type.h&quot;</span><span class="cp"></span>
+<span class="cp">#include</span> <span class="cpf">&quot;3rd_party/phf/phf.h&quot;</span><span class="cp"></span>
+<span class="cp">#include</span> <span class="cpf">&quot;3rd_party/yaml-cpp/yaml.h&quot;</span><span class="cp"></span>
+
+<span class="c1">// This file contains code to create a fast access option class,</span>
+<span class="c1">// meant as a replacment/supplement to YAML::Node.</span>
+
+<span class="k">namespace</span> <span class="n">marian</span> <span class="p">{</span>
+
+<span class="k">namespace</span> <span class="n">crc</span> <span class="p">{</span>
+<span class="c1">// has to stay in header due to constexpr</span>
+
+<span class="c1">// This code comes from https://notes.underscorediscovery.com/constexpr-fnv1a/</span>
+<span class="c1">// and is distributed as public domain as stated by the author under that link</span>
+
+<span class="c1">// constants for hash computations</span>
+<span class="k">constexpr</span> <span class="kt">uint64_t</span> <span class="n">val_64_const</span> <span class="o">=</span> <span class="mh">0xcbf29ce484222325</span><span class="p">;</span>
+<span class="k">constexpr</span> <span class="kt">uint64_t</span> <span class="n">prime_64_const</span> <span class="o">=</span> <span class="mh">0x100000001b3</span><span class="p">;</span>
+
+<span class="c1">// recursive compile-time hash, looking for stack-overflow source</span>
+<span class="kr">inline</span> <span class="k">constexpr</span> <span class="kt">uint64_t</span>
+<span class="n">hash_64_fnv1a_const</span><span class="p">(</span><span class="k">const</span> <span class="kt">char</span><span class="o">*</span> <span class="k">const</span> <span class="n">str</span><span class="p">,</span>
+                    <span class="k">const</span> <span class="kt">uint64_t</span> <span class="n">value</span> <span class="o">=</span> <span class="n">val_64_const</span><span class="p">)</span> <span class="k">noexcept</span> <span class="p">{</span>
+  <span class="k">return</span> <span class="p">(</span><span class="n">str</span><span class="p">[</span><span class="mi">0</span><span class="p">]</span> <span class="o">==</span> <span class="sc">&#39;\0&#39;</span><span class="p">)</span> <span class="o">?</span> <span class="nl">value</span> <span class="p">:</span>
+      <span class="n">hash_64_fnv1a_const</span><span class="p">(</span><span class="o">&amp;</span><span class="n">str</span><span class="p">[</span><span class="mi">1</span><span class="p">],</span> <span class="p">(</span><span class="n">value</span> <span class="o">^</span> <span class="kt">uint64_t</span><span class="p">(</span><span class="n">str</span><span class="p">[</span><span class="mi">0</span><span class="p">]))</span> <span class="o">*</span> <span class="n">prime_64_const</span><span class="p">);</span>
+<span class="p">}</span>
+
+<span class="c1">// Compile time string hashing. Should work particularly well for option look up with explicitly used keys like options-&gt;get(&quot;dim-input&quot;);</span>
+<span class="kr">inline</span> <span class="k">constexpr</span> <span class="kt">uint64_t</span> <span class="n">crc</span><span class="p">(</span><span class="k">const</span> <span class="kt">char</span><span class="o">*</span> <span class="k">const</span> <span class="n">str</span><span class="p">)</span> <span class="k">noexcept</span> <span class="p">{</span>
+  <span class="k">return</span> <span class="nf">hash_64_fnv1a_const</span><span class="p">(</span><span class="n">str</span><span class="p">);</span>
+<span class="p">}</span>
+
+<span class="p">}</span>
+
+<span class="cm">/*****************************************************************************/</span>
+
+<span class="c1">// PerfectHash constructs a perfect hash for a set K of n numeric keys. The size of</span>
+<span class="c1">// the hash is m &gt; n (not much larger) and n &lt;&lt; max(K) (much smaller). The output array size is</span>
+<span class="c1">// determined by PHF::init in &quot;src/3rd_party/phf/phf.h&quot;. m - n fields stay undefined (a bit of waste).</span>
+
+<span class="c1">// Wrapper class for the 3rd-party library in &quot;src/3rd_party/phf&quot;</span>
+<span class="k">class</span> <span class="nc">PerfectHash</span> <span class="p">{</span>
+<span class="k">private</span><span class="o">:</span>
+  <span class="n">phf</span> <span class="n">phf_</span><span class="p">;</span>
+
+  <span class="n">PerfectHash</span><span class="p">(</span><span class="k">const</span> <span class="kt">uint64_t</span> <span class="n">keys</span><span class="p">[],</span> <span class="kt">size_t</span> <span class="n">num</span><span class="p">)</span> <span class="p">{</span>
+    <span class="kt">int</span> <span class="n">error</span> <span class="o">=</span> <span class="n">PHF</span><span class="o">::</span><span class="n">init</span><span class="o">&lt;</span><span class="kt">uint64_t</span><span class="p">,</span> <span class="nb">true</span><span class="o">&gt;</span><span class="p">(</span><span class="o">&amp;</span><span class="n">phf_</span><span class="p">,</span> <span class="n">keys</span><span class="p">,</span> <span class="n">num</span><span class="p">,</span>
+      <span class="cm">/* bucket size */</span> <span class="mi">4</span><span class="p">,</span>
+      <span class="cm">/* loading factor */</span> <span class="mi">90</span><span class="p">,</span>
+      <span class="cm">/* seed */</span> <span class="mi">123456</span><span class="p">);</span>
+    <span class="n">ABORT_IF</span><span class="p">(</span><span class="n">error</span> <span class="o">!=</span> <span class="mi">0</span><span class="p">,</span> <span class="s">&quot;PHF error {}&quot;</span><span class="p">,</span> <span class="n">error</span><span class="p">);</span>
+  <span class="p">}</span>
+
+<span class="k">public</span><span class="o">:</span>
+
+  <span class="n">PerfectHash</span><span class="p">(</span><span class="k">const</span> <span class="n">std</span><span class="o">::</span><span class="n">vector</span><span class="o">&lt;</span><span class="kt">uint64_t</span><span class="o">&gt;&amp;</span> <span class="n">v</span><span class="p">)</span>
+   <span class="o">:</span> <span class="n">PerfectHash</span><span class="p">(</span><span class="n">v</span><span class="p">.</span><span class="n">data</span><span class="p">(),</span> <span class="n">v</span><span class="p">.</span><span class="n">size</span><span class="p">())</span> <span class="p">{</span> <span class="p">}</span>
+
+  <span class="o">~</span><span class="n">PerfectHash</span><span class="p">()</span> <span class="p">{</span>
+    <span class="n">PHF</span><span class="o">::</span><span class="n">destroy</span><span class="p">(</span><span class="o">&amp;</span><span class="n">phf_</span><span class="p">);</span>
+  <span class="p">}</span>
+
+  <span class="c1">// subscript operator [] overloading: if the key is uint64_t, return the hash code directly</span>
+  <span class="kt">uint32_t</span> <span class="k">operator</span><span class="p">[](</span><span class="k">const</span> <span class="kt">uint64_t</span><span class="o">&amp;</span> <span class="n">key</span><span class="p">)</span> <span class="k">const</span> <span class="p">{</span>
+    <span class="k">return</span> <span class="n">PHF</span><span class="o">::</span><span class="n">hash</span><span class="o">&lt;</span><span class="kt">uint64_t</span><span class="o">&gt;</span><span class="p">(</span><span class="k">const_cast</span><span class="o">&lt;</span><span class="n">phf</span><span class="o">*&gt;</span><span class="p">(</span><span class="o">&amp;</span><span class="n">phf_</span><span class="p">),</span> <span class="n">key</span><span class="p">);</span>
+  <span class="p">}</span>
+
+  <span class="c1">// If the key is a string, return the hash code for the string&#39;s CRC code</span>
+  <span class="kt">uint32_t</span> <span class="k">operator</span><span class="p">[](</span><span class="k">const</span> <span class="kt">char</span><span class="o">*</span> <span class="k">const</span> <span class="n">keyStr</span><span class="p">)</span> <span class="k">const</span> <span class="p">{</span>
+    <span class="k">return</span> <span class="p">(</span><span class="o">*</span><span class="k">this</span><span class="p">)[</span><span class="n">crc</span><span class="o">::</span><span class="n">crc</span><span class="p">(</span><span class="n">keyStr</span><span class="p">)];</span>
+  <span class="p">}</span>
+
+  <span class="kt">size_t</span> <span class="n">size</span><span class="p">()</span> <span class="k">const</span> <span class="p">{</span>
+    <span class="k">return</span> <span class="n">phf_</span><span class="p">.</span><span class="n">m</span><span class="p">;</span>
+  <span class="p">}</span>
+<span class="p">};</span>
+
+<span class="cm">/*****************************************************************************/</span>
+
+<span class="k">class</span> <span class="nc">FastOpt</span><span class="p">;</span>
+
+<span class="c1">// helper class for conversion, see fastopt.cpp</span>
+<span class="k">namespace</span> <span class="n">fastopt_helpers</span> <span class="p">{</span>
+  <span class="k">template</span> <span class="o">&lt;</span><span class="k">typename</span> <span class="nc">T</span><span class="o">&gt;</span>
+  <span class="k">struct</span> <span class="nc">As</span> <span class="p">{</span>
+    <span class="k">static</span> <span class="n">T</span> <span class="n">apply</span><span class="p">(</span><span class="k">const</span> <span class="n">FastOpt</span><span class="o">&amp;</span><span class="p">);</span>
+  <span class="p">};</span>
+
+  <span class="k">template</span> <span class="o">&lt;</span><span class="k">typename</span> <span class="nc">T</span><span class="o">&gt;</span>
+  <span class="k">struct</span> <span class="nc">As</span><span class="o">&lt;</span><span class="n">std</span><span class="o">::</span><span class="n">vector</span><span class="o">&lt;</span><span class="n">T</span><span class="o">&gt;&gt;</span> <span class="p">{</span>
+    <span class="k">static</span> <span class="n">std</span><span class="o">::</span><span class="n">vector</span><span class="o">&lt;</span><span class="n">T</span><span class="o">&gt;</span> <span class="n">apply</span><span class="p">(</span><span class="k">const</span> <span class="n">FastOpt</span><span class="o">&amp;</span><span class="p">);</span>
+  <span class="p">};</span>
+
+  <span class="k">template</span> <span class="o">&lt;</span><span class="k">typename</span> <span class="nc">T1</span><span class="p">,</span> <span class="k">typename</span> <span class="nc">T2</span><span class="o">&gt;</span>
+  <span class="k">struct</span> <span class="nc">As</span><span class="o">&lt;</span><span class="n">std</span><span class="o">::</span><span class="n">pair</span><span class="o">&lt;</span><span class="n">T1</span><span class="p">,</span> <span class="n">T2</span><span class="o">&gt;&gt;</span> <span class="p">{</span>
+    <span class="k">static</span> <span class="n">std</span><span class="o">::</span><span class="n">pair</span><span class="o">&lt;</span><span class="n">T1</span><span class="p">,</span> <span class="n">T2</span><span class="o">&gt;</span> <span class="n">apply</span><span class="p">(</span><span class="k">const</span> <span class="n">FastOpt</span><span class="o">&amp;</span><span class="p">);</span>
+  <span class="p">};</span>
+<span class="p">}</span>
+
+<span class="c1">// Fast access option class, meant as a replacment/supplement to YAML::Node.</span>
+<span class="c1">// Relatively expensive to construct, fast to access (not visible in profiler)</span>
+<span class="c1">// via std::vector or perfect hash. The perfect hash only requires a few look-ups</span>
+<span class="c1">// and arithmentic operations, still O(1).</span>
+<span class="c1">// Still requires YAML::Node support for parsing and modification via rebuilding.</span>
+<span class="k">class</span> <span class="nc">FastOpt</span> <span class="p">{</span>
+<span class="k">private</span><span class="o">:</span>
+  <span class="k">template</span> <span class="o">&lt;</span><span class="k">typename</span> <span class="nc">T</span><span class="o">&gt;</span>
+  <span class="k">friend</span> <span class="k">struct</span> <span class="nc">fastopt_helpers</span><span class="o">::</span><span class="n">As</span><span class="p">;</span>
+
+<span class="k">public</span><span class="o">:</span>
+  <span class="c1">// Node types for FastOpt, seem to be enough to cover YAML:NodeType</span>
+  <span class="c1">// Multi-element types include &quot;Sequence&quot; and &quot;Map&quot;</span>
+  <span class="c1">// &quot;Sequence&quot; is implemented with STL vectors</span>
+  <span class="c1">// &quot;Map&quot; is implemented with a 3rd-party PHF library (see the PerfectHash class)</span>
+  <span class="k">enum</span> <span class="k">struct</span> <span class="nc">NodeType</span> <span class="p">{</span>
+    <span class="n">Null</span><span class="p">,</span> <span class="n">Bool</span><span class="p">,</span> <span class="n">Int64</span><span class="p">,</span> <span class="n">Float64</span><span class="p">,</span> <span class="n">String</span><span class="p">,</span> <span class="n">Sequence</span><span class="p">,</span> <span class="n">Map</span>
+  <span class="p">};</span>
+
+<span class="k">private</span><span class="o">:</span>
+  <span class="n">any_type</span> <span class="n">value_</span><span class="p">;</span>
+  <span class="n">std</span><span class="o">::</span><span class="n">unique_ptr</span><span class="o">&lt;</span><span class="k">const</span> <span class="n">PerfectHash</span><span class="o">&gt;</span> <span class="n">ph_</span><span class="p">;</span>
+  <span class="n">std</span><span class="o">::</span><span class="n">vector</span><span class="o">&lt;</span><span class="n">std</span><span class="o">::</span><span class="n">unique_ptr</span><span class="o">&lt;</span><span class="k">const</span> <span class="n">FastOpt</span><span class="o">&gt;&gt;</span> <span class="n">array_</span><span class="p">;</span>
+  <span class="n">NodeType</span> <span class="n">type_</span><span class="p">{</span><span class="n">NodeType</span><span class="o">::</span><span class="n">Null</span><span class="p">};</span>
+
+  <span class="k">static</span> <span class="k">const</span> <span class="n">std</span><span class="o">::</span><span class="n">unique_ptr</span><span class="o">&lt;</span><span class="k">const</span> <span class="n">FastOpt</span><span class="o">&gt;</span> <span class="n">uniqueNullPtr</span><span class="p">;</span> <span class="c1">// return this unique_ptr if key not found, equivalent to nullptr</span>
+
+  <span class="kt">uint64_t</span> <span class="n">fingerprint_</span><span class="p">{</span><span class="mi">0</span><span class="p">};</span> <span class="c1">// When node is used as a value in a map, used to check if the perfect hash</span>
+                            <span class="c1">// returned the right value (they can produce false positives)</span>
+  <span class="kt">size_t</span> <span class="n">elements_</span><span class="p">{</span><span class="mi">0</span><span class="p">};</span>      <span class="c1">// Number of elements if isMap or isSequence is true, 0 otherwise.</span>
+
+  <span class="c1">// Used to find elements if isSequence() is true.</span>
+  <span class="c1">// Retrieve the entry using array indexing.</span>
+  <span class="kr">inline</span> <span class="k">const</span> <span class="n">std</span><span class="o">::</span><span class="n">unique_ptr</span><span class="o">&lt;</span><span class="k">const</span> <span class="n">FastOpt</span><span class="o">&gt;&amp;</span> <span class="n">arrayLookup</span><span class="p">(</span><span class="kt">size_t</span> <span class="n">keyId</span><span class="p">)</span> <span class="k">const</span> <span class="p">{</span>
+    <span class="k">if</span><span class="p">(</span><span class="n">keyId</span> <span class="o">&lt;</span> <span class="n">array_</span><span class="p">.</span><span class="n">size</span><span class="p">())</span>
+      <span class="k">return</span> <span class="n">array_</span><span class="p">[</span><span class="n">keyId</span><span class="p">];</span>
+    <span class="k">else</span>
+      <span class="k">return</span> <span class="n">uniqueNullPtr</span><span class="p">;</span>
+  <span class="p">}</span>
+
+  <span class="c1">// Used to find elements if isMap() is true.</span>
+  <span class="c1">// Retrieve the entry from the hash table.</span>
+  <span class="kr">inline</span> <span class="k">const</span> <span class="n">std</span><span class="o">::</span><span class="n">unique_ptr</span><span class="o">&lt;</span><span class="k">const</span> <span class="n">FastOpt</span><span class="o">&gt;&amp;</span> <span class="n">phLookup</span><span class="p">(</span><span class="kt">uint64_t</span> <span class="n">keyId</span><span class="p">)</span> <span class="k">const</span> <span class="p">{</span>
+    <span class="k">if</span><span class="p">(</span><span class="n">ph_</span><span class="p">)</span>
+      <span class="k">return</span> <span class="n">array_</span><span class="p">[(</span><span class="o">*</span><span class="n">ph_</span><span class="p">)[</span><span class="n">keyId</span><span class="p">]];</span>
+    <span class="k">else</span>
+      <span class="k">return</span> <span class="n">uniqueNullPtr</span><span class="p">;</span>
+  <span class="p">}</span>
+
+  <span class="c1">// Builders for different types of nodes.</span>
+  <span class="c1">// Build Null node.</span>
+  <span class="kt">void</span> <span class="n">makeNull</span><span class="p">()</span> <span class="p">{</span>
+    <span class="n">elements_</span> <span class="o">=</span> <span class="mi">0</span><span class="p">;</span>
+    <span class="n">type_</span> <span class="o">=</span> <span class="n">NodeType</span><span class="o">::</span><span class="n">Null</span><span class="p">;</span>
+
+    <span class="n">ABORT_IF</span><span class="p">(</span><span class="n">ph_</span><span class="p">,</span> <span class="s">&quot;ph_ should be undefined&quot;</span><span class="p">);</span>
+    <span class="n">ABORT_IF</span><span class="p">(</span><span class="o">!</span><span class="n">array_</span><span class="p">.</span><span class="n">empty</span><span class="p">(),</span> <span class="s">&quot;array_ should be empty&quot;</span><span class="p">);</span>
+  <span class="p">}</span>
+
+  <span class="c1">// Build Scalar node via controlled failure to convert from a YAML::Node object.</span>
+  <span class="kt">void</span> <span class="n">makeScalar</span><span class="p">(</span><span class="k">const</span> <span class="n">YAML</span><span class="o">::</span><span class="n">Node</span><span class="o">&amp;</span> <span class="n">v</span><span class="p">)</span> <span class="p">{</span>
+    <span class="n">elements_</span> <span class="o">=</span> <span class="mi">0</span><span class="p">;</span>
+
+    <span class="c1">// Placeholders for decode</span>
+    <span class="kt">bool</span> <span class="n">asBool</span><span class="p">;</span>
+    <span class="kt">int64_t</span> <span class="n">asInt</span><span class="p">;</span>
+    <span class="kt">double</span> <span class="n">asDouble</span><span class="p">;</span>
+
+    <span class="c1">// Text boolean values should be treated as a string</span>
+    <span class="k">auto</span> <span class="n">asString</span>  <span class="o">=</span> <span class="n">v</span><span class="p">.</span><span class="n">as</span><span class="o">&lt;</span><span class="n">std</span><span class="o">::</span><span class="n">string</span><span class="o">&gt;</span><span class="p">();</span>
+    <span class="kt">bool</span> <span class="n">isTextBool</span> <span class="o">=</span> <span class="n">asString</span><span class="p">.</span><span class="n">size</span><span class="p">()</span> <span class="o">==</span> <span class="mi">1</span> <span class="o">&amp;&amp;</span> <span class="n">asString</span><span class="p">.</span><span class="n">find_first_of</span><span class="p">(</span><span class="s">&quot;nyNYtfTF&quot;</span><span class="p">)</span> <span class="o">==</span> <span class="mi">0</span><span class="p">;</span>
+
+    <span class="k">if</span><span class="p">(</span><span class="n">YAML</span><span class="o">::</span><span class="n">convert</span><span class="o">&lt;</span><span class="kt">bool</span><span class="o">&gt;::</span><span class="n">decode</span><span class="p">(</span><span class="n">v</span><span class="p">,</span> <span class="n">asBool</span><span class="p">)</span> <span class="o">&amp;&amp;</span> <span class="o">!</span><span class="n">isTextBool</span><span class="p">)</span> <span class="p">{</span>
+      <span class="n">value_</span> <span class="o">=</span> <span class="n">asBool</span><span class="p">;</span>
+      <span class="n">type_</span> <span class="o">=</span> <span class="n">NodeType</span><span class="o">::</span><span class="n">Bool</span><span class="p">;</span>
+    <span class="p">}</span>
+    <span class="k">else</span> <span class="k">if</span><span class="p">(</span><span class="n">YAML</span><span class="o">::</span><span class="n">convert</span><span class="o">&lt;</span><span class="kt">int64_t</span><span class="o">&gt;::</span><span class="n">decode</span><span class="p">(</span><span class="n">v</span><span class="p">,</span> <span class="n">asInt</span><span class="p">))</span> <span class="p">{</span>
+      <span class="n">value_</span> <span class="o">=</span> <span class="n">asInt</span><span class="p">;</span>
+      <span class="n">type_</span> <span class="o">=</span> <span class="n">NodeType</span><span class="o">::</span><span class="n">Int64</span><span class="p">;</span>
+    <span class="p">}</span>
+    <span class="k">else</span> <span class="k">if</span><span class="p">(</span><span class="n">YAML</span><span class="o">::</span><span class="n">convert</span><span class="o">&lt;</span><span class="kt">double</span><span class="o">&gt;::</span><span class="n">decode</span><span class="p">(</span><span class="n">v</span><span class="p">,</span> <span class="n">asDouble</span><span class="p">))</span> <span class="p">{</span>
+      <span class="n">value_</span> <span class="o">=</span> <span class="n">asDouble</span><span class="p">;</span>
+      <span class="n">type_</span> <span class="o">=</span> <span class="n">NodeType</span><span class="o">::</span><span class="n">Float64</span><span class="p">;</span>
+    <span class="p">}</span>
+    <span class="k">else</span> <span class="p">{</span>
+      <span class="n">value_</span> <span class="o">=</span> <span class="n">asString</span><span class="p">;</span>
+      <span class="n">type_</span> <span class="o">=</span> <span class="n">NodeType</span><span class="o">::</span><span class="n">String</span><span class="p">;</span>
+    <span class="p">}</span>
+
+    <span class="n">ABORT_IF</span><span class="p">(</span><span class="n">ph_</span><span class="p">,</span> <span class="s">&quot;ph_ should be undefined&quot;</span><span class="p">);</span>
+    <span class="n">ABORT_IF</span><span class="p">(</span><span class="o">!</span><span class="n">array_</span><span class="p">.</span><span class="n">empty</span><span class="p">(),</span> <span class="s">&quot;array_ should be empty&quot;</span><span class="p">);</span>
+  <span class="p">}</span>
+
+  <span class="c1">// Build a Sequence node, can by converted to std::vector&lt;T&gt; if elements can be converted to T.</span>
+  <span class="kt">void</span> <span class="n">makeSequence</span><span class="p">(</span><span class="k">const</span> <span class="n">std</span><span class="o">::</span><span class="n">vector</span><span class="o">&lt;</span><span class="n">YAML</span><span class="o">::</span><span class="n">Node</span><span class="o">&gt;&amp;</span> <span class="n">v</span><span class="p">)</span> <span class="p">{</span>
+    <span class="n">elements_</span> <span class="o">=</span> <span class="n">v</span><span class="p">.</span><span class="n">size</span><span class="p">();</span>
+    <span class="n">ABORT_IF</span><span class="p">(</span><span class="o">!</span><span class="n">array_</span><span class="p">.</span><span class="n">empty</span><span class="p">(),</span> <span class="s">&quot;array_ is not empty??&quot;</span><span class="p">);</span>
+    <span class="k">for</span><span class="p">(</span><span class="kt">size_t</span> <span class="n">pos</span> <span class="o">=</span> <span class="mi">0</span><span class="p">;</span> <span class="n">pos</span> <span class="o">&lt;</span> <span class="n">v</span><span class="p">.</span><span class="n">size</span><span class="p">();</span> <span class="o">++</span><span class="n">pos</span><span class="p">)</span> <span class="p">{</span>
+      <span class="n">array_</span><span class="p">.</span><span class="n">emplace_back</span><span class="p">(</span><span class="k">new</span> <span class="n">FastOpt</span><span class="p">(</span><span class="n">v</span><span class="p">[</span><span class="n">pos</span><span class="p">],</span> <span class="n">pos</span><span class="p">));</span>
+    <span class="p">}</span>
+    <span class="n">type_</span> <span class="o">=</span> <span class="n">NodeType</span><span class="o">::</span><span class="n">Sequence</span><span class="p">;</span>
+
+    <span class="n">ABORT_IF</span><span class="p">(</span><span class="n">ph_</span><span class="p">,</span> <span class="s">&quot;ph_ should be undefined&quot;</span><span class="p">);</span>
+  <span class="p">}</span>
+
+  <span class="c1">// Build a Map node.</span>
+  <span class="kt">void</span> <span class="n">makeMap</span><span class="p">(</span><span class="k">const</span> <span class="n">std</span><span class="o">::</span><span class="n">map</span><span class="o">&lt;</span><span class="kt">uint64_t</span><span class="p">,</span> <span class="n">YAML</span><span class="o">::</span><span class="n">Node</span><span class="o">&gt;&amp;</span> <span class="n">m</span><span class="p">)</span> <span class="p">{</span>
+    <span class="n">std</span><span class="o">::</span><span class="n">vector</span><span class="o">&lt;</span><span class="kt">uint64_t</span><span class="o">&gt;</span> <span class="n">keys</span><span class="p">;</span>
+    <span class="k">for</span><span class="p">(</span><span class="k">const</span> <span class="k">auto</span><span class="o">&amp;</span> <span class="nl">it</span> <span class="p">:</span> <span class="n">m</span><span class="p">)</span>
+      <span class="n">keys</span><span class="p">.</span><span class="n">push_back</span><span class="p">(</span><span class="n">it</span><span class="p">.</span><span class="n">first</span><span class="p">);</span>
+
+    <span class="n">ABORT_IF</span><span class="p">(</span><span class="n">ph_</span><span class="p">,</span> <span class="s">&quot;ph_ is already defined??&quot;</span><span class="p">);</span>
+    <span class="n">ph_</span><span class="p">.</span><span class="n">reset</span><span class="p">(</span><span class="k">new</span> <span class="n">PerfectHash</span><span class="p">(</span><span class="n">keys</span><span class="p">));</span>
+
+    <span class="n">ABORT_IF</span><span class="p">(</span><span class="o">!</span><span class="n">array_</span><span class="p">.</span><span class="n">empty</span><span class="p">(),</span> <span class="s">&quot;array_ is not empty??&quot;</span><span class="p">);</span>
+
+    <span class="c1">// for lack of resize_emplace</span>
+    <span class="k">for</span><span class="p">(</span><span class="kt">int</span> <span class="n">i</span> <span class="o">=</span> <span class="mi">0</span><span class="p">;</span> <span class="n">i</span> <span class="o">&lt;</span> <span class="n">ph_</span><span class="o">-&gt;</span><span class="n">size</span><span class="p">();</span> <span class="o">++</span><span class="n">i</span><span class="p">)</span>
+      <span class="n">array_</span><span class="p">.</span><span class="n">emplace_back</span><span class="p">(</span><span class="k">nullptr</span><span class="p">);</span>
+    <span class="n">elements_</span> <span class="o">=</span> <span class="n">keys</span><span class="p">.</span><span class="n">size</span><span class="p">();</span>
+
+    <span class="k">for</span><span class="p">(</span><span class="k">const</span> <span class="k">auto</span><span class="o">&amp;</span> <span class="nl">it</span> <span class="p">:</span> <span class="n">m</span><span class="p">)</span> <span class="p">{</span>
+      <span class="kt">uint64_t</span> <span class="n">key</span> <span class="o">=</span> <span class="n">it</span><span class="p">.</span><span class="n">first</span><span class="p">;</span>
+      <span class="kt">size_t</span> <span class="n">pos</span> <span class="o">=</span> <span class="p">(</span><span class="o">*</span><span class="n">ph_</span><span class="p">)[</span><span class="n">key</span><span class="p">];</span>
+      <span class="n">array_</span><span class="p">[</span><span class="n">pos</span><span class="p">].</span><span class="n">reset</span><span class="p">(</span><span class="k">new</span> <span class="n">FastOpt</span><span class="p">(</span><span class="n">it</span><span class="p">.</span><span class="n">second</span><span class="p">,</span> <span class="n">key</span><span class="p">));</span>
+    <span class="p">}</span>
+
+    <span class="n">type_</span> <span class="o">=</span> <span class="n">NodeType</span><span class="o">::</span><span class="n">Map</span><span class="p">;</span>
+  <span class="p">}</span>
+
+  <span class="c1">// Build a Map node, uses std::string as key, which gets hashed to uint64_t and used in the function above.</span>
+  <span class="kt">void</span> <span class="n">makeMap</span><span class="p">(</span><span class="k">const</span> <span class="n">std</span><span class="o">::</span><span class="n">map</span><span class="o">&lt;</span><span class="n">std</span><span class="o">::</span><span class="n">string</span><span class="p">,</span> <span class="n">YAML</span><span class="o">::</span><span class="n">Node</span><span class="o">&gt;&amp;</span> <span class="n">m</span><span class="p">)</span> <span class="p">{</span>
+    <span class="n">std</span><span class="o">::</span><span class="n">map</span><span class="o">&lt;</span><span class="kt">uint64_t</span><span class="p">,</span> <span class="n">YAML</span><span class="o">::</span><span class="n">Node</span><span class="o">&gt;</span> <span class="n">mi</span><span class="p">;</span>
+    <span class="k">for</span><span class="p">(</span><span class="k">const</span> <span class="k">auto</span><span class="o">&amp;</span> <span class="nl">it</span> <span class="p">:</span> <span class="n">m</span><span class="p">)</span> <span class="p">{</span>
+      <span class="k">auto</span> <span class="n">key</span> <span class="o">=</span> <span class="n">it</span><span class="p">.</span><span class="n">first</span><span class="p">.</span><span class="n">c_str</span><span class="p">();</span>
+      <span class="n">mi</span><span class="p">[</span><span class="n">crc</span><span class="o">::</span><span class="n">crc</span><span class="p">(</span><span class="n">key</span><span class="p">)]</span> <span class="o">=</span> <span class="n">it</span><span class="p">.</span><span class="n">second</span><span class="p">;</span>
+    <span class="p">}</span>
+
+    <span class="n">makeMap</span><span class="p">(</span><span class="n">mi</span><span class="p">);</span>
+  <span class="p">}</span>
+
+  <span class="c1">// Only build from YAML::Node</span>
+  <span class="n">FastOpt</span><span class="p">(</span><span class="k">const</span> <span class="n">FastOpt</span><span class="o">&amp;</span><span class="p">)</span> <span class="o">=</span> <span class="k">delete</span><span class="p">;</span>
+  <span class="n">FastOpt</span><span class="p">()</span> <span class="o">=</span> <span class="k">delete</span><span class="p">;</span>
+
+  <span class="kt">void</span> <span class="nf">construct</span><span class="p">(</span><span class="k">const</span> <span class="n">YAML</span><span class="o">::</span><span class="n">Node</span><span class="o">&amp;</span> <span class="n">node</span><span class="p">)</span> <span class="p">{</span>
+    <span class="k">switch</span><span class="p">(</span><span class="n">node</span><span class="p">.</span><span class="n">Type</span><span class="p">())</span> <span class="p">{</span>
+      <span class="k">case</span> <span class="n">YAML</span><span class="o">::</span><span class="n">NodeType</span><span class="o">::</span><span class="nl">Scalar</span><span class="p">:</span>
+        <span class="n">makeScalar</span><span class="p">(</span><span class="n">node</span><span class="p">);</span>
+        <span class="k">break</span><span class="p">;</span>
+      <span class="k">case</span> <span class="n">YAML</span><span class="o">::</span><span class="n">NodeType</span><span class="o">::</span><span class="nl">Sequence</span><span class="p">:</span> <span class="p">{</span>
+        <span class="n">std</span><span class="o">::</span><span class="n">vector</span><span class="o">&lt;</span><span class="n">YAML</span><span class="o">::</span><span class="n">Node</span><span class="o">&gt;</span> <span class="n">nodesVec</span><span class="p">;</span>
+        <span class="k">for</span><span class="p">(</span><span class="k">auto</span><span class="o">&amp;&amp;</span> <span class="nl">n</span> <span class="p">:</span> <span class="n">node</span><span class="p">)</span>
+          <span class="n">nodesVec</span><span class="p">.</span><span class="n">push_back</span><span class="p">(</span><span class="n">n</span><span class="p">);</span>
+        <span class="n">makeSequence</span><span class="p">(</span><span class="n">nodesVec</span><span class="p">);</span>
+      <span class="p">}</span> <span class="k">break</span><span class="p">;</span>
+      <span class="k">case</span> <span class="n">YAML</span><span class="o">::</span><span class="n">NodeType</span><span class="o">::</span><span class="nl">Map</span><span class="p">:</span> <span class="p">{</span>
+        <span class="n">std</span><span class="o">::</span><span class="n">map</span><span class="o">&lt;</span><span class="n">std</span><span class="o">::</span><span class="n">string</span><span class="p">,</span> <span class="n">YAML</span><span class="o">::</span><span class="n">Node</span><span class="o">&gt;</span> <span class="n">nodesMap</span><span class="p">;</span>
+        <span class="k">for</span><span class="p">(</span><span class="k">auto</span><span class="o">&amp;</span> <span class="nl">n</span> <span class="p">:</span> <span class="n">node</span><span class="p">)</span> <span class="p">{</span>
+          <span class="k">auto</span> <span class="n">key</span> <span class="o">=</span> <span class="n">n</span><span class="p">.</span><span class="n">first</span><span class="p">.</span><span class="n">as</span><span class="o">&lt;</span><span class="n">std</span><span class="o">::</span><span class="n">string</span><span class="o">&gt;</span><span class="p">();</span>
+          <span class="n">nodesMap</span><span class="p">[</span><span class="n">key</span><span class="p">]</span> <span class="o">=</span> <span class="n">n</span><span class="p">.</span><span class="n">second</span><span class="p">;</span>
+        <span class="p">}</span>
+        <span class="n">makeMap</span><span class="p">(</span><span class="n">nodesMap</span><span class="p">);</span>
+      <span class="p">}</span> <span class="k">break</span><span class="p">;</span>
+      <span class="k">case</span> <span class="n">YAML</span><span class="o">::</span><span class="n">NodeType</span><span class="o">::</span><span class="nl">Undefined</span><span class="p">:</span>
+      <span class="k">case</span> <span class="n">YAML</span><span class="o">::</span><span class="n">NodeType</span><span class="o">::</span><span class="nl">Null</span><span class="p">:</span>
+        <span class="n">makeNull</span><span class="p">();</span>
+    <span class="p">}</span>
+  <span class="p">}</span>
+
+<span class="k">public</span><span class="o">:</span>
+  <span class="c1">// Constructor to recursively create a FastOpt object from a YAML::Node following the yaml structure.</span>
+  <span class="n">FastOpt</span><span class="p">(</span><span class="k">const</span> <span class="n">YAML</span><span class="o">::</span><span class="n">Node</span><span class="o">&amp;</span> <span class="n">node</span><span class="p">)</span>
+  <span class="p">{</span> <span class="n">construct</span><span class="p">(</span><span class="n">node</span><span class="p">);</span> <span class="p">}</span>
+
+  <span class="n">FastOpt</span><span class="p">(</span><span class="k">const</span> <span class="n">YAML</span><span class="o">::</span><span class="n">Node</span><span class="o">&amp;</span> <span class="n">node</span><span class="p">,</span> <span class="kt">uint64_t</span> <span class="n">fingerprint</span><span class="p">)</span>
+     <span class="o">:</span> <span class="n">fingerprint_</span><span class="p">{</span><span class="n">fingerprint</span><span class="p">}</span>
+  <span class="p">{</span> <span class="n">construct</span><span class="p">(</span><span class="n">node</span><span class="p">);</span> <span class="p">}</span>
+
+  <span class="c1">// Predicates for node types</span>
+  <span class="kt">bool</span> <span class="n">isSequence</span><span class="p">()</span> <span class="k">const</span> <span class="p">{</span>
+    <span class="k">return</span> <span class="n">type_</span> <span class="o">==</span> <span class="n">NodeType</span><span class="o">::</span><span class="n">Sequence</span><span class="p">;</span>
+  <span class="p">}</span>
+
+  <span class="kt">bool</span> <span class="n">isMap</span><span class="p">()</span> <span class="k">const</span> <span class="p">{</span>
+    <span class="k">return</span> <span class="n">type_</span> <span class="o">==</span> <span class="n">NodeType</span><span class="o">::</span><span class="n">Map</span><span class="p">;</span>
+  <span class="p">}</span>
+
+  <span class="kt">bool</span> <span class="n">isScalar</span><span class="p">()</span> <span class="k">const</span> <span class="p">{</span>
+    <span class="k">return</span> <span class="n">type_</span> <span class="o">==</span> <span class="n">NodeType</span><span class="o">::</span><span class="n">Bool</span>
+      <span class="o">||</span> <span class="n">type_</span> <span class="o">==</span> <span class="n">NodeType</span><span class="o">::</span><span class="n">Float64</span>
+      <span class="o">||</span> <span class="n">type_</span> <span class="o">==</span> <span class="n">NodeType</span><span class="o">::</span><span class="n">Int64</span>
+      <span class="o">||</span> <span class="n">type_</span> <span class="o">==</span> <span class="n">NodeType</span><span class="o">::</span><span class="n">String</span><span class="p">;</span>
+  <span class="p">}</span>
+
+  <span class="kt">bool</span> <span class="n">isNull</span><span class="p">()</span> <span class="k">const</span> <span class="p">{</span>
+    <span class="k">return</span> <span class="n">type_</span> <span class="o">==</span> <span class="n">NodeType</span><span class="o">::</span><span class="n">Null</span><span class="p">;</span>
+  <span class="p">}</span>
+
+  <span class="kt">bool</span> <span class="n">isInt</span><span class="p">()</span> <span class="k">const</span> <span class="p">{</span>
+    <span class="k">return</span> <span class="n">type_</span> <span class="o">==</span> <span class="n">NodeType</span><span class="o">::</span><span class="n">Int64</span><span class="p">;</span>
+  <span class="p">}</span>
+
+  <span class="kt">bool</span> <span class="n">isBool</span><span class="p">()</span> <span class="k">const</span> <span class="p">{</span>
+    <span class="k">return</span> <span class="n">type_</span> <span class="o">==</span> <span class="n">NodeType</span><span class="o">::</span><span class="n">Bool</span><span class="p">;</span>
+  <span class="p">}</span>
+
+  <span class="kt">bool</span> <span class="n">isFloat</span><span class="p">()</span> <span class="k">const</span> <span class="p">{</span>
+    <span class="k">return</span> <span class="n">type_</span> <span class="o">==</span> <span class="n">NodeType</span><span class="o">::</span><span class="n">Float64</span><span class="p">;</span>
+  <span class="p">}</span>
+
+  <span class="kt">bool</span> <span class="n">isString</span><span class="p">()</span> <span class="k">const</span> <span class="p">{</span>
+    <span class="k">return</span> <span class="n">type_</span> <span class="o">==</span> <span class="n">NodeType</span><span class="o">::</span><span class="n">String</span><span class="p">;</span>
+  <span class="p">}</span>
+
+  <span class="c1">// actual number of elements in a sequence or map, 0 (not 1) for scalar nodes.</span>
+  <span class="c1">// 0 here means rather &quot;not applicable&quot;.</span>
+  <span class="kt">size_t</span> <span class="n">size</span><span class="p">()</span> <span class="k">const</span> <span class="p">{</span>
+    <span class="k">return</span> <span class="n">elements_</span><span class="p">;</span>
+  <span class="p">}</span>
+
+  <span class="c1">// replace current node with an externally built FastOpt object</span>
+  <span class="kt">void</span> <span class="n">swap</span><span class="p">(</span><span class="n">FastOpt</span><span class="o">&amp;</span> <span class="n">other</span><span class="p">)</span> <span class="p">{</span>
+    <span class="n">std</span><span class="o">::</span><span class="n">swap</span><span class="p">(</span><span class="n">value_</span><span class="p">,</span> <span class="n">other</span><span class="p">.</span><span class="n">value_</span><span class="p">);</span>
+    <span class="n">std</span><span class="o">::</span><span class="n">swap</span><span class="p">(</span><span class="n">ph_</span><span class="p">,</span> <span class="n">other</span><span class="p">.</span><span class="n">ph_</span><span class="p">);</span>
+    <span class="n">std</span><span class="o">::</span><span class="n">swap</span><span class="p">(</span><span class="n">array_</span><span class="p">,</span> <span class="n">other</span><span class="p">.</span><span class="n">array_</span><span class="p">);</span>
+    <span class="n">std</span><span class="o">::</span><span class="n">swap</span><span class="p">(</span><span class="n">type_</span><span class="p">,</span> <span class="n">other</span><span class="p">.</span><span class="n">type_</span><span class="p">);</span>
+    <span class="n">std</span><span class="o">::</span><span class="n">swap</span><span class="p">(</span><span class="n">elements_</span><span class="p">,</span> <span class="n">other</span><span class="p">.</span><span class="n">elements_</span><span class="p">);</span>
+    <span class="c1">// leave fingerprint alone as it needed by parent node.</span>
+  <span class="p">}</span>
+
+  <span class="c1">// Is the hashed key in a map?</span>
+  <span class="kt">bool</span> <span class="n">has</span><span class="p">(</span><span class="kt">uint64_t</span> <span class="n">keyId</span><span class="p">)</span> <span class="k">const</span> <span class="p">{</span>
+    <span class="k">if</span><span class="p">(</span><span class="n">isMap</span><span class="p">()</span> <span class="o">&amp;&amp;</span> <span class="n">elements_</span> <span class="o">&gt;</span> <span class="mi">0</span><span class="p">)</span> <span class="p">{</span>
+      <span class="k">const</span> <span class="k">auto</span><span class="o">&amp;</span> <span class="n">ptr</span> <span class="o">=</span> <span class="n">phLookup</span><span class="p">(</span><span class="n">keyId</span><span class="p">);</span>
+      <span class="k">return</span> <span class="n">ptr</span> <span class="o">?</span> <span class="n">ptr</span><span class="o">-&gt;</span><span class="n">fingerprint_</span> <span class="o">==</span> <span class="nl">keyId</span> <span class="p">:</span> <span class="nb">false</span><span class="p">;</span>
+    <span class="p">}</span> <span class="k">else</span> <span class="p">{</span>
+      <span class="k">return</span> <span class="nb">false</span><span class="p">;</span>
+    <span class="p">}</span>
+  <span class="p">}</span>
+
+  <span class="kt">bool</span> <span class="n">has</span><span class="p">(</span><span class="k">const</span> <span class="kt">char</span><span class="o">*</span> <span class="k">const</span> <span class="n">key</span><span class="p">)</span> <span class="k">const</span> <span class="p">{</span>
+    <span class="k">return</span> <span class="nf">has</span><span class="p">(</span><span class="n">crc</span><span class="o">::</span><span class="n">crc</span><span class="p">(</span><span class="n">key</span><span class="p">));</span>
+  <span class="p">}</span>
+
+  <span class="kt">bool</span> <span class="n">has</span><span class="p">(</span><span class="k">const</span> <span class="n">std</span><span class="o">::</span><span class="n">string</span><span class="o">&amp;</span> <span class="n">key</span><span class="p">)</span> <span class="k">const</span> <span class="p">{</span>
+    <span class="k">return</span> <span class="nf">has</span><span class="p">(</span><span class="n">key</span><span class="p">.</span><span class="n">c_str</span><span class="p">());</span>
+  <span class="p">}</span>
+
+  <span class="c1">// convert to requested type</span>
+  <span class="k">template</span> <span class="o">&lt;</span><span class="k">typename</span> <span class="nc">T</span><span class="o">&gt;</span>
+  <span class="kr">inline</span> <span class="n">T</span> <span class="n">as</span><span class="p">()</span> <span class="k">const</span> <span class="p">{</span>
+    <span class="k">return</span> <span class="n">fastopt_helpers</span><span class="o">::</span><span class="n">As</span><span class="o">&lt;</span><span class="n">T</span><span class="o">&gt;::</span><span class="n">apply</span><span class="p">(</span><span class="o">*</span><span class="k">this</span><span class="p">);</span>
+  <span class="p">}</span>
+
+  <span class="c1">// access sequence or map element</span>
+  <span class="k">const</span> <span class="n">FastOpt</span><span class="o">&amp;</span> <span class="k">operator</span><span class="p">[](</span><span class="kt">uint64_t</span> <span class="n">keyId</span><span class="p">)</span> <span class="k">const</span> <span class="p">{</span>
+    <span class="k">if</span><span class="p">(</span><span class="n">isSequence</span><span class="p">())</span> <span class="p">{</span>
+      <span class="k">const</span> <span class="k">auto</span><span class="o">&amp;</span> <span class="n">ptr</span> <span class="o">=</span> <span class="n">arrayLookup</span><span class="p">((</span><span class="kt">size_t</span><span class="p">)</span><span class="n">keyId</span><span class="p">);</span>
+      <span class="n">ABORT_IF</span><span class="p">(</span><span class="o">!</span><span class="n">ptr</span><span class="p">,</span> <span class="s">&quot;Unseen key {}&quot;</span> <span class="p">,</span> <span class="n">keyId</span><span class="p">);</span>
+      <span class="k">return</span> <span class="o">*</span><span class="n">ptr</span><span class="p">;</span>
+    <span class="p">}</span> <span class="k">else</span> <span class="k">if</span><span class="p">(</span><span class="n">isMap</span><span class="p">())</span> <span class="p">{</span>
+      <span class="k">const</span> <span class="k">auto</span><span class="o">&amp;</span> <span class="n">ptr</span> <span class="o">=</span> <span class="n">phLookup</span><span class="p">(</span><span class="n">keyId</span><span class="p">);</span>
+      <span class="n">ABORT_IF</span><span class="p">(</span><span class="o">!</span><span class="n">ptr</span> <span class="o">||</span> <span class="n">ptr</span><span class="o">-&gt;</span><span class="n">fingerprint_</span> <span class="o">!=</span> <span class="n">keyId</span><span class="p">,</span> <span class="s">&quot;Unseen key {}&quot;</span><span class="p">,</span> <span class="n">keyId</span><span class="p">);</span>
+      <span class="k">return</span> <span class="o">*</span><span class="n">ptr</span><span class="p">;</span>
+    <span class="p">}</span> <span class="k">else</span> <span class="p">{</span>
+      <span class="n">ABORT</span><span class="p">(</span><span class="s">&quot;Not a sequence or map node&quot;</span><span class="p">);</span>
+    <span class="p">}</span>
+  <span class="p">}</span>
+
+  <span class="c1">// operator [] overloading for non-uint64_t keys</span>
+  <span class="k">const</span> <span class="n">FastOpt</span><span class="o">&amp;</span> <span class="k">operator</span><span class="p">[](</span><span class="kt">int</span> <span class="n">key</span><span class="p">)</span> <span class="k">const</span> <span class="p">{</span>
+    <span class="k">return</span> <span class="k">operator</span><span class="p">[]((</span><span class="kt">uint64_t</span><span class="p">)</span><span class="n">key</span><span class="p">);</span>
+  <span class="p">}</span>
+
+  <span class="k">const</span> <span class="n">FastOpt</span><span class="o">&amp;</span> <span class="k">operator</span><span class="p">[](</span><span class="k">const</span> <span class="kt">char</span><span class="o">*</span> <span class="k">const</span> <span class="n">key</span><span class="p">)</span> <span class="k">const</span> <span class="p">{</span>
+    <span class="k">return</span> <span class="k">operator</span><span class="p">[](</span><span class="n">crc</span><span class="o">::</span><span class="n">crc</span><span class="p">(</span><span class="n">key</span><span class="p">));</span>
+  <span class="p">}</span>
+
+  <span class="k">const</span> <span class="n">FastOpt</span><span class="o">&amp;</span> <span class="k">operator</span><span class="p">[](</span><span class="k">const</span> <span class="n">std</span><span class="o">::</span><span class="n">string</span><span class="o">&amp;</span> <span class="n">key</span><span class="p">)</span> <span class="k">const</span> <span class="p">{</span>
+    <span class="k">return</span> <span class="k">operator</span><span class="p">[](</span><span class="n">key</span><span class="p">.</span><span class="n">c_str</span><span class="p">());</span>
+  <span class="p">}</span>
+<span class="p">};</span>
+
+<span class="p">}</span>
+</pre></div>
+</div>
+</div>
+
+
+           </div>
+           
+          </div>
+          <footer>
+
+  <hr/>
+
+  <div role="contentinfo">
+    <p>
+        &#169; Copyright 2021, Marian NMT Team.
+
+    </p>
+  </div>
+    
+    
+    
+    Built with <a href="https://www.sphinx-doc.org/">Sphinx</a> using a
+    
+    <a href="https://github.com/readthedocs/sphinx_rtd_theme">theme</a>
+    
+    provided by <a href="https://readthedocs.org">Read the Docs</a>. 
+
+</footer>
+        </div>
+      </div>
+
+    </section>
+
+  </div>
+  
+
+  <script type="text/javascript">
+      jQuery(function () {
+          SphinxRtdTheme.Navigation.enable(true);
+      });
+  </script>
+
+  
+  
+    
+   
+
+</body>
+</html>

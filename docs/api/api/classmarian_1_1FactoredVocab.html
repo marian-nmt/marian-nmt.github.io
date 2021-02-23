@@ -1,0 +1,497 @@
+
+
+<!DOCTYPE html>
+<html class="writer-html5" lang="en" >
+<head>
+  <meta charset="utf-8" />
+  
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  
+  <title>Class FactoredVocab &mdash; Marian NMT v1.10.1 2021-02-23 documentation</title>
+  
+
+  
+  <link rel="stylesheet" href="../_static/css/theme.css" type="text/css" />
+  <link rel="stylesheet" href="../_static/pygments.css" type="text/css" />
+  <link rel="stylesheet" href="../_static/css/custom.css" type="text/css" />
+  <link rel="stylesheet" href="../_static/collapsible-lists/css/tree_view.css" type="text/css" />
+
+  
+  
+
+  
+  
+
+  
+    <link rel="canonical" href="http://marian-nmt.github.io/docs/api/api/classmarian_1_1FactoredVocab.html" />
+
+  
+  <!--[if lt IE 9]>
+    <script src="../_static/js/html5shiv.min.js"></script>
+  <![endif]-->
+  
+    
+      <script type="text/javascript" id="documentation_options" data-url_root="../" src="../_static/documentation_options.js"></script>
+        <script src="../_static/jquery.js"></script>
+        <script src="../_static/underscore.js"></script>
+        <script src="../_static/doctools.js"></script>
+        <script src="../_static/language_data.js"></script>
+        <script src="../_static/collapsible-lists/js/CollapsibleLists.compressed.js"></script>
+        <script src="../_static/collapsible-lists/js/apply-collapsible-lists.js"></script>
+    
+    <script type="text/javascript" src="../_static/js/theme.js"></script>
+
+    
+    <link rel="index" title="Index" href="../genindex.html" />
+    <link rel="search" title="Search" href="../search.html" />
+    <link rel="next" title="Class FactoredVocab::WordLUT" href="classmarian_1_1FactoredVocab_1_1WordLUT.html" />
+    <link rel="prev" title="Class ExpressionGraphPackable" href="classmarian_1_1ExpressionGraphPackable.html" /> 
+</head>
+
+<body class="wy-body-for-nav">
+
+   
+  <div class="wy-grid-for-nav">
+    
+    <nav data-toggle="wy-nav-shift" class="wy-nav-side">
+      <div class="wy-side-scroll">
+        <div class="wy-side-nav-search" >
+          
+
+          
+            <a href="../index.html" class="icon icon-home"> Marian NMT
+          
+
+          
+          </a>
+
+          
+            
+            
+              <div class="version">
+                v1.10.1
+              </div>
+            
+          
+
+          
+<div role="search">
+  <form id="rtd-search-form" class="wy-form" action="../search.html" method="get">
+    <input type="text" name="q" placeholder="Search docs" />
+    <input type="hidden" name="check_keywords" value="yes" />
+    <input type="hidden" name="area" value="default" />
+  </form>
+</div>
+
+          
+        </div>
+
+        
+        <div class="wy-menu wy-menu-vertical" data-spy="affix" role="navigation" aria-label="main navigation">
+          
+            
+            
+              
+            
+            
+              <p class="caption"><span class="caption-text">Contents:</span></p>
+<ul>
+<li class="toctree-l1"><a class="reference internal" href="../install.html">Installation</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../graph.html">Expression graphs</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../operators.html">Graph operations</a></li>
+<li class="toctree-l1"><a class="reference internal" href="library_index.html">Library API</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../contributing.html">How to contribute to Marian</a></li>
+</ul>
+
+            
+          
+        </div>
+        
+      </div>
+    </nav>
+
+    <section data-toggle="wy-nav-shift" class="wy-nav-content-wrap">
+
+      
+      <nav class="wy-nav-top" aria-label="top navigation">
+        
+          <i data-toggle="wy-nav-top" class="fa fa-bars"></i>
+          <a href="../index.html">Marian NMT</a>
+        
+      </nav>
+
+
+      <div class="wy-nav-content">
+        
+        <div class="rst-content">
+        
+          
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+<div role="navigation" aria-label="breadcrumbs navigation">
+
+  <ul class="wy-breadcrumbs">
+    
+      <li><a href="../index.html" class="icon icon-home"></a> &raquo;</li>
+        
+          <li><a href="library_index.html">Library API</a> &raquo;</li>
+        
+      <li>Class FactoredVocab</li>
+    
+    
+      <li class="wy-breadcrumbs-aside">
+        
+          
+            <a href="../_sources/api/classmarian_1_1FactoredVocab.rst.txt" rel="nofollow"> View page source</a>
+          
+        
+      </li>
+    
+  </ul>
+
+  
+  <hr/>
+</div>
+          <div role="main" class="document" itemscope="itemscope" itemtype="http://schema.org/Article">
+           <div itemprop="articleBody">
+            
+  <div class="section" id="class-factoredvocab">
+<span id="exhale-class-classmarian-1-1factoredvocab"></span><h1>Class FactoredVocab<a class="headerlink" href="#class-factoredvocab" title="Permalink to this headline">¶</a></h1>
+<ul class="simple">
+<li><p>Defined in <a class="reference internal" href="file_src_data_factored_vocab.h.html#file-src-data-factored-vocab-h"><span class="std std-ref">File factored_vocab.h</span></a></p></li>
+</ul>
+<div class="section" id="nested-relationships">
+<h2>Nested Relationships<a class="headerlink" href="#nested-relationships" title="Permalink to this headline">¶</a></h2>
+<div class="section" id="nested-types">
+<h3>Nested Types<a class="headerlink" href="#nested-types" title="Permalink to this headline">¶</a></h3>
+<ul class="simple">
+<li><p><a class="reference internal" href="structmarian_1_1FactoredVocab_1_1CSRData.html#exhale-struct-structmarian-1-1factoredvocab-1-1csrdata"><span class="std std-ref">Struct FactoredVocab::CSRData</span></a></p></li>
+<li><p><a class="reference internal" href="classmarian_1_1FactoredVocab_1_1WordLUT.html#exhale-class-classmarian-1-1factoredvocab-1-1wordlut"><span class="std std-ref">Class FactoredVocab::WordLUT</span></a></p></li>
+</ul>
+</div>
+</div>
+<div class="section" id="inheritance-relationships">
+<h2>Inheritance Relationships<a class="headerlink" href="#inheritance-relationships" title="Permalink to this headline">¶</a></h2>
+<div class="section" id="base-type">
+<h3>Base Type<a class="headerlink" href="#base-type" title="Permalink to this headline">¶</a></h3>
+<ul class="simple">
+<li><p><code class="docutils literal notranslate"><span class="pre">public</span> <span class="pre">marian::IVocab</span></code> (<a class="reference internal" href="classmarian_1_1IVocab.html#exhale-class-classmarian-1-1ivocab"><span class="std std-ref">Class IVocab</span></a>)</p></li>
+</ul>
+</div>
+</div>
+<div class="section" id="class-documentation">
+<h2>Class Documentation<a class="headerlink" href="#class-documentation" title="Permalink to this headline">¶</a></h2>
+<dl class="class">
+<dt id="_CPPv4N6marian13FactoredVocabE">
+<span id="_CPPv3N6marian13FactoredVocabE"></span><span id="_CPPv2N6marian13FactoredVocabE"></span><span id="marian::FactoredVocab"></span><span class="target" id="classmarian_1_1FactoredVocab"></span><em class="property">class </em><code class="sig-name descname">FactoredVocab</code> : <em class="property">public</em> marian::<a class="reference internal" href="classmarian_1_1IVocab.html#_CPPv4N6marian6IVocabE" title="marian::IVocab">IVocab</a><a class="headerlink" href="#_CPPv4N6marian13FactoredVocabE" title="Permalink to this definition">¶</a><br /></dt>
+<dd><div class="breathe-sectiondef docutils container">
+<p class="breathe-sectiondef-title rubric">Public Functions</p>
+<dl class="function">
+<dt id="_CPPv4N6marian13FactoredVocab4loadERKNSt6stringE6size_t">
+<span id="_CPPv3N6marian13FactoredVocab4loadERKNSt6stringE6size_t"></span><span id="_CPPv2N6marian13FactoredVocab4loadERKNSt6stringE6size_t"></span><span id="marian::FactoredVocab::load__ssCR.s"></span><span class="target" id="classmarian_1_1FactoredVocab_1a5588a5258673e27bd53a205efe38ea82"></span>size_t <code class="sig-name descname">load</code><span class="sig-paren">(</span><em class="property">const</em> <a class="reference internal" href="function_expression__operators_8cpp_1af4e69a5f7167b63522135a1f6b8a5dd8.html#_CPPv4N6marianStE4Expri" title="marian::std">std</a>::string &amp;<em>factoredVocabPath</em>, size_t <em>maxSizeUnused</em> = 0<span class="sig-paren">)</span><a class="headerlink" href="#_CPPv4N6marian13FactoredVocab4loadERKNSt6stringE6size_t" title="Permalink to this definition">¶</a><br /></dt>
+<dd></dd></dl>
+
+<dl class="function">
+<dt id="_CPPv4N6marian13FactoredVocab6createERKNSt6stringERKNSt6vectorINSt6stringEEE6size_t">
+<span id="_CPPv3N6marian13FactoredVocab6createERKNSt6stringERKNSt6vectorINSt6stringEEE6size_t"></span><span id="_CPPv2N6marian13FactoredVocab6createERKNSt6stringERKNSt6vectorINSt6stringEEE6size_t"></span><span id="marian::FactoredVocab::create__ssCR.std::vector:ss:CR.s"></span><span class="target" id="classmarian_1_1FactoredVocab_1a1ba70ed5dd0a0853da0b78ca09fd82d3"></span><em class="property">virtual</em> void <code class="sig-name descname">create</code><span class="sig-paren">(</span><em class="property">const</em> <a class="reference internal" href="function_expression__operators_8cpp_1af4e69a5f7167b63522135a1f6b8a5dd8.html#_CPPv4N6marianStE4Expri" title="marian::std">std</a>::string &amp;<em>vocabPath</em>, <em class="property">const</em> <a class="reference internal" href="function_expression__operators_8cpp_1af4e69a5f7167b63522135a1f6b8a5dd8.html#_CPPv4N6marianStE4Expri" title="marian::std">std</a>::vector&lt;<a class="reference internal" href="function_expression__operators_8cpp_1af4e69a5f7167b63522135a1f6b8a5dd8.html#_CPPv4N6marianStE4Expri" title="marian::std">std</a>::string&gt; &amp;<em>trainPaths</em>, size_t <em>maxSize</em><span class="sig-paren">)</span><a class="headerlink" href="#_CPPv4N6marian13FactoredVocab6createERKNSt6stringERKNSt6vectorINSt6stringEEE6size_t" title="Permalink to this definition">¶</a><br /></dt>
+<dd></dd></dl>
+
+<dl class="function">
+<dt id="_CPPv4NK6marian13FactoredVocab18canonicalExtensionEv">
+<span id="_CPPv3NK6marian13FactoredVocab18canonicalExtensionEv"></span><span id="_CPPv2NK6marian13FactoredVocab18canonicalExtensionEv"></span><span id="marian::FactoredVocab::canonicalExtensionC"></span><span class="target" id="classmarian_1_1FactoredVocab_1a7d22cce3f6dd8900d945502cb2769030"></span><em class="property">virtual</em> <em class="property">const</em> <a class="reference internal" href="function_expression__operators_8cpp_1af4e69a5f7167b63522135a1f6b8a5dd8.html#_CPPv4N6marianStE4Expri" title="marian::std">std</a>::string &amp;<code class="sig-name descname">canonicalExtension</code><span class="sig-paren">(</span><span class="sig-paren">)</span> <em class="property">const</em><a class="headerlink" href="#_CPPv4NK6marian13FactoredVocab18canonicalExtensionEv" title="Permalink to this definition">¶</a><br /></dt>
+<dd></dd></dl>
+
+<dl class="function">
+<dt id="_CPPv4NK6marian13FactoredVocab8suffixesEv">
+<span id="_CPPv3NK6marian13FactoredVocab8suffixesEv"></span><span id="_CPPv2NK6marian13FactoredVocab8suffixesEv"></span><span id="marian::FactoredVocab::suffixesC"></span><span class="target" id="classmarian_1_1FactoredVocab_1ac3f7f38d97d44eb123d14119ba7bd2e4"></span><em class="property">const</em> <a class="reference internal" href="function_expression__operators_8cpp_1af4e69a5f7167b63522135a1f6b8a5dd8.html#_CPPv4N6marianStE4Expri" title="marian::std">std</a>::vector&lt;<a class="reference internal" href="function_expression__operators_8cpp_1af4e69a5f7167b63522135a1f6b8a5dd8.html#_CPPv4N6marianStE4Expri" title="marian::std">std</a>::string&gt; &amp;<code class="sig-name descname">suffixes</code><span class="sig-paren">(</span><span class="sig-paren">)</span> <em class="property">const</em><a class="headerlink" href="#_CPPv4NK6marian13FactoredVocab8suffixesEv" title="Permalink to this definition">¶</a><br /></dt>
+<dd></dd></dl>
+
+<dl class="function">
+<dt id="_CPPv4NK6marian13FactoredVocabixERKNSt6stringE">
+<span id="_CPPv3NK6marian13FactoredVocabixERKNSt6stringE"></span><span id="_CPPv2NK6marian13FactoredVocabixERKNSt6stringE"></span><span id="marian::FactoredVocab::subscript-operator__ssCRC"></span><span class="target" id="classmarian_1_1FactoredVocab_1a4802e3646abbd69ed5a45fd63d3e4085"></span><a class="reference internal" href="classmarian_1_1Word.html#_CPPv4N6marian4WordE" title="marian::Word">Word</a> <code class="sig-name descname">operator[]</code><span class="sig-paren">(</span><em class="property">const</em> <a class="reference internal" href="function_expression__operators_8cpp_1af4e69a5f7167b63522135a1f6b8a5dd8.html#_CPPv4N6marianStE4Expri" title="marian::std">std</a>::string &amp;<em>word</em><span class="sig-paren">)</span> <em class="property">const</em><a class="headerlink" href="#_CPPv4NK6marian13FactoredVocabixERKNSt6stringE" title="Permalink to this definition">¶</a><br /></dt>
+<dd></dd></dl>
+
+<dl class="function">
+<dt id="_CPPv4NK6marian13FactoredVocab6encodeERKNSt6stringEbb">
+<span id="_CPPv3NK6marian13FactoredVocab6encodeERKNSt6stringEbb"></span><span id="_CPPv2NK6marian13FactoredVocab6encodeERKNSt6stringEbb"></span><span id="marian::FactoredVocab::encode__ssCR.b.bC"></span><span class="target" id="classmarian_1_1FactoredVocab_1a1e108689e06b9a45f37726f7fe4371bd"></span><a class="reference internal" href="typedef_data_2types_8h_1a81f026d9529d47fd44a64a27954775fd.html#_CPPv4N6marian5WordsE" title="marian::Words">Words</a> <code class="sig-name descname">encode</code><span class="sig-paren">(</span><em class="property">const</em> <a class="reference internal" href="function_expression__operators_8cpp_1af4e69a5f7167b63522135a1f6b8a5dd8.html#_CPPv4N6marianStE4Expri" title="marian::std">std</a>::string &amp;<em>line</em>, bool <em>addEOS</em> = true, bool <em>inference</em> = false<span class="sig-paren">)</span> <em class="property">const</em><a class="headerlink" href="#_CPPv4NK6marian13FactoredVocab6encodeERKNSt6stringEbb" title="Permalink to this definition">¶</a><br /></dt>
+<dd></dd></dl>
+
+<dl class="function">
+<dt id="_CPPv4NK6marian13FactoredVocab6decodeERK5Wordsb">
+<span id="_CPPv3NK6marian13FactoredVocab6decodeERK5Wordsb"></span><span id="_CPPv2NK6marian13FactoredVocab6decodeERK5Wordsb"></span><span id="marian::FactoredVocab::decode__WordsCR.bC"></span><span class="target" id="classmarian_1_1FactoredVocab_1a3a226b5fc4226fa904dd66da7520ba27"></span><a class="reference internal" href="function_expression__operators_8cpp_1af4e69a5f7167b63522135a1f6b8a5dd8.html#_CPPv4N6marianStE4Expri" title="marian::std">std</a>::string <code class="sig-name descname">decode</code><span class="sig-paren">(</span><em class="property">const</em> <a class="reference internal" href="typedef_data_2types_8h_1a81f026d9529d47fd44a64a27954775fd.html#_CPPv4N6marian5WordsE" title="marian::Words">Words</a> &amp;<em>sentence</em>, bool <em>ignoreEos</em> = true<span class="sig-paren">)</span> <em class="property">const</em><a class="headerlink" href="#_CPPv4NK6marian13FactoredVocab6decodeERK5Wordsb" title="Permalink to this definition">¶</a><br /></dt>
+<dd></dd></dl>
+
+<dl class="function">
+<dt id="_CPPv4NK6marian13FactoredVocab11surfaceFormERK5Words">
+<span id="_CPPv3NK6marian13FactoredVocab11surfaceFormERK5Words"></span><span id="_CPPv2NK6marian13FactoredVocab11surfaceFormERK5Words"></span><span id="marian::FactoredVocab::surfaceForm__WordsCRC"></span><span class="target" id="classmarian_1_1FactoredVocab_1ab5f72f1c21186cd2ba2215aabc49df76"></span><a class="reference internal" href="function_expression__operators_8cpp_1af4e69a5f7167b63522135a1f6b8a5dd8.html#_CPPv4N6marianStE4Expri" title="marian::std">std</a>::string <code class="sig-name descname">surfaceForm</code><span class="sig-paren">(</span><em class="property">const</em> <a class="reference internal" href="typedef_data_2types_8h_1a81f026d9529d47fd44a64a27954775fd.html#_CPPv4N6marian5WordsE" title="marian::Words">Words</a> &amp;<em>sentence</em><span class="sig-paren">)</span> <em class="property">const</em><a class="headerlink" href="#_CPPv4NK6marian13FactoredVocab11surfaceFormERK5Words" title="Permalink to this definition">¶</a><br /></dt>
+<dd></dd></dl>
+
+<dl class="function">
+<dt id="_CPPv4NK6marian13FactoredVocabixE4Word">
+<span id="_CPPv3NK6marian13FactoredVocabixE4Word"></span><span id="_CPPv2NK6marian13FactoredVocabixE4Word"></span><span id="marian::FactoredVocab::subscript-operator__WordC"></span><span class="target" id="classmarian_1_1FactoredVocab_1a170cd302a0513e36eba4102388abc0e7"></span><em class="property">const</em> <a class="reference internal" href="function_expression__operators_8cpp_1af4e69a5f7167b63522135a1f6b8a5dd8.html#_CPPv4N6marianStE4Expri" title="marian::std">std</a>::string &amp;<code class="sig-name descname">operator[]</code><span class="sig-paren">(</span><a class="reference internal" href="classmarian_1_1Word.html#_CPPv4N6marian4WordE" title="marian::Word">Word</a> <em>id</em><span class="sig-paren">)</span> <em class="property">const</em><a class="headerlink" href="#_CPPv4NK6marian13FactoredVocabixE4Word" title="Permalink to this definition">¶</a><br /></dt>
+<dd></dd></dl>
+
+<dl class="function">
+<dt id="_CPPv4NK6marian13FactoredVocab4sizeEv">
+<span id="_CPPv3NK6marian13FactoredVocab4sizeEv"></span><span id="_CPPv2NK6marian13FactoredVocab4sizeEv"></span><span id="marian::FactoredVocab::sizeC"></span><span class="target" id="classmarian_1_1FactoredVocab_1a019f892b1a286aa73c2662daf45fec8b"></span><em class="property">virtual</em> size_t <code class="sig-name descname">size</code><span class="sig-paren">(</span><span class="sig-paren">)</span> <em class="property">const</em><a class="headerlink" href="#_CPPv4NK6marian13FactoredVocab4sizeEv" title="Permalink to this definition">¶</a><br /></dt>
+<dd></dd></dl>
+
+<dl class="function">
+<dt id="_CPPv4NK6marian13FactoredVocab4typeEv">
+<span id="_CPPv3NK6marian13FactoredVocab4typeEv"></span><span id="_CPPv2NK6marian13FactoredVocab4typeEv"></span><span id="marian::FactoredVocab::typeC"></span><span class="target" id="classmarian_1_1FactoredVocab_1af832a1022286b0fdb9cbdb592e29feb4"></span><em class="property">virtual</em> <a class="reference internal" href="function_expression__operators_8cpp_1af4e69a5f7167b63522135a1f6b8a5dd8.html#_CPPv4N6marianStE4Expri" title="marian::std">std</a>::string <code class="sig-name descname">type</code><span class="sig-paren">(</span><span class="sig-paren">)</span> <em class="property">const</em><a class="headerlink" href="#_CPPv4NK6marian13FactoredVocab4typeEv" title="Permalink to this definition">¶</a><br /></dt>
+<dd></dd></dl>
+
+<dl class="function">
+<dt id="_CPPv4NK6marian13FactoredVocab8getEosIdEv">
+<span id="_CPPv3NK6marian13FactoredVocab8getEosIdEv"></span><span id="_CPPv2NK6marian13FactoredVocab8getEosIdEv"></span><span id="marian::FactoredVocab::getEosIdC"></span><span class="target" id="classmarian_1_1FactoredVocab_1ada9d56d6bcec1df0d9125f71cadf035a"></span><em class="property">virtual</em> <a class="reference internal" href="classmarian_1_1Word.html#_CPPv4N6marian4WordE" title="marian::Word">Word</a> <code class="sig-name descname">getEosId</code><span class="sig-paren">(</span><span class="sig-paren">)</span> <em class="property">const</em><a class="headerlink" href="#_CPPv4NK6marian13FactoredVocab8getEosIdEv" title="Permalink to this definition">¶</a><br /></dt>
+<dd></dd></dl>
+
+<dl class="function">
+<dt id="_CPPv4NK6marian13FactoredVocab8getUnkIdEv">
+<span id="_CPPv3NK6marian13FactoredVocab8getUnkIdEv"></span><span id="_CPPv2NK6marian13FactoredVocab8getUnkIdEv"></span><span id="marian::FactoredVocab::getUnkIdC"></span><span class="target" id="classmarian_1_1FactoredVocab_1a10168a3e5efaafd64ccfac63be7036d7"></span><em class="property">virtual</em> <a class="reference internal" href="classmarian_1_1Word.html#_CPPv4N6marian4WordE" title="marian::Word">Word</a> <code class="sig-name descname">getUnkId</code><span class="sig-paren">(</span><span class="sig-paren">)</span> <em class="property">const</em><a class="headerlink" href="#_CPPv4NK6marian13FactoredVocab8getUnkIdEv" title="Permalink to this definition">¶</a><br /></dt>
+<dd></dd></dl>
+
+<dl class="function">
+<dt id="_CPPv4NK6marian13FactoredVocab7toUpperERKNSt6stringE">
+<span id="_CPPv3NK6marian13FactoredVocab7toUpperERKNSt6stringE"></span><span id="_CPPv2NK6marian13FactoredVocab7toUpperERKNSt6stringE"></span><span id="marian::FactoredVocab::toUpper__ssCRC"></span><span class="target" id="classmarian_1_1FactoredVocab_1aaf74f360964d04fed1215a0c1265620e"></span><a class="reference internal" href="function_expression__operators_8cpp_1af4e69a5f7167b63522135a1f6b8a5dd8.html#_CPPv4N6marianStE4Expri" title="marian::std">std</a>::string <code class="sig-name descname">toUpper</code><span class="sig-paren">(</span><em class="property">const</em> <a class="reference internal" href="function_expression__operators_8cpp_1af4e69a5f7167b63522135a1f6b8a5dd8.html#_CPPv4N6marianStE4Expri" title="marian::std">std</a>::string &amp;<em>line</em><span class="sig-paren">)</span> <em class="property">const</em><a class="headerlink" href="#_CPPv4NK6marian13FactoredVocab7toUpperERKNSt6stringE" title="Permalink to this definition">¶</a><br /></dt>
+<dd></dd></dl>
+
+<dl class="function">
+<dt id="_CPPv4NK6marian13FactoredVocab18toEnglishTitleCaseERKNSt6stringE">
+<span id="_CPPv3NK6marian13FactoredVocab18toEnglishTitleCaseERKNSt6stringE"></span><span id="_CPPv2NK6marian13FactoredVocab18toEnglishTitleCaseERKNSt6stringE"></span><span id="marian::FactoredVocab::toEnglishTitleCase__ssCRC"></span><span class="target" id="classmarian_1_1FactoredVocab_1a76bcff07f5f2d1c8d4af8cc196e08bd8"></span><a class="reference internal" href="function_expression__operators_8cpp_1af4e69a5f7167b63522135a1f6b8a5dd8.html#_CPPv4N6marianStE4Expri" title="marian::std">std</a>::string <code class="sig-name descname">toEnglishTitleCase</code><span class="sig-paren">(</span><em class="property">const</em> <a class="reference internal" href="function_expression__operators_8cpp_1af4e69a5f7167b63522135a1f6b8a5dd8.html#_CPPv4N6marianStE4Expri" title="marian::std">std</a>::string &amp;<em>line</em><span class="sig-paren">)</span> <em class="property">const</em><a class="headerlink" href="#_CPPv4NK6marian13FactoredVocab18toEnglishTitleCaseERKNSt6stringE" title="Permalink to this definition">¶</a><br /></dt>
+<dd></dd></dl>
+
+<dl class="function">
+<dt id="_CPPv4NK6marian13FactoredVocab27transcodeToShortlistInPlaceEP9WordIndex6size_t">
+<span id="_CPPv3NK6marian13FactoredVocab27transcodeToShortlistInPlaceEP9WordIndex6size_t"></span><span id="_CPPv2NK6marian13FactoredVocab27transcodeToShortlistInPlaceEP9WordIndex6size_t"></span><span id="marian::FactoredVocab::transcodeToShortlistInPlace__WordIndexP.sC"></span><span class="target" id="classmarian_1_1FactoredVocab_1a33ee3a735200780ef7bb930eab3d2b18"></span>void <code class="sig-name descname">transcodeToShortlistInPlace</code><span class="sig-paren">(</span><a class="reference internal" href="typedef_data_2types_8h_1ae7167b339fc21c2985d7f2ddef03d25e.html#_CPPv4N6marian9WordIndexE" title="marian::WordIndex">WordIndex</a> *<em>ptr</em>, size_t <em>num</em><span class="sig-paren">)</span> <em class="property">const</em><a class="headerlink" href="#_CPPv4NK6marian13FactoredVocab27transcodeToShortlistInPlaceEP9WordIndex6size_t" title="Permalink to this definition">¶</a><br /></dt>
+<dd></dd></dl>
+
+<dl class="function">
+<dt id="_CPPv4NK6marian13FactoredVocab11getUnkIndexEv">
+<span id="_CPPv3NK6marian13FactoredVocab11getUnkIndexEv"></span><span id="_CPPv2NK6marian13FactoredVocab11getUnkIndexEv"></span><span id="marian::FactoredVocab::getUnkIndexC"></span><span class="target" id="classmarian_1_1FactoredVocab_1ab8f676d8806983f54eef348e5d465327"></span><a class="reference internal" href="typedef_data_2types_8h_1ae7167b339fc21c2985d7f2ddef03d25e.html#_CPPv4N6marian9WordIndexE" title="marian::WordIndex">WordIndex</a> <code class="sig-name descname">getUnkIndex</code><span class="sig-paren">(</span><span class="sig-paren">)</span> <em class="property">const</em><a class="headerlink" href="#_CPPv4NK6marian13FactoredVocab11getUnkIndexEv" title="Permalink to this definition">¶</a><br /></dt>
+<dd></dd></dl>
+
+<dl class="function">
+<dt id="_CPPv4N6marian13FactoredVocab10createFakeEv">
+<span id="_CPPv3N6marian13FactoredVocab10createFakeEv"></span><span id="_CPPv2N6marian13FactoredVocab10createFakeEv"></span><span id="marian::FactoredVocab::createFake"></span><span class="target" id="classmarian_1_1FactoredVocab_1ade432e8b576f0b8b7701f1c7d281bc29"></span><em class="property">virtual</em> void <code class="sig-name descname">createFake</code><span class="sig-paren">(</span><span class="sig-paren">)</span><a class="headerlink" href="#_CPPv4N6marian13FactoredVocab10createFakeEv" title="Permalink to this definition">¶</a><br /></dt>
+<dd></dd></dl>
+
+<dl class="function">
+<dt id="_CPPv4NK6marian13FactoredVocab8randWordEv">
+<span id="_CPPv3NK6marian13FactoredVocab8randWordEv"></span><span id="_CPPv2NK6marian13FactoredVocab8randWordEv"></span><span id="marian::FactoredVocab::randWordC"></span><span class="target" id="classmarian_1_1FactoredVocab_1a30d3deab0774e30048a8dedb592bfb00"></span><a class="reference internal" href="classmarian_1_1Word.html#_CPPv4N6marian4WordE" title="marian::Word">Word</a> <code class="sig-name descname">randWord</code><span class="sig-paren">(</span><span class="sig-paren">)</span> <em class="property">const</em><a class="headerlink" href="#_CPPv4NK6marian13FactoredVocab8randWordEv" title="Permalink to this definition">¶</a><br /></dt>
+<dd></dd></dl>
+
+<dl class="function">
+<dt id="_CPPv4NK6marian13FactoredVocab15factorVocabSizeEv">
+<span id="_CPPv3NK6marian13FactoredVocab15factorVocabSizeEv"></span><span id="_CPPv2NK6marian13FactoredVocab15factorVocabSizeEv"></span><span id="marian::FactoredVocab::factorVocabSizeC"></span><span class="target" id="classmarian_1_1FactoredVocab_1acbdbafb146edc3079f0d4f625face564"></span>size_t <code class="sig-name descname">factorVocabSize</code><span class="sig-paren">(</span><span class="sig-paren">)</span> <em class="property">const</em><a class="headerlink" href="#_CPPv4NK6marian13FactoredVocab15factorVocabSizeEv" title="Permalink to this definition">¶</a><br /></dt>
+<dd></dd></dl>
+
+<dl class="function">
+<dt id="_CPPv4NK6marian13FactoredVocab16virtualVocabSizeEv">
+<span id="_CPPv3NK6marian13FactoredVocab16virtualVocabSizeEv"></span><span id="_CPPv2NK6marian13FactoredVocab16virtualVocabSizeEv"></span><span id="marian::FactoredVocab::virtualVocabSizeC"></span><span class="target" id="classmarian_1_1FactoredVocab_1ac736d17b796225f2a2ee6f18216b1193"></span>size_t <code class="sig-name descname">virtualVocabSize</code><span class="sig-paren">(</span><span class="sig-paren">)</span> <em class="property">const</em><a class="headerlink" href="#_CPPv4NK6marian13FactoredVocab16virtualVocabSizeEv" title="Permalink to this definition">¶</a><br /></dt>
+<dd></dd></dl>
+
+<dl class="function">
+<dt id="_CPPv4NK6marian13FactoredVocab8csr_rowsERK5Words">
+<span id="_CPPv3NK6marian13FactoredVocab8csr_rowsERK5Words"></span><span id="_CPPv2NK6marian13FactoredVocab8csr_rowsERK5Words"></span><span id="marian::FactoredVocab::csr_rows__WordsCRC"></span><span class="target" id="classmarian_1_1FactoredVocab_1a782e246a58cbc9a358b8d6a451bfaf1a"></span><a class="reference internal" href="#_CPPv4N6marian13FactoredVocabE" title="marian::FactoredVocab">FactoredVocab</a>::<a class="reference internal" href="#_CPPv4N6marian13FactoredVocab7CSRDataE" title="marian::FactoredVocab::CSRData">CSRData</a> <code class="sig-name descname">csr_rows</code><span class="sig-paren">(</span><em class="property">const</em> <a class="reference internal" href="typedef_data_2types_8h_1a81f026d9529d47fd44a64a27954775fd.html#_CPPv4N6marian5WordsE" title="marian::Words">Words</a> &amp;<em>words</em><span class="sig-paren">)</span> <em class="property">const</em><a class="headerlink" href="#_CPPv4NK6marian13FactoredVocab8csr_rowsERK5Words" title="Permalink to this definition">¶</a><br /></dt>
+<dd></dd></dl>
+
+<dl class="function">
+<dt id="_CPPv4NK6marian13FactoredVocab12getNumGroupsEv">
+<span id="_CPPv3NK6marian13FactoredVocab12getNumGroupsEv"></span><span id="_CPPv2NK6marian13FactoredVocab12getNumGroupsEv"></span><span id="marian::FactoredVocab::getNumGroupsC"></span><span class="target" id="classmarian_1_1FactoredVocab_1ad3166a435eb1f2d6c1edff99f480f4db"></span>size_t <code class="sig-name descname">getNumGroups</code><span class="sig-paren">(</span><span class="sig-paren">)</span> <em class="property">const</em><a class="headerlink" href="#_CPPv4NK6marian13FactoredVocab12getNumGroupsEv" title="Permalink to this definition">¶</a><br /></dt>
+<dd></dd></dl>
+
+<dl class="function">
+<dt id="_CPPv4NK6marian13FactoredVocab13getGroupRangeE6size_t">
+<span id="_CPPv3NK6marian13FactoredVocab13getGroupRangeE6size_t"></span><span id="_CPPv2NK6marian13FactoredVocab13getGroupRangeE6size_t"></span><span id="marian::FactoredVocab::getGroupRange__sC"></span><span class="target" id="classmarian_1_1FactoredVocab_1a9e8b313d414004ff09f251a8f75f7c62"></span><a class="reference internal" href="function_expression__operators_8cpp_1af4e69a5f7167b63522135a1f6b8a5dd8.html#_CPPv4N6marianStE4Expri" title="marian::std">std</a>::pair&lt;size_t, size_t&gt; <code class="sig-name descname">getGroupRange</code><span class="sig-paren">(</span>size_t <em>g</em><span class="sig-paren">)</span> <em class="property">const</em><a class="headerlink" href="#_CPPv4NK6marian13FactoredVocab13getGroupRangeE6size_t" title="Permalink to this definition">¶</a><br /></dt>
+<dd></dd></dl>
+
+<dl class="function">
+<dt id="_CPPv4NK6marian13FactoredVocab12factors2wordERKNSt6vectorI6size_tEE">
+<span id="_CPPv3NK6marian13FactoredVocab12factors2wordERKNSt6vectorI6size_tEE"></span><span id="_CPPv2NK6marian13FactoredVocab12factors2wordERKNSt6vectorI6size_tEE"></span><span id="marian::FactoredVocab::factors2word__std::vector:s:CRC"></span><span class="target" id="classmarian_1_1FactoredVocab_1abb4cbc5aa6d27a1a797dae99873344b1"></span><a class="reference internal" href="classmarian_1_1Word.html#_CPPv4N6marian4WordE" title="marian::Word">Word</a> <code class="sig-name descname">factors2word</code><span class="sig-paren">(</span><em class="property">const</em> <a class="reference internal" href="function_expression__operators_8cpp_1af4e69a5f7167b63522135a1f6b8a5dd8.html#_CPPv4N6marianStE4Expri" title="marian::std">std</a>::vector&lt;size_t&gt; &amp;<em>factors</em><span class="sig-paren">)</span> <em class="property">const</em><a class="headerlink" href="#_CPPv4NK6marian13FactoredVocab12factors2wordERKNSt6vectorI6size_tEE" title="Permalink to this definition">¶</a><br /></dt>
+<dd></dd></dl>
+
+<dl class="function">
+<dt id="_CPPv4NK6marian13FactoredVocab12word2factorsE4WordRNSt6vectorI6size_tEE">
+<span id="_CPPv3NK6marian13FactoredVocab12word2factorsE4WordRNSt6vectorI6size_tEE"></span><span id="_CPPv2NK6marian13FactoredVocab12word2factorsE4WordRNSt6vectorI6size_tEE"></span><span id="marian::FactoredVocab::word2factors__Word.std::vector:s:RC"></span><span class="target" id="classmarian_1_1FactoredVocab_1ad0ae1b87ffd923bd544b943a83d75fcb"></span>void <code class="sig-name descname">word2factors</code><span class="sig-paren">(</span><a class="reference internal" href="classmarian_1_1Word.html#_CPPv4N6marian4WordE" title="marian::Word">Word</a> <em>word</em>, <a class="reference internal" href="function_expression__operators_8cpp_1af4e69a5f7167b63522135a1f6b8a5dd8.html#_CPPv4N6marianStE4Expri" title="marian::std">std</a>::vector&lt;size_t&gt; &amp;<em>factors</em><span class="sig-paren">)</span> <em class="property">const</em><a class="headerlink" href="#_CPPv4NK6marian13FactoredVocab12word2factorsE4WordRNSt6vectorI6size_tEE" title="Permalink to this definition">¶</a><br /></dt>
+<dd></dd></dl>
+
+<dl class="function">
+<dt id="_CPPv4NK6marian13FactoredVocab10lemma2WordE6size_t">
+<span id="_CPPv3NK6marian13FactoredVocab10lemma2WordE6size_t"></span><span id="_CPPv2NK6marian13FactoredVocab10lemma2WordE6size_t"></span><span id="marian::FactoredVocab::lemma2Word__sC"></span><span class="target" id="classmarian_1_1FactoredVocab_1a8ade060cbc0231dc99fecf9b070c99c3"></span><a class="reference internal" href="classmarian_1_1Word.html#_CPPv4N6marian4WordE" title="marian::Word">Word</a> <code class="sig-name descname">lemma2Word</code><span class="sig-paren">(</span>size_t <em>factor0Index</em><span class="sig-paren">)</span> <em class="property">const</em><a class="headerlink" href="#_CPPv4NK6marian13FactoredVocab10lemma2WordE6size_t" title="Permalink to this definition">¶</a><br /></dt>
+<dd></dd></dl>
+
+<dl class="function">
+<dt id="_CPPv4NK6marian13FactoredVocab18expandFactoredWordE4Word6size_t6size_t">
+<span id="_CPPv3NK6marian13FactoredVocab18expandFactoredWordE4Word6size_t6size_t"></span><span id="_CPPv2NK6marian13FactoredVocab18expandFactoredWordE4Word6size_t6size_t"></span><span id="marian::FactoredVocab::expandFactoredWord__Word.s.sC"></span><span class="target" id="classmarian_1_1FactoredVocab_1ab706b02fb6dd7c69bcd4d579eb734d3a"></span><a class="reference internal" href="classmarian_1_1Word.html#_CPPv4N6marian4WordE" title="marian::Word">Word</a> <code class="sig-name descname">expandFactoredWord</code><span class="sig-paren">(</span><a class="reference internal" href="classmarian_1_1Word.html#_CPPv4N6marian4WordE" title="marian::Word">Word</a> <em>word</em>, size_t <em>groupIndex</em>, size_t <em>factorIndex</em><span class="sig-paren">)</span> <em class="property">const</em><a class="headerlink" href="#_CPPv4NK6marian13FactoredVocab18expandFactoredWordE4Word6size_t6size_t" title="Permalink to this definition">¶</a><br /></dt>
+<dd></dd></dl>
+
+<dl class="function">
+<dt id="_CPPv4NK6marian13FactoredVocab21canExpandFactoredWordE4Word6size_t">
+<span id="_CPPv3NK6marian13FactoredVocab21canExpandFactoredWordE4Word6size_t"></span><span id="_CPPv2NK6marian13FactoredVocab21canExpandFactoredWordE4Word6size_t"></span><span id="marian::FactoredVocab::canExpandFactoredWord__Word.sC"></span><span class="target" id="classmarian_1_1FactoredVocab_1a416790a2dd6b0d897abb1d694d95892d"></span>bool <code class="sig-name descname">canExpandFactoredWord</code><span class="sig-paren">(</span><a class="reference internal" href="classmarian_1_1Word.html#_CPPv4N6marian4WordE" title="marian::Word">Word</a> <em>word</em>, size_t <em>groupIndex</em><span class="sig-paren">)</span> <em class="property">const</em><a class="headerlink" href="#_CPPv4NK6marian13FactoredVocab21canExpandFactoredWordE4Word6size_t" title="Permalink to this definition">¶</a><br /></dt>
+<dd></dd></dl>
+
+<dl class="function">
+<dt id="_CPPv4NK6marian13FactoredVocab9getFactorE4Word6size_t">
+<span id="_CPPv3NK6marian13FactoredVocab9getFactorE4Word6size_t"></span><span id="_CPPv2NK6marian13FactoredVocab9getFactorE4Word6size_t"></span><span id="marian::FactoredVocab::getFactor__Word.sC"></span><span class="target" id="classmarian_1_1FactoredVocab_1a0c35abc3a44fc4826e75f1a533d80614"></span>size_t <code class="sig-name descname">getFactor</code><span class="sig-paren">(</span><a class="reference internal" href="classmarian_1_1Word.html#_CPPv4N6marian4WordE" title="marian::Word">Word</a> <em>word</em>, size_t <em>groupIndex</em><span class="sig-paren">)</span> <em class="property">const</em><a class="headerlink" href="#_CPPv4NK6marian13FactoredVocab9getFactorE4Word6size_t" title="Permalink to this definition">¶</a><br /></dt>
+<dd></dd></dl>
+
+<dl class="function">
+<dt id="_CPPv4NK6marian13FactoredVocab19lemmaHasFactorGroupE6size_t6size_t">
+<span id="_CPPv3NK6marian13FactoredVocab19lemmaHasFactorGroupE6size_t6size_t"></span><span id="_CPPv2NK6marian13FactoredVocab19lemmaHasFactorGroupE6size_t6size_t"></span><span id="marian::FactoredVocab::lemmaHasFactorGroup__s.sC"></span><span class="target" id="classmarian_1_1FactoredVocab_1a7b72e80858bc219c927101b3058af044"></span>bool <code class="sig-name descname">lemmaHasFactorGroup</code><span class="sig-paren">(</span>size_t <em>factor0Index</em>, size_t <em>g</em><span class="sig-paren">)</span> <em class="property">const</em><a class="headerlink" href="#_CPPv4NK6marian13FactoredVocab19lemmaHasFactorGroupE6size_t6size_t" title="Permalink to this definition">¶</a><br /></dt>
+<dd></dd></dl>
+
+<dl class="function">
+<dt id="_CPPv4NK6marian13FactoredVocab20getFactorGroupPrefixE6size_t">
+<span id="_CPPv3NK6marian13FactoredVocab20getFactorGroupPrefixE6size_t"></span><span id="_CPPv2NK6marian13FactoredVocab20getFactorGroupPrefixE6size_t"></span><span id="marian::FactoredVocab::getFactorGroupPrefix__sC"></span><span class="target" id="classmarian_1_1FactoredVocab_1accc3233b82101e6c9e46543d7283e0a4"></span><em class="property">const</em> <a class="reference internal" href="function_expression__operators_8cpp_1af4e69a5f7167b63522135a1f6b8a5dd8.html#_CPPv4N6marianStE4Expri" title="marian::std">std</a>::string &amp;<code class="sig-name descname">getFactorGroupPrefix</code><span class="sig-paren">(</span>size_t <em>groupIndex</em><span class="sig-paren">)</span> <em class="property">const</em><a class="headerlink" href="#_CPPv4NK6marian13FactoredVocab20getFactorGroupPrefixE6size_t" title="Permalink to this definition">¶</a><br /></dt>
+<dd></dd></dl>
+
+<dl class="function">
+<dt id="_CPPv4NK6marian13FactoredVocab13getFactorNameE6size_t6size_t">
+<span id="_CPPv3NK6marian13FactoredVocab13getFactorNameE6size_t6size_t"></span><span id="_CPPv2NK6marian13FactoredVocab13getFactorNameE6size_t6size_t"></span><span id="marian::FactoredVocab::getFactorName__s.sC"></span><span class="target" id="classmarian_1_1FactoredVocab_1adf177b34ed60eaf1581f4a4a8037aecc"></span><em class="property">const</em> <a class="reference internal" href="function_expression__operators_8cpp_1af4e69a5f7167b63522135a1f6b8a5dd8.html#_CPPv4N6marianStE4Expri" title="marian::std">std</a>::string &amp;<code class="sig-name descname">getFactorName</code><span class="sig-paren">(</span>size_t <em>groupIndex</em>, size_t <em>factorIndex</em><span class="sig-paren">)</span> <em class="property">const</em><a class="headerlink" href="#_CPPv4NK6marian13FactoredVocab13getFactorNameE6size_t6size_t" title="Permalink to this definition">¶</a><br /></dt>
+<dd></dd></dl>
+
+<dl class="function">
+<dt id="_CPPv4NK6marian13FactoredVocab20decodeForDiagnosticsERK5Words">
+<span id="_CPPv3NK6marian13FactoredVocab20decodeForDiagnosticsERK5Words"></span><span id="_CPPv2NK6marian13FactoredVocab20decodeForDiagnosticsERK5Words"></span><span id="marian::FactoredVocab::decodeForDiagnostics__WordsCRC"></span><span class="target" id="classmarian_1_1FactoredVocab_1aa2820ca87b30b8821d4d2f6e46e126e7"></span><a class="reference internal" href="function_expression__operators_8cpp_1af4e69a5f7167b63522135a1f6b8a5dd8.html#_CPPv4N6marianStE4Expri" title="marian::std">std</a>::string <code class="sig-name descname">decodeForDiagnostics</code><span class="sig-paren">(</span><em class="property">const</em> <a class="reference internal" href="typedef_data_2types_8h_1a81f026d9529d47fd44a64a27954775fd.html#_CPPv4N6marian5WordsE" title="marian::Words">Words</a> &amp;<em>sentence</em><span class="sig-paren">)</span> <em class="property">const</em><a class="headerlink" href="#_CPPv4NK6marian13FactoredVocab20decodeForDiagnosticsERK5Words" title="Permalink to this definition">¶</a><br /></dt>
+<dd></dd></dl>
+
+<dl class="function">
+<dt id="_CPPv4NK6marian13FactoredVocab11word2stringE4Word">
+<span id="_CPPv3NK6marian13FactoredVocab11word2stringE4Word"></span><span id="_CPPv2NK6marian13FactoredVocab11word2stringE4Word"></span><span id="marian::FactoredVocab::word2string__WordC"></span><span class="target" id="classmarian_1_1FactoredVocab_1aa6660337ff5927088200f9ab862831c4"></span><a class="reference internal" href="function_expression__operators_8cpp_1af4e69a5f7167b63522135a1f6b8a5dd8.html#_CPPv4N6marianStE4Expri" title="marian::std">std</a>::string <code class="sig-name descname">word2string</code><span class="sig-paren">(</span><a class="reference internal" href="classmarian_1_1Word.html#_CPPv4N6marian4WordE" title="marian::Word">Word</a> <em>word</em><span class="sig-paren">)</span> <em class="property">const</em><a class="headerlink" href="#_CPPv4NK6marian13FactoredVocab11word2stringE4Word" title="Permalink to this definition">¶</a><br /></dt>
+<dd></dd></dl>
+
+<dl class="function">
+<dt id="_CPPv4NK6marian13FactoredVocab11string2wordERKNSt6stringE">
+<span id="_CPPv3NK6marian13FactoredVocab11string2wordERKNSt6stringE"></span><span id="_CPPv2NK6marian13FactoredVocab11string2wordERKNSt6stringE"></span><span id="marian::FactoredVocab::string2word__ssCRC"></span><span class="target" id="classmarian_1_1FactoredVocab_1a26b95fa147cb2d104c38eb3bb717e27d"></span><a class="reference internal" href="classmarian_1_1Word.html#_CPPv4N6marian4WordE" title="marian::Word">Word</a> <code class="sig-name descname">string2word</code><span class="sig-paren">(</span><em class="property">const</em> <a class="reference internal" href="function_expression__operators_8cpp_1af4e69a5f7167b63522135a1f6b8a5dd8.html#_CPPv4N6marianStE4Expri" title="marian::std">std</a>::string &amp;<em>w</em><span class="sig-paren">)</span> <em class="property">const</em><a class="headerlink" href="#_CPPv4NK6marian13FactoredVocab11string2wordERKNSt6stringE" title="Permalink to this definition">¶</a><br /></dt>
+<dd></dd></dl>
+
+<dl class="function">
+<dt id="_CPPv4NK6marian13FactoredVocab12tryGetFactorERKNSt6stringER6size_tR6size_t">
+<span id="_CPPv3NK6marian13FactoredVocab12tryGetFactorERKNSt6stringER6size_tR6size_t"></span><span id="_CPPv2NK6marian13FactoredVocab12tryGetFactorERKNSt6stringER6size_tR6size_t"></span><span id="marian::FactoredVocab::tryGetFactor__ssCR.sR.sRC"></span><span class="target" id="classmarian_1_1FactoredVocab_1aa6f4dade5d69c96aa5cf27b9a321baa4"></span>bool <code class="sig-name descname">tryGetFactor</code><span class="sig-paren">(</span><em class="property">const</em> <a class="reference internal" href="function_expression__operators_8cpp_1af4e69a5f7167b63522135a1f6b8a5dd8.html#_CPPv4N6marianStE4Expri" title="marian::std">std</a>::string &amp;<em>factorGroupName</em>, size_t &amp;<em>groupIndex</em>, size_t &amp;<em>factorIndex</em><span class="sig-paren">)</span> <em class="property">const</em><a class="headerlink" href="#_CPPv4NK6marian13FactoredVocab12tryGetFactorERKNSt6stringER6size_tR6size_t" title="Permalink to this definition">¶</a><br /></dt>
+<dd></dd></dl>
+
+</div>
+<div class="breathe-sectiondef docutils container">
+<p class="breathe-sectiondef-title rubric">Public Static Functions</p>
+<dl class="function">
+<dt id="_CPPv4N6marian13FactoredVocab13isFactorValidE6size_t">
+<span id="_CPPv3N6marian13FactoredVocab13isFactorValidE6size_t"></span><span id="_CPPv2N6marian13FactoredVocab13isFactorValidE6size_t"></span><span id="marian::FactoredVocab::isFactorValid__s"></span><span class="target" id="classmarian_1_1FactoredVocab_1ae010e2b7e6fabe6aeeae59bb9f690e5d"></span><em class="property">static</em> bool <code class="sig-name descname">isFactorValid</code><span class="sig-paren">(</span>size_t <em>factorIndex</em><span class="sig-paren">)</span><a class="headerlink" href="#_CPPv4N6marian13FactoredVocab13isFactorValidE6size_t" title="Permalink to this definition">¶</a><br /></dt>
+<dd></dd></dl>
+
+<dl class="function">
+<dt id="_CPPv4N6marian13FactoredVocab16tryCreateAndLoadERKNSt6stringE">
+<span id="_CPPv3N6marian13FactoredVocab16tryCreateAndLoadERKNSt6stringE"></span><span id="_CPPv2N6marian13FactoredVocab16tryCreateAndLoadERKNSt6stringE"></span><span id="marian::FactoredVocab::tryCreateAndLoad__ssCR"></span><span class="target" id="classmarian_1_1FactoredVocab_1a2b229fee98454f4d248cbd4a6b486375"></span><a class="reference internal" href="typedef_definitions_8h_1ad1a373be43a00ef9ce35666145137b08.html#_CPPv4N6marian3PtrE" title="marian::Ptr">Ptr</a>&lt;<a class="reference internal" href="#_CPPv4N6marian13FactoredVocabE" title="marian::FactoredVocab">FactoredVocab</a>&gt; <code class="sig-name descname">tryCreateAndLoad</code><span class="sig-paren">(</span><em class="property">const</em> <a class="reference internal" href="function_expression__operators_8cpp_1af4e69a5f7167b63522135a1f6b8a5dd8.html#_CPPv4N6marianStE4Expri" title="marian::std">std</a>::string &amp;<em>path</em><span class="sig-paren">)</span><a class="headerlink" href="#_CPPv4N6marian13FactoredVocab16tryCreateAndLoadERKNSt6stringE" title="Permalink to this definition">¶</a><br /></dt>
+<dd></dd></dl>
+
+</div>
+<div class="breathe-sectiondef docutils container">
+<p class="breathe-sectiondef-title rubric">Public Static Attributes</p>
+<dl class="member">
+<dt id="_CPPv4N6marian13FactoredVocab21FACTOR_NOT_APPLICABLEE">
+<span id="_CPPv3N6marian13FactoredVocab21FACTOR_NOT_APPLICABLEE"></span><span id="_CPPv2N6marian13FactoredVocab21FACTOR_NOT_APPLICABLEE"></span><span id="marian::FactoredVocab::FACTOR_NOT_APPLICABLE__s"></span><span class="target" id="classmarian_1_1FactoredVocab_1a2b33372faec81b78cc5c466851f21c6a"></span><em class="property">constexpr</em> size_t <code class="sig-name descname">FACTOR_NOT_APPLICABLE</code> = (SIZE_MAX - 1)<a class="headerlink" href="#_CPPv4N6marian13FactoredVocab21FACTOR_NOT_APPLICABLEE" title="Permalink to this definition">¶</a><br /></dt>
+<dd></dd></dl>
+
+<dl class="member">
+<dt id="_CPPv4N6marian13FactoredVocab20FACTOR_NOT_SPECIFIEDE">
+<span id="_CPPv3N6marian13FactoredVocab20FACTOR_NOT_SPECIFIEDE"></span><span id="_CPPv2N6marian13FactoredVocab20FACTOR_NOT_SPECIFIEDE"></span><span id="marian::FactoredVocab::FACTOR_NOT_SPECIFIED__s"></span><span class="target" id="classmarian_1_1FactoredVocab_1a22bbe77b4b6df22b59e266b045dfb9f4"></span><em class="property">constexpr</em> size_t <code class="sig-name descname">FACTOR_NOT_SPECIFIED</code> = (SIZE_MAX - 2)<a class="headerlink" href="#_CPPv4N6marian13FactoredVocab20FACTOR_NOT_SPECIFIEDE" title="Permalink to this definition">¶</a><br /></dt>
+<dd></dd></dl>
+
+</div>
+<dl class="class">
+<dt id="_CPPv4N6marian13FactoredVocab7CSRDataE">
+<span id="_CPPv3N6marian13FactoredVocab7CSRDataE"></span><span id="_CPPv2N6marian13FactoredVocab7CSRDataE"></span><span id="marian::FactoredVocab::CSRData"></span><span class="target" id="structmarian_1_1FactoredVocab_1_1CSRData"></span><em class="property">struct </em><code class="sig-name descname">CSRData</code><a class="headerlink" href="#_CPPv4N6marian13FactoredVocab7CSRDataE" title="Permalink to this definition">¶</a><br /></dt>
+<dd><div class="breathe-sectiondef docutils container">
+<p class="breathe-sectiondef-title rubric">Public Members</p>
+<dl class="member">
+<dt id="_CPPv4N6marian13FactoredVocab7CSRData5shapeE">
+<span id="_CPPv3N6marian13FactoredVocab7CSRData5shapeE"></span><span id="_CPPv2N6marian13FactoredVocab7CSRData5shapeE"></span><span id="marian::FactoredVocab::CSRData::shape__Shape"></span><span class="target" id="structmarian_1_1FactoredVocab_1_1CSRData_1aaf576ae44482c61c217867b118754dd7"></span><a class="reference internal" href="structmarian_1_1Shape.html#_CPPv4N6marian5ShapeE" title="marian::Shape">Shape</a> <code class="sig-name descname">shape</code><a class="headerlink" href="#_CPPv4N6marian13FactoredVocab7CSRData5shapeE" title="Permalink to this definition">¶</a><br /></dt>
+<dd></dd></dl>
+
+<dl class="member">
+<dt id="_CPPv4N6marian13FactoredVocab7CSRData7weightsE">
+<span id="_CPPv3N6marian13FactoredVocab7CSRData7weightsE"></span><span id="_CPPv2N6marian13FactoredVocab7CSRData7weightsE"></span><span id="marian::FactoredVocab::CSRData::weights__std::vector:float:"></span><span class="target" id="structmarian_1_1FactoredVocab_1_1CSRData_1aba2144c856d4b6db9fdfe431a19d24ba"></span><a class="reference internal" href="function_expression__operators_8cpp_1af4e69a5f7167b63522135a1f6b8a5dd8.html#_CPPv4N6marianStE4Expri" title="marian::std">std</a>::vector&lt;float&gt; <code class="sig-name descname">weights</code><a class="headerlink" href="#_CPPv4N6marian13FactoredVocab7CSRData7weightsE" title="Permalink to this definition">¶</a><br /></dt>
+<dd></dd></dl>
+
+<dl class="member">
+<dt id="_CPPv4N6marian13FactoredVocab7CSRData7indicesE">
+<span id="_CPPv3N6marian13FactoredVocab7CSRData7indicesE"></span><span id="_CPPv2N6marian13FactoredVocab7CSRData7indicesE"></span><span id="marian::FactoredVocab::CSRData::indices__std::vector:IndexType:"></span><span class="target" id="structmarian_1_1FactoredVocab_1_1CSRData_1aa097580fc1a44bf294003e2647c9e2f5"></span><a class="reference internal" href="function_expression__operators_8cpp_1af4e69a5f7167b63522135a1f6b8a5dd8.html#_CPPv4N6marianStE4Expri" title="marian::std">std</a>::vector&lt;<a class="reference internal" href="typedef_definitions_8h_1af472f150bf0d608c36430a11b2f1b49c.html#_CPPv4N6marian9IndexTypeE" title="marian::IndexType">IndexType</a>&gt; <code class="sig-name descname">indices</code><a class="headerlink" href="#_CPPv4N6marian13FactoredVocab7CSRData7indicesE" title="Permalink to this definition">¶</a><br /></dt>
+<dd></dd></dl>
+
+<dl class="member">
+<dt id="_CPPv4N6marian13FactoredVocab7CSRData7offsetsE">
+<span id="_CPPv3N6marian13FactoredVocab7CSRData7offsetsE"></span><span id="_CPPv2N6marian13FactoredVocab7CSRData7offsetsE"></span><span id="marian::FactoredVocab::CSRData::offsets__std::vector:IndexType:"></span><span class="target" id="structmarian_1_1FactoredVocab_1_1CSRData_1ace1486cfb1bd229b74376c142c46bec0"></span><a class="reference internal" href="function_expression__operators_8cpp_1af4e69a5f7167b63522135a1f6b8a5dd8.html#_CPPv4N6marianStE4Expri" title="marian::std">std</a>::vector&lt;<a class="reference internal" href="typedef_definitions_8h_1af472f150bf0d608c36430a11b2f1b49c.html#_CPPv4N6marian9IndexTypeE" title="marian::IndexType">IndexType</a>&gt; <code class="sig-name descname">offsets</code><a class="headerlink" href="#_CPPv4N6marian13FactoredVocab7CSRData7offsetsE" title="Permalink to this definition">¶</a><br /></dt>
+<dd></dd></dl>
+
+</div>
+</dd></dl>
+
+</dd></dl>
+
+</div>
+</div>
+
+
+           </div>
+           
+          </div>
+          <footer>
+    <div class="rst-footer-buttons" role="navigation" aria-label="footer navigation">
+        <a href="classmarian_1_1FactoredVocab_1_1WordLUT.html" class="btn btn-neutral float-right" title="Class FactoredVocab::WordLUT" accesskey="n" rel="next">Next <span class="fa fa-arrow-circle-right" aria-hidden="true"></span></a>
+        <a href="classmarian_1_1ExpressionGraphPackable.html" class="btn btn-neutral float-left" title="Class ExpressionGraphPackable" accesskey="p" rel="prev"><span class="fa fa-arrow-circle-left" aria-hidden="true"></span> Previous</a>
+    </div>
+
+  <hr/>
+
+  <div role="contentinfo">
+    <p>
+        &#169; Copyright 2021, Marian NMT Team.
+
+    </p>
+  </div>
+    
+    
+    
+    Built with <a href="https://www.sphinx-doc.org/">Sphinx</a> using a
+    
+    <a href="https://github.com/readthedocs/sphinx_rtd_theme">theme</a>
+    
+    provided by <a href="https://readthedocs.org">Read the Docs</a>. 
+
+</footer>
+        </div>
+      </div>
+
+    </section>
+
+  </div>
+  
+
+  <script type="text/javascript">
+      jQuery(function () {
+          SphinxRtdTheme.Navigation.enable(true);
+      });
+  </script>
+
+  
+  
+    
+   
+
+</body>
+</html>

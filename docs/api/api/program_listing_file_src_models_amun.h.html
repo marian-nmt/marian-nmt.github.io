@@ -1,0 +1,436 @@
+
+
+<!DOCTYPE html>
+<html class="writer-html5" lang="en" >
+<head>
+  <meta charset="utf-8" />
+  
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  
+  <title>Program Listing for File amun.h &mdash; Marian NMT v1.10.1 2021-02-23 documentation</title>
+  
+
+  
+  <link rel="stylesheet" href="../_static/css/theme.css" type="text/css" />
+  <link rel="stylesheet" href="../_static/pygments.css" type="text/css" />
+  <link rel="stylesheet" href="../_static/css/custom.css" type="text/css" />
+  <link rel="stylesheet" href="../_static/collapsible-lists/css/tree_view.css" type="text/css" />
+
+  
+  
+
+  
+  
+
+  
+    <link rel="canonical" href="http://marian-nmt.github.io/docs/api/api/program_listing_file_src_models_amun.h.html" />
+
+  
+  <!--[if lt IE 9]>
+    <script src="../_static/js/html5shiv.min.js"></script>
+  <![endif]-->
+  
+    
+      <script type="text/javascript" id="documentation_options" data-url_root="../" src="../_static/documentation_options.js"></script>
+        <script src="../_static/jquery.js"></script>
+        <script src="../_static/underscore.js"></script>
+        <script src="../_static/doctools.js"></script>
+        <script src="../_static/language_data.js"></script>
+        <script src="../_static/collapsible-lists/js/CollapsibleLists.compressed.js"></script>
+        <script src="../_static/collapsible-lists/js/apply-collapsible-lists.js"></script>
+    
+    <script type="text/javascript" src="../_static/js/theme.js"></script>
+
+    
+    <link rel="index" title="Index" href="../genindex.html" />
+    <link rel="search" title="Search" href="../search.html" /> 
+</head>
+
+<body class="wy-body-for-nav">
+
+   
+  <div class="wy-grid-for-nav">
+    
+    <nav data-toggle="wy-nav-shift" class="wy-nav-side">
+      <div class="wy-side-scroll">
+        <div class="wy-side-nav-search" >
+          
+
+          
+            <a href="../index.html" class="icon icon-home"> Marian NMT
+          
+
+          
+          </a>
+
+          
+            
+            
+              <div class="version">
+                v1.10.1
+              </div>
+            
+          
+
+          
+<div role="search">
+  <form id="rtd-search-form" class="wy-form" action="../search.html" method="get">
+    <input type="text" name="q" placeholder="Search docs" />
+    <input type="hidden" name="check_keywords" value="yes" />
+    <input type="hidden" name="area" value="default" />
+  </form>
+</div>
+
+          
+        </div>
+
+        
+        <div class="wy-menu wy-menu-vertical" data-spy="affix" role="navigation" aria-label="main navigation">
+          
+            
+            
+              
+            
+            
+              <p class="caption"><span class="caption-text">Contents:</span></p>
+<ul>
+<li class="toctree-l1"><a class="reference internal" href="../install.html">Installation</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../graph.html">Expression graphs</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../operators.html">Graph operations</a></li>
+<li class="toctree-l1"><a class="reference internal" href="library_index.html">Library API</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../contributing.html">How to contribute to Marian</a></li>
+</ul>
+
+            
+          
+        </div>
+        
+      </div>
+    </nav>
+
+    <section data-toggle="wy-nav-shift" class="wy-nav-content-wrap">
+
+      
+      <nav class="wy-nav-top" aria-label="top navigation">
+        
+          <i data-toggle="wy-nav-top" class="fa fa-bars"></i>
+          <a href="../index.html">Marian NMT</a>
+        
+      </nav>
+
+
+      <div class="wy-nav-content">
+        
+        <div class="rst-content">
+        
+          
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+<div role="navigation" aria-label="breadcrumbs navigation">
+
+  <ul class="wy-breadcrumbs">
+    
+      <li><a href="../index.html" class="icon icon-home"></a> &raquo;</li>
+        
+      <li>Program Listing for File amun.h</li>
+    
+    
+      <li class="wy-breadcrumbs-aside">
+        
+          
+            <a href="../_sources/api/program_listing_file_src_models_amun.h.rst.txt" rel="nofollow"> View page source</a>
+          
+        
+      </li>
+    
+  </ul>
+
+  
+  <hr/>
+</div>
+          <div role="main" class="document" itemscope="itemscope" itemtype="http://schema.org/Article">
+           <div itemprop="articleBody">
+            
+  <div class="section" id="program-listing-for-file-amun-h">
+<span id="program-listing-file-src-models-amun-h"></span><h1>Program Listing for File amun.h<a class="headerlink" href="#program-listing-for-file-amun-h" title="Permalink to this headline">¶</a></h1>
+<p>↰ <a class="reference internal" href="file_src_models_amun.h.html#file-src-models-amun-h"><span class="std std-ref">Return to documentation for file</span></a> (<code class="docutils literal notranslate"><span class="pre">src/models/amun.h</span></code>)</p>
+<div class="highlight-cpp notranslate"><div class="highlight"><pre><span></span><span class="cp">#pragma once</span>
+
+<span class="cp">#include</span> <span class="cpf">&quot;marian.h&quot;</span><span class="cp"></span>
+
+<span class="cp">#include</span> <span class="cpf">&quot;models/s2s.h&quot;</span><span class="cp"></span>
+
+<span class="k">namespace</span> <span class="n">marian</span> <span class="p">{</span>
+
+<span class="k">class</span> <span class="nc">Amun</span> <span class="o">:</span> <span class="k">public</span> <span class="n">EncoderDecoder</span> <span class="p">{</span>
+<span class="k">public</span><span class="o">:</span>
+  <span class="n">Amun</span><span class="p">(</span><span class="n">Ptr</span><span class="o">&lt;</span><span class="n">ExpressionGraph</span><span class="o">&gt;</span> <span class="n">graph</span><span class="p">,</span> <span class="n">Ptr</span><span class="o">&lt;</span><span class="n">Options</span><span class="o">&gt;</span> <span class="n">options</span><span class="p">)</span> <span class="o">:</span> <span class="n">EncoderDecoder</span><span class="p">(</span><span class="n">graph</span><span class="p">,</span> <span class="n">options</span><span class="p">)</span> <span class="p">{</span>
+    <span class="n">ABORT_IF</span><span class="p">(</span><span class="n">opt</span><span class="o">&lt;</span><span class="kt">int</span><span class="o">&gt;</span><span class="p">(</span><span class="s">&quot;enc-depth&quot;</span><span class="p">)</span> <span class="o">&gt;</span> <span class="mi">1</span><span class="p">,</span>
+             <span class="s">&quot;--type amun does not support multiple encoder &quot;</span>
+             <span class="s">&quot;layers, use --type s2s&quot;</span><span class="p">);</span>
+    <span class="n">ABORT_IF</span><span class="p">(</span><span class="n">opt</span><span class="o">&lt;</span><span class="kt">int</span><span class="o">&gt;</span><span class="p">(</span><span class="s">&quot;enc-cell-depth&quot;</span><span class="p">)</span> <span class="o">&gt;</span> <span class="mi">1</span><span class="p">,</span>
+             <span class="s">&quot;--type amun does not support stacked encoder &quot;</span>
+             <span class="s">&quot;cells, use --type s2s&quot;</span><span class="p">);</span>
+    <span class="n">ABORT_IF</span><span class="p">(</span><span class="n">opt</span><span class="o">&lt;</span><span class="kt">bool</span><span class="o">&gt;</span><span class="p">(</span><span class="s">&quot;skip&quot;</span><span class="p">),</span>
+             <span class="s">&quot;--type amun does not support skip connections, &quot;</span>
+             <span class="s">&quot;use --type s2s&quot;</span><span class="p">);</span>
+    <span class="n">ABORT_IF</span><span class="p">(</span><span class="n">opt</span><span class="o">&lt;</span><span class="kt">int</span><span class="o">&gt;</span><span class="p">(</span><span class="s">&quot;dec-depth&quot;</span><span class="p">)</span> <span class="o">&gt;</span> <span class="mi">1</span><span class="p">,</span>
+             <span class="s">&quot;--type amun does not support multiple decoder &quot;</span>
+             <span class="s">&quot;layers, use --type s2s&quot;</span><span class="p">);</span>
+    <span class="n">ABORT_IF</span><span class="p">(</span><span class="n">opt</span><span class="o">&lt;</span><span class="kt">int</span><span class="o">&gt;</span><span class="p">(</span><span class="s">&quot;dec-cell-base-depth&quot;</span><span class="p">)</span> <span class="o">!=</span> <span class="mi">2</span><span class="p">,</span>
+             <span class="s">&quot;--type amun does not support multiple decoder &quot;</span>
+             <span class="s">&quot;base cells, use --type s2s&quot;</span><span class="p">);</span>
+    <span class="n">ABORT_IF</span><span class="p">(</span><span class="n">opt</span><span class="o">&lt;</span><span class="kt">int</span><span class="o">&gt;</span><span class="p">(</span><span class="s">&quot;dec-cell-high-depth&quot;</span><span class="p">)</span> <span class="o">&gt;</span> <span class="mi">1</span><span class="p">,</span>
+             <span class="s">&quot;--type amun does not support multiple decoder &quot;</span>
+             <span class="s">&quot;high cells, use --type s2s&quot;</span><span class="p">);</span>
+    <span class="n">ABORT_IF</span><span class="p">(</span><span class="n">opt</span><span class="o">&lt;</span><span class="n">std</span><span class="o">::</span><span class="n">string</span><span class="o">&gt;</span><span class="p">(</span><span class="s">&quot;enc-cell&quot;</span><span class="p">)</span> <span class="o">!=</span> <span class="s">&quot;gru&quot;</span><span class="p">,</span>
+             <span class="s">&quot;--type amun does not support other rnn cells than gru, &quot;</span>
+             <span class="s">&quot;use --type s2s&quot;</span><span class="p">);</span>
+    <span class="n">ABORT_IF</span><span class="p">(</span><span class="n">opt</span><span class="o">&lt;</span><span class="n">std</span><span class="o">::</span><span class="n">string</span><span class="o">&gt;</span><span class="p">(</span><span class="s">&quot;dec-cell&quot;</span><span class="p">)</span> <span class="o">!=</span> <span class="s">&quot;gru&quot;</span><span class="p">,</span>
+             <span class="s">&quot;--type amun does not support other rnn cells than gru, &quot;</span>
+             <span class="s">&quot;use --type s2s&quot;</span><span class="p">);</span>
+  <span class="p">}</span>
+
+  <span class="kt">void</span> <span class="n">load</span><span class="p">(</span><span class="n">Ptr</span><span class="o">&lt;</span><span class="n">ExpressionGraph</span><span class="o">&gt;</span> <span class="n">graph</span><span class="p">,</span>
+            <span class="k">const</span> <span class="n">std</span><span class="o">::</span><span class="n">string</span><span class="o">&amp;</span> <span class="n">name</span><span class="p">,</span>
+            <span class="kt">bool</span> <span class="cm">/*markedReloaded*/</span> <span class="o">=</span> <span class="nb">true</span><span class="p">)</span> <span class="k">override</span> <span class="p">{</span>
+    <span class="n">std</span><span class="o">::</span><span class="n">map</span><span class="o">&lt;</span><span class="n">std</span><span class="o">::</span><span class="n">string</span><span class="p">,</span> <span class="n">std</span><span class="o">::</span><span class="n">string</span><span class="o">&gt;</span> <span class="n">nameMap</span>
+        <span class="o">=</span> <span class="p">{{</span><span class="s">&quot;decoder_U&quot;</span><span class="p">,</span> <span class="s">&quot;decoder_cell1_U&quot;</span><span class="p">},</span>
+           <span class="p">{</span><span class="s">&quot;decoder_Ux&quot;</span><span class="p">,</span> <span class="s">&quot;decoder_cell1_Ux&quot;</span><span class="p">},</span>
+           <span class="p">{</span><span class="s">&quot;decoder_W&quot;</span><span class="p">,</span> <span class="s">&quot;decoder_cell1_W&quot;</span><span class="p">},</span>
+           <span class="p">{</span><span class="s">&quot;decoder_Wx&quot;</span><span class="p">,</span> <span class="s">&quot;decoder_cell1_Wx&quot;</span><span class="p">},</span>
+           <span class="p">{</span><span class="s">&quot;decoder_b&quot;</span><span class="p">,</span> <span class="s">&quot;decoder_cell1_b&quot;</span><span class="p">},</span>
+           <span class="p">{</span><span class="s">&quot;decoder_bx&quot;</span><span class="p">,</span> <span class="s">&quot;decoder_cell1_bx&quot;</span><span class="p">},</span>
+           <span class="p">{</span><span class="s">&quot;decoder_cell1_gamma1&quot;</span><span class="p">,</span> <span class="s">&quot;decoder_cell1_gamma1&quot;</span><span class="p">},</span>
+           <span class="p">{</span><span class="s">&quot;decoder_cell1_gamma2&quot;</span><span class="p">,</span> <span class="s">&quot;decoder_cell1_gamma2&quot;</span><span class="p">},</span>
+           <span class="p">{</span><span class="s">&quot;decoder_U_nl&quot;</span><span class="p">,</span> <span class="s">&quot;decoder_cell2_U&quot;</span><span class="p">},</span>
+           <span class="p">{</span><span class="s">&quot;decoder_Ux_nl&quot;</span><span class="p">,</span> <span class="s">&quot;decoder_cell2_Ux&quot;</span><span class="p">},</span>
+           <span class="p">{</span><span class="s">&quot;decoder_Wc&quot;</span><span class="p">,</span> <span class="s">&quot;decoder_cell2_W&quot;</span><span class="p">},</span>
+           <span class="p">{</span><span class="s">&quot;decoder_Wcx&quot;</span><span class="p">,</span> <span class="s">&quot;decoder_cell2_Wx&quot;</span><span class="p">},</span>
+           <span class="p">{</span><span class="s">&quot;decoder_b_nl&quot;</span><span class="p">,</span> <span class="s">&quot;decoder_cell2_b&quot;</span><span class="p">},</span>
+           <span class="p">{</span><span class="s">&quot;decoder_bx_nl&quot;</span><span class="p">,</span> <span class="s">&quot;decoder_cell2_bx&quot;</span><span class="p">},</span>
+           <span class="p">{</span><span class="s">&quot;ff_logit_prev_W&quot;</span><span class="p">,</span> <span class="s">&quot;decoder_ff_logit_l1_W0&quot;</span><span class="p">},</span>
+           <span class="p">{</span><span class="s">&quot;ff_logit_lstm_W&quot;</span><span class="p">,</span> <span class="s">&quot;decoder_ff_logit_l1_W1&quot;</span><span class="p">},</span>
+           <span class="p">{</span><span class="s">&quot;ff_logit_ctx_W&quot;</span><span class="p">,</span> <span class="s">&quot;decoder_ff_logit_l1_W2&quot;</span><span class="p">},</span>
+           <span class="p">{</span><span class="s">&quot;ff_logit_prev_b&quot;</span><span class="p">,</span> <span class="s">&quot;decoder_ff_logit_l1_b0&quot;</span><span class="p">},</span>
+           <span class="p">{</span><span class="s">&quot;ff_logit_lstm_b&quot;</span><span class="p">,</span> <span class="s">&quot;decoder_ff_logit_l1_b1&quot;</span><span class="p">},</span>
+           <span class="p">{</span><span class="s">&quot;ff_logit_ctx_b&quot;</span><span class="p">,</span> <span class="s">&quot;decoder_ff_logit_l1_b2&quot;</span><span class="p">},</span>
+           <span class="p">{</span><span class="s">&quot;ff_logit_l1_gamma0&quot;</span><span class="p">,</span> <span class="s">&quot;decoder_ff_logit_l1_gamma0&quot;</span><span class="p">},</span>
+           <span class="p">{</span><span class="s">&quot;ff_logit_l1_gamma1&quot;</span><span class="p">,</span> <span class="s">&quot;decoder_ff_logit_l1_gamma1&quot;</span><span class="p">},</span>
+           <span class="p">{</span><span class="s">&quot;ff_logit_l1_gamma2&quot;</span><span class="p">,</span> <span class="s">&quot;decoder_ff_logit_l1_gamma2&quot;</span><span class="p">},</span>
+           <span class="p">{</span><span class="s">&quot;ff_logit_W&quot;</span><span class="p">,</span> <span class="s">&quot;decoder_ff_logit_l2_W&quot;</span><span class="p">},</span>
+           <span class="p">{</span><span class="s">&quot;ff_logit_b&quot;</span><span class="p">,</span> <span class="s">&quot;decoder_ff_logit_l2_b&quot;</span><span class="p">},</span>
+           <span class="p">{</span><span class="s">&quot;ff_state_W&quot;</span><span class="p">,</span> <span class="s">&quot;decoder_ff_state_W&quot;</span><span class="p">},</span>
+           <span class="p">{</span><span class="s">&quot;ff_state_b&quot;</span><span class="p">,</span> <span class="s">&quot;decoder_ff_state_b&quot;</span><span class="p">},</span>
+           <span class="p">{</span><span class="s">&quot;ff_state_gamma&quot;</span><span class="p">,</span> <span class="s">&quot;decoder_ff_state_gamma&quot;</span><span class="p">},</span>
+           <span class="p">{</span><span class="s">&quot;Wemb_dec&quot;</span><span class="p">,</span> <span class="s">&quot;decoder_Wemb&quot;</span><span class="p">},</span>
+           <span class="p">{</span><span class="s">&quot;Wemb&quot;</span><span class="p">,</span> <span class="s">&quot;encoder_Wemb&quot;</span><span class="p">},</span>
+           <span class="p">{</span><span class="s">&quot;encoder_U&quot;</span><span class="p">,</span> <span class="s">&quot;encoder_bi_U&quot;</span><span class="p">},</span>
+           <span class="p">{</span><span class="s">&quot;encoder_Ux&quot;</span><span class="p">,</span> <span class="s">&quot;encoder_bi_Ux&quot;</span><span class="p">},</span>
+           <span class="p">{</span><span class="s">&quot;encoder_W&quot;</span><span class="p">,</span> <span class="s">&quot;encoder_bi_W&quot;</span><span class="p">},</span>
+           <span class="p">{</span><span class="s">&quot;encoder_Wx&quot;</span><span class="p">,</span> <span class="s">&quot;encoder_bi_Wx&quot;</span><span class="p">},</span>
+           <span class="p">{</span><span class="s">&quot;encoder_b&quot;</span><span class="p">,</span> <span class="s">&quot;encoder_bi_b&quot;</span><span class="p">},</span>
+           <span class="p">{</span><span class="s">&quot;encoder_bx&quot;</span><span class="p">,</span> <span class="s">&quot;encoder_bi_bx&quot;</span><span class="p">},</span>
+           <span class="p">{</span><span class="s">&quot;encoder_gamma1&quot;</span><span class="p">,</span> <span class="s">&quot;encoder_bi_gamma1&quot;</span><span class="p">},</span>
+           <span class="p">{</span><span class="s">&quot;encoder_gamma2&quot;</span><span class="p">,</span> <span class="s">&quot;encoder_bi_gamma2&quot;</span><span class="p">},</span>
+           <span class="p">{</span><span class="s">&quot;encoder_r_U&quot;</span><span class="p">,</span> <span class="s">&quot;encoder_bi_r_U&quot;</span><span class="p">},</span>
+           <span class="p">{</span><span class="s">&quot;encoder_r_Ux&quot;</span><span class="p">,</span> <span class="s">&quot;encoder_bi_r_Ux&quot;</span><span class="p">},</span>
+           <span class="p">{</span><span class="s">&quot;encoder_r_W&quot;</span><span class="p">,</span> <span class="s">&quot;encoder_bi_r_W&quot;</span><span class="p">},</span>
+           <span class="p">{</span><span class="s">&quot;encoder_r_Wx&quot;</span><span class="p">,</span> <span class="s">&quot;encoder_bi_r_Wx&quot;</span><span class="p">},</span>
+           <span class="p">{</span><span class="s">&quot;encoder_r_b&quot;</span><span class="p">,</span> <span class="s">&quot;encoder_bi_r_b&quot;</span><span class="p">},</span>
+           <span class="p">{</span><span class="s">&quot;encoder_r_bx&quot;</span><span class="p">,</span> <span class="s">&quot;encoder_bi_r_bx&quot;</span><span class="p">},</span>
+           <span class="p">{</span><span class="s">&quot;encoder_r_gamma1&quot;</span><span class="p">,</span> <span class="s">&quot;encoder_bi_r_gamma1&quot;</span><span class="p">},</span>
+           <span class="p">{</span><span class="s">&quot;encoder_r_gamma2&quot;</span><span class="p">,</span> <span class="s">&quot;encoder_bi_r_gamma2&quot;</span><span class="p">}};</span>
+
+    <span class="k">if</span><span class="p">(</span><span class="n">opt</span><span class="o">&lt;</span><span class="kt">bool</span><span class="o">&gt;</span><span class="p">(</span><span class="s">&quot;tied-embeddings-src&quot;</span><span class="p">)</span> <span class="o">||</span> <span class="n">opt</span><span class="o">&lt;</span><span class="kt">bool</span><span class="o">&gt;</span><span class="p">(</span><span class="s">&quot;tied-embeddings-all&quot;</span><span class="p">))</span>
+      <span class="n">nameMap</span><span class="p">[</span><span class="s">&quot;Wemb&quot;</span><span class="p">]</span> <span class="o">=</span> <span class="s">&quot;Wemb&quot;</span><span class="p">;</span>
+
+    <span class="n">LOG</span><span class="p">(</span><span class="n">info</span><span class="p">,</span> <span class="s">&quot;Loading model from {}&quot;</span><span class="p">,</span> <span class="n">name</span><span class="p">);</span>
+    <span class="c1">// load items from .npz file</span>
+    <span class="k">auto</span> <span class="n">ioItems</span> <span class="o">=</span> <span class="n">io</span><span class="o">::</span><span class="n">loadItems</span><span class="p">(</span><span class="n">name</span><span class="p">);</span>
+    <span class="c1">// map names and remove a dummy matrices</span>
+    <span class="k">for</span><span class="p">(</span><span class="k">auto</span> <span class="n">it</span> <span class="o">=</span> <span class="n">ioItems</span><span class="p">.</span><span class="n">begin</span><span class="p">();</span> <span class="n">it</span> <span class="o">!=</span> <span class="n">ioItems</span><span class="p">.</span><span class="n">end</span><span class="p">();)</span> <span class="p">{</span>
+      <span class="k">if</span><span class="p">(</span><span class="n">it</span><span class="o">-&gt;</span><span class="n">name</span> <span class="o">==</span> <span class="s">&quot;decoder_c_tt&quot;</span><span class="p">)</span> <span class="p">{</span>
+        <span class="n">it</span> <span class="o">=</span> <span class="n">ioItems</span><span class="p">.</span><span class="n">erase</span><span class="p">(</span><span class="n">it</span><span class="p">);</span>
+      <span class="p">}</span> <span class="k">else</span> <span class="k">if</span><span class="p">(</span><span class="n">it</span><span class="o">-&gt;</span><span class="n">name</span> <span class="o">==</span> <span class="s">&quot;uidx&quot;</span><span class="p">)</span> <span class="p">{</span>
+        <span class="n">it</span> <span class="o">=</span> <span class="n">ioItems</span><span class="p">.</span><span class="n">erase</span><span class="p">(</span><span class="n">it</span><span class="p">);</span>
+      <span class="p">}</span> <span class="k">else</span> <span class="k">if</span><span class="p">(</span><span class="n">it</span><span class="o">-&gt;</span><span class="n">name</span> <span class="o">==</span> <span class="s">&quot;history_errs&quot;</span><span class="p">)</span> <span class="p">{</span>
+        <span class="n">it</span> <span class="o">=</span> <span class="n">ioItems</span><span class="p">.</span><span class="n">erase</span><span class="p">(</span><span class="n">it</span><span class="p">);</span>
+      <span class="p">}</span> <span class="k">else</span> <span class="p">{</span>
+        <span class="k">auto</span> <span class="n">pair</span> <span class="o">=</span> <span class="n">nameMap</span><span class="p">.</span><span class="n">find</span><span class="p">(</span><span class="n">it</span><span class="o">-&gt;</span><span class="n">name</span><span class="p">);</span>
+        <span class="k">if</span><span class="p">(</span><span class="n">pair</span> <span class="o">!=</span> <span class="n">nameMap</span><span class="p">.</span><span class="n">end</span><span class="p">())</span>
+          <span class="n">it</span><span class="o">-&gt;</span><span class="n">name</span> <span class="o">=</span> <span class="n">pair</span><span class="o">-&gt;</span><span class="n">second</span><span class="p">;</span>
+        <span class="n">it</span><span class="o">++</span><span class="p">;</span>
+      <span class="p">}</span>
+    <span class="p">}</span>
+    <span class="c1">// load items into the graph</span>
+    <span class="n">graph</span><span class="o">-&gt;</span><span class="n">load</span><span class="p">(</span><span class="n">ioItems</span><span class="p">);</span>
+  <span class="p">}</span>
+
+  <span class="kt">void</span> <span class="n">save</span><span class="p">(</span><span class="n">Ptr</span><span class="o">&lt;</span><span class="n">ExpressionGraph</span><span class="o">&gt;</span> <span class="n">graph</span><span class="p">,</span>
+            <span class="k">const</span> <span class="n">std</span><span class="o">::</span><span class="n">string</span><span class="o">&amp;</span> <span class="n">name</span><span class="p">,</span>
+            <span class="kt">bool</span> <span class="n">saveTranslatorConfig</span> <span class="o">=</span> <span class="nb">false</span><span class="p">)</span> <span class="k">override</span> <span class="p">{</span>
+    <span class="n">LOG</span><span class="p">(</span><span class="n">info</span><span class="p">,</span> <span class="s">&quot;Saving model to {}&quot;</span><span class="p">,</span> <span class="n">name</span><span class="p">);</span>
+
+    <span class="n">std</span><span class="o">::</span><span class="n">map</span><span class="o">&lt;</span><span class="n">std</span><span class="o">::</span><span class="n">string</span><span class="p">,</span> <span class="n">std</span><span class="o">::</span><span class="n">string</span><span class="o">&gt;</span> <span class="n">nameMap</span>
+        <span class="o">=</span> <span class="p">{{</span><span class="s">&quot;decoder_cell1_U&quot;</span><span class="p">,</span> <span class="s">&quot;decoder_U&quot;</span><span class="p">},</span>
+           <span class="p">{</span><span class="s">&quot;decoder_cell1_Ux&quot;</span><span class="p">,</span> <span class="s">&quot;decoder_Ux&quot;</span><span class="p">},</span>
+           <span class="p">{</span><span class="s">&quot;decoder_cell1_W&quot;</span><span class="p">,</span> <span class="s">&quot;decoder_W&quot;</span><span class="p">},</span>
+           <span class="p">{</span><span class="s">&quot;decoder_cell1_Wx&quot;</span><span class="p">,</span> <span class="s">&quot;decoder_Wx&quot;</span><span class="p">},</span>
+           <span class="p">{</span><span class="s">&quot;decoder_cell1_b&quot;</span><span class="p">,</span> <span class="s">&quot;decoder_b&quot;</span><span class="p">},</span>
+           <span class="p">{</span><span class="s">&quot;decoder_cell1_bx&quot;</span><span class="p">,</span> <span class="s">&quot;decoder_bx&quot;</span><span class="p">},</span>
+           <span class="p">{</span><span class="s">&quot;decoder_cell2_U&quot;</span><span class="p">,</span> <span class="s">&quot;decoder_U_nl&quot;</span><span class="p">},</span>
+           <span class="p">{</span><span class="s">&quot;decoder_cell2_Ux&quot;</span><span class="p">,</span> <span class="s">&quot;decoder_Ux_nl&quot;</span><span class="p">},</span>
+           <span class="p">{</span><span class="s">&quot;decoder_cell2_W&quot;</span><span class="p">,</span> <span class="s">&quot;decoder_Wc&quot;</span><span class="p">},</span>
+           <span class="p">{</span><span class="s">&quot;decoder_cell2_Wx&quot;</span><span class="p">,</span> <span class="s">&quot;decoder_Wcx&quot;</span><span class="p">},</span>
+           <span class="p">{</span><span class="s">&quot;decoder_cell2_b&quot;</span><span class="p">,</span> <span class="s">&quot;decoder_b_nl&quot;</span><span class="p">},</span>
+           <span class="p">{</span><span class="s">&quot;decoder_cell2_bx&quot;</span><span class="p">,</span> <span class="s">&quot;decoder_bx_nl&quot;</span><span class="p">},</span>
+           <span class="p">{</span><span class="s">&quot;decoder_ff_logit_l1_W0&quot;</span><span class="p">,</span> <span class="s">&quot;ff_logit_prev_W&quot;</span><span class="p">},</span>
+           <span class="p">{</span><span class="s">&quot;decoder_ff_logit_l1_W1&quot;</span><span class="p">,</span> <span class="s">&quot;ff_logit_lstm_W&quot;</span><span class="p">},</span>
+           <span class="p">{</span><span class="s">&quot;decoder_ff_logit_l1_W2&quot;</span><span class="p">,</span> <span class="s">&quot;ff_logit_ctx_W&quot;</span><span class="p">},</span>
+           <span class="p">{</span><span class="s">&quot;decoder_ff_logit_l1_b0&quot;</span><span class="p">,</span> <span class="s">&quot;ff_logit_prev_b&quot;</span><span class="p">},</span>
+           <span class="p">{</span><span class="s">&quot;decoder_ff_logit_l1_b1&quot;</span><span class="p">,</span> <span class="s">&quot;ff_logit_lstm_b&quot;</span><span class="p">},</span>
+           <span class="p">{</span><span class="s">&quot;decoder_ff_logit_l1_b2&quot;</span><span class="p">,</span> <span class="s">&quot;ff_logit_ctx_b&quot;</span><span class="p">},</span>
+           <span class="p">{</span><span class="s">&quot;decoder_ff_logit_l1_gamma0&quot;</span><span class="p">,</span> <span class="s">&quot;ff_logit_l1_gamma0&quot;</span><span class="p">},</span>
+           <span class="p">{</span><span class="s">&quot;decoder_ff_logit_l1_gamma1&quot;</span><span class="p">,</span> <span class="s">&quot;ff_logit_l1_gamma1&quot;</span><span class="p">},</span>
+           <span class="p">{</span><span class="s">&quot;decoder_ff_logit_l1_gamma2&quot;</span><span class="p">,</span> <span class="s">&quot;ff_logit_l1_gamma2&quot;</span><span class="p">},</span>
+           <span class="p">{</span><span class="s">&quot;decoder_ff_logit_l2_W&quot;</span><span class="p">,</span> <span class="s">&quot;ff_logit_W&quot;</span><span class="p">},</span>
+           <span class="p">{</span><span class="s">&quot;decoder_ff_logit_l2_b&quot;</span><span class="p">,</span> <span class="s">&quot;ff_logit_b&quot;</span><span class="p">},</span>
+           <span class="p">{</span><span class="s">&quot;decoder_ff_state_W&quot;</span><span class="p">,</span> <span class="s">&quot;ff_state_W&quot;</span><span class="p">},</span>
+           <span class="p">{</span><span class="s">&quot;decoder_ff_state_b&quot;</span><span class="p">,</span> <span class="s">&quot;ff_state_b&quot;</span><span class="p">},</span>
+           <span class="p">{</span><span class="s">&quot;decoder_ff_state_gamma&quot;</span><span class="p">,</span> <span class="s">&quot;ff_state_gamma&quot;</span><span class="p">},</span>
+           <span class="p">{</span><span class="s">&quot;decoder_Wemb&quot;</span><span class="p">,</span> <span class="s">&quot;Wemb_dec&quot;</span><span class="p">},</span>
+           <span class="p">{</span><span class="s">&quot;encoder_Wemb&quot;</span><span class="p">,</span> <span class="s">&quot;Wemb&quot;</span><span class="p">},</span>
+           <span class="p">{</span><span class="s">&quot;encoder_bi_U&quot;</span><span class="p">,</span> <span class="s">&quot;encoder_U&quot;</span><span class="p">},</span>
+           <span class="p">{</span><span class="s">&quot;encoder_bi_Ux&quot;</span><span class="p">,</span> <span class="s">&quot;encoder_Ux&quot;</span><span class="p">},</span>
+           <span class="p">{</span><span class="s">&quot;encoder_bi_W&quot;</span><span class="p">,</span> <span class="s">&quot;encoder_W&quot;</span><span class="p">},</span>
+           <span class="p">{</span><span class="s">&quot;encoder_bi_Wx&quot;</span><span class="p">,</span> <span class="s">&quot;encoder_Wx&quot;</span><span class="p">},</span>
+           <span class="p">{</span><span class="s">&quot;encoder_bi_b&quot;</span><span class="p">,</span> <span class="s">&quot;encoder_b&quot;</span><span class="p">},</span>
+           <span class="p">{</span><span class="s">&quot;encoder_bi_bx&quot;</span><span class="p">,</span> <span class="s">&quot;encoder_bx&quot;</span><span class="p">},</span>
+           <span class="p">{</span><span class="s">&quot;encoder_bi_gamma1&quot;</span><span class="p">,</span> <span class="s">&quot;encoder_gamma1&quot;</span><span class="p">},</span>
+           <span class="p">{</span><span class="s">&quot;encoder_bi_gamma2&quot;</span><span class="p">,</span> <span class="s">&quot;encoder_gamma2&quot;</span><span class="p">},</span>
+           <span class="p">{</span><span class="s">&quot;encoder_bi_r_U&quot;</span><span class="p">,</span> <span class="s">&quot;encoder_r_U&quot;</span><span class="p">},</span>
+           <span class="p">{</span><span class="s">&quot;encoder_bi_r_Ux&quot;</span><span class="p">,</span> <span class="s">&quot;encoder_r_Ux&quot;</span><span class="p">},</span>
+           <span class="p">{</span><span class="s">&quot;encoder_bi_r_W&quot;</span><span class="p">,</span> <span class="s">&quot;encoder_r_W&quot;</span><span class="p">},</span>
+           <span class="p">{</span><span class="s">&quot;encoder_bi_r_Wx&quot;</span><span class="p">,</span> <span class="s">&quot;encoder_r_Wx&quot;</span><span class="p">},</span>
+           <span class="p">{</span><span class="s">&quot;encoder_bi_r_b&quot;</span><span class="p">,</span> <span class="s">&quot;encoder_r_b&quot;</span><span class="p">},</span>
+           <span class="p">{</span><span class="s">&quot;encoder_bi_r_bx&quot;</span><span class="p">,</span> <span class="s">&quot;encoder_r_bx&quot;</span><span class="p">},</span>
+           <span class="p">{</span><span class="s">&quot;encoder_bi_r_gamma1&quot;</span><span class="p">,</span> <span class="s">&quot;encoder_r_gamma1&quot;</span><span class="p">},</span>
+           <span class="p">{</span><span class="s">&quot;encoder_bi_r_gamma2&quot;</span><span class="p">,</span> <span class="s">&quot;encoder_r_gamma2&quot;</span><span class="p">}};</span>
+
+    <span class="c1">// get parameters from the graph to items</span>
+    <span class="n">std</span><span class="o">::</span><span class="n">vector</span><span class="o">&lt;</span><span class="n">io</span><span class="o">::</span><span class="n">Item</span><span class="o">&gt;</span> <span class="n">ioItems</span><span class="p">;</span>
+    <span class="n">graph</span><span class="o">-&gt;</span><span class="n">save</span><span class="p">(</span><span class="n">ioItems</span><span class="p">);</span>
+    <span class="c1">// replace names to be compatible with Nematus</span>
+    <span class="k">for</span><span class="p">(</span><span class="k">auto</span><span class="o">&amp;</span> <span class="nl">item</span> <span class="p">:</span> <span class="n">ioItems</span><span class="p">)</span> <span class="p">{</span>
+      <span class="k">auto</span> <span class="n">newItemName</span> <span class="o">=</span> <span class="n">nameMap</span><span class="p">.</span><span class="n">find</span><span class="p">(</span><span class="n">item</span><span class="p">.</span><span class="n">name</span><span class="p">);</span>
+      <span class="k">if</span><span class="p">(</span><span class="n">newItemName</span> <span class="o">!=</span> <span class="n">nameMap</span><span class="p">.</span><span class="n">end</span><span class="p">())</span>
+        <span class="n">item</span><span class="p">.</span><span class="n">name</span> <span class="o">=</span> <span class="n">newItemName</span><span class="o">-&gt;</span><span class="n">second</span><span class="p">;</span>
+    <span class="p">}</span>
+    <span class="c1">// add a dummy matrix &#39;decoder_c_tt&#39; required for Amun and Nematus</span>
+    <span class="n">ioItems</span><span class="p">.</span><span class="n">emplace_back</span><span class="p">();</span>
+    <span class="n">ioItems</span><span class="p">.</span><span class="n">back</span><span class="p">().</span><span class="n">name</span> <span class="o">=</span> <span class="s">&quot;decoder_c_tt&quot;</span><span class="p">;</span>
+    <span class="n">ioItems</span><span class="p">.</span><span class="n">back</span><span class="p">().</span><span class="n">shape</span> <span class="o">=</span> <span class="n">Shape</span><span class="p">({</span><span class="mi">1</span><span class="p">,</span> <span class="mi">0</span><span class="p">});</span>
+    <span class="n">ioItems</span><span class="p">.</span><span class="n">back</span><span class="p">().</span><span class="n">bytes</span><span class="p">.</span><span class="n">emplace_back</span><span class="p">((</span><span class="kt">char</span><span class="p">)</span><span class="mi">0</span><span class="p">);</span>
+
+    <span class="n">io</span><span class="o">::</span><span class="n">addMetaToItems</span><span class="p">(</span><span class="n">getModelParametersAsString</span><span class="p">(),</span> <span class="s">&quot;special:model.yml&quot;</span><span class="p">,</span> <span class="n">ioItems</span><span class="p">);</span>
+    <span class="n">io</span><span class="o">::</span><span class="n">saveItems</span><span class="p">(</span><span class="n">name</span><span class="p">,</span> <span class="n">ioItems</span><span class="p">);</span>
+
+    <span class="k">if</span><span class="p">(</span><span class="n">saveTranslatorConfig</span><span class="p">)</span> <span class="p">{</span>
+      <span class="n">createAmunConfig</span><span class="p">(</span><span class="n">name</span><span class="p">);</span>
+      <span class="n">createDecoderConfig</span><span class="p">(</span><span class="n">name</span><span class="p">);</span>
+    <span class="p">}</span>
+  <span class="p">}</span>
+
+<span class="k">private</span><span class="o">:</span>
+  <span class="kt">void</span> <span class="n">createAmunConfig</span><span class="p">(</span><span class="k">const</span> <span class="n">std</span><span class="o">::</span><span class="n">string</span><span class="o">&amp;</span> <span class="n">name</span><span class="p">)</span> <span class="p">{</span>
+    <span class="n">Config</span><span class="o">::</span><span class="n">YamlNode</span> <span class="n">amun</span><span class="p">;</span>
+    <span class="k">auto</span> <span class="n">vocabs</span> <span class="o">=</span> <span class="n">options_</span><span class="o">-&gt;</span><span class="n">get</span><span class="o">&lt;</span><span class="n">std</span><span class="o">::</span><span class="n">vector</span><span class="o">&lt;</span><span class="n">std</span><span class="o">::</span><span class="n">string</span><span class="o">&gt;&gt;</span><span class="p">(</span><span class="s">&quot;vocabs&quot;</span><span class="p">);</span>
+
+    <span class="k">if</span><span class="p">(</span><span class="n">options_</span><span class="o">-&gt;</span><span class="n">get</span><span class="o">&lt;</span><span class="kt">bool</span><span class="o">&gt;</span><span class="p">(</span><span class="s">&quot;relative-paths&quot;</span><span class="p">))</span> <span class="p">{</span>
+      <span class="n">amun</span><span class="p">[</span><span class="s">&quot;relative-paths&quot;</span><span class="p">]</span> <span class="o">=</span> <span class="nb">true</span><span class="p">;</span>
+      <span class="k">auto</span> <span class="n">dirPath</span> <span class="o">=</span> <span class="n">filesystem</span><span class="o">::</span><span class="n">Path</span><span class="p">{</span><span class="n">name</span><span class="p">}.</span><span class="n">parentPath</span><span class="p">();</span>
+      <span class="n">amun</span><span class="p">[</span><span class="s">&quot;source-vocab&quot;</span><span class="p">]</span> <span class="o">=</span> <span class="n">filesystem</span><span class="o">::</span><span class="n">relative</span><span class="p">(</span><span class="n">filesystem</span><span class="o">::</span><span class="n">Path</span><span class="p">{</span><span class="n">vocabs</span><span class="p">[</span><span class="mi">0</span><span class="p">]},</span> <span class="n">dirPath</span><span class="p">).</span><span class="n">string</span><span class="p">();</span>
+      <span class="n">amun</span><span class="p">[</span><span class="s">&quot;target-vocab&quot;</span><span class="p">]</span> <span class="o">=</span> <span class="n">filesystem</span><span class="o">::</span><span class="n">relative</span><span class="p">(</span><span class="n">filesystem</span><span class="o">::</span><span class="n">Path</span><span class="p">{</span><span class="n">vocabs</span><span class="p">[</span><span class="mi">1</span><span class="p">]},</span> <span class="n">dirPath</span><span class="p">).</span><span class="n">string</span><span class="p">();</span>
+      <span class="n">amun</span><span class="p">[</span><span class="s">&quot;scorers&quot;</span><span class="p">][</span><span class="s">&quot;F0&quot;</span><span class="p">][</span><span class="s">&quot;path&quot;</span><span class="p">]</span> <span class="o">=</span> <span class="n">filesystem</span><span class="o">::</span><span class="n">Path</span><span class="p">{</span><span class="n">name</span><span class="p">}.</span><span class="n">filename</span><span class="p">().</span><span class="n">string</span><span class="p">();</span>
+    <span class="p">}</span> <span class="k">else</span> <span class="p">{</span>
+      <span class="n">amun</span><span class="p">[</span><span class="s">&quot;relative-paths&quot;</span><span class="p">]</span> <span class="o">=</span> <span class="nb">false</span><span class="p">;</span>
+      <span class="n">amun</span><span class="p">[</span><span class="s">&quot;source-vocab&quot;</span><span class="p">]</span> <span class="o">=</span> <span class="n">vocabs</span><span class="p">[</span><span class="mi">0</span><span class="p">];</span>
+      <span class="n">amun</span><span class="p">[</span><span class="s">&quot;target-vocab&quot;</span><span class="p">]</span> <span class="o">=</span> <span class="n">vocabs</span><span class="p">[</span><span class="mi">1</span><span class="p">];</span>
+      <span class="n">amun</span><span class="p">[</span><span class="s">&quot;scorers&quot;</span><span class="p">][</span><span class="s">&quot;F0&quot;</span><span class="p">][</span><span class="s">&quot;path&quot;</span><span class="p">]</span> <span class="o">=</span> <span class="n">name</span><span class="p">;</span>
+    <span class="p">}</span>
+
+    <span class="n">amun</span><span class="p">[</span><span class="s">&quot;scorers&quot;</span><span class="p">][</span><span class="s">&quot;F0&quot;</span><span class="p">][</span><span class="s">&quot;type&quot;</span><span class="p">]</span> <span class="o">=</span> <span class="s">&quot;Nematus&quot;</span><span class="p">;</span>
+    <span class="n">amun</span><span class="p">[</span><span class="s">&quot;weights&quot;</span><span class="p">][</span><span class="s">&quot;F0&quot;</span><span class="p">]</span> <span class="o">=</span> <span class="mf">1.0f</span><span class="p">;</span>
+    <span class="n">amun</span><span class="p">[</span><span class="s">&quot;normalize&quot;</span><span class="p">]</span> <span class="o">=</span> <span class="n">opt</span><span class="o">&lt;</span><span class="kt">float</span><span class="o">&gt;</span><span class="p">(</span><span class="s">&quot;normalize&quot;</span><span class="p">)</span> <span class="o">&gt;</span> <span class="mi">0</span><span class="p">;</span>
+    <span class="n">amun</span><span class="p">[</span><span class="s">&quot;beam-size&quot;</span><span class="p">]</span> <span class="o">=</span> <span class="n">opt</span><span class="o">&lt;</span><span class="kt">size_t</span><span class="o">&gt;</span><span class="p">(</span><span class="s">&quot;beam-size&quot;</span><span class="p">);</span>
+
+    <span class="n">io</span><span class="o">::</span><span class="n">OutputFileStream</span> <span class="n">out</span><span class="p">(</span><span class="n">name</span> <span class="o">+</span> <span class="s">&quot;.amun.yml&quot;</span><span class="p">);</span>
+    <span class="n">out</span> <span class="o">&lt;&lt;</span> <span class="n">amun</span><span class="p">;</span>
+  <span class="p">}</span>
+<span class="p">};</span>
+<span class="p">}</span>  <span class="c1">// namespace marian</span>
+</pre></div>
+</div>
+</div>
+
+
+           </div>
+           
+          </div>
+          <footer>
+
+  <hr/>
+
+  <div role="contentinfo">
+    <p>
+        &#169; Copyright 2021, Marian NMT Team.
+
+    </p>
+  </div>
+    
+    
+    
+    Built with <a href="https://www.sphinx-doc.org/">Sphinx</a> using a
+    
+    <a href="https://github.com/readthedocs/sphinx_rtd_theme">theme</a>
+    
+    provided by <a href="https://readthedocs.org">Read the Docs</a>. 
+
+</footer>
+        </div>
+      </div>
+
+    </section>
+
+  </div>
+  
+
+  <script type="text/javascript">
+      jQuery(function () {
+          SphinxRtdTheme.Navigation.enable(true);
+      });
+  </script>
+
+  
+  
+    
+   
+
+</body>
+</html>

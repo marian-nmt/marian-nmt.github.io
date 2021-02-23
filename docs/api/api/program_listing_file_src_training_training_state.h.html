@@ -1,0 +1,544 @@
+
+
+<!DOCTYPE html>
+<html class="writer-html5" lang="en" >
+<head>
+  <meta charset="utf-8" />
+  
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  
+  <title>Program Listing for File training_state.h &mdash; Marian NMT v1.10.1 2021-02-23 documentation</title>
+  
+
+  
+  <link rel="stylesheet" href="../_static/css/theme.css" type="text/css" />
+  <link rel="stylesheet" href="../_static/pygments.css" type="text/css" />
+  <link rel="stylesheet" href="../_static/css/custom.css" type="text/css" />
+  <link rel="stylesheet" href="../_static/collapsible-lists/css/tree_view.css" type="text/css" />
+
+  
+  
+
+  
+  
+
+  
+    <link rel="canonical" href="http://marian-nmt.github.io/docs/api/api/program_listing_file_src_training_training_state.h.html" />
+
+  
+  <!--[if lt IE 9]>
+    <script src="../_static/js/html5shiv.min.js"></script>
+  <![endif]-->
+  
+    
+      <script type="text/javascript" id="documentation_options" data-url_root="../" src="../_static/documentation_options.js"></script>
+        <script src="../_static/jquery.js"></script>
+        <script src="../_static/underscore.js"></script>
+        <script src="../_static/doctools.js"></script>
+        <script src="../_static/language_data.js"></script>
+        <script src="../_static/collapsible-lists/js/CollapsibleLists.compressed.js"></script>
+        <script src="../_static/collapsible-lists/js/apply-collapsible-lists.js"></script>
+    
+    <script type="text/javascript" src="../_static/js/theme.js"></script>
+
+    
+    <link rel="index" title="Index" href="../genindex.html" />
+    <link rel="search" title="Search" href="../search.html" /> 
+</head>
+
+<body class="wy-body-for-nav">
+
+   
+  <div class="wy-grid-for-nav">
+    
+    <nav data-toggle="wy-nav-shift" class="wy-nav-side">
+      <div class="wy-side-scroll">
+        <div class="wy-side-nav-search" >
+          
+
+          
+            <a href="../index.html" class="icon icon-home"> Marian NMT
+          
+
+          
+          </a>
+
+          
+            
+            
+              <div class="version">
+                v1.10.1
+              </div>
+            
+          
+
+          
+<div role="search">
+  <form id="rtd-search-form" class="wy-form" action="../search.html" method="get">
+    <input type="text" name="q" placeholder="Search docs" />
+    <input type="hidden" name="check_keywords" value="yes" />
+    <input type="hidden" name="area" value="default" />
+  </form>
+</div>
+
+          
+        </div>
+
+        
+        <div class="wy-menu wy-menu-vertical" data-spy="affix" role="navigation" aria-label="main navigation">
+          
+            
+            
+              
+            
+            
+              <p class="caption"><span class="caption-text">Contents:</span></p>
+<ul>
+<li class="toctree-l1"><a class="reference internal" href="../install.html">Installation</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../graph.html">Expression graphs</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../operators.html">Graph operations</a></li>
+<li class="toctree-l1"><a class="reference internal" href="library_index.html">Library API</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../contributing.html">How to contribute to Marian</a></li>
+</ul>
+
+            
+          
+        </div>
+        
+      </div>
+    </nav>
+
+    <section data-toggle="wy-nav-shift" class="wy-nav-content-wrap">
+
+      
+      <nav class="wy-nav-top" aria-label="top navigation">
+        
+          <i data-toggle="wy-nav-top" class="fa fa-bars"></i>
+          <a href="../index.html">Marian NMT</a>
+        
+      </nav>
+
+
+      <div class="wy-nav-content">
+        
+        <div class="rst-content">
+        
+          
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+<div role="navigation" aria-label="breadcrumbs navigation">
+
+  <ul class="wy-breadcrumbs">
+    
+      <li><a href="../index.html" class="icon icon-home"></a> &raquo;</li>
+        
+      <li>Program Listing for File training_state.h</li>
+    
+    
+      <li class="wy-breadcrumbs-aside">
+        
+          
+            <a href="../_sources/api/program_listing_file_src_training_training_state.h.rst.txt" rel="nofollow"> View page source</a>
+          
+        
+      </li>
+    
+  </ul>
+
+  
+  <hr/>
+</div>
+          <div role="main" class="document" itemscope="itemscope" itemtype="http://schema.org/Article">
+           <div itemprop="articleBody">
+            
+  <div class="section" id="program-listing-for-file-training-state-h">
+<span id="program-listing-file-src-training-training-state-h"></span><h1>Program Listing for File training_state.h<a class="headerlink" href="#program-listing-for-file-training-state-h" title="Permalink to this headline">¶</a></h1>
+<p>↰ <a class="reference internal" href="file_src_training_training_state.h.html#file-src-training-training-state-h"><span class="std std-ref">Return to documentation for file</span></a> (<code class="docutils literal notranslate"><span class="pre">src/training/training_state.h</span></code>)</p>
+<div class="highlight-cpp notranslate"><div class="highlight"><pre><span></span><span class="cp">#pragma once</span>
+
+<span class="cp">#include</span> <span class="cpf">&quot;common/definitions.h&quot;</span><span class="cp"></span>
+<span class="cp">#include</span> <span class="cpf">&quot;common/filesystem.h&quot;</span><span class="cp"></span>
+<span class="cp">#include</span> <span class="cpf">&quot;common/utils.h&quot;</span><span class="cp"></span>
+
+<span class="cp">#include</span> <span class="cpf">&lt;fstream&gt;</span><span class="cp"></span>
+<span class="cp">#include</span> <span class="cpf">&lt;vector&gt;</span><span class="cp"></span>
+
+<span class="k">namespace</span> <span class="n">marian</span> <span class="p">{</span>
+
+<span class="k">class</span> <span class="nc">TrainingState</span><span class="p">;</span>
+
+<span class="k">class</span> <span class="nc">TrainingObserver</span> <span class="p">{</span>
+<span class="k">public</span><span class="o">:</span>
+  <span class="k">virtual</span> <span class="o">~</span><span class="n">TrainingObserver</span><span class="p">()</span> <span class="p">{}</span>
+
+  <span class="k">virtual</span> <span class="kt">void</span> <span class="n">init</span><span class="p">(</span><span class="n">TrainingState</span><span class="o">&amp;</span><span class="p">)</span> <span class="p">{}</span>
+  <span class="k">virtual</span> <span class="kt">void</span> <span class="n">actAfterEpoch</span><span class="p">(</span><span class="n">TrainingState</span><span class="o">&amp;</span><span class="p">)</span> <span class="p">{}</span>
+  <span class="k">virtual</span> <span class="kt">void</span> <span class="n">actAfterBatches</span><span class="p">(</span><span class="n">TrainingState</span><span class="o">&amp;</span><span class="p">)</span> <span class="p">{}</span>
+  <span class="k">virtual</span> <span class="kt">void</span> <span class="n">actAfterStalled</span><span class="p">(</span><span class="n">TrainingState</span><span class="o">&amp;</span><span class="p">)</span> <span class="p">{}</span>
+  <span class="k">virtual</span> <span class="kt">void</span> <span class="n">actAfterLoaded</span><span class="p">(</span><span class="n">TrainingState</span><span class="o">&amp;</span><span class="p">)</span> <span class="p">{}</span>
+<span class="p">};</span>
+
+<span class="c1">// support for scheduling parameters that can be expressed with a unit, such as --lr-decay-inv-sqrt</span>
+<span class="k">enum</span> <span class="k">class</span> <span class="nc">SchedulingUnit</span> <span class="p">{</span>
+  <span class="n">trgLabels</span><span class="p">,</span> <span class="c1">// &quot;t&quot;: number of target labels seen so far</span>
+  <span class="n">updates</span><span class="p">,</span>   <span class="c1">// &quot;u&quot;: number of updates so far (batches)</span>
+  <span class="n">epochs</span>     <span class="c1">// &quot;e&quot;: number of epochs begun so far (very first epoch is 1)</span>
+<span class="p">};</span>
+
+<span class="k">struct</span> <span class="nc">SchedulingParameter</span> <span class="p">{</span>
+  <span class="kt">size_t</span> <span class="n">n</span><span class="p">{</span><span class="mi">0</span><span class="p">};</span>                                  <span class="c1">// number of steps measured in &#39;unit&#39;</span>
+  <span class="n">SchedulingUnit</span> <span class="n">unit</span><span class="p">{</span><span class="n">SchedulingUnit</span><span class="o">::</span><span class="n">updates</span><span class="p">};</span> <span class="c1">// unit of value</span>
+
+  <span class="c1">// parses scheduling parameters of the form NU where N=unsigned int and U=unit</span>
+  <span class="c1">// Examples of valid inputs: &quot;16000u&quot; (16000 updates), &quot;32000000t&quot; (32 million target labels),</span>
+  <span class="c1">// &quot;100e&quot; (100 epochs).</span>
+  <span class="k">static</span> <span class="n">SchedulingParameter</span> <span class="n">parse</span><span class="p">(</span><span class="n">std</span><span class="o">::</span><span class="n">string</span> <span class="n">param</span><span class="p">)</span> <span class="p">{</span>
+    <span class="n">SchedulingParameter</span> <span class="n">res</span><span class="p">;</span>
+    <span class="k">if</span><span class="p">(</span><span class="o">!</span><span class="n">param</span><span class="p">.</span><span class="n">empty</span><span class="p">()</span> <span class="o">&amp;&amp;</span> <span class="n">param</span><span class="p">.</span><span class="n">back</span><span class="p">()</span> <span class="o">&gt;=</span> <span class="sc">&#39;a&#39;</span><span class="p">)</span> <span class="p">{</span>
+      <span class="k">switch</span><span class="p">(</span><span class="n">param</span><span class="p">.</span><span class="n">back</span><span class="p">())</span> <span class="p">{</span>
+        <span class="k">case</span> <span class="sc">&#39;t&#39;</span><span class="o">:</span> <span class="n">res</span><span class="p">.</span><span class="n">unit</span> <span class="o">=</span> <span class="n">SchedulingUnit</span><span class="o">::</span><span class="n">trgLabels</span><span class="p">;</span> <span class="k">break</span><span class="p">;</span>
+        <span class="k">case</span> <span class="sc">&#39;u&#39;</span><span class="o">:</span> <span class="n">res</span><span class="p">.</span><span class="n">unit</span> <span class="o">=</span> <span class="n">SchedulingUnit</span><span class="o">::</span><span class="n">updates</span><span class="p">;</span>   <span class="k">break</span><span class="p">;</span>
+        <span class="k">case</span> <span class="sc">&#39;e&#39;</span><span class="o">:</span> <span class="n">res</span><span class="p">.</span><span class="n">unit</span> <span class="o">=</span> <span class="n">SchedulingUnit</span><span class="o">::</span><span class="n">epochs</span><span class="p">;</span>    <span class="k">break</span><span class="p">;</span>
+        <span class="k">default</span><span class="o">:</span> <span class="n">ABORT</span><span class="p">(</span><span class="s">&quot;invalid unit &#39;{}&#39; in {}&quot;</span><span class="p">,</span> <span class="n">param</span><span class="p">.</span><span class="n">back</span><span class="p">(),</span> <span class="n">param</span><span class="p">);</span>
+      <span class="p">}</span>
+      <span class="n">param</span><span class="p">.</span><span class="n">pop_back</span><span class="p">();</span>
+    <span class="p">}</span>
+    <span class="kt">double</span> <span class="n">number</span> <span class="o">=</span> <span class="n">utils</span><span class="o">::</span><span class="n">parseNumber</span><span class="p">(</span><span class="n">param</span><span class="p">);</span>
+    <span class="n">res</span><span class="p">.</span><span class="n">n</span> <span class="o">=</span> <span class="p">(</span><span class="kt">size_t</span><span class="p">)</span><span class="n">number</span><span class="p">;</span>
+    <span class="n">ABORT_IF</span><span class="p">(</span><span class="n">number</span> <span class="o">!=</span> <span class="p">(</span><span class="kt">double</span><span class="p">)</span><span class="n">res</span><span class="p">.</span><span class="n">n</span><span class="p">,</span> <span class="s">&quot;Scheduling parameters must be whole numbers&quot;</span><span class="p">);</span>
+    <span class="k">return</span> <span class="n">res</span><span class="p">;</span>
+  <span class="p">}</span>
+
+  <span class="k">operator</span> <span class="kt">bool</span><span class="p">()</span> <span class="k">const</span> <span class="p">{</span> <span class="k">return</span> <span class="n">n</span> <span class="o">&gt;</span> <span class="mi">0</span><span class="p">;</span> <span class="p">}</span> <span class="c1">// check whether it is specified</span>
+
+  <span class="k">operator</span> <span class="n">std</span><span class="o">::</span><span class="n">string</span><span class="p">()</span> <span class="k">const</span> <span class="p">{</span> <span class="c1">// convert back for storing in config</span>
+    <span class="k">switch</span><span class="p">(</span><span class="n">unit</span><span class="p">)</span> <span class="p">{</span>
+      <span class="k">case</span> <span class="n">SchedulingUnit</span><span class="o">::</span><span class="nl">trgLabels</span><span class="p">:</span> <span class="k">return</span> <span class="n">std</span><span class="o">::</span><span class="n">to_string</span><span class="p">(</span><span class="n">n</span><span class="p">)</span> <span class="o">+</span> <span class="s">&quot;t&quot;</span><span class="p">;</span>
+      <span class="k">case</span> <span class="n">SchedulingUnit</span><span class="o">::</span><span class="nl">updates</span>  <span class="p">:</span> <span class="k">return</span> <span class="n">std</span><span class="o">::</span><span class="n">to_string</span><span class="p">(</span><span class="n">n</span><span class="p">)</span> <span class="o">+</span> <span class="s">&quot;u&quot;</span><span class="p">;</span>
+      <span class="k">case</span> <span class="n">SchedulingUnit</span><span class="o">::</span><span class="nl">epochs</span>   <span class="p">:</span> <span class="k">return</span> <span class="n">std</span><span class="o">::</span><span class="n">to_string</span><span class="p">(</span><span class="n">n</span><span class="p">)</span> <span class="o">+</span> <span class="s">&quot;e&quot;</span><span class="p">;</span>
+      <span class="k">default</span><span class="o">:</span> <span class="n">ABORT</span><span class="p">(</span><span class="s">&quot;corrupt enum value for scheduling unit&quot;</span><span class="p">);</span>
+    <span class="p">}</span>
+  <span class="p">}</span>
+<span class="p">};</span>
+
+<span class="k">class</span> <span class="nc">TrainingState</span> <span class="p">{</span>
+<span class="k">public</span><span class="o">:</span>
+  <span class="c1">// Current epoch</span>
+  <span class="kt">size_t</span> <span class="n">epochs</span><span class="p">{</span><span class="mi">1</span><span class="p">};</span>
+  <span class="c1">// The total number of updates since beginning of training   --@TODO: rename to &#39;updates&#39;</span>
+  <span class="kt">size_t</span> <span class="n">batches</span><span class="p">{</span><span class="mi">0</span><span class="p">};</span>
+  <span class="c1">// The number of batches seen in this epoch  --note: not updates; an update can consist of multiple batches</span>
+  <span class="kt">size_t</span> <span class="n">batchesEpoch</span><span class="p">{</span><span class="mi">0</span><span class="p">};</span>
+  <span class="c1">// The number of sentences seen in this epoch  --@TODO: rename to &#39;sentencesEpoch&#39;</span>
+  <span class="kt">size_t</span> <span class="n">samplesEpoch</span><span class="p">{</span><span class="mi">0</span><span class="p">};</span>
+  <span class="c1">// Number of word labels processed since beginning of training</span>
+  <span class="kt">size_t</span> <span class="n">labelsTotal</span><span class="p">{</span><span class="mi">0</span><span class="p">};</span>
+
+  <span class="c1">// Values before previous update() call</span>
+  <span class="kt">size_t</span> <span class="n">prevLabelsTotal</span><span class="p">{</span><span class="mi">0</span><span class="p">},</span> <span class="n">prevBatches</span><span class="p">{</span><span class="mi">0</span><span class="p">},</span> <span class="n">prevEpochs</span><span class="p">{</span><span class="mi">0</span><span class="p">};</span>
+
+  <span class="c1">// The number of stalled validations</span>
+  <span class="kt">size_t</span> <span class="n">stalled</span><span class="p">{</span><span class="mi">0</span><span class="p">};</span>
+  <span class="c1">// The largest number of stalled validations so far</span>
+  <span class="kt">size_t</span> <span class="n">maxStalled</span><span class="p">{</span><span class="mi">0</span><span class="p">};</span>
+  <span class="c1">// Last best validation score</span>
+  <span class="kt">float</span> <span class="n">validBest</span><span class="p">{</span><span class="mf">0.f</span><span class="p">};</span>
+  <span class="n">std</span><span class="o">::</span><span class="n">string</span> <span class="n">validator</span><span class="p">;</span>
+  <span class="c1">// List of validators</span>
+  <span class="n">YAML</span><span class="o">::</span><span class="n">Node</span> <span class="n">validators</span><span class="p">;</span>
+  <span class="c1">// Reset optimizer parameters</span>
+  <span class="kt">bool</span> <span class="n">reset</span><span class="p">{</span><span class="nb">false</span><span class="p">};</span>
+
+  <span class="c1">// Current learning rate, representing all adjustment processes and factors</span>
+  <span class="kt">float</span> <span class="n">eta</span><span class="p">;</span>
+  <span class="kt">void</span> <span class="nf">updateEta</span><span class="p">(</span><span class="kt">float</span> <span class="n">dynamicBaseLR</span><span class="p">)</span> <span class="p">{</span> <span class="c1">// note: no other function may write to &#39;eta&#39; (besides load())</span>
+    <span class="n">eta</span> <span class="o">=</span> <span class="n">dynamicBaseLR</span> <span class="o">*</span> <span class="n">factor</span><span class="p">;</span>
+  <span class="p">}</span>
+  <span class="c1">// State-based multiplication factor for learning rate</span>
+  <span class="kt">float</span> <span class="n">factor</span><span class="p">{</span><span class="mf">1.f</span><span class="p">};</span>
+  <span class="n">SchedulingParameter</span> <span class="n">warmupStart</span><span class="p">;</span> <span class="c1">// has same unit as lr-warmup</span>
+
+  <span class="c1">// Sum of costs since last display</span>
+  <span class="kt">float</span> <span class="n">costSum</span><span class="p">{</span><span class="mi">0</span><span class="p">};</span>
+  <span class="c1">// Number of labels aggregated in</span>
+  <span class="c1">// costSum since last display</span>
+  <span class="kt">size_t</span> <span class="n">costCount</span><span class="p">{</span><span class="mi">0</span><span class="p">};</span>
+
+  <span class="c1">// Number of words seen since last display</span>
+  <span class="kt">size_t</span> <span class="n">wordsDisp</span><span class="p">{</span><span class="mi">0</span><span class="p">};</span>
+  <span class="c1">// Number of samples/sentences seen since last display</span>
+  <span class="kt">size_t</span> <span class="n">samplesDisp</span><span class="p">{</span><span class="mi">0</span><span class="p">};</span>
+  <span class="c1">// Number of updates seen since last display</span>
+  <span class="kt">size_t</span> <span class="n">updatesDisp</span><span class="p">{</span><span class="mi">0</span><span class="p">};</span>
+
+  <span class="c1">// The state of the random number generator from a batch generator</span>
+  <span class="n">std</span><span class="o">::</span><span class="n">string</span> <span class="n">seedBatch</span><span class="p">;</span>
+  <span class="c1">// The state of the random number generator from a corpus</span>
+  <span class="n">std</span><span class="o">::</span><span class="n">string</span> <span class="n">seedCorpus</span><span class="p">;</span>
+
+  <span class="c1">// Set flag if training was resumed</span>
+  <span class="kt">bool</span> <span class="n">loaded</span><span class="p">{</span><span class="nb">false</span><span class="p">};</span>
+
+  <span class="c1">// Set flag if the model was validated in the current batch</span>
+  <span class="kt">bool</span> <span class="n">validated</span><span class="p">{</span><span class="nb">false</span><span class="p">};</span>
+
+  <span class="n">TrainingState</span><span class="p">(</span><span class="kt">float</span> <span class="n">learnRate</span><span class="p">)</span> <span class="p">{</span>
+    <span class="n">updateEta</span><span class="p">(</span><span class="n">learnRate</span><span class="p">);</span>
+  <span class="p">}</span>
+
+  <span class="kt">void</span> <span class="n">registerObserver</span><span class="p">(</span><span class="n">Ptr</span><span class="o">&lt;</span><span class="n">TrainingObserver</span><span class="o">&gt;</span> <span class="n">observer</span><span class="p">)</span> <span class="p">{</span>
+    <span class="n">observer</span><span class="o">-&gt;</span><span class="n">init</span><span class="p">(</span><span class="o">*</span><span class="k">this</span><span class="p">);</span>
+    <span class="n">wObservers_</span><span class="p">.</span><span class="n">push_back</span><span class="p">(</span><span class="n">observer</span><span class="p">);</span>
+  <span class="p">}</span>
+
+  <span class="c1">// return the totals count that corresponds to the given unit (batches, labels, or epochs)</span>
+  <span class="kt">size_t</span> <span class="n">getProgressIn</span><span class="p">(</span><span class="n">SchedulingUnit</span> <span class="n">u</span><span class="p">)</span> <span class="k">const</span> <span class="p">{</span>
+    <span class="k">switch</span><span class="p">(</span><span class="n">u</span><span class="p">)</span> <span class="p">{</span>
+      <span class="k">case</span> <span class="n">SchedulingUnit</span><span class="o">::</span><span class="nl">trgLabels</span><span class="p">:</span> <span class="k">return</span> <span class="n">labelsTotal</span><span class="p">;</span>
+      <span class="k">case</span> <span class="n">SchedulingUnit</span><span class="o">::</span><span class="nl">updates</span>  <span class="p">:</span> <span class="k">return</span> <span class="n">batches</span><span class="p">;</span>
+      <span class="k">case</span> <span class="n">SchedulingUnit</span><span class="o">::</span><span class="nl">epochs</span>   <span class="p">:</span> <span class="k">return</span> <span class="n">epochs</span><span class="p">;</span>
+      <span class="k">default</span><span class="o">:</span> <span class="n">ABORT</span><span class="p">(</span><span class="s">&quot;corrupt enum value&quot;</span><span class="p">);</span>
+    <span class="p">}</span>
+  <span class="p">}</span>
+
+  <span class="c1">// update() first calls this</span>
+  <span class="c1">// This is to make sure that enteredNewPeriodOf() can detect a transition intoa new period</span>
+  <span class="kt">void</span> <span class="n">rememberPreviousProgress</span><span class="p">()</span> <span class="p">{</span>
+    <span class="n">prevLabelsTotal</span> <span class="o">=</span> <span class="n">labelsTotal</span><span class="p">;</span>
+    <span class="n">prevBatches</span>     <span class="o">=</span> <span class="n">batches</span><span class="p">;</span>
+    <span class="n">prevEpochs</span>      <span class="o">=</span> <span class="n">epochs</span><span class="p">;</span>
+  <span class="p">}</span>
+
+  <span class="kt">size_t</span> <span class="n">getPreviousProgressIn</span><span class="p">(</span><span class="n">SchedulingUnit</span> <span class="n">u</span><span class="p">)</span> <span class="k">const</span> <span class="p">{</span>
+    <span class="k">switch</span><span class="p">(</span><span class="n">u</span><span class="p">)</span> <span class="p">{</span>
+      <span class="k">case</span> <span class="n">SchedulingUnit</span><span class="o">::</span><span class="nl">trgLabels</span><span class="p">:</span> <span class="k">return</span> <span class="n">prevLabelsTotal</span><span class="p">;</span>
+      <span class="k">case</span> <span class="n">SchedulingUnit</span><span class="o">::</span><span class="nl">updates</span>  <span class="p">:</span> <span class="k">return</span> <span class="n">prevBatches</span><span class="p">;</span>
+      <span class="k">case</span> <span class="n">SchedulingUnit</span><span class="o">::</span><span class="nl">epochs</span>   <span class="p">:</span> <span class="k">return</span> <span class="n">prevEpochs</span><span class="p">;</span>
+      <span class="k">default</span><span class="o">:</span> <span class="n">ABORT</span><span class="p">(</span><span class="s">&quot;corrupt enum value&quot;</span><span class="p">);</span>
+    <span class="p">}</span>
+  <span class="p">}</span>
+
+  <span class="c1">// Tests whether we entered a new period, e.g. disp-freq, according to the</span>
+  <span class="c1">// unit in which that parameter is given. There are a few edge cases:</span>
+  <span class="c1">//  - this function will be called many times within the same epoch</span>
+  <span class="c1">//  - labelsTotal does not increment by 1, so simple modulus does not work</span>
+  <span class="c1">//</span>
+  <span class="c1">// So instead of modulus==0, this function compares the previous progress/period</span>
+  <span class="c1">// to the current, and triggers if they differ (i.e. the border between two</span>
+  <span class="c1">// periods was crossed). This requires that rememberPreviousProgress() is called</span>
+  <span class="c1">// between calls to this. We call it from update(). Unfortunately, newEpoch()</span>
+  <span class="c1">// is called at the wrong place for this to work, so SchedulingUnit::epoch is forbidden</span>
+  <span class="c1">// for periods.</span>
+  <span class="kt">bool</span> <span class="n">enteredNewPeriodOf</span><span class="p">(</span><span class="n">std</span><span class="o">::</span><span class="n">string</span> <span class="n">schedulingParam</span><span class="p">)</span> <span class="k">const</span> <span class="p">{</span>
+    <span class="k">auto</span> <span class="n">period</span> <span class="o">=</span> <span class="n">SchedulingParameter</span><span class="o">::</span><span class="n">parse</span><span class="p">(</span><span class="n">schedulingParam</span><span class="p">);</span>
+    <span class="n">ABORT_IF</span><span class="p">(</span><span class="n">period</span><span class="p">.</span><span class="n">unit</span> <span class="o">==</span> <span class="n">SchedulingUnit</span><span class="o">::</span><span class="n">epochs</span><span class="p">,</span>
+             <span class="s">&quot;Unit {} is not supported for frequency parameters (the one(s) with value {})&quot;</span><span class="p">,</span>
+             <span class="n">schedulingParam</span><span class="p">);</span>
+    <span class="k">auto</span> <span class="n">previousProgress</span> <span class="o">=</span> <span class="n">getPreviousProgressIn</span><span class="p">(</span><span class="n">period</span><span class="p">.</span><span class="n">unit</span><span class="p">);</span>
+    <span class="k">auto</span> <span class="n">progress</span> <span class="o">=</span> <span class="n">getProgressIn</span><span class="p">(</span><span class="n">period</span><span class="p">.</span><span class="n">unit</span><span class="p">);</span>
+    <span class="k">return</span> <span class="n">period</span> <span class="o">&amp;&amp;</span> <span class="n">progress</span> <span class="o">/</span> <span class="n">period</span><span class="p">.</span><span class="n">n</span> <span class="o">!=</span> <span class="n">previousProgress</span> <span class="o">/</span> <span class="n">period</span><span class="p">.</span><span class="n">n</span><span class="p">;</span>
+  <span class="p">}</span>
+
+  <span class="kt">void</span> <span class="n">newEpoch</span><span class="p">()</span> <span class="p">{</span>
+    <span class="o">++</span><span class="n">epochs</span><span class="p">;</span>
+    <span class="k">for</span><span class="p">(</span><span class="k">auto</span> <span class="nl">wObserver</span> <span class="p">:</span> <span class="n">wObservers_</span><span class="p">)</span> <span class="p">{</span>
+      <span class="k">auto</span> <span class="n">observer</span> <span class="o">=</span> <span class="n">wObserver</span><span class="p">.</span><span class="n">lock</span><span class="p">();</span>
+      <span class="n">ABORT_IF</span><span class="p">(</span><span class="o">!</span><span class="n">observer</span><span class="p">,</span> <span class="s">&quot;Training observer object expired. Make sure all registered observers exist during scheduler life time&quot;</span><span class="p">);</span>
+      <span class="n">observer</span><span class="o">-&gt;</span><span class="n">actAfterEpoch</span><span class="p">(</span><span class="o">*</span><span class="k">this</span><span class="p">);</span>
+    <span class="p">}</span>
+    <span class="n">samplesEpoch</span> <span class="o">=</span> <span class="mi">0</span><span class="p">;</span>
+    <span class="n">batchesEpoch</span> <span class="o">=</span> <span class="mi">0</span><span class="p">;</span>
+  <span class="p">}</span>
+
+  <span class="kt">void</span> <span class="n">newUpdate</span><span class="p">(</span><span class="kt">size_t</span> <span class="n">batchesInUpdate</span><span class="p">)</span> <span class="p">{</span>
+    <span class="o">++</span><span class="n">batches</span><span class="p">;</span>
+    <span class="n">batchesEpoch</span> <span class="o">+=</span> <span class="n">batchesInUpdate</span><span class="p">;</span>
+    <span class="n">loaded</span> <span class="o">=</span> <span class="nb">false</span><span class="p">;</span>
+    <span class="n">validated</span> <span class="o">=</span> <span class="nb">false</span><span class="p">;</span>
+    <span class="k">for</span><span class="p">(</span><span class="k">auto</span> <span class="nl">wObserver</span> <span class="p">:</span> <span class="n">wObservers_</span><span class="p">)</span> <span class="p">{</span>
+      <span class="k">auto</span> <span class="n">observer</span> <span class="o">=</span> <span class="n">wObserver</span><span class="p">.</span><span class="n">lock</span><span class="p">();</span>
+      <span class="n">ABORT_IF</span><span class="p">(</span><span class="o">!</span><span class="n">observer</span><span class="p">,</span> <span class="s">&quot;Training observer object expired. Make sure all registered observers exist during scheduler life time&quot;</span><span class="p">);</span>
+      <span class="n">observer</span><span class="o">-&gt;</span><span class="n">actAfterBatches</span><span class="p">(</span><span class="o">*</span><span class="k">this</span><span class="p">);</span>
+    <span class="p">}</span>
+  <span class="p">}</span>
+
+  <span class="kt">void</span> <span class="n">newStalled</span><span class="p">(</span><span class="kt">size_t</span> <span class="n">num</span><span class="p">)</span> <span class="p">{</span>
+    <span class="n">stalled</span> <span class="o">=</span> <span class="n">num</span><span class="p">;</span>
+    <span class="k">if</span><span class="p">(</span><span class="n">num</span> <span class="o">&gt;</span> <span class="n">maxStalled</span><span class="p">)</span>
+      <span class="o">++</span><span class="n">maxStalled</span><span class="p">;</span>
+    <span class="k">for</span><span class="p">(</span><span class="k">auto</span> <span class="nl">wObserver</span> <span class="p">:</span> <span class="n">wObservers_</span><span class="p">)</span> <span class="p">{</span>
+      <span class="k">auto</span> <span class="n">observer</span> <span class="o">=</span> <span class="n">wObserver</span><span class="p">.</span><span class="n">lock</span><span class="p">();</span>
+      <span class="n">ABORT_IF</span><span class="p">(</span><span class="o">!</span><span class="n">observer</span><span class="p">,</span> <span class="s">&quot;Training observer object expired. Make sure all registered observers exist during scheduler life time&quot;</span><span class="p">);</span>
+      <span class="n">observer</span><span class="o">-&gt;</span><span class="n">actAfterStalled</span><span class="p">(</span><span class="o">*</span><span class="k">this</span><span class="p">);</span>
+    <span class="p">}</span>
+  <span class="p">}</span>
+
+  <span class="kt">void</span> <span class="n">newLoad</span><span class="p">()</span> <span class="p">{</span>
+    <span class="n">loaded</span> <span class="o">=</span> <span class="nb">true</span><span class="p">;</span>
+    <span class="k">for</span><span class="p">(</span><span class="k">auto</span> <span class="nl">wObserver</span> <span class="p">:</span> <span class="n">wObservers_</span><span class="p">)</span> <span class="p">{</span>
+      <span class="k">auto</span> <span class="n">observer</span> <span class="o">=</span> <span class="n">wObserver</span><span class="p">.</span><span class="n">lock</span><span class="p">();</span>
+      <span class="n">ABORT_IF</span><span class="p">(</span><span class="o">!</span><span class="n">observer</span><span class="p">,</span> <span class="s">&quot;Training observer object expired. Make sure all registered observers exist during scheduler life time&quot;</span><span class="p">);</span>
+      <span class="n">observer</span><span class="o">-&gt;</span><span class="n">actAfterLoaded</span><span class="p">(</span><span class="o">*</span><span class="k">this</span><span class="p">);</span>
+    <span class="p">}</span>
+  <span class="p">}</span>
+
+  <span class="kt">void</span> <span class="n">load</span><span class="p">(</span><span class="k">const</span> <span class="n">std</span><span class="o">::</span><span class="n">string</span><span class="o">&amp;</span> <span class="n">name</span><span class="p">)</span> <span class="p">{</span>
+    <span class="k">if</span><span class="p">(</span><span class="o">!</span><span class="n">filesystem</span><span class="o">::</span><span class="n">exists</span><span class="p">(</span><span class="n">name</span><span class="p">))</span>
+      <span class="k">return</span><span class="p">;</span>
+
+    <span class="n">YAML</span><span class="o">::</span><span class="n">Node</span> <span class="n">config</span> <span class="o">=</span> <span class="n">YAML</span><span class="o">::</span><span class="n">LoadFile</span><span class="p">(</span><span class="n">name</span><span class="p">);</span>
+
+    <span class="n">epochs</span> <span class="o">=</span> <span class="n">config</span><span class="p">[</span><span class="s">&quot;epochs&quot;</span><span class="p">].</span><span class="n">as</span><span class="o">&lt;</span><span class="kt">size_t</span><span class="o">&gt;</span><span class="p">();</span>
+    <span class="n">batches</span> <span class="o">=</span> <span class="n">config</span><span class="p">[</span><span class="s">&quot;batches&quot;</span><span class="p">].</span><span class="n">as</span><span class="o">&lt;</span><span class="kt">size_t</span><span class="o">&gt;</span><span class="p">();</span>
+    <span class="n">batchesEpoch</span> <span class="o">=</span> <span class="n">config</span><span class="p">[</span><span class="s">&quot;batches-epoch&quot;</span><span class="p">].</span><span class="n">as</span><span class="o">&lt;</span><span class="kt">size_t</span><span class="o">&gt;</span><span class="p">();</span>
+    <span class="c1">// different serialization name for backward compatibility</span>
+    <span class="n">samplesEpoch</span> <span class="o">=</span> <span class="n">config</span><span class="p">[</span><span class="s">&quot;samples&quot;</span><span class="p">].</span><span class="n">as</span><span class="o">&lt;</span><span class="kt">size_t</span><span class="o">&gt;</span><span class="p">();</span>
+
+    <span class="c1">// clang-format off</span>
+    <span class="c1">// optional for backward compatibility</span>
+    <span class="n">labelsTotal</span>     <span class="o">=</span> <span class="n">config</span><span class="p">[</span><span class="s">&quot;labels-total&quot;</span><span class="p">]</span>      <span class="o">?</span> <span class="n">config</span><span class="p">[</span><span class="s">&quot;labels-total&quot;</span><span class="p">].</span><span class="n">as</span><span class="o">&lt;</span><span class="kt">size_t</span><span class="o">&gt;</span><span class="p">()</span>      <span class="o">:</span> <span class="mi">0</span><span class="p">;</span>
+    <span class="n">prevLabelsTotal</span> <span class="o">=</span> <span class="n">config</span><span class="p">[</span><span class="s">&quot;prev-labels-total&quot;</span><span class="p">]</span> <span class="o">?</span> <span class="n">config</span><span class="p">[</span><span class="s">&quot;prev-labels-total&quot;</span><span class="p">].</span><span class="n">as</span><span class="o">&lt;</span><span class="kt">size_t</span><span class="o">&gt;</span><span class="p">()</span> <span class="o">:</span> <span class="mi">0</span><span class="p">;</span>
+    <span class="n">prevBatches</span>     <span class="o">=</span> <span class="n">config</span><span class="p">[</span><span class="s">&quot;prev-batches&quot;</span><span class="p">]</span>      <span class="o">?</span> <span class="n">config</span><span class="p">[</span><span class="s">&quot;prev-batches&quot;</span><span class="p">].</span><span class="n">as</span><span class="o">&lt;</span><span class="kt">size_t</span><span class="o">&gt;</span><span class="p">()</span>      <span class="o">:</span> <span class="mi">0</span><span class="p">;</span>
+    <span class="n">prevEpochs</span>      <span class="o">=</span> <span class="n">config</span><span class="p">[</span><span class="s">&quot;prev-epochs&quot;</span><span class="p">]</span>       <span class="o">?</span> <span class="n">config</span><span class="p">[</span><span class="s">&quot;prev-epochs&quot;</span><span class="p">].</span><span class="n">as</span><span class="o">&lt;</span><span class="kt">size_t</span><span class="o">&gt;</span><span class="p">()</span>       <span class="o">:</span> <span class="mi">0</span><span class="p">;</span>
+    <span class="c1">// clang-format on</span>
+
+    <span class="n">stalled</span> <span class="o">=</span> <span class="n">config</span><span class="p">[</span><span class="s">&quot;stalled&quot;</span><span class="p">].</span><span class="n">as</span><span class="o">&lt;</span><span class="kt">size_t</span><span class="o">&gt;</span><span class="p">();</span>
+    <span class="n">maxStalled</span> <span class="o">=</span> <span class="n">config</span><span class="p">[</span><span class="s">&quot;stalled-max&quot;</span><span class="p">].</span><span class="n">as</span><span class="o">&lt;</span><span class="kt">size_t</span><span class="o">&gt;</span><span class="p">();</span>
+    <span class="n">validBest</span> <span class="o">=</span> <span class="n">config</span><span class="p">[</span><span class="s">&quot;valid-best&quot;</span><span class="p">].</span><span class="n">as</span><span class="o">&lt;</span><span class="kt">float</span><span class="o">&gt;</span><span class="p">();</span>
+    <span class="n">validator</span> <span class="o">=</span> <span class="n">config</span><span class="p">[</span><span class="s">&quot;validator&quot;</span><span class="p">].</span><span class="n">as</span><span class="o">&lt;</span><span class="n">std</span><span class="o">::</span><span class="n">string</span><span class="o">&gt;</span><span class="p">();</span>
+    <span class="n">validators</span> <span class="o">=</span> <span class="n">config</span><span class="p">[</span><span class="s">&quot;validators&quot;</span><span class="p">];</span>
+    <span class="n">reset</span> <span class="o">=</span> <span class="n">config</span><span class="p">[</span><span class="s">&quot;reset&quot;</span><span class="p">].</span><span class="n">as</span><span class="o">&lt;</span><span class="kt">bool</span><span class="o">&gt;</span><span class="p">();</span>
+
+    <span class="n">eta</span> <span class="o">=</span> <span class="n">config</span><span class="p">[</span><span class="s">&quot;eta&quot;</span><span class="p">].</span><span class="n">as</span><span class="o">&lt;</span><span class="kt">float</span><span class="o">&gt;</span><span class="p">();</span>
+    <span class="n">factor</span> <span class="o">=</span> <span class="n">config</span><span class="p">[</span><span class="s">&quot;eta-factor&quot;</span><span class="p">].</span><span class="n">as</span><span class="o">&lt;</span><span class="kt">float</span><span class="o">&gt;</span><span class="p">();</span>
+    <span class="n">warmupStart</span> <span class="o">=</span> <span class="n">SchedulingParameter</span><span class="o">::</span><span class="n">parse</span><span class="p">(</span><span class="n">config</span><span class="p">[</span><span class="s">&quot;warmup-start&quot;</span><span class="p">].</span><span class="n">as</span><span class="o">&lt;</span><span class="n">std</span><span class="o">::</span><span class="n">string</span><span class="o">&gt;</span><span class="p">());</span>
+
+    <span class="n">costSum</span> <span class="o">=</span> <span class="n">config</span><span class="p">[</span><span class="s">&quot;cost-sum&quot;</span><span class="p">].</span><span class="n">as</span><span class="o">&lt;</span><span class="kt">float</span><span class="o">&gt;</span><span class="p">();</span>
+    <span class="n">costCount</span> <span class="o">=</span> <span class="n">config</span><span class="p">[</span><span class="s">&quot;cost-count&quot;</span><span class="p">].</span><span class="n">as</span><span class="o">&lt;</span><span class="kt">size_t</span><span class="o">&gt;</span><span class="p">();</span>
+
+    <span class="n">wordsDisp</span> <span class="o">=</span> <span class="n">config</span><span class="p">[</span><span class="s">&quot;disp-words&quot;</span><span class="p">].</span><span class="n">as</span><span class="o">&lt;</span><span class="kt">size_t</span><span class="o">&gt;</span><span class="p">();</span>
+    <span class="n">samplesDisp</span> <span class="o">=</span> <span class="n">config</span><span class="p">[</span><span class="s">&quot;disp-samples&quot;</span><span class="p">].</span><span class="n">as</span><span class="o">&lt;</span><span class="kt">size_t</span><span class="o">&gt;</span><span class="p">();</span>
+    <span class="n">updatesDisp</span> <span class="o">=</span> <span class="n">config</span><span class="p">[</span><span class="s">&quot;disp-updates&quot;</span><span class="p">].</span><span class="n">as</span><span class="o">&lt;</span><span class="kt">size_t</span><span class="o">&gt;</span><span class="p">();</span>
+
+    <span class="n">seedBatch</span> <span class="o">=</span> <span class="n">config</span><span class="p">[</span><span class="s">&quot;seed-batch&quot;</span><span class="p">].</span><span class="n">as</span><span class="o">&lt;</span><span class="n">std</span><span class="o">::</span><span class="n">string</span><span class="o">&gt;</span><span class="p">();</span>
+    <span class="n">seedCorpus</span> <span class="o">=</span> <span class="n">config</span><span class="p">[</span><span class="s">&quot;seed-corpus&quot;</span><span class="p">].</span><span class="n">as</span><span class="o">&lt;</span><span class="n">std</span><span class="o">::</span><span class="n">string</span><span class="o">&gt;</span><span class="p">();</span>
+  <span class="p">}</span>
+
+  <span class="kt">void</span> <span class="n">save</span><span class="p">(</span><span class="k">const</span> <span class="n">std</span><span class="o">::</span><span class="n">string</span><span class="o">&amp;</span> <span class="n">name</span><span class="p">)</span> <span class="k">const</span> <span class="p">{</span>
+    <span class="n">std</span><span class="o">::</span><span class="n">ofstream</span> <span class="n">fout</span><span class="p">(</span><span class="n">name</span><span class="p">);</span>
+    <span class="n">YAML</span><span class="o">::</span><span class="n">Node</span> <span class="n">config</span><span class="p">;</span>
+
+    <span class="n">config</span><span class="p">[</span><span class="s">&quot;epochs&quot;</span><span class="p">]</span> <span class="o">=</span> <span class="n">epochs</span><span class="p">;</span>
+    <span class="n">config</span><span class="p">[</span><span class="s">&quot;batches&quot;</span><span class="p">]</span> <span class="o">=</span> <span class="n">batches</span><span class="p">;</span>
+    <span class="n">config</span><span class="p">[</span><span class="s">&quot;batches-epoch&quot;</span><span class="p">]</span> <span class="o">=</span> <span class="n">batchesEpoch</span><span class="p">;</span>
+    <span class="n">config</span><span class="p">[</span><span class="s">&quot;samples&quot;</span><span class="p">]</span> <span class="o">=</span> <span class="n">samplesEpoch</span><span class="p">;</span>
+    <span class="n">config</span><span class="p">[</span><span class="s">&quot;labels-total&quot;</span><span class="p">]</span> <span class="o">=</span> <span class="n">labelsTotal</span><span class="p">;</span>
+    <span class="n">config</span><span class="p">[</span><span class="s">&quot;prev-labels-total&quot;</span><span class="p">]</span> <span class="o">=</span> <span class="n">prevLabelsTotal</span><span class="p">;</span>
+    <span class="n">config</span><span class="p">[</span><span class="s">&quot;prev-batches&quot;</span><span class="p">]</span> <span class="o">=</span> <span class="n">prevBatches</span><span class="p">;</span>
+    <span class="n">config</span><span class="p">[</span><span class="s">&quot;prev-epochs&quot;</span><span class="p">]</span> <span class="o">=</span> <span class="n">prevEpochs</span><span class="p">;</span>
+
+    <span class="n">config</span><span class="p">[</span><span class="s">&quot;stalled&quot;</span><span class="p">]</span> <span class="o">=</span> <span class="n">stalled</span><span class="p">;</span>
+    <span class="n">config</span><span class="p">[</span><span class="s">&quot;stalled-max&quot;</span><span class="p">]</span> <span class="o">=</span> <span class="n">maxStalled</span><span class="p">;</span>
+    <span class="n">config</span><span class="p">[</span><span class="s">&quot;valid-best&quot;</span><span class="p">]</span> <span class="o">=</span> <span class="n">validBest</span><span class="p">;</span>
+    <span class="n">config</span><span class="p">[</span><span class="s">&quot;validator&quot;</span><span class="p">]</span> <span class="o">=</span> <span class="n">validator</span><span class="p">;</span>
+    <span class="n">config</span><span class="p">[</span><span class="s">&quot;validators&quot;</span><span class="p">]</span> <span class="o">=</span> <span class="n">validators</span><span class="p">;</span>
+    <span class="n">config</span><span class="p">[</span><span class="s">&quot;reset&quot;</span><span class="p">]</span> <span class="o">=</span> <span class="n">reset</span><span class="p">;</span>
+
+    <span class="n">config</span><span class="p">[</span><span class="s">&quot;eta&quot;</span><span class="p">]</span> <span class="o">=</span> <span class="n">eta</span><span class="p">;</span>
+    <span class="n">config</span><span class="p">[</span><span class="s">&quot;eta-factor&quot;</span><span class="p">]</span> <span class="o">=</span> <span class="n">factor</span><span class="p">;</span>
+    <span class="n">config</span><span class="p">[</span><span class="s">&quot;warmup-start&quot;</span><span class="p">]</span> <span class="o">=</span> <span class="n">std</span><span class="o">::</span><span class="n">string</span><span class="p">(</span><span class="n">warmupStart</span><span class="p">);</span>
+
+    <span class="n">config</span><span class="p">[</span><span class="s">&quot;cost-sum&quot;</span><span class="p">]</span> <span class="o">=</span> <span class="n">costSum</span><span class="p">;</span>
+    <span class="n">config</span><span class="p">[</span><span class="s">&quot;cost-count&quot;</span><span class="p">]</span> <span class="o">=</span> <span class="n">costCount</span><span class="p">;</span>
+
+    <span class="n">config</span><span class="p">[</span><span class="s">&quot;disp-updates&quot;</span><span class="p">]</span> <span class="o">=</span> <span class="n">updatesDisp</span><span class="p">;</span>
+    <span class="n">config</span><span class="p">[</span><span class="s">&quot;disp-samples&quot;</span><span class="p">]</span> <span class="o">=</span> <span class="n">samplesDisp</span><span class="p">;</span>
+    <span class="n">config</span><span class="p">[</span><span class="s">&quot;disp-words&quot;</span><span class="p">]</span> <span class="o">=</span> <span class="n">wordsDisp</span><span class="p">;</span>
+
+    <span class="n">config</span><span class="p">[</span><span class="s">&quot;seed-batch&quot;</span><span class="p">]</span> <span class="o">=</span> <span class="n">seedBatch</span><span class="p">;</span>
+    <span class="n">config</span><span class="p">[</span><span class="s">&quot;seed-corpus&quot;</span><span class="p">]</span> <span class="o">=</span> <span class="n">seedCorpus</span><span class="p">;</span>
+
+    <span class="n">fout</span> <span class="o">&lt;&lt;</span> <span class="n">config</span><span class="p">;</span>
+  <span class="p">}</span>
+
+  <span class="n">std</span><span class="o">::</span><span class="n">string</span> <span class="n">fillTemplate</span><span class="p">(</span><span class="k">const</span> <span class="n">std</span><span class="o">::</span><span class="n">string</span><span class="o">&amp;</span> <span class="n">templ</span><span class="p">)</span> <span class="k">const</span> <span class="p">{</span>
+    <span class="c1">// The formatting below uses fmtlib, which is included with spdlog</span>
+    <span class="c1">// and is included via the logger.</span>
+    <span class="k">return</span> <span class="n">fmt</span><span class="o">::</span><span class="n">format</span><span class="p">(</span><span class="n">templ</span><span class="p">.</span><span class="n">c_str</span><span class="p">(),</span>
+                       <span class="n">fmt</span><span class="o">::</span><span class="n">arg</span><span class="p">(</span><span class="s">&quot;E&quot;</span><span class="p">,</span> <span class="n">epochs</span><span class="p">),</span>
+                       <span class="n">fmt</span><span class="o">::</span><span class="n">arg</span><span class="p">(</span><span class="s">&quot;U&quot;</span><span class="p">,</span> <span class="n">batches</span><span class="p">),</span>
+                       <span class="n">fmt</span><span class="o">::</span><span class="n">arg</span><span class="p">(</span><span class="s">&quot;B&quot;</span><span class="p">,</span> <span class="n">batchesEpoch</span><span class="p">),</span>
+                       <span class="n">fmt</span><span class="o">::</span><span class="n">arg</span><span class="p">(</span><span class="s">&quot;T&quot;</span><span class="p">,</span> <span class="n">labelsTotal</span><span class="p">));</span>
+  <span class="p">}</span>
+
+<span class="k">private</span><span class="o">:</span>
+  <span class="c1">// this needs to be a vector of weak pointers, otherwise</span>
+  <span class="c1">// it is likely to cause circular dependencies.</span>
+  <span class="n">std</span><span class="o">::</span><span class="n">vector</span><span class="o">&lt;</span><span class="n">Weak</span><span class="o">&lt;</span><span class="n">TrainingObserver</span><span class="o">&gt;&gt;</span> <span class="n">wObservers_</span><span class="p">;</span>
+
+<span class="p">};</span>
+<span class="p">}</span>  <span class="c1">// namespace marian</span>
+</pre></div>
+</div>
+</div>
+
+
+           </div>
+           
+          </div>
+          <footer>
+
+  <hr/>
+
+  <div role="contentinfo">
+    <p>
+        &#169; Copyright 2021, Marian NMT Team.
+
+    </p>
+  </div>
+    
+    
+    
+    Built with <a href="https://www.sphinx-doc.org/">Sphinx</a> using a
+    
+    <a href="https://github.com/readthedocs/sphinx_rtd_theme">theme</a>
+    
+    provided by <a href="https://readthedocs.org">Read the Docs</a>. 
+
+</footer>
+        </div>
+      </div>
+
+    </section>
+
+  </div>
+  
+
+  <script type="text/javascript">
+      jQuery(function () {
+          SphinxRtdTheme.Navigation.enable(true);
+      });
+  </script>
+
+  
+  
+    
+   
+
+</body>
+</html>

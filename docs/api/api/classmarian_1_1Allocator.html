@@ -1,0 +1,314 @@
+
+
+<!DOCTYPE html>
+<html class="writer-html5" lang="en" >
+<head>
+  <meta charset="utf-8" />
+  
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  
+  <title>Class Allocator &mdash; Marian NMT v1.10.1 2021-02-23 documentation</title>
+  
+
+  
+  <link rel="stylesheet" href="../_static/css/theme.css" type="text/css" />
+  <link rel="stylesheet" href="../_static/pygments.css" type="text/css" />
+  <link rel="stylesheet" href="../_static/css/custom.css" type="text/css" />
+  <link rel="stylesheet" href="../_static/collapsible-lists/css/tree_view.css" type="text/css" />
+
+  
+  
+
+  
+  
+
+  
+    <link rel="canonical" href="http://marian-nmt.github.io/docs/api/api/classmarian_1_1Allocator.html" />
+
+  
+  <!--[if lt IE 9]>
+    <script src="../_static/js/html5shiv.min.js"></script>
+  <![endif]-->
+  
+    
+      <script type="text/javascript" id="documentation_options" data-url_root="../" src="../_static/documentation_options.js"></script>
+        <script src="../_static/jquery.js"></script>
+        <script src="../_static/underscore.js"></script>
+        <script src="../_static/doctools.js"></script>
+        <script src="../_static/language_data.js"></script>
+        <script src="../_static/collapsible-lists/js/CollapsibleLists.compressed.js"></script>
+        <script src="../_static/collapsible-lists/js/apply-collapsible-lists.js"></script>
+    
+    <script type="text/javascript" src="../_static/js/theme.js"></script>
+
+    
+    <link rel="index" title="Index" href="../genindex.html" />
+    <link rel="search" title="Search" href="../search.html" />
+    <link rel="next" title="Class Amun" href="classmarian_1_1Amun.html" />
+    <link rel="prev" title="Class AllocationException" href="classmarian_1_1AllocationException.html" /> 
+</head>
+
+<body class="wy-body-for-nav">
+
+   
+  <div class="wy-grid-for-nav">
+    
+    <nav data-toggle="wy-nav-shift" class="wy-nav-side">
+      <div class="wy-side-scroll">
+        <div class="wy-side-nav-search" >
+          
+
+          
+            <a href="../index.html" class="icon icon-home"> Marian NMT
+          
+
+          
+          </a>
+
+          
+            
+            
+              <div class="version">
+                v1.10.1
+              </div>
+            
+          
+
+          
+<div role="search">
+  <form id="rtd-search-form" class="wy-form" action="../search.html" method="get">
+    <input type="text" name="q" placeholder="Search docs" />
+    <input type="hidden" name="check_keywords" value="yes" />
+    <input type="hidden" name="area" value="default" />
+  </form>
+</div>
+
+          
+        </div>
+
+        
+        <div class="wy-menu wy-menu-vertical" data-spy="affix" role="navigation" aria-label="main navigation">
+          
+            
+            
+              
+            
+            
+              <p class="caption"><span class="caption-text">Contents:</span></p>
+<ul>
+<li class="toctree-l1"><a class="reference internal" href="../install.html">Installation</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../graph.html">Expression graphs</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../operators.html">Graph operations</a></li>
+<li class="toctree-l1"><a class="reference internal" href="library_index.html">Library API</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../contributing.html">How to contribute to Marian</a></li>
+</ul>
+
+            
+          
+        </div>
+        
+      </div>
+    </nav>
+
+    <section data-toggle="wy-nav-shift" class="wy-nav-content-wrap">
+
+      
+      <nav class="wy-nav-top" aria-label="top navigation">
+        
+          <i data-toggle="wy-nav-top" class="fa fa-bars"></i>
+          <a href="../index.html">Marian NMT</a>
+        
+      </nav>
+
+
+      <div class="wy-nav-content">
+        
+        <div class="rst-content">
+        
+          
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+<div role="navigation" aria-label="breadcrumbs navigation">
+
+  <ul class="wy-breadcrumbs">
+    
+      <li><a href="../index.html" class="icon icon-home"></a> &raquo;</li>
+        
+          <li><a href="library_index.html">Library API</a> &raquo;</li>
+        
+      <li>Class Allocator</li>
+    
+    
+      <li class="wy-breadcrumbs-aside">
+        
+          
+            <a href="../_sources/api/classmarian_1_1Allocator.rst.txt" rel="nofollow"> View page source</a>
+          
+        
+      </li>
+    
+  </ul>
+
+  
+  <hr/>
+</div>
+          <div role="main" class="document" itemscope="itemscope" itemtype="http://schema.org/Article">
+           <div itemprop="articleBody">
+            
+  <div class="section" id="class-allocator">
+<span id="exhale-class-classmarian-1-1allocator"></span><h1>Class Allocator<a class="headerlink" href="#class-allocator" title="Permalink to this headline">¶</a></h1>
+<ul class="simple">
+<li><p>Defined in <a class="reference internal" href="file_src_tensors_allocator.h.html#file-src-tensors-allocator-h"><span class="std std-ref">File allocator.h</span></a></p></li>
+</ul>
+<div class="section" id="class-documentation">
+<h2>Class Documentation<a class="headerlink" href="#class-documentation" title="Permalink to this headline">¶</a></h2>
+<dl class="class">
+<dt id="_CPPv4N6marian9AllocatorE">
+<span id="_CPPv3N6marian9AllocatorE"></span><span id="_CPPv2N6marian9AllocatorE"></span><span id="marian::Allocator"></span><span class="target" id="classmarian_1_1Allocator"></span><em class="property">class </em><code class="sig-name descname">Allocator</code><a class="headerlink" href="#_CPPv4N6marian9AllocatorE" title="Permalink to this definition">¶</a><br /></dt>
+<dd><div class="breathe-sectiondef docutils container">
+<p class="breathe-sectiondef-title rubric">Public Functions</p>
+<dl class="function">
+<dt id="_CPPv4N6marian9Allocator9AllocatorE8DeviceId6size_t6size_t6size_t">
+<span id="_CPPv3N6marian9Allocator9AllocatorE8DeviceId6size_t6size_t6size_t"></span><span id="_CPPv2N6marian9Allocator9AllocatorE8DeviceId6size_t6size_t6size_t"></span><span id="marian::Allocator::Allocator__DeviceId.s.s.s"></span><span class="target" id="classmarian_1_1Allocator_1ae9d7239977f6adf2d6477b119a3c830d"></span><code class="sig-name descname">Allocator</code><span class="sig-paren">(</span><a class="reference internal" href="structmarian_1_1DeviceId.html#_CPPv4N6marian8DeviceIdE" title="marian::DeviceId">DeviceId</a> <em>deviceId</em>, size_t <em>bytes</em>, size_t <em>step</em>, size_t <em>alignment</em> = 256<span class="sig-paren">)</span><a class="headerlink" href="#_CPPv4N6marian9Allocator9AllocatorE8DeviceId6size_t6size_t6size_t" title="Permalink to this definition">¶</a><br /></dt>
+<dd></dd></dl>
+
+<dl class="function">
+<dt id="_CPPv4N6marian9Allocator9AllocatorE8DeviceId3PtrI6DeviceE6size_t6size_t6size_t">
+<span id="_CPPv3N6marian9Allocator9AllocatorE8DeviceId3PtrI6DeviceE6size_t6size_t6size_t"></span><span id="_CPPv2N6marian9Allocator9AllocatorE8DeviceId3PtrI6DeviceE6size_t6size_t6size_t"></span><span id="marian::Allocator::Allocator__DeviceId.Ptr:Device:.s.s.s"></span><span class="target" id="classmarian_1_1Allocator_1ad18e5a0678107d2d0f72498b36e7b3fd"></span><code class="sig-name descname">Allocator</code><span class="sig-paren">(</span><a class="reference internal" href="structmarian_1_1DeviceId.html#_CPPv4N6marian8DeviceIdE" title="marian::DeviceId">DeviceId</a>, <a class="reference internal" href="typedef_definitions_8h_1ad1a373be43a00ef9ce35666145137b08.html#_CPPv4N6marian3PtrE" title="marian::Ptr">Ptr</a>&lt;<a class="reference internal" href="classmarian_1_1Device.html#_CPPv4N6marian6DeviceE" title="marian::Device">Device</a>&gt; <em>device</em>, size_t <em>bytes</em>, size_t <em>step</em>, size_t <em>alignment</em> = 256<span class="sig-paren">)</span><a class="headerlink" href="#_CPPv4N6marian9Allocator9AllocatorE8DeviceId3PtrI6DeviceE6size_t6size_t6size_t" title="Permalink to this definition">¶</a><br /></dt>
+<dd></dd></dl>
+
+<dl class="function">
+<dt id="_CPPv4N6marian9Allocator11alignedSizeE6size_t">
+<span id="_CPPv3N6marian9Allocator11alignedSizeE6size_t"></span><span id="_CPPv2N6marian9Allocator11alignedSizeE6size_t"></span><span id="marian::Allocator::alignedSize__s"></span><span class="target" id="classmarian_1_1Allocator_1a85ff88bece6073874e9c88af99d6d6bc"></span>size_t <code class="sig-name descname">alignedSize</code><span class="sig-paren">(</span>size_t <em>size</em><span class="sig-paren">)</span><a class="headerlink" href="#_CPPv4N6marian9Allocator11alignedSizeE6size_t" title="Permalink to this definition">¶</a><br /></dt>
+<dd></dd></dl>
+
+<dl class="function">
+<dt id="_CPPv4N6marian9Allocator19throwAtReallocationEb">
+<span id="_CPPv3N6marian9Allocator19throwAtReallocationEb"></span><span id="_CPPv2N6marian9Allocator19throwAtReallocationEb"></span><span id="marian::Allocator::throwAtReallocation__b"></span><span class="target" id="classmarian_1_1Allocator_1abcc0ff23c7c0bc89b00906d2dada7b70"></span>void <code class="sig-name descname">throwAtReallocation</code><span class="sig-paren">(</span>bool <em>throwRealloc</em><span class="sig-paren">)</span><a class="headerlink" href="#_CPPv4N6marian9Allocator19throwAtReallocationEb" title="Permalink to this definition">¶</a><br /></dt>
+<dd></dd></dl>
+
+<dl class="function">
+<dt id="_CPPv4N6marian9Allocator7reserveE6size_t">
+<span id="_CPPv3N6marian9Allocator7reserveE6size_t"></span><span id="_CPPv2N6marian9Allocator7reserveE6size_t"></span><span id="marian::Allocator::reserve__s"></span><span class="target" id="classmarian_1_1Allocator_1a2ee2f87990027b9964d9f0cc8d4e9959"></span>void <code class="sig-name descname">reserve</code><span class="sig-paren">(</span>size_t <em>bytes</em><span class="sig-paren">)</span><a class="headerlink" href="#_CPPv4N6marian9Allocator7reserveE6size_t" title="Permalink to this definition">¶</a><br /></dt>
+<dd></dd></dl>
+
+<dl class="function">
+<dt id="_CPPv4I0EN6marian9Allocator8capacityE6size_t6size_t">
+<span id="_CPPv3I0EN6marian9Allocator8capacityE6size_t"></span><span id="_CPPv2I0EN6marian9Allocator8capacityE6size_t"></span><span class="target" id="classmarian_1_1Allocator_1aaddb42652f2a52f148434714002793de"></span>template&lt;typename <code class="sig-name descname">T</code>&gt;<br />size_t <code class="sig-name descname">capacity</code><span class="sig-paren">(</span>size_t <em>num</em><span class="sig-paren">)</span><a class="headerlink" href="#_CPPv4I0EN6marian9Allocator8capacityE6size_t6size_t" title="Permalink to this definition">¶</a><br /></dt>
+<dd></dd></dl>
+
+<dl class="function">
+<dt id="_CPPv4I0EN6marian9Allocator5allocEN11MemoryPiece7PtrTypeE6size_t">
+<span id="_CPPv3I0EN6marian9Allocator5allocE6size_t"></span><span id="_CPPv2I0EN6marian9Allocator5allocE6size_t"></span><span class="target" id="classmarian_1_1Allocator_1a23433d2ebb35d70b651d5d4e1af3b854"></span>template&lt;typename <code class="sig-name descname">T</code>&gt;<br /><a class="reference internal" href="classmarian_1_1MemoryPiece.html#_CPPv4N6marian11MemoryPieceE" title="marian::MemoryPiece">MemoryPiece</a>::<a class="reference internal" href="classmarian_1_1MemoryPiece.html#_CPPv4N6marian11MemoryPiece7PtrTypeE" title="marian::MemoryPiece::PtrType">PtrType</a> <code class="sig-name descname">alloc</code><span class="sig-paren">(</span>size_t <em>num</em><span class="sig-paren">)</span><a class="headerlink" href="#_CPPv4I0EN6marian9Allocator5allocEN11MemoryPiece7PtrTypeE6size_t" title="Permalink to this definition">¶</a><br /></dt>
+<dd></dd></dl>
+
+<dl class="function">
+<dt id="_CPPv4N6marian9Allocator5allocE6size_t">
+<span id="_CPPv3N6marian9Allocator5allocE6size_t"></span><span id="_CPPv2N6marian9Allocator5allocE6size_t"></span><span id="marian::Allocator::alloc__s"></span><span class="target" id="classmarian_1_1Allocator_1aea065959fa164f4bcac2f3a4ed47dc72"></span><a class="reference internal" href="classmarian_1_1MemoryPiece.html#_CPPv4N6marian11MemoryPieceE" title="marian::MemoryPiece">MemoryPiece</a>::<a class="reference internal" href="classmarian_1_1MemoryPiece.html#_CPPv4N6marian11MemoryPiece7PtrTypeE" title="marian::MemoryPiece::PtrType">PtrType</a> <code class="sig-name descname">alloc</code><span class="sig-paren">(</span>size_t <em>bytes</em><span class="sig-paren">)</span><a class="headerlink" href="#_CPPv4N6marian9Allocator5allocE6size_t" title="Permalink to this definition">¶</a><br /></dt>
+<dd></dd></dl>
+
+<dl class="function">
+<dt id="_CPPv4N6marian9Allocator4freeEP7uint8_t6size_t">
+<span id="_CPPv3N6marian9Allocator4freeEP7uint8_t6size_t"></span><span id="_CPPv2N6marian9Allocator4freeEP7uint8_t6size_t"></span><span id="marian::Allocator::free__uint8_tP.s"></span><span class="target" id="classmarian_1_1Allocator_1ab95e891976840ece4c1486ae6a1d7776"></span>bool <code class="sig-name descname">free</code><span class="sig-paren">(</span>uint8_t *<em>ptr</em>, size_t <em>bytes</em><span class="sig-paren">)</span><a class="headerlink" href="#_CPPv4N6marian9Allocator4freeEP7uint8_t6size_t" title="Permalink to this definition">¶</a><br /></dt>
+<dd></dd></dl>
+
+<dl class="function">
+<dt id="_CPPv4N6marian9Allocator4freeEN11MemoryPiece7PtrTypeE">
+<span id="_CPPv3N6marian9Allocator4freeEN11MemoryPiece7PtrTypeE"></span><span id="_CPPv2N6marian9Allocator4freeEN11MemoryPiece7PtrTypeE"></span><span id="marian::Allocator::free__MemoryPiece::PtrType"></span><span class="target" id="classmarian_1_1Allocator_1a9d5542064c4096a4351bf3aa178a3a69"></span>bool <code class="sig-name descname">free</code><span class="sig-paren">(</span><a class="reference internal" href="classmarian_1_1MemoryPiece.html#_CPPv4N6marian11MemoryPieceE" title="marian::MemoryPiece">MemoryPiece</a>::<a class="reference internal" href="classmarian_1_1MemoryPiece.html#_CPPv4N6marian11MemoryPiece7PtrTypeE" title="marian::MemoryPiece::PtrType">PtrType</a> <em>mp</em><span class="sig-paren">)</span><a class="headerlink" href="#_CPPv4N6marian9Allocator4freeEN11MemoryPiece7PtrTypeE" title="Permalink to this definition">¶</a><br /></dt>
+<dd></dd></dl>
+
+<dl class="function">
+<dt id="_CPPv4N6marian9Allocator5clearEv">
+<span id="_CPPv3N6marian9Allocator5clearEv"></span><span id="_CPPv2N6marian9Allocator5clearEv"></span><span id="marian::Allocator::clear"></span><span class="target" id="classmarian_1_1Allocator_1a8dccb196d2da963dd2228083f25b2de7"></span>void <code class="sig-name descname">clear</code><span class="sig-paren">(</span><span class="sig-paren">)</span><a class="headerlink" href="#_CPPv4N6marian9Allocator5clearEv" title="Permalink to this definition">¶</a><br /></dt>
+<dd></dd></dl>
+
+<dl class="function">
+<dt id="_CPPv4N6marian9Allocator6memoryEv">
+<span id="_CPPv3N6marian9Allocator6memoryEv"></span><span id="_CPPv2N6marian9Allocator6memoryEv"></span><span id="marian::Allocator::memory"></span><span class="target" id="classmarian_1_1Allocator_1aaef2aa7b45527af6ab07b7960c38310f"></span><a class="reference internal" href="classmarian_1_1MemoryPiece.html#_CPPv4N6marian11MemoryPieceE" title="marian::MemoryPiece">MemoryPiece</a>::<a class="reference internal" href="classmarian_1_1MemoryPiece.html#_CPPv4N6marian11MemoryPiece7PtrTypeE" title="marian::MemoryPiece::PtrType">PtrType</a> <code class="sig-name descname">memory</code><span class="sig-paren">(</span><span class="sig-paren">)</span><a class="headerlink" href="#_CPPv4N6marian9Allocator6memoryEv" title="Permalink to this definition">¶</a><br /></dt>
+<dd></dd></dl>
+
+<dl class="function">
+<dt id="_CPPv4N6marian9Allocator4sizeEv">
+<span id="_CPPv3N6marian9Allocator4sizeEv"></span><span id="_CPPv2N6marian9Allocator4sizeEv"></span><span id="marian::Allocator::size"></span><span class="target" id="classmarian_1_1Allocator_1ac7583c1ec72d0ea0c732d64649a62cc2"></span>size_t <code class="sig-name descname">size</code><span class="sig-paren">(</span><span class="sig-paren">)</span><a class="headerlink" href="#_CPPv4N6marian9Allocator4sizeEv" title="Permalink to this definition">¶</a><br /></dt>
+<dd></dd></dl>
+
+<dl class="function">
+<dt id="_CPPv4N6marian9Allocator9availableEv">
+<span id="_CPPv3N6marian9Allocator9availableEv"></span><span id="_CPPv2N6marian9Allocator9availableEv"></span><span id="marian::Allocator::available"></span><span class="target" id="classmarian_1_1Allocator_1a09cd9a7125d71974f2cab1e9e278c796"></span>size_t <code class="sig-name descname">available</code><span class="sig-paren">(</span><span class="sig-paren">)</span><a class="headerlink" href="#_CPPv4N6marian9Allocator9availableEv" title="Permalink to this definition">¶</a><br /></dt>
+<dd></dd></dl>
+
+<dl class="function">
+<dt id="_CPPv4N6marian9Allocator11getDeviceIdEv">
+<span id="_CPPv3N6marian9Allocator11getDeviceIdEv"></span><span id="_CPPv2N6marian9Allocator11getDeviceIdEv"></span><span id="marian::Allocator::getDeviceId"></span><span class="target" id="classmarian_1_1Allocator_1a12559f2d58d2186c100d8e8971d950b3"></span><a class="reference internal" href="structmarian_1_1DeviceId.html#_CPPv4N6marian8DeviceIdE" title="marian::DeviceId">DeviceId</a> <code class="sig-name descname">getDeviceId</code><span class="sig-paren">(</span><span class="sig-paren">)</span><a class="headerlink" href="#_CPPv4N6marian9Allocator11getDeviceIdEv" title="Permalink to this definition">¶</a><br /></dt>
+<dd></dd></dl>
+
+</div>
+</dd></dl>
+
+</div>
+</div>
+
+
+           </div>
+           
+          </div>
+          <footer>
+    <div class="rst-footer-buttons" role="navigation" aria-label="footer navigation">
+        <a href="classmarian_1_1Amun.html" class="btn btn-neutral float-right" title="Class Amun" accesskey="n" rel="next">Next <span class="fa fa-arrow-circle-right" aria-hidden="true"></span></a>
+        <a href="classmarian_1_1AllocationException.html" class="btn btn-neutral float-left" title="Class AllocationException" accesskey="p" rel="prev"><span class="fa fa-arrow-circle-left" aria-hidden="true"></span> Previous</a>
+    </div>
+
+  <hr/>
+
+  <div role="contentinfo">
+    <p>
+        &#169; Copyright 2021, Marian NMT Team.
+
+    </p>
+  </div>
+    
+    
+    
+    Built with <a href="https://www.sphinx-doc.org/">Sphinx</a> using a
+    
+    <a href="https://github.com/readthedocs/sphinx_rtd_theme">theme</a>
+    
+    provided by <a href="https://readthedocs.org">Read the Docs</a>. 
+
+</footer>
+        </div>
+      </div>
+
+    </section>
+
+  </div>
+  
+
+  <script type="text/javascript">
+      jQuery(function () {
+          SphinxRtdTheme.Navigation.enable(true);
+      });
+  </script>
+
+  
+  
+    
+   
+
+</body>
+</html>

@@ -7,7 +7,7 @@
   
   <meta name="viewport" content="width=device-width, initial-scale=1.0" />
   
-  <title>Program Listing for File expression_graph.cpp &mdash; Marian NMT v1.10.1 2021-02-23 documentation</title>
+  <title>Program Listing for File expression_graph.cpp &mdash; Marian NMT v1.10.2 2021-02-28 documentation</title>
   
 
   
@@ -67,7 +67,7 @@
             
             
               <div class="version">
-                v1.10.1
+                v1.10.2
               </div>
             
           
@@ -94,9 +94,8 @@
             
               <p class="caption"><span class="caption-text">Contents:</span></p>
 <ul>
-<li class="toctree-l1"><a class="reference internal" href="../install.html">Installation</a></li>
 <li class="toctree-l1"><a class="reference internal" href="../graph.html">Expression graphs</a></li>
-<li class="toctree-l1"><a class="reference internal" href="../operators.html">Graph operations</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../operators.html">Operations in the Expression Graph</a></li>
 <li class="toctree-l1"><a class="reference internal" href="library_index.html">Library API</a></li>
 <li class="toctree-l1"><a class="reference internal" href="../contributing.html">How to contribute to Marian</a></li>
 </ul>
@@ -201,7 +200,7 @@
   <span class="p">}</span> <span class="k">else</span> <span class="p">{</span>
     <span class="n">node</span><span class="o">-&gt;</span><span class="n">setId</span><span class="p">(</span><span class="n">count_</span><span class="o">++</span><span class="p">);</span>
 
-    <span class="c1">// record in foward graph</span>
+    <span class="c1">// record in forward graph</span>
     <span class="n">nodesForward_</span><span class="p">.</span><span class="n">push_back</span><span class="p">(</span><span class="n">node</span><span class="p">);</span>
 
     <span class="c1">// record in backward graph if training, and keep track of roots</span>
@@ -314,6 +313,11 @@
     <span class="k">if</span><span class="p">(</span><span class="n">inferenceOnly_</span><span class="p">)</span>
       <span class="n">v</span><span class="o">-&gt;</span><span class="n">children</span><span class="p">().</span><span class="n">clear</span><span class="p">();</span>
 
+    <span class="c1">// If checkpointing is disabled, keep the memory for forward signals for all nodes.</span>
+    <span class="c1">// If checkpointing is enabled:</span>
+    <span class="c1">//  (a) In the forward pass before the backward pass, free the memory for the nodes in the subtape to save memory.</span>
+    <span class="c1">//  (b) In the forward calls during the backward pass, keep the memory in the current subtape to accelerate</span>
+    <span class="c1">//      gradient computation.</span>
     <span class="k">if</span><span class="p">(</span><span class="n">checkpointing_</span> <span class="o">&amp;&amp;</span> <span class="o">!</span><span class="n">finalPass</span><span class="p">)</span> <span class="p">{</span>
       <span class="k">auto</span> <span class="n">subtape</span> <span class="o">=</span> <span class="n">v</span><span class="o">-&gt;</span><span class="n">getSubtape</span><span class="p">();</span>
       <span class="k">if</span><span class="p">(</span><span class="n">subtape</span><span class="p">)</span> <span class="p">{</span>
@@ -342,12 +346,14 @@
     <span class="n">ABORT</span><span class="p">(</span><span class="s">&quot;Aborting&quot;</span><span class="p">);</span>
   <span class="p">}</span>
 
+  <span class="c1">// allocates memory and initialises gradients for parameters</span>
   <span class="k">for</span><span class="p">(</span><span class="k">auto</span> <span class="nl">kvParams</span> <span class="p">:</span> <span class="n">paramsByElementType_</span><span class="p">)</span> <span class="p">{</span>
     <span class="n">kvParams</span><span class="p">.</span><span class="n">second</span><span class="o">-&gt;</span><span class="n">allocateBackward</span><span class="p">();</span>
     <span class="k">if</span><span class="p">(</span><span class="n">reset</span><span class="p">)</span>
       <span class="n">kvParams</span><span class="p">.</span><span class="n">second</span><span class="o">-&gt;</span><span class="n">set_zero_adjoint</span><span class="p">();</span>
   <span class="p">}</span>
 
+  <span class="c1">// for top nodes: allocates memory and initialise gradients to 1</span>
   <span class="k">for</span><span class="p">(</span><span class="k">auto</span><span class="o">&amp;&amp;</span> <span class="nl">v</span> <span class="p">:</span> <span class="n">topNodes_</span><span class="p">)</span>
     <span class="n">v</span><span class="o">-&gt;</span><span class="n">init_dependent</span><span class="p">();</span>
 
@@ -357,13 +363,16 @@
 
   <span class="kt">bool</span> <span class="n">firstNaN</span> <span class="o">=</span> <span class="nb">true</span><span class="p">;</span>
   <span class="k">while</span><span class="p">(</span><span class="o">!</span><span class="n">nodesBackward_</span><span class="p">.</span><span class="n">empty</span><span class="p">())</span> <span class="p">{</span>
-    <span class="k">auto</span> <span class="n">v</span> <span class="o">=</span> <span class="n">nodesBackward_</span><span class="p">.</span><span class="n">back</span><span class="p">();</span>
-    <span class="n">nodesBackward_</span><span class="p">.</span><span class="n">pop_back</span><span class="p">();</span>
+    <span class="k">auto</span> <span class="n">v</span> <span class="o">=</span> <span class="n">nodesBackward_</span><span class="p">.</span><span class="n">back</span><span class="p">();</span>  <span class="c1">// return the last element</span>
+    <span class="n">nodesBackward_</span><span class="p">.</span><span class="n">pop_back</span><span class="p">();</span>       <span class="c1">// remove the last element</span>
 
+    <span class="c1">// for non-top nodes: allocates memory and initialises gradients to 0</span>
     <span class="k">for</span><span class="p">(</span><span class="k">auto</span><span class="o">&amp;&amp;</span> <span class="nl">child</span> <span class="p">:</span> <span class="n">v</span><span class="o">-&gt;</span><span class="n">children</span><span class="p">())</span>
       <span class="k">if</span><span class="p">(</span><span class="n">child</span><span class="o">-&gt;</span><span class="n">trainable</span><span class="p">()</span> <span class="o">&amp;&amp;</span> <span class="n">child</span><span class="o">-&gt;</span><span class="n">type</span><span class="p">()</span> <span class="o">!=</span> <span class="s">&quot;param&quot;</span><span class="p">)</span>
         <span class="n">child</span><span class="o">-&gt;</span><span class="n">set_zero_adjoint</span><span class="p">();</span>
 
+    <span class="c1">// if using gradient checkpointing,</span>
+    <span class="c1">// recompute the forward pass from checkpoint to the root</span>
     <span class="k">if</span><span class="p">(</span><span class="n">checkpointing_</span> <span class="o">&amp;&amp;</span> <span class="n">v</span><span class="o">-&gt;</span><span class="n">getSubtape</span><span class="p">())</span> <span class="p">{</span>
       <span class="n">forward</span><span class="p">(</span><span class="o">*</span><span class="n">v</span><span class="o">-&gt;</span><span class="n">getSubtape</span><span class="p">(),</span> <span class="cm">/*finalPass=*/</span><span class="nb">true</span><span class="p">);</span>
     <span class="p">}</span>

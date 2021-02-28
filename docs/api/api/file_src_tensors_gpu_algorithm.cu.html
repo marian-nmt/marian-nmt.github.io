@@ -1,0 +1,296 @@
+
+
+<!DOCTYPE html>
+<html class="writer-html5" lang="en" >
+<head>
+  <meta charset="utf-8" />
+  
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  
+  <title>File algorithm.cu &mdash; Marian NMT v1.10.2 2021-02-28 documentation</title>
+  
+
+  
+  <link rel="stylesheet" href="../_static/css/theme.css" type="text/css" />
+  <link rel="stylesheet" href="../_static/pygments.css" type="text/css" />
+  <link rel="stylesheet" href="../_static/css/custom.css" type="text/css" />
+  <link rel="stylesheet" href="../_static/collapsible-lists/css/tree_view.css" type="text/css" />
+
+  
+  
+
+  
+  
+
+  
+    <link rel="canonical" href="http://marian-nmt.github.io/docs/api/api/file_src_tensors_gpu_algorithm.cu.html" />
+
+  
+  <!--[if lt IE 9]>
+    <script src="../_static/js/html5shiv.min.js"></script>
+  <![endif]-->
+  
+    
+      <script type="text/javascript" id="documentation_options" data-url_root="../" src="../_static/documentation_options.js"></script>
+        <script src="../_static/jquery.js"></script>
+        <script src="../_static/underscore.js"></script>
+        <script src="../_static/doctools.js"></script>
+        <script src="../_static/language_data.js"></script>
+        <script src="../_static/collapsible-lists/js/CollapsibleLists.compressed.js"></script>
+        <script src="../_static/collapsible-lists/js/apply-collapsible-lists.js"></script>
+    
+    <script type="text/javascript" src="../_static/js/theme.js"></script>
+
+    
+    <link rel="index" title="Index" href="../genindex.html" />
+    <link rel="search" title="Search" href="../search.html" /> 
+</head>
+
+<body class="wy-body-for-nav">
+
+   
+  <div class="wy-grid-for-nav">
+    
+    <nav data-toggle="wy-nav-shift" class="wy-nav-side">
+      <div class="wy-side-scroll">
+        <div class="wy-side-nav-search" >
+          
+
+          
+            <a href="../index.html" class="icon icon-home"> Marian NMT
+          
+
+          
+          </a>
+
+          
+            
+            
+              <div class="version">
+                v1.10.2
+              </div>
+            
+          
+
+          
+<div role="search">
+  <form id="rtd-search-form" class="wy-form" action="../search.html" method="get">
+    <input type="text" name="q" placeholder="Search docs" />
+    <input type="hidden" name="check_keywords" value="yes" />
+    <input type="hidden" name="area" value="default" />
+  </form>
+</div>
+
+          
+        </div>
+
+        
+        <div class="wy-menu wy-menu-vertical" data-spy="affix" role="navigation" aria-label="main navigation">
+          
+            
+            
+              
+            
+            
+              <p class="caption"><span class="caption-text">Contents:</span></p>
+<ul>
+<li class="toctree-l1"><a class="reference internal" href="../graph.html">Expression graphs</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../operators.html">Operations in the Expression Graph</a></li>
+<li class="toctree-l1"><a class="reference internal" href="library_index.html">Library API</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../contributing.html">How to contribute to Marian</a></li>
+</ul>
+
+            
+          
+        </div>
+        
+      </div>
+    </nav>
+
+    <section data-toggle="wy-nav-shift" class="wy-nav-content-wrap">
+
+      
+      <nav class="wy-nav-top" aria-label="top navigation">
+        
+          <i data-toggle="wy-nav-top" class="fa fa-bars"></i>
+          <a href="../index.html">Marian NMT</a>
+        
+      </nav>
+
+
+      <div class="wy-nav-content">
+        
+        <div class="rst-content">
+        
+          
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+<div role="navigation" aria-label="breadcrumbs navigation">
+
+  <ul class="wy-breadcrumbs">
+    
+      <li><a href="../index.html" class="icon icon-home"></a> &raquo;</li>
+        
+      <li>File algorithm.cu</li>
+    
+    
+      <li class="wy-breadcrumbs-aside">
+        
+          
+            <a href="../_sources/api/file_src_tensors_gpu_algorithm.cu.rst.txt" rel="nofollow"> View page source</a>
+          
+        
+      </li>
+    
+  </ul>
+
+  
+  <hr/>
+</div>
+          <div role="main" class="document" itemscope="itemscope" itemtype="http://schema.org/Article">
+           <div itemprop="articleBody">
+            
+  <div class="section" id="file-algorithm-cu">
+<span id="file-src-tensors-gpu-algorithm-cu"></span><h1>File algorithm.cu<a class="headerlink" href="#file-algorithm-cu" title="Permalink to this headline">¶</a></h1>
+<p>↰ <a class="reference internal" href="dir_src_tensors_gpu.html#dir-src-tensors-gpu"><span class="std std-ref">Parent directory</span></a> (<code class="docutils literal notranslate"><span class="pre">src/tensors/gpu</span></code>)</p>
+<div class="contents local topic" id="contents">
+<p class="topic-title">Contents</p>
+<ul class="simple">
+<li><p><a class="reference internal" href="#definition-src-tensors-gpu-algorithm-cu" id="id1">Definition (<code class="docutils literal notranslate"><span class="pre">src/tensors/gpu/algorithm.cu</span></code>)</a></p></li>
+<li><p><a class="reference internal" href="#includes" id="id2">Includes</a></p></li>
+<li><p><a class="reference internal" href="#namespaces" id="id3">Namespaces</a></p></li>
+<li><p><a class="reference internal" href="#functions" id="id4">Functions</a></p></li>
+</ul>
+</div>
+<div class="section" id="definition-src-tensors-gpu-algorithm-cu">
+<h2>Definition (<code class="docutils literal notranslate"><span class="pre">src/tensors/gpu/algorithm.cu</span></code>)<a class="headerlink" href="#definition-src-tensors-gpu-algorithm-cu" title="Permalink to this headline">¶</a></h2>
+<div class="toctree-wrapper compound">
+<ul>
+<li class="toctree-l1"><a class="reference internal" href="program_listing_file_src_tensors_gpu_algorithm.cu.html">Program Listing for File algorithm.cu</a></li>
+</ul>
+</div>
+</div>
+<div class="section" id="includes">
+<h2>Includes<a class="headerlink" href="#includes" title="Permalink to this headline">¶</a></h2>
+<ul class="simple">
+<li><p><code class="docutils literal notranslate"><span class="pre">tensors/gpu/algorithm.h</span></code> (<a class="reference internal" href="file_src_tensors_gpu_algorithm.h.html#file-src-tensors-gpu-algorithm-h"><span class="std std-ref">File algorithm.h</span></a>)</p></li>
+<li><p><code class="docutils literal notranslate"><span class="pre">tensors/gpu/cuda_helpers.h</span></code> (<a class="reference internal" href="file_src_tensors_gpu_cuda_helpers.h.html#file-src-tensors-gpu-cuda-helpers-h"><span class="std std-ref">File cuda_helpers.h</span></a>)</p></li>
+<li><p><code class="docutils literal notranslate"><span class="pre">tensors/tensor_operators.h</span></code> (<a class="reference internal" href="file_src_tensors_tensor_operators.h.html#file-src-tensors-tensor-operators-h"><span class="std std-ref">File tensor_operators.h</span></a>)</p></li>
+</ul>
+</div>
+<div class="section" id="namespaces">
+<h2>Namespaces<a class="headerlink" href="#namespaces" title="Permalink to this headline">¶</a></h2>
+<ul class="simple">
+<li><p><a class="reference internal" href="namespace_marian.html#namespace-marian"><span class="std std-ref">Namespace marian</span></a></p></li>
+<li><p><a class="reference internal" href="namespace_marian__gpu.html#namespace-marian-gpu"><span class="std std-ref">Namespace marian::gpu</span></a></p></li>
+</ul>
+</div>
+<div class="section" id="functions">
+<h2>Functions<a class="headerlink" href="#functions" title="Permalink to this headline">¶</a></h2>
+<ul class="simple">
+<li><p><a class="reference internal" href="function_algorithm_8cu_1a8be38526438efc599006e43cde289839.html#exhale-function-algorithm-8cu-1a8be38526438efc599006e43cde289839"><span class="std std-ref">Template Function marian::gpu::copy(Ptr&lt;Backend&gt;, const T *, const T *, T *)</span></a></p></li>
+<li><p><a class="reference internal" href="function_algorithm_8cu_1a8bdbf860a6f77b79a1d0d82fa8adf39a.html#exhale-function-algorithm-8cu-1a8bdbf860a6f77b79a1d0d82fa8adf39a"><span class="std std-ref">Function marian::gpu::copy&lt; char &gt;</span></a></p></li>
+<li><p><a class="reference internal" href="function_algorithm_8cu_1a7c5ae08b43932f27d46019899e6871ca.html#exhale-function-algorithm-8cu-1a7c5ae08b43932f27d46019899e6871ca"><span class="std std-ref">Function marian::gpu::copy&lt; double &gt;</span></a></p></li>
+<li><p><a class="reference internal" href="function_algorithm_8cu_1af353b9a6efa274386e925638e54c84cd.html#exhale-function-algorithm-8cu-1af353b9a6efa274386e925638e54c84cd"><span class="std std-ref">Function marian::gpu::copy&lt; float &gt;</span></a></p></li>
+<li><p><a class="reference internal" href="function_algorithm_8cu_1ad56d94869533357de67512812194a1a0.html#exhale-function-algorithm-8cu-1ad56d94869533357de67512812194a1a0"><span class="std std-ref">Function marian::gpu::copy&lt; float16 &gt;</span></a></p></li>
+<li><p><a class="reference internal" href="function_algorithm_8cu_1a87cc546331fe9310241fb20eae95f7d6.html#exhale-function-algorithm-8cu-1a87cc546331fe9310241fb20eae95f7d6"><span class="std std-ref">Function marian::gpu::copy&lt; int16_t &gt;</span></a></p></li>
+<li><p><a class="reference internal" href="function_algorithm_8cu_1a8ed057d43733993497bc6c53787bf309.html#exhale-function-algorithm-8cu-1a8ed057d43733993497bc6c53787bf309"><span class="std std-ref">Function marian::gpu::copy&lt; int32_t &gt;</span></a></p></li>
+<li><p><a class="reference internal" href="function_algorithm_8cu_1a5b95bd6b0a6629e8ff024c5cf72282ae.html#exhale-function-algorithm-8cu-1a5b95bd6b0a6629e8ff024c5cf72282ae"><span class="std std-ref">Function marian::gpu::copy&lt; int64_t &gt;</span></a></p></li>
+<li><p><a class="reference internal" href="function_algorithm_8cu_1aa6c200428958ceb9320ac40e340cd46b.html#exhale-function-algorithm-8cu-1aa6c200428958ceb9320ac40e340cd46b"><span class="std std-ref">Function marian::gpu::copy&lt; int8_t &gt;</span></a></p></li>
+<li><p><a class="reference internal" href="function_algorithm_8cu_1ab50961eb1f3831d922a7db287c51a4f6.html#exhale-function-algorithm-8cu-1ab50961eb1f3831d922a7db287c51a4f6"><span class="std std-ref">Function marian::gpu::copy&lt; uint16_t &gt;</span></a></p></li>
+<li><p><a class="reference internal" href="function_algorithm_8cu_1ae40bc789ff7481bf200f6bfef9705a7c.html#exhale-function-algorithm-8cu-1ae40bc789ff7481bf200f6bfef9705a7c"><span class="std std-ref">Function marian::gpu::copy&lt; uint32_t &gt;</span></a></p></li>
+<li><p><a class="reference internal" href="function_algorithm_8cu_1a4ae6672be4ed1af3e96f22ac9f5325cc.html#exhale-function-algorithm-8cu-1a4ae6672be4ed1af3e96f22ac9f5325cc"><span class="std std-ref">Function marian::gpu::copy&lt; uint64_t &gt;</span></a></p></li>
+<li><p><a class="reference internal" href="function_algorithm_8cu_1a332a6d699dcbb059fdd18fffad1c2955.html#exhale-function-algorithm-8cu-1a332a6d699dcbb059fdd18fffad1c2955"><span class="std std-ref">Function marian::gpu::copy&lt; uint8_t &gt;</span></a></p></li>
+<li><p><a class="reference internal" href="function_algorithm_8cu_1a2474b35b2d85bd270500ce011aa7c337.html#exhale-function-algorithm-8cu-1a2474b35b2d85bd270500ce011aa7c337"><span class="std std-ref">Template Function marian::gpu::fill(Ptr&lt;Backend&gt;, T *, T *, T)</span></a></p></li>
+<li><p><a class="reference internal" href="function_algorithm_8cu_1a47a6b26f545743fb027b1be0b6afa6cf.html#exhale-function-algorithm-8cu-1a47a6b26f545743fb027b1be0b6afa6cf"><span class="std std-ref">Function marian::gpu::fill&lt; bool &gt;</span></a></p></li>
+<li><p><a class="reference internal" href="function_algorithm_8cu_1a57843ac657992773fad3a5c1369eff1e.html#exhale-function-algorithm-8cu-1a57843ac657992773fad3a5c1369eff1e"><span class="std std-ref">Function marian::gpu::fill&lt; double &gt;</span></a></p></li>
+<li><p><a class="reference internal" href="function_algorithm_8cu_1a0b3691577aecefe94fc9670f5df8e67c.html#exhale-function-algorithm-8cu-1a0b3691577aecefe94fc9670f5df8e67c"><span class="std std-ref">Function marian::gpu::fill&lt; float &gt;</span></a></p></li>
+<li><p><a class="reference internal" href="function_algorithm_8cu_1a967608397949850307c8c951db697fbd.html#exhale-function-algorithm-8cu-1a967608397949850307c8c951db697fbd"><span class="std std-ref">Function marian::gpu::fill&lt; float16 &gt;</span></a></p></li>
+<li><p><a class="reference internal" href="function_algorithm_8cu_1a9ad3a8ce3b22bde170b01dcaad689035.html#exhale-function-algorithm-8cu-1a9ad3a8ce3b22bde170b01dcaad689035"><span class="std std-ref">Function marian::gpu::fill&lt; int16_t &gt;</span></a></p></li>
+<li><p><a class="reference internal" href="function_algorithm_8cu_1accdbedf1d6c90d37f8f24e6ac4fc4d88.html#exhale-function-algorithm-8cu-1accdbedf1d6c90d37f8f24e6ac4fc4d88"><span class="std std-ref">Function marian::gpu::fill&lt; int32_t &gt;</span></a></p></li>
+<li><p><a class="reference internal" href="function_algorithm_8cu_1a3902593ad82c2dd917be809aa09ee1f7.html#exhale-function-algorithm-8cu-1a3902593ad82c2dd917be809aa09ee1f7"><span class="std std-ref">Function marian::gpu::fill&lt; int64_t &gt;</span></a></p></li>
+<li><p><a class="reference internal" href="function_algorithm_8cu_1a5459d80b607e7fdea99ce9cf4b9601ae.html#exhale-function-algorithm-8cu-1a5459d80b607e7fdea99ce9cf4b9601ae"><span class="std std-ref">Function marian::gpu::fill&lt; int8_t &gt;</span></a></p></li>
+<li><p><a class="reference internal" href="function_algorithm_8cu_1a37230c7c89355154b8709de683120815.html#exhale-function-algorithm-8cu-1a37230c7c89355154b8709de683120815"><span class="std std-ref">Function marian::gpu::fill&lt; uint16_t &gt;</span></a></p></li>
+<li><p><a class="reference internal" href="function_algorithm_8cu_1a4735a8b05277ae3a43783304574a6d82.html#exhale-function-algorithm-8cu-1a4735a8b05277ae3a43783304574a6d82"><span class="std std-ref">Function marian::gpu::fill&lt; uint32_t &gt;</span></a></p></li>
+<li><p><a class="reference internal" href="function_algorithm_8cu_1a3f68985d4d4e38d7a0347df06f452cb6.html#exhale-function-algorithm-8cu-1a3f68985d4d4e38d7a0347df06f452cb6"><span class="std std-ref">Function marian::gpu::fill&lt; uint64_t &gt;</span></a></p></li>
+<li><p><a class="reference internal" href="function_algorithm_8cu_1a96fbec5cd4f5fb9e33720c9c4b83e7df.html#exhale-function-algorithm-8cu-1a96fbec5cd4f5fb9e33720c9c4b83e7df"><span class="std std-ref">Function marian::gpu::fill&lt; uint8_t &gt;</span></a></p></li>
+<li><p><a class="reference internal" href="function_algorithm_8cu_1a10f74657a42e811a332aba8a8c84e889.html#exhale-function-algorithm-8cu-1a10f74657a42e811a332aba8a8c84e889"><span class="std std-ref">Template Function marian::gpu::gFill</span></a></p></li>
+<li><p><a class="reference internal" href="function_algorithm_8cu_1aacf2235d3225605bd59454172dbc48c5.html#exhale-function-algorithm-8cu-1aacf2235d3225605bd59454172dbc48c5"><span class="std std-ref">Template Function marian::gpu::gSwap</span></a></p></li>
+<li><p><a class="reference internal" href="function_algorithm_8cu_1a0a07d8a401e621986dab846f8289e6be.html#exhale-function-algorithm-8cu-1a0a07d8a401e621986dab846f8289e6be"><span class="std std-ref">Function marian::gpu::setSparse(Ptr&lt;Backend&gt;, const std::vector&lt;size_t&gt;&amp;, const std::vector&lt;float&gt;&amp;, float *)</span></a></p></li>
+<li><p><a class="reference internal" href="function_algorithm_8cu_1a9731651821d5e264a6433ae688638f73.html#exhale-function-algorithm-8cu-1a9731651821d5e264a6433ae688638f73"><span class="std std-ref">Template Function marian::gpu::swap_ranges(Ptr&lt;Backend&gt;, T *, T *, T *)</span></a></p></li>
+<li><p><a class="reference internal" href="function_algorithm_8cu_1a978a1852e03e8523858fa1bce8f6cb0c.html#exhale-function-algorithm-8cu-1a978a1852e03e8523858fa1bce8f6cb0c"><span class="std std-ref">Function marian::gpu::swap_ranges&lt; char &gt;</span></a></p></li>
+<li><p><a class="reference internal" href="function_algorithm_8cu_1aff1bef3e46a3843ebe3bfd398191e6a6.html#exhale-function-algorithm-8cu-1aff1bef3e46a3843ebe3bfd398191e6a6"><span class="std std-ref">Function marian::gpu::swap_ranges&lt; double &gt;</span></a></p></li>
+<li><p><a class="reference internal" href="function_algorithm_8cu_1aa4582a295e4ad2ecf41022566d552a26.html#exhale-function-algorithm-8cu-1aa4582a295e4ad2ecf41022566d552a26"><span class="std std-ref">Function marian::gpu::swap_ranges&lt; float &gt;</span></a></p></li>
+<li><p><a class="reference internal" href="function_algorithm_8cu_1ad5d38cd2f3385db43e8cba542cf51a21.html#exhale-function-algorithm-8cu-1ad5d38cd2f3385db43e8cba542cf51a21"><span class="std std-ref">Function marian::gpu::swap_ranges&lt; float16 &gt;</span></a></p></li>
+<li><p><a class="reference internal" href="function_algorithm_8cu_1abc2888c9b9e2f5abc7025bf0c75453d3.html#exhale-function-algorithm-8cu-1abc2888c9b9e2f5abc7025bf0c75453d3"><span class="std std-ref">Function marian::gpu::swap_ranges&lt; int16_t &gt;</span></a></p></li>
+<li><p><a class="reference internal" href="function_algorithm_8cu_1a28bbc8099d91abef3622c03468dc630c.html#exhale-function-algorithm-8cu-1a28bbc8099d91abef3622c03468dc630c"><span class="std std-ref">Function marian::gpu::swap_ranges&lt; int32_t &gt;</span></a></p></li>
+<li><p><a class="reference internal" href="function_algorithm_8cu_1adb2531cb9fab0e7fec2084de836eaa3d.html#exhale-function-algorithm-8cu-1adb2531cb9fab0e7fec2084de836eaa3d"><span class="std std-ref">Function marian::gpu::swap_ranges&lt; int64_t &gt;</span></a></p></li>
+<li><p><a class="reference internal" href="function_algorithm_8cu_1abf8e15908316cf1b6d7e5165302a5f6f.html#exhale-function-algorithm-8cu-1abf8e15908316cf1b6d7e5165302a5f6f"><span class="std std-ref">Function marian::gpu::swap_ranges&lt; int8_t &gt;</span></a></p></li>
+<li><p><a class="reference internal" href="function_algorithm_8cu_1a0b4aaa3e2806ce2a718627cb07638d85.html#exhale-function-algorithm-8cu-1a0b4aaa3e2806ce2a718627cb07638d85"><span class="std std-ref">Function marian::gpu::swap_ranges&lt; uint16_t &gt;</span></a></p></li>
+<li><p><a class="reference internal" href="function_algorithm_8cu_1a921b12e56d88455e0d55aa2ee787b311.html#exhale-function-algorithm-8cu-1a921b12e56d88455e0d55aa2ee787b311"><span class="std std-ref">Function marian::gpu::swap_ranges&lt; uint32_t &gt;</span></a></p></li>
+<li><p><a class="reference internal" href="function_algorithm_8cu_1ab02cddf7bbaa31e788481d1e3197c34f.html#exhale-function-algorithm-8cu-1ab02cddf7bbaa31e788481d1e3197c34f"><span class="std std-ref">Function marian::gpu::swap_ranges&lt; uint64_t &gt;</span></a></p></li>
+<li><p><a class="reference internal" href="function_algorithm_8cu_1a4b7f16f591c0c0e8f4d40f30eeffc9a9.html#exhale-function-algorithm-8cu-1a4b7f16f591c0c0e8f4d40f30eeffc9a9"><span class="std std-ref">Function marian::gpu::swap_ranges&lt; uint8_t &gt;</span></a></p></li>
+</ul>
+</div>
+</div>
+
+
+           </div>
+           
+          </div>
+          <footer>
+
+  <hr/>
+
+  <div role="contentinfo">
+    <p>
+        &#169; Copyright 2021, Marian NMT Team.
+
+    </p>
+  </div>
+    
+    
+    
+    Built with <a href="https://www.sphinx-doc.org/">Sphinx</a> using a
+    
+    <a href="https://github.com/readthedocs/sphinx_rtd_theme">theme</a>
+    
+    provided by <a href="https://readthedocs.org">Read the Docs</a>. 
+
+</footer>
+        </div>
+      </div>
+
+    </section>
+
+  </div>
+  
+
+  <script type="text/javascript">
+      jQuery(function () {
+          SphinxRtdTheme.Navigation.enable(true);
+      });
+  </script>
+
+  
+  
+    
+   
+
+</body>
+</html>

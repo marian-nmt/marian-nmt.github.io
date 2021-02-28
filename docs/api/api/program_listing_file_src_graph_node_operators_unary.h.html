@@ -7,7 +7,7 @@
   
   <meta name="viewport" content="width=device-width, initial-scale=1.0" />
   
-  <title>Program Listing for File node_operators_unary.h &mdash; Marian NMT v1.10.1 2021-02-23 documentation</title>
+  <title>Program Listing for File node_operators_unary.h &mdash; Marian NMT v1.10.2 2021-02-28 documentation</title>
   
 
   
@@ -67,7 +67,7 @@
             
             
               <div class="version">
-                v1.10.1
+                v1.10.2
               </div>
             
           
@@ -94,9 +94,8 @@
             
               <p class="caption"><span class="caption-text">Contents:</span></p>
 <ul>
-<li class="toctree-l1"><a class="reference internal" href="../install.html">Installation</a></li>
 <li class="toctree-l1"><a class="reference internal" href="../graph.html">Expression graphs</a></li>
-<li class="toctree-l1"><a class="reference internal" href="../operators.html">Graph operations</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../operators.html">Operations in the Expression Graph</a></li>
 <li class="toctree-l1"><a class="reference internal" href="library_index.html">Library API</a></li>
 <li class="toctree-l1"><a class="reference internal" href="../contributing.html">How to contribute to Marian</a></li>
 </ul>
@@ -782,7 +781,7 @@
     <span class="k">return</span> <span class="p">{</span><span class="n">NodeOp</span><span class="p">(</span><span class="n">Add</span><span class="p">(</span><span class="n">_1</span> <span class="o">*</span> <span class="o">-</span><span class="n">sin</span><span class="p">(</span><span class="n">_2</span><span class="p">),</span> <span class="n">child</span><span class="p">(</span><span class="mi">0</span><span class="p">)</span><span class="o">-&gt;</span><span class="n">grad</span><span class="p">(),</span> <span class="n">adj_</span><span class="p">,</span> <span class="n">child</span><span class="p">(</span><span class="mi">0</span><span class="p">)</span><span class="o">-&gt;</span><span class="n">val</span><span class="p">()))};</span>
   <span class="p">}</span>
 
-  <span class="k">const</span> <span class="n">std</span><span class="o">::</span><span class="n">string</span> <span class="n">type</span><span class="p">()</span> <span class="k">override</span> <span class="p">{</span> <span class="k">return</span> <span class="s">&quot;sin&quot;</span><span class="p">;</span> <span class="p">}</span>
+  <span class="k">const</span> <span class="n">std</span><span class="o">::</span><span class="n">string</span> <span class="n">type</span><span class="p">()</span> <span class="k">override</span> <span class="p">{</span> <span class="k">return</span> <span class="s">&quot;cos&quot;</span><span class="p">;</span> <span class="p">}</span>
 <span class="p">};</span>
 
 <span class="k">struct</span> <span class="nc">TanNodeOp</span> <span class="o">:</span> <span class="k">public</span> <span class="n">UnaryNodeOp</span> <span class="p">{</span>
@@ -798,7 +797,7 @@
     <span class="k">return</span> <span class="p">{</span><span class="n">NodeOp</span><span class="p">(</span><span class="n">Add</span><span class="p">(</span><span class="n">_1</span> <span class="o">/</span> <span class="n">sqr</span><span class="p">(</span><span class="n">cos</span><span class="p">(</span><span class="n">_2</span><span class="p">)),</span> <span class="n">child</span><span class="p">(</span><span class="mi">0</span><span class="p">)</span><span class="o">-&gt;</span><span class="n">grad</span><span class="p">(),</span> <span class="n">adj_</span><span class="p">,</span> <span class="n">child</span><span class="p">(</span><span class="mi">0</span><span class="p">)</span><span class="o">-&gt;</span><span class="n">val</span><span class="p">()))};</span>
   <span class="p">}</span>
 
-  <span class="k">const</span> <span class="n">std</span><span class="o">::</span><span class="n">string</span> <span class="n">type</span><span class="p">()</span> <span class="k">override</span> <span class="p">{</span> <span class="k">return</span> <span class="s">&quot;sin&quot;</span><span class="p">;</span> <span class="p">}</span>
+  <span class="k">const</span> <span class="n">std</span><span class="o">::</span><span class="n">string</span> <span class="n">type</span><span class="p">()</span> <span class="k">override</span> <span class="p">{</span> <span class="k">return</span> <span class="s">&quot;tan&quot;</span><span class="p">;</span> <span class="p">}</span>
 <span class="p">};</span>
 
 <span class="k">struct</span> <span class="nc">SqrtNodeOp</span> <span class="o">:</span> <span class="k">public</span> <span class="n">UnaryNodeOp</span> <span class="p">{</span>

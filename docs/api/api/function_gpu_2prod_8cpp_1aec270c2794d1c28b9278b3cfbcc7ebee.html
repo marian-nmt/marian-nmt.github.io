@@ -7,7 +7,7 @@
   
   <meta name="viewport" content="width=device-width, initial-scale=1.0" />
   
-  <title>Template Function marian::gpu::ProdTyped &mdash; Marian NMT v1.10.1 2021-02-23 documentation</title>
+  <title>Template Function marian::gpu::ProdTyped &mdash; Marian NMT v1.10.2 2021-02-28 documentation</title>
   
 
   
@@ -44,7 +44,7 @@
     
     <link rel="index" title="Index" href="../genindex.html" />
     <link rel="search" title="Search" href="../search.html" />
-    <link rel="next" title="Function marian::gpu::scatterAdd" href="function_sparse__algorithm_8h_1a139424fa1eecec0693cf784f310a2c2e.html" />
+    <link rel="next" title="Function marian::gpu::sampling" href="function_dropper_8cu_1a83053ef74d1c61463540d45bea26972b.html" />
     <link rel="prev" title="Template Function marian::gpu::ProdBatchedTyped" href="function_gpu_2prod_8cpp_1a1d9f9c6dda3f1e205ec31cdaa51c13f1.html" /> 
 </head>
 
@@ -69,7 +69,7 @@
             
             
               <div class="version">
-                v1.10.1
+                v1.10.2
               </div>
             
           
@@ -96,9 +96,8 @@
             
               <p class="caption"><span class="caption-text">Contents:</span></p>
 <ul>
-<li class="toctree-l1"><a class="reference internal" href="../install.html">Installation</a></li>
 <li class="toctree-l1"><a class="reference internal" href="../graph.html">Expression graphs</a></li>
-<li class="toctree-l1"><a class="reference internal" href="../operators.html">Graph operations</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../operators.html">Operations in the Expression Graph</a></li>
 <li class="toctree-l1"><a class="reference internal" href="library_index.html">Library API</a></li>
 <li class="toctree-l1"><a class="reference internal" href="../contributing.html">How to contribute to Marian</a></li>
 </ul>
@@ -179,7 +178,7 @@
 <h2>Function Documentation<a class="headerlink" href="#function-documentation" title="Permalink to this headline">¶</a></h2>
 <dl class="function">
 <dt id="_CPPv4I0EN6marian3gpu9ProdTypedEvN6marian6TensorERKN6marian6TensorERKN6marian6TensorEbb1T1T">
-<span id="_CPPv3I0EN6marian3gpu9ProdTypedEN6marian6TensorERKN6marian6TensorERKN6marian6TensorEbb1T1T"></span><span id="_CPPv2I0EN6marian3gpu9ProdTypedEN6marian6TensorERKN6marian6TensorERKN6marian6TensorEbb1T1T"></span><span class="target" id="gpu_2prod_8cpp_1aec270c2794d1c28b9278b3cfbcc7ebee"></span>template&lt;typename <code class="sig-name descname">T</code>&gt;<br />void <code class="sig-prename descclassname">marian::<a class="reference internal" href="enum_definitions_8h_1a80d9ddedec349b4d83d40d387878bf4c.html#_CPPv4N6marian3gpuE" title="marian::gpu">gpu</a><code class="sig-prename descclassname">::</code></code><code class="sig-name descname">ProdTyped</code><span class="sig-paren">(</span>marian::Tensor <em>C</em>, <em class="property">const</em> marian::Tensor &amp;<em>A</em>, <em class="property">const</em> marian::Tensor &amp;<em>B</em>, bool <em>transA</em>, bool <em>transB</em>, <a class="reference internal" href="#_CPPv4I0EN6marian3gpu9ProdTypedEvN6marian6TensorERKN6marian6TensorERKN6marian6TensorEbb1T1T" title="marian::gpu::ProdTyped::T">T</a> <em>beta</em>, <a class="reference internal" href="#_CPPv4I0EN6marian3gpu9ProdTypedEvN6marian6TensorERKN6marian6TensorERKN6marian6TensorEbb1T1T" title="marian::gpu::ProdTyped::T">T</a> <em>scalar</em><span class="sig-paren">)</span><a class="headerlink" href="#_CPPv4I0EN6marian3gpu9ProdTypedEvN6marian6TensorERKN6marian6TensorERKN6marian6TensorEbb1T1T" title="Permalink to this definition">¶</a><br /></dt>
+<span id="_CPPv3I0EN6marian3gpu9ProdTypedEN6marian6TensorERKN6marian6TensorERKN6marian6TensorEbb1T1T"></span><span id="_CPPv2I0EN6marian3gpu9ProdTypedEN6marian6TensorERKN6marian6TensorERKN6marian6TensorEbb1T1T"></span><span class="target" id="gpu_2prod_8cpp_1aec270c2794d1c28b9278b3cfbcc7ebee"></span>template&lt;typename <code class="sig-name descname">T</code>&gt;<br />void <code class="sig-prename descclassname">marian::<a class="reference internal" href="enum_namespacemarian_1a80d9ddedec349b4d83d40d387878bf4c.html#_CPPv4N6marian3gpuE" title="marian::gpu">gpu</a><code class="sig-prename descclassname">::</code></code><code class="sig-name descname">ProdTyped</code><span class="sig-paren">(</span>marian::Tensor <em>C</em>, <em class="property">const</em> marian::Tensor &amp;<em>A</em>, <em class="property">const</em> marian::Tensor &amp;<em>B</em>, bool <em>transA</em>, bool <em>transB</em>, <a class="reference internal" href="#_CPPv4I0EN6marian3gpu9ProdTypedEvN6marian6TensorERKN6marian6TensorERKN6marian6TensorEbb1T1T" title="marian::gpu::ProdTyped::T">T</a> <em>beta</em>, <a class="reference internal" href="#_CPPv4I0EN6marian3gpu9ProdTypedEvN6marian6TensorERKN6marian6TensorERKN6marian6TensorEbb1T1T" title="marian::gpu::ProdTyped::T">T</a> <em>scalar</em><span class="sig-paren">)</span><a class="headerlink" href="#_CPPv4I0EN6marian3gpu9ProdTypedEvN6marian6TensorERKN6marian6TensorERKN6marian6TensorEbb1T1T" title="Permalink to this definition">¶</a><br /></dt>
 <dd></dd></dl>
 
 </div>
@@ -191,7 +190,7 @@
           </div>
           <footer>
     <div class="rst-footer-buttons" role="navigation" aria-label="footer navigation">
-        <a href="function_sparse__algorithm_8h_1a139424fa1eecec0693cf784f310a2c2e.html" class="btn btn-neutral float-right" title="Function marian::gpu::scatterAdd" accesskey="n" rel="next">Next <span class="fa fa-arrow-circle-right" aria-hidden="true"></span></a>
+        <a href="function_dropper_8cu_1a83053ef74d1c61463540d45bea26972b.html" class="btn btn-neutral float-right" title="Function marian::gpu::sampling" accesskey="n" rel="next">Next <span class="fa fa-arrow-circle-right" aria-hidden="true"></span></a>
         <a href="function_gpu_2prod_8cpp_1a1d9f9c6dda3f1e205ec31cdaa51c13f1.html" class="btn btn-neutral float-left" title="Template Function marian::gpu::ProdBatchedTyped" accesskey="p" rel="prev"><span class="fa fa-arrow-circle-left" aria-hidden="true"></span> Previous</a>
     </div>
 

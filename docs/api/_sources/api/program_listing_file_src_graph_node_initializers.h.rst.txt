@@ -23,7 +23,6 @@ Program Listing for File node_initializers.h
    namespace marian {
    
    class ExpressionGraph; // Forward declaration
-   
    namespace inits {
    
    class NodeInitializer {
@@ -52,36 +51,28 @@ Program Listing for File node_initializers.h
    
    Ptr<NodeInitializer> uniform(float a = 0.f, float b = 1.f);
    
-   // @TODO: add documentation
    Ptr<NodeInitializer> bernoulli(float p, float scale = 1.f, float shift = 0.f);
    
-   // @TODO: add documentation
    Ptr<NodeInitializer> glorotUniform(bool fanIn = false, bool fanOut = false, float scale = 1.f);
    
-   // @TODO: add documentation
    Ptr<NodeInitializer> glorotNormal(bool fanIn = false, bool fanOut = false, float scale = 1.f);
    
-   // @TODO: add documentation
-   Ptr<NodeInitializer> dropout(float dropoutProbabilty);
+   Ptr<NodeInitializer> dropout(float dropoutProbability);
    
    Ptr<NodeInitializer> gumbel(float eps = 1e-5f);
    
-   // @TODO: add documentation
    template <typename T>
    Ptr<NodeInitializer> fromVector(const std::vector<T>& v);
+   
    template <typename T>
    Ptr<NodeInitializer> fromVector(std::vector<T>&& v);
    
-   // @TODO: add documentation
    Ptr<NodeInitializer> fromSparseVector(std::pair<std::vector<size_t>, std::vector<float>>& v);
    
-   // @TODO: add documentation
    Ptr<NodeInitializer> fromItem(const io::Item& item);
    
-   // @TODO: add documentation
    Ptr<NodeInitializer> fromTensor(Tensor tensor);
    
-   // @TODO: add documentation
    Ptr<NodeInitializer> fromWord2vec(const std::string& file,
                                      int dimVoc,
                                      int dimEmb,

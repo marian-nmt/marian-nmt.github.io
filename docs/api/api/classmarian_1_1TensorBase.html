@@ -7,7 +7,7 @@
   
   <meta name="viewport" content="width=device-width, initial-scale=1.0" />
   
-  <title>Class TensorBase &mdash; Marian NMT v1.10.1 2021-02-23 documentation</title>
+  <title>Class TensorBase &mdash; Marian NMT v1.10.2 2021-02-28 documentation</title>
   
 
   
@@ -69,7 +69,7 @@
             
             
               <div class="version">
-                v1.10.1
+                v1.10.2
               </div>
             
           
@@ -96,9 +96,8 @@
             
               <p class="caption"><span class="caption-text">Contents:</span></p>
 <ul>
-<li class="toctree-l1"><a class="reference internal" href="../install.html">Installation</a></li>
 <li class="toctree-l1"><a class="reference internal" href="../graph.html">Expression graphs</a></li>
-<li class="toctree-l1"><a class="reference internal" href="../operators.html">Graph operations</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../operators.html">Operations in the Expression Graph</a></li>
 <li class="toctree-l1"><a class="reference internal" href="library_index.html">Library API</a></li>
 <li class="toctree-l1"><a class="reference internal" href="../contributing.html">How to contribute to Marian</a></li>
 </ul>
@@ -180,11 +179,13 @@
 <dl class="class">
 <dt id="_CPPv4N6marian10TensorBaseE">
 <span id="_CPPv3N6marian10TensorBaseE"></span><span id="_CPPv2N6marian10TensorBaseE"></span><span id="marian::TensorBase"></span><span class="target" id="classmarian_1_1TensorBase"></span><em class="property">class </em><code class="sig-name descname">TensorBase</code><a class="headerlink" href="#_CPPv4N6marian10TensorBaseE" title="Permalink to this definition">¶</a><br /></dt>
-<dd><div class="breathe-sectiondef docutils container">
+<dd><p>Main implementation of a <a class="reference external" href="https://en.wikipedia.org/wiki/Tensor">tensor</a>, a multi-dimensional matrix containing elements of a single data type. </p>
+<p><a class="reference internal" href="#classmarian_1_1TensorBase"><span class="std std-ref">TensorBase</span></a> contains the data, data type, pointer to memory region, shape, backend info and other attributes. </p>
+<div class="breathe-sectiondef docutils container">
 <p class="breathe-sectiondef-title rubric">Public Types</p>
 <dl class="type">
 <dt id="_CPPv4N6marian10TensorBase7PtrTypeE">
-<span id="_CPPv3N6marian10TensorBase7PtrTypeE"></span><span id="_CPPv2N6marian10TensorBase7PtrTypeE"></span><span id="marian::TensorBase::PtrType"></span><span class="target" id="classmarian_1_1TensorBase_1a2cf7b5d4d52d341e3ad1ba0f870e52b8"></span><em class="property">typedef </em><a class="reference internal" href="typedef_definitions_8h_1a74108979eb2c77c6154dd176649ae9b7.html#_CPPv4N6marian4IPtrE" title="marian::IPtr">IPtr</a>&lt;<a class="reference internal" href="#_CPPv4N6marian10TensorBaseE" title="marian::TensorBase">TensorBase</a>&gt; <code class="sig-name descname">PtrType</code><a class="headerlink" href="#_CPPv4N6marian10TensorBase7PtrTypeE" title="Permalink to this definition">¶</a><br /></dt>
+<span id="_CPPv3N6marian10TensorBase7PtrTypeE"></span><span id="_CPPv2N6marian10TensorBase7PtrTypeE"></span><span id="marian::TensorBase::PtrType"></span><span class="target" id="classmarian_1_1TensorBase_1a2cf7b5d4d52d341e3ad1ba0f870e52b8"></span><em class="property">typedef </em><a class="reference internal" href="typedef_namespacemarian_1a74108979eb2c77c6154dd176649ae9b7.html#_CPPv4N6marian4IPtrE" title="marian::IPtr">IPtr</a>&lt;<a class="reference internal" href="#_CPPv4N6marian10TensorBaseE" title="marian::TensorBase">TensorBase</a>&gt; <code class="sig-name descname">PtrType</code><a class="headerlink" href="#_CPPv4N6marian10TensorBase7PtrTypeE" title="Permalink to this definition">¶</a><br /></dt>
 <dd></dd></dl>
 
 </div>
@@ -207,7 +208,7 @@
 
 <dl class="function">
 <dt id="_CPPv4N6marian10TensorBase4typeEv">
-<span id="_CPPv3N6marian10TensorBase4typeEv"></span><span id="_CPPv2N6marian10TensorBase4typeEv"></span><span id="marian::TensorBase::type"></span><span class="target" id="classmarian_1_1TensorBase_1a65e67c3fa8ac491b1b940bcea8c03fa8"></span><em class="property">virtual</em> <a class="reference internal" href="enum_common_2types_8h_1a2b75d1cec1d73f6a07a1fc4f93604c81.html#_CPPv4N6marian4TypeE" title="marian::Type">Type</a> <code class="sig-name descname">type</code><span class="sig-paren">(</span><span class="sig-paren">)</span><a class="headerlink" href="#_CPPv4N6marian10TensorBase4typeEv" title="Permalink to this definition">¶</a><br /></dt>
+<span id="_CPPv3N6marian10TensorBase4typeEv"></span><span id="_CPPv2N6marian10TensorBase4typeEv"></span><span id="marian::TensorBase::type"></span><span class="target" id="classmarian_1_1TensorBase_1a65e67c3fa8ac491b1b940bcea8c03fa8"></span><em class="property">virtual</em> <a class="reference internal" href="enum_namespacemarian_1a2b75d1cec1d73f6a07a1fc4f93604c81.html#_CPPv4N6marian4TypeE" title="marian::Type">Type</a> <code class="sig-name descname">type</code><span class="sig-paren">(</span><span class="sig-paren">)</span><a class="headerlink" href="#_CPPv4N6marian10TensorBase4typeEv" title="Permalink to this definition">¶</a><br /></dt>
 <dd></dd></dl>
 
 <dl class="function">
@@ -242,7 +243,7 @@
 
 <dl class="function">
 <dt id="_CPPv4N6marian10TensorBase10getBackendEv">
-<span id="_CPPv3N6marian10TensorBase10getBackendEv"></span><span id="_CPPv2N6marian10TensorBase10getBackendEv"></span><span id="marian::TensorBase::getBackend"></span><span class="target" id="classmarian_1_1TensorBase_1a06ecdbd9f686531191062ae48dae5939"></span><a class="reference internal" href="typedef_definitions_8h_1ad1a373be43a00ef9ce35666145137b08.html#_CPPv4N6marian3PtrE" title="marian::Ptr">Ptr</a>&lt;<a class="reference internal" href="classmarian_1_1Backend.html#_CPPv4N6marian7BackendE" title="marian::Backend">Backend</a>&gt; <code class="sig-name descname">getBackend</code><span class="sig-paren">(</span><span class="sig-paren">)</span><a class="headerlink" href="#_CPPv4N6marian10TensorBase10getBackendEv" title="Permalink to this definition">¶</a><br /></dt>
+<span id="_CPPv3N6marian10TensorBase10getBackendEv"></span><span id="_CPPv2N6marian10TensorBase10getBackendEv"></span><span id="marian::TensorBase::getBackend"></span><span class="target" id="classmarian_1_1TensorBase_1a06ecdbd9f686531191062ae48dae5939"></span><a class="reference internal" href="typedef_namespacemarian_1ad1a373be43a00ef9ce35666145137b08.html#_CPPv4N6marian3PtrE" title="marian::Ptr">Ptr</a>&lt;<a class="reference internal" href="classmarian_1_1Backend.html#_CPPv4N6marian7BackendE" title="marian::Backend">Backend</a>&gt; <code class="sig-name descname">getBackend</code><span class="sig-paren">(</span><span class="sig-paren">)</span><a class="headerlink" href="#_CPPv4N6marian10TensorBase10getBackendEv" title="Permalink to this definition">¶</a><br /></dt>
 <dd></dd></dl>
 
 <dl class="function">
@@ -267,12 +268,12 @@
 
 <dl class="function">
 <dt id="_CPPv4I0EN6marian10TensorBase3getEvRNSt6vectorI1TEE">
-<span id="_CPPv3I0EN6marian10TensorBase3getERNSt6vectorI1TEE"></span><span id="_CPPv2I0EN6marian10TensorBase3getERNSt6vectorI1TEE"></span><span class="target" id="classmarian_1_1TensorBase_1ae94420e5228d3251e77e28c5f52fb65f"></span>template&lt;typename <code class="sig-name descname">T</code>&gt;<br />void <code class="sig-name descname">get</code><span class="sig-paren">(</span><a class="reference internal" href="function_expression__operators_8cpp_1af4e69a5f7167b63522135a1f6b8a5dd8.html#_CPPv4N6marianStE4Expri" title="marian::std">std</a>::vector&lt;<a class="reference internal" href="#_CPPv4I0EN6marian10TensorBase3getE1T6size_t" title="marian::TensorBase::get::T">T</a>&gt; &amp;<em>v</em><span class="sig-paren">)</span><a class="headerlink" href="#_CPPv4I0EN6marian10TensorBase3getEvRNSt6vectorI1TEE" title="Permalink to this definition">¶</a><br /></dt>
+<span id="_CPPv3I0EN6marian10TensorBase3getERNSt6vectorI1TEE"></span><span id="_CPPv2I0EN6marian10TensorBase3getERNSt6vectorI1TEE"></span><span class="target" id="classmarian_1_1TensorBase_1ae94420e5228d3251e77e28c5f52fb65f"></span>template&lt;typename <code class="sig-name descname">T</code>&gt;<br />void <code class="sig-name descname">get</code><span class="sig-paren">(</span><a class="reference internal" href="function_group__graph__ops__mathematical_1gaf4e69a5f7167b63522135a1f6b8a5dd8.html#_CPPv4N6marianStE4Expri" title="marian::std">std</a>::vector&lt;<a class="reference internal" href="#_CPPv4I0EN6marian10TensorBase3getE1T6size_t" title="marian::TensorBase::get::T">T</a>&gt; &amp;<em>v</em><span class="sig-paren">)</span><a class="headerlink" href="#_CPPv4I0EN6marian10TensorBase3getEvRNSt6vectorI1TEE" title="Permalink to this definition">¶</a><br /></dt>
 <dd></dd></dl>
 
 <dl class="function">
 <dt id="_CPPv4N6marian10TensorBase3getERN2io4ItemERKNSt6stringE">
-<span id="_CPPv3N6marian10TensorBase3getERN2io4ItemERKNSt6stringE"></span><span id="_CPPv2N6marian10TensorBase3getERN2io4ItemERKNSt6stringE"></span><span id="marian::TensorBase::get__io::ItemR.ssCR"></span><span class="target" id="classmarian_1_1TensorBase_1ab09a1b3c5c921949f622b3e3c4b99347"></span>void <code class="sig-name descname">get</code><span class="sig-paren">(</span>io::<a class="reference internal" href="structmarian_1_1io_1_1Item.html#_CPPv4N6marian2io4ItemE" title="marian::io::Item">Item</a> &amp;<em>item</em>, <em class="property">const</em> <a class="reference internal" href="function_expression__operators_8cpp_1af4e69a5f7167b63522135a1f6b8a5dd8.html#_CPPv4N6marianStE4Expri" title="marian::std">std</a>::string &amp;<em>name</em><span class="sig-paren">)</span><a class="headerlink" href="#_CPPv4N6marian10TensorBase3getERN2io4ItemERKNSt6stringE" title="Permalink to this definition">¶</a><br /></dt>
+<span id="_CPPv3N6marian10TensorBase3getERN2io4ItemERKNSt6stringE"></span><span id="_CPPv2N6marian10TensorBase3getERN2io4ItemERKNSt6stringE"></span><span id="marian::TensorBase::get__io::ItemR.ssCR"></span><span class="target" id="classmarian_1_1TensorBase_1ab09a1b3c5c921949f622b3e3c4b99347"></span>void <code class="sig-name descname">get</code><span class="sig-paren">(</span>io::<a class="reference internal" href="structmarian_1_1io_1_1Item.html#_CPPv4N6marian2io4ItemE" title="marian::io::Item">Item</a> &amp;<em>item</em>, <em class="property">const</em> <a class="reference internal" href="function_group__graph__ops__mathematical_1gaf4e69a5f7167b63522135a1f6b8a5dd8.html#_CPPv4N6marianStE4Expri" title="marian::std">std</a>::string &amp;<em>name</em><span class="sig-paren">)</span><a class="headerlink" href="#_CPPv4N6marian10TensorBase3getERN2io4ItemERKNSt6stringE" title="Permalink to this definition">¶</a><br /></dt>
 <dd></dd></dl>
 
 <dl class="function">
@@ -287,7 +288,7 @@
 
 <dl class="function">
 <dt id="_CPPv4I0EN6marian10TensorBase3setEvRKNSt6vectorI1TEE">
-<span id="_CPPv3I0EN6marian10TensorBase3setERKNSt6vectorI1TEE"></span><span id="_CPPv2I0EN6marian10TensorBase3setERKNSt6vectorI1TEE"></span><span class="target" id="classmarian_1_1TensorBase_1ad12fbc33a0b4c161b0c63e4f1cac0d8c"></span>template&lt;typename <code class="sig-name descname">T</code>&gt;<br />void <code class="sig-name descname">set</code><span class="sig-paren">(</span><em class="property">const</em> <a class="reference internal" href="function_expression__operators_8cpp_1af4e69a5f7167b63522135a1f6b8a5dd8.html#_CPPv4N6marianStE4Expri" title="marian::std">std</a>::vector&lt;<a class="reference internal" href="#_CPPv4I0EN6marian10TensorBase3setEv6size_t1T" title="marian::TensorBase::set::T">T</a>&gt; &amp;<em>v</em><span class="sig-paren">)</span><a class="headerlink" href="#_CPPv4I0EN6marian10TensorBase3setEvRKNSt6vectorI1TEE" title="Permalink to this definition">¶</a><br /></dt>
+<span id="_CPPv3I0EN6marian10TensorBase3setERKNSt6vectorI1TEE"></span><span id="_CPPv2I0EN6marian10TensorBase3setERKNSt6vectorI1TEE"></span><span class="target" id="classmarian_1_1TensorBase_1ad12fbc33a0b4c161b0c63e4f1cac0d8c"></span>template&lt;typename <code class="sig-name descname">T</code>&gt;<br />void <code class="sig-name descname">set</code><span class="sig-paren">(</span><em class="property">const</em> <a class="reference internal" href="function_group__graph__ops__mathematical_1gaf4e69a5f7167b63522135a1f6b8a5dd8.html#_CPPv4N6marianStE4Expri" title="marian::std">std</a>::vector&lt;<a class="reference internal" href="#_CPPv4I0EN6marian10TensorBase3setEv6size_t1T" title="marian::TensorBase::set::T">T</a>&gt; &amp;<em>v</em><span class="sig-paren">)</span><a class="headerlink" href="#_CPPv4I0EN6marian10TensorBase3setEvRKNSt6vectorI1TEE" title="Permalink to this definition">¶</a><br /></dt>
 <dd></dd></dl>
 
 <dl class="function">
@@ -302,7 +303,7 @@
 
 <dl class="function">
 <dt id="_CPPv4N6marian10TensorBase9setSparseERKNSt6vectorI6size_tEERKNSt6vectorIfEE">
-<span id="_CPPv3N6marian10TensorBase9setSparseERKNSt6vectorI6size_tEERKNSt6vectorIfEE"></span><span id="_CPPv2N6marian10TensorBase9setSparseERKNSt6vectorI6size_tEERKNSt6vectorIfEE"></span><span id="marian::TensorBase::setSparse__std::vector:s:CR.std::vector:float:CR"></span><span class="target" id="classmarian_1_1TensorBase_1a86fbac9f53e727f7c1777cfc91a0d4c5"></span>void <code class="sig-name descname">setSparse</code><span class="sig-paren">(</span><em class="property">const</em> <a class="reference internal" href="function_expression__operators_8cpp_1af4e69a5f7167b63522135a1f6b8a5dd8.html#_CPPv4N6marianStE4Expri" title="marian::std">std</a>::vector&lt;size_t&gt; &amp;<em>k</em>, <em class="property">const</em> <a class="reference internal" href="function_expression__operators_8cpp_1af4e69a5f7167b63522135a1f6b8a5dd8.html#_CPPv4N6marianStE4Expri" title="marian::std">std</a>::vector&lt;float&gt; &amp;<em>v</em><span class="sig-paren">)</span><a class="headerlink" href="#_CPPv4N6marian10TensorBase9setSparseERKNSt6vectorI6size_tEERKNSt6vectorIfEE" title="Permalink to this definition">¶</a><br /></dt>
+<span id="_CPPv3N6marian10TensorBase9setSparseERKNSt6vectorI6size_tEERKNSt6vectorIfEE"></span><span id="_CPPv2N6marian10TensorBase9setSparseERKNSt6vectorI6size_tEERKNSt6vectorIfEE"></span><span id="marian::TensorBase::setSparse__std::vector:s:CR.std::vector:float:CR"></span><span class="target" id="classmarian_1_1TensorBase_1a86fbac9f53e727f7c1777cfc91a0d4c5"></span>void <code class="sig-name descname">setSparse</code><span class="sig-paren">(</span><em class="property">const</em> <a class="reference internal" href="function_group__graph__ops__mathematical_1gaf4e69a5f7167b63522135a1f6b8a5dd8.html#_CPPv4N6marianStE4Expri" title="marian::std">std</a>::vector&lt;size_t&gt; &amp;<em>k</em>, <em class="property">const</em> <a class="reference internal" href="function_group__graph__ops__mathematical_1gaf4e69a5f7167b63522135a1f6b8a5dd8.html#_CPPv4N6marianStE4Expri" title="marian::std">std</a>::vector&lt;float&gt; &amp;<em>v</em><span class="sig-paren">)</span><a class="headerlink" href="#_CPPv4N6marian10TensorBase9setSparseERKNSt6vectorI6size_tEERKNSt6vectorIfEE" title="Permalink to this definition">¶</a><br /></dt>
 <dd></dd></dl>
 
 <dl class="function">
@@ -327,7 +328,7 @@
 
 <dl class="function">
 <dt id="_CPPv4I0EN6marian10TensorBase5debugENSt6stringEii">
-<span id="_CPPv3I0EN6marian10TensorBase5debugEii"></span><span id="_CPPv2I0EN6marian10TensorBase5debugEii"></span><span class="target" id="classmarian_1_1TensorBase_1afd57e3d35b110c35b696ce45629d0b21"></span>template&lt;typename <code class="sig-name descname">T</code>&gt;<br /><a class="reference internal" href="function_expression__operators_8cpp_1af4e69a5f7167b63522135a1f6b8a5dd8.html#_CPPv4N6marianStE4Expri" title="marian::std">std</a>::string <code class="sig-name descname">debug</code><span class="sig-paren">(</span>int <em>precision</em> = 8, int <em>dispCols</em> = 5<span class="sig-paren">)</span><a class="headerlink" href="#_CPPv4I0EN6marian10TensorBase5debugENSt6stringEii" title="Permalink to this definition">¶</a><br /></dt>
+<span id="_CPPv3I0EN6marian10TensorBase5debugEii"></span><span id="_CPPv2I0EN6marian10TensorBase5debugEii"></span><span class="target" id="classmarian_1_1TensorBase_1afd57e3d35b110c35b696ce45629d0b21"></span>template&lt;typename <code class="sig-name descname">T</code>&gt;<br /><a class="reference internal" href="function_group__graph__ops__mathematical_1gaf4e69a5f7167b63522135a1f6b8a5dd8.html#_CPPv4N6marianStE4Expri" title="marian::std">std</a>::string <code class="sig-name descname">debug</code><span class="sig-paren">(</span>int <em>precision</em> = 8, int <em>dispCols</em> = 5<span class="sig-paren">)</span><a class="headerlink" href="#_CPPv4I0EN6marian10TensorBase5debugENSt6stringEii" title="Permalink to this definition">¶</a><br /></dt>
 <dd></dd></dl>
 
 <dl class="function">

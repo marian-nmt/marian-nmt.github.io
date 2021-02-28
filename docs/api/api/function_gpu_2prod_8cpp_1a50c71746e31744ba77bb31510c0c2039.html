@@ -7,7 +7,7 @@
   
   <meta name="viewport" content="width=device-width, initial-scale=1.0" />
   
-  <title>Function marian::gpu::cusparseSgemmiEx &mdash; Marian NMT v1.10.1 2021-02-23 documentation</title>
+  <title>Function marian::gpu::cusparseSgemmiEx &mdash; Marian NMT v1.10.2 2021-02-28 documentation</title>
   
 
   
@@ -44,7 +44,7 @@
     
     <link rel="index" title="Index" href="../genindex.html" />
     <link rel="search" title="Search" href="../search.html" />
-    <link rel="next" title="Template Function marian::gpu::Element" href="function_gpu_2element_8h_1a2d0062f156f03c6347ed46ff6c516c0b.html" />
+    <link rel="next" title="Function marian::gpu::Deconcatenate" href="function_tensor__operators_8cu_1a15b122a59d5e8ebc0d414f129790fb6f.html" />
     <link rel="prev" title="Function marian::gpu::cublasGemmTyped" href="function_gpu_2prod_8cpp_1aa1ab94130b4a8f841e4fd510672f0429.html" /> 
 </head>
 
@@ -69,7 +69,7 @@
             
             
               <div class="version">
-                v1.10.1
+                v1.10.2
               </div>
             
           
@@ -96,9 +96,8 @@
             
               <p class="caption"><span class="caption-text">Contents:</span></p>
 <ul>
-<li class="toctree-l1"><a class="reference internal" href="../install.html">Installation</a></li>
 <li class="toctree-l1"><a class="reference internal" href="../graph.html">Expression graphs</a></li>
-<li class="toctree-l1"><a class="reference internal" href="../operators.html">Graph operations</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../operators.html">Operations in the Expression Graph</a></li>
 <li class="toctree-l1"><a class="reference internal" href="library_index.html">Library API</a></li>
 <li class="toctree-l1"><a class="reference internal" href="../contributing.html">How to contribute to Marian</a></li>
 </ul>
@@ -179,7 +178,7 @@
 <h2>Function Documentation<a class="headerlink" href="#function-documentation" title="Permalink to this headline">¶</a></h2>
 <dl class="function">
 <dt id="_CPPv4N6marian3gpu16cusparseSgemmiExE16cusparseHandle_tiiiiPKfPKfiPKfPKiPKiPKfPfi">
-<span id="_CPPv3N6marian3gpu16cusparseSgemmiExE16cusparseHandle_tiiiiPKfPKfiPKfPKiPKiPKfPfi"></span><span id="_CPPv2N6marian3gpu16cusparseSgemmiExE16cusparseHandle_tiiiiPKfPKfiPKfPKiPKiPKfPfi"></span><span id="marian::gpu::cusparseSgemmiEx__cusparseHandle_t.i.i.i.i.floatCP.floatCP.i.floatCP.iCP.iCP.floatCP.floatP.i"></span><span class="target" id="gpu_2prod_8cpp_1a50c71746e31744ba77bb31510c0c2039"></span><em class="property">static</em> cusparseStatus_t <code class="sig-prename descclassname">marian::<a class="reference internal" href="enum_definitions_8h_1a80d9ddedec349b4d83d40d387878bf4c.html#_CPPv4N6marian3gpuE" title="marian::gpu">gpu</a><code class="sig-prename descclassname">::</code></code><code class="sig-name descname">cusparseSgemmiEx</code><span class="sig-paren">(</span>cusparseHandle_t <em>handle</em>, int <em>m</em>, int <em>n</em>, int <em>k</em>, int <em>nnz</em>, <em class="property">const</em> float *<em>alpha</em>, <em class="property">const</em> float *<em>A</em>, int <em>lda</em>, <em class="property">const</em> float *<em>cscValB</em>, <em class="property">const</em> int *<em>cscColPtrB</em>, <em class="property">const</em> int *<em>cscRowIndB</em>, <em class="property">const</em> float *<em>beta</em>, float *<em>C</em>, int <em>ldc</em><span class="sig-paren">)</span><a class="headerlink" href="#_CPPv4N6marian3gpu16cusparseSgemmiExE16cusparseHandle_tiiiiPKfPKfiPKfPKiPKiPKfPfi" title="Permalink to this definition">¶</a><br /></dt>
+<span id="_CPPv3N6marian3gpu16cusparseSgemmiExE16cusparseHandle_tiiiiPKfPKfiPKfPKiPKiPKfPfi"></span><span id="_CPPv2N6marian3gpu16cusparseSgemmiExE16cusparseHandle_tiiiiPKfPKfiPKfPKiPKiPKfPfi"></span><span id="marian::gpu::cusparseSgemmiEx__cusparseHandle_t.i.i.i.i.floatCP.floatCP.i.floatCP.iCP.iCP.floatCP.floatP.i"></span><span class="target" id="gpu_2prod_8cpp_1a50c71746e31744ba77bb31510c0c2039"></span><em class="property">static</em> cusparseStatus_t <code class="sig-prename descclassname">marian::<a class="reference internal" href="enum_namespacemarian_1a80d9ddedec349b4d83d40d387878bf4c.html#_CPPv4N6marian3gpuE" title="marian::gpu">gpu</a><code class="sig-prename descclassname">::</code></code><code class="sig-name descname">cusparseSgemmiEx</code><span class="sig-paren">(</span>cusparseHandle_t <em>handle</em>, int <em>m</em>, int <em>n</em>, int <em>k</em>, int <em>nnz</em>, <em class="property">const</em> float *<em>alpha</em>, <em class="property">const</em> float *<em>A</em>, int <em>lda</em>, <em class="property">const</em> float *<em>cscValB</em>, <em class="property">const</em> int *<em>cscColPtrB</em>, <em class="property">const</em> int *<em>cscRowIndB</em>, <em class="property">const</em> float *<em>beta</em>, float *<em>C</em>, int <em>ldc</em><span class="sig-paren">)</span><a class="headerlink" href="#_CPPv4N6marian3gpu16cusparseSgemmiExE16cusparseHandle_tiiiiPKfPKfiPKfPKiPKiPKfPfi" title="Permalink to this definition">¶</a><br /></dt>
 <dd></dd></dl>
 
 </div>
@@ -191,7 +190,7 @@
           </div>
           <footer>
     <div class="rst-footer-buttons" role="navigation" aria-label="footer navigation">
-        <a href="function_gpu_2element_8h_1a2d0062f156f03c6347ed46ff6c516c0b.html" class="btn btn-neutral float-right" title="Template Function marian::gpu::Element" accesskey="n" rel="next">Next <span class="fa fa-arrow-circle-right" aria-hidden="true"></span></a>
+        <a href="function_tensor__operators_8cu_1a15b122a59d5e8ebc0d414f129790fb6f.html" class="btn btn-neutral float-right" title="Function marian::gpu::Deconcatenate" accesskey="n" rel="next">Next <span class="fa fa-arrow-circle-right" aria-hidden="true"></span></a>
         <a href="function_gpu_2prod_8cpp_1aa1ab94130b4a8f841e4fd510672f0429.html" class="btn btn-neutral float-left" title="Function marian::gpu::cublasGemmTyped" accesskey="p" rel="prev"><span class="fa fa-arrow-circle-left" aria-hidden="true"></span> Previous</a>
     </div>
 

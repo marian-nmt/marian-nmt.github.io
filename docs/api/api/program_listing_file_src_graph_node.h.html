@@ -7,7 +7,7 @@
   
   <meta name="viewport" content="width=device-width, initial-scale=1.0" />
   
-  <title>Program Listing for File node.h &mdash; Marian NMT v1.10.1 2021-02-23 documentation</title>
+  <title>Program Listing for File node.h &mdash; Marian NMT v1.10.2 2021-02-28 documentation</title>
   
 
   
@@ -67,7 +67,7 @@
             
             
               <div class="version">
-                v1.10.1
+                v1.10.2
               </div>
             
           
@@ -94,9 +94,8 @@
             
               <p class="caption"><span class="caption-text">Contents:</span></p>
 <ul>
-<li class="toctree-l1"><a class="reference internal" href="../install.html">Installation</a></li>
 <li class="toctree-l1"><a class="reference internal" href="../graph.html">Expression graphs</a></li>
-<li class="toctree-l1"><a class="reference internal" href="../operators.html">Graph operations</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../operators.html">Operations in the Expression Graph</a></li>
 <li class="toctree-l1"><a class="reference internal" href="library_index.html">Library API</a></li>
 <li class="toctree-l1"><a class="reference internal" href="../contributing.html">How to contribute to Marian</a></li>
 </ul>
@@ -194,13 +193,13 @@
   <span class="n">std</span><span class="o">::</span><span class="n">vector</span><span class="o">&lt;</span><span class="n">Expr</span><span class="o">&gt;</span> <span class="n">children_</span><span class="p">;</span>
 
   <span class="n">Weak</span><span class="o">&lt;</span><span class="n">ExpressionGraph</span><span class="o">&gt;</span> <span class="n">graph_</span><span class="p">;</span>
-  <span class="n">Shape</span> <span class="n">shape_</span><span class="p">{</span><span class="mi">1</span><span class="p">,</span> <span class="mi">1</span><span class="p">,</span> <span class="mi">1</span><span class="p">,</span> <span class="mi">1</span><span class="p">};</span>
-  <span class="n">Type</span> <span class="n">valueType_</span><span class="p">{</span><span class="n">Type</span><span class="o">::</span><span class="n">float32</span><span class="p">};</span>
+  <span class="n">Shape</span> <span class="n">shape_</span><span class="p">{</span><span class="mi">1</span><span class="p">,</span> <span class="mi">1</span><span class="p">,</span> <span class="mi">1</span><span class="p">,</span> <span class="mi">1</span><span class="p">};</span>         <span class="c1">// defines the dimensionality of the node (for tensors)</span>
+  <span class="n">Type</span> <span class="n">valueType_</span><span class="p">{</span><span class="n">Type</span><span class="o">::</span><span class="n">float32</span><span class="p">};</span>   <span class="c1">// defines the element type of the node (for tensors)</span>
 
   <span class="n">std</span><span class="o">::</span><span class="n">string</span> <span class="n">name_</span><span class="p">{</span><span class="s">&quot;none&quot;</span><span class="p">};</span>
 
-  <span class="n">Tensor</span> <span class="n">val_</span><span class="p">{</span><span class="k">nullptr</span><span class="p">};</span>
-  <span class="n">Tensor</span> <span class="n">adj_</span><span class="p">{</span><span class="k">nullptr</span><span class="p">};</span>
+  <span class="n">Tensor</span> <span class="n">val_</span><span class="p">{</span><span class="k">nullptr</span><span class="p">};</span>  <span class="c1">// the resulting new tensor in forward pass</span>
+  <span class="n">Tensor</span> <span class="n">adj_</span><span class="p">{</span><span class="k">nullptr</span><span class="p">};</span>  <span class="c1">// the accumulated gradients (a tensor) in backward pass</span>
 
   <span class="kt">bool</span> <span class="n">markedForDebug_</span><span class="p">{</span><span class="nb">false</span><span class="p">};</span>
   <span class="n">std</span><span class="o">::</span><span class="n">string</span> <span class="n">debugMessage_</span><span class="p">;</span>
@@ -271,7 +270,6 @@
   <span class="k">virtual</span> <span class="kt">void</span> <span class="n">free</span><span class="p">()</span> <span class="k">override</span><span class="p">;</span>
 
   <span class="k">virtual</span> <span class="kt">void</span> <span class="n">init</span><span class="p">()</span> <span class="k">override</span> <span class="p">{};</span>
-
   <span class="k">virtual</span> <span class="kt">void</span> <span class="n">init_dependent</span><span class="p">()</span> <span class="k">override</span><span class="p">;</span>
 
   <span class="k">virtual</span> <span class="kt">void</span> <span class="n">set_zero_adjoint</span><span class="p">()</span> <span class="k">override</span><span class="p">;</span>

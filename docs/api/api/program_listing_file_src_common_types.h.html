@@ -7,7 +7,7 @@
   
   <meta name="viewport" content="width=device-width, initial-scale=1.0" />
   
-  <title>Program Listing for File types.h &mdash; Marian NMT v1.10.1 2021-02-23 documentation</title>
+  <title>Program Listing for File types.h &mdash; Marian NMT v1.10.2 2021-02-28 documentation</title>
   
 
   
@@ -67,7 +67,7 @@
             
             
               <div class="version">
-                v1.10.1
+                v1.10.2
               </div>
             
           
@@ -94,9 +94,8 @@
             
               <p class="caption"><span class="caption-text">Contents:</span></p>
 <ul>
-<li class="toctree-l1"><a class="reference internal" href="../install.html">Installation</a></li>
 <li class="toctree-l1"><a class="reference internal" href="../graph.html">Expression graphs</a></li>
-<li class="toctree-l1"><a class="reference internal" href="../operators.html">Graph operations</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../operators.html">Operations in the Expression Graph</a></li>
 <li class="toctree-l1"><a class="reference internal" href="library_index.html">Library API</a></li>
 <li class="toctree-l1"><a class="reference internal" href="../contributing.html">How to contribute to Marian</a></li>
 </ul>
@@ -302,7 +301,6 @@
 <span class="cp">    default: ABORT(&quot;Unknown type {}&quot;, type); \</span>
 <span class="cp">  } \</span>
 <span class="cp">} while(0)</span>
-
 <span class="k">namespace</span> <span class="n">marian</span> <span class="p">{</span>
 
 <span class="c1">// small struct to enable templating based on types use for packing</span>
@@ -433,21 +431,21 @@
   <span class="n">float32</span>  <span class="o">=</span> <span class="n">TypeClass</span><span class="o">::</span><span class="n">float_type</span> <span class="o">+</span> <span class="mi">4u</span><span class="p">,</span>
   <span class="n">float64</span>  <span class="o">=</span> <span class="n">TypeClass</span><span class="o">::</span><span class="n">float_type</span> <span class="o">+</span> <span class="mi">8u</span><span class="p">,</span>
 
-  <span class="n">packed16</span>            <span class="o">=</span> <span class="n">TypeClass</span><span class="o">::</span><span class="n">packed_type</span> <span class="o">+</span> <span class="mi">2u</span><span class="p">,</span>                                   <span class="c1">// special type for FBGEMM, not meant to be used anywhere else, not meant to be accessed invidually. Internal actual type (uint16) is meaningless.</span>
-  <span class="n">packed8avx2</span>         <span class="o">=</span> <span class="n">TypeClass</span><span class="o">::</span><span class="n">packed_type</span> <span class="o">+</span> <span class="mi">1u</span> <span class="o">+</span> <span class="n">TypeClass</span><span class="o">::</span><span class="n">avx2_type</span><span class="p">,</span>            <span class="c1">// special type for FBGEMM with AVX2, not meant to be used anywhere else, not meant to be accessed invidually. Internal actual type (uint8) is meaningless.</span>
-  <span class="n">packed8avx512</span>       <span class="o">=</span> <span class="n">TypeClass</span><span class="o">::</span><span class="n">packed_type</span> <span class="o">+</span> <span class="mi">1u</span> <span class="o">+</span> <span class="n">TypeClass</span><span class="o">::</span><span class="n">avx512_type</span><span class="p">,</span>          <span class="c1">// special type for FBGEMM with AVX512, not meant to be used anywhere else, not meant to be accessed invidually. Internal actual type (uint8) is meaningless.</span>
+  <span class="n">packed16</span>            <span class="o">=</span> <span class="n">TypeClass</span><span class="o">::</span><span class="n">packed_type</span> <span class="o">+</span> <span class="mi">2u</span><span class="p">,</span>
+  <span class="n">packed8avx2</span>         <span class="o">=</span> <span class="n">TypeClass</span><span class="o">::</span><span class="n">packed_type</span> <span class="o">+</span> <span class="mi">1u</span> <span class="o">+</span> <span class="n">TypeClass</span><span class="o">::</span><span class="n">avx2_type</span><span class="p">,</span>
+  <span class="n">packed8avx512</span>       <span class="o">=</span> <span class="n">TypeClass</span><span class="o">::</span><span class="n">packed_type</span> <span class="o">+</span> <span class="mi">1u</span> <span class="o">+</span> <span class="n">TypeClass</span><span class="o">::</span><span class="n">avx512_type</span><span class="p">,</span>
 
-  <span class="n">intgemm8</span>            <span class="o">=</span> <span class="n">TypeClass</span><span class="o">::</span><span class="n">intgemm_type</span> <span class="o">+</span> <span class="mi">1u</span><span class="p">,</span>                                  <span class="c1">// Int8 quantized (not packed) matrices for intgemm</span>
-  <span class="n">intgemm16</span>           <span class="o">=</span> <span class="n">TypeClass</span><span class="o">::</span><span class="n">intgemm_type</span> <span class="o">+</span> <span class="mi">2u</span><span class="p">,</span>                                  <span class="c1">// Int16 quantized (not packed) matrices for intgemm</span>
+  <span class="n">intgemm8</span>            <span class="o">=</span> <span class="n">TypeClass</span><span class="o">::</span><span class="n">intgemm_type</span> <span class="o">+</span> <span class="mi">1u</span><span class="p">,</span>
+  <span class="n">intgemm16</span>           <span class="o">=</span> <span class="n">TypeClass</span><span class="o">::</span><span class="n">intgemm_type</span> <span class="o">+</span> <span class="mi">2u</span><span class="p">,</span>
 
-  <span class="n">intgemm8ssse3</span>       <span class="o">=</span> <span class="n">TypeClass</span><span class="o">::</span><span class="n">intgemm_type</span> <span class="o">+</span> <span class="mi">1u</span> <span class="o">+</span> <span class="n">TypeClass</span><span class="o">::</span><span class="n">ssse3_type</span><span class="p">,</span>          <span class="c1">// Int8 quantized and packed (ssse3) matrices for intgemm</span>
-  <span class="n">intgemm8avx2</span>        <span class="o">=</span> <span class="n">TypeClass</span><span class="o">::</span><span class="n">intgemm_type</span> <span class="o">+</span> <span class="mi">1u</span> <span class="o">+</span> <span class="n">TypeClass</span><span class="o">::</span><span class="n">avx2_type</span><span class="p">,</span>           <span class="c1">// Int8 quantized and packed (avx2) matrices for intgemm</span>
-  <span class="n">intgemm8avx512</span>      <span class="o">=</span> <span class="n">TypeClass</span><span class="o">::</span><span class="n">intgemm_type</span> <span class="o">+</span> <span class="mi">1u</span> <span class="o">+</span> <span class="n">TypeClass</span><span class="o">::</span><span class="n">avx512_type</span><span class="p">,</span>         <span class="c1">// Int8 quantized and packed (avx512) matrices for intgemm</span>
-  <span class="n">intgemm8avx512vnni</span>  <span class="o">=</span> <span class="n">TypeClass</span><span class="o">::</span><span class="n">intgemm_type</span> <span class="o">+</span> <span class="mi">1u</span> <span class="o">+</span> <span class="n">TypeClass</span><span class="o">::</span><span class="n">avx512_type</span> <span class="o">+</span> <span class="mi">4096u</span><span class="p">,</span> <span class="c1">// Int8 quantized and packed (avx512) matrices for intgemm. VNNI algorithm</span>
+  <span class="n">intgemm8ssse3</span>       <span class="o">=</span> <span class="n">TypeClass</span><span class="o">::</span><span class="n">intgemm_type</span> <span class="o">+</span> <span class="mi">1u</span> <span class="o">+</span> <span class="n">TypeClass</span><span class="o">::</span><span class="n">ssse3_type</span><span class="p">,</span>
+  <span class="n">intgemm8avx2</span>        <span class="o">=</span> <span class="n">TypeClass</span><span class="o">::</span><span class="n">intgemm_type</span> <span class="o">+</span> <span class="mi">1u</span> <span class="o">+</span> <span class="n">TypeClass</span><span class="o">::</span><span class="n">avx2_type</span><span class="p">,</span>
+  <span class="n">intgemm8avx512</span>      <span class="o">=</span> <span class="n">TypeClass</span><span class="o">::</span><span class="n">intgemm_type</span> <span class="o">+</span> <span class="mi">1u</span> <span class="o">+</span> <span class="n">TypeClass</span><span class="o">::</span><span class="n">avx512_type</span><span class="p">,</span>
+  <span class="n">intgemm8avx512vnni</span>  <span class="o">=</span> <span class="n">TypeClass</span><span class="o">::</span><span class="n">intgemm_type</span> <span class="o">+</span> <span class="mi">1u</span> <span class="o">+</span> <span class="n">TypeClass</span><span class="o">::</span><span class="n">avx512_type</span> <span class="o">+</span> <span class="mi">4096u</span><span class="p">,</span>
 
-  <span class="n">intgemm16sse2</span>       <span class="o">=</span> <span class="n">TypeClass</span><span class="o">::</span><span class="n">intgemm_type</span> <span class="o">+</span> <span class="mi">2u</span> <span class="o">+</span> <span class="n">TypeClass</span><span class="o">::</span><span class="n">sse2_type</span><span class="p">,</span>           <span class="c1">// Int16 quantized and packed (sse2) matrices for intgemm</span>
-  <span class="n">intgemm16avx2</span>       <span class="o">=</span> <span class="n">TypeClass</span><span class="o">::</span><span class="n">intgemm_type</span> <span class="o">+</span> <span class="mi">2u</span> <span class="o">+</span> <span class="n">TypeClass</span><span class="o">::</span><span class="n">avx2_type</span><span class="p">,</span>           <span class="c1">// Int16 quantized and packed (avx2) matrices for intgemm</span>
-  <span class="n">intgemm16avx512</span>     <span class="o">=</span> <span class="n">TypeClass</span><span class="o">::</span><span class="n">intgemm_type</span> <span class="o">+</span> <span class="mi">2u</span> <span class="o">+</span> <span class="n">TypeClass</span><span class="o">::</span><span class="n">avx512_type</span><span class="p">,</span>         <span class="c1">// Int16 quantized and packed (avx512) matrices for intgemm</span>
+  <span class="n">intgemm16sse2</span>       <span class="o">=</span> <span class="n">TypeClass</span><span class="o">::</span><span class="n">intgemm_type</span> <span class="o">+</span> <span class="mi">2u</span> <span class="o">+</span> <span class="n">TypeClass</span><span class="o">::</span><span class="n">sse2_type</span><span class="p">,</span>
+  <span class="n">intgemm16avx2</span>       <span class="o">=</span> <span class="n">TypeClass</span><span class="o">::</span><span class="n">intgemm_type</span> <span class="o">+</span> <span class="mi">2u</span> <span class="o">+</span> <span class="n">TypeClass</span><span class="o">::</span><span class="n">avx2_type</span><span class="p">,</span>
+  <span class="n">intgemm16avx512</span>     <span class="o">=</span> <span class="n">TypeClass</span><span class="o">::</span><span class="n">intgemm_type</span> <span class="o">+</span> <span class="mi">2u</span> <span class="o">+</span> <span class="n">TypeClass</span><span class="o">::</span><span class="n">avx512_type</span><span class="p">,</span>
 <span class="p">};</span>
 
 <span class="k">static</span> <span class="kr">inline</span> <span class="kt">size_t</span> <span class="k">operator</span><span class="o">&amp;</span><span class="p">(</span><span class="n">TypeClass</span> <span class="n">typeClass</span><span class="p">,</span> <span class="n">Type</span> <span class="n">type</span><span class="p">)</span> <span class="p">{</span>

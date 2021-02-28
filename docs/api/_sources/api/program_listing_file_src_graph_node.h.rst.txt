@@ -35,13 +35,13 @@ Program Listing for File node.h
      std::vector<Expr> children_;
    
      Weak<ExpressionGraph> graph_;
-     Shape shape_{1, 1, 1, 1};
-     Type valueType_{Type::float32};
+     Shape shape_{1, 1, 1, 1};         // defines the dimensionality of the node (for tensors)
+     Type valueType_{Type::float32};   // defines the element type of the node (for tensors)
    
      std::string name_{"none"};
    
-     Tensor val_{nullptr};
-     Tensor adj_{nullptr};
+     Tensor val_{nullptr};  // the resulting new tensor in forward pass
+     Tensor adj_{nullptr};  // the accumulated gradients (a tensor) in backward pass
    
      bool markedForDebug_{false};
      std::string debugMessage_;
@@ -112,7 +112,6 @@ Program Listing for File node.h
      virtual void free() override;
    
      virtual void init() override {};
-   
      virtual void init_dependent() override;
    
      virtual void set_zero_adjoint() override;

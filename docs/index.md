@@ -40,6 +40,14 @@ for [previous releases](/docs/cmd).
 
 
 
+### Code documentation
+
+[The developer documentation for Marian](/docs/api/) is generated using Doxygen
+and Sphinx. It can be generated locally from the {% github_link marian-dev/doc/
+%} folder.
+
+
+
 ### Model types
 
 - `s2s`: An RNN-based encoder-decoder model with attention mechanism. The
@@ -772,12 +780,3 @@ to be trained with guided alignments (see
 
 The scorer can report summarized score (cross-entropy or perplexity) for an
 entire test set with option `--summary`.
-
-
-
-## Code documentation
-
-[The code documentation for Marian toolkit](/docs/marian/classes.html) is
-generated using Doxygen. The newest version can be generated locally with CMake:
-
-    mkdir -p build && cd build && cmake .. && make doc

@@ -1,0 +1,316 @@
+name: Website
+
+on:
+  push:
+    branches:
+      - jekyll
+
+  pull_request:
+    branches:
+      - jekyll
+
+  workflow_dispatch:
+
+# Source and Deploy branch names
+env:
+  source: jekyll
+  deploy: master
+
+
+jobs:
+  # Check if marian submodule was updated
+  check_source:
+      name: Check for source changes
+      outputs:
+        changed: ${{ steps.check.outputs.changed }}
+      runs-on: ubuntu-latest
+      steps:
+        - name: Checkout source code
+          uses: actions/checkout@v2
+
+        - name: Determine changes since last event
+          id: check
+          env:
+            ref: ${{ github.event.before }}
+          run: |
+            if [ -z "${{ env.ref }}" ]; then
+              echo '::set-output name=changed::true';
+            else
+              git fetch origin ${{ env.ref }} --depth=1
+              git diff --name-only ${{ env.ref }}.. | grep '^marian-dev' && \
+                echo '::set-output name=changed::true' || true
+            fi
+
+            # Always run on workflow_dispatch
+            if [ "${{ github.event_name }}" = "workflow_dispatch" ]; then
+              echo '::set-output name=changed::true';
+            fi
+
+
+
+  # Compile Marian to get CLI options
+  cli:
+    name: Build CLI documentation
+    env:
+      gcc: 7
+      cuda: "11.2"
+    defaults:
+      run:
+        working-directory: marian-dev
+    runs-on: ubuntu-latest
+    steps:
+      - name: Checkout source code
+        uses: actions/checkout@v2
+        with:
+          submodules: true
+
+      - name: Get marian submodule SHA
+        id: version
+        run: |
+          echo "::set-output name=sha::$(git rev-parse HEAD)"
+
+      # Cache output of --version/help to save on recompilation
+      - name: Set up cache for marian output
+        uses: actions/cache@v2
+        id: cache
+        with:
+          path: |
+            marian-dev/build/marian*.version
+            marian-dev/build/marian*.help
+          key: ${{ runner.os }}-${{ steps.version.outputs.sha }}
+
+      # Only compile if the cache is expired
+      - name: Install dependencies
+        if: steps.cache.outputs.cache-hit != 'true'
+        run: |
+          sudo apt-get update -y && \
+          sudo apt-get install -y libboost-all-dev \
+            libgoogle-perftools-dev libprotobuf-dev protobuf-compiler
+
+      - name: Install CUDA
+        if: steps.cache.outputs.cache-hit != 'true'
+        run: ./scripts/ci/install_cuda_ubuntu.sh ${{ env.cuda }}
+
+      - name: Configure CMake
+        if: steps.cache.outputs.cache-hit != 'true'
+        run: |
+          mkdir build && cd build
+          CC=/usr/bin/gcc-${{ env.gcc }} \
+          CXX=/usr/bin/g++-${{ env.gcc }} \
+          CUDAHOSTCXX=/usr/bin/g++-${{ env.gcc }} \
+          cmake .. \
+            -DCMAKE_BUILD_TYPE=Release \
+            -DCOMPILE_CPU=ON \
+            -DCOMPILE_CUDA=ON \
+            -DCUDA_TOOLKIT_ROOT_DIR=/usr/local/cuda-${{ env.cuda }}/ \
+            -DCOMPILE_SERVER=ON \
+            -DCOMPILE_EXAMPLES=OFF \
+            -DCOMPILE_TESTS=OFF \
+            -DUSE_FBGEMM=ON \
+            -DUSE_SENTENCEPIECE=ON \
+            -DUSE_STATIC_LIBS=OFF
+
+      - name: Compile
+        if: steps.cache.outputs.cache-hit != 'true'
+        working-directory: marian-dev/build
+        run: make -j2
+
+      - name: Output version and help files
+        if: steps.cache.outputs.cache-hit != 'true'
+        working-directory: marian-dev/build
+        run: |
+          for cmd in marian marian-{decoder,server,scorer,vocab,conv}; do
+            ./${cmd} --version > ${cmd}.version 2>&1
+            ./${cmd} --help > ${cmd}.help 2>&1
+          done
+
+      - name: Output SHA file
+        working-directory: marian-dev/build
+        run: echo "${{ steps.version.outputs.sha }}" > marian.sha
+
+      # Artifact contains the output of --version and --help for each command as
+      # well as the submodule sha.
+      - name: Upload CLI output
+        uses: actions/upload-artifact@v2
+        with:
+          name: cli
+          path: |
+            marian-dev/build/marian*.version
+            marian-dev/build/marian*.help
+            marian-dev/build/marian.sha
+
+  # Build website source
+  site:
+    name: Build website
+    needs: [cli]
+    runs-on: ubuntu-latest
+    steps:
+      - name: Checkout website source
+        uses: actions/checkout@v2
+        with:
+          fetch-depth: 0  # required for mtime
+          ref: ${{ env.source }}
+          submodules: true
+
+      - name: Download CLI files
+        if: needs.cli.result == 'success'
+        uses: actions/download-artifact@v2
+        id: cli
+        with:
+          name: cli
+          path: ~/cli
+
+      # Create _data file with current marian version and sha
+      - name: Generate data file
+        env:
+          cli: ${{steps.cli.outputs.download-path}}
+        run: |
+          version_full=$(cat ${{ env.cli }}/marian.version)
+          version=$(awk '{print substr($1,2)}' <<< ${version_full})
+
+          cat <<EOF > _data/marian.yml
+          version: ${version}
+          version_full: ${version_full}
+          sha: $(cat ${{ env.cli }}/marian.sha)
+          EOF
+
+      # Create CLI markdown output
+      - name: Generate CLI markdown files
+        working-directory: .
+        env:
+          cli: ${{steps.cli.outputs.download-path}}
+          doc: 'docs/cmd'
+        run: |
+          for cmd in marian marian-{decoder,server,scorer,vocab,conv}; do
+            output="${{ env.doc }}/${cmd}.md"
+            sed "s/<COMMAND>/${cmd}/" ${{ env.doc }}/_template.tmp > ${output}
+            echo "Version: " >> ${output}
+            cat ${{ env.cli }}/${cmd}.version >> ${output} 2>&1
+            echo "" >> ${output}
+            cat ${{ env.cli }}/${cmd}.help 2>&1 | bash _scripts/help2markdown.sh | python _scripts/wrap_help.py >> ${output}
+            git add ${output}
+          done
+
+      # Generates the correct date
+      - name: Commit CLI options
+        run: |
+          git config --global user.name '${{ github.actor }}'
+          git config --global user.email '${{ github.actor }}@users.noreply.github.com'
+          git commit -m "Update CLI options: ${{ github.sha	}}" || true
+
+      # Push on commit
+      - name: Push commit
+        if: ${{ github.event_name == 'push' }}
+        run: git push origin
+
+
+      # Setup Ruby and build Jekyll
+      - name: Setup Ruby
+        uses: ruby/setup-ruby@v1
+        with:
+          ruby-version: 2.7
+
+      - name: Build Jekyll
+        uses: limjh16/jekyll-action-ts@v2
+        with:
+          enable_cache: true
+          custom_opts: '--baseurl /${{ github.event.repository.name }}'  # enable if testing in a fork
+
+      # This artifact contains the HTML output of Jekyll.
+      # index.html at the root of the produced zip file.
+      - name: Upload HTML
+        uses: actions/upload-artifact@v2
+        with:
+          name: jekyll-output
+          path: ./_site
+
+  # Generates API docs
+  api:
+    name: Build API documentation
+    needs: [check_source]
+    if: needs.check_source.outputs.changed == 'true'
+    runs-on: ubuntu-latest
+    defaults:
+      run:
+        working-directory: marian-dev
+    steps:
+      - name: Checkout website source
+        uses: actions/checkout@v2
+        with:
+          submodules: recursive
+
+      - name: Set up Doxygen
+        run: sudo apt-get install -y doxygen
+
+      - name: Set up Python
+        uses: actions/setup-python@v2
+        with:
+          python-version: 3.7
+
+      - name: Set up dependency cache
+        uses: actions/cache@v2
+        with:
+          path: ~/.cache/pip
+          key: ${{ runner.os }}-pip-${{ hashFiles('marian-dev/doc/requirements.txt') }}
+          restore-keys: |
+            ${{ runner.os }}-pip-
+
+      - name: Install dependencies
+        working-directory: ./marian-dev/doc
+        run: pip install -r requirements.txt
+
+      - name: Build documentation
+        working-directory: ./marian-dev/doc
+        run: make html
+
+      # This artifact contains the HTML output of Sphinx only.
+      # With index.html at the root of the produced zip file.
+      - name: Upload documentation
+        uses: actions/upload-artifact@v2
+        with:
+          name: api-docs-output
+          path: ./marian-dev/doc/build/html
+
+  # Deploy to branch (on push events only)
+  deploy:
+    name: Deploy to live branch
+    needs: [site, api]
+    if: ${{ !failure() && github.event_name == 'push' }}  # skipped needs are fine, but failures are not
+    runs-on: ubuntu-latest
+    steps:
+      - name: Download Jekyll
+        uses: actions/download-artifact@v2
+        with:
+          name: jekyll-output
+          path: jekyll
+
+      # Use New API
+      - name: Download new API documentation
+        if: needs.api.result == 'success'
+        uses: actions/download-artifact@v2
+        with:
+          name: api-docs-output
+          path: api/docs/api  # match fallback api layout to unify rsync command
+
+      # Fallback to use current live API
+      - name: Reuse current API documentation
+        if: needs.api.result == 'skipped'
+        uses: actions/checkout@v2
+        with:
+          ref: ${{ env.deploy }}
+          path: api
+
+      # Updates API documentation, deleting unknown files in destination
+      - name: Add API docs to website
+        run:
+          rsync -avh --checksum --delete api/docs/api/ jekyll/docs/api
+
+      # Deploy to live branch
+      - name: Deploy
+        uses: peaceiris/actions-gh-pages@v3
+        with:
+          github_token: ${{ secrets.GITHUB_TOKEN }}
+          publish_dir: ./jekyll
+          publish_branch: ${{ env.deploy }}
+          keep_files: false
+          enable_jekyll: false # prevents GitHub running Jekyll

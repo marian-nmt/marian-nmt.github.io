@@ -304,8 +304,7 @@ jobs:
 
       # Updates API documentation, deleting unknown files in destination
       - name: Add API docs to website
-        run:
-          rsync -avh --checksum --delete api/docs/api/ jekyll/docs/api
+        run: rsync -avh --checksum --delete api/docs/api/ jekyll/docs/api
 
       # Deploy to live branch
       - name: Deploy

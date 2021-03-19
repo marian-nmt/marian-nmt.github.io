@@ -204,8 +204,7 @@ jobs:
       # Push on commit
       - name: Push commit
         if: ${{ github.event_name == 'push' }}
-        run: git push origin
-
+        run: git push origin ${{ env.source }}
 
       # Setup Ruby and build Jekyll
       - name: Setup Ruby

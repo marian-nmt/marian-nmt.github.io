@@ -1,3 +1,20 @@
+# This workflow builds and deploys the marian-nmt website.
+#
+# It automates:
+#   - generation of CLI version/help markdown
+#   - generation of API documentation
+#   - building of Jekyll website
+#
+# It uses a submodule to marian-dev to facilitate this.
+# The pinned commit determines the API/CLI output.
+#
+# On push events, HTML output from the Sphinx API is added to the Jekyll HTML
+# output and published in the deploy branch
+# NOTE: The CLI markdown is *committed* to the source via this workflow.
+#
+# On PRs, the commit stages are skipped and the Sphinx and Jekyll output are
+# available as artifacts.
+
 name: Website
 
 on:
@@ -9,11 +26,13 @@ on:
     branches:
       - jekyll
 
+  # Allow manual running of this workflow
+  # ONLY RUN THIS ON THE SOURCE BRANCH
   workflow_dispatch:
 
 # Source and Deploy branch names
 env:
-  source: jekyll
+  source: jekyll  # this should reflect the branch used in 'on'
   deploy: master
 
 
@@ -31,11 +50,13 @@ jobs:
         - name: Determine changes since last event
           id: check
           env:
-            ref: ${{ github.event.before }}
+            ref: ${{ github.event.before }}  # ref to the prior event
           run: |
             if [ -z "${{ env.ref }}" ]; then
+              # Assume changes if no prior event reference
               echo '::set-output name=changed::true';
             else
+              # Check diff since prior event to see any changes to the submodule
               git fetch origin ${{ env.ref }} --depth=1
               git diff --name-only ${{ env.ref }}.. | grep '^marian-dev' && \
                 echo '::set-output name=changed::true' || true
@@ -45,8 +66,6 @@ jobs:
             if [ "${{ github.event_name }}" = "workflow_dispatch" ]; then
               echo '::set-output name=changed::true';
             fi
-
-
 
   # Compile Marian to get CLI options
   cli:
@@ -166,7 +185,7 @@ jobs:
       # Create _data file with current marian version and sha
       - name: Generate data file
         env:
-          cli: ${{steps.cli.outputs.download-path}}
+          cli: ${{ steps.cli.outputs.download-path }}
         run: |
           version_full=$(cat ${{ env.cli }}/marian.version)
           version=$(awk '{print substr($1,2)}' <<< ${version_full})
@@ -181,7 +200,7 @@ jobs:
       - name: Generate CLI markdown files
         working-directory: .
         env:
-          cli: ${{steps.cli.outputs.download-path}}
+          cli: ${{ steps.cli.outputs.download-path }}
           doc: 'docs/cmd'
         run: |
           for cmd in marian marian-{decoder,server,scorer,vocab,conv}; do
@@ -227,6 +246,7 @@ jobs:
           path: ./_site
 
   # Generates API docs
+  # Based on marian-dev/.github/workflows/documentation.yml
   api:
     name: Build API documentation
     needs: [check_source]

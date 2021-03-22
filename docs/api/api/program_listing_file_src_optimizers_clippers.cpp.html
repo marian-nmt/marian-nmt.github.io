@@ -7,7 +7,7 @@
   
   <meta name="viewport" content="width=device-width, initial-scale=1.0" />
   
-  <title>Program Listing for File clippers.cpp &mdash; Marian NMT v1.10.2 2021-02-28 documentation</title>
+  <title>Program Listing for File clippers.cpp &mdash; Marian NMT v1.10.3 2021-03-22 documentation</title>
   
 
   
@@ -67,7 +67,7 @@
             
             
               <div class="version">
-                v1.10.2
+                v1.10.3
               </div>
             
           
@@ -174,17 +174,29 @@
 <span class="cp">#include</span> <span class="cpf">&quot;tensors/tensor_operators.h&quot;</span><span class="cp"></span>
 
 <span class="k">namespace</span> <span class="n">marian</span> <span class="p">{</span>
-<span class="kt">void</span> <span class="n">Elementwise</span><span class="o">::</span><span class="n">clip</span><span class="p">(</span><span class="n">Tensor</span> <span class="n">t</span><span class="p">)</span> <span class="p">{</span>
+<span class="kt">float</span> <span class="n">ElementwiseClipper</span><span class="o">::</span><span class="n">clip</span><span class="p">(</span><span class="n">Tensor</span> <span class="n">t</span><span class="p">,</span> <span class="kt">float</span> <span class="n">costScalingFactor</span><span class="p">)</span> <span class="p">{</span>
   <span class="k">using</span> <span class="k">namespace</span> <span class="n">functional</span><span class="p">;</span>
-  <span class="n">Element</span><span class="p">(</span><span class="n">_1</span> <span class="o">=</span> <span class="n">functional</span><span class="o">::</span><span class="n">clip</span><span class="p">(</span><span class="n">_1</span><span class="p">,</span> <span class="n">c_</span><span class="p">),</span> <span class="n">t</span><span class="p">);</span>
+  <span class="n">Element</span><span class="p">(</span><span class="n">_1</span> <span class="o">=</span> <span class="n">functional</span><span class="o">::</span><span class="n">clip</span><span class="p">(</span><span class="n">_1</span><span class="p">,</span> <span class="n">c_</span> <span class="o">*</span> <span class="n">costScalingFactor</span><span class="p">),</span> <span class="n">t</span><span class="p">);</span>
+  <span class="k">return</span> <span class="mf">0.f</span><span class="p">;</span> <span class="c1">// dummy</span>
 <span class="p">}</span>
 
-<span class="kt">void</span> <span class="n">Norm</span><span class="o">::</span><span class="n">clip</span><span class="p">(</span><span class="n">Tensor</span> <span class="n">t</span><span class="p">)</span> <span class="p">{</span>
+<span class="kt">float</span> <span class="n">NormClipper</span><span class="o">::</span><span class="n">clip</span><span class="p">(</span><span class="n">Tensor</span> <span class="n">t</span><span class="p">,</span> <span class="kt">float</span> <span class="n">costScalingFactor</span><span class="p">)</span> <span class="p">{</span>
   <span class="k">using</span> <span class="k">namespace</span> <span class="n">functional</span><span class="p">;</span>
-  <span class="kt">float</span> <span class="n">l2Norm</span> <span class="o">=</span> <span class="n">L2Norm</span><span class="p">(</span><span class="n">t</span><span class="p">,</span> <span class="k">nullptr</span><span class="p">);</span> <span class="c1">// @TODO: this is a placeholder for a memory allocator, will be replaced with better version in a PR or two.</span>
-  <span class="k">if</span><span class="p">(</span><span class="n">l2Norm</span> <span class="o">&gt;=</span> <span class="n">c_</span><span class="p">)</span>
-    <span class="n">Element</span><span class="p">(</span><span class="n">_1</span> <span class="o">=</span> <span class="p">(</span><span class="n">c_</span> <span class="o">/</span> <span class="n">l2Norm</span><span class="p">)</span> <span class="o">*</span> <span class="n">_1</span><span class="p">,</span> <span class="n">t</span><span class="p">);</span>
+  <span class="kt">float</span> <span class="n">l2Norm</span> <span class="o">=</span> <span class="n">L2Norm</span><span class="p">(</span><span class="n">t</span><span class="p">,</span> <span class="n">allocator_</span><span class="p">);</span>
+  <span class="kt">float</span> <span class="n">clipValue</span> <span class="o">=</span> <span class="n">c_</span> <span class="o">*</span> <span class="n">costScalingFactor</span><span class="p">;</span>
+  <span class="k">if</span><span class="p">(</span><span class="n">l2Norm</span> <span class="o">&gt;</span> <span class="n">clipValue</span><span class="p">)</span> <span class="p">{</span>
+    <span class="n">LOG</span><span class="p">(</span><span class="n">debug</span><span class="p">,</span> <span class="s">&quot;Re-scaling gradient by {}&quot;</span><span class="p">,</span> <span class="n">clipValue</span> <span class="o">/</span> <span class="n">l2Norm</span><span class="p">);</span>
+    <span class="n">Element</span><span class="p">(</span><span class="n">_1</span> <span class="o">=</span> <span class="p">(</span><span class="n">clipValue</span> <span class="o">/</span> <span class="n">l2Norm</span><span class="p">)</span> <span class="o">*</span> <span class="n">_1</span><span class="p">,</span> <span class="n">t</span><span class="p">);</span>
+  <span class="p">}</span>
+  <span class="k">return</span> <span class="n">l2Norm</span><span class="p">;</span>
 <span class="p">}</span>
+
+<span class="c1">// don&#39;t clip, just report L2Norm</span>
+<span class="kt">float</span> <span class="n">ReportNormClipper</span><span class="o">::</span><span class="n">clip</span><span class="p">(</span><span class="n">Tensor</span> <span class="n">t</span><span class="p">,</span> <span class="kt">float</span> <span class="cm">/*costScalingFactor*/</span><span class="p">)</span> <span class="p">{</span>
+  <span class="k">using</span> <span class="k">namespace</span> <span class="n">functional</span><span class="p">;</span>
+  <span class="k">return</span> <span class="nf">L2Norm</span><span class="p">(</span><span class="n">t</span><span class="p">,</span> <span class="n">allocator_</span><span class="p">);</span>
+<span class="p">}</span>
+
 <span class="p">}</span>  <span class="c1">// namespace marian</span>
 </pre></div>
 </div>

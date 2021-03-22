@@ -366,11 +366,14 @@ Program Listing for File corpus_base.h
    public:
      typedef SentenceTuple Sample;
    
-     CorpusBase(Ptr<Options> options, bool translate = false);
+     CorpusBase(Ptr<Options> options, 
+                bool translate = false, 
+                size_t seed = Config::seed);
    
      CorpusBase(const std::vector<std::string>& paths,
-         const std::vector<Ptr<Vocab>>& vocabs,
-         Ptr<Options> options);
+                const std::vector<Ptr<Vocab>>& vocabs,
+                Ptr<Options> options,
+                size_t seed = Config::seed);
    
      virtual ~CorpusBase() {}
      virtual std::vector<Ptr<Vocab>>& getVocabs() = 0;
@@ -422,7 +425,7 @@ Program Listing for File corpus_base.h
    
      CorpusBase* corpus_;
    
-     long long int pos_;
+     int64_t pos_; // we use int64_t here because the initial value can be -1
      SentenceTuple tup_;
    };
    }  // namespace data

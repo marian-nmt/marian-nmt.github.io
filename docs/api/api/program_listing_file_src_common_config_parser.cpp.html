@@ -7,7 +7,7 @@
   
   <meta name="viewport" content="width=device-width, initial-scale=1.0" />
   
-  <title>Program Listing for File config_parser.cpp &mdash; Marian NMT v1.10.2 2021-02-28 documentation</title>
+  <title>Program Listing for File config_parser.cpp &mdash; Marian NMT v1.10.3 2021-03-22 documentation</title>
   
 
   
@@ -67,7 +67,7 @@
             
             
               <div class="version">
-                v1.10.2
+                v1.10.3
               </div>
             
           
@@ -304,6 +304,9 @@
     <span class="s">&quot;Suppress logging for translation&quot;</span><span class="p">);</span>
   <span class="n">cli</span><span class="p">.</span><span class="n">add</span><span class="o">&lt;</span><span class="kt">size_t</span><span class="o">&gt;</span><span class="p">(</span><span class="s">&quot;--seed&quot;</span><span class="p">,</span>
     <span class="s">&quot;Seed for all random number generators. 0 means initialize randomly&quot;</span><span class="p">);</span>
+  <span class="n">cli</span><span class="p">.</span><span class="n">add</span><span class="o">&lt;</span><span class="kt">bool</span><span class="o">&gt;</span><span class="p">(</span><span class="s">&quot;--check-nan&quot;</span><span class="p">,</span>
+    <span class="s">&quot;Check for NaNs or Infs in forward and backward pass. Will abort when found. &quot;</span>
+    <span class="s">&quot;This is a diagnostic option that will slow down computation significantly&quot;</span><span class="p">);</span>
   <span class="n">cli</span><span class="p">.</span><span class="n">add</span><span class="o">&lt;</span><span class="kt">bool</span><span class="o">&gt;</span><span class="p">(</span><span class="s">&quot;--interpolate-env-vars&quot;</span><span class="p">,</span>
     <span class="s">&quot;allow the use of environment variables in paths, of the form ${VAR_NAME}&quot;</span><span class="p">);</span>
   <span class="n">cli</span><span class="p">.</span><span class="n">add</span><span class="o">&lt;</span><span class="kt">bool</span><span class="o">&gt;</span><span class="p">(</span><span class="s">&quot;--relative-paths&quot;</span><span class="p">,</span>
@@ -493,13 +496,6 @@
         <span class="s">&quot;Dropout source words (0 = no dropout)&quot;</span><span class="p">);</span>
     <span class="n">cli</span><span class="p">.</span><span class="n">add</span><span class="o">&lt;</span><span class="kt">float</span><span class="o">&gt;</span><span class="p">(</span><span class="s">&quot;--dropout-trg&quot;</span><span class="p">,</span>
         <span class="s">&quot;Dropout target words (0 = no dropout)&quot;</span><span class="p">);</span>
-    <span class="n">cli</span><span class="p">.</span><span class="n">add</span><span class="o">&lt;</span><span class="kt">float</span><span class="o">&gt;</span><span class="p">(</span><span class="s">&quot;--grad-dropping-rate&quot;</span><span class="p">,</span>
-        <span class="s">&quot;Gradient Dropping rate (0 = no gradient Dropping)&quot;</span><span class="p">);</span>
-    <span class="n">cli</span><span class="p">.</span><span class="n">add</span><span class="o">&lt;</span><span class="kt">float</span><span class="o">&gt;</span><span class="p">(</span><span class="s">&quot;--grad-dropping-momentum&quot;</span><span class="p">,</span>
-        <span class="s">&quot;Gradient Dropping momentum decay rate (0.0 to 1.0)&quot;</span><span class="p">);</span>
-    <span class="n">cli</span><span class="p">.</span><span class="n">add</span><span class="o">&lt;</span><span class="kt">size_t</span><span class="o">&gt;</span><span class="p">(</span><span class="s">&quot;--grad-dropping-warmup&quot;</span><span class="p">,</span>
-        <span class="s">&quot;Do not apply gradient dropping for the first arg steps&quot;</span><span class="p">,</span>
-        <span class="mi">100</span><span class="p">);</span>
     <span class="n">cli</span><span class="p">.</span><span class="n">add</span><span class="o">&lt;</span><span class="kt">float</span><span class="o">&gt;</span><span class="p">(</span><span class="s">&quot;--transformer-dropout&quot;</span><span class="p">,</span>
         <span class="s">&quot;Dropout between transformer layers (0 = no dropout)&quot;</span><span class="p">);</span>
     <span class="n">cli</span><span class="p">.</span><span class="n">add</span><span class="o">&lt;</span><span class="kt">float</span><span class="o">&gt;</span><span class="p">(</span><span class="s">&quot;--transformer-dropout-attention&quot;</span><span class="p">,</span>
@@ -690,29 +686,32 @@
   <span class="c1">// mixed precision training</span>
   <span class="n">cli</span><span class="p">.</span><span class="n">add</span><span class="o">&lt;</span><span class="kt">bool</span><span class="o">&gt;</span><span class="p">(</span><span class="s">&quot;--fp16&quot;</span><span class="p">,</span>
       <span class="s">&quot;Shortcut for mixed precision training with float16 and cost-scaling, &quot;</span>
-      <span class="s">&quot;corresponds to: --precision float16 float32 float32 --cost-scaling 7 2000 2 0.05 10 1&quot;</span><span class="p">);</span>
+      <span class="s">&quot;corresponds to: --precision float16 float32 --cost-scaling 0 1000 2 0.05 10 1e-5f&quot;</span><span class="p">);</span>
   <span class="n">cli</span><span class="p">.</span><span class="n">add</span><span class="o">&lt;</span><span class="n">std</span><span class="o">::</span><span class="n">vector</span><span class="o">&lt;</span><span class="n">std</span><span class="o">::</span><span class="n">string</span><span class="o">&gt;&gt;</span><span class="p">(</span><span class="s">&quot;--precision&quot;</span><span class="p">,</span>
       <span class="s">&quot;Mixed precision training for forward/backward pass and optimizaton. &quot;</span>
-      <span class="s">&quot;Defines types for: forward/backward, optimization, saving.&quot;</span><span class="p">,</span>
-      <span class="p">{</span><span class="s">&quot;float32&quot;</span><span class="p">,</span> <span class="s">&quot;float32&quot;</span><span class="p">,</span> <span class="s">&quot;float32&quot;</span><span class="p">});</span>
+      <span class="s">&quot;Defines types for: forward/backward pass, optimization.&quot;</span><span class="p">,</span>
+      <span class="p">{</span><span class="s">&quot;float32&quot;</span><span class="p">,</span> <span class="s">&quot;float32&quot;</span><span class="p">});</span>
   <span class="n">cli</span><span class="p">.</span><span class="n">add</span><span class="o">&lt;</span><span class="n">std</span><span class="o">::</span><span class="n">vector</span><span class="o">&lt;</span><span class="n">std</span><span class="o">::</span><span class="n">string</span><span class="o">&gt;&gt;</span><span class="p">(</span><span class="s">&quot;--cost-scaling&quot;</span><span class="p">,</span>
       <span class="s">&quot;Dynamic cost scaling for mixed precision training: &quot;</span>
       <span class="s">&quot;power of 2, scaling window, scaling factor, tolerance, range, minimum factor&quot;</span><span class="p">)</span>
-    <span class="o">-&gt;</span><span class="n">implicit_val</span><span class="p">(</span><span class="s">&quot;7.f 2000 2.f 0.05f 10 1.f&quot;</span><span class="p">);</span>
+      <span class="o">-&gt;</span><span class="n">implicit_val</span><span class="p">(</span><span class="s">&quot;0.f 1000 2.f 0.05f 10 1e-5f&quot;</span><span class="p">);</span>
+  <span class="n">cli</span><span class="p">.</span><span class="n">add</span><span class="o">&lt;</span><span class="kt">size_t</span><span class="o">&gt;</span><span class="p">(</span><span class="s">&quot;--gradient-norm-average-window&quot;</span><span class="p">,</span>
+      <span class="s">&quot;Window size over which the exponential average of the gradient norm is recorded (for logging and scaling). &quot;</span>
+      <span class="s">&quot;After this many updates about 90% of the mass of the exponential average comes from these updates&quot;</span><span class="p">,</span>
+      <span class="mi">100</span><span class="p">);</span>
+  <span class="n">cli</span><span class="p">.</span><span class="n">add</span><span class="o">&lt;</span><span class="n">std</span><span class="o">::</span><span class="n">vector</span><span class="o">&lt;</span><span class="n">std</span><span class="o">::</span><span class="n">string</span><span class="o">&gt;&gt;</span><span class="p">(</span><span class="s">&quot;--dynamic-gradient-scaling&quot;</span><span class="p">,</span>
+      <span class="s">&quot;Re-scale gradient to have average gradient norm if (log) gradient norm diverges from average by arg1 sigmas. &quot;</span>
+      <span class="s">&quot;If arg2 = </span><span class="se">\&quot;</span><span class="s">log</span><span class="se">\&quot;</span><span class="s"> the statistics are recorded for the log of the gradient norm else use plain norm&quot;</span><span class="p">)</span>
+      <span class="o">-&gt;</span><span class="n">implicit_val</span><span class="p">(</span><span class="s">&quot;2.f log&quot;</span><span class="p">);</span>
+  <span class="n">cli</span><span class="p">.</span><span class="n">add</span><span class="o">&lt;</span><span class="kt">bool</span><span class="o">&gt;</span><span class="p">(</span><span class="s">&quot;--check-gradient-nan&quot;</span><span class="p">,</span>
+      <span class="s">&quot;Skip parameter update in case of NaNs in gradient&quot;</span><span class="p">);</span>
   <span class="n">cli</span><span class="p">.</span><span class="n">add</span><span class="o">&lt;</span><span class="kt">bool</span><span class="o">&gt;</span><span class="p">(</span><span class="s">&quot;--normalize-gradient&quot;</span><span class="p">,</span>
-      <span class="s">&quot;Normalize gradient by multiplying with no. devices / total labels&quot;</span><span class="p">);</span>
+      <span class="s">&quot;Normalize gradient by multiplying with no. devices / total labels (not recommended and to be removed in the future)&quot;</span><span class="p">);</span>
 
   <span class="n">cli</span><span class="p">.</span><span class="n">add</span><span class="o">&lt;</span><span class="n">std</span><span class="o">::</span><span class="n">vector</span><span class="o">&lt;</span><span class="n">std</span><span class="o">::</span><span class="n">string</span><span class="o">&gt;&gt;</span><span class="p">(</span><span class="s">&quot;--train-embedder-rank&quot;</span><span class="p">,</span>
       <span class="s">&quot;Override model configuration and train a embedding similarity ranker with the model encoder, &quot;</span>
       <span class="s">&quot;parameters encode margin and an optional normalization factor&quot;</span><span class="p">)</span>
     <span class="o">-&gt;</span><span class="n">implicit_val</span><span class="p">(</span><span class="s">&quot;0.3f 0.0f&quot;</span><span class="p">);</span>
-
-  <span class="c1">// multi-node training</span>
-  <span class="n">cli</span><span class="p">.</span><span class="n">add</span><span class="o">&lt;</span><span class="kt">bool</span><span class="o">&gt;</span><span class="p">(</span><span class="s">&quot;--multi-node&quot;</span><span class="p">,</span>
-     <span class="s">&quot;Enable asynchronous multi-node training through MPI (and legacy sync if combined with --sync-sgd)&quot;</span><span class="p">);</span>
-  <span class="n">cli</span><span class="p">.</span><span class="n">add</span><span class="o">&lt;</span><span class="kt">bool</span><span class="o">&gt;</span><span class="p">(</span><span class="s">&quot;--multi-node-overlap&quot;</span><span class="p">,</span>
-     <span class="s">&quot;Overlap model computations with MPI communication&quot;</span><span class="p">,</span>
-     <span class="nb">true</span><span class="p">);</span>
 
   <span class="c1">// model quantization training</span>
   <span class="n">addSuboptionsQuantization</span><span class="p">(</span><span class="n">cli</span><span class="p">);</span>
@@ -958,9 +957,17 @@
   <span class="n">cli</span><span class="p">.</span><span class="n">add</span><span class="o">&lt;</span><span class="kt">size_t</span><span class="o">&gt;</span><span class="p">(</span><span class="s">&quot;--num-devices&quot;</span><span class="p">,</span>
       <span class="s">&quot;Number of GPUs to use for this process. Defaults to length(devices) or 1&quot;</span><span class="p">);</span>
 <span class="cp">#ifdef USE_NCCL</span>
-  <span class="k">if</span><span class="p">(</span><span class="n">mode_</span> <span class="o">==</span> <span class="n">cli</span><span class="o">::</span><span class="n">mode</span><span class="o">::</span><span class="n">training</span><span class="p">)</span>
+  <span class="k">if</span><span class="p">(</span><span class="n">mode_</span> <span class="o">==</span> <span class="n">cli</span><span class="o">::</span><span class="n">mode</span><span class="o">::</span><span class="n">training</span><span class="p">)</span> <span class="p">{</span>
     <span class="n">cli</span><span class="p">.</span><span class="n">add</span><span class="o">&lt;</span><span class="kt">bool</span><span class="o">&gt;</span><span class="p">(</span><span class="s">&quot;--no-nccl&quot;</span><span class="p">,</span>
       <span class="s">&quot;Disable inter-GPU communication via NCCL&quot;</span><span class="p">);</span>
+    <span class="n">cli</span><span class="p">.</span><span class="n">add</span><span class="o">&lt;</span><span class="n">std</span><span class="o">::</span><span class="n">string</span><span class="o">&gt;</span><span class="p">(</span><span class="s">&quot;--sharding&quot;</span><span class="p">,</span>
+      <span class="s">&quot;When using NCCL and MPI for multi-process training use &#39;global&#39; (default, less memory usage) &quot;</span>
+      <span class="s">&quot;or &#39;local&#39; (more memory usage but faster) sharding&quot;</span><span class="p">,</span>
+      <span class="p">{</span><span class="s">&quot;global&quot;</span><span class="p">});</span>
+    <span class="n">cli</span><span class="p">.</span><span class="n">add</span><span class="o">&lt;</span><span class="n">std</span><span class="o">::</span><span class="n">string</span><span class="cm">/*SchedulerPeriod*/</span><span class="o">&gt;</span><span class="p">(</span><span class="s">&quot;--sync-freq&quot;</span><span class="p">,</span>
+      <span class="s">&quot;When sharding is local sync all shards across processes once every n steps (possible units u=updates, t=target labels, e=epochs)&quot;</span><span class="p">,</span>
+      <span class="s">&quot;200u&quot;</span><span class="p">);</span>
+  <span class="p">}</span>
 <span class="cp">#endif</span>
 <span class="cp">#ifdef CUDA_FOUND</span>
   <span class="n">cli</span><span class="p">.</span><span class="n">add</span><span class="o">&lt;</span><span class="kt">size_t</span><span class="o">&gt;</span><span class="p">(</span><span class="s">&quot;--cpu-threads&quot;</span><span class="p">,</span>
@@ -1018,7 +1025,7 @@
     <span class="n">cli</span><span class="p">.</span><span class="n">add</span><span class="o">&lt;</span><span class="kt">size_t</span><span class="o">&gt;</span><span class="p">(</span><span class="s">&quot;--english-title-case-every&quot;</span><span class="p">,</span>
         <span class="s">&quot;When forming minibatches, preprocess every Nth line on the fly to title-case. Assumes English (ASCII only)&quot;</span><span class="p">);</span>
 
-    <span class="n">cli</span><span class="p">.</span><span class="n">add</span><span class="o">&lt;</span><span class="kt">int</span><span class="o">&gt;</span><span class="p">(</span><span class="s">&quot;--mini-batch-words-ref&quot;</span><span class="p">,</span>
+    <span class="n">cli</span><span class="p">.</span><span class="n">add</span><span class="o">&lt;</span><span class="kt">size_t</span><span class="o">&gt;</span><span class="p">(</span><span class="s">&quot;--mini-batch-words-ref&quot;</span><span class="p">,</span>
         <span class="s">&quot;If given, the following hyper parameters are adjusted as-if we had this mini-batch size: &quot;</span>
         <span class="s">&quot;--learn-rate, --optimizer-params, --exponential-smoothing, --mini-batch-warmup&quot;</span><span class="p">);</span>
     <span class="n">cli</span><span class="p">.</span><span class="n">add</span><span class="o">&lt;</span><span class="n">std</span><span class="o">::</span><span class="n">string</span><span class="cm">/*SchedulerPeriod*/</span><span class="o">&gt;</span><span class="p">(</span><span class="s">&quot;--mini-batch-warmup&quot;</span><span class="p">,</span>
@@ -1027,6 +1034,9 @@
         <span class="p">{</span><span class="s">&quot;0&quot;</span><span class="p">});</span>
     <span class="n">cli</span><span class="p">.</span><span class="n">add</span><span class="o">&lt;</span><span class="kt">bool</span><span class="o">&gt;</span><span class="p">(</span><span class="s">&quot;--mini-batch-track-lr&quot;</span><span class="p">,</span>
         <span class="s">&quot;Dynamically track mini-batch size inverse to actual learning rate (not considering lr-warmup)&quot;</span><span class="p">);</span>
+    <span class="n">cli</span><span class="p">.</span><span class="n">add</span><span class="o">&lt;</span><span class="kt">bool</span><span class="o">&gt;</span><span class="p">(</span><span class="s">&quot;--mini-batch-round-up&quot;</span><span class="p">,</span>
+        <span class="s">&quot;Round up batch size to next power of 2 for more efficient training, but this can make batch size less stable. Disable with --mini-batch-round-up=false&quot;</span><span class="p">,</span>
+        <span class="nb">true</span><span class="p">);</span>
   <span class="p">}</span>
   <span class="c1">// clang-format on</span>
 <span class="p">}</span>
@@ -1212,6 +1222,40 @@
                           <span class="s">&quot;Extracting &#39;alignment&#39; and &#39;weight&#39; types from input-types failed.&quot;</span><span class="p">);</span>
     <span class="p">}</span>
   <span class="p">}</span>
+
+<span class="cp">#if 0</span><span class="c"> // @TODO: remove once fully deprecated</span>
+<span class="c">  // Convert --after-batches N to --after Nu and --after-epochs N to --after Ne, different values get concatenated with &quot;,&quot;</span>
+<span class="c">  if(mode_ == cli::mode::training &amp;&amp; get&lt;size_t&gt;(&quot;after-epochs&quot;) &gt; 0) {</span>
+<span class="c">    auto afterValue = get&lt;size_t&gt;(&quot;after-epochs&quot;);</span>
+<span class="c">    LOG(info, &quot;\&quot;--after-epochs {}\&quot; is deprecated, please use \&quot;--after {}e\&quot; instead (\&quot;e\&quot; stands for epoch)&quot;, afterValue, afterValue);</span>
+<span class="c">    YAML::Node config;</span>
+<span class="c">    std::string prevAfter = get&lt;std::string&gt;(&quot;after&quot;);</span>
+<span class="c">    std::string converted = std::to_string(afterValue) + &quot;e&quot;;</span>
+<span class="c">    if(prevAfter != &quot;0e&quot;)</span>
+<span class="c">      config[&quot;after&quot;] = prevAfter + &quot;,&quot; + converted;</span>
+<span class="c">    else</span>
+<span class="c">      config[&quot;after&quot;] = converted;</span>
+<span class="c">    if(!config.IsNull())</span>
+<span class="c">      cli_.updateConfig(config,</span>
+<span class="c">                        cli::OptionPriority::CommandLine,</span>
+<span class="c">                        &quot;Could not update --after with value from --after-epochs&quot;);</span>
+<span class="c">  }</span>
+<span class="c">  if(mode_ == cli::mode::training &amp;&amp; get&lt;size_t&gt;(&quot;after-batches&quot;) &gt; 0) {</span>
+<span class="c">    auto afterValue = get&lt;size_t&gt;(&quot;after-batches&quot;);</span>
+<span class="c">    LOG(info, &quot;\&quot;--after-batches {}\&quot; is deprecated, please use \&quot;--after {}u\&quot; instead (\&quot;u\&quot; stands for updates)&quot;, afterValue, afterValue);</span>
+<span class="c">    YAML::Node config;</span>
+<span class="c">    std::string prevAfter = get&lt;std::string&gt;(&quot;after&quot;);</span>
+<span class="c">    std::string converted = std::to_string(afterValue) + &quot;u&quot;;</span>
+<span class="c">    if(prevAfter != &quot;0e&quot;)</span>
+<span class="c">      config[&quot;after&quot;] = prevAfter + &quot;,&quot; + converted;</span>
+<span class="c">    else</span>
+<span class="c">      config[&quot;after&quot;] = converted;</span>
+<span class="c">    if(!config.IsNull())</span>
+<span class="c">      cli_.updateConfig(config,</span>
+<span class="c">                        cli::OptionPriority::CommandLine,</span>
+<span class="c">                        &quot;Could not update --after with value from --after-updates&quot;);</span>
+<span class="c">  }</span>
+<span class="cp">#endif</span>
 
   <span class="n">cli_</span><span class="p">.</span><span class="n">parseAliases</span><span class="p">();</span>
   <span class="k">auto</span> <span class="n">opts</span> <span class="o">=</span> <span class="n">New</span><span class="o">&lt;</span><span class="n">Options</span><span class="o">&gt;</span><span class="p">();</span>

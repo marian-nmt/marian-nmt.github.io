@@ -7,7 +7,7 @@
   
   <meta name="viewport" content="width=device-width, initial-scale=1.0" />
   
-  <title>Program Listing for File tensor.h &mdash; Marian NMT v1.10.2 2021-02-28 documentation</title>
+  <title>Program Listing for File tensor.h &mdash; Marian NMT v1.10.3 2021-03-22 documentation</title>
   
 
   
@@ -67,7 +67,7 @@
             
             
               <div class="version">
-                v1.10.2
+                v1.10.3
               </div>
             
           
@@ -186,11 +186,10 @@
   <span class="k">return</span> <span class="n">shape</span><span class="p">;</span>
 <span class="p">}</span>
 
-<span class="c1">// modify last shape dimension to automatically map to a larger stride. We are moving now by 4 floats</span>
-<span class="c1">// at once and need to stop earlier. This is a shallow typecast to bascially an array of 4 floats.</span>
-
 <span class="cp">#ifndef __CUDACC__ </span><span class="c1">// vectorized types not available from .cu files</span>
 
+<span class="c1">// modify last shape dimension to automatically map to a larger stride. We are moving now by 4 floats</span>
+<span class="c1">// at once and need to stop earlier. This is a shallow typecast to bascially an array of 4 floats.</span>
 <span class="k">template</span> <span class="o">&lt;&gt;</span>
 <span class="kr">inline</span> <span class="n">marian</span><span class="o">::</span><span class="n">Shape</span> <span class="n">adapt</span><span class="o">&lt;</span><span class="n">float32x4</span><span class="o">&gt;</span><span class="p">(</span><span class="k">const</span> <span class="n">marian</span><span class="o">::</span><span class="n">Shape</span><span class="o">&amp;</span> <span class="n">shape</span><span class="p">)</span> <span class="p">{</span>
   <span class="n">ABORT_IF</span><span class="p">(</span><span class="n">shape</span><span class="p">[</span><span class="mi">-1</span><span class="p">]</span> <span class="o">%</span> <span class="mi">4</span> <span class="o">!=</span> <span class="mi">0</span><span class="p">,</span>
@@ -201,7 +200,9 @@
   <span class="n">x4Shape</span><span class="p">.</span><span class="n">set</span><span class="p">(</span><span class="mi">-1</span><span class="p">,</span> <span class="n">shape</span><span class="p">[</span><span class="mi">-1</span><span class="p">]</span> <span class="o">/</span> <span class="mi">4</span><span class="p">);</span>
   <span class="k">return</span> <span class="n">x4Shape</span><span class="p">;</span>
 <span class="p">}</span>
+
 <span class="cp">#ifdef __AVX__</span>
+<span class="c1">// as above, but for a stride of 8, since we are processing 8 floats at once</span>
 <span class="k">template</span> <span class="o">&lt;&gt;</span>
 <span class="kr">inline</span> <span class="n">marian</span><span class="o">::</span><span class="n">Shape</span> <span class="n">adapt</span><span class="o">&lt;</span><span class="n">float32x8</span><span class="o">&gt;</span><span class="p">(</span><span class="k">const</span> <span class="n">marian</span><span class="o">::</span><span class="n">Shape</span><span class="o">&amp;</span> <span class="n">shape</span><span class="p">)</span> <span class="p">{</span>
   <span class="n">ABORT_IF</span><span class="p">(</span><span class="n">shape</span><span class="p">[</span><span class="mi">-1</span><span class="p">]</span> <span class="o">%</span> <span class="mi">8</span> <span class="o">!=</span> <span class="mi">0</span><span class="p">,</span>
@@ -213,6 +214,20 @@
   <span class="k">return</span> <span class="n">x8Shape</span><span class="p">;</span>
 <span class="p">}</span>
 <span class="cp">#endif</span>
+<span class="cp">#endif</span>
+
+<span class="cp">#if COMPILE_FP16</span>
+<span class="c1">// as above, but for a stride of 2, since we are processing 2 half floats at once. Works on GPU.</span>
+<span class="k">template</span> <span class="o">&lt;&gt;</span>
+<span class="kr">inline</span> <span class="n">marian</span><span class="o">::</span><span class="n">Shape</span> <span class="n">adapt</span><span class="o">&lt;</span><span class="n">halfx2</span><span class="o">&gt;</span><span class="p">(</span><span class="k">const</span> <span class="n">marian</span><span class="o">::</span><span class="n">Shape</span><span class="o">&amp;</span> <span class="n">shape</span><span class="p">)</span> <span class="p">{</span>
+  <span class="n">ABORT_IF</span><span class="p">(</span><span class="n">shape</span><span class="p">[</span><span class="mi">-1</span><span class="p">]</span> <span class="o">%</span> <span class="mi">2</span> <span class="o">!=</span> <span class="mi">0</span><span class="p">,</span>
+           <span class="s">&quot;Last dim ({}) is not a multiple of 2 while converting to Tensor&lt;halfx2&gt;&quot;</span><span class="p">,</span>
+           <span class="n">shape</span><span class="p">[</span><span class="mi">-1</span><span class="p">]);</span>
+
+  <span class="n">marian</span><span class="o">::</span><span class="n">Shape</span> <span class="n">x2Shape</span> <span class="o">=</span> <span class="n">shape</span><span class="p">;</span>
+  <span class="n">x2Shape</span><span class="p">.</span><span class="n">set</span><span class="p">(</span><span class="mi">-1</span><span class="p">,</span> <span class="n">shape</span><span class="p">[</span><span class="mi">-1</span><span class="p">]</span> <span class="o">/</span> <span class="mi">2</span><span class="p">);</span>
+  <span class="k">return</span> <span class="n">x2Shape</span><span class="p">;</span>
+<span class="p">}</span>
 <span class="cp">#endif</span>
 
 <span class="k">template</span> <span class="o">&lt;</span><span class="k">typename</span> <span class="nc">T</span><span class="p">,</span> <span class="k">const</span> <span class="kt">int</span> <span class="n">D</span><span class="o">&gt;</span>

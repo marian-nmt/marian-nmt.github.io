@@ -7,7 +7,7 @@
   
   <meta name="viewport" content="width=device-width, initial-scale=1.0" />
   
-  <title>Program Listing for File training.h &mdash; Marian NMT v1.10.2 2021-02-28 documentation</title>
+  <title>Program Listing for File training.h &mdash; Marian NMT v1.10.3 2021-03-22 documentation</title>
   
 
   
@@ -67,7 +67,7 @@
             
             
               <div class="version">
-                v1.10.2
+                v1.10.3
               </div>
             
           
@@ -194,19 +194,26 @@
   <span class="kt">void</span> <span class="n">run</span><span class="p">()</span> <span class="k">override</span> <span class="p">{</span>
     <span class="k">using</span> <span class="k">namespace</span> <span class="n">data</span><span class="p">;</span>
 
+    <span class="c1">// MPI init should be first thing in training</span>
+    <span class="k">auto</span> <span class="n">mpi</span> <span class="o">=</span> <span class="n">initMPI</span><span class="p">(</span><span class="cm">/*multiThreaded=*/</span><span class="o">!</span><span class="n">options_</span><span class="o">-&gt;</span><span class="n">get</span><span class="o">&lt;</span><span class="kt">bool</span><span class="o">&gt;</span><span class="p">(</span><span class="s">&quot;sync-sgd&quot;</span><span class="p">));</span> <span class="c1">// @TODO: do we need the multiThreaded distinction at all?</span>
+
+    <span class="k">if</span><span class="p">(</span><span class="n">mpi</span><span class="p">)</span> <span class="p">{</span> <span class="c1">// if we run MPI, then make sure to sync seed across processes as first action</span>
+      <span class="n">mpi</span><span class="o">-&gt;</span><span class="n">bCast</span><span class="p">(</span><span class="o">&amp;</span><span class="n">Config</span><span class="o">::</span><span class="n">seed</span><span class="p">,</span> <span class="mi">1</span><span class="p">,</span> <span class="n">IMPIWrapper</span><span class="o">::</span><span class="n">getDataType</span><span class="p">(</span><span class="o">&amp;</span><span class="n">Config</span><span class="o">::</span><span class="n">seed</span><span class="p">));</span>
+      <span class="n">LOG</span><span class="p">(</span><span class="n">info</span><span class="p">,</span> <span class="s">&quot;Synced seed {}&quot;</span><span class="p">,</span> <span class="n">Config</span><span class="o">::</span><span class="n">seed</span><span class="p">);</span>
+    <span class="p">}</span>
+
     <span class="n">Ptr</span><span class="o">&lt;</span><span class="n">CorpusBase</span><span class="o">&gt;</span> <span class="n">dataset</span><span class="p">;</span>
+    <span class="k">auto</span> <span class="n">corpusSeed</span> <span class="o">=</span> <span class="n">Config</span><span class="o">::</span><span class="n">seed</span> <span class="o">+</span> <span class="p">(</span><span class="n">mpi</span> <span class="o">?</span> <span class="n">mpi</span><span class="o">-&gt;</span><span class="n">myMPIRank</span><span class="p">()</span> <span class="o">:</span> <span class="mi">0</span><span class="p">);</span> <span class="c1">// @BUGBUG: no correct resume right now</span>
     <span class="k">if</span><span class="p">(</span><span class="o">!</span><span class="n">options_</span><span class="o">-&gt;</span><span class="n">get</span><span class="o">&lt;</span><span class="n">std</span><span class="o">::</span><span class="n">string</span><span class="o">&gt;</span><span class="p">(</span><span class="s">&quot;sqlite&quot;</span><span class="p">).</span><span class="n">empty</span><span class="p">())</span>
 <span class="cp">#ifndef _MSC_VER </span><span class="c1">// @TODO: include SqLite in Visual Studio project</span>
-      <span class="n">dataset</span> <span class="o">=</span> <span class="n">New</span><span class="o">&lt;</span><span class="n">CorpusSQLite</span><span class="o">&gt;</span><span class="p">(</span><span class="n">options_</span><span class="p">);</span>
+      <span class="n">dataset</span> <span class="o">=</span> <span class="n">New</span><span class="o">&lt;</span><span class="n">CorpusSQLite</span><span class="o">&gt;</span><span class="p">(</span><span class="n">options_</span><span class="p">,</span> <span class="cm">/*translate=*/</span><span class="nb">false</span><span class="p">,</span> <span class="n">corpusSeed</span><span class="p">);</span>
 <span class="cp">#else</span>
       <span class="n">ABORT</span><span class="p">(</span><span class="s">&quot;SqLite presently not supported on Windows&quot;</span><span class="p">);</span>
 <span class="cp">#endif</span>
     <span class="k">else</span>
-      <span class="n">dataset</span> <span class="o">=</span> <span class="n">New</span><span class="o">&lt;</span><span class="n">Corpus</span><span class="o">&gt;</span><span class="p">(</span><span class="n">options_</span><span class="p">);</span>
+      <span class="n">dataset</span> <span class="o">=</span> <span class="n">New</span><span class="o">&lt;</span><span class="n">Corpus</span><span class="o">&gt;</span><span class="p">(</span><span class="n">options_</span><span class="p">,</span> <span class="cm">/*translate=*/</span><span class="nb">false</span><span class="p">,</span> <span class="n">corpusSeed</span><span class="p">);</span>
 
     <span class="n">dataset</span><span class="o">-&gt;</span><span class="n">prepare</span><span class="p">();</span>
-
-    <span class="k">auto</span> <span class="n">mpi</span> <span class="o">=</span> <span class="n">initMPI</span><span class="p">(</span><span class="cm">/*multiThreaded=*/</span><span class="o">!</span><span class="n">options_</span><span class="o">-&gt;</span><span class="n">get</span><span class="o">&lt;</span><span class="kt">bool</span><span class="o">&gt;</span><span class="p">(</span><span class="s">&quot;sync-sgd&quot;</span><span class="p">));</span> <span class="c1">// @TODO: do we need the multiThreaded distinction at all?</span>
 
     <span class="n">Ptr</span><span class="o">&lt;</span><span class="n">BatchStats</span><span class="o">&gt;</span> <span class="n">stats</span><span class="p">;</span>
     <span class="k">if</span><span class="p">(</span><span class="n">options_</span><span class="o">-&gt;</span><span class="n">get</span><span class="o">&lt;</span><span class="kt">bool</span><span class="o">&gt;</span><span class="p">(</span><span class="s">&quot;mini-batch-fit&quot;</span><span class="p">))</span> <span class="p">{</span>
@@ -220,7 +227,7 @@
       <span class="c1">// use temporary scheduler to make sure everything gets destroyed properly</span>
       <span class="c1">// otherwise the scheduler believes that registered objects still exist</span>
       <span class="k">auto</span> <span class="n">tempTrainState</span> <span class="o">=</span> <span class="n">New</span><span class="o">&lt;</span><span class="n">TrainingState</span><span class="o">&gt;</span><span class="p">(</span><span class="n">options_</span><span class="o">-&gt;</span><span class="n">get</span><span class="o">&lt;</span><span class="kt">float</span><span class="o">&gt;</span><span class="p">(</span><span class="s">&quot;learn-rate&quot;</span><span class="p">));</span>
-      <span class="k">auto</span> <span class="n">tempScheduler</span> <span class="o">=</span> <span class="n">New</span><span class="o">&lt;</span><span class="n">Scheduler</span><span class="o">&gt;</span><span class="p">(</span><span class="n">options_</span><span class="p">,</span> <span class="n">tempTrainState</span><span class="p">);</span>
+      <span class="k">auto</span> <span class="n">tempScheduler</span> <span class="o">=</span> <span class="n">New</span><span class="o">&lt;</span><span class="n">Scheduler</span><span class="o">&gt;</span><span class="p">(</span><span class="n">options_</span><span class="p">,</span> <span class="n">tempTrainState</span><span class="p">,</span> <span class="n">mpi</span><span class="p">);</span>
 
       <span class="n">model</span><span class="o">-&gt;</span><span class="n">setScheduler</span><span class="p">(</span><span class="n">tempScheduler</span><span class="p">);</span> <span class="c1">// collectStats() needs to know about dynamic MB scaling</span>
       <span class="n">stats</span> <span class="o">=</span> <span class="n">model</span><span class="o">-&gt;</span><span class="n">collectStats</span><span class="p">(</span><span class="n">dataset</span><span class="o">-&gt;</span><span class="n">getVocabs</span><span class="p">());</span>
@@ -228,7 +235,7 @@
     <span class="p">}</span>
 
     <span class="k">auto</span> <span class="n">trainState</span> <span class="o">=</span> <span class="n">New</span><span class="o">&lt;</span><span class="n">TrainingState</span><span class="o">&gt;</span><span class="p">(</span><span class="n">options_</span><span class="o">-&gt;</span><span class="n">get</span><span class="o">&lt;</span><span class="kt">float</span><span class="o">&gt;</span><span class="p">(</span><span class="s">&quot;learn-rate&quot;</span><span class="p">));</span>
-    <span class="k">auto</span> <span class="n">scheduler</span> <span class="o">=</span> <span class="n">New</span><span class="o">&lt;</span><span class="n">Scheduler</span><span class="o">&gt;</span><span class="p">(</span><span class="n">options_</span><span class="p">,</span> <span class="n">trainState</span><span class="p">);</span>
+    <span class="k">auto</span> <span class="n">scheduler</span> <span class="o">=</span> <span class="n">New</span><span class="o">&lt;</span><span class="n">Scheduler</span><span class="o">&gt;</span><span class="p">(</span><span class="n">options_</span><span class="p">,</span> <span class="n">trainState</span><span class="p">,</span> <span class="n">mpi</span><span class="p">);</span>
 
     <span class="k">if</span><span class="p">((</span><span class="n">options_</span><span class="o">-&gt;</span><span class="n">hasAndNotEmpty</span><span class="p">(</span><span class="s">&quot;valid-sets&quot;</span><span class="p">)</span> <span class="o">||</span> <span class="n">options_</span><span class="o">-&gt;</span><span class="n">hasAndNotEmpty</span><span class="p">(</span><span class="s">&quot;valid-script-path&quot;</span><span class="p">))</span>
        <span class="o">&amp;&amp;</span> <span class="n">SchedulingParameter</span><span class="o">::</span><span class="n">parse</span><span class="p">(</span><span class="n">options_</span><span class="o">-&gt;</span><span class="n">get</span><span class="o">&lt;</span><span class="n">std</span><span class="o">::</span><span class="n">string</span><span class="o">&gt;</span><span class="p">(</span><span class="s">&quot;valid-freq&quot;</span><span class="p">)))</span> <span class="p">{</span>
@@ -277,7 +284,8 @@
       <span class="n">model</span><span class="o">-&gt;</span><span class="n">save</span><span class="p">(</span><span class="nb">true</span><span class="p">);</span>
 
     <span class="c1">// Signal success to a potential MPI runner</span>
-    <span class="n">model</span> <span class="o">=</span> <span class="k">nullptr</span><span class="p">;</span> <span class="c1">// release any reference to MPI that model may hold</span>
+    <span class="n">model</span> <span class="o">=</span> <span class="k">nullptr</span><span class="p">;</span>     <span class="c1">// release any reference to MPI that model may hold</span>
+    <span class="n">scheduler</span> <span class="o">=</span> <span class="k">nullptr</span><span class="p">;</span> <span class="c1">// as above</span>
     <span class="n">finalizeMPI</span><span class="p">(</span><span class="n">std</span><span class="o">::</span><span class="n">move</span><span class="p">(</span><span class="n">mpi</span><span class="p">));</span>
   <span class="p">}</span>
 <span class="p">};</span>

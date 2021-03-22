@@ -7,7 +7,7 @@
   
   <meta name="viewport" content="width=device-width, initial-scale=1.0" />
   
-  <title>Program Listing for File node_operators_binary.h &mdash; Marian NMT v1.10.2 2021-02-28 documentation</title>
+  <title>Program Listing for File node_operators_binary.h &mdash; Marian NMT v1.10.3 2021-03-22 documentation</title>
   
 
   
@@ -67,7 +67,7 @@
             
             
               <div class="version">
-                v1.10.2
+                v1.10.3
               </div>
             
           
@@ -290,6 +290,21 @@
     <span class="c1">// df/dB += alpha * dot(op(A).T, D)</span>
     <span class="c1">// beta set to 1.0 in gemm, C = alpha * dot(op(A), op(B)) + beta * C</span>
     <span class="c1">// to sum gradients from different graph parts</span>
+
+    <span class="k">auto</span> <span class="n">isParameter</span> <span class="o">=</span> <span class="p">[](</span><span class="n">Expr</span> <span class="n">p</span><span class="p">)</span> <span class="p">{</span>
+      <span class="k">return</span> <span class="n">std</span><span class="o">::</span><span class="n">dynamic_pointer_cast</span><span class="o">&lt;</span><span class="n">ParamNode</span><span class="o">&gt;</span><span class="p">(</span><span class="n">p</span><span class="p">)</span> <span class="o">!=</span> <span class="k">nullptr</span><span class="p">;</span>
+    <span class="p">};</span>
+
+    <span class="c1">// if child A is not a parameter (i.e. activations) use computeType float32 for accumulation</span>
+    <span class="n">Type</span> <span class="n">computeTypeA</span> <span class="o">=</span> <span class="n">child</span><span class="p">(</span><span class="mi">0</span><span class="p">)</span><span class="o">-&gt;</span><span class="n">trainable</span><span class="p">()</span> <span class="o">?</span> <span class="n">child</span><span class="p">(</span><span class="mi">0</span><span class="p">)</span><span class="o">-&gt;</span><span class="n">grad</span><span class="p">()</span><span class="o">-&gt;</span><span class="n">type</span><span class="p">()</span> <span class="o">:</span> <span class="n">Type</span><span class="o">::</span><span class="n">float32</span><span class="p">;</span>
+    <span class="k">if</span><span class="p">(</span><span class="o">!</span><span class="n">isParameter</span><span class="p">(</span><span class="n">child</span><span class="p">(</span><span class="mi">0</span><span class="p">))</span> <span class="o">&amp;&amp;</span> <span class="n">computeTypeA</span> <span class="o">==</span> <span class="n">Type</span><span class="o">::</span><span class="n">float16</span><span class="p">)</span>
+      <span class="n">computeTypeA</span> <span class="o">=</span> <span class="n">Type</span><span class="o">::</span><span class="n">float32</span><span class="p">;</span>
+
+    <span class="c1">// if child B is not a parameter (i.e. activations) use computeType float32 for accumulation</span>
+    <span class="n">Type</span> <span class="n">computeTypeB</span> <span class="o">=</span> <span class="n">child</span><span class="p">(</span><span class="mi">1</span><span class="p">)</span><span class="o">-&gt;</span><span class="n">trainable</span><span class="p">()</span> <span class="o">?</span> <span class="n">child</span><span class="p">(</span><span class="mi">1</span><span class="p">)</span><span class="o">-&gt;</span><span class="n">grad</span><span class="p">()</span><span class="o">-&gt;</span><span class="n">type</span><span class="p">()</span> <span class="o">:</span> <span class="n">Type</span><span class="o">::</span><span class="n">float32</span><span class="p">;</span>
+    <span class="k">if</span><span class="p">(</span><span class="o">!</span><span class="n">isParameter</span><span class="p">(</span><span class="n">child</span><span class="p">(</span><span class="mi">1</span><span class="p">))</span> <span class="o">&amp;&amp;</span> <span class="n">computeTypeB</span> <span class="o">==</span> <span class="n">Type</span><span class="o">::</span><span class="n">float16</span><span class="p">)</span>
+      <span class="n">computeTypeB</span> <span class="o">=</span> <span class="n">Type</span><span class="o">::</span><span class="n">float32</span><span class="p">;</span>
+
     <span class="k">if</span><span class="p">(</span><span class="o">!</span><span class="n">transA_</span> <span class="o">&amp;&amp;</span> <span class="n">transB_</span><span class="p">)</span>
       <span class="k">return</span> <span class="p">{</span><span class="n">NodeOp</span><span class="p">(</span><span class="n">Prod</span><span class="p">(</span><span class="n">child</span><span class="p">(</span><span class="mi">0</span><span class="p">)</span><span class="o">-&gt;</span><span class="n">grad</span><span class="p">(),</span>
                           <span class="n">adj_</span><span class="p">,</span>
@@ -297,14 +312,14 @@
                           <span class="nb">false</span><span class="p">,</span>
                           <span class="nb">false</span><span class="p">,</span>
                           <span class="mf">1.0</span><span class="p">,</span>
-                          <span class="n">scalar_</span><span class="p">)),</span>
+                          <span class="n">scalar_</span><span class="p">,</span> <span class="n">computeTypeA</span><span class="p">)),</span>
               <span class="n">NodeOp</span><span class="p">(</span><span class="n">Prod</span><span class="p">(</span><span class="n">child</span><span class="p">(</span><span class="mi">1</span><span class="p">)</span><span class="o">-&gt;</span><span class="n">grad</span><span class="p">(),</span>
                           <span class="n">adj_</span><span class="p">,</span>
                           <span class="n">child</span><span class="p">(</span><span class="mi">0</span><span class="p">)</span><span class="o">-&gt;</span><span class="n">val</span><span class="p">(),</span>
                           <span class="nb">true</span><span class="p">,</span>
                           <span class="nb">false</span><span class="p">,</span>
                           <span class="mf">1.0</span><span class="p">,</span>
-                          <span class="n">scalar_</span><span class="p">))};</span>
+                          <span class="n">scalar_</span><span class="p">,</span> <span class="n">computeTypeB</span><span class="p">))};</span>
 
     <span class="k">if</span><span class="p">(</span><span class="n">transA_</span> <span class="o">&amp;&amp;</span> <span class="o">!</span><span class="n">transB_</span><span class="p">)</span>
       <span class="k">return</span> <span class="p">{</span><span class="n">NodeOp</span><span class="p">(</span><span class="n">Prod</span><span class="p">(</span><span class="n">child</span><span class="p">(</span><span class="mi">0</span><span class="p">)</span><span class="o">-&gt;</span><span class="n">grad</span><span class="p">(),</span>
@@ -313,14 +328,14 @@
                           <span class="nb">false</span><span class="p">,</span>
                           <span class="nb">true</span><span class="p">,</span>
                           <span class="mf">1.0</span><span class="p">,</span>
-                          <span class="n">scalar_</span><span class="p">)),</span>
+                          <span class="n">scalar_</span><span class="p">,</span> <span class="n">computeTypeA</span><span class="p">)),</span>
               <span class="n">NodeOp</span><span class="p">(</span><span class="n">Prod</span><span class="p">(</span><span class="n">child</span><span class="p">(</span><span class="mi">1</span><span class="p">)</span><span class="o">-&gt;</span><span class="n">grad</span><span class="p">(),</span>
                           <span class="n">child</span><span class="p">(</span><span class="mi">0</span><span class="p">)</span><span class="o">-&gt;</span><span class="n">val</span><span class="p">(),</span>
                           <span class="n">adj_</span><span class="p">,</span>
                           <span class="nb">false</span><span class="p">,</span>
                           <span class="nb">false</span><span class="p">,</span>
                           <span class="mf">1.0</span><span class="p">,</span>
-                          <span class="n">scalar_</span><span class="p">))};</span>
+                          <span class="n">scalar_</span><span class="p">,</span> <span class="n">computeTypeB</span><span class="p">))};</span>
 
     <span class="k">if</span><span class="p">(</span><span class="n">transA_</span> <span class="o">&amp;&amp;</span> <span class="n">transB_</span><span class="p">)</span>
       <span class="k">return</span> <span class="p">{</span><span class="n">NodeOp</span><span class="p">(</span><span class="n">Prod</span><span class="p">(</span><span class="n">child</span><span class="p">(</span><span class="mi">0</span><span class="p">)</span><span class="o">-&gt;</span><span class="n">grad</span><span class="p">(),</span>
@@ -329,14 +344,14 @@
                           <span class="nb">true</span><span class="p">,</span>
                           <span class="nb">true</span><span class="p">,</span>
                           <span class="mf">1.0</span><span class="p">,</span>
-                          <span class="n">scalar_</span><span class="p">)),</span>
+                          <span class="n">scalar_</span><span class="p">,</span> <span class="n">computeTypeA</span><span class="p">)),</span>
               <span class="n">NodeOp</span><span class="p">(</span><span class="n">Prod</span><span class="p">(</span><span class="n">child</span><span class="p">(</span><span class="mi">1</span><span class="p">)</span><span class="o">-&gt;</span><span class="n">grad</span><span class="p">(),</span>
                           <span class="n">adj_</span><span class="p">,</span>
                           <span class="n">child</span><span class="p">(</span><span class="mi">0</span><span class="p">)</span><span class="o">-&gt;</span><span class="n">val</span><span class="p">(),</span>
                           <span class="nb">true</span><span class="p">,</span>
                           <span class="nb">true</span><span class="p">,</span>
                           <span class="mf">1.0</span><span class="p">,</span>
-                          <span class="n">scalar_</span><span class="p">))};</span>
+                          <span class="n">scalar_</span><span class="p">,</span> <span class="n">computeTypeB</span><span class="p">))};</span>
 
     <span class="k">return</span> <span class="p">{</span><span class="n">NodeOp</span><span class="p">(</span><span class="n">Prod</span><span class="p">(</span><span class="n">child</span><span class="p">(</span><span class="mi">0</span><span class="p">)</span><span class="o">-&gt;</span><span class="n">grad</span><span class="p">(),</span>
                         <span class="n">adj_</span><span class="p">,</span>
@@ -344,14 +359,14 @@
                         <span class="nb">false</span><span class="p">,</span>
                         <span class="nb">true</span><span class="p">,</span>
                         <span class="mf">1.0</span><span class="p">,</span>
-                        <span class="n">scalar_</span><span class="p">)),</span>
+                        <span class="n">scalar_</span><span class="p">,</span> <span class="n">computeTypeA</span><span class="p">)),</span>
             <span class="n">NodeOp</span><span class="p">(</span><span class="n">Prod</span><span class="p">(</span><span class="n">child</span><span class="p">(</span><span class="mi">1</span><span class="p">)</span><span class="o">-&gt;</span><span class="n">grad</span><span class="p">(),</span>
                         <span class="n">child</span><span class="p">(</span><span class="mi">0</span><span class="p">)</span><span class="o">-&gt;</span><span class="n">val</span><span class="p">(),</span>
                         <span class="n">adj_</span><span class="p">,</span>
                         <span class="nb">true</span><span class="p">,</span>
                         <span class="nb">false</span><span class="p">,</span>
                         <span class="mf">1.0</span><span class="p">,</span>
-                        <span class="n">scalar_</span><span class="p">))};</span>
+                        <span class="n">scalar_</span><span class="p">,</span> <span class="n">computeTypeB</span><span class="p">))};</span>
   <span class="p">}</span>
 
   <span class="k">const</span> <span class="n">std</span><span class="o">::</span><span class="n">string</span> <span class="n">type</span><span class="p">()</span> <span class="k">override</span> <span class="p">{</span> <span class="k">return</span> <span class="s">&quot;dot&quot;</span><span class="p">;</span> <span class="p">}</span>
@@ -441,8 +456,27 @@
     <span class="c1">// df/dB += alpha * dot(op(A).T, D)</span>
     <span class="c1">// beta set to 1.0 in gemm, C = alpha * dot(op(A), op(B)) + beta * C</span>
     <span class="c1">// to sum gradients from different graph parts</span>
-    <span class="k">using</span> <span class="k">namespace</span> <span class="n">functional</span><span class="p">;</span>
 
+    <span class="k">auto</span> <span class="n">isParameter</span> <span class="o">=</span> <span class="p">[](</span><span class="n">Expr</span> <span class="n">p</span><span class="p">)</span> <span class="p">{</span>
+      <span class="k">return</span> <span class="n">std</span><span class="o">::</span><span class="n">dynamic_pointer_cast</span><span class="o">&lt;</span><span class="n">ParamNode</span><span class="o">&gt;</span><span class="p">(</span><span class="n">p</span><span class="p">)</span> <span class="o">!=</span> <span class="k">nullptr</span><span class="p">;</span>
+    <span class="p">};</span>
+
+    <span class="c1">// if child A is not a parameter (i.e. activations) use computeType float32 for accumulation</span>
+    <span class="n">Type</span> <span class="n">computeTypeA</span> <span class="o">=</span> <span class="n">child</span><span class="p">(</span><span class="mi">0</span><span class="p">)</span><span class="o">-&gt;</span><span class="n">trainable</span><span class="p">()</span> <span class="o">?</span> <span class="n">child</span><span class="p">(</span><span class="mi">0</span><span class="p">)</span><span class="o">-&gt;</span><span class="n">grad</span><span class="p">()</span><span class="o">-&gt;</span><span class="n">type</span><span class="p">()</span> <span class="o">:</span> <span class="n">Type</span><span class="o">::</span><span class="n">float32</span><span class="p">;</span>
+    <span class="k">if</span><span class="p">(</span><span class="o">!</span><span class="n">isParameter</span><span class="p">(</span><span class="n">child</span><span class="p">(</span><span class="mi">0</span><span class="p">))</span> <span class="o">&amp;&amp;</span> <span class="n">computeTypeA</span> <span class="o">==</span> <span class="n">Type</span><span class="o">::</span><span class="n">float16</span><span class="p">)</span>
+      <span class="n">computeTypeA</span> <span class="o">=</span> <span class="n">Type</span><span class="o">::</span><span class="n">float32</span><span class="p">;</span>
+
+    <span class="c1">// if child B is not a parameter (i.e. activations) use computeType float32 for accumulation</span>
+    <span class="n">Type</span> <span class="n">computeTypeB</span> <span class="o">=</span> <span class="n">child</span><span class="p">(</span><span class="mi">1</span><span class="p">)</span><span class="o">-&gt;</span><span class="n">trainable</span><span class="p">()</span> <span class="o">?</span> <span class="n">child</span><span class="p">(</span><span class="mi">1</span><span class="p">)</span><span class="o">-&gt;</span><span class="n">grad</span><span class="p">()</span><span class="o">-&gt;</span><span class="n">type</span><span class="p">()</span> <span class="o">:</span> <span class="n">Type</span><span class="o">::</span><span class="n">float32</span><span class="p">;</span>
+    <span class="k">if</span><span class="p">(</span><span class="o">!</span><span class="n">isParameter</span><span class="p">(</span><span class="n">child</span><span class="p">(</span><span class="mi">1</span><span class="p">))</span> <span class="o">&amp;&amp;</span> <span class="n">computeTypeB</span> <span class="o">==</span> <span class="n">Type</span><span class="o">::</span><span class="n">float16</span><span class="p">)</span>
+      <span class="n">computeTypeB</span> <span class="o">=</span> <span class="n">Type</span><span class="o">::</span><span class="n">float32</span><span class="p">;</span>
+
+    <span class="c1">// if child C (bias) is not a parameter (i.e. activations) use computeType float32 for accumulation</span>
+    <span class="n">Type</span> <span class="n">computeTypeC</span> <span class="o">=</span> <span class="n">child</span><span class="p">(</span><span class="mi">2</span><span class="p">)</span><span class="o">-&gt;</span><span class="n">trainable</span><span class="p">()</span> <span class="o">?</span> <span class="n">child</span><span class="p">(</span><span class="mi">2</span><span class="p">)</span><span class="o">-&gt;</span><span class="n">grad</span><span class="p">()</span><span class="o">-&gt;</span><span class="n">type</span><span class="p">()</span> <span class="o">:</span> <span class="n">Type</span><span class="o">::</span><span class="n">float32</span><span class="p">;</span>
+    <span class="k">if</span><span class="p">(</span><span class="o">!</span><span class="n">isParameter</span><span class="p">(</span><span class="n">child</span><span class="p">(</span><span class="mi">2</span><span class="p">))</span> <span class="o">&amp;&amp;</span> <span class="n">computeTypeC</span> <span class="o">==</span> <span class="n">Type</span><span class="o">::</span><span class="n">float16</span><span class="p">)</span>
+      <span class="n">computeTypeC</span> <span class="o">=</span> <span class="n">Type</span><span class="o">::</span><span class="n">float32</span><span class="p">;</span>
+
+    <span class="c1">// We reduce bias gradients with a matrix multiply</span>
     <span class="k">if</span><span class="p">(</span><span class="o">!</span><span class="n">transA_</span> <span class="o">&amp;&amp;</span> <span class="n">transB_</span><span class="p">)</span>
       <span class="k">return</span> <span class="p">{</span>
           <span class="n">NodeOp</span><span class="p">(</span><span class="n">Prod</span><span class="p">(</span><span class="n">child</span><span class="p">(</span><span class="mi">0</span><span class="p">)</span><span class="o">-&gt;</span><span class="n">grad</span><span class="p">(),</span>
@@ -451,16 +485,16 @@
                       <span class="nb">false</span><span class="p">,</span>
                       <span class="nb">false</span><span class="p">,</span>
                       <span class="mf">1.0</span><span class="p">,</span>
-                      <span class="n">scalar_</span><span class="p">)),</span>
+                      <span class="n">scalar_</span><span class="p">,</span> <span class="n">computeTypeA</span><span class="p">)),</span>
           <span class="n">NodeOp</span><span class="p">(</span><span class="n">Prod</span><span class="p">(</span><span class="n">child</span><span class="p">(</span><span class="mi">1</span><span class="p">)</span><span class="o">-&gt;</span><span class="n">grad</span><span class="p">(),</span>
                       <span class="n">adj_</span><span class="p">,</span>
                       <span class="n">child</span><span class="p">(</span><span class="mi">0</span><span class="p">)</span><span class="o">-&gt;</span><span class="n">val</span><span class="p">(),</span>
                       <span class="nb">true</span><span class="p">,</span>
                       <span class="nb">false</span><span class="p">,</span>
                       <span class="mf">1.0</span><span class="p">,</span>
-                      <span class="n">scalar_</span><span class="p">)),</span>
+                      <span class="n">scalar_</span><span class="p">,</span> <span class="n">computeTypeB</span><span class="p">)),</span>
           <span class="n">NodeOp</span><span class="p">(</span><span class="n">Prod</span><span class="p">(</span>
-              <span class="n">child</span><span class="p">(</span><span class="mi">2</span><span class="p">)</span><span class="o">-&gt;</span><span class="n">grad</span><span class="p">(),</span> <span class="n">child</span><span class="p">(</span><span class="mi">3</span><span class="p">)</span><span class="o">-&gt;</span><span class="n">val</span><span class="p">(),</span> <span class="n">adj_</span><span class="p">,</span> <span class="nb">true</span><span class="p">,</span> <span class="nb">false</span><span class="p">,</span> <span class="mf">0.f</span><span class="p">,</span> <span class="mf">1.f</span><span class="p">))</span>
+              <span class="n">child</span><span class="p">(</span><span class="mi">2</span><span class="p">)</span><span class="o">-&gt;</span><span class="n">grad</span><span class="p">(),</span> <span class="n">child</span><span class="p">(</span><span class="mi">3</span><span class="p">)</span><span class="o">-&gt;</span><span class="n">val</span><span class="p">(),</span> <span class="n">adj_</span><span class="p">,</span> <span class="nb">true</span><span class="p">,</span> <span class="nb">false</span><span class="p">,</span> <span class="mf">0.f</span><span class="p">,</span> <span class="mf">1.f</span><span class="p">,</span> <span class="n">computeTypeC</span><span class="p">))</span>
       <span class="p">};</span>
 
     <span class="k">if</span><span class="p">(</span><span class="n">transA_</span> <span class="o">&amp;&amp;</span> <span class="o">!</span><span class="n">transB_</span><span class="p">)</span>
@@ -471,16 +505,16 @@
                       <span class="nb">false</span><span class="p">,</span>
                       <span class="nb">true</span><span class="p">,</span>
                       <span class="mf">1.0</span><span class="p">,</span>
-                      <span class="n">scalar_</span><span class="p">)),</span>
+                      <span class="n">scalar_</span><span class="p">,</span> <span class="n">computeTypeA</span><span class="p">)),</span>
           <span class="n">NodeOp</span><span class="p">(</span><span class="n">Prod</span><span class="p">(</span><span class="n">child</span><span class="p">(</span><span class="mi">1</span><span class="p">)</span><span class="o">-&gt;</span><span class="n">grad</span><span class="p">(),</span>
                       <span class="n">child</span><span class="p">(</span><span class="mi">0</span><span class="p">)</span><span class="o">-&gt;</span><span class="n">val</span><span class="p">(),</span>
                       <span class="n">adj_</span><span class="p">,</span>
                       <span class="nb">false</span><span class="p">,</span>
                       <span class="nb">false</span><span class="p">,</span>
                       <span class="mf">1.0</span><span class="p">,</span>
-                      <span class="n">scalar_</span><span class="p">)),</span>
+                      <span class="n">scalar_</span><span class="p">,</span> <span class="n">computeTypeB</span><span class="p">)),</span>
           <span class="n">NodeOp</span><span class="p">(</span><span class="n">Prod</span><span class="p">(</span>
-              <span class="n">child</span><span class="p">(</span><span class="mi">2</span><span class="p">)</span><span class="o">-&gt;</span><span class="n">grad</span><span class="p">(),</span> <span class="n">child</span><span class="p">(</span><span class="mi">3</span><span class="p">)</span><span class="o">-&gt;</span><span class="n">val</span><span class="p">(),</span> <span class="n">adj_</span><span class="p">,</span> <span class="nb">true</span><span class="p">,</span> <span class="nb">false</span><span class="p">,</span> <span class="mf">0.f</span><span class="p">,</span> <span class="mf">1.f</span><span class="p">))</span>
+              <span class="n">child</span><span class="p">(</span><span class="mi">2</span><span class="p">)</span><span class="o">-&gt;</span><span class="n">grad</span><span class="p">(),</span> <span class="n">child</span><span class="p">(</span><span class="mi">3</span><span class="p">)</span><span class="o">-&gt;</span><span class="n">val</span><span class="p">(),</span> <span class="n">adj_</span><span class="p">,</span> <span class="nb">true</span><span class="p">,</span> <span class="nb">false</span><span class="p">,</span> <span class="mf">0.f</span><span class="p">,</span> <span class="mf">1.f</span><span class="p">,</span> <span class="n">computeTypeC</span><span class="p">))</span>
       <span class="p">};</span>
 
     <span class="k">if</span><span class="p">(</span><span class="n">transA_</span> <span class="o">&amp;&amp;</span> <span class="n">transB_</span><span class="p">)</span>
@@ -491,16 +525,16 @@
                       <span class="nb">true</span><span class="p">,</span>
                       <span class="nb">true</span><span class="p">,</span>
                       <span class="mf">1.0</span><span class="p">,</span>
-                      <span class="n">scalar_</span><span class="p">)),</span>
+                      <span class="n">scalar_</span><span class="p">,</span> <span class="n">computeTypeA</span><span class="p">)),</span>
           <span class="n">NodeOp</span><span class="p">(</span><span class="n">Prod</span><span class="p">(</span><span class="n">child</span><span class="p">(</span><span class="mi">1</span><span class="p">)</span><span class="o">-&gt;</span><span class="n">grad</span><span class="p">(),</span>
                       <span class="n">adj_</span><span class="p">,</span>
                       <span class="n">child</span><span class="p">(</span><span class="mi">0</span><span class="p">)</span><span class="o">-&gt;</span><span class="n">val</span><span class="p">(),</span>
                       <span class="nb">true</span><span class="p">,</span>
                       <span class="nb">true</span><span class="p">,</span>
                       <span class="mf">1.0</span><span class="p">,</span>
-                      <span class="n">scalar_</span><span class="p">)),</span>
+                      <span class="n">scalar_</span><span class="p">,</span> <span class="n">computeTypeB</span><span class="p">)),</span>
           <span class="n">NodeOp</span><span class="p">(</span><span class="n">Prod</span><span class="p">(</span>
-              <span class="n">child</span><span class="p">(</span><span class="mi">2</span><span class="p">)</span><span class="o">-&gt;</span><span class="n">grad</span><span class="p">(),</span> <span class="n">child</span><span class="p">(</span><span class="mi">3</span><span class="p">)</span><span class="o">-&gt;</span><span class="n">val</span><span class="p">(),</span> <span class="n">adj_</span><span class="p">,</span> <span class="nb">true</span><span class="p">,</span> <span class="nb">false</span><span class="p">,</span> <span class="mf">0.f</span><span class="p">,</span> <span class="mf">1.f</span><span class="p">))</span>
+              <span class="n">child</span><span class="p">(</span><span class="mi">2</span><span class="p">)</span><span class="o">-&gt;</span><span class="n">grad</span><span class="p">(),</span> <span class="n">child</span><span class="p">(</span><span class="mi">3</span><span class="p">)</span><span class="o">-&gt;</span><span class="n">val</span><span class="p">(),</span> <span class="n">adj_</span><span class="p">,</span> <span class="nb">true</span><span class="p">,</span> <span class="nb">false</span><span class="p">,</span> <span class="mf">0.f</span><span class="p">,</span> <span class="mf">1.f</span><span class="p">,</span> <span class="n">computeTypeC</span><span class="p">))</span>
       <span class="p">};</span>
 
     <span class="k">return</span> <span class="p">{</span>
@@ -510,16 +544,16 @@
                     <span class="nb">false</span><span class="p">,</span>
                     <span class="nb">true</span><span class="p">,</span>
                     <span class="mf">1.0</span><span class="p">,</span>
-                    <span class="n">scalar_</span><span class="p">)),</span>
+                    <span class="n">scalar_</span><span class="p">,</span> <span class="n">computeTypeA</span><span class="p">)),</span>
         <span class="n">NodeOp</span><span class="p">(</span><span class="n">Prod</span><span class="p">(</span><span class="n">child</span><span class="p">(</span><span class="mi">1</span><span class="p">)</span><span class="o">-&gt;</span><span class="n">grad</span><span class="p">(),</span>
                     <span class="n">child</span><span class="p">(</span><span class="mi">0</span><span class="p">)</span><span class="o">-&gt;</span><span class="n">val</span><span class="p">(),</span>
                     <span class="n">adj_</span><span class="p">,</span>
                     <span class="nb">true</span><span class="p">,</span>
                     <span class="nb">false</span><span class="p">,</span>
                     <span class="mf">1.0</span><span class="p">,</span>
-                    <span class="n">scalar_</span><span class="p">)),</span>
+                    <span class="n">scalar_</span><span class="p">,</span> <span class="n">computeTypeB</span><span class="p">)),</span>
         <span class="n">NodeOp</span><span class="p">(</span><span class="n">Prod</span><span class="p">(</span>
-            <span class="n">child</span><span class="p">(</span><span class="mi">2</span><span class="p">)</span><span class="o">-&gt;</span><span class="n">grad</span><span class="p">(),</span> <span class="n">child</span><span class="p">(</span><span class="mi">3</span><span class="p">)</span><span class="o">-&gt;</span><span class="n">val</span><span class="p">(),</span> <span class="n">adj_</span><span class="p">,</span> <span class="nb">true</span><span class="p">,</span> <span class="nb">false</span><span class="p">,</span> <span class="mf">0.f</span><span class="p">,</span> <span class="mf">1.f</span><span class="p">))</span>
+            <span class="n">child</span><span class="p">(</span><span class="mi">2</span><span class="p">)</span><span class="o">-&gt;</span><span class="n">grad</span><span class="p">(),</span> <span class="n">child</span><span class="p">(</span><span class="mi">3</span><span class="p">)</span><span class="o">-&gt;</span><span class="n">val</span><span class="p">(),</span> <span class="n">adj_</span><span class="p">,</span> <span class="nb">true</span><span class="p">,</span> <span class="nb">false</span><span class="p">,</span> <span class="mf">0.f</span><span class="p">,</span> <span class="mf">1.f</span><span class="p">,</span> <span class="n">computeTypeC</span><span class="p">))</span>
     <span class="p">};</span>
   <span class="p">}</span>
 
@@ -717,6 +751,8 @@
       <span class="n">transS_</span><span class="p">(</span><span class="n">transS</span><span class="p">),</span> <span class="n">swapOperands_</span><span class="p">(</span><span class="n">swapOperands</span><span class="p">)</span> <span class="p">{</span>
     <span class="n">matchOrAbort</span><span class="o">&lt;</span><span class="n">IndexType</span><span class="o">&gt;</span><span class="p">(</span><span class="n">S_indices</span><span class="o">-&gt;</span><span class="n">value_type</span><span class="p">());</span>
     <span class="n">matchOrAbort</span><span class="o">&lt;</span><span class="n">IndexType</span><span class="o">&gt;</span><span class="p">(</span><span class="n">S_offsets</span><span class="o">-&gt;</span><span class="n">value_type</span><span class="p">());</span>
+
+    <span class="n">ABORT_IF</span><span class="p">(</span><span class="n">swapOperands_</span><span class="p">,</span> <span class="s">&quot;Implementation for this is wonky, if you use this tell us.&quot;</span><span class="p">);</span>
   <span class="p">}</span>
 
   <span class="n">Shape</span> <span class="n">newShape</span><span class="p">(</span><span class="k">const</span> <span class="n">Shape</span><span class="o">&amp;</span> <span class="n">S_shape</span><span class="p">,</span> <span class="n">Expr</span> <span class="n">S_values</span><span class="p">,</span> <span class="n">Expr</span> <span class="n">S_indices</span><span class="p">,</span> <span class="n">Expr</span> <span class="n">S_offsets</span><span class="p">,</span> <span class="n">Expr</span> <span class="n">D</span><span class="p">,</span> <span class="kt">bool</span> <span class="n">transS</span><span class="p">,</span> <span class="kt">bool</span> <span class="n">swapOperands</span><span class="p">)</span> <span class="p">{</span>

@@ -7,7 +7,7 @@
   
   <meta name="viewport" content="width=device-width, initial-scale=1.0" />
   
-  <title>Program Listing for File training.h &mdash; Marian NMT v1.10.2 2021-02-28 documentation</title>
+  <title>Program Listing for File training.h &mdash; Marian NMT v1.10.3 2021-03-22 documentation</title>
   
 
   
@@ -67,7 +67,7 @@
             
             
               <div class="version">
-                v1.10.2
+                v1.10.3
               </div>
             
           
@@ -197,7 +197,7 @@
 
     <span class="c1">// Prepare scheduler with validators</span>
     <span class="k">auto</span> <span class="n">trainState</span> <span class="o">=</span> <span class="n">New</span><span class="o">&lt;</span><span class="n">TrainingState</span><span class="o">&gt;</span><span class="p">(</span><span class="n">options_</span><span class="o">-&gt;</span><span class="n">get</span><span class="o">&lt;</span><span class="kt">float</span><span class="o">&gt;</span><span class="p">(</span><span class="s">&quot;learn-rate&quot;</span><span class="p">));</span>
-    <span class="k">auto</span> <span class="n">scheduler</span> <span class="o">=</span> <span class="n">New</span><span class="o">&lt;</span><span class="n">Scheduler</span><span class="o">&gt;</span><span class="p">(</span><span class="n">options_</span><span class="p">,</span> <span class="n">trainState</span><span class="p">);</span>
+    <span class="k">auto</span> <span class="n">scheduler</span> <span class="o">=</span> <span class="n">New</span><span class="o">&lt;</span><span class="n">Scheduler</span><span class="o">&gt;</span><span class="p">(</span><span class="n">options_</span><span class="p">,</span> <span class="n">trainState</span><span class="p">,</span> <span class="k">nullptr</span><span class="p">);</span>
     <span class="n">scheduler</span><span class="o">-&gt;</span><span class="n">addValidator</span><span class="p">(</span><span class="n">New</span><span class="o">&lt;</span><span class="n">MNISTAccuracyValidator</span><span class="o">&gt;</span><span class="p">(</span><span class="n">options_</span><span class="p">));</span>
 
     <span class="c1">// Multi-node training</span>

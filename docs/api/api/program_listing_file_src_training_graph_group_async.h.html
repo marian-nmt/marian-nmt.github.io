@@ -7,7 +7,7 @@
   
   <meta name="viewport" content="width=device-width, initial-scale=1.0" />
   
-  <title>Program Listing for File graph_group_async.h &mdash; Marian NMT v1.10.2 2021-02-28 documentation</title>
+  <title>Program Listing for File graph_group_async.h &mdash; Marian NMT v1.10.3 2021-03-22 documentation</title>
   
 
   
@@ -67,7 +67,7 @@
             
             
               <div class="version">
-                v1.10.2
+                v1.10.3
               </div>
             
           
@@ -171,7 +171,6 @@
 <div class="highlight-cpp notranslate"><div class="highlight"><pre><span></span><span class="cp">#pragma once</span>
 
 <span class="cp">#include</span> <span class="cpf">&quot;3rd_party/threadpool.h&quot;</span><span class="cp"></span>
-<span class="cp">#include</span> <span class="cpf">&quot;training/exponential_smoothing.h&quot;</span><span class="cp"></span>
 <span class="cp">#include</span> <span class="cpf">&quot;training/graph_group.h&quot;</span><span class="cp"></span>
 
 <span class="cp">#include</span> <span class="cpf">&lt;future&gt;</span><span class="cp"></span>
@@ -179,16 +178,12 @@
 
 <span class="k">namespace</span> <span class="n">marian</span> <span class="p">{</span>
 
-<span class="k">class</span> <span class="nc">AsyncGraphGroup</span> <span class="o">:</span> <span class="k">public</span> <span class="n">GraphGroup</span><span class="p">,</span> <span class="k">public</span> <span class="n">ExponentialSmoothing</span> <span class="p">{</span>
+<span class="k">class</span> <span class="nc">AsyncGraphGroup</span> <span class="o">:</span> <span class="k">public</span> <span class="n">GraphGroup</span> <span class="p">{</span>
 <span class="k">public</span><span class="o">:</span>
   <span class="k">virtual</span> <span class="kt">void</span> <span class="n">setScheduler</span><span class="p">(</span><span class="n">Ptr</span><span class="o">&lt;</span><span class="n">Scheduler</span><span class="o">&gt;</span> <span class="n">scheduler</span><span class="p">)</span> <span class="k">override</span><span class="p">;</span>
 
 <span class="k">protected</span><span class="o">:</span>
   <span class="kt">bool</span> <span class="n">first_</span><span class="p">{</span><span class="nb">true</span><span class="p">};</span>
-
-  <span class="n">std</span><span class="o">::</span><span class="n">vector</span><span class="o">&lt;</span><span class="n">Ptr</span><span class="o">&lt;</span><span class="n">models</span><span class="o">::</span><span class="n">ICriterionFunction</span><span class="o">&gt;&gt;</span> <span class="n">builders_</span><span class="p">;</span>
-  <span class="n">std</span><span class="o">::</span><span class="n">vector</span><span class="o">&lt;</span><span class="n">Ptr</span><span class="o">&lt;</span><span class="n">ExpressionGraph</span><span class="o">&gt;&gt;</span> <span class="n">graphs_</span><span class="p">;</span>
-  <span class="n">std</span><span class="o">::</span><span class="n">vector</span><span class="o">&lt;</span><span class="n">DeviceId</span><span class="o">&gt;</span> <span class="n">devices_</span><span class="p">;</span>
 
   <span class="n">std</span><span class="o">::</span><span class="n">mutex</span> <span class="n">sync_</span><span class="p">;</span>
   <span class="n">std</span><span class="o">::</span><span class="n">vector</span><span class="o">&lt;</span><span class="n">std</span><span class="o">::</span><span class="n">mutex</span><span class="o">&gt;</span> <span class="n">shardSync_</span><span class="p">;</span>
@@ -201,12 +196,8 @@
   <span class="n">std</span><span class="o">::</span><span class="n">vector</span><span class="o">&lt;</span><span class="n">Tensor</span><span class="o">&gt;</span> <span class="n">grads_</span><span class="p">;</span>
   <span class="n">std</span><span class="o">::</span><span class="n">vector</span><span class="o">&lt;</span><span class="n">Ptr</span><span class="o">&lt;</span><span class="n">TensorAllocator</span><span class="o">&gt;&gt;</span> <span class="n">gradsAlloc_</span><span class="p">;</span>
 
-  <span class="n">std</span><span class="o">::</span><span class="n">vector</span><span class="o">&lt;</span><span class="n">Ptr</span><span class="o">&lt;</span><span class="n">OptimizerBase</span><span class="o">&gt;&gt;</span> <span class="n">shardOpt_</span><span class="p">;</span>
-
   <span class="kt">int</span> <span class="n">shardSize_</span><span class="p">;</span>
 
-  <span class="n">std</span><span class="o">::</span><span class="n">vector</span><span class="o">&lt;</span><span class="n">Tensor</span><span class="o">&gt;</span> <span class="n">paramsAvg_</span><span class="p">;</span>
-  <span class="n">std</span><span class="o">::</span><span class="n">vector</span><span class="o">&lt;</span><span class="n">Ptr</span><span class="o">&lt;</span><span class="n">TensorAllocator</span><span class="o">&gt;&gt;</span> <span class="n">paramsAllocAvg_</span><span class="p">;</span>
   <span class="n">std</span><span class="o">::</span><span class="n">unique_ptr</span><span class="o">&lt;</span><span class="n">ThreadPool</span><span class="o">&gt;</span> <span class="n">pool_</span><span class="p">;</span>
 
   <span class="kt">size_t</span> <span class="n">optimizerDelay_</span><span class="p">{</span><span class="mi">1</span><span class="p">};</span>
@@ -216,7 +207,8 @@
                            <span class="kt">int</span> <span class="n">device_id</span><span class="p">);</span>
 
   <span class="k">virtual</span> <span class="kt">void</span> <span class="n">pushGradients</span><span class="p">(</span><span class="n">Tensor</span> <span class="n">newGrads</span><span class="p">,</span>
-                             <span class="kt">int</span> <span class="n">device_id</span><span class="p">);</span>
+                             <span class="kt">int</span> <span class="n">device_id</span><span class="p">,</span>
+                             <span class="kt">size_t</span> <span class="n">mbSize</span><span class="p">);</span>
 
   <span class="k">virtual</span> <span class="kt">void</span> <span class="n">init</span><span class="p">(</span><span class="n">Ptr</span><span class="o">&lt;</span><span class="n">data</span><span class="o">::</span><span class="n">Batch</span><span class="o">&gt;</span> <span class="n">batch</span><span class="p">);</span>
   <span class="kt">void</span> <span class="nf">execute</span><span class="p">(</span><span class="n">Ptr</span><span class="o">&lt;</span><span class="n">data</span><span class="o">::</span><span class="n">Batch</span><span class="o">&gt;</span> <span class="n">batch</span><span class="p">);</span>
@@ -229,13 +221,9 @@
     <span class="n">execute</span><span class="p">(</span><span class="n">batch</span><span class="p">);</span>
   <span class="p">}</span>
 
-  <span class="kt">void</span> <span class="nf">load</span><span class="p">()</span> <span class="k">override</span><span class="p">;</span>
-  <span class="kt">void</span> <span class="nf">save</span><span class="p">(</span><span class="kt">bool</span> <span class="k">final</span> <span class="o">=</span> <span class="nb">false</span><span class="p">)</span> <span class="k">override</span><span class="p">;</span>
-  <span class="kt">void</span> <span class="nf">save</span><span class="p">(</span><span class="n">Ptr</span><span class="o">&lt;</span><span class="n">ExpressionGraph</span><span class="o">&gt;</span><span class="p">,</span> <span class="kt">bool</span> <span class="k">final</span> <span class="o">=</span> <span class="nb">false</span><span class="p">);</span>
-
   <span class="c1">// @TODO: give it a fake batch generator which own vocabs instead of passing vocabs</span>
-  <span class="k">virtual</span> <span class="n">Ptr</span><span class="o">&lt;</span><span class="n">data</span><span class="o">::</span><span class="n">BatchStats</span><span class="o">&gt;</span> <span class="n">collectStats</span><span class="p">(</span><span class="k">const</span> <span class="n">std</span><span class="o">::</span><span class="n">vector</span><span class="o">&lt;</span><span class="n">Ptr</span><span class="o">&lt;</span><span class="n">Vocab</span><span class="o">&gt;&gt;&amp;</span> <span class="n">vocabs</span><span class="p">)</span> <span class="p">{</span>
-    <span class="k">return</span> <span class="n">GraphGroup</span><span class="o">::</span><span class="n">collectStats</span><span class="p">(</span><span class="n">graphs_</span><span class="p">[</span><span class="mi">0</span><span class="p">],</span> <span class="n">builders_</span><span class="p">[</span><span class="mi">0</span><span class="p">],</span> <span class="n">vocabs</span><span class="p">);</span>
+  <span class="n">Ptr</span><span class="o">&lt;</span><span class="n">data</span><span class="o">::</span><span class="n">BatchStats</span><span class="o">&gt;</span> <span class="n">collectStats</span><span class="p">(</span><span class="k">const</span> <span class="n">std</span><span class="o">::</span><span class="n">vector</span><span class="o">&lt;</span><span class="n">Ptr</span><span class="o">&lt;</span><span class="n">Vocab</span><span class="o">&gt;&gt;&amp;</span> <span class="n">vocabs</span><span class="p">)</span> <span class="k">override</span> <span class="p">{</span>
+    <span class="k">return</span> <span class="n">GraphGroup</span><span class="o">::</span><span class="n">collectStats</span><span class="p">(</span><span class="n">graphs_</span><span class="p">[</span><span class="mi">0</span><span class="p">],</span> <span class="n">models_</span><span class="p">[</span><span class="mi">0</span><span class="p">],</span> <span class="n">vocabs</span><span class="p">);</span>
   <span class="p">}</span>
 
   <span class="k">virtual</span> <span class="kt">void</span> <span class="n">finalize</span><span class="p">()</span> <span class="k">override</span><span class="p">;</span>

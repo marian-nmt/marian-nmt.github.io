@@ -7,7 +7,7 @@
   
   <meta name="viewport" content="width=device-width, initial-scale=1.0" />
   
-  <title>Program Listing for File logging.cpp &mdash; Marian NMT v1.10.2 2021-02-28 documentation</title>
+  <title>Program Listing for File logging.cpp &mdash; Marian NMT v1.10.3 2021-03-22 documentation</title>
   
 
   
@@ -67,7 +67,7 @@
             
             
               <div class="version">
-                v1.10.2
+                v1.10.3
               </div>
             
           
@@ -309,8 +309,12 @@
 <span class="kt">void</span> <span class="n">switchtoMultinodeLogging</span><span class="p">(</span><span class="n">std</span><span class="o">::</span><span class="n">string</span> <span class="n">nodeIdStr</span><span class="p">)</span> <span class="p">{</span>
   <span class="n">Logger</span> <span class="n">log</span> <span class="o">=</span> <span class="n">spdlog</span><span class="o">::</span><span class="n">get</span><span class="p">(</span><span class="s">&quot;general&quot;</span><span class="p">);</span>
   <span class="k">if</span><span class="p">(</span><span class="n">log</span><span class="p">)</span>
-    <span class="n">log</span><span class="o">-&gt;</span><span class="n">set_pattern</span><span class="p">(</span><span class="s">&quot;[%Y-%m-%d %T &quot;</span> <span class="o">+</span> <span class="n">nodeIdStr</span> <span class="o">+</span> <span class="s">&quot;:%t] %v&quot;</span><span class="p">);</span>
-<span class="p">}</span>
+    <span class="n">log</span><span class="o">-&gt;</span><span class="n">set_pattern</span><span class="p">(</span><span class="n">fmt</span><span class="o">::</span><span class="n">format</span><span class="p">(</span><span class="s">&quot;[%Y-%m-%d %T mpi:{}] %v&quot;</span><span class="p">,</span> <span class="n">nodeIdStr</span><span class="p">));</span>
+
+  <span class="n">Logger</span> <span class="n">valid</span> <span class="o">=</span> <span class="n">spdlog</span><span class="o">::</span><span class="n">get</span><span class="p">(</span><span class="s">&quot;valid&quot;</span><span class="p">);</span>
+  <span class="k">if</span><span class="p">(</span><span class="n">valid</span><span class="p">)</span>
+    <span class="n">valid</span><span class="o">-&gt;</span><span class="n">set_pattern</span><span class="p">(</span><span class="n">fmt</span><span class="o">::</span><span class="n">format</span><span class="p">(</span><span class="s">&quot;[%Y-%m-%d %T mpi:{}] [valid] %v&quot;</span><span class="p">,</span> <span class="n">nodeIdStr</span><span class="p">));</span>
+  <span class="p">}</span>
 
 
 <span class="k">namespace</span> <span class="n">marian</span> <span class="p">{</span>

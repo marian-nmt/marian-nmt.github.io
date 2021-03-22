@@ -1,0 +1,325 @@
+
+
+<!DOCTYPE html>
+<html class="writer-html5" lang="en" >
+<head>
+  <meta charset="utf-8" />
+  
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  
+  <title>Program Listing for File logits.h &mdash; Marian NMT v1.10.3 2021-03-22 documentation</title>
+  
+
+  
+  <link rel="stylesheet" href="../_static/css/theme.css" type="text/css" />
+  <link rel="stylesheet" href="../_static/pygments.css" type="text/css" />
+  <link rel="stylesheet" href="../_static/css/custom.css" type="text/css" />
+  <link rel="stylesheet" href="../_static/collapsible-lists/css/tree_view.css" type="text/css" />
+
+  
+  
+
+  
+  
+
+  
+    <link rel="canonical" href="http://marian-nmt.github.io/docs/api/api/program_listing_file_src_layers_logits.h.html" />
+
+  
+  <!--[if lt IE 9]>
+    <script src="../_static/js/html5shiv.min.js"></script>
+  <![endif]-->
+  
+    
+      <script type="text/javascript" id="documentation_options" data-url_root="../" src="../_static/documentation_options.js"></script>
+        <script src="../_static/jquery.js"></script>
+        <script src="../_static/underscore.js"></script>
+        <script src="../_static/doctools.js"></script>
+        <script src="../_static/language_data.js"></script>
+        <script src="../_static/collapsible-lists/js/CollapsibleLists.compressed.js"></script>
+        <script src="../_static/collapsible-lists/js/apply-collapsible-lists.js"></script>
+    
+    <script type="text/javascript" src="../_static/js/theme.js"></script>
+
+    
+    <link rel="index" title="Index" href="../genindex.html" />
+    <link rel="search" title="Search" href="../search.html" /> 
+</head>
+
+<body class="wy-body-for-nav">
+
+   
+  <div class="wy-grid-for-nav">
+    
+    <nav data-toggle="wy-nav-shift" class="wy-nav-side">
+      <div class="wy-side-scroll">
+        <div class="wy-side-nav-search" >
+          
+
+          
+            <a href="../index.html" class="icon icon-home"> Marian NMT
+          
+
+          
+          </a>
+
+          
+            
+            
+              <div class="version">
+                v1.10.3
+              </div>
+            
+          
+
+          
+<div role="search">
+  <form id="rtd-search-form" class="wy-form" action="../search.html" method="get">
+    <input type="text" name="q" placeholder="Search docs" />
+    <input type="hidden" name="check_keywords" value="yes" />
+    <input type="hidden" name="area" value="default" />
+  </form>
+</div>
+
+          
+        </div>
+
+        
+        <div class="wy-menu wy-menu-vertical" data-spy="affix" role="navigation" aria-label="main navigation">
+          
+            
+            
+              
+            
+            
+              <p class="caption"><span class="caption-text">Contents:</span></p>
+<ul>
+<li class="toctree-l1"><a class="reference internal" href="../graph.html">Expression graphs</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../operators.html">Operations in the Expression Graph</a></li>
+<li class="toctree-l1"><a class="reference internal" href="library_index.html">Library API</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../contributing.html">How to contribute to Marian</a></li>
+</ul>
+
+            
+          
+        </div>
+        
+      </div>
+    </nav>
+
+    <section data-toggle="wy-nav-shift" class="wy-nav-content-wrap">
+
+      
+      <nav class="wy-nav-top" aria-label="top navigation">
+        
+          <i data-toggle="wy-nav-top" class="fa fa-bars"></i>
+          <a href="../index.html">Marian NMT</a>
+        
+      </nav>
+
+
+      <div class="wy-nav-content">
+        
+        <div class="rst-content">
+        
+          
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+<div role="navigation" aria-label="breadcrumbs navigation">
+
+  <ul class="wy-breadcrumbs">
+    
+      <li><a href="../index.html" class="icon icon-home"></a> &raquo;</li>
+        
+      <li>Program Listing for File logits.h</li>
+    
+    
+      <li class="wy-breadcrumbs-aside">
+        
+          
+            <a href="../_sources/api/program_listing_file_src_layers_logits.h.rst.txt" rel="nofollow"> View page source</a>
+          
+        
+      </li>
+    
+  </ul>
+
+  
+  <hr/>
+</div>
+          <div role="main" class="document" itemscope="itemscope" itemtype="http://schema.org/Article">
+           <div itemprop="articleBody">
+            
+  <div class="section" id="program-listing-for-file-logits-h">
+<span id="program-listing-file-src-layers-logits-h"></span><h1>Program Listing for File logits.h<a class="headerlink" href="#program-listing-for-file-logits-h" title="Permalink to this headline">¶</a></h1>
+<p>↰ <a class="reference internal" href="file_src_layers_logits.h.html#file-src-layers-logits-h"><span class="std std-ref">Return to documentation for file</span></a> (<code class="docutils literal notranslate"><span class="pre">src/layers/logits.h</span></code>)</p>
+<div class="highlight-cpp notranslate"><div class="highlight"><pre><span></span><span class="cp">#pragma once</span>
+
+<span class="cp">#include</span> <span class="cpf">&quot;data/shortlist.h&quot;</span><span class="cp"></span>
+<span class="cp">#include</span> <span class="cpf">&quot;generic.h&quot;</span><span class="cp"></span>
+<span class="cp">#include</span> <span class="cpf">&quot;marian.h&quot;</span><span class="cp"></span>
+
+<span class="k">namespace</span> <span class="n">marian</span> <span class="p">{</span>
+
+<span class="k">class</span> <span class="nc">FactoredVocab</span><span class="p">;</span>
+
+<span class="c1">// To support factors, any output projection (that is followed by a softmax) must</span>
+<span class="c1">// retain multiple outputs, one for each factor. Such layer returns not a single Expr,</span>
+<span class="c1">// but a Logits object that contains multiple.</span>
+<span class="c1">// This allows to compute softmax values in a factored manner, where we never create</span>
+<span class="c1">// a fully expanded list of all factor combinations.</span>
+<span class="k">class</span> <span class="nc">RationalLoss</span><span class="p">;</span>
+<span class="k">class</span> <span class="nc">Logits</span> <span class="p">{</span>
+<span class="k">public</span><span class="o">:</span>
+  <span class="n">Logits</span><span class="p">()</span> <span class="p">{}</span>
+  <span class="k">explicit</span> <span class="n">Logits</span><span class="p">(</span><span class="n">Ptr</span><span class="o">&lt;</span><span class="n">RationalLoss</span><span class="o">&gt;</span> <span class="n">logits</span><span class="p">)</span> <span class="p">{</span>  <span class="c1">// single-output constructor</span>
+    <span class="n">logits_</span><span class="p">.</span><span class="n">push_back</span><span class="p">(</span><span class="n">logits</span><span class="p">);</span>
+  <span class="p">}</span>
+  <span class="k">explicit</span> <span class="n">Logits</span><span class="p">(</span>
+      <span class="n">Expr</span> <span class="n">logits</span><span class="p">);</span>  <span class="c1">// single-output constructor from Expr only (RationalLoss has no count)</span>
+  <span class="n">Logits</span><span class="p">(</span><span class="n">std</span><span class="o">::</span><span class="n">vector</span><span class="o">&lt;</span><span class="n">Ptr</span><span class="o">&lt;</span><span class="n">RationalLoss</span><span class="o">&gt;&gt;&amp;&amp;</span> <span class="n">logits</span><span class="p">,</span>
+         <span class="n">Ptr</span><span class="o">&lt;</span><span class="n">FactoredVocab</span><span class="o">&gt;</span> <span class="n">embeddingFactorMapping</span><span class="p">)</span>  <span class="c1">// factored-output constructor</span>
+      <span class="o">:</span> <span class="n">logits_</span><span class="p">(</span><span class="n">std</span><span class="o">::</span><span class="n">move</span><span class="p">(</span><span class="n">logits</span><span class="p">)),</span> <span class="n">factoredVocab_</span><span class="p">(</span><span class="n">embeddingFactorMapping</span><span class="p">)</span> <span class="p">{}</span>
+  <span class="n">Expr</span> <span class="n">getLogits</span><span class="p">()</span> <span class="k">const</span><span class="p">;</span>  <span class="c1">// assume it holds logits: get them, possibly aggregating over factors</span>
+  <span class="n">Expr</span> <span class="nf">getFactoredLogits</span><span class="p">(</span>
+      <span class="kt">size_t</span> <span class="n">groupIndex</span><span class="p">,</span>
+      <span class="n">Ptr</span><span class="o">&lt;</span><span class="n">data</span><span class="o">::</span><span class="n">Shortlist</span><span class="o">&gt;</span> <span class="n">shortlist</span> <span class="o">=</span> <span class="k">nullptr</span><span class="p">,</span>
+      <span class="k">const</span> <span class="n">std</span><span class="o">::</span><span class="n">vector</span><span class="o">&lt;</span><span class="n">IndexType</span><span class="o">&gt;&amp;</span> <span class="n">hypIndices</span> <span class="o">=</span> <span class="p">{},</span>
+      <span class="kt">size_t</span> <span class="n">beamSize</span> <span class="o">=</span> <span class="mi">0</span><span class="p">)</span> <span class="k">const</span><span class="p">;</span>  <span class="c1">// get logits for only one factor group, with optional reshuffle</span>
+  <span class="c1">// Ptr&lt;RationalLoss&gt; getRationalLoss() const; // assume it holds a loss: get that</span>
+  <span class="n">Expr</span> <span class="nf">applyLossFunction</span><span class="p">(</span>
+      <span class="k">const</span> <span class="n">Words</span><span class="o">&amp;</span> <span class="n">labels</span><span class="p">,</span>
+      <span class="k">const</span> <span class="n">std</span><span class="o">::</span><span class="n">function</span><span class="o">&lt;</span><span class="n">Expr</span><span class="p">(</span><span class="n">Expr</span> <span class="cm">/*logits*/</span><span class="p">,</span> <span class="n">Expr</span> <span class="cm">/*indices*/</span><span class="p">)</span><span class="o">&gt;&amp;</span> <span class="n">lossFn</span><span class="p">)</span> <span class="k">const</span><span class="p">;</span>
+  <span class="n">Logits</span> <span class="nf">applyUnaryFunction</span><span class="p">(</span>
+      <span class="k">const</span> <span class="n">std</span><span class="o">::</span><span class="n">function</span><span class="o">&lt;</span><span class="n">Expr</span><span class="p">(</span><span class="n">Expr</span><span class="p">)</span><span class="o">&gt;&amp;</span> <span class="n">f</span><span class="p">)</span> <span class="k">const</span><span class="p">;</span>  <span class="c1">// clone this but apply f to all loss values</span>
+  <span class="n">Logits</span> <span class="nf">applyUnaryFunctions</span><span class="p">(</span><span class="k">const</span> <span class="n">std</span><span class="o">::</span><span class="n">function</span><span class="o">&lt;</span><span class="n">Expr</span><span class="p">(</span><span class="n">Expr</span><span class="p">)</span><span class="o">&gt;&amp;</span> <span class="n">f1</span><span class="p">,</span>
+                             <span class="k">const</span> <span class="n">std</span><span class="o">::</span><span class="n">function</span><span class="o">&lt;</span><span class="n">Expr</span><span class="p">(</span><span class="n">Expr</span><span class="p">)</span><span class="o">&gt;&amp;</span> <span class="n">fother</span><span class="p">)</span>
+      <span class="k">const</span><span class="p">;</span>  <span class="c1">// clone this but apply f1 to first and fother to to all other values</span>
+
+  <span class="k">struct</span> <span class="nc">MaskedFactorIndices</span> <span class="p">{</span>
+    <span class="n">std</span><span class="o">::</span><span class="n">vector</span><span class="o">&lt;</span><span class="n">WordIndex</span><span class="o">&gt;</span> <span class="n">indices</span><span class="p">;</span>  <span class="c1">// factor index, or 0 if masked</span>
+    <span class="n">std</span><span class="o">::</span><span class="n">vector</span><span class="o">&lt;</span><span class="kt">float</span><span class="o">&gt;</span> <span class="n">masks</span><span class="p">;</span>
+    <span class="kt">void</span> <span class="nf">reserve</span><span class="p">(</span><span class="kt">size_t</span> <span class="n">n</span><span class="p">)</span> <span class="p">{</span>
+      <span class="n">indices</span><span class="p">.</span><span class="n">reserve</span><span class="p">(</span><span class="n">n</span><span class="p">);</span>
+      <span class="n">masks</span><span class="p">.</span><span class="n">reserve</span><span class="p">(</span><span class="n">n</span><span class="p">);</span>
+    <span class="p">}</span>
+    <span class="kt">void</span> <span class="nf">push_back</span><span class="p">(</span><span class="kt">size_t</span> <span class="n">factorIndex</span><span class="p">);</span>  <span class="c1">// push back into both arrays, setting mask and index to 0</span>
+                                         <span class="c1">// for invalid entries</span>
+    <span class="n">MaskedFactorIndices</span><span class="p">()</span> <span class="p">{}</span>
+    <span class="n">MaskedFactorIndices</span><span class="p">(</span><span class="k">const</span> <span class="n">Words</span><span class="o">&amp;</span> <span class="n">words</span><span class="p">)</span> <span class="p">{</span>
+      <span class="n">indices</span> <span class="o">=</span> <span class="n">toWordIndexVector</span><span class="p">(</span><span class="n">words</span><span class="p">);</span>
+    <span class="p">}</span>  <span class="c1">// we can leave masks uninitialized for this special use case</span>
+  <span class="p">};</span>
+  <span class="n">std</span><span class="o">::</span><span class="n">vector</span><span class="o">&lt;</span><span class="n">MaskedFactorIndices</span><span class="o">&gt;</span> <span class="n">factorizeWords</span><span class="p">(</span>
+      <span class="k">const</span> <span class="n">Words</span><span class="o">&amp;</span> <span class="n">words</span><span class="p">)</span> <span class="k">const</span><span class="p">;</span>  <span class="c1">// breaks encoded Word into individual factor indices</span>
+  <span class="n">Tensor</span> <span class="nf">getFactoredLogitsTensor</span><span class="p">(</span><span class="kt">size_t</span> <span class="n">factorGroup</span><span class="p">)</span> <span class="k">const</span><span class="p">;</span>  <span class="c1">// used for breakDown() only</span>
+  <span class="kt">size_t</span> <span class="nf">getNumFactorGroups</span><span class="p">()</span> <span class="k">const</span> <span class="p">{</span> <span class="k">return</span> <span class="n">logits_</span><span class="p">.</span><span class="n">size</span><span class="p">();</span> <span class="p">}</span>
+  <span class="kt">bool</span> <span class="nf">empty</span><span class="p">()</span> <span class="k">const</span> <span class="p">{</span> <span class="k">return</span> <span class="n">logits_</span><span class="p">.</span><span class="n">empty</span><span class="p">();</span> <span class="p">}</span>
+  <span class="n">Logits</span> <span class="nf">withCounts</span><span class="p">(</span>
+      <span class="k">const</span> <span class="n">Expr</span><span class="o">&amp;</span> <span class="n">count</span><span class="p">)</span> <span class="k">const</span><span class="p">;</span>  <span class="c1">// create new Logits with &#39;count&#39; implanted into all logits_</span>
+<span class="k">private</span><span class="o">:</span>
+  <span class="c1">// helper functions</span>
+  <span class="n">Ptr</span><span class="o">&lt;</span><span class="n">ExpressionGraph</span><span class="o">&gt;</span> <span class="n">graph</span><span class="p">()</span> <span class="k">const</span><span class="p">;</span>
+  <span class="n">Expr</span> <span class="nf">constant</span><span class="p">(</span><span class="k">const</span> <span class="n">Shape</span><span class="o">&amp;</span> <span class="n">shape</span><span class="p">,</span> <span class="k">const</span> <span class="n">std</span><span class="o">::</span><span class="n">vector</span><span class="o">&lt;</span><span class="kt">float</span><span class="o">&gt;&amp;</span> <span class="n">data</span><span class="p">)</span> <span class="k">const</span> <span class="p">{</span>
+    <span class="k">return</span> <span class="n">graph</span><span class="p">()</span><span class="o">-&gt;</span><span class="n">constant</span><span class="p">(</span><span class="n">shape</span><span class="p">,</span> <span class="n">inits</span><span class="o">::</span><span class="n">fromVector</span><span class="p">(</span><span class="n">data</span><span class="p">));</span>
+  <span class="p">}</span>
+  <span class="n">Expr</span> <span class="nf">constant</span><span class="p">(</span><span class="k">const</span> <span class="n">Shape</span><span class="o">&amp;</span> <span class="n">shape</span><span class="p">,</span> <span class="k">const</span> <span class="n">std</span><span class="o">::</span><span class="n">vector</span><span class="o">&lt;</span><span class="kt">uint32_t</span><span class="o">&gt;&amp;</span> <span class="n">data</span><span class="p">)</span> <span class="k">const</span> <span class="p">{</span>
+    <span class="k">return</span> <span class="n">graph</span><span class="p">()</span><span class="o">-&gt;</span><span class="n">constant</span><span class="p">(</span><span class="n">shape</span><span class="p">,</span> <span class="n">inits</span><span class="o">::</span><span class="n">fromVector</span><span class="p">(</span><span class="n">data</span><span class="p">));</span>
+  <span class="p">}</span>
+  <span class="k">template</span> <span class="o">&lt;</span><span class="k">typename</span> <span class="nc">T</span><span class="o">&gt;</span>
+  <span class="n">Expr</span> <span class="n">constant</span><span class="p">(</span><span class="k">const</span> <span class="n">std</span><span class="o">::</span><span class="n">vector</span><span class="o">&lt;</span><span class="n">T</span><span class="o">&gt;&amp;</span> <span class="n">data</span><span class="p">)</span> <span class="k">const</span> <span class="p">{</span>
+    <span class="k">return</span> <span class="nf">constant</span><span class="p">(</span><span class="n">Shape</span><span class="p">{(</span><span class="kt">int</span><span class="p">)</span><span class="n">data</span><span class="p">.</span><span class="n">size</span><span class="p">()},</span> <span class="n">data</span><span class="p">);</span>
+  <span class="p">}</span>  <span class="c1">// same as constant() but assuming vector</span>
+  <span class="n">Expr</span> <span class="n">indices</span><span class="p">(</span><span class="k">const</span> <span class="n">std</span><span class="o">::</span><span class="n">vector</span><span class="o">&lt;</span><span class="kt">uint32_t</span><span class="o">&gt;&amp;</span> <span class="n">data</span><span class="p">)</span> <span class="k">const</span> <span class="p">{</span>
+    <span class="k">return</span> <span class="nf">graph</span><span class="p">()</span><span class="o">-&gt;</span><span class="n">indices</span><span class="p">(</span><span class="n">data</span><span class="p">);</span>
+  <span class="p">}</span>  <span class="c1">// actually the same as constant(data) for this data type</span>
+  <span class="n">std</span><span class="o">::</span><span class="n">vector</span><span class="o">&lt;</span><span class="kt">float</span><span class="o">&gt;</span> <span class="n">getFactorMasks</span><span class="p">(</span><span class="kt">size_t</span> <span class="n">factorGroup</span><span class="p">,</span>
+                                    <span class="k">const</span> <span class="n">std</span><span class="o">::</span><span class="n">vector</span><span class="o">&lt;</span><span class="n">WordIndex</span><span class="o">&gt;&amp;</span> <span class="n">indices</span><span class="p">)</span> <span class="k">const</span><span class="p">;</span>
+
+<span class="k">private</span><span class="o">:</span>
+  <span class="c1">// members</span>
+  <span class="c1">// @TODO: we don&#39;t use the RationalLoss component anymore, can be removed again, and replaced just</span>
+  <span class="c1">// by the Expr</span>
+  <span class="n">std</span><span class="o">::</span><span class="n">vector</span><span class="o">&lt;</span><span class="n">Ptr</span><span class="o">&lt;</span><span class="n">RationalLoss</span><span class="o">&gt;&gt;</span> <span class="n">logits_</span><span class="p">;</span>  <span class="c1">// [group id][B..., num factors in group]</span>
+  <span class="n">Ptr</span><span class="o">&lt;</span><span class="n">FactoredVocab</span><span class="o">&gt;</span> <span class="n">factoredVocab_</span><span class="p">;</span>
+<span class="p">};</span>
+
+<span class="c1">// Unary function that returns a Logits object</span>
+<span class="c1">// Also implements IUnaryLayer, since Logits can be cast to Expr.</span>
+<span class="c1">// This interface is implemented by all layers that are of the form of a unary function</span>
+<span class="c1">// that returns multiple logits, to support factors.</span>
+<span class="k">struct</span> <span class="nc">IUnaryLogitLayer</span> <span class="o">:</span> <span class="k">public</span> <span class="n">IUnaryLayer</span> <span class="p">{</span>
+  <span class="k">virtual</span> <span class="n">Logits</span> <span class="n">applyAsLogits</span><span class="p">(</span><span class="n">Expr</span><span class="p">)</span> <span class="o">=</span> <span class="mi">0</span><span class="p">;</span>
+  <span class="k">virtual</span> <span class="n">Logits</span> <span class="n">applyAsLogits</span><span class="p">(</span><span class="k">const</span> <span class="n">std</span><span class="o">::</span><span class="n">vector</span><span class="o">&lt;</span><span class="n">Expr</span><span class="o">&gt;&amp;</span> <span class="n">es</span><span class="p">)</span> <span class="p">{</span>
+    <span class="n">ABORT_IF</span><span class="p">(</span><span class="n">es</span><span class="p">.</span><span class="n">size</span><span class="p">()</span> <span class="o">&gt;</span> <span class="mi">1</span><span class="p">,</span> <span class="s">&quot;Not implemented&quot;</span><span class="p">);</span>  <span class="c1">// simple stub</span>
+    <span class="k">return</span> <span class="nf">applyAsLogits</span><span class="p">(</span><span class="n">es</span><span class="p">.</span><span class="n">front</span><span class="p">());</span>
+  <span class="p">}</span>
+  <span class="k">virtual</span> <span class="n">Expr</span> <span class="n">apply</span><span class="p">(</span><span class="n">Expr</span> <span class="n">e</span><span class="p">)</span> <span class="k">override</span> <span class="p">{</span> <span class="k">return</span> <span class="nf">applyAsLogits</span><span class="p">(</span><span class="n">e</span><span class="p">).</span><span class="n">getLogits</span><span class="p">();</span> <span class="p">}</span>
+  <span class="k">virtual</span> <span class="n">Expr</span> <span class="n">apply</span><span class="p">(</span><span class="k">const</span> <span class="n">std</span><span class="o">::</span><span class="n">vector</span><span class="o">&lt;</span><span class="n">Expr</span><span class="o">&gt;&amp;</span> <span class="n">es</span><span class="p">)</span> <span class="k">override</span> <span class="p">{</span> <span class="k">return</span> <span class="nf">applyAsLogits</span><span class="p">(</span><span class="n">es</span><span class="p">).</span><span class="n">getLogits</span><span class="p">();</span> <span class="p">}</span>
+<span class="p">};</span>
+
+<span class="p">}</span>  <span class="c1">// namespace marian</span>
+</pre></div>
+</div>
+</div>
+
+
+           </div>
+           
+          </div>
+          <footer>
+
+  <hr/>
+
+  <div role="contentinfo">
+    <p>
+        &#169; Copyright 2021, Marian NMT Team.
+
+    </p>
+  </div>
+    
+    
+    
+    Built with <a href="https://www.sphinx-doc.org/">Sphinx</a> using a
+    
+    <a href="https://github.com/readthedocs/sphinx_rtd_theme">theme</a>
+    
+    provided by <a href="https://readthedocs.org">Read the Docs</a>. 
+
+</footer>
+        </div>
+      </div>
+
+    </section>
+
+  </div>
+  
+
+  <script type="text/javascript">
+      jQuery(function () {
+          SphinxRtdTheme.Navigation.enable(true);
+      });
+  </script>
+
+  
+  
+    
+   
+
+</body>
+</html>

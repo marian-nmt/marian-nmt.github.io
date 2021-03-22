@@ -7,7 +7,7 @@
   
   <meta name="viewport" content="width=device-width, initial-scale=1.0" />
   
-  <title>Class ICommunicator &mdash; Marian NMT v1.10.2 2021-02-28 documentation</title>
+  <title>Class ICommunicator &mdash; Marian NMT v1.10.3 2021-03-22 documentation</title>
   
 
   
@@ -69,7 +69,7 @@
             
             
               <div class="version">
-                v1.10.2
+                v1.10.3
               </div>
             
           
@@ -194,7 +194,12 @@
 <p class="breathe-sectiondef-title rubric">Public Types</p>
 <dl class="type">
 <dt id="_CPPv4N6marian13ICommunicator11ForeachFuncE">
-<span id="_CPPv3N6marian13ICommunicator11ForeachFuncE"></span><span id="_CPPv2N6marian13ICommunicator11ForeachFuncE"></span><span id="marian::ICommunicator::ForeachFunc"></span><span class="target" id="classmarian_1_1ICommunicator_1ae2fd7859deddeeb65385d6409870d133"></span><em class="property">typedef </em><a class="reference internal" href="function_group__graph__ops__mathematical_1gaf4e69a5f7167b63522135a1f6b8a5dd8.html#_CPPv4N6marianStE4Expri" title="marian::std">std</a>::function&lt;void<span class="sig-paren">(</span>size_t, size_t, size_t<span class="sig-paren">)</span>&gt; <code class="sig-name descname">ForeachFunc</code><a class="headerlink" href="#_CPPv4N6marian13ICommunicator11ForeachFuncE" title="Permalink to this definition">¶</a><br /></dt>
+<span id="_CPPv3N6marian13ICommunicator11ForeachFuncE"></span><span id="_CPPv2N6marian13ICommunicator11ForeachFuncE"></span><span class="target" id="classmarian_1_1ICommunicator_1aa6fde62bafc3157523c97067225bbc5c"></span><em class="property">using </em><code class="sig-name descname">ForeachFunc</code> = <a class="reference internal" href="function_group__graph__ops__mathematical_1gaf4e69a5f7167b63522135a1f6b8a5dd8.html#_CPPv4N6marianStE4Expri" title="marian::std">std</a>::function&lt;ReturnType<span class="sig-paren">(</span>size_t, size_t, size_t<span class="sig-paren">)</span>&gt;<a class="headerlink" href="#_CPPv4N6marian13ICommunicator11ForeachFuncE" title="Permalink to this definition">¶</a><br /></dt>
+<dd></dd></dl>
+
+<dl class="type">
+<dt id="_CPPv4N6marian13ICommunicator7AccFuncE">
+<span id="_CPPv3N6marian13ICommunicator7AccFuncE"></span><span id="_CPPv2N6marian13ICommunicator7AccFuncE"></span><span class="target" id="classmarian_1_1ICommunicator_1a7cb61e00d10115df26e8499ab4bd43d5"></span><em class="property">using </em><code class="sig-name descname">AccFunc</code> = <a class="reference internal" href="function_group__graph__ops__mathematical_1gaf4e69a5f7167b63522135a1f6b8a5dd8.html#_CPPv4N6marianStE4Expri" title="marian::std">std</a>::function&lt;void<span class="sig-paren">(</span>ReturnType&amp;, ReturnType<span class="sig-paren">)</span>&gt;<a class="headerlink" href="#_CPPv4N6marian13ICommunicator7AccFuncE" title="Permalink to this definition">¶</a><br /></dt>
 <dd></dd></dl>
 
 </div>
@@ -211,8 +216,13 @@
 <dd></dd></dl>
 
 <dl class="function">
-<dt id="_CPPv4NK6marian13ICommunicator7foreachERK11ForeachFuncb">
-<span id="_CPPv3NK6marian13ICommunicator7foreachERK11ForeachFuncb"></span><span id="_CPPv2NK6marian13ICommunicator7foreachERK11ForeachFuncb"></span><span id="marian::ICommunicator::foreach__ForeachFuncCR.bC"></span><span class="target" id="classmarian_1_1ICommunicator_1aefe04daab60a763c67ea6254d7016c40"></span><em class="property">virtual</em> void <code class="sig-name descname">foreach</code><span class="sig-paren">(</span><em class="property">const</em> <a class="reference internal" href="#_CPPv4N6marian13ICommunicator11ForeachFuncE" title="marian::ICommunicator::ForeachFunc">ForeachFunc</a> &amp;<em>func</em>, bool <em>parallel</em> = true<span class="sig-paren">)</span> <em class="property">const</em> = 0<a class="headerlink" href="#_CPPv4NK6marian13ICommunicator7foreachERK11ForeachFuncb" title="Permalink to this definition">¶</a><br /></dt>
+<dt id="_CPPv4NK6marian13ICommunicator7foreachERK11ForeachFuncIbEb">
+<span id="_CPPv3NK6marian13ICommunicator7foreachERK11ForeachFuncIbEb"></span><span id="_CPPv2NK6marian13ICommunicator7foreachERK11ForeachFuncIbEb"></span><span id="marian::ICommunicator::foreach__ForeachFunc:b:CR.bC"></span><span class="target" id="classmarian_1_1ICommunicator_1a340f62f98a5af9e4909c0f18541f4734"></span><em class="property">virtual</em> bool <code class="sig-name descname">foreach</code><span class="sig-paren">(</span><em class="property">const</em> <a class="reference internal" href="#_CPPv4N6marian13ICommunicator11ForeachFuncE" title="marian::ICommunicator::ForeachFunc">ForeachFunc</a>&lt;bool&gt; &amp;<em>func</em>, bool <em>parallel</em> = true<span class="sig-paren">)</span> <em class="property">const</em> = 0<a class="headerlink" href="#_CPPv4NK6marian13ICommunicator7foreachERK11ForeachFuncIbEb" title="Permalink to this definition">¶</a><br /></dt>
+<dd></dd></dl>
+
+<dl class="function">
+<dt id="_CPPv4NK6marian13ICommunicator7foreachERK11ForeachFuncIfE7AccFuncIfEfb">
+<span id="_CPPv3NK6marian13ICommunicator7foreachERK11ForeachFuncIfE7AccFuncIfEfb"></span><span id="_CPPv2NK6marian13ICommunicator7foreachERK11ForeachFuncIfE7AccFuncIfEfb"></span><span id="marian::ICommunicator::foreach__ForeachFunc:float:CR.AccFunc:float:.float.bC"></span><span class="target" id="classmarian_1_1ICommunicator_1a46dc2bcc80faeb1e91f62c05f03368c0"></span><em class="property">virtual</em> float <code class="sig-name descname">foreach</code><span class="sig-paren">(</span><em class="property">const</em> <a class="reference internal" href="#_CPPv4N6marian13ICommunicator11ForeachFuncE" title="marian::ICommunicator::ForeachFunc">ForeachFunc</a>&lt;float&gt; &amp;<em>func</em>, <a class="reference internal" href="#_CPPv4N6marian13ICommunicator7AccFuncE" title="marian::ICommunicator::AccFunc">AccFunc</a>&lt;float&gt; <em>acc</em>, float <em>init</em>, bool <em>parallel</em> = true<span class="sig-paren">)</span> <em class="property">const</em> = 0<a class="headerlink" href="#_CPPv4NK6marian13ICommunicator7foreachERK11ForeachFuncIfE7AccFuncIfEfb" title="Permalink to this definition">¶</a><br /></dt>
 <dd></dd></dl>
 
 <dl class="function">
@@ -226,18 +236,23 @@
 <dd></dd></dl>
 
 <dl class="function">
-<dt id="_CPPv4NK6marian13ICommunicator10swapParamsERKNSt6vectorI6TensorEE">
-<span id="_CPPv3NK6marian13ICommunicator10swapParamsERKNSt6vectorI6TensorEE"></span><span id="_CPPv2NK6marian13ICommunicator10swapParamsERKNSt6vectorI6TensorEE"></span><span id="marian::ICommunicator::swapParams__std::vector:Tensor:CRC"></span><span class="target" id="classmarian_1_1ICommunicator_1a80f6e3a71fb6bdfc5628ad2728ee45a9"></span><em class="property">virtual</em> void <code class="sig-name descname">swapParams</code><span class="sig-paren">(</span><em class="property">const</em> <a class="reference internal" href="function_group__graph__ops__mathematical_1gaf4e69a5f7167b63522135a1f6b8a5dd8.html#_CPPv4N6marianStE4Expri" title="marian::std">std</a>::vector&lt;Tensor&gt; &amp;<em>paramShards</em><span class="sig-paren">)</span> <em class="property">const</em> = 0<a class="headerlink" href="#_CPPv4NK6marian13ICommunicator10swapParamsERKNSt6vectorI6TensorEE" title="Permalink to this definition">¶</a><br /></dt>
+<dt id="_CPPv4NK6marian13ICommunicator15broadcastParamsEb">
+<span id="_CPPv3NK6marian13ICommunicator15broadcastParamsEb"></span><span id="_CPPv2NK6marian13ICommunicator15broadcastParamsEb"></span><span id="marian::ICommunicator::broadcastParams__bC"></span><span class="target" id="classmarian_1_1ICommunicator_1abd94eb27c9aa7baf26009f3562509c39"></span><em class="property">virtual</em> void <code class="sig-name descname">broadcastParams</code><span class="sig-paren">(</span>bool <em>average</em> = false<span class="sig-paren">)</span> <em class="property">const</em> = 0<a class="headerlink" href="#_CPPv4NK6marian13ICommunicator15broadcastParamsEb" title="Permalink to this definition">¶</a><br /></dt>
 <dd></dd></dl>
 
 <dl class="function">
-<dt id="_CPPv4NK6marian13ICommunicator12scatterStateERKNSt6vectorIfEERKN13OptimizerBase19ScatterStateSetFuncE">
-<span id="_CPPv3NK6marian13ICommunicator12scatterStateERKNSt6vectorIfEERKN13OptimizerBase19ScatterStateSetFuncE"></span><span id="_CPPv2NK6marian13ICommunicator12scatterStateERKNSt6vectorIfEERKN13OptimizerBase19ScatterStateSetFuncE"></span><span id="marian::ICommunicator::scatterState__std::vector:float:CR.OptimizerBase::ScatterStateSetFuncCRC"></span><span class="target" id="classmarian_1_1ICommunicator_1afef847d163c0a6b785a7ce683febd4b5"></span><em class="property">virtual</em> void <code class="sig-name descname">scatterState</code><span class="sig-paren">(</span><em class="property">const</em> <a class="reference internal" href="function_group__graph__ops__mathematical_1gaf4e69a5f7167b63522135a1f6b8a5dd8.html#_CPPv4N6marianStE4Expri" title="marian::std">std</a>::vector&lt;float&gt; &amp;<em>data</em>, <em class="property">const</em> <a class="reference internal" href="classmarian_1_1OptimizerBase.html#_CPPv4N6marian13OptimizerBaseE" title="marian::OptimizerBase">OptimizerBase</a>::<a class="reference internal" href="classmarian_1_1OptimizerBase.html#_CPPv4N6marian13OptimizerBase19ScatterStateSetFuncE" title="marian::OptimizerBase::ScatterStateSetFunc">ScatterStateSetFunc</a> &amp;<em>setFn</em><span class="sig-paren">)</span> <em class="property">const</em> = 0<a class="headerlink" href="#_CPPv4NK6marian13ICommunicator12scatterStateERKNSt6vectorIfEERKN13OptimizerBase19ScatterStateSetFuncE" title="Permalink to this definition">¶</a><br /></dt>
+<dt id="_CPPv4NK6marian13ICommunicator15broadcastShardsERKNSt6vectorI3PtrI13OptimizerBaseEEEb">
+<span id="_CPPv3NK6marian13ICommunicator15broadcastShardsERKNSt6vectorI3PtrI13OptimizerBaseEEEb"></span><span id="_CPPv2NK6marian13ICommunicator15broadcastShardsERKNSt6vectorI3PtrI13OptimizerBaseEEEb"></span><span id="marian::ICommunicator::broadcastShards__std::vector:Ptr:OptimizerBase::CR.bC"></span><span class="target" id="classmarian_1_1ICommunicator_1a57df5b7ca596a7d7ec79d2482eceafe6"></span><em class="property">virtual</em> void <code class="sig-name descname">broadcastShards</code><span class="sig-paren">(</span><em class="property">const</em> <a class="reference internal" href="function_group__graph__ops__mathematical_1gaf4e69a5f7167b63522135a1f6b8a5dd8.html#_CPPv4N6marianStE4Expri" title="marian::std">std</a>::vector&lt;<a class="reference internal" href="typedef_namespacemarian_1ad1a373be43a00ef9ce35666145137b08.html#_CPPv4N6marian3PtrE" title="marian::Ptr">Ptr</a>&lt;<a class="reference internal" href="classmarian_1_1OptimizerBase.html#_CPPv4N6marian13OptimizerBaseE" title="marian::OptimizerBase">OptimizerBase</a>&gt;&gt; &amp;<em>opts</em>, bool <em>average</em> = false<span class="sig-paren">)</span> <em class="property">const</em> = 0<a class="headerlink" href="#_CPPv4NK6marian13ICommunicator15broadcastShardsERKNSt6vectorI3PtrI13OptimizerBaseEEEb" title="Permalink to this definition">¶</a><br /></dt>
+<dd></dd></dl>
+
+<dl class="function">
+<dt id="_CPPv4NK6marian13ICommunicator12scatterStateERKN2io4ItemERKN13OptimizerBase19ScatterStateSetFuncE">
+<span id="_CPPv3NK6marian13ICommunicator12scatterStateERKN2io4ItemERKN13OptimizerBase19ScatterStateSetFuncE"></span><span id="_CPPv2NK6marian13ICommunicator12scatterStateERKN2io4ItemERKN13OptimizerBase19ScatterStateSetFuncE"></span><span id="marian::ICommunicator::scatterState__io::ItemCR.OptimizerBase::ScatterStateSetFuncCRC"></span><span class="target" id="classmarian_1_1ICommunicator_1a7467e4092d71b2fab0219eaf10ca9423"></span><em class="property">virtual</em> void <code class="sig-name descname">scatterState</code><span class="sig-paren">(</span><em class="property">const</em> io::<a class="reference internal" href="structmarian_1_1io_1_1Item.html#_CPPv4N6marian2io4ItemE" title="marian::io::Item">Item</a> &amp;<em>data</em>, <em class="property">const</em> <a class="reference internal" href="classmarian_1_1OptimizerBase.html#_CPPv4N6marian13OptimizerBaseE" title="marian::OptimizerBase">OptimizerBase</a>::<a class="reference internal" href="classmarian_1_1OptimizerBase.html#_CPPv4N6marian13OptimizerBase19ScatterStateSetFuncE" title="marian::OptimizerBase::ScatterStateSetFunc">ScatterStateSetFunc</a> &amp;<em>setFn</em><span class="sig-paren">)</span> <em class="property">const</em> = 0<a class="headerlink" href="#_CPPv4NK6marian13ICommunicator12scatterStateERKN2io4ItemERKN13OptimizerBase19ScatterStateSetFuncE" title="Permalink to this definition">¶</a><br /></dt>
 <dd></dd></dl>
 
 <dl class="function">
 <dt id="_CPPv4NK6marian13ICommunicator11gatherStateERKN13OptimizerBase18GatherStateGetFuncE">
-<span id="_CPPv3NK6marian13ICommunicator11gatherStateERKN13OptimizerBase18GatherStateGetFuncE"></span><span id="_CPPv2NK6marian13ICommunicator11gatherStateERKN13OptimizerBase18GatherStateGetFuncE"></span><span id="marian::ICommunicator::gatherState__OptimizerBase::GatherStateGetFuncCRC"></span><span class="target" id="classmarian_1_1ICommunicator_1a66cf199a8f63c3ddf22f8bff06bcf5c6"></span><em class="property">virtual</em> <a class="reference internal" href="function_group__graph__ops__mathematical_1gaf4e69a5f7167b63522135a1f6b8a5dd8.html#_CPPv4N6marianStE4Expri" title="marian::std">std</a>::vector&lt;float&gt; <code class="sig-name descname">gatherState</code><span class="sig-paren">(</span><em class="property">const</em> <a class="reference internal" href="classmarian_1_1OptimizerBase.html#_CPPv4N6marian13OptimizerBaseE" title="marian::OptimizerBase">OptimizerBase</a>::GatherStateGetFunc &amp;<em>getFn</em><span class="sig-paren">)</span> <em class="property">const</em> = 0<a class="headerlink" href="#_CPPv4NK6marian13ICommunicator11gatherStateERKN13OptimizerBase18GatherStateGetFuncE" title="Permalink to this definition">¶</a><br /></dt>
+<span id="_CPPv3NK6marian13ICommunicator11gatherStateERKN13OptimizerBase18GatherStateGetFuncE"></span><span id="_CPPv2NK6marian13ICommunicator11gatherStateERKN13OptimizerBase18GatherStateGetFuncE"></span><span id="marian::ICommunicator::gatherState__OptimizerBase::GatherStateGetFuncCRC"></span><span class="target" id="classmarian_1_1ICommunicator_1ac39d9612132b171d000f4ff5a52b8804"></span><em class="property">virtual</em> io::<a class="reference internal" href="structmarian_1_1io_1_1Item.html#_CPPv4N6marian2io4ItemE" title="marian::io::Item">Item</a> <code class="sig-name descname">gatherState</code><span class="sig-paren">(</span><em class="property">const</em> <a class="reference internal" href="classmarian_1_1OptimizerBase.html#_CPPv4N6marian13OptimizerBaseE" title="marian::OptimizerBase">OptimizerBase</a>::<a class="reference internal" href="classmarian_1_1OptimizerBase.html#_CPPv4N6marian13OptimizerBase18GatherStateGetFuncE" title="marian::OptimizerBase::GatherStateGetFunc">GatherStateGetFunc</a> &amp;<em>getFn</em><span class="sig-paren">)</span> <em class="property">const</em> = 0<a class="headerlink" href="#_CPPv4NK6marian13ICommunicator11gatherStateERKN13OptimizerBase18GatherStateGetFuncE" title="Permalink to this definition">¶</a><br /></dt>
 <dd></dd></dl>
 
 </div>

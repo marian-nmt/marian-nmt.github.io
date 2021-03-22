@@ -1,0 +1,28 @@
+
+.. _program_listing_file_src_microsoft_shortlist_utils_PrintTypes.h:
+
+Program Listing for File PrintTypes.h
+=====================================
+
+|exhale_lsh| :ref:`Return to documentation for file <file_src_microsoft_shortlist_utils_PrintTypes.h>` (``src/microsoft/shortlist/utils/PrintTypes.h``)
+
+.. |exhale_lsh| unicode:: U+021B0 .. UPWARDS ARROW WITH TIP LEFTWARDS
+
+.. code-block:: cpp
+
+   #pragma once
+   
+   #include <inttypes.h>
+   
+   #ifdef QUICKSAND_WINDOWS_BUILD
+   #define PI32 "d"
+   #define PI64 "lld"
+   #define PU32 "u"
+   #define PU64 "llu"
+   #else
+   #define PI32 PRId32
+   #define PI64 PRId64
+   #define PU32 PRIu32
+   #define PU64 PRIu64
+   #endif
+   

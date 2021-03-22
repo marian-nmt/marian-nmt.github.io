@@ -7,7 +7,7 @@
   
   <meta name="viewport" content="width=device-width, initial-scale=1.0" />
   
-  <title>Program Listing for File shortlist.h &mdash; Marian NMT v1.10.2 2021-02-28 documentation</title>
+  <title>Program Listing for File shortlist.h &mdash; Marian NMT v1.10.3 2021-03-22 documentation</title>
   
 
   
@@ -67,7 +67,7 @@
             
             
               <div class="version">
-                v1.10.2
+                v1.10.3
               </div>
             
           
@@ -175,6 +175,7 @@
 <span class="cp">#include</span> <span class="cpf">&quot;common/file_stream.h&quot;</span><span class="cp"></span>
 <span class="cp">#include</span> <span class="cpf">&quot;data/corpus_base.h&quot;</span><span class="cp"></span>
 <span class="cp">#include</span> <span class="cpf">&quot;data/types.h&quot;</span><span class="cp"></span>
+<span class="cp">#include</span> <span class="cpf">&quot;mio/mio.hpp&quot;</span><span class="cp"></span>
 
 <span class="cp">#include</span> <span class="cpf">&lt;random&gt;</span><span class="cp"></span>
 <span class="cp">#include</span> <span class="cpf">&lt;unordered_map&gt;</span><span class="cp"></span>
@@ -461,6 +462,52 @@
     <span class="k">return</span> <span class="n">New</span><span class="o">&lt;</span><span class="n">Shortlist</span><span class="o">&gt;</span><span class="p">(</span><span class="n">indices_</span><span class="p">);</span>
   <span class="p">}</span>
 <span class="p">};</span>
+
+<span class="cm">/*</span>
+<span class="cm">Legacy binary shortlist for Microsoft-internal use.</span>
+<span class="cm">*/</span>
+<span class="k">class</span> <span class="nc">QuicksandShortlistGenerator</span> <span class="o">:</span> <span class="k">public</span> <span class="n">ShortlistGenerator</span> <span class="p">{</span>
+<span class="k">private</span><span class="o">:</span>
+  <span class="n">Ptr</span><span class="o">&lt;</span><span class="n">Options</span><span class="o">&gt;</span> <span class="n">options_</span><span class="p">;</span>
+  <span class="n">Ptr</span><span class="o">&lt;</span><span class="k">const</span> <span class="n">Vocab</span><span class="o">&gt;</span> <span class="n">srcVocab_</span><span class="p">;</span>
+  <span class="n">Ptr</span><span class="o">&lt;</span><span class="k">const</span> <span class="n">Vocab</span><span class="o">&gt;</span> <span class="n">trgVocab_</span><span class="p">;</span>
+
+  <span class="kt">size_t</span> <span class="n">srcIdx_</span><span class="p">;</span>
+
+  <span class="n">mio</span><span class="o">::</span><span class="n">mmap_source</span> <span class="n">mmap_</span><span class="p">;</span>
+
+  <span class="c1">// all the quicksand bits go here</span>
+  <span class="kt">bool</span> <span class="n">use16bit_</span><span class="p">{</span><span class="nb">false</span><span class="p">};</span>
+  <span class="kt">int32_t</span> <span class="n">numDefaultIds_</span><span class="p">;</span>
+  <span class="kt">int32_t</span> <span class="n">idSize_</span><span class="p">;</span>
+  <span class="k">const</span> <span class="kt">int32_t</span><span class="o">*</span> <span class="n">defaultIds_</span><span class="p">{</span><span class="k">nullptr</span><span class="p">};</span>
+  <span class="kt">int32_t</span> <span class="n">numSourceIds_</span><span class="p">{</span><span class="mi">0</span><span class="p">};</span>
+  <span class="k">const</span> <span class="kt">int32_t</span><span class="o">*</span> <span class="n">sourceLengths_</span><span class="p">{</span><span class="k">nullptr</span><span class="p">};</span>
+  <span class="k">const</span> <span class="kt">int32_t</span><span class="o">*</span> <span class="n">sourceOffsets_</span><span class="p">{</span><span class="k">nullptr</span><span class="p">};</span>
+  <span class="kt">int32_t</span> <span class="n">numShortlistIds_</span><span class="p">{</span><span class="mi">0</span><span class="p">};</span>
+  <span class="k">const</span> <span class="kt">uint8_t</span><span class="o">*</span> <span class="n">sourceToShortlistIds_</span><span class="p">{</span><span class="k">nullptr</span><span class="p">};</span>
+
+<span class="k">public</span><span class="o">:</span>
+  <span class="n">QuicksandShortlistGenerator</span><span class="p">(</span><span class="n">Ptr</span><span class="o">&lt;</span><span class="n">Options</span><span class="o">&gt;</span> <span class="n">options</span><span class="p">,</span>
+                              <span class="n">Ptr</span><span class="o">&lt;</span><span class="k">const</span> <span class="n">Vocab</span><span class="o">&gt;</span> <span class="n">srcVocab</span><span class="p">,</span>
+                              <span class="n">Ptr</span><span class="o">&lt;</span><span class="k">const</span> <span class="n">Vocab</span><span class="o">&gt;</span> <span class="n">trgVocab</span><span class="p">,</span>
+                              <span class="kt">size_t</span> <span class="n">srcIdx</span> <span class="o">=</span> <span class="mi">0</span><span class="p">,</span>
+                              <span class="kt">size_t</span> <span class="n">trgIdx</span> <span class="o">=</span> <span class="mi">1</span><span class="p">,</span>
+                              <span class="kt">bool</span> <span class="n">shared</span> <span class="o">=</span> <span class="nb">false</span><span class="p">);</span>
+
+  <span class="k">virtual</span> <span class="n">Ptr</span><span class="o">&lt;</span><span class="n">Shortlist</span><span class="o">&gt;</span> <span class="n">generate</span><span class="p">(</span><span class="n">Ptr</span><span class="o">&lt;</span><span class="n">data</span><span class="o">::</span><span class="n">CorpusBatch</span><span class="o">&gt;</span> <span class="n">batch</span><span class="p">)</span> <span class="k">const</span> <span class="k">override</span><span class="p">;</span>
+<span class="p">};</span>
+
+<span class="cm">/*</span>
+<span class="cm">Shortlist factory to create correct type of shortlist. Currently assumes everything is a text shortlist</span>
+<span class="cm">unless the extension is *.bin for which the Microsoft legacy binary shortlist is used.</span>
+<span class="cm">*/</span>
+<span class="n">Ptr</span><span class="o">&lt;</span><span class="n">ShortlistGenerator</span><span class="o">&gt;</span> <span class="n">createShortlistGenerator</span><span class="p">(</span><span class="n">Ptr</span><span class="o">&lt;</span><span class="n">Options</span><span class="o">&gt;</span> <span class="n">options</span><span class="p">,</span>
+                                                 <span class="n">Ptr</span><span class="o">&lt;</span><span class="k">const</span> <span class="n">Vocab</span><span class="o">&gt;</span> <span class="n">srcVocab</span><span class="p">,</span>
+                                                 <span class="n">Ptr</span><span class="o">&lt;</span><span class="k">const</span> <span class="n">Vocab</span><span class="o">&gt;</span> <span class="n">trgVocab</span><span class="p">,</span>
+                                                 <span class="kt">size_t</span> <span class="n">srcIdx</span> <span class="o">=</span> <span class="mi">0</span><span class="p">,</span>
+                                                 <span class="kt">size_t</span> <span class="n">trgIdx</span> <span class="o">=</span> <span class="mi">1</span><span class="p">,</span>
+                                                 <span class="kt">bool</span> <span class="n">shared</span> <span class="o">=</span> <span class="nb">false</span><span class="p">);</span>
 
 <span class="p">}</span>  <span class="c1">// namespace data</span>
 <span class="p">}</span>  <span class="c1">// namespace marian</span>

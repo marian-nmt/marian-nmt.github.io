@@ -7,7 +7,7 @@
   
   <meta name="viewport" content="width=device-width, initial-scale=1.0" />
   
-  <title>Program Listing for File corpus.cpp &mdash; Marian NMT v1.10.2 2021-02-28 documentation</title>
+  <title>Program Listing for File corpus.cpp &mdash; Marian NMT v1.10.3 2021-03-22 documentation</title>
   
 
   
@@ -67,7 +67,7 @@
             
             
               <div class="version">
-                v1.10.2
+                v1.10.3
               </div>
             
           
@@ -181,16 +181,17 @@
 <span class="k">namespace</span> <span class="n">marian</span> <span class="p">{</span>
 <span class="k">namespace</span> <span class="n">data</span> <span class="p">{</span>
 
-<span class="n">Corpus</span><span class="o">::</span><span class="n">Corpus</span><span class="p">(</span><span class="n">Ptr</span><span class="o">&lt;</span><span class="n">Options</span><span class="o">&gt;</span> <span class="n">options</span><span class="p">,</span> <span class="kt">bool</span> <span class="n">translate</span> <span class="cm">/*= false*/</span><span class="p">)</span>
-    <span class="o">:</span> <span class="n">CorpusBase</span><span class="p">(</span><span class="n">options</span><span class="p">,</span> <span class="n">translate</span><span class="p">),</span>
+<span class="n">Corpus</span><span class="o">::</span><span class="n">Corpus</span><span class="p">(</span><span class="n">Ptr</span><span class="o">&lt;</span><span class="n">Options</span><span class="o">&gt;</span> <span class="n">options</span><span class="p">,</span> <span class="kt">bool</span> <span class="n">translate</span> <span class="cm">/*= false*/</span><span class="p">,</span> <span class="kt">size_t</span> <span class="n">seed</span> <span class="cm">/*= Config:seed*/</span><span class="p">)</span>
+    <span class="o">:</span> <span class="n">CorpusBase</span><span class="p">(</span><span class="n">options</span><span class="p">,</span> <span class="n">translate</span><span class="p">,</span> <span class="n">seed</span><span class="p">),</span>
         <span class="n">shuffleInRAM_</span><span class="p">(</span><span class="n">options_</span><span class="o">-&gt;</span><span class="n">get</span><span class="o">&lt;</span><span class="kt">bool</span><span class="o">&gt;</span><span class="p">(</span><span class="s">&quot;shuffle-in-ram&quot;</span><span class="p">,</span> <span class="nb">false</span><span class="p">)),</span>
         <span class="n">allCapsEvery_</span><span class="p">(</span><span class="n">options_</span><span class="o">-&gt;</span><span class="n">get</span><span class="o">&lt;</span><span class="kt">size_t</span><span class="o">&gt;</span><span class="p">(</span><span class="s">&quot;all-caps-every&quot;</span><span class="p">,</span> <span class="mi">0</span><span class="p">)),</span>
         <span class="n">titleCaseEvery_</span><span class="p">(</span><span class="n">options_</span><span class="o">-&gt;</span><span class="n">get</span><span class="o">&lt;</span><span class="kt">size_t</span><span class="o">&gt;</span><span class="p">(</span><span class="s">&quot;english-title-case-every&quot;</span><span class="p">,</span> <span class="mi">0</span><span class="p">))</span> <span class="p">{}</span>
 
 <span class="n">Corpus</span><span class="o">::</span><span class="n">Corpus</span><span class="p">(</span><span class="n">std</span><span class="o">::</span><span class="n">vector</span><span class="o">&lt;</span><span class="n">std</span><span class="o">::</span><span class="n">string</span><span class="o">&gt;</span> <span class="n">paths</span><span class="p">,</span>
                <span class="n">std</span><span class="o">::</span><span class="n">vector</span><span class="o">&lt;</span><span class="n">Ptr</span><span class="o">&lt;</span><span class="n">Vocab</span><span class="o">&gt;&gt;</span> <span class="n">vocabs</span><span class="p">,</span>
-               <span class="n">Ptr</span><span class="o">&lt;</span><span class="n">Options</span><span class="o">&gt;</span> <span class="n">options</span><span class="p">)</span>
-    <span class="o">:</span> <span class="n">CorpusBase</span><span class="p">(</span><span class="n">paths</span><span class="p">,</span> <span class="n">vocabs</span><span class="p">,</span> <span class="n">options</span><span class="p">),</span>
+               <span class="n">Ptr</span><span class="o">&lt;</span><span class="n">Options</span><span class="o">&gt;</span> <span class="n">options</span><span class="p">,</span>
+               <span class="kt">size_t</span> <span class="n">seed</span> <span class="cm">/*= Config:seed*/</span><span class="p">)</span>
+    <span class="o">:</span> <span class="n">CorpusBase</span><span class="p">(</span><span class="n">paths</span><span class="p">,</span> <span class="n">vocabs</span><span class="p">,</span> <span class="n">options</span><span class="p">,</span> <span class="n">seed</span><span class="p">),</span>
         <span class="n">shuffleInRAM_</span><span class="p">(</span><span class="n">options_</span><span class="o">-&gt;</span><span class="n">get</span><span class="o">&lt;</span><span class="kt">bool</span><span class="o">&gt;</span><span class="p">(</span><span class="s">&quot;shuffle-in-ram&quot;</span><span class="p">,</span> <span class="nb">false</span><span class="p">)),</span>
         <span class="n">allCapsEvery_</span><span class="p">(</span><span class="n">options_</span><span class="o">-&gt;</span><span class="n">get</span><span class="o">&lt;</span><span class="kt">size_t</span><span class="o">&gt;</span><span class="p">(</span><span class="s">&quot;all-caps-every&quot;</span><span class="p">,</span> <span class="mi">0</span><span class="p">)),</span>
         <span class="n">titleCaseEvery_</span><span class="p">(</span><span class="n">options_</span><span class="o">-&gt;</span><span class="n">get</span><span class="o">&lt;</span><span class="kt">size_t</span><span class="o">&gt;</span><span class="p">(</span><span class="s">&quot;english-title-case-every&quot;</span><span class="p">,</span> <span class="mi">0</span><span class="p">))</span> <span class="p">{}</span>

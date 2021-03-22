@@ -7,7 +7,7 @@
   
   <meta name="viewport" content="width=device-width, initial-scale=1.0" />
   
-  <title>Program Listing for File iris.cpp &mdash; Marian NMT v1.10.2 2021-02-28 documentation</title>
+  <title>Program Listing for File iris.cpp &mdash; Marian NMT v1.10.3 2021-03-22 documentation</title>
   
 
   
@@ -67,7 +67,7 @@
             
             
               <div class="version">
-                v1.10.2
+                v1.10.3
               </div>
             
           
@@ -258,7 +258,7 @@
     <span class="n">graph</span><span class="o">-&gt;</span><span class="n">reserveWorkspaceMB</span><span class="p">(</span><span class="mi">128</span><span class="p">);</span>
 
     <span class="c1">// Choose optimizer (Sgd, Adagrad, Adam) and initial learning rate</span>
-    <span class="k">auto</span> <span class="n">opt</span> <span class="o">=</span> <span class="n">Optimizer</span><span class="o">&lt;</span><span class="n">Adam</span><span class="o">&gt;</span><span class="p">(</span><span class="mf">0.005</span><span class="p">);</span>
+    <span class="k">auto</span> <span class="n">opt</span> <span class="o">=</span> <span class="n">Optimizer</span><span class="p">(</span><span class="n">New</span><span class="o">&lt;</span><span class="n">Options</span><span class="o">&gt;</span><span class="p">(</span><span class="s">&quot;optimizer&quot;</span><span class="p">,</span> <span class="s">&quot;adam&quot;</span><span class="p">,</span> <span class="s">&quot;learn-rate&quot;</span><span class="p">,</span> <span class="mf">0.005</span><span class="p">));</span>
 
     <span class="k">for</span><span class="p">(</span><span class="kt">size_t</span> <span class="n">epoch</span> <span class="o">=</span> <span class="mi">1</span><span class="p">;</span> <span class="n">epoch</span> <span class="o">&lt;=</span> <span class="n">MAX_EPOCHS</span><span class="p">;</span> <span class="o">++</span><span class="n">epoch</span><span class="p">)</span> <span class="p">{</span>
       <span class="c1">// Shuffle data in each epochs</span>
@@ -270,7 +270,7 @@
       <span class="c1">// Train classifier and update weights</span>
       <span class="n">graph</span><span class="o">-&gt;</span><span class="n">forward</span><span class="p">();</span>
       <span class="n">graph</span><span class="o">-&gt;</span><span class="n">backward</span><span class="p">();</span>
-      <span class="n">opt</span><span class="o">-&gt;</span><span class="n">update</span><span class="p">(</span><span class="n">graph</span><span class="p">);</span>
+      <span class="n">opt</span><span class="o">-&gt;</span><span class="n">update</span><span class="p">(</span><span class="n">graph</span><span class="p">,</span> <span class="cm">/*mbSize=*/</span><span class="mi">0</span><span class="p">);</span>
 
       <span class="k">if</span><span class="p">(</span><span class="n">epoch</span> <span class="o">%</span> <span class="mi">10</span> <span class="o">==</span> <span class="mi">0</span><span class="p">)</span>
         <span class="n">std</span><span class="o">::</span><span class="n">cout</span> <span class="o">&lt;&lt;</span> <span class="s">&quot;Epoch: &quot;</span> <span class="o">&lt;&lt;</span> <span class="n">epoch</span> <span class="o">&lt;&lt;</span> <span class="s">&quot; Cost: &quot;</span> <span class="o">&lt;&lt;</span> <span class="n">cost</span><span class="o">-&gt;</span><span class="n">scalar</span><span class="p">()</span>

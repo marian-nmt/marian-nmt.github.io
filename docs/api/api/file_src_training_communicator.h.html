@@ -7,7 +7,7 @@
   
   <meta name="viewport" content="width=device-width, initial-scale=1.0" />
   
-  <title>File communicator.h &mdash; Marian NMT v1.10.2 2021-02-28 documentation</title>
+  <title>File communicator.h &mdash; Marian NMT v1.10.3 2021-03-22 documentation</title>
   
 
   
@@ -67,7 +67,7 @@
             
             
               <div class="version">
-                v1.10.2
+                v1.10.3
               </div>
             
           
@@ -193,7 +193,9 @@
 <div class="section" id="includes">
 <h2>Includes<a class="headerlink" href="#includes" title="Permalink to this headline">¶</a></h2>
 <ul class="simple">
+<li><p><code class="docutils literal notranslate"><span class="pre">3rd_party/threadpool.h</span></code></p></li>
 <li><p><code class="docutils literal notranslate"><span class="pre">functional/functional.h</span></code> (<a class="reference internal" href="file_src_functional_functional.h.html#file-src-functional-functional-h"><span class="std std-ref">File functional.h</span></a>)</p></li>
+<li><p><code class="docutils literal notranslate"><span class="pre">future</span></code></p></li>
 <li><p><code class="docutils literal notranslate"><span class="pre">graph/expression_graph.h</span></code> (<a class="reference internal" href="file_src_graph_expression_graph.h.html#file-src-graph-expression-graph-h"><span class="std std-ref">File expression_graph.h</span></a>)</p></li>
 <li><p><code class="docutils literal notranslate"><span class="pre">optimizers/optimizers.h</span></code> (<a class="reference internal" href="file_src_optimizers_optimizers.h.html#file-src-optimizers-optimizers-h"><span class="std std-ref">File optimizers.h</span></a>)</p></li>
 <li><p><code class="docutils literal notranslate"><span class="pre">tensors/tensor_operators.h</span></code> (<a class="reference internal" href="file_src_tensors_tensor_operators.h.html#file-src-tensors-tensor-operators-h"><span class="std std-ref">File tensor_operators.h</span></a>)</p></li>
@@ -204,10 +206,7 @@
 <ul class="simple">
 <li><p><a class="reference internal" href="file_src_training_communicator.cpp.html#file-src-training-communicator-cpp"><span class="std std-ref">File communicator.cpp</span></a></p></li>
 <li><p><a class="reference internal" href="file_src_training_communicator_nccl.h.html#file-src-training-communicator-nccl-h"><span class="std std-ref">File communicator_nccl.h</span></a></p></li>
-<li><p><a class="reference internal" href="file_src_training_deprecated_graph_group_multinode.h.html#file-src-training-deprecated-graph-group-multinode-h"><span class="std std-ref">File graph_group_multinode.h</span></a></p></li>
-<li><p><a class="reference internal" href="file_src_training_deprecated_graph_group_multinode_sync.h.html#file-src-training-deprecated-graph-group-multinode-sync-h"><span class="std std-ref">File graph_group_multinode_sync.h</span></a></p></li>
 <li><p><a class="reference internal" href="file_src_training_graph_group.h.html#file-src-training-graph-group-h"><span class="std std-ref">File graph_group.h</span></a></p></li>
-<li><p><a class="reference internal" href="file_src_training_graph_group_sync.h.html#file-src-training-graph-group-sync-h"><span class="std std-ref">File graph_group_sync.h</span></a></p></li>
 <li><p><a class="reference internal" href="file_src_training_scheduler.h.html#file-src-training-scheduler-h"><span class="std std-ref">File scheduler.h</span></a></p></li>
 </ul>
 </div>
@@ -231,6 +230,7 @@
 <li><p><a class="reference internal" href="enum_namespacemarian_1a99b7af6b45a77b11ae730d0a0b8ee7a2.html#exhale-enum-namespacemarian-1a99b7af6b45a77b11ae730d0a0b8ee7a2"><span class="std std-ref">Enum MPI_Comm</span></a></p></li>
 <li><p><a class="reference internal" href="enum_namespacemarian_1aad9609e9074fe840a87cba89b6583a2a.html#exhale-enum-namespacemarian-1aad9609e9074fe840a87cba89b6583a2a"><span class="std std-ref">Enum MPI_Datatype</span></a></p></li>
 <li><p><a class="reference internal" href="enum_namespacemarian_1a37b0f8fb987019b5b3a02a01b037a36c.html#exhale-enum-namespacemarian-1a37b0f8fb987019b5b3a02a01b037a36c"><span class="std std-ref">Enum MPI_Op</span></a></p></li>
+<li><p><a class="reference internal" href="enum_namespacemarian_1a3b76f9c69517730178c29fca1437e0ce.html#exhale-enum-namespacemarian-1a3b76f9c69517730178c29fca1437e0ce"><span class="std std-ref">Enum ShardingMode</span></a></p></li>
 </ul>
 </div>
 <div class="section" id="functions">
@@ -238,13 +238,16 @@
 <ul class="simple">
 <li><p><a class="reference internal" href="function_namespacemarian_1a1fb2adff5587a452b89a235ed5a461f4.html#exhale-function-namespacemarian-1a1fb2adff5587a452b89a235ed5a461f4"><span class="std std-ref">Function marian::allReduce</span></a></p></li>
 <li><p><a class="reference internal" href="function_namespacemarian_1ac67e4eebc152da62eb145a068494270d.html#exhale-function-namespacemarian-1ac67e4eebc152da62eb145a068494270d"><span class="std std-ref">Function marian::barrier</span></a></p></li>
+<li><p><a class="reference internal" href="function_namespacemarian_1abf5090dcd5ce1548cfbd4fa6c8d63add.html#exhale-function-namespacemarian-1abf5090dcd5ce1548cfbd4fa6c8d63add"><span class="std std-ref">Function marian::bCast(io::Item&amp;, size_t, MPI_Comm)</span></a></p></li>
 <li><p><a class="reference internal" href="function_namespacemarian_1a053414677fbe567ace66b78119928a60.html#exhale-function-namespacemarian-1a053414677fbe567ace66b78119928a60"><span class="std std-ref">Function marian::bCast(void *, size_t, MPI_Datatype, size_t, MPI_Comm)</span></a></p></li>
-<li><p><a class="reference internal" href="function_namespacemarian_1a732d117a77e823e685a76fa246d90e6c.html#exhale-function-namespacemarian-1a732d117a77e823e685a76fa246d90e6c"><span class="std std-ref">Template Function marian::bCast(std::vector&lt;T&gt;&amp;, size_t, MPI_Comm)</span></a></p></li>
 <li><p><a class="reference internal" href="function_namespacemarian_1ae37b863c1eff5012cbd59108f6621780.html#exhale-function-namespacemarian-1ae37b863c1eff5012cbd59108f6621780"><span class="std std-ref">Function marian::finalize</span></a></p></li>
-<li><p><a class="reference internal" href="function_namespacemarian_1a942942cc24edbb109a83a0d036b715a7.html#exhale-function-namespacemarian-1a942942cc24edbb109a83a0d036b715a7"><span class="std std-ref">Function marian::getDataType(const unsigned long *)</span></a></p></li>
+<li><p><a class="reference internal" href="function_namespacemarian_1a71edfbab34da9f59962a18b666e2db88.html#exhale-function-namespacemarian-1a71edfbab34da9f59962a18b666e2db88"><span class="std std-ref">Function marian::getDataType(const char *)</span></a></p></li>
+<li><p><a class="reference internal" href="function_namespacemarian_1a35955af9903e1311bb3a25b6ce4e696c.html#exhale-function-namespacemarian-1a35955af9903e1311bb3a25b6ce4e696c"><span class="std std-ref">Function marian::getDataType(const int *)</span></a></p></li>
 <li><p><a class="reference internal" href="function_namespacemarian_1a26d251863d7eeeb86dbf87444851113c.html#exhale-function-namespacemarian-1a26d251863d7eeeb86dbf87444851113c"><span class="std std-ref">Function marian::getDataType(const float *)</span></a></p></li>
+<li><p><a class="reference internal" href="function_namespacemarian_1a942942cc24edbb109a83a0d036b715a7.html#exhale-function-namespacemarian-1a942942cc24edbb109a83a0d036b715a7"><span class="std std-ref">Function marian::getDataType(const unsigned long *)</span></a></p></li>
 <li><p><a class="reference internal" href="function_namespacemarian_1a5221f3834655e2e916047b0c3f649255.html#exhale-function-namespacemarian-1a5221f3834655e2e916047b0c3f649255"><span class="std std-ref">Function marian::getDataType(const unsigned long long *)</span></a></p></li>
 <li><p><a class="reference internal" href="function_namespacemarian_1a1acf6ee43f3db21ec247cd9dd1e445ee.html#exhale-function-namespacemarian-1a1acf6ee43f3db21ec247cd9dd1e445ee"><span class="std std-ref">Function marian::idStr</span></a></p></li>
+<li><p><a class="reference internal" href="function_namespacemarian_1a224a03342cb49dec901c1dd8caea41ca.html#exhale-function-namespacemarian-1a224a03342cb49dec901c1dd8caea41ca"><span class="std std-ref">Function marian::isMainProcess</span></a></p></li>
 <li><p><a class="reference internal" href="function_namespacemarian_1a904a2180c6320b13c3519b118774f6d8.html#exhale-function-namespacemarian-1a904a2180c6320b13c3519b118774f6d8"><span class="std std-ref">Function marian::numMPIProcesses</span></a></p></li>
 <li><p><a class="reference internal" href="function_namespacemarian_1a23ef434ea2ac7559efb04c08be312c60.html#exhale-function-namespacemarian-1a23ef434ea2ac7559efb04c08be312c60"><span class="std std-ref">Function marian::recv</span></a></p></li>
 <li><p><a class="reference internal" href="function_namespacemarian_1a45934ca66e736a27cb859962efe79cf0.html#exhale-function-namespacemarian-1a45934ca66e736a27cb859962efe79cf0"><span class="std std-ref">Function marian::sSend</span></a></p></li>

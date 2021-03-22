@@ -7,7 +7,7 @@
   
   <meta name="viewport" content="width=device-width, initial-scale=1.0" />
   
-  <title>Program Listing for File scheduler.h &mdash; Marian NMT v1.10.2 2021-02-28 documentation</title>
+  <title>Program Listing for File scheduler.h &mdash; Marian NMT v1.10.3 2021-03-22 documentation</title>
   
 
   
@@ -67,7 +67,7 @@
             
             
               <div class="version">
-                v1.10.2
+                v1.10.3
               </div>
             
           
@@ -184,8 +184,10 @@
   <span class="n">Ptr</span><span class="o">&lt;</span><span class="n">Options</span><span class="o">&gt;</span> <span class="n">options_</span><span class="p">;</span>
   <span class="n">Ptr</span><span class="o">&lt;</span><span class="n">TrainingState</span><span class="o">&gt;</span> <span class="n">state_</span><span class="p">;</span>
   <span class="n">std</span><span class="o">::</span><span class="n">vector</span><span class="o">&lt;</span><span class="n">Ptr</span><span class="o">&lt;</span><span class="n">ValidatorBase</span><span class="o">&gt;&gt;</span> <span class="n">validators_</span><span class="p">;</span>
+  <span class="n">Ptr</span><span class="o">&lt;</span><span class="n">IMPIWrapper</span><span class="o">&gt;</span> <span class="n">mpi_</span><span class="p">;</span>
 
-  <span class="kt">bool</span> <span class="n">first_</span><span class="p">{</span><span class="nb">true</span><span class="p">};</span>        <span class="c1">// true if this is the first update after renewing the training</span>
+  <span class="kt">bool</span> <span class="n">first_</span><span class="p">{</span><span class="nb">true</span><span class="p">};</span>                  <span class="c1">// true if this is the first update after renewing the training</span>
+  <span class="kt">size_t</span> <span class="n">gradientNormAvgWindow_</span><span class="p">{</span><span class="mi">100</span><span class="p">};</span> <span class="c1">// window size for recording the exponential average of gradient norms, after this many updates about 90% of the mass comes from this many last updates</span>
   <span class="n">SchedulingParameter</span> <span class="n">logicalEpoch_</span><span class="p">;</span>
   <span class="kt">size_t</span> <span class="n">logicalEpochWidth_</span><span class="p">{</span><span class="mi">0</span><span class="p">};</span>
 
@@ -197,6 +199,7 @@
   <span class="c1">// which indicates the end of the training data stream from STDIN</span>
   <span class="kt">bool</span> <span class="n">endOfStdin_</span><span class="p">{</span><span class="nb">false</span><span class="p">};</span>  <span class="c1">// true at the end of the epoch if training from STDIN;</span>
 
+  <span class="c1">// @TODO: figure out how to compute this with regard to updates as well, although maybe harder since no final value</span>
   <span class="c1">// determine scheduled LR decay factor (--lr-decay-inv-sqrt option)</span>
   <span class="kt">float</span> <span class="nf">getScheduledLRDecayFactor</span><span class="p">(</span><span class="k">const</span> <span class="n">TrainingState</span><span class="o">&amp;</span> <span class="n">state</span><span class="p">)</span> <span class="k">const</span> <span class="p">{</span>
     <span class="k">auto</span> <span class="n">args</span> <span class="o">=</span> <span class="n">options_</span><span class="o">-&gt;</span><span class="n">get</span><span class="o">&lt;</span><span class="n">std</span><span class="o">::</span><span class="n">vector</span><span class="o">&lt;</span><span class="n">std</span><span class="o">::</span><span class="n">string</span><span class="o">&gt;&gt;</span><span class="p">(</span><span class="s">&quot;lr-decay-inv-sqrt&quot;</span><span class="p">);</span>
@@ -218,12 +221,6 @@
       <span class="k">return</span> <span class="mf">1.f</span><span class="p">;</span>
   <span class="p">}</span>
 
-  <span class="c1">// update current learning rate in state.eta</span>
-  <span class="c1">// This considers</span>
-  <span class="c1">//  - base LR (--learn-rate)</span>
-  <span class="c1">//  - LR warm-up (--lr-warmup, --lr=warmup-start-rate)</span>
-  <span class="c1">//  - scheduled LR decay (--lr-decay-inv-sqrt)</span>
-  <span class="c1">//  - state-based LR decay (--lr-decay, --lr-decay-strategy)</span>
   <span class="kt">void</span> <span class="nf">updateLearningRate</span><span class="p">(</span><span class="n">TrainingState</span><span class="o">&amp;</span> <span class="n">state</span><span class="p">)</span> <span class="k">const</span> <span class="p">{</span>
     <span class="kt">float</span> <span class="n">baselr</span> <span class="o">=</span> <span class="n">options_</span><span class="o">-&gt;</span><span class="n">get</span><span class="o">&lt;</span><span class="kt">float</span><span class="o">&gt;</span><span class="p">(</span><span class="s">&quot;learn-rate&quot;</span><span class="p">);</span>
 
@@ -265,7 +262,7 @@
       <span class="n">ss</span> <span class="o">&lt;&lt;</span> <span class="n">state</span><span class="o">-&gt;</span><span class="n">costSum</span> <span class="o">/</span> <span class="n">state</span><span class="o">-&gt;</span><span class="n">costCount</span><span class="p">;</span>
     <span class="p">}</span> <span class="k">else</span> <span class="k">if</span><span class="p">(</span><span class="n">lossType</span> <span class="o">==</span> <span class="s">&quot;ce-sum&quot;</span> <span class="o">&amp;&amp;</span> <span class="n">dispLabelCounts</span><span class="p">)</span> <span class="p">{</span>
       <span class="n">ss</span> <span class="o">&lt;&lt;</span> <span class="n">state</span><span class="o">-&gt;</span><span class="n">costSum</span> <span class="o">/</span> <span class="n">state</span><span class="o">-&gt;</span><span class="n">costCount</span>
-         <span class="o">&lt;&lt;</span> <span class="s">&quot; * &quot;</span> <span class="o">&lt;&lt;</span> <span class="n">utils</span><span class="o">::</span><span class="n">withCommas</span><span class="p">(</span><span class="n">state</span><span class="o">-&gt;</span><span class="n">costCount</span><span class="p">);</span>
+         <span class="o">&lt;&lt;</span> <span class="s">&quot; * &quot;</span> <span class="o">&lt;&lt;</span> <span class="n">utils</span><span class="o">::</span><span class="n">withCommas</span><span class="p">((</span><span class="kt">size_t</span><span class="p">)</span><span class="n">state</span><span class="o">-&gt;</span><span class="n">costCount</span><span class="p">);</span>
       <span class="k">if</span><span class="p">(</span><span class="n">batchLabels</span> <span class="o">&gt;</span> <span class="mi">0</span><span class="p">)</span>
          <span class="n">ss</span> <span class="o">&lt;&lt;</span> <span class="s">&quot; @ &quot;</span> <span class="o">&lt;&lt;</span> <span class="n">utils</span><span class="o">::</span><span class="n">withCommas</span><span class="p">(</span><span class="n">batchLabels</span><span class="p">);</span>
       <span class="n">ss</span> <span class="o">&lt;&lt;</span> <span class="s">&quot; after &quot;</span> <span class="o">&lt;&lt;</span> <span class="n">utils</span><span class="o">::</span><span class="n">withCommas</span><span class="p">(</span><span class="n">state</span><span class="o">-&gt;</span><span class="n">labelsTotal</span><span class="p">);</span>
@@ -303,8 +300,9 @@
   <span class="p">}</span>
 
 <span class="k">public</span><span class="o">:</span>
-  <span class="n">Scheduler</span><span class="p">(</span><span class="n">Ptr</span><span class="o">&lt;</span><span class="n">Options</span><span class="o">&gt;</span> <span class="n">options</span><span class="p">,</span> <span class="n">Ptr</span><span class="o">&lt;</span><span class="n">TrainingState</span><span class="o">&gt;</span> <span class="n">state</span><span class="p">)</span>
-      <span class="o">:</span> <span class="n">options_</span><span class="p">(</span><span class="n">options</span><span class="p">),</span> <span class="n">state_</span><span class="p">(</span><span class="n">state</span><span class="p">)</span> <span class="p">{</span>
+  <span class="n">Scheduler</span><span class="p">(</span><span class="n">Ptr</span><span class="o">&lt;</span><span class="n">Options</span><span class="o">&gt;</span> <span class="n">options</span><span class="p">,</span> <span class="n">Ptr</span><span class="o">&lt;</span><span class="n">TrainingState</span><span class="o">&gt;</span> <span class="n">state</span><span class="p">,</span> <span class="n">Ptr</span><span class="o">&lt;</span><span class="n">IMPIWrapper</span><span class="o">&gt;</span> <span class="n">mpi</span> <span class="o">=</span> <span class="k">nullptr</span><span class="p">)</span>
+      <span class="o">:</span> <span class="n">options_</span><span class="p">(</span><span class="n">options</span><span class="p">),</span> <span class="n">state_</span><span class="p">(</span><span class="n">state</span><span class="p">),</span> <span class="n">mpi_</span><span class="p">(</span><span class="n">mpi</span><span class="p">),</span>
+        <span class="n">gradientNormAvgWindow_</span><span class="p">(</span><span class="n">options_</span><span class="o">-&gt;</span><span class="n">get</span><span class="o">&lt;</span><span class="kt">size_t</span><span class="o">&gt;</span><span class="p">(</span><span class="s">&quot;gradient-norm-average-window&quot;</span><span class="p">,</span> <span class="mi">100</span><span class="p">))</span> <span class="p">{</span>
 
     <span class="c1">// parse logical-epoch parameters</span>
     <span class="k">auto</span> <span class="n">logicalEpochStr</span> <span class="o">=</span> <span class="n">options</span><span class="o">-&gt;</span><span class="n">get</span><span class="o">&lt;</span><span class="n">std</span><span class="o">::</span><span class="n">vector</span><span class="o">&lt;</span><span class="n">std</span><span class="o">::</span><span class="n">string</span><span class="o">&gt;&gt;</span><span class="p">(</span><span class="s">&quot;logical-epoch&quot;</span><span class="p">,</span> <span class="p">{</span><span class="s">&quot;1e&quot;</span><span class="p">,</span> <span class="s">&quot;0&quot;</span><span class="p">});</span>
@@ -346,8 +344,10 @@
       <span class="kt">size_t</span> <span class="n">progress</span> <span class="o">=</span> <span class="n">state_</span><span class="o">-&gt;</span><span class="n">getProgressIn</span><span class="p">(</span><span class="n">mbWarmup</span><span class="p">.</span><span class="n">unit</span><span class="p">);</span> <span class="c1">// number of updates/labels processed</span>
       <span class="k">auto</span> <span class="n">progressRatio</span> <span class="o">=</span> <span class="p">(</span><span class="kt">double</span><span class="p">)</span><span class="n">progress</span> <span class="o">/</span> <span class="p">(</span><span class="kt">double</span><span class="p">)</span><span class="n">mbWarmup</span><span class="p">.</span><span class="n">n</span><span class="p">;</span> <span class="c1">// where are we relatively within target warm-up period</span>
       <span class="c1">// if unit is labels, then account for the fact that our increment itself is not constant</span>
+<span class="cp">#if 1  </span><span class="c1">// this seems to hurt convergence quite a bit compared to when updates is used</span>
       <span class="k">if</span> <span class="p">(</span><span class="n">mbWarmup</span><span class="p">.</span><span class="n">unit</span> <span class="o">==</span> <span class="n">SchedulingUnit</span><span class="o">::</span><span class="n">trgLabels</span><span class="p">)</span>
         <span class="n">progressRatio</span> <span class="o">=</span> <span class="n">std</span><span class="o">::</span><span class="n">sqrt</span><span class="p">(</span><span class="n">progressRatio</span><span class="p">);</span>
+<span class="cp">#endif</span>
       <span class="k">if</span> <span class="p">(</span><span class="n">progressRatio</span> <span class="o">&lt;</span> <span class="mi">1</span><span class="p">)</span>
         <span class="n">ratio</span> <span class="o">*=</span> <span class="n">progressRatio</span><span class="p">;</span>
     <span class="p">}</span>
@@ -356,12 +356,21 @@
     <span class="c1">// As LR goes down, MB gets ramped up by the same ratio, which has been found to be safe.</span>
     <span class="k">auto</span> <span class="n">mbTracking</span> <span class="o">=</span> <span class="n">options_</span><span class="o">-&gt;</span><span class="n">get</span><span class="o">&lt;</span><span class="kt">bool</span><span class="o">&gt;</span><span class="p">(</span><span class="s">&quot;mini-batch-track-lr&quot;</span><span class="p">);</span>
     <span class="k">if</span> <span class="p">(</span><span class="n">mbTracking</span><span class="p">)</span> <span class="p">{</span>
+      <span class="n">ABORT</span><span class="p">(</span><span class="s">&quot;Please review this code&quot;</span><span class="p">);</span>
       <span class="k">auto</span> <span class="n">lrFactor</span> <span class="o">=</span> <span class="n">getScheduledLRDecayFactor</span><span class="p">(</span><span class="o">*</span><span class="n">state_</span><span class="p">)</span> <span class="o">*</span> <span class="n">state_</span><span class="o">-&gt;</span><span class="n">factor</span><span class="p">;</span> <span class="c1">// (don&#39;t include lr-warmup)</span>
       <span class="k">if</span> <span class="p">(</span><span class="n">lrFactor</span> <span class="o">!=</span> <span class="mi">1</span><span class="p">)</span>
         <span class="n">LOG_ONCE</span><span class="p">(</span><span class="n">info</span><span class="p">,</span> <span class="s">&quot;[scheduler] Dynamic mini-batch size adjustment enabled and kicking in&quot;</span><span class="p">);</span>
       <span class="n">ratio</span> <span class="o">/=</span> <span class="n">lrFactor</span><span class="p">;</span>
     <span class="p">}</span>
     <span class="k">return</span> <span class="n">ratio</span><span class="p">;</span>
+  <span class="p">}</span>
+
+  <span class="n">std</span><span class="o">::</span><span class="n">tuple</span><span class="o">&lt;</span><span class="kt">size_t</span><span class="p">,</span> <span class="kt">float</span><span class="p">,</span> <span class="kt">float</span><span class="o">&gt;</span> <span class="n">getGradientNormStats</span><span class="p">()</span> <span class="k">const</span> <span class="p">{</span>
+    <span class="k">return</span> <span class="n">std</span><span class="o">::</span><span class="n">make_tuple</span><span class="p">(</span><span class="n">gradientNormAvgWindow_</span><span class="p">,</span> <span class="n">state_</span><span class="o">-&gt;</span><span class="n">gradientNormAvg</span><span class="p">,</span> <span class="n">state_</span><span class="o">-&gt;</span><span class="n">gradientNormVar</span><span class="p">);</span>
+  <span class="p">}</span>
+
+  <span class="n">std</span><span class="o">::</span><span class="n">tuple</span><span class="o">&lt;</span><span class="kt">size_t</span><span class="p">,</span> <span class="kt">float</span><span class="p">,</span> <span class="kt">float</span><span class="o">&gt;</span> <span class="n">getLogGradientNormStats</span><span class="p">()</span> <span class="k">const</span> <span class="p">{</span>
+    <span class="k">return</span> <span class="n">std</span><span class="o">::</span><span class="n">make_tuple</span><span class="p">(</span><span class="n">gradientNormAvgWindow_</span><span class="p">,</span> <span class="n">state_</span><span class="o">-&gt;</span><span class="n">logGradientNormAvg</span><span class="p">,</span> <span class="n">state_</span><span class="o">-&gt;</span><span class="n">logGradientNormVar</span><span class="p">);</span>
   <span class="p">}</span>
 
   <span class="kt">bool</span> <span class="n">keepGoing</span><span class="p">()</span> <span class="p">{</span>
@@ -406,7 +415,7 @@
   <span class="p">}</span>
 
   <span class="kt">void</span> <span class="n">increaseEpoch</span><span class="p">()</span> <span class="p">{</span>
-    <span class="n">LOG</span><span class="p">(</span><span class="n">info</span><span class="p">,</span> <span class="s">&quot;Seen {} samples&quot;</span><span class="p">,</span> <span class="n">state_</span><span class="o">-&gt;</span><span class="n">samplesEpoch</span><span class="p">);</span>
+    <span class="n">LOG</span><span class="p">(</span><span class="n">info</span><span class="p">,</span> <span class="s">&quot;Seen {} samples&quot;</span><span class="p">,</span> <span class="n">utils</span><span class="o">::</span><span class="n">withCommas</span><span class="p">(</span><span class="n">state_</span><span class="o">-&gt;</span><span class="n">samplesEpoch</span><span class="p">));</span>
     <span class="n">state_</span><span class="o">-&gt;</span><span class="n">newEpoch</span><span class="p">();</span>
     <span class="k">if</span><span class="p">(</span><span class="n">std</span><span class="o">::</span><span class="n">to_string</span><span class="p">(</span><span class="n">logicalEpoch_</span><span class="p">)</span> <span class="o">==</span> <span class="s">&quot;1e&quot;</span><span class="p">)</span>
       <span class="n">LOG</span><span class="p">(</span><span class="n">info</span><span class="p">,</span> <span class="s">&quot;Starting epoch {}&quot;</span><span class="p">,</span> <span class="n">state_</span><span class="o">-&gt;</span><span class="n">epochs</span><span class="p">);</span>
@@ -444,6 +453,10 @@
     <span class="k">return</span> <span class="n">state_</span><span class="o">-&gt;</span><span class="n">enteredNewPeriodOf</span><span class="p">(</span><span class="n">options_</span><span class="o">-&gt;</span><span class="n">get</span><span class="o">&lt;</span><span class="n">std</span><span class="o">::</span><span class="n">string</span><span class="o">&gt;</span><span class="p">(</span><span class="s">&quot;save-freq&quot;</span><span class="p">));</span>
   <span class="p">}</span>
 
+  <span class="kt">bool</span> <span class="n">syncing</span><span class="p">()</span> <span class="p">{</span>
+    <span class="k">return</span> <span class="n">state_</span><span class="o">-&gt;</span><span class="n">enteredNewPeriodOf</span><span class="p">(</span><span class="n">options_</span><span class="o">-&gt;</span><span class="n">get</span><span class="o">&lt;</span><span class="n">std</span><span class="o">::</span><span class="n">string</span><span class="o">&gt;</span><span class="p">(</span><span class="s">&quot;sync-freq&quot;</span><span class="p">,</span> <span class="s">&quot;0&quot;</span><span class="p">));</span>
+  <span class="p">}</span>
+
   <span class="kt">void</span> <span class="n">validate</span><span class="p">(</span><span class="k">const</span> <span class="n">std</span><span class="o">::</span><span class="n">vector</span><span class="o">&lt;</span><span class="n">Ptr</span><span class="o">&lt;</span><span class="n">ExpressionGraph</span><span class="o">&gt;&gt;&amp;</span> <span class="n">graphs</span><span class="p">,</span>
                 <span class="kt">bool</span> <span class="n">isFinal</span> <span class="o">=</span> <span class="nb">false</span><span class="p">)</span> <span class="p">{</span>
     <span class="c1">// Do not validate if already validated (for instance, after the model is loaded)</span>
@@ -460,30 +473,44 @@
         <span class="k">continue</span><span class="p">;</span>
 
       <span class="kt">size_t</span> <span class="n">stalledPrev</span> <span class="o">=</span> <span class="n">validator</span><span class="o">-&gt;</span><span class="n">stalled</span><span class="p">();</span>
-      <span class="kt">float</span> <span class="n">value</span> <span class="o">=</span> <span class="n">validator</span><span class="o">-&gt;</span><span class="n">validate</span><span class="p">(</span><span class="n">graphs</span><span class="p">,</span> <span class="n">state_</span><span class="p">);</span>
-      <span class="k">if</span><span class="p">(</span><span class="n">validator</span><span class="o">-&gt;</span><span class="n">stalled</span><span class="p">()</span> <span class="o">&gt;</span> <span class="mi">0</span><span class="p">)</span> <span class="p">{</span>
-        <span class="n">LOG_VALID</span><span class="p">(</span><span class="n">info</span><span class="p">,</span>
-                  <span class="s">&quot;Ep. {} : Up. {} : {} : {} : stalled {} times (last best: {})&quot;</span><span class="p">,</span>
-                  <span class="n">formatLogicalEpoch</span><span class="p">(),</span>
-                  <span class="n">state_</span><span class="o">-&gt;</span><span class="n">batches</span><span class="p">,</span>
-                  <span class="n">validator</span><span class="o">-&gt;</span><span class="n">type</span><span class="p">(),</span>
-                  <span class="n">value</span><span class="p">,</span>
-                  <span class="n">validator</span><span class="o">-&gt;</span><span class="n">stalled</span><span class="p">(),</span> <span class="n">validator</span><span class="o">-&gt;</span><span class="n">lastBest</span><span class="p">());</span>
-      <span class="p">}</span> <span class="k">else</span> <span class="p">{</span>
-        <span class="n">LOG_VALID</span><span class="p">(</span><span class="n">info</span><span class="p">,</span>
-                  <span class="s">&quot;Ep. {} : Up. {} : {} : {} : new best&quot;</span><span class="p">,</span>
-                  <span class="n">formatLogicalEpoch</span><span class="p">(),</span>
-                  <span class="n">state_</span><span class="o">-&gt;</span><span class="n">batches</span><span class="p">,</span>
-                  <span class="n">validator</span><span class="o">-&gt;</span><span class="n">type</span><span class="p">(),</span>
-                  <span class="n">value</span><span class="p">);</span>
-
-        <span class="k">if</span><span class="p">(</span><span class="n">firstValidator</span><span class="p">)</span>
-          <span class="n">state_</span><span class="o">-&gt;</span><span class="n">validBest</span> <span class="o">=</span> <span class="n">value</span><span class="p">;</span>
+      <span class="kt">float</span> <span class="n">value</span> <span class="o">=</span> <span class="mi">0</span><span class="p">;</span>
+      <span class="k">if</span><span class="p">(</span><span class="o">!</span><span class="n">mpi_</span> <span class="o">||</span> <span class="n">mpi_</span><span class="o">-&gt;</span><span class="n">isMainProcess</span><span class="p">())</span> <span class="p">{</span>
+        <span class="c1">// We run validation only in the main process, but this is risky with MPI.</span>
+        <span class="c1">// Validators might modify random state etc., maybe we should run validators</span>
+        <span class="c1">// everywhere, but not report and not save on the other processes.</span>
+        <span class="n">value</span> <span class="o">=</span> <span class="n">validator</span><span class="o">-&gt;</span><span class="n">validate</span><span class="p">(</span><span class="n">graphs</span><span class="p">,</span> <span class="n">state_</span><span class="p">);</span>
+        <span class="k">if</span><span class="p">(</span><span class="n">validator</span><span class="o">-&gt;</span><span class="n">stalled</span><span class="p">()</span> <span class="o">&gt;</span> <span class="mi">0</span><span class="p">)</span> <span class="p">{</span>
+          <span class="n">LOG_VALID</span><span class="p">(</span><span class="n">info</span><span class="p">,</span>
+                    <span class="s">&quot;Ep. {} : Up. {} : {} : {} : stalled {} times (last best: {})&quot;</span><span class="p">,</span>
+                    <span class="n">formatLogicalEpoch</span><span class="p">(),</span>
+                    <span class="n">state_</span><span class="o">-&gt;</span><span class="n">batches</span><span class="p">,</span>
+                    <span class="n">validator</span><span class="o">-&gt;</span><span class="n">type</span><span class="p">(),</span>
+                    <span class="n">value</span><span class="p">,</span>
+                    <span class="n">validator</span><span class="o">-&gt;</span><span class="n">stalled</span><span class="p">(),</span> <span class="n">validator</span><span class="o">-&gt;</span><span class="n">lastBest</span><span class="p">());</span>
+        <span class="p">}</span> <span class="k">else</span> <span class="p">{</span>
+          <span class="n">LOG_VALID</span><span class="p">(</span><span class="n">info</span><span class="p">,</span>
+                    <span class="s">&quot;Ep. {} : Up. {} : {} : {} : new best&quot;</span><span class="p">,</span>
+                    <span class="n">formatLogicalEpoch</span><span class="p">(),</span>
+                    <span class="n">state_</span><span class="o">-&gt;</span><span class="n">batches</span><span class="p">,</span>
+                    <span class="n">validator</span><span class="o">-&gt;</span><span class="n">type</span><span class="p">(),</span>
+                    <span class="n">value</span><span class="p">);</span>
+        <span class="p">}</span>
       <span class="p">}</span>
 
-      <span class="n">state_</span><span class="o">-&gt;</span><span class="n">validators</span><span class="p">[</span><span class="n">validator</span><span class="o">-&gt;</span><span class="n">type</span><span class="p">()][</span><span class="s">&quot;last-best&quot;</span><span class="p">]</span>
-          <span class="o">=</span> <span class="n">validator</span><span class="o">-&gt;</span><span class="n">lastBest</span><span class="p">();</span>
-      <span class="n">state_</span><span class="o">-&gt;</span><span class="n">validators</span><span class="p">[</span><span class="n">validator</span><span class="o">-&gt;</span><span class="n">type</span><span class="p">()][</span><span class="s">&quot;stalled&quot;</span><span class="p">]</span> <span class="o">=</span> <span class="n">validator</span><span class="o">-&gt;</span><span class="n">stalled</span><span class="p">();</span>
+      <span class="k">if</span><span class="p">(</span><span class="n">mpi_</span><span class="p">)</span> <span class="p">{</span>
+        <span class="c1">// collect and broadcast validation result to all processes and bring validator up-to-date</span>
+        <span class="n">mpi_</span><span class="o">-&gt;</span><span class="n">bCast</span><span class="p">(</span><span class="o">&amp;</span><span class="n">value</span><span class="p">,</span> <span class="mi">1</span><span class="p">,</span> <span class="n">IMPIWrapper</span><span class="o">::</span><span class="n">getDataType</span><span class="p">(</span><span class="o">&amp;</span><span class="n">value</span><span class="p">));</span>
+
+        <span class="c1">// @TODO: add function to validator?</span>
+        <span class="n">mpi_</span><span class="o">-&gt;</span><span class="n">bCast</span><span class="p">(</span><span class="o">&amp;</span><span class="n">validator</span><span class="o">-&gt;</span><span class="n">stalled</span><span class="p">(),</span> <span class="mi">1</span><span class="p">,</span> <span class="n">IMPIWrapper</span><span class="o">::</span><span class="n">getDataType</span><span class="p">(</span><span class="o">&amp;</span><span class="n">validator</span><span class="o">-&gt;</span><span class="n">stalled</span><span class="p">()));</span>
+        <span class="n">mpi_</span><span class="o">-&gt;</span><span class="n">bCast</span><span class="p">(</span><span class="o">&amp;</span><span class="n">validator</span><span class="o">-&gt;</span><span class="n">lastBest</span><span class="p">(),</span> <span class="mi">1</span><span class="p">,</span> <span class="n">IMPIWrapper</span><span class="o">::</span><span class="n">getDataType</span><span class="p">(</span><span class="o">&amp;</span><span class="n">validator</span><span class="o">-&gt;</span><span class="n">lastBest</span><span class="p">()));</span>
+      <span class="p">}</span>
+
+      <span class="k">if</span><span class="p">(</span><span class="n">firstValidator</span><span class="p">)</span>
+        <span class="n">state_</span><span class="o">-&gt;</span><span class="n">validBest</span> <span class="o">=</span> <span class="n">value</span><span class="p">;</span>
+
+      <span class="n">state_</span><span class="o">-&gt;</span><span class="n">validators</span><span class="p">[</span><span class="n">validator</span><span class="o">-&gt;</span><span class="n">type</span><span class="p">()][</span><span class="s">&quot;last-best&quot;</span><span class="p">]</span> <span class="o">=</span> <span class="n">validator</span><span class="o">-&gt;</span><span class="n">lastBest</span><span class="p">();</span>
+      <span class="n">state_</span><span class="o">-&gt;</span><span class="n">validators</span><span class="p">[</span><span class="n">validator</span><span class="o">-&gt;</span><span class="n">type</span><span class="p">()][</span><span class="s">&quot;stalled&quot;</span><span class="p">]</span>   <span class="o">=</span> <span class="n">validator</span><span class="o">-&gt;</span><span class="n">stalled</span><span class="p">();</span>
 
       <span class="c1">// notify training observers if the first validator did not improve</span>
       <span class="k">if</span><span class="p">(</span><span class="n">firstValidator</span> <span class="o">&amp;&amp;</span> <span class="n">validator</span><span class="o">-&gt;</span><span class="n">stalled</span><span class="p">()</span> <span class="o">&gt;</span> <span class="n">stalledPrev</span><span class="p">)</span>
@@ -502,7 +529,7 @@
   <span class="p">}</span>
 
   <span class="kt">void</span> <span class="n">update</span><span class="p">(</span><span class="n">StaticLoss</span> <span class="n">rationalLoss</span><span class="p">,</span> <span class="n">Ptr</span><span class="o">&lt;</span><span class="n">data</span><span class="o">::</span><span class="n">Batch</span><span class="o">&gt;</span> <span class="n">batch</span><span class="p">)</span> <span class="p">{</span>
-    <span class="n">update</span><span class="p">(</span><span class="n">rationalLoss</span><span class="p">,</span> <span class="cm">/*numReadBatches=*/</span><span class="mi">1</span><span class="p">,</span> <span class="cm">/*batchSize=*/</span><span class="n">batch</span><span class="o">-&gt;</span><span class="n">size</span><span class="p">(),</span> <span class="cm">/*batchLabels=*/</span><span class="n">batch</span><span class="o">-&gt;</span><span class="n">wordsTrg</span><span class="p">());</span>
+    <span class="n">update</span><span class="p">(</span><span class="n">rationalLoss</span><span class="p">,</span> <span class="cm">/*numReadBatches=*/</span><span class="mi">1</span><span class="p">,</span> <span class="cm">/*batchSize=*/</span><span class="n">batch</span><span class="o">-&gt;</span><span class="n">size</span><span class="p">(),</span> <span class="cm">/*batchLabels=*/</span><span class="n">batch</span><span class="o">-&gt;</span><span class="n">wordsTrg</span><span class="p">(),</span> <span class="cm">/*gradientNorm=*/</span><span class="mf">0.f</span><span class="p">);</span>
   <span class="p">}</span>
 
   <span class="c1">// @TODO: go back to function which takes batch as an argument? The current arguments make it hard</span>
@@ -512,7 +539,7 @@
               <span class="kt">size_t</span> <span class="n">numReadBatches</span><span class="p">,</span> <span class="c1">// number of batches read by the reader (for seeking in case of restart)</span>
               <span class="kt">size_t</span> <span class="n">batchSize</span><span class="p">,</span>      <span class="c1">// total number of sentences in batch</span>
               <span class="kt">size_t</span> <span class="n">batchLabels</span><span class="p">,</span>    <span class="c1">// total number of target words in batch</span>
-              <span class="n">Ptr</span><span class="o">&lt;</span><span class="n">IMPIWrapper</span><span class="o">&gt;</span> <span class="n">mpi</span> <span class="o">=</span> <span class="k">nullptr</span><span class="p">)</span> <span class="p">{</span>
+              <span class="kt">float</span> <span class="n">gradientNorm</span><span class="p">)</span> <span class="p">{</span>  <span class="c1">// gradientNorm of update</span>
     <span class="n">state_</span><span class="o">-&gt;</span><span class="n">rememberPreviousProgress</span><span class="p">();</span>  <span class="c1">// note: epoch increases happen at the wrong place, hence</span>
                                          <span class="c1">// -freq parameters do not support epoch units</span>
     <span class="n">state_</span><span class="o">-&gt;</span><span class="n">validated</span> <span class="o">=</span> <span class="nb">false</span><span class="p">;</span>
@@ -520,58 +547,74 @@
     <span class="c1">// Since batchLabels is counted across all MPI processes, we also should temporarily</span>
     <span class="c1">// extrapolate cost across MPI processes, to have numbers in the right range.</span>
     <span class="c1">// When doing the actual log, we then aggregate across MPI processes to get the accurate number.</span>
-    <span class="k">if</span><span class="p">(</span><span class="n">mpi</span><span class="p">)</span>
-      <span class="n">rationalLoss</span><span class="p">.</span><span class="n">loss</span> <span class="o">*=</span> <span class="n">mpi</span><span class="o">-&gt;</span><span class="n">numMPIProcesses</span><span class="p">();</span>
+    <span class="k">if</span><span class="p">(</span><span class="n">mpi_</span><span class="p">)</span> <span class="p">{</span>
+      <span class="n">rationalLoss</span><span class="p">.</span><span class="n">loss</span>  <span class="o">*=</span> <span class="n">mpi_</span><span class="o">-&gt;</span><span class="n">numMPIProcesses</span><span class="p">();</span>
+      <span class="n">rationalLoss</span><span class="p">.</span><span class="n">count</span> <span class="o">*=</span> <span class="n">mpi_</span><span class="o">-&gt;</span><span class="n">numMPIProcesses</span><span class="p">();</span>
+    <span class="p">}</span>
 
     <span class="c1">// @BUGBUG: rationalLoss.count is float, not a count. Possible solution: make (costSum, costCount) a StaticLoss object as well</span>
     <span class="n">state_</span><span class="o">-&gt;</span><span class="n">costSum</span>      <span class="o">+=</span> <span class="n">rationalLoss</span><span class="p">.</span><span class="n">loss</span><span class="p">;</span>   <span class="c1">// aggregate sum cost since last display</span>
-    <span class="n">state_</span><span class="o">-&gt;</span><span class="n">costCount</span>    <span class="o">+=</span> <span class="p">(</span><span class="kt">size_t</span><span class="p">)</span><span class="n">rationalLoss</span><span class="p">.</span><span class="n">count</span><span class="p">;</span> <span class="c1">// cost gets normalized w.r.t. this in display</span>
+    <span class="n">state_</span><span class="o">-&gt;</span><span class="n">costCount</span>    <span class="o">+=</span> <span class="n">rationalLoss</span><span class="p">.</span><span class="n">count</span><span class="p">;</span> <span class="c1">// cost gets normalized w.r.t. this in display</span>
 
     <span class="n">state_</span><span class="o">-&gt;</span><span class="n">updatesDisp</span>  <span class="o">+=</span> <span class="mi">1</span><span class="p">;</span>
     <span class="n">state_</span><span class="o">-&gt;</span><span class="n">samplesDisp</span>  <span class="o">+=</span> <span class="n">batchSize</span><span class="p">;</span>
-    <span class="n">state_</span><span class="o">-&gt;</span><span class="n">wordsDisp</span>    <span class="o">+=</span> <span class="n">batchLabels</span><span class="p">;</span>  <span class="c1">//@TODO: this is wrong        // words at given input processed since last display, for speed display</span>
+    <span class="n">state_</span><span class="o">-&gt;</span><span class="n">wordsDisp</span>    <span class="o">+=</span> <span class="n">batchLabels</span><span class="p">;</span> <span class="c1">// words at given input processed since last display, for speed display</span>
 
-    <span class="n">state_</span><span class="o">-&gt;</span><span class="n">samplesEpoch</span> <span class="o">+=</span> <span class="n">batchSize</span><span class="p">;</span>          <span class="c1">// sentences processed in this epoch</span>
-    <span class="c1">// @BUGBUG: rationalLoss.count is float, not a count</span>
-    <span class="n">state_</span><span class="o">-&gt;</span><span class="n">labelsTotal</span>  <span class="o">+=</span> <span class="p">(</span><span class="kt">size_t</span><span class="p">)</span><span class="n">rationalLoss</span><span class="p">.</span><span class="n">count</span><span class="p">;</span> <span class="c1">// total labels processed</span>
+    <span class="n">state_</span><span class="o">-&gt;</span><span class="n">samplesEpoch</span> <span class="o">+=</span> <span class="n">batchSize</span><span class="p">;</span>   <span class="c1">// sentences processed in this epoch</span>
+    <span class="n">state_</span><span class="o">-&gt;</span><span class="n">labelsTotal</span>  <span class="o">+=</span> <span class="n">batchLabels</span><span class="p">;</span> <span class="c1">// total labels processed</span>
 
     <span class="n">state_</span><span class="o">-&gt;</span><span class="n">newUpdate</span><span class="p">(</span><span class="n">numReadBatches</span><span class="p">);</span>
+
+    <span class="k">if</span><span class="p">(</span><span class="n">gradientNorm</span><span class="p">)</span> <span class="p">{</span>
+      <span class="kt">size_t</span> <span class="n">range</span> <span class="o">=</span> <span class="n">std</span><span class="o">::</span><span class="n">min</span><span class="p">(</span><span class="n">gradientNormAvgWindow_</span><span class="p">,</span> <span class="n">state_</span><span class="o">-&gt;</span><span class="n">batches</span><span class="p">);</span>
+      <span class="kt">float</span> <span class="n">alpha</span> <span class="o">=</span> <span class="mf">2.f</span> <span class="o">/</span> <span class="p">(</span><span class="kt">float</span><span class="p">)(</span><span class="n">range</span> <span class="o">+</span> <span class="mi">1</span><span class="p">);</span>
+
+      <span class="kt">float</span> <span class="n">delta</span> <span class="o">=</span> <span class="n">gradientNorm</span> <span class="o">-</span> <span class="n">state_</span><span class="o">-&gt;</span><span class="n">gradientNormAvg</span><span class="p">;</span>
+      <span class="n">state_</span><span class="o">-&gt;</span><span class="n">gradientNormAvg</span> <span class="o">=</span> <span class="n">state_</span><span class="o">-&gt;</span><span class="n">gradientNormAvg</span> <span class="o">+</span> <span class="n">alpha</span> <span class="o">*</span> <span class="n">delta</span><span class="p">;</span>
+      <span class="n">state_</span><span class="o">-&gt;</span><span class="n">gradientNormVar</span> <span class="o">=</span> <span class="p">(</span><span class="mf">1.0f</span> <span class="o">-</span> <span class="n">alpha</span><span class="p">)</span> <span class="o">*</span> <span class="p">(</span><span class="n">state_</span><span class="o">-&gt;</span><span class="n">gradientNormVar</span> <span class="o">+</span> <span class="n">alpha</span> <span class="o">*</span> <span class="n">delta</span> <span class="o">*</span> <span class="n">delta</span><span class="p">);</span>
+
+      <span class="kt">float</span> <span class="n">logDelta</span> <span class="o">=</span> <span class="n">std</span><span class="o">::</span><span class="n">log</span><span class="p">(</span><span class="n">gradientNorm</span><span class="p">)</span> <span class="o">-</span> <span class="n">state_</span><span class="o">-&gt;</span><span class="n">logGradientNormAvg</span><span class="p">;</span>
+      <span class="n">state_</span><span class="o">-&gt;</span><span class="n">logGradientNormAvg</span> <span class="o">=</span> <span class="n">state_</span><span class="o">-&gt;</span><span class="n">logGradientNormAvg</span> <span class="o">+</span> <span class="n">alpha</span> <span class="o">*</span> <span class="n">logDelta</span><span class="p">;</span>
+      <span class="n">state_</span><span class="o">-&gt;</span><span class="n">logGradientNormVar</span> <span class="o">=</span> <span class="p">(</span><span class="mf">1.0f</span> <span class="o">-</span> <span class="n">alpha</span><span class="p">)</span> <span class="o">*</span> <span class="p">(</span><span class="n">state_</span><span class="o">-&gt;</span><span class="n">logGradientNormVar</span> <span class="o">+</span> <span class="n">alpha</span> <span class="o">*</span> <span class="n">logDelta</span> <span class="o">*</span> <span class="n">logDelta</span><span class="p">);</span>
+    <span class="p">}</span>
 
     <span class="c1">// reconstruct sum cost, for displaying epoch-level averages instead of minibatch-level</span>
     <span class="k">auto</span> <span class="n">lossType</span> <span class="o">=</span> <span class="n">options_</span><span class="o">-&gt;</span><span class="n">get</span><span class="o">&lt;</span><span class="n">std</span><span class="o">::</span><span class="n">string</span><span class="o">&gt;</span><span class="p">(</span><span class="s">&quot;cost-type&quot;</span><span class="p">);</span>
     <span class="k">auto</span> <span class="n">dispLabelCounts</span> <span class="o">=</span> <span class="n">options_</span><span class="o">-&gt;</span><span class="n">get</span><span class="o">&lt;</span><span class="kt">bool</span><span class="o">&gt;</span><span class="p">(</span><span class="s">&quot;disp-label-counts&quot;</span><span class="p">);</span>  <span class="c1">// if true then show as &quot;cost per label * number of labels&quot;</span>
 
-    <span class="k">if</span><span class="p">(</span><span class="n">state_</span><span class="o">-&gt;</span><span class="n">enteredNewPeriodOf</span><span class="p">(</span><span class="n">options_</span><span class="o">-&gt;</span><span class="n">get</span><span class="o">&lt;</span><span class="n">std</span><span class="o">::</span><span class="n">string</span><span class="o">&gt;</span><span class="p">(</span><span class="s">&quot;disp-freq&quot;</span><span class="p">))</span> <span class="o">||</span>
-       <span class="n">state_</span><span class="o">-&gt;</span><span class="n">batches</span> <span class="o">&lt;=</span> <span class="n">options_</span><span class="o">-&gt;</span><span class="n">get</span><span class="o">&lt;</span><span class="kt">size_t</span><span class="o">&gt;</span><span class="p">(</span><span class="s">&quot;disp-first&quot;</span><span class="p">))</span> <span class="p">{</span>
+    <span class="k">if</span><span class="p">(</span><span class="n">state_</span><span class="o">-&gt;</span><span class="n">enteredNewPeriodOf</span><span class="p">(</span><span class="n">options_</span><span class="o">-&gt;</span><span class="n">get</span><span class="o">&lt;</span><span class="n">std</span><span class="o">::</span><span class="n">string</span><span class="o">&gt;</span><span class="p">(</span><span class="s">&quot;disp-freq&quot;</span><span class="p">))</span> <span class="o">||</span> <span class="n">state_</span><span class="o">-&gt;</span><span class="n">batches</span> <span class="o">&lt;=</span> <span class="n">options_</span><span class="o">-&gt;</span><span class="n">get</span><span class="o">&lt;</span><span class="kt">size_t</span><span class="o">&gt;</span><span class="p">(</span><span class="s">&quot;disp-first&quot;</span><span class="p">))</span> <span class="p">{</span>
       <span class="c1">// if MPI then aggregate precise cost across workers</span>
-      <span class="k">if</span><span class="p">(</span><span class="n">mpi</span><span class="p">)</span> <span class="p">{</span>
-        <span class="n">state_</span><span class="o">-&gt;</span><span class="n">costSum</span> <span class="o">/=</span> <span class="n">mpi</span><span class="o">-&gt;</span><span class="n">numMPIProcesses</span><span class="p">();</span> <span class="c1">// undo the extra scaling</span>
-        <span class="n">mpi</span><span class="o">-&gt;</span><span class="n">allReduce</span><span class="p">(</span><span class="o">&amp;</span><span class="n">state_</span><span class="o">-&gt;</span><span class="n">costSum</span><span class="p">,</span> <span class="o">&amp;</span><span class="n">state_</span><span class="o">-&gt;</span><span class="n">costSum</span><span class="p">,</span> <span class="mi">1</span><span class="p">,</span> <span class="n">MPI_FLOAT</span><span class="p">,</span> <span class="n">MPI_SUM</span><span class="p">);</span>
+      <span class="k">if</span><span class="p">(</span><span class="n">mpi_</span><span class="p">)</span> <span class="p">{</span>
+        <span class="n">state_</span><span class="o">-&gt;</span><span class="n">costSum</span>   <span class="o">/=</span> <span class="n">mpi_</span><span class="o">-&gt;</span><span class="n">numMPIProcesses</span><span class="p">();</span> <span class="c1">// undo the extra scaling</span>
+        <span class="n">state_</span><span class="o">-&gt;</span><span class="n">costCount</span> <span class="o">/=</span> <span class="n">mpi_</span><span class="o">-&gt;</span><span class="n">numMPIProcesses</span><span class="p">();</span> <span class="c1">// undo the extra scaling</span>
+        <span class="n">mpi_</span><span class="o">-&gt;</span><span class="n">allReduce</span><span class="p">(</span><span class="o">&amp;</span><span class="n">state_</span><span class="o">-&gt;</span><span class="n">costSum</span><span class="p">,</span> <span class="o">&amp;</span><span class="n">state_</span><span class="o">-&gt;</span><span class="n">costSum</span><span class="p">,</span> <span class="mi">1</span><span class="p">,</span> <span class="n">MPI_FLOAT</span><span class="p">,</span> <span class="n">MPI_SUM</span><span class="p">);</span>
+        <span class="n">mpi_</span><span class="o">-&gt;</span><span class="n">allReduce</span><span class="p">(</span><span class="o">&amp;</span><span class="n">state_</span><span class="o">-&gt;</span><span class="n">costCount</span><span class="p">,</span> <span class="o">&amp;</span><span class="n">state_</span><span class="o">-&gt;</span><span class="n">costCount</span><span class="p">,</span> <span class="mi">1</span><span class="p">,</span> <span class="n">MPI_FLOAT</span><span class="p">,</span> <span class="n">MPI_SUM</span><span class="p">);</span>
       <span class="p">}</span>
 
-      <span class="k">if</span><span class="p">(</span><span class="n">mpi</span> <span class="o">&amp;&amp;</span> <span class="n">mpi</span><span class="o">-&gt;</span><span class="n">myMPIRank</span><span class="p">()</span> <span class="o">!=</span> <span class="mi">0</span><span class="p">)</span> <span class="p">{</span>
+      <span class="k">if</span><span class="p">(</span><span class="n">mpi_</span> <span class="o">&amp;&amp;</span> <span class="n">mpi_</span><span class="o">-&gt;</span><span class="n">myMPIRank</span><span class="p">()</span> <span class="o">!=</span> <span class="mi">0</span><span class="p">)</span> <span class="p">{</span>
         <span class="c1">// skip the report on alternate worker processes</span>
       <span class="p">}</span> <span class="k">else</span> <span class="k">if</span><span class="p">(</span><span class="n">options_</span><span class="o">-&gt;</span><span class="n">get</span><span class="o">&lt;</span><span class="kt">bool</span><span class="o">&gt;</span><span class="p">(</span><span class="s">&quot;lr-report&quot;</span><span class="p">))</span> <span class="p">{</span>
         <span class="n">LOG</span><span class="p">(</span><span class="n">info</span><span class="p">,</span>
-            <span class="s">&quot;Ep. {} : Up. {} : Sen. {} : {} : Time {:.2f}s : {:.2f} words/s : L.r. {:.4e}&quot;</span><span class="p">,</span>
+            <span class="s">&quot;Ep. {} : Up. {} : Sen. {} : {} : Time {:.2f}s : {:.2f} words/s : gNorm {:.4f} : L.r. {:.4e}&quot;</span><span class="p">,</span>
             <span class="n">formatLogicalEpoch</span><span class="p">(),</span>
             <span class="n">state_</span><span class="o">-&gt;</span><span class="n">batches</span><span class="p">,</span>
             <span class="n">utils</span><span class="o">::</span><span class="n">withCommas</span><span class="p">(</span><span class="n">state_</span><span class="o">-&gt;</span><span class="n">samplesEpoch</span><span class="p">),</span>
             <span class="n">formatLoss</span><span class="p">(</span><span class="n">lossType</span><span class="p">,</span> <span class="n">dispLabelCounts</span><span class="p">,</span> <span class="n">batchLabels</span><span class="p">,</span> <span class="n">state_</span><span class="p">),</span>
             <span class="n">timer_</span><span class="p">.</span><span class="n">elapsed</span><span class="p">(),</span>
             <span class="n">state_</span><span class="o">-&gt;</span><span class="n">wordsDisp</span> <span class="o">/</span> <span class="n">timer_</span><span class="p">.</span><span class="n">elapsed</span><span class="p">(),</span>
+            <span class="n">state_</span><span class="o">-&gt;</span><span class="n">gradientNormAvg</span><span class="p">,</span>
             <span class="n">state_</span><span class="o">-&gt;</span><span class="n">eta</span><span class="p">);</span>
       <span class="p">}</span> <span class="k">else</span> <span class="p">{</span>
         <span class="n">LOG</span><span class="p">(</span><span class="n">info</span><span class="p">,</span>
-            <span class="s">&quot;Ep. {} : Up. {} : Sen. {} : {} : Time {:.2f}s : {:.2f} words/s&quot;</span><span class="p">,</span>
+            <span class="s">&quot;Ep. {} : Up. {} : Sen. {} : {} : Time {:.2f}s : {:.2f} words/s : gNorm {:.4f}&quot;</span><span class="p">,</span>
             <span class="n">formatLogicalEpoch</span><span class="p">(),</span>
             <span class="n">state_</span><span class="o">-&gt;</span><span class="n">batches</span><span class="p">,</span>
             <span class="n">utils</span><span class="o">::</span><span class="n">withCommas</span><span class="p">(</span><span class="n">state_</span><span class="o">-&gt;</span><span class="n">samplesEpoch</span><span class="p">),</span>
-            <span class="n">formatLoss</span><span class="p">(</span><span class="n">lossType</span><span class="p">,</span> <span class="n">dispLabelCounts</span><span class="p">,</span> <span class="mi">0</span><span class="p">,</span> <span class="n">state_</span><span class="p">),</span> <span class="c1">// ignore batchLabels</span>
+            <span class="n">formatLoss</span><span class="p">(</span><span class="n">lossType</span><span class="p">,</span> <span class="n">dispLabelCounts</span><span class="p">,</span> <span class="n">batchLabels</span><span class="p">,</span> <span class="n">state_</span><span class="p">),</span>
             <span class="n">timer_</span><span class="p">.</span><span class="n">elapsed</span><span class="p">(),</span>
-            <span class="n">state_</span><span class="o">-&gt;</span><span class="n">wordsDisp</span> <span class="o">/</span> <span class="n">timer_</span><span class="p">.</span><span class="n">elapsed</span><span class="p">());</span>
+            <span class="n">state_</span><span class="o">-&gt;</span><span class="n">wordsDisp</span> <span class="o">/</span> <span class="n">timer_</span><span class="p">.</span><span class="n">elapsed</span><span class="p">(),</span>
+            <span class="n">state_</span><span class="o">-&gt;</span><span class="n">gradientNormAvg</span><span class="p">);</span>
       <span class="p">}</span>
-
 
       <span class="n">timer_</span><span class="p">.</span><span class="n">start</span><span class="p">();</span>
       <span class="n">state_</span><span class="o">-&gt;</span><span class="n">costSum</span>      <span class="o">=</span> <span class="mi">0</span><span class="p">;</span>
@@ -585,13 +628,12 @@
     <span class="c1">// progress heartbeat for MS-internal Philly compute cluster</span>
     <span class="c1">// This environment variable exists when running on the cluster.</span>
     <span class="k">using</span> <span class="k">namespace</span> <span class="n">std</span><span class="o">::</span><span class="n">chrono</span><span class="p">;</span>
-    <span class="k">if</span><span class="p">((</span><span class="o">!</span><span class="n">mpi</span> <span class="o">||</span> <span class="n">mpi</span><span class="o">-&gt;</span><span class="n">myMPIRank</span><span class="p">()</span> <span class="o">==</span> <span class="mi">0</span><span class="p">)</span> <span class="o">&amp;&amp;</span> <span class="n">getenv</span><span class="p">(</span><span class="s">&quot;PHILLY_JOB_ID&quot;</span><span class="p">)</span>
-       <span class="o">&amp;&amp;</span> <span class="n">heartBeatTimer_</span><span class="p">.</span><span class="n">elapsed</span><span class="o">&lt;</span><span class="n">std</span><span class="o">::</span><span class="n">chrono</span><span class="o">::</span><span class="n">minutes</span><span class="o">&gt;</span><span class="p">()</span> <span class="o">&gt;=</span> <span class="mi">10</span><span class="p">)</span> <span class="p">{</span>
-      <span class="n">printf</span><span class="p">(</span><span class="s">&quot;PROGRESS: %.2f%%</span><span class="se">\n</span><span class="s">EVALERR: %.7f%%</span><span class="se">\n</span><span class="s">&quot;</span><span class="p">,</span>
+    <span class="k">if</span><span class="p">((</span><span class="o">!</span><span class="n">mpi_</span> <span class="o">||</span> <span class="n">mpi_</span><span class="o">-&gt;</span><span class="n">myMPIRank</span><span class="p">()</span> <span class="o">==</span> <span class="mi">0</span><span class="p">)</span> <span class="o">&amp;&amp;</span> <span class="n">getenv</span><span class="p">(</span><span class="s">&quot;PHILLY_JOB_ID&quot;</span><span class="p">)</span>
+       <span class="o">&amp;&amp;</span> <span class="n">heartBeatTimer_</span><span class="p">.</span><span class="n">elapsed</span><span class="o">&lt;</span><span class="n">std</span><span class="o">::</span><span class="n">chrono</span><span class="o">::</span><span class="n">minutes</span><span class="o">&gt;</span><span class="p">()</span> <span class="o">&gt;=</span> <span class="mi">30</span><span class="p">)</span> <span class="p">{</span>
+      <span class="n">fprintf</span><span class="p">(</span><span class="n">stderr</span><span class="p">,</span> <span class="s">&quot;PROGRESS: %.2f%%</span><span class="se">\n</span><span class="s">EVALERR: %.7f%%</span><span class="se">\n</span><span class="s">&quot;</span><span class="p">,</span>
           <span class="p">(</span><span class="kt">double</span><span class="p">)</span><span class="n">calculateLogicalEpoch</span><span class="p">(),</span>
-          <span class="n">state_</span><span class="o">-&gt;</span><span class="n">costSum</span> <span class="o">/</span> <span class="p">(</span><span class="n">state_</span><span class="o">-&gt;</span><span class="n">costCount</span> <span class="o">?</span> <span class="n">state_</span><span class="o">-&gt;</span><span class="nl">costCount</span> <span class="p">:</span> <span class="mi">1</span><span class="p">)</span> <span class="o">/</span> <span class="p">(</span><span class="n">mpi</span> <span class="o">?</span> <span class="n">mpi</span><span class="o">-&gt;</span><span class="n">numMPIProcesses</span><span class="p">()</span> <span class="o">:</span> <span class="mi">1</span><span class="p">));</span>
-      <span class="n">fflush</span><span class="p">(</span><span class="n">stdout</span><span class="p">);</span>
-      <span class="n">std</span><span class="o">::</span><span class="n">cout</span> <span class="o">&lt;&lt;</span> <span class="s">&quot;MBSIZE: &quot;</span> <span class="o">&lt;&lt;</span> <span class="n">batchLabels</span> <span class="o">&lt;&lt;</span> <span class="s">&quot; after &quot;</span> <span class="o">&lt;&lt;</span> <span class="n">state_</span><span class="o">-&gt;</span><span class="n">batches</span> <span class="o">&lt;&lt;</span> <span class="s">&quot; updates = &quot;</span> <span class="o">&lt;&lt;</span> <span class="n">state_</span><span class="o">-&gt;</span><span class="n">labelsTotal</span> <span class="o">&lt;&lt;</span> <span class="s">&quot; labels&quot;</span> <span class="o">&lt;&lt;</span> <span class="n">std</span><span class="o">::</span><span class="n">endl</span> <span class="o">&lt;&lt;</span> <span class="n">std</span><span class="o">::</span><span class="n">flush</span><span class="p">;</span>
+          <span class="n">state_</span><span class="o">-&gt;</span><span class="n">costSum</span> <span class="o">/</span> <span class="p">(</span><span class="n">state_</span><span class="o">-&gt;</span><span class="n">costCount</span> <span class="o">?</span> <span class="n">state_</span><span class="o">-&gt;</span><span class="nl">costCount</span> <span class="p">:</span> <span class="mi">1</span><span class="p">));</span>
+      <span class="n">fflush</span><span class="p">(</span><span class="n">stderr</span><span class="p">);</span>
       <span class="n">heartBeatTimer_</span><span class="p">.</span><span class="n">start</span><span class="p">();</span>
     <span class="p">}</span>
   <span class="p">}</span>

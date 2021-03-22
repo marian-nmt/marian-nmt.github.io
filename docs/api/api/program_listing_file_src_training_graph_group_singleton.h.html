@@ -7,7 +7,7 @@
   
   <meta name="viewport" content="width=device-width, initial-scale=1.0" />
   
-  <title>Program Listing for File graph_group_singleton.h &mdash; Marian NMT v1.10.2 2021-02-28 documentation</title>
+  <title>Program Listing for File graph_group_singleton.h &mdash; Marian NMT v1.10.3 2021-03-22 documentation</title>
   
 
   
@@ -67,7 +67,7 @@
             
             
               <div class="version">
-                v1.10.2
+                v1.10.3
               </div>
             
           
@@ -172,39 +172,25 @@
 
 <span class="cp">#include</span> <span class="cpf">&quot;training/graph_group.h&quot;</span><span class="cp"></span>
 <span class="cp">#include</span> <span class="cpf">&quot;common/filesystem.h&quot;</span><span class="cp"></span>
-<span class="cp">#include</span> <span class="cpf">&quot;training/exponential_smoothing.h&quot;</span><span class="cp"></span>
 
 <span class="cp">#include</span> <span class="cpf">&lt;future&gt;</span><span class="cp"></span>
 
 <span class="k">namespace</span> <span class="n">marian</span> <span class="p">{</span>
 
-<span class="k">class</span> <span class="nc">SingletonGraph</span> <span class="o">:</span> <span class="k">public</span> <span class="n">GraphGroup</span><span class="p">,</span> <span class="k">public</span> <span class="n">ExponentialSmoothing</span> <span class="p">{</span>
+<span class="k">class</span> <span class="nc">SingletonGraph</span> <span class="o">:</span> <span class="k">public</span> <span class="n">GraphGroup</span> <span class="p">{</span>
 <span class="k">public</span><span class="o">:</span>
   <span class="k">virtual</span> <span class="kt">void</span> <span class="n">setScheduler</span><span class="p">(</span><span class="n">Ptr</span><span class="o">&lt;</span><span class="n">Scheduler</span><span class="o">&gt;</span> <span class="n">scheduler</span><span class="p">)</span> <span class="k">override</span><span class="p">;</span>
 
 <span class="k">private</span><span class="o">:</span>
-  <span class="n">Ptr</span><span class="o">&lt;</span><span class="n">models</span><span class="o">::</span><span class="n">ICriterionFunction</span><span class="o">&gt;</span> <span class="n">builder_</span><span class="p">;</span>
-  <span class="n">Ptr</span><span class="o">&lt;</span><span class="n">ExpressionGraph</span><span class="o">&gt;</span> <span class="n">graph_</span><span class="p">;</span>
-  <span class="n">Ptr</span><span class="o">&lt;</span><span class="n">ExpressionGraph</span><span class="o">&gt;</span> <span class="n">graphAvg_</span><span class="p">;</span>
-
-  <span class="kt">void</span> <span class="nf">execute</span><span class="p">(</span><span class="n">Ptr</span><span class="o">&lt;</span><span class="n">data</span><span class="o">::</span><span class="n">Batch</span><span class="o">&gt;</span> <span class="n">batch</span><span class="p">);</span>
+  <span class="kt">void</span> <span class="n">execute</span><span class="p">(</span><span class="n">Ptr</span><span class="o">&lt;</span><span class="n">data</span><span class="o">::</span><span class="n">Batch</span><span class="o">&gt;</span> <span class="n">batch</span><span class="p">);</span>
 
 <span class="k">public</span><span class="o">:</span>
-  <span class="n">SingletonGraph</span><span class="p">(</span><span class="n">Ptr</span><span class="o">&lt;</span><span class="n">Options</span><span class="o">&gt;</span> <span class="n">config</span><span class="p">,</span> <span class="n">Ptr</span><span class="o">&lt;</span><span class="n">IMPIWrapper</span><span class="o">&gt;</span> <span class="n">mpi</span><span class="p">)</span>
-      <span class="o">:</span> <span class="n">GraphGroup</span><span class="p">(</span><span class="n">config</span><span class="p">),</span>
-        <span class="n">ExponentialSmoothing</span><span class="p">(</span><span class="n">config</span><span class="p">)</span> <span class="p">{</span>
+  <span class="n">SingletonGraph</span><span class="p">(</span><span class="n">Ptr</span><span class="o">&lt;</span><span class="n">Options</span><span class="o">&gt;</span> <span class="n">options</span><span class="p">,</span> <span class="n">Ptr</span><span class="o">&lt;</span><span class="n">IMPIWrapper</span><span class="o">&gt;</span> <span class="n">mpi</span><span class="p">)</span>
+      <span class="o">:</span> <span class="n">GraphGroup</span><span class="p">(</span><span class="n">options</span><span class="p">,</span> <span class="n">mpi</span><span class="p">)</span> <span class="p">{</span>
+
+    <span class="n">LOG</span><span class="p">(</span><span class="n">warn</span><span class="p">,</span> <span class="s">&quot;This class only serves demonstration purposes. It should currently not be called from actual Marian code.&quot;</span><span class="p">);</span>
     <span class="n">ABORT_IF</span><span class="p">(</span><span class="n">mpi</span><span class="o">-&gt;</span><span class="n">numMPIProcesses</span><span class="p">()</span> <span class="o">!=</span> <span class="mi">1</span><span class="p">,</span> <span class="s">&quot;SingletonGraph does not support multiple MPI processes&quot;</span><span class="p">);</span>
-    <span class="c1">// Get device ID</span>
-    <span class="k">auto</span> <span class="n">devices</span> <span class="o">=</span> <span class="n">Config</span><span class="o">::</span><span class="n">getDevices</span><span class="p">(</span><span class="n">options_</span><span class="p">);</span>
-    <span class="n">ABORT_IF</span><span class="p">(</span><span class="n">devices</span><span class="p">.</span><span class="n">size</span><span class="p">()</span> <span class="o">!=</span> <span class="mi">1</span><span class="p">,</span> <span class="s">&quot;Only one device ID should be provided for singleton training&quot;</span><span class="p">);</span>
-    <span class="k">auto</span> <span class="n">deviceId</span> <span class="o">=</span> <span class="n">devices</span><span class="p">[</span><span class="mi">0</span><span class="p">];</span>
-    <span class="c1">// Initialize graph</span>
-    <span class="n">graph_</span> <span class="o">=</span> <span class="n">New</span><span class="o">&lt;</span><span class="n">ExpressionGraph</span><span class="o">&gt;</span><span class="p">();</span>
-    <span class="n">graph_</span><span class="o">-&gt;</span><span class="n">setDevice</span><span class="p">(</span><span class="n">deviceId</span><span class="p">);</span>
-    <span class="n">graph_</span><span class="o">-&gt;</span><span class="n">setCheckpointing</span><span class="p">(</span><span class="n">options_</span><span class="o">-&gt;</span><span class="n">get</span><span class="o">&lt;</span><span class="kt">bool</span><span class="o">&gt;</span><span class="p">(</span><span class="s">&quot;gradient-checkpointing&quot;</span><span class="p">));</span>
-    <span class="n">graph_</span><span class="o">-&gt;</span><span class="n">reserveWorkspaceMB</span><span class="p">(</span><span class="n">options_</span><span class="o">-&gt;</span><span class="n">get</span><span class="o">&lt;</span><span class="kt">size_t</span><span class="o">&gt;</span><span class="p">(</span><span class="s">&quot;workspace&quot;</span><span class="p">));</span>
-    <span class="n">opt_</span> <span class="o">=</span> <span class="n">Optimizer</span><span class="p">(</span><span class="n">options_</span><span class="p">);</span>
-    <span class="n">builder_</span> <span class="o">=</span> <span class="n">models</span><span class="o">::</span><span class="n">createCriterionFunctionFromOptions</span><span class="p">(</span><span class="n">options_</span><span class="p">,</span> <span class="n">models</span><span class="o">::</span><span class="n">usage</span><span class="o">::</span><span class="n">training</span><span class="p">);</span>
+    <span class="n">ABORT_IF</span><span class="p">(</span><span class="n">devices_</span><span class="p">.</span><span class="n">size</span><span class="p">()</span> <span class="o">!=</span> <span class="mi">1</span><span class="p">,</span> <span class="s">&quot;Only one device ID should be provided for singleton training&quot;</span><span class="p">);</span>
   <span class="p">}</span>
 
   <span class="kt">void</span> <span class="n">update</span><span class="p">(</span><span class="n">Ptr</span><span class="o">&lt;</span><span class="n">data</span><span class="o">::</span><span class="n">Batch</span><span class="o">&gt;</span> <span class="n">batch</span><span class="p">)</span> <span class="k">override</span> <span class="p">{</span>
@@ -212,89 +198,8 @@
     <span class="n">execute</span><span class="p">(</span><span class="n">batch</span><span class="p">);</span>
   <span class="p">}</span>
 
-  <span class="kt">void</span> <span class="n">load</span><span class="p">()</span> <span class="k">override</span> <span class="p">{</span>
-    <span class="k">if</span><span class="p">(</span><span class="o">!</span><span class="n">options_</span><span class="o">-&gt;</span><span class="n">get</span><span class="o">&lt;</span><span class="kt">bool</span><span class="o">&gt;</span><span class="p">(</span><span class="s">&quot;no-reload&quot;</span><span class="p">))</span> <span class="p">{</span>
-      <span class="n">std</span><span class="o">::</span><span class="n">string</span> <span class="n">name</span> <span class="o">=</span> <span class="n">options_</span><span class="o">-&gt;</span><span class="n">get</span><span class="o">&lt;</span><span class="n">std</span><span class="o">::</span><span class="n">string</span><span class="o">&gt;</span><span class="p">(</span><span class="s">&quot;model&quot;</span><span class="p">);</span>
-
-      <span class="k">if</span><span class="p">(</span><span class="n">filesystem</span><span class="o">::</span><span class="n">exists</span><span class="p">(</span><span class="n">name</span><span class="p">))</span> <span class="p">{</span>
-        <span class="k">if</span><span class="p">(</span><span class="n">scheduler_</span><span class="p">)</span>
-          <span class="n">scheduler_</span><span class="o">-&gt;</span><span class="n">load</span><span class="p">(</span><span class="n">name</span><span class="p">);</span>
-
-        <span class="k">if</span><span class="p">(</span><span class="n">mvAvg_</span> <span class="o">&amp;&amp;</span> <span class="n">filesystem</span><span class="o">::</span><span class="n">exists</span><span class="p">(</span><span class="n">name</span> <span class="o">+</span> <span class="s">&quot;.orig.npz&quot;</span><span class="p">))</span> <span class="p">{</span>
-          <span class="c1">// Load the original parameters from model.npz</span>
-          <span class="n">builder_</span><span class="o">-&gt;</span><span class="n">load</span><span class="p">(</span><span class="n">graph_</span><span class="p">,</span> <span class="n">name</span> <span class="o">+</span> <span class="s">&quot;.orig.npz&quot;</span><span class="p">);</span>
-
-          <span class="c1">// Load the averaged parameters from model.npz</span>
-          <span class="n">graphAvg_</span> <span class="o">=</span> <span class="n">New</span><span class="o">&lt;</span><span class="n">ExpressionGraph</span><span class="o">&gt;</span><span class="p">();</span>
-          <span class="n">graphAvg_</span><span class="o">-&gt;</span><span class="n">setDevice</span><span class="p">(</span><span class="n">graph_</span><span class="o">-&gt;</span><span class="n">getDeviceId</span><span class="p">());</span>
-          <span class="n">builder_</span><span class="o">-&gt;</span><span class="n">load</span><span class="p">(</span><span class="n">graphAvg_</span><span class="p">,</span> <span class="n">name</span><span class="p">);</span>
-          <span class="n">graphAvg_</span><span class="o">-&gt;</span><span class="n">forward</span><span class="p">();</span>
-        <span class="p">}</span> <span class="k">else</span> <span class="p">{</span>
-          <span class="n">builder_</span><span class="o">-&gt;</span><span class="n">load</span><span class="p">(</span><span class="n">graph_</span><span class="p">,</span> <span class="n">name</span><span class="p">);</span>
-        <span class="p">}</span>
-
-        <span class="n">opt_</span><span class="o">-&gt;</span><span class="n">load</span><span class="p">(</span><span class="n">name</span> <span class="o">+</span> <span class="s">&quot;.optimizer.npz&quot;</span><span class="p">,</span> <span class="p">{</span><span class="n">opt_</span><span class="p">},</span> <span class="p">{</span><span class="n">graph_</span><span class="o">-&gt;</span><span class="n">getBackend</span><span class="p">()},</span>
-          <span class="cm">/*scatterStateFn=*/</span><span class="p">[</span><span class="o">&amp;</span><span class="p">](</span><span class="k">const</span> <span class="n">std</span><span class="o">::</span><span class="n">vector</span><span class="o">&lt;</span><span class="kt">float</span><span class="o">&gt;&amp;</span> <span class="n">data</span><span class="p">,</span> <span class="k">const</span> <span class="n">OptimizerBase</span><span class="o">::</span><span class="n">ScatterStateSetFunc</span><span class="o">&amp;</span> <span class="n">setFn</span><span class="p">)</span> <span class="p">{</span>
-            <span class="n">setFn</span><span class="p">(</span><span class="cm">/*localDeviceIndex=*/</span><span class="mi">0</span><span class="p">,</span> <span class="n">data</span><span class="p">.</span><span class="n">begin</span><span class="p">(),</span> <span class="n">data</span><span class="p">.</span><span class="n">end</span><span class="p">());</span>
-          <span class="p">});</span>
-      <span class="p">}</span> <span class="k">else</span> <span class="k">if</span><span class="p">(</span><span class="n">options_</span><span class="o">-&gt;</span><span class="n">hasAndNotEmpty</span><span class="p">(</span><span class="s">&quot;pretrained-model&quot;</span><span class="p">))</span> <span class="p">{</span>
-        <span class="n">std</span><span class="o">::</span><span class="n">string</span> <span class="n">init</span> <span class="o">=</span> <span class="n">options_</span><span class="o">-&gt;</span><span class="n">get</span><span class="o">&lt;</span><span class="n">std</span><span class="o">::</span><span class="n">string</span><span class="o">&gt;</span><span class="p">(</span><span class="s">&quot;pretrained-model&quot;</span><span class="p">);</span>
-        <span class="n">LOG</span><span class="p">(</span><span class="n">info</span><span class="p">,</span>
-            <span class="s">&quot;Initialize model weights with the pre-trained model {}&quot;</span><span class="p">,</span>
-            <span class="n">init</span><span class="p">);</span>
-        <span class="n">builder_</span><span class="o">-&gt;</span><span class="n">load</span><span class="p">(</span><span class="n">graph_</span><span class="p">,</span> <span class="n">init</span><span class="p">,</span> <span class="nb">false</span><span class="p">);</span>
-      <span class="p">}</span>
-    <span class="p">}</span>
-  <span class="p">}</span>
-
-  <span class="kt">void</span> <span class="n">save</span><span class="p">(</span><span class="kt">bool</span> <span class="k">final</span> <span class="o">=</span> <span class="nb">false</span><span class="p">)</span> <span class="k">override</span> <span class="p">{</span>
-    <span class="k">auto</span> <span class="n">saveGraph</span> <span class="o">=</span> <span class="n">graph_</span><span class="p">;</span>
-    <span class="k">if</span><span class="p">(</span><span class="n">mvAvg_</span><span class="p">)</span> <span class="p">{</span>
-      <span class="c1">// The model with averaged parameters will be saved into model.npz as</span>
-      <span class="c1">// it&#39;s a model which should be used for decoding</span>
-      <span class="n">saveGraph</span> <span class="o">=</span> <span class="n">graphAvg_</span><span class="p">;</span>
-      <span class="c1">// Save the original parameters in model.npz.orig.npz</span>
-      <span class="n">std</span><span class="o">::</span><span class="n">string</span> <span class="n">name</span> <span class="o">=</span> <span class="n">options_</span><span class="o">-&gt;</span><span class="n">get</span><span class="o">&lt;</span><span class="n">std</span><span class="o">::</span><span class="n">string</span><span class="o">&gt;</span><span class="p">(</span><span class="s">&quot;model&quot;</span><span class="p">);</span>
-      <span class="n">builder_</span><span class="o">-&gt;</span><span class="n">save</span><span class="p">(</span><span class="n">graph_</span><span class="p">,</span> <span class="n">name</span> <span class="o">+</span> <span class="s">&quot;.orig.npz&quot;</span><span class="p">);</span>
-    <span class="p">}</span>
-
-    <span class="k">if</span><span class="p">(</span><span class="k">final</span> <span class="o">&amp;&amp;</span> <span class="n">scheduler_</span><span class="p">)</span>
-      <span class="n">scheduler_</span><span class="o">-&gt;</span><span class="n">validate</span><span class="p">({</span><span class="n">saveGraph</span><span class="p">},</span> <span class="nb">true</span><span class="p">);</span>
-
-    <span class="n">save</span><span class="p">(</span><span class="n">saveGraph</span><span class="p">,</span> <span class="k">final</span><span class="p">);</span>
-  <span class="p">}</span>
-
-  <span class="kt">void</span> <span class="n">save</span><span class="p">(</span><span class="n">Ptr</span><span class="o">&lt;</span><span class="n">ExpressionGraph</span><span class="o">&gt;</span> <span class="n">graph</span><span class="p">,</span> <span class="kt">bool</span> <span class="k">final</span> <span class="o">=</span> <span class="nb">false</span><span class="p">)</span> <span class="p">{</span>
-    <span class="n">std</span><span class="o">::</span><span class="n">string</span> <span class="n">name</span> <span class="o">=</span> <span class="n">options_</span><span class="o">-&gt;</span><span class="n">get</span><span class="o">&lt;</span><span class="n">std</span><span class="o">::</span><span class="n">string</span><span class="o">&gt;</span><span class="p">(</span><span class="s">&quot;model&quot;</span><span class="p">);</span>
-
-    <span class="k">if</span><span class="p">(</span><span class="n">options_</span><span class="o">-&gt;</span><span class="n">get</span><span class="o">&lt;</span><span class="kt">bool</span><span class="o">&gt;</span><span class="p">(</span><span class="s">&quot;overwrite&quot;</span><span class="p">))</span> <span class="p">{</span>
-      <span class="n">builder_</span><span class="o">-&gt;</span><span class="n">save</span><span class="p">(</span><span class="n">graph</span><span class="p">,</span> <span class="n">name</span><span class="p">,</span> <span class="nb">true</span><span class="p">);</span>
-      <span class="k">if</span><span class="p">(</span><span class="n">scheduler_</span><span class="p">)</span>
-        <span class="n">scheduler_</span><span class="o">-&gt;</span><span class="n">save</span><span class="p">(</span><span class="n">name</span><span class="p">);</span>
-    <span class="p">}</span> <span class="k">else</span> <span class="p">{</span>
-      <span class="k">if</span><span class="p">(</span><span class="o">!</span><span class="k">final</span><span class="p">)</span> <span class="p">{</span>
-        <span class="n">std</span><span class="o">::</span><span class="n">string</span> <span class="n">numberOfBatches</span>
-            <span class="o">=</span> <span class="n">scheduler_</span> <span class="o">?</span> <span class="n">std</span><span class="o">::</span><span class="n">to_string</span><span class="p">(</span><span class="n">scheduler_</span><span class="o">-&gt;</span><span class="n">numberOfBatches</span><span class="p">())</span>
-                         <span class="o">:</span> <span class="s">&quot;unknown&quot;</span><span class="p">;</span>
-        <span class="n">std</span><span class="o">::</span><span class="n">string</span> <span class="n">nameOverwrite</span> <span class="o">=</span> <span class="n">name</span><span class="p">;</span>
-        <span class="n">nameOverwrite</span><span class="p">.</span><span class="n">replace</span><span class="p">(</span>
-            <span class="n">name</span><span class="p">.</span><span class="n">size</span><span class="p">()</span> <span class="o">-</span> <span class="mi">4</span><span class="p">,</span> <span class="mi">4</span><span class="p">,</span> <span class="s">&quot;.iter&quot;</span> <span class="o">+</span> <span class="n">numberOfBatches</span> <span class="o">+</span> <span class="s">&quot;.npz&quot;</span><span class="p">);</span>
-        <span class="n">builder_</span><span class="o">-&gt;</span><span class="n">save</span><span class="p">(</span><span class="n">graph</span><span class="p">,</span> <span class="n">nameOverwrite</span><span class="p">);</span>
-      <span class="p">}</span>
-
-      <span class="n">builder_</span><span class="o">-&gt;</span><span class="n">save</span><span class="p">(</span><span class="n">graph</span><span class="p">,</span> <span class="n">name</span><span class="p">,</span> <span class="nb">true</span><span class="p">);</span>
-      <span class="k">if</span><span class="p">(</span><span class="n">scheduler_</span><span class="p">)</span>
-        <span class="n">scheduler_</span><span class="o">-&gt;</span><span class="n">save</span><span class="p">(</span><span class="n">name</span><span class="p">);</span>
-    <span class="p">}</span>
-
-    <span class="n">opt_</span><span class="o">-&gt;</span><span class="n">save</span><span class="p">(</span><span class="n">name</span> <span class="o">+</span> <span class="s">&quot;.optimizer.npz&quot;</span><span class="p">,</span> <span class="p">{</span><span class="n">opt_</span><span class="p">},</span>
-      <span class="cm">/*gatherStateFn=*/</span><span class="p">[</span><span class="o">&amp;</span><span class="p">](</span><span class="k">const</span> <span class="n">OptimizerBase</span><span class="o">::</span><span class="n">GatherStateGetFunc</span><span class="o">&amp;</span> <span class="n">getFn</span><span class="p">)</span> <span class="p">{</span>
-        <span class="k">return</span> <span class="nf">getFn</span><span class="p">(</span><span class="cm">/*localDeviceIndex=*/</span><span class="mi">0</span><span class="p">);</span>
-      <span class="p">});</span>
-  <span class="p">}</span>
-
-  <span class="n">Ptr</span><span class="o">&lt;</span><span class="n">data</span><span class="o">::</span><span class="n">BatchStats</span><span class="o">&gt;</span> <span class="n">collectStats</span><span class="p">(</span><span class="k">const</span> <span class="n">std</span><span class="o">::</span><span class="n">vector</span><span class="o">&lt;</span><span class="n">Ptr</span><span class="o">&lt;</span><span class="n">Vocab</span><span class="o">&gt;&gt;&amp;</span> <span class="n">vocabs</span><span class="p">)</span> <span class="p">{</span>
-    <span class="k">return</span> <span class="n">GraphGroup</span><span class="o">::</span><span class="n">collectStats</span><span class="p">(</span><span class="n">graph_</span><span class="p">,</span> <span class="n">builder_</span><span class="p">,</span> <span class="n">vocabs</span><span class="p">);</span>
+  <span class="n">Ptr</span><span class="o">&lt;</span><span class="n">data</span><span class="o">::</span><span class="n">BatchStats</span><span class="o">&gt;</span> <span class="n">collectStats</span><span class="p">(</span><span class="k">const</span> <span class="n">std</span><span class="o">::</span><span class="n">vector</span><span class="o">&lt;</span><span class="n">Ptr</span><span class="o">&lt;</span><span class="n">Vocab</span><span class="o">&gt;&gt;&amp;</span> <span class="n">vocabs</span><span class="p">)</span> <span class="k">override</span> <span class="p">{</span>
+    <span class="k">return</span> <span class="n">GraphGroup</span><span class="o">::</span><span class="n">collectStats</span><span class="p">(</span><span class="n">graphs_</span><span class="p">[</span><span class="mi">0</span><span class="p">],</span> <span class="n">models_</span><span class="p">[</span><span class="mi">0</span><span class="p">],</span> <span class="n">vocabs</span><span class="p">);</span>
   <span class="p">}</span>
 
   <span class="k">virtual</span> <span class="kt">void</span> <span class="n">finalize</span><span class="p">()</span> <span class="k">override</span> <span class="p">{</span> <span class="n">finalized_</span> <span class="o">=</span> <span class="nb">true</span><span class="p">;</span> <span class="p">}</span>

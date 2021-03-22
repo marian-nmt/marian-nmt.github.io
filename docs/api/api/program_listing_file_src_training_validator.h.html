@@ -7,7 +7,7 @@
   
   <meta name="viewport" content="width=device-width, initial-scale=1.0" />
   
-  <title>Program Listing for File validator.h &mdash; Marian NMT v1.10.2 2021-02-28 documentation</title>
+  <title>Program Listing for File validator.h &mdash; Marian NMT v1.10.3 2021-03-22 documentation</title>
   
 
   
@@ -67,7 +67,7 @@
             
             
               <div class="version">
-                v1.10.2
+                v1.10.3
               </div>
             
           
@@ -209,8 +209,8 @@
                          <span class="n">Ptr</span><span class="o">&lt;</span><span class="k">const</span> <span class="n">TrainingState</span><span class="o">&gt;</span> <span class="n">state</span><span class="p">)</span> <span class="o">=</span> <span class="mi">0</span><span class="p">;</span>
   <span class="k">virtual</span> <span class="n">std</span><span class="o">::</span><span class="n">string</span> <span class="n">type</span><span class="p">()</span> <span class="o">=</span> <span class="mi">0</span><span class="p">;</span>
 
-  <span class="kt">float</span> <span class="nf">lastBest</span><span class="p">()</span> <span class="p">{</span> <span class="k">return</span> <span class="n">lastBest_</span><span class="p">;</span> <span class="p">}</span>
-  <span class="kt">size_t</span> <span class="nf">stalled</span><span class="p">()</span> <span class="p">{</span> <span class="k">return</span> <span class="n">stalled_</span><span class="p">;</span> <span class="p">}</span>
+  <span class="kt">float</span><span class="o">&amp;</span> <span class="nf">lastBest</span><span class="p">()</span> <span class="p">{</span> <span class="k">return</span> <span class="n">lastBest_</span><span class="p">;</span> <span class="p">}</span>
+  <span class="kt">size_t</span><span class="o">&amp;</span> <span class="nf">stalled</span><span class="p">()</span> <span class="p">{</span> <span class="k">return</span> <span class="n">stalled_</span><span class="p">;</span> <span class="p">}</span>
 
   <span class="k">virtual</span> <span class="kt">float</span> <span class="n">initScore</span><span class="p">();</span>
   <span class="k">virtual</span> <span class="kt">void</span> <span class="n">actAfterLoaded</span><span class="p">(</span><span class="n">TrainingState</span><span class="o">&amp;</span> <span class="n">state</span><span class="p">)</span> <span class="k">override</span><span class="p">;</span>
@@ -301,7 +301,6 @@
     <span class="k">auto</span> <span class="n">model</span> <span class="o">=</span> <span class="n">options_</span><span class="o">-&gt;</span><span class="n">get</span><span class="o">&lt;</span><span class="n">std</span><span class="o">::</span><span class="n">string</span><span class="o">&gt;</span><span class="p">(</span><span class="s">&quot;model&quot;</span><span class="p">);</span>
     <span class="n">std</span><span class="o">::</span><span class="n">string</span> <span class="n">suffix</span> <span class="o">=</span> <span class="n">model</span><span class="p">.</span><span class="n">substr</span><span class="p">(</span><span class="n">model</span><span class="p">.</span><span class="n">size</span><span class="p">()</span> <span class="o">-</span> <span class="mi">4</span><span class="p">);</span>
     <span class="n">ABORT_IF</span><span class="p">(</span><span class="n">suffix</span> <span class="o">!=</span> <span class="s">&quot;.npz&quot;</span> <span class="o">&amp;&amp;</span> <span class="n">suffix</span> <span class="o">!=</span> <span class="s">&quot;.bin&quot;</span><span class="p">,</span> <span class="s">&quot;Unknown model suffix {}&quot;</span><span class="p">,</span> <span class="n">suffix</span><span class="p">);</span>
-
     <span class="n">builder_</span><span class="o">-&gt;</span><span class="n">save</span><span class="p">(</span><span class="n">graphs</span><span class="p">[</span><span class="mi">0</span><span class="p">],</span> <span class="n">model</span> <span class="o">+</span> <span class="s">&quot;.best-&quot;</span> <span class="o">+</span> <span class="n">type</span><span class="p">()</span> <span class="o">+</span> <span class="n">suffix</span><span class="p">,</span> <span class="nb">true</span><span class="p">);</span>
   <span class="p">}</span>
 <span class="p">};</span>

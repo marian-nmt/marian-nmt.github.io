@@ -7,7 +7,7 @@
   
   <meta name="viewport" content="width=device-width, initial-scale=1.0" />
   
-  <title>Program Listing for File states.h &mdash; Marian NMT v1.10.2 2021-02-28 documentation</title>
+  <title>Program Listing for File states.h &mdash; Marian NMT v1.10.3 2021-03-22 documentation</title>
   
 
   
@@ -67,7 +67,7 @@
             
             
               <div class="version">
-                v1.10.2
+                v1.10.3
               </div>
             
           
@@ -170,8 +170,8 @@
 <p>↰ <a class="reference internal" href="file_src_models_states.h.html#file-src-models-states-h"><span class="std std-ref">Return to documentation for file</span></a> (<code class="docutils literal notranslate"><span class="pre">src/models/states.h</span></code>)</p>
 <div class="highlight-cpp notranslate"><div class="highlight"><pre><span></span><span class="cp">#pragma once</span>
 
+<span class="cp">#include</span> <span class="cpf">&quot;layers/logits.h&quot;</span><span class="c1">  // @HACK: for factored embeddings only so far</span><span class="cp"></span>
 <span class="cp">#include</span> <span class="cpf">&quot;marian.h&quot;</span><span class="cp"></span>
-<span class="cp">#include</span> <span class="cpf">&quot;layers/generic.h&quot;</span><span class="c1"> // @HACK: for factored embeddings only so far</span><span class="cp"></span>
 <span class="cp">#include</span> <span class="cpf">&quot;rnn/types.h&quot;</span><span class="cp"></span>
 
 <span class="k">namespace</span> <span class="n">marian</span> <span class="p">{</span>
@@ -179,7 +179,7 @@
 <span class="k">class</span> <span class="nc">EncoderState</span> <span class="p">{</span>
 <span class="k">private</span><span class="o">:</span>
   <span class="n">Expr</span> <span class="n">context_</span><span class="p">;</span>
-  <span class="n">Expr</span> <span class="n">mask_</span><span class="p">;</span>       <span class="c1">// [beam depth=1, max length, batch size, vector dim=1] source mask</span>
+  <span class="n">Expr</span> <span class="n">mask_</span><span class="p">;</span>  <span class="c1">// [beam depth=1, max length, batch size, vector dim=1] source mask</span>
   <span class="n">Ptr</span><span class="o">&lt;</span><span class="n">data</span><span class="o">::</span><span class="n">CorpusBatch</span><span class="o">&gt;</span> <span class="n">batch_</span><span class="p">;</span>
 
 <span class="k">public</span><span class="o">:</span>
@@ -189,31 +189,34 @@
   <span class="n">EncoderState</span><span class="p">()</span> <span class="p">{}</span>
   <span class="k">virtual</span> <span class="o">~</span><span class="n">EncoderState</span><span class="p">()</span> <span class="p">{}</span>
 
-  <span class="k">virtual</span> <span class="n">Expr</span> <span class="n">getContext</span><span class="p">()</span>   <span class="k">const</span> <span class="p">{</span> <span class="k">return</span> <span class="n">context_</span><span class="p">;</span>   <span class="p">}</span>
-  <span class="k">virtual</span> <span class="n">Expr</span> <span class="n">getAttended</span><span class="p">()</span>  <span class="k">const</span> <span class="p">{</span> <span class="k">return</span> <span class="n">context_</span><span class="p">;</span>   <span class="p">}</span>
-  <span class="k">virtual</span> <span class="n">Expr</span> <span class="n">getMask</span><span class="p">()</span>      <span class="k">const</span> <span class="p">{</span> <span class="k">return</span> <span class="n">mask_</span><span class="p">;</span>      <span class="p">}</span> <span class="c1">// source batch mask; may have additional positions suppressed</span>
+  <span class="k">virtual</span> <span class="n">Expr</span> <span class="n">getContext</span><span class="p">()</span> <span class="k">const</span> <span class="p">{</span> <span class="k">return</span> <span class="n">context_</span><span class="p">;</span> <span class="p">}</span>
+  <span class="k">virtual</span> <span class="n">Expr</span> <span class="n">getAttended</span><span class="p">()</span> <span class="k">const</span> <span class="p">{</span> <span class="k">return</span> <span class="n">context_</span><span class="p">;</span> <span class="p">}</span>
+  <span class="k">virtual</span> <span class="n">Expr</span> <span class="n">getMask</span><span class="p">()</span> <span class="k">const</span> <span class="p">{</span>
+    <span class="k">return</span> <span class="n">mask_</span><span class="p">;</span>
+  <span class="p">}</span>  <span class="c1">// source batch mask; may have additional positions suppressed</span>
 
-  <span class="k">virtual</span> <span class="k">const</span> <span class="n">Words</span><span class="o">&amp;</span> <span class="n">getSourceWords</span><span class="p">()</span> <span class="p">{</span>
-    <span class="k">return</span> <span class="n">batch_</span><span class="o">-&gt;</span><span class="n">front</span><span class="p">()</span><span class="o">-&gt;</span><span class="n">data</span><span class="p">();</span>
-  <span class="p">}</span>
+  <span class="k">virtual</span> <span class="k">const</span> <span class="n">Words</span><span class="o">&amp;</span> <span class="n">getSourceWords</span><span class="p">()</span> <span class="p">{</span> <span class="k">return</span> <span class="n">batch_</span><span class="o">-&gt;</span><span class="n">front</span><span class="p">()</span><span class="o">-&gt;</span><span class="n">data</span><span class="p">();</span> <span class="p">}</span>
 
   <span class="c1">// Sub-select active batch entries from encoder context and context mask</span>
-  <span class="n">Ptr</span><span class="o">&lt;</span><span class="n">EncoderState</span><span class="o">&gt;</span> <span class="n">select</span><span class="p">(</span><span class="k">const</span> <span class="n">std</span><span class="o">::</span><span class="n">vector</span><span class="o">&lt;</span><span class="n">IndexType</span><span class="o">&gt;&amp;</span> <span class="n">batchIndices</span><span class="p">)</span> <span class="p">{</span> <span class="c1">// [batchIndex] indices of active batch entries</span>
-    <span class="c1">// Dimension -2 is OK for both, RNN and Transformer models as the encoder context in Transformer gets transposed to the same dimension layout</span>
-    <span class="k">return</span> <span class="n">New</span><span class="o">&lt;</span><span class="n">EncoderState</span><span class="o">&gt;</span><span class="p">(</span><span class="n">index_select</span><span class="p">(</span><span class="n">context_</span><span class="p">,</span> <span class="mi">-2</span><span class="p">,</span> <span class="n">batchIndices</span><span class="p">),</span> <span class="n">index_select</span><span class="p">(</span><span class="n">mask_</span><span class="p">,</span> <span class="mi">-2</span><span class="p">,</span> <span class="n">batchIndices</span><span class="p">),</span> <span class="n">batch_</span><span class="p">);</span>
+  <span class="n">Ptr</span><span class="o">&lt;</span><span class="n">EncoderState</span><span class="o">&gt;</span> <span class="n">select</span><span class="p">(</span>
+      <span class="k">const</span> <span class="n">std</span><span class="o">::</span><span class="n">vector</span><span class="o">&lt;</span><span class="n">IndexType</span><span class="o">&gt;&amp;</span> <span class="n">batchIndices</span><span class="p">)</span> <span class="p">{</span>  <span class="c1">// [batchIndex] indices of active batch entries</span>
+    <span class="c1">// Dimension -2 is OK for both, RNN and Transformer models as the encoder context in Transformer</span>
+    <span class="c1">// gets transposed to the same dimension layout</span>
+    <span class="k">return</span> <span class="n">New</span><span class="o">&lt;</span><span class="n">EncoderState</span><span class="o">&gt;</span><span class="p">(</span>
+        <span class="n">index_select</span><span class="p">(</span><span class="n">context_</span><span class="p">,</span> <span class="mi">-2</span><span class="p">,</span> <span class="n">batchIndices</span><span class="p">),</span> <span class="n">index_select</span><span class="p">(</span><span class="n">mask_</span><span class="p">,</span> <span class="mi">-2</span><span class="p">,</span> <span class="n">batchIndices</span><span class="p">),</span> <span class="n">batch_</span><span class="p">);</span>
   <span class="p">}</span>
 <span class="p">};</span>
 
 <span class="k">class</span> <span class="nc">DecoderState</span> <span class="p">{</span>
 <span class="k">protected</span><span class="o">:</span>
-  <span class="n">rnn</span><span class="o">::</span><span class="n">States</span> <span class="n">states_</span><span class="p">;</span> <span class="c1">// states of individual decoder layers</span>
+  <span class="n">rnn</span><span class="o">::</span><span class="n">States</span> <span class="n">states_</span><span class="p">;</span>  <span class="c1">// states of individual decoder layers</span>
   <span class="n">Logits</span> <span class="n">logProbs_</span><span class="p">;</span>
   <span class="n">std</span><span class="o">::</span><span class="n">vector</span><span class="o">&lt;</span><span class="n">Ptr</span><span class="o">&lt;</span><span class="n">EncoderState</span><span class="o">&gt;&gt;</span> <span class="n">encStates_</span><span class="p">;</span>
   <span class="n">Ptr</span><span class="o">&lt;</span><span class="n">data</span><span class="o">::</span><span class="n">CorpusBatch</span><span class="o">&gt;</span> <span class="n">batch_</span><span class="p">;</span>
 
-  <span class="n">Expr</span> <span class="n">targetHistoryEmbeddings_</span><span class="p">;</span> <span class="c1">// decoder history (teacher-forced or from decoding), embedded</span>
+  <span class="n">Expr</span> <span class="n">targetHistoryEmbeddings_</span><span class="p">;</span>  <span class="c1">// decoder history (teacher-forced or from decoding), embedded</span>
   <span class="n">Expr</span> <span class="n">targetMask_</span><span class="p">;</span>
-  <span class="n">Words</span> <span class="n">targetWords_</span><span class="p">;</span>            <span class="c1">// target labels</span>
+  <span class="n">Words</span> <span class="n">targetWords_</span><span class="p">;</span>  <span class="c1">// target labels</span>
 
   <span class="c1">// Keep track of current target token position during translation</span>
   <span class="kt">size_t</span> <span class="n">position_</span><span class="p">{</span><span class="mi">0</span><span class="p">};</span>
@@ -227,26 +230,30 @@
   <span class="k">virtual</span> <span class="o">~</span><span class="n">DecoderState</span><span class="p">()</span> <span class="p">{}</span>
 
   <span class="c1">// @TODO: Do we need all these to be virtual?</span>
-  <span class="k">virtual</span> <span class="k">const</span> <span class="n">std</span><span class="o">::</span><span class="n">vector</span><span class="o">&lt;</span><span class="n">Ptr</span><span class="o">&lt;</span><span class="n">EncoderState</span><span class="o">&gt;&gt;&amp;</span> <span class="n">getEncoderStates</span><span class="p">()</span> <span class="k">const</span> <span class="p">{</span>
-    <span class="k">return</span> <span class="n">encStates_</span><span class="p">;</span>
-  <span class="p">}</span>
+  <span class="k">virtual</span> <span class="k">const</span> <span class="n">std</span><span class="o">::</span><span class="n">vector</span><span class="o">&lt;</span><span class="n">Ptr</span><span class="o">&lt;</span><span class="n">EncoderState</span><span class="o">&gt;&gt;&amp;</span> <span class="n">getEncoderStates</span><span class="p">()</span> <span class="k">const</span> <span class="p">{</span> <span class="k">return</span> <span class="n">encStates_</span><span class="p">;</span> <span class="p">}</span>
 
   <span class="k">virtual</span> <span class="n">Logits</span> <span class="n">getLogProbs</span><span class="p">()</span> <span class="k">const</span> <span class="p">{</span> <span class="k">return</span> <span class="n">logProbs_</span><span class="p">;</span> <span class="p">}</span>
   <span class="k">virtual</span> <span class="kt">void</span> <span class="n">setLogProbs</span><span class="p">(</span><span class="n">Logits</span> <span class="n">logProbs</span><span class="p">)</span> <span class="p">{</span> <span class="n">logProbs_</span> <span class="o">=</span> <span class="n">logProbs</span><span class="p">;</span> <span class="p">}</span>
 
-  <span class="c1">// @TODO: should this be a constructor? Then derived classes can call this without the New&lt;&gt; in the loop</span>
-  <span class="k">virtual</span> <span class="n">Ptr</span><span class="o">&lt;</span><span class="n">DecoderState</span><span class="o">&gt;</span> <span class="n">select</span><span class="p">(</span><span class="k">const</span> <span class="n">std</span><span class="o">::</span><span class="n">vector</span><span class="o">&lt;</span><span class="n">IndexType</span><span class="o">&gt;&amp;</span> <span class="n">hypIndices</span><span class="p">,</span>   <span class="c1">// [beamIndex * activeBatchSize + batchIndex]</span>
-                                   <span class="k">const</span> <span class="n">std</span><span class="o">::</span><span class="n">vector</span><span class="o">&lt;</span><span class="n">IndexType</span><span class="o">&gt;&amp;</span> <span class="n">batchIndices</span><span class="p">,</span> <span class="c1">// [batchIndex]</span>
-                                   <span class="kt">int</span> <span class="n">beamSize</span><span class="p">)</span> <span class="k">const</span> <span class="p">{</span>
-
+  <span class="c1">// @TODO: should this be a constructor? Then derived classes can call this without the New&lt;&gt; in</span>
+  <span class="c1">// the loop</span>
+  <span class="k">virtual</span> <span class="n">Ptr</span><span class="o">&lt;</span><span class="n">DecoderState</span><span class="o">&gt;</span> <span class="n">select</span><span class="p">(</span>
+      <span class="k">const</span> <span class="n">std</span><span class="o">::</span><span class="n">vector</span><span class="o">&lt;</span><span class="n">IndexType</span><span class="o">&gt;&amp;</span> <span class="n">hypIndices</span><span class="p">,</span>    <span class="c1">// [beamIndex * activeBatchSize + batchIndex]</span>
+      <span class="k">const</span> <span class="n">std</span><span class="o">::</span><span class="n">vector</span><span class="o">&lt;</span><span class="n">IndexType</span><span class="o">&gt;&amp;</span> <span class="n">batchIndices</span><span class="p">,</span>  <span class="c1">// [batchIndex]</span>
+      <span class="kt">int</span> <span class="n">beamSize</span><span class="p">)</span> <span class="k">const</span> <span class="p">{</span>
     <span class="n">std</span><span class="o">::</span><span class="n">vector</span><span class="o">&lt;</span><span class="n">Ptr</span><span class="o">&lt;</span><span class="n">EncoderState</span><span class="o">&gt;&gt;</span> <span class="n">newEncStates</span><span class="p">;</span>
     <span class="k">for</span><span class="p">(</span><span class="k">auto</span><span class="o">&amp;</span> <span class="nl">es</span> <span class="p">:</span> <span class="n">encStates_</span><span class="p">)</span>
-      <span class="c1">// If the size of the batch dimension of the encoder state context changed, subselect the correct batch entries</span>
-      <span class="n">newEncStates</span><span class="p">.</span><span class="n">push_back</span><span class="p">(</span><span class="n">es</span><span class="o">-&gt;</span><span class="n">getContext</span><span class="p">()</span><span class="o">-&gt;</span><span class="n">shape</span><span class="p">()[</span><span class="mi">-2</span><span class="p">]</span> <span class="o">==</span> <span class="n">batchIndices</span><span class="p">.</span><span class="n">size</span><span class="p">()</span> <span class="o">?</span> <span class="nl">es</span> <span class="p">:</span> <span class="n">es</span><span class="o">-&gt;</span><span class="n">select</span><span class="p">(</span><span class="n">batchIndices</span><span class="p">));</span>
+      <span class="c1">// If the size of the batch dimension of the encoder state context changed, subselect the</span>
+      <span class="c1">// correct batch entries</span>
+      <span class="n">newEncStates</span><span class="p">.</span><span class="n">push_back</span><span class="p">(</span>
+          <span class="n">es</span><span class="o">-&gt;</span><span class="n">getContext</span><span class="p">()</span><span class="o">-&gt;</span><span class="n">shape</span><span class="p">()[</span><span class="mi">-2</span><span class="p">]</span> <span class="o">==</span> <span class="n">batchIndices</span><span class="p">.</span><span class="n">size</span><span class="p">()</span> <span class="o">?</span> <span class="nl">es</span> <span class="p">:</span> <span class="n">es</span><span class="o">-&gt;</span><span class="n">select</span><span class="p">(</span><span class="n">batchIndices</span><span class="p">));</span>
 
     <span class="c1">// hypindices matches batchIndices in terms of batch dimension, so we only need hypIndices</span>
-    <span class="k">auto</span> <span class="n">selectedState</span> <span class="o">=</span> <span class="n">New</span><span class="o">&lt;</span><span class="n">DecoderState</span><span class="o">&gt;</span><span class="p">(</span>
-        <span class="n">states_</span><span class="p">.</span><span class="n">select</span><span class="p">(</span><span class="n">hypIndices</span><span class="p">,</span> <span class="n">beamSize</span><span class="p">,</span> <span class="cm">/*isBatchMajor=*/</span><span class="nb">false</span><span class="p">),</span> <span class="n">logProbs_</span><span class="p">,</span> <span class="n">newEncStates</span><span class="p">,</span> <span class="n">batch_</span><span class="p">);</span>
+    <span class="k">auto</span> <span class="n">selectedState</span>
+        <span class="o">=</span> <span class="n">New</span><span class="o">&lt;</span><span class="n">DecoderState</span><span class="o">&gt;</span><span class="p">(</span><span class="n">states_</span><span class="p">.</span><span class="n">select</span><span class="p">(</span><span class="n">hypIndices</span><span class="p">,</span> <span class="n">beamSize</span><span class="p">,</span> <span class="cm">/*isBatchMajor=*/</span><span class="nb">false</span><span class="p">),</span>
+                            <span class="n">logProbs_</span><span class="p">,</span>
+                            <span class="n">newEncStates</span><span class="p">,</span>
+                            <span class="n">batch_</span><span class="p">);</span>
 
     <span class="c1">// Set positon of new state based on the target token position of current state</span>
     <span class="n">selectedState</span><span class="o">-&gt;</span><span class="n">setPosition</span><span class="p">(</span><span class="n">getPosition</span><span class="p">());</span>
@@ -256,7 +263,9 @@
   <span class="k">virtual</span> <span class="k">const</span> <span class="n">rnn</span><span class="o">::</span><span class="n">States</span><span class="o">&amp;</span> <span class="n">getStates</span><span class="p">()</span> <span class="k">const</span> <span class="p">{</span> <span class="k">return</span> <span class="n">states_</span><span class="p">;</span> <span class="p">}</span>
 
   <span class="k">virtual</span> <span class="n">Expr</span> <span class="n">getTargetHistoryEmbeddings</span><span class="p">()</span> <span class="k">const</span> <span class="p">{</span> <span class="k">return</span> <span class="n">targetHistoryEmbeddings_</span><span class="p">;</span> <span class="p">};</span>
-  <span class="k">virtual</span> <span class="kt">void</span> <span class="n">setTargetHistoryEmbeddings</span><span class="p">(</span><span class="n">Expr</span> <span class="n">targetHistoryEmbeddings</span><span class="p">)</span> <span class="p">{</span> <span class="n">targetHistoryEmbeddings_</span> <span class="o">=</span> <span class="n">targetHistoryEmbeddings</span><span class="p">;</span> <span class="p">}</span>
+  <span class="k">virtual</span> <span class="kt">void</span> <span class="n">setTargetHistoryEmbeddings</span><span class="p">(</span><span class="n">Expr</span> <span class="n">targetHistoryEmbeddings</span><span class="p">)</span> <span class="p">{</span>
+    <span class="n">targetHistoryEmbeddings_</span> <span class="o">=</span> <span class="n">targetHistoryEmbeddings</span><span class="p">;</span>
+  <span class="p">}</span>
 
   <span class="k">virtual</span> <span class="k">const</span> <span class="n">Words</span><span class="o">&amp;</span> <span class="n">getTargetWords</span><span class="p">()</span> <span class="k">const</span> <span class="p">{</span> <span class="k">return</span> <span class="n">targetWords_</span><span class="p">;</span> <span class="p">};</span>
   <span class="k">virtual</span> <span class="kt">void</span> <span class="n">setTargetWords</span><span class="p">(</span><span class="k">const</span> <span class="n">Words</span><span class="o">&amp;</span> <span class="n">targetWords</span><span class="p">)</span> <span class="p">{</span> <span class="n">targetWords_</span> <span class="o">=</span> <span class="n">targetWords</span><span class="p">;</span> <span class="p">}</span>
@@ -264,9 +273,7 @@
   <span class="k">virtual</span> <span class="n">Expr</span> <span class="n">getTargetMask</span><span class="p">()</span> <span class="k">const</span> <span class="p">{</span> <span class="k">return</span> <span class="n">targetMask_</span><span class="p">;</span> <span class="p">};</span>
   <span class="k">virtual</span> <span class="kt">void</span> <span class="n">setTargetMask</span><span class="p">(</span><span class="n">Expr</span> <span class="n">targetMask</span><span class="p">)</span> <span class="p">{</span> <span class="n">targetMask_</span> <span class="o">=</span> <span class="n">targetMask</span><span class="p">;</span> <span class="p">}</span>
 
-  <span class="k">virtual</span> <span class="k">const</span> <span class="n">Words</span><span class="o">&amp;</span> <span class="n">getSourceWords</span><span class="p">()</span> <span class="k">const</span> <span class="p">{</span>
-    <span class="k">return</span> <span class="nf">getEncoderStates</span><span class="p">()[</span><span class="mi">0</span><span class="p">]</span><span class="o">-&gt;</span><span class="n">getSourceWords</span><span class="p">();</span>
-  <span class="p">}</span>
+  <span class="k">virtual</span> <span class="k">const</span> <span class="n">Words</span><span class="o">&amp;</span> <span class="n">getSourceWords</span><span class="p">()</span> <span class="k">const</span> <span class="p">{</span> <span class="k">return</span> <span class="nf">getEncoderStates</span><span class="p">()[</span><span class="mi">0</span><span class="p">]</span><span class="o">-&gt;</span><span class="n">getSourceWords</span><span class="p">();</span> <span class="p">}</span>
 
   <span class="n">Ptr</span><span class="o">&lt;</span><span class="n">data</span><span class="o">::</span><span class="n">CorpusBatch</span><span class="o">&gt;</span> <span class="n">getBatch</span><span class="p">()</span> <span class="k">const</span> <span class="p">{</span> <span class="k">return</span> <span class="n">batch_</span><span class="p">;</span> <span class="p">}</span>
 

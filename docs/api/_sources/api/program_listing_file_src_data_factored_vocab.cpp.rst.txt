@@ -428,7 +428,7 @@ Program Listing for File factored_vocab.cpp
        WordIndex u;
        bool found = factorVocab_.tryFind(i == 0 ? parts[i] : sep + parts[i], u);
        if (!found) {
-         static int logs = 100;
+         static int logs = 5;
          if (logs > 0) {
            logs--;
            LOG(info, "WARNING: Unknown factor '{}' in '{}'; mapping to '{}'", parts[i], w, word2string(getUnkId()));
@@ -558,7 +558,6 @@ Program Listing for File factored_vocab.cpp
    /*virtual*/ void FactoredVocab::transcodeToShortlistInPlace(WordIndex* ptr, size_t num) const {
      for (; num-- > 0; ptr++) {
        auto word = Word::fromWordIndex(*ptr);
-       auto wordString = word2string(word);
        auto lemmaIndex = getFactor(word, 0) + groupRanges_[0].first;
        *ptr = (WordIndex)lemmaIndex;
      }

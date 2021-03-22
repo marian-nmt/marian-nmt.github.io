@@ -7,7 +7,7 @@
   
   <meta name="viewport" content="width=device-width, initial-scale=1.0" />
   
-  <title>Program Listing for File aliases.cpp &mdash; Marian NMT v1.10.2 2021-02-28 documentation</title>
+  <title>Program Listing for File aliases.cpp &mdash; Marian NMT v1.10.3 2021-03-22 documentation</title>
   
 
   
@@ -67,7 +67,7 @@
             
             
               <div class="version">
-                v1.10.2
+                v1.10.3
               </div>
             
           
@@ -176,10 +176,9 @@
 <span class="kt">void</span> <span class="n">ConfigParser</span><span class="o">::</span><span class="n">addAliases</span><span class="p">(</span><span class="n">cli</span><span class="o">::</span><span class="n">CLIWrapper</span><span class="o">&amp;</span> <span class="n">cli</span><span class="p">)</span> <span class="p">{</span>
   <span class="n">cli</span><span class="p">.</span><span class="n">alias</span><span class="p">(</span><span class="s">&quot;fp16&quot;</span><span class="p">,</span> <span class="s">&quot;true&quot;</span><span class="p">,</span> <span class="p">[</span><span class="o">&amp;</span><span class="p">](</span><span class="n">YAML</span><span class="o">::</span><span class="n">Node</span><span class="o">&amp;</span> <span class="n">config</span><span class="p">)</span> <span class="p">{</span>
     <span class="k">if</span><span class="p">(</span><span class="n">mode_</span> <span class="o">==</span> <span class="n">cli</span><span class="o">::</span><span class="n">mode</span><span class="o">::</span><span class="n">training</span><span class="p">)</span> <span class="p">{</span>
-      <span class="n">config</span><span class="p">[</span><span class="s">&quot;precision&quot;</span><span class="p">]</span> <span class="o">=</span> <span class="n">std</span><span class="o">::</span><span class="n">vector</span><span class="o">&lt;</span><span class="n">std</span><span class="o">::</span><span class="n">string</span><span class="o">&gt;</span><span class="p">({</span><span class="s">&quot;float16&quot;</span><span class="p">,</span> <span class="s">&quot;float32&quot;</span><span class="p">,</span> <span class="s">&quot;float32&quot;</span><span class="p">});</span> <span class="c1">// inference type, optimization type, save type</span>
-      <span class="c1">// @TODO: review this</span>
+      <span class="n">config</span><span class="p">[</span><span class="s">&quot;precision&quot;</span><span class="p">]</span> <span class="o">=</span> <span class="n">std</span><span class="o">::</span><span class="n">vector</span><span class="o">&lt;</span><span class="n">std</span><span class="o">::</span><span class="n">string</span><span class="o">&gt;</span><span class="p">({</span><span class="s">&quot;float16&quot;</span><span class="p">,</span> <span class="s">&quot;float32&quot;</span><span class="p">});</span> <span class="c1">// inference type, optimization type, save type</span>
       <span class="c1">// scaling factor (power of 2), frequency, multiplier at increase, tolerance, range, minium factor</span>
-      <span class="n">config</span><span class="p">[</span><span class="s">&quot;cost-scaling&quot;</span><span class="p">]</span> <span class="o">=</span> <span class="n">std</span><span class="o">::</span><span class="n">vector</span><span class="o">&lt;</span><span class="n">std</span><span class="o">::</span><span class="n">string</span><span class="o">&gt;</span><span class="p">({</span><span class="s">&quot;7&quot;</span><span class="p">,</span> <span class="s">&quot;2000&quot;</span><span class="p">,</span> <span class="s">&quot;2&quot;</span><span class="p">,</span> <span class="s">&quot;0.05&quot;</span><span class="p">,</span> <span class="s">&quot;10&quot;</span><span class="p">,</span> <span class="s">&quot;1&quot;</span><span class="p">});</span>
+      <span class="n">config</span><span class="p">[</span><span class="s">&quot;cost-scaling&quot;</span><span class="p">]</span> <span class="o">=</span> <span class="n">std</span><span class="o">::</span><span class="n">vector</span><span class="o">&lt;</span><span class="n">std</span><span class="o">::</span><span class="n">string</span><span class="o">&gt;</span><span class="p">({</span><span class="s">&quot;0&quot;</span><span class="p">,</span> <span class="s">&quot;1000&quot;</span><span class="p">,</span> <span class="s">&quot;2&quot;</span><span class="p">,</span> <span class="s">&quot;0.05&quot;</span><span class="p">,</span> <span class="s">&quot;10&quot;</span><span class="p">,</span> <span class="s">&quot;1e-5&quot;</span><span class="p">});</span>
     <span class="p">}</span> <span class="k">else</span> <span class="p">{</span>
       <span class="n">config</span><span class="p">[</span><span class="s">&quot;precision&quot;</span><span class="p">]</span> <span class="o">=</span> <span class="n">std</span><span class="o">::</span><span class="n">vector</span><span class="o">&lt;</span><span class="n">std</span><span class="o">::</span><span class="n">string</span><span class="o">&gt;</span><span class="p">({</span><span class="s">&quot;float16&quot;</span><span class="p">});</span> <span class="c1">// for inference we do not need the other types</span>
     <span class="p">}</span>

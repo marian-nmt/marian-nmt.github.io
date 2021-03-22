@@ -7,7 +7,7 @@
   
   <meta name="viewport" content="width=device-width, initial-scale=1.0" />
   
-  <title>Program Listing for File marian_train.cpp &mdash; Marian NMT v1.10.2 2021-02-28 documentation</title>
+  <title>Program Listing for File marian_train.cpp &mdash; Marian NMT v1.10.3 2021-03-22 documentation</title>
   
 
   
@@ -67,7 +67,7 @@
             
             
               <div class="version">
-                v1.10.2
+                v1.10.3
               </div>
             
           
@@ -181,25 +181,14 @@
 
 <span class="kt">int</span> <span class="nf">main</span><span class="p">(</span><span class="kt">int</span> <span class="n">argc</span><span class="p">,</span> <span class="kt">char</span><span class="o">**</span> <span class="n">argv</span><span class="p">)</span> <span class="p">{</span>
   <span class="k">using</span> <span class="k">namespace</span> <span class="n">marian</span><span class="p">;</span>
-
   <span class="k">auto</span> <span class="n">options</span> <span class="o">=</span> <span class="n">parseOptions</span><span class="p">(</span><span class="n">argc</span><span class="p">,</span> <span class="n">argv</span><span class="p">,</span> <span class="n">cli</span><span class="o">::</span><span class="n">mode</span><span class="o">::</span><span class="n">training</span><span class="p">);</span>
 
-  <span class="c1">// selects MultiNodeGraphGroup family</span>
-  <span class="c1">//</span>
-  <span class="c1">// Note: --sync-sgd without --multi-node also supports MPI now, using the SyncGraphGroup.  This</span>
-  <span class="c1">// means we have two redundant implementations of multi-node sync-sgd.  Note that the</span>
-  <span class="c1">// MultiNodeGraphGroup family is out of date.  Therefore, the goal is to remove</span>
-  <span class="c1">// MultiNodeGraphGroupSync.</span>
-  <span class="k">if</span><span class="p">(</span><span class="n">options</span><span class="o">-&gt;</span><span class="n">get</span><span class="o">&lt;</span><span class="kt">bool</span><span class="o">&gt;</span><span class="p">(</span><span class="s">&quot;multi-node&quot;</span><span class="p">))</span> <span class="p">{</span>
-    <span class="n">LOG</span><span class="p">(</span><span class="n">warn</span><span class="p">,</span> <span class="s">&quot;[experimental] Using old multi-node training implementations that are not up-to-date&quot;</span><span class="p">);</span>
-    <span class="n">ABORT</span><span class="p">(</span><span class="s">&quot;Old multi-node training code disabled&quot;</span><span class="p">);</span>
-  <span class="p">}</span>
   <span class="c1">// --sync-sgd always selects SyncGraphGroup</span>
   <span class="c1">//</span>
   <span class="c1">// If given, then this implementation is used for all combinations of (single, multiple) MPI</span>
   <span class="c1">// processes x (single, multiple) GPUs per MPI process.  This variant is presently up-to-date and</span>
   <span class="c1">// best supported.</span>
-  <span class="k">else</span> <span class="k">if</span> <span class="p">(</span><span class="n">options</span><span class="o">-&gt;</span><span class="n">get</span><span class="o">&lt;</span><span class="kt">bool</span><span class="o">&gt;</span><span class="p">(</span><span class="s">&quot;sync-sgd&quot;</span><span class="p">))</span> <span class="p">{</span>
+  <span class="k">if</span><span class="p">(</span><span class="n">options</span><span class="o">-&gt;</span><span class="n">get</span><span class="o">&lt;</span><span class="kt">bool</span><span class="o">&gt;</span><span class="p">(</span><span class="s">&quot;sync-sgd&quot;</span><span class="p">))</span> <span class="p">{</span> <span class="c1">// @TODO: make default</span>
     <span class="n">LOG</span><span class="p">(</span><span class="n">info</span><span class="p">,</span> <span class="s">&quot;Using synchronous SGD&quot;</span><span class="p">);</span>
     <span class="n">New</span><span class="o">&lt;</span><span class="n">Train</span><span class="o">&lt;</span><span class="n">SyncGraphGroup</span><span class="o">&gt;&gt;</span><span class="p">(</span><span class="n">options</span><span class="p">)</span><span class="o">-&gt;</span><span class="n">run</span><span class="p">();</span>
   <span class="p">}</span>
@@ -207,7 +196,8 @@
     <span class="k">auto</span> <span class="n">devices</span> <span class="o">=</span> <span class="n">Config</span><span class="o">::</span><span class="n">getDevices</span><span class="p">(</span><span class="n">options</span><span class="p">);</span>
     <span class="k">if</span><span class="p">(</span><span class="n">devices</span><span class="p">.</span><span class="n">size</span><span class="p">()</span> <span class="o">==</span> <span class="mi">1</span><span class="p">)</span> <span class="p">{</span>
       <span class="n">LOG</span><span class="p">(</span><span class="n">info</span><span class="p">,</span> <span class="s">&quot;[training] Using single-device training&quot;</span><span class="p">);</span>
-      <span class="n">New</span><span class="o">&lt;</span><span class="n">Train</span><span class="o">&lt;</span><span class="n">SingletonGraph</span><span class="o">&gt;&gt;</span><span class="p">(</span><span class="n">options</span><span class="p">)</span><span class="o">-&gt;</span><span class="n">run</span><span class="p">();</span>
+      <span class="n">New</span><span class="o">&lt;</span><span class="n">Train</span><span class="o">&lt;</span><span class="n">SyncGraphGroup</span><span class="o">&gt;&gt;</span><span class="p">(</span><span class="n">options</span><span class="p">)</span><span class="o">-&gt;</span><span class="n">run</span><span class="p">();</span>
+      <span class="c1">// New&lt;Train&lt;SingletonGraph&gt;&gt;(options)-&gt;run(); // kept for reference</span>
     <span class="p">}</span> <span class="k">else</span> <span class="p">{</span>
       <span class="n">LOG</span><span class="p">(</span><span class="n">info</span><span class="p">,</span> <span class="s">&quot;Using asynchronous training&quot;</span><span class="p">);</span>
       <span class="n">New</span><span class="o">&lt;</span><span class="n">Train</span><span class="o">&lt;</span><span class="n">AsyncGraphGroup</span><span class="o">&gt;&gt;</span><span class="p">(</span><span class="n">options</span><span class="p">)</span><span class="o">-&gt;</span><span class="n">run</span><span class="p">();</span>

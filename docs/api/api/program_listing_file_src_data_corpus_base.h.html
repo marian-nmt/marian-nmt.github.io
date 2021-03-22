@@ -7,7 +7,7 @@
   
   <meta name="viewport" content="width=device-width, initial-scale=1.0" />
   
-  <title>Program Listing for File corpus_base.h &mdash; Marian NMT v1.10.2 2021-02-28 documentation</title>
+  <title>Program Listing for File corpus_base.h &mdash; Marian NMT v1.10.3 2021-03-22 documentation</title>
   
 
   
@@ -67,7 +67,7 @@
             
             
               <div class="version">
-                v1.10.2
+                v1.10.3
               </div>
             
           
@@ -524,11 +524,14 @@
 <span class="k">public</span><span class="o">:</span>
   <span class="k">typedef</span> <span class="n">SentenceTuple</span> <span class="n">Sample</span><span class="p">;</span>
 
-  <span class="n">CorpusBase</span><span class="p">(</span><span class="n">Ptr</span><span class="o">&lt;</span><span class="n">Options</span><span class="o">&gt;</span> <span class="n">options</span><span class="p">,</span> <span class="kt">bool</span> <span class="n">translate</span> <span class="o">=</span> <span class="nb">false</span><span class="p">);</span>
+  <span class="n">CorpusBase</span><span class="p">(</span><span class="n">Ptr</span><span class="o">&lt;</span><span class="n">Options</span><span class="o">&gt;</span> <span class="n">options</span><span class="p">,</span>
+             <span class="kt">bool</span> <span class="n">translate</span> <span class="o">=</span> <span class="nb">false</span><span class="p">,</span>
+             <span class="kt">size_t</span> <span class="n">seed</span> <span class="o">=</span> <span class="n">Config</span><span class="o">::</span><span class="n">seed</span><span class="p">);</span>
 
   <span class="n">CorpusBase</span><span class="p">(</span><span class="k">const</span> <span class="n">std</span><span class="o">::</span><span class="n">vector</span><span class="o">&lt;</span><span class="n">std</span><span class="o">::</span><span class="n">string</span><span class="o">&gt;&amp;</span> <span class="n">paths</span><span class="p">,</span>
-      <span class="k">const</span> <span class="n">std</span><span class="o">::</span><span class="n">vector</span><span class="o">&lt;</span><span class="n">Ptr</span><span class="o">&lt;</span><span class="n">Vocab</span><span class="o">&gt;&gt;&amp;</span> <span class="n">vocabs</span><span class="p">,</span>
-      <span class="n">Ptr</span><span class="o">&lt;</span><span class="n">Options</span><span class="o">&gt;</span> <span class="n">options</span><span class="p">);</span>
+             <span class="k">const</span> <span class="n">std</span><span class="o">::</span><span class="n">vector</span><span class="o">&lt;</span><span class="n">Ptr</span><span class="o">&lt;</span><span class="n">Vocab</span><span class="o">&gt;&gt;&amp;</span> <span class="n">vocabs</span><span class="p">,</span>
+             <span class="n">Ptr</span><span class="o">&lt;</span><span class="n">Options</span><span class="o">&gt;</span> <span class="n">options</span><span class="p">,</span>
+             <span class="kt">size_t</span> <span class="n">seed</span> <span class="o">=</span> <span class="n">Config</span><span class="o">::</span><span class="n">seed</span><span class="p">);</span>
 
   <span class="k">virtual</span> <span class="o">~</span><span class="n">CorpusBase</span><span class="p">()</span> <span class="p">{}</span>
   <span class="k">virtual</span> <span class="n">std</span><span class="o">::</span><span class="n">vector</span><span class="o">&lt;</span><span class="n">Ptr</span><span class="o">&lt;</span><span class="n">Vocab</span><span class="o">&gt;&gt;&amp;</span> <span class="n">getVocabs</span><span class="p">()</span> <span class="o">=</span> <span class="mi">0</span><span class="p">;</span>
@@ -580,7 +583,7 @@
 
   <span class="n">CorpusBase</span><span class="o">*</span> <span class="n">corpus_</span><span class="p">;</span>
 
-  <span class="kt">long</span> <span class="kt">long</span> <span class="kt">int</span> <span class="n">pos_</span><span class="p">;</span>
+  <span class="kt">int64_t</span> <span class="n">pos_</span><span class="p">;</span> <span class="c1">// we use int64_t here because the initial value can be -1</span>
   <span class="n">SentenceTuple</span> <span class="n">tup_</span><span class="p">;</span>
 <span class="p">};</span>
 <span class="p">}</span>  <span class="c1">// namespace data</span>

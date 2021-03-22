@@ -7,7 +7,7 @@
   
   <meta name="viewport" content="width=device-width, initial-scale=1.0" />
   
-  <title>Program Listing for File communicator.cpp &mdash; Marian NMT v1.10.2 2021-02-28 documentation</title>
+  <title>Program Listing for File communicator.cpp &mdash; Marian NMT v1.10.3 2021-03-22 documentation</title>
   
 
   
@@ -67,7 +67,7 @@
             
             
               <div class="version">
-                v1.10.2
+                v1.10.3
               </div>
             
           
@@ -181,9 +181,19 @@
 
 <span class="k">namespace</span> <span class="n">marian</span> <span class="p">{</span>
 
+<span class="n">ShardingMode</span> <span class="nf">getShardingMode</span><span class="p">(</span><span class="n">Ptr</span><span class="o">&lt;</span><span class="n">Options</span><span class="o">&gt;</span> <span class="n">options</span><span class="p">,</span> <span class="n">Ptr</span><span class="o">&lt;</span><span class="n">IMPIWrapper</span><span class="o">&gt;</span> <span class="n">mpi</span><span class="p">)</span> <span class="p">{</span>
+  <span class="k">auto</span> <span class="n">shardOpt</span> <span class="o">=</span> <span class="n">options</span><span class="o">-&gt;</span><span class="n">get</span><span class="o">&lt;</span><span class="n">std</span><span class="o">::</span><span class="n">string</span><span class="o">&gt;</span><span class="p">(</span><span class="s">&quot;sharding&quot;</span><span class="p">,</span> <span class="s">&quot;global&quot;</span><span class="p">);</span>
+  <span class="k">if</span><span class="p">(</span><span class="n">shardOpt</span> <span class="o">==</span> <span class="s">&quot;global&quot;</span> <span class="o">||</span> <span class="o">!</span><span class="n">mpi</span> <span class="o">||</span> <span class="p">(</span><span class="n">mpi</span> <span class="o">&amp;&amp;</span> <span class="n">mpi</span><span class="o">-&gt;</span><span class="n">numMPIProcesses</span><span class="p">()</span> <span class="o">==</span> <span class="mi">1</span><span class="p">))</span>
+    <span class="k">return</span> <span class="n">ShardingMode</span><span class="o">::</span><span class="n">global</span><span class="p">;</span>
+  <span class="k">else</span> <span class="k">if</span><span class="p">(</span><span class="n">shardOpt</span> <span class="o">==</span> <span class="s">&quot;local&quot;</span><span class="p">)</span>
+    <span class="k">return</span> <span class="n">ShardingMode</span><span class="o">::</span><span class="n">local</span><span class="p">;</span>
+  <span class="k">else</span>
+    <span class="n">ABORT</span><span class="p">(</span><span class="s">&quot;Unknown sharding mode {}&quot;</span><span class="p">,</span> <span class="n">shardOpt</span><span class="p">);</span>
+<span class="p">}</span>
+
 <span class="n">Ptr</span><span class="o">&lt;</span><span class="n">ICommunicator</span><span class="o">&gt;</span> <span class="n">createCommunicator</span><span class="p">(</span>
   <span class="k">const</span> <span class="n">std</span><span class="o">::</span><span class="n">vector</span><span class="o">&lt;</span><span class="n">Ptr</span><span class="o">&lt;</span><span class="n">ExpressionGraph</span><span class="o">&gt;&gt;&amp;</span> <span class="n">graphs</span><span class="p">,</span>
-  <span class="kt">bool</span> <span class="n">noNccl</span><span class="p">,</span> <span class="n">Ptr</span><span class="o">&lt;</span><span class="n">IMPIWrapper</span><span class="o">&gt;</span> <span class="n">mpi</span><span class="p">)</span> <span class="p">{</span>
+  <span class="kt">bool</span> <span class="n">noNccl</span><span class="p">,</span> <span class="n">ShardingMode</span> <span class="n">shardingMode</span><span class="p">,</span> <span class="n">Ptr</span><span class="o">&lt;</span><span class="n">IMPIWrapper</span><span class="o">&gt;</span> <span class="n">mpi</span><span class="p">)</span> <span class="p">{</span>
   <span class="n">mpi</span><span class="p">;</span>
 <span class="cp">#if defined(CUDA_FOUND) &amp;&amp; defined(USE_NCCL)</span>
   <span class="k">if</span><span class="p">(</span><span class="n">noNccl</span><span class="p">)</span> <span class="p">{</span>
@@ -208,9 +218,9 @@
   <span class="p">}</span>
 
   <span class="c1">// the actual implementation is inside communicator.cu</span>
-  <span class="k">return</span> <span class="n">New</span><span class="o">&lt;</span><span class="n">NCCLCommunicator</span><span class="o">&gt;</span><span class="p">(</span><span class="n">graphs</span><span class="p">,</span> <span class="n">mpi</span><span class="p">);</span>
+  <span class="k">return</span> <span class="n">New</span><span class="o">&lt;</span><span class="n">NCCLCommunicator</span><span class="o">&gt;</span><span class="p">(</span><span class="n">graphs</span><span class="p">,</span> <span class="n">shardingMode</span><span class="p">,</span> <span class="n">mpi</span><span class="p">);</span>
 <span class="cp">#else </span><span class="c1">// no CUDA or no NCCL</span>
-  <span class="n">noNccl</span><span class="p">;</span> <span class="c1">// (unused)</span>
+  <span class="n">noNccl</span><span class="p">;</span> <span class="n">shardingMode</span><span class="p">;</span> <span class="c1">// (unused)</span>
   <span class="k">return</span> <span class="n">New</span><span class="o">&lt;</span><span class="n">DefaultCommunicator</span><span class="o">&gt;</span><span class="p">(</span><span class="n">graphs</span><span class="p">,</span> <span class="n">mpi</span><span class="p">);</span>
 <span class="cp">#endif</span>
 <span class="p">}</span>

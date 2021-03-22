@@ -7,7 +7,7 @@
   
   <meta name="viewport" content="width=device-width, initial-scale=1.0" />
   
-  <title>Program Listing for File mnist_ffnn.cpp &mdash; Marian NMT v1.10.2 2021-02-28 documentation</title>
+  <title>Program Listing for File mnist_ffnn.cpp &mdash; Marian NMT v1.10.3 2021-03-22 documentation</title>
   
 
   
@@ -67,7 +67,7 @@
             
             
               <div class="version">
-                v1.10.2
+                v1.10.3
               </div>
             
           
@@ -204,13 +204,12 @@
 
   <span class="k">auto</span> <span class="n">devices</span> <span class="o">=</span> <span class="n">Config</span><span class="o">::</span><span class="n">getDevices</span><span class="p">(</span><span class="n">options</span><span class="p">);</span>
 
-  <span class="k">if</span><span class="p">(</span><span class="n">devices</span><span class="p">.</span><span class="n">size</span><span class="p">()</span> <span class="o">&gt;</span> <span class="mi">1</span><span class="p">)</span> <span class="p">{</span>
-    <span class="k">if</span><span class="p">(</span><span class="n">options</span><span class="o">-&gt;</span><span class="n">get</span><span class="o">&lt;</span><span class="kt">bool</span><span class="o">&gt;</span><span class="p">(</span><span class="s">&quot;sync-sgd&quot;</span><span class="p">))</span>
-      <span class="n">New</span><span class="o">&lt;</span><span class="n">TrainMNIST</span><span class="o">&lt;</span><span class="n">SyncGraphGroup</span><span class="o">&gt;&gt;</span><span class="p">(</span><span class="n">options</span><span class="p">)</span><span class="o">-&gt;</span><span class="n">run</span><span class="p">();</span>
-    <span class="k">else</span>
-      <span class="n">New</span><span class="o">&lt;</span><span class="n">TrainMNIST</span><span class="o">&lt;</span><span class="n">AsyncGraphGroup</span><span class="o">&gt;&gt;</span><span class="p">(</span><span class="n">options</span><span class="p">)</span><span class="o">-&gt;</span><span class="n">run</span><span class="p">();</span>
-  <span class="p">}</span> <span class="k">else</span>
+  <span class="k">if</span><span class="p">(</span><span class="n">devices</span><span class="p">.</span><span class="n">size</span><span class="p">()</span> <span class="o">==</span> <span class="mi">1</span><span class="p">)</span>
     <span class="n">New</span><span class="o">&lt;</span><span class="n">TrainMNIST</span><span class="o">&lt;</span><span class="n">SingletonGraph</span><span class="o">&gt;&gt;</span><span class="p">(</span><span class="n">options</span><span class="p">)</span><span class="o">-&gt;</span><span class="n">run</span><span class="p">();</span>
+  <span class="k">else</span> <span class="k">if</span><span class="p">(</span><span class="n">options</span><span class="o">-&gt;</span><span class="n">get</span><span class="o">&lt;</span><span class="kt">bool</span><span class="o">&gt;</span><span class="p">(</span><span class="s">&quot;sync-sgd&quot;</span><span class="p">))</span>
+    <span class="n">New</span><span class="o">&lt;</span><span class="n">TrainMNIST</span><span class="o">&lt;</span><span class="n">SyncGraphGroup</span><span class="o">&gt;&gt;</span><span class="p">(</span><span class="n">options</span><span class="p">)</span><span class="o">-&gt;</span><span class="n">run</span><span class="p">();</span>
+  <span class="k">else</span>
+    <span class="n">New</span><span class="o">&lt;</span><span class="n">TrainMNIST</span><span class="o">&lt;</span><span class="n">AsyncGraphGroup</span><span class="o">&gt;&gt;</span><span class="p">(</span><span class="n">options</span><span class="p">)</span><span class="o">-&gt;</span><span class="n">run</span><span class="p">();</span>
 
   <span class="k">return</span> <span class="mi">0</span><span class="p">;</span>
 <span class="p">}</span>

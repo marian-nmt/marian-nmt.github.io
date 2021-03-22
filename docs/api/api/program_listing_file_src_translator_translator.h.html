@@ -7,7 +7,7 @@
   
   <meta name="viewport" content="width=device-width, initial-scale=1.0" />
   
-  <title>Program Listing for File translator.h &mdash; Marian NMT v1.10.2 2021-02-28 documentation</title>
+  <title>Program Listing for File translator.h &mdash; Marian NMT v1.10.3 2021-03-22 documentation</title>
   
 
   
@@ -67,7 +67,7 @@
             
             
               <div class="version">
-                v1.10.2
+                v1.10.3
               </div>
             
           
@@ -230,8 +230,7 @@
     <span class="k">auto</span> <span class="n">srcVocab</span> <span class="o">=</span> <span class="n">corpus_</span><span class="o">-&gt;</span><span class="n">getVocabs</span><span class="p">()[</span><span class="mi">0</span><span class="p">];</span>
 
     <span class="k">if</span><span class="p">(</span><span class="n">options_</span><span class="o">-&gt;</span><span class="n">hasAndNotEmpty</span><span class="p">(</span><span class="s">&quot;shortlist&quot;</span><span class="p">))</span>
-      <span class="n">shortlistGenerator_</span> <span class="o">=</span> <span class="n">New</span><span class="o">&lt;</span><span class="n">data</span><span class="o">::</span><span class="n">LexicalShortlistGenerator</span><span class="o">&gt;</span><span class="p">(</span>
-          <span class="n">options_</span><span class="p">,</span> <span class="n">srcVocab</span><span class="p">,</span> <span class="n">trgVocab_</span><span class="p">,</span> <span class="mi">0</span><span class="p">,</span> <span class="mi">1</span><span class="p">,</span> <span class="n">vocabs</span><span class="p">.</span><span class="n">front</span><span class="p">()</span> <span class="o">==</span> <span class="n">vocabs</span><span class="p">.</span><span class="n">back</span><span class="p">());</span>
+      <span class="n">shortlistGenerator_</span> <span class="o">=</span> <span class="n">data</span><span class="o">::</span><span class="n">createShortlistGenerator</span><span class="p">(</span><span class="n">options_</span><span class="p">,</span> <span class="n">srcVocab</span><span class="p">,</span> <span class="n">trgVocab_</span><span class="p">,</span> <span class="mi">0</span><span class="p">,</span> <span class="mi">1</span><span class="p">,</span> <span class="n">vocabs</span><span class="p">.</span><span class="n">front</span><span class="p">()</span> <span class="o">==</span> <span class="n">vocabs</span><span class="p">.</span><span class="n">back</span><span class="p">());</span>
 
     <span class="k">auto</span> <span class="n">devices</span> <span class="o">=</span> <span class="n">Config</span><span class="o">::</span><span class="n">getDevices</span><span class="p">(</span><span class="n">options_</span><span class="p">);</span>
     <span class="n">numDevices_</span> <span class="o">=</span> <span class="n">devices</span><span class="p">.</span><span class="n">size</span><span class="p">();</span>

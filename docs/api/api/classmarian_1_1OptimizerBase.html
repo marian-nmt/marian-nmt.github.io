@@ -7,7 +7,7 @@
   
   <meta name="viewport" content="width=device-width, initial-scale=1.0" />
   
-  <title>Class OptimizerBase &mdash; Marian NMT v1.10.2 2021-02-28 documentation</title>
+  <title>Class OptimizerBase &mdash; Marian NMT v1.10.3 2021-03-22 documentation</title>
   
 
   
@@ -69,7 +69,7 @@
             
             
               <div class="version">
-                v1.10.2
+                v1.10.3
               </div>
             
           
@@ -176,10 +176,11 @@
 </ul>
 <div class="section" id="inheritance-relationships">
 <h2>Inheritance Relationships<a class="headerlink" href="#inheritance-relationships" title="Permalink to this headline">¶</a></h2>
-<div class="section" id="base-type">
-<h3>Base Type<a class="headerlink" href="#base-type" title="Permalink to this headline">¶</a></h3>
+<div class="section" id="base-types">
+<h3>Base Types<a class="headerlink" href="#base-types" title="Permalink to this headline">¶</a></h3>
 <ul class="simple">
 <li><p><code class="docutils literal notranslate"><span class="pre">public</span> <span class="pre">marian::TrainingObserver</span></code> (<a class="reference internal" href="classmarian_1_1TrainingObserver.html#exhale-class-classmarian-1-1trainingobserver"><span class="std std-ref">Class TrainingObserver</span></a>)</p></li>
+<li><p><code class="docutils literal notranslate"><span class="pre">public</span> <span class="pre">marian::ExponentialSmoothing</span></code> (<a class="reference internal" href="classmarian_1_1ExponentialSmoothing.html#exhale-class-classmarian-1-1exponentialsmoothing"><span class="std std-ref">Class ExponentialSmoothing</span></a>)</p></li>
 </ul>
 </div>
 <div class="section" id="derived-types">
@@ -195,37 +196,37 @@
 <h2>Class Documentation<a class="headerlink" href="#class-documentation" title="Permalink to this headline">¶</a></h2>
 <dl class="class">
 <dt id="_CPPv4N6marian13OptimizerBaseE">
-<span id="_CPPv3N6marian13OptimizerBaseE"></span><span id="_CPPv2N6marian13OptimizerBaseE"></span><span id="marian::OptimizerBase"></span><span class="target" id="classmarian_1_1OptimizerBase"></span><em class="property">class </em><code class="sig-name descname">OptimizerBase</code> : <em class="property">public</em> marian::<a class="reference internal" href="classmarian_1_1TrainingObserver.html#_CPPv4N6marian16TrainingObserverE" title="marian::TrainingObserver">TrainingObserver</a><a class="headerlink" href="#_CPPv4N6marian13OptimizerBaseE" title="Permalink to this definition">¶</a><br /></dt>
+<span id="_CPPv3N6marian13OptimizerBaseE"></span><span id="_CPPv2N6marian13OptimizerBaseE"></span><span id="marian::OptimizerBase"></span><span class="target" id="classmarian_1_1OptimizerBase"></span><em class="property">class </em><code class="sig-name descname">OptimizerBase</code> : <em class="property">public</em> marian::<a class="reference internal" href="classmarian_1_1TrainingObserver.html#_CPPv4N6marian16TrainingObserverE" title="marian::TrainingObserver">TrainingObserver</a>, <em class="property">public</em> marian::<a class="reference internal" href="classmarian_1_1ExponentialSmoothing.html#_CPPv4N6marian20ExponentialSmoothingE" title="marian::ExponentialSmoothing">ExponentialSmoothing</a><a class="headerlink" href="#_CPPv4N6marian13OptimizerBaseE" title="Permalink to this definition">¶</a><br /></dt>
 <dd><p>Base class for optimizers. </p>
 <p>Subclassed by <a class="reference internal" href="classmarian_1_1Adagrad.html#classmarian_1_1Adagrad"><span class="std std-ref">marian::Adagrad</span></a>, <a class="reference internal" href="classmarian_1_1Adam.html#classmarian_1_1Adam"><span class="std std-ref">marian::Adam</span></a>, <a class="reference internal" href="classmarian_1_1Sgd.html#classmarian_1_1Sgd"><span class="std std-ref">marian::Sgd</span></a></p>
 <div class="breathe-sectiondef docutils container">
 <p class="breathe-sectiondef-title rubric">Public Types</p>
 <dl class="type">
 <dt id="_CPPv4N6marian13OptimizerBase19ScatterStateSetFuncE">
-<span id="_CPPv3N6marian13OptimizerBase19ScatterStateSetFuncE"></span><span id="_CPPv2N6marian13OptimizerBase19ScatterStateSetFuncE"></span><span id="marian::OptimizerBase::ScatterStateSetFunc"></span><span class="target" id="classmarian_1_1OptimizerBase_1a9172bb847615abfb24004e77b19e5342"></span><em class="property">typedef </em><a class="reference internal" href="function_group__graph__ops__mathematical_1gaf4e69a5f7167b63522135a1f6b8a5dd8.html#_CPPv4N6marianStE4Expri" title="marian::std">std</a>::function&lt;void<span class="sig-paren">(</span>size_t, <a class="reference internal" href="function_group__graph__ops__mathematical_1gaf4e69a5f7167b63522135a1f6b8a5dd8.html#_CPPv4N6marianStE4Expri" title="marian::std">std</a>::vector&lt;float&gt;::const_iterator, <a class="reference internal" href="function_group__graph__ops__mathematical_1gaf4e69a5f7167b63522135a1f6b8a5dd8.html#_CPPv4N6marianStE4Expri" title="marian::std">std</a>::vector&lt;float&gt;::const_iterator<span class="sig-paren">)</span>&gt; <code class="sig-name descname">ScatterStateSetFunc</code><a class="headerlink" href="#_CPPv4N6marian13OptimizerBase19ScatterStateSetFuncE" title="Permalink to this definition">¶</a><br /></dt>
+<span id="_CPPv3N6marian13OptimizerBase19ScatterStateSetFuncE"></span><span id="_CPPv2N6marian13OptimizerBase19ScatterStateSetFuncE"></span><span id="marian::OptimizerBase::ScatterStateSetFunc"></span><span class="target" id="classmarian_1_1OptimizerBase_1aed0e7a44477e74013457577929e1eb7b"></span><em class="property">typedef </em><a class="reference internal" href="function_group__graph__ops__mathematical_1gaf4e69a5f7167b63522135a1f6b8a5dd8.html#_CPPv4N6marianStE4Expri" title="marian::std">std</a>::function&lt;void<span class="sig-paren">(</span>size_t, <em class="property">const</em> char *, <em class="property">const</em> char *<span class="sig-paren">)</span>&gt; <code class="sig-name descname">ScatterStateSetFunc</code><a class="headerlink" href="#_CPPv4N6marian13OptimizerBase19ScatterStateSetFuncE" title="Permalink to this definition">¶</a><br /></dt>
 <dd></dd></dl>
 
 <dl class="type">
-<dt>
-<span class="target" id="classmarian_1_1OptimizerBase_1ad748bf7e678dc26c915d9a8f3093c368"></span><em class="property">typedef </em><code class="sig-name descname">std::function&lt;std::vector&lt;float&gt;size_t )&gt; marian::OptimizerBase::GatherStateGetFunc</code></dt>
+<dt id="_CPPv4N6marian13OptimizerBase18GatherStateGetFuncE">
+<span id="_CPPv3N6marian13OptimizerBase18GatherStateGetFuncE"></span><span id="_CPPv2N6marian13OptimizerBase18GatherStateGetFuncE"></span><span id="marian::OptimizerBase::GatherStateGetFunc"></span><span class="target" id="classmarian_1_1OptimizerBase_1ae856c5a6785dddfd218d1c3aaa253116"></span><em class="property">typedef </em><a class="reference internal" href="function_group__graph__ops__mathematical_1gaf4e69a5f7167b63522135a1f6b8a5dd8.html#_CPPv4N6marianStE4Expri" title="marian::std">std</a>::function&lt;io::<a class="reference internal" href="structmarian_1_1io_1_1Item.html#_CPPv4N6marian2io4ItemE" title="marian::io::Item">Item</a><span class="sig-paren">(</span>size_t<span class="sig-paren">)</span>&gt; <code class="sig-name descname">GatherStateGetFunc</code><a class="headerlink" href="#_CPPv4N6marian13OptimizerBase18GatherStateGetFuncE" title="Permalink to this definition">¶</a><br /></dt>
 <dd></dd></dl>
 
 <dl class="type">
 <dt id="_CPPv4N6marian13OptimizerBase16ScatterStateFuncE">
-<span id="_CPPv3N6marian13OptimizerBase16ScatterStateFuncE"></span><span id="_CPPv2N6marian13OptimizerBase16ScatterStateFuncE"></span><span id="marian::OptimizerBase::ScatterStateFunc"></span><span class="target" id="classmarian_1_1OptimizerBase_1aa03dd384e7d9c9827445ec822adef043"></span><em class="property">typedef </em><a class="reference internal" href="function_group__graph__ops__mathematical_1gaf4e69a5f7167b63522135a1f6b8a5dd8.html#_CPPv4N6marianStE4Expri" title="marian::std">std</a>::function&lt;void<span class="sig-paren">(</span><em class="property">const</em> <a class="reference internal" href="function_group__graph__ops__mathematical_1gaf4e69a5f7167b63522135a1f6b8a5dd8.html#_CPPv4N6marianStE4Expri" title="marian::std">std</a>::vector&lt;float&gt;&amp;, <em class="property">const</em> <a class="reference internal" href="#_CPPv4N6marian13OptimizerBase19ScatterStateSetFuncE" title="marian::OptimizerBase::ScatterStateSetFunc">ScatterStateSetFunc</a>&amp;<span class="sig-paren">)</span>&gt; <code class="sig-name descname">ScatterStateFunc</code><a class="headerlink" href="#_CPPv4N6marian13OptimizerBase16ScatterStateFuncE" title="Permalink to this definition">¶</a><br /></dt>
+<span id="_CPPv3N6marian13OptimizerBase16ScatterStateFuncE"></span><span id="_CPPv2N6marian13OptimizerBase16ScatterStateFuncE"></span><span id="marian::OptimizerBase::ScatterStateFunc"></span><span class="target" id="classmarian_1_1OptimizerBase_1a233fa8c3027b7254e7856843cdc0509d"></span><em class="property">typedef </em><a class="reference internal" href="function_group__graph__ops__mathematical_1gaf4e69a5f7167b63522135a1f6b8a5dd8.html#_CPPv4N6marianStE4Expri" title="marian::std">std</a>::function&lt;void<span class="sig-paren">(</span><em class="property">const</em> io::<a class="reference internal" href="structmarian_1_1io_1_1Item.html#_CPPv4N6marian2io4ItemE" title="marian::io::Item">Item</a>&amp;, <em class="property">const</em> <a class="reference internal" href="#_CPPv4N6marian13OptimizerBase19ScatterStateSetFuncE" title="marian::OptimizerBase::ScatterStateSetFunc">ScatterStateSetFunc</a>&amp;<span class="sig-paren">)</span>&gt; <code class="sig-name descname">ScatterStateFunc</code><a class="headerlink" href="#_CPPv4N6marian13OptimizerBase16ScatterStateFuncE" title="Permalink to this definition">¶</a><br /></dt>
 <dd></dd></dl>
 
 <dl class="type">
-<dt>
-<span class="target" id="classmarian_1_1OptimizerBase_1a4719b4465c1ab7f29c6f78e85e632618"></span><em class="property">typedef </em><code class="sig-name descname">std::function&lt;std::vector&lt;float&gt;const GatherStateGetFunc&amp; )&gt; marian::OptimizerBase::GatherStateFunc</code></dt>
+<dt id="_CPPv4N6marian13OptimizerBase15GatherStateFuncE">
+<span id="_CPPv3N6marian13OptimizerBase15GatherStateFuncE"></span><span id="_CPPv2N6marian13OptimizerBase15GatherStateFuncE"></span><span id="marian::OptimizerBase::GatherStateFunc"></span><span class="target" id="classmarian_1_1OptimizerBase_1a426f9505991c2006b8547fc7d4663347"></span><em class="property">typedef </em><a class="reference internal" href="function_group__graph__ops__mathematical_1gaf4e69a5f7167b63522135a1f6b8a5dd8.html#_CPPv4N6marianStE4Expri" title="marian::std">std</a>::function&lt;io::<a class="reference internal" href="structmarian_1_1io_1_1Item.html#_CPPv4N6marian2io4ItemE" title="marian::io::Item">Item</a><span class="sig-paren">(</span><em class="property">const</em> <a class="reference internal" href="#_CPPv4N6marian13OptimizerBase18GatherStateGetFuncE" title="marian::OptimizerBase::GatherStateGetFunc">GatherStateGetFunc</a>&amp;<span class="sig-paren">)</span>&gt; <code class="sig-name descname">GatherStateFunc</code><a class="headerlink" href="#_CPPv4N6marian13OptimizerBase15GatherStateFuncE" title="Permalink to this definition">¶</a><br /></dt>
 <dd></dd></dl>
 
 </div>
 <div class="breathe-sectiondef docutils container">
 <p class="breathe-sectiondef-title rubric">Public Functions</p>
 <dl class="function">
-<dt id="_CPPv4N6marian13OptimizerBase13OptimizerBaseEf6size_t3PtrI11ClipperBaseE">
-<span id="_CPPv3N6marian13OptimizerBase13OptimizerBaseEf6size_t3PtrI11ClipperBaseE"></span><span id="_CPPv2N6marian13OptimizerBase13OptimizerBaseEf6size_t3PtrI11ClipperBaseE"></span><span id="marian::OptimizerBase::OptimizerBase__float.s.Ptr:ClipperBase:"></span><span class="target" id="classmarian_1_1OptimizerBase_1a8dd14c54e7b9fe33d46bc0442d850528"></span><code class="sig-name descname">OptimizerBase</code><span class="sig-paren">(</span>float <em>eta</em>, size_t <em>refMBWordsParam</em>, <a class="reference internal" href="typedef_namespacemarian_1ad1a373be43a00ef9ce35666145137b08.html#_CPPv4N6marian3PtrE" title="marian::Ptr">Ptr</a>&lt;<a class="reference internal" href="classmarian_1_1ClipperBase.html#_CPPv4N6marian11ClipperBaseE" title="marian::ClipperBase">ClipperBase</a>&gt; <em>clipper</em><span class="sig-paren">)</span><a class="headerlink" href="#_CPPv4N6marian13OptimizerBase13OptimizerBaseEf6size_t3PtrI11ClipperBaseE" title="Permalink to this definition">¶</a><br /></dt>
+<dt id="_CPPv4N6marian13OptimizerBase13OptimizerBaseE3PtrI7OptionsE">
+<span id="_CPPv3N6marian13OptimizerBase13OptimizerBaseE3PtrI7OptionsE"></span><span id="_CPPv2N6marian13OptimizerBase13OptimizerBaseE3PtrI7OptionsE"></span><span id="marian::OptimizerBase::OptimizerBase__Ptr:Options:"></span><span class="target" id="classmarian_1_1OptimizerBase_1a410f72efc1dd8293c900b2483aeaa7a4"></span><code class="sig-name descname">OptimizerBase</code><span class="sig-paren">(</span><a class="reference internal" href="typedef_namespacemarian_1ad1a373be43a00ef9ce35666145137b08.html#_CPPv4N6marian3PtrE" title="marian::Ptr">Ptr</a>&lt;<a class="reference internal" href="classmarian_1_1Options.html#_CPPv4N6marian7OptionsE" title="marian::Options">Options</a>&gt; <em>options</em><span class="sig-paren">)</span><a class="headerlink" href="#_CPPv4N6marian13OptimizerBase13OptimizerBaseE3PtrI7OptionsE" title="Permalink to this definition">¶</a><br /></dt>
 <dd></dd></dl>
 
 <dl class="function">
@@ -234,13 +235,13 @@
 <dd></dd></dl>
 
 <dl class="function">
-<dt id="_CPPv4N6marian13OptimizerBase6updateE3PtrI15ExpressionGraphE6size_t">
-<span id="_CPPv3N6marian13OptimizerBase6updateE3PtrI15ExpressionGraphE6size_t"></span><span id="_CPPv2N6marian13OptimizerBase6updateE3PtrI15ExpressionGraphE6size_t"></span><span id="marian::OptimizerBase::update__Ptr:ExpressionGraph:.s"></span><span class="target" id="classmarian_1_1OptimizerBase_1a8d16166dee5b1cb6629db08139845737"></span>void <code class="sig-name descname">update</code><span class="sig-paren">(</span><a class="reference internal" href="typedef_namespacemarian_1ad1a373be43a00ef9ce35666145137b08.html#_CPPv4N6marian3PtrE" title="marian::Ptr">Ptr</a>&lt;<a class="reference internal" href="classmarian_1_1ExpressionGraph.html#_CPPv4N6marian15ExpressionGraphE" title="marian::ExpressionGraph">ExpressionGraph</a>&gt; <em>graph</em>, size_t <em>mbSize</em> = <a class="reference internal" href="#_CPPv4N6marian13OptimizerBase17mbSizeNotProvidedE" title="marian::OptimizerBase::mbSizeNotProvided">mbSizeNotProvided</a><span class="sig-paren">)</span><a class="headerlink" href="#_CPPv4N6marian13OptimizerBase6updateE3PtrI15ExpressionGraphE6size_t" title="Permalink to this definition">¶</a><br /></dt>
+<dt id="_CPPv4N6marian13OptimizerBase6updateE3PtrI15ExpressionGraphE6size_tf">
+<span id="_CPPv3N6marian13OptimizerBase6updateE3PtrI15ExpressionGraphE6size_tf"></span><span id="_CPPv2N6marian13OptimizerBase6updateE3PtrI15ExpressionGraphE6size_tf"></span><span id="marian::OptimizerBase::update__Ptr:ExpressionGraph:.s.float"></span><span class="target" id="classmarian_1_1OptimizerBase_1a5035bcfcdbc15ee15965468f12544f82"></span>float <code class="sig-name descname">update</code><span class="sig-paren">(</span><a class="reference internal" href="typedef_namespacemarian_1ad1a373be43a00ef9ce35666145137b08.html#_CPPv4N6marian3PtrE" title="marian::Ptr">Ptr</a>&lt;<a class="reference internal" href="classmarian_1_1ExpressionGraph.html#_CPPv4N6marian15ExpressionGraphE" title="marian::ExpressionGraph">ExpressionGraph</a>&gt; <em>graph</em>, size_t <em>mbSize</em>, float <em>costScaleFactor</em> = 1.f<span class="sig-paren">)</span><a class="headerlink" href="#_CPPv4N6marian13OptimizerBase6updateE3PtrI15ExpressionGraphE6size_tf" title="Permalink to this definition">¶</a><br /></dt>
 <dd></dd></dl>
 
 <dl class="function">
-<dt id="_CPPv4N6marian13OptimizerBase6updateE6Tensor6Tensor6size_t">
-<span id="_CPPv3N6marian13OptimizerBase6updateE6Tensor6Tensor6size_t"></span><span id="_CPPv2N6marian13OptimizerBase6updateE6Tensor6Tensor6size_t"></span><span id="marian::OptimizerBase::update__Tensor.Tensor.s"></span><span class="target" id="classmarian_1_1OptimizerBase_1a2c1712e282be315b948b7da50fc00545"></span>void <code class="sig-name descname">update</code><span class="sig-paren">(</span>Tensor <em>params</em>, Tensor <em>grads</em>, size_t <em>mbSize</em> = <a class="reference internal" href="#_CPPv4N6marian13OptimizerBase17mbSizeNotProvidedE" title="marian::OptimizerBase::mbSizeNotProvided">mbSizeNotProvided</a><span class="sig-paren">)</span><a class="headerlink" href="#_CPPv4N6marian13OptimizerBase6updateE6Tensor6Tensor6size_t" title="Permalink to this definition">¶</a><br /></dt>
+<dt id="_CPPv4N6marian13OptimizerBase6updateE6Tensor6Tensor6size_tf">
+<span id="_CPPv3N6marian13OptimizerBase6updateE6Tensor6Tensor6size_tf"></span><span id="_CPPv2N6marian13OptimizerBase6updateE6Tensor6Tensor6size_tf"></span><span id="marian::OptimizerBase::update__Tensor.Tensor.s.float"></span><span class="target" id="classmarian_1_1OptimizerBase_1a5e5edb1e81620594ebce19296dce729e"></span>float <code class="sig-name descname">update</code><span class="sig-paren">(</span>Tensor <em>params</em>, Tensor <em>grads</em>, size_t <em>mbSize</em>, float <em>costScaleFactor</em> = 1.f<span class="sig-paren">)</span><a class="headerlink" href="#_CPPv4N6marian13OptimizerBase6updateE6Tensor6Tensor6size_tf" title="Permalink to this definition">¶</a><br /></dt>
 <dd></dd></dl>
 
 <dl class="function">
@@ -274,29 +275,31 @@
 <dd></dd></dl>
 
 <dl class="function">
-<dt id="_CPPv4N6marian13OptimizerBase4loadERKNSt6stringERKNSt6vectorI3PtrI13OptimizerBaseEEERKNSt6vectorI3PtrI7BackendEEERK16ScatterStateFunc">
-<span id="_CPPv3N6marian13OptimizerBase4loadERKNSt6stringERKNSt6vectorI3PtrI13OptimizerBaseEEERKNSt6vectorI3PtrI7BackendEEERK16ScatterStateFunc"></span><span id="_CPPv2N6marian13OptimizerBase4loadERKNSt6stringERKNSt6vectorI3PtrI13OptimizerBaseEEERKNSt6vectorI3PtrI7BackendEEERK16ScatterStateFunc"></span><span id="marian::OptimizerBase::load__ssCR.std::vector:Ptr:OptimizerBase::CR.std::vector:Ptr:Backend::CR.ScatterStateFuncCR"></span><span class="target" id="classmarian_1_1OptimizerBase_1ac16192564c64eed24902e89bd314827f"></span><em class="property">virtual</em> void <code class="sig-name descname">load</code><span class="sig-paren">(</span><em class="property">const</em> <a class="reference internal" href="function_group__graph__ops__mathematical_1gaf4e69a5f7167b63522135a1f6b8a5dd8.html#_CPPv4N6marianStE4Expri" title="marian::std">std</a>::string&amp;, <em class="property">const</em> <a class="reference internal" href="function_group__graph__ops__mathematical_1gaf4e69a5f7167b63522135a1f6b8a5dd8.html#_CPPv4N6marianStE4Expri" title="marian::std">std</a>::vector&lt;<a class="reference internal" href="typedef_namespacemarian_1ad1a373be43a00ef9ce35666145137b08.html#_CPPv4N6marian3PtrE" title="marian::Ptr">Ptr</a>&lt;<a class="reference internal" href="#_CPPv4N6marian13OptimizerBaseE" title="marian::OptimizerBase">OptimizerBase</a>&gt;&gt;&amp;, <em class="property">const</em> <a class="reference internal" href="function_group__graph__ops__mathematical_1gaf4e69a5f7167b63522135a1f6b8a5dd8.html#_CPPv4N6marianStE4Expri" title="marian::std">std</a>::vector&lt;<a class="reference internal" href="typedef_namespacemarian_1ad1a373be43a00ef9ce35666145137b08.html#_CPPv4N6marian3PtrE" title="marian::Ptr">Ptr</a>&lt;<a class="reference internal" href="classmarian_1_1Backend.html#_CPPv4N6marian7BackendE" title="marian::Backend">Backend</a>&gt;&gt;&amp;, <em class="property">const</em> <a class="reference internal" href="#_CPPv4N6marian13OptimizerBase16ScatterStateFuncE" title="marian::OptimizerBase::ScatterStateFunc">ScatterStateFunc</a>&amp;<span class="sig-paren">)</span><a class="headerlink" href="#_CPPv4N6marian13OptimizerBase4loadERKNSt6stringERKNSt6vectorI3PtrI13OptimizerBaseEEERKNSt6vectorI3PtrI7BackendEEERK16ScatterStateFunc" title="Permalink to this definition">¶</a><br /></dt>
+<dt id="_CPPv4N6marian13OptimizerBase4loadERNSt6vectorIN2io4ItemEEERKNSt6vectorI3PtrI13OptimizerBaseEEERKNSt6vectorI3PtrI7BackendEEERK16ScatterStateFuncb">
+<span id="_CPPv3N6marian13OptimizerBase4loadERNSt6vectorIN2io4ItemEEERKNSt6vectorI3PtrI13OptimizerBaseEEERKNSt6vectorI3PtrI7BackendEEERK16ScatterStateFuncb"></span><span id="_CPPv2N6marian13OptimizerBase4loadERNSt6vectorIN2io4ItemEEERKNSt6vectorI3PtrI13OptimizerBaseEEERKNSt6vectorI3PtrI7BackendEEERK16ScatterStateFuncb"></span><span id="marian::OptimizerBase::load__std::vector:io::Item:R.std::vector:Ptr:OptimizerBase::CR.std::vector:Ptr:Backend::CR.ScatterStateFuncCR.b"></span><span class="target" id="classmarian_1_1OptimizerBase_1ab7cbdde3195c31892b2ab55506af1f32"></span>void <code class="sig-name descname">load</code><span class="sig-paren">(</span><a class="reference internal" href="function_group__graph__ops__mathematical_1gaf4e69a5f7167b63522135a1f6b8a5dd8.html#_CPPv4N6marianStE4Expri" title="marian::std">std</a>::vector&lt;io::<a class="reference internal" href="structmarian_1_1io_1_1Item.html#_CPPv4N6marian2io4ItemE" title="marian::io::Item">Item</a>&gt; &amp;<em>items</em>, <em class="property">const</em> <a class="reference internal" href="function_group__graph__ops__mathematical_1gaf4e69a5f7167b63522135a1f6b8a5dd8.html#_CPPv4N6marianStE4Expri" title="marian::std">std</a>::vector&lt;<a class="reference internal" href="typedef_namespacemarian_1ad1a373be43a00ef9ce35666145137b08.html#_CPPv4N6marian3PtrE" title="marian::Ptr">Ptr</a>&lt;<a class="reference internal" href="#_CPPv4N6marian13OptimizerBaseE" title="marian::OptimizerBase">OptimizerBase</a>&gt;&gt; &amp;<em>opts</em>, <em class="property">const</em> <a class="reference internal" href="function_group__graph__ops__mathematical_1gaf4e69a5f7167b63522135a1f6b8a5dd8.html#_CPPv4N6marianStE4Expri" title="marian::std">std</a>::vector&lt;<a class="reference internal" href="typedef_namespacemarian_1ad1a373be43a00ef9ce35666145137b08.html#_CPPv4N6marian3PtrE" title="marian::Ptr">Ptr</a>&lt;<a class="reference internal" href="classmarian_1_1Backend.html#_CPPv4N6marian7BackendE" title="marian::Backend">Backend</a>&gt;&gt; &amp;<em>backends</em>, <em class="property">const</em> <a class="reference internal" href="#_CPPv4N6marian13OptimizerBase16ScatterStateFuncE" title="marian::OptimizerBase::ScatterStateFunc">ScatterStateFunc</a> &amp;<em>scatterFn</em>, bool <em>isMainProcess</em><span class="sig-paren">)</span><a class="headerlink" href="#_CPPv4N6marian13OptimizerBase4loadERNSt6vectorIN2io4ItemEEERKNSt6vectorI3PtrI13OptimizerBaseEEERKNSt6vectorI3PtrI7BackendEEERK16ScatterStateFuncb" title="Permalink to this definition">¶</a><br /></dt>
 <dd></dd></dl>
 
 <dl class="function">
-<dt id="_CPPv4N6marian13OptimizerBase4saveERKNSt6stringERKNSt6vectorI3PtrI13OptimizerBaseEEERK15GatherStateFuncb">
-<span id="_CPPv3N6marian13OptimizerBase4saveERKNSt6stringERKNSt6vectorI3PtrI13OptimizerBaseEEERK15GatherStateFuncb"></span><span id="_CPPv2N6marian13OptimizerBase4saveERKNSt6stringERKNSt6vectorI3PtrI13OptimizerBaseEEERK15GatherStateFuncb"></span><span id="marian::OptimizerBase::save__ssCR.std::vector:Ptr:OptimizerBase::CR.GatherStateFuncCR.b"></span><span class="target" id="classmarian_1_1OptimizerBase_1a2242e8ab1fdd89dc9b7acf08da6a93bb"></span><em class="property">virtual</em> void <code class="sig-name descname">save</code><span class="sig-paren">(</span><em class="property">const</em> <a class="reference internal" href="function_group__graph__ops__mathematical_1gaf4e69a5f7167b63522135a1f6b8a5dd8.html#_CPPv4N6marianStE4Expri" title="marian::std">std</a>::string&amp;, <em class="property">const</em> <a class="reference internal" href="function_group__graph__ops__mathematical_1gaf4e69a5f7167b63522135a1f6b8a5dd8.html#_CPPv4N6marianStE4Expri" title="marian::std">std</a>::vector&lt;<a class="reference internal" href="typedef_namespacemarian_1ad1a373be43a00ef9ce35666145137b08.html#_CPPv4N6marian3PtrE" title="marian::Ptr">Ptr</a>&lt;<a class="reference internal" href="#_CPPv4N6marian13OptimizerBaseE" title="marian::OptimizerBase">OptimizerBase</a>&gt;&gt;&amp;, <em class="property">const</em> GatherStateFunc&amp;, bool = true<span class="sig-paren">)</span><a class="headerlink" href="#_CPPv4N6marian13OptimizerBase4saveERKNSt6stringERKNSt6vectorI3PtrI13OptimizerBaseEEERK15GatherStateFuncb" title="Permalink to this definition">¶</a><br /></dt>
+<dt id="_CPPv4N6marian13OptimizerBase4saveERNSt6vectorIN2io4ItemEEERKNSt6vectorI3PtrI13OptimizerBaseEEERK15GatherStateFuncb">
+<span id="_CPPv3N6marian13OptimizerBase4saveERNSt6vectorIN2io4ItemEEERKNSt6vectorI3PtrI13OptimizerBaseEEERK15GatherStateFuncb"></span><span id="_CPPv2N6marian13OptimizerBase4saveERNSt6vectorIN2io4ItemEEERKNSt6vectorI3PtrI13OptimizerBaseEEERK15GatherStateFuncb"></span><span id="marian::OptimizerBase::save__std::vector:io::Item:R.std::vector:Ptr:OptimizerBase::CR.GatherStateFuncCR.b"></span><span class="target" id="classmarian_1_1OptimizerBase_1a0fcdcd4202b5aecc52ab215f1590853f"></span>void <code class="sig-name descname">save</code><span class="sig-paren">(</span><a class="reference internal" href="function_group__graph__ops__mathematical_1gaf4e69a5f7167b63522135a1f6b8a5dd8.html#_CPPv4N6marianStE4Expri" title="marian::std">std</a>::vector&lt;io::<a class="reference internal" href="structmarian_1_1io_1_1Item.html#_CPPv4N6marian2io4ItemE" title="marian::io::Item">Item</a>&gt; &amp;<em>items</em>, <em class="property">const</em> <a class="reference internal" href="function_group__graph__ops__mathematical_1gaf4e69a5f7167b63522135a1f6b8a5dd8.html#_CPPv4N6marianStE4Expri" title="marian::std">std</a>::vector&lt;<a class="reference internal" href="typedef_namespacemarian_1ad1a373be43a00ef9ce35666145137b08.html#_CPPv4N6marian3PtrE" title="marian::Ptr">Ptr</a>&lt;<a class="reference internal" href="#_CPPv4N6marian13OptimizerBaseE" title="marian::OptimizerBase">OptimizerBase</a>&gt;&gt; &amp;<em>opts</em>, <em class="property">const</em> <a class="reference internal" href="#_CPPv4N6marian13OptimizerBase15GatherStateFuncE" title="marian::OptimizerBase::GatherStateFunc">GatherStateFunc</a> &amp;<em>gatherFn</em>, bool <em>isMainProcess</em><span class="sig-paren">)</span><a class="headerlink" href="#_CPPv4N6marian13OptimizerBase4saveERNSt6vectorIN2io4ItemEEERKNSt6vectorI3PtrI13OptimizerBaseEEERK15GatherStateFuncb" title="Permalink to this definition">¶</a><br /></dt>
 <dd></dd></dl>
 
-</div>
-<div class="breathe-sectiondef docutils container">
-<p class="breathe-sectiondef-title rubric">Public Static Attributes</p>
-<dl class="member">
-<dt id="_CPPv4N6marian13OptimizerBase17mbSizeNotProvidedE">
-<span id="_CPPv3N6marian13OptimizerBase17mbSizeNotProvidedE"></span><span id="_CPPv2N6marian13OptimizerBase17mbSizeNotProvidedE"></span><span id="marian::OptimizerBase::mbSizeNotProvided__s"></span><span class="target" id="classmarian_1_1OptimizerBase_1a16728520f5b30aa845c3094223400d05"></span><em class="property">constexpr</em> size_t <code class="sig-name descname">mbSizeNotProvided</code> = SIZE_MAX<a class="headerlink" href="#_CPPv4N6marian13OptimizerBase17mbSizeNotProvidedE" title="Permalink to this definition">¶</a><br /></dt>
+<dl class="function">
+<dt id="_CPPv4N6marian13OptimizerBase16swapWithSmoothedE6Tensor">
+<span id="_CPPv3N6marian13OptimizerBase16swapWithSmoothedE6Tensor"></span><span id="_CPPv2N6marian13OptimizerBase16swapWithSmoothedE6Tensor"></span><span id="marian::OptimizerBase::swapWithSmoothed__Tensor"></span><span class="target" id="classmarian_1_1OptimizerBase_1aa9bf8e0ecc0147f0b1235dad7862af30"></span>void <code class="sig-name descname">swapWithSmoothed</code><span class="sig-paren">(</span>Tensor <em>params</em><span class="sig-paren">)</span><a class="headerlink" href="#_CPPv4N6marian13OptimizerBase16swapWithSmoothedE6Tensor" title="Permalink to this definition">¶</a><br /></dt>
+<dd></dd></dl>
+
+<dl class="function">
+<dt id="_CPPv4N6marian13OptimizerBase9getShardsEv">
+<span id="_CPPv3N6marian13OptimizerBase9getShardsEv"></span><span id="_CPPv2N6marian13OptimizerBase9getShardsEv"></span><span id="marian::OptimizerBase::getShards"></span><span class="target" id="classmarian_1_1OptimizerBase_1a3b549ce6089fc534d03796a4cc711864"></span><em class="property">virtual</em> <a class="reference internal" href="function_group__graph__ops__mathematical_1gaf4e69a5f7167b63522135a1f6b8a5dd8.html#_CPPv4N6marianStE4Expri" title="marian::std">std</a>::vector&lt;Tensor&gt; <code class="sig-name descname">getShards</code><span class="sig-paren">(</span><span class="sig-paren">)</span><a class="headerlink" href="#_CPPv4N6marian13OptimizerBase9getShardsEv" title="Permalink to this definition">¶</a><br /></dt>
 <dd></dd></dl>
 
 </div>
 <div class="breathe-sectiondef docutils container">
 <p class="breathe-sectiondef-title rubric">Protected Functions</p>
 <dl class="function">
-<dt id="_CPPv4N6marian13OptimizerBase10updateImplE6Tensor6Tensor6size_t6size_t">
-<span id="_CPPv3N6marian13OptimizerBase10updateImplE6Tensor6Tensor6size_t6size_t"></span><span id="_CPPv2N6marian13OptimizerBase10updateImplE6Tensor6Tensor6size_t6size_t"></span><span id="marian::OptimizerBase::updateImpl__Tensor.Tensor.s.s"></span><span class="target" id="classmarian_1_1OptimizerBase_1a8bb3181b2425f7a7235d62f36e5ecc01"></span><em class="property">virtual</em> void <code class="sig-name descname">updateImpl</code><span class="sig-paren">(</span>Tensor <em>params</em>, Tensor <em>grads</em>, size_t <em>actualMBSize</em>, size_t <em>refMBWords</em><span class="sig-paren">)</span> = 0<a class="headerlink" href="#_CPPv4N6marian13OptimizerBase10updateImplE6Tensor6Tensor6size_t6size_t" title="Permalink to this definition">¶</a><br /></dt>
+<dt id="_CPPv4N6marian13OptimizerBase10updateImplE6Tensor6Tensor6size_t">
+<span id="_CPPv3N6marian13OptimizerBase10updateImplE6Tensor6Tensor6size_t"></span><span id="_CPPv2N6marian13OptimizerBase10updateImplE6Tensor6Tensor6size_t"></span><span id="marian::OptimizerBase::updateImpl__Tensor.Tensor.s"></span><span class="target" id="classmarian_1_1OptimizerBase_1a6adfc6fc15b3751b41127271c2781bd8"></span><em class="property">virtual</em> void <code class="sig-name descname">updateImpl</code><span class="sig-paren">(</span>Tensor <em>params</em>, Tensor <em>grads</em>, size_t <em>actualMBSize</em><span class="sig-paren">)</span> = 0<a class="headerlink" href="#_CPPv4N6marian13OptimizerBase10updateImplE6Tensor6Tensor6size_t" title="Permalink to this definition">¶</a><br /></dt>
 <dd></dd></dl>
 
 <dl class="function">
@@ -308,6 +311,11 @@
 <div class="breathe-sectiondef docutils container">
 <p class="breathe-sectiondef-title rubric">Protected Attributes</p>
 <dl class="member">
+<dt id="_CPPv4N6marian13OptimizerBase8options_E">
+<span id="_CPPv3N6marian13OptimizerBase8options_E"></span><span id="_CPPv2N6marian13OptimizerBase8options_E"></span><span id="marian::OptimizerBase::options___Ptr:Options:"></span><span class="target" id="classmarian_1_1OptimizerBase_1aef252af80bcd11be5d5c5433835237a1"></span><a class="reference internal" href="typedef_namespacemarian_1ad1a373be43a00ef9ce35666145137b08.html#_CPPv4N6marian3PtrE" title="marian::Ptr">Ptr</a>&lt;<a class="reference internal" href="classmarian_1_1Options.html#_CPPv4N6marian7OptionsE" title="marian::Options">Options</a>&gt; <code class="sig-name descname">options_</code><a class="headerlink" href="#_CPPv4N6marian13OptimizerBase8options_E" title="Permalink to this definition">¶</a><br /></dt>
+<dd></dd></dl>
+
+<dl class="member">
 <dt id="_CPPv4N6marian13OptimizerBase4eta_E">
 <span id="_CPPv3N6marian13OptimizerBase4eta_E"></span><span id="_CPPv2N6marian13OptimizerBase4eta_E"></span><span id="marian::OptimizerBase::eta___float"></span><span class="target" id="classmarian_1_1OptimizerBase_1a3ef582b12fb6816fb26d0eb8f697e204"></span>float <code class="sig-name descname">eta_</code><a class="headerlink" href="#_CPPv4N6marian13OptimizerBase4eta_E" title="Permalink to this definition">¶</a><br /></dt>
 <dd></dd></dl>
@@ -318,8 +326,53 @@
 <dd></dd></dl>
 
 <dl class="member">
+<dt id="_CPPv4N6marian13OptimizerBase12batchesSeen_E">
+<span id="_CPPv3N6marian13OptimizerBase12batchesSeen_E"></span><span id="_CPPv2N6marian13OptimizerBase12batchesSeen_E"></span><span id="marian::OptimizerBase::batchesSeen___s"></span><span class="target" id="classmarian_1_1OptimizerBase_1a2d89743fa2418374aaf12f4555816f2d"></span>size_t <code class="sig-name descname">batchesSeen_</code> = {0}<a class="headerlink" href="#_CPPv4N6marian13OptimizerBase12batchesSeen_E" title="Permalink to this definition">¶</a><br /></dt>
+<dd></dd></dl>
+
+<dl class="member">
+<dt id="_CPPv4N6marian13OptimizerBase19normalizedGradient_E">
+<span id="_CPPv3N6marian13OptimizerBase19normalizedGradient_E"></span><span id="_CPPv2N6marian13OptimizerBase19normalizedGradient_E"></span><span id="marian::OptimizerBase::normalizedGradient___b"></span><span class="target" id="classmarian_1_1OptimizerBase_1adf8cab2f2fb78abe86a36dfc158d31e8"></span>bool <code class="sig-name descname">normalizedGradient_</code> = {false}<a class="headerlink" href="#_CPPv4N6marian13OptimizerBase19normalizedGradient_E" title="Permalink to this definition">¶</a><br /></dt>
+<dd></dd></dl>
+
+<dl class="member">
+<dt id="_CPPv4N6marian13OptimizerBase14optimizerType_E">
+<span id="_CPPv3N6marian13OptimizerBase14optimizerType_E"></span><span id="_CPPv2N6marian13OptimizerBase14optimizerType_E"></span><span id="marian::OptimizerBase::optimizerType___Type"></span><span class="target" id="classmarian_1_1OptimizerBase_1ac2d6fe8e81752b6ac6ebca0f455963d6"></span><a class="reference internal" href="enum_namespacemarian_1a2b75d1cec1d73f6a07a1fc4f93604c81.html#_CPPv4N6marian4TypeE" title="marian::Type">Type</a> <code class="sig-name descname">optimizerType_</code> = {<a class="reference internal" href="enum_namespacemarian_1a2b75d1cec1d73f6a07a1fc4f93604c81.html#_CPPv4N6marian4TypeE" title="marian::Type">Type</a>::float32}<a class="headerlink" href="#_CPPv4N6marian13OptimizerBase14optimizerType_E" title="Permalink to this definition">¶</a><br /></dt>
+<dd></dd></dl>
+
+<dl class="member">
+<dt id="_CPPv4N6marian13OptimizerBase18castOptimizerType_E">
+<span id="_CPPv3N6marian13OptimizerBase18castOptimizerType_E"></span><span id="_CPPv2N6marian13OptimizerBase18castOptimizerType_E"></span><span id="marian::OptimizerBase::castOptimizerType___b"></span><span class="target" id="classmarian_1_1OptimizerBase_1a4c8256479b0d2d906c807861bc703dfd"></span>bool <code class="sig-name descname">castOptimizerType_</code> = {false}<a class="headerlink" href="#_CPPv4N6marian13OptimizerBase18castOptimizerType_E" title="Permalink to this definition">¶</a><br /></dt>
+<dd></dd></dl>
+
+<dl class="member">
 <dt id="_CPPv4N6marian13OptimizerBase8clipper_E">
-<span id="_CPPv3N6marian13OptimizerBase8clipper_E"></span><span id="_CPPv2N6marian13OptimizerBase8clipper_E"></span><span id="marian::OptimizerBase::clipper___Ptr:ClipperBase:"></span><span class="target" id="classmarian_1_1OptimizerBase_1ac2a86cf5b8691476b891c9a9df99218d"></span><a class="reference internal" href="typedef_namespacemarian_1ad1a373be43a00ef9ce35666145137b08.html#_CPPv4N6marian3PtrE" title="marian::Ptr">Ptr</a>&lt;<a class="reference internal" href="classmarian_1_1ClipperBase.html#_CPPv4N6marian11ClipperBaseE" title="marian::ClipperBase">ClipperBase</a>&gt; <code class="sig-name descname">clipper_</code><a class="headerlink" href="#_CPPv4N6marian13OptimizerBase8clipper_E" title="Permalink to this definition">¶</a><br /></dt>
+<span id="_CPPv3N6marian13OptimizerBase8clipper_E"></span><span id="_CPPv2N6marian13OptimizerBase8clipper_E"></span><span id="marian::OptimizerBase::clipper___Ptr:Clipper:"></span><span class="target" id="classmarian_1_1OptimizerBase_1a578e92c7c8f7d3977b783cd5415a273a"></span><a class="reference internal" href="typedef_namespacemarian_1ad1a373be43a00ef9ce35666145137b08.html#_CPPv4N6marian3PtrE" title="marian::Ptr">Ptr</a>&lt;<a class="reference internal" href="classmarian_1_1Clipper.html#_CPPv4N6marian7ClipperE" title="marian::Clipper">Clipper</a>&gt; <code class="sig-name descname">clipper_</code><a class="headerlink" href="#_CPPv4N6marian13OptimizerBase8clipper_E" title="Permalink to this definition">¶</a><br /></dt>
+<dd></dd></dl>
+
+<dl class="member">
+<dt id="_CPPv4N6marian13OptimizerBase10baseAlloc_E">
+<span id="_CPPv3N6marian13OptimizerBase10baseAlloc_E"></span><span id="_CPPv2N6marian13OptimizerBase10baseAlloc_E"></span><span id="marian::OptimizerBase::baseAlloc___Ptr:TensorAllocator:"></span><span class="target" id="classmarian_1_1OptimizerBase_1adbda027cab34e8052025223af8b805cf"></span><a class="reference internal" href="typedef_namespacemarian_1ad1a373be43a00ef9ce35666145137b08.html#_CPPv4N6marian3PtrE" title="marian::Ptr">Ptr</a>&lt;<a class="reference internal" href="classmarian_1_1TensorAllocator.html#_CPPv4N6marian15TensorAllocatorE" title="marian::TensorAllocator">TensorAllocator</a>&gt; <code class="sig-name descname">baseAlloc_</code><a class="headerlink" href="#_CPPv4N6marian13OptimizerBase10baseAlloc_E" title="Permalink to this definition">¶</a><br /></dt>
+<dd></dd></dl>
+
+<dl class="member">
+<dt id="_CPPv4N6marian13OptimizerBase6alloc_E">
+<span id="_CPPv3N6marian13OptimizerBase6alloc_E"></span><span id="_CPPv2N6marian13OptimizerBase6alloc_E"></span><span id="marian::OptimizerBase::alloc___Ptr:Allocator:"></span><span class="target" id="classmarian_1_1OptimizerBase_1ae74aac94847b9d94ea2c17c612d30bb1"></span><a class="reference internal" href="typedef_namespacemarian_1ad1a373be43a00ef9ce35666145137b08.html#_CPPv4N6marian3PtrE" title="marian::Ptr">Ptr</a>&lt;<a class="reference internal" href="classmarian_1_1Allocator.html#_CPPv4N6marian9AllocatorE" title="marian::Allocator">Allocator</a>&gt; <code class="sig-name descname">alloc_</code><a class="headerlink" href="#_CPPv4N6marian13OptimizerBase6alloc_E" title="Permalink to this definition">¶</a><br /></dt>
+<dd></dd></dl>
+
+<dl class="member">
+<dt id="_CPPv4N6marian13OptimizerBase4avg_E">
+<span id="_CPPv3N6marian13OptimizerBase4avg_E"></span><span id="_CPPv2N6marian13OptimizerBase4avg_E"></span><span id="marian::OptimizerBase::avg___Tensor"></span><span class="target" id="classmarian_1_1OptimizerBase_1a069ef85b75c21eda943bb5cc47d954e0"></span>Tensor <code class="sig-name descname">avg_</code><a class="headerlink" href="#_CPPv4N6marian13OptimizerBase4avg_E" title="Permalink to this definition">¶</a><br /></dt>
+<dd></dd></dl>
+
+<dl class="member">
+<dt id="_CPPv4N6marian13OptimizerBase3pm_E">
+<span id="_CPPv3N6marian13OptimizerBase3pm_E"></span><span id="_CPPv2N6marian13OptimizerBase3pm_E"></span><span id="marian::OptimizerBase::pm___Tensor"></span><span class="target" id="classmarian_1_1OptimizerBase_1a159859d5a702a6af02193a35e0dbf685"></span>Tensor <code class="sig-name descname">pm_</code><a class="headerlink" href="#_CPPv4N6marian13OptimizerBase3pm_E" title="Permalink to this definition">¶</a><br /></dt>
+<dd></dd></dl>
+
+<dl class="member">
+<dt id="_CPPv4N6marian13OptimizerBase3gd_E">
+<span id="_CPPv3N6marian13OptimizerBase3gd_E"></span><span id="_CPPv2N6marian13OptimizerBase3gd_E"></span><span id="marian::OptimizerBase::gd___Tensor"></span><span class="target" id="classmarian_1_1OptimizerBase_1a226efede73c3913d6f6ddc75ca16c9d8"></span>Tensor <code class="sig-name descname">gd_</code><a class="headerlink" href="#_CPPv4N6marian13OptimizerBase3gd_E" title="Permalink to this definition">¶</a><br /></dt>
 <dd></dd></dl>
 
 </div>

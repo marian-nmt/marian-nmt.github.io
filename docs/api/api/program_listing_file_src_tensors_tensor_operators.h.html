@@ -7,7 +7,7 @@
   
   <meta name="viewport" content="width=device-width, initial-scale=1.0" />
   
-  <title>Program Listing for File tensor_operators.h &mdash; Marian NMT v1.10.2 2021-02-28 documentation</title>
+  <title>Program Listing for File tensor_operators.h &mdash; Marian NMT v1.10.3 2021-03-22 documentation</title>
   
 
   
@@ -67,7 +67,7 @@
             
             
               <div class="version">
-                v1.10.2
+                v1.10.3
               </div>
             
           
@@ -208,6 +208,7 @@
 <span class="p">}</span>
 
 <span class="n">DISPATCH2</span><span class="p">(</span><span class="n">CopyCast</span><span class="p">,</span> <span class="n">marian</span><span class="o">::</span><span class="n">Tensor</span><span class="p">,</span> <span class="k">const</span> <span class="n">marian</span><span class="o">::</span><span class="n">Tensor</span><span class="p">);</span>
+<span class="n">DISPATCH2</span><span class="p">(</span><span class="n">AddCast</span><span class="p">,</span> <span class="n">marian</span><span class="o">::</span><span class="n">Tensor</span><span class="p">,</span> <span class="k">const</span> <span class="n">marian</span><span class="o">::</span><span class="n">Tensor</span><span class="p">);</span>
 <span class="n">DISPATCH4</span><span class="p">(</span><span class="n">IsNaN</span><span class="p">,</span> <span class="k">const</span> <span class="n">Tensor</span><span class="p">,</span> <span class="n">Ptr</span><span class="o">&lt;</span><span class="n">Allocator</span><span class="o">&gt;</span><span class="p">,</span> <span class="kt">bool</span><span class="o">&amp;</span><span class="p">,</span> <span class="kt">bool</span><span class="o">&amp;</span><span class="p">);</span>
 
 <span class="k">template</span> <span class="o">&lt;</span><span class="k">class</span> <span class="nc">Functor</span><span class="p">,</span> <span class="k">class</span><span class="p">...</span> <span class="n">Tensors</span><span class="o">&gt;</span>
@@ -270,6 +271,8 @@
 
 <span class="c1">// clang-format off</span>
 <span class="n">DISPATCH7</span><span class="p">(</span><span class="n">Prod</span><span class="p">,</span> <span class="n">marian</span><span class="o">::</span><span class="n">Tensor</span><span class="p">,</span> <span class="k">const</span> <span class="n">marian</span><span class="o">::</span><span class="n">Tensor</span><span class="o">&amp;</span><span class="p">,</span> <span class="k">const</span> <span class="n">marian</span><span class="o">::</span><span class="n">Tensor</span><span class="o">&amp;</span><span class="p">,</span> <span class="kt">bool</span><span class="p">,</span> <span class="kt">bool</span><span class="p">,</span> <span class="kt">float</span><span class="p">,</span> <span class="kt">float</span><span class="p">)</span>
+<span class="n">DISPATCH8</span><span class="p">(</span><span class="n">Prod</span><span class="p">,</span> <span class="n">marian</span><span class="o">::</span><span class="n">Tensor</span><span class="p">,</span> <span class="k">const</span> <span class="n">marian</span><span class="o">::</span><span class="n">Tensor</span><span class="o">&amp;</span><span class="p">,</span> <span class="k">const</span> <span class="n">marian</span><span class="o">::</span><span class="n">Tensor</span><span class="o">&amp;</span><span class="p">,</span> <span class="kt">bool</span><span class="p">,</span> <span class="kt">bool</span><span class="p">,</span> <span class="kt">float</span><span class="p">,</span> <span class="kt">float</span><span class="p">,</span> <span class="n">Type</span><span class="p">)</span> <span class="c1">// overloading since we want the default to for computeType be C-&gt;type() which difficult otherwise.</span>
+
 <span class="n">DISPATCH8</span><span class="p">(</span><span class="n">ProdBatched</span><span class="p">,</span> <span class="n">marian</span><span class="o">::</span><span class="n">Tensor</span><span class="p">,</span> <span class="n">Ptr</span><span class="o">&lt;</span><span class="n">Allocator</span><span class="o">&gt;</span><span class="p">,</span> <span class="k">const</span> <span class="n">marian</span><span class="o">::</span><span class="n">Tensor</span><span class="p">,</span> <span class="k">const</span> <span class="n">marian</span><span class="o">::</span><span class="n">Tensor</span><span class="p">,</span> <span class="kt">bool</span><span class="p">,</span> <span class="kt">bool</span><span class="p">,</span> <span class="kt">float</span><span class="p">,</span> <span class="kt">float</span><span class="p">)</span>
 <span class="n">DISPATCH9</span><span class="p">(</span><span class="n">CSRProd</span><span class="p">,</span> <span class="n">marian</span><span class="o">::</span><span class="n">Tensor</span><span class="p">,</span> <span class="n">Ptr</span><span class="o">&lt;</span><span class="n">Allocator</span><span class="o">&gt;</span><span class="p">,</span> <span class="k">const</span> <span class="n">marian</span><span class="o">::</span><span class="n">Tensor</span><span class="o">&amp;</span><span class="p">,</span> <span class="k">const</span> <span class="n">marian</span><span class="o">::</span><span class="n">Tensor</span><span class="o">&amp;</span><span class="p">,</span> <span class="k">const</span> <span class="n">marian</span><span class="o">::</span><span class="n">Tensor</span><span class="o">&amp;</span><span class="p">,</span> <span class="k">const</span> <span class="n">marian</span><span class="o">::</span><span class="n">Tensor</span><span class="o">&amp;</span><span class="p">,</span> <span class="kt">bool</span><span class="p">,</span> <span class="kt">bool</span><span class="p">,</span> <span class="kt">float</span><span class="p">)</span>
 
@@ -306,6 +309,8 @@
   <span class="kt">float</span> <span class="n">scale</span> <span class="o">=</span> <span class="mf">1.f</span> <span class="o">/</span> <span class="n">keepProb</span><span class="p">;</span>
   <span class="n">Bernoulli</span><span class="p">(</span><span class="n">tensor</span><span class="p">,</span> <span class="n">keepProb</span><span class="p">,</span> <span class="n">scale</span><span class="p">,</span> <span class="cm">/*shift=*/</span><span class="mf">0.f</span><span class="p">);</span>
 <span class="p">}</span>
+
+<span class="n">DISPATCH2</span><span class="p">(</span><span class="n">SinusoidalPositionEmbeddings</span><span class="p">,</span> <span class="n">marian</span><span class="o">::</span><span class="n">Tensor</span><span class="p">,</span> <span class="kt">int</span><span class="p">);</span>
 
 <span class="cp">#ifdef CUDA_FOUND</span>
 <span class="k">namespace</span> <span class="n">gpu</span> <span class="p">{</span>
@@ -453,7 +458,8 @@
 
 <span class="cp">#ifdef CUDA_FOUND</span>
 <span class="k">namespace</span> <span class="n">gpu</span> <span class="p">{</span>
-<span class="kt">void</span> <span class="nf">GRUFastBackward</span><span class="p">(</span><span class="n">std</span><span class="o">::</span><span class="n">vector</span><span class="o">&lt;</span><span class="n">marian</span><span class="o">::</span><span class="n">Tensor</span><span class="o">&gt;</span> <span class="n">outputs</span><span class="p">,</span>
+<span class="kt">void</span> <span class="nf">GRUFastBackward</span><span class="p">(</span><span class="n">Ptr</span><span class="o">&lt;</span><span class="n">Allocator</span><span class="o">&gt;</span> <span class="n">allocator</span><span class="p">,</span>
+                     <span class="n">std</span><span class="o">::</span><span class="n">vector</span><span class="o">&lt;</span><span class="n">marian</span><span class="o">::</span><span class="n">Tensor</span><span class="o">&gt;</span> <span class="n">outputs</span><span class="p">,</span>
                      <span class="n">std</span><span class="o">::</span><span class="n">vector</span><span class="o">&lt;</span><span class="n">marian</span><span class="o">::</span><span class="n">Tensor</span><span class="o">&gt;</span> <span class="n">inputs</span><span class="p">,</span>
                      <span class="n">marian</span><span class="o">::</span><span class="n">Tensor</span> <span class="n">adj</span><span class="p">,</span>
                      <span class="kt">bool</span> <span class="k">final</span><span class="p">);</span>
@@ -461,22 +467,24 @@
 <span class="cp">#endif</span>
 
 <span class="k">namespace</span> <span class="n">cpu</span> <span class="p">{</span>
-<span class="kt">void</span> <span class="nf">GRUFastBackward</span><span class="p">(</span><span class="n">std</span><span class="o">::</span><span class="n">vector</span><span class="o">&lt;</span><span class="n">marian</span><span class="o">::</span><span class="n">Tensor</span><span class="o">&gt;</span> <span class="n">outputs</span><span class="p">,</span>
+<span class="kt">void</span> <span class="nf">GRUFastBackward</span><span class="p">(</span><span class="n">Ptr</span><span class="o">&lt;</span><span class="n">Allocator</span><span class="o">&gt;</span> <span class="n">allocator</span><span class="p">,</span>
+                     <span class="n">std</span><span class="o">::</span><span class="n">vector</span><span class="o">&lt;</span><span class="n">marian</span><span class="o">::</span><span class="n">Tensor</span><span class="o">&gt;</span> <span class="n">outputs</span><span class="p">,</span>
                      <span class="n">std</span><span class="o">::</span><span class="n">vector</span><span class="o">&lt;</span><span class="n">marian</span><span class="o">::</span><span class="n">Tensor</span><span class="o">&gt;</span> <span class="n">inputs</span><span class="p">,</span>
                      <span class="n">marian</span><span class="o">::</span><span class="n">Tensor</span> <span class="n">adj</span><span class="p">,</span>
                      <span class="kt">bool</span> <span class="k">final</span><span class="p">);</span>
 <span class="p">}</span>
 
-<span class="k">static</span> <span class="kr">inline</span> <span class="kt">void</span> <span class="n">GRUFastBackward</span><span class="p">(</span><span class="n">std</span><span class="o">::</span><span class="n">vector</span><span class="o">&lt;</span><span class="n">marian</span><span class="o">::</span><span class="n">Tensor</span><span class="o">&gt;</span> <span class="n">outputs</span><span class="p">,</span>
+<span class="k">static</span> <span class="kr">inline</span> <span class="kt">void</span> <span class="n">GRUFastBackward</span><span class="p">(</span><span class="n">Ptr</span><span class="o">&lt;</span><span class="n">Allocator</span><span class="o">&gt;</span> <span class="n">allocator</span><span class="p">,</span>
+                                   <span class="n">std</span><span class="o">::</span><span class="n">vector</span><span class="o">&lt;</span><span class="n">marian</span><span class="o">::</span><span class="n">Tensor</span><span class="o">&gt;</span> <span class="n">outputs</span><span class="p">,</span>
                                    <span class="n">std</span><span class="o">::</span><span class="n">vector</span><span class="o">&lt;</span><span class="n">marian</span><span class="o">::</span><span class="n">Tensor</span><span class="o">&gt;</span> <span class="n">inputs</span><span class="p">,</span>
                                    <span class="n">marian</span><span class="o">::</span><span class="n">Tensor</span> <span class="n">adj</span><span class="p">,</span>
                                    <span class="kt">bool</span> <span class="k">final</span> <span class="o">=</span> <span class="nb">false</span><span class="p">)</span> <span class="p">{</span>
 <span class="cp">#ifdef CUDA_FOUND</span>
   <span class="k">if</span><span class="p">(</span><span class="n">adj</span><span class="o">-&gt;</span><span class="n">getBackend</span><span class="p">()</span><span class="o">-&gt;</span><span class="n">getDeviceId</span><span class="p">().</span><span class="n">type</span> <span class="o">==</span> <span class="n">DeviceType</span><span class="o">::</span><span class="n">gpu</span><span class="p">)</span>
-    <span class="n">gpu</span><span class="o">::</span><span class="n">GRUFastBackward</span><span class="p">(</span><span class="n">outputs</span><span class="p">,</span> <span class="n">inputs</span><span class="p">,</span> <span class="n">adj</span><span class="p">,</span> <span class="k">final</span><span class="p">);</span>
+    <span class="n">gpu</span><span class="o">::</span><span class="n">GRUFastBackward</span><span class="p">(</span><span class="n">allocator</span><span class="p">,</span> <span class="n">outputs</span><span class="p">,</span> <span class="n">inputs</span><span class="p">,</span> <span class="n">adj</span><span class="p">,</span> <span class="k">final</span><span class="p">);</span>
   <span class="k">else</span>
 <span class="cp">#endif</span>
-    <span class="n">cpu</span><span class="o">::</span><span class="n">GRUFastBackward</span><span class="p">(</span><span class="n">outputs</span><span class="p">,</span> <span class="n">inputs</span><span class="p">,</span> <span class="n">adj</span><span class="p">,</span> <span class="k">final</span><span class="p">);</span>
+    <span class="n">cpu</span><span class="o">::</span><span class="n">GRUFastBackward</span><span class="p">(</span><span class="n">allocator</span><span class="p">,</span> <span class="n">outputs</span><span class="p">,</span> <span class="n">inputs</span><span class="p">,</span> <span class="n">adj</span><span class="p">,</span> <span class="k">final</span><span class="p">);</span>
 <span class="p">}</span>
 
 <span class="c1">// clang-format off</span>

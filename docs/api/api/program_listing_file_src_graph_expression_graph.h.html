@@ -7,7 +7,7 @@
   
   <meta name="viewport" content="width=device-width, initial-scale=1.0" />
   
-  <title>Program Listing for File expression_graph.h &mdash; Marian NMT v1.10.2 2021-02-28 documentation</title>
+  <title>Program Listing for File expression_graph.h &mdash; Marian NMT v1.10.3 2021-03-22 documentation</title>
   
 
   
@@ -67,7 +67,7 @@
             
             
               <div class="version">
-                v1.10.2
+                v1.10.3
               </div>
             
           
@@ -600,6 +600,8 @@
     <span class="n">defaultElementType_</span> <span class="o">=</span> <span class="n">defaultElementType</span><span class="p">;</span>
   <span class="p">}</span>
 
+  <span class="n">Type</span> <span class="n">getDefaultElementType</span><span class="p">()</span> <span class="p">{</span> <span class="k">return</span> <span class="n">defaultElementType_</span><span class="p">;</span> <span class="p">}</span>
+
   <span class="n">Expr</span> <span class="n">add</span><span class="p">(</span><span class="n">Expr</span> <span class="n">node</span><span class="p">);</span>
 
   <span class="kt">void</span> <span class="nf">allocateForward</span><span class="p">(</span><span class="n">Expr</span> <span class="n">node</span><span class="p">)</span> <span class="p">{</span>
@@ -709,9 +711,13 @@
   <span class="kt">void</span> <span class="nf">save</span><span class="p">(</span><span class="k">const</span> <span class="n">std</span><span class="o">::</span><span class="n">string</span><span class="o">&amp;</span> <span class="n">name</span><span class="p">,</span> <span class="k">const</span> <span class="n">std</span><span class="o">::</span><span class="n">string</span><span class="o">&amp;</span> <span class="n">meta</span> <span class="o">=</span> <span class="s">&quot;&quot;</span><span class="p">,</span> <span class="n">Type</span> <span class="n">saveElementType</span> <span class="o">=</span> <span class="n">Type</span><span class="o">::</span><span class="n">float32</span><span class="p">)</span> <span class="p">{</span>
     <span class="n">std</span><span class="o">::</span><span class="n">vector</span><span class="o">&lt;</span><span class="n">io</span><span class="o">::</span><span class="n">Item</span><span class="o">&gt;</span> <span class="n">ioItems</span><span class="p">;</span>
     <span class="n">save</span><span class="p">(</span><span class="n">ioItems</span><span class="p">,</span> <span class="n">saveElementType</span><span class="p">);</span>
-    <span class="k">if</span><span class="p">(</span><span class="o">!</span><span class="n">meta</span><span class="p">.</span><span class="n">empty</span><span class="p">())</span>
-      <span class="n">io</span><span class="o">::</span><span class="n">addMetaToItems</span><span class="p">(</span><span class="n">meta</span><span class="p">,</span> <span class="s">&quot;special:model.yml&quot;</span><span class="p">,</span> <span class="n">ioItems</span><span class="p">);</span>
-    <span class="n">io</span><span class="o">::</span><span class="n">saveItems</span><span class="p">(</span><span class="n">name</span><span class="p">,</span> <span class="n">ioItems</span><span class="p">);</span>
+    <span class="k">if</span><span class="p">(</span><span class="n">ioItems</span><span class="p">.</span><span class="n">empty</span><span class="p">())</span> <span class="p">{</span>
+      <span class="n">LOG</span><span class="p">(</span><span class="n">warn</span><span class="p">,</span> <span class="s">&quot;Item list is empty, skipping saving&quot;</span><span class="p">);</span>
+    <span class="p">}</span> <span class="k">else</span> <span class="p">{</span>
+      <span class="k">if</span><span class="p">(</span><span class="o">!</span><span class="n">meta</span><span class="p">.</span><span class="n">empty</span><span class="p">())</span>
+        <span class="n">io</span><span class="o">::</span><span class="n">addMetaToItems</span><span class="p">(</span><span class="n">meta</span><span class="p">,</span> <span class="s">&quot;special:model.yml&quot;</span><span class="p">,</span> <span class="n">ioItems</span><span class="p">);</span>
+      <span class="n">io</span><span class="o">::</span><span class="n">saveItems</span><span class="p">(</span><span class="n">name</span><span class="p">,</span> <span class="n">ioItems</span><span class="p">);</span>
+    <span class="p">}</span>
   <span class="p">}</span>
 <span class="p">};</span>
 

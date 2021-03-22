@@ -7,7 +7,7 @@
   
   <meta name="viewport" content="width=device-width, initial-scale=1.0" />
   
-  <title>Program Listing for File node_initializers.cpp &mdash; Marian NMT v1.10.2 2021-02-28 documentation</title>
+  <title>Program Listing for File node_initializers.cpp &mdash; Marian NMT v1.10.3 2021-03-22 documentation</title>
   
 
   
@@ -67,7 +67,7 @@
             
             
               <div class="version">
-                v1.10.2
+                v1.10.3
               </div>
             
           
@@ -196,7 +196,7 @@
 <span class="k">class</span> <span class="nc">LambdaInitConvert</span> <span class="o">:</span> <span class="k">public</span> <span class="n">NodeInitializer</span> <span class="p">{</span>
   <span class="k">private</span><span class="o">:</span>
     <span class="n">std</span><span class="o">::</span><span class="n">function</span><span class="o">&lt;</span><span class="kt">void</span><span class="p">(</span><span class="n">Tensor</span><span class="p">)</span><span class="o">&gt;</span> <span class="n">lambda_</span><span class="p">;</span>
-    <span class="n">Type</span> <span class="n">intermediateType_</span><span class="p">;</span> <span class="c1">// is used for the creation of a temporary intermedia tensor on which the lambda actually operates.</span>
+    <span class="n">Type</span> <span class="n">intermediateType_</span><span class="p">;</span> <span class="c1">// is used for the creation of a temporary intermediate tensor on which the lambda actually operates.</span>
                             <span class="c1">// This tensor is then automatically cast and copied to the type of the actual tensor.</span>
 
   <span class="k">public</span><span class="o">:</span>
@@ -384,24 +384,7 @@
 
 <span class="c1">// Computes Google&#39;s sinusoidal position embeddings</span>
 <span class="n">Ptr</span><span class="o">&lt;</span><span class="n">NodeInitializer</span><span class="o">&gt;</span> <span class="n">sinusoidalPositionEmbeddings</span><span class="p">(</span><span class="kt">int</span> <span class="n">start</span><span class="p">)</span> <span class="p">{</span>
-  <span class="k">return</span> <span class="nf">fromLambda</span><span class="p">([</span><span class="n">start</span><span class="p">](</span><span class="n">Tensor</span> <span class="n">t</span><span class="p">)</span> <span class="p">{</span>
-    <span class="kt">int</span> <span class="n">dimEmb</span>   <span class="o">=</span> <span class="n">t</span><span class="o">-&gt;</span><span class="n">shape</span><span class="p">()[</span><span class="mi">-1</span><span class="p">];</span>
-    <span class="kt">int</span> <span class="n">dimWords</span> <span class="o">=</span> <span class="p">(</span><span class="kt">int</span><span class="p">)</span><span class="n">t</span><span class="o">-&gt;</span><span class="n">size</span><span class="p">()</span> <span class="o">/</span> <span class="n">dimEmb</span><span class="p">;</span>
-
-    <span class="kt">float</span> <span class="n">numTimescales</span> <span class="o">=</span> <span class="p">(</span><span class="kt">float</span><span class="p">)</span><span class="n">dimEmb</span> <span class="o">/</span> <span class="mi">2</span><span class="p">;</span>
-    <span class="kt">float</span> <span class="n">logTimescaleIncrement</span> <span class="o">=</span> <span class="n">std</span><span class="o">::</span><span class="n">log</span><span class="p">(</span><span class="mf">10000.f</span><span class="p">)</span> <span class="o">/</span> <span class="p">(</span><span class="n">numTimescales</span> <span class="o">-</span> <span class="mf">1.f</span><span class="p">);</span>
-
-    <span class="n">std</span><span class="o">::</span><span class="n">vector</span><span class="o">&lt;</span><span class="kt">float</span><span class="o">&gt;</span> <span class="n">vPos</span><span class="p">(</span><span class="n">dimEmb</span> <span class="o">*</span> <span class="n">dimWords</span><span class="p">,</span> <span class="mi">0</span><span class="p">);</span>
-    <span class="k">for</span><span class="p">(</span><span class="kt">int</span> <span class="n">p</span> <span class="o">=</span> <span class="n">start</span><span class="p">;</span> <span class="n">p</span> <span class="o">&lt;</span> <span class="n">dimWords</span> <span class="o">+</span> <span class="n">start</span><span class="p">;</span> <span class="o">++</span><span class="n">p</span><span class="p">)</span> <span class="p">{</span>
-      <span class="k">for</span><span class="p">(</span><span class="kt">int</span> <span class="n">i</span> <span class="o">=</span> <span class="mi">0</span><span class="p">;</span> <span class="n">i</span> <span class="o">&lt;</span> <span class="n">numTimescales</span><span class="p">;</span> <span class="o">++</span><span class="n">i</span><span class="p">)</span> <span class="p">{</span>
-        <span class="kt">float</span> <span class="n">v</span> <span class="o">=</span> <span class="n">p</span> <span class="o">*</span> <span class="n">std</span><span class="o">::</span><span class="n">exp</span><span class="p">(</span><span class="n">i</span> <span class="o">*</span> <span class="o">-</span><span class="n">logTimescaleIncrement</span><span class="p">);</span>
-        <span class="n">vPos</span><span class="p">[(</span><span class="n">p</span> <span class="o">-</span> <span class="n">start</span><span class="p">)</span> <span class="o">*</span> <span class="n">dimEmb</span> <span class="o">+</span> <span class="n">i</span>                     <span class="p">]</span> <span class="o">=</span> <span class="n">std</span><span class="o">::</span><span class="n">sin</span><span class="p">(</span><span class="n">v</span><span class="p">);</span>
-        <span class="n">vPos</span><span class="p">[(</span><span class="n">p</span> <span class="o">-</span> <span class="n">start</span><span class="p">)</span> <span class="o">*</span> <span class="n">dimEmb</span> <span class="o">+</span> <span class="p">(</span><span class="kt">int</span><span class="p">)</span><span class="n">numTimescales</span> <span class="o">+</span> <span class="n">i</span><span class="p">]</span> <span class="o">=</span> <span class="n">std</span><span class="o">::</span><span class="n">cos</span><span class="p">(</span><span class="n">v</span><span class="p">);</span> <span class="c1">// @TODO: is int vs. float correct for num_timescales?</span>
-      <span class="p">}</span>
-    <span class="p">}</span>
-
-    <span class="n">t</span><span class="o">-&gt;</span><span class="n">set</span><span class="p">(</span><span class="n">vPos</span><span class="p">);</span>
-  <span class="p">},</span> <span class="n">Type</span><span class="o">::</span><span class="n">float32</span><span class="p">);</span>
+  <span class="k">return</span> <span class="nf">fromLambda</span><span class="p">([</span><span class="n">start</span><span class="p">](</span><span class="n">Tensor</span> <span class="n">t</span><span class="p">)</span> <span class="p">{</span> <span class="n">SinusoidalPositionEmbeddings</span><span class="p">(</span><span class="n">t</span><span class="p">,</span> <span class="n">start</span><span class="p">);</span> <span class="p">});</span>
 <span class="p">}</span>
 
 <span class="c1">// computes the equivalent of Python&#39;s range()</span>

@@ -1,0 +1,392 @@
+
+
+<!DOCTYPE html>
+<html class="writer-html5" lang="en" >
+<head>
+  <meta charset="utf-8" />
+  
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  
+  <title>Program Listing for File prod_sparse_cu10.h &mdash; Marian NMT v1.10.3 2021-03-22 documentation</title>
+  
+
+  
+  <link rel="stylesheet" href="../_static/css/theme.css" type="text/css" />
+  <link rel="stylesheet" href="../_static/pygments.css" type="text/css" />
+  <link rel="stylesheet" href="../_static/css/custom.css" type="text/css" />
+  <link rel="stylesheet" href="../_static/collapsible-lists/css/tree_view.css" type="text/css" />
+
+  
+  
+
+  
+  
+
+  
+    <link rel="canonical" href="http://marian-nmt.github.io/docs/api/api/program_listing_file_src_tensors_gpu_prod_sparse_cu10.h.html" />
+
+  
+  <!--[if lt IE 9]>
+    <script src="../_static/js/html5shiv.min.js"></script>
+  <![endif]-->
+  
+    
+      <script type="text/javascript" id="documentation_options" data-url_root="../" src="../_static/documentation_options.js"></script>
+        <script src="../_static/jquery.js"></script>
+        <script src="../_static/underscore.js"></script>
+        <script src="../_static/doctools.js"></script>
+        <script src="../_static/language_data.js"></script>
+        <script src="../_static/collapsible-lists/js/CollapsibleLists.compressed.js"></script>
+        <script src="../_static/collapsible-lists/js/apply-collapsible-lists.js"></script>
+    
+    <script type="text/javascript" src="../_static/js/theme.js"></script>
+
+    
+    <link rel="index" title="Index" href="../genindex.html" />
+    <link rel="search" title="Search" href="../search.html" /> 
+</head>
+
+<body class="wy-body-for-nav">
+
+   
+  <div class="wy-grid-for-nav">
+    
+    <nav data-toggle="wy-nav-shift" class="wy-nav-side">
+      <div class="wy-side-scroll">
+        <div class="wy-side-nav-search" >
+          
+
+          
+            <a href="../index.html" class="icon icon-home"> Marian NMT
+          
+
+          
+          </a>
+
+          
+            
+            
+              <div class="version">
+                v1.10.3
+              </div>
+            
+          
+
+          
+<div role="search">
+  <form id="rtd-search-form" class="wy-form" action="../search.html" method="get">
+    <input type="text" name="q" placeholder="Search docs" />
+    <input type="hidden" name="check_keywords" value="yes" />
+    <input type="hidden" name="area" value="default" />
+  </form>
+</div>
+
+          
+        </div>
+
+        
+        <div class="wy-menu wy-menu-vertical" data-spy="affix" role="navigation" aria-label="main navigation">
+          
+            
+            
+              
+            
+            
+              <p class="caption"><span class="caption-text">Contents:</span></p>
+<ul>
+<li class="toctree-l1"><a class="reference internal" href="../graph.html">Expression graphs</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../operators.html">Operations in the Expression Graph</a></li>
+<li class="toctree-l1"><a class="reference internal" href="library_index.html">Library API</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../contributing.html">How to contribute to Marian</a></li>
+</ul>
+
+            
+          
+        </div>
+        
+      </div>
+    </nav>
+
+    <section data-toggle="wy-nav-shift" class="wy-nav-content-wrap">
+
+      
+      <nav class="wy-nav-top" aria-label="top navigation">
+        
+          <i data-toggle="wy-nav-top" class="fa fa-bars"></i>
+          <a href="../index.html">Marian NMT</a>
+        
+      </nav>
+
+
+      <div class="wy-nav-content">
+        
+        <div class="rst-content">
+        
+          
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+<div role="navigation" aria-label="breadcrumbs navigation">
+
+  <ul class="wy-breadcrumbs">
+    
+      <li><a href="../index.html" class="icon icon-home"></a> &raquo;</li>
+        
+      <li>Program Listing for File prod_sparse_cu10.h</li>
+    
+    
+      <li class="wy-breadcrumbs-aside">
+        
+          
+            <a href="../_sources/api/program_listing_file_src_tensors_gpu_prod_sparse_cu10.h.rst.txt" rel="nofollow"> View page source</a>
+          
+        
+      </li>
+    
+  </ul>
+
+  
+  <hr/>
+</div>
+          <div role="main" class="document" itemscope="itemscope" itemtype="http://schema.org/Article">
+           <div itemprop="articleBody">
+            
+  <div class="section" id="program-listing-for-file-prod-sparse-cu10-h">
+<span id="program-listing-file-src-tensors-gpu-prod-sparse-cu10-h"></span><h1>Program Listing for File prod_sparse_cu10.h<a class="headerlink" href="#program-listing-for-file-prod-sparse-cu10-h" title="Permalink to this headline">¶</a></h1>
+<p>↰ <a class="reference internal" href="file_src_tensors_gpu_prod_sparse_cu10.h.html#file-src-tensors-gpu-prod-sparse-cu10-h"><span class="std std-ref">Return to documentation for file</span></a> (<code class="docutils literal notranslate"><span class="pre">src/tensors/gpu/prod_sparse_cu10.h</span></code>)</p>
+<div class="highlight-cpp notranslate"><div class="highlight"><pre><span></span><span class="cp">#include</span> <span class="cpf">&lt;cublas_v2.h&gt;</span><span class="cp"></span>
+<span class="cp">#include</span> <span class="cpf">&lt;cusparse.h&gt;</span><span class="cp"></span>
+
+<span class="c1">// clang-format off</span>
+<span class="cp">#include</span> <span class="cpf">&quot;tensors/gpu/prod.h&quot;</span><span class="cp"></span>
+<span class="cp">#include</span> <span class="cpf">&quot;tensors/gpu/backend.h&quot;</span><span class="cp"></span>
+<span class="cp">#include</span> <span class="cpf">&quot;tensors/gpu/cuda_helpers.h&quot;</span><span class="cp"></span>
+<span class="c1">// clang-format on</span>
+
+<span class="k">namespace</span> <span class="n">marian</span> <span class="p">{</span>
+<span class="k">namespace</span> <span class="n">gpu</span> <span class="p">{</span>
+
+<span class="c1">// primary template for specialization with different element and compute types</span>
+<span class="k">template</span> <span class="o">&lt;</span><span class="k">typename</span> <span class="nc">ElementType</span><span class="o">&gt;</span>
+<span class="k">struct</span> <span class="nc">TypedSparseGemm</span> <span class="p">{</span> <span class="p">};</span>
+
+<span class="k">template</span> <span class="o">&lt;&gt;</span>
+<span class="k">struct</span> <span class="nc">TypedSparseGemm</span><span class="o">&lt;</span><span class="cm">/*ElementType=*/</span><span class="kt">float</span><span class="o">&gt;</span> <span class="p">{</span> <span class="c1">// specialization for element type float32 and compute type float32</span>
+
+<span class="c1">// bug in cuSparse: sparse matrix is limited to 65535 columns</span>
+<span class="c1">// This function is a drop-in replacement that handles it (by slicing).</span>
+<span class="n">cusparseStatus_t</span>
+<span class="k">static</span> <span class="n">cusparseSgemmiEx</span><span class="p">(</span><span class="n">cusparseHandle_t</span> <span class="n">handle</span><span class="p">,</span> <span class="kt">int</span> <span class="n">m</span><span class="p">,</span>
+  <span class="kt">int</span> <span class="n">n</span><span class="p">,</span> <span class="c1">// the offending number of columns of matrices B and C</span>
+  <span class="kt">int</span> <span class="n">k</span><span class="p">,</span> <span class="kt">int</span> <span class="n">nnz</span><span class="p">,</span> <span class="k">const</span> <span class="kt">float</span> <span class="o">*</span><span class="n">alpha</span><span class="p">,</span> <span class="k">const</span> <span class="kt">float</span> <span class="o">*</span><span class="n">A</span><span class="p">,</span> <span class="kt">int</span> <span class="n">lda</span><span class="p">,</span>
+  <span class="k">const</span> <span class="kt">float</span> <span class="o">*</span><span class="n">cscValB</span><span class="p">,</span> <span class="k">const</span> <span class="kt">int</span> <span class="o">*</span><span class="n">cscColPtrB</span><span class="p">,</span> <span class="k">const</span> <span class="kt">int</span> <span class="o">*</span><span class="n">cscRowIndB</span><span class="p">,</span> <span class="k">const</span> <span class="kt">float</span> <span class="o">*</span><span class="n">beta</span><span class="p">,</span>
+  <span class="kt">float</span> <span class="o">*</span><span class="n">C</span><span class="p">,</span> <span class="kt">int</span> <span class="n">ldc</span><span class="p">)</span>
+<span class="p">{</span>
+  <span class="k">const</span> <span class="kt">int</span> <span class="n">nMax</span> <span class="o">=</span> <span class="mi">65535</span><span class="p">;</span> <span class="c1">// max. number of columns allowed by cuSparse 10 implementation</span>
+  <span class="k">for</span> <span class="p">(</span><span class="kt">int</span> <span class="n">j0</span> <span class="o">=</span> <span class="mi">0</span><span class="p">;</span> <span class="n">j0</span> <span class="o">&lt;</span> <span class="n">n</span><span class="p">;</span> <span class="n">j0</span> <span class="o">+=</span> <span class="mi">65535</span><span class="p">)</span> <span class="p">{</span> <span class="c1">// loop over column slices, j0 = index of first column</span>
+    <span class="c1">// Call original function on a column slice.</span>
+    <span class="c1">// Replace all parameters that relate to the column slice.</span>
+    <span class="c1">// nnz does not need to be corrected.</span>
+    <span class="k">auto</span> <span class="n">n1</span> <span class="o">=</span> <span class="n">std</span><span class="o">::</span><span class="n">min</span><span class="p">(</span><span class="n">n</span> <span class="o">-</span> <span class="n">j0</span><span class="p">,</span> <span class="n">nMax</span><span class="p">);</span>   <span class="c1">// width of column slice is limited to max</span>
+    <span class="k">auto</span> <span class="n">C1</span> <span class="o">=</span> <span class="n">C</span> <span class="o">+</span> <span class="n">j0</span> <span class="o">*</span> <span class="n">ldc</span><span class="p">;</span>             <span class="c1">// column slice into result matrix C</span>
+    <span class="k">auto</span> <span class="n">cscColPtrB1</span> <span class="o">=</span> <span class="n">cscColPtrB</span> <span class="o">+</span> <span class="n">j0</span><span class="p">;</span> <span class="c1">// column slice into sparse factor B</span>
+    <span class="k">auto</span> <span class="n">rc</span> <span class="o">=</span> <span class="n">cusparseSgemmi</span><span class="p">(</span><span class="n">handle</span><span class="p">,</span> <span class="n">m</span><span class="p">,</span> <span class="n">n1</span><span class="p">,</span> <span class="n">k</span><span class="p">,</span> <span class="n">nnz</span><span class="p">,</span> <span class="n">alpha</span><span class="p">,</span> <span class="n">A</span><span class="p">,</span> <span class="n">lda</span><span class="p">,</span> <span class="n">cscValB</span><span class="p">,</span> <span class="n">cscColPtrB1</span><span class="p">,</span> <span class="n">cscRowIndB</span><span class="p">,</span> <span class="n">beta</span><span class="p">,</span> <span class="n">C1</span><span class="p">,</span> <span class="n">ldc</span><span class="p">);</span>
+    <span class="k">if</span> <span class="p">(</span><span class="n">rc</span> <span class="o">!=</span> <span class="n">CUSPARSE_STATUS_SUCCESS</span><span class="p">)</span>
+      <span class="k">return</span> <span class="n">rc</span><span class="p">;</span>
+  <span class="p">}</span>
+  <span class="k">return</span> <span class="n">CUSPARSE_STATUS_SUCCESS</span><span class="p">;</span>
+<span class="p">}</span>
+
+<span class="c1">// C = op(S) x D if not swapOperands else C = D x op(S)</span>
+<span class="c1">// op(S) = S if not transA else S^T</span>
+<span class="k">static</span> <span class="kt">void</span> <span class="n">CSRProd</span><span class="p">(</span><span class="n">marian</span><span class="o">::</span><span class="n">Tensor</span> <span class="n">C</span><span class="p">,</span>
+                    <span class="n">Ptr</span><span class="o">&lt;</span><span class="n">Allocator</span><span class="o">&gt;</span> <span class="n">allocator</span><span class="p">,</span>
+                    <span class="k">const</span> <span class="n">marian</span><span class="o">::</span><span class="n">Tensor</span><span class="o">&amp;</span> <span class="n">S_values</span><span class="p">,</span>
+                    <span class="k">const</span> <span class="n">marian</span><span class="o">::</span><span class="n">Tensor</span><span class="o">&amp;</span> <span class="n">S_indices</span><span class="p">,</span>
+                    <span class="k">const</span> <span class="n">marian</span><span class="o">::</span><span class="n">Tensor</span><span class="o">&amp;</span> <span class="n">S_offsets</span><span class="p">,</span>
+                    <span class="k">const</span> <span class="n">marian</span><span class="o">::</span><span class="n">Tensor</span><span class="o">&amp;</span> <span class="n">D</span><span class="p">,</span>
+                    <span class="kt">bool</span> <span class="n">transS</span><span class="p">,</span>
+                    <span class="kt">bool</span> <span class="n">swapOperands</span><span class="p">,</span>
+                    <span class="kt">float</span> <span class="n">beta</span><span class="p">)</span> <span class="p">{</span>
+  <span class="n">cudaSetDevice</span><span class="p">((</span><span class="kt">int</span><span class="p">)</span><span class="n">C</span><span class="o">-&gt;</span><span class="n">getDeviceId</span><span class="p">().</span><span class="n">no</span><span class="p">);</span>
+  <span class="k">auto</span> <span class="n">cusparseHandle</span> <span class="o">=</span> <span class="n">std</span><span class="o">::</span><span class="n">static_pointer_cast</span><span class="o">&lt;</span><span class="n">gpu</span><span class="o">::</span><span class="n">Backend</span><span class="o">&gt;</span><span class="p">(</span><span class="n">C</span><span class="o">-&gt;</span><span class="n">getBackend</span><span class="p">())</span><span class="o">-&gt;</span><span class="n">getCusparseHandle</span><span class="p">();</span>
+  <span class="c1">// interpret tensor dimensions as matrix dimensions</span>
+  <span class="k">const</span> <span class="k">auto</span><span class="o">&amp;</span> <span class="n">shapeC</span> <span class="o">=</span> <span class="n">C</span><span class="o">-&gt;</span><span class="n">shape</span><span class="p">();</span>
+  <span class="k">const</span> <span class="k">auto</span><span class="o">&amp;</span> <span class="n">shapeD</span> <span class="o">=</span> <span class="n">D</span><span class="o">-&gt;</span><span class="n">shape</span><span class="p">();</span>
+  <span class="c1">// If swapOperands, S and D are swapped (C = D x S instead of C = S x D).</span>
+  <span class="c1">// In that case, in the next 6 lines, please read all dimensions as if they were reversed in order.</span>
+  <span class="k">auto</span> <span class="n">rowsC</span> <span class="o">=</span> <span class="n">shapeC</span><span class="p">[</span><span class="o">-</span><span class="p">(</span><span class="kt">int</span><span class="p">)</span><span class="n">swapOperands</span><span class="p">];</span>
+  <span class="k">auto</span> <span class="n">colsC</span> <span class="o">=</span> <span class="n">shapeC</span><span class="p">.</span><span class="n">elements</span><span class="p">()</span> <span class="o">/</span> <span class="n">rowsC</span><span class="p">;</span>
+  <span class="k">auto</span> <span class="n">rowsD</span> <span class="o">=</span> <span class="n">shapeD</span><span class="p">[</span><span class="o">-</span><span class="p">(</span><span class="kt">int</span><span class="p">)</span><span class="n">swapOperands</span><span class="p">];</span>
+  <span class="k">auto</span> <span class="n">colsD</span> <span class="o">=</span> <span class="n">shapeD</span><span class="p">.</span><span class="n">elements</span><span class="p">()</span> <span class="o">/</span> <span class="n">rowsD</span><span class="p">;</span>
+  <span class="k">auto</span> <span class="n">rowsS</span> <span class="o">=</span> <span class="n">transS</span> <span class="o">?</span> <span class="nl">rowsD</span> <span class="p">:</span> <span class="n">rowsC</span><span class="p">;</span>
+  <span class="k">auto</span> <span class="n">colsS</span> <span class="o">=</span> <span class="n">transS</span> <span class="o">?</span> <span class="nl">rowsC</span> <span class="p">:</span> <span class="n">rowsD</span><span class="p">;</span>
+  <span class="n">ABORT_IF</span><span class="p">(</span><span class="n">colsD</span> <span class="o">!=</span> <span class="n">colsC</span><span class="p">,</span> <span class="s">&quot;Inconsistent outer dimensions in CSR product&quot;</span><span class="p">);</span>
+  <span class="k">if</span> <span class="p">(</span><span class="n">swapOperands</span><span class="p">)</span> <span class="p">{</span> <span class="c1">// make rowsX actual row dimensions again, likewise colsX</span>
+    <span class="n">std</span><span class="o">::</span><span class="n">swap</span><span class="p">(</span><span class="n">rowsC</span><span class="p">,</span> <span class="n">colsC</span><span class="p">);</span>
+    <span class="n">std</span><span class="o">::</span><span class="n">swap</span><span class="p">(</span><span class="n">rowsD</span><span class="p">,</span> <span class="n">colsD</span><span class="p">);</span>
+    <span class="n">std</span><span class="o">::</span><span class="n">swap</span><span class="p">(</span><span class="n">rowsS</span><span class="p">,</span> <span class="n">colsS</span><span class="p">);</span>
+  <span class="p">}</span>
+  <span class="c1">// sparse arrays</span>
+  <span class="k">auto</span> <span class="n">numValues</span>  <span class="o">=</span> <span class="n">S_values</span><span class="o">-&gt;</span><span class="n">shape</span><span class="p">().</span><span class="n">elements</span><span class="p">();</span>
+  <span class="k">auto</span> <span class="n">numOffsets</span> <span class="o">=</span> <span class="n">S_offsets</span><span class="o">-&gt;</span><span class="n">shape</span><span class="p">().</span><span class="n">elements</span><span class="p">()</span> <span class="o">-</span> <span class="mi">1</span><span class="p">;</span> <span class="c1">// -1 since last value is length</span>
+  <span class="n">ABORT_IF</span><span class="p">(</span><span class="n">numOffsets</span> <span class="o">!=</span> <span class="n">rowsS</span><span class="p">,</span> <span class="s">&quot;Unexpected number of rows in CSR argument&quot;</span><span class="p">);</span>
+  <span class="n">ABORT_IF</span><span class="p">(</span><span class="n">S_values</span><span class="o">-&gt;</span><span class="n">shape</span><span class="p">()</span> <span class="o">!=</span> <span class="n">S_indices</span><span class="o">-&gt;</span><span class="n">shape</span><span class="p">(),</span> <span class="s">&quot;CSR values and indices must have the same size&quot;</span><span class="p">);</span>
+  <span class="kt">float</span> <span class="n">alpha</span> <span class="o">=</span> <span class="mi">1</span><span class="p">;</span>
+  <span class="n">MemoryPiece</span><span class="o">::</span><span class="n">PtrType</span> <span class="n">St_values</span><span class="p">,</span> <span class="n">St_indices</span><span class="p">,</span> <span class="n">St_offsets</span><span class="p">;</span>
+  <span class="k">if</span> <span class="p">(</span><span class="n">transS</span> <span class="o">!=</span> <span class="n">swapOperands</span><span class="p">)</span> <span class="p">{</span>
+    <span class="c1">// Cusparse gemmi() does not support this specific version of transpose, and csrmm() is non-deterministic.</span>
+    <span class="c1">// Hence, we transpose the matrix explicitly.</span>
+    <span class="c1">// Note that gemmi() expects a CSC, while csrmm() a CSR; hence, the strange condition (transS != swapOperands) above.</span>
+    <span class="n">St_values</span>  <span class="o">=</span> <span class="n">allocator</span><span class="o">-&gt;</span><span class="n">alloc</span><span class="o">&lt;</span><span class="kt">float</span><span class="o">&gt;</span><span class="p">(</span><span class="n">numValues</span><span class="p">);</span>
+    <span class="n">St_indices</span> <span class="o">=</span> <span class="n">allocator</span><span class="o">-&gt;</span><span class="n">alloc</span><span class="o">&lt;</span><span class="kt">int</span><span class="o">&gt;</span><span class="p">(</span><span class="n">numValues</span><span class="p">);</span>
+    <span class="n">St_offsets</span> <span class="o">=</span> <span class="n">allocator</span><span class="o">-&gt;</span><span class="n">alloc</span><span class="o">&lt;</span><span class="kt">int</span><span class="o">&gt;</span><span class="p">(</span><span class="n">colsS</span> <span class="o">+</span> <span class="mi">1</span><span class="p">);</span>
+    <span class="c1">// transpose the second argument</span>
+    <span class="n">CUSPARSE_CHECK</span><span class="p">(</span><span class="n">cusparseScsr2csc</span><span class="p">(</span><span class="n">cusparseHandle</span><span class="p">,</span>
+        <span class="cm">/*m=*/</span> <span class="n">rowsS</span><span class="p">,</span> <span class="c1">// number of rows of matrix</span>
+        <span class="cm">/*n=*/</span> <span class="n">colsS</span><span class="p">,</span> <span class="c1">// number of columns of matrix</span>
+        <span class="cm">/*nnz=*/</span> <span class="p">(</span><span class="kt">int</span><span class="p">)</span><span class="n">numValues</span><span class="p">,</span>
+        <span class="cm">/*csrcVal=*/</span>    <span class="n">S_values</span> <span class="o">-&gt;</span><span class="n">data</span><span class="o">&lt;</span><span class="kt">float</span><span class="o">&gt;</span><span class="p">(),</span>
+        <span class="cm">/*csrcRowPtr=*/</span> <span class="p">(</span><span class="kt">int</span><span class="o">*</span><span class="p">)</span><span class="n">S_offsets</span><span class="o">-&gt;</span><span class="n">data</span><span class="o">&lt;</span><span class="n">IndexType</span><span class="o">&gt;</span><span class="p">(),</span>
+        <span class="cm">/*csrcColInd=*/</span> <span class="p">(</span><span class="kt">int</span><span class="o">*</span><span class="p">)</span><span class="n">S_indices</span><span class="o">-&gt;</span><span class="n">data</span><span class="o">&lt;</span><span class="n">IndexType</span><span class="o">&gt;</span><span class="p">(),</span>
+        <span class="cm">/*cscVal=*/</span>    <span class="n">St_values</span> <span class="o">-&gt;</span><span class="n">data</span><span class="o">&lt;</span><span class="kt">float</span><span class="o">&gt;</span><span class="p">(),</span>  <span class="c1">// transposed version goes here</span>
+        <span class="cm">/*cscRowInd=*/</span> <span class="n">St_indices</span><span class="o">-&gt;</span><span class="n">data</span><span class="o">&lt;</span><span class="kt">int</span><span class="o">&gt;</span><span class="p">(),</span>
+        <span class="cm">/*cscColPtr=*/</span> <span class="n">St_offsets</span><span class="o">-&gt;</span><span class="n">data</span><span class="o">&lt;</span><span class="kt">int</span><span class="o">&gt;</span><span class="p">(),</span>
+        <span class="cm">/*copyValues=*/</span> <span class="n">CUSPARSE_ACTION_NUMERIC</span><span class="p">,</span>
+        <span class="cm">/*idxBase=*/</span> <span class="n">CUSPARSE_INDEX_BASE_ZERO</span><span class="p">));</span>
+    <span class="n">std</span><span class="o">::</span><span class="n">swap</span><span class="p">(</span><span class="n">rowsS</span><span class="p">,</span> <span class="n">colsS</span><span class="p">);</span> <span class="c1">// these variables now represent the dims of the explicitly transposed object</span>
+  <span class="p">}</span>
+  <span class="k">if</span> <span class="p">(</span><span class="n">swapOperands</span><span class="p">)</span> <span class="p">{</span>
+    <span class="c1">// C = D x S for row-major matrices</span>
+    <span class="c1">// Implemented via cusparse as C&#39; = S&#39; x D&#39; (&quot;csrmm&quot;) where C&#39; and D&#39; are column-major,</span>
+    <span class="c1">// and S&#39; is CSR (if not transS then we make a transposed copy).</span>
+    <span class="n">cusparseMatDescr_t</span> <span class="n">descrA</span><span class="p">;</span>
+    <span class="n">CUSPARSE_CHECK</span><span class="p">(</span><span class="n">cusparseCreateMatDescr</span><span class="p">(</span><span class="o">&amp;</span><span class="n">descrA</span><span class="p">));</span>
+    <span class="n">cusparseSetMatType</span>     <span class="p">(</span><span class="n">descrA</span><span class="p">,</span> <span class="n">CUSPARSE_MATRIX_TYPE_GENERAL</span><span class="p">);</span>
+    <span class="n">cusparseSetMatIndexBase</span><span class="p">(</span><span class="n">descrA</span><span class="p">,</span> <span class="n">CUSPARSE_INDEX_BASE_ZERO</span><span class="p">);</span>
+    <span class="n">CUSPARSE_CHECK</span><span class="p">(</span><span class="n">cusparseScsrmm</span><span class="p">(</span><span class="n">cusparseHandle</span><span class="p">,</span>
+        <span class="n">CUSPARSE_OPERATION_NON_TRANSPOSE</span><span class="p">,</span> <span class="c1">// (we explicitly transposed above)</span>
+        <span class="cm">/*m=*/</span> <span class="n">rowsS</span><span class="p">,</span> <span class="c1">// #rows of first (CSR) factor (the transpose was done explicitly)</span>
+        <span class="cm">/*n=*/</span> <span class="n">rowsC</span><span class="p">,</span> <span class="c1">// #cols of second (col-major) factor and (col-major) result = #rows of row-major C</span>
+        <span class="cm">/*k=*/</span> <span class="n">colsS</span><span class="p">,</span> <span class="c1">// #cols of first (CSR) factor</span>
+        <span class="cm">/*nnz=*/</span> <span class="p">(</span><span class="kt">int</span><span class="p">)</span><span class="n">numValues</span><span class="p">,</span>
+        <span class="o">&amp;</span><span class="n">alpha</span><span class="p">,</span> <span class="n">descrA</span><span class="p">,</span>
+        <span class="cm">/*csrValA=*/</span>    <span class="n">St_values</span>  <span class="o">?</span> <span class="n">St_values</span> <span class="o">-&gt;</span><span class="n">data</span><span class="o">&lt;</span><span class="kt">float</span><span class="o">&gt;</span><span class="p">()</span> <span class="o">:</span>       <span class="n">S_values</span> <span class="o">-&gt;</span><span class="n">data</span><span class="o">&lt;</span><span class="kt">float</span><span class="o">&gt;</span><span class="p">(),</span>
+        <span class="cm">/*csrRowPtrA=*/</span> <span class="n">St_offsets</span> <span class="o">?</span> <span class="n">St_offsets</span><span class="o">-&gt;</span><span class="n">data</span><span class="o">&lt;</span><span class="kt">int</span><span class="o">&gt;</span><span class="p">()</span>   <span class="o">:</span> <span class="p">(</span><span class="kt">int</span><span class="o">*</span><span class="p">)</span><span class="n">S_offsets</span><span class="o">-&gt;</span><span class="n">data</span><span class="o">&lt;</span><span class="n">IndexType</span><span class="o">&gt;</span><span class="p">(),</span>
+        <span class="cm">/*csrColIndA=*/</span> <span class="n">St_indices</span> <span class="o">?</span> <span class="n">St_indices</span><span class="o">-&gt;</span><span class="n">data</span><span class="o">&lt;</span><span class="kt">int</span><span class="o">&gt;</span><span class="p">()</span>   <span class="o">:</span> <span class="p">(</span><span class="kt">int</span><span class="o">*</span><span class="p">)</span><span class="n">S_indices</span><span class="o">-&gt;</span><span class="n">data</span><span class="o">&lt;</span><span class="n">IndexType</span><span class="o">&gt;</span><span class="p">(),</span>
+        <span class="n">D</span><span class="o">-&gt;</span><span class="n">data</span><span class="p">(),</span>
+        <span class="cm">/*ldb=*/</span> <span class="n">colsD</span><span class="p">,</span> <span class="c1">// stride</span>
+        <span class="o">&amp;</span><span class="n">beta</span><span class="p">,</span>
+        <span class="n">C</span><span class="o">-&gt;</span><span class="n">data</span><span class="p">(),</span>
+        <span class="cm">/*ldc=*/</span> <span class="n">colsC</span><span class="p">));</span> <span class="c1">// stride</span>
+    <span class="n">cusparseDestroyMatDescr</span><span class="p">(</span><span class="n">descrA</span><span class="p">);</span>
+  <span class="p">}</span>
+  <span class="k">else</span> <span class="p">{</span>
+    <span class="c1">// C = S x D for row-major matrices</span>
+    <span class="c1">// Implemented via cusparse as C&#39; = D&#39; x S&#39; (&quot;gemmi&quot;) where C&#39; and D&#39; are column-major.</span>
+    <span class="n">CUSPARSE_CHECK</span><span class="p">(</span><span class="n">cusparseSgemmiEx</span><span class="p">(</span><span class="n">cusparseHandle</span><span class="p">,</span>
+        <span class="cm">/*m=*/</span> <span class="n">colsD</span><span class="p">,</span> <span class="c1">// #rows of first (col-major) factor = #cols of row-major D</span>
+        <span class="cm">/*n=*/</span> <span class="n">rowsC</span><span class="p">,</span> <span class="c1">// #cols of second (CSC) factor and (col-major) result = #rows of row-major C</span>
+        <span class="cm">/*k=*/</span> <span class="n">rowsD</span><span class="p">,</span> <span class="c1">// #cols of first (col-major) factor = #rows of row-major D</span>
+        <span class="cm">/*nnz=*/</span> <span class="p">(</span><span class="kt">int</span><span class="p">)</span><span class="n">numValues</span><span class="p">,</span>
+        <span class="o">&amp;</span><span class="n">alpha</span><span class="p">,</span>
+        <span class="cm">/*A=*/</span> <span class="n">D</span><span class="o">-&gt;</span><span class="n">data</span><span class="p">(),</span>
+        <span class="cm">/*lda=*/</span> <span class="n">colsD</span><span class="p">,</span> <span class="c1">// stride</span>
+        <span class="cm">/*cscValB=*/</span>    <span class="n">St_values</span>  <span class="o">?</span> <span class="n">St_values</span> <span class="o">-&gt;</span><span class="n">data</span><span class="o">&lt;</span><span class="kt">float</span><span class="o">&gt;</span><span class="p">()</span> <span class="o">:</span>       <span class="n">S_values</span> <span class="o">-&gt;</span><span class="n">data</span><span class="o">&lt;</span><span class="kt">float</span><span class="o">&gt;</span><span class="p">(),</span>
+        <span class="cm">/*cscColPtrB=*/</span> <span class="n">St_offsets</span> <span class="o">?</span> <span class="n">St_offsets</span><span class="o">-&gt;</span><span class="n">data</span><span class="o">&lt;</span><span class="kt">int</span><span class="o">&gt;</span><span class="p">()</span>   <span class="o">:</span> <span class="p">(</span><span class="kt">int</span><span class="o">*</span><span class="p">)</span><span class="n">S_offsets</span><span class="o">-&gt;</span><span class="n">data</span><span class="o">&lt;</span><span class="n">IndexType</span><span class="o">&gt;</span><span class="p">(),</span>
+        <span class="cm">/*cscRowIndB=*/</span> <span class="n">St_indices</span> <span class="o">?</span> <span class="n">St_indices</span><span class="o">-&gt;</span><span class="n">data</span><span class="o">&lt;</span><span class="kt">int</span><span class="o">&gt;</span><span class="p">()</span>   <span class="o">:</span> <span class="p">(</span><span class="kt">int</span><span class="o">*</span><span class="p">)</span><span class="n">S_indices</span><span class="o">-&gt;</span><span class="n">data</span><span class="o">&lt;</span><span class="n">IndexType</span><span class="o">&gt;</span><span class="p">(),</span>
+        <span class="o">&amp;</span><span class="n">beta</span><span class="p">,</span>
+        <span class="n">C</span><span class="o">-&gt;</span><span class="n">data</span><span class="p">(),</span>
+        <span class="cm">/*ldc=*/</span> <span class="n">colsC</span><span class="p">));</span> <span class="c1">// stride</span>
+    <span class="c1">// Note: cuSparse 10 docs says this about cscColPtrB:</span>
+    <span class="c1">//   &quot;integer array of k + 1 elements that contains the start of every row and the end of the last row plus one.&quot;</span>
+    <span class="c1">// This is wrong. It should be col instead of row, and n instead of k.</span>
+  <span class="p">}</span>
+  <span class="k">if</span><span class="p">(</span><span class="n">St_values</span> <span class="p">)</span> <span class="n">allocator</span><span class="o">-&gt;</span><span class="n">free</span><span class="p">(</span><span class="n">St_values</span> <span class="p">);</span>
+  <span class="k">if</span><span class="p">(</span><span class="n">St_indices</span><span class="p">)</span> <span class="n">allocator</span><span class="o">-&gt;</span><span class="n">free</span><span class="p">(</span><span class="n">St_indices</span><span class="p">);</span>
+  <span class="k">if</span><span class="p">(</span><span class="n">St_offsets</span><span class="p">)</span> <span class="n">allocator</span><span class="o">-&gt;</span><span class="n">free</span><span class="p">(</span><span class="n">St_offsets</span><span class="p">);</span>
+<span class="p">}</span>
+
+<span class="p">};</span>
+
+<span class="k">template</span> <span class="o">&lt;&gt;</span>
+<span class="k">struct</span> <span class="nc">TypedSparseGemm</span><span class="o">&lt;</span><span class="cm">/*ElementType=*/</span><span class="n">half</span><span class="o">&gt;</span> <span class="p">{</span> <span class="c1">// specialization for element type float32 and compute type float16</span>
+  <span class="k">static</span> <span class="kt">void</span> <span class="n">CSRProd</span><span class="p">(</span><span class="n">marian</span><span class="o">::</span><span class="n">Tensor</span> <span class="cm">/*C*/</span><span class="p">,</span>
+                      <span class="n">Ptr</span><span class="o">&lt;</span><span class="n">Allocator</span><span class="o">&gt;</span> <span class="cm">/*allocator*/</span><span class="p">,</span>
+                      <span class="k">const</span> <span class="n">marian</span><span class="o">::</span><span class="n">Tensor</span><span class="o">&amp;</span> <span class="cm">/*S_values*/</span><span class="p">,</span>
+                      <span class="k">const</span> <span class="n">marian</span><span class="o">::</span><span class="n">Tensor</span><span class="o">&amp;</span> <span class="cm">/*S_indices*/</span><span class="p">,</span>
+                      <span class="k">const</span> <span class="n">marian</span><span class="o">::</span><span class="n">Tensor</span><span class="o">&amp;</span> <span class="cm">/*S_offsets*/</span><span class="p">,</span>
+                      <span class="k">const</span> <span class="n">marian</span><span class="o">::</span><span class="n">Tensor</span><span class="o">&amp;</span> <span class="cm">/*D*/</span><span class="p">,</span>
+                      <span class="kt">bool</span> <span class="cm">/*transS*/</span><span class="p">,</span>
+                      <span class="kt">bool</span> <span class="cm">/*swapOperands*/</span><span class="p">,</span>
+                      <span class="kt">float</span> <span class="cm">/*beta*/</span><span class="p">)</span> <span class="p">{</span>
+    <span class="n">ABORT</span><span class="p">(</span><span class="s">&quot;CSRProd with type {} not supported on CUDA 10.2 or lower. You need at least CUDA 11.0&quot;</span><span class="p">,</span> <span class="n">Type</span><span class="o">::</span><span class="n">float16</span><span class="p">);</span>
+  <span class="p">}</span>
+<span class="p">};</span>
+
+
+<span class="p">}</span>  <span class="c1">// namespace gpu</span>
+<span class="p">}</span>  <span class="c1">// namespace marian</span>
+</pre></div>
+</div>
+</div>
+
+
+           </div>
+           
+          </div>
+          <footer>
+
+  <hr/>
+
+  <div role="contentinfo">
+    <p>
+        &#169; Copyright 2021, Marian NMT Team.
+
+    </p>
+  </div>
+    
+    
+    
+    Built with <a href="https://www.sphinx-doc.org/">Sphinx</a> using a
+    
+    <a href="https://github.com/readthedocs/sphinx_rtd_theme">theme</a>
+    
+    provided by <a href="https://readthedocs.org">Read the Docs</a>. 
+
+</footer>
+        </div>
+      </div>
+
+    </section>
+
+  </div>
+  
+
+  <script type="text/javascript">
+      jQuery(function () {
+          SphinxRtdTheme.Navigation.enable(true);
+      });
+  </script>
+
+  
+  
+    
+   
+
+</body>
+</html>

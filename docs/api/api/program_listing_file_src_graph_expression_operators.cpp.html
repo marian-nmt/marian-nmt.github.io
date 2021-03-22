@@ -7,7 +7,7 @@
   
   <meta name="viewport" content="width=device-width, initial-scale=1.0" />
   
-  <title>Program Listing for File expression_operators.cpp &mdash; Marian NMT v1.10.2 2021-02-28 documentation</title>
+  <title>Program Listing for File expression_operators.cpp &mdash; Marian NMT v1.10.3 2021-03-22 documentation</title>
   
 
   
@@ -67,7 +67,7 @@
             
             
               <div class="version">
-                v1.10.2
+                v1.10.3
               </div>
             
           
@@ -747,10 +747,30 @@
   <span class="p">}</span>
 <span class="p">}</span>
 
+<span class="c1">// @TODO: Not a great place to check this</span>
+<span class="cp">#if CUDA_VERSION &lt; 11000</span>
 <span class="c1">// multiply a CSR matrix A with a matrix B</span>
 <span class="c1">// A[i,j] is at A_values[A_offsets[i]+k], where k is position of j in A_indices[A_offsets[i]:A_offsets[i+1]]</span>
 <span class="c1">// @TODO: Define a proper sparse tensor type.</span>
 <span class="n">Expr</span> <span class="n">csr_dot</span><span class="p">(</span><span class="k">const</span> <span class="n">Shape</span><span class="o">&amp;</span> <span class="n">A_shape</span><span class="p">,</span> <span class="n">Expr</span> <span class="n">A_values</span><span class="p">,</span> <span class="n">Expr</span> <span class="n">A_indices</span><span class="p">,</span> <span class="n">Expr</span> <span class="n">A_offsets</span><span class="p">,</span> <span class="n">Expr</span> <span class="n">B</span><span class="p">,</span> <span class="kt">bool</span> <span class="n">transA</span> <span class="cm">/*= false*/</span><span class="p">)</span> <span class="p">{</span>
+  <span class="k">if</span><span class="p">(</span><span class="n">A_values</span><span class="o">-&gt;</span><span class="n">value_type</span><span class="p">()</span> <span class="o">==</span> <span class="n">Type</span><span class="o">::</span><span class="n">float16</span><span class="p">)</span>
+    <span class="n">LOG_ONCE</span><span class="p">(</span><span class="n">warn</span><span class="p">,</span> <span class="s">&quot;Using very slow version of sparse matrix operations with explicity cast to {}. Use CUDA 11.0 or higher.&quot;</span><span class="p">,</span> <span class="n">Type</span><span class="o">::</span><span class="n">float16</span><span class="p">);</span>
+  <span class="k">return</span> <span class="nf">cast</span><span class="p">(</span><span class="n">Expression</span><span class="o">&lt;</span><span class="n">CSRDotNodeOp</span><span class="o">&gt;</span><span class="p">(</span><span class="n">A_shape</span><span class="p">,</span> <span class="n">cast</span><span class="p">(</span><span class="n">A_values</span><span class="p">,</span> <span class="n">Type</span><span class="o">::</span><span class="n">float32</span><span class="p">),</span> <span class="n">A_indices</span><span class="p">,</span> <span class="n">A_offsets</span><span class="p">,</span> <span class="n">cast</span><span class="p">(</span><span class="n">B</span><span class="p">,</span> <span class="n">Type</span><span class="o">::</span><span class="n">float32</span><span class="p">),</span> <span class="n">transA</span><span class="p">,</span> <span class="cm">/*swapOperands=*/</span><span class="nb">false</span><span class="p">),</span> <span class="n">A_values</span><span class="o">-&gt;</span><span class="n">value_type</span><span class="p">());</span>
+<span class="p">}</span>
+
+<span class="c1">// multiply a matrix A with a CSR matrix B</span>
+<span class="c1">// @TODO: Define a proper sparse tensor type.</span>
+<span class="n">Expr</span> <span class="n">dot_csr</span><span class="p">(</span><span class="n">Expr</span> <span class="n">A</span><span class="p">,</span> <span class="k">const</span> <span class="n">Shape</span><span class="o">&amp;</span> <span class="n">B_shape</span><span class="p">,</span> <span class="n">Expr</span> <span class="n">B_values</span><span class="p">,</span> <span class="n">Expr</span> <span class="n">B_indices</span><span class="p">,</span> <span class="n">Expr</span> <span class="n">B_offsets</span><span class="p">,</span> <span class="kt">bool</span> <span class="n">transB</span> <span class="cm">/*= false*/</span><span class="p">)</span> <span class="p">{</span>
+  <span class="k">if</span><span class="p">(</span><span class="n">B_values</span><span class="o">-&gt;</span><span class="n">value_type</span><span class="p">()</span> <span class="o">==</span> <span class="n">Type</span><span class="o">::</span><span class="n">float16</span><span class="p">)</span>
+    <span class="n">LOG_ONCE</span><span class="p">(</span><span class="n">warn</span><span class="p">,</span> <span class="s">&quot;Using very slow version of sparse matrix operations with explicity cast to {}. Use CUDA 11.0 or higher.&quot;</span><span class="p">,</span> <span class="n">Type</span><span class="o">::</span><span class="n">float16</span><span class="p">);</span>
+  <span class="k">return</span> <span class="nf">cast</span><span class="p">(</span><span class="n">Expression</span><span class="o">&lt;</span><span class="n">CSRDotNodeOp</span><span class="o">&gt;</span><span class="p">(</span><span class="n">B_shape</span><span class="p">,</span> <span class="n">cast</span><span class="p">(</span><span class="n">B_values</span><span class="p">,</span> <span class="n">Type</span><span class="o">::</span><span class="n">float32</span><span class="p">),</span> <span class="n">B_indices</span><span class="p">,</span> <span class="n">B_offsets</span><span class="p">,</span> <span class="n">cast</span><span class="p">(</span><span class="n">A</span><span class="p">,</span> <span class="n">Type</span><span class="o">::</span><span class="n">float32</span><span class="p">),</span> <span class="n">transB</span><span class="p">,</span> <span class="cm">/*swapOperands=*/</span><span class="nb">true</span><span class="p">),</span> <span class="n">B_values</span><span class="o">-&gt;</span><span class="n">value_type</span><span class="p">());</span>
+<span class="p">}</span>
+<span class="cp">#else</span>
+<span class="c1">// multiply a CSR matrix A with a matrix B</span>
+<span class="c1">// A[i,j] is at A_values[A_offsets[i]+k], where k is position of j in A_indices[A_offsets[i]:A_offsets[i+1]]</span>
+<span class="c1">// @TODO: Define a proper sparse tensor type.</span>
+<span class="n">Expr</span> <span class="n">csr_dot</span><span class="p">(</span><span class="k">const</span> <span class="n">Shape</span><span class="o">&amp;</span> <span class="n">A_shape</span><span class="p">,</span> <span class="n">Expr</span> <span class="n">A_values</span><span class="p">,</span> <span class="n">Expr</span> <span class="n">A_indices</span><span class="p">,</span> <span class="n">Expr</span> <span class="n">A_offsets</span><span class="p">,</span> <span class="n">Expr</span> <span class="n">B</span><span class="p">,</span> <span class="kt">bool</span> <span class="n">transA</span> <span class="cm">/*= false*/</span><span class="p">)</span> <span class="p">{</span>
+  <span class="c1">// @TODO: implement this without cast</span>
   <span class="k">return</span> <span class="n">Expression</span><span class="o">&lt;</span><span class="n">CSRDotNodeOp</span><span class="o">&gt;</span><span class="p">(</span><span class="n">A_shape</span><span class="p">,</span> <span class="n">A_values</span><span class="p">,</span> <span class="n">A_indices</span><span class="p">,</span> <span class="n">A_offsets</span><span class="p">,</span> <span class="n">B</span><span class="p">,</span> <span class="n">transA</span><span class="p">,</span> <span class="cm">/*swapOperands=*/</span><span class="nb">false</span><span class="p">);</span>
 <span class="p">}</span>
 
@@ -759,6 +779,8 @@
 <span class="n">Expr</span> <span class="n">dot_csr</span><span class="p">(</span><span class="n">Expr</span> <span class="n">A</span><span class="p">,</span> <span class="k">const</span> <span class="n">Shape</span><span class="o">&amp;</span> <span class="n">B_shape</span><span class="p">,</span> <span class="n">Expr</span> <span class="n">B_values</span><span class="p">,</span> <span class="n">Expr</span> <span class="n">B_indices</span><span class="p">,</span> <span class="n">Expr</span> <span class="n">B_offsets</span><span class="p">,</span> <span class="kt">bool</span> <span class="n">transB</span> <span class="cm">/*= false*/</span><span class="p">)</span> <span class="p">{</span>
   <span class="k">return</span> <span class="n">Expression</span><span class="o">&lt;</span><span class="n">CSRDotNodeOp</span><span class="o">&gt;</span><span class="p">(</span><span class="n">B_shape</span><span class="p">,</span> <span class="n">B_values</span><span class="p">,</span> <span class="n">B_indices</span><span class="p">,</span> <span class="n">B_offsets</span><span class="p">,</span> <span class="n">A</span><span class="p">,</span> <span class="n">transB</span><span class="p">,</span> <span class="cm">/*swapOperands=*/</span><span class="nb">true</span><span class="p">);</span>
 <span class="p">}</span>
+<span class="cp">#endif</span>
+
 
 <span class="c1">// swap the last two axes</span>
 <span class="c1">// @TODO: change to swapAxes(a, -1, -2)</span>
@@ -809,7 +831,7 @@
 
 <span class="n">Expr</span> <span class="n">cast</span><span class="p">(</span><span class="n">Expr</span> <span class="n">a</span><span class="p">,</span> <span class="n">Type</span> <span class="n">type</span><span class="p">)</span> <span class="p">{</span>
   <span class="k">if</span><span class="p">(</span><span class="n">a</span><span class="o">-&gt;</span><span class="n">value_type</span><span class="p">()</span> <span class="o">==</span> <span class="n">type</span><span class="p">)</span> <span class="p">{</span>
-    <span class="k">return</span> <span class="n">a</span><span class="p">;</span>
+    <span class="k">return</span> <span class="n">a</span><span class="p">;</span> <span class="c1">// it&#39;s the correct type already, so nothing to do here</span>
   <span class="p">}</span> <span class="k">else</span> <span class="p">{</span>
     <span class="k">return</span> <span class="n">Expression</span><span class="o">&lt;</span><span class="n">CastNodeOp</span><span class="o">&gt;</span><span class="p">(</span><span class="n">a</span><span class="p">,</span> <span class="n">type</span><span class="p">);</span>
   <span class="p">}</span>

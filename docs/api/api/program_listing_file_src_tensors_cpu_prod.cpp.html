@@ -7,7 +7,7 @@
   
   <meta name="viewport" content="width=device-width, initial-scale=1.0" />
   
-  <title>Program Listing for File prod.cpp &mdash; Marian NMT v1.10.2 2021-02-28 documentation</title>
+  <title>Program Listing for File prod.cpp &mdash; Marian NMT v1.10.3 2021-03-22 documentation</title>
   
 
   
@@ -67,7 +67,7 @@
             
             
               <div class="version">
-                v1.10.2
+                v1.10.3
               </div>
             
           
@@ -237,6 +237,19 @@
   <span class="n">C</span><span class="p">;</span> <span class="n">A</span><span class="p">;</span> <span class="n">B</span><span class="p">;</span> <span class="n">transA</span><span class="p">;</span> <span class="n">transB</span><span class="p">;</span> <span class="n">beta</span><span class="p">;</span> <span class="n">scalar</span><span class="p">;</span>
   <span class="n">ABORT</span><span class="p">(</span><span class="s">&quot;You need to compile with MKL in order to use the CPU version&quot;</span><span class="p">);</span>
 <span class="cp">#endif</span>
+<span class="p">}</span>
+
+<span class="c1">// dummy implementation, computeType doesn&#39;t do anything on CPU</span>
+<span class="kt">void</span> <span class="nf">Prod</span><span class="p">(</span><span class="n">marian</span><span class="o">::</span><span class="n">Tensor</span> <span class="n">C</span><span class="p">,</span>
+          <span class="k">const</span> <span class="n">marian</span><span class="o">::</span><span class="n">Tensor</span><span class="o">&amp;</span> <span class="n">A</span><span class="p">,</span>
+          <span class="k">const</span> <span class="n">marian</span><span class="o">::</span><span class="n">Tensor</span><span class="o">&amp;</span> <span class="n">B</span><span class="p">,</span>
+          <span class="kt">bool</span> <span class="n">transA</span><span class="p">,</span>
+          <span class="kt">bool</span> <span class="n">transB</span><span class="p">,</span>
+          <span class="kt">float</span> <span class="n">beta</span><span class="p">,</span>
+          <span class="kt">float</span> <span class="n">scalar</span><span class="p">,</span>
+          <span class="n">Type</span> <span class="n">computeType</span><span class="p">)</span> <span class="p">{</span>
+  <span class="n">computeType</span><span class="p">;</span> <span class="c1">// make compiler happy</span>
+  <span class="n">cpu</span><span class="o">::</span><span class="n">Prod</span><span class="p">(</span><span class="n">C</span><span class="p">,</span> <span class="n">A</span><span class="p">,</span> <span class="n">B</span><span class="p">,</span> <span class="n">transA</span><span class="p">,</span> <span class="n">transB</span><span class="p">,</span> <span class="n">beta</span><span class="p">,</span> <span class="n">scalar</span><span class="p">);</span>
 <span class="p">}</span>
 
 <span class="kt">void</span> <span class="nf">ProdBatched</span><span class="p">(</span><span class="n">marian</span><span class="o">::</span><span class="n">Tensor</span> <span class="n">C</span><span class="p">,</span>

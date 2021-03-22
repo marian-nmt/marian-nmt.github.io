@@ -7,7 +7,7 @@
   
   <meta name="viewport" content="width=device-width, initial-scale=1.0" />
   
-  <title>Program Listing for File io.h &mdash; Marian NMT v1.10.2 2021-02-28 documentation</title>
+  <title>Program Listing for File io.h &mdash; Marian NMT v1.10.3 2021-03-22 documentation</title>
   
 
   
@@ -67,7 +67,7 @@
             
             
               <div class="version">
-                v1.10.2
+                v1.10.3
               </div>
             
           
@@ -202,6 +202,17 @@
 <span class="n">std</span><span class="o">::</span><span class="n">vector</span><span class="o">&lt;</span><span class="n">Item</span><span class="o">&gt;</span> <span class="n">mmapItems</span><span class="p">(</span><span class="k">const</span> <span class="kt">void</span><span class="o">*</span> <span class="n">ptr</span><span class="p">);</span>
 
 <span class="kt">void</span> <span class="nf">saveItems</span><span class="p">(</span><span class="k">const</span> <span class="n">std</span><span class="o">::</span><span class="n">string</span><span class="o">&amp;</span> <span class="n">fileName</span><span class="p">,</span> <span class="k">const</span> <span class="n">std</span><span class="o">::</span><span class="n">vector</span><span class="o">&lt;</span><span class="n">Item</span><span class="o">&gt;&amp;</span> <span class="n">items</span><span class="p">);</span>
+
+<span class="k">template</span> <span class="o">&lt;</span><span class="k">typename</span> <span class="nc">T</span><span class="o">&gt;</span>
+<span class="n">Item</span> <span class="n">fromVector</span><span class="p">(</span><span class="k">const</span> <span class="n">std</span><span class="o">::</span><span class="n">vector</span><span class="o">&lt;</span><span class="n">T</span><span class="o">&gt;&amp;</span> <span class="n">vec</span><span class="p">,</span> <span class="k">const</span> <span class="n">std</span><span class="o">::</span><span class="n">string</span><span class="o">&amp;</span> <span class="n">name</span><span class="p">)</span> <span class="p">{</span>
+  <span class="n">Item</span> <span class="n">item</span><span class="p">;</span>
+  <span class="n">item</span><span class="p">.</span><span class="n">name</span> <span class="o">=</span> <span class="n">std</span><span class="o">::</span><span class="n">move</span><span class="p">(</span><span class="n">name</span><span class="p">);</span>
+  <span class="n">item</span><span class="p">.</span><span class="n">shape</span> <span class="o">=</span> <span class="n">Shape</span><span class="p">({</span><span class="mi">1</span><span class="p">,</span> <span class="p">(</span><span class="kt">int</span><span class="p">)</span><span class="n">vec</span><span class="p">.</span><span class="n">size</span><span class="p">()});</span> <span class="c1">// @TODO: review if this should be {1, size} or rather just {size}</span>
+  <span class="n">item</span><span class="p">.</span><span class="n">type</span> <span class="o">=</span> <span class="n">typeId</span><span class="o">&lt;</span><span class="n">T</span><span class="o">&gt;</span><span class="p">();</span>
+  <span class="n">item</span><span class="p">.</span><span class="n">bytes</span><span class="p">.</span><span class="n">resize</span><span class="p">(</span><span class="n">vec</span><span class="p">.</span><span class="n">size</span><span class="p">()</span> <span class="o">*</span> <span class="n">sizeOf</span><span class="p">(</span><span class="n">item</span><span class="p">.</span><span class="n">type</span><span class="p">));</span>
+  <span class="n">std</span><span class="o">::</span><span class="n">copy</span><span class="p">((</span><span class="kt">char</span><span class="o">*</span><span class="p">)</span><span class="n">vec</span><span class="p">.</span><span class="n">data</span><span class="p">(),</span> <span class="p">(</span><span class="kt">char</span><span class="o">*</span><span class="p">)(</span><span class="n">vec</span><span class="p">.</span><span class="n">data</span><span class="p">()</span> <span class="o">+</span> <span class="n">vec</span><span class="p">.</span><span class="n">size</span><span class="p">()),</span> <span class="n">item</span><span class="p">.</span><span class="n">bytes</span><span class="p">.</span><span class="n">begin</span><span class="p">());</span>
+  <span class="k">return</span> <span class="n">item</span><span class="p">;</span>
+<span class="p">}</span>
 
 <span class="p">}</span>  <span class="c1">// namespace io</span>
 <span class="p">}</span>  <span class="c1">// namespace marian</span>

@@ -7,7 +7,7 @@
   
   <meta name="viewport" content="width=device-width, initial-scale=1.0" />
   
-  <title>Program Listing for File costs.h &mdash; Marian NMT v1.10.2 2021-02-28 documentation</title>
+  <title>Program Listing for File costs.h &mdash; Marian NMT v1.10.3 2021-03-22 documentation</title>
   
 
   
@@ -67,7 +67,7 @@
             
             
               <div class="version">
-                v1.10.2
+                v1.10.3
               </div>
             
           
@@ -174,8 +174,8 @@
 <span class="cp">#include</span> <span class="cpf">&quot;layers/guided_alignment.h&quot;</span><span class="cp"></span>
 <span class="cp">#include</span> <span class="cpf">&quot;layers/loss.h&quot;</span><span class="cp"></span>
 <span class="cp">#include</span> <span class="cpf">&quot;layers/weight.h&quot;</span><span class="cp"></span>
-<span class="cp">#include</span> <span class="cpf">&quot;models/encoder_decoder.h&quot;</span><span class="cp"></span>
 <span class="cp">#include</span> <span class="cpf">&quot;models/encoder_classifier.h&quot;</span><span class="cp"></span>
+<span class="cp">#include</span> <span class="cpf">&quot;models/encoder_decoder.h&quot;</span><span class="cp"></span>
 <span class="cp">#include</span> <span class="cpf">&quot;models/encoder_pooler.h&quot;</span><span class="cp"></span>
 
 <span class="k">namespace</span> <span class="n">marian</span> <span class="p">{</span>
@@ -192,10 +192,12 @@
 
 <span class="k">class</span> <span class="nc">ICost</span> <span class="p">{</span>
 <span class="k">public</span><span class="o">:</span>
-  <span class="k">virtual</span> <span class="n">Ptr</span><span class="o">&lt;</span><span class="n">MultiRationalLoss</span><span class="o">&gt;</span> <span class="n">apply</span><span class="p">(</span><span class="n">Ptr</span><span class="o">&lt;</span><span class="n">IModel</span><span class="o">&gt;</span> <span class="n">model</span><span class="p">,</span>
-                                       <span class="n">Ptr</span><span class="o">&lt;</span><span class="n">ExpressionGraph</span><span class="o">&gt;</span> <span class="n">graph</span><span class="p">,</span> <span class="c1">// @TODO: why needed? Can it be gotten from model?</span>
-                                       <span class="n">Ptr</span><span class="o">&lt;</span><span class="n">data</span><span class="o">::</span><span class="n">Batch</span><span class="o">&gt;</span> <span class="n">batch</span><span class="p">,</span>
-                                       <span class="kt">bool</span> <span class="n">clearGraph</span> <span class="o">=</span> <span class="nb">true</span><span class="p">)</span> <span class="o">=</span> <span class="mi">0</span><span class="p">;</span>
+  <span class="k">virtual</span> <span class="n">Ptr</span><span class="o">&lt;</span><span class="n">MultiRationalLoss</span><span class="o">&gt;</span> <span class="n">apply</span><span class="p">(</span>
+      <span class="n">Ptr</span><span class="o">&lt;</span><span class="n">IModel</span><span class="o">&gt;</span> <span class="n">model</span><span class="p">,</span>
+      <span class="n">Ptr</span><span class="o">&lt;</span><span class="n">ExpressionGraph</span><span class="o">&gt;</span> <span class="n">graph</span><span class="p">,</span>  <span class="c1">// @TODO: why needed? Can it be gotten from model?</span>
+      <span class="n">Ptr</span><span class="o">&lt;</span><span class="n">data</span><span class="o">::</span><span class="n">Batch</span><span class="o">&gt;</span> <span class="n">batch</span><span class="p">,</span>
+      <span class="kt">bool</span> <span class="n">clearGraph</span> <span class="o">=</span> <span class="nb">true</span><span class="p">)</span>
+      <span class="o">=</span> <span class="mi">0</span><span class="p">;</span>
   <span class="k">virtual</span> <span class="o">~</span><span class="n">ICost</span><span class="p">()</span> <span class="p">{}</span>
 <span class="p">};</span>
 
@@ -215,10 +217,9 @@
       <span class="o">:</span> <span class="n">options_</span><span class="p">(</span><span class="n">options</span><span class="p">),</span> <span class="n">inference_</span><span class="p">(</span><span class="n">options</span><span class="o">-&gt;</span><span class="n">get</span><span class="o">&lt;</span><span class="kt">bool</span><span class="o">&gt;</span><span class="p">(</span><span class="s">&quot;inference&quot;</span><span class="p">,</span> <span class="nb">false</span><span class="p">))</span> <span class="p">{</span>
     <span class="n">loss_</span> <span class="o">=</span> <span class="n">newLoss</span><span class="p">(</span><span class="n">options_</span><span class="p">,</span> <span class="n">inference_</span><span class="p">);</span>
 
-    <span class="n">toBeWeighted_</span>
-        <span class="o">=</span> <span class="p">(</span><span class="n">options_</span><span class="o">-&gt;</span><span class="n">hasAndNotEmpty</span><span class="p">(</span><span class="s">&quot;data-weighting&quot;</span><span class="p">)</span> <span class="o">&amp;&amp;</span> <span class="o">!</span><span class="n">inference_</span><span class="p">)</span>
-          <span class="o">||</span> <span class="p">(</span><span class="n">options_</span><span class="o">-&gt;</span><span class="n">has</span><span class="p">(</span><span class="s">&quot;dynamic-weighting&quot;</span><span class="p">)</span> <span class="o">&amp;&amp;</span> <span class="n">options_</span><span class="o">-&gt;</span><span class="n">get</span><span class="o">&lt;</span><span class="kt">bool</span><span class="o">&gt;</span><span class="p">(</span><span class="s">&quot;dynamic-weighting&quot;</span><span class="p">)</span>
-              <span class="o">&amp;&amp;</span> <span class="o">!</span><span class="n">inference_</span><span class="p">);</span>
+    <span class="n">toBeWeighted_</span> <span class="o">=</span> <span class="p">(</span><span class="n">options_</span><span class="o">-&gt;</span><span class="n">hasAndNotEmpty</span><span class="p">(</span><span class="s">&quot;data-weighting&quot;</span><span class="p">)</span> <span class="o">&amp;&amp;</span> <span class="o">!</span><span class="n">inference_</span><span class="p">)</span>
+                    <span class="o">||</span> <span class="p">(</span><span class="n">options_</span><span class="o">-&gt;</span><span class="n">has</span><span class="p">(</span><span class="s">&quot;dynamic-weighting&quot;</span><span class="p">)</span>
+                        <span class="o">&amp;&amp;</span> <span class="n">options_</span><span class="o">-&gt;</span><span class="n">get</span><span class="o">&lt;</span><span class="kt">bool</span><span class="o">&gt;</span><span class="p">(</span><span class="s">&quot;dynamic-weighting&quot;</span><span class="p">)</span> <span class="o">&amp;&amp;</span> <span class="o">!</span><span class="n">inference_</span><span class="p">);</span>
     <span class="k">if</span><span class="p">(</span><span class="n">toBeWeighted_</span><span class="p">)</span>
       <span class="n">weighter_</span> <span class="o">=</span> <span class="n">WeightingFactory</span><span class="p">(</span><span class="n">options_</span><span class="p">);</span>
   <span class="p">}</span>
@@ -226,9 +227,9 @@
   <span class="k">virtual</span> <span class="o">~</span><span class="n">EncoderDecoderCECost</span><span class="p">()</span> <span class="p">{}</span>
 
   <span class="n">Ptr</span><span class="o">&lt;</span><span class="n">MultiRationalLoss</span><span class="o">&gt;</span> <span class="n">apply</span><span class="p">(</span><span class="n">Ptr</span><span class="o">&lt;</span><span class="n">IModel</span><span class="o">&gt;</span> <span class="n">model</span><span class="p">,</span>
-             <span class="n">Ptr</span><span class="o">&lt;</span><span class="n">ExpressionGraph</span><span class="o">&gt;</span> <span class="n">graph</span><span class="p">,</span>
-             <span class="n">Ptr</span><span class="o">&lt;</span><span class="n">data</span><span class="o">::</span><span class="n">Batch</span><span class="o">&gt;</span> <span class="n">batch</span><span class="p">,</span>
-             <span class="kt">bool</span> <span class="n">clearGraph</span> <span class="o">=</span> <span class="nb">true</span><span class="p">)</span> <span class="k">override</span> <span class="p">{</span>
+                               <span class="n">Ptr</span><span class="o">&lt;</span><span class="n">ExpressionGraph</span><span class="o">&gt;</span> <span class="n">graph</span><span class="p">,</span>
+                               <span class="n">Ptr</span><span class="o">&lt;</span><span class="n">data</span><span class="o">::</span><span class="n">Batch</span><span class="o">&gt;</span> <span class="n">batch</span><span class="p">,</span>
+                               <span class="kt">bool</span> <span class="n">clearGraph</span> <span class="o">=</span> <span class="nb">true</span><span class="p">)</span> <span class="k">override</span> <span class="p">{</span>
     <span class="k">auto</span> <span class="n">encdec</span> <span class="o">=</span> <span class="n">std</span><span class="o">::</span><span class="n">static_pointer_cast</span><span class="o">&lt;</span><span class="n">EncoderDecoder</span><span class="o">&gt;</span><span class="p">(</span><span class="n">model</span><span class="p">);</span>
     <span class="k">auto</span> <span class="n">corpusBatch</span> <span class="o">=</span> <span class="n">std</span><span class="o">::</span><span class="n">static_pointer_cast</span><span class="o">&lt;</span><span class="n">data</span><span class="o">::</span><span class="n">CorpusBatch</span><span class="o">&gt;</span><span class="p">(</span><span class="n">batch</span><span class="p">);</span>
 
@@ -242,17 +243,17 @@
     <span class="n">Ptr</span><span class="o">&lt;</span><span class="n">MultiRationalLoss</span><span class="o">&gt;</span> <span class="n">multiLoss</span> <span class="o">=</span> <span class="n">newMultiLoss</span><span class="p">(</span><span class="n">options_</span><span class="p">);</span>
 
     <span class="c1">// @TODO: adapt to multi-objective training with multiple decoders</span>
-    <span class="k">auto</span> <span class="n">partialLoss</span> <span class="o">=</span> <span class="n">loss_</span><span class="o">-&gt;</span><span class="n">apply</span><span class="p">(</span><span class="n">state</span><span class="o">-&gt;</span><span class="n">getLogProbs</span><span class="p">(),</span>
-                                    <span class="n">state</span><span class="o">-&gt;</span><span class="n">getTargetWords</span><span class="p">(),</span>
-                                    <span class="n">state</span><span class="o">-&gt;</span><span class="n">getTargetMask</span><span class="p">(),</span>
-                                    <span class="n">weights</span><span class="p">);</span>
+    <span class="k">auto</span> <span class="n">partialLoss</span> <span class="o">=</span> <span class="n">loss_</span><span class="o">-&gt;</span><span class="n">apply</span><span class="p">(</span>
+        <span class="n">state</span><span class="o">-&gt;</span><span class="n">getLogProbs</span><span class="p">(),</span> <span class="n">state</span><span class="o">-&gt;</span><span class="n">getTargetWords</span><span class="p">(),</span> <span class="n">state</span><span class="o">-&gt;</span><span class="n">getTargetMask</span><span class="p">(),</span> <span class="n">weights</span><span class="p">);</span>
     <span class="n">multiLoss</span><span class="o">-&gt;</span><span class="n">push_back</span><span class="p">(</span><span class="n">partialLoss</span><span class="p">);</span>
 
     <span class="k">if</span><span class="p">(</span><span class="n">options_</span><span class="o">-&gt;</span><span class="n">get</span><span class="p">(</span><span class="s">&quot;guided-alignment&quot;</span><span class="p">,</span> <span class="n">std</span><span class="o">::</span><span class="n">string</span><span class="p">(</span><span class="s">&quot;none&quot;</span><span class="p">))</span> <span class="o">!=</span> <span class="s">&quot;none&quot;</span> <span class="o">&amp;&amp;</span> <span class="o">!</span><span class="n">inference_</span><span class="p">)</span> <span class="p">{</span>
-      <span class="k">auto</span> <span class="n">attentionVectors</span> <span class="o">=</span> <span class="n">encdec</span><span class="o">-&gt;</span><span class="n">getDecoders</span><span class="p">()[</span><span class="mi">0</span><span class="p">]</span><span class="o">-&gt;</span><span class="n">getAlignments</span><span class="p">();</span> <span class="c1">// [tgt index][beam depth, max src length, batch size, 1]</span>
+      <span class="k">auto</span> <span class="n">attentionVectors</span>
+          <span class="o">=</span> <span class="n">encdec</span><span class="o">-&gt;</span><span class="n">getDecoders</span><span class="p">()[</span><span class="mi">0</span><span class="p">]</span>
+                <span class="o">-&gt;</span><span class="n">getAlignments</span><span class="p">();</span>  <span class="c1">// [tgt index][beam depth, max src length, batch size, 1]</span>
       <span class="n">ABORT_IF</span><span class="p">(</span><span class="n">attentionVectors</span><span class="p">.</span><span class="n">empty</span><span class="p">(),</span> <span class="s">&quot;Model does not seem to support alignments&quot;</span><span class="p">);</span>
 
-      <span class="k">auto</span> <span class="n">attention</span> <span class="o">=</span> <span class="n">concatenate</span><span class="p">(</span><span class="n">attentionVectors</span><span class="p">,</span> <span class="cm">/*axis =*/</span> <span class="mi">-1</span><span class="p">);</span>
+      <span class="k">auto</span> <span class="n">attention</span> <span class="o">=</span> <span class="n">concatenate</span><span class="p">(</span><span class="n">attentionVectors</span><span class="p">,</span> <span class="cm">/*axis =*/</span><span class="mi">-1</span><span class="p">);</span>
 
       <span class="k">auto</span> <span class="n">alignmentLoss</span> <span class="o">=</span> <span class="n">guidedAlignmentCost</span><span class="p">(</span><span class="n">graph</span><span class="p">,</span> <span class="n">corpusBatch</span><span class="p">,</span> <span class="n">options_</span><span class="p">,</span> <span class="n">attention</span><span class="p">);</span>
       <span class="n">multiLoss</span><span class="o">-&gt;</span><span class="n">push_back</span><span class="p">(</span><span class="n">alignmentLoss</span><span class="p">);</span>
@@ -279,10 +280,9 @@
   <span class="p">}</span>
 
   <span class="n">Ptr</span><span class="o">&lt;</span><span class="n">MultiRationalLoss</span><span class="o">&gt;</span> <span class="n">apply</span><span class="p">(</span><span class="n">Ptr</span><span class="o">&lt;</span><span class="n">IModel</span><span class="o">&gt;</span> <span class="n">model</span><span class="p">,</span>
-             <span class="n">Ptr</span><span class="o">&lt;</span><span class="n">ExpressionGraph</span><span class="o">&gt;</span> <span class="n">graph</span><span class="p">,</span>
-             <span class="n">Ptr</span><span class="o">&lt;</span><span class="n">data</span><span class="o">::</span><span class="n">Batch</span><span class="o">&gt;</span> <span class="n">batch</span><span class="p">,</span>
-             <span class="kt">bool</span> <span class="n">clearGraph</span> <span class="o">=</span> <span class="nb">true</span><span class="p">)</span> <span class="k">override</span> <span class="p">{</span>
-
+                               <span class="n">Ptr</span><span class="o">&lt;</span><span class="n">ExpressionGraph</span><span class="o">&gt;</span> <span class="n">graph</span><span class="p">,</span>
+                               <span class="n">Ptr</span><span class="o">&lt;</span><span class="n">data</span><span class="o">::</span><span class="n">Batch</span><span class="o">&gt;</span> <span class="n">batch</span><span class="p">,</span>
+                               <span class="kt">bool</span> <span class="n">clearGraph</span> <span class="o">=</span> <span class="nb">true</span><span class="p">)</span> <span class="k">override</span> <span class="p">{</span>
     <span class="k">auto</span> <span class="n">enccls</span> <span class="o">=</span> <span class="n">std</span><span class="o">::</span><span class="n">static_pointer_cast</span><span class="o">&lt;</span><span class="n">EncoderClassifier</span><span class="o">&gt;</span><span class="p">(</span><span class="n">model</span><span class="p">);</span>
     <span class="k">auto</span> <span class="n">corpusBatch</span> <span class="o">=</span> <span class="n">std</span><span class="o">::</span><span class="n">static_pointer_cast</span><span class="o">&lt;</span><span class="n">data</span><span class="o">::</span><span class="n">CorpusBatch</span><span class="o">&gt;</span><span class="p">(</span><span class="n">batch</span><span class="p">);</span>
 
@@ -311,21 +311,20 @@
 
 <span class="k">public</span><span class="o">:</span>
   <span class="n">EncoderPoolerRankCost</span><span class="p">(</span><span class="n">Ptr</span><span class="o">&lt;</span><span class="n">Options</span><span class="o">&gt;</span> <span class="n">options</span><span class="p">)</span>
-      <span class="o">:</span> <span class="n">options_</span><span class="p">(</span><span class="n">options</span><span class="p">),</span>
-        <span class="n">inference_</span><span class="p">(</span><span class="n">options</span><span class="o">-&gt;</span><span class="n">get</span><span class="o">&lt;</span><span class="kt">bool</span><span class="o">&gt;</span><span class="p">(</span><span class="s">&quot;inference&quot;</span><span class="p">,</span> <span class="nb">false</span><span class="p">))</span> <span class="p">{</span>
-      <span class="k">auto</span> <span class="n">trainEmbedderRank</span> <span class="o">=</span> <span class="n">options</span><span class="o">-&gt;</span><span class="n">get</span><span class="o">&lt;</span><span class="n">std</span><span class="o">::</span><span class="n">vector</span><span class="o">&lt;</span><span class="n">std</span><span class="o">::</span><span class="n">string</span><span class="o">&gt;&gt;</span><span class="p">(</span><span class="s">&quot;train-embedder-rank&quot;</span><span class="p">,</span> <span class="p">{});</span>
-      <span class="n">ABORT_IF</span><span class="p">(</span><span class="n">trainEmbedderRank</span><span class="p">.</span><span class="n">empty</span><span class="p">(),</span> <span class="s">&quot;EncoderPoolerRankCost expects train-embedder-rank to be set&quot;</span><span class="p">);</span>
+      <span class="o">:</span> <span class="n">options_</span><span class="p">(</span><span class="n">options</span><span class="p">),</span> <span class="n">inference_</span><span class="p">(</span><span class="n">options</span><span class="o">-&gt;</span><span class="n">get</span><span class="o">&lt;</span><span class="kt">bool</span><span class="o">&gt;</span><span class="p">(</span><span class="s">&quot;inference&quot;</span><span class="p">,</span> <span class="nb">false</span><span class="p">))</span> <span class="p">{</span>
+    <span class="k">auto</span> <span class="n">trainEmbedderRank</span> <span class="o">=</span> <span class="n">options</span><span class="o">-&gt;</span><span class="n">get</span><span class="o">&lt;</span><span class="n">std</span><span class="o">::</span><span class="n">vector</span><span class="o">&lt;</span><span class="n">std</span><span class="o">::</span><span class="n">string</span><span class="o">&gt;&gt;</span><span class="p">(</span><span class="s">&quot;train-embedder-rank&quot;</span><span class="p">,</span> <span class="p">{});</span>
+    <span class="n">ABORT_IF</span><span class="p">(</span><span class="n">trainEmbedderRank</span><span class="p">.</span><span class="n">empty</span><span class="p">(),</span>
+             <span class="s">&quot;EncoderPoolerRankCost expects train-embedder-rank to be set&quot;</span><span class="p">);</span>
 
-      <span class="n">margin_</span> <span class="o">=</span> <span class="n">std</span><span class="o">::</span><span class="n">stof</span><span class="p">(</span><span class="n">trainEmbedderRank</span><span class="p">[</span><span class="mi">0</span><span class="p">]);</span>
-      <span class="k">if</span><span class="p">(</span><span class="n">trainEmbedderRank</span><span class="p">.</span><span class="n">size</span><span class="p">()</span> <span class="o">&gt;</span> <span class="mi">1</span><span class="p">)</span>
-        <span class="n">normalizer_</span> <span class="o">=</span> <span class="n">std</span><span class="o">::</span><span class="n">stof</span><span class="p">(</span><span class="n">trainEmbedderRank</span><span class="p">[</span><span class="mi">1</span><span class="p">]);</span>
+    <span class="n">margin_</span> <span class="o">=</span> <span class="n">std</span><span class="o">::</span><span class="n">stof</span><span class="p">(</span><span class="n">trainEmbedderRank</span><span class="p">[</span><span class="mi">0</span><span class="p">]);</span>
+    <span class="k">if</span><span class="p">(</span><span class="n">trainEmbedderRank</span><span class="p">.</span><span class="n">size</span><span class="p">()</span> <span class="o">&gt;</span> <span class="mi">1</span><span class="p">)</span>
+      <span class="n">normalizer_</span> <span class="o">=</span> <span class="n">std</span><span class="o">::</span><span class="n">stof</span><span class="p">(</span><span class="n">trainEmbedderRank</span><span class="p">[</span><span class="mi">1</span><span class="p">]);</span>
   <span class="p">}</span>
 
   <span class="n">Ptr</span><span class="o">&lt;</span><span class="n">MultiRationalLoss</span><span class="o">&gt;</span> <span class="n">apply</span><span class="p">(</span><span class="n">Ptr</span><span class="o">&lt;</span><span class="n">IModel</span><span class="o">&gt;</span> <span class="n">model</span><span class="p">,</span>
                                <span class="n">Ptr</span><span class="o">&lt;</span><span class="n">ExpressionGraph</span><span class="o">&gt;</span> <span class="n">graph</span><span class="p">,</span>
                                <span class="n">Ptr</span><span class="o">&lt;</span><span class="n">data</span><span class="o">::</span><span class="n">Batch</span><span class="o">&gt;</span> <span class="n">batch</span><span class="p">,</span>
                                <span class="kt">bool</span> <span class="n">clearGraph</span> <span class="o">=</span> <span class="nb">true</span><span class="p">)</span> <span class="k">override</span> <span class="p">{</span>
-
     <span class="k">auto</span> <span class="n">encpool</span> <span class="o">=</span> <span class="n">std</span><span class="o">::</span><span class="n">static_pointer_cast</span><span class="o">&lt;</span><span class="n">EncoderPooler</span><span class="o">&gt;</span><span class="p">(</span><span class="n">model</span><span class="p">);</span>
     <span class="k">auto</span> <span class="n">corpusBatch</span> <span class="o">=</span> <span class="n">std</span><span class="o">::</span><span class="n">static_pointer_cast</span><span class="o">&lt;</span><span class="n">data</span><span class="o">::</span><span class="n">CorpusBatch</span><span class="o">&gt;</span><span class="p">(</span><span class="n">batch</span><span class="p">);</span>
     <span class="n">std</span><span class="o">::</span><span class="n">vector</span><span class="o">&lt;</span><span class="n">Expr</span><span class="o">&gt;</span> <span class="n">dotProducts</span> <span class="o">=</span> <span class="n">encpool</span><span class="o">-&gt;</span><span class="n">apply</span><span class="p">(</span><span class="n">graph</span><span class="p">,</span> <span class="n">corpusBatch</span><span class="p">,</span> <span class="n">clearGraph</span><span class="p">);</span>
@@ -337,24 +336,37 @@
     <span class="n">ABORT_IF</span><span class="p">(</span><span class="n">dotProducts</span><span class="p">.</span><span class="n">size</span><span class="p">()</span> <span class="o">!=</span> <span class="mi">3</span><span class="p">,</span> <span class="s">&quot;Three dot products required for margin loss&quot;</span><span class="p">);</span>
 
     <span class="c1">// multi-objective training</span>
-    <span class="k">auto</span> <span class="n">maxDot</span> <span class="o">=</span> <span class="n">max</span><span class="p">(</span><span class="n">concatenate</span><span class="p">(</span><span class="n">dotProducts</span><span class="p">,</span> <span class="mi">-1</span><span class="p">),</span> <span class="mi">-1</span><span class="p">);</span> <span class="c1">// compute maximum for numeric stability</span>
-    <span class="k">auto</span> <span class="n">exponent</span> <span class="o">=</span> <span class="n">dotProducts</span><span class="p">[</span><span class="mi">0</span><span class="p">]</span> <span class="o">-</span> <span class="n">maxDot</span> <span class="o">-</span> <span class="n">margin_</span><span class="p">;</span>   <span class="c1">// substract maximum and margin from dot product</span>
+    <span class="k">auto</span> <span class="n">maxDot</span> <span class="o">=</span> <span class="n">max</span><span class="p">(</span><span class="n">concatenate</span><span class="p">(</span><span class="n">dotProducts</span><span class="p">,</span> <span class="mi">-1</span><span class="p">),</span> <span class="mi">-1</span><span class="p">);</span>  <span class="c1">// compute maximum for numeric stability</span>
+    <span class="k">auto</span> <span class="n">exponent</span>
+        <span class="o">=</span> <span class="n">dotProducts</span><span class="p">[</span><span class="mi">0</span><span class="p">]</span> <span class="o">-</span> <span class="n">maxDot</span> <span class="o">-</span> <span class="n">margin_</span><span class="p">;</span>  <span class="c1">// substract maximum and margin from dot product</span>
     <span class="k">auto</span> <span class="n">dp</span> <span class="o">=</span> <span class="n">exp</span><span class="p">(</span><span class="n">exponent</span><span class="p">);</span>
 
     <span class="n">Expr</span> <span class="n">dn1</span><span class="p">,</span> <span class="n">dn2</span><span class="p">;</span>
-    <span class="k">if</span><span class="p">(</span><span class="n">normalizer_</span> <span class="o">!=</span> <span class="mf">0.0f</span><span class="p">)</span> <span class="p">{</span> <span class="c1">// the normalizer may be useful for fluctuating batch sizes since it limits the magnitude of the sum of negative examples in the denominator.</span>
-      <span class="n">dn1</span> <span class="o">=</span> <span class="n">normalizer_</span> <span class="o">*</span> <span class="n">mean</span><span class="p">(</span><span class="n">exp</span><span class="p">(</span><span class="n">dotProducts</span><span class="p">[</span><span class="mi">1</span><span class="p">]</span> <span class="o">-</span> <span class="n">maxDot</span><span class="p">),</span> <span class="mi">-1</span><span class="p">);</span> <span class="c1">// dot product of anchor and first negative example</span>
-      <span class="n">dn2</span> <span class="o">=</span> <span class="n">normalizer_</span> <span class="o">*</span> <span class="n">mean</span><span class="p">(</span><span class="n">exp</span><span class="p">(</span><span class="n">dotProducts</span><span class="p">[</span><span class="mi">2</span><span class="p">]</span> <span class="o">-</span> <span class="n">maxDot</span><span class="p">),</span> <span class="mi">-1</span><span class="p">);</span> <span class="c1">// dot product of positive examples and first negative example</span>
+    <span class="k">if</span><span class="p">(</span><span class="n">normalizer_</span>
+       <span class="o">!=</span> <span class="mf">0.0f</span><span class="p">)</span> <span class="p">{</span>  <span class="c1">// the normalizer may be useful for fluctuating batch sizes since it limits the</span>
+                   <span class="c1">// magnitude of the sum of negative examples in the denominator.</span>
+      <span class="n">dn1</span> <span class="o">=</span> <span class="n">normalizer_</span>
+            <span class="o">*</span> <span class="n">mean</span><span class="p">(</span><span class="n">exp</span><span class="p">(</span><span class="n">dotProducts</span><span class="p">[</span><span class="mi">1</span><span class="p">]</span> <span class="o">-</span> <span class="n">maxDot</span><span class="p">),</span>
+                   <span class="mi">-1</span><span class="p">);</span>  <span class="c1">// dot product of anchor and first negative example</span>
+      <span class="n">dn2</span> <span class="o">=</span> <span class="n">normalizer_</span>
+            <span class="o">*</span> <span class="n">mean</span><span class="p">(</span><span class="n">exp</span><span class="p">(</span><span class="n">dotProducts</span><span class="p">[</span><span class="mi">2</span><span class="p">]</span> <span class="o">-</span> <span class="n">maxDot</span><span class="p">),</span>
+                   <span class="mi">-1</span><span class="p">);</span>  <span class="c1">// dot product of positive examples and first negative example</span>
     <span class="p">}</span> <span class="k">else</span> <span class="p">{</span>
-      <span class="n">dn1</span> <span class="o">=</span> <span class="n">sum</span><span class="p">(</span><span class="n">exp</span><span class="p">(</span><span class="n">dotProducts</span><span class="p">[</span><span class="mi">1</span><span class="p">]</span> <span class="o">-</span> <span class="n">maxDot</span><span class="p">),</span> <span class="mi">-1</span><span class="p">);</span> <span class="c1">// dot product of anchor and first negative example</span>
-      <span class="n">dn2</span> <span class="o">=</span> <span class="n">sum</span><span class="p">(</span><span class="n">exp</span><span class="p">(</span><span class="n">dotProducts</span><span class="p">[</span><span class="mi">2</span><span class="p">]</span> <span class="o">-</span> <span class="n">maxDot</span><span class="p">),</span> <span class="mi">-1</span><span class="p">);</span> <span class="c1">// dot product of positive examples and first negative example</span>
+      <span class="n">dn1</span> <span class="o">=</span> <span class="n">sum</span><span class="p">(</span><span class="n">exp</span><span class="p">(</span><span class="n">dotProducts</span><span class="p">[</span><span class="mi">1</span><span class="p">]</span> <span class="o">-</span> <span class="n">maxDot</span><span class="p">),</span>
+                <span class="mi">-1</span><span class="p">);</span>  <span class="c1">// dot product of anchor and first negative example</span>
+      <span class="n">dn2</span> <span class="o">=</span> <span class="n">sum</span><span class="p">(</span><span class="n">exp</span><span class="p">(</span><span class="n">dotProducts</span><span class="p">[</span><span class="mi">2</span><span class="p">]</span> <span class="o">-</span> <span class="n">maxDot</span><span class="p">),</span>
+                <span class="mi">-1</span><span class="p">);</span>  <span class="c1">// dot product of positive examples and first negative example</span>
     <span class="p">}</span>
 
     <span class="c1">// We rewrite the loss so it looks more like a log-softmax, presumably more stable?</span>
-    <span class="c1">// Let dp = exp(phi - m) then -log(dp / (dp + sum(dn))) = -log(dp) + log(dp + sum(dn)) = log(dp + sum(dn)) - log(dp) = log(dp + sum(dn)) - (phi - m)</span>
-    <span class="k">auto</span> <span class="n">marginLoss1</span> <span class="o">=</span> <span class="n">log</span><span class="p">(</span><span class="n">dp</span> <span class="o">+</span> <span class="n">dn1</span><span class="p">)</span> <span class="o">-</span> <span class="n">exponent</span><span class="p">;</span> <span class="c1">// softmax-margin loss for anchor vs negative examples</span>
-    <span class="k">auto</span> <span class="n">marginLoss2</span> <span class="o">=</span> <span class="n">log</span><span class="p">(</span><span class="n">dp</span> <span class="o">+</span> <span class="n">dn2</span><span class="p">)</span> <span class="o">-</span> <span class="n">exponent</span><span class="p">;</span> <span class="c1">// symmetric version of the above with positive example vs negative examples</span>
-    <span class="k">auto</span> <span class="n">marginLoss</span>  <span class="o">=</span> <span class="n">sum</span><span class="p">(</span><span class="n">marginLoss1</span> <span class="o">+</span> <span class="n">marginLoss2</span><span class="p">,</span> <span class="cm">/*axis=*/</span><span class="mi">-2</span><span class="p">);</span>
+    <span class="c1">// Let dp = exp(phi - m) then -log(dp / (dp + sum(dn))) = -log(dp) + log(dp + sum(dn)) = log(dp</span>
+    <span class="c1">// + sum(dn)) - log(dp) = log(dp + sum(dn)) - (phi - m)</span>
+    <span class="k">auto</span> <span class="n">marginLoss1</span>
+        <span class="o">=</span> <span class="n">log</span><span class="p">(</span><span class="n">dp</span> <span class="o">+</span> <span class="n">dn1</span><span class="p">)</span> <span class="o">-</span> <span class="n">exponent</span><span class="p">;</span>  <span class="c1">// softmax-margin loss for anchor vs negative examples</span>
+    <span class="k">auto</span> <span class="n">marginLoss2</span>
+        <span class="o">=</span> <span class="n">log</span><span class="p">(</span><span class="n">dp</span> <span class="o">+</span> <span class="n">dn2</span><span class="p">)</span>
+          <span class="o">-</span> <span class="n">exponent</span><span class="p">;</span>  <span class="c1">// symmetric version of the above with positive example vs negative examples</span>
+    <span class="k">auto</span> <span class="n">marginLoss</span> <span class="o">=</span> <span class="n">sum</span><span class="p">(</span><span class="n">marginLoss1</span> <span class="o">+</span> <span class="n">marginLoss2</span><span class="p">,</span> <span class="cm">/*axis=*/</span><span class="mi">-2</span><span class="p">);</span>
 
     <span class="n">RationalLoss</span> <span class="nf">loss</span><span class="p">(</span><span class="n">marginLoss</span><span class="p">,</span> <span class="p">(</span><span class="kt">float</span><span class="p">)</span><span class="n">dimBatch</span><span class="p">);</span>
     <span class="n">multiLoss</span><span class="o">-&gt;</span><span class="n">push_back</span><span class="p">(</span><span class="n">loss</span><span class="p">);</span>
@@ -369,8 +381,7 @@
   <span class="n">Ptr</span><span class="o">&lt;</span><span class="n">ICost</span><span class="o">&gt;</span> <span class="n">cost_</span><span class="p">;</span>
 
 <span class="k">public</span><span class="o">:</span>
-  <span class="n">Trainer</span><span class="p">(</span><span class="n">Ptr</span><span class="o">&lt;</span><span class="n">IModel</span><span class="o">&gt;</span> <span class="n">model</span><span class="p">,</span> <span class="n">Ptr</span><span class="o">&lt;</span><span class="n">ICost</span><span class="o">&gt;</span> <span class="n">cost</span><span class="p">)</span>
-      <span class="o">:</span> <span class="n">model_</span><span class="p">(</span><span class="n">model</span><span class="p">),</span> <span class="n">cost_</span><span class="p">(</span><span class="n">cost</span><span class="p">)</span> <span class="p">{}</span>
+  <span class="n">Trainer</span><span class="p">(</span><span class="n">Ptr</span><span class="o">&lt;</span><span class="n">IModel</span><span class="o">&gt;</span> <span class="n">model</span><span class="p">,</span> <span class="n">Ptr</span><span class="o">&lt;</span><span class="n">ICost</span><span class="o">&gt;</span> <span class="n">cost</span><span class="p">)</span> <span class="o">:</span> <span class="n">model_</span><span class="p">(</span><span class="n">model</span><span class="p">),</span> <span class="n">cost_</span><span class="p">(</span><span class="n">cost</span><span class="p">)</span> <span class="p">{}</span>
 
   <span class="k">virtual</span> <span class="o">~</span><span class="n">Trainer</span><span class="p">()</span> <span class="p">{}</span>
 
@@ -389,8 +400,8 @@
   <span class="p">}</span>
 
   <span class="k">virtual</span> <span class="n">Ptr</span><span class="o">&lt;</span><span class="n">RationalLoss</span><span class="o">&gt;</span> <span class="n">build</span><span class="p">(</span><span class="n">Ptr</span><span class="o">&lt;</span><span class="n">ExpressionGraph</span><span class="o">&gt;</span> <span class="n">graph</span><span class="p">,</span>
-                       <span class="n">Ptr</span><span class="o">&lt;</span><span class="n">data</span><span class="o">::</span><span class="n">Batch</span><span class="o">&gt;</span> <span class="n">batch</span><span class="p">,</span>
-                       <span class="kt">bool</span> <span class="n">clearGraph</span> <span class="o">=</span> <span class="nb">true</span><span class="p">)</span> <span class="k">override</span> <span class="p">{</span>
+                                  <span class="n">Ptr</span><span class="o">&lt;</span><span class="n">data</span><span class="o">::</span><span class="n">Batch</span><span class="o">&gt;</span> <span class="n">batch</span><span class="p">,</span>
+                                  <span class="kt">bool</span> <span class="n">clearGraph</span> <span class="o">=</span> <span class="nb">true</span><span class="p">)</span> <span class="k">override</span> <span class="p">{</span>
     <span class="k">return</span> <span class="n">cost_</span><span class="o">-&gt;</span><span class="n">apply</span><span class="p">(</span><span class="n">model_</span><span class="p">,</span> <span class="n">graph</span><span class="p">,</span> <span class="n">batch</span><span class="p">,</span> <span class="n">clearGraph</span><span class="p">);</span>
   <span class="p">};</span>
 
@@ -400,24 +411,25 @@
 <span class="k">class</span> <span class="nc">ILogProb</span> <span class="p">{</span>
 <span class="k">public</span><span class="o">:</span>
   <span class="k">virtual</span> <span class="n">Logits</span> <span class="n">apply</span><span class="p">(</span><span class="n">Ptr</span><span class="o">&lt;</span><span class="n">IModel</span><span class="o">&gt;</span> <span class="n">model</span><span class="p">,</span>
-                     <span class="n">Ptr</span><span class="o">&lt;</span><span class="n">ExpressionGraph</span><span class="o">&gt;</span> <span class="n">graph</span><span class="p">,</span>
-                     <span class="n">Ptr</span><span class="o">&lt;</span><span class="n">data</span><span class="o">::</span><span class="n">Batch</span><span class="o">&gt;</span> <span class="n">batch</span><span class="p">,</span>
-                     <span class="kt">bool</span> <span class="n">clearGraph</span> <span class="o">=</span> <span class="nb">true</span><span class="p">)</span> <span class="o">=</span> <span class="mi">0</span><span class="p">;</span>
+                       <span class="n">Ptr</span><span class="o">&lt;</span><span class="n">ExpressionGraph</span><span class="o">&gt;</span> <span class="n">graph</span><span class="p">,</span>
+                       <span class="n">Ptr</span><span class="o">&lt;</span><span class="n">data</span><span class="o">::</span><span class="n">Batch</span><span class="o">&gt;</span> <span class="n">batch</span><span class="p">,</span>
+                       <span class="kt">bool</span> <span class="n">clearGraph</span> <span class="o">=</span> <span class="nb">true</span><span class="p">)</span>
+      <span class="o">=</span> <span class="mi">0</span><span class="p">;</span>
 <span class="p">};</span>
 
-<span class="c1">// @TODO: Name &#39;scorer&#39; is ambiguous: Does it compute scores for all classes, or the loss value for the ground truth?</span>
-<span class="c1">//        Beam search uses it for the former meaning, while &#39;marian score&#39; and validation in the latter.</span>
-<span class="c1">//        This class is for the former use. The latter is done using Trainer.</span>
+<span class="c1">// @TODO: Name &#39;scorer&#39; is ambiguous: Does it compute scores for all classes, or the loss value for</span>
+<span class="c1">// the ground truth?</span>
+<span class="c1">//        Beam search uses it for the former meaning, while &#39;marian score&#39; and validation in the</span>
+<span class="c1">//        latter. This class is for the former use. The latter is done using Trainer.</span>
 <span class="k">class</span> <span class="nc">Scorer</span> <span class="o">:</span> <span class="k">public</span> <span class="n">IModel</span> <span class="p">{</span>
 <span class="k">protected</span><span class="o">:</span>
   <span class="n">Ptr</span><span class="o">&lt;</span><span class="n">IModel</span><span class="o">&gt;</span> <span class="n">model_</span><span class="p">;</span>
   <span class="n">Ptr</span><span class="o">&lt;</span><span class="n">ILogProb</span><span class="o">&gt;</span> <span class="n">logProb_</span><span class="p">;</span>
 
 <span class="k">public</span><span class="o">:</span>
-  <span class="n">Scorer</span><span class="p">(</span><span class="n">Ptr</span><span class="o">&lt;</span><span class="n">IModel</span><span class="o">&gt;</span> <span class="n">model</span><span class="p">,</span> <span class="n">Ptr</span><span class="o">&lt;</span><span class="n">ILogProb</span><span class="o">&gt;</span> <span class="n">cost</span><span class="p">)</span>
-      <span class="o">:</span> <span class="n">model_</span><span class="p">(</span><span class="n">model</span><span class="p">),</span> <span class="n">logProb_</span><span class="p">(</span><span class="n">cost</span><span class="p">)</span> <span class="p">{}</span>
+  <span class="n">Scorer</span><span class="p">(</span><span class="n">Ptr</span><span class="o">&lt;</span><span class="n">IModel</span><span class="o">&gt;</span> <span class="n">model</span><span class="p">,</span> <span class="n">Ptr</span><span class="o">&lt;</span><span class="n">ILogProb</span><span class="o">&gt;</span> <span class="n">cost</span><span class="p">)</span> <span class="o">:</span> <span class="n">model_</span><span class="p">(</span><span class="n">model</span><span class="p">),</span> <span class="n">logProb_</span><span class="p">(</span><span class="n">cost</span><span class="p">)</span> <span class="p">{}</span>
 
-  <span class="k">virtual</span> <span class="o">~</span><span class="n">Scorer</span><span class="p">(){}</span>
+  <span class="k">virtual</span> <span class="o">~</span><span class="n">Scorer</span><span class="p">()</span> <span class="p">{}</span>
 
   <span class="n">Ptr</span><span class="o">&lt;</span><span class="n">IModel</span><span class="o">&gt;</span> <span class="n">getModel</span><span class="p">()</span> <span class="p">{</span> <span class="k">return</span> <span class="n">model_</span><span class="p">;</span> <span class="p">}</span>
 
@@ -434,8 +446,8 @@
   <span class="p">}</span>
 
   <span class="k">virtual</span> <span class="n">Logits</span> <span class="n">build</span><span class="p">(</span><span class="n">Ptr</span><span class="o">&lt;</span><span class="n">ExpressionGraph</span><span class="o">&gt;</span> <span class="n">graph</span><span class="p">,</span>
-                     <span class="n">Ptr</span><span class="o">&lt;</span><span class="n">data</span><span class="o">::</span><span class="n">Batch</span><span class="o">&gt;</span> <span class="n">batch</span><span class="p">,</span>
-                     <span class="kt">bool</span> <span class="n">clearGraph</span> <span class="o">=</span> <span class="nb">true</span><span class="p">)</span> <span class="k">override</span> <span class="p">{</span>
+                       <span class="n">Ptr</span><span class="o">&lt;</span><span class="n">data</span><span class="o">::</span><span class="n">Batch</span><span class="o">&gt;</span> <span class="n">batch</span><span class="p">,</span>
+                       <span class="kt">bool</span> <span class="n">clearGraph</span> <span class="o">=</span> <span class="nb">true</span><span class="p">)</span> <span class="k">override</span> <span class="p">{</span>
     <span class="k">return</span> <span class="n">logProb_</span><span class="o">-&gt;</span><span class="n">apply</span><span class="p">(</span><span class="n">model_</span><span class="p">,</span> <span class="n">graph</span><span class="p">,</span> <span class="n">batch</span><span class="p">,</span> <span class="n">clearGraph</span><span class="p">);</span>
   <span class="p">};</span>
 
@@ -452,12 +464,7 @@
 <span class="k">class</span> <span class="nc">LogSoftmaxStep</span> <span class="o">:</span> <span class="k">public</span> <span class="n">ILogProbStep</span> <span class="p">{</span>
 <span class="k">public</span><span class="o">:</span>
   <span class="k">virtual</span> <span class="o">~</span><span class="n">LogSoftmaxStep</span><span class="p">()</span> <span class="p">{}</span>
-  <span class="k">virtual</span> <span class="n">Ptr</span><span class="o">&lt;</span><span class="n">DecoderState</span><span class="o">&gt;</span> <span class="n">apply</span><span class="p">(</span><span class="n">Ptr</span><span class="o">&lt;</span><span class="n">DecoderState</span><span class="o">&gt;</span> <span class="n">state</span><span class="p">)</span> <span class="k">override</span> <span class="p">{</span>
-    <span class="c1">// decoder needs normalized probabilities (note: skipped if beam 1 and --skip-cost)</span>
-    <span class="n">state</span><span class="o">-&gt;</span><span class="n">setLogProbs</span><span class="p">(</span><span class="n">state</span><span class="o">-&gt;</span><span class="n">getLogProbs</span><span class="p">().</span><span class="n">applyUnaryFunction</span><span class="p">(</span><span class="n">logsoftmax</span><span class="p">));</span>
-    <span class="c1">// @TODO: This is becoming more and more opaque ^^. Can we simplify this?</span>
-    <span class="k">return</span> <span class="n">state</span><span class="p">;</span>
-  <span class="p">}</span>
+  <span class="k">virtual</span> <span class="n">Ptr</span><span class="o">&lt;</span><span class="n">DecoderState</span><span class="o">&gt;</span> <span class="n">apply</span><span class="p">(</span><span class="n">Ptr</span><span class="o">&lt;</span><span class="n">DecoderState</span><span class="o">&gt;</span> <span class="n">state</span><span class="p">)</span> <span class="k">override</span><span class="p">;</span>
 <span class="p">};</span>
 
 <span class="c1">// Gumbel-max noising for sampling during beam-search</span>
@@ -468,10 +475,10 @@
   <span class="k">virtual</span> <span class="o">~</span><span class="n">GumbelSoftmaxStep</span><span class="p">()</span> <span class="p">{}</span>
   <span class="k">virtual</span> <span class="n">Ptr</span><span class="o">&lt;</span><span class="n">DecoderState</span><span class="o">&gt;</span> <span class="n">apply</span><span class="p">(</span><span class="n">Ptr</span><span class="o">&lt;</span><span class="n">DecoderState</span><span class="o">&gt;</span> <span class="n">state</span><span class="p">)</span> <span class="k">override</span> <span class="p">{</span>
     <span class="n">state</span><span class="o">-&gt;</span><span class="n">setLogProbs</span><span class="p">(</span><span class="n">state</span><span class="o">-&gt;</span><span class="n">getLogProbs</span><span class="p">().</span><span class="n">applyUnaryFunctions</span><span class="p">(</span>
-      <span class="p">[](</span><span class="n">Expr</span> <span class="n">logits</span><span class="p">){</span> <span class="c1">// lemma gets gumbelled</span>
-        <span class="k">return</span> <span class="nf">logsoftmax</span><span class="p">(</span><span class="n">logits</span> <span class="o">+</span> <span class="n">constant_like</span><span class="p">(</span><span class="n">logits</span><span class="p">,</span> <span class="n">inits</span><span class="o">::</span><span class="n">gumbel</span><span class="p">()));</span>
-      <span class="p">},</span>
-      <span class="n">logsoftmax</span><span class="p">));</span> <span class="c1">// factors don&#39;t</span>
+        <span class="p">[](</span><span class="n">Expr</span> <span class="n">logits</span><span class="p">)</span> <span class="p">{</span>  <span class="c1">// lemma gets gumbelled</span>
+          <span class="k">return</span> <span class="nf">logsoftmax</span><span class="p">(</span><span class="n">logits</span> <span class="o">+</span> <span class="n">constant_like</span><span class="p">(</span><span class="n">logits</span><span class="p">,</span> <span class="n">inits</span><span class="o">::</span><span class="n">gumbel</span><span class="p">()));</span>
+        <span class="p">},</span>
+        <span class="n">logsoftmax</span><span class="p">));</span>  <span class="c1">// factors don&#39;t</span>
     <span class="k">return</span> <span class="n">state</span><span class="p">;</span>
   <span class="p">}</span>
 <span class="p">};</span>
@@ -486,8 +493,7 @@
   <span class="n">Ptr</span><span class="o">&lt;</span><span class="n">ILogProbStep</span><span class="o">&gt;</span> <span class="n">cost_</span><span class="p">;</span>
 
 <span class="k">public</span><span class="o">:</span>
-  <span class="n">Stepwise</span><span class="p">(</span><span class="n">Ptr</span><span class="o">&lt;</span><span class="n">IEncoderDecoder</span><span class="o">&gt;</span> <span class="n">encdec</span><span class="p">,</span> <span class="n">Ptr</span><span class="o">&lt;</span><span class="n">ILogProbStep</span><span class="o">&gt;</span> <span class="n">cost</span><span class="p">)</span>
-      <span class="o">:</span> <span class="n">encdec_</span><span class="p">(</span><span class="n">encdec</span><span class="p">),</span> <span class="n">cost_</span><span class="p">(</span><span class="n">cost</span><span class="p">)</span> <span class="p">{}</span>
+  <span class="n">Stepwise</span><span class="p">(</span><span class="n">Ptr</span><span class="o">&lt;</span><span class="n">IEncoderDecoder</span><span class="o">&gt;</span> <span class="n">encdec</span><span class="p">,</span> <span class="n">Ptr</span><span class="o">&lt;</span><span class="n">ILogProbStep</span><span class="o">&gt;</span> <span class="n">cost</span><span class="p">)</span> <span class="o">:</span> <span class="n">encdec_</span><span class="p">(</span><span class="n">encdec</span><span class="p">),</span> <span class="n">cost_</span><span class="p">(</span><span class="n">cost</span><span class="p">)</span> <span class="p">{}</span>
 
   <span class="k">virtual</span> <span class="kt">void</span> <span class="n">load</span><span class="p">(</span><span class="n">Ptr</span><span class="o">&lt;</span><span class="n">ExpressionGraph</span><span class="o">&gt;</span> <span class="n">graph</span><span class="p">,</span>
                     <span class="k">const</span> <span class="n">std</span><span class="o">::</span><span class="n">string</span><span class="o">&amp;</span> <span class="n">name</span><span class="p">,</span>
@@ -521,12 +527,13 @@
     <span class="k">return</span> <span class="n">encdec_</span><span class="o">-&gt;</span><span class="n">startState</span><span class="p">(</span><span class="n">graph</span><span class="p">,</span> <span class="n">batch</span><span class="p">);</span>
   <span class="p">}</span>
 
-  <span class="k">virtual</span> <span class="n">Ptr</span><span class="o">&lt;</span><span class="n">DecoderState</span><span class="o">&gt;</span> <span class="n">step</span><span class="p">(</span><span class="n">Ptr</span><span class="o">&lt;</span><span class="n">ExpressionGraph</span><span class="o">&gt;</span> <span class="n">graph</span><span class="p">,</span>
-                                 <span class="n">Ptr</span><span class="o">&lt;</span><span class="n">DecoderState</span><span class="o">&gt;</span> <span class="n">state</span><span class="p">,</span>
-                                 <span class="k">const</span> <span class="n">std</span><span class="o">::</span><span class="n">vector</span><span class="o">&lt;</span><span class="n">IndexType</span><span class="o">&gt;&amp;</span> <span class="n">hypIndices</span><span class="p">,</span>   <span class="c1">// [beamIndex * activeBatchSize + batchIndex]</span>
-                                 <span class="k">const</span> <span class="n">Words</span><span class="o">&amp;</span> <span class="n">words</span><span class="p">,</span>                         <span class="c1">// [beamIndex * activeBatchSize + batchIndex]</span>
-                                 <span class="k">const</span> <span class="n">std</span><span class="o">::</span><span class="n">vector</span><span class="o">&lt;</span><span class="n">IndexType</span><span class="o">&gt;&amp;</span> <span class="n">batchIndices</span><span class="p">,</span> <span class="c1">// [batchIndex]</span>
-                                 <span class="kt">int</span> <span class="n">beamSize</span><span class="p">)</span> <span class="k">override</span> <span class="p">{</span>
+  <span class="k">virtual</span> <span class="n">Ptr</span><span class="o">&lt;</span><span class="n">DecoderState</span><span class="o">&gt;</span> <span class="n">step</span><span class="p">(</span>
+      <span class="n">Ptr</span><span class="o">&lt;</span><span class="n">ExpressionGraph</span><span class="o">&gt;</span> <span class="n">graph</span><span class="p">,</span>
+      <span class="n">Ptr</span><span class="o">&lt;</span><span class="n">DecoderState</span><span class="o">&gt;</span> <span class="n">state</span><span class="p">,</span>
+      <span class="k">const</span> <span class="n">std</span><span class="o">::</span><span class="n">vector</span><span class="o">&lt;</span><span class="n">IndexType</span><span class="o">&gt;&amp;</span> <span class="n">hypIndices</span><span class="p">,</span>    <span class="c1">// [beamIndex * activeBatchSize + batchIndex]</span>
+      <span class="k">const</span> <span class="n">Words</span><span class="o">&amp;</span> <span class="n">words</span><span class="p">,</span>                          <span class="c1">// [beamIndex * activeBatchSize + batchIndex]</span>
+      <span class="k">const</span> <span class="n">std</span><span class="o">::</span><span class="n">vector</span><span class="o">&lt;</span><span class="n">IndexType</span><span class="o">&gt;&amp;</span> <span class="n">batchIndices</span><span class="p">,</span>  <span class="c1">// [batchIndex]</span>
+      <span class="kt">int</span> <span class="n">beamSize</span><span class="p">)</span> <span class="k">override</span> <span class="p">{</span>
     <span class="k">auto</span> <span class="n">nextState</span> <span class="o">=</span> <span class="n">encdec_</span><span class="o">-&gt;</span><span class="n">step</span><span class="p">(</span><span class="n">graph</span><span class="p">,</span> <span class="n">state</span><span class="p">,</span> <span class="n">hypIndices</span><span class="p">,</span> <span class="n">words</span><span class="p">,</span> <span class="n">batchIndices</span><span class="p">,</span> <span class="n">beamSize</span><span class="p">);</span>
     <span class="k">return</span> <span class="n">cost_</span><span class="o">-&gt;</span><span class="n">apply</span><span class="p">(</span><span class="n">nextState</span><span class="p">);</span>
   <span class="p">}</span>
@@ -544,9 +551,7 @@
     <span class="n">encdec_</span><span class="o">-&gt;</span><span class="n">setShortlistGenerator</span><span class="p">(</span><span class="n">shortlistGenerator</span><span class="p">);</span>
   <span class="p">};</span>
 
-  <span class="k">virtual</span> <span class="n">Ptr</span><span class="o">&lt;</span><span class="n">data</span><span class="o">::</span><span class="n">Shortlist</span><span class="o">&gt;</span> <span class="n">getShortlist</span><span class="p">()</span> <span class="k">override</span> <span class="p">{</span>
-    <span class="k">return</span> <span class="n">encdec_</span><span class="o">-&gt;</span><span class="n">getShortlist</span><span class="p">();</span>
-  <span class="p">};</span>
+  <span class="k">virtual</span> <span class="n">Ptr</span><span class="o">&lt;</span><span class="n">data</span><span class="o">::</span><span class="n">Shortlist</span><span class="o">&gt;</span> <span class="n">getShortlist</span><span class="p">()</span> <span class="k">override</span> <span class="p">{</span> <span class="k">return</span> <span class="n">encdec_</span><span class="o">-&gt;</span><span class="n">getShortlist</span><span class="p">();</span> <span class="p">};</span>
 
   <span class="k">virtual</span> <span class="n">data</span><span class="o">::</span><span class="n">SoftAlignment</span> <span class="n">getAlignment</span><span class="p">()</span> <span class="k">override</span> <span class="p">{</span> <span class="k">return</span> <span class="n">encdec_</span><span class="o">-&gt;</span><span class="n">getAlignment</span><span class="p">();</span> <span class="p">}</span>
 <span class="p">};</span>

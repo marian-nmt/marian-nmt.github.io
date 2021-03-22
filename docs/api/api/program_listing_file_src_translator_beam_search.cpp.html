@@ -7,7 +7,7 @@
   
   <meta name="viewport" content="width=device-width, initial-scale=1.0" />
   
-  <title>Program Listing for File beam_search.cpp &mdash; Marian NMT v1.10.2 2021-02-28 documentation</title>
+  <title>Program Listing for File beam_search.cpp &mdash; Marian NMT v1.10.3 2021-03-22 documentation</title>
   
 
   
@@ -67,7 +67,7 @@
             
             
               <div class="version">
-                v1.10.2
+                v1.10.3
               </div>
             
           
@@ -589,10 +589,9 @@
           <span class="c1">//      factoredVocab ? factoredVocab-&gt;word2string(prevWords[kk]) : (*batch-&gt;back()-&gt;vocab())[prevWords[kk]],</span>
           <span class="c1">//      prevScores[kk]);</span>
           <span class="n">states</span><span class="p">[</span><span class="n">i</span><span class="p">]</span> <span class="o">=</span> <span class="n">scorers_</span><span class="p">[</span><span class="n">i</span><span class="p">]</span><span class="o">-&gt;</span><span class="n">step</span><span class="p">(</span><span class="n">graph</span><span class="p">,</span> <span class="n">states</span><span class="p">[</span><span class="n">i</span><span class="p">],</span> <span class="n">hypIndices</span><span class="p">,</span> <span class="n">prevWords</span><span class="p">,</span> <span class="n">batchIndices</span><span class="p">,</span> <span class="p">(</span><span class="kt">int</span><span class="p">)</span><span class="n">maxBeamSize</span><span class="p">);</span>
-          <span class="k">if</span> <span class="p">(</span><span class="n">numFactorGroups</span> <span class="o">==</span> <span class="mi">1</span><span class="p">)</span> <span class="c1">// @TODO: this branch can go away</span>
+          <span class="k">if</span> <span class="p">(</span><span class="n">numFactorGroups</span> <span class="o">==</span> <span class="mi">1</span><span class="p">)</span> <span class="p">{</span> <span class="c1">// @TODO: this branch can go away</span>
             <span class="n">logProbs</span> <span class="o">=</span> <span class="n">states</span><span class="p">[</span><span class="n">i</span><span class="p">]</span><span class="o">-&gt;</span><span class="n">getLogProbs</span><span class="p">().</span><span class="n">getLogits</span><span class="p">();</span> <span class="c1">// [maxBeamSize, 1, currentDimBatch, dimVocab]</span>
-          <span class="k">else</span>
-          <span class="p">{</span>
+          <span class="p">}</span> <span class="k">else</span> <span class="p">{</span>
             <span class="k">auto</span> <span class="n">shortlist</span> <span class="o">=</span> <span class="n">scorers_</span><span class="p">[</span><span class="n">i</span><span class="p">]</span><span class="o">-&gt;</span><span class="n">getShortlist</span><span class="p">();</span>
             <span class="n">logProbs</span> <span class="o">=</span> <span class="n">states</span><span class="p">[</span><span class="n">i</span><span class="p">]</span><span class="o">-&gt;</span><span class="n">getLogProbs</span><span class="p">().</span><span class="n">getFactoredLogits</span><span class="p">(</span><span class="n">factorGroup</span><span class="p">,</span> <span class="n">shortlist</span><span class="p">);</span> <span class="c1">// [maxBeamSize, 1, currentDimBatch, dimVocab]</span>
           <span class="p">}</span>

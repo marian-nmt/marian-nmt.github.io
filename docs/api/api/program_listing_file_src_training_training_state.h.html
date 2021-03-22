@@ -7,7 +7,7 @@
   
   <meta name="viewport" content="width=device-width, initial-scale=1.0" />
   
-  <title>Program Listing for File training_state.h &mdash; Marian NMT v1.10.2 2021-02-28 documentation</title>
+  <title>Program Listing for File training_state.h &mdash; Marian NMT v1.10.3 2021-03-22 documentation</title>
   
 
   
@@ -67,7 +67,7 @@
             
             
               <div class="version">
-                v1.10.2
+                v1.10.3
               </div>
             
           
@@ -219,7 +219,7 @@
     <span class="p">}</span>
     <span class="kt">double</span> <span class="n">number</span> <span class="o">=</span> <span class="n">utils</span><span class="o">::</span><span class="n">parseNumber</span><span class="p">(</span><span class="n">param</span><span class="p">);</span>
     <span class="n">res</span><span class="p">.</span><span class="n">n</span> <span class="o">=</span> <span class="p">(</span><span class="kt">size_t</span><span class="p">)</span><span class="n">number</span><span class="p">;</span>
-    <span class="n">ABORT_IF</span><span class="p">(</span><span class="n">number</span> <span class="o">!=</span> <span class="p">(</span><span class="kt">double</span><span class="p">)</span><span class="n">res</span><span class="p">.</span><span class="n">n</span><span class="p">,</span> <span class="s">&quot;Scheduling parameters must be whole numbers&quot;</span><span class="p">);</span>
+    <span class="n">ABORT_IF</span><span class="p">(</span><span class="n">number</span> <span class="o">!=</span> <span class="p">(</span><span class="kt">double</span><span class="p">)</span><span class="n">res</span><span class="p">.</span><span class="n">n</span><span class="p">,</span> <span class="s">&quot;Scheduling parameters must be whole numbers&quot;</span><span class="p">);</span> <span class="c1">// @TODO: do they?</span>
     <span class="k">return</span> <span class="n">res</span><span class="p">;</span>
   <span class="p">}</span>
 
@@ -270,13 +270,14 @@
   <span class="p">}</span>
   <span class="c1">// State-based multiplication factor for learning rate</span>
   <span class="kt">float</span> <span class="n">factor</span><span class="p">{</span><span class="mf">1.f</span><span class="p">};</span>
+  <span class="c1">// @TODO: should also have warmup period here?</span>
   <span class="n">SchedulingParameter</span> <span class="n">warmupStart</span><span class="p">;</span> <span class="c1">// has same unit as lr-warmup</span>
 
   <span class="c1">// Sum of costs since last display</span>
   <span class="kt">float</span> <span class="n">costSum</span><span class="p">{</span><span class="mi">0</span><span class="p">};</span>
   <span class="c1">// Number of labels aggregated in</span>
   <span class="c1">// costSum since last display</span>
-  <span class="kt">size_t</span> <span class="n">costCount</span><span class="p">{</span><span class="mi">0</span><span class="p">};</span>
+  <span class="kt">float</span> <span class="n">costCount</span><span class="p">{</span><span class="mi">0</span><span class="p">};</span>
 
   <span class="c1">// Number of words seen since last display</span>
   <span class="kt">size_t</span> <span class="n">wordsDisp</span><span class="p">{</span><span class="mi">0</span><span class="p">};</span>
@@ -284,6 +285,16 @@
   <span class="kt">size_t</span> <span class="n">samplesDisp</span><span class="p">{</span><span class="mi">0</span><span class="p">};</span>
   <span class="c1">// Number of updates seen since last display</span>
   <span class="kt">size_t</span> <span class="n">updatesDisp</span><span class="p">{</span><span class="mi">0</span><span class="p">};</span>
+
+  <span class="c1">// Running average of gradient norm</span>
+  <span class="kt">float</span> <span class="n">gradientNormAvg</span><span class="p">{</span><span class="mi">0</span><span class="p">};</span>
+  <span class="c1">// Running variance of gradient norm</span>
+  <span class="kt">float</span> <span class="n">gradientNormVar</span><span class="p">{</span><span class="mi">0</span><span class="p">};</span>
+
+  <span class="c1">// Running average of log gradient norm</span>
+  <span class="kt">float</span> <span class="n">logGradientNormAvg</span><span class="p">{</span><span class="mi">0</span><span class="p">};</span>
+  <span class="c1">// Running variance of log gradient norm</span>
+  <span class="kt">float</span> <span class="n">logGradientNormVar</span><span class="p">{</span><span class="mi">0</span><span class="p">};</span>
 
   <span class="c1">// The state of the random number generator from a batch generator</span>
   <span class="n">std</span><span class="o">::</span><span class="n">string</span> <span class="n">seedBatch</span><span class="p">;</span>
@@ -425,14 +436,21 @@
 
     <span class="n">eta</span> <span class="o">=</span> <span class="n">config</span><span class="p">[</span><span class="s">&quot;eta&quot;</span><span class="p">].</span><span class="n">as</span><span class="o">&lt;</span><span class="kt">float</span><span class="o">&gt;</span><span class="p">();</span>
     <span class="n">factor</span> <span class="o">=</span> <span class="n">config</span><span class="p">[</span><span class="s">&quot;eta-factor&quot;</span><span class="p">].</span><span class="n">as</span><span class="o">&lt;</span><span class="kt">float</span><span class="o">&gt;</span><span class="p">();</span>
+
     <span class="n">warmupStart</span> <span class="o">=</span> <span class="n">SchedulingParameter</span><span class="o">::</span><span class="n">parse</span><span class="p">(</span><span class="n">config</span><span class="p">[</span><span class="s">&quot;warmup-start&quot;</span><span class="p">].</span><span class="n">as</span><span class="o">&lt;</span><span class="n">std</span><span class="o">::</span><span class="n">string</span><span class="o">&gt;</span><span class="p">());</span>
 
     <span class="n">costSum</span> <span class="o">=</span> <span class="n">config</span><span class="p">[</span><span class="s">&quot;cost-sum&quot;</span><span class="p">].</span><span class="n">as</span><span class="o">&lt;</span><span class="kt">float</span><span class="o">&gt;</span><span class="p">();</span>
-    <span class="n">costCount</span> <span class="o">=</span> <span class="n">config</span><span class="p">[</span><span class="s">&quot;cost-count&quot;</span><span class="p">].</span><span class="n">as</span><span class="o">&lt;</span><span class="kt">size_t</span><span class="o">&gt;</span><span class="p">();</span>
+    <span class="n">costCount</span> <span class="o">=</span> <span class="n">config</span><span class="p">[</span><span class="s">&quot;cost-count&quot;</span><span class="p">].</span><span class="n">as</span><span class="o">&lt;</span><span class="kt">float</span><span class="o">&gt;</span><span class="p">();</span>
 
     <span class="n">wordsDisp</span> <span class="o">=</span> <span class="n">config</span><span class="p">[</span><span class="s">&quot;disp-words&quot;</span><span class="p">].</span><span class="n">as</span><span class="o">&lt;</span><span class="kt">size_t</span><span class="o">&gt;</span><span class="p">();</span>
     <span class="n">samplesDisp</span> <span class="o">=</span> <span class="n">config</span><span class="p">[</span><span class="s">&quot;disp-samples&quot;</span><span class="p">].</span><span class="n">as</span><span class="o">&lt;</span><span class="kt">size_t</span><span class="o">&gt;</span><span class="p">();</span>
     <span class="n">updatesDisp</span> <span class="o">=</span> <span class="n">config</span><span class="p">[</span><span class="s">&quot;disp-updates&quot;</span><span class="p">].</span><span class="n">as</span><span class="o">&lt;</span><span class="kt">size_t</span><span class="o">&gt;</span><span class="p">();</span>
+
+    <span class="n">gradientNormAvg</span> <span class="o">=</span> <span class="n">config</span><span class="p">[</span><span class="s">&quot;gradient-norm-avg&quot;</span><span class="p">].</span><span class="n">as</span><span class="o">&lt;</span><span class="kt">float</span><span class="o">&gt;</span><span class="p">();</span>
+    <span class="n">gradientNormVar</span> <span class="o">=</span> <span class="n">config</span><span class="p">[</span><span class="s">&quot;gradient-norm-var&quot;</span><span class="p">].</span><span class="n">as</span><span class="o">&lt;</span><span class="kt">float</span><span class="o">&gt;</span><span class="p">();</span>
+
+    <span class="n">logGradientNormAvg</span> <span class="o">=</span> <span class="n">config</span><span class="p">[</span><span class="s">&quot;log-gradient-norm-avg&quot;</span><span class="p">].</span><span class="n">as</span><span class="o">&lt;</span><span class="kt">float</span><span class="o">&gt;</span><span class="p">();</span>
+    <span class="n">logGradientNormVar</span> <span class="o">=</span> <span class="n">config</span><span class="p">[</span><span class="s">&quot;log-gradient-norm-var&quot;</span><span class="p">].</span><span class="n">as</span><span class="o">&lt;</span><span class="kt">float</span><span class="o">&gt;</span><span class="p">();</span>
 
     <span class="n">seedBatch</span> <span class="o">=</span> <span class="n">config</span><span class="p">[</span><span class="s">&quot;seed-batch&quot;</span><span class="p">].</span><span class="n">as</span><span class="o">&lt;</span><span class="n">std</span><span class="o">::</span><span class="n">string</span><span class="o">&gt;</span><span class="p">();</span>
     <span class="n">seedCorpus</span> <span class="o">=</span> <span class="n">config</span><span class="p">[</span><span class="s">&quot;seed-corpus&quot;</span><span class="p">].</span><span class="n">as</span><span class="o">&lt;</span><span class="n">std</span><span class="o">::</span><span class="n">string</span><span class="o">&gt;</span><span class="p">();</span>
@@ -468,6 +486,12 @@
     <span class="n">config</span><span class="p">[</span><span class="s">&quot;disp-updates&quot;</span><span class="p">]</span> <span class="o">=</span> <span class="n">updatesDisp</span><span class="p">;</span>
     <span class="n">config</span><span class="p">[</span><span class="s">&quot;disp-samples&quot;</span><span class="p">]</span> <span class="o">=</span> <span class="n">samplesDisp</span><span class="p">;</span>
     <span class="n">config</span><span class="p">[</span><span class="s">&quot;disp-words&quot;</span><span class="p">]</span> <span class="o">=</span> <span class="n">wordsDisp</span><span class="p">;</span>
+
+    <span class="n">config</span><span class="p">[</span><span class="s">&quot;gradient-norm-avg&quot;</span><span class="p">]</span> <span class="o">=</span> <span class="n">gradientNormAvg</span><span class="p">;</span>
+    <span class="n">config</span><span class="p">[</span><span class="s">&quot;gradient-norm-var&quot;</span><span class="p">]</span> <span class="o">=</span> <span class="n">gradientNormVar</span><span class="p">;</span>
+
+    <span class="n">config</span><span class="p">[</span><span class="s">&quot;log-gradient-norm-avg&quot;</span><span class="p">]</span> <span class="o">=</span> <span class="n">logGradientNormAvg</span><span class="p">;</span>
+    <span class="n">config</span><span class="p">[</span><span class="s">&quot;log-gradient-norm-var&quot;</span><span class="p">]</span> <span class="o">=</span> <span class="n">logGradientNormVar</span><span class="p">;</span>
 
     <span class="n">config</span><span class="p">[</span><span class="s">&quot;seed-batch&quot;</span><span class="p">]</span> <span class="o">=</span> <span class="n">seedBatch</span><span class="p">;</span>
     <span class="n">config</span><span class="p">[</span><span class="s">&quot;seed-corpus&quot;</span><span class="p">]</span> <span class="o">=</span> <span class="n">seedCorpus</span><span class="p">;</span>

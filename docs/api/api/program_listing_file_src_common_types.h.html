@@ -7,7 +7,7 @@
   
   <meta name="viewport" content="width=device-width, initial-scale=1.0" />
   
-  <title>Program Listing for File types.h &mdash; Marian NMT v1.10.2 2021-02-28 documentation</title>
+  <title>Program Listing for File types.h &mdash; Marian NMT v1.10.3 2021-03-22 documentation</title>
   
 
   
@@ -67,7 +67,7 @@
             
             
               <div class="version">
-                v1.10.2
+                v1.10.3
               </div>
             
           
@@ -194,6 +194,12 @@
 <span class="cp">#include</span> <span class="cpf">&lt;cuda.h&gt;</span><span class="c1"> // required to see CUDA_VERSION</span><span class="cp"></span>
 <span class="cp">#if (CUDA_VERSION &gt; 9000 &amp;&amp; (__CUDA_ARCH__ &gt;= 600 || !defined(__CUDA_ARCH__)))</span>
 <span class="cp">#define COMPILE_FP16 1 </span><span class="c1">// we are in GPU code and we know what to do with FP16 code</span>
+<span class="cp">#ifdef _MSC_VER</span>
+<span class="cp">#pragma warning(push)</span>
+<span class="cp">#pragma warning(disable:4505) </span><span class="c1">// &quot;unreferenced local function has been removed&quot; in cuda_fp16.hpp</span>
+<span class="cp">#endif</span>
+<span class="cp">#include</span> <span class="cpf">&lt;cuda_fp16.h&gt;</span><span class="cp"></span>
+<span class="cp">#include</span> <span class="cpf">&quot;functional/defs.h&quot;</span><span class="cp"></span>
 <span class="cp">#else</span>
 <span class="cp">#define COMPILE_FP16 0 </span><span class="c1">// we are in GPU code, but compute capability is too low to use FP16</span>
 <span class="cp">#endif</span>
@@ -201,6 +207,12 @@
 <span class="cp">#include</span> <span class="cpf">&lt;cuda.h&gt;</span><span class="c1"> // required to see CUDA_VERSION</span><span class="cp"></span>
 <span class="cp">#if (CUDA_VERSION &gt; 9000)</span>
 <span class="cp">#define COMPILE_FP16 1</span>
+<span class="cp">#ifdef _MSC_VER</span>
+<span class="cp">#pragma warning(push)</span>
+<span class="cp">#pragma warning(disable:4505) </span><span class="c1">// &quot;unreferenced local function has been removed&quot; in cuda_fp16.hpp</span>
+<span class="cp">#endif</span>
+<span class="cp">#include</span> <span class="cpf">&lt;cuda_fp16.h&gt;</span><span class="cp"></span>
+<span class="cp">#include</span> <span class="cpf">&quot;functional/defs.h&quot;</span><span class="cp"></span>
 <span class="cp">#else</span>
 <span class="cp">#define COMPILE_FP16 0</span>
 <span class="cp">#endif</span>
@@ -386,6 +398,37 @@
 <span class="k">struct</span> <span class="nc">float32x8</span> <span class="p">{</span>
 <span class="p">};</span>
 <span class="cp">#endif</span>
+<span class="cp">#endif</span>
+
+<span class="cp">#if COMPILE_FP16</span>
+
+<span class="c1">// @TODO: check what intrinsics are actually available.</span>
+<span class="k">struct</span> <span class="nc">halfx2</span> <span class="p">{</span>
+<span class="k">private</span><span class="o">:</span>
+  <span class="n">__half2</span> <span class="n">h2_</span><span class="p">;</span>
+
+<span class="k">public</span><span class="o">:</span>
+  <span class="n">DEVICE</span> <span class="n">halfx2</span><span class="p">()</span> <span class="p">{}</span>
+  <span class="n">DEVICE</span> <span class="n">halfx2</span><span class="p">(</span><span class="k">const</span> <span class="n">__half2</span><span class="o">&amp;</span> <span class="n">h2</span><span class="p">)</span> <span class="o">:</span> <span class="n">h2_</span><span class="p">(</span><span class="n">h2</span><span class="p">)</span> <span class="p">{}</span>
+  <span class="n">DEVICE</span> <span class="n">halfx2</span><span class="p">(</span><span class="k">const</span> <span class="n">__half</span><span class="o">&amp;</span> <span class="n">h</span><span class="p">)</span> <span class="o">:</span> <span class="n">h2_</span><span class="p">(</span><span class="n">h</span><span class="p">,</span> <span class="n">h</span><span class="p">)</span> <span class="p">{}</span>
+  <span class="n">DEVICE</span> <span class="n">halfx2</span><span class="p">(</span><span class="k">const</span> <span class="n">__half</span><span class="o">&amp;</span> <span class="n">h1</span><span class="p">,</span> <span class="k">const</span> <span class="n">__half</span><span class="o">&amp;</span> <span class="n">h2</span><span class="p">)</span> <span class="o">:</span> <span class="n">h2_</span><span class="p">(</span><span class="n">h1</span><span class="p">,</span> <span class="n">h2</span><span class="p">)</span> <span class="p">{}</span>
+
+  <span class="n">DEVICE_INLINE</span> <span class="k">operator</span> <span class="k">const</span> <span class="n">__half2</span><span class="o">&amp;</span><span class="p">()</span> <span class="k">const</span> <span class="p">{</span> <span class="k">return</span> <span class="n">h2_</span><span class="p">;</span> <span class="p">}</span>
+  <span class="n">DEVICE_INLINE</span> <span class="k">operator</span> <span class="n">__half2</span><span class="o">&amp;</span><span class="p">()</span> <span class="p">{</span> <span class="k">return</span> <span class="n">h2_</span><span class="p">;</span> <span class="p">}</span>
+
+  <span class="n">DEVICE_INLINE</span> <span class="n">__half</span> <span class="k">operator</span><span class="p">[]</span> <span class="p">(</span><span class="kt">size_t</span> <span class="n">i</span><span class="p">)</span> <span class="k">const</span> <span class="p">{</span>
+    <span class="k">return</span> <span class="o">*</span><span class="p">(((</span><span class="n">__half</span><span class="o">*</span><span class="p">)</span><span class="o">&amp;</span><span class="n">h2_</span><span class="p">)</span> <span class="o">+</span> <span class="n">i</span><span class="p">);</span> <span class="c1">// potentially undefined, but efficient. In practice __m128 is an array of floats</span>
+  <span class="p">}</span>
+
+  <span class="k">friend</span> <span class="n">std</span><span class="o">::</span><span class="n">ostream</span><span class="o">&amp;</span> <span class="k">operator</span><span class="o">&lt;&lt;</span><span class="p">(</span><span class="n">std</span><span class="o">::</span><span class="n">ostream</span><span class="o">&amp;</span> <span class="n">out</span><span class="p">,</span> <span class="n">halfx2</span> <span class="n">h2</span><span class="p">)</span> <span class="p">{</span>
+    <span class="n">__half</span><span class="o">*</span> <span class="n">a</span> <span class="o">=</span> <span class="p">(</span><span class="n">__half</span><span class="o">*</span><span class="p">)</span><span class="o">&amp;</span><span class="n">h2</span><span class="p">;</span>
+    <span class="n">out</span> <span class="o">&lt;&lt;</span> <span class="s">&quot;[&quot;</span> <span class="o">&lt;&lt;</span> <span class="p">(</span><span class="kt">float</span><span class="p">)</span><span class="n">a</span><span class="p">[</span><span class="mi">0</span><span class="p">];</span>
+    <span class="k">for</span><span class="p">(</span><span class="kt">int</span> <span class="n">i</span> <span class="o">=</span> <span class="mi">1</span><span class="p">;</span> <span class="n">i</span> <span class="o">&lt;</span> <span class="mi">2</span><span class="p">;</span> <span class="n">i</span><span class="o">++</span><span class="p">)</span>
+      <span class="n">out</span> <span class="o">&lt;&lt;</span> <span class="s">&quot; &quot;</span> <span class="o">&lt;&lt;</span> <span class="p">(</span><span class="kt">float</span><span class="p">)</span><span class="n">a</span><span class="p">[</span><span class="n">i</span><span class="p">];</span>
+    <span class="n">out</span> <span class="o">&lt;&lt;</span> <span class="s">&quot;]&quot;</span><span class="p">;</span>
+    <span class="k">return</span> <span class="n">out</span><span class="p">;</span>
+  <span class="p">}</span>
+<span class="p">};</span>
 <span class="cp">#endif</span>
 
 <span class="c1">// Internal to types.h, don&#39;t use. Use test functions below.</span>
@@ -733,6 +776,7 @@
 
   <span class="k">template</span> <span class="o">&lt;</span><span class="k">typename</span> <span class="nc">MaxType</span><span class="o">&gt;</span> <span class="kt">void</span> <span class="n">setLimitsMax</span><span class="p">()</span> <span class="p">{</span>
     <span class="n">max</span>    <span class="o">=</span> <span class="p">(</span><span class="n">ReturnType</span><span class="p">)</span><span class="n">std</span><span class="o">::</span><span class="n">numeric_limits</span><span class="o">&lt;</span><span class="n">MaxType</span><span class="o">&gt;::</span><span class="n">max</span><span class="p">();</span>
+    <span class="n">min</span>    <span class="o">=</span> <span class="p">(</span><span class="n">ReturnType</span><span class="p">)</span><span class="n">std</span><span class="o">::</span><span class="n">numeric_limits</span><span class="o">&lt;</span><span class="n">MaxType</span><span class="o">&gt;::</span><span class="n">min</span><span class="p">();</span>
     <span class="n">lowest</span> <span class="o">=</span> <span class="p">(</span><span class="n">ReturnType</span><span class="p">)</span><span class="n">std</span><span class="o">::</span><span class="n">numeric_limits</span><span class="o">&lt;</span><span class="n">MaxType</span><span class="o">&gt;::</span><span class="n">lowest</span><span class="p">();</span>
   <span class="p">}</span>
 
@@ -757,6 +801,7 @@
 
 <span class="k">public</span><span class="o">:</span>
   <span class="n">ReturnType</span> <span class="n">max</span><span class="p">;</span>
+  <span class="n">ReturnType</span> <span class="n">min</span><span class="p">;</span>
   <span class="n">ReturnType</span> <span class="n">lowest</span><span class="p">;</span>
 
   <span class="n">NumericLimits</span><span class="p">(</span><span class="n">Type</span> <span class="n">type</span><span class="p">)</span> <span class="p">{</span>

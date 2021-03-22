@@ -7,7 +7,7 @@
   
   <meta name="viewport" content="width=device-width, initial-scale=1.0" />
   
-  <title>Program Listing for File tensor.h &mdash; Marian NMT v1.10.2 2021-02-28 documentation</title>
+  <title>Program Listing for File tensor.h &mdash; Marian NMT v1.10.3 2021-03-22 documentation</title>
   
 
   
@@ -67,7 +67,7 @@
             
             
               <div class="version">
-                v1.10.2
+                v1.10.3
               </div>
             
           
@@ -357,6 +357,33 @@
     <span class="n">set</span><span class="p">(</span><span class="n">v</span><span class="p">.</span><span class="n">data</span><span class="p">(),</span> <span class="n">v</span><span class="p">.</span><span class="n">data</span><span class="p">()</span> <span class="o">+</span> <span class="n">v</span><span class="p">.</span><span class="n">size</span><span class="p">());</span>
   <span class="p">}</span>
 
+  <span class="c1">// a binary copy with type checking</span>
+  <span class="kt">void</span> <span class="n">set</span><span class="p">(</span><span class="k">const</span> <span class="kt">char</span><span class="o">*</span> <span class="n">begin</span><span class="p">,</span> <span class="k">const</span> <span class="kt">char</span><span class="o">*</span> <span class="n">end</span><span class="p">,</span> <span class="n">Type</span> <span class="n">type</span><span class="p">)</span> <span class="p">{</span>
+    <span class="n">ABORT_IF</span><span class="p">(</span><span class="n">type_</span> <span class="o">!=</span> <span class="n">type</span><span class="p">,</span>
+             <span class="s">&quot;Tensor type ({}) and data type ({}) do not match&quot;</span><span class="p">,</span>
+             <span class="n">type_</span><span class="p">,</span>
+             <span class="n">type</span><span class="p">);</span>
+
+    <span class="kt">size_t</span> <span class="n">dataSize</span> <span class="o">=</span> <span class="p">(</span><span class="n">end</span> <span class="o">-</span> <span class="n">begin</span><span class="p">)</span> <span class="o">/</span> <span class="n">sizeOf</span><span class="p">(</span><span class="n">type</span><span class="p">);</span>
+    <span class="n">ABORT_IF</span><span class="p">(</span><span class="n">size</span><span class="p">()</span> <span class="o">!=</span> <span class="n">dataSize</span><span class="p">,</span>
+             <span class="s">&quot;Tensor size ({}) and mapped size ({}) do not match&quot;</span><span class="p">,</span>
+             <span class="n">size</span><span class="p">(),</span>
+             <span class="n">dataSize</span><span class="p">);</span>
+
+    <span class="k">if</span><span class="p">(</span><span class="n">backend_</span><span class="o">-&gt;</span><span class="n">getDeviceId</span><span class="p">().</span><span class="n">type</span> <span class="o">==</span> <span class="n">DeviceType</span><span class="o">::</span><span class="n">cpu</span><span class="p">)</span> <span class="p">{</span>
+      <span class="n">std</span><span class="o">::</span><span class="n">copy</span><span class="p">(</span><span class="n">begin</span><span class="p">,</span> <span class="n">end</span><span class="p">,</span> <span class="n">data</span><span class="o">&lt;</span><span class="kt">char</span><span class="o">&gt;</span><span class="p">());</span>
+    <span class="p">}</span>
+<span class="cp">#ifdef CUDA_FOUND</span>
+    <span class="k">else</span> <span class="p">{</span>
+      <span class="n">gpu</span><span class="o">::</span><span class="n">copy</span><span class="p">(</span><span class="n">backend_</span><span class="p">,</span> <span class="n">begin</span><span class="p">,</span> <span class="n">end</span><span class="p">,</span> <span class="n">data</span><span class="o">&lt;</span><span class="kt">char</span><span class="o">&gt;</span><span class="p">());</span>
+    <span class="p">}</span>
+<span class="cp">#endif</span>
+  <span class="p">}</span>
+
+  <span class="kt">void</span> <span class="n">set</span><span class="p">(</span><span class="k">const</span> <span class="n">std</span><span class="o">::</span><span class="n">vector</span><span class="o">&lt;</span><span class="kt">char</span><span class="o">&gt;&amp;</span> <span class="n">v</span><span class="p">,</span> <span class="n">Type</span> <span class="n">type</span><span class="p">)</span> <span class="p">{</span>
+    <span class="n">set</span><span class="p">(</span><span class="n">v</span><span class="p">.</span><span class="n">data</span><span class="p">(),</span> <span class="n">v</span><span class="p">.</span><span class="n">data</span><span class="p">()</span> <span class="o">+</span> <span class="n">v</span><span class="p">.</span><span class="n">size</span><span class="p">(),</span> <span class="n">type</span><span class="p">);</span>
+  <span class="p">}</span>
+
   <span class="kt">void</span> <span class="n">set</span><span class="p">(</span><span class="k">const</span> <span class="n">io</span><span class="o">::</span><span class="n">Item</span><span class="o">&amp;</span> <span class="n">item</span><span class="p">);</span>
 
   <span class="c1">// For single values enable conversion to other numeric formats if possible</span>
@@ -462,6 +489,8 @@
   <span class="n">std</span><span class="o">::</span><span class="n">string</span> <span class="n">debug</span><span class="p">(</span><span class="kt">int</span> <span class="n">precision</span> <span class="o">=</span> <span class="mi">8</span><span class="p">,</span> <span class="kt">int</span> <span class="n">dispCols</span> <span class="o">=</span> <span class="mi">5</span><span class="p">)</span> <span class="p">{</span>
     <span class="n">DISPATCH_BY_TYPE2</span><span class="p">(</span><span class="n">type_</span><span class="p">,</span> <span class="n">debug</span><span class="p">,</span> <span class="n">precision</span><span class="p">,</span> <span class="n">dispCols</span><span class="p">);</span>
   <span class="p">}</span>
+
+  <span class="kt">size_t</span> <span class="n">hash</span><span class="p">();</span>
 
 <span class="p">};</span>
 

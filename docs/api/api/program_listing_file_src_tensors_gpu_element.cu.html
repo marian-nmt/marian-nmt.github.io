@@ -7,7 +7,7 @@
   
   <meta name="viewport" content="width=device-width, initial-scale=1.0" />
   
-  <title>Program Listing for File element.cu &mdash; Marian NMT v1.10.2 2021-02-28 documentation</title>
+  <title>Program Listing for File element.cu &mdash; Marian NMT v1.10.3 2021-03-22 documentation</title>
   
 
   
@@ -67,7 +67,7 @@
             
             
               <div class="version">
-                v1.10.2
+                v1.10.3
               </div>
             
           
@@ -235,7 +235,13 @@
     <span class="n">ElementTyped</span><span class="o">&lt;</span><span class="kt">float</span><span class="o">&gt;</span><span class="p">(</span><span class="n">functor</span><span class="p">,</span> <span class="n">out</span><span class="p">,</span> <span class="n">tensors</span><span class="p">...);</span>
   <span class="p">}</span> <span class="k">else</span> <span class="k">if</span><span class="p">(</span><span class="n">out</span><span class="o">-&gt;</span><span class="n">type</span><span class="p">()</span> <span class="o">==</span> <span class="n">Type</span><span class="o">::</span><span class="n">float16</span><span class="p">)</span> <span class="p">{</span>
 <span class="cp">#if COMPILE_FP16</span>
-    <span class="n">ElementTyped</span><span class="o">&lt;</span><span class="n">__half</span><span class="o">&gt;</span><span class="p">(</span><span class="n">functor</span><span class="p">,</span> <span class="n">out</span><span class="p">,</span> <span class="n">tensors</span><span class="p">...);</span>
+    <span class="n">std</span><span class="o">::</span><span class="n">vector</span><span class="o">&lt;</span><span class="n">marian</span><span class="o">::</span><span class="n">Tensor</span><span class="o">&gt;</span> <span class="n">ts</span><span class="p">({</span><span class="n">out</span><span class="p">,</span> <span class="n">tensors</span><span class="p">...});</span>
+    <span class="kt">bool</span> <span class="n">div2</span> <span class="o">=</span> <span class="n">std</span><span class="o">::</span><span class="n">all_of</span><span class="p">(</span><span class="n">ts</span><span class="p">.</span><span class="n">cbegin</span><span class="p">(),</span> <span class="n">ts</span><span class="p">.</span><span class="n">cend</span><span class="p">(),</span> <span class="p">[](</span><span class="n">marian</span><span class="o">::</span><span class="n">Tensor</span> <span class="n">t</span><span class="p">){</span> <span class="k">return</span> <span class="n">t</span><span class="o">-&gt;</span><span class="n">shape</span><span class="p">()[</span><span class="mi">-1</span><span class="p">]</span> <span class="o">%</span> <span class="mi">2</span> <span class="o">==</span> <span class="mi">0</span><span class="p">;</span> <span class="p">});</span>
+    <span class="k">if</span><span class="p">(</span><span class="n">div2</span><span class="p">)</span> <span class="p">{</span>
+      <span class="n">ElementTyped</span><span class="o">&lt;</span><span class="n">halfx2</span><span class="o">&gt;</span><span class="p">(</span><span class="n">functor</span><span class="p">,</span> <span class="n">out</span><span class="p">,</span> <span class="n">tensors</span><span class="p">...);</span>
+    <span class="p">}</span> <span class="k">else</span> <span class="p">{</span>
+      <span class="n">ElementTyped</span><span class="o">&lt;</span><span class="n">half</span><span class="o">&gt;</span><span class="p">(</span><span class="n">functor</span><span class="p">,</span> <span class="n">out</span><span class="p">,</span> <span class="n">tensors</span><span class="p">...);</span>
+    <span class="p">}</span>
 <span class="cp">#else</span>
     <span class="n">ABORT</span><span class="p">(</span><span class="s">&quot;FP16 not supported with chosen current hardware or CUDA version&quot;</span><span class="p">);</span>
 <span class="cp">#endif</span>

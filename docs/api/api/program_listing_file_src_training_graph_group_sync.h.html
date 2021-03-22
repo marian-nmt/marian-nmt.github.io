@@ -7,7 +7,7 @@
   
   <meta name="viewport" content="width=device-width, initial-scale=1.0" />
   
-  <title>Program Listing for File graph_group_sync.h &mdash; Marian NMT v1.10.2 2021-02-28 documentation</title>
+  <title>Program Listing for File graph_group_sync.h &mdash; Marian NMT v1.10.3 2021-03-22 documentation</title>
   
 
   
@@ -67,7 +67,7 @@
             
             
               <div class="version">
-                v1.10.2
+                v1.10.3
               </div>
             
           
@@ -172,27 +172,15 @@
 
 <span class="cp">#include</span> <span class="cpf">&quot;optimizers/quantizer.h&quot;</span><span class="cp"></span>
 <span class="cp">#include</span> <span class="cpf">&quot;training/graph_group.h&quot;</span><span class="cp"></span>
-<span class="cp">#include</span> <span class="cpf">&quot;training/communicator.h&quot;</span><span class="cp"></span>
-<span class="cp">#include</span> <span class="cpf">&quot;training/exponential_smoothing.h&quot;</span><span class="cp"></span>
 
 <span class="k">namespace</span> <span class="n">marian</span> <span class="p">{</span>
 
-<span class="k">class</span> <span class="nc">SyncGraphGroup</span> <span class="o">:</span> <span class="k">public</span> <span class="n">GraphGroup</span><span class="p">,</span> <span class="k">public</span> <span class="n">ExponentialSmoothing</span> <span class="p">{</span>
+<span class="k">class</span> <span class="nc">SyncGraphGroup</span> <span class="o">:</span> <span class="k">public</span> <span class="n">GraphGroup</span> <span class="p">{</span>
   <span class="k">using</span> <span class="n">Base</span> <span class="o">=</span> <span class="n">GraphGroup</span><span class="p">;</span>
   <span class="k">const</span> <span class="kt">double</span> <span class="n">delay_</span><span class="p">{</span><span class="mf">1.</span><span class="p">};</span> <span class="c1">// optimizer-delay parameter. Fractional means to use a fraction of whatever the MB size is</span>
 
-  <span class="n">Ptr</span><span class="o">&lt;</span><span class="n">ICommunicator</span><span class="o">&gt;</span> <span class="n">comm_</span><span class="p">;</span> <span class="c1">// [not null] communicator, e.g. NCCLCommunicator</span>
-  <span class="n">Ptr</span><span class="o">&lt;</span><span class="n">IMPIWrapper</span><span class="o">&gt;</span> <span class="n">mpi_</span><span class="p">;</span>    <span class="c1">// [not null] all MPI-like communication goes through this (this is a dummy implementation if no MPI run)</span>
-
-  <span class="n">std</span><span class="o">::</span><span class="n">vector</span><span class="o">&lt;</span><span class="n">DeviceId</span><span class="o">&gt;</span> <span class="n">devices_</span><span class="p">;</span>                         <span class="c1">// [deviceIndex]</span>
-  <span class="n">std</span><span class="o">::</span><span class="n">vector</span><span class="o">&lt;</span><span class="n">Ptr</span><span class="o">&lt;</span><span class="n">models</span><span class="o">::</span><span class="n">ICriterionFunction</span><span class="o">&gt;&gt;</span> <span class="n">builders_</span><span class="p">;</span> <span class="c1">// [deviceIndex]</span>
-  <span class="n">std</span><span class="o">::</span><span class="n">vector</span><span class="o">&lt;</span><span class="n">Ptr</span><span class="o">&lt;</span><span class="n">ExpressionGraph</span><span class="o">&gt;&gt;</span> <span class="n">graphs_</span><span class="p">;</span>              <span class="c1">// [deviceIndex]</span>
-
-  <span class="n">std</span><span class="o">::</span><span class="n">vector</span><span class="o">&lt;</span><span class="n">Ptr</span><span class="o">&lt;</span><span class="n">OptimizerBase</span><span class="o">&gt;&gt;</span> <span class="n">shardOpt_</span><span class="p">;</span>       <span class="c1">// [deviceIndex]</span>
-  <span class="n">std</span><span class="o">::</span><span class="n">vector</span><span class="o">&lt;</span><span class="n">Tensor</span><span class="o">&gt;</span> <span class="n">paramsAvg_</span><span class="p">;</span>                  <span class="c1">// [deviceIndex] exponentially smoothed parameters, sharded</span>
   <span class="c1">// @TODO: instead, create an array of ExponentialSmoothing objects, and don&#39;t use ExponentialSmoothing as a base class</span>
   <span class="n">std</span><span class="o">::</span><span class="n">vector</span><span class="o">&lt;</span><span class="n">Ptr</span><span class="o">&lt;</span><span class="n">TensorAllocator</span><span class="o">&gt;&gt;</span> <span class="n">paramsAllocs_</span><span class="p">;</span> <span class="c1">// [deviceIndex] we must hold a reference to the memory until this class dies</span>
-  <span class="c1">// @TODO: move this nto ExponentialSmoothing, together with paramsAvg_?</span>
 
   <span class="c1">// model quantizer</span>
   <span class="n">std</span><span class="o">::</span><span class="n">vector</span><span class="o">&lt;</span><span class="n">Ptr</span><span class="o">&lt;</span><span class="n">ModelQuantizer</span><span class="o">&gt;&gt;</span> <span class="n">quantizers_</span><span class="p">;</span>
@@ -203,11 +191,6 @@
   <span class="kt">double</span> <span class="n">updateMultiplier_</span><span class="p">{</span><span class="mi">1</span><span class="p">};</span>                  <span class="c1">// multiplier not applied in collectStats() (no multiplier if not mini-batch-fit)</span>
 
   <span class="kt">void</span> <span class="nf">initialize</span><span class="p">(</span><span class="k">const</span> <span class="n">Ptr</span><span class="o">&lt;</span><span class="n">data</span><span class="o">::</span><span class="n">Batch</span><span class="o">&gt;&amp;</span> <span class="n">exampleBatch</span><span class="p">);</span>
-  <span class="kt">void</span> <span class="nf">initializeAvg</span><span class="p">();</span>
-
-  <span class="kt">bool</span> <span class="nf">isMainProcess</span><span class="p">()</span> <span class="k">const</span> <span class="p">{</span> <span class="k">return</span> <span class="n">mpi_</span><span class="o">-&gt;</span><span class="n">myMPIRank</span><span class="p">()</span> <span class="o">==</span> <span class="mi">0</span><span class="p">;</span> <span class="p">}</span> <span class="c1">// (we need this test a few times)</span>
-  <span class="kt">void</span> <span class="nf">barrier</span><span class="p">()</span> <span class="k">const</span> <span class="p">{</span> <span class="n">mpi_</span><span class="o">-&gt;</span><span class="n">barrier</span><span class="p">();</span> <span class="p">}</span> <span class="c1">// (we need this several times)</span>
-  <span class="kt">void</span> <span class="nf">swapParamsAvg</span><span class="p">()</span> <span class="p">{</span> <span class="k">if</span> <span class="p">(</span><span class="n">mvAvg_</span> <span class="o">&amp;&amp;</span> <span class="n">paramsAvg_</span><span class="p">.</span><span class="n">size</span><span class="p">()</span> <span class="o">&gt;</span> <span class="mi">0</span><span class="p">)</span> <span class="n">comm_</span><span class="o">-&gt;</span><span class="n">swapParams</span><span class="p">(</span><span class="n">paramsAvg_</span><span class="p">);</span> <span class="p">}</span> <span class="c1">// note: must call this on all MPI ranks in parallel</span>
 
   <span class="kt">bool</span> <span class="nf">tryGetSubBatches</span><span class="p">(</span><span class="n">Ptr</span><span class="o">&lt;</span><span class="n">data</span><span class="o">::</span><span class="n">Batch</span><span class="o">&gt;</span> <span class="n">newBatch</span><span class="p">,</span> <span class="n">std</span><span class="o">::</span><span class="n">vector</span><span class="o">&lt;</span><span class="n">Ptr</span><span class="o">&lt;</span><span class="n">data</span><span class="o">::</span><span class="n">Batch</span><span class="o">&gt;&gt;&amp;</span> <span class="n">subBatches</span><span class="p">,</span> <span class="kt">size_t</span><span class="o">&amp;</span> <span class="n">numReadBatches</span><span class="p">);</span>
   <span class="kt">void</span> <span class="nf">update</span><span class="p">(</span><span class="n">std</span><span class="o">::</span><span class="n">vector</span><span class="o">&lt;</span><span class="n">Ptr</span><span class="o">&lt;</span><span class="n">data</span><span class="o">::</span><span class="n">Batch</span><span class="o">&gt;&gt;</span> <span class="n">subBatches</span><span class="p">,</span> <span class="kt">size_t</span> <span class="n">numReadBatches</span><span class="p">);</span>
@@ -219,10 +202,7 @@
 
   <span class="kt">void</span> <span class="nf">update</span><span class="p">(</span><span class="n">Ptr</span><span class="o">&lt;</span><span class="n">data</span><span class="o">::</span><span class="n">Batch</span><span class="o">&gt;</span> <span class="n">batch</span><span class="p">)</span> <span class="k">override</span><span class="p">;</span>
 
-  <span class="kt">void</span> <span class="nf">load</span><span class="p">()</span> <span class="k">override</span><span class="p">;</span>
-  <span class="kt">void</span> <span class="nf">save</span><span class="p">(</span><span class="kt">bool</span> <span class="k">final</span> <span class="o">=</span> <span class="nb">false</span><span class="p">)</span> <span class="k">override</span><span class="p">;</span>
-
-  <span class="n">Ptr</span><span class="o">&lt;</span><span class="n">data</span><span class="o">::</span><span class="n">BatchStats</span><span class="o">&gt;</span> <span class="n">collectStats</span><span class="p">(</span><span class="k">const</span> <span class="n">std</span><span class="o">::</span><span class="n">vector</span><span class="o">&lt;</span><span class="n">Ptr</span><span class="o">&lt;</span><span class="n">Vocab</span><span class="o">&gt;&gt;&amp;</span><span class="p">);</span>
+  <span class="n">Ptr</span><span class="o">&lt;</span><span class="n">data</span><span class="o">::</span><span class="n">BatchStats</span><span class="o">&gt;</span> <span class="n">collectStats</span><span class="p">(</span><span class="k">const</span> <span class="n">std</span><span class="o">::</span><span class="n">vector</span><span class="o">&lt;</span><span class="n">Ptr</span><span class="o">&lt;</span><span class="n">Vocab</span><span class="o">&gt;&gt;&amp;</span><span class="p">)</span> <span class="k">override</span><span class="p">;</span>
   <span class="kt">void</span> <span class="nf">finalize</span><span class="p">()</span> <span class="k">override</span><span class="p">;</span>
 
   <span class="c1">// @TODO: consider to make this a virtual as well? Currently it is a template dispatch</span>

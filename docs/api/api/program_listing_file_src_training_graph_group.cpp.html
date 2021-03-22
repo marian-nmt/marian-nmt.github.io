@@ -7,7 +7,7 @@
   
   <meta name="viewport" content="width=device-width, initial-scale=1.0" />
   
-  <title>Program Listing for File graph_group.cpp &mdash; Marian NMT v1.10.2 2021-02-28 documentation</title>
+  <title>Program Listing for File graph_group.cpp &mdash; Marian NMT v1.10.3 2021-03-22 documentation</title>
   
 
   
@@ -67,7 +67,7 @@
             
             
               <div class="version">
-                v1.10.2
+                v1.10.3
               </div>
             
           
@@ -172,9 +172,446 @@
 
 <span class="k">namespace</span> <span class="n">marian</span> <span class="p">{</span>
 
-<span class="n">GraphGroup</span><span class="o">::</span><span class="n">GraphGroup</span><span class="p">(</span><span class="n">Ptr</span><span class="o">&lt;</span><span class="n">Options</span><span class="o">&gt;</span> <span class="n">options</span><span class="p">)</span> <span class="o">:</span> <span class="n">options_</span><span class="p">(</span><span class="n">options</span><span class="p">),</span> <span class="n">opt_</span><span class="p">(</span><span class="n">Optimizer</span><span class="p">(</span><span class="n">options</span><span class="p">))</span> <span class="p">{}</span>
+<span class="n">GraphGroup</span><span class="o">::</span><span class="n">GraphGroup</span><span class="p">(</span><span class="n">Ptr</span><span class="o">&lt;</span><span class="n">Options</span><span class="o">&gt;</span> <span class="n">options</span><span class="p">,</span> <span class="n">Ptr</span><span class="o">&lt;</span><span class="n">IMPIWrapper</span><span class="o">&gt;</span> <span class="n">mpi</span><span class="p">)</span>
+  <span class="o">:</span> <span class="n">options_</span><span class="p">(</span><span class="n">options</span><span class="p">),</span>
+    <span class="n">mpi_</span><span class="p">(</span><span class="n">mpi</span><span class="p">),</span>
+    <span class="n">devices_</span><span class="p">(</span><span class="n">Config</span><span class="o">::</span><span class="n">getDevices</span><span class="p">(</span><span class="n">options</span><span class="p">,</span> <span class="n">mpi</span><span class="o">-&gt;</span><span class="n">myMPIRank</span><span class="p">(),</span> <span class="n">mpi</span><span class="o">-&gt;</span><span class="n">numMPIProcesses</span><span class="p">())),</span>
+    <span class="n">shardingMode_</span><span class="p">(</span><span class="n">getShardingMode</span><span class="p">(</span><span class="n">options_</span><span class="p">,</span> <span class="n">mpi</span><span class="p">)),</span>
+    <span class="n">mbRoundUp_</span><span class="p">(</span><span class="n">options_</span><span class="o">-&gt;</span><span class="n">get</span><span class="o">&lt;</span><span class="kt">bool</span><span class="o">&gt;</span><span class="p">(</span><span class="s">&quot;mini-batch-round-up&quot;</span><span class="p">,</span> <span class="nb">true</span><span class="p">))</span> <span class="p">{</span>
+  <span class="k">if</span><span class="p">(</span><span class="n">options_</span><span class="o">-&gt;</span><span class="n">hasAndNotEmpty</span><span class="p">(</span><span class="s">&quot;cost-scaling&quot;</span><span class="p">))</span> <span class="p">{</span>
+    <span class="k">auto</span> <span class="n">vcs</span> <span class="o">=</span> <span class="n">options_</span><span class="o">-&gt;</span><span class="n">get</span><span class="o">&lt;</span><span class="n">std</span><span class="o">::</span><span class="n">vector</span><span class="o">&lt;</span><span class="n">std</span><span class="o">::</span><span class="n">string</span><span class="o">&gt;&gt;</span><span class="p">(</span><span class="s">&quot;cost-scaling&quot;</span><span class="p">);</span>
+    <span class="n">costScale_</span> <span class="o">=</span> <span class="nb">true</span><span class="p">;</span>
+    <span class="kt">float</span> <span class="n">costExponent</span> <span class="o">=</span> <span class="n">std</span><span class="o">::</span><span class="n">stof</span><span class="p">(</span><span class="n">vcs</span><span class="p">[</span><span class="mi">0</span><span class="p">]);</span>
+    <span class="n">costScaleFactor_</span> <span class="o">=</span> <span class="n">std</span><span class="o">::</span><span class="n">pow</span><span class="p">(</span><span class="mf">2.0f</span><span class="p">,</span> <span class="n">costExponent</span><span class="p">);</span>
 
-<span class="kt">void</span> <span class="n">GraphGroup</span><span class="o">::</span><span class="n">validate</span><span class="p">()</span> <span class="p">{</span>
+    <span class="k">if</span><span class="p">(</span><span class="n">vcs</span><span class="p">.</span><span class="n">size</span><span class="p">()</span> <span class="o">&gt;</span> <span class="mi">1</span><span class="p">)</span> <span class="n">costScaleFreq_</span> <span class="o">=</span> <span class="n">std</span><span class="o">::</span><span class="n">stoul</span><span class="p">(</span><span class="n">vcs</span><span class="p">[</span><span class="mi">1</span><span class="p">]);</span>
+    <span class="k">if</span><span class="p">(</span><span class="n">vcs</span><span class="p">.</span><span class="n">size</span><span class="p">()</span> <span class="o">&gt;</span> <span class="mi">2</span><span class="p">)</span> <span class="n">costScaleMultiplier_</span> <span class="o">=</span> <span class="n">std</span><span class="o">::</span><span class="n">stof</span><span class="p">(</span><span class="n">vcs</span><span class="p">[</span><span class="mi">2</span><span class="p">]);</span>
+    <span class="k">if</span><span class="p">(</span><span class="n">vcs</span><span class="p">.</span><span class="n">size</span><span class="p">()</span> <span class="o">&gt;</span> <span class="mi">3</span><span class="p">)</span> <span class="n">costScaleNanTolerance_</span> <span class="o">=</span> <span class="n">std</span><span class="o">::</span><span class="n">stof</span><span class="p">(</span><span class="n">vcs</span><span class="p">[</span><span class="mi">3</span><span class="p">]);</span>
+    <span class="k">if</span><span class="p">(</span><span class="n">vcs</span><span class="p">.</span><span class="n">size</span><span class="p">()</span> <span class="o">&gt;</span> <span class="mi">4</span><span class="p">)</span> <span class="n">costScaleNanRange_</span> <span class="o">=</span> <span class="n">std</span><span class="o">::</span><span class="n">stoul</span><span class="p">(</span><span class="n">vcs</span><span class="p">[</span><span class="mi">4</span><span class="p">]);</span>
+    <span class="k">if</span><span class="p">(</span><span class="n">vcs</span><span class="p">.</span><span class="n">size</span><span class="p">()</span> <span class="o">&gt;</span> <span class="mi">5</span><span class="p">)</span> <span class="n">costScaleFactorMinimum_</span> <span class="o">=</span> <span class="n">std</span><span class="o">::</span><span class="n">stof</span><span class="p">(</span><span class="n">vcs</span><span class="p">[</span><span class="mi">5</span><span class="p">]);</span>
+
+    <span class="n">LOG_ONCE</span><span class="p">(</span><span class="n">info</span><span class="p">,</span>
+             <span class="s">&quot;Training with cost scaling - factor: 2^{} = {}, frequency: {}, multiplier: {}, tolerance: {}, range: {}, minimum: {}&quot;</span><span class="p">,</span>
+             <span class="n">costExponent</span><span class="p">,</span>
+             <span class="n">costScaleFactor_</span><span class="p">,</span>
+             <span class="n">costScaleFreq_</span><span class="p">,</span>
+             <span class="n">costScaleMultiplier_</span><span class="p">,</span>
+             <span class="n">costScaleNanTolerance_</span><span class="p">,</span>
+             <span class="n">costScaleNanRange_</span><span class="p">,</span>
+             <span class="n">costScaleFactorMinimum_</span><span class="p">);</span>
+  <span class="p">}</span>
+
+  <span class="k">if</span><span class="p">(</span><span class="n">options_</span><span class="o">-&gt;</span><span class="n">hasAndNotEmpty</span><span class="p">(</span><span class="s">&quot;dynamic-gradient-scaling&quot;</span><span class="p">))</span> <span class="p">{</span>
+    <span class="k">auto</span> <span class="n">vgc</span> <span class="o">=</span> <span class="n">options_</span><span class="o">-&gt;</span><span class="n">get</span><span class="o">&lt;</span><span class="n">std</span><span class="o">::</span><span class="n">vector</span><span class="o">&lt;</span><span class="n">std</span><span class="o">::</span><span class="n">string</span><span class="o">&gt;&gt;</span><span class="p">(</span><span class="s">&quot;dynamic-gradient-scaling&quot;</span><span class="p">);</span>
+    <span class="n">dynamicGradientScaling_</span> <span class="o">=</span> <span class="nb">true</span><span class="p">;</span>
+
+    <span class="k">if</span><span class="p">(</span><span class="n">vgc</span><span class="p">.</span><span class="n">size</span><span class="p">()</span> <span class="o">&gt;</span> <span class="mi">0</span><span class="p">)</span> <span class="n">dynamicGradientScalingFactor_</span>  <span class="o">=</span> <span class="n">std</span><span class="o">::</span><span class="n">stof</span><span class="p">(</span><span class="n">vgc</span><span class="p">[</span><span class="mi">0</span><span class="p">]);</span>
+    <span class="k">if</span><span class="p">(</span><span class="n">vgc</span><span class="p">.</span><span class="n">size</span><span class="p">()</span> <span class="o">&gt;</span> <span class="mi">1</span><span class="p">)</span> <span class="n">dynamicGradientScalingUseLogs_</span> <span class="o">=</span> <span class="n">vgc</span><span class="p">[</span><span class="mi">1</span><span class="p">]</span> <span class="o">==</span> <span class="s">&quot;log&quot;</span><span class="p">;</span>
+
+    <span class="n">LOG_ONCE</span><span class="p">(</span><span class="n">info</span><span class="p">,</span>
+             <span class="s">&quot;Re-scaling gradient to have average gradient norm if (log={}) gradient norm diverges from average by {} sigmas&quot;</span><span class="p">,</span>
+             <span class="n">dynamicGradientScalingUseLogs_</span><span class="p">,</span>
+             <span class="n">dynamicGradientScalingFactor_</span><span class="p">);</span>
+  <span class="p">}</span>
+
+  <span class="k">if</span><span class="p">(</span><span class="n">options_</span><span class="o">-&gt;</span><span class="n">get</span><span class="o">&lt;</span><span class="kt">bool</span><span class="o">&gt;</span><span class="p">(</span><span class="s">&quot;check-gradient-nan&quot;</span><span class="p">))</span> <span class="p">{</span>
+    <span class="n">checkGradientNan_</span> <span class="o">=</span> <span class="nb">true</span><span class="p">;</span>
+    <span class="n">LOG_ONCE</span><span class="p">(</span><span class="n">info</span><span class="p">,</span> <span class="s">&quot;Checking gradient for NaN&quot;</span><span class="p">);</span>
+  <span class="p">}</span>
+
+  <span class="n">initGraphsAndOpts</span><span class="p">();</span>
+
+  <span class="c1">// Note: We may well end up with only one MPI process or only one graph per worker.</span>
+  <span class="c1">// This part of the code will not special-case any of this here.</span>
+  <span class="c1">// Rather, it is assumed that the communicator knows to reduce unnecessary transfers to no-ops.</span>
+  <span class="c1">// @TODO: createCommunicator(options, ...)</span>
+  <span class="n">comm_</span> <span class="o">=</span> <span class="n">createCommunicator</span><span class="p">(</span><span class="n">graphs_</span><span class="p">,</span>
+                             <span class="cm">/*noNccl=*/</span><span class="n">options_</span><span class="o">-&gt;</span><span class="n">get</span><span class="o">&lt;</span><span class="kt">bool</span><span class="o">&gt;</span><span class="p">(</span><span class="s">&quot;no-nccl&quot;</span><span class="p">,</span> <span class="nb">false</span><span class="p">),</span>
+                             <span class="n">shardingMode_</span><span class="p">,</span>
+                             <span class="cm">/*mpi=*/</span><span class="n">mpi_</span><span class="p">);</span>
+
+  <span class="k">auto</span> <span class="n">formattedDeviceType</span> <span class="o">=</span> <span class="n">utils</span><span class="o">::</span><span class="n">utf8ToUpper</span><span class="p">(</span><span class="n">devices_</span><span class="p">.</span><span class="n">front</span><span class="p">().</span><span class="n">typeAsString</span><span class="p">())</span> <span class="o">+</span> <span class="s">&quot;s&quot;</span><span class="p">;</span>
+  <span class="k">if</span> <span class="p">(</span><span class="n">mpi_</span><span class="o">-&gt;</span><span class="n">numMPIProcesses</span><span class="p">()</span> <span class="o">&gt;</span> <span class="mi">1</span><span class="p">)</span>
+    <span class="n">LOG</span><span class="p">(</span><span class="n">info</span><span class="p">,</span> <span class="s">&quot;[training] Using {} {}, distributed over {} MPI processes&quot;</span><span class="p">,</span> <span class="n">mpi_</span><span class="o">-&gt;</span><span class="n">numMPIProcesses</span><span class="p">()</span> <span class="o">*</span> <span class="n">devices_</span><span class="p">.</span><span class="n">size</span><span class="p">(),</span> <span class="n">formattedDeviceType</span><span class="p">,</span> <span class="n">mpi_</span><span class="o">-&gt;</span><span class="n">numMPIProcesses</span><span class="p">());</span>
+  <span class="k">else</span>
+    <span class="nf">LOG</span><span class="p">(</span><span class="n">info</span><span class="p">,</span> <span class="s">&quot;[training] Using {} {}&quot;</span><span class="p">,</span> <span class="n">devices_</span><span class="p">.</span><span class="n">size</span><span class="p">(),</span> <span class="n">formattedDeviceType</span><span class="p">);</span>
+<span class="p">}</span>
+
+<span class="kt">void</span> <span class="n">GraphGroup</span><span class="o">::</span><span class="n">initGraphsAndOpts</span><span class="p">()</span> <span class="p">{</span>
+  <span class="k">for</span><span class="p">(</span><span class="k">auto</span> <span class="nl">device</span> <span class="p">:</span> <span class="n">devices_</span><span class="p">)</span> <span class="p">{</span>
+    <span class="k">auto</span> <span class="n">graph</span> <span class="o">=</span> <span class="n">New</span><span class="o">&lt;</span><span class="n">ExpressionGraph</span><span class="o">&gt;</span><span class="p">();</span>
+
+    <span class="c1">// @TODO: validate precisions in config</span>
+    <span class="k">auto</span> <span class="n">precisions</span> <span class="o">=</span> <span class="n">options_</span><span class="o">-&gt;</span><span class="n">get</span><span class="o">&lt;</span><span class="n">std</span><span class="o">::</span><span class="n">vector</span><span class="o">&lt;</span><span class="n">std</span><span class="o">::</span><span class="n">string</span><span class="o">&gt;&gt;</span><span class="p">(</span><span class="s">&quot;precision&quot;</span><span class="p">);</span>
+    <span class="n">Type</span> <span class="n">parameterType</span> <span class="o">=</span> <span class="n">typeFromString</span><span class="p">(</span><span class="n">precisions</span><span class="p">[</span><span class="mi">0</span><span class="p">]);</span>
+
+    <span class="n">graph</span><span class="o">-&gt;</span><span class="n">setDefaultElementType</span><span class="p">(</span><span class="n">parameterType</span><span class="p">);</span>
+    <span class="n">graph</span><span class="o">-&gt;</span><span class="n">setCheckpointing</span><span class="p">(</span><span class="n">options_</span><span class="o">-&gt;</span><span class="n">get</span><span class="o">&lt;</span><span class="kt">bool</span><span class="o">&gt;</span><span class="p">(</span><span class="s">&quot;gradient-checkpointing&quot;</span><span class="p">));</span>
+
+    <span class="k">if</span><span class="p">(</span><span class="n">options_</span><span class="o">-&gt;</span><span class="n">get</span><span class="o">&lt;</span><span class="kt">bool</span><span class="o">&gt;</span><span class="p">(</span><span class="s">&quot;check-nan&quot;</span><span class="p">))</span> <span class="c1">// @TODO: add to other places</span>
+      <span class="n">graph</span><span class="o">-&gt;</span><span class="n">setThrowNaN</span><span class="p">(</span><span class="nb">true</span><span class="p">);</span>
+
+    <span class="n">graph</span><span class="o">-&gt;</span><span class="n">setDevice</span><span class="p">(</span><span class="n">device</span><span class="p">);</span>
+
+    <span class="n">graph</span><span class="o">-&gt;</span><span class="n">reserveWorkspaceMB</span><span class="p">(</span><span class="n">options_</span><span class="o">-&gt;</span><span class="n">get</span><span class="o">&lt;</span><span class="kt">size_t</span><span class="o">&gt;</span><span class="p">(</span><span class="s">&quot;workspace&quot;</span><span class="p">));</span>
+
+    <span class="n">graphs_</span><span class="p">.</span><span class="n">push_back</span><span class="p">(</span><span class="n">graph</span><span class="p">);</span>
+
+    <span class="n">optimizerShards_</span><span class="p">.</span><span class="n">push_back</span><span class="p">(</span><span class="n">Optimizer</span><span class="p">(</span><span class="n">options_</span><span class="p">));</span>
+    <span class="n">models_</span><span class="p">.</span><span class="n">push_back</span><span class="p">(</span><span class="n">models</span><span class="o">::</span><span class="n">createCriterionFunctionFromOptions</span><span class="p">(</span><span class="n">options_</span><span class="p">,</span> <span class="n">models</span><span class="o">::</span><span class="n">usage</span><span class="o">::</span><span class="n">training</span><span class="p">));</span>
+  <span class="p">}</span>
+<span class="p">}</span>
+
+<span class="c1">// increase cost-scaling factor if no NaN has been detected for a</span>
+<span class="c1">// given number of iterations. Usually we increase by 2 which adds</span>
+<span class="c1">// one more bit for precision.</span>
+<span class="kt">void</span> <span class="n">GraphGroup</span><span class="o">::</span><span class="n">increaseCostScaleFactor</span><span class="p">()</span> <span class="p">{</span>
+  <span class="k">if</span><span class="p">(</span><span class="o">!</span><span class="n">costScale_</span><span class="p">)</span>
+    <span class="k">return</span><span class="p">;</span>
+
+  <span class="n">noNanSeen_</span><span class="o">++</span><span class="p">;</span>
+
+  <span class="kt">size_t</span> <span class="n">total</span> <span class="o">=</span> <span class="n">nanSeen_</span> <span class="o">+</span> <span class="n">noNanSeen_</span><span class="p">;</span>
+  <span class="kt">float</span> <span class="n">nanPercent</span> <span class="o">=</span> <span class="n">noNanSeen_</span> <span class="o">==</span> <span class="p">(</span><span class="kt">float</span><span class="p">)</span><span class="n">nanSeen_</span> <span class="o">/</span> <span class="p">(</span><span class="kt">float</span><span class="p">)</span><span class="n">total</span><span class="p">;</span> <span class="c1">// total is at least 1 because of noNanSeen_++</span>
+
+  <span class="k">if</span><span class="p">(</span><span class="n">noNanSeen_</span> <span class="o">%</span> <span class="n">costScaleFreq_</span> <span class="o">==</span> <span class="mi">0</span><span class="p">)</span> <span class="p">{</span>
+    <span class="n">costScaleFactor_</span> <span class="o">*=</span> <span class="n">costScaleMultiplier_</span><span class="p">;</span>
+    <span class="n">LOG</span><span class="p">(</span><span class="n">debug</span><span class="p">,</span>
+        <span class="s">&quot;NaN/Inf percentage {:.2f} after {} gradient updates. Increasing cost-scaling factor to {}&quot;</span><span class="p">,</span>
+        <span class="n">nanPercent</span><span class="p">,</span>
+        <span class="n">total</span><span class="p">,</span>
+        <span class="n">costScaleFactor_</span><span class="p">);</span>
+
+    <span class="c1">// Resetting counts after cost-scale change</span>
+    <span class="n">noNanSeen_</span> <span class="o">=</span> <span class="mi">0</span><span class="p">;</span>
+    <span class="n">nanSeen_</span> <span class="o">=</span> <span class="mi">0</span><span class="p">;</span>
+  <span class="p">}</span>
+<span class="p">}</span>
+
+<span class="c1">// call when a NaN was seen to decrease cost-scaling factor</span>
+<span class="kt">void</span> <span class="n">GraphGroup</span><span class="o">::</span><span class="n">decreaseCostScaleFactor</span><span class="p">()</span> <span class="p">{</span>
+  <span class="k">if</span><span class="p">(</span><span class="o">!</span><span class="n">costScale_</span><span class="p">)</span>
+    <span class="k">return</span><span class="p">;</span>
+
+  <span class="n">nanSeen_</span><span class="o">++</span><span class="p">;</span>
+
+  <span class="kt">size_t</span> <span class="n">total</span> <span class="o">=</span> <span class="n">nanSeen_</span> <span class="o">+</span> <span class="n">noNanSeen_</span><span class="p">;</span>
+  <span class="kt">float</span> <span class="n">nanPercent</span> <span class="o">=</span> <span class="p">(</span><span class="kt">float</span><span class="p">)</span><span class="n">nanSeen_</span> <span class="o">/</span> <span class="p">(</span><span class="kt">float</span><span class="p">)</span><span class="n">total</span><span class="p">;</span> <span class="c1">// total is at least 1 because of nanSeen_++</span>
+  <span class="k">if</span><span class="p">(</span><span class="n">total</span> <span class="o">&gt;=</span> <span class="n">costScaleNanRange_</span> <span class="o">&amp;&amp;</span> <span class="n">nanPercent</span> <span class="o">&gt;</span> <span class="n">costScaleNanTolerance_</span><span class="p">)</span> <span class="p">{</span>
+    <span class="k">if</span><span class="p">(</span><span class="n">costScaleFactor_</span> <span class="o">&gt;</span> <span class="n">costScaleFactorMinimum_</span><span class="p">)</span> <span class="p">{</span>
+      <span class="n">costScaleFactor_</span> <span class="o">/=</span> <span class="n">costScaleMultiplier_</span><span class="p">;</span>
+      <span class="n">LOG</span><span class="p">(</span><span class="n">debug</span><span class="p">,</span>
+          <span class="s">&quot;NaN/Inf percentage {:.2f} in {} gradient updates, reducing cost-scaling factor to {}&quot;</span><span class="p">,</span>
+          <span class="n">nanPercent</span><span class="p">,</span>
+          <span class="n">total</span><span class="p">,</span>
+          <span class="n">costScaleFactor_</span><span class="p">);</span>
+    <span class="p">}</span> <span class="k">else</span> <span class="p">{</span>
+      <span class="c1">// @TODO: think if should this rather abort?</span>
+      <span class="n">LOG</span><span class="p">(</span><span class="n">warn</span><span class="p">,</span>
+          <span class="s">&quot;NaN/Inf percentage {:.2f} in {} gradient updates, but cost-scaling factor {} is already at minimum&quot;</span><span class="p">,</span>
+          <span class="n">nanPercent</span><span class="p">,</span>
+          <span class="n">total</span><span class="p">,</span>
+          <span class="n">costScaleFactor_</span><span class="p">);</span>
+    <span class="p">}</span>
+
+    <span class="c1">// Resetting counts after cost-scale change</span>
+    <span class="n">noNanSeen_</span> <span class="o">=</span> <span class="mi">0</span><span class="p">;</span>
+    <span class="n">nanSeen_</span> <span class="o">=</span> <span class="mi">0</span><span class="p">;</span>
+  <span class="p">}</span>
+<span class="p">}</span>
+
+<span class="kt">float</span> <span class="n">GraphGroup</span><span class="o">::</span><span class="n">checkNanOrNorm</span><span class="p">(</span><span class="kt">size_t</span> <span class="n">i</span><span class="p">,</span> <span class="kt">size_t</span> <span class="n">begin</span><span class="p">,</span> <span class="kt">size_t</span> <span class="n">end</span><span class="p">)</span> <span class="p">{</span>
+  <span class="k">auto</span> <span class="n">curGrad</span> <span class="o">=</span> <span class="n">graphs_</span><span class="p">[</span><span class="n">i</span><span class="p">]</span><span class="o">-&gt;</span><span class="n">params</span><span class="p">()</span><span class="o">-&gt;</span><span class="n">grads</span><span class="p">()</span><span class="o">-&gt;</span><span class="n">subtensor</span><span class="p">(</span><span class="n">begin</span><span class="p">,</span> <span class="n">end</span><span class="o">-</span><span class="n">begin</span><span class="p">);</span>
+
+  <span class="k">if</span><span class="p">(</span><span class="n">checkGradientNan_</span> <span class="o">||</span> <span class="n">costScale_</span><span class="p">)</span> <span class="p">{</span>
+    <span class="kt">bool</span> <span class="n">hasNan</span> <span class="o">=</span> <span class="nb">false</span><span class="p">,</span> <span class="n">hasInf</span> <span class="o">=</span> <span class="nb">false</span><span class="p">;</span>
+    <span class="n">IsNaN</span><span class="p">(</span><span class="n">curGrad</span><span class="p">,</span> <span class="n">graphs_</span><span class="p">[</span><span class="n">i</span><span class="p">]</span><span class="o">-&gt;</span><span class="n">allocator</span><span class="p">(),</span> <span class="n">hasNan</span><span class="p">,</span> <span class="n">hasInf</span><span class="p">);</span> <span class="c1">// @TODO: make safe with different compiler options</span>
+    <span class="k">if</span><span class="p">(</span><span class="n">hasNan</span> <span class="o">||</span> <span class="n">hasInf</span><span class="p">)</span> <span class="p">{</span>
+      <span class="n">LOG</span><span class="p">(</span><span class="n">debug</span><span class="p">,</span> <span class="s">&quot;Found Nan ({}) or Inf ({})&quot;</span><span class="p">,</span> <span class="n">hasNan</span><span class="p">,</span> <span class="n">hasInf</span><span class="p">);</span>
+      <span class="k">return</span> <span class="n">std</span><span class="o">::</span><span class="n">numeric_limits</span><span class="o">&lt;</span><span class="kt">float</span><span class="o">&gt;::</span><span class="n">quiet_NaN</span><span class="p">();</span>
+    <span class="p">}</span>
+  <span class="p">}</span>
+
+  <span class="k">if</span><span class="p">(</span><span class="n">dynamicGradientScaling_</span><span class="p">)</span> <span class="p">{</span>
+    <span class="k">auto</span> <span class="n">gNorm</span> <span class="o">=</span> <span class="n">L2Norm</span><span class="p">(</span><span class="n">curGrad</span><span class="p">,</span> <span class="n">graphs_</span><span class="p">[</span><span class="n">i</span><span class="p">]</span><span class="o">-&gt;</span><span class="n">allocator</span><span class="p">());</span>
+    <span class="k">if</span><span class="p">(</span><span class="n">isFinite</span><span class="p">(</span><span class="n">gNorm</span><span class="p">)</span> <span class="o">&amp;&amp;</span> <span class="n">gNorm</span> <span class="o">&gt;</span> <span class="mf">0.0</span><span class="p">)</span>
+      <span class="k">return</span> <span class="n">gNorm</span><span class="p">;</span>
+    <span class="k">else</span>
+      <span class="k">return</span> <span class="n">std</span><span class="o">::</span><span class="n">numeric_limits</span><span class="o">&lt;</span><span class="kt">float</span><span class="o">&gt;::</span><span class="n">quiet_NaN</span><span class="p">();</span>
+  <span class="p">}</span>
+
+  <span class="k">return</span> <span class="mf">0.f</span><span class="p">;</span>
+<span class="p">};</span>
+
+<span class="kt">float</span> <span class="n">GraphGroup</span><span class="o">::</span><span class="n">executeAndCollectNorm</span><span class="p">(</span><span class="k">const</span> <span class="n">std</span><span class="o">::</span><span class="n">function</span><span class="o">&lt;</span><span class="kt">float</span><span class="p">(</span><span class="kt">size_t</span><span class="p">,</span> <span class="kt">size_t</span><span class="p">,</span> <span class="kt">size_t</span><span class="p">)</span><span class="o">&gt;&amp;</span> <span class="n">task</span><span class="p">)</span> <span class="p">{</span>
+  <span class="k">auto</span> <span class="n">gradNorm</span> <span class="o">=</span> <span class="n">comm_</span><span class="o">-&gt;</span><span class="n">foreach</span><span class="p">(</span><span class="n">task</span><span class="p">,</span> <span class="n">accNanOrNorm</span><span class="p">,</span> <span class="mf">0.f</span><span class="p">);</span>
+  <span class="k">if</span><span class="p">(</span><span class="n">mpi_</span><span class="p">)</span> <span class="p">{</span> <span class="c1">// accumulate gradientNorm from subprocesses</span>
+    <span class="k">auto</span> <span class="n">gradNormSquared</span> <span class="o">=</span> <span class="n">gradNorm</span> <span class="o">*</span> <span class="n">gradNorm</span><span class="p">;</span> <span class="c1">// undo sqrt</span>
+    <span class="n">mpi_</span><span class="o">-&gt;</span><span class="n">allReduce</span><span class="p">(</span><span class="o">&amp;</span><span class="n">gradNormSquared</span><span class="p">,</span> <span class="o">&amp;</span><span class="n">gradNormSquared</span><span class="p">,</span> <span class="mi">1</span><span class="p">,</span> <span class="n">MPI_FLOAT</span><span class="p">,</span> <span class="n">MPI_SUM</span><span class="p">);</span> <span class="c1">// sum all</span>
+
+    <span class="k">if</span><span class="p">(</span><span class="n">shardingMode_</span> <span class="o">==</span> <span class="n">ShardingMode</span><span class="o">::</span><span class="n">local</span><span class="p">)</span> <span class="c1">// we already have the correct norm on one device, but we also need to check for NaN</span>
+      <span class="n">gradNormSquared</span> <span class="o">/=</span> <span class="p">(</span><span class="kt">float</span><span class="p">)</span><span class="n">mpi_</span><span class="o">-&gt;</span><span class="n">numMPIProcesses</span><span class="p">();</span>
+
+    <span class="n">gradNorm</span> <span class="o">=</span> <span class="n">std</span><span class="o">::</span><span class="n">sqrt</span><span class="p">(</span><span class="n">gradNormSquared</span><span class="p">);</span> <span class="c1">// redo sqrt</span>
+  <span class="p">}</span>
+  <span class="k">return</span> <span class="n">gradNorm</span><span class="p">;</span>
+<span class="p">}</span>
+
+<span class="kt">float</span> <span class="n">GraphGroup</span><span class="o">::</span><span class="n">computeNormalizationFactor</span><span class="p">(</span><span class="kt">float</span> <span class="n">gNorm</span><span class="p">,</span> <span class="kt">size_t</span> <span class="n">updateTrgWords</span><span class="p">)</span> <span class="p">{</span>
+  <span class="kt">float</span> <span class="n">normalizationFactor</span> <span class="o">=</span> <span class="mf">1.f</span><span class="p">;</span>
+
+  <span class="k">if</span><span class="p">(</span><span class="n">costScale_</span><span class="p">)</span>
+    <span class="n">normalizationFactor</span> <span class="o">*=</span> <span class="n">costScaleFactor_</span><span class="p">;</span>
+
+  <span class="k">if</span><span class="p">(</span><span class="n">options_</span><span class="o">-&gt;</span><span class="n">get</span><span class="o">&lt;</span><span class="kt">bool</span><span class="o">&gt;</span><span class="p">(</span><span class="s">&quot;normalize-gradient&quot;</span><span class="p">))</span>
+    <span class="n">normalizationFactor</span> <span class="o">*=</span> <span class="n">updateTrgWords</span><span class="p">;</span>
+
+  <span class="k">if</span><span class="p">(</span><span class="o">!</span><span class="n">isFinite</span><span class="p">(</span><span class="n">gNorm</span><span class="p">))</span> <span class="c1">// we are checking the sanity of the gradient elsewhere</span>
+    <span class="k">return</span> <span class="n">normalizationFactor</span><span class="p">;</span>
+
+  <span class="k">if</span><span class="p">(</span><span class="n">dynamicGradientScaling_</span><span class="p">)</span> <span class="p">{</span>
+    <span class="c1">// make gradient norm invariant to changes in costScaleFactor_, luckily norm(c * g) = c * norm(g)</span>
+    <span class="k">if</span><span class="p">(</span><span class="n">costScale_</span><span class="p">)</span>
+      <span class="n">gNorm</span> <span class="o">=</span> <span class="n">gNorm</span> <span class="o">/</span> <span class="n">costScaleFactor_</span><span class="p">;</span>
+
+    <span class="c1">// Normalize gradient norm w.r.t. number of labels in batch for statistics,</span>
+    <span class="c1">// there should be no gradient normalization before this point, @TODO: check this</span>
+    <span class="n">gNorm</span> <span class="o">=</span> <span class="n">gNorm</span> <span class="o">/</span> <span class="n">updateTrgWords</span><span class="p">;</span>
+
+    <span class="kt">size_t</span> <span class="n">window</span><span class="p">;</span> <span class="kt">float</span> <span class="n">gNormAvgTransform</span><span class="p">,</span> <span class="n">gNormVarTransform</span><span class="p">,</span> <span class="n">gNormTransform</span><span class="p">,</span> <span class="n">gNormAvg</span><span class="p">;</span>
+    <span class="k">if</span><span class="p">(</span><span class="n">dynamicGradientScalingUseLogs_</span><span class="p">)</span> <span class="p">{</span>
+      <span class="c1">// tracking the log of the gradient norms rather than the gradient norms itself results in a larger standard deviation as the actual</span>
+      <span class="c1">// gradient norms go towards 0. From observation, the STD (of log norms) tends to become near constant after some time while the averages keep decreasing.</span>
+      <span class="n">std</span><span class="o">::</span><span class="n">tie</span><span class="p">(</span><span class="n">window</span><span class="p">,</span> <span class="n">gNormAvgTransform</span><span class="p">,</span> <span class="n">gNormVarTransform</span><span class="p">)</span> <span class="o">=</span> <span class="n">scheduler_</span><span class="o">-&gt;</span><span class="n">getLogGradientNormStats</span><span class="p">();</span>
+      <span class="n">gNormTransform</span> <span class="o">=</span> <span class="n">std</span><span class="o">::</span><span class="n">log</span><span class="p">(</span><span class="n">gNorm</span><span class="p">);</span>             <span class="c1">// we are using the average of log norms, so we need to compute the log</span>
+      <span class="n">gNormAvg</span>       <span class="o">=</span> <span class="n">std</span><span class="o">::</span><span class="n">exp</span><span class="p">(</span><span class="n">gNormAvgTransform</span><span class="p">);</span> <span class="c1">// for rescaling we need to undo the log, we assume avg(log(norm)) is roughly log(avg(norm))</span>
+    <span class="p">}</span> <span class="k">else</span> <span class="p">{</span>
+      <span class="n">std</span><span class="o">::</span><span class="n">tie</span><span class="p">(</span><span class="n">window</span><span class="p">,</span> <span class="n">gNormAvgTransform</span><span class="p">,</span> <span class="n">gNormVarTransform</span><span class="p">)</span> <span class="o">=</span> <span class="n">scheduler_</span><span class="o">-&gt;</span><span class="n">getGradientNormStats</span><span class="p">();</span>
+      <span class="n">gNormTransform</span> <span class="o">=</span> <span class="n">gNorm</span><span class="p">;</span>              <span class="c1">// we are not using logs, so we can just use the normal gradient norm</span>
+      <span class="n">gNormAvg</span>       <span class="o">=</span> <span class="n">gNormAvgTransform</span><span class="p">;</span>  <span class="c1">// we are getting the actual running average of gradient norms, no transformation needed.</span>
+    <span class="p">}</span>
+
+    <span class="k">auto</span> <span class="n">deltaTransform</span>    <span class="o">=</span> <span class="n">gNormTransform</span> <span class="o">-</span> <span class="n">gNormAvgTransform</span><span class="p">;</span> <span class="c1">// compute the difference between the current transformer gradient norm and the running average.</span>
+    <span class="k">auto</span> <span class="n">gNormStdTransform</span> <span class="o">=</span> <span class="n">std</span><span class="o">::</span><span class="n">sqrt</span><span class="p">(</span><span class="n">gNormVarTransform</span><span class="p">);</span>       <span class="c1">// compute STD for the running average of (log) gradient norms.</span>
+
+    <span class="c1">// delta of (log) gradient norm vs (log) gradient norm average is larger than N standard deviations</span>
+    <span class="c1">// hence rescale gradient using the average.</span>
+    <span class="k">if</span><span class="p">(</span><span class="n">scheduler_</span><span class="o">-&gt;</span><span class="n">numberOfBatches</span><span class="p">()</span> <span class="o">&gt;=</span> <span class="n">window</span> <span class="o">&amp;&amp;</span> <span class="n">deltaTransform</span> <span class="o">&gt;</span> <span class="n">dynamicGradientScalingFactor_</span> <span class="o">*</span> <span class="n">gNormStdTransform</span><span class="p">)</span> <span class="p">{</span>
+      <span class="n">LOG</span><span class="p">(</span><span class="n">debug</span><span class="p">,</span> <span class="s">&quot;log gradient norms: {} :: {:.4f} - {:.4f} = {:.4f} &gt; {:.4f} * {:.4f}&quot;</span><span class="p">,</span>
+          <span class="n">dynamicGradientScalingUseLogs_</span><span class="p">,</span> <span class="n">gNormTransform</span><span class="p">,</span> <span class="n">gNormAvgTransform</span><span class="p">,</span> <span class="n">deltaTransform</span><span class="p">,</span> <span class="n">dynamicGradientScalingFactor_</span><span class="p">,</span> <span class="n">gNormStdTransform</span><span class="p">);</span>
+
+      <span class="n">normalizationFactor</span> <span class="o">*=</span> <span class="n">gNorm</span> <span class="o">/</span> <span class="n">gNormAvg</span><span class="p">;</span> <span class="c1">// since we later do gradient / normalizationFactor this divides by norm and multiplies by the average, rescaling to the average.</span>
+    <span class="p">}</span>
+  <span class="p">}</span>
+
+  <span class="k">return</span> <span class="n">normalizationFactor</span><span class="p">;</span>
+<span class="p">};</span>
+
+<span class="kt">void</span> <span class="n">GraphGroup</span><span class="o">::</span><span class="n">load</span><span class="p">()</span> <span class="p">{</span>
+  <span class="n">validate</span><span class="p">();</span>
+  <span class="k">auto</span> <span class="n">scatterFn</span> <span class="o">=</span> <span class="p">[</span><span class="o">&amp;</span><span class="p">](</span><span class="k">const</span> <span class="n">io</span><span class="o">::</span><span class="n">Item</span><span class="o">&amp;</span> <span class="n">optimizerState</span><span class="p">,</span> <span class="k">const</span> <span class="n">OptimizerBase</span><span class="o">::</span><span class="n">ScatterStateSetFunc</span><span class="o">&amp;</span> <span class="n">setShardFn</span><span class="p">)</span> <span class="p">{</span>
+    <span class="n">comm_</span><span class="o">-&gt;</span><span class="n">scatterState</span><span class="p">(</span><span class="n">optimizerState</span><span class="p">,</span> <span class="n">setShardFn</span><span class="p">);</span>
+  <span class="p">};</span>
+  <span class="n">load</span><span class="p">(</span><span class="n">scatterFn</span><span class="p">);</span>
+<span class="p">}</span>
+
+<span class="kt">void</span> <span class="n">GraphGroup</span><span class="o">::</span><span class="n">save</span><span class="p">(</span><span class="kt">bool</span> <span class="n">isFinal</span><span class="p">)</span> <span class="cm">/*override*/</span> <span class="p">{</span>
+  <span class="k">auto</span> <span class="n">gatherOpt</span>  <span class="o">=</span> <span class="p">[</span><span class="o">&amp;</span><span class="p">](</span><span class="k">const</span> <span class="n">OptimizerBase</span><span class="o">::</span><span class="n">GatherStateGetFunc</span><span class="o">&amp;</span> <span class="n">getShardFn</span><span class="p">)</span> <span class="p">{</span>
+    <span class="k">return</span> <span class="n">comm_</span><span class="o">-&gt;</span><span class="n">gatherState</span><span class="p">(</span><span class="n">getShardFn</span><span class="p">);</span>
+  <span class="p">};</span>
+  <span class="n">save</span><span class="p">(</span><span class="n">isFinal</span><span class="p">,</span> <span class="n">gatherOpt</span><span class="p">);</span>
+<span class="p">}</span>
+
+<span class="kt">void</span> <span class="n">GraphGroup</span><span class="o">::</span><span class="n">load</span><span class="p">(</span><span class="k">const</span> <span class="n">OptimizerBase</span><span class="o">::</span><span class="n">ScatterStateFunc</span><span class="o">&amp;</span> <span class="n">scatterFn</span><span class="p">)</span> <span class="p">{</span>
+  <span class="cm">/*</span>
+<span class="cm">  if not no-reload (=&gt; i.e. do reload):</span>
+<span class="cm">    restore scheduler</span>
+<span class="cm">    if checkpoint is available or not no-reload-checkpoint:</span>
+<span class="cm">      reload from checkpoint</span>
+<span class="cm">    else if model is available:</span>
+<span class="cm">      reload from model, but warn that no checkpoint was used and the model could be smoothed</span>
+<span class="cm">  else if pretrained-model path given:</span>
+<span class="cm">    initialize matching weights from pretrained model</span>
+<span class="cm">  else:</span>
+<span class="cm">    (implicitly) don&#39;t do anything =&gt; initialize randomly later</span>
+<span class="cm">  */</span>
+  <span class="k">if</span><span class="p">(</span><span class="o">!</span><span class="n">options_</span><span class="o">-&gt;</span><span class="n">get</span><span class="o">&lt;</span><span class="kt">bool</span><span class="o">&gt;</span><span class="p">(</span><span class="s">&quot;no-reload&quot;</span><span class="p">))</span> <span class="p">{</span>
+    <span class="n">std</span><span class="o">::</span><span class="n">string</span> <span class="n">modelFileName</span> <span class="o">=</span> <span class="n">options_</span><span class="o">-&gt;</span><span class="n">get</span><span class="o">&lt;</span><span class="n">std</span><span class="o">::</span><span class="n">string</span><span class="o">&gt;</span><span class="p">(</span><span class="s">&quot;model&quot;</span><span class="p">);</span>
+
+    <span class="k">if</span><span class="p">(</span><span class="n">filesystem</span><span class="o">::</span><span class="n">exists</span><span class="p">(</span><span class="n">modelFileName</span><span class="p">))</span> <span class="p">{</span>
+      <span class="k">if</span><span class="p">(</span><span class="n">scheduler_</span><span class="p">)</span>
+        <span class="n">scheduler_</span><span class="o">-&gt;</span><span class="n">load</span><span class="p">(</span><span class="n">modelFileName</span><span class="p">);</span>
+      <span class="c1">// we just load it N times from disk (it&#39;ll be in disk cache after the first)</span>
+      <span class="c1">// this also allocates memory correctly when calling forward() inside restoreFromCheckPoint</span>
+      <span class="kt">size_t</span> <span class="n">i</span> <span class="o">=</span> <span class="mi">0</span><span class="p">;</span>
+      <span class="k">for</span><span class="p">(</span><span class="k">auto</span> <span class="nl">graph</span> <span class="p">:</span> <span class="n">graphs_</span><span class="p">)</span>
+        <span class="n">models_</span><span class="p">[</span><span class="n">i</span><span class="o">++</span><span class="p">]</span><span class="o">-&gt;</span><span class="n">load</span><span class="p">(</span><span class="n">graph</span><span class="p">,</span> <span class="n">modelFileName</span><span class="p">);</span>
+
+      <span class="c1">// try to restore everything from checkpoint now</span>
+      <span class="n">restoreFromCheckpoint</span><span class="p">(</span><span class="n">modelFileName</span><span class="p">,</span> <span class="n">scatterFn</span><span class="p">);</span>
+    <span class="p">}</span> <span class="k">else</span> <span class="k">if</span><span class="p">(</span><span class="n">options_</span><span class="o">-&gt;</span><span class="n">hasAndNotEmpty</span><span class="p">(</span><span class="s">&quot;pretrained-model&quot;</span><span class="p">))</span> <span class="p">{</span>
+      <span class="n">std</span><span class="o">::</span><span class="n">string</span> <span class="n">nameInit</span> <span class="o">=</span> <span class="n">options_</span><span class="o">-&gt;</span><span class="n">get</span><span class="o">&lt;</span><span class="n">std</span><span class="o">::</span><span class="n">string</span><span class="o">&gt;</span><span class="p">(</span><span class="s">&quot;pretrained-model&quot;</span><span class="p">);</span>
+      <span class="n">LOG</span><span class="p">(</span><span class="n">info</span><span class="p">,</span>
+          <span class="s">&quot;[training] Initializing model weights with pre-trained model {}&quot;</span><span class="p">,</span>
+          <span class="n">nameInit</span><span class="p">);</span>
+
+      <span class="kt">size_t</span> <span class="n">i</span> <span class="o">=</span> <span class="mi">0</span><span class="p">;</span>
+      <span class="k">for</span><span class="p">(</span><span class="k">auto</span> <span class="nl">graph</span> <span class="p">:</span> <span class="n">graphs_</span><span class="p">)</span>
+        <span class="n">models_</span><span class="p">[</span><span class="n">i</span><span class="o">++</span><span class="p">]</span><span class="o">-&gt;</span><span class="n">load</span><span class="p">(</span><span class="n">graph</span><span class="p">,</span> <span class="n">nameInit</span><span class="p">,</span> <span class="nb">false</span><span class="p">);</span>
+    <span class="p">}</span>
+  <span class="p">}</span>
+<span class="p">}</span>
+
+<span class="kt">bool</span> <span class="n">GraphGroup</span><span class="o">::</span><span class="n">restoreFromCheckpoint</span><span class="p">(</span><span class="k">const</span> <span class="n">std</span><span class="o">::</span><span class="n">string</span><span class="o">&amp;</span> <span class="n">modelFileName</span><span class="p">,</span>
+                                       <span class="k">const</span> <span class="n">OptimizerBase</span><span class="o">::</span><span class="n">ScatterStateFunc</span><span class="o">&amp;</span> <span class="n">scatterFn</span><span class="p">)</span> <span class="p">{</span>
+  <span class="cm">/*</span>
+<span class="cm">  if model checkpoint is available:</span>
+<span class="cm">    - load model from checkpoint, not from model.npz</span>
+<span class="cm">    - abort if checkpoint model and graph size do not match, probably due to different model or precision</span>
+<span class="cm">  */</span>
+
+  <span class="n">std</span><span class="o">::</span><span class="n">string</span> <span class="n">checkpointName</span> <span class="o">=</span> <span class="n">modelFileName</span> <span class="o">+</span> <span class="s">&quot;.optimizer.npz&quot;</span><span class="p">;</span> <span class="c1">// @TODO: change to .checkpoint.npz, would break backwards compat</span>
+
+  <span class="k">if</span><span class="p">(</span><span class="o">!</span><span class="n">filesystem</span><span class="o">::</span><span class="n">exists</span><span class="p">(</span><span class="n">checkpointName</span><span class="p">))</span> <span class="p">{</span>
+    <span class="n">LOG</span><span class="p">(</span><span class="n">warn</span><span class="p">,</span> <span class="s">&quot;No checkpoint found, parameters reloaded from last inference model&quot;</span><span class="p">);</span>
+    <span class="k">return</span> <span class="nb">false</span><span class="p">;</span> <span class="c1">// failed to restore</span>
+  <span class="p">}</span>
+
+  <span class="k">auto</span> <span class="n">items</span> <span class="o">=</span> <span class="n">io</span><span class="o">::</span><span class="n">loadItems</span><span class="p">(</span><span class="n">checkpointName</span><span class="p">);</span>
+
+  <span class="c1">// make sure all nodes see the same checkpoint data, may not be the case with distributed file systems</span>
+  <span class="c1">// when there was a delay in updating the caches accross nodes. So here node 0 sends its data to all.</span>
+  <span class="c1">// We still load them all from disk, but that serves more as a trick to allocate the correct memory.</span>
+  <span class="k">if</span><span class="p">(</span><span class="n">mpi_</span><span class="p">)</span>
+    <span class="k">for</span><span class="p">(</span><span class="k">auto</span><span class="o">&amp;</span> <span class="nl">item</span> <span class="p">:</span> <span class="n">items</span><span class="p">)</span>
+      <span class="n">mpi_</span><span class="o">-&gt;</span><span class="n">bCast</span><span class="p">(</span><span class="n">item</span><span class="p">);</span>
+
+  <span class="c1">// @TODO: probably we want to have the list of DeviceIds as an attribute</span>
+  <span class="n">std</span><span class="o">::</span><span class="n">vector</span><span class="o">&lt;</span><span class="n">Ptr</span><span class="o">&lt;</span><span class="n">Backend</span><span class="o">&gt;&gt;</span> <span class="n">backends</span><span class="p">;</span>
+  <span class="k">for</span><span class="p">(</span><span class="k">auto</span> <span class="nl">graph</span> <span class="p">:</span> <span class="n">graphs_</span><span class="p">)</span>
+    <span class="n">backends</span><span class="p">.</span><span class="n">push_back</span><span class="p">(</span><span class="n">graph</span><span class="o">-&gt;</span><span class="n">getBackend</span><span class="p">());</span>
+  <span class="n">optimizerShards_</span><span class="p">[</span><span class="mi">0</span><span class="p">]</span><span class="o">-&gt;</span><span class="n">load</span><span class="p">(</span><span class="n">items</span><span class="p">,</span> <span class="n">optimizerShards_</span><span class="p">,</span> <span class="n">backends</span><span class="p">,</span> <span class="n">scatterFn</span><span class="p">,</span> <span class="n">isMainProcess</span><span class="p">());</span>
+
+  <span class="c1">// restore the graph parameters from the checkpoint master copy.</span>
+  <span class="k">auto</span> <span class="n">found</span> <span class="o">=</span> <span class="n">std</span><span class="o">::</span><span class="n">find_if</span><span class="p">(</span><span class="n">items</span><span class="p">.</span><span class="n">begin</span><span class="p">(),</span> <span class="n">items</span><span class="p">.</span><span class="n">end</span><span class="p">(),</span>
+    <span class="p">[](</span><span class="k">const</span> <span class="n">io</span><span class="o">::</span><span class="n">Item</span><span class="o">&amp;</span> <span class="n">item</span><span class="p">)</span> <span class="p">{</span> <span class="k">return</span> <span class="n">item</span><span class="p">.</span><span class="n">name</span> <span class="o">==</span> <span class="s">&quot;master_parameters&quot;</span><span class="p">;</span> <span class="p">});</span>
+
+  <span class="k">if</span><span class="p">(</span><span class="n">found</span> <span class="o">==</span> <span class="n">items</span><span class="p">.</span><span class="n">end</span><span class="p">())</span> <span class="p">{</span>
+    <span class="n">LOG</span><span class="p">(</span><span class="n">warn</span><span class="p">,</span> <span class="s">&quot;No master parameters found in checkpoint, parameters reloaded from last inference model&quot;</span><span class="p">);</span>
+    <span class="k">return</span> <span class="nb">false</span><span class="p">;</span> <span class="c1">// failed to restore</span>
+  <span class="p">}</span>
+
+  <span class="k">auto</span><span class="o">&amp;</span> <span class="n">masterParameters</span> <span class="o">=</span> <span class="o">*</span><span class="n">found</span><span class="p">;</span>
+  <span class="k">for</span><span class="p">(</span><span class="k">auto</span> <span class="nl">graph</span> <span class="p">:</span> <span class="n">graphs_</span><span class="p">)</span> <span class="p">{</span>
+    <span class="n">graph</span><span class="o">-&gt;</span><span class="n">forward</span><span class="p">();</span> <span class="c1">// allocate graph parameter memory and initialize parameters from inference model. This needs to</span>
+    <span class="c1">// run a full forward pass over the paramters to allocate the parameters values in order (by parameter name).</span>
+    <span class="c1">// Just doing graph-&gt;params()-&gt;allocateForward() is not sufficient.</span>
+    <span class="n">ABORT_IF</span><span class="p">(</span><span class="n">graph</span><span class="o">-&gt;</span><span class="n">params</span><span class="p">()</span><span class="o">-&gt;</span><span class="n">vals</span><span class="p">()</span><span class="o">-&gt;</span><span class="n">shape</span><span class="p">()</span> <span class="o">!=</span> <span class="n">masterParameters</span><span class="p">.</span><span class="n">shape</span><span class="p">,</span>
+             <span class="s">&quot;Graph parameter sizes and master copy parameter sizes in checkpoint do not match&quot;</span><span class="p">);</span>
+
+    <span class="c1">// Convert type of io::Item to match graph parameter type.</span>
+    <span class="k">if</span><span class="p">(</span><span class="n">masterParameters</span><span class="p">.</span><span class="n">type</span> <span class="o">!=</span> <span class="n">graph</span><span class="o">-&gt;</span><span class="n">params</span><span class="p">()</span><span class="o">-&gt;</span><span class="n">vals</span><span class="p">()</span><span class="o">-&gt;</span><span class="n">type</span><span class="p">())</span>
+      <span class="n">masterParameters</span><span class="p">.</span><span class="n">convert</span><span class="p">(</span><span class="n">graph</span><span class="o">-&gt;</span><span class="n">params</span><span class="p">()</span><span class="o">-&gt;</span><span class="n">vals</span><span class="p">()</span><span class="o">-&gt;</span><span class="n">type</span><span class="p">());</span>
+
+    <span class="n">graph</span><span class="o">-&gt;</span><span class="n">params</span><span class="p">()</span><span class="o">-&gt;</span><span class="n">vals</span><span class="p">()</span><span class="o">-&gt;</span><span class="n">set</span><span class="p">(</span><span class="n">masterParameters</span><span class="p">);</span>
+    <span class="n">graph</span><span class="o">-&gt;</span><span class="n">clear</span><span class="p">();</span>
+  <span class="p">}</span>
+
+  <span class="n">LOG</span><span class="p">(</span><span class="n">info</span><span class="p">,</span> <span class="s">&quot;[training] Master parameters and optimizers restored from training checkpoint {} and {}&quot;</span><span class="p">,</span> <span class="n">modelFileName</span><span class="p">,</span> <span class="n">checkpointName</span><span class="p">);</span>
+  <span class="k">return</span> <span class="nb">true</span><span class="p">;</span> <span class="c1">// succeeded to restore</span>
+<span class="p">}</span>
+
+<span class="kt">void</span> <span class="n">GraphGroup</span><span class="o">::</span><span class="n">saveCheckpoint</span><span class="p">(</span><span class="k">const</span> <span class="n">std</span><span class="o">::</span><span class="n">string</span><span class="o">&amp;</span> <span class="n">modelFileName</span><span class="p">,</span>
+                                <span class="k">const</span> <span class="n">OptimizerBase</span><span class="o">::</span><span class="n">GatherStateFunc</span><span class="o">&amp;</span> <span class="n">gatherFn</span><span class="p">)</span> <span class="p">{</span>
+  <span class="c1">// @TODO: change to .checkpoint.npz, would break backwards compat</span>
+  <span class="n">std</span><span class="o">::</span><span class="n">string</span> <span class="n">checkpointName</span> <span class="o">=</span> <span class="n">modelFileName</span> <span class="o">+</span> <span class="s">&quot;.optimizer.npz&quot;</span><span class="p">;</span>
+
+  <span class="n">std</span><span class="o">::</span><span class="n">vector</span><span class="o">&lt;</span><span class="n">io</span><span class="o">::</span><span class="n">Item</span><span class="o">&gt;</span> <span class="n">items</span><span class="p">;</span>
+  <span class="n">optimizerShards_</span><span class="p">[</span><span class="mi">0</span><span class="p">]</span><span class="o">-&gt;</span><span class="n">save</span><span class="p">(</span><span class="n">items</span><span class="p">,</span>
+                            <span class="n">optimizerShards_</span><span class="p">,</span>
+                            <span class="n">gatherFn</span><span class="p">,</span>
+                            <span class="n">isMainProcess</span><span class="p">());</span>
+
+  <span class="k">if</span><span class="p">(</span><span class="n">isMainProcess</span><span class="p">())</span> <span class="p">{</span> <span class="c1">// only main process does the actual saving</span>
+    <span class="k">auto</span> <span class="n">found</span> <span class="o">=</span> <span class="n">std</span><span class="o">::</span><span class="n">find_if</span><span class="p">(</span><span class="n">items</span><span class="p">.</span><span class="n">begin</span><span class="p">(),</span> <span class="n">items</span><span class="p">.</span><span class="n">end</span><span class="p">(),</span>
+      <span class="p">[](</span><span class="k">const</span> <span class="n">io</span><span class="o">::</span><span class="n">Item</span><span class="o">&amp;</span> <span class="n">item</span><span class="p">)</span> <span class="p">{</span> <span class="k">return</span> <span class="n">item</span><span class="p">.</span><span class="n">name</span> <span class="o">==</span> <span class="s">&quot;master_parameters&quot;</span><span class="p">;</span> <span class="p">});</span>
+
+    <span class="k">if</span><span class="p">(</span><span class="n">found</span> <span class="o">==</span> <span class="n">items</span><span class="p">.</span><span class="n">end</span><span class="p">())</span> <span class="p">{</span>
+      <span class="c1">// if the optimizer does not provide a master parameters copy (the default when training with full precision)</span>
+      <span class="c1">// then dump the parameters of graphs_[0] into the checkpoint. This should be called when the original parameters</span>
+      <span class="c1">// are in the graph, not the smoothed version. Here we are getting called after a double swap, so that should be</span>
+      <span class="c1">// the case.</span>
+      <span class="n">io</span><span class="o">::</span><span class="n">Item</span> <span class="n">masterParameters</span><span class="p">;</span>
+      <span class="n">graphs_</span><span class="p">[</span><span class="mi">0</span><span class="p">]</span><span class="o">-&gt;</span><span class="n">params</span><span class="p">()</span><span class="o">-&gt;</span><span class="n">vals</span><span class="p">()</span><span class="o">-&gt;</span><span class="n">get</span><span class="p">(</span><span class="n">masterParameters</span><span class="p">,</span> <span class="s">&quot;master_parameters&quot;</span><span class="p">);</span>
+      <span class="n">items</span><span class="p">.</span><span class="n">push_back</span><span class="p">(</span><span class="n">masterParameters</span><span class="p">);</span>
+    <span class="p">}</span>
+
+
+    <span class="n">LOG</span><span class="p">(</span><span class="n">info</span><span class="p">,</span> <span class="s">&quot;[training] Saving training checkpoint to {} and {}&quot;</span><span class="p">,</span> <span class="n">modelFileName</span><span class="p">,</span> <span class="n">checkpointName</span><span class="p">);</span>
+    <span class="n">io</span><span class="o">::</span><span class="n">saveItems</span><span class="p">(</span><span class="n">checkpointName</span><span class="p">,</span> <span class="n">items</span><span class="p">);</span>
+  <span class="p">}</span>
+<span class="p">}</span>
+
+<span class="kt">void</span> <span class="n">GraphGroup</span><span class="o">::</span><span class="n">save</span><span class="p">(</span><span class="kt">bool</span> <span class="n">isFinal</span><span class="p">,</span>
+                      <span class="k">const</span> <span class="n">OptimizerBase</span><span class="o">::</span><span class="n">GatherStateFunc</span><span class="o">&amp;</span> <span class="n">gatherOptimizerStateFn</span><span class="p">)</span> <span class="p">{</span>
+  <span class="n">barrier</span><span class="p">();</span> <span class="c1">// (for better grouping of log messages)</span>
+
+  <span class="c1">// bring the smoothed model in</span>
+  <span class="c1">// Note that it is sharded. For multi-node, it is sharded over multiple machines, so this is a network access.</span>
+  <span class="c1">// Also note that the swap must run on all MPI processes concurrently, although only one actually validates.</span>
+
+  <span class="n">swapWithSmoothed</span><span class="p">();</span>
+
+  <span class="k">if</span><span class="p">(</span><span class="n">isFinal</span> <span class="o">&amp;&amp;</span> <span class="n">scheduler_</span><span class="p">)</span>
+    <span class="n">scheduler_</span><span class="o">-&gt;</span><span class="n">validate</span><span class="p">(</span><span class="n">graphs_</span><span class="p">,</span> <span class="n">isFinal</span><span class="p">);</span>
+
+  <span class="n">barrier</span><span class="p">();</span> <span class="c1">// (for better grouping of log messages)</span>
+
+  <span class="n">std</span><span class="o">::</span><span class="n">string</span> <span class="n">modelFileName</span> <span class="o">=</span> <span class="n">options_</span><span class="o">-&gt;</span><span class="n">get</span><span class="o">&lt;</span><span class="n">std</span><span class="o">::</span><span class="n">string</span><span class="o">&gt;</span><span class="p">(</span><span class="s">&quot;model&quot;</span><span class="p">);</span>
+  <span class="k">if</span><span class="p">(</span><span class="n">isMainProcess</span><span class="p">())</span> <span class="p">{</span>
+    <span class="c1">// save main model file</span>
+    <span class="k">if</span><span class="p">(</span><span class="n">options_</span><span class="o">-&gt;</span><span class="n">get</span><span class="o">&lt;</span><span class="kt">bool</span><span class="o">&gt;</span><span class="p">(</span><span class="s">&quot;overwrite&quot;</span><span class="p">))</span> <span class="p">{</span>
+      <span class="n">models_</span><span class="p">[</span><span class="mi">0</span><span class="p">]</span><span class="o">-&gt;</span><span class="n">save</span><span class="p">(</span><span class="n">graphs_</span><span class="p">[</span><span class="mi">0</span><span class="p">],</span> <span class="n">modelFileName</span><span class="p">,</span> <span class="cm">/*saveTranslatorConfig=*/</span><span class="nb">true</span><span class="p">);</span>
+      <span class="c1">// save scheduler-related state</span>
+      <span class="k">if</span><span class="p">(</span><span class="n">scheduler_</span><span class="p">)</span>
+        <span class="n">scheduler_</span><span class="o">-&gt;</span><span class="n">save</span><span class="p">(</span><span class="n">modelFileName</span><span class="p">);</span>
+    <span class="p">}</span> <span class="k">else</span> <span class="p">{</span>
+      <span class="k">if</span><span class="p">(</span><span class="o">!</span><span class="n">isFinal</span><span class="p">)</span> <span class="p">{</span> <span class="c1">// save a model with iteration number</span>
+        <span class="n">std</span><span class="o">::</span><span class="n">string</span> <span class="n">numberOfBatches</span> <span class="o">=</span> <span class="n">scheduler_</span> <span class="o">?</span> <span class="n">std</span><span class="o">::</span><span class="n">to_string</span><span class="p">(</span><span class="n">scheduler_</span><span class="o">-&gt;</span><span class="n">numberOfBatches</span><span class="p">())</span> <span class="o">:</span> <span class="s">&quot;unknown&quot;</span><span class="p">;</span>
+        <span class="n">std</span><span class="o">::</span><span class="n">string</span> <span class="n">nameOverwrite</span> <span class="o">=</span> <span class="n">modelFileName</span><span class="p">;</span>
+        <span class="n">nameOverwrite</span><span class="p">.</span><span class="n">replace</span><span class="p">(</span><span class="n">modelFileName</span><span class="p">.</span><span class="n">size</span><span class="p">()</span> <span class="o">-</span> <span class="mi">4</span><span class="p">,</span> <span class="mi">4</span><span class="p">,</span> <span class="s">&quot;.iter&quot;</span> <span class="o">+</span> <span class="n">numberOfBatches</span> <span class="o">+</span> <span class="s">&quot;.npz&quot;</span><span class="p">);</span>
+        <span class="n">models_</span><span class="p">[</span><span class="mi">0</span><span class="p">]</span><span class="o">-&gt;</span><span class="n">save</span><span class="p">(</span><span class="n">graphs_</span><span class="p">[</span><span class="mi">0</span><span class="p">],</span> <span class="n">nameOverwrite</span><span class="p">);</span>
+      <span class="p">}</span>
+      <span class="n">models_</span><span class="p">[</span><span class="mi">0</span><span class="p">]</span><span class="o">-&gt;</span><span class="n">save</span><span class="p">(</span><span class="n">graphs_</span><span class="p">[</span><span class="mi">0</span><span class="p">],</span> <span class="n">modelFileName</span><span class="p">,</span> <span class="cm">/*saveTranslatorConfig=*/</span><span class="nb">true</span><span class="p">);</span>
+
+      <span class="c1">// save scheduler-related state</span>
+      <span class="k">if</span><span class="p">(</span><span class="n">scheduler_</span><span class="p">)</span>
+        <span class="n">scheduler_</span><span class="o">-&gt;</span><span class="n">save</span><span class="p">(</span><span class="n">modelFileName</span><span class="p">);</span>
+    <span class="p">}</span>
+  <span class="p">}</span>
+
+  <span class="n">swapWithSmoothed</span><span class="p">();</span>
+  <span class="n">saveCheckpoint</span><span class="p">(</span><span class="n">modelFileName</span><span class="p">,</span> <span class="n">gatherOptimizerStateFn</span><span class="p">);</span>
+
+  <span class="n">barrier</span><span class="p">();</span> <span class="c1">// (for better grouping of log messages)</span>
+<span class="p">}</span>
+
+<span class="kt">void</span> <span class="n">GraphGroup</span><span class="o">::</span><span class="n">swapWithSmoothed</span><span class="p">()</span> <span class="p">{</span>
+  <span class="k">auto</span> <span class="n">swap</span> <span class="o">=</span> <span class="p">[</span><span class="o">&amp;</span><span class="p">](</span><span class="kt">size_t</span> <span class="n">i</span><span class="p">,</span> <span class="kt">size_t</span> <span class="n">begin</span><span class="p">,</span> <span class="kt">size_t</span> <span class="n">end</span><span class="p">)</span> <span class="p">{</span>
+    <span class="k">auto</span> <span class="n">curParam</span> <span class="o">=</span> <span class="n">graphs_</span><span class="p">[</span><span class="n">i</span><span class="p">]</span><span class="o">-&gt;</span><span class="n">params</span><span class="p">()</span><span class="o">-&gt;</span><span class="n">vals</span><span class="p">()</span><span class="o">-&gt;</span><span class="n">subtensor</span><span class="p">(</span><span class="n">begin</span><span class="p">,</span> <span class="n">end</span><span class="o">-</span><span class="n">begin</span><span class="p">);</span>
+    <span class="n">optimizerShards_</span><span class="p">[</span><span class="n">i</span><span class="p">]</span><span class="o">-&gt;</span><span class="n">swapWithSmoothed</span><span class="p">(</span><span class="n">curParam</span><span class="p">);</span>
+    <span class="k">return</span> <span class="nb">true</span><span class="p">;</span> <span class="c1">// dummy success</span>
+  <span class="p">};</span>
+  <span class="n">comm_</span><span class="o">-&gt;</span><span class="n">foreach</span><span class="p">(</span><span class="n">swap</span><span class="p">);</span>
+  <span class="n">comm_</span><span class="o">-&gt;</span><span class="n">allGatherParams</span><span class="p">();</span>
+
+  <span class="k">if</span><span class="p">(</span><span class="n">shardingMode_</span> <span class="o">==</span> <span class="n">ShardingMode</span><span class="o">::</span><span class="n">local</span><span class="p">)</span>
+    <span class="n">comm_</span><span class="o">-&gt;</span><span class="n">broadcastParams</span><span class="p">();</span>
+
+  <span class="n">barrier</span><span class="p">();</span>
+<span class="p">}</span>
+
+<span class="kt">void</span> <span class="n">GraphGroup</span><span class="o">::</span><span class="n">validate</span><span class="p">()</span> <span class="p">{</span> <span class="c1">//@TODO: rename this function to something less confusing.</span>
   <span class="n">ABORT_IF</span><span class="p">(</span><span class="n">finalized_</span><span class="p">,</span> <span class="s">&quot;Training has already finished.&quot;</span><span class="p">);</span>
 <span class="p">}</span>
 
@@ -182,10 +619,16 @@
   <span class="n">finalized_</span> <span class="o">=</span> <span class="nb">true</span><span class="p">;</span>
 <span class="p">}</span>
 
+<span class="c1">// @TODO: Can this be made const? It seems wrong to have a stateful method that still returns a result.</span>
 <span class="n">Ptr</span><span class="o">&lt;</span><span class="n">data</span><span class="o">::</span><span class="n">BatchStats</span><span class="o">&gt;</span> <span class="n">GraphGroup</span><span class="o">::</span><span class="n">collectStats</span><span class="p">(</span><span class="n">Ptr</span><span class="o">&lt;</span><span class="n">ExpressionGraph</span><span class="o">&gt;</span> <span class="n">graph</span><span class="p">,</span>
                                                <span class="n">Ptr</span><span class="o">&lt;</span><span class="n">models</span><span class="o">::</span><span class="n">ICriterionFunction</span><span class="o">&gt;</span> <span class="n">model</span><span class="p">,</span>
                                                <span class="k">const</span> <span class="n">std</span><span class="o">::</span><span class="n">vector</span><span class="o">&lt;</span><span class="n">Ptr</span><span class="o">&lt;</span><span class="n">Vocab</span><span class="o">&gt;&gt;&amp;</span> <span class="n">vocabs</span><span class="p">,</span>
                                                <span class="kt">double</span> <span class="n">multiplier</span><span class="p">)</span> <span class="p">{</span>
+  <span class="c1">// this runs with fake values, we do not care for overflow/underflow</span>
+  <span class="kt">bool</span> <span class="n">throwNan</span> <span class="o">=</span> <span class="n">graph</span><span class="o">-&gt;</span><span class="n">getThrowNaN</span><span class="p">();</span>
+
+  <span class="n">graph</span><span class="o">-&gt;</span><span class="n">setThrowNaN</span><span class="p">(</span><span class="nb">false</span><span class="p">);</span>
+
   <span class="k">auto</span> <span class="n">stats</span> <span class="o">=</span> <span class="n">New</span><span class="o">&lt;</span><span class="n">data</span><span class="o">::</span><span class="n">BatchStats</span><span class="o">&gt;</span><span class="p">();</span>
   <span class="kt">size_t</span> <span class="n">numFiles</span> <span class="o">=</span> <span class="n">numberOfInputFiles</span><span class="p">();</span>
 
@@ -209,11 +652,12 @@
   <span class="kt">bool</span> <span class="n">fits</span> <span class="o">=</span> <span class="nb">true</span><span class="p">;</span>
   <span class="k">while</span><span class="p">(</span><span class="n">fits</span><span class="p">)</span> <span class="p">{</span>
     <span class="n">std</span><span class="o">::</span><span class="n">vector</span><span class="o">&lt;</span><span class="kt">size_t</span><span class="o">&gt;</span> <span class="n">lengths</span><span class="p">(</span><span class="n">numFiles</span><span class="p">,</span> <span class="n">first</span><span class="p">);</span>
+
     <span class="k">for</span><span class="p">(</span><span class="kt">int</span> <span class="n">j</span> <span class="o">=</span> <span class="mi">0</span><span class="p">;</span> <span class="n">j</span> <span class="o">&lt;</span> <span class="n">lengths</span><span class="p">.</span><span class="n">size</span><span class="p">();</span> <span class="o">++</span><span class="n">j</span><span class="p">)</span> <span class="c1">// apply length restrictions</span>
       <span class="n">lengths</span><span class="p">[</span><span class="n">j</span><span class="p">]</span> <span class="o">=</span> <span class="n">std</span><span class="o">::</span><span class="n">min</span><span class="p">(</span><span class="n">lengths</span><span class="p">[</span><span class="n">j</span><span class="p">],</span> <span class="n">localMaxes</span><span class="p">[</span><span class="n">j</span><span class="p">]);</span>
 
     <span class="k">auto</span> <span class="n">batch</span> <span class="o">=</span> <span class="n">data</span><span class="o">::</span><span class="n">CorpusBatch</span><span class="o">::</span><span class="n">fakeBatch</span><span class="p">(</span><span class="n">lengths</span><span class="p">,</span> <span class="n">vocabs</span><span class="p">,</span> <span class="n">maxBatch</span><span class="p">,</span> <span class="n">options_</span><span class="p">);</span>
-    <span class="k">auto</span> <span class="n">cost</span> <span class="o">=</span> <span class="n">model</span><span class="o">-&gt;</span><span class="n">build</span><span class="p">(</span><span class="n">graph</span><span class="p">,</span> <span class="n">batch</span><span class="p">);</span>
+    <span class="k">auto</span> <span class="n">loss</span> <span class="o">=</span> <span class="n">model</span><span class="o">-&gt;</span><span class="n">build</span><span class="p">(</span><span class="n">graph</span><span class="p">,</span> <span class="n">batch</span><span class="p">);</span>
     <span class="n">fits</span> <span class="o">=</span> <span class="n">graph</span><span class="o">-&gt;</span><span class="n">fits</span><span class="p">();</span>
     <span class="k">if</span><span class="p">(</span><span class="n">fits</span><span class="p">)</span>
       <span class="n">maxBatch</span> <span class="o">*=</span> <span class="mi">2</span><span class="p">;</span>
@@ -233,7 +677,7 @@
     <span class="k">do</span> <span class="p">{</span>
       <span class="kt">size_t</span> <span class="n">current</span> <span class="o">=</span> <span class="p">(</span><span class="n">start</span> <span class="o">+</span> <span class="n">end</span><span class="p">)</span> <span class="o">/</span> <span class="mi">2</span><span class="p">;</span>
       <span class="k">auto</span> <span class="n">batch</span> <span class="o">=</span> <span class="n">data</span><span class="o">::</span><span class="n">CorpusBatch</span><span class="o">::</span><span class="n">fakeBatch</span><span class="p">(</span><span class="n">lengths</span><span class="p">,</span> <span class="n">vocabs</span><span class="p">,</span> <span class="n">current</span><span class="p">,</span> <span class="n">options_</span><span class="p">);</span>
-      <span class="k">auto</span> <span class="n">cost</span> <span class="o">=</span> <span class="n">model</span><span class="o">-&gt;</span><span class="n">build</span><span class="p">(</span><span class="n">graph</span><span class="p">,</span> <span class="n">batch</span><span class="p">);</span>
+      <span class="k">auto</span> <span class="n">loss</span> <span class="o">=</span> <span class="n">model</span><span class="o">-&gt;</span><span class="n">build</span><span class="p">(</span><span class="n">graph</span><span class="p">,</span> <span class="n">batch</span><span class="p">);</span>
       <span class="n">fits</span> <span class="o">=</span> <span class="n">graph</span><span class="o">-&gt;</span><span class="n">fits</span><span class="p">();</span>
 
       <span class="n">LOG</span><span class="p">(</span><span class="n">debug</span><span class="p">,</span> <span class="s">&quot;[batching] length: {} - size: {} - fits: {}&quot;</span><span class="p">,</span> <span class="n">lengths</span><span class="p">[</span><span class="mi">0</span><span class="p">],</span> <span class="n">current</span><span class="p">,</span> <span class="n">fits</span><span class="p">);</span>
@@ -248,11 +692,23 @@
 
     <span class="n">maxBatch</span> <span class="o">=</span> <span class="n">start</span><span class="p">;</span>
   <span class="p">}</span>
+
+  <span class="c1">// set back to original value for aborting on NaN or Inf</span>
+  <span class="n">graph</span><span class="o">-&gt;</span><span class="n">setThrowNaN</span><span class="p">(</span><span class="n">throwNan</span><span class="p">);</span>
+
   <span class="k">return</span> <span class="n">stats</span><span class="p">;</span>
 <span class="p">}</span>
 
 <span class="kt">void</span> <span class="n">GraphGroup</span><span class="o">::</span><span class="n">setTypicalTrgBatchWords</span><span class="p">(</span><span class="kt">size_t</span> <span class="n">typicalTrgBatchWords</span><span class="p">)</span> <span class="p">{</span> <span class="c1">// needed for dynamic MB scaling</span>
-  <span class="n">typicalTrgBatchWords_</span> <span class="o">=</span> <span class="n">typicalTrgBatchWords</span><span class="p">;</span>
+  <span class="n">typicalTrgBatchWords_</span> <span class="o">=</span> <span class="p">(</span><span class="kt">double</span><span class="p">)</span><span class="n">typicalTrgBatchWords</span><span class="p">;</span>
+<span class="p">}</span>
+
+<span class="kt">double</span> <span class="n">GraphGroup</span><span class="o">::</span><span class="n">getTypicalTrgBatchWords</span><span class="p">()</span> <span class="p">{</span>
+  <span class="k">return</span> <span class="n">typicalTrgBatchWords_</span><span class="p">;</span>
+<span class="p">}</span>
+
+<span class="kt">void</span> <span class="n">GraphGroup</span><span class="o">::</span><span class="n">updateAverageTrgBatchWords</span><span class="p">(</span><span class="kt">size_t</span> <span class="n">trgBatchWords</span><span class="p">)</span> <span class="p">{</span>
+  <span class="n">typicalTrgBatchWords_</span> <span class="o">=</span> <span class="mf">0.99</span> <span class="o">*</span> <span class="n">typicalTrgBatchWords_</span> <span class="o">+</span> <span class="mf">0.01</span> <span class="o">*</span> <span class="p">(</span><span class="kt">double</span><span class="p">)</span><span class="n">trgBatchWords</span><span class="p">;</span> <span class="c1">// record a running average of the batch size, factors are chosen empirically.</span>
 <span class="p">}</span>
 
 <span class="kt">size_t</span> <span class="n">GraphGroup</span><span class="o">::</span><span class="n">numberOfInputFiles</span><span class="p">()</span> <span class="p">{</span>

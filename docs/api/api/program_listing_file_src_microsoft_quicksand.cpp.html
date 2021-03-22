@@ -7,7 +7,7 @@
   
   <meta name="viewport" content="width=device-width, initial-scale=1.0" />
   
-  <title>Program Listing for File quicksand.cpp &mdash; Marian NMT v1.10.2 2021-02-28 documentation</title>
+  <title>Program Listing for File quicksand.cpp &mdash; Marian NMT v1.10.3 2021-03-22 documentation</title>
   
 
   
@@ -67,7 +67,7 @@
             
             
               <div class="version">
-                v1.10.2
+                v1.10.3
               </div>
             
           
@@ -415,7 +415,9 @@
   <span class="p">}</span>
 <span class="p">}</span>
 
-<span class="c1">// @TODO: clean-up this code and unify with marian-conv. The targetPrec parameter is not clear enought etc.</span>
+<span class="c1">// This function converts an fp32 model into an FBGEMM based packed model.</span>
+<span class="c1">// marian defined types are used for external project as well.</span>
+<span class="c1">// The targetPrec is passed as int32_t for the exported function definition.</span>
 <span class="kt">bool</span> <span class="n">convertModel</span><span class="p">(</span><span class="n">std</span><span class="o">::</span><span class="n">string</span> <span class="n">inputFile</span><span class="p">,</span> <span class="n">std</span><span class="o">::</span><span class="n">string</span> <span class="n">outputFile</span><span class="p">,</span> <span class="kt">int32_t</span> <span class="n">targetPrec</span><span class="p">)</span> <span class="p">{</span>
   <span class="n">std</span><span class="o">::</span><span class="n">cerr</span> <span class="o">&lt;&lt;</span> <span class="s">&quot;Converting from: &quot;</span> <span class="o">&lt;&lt;</span> <span class="n">inputFile</span> <span class="o">&lt;&lt;</span> <span class="s">&quot;, to: &quot;</span> <span class="o">&lt;&lt;</span> <span class="n">outputFile</span> <span class="o">&lt;&lt;</span> <span class="s">&quot;, precision: &quot;</span> <span class="o">&lt;&lt;</span> <span class="n">targetPrec</span> <span class="o">&lt;&lt;</span> <span class="n">std</span><span class="o">::</span><span class="n">endl</span><span class="p">;</span>
 
@@ -429,16 +431,17 @@
 
   <span class="n">graph</span><span class="o">-&gt;</span><span class="n">load</span><span class="p">(</span><span class="n">inputFile</span><span class="p">);</span>
   <span class="n">graph</span><span class="o">-&gt;</span><span class="n">forward</span><span class="p">();</span>
-  <span class="k">auto</span> <span class="n">saveGemmType</span> <span class="o">=</span> <span class="n">Type</span><span class="o">::</span><span class="n">float32</span><span class="p">;</span>
-  <span class="k">if</span> <span class="p">(</span><span class="n">targetPrec</span> <span class="o">==</span> <span class="mi">16</span><span class="p">)</span>
-    <span class="n">saveGemmType</span> <span class="o">=</span> <span class="n">Type</span><span class="o">::</span><span class="n">packed16</span><span class="p">;</span>
-  <span class="k">else</span> <span class="nf">if</span> <span class="p">(</span><span class="n">targetPrec</span> <span class="o">==</span> <span class="mi">8</span><span class="p">)</span>
-    <span class="n">saveGemmType</span> <span class="o">=</span> <span class="n">Type</span><span class="o">::</span><span class="n">packed8avx2</span><span class="p">;</span> <span class="c1">// We currently use avx2 by default.</span>
 
-  <span class="c1">// added a flag if the weights needs to be packed or not</span>
-  <span class="n">graph</span><span class="o">-&gt;</span><span class="n">packAndSave</span><span class="p">(</span><span class="n">outputFile</span><span class="p">,</span> <span class="n">configStr</span><span class="p">.</span><span class="n">str</span><span class="p">(),</span> <span class="n">saveGemmType</span><span class="p">);</span>
-
-  <span class="n">std</span><span class="o">::</span><span class="n">cerr</span> <span class="o">&lt;&lt;</span> <span class="s">&quot;Conversion Finished.&quot;</span> <span class="o">&lt;&lt;</span> <span class="n">std</span><span class="o">::</span><span class="n">endl</span><span class="p">;</span>
+  <span class="n">Type</span> <span class="n">targetPrecType</span> <span class="o">=</span> <span class="p">(</span><span class="n">Type</span><span class="p">)</span> <span class="n">targetPrec</span><span class="p">;</span>
+  <span class="k">if</span> <span class="p">(</span><span class="n">targetPrecType</span> <span class="o">==</span> <span class="n">Type</span><span class="o">::</span><span class="n">packed16</span>
+      <span class="o">||</span> <span class="n">targetPrecType</span> <span class="o">==</span> <span class="n">Type</span><span class="o">::</span><span class="n">packed8avx2</span>
+      <span class="o">||</span> <span class="n">targetPrecType</span> <span class="o">==</span> <span class="n">Type</span><span class="o">::</span><span class="n">packed8avx512</span><span class="p">)</span> <span class="p">{</span>
+    <span class="n">graph</span><span class="o">-&gt;</span><span class="n">packAndSave</span><span class="p">(</span><span class="n">outputFile</span><span class="p">,</span> <span class="n">configStr</span><span class="p">.</span><span class="n">str</span><span class="p">(),</span> <span class="n">targetPrecType</span><span class="p">);</span>
+    <span class="n">std</span><span class="o">::</span><span class="n">cerr</span> <span class="o">&lt;&lt;</span> <span class="s">&quot;Conversion Finished.&quot;</span> <span class="o">&lt;&lt;</span> <span class="n">std</span><span class="o">::</span><span class="n">endl</span><span class="p">;</span>
+  <span class="p">}</span> <span class="k">else</span> <span class="p">{</span>
+    <span class="n">ABORT</span><span class="p">(</span><span class="s">&quot;Target type is not supported in this funcion: {}&quot;</span><span class="p">,</span> <span class="n">targetPrec</span><span class="p">);</span>
+    <span class="k">return</span> <span class="nb">false</span><span class="p">;</span>
+  <span class="p">}</span>
 
   <span class="k">return</span> <span class="nb">true</span><span class="p">;</span>
 <span class="p">}</span>

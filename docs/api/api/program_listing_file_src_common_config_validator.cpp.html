@@ -7,7 +7,7 @@
   
   <meta name="viewport" content="width=device-width, initial-scale=1.0" />
   
-  <title>Program Listing for File config_validator.cpp &mdash; Marian NMT v1.10.2 2021-02-28 documentation</title>
+  <title>Program Listing for File config_validator.cpp &mdash; Marian NMT v1.10.3 2021-03-22 documentation</title>
   
 
   
@@ -67,7 +67,7 @@
             
             
               <div class="version">
-                v1.10.2
+                v1.10.3
               </div>
             
           
@@ -340,22 +340,16 @@
   <span class="p">}</span>
 <span class="p">}</span>
 
-<span class="kt">void</span> <span class="n">ConfigValidator</span><span class="o">::</span><span class="n">validateDevices</span><span class="p">(</span><span class="n">cli</span><span class="o">::</span><span class="n">mode</span> <span class="n">mode</span><span class="p">)</span> <span class="k">const</span> <span class="p">{</span>
+<span class="kt">void</span> <span class="n">ConfigValidator</span><span class="o">::</span><span class="n">validateDevices</span><span class="p">(</span><span class="n">cli</span><span class="o">::</span><span class="n">mode</span> <span class="cm">/*mode*/</span><span class="p">)</span> <span class="k">const</span> <span class="p">{</span>
   <span class="n">std</span><span class="o">::</span><span class="n">string</span> <span class="n">devices</span> <span class="o">=</span> <span class="n">utils</span><span class="o">::</span><span class="n">join</span><span class="p">(</span><span class="n">get</span><span class="o">&lt;</span><span class="n">std</span><span class="o">::</span><span class="n">vector</span><span class="o">&lt;</span><span class="n">std</span><span class="o">::</span><span class="n">string</span><span class="o">&gt;&gt;</span><span class="p">(</span><span class="s">&quot;devices&quot;</span><span class="p">));</span>
   <span class="n">utils</span><span class="o">::</span><span class="n">trim</span><span class="p">(</span><span class="n">devices</span><span class="p">);</span>
 
   <span class="n">regex</span><span class="o">::</span><span class="n">regex</span> <span class="n">pattern</span><span class="p">;</span>
   <span class="n">std</span><span class="o">::</span><span class="n">string</span> <span class="n">help</span><span class="p">;</span>
-  <span class="c1">// @TODO: Is this format still supported? Remove this if not.</span>
-  <span class="k">if</span><span class="p">(</span><span class="n">mode</span> <span class="o">==</span> <span class="n">cli</span><span class="o">::</span><span class="n">mode</span><span class="o">::</span><span class="n">training</span> <span class="o">&amp;&amp;</span> <span class="n">get</span><span class="o">&lt;</span><span class="kt">bool</span><span class="o">&gt;</span><span class="p">(</span><span class="s">&quot;multi-node&quot;</span><span class="p">))</span> <span class="p">{</span>
-    <span class="c1">// valid strings: &#39;0: 1 2&#39;, &#39;0:1 2 1:2 3&#39;</span>
-    <span class="n">pattern</span> <span class="o">=</span> <span class="s">&quot;( *[0-9]+ *: *[0-9]+( *[0-9]+)*)+&quot;</span><span class="p">;</span>
-    <span class="n">help</span> <span class="o">=</span> <span class="s">&quot;Supported format for multi-node setting: &#39;0:0 1 2 3 1:0 1 2 3&#39;&quot;</span><span class="p">;</span>
-  <span class="p">}</span> <span class="k">else</span> <span class="p">{</span>
-    <span class="c1">// valid strings: &#39;0&#39;, &#39;0 1 2 3&#39;, &#39;3 2 0 1&#39;</span>
-    <span class="n">pattern</span> <span class="o">=</span> <span class="s">&quot;[0-9]+( *[0-9]+)*&quot;</span><span class="p">;</span>
-    <span class="n">help</span> <span class="o">=</span> <span class="s">&quot;Supported formats: &#39;0 1 2 3&#39;&quot;</span><span class="p">;</span>
-  <span class="p">}</span>
+
+  <span class="c1">// valid strings: &#39;0&#39;, &#39;0 1 2 3&#39;, &#39;3 2 0 1&#39;</span>
+  <span class="n">pattern</span> <span class="o">=</span> <span class="s">&quot;[0-9]+( *[0-9]+)*&quot;</span><span class="p">;</span>
+  <span class="n">help</span> <span class="o">=</span> <span class="s">&quot;Supported formats: &#39;0 1 2 3&#39;&quot;</span><span class="p">;</span>
 
   <span class="n">ABORT_IF</span><span class="p">(</span><span class="o">!</span><span class="n">regex</span><span class="o">::</span><span class="n">regex_match</span><span class="p">(</span><span class="n">devices</span><span class="p">,</span> <span class="n">pattern</span><span class="p">),</span>
            <span class="s">&quot;the argument &#39;{}&#39; for option &#39;--devices&#39; is invalid. {}&quot;</span><span class="p">,</span>

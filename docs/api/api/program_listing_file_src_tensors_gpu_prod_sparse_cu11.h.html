@@ -1,0 +1,459 @@
+
+
+<!DOCTYPE html>
+<html class="writer-html5" lang="en" >
+<head>
+  <meta charset="utf-8" />
+  
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  
+  <title>Program Listing for File prod_sparse_cu11.h &mdash; Marian NMT v1.10.3 2021-03-22 documentation</title>
+  
+
+  
+  <link rel="stylesheet" href="../_static/css/theme.css" type="text/css" />
+  <link rel="stylesheet" href="../_static/pygments.css" type="text/css" />
+  <link rel="stylesheet" href="../_static/css/custom.css" type="text/css" />
+  <link rel="stylesheet" href="../_static/collapsible-lists/css/tree_view.css" type="text/css" />
+
+  
+  
+
+  
+  
+
+  
+    <link rel="canonical" href="http://marian-nmt.github.io/docs/api/api/program_listing_file_src_tensors_gpu_prod_sparse_cu11.h.html" />
+
+  
+  <!--[if lt IE 9]>
+    <script src="../_static/js/html5shiv.min.js"></script>
+  <![endif]-->
+  
+    
+      <script type="text/javascript" id="documentation_options" data-url_root="../" src="../_static/documentation_options.js"></script>
+        <script src="../_static/jquery.js"></script>
+        <script src="../_static/underscore.js"></script>
+        <script src="../_static/doctools.js"></script>
+        <script src="../_static/language_data.js"></script>
+        <script src="../_static/collapsible-lists/js/CollapsibleLists.compressed.js"></script>
+        <script src="../_static/collapsible-lists/js/apply-collapsible-lists.js"></script>
+    
+    <script type="text/javascript" src="../_static/js/theme.js"></script>
+
+    
+    <link rel="index" title="Index" href="../genindex.html" />
+    <link rel="search" title="Search" href="../search.html" /> 
+</head>
+
+<body class="wy-body-for-nav">
+
+   
+  <div class="wy-grid-for-nav">
+    
+    <nav data-toggle="wy-nav-shift" class="wy-nav-side">
+      <div class="wy-side-scroll">
+        <div class="wy-side-nav-search" >
+          
+
+          
+            <a href="../index.html" class="icon icon-home"> Marian NMT
+          
+
+          
+          </a>
+
+          
+            
+            
+              <div class="version">
+                v1.10.3
+              </div>
+            
+          
+
+          
+<div role="search">
+  <form id="rtd-search-form" class="wy-form" action="../search.html" method="get">
+    <input type="text" name="q" placeholder="Search docs" />
+    <input type="hidden" name="check_keywords" value="yes" />
+    <input type="hidden" name="area" value="default" />
+  </form>
+</div>
+
+          
+        </div>
+
+        
+        <div class="wy-menu wy-menu-vertical" data-spy="affix" role="navigation" aria-label="main navigation">
+          
+            
+            
+              
+            
+            
+              <p class="caption"><span class="caption-text">Contents:</span></p>
+<ul>
+<li class="toctree-l1"><a class="reference internal" href="../graph.html">Expression graphs</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../operators.html">Operations in the Expression Graph</a></li>
+<li class="toctree-l1"><a class="reference internal" href="library_index.html">Library API</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../contributing.html">How to contribute to Marian</a></li>
+</ul>
+
+            
+          
+        </div>
+        
+      </div>
+    </nav>
+
+    <section data-toggle="wy-nav-shift" class="wy-nav-content-wrap">
+
+      
+      <nav class="wy-nav-top" aria-label="top navigation">
+        
+          <i data-toggle="wy-nav-top" class="fa fa-bars"></i>
+          <a href="../index.html">Marian NMT</a>
+        
+      </nav>
+
+
+      <div class="wy-nav-content">
+        
+        <div class="rst-content">
+        
+          
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+<div role="navigation" aria-label="breadcrumbs navigation">
+
+  <ul class="wy-breadcrumbs">
+    
+      <li><a href="../index.html" class="icon icon-home"></a> &raquo;</li>
+        
+      <li>Program Listing for File prod_sparse_cu11.h</li>
+    
+    
+      <li class="wy-breadcrumbs-aside">
+        
+          
+            <a href="../_sources/api/program_listing_file_src_tensors_gpu_prod_sparse_cu11.h.rst.txt" rel="nofollow"> View page source</a>
+          
+        
+      </li>
+    
+  </ul>
+
+  
+  <hr/>
+</div>
+          <div role="main" class="document" itemscope="itemscope" itemtype="http://schema.org/Article">
+           <div itemprop="articleBody">
+            
+  <div class="section" id="program-listing-for-file-prod-sparse-cu11-h">
+<span id="program-listing-file-src-tensors-gpu-prod-sparse-cu11-h"></span><h1>Program Listing for File prod_sparse_cu11.h<a class="headerlink" href="#program-listing-for-file-prod-sparse-cu11-h" title="Permalink to this headline">¶</a></h1>
+<p>↰ <a class="reference internal" href="file_src_tensors_gpu_prod_sparse_cu11.h.html#file-src-tensors-gpu-prod-sparse-cu11-h"><span class="std std-ref">Return to documentation for file</span></a> (<code class="docutils literal notranslate"><span class="pre">src/tensors/gpu/prod_sparse_cu11.h</span></code>)</p>
+<div class="highlight-cpp notranslate"><div class="highlight"><pre><span></span><span class="cp">#ifdef _MSC_VER</span>
+<span class="cp">#pragma warning(disable: 4505) </span><span class="c1">// warning C4505: &#39;__float2half_rz&#39;: unreferenced local function has been removed (missing &#39;static inline&#39;)</span>
+<span class="cp">#endif</span>
+
+<span class="cp">#include</span> <span class="cpf">&lt;cublas_v2.h&gt;</span><span class="cp"></span>
+<span class="cp">#include</span> <span class="cpf">&lt;cusparse.h&gt;</span><span class="cp"></span>
+
+<span class="c1">// clang-format off</span>
+<span class="cp">#include</span> <span class="cpf">&quot;tensors/gpu/prod.h&quot;</span><span class="cp"></span>
+<span class="cp">#include</span> <span class="cpf">&quot;tensors/gpu/backend.h&quot;</span><span class="cp"></span>
+<span class="cp">#include</span> <span class="cpf">&quot;tensors/gpu/cuda_helpers.h&quot;</span><span class="cp"></span>
+<span class="c1">// clang-format on</span>
+
+<span class="k">namespace</span> <span class="n">marian</span> <span class="p">{</span>
+<span class="k">namespace</span> <span class="n">gpu</span> <span class="p">{</span>
+
+<span class="c1">// primary template for specialization with different element and compute types</span>
+<span class="k">template</span> <span class="o">&lt;</span><span class="k">typename</span> <span class="nc">ElementType</span><span class="o">&gt;</span>
+<span class="k">struct</span> <span class="nc">TypedSparseGemm</span> <span class="p">{</span>
+
+<span class="k">static</span> <span class="n">cudaDataType</span> <span class="n">getCudaDataType</span><span class="p">(</span><span class="k">const</span> <span class="kt">float</span><span class="o">*</span><span class="p">)</span> <span class="p">{</span> <span class="k">return</span> <span class="n">CUDA_R_32F</span><span class="p">;</span> <span class="p">};</span>
+<span class="k">static</span> <span class="n">cudaDataType</span> <span class="n">getCudaDataType</span><span class="p">(</span><span class="k">const</span> <span class="n">half</span><span class="o">*</span><span class="p">)</span>  <span class="p">{</span> <span class="k">return</span> <span class="n">CUDA_R_16F</span><span class="p">;</span> <span class="p">};</span>
+
+<span class="cp">#if 0</span><span class="c"></span>
+<span class="c">static void CSRProdSwapped(marian::Tensor C,</span>
+<span class="c">                           Ptr&lt;Allocator&gt; allocator,</span>
+<span class="c">                           const marian::Tensor&amp; S_values,</span>
+<span class="c">                           const marian::Tensor&amp; S_indices,</span>
+<span class="c">                           const marian::Tensor&amp; S_offsets,</span>
+<span class="c">                           const marian::Tensor&amp; D,</span>
+<span class="c">                           bool transS,</span>
+<span class="c">                           ElementType beta) {</span>
+<span class="c">  cudaSetDevice((int)C-&gt;getDeviceId().no);</span>
+<span class="c">  auto cusparseHandle = std::static_pointer_cast&lt;gpu::Backend&gt;(C-&gt;getBackend())-&gt;getCusparseHandle();</span>
+
+<span class="c">  // interpret tensor dimensions as matrix dimensions</span>
+<span class="c">  const auto&amp; shapeC = C-&gt;shape();</span>
+<span class="c">  const auto&amp; shapeD = D-&gt;shape();</span>
+
+<span class="c">  auto colsC = shapeC[-1];</span>
+<span class="c">  auto rowsC = shapeC.elements() / colsC;</span>
+
+<span class="c">  auto colsD = shapeD[-1];</span>
+<span class="c">  auto rowsD = shapeD.elements() / colsD;</span>
+
+<span class="c">  auto rowsS = rowsC;</span>
+<span class="c">  auto colsS = rowsD;</span>
+
+<span class="c">  auto denseOrder = CUSPARSE_ORDER_COL;</span>
+<span class="c">  auto algorithm  = CUSPARSE_SPMM_ALG_DEFAULT;</span>
+
+<span class="c">  std::cerr &lt;&lt; shapeC &lt;&lt; std::endl;</span>
+<span class="c">  std::cerr &lt;&lt; shapeD &lt;&lt; std::endl;</span>
+
+<span class="c">  if(transS)</span>
+<span class="c">    std::swap(rowsS, colsS);</span>
+
+<span class="c">  // sparse arrays</span>
+<span class="c">  auto numValues  = S_values-&gt;shape().elements();</span>
+<span class="c">  auto numOffsets = S_offsets-&gt;shape().elements() - 1; // -1 since last value is length</span>
+<span class="c">  ABORT_IF(numOffsets != rowsS, &quot;Unexpected number of rows in CSR argument&quot;);</span>
+<span class="c">  ABORT_IF(S_values-&gt;shape() != S_indices-&gt;shape(), &quot;CSR values and indices must have the same size&quot;);</span>
+
+<span class="c">  ElementType alpha = 1.0;</span>
+
+<span class="c">  cusparseSpMatDescr_t descS;</span>
+<span class="c">  cusparseDnMatDescr_t descD;</span>
+<span class="c">  cusparseDnMatDescr_t descC;</span>
+<span class="c">  CUSPARSE_CHECK(cusparseCreateCsr(&amp;descS,</span>
+<span class="c">                                   rowsS, colsS, numValues,</span>
+<span class="c">                                   S_offsets-&gt;data&lt;IndexType&gt;(),</span>
+<span class="c">                                   S_indices-&gt;data&lt;IndexType&gt;(),</span>
+<span class="c">                                   S_values -&gt;data&lt;ElementType&gt;(),</span>
+<span class="c">                                   CUSPARSE_INDEX_32I,</span>
+<span class="c">                                   CUSPARSE_INDEX_32I,</span>
+<span class="c">                                   CUSPARSE_INDEX_BASE_ZERO,</span>
+<span class="c">                                   getCudaDataType(S_values-&gt;data&lt;ElementType&gt;())));</span>
+<span class="c">  CUSPARSE_CHECK(cusparseCreateDnMat(&amp;descD,</span>
+<span class="c">                                     rowsD, colsD, /*ld=*/colsD,</span>
+<span class="c">                                     D-&gt;data&lt;ElementType&gt;(),</span>
+<span class="c">                                     getCudaDataType(D-&gt;data&lt;ElementType&gt;()),</span>
+<span class="c">                                     denseOrder));</span>
+<span class="c">  CUSPARSE_CHECK(cusparseCreateDnMat(&amp;descC,</span>
+<span class="c">                                     rowsC, colsC, /*ld=*/colsC,</span>
+<span class="c">                                     C-&gt;data&lt;ElementType&gt;(),</span>
+<span class="c">                                     getCudaDataType(C-&gt;data&lt;ElementType&gt;()),</span>
+<span class="c">                                     denseOrder));</span>
+
+<span class="c">  size_t bufferSize = 0;</span>
+<span class="c">  CUSPARSE_CHECK(cusparseSpMM_bufferSize(cusparseHandle,</span>
+<span class="c">                                         transS ? CUSPARSE_OPERATION_TRANSPOSE : CUSPARSE_OPERATION_NON_TRANSPOSE,</span>
+<span class="c">                                         CUSPARSE_OPERATION_NON_TRANSPOSE,</span>
+<span class="c">                                         &amp;alpha,</span>
+<span class="c">                                         descS,</span>
+<span class="c">                                         descD,</span>
+<span class="c">                                         &amp;beta,</span>
+<span class="c">                                         descC,</span>
+<span class="c">                                         getCudaDataType(C-&gt;data&lt;ElementType&gt;()),</span>
+<span class="c">                                         algorithm,</span>
+<span class="c">                                         &amp;bufferSize));</span>
+<span class="c">  if(bufferSize &gt; 0) {</span>
+<span class="c">    MemoryPiece::PtrType buffer = allocator-&gt;alloc&lt;uint8_t&gt;(bufferSize);</span>
+<span class="c">    CUSPARSE_CHECK(cusparseSpMM(cusparseHandle,</span>
+<span class="c">                                transS ? CUSPARSE_OPERATION_TRANSPOSE : CUSPARSE_OPERATION_NON_TRANSPOSE,</span>
+<span class="c">                                CUSPARSE_OPERATION_NON_TRANSPOSE,</span>
+<span class="c">                                &amp;alpha,</span>
+<span class="c">                                descS,</span>
+<span class="c">                                descD,</span>
+<span class="c">                                &amp;beta,</span>
+<span class="c">                                descC,</span>
+<span class="c">                                getCudaDataType(C-&gt;data&lt;ElementType&gt;()),</span>
+<span class="c">                                algorithm,</span>
+<span class="c">                                buffer-&gt;data&lt;uint8_t&gt;()));</span>
+<span class="c">    allocator-&gt;free(buffer);</span>
+<span class="c">  }</span>
+
+<span class="c">  CUSPARSE_CHECK(cusparseDestroySpMat(descS));</span>
+<span class="c">  CUSPARSE_CHECK(cusparseDestroyDnMat(descD));</span>
+<span class="c">  CUSPARSE_CHECK(cusparseDestroyDnMat(descC));</span>
+<span class="c">}</span>
+<span class="cp">#endif</span>
+
+<span class="c1">// C = op(S) x D if not swapOperands else C = D x op(S)</span>
+<span class="c1">// op(S) = S if not transA else S^T</span>
+<span class="k">static</span> <span class="kt">void</span> <span class="n">CSRProd</span><span class="p">(</span><span class="n">marian</span><span class="o">::</span><span class="n">Tensor</span> <span class="n">C</span><span class="p">,</span>
+                    <span class="n">Ptr</span><span class="o">&lt;</span><span class="n">Allocator</span><span class="o">&gt;</span> <span class="n">allocator</span><span class="p">,</span>
+                    <span class="k">const</span> <span class="n">marian</span><span class="o">::</span><span class="n">Tensor</span><span class="o">&amp;</span> <span class="n">S_values</span><span class="p">,</span>
+                    <span class="k">const</span> <span class="n">marian</span><span class="o">::</span><span class="n">Tensor</span><span class="o">&amp;</span> <span class="n">S_indices</span><span class="p">,</span>
+                    <span class="k">const</span> <span class="n">marian</span><span class="o">::</span><span class="n">Tensor</span><span class="o">&amp;</span> <span class="n">S_offsets</span><span class="p">,</span>
+                    <span class="k">const</span> <span class="n">marian</span><span class="o">::</span><span class="n">Tensor</span><span class="o">&amp;</span> <span class="n">D</span><span class="p">,</span>
+                    <span class="kt">bool</span> <span class="n">transS</span><span class="p">,</span>
+                    <span class="n">ElementType</span> <span class="n">beta</span><span class="p">)</span> <span class="p">{</span>
+  <span class="n">cudaSetDevice</span><span class="p">((</span><span class="kt">int</span><span class="p">)</span><span class="n">C</span><span class="o">-&gt;</span><span class="n">getDeviceId</span><span class="p">().</span><span class="n">no</span><span class="p">);</span>
+  <span class="k">auto</span> <span class="n">cusparseHandle</span> <span class="o">=</span> <span class="n">std</span><span class="o">::</span><span class="n">static_pointer_cast</span><span class="o">&lt;</span><span class="n">gpu</span><span class="o">::</span><span class="n">Backend</span><span class="o">&gt;</span><span class="p">(</span><span class="n">C</span><span class="o">-&gt;</span><span class="n">getBackend</span><span class="p">())</span><span class="o">-&gt;</span><span class="n">getCusparseHandle</span><span class="p">();</span>
+
+  <span class="c1">// interpret tensor dimensions as matrix dimensions</span>
+  <span class="k">const</span> <span class="k">auto</span><span class="o">&amp;</span> <span class="n">shapeC</span> <span class="o">=</span> <span class="n">C</span><span class="o">-&gt;</span><span class="n">shape</span><span class="p">();</span>
+  <span class="k">const</span> <span class="k">auto</span><span class="o">&amp;</span> <span class="n">shapeD</span> <span class="o">=</span> <span class="n">D</span><span class="o">-&gt;</span><span class="n">shape</span><span class="p">();</span>
+
+  <span class="k">auto</span> <span class="n">colsC</span> <span class="o">=</span> <span class="n">shapeC</span><span class="p">[</span><span class="mi">-1</span><span class="p">];</span>
+  <span class="k">auto</span> <span class="n">rowsC</span> <span class="o">=</span> <span class="n">shapeC</span><span class="p">.</span><span class="n">elements</span><span class="p">()</span> <span class="o">/</span> <span class="n">colsC</span><span class="p">;</span>
+
+  <span class="k">auto</span> <span class="n">colsD</span> <span class="o">=</span> <span class="n">shapeD</span><span class="p">[</span><span class="mi">-1</span><span class="p">];</span>
+  <span class="k">auto</span> <span class="n">rowsD</span> <span class="o">=</span> <span class="n">shapeD</span><span class="p">.</span><span class="n">elements</span><span class="p">()</span> <span class="o">/</span> <span class="n">colsD</span><span class="p">;</span>
+
+  <span class="k">auto</span> <span class="n">rowsS</span> <span class="o">=</span> <span class="n">rowsC</span><span class="p">;</span>
+  <span class="k">auto</span> <span class="n">colsS</span> <span class="o">=</span> <span class="n">rowsD</span><span class="p">;</span>
+
+  <span class="k">auto</span> <span class="n">denseOrder</span> <span class="o">=</span> <span class="n">CUSPARSE_ORDER_ROW</span><span class="p">;</span>
+  <span class="k">auto</span> <span class="n">algorithm</span>  <span class="o">=</span> <span class="n">CUSPARSE_SPMM_CSR_ALG2</span><span class="p">;</span>
+
+  <span class="k">if</span><span class="p">(</span><span class="n">transS</span><span class="p">)</span>
+    <span class="n">std</span><span class="o">::</span><span class="n">swap</span><span class="p">(</span><span class="n">rowsS</span><span class="p">,</span> <span class="n">colsS</span><span class="p">);</span>
+
+  <span class="c1">// sparse arrays</span>
+  <span class="k">auto</span> <span class="n">numValues</span>  <span class="o">=</span> <span class="n">S_values</span><span class="o">-&gt;</span><span class="n">shape</span><span class="p">().</span><span class="n">elements</span><span class="p">();</span>
+  <span class="k">auto</span> <span class="n">numOffsets</span> <span class="o">=</span> <span class="n">S_offsets</span><span class="o">-&gt;</span><span class="n">shape</span><span class="p">().</span><span class="n">elements</span><span class="p">()</span> <span class="o">-</span> <span class="mi">1</span><span class="p">;</span> <span class="c1">// -1 since last value is length</span>
+  <span class="n">ABORT_IF</span><span class="p">(</span><span class="n">numOffsets</span> <span class="o">!=</span> <span class="n">rowsS</span><span class="p">,</span> <span class="s">&quot;Unexpected number of rows in CSR argument&quot;</span><span class="p">);</span>
+  <span class="n">ABORT_IF</span><span class="p">(</span><span class="n">S_values</span><span class="o">-&gt;</span><span class="n">shape</span><span class="p">()</span> <span class="o">!=</span> <span class="n">S_indices</span><span class="o">-&gt;</span><span class="n">shape</span><span class="p">(),</span> <span class="s">&quot;CSR values and indices must have the same size&quot;</span><span class="p">);</span>
+
+  <span class="n">ElementType</span> <span class="n">alpha</span> <span class="o">=</span> <span class="mf">1.0</span><span class="p">;</span>
+
+  <span class="n">cusparseSpMatDescr_t</span> <span class="n">descS</span><span class="p">;</span>
+  <span class="n">cusparseDnMatDescr_t</span> <span class="n">descD</span><span class="p">;</span>
+  <span class="n">cusparseDnMatDescr_t</span> <span class="n">descC</span><span class="p">;</span>
+  <span class="n">CUSPARSE_CHECK</span><span class="p">(</span><span class="n">cusparseCreateCsr</span><span class="p">(</span><span class="o">&amp;</span><span class="n">descS</span><span class="p">,</span>
+                                   <span class="n">rowsS</span><span class="p">,</span> <span class="n">colsS</span><span class="p">,</span> <span class="n">numValues</span><span class="p">,</span>
+                                   <span class="n">S_offsets</span><span class="o">-&gt;</span><span class="n">data</span><span class="o">&lt;</span><span class="n">IndexType</span><span class="o">&gt;</span><span class="p">(),</span>
+                                   <span class="n">S_indices</span><span class="o">-&gt;</span><span class="n">data</span><span class="o">&lt;</span><span class="n">IndexType</span><span class="o">&gt;</span><span class="p">(),</span>
+                                   <span class="n">S_values</span> <span class="o">-&gt;</span><span class="n">data</span><span class="o">&lt;</span><span class="n">ElementType</span><span class="o">&gt;</span><span class="p">(),</span>
+                                   <span class="n">CUSPARSE_INDEX_32I</span><span class="p">,</span>
+                                   <span class="n">CUSPARSE_INDEX_32I</span><span class="p">,</span>
+                                   <span class="n">CUSPARSE_INDEX_BASE_ZERO</span><span class="p">,</span>
+                                   <span class="n">getCudaDataType</span><span class="p">(</span><span class="n">S_values</span><span class="o">-&gt;</span><span class="n">data</span><span class="o">&lt;</span><span class="n">ElementType</span><span class="o">&gt;</span><span class="p">())));</span>
+  <span class="n">CUSPARSE_CHECK</span><span class="p">(</span><span class="n">cusparseCreateDnMat</span><span class="p">(</span><span class="o">&amp;</span><span class="n">descD</span><span class="p">,</span>
+                                     <span class="n">rowsD</span><span class="p">,</span> <span class="n">colsD</span><span class="p">,</span> <span class="cm">/*ld=*/</span><span class="n">colsD</span><span class="p">,</span>
+                                     <span class="n">D</span><span class="o">-&gt;</span><span class="n">data</span><span class="o">&lt;</span><span class="n">ElementType</span><span class="o">&gt;</span><span class="p">(),</span>
+                                     <span class="n">getCudaDataType</span><span class="p">(</span><span class="n">D</span><span class="o">-&gt;</span><span class="n">data</span><span class="o">&lt;</span><span class="n">ElementType</span><span class="o">&gt;</span><span class="p">()),</span>
+                                     <span class="n">denseOrder</span><span class="p">));</span>
+  <span class="n">CUSPARSE_CHECK</span><span class="p">(</span><span class="n">cusparseCreateDnMat</span><span class="p">(</span><span class="o">&amp;</span><span class="n">descC</span><span class="p">,</span>
+                                     <span class="n">rowsC</span><span class="p">,</span> <span class="n">colsC</span><span class="p">,</span> <span class="cm">/*ld=*/</span><span class="n">colsC</span><span class="p">,</span>
+                                     <span class="n">C</span><span class="o">-&gt;</span><span class="n">data</span><span class="o">&lt;</span><span class="n">ElementType</span><span class="o">&gt;</span><span class="p">(),</span>
+                                     <span class="n">getCudaDataType</span><span class="p">(</span><span class="n">C</span><span class="o">-&gt;</span><span class="n">data</span><span class="o">&lt;</span><span class="n">ElementType</span><span class="o">&gt;</span><span class="p">()),</span>
+                                     <span class="n">denseOrder</span><span class="p">));</span>
+
+  <span class="kt">size_t</span> <span class="n">bufferSize</span> <span class="o">=</span> <span class="mi">0</span><span class="p">;</span>
+  <span class="n">CUSPARSE_CHECK</span><span class="p">(</span><span class="n">cusparseSpMM_bufferSize</span><span class="p">(</span><span class="n">cusparseHandle</span><span class="p">,</span>
+                                         <span class="n">transS</span> <span class="o">?</span> <span class="nl">CUSPARSE_OPERATION_TRANSPOSE</span> <span class="p">:</span> <span class="n">CUSPARSE_OPERATION_NON_TRANSPOSE</span><span class="p">,</span>
+                                         <span class="n">CUSPARSE_OPERATION_NON_TRANSPOSE</span><span class="p">,</span>
+                                         <span class="o">&amp;</span><span class="n">alpha</span><span class="p">,</span>
+                                         <span class="n">descS</span><span class="p">,</span>
+                                         <span class="n">descD</span><span class="p">,</span>
+                                         <span class="o">&amp;</span><span class="n">beta</span><span class="p">,</span>
+                                         <span class="n">descC</span><span class="p">,</span>
+                                         <span class="n">getCudaDataType</span><span class="p">(</span><span class="n">C</span><span class="o">-&gt;</span><span class="n">data</span><span class="o">&lt;</span><span class="n">ElementType</span><span class="o">&gt;</span><span class="p">()),</span>
+                                         <span class="n">algorithm</span><span class="p">,</span>
+                                         <span class="o">&amp;</span><span class="n">bufferSize</span><span class="p">));</span>
+  <span class="k">if</span><span class="p">(</span><span class="n">bufferSize</span> <span class="o">&gt;</span> <span class="mi">0</span><span class="p">)</span> <span class="p">{</span>
+    <span class="n">MemoryPiece</span><span class="o">::</span><span class="n">PtrType</span> <span class="n">buffer</span> <span class="o">=</span> <span class="n">allocator</span><span class="o">-&gt;</span><span class="n">alloc</span><span class="o">&lt;</span><span class="kt">uint8_t</span><span class="o">&gt;</span><span class="p">(</span><span class="n">bufferSize</span><span class="p">);</span>
+    <span class="n">CUSPARSE_CHECK</span><span class="p">(</span><span class="n">cusparseSpMM</span><span class="p">(</span><span class="n">cusparseHandle</span><span class="p">,</span>
+                                <span class="n">transS</span> <span class="o">?</span> <span class="nl">CUSPARSE_OPERATION_TRANSPOSE</span> <span class="p">:</span> <span class="n">CUSPARSE_OPERATION_NON_TRANSPOSE</span><span class="p">,</span>
+                                <span class="n">CUSPARSE_OPERATION_NON_TRANSPOSE</span><span class="p">,</span>
+                                <span class="o">&amp;</span><span class="n">alpha</span><span class="p">,</span>
+                                <span class="n">descS</span><span class="p">,</span>
+                                <span class="n">descD</span><span class="p">,</span>
+                                <span class="o">&amp;</span><span class="n">beta</span><span class="p">,</span>
+                                <span class="n">descC</span><span class="p">,</span>
+                                <span class="n">getCudaDataType</span><span class="p">(</span><span class="n">C</span><span class="o">-&gt;</span><span class="n">data</span><span class="o">&lt;</span><span class="n">ElementType</span><span class="o">&gt;</span><span class="p">()),</span>
+                                <span class="n">algorithm</span><span class="p">,</span>
+                                <span class="n">buffer</span><span class="o">-&gt;</span><span class="n">data</span><span class="o">&lt;</span><span class="kt">uint8_t</span><span class="o">&gt;</span><span class="p">()));</span>
+    <span class="n">allocator</span><span class="o">-&gt;</span><span class="n">free</span><span class="p">(</span><span class="n">buffer</span><span class="p">);</span>
+  <span class="p">}</span>
+
+  <span class="n">CUSPARSE_CHECK</span><span class="p">(</span><span class="n">cusparseDestroySpMat</span><span class="p">(</span><span class="n">descS</span><span class="p">));</span>
+  <span class="n">CUSPARSE_CHECK</span><span class="p">(</span><span class="n">cusparseDestroyDnMat</span><span class="p">(</span><span class="n">descD</span><span class="p">));</span>
+  <span class="n">CUSPARSE_CHECK</span><span class="p">(</span><span class="n">cusparseDestroyDnMat</span><span class="p">(</span><span class="n">descC</span><span class="p">));</span>
+<span class="p">}</span>
+
+<span class="k">static</span> <span class="kt">void</span> <span class="n">CSRProd</span><span class="p">(</span><span class="n">marian</span><span class="o">::</span><span class="n">Tensor</span> <span class="n">C</span><span class="p">,</span>
+                    <span class="n">Ptr</span><span class="o">&lt;</span><span class="n">Allocator</span><span class="o">&gt;</span> <span class="n">allocator</span><span class="p">,</span>
+                    <span class="k">const</span> <span class="n">marian</span><span class="o">::</span><span class="n">Tensor</span><span class="o">&amp;</span> <span class="n">S_values</span><span class="p">,</span>
+                    <span class="k">const</span> <span class="n">marian</span><span class="o">::</span><span class="n">Tensor</span><span class="o">&amp;</span> <span class="n">S_indices</span><span class="p">,</span>
+                    <span class="k">const</span> <span class="n">marian</span><span class="o">::</span><span class="n">Tensor</span><span class="o">&amp;</span> <span class="n">S_offsets</span><span class="p">,</span>
+                    <span class="k">const</span> <span class="n">marian</span><span class="o">::</span><span class="n">Tensor</span><span class="o">&amp;</span> <span class="n">D</span><span class="p">,</span>
+                    <span class="kt">bool</span> <span class="n">transS</span><span class="p">,</span>
+                    <span class="kt">bool</span> <span class="n">swapOperands</span><span class="p">,</span>
+                    <span class="n">ElementType</span> <span class="n">beta</span><span class="p">)</span> <span class="p">{</span>
+  <span class="k">if</span><span class="p">(</span><span class="n">swapOperands</span><span class="p">)</span> <span class="p">{</span>
+    <span class="n">ABORT</span><span class="p">(</span><span class="s">&quot;Not implemented&quot;</span><span class="p">);</span>
+    <span class="c1">// CSRProdSwapped(C, allocator, S_values, S_indices, S_offsets, D, transS, beta);</span>
+  <span class="p">}</span>
+  <span class="k">else</span> <span class="p">{</span>
+    <span class="n">CSRProd</span><span class="p">(</span><span class="n">C</span><span class="p">,</span> <span class="n">allocator</span><span class="p">,</span> <span class="n">S_values</span><span class="p">,</span> <span class="n">S_indices</span><span class="p">,</span> <span class="n">S_offsets</span><span class="p">,</span> <span class="n">D</span><span class="p">,</span> <span class="n">transS</span><span class="p">,</span> <span class="n">beta</span><span class="p">);</span>
+  <span class="p">}</span>
+<span class="p">}</span>
+
+<span class="p">};</span>
+
+<span class="p">}</span>  <span class="c1">// namespace gpu</span>
+<span class="p">}</span>  <span class="c1">// namespace marian</span>
+</pre></div>
+</div>
+</div>
+
+
+           </div>
+           
+          </div>
+          <footer>
+
+  <hr/>
+
+  <div role="contentinfo">
+    <p>
+        &#169; Copyright 2021, Marian NMT Team.
+
+    </p>
+  </div>
+    
+    
+    
+    Built with <a href="https://www.sphinx-doc.org/">Sphinx</a> using a
+    
+    <a href="https://github.com/readthedocs/sphinx_rtd_theme">theme</a>
+    
+    provided by <a href="https://readthedocs.org">Read the Docs</a>. 
+
+</footer>
+        </div>
+      </div>
+
+    </section>
+
+  </div>
+  
+
+  <script type="text/javascript">
+      jQuery(function () {
+          SphinxRtdTheme.Navigation.enable(true);
+      });
+  </script>
+
+  
+  
+    
+   
+
+</body>
+</html>

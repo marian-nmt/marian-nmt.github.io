@@ -1,0 +1,372 @@
+
+
+<!DOCTYPE html>
+<html class="writer-html5" lang="en" >
+<head>
+  <meta charset="utf-8" />
+  
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  
+  <title>Program Listing for File shortlist.cpp &mdash; Marian NMT v1.10.3 2021-03-22 documentation</title>
+  
+
+  
+  <link rel="stylesheet" href="../_static/css/theme.css" type="text/css" />
+  <link rel="stylesheet" href="../_static/pygments.css" type="text/css" />
+  <link rel="stylesheet" href="../_static/css/custom.css" type="text/css" />
+  <link rel="stylesheet" href="../_static/collapsible-lists/css/tree_view.css" type="text/css" />
+
+  
+  
+
+  
+  
+
+  
+    <link rel="canonical" href="http://marian-nmt.github.io/docs/api/api/program_listing_file_src_data_shortlist.cpp.html" />
+
+  
+  <!--[if lt IE 9]>
+    <script src="../_static/js/html5shiv.min.js"></script>
+  <![endif]-->
+  
+    
+      <script type="text/javascript" id="documentation_options" data-url_root="../" src="../_static/documentation_options.js"></script>
+        <script src="../_static/jquery.js"></script>
+        <script src="../_static/underscore.js"></script>
+        <script src="../_static/doctools.js"></script>
+        <script src="../_static/language_data.js"></script>
+        <script src="../_static/collapsible-lists/js/CollapsibleLists.compressed.js"></script>
+        <script src="../_static/collapsible-lists/js/apply-collapsible-lists.js"></script>
+    
+    <script type="text/javascript" src="../_static/js/theme.js"></script>
+
+    
+    <link rel="index" title="Index" href="../genindex.html" />
+    <link rel="search" title="Search" href="../search.html" /> 
+</head>
+
+<body class="wy-body-for-nav">
+
+   
+  <div class="wy-grid-for-nav">
+    
+    <nav data-toggle="wy-nav-shift" class="wy-nav-side">
+      <div class="wy-side-scroll">
+        <div class="wy-side-nav-search" >
+          
+
+          
+            <a href="../index.html" class="icon icon-home"> Marian NMT
+          
+
+          
+          </a>
+
+          
+            
+            
+              <div class="version">
+                v1.10.3
+              </div>
+            
+          
+
+          
+<div role="search">
+  <form id="rtd-search-form" class="wy-form" action="../search.html" method="get">
+    <input type="text" name="q" placeholder="Search docs" />
+    <input type="hidden" name="check_keywords" value="yes" />
+    <input type="hidden" name="area" value="default" />
+  </form>
+</div>
+
+          
+        </div>
+
+        
+        <div class="wy-menu wy-menu-vertical" data-spy="affix" role="navigation" aria-label="main navigation">
+          
+            
+            
+              
+            
+            
+              <p class="caption"><span class="caption-text">Contents:</span></p>
+<ul>
+<li class="toctree-l1"><a class="reference internal" href="../graph.html">Expression graphs</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../operators.html">Operations in the Expression Graph</a></li>
+<li class="toctree-l1"><a class="reference internal" href="library_index.html">Library API</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../contributing.html">How to contribute to Marian</a></li>
+</ul>
+
+            
+          
+        </div>
+        
+      </div>
+    </nav>
+
+    <section data-toggle="wy-nav-shift" class="wy-nav-content-wrap">
+
+      
+      <nav class="wy-nav-top" aria-label="top navigation">
+        
+          <i data-toggle="wy-nav-top" class="fa fa-bars"></i>
+          <a href="../index.html">Marian NMT</a>
+        
+      </nav>
+
+
+      <div class="wy-nav-content">
+        
+        <div class="rst-content">
+        
+          
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+<div role="navigation" aria-label="breadcrumbs navigation">
+
+  <ul class="wy-breadcrumbs">
+    
+      <li><a href="../index.html" class="icon icon-home"></a> &raquo;</li>
+        
+      <li>Program Listing for File shortlist.cpp</li>
+    
+    
+      <li class="wy-breadcrumbs-aside">
+        
+          
+            <a href="../_sources/api/program_listing_file_src_data_shortlist.cpp.rst.txt" rel="nofollow"> View page source</a>
+          
+        
+      </li>
+    
+  </ul>
+
+  
+  <hr/>
+</div>
+          <div role="main" class="document" itemscope="itemscope" itemtype="http://schema.org/Article">
+           <div itemprop="articleBody">
+            
+  <div class="section" id="program-listing-for-file-shortlist-cpp">
+<span id="program-listing-file-src-data-shortlist-cpp"></span><h1>Program Listing for File shortlist.cpp<a class="headerlink" href="#program-listing-for-file-shortlist-cpp" title="Permalink to this headline">¶</a></h1>
+<p>↰ <a class="reference internal" href="file_src_data_shortlist.cpp.html#file-src-data-shortlist-cpp"><span class="std std-ref">Return to documentation for file</span></a> (<code class="docutils literal notranslate"><span class="pre">src/data/shortlist.cpp</span></code>)</p>
+<div class="highlight-cpp notranslate"><div class="highlight"><pre><span></span><span class="cp">#include</span> <span class="cpf">&quot;data/shortlist.h&quot;</span><span class="cp"></span>
+<span class="cp">#include</span> <span class="cpf">&quot;microsoft/shortlist/utils/ParameterTree.h&quot;</span><span class="cp"></span>
+
+<span class="k">namespace</span> <span class="n">marian</span> <span class="p">{</span>
+<span class="k">namespace</span> <span class="n">data</span> <span class="p">{</span>
+
+<span class="c1">// cast current void pointer to T pointer and move forward by num elements</span>
+<span class="k">template</span> <span class="o">&lt;</span><span class="k">typename</span> <span class="nc">T</span><span class="o">&gt;</span>
+<span class="k">const</span> <span class="n">T</span><span class="o">*</span> <span class="n">get</span><span class="p">(</span><span class="k">const</span> <span class="kt">void</span><span class="o">*&amp;</span> <span class="n">current</span><span class="p">,</span> <span class="kt">size_t</span> <span class="n">num</span> <span class="o">=</span> <span class="mi">1</span><span class="p">)</span> <span class="p">{</span>
+  <span class="k">const</span> <span class="n">T</span><span class="o">*</span> <span class="n">ptr</span> <span class="o">=</span> <span class="p">(</span><span class="k">const</span> <span class="n">T</span><span class="o">*</span><span class="p">)</span><span class="n">current</span><span class="p">;</span>
+  <span class="n">current</span> <span class="o">=</span> <span class="p">(</span><span class="k">const</span> <span class="n">T</span><span class="o">*</span><span class="p">)</span><span class="n">current</span> <span class="o">+</span> <span class="n">num</span><span class="p">;</span>
+  <span class="k">return</span> <span class="n">ptr</span><span class="p">;</span>
+<span class="p">}</span>
+
+<span class="n">QuicksandShortlistGenerator</span><span class="o">::</span><span class="n">QuicksandShortlistGenerator</span><span class="p">(</span><span class="n">Ptr</span><span class="o">&lt;</span><span class="n">Options</span><span class="o">&gt;</span> <span class="n">options</span><span class="p">,</span>
+                                                         <span class="n">Ptr</span><span class="o">&lt;</span><span class="k">const</span> <span class="n">Vocab</span><span class="o">&gt;</span> <span class="n">srcVocab</span><span class="p">,</span>
+                                                         <span class="n">Ptr</span><span class="o">&lt;</span><span class="k">const</span> <span class="n">Vocab</span><span class="o">&gt;</span> <span class="n">trgVocab</span><span class="p">,</span>
+                                                         <span class="kt">size_t</span> <span class="n">srcIdx</span><span class="p">,</span>
+                                                         <span class="kt">size_t</span> <span class="cm">/*trgIdx*/</span><span class="p">,</span>
+                                                         <span class="kt">bool</span> <span class="cm">/*shared*/</span><span class="p">)</span>
+    <span class="o">:</span> <span class="n">options_</span><span class="p">(</span><span class="n">options</span><span class="p">),</span>
+      <span class="n">srcVocab_</span><span class="p">(</span><span class="n">srcVocab</span><span class="p">),</span>
+      <span class="n">trgVocab_</span><span class="p">(</span><span class="n">trgVocab</span><span class="p">),</span>
+      <span class="n">srcIdx_</span><span class="p">(</span><span class="n">srcIdx</span><span class="p">)</span> <span class="p">{</span>
+  <span class="n">std</span><span class="o">::</span><span class="n">vector</span><span class="o">&lt;</span><span class="n">std</span><span class="o">::</span><span class="n">string</span><span class="o">&gt;</span> <span class="n">vals</span> <span class="o">=</span> <span class="n">options_</span><span class="o">-&gt;</span><span class="n">get</span><span class="o">&lt;</span><span class="n">std</span><span class="o">::</span><span class="n">vector</span><span class="o">&lt;</span><span class="n">std</span><span class="o">::</span><span class="n">string</span><span class="o">&gt;&gt;</span><span class="p">(</span><span class="s">&quot;shortlist&quot;</span><span class="p">);</span>
+
+  <span class="n">ABORT_IF</span><span class="p">(</span><span class="n">vals</span><span class="p">.</span><span class="n">empty</span><span class="p">(),</span> <span class="s">&quot;No path to filter path given&quot;</span><span class="p">);</span>
+  <span class="n">std</span><span class="o">::</span><span class="n">string</span> <span class="n">fname</span> <span class="o">=</span> <span class="n">vals</span><span class="p">[</span><span class="mi">0</span><span class="p">];</span>
+
+  <span class="k">auto</span> <span class="n">firstNum</span>   <span class="o">=</span> <span class="n">vals</span><span class="p">.</span><span class="n">size</span><span class="p">()</span> <span class="o">&gt;</span> <span class="mi">1</span> <span class="o">?</span> <span class="n">std</span><span class="o">::</span><span class="n">stoi</span><span class="p">(</span><span class="n">vals</span><span class="p">[</span><span class="mi">1</span><span class="p">])</span> <span class="o">:</span> <span class="mi">0</span><span class="p">;</span>
+  <span class="k">auto</span> <span class="n">bestNum</span>    <span class="o">=</span> <span class="n">vals</span><span class="p">.</span><span class="n">size</span><span class="p">()</span> <span class="o">&gt;</span> <span class="mi">2</span> <span class="o">?</span> <span class="n">std</span><span class="o">::</span><span class="n">stoi</span><span class="p">(</span><span class="n">vals</span><span class="p">[</span><span class="mi">2</span><span class="p">])</span> <span class="o">:</span> <span class="mi">0</span><span class="p">;</span>
+  <span class="kt">float</span> <span class="n">threshold</span> <span class="o">=</span> <span class="n">vals</span><span class="p">.</span><span class="n">size</span><span class="p">()</span> <span class="o">&gt;</span> <span class="mi">3</span> <span class="o">?</span> <span class="n">std</span><span class="o">::</span><span class="n">stof</span><span class="p">(</span><span class="n">vals</span><span class="p">[</span><span class="mi">3</span><span class="p">])</span> <span class="o">:</span> <span class="mi">0</span><span class="p">;</span>
+
+  <span class="k">if</span><span class="p">(</span><span class="n">firstNum</span> <span class="o">!=</span> <span class="mi">0</span> <span class="o">||</span> <span class="n">bestNum</span> <span class="o">!=</span> <span class="mi">0</span> <span class="o">||</span> <span class="n">threshold</span> <span class="o">!=</span> <span class="mi">0</span><span class="p">)</span> <span class="p">{</span>
+    <span class="n">LOG</span><span class="p">(</span><span class="n">warn</span><span class="p">,</span> <span class="s">&quot;You have provided additional parameters for the Quicksand shortlist, but they are ignored.&quot;</span><span class="p">);</span>
+  <span class="p">}</span>
+
+  <span class="n">mmap_</span> <span class="o">=</span> <span class="n">mio</span><span class="o">::</span><span class="n">mmap_source</span><span class="p">(</span><span class="n">fname</span><span class="p">);</span> <span class="c1">// memory-map the binary file once</span>
+  <span class="k">const</span> <span class="kt">void</span><span class="o">*</span> <span class="n">current</span> <span class="o">=</span> <span class="n">mmap_</span><span class="p">.</span><span class="n">data</span><span class="p">();</span> <span class="c1">// pointer iterator over binary file</span>
+
+  <span class="c1">// compare magic number in binary file to make sure we are reading the right thing</span>
+  <span class="k">const</span> <span class="kt">int32_t</span> <span class="n">MAGIC_NUMBER</span> <span class="o">=</span> <span class="mi">1234567890</span><span class="p">;</span>
+  <span class="kt">int32_t</span> <span class="n">header_magic_number</span> <span class="o">=</span> <span class="o">*</span><span class="n">get</span><span class="o">&lt;</span><span class="kt">int32_t</span><span class="o">&gt;</span><span class="p">(</span><span class="n">current</span><span class="p">);</span>
+  <span class="n">ABORT_IF</span><span class="p">(</span><span class="n">header_magic_number</span> <span class="o">!=</span> <span class="n">MAGIC_NUMBER</span><span class="p">,</span> <span class="s">&quot;Trying to mmap Quicksand shortlist but encountered wrong magic number&quot;</span><span class="p">);</span>
+
+  <span class="k">auto</span> <span class="n">config</span> <span class="o">=</span> <span class="o">::</span><span class="n">quicksand</span><span class="o">::</span><span class="n">ParameterTree</span><span class="o">::</span><span class="n">FromBinaryReader</span><span class="p">(</span><span class="n">current</span><span class="p">);</span>
+  <span class="n">use16bit_</span> <span class="o">=</span> <span class="n">config</span><span class="o">-&gt;</span><span class="n">GetBoolReq</span><span class="p">(</span><span class="s">&quot;use_16_bit&quot;</span><span class="p">);</span>
+
+  <span class="n">LOG</span><span class="p">(</span><span class="n">info</span><span class="p">,</span> <span class="s">&quot;[data] Mapping Quicksand shortlist from {}&quot;</span><span class="p">,</span> <span class="n">fname</span><span class="p">);</span>
+
+  <span class="n">idSize_</span> <span class="o">=</span> <span class="k">sizeof</span><span class="p">(</span><span class="kt">int32_t</span><span class="p">);</span>
+  <span class="k">if</span> <span class="p">(</span><span class="n">use16bit_</span><span class="p">)</span> <span class="p">{</span>
+    <span class="n">idSize_</span> <span class="o">=</span> <span class="k">sizeof</span><span class="p">(</span><span class="kt">uint16_t</span><span class="p">);</span>
+  <span class="p">}</span>
+
+  <span class="c1">// mmap the binary shortlist pieces</span>
+  <span class="n">numDefaultIds_</span>        <span class="o">=</span> <span class="o">*</span><span class="n">get</span><span class="o">&lt;</span><span class="kt">int32_t</span><span class="o">&gt;</span><span class="p">(</span><span class="n">current</span><span class="p">);</span>
+  <span class="n">defaultIds_</span>           <span class="o">=</span>  <span class="n">get</span><span class="o">&lt;</span><span class="kt">int32_t</span><span class="o">&gt;</span><span class="p">(</span><span class="n">current</span><span class="p">,</span> <span class="n">numDefaultIds_</span><span class="p">);</span>
+  <span class="n">numSourceIds_</span>         <span class="o">=</span> <span class="o">*</span><span class="n">get</span><span class="o">&lt;</span><span class="kt">int32_t</span><span class="o">&gt;</span><span class="p">(</span><span class="n">current</span><span class="p">);</span>
+  <span class="n">sourceLengths_</span>        <span class="o">=</span>  <span class="n">get</span><span class="o">&lt;</span><span class="kt">int32_t</span><span class="o">&gt;</span><span class="p">(</span><span class="n">current</span><span class="p">,</span> <span class="n">numSourceIds_</span><span class="p">);</span>
+  <span class="n">sourceOffsets_</span>        <span class="o">=</span>  <span class="n">get</span><span class="o">&lt;</span><span class="kt">int32_t</span><span class="o">&gt;</span><span class="p">(</span><span class="n">current</span><span class="p">,</span> <span class="n">numSourceIds_</span><span class="p">);</span>
+  <span class="n">numShortlistIds_</span>      <span class="o">=</span> <span class="o">*</span><span class="n">get</span><span class="o">&lt;</span><span class="kt">int32_t</span><span class="o">&gt;</span><span class="p">(</span><span class="n">current</span><span class="p">);</span>
+  <span class="n">sourceToShortlistIds_</span> <span class="o">=</span>  <span class="n">get</span><span class="o">&lt;</span><span class="kt">uint8_t</span><span class="o">&gt;</span><span class="p">(</span><span class="n">current</span><span class="p">,</span> <span class="n">idSize_</span> <span class="o">*</span> <span class="n">numShortlistIds_</span><span class="p">);</span>
+
+  <span class="c1">// display parameters</span>
+  <span class="n">LOG</span><span class="p">(</span><span class="n">info</span><span class="p">,</span>
+      <span class="s">&quot;[data] Quicksand shortlist has {} source ids, {} default ids and {} shortlist ids&quot;</span><span class="p">,</span>
+      <span class="n">numSourceIds_</span><span class="p">,</span>
+      <span class="n">numDefaultIds_</span><span class="p">,</span>
+      <span class="n">numShortlistIds_</span><span class="p">);</span>
+<span class="p">}</span>
+
+<span class="n">Ptr</span><span class="o">&lt;</span><span class="n">Shortlist</span><span class="o">&gt;</span> <span class="n">QuicksandShortlistGenerator</span><span class="o">::</span><span class="n">generate</span><span class="p">(</span><span class="n">Ptr</span><span class="o">&lt;</span><span class="n">data</span><span class="o">::</span><span class="n">CorpusBatch</span><span class="o">&gt;</span> <span class="n">batch</span><span class="p">)</span> <span class="k">const</span> <span class="p">{</span>
+  <span class="k">auto</span> <span class="n">srcBatch</span> <span class="o">=</span> <span class="p">(</span><span class="o">*</span><span class="n">batch</span><span class="p">)[</span><span class="n">srcIdx_</span><span class="p">];</span>
+  <span class="k">auto</span> <span class="n">maxShortlistSize</span> <span class="o">=</span> <span class="n">trgVocab_</span><span class="o">-&gt;</span><span class="n">size</span><span class="p">();</span>
+
+  <span class="n">std</span><span class="o">::</span><span class="n">unordered_set</span><span class="o">&lt;</span><span class="kt">int32_t</span><span class="o">&gt;</span> <span class="n">indexSet</span><span class="p">;</span>
+  <span class="k">for</span><span class="p">(</span><span class="kt">int32_t</span> <span class="n">i</span> <span class="o">=</span> <span class="mi">0</span><span class="p">;</span> <span class="n">i</span> <span class="o">&lt;</span> <span class="n">numDefaultIds_</span> <span class="o">&amp;&amp;</span> <span class="n">i</span> <span class="o">&lt;</span> <span class="n">maxShortlistSize</span><span class="p">;</span> <span class="o">++</span><span class="n">i</span><span class="p">)</span> <span class="p">{</span>
+    <span class="kt">int32_t</span> <span class="n">id</span> <span class="o">=</span> <span class="n">defaultIds_</span><span class="p">[</span><span class="n">i</span><span class="p">];</span>
+    <span class="n">indexSet</span><span class="p">.</span><span class="n">insert</span><span class="p">(</span><span class="n">id</span><span class="p">);</span>
+  <span class="p">}</span>
+
+  <span class="c1">// State</span>
+  <span class="n">std</span><span class="o">::</span><span class="n">vector</span><span class="o">&lt;</span><span class="n">std</span><span class="o">::</span><span class="n">pair</span><span class="o">&lt;</span><span class="k">const</span> <span class="kt">uint8_t</span><span class="o">*</span><span class="p">,</span> <span class="kt">int32_t</span><span class="o">&gt;&gt;</span> <span class="n">curShortlists</span><span class="p">(</span><span class="n">maxShortlistSize</span><span class="p">);</span>
+  <span class="k">auto</span> <span class="n">curShortlistIt</span> <span class="o">=</span> <span class="n">curShortlists</span><span class="p">.</span><span class="n">begin</span><span class="p">();</span>
+
+  <span class="c1">// Because we might fill up our shortlist before reaching max_shortlist_size, we fill the shortlist in order of rank.</span>
+  <span class="c1">// E.g., first rank of word 0, first rank of word 1, ... second rank of word 0, ...</span>
+  <span class="kt">int32_t</span> <span class="n">maxLength</span> <span class="o">=</span> <span class="mi">0</span><span class="p">;</span>
+  <span class="k">for</span> <span class="p">(</span><span class="n">Word</span> <span class="nl">word</span> <span class="p">:</span> <span class="n">srcBatch</span><span class="o">-&gt;</span><span class="n">data</span><span class="p">())</span> <span class="p">{</span>
+    <span class="kt">int32_t</span> <span class="n">sourceId</span> <span class="o">=</span> <span class="p">(</span><span class="kt">int32_t</span><span class="p">)</span><span class="n">word</span><span class="p">.</span><span class="n">toWordIndex</span><span class="p">();</span>
+    <span class="n">srcVocab_</span><span class="o">-&gt;</span><span class="n">transcodeToShortlistInPlace</span><span class="p">((</span><span class="n">WordIndex</span><span class="o">*</span><span class="p">)</span><span class="o">&amp;</span><span class="n">sourceId</span><span class="p">,</span> <span class="mi">1</span><span class="p">);</span>
+
+    <span class="k">if</span> <span class="p">(</span><span class="n">sourceId</span> <span class="o">&lt;</span> <span class="n">numSourceIds_</span><span class="p">)</span> <span class="p">{</span> <span class="c1">// if it&#39;s a valid source id</span>
+      <span class="k">const</span> <span class="kt">uint8_t</span><span class="o">*</span> <span class="n">curShortlistIds</span> <span class="o">=</span> <span class="n">sourceToShortlistIds_</span> <span class="o">+</span> <span class="n">idSize_</span> <span class="o">*</span> <span class="n">sourceOffsets_</span><span class="p">[</span><span class="n">sourceId</span><span class="p">];</span> <span class="c1">// start position for mapping</span>
+      <span class="kt">int32_t</span> <span class="n">length</span> <span class="o">=</span> <span class="n">sourceLengths_</span><span class="p">[</span><span class="n">sourceId</span><span class="p">];</span> <span class="c1">// how many mappings are there</span>
+      <span class="n">curShortlistIt</span><span class="o">-&gt;</span><span class="n">first</span>  <span class="o">=</span> <span class="n">curShortlistIds</span><span class="p">;</span>
+      <span class="n">curShortlistIt</span><span class="o">-&gt;</span><span class="n">second</span> <span class="o">=</span> <span class="n">length</span><span class="p">;</span>
+      <span class="n">curShortlistIt</span><span class="o">++</span><span class="p">;</span>
+
+      <span class="k">if</span> <span class="p">(</span><span class="n">length</span> <span class="o">&gt;</span> <span class="n">maxLength</span><span class="p">)</span>
+        <span class="n">maxLength</span> <span class="o">=</span> <span class="n">length</span><span class="p">;</span>
+    <span class="p">}</span>
+  <span class="p">}</span>
+
+  <span class="c1">// collect the actual shortlist mappings</span>
+  <span class="k">for</span> <span class="p">(</span><span class="kt">int32_t</span> <span class="n">i</span> <span class="o">=</span> <span class="mi">0</span><span class="p">;</span> <span class="n">i</span> <span class="o">&lt;</span> <span class="n">maxLength</span> <span class="o">&amp;&amp;</span> <span class="n">indexSet</span><span class="p">.</span><span class="n">size</span><span class="p">()</span> <span class="o">&lt;</span> <span class="n">maxShortlistSize</span><span class="p">;</span> <span class="n">i</span><span class="o">++</span><span class="p">)</span> <span class="p">{</span>
+    <span class="k">for</span> <span class="p">(</span><span class="kt">int32_t</span> <span class="n">j</span> <span class="o">=</span> <span class="mi">0</span><span class="p">;</span> <span class="n">j</span> <span class="o">&lt;</span> <span class="n">curShortlists</span><span class="p">.</span><span class="n">size</span><span class="p">()</span> <span class="o">&amp;&amp;</span> <span class="n">indexSet</span><span class="p">.</span><span class="n">size</span><span class="p">()</span> <span class="o">&lt;</span> <span class="n">maxShortlistSize</span><span class="p">;</span> <span class="n">j</span><span class="o">++</span><span class="p">)</span> <span class="p">{</span>
+      <span class="kt">int32_t</span> <span class="n">length</span> <span class="o">=</span> <span class="n">curShortlists</span><span class="p">[</span><span class="n">j</span><span class="p">].</span><span class="n">second</span><span class="p">;</span>
+      <span class="k">if</span> <span class="p">(</span><span class="n">i</span> <span class="o">&lt;</span> <span class="n">length</span><span class="p">)</span> <span class="p">{</span>
+        <span class="k">const</span> <span class="kt">uint8_t</span><span class="o">*</span> <span class="n">source_shortlist_ids_bytes</span> <span class="o">=</span> <span class="n">curShortlists</span><span class="p">[</span><span class="n">j</span><span class="p">].</span><span class="n">first</span><span class="p">;</span>
+        <span class="kt">int32_t</span> <span class="n">id</span> <span class="o">=</span> <span class="mi">0</span><span class="p">;</span>
+        <span class="k">if</span> <span class="p">(</span><span class="n">use16bit_</span><span class="p">)</span> <span class="p">{</span>
+          <span class="k">const</span> <span class="kt">uint16_t</span><span class="o">*</span> <span class="n">source_shortlist_ids</span> <span class="o">=</span> <span class="k">reinterpret_cast</span><span class="o">&lt;</span><span class="k">const</span> <span class="kt">uint16_t</span><span class="o">*&gt;</span><span class="p">(</span><span class="n">source_shortlist_ids_bytes</span><span class="p">);</span>
+          <span class="n">id</span> <span class="o">=</span> <span class="p">(</span><span class="kt">int32_t</span><span class="p">)</span><span class="n">source_shortlist_ids</span><span class="p">[</span><span class="n">i</span><span class="p">];</span>
+        <span class="p">}</span>
+        <span class="k">else</span> <span class="p">{</span>
+          <span class="k">const</span> <span class="kt">int32_t</span><span class="o">*</span> <span class="n">source_shortlist_ids</span> <span class="o">=</span> <span class="k">reinterpret_cast</span><span class="o">&lt;</span><span class="k">const</span> <span class="kt">int32_t</span><span class="o">*&gt;</span><span class="p">(</span><span class="n">source_shortlist_ids_bytes</span><span class="p">);</span>
+          <span class="n">id</span> <span class="o">=</span> <span class="n">source_shortlist_ids</span><span class="p">[</span><span class="n">i</span><span class="p">];</span>
+        <span class="p">}</span>
+        <span class="n">indexSet</span><span class="p">.</span><span class="n">insert</span><span class="p">(</span><span class="n">id</span><span class="p">);</span>
+      <span class="p">}</span>
+    <span class="p">}</span>
+  <span class="p">}</span>
+
+  <span class="c1">// turn into vector and sort (selected indices)</span>
+  <span class="n">std</span><span class="o">::</span><span class="n">vector</span><span class="o">&lt;</span><span class="n">WordIndex</span><span class="o">&gt;</span> <span class="n">indices</span><span class="p">;</span>
+  <span class="n">indices</span><span class="p">.</span><span class="n">reserve</span><span class="p">(</span><span class="n">indexSet</span><span class="p">.</span><span class="n">size</span><span class="p">());</span>
+  <span class="k">for</span><span class="p">(</span><span class="k">auto</span> <span class="nl">i</span> <span class="p">:</span> <span class="n">indexSet</span><span class="p">)</span>
+    <span class="n">indices</span><span class="p">.</span><span class="n">push_back</span><span class="p">((</span><span class="n">WordIndex</span><span class="p">)</span><span class="n">i</span><span class="p">);</span>
+
+  <span class="n">std</span><span class="o">::</span><span class="n">sort</span><span class="p">(</span><span class="n">indices</span><span class="p">.</span><span class="n">begin</span><span class="p">(),</span> <span class="n">indices</span><span class="p">.</span><span class="n">end</span><span class="p">());</span>
+  <span class="k">return</span> <span class="n">New</span><span class="o">&lt;</span><span class="n">Shortlist</span><span class="o">&gt;</span><span class="p">(</span><span class="n">indices</span><span class="p">);</span>
+<span class="p">}</span>
+
+<span class="n">Ptr</span><span class="o">&lt;</span><span class="n">ShortlistGenerator</span><span class="o">&gt;</span> <span class="n">createShortlistGenerator</span><span class="p">(</span><span class="n">Ptr</span><span class="o">&lt;</span><span class="n">Options</span><span class="o">&gt;</span> <span class="n">options</span><span class="p">,</span>
+                                                 <span class="n">Ptr</span><span class="o">&lt;</span><span class="k">const</span> <span class="n">Vocab</span><span class="o">&gt;</span> <span class="n">srcVocab</span><span class="p">,</span>
+                                                 <span class="n">Ptr</span><span class="o">&lt;</span><span class="k">const</span> <span class="n">Vocab</span><span class="o">&gt;</span> <span class="n">trgVocab</span><span class="p">,</span>
+                                                 <span class="kt">size_t</span> <span class="n">srcIdx</span><span class="p">,</span>
+                                                 <span class="kt">size_t</span> <span class="n">trgIdx</span><span class="p">,</span>
+                                                 <span class="kt">bool</span> <span class="n">shared</span><span class="p">)</span> <span class="p">{</span>
+  <span class="n">std</span><span class="o">::</span><span class="n">vector</span><span class="o">&lt;</span><span class="n">std</span><span class="o">::</span><span class="n">string</span><span class="o">&gt;</span> <span class="n">vals</span> <span class="o">=</span> <span class="n">options</span><span class="o">-&gt;</span><span class="n">get</span><span class="o">&lt;</span><span class="n">std</span><span class="o">::</span><span class="n">vector</span><span class="o">&lt;</span><span class="n">std</span><span class="o">::</span><span class="n">string</span><span class="o">&gt;&gt;</span><span class="p">(</span><span class="s">&quot;shortlist&quot;</span><span class="p">);</span>
+  <span class="n">ABORT_IF</span><span class="p">(</span><span class="n">vals</span><span class="p">.</span><span class="n">empty</span><span class="p">(),</span> <span class="s">&quot;No path to shortlist given&quot;</span><span class="p">);</span>
+  <span class="n">std</span><span class="o">::</span><span class="n">string</span> <span class="n">fname</span> <span class="o">=</span> <span class="n">vals</span><span class="p">[</span><span class="mi">0</span><span class="p">];</span>
+  <span class="k">if</span><span class="p">(</span><span class="n">filesystem</span><span class="o">::</span><span class="n">Path</span><span class="p">(</span><span class="n">fname</span><span class="p">).</span><span class="n">extension</span><span class="p">().</span><span class="n">string</span><span class="p">()</span> <span class="o">==</span> <span class="s">&quot;.bin&quot;</span><span class="p">)</span> <span class="p">{</span>
+    <span class="k">return</span> <span class="n">New</span><span class="o">&lt;</span><span class="n">QuicksandShortlistGenerator</span><span class="o">&gt;</span><span class="p">(</span><span class="n">options</span><span class="p">,</span> <span class="n">srcVocab</span><span class="p">,</span> <span class="n">trgVocab</span><span class="p">,</span> <span class="n">srcIdx</span><span class="p">,</span> <span class="n">trgIdx</span><span class="p">,</span> <span class="n">shared</span><span class="p">);</span>
+  <span class="p">}</span> <span class="k">else</span> <span class="p">{</span>
+    <span class="k">return</span> <span class="n">New</span><span class="o">&lt;</span><span class="n">LexicalShortlistGenerator</span><span class="o">&gt;</span><span class="p">(</span><span class="n">options</span><span class="p">,</span> <span class="n">srcVocab</span><span class="p">,</span> <span class="n">trgVocab</span><span class="p">,</span> <span class="n">srcIdx</span><span class="p">,</span> <span class="n">trgIdx</span><span class="p">,</span> <span class="n">shared</span><span class="p">);</span>
+  <span class="p">}</span>
+<span class="p">}</span>
+
+<span class="p">}</span>  <span class="c1">// namespace data</span>
+<span class="p">}</span>  <span class="c1">// namespace marian</span>
+</pre></div>
+</div>
+</div>
+
+
+           </div>
+           
+          </div>
+          <footer>
+
+  <hr/>
+
+  <div role="contentinfo">
+    <p>
+        &#169; Copyright 2021, Marian NMT Team.
+
+    </p>
+  </div>
+    
+    
+    
+    Built with <a href="https://www.sphinx-doc.org/">Sphinx</a> using a
+    
+    <a href="https://github.com/readthedocs/sphinx_rtd_theme">theme</a>
+    
+    provided by <a href="https://readthedocs.org">Read the Docs</a>. 
+
+</footer>
+        </div>
+      </div>
+
+    </section>
+
+  </div>
+  
+
+  <script type="text/javascript">
+      jQuery(function () {
+          SphinxRtdTheme.Navigation.enable(true);
+      });
+  </script>
+
+  
+  
+    
+   
+
+</body>
+</html>

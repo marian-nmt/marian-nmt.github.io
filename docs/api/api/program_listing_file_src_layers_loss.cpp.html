@@ -7,7 +7,7 @@
   
   <meta name="viewport" content="width=device-width, initial-scale=1.0" />
   
-  <title>Program Listing for File loss.cpp &mdash; Marian NMT v1.10.2 2021-02-28 documentation</title>
+  <title>Program Listing for File loss.cpp &mdash; Marian NMT v1.10.3 2021-03-22 documentation</title>
   
 
   
@@ -67,7 +67,7 @@
             
             
               <div class="version">
-                v1.10.2
+                v1.10.3
               </div>
             
           
@@ -183,26 +183,30 @@
     <span class="kt">bool</span> <span class="n">wordScores</span> <span class="o">=</span> <span class="n">options</span><span class="o">-&gt;</span><span class="n">get</span><span class="o">&lt;</span><span class="kt">bool</span><span class="o">&gt;</span><span class="p">(</span><span class="s">&quot;word-scores&quot;</span><span class="p">,</span> <span class="nb">false</span><span class="p">);</span>
     <span class="k">return</span> <span class="n">New</span><span class="o">&lt;</span><span class="n">RescorerLoss</span><span class="o">&gt;</span><span class="p">(</span><span class="n">wordScores</span><span class="p">);</span>
   <span class="p">}</span> <span class="k">else</span> <span class="k">if</span><span class="p">(</span><span class="n">unlikelihood</span><span class="p">)</span> <span class="p">{</span>
-    <span class="n">ABORT_IF</span><span class="p">(</span><span class="o">!</span><span class="n">options</span><span class="o">-&gt;</span><span class="n">hasAndNotEmpty</span><span class="p">(</span><span class="s">&quot;data-weighting&quot;</span><span class="p">)</span>
-             <span class="o">&amp;&amp;</span> <span class="n">options</span><span class="o">-&gt;</span><span class="n">get</span><span class="o">&lt;</span><span class="n">std</span><span class="o">::</span><span class="n">string</span><span class="o">&gt;</span><span class="p">(</span><span class="s">&quot;data-weighting-type&quot;</span><span class="p">)</span> <span class="o">!=</span> <span class="s">&quot;word&quot;</span><span class="p">,</span>
-             <span class="s">&quot;Unlikelihood loss training requires error annotation in form of per-target-label scores&quot;</span><span class="p">);</span>
-    <span class="k">return</span> <span class="n">New</span><span class="o">&lt;</span><span class="n">SequenceUnlikelihoodLoss</span><span class="o">&gt;</span><span class="p">(</span><span class="n">smoothing</span><span class="p">,</span> <span class="n">factorWeight</span><span class="p">);</span> <span class="c1">// this is a mix of CE-loss and unlikelihood less depending on values given for data-weighting</span>
-  <span class="p">}</span> <span class="k">else</span> <span class="p">{</span>  <span class="c1">// same as ce-mean  --@TODO: better check all allowed values, and fail for invalid ones. E.g. what about ce-sum?</span>
+    <span class="n">ABORT_IF</span><span class="p">(</span>
+        <span class="o">!</span><span class="n">options</span><span class="o">-&gt;</span><span class="n">hasAndNotEmpty</span><span class="p">(</span><span class="s">&quot;data-weighting&quot;</span><span class="p">)</span>
+            <span class="o">&amp;&amp;</span> <span class="n">options</span><span class="o">-&gt;</span><span class="n">get</span><span class="o">&lt;</span><span class="n">std</span><span class="o">::</span><span class="n">string</span><span class="o">&gt;</span><span class="p">(</span><span class="s">&quot;data-weighting-type&quot;</span><span class="p">)</span> <span class="o">!=</span> <span class="s">&quot;word&quot;</span><span class="p">,</span>
+        <span class="s">&quot;Unlikelihood loss training requires error annotation in form of per-target-label scores&quot;</span><span class="p">);</span>
+    <span class="k">return</span> <span class="n">New</span><span class="o">&lt;</span><span class="n">SequenceUnlikelihoodLoss</span><span class="o">&gt;</span><span class="p">(</span>
+        <span class="n">smoothing</span><span class="p">,</span> <span class="n">factorWeight</span><span class="p">);</span>  <span class="c1">// this is a mix of CE-loss and unlikelihood less depending on</span>
+                                   <span class="c1">// values given for data-weighting</span>
+  <span class="p">}</span> <span class="k">else</span> <span class="p">{</span>  <span class="c1">// same as ce-mean  --@TODO: better check all allowed values, and fail for invalid ones.</span>
+            <span class="c1">// E.g. what about ce-sum?</span>
     <span class="k">return</span> <span class="n">New</span><span class="o">&lt;</span><span class="n">CrossEntropyLoss</span><span class="o">&gt;</span><span class="p">(</span><span class="n">smoothing</span><span class="p">,</span> <span class="n">factorWeight</span><span class="p">);</span>
   <span class="p">}</span>
 <span class="p">}</span>
 
 <span class="c1">// see loss.h for detailed explanations of each class</span>
 <span class="n">Ptr</span><span class="o">&lt;</span><span class="n">MultiRationalLoss</span><span class="o">&gt;</span> <span class="n">newMultiLoss</span><span class="p">(</span><span class="n">Ptr</span><span class="o">&lt;</span><span class="n">Options</span><span class="o">&gt;</span> <span class="n">options</span><span class="p">)</span> <span class="p">{</span>
-    <span class="n">std</span><span class="o">::</span><span class="n">string</span> <span class="n">multiLossType</span> <span class="o">=</span> <span class="n">options</span><span class="o">-&gt;</span><span class="n">get</span><span class="o">&lt;</span><span class="n">std</span><span class="o">::</span><span class="n">string</span><span class="o">&gt;</span><span class="p">(</span><span class="s">&quot;multi-loss-type&quot;</span><span class="p">,</span> <span class="s">&quot;sum&quot;</span><span class="p">);</span>
-    <span class="k">if</span><span class="p">(</span><span class="n">multiLossType</span> <span class="o">==</span> <span class="s">&quot;sum&quot;</span><span class="p">)</span>         <span class="c1">// sum of sums</span>
-      <span class="k">return</span> <span class="n">New</span><span class="o">&lt;</span><span class="n">SumMultiRationalLoss</span><span class="o">&gt;</span><span class="p">();</span>
-    <span class="k">else</span> <span class="nf">if</span><span class="p">(</span><span class="n">multiLossType</span> <span class="o">==</span> <span class="s">&quot;scaled&quot;</span><span class="p">)</span> <span class="c1">// sum of scaled sums, first element is reference scale</span>
-      <span class="k">return</span> <span class="n">New</span><span class="o">&lt;</span><span class="n">ScaledMultiRationalLoss</span><span class="o">&gt;</span><span class="p">();</span>
-    <span class="k">else</span> <span class="nf">if</span><span class="p">(</span><span class="n">multiLossType</span> <span class="o">==</span> <span class="s">&quot;mean&quot;</span><span class="p">)</span>   <span class="c1">// sum of means</span>
-      <span class="k">return</span> <span class="n">New</span><span class="o">&lt;</span><span class="n">MeanMultiRationalLoss</span><span class="o">&gt;</span><span class="p">();</span>
-    <span class="k">else</span>
-      <span class="nf">ABORT</span><span class="p">(</span><span class="s">&quot;Unknown multi-loss-type {}&quot;</span><span class="p">,</span> <span class="n">multiLossType</span><span class="p">);</span>
+  <span class="n">std</span><span class="o">::</span><span class="n">string</span> <span class="n">multiLossType</span> <span class="o">=</span> <span class="n">options</span><span class="o">-&gt;</span><span class="n">get</span><span class="o">&lt;</span><span class="n">std</span><span class="o">::</span><span class="n">string</span><span class="o">&gt;</span><span class="p">(</span><span class="s">&quot;multi-loss-type&quot;</span><span class="p">,</span> <span class="s">&quot;sum&quot;</span><span class="p">);</span>
+  <span class="k">if</span><span class="p">(</span><span class="n">multiLossType</span> <span class="o">==</span> <span class="s">&quot;sum&quot;</span><span class="p">)</span>  <span class="c1">// sum of sums</span>
+    <span class="k">return</span> <span class="n">New</span><span class="o">&lt;</span><span class="n">SumMultiRationalLoss</span><span class="o">&gt;</span><span class="p">();</span>
+  <span class="k">else</span> <span class="nf">if</span><span class="p">(</span><span class="n">multiLossType</span> <span class="o">==</span> <span class="s">&quot;scaled&quot;</span><span class="p">)</span>  <span class="c1">// sum of scaled sums, first element is reference scale</span>
+    <span class="k">return</span> <span class="n">New</span><span class="o">&lt;</span><span class="n">ScaledMultiRationalLoss</span><span class="o">&gt;</span><span class="p">();</span>
+  <span class="k">else</span> <span class="nf">if</span><span class="p">(</span><span class="n">multiLossType</span> <span class="o">==</span> <span class="s">&quot;mean&quot;</span><span class="p">)</span>  <span class="c1">// sum of means</span>
+    <span class="k">return</span> <span class="n">New</span><span class="o">&lt;</span><span class="n">MeanMultiRationalLoss</span><span class="o">&gt;</span><span class="p">();</span>
+  <span class="k">else</span>
+    <span class="nf">ABORT</span><span class="p">(</span><span class="s">&quot;Unknown multi-loss-type {}&quot;</span><span class="p">,</span> <span class="n">multiLossType</span><span class="p">);</span>
 <span class="p">}</span>
 
 <span class="p">}</span>  <span class="c1">// namespace marian</span>

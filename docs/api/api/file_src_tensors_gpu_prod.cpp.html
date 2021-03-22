@@ -7,7 +7,7 @@
   
   <meta name="viewport" content="width=device-width, initial-scale=1.0" />
   
-  <title>File prod.cpp &mdash; Marian NMT v1.10.2 2021-02-28 documentation</title>
+  <title>File prod.cpp &mdash; Marian NMT v1.10.3 2021-03-22 documentation</title>
   
 
   
@@ -67,7 +67,7 @@
             
             
               <div class="version">
-                v1.10.2
+                v1.10.3
               </div>
             
           
@@ -174,7 +174,8 @@
 <li><p><a class="reference internal" href="#definition-src-tensors-gpu-prod-cpp" id="id1">Definition (<code class="docutils literal notranslate"><span class="pre">src/tensors/gpu/prod.cpp</span></code>)</a></p></li>
 <li><p><a class="reference internal" href="#includes" id="id2">Includes</a></p></li>
 <li><p><a class="reference internal" href="#namespaces" id="id3">Namespaces</a></p></li>
-<li><p><a class="reference internal" href="#functions" id="id4">Functions</a></p></li>
+<li><p><a class="reference internal" href="#classes" id="id4">Classes</a></p></li>
+<li><p><a class="reference internal" href="#functions" id="id5">Functions</a></p></li>
 </ul>
 </div>
 <div class="section" id="definition-src-tensors-gpu-prod-cpp">
@@ -189,7 +190,6 @@
 <h2>Includes<a class="headerlink" href="#includes" title="Permalink to this headline">¶</a></h2>
 <ul class="simple">
 <li><p><code class="docutils literal notranslate"><span class="pre">cublas_v2.h</span></code></p></li>
-<li><p><code class="docutils literal notranslate"><span class="pre">cusparse.h</span></code></p></li>
 <li><p><code class="docutils literal notranslate"><span class="pre">tensors/gpu/backend.h</span></code> (<a class="reference internal" href="file_src_tensors_gpu_backend.h.html#file-src-tensors-gpu-backend-h"><span class="std std-ref">File backend.h</span></a>)</p></li>
 <li><p><code class="docutils literal notranslate"><span class="pre">tensors/gpu/cuda_helpers.h</span></code> (<a class="reference internal" href="file_src_tensors_gpu_cuda_helpers.h.html#file-src-tensors-gpu-cuda-helpers-h"><span class="std std-ref">File cuda_helpers.h</span></a>)</p></li>
 <li><p><code class="docutils literal notranslate"><span class="pre">tensors/gpu/prod.h</span></code> (<a class="reference internal" href="file_src_tensors_gpu_prod.h.html#file-src-tensors-gpu-prod-h"><span class="std std-ref">File prod.h</span></a>)</p></li>
@@ -202,17 +202,21 @@
 <li><p><a class="reference internal" href="namespace_marian__gpu.html#namespace-marian-gpu"><span class="std std-ref">Namespace marian::gpu</span></a></p></li>
 </ul>
 </div>
+<div class="section" id="classes">
+<h2>Classes<a class="headerlink" href="#classes" title="Permalink to this headline">¶</a></h2>
+<ul class="simple">
+<li><p><a class="reference internal" href="structmarian_1_1gpu_1_1TypedGemm.html#exhale-struct-structmarian-1-1gpu-1-1typedgemm"><span class="std std-ref">Template Struct TypedGemm</span></a></p></li>
+<li><p><a class="reference internal" href="structmarian_1_1gpu_1_1TypedGemm_3_01float_00_01float_01_4.html#exhale-struct-structmarian-1-1gpu-1-1typedgemm-3-01float-00-01float-01-4"><span class="std std-ref">Template Struct TypedGemm&lt; float, float &gt;</span></a></p></li>
+</ul>
+</div>
 <div class="section" id="functions">
 <h2>Functions<a class="headerlink" href="#functions" title="Permalink to this headline">¶</a></h2>
 <ul class="simple">
-<li><p><a class="reference internal" href="function_gpu_2prod_8cpp_1a9f6f2c8f64011d55672f54c49953154c.html#exhale-function-gpu-2prod-8cpp-1a9f6f2c8f64011d55672f54c49953154c"><span class="std std-ref">Function marian::gpu::CSRProd</span></a></p></li>
-<li><p><a class="reference internal" href="function_gpu_2prod_8cpp_1a1e205c764ae2d859f3d0fd16195ae38a.html#exhale-function-gpu-2prod-8cpp-1a1e205c764ae2d859f3d0fd16195ae38a"><span class="std std-ref">Function marian::gpu::cublasGemmBatchedTyped</span></a></p></li>
-<li><p><a class="reference internal" href="function_gpu_2prod_8cpp_1aa1ab94130b4a8f841e4fd510672f0429.html#exhale-function-gpu-2prod-8cpp-1aa1ab94130b4a8f841e4fd510672f0429"><span class="std std-ref">Function marian::gpu::cublasGemmTyped</span></a></p></li>
-<li><p><a class="reference internal" href="function_gpu_2prod_8cpp_1a50c71746e31744ba77bb31510c0c2039.html#exhale-function-gpu-2prod-8cpp-1a50c71746e31744ba77bb31510c0c2039"><span class="std std-ref">Function marian::gpu::cusparseSgemmiEx</span></a></p></li>
-<li><p><a class="reference internal" href="function_gpu_2prod_8cpp_1a0d73e4242d6621bce259097913193797.html#exhale-function-gpu-2prod-8cpp-1a0d73e4242d6621bce259097913193797"><span class="std std-ref">Function marian::gpu::Prod</span></a></p></li>
+<li><p><a class="reference internal" href="function_gpu_2prod_8cpp_1af9496ed89f5128b43df3265507f9848e.html#exhale-function-gpu-2prod-8cpp-1af9496ed89f5128b43df3265507f9848e"><span class="std std-ref">Function marian::gpu::Prod(marian::Tensor, const marian::Tensor&amp;, const marian::Tensor&amp;, bool, bool, float, float, Type)</span></a></p></li>
+<li><p><a class="reference internal" href="function_gpu_2prod_8cpp_1a0d73e4242d6621bce259097913193797.html#exhale-function-gpu-2prod-8cpp-1a0d73e4242d6621bce259097913193797"><span class="std std-ref">Function marian::gpu::Prod(marian::Tensor, const marian::Tensor&amp;, const marian::Tensor&amp;, bool, bool, float, float)</span></a></p></li>
 <li><p><a class="reference internal" href="function_gpu_2prod_8cpp_1adbce1c41007bd3757617fd34a8c12ee7.html#exhale-function-gpu-2prod-8cpp-1adbce1c41007bd3757617fd34a8c12ee7"><span class="std std-ref">Function marian::gpu::ProdBatched</span></a></p></li>
-<li><p><a class="reference internal" href="function_gpu_2prod_8cpp_1a1d9f9c6dda3f1e205ec31cdaa51c13f1.html#exhale-function-gpu-2prod-8cpp-1a1d9f9c6dda3f1e205ec31cdaa51c13f1"><span class="std std-ref">Template Function marian::gpu::ProdBatchedTyped</span></a></p></li>
-<li><p><a class="reference internal" href="function_gpu_2prod_8cpp_1aec270c2794d1c28b9278b3cfbcc7ebee.html#exhale-function-gpu-2prod-8cpp-1aec270c2794d1c28b9278b3cfbcc7ebee"><span class="std std-ref">Template Function marian::gpu::ProdTyped</span></a></p></li>
+<li><p><a class="reference internal" href="function_gpu_2prod_8cpp_1a2a83e3d0f6b33a30e54841eace4848ee.html#exhale-function-gpu-2prod-8cpp-1a2a83e3d0f6b33a30e54841eace4848ee"><span class="std std-ref">Template Function marian::gpu::ProdBatchedTyped</span></a></p></li>
+<li><p><a class="reference internal" href="function_gpu_2prod_8cpp_1a28437bb8350814cc6de28cfdac215e66.html#exhale-function-gpu-2prod-8cpp-1a28437bb8350814cc6de28cfdac215e66"><span class="std std-ref">Template Function marian::gpu::ProdTyped</span></a></p></li>
 <li><p><a class="reference internal" href="function_gpu_2prod_8cpp_1af1f337e95e06f8828d8ad77c58af7b10.html#exhale-function-gpu-2prod-8cpp-1af1f337e95e06f8828d8ad77c58af7b10"><span class="std std-ref">Function marian::gpu::setTensorMode</span></a></p></li>
 <li><p><a class="reference internal" href="function_gpu_2prod_8cpp_1a59dd774e0bc29a6b829a891f613c40c9.html#exhale-function-gpu-2prod-8cpp-1a59dd774e0bc29a6b829a891f613c40c9"><span class="std std-ref">Function marian::gpu::tensorOpsEnabled</span></a></p></li>
 <li><p><a class="reference internal" href="function_gpu_2prod_8cpp_1aed7344f774b0eaff24e4245ba469b274.html#exhale-function-gpu-2prod-8cpp-1aed7344f774b0eaff24e4245ba469b274"><span class="std std-ref">Function marian::gpu::unsetTensorMode</span></a></p></li>

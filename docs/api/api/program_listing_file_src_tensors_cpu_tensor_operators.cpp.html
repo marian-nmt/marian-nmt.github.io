@@ -7,7 +7,7 @@
   
   <meta name="viewport" content="width=device-width, initial-scale=1.0" />
   
-  <title>Program Listing for File tensor_operators.cpp &mdash; Marian NMT v1.10.2 2021-02-28 documentation</title>
+  <title>Program Listing for File tensor_operators.cpp &mdash; Marian NMT v1.10.3 2021-03-22 documentation</title>
   
 
   
@@ -67,7 +67,7 @@
             
             
               <div class="version">
-                v1.10.2
+                v1.10.3
               </div>
             
           
@@ -190,18 +190,21 @@
 
 <span class="k">namespace</span> <span class="n">cpu</span> <span class="p">{</span>
 
-  <span class="kt">void</span> <span class="nf">IsNaN</span><span class="p">(</span><span class="k">const</span> <span class="n">Tensor</span> <span class="cm">/*in*/</span><span class="p">,</span> <span class="n">Ptr</span><span class="o">&lt;</span><span class="n">Allocator</span><span class="o">&gt;</span> <span class="cm">/*allocator*/</span><span class="p">,</span> <span class="kt">bool</span><span class="o">&amp;</span> <span class="cm">/*isNaN*/</span><span class="p">,</span> <span class="kt">bool</span><span class="o">&amp;</span> <span class="cm">/*isInf*/</span><span class="p">)</span> <span class="p">{</span>
+<span class="kt">void</span> <span class="nf">IsNaN</span><span class="p">(</span><span class="k">const</span> <span class="n">Tensor</span> <span class="cm">/*in*/</span><span class="p">,</span> <span class="n">Ptr</span><span class="o">&lt;</span><span class="n">Allocator</span><span class="o">&gt;</span> <span class="cm">/*allocator*/</span><span class="p">,</span> <span class="kt">bool</span><span class="o">&amp;</span> <span class="cm">/*isNaN*/</span><span class="p">,</span> <span class="kt">bool</span><span class="o">&amp;</span> <span class="cm">/*isInf*/</span><span class="p">)</span> <span class="p">{</span>
   <span class="n">ABORT</span><span class="p">(</span><span class="s">&quot;Not implemented&quot;</span><span class="p">);</span>
 <span class="p">}</span>
 
-<span class="k">template</span> <span class="o">&lt;</span><span class="k">typename</span> <span class="nc">To</span><span class="p">,</span> <span class="k">typename</span> <span class="nc">From</span><span class="o">&gt;</span>
+<span class="k">template</span> <span class="o">&lt;</span><span class="kt">bool</span> <span class="n">add</span><span class="p">,</span> <span class="k">typename</span> <span class="nc">To</span><span class="p">,</span> <span class="k">typename</span> <span class="nc">From</span><span class="o">&gt;</span>
 <span class="kt">void</span> <span class="n">CopyCastTo</span><span class="p">(</span><span class="n">To</span><span class="o">*</span> <span class="n">out</span><span class="p">,</span> <span class="k">const</span> <span class="n">From</span><span class="o">*</span> <span class="n">in</span><span class="p">,</span> <span class="kt">int</span> <span class="n">length</span><span class="p">)</span> <span class="p">{</span>
   <span class="k">for</span><span class="p">(</span><span class="kt">int</span> <span class="n">i</span> <span class="o">=</span> <span class="mi">0</span><span class="p">;</span> <span class="n">i</span> <span class="o">&lt;</span> <span class="n">length</span><span class="p">;</span> <span class="o">++</span><span class="n">i</span><span class="p">)</span>
 <span class="cp">#ifdef _MSC_VER</span>
 <span class="cp">#pragma warning (push)</span>
 <span class="cp">#pragma warning (disable: 4244)  </span><span class="c1">// &#39;argument&#39;: conversion from &#39;const From&#39; to &#39;float&#39;, possible loss of data</span>
 <span class="cp">#endif</span>
-    <span class="n">out</span><span class="p">[</span><span class="n">i</span><span class="p">]</span> <span class="o">=</span> <span class="p">(</span><span class="n">To</span><span class="p">)</span><span class="n">in</span><span class="p">[</span><span class="n">i</span><span class="p">];</span>
+    <span class="k">if</span><span class="p">(</span><span class="n">add</span><span class="p">)</span>
+      <span class="n">out</span><span class="p">[</span><span class="n">i</span><span class="p">]</span> <span class="o">+=</span> <span class="p">(</span><span class="n">To</span><span class="p">)</span><span class="n">in</span><span class="p">[</span><span class="n">i</span><span class="p">];</span>
+    <span class="k">else</span>
+      <span class="n">out</span><span class="p">[</span><span class="n">i</span><span class="p">]</span>  <span class="o">=</span> <span class="p">(</span><span class="n">To</span><span class="p">)</span><span class="n">in</span><span class="p">[</span><span class="n">i</span><span class="p">];</span>
 <span class="cp">#ifdef _MSC_VER</span>
 <span class="cp">#pragma warning (pop)</span>
 <span class="cp">#endif</span>
@@ -212,12 +215,12 @@
 <span class="c1">// the full Carthesian product of possible type cast via template magic.</span>
 <span class="c1">// Extending CopyCast and CopyCastFrom with a new branch in the &quot;if&quot; clause</span>
 <span class="c1">// adds all possible variants.</span>
-<span class="k">template</span> <span class="o">&lt;</span><span class="k">typename</span> <span class="nc">T</span><span class="o">&gt;</span>
+<span class="k">template</span> <span class="o">&lt;</span><span class="kt">bool</span> <span class="n">add</span><span class="p">,</span> <span class="k">typename</span> <span class="nc">T</span><span class="o">&gt;</span>
 <span class="kt">void</span> <span class="n">CopyCastFrom</span><span class="p">(</span><span class="n">Tensor</span> <span class="n">out</span><span class="p">,</span> <span class="k">const</span> <span class="n">T</span><span class="o">*</span> <span class="n">in</span><span class="p">,</span> <span class="kt">int</span> <span class="n">length</span><span class="p">)</span> <span class="p">{</span>
   <span class="k">if</span><span class="p">(</span><span class="n">out</span><span class="o">-&gt;</span><span class="n">type</span><span class="p">()</span> <span class="o">==</span> <span class="n">Type</span><span class="o">::</span><span class="n">float32</span><span class="p">)</span> <span class="p">{</span>
-    <span class="n">CopyCastTo</span><span class="p">(</span><span class="n">out</span><span class="o">-&gt;</span><span class="n">data</span><span class="o">&lt;</span><span class="kt">float</span><span class="o">&gt;</span><span class="p">(),</span> <span class="n">in</span><span class="p">,</span> <span class="n">length</span><span class="p">);</span>
+    <span class="n">CopyCastTo</span><span class="o">&lt;</span><span class="n">add</span><span class="o">&gt;</span><span class="p">(</span><span class="n">out</span><span class="o">-&gt;</span><span class="n">data</span><span class="o">&lt;</span><span class="kt">float</span><span class="o">&gt;</span><span class="p">(),</span> <span class="n">in</span><span class="p">,</span> <span class="n">length</span><span class="p">);</span>
   <span class="p">}</span> <span class="k">else</span> <span class="k">if</span><span class="p">(</span><span class="n">out</span><span class="o">-&gt;</span><span class="n">type</span><span class="p">()</span> <span class="o">==</span> <span class="n">Type</span><span class="o">::</span><span class="n">float16</span><span class="p">)</span> <span class="p">{</span>
-    <span class="n">CopyCastTo</span><span class="p">(</span><span class="n">out</span><span class="o">-&gt;</span><span class="n">data</span><span class="o">&lt;</span><span class="n">float16</span><span class="o">&gt;</span><span class="p">(),</span> <span class="n">in</span><span class="p">,</span> <span class="n">length</span><span class="p">);</span>
+    <span class="n">CopyCastTo</span><span class="o">&lt;</span><span class="n">add</span><span class="o">&gt;</span><span class="p">(</span><span class="n">out</span><span class="o">-&gt;</span><span class="n">data</span><span class="o">&lt;</span><span class="n">float16</span><span class="o">&gt;</span><span class="p">(),</span> <span class="n">in</span><span class="p">,</span> <span class="n">length</span><span class="p">);</span>
   <span class="p">}</span> <span class="k">else</span> <span class="p">{</span>
     <span class="n">ABORT</span><span class="p">(</span><span class="s">&quot;CopyCastTo to type {} not implemented&quot;</span><span class="p">,</span> <span class="n">out</span><span class="o">-&gt;</span><span class="n">type</span><span class="p">());</span>
   <span class="p">}</span>
@@ -226,11 +229,24 @@
 <span class="c1">// currently useless on the CPU until more types are added</span>
 <span class="kt">void</span> <span class="n">CopyCast</span><span class="p">(</span><span class="n">Tensor</span> <span class="n">out</span><span class="p">,</span> <span class="k">const</span> <span class="n">Tensor</span> <span class="n">in</span><span class="p">)</span> <span class="p">{</span>
   <span class="k">if</span><span class="p">(</span><span class="n">in</span><span class="o">-&gt;</span><span class="n">type</span><span class="p">()</span> <span class="o">==</span> <span class="n">Type</span><span class="o">::</span><span class="n">float32</span><span class="p">)</span> <span class="p">{</span>
-    <span class="n">CopyCastFrom</span><span class="p">(</span><span class="n">out</span><span class="p">,</span> <span class="n">in</span><span class="o">-&gt;</span><span class="n">data</span><span class="o">&lt;</span><span class="kt">float</span><span class="o">&gt;</span><span class="p">(),</span> <span class="p">(</span><span class="kt">int</span><span class="p">)</span><span class="n">in</span><span class="o">-&gt;</span><span class="n">size</span><span class="p">());</span>
+    <span class="n">CopyCastFrom</span><span class="o">&lt;</span><span class="cm">/*add=*/</span><span class="nb">false</span><span class="o">&gt;</span><span class="p">(</span><span class="n">out</span><span class="p">,</span> <span class="n">in</span><span class="o">-&gt;</span><span class="n">data</span><span class="o">&lt;</span><span class="kt">float</span><span class="o">&gt;</span><span class="p">(),</span> <span class="p">(</span><span class="kt">int</span><span class="p">)</span><span class="n">in</span><span class="o">-&gt;</span><span class="n">size</span><span class="p">());</span>
   <span class="p">}</span> <span class="k">else</span> <span class="k">if</span><span class="p">(</span><span class="n">in</span><span class="o">-&gt;</span><span class="n">type</span><span class="p">()</span> <span class="o">==</span> <span class="n">Type</span><span class="o">::</span><span class="n">float16</span><span class="p">)</span> <span class="p">{</span>
-    <span class="n">CopyCastFrom</span><span class="p">(</span><span class="n">out</span><span class="p">,</span> <span class="n">in</span><span class="o">-&gt;</span><span class="n">data</span><span class="o">&lt;</span><span class="n">float16</span><span class="o">&gt;</span><span class="p">(),</span> <span class="p">(</span><span class="kt">int</span><span class="p">)</span><span class="n">in</span><span class="o">-&gt;</span><span class="n">size</span><span class="p">());</span>
+    <span class="n">CopyCastFrom</span><span class="o">&lt;</span><span class="cm">/*add=*/</span><span class="nb">false</span><span class="o">&gt;</span><span class="p">(</span><span class="n">out</span><span class="p">,</span> <span class="n">in</span><span class="o">-&gt;</span><span class="n">data</span><span class="o">&lt;</span><span class="n">float16</span><span class="o">&gt;</span><span class="p">(),</span> <span class="p">(</span><span class="kt">int</span><span class="p">)</span><span class="n">in</span><span class="o">-&gt;</span><span class="n">size</span><span class="p">());</span>
   <span class="p">}</span> <span class="k">else</span> <span class="k">if</span><span class="p">(</span><span class="n">in</span><span class="o">-&gt;</span><span class="n">type</span><span class="p">()</span> <span class="o">==</span> <span class="n">Type</span><span class="o">::</span><span class="n">uint32</span><span class="p">)</span> <span class="p">{</span>
-    <span class="n">CopyCastFrom</span><span class="p">(</span><span class="n">out</span><span class="p">,</span> <span class="n">in</span><span class="o">-&gt;</span><span class="n">data</span><span class="o">&lt;</span><span class="kt">uint32_t</span><span class="o">&gt;</span><span class="p">(),</span> <span class="p">(</span><span class="kt">int</span><span class="p">)</span><span class="n">in</span><span class="o">-&gt;</span><span class="n">size</span><span class="p">());</span>
+    <span class="n">CopyCastFrom</span><span class="o">&lt;</span><span class="cm">/*add=*/</span><span class="nb">false</span><span class="o">&gt;</span><span class="p">(</span><span class="n">out</span><span class="p">,</span> <span class="n">in</span><span class="o">-&gt;</span><span class="n">data</span><span class="o">&lt;</span><span class="kt">uint32_t</span><span class="o">&gt;</span><span class="p">(),</span> <span class="p">(</span><span class="kt">int</span><span class="p">)</span><span class="n">in</span><span class="o">-&gt;</span><span class="n">size</span><span class="p">());</span>
+  <span class="p">}</span> <span class="k">else</span> <span class="p">{</span>
+    <span class="n">ABORT</span><span class="p">(</span><span class="s">&quot;CopyCastFrom from type {} not implemented&quot;</span><span class="p">,</span> <span class="n">in</span><span class="o">-&gt;</span><span class="n">type</span><span class="p">());</span>
+  <span class="p">}</span>
+<span class="p">}</span>
+
+<span class="c1">// currently useless on the CPU until more types are added</span>
+<span class="kt">void</span> <span class="n">AddCast</span><span class="p">(</span><span class="n">Tensor</span> <span class="n">out</span><span class="p">,</span> <span class="k">const</span> <span class="n">Tensor</span> <span class="n">in</span><span class="p">)</span> <span class="p">{</span>
+  <span class="k">if</span><span class="p">(</span><span class="n">in</span><span class="o">-&gt;</span><span class="n">type</span><span class="p">()</span> <span class="o">==</span> <span class="n">Type</span><span class="o">::</span><span class="n">float32</span><span class="p">)</span> <span class="p">{</span>
+    <span class="n">CopyCastFrom</span><span class="o">&lt;</span><span class="cm">/*add=*/</span><span class="nb">true</span><span class="o">&gt;</span><span class="p">(</span><span class="n">out</span><span class="p">,</span> <span class="n">in</span><span class="o">-&gt;</span><span class="n">data</span><span class="o">&lt;</span><span class="kt">float</span><span class="o">&gt;</span><span class="p">(),</span> <span class="p">(</span><span class="kt">int</span><span class="p">)</span><span class="n">in</span><span class="o">-&gt;</span><span class="n">size</span><span class="p">());</span>
+  <span class="p">}</span> <span class="k">else</span> <span class="k">if</span><span class="p">(</span><span class="n">in</span><span class="o">-&gt;</span><span class="n">type</span><span class="p">()</span> <span class="o">==</span> <span class="n">Type</span><span class="o">::</span><span class="n">float16</span><span class="p">)</span> <span class="p">{</span>
+    <span class="n">CopyCastFrom</span><span class="o">&lt;</span><span class="cm">/*add=*/</span><span class="nb">true</span><span class="o">&gt;</span><span class="p">(</span><span class="n">out</span><span class="p">,</span> <span class="n">in</span><span class="o">-&gt;</span><span class="n">data</span><span class="o">&lt;</span><span class="n">float16</span><span class="o">&gt;</span><span class="p">(),</span> <span class="p">(</span><span class="kt">int</span><span class="p">)</span><span class="n">in</span><span class="o">-&gt;</span><span class="n">size</span><span class="p">());</span>
+  <span class="p">}</span> <span class="k">else</span> <span class="k">if</span><span class="p">(</span><span class="n">in</span><span class="o">-&gt;</span><span class="n">type</span><span class="p">()</span> <span class="o">==</span> <span class="n">Type</span><span class="o">::</span><span class="n">uint32</span><span class="p">)</span> <span class="p">{</span>
+    <span class="n">CopyCastFrom</span><span class="o">&lt;</span><span class="cm">/*add=*/</span><span class="nb">true</span><span class="o">&gt;</span><span class="p">(</span><span class="n">out</span><span class="p">,</span> <span class="n">in</span><span class="o">-&gt;</span><span class="n">data</span><span class="o">&lt;</span><span class="kt">uint32_t</span><span class="o">&gt;</span><span class="p">(),</span> <span class="p">(</span><span class="kt">int</span><span class="p">)</span><span class="n">in</span><span class="o">-&gt;</span><span class="n">size</span><span class="p">());</span>
   <span class="p">}</span> <span class="k">else</span> <span class="p">{</span>
     <span class="n">ABORT</span><span class="p">(</span><span class="s">&quot;CopyCastFrom from type {} not implemented&quot;</span><span class="p">,</span> <span class="n">in</span><span class="o">-&gt;</span><span class="n">type</span><span class="p">());</span>
   <span class="p">}</span>
@@ -956,7 +972,8 @@
   <span class="p">}</span>
 <span class="p">}</span>
 
-<span class="kt">void</span> <span class="n">GRUFastBackward</span><span class="p">(</span><span class="n">std</span><span class="o">::</span><span class="n">vector</span><span class="o">&lt;</span><span class="n">Tensor</span><span class="o">&gt;</span> <span class="n">outputs</span><span class="p">,</span>
+<span class="kt">void</span> <span class="n">GRUFastBackward</span><span class="p">(</span><span class="n">Ptr</span><span class="o">&lt;</span><span class="n">Allocator</span><span class="o">&gt;</span> <span class="cm">/*allocator*/</span><span class="p">,</span>
+                     <span class="n">std</span><span class="o">::</span><span class="n">vector</span><span class="o">&lt;</span><span class="n">Tensor</span><span class="o">&gt;</span> <span class="n">outputs</span><span class="p">,</span>
                      <span class="n">std</span><span class="o">::</span><span class="n">vector</span><span class="o">&lt;</span><span class="n">Tensor</span><span class="o">&gt;</span> <span class="n">inputs</span><span class="p">,</span>
                      <span class="n">Tensor</span> <span class="n">adj_</span><span class="p">,</span>
                      <span class="kt">bool</span> <span class="k">final</span><span class="p">)</span> <span class="p">{</span>
@@ -1702,6 +1719,21 @@
       <span class="k">if</span><span class="p">(</span><span class="n">outB</span><span class="p">)</span> <span class="p">{</span>
         <span class="n">outB</span><span class="p">[</span><span class="n">k</span><span class="p">]</span> <span class="o">+=</span> <span class="n">dcdxo</span><span class="p">;</span>
       <span class="p">}</span>
+    <span class="p">}</span>
+  <span class="p">}</span>
+<span class="p">}</span>
+
+<span class="kt">void</span> <span class="n">SinusoidalPositionEmbeddings</span><span class="p">(</span><span class="n">marian</span><span class="o">::</span><span class="n">Tensor</span> <span class="n">t</span><span class="p">,</span> <span class="kt">int</span> <span class="n">start</span><span class="p">)</span> <span class="p">{</span>
+  <span class="kt">int</span> <span class="n">dimEmb</span>   <span class="o">=</span> <span class="n">t</span><span class="o">-&gt;</span><span class="n">shape</span><span class="p">()[</span><span class="mi">-1</span><span class="p">];</span>
+  <span class="kt">int</span> <span class="n">dimWords</span> <span class="o">=</span> <span class="p">(</span><span class="kt">int</span><span class="p">)</span><span class="n">t</span><span class="o">-&gt;</span><span class="n">size</span><span class="p">()</span> <span class="o">/</span> <span class="n">dimEmb</span><span class="p">;</span>
+
+  <span class="kt">float</span> <span class="n">numTimescales</span> <span class="o">=</span> <span class="p">(</span><span class="kt">float</span><span class="p">)</span><span class="n">dimEmb</span> <span class="o">/</span> <span class="mi">2</span><span class="p">;</span>
+  <span class="kt">float</span> <span class="n">logTimescaleIncrement</span> <span class="o">=</span> <span class="n">std</span><span class="o">::</span><span class="n">log</span><span class="p">(</span><span class="mf">10000.f</span><span class="p">)</span> <span class="o">/</span> <span class="p">(</span><span class="n">numTimescales</span> <span class="o">-</span> <span class="mf">1.f</span><span class="p">);</span>
+
+  <span class="k">for</span><span class="p">(</span><span class="kt">int</span> <span class="n">j</span> <span class="o">=</span> <span class="mi">0</span><span class="p">;</span> <span class="n">j</span> <span class="o">&lt;</span> <span class="n">dimWords</span><span class="p">;</span> <span class="o">++</span><span class="n">j</span><span class="p">)</span> <span class="p">{</span>
+    <span class="k">for</span><span class="p">(</span><span class="kt">int</span> <span class="n">i</span> <span class="o">=</span> <span class="mi">0</span><span class="p">;</span> <span class="n">i</span> <span class="o">&lt;</span> <span class="n">dimEmb</span><span class="p">;</span> <span class="o">++</span><span class="n">i</span><span class="p">)</span> <span class="p">{</span>
+      <span class="kt">float</span> <span class="n">v</span> <span class="o">=</span> <span class="p">(</span><span class="n">j</span> <span class="o">+</span> <span class="n">start</span><span class="p">)</span> <span class="o">*</span> <span class="n">std</span><span class="o">::</span><span class="n">exp</span><span class="p">((</span><span class="n">i</span> <span class="o">%</span> <span class="p">(</span><span class="kt">int</span><span class="p">)</span><span class="n">numTimescales</span><span class="p">)</span> <span class="o">*</span> <span class="o">-</span><span class="n">logTimescaleIncrement</span><span class="p">);</span>
+      <span class="n">t</span><span class="o">-&gt;</span><span class="n">data</span><span class="p">()[</span><span class="n">j</span> <span class="o">*</span> <span class="n">dimEmb</span> <span class="o">+</span> <span class="n">i</span><span class="p">]</span> <span class="o">=</span> <span class="n">i</span> <span class="o">&lt;</span> <span class="p">(</span><span class="kt">int</span><span class="p">)</span><span class="n">numTimescales</span> <span class="o">?</span> <span class="n">std</span><span class="o">::</span><span class="n">sin</span><span class="p">(</span><span class="n">v</span><span class="p">)</span> <span class="o">:</span> <span class="n">std</span><span class="o">::</span><span class="n">cos</span><span class="p">(</span><span class="n">v</span><span class="p">);</span>
     <span class="p">}</span>
   <span class="p">}</span>
 <span class="p">}</span>

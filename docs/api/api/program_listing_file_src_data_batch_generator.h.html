@@ -7,7 +7,7 @@
   
   <meta name="viewport" content="width=device-width, initial-scale=1.0" />
   
-  <title>Program Listing for File batch_generator.h &mdash; Marian NMT v1.10.2 2021-02-28 documentation</title>
+  <title>Program Listing for File batch_generator.h &mdash; Marian NMT v1.10.3 2021-03-22 documentation</title>
   
 
   
@@ -67,7 +67,7 @@
             
             
               <div class="version">
-                v1.10.2
+                v1.10.3
               </div>
             
           
@@ -349,10 +349,10 @@
 
         <span class="n">maxBatchSize</span> <span class="o">=</span> <span class="n">stats_</span><span class="o">-&gt;</span><span class="n">findBatchSize</span><span class="p">(</span><span class="n">lengths</span><span class="p">,</span> <span class="n">cachedStatsIter</span><span class="p">);</span>
         <span class="c1">// this optimization makes no difference indeed</span>
-<span class="cp">#if 1     </span><span class="c1">// sanity check: would we find the same entry if searching from the start?</span>
-        <span class="k">auto</span> <span class="n">it</span> <span class="o">=</span> <span class="n">stats_</span><span class="o">-&gt;</span><span class="n">lower_bound</span><span class="p">(</span><span class="n">lengths</span><span class="p">);</span>
-        <span class="k">auto</span> <span class="n">maxBatchSize1</span> <span class="o">=</span> <span class="n">stats_</span><span class="o">-&gt;</span><span class="n">findBatchSize</span><span class="p">(</span><span class="n">lengths</span><span class="p">,</span> <span class="n">it</span><span class="p">);</span>
-        <span class="n">ABORT_IF</span><span class="p">(</span><span class="n">maxBatchSize</span> <span class="o">!=</span> <span class="n">maxBatchSize1</span><span class="p">,</span> <span class="s">&quot;findBatchSize iter caching logic is borked&quot;</span><span class="p">);</span>
+<span class="cp">#if 0</span><span class="c">   // sanity check: would we find the same entry if searching from the start?</span>
+<span class="c">        auto it = stats_-&gt;lower_bound(lengths);</span>
+<span class="c">        auto maxBatchSize1 = stats_-&gt;findBatchSize(lengths, it);</span>
+<span class="c">        ABORT_IF(maxBatchSize != maxBatchSize1, &quot;findBatchSize iter caching logic is borked&quot;);</span>
 <span class="cp">#endif</span>
         <span class="n">makeBatch</span> <span class="o">=</span> <span class="n">batchVector</span><span class="p">.</span><span class="n">size</span><span class="p">()</span> <span class="o">&gt;=</span> <span class="n">maxBatchSize</span><span class="p">;</span>
         <span class="c1">// if last added sentence caused a bump then we likely have bad padding, so rather move it into the next batch</span>

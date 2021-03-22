@@ -8,9 +8,9 @@ icon: fa-file-code-o
 ## marian
 
 Version: 
-v1.9.1 95c65bb 2020-03-17 03:30:49 +0000
+v1.10.3 8f73923 2021-03-18 03:34:44 +0000
 
-Usage: `../marian-dev/build/marian [OPTIONS]`
+Usage: `./marian [OPTIONS]`
 
 ### General options
 ```
@@ -30,12 +30,15 @@ Usage: `../marian-dev/build/marian [OPTIONS]`
 --quiet-translation                   Suppress logging for translation
 --seed UINT                           Seed for all random number generators. 0 means initialize 
                                       randomly
---clip-gemm FLOAT                     If not 0 clip GEMM input values to +/- arg
+--check-nan                           Check for NaNs or Infs in forward and backward pass. Will 
+                                      abort when found. This is a diagnostic option that will 
+                                      slow down computation significantly
 --interpolate-env-vars                allow the use of environment variables in paths, of the form 
                                       ${VAR_NAME}
 --relative-paths                      All paths are relative to the config file location
 --dump-config TEXT                    Dump current (modified) configuration to stdout and exit. 
                                       Possible values: full, minimal, expand
+--sigterm TEXT=save-and-exit          What to do with SIGTERM: save-and-exit or exit-immediately.
 ```
 
 ### Model options
@@ -63,15 +66,19 @@ Usage: `../marian-dev/build/marian [OPTIONS]`
 --layer-normalization                 Enable layer normalization
 --right-left                          Train right-to-left model
 --input-types VECTOR ...              Provide type of input data if different than 'sequence'. 
-                                      Possible values: sequence, class. You need to provide one 
-                                      type per input.
+                                      Possible values: sequence, class, alignment, weight. You 
+                                      need to provide one type per input file (if --train-sets) 
+                                      or per TSV field (if --tsv).
 --best-deep                           Use Edinburgh deep RNN configuration (s2s)
 --tied-embeddings                     Tie target embeddings and output embeddings in output layer
 --tied-embeddings-src                 Tie source and target embeddings
 --tied-embeddings-all                 Tie all embedding layers and output layer
+--output-omit-bias                    Do not use a bias vector in decoder output layer
 --transformer-heads INT=8             Number of heads in multi-head attention (transformer)
 --transformer-no-projection           Omit linear projection after multi-head attention 
                                       (transformer)
+--transformer-pool                    Pool encoder states instead of using cross attention 
+                                      (selects first encoder state, best used with special token)
 --transformer-dim-ffn INT=2048        Size of position-wise feed-forward network (transformer)
 --transformer-ffn-depth INT=2         Depth of filters (transformer)
 --transformer-ffn-activation TEXT=swish
@@ -95,6 +102,9 @@ Usage: `../marian-dev/build/marian [OPTIONS]`
                                       = add, n = normalize
 --transformer-postprocess TEXT=dan    Operation after each transformer layer: d = dropout, a = 
                                       add, n = normalize
+--transformer-postprocess-top TEXT    Final operation after a full transformer stack: d = dropout, 
+                                      a = add, n = normalize. The optional skip connection with 
+                                      'a' by-passes the entire stack.
 --transformer-train-position-embeddings
                                       Train positional embeddings instead of using static 
                                       sinusoidal embeddings
@@ -111,9 +121,6 @@ Usage: `../marian-dev/build/marian [OPTIONS]`
 --dropout-rnn FLOAT                   Scaling dropout along rnn layers and time (0 = no dropout)
 --dropout-src FLOAT                   Dropout source words (0 = no dropout)
 --dropout-trg FLOAT                   Dropout target words (0 = no dropout)
---grad-dropping-rate FLOAT            Gradient Dropping rate (0 = no gradient Dropping)
---grad-dropping-momentum FLOAT        Gradient Dropping momentum decay rate (0.0 to 1.0)
---grad-dropping-warmup UINT=100       Do not apply gradient dropping for the first arg steps
 --transformer-dropout FLOAT           Dropout between transformer layers (0 = no dropout)
 --transformer-dropout-attention FLOAT Dropout for transformer attention (0 = no dropout)
 --transformer-dropout-ffn FLOAT       Dropout for transformer filter (0 = no dropout)
@@ -121,7 +128,7 @@ Usage: `../marian-dev/build/marian [OPTIONS]`
 
 ### Training options
 ```
---cost-type TEXT=ce-mean              Optimization criterion: ce-mean, ce-mean-words, ce-sum, 
+--cost-type TEXT=ce-sum               Optimization criterion: ce-mean, ce-mean-words, ce-sum, 
                                       perplexity
 --multi-loss-type TEXT=sum            How to accumulate multi-objective losses: sum, scaled, mean
 --unlikelihood-loss                   Use word-level weights as indicators for sequence-level 
@@ -137,21 +144,34 @@ Usage: `../marian-dev/build/marian [OPTIONS]`
 --sentencepiece-alphas VECTOR ...     Sampling factors for SentencePiece vocabulary; i-th factor 
                                       corresponds to i-th vocabulary
 --sentencepiece-options TEXT          Pass-through command-line options to SentencePiece trainer
---sentencepiece-max-lines UINT=10000000
+--sentencepiece-max-lines UINT=2000000
                                       Maximum lines to train SentencePiece vocabulary, selected 
                                       with sampling from all data. When set to 0 all lines are 
                                       going to be used.
--e,--after-epochs UINT                Finish after this many epochs, 0 is infinity
---after-batches UINT                  Finish after this many batch updates, 0 is infinity
+-e,--after-epochs UINT                Finish after this many epochs, 0 is infinity (deprecated, 
+                                      '--after-epochs N' corresponds to '--after Ne')
+--after-batches UINT                  Finish after this many batch updates, 0 is infinity 
+                                      (deprecated, '--after-batches N' corresponds to '--after 
+                                      Nu')
+-a,--after TEXT=0e                    Finish after this many chosen training units, 0 is infinity 
+                                      (e.g. 100e = 100 epochs, 10Gt = 10 billion target labels, 
+                                      100Ku = 100,000 updates
 --disp-freq TEXT=1000u                Display information every  arg  updates (append 't' for 
                                       every  arg  target labels)
 --disp-first UINT                     Display information for the first  arg  updates
---disp-label-counts                   Display label counts when logging loss progress
+--disp-label-counts=true              Display label counts when logging loss progress
 --save-freq TEXT=10000u               Save model file every  arg  updates (append 't' for every  
                                       arg  target labels)
+--logical-epoch VECTOR=1e,0 ...       Redefine logical epoch counter as multiple of data epochs 
+                                      (e.g. 1e), updates (e.g. 100Ku) or labels (e.g. 1Gt). 
+                                      Second parameter defines width of fractional display, 0 by 
+                                      default.
 --max-length UINT=50                  Maximum length of a sentence in a training sentence pair
 --max-length-crop                     Crop a sentence to max-length instead of omitting it if 
                                       longer than max-length
+--tsv                                 Tab-separated input
+--tsv-fields UINT                     Number of fields in the TSV input. By default, it is guessed 
+                                      based on the model type
 --shuffle TEXT=data                   How to shuffle input data (data: shuffles data and sorted 
                                       batches; batches: data is read in order into batches, but 
                                       batches are shuffled; none: no shuffling). Use with 
@@ -169,6 +189,12 @@ Usage: `../marian-dev/build/marian [OPTIONS]`
 --num-devices UINT                    Number of GPUs to use for this process. Defaults to 
                                       length(devices) or 1
 --no-nccl                             Disable inter-GPU communication via NCCL
+--sharding TEXT=global                When using NCCL and MPI for multi-process training use 
+                                      'global' (default, less memory usage) or 'local' (more 
+                                      memory usage but faster) sharding
+--sync-freq TEXT=200u                 When sharding is local sync all shards across processes once 
+                                      every n steps (possible units u=updates, t=target labels, 
+                                      e=epochs)
 --cpu-threads UINT=0                  Use CPU-based computation with this many independent 
                                       threads, 0 means GPU-based computation
 --mini-batch INT=64                   Size of mini-batch used during update
@@ -185,7 +211,7 @@ Usage: `../marian-dev/build/marian [OPTIONS]`
                                       fly to all-caps. Assumes UTF-8
 --english-title-case-every UINT       When forming minibatches, preprocess every Nth line on the 
                                       fly to title-case. Assumes English (ASCII only)
---mini-batch-words-ref INT            If given, the following hyper parameters are adjusted as-if 
+--mini-batch-words-ref UINT           If given, the following hyper parameters are adjusted as-if 
                                       we had this mini-batch size: --learn-rate, 
                                       --optimizer-params, --exponential-smoothing, 
                                       --mini-batch-warmup
@@ -194,6 +220,9 @@ Usage: `../marian-dev/build/marian [OPTIONS]`
                                       --mini-batch-words-ref if given
 --mini-batch-track-lr                 Dynamically track mini-batch size inverse to actual learning 
                                       rate (not considering lr-warmup)
+--mini-batch-round-up=true            Round up batch size to next power of 2 for more efficient 
+                                      training, but this can make batch size less stable. Disable 
+                                      with --mini-batch-round-up=false
 -o,--optimizer TEXT=adam              Optimization algorithm: sgd, adagrad, adam
 --optimizer-params VECTOR ...         Parameters for optimization algorithm, e.g. betas for Adam. 
                                       Auto-adjusted to --mini-batch-words-ref if given
@@ -233,11 +262,14 @@ Usage: `../marian-dev/build/marian [OPTIONS]`
                                       saving with smoothing factor. 0 to disable. Auto-adjusted 
                                       to --mini-batch-words-ref if given.
 --guided-alignment TEXT=none          Path to a file with word alignments. Use guided alignment to 
-                                      guide attention or 'none'
+                                      guide attention or 'none'. If --tsv it specifies the index 
+                                      of a TSV field that contains the alignments (0-based)
 --guided-alignment-cost TEXT=mse      Cost type for guided alignment: ce (cross-entropy), mse 
                                       (mean square error), mult (multiplication)
 --guided-alignment-weight FLOAT=0.1   Weight for guided alignment cost
---data-weighting TEXT                 Path to a file with sentence or word weights
+--data-weighting TEXT                 Path to a file with sentence or word weights. If --tsv it 
+                                      specifies the index of a TSV field that contains the 
+                                      weights (0-based)
 --data-weighting-type TEXT=sentence   Processing level for data weighting: sentence, word
 --embedding-vectors VECTOR ...        Paths to files with custom source and target embedding vectors
 --embedding-normalization             Normalize values from custom embedding vectors to [-1, 1]
@@ -245,19 +277,33 @@ Usage: `../marian-dev/build/marian [OPTIONS]`
 --embedding-fix-trg                   Fix target embeddings. Affects all decoders
 --fp16                                Shortcut for mixed precision training with float16 and 
                                       cost-scaling, corresponds to: --precision float16 float32 
-                                      float32 --cost-scaling 7 2000 2 0.05 10 1
---precision VECTOR=float32,float32,float32 ...
+                                      --cost-scaling 0 1000 2 0.05 10 1e-5f
+--precision VECTOR=float32,float32 ...
                                       Mixed precision training for forward/backward pass and 
-                                      optimizaton. Defines types for: forward/backward, 
-                                      optimization, saving.
+                                      optimizaton. Defines types for: forward/backward pass, 
+                                      optimization.
 --cost-scaling VECTOR ...             Dynamic cost scaling for mixed precision training: power of 
                                       2, scaling window, scaling factor, tolerance, range, 
                                       minimum factor
+--gradient-norm-average-window UINT=100
+                                      Window size over which the exponential average of the 
+                                      gradient norm is recorded (for logging and scaling). After 
+                                      this many updates about 90% of the mass of the exponential 
+                                      average comes from these updates
+--dynamic-gradient-scaling VECTOR ... Re-scale gradient to have average gradient norm if (log) 
+                                      gradient norm diverges from average by arg1 sigmas. If arg2 
+                                      = "log" the statistics are recorded for the log of the 
+                                      gradient norm else use plain norm
+--check-gradient-nan                  Skip parameter update in case of NaNs in gradient
 --normalize-gradient                  Normalize gradient by multiplying with no. devices / total 
-                                      labels
---multi-node                          Enable asynchronous multi-node training through MPI (and 
-                                      legacy sync if combined with --sync-sgd)
---multi-node-overlap=true             Overlap model computations with MPI communication
+                                      labels (not recommended and to be removed in the future)
+--train-embedder-rank VECTOR ...      Override model configuration and train a embedding 
+                                      similarity ranker with the model encoder, parameters encode 
+                                      margin and an optional normalization factor
+--quantize-bits UINT=0                Number of bits to compress model to. Set to 0 to disable
+--quantize-optimization-steps UINT=0  Adjust quantization scaling factor for N steps
+--quantize-log-based                  Uses log-based quantization
+--quantize-biases                     Apply quantization to biases
 --ulr                                 Enable ULR (Universal Language Representation)
 --ulr-query-vectors TEXT              Path to file with universal sources embeddings from 
                                       projection into universal space
@@ -280,7 +326,8 @@ Usage: `../marian-dev/build/marian [OPTIONS]`
 --valid-metrics VECTOR=cross-entropy ...
                                       Metric to use during validation: cross-entropy, 
                                       ce-mean-words, perplexity, valid-script, translation, bleu, 
-                                      bleu-detok. Multiple metrics can be specified
+                                      bleu-detok (deprecated, same as bleu), bleu-segmented, 
+                                      chrf. Multiple metrics can be specified
 --valid-reset-stalled                 Reset all stalled validation metrics when the training is 
                                       restarted
 --early-stopping UINT=10              Stop if the first validation metric does not improve for  
@@ -291,7 +338,8 @@ Usage: `../marian-dev/build/marian [OPTIONS]`
 --word-penalty FLOAT                  Subtract (arg * translation length) from translation score
 --allow-unk                           Allow unknown words to appear in output
 --n-best                              Generate n-best list
---word-scores                         Print word-level scores
+--word-scores                         Print word-level scores. One score per subword unit, not 
+                                      normalized even if --normalize
 --valid-mini-batch INT=32             Size of mini-batch used during validation
 --valid-max-length UINT=1000          Maximum length of a sentence in a validating sentence pair. 
                                       Sentences longer than valid-max-length are cropped to 

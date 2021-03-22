@@ -8,9 +8,9 @@ icon: fa-file-code-o
 ## marian-server
 
 Version: 
-v1.9.1 95c65bb 2020-03-17 03:30:49 +0000
+v1.10.3 8f73923 2021-03-18 03:34:44 +0000
 
-Usage: `marian/build/marian-server [OPTIONS]`
+Usage: `./marian-server [OPTIONS]`
 
 ### General options
 ```
@@ -30,7 +30,9 @@ Usage: `marian/build/marian-server [OPTIONS]`
 --quiet-translation                   Suppress logging for translation
 --seed UINT                           Seed for all random number generators. 0 means initialize 
                                       randomly
---clip-gemm FLOAT                     If not 0 clip GEMM input values to +/- arg
+--check-nan                           Check for NaNs or Infs in forward and backward pass. Will 
+                                      abort when found. This is a diagnostic option that will 
+                                      slow down computation significantly
 --interpolate-env-vars                allow the use of environment variables in paths, of the form 
                                       ${VAR_NAME}
 --relative-paths                      All paths are relative to the config file location
@@ -67,15 +69,19 @@ Usage: `marian/build/marian-server [OPTIONS]`
 --layer-normalization                 Enable layer normalization
 --right-left                          Train right-to-left model
 --input-types VECTOR ...              Provide type of input data if different than 'sequence'. 
-                                      Possible values: sequence, class. You need to provide one 
-                                      type per input.
+                                      Possible values: sequence, class, alignment, weight. You 
+                                      need to provide one type per input file (if --train-sets) 
+                                      or per TSV field (if --tsv).
 --best-deep                           Use Edinburgh deep RNN configuration (s2s)
 --tied-embeddings                     Tie target embeddings and output embeddings in output layer
 --tied-embeddings-src                 Tie source and target embeddings
 --tied-embeddings-all                 Tie all embedding layers and output layer
+--output-omit-bias                    Do not use a bias vector in decoder output layer
 --transformer-heads INT=8             Number of heads in multi-head attention (transformer)
 --transformer-no-projection           Omit linear projection after multi-head attention 
                                       (transformer)
+--transformer-pool                    Pool encoder states instead of using cross attention 
+                                      (selects first encoder state, best used with special token)
 --transformer-dim-ffn INT=2048        Size of position-wise feed-forward network (transformer)
 --transformer-ffn-depth INT=2         Depth of filters (transformer)
 --transformer-ffn-activation TEXT=swish
@@ -99,6 +105,9 @@ Usage: `marian/build/marian-server [OPTIONS]`
                                       = add, n = normalize
 --transformer-postprocess TEXT=dan    Operation after each transformer layer: d = dropout, a = 
                                       add, n = normalize
+--transformer-postprocess-top TEXT    Final operation after a full transformer stack: d = dropout, 
+                                      a = add, n = normalize. The optional skip connection with 
+                                      'a' by-passes the entire stack.
 --transformer-train-position-embeddings
                                       Train positional embeddings instead of using static 
                                       sinusoidal embeddings
@@ -126,30 +135,35 @@ Usage: `marian/build/marian-server [OPTIONS]`
 --allow-unk                           Allow unknown words to appear in output
 --n-best                              Generate n-best list
 --alignment TEXT                      Return word alignment. Possible values: 0.0-1.0, hard, soft
---word-scores                         Print word-level scores
+--word-scores                         Print word-level scores. One score per subword unit, not 
+                                      normalized even if --normalize
 --no-spm-decode                       Keep the output segmented into SentencePiece subwords
+--max-length UINT=1000                Maximum length of a sentence in a training sentence pair
+--max-length-crop                     Crop a sentence to max-length instead of omitting it if 
+                                      longer than max-length
+--tsv                                 Tab-separated input
+--tsv-fields UINT                     Number of fields in the TSV input. By default, it is guessed 
+                                      based on the model type
 -d,--devices VECTOR=0 ...             Specifies GPU ID(s) to use for training. Defaults to 
                                       0..num-devices-1
 --num-devices UINT                    Number of GPUs to use for this process. Defaults to 
                                       length(devices) or 1
 --cpu-threads UINT=0                  Use CPU-based computation with this many independent 
                                       threads, 0 means GPU-based computation
---max-length UINT=1000                Maximum length of a sentence in a training sentence pair
---max-length-crop                     Crop a sentence to max-length instead of omitting it if 
-                                      longer than max-length
 --mini-batch INT=1                    Size of mini-batch used during batched translation
 --mini-batch-words INT                Set mini-batch size based on words instead of sentences
 --maxi-batch INT=1                    Number of batches to preload for length-based sorting
 --maxi-batch-sort TEXT=none           Sorting strategy for maxi-batch: none, src, trg (not 
                                       available for decoder)
---optimize                            Optimize speed aggressively sacrificing memory or precision
---skip-cost                           Ignore model cost during translation, not recommended for 
-                                      beam-size > 1
 --fp16                                Shortcut for mixed precision inference with float16, 
                                       corresponds to: --precision float16
 --precision VECTOR=float32 ...        Mixed precision for inference, set parameter type in 
                                       expression graph
+--skip-cost                           Ignore model cost during translation, not recommended for 
+                                      beam-size > 1
 --shortlist VECTOR ...                Use softmax shortlist: path first best prune
 --weights VECTOR ...                  Scorer weights
 --output-sampling=false               Noise output layer with gumbel noise
+--output-approx-knn VECTOR ...        Use approximate knn search in output layer (currently only 
+                                      in transformer)
 ```

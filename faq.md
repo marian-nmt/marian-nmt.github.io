@@ -128,8 +128,9 @@ The name started out as a joke, but was made official later by public demand.
 
 {:.question}
 #### Can Marian be run on Windows?
-Not yet. We plan to release a version that can be compiled and run on Windows
-soon.
+Yes, and both CPU and GPU builds are supported. Read more about Marian
+compilation on Windows in
+[https://github.com/marian-nmt/marian/vs/README.md](https://github.com/marian-nmt/marian/tree/master/vs/README.md).
 
 {:.question}
 #### Can I compile Marian without CUDA?

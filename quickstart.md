@@ -55,7 +55,8 @@ Clone a fresh copy from github:
 
     git clone https://github.com/marian-nmt/marian
 
-The project is a standard CMake out-of-source build:
+The project is a standard CMake out-of-source build, which on Linux can be compiled by executing the
+following commands:
 
     mkdir marian/build
     cd marian/build
@@ -63,6 +64,8 @@ The project is a standard CMake out-of-source build:
     make -j4
 
 If run for the first time, this will also download several submodule repositories.
+
+For details on installation under Windows see [the documentation](/docs/#compilation-on-windows).
 
 
 ## Running Marian

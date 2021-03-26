@@ -76,7 +76,8 @@ Clone a fresh copy from github:
 
     git clone https://github.com/marian-nmt/marian
 
-The project is a standard CMake out-of-source build:
+The project is a standard CMake out-of-source build, which on Linux can be compiled by executing the
+following commands:
 
     mkdir marian/build
     cd marian/build
@@ -86,6 +87,16 @@ The project is a standard CMake out-of-source build:
 The complete list of compilation options in the form of CMake flags can be
 obtained by running `cmake -LH -N` or `cmake -LAH -N` from the `build`
 directory after running `cmake ..` first.
+
+For details on installation under Windows see [the documentation below](/docs/#compilation-on-windows).
+
+
+
+### Compilation on Windows
+
+Marian can be built on Windows using CMake or as a Visual Studio project. Both
+CPU and GPU builds are supported. Read more about this in
+[https://github.com/marian-nmt/marian/vs/README.md](https://github.com/marian-nmt/marian/tree/master/vs/README.md).
 
 
 
@@ -97,15 +108,15 @@ built-in SentencePiece and TCMalloc support.
 
 * Ubuntu 20.04 + CUDA 10.1 (defaults are gcc 9.3.0, Boost 1.71):
 
-      sudo apt-get install git cmake build-essential libboost-all-dev libprotobuf17 protobuf-compiler libprotobuf-dev openssl libssl-dev libgoogle-perftools-dev
+      sudo apt-get install git cmake build-essential libboost-system-dev libprotobuf17 protobuf-compiler libprotobuf-dev openssl libssl-dev libgoogle-perftools-dev
 
 * Ubuntu 18.04 + CUDA 9.2 (gcc 7.3.0, Boost 1.65):
 
-      sudo apt-get install git cmake build-essential libboost-all-dev libprotobuf10 protobuf-compiler libprotobuf-dev openssl libssl-dev libgoogle-perftools-dev
+      sudo apt-get install git cmake build-essential libboost-system-dev libprotobuf10 protobuf-compiler libprotobuf-dev openssl libssl-dev libgoogle-perftools-dev
 
 * Ubuntu 16.04 + CUDA 9.2 (gcc 5.4.0, Boost 1.58):
 
-      sudo apt-get install git cmake build-essential libboost-all-dev zlib1g-dev libprotobuf9v5 protobuf-compiler libprotobuf-dev openssl libssl-dev libgoogle-perftools-dev
+      sudo apt-get install git cmake build-essential libboost-system-dev zlib1g-dev libprotobuf9v5 protobuf-compiler libprotobuf-dev openssl libssl-dev libgoogle-perftools-dev
 
 * Ubuntu 14.04: gcc 4.8.4 and CUDA 8.0 that are available from the default
   package repositories are no longer supported, so first install gcc-5, g++-5
@@ -116,6 +127,7 @@ built-in SentencePiece and TCMalloc support.
 Please see the [GCC/CUDA compatibility
 table](https://github.com/marian-nmt/marian-dev/issues/526) if you experience
 compilation issues with different versions of GCC and CUDA.
+
 
 
 ### Static compilation

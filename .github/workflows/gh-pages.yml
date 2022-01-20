@@ -181,38 +181,15 @@ jobs:
         id: cli
         with:
           name: cli
-          path: ~/cli
+          path: marian-dev/build
 
       # Create _data file with current marian version and sha
       - name: Generate data file
-        env:
-          cli: ${{ steps.cli.outputs.download-path }}
-        run: |
-          version_full=$(cat ${{ env.cli }}/marian.version)
-          version=$(awk '{print substr($1,2)}' <<< ${version_full})
-
-          cat <<EOF > _data/marian.yml
-          version: ${version}
-          version_full: ${version_full}
-          sha: $(cat ${{ env.cli }}/marian.sha)
-          EOF
+        run: make update-datafile
 
       # Create CLI markdown output
-      - name: Generate CLI markdown files
-        working-directory: .
-        env:
-          cli: ${{ steps.cli.outputs.download-path }}
-          doc: 'docs/cmd'
-        run: |
-          for cmd in marian marian-{decoder,server,scorer,vocab,conv}; do
-            output="${{ env.doc }}/${cmd}.md"
-            sed "s/<COMMAND>/${cmd}/" ${{ env.doc }}/_template.tmp > ${output}
-            echo "Version: " >> ${output}
-            cat ${{ env.cli }}/${cmd}.version >> ${output} 2>&1
-            echo "" >> ${output}
-            cat ${{ env.cli }}/${cmd}.help 2>&1 | bash _scripts/help2markdown.sh | python _scripts/wrap_help.py >> ${output}
-            git add ${output}
-          done
+      - name: Generate CLI
+        run: make update-cmds
 
       # Generates the correct date
       - name: Commit CLI options

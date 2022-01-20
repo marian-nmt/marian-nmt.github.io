@@ -10,7 +10,7 @@ latex: true
 ## Overview
 
 Version:
-v1.9.1 95c65bb 2020-03-17 03:30:49 +0000
+{{ site.data.marian.version_full }}
 
 Marian toolkit provides the following tools:
 

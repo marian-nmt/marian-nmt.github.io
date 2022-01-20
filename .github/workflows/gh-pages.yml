@@ -232,19 +232,24 @@ jobs:
         with:
           ruby-version: 2.7
 
-      - name: Build Jekyll (Production)
-        id: jekyll
-        if: ${{ github.event_name == 'push' && github.repository == 'marian-nmt/marian-nmt.github.io' }}
-        uses: limjh16/jekyll-action-ts@v2
-        with:
-          enable_cache: true
-
-      - name: Build Jekyll (Dev)
-        if: ${{ steps.jekyll.outcome == 'skipped' }}
+      # Run with baseurl when pushes occur on forks
+      - name: Build Jekyll (Forks)
+        id: jekyll-dev
+        if: ${{ github.event_name == 'push' && github.repository != 'marian-nmt/marian-nmt.github.io' }}
         uses: limjh16/jekyll-action-ts@v2
         with:
           enable_cache: true
           custom_opts: '--baseurl /${{ github.event.repository.name }}'
+
+      # Run without baseurl
+      - name: Build Jekyll
+        id: jekyll
+        if: ${{ steps.jekyll-dev.outcome == 'skipped' }}
+        # if: ${{ github.event_name == 'push' && github.repository == 'marian-nmt/marian-nmt.github.io' }}
+        uses: limjh16/jekyll-action-ts@v2
+        with:
+          enable_cache: true
+
 
       # This artifact contains the HTML output of Jekyll.
       # index.html at the root of the produced zip file.

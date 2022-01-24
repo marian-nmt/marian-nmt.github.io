@@ -1,19 +1,19 @@
-
 SHELL := /bin/bash
 
 MARIAN   = marian-dev/build
 COMMANDS = marian marian-decoder marian-server marian-scorer marian-vocab marian-conv
 CMDFILES = $(patsubst %,docs/cmd/%.md,$(COMMANDS))
 
-.PHONY: build clean update-gems update-cmds update-datafile install run zip Gamefile.lock
+.PHONY: build install update-gems update-cmds update-datafile run
 
+# Update Marian outputs and build
+all: update-cmds update-datafile run
 
-all: run
-
+# Jekyll
 run: build
 	bundle exec jekyll serve --skip-initial-build
 
-build:
+build: install
 	bundle exec jekyll build
 
 install: Gemfile
@@ -21,33 +21,32 @@ install: Gemfile
 update-gems: Gemfile
 	bundle update
 
-
-# generate archive
-zip: marian-nmt-website.tgz
-marian-nmt-website.tgz: build
-	tar zcf $@ _site
-
-# Generate pages with command-line options
+## Updte pages with command-line options
 update-cmds: $(CMDFILES)
+
+## Update verion datafile
 update-datafile: _data/marian.yml
 
-# Generate Marian version YAML
+## Generate datafile from extracted version/sha
 _data/marian.yml: $(MARIAN)/marian.version $(MARIAN)/marian.sha
 	_scripts/datafile.sh $^ $@
 
-# CLI Documentation
-$(MARIAN)/%.version:
+## Extract version
+$(MARIAN)/%.version: | $(MARIAN)
 	@echo "Ouput Version"
 	$(MARIAN)/$* --version > $@ 2>&1
 
-$(MARIAN)/%.help:
+## Extract helptext
+$(MARIAN)/%.help: | $(MARIAN)
 	@echo "Ouput Help"
 	$(MARIAN)/$* --help > $@ 2>&1
 
+## Extract submodule commmit ref (sha)
 $(MARIAN)/marian.sha:
 	rev=$$(cd $(MARIAN) && echo "$$(git rev-parse HEAD)");\
 	echo $$rev > $@
 
+## Build CLI markdown file
 docs/cmd/%.md: docs/cmd/_template.tmp $(MARIAN)/%.version $(MARIAN)/%.help
 	sed "s/<COMMAND>/$*/" $< > $@
 	echo "Version: " >> $@
@@ -55,14 +54,13 @@ docs/cmd/%.md: docs/cmd/_template.tmp $(MARIAN)/%.version $(MARIAN)/%.help
 	echo "" >> $@
 	cat $(MARIAN)/$*.help | bash _scripts/help2markdown.sh | python _scripts/wrap_help.py >> $@
 
-
-# Compile Marian
-marian-dev/build: marian-dev
-	mkdir -p marian-dev/build && cd marian-dev/build && cmake .. -DCOMPILE_SERVER=ON && make -j8
-
-# Init submodule
-marian-dev:
-	git submodule update --init --recursive
+## Compile Marian
+$(MARIAN):
+	git submodule update --init --recursive;\
+	mkdir -p marian-dev/build \
+		&& cd marian-dev/build \
+		&& cmake .. -DCOMPILE_SERVER=ON \
+		&& make -j8
 
 
 # Clean

@@ -10,23 +10,23 @@ latex: true
 ## Overview
 
 Version:
-v1.9.1 95c65bb 2020-03-17 03:30:49 +0000
+{{ site.data.marian.version_full }}
 
 Marian toolkit provides the following tools:
 
-- [marian](/docs/cmd/marian): training NMT models and language models.
-- [marian-decoder](/docs/cmd/marian-decoder): CPU and GPU translation with NMT
+- [marian]({% link docs/cmd/marian.md %}): training NMT models and language models.
+- [marian-decoder]({% link docs/cmd/marian-decoder.md %}): CPU and GPU translation with NMT
   models trained with Marian.
-- [marian-server](/docs/cmd/marian-server): a web-socket server providing
+- [marian-server]({% link docs/cmd/marian-server.md %}): a web-socket server providing
   translation service.
-- [marian-scorer](/docs/cmd/marian-scorer): rescoring parallel text files and
+- [marian-scorer]({% link docs/cmd/marian-scorer.md %}): rescoring parallel text files and
   n-best lists.
-- [marian-vocab](/docs/cmd/marian-vocab): creating a vocabulary from text given
+- [marian-vocab]({% link docs/cmd/marian-vocab.md %}): creating a vocabulary from text given
   on STDIN.
-- [marian-conv](/docs/cmd/marian-conv): converting a model into a binary
+- [marian-conv]({% link docs/cmd/marian-conv.md %}): converting a model into a binary
   format.
 
-The [amun](/docs/cmd/amun) tool offering CPU and GPU translation with specific
+The [amun]({% link docs/cmd/amun.md %}) tool offering CPU and GPU translation with specific
 Marian and Nematus models, which used to be a part of Marian, has been moved to
 its separate repository and is available from:
 [https://github.com/marian-nmt/amun](https://github.com/marian-nmt/amun)
@@ -36,13 +36,13 @@ its separate repository and is available from:
 ### Command-line options
 
 Click on the tool name above for a list of command line options. See options
-for [previous releases](/docs/cmd).
+for [previous releases]({% link docs/cmd/index.md %}).
 
 
 
 ### Code documentation
 
-[The developer documentation for Marian](/docs/api/) is generated using Doxygen
+[The developer documentation for Marian]({{ 'docs/api/' | relative_url }}) is generated using Doxygen
 and Sphinx. It can be generated locally from the {% github_link marian-dev/doc/
 %} folder.
 
@@ -88,7 +88,7 @@ The complete list of compilation options in the form of CMake flags can be
 obtained by running `cmake -LH -N` or `cmake -LAH -N` from the `build`
 directory after running `cmake ..` first.
 
-For details on installation under Windows see [the documentation below](/docs/#compilation-on-windows).
+For details on installation under Windows see [the documentation below]({% link docs/index.md %}#compilation-on-windows ).
 
 
 

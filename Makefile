@@ -1,19 +1,19 @@
-
 SHELL := /bin/bash
 
-MARIAN   = marian/build
+MARIAN   = marian-dev/build
 COMMANDS = marian marian-decoder marian-server marian-scorer marian-vocab marian-conv
 CMDFILES = $(patsubst %,docs/cmd/%.md,$(COMMANDS))
 
-.PHONY: build clean update-gems update-cmds update-docs install run zip Gamefile.lock
+.PHONY: build install update-gems update-cmds update-datafile run
 
+# Update Marian outputs and build
+all: update-cmds update-datafile run
 
-all: run
-
+# Jekyll
 run: build
 	bundle exec jekyll serve --skip-initial-build
 
-build:
+build: install
 	bundle exec jekyll build
 
 install: Gemfile
@@ -21,39 +21,48 @@ install: Gemfile
 update-gems: Gemfile
 	bundle update
 
+## Updte pages with command-line options
+update-cmds: $(CMDFILES)
 
-# generate archive
-zip: marian-nmt-website.tgz
-marian-nmt-website.tgz: build
-	tar zcf $@ _site
+## Update verion datafile
+update-datafile: _data/marian.yml
 
-# generate pages with command-line options
-update-cmds: $(MARIAN) $(CMDFILES)
+## Generate datafile from extracted version/sha
+_data/marian.yml: $(MARIAN)/marian.version $(MARIAN)/marian.sha
+	_scripts/datafile.sh $^ $@
 
-docs/cmd/%.md: docs/cmd/_template.tmp
-	sed "s/<COMMAND>/$*/" $^ > $@
+## Extract version
+$(MARIAN)/%.version: | $(MARIAN)
+	@echo "Ouput Version"
+	$(MARIAN)/$* --version > $@ 2>&1
+
+## Extract helptext
+$(MARIAN)/%.help: | $(MARIAN)
+	@echo "Ouput Help"
+	$(MARIAN)/$* --help > $@ 2>&1
+
+## Extract submodule commmit ref (sha)
+$(MARIAN)/marian.sha:
+	rev=$$(cd $(MARIAN) && echo "$$(git rev-parse HEAD)");\
+	echo $$rev > $@
+
+## Build CLI markdown file
+docs/cmd/%.md: docs/cmd/_template.tmp $(MARIAN)/%.version $(MARIAN)/%.help
+	sed "s/<COMMAND>/$*/" $< > $@
 	echo "Version: " >> $@
-	$(MARIAN)/marian --version >> $@ 2>&1
+	cat $(MARIAN)/$*.version >> $@
 	echo "" >> $@
-	$(MARIAN)/$* -h 2>&1 | bash _scripts/help2markdown.sh | python _scripts/wrap_help.py >> $@
+	cat $(MARIAN)/$*.help | bash _scripts/help2markdown.sh | python _scripts/wrap_help.py >> $@
 
-# generate documentation
-update-docs: Doxyfile.marian.in marian
-	sed -i -r "s/PROJECT_NUMBER * = .*/PROJECT_NUMBER = $$(cat marian\/VERSION)/" Doxyfile.marian.in
-	doxygen $<
-
-
-# download & compile marian
-marian/build: marian
-	mkdir -p marian/build && cd marian/build && cmake .. && make -j8
-marian:
-	git -C $@ pull || git clone https://github.com/marian-nmt/marian-dev.git $@
-	cd marian; git checkout stable; cd ..
+## Compile Marian
+$(MARIAN):
+	git submodule update --init --recursive;\
+	mkdir -p marian-dev/build \
+		&& cd marian-dev/build \
+		&& cmake .. -DCOMPILE_SERVER=ON \
+		&& make -j8
 
 
-# clean
-clean-docs:
-	rm -rf docs/marian
-
-clean: clean-docs
+# Clean
+clean:
 	bundle exec jekyll clean

@@ -197,7 +197,7 @@
               <h2 id="marian-scorer">marian-scorer</h2>
 
 <p>Version: 
-v1.10.3 8f73923 2021-03-18 03:34:44 +0000</p>
+v1.10.27; b64e258 2022-01-18 12:59:37 +0000</p>
 
 <p>Usage: <code class="highlighter-rouge">./marian-scorer [OPTIONS]</code></p>
 
@@ -236,6 +236,13 @@ v1.10.3 8f73923 2021-03-18 03:34:44 +0000</p>
 --dim-vocabs VECTOR=0,0 ...           Maximum items in vocabulary ordered by rank, 0 uses all 
                                       items in the provided/created vocabulary file
 --dim-emb INT=512                     Size of embedding vector
+--factors-dim-emb INT                 Embedding dimension of the factors. Only used if concat is 
+                                      selected as factors combining form
+--factors-combine TEXT=sum            How to combine the factors and lemma embeddings. Options 
+                                      available: sum, concat
+--lemma-dependency TEXT               Lemma dependency method to use when predicting target 
+                                      factors. Options: soft-transformer-layer, 
+                                      hard-transformer-layer, lemma-dependent-bias, re-embedding
 --lemma-dim-emb INT=0                 Re-embedding dimension of lemma in factors
 --dim-rnn INT=1024                    Size of rnn hidden state
 --enc-type TEXT=bidirectional         Type of encoder RNN : bidirectional, bi-unidirectional, 
@@ -342,6 +349,12 @@ v1.10.3 8f73923 2021-03-18 03:34:44 +0000</p>
                                       corresponds to: --precision float16
 --precision VECTOR=float32 ...        Mixed precision for inference, set parameter type in 
                                       expression graph
+--optimize=false                      Optimize the graph on-the-fly
+-g,--gemm-type TEXT=float32           GEMM Type to be used for on-line quantization/packing: 
+                                      float32, packed16, packed8
+--quantize-range FLOAT=0              Range for the on-line quantiziation of weight matrix in 
+                                      multiple of this range and standard deviation, 0.0 means 
+                                      min/max quantization
 </code></pre></div></div>
 
 

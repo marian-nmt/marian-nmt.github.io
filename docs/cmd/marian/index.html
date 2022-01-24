@@ -197,7 +197,7 @@
               <h2 id="marian">marian</h2>
 
 <p>Version: 
-v1.10.3 8f73923 2021-03-18 03:34:44 +0000</p>
+v1.10.27; b64e258 2022-01-18 12:59:37 +0000</p>
 
 <p>Usage: <code class="highlighter-rouge">./marian [OPTIONS]</code></p>
 
@@ -238,6 +238,13 @@ v1.10.3 8f73923 2021-03-18 03:34:44 +0000</p>
 --dim-vocabs VECTOR=0,0 ...           Maximum items in vocabulary ordered by rank, 0 uses all 
                                       items in the provided/created vocabulary file
 --dim-emb INT=512                     Size of embedding vector
+--factors-dim-emb INT                 Embedding dimension of the factors. Only used if concat is 
+                                      selected as factors combining form
+--factors-combine TEXT=sum            How to combine the factors and lemma embeddings. Options 
+                                      available: sum, concat
+--lemma-dependency TEXT               Lemma dependency method to use when predicting target 
+                                      factors. Options: soft-transformer-layer, 
+                                      hard-transformer-layer, lemma-dependent-bias, re-embedding
 --lemma-dim-emb INT=0                 Re-embedding dimension of lemma in factors
 --dim-rnn INT=1024                    Size of rnn hidden state
 --enc-type TEXT=bidirectional         Type of encoder RNN : bidirectional, bi-unidirectional, 
@@ -500,8 +507,9 @@ v1.10.3 8f73923 2021-03-18 03:34:44 +0000</p>
 --ulr-dropout FLOAT=0                 ULR dropout on embeddings attentions. Default is no dropout
 --ulr-softmax-temperature FLOAT=1     ULR softmax temperature to control randomness of 
                                       predictions. Deafult is 1.0: no temperature
---task VECTOR ...                     Use predefined set of options. Possible values: transformer, 
-                                      transformer-big
+--task VECTOR ...                     Use predefined set of options. Possible values: 
+                                      transformer-base, transformer-big, 
+                                      transformer-base-prenorm, transformer-big-prenorm
 </code></pre></div></div>
 
 <h3 id="validation-set-options">Validation set options</h3>
@@ -517,6 +525,9 @@ v1.10.3 8f73923 2021-03-18 03:34:44 +0000</p>
                                       restarted
 --early-stopping UINT=10              Stop if the first validation metric does not improve for  
                                       arg  consecutive validation steps
+--early-stopping-on TEXT=first        Decide if early stopping should take into account first, 
+                                      all, or any validation metricsPossible values: first, all, 
+                                      any
 -b,--beam-size UINT=12                Beam size used during search with validating translator
 -n,--normalize FLOAT=0                Divide translation score by pow(translation length, arg)
 --max-length-factor FLOAT=3           Maximum target length as source length times factor

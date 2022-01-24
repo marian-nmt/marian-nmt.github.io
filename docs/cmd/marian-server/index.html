@@ -197,7 +197,7 @@
               <h2 id="marian-server">marian-server</h2>
 
 <p>Version: 
-v1.10.3 8f73923 2021-03-18 03:34:44 +0000</p>
+v1.10.27; b64e258 2022-01-18 12:59:37 +0000</p>
 
 <p>Usage: <code class="highlighter-rouge">./marian-server [OPTIONS]</code></p>
 
@@ -235,11 +235,19 @@ v1.10.3 8f73923 2021-03-18 03:34:44 +0000</p>
 <h3 id="model-options">Model options</h3>
 <div class="highlighter-rouge"><div class="highlight"><pre class="highlight"><code>-m,--models VECTOR ...                Paths to model(s) to be loaded. Supported file extensions: 
                                       .npz, .bin
+--model-mmap                          Use memory-mapping when loading model (CPU only)
 --ignore-model-config                 Ignore the model configuration saved in npz file
 --type TEXT=amun                      Model type: amun, nematus, s2s, multi-s2s, transformer
 --dim-vocabs VECTOR=0,0 ...           Maximum items in vocabulary ordered by rank, 0 uses all 
                                       items in the provided/created vocabulary file
 --dim-emb INT=512                     Size of embedding vector
+--factors-dim-emb INT                 Embedding dimension of the factors. Only used if concat is 
+                                      selected as factors combining form
+--factors-combine TEXT=sum            How to combine the factors and lemma embeddings. Options 
+                                      available: sum, concat
+--lemma-dependency TEXT               Lemma dependency method to use when predicting target 
+                                      factors. Options: soft-transformer-layer, 
+                                      hard-transformer-layer, lemma-dependent-bias, re-embedding
 --lemma-dim-emb INT=0                 Re-embedding dimension of lemma in factors
 --dim-rnn INT=1024                    Size of rnn hidden state
 --enc-type TEXT=bidirectional         Type of encoder RNN : bidirectional, bi-unidirectional, 
@@ -318,10 +326,15 @@ v1.10.3 8f73923 2021-03-18 03:34:44 +0000</p>
 --max-length-factor FLOAT=3           Maximum target length as source length times factor
 --word-penalty FLOAT                  Subtract (arg * translation length) from translation score
 --allow-unk                           Allow unknown words to appear in output
+--allow-special                       Allow special symbols to appear in output, e.g. for 
+                                      SentencePiece with byte-fallback do not suppress the 
+                                      newline symbol
 --n-best                              Generate n-best list
 --alignment TEXT                      Return word alignment. Possible values: 0.0-1.0, hard, soft
 --word-scores                         Print word-level scores. One score per subword unit, not 
                                       normalized even if --normalize
+--stat-freq TEXT=0                    Display speed information every arg mini-batches. Disabled 
+                                      by default with 0, set to value larger than 0 to activate
 --no-spm-decode                       Keep the output segmented into SentencePiece subwords
 --max-length UINT=1000                Maximum length of a sentence in a training sentence pair
 --max-length-crop                     Crop a sentence to max-length instead of omitting it if 
@@ -351,6 +364,12 @@ v1.10.3 8f73923 2021-03-18 03:34:44 +0000</p>
 --output-sampling=false               Noise output layer with gumbel noise
 --output-approx-knn VECTOR ...        Use approximate knn search in output layer (currently only 
                                       in transformer)
+--optimize=false                      Optimize the graph on-the-fly
+-g,--gemm-type TEXT=float32           GEMM Type to be used for on-line quantization/packing: 
+                                      float32, packed16, packed8
+--quantize-range FLOAT=0              Range for the on-line quantiziation of weight matrix in 
+                                      multiple of this range and standard deviation, 0.0 means 
+                                      min/max quantization
 </code></pre></div></div>
 
 

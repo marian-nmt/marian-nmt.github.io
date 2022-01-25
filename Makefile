@@ -21,7 +21,7 @@ install: Gemfile
 update-gems: Gemfile
 	bundle update
 
-## Updte pages with command-line options
+## Update pages with command-line options
 update-cmds: $(CMDFILES)
 
 ## Update verion datafile
@@ -61,7 +61,6 @@ $(MARIAN):
 		&& cd marian-dev/build \
 		&& cmake .. -DCOMPILE_SERVER=ON \
 		&& make -j8
-
 
 # Clean
 clean:

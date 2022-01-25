@@ -40,14 +40,6 @@ for [previous releases]({% link docs/cmd/index.md %}).
 
 
 
-### Code documentation
-
-[The developer documentation for Marian]({{ 'docs/api/' | relative_url }}) is generated using Doxygen
-and Sphinx. It can be generated locally from the {% github_link marian-dev/doc/
-%} folder.
-
-
-
 ### Model types
 
 - `s2s`: An RNN-based encoder-decoder model with attention mechanism. The
@@ -67,6 +59,14 @@ and Sphinx. It can be generated locally from the {% github_link marian-dev/doc/
   Can be decoded with Amun as _nematus2_ model type.
 - `lm`: An RNN language model.
 - `lm-transformer`: An transformer-based language model.
+
+
+
+### Developer API
+
+[The developer documentation for Marian]({{ 'docs/api/' | relative_url }}) is
+generated using Doxygen and Sphinx. The newest version can be generated locally
+from the {% github_link marian-dev/doc/ %} folder.
 
 
 

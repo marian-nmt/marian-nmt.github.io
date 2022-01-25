@@ -4,7 +4,7 @@ The website is build with Jekyll - a static site generator.
 The content is created and updated on branch `jekyll`, then the static pages
 are generated with Jekyll and stored in the branch `master`.
 
-Please **do not update files directly in `master`**.
+:warning: Please **do not update files directly in `master`**. :warning:
 
 ## Automated build
 
@@ -20,7 +20,7 @@ This covers:
 The CLI and API document content is determined by the pinned version of the
 marian-dev submodule.
 
-The CLI documentation
+### The CLI documentation
 
 This pipeline is triggered by pushes on the source branch `jekyll`, and, on
 success, the resulting site is pushed to the GitHub pages branch (`master`).
@@ -31,7 +31,6 @@ pushed onto the source branch (message: `Update CLI options:`).
 This is necessary due to the renderedtimestamp of these files being
 determined from their last-commit date.
 -->
-
 For pull requests against the source branch, the resulting site is available as
 an artifact and should be reviewed before approval.
 

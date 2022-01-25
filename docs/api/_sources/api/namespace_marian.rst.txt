@@ -17,6 +17,18 @@ namespace marian
 
 
 
+Detailed Description
+--------------------
+
+In this file we bascially take the faiss::IndexLSH and pick it apart so that the individual steps can be implemented as Marian inference operators.
+
+We can encode the inputs and weights into their bitwise equivalents, apply the hashing rotation (if required), and perform the actual search.
+
+This also allows to create parameters that get dumped into the model weight file. This is currently a bit hacky (see marian-conv), but once this is done the model can memory-map the LSH with existing mechanisms and no additional memory is consumed to build the index or rotation matrix. 
+
+
+
+
 
 Namespaces
 ----------
@@ -46,6 +58,8 @@ Namespaces
 
 - :ref:`namespace_marian__io`
 
+- :ref:`namespace_marian__lsh`
+
 - :ref:`namespace_marian__mlp`
 
 - :ref:`namespace_marian__models`
@@ -55,6 +69,8 @@ Namespaces
 - :ref:`namespace_marian__rnn`
 
 - :ref:`namespace_marian__sparse`
+
+- :ref:`namespace_marian__spm`
 
 - :ref:`namespace_marian__timer`
 
@@ -181,6 +197,8 @@ Classes
 
 - :ref:`exhale_struct_structmarian_1_1ReLUNodeOp`
 
+- :ref:`exhale_struct_structmarian_1_1RMSNormalizationOp`
+
 - :ref:`exhale_struct_structmarian_1_1RowsNodeOp`
 
 - :ref:`exhale_struct_structmarian_1_1ScalarAddNodeOp`
@@ -233,6 +251,8 @@ Classes
 
 - :ref:`exhale_class_classmarian_1_1AffineNodeOp`
 
+- :ref:`exhale_class_classmarian_1_1AffineWithReluNodeOp`
+
 - :ref:`exhale_class_classmarian_1_1AllocationException`
 
 - :ref:`exhale_class_classmarian_1_1Allocator`
@@ -258,6 +278,8 @@ Classes
 - :ref:`exhale_class_classmarian_1_1BertEncoderClassifier`
 
 - :ref:`exhale_class_classmarian_1_1BertMaskedLM`
+
+- :ref:`exhale_class_classmarian_1_1CallbackNodeOp`
 
 - :ref:`exhale_class_classmarian_1_1Chainable`
 
@@ -310,6 +332,8 @@ Classes
 - :ref:`exhale_class_classmarian_1_1DefaultVocab_1_1VocabFreqOrderer`
 
 - :ref:`exhale_class_classmarian_1_1Device`
+
+- :ref:`exhale_class_classmarian_1_1DotBatchedLegacyNodeOp`
 
 - :ref:`exhale_class_classmarian_1_1DotBatchedNodeOp`
 
@@ -388,8 +412,6 @@ Classes
 - :ref:`exhale_class_classmarian_1_1LayerBase`
 
 - :ref:`exhale_class_classmarian_1_1Logits`
-
-- :ref:`exhale_class_classmarian_1_1LSH`
 
 - :ref:`exhale_class_classmarian_1_1MappedParameters`
 
@@ -546,6 +568,8 @@ Enums
 
 - :ref:`exhale_enum_namespacemarian_1a80d9ddedec349b4d83d40d387878bf4c`
 
+- :ref:`exhale_enum_namespacemarian_1afd57ce1e4f99b51a69b0c6820e6b47ca`
+
 - :ref:`exhale_enum_namespacemarian_1a99b7af6b45a77b11ae730d0a0b8ee7a2`
 
 - :ref:`exhale_enum_namespacemarian_1aad9609e9074fe840a87cba89b6583a2a`
@@ -573,13 +597,17 @@ Functions
 
 - :ref:`exhale_function_namespacemarian_1aba1e5946a9d72634ae62b44c15dca9cf`
 
+- :ref:`exhale_function_namespacemarian_1a3eed70dfeb384a219b17e3f0340cd030`
+
 - :ref:`exhale_function_namespacemarian_1aabc7938a8b29a7cff600b120077bf255`
 
 - :ref:`exhale_function_namespacemarian_1af285cb3d727a2b162c71259554d867fb`
 
-- :ref:`exhale_function_group__graph__ops_1ga8a5bcad46fab763303f0e576bbb4f33e`
+- :ref:`exhale_function_group__graph__ops_1gad5f125c9990c8d096cefe2de2a19556a`
 
-- :ref:`exhale_function_namespacemarian_1a376617bd4169270b0a56e2a014dae125`
+- :ref:`exhale_function_namespacemarian_1a98635d4fb6b6ffa23d50a3ca9e6b925e`
+
+- :ref:`exhale_function_group__graph__ops_1gaf0f328f8e44f2f6357e4b5932593d0dd`
 
 - :ref:`exhale_function_namespacemarian_1ae1aa3d1e7e389f5f18520367bb960a89`
 
@@ -617,13 +645,17 @@ Functions
 
 - :ref:`exhale_function_namespacemarian_1ac67e4eebc152da62eb145a068494270d`
 
-- :ref:`exhale_function_namespacemarian_1a053414677fbe567ace66b78119928a60`
-
 - :ref:`exhale_function_namespacemarian_1abf5090dcd5ce1548cfbd4fa6c8d63add`
+
+- :ref:`exhale_function_namespacemarian_1a053414677fbe567ace66b78119928a60`
 
 - :ref:`exhale_function_group__graph__ops_1gaafb2da2076a75eead08e58838c194182`
 
+- :ref:`exhale_function_group__graph__ops_1gacae5f032849e92be5dac5de61f0b5942`
+
 - :ref:`exhale_function_namespacemarian_1a71b7b9c7ec6834768cf521c4a091e04f`
+
+- :ref:`exhale_function_group__graph__ops_1ga0f7da7833e4c54af139ca31dedf954ba`
 
 - :ref:`exhale_function_group__graph__ops__manipulation_1ga9e4171203266af97059455b103b64351`
 
@@ -675,6 +707,8 @@ Functions
 
 - :ref:`exhale_function_namespacemarian_1a9d297b5522873e34ca9ff0c3a01933e4`
 
+- :ref:`exhale_function_namespacemarian_1aa9a14a84843ce24215cb496eae0ce434`
+
 - :ref:`exhale_function_namespacemarian_1ad4b084546319a14929e136130f20d152`
 
 - :ref:`exhale_function_namespacemarian_1a13237267a3f31e5fbdfad4604d627ff1`
@@ -695,49 +729,53 @@ Functions
 
 - :ref:`exhale_function_namespacemarian_1ad9b5bce26f55cfac97f173eed4bacab5`
 
-- :ref:`exhale_function_namespacemarian_1a4258896a6efeba02cdc20006bf020d98`
+- :ref:`exhale_function_namespacemarian_1aa5a83fa5c4fb268c0d1876b217b5b9ba`
+
+- :ref:`exhale_function_namespacemarian_1a2f7095bea7fae3cda70267120f63d091`
+
+- :ref:`exhale_function_namespacemarian_1ae80ed496ddaed7c95969452129882fa2`
+
+- :ref:`exhale_function_namespacemarian_1ac89dcc7abcd7900e297521cf16be0e62`
 
 - :ref:`exhale_function_namespacemarian_1a10066c8d1e384ff2bddfa88f1b9e875d`
 
 - :ref:`exhale_function_namespacemarian_1ab893b095927312afe8bb9a190e9ec1a8`
 
-- :ref:`exhale_function_namespacemarian_1a853d24e55f53d1260af215cfea759d9d`
+- :ref:`exhale_function_namespacemarian_1abe97e46759c8049079c056af146f8dd8`
 
-- :ref:`exhale_function_namespacemarian_1ae0f4b4277e68547a57cc3d001e61051b`
-
-- :ref:`exhale_function_namespacemarian_1ac89dcc7abcd7900e297521cf16be0e62`
-
-- :ref:`exhale_function_namespacemarian_1a9dcde38124b2b5323d3a8f1164aa90f5`
-
-- :ref:`exhale_function_namespacemarian_1a3cf7499b69139209066c2abf233cd4dd`
-
-- :ref:`exhale_function_namespacemarian_1af8600d2ddd2d712b3319b5a7a43ab685`
+- :ref:`exhale_function_namespacemarian_1a9c3f2072dc5ff389edaa5288e4f5d5b3`
 
 - :ref:`exhale_function_namespacemarian_1a36edcd6a6e0f51a5df99df5c5cee348c`
 
 - :ref:`exhale_function_namespacemarian_1ab207434bda771d41a22ad42aecd6d832`
 
-- :ref:`exhale_function_namespacemarian_1a386dd09855c15e3164606a77068448a7`
+- :ref:`exhale_function_namespacemarian_1a9dcde38124b2b5323d3a8f1164aa90f5`
 
-- :ref:`exhale_function_namespacemarian_1af778bcf1d71b7d165eef7c855681c49c`
-
-- :ref:`exhale_function_namespacemarian_1a71342682bc1986b67b5e9c9784d34e43`
+- :ref:`exhale_function_namespacemarian_1a0eab02aba205f907b01178913b1d357a`
 
 - :ref:`exhale_function_namespacemarian_1a5c0b04d4bc9ce43fa6c0fe9a58bf3019`
 
 - :ref:`exhale_function_namespacemarian_1aab7b90290ced90fb0684ef1d0bdb28a7`
 
-- :ref:`exhale_function_namespacemarian_1ace855cd10b8dd9d3cdb4786453f167d1`
+- :ref:`exhale_function_namespacemarian_1a386dd09855c15e3164606a77068448a7`
 
-- :ref:`exhale_function_namespacemarian_1a1254954d7c13dcb39701342de2b129e3`
+- :ref:`exhale_function_namespacemarian_1af778bcf1d71b7d165eef7c855681c49c`
+
+- :ref:`exhale_function_namespacemarian_1a93788120a799454d41a88dcff920f01a`
 
 - :ref:`exhale_function_namespacemarian_1ab5e6f7a9119c4bb37aa45d1e3dcb3e13`
 
-- :ref:`exhale_function_namespacemarian_1abacf18d662853012a7ea06debef2243e`
+- :ref:`exhale_function_namespacemarian_1a772eb9f360c1fcc5665d2707f7a29be8`
+
+- :ref:`exhale_function_namespacemarian_1ace855cd10b8dd9d3cdb4786453f167d1`
 
 - :ref:`exhale_function_namespacemarian_1a99a97ec86003336577c1b90560f18518`
 
-- :ref:`exhale_function_namespacemarian_1ac56efcc320a9506710575380c3b8a39d`
+- :ref:`exhale_function_namespacemarian_1abacf18d662853012a7ea06debef2243e`
+
+- :ref:`exhale_function_namespacemarian_1ae9b145c9b19f0467725fda54a6f361f0`
+
+- :ref:`exhale_function_namespacemarian_1a7f601d619b186848423c2cbccba5674d`
 
 - :ref:`exhale_function_namespacemarian_1ae51a0acaa5fcd7d183cbb2c461e2662c`
 
@@ -753,11 +791,11 @@ Functions
 
 - :ref:`exhale_function_namespacemarian_1a1861d3e3f78e0a444805424d47ae17a7`
 
-- :ref:`exhale_function_group__graph__ops__cmp_1ga9840c89d81aaa0ba7ab80745808587c1`
-
 - :ref:`exhale_function_group__graph__ops__cmp_1gac41e52582bd5c32c66c57fffd6fbaf91`
 
 - :ref:`exhale_function_group__graph__ops__cmp_1ga107bc63e0bfe3d4823b8b4d0ba91c413`
+
+- :ref:`exhale_function_group__graph__ops__cmp_1ga9840c89d81aaa0ba7ab80745808587c1`
 
 - :ref:`exhale_function_namespacemarian_1ada5728e755adc4f95b37592d9487e0fc`
 
@@ -777,15 +815,15 @@ Functions
 
 - :ref:`exhale_function_group__graph__ops_1ga9a1b506457b4700c2a42442b78a9df51`
 
-- :ref:`exhale_function_group__graph__ops__cmp_1gaeb11683e8b3dc2ffdc866d195f15536d`
-
 - :ref:`exhale_function_group__graph__ops__cmp_1ga6a3648b889481efcd454d0ab15ac6588`
 
 - :ref:`exhale_function_group__graph__ops__cmp_1gaba117744912cea9c77b87cf93062ea47`
 
-- :ref:`exhale_function_group__graph__ops__activation_1ga361caa8e8fc620452ad9d57b5fef19ad`
+- :ref:`exhale_function_group__graph__ops__cmp_1gaeb11683e8b3dc2ffdc866d195f15536d`
 
 - :ref:`exhale_function_group__graph__ops__activation_1gad688784b99a7ad88cb808614dcd46760`
+
+- :ref:`exhale_function_group__graph__ops__activation_1ga361caa8e8fc620452ad9d57b5fef19ad`
 
 - :ref:`exhale_function_group__graph__ops_1ga99579ba3d95d7b69120397a340becdd0`
 
@@ -815,11 +853,11 @@ Functions
 
 - :ref:`exhale_function_namespacemarian_1a8a6e3bc1db58ee1611d40446e558a974`
 
-- :ref:`exhale_function_group__graph__ops__cmp_1ga20e2d8a39dc3d87e2a98675678a89c06`
-
 - :ref:`exhale_function_group__graph__ops__cmp_1gab359dcd0901c9e29d93a8548b29d09d1`
 
 - :ref:`exhale_function_group__graph__ops__cmp_1gaa94225519d7ed355e847bfb6ce626b48`
+
+- :ref:`exhale_function_group__graph__ops__cmp_1ga20e2d8a39dc3d87e2a98675678a89c06`
 
 - :ref:`exhale_function_namespacemarian_1a07808253f1fc16d6723086a449ca5c13`
 
@@ -867,13 +905,13 @@ Functions
 
 - :ref:`exhale_function_namespacemarian_1a9ebd3582991085e4b6b469eb69ccb04e`
 
-- :ref:`exhale_function_group__graph__ops_1gae577eebbc7937eda647d63bf2da33de3`
+- :ref:`exhale_function_group__graph__ops_1gae295f9d1a8d4cc8eb06f9c41fbf91e6f`
 
-- :ref:`exhale_function_group__graph__ops_1ga36c12f574de1693c10f24e3d7d27d642`
-
-- :ref:`exhale_function_group__graph__ops_1ga12f467ba3ef8263cd40c2bfc27e9effd`
+- :ref:`exhale_function_group__graph__ops_1gac960b3d76f410b65343b3a311ec49b7e`
 
 - :ref:`exhale_function_namespacemarian_1a147966ddee4bccb6058d136fe058de1f`
+
+- :ref:`exhale_function_group__graph__ops_1ga12f467ba3ef8263cd40c2bfc27e9effd`
 
 - :ref:`exhale_function_namespacemarian_1a4c583e97ede9ba5992db4f7cadf46019`
 
@@ -883,9 +921,9 @@ Functions
 
 - :ref:`exhale_function_group__graph__ops__cmp_1ga3cadec94f28c90208347409178bc544d`
 
-- :ref:`exhale_function_group__graph__ops__activation_1ga754a3cfd940a40b2e6880956090891d4`
-
 - :ref:`exhale_function_group__graph__ops__activation_1ga7f39b829252ccb999f3af21c42108f75`
+
+- :ref:`exhale_function_group__graph__ops__activation_1ga754a3cfd940a40b2e6880956090891d4`
 
 - :ref:`exhale_function_group__graph__ops__mathematical_1ga0f3132fbaaaf9a5f2c1cbf6e3ad8f5f5`
 
@@ -903,11 +941,11 @@ Functions
 
 - :ref:`exhale_function_namespacemarian_1a4c7793c2f97ee08430e7950690539460`
 
-- :ref:`exhale_function_group__graph__ops__cmp_1ga17cdd4cc7c3fb4c937a6c835e808a61b`
-
 - :ref:`exhale_function_group__graph__ops__cmp_1ga7d27e013c78deda690e0a2986f6af290`
 
 - :ref:`exhale_function_group__graph__ops__cmp_1ga180aa98b74e982c6d87e96f0d2773f07`
+
+- :ref:`exhale_function_group__graph__ops__cmp_1ga17cdd4cc7c3fb4c937a6c835e808a61b`
 
 - :ref:`exhale_function_namespacemarian_1acba2d819317c88f4c038c34ed1236864`
 
@@ -987,9 +1025,9 @@ Functions
 
 - :ref:`exhale_function_group__graph__ops__cmp_1gace72a57133457133e60beed9438db6eb`
 
-- :ref:`exhale_function_namespacemarian_1a8b5635e6b01553e78bfab781201e5d12`
-
 - :ref:`exhale_function_namespacemarian_1af27077d144a9eaf77f526e4b538861ef`
+
+- :ref:`exhale_function_namespacemarian_1a8b5635e6b01553e78bfab781201e5d12`
 
 - :ref:`exhale_function_namespacemarian_1a10a53a1171bd8a78cef75053d994d565`
 
@@ -1003,13 +1041,11 @@ Functions
 
 - :ref:`exhale_function_namespacemarian_1aec6cd7a22dc8cb0aeb7a3771f8008c49`
 
-- :ref:`exhale_function_group__graph__ops__arithmetic_1ga6aaf9b9fe6f3717c4319e926330f2c22`
-
 - :ref:`exhale_function_group__graph__ops__arithmetic_1ga9733ed505673313bd944e7e04ce7b606`
 
 - :ref:`exhale_function_group__graph__ops__arithmetic_1ga80d27bc20c3653d6d7882f9087f10390`
 
-- :ref:`exhale_function_group__graph__ops__arithmetic_1ga4634bf0330cd2ba9cdfcdc868aff5f31`
+- :ref:`exhale_function_group__graph__ops__arithmetic_1ga6aaf9b9fe6f3717c4319e926330f2c22`
 
 - :ref:`exhale_function_group__graph__ops__arithmetic_1ga6987ca2c3590a14cdd96999e01593600`
 
@@ -1019,19 +1055,21 @@ Functions
 
 - :ref:`exhale_function_namespacemarian_1a8c91c9328239022e60350de7a01d7169`
 
-- :ref:`exhale_function_group__graph__ops__arithmetic_1ga95ebcb81d4b23c6c11463de49ba1b3cb`
+- :ref:`exhale_function_group__graph__ops__arithmetic_1ga4634bf0330cd2ba9cdfcdc868aff5f31`
+
+- :ref:`exhale_function_group__graph__ops__arithmetic_1ga30a0eed503c8c667b2c66f5ee8c9c6b5`
 
 - :ref:`exhale_function_group__graph__ops__arithmetic_1ga4980c825bcd4d4fd369cce025dc9e45e`
 
 - :ref:`exhale_function_group__graph__ops__arithmetic_1gae39f821d2f92647251cfb015fe07f4db`
 
-- :ref:`exhale_function_group__graph__ops__arithmetic_1ga30a0eed503c8c667b2c66f5ee8c9c6b5`
-
-- :ref:`exhale_function_group__graph__ops__arithmetic_1ga1b719c7a542512dbc5a589f92114be62`
+- :ref:`exhale_function_group__graph__ops__arithmetic_1ga95ebcb81d4b23c6c11463de49ba1b3cb`
 
 - :ref:`exhale_function_group__graph__ops__arithmetic_1ga4d70c319f9e3a8de38cb564fd92c9944`
 
 - :ref:`exhale_function_group__graph__ops__arithmetic_1ga06c2e6bdcd86d1d0466591b05cc7c0d0`
+
+- :ref:`exhale_function_group__graph__ops__arithmetic_1ga1b719c7a542512dbc5a589f92114be62`
 
 - :ref:`exhale_function_namespacemarian_1a370cbe3a84ff8744e247f12f36f792e9`
 
@@ -1045,9 +1083,9 @@ Functions
 
 - :ref:`exhale_function_group__graph__ops_1ga8477b2866969bccbd1076a47e6a98bb2`
 
-- :ref:`exhale_function_group__graph__ops__activation_1ga0085bbd51efb8d93e3667459b020b413`
-
 - :ref:`exhale_function_group__graph__ops__activation_1ga126285cb77c46ee2619b6c5ba69bda01`
+
+- :ref:`exhale_function_group__graph__ops__activation_1ga0085bbd51efb8d93e3667459b020b413`
 
 - :ref:`exhale_function_group__graph__ops__mathematical_1ga496c8540bee48ca9d3d914f23ea299c0`
 
@@ -1059,9 +1097,9 @@ Functions
 
 - :ref:`exhale_function_namespacemarian_1ac7c4237e2fa04fdb9a49565d3d27d18e`
 
-- :ref:`exhale_function_group__graph__ops__activation_1ga0594af020fe0304dbcee0c041ffc4606`
-
 - :ref:`exhale_function_group__graph__ops__activation_1ga6228f7e46aeed337e3886df6446b7840`
+
+- :ref:`exhale_function_group__graph__ops__activation_1ga0594af020fe0304dbcee0c041ffc4606`
 
 - :ref:`exhale_function_group__graph__ops__manipulation_1ga04ca8ba70948e14a3583134b7aa6d033`
 
@@ -1119,6 +1157,12 @@ Functions
 
 - :ref:`exhale_function_group__graph__ops__manipulation_1gacd984f43188d0ae23c2a6ef13ae5293f`
 
+- :ref:`exhale_function_namespacemarian_1a4601a23d26f491fe45209d7725b5bb9d`
+
+- :ref:`exhale_function_group__graph__ops_1gaf3347015ccc9fabd767864413fa4f07a`
+
+- :ref:`exhale_function_namespacemarian_1a05de954be31f69e0905ea667ead56e90`
+
 - :ref:`exhale_function_namespacemarian_1adcd1ef3f450865be59b25b644209f2cd`
 
 - :ref:`exhale_function_group__graph__ops_1gaf1536ded3ee9ec65fafa013d7e554872`
@@ -1129,9 +1173,11 @@ Functions
 
 - :ref:`exhale_function_group__graph__ops_1gade2d4e4763369c7d4f11955c8c9b5548`
 
-- :ref:`exhale_function_namespacemarian_1a4df64a8111938f1a6a3d2cdd276709a5`
+- :ref:`exhale_function_namespacemarian_1a808e7fd8906571d2c2a690db44e4079c`
 
 - :ref:`exhale_function_namespacemarian_1ad245b388788aca495683827d22594295`
+
+- :ref:`exhale_function_namespacemarian_1ac6c79cb7388a90dd445425e52d0a85b7`
 
 - :ref:`exhale_function_namespacemarian_1a75fa93ac45692d37d34215e32ceda045`
 
@@ -1139,9 +1185,9 @@ Functions
 
 - :ref:`exhale_function_group__graph__ops_1ga82f20c64c70cb5382c8b739c602f0b3b`
 
-- :ref:`exhale_function_group__graph__ops__activation_1gac5c1535b578f406693c44d1510a49015`
-
 - :ref:`exhale_function_group__graph__ops__activation_1ga04db6b8cee7d71439a7bc3dca0d0620e`
+
+- :ref:`exhale_function_group__graph__ops__activation_1gac5c1535b578f406693c44d1510a49015`
 
 - :ref:`exhale_function_group__graph__ops__mathematical_1ga2548565a400350763ae946f8e421c8a1`
 
@@ -1171,13 +1217,13 @@ Functions
 
 - :ref:`exhale_function_group__graph__ops__mathematical_1ga47008438e853a827054bdd6fda759de5`
 
-- :ref:`exhale_function_namespacemarian_1a2debfc49cfa75c61a614e02a397498ff`
+- :ref:`exhale_function_namespacemarian_1a73a4015c865ea4e1457e7f0dfe5effcb`
 
 - :ref:`exhale_function_group__graph__ops__manipulation_1gaefbe924ba733a7b40b94aa17391ddda7`
 
-- :ref:`exhale_function_group__graph__ops__activation_1ga00bc56ca69e09f0b52d7c63230bd8640`
-
 - :ref:`exhale_function_group__graph__ops__activation_1ga93a88db6ed117a3fa1d47c3882fb49a7`
+
+- :ref:`exhale_function_group__graph__ops__activation_1ga00bc56ca69e09f0b52d7c63230bd8640`
 
 - :ref:`exhale_function_group__graph__ops__mathematical_1ga4e5f557e69a749794ddf12dd5feadea5`
 
@@ -1288,6 +1334,8 @@ Typedefs
 
 - :ref:`exhale_typedef_namespacemarian_1a85a3bcef5f8e9503fb9939c7c886838c`
 
+- :ref:`exhale_typedef_group__graph__ops_1ga592b969c5b41e0eb7d816cb77d6c9e6b`
+
 - :ref:`exhale_typedef_group__graph__ops_1gab0580c44108d48c60e5ab3dd4872051a`
 
 - :ref:`exhale_typedef_namespacemarian_1aaae4a49bda201e73a4671babdb7df6b8`
@@ -1327,7 +1375,7 @@ Variables
 
 - :ref:`exhale_variable_namespacemarian_1a251d87403cbf20310189fb96ff91a730`
 
-- :ref:`exhale_variable_namespacemarian_1a5d171f74934ad64d3806c2a32bd90583`
+- :ref:`exhale_variable_namespacemarian_1a9a3c16085a56e085d35909085e28bdbc`
 
 - :ref:`exhale_variable_namespacemarian_1a39dfc59cc65a7008ea3ee8d18453b673`
 
@@ -1351,7 +1399,7 @@ Variables
 
 - :ref:`exhale_variable_namespacemarian_1a1c580d254cb8f49ba6bcd925ecb8b5b8`
 
-- :ref:`exhale_variable_namespacemarian_1a2a20e8cd1b64dc04c0d6e7e69d9b3e19`
+- :ref:`exhale_variable_namespacemarian_1a45d472083854adfd97f66d00c1a7391e`
 
 - :ref:`exhale_variable_namespacemarian_1a826fee3eea496d4ac9a64fb52be8c194`
 
@@ -1373,7 +1421,7 @@ Variables
 
 - :ref:`exhale_variable_namespacemarian_1a6b4179ae4ebaf6457808496bec74a363`
 
-- :ref:`exhale_variable_namespacemarian_1a950229fc9cb02659d2dfc471cb8d8e1f`
+- :ref:`exhale_variable_namespacemarian_1a9fbcb1d27819e99c38741f796a3ba4a9`
 
 - :ref:`exhale_variable_namespacemarian_1a05b6afaf3cd64a03dbf6dcb5348785ce`
 
@@ -1383,7 +1431,7 @@ Variables
 
 - :ref:`exhale_variable_namespacemarian_1a3be95e4f53b914e9ee86d1a4f508d55e`
 
-- :ref:`exhale_variable_namespacemarian_1adb84f61b0f5dd771d4ecb202b0937adc`
+- :ref:`exhale_variable_namespacemarian_1a4b4e7b8367dfd667bac586e9ef9e9757`
 
 - :ref:`exhale_variable_namespacemarian_1a00226872d2854e05db3f7f5263ea42bb`
 
@@ -1395,7 +1443,7 @@ Variables
 
 - :ref:`exhale_variable_namespacemarian_1a476ff481938939a3e9a817b816261bf5`
 
-- :ref:`exhale_variable_namespacemarian_1a87acca92b42b1257ce172d7b99adb386`
+- :ref:`exhale_variable_namespacemarian_1a7d44d3dbca074924e329b9623c1b720e`
 
 - :ref:`exhale_variable_group__graph__ops_1gaba35df17f465b2f32b13f890ca6301a3`
 

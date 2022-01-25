@@ -1,0 +1,313 @@
+<!DOCTYPE html>
+<html class="writer-html5" lang="en" >
+<head>
+  <meta charset="utf-8" /><meta name="generator" content="Docutils 0.17.1: http://docutils.sourceforge.net/" />
+
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Using marian with factors &mdash; Marian NMT v1.10.27 2022-01-25 documentation</title><link rel="stylesheet" href="_static/css/theme.css" type="text/css" />
+    <link rel="stylesheet" href="_static/pygments.css" type="text/css" />
+      <link rel="stylesheet" href="_static/css/custom.css" type="text/css" />
+      <link rel="stylesheet" href="_static/collapsible-lists/css/tree_view.css" type="text/css" />
+    <link rel="canonical" href="http://marian-nmt.github.io/docs/api/factors.html" />
+  <!--[if lt IE 9]>
+    <script src="_static/js/html5shiv.min.js"></script>
+  <![endif]-->
+  <script id="documentation_options" data-url_root="./" src="_static/documentation_options.js"></script>
+        <script src="_static/jquery.js"></script>
+        <script src="_static/underscore.js"></script>
+        <script src="_static/doctools.js"></script>
+        <script src="_static/language_data.js"></script>
+        <script src="_static/collapsible-lists/js/CollapsibleLists.compressed.js"></script>
+        <script src="_static/collapsible-lists/js/apply-collapsible-lists.js"></script>
+        <script async="async" src="https://cdnjs.cloudflare.com/ajax/libs/mathjax/2.7.5/latest.js?config=TeX-AMS-MML_HTMLorMML"></script>
+        <script type="text/x-mathjax-config">MathJax.Hub.Config({"tex2jax": {"inlineMath": [["\\(", "\\)"]], "displayMath": [["\\[", "\\]"]], "processRefs": false, "processEnvironments": false}})</script>
+    <script src="_static/js/theme.js"></script>
+    <link rel="index" title="Index" href="genindex.html" />
+    <link rel="search" title="Search" href="search.html" /> 
+</head>
+
+<body class="wy-body-for-nav"> 
+  <div class="wy-grid-for-nav">
+    <nav data-toggle="wy-nav-shift" class="wy-nav-side">
+      <div class="wy-side-scroll">
+        <div class="wy-side-nav-search" >
+            <a href="index.html" class="icon icon-home"> Marian NMT
+          </a>
+              <div class="version">
+                v1.10.27
+              </div>
+<div role="search">
+  <form id="rtd-search-form" class="wy-form" action="search.html" method="get">
+    <input type="text" name="q" placeholder="Search docs" />
+    <input type="hidden" name="check_keywords" value="yes" />
+    <input type="hidden" name="area" value="default" />
+  </form>
+</div>
+        </div><div class="wy-menu wy-menu-vertical" data-spy="affix" role="navigation" aria-label="Navigation menu">
+              <p><span class="caption-text">Contents:</span></p>
+<ul>
+<li class="toctree-l1"><a class="reference internal" href="graph.html">Expression graphs</a></li>
+<li class="toctree-l1"><a class="reference internal" href="operators.html">Operations in the Expression Graph</a></li>
+<li class="toctree-l1"><a class="reference internal" href="api/library_index.html">Library API</a></li>
+<li class="toctree-l1"><a class="reference internal" href="contributing.html">How to contribute to Marian</a></li>
+<li class="toctree-l1"><a class="reference internal" href="doc_guide.html">Writing documentation</a></li>
+</ul>
+
+        </div>
+      </div>
+    </nav>
+
+    <section data-toggle="wy-nav-shift" class="wy-nav-content-wrap"><nav class="wy-nav-top" aria-label="Mobile navigation menu" >
+          <i data-toggle="wy-nav-top" class="fa fa-bars"></i>
+          <a href="index.html">Marian NMT</a>
+      </nav>
+
+      <div class="wy-nav-content">
+        <div class="rst-content">
+          <div role="navigation" aria-label="Page navigation">
+  <ul class="wy-breadcrumbs">
+      <li><a href="index.html" class="icon icon-home"></a> &raquo;</li>
+      <li>Using marian with factors</li>
+      <li class="wy-breadcrumbs-aside">
+            <a href="_sources/factors.md.txt" rel="nofollow"> View page source</a>
+      </li>
+  </ul>
+  <hr/>
+</div>
+          <div role="main" class="document" itemscope="itemscope" itemtype="http://schema.org/Article">
+           <div itemprop="articleBody">
+             
+  <section id="using-marian-with-factors">
+<h1>Using marian with factors<a class="headerlink" href="#using-marian-with-factors" title="Permalink to this headline">¶</a></h1>
+<p>Following this README should allow the user to train a model with source and/or target side factors. To train with factors, the data must be formatted in a certain way. A special vocabulary file format is also required, and its extension should be <code class="docutils literal notranslate"><span class="pre">.fsv</span></code> as providing a source and/or target vocabulary file with this extension is what triggers the usage of source and/or target factors. See details below.</p>
+<section id="requirements">
+<h2>Requirements:<a class="headerlink" href="#requirements" title="Permalink to this headline">¶</a></h2>
+<p>In order to use factors in Marian, you should use at least Marian 1.9.0 unless you want to use a factors functionality that requires setting one of the following command line options to their non default values: <code class="docutils literal notranslate"><span class="pre">--factors-combine</span></code>, <code class="docutils literal notranslate"><span class="pre">-—factors-dim-emb</span></code> and <code class="docutils literal notranslate"><span class="pre">--lemma-dependency</span></code> as they were only introduced after Marian 1.10.20+.</p>
+</section>
+<section id="define-factors">
+<h2>Define factors<a class="headerlink" href="#define-factors" title="Permalink to this headline">¶</a></h2>
+<p>Factors should be organized in “groups,” where each group represents a different feature. For example, there could be a group denoting capitalization and another denoting subword divisions.</p>
+<p>Factors within a single group should start with the same string.</p>
+<p>For example, for a capitalization factor group, the individual factors could be:</p>
+<ul class="simple">
+<li><p><code class="docutils literal notranslate"><span class="pre">c0</span></code>: all lowercase</p></li>
+<li><p><code class="docutils literal notranslate"><span class="pre">c1</span></code>: first character capitalized, rest lowercase</p></li>
+<li><p><code class="docutils literal notranslate"><span class="pre">c2</span></code>: all uppercase</p></li>
+</ul>
+<p>If there were a second factor group for subword divisions, the individual factors could be:</p>
+<ul class="simple">
+<li><p><code class="docutils literal notranslate"><span class="pre">s0</span></code>: end of word, whitespace should follow</p></li>
+<li><p><code class="docutils literal notranslate"><span class="pre">s1</span></code>: join token with next subword</p></li>
+</ul>
+<p>There is no limit on the number of factor groups barring some practical limitations having to do with how the vocabulary is stored by <code class="docutils literal notranslate"><span class="pre">marian</span></code>. If the limit is exceeded <code class="docutils literal notranslate"><span class="pre">marian</span></code> will throw an error.</p>
+<p>Factor group zero is always the actual words in the text, referred to as <em>lemmas</em>.</p>
+</section>
+<section id="data-preparation">
+<h2>Data preparation<a class="headerlink" href="#data-preparation" title="Permalink to this headline">¶</a></h2>
+<p>Factors are appended to the <em>lemmas</em> with a pipe <code class="docutils literal notranslate"><span class="pre">|</span></code>. The pipe also separates factors of multiple groups.</p>
+<p>Example sentence:</p>
+<div class="highlight-cpp notranslate"><div class="highlight"><pre><span></span><span class="n">Trump</span><span class="w"> </span><span class="n">tested</span><span class="w"> </span><span class="n">positive</span><span class="w"> </span><span class="k">for</span><span class="w"> </span><span class="n">COVID</span><span class="mf">-19.</span><span class="w"></span>
+</pre></div>
+</div>
+<p>Preprocessed sentence:</p>
+<div class="highlight-cpp notranslate"><div class="highlight"><pre><span></span>trump test@@ ed positive for c@@ o@@ v@@ i@@ d - 19 .
+</pre></div>
+</div>
+<p>Apply factors:</p>
+<div class="highlight-cpp notranslate"><div class="highlight"><pre><span></span><span class="n">trump</span><span class="o">|</span><span class="n">c1</span><span class="o">|</span><span class="n">s0</span><span class="w"> </span><span class="n">test</span><span class="o">|</span><span class="n">c0</span><span class="o">|</span><span class="n">s1</span><span class="w"> </span><span class="n">ed</span><span class="o">|</span><span class="n">c0</span><span class="o">|</span><span class="n">s0</span><span class="w"> </span><span class="n">positive</span><span class="o">|</span><span class="n">c0</span><span class="o">|</span><span class="n">s0</span><span class="w"> </span><span class="k">for</span><span class="o">|</span><span class="n">c0</span><span class="o">|</span><span class="n">s0</span><span class="w"> </span><span class="n">c</span><span class="o">|</span><span class="n">c2</span><span class="o">|</span><span class="n">s1</span><span class="w"> </span><span class="n">o</span><span class="o">|</span><span class="n">c2</span><span class="o">|</span><span class="n">s1</span><span class="w"> </span><span class="n">v</span><span class="o">|</span><span class="n">c2</span><span class="o">|</span><span class="n">s1</span><span class="w"> </span><span class="n">i</span><span class="o">|</span><span class="n">c2</span><span class="o">|</span><span class="n">s1</span><span class="w"> </span><span class="n">d</span><span class="o">|</span><span class="n">c2</span><span class="o">|</span><span class="n">s0</span><span class="w"> </span><span class="o">-|</span><span class="n">c0</span><span class="o">|</span><span class="n">s0</span><span class="w"> </span><span class="mi">19</span><span class="o">|</span><span class="n">c0</span><span class="o">|</span><span class="n">s0</span><span class="w"> </span><span class="p">.</span><span class="o">|</span><span class="n">c0</span><span class="o">|</span><span class="n">s0</span><span class="w"></span>
+</pre></div>
+</div>
+</section>
+<section id="create-the-factored-vocabulary">
+<h2>Create the factored vocabulary<a class="headerlink" href="#create-the-factored-vocabulary" title="Permalink to this headline">¶</a></h2>
+<p>Factored vocabularies must have the extension <code class="docutils literal notranslate"><span class="pre">.fsv</span></code>. How to structure the vocabulary file is described below. If using factors only on the source or target side, the vocabulary of the other side can be a normal <code class="docutils literal notranslate"><span class="pre">json</span></code>, <code class="docutils literal notranslate"><span class="pre">yaml</span></code>, etc.</p>
+<p>The <code class="docutils literal notranslate"><span class="pre">.fsv</span></code> vocabulary must have two sections:</p>
+<ol>
+<li><p><strong>Factors</strong></p>
+<p>The factor groups are defined with an underscore prepended. The colon indicates which factor group each factor inherits from. <code class="docutils literal notranslate"><span class="pre">_has_c</span></code> is used in the definition of the words in the vocabulary (see #2 below) to indicate that that word has that factor group. The <code class="docutils literal notranslate"><span class="pre">_lemma</span></code> factor is used for the words/tokens themselves; this must be present.</p>
+<div class="highlight-cpp notranslate"><div class="highlight"><pre><span></span><span class="n">_lemma</span><span class="w"></span>
+
+<span class="n">_c</span><span class="w"></span>
+<span class="nl">c0</span><span class="w"> </span><span class="p">:</span><span class="w"> </span><span class="n">_c</span><span class="w"></span>
+<span class="nl">c1</span><span class="w"> </span><span class="p">:</span><span class="w"> </span><span class="n">_c</span><span class="w"></span>
+<span class="nl">c2</span><span class="w"> </span><span class="p">:</span><span class="w"> </span><span class="n">_c</span><span class="w"></span>
+<span class="n">_has_c</span><span class="w"></span>
+
+<span class="n">_s</span><span class="w"></span>
+<span class="nl">s0</span><span class="w"> </span><span class="p">:</span><span class="w"> </span><span class="n">_s</span><span class="w"></span>
+<span class="nl">s1</span><span class="w"> </span><span class="p">:</span><span class="w"> </span><span class="n">_s</span><span class="w"></span>
+<span class="n">_has_s</span><span class="w"></span>
+</pre></div>
+</div>
+</li>
+<li><p><strong>Lemmas</strong></p>
+<p>These are the vocabulary entries themselves. They have the format of <code class="docutils literal notranslate"><span class="pre">LEMMA</span> <span class="pre">:</span> <span class="pre">_lemma</span> <span class="pre">[_has_c]</span> <span class="pre">[_has_s]</span></code>. The <code class="docutils literal notranslate"><span class="pre">_has_X</span></code> should only apply to lemmas that can have an <code class="docutils literal notranslate"><span class="pre">X</span></code> factor anywhere in the data (which will likely be all of the tokens except <code class="docutils literal notranslate"><span class="pre">&lt;/s&gt;</span></code> and <code class="docutils literal notranslate"><span class="pre">&lt;unk&gt;</span></code>).</p>
+<p>Examples:</p>
+<div class="highlight-cpp notranslate"><div class="highlight"><pre><span></span><span class="o">&lt;/</span><span class="n">s</span><span class="o">&gt;</span><span class="w"> </span><span class="o">:</span><span class="w"> </span><span class="n">_lemma</span><span class="w"></span>
+<span class="o">&lt;</span><span class="n">unk</span><span class="o">&gt;</span><span class="w"> </span><span class="o">:</span><span class="w"> </span><span class="n">_lemma</span><span class="w"></span>
+<span class="p">,</span><span class="w"> </span><span class="o">:</span><span class="w"> </span><span class="n">_lemma</span><span class="w"> </span><span class="n">_has_c</span><span class="w"> </span><span class="n">_has_s</span><span class="w"></span>
+<span class="p">.</span><span class="w"> </span><span class="o">:</span><span class="w"> </span><span class="n">_lemma</span><span class="w"> </span><span class="n">_has_c</span><span class="w"> </span><span class="n">_has_s</span><span class="w"></span>
+<span class="nl">the</span><span class="w"> </span><span class="p">:</span><span class="w"> </span><span class="n">_lemma</span><span class="w"> </span><span class="n">_has_c</span><span class="w"> </span><span class="n">_has_s</span><span class="w"></span>
+<span class="nl">for</span><span class="w"> </span><span class="p">:</span><span class="w"> </span><span class="n">_lemma</span><span class="w"> </span><span class="n">_has_c</span><span class="w"> </span><span class="n">_has_s</span><span class="w"></span>
+</pre></div>
+</div>
+</li>
+</ol>
+<section id="other-requirements">
+<h3>Other Requirements<a class="headerlink" href="#other-requirements" title="Permalink to this headline">¶</a></h3>
+<p>Certain characters are used by the <code class="docutils literal notranslate"><span class="pre">.fsv</span></code> vocabulary that will have to be escaped/replaced in the data: <code class="docutils literal notranslate"><span class="pre">#:_\|</span></code></p>
+<p>The tokens in the factor vocabularies (<code class="docutils literal notranslate"><span class="pre">c0</span></code>, <code class="docutils literal notranslate"><span class="pre">c1</span></code>, <code class="docutils literal notranslate"><span class="pre">s0</span></code>, etc.) cannot be present in any of the <em>lemmas</em>.</p>
+</section>
+<section id="full-fsv-file">
+<h3>Full <code class="docutils literal notranslate"><span class="pre">.fsv</span></code> file<a class="headerlink" href="#full-fsv-file" title="Permalink to this headline">¶</a></h3>
+<p>Putting everything together, the final <code class="docutils literal notranslate"><span class="pre">.fsv</span></code> file should look like this. It can have comments (lines started by <code class="docutils literal notranslate"><span class="pre">#</span></code>).</p>
+<div class="highlight-cpp notranslate"><div class="highlight"><pre><span></span><span class="cp"># factors</span>
+
+<span class="n">_lemma</span><span class="w"></span>
+
+<span class="n">_c</span><span class="w"></span>
+<span class="nl">c0</span><span class="w"> </span><span class="p">:</span><span class="w"> </span><span class="n">_c</span><span class="w"></span>
+<span class="nl">c1</span><span class="w"> </span><span class="p">:</span><span class="w"> </span><span class="n">_c</span><span class="w"></span>
+<span class="nl">c2</span><span class="w"> </span><span class="p">:</span><span class="w"> </span><span class="n">_c</span><span class="w"></span>
+<span class="n">_has_c</span><span class="w"></span>
+
+<span class="n">_s</span><span class="w"></span>
+<span class="nl">s0</span><span class="w"> </span><span class="p">:</span><span class="w"> </span><span class="n">_s</span><span class="w"></span>
+<span class="nl">s1</span><span class="w"> </span><span class="p">:</span><span class="w"> </span><span class="n">_s</span><span class="w"></span>
+<span class="n">_has_s</span><span class="w"></span>
+
+<span class="cp"># lemmas</span>
+
+<span class="o">&lt;/</span><span class="n">s</span><span class="o">&gt;</span><span class="w"> </span><span class="o">:</span><span class="w"> </span><span class="n">_lemma</span><span class="w"></span>
+<span class="o">&lt;</span><span class="n">unk</span><span class="o">&gt;</span><span class="w"> </span><span class="o">:</span><span class="w"> </span><span class="n">_lemma</span><span class="w"></span>
+<span class="p">,</span><span class="w"> </span><span class="o">:</span><span class="w"> </span><span class="n">_lemma</span><span class="w"> </span><span class="n">_has_c</span><span class="w"> </span><span class="n">_has_s</span><span class="w"></span>
+<span class="p">.</span><span class="w"> </span><span class="o">:</span><span class="w"> </span><span class="n">_lemma</span><span class="w"> </span><span class="n">_has_c</span><span class="w"> </span><span class="n">_has_s</span><span class="w"></span>
+<span class="nl">the</span><span class="w"> </span><span class="p">:</span><span class="w"> </span><span class="n">_lemma</span><span class="w"> </span><span class="n">_has_c</span><span class="w"> </span><span class="n">_has_s</span><span class="w"></span>
+<span class="nl">for</span><span class="w"> </span><span class="p">:</span><span class="w"> </span><span class="n">_lemma</span><span class="w"> </span><span class="n">_has_c</span><span class="w"> </span><span class="n">_has_s</span><span class="w"></span>
+</pre></div>
+</div>
+</section>
+</section>
+<section id="training-options">
+<h2>Training options<a class="headerlink" href="#training-options" title="Permalink to this headline">¶</a></h2>
+<p>There are two choices for how factor embeddings are combined with <em>lemma</em> embeddings: summation and concatenation.</p>
+<div class="highlight-cpp notranslate"><div class="highlight"><pre><span></span><span class="o">--</span><span class="n">factors</span><span class="o">-</span><span class="n">combine</span><span class="w"> </span><span class="n">TEXT</span><span class="o">=</span><span class="n">sum</span><span class="w">      </span><span class="n">How</span><span class="w"> </span><span class="n">to</span><span class="w"> </span><span class="n">combine</span><span class="w"> </span><span class="n">the</span><span class="w"> </span><span class="n">factors</span><span class="w"> </span><span class="n">and</span><span class="w"> </span><span class="n">lemma</span><span class="w"> </span><span class="n">embeddings</span><span class="p">.</span><span class="w"></span>
+<span class="w">                                </span><span class="n">Options</span><span class="w"> </span><span class="n">available</span><span class="o">:</span><span class="w"> </span><span class="n">sum</span><span class="p">,</span><span class="w"> </span><span class="n">concat</span><span class="w"></span>
+</pre></div>
+</div>
+<p>The dimension of the factor embeddings must be specified if using combine option <code class="docutils literal notranslate"><span class="pre">concat</span></code>. If using <code class="docutils literal notranslate"><span class="pre">sum</span></code>, the factor embedding dimension matches that of the lemmas.</p>
+<div class="highlight-cpp notranslate"><div class="highlight"><pre><span></span><span class="o">--</span><span class="n">factors</span><span class="o">-</span><span class="n">dim</span><span class="o">-</span><span class="n">emb</span><span class="w"> </span><span class="n">INT</span><span class="w">           </span><span class="n">Embedding</span><span class="w"> </span><span class="n">dimension</span><span class="w"> </span><span class="n">of</span><span class="w"> </span><span class="n">the</span><span class="w"> </span><span class="n">factors</span><span class="p">.</span><span class="w"> </span><span class="n">Only</span><span class="w"> </span><span class="n">used</span><span class="w"> </span><span class="k">if</span><span class="w"> </span><span class="n">concat</span><span class="w"> </span><span class="n">is</span><span class="w"> </span><span class="n">selected</span><span class="w"> </span><span class="n">as</span><span class="w"> </span><span class="n">factors</span><span class="w"> </span><span class="n">combining</span><span class="w"> </span><span class="n">form</span><span class="w"></span>
+</pre></div>
+</div>
+<p>Note: At the moment <code class="docutils literal notranslate"><span class="pre">concat</span></code> is only implemented for usage in the source side.</p>
+<section id="prediction">
+<h3>Prediction<a class="headerlink" href="#prediction" title="Permalink to this headline">¶</a></h3>
+<p>If using factors on the target side, there are multiple options for how factor predictions are generated related to the form of conditioning / dependencies of factors and lemmas. If no option is set with <code class="docutils literal notranslate"><span class="pre">--lemma-dependency</span></code>, the default behavior will be predicting the factors with no lemma dependency.</p>
+<div class="highlight-cpp notranslate"><div class="highlight"><pre><span></span><span class="o">--</span><span class="n">lemma</span><span class="o">-</span><span class="n">dependency</span><span class="w"> </span><span class="n">TEXT</span><span class="w">         </span><span class="n">Lemma</span><span class="w"> </span><span class="n">dependency</span><span class="w"> </span><span class="n">method</span><span class="w"> </span><span class="n">to</span><span class="w"> </span><span class="n">use</span><span class="w"> </span><span class="n">when</span><span class="w"> </span><span class="n">predicting</span><span class="w"> </span><span class="n">target</span><span class="w"> </span><span class="n">factors</span><span class="p">.</span><span class="w"></span>
+<span class="w">                                </span><span class="nl">Options</span><span class="p">:</span><span class="w"> </span><span class="n">soft</span><span class="o">-</span><span class="n">transformer</span><span class="o">-</span><span class="n">layer</span><span class="p">,</span><span class="w"> </span><span class="n">hard</span><span class="o">-</span><span class="n">transformer</span><span class="o">-</span><span class="n">layer</span><span class="p">,</span><span class="w"> </span><span class="n">lemma</span><span class="o">-</span><span class="n">dependent</span><span class="o">-</span><span class="n">bias</span><span class="p">,</span><span class="w"> </span><span class="n">re</span><span class="o">-</span><span class="n">embedding</span><span class="w"></span>
+
+<span class="o">--</span><span class="n">lemma</span><span class="o">-</span><span class="n">dim</span><span class="o">-</span><span class="n">emb</span><span class="w"> </span><span class="n">INT</span><span class="o">=</span><span class="mi">0</span><span class="w">           </span><span class="n">Re</span><span class="o">-</span><span class="n">embedding</span><span class="w"> </span><span class="n">dimension</span><span class="w"> </span><span class="n">of</span><span class="w"> </span><span class="n">lemma</span><span class="w"> </span><span class="n">in</span><span class="w"> </span><span class="n">factors</span><span class="w"></span>
+</pre></div>
+</div>
+<ul class="simple">
+<li><p><code class="docutils literal notranslate"><span class="pre">soft-transformer-layer</span></code>: Uses an additional transformer layer to predict the factors using the previously predicted lemma</p></li>
+<li><p><code class="docutils literal notranslate"><span class="pre">hard-transformer-layer</span></code>: Like <code class="docutils literal notranslate"><span class="pre">soft-transformer-layer</span></code> but with hard-max</p></li>
+<li><p><code class="docutils literal notranslate"><span class="pre">lemma-dependent-bias</span></code>: Adds a learned bias term based on the predicted lemma to the logits of the factors. There is no additional transformer layer introduced with this option</p></li>
+<li><p><code class="docutils literal notranslate"><span class="pre">re-embedding</span></code>: After predicting a lemma, re-embed the lemma and add this new vector before predicting the factors</p></li>
+<li><p><code class="docutils literal notranslate"><span class="pre">lemma-dim-emb</span></code>: Controls the dimension of the re-embedded lemma when using the option <code class="docutils literal notranslate"><span class="pre">re-embedding</span></code></p></li>
+</ul>
+</section>
+<section id="weight-tying">
+<h3>Weight tying<a class="headerlink" href="#weight-tying" title="Permalink to this headline">¶</a></h3>
+<p>If you use factors both on the source and target side, and the factors are the same for both sides you can tie the embeddings exactly as you do for non factored models.</p>
+<p>If factors are used only on one side (either source or target) with a joint vocabulary, there are two options for tying source and target embedding weights:</p>
+<ol>
+<li><p>Use combine option <code class="docutils literal notranslate"><span class="pre">concat</span></code> (If using factors only on the source side).</p></li>
+<li><p>Use combine option <code class="docutils literal notranslate"><span class="pre">sum</span></code>, and create “dummy” factors on the non-factorized side. This entails creating a factored vocabulary where the same number of factors are present as are on the side with meaningful factors. In the previous example, if we have the capitalization and subword factors on the source side, the target side would have five different dummy factors (they can all be in the same group). In the <em>lemma</em> section of the <code class="docutils literal notranslate"><span class="pre">.fsv</span></code> file we would just not put <code class="docutils literal notranslate"><span class="pre">_has_X</span></code> for any lemma.</p>
+<div class="highlight-cpp notranslate"><div class="highlight"><pre><span></span><span class="cp"># factors</span>
+
+<span class="n">_lemma</span><span class="w"></span>
+
+<span class="n">_d</span><span class="w"></span>
+<span class="nl">d0</span><span class="w"> </span><span class="p">:</span><span class="w"> </span><span class="n">_d</span><span class="w"></span>
+<span class="nl">d1</span><span class="w"> </span><span class="p">:</span><span class="w"> </span><span class="n">_d</span><span class="w"></span>
+<span class="nl">d2</span><span class="w"> </span><span class="p">:</span><span class="w"> </span><span class="n">_d</span><span class="w"></span>
+<span class="nl">d3</span><span class="w"> </span><span class="p">:</span><span class="w"> </span><span class="n">_d</span><span class="w"></span>
+<span class="nl">d4</span><span class="w"> </span><span class="p">:</span><span class="w"> </span><span class="n">_d</span><span class="w"></span>
+<span class="n">_has_d</span><span class="w"></span>
+
+<span class="cp"># lemmas</span>
+
+<span class="o">&lt;/</span><span class="n">s</span><span class="o">&gt;</span><span class="w"> </span><span class="o">:</span><span class="w"> </span><span class="n">_lemma</span><span class="w"></span>
+<span class="o">&lt;</span><span class="n">unk</span><span class="o">&gt;</span><span class="w"> </span><span class="o">:</span><span class="w"> </span><span class="n">_lemma</span><span class="w"></span>
+<span class="p">,</span><span class="w"> </span><span class="o">:</span><span class="w"> </span><span class="n">_lemma</span><span class="w"></span>
+<span class="p">.</span><span class="w"> </span><span class="o">:</span><span class="w"> </span><span class="n">_lemma</span><span class="w"></span>
+<span class="nl">le</span><span class="w"> </span><span class="p">:</span><span class="w"> </span><span class="n">_lemma</span><span class="w"></span>
+<span class="nl">pour</span><span class="w"> </span><span class="p">:</span><span class="w"> </span><span class="n">_lemma</span><span class="w"></span>
+</pre></div>
+</div>
+</li>
+</ol>
+</section>
+</section>
+<section id="examples">
+<h2>Examples<a class="headerlink" href="#examples" title="Permalink to this headline">¶</a></h2>
+<p>Some examples of possible commands to train factored models in marian:</p>
+<ul class="simple">
+<li><p>Using factors on both source and target. Using <code class="docutils literal notranslate"><span class="pre">sum</span></code> to combine lemma and factor embeddings. No tied embeddings and no lemma dependency when predicting the factors:</p></li>
+</ul>
+<div class="highlight-cpp notranslate"><div class="highlight"><pre><span></span><span class="n">path_to</span><span class="o">/</span><span class="n">build</span><span class="o">/</span><span class="n">marian</span><span class="w"> </span><span class="o">-</span><span class="n">t</span><span class="w"> </span><span class="n">corpus</span><span class="p">.</span><span class="n">fact</span><span class="p">.{</span><span class="n">src</span><span class="p">,</span><span class="n">trg</span><span class="p">}</span><span class="w"> </span>\
+<span class="w">                     </span><span class="o">-</span><span class="n">v</span><span class="w"> </span><span class="n">vocab</span><span class="p">.{</span><span class="n">src</span><span class="p">,</span><span class="n">trg</span><span class="p">}.</span><span class="n">fsv</span><span class="w"></span>
+</pre></div>
+</div>
+<ul class="simple">
+<li><p>Using factors only on the source side. Using <code class="docutils literal notranslate"><span class="pre">concat</span></code> to combine lemma and factor embeddings. Source, target and output embeddings matrices tied:</p></li>
+</ul>
+<div class="highlight-cpp notranslate"><div class="highlight"><pre><span></span><span class="n">path_to</span><span class="o">/</span><span class="n">build</span><span class="o">/</span><span class="n">marian</span><span class="w"> </span><span class="o">-</span><span class="n">t</span><span class="w"> </span><span class="n">corpus</span><span class="p">.</span><span class="n">fact</span><span class="p">.</span><span class="n">src</span><span class="w"> </span><span class="n">corpus</span><span class="p">.</span><span class="n">trg</span><span class="w"> </span>\
+<span class="w">                     </span><span class="o">-</span><span class="n">v</span><span class="w"> </span><span class="n">vocab</span><span class="p">.</span><span class="n">src</span><span class="p">.</span><span class="n">fsv</span><span class="w"> </span><span class="n">vocab</span><span class="p">.</span><span class="n">trg</span><span class="p">.</span><span class="n">yml</span><span class="w"> </span>\
+<span class="w">                     </span><span class="o">--</span><span class="n">factors</span><span class="o">-</span><span class="n">combine</span><span class="w"> </span><span class="n">concat</span><span class="w"> </span>\
+<span class="w">                     </span><span class="o">--</span><span class="n">factors</span><span class="o">-</span><span class="n">dim</span><span class="o">-</span><span class="n">emb</span><span class="w"> </span><span class="mi">8</span><span class="w"> </span>\
+<span class="w">                     </span><span class="o">--</span><span class="n">tied</span><span class="o">-</span><span class="n">embeddings</span><span class="o">-</span><span class="n">all</span><span class="w"></span>
+</pre></div>
+</div>
+<ul class="simple">
+<li><p>Using factors only on the target side. Using <code class="docutils literal notranslate"><span class="pre">sum</span></code> to combine lemma and factor embeddings. Target and output embedding matrices tied. Predicting factors with <code class="docutils literal notranslate"><span class="pre">soft-transformer-layer</span></code> lemma dependency:</p></li>
+</ul>
+<div class="highlight-cpp notranslate"><div class="highlight"><pre><span></span><span class="n">path_to</span><span class="o">/</span><span class="n">build</span><span class="o">/</span><span class="n">marian</span><span class="w"> </span><span class="o">-</span><span class="n">t</span><span class="w"> </span><span class="n">corpus</span><span class="p">.</span><span class="n">src</span><span class="w"> </span><span class="n">corpus</span><span class="p">.</span><span class="n">fact</span><span class="p">.</span><span class="n">trg</span><span class="w"> </span>\
+<span class="w">                     </span><span class="o">-</span><span class="n">v</span><span class="w"> </span><span class="n">vocab</span><span class="p">.</span><span class="n">src</span><span class="p">.</span><span class="n">yml</span><span class="w"> </span><span class="n">vocab</span><span class="p">.</span><span class="n">fsv</span><span class="p">.</span><span class="n">trg</span><span class="w"> </span>\
+<span class="w">                     </span><span class="o">--</span><span class="n">tied</span><span class="o">-</span><span class="n">embeddings</span><span class="w"> </span>\
+<span class="w">                     </span><span class="o">--</span><span class="n">lemma</span><span class="o">-</span><span class="n">dependency</span><span class="w"> </span><span class="n">soft</span><span class="o">-</span><span class="n">transformer</span><span class="o">-</span><span class="n">layer</span><span class="w"></span>
+</pre></div>
+</div>
+</section>
+</section>
+
+
+           </div>
+          </div>
+          <footer>
+
+  <hr/>
+
+  <div role="contentinfo">
+    <p>&#169; Copyright 2021, Marian NMT Team.</p>
+  </div>
+
+  Built with <a href="https://www.sphinx-doc.org/">Sphinx</a> using a
+    <a href="https://github.com/readthedocs/sphinx_rtd_theme">theme</a>
+    provided by <a href="https://readthedocs.org">Read the Docs</a>.
+   
+
+</footer>
+        </div>
+      </div>
+    </section>
+  </div>
+  <script>
+      jQuery(function () {
+          SphinxRtdTheme.Navigation.enable(true);
+      });
+  </script> 
+
+</body>
+</html>

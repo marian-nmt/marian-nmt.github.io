@@ -74,6 +74,9 @@ Program Listing for File encoder_decoder.cpp
      modelFeatures_.insert("ulr-dim-emb");
      modelFeatures_.insert("lemma-dim-emb");
      modelFeatures_.insert("output-omit-bias");
+     modelFeatures_.insert("lemma-dependency");
+     modelFeatures_.insert("factors-combine");
+     modelFeatures_.insert("factors-dim-emb");
    }
    
    std::vector<Ptr<EncoderBase>>& EncoderDecoder::getEncoders() {
@@ -151,6 +154,12 @@ Program Listing for File encoder_decoder.cpp
      YAML::Emitter out;
      cli::OutputYaml(yaml, out);
      return std::string(out.c_str());
+   }
+   
+   void EncoderDecoder::load(Ptr<ExpressionGraph> graph,
+                             const std::vector<io::Item>& items,
+                             bool markedReloaded) {
+     graph->load(items, markedReloaded && !opt<bool>("ignore-model-config", false));
    }
    
    void EncoderDecoder::load(Ptr<ExpressionGraph> graph,

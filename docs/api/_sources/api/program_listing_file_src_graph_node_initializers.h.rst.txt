@@ -35,6 +35,8 @@ Program Listing for File node_initializers.h
      virtual ~NodeInitializer() {}
    };
    
+   Ptr<NodeInitializer> dummy();
+   
    Ptr<NodeInitializer> fromLambda(std::function<void(Tensor)>&& func);
    
    Ptr<NodeInitializer> fromLambda(std::function<void(Tensor)>&& func, Type intermediateType);
@@ -79,8 +81,6 @@ Program Listing for File node_initializers.h
                                      bool normalize = false);
    
    Ptr<NodeInitializer> sinusoidalPositionEmbeddings(int start);
-   
-   Ptr<NodeInitializer> randomRotation(size_t seed = Config::seed);
    
    template <typename T>
    Ptr<NodeInitializer> range(T begin, T end, T step = (T)1);

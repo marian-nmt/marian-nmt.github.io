@@ -1,78 +1,41 @@
-
-
 <!DOCTYPE html>
 <html class="writer-html5" lang="en" >
 <head>
-  <meta charset="utf-8" />
-  
+  <meta charset="utf-8" /><meta name="generator" content="Docutils 0.17.1: http://docutils.sourceforge.net/" />
+
   <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-  
-  <title>Program Listing for File graph_group_sync.cpp &mdash; Marian NMT v1.10.3 2021-03-22 documentation</title>
-  
-
-  
-  <link rel="stylesheet" href="../_static/css/theme.css" type="text/css" />
-  <link rel="stylesheet" href="../_static/pygments.css" type="text/css" />
-  <link rel="stylesheet" href="../_static/css/custom.css" type="text/css" />
-  <link rel="stylesheet" href="../_static/collapsible-lists/css/tree_view.css" type="text/css" />
-
-  
-  
-
-  
-  
-
-  
+  <title>Program Listing for File graph_group_sync.cpp &mdash; Marian NMT v1.10.27 2022-01-25 documentation</title><link rel="stylesheet" href="../_static/css/theme.css" type="text/css" />
+    <link rel="stylesheet" href="../_static/pygments.css" type="text/css" />
+      <link rel="stylesheet" href="../_static/css/custom.css" type="text/css" />
+      <link rel="stylesheet" href="../_static/collapsible-lists/css/tree_view.css" type="text/css" />
     <link rel="canonical" href="http://marian-nmt.github.io/docs/api/api/program_listing_file_src_training_graph_group_sync.cpp.html" />
-
-  
   <!--[if lt IE 9]>
     <script src="../_static/js/html5shiv.min.js"></script>
   <![endif]-->
-  
-    
-      <script type="text/javascript" id="documentation_options" data-url_root="../" src="../_static/documentation_options.js"></script>
+  <script id="documentation_options" data-url_root="../" src="../_static/documentation_options.js"></script>
         <script src="../_static/jquery.js"></script>
         <script src="../_static/underscore.js"></script>
         <script src="../_static/doctools.js"></script>
         <script src="../_static/language_data.js"></script>
         <script src="../_static/collapsible-lists/js/CollapsibleLists.compressed.js"></script>
         <script src="../_static/collapsible-lists/js/apply-collapsible-lists.js"></script>
-    
-    <script type="text/javascript" src="../_static/js/theme.js"></script>
-
-    
+        <script async="async" src="https://cdnjs.cloudflare.com/ajax/libs/mathjax/2.7.5/latest.js?config=TeX-AMS-MML_HTMLorMML"></script>
+        <script type="text/x-mathjax-config">MathJax.Hub.Config({"tex2jax": {"inlineMath": [["\\(", "\\)"]], "displayMath": [["\\[", "\\]"]], "processRefs": false, "processEnvironments": false}})</script>
+    <script src="../_static/js/theme.js"></script>
     <link rel="index" title="Index" href="../genindex.html" />
     <link rel="search" title="Search" href="../search.html" /> 
 </head>
 
-<body class="wy-body-for-nav">
-
-   
+<body class="wy-body-for-nav"> 
   <div class="wy-grid-for-nav">
-    
     <nav data-toggle="wy-nav-shift" class="wy-nav-side">
       <div class="wy-side-scroll">
         <div class="wy-side-nav-search" >
-          
-
-          
             <a href="../index.html" class="icon icon-home"> Marian NMT
-          
-
-          
           </a>
-
-          
-            
-            
               <div class="version">
-                v1.10.3
+                v1.10.27
               </div>
-            
-          
-
-          
 <div role="search">
   <form id="rtd-search-form" class="wy-form" action="../search.html" method="get">
     <input type="text" name="q" placeholder="Search docs" />
@@ -80,519 +43,452 @@
     <input type="hidden" name="area" value="default" />
   </form>
 </div>
-
-          
-        </div>
-
-        
-        <div class="wy-menu wy-menu-vertical" data-spy="affix" role="navigation" aria-label="main navigation">
-          
-            
-            
-              
-            
-            
-              <p class="caption"><span class="caption-text">Contents:</span></p>
+        </div><div class="wy-menu wy-menu-vertical" data-spy="affix" role="navigation" aria-label="Navigation menu">
+              <p><span class="caption-text">Contents:</span></p>
 <ul>
 <li class="toctree-l1"><a class="reference internal" href="../graph.html">Expression graphs</a></li>
 <li class="toctree-l1"><a class="reference internal" href="../operators.html">Operations in the Expression Graph</a></li>
 <li class="toctree-l1"><a class="reference internal" href="library_index.html">Library API</a></li>
 <li class="toctree-l1"><a class="reference internal" href="../contributing.html">How to contribute to Marian</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../doc_guide.html">Writing documentation</a></li>
 </ul>
 
-            
-          
         </div>
-        
       </div>
     </nav>
 
-    <section data-toggle="wy-nav-shift" class="wy-nav-content-wrap">
-
-      
-      <nav class="wy-nav-top" aria-label="top navigation">
-        
+    <section data-toggle="wy-nav-shift" class="wy-nav-content-wrap"><nav class="wy-nav-top" aria-label="Mobile navigation menu" >
           <i data-toggle="wy-nav-top" class="fa fa-bars"></i>
           <a href="../index.html">Marian NMT</a>
-        
       </nav>
 
-
       <div class="wy-nav-content">
-        
         <div class="rst-content">
-        
-          
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-<div role="navigation" aria-label="breadcrumbs navigation">
-
+          <div role="navigation" aria-label="Page navigation">
   <ul class="wy-breadcrumbs">
-    
       <li><a href="../index.html" class="icon icon-home"></a> &raquo;</li>
-        
       <li>Program Listing for File graph_group_sync.cpp</li>
-    
-    
       <li class="wy-breadcrumbs-aside">
-        
-          
             <a href="../_sources/api/program_listing_file_src_training_graph_group_sync.cpp.rst.txt" rel="nofollow"> View page source</a>
-          
-        
       </li>
-    
   </ul>
-
-  
   <hr/>
 </div>
           <div role="main" class="document" itemscope="itemscope" itemtype="http://schema.org/Article">
            <div itemprop="articleBody">
-            
-  <div class="section" id="program-listing-for-file-graph-group-sync-cpp">
+             
+  <section id="program-listing-for-file-graph-group-sync-cpp">
 <span id="program-listing-file-src-training-graph-group-sync-cpp"></span><h1>Program Listing for File graph_group_sync.cpp<a class="headerlink" href="#program-listing-for-file-graph-group-sync-cpp" title="Permalink to this headline">¶</a></h1>
 <p>↰ <a class="reference internal" href="file_src_training_graph_group_sync.cpp.html#file-src-training-graph-group-sync-cpp"><span class="std std-ref">Return to documentation for file</span></a> (<code class="docutils literal notranslate"><span class="pre">src/training/graph_group_sync.cpp</span></code>)</p>
-<div class="highlight-cpp notranslate"><div class="highlight"><pre><span></span><span class="cp">#include</span> <span class="cpf">&quot;training/graph_group_sync.h&quot;</span><span class="cp"></span>
+<div class="highlight-cpp notranslate"><div class="highlight"><pre><span></span><span class="cp">#include</span><span class="w"> </span><span class="cpf">&quot;training/graph_group_sync.h&quot;</span><span class="cp"></span>
 
-<span class="cp">#include</span> <span class="cpf">&lt;math.h&gt;</span><span class="cp"></span>
+<span class="cp">#include</span><span class="w"> </span><span class="cpf">&lt;math.h&gt;</span><span class="cp"></span>
 
-<span class="k">namespace</span> <span class="n">marian</span> <span class="p">{</span>
+<span class="k">namespace</span><span class="w"> </span><span class="nn">marian</span><span class="w"> </span><span class="p">{</span><span class="w"></span>
 
-<span class="n">SyncGraphGroup</span><span class="o">::</span><span class="n">SyncGraphGroup</span><span class="p">(</span><span class="n">Ptr</span><span class="o">&lt;</span><span class="n">Options</span><span class="o">&gt;</span> <span class="n">options</span><span class="p">,</span> <span class="n">Ptr</span><span class="o">&lt;</span><span class="n">IMPIWrapper</span><span class="o">&gt;</span> <span class="n">mpi</span><span class="p">)</span>
-    <span class="o">:</span> <span class="n">GraphGroup</span><span class="p">(</span><span class="n">options</span><span class="p">,</span> <span class="n">mpi</span><span class="p">),</span>
-      <span class="n">delay_</span><span class="p">{</span><span class="n">options_</span><span class="o">-&gt;</span><span class="n">get</span><span class="o">&lt;</span><span class="kt">double</span><span class="o">&gt;</span><span class="p">(</span><span class="s">&quot;optimizer-delay&quot;</span><span class="p">)}</span> <span class="p">{}</span> <span class="c1">// @TODO: rename delay_ to something else; delay means delayed updated, not accumulation</span>
+<span class="n">SyncGraphGroup</span><span class="o">::</span><span class="n">SyncGraphGroup</span><span class="p">(</span><span class="n">Ptr</span><span class="o">&lt;</span><span class="n">Options</span><span class="o">&gt;</span><span class="w"> </span><span class="n">options</span><span class="p">,</span><span class="w"> </span><span class="n">Ptr</span><span class="o">&lt;</span><span class="n">IMPIWrapper</span><span class="o">&gt;</span><span class="w"> </span><span class="n">mpi</span><span class="p">)</span><span class="w"></span>
+<span class="w">    </span><span class="o">:</span><span class="w"> </span><span class="n">GraphGroup</span><span class="p">(</span><span class="n">options</span><span class="p">,</span><span class="w"> </span><span class="n">mpi</span><span class="p">),</span><span class="w"></span>
+<span class="w">      </span><span class="n">delay_</span><span class="p">{</span><span class="n">options_</span><span class="o">-&gt;</span><span class="n">get</span><span class="o">&lt;</span><span class="kt">double</span><span class="o">&gt;</span><span class="p">(</span><span class="s">&quot;optimizer-delay&quot;</span><span class="p">)}</span><span class="w"> </span><span class="p">{}</span><span class="w"> </span><span class="c1">// @TODO: rename delay_ to something else; delay means delayed updated, not accumulation</span>
 
-<span class="kt">void</span> <span class="n">SyncGraphGroup</span><span class="o">::</span><span class="n">setScheduler</span><span class="p">(</span><span class="n">Ptr</span><span class="o">&lt;</span><span class="n">Scheduler</span><span class="o">&gt;</span> <span class="n">scheduler</span><span class="p">)</span> <span class="cm">/*override*/</span> <span class="p">{</span>
-  <span class="n">validate</span><span class="p">();</span>
-  <span class="n">scheduler_</span> <span class="o">=</span> <span class="n">scheduler</span><span class="p">;</span>
-  <span class="n">scheduler_</span><span class="o">-&gt;</span><span class="n">registerTrainingObserver</span><span class="p">(</span><span class="n">scheduler_</span><span class="p">);</span>
+<span class="kt">void</span><span class="w"> </span><span class="n">SyncGraphGroup</span><span class="o">::</span><span class="n">setScheduler</span><span class="p">(</span><span class="n">Ptr</span><span class="o">&lt;</span><span class="n">Scheduler</span><span class="o">&gt;</span><span class="w"> </span><span class="n">scheduler</span><span class="p">)</span><span class="w"> </span><span class="cm">/*override*/</span><span class="w"> </span><span class="p">{</span><span class="w"></span>
+<span class="w">  </span><span class="n">validate</span><span class="p">();</span><span class="w"></span>
+<span class="w">  </span><span class="n">scheduler_</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="n">scheduler</span><span class="p">;</span><span class="w"></span>
+<span class="w">  </span><span class="n">scheduler_</span><span class="o">-&gt;</span><span class="n">registerTrainingObserver</span><span class="p">(</span><span class="n">scheduler_</span><span class="p">);</span><span class="w"></span>
 
-  <span class="c1">// optimizer has to be registered last to see changes of learning rate</span>
-  <span class="k">for</span><span class="p">(</span><span class="k">auto</span> <span class="nl">opt</span> <span class="p">:</span> <span class="n">optimizerShards_</span><span class="p">)</span>
-    <span class="n">scheduler_</span><span class="o">-&gt;</span><span class="n">registerTrainingObserver</span><span class="p">(</span><span class="n">opt</span><span class="p">);</span>
-<span class="p">}</span>
+<span class="w">  </span><span class="c1">// optimizer has to be registered last to see changes of learning rate</span>
+<span class="w">  </span><span class="k">for</span><span class="p">(</span><span class="k">auto</span><span class="w"> </span><span class="n">opt</span><span class="w"> </span><span class="o">:</span><span class="w"> </span><span class="n">optimizerShards_</span><span class="p">)</span><span class="w"></span>
+<span class="w">    </span><span class="n">scheduler_</span><span class="o">-&gt;</span><span class="n">registerTrainingObserver</span><span class="p">(</span><span class="n">opt</span><span class="p">);</span><span class="w"></span>
+<span class="p">}</span><span class="w"></span>
 
-<span class="kt">void</span> <span class="n">SyncGraphGroup</span><span class="o">::</span><span class="n">initialize</span><span class="p">(</span><span class="k">const</span> <span class="n">Ptr</span><span class="o">&lt;</span><span class="n">data</span><span class="o">::</span><span class="n">Batch</span><span class="o">&gt;&amp;</span> <span class="n">exampleBatch</span><span class="p">)</span> <span class="p">{</span>
-  <span class="c1">// Initialize graphs with random weights in one forward step</span>
-  <span class="c1">// Also allocate and clear the gradients</span>
-  <span class="n">comm_</span><span class="o">-&gt;</span><span class="n">foreach</span><span class="p">([</span><span class="o">&amp;</span><span class="p">](</span><span class="kt">size_t</span> <span class="n">i</span><span class="p">,</span> <span class="kt">size_t</span> <span class="cm">/*begin*/</span><span class="p">,</span> <span class="kt">size_t</span> <span class="cm">/*end*/</span><span class="p">)</span> <span class="p">{</span>
-    <span class="n">models_</span><span class="p">[</span><span class="n">i</span><span class="p">]</span><span class="o">-&gt;</span><span class="n">build</span><span class="p">(</span><span class="n">graphs_</span><span class="p">[</span><span class="n">i</span><span class="p">],</span> <span class="n">exampleBatch</span><span class="p">);</span>
-    <span class="n">graphs_</span><span class="p">[</span><span class="n">i</span><span class="p">]</span><span class="o">-&gt;</span><span class="n">forward</span><span class="p">();</span>
-    <span class="n">graphs_</span><span class="p">[</span><span class="n">i</span><span class="p">]</span><span class="o">-&gt;</span><span class="n">params</span><span class="p">()</span><span class="o">-&gt;</span><span class="n">allocateBackward</span><span class="p">();</span>
-    <span class="n">graphs_</span><span class="p">[</span><span class="n">i</span><span class="p">]</span><span class="o">-&gt;</span><span class="n">params</span><span class="p">()</span><span class="o">-&gt;</span><span class="n">set_zero_adjoint</span><span class="p">();</span>
-    <span class="k">return</span> <span class="nb">true</span><span class="p">;</span> <span class="c1">// dummy success</span>
-  <span class="p">});</span>
+<span class="kt">void</span><span class="w"> </span><span class="n">SyncGraphGroup</span><span class="o">::</span><span class="n">initialize</span><span class="p">(</span><span class="k">const</span><span class="w"> </span><span class="n">Ptr</span><span class="o">&lt;</span><span class="n">data</span><span class="o">::</span><span class="n">Batch</span><span class="o">&gt;&amp;</span><span class="w"> </span><span class="n">exampleBatch</span><span class="p">)</span><span class="w"> </span><span class="p">{</span><span class="w"></span>
+<span class="w">  </span><span class="c1">// Initialize graphs with random weights in one forward step</span>
+<span class="w">  </span><span class="c1">// Also allocate and clear the gradients</span>
+<span class="w">  </span><span class="n">comm_</span><span class="o">-&gt;</span><span class="n">foreach</span><span class="p">([</span><span class="o">&amp;</span><span class="p">](</span><span class="kt">size_t</span><span class="w"> </span><span class="n">i</span><span class="p">,</span><span class="w"> </span><span class="kt">size_t</span><span class="w"> </span><span class="cm">/*begin*/</span><span class="p">,</span><span class="w"> </span><span class="kt">size_t</span><span class="w"> </span><span class="cm">/*end*/</span><span class="p">)</span><span class="w"> </span><span class="p">{</span><span class="w"></span>
+<span class="w">    </span><span class="n">models_</span><span class="p">[</span><span class="n">i</span><span class="p">]</span><span class="o">-&gt;</span><span class="n">build</span><span class="p">(</span><span class="n">graphs_</span><span class="p">[</span><span class="n">i</span><span class="p">],</span><span class="w"> </span><span class="n">exampleBatch</span><span class="p">);</span><span class="w"></span>
+<span class="w">    </span><span class="n">graphs_</span><span class="p">[</span><span class="n">i</span><span class="p">]</span><span class="o">-&gt;</span><span class="n">forward</span><span class="p">();</span><span class="w"></span>
+<span class="w">    </span><span class="n">graphs_</span><span class="p">[</span><span class="n">i</span><span class="p">]</span><span class="o">-&gt;</span><span class="n">params</span><span class="p">()</span><span class="o">-&gt;</span><span class="n">allocateBackward</span><span class="p">();</span><span class="w"></span>
+<span class="w">    </span><span class="n">graphs_</span><span class="p">[</span><span class="n">i</span><span class="p">]</span><span class="o">-&gt;</span><span class="n">params</span><span class="p">()</span><span class="o">-&gt;</span><span class="n">set_zero_adjoint</span><span class="p">();</span><span class="w"></span>
+<span class="w">    </span><span class="k">return</span><span class="w"> </span><span class="nb">true</span><span class="p">;</span><span class="w"> </span><span class="c1">// dummy success</span>
+<span class="w">  </span><span class="p">});</span><span class="w"></span>
 
-  <span class="c1">// Copy weights from 0-th graph to all other graphs to have equal weights across devices.</span>
-  <span class="c1">// This is used after weight initialization and after checkpoint restoration.</span>
-  <span class="n">comm_</span><span class="o">-&gt;</span><span class="n">broadcastParams</span><span class="p">();</span>
+<span class="w">  </span><span class="c1">// Copy weights from 0-th graph to all other graphs to have equal weights across devices.</span>
+<span class="w">  </span><span class="c1">// This is used after weight initialization and after checkpoint restoration.</span>
+<span class="w">  </span><span class="n">comm_</span><span class="o">-&gt;</span><span class="n">broadcastParams</span><span class="p">();</span><span class="w"></span>
 
-  <span class="c1">// initialize model quantization</span>
-  <span class="k">if</span> <span class="p">(</span><span class="n">options_</span><span class="o">-&gt;</span><span class="n">get</span><span class="o">&lt;</span><span class="kt">size_t</span><span class="o">&gt;</span><span class="p">(</span><span class="s">&quot;quantize-bits&quot;</span><span class="p">)</span> <span class="o">&gt;</span> <span class="mi">0</span><span class="p">)</span> <span class="p">{</span>
-    <span class="k">for</span> <span class="p">(</span><span class="kt">int</span> <span class="n">idx</span> <span class="o">=</span> <span class="mi">0</span><span class="p">;</span> <span class="n">idx</span> <span class="o">&lt;</span> <span class="n">graphs_</span><span class="p">.</span><span class="n">size</span><span class="p">();</span> <span class="n">idx</span><span class="o">++</span><span class="p">)</span>
-      <span class="n">quantizers_</span><span class="p">.</span><span class="n">push_back</span><span class="p">(</span><span class="n">New</span><span class="o">&lt;</span><span class="n">ModelQuantizer</span><span class="o">&gt;</span><span class="p">(</span><span class="n">options_</span><span class="p">));</span>
+<span class="w">  </span><span class="c1">// initialize model quantization</span>
+<span class="w">  </span><span class="k">if</span><span class="w"> </span><span class="p">(</span><span class="n">options_</span><span class="o">-&gt;</span><span class="n">get</span><span class="o">&lt;</span><span class="kt">size_t</span><span class="o">&gt;</span><span class="p">(</span><span class="s">&quot;quantize-bits&quot;</span><span class="p">)</span><span class="w"> </span><span class="o">&gt;</span><span class="w"> </span><span class="mi">0</span><span class="p">)</span><span class="w"> </span><span class="p">{</span><span class="w"></span>
+<span class="w">    </span><span class="k">for</span><span class="w"> </span><span class="p">(</span><span class="kt">int</span><span class="w"> </span><span class="n">idx</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="mi">0</span><span class="p">;</span><span class="w"> </span><span class="n">idx</span><span class="w"> </span><span class="o">&lt;</span><span class="w"> </span><span class="n">graphs_</span><span class="p">.</span><span class="n">size</span><span class="p">();</span><span class="w"> </span><span class="n">idx</span><span class="o">++</span><span class="p">)</span><span class="w"></span>
+<span class="w">      </span><span class="n">quantizers_</span><span class="p">.</span><span class="n">push_back</span><span class="p">(</span><span class="n">New</span><span class="o">&lt;</span><span class="n">ModelQuantizer</span><span class="o">&gt;</span><span class="p">(</span><span class="n">options_</span><span class="p">));</span><span class="w"></span>
 
-    <span class="n">comm_</span><span class="o">-&gt;</span><span class="n">foreach</span><span class="p">([</span><span class="o">&amp;</span><span class="p">](</span><span class="kt">size_t</span> <span class="n">idx</span><span class="p">,</span> <span class="kt">size_t</span> <span class="cm">/*begin*/</span><span class="p">,</span> <span class="kt">size_t</span> <span class="cm">/*end*/</span><span class="p">)</span> <span class="p">{</span>
-      <span class="n">quantizers_</span><span class="p">[</span><span class="n">idx</span><span class="p">]</span><span class="o">-&gt;</span><span class="n">quantize</span><span class="p">(</span><span class="n">graphs_</span><span class="p">[</span><span class="n">idx</span><span class="p">]);</span> <span class="k">return</span> <span class="nb">true</span><span class="p">;</span>
-    <span class="p">});</span>
-  <span class="p">}</span>
+<span class="w">    </span><span class="n">comm_</span><span class="o">-&gt;</span><span class="n">foreach</span><span class="p">([</span><span class="o">&amp;</span><span class="p">](</span><span class="kt">size_t</span><span class="w"> </span><span class="n">idx</span><span class="p">,</span><span class="w"> </span><span class="kt">size_t</span><span class="w"> </span><span class="cm">/*begin*/</span><span class="p">,</span><span class="w"> </span><span class="kt">size_t</span><span class="w"> </span><span class="cm">/*end*/</span><span class="p">)</span><span class="w"> </span><span class="p">{</span><span class="w"></span>
+<span class="w">      </span><span class="n">quantizers_</span><span class="p">[</span><span class="n">idx</span><span class="p">]</span><span class="o">-&gt;</span><span class="n">quantize</span><span class="p">(</span><span class="n">graphs_</span><span class="p">[</span><span class="n">idx</span><span class="p">]);</span><span class="w"> </span><span class="k">return</span><span class="w"> </span><span class="nb">true</span><span class="p">;</span><span class="w"></span>
+<span class="w">    </span><span class="p">});</span><span class="w"></span>
+<span class="w">  </span><span class="p">}</span><span class="w"></span>
 
-  <span class="c1">// We compute the readerMultiplier in collectStats(...) and the updateMultiplier_ here</span>
-  <span class="c1">// as collectStats maybe called for a different instance of this object and fields would not</span>
-  <span class="c1">// survive destruction.</span>
-  <span class="kt">double</span> <span class="n">multiplier</span> <span class="o">=</span> <span class="n">devices_</span><span class="p">.</span><span class="n">size</span><span class="p">()</span>  <span class="o">*</span> <span class="n">delay_</span><span class="p">;</span> <span class="c1">// @TODO: make this optional? Comment what is going on.</span>
-  <span class="kt">bool</span> <span class="n">isDynamic</span> <span class="o">=</span> <span class="n">scheduler_</span><span class="o">-&gt;</span><span class="n">isDynamicMBSizeScaling</span><span class="p">();</span>
-  <span class="n">updateMultiplier_</span> <span class="o">=</span> <span class="n">isDynamic</span> <span class="o">?</span> <span class="nl">multiplier</span> <span class="p">:</span> <span class="mf">1.</span><span class="p">;</span> <span class="c1">// multiplier applied later in update()</span>
-<span class="p">}</span>
+<span class="w">  </span><span class="c1">// We compute the readerMultiplier in collectStats(...) and the updateMultiplier_ here</span>
+<span class="w">  </span><span class="c1">// as collectStats maybe called for a different instance of this object and fields would not</span>
+<span class="w">  </span><span class="c1">// survive destruction.</span>
+<span class="w">  </span><span class="kt">double</span><span class="w"> </span><span class="n">multiplier</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="n">devices_</span><span class="p">.</span><span class="n">size</span><span class="p">()</span><span class="w">  </span><span class="o">*</span><span class="w"> </span><span class="n">delay_</span><span class="p">;</span><span class="w"> </span><span class="c1">// @TODO: make this optional? Comment what is going on.</span>
+<span class="w">  </span><span class="kt">bool</span><span class="w"> </span><span class="n">isDynamic</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="n">scheduler_</span><span class="o">-&gt;</span><span class="n">isDynamicMBSizeScaling</span><span class="p">();</span><span class="w"></span>
+<span class="w">  </span><span class="n">updateMultiplier_</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="n">isDynamic</span><span class="w"> </span><span class="o">?</span><span class="w"> </span><span class="n">multiplier</span><span class="w"> </span><span class="o">:</span><span class="w"> </span><span class="mf">1.</span><span class="p">;</span><span class="w"> </span><span class="c1">// multiplier applied later in update()</span>
+<span class="p">}</span><span class="w"></span>
 
-<span class="n">Ptr</span><span class="o">&lt;</span><span class="n">data</span><span class="o">::</span><span class="n">BatchStats</span><span class="o">&gt;</span> <span class="n">SyncGraphGroup</span><span class="o">::</span><span class="n">collectStats</span><span class="p">(</span><span class="k">const</span> <span class="n">std</span><span class="o">::</span><span class="n">vector</span><span class="o">&lt;</span><span class="n">Ptr</span><span class="o">&lt;</span><span class="n">Vocab</span><span class="o">&gt;&gt;&amp;</span> <span class="n">vocabs</span><span class="p">)</span> <span class="p">{</span>
-  <span class="c1">// This function determines the granularity in which the reader provides data.</span>
-  <span class="c1">// If no mini-batch-fit, then user provides a constant number. It reads that much. We won&#39;t get into this function.</span>
+<span class="n">Ptr</span><span class="o">&lt;</span><span class="n">data</span><span class="o">::</span><span class="n">BatchStats</span><span class="o">&gt;</span><span class="w"> </span><span class="n">SyncGraphGroup</span><span class="o">::</span><span class="n">collectStats</span><span class="p">(</span><span class="k">const</span><span class="w"> </span><span class="n">std</span><span class="o">::</span><span class="n">vector</span><span class="o">&lt;</span><span class="n">Ptr</span><span class="o">&lt;</span><span class="n">Vocab</span><span class="o">&gt;&gt;&amp;</span><span class="w"> </span><span class="n">vocabs</span><span class="p">)</span><span class="w"> </span><span class="p">{</span><span class="w"></span>
+<span class="w">  </span><span class="c1">// This function determines the granularity in which the reader provides data.</span>
+<span class="w">  </span><span class="c1">// If no mini-batch-fit, then user provides a constant number. It reads that much. We won&#39;t get into this function.</span>
 
-  <span class="c1">// If dynamic MB scaling, then we want fine-grained minibatches of the size of one GPU.</span>
-  <span class="c1">// If not, we prefer a single large batch that can be split into equal-size parts over GPUs,</span>
-  <span class="c1">// so that we have perfect load balancing and read precisely as much as we need (no waste).</span>
-  <span class="kt">double</span> <span class="n">multiplier</span> <span class="o">=</span> <span class="n">devices_</span><span class="p">.</span><span class="n">size</span><span class="p">()</span>  <span class="o">*</span> <span class="n">delay_</span><span class="p">;</span>
-  <span class="kt">bool</span> <span class="n">isDynamic</span> <span class="o">=</span> <span class="n">scheduler_</span><span class="o">-&gt;</span><span class="n">isDynamicMBSizeScaling</span><span class="p">();</span>
-  <span class="kt">double</span> <span class="n">readerMultiplier</span> <span class="o">=</span> <span class="n">isDynamic</span> <span class="o">?</span> <span class="mf">1.</span> <span class="o">:</span> <span class="n">multiplier</span><span class="p">;</span> <span class="c1">// multiplier applied already by reader</span>
-  <span class="k">return</span> <span class="n">GraphGroup</span><span class="o">::</span><span class="n">collectStats</span><span class="p">(</span><span class="n">graphs_</span><span class="p">[</span><span class="mi">0</span><span class="p">],</span> <span class="n">models_</span><span class="p">[</span><span class="mi">0</span><span class="p">],</span> <span class="n">vocabs</span><span class="p">,</span> <span class="n">readerMultiplier</span><span class="p">);</span>
-<span class="p">}</span>
+<span class="w">  </span><span class="c1">// If dynamic MB scaling, then we want fine-grained minibatches of the size of one GPU.</span>
+<span class="w">  </span><span class="c1">// If not, we prefer a single large batch that can be split into equal-size parts over GPUs,</span>
+<span class="w">  </span><span class="c1">// so that we have perfect load balancing and read precisely as much as we need (no waste).</span>
+<span class="w">  </span><span class="kt">double</span><span class="w"> </span><span class="n">multiplier</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="n">devices_</span><span class="p">.</span><span class="n">size</span><span class="p">()</span><span class="w">  </span><span class="o">*</span><span class="w"> </span><span class="n">delay_</span><span class="p">;</span><span class="w"></span>
+<span class="w">  </span><span class="kt">bool</span><span class="w"> </span><span class="n">isDynamic</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="n">scheduler_</span><span class="o">-&gt;</span><span class="n">isDynamicMBSizeScaling</span><span class="p">();</span><span class="w"></span>
+<span class="w">  </span><span class="kt">double</span><span class="w"> </span><span class="n">readerMultiplier</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="n">isDynamic</span><span class="w"> </span><span class="o">?</span><span class="w"> </span><span class="mf">1.</span><span class="w"> </span><span class="o">:</span><span class="w"> </span><span class="n">multiplier</span><span class="p">;</span><span class="w"> </span><span class="c1">// multiplier applied already by reader</span>
+<span class="w">  </span><span class="k">return</span><span class="w"> </span><span class="n">GraphGroup</span><span class="o">::</span><span class="n">collectStats</span><span class="p">(</span><span class="n">graphs_</span><span class="p">[</span><span class="mi">0</span><span class="p">],</span><span class="w"> </span><span class="n">models_</span><span class="p">[</span><span class="mi">0</span><span class="p">],</span><span class="w"> </span><span class="n">vocabs</span><span class="p">,</span><span class="w"> </span><span class="n">readerMultiplier</span><span class="p">);</span><span class="w"></span>
+<span class="p">}</span><span class="w"></span>
 
 <span class="c1">// helper for MB scaling: quantize the ratio with a given error margin</span>
-<span class="k">static</span> <span class="kt">double</span> <span class="n">roundUpRatio</span><span class="p">(</span><span class="kt">double</span> <span class="n">ratio</span><span class="p">)</span> <span class="p">{</span>
-  <span class="k">if</span> <span class="p">(</span><span class="n">ratio</span> <span class="o">==</span> <span class="mi">0</span><span class="p">)</span>
-    <span class="k">return</span> <span class="n">ratio</span><span class="p">;</span>
-  <span class="c1">// find largest power of two that fits into ratio</span>
-  <span class="kt">double</span> <span class="n">p</span> <span class="o">=</span> <span class="mi">1</span><span class="p">;</span>
-  <span class="k">while</span> <span class="p">(</span><span class="n">p</span> <span class="o">*</span> <span class="mi">2</span> <span class="o">&lt;</span> <span class="n">ratio</span><span class="p">)</span>
-    <span class="n">p</span> <span class="o">*=</span> <span class="mi">2</span><span class="p">;</span>
-  <span class="c1">// round up to nearest multiple of a largest power of 2 where relative error is within margin</span>
-  <span class="c1">// 25% error margin seems acceptable:</span>
-  <span class="c1">//  - using a 25% larger MB size should not break convergence</span>
-  <span class="c1">//  - @TODO: not using the first 25% of the next block is OK since those are dominated by data exchange</span>
-  <span class="kt">double</span> <span class="n">maxError</span> <span class="o">=</span> <span class="mf">0.25</span><span class="p">;</span>
-  <span class="k">while</span> <span class="p">(</span><span class="n">p</span> <span class="o">&gt;=</span> <span class="mi">1</span><span class="p">)</span> <span class="p">{</span>
-    <span class="kt">double</span> <span class="n">proposedRatio</span> <span class="o">=</span> <span class="n">ceil</span><span class="p">(</span><span class="n">ratio</span> <span class="o">/</span> <span class="n">p</span><span class="p">)</span> <span class="o">*</span> <span class="n">p</span><span class="p">;</span>
-    <span class="kt">double</span> <span class="n">error</span> <span class="o">=</span> <span class="p">(</span><span class="n">proposedRatio</span> <span class="o">-</span> <span class="n">ratio</span><span class="p">)</span> <span class="o">/</span> <span class="n">ratio</span><span class="p">;</span>
-    <span class="k">if</span> <span class="p">(</span><span class="n">fabs</span><span class="p">(</span><span class="n">error</span><span class="p">)</span> <span class="o">&lt;=</span> <span class="n">maxError</span><span class="p">)</span>
-      <span class="k">return</span> <span class="n">proposedRatio</span><span class="p">;</span>
-    <span class="n">p</span> <span class="o">/=</span> <span class="mi">2</span><span class="p">;</span>
-  <span class="p">}</span>
-  <span class="k">return</span> <span class="n">ratio</span><span class="p">;</span>
-<span class="p">}</span>
+<span class="k">static</span><span class="w"> </span><span class="kt">double</span><span class="w"> </span><span class="n">roundUpRatio</span><span class="p">(</span><span class="kt">double</span><span class="w"> </span><span class="n">ratio</span><span class="p">)</span><span class="w"> </span><span class="p">{</span><span class="w"></span>
+<span class="w">  </span><span class="k">if</span><span class="w"> </span><span class="p">(</span><span class="n">ratio</span><span class="w"> </span><span class="o">==</span><span class="w"> </span><span class="mi">0</span><span class="p">)</span><span class="w"></span>
+<span class="w">    </span><span class="k">return</span><span class="w"> </span><span class="n">ratio</span><span class="p">;</span><span class="w"></span>
+<span class="w">  </span><span class="c1">// find largest power of two that fits into ratio</span>
+<span class="w">  </span><span class="kt">double</span><span class="w"> </span><span class="n">p</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="mi">1</span><span class="p">;</span><span class="w"></span>
+<span class="w">  </span><span class="k">while</span><span class="w"> </span><span class="p">(</span><span class="n">p</span><span class="w"> </span><span class="o">*</span><span class="w"> </span><span class="mi">2</span><span class="w"> </span><span class="o">&lt;</span><span class="w"> </span><span class="n">ratio</span><span class="p">)</span><span class="w"></span>
+<span class="w">    </span><span class="n">p</span><span class="w"> </span><span class="o">*=</span><span class="w"> </span><span class="mi">2</span><span class="p">;</span><span class="w"></span>
+<span class="w">  </span><span class="c1">// round up to nearest multiple of a largest power of 2 where relative error is within margin</span>
+<span class="w">  </span><span class="c1">// 25% error margin seems acceptable:</span>
+<span class="w">  </span><span class="c1">//  - using a 25% larger MB size should not break convergence</span>
+<span class="w">  </span><span class="c1">//  - @TODO: not using the first 25% of the next block is OK since those are dominated by data exchange</span>
+<span class="w">  </span><span class="kt">double</span><span class="w"> </span><span class="n">maxError</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="mf">0.25</span><span class="p">;</span><span class="w"></span>
+<span class="w">  </span><span class="k">while</span><span class="w"> </span><span class="p">(</span><span class="n">p</span><span class="w"> </span><span class="o">&gt;=</span><span class="w"> </span><span class="mi">1</span><span class="p">)</span><span class="w"> </span><span class="p">{</span><span class="w"></span>
+<span class="w">    </span><span class="kt">double</span><span class="w"> </span><span class="n">proposedRatio</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="n">ceil</span><span class="p">(</span><span class="n">ratio</span><span class="w"> </span><span class="o">/</span><span class="w"> </span><span class="n">p</span><span class="p">)</span><span class="w"> </span><span class="o">*</span><span class="w"> </span><span class="n">p</span><span class="p">;</span><span class="w"></span>
+<span class="w">    </span><span class="kt">double</span><span class="w"> </span><span class="n">error</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="p">(</span><span class="n">proposedRatio</span><span class="w"> </span><span class="o">-</span><span class="w"> </span><span class="n">ratio</span><span class="p">)</span><span class="w"> </span><span class="o">/</span><span class="w"> </span><span class="n">ratio</span><span class="p">;</span><span class="w"></span>
+<span class="w">    </span><span class="k">if</span><span class="w"> </span><span class="p">(</span><span class="n">fabs</span><span class="p">(</span><span class="n">error</span><span class="p">)</span><span class="w"> </span><span class="o">&lt;=</span><span class="w"> </span><span class="n">maxError</span><span class="p">)</span><span class="w"></span>
+<span class="w">      </span><span class="k">return</span><span class="w"> </span><span class="n">proposedRatio</span><span class="p">;</span><span class="w"></span>
+<span class="w">    </span><span class="n">p</span><span class="w"> </span><span class="o">/=</span><span class="w"> </span><span class="mi">2</span><span class="p">;</span><span class="w"></span>
+<span class="w">  </span><span class="p">}</span><span class="w"></span>
+<span class="w">  </span><span class="k">return</span><span class="w"> </span><span class="n">ratio</span><span class="p">;</span><span class="w"></span>
+<span class="p">}</span><span class="w"></span>
 
 <span class="c1">// helper routine that handles accumulation and load-balancing of sub-batches to fill all devices</span>
 <span class="c1">// It adds &#39;newBatch&#39; to &#39;pendingBatches_&#39;, and if sufficient batches have been queued, then</span>
 <span class="c1">// returns &#39;pendingBatches_&#39; in &#39;subBatches&#39; and resets it. If not, it returns false.</span>
-<span class="kt">bool</span> <span class="n">SyncGraphGroup</span><span class="o">::</span><span class="n">tryGetSubBatches</span><span class="p">(</span><span class="n">Ptr</span><span class="o">&lt;</span><span class="n">data</span><span class="o">::</span><span class="n">Batch</span><span class="o">&gt;</span> <span class="n">newBatch</span><span class="p">,</span>
-                                      <span class="n">std</span><span class="o">::</span><span class="n">vector</span><span class="o">&lt;</span><span class="n">Ptr</span><span class="o">&lt;</span><span class="n">data</span><span class="o">::</span><span class="n">Batch</span><span class="o">&gt;&gt;&amp;</span> <span class="n">subBatches</span><span class="p">,</span>
-                                      <span class="kt">size_t</span><span class="o">&amp;</span> <span class="n">numReadBatches</span><span class="p">)</span> <span class="p">{</span>
-  <span class="c1">// The reader delivers in chunks of these sizes, according to case:</span>
-  <span class="c1">//  - no dynamic MB-size scaling:</span>
-  <span class="c1">//     - reader batch size = update batch size, with...</span>
-  <span class="c1">//     - mini-batch-fit:</span>
-  <span class="c1">//        - update batch size = what fits into all GPUs, times decay_ to allow experimenting with fractional sizes</span>
-  <span class="c1">//     - no mini-batch-fit:</span>
-  <span class="c1">//        - update batch size = user-specified size (user guarantees that it fits if distributed over delay_ GPUs)</span>
-  <span class="c1">//  - dynamic MB-size scaling:</span>
-  <span class="c1">//     - update batch size = aggregate reader batch size * (dynamic progress-based ratio * reference adjustment), with...</span>
-  <span class="c1">//     - mini-batch-fit:</span>
-  <span class="c1">//        - aggregate reader batch size = equal to what fits into one GPU * warpSize * delay_</span>
-  <span class="c1">//     - no mini-batch-fit:</span>
-  <span class="c1">//        - aggregate reader batch size = user-specified size (user guarantees that it fits if distributed over delay_ GPUs)</span>
-  <span class="c1">//     - reference adjustment =</span>
-  <span class="c1">//        - reference batch size specified: (reference batch size / typical aggregate reader batch size)</span>
-  <span class="c1">//        - no ref size specified: 1</span>
+<span class="kt">bool</span><span class="w"> </span><span class="n">SyncGraphGroup</span><span class="o">::</span><span class="n">tryGetSubBatches</span><span class="p">(</span><span class="n">Ptr</span><span class="o">&lt;</span><span class="n">data</span><span class="o">::</span><span class="n">Batch</span><span class="o">&gt;</span><span class="w"> </span><span class="n">newBatch</span><span class="p">,</span><span class="w"></span>
+<span class="w">                                      </span><span class="n">std</span><span class="o">::</span><span class="n">vector</span><span class="o">&lt;</span><span class="n">Ptr</span><span class="o">&lt;</span><span class="n">data</span><span class="o">::</span><span class="n">Batch</span><span class="o">&gt;&gt;&amp;</span><span class="w"> </span><span class="n">subBatches</span><span class="p">,</span><span class="w"></span>
+<span class="w">                                      </span><span class="kt">size_t</span><span class="o">&amp;</span><span class="w"> </span><span class="n">numReadBatches</span><span class="p">)</span><span class="w"> </span><span class="p">{</span><span class="w"></span>
+<span class="w">  </span><span class="c1">// The reader delivers in chunks of these sizes, according to case:</span>
+<span class="w">  </span><span class="c1">//  - no dynamic MB-size scaling:</span>
+<span class="w">  </span><span class="c1">//     - reader batch size = update batch size, with...</span>
+<span class="w">  </span><span class="c1">//     - mini-batch-fit:</span>
+<span class="w">  </span><span class="c1">//        - update batch size = what fits into all GPUs, times decay_ to allow experimenting with fractional sizes</span>
+<span class="w">  </span><span class="c1">//     - no mini-batch-fit:</span>
+<span class="w">  </span><span class="c1">//        - update batch size = user-specified size (user guarantees that it fits if distributed over delay_ GPUs)</span>
+<span class="w">  </span><span class="c1">//  - dynamic MB-size scaling:</span>
+<span class="w">  </span><span class="c1">//     - update batch size = aggregate reader batch size * (dynamic progress-based ratio * reference adjustment), with...</span>
+<span class="w">  </span><span class="c1">//     - mini-batch-fit:</span>
+<span class="w">  </span><span class="c1">//        - aggregate reader batch size = equal to what fits into one GPU * warpSize * delay_</span>
+<span class="w">  </span><span class="c1">//     - no mini-batch-fit:</span>
+<span class="w">  </span><span class="c1">//        - aggregate reader batch size = user-specified size (user guarantees that it fits if distributed over delay_ GPUs)</span>
+<span class="w">  </span><span class="c1">//     - reference adjustment =</span>
+<span class="w">  </span><span class="c1">//        - reference batch size specified: (reference batch size / typical aggregate reader batch size)</span>
+<span class="w">  </span><span class="c1">//        - no ref size specified: 1</span>
 
-  <span class="kt">size_t</span> <span class="n">warpSize</span> <span class="o">=</span> <span class="n">devices_</span><span class="p">.</span><span class="n">size</span><span class="p">()</span> <span class="p">;</span> <span class="c1">// warp := set of batches processed concurrently across GPUs and workers</span>
+<span class="w">  </span><span class="kt">size_t</span><span class="w"> </span><span class="n">warpSize</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="n">devices_</span><span class="p">.</span><span class="n">size</span><span class="p">()</span><span class="w"> </span><span class="p">;</span><span class="w"> </span><span class="c1">// warp := set of batches processed concurrently across GPUs and workers</span>
 
-  <span class="c1">// if not dynamic then return the big batch, but first split it over GPUs as it may be too large</span>
-  <span class="k">if</span> <span class="p">(</span><span class="o">!</span><span class="n">scheduler_</span><span class="o">-&gt;</span><span class="n">isDynamicMBSizeScaling</span><span class="p">())</span> <span class="p">{</span>
-    <span class="c1">// If mini-batch-fit, then the read batch is (devices_.size() * mpi_-&gt;numMPIProcesses() * delay_)</span>
-    <span class="c1">// times what fits one GPU. If not mini-batch-fit, it is whatever the user has specified, which</span>
-    <span class="c1">// is the user&#39;s responsibility to guarantee that it fits into &#39;delay_&#39; warps.</span>
-    <span class="c1">// Distribute evenly over all GPUs we have, using multiple warps if needed.</span>
-    <span class="kt">size_t</span> <span class="n">numWarps</span> <span class="o">=</span> <span class="p">(</span><span class="kt">size_t</span><span class="p">)</span><span class="n">ceil</span><span class="p">(</span><span class="n">delay_</span><span class="p">);</span>
-    <span class="n">subBatches</span> <span class="o">=</span> <span class="n">newBatch</span><span class="o">-&gt;</span><span class="n">split</span><span class="p">(</span><span class="n">numWarps</span> <span class="o">*</span> <span class="n">warpSize</span><span class="p">);</span> <span class="c1">// @TODO might be eaiser to mb-scaling here if mb-words not given?</span>
-    <span class="n">numReadBatches</span> <span class="o">=</span> <span class="mi">1</span><span class="p">;</span>
-    <span class="k">return</span> <span class="nb">true</span><span class="p">;</span>
-  <span class="p">}</span>
+<span class="w">  </span><span class="c1">// if not dynamic then return the big batch, but first split it over GPUs as it may be too large</span>
+<span class="w">  </span><span class="k">if</span><span class="w"> </span><span class="p">(</span><span class="o">!</span><span class="n">scheduler_</span><span class="o">-&gt;</span><span class="n">isDynamicMBSizeScaling</span><span class="p">())</span><span class="w"> </span><span class="p">{</span><span class="w"></span>
+<span class="w">    </span><span class="c1">// If mini-batch-fit, then the read batch is (devices_.size() * mpi_-&gt;numMPIProcesses() * delay_)</span>
+<span class="w">    </span><span class="c1">// times what fits one GPU. If not mini-batch-fit, it is whatever the user has specified, which</span>
+<span class="w">    </span><span class="c1">// is the user&#39;s responsibility to guarantee that it fits into &#39;delay_&#39; warps.</span>
+<span class="w">    </span><span class="c1">// Distribute evenly over all GPUs we have, using multiple warps if needed.</span>
+<span class="w">    </span><span class="kt">size_t</span><span class="w"> </span><span class="n">numWarps</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="p">(</span><span class="kt">size_t</span><span class="p">)</span><span class="n">ceil</span><span class="p">(</span><span class="n">delay_</span><span class="p">);</span><span class="w"></span>
+<span class="w">    </span><span class="n">subBatches</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="n">newBatch</span><span class="o">-&gt;</span><span class="n">split</span><span class="p">(</span><span class="n">numWarps</span><span class="w"> </span><span class="o">*</span><span class="w"> </span><span class="n">warpSize</span><span class="p">);</span><span class="w"> </span><span class="c1">// @TODO might be eaiser to mb-scaling here if mb-words not given?</span>
+<span class="w">    </span><span class="n">numReadBatches</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="mi">1</span><span class="p">;</span><span class="w"></span>
+<span class="w">    </span><span class="k">return</span><span class="w"> </span><span class="nb">true</span><span class="p">;</span><span class="w"></span>
+<span class="w">  </span><span class="p">}</span><span class="w"></span>
 
-  <span class="c1">// we are collecting multiple batches and potentially cut them to size here</span>
+<span class="w">  </span><span class="c1">// we are collecting multiple batches and potentially cut them to size here</span>
 
-  <span class="n">LOG_ONCE</span><span class="p">(</span><span class="n">info</span><span class="p">,</span> <span class="s">&quot;[training] Dynamic mini-batch scaling enabled&quot;</span><span class="p">);</span>
+<span class="w">  </span><span class="n">LOG_ONCE</span><span class="p">(</span><span class="n">info</span><span class="p">,</span><span class="w"> </span><span class="s">&quot;[training] Dynamic mini-batch scaling enabled&quot;</span><span class="p">);</span><span class="w"></span>
 
-  <span class="c1">// if dynamic and mini-batch-fit, then we get batches in the size of what fits into one GPU</span>
-  <span class="n">pendingBatches_</span><span class="p">.</span><span class="n">push_back</span><span class="p">(</span><span class="n">newBatch</span><span class="p">);</span>
+<span class="w">  </span><span class="c1">// if dynamic and mini-batch-fit, then we get batches in the size of what fits into one GPU</span>
+<span class="w">  </span><span class="n">pendingBatches_</span><span class="p">.</span><span class="n">push_back</span><span class="p">(</span><span class="n">newBatch</span><span class="p">);</span><span class="w"></span>
 
-  <span class="c1">// what ratio (how many batches in reader&#39;s batch size) do we want, based on current training progress schedule?</span>
-  <span class="kt">double</span> <span class="n">ratio</span> <span class="o">=</span> <span class="n">scheduler_</span><span class="o">-&gt;</span><span class="n">getDynamicMBSizeMultiplier</span><span class="p">();</span>
+<span class="w">  </span><span class="c1">// what ratio (how many batches in reader&#39;s batch size) do we want, based on current training progress schedule?</span>
+<span class="w">  </span><span class="kt">double</span><span class="w"> </span><span class="n">ratio</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="n">scheduler_</span><span class="o">-&gt;</span><span class="n">getDynamicMBSizeMultiplier</span><span class="p">();</span><span class="w"></span>
 
-  <span class="c1">// relative to what base? (what does ratio == 1 mean)</span>
-  <span class="c1">// updateMultiplier_ is only used if we do mini-batch warmup and did not provide mini-batch-words. Otherwise it gets cancelled out.</span>
-  <span class="n">ratio</span> <span class="o">*=</span> <span class="n">updateMultiplier_</span><span class="p">;</span> <span class="c1">// if mini-batch-fit, this is = warpSize * delay_, otherwise 1</span>
+<span class="w">  </span><span class="c1">// relative to what base? (what does ratio == 1 mean)</span>
+<span class="w">  </span><span class="c1">// updateMultiplier_ is only used if we do mini-batch warmup and did not provide mini-batch-words. Otherwise it gets cancelled out.</span>
+<span class="w">  </span><span class="n">ratio</span><span class="w"> </span><span class="o">*=</span><span class="w"> </span><span class="n">updateMultiplier_</span><span class="p">;</span><span class="w"> </span><span class="c1">// if mini-batch-fit, this is = warpSize * delay_, otherwise 1</span>
 
-  <span class="c1">// If a reference is given, then at progress == mbWarmup.n (ratio=1), we would like to have refBatchLabels instead of whichever</span>
-  <span class="c1">// the actual batch size is. Since we cannot know the future actual batch sizes that will be delivered</span>
-  <span class="c1">// by the reader, we approximate them with (typicalTrgBatchWords * updateMultiplier), and scale ratio accordingly.</span>
-  <span class="k">auto</span> <span class="n">refBatchLabels</span> <span class="o">=</span> <span class="n">options_</span><span class="o">-&gt;</span><span class="n">get</span><span class="o">&lt;</span><span class="kt">size_t</span><span class="o">&gt;</span><span class="p">(</span><span class="s">&quot;mini-batch-words&quot;</span><span class="p">)</span> <span class="o">/</span> <span class="n">mpi_</span><span class="o">-&gt;</span><span class="n">numMPIProcesses</span><span class="p">();</span>
-  <span class="k">if</span> <span class="p">(</span><span class="n">refBatchLabels</span> <span class="o">!=</span> <span class="mi">0</span><span class="p">)</span> <span class="p">{</span>
-    <span class="n">LOG_ONCE</span><span class="p">(</span><span class="n">info</span><span class="p">,</span> <span class="s">&quot;[scheduler] Scaling to {} reference labels, using actual-batch-word estimate of {}&quot;</span><span class="p">,</span> <span class="n">refBatchLabels</span><span class="p">,</span> <span class="n">GraphGroup</span><span class="o">::</span><span class="n">getTypicalTrgBatchWords</span><span class="p">());</span>
-    <span class="n">ABORT_IF</span><span class="p">(</span><span class="n">GraphGroup</span><span class="o">::</span><span class="n">getTypicalTrgBatchWords</span><span class="p">()</span> <span class="o">==</span> <span class="mi">0</span><span class="p">,</span> <span class="s">&quot;Dynamic scaling with words target requires MB size to be known in words&quot;</span><span class="p">);</span> <span class="c1">// happens if MB size is specified in sentences</span>
+<span class="w">  </span><span class="c1">// If a reference is given, then at progress == mbWarmup.n (ratio=1), we would like to have refBatchLabels instead of whichever</span>
+<span class="w">  </span><span class="c1">// the actual batch size is. Since we cannot know the future actual batch sizes that will be delivered</span>
+<span class="w">  </span><span class="c1">// by the reader, we approximate them with (typicalTrgBatchWords * updateMultiplier), and scale ratio accordingly.</span>
+<span class="w">  </span><span class="k">auto</span><span class="w"> </span><span class="n">refBatchLabels</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="n">options_</span><span class="o">-&gt;</span><span class="n">get</span><span class="o">&lt;</span><span class="kt">size_t</span><span class="o">&gt;</span><span class="p">(</span><span class="s">&quot;mini-batch-words&quot;</span><span class="p">)</span><span class="w"> </span><span class="o">/</span><span class="w"> </span><span class="n">mpi_</span><span class="o">-&gt;</span><span class="n">numMPIProcesses</span><span class="p">();</span><span class="w"></span>
+<span class="w">  </span><span class="k">if</span><span class="w"> </span><span class="p">(</span><span class="n">refBatchLabels</span><span class="w"> </span><span class="o">!=</span><span class="w"> </span><span class="mi">0</span><span class="p">)</span><span class="w"> </span><span class="p">{</span><span class="w"></span>
+<span class="w">    </span><span class="n">LOG_ONCE</span><span class="p">(</span><span class="n">info</span><span class="p">,</span><span class="w"> </span><span class="s">&quot;[scheduler] Scaling to {} reference labels, using actual-batch-word estimate of {}&quot;</span><span class="p">,</span><span class="w"> </span><span class="n">refBatchLabels</span><span class="p">,</span><span class="w"> </span><span class="n">GraphGroup</span><span class="o">::</span><span class="n">getTypicalTrgBatchWords</span><span class="p">());</span><span class="w"></span>
+<span class="w">    </span><span class="n">ABORT_IF</span><span class="p">(</span><span class="n">GraphGroup</span><span class="o">::</span><span class="n">getTypicalTrgBatchWords</span><span class="p">()</span><span class="w"> </span><span class="o">==</span><span class="w"> </span><span class="mi">0</span><span class="p">,</span><span class="w"> </span><span class="s">&quot;Dynamic scaling with words target requires MB size to be known in words&quot;</span><span class="p">);</span><span class="w"> </span><span class="c1">// happens if MB size is specified in sentences</span>
 
-    <span class="n">GraphGroup</span><span class="o">::</span><span class="n">updateAverageTrgBatchWords</span><span class="p">(</span><span class="n">newBatch</span><span class="o">-&gt;</span><span class="n">wordsTrg</span><span class="p">());</span> <span class="c1">// @TODO: should this be synchronized with MPI?</span>
-    <span class="n">ratio</span> <span class="o">*=</span> <span class="p">(</span><span class="kt">double</span><span class="p">)</span><span class="n">refBatchLabels</span> <span class="o">/</span> <span class="p">(</span><span class="n">GraphGroup</span><span class="o">::</span><span class="n">getTypicalTrgBatchWords</span><span class="p">()</span> <span class="o">*</span> <span class="n">updateMultiplier_</span><span class="p">);</span> <span class="c1">// cancellation of updateMultiplier_</span>
-  <span class="p">}</span>
+<span class="w">    </span><span class="n">GraphGroup</span><span class="o">::</span><span class="n">updateAverageTrgBatchWords</span><span class="p">(</span><span class="n">newBatch</span><span class="o">-&gt;</span><span class="n">wordsTrg</span><span class="p">());</span><span class="w"> </span><span class="c1">// @TODO: should this be synchronized with MPI?</span>
+<span class="w">    </span><span class="n">ratio</span><span class="w"> </span><span class="o">*=</span><span class="w"> </span><span class="p">(</span><span class="kt">double</span><span class="p">)</span><span class="n">refBatchLabels</span><span class="w"> </span><span class="o">/</span><span class="w"> </span><span class="p">(</span><span class="n">GraphGroup</span><span class="o">::</span><span class="n">getTypicalTrgBatchWords</span><span class="p">()</span><span class="w"> </span><span class="o">*</span><span class="w"> </span><span class="n">updateMultiplier_</span><span class="p">);</span><span class="w"> </span><span class="c1">// cancellation of updateMultiplier_</span>
+<span class="w">  </span><span class="p">}</span><span class="w"></span>
 
-  <span class="c1">// round up to full batches if within a certain error margin  --@BUGBUG: Not invariant w.r.t. GPU size, as ratio is relative to what fits into 1 GPU</span>
-  <span class="k">if</span><span class="p">(</span><span class="n">GraphGroup</span><span class="o">::</span><span class="n">mbRoundUp_</span><span class="p">)</span> <span class="c1">// true by default</span>
-    <span class="n">ratio</span> <span class="o">=</span> <span class="n">roundUpRatio</span><span class="p">(</span><span class="n">ratio</span><span class="p">);</span>
+<span class="w">  </span><span class="c1">// round up to full batches if within a certain error margin  --@BUGBUG: Not invariant w.r.t. GPU size, as ratio is relative to what fits into 1 GPU</span>
+<span class="w">  </span><span class="k">if</span><span class="p">(</span><span class="n">GraphGroup</span><span class="o">::</span><span class="n">mbRoundUp_</span><span class="p">)</span><span class="w"> </span><span class="c1">// true by default</span>
+<span class="w">    </span><span class="n">ratio</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="n">roundUpRatio</span><span class="p">(</span><span class="n">ratio</span><span class="p">);</span><span class="w"></span>
 
-  <span class="k">if</span><span class="p">(</span><span class="n">pendingBatches_</span><span class="p">.</span><span class="n">size</span><span class="p">()</span> <span class="o">&lt;</span> <span class="n">ratio</span> <span class="o">||</span> <span class="n">pendingBatches_</span><span class="p">.</span><span class="n">size</span><span class="p">()</span> <span class="o">%</span> <span class="p">(</span><span class="kt">size_t</span><span class="p">)</span><span class="n">updateMultiplier_</span> <span class="o">!=</span> <span class="mi">0</span><span class="p">)</span>
-    <span class="k">return</span> <span class="nb">false</span><span class="p">;</span> <span class="c1">// not enough data yet or not a multiple of the multiplier</span>
+<span class="w">  </span><span class="k">if</span><span class="p">(</span><span class="n">pendingBatches_</span><span class="p">.</span><span class="n">size</span><span class="p">()</span><span class="w"> </span><span class="o">&lt;</span><span class="w"> </span><span class="n">ratio</span><span class="w"> </span><span class="o">||</span><span class="w"> </span><span class="n">pendingBatches_</span><span class="p">.</span><span class="n">size</span><span class="p">()</span><span class="w"> </span><span class="o">%</span><span class="w"> </span><span class="p">(</span><span class="kt">size_t</span><span class="p">)</span><span class="n">updateMultiplier_</span><span class="w"> </span><span class="o">!=</span><span class="w"> </span><span class="mi">0</span><span class="p">)</span><span class="w"></span>
+<span class="w">    </span><span class="k">return</span><span class="w"> </span><span class="nb">false</span><span class="p">;</span><span class="w"> </span><span class="c1">// not enough data yet or not a multiple of the multiplier</span>
 
-  <span class="c1">// now we have enough to fill at least &#39;ratio&#39; batches</span>
-  <span class="c1">// @BUGBUG: We do not handle the case that fixed MB size * ratio exceeds GPU memory (we&#39;d need to split that).</span>
+<span class="w">  </span><span class="c1">// now we have enough to fill at least &#39;ratio&#39; batches</span>
+<span class="w">  </span><span class="c1">// @BUGBUG: We do not handle the case that fixed MB size * ratio exceeds GPU memory (we&#39;d need to split that).</span>
 
-  <span class="n">numReadBatches</span> <span class="o">=</span> <span class="n">pendingBatches_</span><span class="p">.</span><span class="n">size</span><span class="p">();</span> <span class="c1">// remember original batch-counter increment from reader (which is not always the same as subBatches.size() in the end)</span>
+<span class="w">  </span><span class="n">numReadBatches</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="n">pendingBatches_</span><span class="p">.</span><span class="n">size</span><span class="p">();</span><span class="w"> </span><span class="c1">// remember original batch-counter increment from reader (which is not always the same as subBatches.size() in the end)</span>
 
-  <span class="c1">// in fact, we got too much, so make up for it by shortening all batches to accurately reflect desired ratio</span>
-  <span class="c1">// e.g. ratio = 3.3 for 4 batches -&gt; Reduce each by 3.3/4</span>
-  <span class="c1">// Alternatively, we could just shorten the last &#39;warp&#39;, but that would not be invariant to warp size.</span>
-  <span class="k">for</span> <span class="p">(</span><span class="k">auto</span><span class="o">&amp;</span> <span class="nl">batch</span> <span class="p">:</span> <span class="n">pendingBatches_</span><span class="p">)</span> <span class="p">{</span>
-    <span class="k">auto</span> <span class="n">reducedBatchSize</span> <span class="o">=</span> <span class="p">(</span><span class="kt">size_t</span><span class="p">)</span><span class="n">ceil</span><span class="p">((</span><span class="kt">double</span><span class="p">)</span><span class="n">batch</span><span class="o">-&gt;</span><span class="n">size</span><span class="p">()</span> <span class="o">*</span> <span class="n">ratio</span> <span class="o">/</span> <span class="p">(</span><span class="kt">double</span><span class="p">)</span><span class="n">pendingBatches_</span><span class="p">.</span><span class="n">size</span><span class="p">());</span>
-    <span class="kt">size_t</span> <span class="n">minSize</span> <span class="o">=</span> <span class="mi">1</span><span class="p">;</span>
-    <span class="k">if</span> <span class="p">(</span><span class="n">pendingBatches_</span><span class="p">.</span><span class="n">size</span><span class="p">()</span> <span class="o">==</span> <span class="mi">1</span><span class="p">)</span> <span class="p">{</span> <span class="c1">// enforce a minimum (only needed/correct if still in first batch)</span>
-      <span class="kt">size_t</span> <span class="n">minTrgWords</span> <span class="o">=</span> <span class="mi">256</span><span class="p">;</span>        <span class="c1">// don&#39;t go below this number of target words, as it seems excessive  --@TODO: parameterize?</span>
-      <span class="n">minSize</span> <span class="o">=</span> <span class="mi">1</span> <span class="o">+</span> <span class="p">(</span><span class="n">minTrgWords</span> <span class="o">*</span> <span class="n">batch</span><span class="o">-&gt;</span><span class="n">size</span><span class="p">()</span> <span class="o">-</span> <span class="mi">1</span><span class="p">)</span> <span class="o">/</span> <span class="n">batch</span><span class="o">-&gt;</span><span class="n">wordsTrg</span><span class="p">();</span> <span class="c1">// approximately convert minTrgWords into a #sentences</span>
-    <span class="p">}</span>
-    <span class="n">reducedBatchSize</span> <span class="o">=</span> <span class="n">std</span><span class="o">::</span><span class="n">max</span><span class="p">(</span><span class="n">reducedBatchSize</span><span class="p">,</span> <span class="n">minSize</span><span class="p">);</span>
-    <span class="k">if</span> <span class="p">(</span><span class="n">reducedBatchSize</span> <span class="o">&lt;</span> <span class="n">batch</span><span class="o">-&gt;</span><span class="n">size</span><span class="p">())</span>
-      <span class="n">batch</span> <span class="o">=</span> <span class="n">batch</span><span class="o">-&gt;</span><span class="n">split</span><span class="p">(</span><span class="cm">/*numSubBatches=*/</span><span class="mi">1</span><span class="p">,</span> <span class="n">reducedBatchSize</span><span class="p">).</span><span class="n">front</span><span class="p">();</span>
-  <span class="p">}</span>
+<span class="w">  </span><span class="c1">// in fact, we got too much, so make up for it by shortening all batches to accurately reflect desired ratio</span>
+<span class="w">  </span><span class="c1">// e.g. ratio = 3.3 for 4 batches -&gt; Reduce each by 3.3/4</span>
+<span class="w">  </span><span class="c1">// Alternatively, we could just shorten the last &#39;warp&#39;, but that would not be invariant to warp size.</span>
+<span class="w">  </span><span class="k">for</span><span class="w"> </span><span class="p">(</span><span class="k">auto</span><span class="o">&amp;</span><span class="w"> </span><span class="n">batch</span><span class="w"> </span><span class="o">:</span><span class="w"> </span><span class="n">pendingBatches_</span><span class="p">)</span><span class="w"> </span><span class="p">{</span><span class="w"></span>
+<span class="w">    </span><span class="k">auto</span><span class="w"> </span><span class="n">reducedBatchSize</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="p">(</span><span class="kt">size_t</span><span class="p">)</span><span class="n">ceil</span><span class="p">((</span><span class="kt">double</span><span class="p">)</span><span class="n">batch</span><span class="o">-&gt;</span><span class="n">size</span><span class="p">()</span><span class="w"> </span><span class="o">*</span><span class="w"> </span><span class="n">ratio</span><span class="w"> </span><span class="o">/</span><span class="w"> </span><span class="p">(</span><span class="kt">double</span><span class="p">)</span><span class="n">pendingBatches_</span><span class="p">.</span><span class="n">size</span><span class="p">());</span><span class="w"></span>
+<span class="w">    </span><span class="kt">size_t</span><span class="w"> </span><span class="n">minSize</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="mi">1</span><span class="p">;</span><span class="w"></span>
+<span class="w">    </span><span class="k">if</span><span class="w"> </span><span class="p">(</span><span class="n">pendingBatches_</span><span class="p">.</span><span class="n">size</span><span class="p">()</span><span class="w"> </span><span class="o">==</span><span class="w"> </span><span class="mi">1</span><span class="p">)</span><span class="w"> </span><span class="p">{</span><span class="w"> </span><span class="c1">// enforce a minimum (only needed/correct if still in first batch)</span>
+<span class="w">      </span><span class="kt">size_t</span><span class="w"> </span><span class="n">minTrgWords</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="mi">256</span><span class="p">;</span><span class="w">        </span><span class="c1">// don&#39;t go below this number of target words, as it seems excessive  --@TODO: parameterize?</span>
+<span class="w">      </span><span class="n">minSize</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="mi">1</span><span class="w"> </span><span class="o">+</span><span class="w"> </span><span class="p">(</span><span class="n">minTrgWords</span><span class="w"> </span><span class="o">*</span><span class="w"> </span><span class="n">batch</span><span class="o">-&gt;</span><span class="n">size</span><span class="p">()</span><span class="w"> </span><span class="o">-</span><span class="w"> </span><span class="mi">1</span><span class="p">)</span><span class="w"> </span><span class="o">/</span><span class="w"> </span><span class="n">batch</span><span class="o">-&gt;</span><span class="n">wordsTrg</span><span class="p">();</span><span class="w"> </span><span class="c1">// approximately convert minTrgWords into a #sentences</span>
+<span class="w">    </span><span class="p">}</span><span class="w"></span>
+<span class="w">    </span><span class="n">reducedBatchSize</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="n">std</span><span class="o">::</span><span class="n">max</span><span class="p">(</span><span class="n">reducedBatchSize</span><span class="p">,</span><span class="w"> </span><span class="n">minSize</span><span class="p">);</span><span class="w"></span>
+<span class="w">    </span><span class="k">if</span><span class="w"> </span><span class="p">(</span><span class="n">reducedBatchSize</span><span class="w"> </span><span class="o">&lt;</span><span class="w"> </span><span class="n">batch</span><span class="o">-&gt;</span><span class="n">size</span><span class="p">())</span><span class="w"></span>
+<span class="w">      </span><span class="n">batch</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="n">batch</span><span class="o">-&gt;</span><span class="n">split</span><span class="p">(</span><span class="cm">/*numSubBatches=*/</span><span class="mi">1</span><span class="p">,</span><span class="w"> </span><span class="n">reducedBatchSize</span><span class="p">).</span><span class="n">front</span><span class="p">();</span><span class="w"></span>
+<span class="w">  </span><span class="p">}</span><span class="w"></span>
 
-  <span class="n">subBatches</span> <span class="o">=</span> <span class="n">std</span><span class="o">::</span><span class="n">move</span><span class="p">(</span><span class="n">pendingBatches_</span><span class="p">);</span>
+<span class="w">  </span><span class="n">subBatches</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="n">std</span><span class="o">::</span><span class="n">move</span><span class="p">(</span><span class="n">pendingBatches_</span><span class="p">);</span><span class="w"></span>
 
-  <span class="n">std</span><span class="o">::</span><span class="n">sort</span><span class="p">(</span><span class="n">subBatches</span><span class="p">.</span><span class="n">begin</span><span class="p">(),</span>
-            <span class="n">subBatches</span><span class="p">.</span><span class="n">end</span><span class="p">(),</span>
-            <span class="p">[](</span><span class="n">Ptr</span><span class="o">&lt;</span><span class="n">data</span><span class="o">::</span><span class="n">Batch</span><span class="o">&gt;</span> <span class="n">a</span><span class="p">,</span> <span class="n">Ptr</span><span class="o">&lt;</span><span class="n">data</span><span class="o">::</span><span class="n">Batch</span><span class="o">&gt;</span> <span class="n">b</span><span class="p">){</span> <span class="k">return</span> <span class="n">a</span><span class="o">-&gt;</span><span class="n">widthTrg</span><span class="p">()</span> <span class="o">&gt;</span> <span class="n">b</span><span class="o">-&gt;</span><span class="n">widthTrg</span><span class="p">();</span> <span class="p">});</span>
+<span class="w">  </span><span class="n">std</span><span class="o">::</span><span class="n">sort</span><span class="p">(</span><span class="n">subBatches</span><span class="p">.</span><span class="n">begin</span><span class="p">(),</span><span class="w"></span>
+<span class="w">            </span><span class="n">subBatches</span><span class="p">.</span><span class="n">end</span><span class="p">(),</span><span class="w"></span>
+<span class="w">            </span><span class="p">[](</span><span class="n">Ptr</span><span class="o">&lt;</span><span class="n">data</span><span class="o">::</span><span class="n">Batch</span><span class="o">&gt;</span><span class="w"> </span><span class="n">a</span><span class="p">,</span><span class="w"> </span><span class="n">Ptr</span><span class="o">&lt;</span><span class="n">data</span><span class="o">::</span><span class="n">Batch</span><span class="o">&gt;</span><span class="w"> </span><span class="n">b</span><span class="p">){</span><span class="w"> </span><span class="k">return</span><span class="w"> </span><span class="n">a</span><span class="o">-&gt;</span><span class="n">widthTrg</span><span class="p">()</span><span class="w"> </span><span class="o">&gt;</span><span class="w"> </span><span class="n">b</span><span class="o">-&gt;</span><span class="n">widthTrg</span><span class="p">();</span><span class="w"> </span><span class="p">});</span><span class="w"></span>
 
-  <span class="k">return</span> <span class="nb">true</span><span class="p">;</span>
-<span class="p">}</span>
+<span class="w">  </span><span class="k">return</span><span class="w"> </span><span class="nb">true</span><span class="p">;</span><span class="w"></span>
+<span class="p">}</span><span class="w"></span>
 
-<span class="kt">void</span> <span class="n">SyncGraphGroup</span><span class="o">::</span><span class="n">update</span><span class="p">(</span><span class="n">Ptr</span><span class="o">&lt;</span><span class="n">data</span><span class="o">::</span><span class="n">Batch</span><span class="o">&gt;</span> <span class="n">newBatch</span><span class="p">)</span> <span class="cm">/*override*/</span> <span class="p">{</span>
-  <span class="n">validate</span><span class="p">();</span>
+<span class="kt">void</span><span class="w"> </span><span class="n">SyncGraphGroup</span><span class="o">::</span><span class="n">update</span><span class="p">(</span><span class="n">Ptr</span><span class="o">&lt;</span><span class="n">data</span><span class="o">::</span><span class="n">Batch</span><span class="o">&gt;</span><span class="w"> </span><span class="n">newBatch</span><span class="p">)</span><span class="w"> </span><span class="cm">/*override*/</span><span class="w"> </span><span class="p">{</span><span class="w"></span>
+<span class="w">  </span><span class="n">validate</span><span class="p">();</span><span class="w"></span>
 
-  <span class="n">std</span><span class="o">::</span><span class="n">vector</span><span class="o">&lt;</span><span class="n">Ptr</span><span class="o">&lt;</span><span class="n">data</span><span class="o">::</span><span class="n">Batch</span><span class="o">&gt;&gt;</span> <span class="n">subBatches</span><span class="p">;</span>
-  <span class="kt">size_t</span> <span class="n">numReadBatches</span><span class="p">;</span> <span class="c1">// actual #batches delivered by reader, for restoring from checkpoint   --@TODO: reader should checkpoint itself; should not go via the scheduler</span>
-  <span class="kt">bool</span> <span class="n">gotSubBatches</span> <span class="o">=</span> <span class="n">tryGetSubBatches</span><span class="p">(</span><span class="n">newBatch</span><span class="p">,</span> <span class="n">subBatches</span><span class="p">,</span> <span class="n">numReadBatches</span><span class="p">);</span>
+<span class="w">  </span><span class="n">std</span><span class="o">::</span><span class="n">vector</span><span class="o">&lt;</span><span class="n">Ptr</span><span class="o">&lt;</span><span class="n">data</span><span class="o">::</span><span class="n">Batch</span><span class="o">&gt;&gt;</span><span class="w"> </span><span class="n">subBatches</span><span class="p">;</span><span class="w"></span>
+<span class="w">  </span><span class="kt">size_t</span><span class="w"> </span><span class="n">numReadBatches</span><span class="p">;</span><span class="w"> </span><span class="c1">// actual #batches delivered by reader, for restoring from checkpoint   --@TODO: reader should checkpoint itself; should not go via the scheduler</span>
+<span class="w">  </span><span class="kt">bool</span><span class="w"> </span><span class="n">gotSubBatches</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="n">tryGetSubBatches</span><span class="p">(</span><span class="n">newBatch</span><span class="p">,</span><span class="w"> </span><span class="n">subBatches</span><span class="p">,</span><span class="w"> </span><span class="n">numReadBatches</span><span class="p">);</span><span class="w"></span>
 
-  <span class="c1">// not enough data yet: return right away</span>
-  <span class="k">if</span> <span class="p">(</span><span class="o">!</span><span class="n">gotSubBatches</span><span class="p">)</span>
-    <span class="k">return</span><span class="p">;</span>
+<span class="w">  </span><span class="c1">// not enough data yet: return right away</span>
+<span class="w">  </span><span class="k">if</span><span class="w"> </span><span class="p">(</span><span class="o">!</span><span class="n">gotSubBatches</span><span class="p">)</span><span class="w"></span>
+<span class="w">    </span><span class="k">return</span><span class="p">;</span><span class="w"></span>
 
-  <span class="c1">// when decoupled, put barrier here?</span>
-  <span class="n">barrier</span><span class="p">();</span>
-  <span class="n">update</span><span class="p">(</span><span class="n">subBatches</span><span class="p">,</span> <span class="n">numReadBatches</span><span class="p">);</span>
-<span class="p">}</span>
+<span class="w">  </span><span class="c1">// when decoupled, put barrier here?</span>
+<span class="w">  </span><span class="n">barrier</span><span class="p">();</span><span class="w"></span>
+<span class="w">  </span><span class="n">update</span><span class="p">(</span><span class="n">subBatches</span><span class="p">,</span><span class="w"> </span><span class="n">numReadBatches</span><span class="p">);</span><span class="w"></span>
+<span class="p">}</span><span class="w"></span>
 
-<span class="kt">void</span> <span class="n">SyncGraphGroup</span><span class="o">::</span><span class="n">update</span><span class="p">(</span><span class="n">std</span><span class="o">::</span><span class="n">vector</span><span class="o">&lt;</span><span class="n">Ptr</span><span class="o">&lt;</span><span class="n">data</span><span class="o">::</span><span class="n">Batch</span><span class="o">&gt;&gt;</span> <span class="n">subBatches</span><span class="p">,</span> <span class="kt">size_t</span> <span class="n">numReadBatches</span><span class="p">)</span> <span class="p">{</span>
-  <span class="kt">size_t</span> <span class="n">updateBatchSize</span> <span class="o">=</span> <span class="mi">0</span><span class="p">;</span>
-  <span class="kt">size_t</span> <span class="n">updateTargetWords</span> <span class="o">=</span> <span class="mi">0</span><span class="p">;</span>
-  <span class="k">for</span> <span class="p">(</span><span class="k">const</span> <span class="k">auto</span><span class="o">&amp;</span> <span class="nl">batch</span> <span class="p">:</span> <span class="n">subBatches</span><span class="p">)</span> <span class="p">{</span>
-    <span class="n">updateBatchSize</span>   <span class="o">+=</span> <span class="n">batch</span><span class="o">-&gt;</span><span class="n">size</span><span class="p">();</span>
-    <span class="n">updateTargetWords</span> <span class="o">+=</span> <span class="n">batch</span><span class="o">-&gt;</span><span class="n">wordsTrg</span><span class="p">();</span>
-  <span class="p">}</span>
-  <span class="n">mpi_</span><span class="o">-&gt;</span><span class="n">allReduce</span><span class="p">(</span><span class="o">&amp;</span><span class="n">updateTargetWords</span><span class="p">,</span> <span class="o">&amp;</span><span class="n">updateTargetWords</span><span class="p">,</span> <span class="mi">1</span><span class="p">,</span> <span class="n">IMPIWrapper</span><span class="o">::</span><span class="n">getDataType</span><span class="p">(</span><span class="o">&amp;</span><span class="n">updateTargetWords</span><span class="p">),</span> <span class="n">MPI_SUM</span><span class="p">);</span>
-  <span class="n">mpi_</span><span class="o">-&gt;</span><span class="n">allReduce</span><span class="p">(</span><span class="o">&amp;</span><span class="n">updateBatchSize</span><span class="p">,</span> <span class="o">&amp;</span><span class="n">updateBatchSize</span><span class="p">,</span> <span class="mi">1</span><span class="p">,</span> <span class="n">IMPIWrapper</span><span class="o">::</span><span class="n">getDataType</span><span class="p">(</span><span class="o">&amp;</span><span class="n">updateBatchSize</span><span class="p">),</span> <span class="n">MPI_SUM</span><span class="p">);</span>
+<span class="kt">void</span><span class="w"> </span><span class="n">SyncGraphGroup</span><span class="o">::</span><span class="n">update</span><span class="p">(</span><span class="n">std</span><span class="o">::</span><span class="n">vector</span><span class="o">&lt;</span><span class="n">Ptr</span><span class="o">&lt;</span><span class="n">data</span><span class="o">::</span><span class="n">Batch</span><span class="o">&gt;&gt;</span><span class="w"> </span><span class="n">subBatches</span><span class="p">,</span><span class="w"> </span><span class="kt">size_t</span><span class="w"> </span><span class="n">numReadBatches</span><span class="p">)</span><span class="w"> </span><span class="p">{</span><span class="w"></span>
+<span class="w">  </span><span class="kt">size_t</span><span class="w"> </span><span class="n">updateBatchSize</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="mi">0</span><span class="p">;</span><span class="w"></span>
+<span class="w">  </span><span class="kt">size_t</span><span class="w"> </span><span class="n">updateTargetWords</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="mi">0</span><span class="p">;</span><span class="w"></span>
+<span class="w">  </span><span class="k">for</span><span class="w"> </span><span class="p">(</span><span class="k">const</span><span class="w"> </span><span class="k">auto</span><span class="o">&amp;</span><span class="w"> </span><span class="n">batch</span><span class="w"> </span><span class="o">:</span><span class="w"> </span><span class="n">subBatches</span><span class="p">)</span><span class="w"> </span><span class="p">{</span><span class="w"></span>
+<span class="w">    </span><span class="n">updateBatchSize</span><span class="w">   </span><span class="o">+=</span><span class="w"> </span><span class="n">batch</span><span class="o">-&gt;</span><span class="n">size</span><span class="p">();</span><span class="w"></span>
+<span class="w">    </span><span class="n">updateTargetWords</span><span class="w"> </span><span class="o">+=</span><span class="w"> </span><span class="n">batch</span><span class="o">-&gt;</span><span class="n">wordsTrg</span><span class="p">();</span><span class="w"></span>
+<span class="w">  </span><span class="p">}</span><span class="w"></span>
+<span class="w">  </span><span class="n">mpi_</span><span class="o">-&gt;</span><span class="n">allReduce</span><span class="p">(</span><span class="o">&amp;</span><span class="n">updateTargetWords</span><span class="p">,</span><span class="w"> </span><span class="o">&amp;</span><span class="n">updateTargetWords</span><span class="p">,</span><span class="w"> </span><span class="mi">1</span><span class="p">,</span><span class="w"> </span><span class="n">IMPIWrapper</span><span class="o">::</span><span class="n">getDataType</span><span class="p">(</span><span class="o">&amp;</span><span class="n">updateTargetWords</span><span class="p">),</span><span class="w"> </span><span class="n">MPI_SUM</span><span class="p">);</span><span class="w"></span>
+<span class="w">  </span><span class="n">mpi_</span><span class="o">-&gt;</span><span class="n">allReduce</span><span class="p">(</span><span class="o">&amp;</span><span class="n">updateBatchSize</span><span class="p">,</span><span class="w"> </span><span class="o">&amp;</span><span class="n">updateBatchSize</span><span class="p">,</span><span class="w"> </span><span class="mi">1</span><span class="p">,</span><span class="w"> </span><span class="n">IMPIWrapper</span><span class="o">::</span><span class="n">getDataType</span><span class="p">(</span><span class="o">&amp;</span><span class="n">updateBatchSize</span><span class="p">),</span><span class="w"> </span><span class="n">MPI_SUM</span><span class="p">);</span><span class="w"></span>
 
-  <span class="n">std</span><span class="o">::</span><span class="n">sort</span><span class="p">(</span><span class="n">subBatches</span><span class="p">.</span><span class="n">begin</span><span class="p">(),</span> <span class="n">subBatches</span><span class="p">.</span><span class="n">end</span><span class="p">(),</span>
-            <span class="p">[](</span><span class="n">Ptr</span><span class="o">&lt;</span><span class="n">data</span><span class="o">::</span><span class="n">Batch</span><span class="o">&gt;</span> <span class="n">a</span><span class="p">,</span> <span class="n">Ptr</span><span class="o">&lt;</span><span class="n">data</span><span class="o">::</span><span class="n">Batch</span><span class="o">&gt;</span> <span class="n">b</span><span class="p">)</span> <span class="p">{</span> <span class="k">return</span> <span class="n">a</span><span class="o">-&gt;</span><span class="n">wordsTrg</span><span class="p">()</span> <span class="o">&gt;</span> <span class="n">b</span><span class="o">-&gt;</span><span class="n">wordsTrg</span><span class="p">();</span> <span class="p">});</span>
+<span class="w">  </span><span class="n">std</span><span class="o">::</span><span class="n">sort</span><span class="p">(</span><span class="n">subBatches</span><span class="p">.</span><span class="n">begin</span><span class="p">(),</span><span class="w"> </span><span class="n">subBatches</span><span class="p">.</span><span class="n">end</span><span class="p">(),</span><span class="w"></span>
+<span class="w">            </span><span class="p">[](</span><span class="n">Ptr</span><span class="o">&lt;</span><span class="n">data</span><span class="o">::</span><span class="n">Batch</span><span class="o">&gt;</span><span class="w"> </span><span class="n">a</span><span class="p">,</span><span class="w"> </span><span class="n">Ptr</span><span class="o">&lt;</span><span class="n">data</span><span class="o">::</span><span class="n">Batch</span><span class="o">&gt;</span><span class="w"> </span><span class="n">b</span><span class="p">)</span><span class="w"> </span><span class="p">{</span><span class="w"> </span><span class="k">return</span><span class="w"> </span><span class="n">a</span><span class="o">-&gt;</span><span class="n">wordsTrg</span><span class="p">()</span><span class="w"> </span><span class="o">&gt;</span><span class="w"> </span><span class="n">b</span><span class="o">-&gt;</span><span class="n">wordsTrg</span><span class="p">();</span><span class="w"> </span><span class="p">});</span><span class="w"></span>
 
-  <span class="c1">// Helper to access the subBatches array</span>
-  <span class="k">auto</span> <span class="n">getSubBatch</span> <span class="o">=</span> <span class="p">[</span><span class="o">&amp;</span><span class="p">](</span><span class="kt">size_t</span> <span class="n">warp</span><span class="p">,</span> <span class="kt">size_t</span> <span class="n">localDeviceIndex</span><span class="p">,</span> <span class="kt">size_t</span> <span class="cm">/*rank*/</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="n">Ptr</span><span class="o">&lt;</span><span class="n">data</span><span class="o">::</span><span class="n">Batch</span><span class="o">&gt;</span> <span class="p">{</span>
-    <span class="c1">// Warp should be slowest changing dimension. If subBatches are sorted by</span>
-    <span class="c1">// length, then grouping sentences of similar length into the same delay step can</span>
-    <span class="c1">// reduce unnecessary time spent in padding.</span>
-    <span class="k">auto</span> <span class="n">index</span> <span class="o">=</span> <span class="p">(</span><span class="n">warp</span> <span class="p">)</span> <span class="o">*</span> <span class="n">devices_</span><span class="p">.</span><span class="n">size</span><span class="p">()</span> <span class="o">+</span> <span class="n">localDeviceIndex</span><span class="p">;</span>
-    <span class="k">if</span> <span class="p">(</span><span class="n">index</span> <span class="o">&lt;</span> <span class="n">subBatches</span><span class="p">.</span><span class="n">size</span><span class="p">())</span>
-      <span class="k">return</span> <span class="n">subBatches</span><span class="p">[</span><span class="n">index</span><span class="p">];</span>
-    <span class="k">else</span>
-      <span class="k">return</span> <span class="k">nullptr</span><span class="p">;</span> <span class="c1">// null if we reached beyond the end</span>
-  <span class="p">};</span>
+<span class="w">  </span><span class="c1">// Helper to access the subBatches array</span>
+<span class="w">  </span><span class="k">auto</span><span class="w"> </span><span class="n">getSubBatch</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="p">[</span><span class="o">&amp;</span><span class="p">](</span><span class="kt">size_t</span><span class="w"> </span><span class="n">warp</span><span class="p">,</span><span class="w"> </span><span class="kt">size_t</span><span class="w"> </span><span class="n">localDeviceIndex</span><span class="p">,</span><span class="w"> </span><span class="kt">size_t</span><span class="w"> </span><span class="cm">/*rank*/</span><span class="p">)</span><span class="w"> </span><span class="o">-&gt;</span><span class="w"> </span><span class="n">Ptr</span><span class="o">&lt;</span><span class="n">data</span><span class="o">::</span><span class="n">Batch</span><span class="o">&gt;</span><span class="w"> </span><span class="p">{</span><span class="w"></span>
+<span class="w">    </span><span class="c1">// Warp should be slowest changing dimension. If subBatches are sorted by</span>
+<span class="w">    </span><span class="c1">// length, then grouping sentences of similar length into the same delay step can</span>
+<span class="w">    </span><span class="c1">// reduce unnecessary time spent in padding.</span>
+<span class="w">    </span><span class="k">auto</span><span class="w"> </span><span class="n">index</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="p">(</span><span class="n">warp</span><span class="w"> </span><span class="p">)</span><span class="w"> </span><span class="o">*</span><span class="w"> </span><span class="n">devices_</span><span class="p">.</span><span class="n">size</span><span class="p">()</span><span class="w"> </span><span class="o">+</span><span class="w"> </span><span class="n">localDeviceIndex</span><span class="p">;</span><span class="w"></span>
+<span class="w">    </span><span class="k">if</span><span class="w"> </span><span class="p">(</span><span class="n">index</span><span class="w"> </span><span class="o">&lt;</span><span class="w"> </span><span class="n">subBatches</span><span class="p">.</span><span class="n">size</span><span class="p">())</span><span class="w"></span>
+<span class="w">      </span><span class="k">return</span><span class="w"> </span><span class="n">subBatches</span><span class="p">[</span><span class="n">index</span><span class="p">];</span><span class="w"></span>
+<span class="w">    </span><span class="k">else</span><span class="w"></span>
+<span class="w">      </span><span class="k">return</span><span class="w"> </span><span class="k">nullptr</span><span class="p">;</span><span class="w"> </span><span class="c1">// null if we reached beyond the end</span>
+<span class="w">  </span><span class="p">};</span><span class="w"></span>
 
-  <span class="c1">// Upon very first execution, reset everything</span>
-  <span class="k">if</span><span class="p">(</span><span class="n">first_</span><span class="p">)</span> <span class="p">{</span>
-    <span class="n">LOG</span><span class="p">(</span><span class="n">info</span><span class="p">,</span> <span class="s">&quot;[training] Batches are processed as {} process(es) x {} devices/process&quot;</span><span class="p">,</span>
-        <span class="n">mpi_</span><span class="o">-&gt;</span><span class="n">numMPIProcesses</span><span class="p">(),</span> <span class="n">devices_</span><span class="p">.</span><span class="n">size</span><span class="p">());</span>
-    <span class="n">initialize</span><span class="p">(</span><span class="n">subBatches</span><span class="p">.</span><span class="n">front</span><span class="p">());</span> <span class="c1">// @TODO: rename to lazyInitialization, move to GraphGroup</span>
-    <span class="n">first_</span> <span class="o">=</span> <span class="nb">false</span><span class="p">;</span>
-  <span class="p">}</span>
+<span class="w">  </span><span class="c1">// Upon very first execution, reset everything</span>
+<span class="w">  </span><span class="k">if</span><span class="p">(</span><span class="n">first_</span><span class="p">)</span><span class="w"> </span><span class="p">{</span><span class="w"></span>
+<span class="w">    </span><span class="n">LOG</span><span class="p">(</span><span class="n">info</span><span class="p">,</span><span class="w"> </span><span class="s">&quot;[training] Batches are processed as {} process(es) x {} devices/process&quot;</span><span class="p">,</span><span class="w"></span>
+<span class="w">        </span><span class="n">mpi_</span><span class="o">-&gt;</span><span class="n">numMPIProcesses</span><span class="p">(),</span><span class="w"> </span><span class="n">devices_</span><span class="p">.</span><span class="n">size</span><span class="p">());</span><span class="w"></span>
+<span class="w">    </span><span class="n">initialize</span><span class="p">(</span><span class="n">subBatches</span><span class="p">.</span><span class="n">front</span><span class="p">());</span><span class="w"> </span><span class="c1">// @TODO: rename to lazyInitialization, move to GraphGroup</span>
+<span class="w">    </span><span class="n">first_</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="nb">false</span><span class="p">;</span><span class="w"></span>
+<span class="w">  </span><span class="p">}</span><span class="w"></span>
 
-  <span class="c1">// Compute gradients</span>
-  <span class="c1">// This happens in multiple steps in case of delay &gt; 1.</span>
-  <span class="n">std</span><span class="o">::</span><span class="n">vector</span><span class="o">&lt;</span><span class="n">StaticLoss</span><span class="o">&gt;</span> <span class="n">localDeviceLosses</span><span class="p">(</span><span class="n">devices_</span><span class="p">.</span><span class="n">size</span><span class="p">());</span> <span class="c1">// [local device index] aggregate cost for each local device</span>
-  <span class="n">comm_</span><span class="o">-&gt;</span><span class="n">foreach</span><span class="p">([</span><span class="o">&amp;</span><span class="p">](</span><span class="kt">size_t</span> <span class="n">localDeviceIndex</span><span class="p">,</span> <span class="kt">size_t</span> <span class="cm">/*begin*/</span><span class="p">,</span> <span class="kt">size_t</span> <span class="cm">/*end*/</span><span class="p">)</span> <span class="p">{</span> <span class="c1">// parallel across devices. Aggregate for warp &gt; 1.</span>
-    <span class="k">auto</span> <span class="n">graph</span> <span class="o">=</span> <span class="n">graphs_</span><span class="p">[</span><span class="n">localDeviceIndex</span><span class="p">];</span>
-    <span class="c1">// reset gradient  --presently done outside</span>
-    <span class="c1">// graph-&gt;params()-&gt;allocateBackward();</span>
-    <span class="c1">// graph-&gt;params()-&gt;set_zero_adjoint();</span>
-    <span class="c1">// This happens in multiple steps if there are more subbatches than devices.</span>
-    <span class="k">for</span> <span class="p">(</span><span class="kt">size_t</span> <span class="n">warp</span> <span class="o">=</span> <span class="mi">0</span><span class="p">;</span> <span class="p">;</span> <span class="n">warp</span><span class="o">++</span><span class="p">)</span> <span class="p">{</span>
-      <span class="c1">// Execute single forward/backward step</span>
-      <span class="k">auto</span> <span class="n">subBatch</span> <span class="o">=</span> <span class="n">getSubBatch</span><span class="p">(</span><span class="n">warp</span><span class="p">,</span> <span class="n">localDeviceIndex</span><span class="p">,</span> <span class="n">mpi_</span><span class="o">-&gt;</span><span class="n">myMPIRank</span><span class="p">());</span>
-      <span class="k">if</span> <span class="p">(</span><span class="o">!</span><span class="n">subBatch</span><span class="p">)</span>
-        <span class="k">break</span><span class="p">;</span>
+<span class="w">  </span><span class="c1">// Compute gradients</span>
+<span class="w">  </span><span class="c1">// This happens in multiple steps in case of delay &gt; 1.</span>
+<span class="w">  </span><span class="n">std</span><span class="o">::</span><span class="n">vector</span><span class="o">&lt;</span><span class="n">StaticLoss</span><span class="o">&gt;</span><span class="w"> </span><span class="n">localDeviceLosses</span><span class="p">(</span><span class="n">devices_</span><span class="p">.</span><span class="n">size</span><span class="p">());</span><span class="w"> </span><span class="c1">// [local device index] aggregate cost for each local device</span>
+<span class="w">  </span><span class="n">comm_</span><span class="o">-&gt;</span><span class="n">foreach</span><span class="p">([</span><span class="o">&amp;</span><span class="p">](</span><span class="kt">size_t</span><span class="w"> </span><span class="n">localDeviceIndex</span><span class="p">,</span><span class="w"> </span><span class="kt">size_t</span><span class="w"> </span><span class="cm">/*begin*/</span><span class="p">,</span><span class="w"> </span><span class="kt">size_t</span><span class="w"> </span><span class="cm">/*end*/</span><span class="p">)</span><span class="w"> </span><span class="p">{</span><span class="w"> </span><span class="c1">// parallel across devices. Aggregate for warp &gt; 1.</span>
+<span class="w">    </span><span class="k">auto</span><span class="w"> </span><span class="n">graph</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="n">graphs_</span><span class="p">[</span><span class="n">localDeviceIndex</span><span class="p">];</span><span class="w"></span>
+<span class="w">    </span><span class="c1">// reset gradient  --presently done outside</span>
+<span class="w">    </span><span class="c1">// graph-&gt;params()-&gt;allocateBackward();</span>
+<span class="w">    </span><span class="c1">// graph-&gt;params()-&gt;set_zero_adjoint();</span>
+<span class="w">    </span><span class="c1">// This happens in multiple steps if there are more subbatches than devices.</span>
+<span class="w">    </span><span class="k">for</span><span class="w"> </span><span class="p">(</span><span class="kt">size_t</span><span class="w"> </span><span class="n">warp</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="mi">0</span><span class="p">;</span><span class="w"> </span><span class="p">;</span><span class="w"> </span><span class="n">warp</span><span class="o">++</span><span class="p">)</span><span class="w"> </span><span class="p">{</span><span class="w"></span>
+<span class="w">      </span><span class="c1">// Execute single forward/backward step</span>
+<span class="w">      </span><span class="k">auto</span><span class="w"> </span><span class="n">subBatch</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="n">getSubBatch</span><span class="p">(</span><span class="n">warp</span><span class="p">,</span><span class="w"> </span><span class="n">localDeviceIndex</span><span class="p">,</span><span class="w"> </span><span class="n">mpi_</span><span class="o">-&gt;</span><span class="n">myMPIRank</span><span class="p">());</span><span class="w"></span>
+<span class="w">      </span><span class="k">if</span><span class="w"> </span><span class="p">(</span><span class="o">!</span><span class="n">subBatch</span><span class="p">)</span><span class="w"></span>
+<span class="w">        </span><span class="k">break</span><span class="p">;</span><span class="w"></span>
 
-      <span class="p">{</span> <span class="c1">// let loss go out of scope, frees memory</span>
-        <span class="k">auto</span> <span class="n">rationalLoss</span> <span class="o">=</span> <span class="n">models_</span><span class="p">[</span><span class="n">localDeviceIndex</span><span class="p">]</span><span class="o">-&gt;</span><span class="n">build</span><span class="p">(</span><span class="n">graph</span><span class="p">,</span> <span class="n">subBatch</span><span class="p">);</span>
-        <span class="k">if</span><span class="p">(</span><span class="n">costScaleFactor_</span> <span class="o">!=</span> <span class="mf">1.f</span><span class="p">)</span>
-          <span class="n">rationalLoss</span><span class="o">-&gt;</span><span class="n">loss</span><span class="p">()</span> <span class="o">*</span> <span class="n">costScaleFactor_</span><span class="p">;</span>
-        <span class="n">graph</span><span class="o">-&gt;</span><span class="n">forward</span><span class="p">();</span>
+<span class="w">      </span><span class="p">{</span><span class="w"> </span><span class="c1">// let loss go out of scope, frees memory</span>
+<span class="w">        </span><span class="k">auto</span><span class="w"> </span><span class="n">rationalLoss</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="n">models_</span><span class="p">[</span><span class="n">localDeviceIndex</span><span class="p">]</span><span class="o">-&gt;</span><span class="n">build</span><span class="p">(</span><span class="n">graph</span><span class="p">,</span><span class="w"> </span><span class="n">subBatch</span><span class="p">);</span><span class="w"></span>
+<span class="w">        </span><span class="k">if</span><span class="p">(</span><span class="n">costScaleFactor_</span><span class="w"> </span><span class="o">!=</span><span class="w"> </span><span class="mf">1.f</span><span class="p">)</span><span class="w"></span>
+<span class="w">          </span><span class="n">rationalLoss</span><span class="o">-&gt;</span><span class="n">loss</span><span class="p">()</span><span class="w"> </span><span class="o">*</span><span class="w"> </span><span class="n">costScaleFactor_</span><span class="p">;</span><span class="w"></span>
+<span class="w">        </span><span class="n">graph</span><span class="o">-&gt;</span><span class="n">forward</span><span class="p">();</span><span class="w"></span>
 
-        <span class="n">localDeviceLosses</span><span class="p">[</span><span class="n">localDeviceIndex</span><span class="p">]</span> <span class="o">+=</span> <span class="o">*</span><span class="n">rationalLoss</span><span class="p">;</span>
-      <span class="p">}</span>
+<span class="w">        </span><span class="n">localDeviceLosses</span><span class="p">[</span><span class="n">localDeviceIndex</span><span class="p">]</span><span class="w"> </span><span class="o">+=</span><span class="w"> </span><span class="o">*</span><span class="n">rationalLoss</span><span class="p">;</span><span class="w"></span>
+<span class="w">      </span><span class="p">}</span><span class="w"></span>
 
-      <span class="n">graph</span><span class="o">-&gt;</span><span class="n">backward</span><span class="p">(</span><span class="cm">/*zero=*/</span><span class="nb">false</span><span class="p">);</span> <span class="c1">// (gradients are reset before we get here)</span>
-    <span class="p">}</span>
+<span class="w">      </span><span class="n">graph</span><span class="o">-&gt;</span><span class="n">backward</span><span class="p">(</span><span class="cm">/*zero=*/</span><span class="nb">false</span><span class="p">);</span><span class="w"> </span><span class="c1">// (gradients are reset before we get here)</span>
+<span class="w">    </span><span class="p">}</span><span class="w"></span>
 
 <span class="cp">#if 1</span>
-    <span class="c1">// experimental and should eventually be somewhere else</span>
-    <span class="c1">// Handle local gradient explosion but only clip to largest possible value</span>
-    <span class="c1">// given number of GPUs and type. Should clip rarely. Also clips inf</span>
-    <span class="c1">// We do another clipping/rescaling after summation.</span>
-    <span class="k">auto</span> <span class="n">gradType</span> <span class="o">=</span> <span class="n">graph</span><span class="o">-&gt;</span><span class="n">params</span><span class="p">()</span><span class="o">-&gt;</span><span class="n">grads</span><span class="p">()</span><span class="o">-&gt;</span><span class="n">type</span><span class="p">();</span>
-    <span class="k">if</span><span class="p">(</span><span class="n">sizeOf</span><span class="p">(</span><span class="n">gradType</span><span class="p">)</span> <span class="o">&lt;</span> <span class="n">sizeOf</span><span class="p">(</span><span class="n">Type</span><span class="o">::</span><span class="n">float32</span><span class="p">))</span> <span class="p">{</span>
-      <span class="k">using</span> <span class="k">namespace</span> <span class="n">functional</span><span class="p">;</span>
-      <span class="kt">size_t</span> <span class="n">numGpus</span> <span class="o">=</span> <span class="n">mpi_</span><span class="o">-&gt;</span><span class="n">numMPIProcesses</span><span class="p">()</span> <span class="o">*</span> <span class="n">devices_</span><span class="p">.</span><span class="n">size</span><span class="p">();</span>
-      <span class="kt">float</span> <span class="n">clipValue</span> <span class="o">=</span> <span class="n">NumericLimits</span><span class="o">&lt;</span><span class="kt">float</span><span class="o">&gt;</span><span class="p">(</span><span class="n">gradType</span><span class="p">).</span><span class="n">max</span> <span class="o">/</span> <span class="p">(</span><span class="kt">float</span><span class="p">)</span><span class="n">numGpus</span><span class="p">;</span>
-      <span class="n">Element</span><span class="p">(</span><span class="n">_1</span> <span class="o">=</span> <span class="n">clip</span><span class="p">(</span><span class="n">_1</span><span class="p">,</span> <span class="n">clipValue</span><span class="p">),</span> <span class="n">graph</span><span class="o">-&gt;</span><span class="n">params</span><span class="p">()</span><span class="o">-&gt;</span><span class="n">grads</span><span class="p">());</span>
-    <span class="p">}</span>
+<span class="w">    </span><span class="c1">// experimental and should eventually be somewhere else</span>
+<span class="w">    </span><span class="c1">// Handle local gradient explosion but only clip to largest possible value</span>
+<span class="w">    </span><span class="c1">// given number of GPUs and type. Should clip rarely. Also clips inf</span>
+<span class="w">    </span><span class="c1">// We do another clipping/rescaling after summation.</span>
+<span class="w">    </span><span class="k">auto</span><span class="w"> </span><span class="n">gradType</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="n">graph</span><span class="o">-&gt;</span><span class="n">params</span><span class="p">()</span><span class="o">-&gt;</span><span class="n">grads</span><span class="p">()</span><span class="o">-&gt;</span><span class="n">type</span><span class="p">();</span><span class="w"></span>
+<span class="w">    </span><span class="k">if</span><span class="p">(</span><span class="n">sizeOf</span><span class="p">(</span><span class="n">gradType</span><span class="p">)</span><span class="w"> </span><span class="o">&lt;</span><span class="w"> </span><span class="n">sizeOf</span><span class="p">(</span><span class="n">Type</span><span class="o">::</span><span class="n">float32</span><span class="p">))</span><span class="w"> </span><span class="p">{</span><span class="w"></span>
+<span class="w">      </span><span class="k">using</span><span class="w"> </span><span class="k">namespace</span><span class="w"> </span><span class="nn">functional</span><span class="p">;</span><span class="w"></span>
+<span class="w">      </span><span class="kt">size_t</span><span class="w"> </span><span class="n">numGpus</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="n">mpi_</span><span class="o">-&gt;</span><span class="n">numMPIProcesses</span><span class="p">()</span><span class="w"> </span><span class="o">*</span><span class="w"> </span><span class="n">devices_</span><span class="p">.</span><span class="n">size</span><span class="p">();</span><span class="w"></span>
+<span class="w">      </span><span class="kt">float</span><span class="w"> </span><span class="n">clipValue</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="n">NumericLimits</span><span class="o">&lt;</span><span class="kt">float</span><span class="o">&gt;</span><span class="p">(</span><span class="n">gradType</span><span class="p">).</span><span class="n">max</span><span class="w"> </span><span class="o">/</span><span class="w"> </span><span class="p">(</span><span class="kt">float</span><span class="p">)</span><span class="n">numGpus</span><span class="p">;</span><span class="w"></span>
+<span class="w">      </span><span class="n">Element</span><span class="p">(</span><span class="n">_1</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="n">clip</span><span class="p">(</span><span class="n">_1</span><span class="p">,</span><span class="w"> </span><span class="n">clipValue</span><span class="p">),</span><span class="w"> </span><span class="n">graph</span><span class="o">-&gt;</span><span class="n">params</span><span class="p">()</span><span class="o">-&gt;</span><span class="n">grads</span><span class="p">());</span><span class="w"></span>
+<span class="w">    </span><span class="p">}</span><span class="w"></span>
 <span class="cp">#endif</span>
 
-    <span class="k">return</span> <span class="nb">true</span><span class="p">;</span> <span class="c1">// dummy success</span>
-  <span class="p">});</span>
+<span class="w">    </span><span class="k">return</span><span class="w"> </span><span class="nb">true</span><span class="p">;</span><span class="w"> </span><span class="c1">// dummy success</span>
+<span class="w">  </span><span class="p">});</span><span class="w"></span>
 
-  <span class="c1">// At this point, each device on each MPI process has a gradient aggregated over a subset of the sub-batches.</span>
-  <span class="c1">// check for Nan or Inf in all summed up shards</span>
-  <span class="n">comm_</span><span class="o">-&gt;</span><span class="n">scatterReduceAndResetGrads</span><span class="p">();</span> <span class="c1">// reduce gradients across all devices (globally) into shards</span>
+<span class="w">  </span><span class="c1">// At this point, each device on each MPI process has a gradient aggregated over a subset of the sub-batches.</span>
+<span class="w">  </span><span class="c1">// check for Nan or Inf in all summed up shards</span>
+<span class="w">  </span><span class="n">comm_</span><span class="o">-&gt;</span><span class="n">scatterReduceAndResetGrads</span><span class="p">();</span><span class="w"> </span><span class="c1">// reduce gradients across all devices (globally) into shards</span>
 
-  <span class="kt">float</span> <span class="n">gradNorm</span> <span class="o">=</span> <span class="mf">0.f</span><span class="p">;</span>
-  <span class="k">if</span><span class="p">(</span><span class="n">costScale_</span> <span class="o">||</span> <span class="n">dynamicGradientScaling_</span> <span class="o">||</span> <span class="n">checkGradientNan_</span><span class="p">)</span> <span class="p">{</span>
-    <span class="c1">// Wrapping member function</span>
-    <span class="k">auto</span> <span class="n">checkNanOrNorm</span> <span class="o">=</span> <span class="p">[</span><span class="o">&amp;</span><span class="p">](</span><span class="kt">size_t</span> <span class="n">i</span><span class="p">,</span> <span class="kt">size_t</span> <span class="n">begin</span><span class="p">,</span> <span class="kt">size_t</span> <span class="n">end</span><span class="p">)</span> <span class="p">{</span>
-      <span class="k">return</span> <span class="n">GraphGroup</span><span class="o">::</span><span class="n">checkNanOrNorm</span><span class="p">(</span><span class="n">i</span><span class="p">,</span> <span class="n">begin</span><span class="p">,</span> <span class="n">end</span><span class="p">);</span>
-    <span class="p">};</span>
-    <span class="n">gradNorm</span> <span class="o">=</span> <span class="n">executeAndCollectNorm</span><span class="p">(</span><span class="n">checkNanOrNorm</span><span class="p">);</span>
-  <span class="p">}</span>
+<span class="w">  </span><span class="kt">float</span><span class="w"> </span><span class="n">gradNorm</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="mf">0.f</span><span class="p">;</span><span class="w"></span>
+<span class="w">  </span><span class="k">if</span><span class="p">(</span><span class="n">costScale_</span><span class="w"> </span><span class="o">||</span><span class="w"> </span><span class="n">dynamicGradientScaling_</span><span class="w"> </span><span class="o">||</span><span class="w"> </span><span class="n">checkGradientNan_</span><span class="p">)</span><span class="w"> </span><span class="p">{</span><span class="w"></span>
+<span class="w">    </span><span class="c1">// Wrapping member function</span>
+<span class="w">    </span><span class="k">auto</span><span class="w"> </span><span class="n">checkNanOrNorm</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="p">[</span><span class="o">&amp;</span><span class="p">](</span><span class="kt">size_t</span><span class="w"> </span><span class="n">i</span><span class="p">,</span><span class="w"> </span><span class="kt">size_t</span><span class="w"> </span><span class="n">begin</span><span class="p">,</span><span class="w"> </span><span class="kt">size_t</span><span class="w"> </span><span class="n">end</span><span class="p">)</span><span class="w"> </span><span class="p">{</span><span class="w"></span>
+<span class="w">      </span><span class="k">return</span><span class="w"> </span><span class="n">GraphGroup</span><span class="o">::</span><span class="n">checkNanOrNorm</span><span class="p">(</span><span class="n">i</span><span class="p">,</span><span class="w"> </span><span class="n">begin</span><span class="p">,</span><span class="w"> </span><span class="n">end</span><span class="p">);</span><span class="w"></span>
+<span class="w">    </span><span class="p">};</span><span class="w"></span>
+<span class="w">    </span><span class="n">gradNorm</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="n">executeAndCollectNorm</span><span class="p">(</span><span class="n">checkNanOrNorm</span><span class="p">);</span><span class="w"></span>
+<span class="w">  </span><span class="p">}</span><span class="w"></span>
 
-  <span class="kt">bool</span> <span class="n">saneGradient</span> <span class="o">=</span> <span class="n">isFinite</span><span class="p">(</span><span class="n">gradNorm</span><span class="p">);</span>
-  <span class="k">if</span><span class="p">(</span><span class="n">saneGradient</span><span class="p">)</span> <span class="p">{</span>
-    <span class="c1">// actual model update</span>
+<span class="w">  </span><span class="kt">bool</span><span class="w"> </span><span class="n">saneGradient</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="n">isFinite</span><span class="p">(</span><span class="n">gradNorm</span><span class="p">);</span><span class="w"></span>
+<span class="w">  </span><span class="k">if</span><span class="p">(</span><span class="n">saneGradient</span><span class="p">)</span><span class="w"> </span><span class="p">{</span><span class="w"></span>
+<span class="w">    </span><span class="c1">// actual model update</span>
 
-    <span class="kt">float</span> <span class="n">gradientNormalizer</span> <span class="o">=</span> <span class="n">GraphGroup</span><span class="o">::</span><span class="n">computeNormalizationFactor</span><span class="p">(</span><span class="n">gradNorm</span><span class="p">,</span> <span class="n">updateTargetWords</span><span class="p">);</span>
+<span class="w">    </span><span class="kt">float</span><span class="w"> </span><span class="n">gradientNormalizer</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="n">GraphGroup</span><span class="o">::</span><span class="n">computeNormalizationFactor</span><span class="p">(</span><span class="n">gradNorm</span><span class="p">,</span><span class="w"> </span><span class="n">updateTargetWords</span><span class="p">);</span><span class="w"></span>
 
-    <span class="c1">// Update parameter shard with gradient shard</span>
-    <span class="k">auto</span> <span class="n">update</span> <span class="o">=</span> <span class="p">[</span><span class="o">&amp;</span><span class="p">](</span><span class="kt">size_t</span> <span class="n">i</span><span class="p">,</span> <span class="kt">size_t</span> <span class="n">begin</span><span class="p">,</span> <span class="kt">size_t</span> <span class="n">end</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="kt">float</span> <span class="p">{</span>
-      <span class="k">auto</span> <span class="n">curGrad</span> <span class="o">=</span> <span class="n">graphs_</span><span class="p">[</span><span class="n">i</span><span class="p">]</span><span class="o">-&gt;</span><span class="n">params</span><span class="p">()</span><span class="o">-&gt;</span><span class="n">grads</span><span class="p">()</span><span class="o">-&gt;</span><span class="n">subtensor</span><span class="p">(</span><span class="n">begin</span><span class="p">,</span> <span class="n">end</span><span class="o">-</span><span class="n">begin</span><span class="p">);</span>
-      <span class="k">auto</span> <span class="n">curParam</span> <span class="o">=</span> <span class="n">graphs_</span><span class="p">[</span><span class="n">i</span><span class="p">]</span><span class="o">-&gt;</span><span class="n">params</span><span class="p">()</span><span class="o">-&gt;</span><span class="n">vals</span><span class="p">()</span><span class="o">-&gt;</span><span class="n">subtensor</span><span class="p">(</span><span class="n">begin</span><span class="p">,</span> <span class="n">end</span><span class="o">-</span><span class="n">begin</span><span class="p">);</span>
-      <span class="kt">float</span> <span class="n">l2norm</span> <span class="o">=</span> <span class="n">optimizerShards_</span><span class="p">[</span><span class="n">i</span><span class="p">]</span><span class="o">-&gt;</span><span class="n">update</span><span class="p">(</span><span class="n">curParam</span><span class="p">,</span> <span class="n">curGrad</span><span class="p">,</span> <span class="n">updateTargetWords</span><span class="p">,</span> <span class="n">gradientNormalizer</span><span class="p">);</span>
+<span class="w">    </span><span class="c1">// Update parameter shard with gradient shard</span>
+<span class="w">    </span><span class="k">auto</span><span class="w"> </span><span class="n">update</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="p">[</span><span class="o">&amp;</span><span class="p">](</span><span class="kt">size_t</span><span class="w"> </span><span class="n">i</span><span class="p">,</span><span class="w"> </span><span class="kt">size_t</span><span class="w"> </span><span class="n">begin</span><span class="p">,</span><span class="w"> </span><span class="kt">size_t</span><span class="w"> </span><span class="n">end</span><span class="p">)</span><span class="w"> </span><span class="o">-&gt;</span><span class="w"> </span><span class="kt">float</span><span class="w"> </span><span class="p">{</span><span class="w"></span>
+<span class="w">      </span><span class="k">auto</span><span class="w"> </span><span class="n">curGrad</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="n">graphs_</span><span class="p">[</span><span class="n">i</span><span class="p">]</span><span class="o">-&gt;</span><span class="n">params</span><span class="p">()</span><span class="o">-&gt;</span><span class="n">grads</span><span class="p">()</span><span class="o">-&gt;</span><span class="n">subtensor</span><span class="p">(</span><span class="n">begin</span><span class="p">,</span><span class="w"> </span><span class="n">end</span><span class="o">-</span><span class="n">begin</span><span class="p">);</span><span class="w"></span>
+<span class="w">      </span><span class="k">auto</span><span class="w"> </span><span class="n">curParam</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="n">graphs_</span><span class="p">[</span><span class="n">i</span><span class="p">]</span><span class="o">-&gt;</span><span class="n">params</span><span class="p">()</span><span class="o">-&gt;</span><span class="n">vals</span><span class="p">()</span><span class="o">-&gt;</span><span class="n">subtensor</span><span class="p">(</span><span class="n">begin</span><span class="p">,</span><span class="w"> </span><span class="n">end</span><span class="o">-</span><span class="n">begin</span><span class="p">);</span><span class="w"></span>
+<span class="w">      </span><span class="kt">float</span><span class="w"> </span><span class="n">l2norm</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="n">optimizerShards_</span><span class="p">[</span><span class="n">i</span><span class="p">]</span><span class="o">-&gt;</span><span class="n">update</span><span class="p">(</span><span class="n">curParam</span><span class="p">,</span><span class="w"> </span><span class="n">curGrad</span><span class="p">,</span><span class="w"> </span><span class="n">updateTargetWords</span><span class="p">,</span><span class="w"> </span><span class="n">gradientNormalizer</span><span class="p">);</span><span class="w"></span>
 
-      <span class="c1">// resets remaining gradient to zero</span>
-      <span class="n">curGrad</span><span class="o">-&gt;</span><span class="n">set</span><span class="p">(</span><span class="mf">0.f</span><span class="p">);</span> <span class="c1">// @TODO: all the different places where gradients get reset are confusing</span>
-      <span class="k">return</span> <span class="n">l2norm</span><span class="p">;</span> <span class="c1">// return partial norm</span>
-    <span class="p">};</span>
+<span class="w">      </span><span class="c1">// resets remaining gradient to zero</span>
+<span class="w">      </span><span class="n">curGrad</span><span class="o">-&gt;</span><span class="n">set</span><span class="p">(</span><span class="mf">0.f</span><span class="p">);</span><span class="w"> </span><span class="c1">// @TODO: all the different places where gradients get reset are confusing</span>
+<span class="w">      </span><span class="k">return</span><span class="w"> </span><span class="n">l2norm</span><span class="p">;</span><span class="w"> </span><span class="c1">// return partial norm</span>
+<span class="w">    </span><span class="p">};</span><span class="w"></span>
 
-    <span class="c1">// Overwrite gradNorm with new value from normalized gradient</span>
-    <span class="n">gradNorm</span> <span class="o">=</span> <span class="n">executeAndCollectNorm</span><span class="p">(</span><span class="n">update</span><span class="p">);</span>
-    <span class="k">if</span><span class="p">(</span><span class="o">!</span><span class="n">options_</span><span class="o">-&gt;</span><span class="n">get</span><span class="o">&lt;</span><span class="kt">bool</span><span class="o">&gt;</span><span class="p">(</span><span class="s">&quot;normalize-gradient&quot;</span><span class="p">))</span>
-      <span class="n">gradNorm</span> <span class="o">/=</span> <span class="n">updateTargetWords</span><span class="p">;</span> <span class="c1">// normalize for logging</span>
+<span class="w">    </span><span class="c1">// Overwrite gradNorm with new value from normalized gradient</span>
+<span class="w">    </span><span class="n">gradNorm</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="n">executeAndCollectNorm</span><span class="p">(</span><span class="n">update</span><span class="p">);</span><span class="w"></span>
+<span class="w">    </span><span class="k">if</span><span class="p">(</span><span class="o">!</span><span class="n">options_</span><span class="o">-&gt;</span><span class="n">get</span><span class="o">&lt;</span><span class="kt">bool</span><span class="o">&gt;</span><span class="p">(</span><span class="s">&quot;normalize-gradient&quot;</span><span class="p">))</span><span class="w"></span>
+<span class="w">      </span><span class="n">gradNorm</span><span class="w"> </span><span class="o">/=</span><span class="w"> </span><span class="n">updateTargetWords</span><span class="p">;</span><span class="w"> </span><span class="c1">// normalize for logging</span>
 
-    <span class="n">comm_</span><span class="o">-&gt;</span><span class="n">allGatherParams</span><span class="p">();</span> <span class="c1">// distribute param value shards back</span>
+<span class="w">    </span><span class="n">comm_</span><span class="o">-&gt;</span><span class="n">allGatherParams</span><span class="p">();</span><span class="w"> </span><span class="c1">// distribute param value shards back</span>
 
-    <span class="c1">// Re-add the error residual from previous quantization,</span>
-    <span class="c1">// then re-quantize the model back and update the error residual</span>
-    <span class="k">if</span><span class="p">(</span><span class="n">options_</span><span class="o">-&gt;</span><span class="n">get</span><span class="o">&lt;</span><span class="kt">size_t</span><span class="o">&gt;</span><span class="p">(</span><span class="s">&quot;quantize-bits&quot;</span><span class="p">)</span> <span class="o">&gt;</span> <span class="mi">0</span><span class="p">)</span>
-      <span class="n">comm_</span><span class="o">-&gt;</span><span class="n">foreach</span><span class="p">([</span><span class="o">&amp;</span><span class="p">](</span><span class="kt">size_t</span> <span class="n">idx</span><span class="p">,</span> <span class="kt">size_t</span> <span class="cm">/*begin*/</span><span class="p">,</span> <span class="kt">size_t</span> <span class="cm">/*end*/</span><span class="p">)</span> <span class="p">{</span>
-        <span class="n">quantizers_</span><span class="p">[</span><span class="n">idx</span><span class="p">]</span><span class="o">-&gt;</span><span class="n">quantize</span><span class="p">(</span><span class="n">graphs_</span><span class="p">[</span><span class="n">idx</span><span class="p">]);</span> <span class="k">return</span> <span class="nb">true</span><span class="p">;</span>
-      <span class="p">});</span>
+<span class="w">    </span><span class="c1">// Re-add the error residual from previous quantization,</span>
+<span class="w">    </span><span class="c1">// then re-quantize the model back and update the error residual</span>
+<span class="w">    </span><span class="k">if</span><span class="p">(</span><span class="n">options_</span><span class="o">-&gt;</span><span class="n">get</span><span class="o">&lt;</span><span class="kt">size_t</span><span class="o">&gt;</span><span class="p">(</span><span class="s">&quot;quantize-bits&quot;</span><span class="p">)</span><span class="w"> </span><span class="o">&gt;</span><span class="w"> </span><span class="mi">0</span><span class="p">)</span><span class="w"></span>
+<span class="w">      </span><span class="n">comm_</span><span class="o">-&gt;</span><span class="n">foreach</span><span class="p">([</span><span class="o">&amp;</span><span class="p">](</span><span class="kt">size_t</span><span class="w"> </span><span class="n">idx</span><span class="p">,</span><span class="w"> </span><span class="kt">size_t</span><span class="w"> </span><span class="cm">/*begin*/</span><span class="p">,</span><span class="w"> </span><span class="kt">size_t</span><span class="w"> </span><span class="cm">/*end*/</span><span class="p">)</span><span class="w"> </span><span class="p">{</span><span class="w"></span>
+<span class="w">        </span><span class="n">quantizers_</span><span class="p">[</span><span class="n">idx</span><span class="p">]</span><span class="o">-&gt;</span><span class="n">quantize</span><span class="p">(</span><span class="n">graphs_</span><span class="p">[</span><span class="n">idx</span><span class="p">]);</span><span class="w"> </span><span class="k">return</span><span class="w"> </span><span class="nb">true</span><span class="p">;</span><span class="w"></span>
+<span class="w">      </span><span class="p">});</span><span class="w"></span>
 
-  <span class="p">}</span> <span class="k">else</span> <span class="p">{</span>
-    <span class="n">LOG</span><span class="p">(</span><span class="n">debug</span><span class="p">,</span> <span class="s">&quot;Seen NaN in gradient, skipping update, resetting gradient&quot;</span><span class="p">);</span>
+<span class="w">  </span><span class="p">}</span><span class="w"> </span><span class="k">else</span><span class="w"> </span><span class="p">{</span><span class="w"></span>
+<span class="w">    </span><span class="n">LOG</span><span class="p">(</span><span class="n">debug</span><span class="p">,</span><span class="w"> </span><span class="s">&quot;Seen NaN in gradient, skipping update, resetting gradient&quot;</span><span class="p">);</span><span class="w"></span>
 
-    <span class="c1">// Reset gradient shard when no update was done</span>
-    <span class="k">auto</span> <span class="n">reset</span> <span class="o">=</span> <span class="p">[</span><span class="o">&amp;</span><span class="p">](</span><span class="kt">size_t</span> <span class="n">i</span><span class="p">,</span> <span class="kt">size_t</span> <span class="n">begin</span><span class="p">,</span> <span class="kt">size_t</span> <span class="n">end</span><span class="p">)</span> <span class="p">{</span>
-      <span class="k">auto</span> <span class="n">curGrad</span> <span class="o">=</span> <span class="n">graphs_</span><span class="p">[</span><span class="n">i</span><span class="p">]</span><span class="o">-&gt;</span><span class="n">params</span><span class="p">()</span><span class="o">-&gt;</span><span class="n">grads</span><span class="p">()</span><span class="o">-&gt;</span><span class="n">subtensor</span><span class="p">(</span><span class="n">begin</span><span class="p">,</span> <span class="n">end</span><span class="o">-</span><span class="n">begin</span><span class="p">);</span>
-      <span class="n">curGrad</span><span class="o">-&gt;</span><span class="n">set</span><span class="p">(</span><span class="mf">0.f</span><span class="p">);</span> <span class="c1">// @TODO: all the different places where gradients get reset are confusing</span>
-      <span class="k">return</span> <span class="nb">true</span><span class="p">;</span> <span class="c1">// dummy success</span>
-    <span class="p">};</span>
+<span class="w">    </span><span class="c1">// Reset gradient shard when no update was done</span>
+<span class="w">    </span><span class="k">auto</span><span class="w"> </span><span class="n">reset</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="p">[</span><span class="o">&amp;</span><span class="p">](</span><span class="kt">size_t</span><span class="w"> </span><span class="n">i</span><span class="p">,</span><span class="w"> </span><span class="kt">size_t</span><span class="w"> </span><span class="n">begin</span><span class="p">,</span><span class="w"> </span><span class="kt">size_t</span><span class="w"> </span><span class="n">end</span><span class="p">)</span><span class="w"> </span><span class="p">{</span><span class="w"></span>
+<span class="w">      </span><span class="k">auto</span><span class="w"> </span><span class="n">curGrad</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="n">graphs_</span><span class="p">[</span><span class="n">i</span><span class="p">]</span><span class="o">-&gt;</span><span class="n">params</span><span class="p">()</span><span class="o">-&gt;</span><span class="n">grads</span><span class="p">()</span><span class="o">-&gt;</span><span class="n">subtensor</span><span class="p">(</span><span class="n">begin</span><span class="p">,</span><span class="w"> </span><span class="n">end</span><span class="o">-</span><span class="n">begin</span><span class="p">);</span><span class="w"></span>
+<span class="w">      </span><span class="n">curGrad</span><span class="o">-&gt;</span><span class="n">set</span><span class="p">(</span><span class="mf">0.f</span><span class="p">);</span><span class="w"> </span><span class="c1">// @TODO: all the different places where gradients get reset are confusing</span>
+<span class="w">      </span><span class="k">return</span><span class="w"> </span><span class="nb">true</span><span class="p">;</span><span class="w"> </span><span class="c1">// dummy success</span>
+<span class="w">    </span><span class="p">};</span><span class="w"></span>
 
-    <span class="n">gradNorm</span> <span class="o">=</span> <span class="mf">0.f</span><span class="p">;</span>
-    <span class="n">comm_</span><span class="o">-&gt;</span><span class="n">foreach</span><span class="p">(</span><span class="n">reset</span><span class="p">);</span>   <span class="c1">// per-shard model-update</span>
-    <span class="n">GraphGroup</span><span class="o">::</span><span class="n">decreaseCostScaleFactor</span><span class="p">();</span>
-  <span class="p">}</span>
+<span class="w">    </span><span class="n">gradNorm</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="mf">0.f</span><span class="p">;</span><span class="w"></span>
+<span class="w">    </span><span class="n">comm_</span><span class="o">-&gt;</span><span class="n">foreach</span><span class="p">(</span><span class="n">reset</span><span class="p">);</span><span class="w">   </span><span class="c1">// per-shard model-update</span>
+<span class="w">    </span><span class="n">GraphGroup</span><span class="o">::</span><span class="n">decreaseCostScaleFactor</span><span class="p">();</span><span class="w"></span>
+<span class="w">  </span><span class="p">}</span><span class="w"></span>
 
-  <span class="c1">// cost across all local devices (scheduler will aggregate cross-process)</span>
-  <span class="n">StaticLoss</span> <span class="n">localLoss</span> <span class="o">=</span> <span class="n">std</span><span class="o">::</span><span class="n">accumulate</span><span class="p">(</span><span class="n">localDeviceLosses</span><span class="p">.</span><span class="n">begin</span><span class="p">(),</span> <span class="n">localDeviceLosses</span><span class="p">.</span><span class="n">end</span><span class="p">(),</span> <span class="n">StaticLoss</span><span class="p">());</span>
+<span class="w">  </span><span class="c1">// cost across all local devices (scheduler will aggregate cross-process)</span>
+<span class="w">  </span><span class="n">StaticLoss</span><span class="w"> </span><span class="n">localLoss</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="n">std</span><span class="o">::</span><span class="n">accumulate</span><span class="p">(</span><span class="n">localDeviceLosses</span><span class="p">.</span><span class="n">begin</span><span class="p">(),</span><span class="w"> </span><span class="n">localDeviceLosses</span><span class="p">.</span><span class="n">end</span><span class="p">(),</span><span class="w"> </span><span class="n">StaticLoss</span><span class="p">());</span><span class="w"></span>
 
-  <span class="k">if</span><span class="p">(</span><span class="n">scheduler_</span><span class="p">)</span> <span class="p">{</span>
-    <span class="c1">// track and log localLoss</span>
-    <span class="n">scheduler_</span><span class="o">-&gt;</span><span class="n">update</span><span class="p">(</span><span class="n">localLoss</span><span class="p">,</span> <span class="n">numReadBatches</span><span class="p">,</span> <span class="n">updateBatchSize</span><span class="p">,</span> <span class="n">updateTargetWords</span><span class="p">,</span> <span class="n">gradNorm</span><span class="p">);</span>
+<span class="w">  </span><span class="k">if</span><span class="p">(</span><span class="n">scheduler_</span><span class="p">)</span><span class="w"> </span><span class="p">{</span><span class="w"></span>
+<span class="w">    </span><span class="c1">// track and log localLoss</span>
+<span class="w">    </span><span class="n">scheduler_</span><span class="o">-&gt;</span><span class="n">update</span><span class="p">(</span><span class="n">localLoss</span><span class="p">,</span><span class="w"> </span><span class="n">numReadBatches</span><span class="p">,</span><span class="w"> </span><span class="n">updateBatchSize</span><span class="p">,</span><span class="w"> </span><span class="n">updateTargetWords</span><span class="p">,</span><span class="w"> </span><span class="n">gradNorm</span><span class="p">);</span><span class="w"></span>
 
-    <span class="k">if</span><span class="p">(</span><span class="n">scheduler_</span><span class="o">-&gt;</span><span class="n">syncing</span><span class="p">())</span> <span class="p">{</span>
-      <span class="k">if</span><span class="p">(</span><span class="n">shardingMode_</span> <span class="o">==</span> <span class="n">ShardingMode</span><span class="o">::</span><span class="n">local</span><span class="p">)</span> <span class="p">{</span>
-        <span class="n">LOG</span><span class="p">(</span><span class="n">debug</span><span class="p">,</span> <span class="s">&quot;Syncing all parameters and optimizer shards across {} MPI processes&quot;</span><span class="p">,</span> <span class="n">mpi_</span><span class="o">-&gt;</span><span class="n">numMPIProcesses</span><span class="p">());</span>
-        <span class="n">comm_</span><span class="o">-&gt;</span><span class="n">broadcastParams</span><span class="p">();</span>
-        <span class="n">comm_</span><span class="o">-&gt;</span><span class="n">broadcastShards</span><span class="p">(</span><span class="n">optimizerShards_</span><span class="p">);</span>
-      <span class="p">}</span>
-    <span class="p">}</span>
+<span class="w">    </span><span class="k">if</span><span class="p">(</span><span class="n">scheduler_</span><span class="o">-&gt;</span><span class="n">syncing</span><span class="p">())</span><span class="w"> </span><span class="p">{</span><span class="w"></span>
+<span class="w">      </span><span class="k">if</span><span class="p">(</span><span class="n">shardingMode_</span><span class="w"> </span><span class="o">==</span><span class="w"> </span><span class="n">ShardingMode</span><span class="o">::</span><span class="n">local</span><span class="p">)</span><span class="w"> </span><span class="p">{</span><span class="w"></span>
+<span class="w">        </span><span class="n">LOG</span><span class="p">(</span><span class="n">debug</span><span class="p">,</span><span class="w"> </span><span class="s">&quot;Syncing all parameters and optimizer shards across {} MPI processes&quot;</span><span class="p">,</span><span class="w"> </span><span class="n">mpi_</span><span class="o">-&gt;</span><span class="n">numMPIProcesses</span><span class="p">());</span><span class="w"></span>
+<span class="w">        </span><span class="n">comm_</span><span class="o">-&gt;</span><span class="n">broadcastParams</span><span class="p">();</span><span class="w"></span>
+<span class="w">        </span><span class="n">comm_</span><span class="o">-&gt;</span><span class="n">broadcastShards</span><span class="p">(</span><span class="n">optimizerShards_</span><span class="p">);</span><span class="w"></span>
+<span class="w">      </span><span class="p">}</span><span class="w"></span>
+<span class="w">    </span><span class="p">}</span><span class="w"></span>
 
-    <span class="c1">// save intermediate model (and optimizer state) to file</span>
-    <span class="k">if</span><span class="p">(</span><span class="n">scheduler_</span><span class="o">-&gt;</span><span class="n">saving</span><span class="p">())</span> <span class="p">{</span>
-      <span class="n">save</span><span class="p">();</span>
-    <span class="p">}</span>
+<span class="w">    </span><span class="c1">// save intermediate model (and optimizer state) to file</span>
+<span class="w">    </span><span class="k">if</span><span class="p">(</span><span class="n">scheduler_</span><span class="o">-&gt;</span><span class="n">saving</span><span class="p">())</span><span class="w"> </span><span class="p">{</span><span class="w"></span>
+<span class="w">      </span><span class="n">save</span><span class="p">();</span><span class="w"></span>
+<span class="w">    </span><span class="p">}</span><span class="w"></span>
 
-    <span class="c1">// process valid data set</span>
-    <span class="c1">// This may save a model as well.</span>
-    <span class="k">if</span><span class="p">(</span><span class="n">scheduler_</span><span class="o">-&gt;</span><span class="n">validating</span><span class="p">())</span> <span class="p">{</span>
-      <span class="n">swapWithSmoothed</span><span class="p">();</span>
-      <span class="n">scheduler_</span><span class="o">-&gt;</span><span class="n">validate</span><span class="p">(</span><span class="n">graphs_</span><span class="p">);</span>
-      <span class="n">swapWithSmoothed</span><span class="p">();</span>
-    <span class="p">}</span>
-  <span class="p">}</span>
+<span class="w">    </span><span class="c1">// process valid data set</span>
+<span class="w">    </span><span class="c1">// This may save a model as well.</span>
+<span class="w">    </span><span class="k">if</span><span class="p">(</span><span class="n">scheduler_</span><span class="o">-&gt;</span><span class="n">validating</span><span class="p">())</span><span class="w"> </span><span class="p">{</span><span class="w"></span>
+<span class="w">      </span><span class="n">swapWithSmoothed</span><span class="p">();</span><span class="w"></span>
+<span class="w">      </span><span class="n">scheduler_</span><span class="o">-&gt;</span><span class="n">validate</span><span class="p">(</span><span class="n">graphs_</span><span class="p">);</span><span class="w"></span>
+<span class="w">      </span><span class="n">swapWithSmoothed</span><span class="p">();</span><span class="w"></span>
+<span class="w">    </span><span class="p">}</span><span class="w"></span>
+<span class="w">  </span><span class="p">}</span><span class="w"></span>
 
-  <span class="k">if</span><span class="p">(</span><span class="n">saneGradient</span><span class="p">)</span>
-    <span class="n">GraphGroup</span><span class="o">::</span><span class="n">increaseCostScaleFactor</span><span class="p">();</span>
-<span class="p">}</span>
+<span class="w">  </span><span class="k">if</span><span class="p">(</span><span class="n">saneGradient</span><span class="p">)</span><span class="w"></span>
+<span class="w">    </span><span class="n">GraphGroup</span><span class="o">::</span><span class="n">increaseCostScaleFactor</span><span class="p">();</span><span class="w"></span>
+<span class="p">}</span><span class="w"></span>
 
-<span class="kt">void</span> <span class="n">SyncGraphGroup</span><span class="o">::</span><span class="n">finalize</span><span class="p">()</span> <span class="cm">/*override*/</span> <span class="p">{</span>
-  <span class="n">validate</span><span class="p">();</span>
-  <span class="n">Base</span><span class="o">::</span><span class="n">finalize</span><span class="p">();</span>
-<span class="p">}</span>
+<span class="kt">void</span><span class="w"> </span><span class="n">SyncGraphGroup</span><span class="o">::</span><span class="n">finalize</span><span class="p">()</span><span class="w"> </span><span class="cm">/*override*/</span><span class="w"> </span><span class="p">{</span><span class="w"></span>
+<span class="w">  </span><span class="n">validate</span><span class="p">();</span><span class="w"></span>
+<span class="w">  </span><span class="n">Base</span><span class="o">::</span><span class="n">finalize</span><span class="p">();</span><span class="w"></span>
+<span class="p">}</span><span class="w"></span>
 
-<span class="p">}</span>  <span class="c1">// namespace marian</span>
+<span class="p">}</span><span class="w">  </span><span class="c1">// namespace marian</span>
 </pre></div>
 </div>
-</div>
+</section>
 
 
            </div>
-           
           </div>
           <footer>
 
   <hr/>
 
   <div role="contentinfo">
-    <p>
-        &#169; Copyright 2021, Marian NMT Team.
-
-    </p>
+    <p>&#169; Copyright 2021, Marian NMT Team.</p>
   </div>
-    
-    
-    
-    Built with <a href="https://www.sphinx-doc.org/">Sphinx</a> using a
-    
+
+  Built with <a href="https://www.sphinx-doc.org/">Sphinx</a> using a
     <a href="https://github.com/readthedocs/sphinx_rtd_theme">theme</a>
-    
-    provided by <a href="https://readthedocs.org">Read the Docs</a>. 
+    provided by <a href="https://readthedocs.org">Read the Docs</a>.
+   
 
 </footer>
         </div>
       </div>
-
     </section>
-
   </div>
-  
-
-  <script type="text/javascript">
+  <script>
       jQuery(function () {
           SphinxRtdTheme.Navigation.enable(true);
       });
-  </script>
-
-  
-  
-    
-   
+  </script> 
 
 </body>
 </html>

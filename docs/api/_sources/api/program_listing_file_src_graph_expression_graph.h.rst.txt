@@ -136,8 +136,6 @@ Program Listing for File expression_graph.h
      Ptr<Tensors> tensors_;
    private:
    
-     std::unordered_map<size_t, std::vector<Expr>> memoized_;
-   
      Type defaultElementType_{Type::float32};  // Type used for storing parameters, currently all parameters have to have the same type
    
      bool inferenceOnly_{false};               // a flag holds whether the graph is used for inference only
@@ -435,6 +433,12 @@ Program Listing for File expression_graph.h
        return it->second;
      }
    
+     Ptr<Parameters>& params(Type elementType) {     
+       auto it = paramsByElementType_.find(elementType);
+       ABORT_IF(it == paramsByElementType_.end(), "Parameter object for type {} does not exist", defaultElementType_);
+       return it->second;
+     }
+   
      void setDefaultElementType(Type defaultElementType) {
        ABORT_IF(!paramsByElementType_.empty() && defaultElementType != defaultElementType_, 
                 "Parameter objects already exist, cannot change default type from {} to {}", 
@@ -482,7 +486,7 @@ Program Listing for File expression_graph.h
      bool getThrowNaN() { return throwNaN_; }
    
    public:
-     void load(std::vector<io::Item>& ioItems, bool markReloaded = true) {
+     void load(const std::vector<io::Item>& ioItems, bool markReloaded = true) {
        setReloaded(false);
        for(auto& item : ioItems) {
          std::string pName = item.name;

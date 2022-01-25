@@ -1,80 +1,43 @@
-
-
 <!DOCTYPE html>
 <html class="writer-html5" lang="en" >
 <head>
-  <meta charset="utf-8" />
-  
+  <meta charset="utf-8" /><meta name="generator" content="Docutils 0.17.1: http://docutils.sourceforge.net/" />
+
   <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-  
-  <title>Expression graphs &mdash; Marian NMT v1.10.3 2021-03-22 documentation</title>
-  
-
-  
-  <link rel="stylesheet" href="_static/css/theme.css" type="text/css" />
-  <link rel="stylesheet" href="_static/pygments.css" type="text/css" />
-  <link rel="stylesheet" href="_static/css/custom.css" type="text/css" />
-  <link rel="stylesheet" href="_static/collapsible-lists/css/tree_view.css" type="text/css" />
-
-  
-  
-
-  
-  
-
-  
+  <title>Expression graphs &mdash; Marian NMT v1.10.27 2022-01-25 documentation</title><link rel="stylesheet" href="_static/css/theme.css" type="text/css" />
+    <link rel="stylesheet" href="_static/pygments.css" type="text/css" />
+      <link rel="stylesheet" href="_static/css/custom.css" type="text/css" />
+      <link rel="stylesheet" href="_static/collapsible-lists/css/tree_view.css" type="text/css" />
     <link rel="canonical" href="http://marian-nmt.github.io/docs/api/graph.html" />
-
-  
   <!--[if lt IE 9]>
     <script src="_static/js/html5shiv.min.js"></script>
   <![endif]-->
-  
-    
-      <script type="text/javascript" id="documentation_options" data-url_root="./" src="_static/documentation_options.js"></script>
+  <script id="documentation_options" data-url_root="./" src="_static/documentation_options.js"></script>
         <script src="_static/jquery.js"></script>
         <script src="_static/underscore.js"></script>
         <script src="_static/doctools.js"></script>
         <script src="_static/language_data.js"></script>
         <script src="_static/collapsible-lists/js/CollapsibleLists.compressed.js"></script>
         <script src="_static/collapsible-lists/js/apply-collapsible-lists.js"></script>
-    
-    <script type="text/javascript" src="_static/js/theme.js"></script>
-
-    
+        <script async="async" src="https://cdnjs.cloudflare.com/ajax/libs/mathjax/2.7.5/latest.js?config=TeX-AMS-MML_HTMLorMML"></script>
+        <script type="text/x-mathjax-config">MathJax.Hub.Config({"tex2jax": {"inlineMath": [["\\(", "\\)"]], "displayMath": [["\\[", "\\]"]], "processRefs": false, "processEnvironments": false}})</script>
+    <script src="_static/js/theme.js"></script>
     <link rel="index" title="Index" href="genindex.html" />
     <link rel="search" title="Search" href="search.html" />
     <link rel="next" title="Operations in the Expression Graph" href="operators.html" />
     <link rel="prev" title="Welcome to Marian’s documentation!" href="index.html" /> 
 </head>
 
-<body class="wy-body-for-nav">
-
-   
+<body class="wy-body-for-nav"> 
   <div class="wy-grid-for-nav">
-    
     <nav data-toggle="wy-nav-shift" class="wy-nav-side">
       <div class="wy-side-scroll">
         <div class="wy-side-nav-search" >
-          
-
-          
             <a href="index.html" class="icon icon-home"> Marian NMT
-          
-
-          
           </a>
-
-          
-            
-            
               <div class="version">
-                v1.10.3
+                v1.10.27
               </div>
-            
-          
-
-          
 <div role="search">
   <form id="rtd-search-form" class="wy-form" action="search.html" method="get">
     <input type="text" name="q" placeholder="Search docs" />
@@ -82,19 +45,8 @@
     <input type="hidden" name="area" value="default" />
   </form>
 </div>
-
-          
-        </div>
-
-        
-        <div class="wy-menu wy-menu-vertical" data-spy="affix" role="navigation" aria-label="main navigation">
-          
-            
-            
-              
-            
-            
-              <p class="caption"><span class="caption-text">Contents:</span></p>
+        </div><div class="wy-menu wy-menu-vertical" data-spy="affix" role="navigation" aria-label="Navigation menu">
+              <p><span class="caption-text">Contents:</span></p>
 <ul class="current">
 <li class="toctree-l1 current"><a class="current reference internal" href="#">Expression graphs</a><ul>
 <li class="toctree-l2"><a class="reference internal" href="#graph-construction">Graph construction</a></li>
@@ -117,74 +69,34 @@
 <li class="toctree-l1"><a class="reference internal" href="operators.html">Operations in the Expression Graph</a></li>
 <li class="toctree-l1"><a class="reference internal" href="api/library_index.html">Library API</a></li>
 <li class="toctree-l1"><a class="reference internal" href="contributing.html">How to contribute to Marian</a></li>
+<li class="toctree-l1"><a class="reference internal" href="doc_guide.html">Writing documentation</a></li>
 </ul>
 
-            
-          
         </div>
-        
       </div>
     </nav>
 
-    <section data-toggle="wy-nav-shift" class="wy-nav-content-wrap">
-
-      
-      <nav class="wy-nav-top" aria-label="top navigation">
-        
+    <section data-toggle="wy-nav-shift" class="wy-nav-content-wrap"><nav class="wy-nav-top" aria-label="Mobile navigation menu" >
           <i data-toggle="wy-nav-top" class="fa fa-bars"></i>
           <a href="index.html">Marian NMT</a>
-        
       </nav>
 
-
       <div class="wy-nav-content">
-        
         <div class="rst-content">
-        
-          
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-<div role="navigation" aria-label="breadcrumbs navigation">
-
+          <div role="navigation" aria-label="Page navigation">
   <ul class="wy-breadcrumbs">
-    
       <li><a href="index.html" class="icon icon-home"></a> &raquo;</li>
-        
       <li>Expression graphs</li>
-    
-    
       <li class="wy-breadcrumbs-aside">
-        
-          
             <a href="_sources/graph.md.txt" rel="nofollow"> View page source</a>
-          
-        
       </li>
-    
   </ul>
-
-  
   <hr/>
 </div>
           <div role="main" class="document" itemscope="itemscope" itemtype="http://schema.org/Article">
            <div itemprop="articleBody">
-            
-  <div class="section" id="expression-graphs">
+             
+  <section id="expression-graphs">
 <h1>Expression graphs<a class="headerlink" href="#expression-graphs" title="Permalink to this headline">¶</a></h1>
 <p>The design of the deep learning framework in Marian is based on reverse-mode <a class="reference external" href="https://en.wikipedia.org/wiki/Automatic_differentiation">auto-differentiation</a> (also known as backpropagation) with dynamic computation graphs.
 Computation graphs allow a great deal of freedom in network architectures, and they can deal with complicated structures like conditions and loops.
@@ -192,14 +104,14 @@ The dynamic declaration, which means a new graph is created for each training in
 It allows handling of variably sized inputs, as well as the cases where the graph may change depending on the results of previous steps.
 Compared to static declaration, a dynamic computation graph could be expensive in terms of creating and optimising computation graphs.
 Marian uses careful memory management to remove overhead in computation graph construction, and supports efficient execution on both CPU and GPU.
-The main implementation of computation graph is in under <a class="reference external" href="api/dir_src_graph.html#dir-src-graph"><code class="docutils literal notranslate"><span class="pre">src/graph</span></code></a> directory.</p>
+The main implementation of computation graph is in under <a class="reference internal" href="api/dir_src_graph.html#dir-src-graph"><span class="std std-ref">src/graph</span></a> directory.</p>
 <p>Building blocks for graphs:</p>
 <ul class="simple">
 <li><p><a class="reference external" href="#graph-construction">graph construction</a></p></li>
 <li><p><a class="reference external" href="#node-types">node types</a></p></li>
 <li><p><a class="reference external" href="#graph-execution">graph execution</a></p></li>
 </ul>
-<div class="section" id="graph-construction">
+<section id="graph-construction">
 <h2>Graph construction<a class="headerlink" href="#graph-construction" title="Permalink to this headline">¶</a></h2>
 <p>What is a computation graph?
 All the numerical computations are expressed as a computation graph.
@@ -218,39 +130,39 @@ Each operation defines its forward and backward steps.
 Except for operations, a Node can also be a constant tensor (<code class="docutils literal notranslate"><span class="pre">ConstantNode</span></code>) or a parameter tensor (<code class="docutils literal notranslate"><span class="pre">ParamNode</span></code>).</p>
 <p>To create a graph, we use <code class="docutils literal notranslate"><span class="pre">New&lt;&gt;</span></code> shortcut in place of regular constructors:</p>
 <div class="highlight-cpp notranslate"><div class="highlight"><pre><span></span><span class="c1">// create a graph</span>
-<span class="k">auto</span> <span class="n">graph</span> <span class="o">=</span> <span class="n">New</span><span class="o">&lt;</span><span class="n">ExpressionGraph</span><span class="o">&gt;</span><span class="p">();</span>
+<span class="k">auto</span><span class="w"> </span><span class="n">graph</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="n">New</span><span class="o">&lt;</span><span class="n">ExpressionGraph</span><span class="o">&gt;</span><span class="p">();</span><span class="w"></span>
 </pre></div>
 </div>
 <p>After creating a graph, we also need to initialise the graph object with device options by <code class="docutils literal notranslate"><span class="pre">setDevice()</span></code> and workspace memory by <code class="docutils literal notranslate"><span class="pre">reserveWorkspaceMB()</span></code>, otherwise the program will result in a crash.</p>
 <div class="highlight-cpp notranslate"><div class="highlight"><pre><span></span><span class="c1">// initialise graph with device options</span>
 <span class="c1">// here we specify device no. is 0</span>
 <span class="c1">// device type can be DeviceType::cpu or DeviceType::gpu</span>
-<span class="n">graph</span><span class="o">-&gt;</span><span class="n">setDevice</span><span class="p">({</span><span class="mi">0</span><span class="p">,</span> <span class="n">DeviceType</span><span class="o">::</span><span class="n">cpu</span><span class="p">});</span> 
+<span class="n">graph</span><span class="o">-&gt;</span><span class="n">setDevice</span><span class="p">({</span><span class="mi">0</span><span class="p">,</span><span class="w"> </span><span class="n">DeviceType</span><span class="o">::</span><span class="n">cpu</span><span class="p">});</span><span class="w"> </span>
 <span class="c1">// preallocate workspace memory (MB) for the graph</span>
-<span class="n">graph</span><span class="o">-&gt;</span><span class="n">reserveWorkspaceMB</span><span class="p">(</span><span class="mi">128</span><span class="p">);</span> 
+<span class="n">graph</span><span class="o">-&gt;</span><span class="n">reserveWorkspaceMB</span><span class="p">(</span><span class="mi">128</span><span class="p">);</span><span class="w"> </span>
 </pre></div>
 </div>
 <p>The <em>workspace memory</em> means the size of the memory available for the forward and backward step of the training procedure.
 This does not include model size and optimizer parameters that are allocated outsize workspace.
 Hence you cannot allocate all device memory to the workspace.</p>
-<p>To create a graph, Marian offer a set of shortcut functions that implements the common expression operators for a neural network (see <a class="reference external" href="api/program_listing_file_src_graph_expression_operators.h.html"><code class="docutils literal notranslate"><span class="pre">src/graph/expression_operators.h</span></code></a>), such as <code class="docutils literal notranslate"><span class="pre">affine()</span></code>.
+<p>To create a graph, Marian offers a set of shortcut functions that implements the common expression operators for a neural network (see <a class="reference internal" href="api/file_src_graph_expression_operators.h.html#file-src-graph-expression-operators-h"><span class="std std-ref">src/graph/expression_operators.h</span></a>, such as <code class="docutils literal notranslate"><span class="pre">affine()</span></code>.
 These functions actually construct the corresponding operation nodes in the graph, make links with other nodes.
 E.g., <code class="docutils literal notranslate"><span class="pre">affine()</span></code> construct a <code class="docutils literal notranslate"><span class="pre">AffineNodeOp</span></code> node in the graph.
 Thus, building a graph turns into a simple task of defining expressions by using those functions.</p>
 <p><strong>Building graph of Example 1 using Marian</strong></p>
 <p>The following code is used to build the graph in Example 1 with inputs <code class="docutils literal notranslate"><span class="pre">x=2</span></code> and <code class="docutils literal notranslate"><span class="pre">y=3</span></code>.</p>
 <div class="highlight-cpp notranslate"><div class="highlight"><pre><span></span><span class="c1">// create and initialise a graph object</span>
-<span class="k">auto</span> <span class="n">graph</span> <span class="o">=</span> <span class="n">New</span><span class="o">&lt;</span><span class="n">ExpressionGraph</span><span class="o">&gt;</span><span class="p">();</span>
-<span class="n">graph</span><span class="o">-&gt;</span><span class="n">setDevice</span><span class="p">({</span><span class="mi">0</span><span class="p">,</span> <span class="n">DeviceType</span><span class="o">::</span><span class="n">cpu</span><span class="p">});</span>
-<span class="n">graph</span><span class="o">-&gt;</span><span class="n">reserveWorkspaceMB</span><span class="p">(</span><span class="mi">8</span><span class="p">);</span>
+<span class="k">auto</span><span class="w"> </span><span class="n">graph</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="n">New</span><span class="o">&lt;</span><span class="n">ExpressionGraph</span><span class="o">&gt;</span><span class="p">();</span><span class="w"></span>
+<span class="n">graph</span><span class="o">-&gt;</span><span class="n">setDevice</span><span class="p">({</span><span class="mi">0</span><span class="p">,</span><span class="w"> </span><span class="n">DeviceType</span><span class="o">::</span><span class="n">cpu</span><span class="p">});</span><span class="w"></span>
+<span class="n">graph</span><span class="o">-&gt;</span><span class="n">reserveWorkspaceMB</span><span class="p">(</span><span class="mi">8</span><span class="p">);</span><span class="w"></span>
 <span class="c1">// add input node x</span>
-<span class="k">auto</span> <span class="n">x</span> <span class="o">=</span> <span class="n">graph</span><span class="o">-&gt;</span><span class="n">constant</span><span class="p">({</span><span class="mi">1</span><span class="p">,</span><span class="mi">1</span><span class="p">},</span> <span class="n">inits</span><span class="o">::</span><span class="n">fromValue</span><span class="p">(</span><span class="mi">2</span><span class="p">));</span>
+<span class="k">auto</span><span class="w"> </span><span class="n">x</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="n">graph</span><span class="o">-&gt;</span><span class="n">constant</span><span class="p">({</span><span class="mi">1</span><span class="p">,</span><span class="mi">1</span><span class="p">},</span><span class="w"> </span><span class="n">inits</span><span class="o">::</span><span class="n">fromValue</span><span class="p">(</span><span class="mi">2</span><span class="p">));</span><span class="w"></span>
 <span class="c1">// add input node y</span>
-<span class="k">auto</span> <span class="n">y</span> <span class="o">=</span> <span class="n">graph</span><span class="o">-&gt;</span><span class="n">constant</span><span class="p">({</span><span class="mi">1</span><span class="p">,</span><span class="mi">1</span><span class="p">},</span> <span class="n">inits</span><span class="o">::</span><span class="n">fromValue</span><span class="p">(</span><span class="mi">3</span><span class="p">));</span>
+<span class="k">auto</span><span class="w"> </span><span class="n">y</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="n">graph</span><span class="o">-&gt;</span><span class="n">constant</span><span class="p">({</span><span class="mi">1</span><span class="p">,</span><span class="mi">1</span><span class="p">},</span><span class="w"> </span><span class="n">inits</span><span class="o">::</span><span class="n">fromValue</span><span class="p">(</span><span class="mi">3</span><span class="p">));</span><span class="w"></span>
 <span class="c1">// define expression</span>
-<span class="k">auto</span> <span class="n">mulOp</span> <span class="o">=</span> <span class="n">x</span><span class="o">*</span><span class="n">y</span><span class="p">;</span>
-<span class="k">auto</span> <span class="n">sinOp</span> <span class="o">=</span> <span class="n">sin</span><span class="p">(</span><span class="n">x</span><span class="p">);</span>
-<span class="k">auto</span> <span class="n">z</span> <span class="o">=</span> <span class="n">mulOp</span> <span class="o">+</span> <span class="n">sinOp</span><span class="p">;</span>
+<span class="k">auto</span><span class="w"> </span><span class="n">mulOp</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="n">x</span><span class="o">*</span><span class="n">y</span><span class="p">;</span><span class="w"></span>
+<span class="k">auto</span><span class="w"> </span><span class="n">sinOp</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="n">sin</span><span class="p">(</span><span class="n">x</span><span class="p">);</span><span class="w"></span>
+<span class="k">auto</span><span class="w"> </span><span class="n">z</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="n">mulOp</span><span class="w"> </span><span class="o">+</span><span class="w"> </span><span class="n">sinOp</span><span class="p">;</span><span class="w"></span>
 <span class="c1">// You can also define this expression: auto z = x*y + sin(x);</span>
 </pre></div>
 </div>
@@ -261,7 +173,7 @@ The operators <code class="docutils literal notranslate"><span class="pre">*</sp
 This visualisation might not be practical for real-size graphs due to an enormous number of nodes and layers.
 You can print the graph layout on console by running the following code:</p>
 <div class="highlight-cpp notranslate"><div class="highlight"><pre><span></span><span class="c1">// print the graph layout on console</span>
-<span class="n">std</span><span class="o">::</span><span class="n">cout</span><span class="o">&lt;&lt;</span><span class="n">graph</span><span class="o">-&gt;</span><span class="n">graphviz</span><span class="p">()</span><span class="o">&lt;&lt;</span><span class="n">std</span><span class="o">::</span><span class="n">endl</span><span class="p">;</span>
+<span class="n">std</span><span class="o">::</span><span class="n">cout</span><span class="o">&lt;&lt;</span><span class="n">graph</span><span class="o">-&gt;</span><span class="n">graphviz</span><span class="p">()</span><span class="o">&lt;&lt;</span><span class="n">std</span><span class="o">::</span><span class="n">endl</span><span class="p">;</span><span class="w"></span>
 </pre></div>
 </div>
 <p><strong>Graph visualisation of Example 1</strong></p>
@@ -274,15 +186,15 @@ We will cover the concept of <em>trainable</em> in <a class="reference external"
 <p>One thing to notice here is that Marian adopts dynamic computation graphs;
 this means that the nodes will be consumed once performing forward or backwards pass.
 Thus, we need to call <code class="docutils literal notranslate"><span class="pre">graphviz()</span></code> function before performing the computation.</p>
-</div>
-<div class="section" id="node-types">
+</section>
+<section id="node-types">
 <h2>Node types<a class="headerlink" href="#node-types" title="Permalink to this headline">¶</a></h2>
 <p>As mentioned earlier, <code class="docutils literal notranslate"><span class="pre">Node</span></code> is the basic unit of a graph.
 Each <code class="docutils literal notranslate"><span class="pre">Node</span></code> defines its forward steps in <code class="docutils literal notranslate"><span class="pre">Node::forward()</span></code> and backward steps in <code class="docutils literal notranslate"><span class="pre">Node::backward()</span></code>.
 To access the resulting new tensor in the forward pass, we can call <code class="docutils literal notranslate"><span class="pre">Node::val()</span></code>.
 While <code class="docutils literal notranslate"><span class="pre">Node::grad()</span></code> returns the accumulated gradients (a tensor) in the backward pass.
 There are three main classes of Node in Marian: <code class="docutils literal notranslate"><span class="pre">ConstantNode</span></code>, <code class="docutils literal notranslate"><span class="pre">ParamNode</span></code> and <code class="docutils literal notranslate"><span class="pre">NaryNodeOp</span></code>.</p>
-<div class="section" id="constantnode">
+<section id="constantnode">
 <h3>ConstantNode<a class="headerlink" href="#constantnode" title="Permalink to this headline">¶</a></h3>
 <p>The <code class="docutils literal notranslate"><span class="pre">ConstantNode</span></code> class is used to construct a constant node in the graph.
 A constant node is actually a constant tensor whose value is immutable during the training.
@@ -296,21 +208,21 @@ The element type must be one of the values stored in <code class="docutils liter
 If the type is not specified, the default type of graph will be used.
 The default type of the graph is usually <code class="docutils literal notranslate"><span class="pre">Type::float32</span></code> unless you change it by <code class="docutils literal notranslate"><span class="pre">setDefaultElementType()</span></code>.</p>
 <div class="highlight-cpp notranslate"><div class="highlight"><pre><span></span><span class="c1">// construct a constant node in the graph with default type</span>
-<span class="k">auto</span> <span class="n">x</span> <span class="o">=</span> <span class="n">graph</span><span class="o">-&gt;</span><span class="n">constant</span><span class="p">({</span><span class="n">N</span><span class="p">,</span> <span class="n">NUM_FEATURES</span><span class="p">},</span> <span class="n">inits</span><span class="o">::</span><span class="n">fromVector</span><span class="p">(</span><span class="n">inputData</span><span class="p">));</span>
+<span class="k">auto</span><span class="w"> </span><span class="n">x</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="n">graph</span><span class="o">-&gt;</span><span class="n">constant</span><span class="p">({</span><span class="n">N</span><span class="p">,</span><span class="w"> </span><span class="n">NUM_FEATURES</span><span class="p">},</span><span class="w"> </span><span class="n">inits</span><span class="o">::</span><span class="n">fromVector</span><span class="p">(</span><span class="n">inputData</span><span class="p">));</span><span class="w"></span>
 </pre></div>
 </div>
 <p>For the above example, the shape of the constant node is <code class="docutils literal notranslate"><span class="pre">{N,</span> <span class="pre">NUM_FEATURES}</span></code>, and the value of the constant node is initialised from a vector <code class="docutils literal notranslate"><span class="pre">inputData</span></code>.
 <code class="docutils literal notranslate"><span class="pre">inits::fromVector()</span></code> returns a <code class="docutils literal notranslate"><span class="pre">NodeInitializer</span></code> which is a functor used to initialise a tensor by copying from the given vector.
-More functions used to initialise a node can be found in <a class="reference external" href="api/namespace_marian__inits.html#namespace-marian-inits"><code class="docutils literal notranslate"><span class="pre">src/graph/node_initializers.h</span></code></a> file.
+More functions used to initialise a node can be found in <a class="reference internal" href="api/namespace_marian__inits.html#namespace-marian-inits"><span class="std std-ref">src/graph/node_initializers.h</span></a> file.
 Marian also provides some shortcut functions to construct special constant nodes, such as <code class="docutils literal notranslate"><span class="pre">ones()</span></code> and <code class="docutils literal notranslate"><span class="pre">zeros()</span></code>:</p>
 <div class="highlight-cpp notranslate"><div class="highlight"><pre><span></span><span class="c1">// construct a constant node with 1</span>
-<span class="k">auto</span> <span class="n">ones</span> <span class="o">=</span> <span class="n">graph</span><span class="p">()</span><span class="o">-&gt;</span><span class="n">ones</span><span class="p">({</span><span class="mi">10</span><span class="p">,</span><span class="mi">10</span><span class="p">});</span>
+<span class="k">auto</span><span class="w"> </span><span class="n">ones</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="n">graph</span><span class="p">()</span><span class="o">-&gt;</span><span class="n">ones</span><span class="p">({</span><span class="mi">10</span><span class="p">,</span><span class="mi">10</span><span class="p">});</span><span class="w"></span>
 <span class="c1">// construct a constant node with 0</span>
-<span class="k">auto</span> <span class="n">zeros</span> <span class="o">=</span> <span class="n">graph</span><span class="p">()</span><span class="o">-&gt;</span><span class="n">zeros</span><span class="p">({</span><span class="mi">10</span><span class="p">,</span><span class="mi">10</span><span class="p">});</span>
+<span class="k">auto</span><span class="w"> </span><span class="n">zeros</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="n">graph</span><span class="p">()</span><span class="o">-&gt;</span><span class="n">zeros</span><span class="p">({</span><span class="mi">10</span><span class="p">,</span><span class="mi">10</span><span class="p">});</span><span class="w"></span>
 </pre></div>
 </div>
-</div>
-<div class="section" id="paramnode">
+</section>
+<section id="paramnode">
 <h3>ParamNode<a class="headerlink" href="#paramnode" title="Permalink to this headline">¶</a></h3>
 <p><code class="docutils literal notranslate"><span class="pre">ParamNode</span></code> is used to store model parameters whose value can be changed during the training, such as weights and biases.
 In addition to the shape and the element type, we need to specify whether a <code class="docutils literal notranslate"><span class="pre">ParamNode</span></code> object is <em>trainable</em> or not.
@@ -320,12 +232,12 @@ We can define whether this parameter node is trainable by <code class="docutils 
 To construct a parameter node in the graph, we use the <code class="docutils literal notranslate"><span class="pre">param()</span></code> function in the <code class="docutils literal notranslate"><span class="pre">ExpressionGraph</span></code> class.
 For a parameter node, we need to specify its name.</p>
 <div class="highlight-cpp notranslate"><div class="highlight"><pre><span></span><span class="c1">// construct a parameter node called W1 in the graph</span>
-<span class="k">auto</span> <span class="n">W1</span> <span class="o">=</span> <span class="n">graph</span><span class="o">-&gt;</span><span class="n">param</span><span class="p">(</span><span class="s">&quot;W1&quot;</span><span class="p">,</span> <span class="p">{</span><span class="n">NUM_FEATURES</span><span class="p">,</span> <span class="mi">5</span><span class="p">},</span> <span class="n">inits</span><span class="o">::</span><span class="n">uniform</span><span class="p">(</span><span class="mf">-0.1f</span><span class="p">,</span> <span class="mf">0.1f</span><span class="p">));</span>
+<span class="k">auto</span><span class="w"> </span><span class="n">W1</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="n">graph</span><span class="o">-&gt;</span><span class="n">param</span><span class="p">(</span><span class="s">&quot;W1&quot;</span><span class="p">,</span><span class="w"> </span><span class="p">{</span><span class="n">NUM_FEATURES</span><span class="p">,</span><span class="w"> </span><span class="mi">5</span><span class="p">},</span><span class="w"> </span><span class="n">inits</span><span class="o">::</span><span class="n">uniform</span><span class="p">(</span><span class="mf">-0.1f</span><span class="p">,</span><span class="w"> </span><span class="mf">0.1f</span><span class="p">));</span><span class="w"></span>
 </pre></div>
 </div>
 <p>The parameter node <code class="docutils literal notranslate"><span class="pre">W1</span></code> has a shape of <code class="docutils literal notranslate"><span class="pre">{NUM_FEATURES,</span> <span class="pre">5}</span></code>, and is initialised with random numbers from the uniform distribution <code class="docutils literal notranslate"><span class="pre">Uniform(-0.1,</span> <span class="pre">0.1)</span></code>.</p>
-</div>
-<div class="section" id="narynodeop">
+</section>
+<section id="narynodeop">
 <h3>NaryNodeOp<a class="headerlink" href="#narynodeop" title="Permalink to this headline">¶</a></h3>
 <p><code class="docutils literal notranslate"><span class="pre">NaryNodeOp</span></code> is the base class that defines the operations in a graph.
 It mainly contains unary and binary operators.
@@ -336,17 +248,17 @@ As mentioned earlier, Marian implements a set of APIs that can easily add operat
 E.g., we can use <code class="docutils literal notranslate"><span class="pre">affine()</span></code> to perform affine transformation and then <code class="docutils literal notranslate"><span class="pre">tanh()</span></code> to perform tanh activation function on the results:</p>
 <div class="highlight-cpp notranslate"><div class="highlight"><pre><span></span><span class="c1">// perform affine transformation: x*W1+b</span>
 <span class="c1">// and then perform tanh activation function</span>
-<span class="k">auto</span> <span class="n">h</span> <span class="o">=</span> <span class="n">tanh</span><span class="p">(</span><span class="n">affine</span><span class="p">(</span><span class="n">x</span><span class="p">,</span> <span class="n">W1</span><span class="p">,</span> <span class="n">b1</span><span class="p">));</span>
+<span class="k">auto</span><span class="w"> </span><span class="n">h</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="n">tanh</span><span class="p">(</span><span class="n">affine</span><span class="p">(</span><span class="n">x</span><span class="p">,</span><span class="w"> </span><span class="n">W1</span><span class="p">,</span><span class="w"> </span><span class="n">b1</span><span class="p">));</span><span class="w"></span>
 </pre></div>
 </div>
 <p>In the above example, <code class="docutils literal notranslate"><span class="pre">affine()</span></code> and <code class="docutils literal notranslate"><span class="pre">tanh()</span></code> actually add <code class="docutils literal notranslate"><span class="pre">AffineNodeOp</span></code> and <code class="docutils literal notranslate"><span class="pre">TanhNodeOp</span></code> nodes to the graph.
-For more shortcut functions used to add operations in the graph, you can find in <a class="reference external" href="api/program_listing_file_src_graph_expression_operators.h.html"><code class="docutils literal notranslate"><span class="pre">src/graph/expression_operators.h</span></code></a> file.</p>
-</div>
-</div>
-<div class="section" id="graph-execution">
+For more shortcut functions used to add operations in the graph, you can find in <a class="reference internal" href="api/file_src_graph_expression_operators.h.html#file-src-graph-expression-operators-h"><span class="std std-ref">src/graph/expression_operators.h</span></a> file.</p>
+</section>
+</section>
+<section id="graph-execution">
 <h2>Graph execution<a class="headerlink" href="#graph-execution" title="Permalink to this headline">¶</a></h2>
 <p>Once you finish building a graph by adding all the nodes, now you can perform the real computation.</p>
-<div class="section" id="forward-pass">
+<section id="forward-pass">
 <h3>Forward pass<a class="headerlink" href="#forward-pass" title="Permalink to this headline">¶</a></h3>
 <p>The forward pass refers to the calculation process.
 It traverses through all nodes from the input layer (leaves) to the output layer (root).
@@ -358,16 +270,16 @@ To perform the forward pass, you can call the function <code class="docutils lit
 <p><strong>Forward pass of Example 1</strong></p>
 <p>To run the forward pass of Example 1, you can run the following code:</p>
 <div class="highlight-cpp notranslate"><div class="highlight"><pre><span></span><span class="c1">// Perform the forward pass on the nodes of the graph</span>
-<span class="n">graph</span><span class="o">-&gt;</span><span class="n">forward</span><span class="p">();</span>
+<span class="n">graph</span><span class="o">-&gt;</span><span class="n">forward</span><span class="p">();</span><span class="w"></span>
 <span class="c1">// get the computation result of z</span>
-<span class="n">std</span><span class="o">::</span><span class="n">vector</span><span class="o">&lt;</span><span class="kt">float</span><span class="o">&gt;</span> <span class="n">w</span><span class="p">;</span>
-<span class="n">z</span><span class="o">-&gt;</span><span class="n">val</span><span class="p">()</span><span class="o">-&gt;</span><span class="n">get</span><span class="p">(</span><span class="n">w</span><span class="p">);</span>
-<span class="n">std</span><span class="o">::</span><span class="n">cout</span><span class="o">&lt;&lt;</span><span class="s">&quot;z=&quot;</span><span class="o">&lt;&lt;</span><span class="n">w</span><span class="p">[</span><span class="mi">0</span><span class="p">]</span><span class="o">&lt;&lt;</span><span class="n">std</span><span class="o">::</span><span class="n">endl</span><span class="p">;</span>
+<span class="n">std</span><span class="o">::</span><span class="n">vector</span><span class="o">&lt;</span><span class="kt">float</span><span class="o">&gt;</span><span class="w"> </span><span class="n">w</span><span class="p">;</span><span class="w"></span>
+<span class="n">z</span><span class="o">-&gt;</span><span class="n">val</span><span class="p">()</span><span class="o">-&gt;</span><span class="n">get</span><span class="p">(</span><span class="n">w</span><span class="p">);</span><span class="w"></span>
+<span class="n">std</span><span class="o">::</span><span class="n">cout</span><span class="o">&lt;&lt;</span><span class="s">&quot;z=&quot;</span><span class="o">&lt;&lt;</span><span class="n">w</span><span class="p">[</span><span class="mi">0</span><span class="p">]</span><span class="o">&lt;&lt;</span><span class="n">std</span><span class="o">::</span><span class="n">endl</span><span class="p">;</span><span class="w"></span>
 <span class="c1">// The output is: z=6.9093</span>
 </pre></div>
 </div>
-</div>
-<div class="section" id="backward-pass">
+</section>
+<section id="backward-pass">
 <h3><strong>Backward pass</strong><a class="headerlink" href="#backward-pass" title="Permalink to this headline">¶</a></h3>
 <p>The backward pass refers to the process of computing the output error.
 It traverses through all <em>trainable</em> nodes from the output layer to the input layer.
@@ -380,12 +292,12 @@ The <code class="docutils literal notranslate"><span class="pre">backward()</spa
 </ul>
 <p>We also provide a shortcut function <code class="docutils literal notranslate"><span class="pre">backprop()</span></code> which performs first the forward pass and then the backward pass on the nodes of the graph:</p>
 <div class="highlight-cpp notranslate"><div class="highlight"><pre><span></span><span class="c1">// Perform backpropagation on the graph</span>
-<span class="n">graph</span><span class="o">-&gt;</span><span class="n">backprop</span><span class="p">();</span>
+<span class="n">graph</span><span class="o">-&gt;</span><span class="n">backprop</span><span class="p">();</span><span class="w"></span>
 <span class="c1">// This function is equal to the following code:</span>
 <span class="cm">/* </span>
 <span class="cm">   graph-&gt;forward();</span>
 <span class="cm">   graph-&gt;backward();</span>
-<span class="cm">*/</span>
+<span class="cm">*/</span><span class="w"></span>
 </pre></div>
 </div>
 <p><strong>Backward pass of modified Example 1</strong></p>
@@ -394,7 +306,7 @@ this means we cannot perform backwards pass on this graph.
 To demonstrate the backward pass, we modify Example 1 by changing the constant node <code class="docutils literal notranslate"><span class="pre">x</span></code> to a parameter node (change <code class="docutils literal notranslate"><span class="pre">constant()</span></code> to <code class="docutils literal notranslate"><span class="pre">param()</span></code>).
 Here is the modification:</p>
 <div class="highlight-cpp notranslate"><div class="highlight"><pre><span></span><span class="c1">// add parameter node x</span>
-<span class="k">auto</span> <span class="n">x</span> <span class="o">=</span> <span class="n">graph</span><span class="o">-&gt;</span><span class="n">param</span><span class="p">(</span><span class="s">&quot;x&quot;</span><span class="p">,</span> <span class="p">{</span><span class="mi">1</span><span class="p">,</span><span class="mi">1</span><span class="p">},</span> <span class="n">inits</span><span class="o">::</span><span class="n">fromValue</span><span class="p">(</span><span class="mi">2</span><span class="p">));</span>
+<span class="k">auto</span><span class="w"> </span><span class="n">x</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="n">graph</span><span class="o">-&gt;</span><span class="n">param</span><span class="p">(</span><span class="s">&quot;x&quot;</span><span class="p">,</span><span class="w"> </span><span class="p">{</span><span class="mi">1</span><span class="p">,</span><span class="mi">1</span><span class="p">},</span><span class="w"> </span><span class="n">inits</span><span class="o">::</span><span class="n">fromValue</span><span class="p">(</span><span class="mi">2</span><span class="p">));</span><span class="w"></span>
 </pre></div>
 </div>
 <p>The resulting graph is also different as displayed in Figure 3.</p>
@@ -402,16 +314,16 @@ Here is the modification:</p>
 <p><em>Figure 3 Graph layout of modified Example 1</em></p>
 <p>To perform the backward pass of modified Example 1, you can run the following code:</p>
 <div class="highlight-cpp notranslate"><div class="highlight"><pre><span></span><span class="c1">// Perform the backward pass on the trainable nodes of the graph</span>
-<span class="n">graph</span><span class="o">-&gt;</span><span class="n">backward</span><span class="p">();</span>
+<span class="n">graph</span><span class="o">-&gt;</span><span class="n">backward</span><span class="p">();</span><span class="w"></span>
 <span class="c1">// get the gradient of x node</span>
-<span class="n">std</span><span class="o">::</span><span class="n">vector</span><span class="o">&lt;</span><span class="kt">float</span><span class="o">&gt;</span> <span class="n">b</span><span class="p">;</span>
-<span class="n">x</span><span class="o">-&gt;</span><span class="n">grad</span><span class="p">()</span><span class="o">-&gt;</span><span class="n">get</span><span class="p">(</span><span class="n">b</span><span class="p">);</span>
-<span class="n">std</span><span class="o">::</span><span class="n">cout</span><span class="o">&lt;&lt;</span><span class="s">&quot;dz/dx=&quot;</span><span class="o">&lt;&lt;</span><span class="n">b</span><span class="p">[</span><span class="mi">0</span><span class="p">]</span><span class="o">&lt;&lt;</span><span class="n">std</span><span class="o">::</span><span class="n">endl</span><span class="p">;</span>
+<span class="n">std</span><span class="o">::</span><span class="n">vector</span><span class="o">&lt;</span><span class="kt">float</span><span class="o">&gt;</span><span class="w"> </span><span class="n">b</span><span class="p">;</span><span class="w"></span>
+<span class="n">x</span><span class="o">-&gt;</span><span class="n">grad</span><span class="p">()</span><span class="o">-&gt;</span><span class="n">get</span><span class="p">(</span><span class="n">b</span><span class="p">);</span><span class="w"></span>
+<span class="n">std</span><span class="o">::</span><span class="n">cout</span><span class="o">&lt;&lt;</span><span class="s">&quot;dz/dx=&quot;</span><span class="o">&lt;&lt;</span><span class="n">b</span><span class="p">[</span><span class="mi">0</span><span class="p">]</span><span class="o">&lt;&lt;</span><span class="n">std</span><span class="o">::</span><span class="n">endl</span><span class="p">;</span><span class="w"></span>
 <span class="c1">// The output is: dz/dx=2.58385</span>
 </pre></div>
 </div>
-</div>
-<div class="section" id="optimiser">
+</section>
+<section id="optimiser">
 <h3>Optimiser<a class="headerlink" href="#optimiser" title="Permalink to this headline">¶</a></h3>
 <p>After the backward pass, we obtain the gradients of the leaves.
 However, the job is not done yet.
@@ -420,15 +332,15 @@ This comes to how we define the loss function and optimiser for the graph.</p>
 <p>A loss function is used to calculate the model error between the predicted value and the actual value.
 The goal is to minimise this error during training.
 In a graph, the loss function is also represented as a group of node(s).
-You can also use the operators provided in <a class="reference external" href="api/program_listing_file_src_graph_expression_operators.h.html"><code class="docutils literal notranslate"><span class="pre">expression_operators.h</span></code></a> file to define the loss function.
+You can also use the operators provided in <a class="reference internal" href="api/file_src_graph_expression_operators.h.html#file-src-graph-expression-operators-h"><span class="std std-ref">src/graph/expression_operators.h</span></a> file to define the loss function.
 E.g., Marian offers <code class="docutils literal notranslate"><span class="pre">cross_entropy()</span></code> function to compute the cross-entropy loss between true labels and predicted labels.</p>
 <p><strong>Define a loss function for modified Example 1</strong></p>
 <p>Suppose we know the actual value of <code class="docutils literal notranslate"><span class="pre">z</span></code> is 6 with <code class="docutils literal notranslate"><span class="pre">y</span> <span class="pre">=</span> <span class="pre">3</span></code>, and <code class="docutils literal notranslate"><span class="pre">x</span></code> is the parameter we would like to learn from the model.
 The loss function we choose here is the absolute error:</p>
 <div class="highlight-cpp notranslate"><div class="highlight"><pre><span></span><span class="c1">// pass the actual value to the model</span>
-<span class="k">auto</span> <span class="n">actual</span> <span class="o">=</span> <span class="n">graph</span><span class="o">-&gt;</span><span class="n">constant</span><span class="p">({</span><span class="mi">1</span><span class="p">,</span><span class="mi">1</span><span class="p">},</span> <span class="n">inits</span><span class="o">::</span><span class="n">fromValue</span><span class="p">(</span><span class="mi">6</span><span class="p">));</span>
+<span class="k">auto</span><span class="w"> </span><span class="n">actual</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="n">graph</span><span class="o">-&gt;</span><span class="n">constant</span><span class="p">({</span><span class="mi">1</span><span class="p">,</span><span class="mi">1</span><span class="p">},</span><span class="w"> </span><span class="n">inits</span><span class="o">::</span><span class="n">fromValue</span><span class="p">(</span><span class="mi">6</span><span class="p">));</span><span class="w"></span>
 <span class="c1">// define loss function</span>
-<span class="k">auto</span> <span class="n">loss</span> <span class="o">=</span> <span class="n">abs</span><span class="p">(</span><span class="n">actual</span><span class="o">-</span><span class="n">z</span><span class="p">);</span>
+<span class="k">auto</span><span class="w"> </span><span class="n">loss</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="n">abs</span><span class="p">(</span><span class="n">actual</span><span class="o">-</span><span class="n">z</span><span class="p">);</span><span class="w"></span>
 </pre></div>
 </div>
 <p>The graph is changed to Figure 4.</p>
@@ -444,29 +356,29 @@ an optimiser with parameter-specific learning rates, which are adapted relative 
 a stochastic gradient descent method that is based on an adaptive estimation of first-order and second-order moments. .
 We use <code class="docutils literal notranslate"><span class="pre">Optimizer&lt;&gt;</span></code> to set up an optimiser with the learning rate:</p>
 <div class="highlight-cpp notranslate"><div class="highlight"><pre><span></span><span class="c1">// Choose optimizer (Sgd, Adagrad, Adam) and initial learning rate</span>
-<span class="k">auto</span> <span class="n">opt</span> <span class="o">=</span> <span class="n">Optimizer</span><span class="o">&lt;</span><span class="n">Adam</span><span class="o">&gt;</span><span class="p">(</span><span class="mf">0.01</span><span class="p">);</span>
+<span class="k">auto</span><span class="w"> </span><span class="n">opt</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="n">Optimizer</span><span class="o">&lt;</span><span class="n">Adam</span><span class="o">&gt;</span><span class="p">(</span><span class="mf">0.01</span><span class="p">);</span><span class="w"></span>
 </pre></div>
 </div>
 <p>After an iteration of backpropagation, we can call <code class="docutils literal notranslate"><span class="pre">update()</span></code> function to update the parameters:</p>
 <div class="highlight-cpp notranslate"><div class="highlight"><pre><span></span><span class="c1">// update parameters in the graph</span>
-<span class="n">opt</span><span class="o">-&gt;</span><span class="n">update</span><span class="p">(</span><span class="n">graph</span><span class="p">);</span>
+<span class="n">opt</span><span class="o">-&gt;</span><span class="n">update</span><span class="p">(</span><span class="n">graph</span><span class="p">);</span><span class="w"></span>
 </pre></div>
 </div>
 <p><strong>Set up an optimiser for modified Example 1</strong></p>
 <p>Continue with Example 1, we choose <code class="docutils literal notranslate"><span class="pre">Sgd</span></code> as the optimiser and update the parameter <code class="docutils literal notranslate"><span class="pre">x</span></code>:</p>
 <div class="highlight-cpp notranslate"><div class="highlight"><pre><span></span><span class="c1">// set up Sgd optimiser with 0.005 learning rate</span>
-<span class="k">auto</span> <span class="n">opt</span> <span class="o">=</span> <span class="n">Optimizer</span><span class="o">&lt;</span><span class="n">Sgd</span><span class="o">&gt;</span><span class="p">(</span><span class="mf">0.005</span><span class="p">);</span>
+<span class="k">auto</span><span class="w"> </span><span class="n">opt</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="n">Optimizer</span><span class="o">&lt;</span><span class="n">Sgd</span><span class="o">&gt;</span><span class="p">(</span><span class="mf">0.005</span><span class="p">);</span><span class="w"></span>
 <span class="c1">// update parameters</span>
-<span class="n">opt</span><span class="o">-&gt;</span><span class="n">update</span><span class="p">(</span><span class="n">graph</span><span class="p">);</span>
+<span class="n">opt</span><span class="o">-&gt;</span><span class="n">update</span><span class="p">(</span><span class="n">graph</span><span class="p">);</span><span class="w"></span>
 <span class="c1">// get the new value of x</span>
-<span class="n">std</span><span class="o">::</span><span class="n">vector</span><span class="o">&lt;</span><span class="kt">float</span><span class="o">&gt;</span> <span class="n">v</span><span class="p">;</span>
-<span class="n">x</span><span class="o">-&gt;</span><span class="n">val</span><span class="p">()</span><span class="o">-&gt;</span><span class="n">get</span><span class="p">(</span><span class="n">v</span><span class="p">);</span>
-<span class="n">std</span><span class="o">::</span><span class="n">cout</span><span class="o">&lt;&lt;</span><span class="s">&quot;x=&quot;</span><span class="o">&lt;&lt;</span><span class="n">v</span><span class="p">[</span><span class="mi">0</span><span class="p">]</span><span class="o">&lt;&lt;</span><span class="n">std</span><span class="o">::</span><span class="n">endl</span><span class="p">;</span>
+<span class="n">std</span><span class="o">::</span><span class="n">vector</span><span class="o">&lt;</span><span class="kt">float</span><span class="o">&gt;</span><span class="w"> </span><span class="n">v</span><span class="p">;</span><span class="w"></span>
+<span class="n">x</span><span class="o">-&gt;</span><span class="n">val</span><span class="p">()</span><span class="o">-&gt;</span><span class="n">get</span><span class="p">(</span><span class="n">v</span><span class="p">);</span><span class="w"></span>
+<span class="n">std</span><span class="o">::</span><span class="n">cout</span><span class="o">&lt;&lt;</span><span class="s">&quot;x=&quot;</span><span class="o">&lt;&lt;</span><span class="n">v</span><span class="p">[</span><span class="mi">0</span><span class="p">]</span><span class="o">&lt;&lt;</span><span class="n">std</span><span class="o">::</span><span class="n">endl</span><span class="p">;</span><span class="w"></span>
 <span class="c1">// The output is: x=1.98708</span>
 </pre></div>
 </div>
-</div>
-<div class="section" id="debugging">
+</section>
+<section id="debugging">
 <h3>Debugging<a class="headerlink" href="#debugging" title="Permalink to this headline">¶</a></h3>
 <p>For debugging, we can call <code class="docutils literal notranslate"><span class="pre">debug()</span></code> to print node parameters. The <code class="docutils literal notranslate"><span class="pre">debug()</span></code> function has to be called prior to graph execution.
 Once a node is marked for debugging, its value (resulting tensor) and the gradient will be printed out during the forward and backward pass.
@@ -474,25 +386,25 @@ It is also recommended to turn on Marian logger by calling <code class="docutils
 <p><strong>Debugging for modified Example 1</strong></p>
 <p>Suppose we want to check the results of node <code class="docutils literal notranslate"><span class="pre">x</span></code> during the computation. We can call <code class="docutils literal notranslate"><span class="pre">debug()</span></code> to mark node <code class="docutils literal notranslate"><span class="pre">x</span></code> for debugging.</p>
 <div class="highlight-cpp notranslate"><div class="highlight"><pre><span></span><span class="c1">// mark node x for debugging with logging message &quot;Parameter x&quot;</span>
-<span class="n">debug</span><span class="p">(</span><span class="n">x</span><span class="p">,</span> <span class="s">&quot;Parameter x&quot;</span><span class="p">);</span>
+<span class="n">debug</span><span class="p">(</span><span class="n">x</span><span class="p">,</span><span class="w"> </span><span class="s">&quot;Parameter x&quot;</span><span class="p">);</span><span class="w"></span>
 </pre></div>
 </div>
 <p>The output is shown as follows with <code class="docutils literal notranslate"><span class="pre">createLoggers()</span></code>:</p>
-<div class="highlight-cpp notranslate"><div class="highlight"><pre><span></span><span class="p">[</span><span class="mi">2021</span><span class="mo">-02</span><span class="mi">-16</span> <span class="mi">15</span><span class="o">:</span><span class="mi">10</span><span class="o">:</span><span class="mi">51</span><span class="p">]</span> <span class="p">[</span><span class="n">memory</span><span class="p">]</span> <span class="n">Reserving</span> <span class="mi">256</span> <span class="n">B</span><span class="p">,</span> <span class="n">device</span> <span class="n">gpu0</span>
-<span class="p">[</span><span class="mi">2021</span><span class="mo">-02</span><span class="mi">-16</span> <span class="mi">15</span><span class="o">:</span><span class="mi">10</span><span class="o">:</span><span class="mi">51</span><span class="p">]</span> <span class="nl">Debug</span><span class="p">:</span> <span class="n">Parameter</span> <span class="n">x</span> <span class="n">op</span><span class="o">=</span><span class="n">param</span>
-<span class="p">[</span><span class="mi">2021</span><span class="mo">-02</span><span class="mi">-16</span> <span class="mi">15</span><span class="o">:</span><span class="mi">10</span><span class="o">:</span><span class="mi">51</span><span class="p">]</span> <span class="n">shape</span><span class="o">=</span><span class="mi">1</span><span class="n">x1</span> <span class="n">size</span><span class="o">=</span><span class="mi">1</span> <span class="n">type</span><span class="o">=</span><span class="n">float32</span> <span class="n">device</span><span class="o">=</span><span class="n">gpu0</span> <span class="n">ptr</span><span class="o">=</span><span class="mi">140505547538432</span> <span class="n">bytes</span><span class="o">=</span><span class="mi">256</span>
-<span class="nl">min</span><span class="p">:</span> <span class="mf">2.00000000</span> <span class="nl">max</span><span class="p">:</span> <span class="mf">2.00000000</span> <span class="n">l2</span><span class="o">-</span><span class="nl">norm</span><span class="p">:</span> <span class="mf">2.00000000</span>
-<span class="p">[[</span>   <span class="mf">2.00000000</span> <span class="p">]]</span>
+<div class="highlight-cpp notranslate"><div class="highlight"><pre><span></span><span class="p">[</span><span class="mi">2021</span><span class="mo">-02</span><span class="mi">-16</span><span class="w"> </span><span class="mi">15</span><span class="o">:</span><span class="mi">10</span><span class="o">:</span><span class="mi">51</span><span class="p">]</span><span class="w"> </span><span class="p">[</span><span class="n">memory</span><span class="p">]</span><span class="w"> </span><span class="n">Reserving</span><span class="w"> </span><span class="mi">256</span><span class="w"> </span><span class="n">B</span><span class="p">,</span><span class="w"> </span><span class="n">device</span><span class="w"> </span><span class="n">gpu0</span><span class="w"></span>
+<span class="p">[</span><span class="mi">2021</span><span class="mo">-02</span><span class="mi">-16</span><span class="w"> </span><span class="mi">15</span><span class="o">:</span><span class="mi">10</span><span class="o">:</span><span class="mi">51</span><span class="p">]</span><span class="w"> </span><span class="n">Debug</span><span class="o">:</span><span class="w"> </span><span class="n">Parameter</span><span class="w"> </span><span class="n">x</span><span class="w"> </span><span class="n">op</span><span class="o">=</span><span class="n">param</span><span class="w"></span>
+<span class="p">[</span><span class="mi">2021</span><span class="mo">-02</span><span class="mi">-16</span><span class="w"> </span><span class="mi">15</span><span class="o">:</span><span class="mi">10</span><span class="o">:</span><span class="mi">51</span><span class="p">]</span><span class="w"> </span><span class="n">shape</span><span class="o">=</span><span class="mi">1</span><span class="n">x1</span><span class="w"> </span><span class="n">size</span><span class="o">=</span><span class="mi">1</span><span class="w"> </span><span class="n">type</span><span class="o">=</span><span class="n">float32</span><span class="w"> </span><span class="n">device</span><span class="o">=</span><span class="n">gpu0</span><span class="w"> </span><span class="n">ptr</span><span class="o">=</span><span class="mi">140505547538432</span><span class="w"> </span><span class="n">bytes</span><span class="o">=</span><span class="mi">256</span><span class="w"></span>
+<span class="nl">min</span><span class="p">:</span><span class="w"> </span><span class="mf">2.00000000</span><span class="w"> </span><span class="n">max</span><span class="o">:</span><span class="w"> </span><span class="mf">2.00000000</span><span class="w"> </span><span class="n">l2</span><span class="o">-</span><span class="n">norm</span><span class="o">:</span><span class="w"> </span><span class="mf">2.00000000</span><span class="w"></span>
+<span class="p">[[</span><span class="w">   </span><span class="mf">2.00000000</span><span class="w"> </span><span class="p">]]</span><span class="w"></span>
 
-<span class="p">[</span><span class="mi">2021</span><span class="mo">-02</span><span class="mi">-16</span> <span class="mi">15</span><span class="o">:</span><span class="mi">10</span><span class="o">:</span><span class="mi">51</span><span class="p">]</span> <span class="p">[</span><span class="n">memory</span><span class="p">]</span> <span class="n">Reserving</span> <span class="mi">256</span> <span class="n">B</span><span class="p">,</span> <span class="n">device</span> <span class="n">gpu0</span>
-<span class="p">[</span><span class="mi">2021</span><span class="mo">-02</span><span class="mi">-16</span> <span class="mi">15</span><span class="o">:</span><span class="mi">10</span><span class="o">:</span><span class="mi">51</span><span class="p">]</span> <span class="n">Debug</span> <span class="nl">Grad</span><span class="p">:</span> <span class="n">Parameter</span> <span class="n">x</span> <span class="n">op</span><span class="o">=</span><span class="n">param</span>
-<span class="p">[</span><span class="mi">2021</span><span class="mo">-02</span><span class="mi">-16</span> <span class="mi">15</span><span class="o">:</span><span class="mi">10</span><span class="o">:</span><span class="mi">51</span><span class="p">]</span> <span class="n">shape</span><span class="o">=</span><span class="mi">1</span><span class="n">x1</span> <span class="n">size</span><span class="o">=</span><span class="mi">1</span> <span class="n">type</span><span class="o">=</span><span class="n">float32</span> <span class="n">device</span><span class="o">=</span><span class="n">gpu0</span> <span class="n">ptr</span><span class="o">=</span><span class="mi">140505547538944</span> <span class="n">bytes</span><span class="o">=</span><span class="mi">256</span>
-<span class="nl">min</span><span class="p">:</span> <span class="mf">2.58385324</span> <span class="nl">max</span><span class="p">:</span> <span class="mf">2.58385324</span> <span class="n">l2</span><span class="o">-</span><span class="nl">norm</span><span class="p">:</span> <span class="mf">2.58385324</span>
-<span class="p">[[</span>   <span class="mf">2.58385324</span> <span class="p">]]</span>
+<span class="p">[</span><span class="mi">2021</span><span class="mo">-02</span><span class="mi">-16</span><span class="w"> </span><span class="mi">15</span><span class="o">:</span><span class="mi">10</span><span class="o">:</span><span class="mi">51</span><span class="p">]</span><span class="w"> </span><span class="p">[</span><span class="n">memory</span><span class="p">]</span><span class="w"> </span><span class="n">Reserving</span><span class="w"> </span><span class="mi">256</span><span class="w"> </span><span class="n">B</span><span class="p">,</span><span class="w"> </span><span class="n">device</span><span class="w"> </span><span class="n">gpu0</span><span class="w"></span>
+<span class="p">[</span><span class="mi">2021</span><span class="mo">-02</span><span class="mi">-16</span><span class="w"> </span><span class="mi">15</span><span class="o">:</span><span class="mi">10</span><span class="o">:</span><span class="mi">51</span><span class="p">]</span><span class="w"> </span><span class="n">Debug</span><span class="w"> </span><span class="n">Grad</span><span class="o">:</span><span class="w"> </span><span class="n">Parameter</span><span class="w"> </span><span class="n">x</span><span class="w"> </span><span class="n">op</span><span class="o">=</span><span class="n">param</span><span class="w"></span>
+<span class="p">[</span><span class="mi">2021</span><span class="mo">-02</span><span class="mi">-16</span><span class="w"> </span><span class="mi">15</span><span class="o">:</span><span class="mi">10</span><span class="o">:</span><span class="mi">51</span><span class="p">]</span><span class="w"> </span><span class="n">shape</span><span class="o">=</span><span class="mi">1</span><span class="n">x1</span><span class="w"> </span><span class="n">size</span><span class="o">=</span><span class="mi">1</span><span class="w"> </span><span class="n">type</span><span class="o">=</span><span class="n">float32</span><span class="w"> </span><span class="n">device</span><span class="o">=</span><span class="n">gpu0</span><span class="w"> </span><span class="n">ptr</span><span class="o">=</span><span class="mi">140505547538944</span><span class="w"> </span><span class="n">bytes</span><span class="o">=</span><span class="mi">256</span><span class="w"></span>
+<span class="nl">min</span><span class="p">:</span><span class="w"> </span><span class="mf">2.58385324</span><span class="w"> </span><span class="n">max</span><span class="o">:</span><span class="w"> </span><span class="mf">2.58385324</span><span class="w"> </span><span class="n">l2</span><span class="o">-</span><span class="n">norm</span><span class="o">:</span><span class="w"> </span><span class="mf">2.58385324</span><span class="w"></span>
+<span class="p">[[</span><span class="w">   </span><span class="mf">2.58385324</span><span class="w"> </span><span class="p">]]</span><span class="w"></span>
 </pre></div>
 </div>
-</div>
-<div class="section" id="more-advanced">
+</section>
+<section id="more-advanced">
 <h3>More advanced<a class="headerlink" href="#more-advanced" title="Permalink to this headline">¶</a></h3>
 <p>For more details about graph execution, a graph keeps track of all the <code class="docutils literal notranslate"><span class="pre">Node</span></code> objects in its <code class="docutils literal notranslate"><span class="pre">nodesForward_</span></code> and <code class="docutils literal notranslate"><span class="pre">nodesBackward_</span></code> lists.
 <code class="docutils literal notranslate"><span class="pre">nodesForward_</span></code> contains all nodes used for the forward pass and <code class="docutils literal notranslate"><span class="pre">nodesBackward_</span></code> contains all trainable nodes used for the backward pass.
@@ -505,7 +417,7 @@ This attribute holds memory and nodes that correspond to graph parameters.
 You can call <code class="docutils literal notranslate"><span class="pre">params()</span></code> function in a graph to get all the parameter objects:</p>
 <div class="highlight-cpp notranslate"><div class="highlight"><pre><span></span><span class="c1">// return the Parameters object related to the graph</span>
 <span class="c1">// The Parameters object holds the whole set of the parameter nodes.</span>
-<span class="n">graph</span><span class="o">-&gt;</span><span class="n">params</span><span class="p">();</span>
+<span class="n">graph</span><span class="o">-&gt;</span><span class="n">params</span><span class="p">();</span><span class="w"></span>
 </pre></div>
 </div>
 <p>Besides, we provide APIs to support the mechanism of Gradient Checkpointing.
@@ -513,70 +425,53 @@ This method works by trading compute for memory, which reruns a forward-pass seg
 Currently, Marian only supports setting checkpoint nodes manually by calling <code class="docutils literal notranslate"><span class="pre">Node::markCheckpoint()</span></code> or <code class="docutils literal notranslate"><span class="pre">checkpoint()</span></code>.
 To enable the gradient-checkpointing mode for a graph, we use <code class="docutils literal notranslate"><span class="pre">setCheckpointing()</span></code>:</p>
 <div class="highlight-cpp notranslate"><div class="highlight"><pre><span></span><span class="c1">// enable gradient-checkpointing for a graph</span>
-<span class="n">graph</span><span class="o">-&gt;</span><span class="n">setCheckpointing</span><span class="p">(</span><span class="nb">true</span><span class="p">);</span>
+<span class="n">graph</span><span class="o">-&gt;</span><span class="n">setCheckpointing</span><span class="p">(</span><span class="nb">true</span><span class="p">);</span><span class="w"></span>
 </pre></div>
 </div>
 <p>We can also save and load the parameters of a graph in Marian.
 We can call <code class="docutils literal notranslate"><span class="pre">save()</span></code> to save all parameters in the graph into a file (<code class="docutils literal notranslate"><span class="pre">.npz</span></code> or <code class="docutils literal notranslate"><span class="pre">.bin</span></code> format).
 The function <code class="docutils literal notranslate"><span class="pre">load()</span></code> can load all model parameters to the graph (either from an array of <code class="docutils literal notranslate"><span class="pre">io::Items</span></code>, a file or a buffer).</p>
 <div class="highlight-cpp notranslate"><div class="highlight"><pre><span></span><span class="c1">// specify the filename</span>
-<span class="n">std</span><span class="o">::</span><span class="n">string</span> <span class="n">filename</span> <span class="o">=</span> <span class="s">&quot;my_model.npz&quot;</span><span class="p">;</span>
+<span class="n">std</span><span class="o">::</span><span class="n">string</span><span class="w"> </span><span class="n">filename</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="s">&quot;my_model.npz&quot;</span><span class="p">;</span><span class="w"></span>
 <span class="c1">// save all the parameters into a file</span>
-<span class="n">graph</span><span class="o">-&gt;</span><span class="n">save</span><span class="p">(</span><span class="n">filename</span><span class="p">);</span>
+<span class="n">graph</span><span class="o">-&gt;</span><span class="n">save</span><span class="p">(</span><span class="n">filename</span><span class="p">);</span><span class="w"></span>
 <span class="c1">// load model from a file</span>
-<span class="n">graph</span><span class="o">-&gt;</span><span class="n">load</span><span class="p">(</span><span class="n">filename</span><span class="p">);</span>
+<span class="n">graph</span><span class="o">-&gt;</span><span class="n">load</span><span class="p">(</span><span class="n">filename</span><span class="p">);</span><span class="w"></span>
 </pre></div>
 </div>
-</div>
-</div>
-</div>
+</section>
+</section>
+</section>
 
 
            </div>
-           
           </div>
-          <footer>
-    <div class="rst-footer-buttons" role="navigation" aria-label="footer navigation">
-        <a href="operators.html" class="btn btn-neutral float-right" title="Operations in the Expression Graph" accesskey="n" rel="next">Next <span class="fa fa-arrow-circle-right" aria-hidden="true"></span></a>
+          <footer><div class="rst-footer-buttons" role="navigation" aria-label="Footer">
         <a href="index.html" class="btn btn-neutral float-left" title="Welcome to Marian’s documentation!" accesskey="p" rel="prev"><span class="fa fa-arrow-circle-left" aria-hidden="true"></span> Previous</a>
+        <a href="operators.html" class="btn btn-neutral float-right" title="Operations in the Expression Graph" accesskey="n" rel="next">Next <span class="fa fa-arrow-circle-right" aria-hidden="true"></span></a>
     </div>
 
   <hr/>
 
   <div role="contentinfo">
-    <p>
-        &#169; Copyright 2021, Marian NMT Team.
-
-    </p>
+    <p>&#169; Copyright 2021, Marian NMT Team.</p>
   </div>
-    
-    
-    
-    Built with <a href="https://www.sphinx-doc.org/">Sphinx</a> using a
-    
+
+  Built with <a href="https://www.sphinx-doc.org/">Sphinx</a> using a
     <a href="https://github.com/readthedocs/sphinx_rtd_theme">theme</a>
-    
-    provided by <a href="https://readthedocs.org">Read the Docs</a>. 
+    provided by <a href="https://readthedocs.org">Read the Docs</a>.
+   
 
 </footer>
         </div>
       </div>
-
     </section>
-
   </div>
-  
-
-  <script type="text/javascript">
+  <script>
       jQuery(function () {
           SphinxRtdTheme.Navigation.enable(true);
       });
-  </script>
-
-  
-  
-    
-   
+  </script> 
 
 </body>
 </html>

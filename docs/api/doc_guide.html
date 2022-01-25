@@ -1,0 +1,456 @@
+<!DOCTYPE html>
+<html class="writer-html5" lang="en" >
+<head>
+  <meta charset="utf-8" /><meta name="generator" content="Docutils 0.17.1: http://docutils.sourceforge.net/" />
+
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Writing documentation &mdash; Marian NMT v1.10.27 2022-01-25 documentation</title><link rel="stylesheet" href="_static/css/theme.css" type="text/css" />
+    <link rel="stylesheet" href="_static/pygments.css" type="text/css" />
+      <link rel="stylesheet" href="_static/css/custom.css" type="text/css" />
+      <link rel="stylesheet" href="_static/collapsible-lists/css/tree_view.css" type="text/css" />
+    <link rel="canonical" href="http://marian-nmt.github.io/docs/api/doc_guide.html" />
+  <!--[if lt IE 9]>
+    <script src="_static/js/html5shiv.min.js"></script>
+  <![endif]-->
+  <script id="documentation_options" data-url_root="./" src="_static/documentation_options.js"></script>
+        <script src="_static/jquery.js"></script>
+        <script src="_static/underscore.js"></script>
+        <script src="_static/doctools.js"></script>
+        <script src="_static/language_data.js"></script>
+        <script src="_static/collapsible-lists/js/CollapsibleLists.compressed.js"></script>
+        <script src="_static/collapsible-lists/js/apply-collapsible-lists.js"></script>
+        <script async="async" src="https://cdnjs.cloudflare.com/ajax/libs/mathjax/2.7.5/latest.js?config=TeX-AMS-MML_HTMLorMML"></script>
+        <script type="text/x-mathjax-config">MathJax.Hub.Config({"tex2jax": {"inlineMath": [["\\(", "\\)"]], "displayMath": [["\\[", "\\]"]], "processRefs": false, "processEnvironments": false}})</script>
+    <script src="_static/js/theme.js"></script>
+    <link rel="index" title="Index" href="genindex.html" />
+    <link rel="search" title="Search" href="search.html" />
+    <link rel="prev" title="How to contribute to Marian" href="contributing.html" /> 
+</head>
+
+<body class="wy-body-for-nav"> 
+  <div class="wy-grid-for-nav">
+    <nav data-toggle="wy-nav-shift" class="wy-nav-side">
+      <div class="wy-side-scroll">
+        <div class="wy-side-nav-search" >
+            <a href="index.html" class="icon icon-home"> Marian NMT
+          </a>
+              <div class="version">
+                v1.10.27
+              </div>
+<div role="search">
+  <form id="rtd-search-form" class="wy-form" action="search.html" method="get">
+    <input type="text" name="q" placeholder="Search docs" />
+    <input type="hidden" name="check_keywords" value="yes" />
+    <input type="hidden" name="area" value="default" />
+  </form>
+</div>
+        </div><div class="wy-menu wy-menu-vertical" data-spy="affix" role="navigation" aria-label="Navigation menu">
+              <p><span class="caption-text">Contents:</span></p>
+<ul class="current">
+<li class="toctree-l1"><a class="reference internal" href="graph.html">Expression graphs</a></li>
+<li class="toctree-l1"><a class="reference internal" href="operators.html">Operations in the Expression Graph</a></li>
+<li class="toctree-l1"><a class="reference internal" href="api/library_index.html">Library API</a></li>
+<li class="toctree-l1"><a class="reference internal" href="contributing.html">How to contribute to Marian</a></li>
+<li class="toctree-l1 current"><a class="current reference internal" href="#">Writing documentation</a><ul>
+<li class="toctree-l2"><a class="reference internal" href="#code-documentation-with-doxygen">Code documentation with Doxygen</a><ul>
+<li class="toctree-l3"><a class="reference internal" href="#doxygen-basics">Doxygen basics</a></li>
+<li class="toctree-l3"><a class="reference internal" href="#doxygen-commands">Doxygen commands</a></li>
+<li class="toctree-l3"><a class="reference internal" href="#math-formulas-in-doxygen">Math formulas in Doxygen</a></li>
+<li class="toctree-l3"><a class="reference internal" href="#recommendations">Recommendations</a></li>
+</ul>
+</li>
+<li class="toctree-l2"><a class="reference internal" href="#user-documentation-with-sphinx">User documentation with Sphinx</a><ul>
+<li class="toctree-l3"><a class="reference internal" href="#restructuredtext">reStructuredText</a></li>
+<li class="toctree-l3"><a class="reference internal" href="#markdown">Markdown</a></li>
+</ul>
+</li>
+</ul>
+</li>
+</ul>
+
+        </div>
+      </div>
+    </nav>
+
+    <section data-toggle="wy-nav-shift" class="wy-nav-content-wrap"><nav class="wy-nav-top" aria-label="Mobile navigation menu" >
+          <i data-toggle="wy-nav-top" class="fa fa-bars"></i>
+          <a href="index.html">Marian NMT</a>
+      </nav>
+
+      <div class="wy-nav-content">
+        <div class="rst-content">
+          <div role="navigation" aria-label="Page navigation">
+  <ul class="wy-breadcrumbs">
+      <li><a href="index.html" class="icon icon-home"></a> &raquo;</li>
+      <li>Writing documentation</li>
+      <li class="wy-breadcrumbs-aside">
+            <a href="_sources/doc_guide.rst.txt" rel="nofollow"> View page source</a>
+      </li>
+  </ul>
+  <hr/>
+</div>
+          <div role="main" class="document" itemscope="itemscope" itemtype="http://schema.org/Article">
+           <div itemprop="articleBody">
+             
+  <section id="writing-documentation">
+<h1>Writing documentation<a class="headerlink" href="#writing-documentation" title="Permalink to this headline">¶</a></h1>
+<p>Marian’s documentation is generated using <a class="reference external" href="https://www.sphinx-doc.org/en/master/usage/quickstart.html">Sphinx</a> + <a class="reference external" href="https://breathe.readthedocs.io/en/latest/directives.html">Breathe</a> + <a class="reference external" href="http://www.doxygen.nl/manual/docblocks.html">Doxygen</a> + <a class="reference external" href="https://exhale.readthedocs.io/en/latest/usage.html">Exhale</a>.
+<a class="reference external" href="http://www.doxygen.nl/manual/docblocks.html">Doxygen</a> is used for documenting the source code and <a class="reference external" href="https://www.sphinx-doc.org/en/master/usage/quickstart.html">Sphinx</a> (together with the extensions of
+<a class="reference external" href="https://breathe.readthedocs.io/en/latest/directives.html">Breathe</a> and <a class="reference external" href="https://exhale.readthedocs.io/en/latest/usage.html">Exhale</a>) for managing handwritten documentation and generating library API
+reference.</p>
+<p>Whenever you add new code or propose changes to Marian, we would highly appreciate if you also add
+new Doxygen comments or update existing ones as needed along with your changes (see the <a class="reference external" href="#documentation-with-doxygen">Doxygen
+guidelines</a> below). Your Doxygen comments will be integrated in the Marian’s documentation
+automatically.</p>
+<p>There is an ongoing and incremental effort with the goal of documenting essential Marian API in a
+consistent way. The existing code might not follow these guidelines, but new code should.</p>
+<section id="code-documentation-with-doxygen">
+<h2>Code documentation with Doxygen<a class="headerlink" href="#code-documentation-with-doxygen" title="Permalink to this headline">¶</a></h2>
+<p><a class="reference external" href="http://www.doxygen.nl/manual/docblocks.html">Doxygen</a> is a powerful documentation system for C++ and many other languages that parses and
+extracts documentation comments included in the source code to generate a comprehensive
+documentation, for example, in HTML or LaTeX format.</p>
+<section id="doxygen-basics">
+<h3>Doxygen basics<a class="headerlink" href="#doxygen-basics" title="Permalink to this headline">¶</a></h3>
+<p>Doxygen recognises several special comment blocks with some additional markings. In Marian, we
+follow the <strong>Javadoc style</strong>, which consist of a C-style comment block starting with two <code class="docutils literal notranslate"><span class="pre">*</span></code>’s,
+like this:</p>
+<div class="highlight-cpp notranslate"><div class="highlight"><pre><span></span><span class="cm">/**</span>
+<span class="cm"> * ... text ...</span>
+<span class="cm"> */</span><span class="w"></span>
+</pre></div>
+</div>
+<p>A documentation comment for all main entities in the code (e.g. classes, functions, methods, etc.)
+always includes two sections: a <em>brief</em> summary and <em>detailed</em> description.  In Marian, a Java-style
+comment block automatically starts a brief description which ends at the first dot followed by a
+space or new line (i.e. there is no need to add the <cite>&#64;brief</cite> keyword). Here is an example:</p>
+<div class="highlight-cpp notranslate"><div class="highlight"><pre><span></span><span class="cm">/**</span>
+<span class="cm"> *  Brief description which ends at this dot. Details follow</span>
+<span class="cm"> *  here.</span>
+<span class="cm"> */</span><span class="w"></span>
+</pre></div>
+</div>
+<p>If you want to put documentation after members (e.g., a variable and enum), you have to put an
+additional <code class="docutils literal notranslate"><span class="pre">&lt;</span></code> marker in the comment block.</p>
+<div class="highlight-cpp notranslate"><div class="highlight"><pre><span></span><span class="kt">int</span><span class="w"> </span><span class="n">var</span><span class="p">;</span><span class="w"> </span><span class="c1">///&lt; Brief description after the member</span>
+</pre></div>
+</div>
+</section>
+<section id="doxygen-commands">
+<h3>Doxygen commands<a class="headerlink" href="#doxygen-commands" title="Permalink to this headline">¶</a></h3>
+<p>More details in the documentation can be provided using special Doxygen’s special commands
+(keywords) which start with an at-sign (&#64;).  See <a class="reference external" href="https://www.doxygen.nl/manual/commands.html">Doxygen special commands</a> for the complete list
+of available commands. Here, we list the most common Doxygen commands, which we use to document
+Marian:</p>
+<table class="docutils align-default">
+<colgroup>
+<col style="width: 33%" />
+<col style="width: 33%" />
+<col style="width: 33%" />
+</colgroup>
+<thead>
+<tr class="row-odd"><th class="head"><p>Doxygen Command</p></th>
+<th class="head"><p>Detailed Description</p></th>
+<th class="head"><p>Example</p></th>
+</tr>
+</thead>
+<tbody>
+<tr class="row-even"><td><p>&#64;param</p></td>
+<td><p>Add a parameter
+description for a
+function parameter</p></td>
+<td><p><code class="docutils literal notranslate"><span class="pre">&#64;param</span> <span class="pre">device</span> <span class="pre">a</span>
+<span class="pre">pointer</span> <span class="pre">to</span> <span class="pre">the</span>
+<span class="pre">device</span></code></p></td>
+</tr>
+<tr class="row-odd"><td><p>&#64;return</p></td>
+<td><p>Add a return value
+description for a
+function</p></td>
+<td><p><code class="docutils literal notranslate"><span class="pre">&#64;return</span> <span class="pre">a</span> <span class="pre">pointer</span>
+<span class="pre">to</span> <span class="pre">the</span> <span class="pre">constant</span>
+<span class="pre">node</span></code></p></td>
+</tr>
+<tr class="row-even"><td><p>&#64;see</p></td>
+<td><p>Add a cross-reference
+to classes,
+functions, methods,
+variables, files or
+URL</p></td>
+<td><p><code class="docutils literal notranslate"><span class="pre">&#64;see</span> <span class="pre">reshape()</span></code></p></td>
+</tr>
+<tr class="row-odd"><td><p>&#64;ref</p></td>
+<td><p>Create a reference to
+another item being
+documented.</p></td>
+<td><p><code class="docutils literal notranslate"><span class="pre">&#64;ref</span> <span class="pre">IndexType</span></code></p></td>
+</tr>
+<tr class="row-even"><td><p>&#64;copybrief</p></td>
+<td><p>Copy the brief
+description from the
+object specified</p></td>
+<td><p><code class="docutils literal notranslate"><span class="pre">&#64;copybrief</span> <span class="pre">slice</span></code></p></td>
+</tr>
+<tr class="row-odd"><td><p>&#64;copydetails</p></td>
+<td><p>Copy the detailed
+documentation from
+the object specified</p></td>
+<td><p><code class="docutils literal notranslate"><span class="pre">&#64;copydetails</span> <span class="pre">dot</span></code></p></td>
+</tr>
+<tr class="row-even"><td><p>&#64;note</p></td>
+<td><p>Add a note message
+where the text will
+be highlighted</p></td>
+<td><p><code class="docutils literal notranslate"><span class="pre">&#64;note</span> <span class="pre">this</span> <span class="pre">is</span> <span class="pre">named</span>
+<span class="pre">after</span> <span class="pre">an</span> <span class="pre">equivalent</span>
+<span class="pre">function</span> <span class="pre">in</span> <span class="pre">PyTorch</span></code></p></td>
+</tr>
+<tr class="row-odd"><td><p>&#64;warning</p></td>
+<td><p>Add a warning message
+where the text will
+be highlighted</p></td>
+<td><p><code class="docutils literal notranslate"><span class="pre">&#64;warning</span>
+<span class="pre">not</span> <span class="pre">implemented</span></code></p></td>
+</tr>
+<tr class="row-even"><td><p>&#64;b</p></td>
+<td><p>Display a single word
+using a bold font</p></td>
+<td><p><code class="docutils literal notranslate"><span class="pre">&#64;b</span> <span class="pre">bold</span></code></p></td>
+</tr>
+<tr class="row-odd"><td><p>&#64;c</p></td>
+<td><p>Display a single word
+using a typewriter
+font</p></td>
+<td><p><code class="docutils literal notranslate"><span class="pre">&#64;c</span> <span class="pre">void</span></code></p></td>
+</tr>
+<tr class="row-even"><td><p>&#64;p</p></td>
+<td><p>Display a single word
+using a typewriter
+font. Equivalent to
+<code class="docutils literal notranslate"><span class="pre">&#64;c</span></code></p></td>
+<td><p><code class="docutils literal notranslate"><span class="pre">&#64;p</span> <span class="pre">transA</span></code></p></td>
+</tr>
+<tr class="row-odd"><td><p>&#64;em</p></td>
+<td><p>Display a single word
+in italics.</p></td>
+<td><p><code class="docutils literal notranslate"><span class="pre">&#64;em</span> <span class="pre">x</span></code></p></td>
+</tr>
+</tbody>
+</table>
+<div class="admonition warning">
+<p class="admonition-title">Warning</p>
+<p>Not all Doxygen special commands are supported in Exhale, e.g., <a class="reference external" href="https://www.doxygen.nl/manual/grouping.html">grouping</a>
+[<a class="reference external" href="https://exhale.readthedocs.io/en/latest/faq.html#my-documentation-is-setup-using-groups-how-can-i-use-exhale">1</a>].
+Some commands like <a class="reference external" href="https://www.doxygen.nl/manual/commands.html#cmdname">&#64;name</a> could lead to errors when parsing overloaded functions.
+To free yourself from debugging the Doxygen comments for hours, we recommend you only using the
+above commands.</p>
+</div>
+</section>
+<section id="math-formulas-in-doxygen">
+<h3>Math formulas in Doxygen<a class="headerlink" href="#math-formulas-in-doxygen" title="Permalink to this headline">¶</a></h3>
+<p>Doxygen supports LaTeX math formulas in the documentation. To include an inline formula that appears
+in the running text, we need wrap it by a pair of <code class="docutils literal notranslate"><span class="pre">&#64;f$</span></code> commands, for example:</p>
+<div class="highlight-none notranslate"><div class="highlight"><pre><span></span>Default is no smoothing, @f$\alpha = 0 @f$.
+</pre></div>
+</div>
+<p>This will result in: Default is no smoothing, <img alt="formula1" src="_images/formula1.png" /></p>
+<p>For the longer formulas which are in separate lines, we can put <code class="docutils literal notranslate"><span class="pre">\f[</span></code> and <code class="docutils literal notranslate"><span class="pre">\f]</span></code> commands between
+the formulas, for instance:</p>
+<div class="highlight-none notranslate"><div class="highlight"><pre><span></span>@f[
+   \operatorname{gelu}(x) = x \cdot \Phi(x)
+     = x \cdot \frac{1}{2}\left[
+        1 + \operatorname{erf}\left(\frac{x}{\sqrt{2}}\right)
+     \right]
+     \sim \operatorname{swish}(x, 1.702)
+@f]
+</pre></div>
+</div>
+<p>This will result in:</p>
+<figure class="align-default" id="id5">
+<img alt="Example of formula 2" src="_images/gelu_formula.png" />
+<figcaption>
+<p><span class="caption-text">Example of formula 2</span><a class="headerlink" href="#id5" title="Permalink to this image">¶</a></p>
+</figcaption>
+</figure>
+<div class="admonition note">
+<p class="admonition-title">Note</p>
+<p>Make sure the formula contains <em>valid</em> commands in <a class="reference external" href="https://en.wikibooks.org/wiki/LaTeX/Mathematics">LaTeX’s math-mode</a>.</p>
+</div>
+</section>
+<section id="recommendations">
+<h3>Recommendations<a class="headerlink" href="#recommendations" title="Permalink to this headline">¶</a></h3>
+<p>First of all, add Doxygen comments in the header files. You can find the examples of Doxygen
+comments in <a class="reference external" href="https://github.com/marian-nmt/marian-dev/blob/master/src/graph/expression_graph.h">src/graph/expression_graph.h</a>.  A good practice is to keep Doxygen comments as
+intuitive and short as possible. Try not to introduce unnecessary vertical space (e.g., an empty
+line). A basic template of Doxygen comments is shown as follows:</p>
+<div class="highlight-cpp notranslate"><div class="highlight"><pre><span></span><span class="cm">/**</span>
+<span class="cm"> * Brief summary.</span>
+<span class="cm"> * Detailed description. More detail.</span>
+<span class="cm"> * @see Some reference</span>
+<span class="cm"> * @param &lt;name&gt; Parameter description.</span>
+<span class="cm"> * @return Return value description.</span>
+<span class="cm"> */</span><span class="w"></span>
+</pre></div>
+</div>
+</section>
+</section>
+<section id="user-documentation-with-sphinx">
+<h2>User documentation with Sphinx<a class="headerlink" href="#user-documentation-with-sphinx" title="Permalink to this headline">¶</a></h2>
+<p>Sphinx supports <a class="reference external" href="https://www.sphinx-doc.org/en/master/usage/restructuredtext/index.html">reStructuredText</a> and <a class="reference external" href="https://www.sphinx-doc.org/en/master/usage/markdown.html">Markdown</a> documents. Marian’s user documentation files are
+located in <a class="reference external" href="https://github.com/marian-nmt/marian-dev/tree/master/doc">doc</a>.  The default format of Sphinx is <a class="reference external" href="https://www.sphinx-doc.org/en/master/usage/restructuredtext/index.html">reStructuredText</a> and most of the framework’s
+power comes from the richness of its default <a class="reference external" href="https://www.sphinx-doc.org/en/master/usage/restructuredtext/index.html">reStructuredText</a> markup format.</p>
+<section id="restructuredtext">
+<h3>reStructuredText<a class="headerlink" href="#restructuredtext" title="Permalink to this headline">¶</a></h3>
+<p>As Marian’s documentation is generated using <a class="reference external" href="https://www.sphinx-doc.org/en/master/usage/quickstart.html">Sphinx</a> + <a class="reference external" href="https://breathe.readthedocs.io/en/latest/directives.html">Breathe</a> + <a class="reference external" href="http://www.doxygen.nl/manual/docblocks.html">Doxygen</a> + <a class="reference external" href="https://exhale.readthedocs.io/en/latest/usage.html">Exhale</a>,
+reStructuredText is the best language to use if you need to utilise many <code class="docutils literal notranslate"><span class="pre">directives</span></code> generated by
+Sphinx / Breathe / Exhale and are not satisfied with Markdown features as mentioned <a class="reference internal" href="#md-section"><span class="std std-ref">below</span></a>.</p>
+<p>There are many useful <code class="docutils literal notranslate"><span class="pre">directives</span></code> supported by Sphinx / Breathe / Exhale which you could use in
+your user documentation. Here we highlight the most useful directives when documenting Marian.
+For the complete reStructuredText syntax guide, please refer to the <a class="reference external" href="https://exhale.readthedocs.io/en/latest/mastering_doxygen.html#features-available-by-using-sphinx-breathe-exhale-by-way-of-restructuredtext">mini guide</a> provided by
+<a class="reference external" href="https://exhale.readthedocs.io/en/latest/usage.html">Exhale</a>. Sphinx docs also covers the most important aspects of reStructuredText. Read more in the
+<a class="reference external" href="https://www.sphinx-doc.org/en/master/usage/restructuredtext/index.html">reStructuredText tutorials provided Sphinx</a>.</p>
+<p>The first useful set of directives are <a class="reference external" href="https://breathe.readthedocs.io/en/latest/directives.html">Breathe directives</a> which are used to include documentation
+for different constructs. The available commands are listed below:</p>
+<blockquote>
+<div><div class="highlight-none notranslate"><div class="highlight"><pre><span></span>.. doxygenindex::
+.. doxygenfunction::
+.. doxygenstruct::
+.. doxygenenum::
+.. doxygentypedef::
+.. doxygenclass::
+</pre></div>
+</div>
+</div></blockquote>
+<p>The second one is <a class="reference external" href="https://exhale.readthedocs.io/en/latest/usage.html#suggested-restructuredtext-linking-strategy">Exhale directives</a> which are used to link different constructs.  The available
+commands are listed below:</p>
+<blockquote>
+<div><div class="highlight-none notranslate"><div class="highlight"><pre><span></span>:class:`namespace::ClassName`
+:func:`namespace::ClassName::methodName`
+:member:`namespace::ClassName::mMemberName`
+:func:`namespace::funcName`
+</pre></div>
+</div>
+</div></blockquote>
+<div class="admonition tip">
+<p class="admonition-title">Tip</p>
+<ol class="arabic simple">
+<li><p>reStructuredText is particularly sensitive to whitespace! If the rendered text does not turn
+out as what you expected, double check space(s) or newline(s).</p></li>
+<li><p>It takes several minutes to build Marian’s documentation (mostly due to Exhale). If you work
+on a user documentation and need to check the rendered result frequently, you can comment out
+the exhale extension in <code class="docutils literal notranslate"><span class="pre">conf.py</span></code> file once <a class="reference internal" href="api/library_index.html"><span class="doc">Marian code documentation</span></a> is generated (i.e., building the whole documentation once). This will
+greatly speed up the documentation building.</p></li>
+</ol>
+</div>
+</section>
+<section id="markdown">
+<span id="md-section"></span><h3>Markdown<a class="headerlink" href="#markdown" title="Permalink to this headline">¶</a></h3>
+<p>Although reStructuredText is more powerful than Markdown, it might feel less intuitive if you have
+never used it before. Sphinx docs now use <a class="reference external" href="https://www.sphinx-doc.org/en/master/usage/markdown.html">MyST-Parser</a> as a default extension for handling
+Markdown, which adds more Markdown-friendly syntax for the purpose of the documentation, in addition
+to the <a class="reference external" href="https://commonmark.org">CommonMark</a> features. Read more in the <a class="reference external" href="https://myst-parser.readthedocs.io/en/latest/syntax/optional.html">MyST-Parser documentation</a>.</p>
+<p>For instance, MyST-Parser supports <a class="reference external" href="https://myst-parser.readthedocs.io/en/latest/syntax/syntax.html#directives-a-block-level-extension-point">directives syntax</a>, a generic block of explicit markup syntax
+available in reStructuredText, such as <code class="docutils literal notranslate"><span class="pre">note</span> <span class="pre">admonitions</span></code>:</p>
+<blockquote>
+<div><div class="highlight-none notranslate"><div class="highlight"><pre><span></span>```{note} Notes require **no** arguments, so content can start here.
+```
+</pre></div>
+</div>
+</div></blockquote>
+<p>The above markdown text will be rendered as below:</p>
+<blockquote>
+<div><div class="admonition note">
+<p class="admonition-title">Note</p>
+<p>Notes require <strong>no</strong> arguments, so content can start here.</p>
+</div>
+</div></blockquote>
+<p>Another useful feature is that you can include reStructuredText text/files into a Markdown file.
+This means you can take advantage of <code class="docutils literal notranslate"><span class="pre">directives</span></code> generated by Sphinx / Breathe / Exhale with
+ease, especially if you want to highlight/reference the functions or classes in <a class="reference internal" href="api/library_index.html"><span class="doc">Marian code
+documentation</span></a>.
+In general Sphinx docs only supports reStructuredText commands (such as <a class="reference external" href="https://www.sphinx-doc.org/en/master/usage/extensions/autodoc.html#module-sphinx.ext.autodoc">sphinx.ext.autodoc</a> and
+<a class="reference external" href="https://breathe.readthedocs.io/en/latest/directives.html">Breathe directives</a>) to interact with the code documentation [<a class="reference external" href="https://myst-parser.readthedocs.io/en/latest/sphinx/use.html#">2</a>].</p>
+<p>For example, let’s assume that you want to include the function documentation of
+<code class="docutils literal notranslate"><span class="pre">marian::inits::fromValue</span> <span class="pre">(</span> <span class="pre">float</span> <span class="pre">)</span></code> in the user documentation. You can use the following <a class="reference external" href="https://breathe.readthedocs.io/en/latest/directives.html#doxygenfunction">Breathe
+doxygenfunction directive</a> for this:</p>
+<dl class="function">
+<dt id="_CPPv4N6marian5inits9fromValueEf">
+<span id="_CPPv3N6marian5inits9fromValueEf"></span><span id="_CPPv2N6marian5inits9fromValueEf"></span><span id="marian::inits::fromValue__float"></span><span class="target" id="namespacemarian_1_1inits_1a71bb6dee3704c85c5f63a97eead43a1e"></span><a class="reference internal" href="api/typedef_namespacemarian_1ad1a373be43a00ef9ce35666145137b08.html#_CPPv4N6marian3PtrE" title="marian::Ptr">Ptr</a>&lt;<a class="reference internal" href="api/classmarian_1_1inits_1_1NodeInitializer.html#_CPPv4N6marian5inits15NodeInitializerE" title="marian::inits::NodeInitializer">NodeInitializer</a>&gt; <code class="sig-prename descclassname">marian::inits<code class="sig-prename descclassname">::</code></code><code class="sig-name descname">fromValue</code><span class="sig-paren">(</span>float <em>value</em><span class="sig-paren">)</span><br /></dt>
+<dd><p>Initialize tensor with given value. </p>
+<p>Creates a <a class="reference internal" href="api/classmarian_1_1inits_1_1NodeInitializer.html#classmarian_1_1inits_1_1NodeInitializer"><span class="std std-ref">NodeInitializer</span></a> that will initialize the given tensor with <code class="docutils literal notranslate"><span class="pre">value</span></code>. Works with any underlying numeric tensor type. <dl class="simple">
+<dt><strong>Return</strong></dt><dd><p>A <a class="reference internal" href="api/classmarian_1_1inits_1_1NodeInitializer.html#classmarian_1_1inits_1_1NodeInitializer"><span class="std std-ref">NodeInitializer</span></a> </p>
+</dd>
+</dl>
+</p>
+</dd></dl>
+
+<p>To display the exactly same content as above, MyST-Parser offers the special <a class="reference external" href="https://myst-parser.readthedocs.io/en/latest/syntax/syntax.html#syntax-directives-parsing">eval-rst directive</a>
+to wrap reStructuredText directives:</p>
+<blockquote>
+<div><div class="highlight-none notranslate"><div class="highlight"><pre><span></span>```{eval-rst}
+.. doxygenfunction:: marian::inits::fromValue(float)
+```
+</pre></div>
+</div>
+</div></blockquote>
+<p>Also, you can link functions or classes in <a class="reference internal" href="api/library_index.html"><span class="doc">Marian code documentation</span></a> with
+<a class="reference external" href="https://myst-parser.readthedocs.io/en/latest/syntax/syntax.html#syntax-directives-parsing">eval-rst directive</a>. For example, to link <code class="docutils literal notranslate"><span class="pre">marian::inits::fromValue(float)</span></code> you can use the
+following markdown syntax:</p>
+<blockquote>
+<div><div class="highlight-none notranslate"><div class="highlight"><pre><span></span>```{eval-rst}
+ Link to :func:`marian::inits::fromValue`
+```
+</pre></div>
+</div>
+</div></blockquote>
+<p>Or you can directly link to the function in <a class="reference external" href="https://www.markdownguide.org/basic-syntax/#links">markdown hyperlink syntax</a>:</p>
+<blockquote>
+<div><div class="highlight-none notranslate"><div class="highlight"><pre><span></span>Link to [`marian::inits::fromValue(float)`](api/function_namespacemarian_1_1inits_1a71bb6dee3704c85c5f63a97eead43a1e.html#_CPPv4N6marian5inits9fromValueEf)
+</pre></div>
+</div>
+</div></blockquote>
+<p>Both outputs will be rendered with a clickable hyperlink to <code class="docutils literal notranslate"><span class="pre">marian::inits::fromValue(float)</span></code> in
+the corresponding Library API page (as shown below):</p>
+<blockquote>
+<div><p>Link to <a class="reference internal" href="api/function_namespacemarian_1_1inits_1a71bb6dee3704c85c5f63a97eead43a1e.html#_CPPv4N6marian5inits9fromValueEf" title="marian::inits::fromValue"><code class="xref cpp cpp-func docutils literal notranslate"><span class="pre">marian::inits::fromValue()</span></code></a></p>
+</div></blockquote>
+<div class="admonition note">
+<p class="admonition-title">Note</p>
+<p>The reference links for <code class="docutils literal notranslate"><span class="pre">marian::inits::fromValue(float)</span></code> is generated by <a class="reference external" href="https://exhale.readthedocs.io/en/latest/usage.html">Exhale</a>. For more
+information about how to cross-reference the code documentation, see <a class="reference external" href="https://exhale.readthedocs.io/en/latest/usage.html#linking-to-a-generated-file">Exhale’s linking
+strategy</a>.</p>
+</div>
+</section>
+</section>
+</section>
+
+
+           </div>
+          </div>
+          <footer><div class="rst-footer-buttons" role="navigation" aria-label="Footer">
+        <a href="contributing.html" class="btn btn-neutral float-left" title="How to contribute to Marian" accesskey="p" rel="prev"><span class="fa fa-arrow-circle-left" aria-hidden="true"></span> Previous</a>
+    </div>
+
+  <hr/>
+
+  <div role="contentinfo">
+    <p>&#169; Copyright 2021, Marian NMT Team.</p>
+  </div>
+
+  Built with <a href="https://www.sphinx-doc.org/">Sphinx</a> using a
+    <a href="https://github.com/readthedocs/sphinx_rtd_theme">theme</a>
+    provided by <a href="https://readthedocs.org">Read the Docs</a>.
+   
+
+</footer>
+        </div>
+      </div>
+    </section>
+  </div>
+  <script>
+      jQuery(function () {
+          SphinxRtdTheme.Navigation.enable(true);
+      });
+  </script> 
+
+</body>
+</html>

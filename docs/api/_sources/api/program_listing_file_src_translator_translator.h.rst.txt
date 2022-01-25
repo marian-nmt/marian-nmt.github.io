@@ -19,6 +19,9 @@ Program Listing for File translator.h
    #include "data/shortlist.h"
    #include "data/text_input.h"
    
+   #include "common/scheduling_parameter.h"
+   #include "common/timer.h"
+   
    #include "3rd_party/threadpool.h"
    
    #include "translator/history.h"
@@ -29,12 +32,7 @@ Program Listing for File translator.h
    #include "translator/scorers.h"
    
    // currently for diagnostics only, will try to mmap files ending in *.bin suffix when enabled.
-   // @TODO: add this as an actual feature.
-   #define MMAP 0
-   
-   #if MMAP
    #include "3rd_party/mio/mio.hpp"
-   #endif
    
    namespace marian {
    
@@ -51,9 +49,8 @@ Program Listing for File translator.h
    
      size_t numDevices_;
    
-   #if MMAP
-     std::vector<mio::mmap_source> mmaps_;
-   #endif
+     std::vector<mio::mmap_source> model_mmaps_; // map
+     std::vector<std::vector<io::Item>> model_items_; // non-mmap
    
    public:
      Translate(Ptr<Options> options)
@@ -71,8 +68,12 @@ Program Listing for File translator.h
        trgVocab_->load(vocabs.back());
        auto srcVocab = corpus_->getVocabs()[0];
    
-       if(options_->hasAndNotEmpty("shortlist"))
-         shortlistGenerator_ = data::createShortlistGenerator(options_, srcVocab, trgVocab_, 0, 1, vocabs.front() == vocabs.back());
+       std::vector<int> lshOpts = options_->get<std::vector<int>>("output-approx-knn", {});
+       ABORT_IF(lshOpts.size() != 0 && lshOpts.size() != 2, "--output-approx-knn takes 2 parameters");
+   
+       if (lshOpts.size() == 2 || options_->hasAndNotEmpty("shortlist")) {
+         shortlistGenerator_ = data::createShortlistGenerator(options_, srcVocab, trgVocab_, lshOpts, 0, 1, vocabs.front() == vocabs.back());
+       }
    
        auto devices = Config::getDevices(options_);
        numDevices_ = devices.size();
@@ -81,15 +82,21 @@ Program Listing for File translator.h
        scorers_.resize(numDevices_);
        graphs_.resize(numDevices_);
    
-   #if MMAP
        auto models = options->get<std::vector<std::string>>("models");
-       for(auto model : models) {
-         marian::filesystem::Path modelPath(model);
-         ABORT_IF(modelPath.extension() != marian::filesystem::Path(".bin"),
-                 "Non-binarized models cannot be mmapped");
-         mmaps_.push_back(std::move(mio::mmap_source(model)));
+       if(options_->get<bool>("model-mmap", false)) {
+         for(auto model : models) {
+           ABORT_IF(!io::isBin(model), "Non-binarized models cannot be mmapped");
+           LOG(info, "Loading model from {}", model);
+           model_mmaps_.push_back(mio::mmap_source(model));
+         }
        }
-   #endif
+       else {
+         for(auto model : models) {
+           LOG(info, "Loading model from {}", model);
+           auto items = io::loadItems(model);
+           model_items_.push_back(std::move(items));
+         }
+       }
    
        size_t id = 0;
        for(auto device : devices) {
@@ -98,14 +105,22 @@ Program Listing for File translator.h
            auto prec = options_->get<std::vector<std::string>>("precision", {"float32"});
            graph->setDefaultElementType(typeFromString(prec[0]));
            graph->setDevice(device);
+           if (device.type == DeviceType::cpu) {
+             graph->getBackend()->setOptimized(options_->get<bool>("optimize"));
+             graph->getBackend()->setGemmType(options_->get<std::string>("gemm-type"));
+             graph->getBackend()->setQuantizeRange(options_->get<float>("quantize-range"));
+           }
            graph->reserveWorkspaceMB(options_->get<size_t>("workspace"));
            graphs_[id] = graph;
    
-   #if MMAP
-           auto scorers = createScorers(options_, mmaps_);
-   #else
-           auto scorers = createScorers(options_);
-   #endif
+           std::vector<Ptr<Scorer>> scorers;
+           if(options_->get<bool>("model-mmap", false)) {
+             scorers = createScorers(options_, model_mmaps_);
+           }
+           else {
+             scorers = createScorers(options_, model_items_);
+           }
+   
            for(auto scorer : scorers) {
              scorer->init(graph);
              if(shortlistGenerator_)
@@ -142,11 +157,42 @@ Program Listing for File translator.h
        if(options_->get<bool>("quiet-translation"))
          collector->setPrintingStrategy(New<QuietPrinting>());
    
-       bg.prepare();
+       // mutex for syncing counter and timer updates
+       std::mutex syncCounts;
+   
+       // timer and counters for total elapsed time and statistics
+       std::unique_ptr<timer::Timer> totTimer(new timer::Timer());
+       size_t totBatches      = 0;
+       size_t totLines        = 0;
+       size_t totSourceTokens = 0;
+   
+       // timer and counters for elapsed time and statistics between updates
+       std::unique_ptr<timer::Timer> curTimer(new timer::Timer());
+       size_t curBatches      = 0;
+       size_t curLines        = 0;
+       size_t curSourceTokens = 0;
+   
+       // determine if we want to display timer statistics, by default off
+       auto statFreq = SchedulingParameter::parse(options_->get<std::string>("stat-freq", "0u"));
+       // abort early to avoid potentially costly batching and translation before error message
+       ABORT_IF(statFreq.unit != SchedulingUnit::updates, "Units other than 'u' are not supported for --stat-freq value {}", statFreq);
+   
+       // Override display for progress heartbeat for MS-internal Philly compute cluster
+       // otherwise this job may be killed prematurely if no log for 4 hrs
+       if(getenv("PHILLY_JOB_ID")) { // this environment variable exists when running on the cluster
+         if(statFreq.n == 0) {
+           statFreq.n = 10000;
+           statFreq.unit = SchedulingUnit::updates;
+         }
+       }
    
        bool doNbest = options_->get<bool>("n-best");
+   
+       bg.prepare();
        for(auto batch : bg) {
-         auto task = [=](size_t id) {
+         auto task = [=, &syncCounts,
+                         &totBatches, &totLines, &totSourceTokens, &totTimer,
+                         &curBatches, &curLines, &curSourceTokens, &curTimer](size_t id) {
            thread_local Ptr<ExpressionGraph> graph;
            thread_local std::vector<Ptr<Scorer>> scorers;
    
@@ -168,20 +214,44 @@ Program Listing for File translator.h
                               doNbest);
            }
    
+           // if we asked for speed information display this
+           if(statFreq.n > 0) {
+             std::lock_guard<std::mutex> lock(syncCounts);
+             totBatches++;
+             totLines        += batch->size();
+             totSourceTokens += batch->front()->batchWords();
    
-           // progress heartbeat for MS-internal Philly compute cluster
-           // otherwise this job may be killed prematurely if no log for 4 hrs
-           if (getenv("PHILLY_JOB_ID")   // this environment variable exists when running on the cluster
-               && id % 1000 == 0)  // hard beat once every 1000 batches
-           {
-             auto progress = 0.f; //fake progress for now
-             fprintf(stderr, "PROGRESS: %.2f%%\n", progress);
-             fflush(stderr);
+             curBatches++;
+             curLines        += batch->size();
+             curSourceTokens += batch->front()->batchWords();
+   
+             if(totBatches % statFreq.n == 0) {
+               double totTime = totTimer->elapsed();
+               double curTime = curTimer->elapsed();
+   
+               LOG(info,
+                   "Processed {} batches, {} lines, {} source tokens in {:.2f}s - Speed (since last): {:.2f} batches/s - {:.2f} lines/s - {:.2f} tokens/s",
+                   totBatches, totLines, totSourceTokens, totTime, curBatches / curTime, curLines / curTime, curSourceTokens / curTime);
+   
+               // reset stats between updates
+               curBatches = curLines = curSourceTokens = 0;
+               curTimer.reset(new timer::Timer());
+             }
            }
          };
    
          threadPool.enqueue(task, batchId++);
+       }
    
+       // make sure threads are joined before other local variables get de-allocated
+       threadPool.join_all();
+   
+       // display final speed numbers over total translation if intermediate displays were requested
+       if(statFreq.n > 0) {
+         double totTime = totTimer->elapsed();
+         LOG(info,
+             "Processed {} batches, {} lines, {} source tokens in {:.2f}s - Speed (total): {:.2f} batches/s - {:.2f} lines/s - {:.2f} tokens/s",
+             totBatches, totLines, totSourceTokens, totTime, totBatches / totTime, totLines / totTime, totSourceTokens / totTime);
        }
      }
    };
@@ -219,15 +289,27 @@ Program Listing for File translator.h
    
        trgVocab_ = New<Vocab>(options_, vocabPaths.size() - 1);
        trgVocab_->load(vocabPaths.back());
+       auto srcVocab = srcVocabs_.front();
+   
+       std::vector<int> lshOpts = options_->get<std::vector<int>>("output-approx-knn");
+       ABORT_IF(lshOpts.size() != 0 && lshOpts.size() != 2, "--output-approx-knn takes 2 parameters");
    
        // load lexical shortlist
-       if(options_->hasAndNotEmpty("shortlist"))
-         shortlistGenerator_ = New<data::LexicalShortlistGenerator>(
-             options_, srcVocabs_.front(), trgVocab_, 0, 1, vocabPaths.front() == vocabPaths.back());
+       if (lshOpts.size() == 2 || options_->hasAndNotEmpty("shortlist")) {
+           shortlistGenerator_ = data::createShortlistGenerator(options_, srcVocab, trgVocab_, lshOpts, 0, 1, vocabPaths.front() == vocabPaths.back());
+       }
    
        // get device IDs
        auto devices = Config::getDevices(options_);
        numDevices_ = devices.size();
+   
+       // preload models
+       std::vector<std::vector<io::Item>> model_items_;
+       auto models = options->get<std::vector<std::string>>("models");
+       for(auto model : models) {
+         auto items = io::loadItems(model);
+         model_items_.push_back(std::move(items));
+       }
    
        // initialize scorers
        for(auto device : devices) {
@@ -236,10 +318,15 @@ Program Listing for File translator.h
          auto precison = options_->get<std::vector<std::string>>("precision", {"float32"});
          graph->setDefaultElementType(typeFromString(precison[0])); // only use first type, used for parameter type in graph
          graph->setDevice(device);
+         if (device.type == DeviceType::cpu) {
+           graph->getBackend()->setOptimized(options_->get<bool>("optimize"));
+           graph->getBackend()->setGemmType(options_->get<std::string>("gemm-type"));
+           graph->getBackend()->setQuantizeRange(options_->get<float>("quantize-range"));
+         }
          graph->reserveWorkspaceMB(options_->get<size_t>("workspace"));
          graphs_.push_back(graph);
    
-         auto scorers = createScorers(options_);
+         auto scorers = createScorers(options_, model_items_);
          for(auto scorer : scorers) {
            scorer->init(graph);
            if(shortlistGenerator_)

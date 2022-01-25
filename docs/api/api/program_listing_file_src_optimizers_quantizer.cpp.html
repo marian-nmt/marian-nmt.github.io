@@ -1,78 +1,41 @@
-
-
 <!DOCTYPE html>
 <html class="writer-html5" lang="en" >
 <head>
-  <meta charset="utf-8" />
-  
+  <meta charset="utf-8" /><meta name="generator" content="Docutils 0.17.1: http://docutils.sourceforge.net/" />
+
   <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-  
-  <title>Program Listing for File quantizer.cpp &mdash; Marian NMT v1.10.3 2021-03-22 documentation</title>
-  
-
-  
-  <link rel="stylesheet" href="../_static/css/theme.css" type="text/css" />
-  <link rel="stylesheet" href="../_static/pygments.css" type="text/css" />
-  <link rel="stylesheet" href="../_static/css/custom.css" type="text/css" />
-  <link rel="stylesheet" href="../_static/collapsible-lists/css/tree_view.css" type="text/css" />
-
-  
-  
-
-  
-  
-
-  
+  <title>Program Listing for File quantizer.cpp &mdash; Marian NMT v1.10.27 2022-01-25 documentation</title><link rel="stylesheet" href="../_static/css/theme.css" type="text/css" />
+    <link rel="stylesheet" href="../_static/pygments.css" type="text/css" />
+      <link rel="stylesheet" href="../_static/css/custom.css" type="text/css" />
+      <link rel="stylesheet" href="../_static/collapsible-lists/css/tree_view.css" type="text/css" />
     <link rel="canonical" href="http://marian-nmt.github.io/docs/api/api/program_listing_file_src_optimizers_quantizer.cpp.html" />
-
-  
   <!--[if lt IE 9]>
     <script src="../_static/js/html5shiv.min.js"></script>
   <![endif]-->
-  
-    
-      <script type="text/javascript" id="documentation_options" data-url_root="../" src="../_static/documentation_options.js"></script>
+  <script id="documentation_options" data-url_root="../" src="../_static/documentation_options.js"></script>
         <script src="../_static/jquery.js"></script>
         <script src="../_static/underscore.js"></script>
         <script src="../_static/doctools.js"></script>
         <script src="../_static/language_data.js"></script>
         <script src="../_static/collapsible-lists/js/CollapsibleLists.compressed.js"></script>
         <script src="../_static/collapsible-lists/js/apply-collapsible-lists.js"></script>
-    
-    <script type="text/javascript" src="../_static/js/theme.js"></script>
-
-    
+        <script async="async" src="https://cdnjs.cloudflare.com/ajax/libs/mathjax/2.7.5/latest.js?config=TeX-AMS-MML_HTMLorMML"></script>
+        <script type="text/x-mathjax-config">MathJax.Hub.Config({"tex2jax": {"inlineMath": [["\\(", "\\)"]], "displayMath": [["\\[", "\\]"]], "processRefs": false, "processEnvironments": false}})</script>
+    <script src="../_static/js/theme.js"></script>
     <link rel="index" title="Index" href="../genindex.html" />
     <link rel="search" title="Search" href="../search.html" /> 
 </head>
 
-<body class="wy-body-for-nav">
-
-   
+<body class="wy-body-for-nav"> 
   <div class="wy-grid-for-nav">
-    
     <nav data-toggle="wy-nav-shift" class="wy-nav-side">
       <div class="wy-side-scroll">
         <div class="wy-side-nav-search" >
-          
-
-          
             <a href="../index.html" class="icon icon-home"> Marian NMT
-          
-
-          
           </a>
-
-          
-            
-            
               <div class="version">
-                v1.10.3
+                v1.10.27
               </div>
-            
-          
-
-          
 <div role="search">
   <form id="rtd-search-form" class="wy-form" action="../search.html" method="get">
     <input type="text" name="q" placeholder="Search docs" />
@@ -80,103 +43,52 @@
     <input type="hidden" name="area" value="default" />
   </form>
 </div>
-
-          
-        </div>
-
-        
-        <div class="wy-menu wy-menu-vertical" data-spy="affix" role="navigation" aria-label="main navigation">
-          
-            
-            
-              
-            
-            
-              <p class="caption"><span class="caption-text">Contents:</span></p>
+        </div><div class="wy-menu wy-menu-vertical" data-spy="affix" role="navigation" aria-label="Navigation menu">
+              <p><span class="caption-text">Contents:</span></p>
 <ul>
 <li class="toctree-l1"><a class="reference internal" href="../graph.html">Expression graphs</a></li>
 <li class="toctree-l1"><a class="reference internal" href="../operators.html">Operations in the Expression Graph</a></li>
 <li class="toctree-l1"><a class="reference internal" href="library_index.html">Library API</a></li>
 <li class="toctree-l1"><a class="reference internal" href="../contributing.html">How to contribute to Marian</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../doc_guide.html">Writing documentation</a></li>
 </ul>
 
-            
-          
         </div>
-        
       </div>
     </nav>
 
-    <section data-toggle="wy-nav-shift" class="wy-nav-content-wrap">
-
-      
-      <nav class="wy-nav-top" aria-label="top navigation">
-        
+    <section data-toggle="wy-nav-shift" class="wy-nav-content-wrap"><nav class="wy-nav-top" aria-label="Mobile navigation menu" >
           <i data-toggle="wy-nav-top" class="fa fa-bars"></i>
           <a href="../index.html">Marian NMT</a>
-        
       </nav>
 
-
       <div class="wy-nav-content">
-        
         <div class="rst-content">
-        
-          
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-<div role="navigation" aria-label="breadcrumbs navigation">
-
+          <div role="navigation" aria-label="Page navigation">
   <ul class="wy-breadcrumbs">
-    
       <li><a href="../index.html" class="icon icon-home"></a> &raquo;</li>
-        
       <li>Program Listing for File quantizer.cpp</li>
-    
-    
       <li class="wy-breadcrumbs-aside">
-        
-          
             <a href="../_sources/api/program_listing_file_src_optimizers_quantizer.cpp.rst.txt" rel="nofollow"> View page source</a>
-          
-        
       </li>
-    
   </ul>
-
-  
   <hr/>
 </div>
           <div role="main" class="document" itemscope="itemscope" itemtype="http://schema.org/Article">
            <div itemprop="articleBody">
-            
-  <div class="section" id="program-listing-for-file-quantizer-cpp">
+             
+  <section id="program-listing-for-file-quantizer-cpp">
 <span id="program-listing-file-src-optimizers-quantizer-cpp"></span><h1>Program Listing for File quantizer.cpp<a class="headerlink" href="#program-listing-for-file-quantizer-cpp" title="Permalink to this headline">¶</a></h1>
 <p>↰ <a class="reference internal" href="file_src_optimizers_quantizer.cpp.html#file-src-optimizers-quantizer-cpp"><span class="std std-ref">Return to documentation for file</span></a> (<code class="docutils literal notranslate"><span class="pre">src/optimizers/quantizer.cpp</span></code>)</p>
-<div class="highlight-cpp notranslate"><div class="highlight"><pre><span></span><span class="cp">#include</span> <span class="cpf">&lt;cmath&gt;</span><span class="cp"></span>
+<div class="highlight-cpp notranslate"><div class="highlight"><pre><span></span><span class="cp">#include</span><span class="w"> </span><span class="cpf">&lt;cmath&gt;</span><span class="cp"></span>
 
-<span class="cp">#include</span> <span class="cpf">&quot;optimizers/quantizer.h&quot;</span><span class="cp"></span>
-<span class="cp">#include</span> <span class="cpf">&quot;tensors/tensor_allocator.h&quot;</span><span class="cp"></span>
-<span class="cp">#include</span> <span class="cpf">&quot;tensors/tensor_operators.h&quot;</span><span class="cp"></span>
+<span class="cp">#include</span><span class="w"> </span><span class="cpf">&quot;optimizers/quantizer.h&quot;</span><span class="cp"></span>
+<span class="cp">#include</span><span class="w"> </span><span class="cpf">&quot;tensors/tensor_allocator.h&quot;</span><span class="cp"></span>
+<span class="cp">#include</span><span class="w"> </span><span class="cpf">&quot;tensors/tensor_operators.h&quot;</span><span class="cp"></span>
 
-<span class="cp">#include</span> <span class="cpf">&quot;functional/functional.h&quot;</span><span class="cp"></span>
+<span class="cp">#include</span><span class="w"> </span><span class="cpf">&quot;functional/functional.h&quot;</span><span class="cp"></span>
 
-<span class="k">namespace</span> <span class="n">marian</span> <span class="p">{</span>
+<span class="k">namespace</span><span class="w"> </span><span class="nn">marian</span><span class="w"> </span><span class="p">{</span><span class="w"></span>
 
 <span class="cm">/* simulate a fixed quantization for values in data.</span>
 <span class="cm"> * For example:</span>
@@ -187,20 +99,20 @@
 <span class="cm"> * @param res will contain the resulting quantized data. set data = res for in-place operation</span>
 <span class="cm"> * @param numCenters the number of quantized centers in absolute. It should be 2^(bit-1)</span>
 <span class="cm"> * @param S stores the scaling factor.</span>
-<span class="cm"> */</span>
-<span class="k">static</span> <span class="kt">void</span> <span class="n">fixedPointQuantization</span><span class="p">(</span><span class="n">Tensor</span> <span class="n">data</span><span class="p">,</span> <span class="n">Tensor</span> <span class="n">res</span><span class="p">,</span> <span class="kt">int</span> <span class="n">numCenters</span><span class="p">,</span> <span class="kt">float</span> <span class="n">S</span><span class="p">)</span> <span class="p">{</span>
-  <span class="k">using</span> <span class="k">namespace</span> <span class="n">functional</span><span class="p">;</span>
-  <span class="kt">float</span> <span class="n">multiplier</span> <span class="o">=</span> <span class="n">numCenters</span> <span class="o">/</span> <span class="n">S</span><span class="p">;</span>
+<span class="cm"> */</span><span class="w"></span>
+<span class="k">static</span><span class="w"> </span><span class="kt">void</span><span class="w"> </span><span class="nf">fixedPointQuantization</span><span class="p">(</span><span class="n">Tensor</span><span class="w"> </span><span class="n">data</span><span class="p">,</span><span class="w"> </span><span class="n">Tensor</span><span class="w"> </span><span class="n">res</span><span class="p">,</span><span class="w"> </span><span class="kt">int</span><span class="w"> </span><span class="n">numCenters</span><span class="p">,</span><span class="w"> </span><span class="kt">float</span><span class="w"> </span><span class="n">S</span><span class="p">)</span><span class="w"> </span><span class="p">{</span><span class="w"></span>
+<span class="w">  </span><span class="k">using</span><span class="w"> </span><span class="k">namespace</span><span class="w"> </span><span class="nn">functional</span><span class="p">;</span><span class="w"></span>
+<span class="w">  </span><span class="kt">float</span><span class="w"> </span><span class="n">multiplier</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="n">numCenters</span><span class="w"> </span><span class="o">/</span><span class="w"> </span><span class="n">S</span><span class="p">;</span><span class="w"></span>
 
-  <span class="c1">// clip based on the scale</span>
-  <span class="n">Element</span><span class="p">(</span><span class="n">_1</span> <span class="o">=</span> <span class="n">clip</span><span class="p">(</span><span class="n">_2</span><span class="p">,</span> <span class="n">S</span><span class="p">),</span> <span class="n">res</span><span class="p">,</span> <span class="n">data</span><span class="p">);</span>
+<span class="w">  </span><span class="c1">// clip based on the scale</span>
+<span class="w">  </span><span class="n">Element</span><span class="p">(</span><span class="n">_1</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="n">clip</span><span class="p">(</span><span class="n">_2</span><span class="p">,</span><span class="w"> </span><span class="n">S</span><span class="p">),</span><span class="w"> </span><span class="n">res</span><span class="p">,</span><span class="w"> </span><span class="n">data</span><span class="p">);</span><span class="w"></span>
 
-  <span class="c1">// get the quantization bin ID</span>
-  <span class="n">Element</span><span class="p">(</span><span class="n">_1</span> <span class="o">=</span> <span class="n">round</span><span class="p">(</span><span class="n">_1</span> <span class="o">*</span> <span class="n">multiplier</span><span class="p">),</span> <span class="n">res</span><span class="p">);</span>
+<span class="w">  </span><span class="c1">// get the quantization bin ID</span>
+<span class="w">  </span><span class="n">Element</span><span class="p">(</span><span class="n">_1</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="n">round</span><span class="p">(</span><span class="n">_1</span><span class="w"> </span><span class="o">*</span><span class="w"> </span><span class="n">multiplier</span><span class="p">),</span><span class="w"> </span><span class="n">res</span><span class="p">);</span><span class="w"></span>
 
-  <span class="c1">// revert back to floating point representation</span>
-  <span class="n">Element</span><span class="p">(</span><span class="n">_1</span> <span class="o">/=</span> <span class="n">multiplier</span><span class="p">,</span> <span class="n">res</span><span class="p">);</span>
-<span class="p">}</span>
+<span class="w">  </span><span class="c1">// revert back to floating point representation</span>
+<span class="w">  </span><span class="n">Element</span><span class="p">(</span><span class="n">_1</span><span class="w"> </span><span class="o">/=</span><span class="w"> </span><span class="n">multiplier</span><span class="p">,</span><span class="w"> </span><span class="n">res</span><span class="p">);</span><span class="w"></span>
+<span class="p">}</span><span class="w"></span>
 
 <span class="cm">/* simulate a log-based quantization for values in data. The quantized value will be in the form of</span>
 <span class="cm"> * S*2^q For example:</span>
@@ -213,195 +125,179 @@
 <span class="cm"> * @param numCenters the number of quantized centers in absolute. It should be 2^(bit-1).</span>
 <span class="cm"> * @param S stores the scaling factor.</span>
 <span class="cm"> * @param base for log quantized center. Default of 2.</span>
-<span class="cm"> */</span>
-<span class="k">static</span> <span class="kt">void</span> <span class="n">logQuantization</span><span class="p">(</span><span class="n">Tensor</span> <span class="n">data</span><span class="p">,</span> <span class="n">Tensor</span> <span class="n">res</span><span class="p">,</span> <span class="kt">int</span> <span class="n">numCenters</span><span class="p">,</span> <span class="kt">float</span> <span class="n">S</span><span class="p">,</span> <span class="kt">float</span> <span class="n">base</span> <span class="o">=</span> <span class="mf">2.0f</span><span class="p">)</span> <span class="p">{</span>
-  <span class="k">using</span> <span class="k">namespace</span> <span class="n">functional</span><span class="p">;</span>
+<span class="cm"> */</span><span class="w"></span>
+<span class="k">static</span><span class="w"> </span><span class="kt">void</span><span class="w"> </span><span class="n">logQuantization</span><span class="p">(</span><span class="n">Tensor</span><span class="w"> </span><span class="n">data</span><span class="p">,</span><span class="w"> </span><span class="n">Tensor</span><span class="w"> </span><span class="n">res</span><span class="p">,</span><span class="w"> </span><span class="kt">int</span><span class="w"> </span><span class="n">numCenters</span><span class="p">,</span><span class="w"> </span><span class="kt">float</span><span class="w"> </span><span class="n">S</span><span class="p">,</span><span class="w"> </span><span class="kt">float</span><span class="w"> </span><span class="n">base</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="mf">2.0f</span><span class="p">)</span><span class="w"> </span><span class="p">{</span><span class="w"></span>
+<span class="w">  </span><span class="k">using</span><span class="w"> </span><span class="k">namespace</span><span class="w"> </span><span class="nn">functional</span><span class="p">;</span><span class="w"></span>
 
-  <span class="c1">// clip based on the scaling factor</span>
-  <span class="n">Element</span><span class="p">(</span><span class="n">_1</span> <span class="o">=</span> <span class="n">clip</span><span class="p">(</span><span class="n">_2</span><span class="p">,</span> <span class="n">S</span><span class="p">),</span> <span class="n">res</span><span class="p">,</span> <span class="n">data</span><span class="p">);</span>
+<span class="w">  </span><span class="c1">// clip based on the scaling factor</span>
+<span class="w">  </span><span class="n">Element</span><span class="p">(</span><span class="n">_1</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="n">clip</span><span class="p">(</span><span class="n">_2</span><span class="p">,</span><span class="w"> </span><span class="n">S</span><span class="p">),</span><span class="w"> </span><span class="n">res</span><span class="p">,</span><span class="w"> </span><span class="n">data</span><span class="p">);</span><span class="w"></span>
 
-  <span class="c1">// multiplier such that the quantization is rounded in normal-space instead of log space.</span>
-  <span class="c1">// 4/3 for base = 2. example: 11.8 should be quantized to 8, instead of 16.</span>
-  <span class="kt">float</span> <span class="n">mult</span> <span class="o">=</span> <span class="p">(</span><span class="mf">2.0f</span> <span class="o">*</span> <span class="n">base</span><span class="p">)</span> <span class="o">/</span> <span class="p">(</span><span class="mf">1.0f</span> <span class="o">+</span> <span class="n">base</span><span class="p">);</span>
+<span class="w">  </span><span class="c1">// multiplier such that the quantization is rounded in normal-space instead of log space.</span>
+<span class="w">  </span><span class="c1">// 4/3 for base = 2. example: 11.8 should be quantized to 8, instead of 16.</span>
+<span class="w">  </span><span class="kt">float</span><span class="w"> </span><span class="n">mult</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="p">(</span><span class="mf">2.0f</span><span class="w"> </span><span class="o">*</span><span class="w"> </span><span class="n">base</span><span class="p">)</span><span class="w"> </span><span class="o">/</span><span class="w"> </span><span class="p">(</span><span class="mf">1.0f</span><span class="w"> </span><span class="o">+</span><span class="w"> </span><span class="n">base</span><span class="p">);</span><span class="w"></span>
 
-  <span class="c1">// log-quantization works as the following:</span>
-  <span class="c1">// 1. capture the sign:</span>
-  <span class="c1">// sign = sgn(v)</span>
-  <span class="c1">// 2. get the quantization center:</span>
-  <span class="c1">// qc = floor(log2(abs(v/S) * _mult))</span>
-  <span class="c1">// 3. clip the center to make sure we have no more than 2^(bit-1) centers.</span>
-  <span class="c1">// qc = clip(qc, num_centers)</span>
-  <span class="c1">// 4. revert back to floating point space:</span>
-  <span class="c1">// q = 2^qc * S * sign</span>
-  <span class="c1">//</span>
-  <span class="c1">// The above steps are writen in 1 call as below, to avoid reserving extra Tensors:</span>
+<span class="w">  </span><span class="c1">// log-quantization works as the following:</span>
+<span class="w">  </span><span class="c1">// 1. capture the sign:</span>
+<span class="w">  </span><span class="c1">// sign = sgn(v)</span>
+<span class="w">  </span><span class="c1">// 2. get the quantization center:</span>
+<span class="w">  </span><span class="c1">// qc = floor(log2(abs(v/S) * _mult))</span>
+<span class="w">  </span><span class="c1">// 3. clip the center to make sure we have no more than 2^(bit-1) centers.</span>
+<span class="w">  </span><span class="c1">// qc = clip(qc, num_centers)</span>
+<span class="w">  </span><span class="c1">// 4. revert back to floating point space:</span>
+<span class="w">  </span><span class="c1">// q = 2^qc * S * sign</span>
+<span class="w">  </span><span class="c1">//</span>
+<span class="w">  </span><span class="c1">// The above steps are writen in 1 call as below, to avoid reserving extra Tensors:</span>
 
-  <span class="n">Element</span><span class="p">(</span>
-      <span class="n">_1</span> <span class="o">=</span> <span class="n">sgn</span><span class="p">(</span><span class="n">_1</span><span class="p">)</span>                                                <span class="c1">// revert the sign back</span>
-           <span class="o">*</span> <span class="n">S</span>                                                    <span class="c1">// revert the scaling function</span>
-           <span class="o">*</span> <span class="n">pow</span><span class="p">(</span><span class="n">base</span><span class="p">,</span>                                            <span class="c1">// revert from log space to normal FP represtation</span>
-                 <span class="n">clip</span><span class="p">(</span><span class="n">floor</span><span class="p">(</span><span class="n">log</span><span class="p">(</span><span class="n">abs</span><span class="p">(</span><span class="n">_1</span> <span class="o">/</span> <span class="n">S</span><span class="p">)</span> <span class="o">*</span> <span class="n">mult</span><span class="p">)</span> <span class="o">/</span> <span class="n">log</span><span class="p">(</span><span class="n">base</span><span class="p">)),</span> <span class="c1">// get the quantization center</span>
-                      <span class="p">(</span><span class="kt">float</span><span class="p">)</span> <span class="n">numCenters</span><span class="p">)),</span>                       <span class="c1">// clip</span>
-      <span class="n">res</span><span class="p">);</span>
-<span class="p">}</span>
+<span class="w">  </span><span class="n">Element</span><span class="p">(</span><span class="w"></span>
+<span class="w">      </span><span class="n">_1</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="n">sgn</span><span class="p">(</span><span class="n">_1</span><span class="p">)</span><span class="w">                                                </span><span class="c1">// revert the sign back</span>
+<span class="w">           </span><span class="o">*</span><span class="w"> </span><span class="n">S</span><span class="w">                                                    </span><span class="c1">// revert the scaling function</span>
+<span class="w">           </span><span class="o">*</span><span class="w"> </span><span class="n">pow</span><span class="p">(</span><span class="n">base</span><span class="p">,</span><span class="w">                                            </span><span class="c1">// revert from log space to normal FP represtation</span>
+<span class="w">                 </span><span class="n">clip</span><span class="p">(</span><span class="n">floor</span><span class="p">(</span><span class="n">log</span><span class="p">(</span><span class="n">abs</span><span class="p">(</span><span class="n">_1</span><span class="w"> </span><span class="o">/</span><span class="w"> </span><span class="n">S</span><span class="p">)</span><span class="w"> </span><span class="o">*</span><span class="w"> </span><span class="n">mult</span><span class="p">)</span><span class="w"> </span><span class="o">/</span><span class="w"> </span><span class="n">log</span><span class="p">(</span><span class="n">base</span><span class="p">)),</span><span class="w"> </span><span class="c1">// get the quantization center</span>
+<span class="w">                      </span><span class="p">(</span><span class="kt">float</span><span class="p">)</span><span class="w"> </span><span class="n">numCenters</span><span class="p">)),</span><span class="w">                       </span><span class="c1">// clip</span>
+<span class="w">      </span><span class="n">res</span><span class="p">);</span><span class="w"></span>
+<span class="p">}</span><span class="w"></span>
 
 <span class="cm">/* Quantize all the parameters (except bias, unless enabled via --quantize-biases).</span>
 <span class="cm"> * Quantization only works if we store the quantization error residual.</span>
 <span class="cm"> * The stored residual will be added for the next quantization.</span>
 <span class="cm"> * @param graph is the model graph to be quantized (in-place).</span>
-<span class="cm"> */</span>
-<span class="kt">void</span> <span class="n">ModelQuantizer</span><span class="o">::</span><span class="n">quantize</span><span class="p">(</span><span class="n">Ptr</span><span class="o">&lt;</span><span class="n">ExpressionGraph</span><span class="o">&gt;</span> <span class="n">graph</span><span class="p">)</span> <span class="p">{</span>
-  <span class="c1">// lazily allocate tensor for error feedback mechanism</span>
-  <span class="k">if</span><span class="p">(</span><span class="o">!</span><span class="n">errorResidual_</span><span class="p">)</span> <span class="p">{</span>
-    <span class="n">LOG</span><span class="p">(</span><span class="n">info</span><span class="p">,</span> <span class="s">&quot;Quantizing the model to {}-bits&quot;</span><span class="p">,</span> <span class="n">bits_</span><span class="p">);</span>
+<span class="cm"> */</span><span class="w"></span>
+<span class="kt">void</span><span class="w"> </span><span class="n">ModelQuantizer</span><span class="o">::</span><span class="n">quantize</span><span class="p">(</span><span class="n">Ptr</span><span class="o">&lt;</span><span class="n">ExpressionGraph</span><span class="o">&gt;</span><span class="w"> </span><span class="n">graph</span><span class="p">)</span><span class="w"> </span><span class="p">{</span><span class="w"></span>
+<span class="w">  </span><span class="c1">// lazily allocate tensor for error feedback mechanism</span>
+<span class="w">  </span><span class="k">if</span><span class="p">(</span><span class="o">!</span><span class="n">errorResidual_</span><span class="p">)</span><span class="w"> </span><span class="p">{</span><span class="w"></span>
+<span class="w">    </span><span class="n">LOG</span><span class="p">(</span><span class="n">info</span><span class="p">,</span><span class="w"> </span><span class="s">&quot;Quantizing the model to {}-bits&quot;</span><span class="p">,</span><span class="w"> </span><span class="n">bits_</span><span class="p">);</span><span class="w"></span>
 
-    <span class="kt">int</span> <span class="n">numElements</span> <span class="o">=</span> <span class="p">(</span><span class="kt">int</span><span class="p">)</span><span class="n">graph</span><span class="o">-&gt;</span><span class="n">params</span><span class="p">()</span><span class="o">-&gt;</span><span class="n">vals</span><span class="p">()</span><span class="o">-&gt;</span><span class="n">size</span><span class="p">();</span>
-    <span class="k">auto</span> <span class="n">allocator</span> <span class="o">=</span> <span class="n">New</span><span class="o">&lt;</span><span class="n">TensorAllocator</span><span class="o">&gt;</span><span class="p">(</span><span class="n">graph</span><span class="o">-&gt;</span><span class="n">getBackend</span><span class="p">());</span>
-    <span class="n">allocator</span><span class="o">-&gt;</span><span class="n">reserveExact</span><span class="p">(</span><span class="n">graph</span><span class="o">-&gt;</span><span class="n">params</span><span class="p">()</span><span class="o">-&gt;</span><span class="n">vals</span><span class="p">()</span><span class="o">-&gt;</span><span class="n">memory</span><span class="p">()</span><span class="o">-&gt;</span><span class="n">size</span><span class="p">());</span>
-    <span class="n">allocator</span><span class="o">-&gt;</span><span class="n">allocate</span><span class="p">(</span><span class="n">errorResidual_</span><span class="p">,</span> <span class="p">{</span><span class="mi">1</span><span class="p">,</span> <span class="n">numElements</span><span class="p">});</span>
+<span class="w">    </span><span class="kt">int</span><span class="w"> </span><span class="n">numElements</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="p">(</span><span class="kt">int</span><span class="p">)</span><span class="n">graph</span><span class="o">-&gt;</span><span class="n">params</span><span class="p">()</span><span class="o">-&gt;</span><span class="n">vals</span><span class="p">()</span><span class="o">-&gt;</span><span class="n">size</span><span class="p">();</span><span class="w"></span>
+<span class="w">    </span><span class="k">auto</span><span class="w"> </span><span class="n">allocator</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="n">New</span><span class="o">&lt;</span><span class="n">TensorAllocator</span><span class="o">&gt;</span><span class="p">(</span><span class="n">graph</span><span class="o">-&gt;</span><span class="n">getBackend</span><span class="p">());</span><span class="w"></span>
+<span class="w">    </span><span class="n">allocator</span><span class="o">-&gt;</span><span class="n">reserveExact</span><span class="p">(</span><span class="n">graph</span><span class="o">-&gt;</span><span class="n">params</span><span class="p">()</span><span class="o">-&gt;</span><span class="n">vals</span><span class="p">()</span><span class="o">-&gt;</span><span class="n">memory</span><span class="p">()</span><span class="o">-&gt;</span><span class="n">size</span><span class="p">());</span><span class="w"></span>
+<span class="w">    </span><span class="n">allocator</span><span class="o">-&gt;</span><span class="n">allocate</span><span class="p">(</span><span class="n">errorResidual_</span><span class="p">,</span><span class="w"> </span><span class="p">{</span><span class="mi">1</span><span class="p">,</span><span class="w"> </span><span class="n">numElements</span><span class="p">});</span><span class="w"></span>
 
-    <span class="n">errorResidual_</span><span class="o">-&gt;</span><span class="n">set</span><span class="p">(</span><span class="mi">0</span><span class="p">);</span>
+<span class="w">    </span><span class="n">errorResidual_</span><span class="o">-&gt;</span><span class="n">set</span><span class="p">(</span><span class="mi">0</span><span class="p">);</span><span class="w"></span>
 
-    <span class="n">allocators_</span><span class="p">.</span><span class="n">push_back</span><span class="p">(</span><span class="n">allocator</span><span class="p">);</span>
-    <span class="n">isFirstError_</span> <span class="o">=</span> <span class="nb">true</span><span class="p">;</span>
-  <span class="p">}</span>
+<span class="w">    </span><span class="n">allocators_</span><span class="p">.</span><span class="n">push_back</span><span class="p">(</span><span class="n">allocator</span><span class="p">);</span><span class="w"></span>
+<span class="w">    </span><span class="n">isFirstError_</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="nb">true</span><span class="p">;</span><span class="w"></span>
+<span class="w">  </span><span class="p">}</span><span class="w"></span>
 
-  <span class="p">{</span>
-    <span class="c1">// apply error feedback mechanism</span>
-    <span class="k">using</span> <span class="k">namespace</span> <span class="n">functional</span><span class="p">;</span>
-    <span class="n">Element</span><span class="p">(</span><span class="n">_1</span> <span class="o">+=</span> <span class="n">_2</span><span class="p">,</span> <span class="n">graph</span><span class="o">-&gt;</span><span class="n">params</span><span class="p">()</span><span class="o">-&gt;</span><span class="n">vals</span><span class="p">(),</span> <span class="n">errorResidual_</span><span class="p">);</span> <span class="c1">// add the previous error residual to the current model</span>
-    <span class="n">errorResidual_</span><span class="o">-&gt;</span><span class="n">copyFrom</span><span class="p">(</span><span class="n">graph</span><span class="o">-&gt;</span><span class="n">params</span><span class="p">()</span><span class="o">-&gt;</span><span class="n">vals</span><span class="p">());</span> <span class="c1">// set the model as the error-residual (will be updated below)</span>
-  <span class="p">}</span>
+<span class="w">  </span><span class="p">{</span><span class="w"></span>
+<span class="w">    </span><span class="c1">// apply error feedback mechanism</span>
+<span class="w">    </span><span class="k">using</span><span class="w"> </span><span class="k">namespace</span><span class="w"> </span><span class="nn">functional</span><span class="p">;</span><span class="w"></span>
+<span class="w">    </span><span class="n">Element</span><span class="p">(</span><span class="n">_1</span><span class="w"> </span><span class="o">+=</span><span class="w"> </span><span class="n">_2</span><span class="p">,</span><span class="w"> </span><span class="n">graph</span><span class="o">-&gt;</span><span class="n">params</span><span class="p">()</span><span class="o">-&gt;</span><span class="n">vals</span><span class="p">(),</span><span class="w"> </span><span class="n">errorResidual_</span><span class="p">);</span><span class="w"> </span><span class="c1">// add the previous error residual to the current model</span>
+<span class="w">    </span><span class="n">errorResidual_</span><span class="o">-&gt;</span><span class="n">copyFrom</span><span class="p">(</span><span class="n">graph</span><span class="o">-&gt;</span><span class="n">params</span><span class="p">()</span><span class="o">-&gt;</span><span class="n">vals</span><span class="p">());</span><span class="w"> </span><span class="c1">// set the model as the error-residual (will be updated below)</span>
+<span class="w">  </span><span class="p">}</span><span class="w"></span>
 
-  <span class="k">for</span><span class="p">(</span><span class="k">auto</span> <span class="nl">p</span> <span class="p">:</span> <span class="o">*</span><span class="n">graph</span><span class="o">-&gt;</span><span class="n">params</span><span class="p">())</span> <span class="p">{</span>
-    <span class="c1">// quantize weight tensors, biases optional</span>
-    <span class="k">if</span><span class="p">(</span><span class="n">quantBias_</span> <span class="o">||</span> <span class="n">p</span><span class="o">-&gt;</span><span class="n">val</span><span class="p">()</span><span class="o">-&gt;</span><span class="n">shape</span><span class="p">()[</span><span class="mi">0</span><span class="p">]</span> <span class="o">&gt;</span> <span class="mi">1</span><span class="p">)</span>
-      <span class="n">quantizeImpl</span><span class="p">(</span><span class="n">p</span><span class="o">-&gt;</span><span class="n">val</span><span class="p">());</span>
-  <span class="p">}</span>
+<span class="w">  </span><span class="k">for</span><span class="p">(</span><span class="k">auto</span><span class="w"> </span><span class="n">p</span><span class="w"> </span><span class="o">:</span><span class="w"> </span><span class="o">*</span><span class="n">graph</span><span class="o">-&gt;</span><span class="n">params</span><span class="p">())</span><span class="w"> </span><span class="p">{</span><span class="w"></span>
+<span class="w">    </span><span class="c1">// quantize weight tensors, biases optional</span>
+<span class="w">    </span><span class="k">if</span><span class="p">(</span><span class="n">quantBias_</span><span class="w"> </span><span class="o">||</span><span class="w"> </span><span class="n">p</span><span class="o">-&gt;</span><span class="n">val</span><span class="p">()</span><span class="o">-&gt;</span><span class="n">shape</span><span class="p">()[</span><span class="mi">0</span><span class="p">]</span><span class="w"> </span><span class="o">&gt;</span><span class="w"> </span><span class="mi">1</span><span class="p">)</span><span class="w"></span>
+<span class="w">      </span><span class="n">quantizeImpl</span><span class="p">(</span><span class="n">p</span><span class="o">-&gt;</span><span class="n">val</span><span class="p">());</span><span class="w"></span>
+<span class="w">  </span><span class="p">}</span><span class="w"></span>
 
-  <span class="c1">// get new error residual. Skip the first one.</span>
-  <span class="k">if</span> <span class="p">(</span><span class="o">!</span><span class="n">isFirstError_</span><span class="p">)</span> <span class="p">{</span>
-    <span class="k">using</span> <span class="k">namespace</span> <span class="n">functional</span><span class="p">;</span>
-    <span class="n">Element</span><span class="p">(</span><span class="n">_1</span> <span class="o">-=</span> <span class="n">_2</span><span class="p">,</span> <span class="n">errorResidual_</span><span class="p">,</span> <span class="n">graph</span><span class="o">-&gt;</span><span class="n">params</span><span class="p">()</span><span class="o">-&gt;</span><span class="n">vals</span><span class="p">());</span> <span class="c1">// new error-residual = original model - quantized model</span>
-  <span class="p">}</span>
-  <span class="k">else</span> <span class="p">{</span>
-    <span class="n">errorResidual_</span><span class="o">-&gt;</span><span class="n">set</span><span class="p">(</span><span class="mi">0</span><span class="p">);</span>
-    <span class="n">isFirstError_</span> <span class="o">=</span> <span class="nb">false</span><span class="p">;</span>
-  <span class="p">}</span>
-<span class="p">}</span>
+<span class="w">  </span><span class="c1">// get new error residual. Skip the first one.</span>
+<span class="w">  </span><span class="k">if</span><span class="w"> </span><span class="p">(</span><span class="o">!</span><span class="n">isFirstError_</span><span class="p">)</span><span class="w"> </span><span class="p">{</span><span class="w"></span>
+<span class="w">    </span><span class="k">using</span><span class="w"> </span><span class="k">namespace</span><span class="w"> </span><span class="nn">functional</span><span class="p">;</span><span class="w"></span>
+<span class="w">    </span><span class="n">Element</span><span class="p">(</span><span class="n">_1</span><span class="w"> </span><span class="o">-=</span><span class="w"> </span><span class="n">_2</span><span class="p">,</span><span class="w"> </span><span class="n">errorResidual_</span><span class="p">,</span><span class="w"> </span><span class="n">graph</span><span class="o">-&gt;</span><span class="n">params</span><span class="p">()</span><span class="o">-&gt;</span><span class="n">vals</span><span class="p">());</span><span class="w"> </span><span class="c1">// new error-residual = original model - quantized model</span>
+<span class="w">  </span><span class="p">}</span><span class="w"></span>
+<span class="w">  </span><span class="k">else</span><span class="w"> </span><span class="p">{</span><span class="w"></span>
+<span class="w">    </span><span class="n">errorResidual_</span><span class="o">-&gt;</span><span class="n">set</span><span class="p">(</span><span class="mi">0</span><span class="p">);</span><span class="w"></span>
+<span class="w">    </span><span class="n">isFirstError_</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="nb">false</span><span class="p">;</span><span class="w"></span>
+<span class="w">  </span><span class="p">}</span><span class="w"></span>
+<span class="p">}</span><span class="w"></span>
 
 
 <span class="cm">/* Tensor quantization implementation.</span>
 <span class="cm"> * @param t is the tensor to be quantized (in-place)</span>
-<span class="cm"> */</span>
-<span class="kt">void</span> <span class="n">ModelQuantizer</span><span class="o">::</span><span class="n">quantizeImpl</span><span class="p">(</span><span class="n">Tensor</span> <span class="n">t</span><span class="p">)</span> <span class="p">{</span>
-  <span class="k">if</span><span class="p">(</span><span class="o">!</span><span class="n">tempVar_</span><span class="p">)</span> <span class="p">{</span>
-    <span class="c1">// init the swap tensor</span>
-    <span class="k">auto</span> <span class="n">allocator</span> <span class="o">=</span> <span class="n">New</span><span class="o">&lt;</span><span class="n">TensorAllocator</span><span class="o">&gt;</span><span class="p">(</span><span class="n">t</span><span class="o">-&gt;</span><span class="n">getBackend</span><span class="p">());</span>
-    <span class="n">allocator</span><span class="o">-&gt;</span><span class="n">reserveExact</span><span class="p">(</span><span class="k">sizeof</span><span class="p">(</span><span class="kt">float</span><span class="p">));</span>
-    <span class="n">allocator</span><span class="o">-&gt;</span><span class="n">allocate</span><span class="p">(</span><span class="n">tempVar_</span><span class="p">,</span> <span class="p">{</span><span class="mi">1</span><span class="p">,</span> <span class="mi">1</span><span class="p">});</span>
-    <span class="n">allocators_</span><span class="p">.</span><span class="n">push_back</span><span class="p">(</span><span class="n">allocator</span><span class="p">);</span>
-  <span class="p">}</span>
+<span class="cm"> */</span><span class="w"></span>
+<span class="kt">void</span><span class="w"> </span><span class="n">ModelQuantizer</span><span class="o">::</span><span class="n">quantizeImpl</span><span class="p">(</span><span class="n">Tensor</span><span class="w"> </span><span class="n">t</span><span class="p">)</span><span class="w"> </span><span class="p">{</span><span class="w"></span>
+<span class="w">  </span><span class="k">if</span><span class="p">(</span><span class="o">!</span><span class="n">tempVar_</span><span class="p">)</span><span class="w"> </span><span class="p">{</span><span class="w"></span>
+<span class="w">    </span><span class="c1">// init the swap tensor</span>
+<span class="w">    </span><span class="k">auto</span><span class="w"> </span><span class="n">allocator</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="n">New</span><span class="o">&lt;</span><span class="n">TensorAllocator</span><span class="o">&gt;</span><span class="p">(</span><span class="n">t</span><span class="o">-&gt;</span><span class="n">getBackend</span><span class="p">());</span><span class="w"></span>
+<span class="w">    </span><span class="n">allocator</span><span class="o">-&gt;</span><span class="n">reserveExact</span><span class="p">(</span><span class="k">sizeof</span><span class="p">(</span><span class="kt">float</span><span class="p">));</span><span class="w"></span>
+<span class="w">    </span><span class="n">allocator</span><span class="o">-&gt;</span><span class="n">allocate</span><span class="p">(</span><span class="n">tempVar_</span><span class="p">,</span><span class="w"> </span><span class="p">{</span><span class="mi">1</span><span class="p">,</span><span class="w"> </span><span class="mi">1</span><span class="p">});</span><span class="w"></span>
+<span class="w">    </span><span class="n">allocators_</span><span class="p">.</span><span class="n">push_back</span><span class="p">(</span><span class="n">allocator</span><span class="p">);</span><span class="w"></span>
+<span class="w">  </span><span class="p">}</span><span class="w"></span>
 
-  <span class="c1">// init additional tensor for scaling optimization</span>
-  <span class="k">if</span><span class="p">(</span><span class="o">!</span><span class="n">delta_</span> <span class="o">&amp;&amp;</span> <span class="n">optSteps_</span> <span class="o">&gt;</span> <span class="mi">0</span><span class="p">)</span> <span class="p">{</span>
-    <span class="kt">int</span> <span class="n">msize</span> <span class="o">=</span> <span class="p">(</span><span class="kt">int</span><span class="p">)</span> <span class="n">errorResidual_</span><span class="o">-&gt;</span><span class="n">size</span><span class="p">();</span>
-    <span class="k">auto</span> <span class="n">allocator</span> <span class="o">=</span> <span class="n">New</span><span class="o">&lt;</span><span class="n">TensorAllocator</span><span class="o">&gt;</span><span class="p">(</span><span class="n">errorResidual_</span><span class="o">-&gt;</span><span class="n">getBackend</span><span class="p">());</span>
-    <span class="n">allocator</span><span class="o">-&gt;</span><span class="n">reserveExact</span><span class="p">(</span><span class="n">msize</span> <span class="o">*</span> <span class="k">sizeof</span><span class="p">(</span><span class="kt">float</span><span class="p">));</span>
-    <span class="n">allocator</span><span class="o">-&gt;</span><span class="n">allocate</span><span class="p">(</span><span class="n">delta_</span><span class="p">,</span> <span class="p">{</span><span class="mi">1</span><span class="p">,</span> <span class="n">msize</span><span class="p">});</span>
-    <span class="n">allocators_</span><span class="p">.</span><span class="n">push_back</span><span class="p">(</span><span class="n">allocator</span><span class="p">);</span>
-  <span class="p">}</span>
+<span class="w">  </span><span class="c1">// init additional tensor for scaling optimization</span>
+<span class="w">  </span><span class="k">if</span><span class="p">(</span><span class="o">!</span><span class="n">delta_</span><span class="w"> </span><span class="o">&amp;&amp;</span><span class="w"> </span><span class="n">optSteps_</span><span class="w"> </span><span class="o">&gt;</span><span class="w"> </span><span class="mi">0</span><span class="p">)</span><span class="w"> </span><span class="p">{</span><span class="w"></span>
+<span class="w">    </span><span class="kt">int</span><span class="w"> </span><span class="n">msize</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="p">(</span><span class="kt">int</span><span class="p">)</span><span class="w"> </span><span class="n">errorResidual_</span><span class="o">-&gt;</span><span class="n">size</span><span class="p">();</span><span class="w"></span>
+<span class="w">    </span><span class="k">auto</span><span class="w"> </span><span class="n">allocator</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="n">New</span><span class="o">&lt;</span><span class="n">TensorAllocator</span><span class="o">&gt;</span><span class="p">(</span><span class="n">errorResidual_</span><span class="o">-&gt;</span><span class="n">getBackend</span><span class="p">());</span><span class="w"></span>
+<span class="w">    </span><span class="n">allocator</span><span class="o">-&gt;</span><span class="n">reserveExact</span><span class="p">(</span><span class="n">msize</span><span class="w"> </span><span class="o">*</span><span class="w"> </span><span class="k">sizeof</span><span class="p">(</span><span class="kt">float</span><span class="p">));</span><span class="w"></span>
+<span class="w">    </span><span class="n">allocator</span><span class="o">-&gt;</span><span class="n">allocate</span><span class="p">(</span><span class="n">delta_</span><span class="p">,</span><span class="w"> </span><span class="p">{</span><span class="mi">1</span><span class="p">,</span><span class="w"> </span><span class="n">msize</span><span class="p">});</span><span class="w"></span>
+<span class="w">    </span><span class="n">allocators_</span><span class="p">.</span><span class="n">push_back</span><span class="p">(</span><span class="n">allocator</span><span class="p">);</span><span class="w"></span>
+<span class="w">  </span><span class="p">}</span><span class="w"></span>
 
-  <span class="n">Tensor</span> <span class="n">tflat</span> <span class="o">=</span> <span class="n">t</span><span class="o">-&gt;</span><span class="n">subtensor</span><span class="p">(</span><span class="mi">0</span><span class="p">,</span> <span class="n">t</span><span class="o">-&gt;</span><span class="n">size</span><span class="p">());</span>   <span class="c1">// flatten t for reduce</span>
+<span class="w">  </span><span class="n">Tensor</span><span class="w"> </span><span class="n">tflat</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="n">t</span><span class="o">-&gt;</span><span class="n">subtensor</span><span class="p">(</span><span class="mi">0</span><span class="p">,</span><span class="w"> </span><span class="n">t</span><span class="o">-&gt;</span><span class="n">size</span><span class="p">());</span><span class="w">   </span><span class="c1">// flatten t for reduce</span>
 
-  <span class="kt">float</span> <span class="n">S</span> <span class="o">=</span> <span class="mf">0.0f</span><span class="p">;</span> <span class="c1">// scaling factor S</span>
-  <span class="c1">// get intial scaling factor (S) based on max element in Tensor</span>
-  <span class="p">{</span>
-    <span class="k">using</span> <span class="k">namespace</span> <span class="n">functional</span><span class="p">;</span>
-    <span class="n">Reduce</span><span class="p">(</span><span class="n">abs</span><span class="p">(</span><span class="n">_1</span><span class="p">),</span> <span class="n">max</span><span class="p">(</span><span class="n">_1</span><span class="p">,</span> <span class="n">_2</span><span class="p">),</span> <span class="mf">0.0f</span><span class="p">,</span> <span class="n">tempVar_</span><span class="p">,</span> <span class="n">tflat</span><span class="p">);</span>
-    <span class="n">S</span> <span class="o">=</span> <span class="n">tempVar_</span><span class="o">-&gt;</span><span class="n">get</span><span class="p">(</span><span class="mi">0</span><span class="p">);</span>
-  <span class="p">}</span>
+<span class="w">  </span><span class="kt">float</span><span class="w"> </span><span class="n">S</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="mf">0.0f</span><span class="p">;</span><span class="w"> </span><span class="c1">// scaling factor S</span>
+<span class="w">  </span><span class="c1">// get intial scaling factor (S) based on max element in Tensor</span>
+<span class="w">  </span><span class="p">{</span><span class="w"></span>
+<span class="w">    </span><span class="k">using</span><span class="w"> </span><span class="k">namespace</span><span class="w"> </span><span class="nn">functional</span><span class="p">;</span><span class="w"></span>
+<span class="w">    </span><span class="n">Reduce</span><span class="p">(</span><span class="n">abs</span><span class="p">(</span><span class="n">_1</span><span class="p">),</span><span class="w"> </span><span class="n">max</span><span class="p">(</span><span class="n">_1</span><span class="p">,</span><span class="w"> </span><span class="n">_2</span><span class="p">),</span><span class="w"> </span><span class="mf">0.0f</span><span class="p">,</span><span class="w"> </span><span class="n">tempVar_</span><span class="p">,</span><span class="w"> </span><span class="n">tflat</span><span class="p">);</span><span class="w"></span>
+<span class="w">    </span><span class="n">S</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="n">tempVar_</span><span class="o">-&gt;</span><span class="n">get</span><span class="p">(</span><span class="mi">0</span><span class="p">);</span><span class="w"></span>
+<span class="w">  </span><span class="p">}</span><span class="w"></span>
 
-  <span class="c1">// optimize the scaling factor S</span>
-  <span class="k">for</span><span class="p">(</span><span class="kt">int</span> <span class="n">i</span> <span class="o">=</span> <span class="mi">0</span><span class="p">;</span> <span class="n">i</span> <span class="o">&lt;</span> <span class="n">optSteps_</span><span class="p">;</span> <span class="n">i</span><span class="o">++</span><span class="p">)</span> <span class="p">{</span>
-    <span class="n">Tensor</span> <span class="n">q</span> <span class="o">=</span> <span class="n">delta_</span><span class="o">-&gt;</span><span class="n">subtensor</span><span class="p">(</span><span class="mi">0</span><span class="p">,</span> <span class="n">t</span><span class="o">-&gt;</span><span class="n">size</span><span class="p">());</span>  <span class="c1">// to store the quantized t</span>
+<span class="w">  </span><span class="c1">// optimize the scaling factor S</span>
+<span class="w">  </span><span class="k">for</span><span class="p">(</span><span class="kt">int</span><span class="w"> </span><span class="n">i</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="mi">0</span><span class="p">;</span><span class="w"> </span><span class="n">i</span><span class="w"> </span><span class="o">&lt;</span><span class="w"> </span><span class="n">optSteps_</span><span class="p">;</span><span class="w"> </span><span class="n">i</span><span class="o">++</span><span class="p">)</span><span class="w"> </span><span class="p">{</span><span class="w"></span>
+<span class="w">    </span><span class="n">Tensor</span><span class="w"> </span><span class="n">q</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="n">delta_</span><span class="o">-&gt;</span><span class="n">subtensor</span><span class="p">(</span><span class="mi">0</span><span class="p">,</span><span class="w"> </span><span class="n">t</span><span class="o">-&gt;</span><span class="n">size</span><span class="p">());</span><span class="w">  </span><span class="c1">// to store the quantized t</span>
 
-    <span class="c1">// let t be the original tensor, and q be the quantized tensor, and q = S*a where S is the</span>
-    <span class="c1">// scaling factor. we want to optimize S to minimize MSE(S*a - t) therefore, S =</span>
-    <span class="c1">// sum(a*t)/sum(a*a) see https://www.aclweb.org/anthology/2020.ngt-1.4.pdf for more details.</span>
-    <span class="k">if</span><span class="p">(</span><span class="n">logQuant_</span><span class="p">)</span>
-      <span class="n">logQuantization</span><span class="p">(</span><span class="n">t</span><span class="p">,</span> <span class="n">q</span><span class="p">,</span> <span class="p">(</span><span class="mi">1</span> <span class="o">&lt;&lt;</span> <span class="p">(</span><span class="n">bits_</span> <span class="o">-</span> <span class="mi">1</span><span class="p">))</span> <span class="o">-</span> <span class="mi">1</span><span class="p">,</span> <span class="n">S</span><span class="p">);</span>
-    <span class="k">else</span>
-      <span class="nf">fixedPointQuantization</span><span class="p">(</span><span class="n">t</span><span class="p">,</span> <span class="n">q</span><span class="p">,</span> <span class="p">(</span><span class="mi">1</span> <span class="o">&lt;&lt;</span> <span class="p">(</span><span class="n">bits_</span> <span class="o">-</span> <span class="mi">1</span><span class="p">))</span> <span class="o">-</span> <span class="mi">1</span><span class="p">,</span> <span class="n">S</span><span class="p">);</span>
+<span class="w">    </span><span class="c1">// let t be the original tensor, and q be the quantized tensor, and q = S*a where S is the</span>
+<span class="w">    </span><span class="c1">// scaling factor. we want to optimize S to minimize MSE(S*a - t) therefore, S =</span>
+<span class="w">    </span><span class="c1">// sum(a*t)/sum(a*a) see https://www.aclweb.org/anthology/2020.ngt-1.4.pdf for more details.</span>
+<span class="w">    </span><span class="k">if</span><span class="p">(</span><span class="n">logQuant_</span><span class="p">)</span><span class="w"></span>
+<span class="w">      </span><span class="n">logQuantization</span><span class="p">(</span><span class="n">t</span><span class="p">,</span><span class="w"> </span><span class="n">q</span><span class="p">,</span><span class="w"> </span><span class="p">(</span><span class="mi">1</span><span class="w"> </span><span class="o">&lt;&lt;</span><span class="w"> </span><span class="p">(</span><span class="n">bits_</span><span class="w"> </span><span class="o">-</span><span class="w"> </span><span class="mi">1</span><span class="p">))</span><span class="w"> </span><span class="o">-</span><span class="w"> </span><span class="mi">1</span><span class="p">,</span><span class="w"> </span><span class="n">S</span><span class="p">);</span><span class="w"></span>
+<span class="w">    </span><span class="k">else</span><span class="w"></span>
+<span class="w">      </span><span class="n">fixedPointQuantization</span><span class="p">(</span><span class="n">t</span><span class="p">,</span><span class="w"> </span><span class="n">q</span><span class="p">,</span><span class="w"> </span><span class="p">(</span><span class="mi">1</span><span class="w"> </span><span class="o">&lt;&lt;</span><span class="w"> </span><span class="p">(</span><span class="n">bits_</span><span class="w"> </span><span class="o">-</span><span class="w"> </span><span class="mi">1</span><span class="p">))</span><span class="w"> </span><span class="o">-</span><span class="w"> </span><span class="mi">1</span><span class="p">,</span><span class="w"> </span><span class="n">S</span><span class="p">);</span><span class="w"></span>
 
-    <span class="c1">// obtain a by applying q/=S</span>
-    <span class="k">using</span> <span class="k">namespace</span> <span class="n">functional</span><span class="p">;</span>
-    <span class="n">Element</span><span class="p">(</span><span class="n">_1</span> <span class="o">/=</span> <span class="n">S</span><span class="p">,</span> <span class="n">delta_</span><span class="p">);</span>
+<span class="w">    </span><span class="c1">// obtain a by applying q/=S</span>
+<span class="w">    </span><span class="k">using</span><span class="w"> </span><span class="k">namespace</span><span class="w"> </span><span class="nn">functional</span><span class="p">;</span><span class="w"></span>
+<span class="w">    </span><span class="n">Element</span><span class="p">(</span><span class="n">_1</span><span class="w"> </span><span class="o">/=</span><span class="w"> </span><span class="n">S</span><span class="p">,</span><span class="w"> </span><span class="n">delta_</span><span class="p">);</span><span class="w"></span>
 
-    <span class="c1">// get sum(a*t)</span>
-    <span class="n">Reduce</span><span class="p">(</span><span class="n">_1</span> <span class="o">*</span> <span class="n">_2</span><span class="p">,</span> <span class="n">tempVar_</span><span class="p">,</span> <span class="n">tflat</span><span class="p">,</span> <span class="n">q</span><span class="p">);</span>
-    <span class="kt">float</span> <span class="n">deltaNumer</span> <span class="o">=</span> <span class="n">tempVar_</span><span class="o">-&gt;</span><span class="n">get</span><span class="p">(</span><span class="mi">0</span><span class="p">);</span>
+<span class="w">    </span><span class="c1">// get sum(a*t)</span>
+<span class="w">    </span><span class="n">Reduce</span><span class="p">(</span><span class="n">_1</span><span class="w"> </span><span class="o">*</span><span class="w"> </span><span class="n">_2</span><span class="p">,</span><span class="w"> </span><span class="n">tempVar_</span><span class="p">,</span><span class="w"> </span><span class="n">tflat</span><span class="p">,</span><span class="w"> </span><span class="n">q</span><span class="p">);</span><span class="w"></span>
+<span class="w">    </span><span class="kt">float</span><span class="w"> </span><span class="n">deltaNumer</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="n">tempVar_</span><span class="o">-&gt;</span><span class="n">get</span><span class="p">(</span><span class="mi">0</span><span class="p">);</span><span class="w"></span>
 
-    <span class="c1">// get sum(a*a)</span>
-    <span class="n">Reduce</span><span class="p">(</span><span class="n">_1</span> <span class="o">*</span> <span class="n">_1</span><span class="p">,</span> <span class="n">tempVar_</span><span class="p">,</span> <span class="n">q</span><span class="p">);</span>
-    <span class="kt">float</span> <span class="n">deltaDenom</span> <span class="o">=</span> <span class="n">tempVar_</span><span class="o">-&gt;</span><span class="n">get</span><span class="p">(</span><span class="mi">0</span><span class="p">);</span>
+<span class="w">    </span><span class="c1">// get sum(a*a)</span>
+<span class="w">    </span><span class="n">Reduce</span><span class="p">(</span><span class="n">_1</span><span class="w"> </span><span class="o">*</span><span class="w"> </span><span class="n">_1</span><span class="p">,</span><span class="w"> </span><span class="n">tempVar_</span><span class="p">,</span><span class="w"> </span><span class="n">q</span><span class="p">);</span><span class="w"></span>
+<span class="w">    </span><span class="kt">float</span><span class="w"> </span><span class="n">deltaDenom</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="n">tempVar_</span><span class="o">-&gt;</span><span class="n">get</span><span class="p">(</span><span class="mi">0</span><span class="p">);</span><span class="w"></span>
 
-    <span class="n">S</span> <span class="o">=</span> <span class="n">deltaNumer</span> <span class="o">/</span> <span class="n">deltaDenom</span><span class="p">;</span>  <span class="c1">// S = sum(a*t)/sum(a*a)</span>
-  <span class="p">}</span>
+<span class="w">    </span><span class="n">S</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="n">deltaNumer</span><span class="w"> </span><span class="o">/</span><span class="w"> </span><span class="n">deltaDenom</span><span class="p">;</span><span class="w">  </span><span class="c1">// S = sum(a*t)/sum(a*a)</span>
+<span class="w">  </span><span class="p">}</span><span class="w"></span>
 
-  <span class="c1">// final quantization</span>
-  <span class="k">if</span><span class="p">(</span><span class="n">logQuant_</span><span class="p">)</span> <span class="p">{</span>
-    <span class="n">logQuantization</span><span class="p">(</span><span class="n">t</span><span class="p">,</span> <span class="n">t</span><span class="p">,</span> <span class="p">(</span><span class="mi">1</span> <span class="o">&lt;&lt;</span> <span class="p">(</span><span class="n">bits_</span> <span class="o">-</span> <span class="mi">1</span><span class="p">))</span> <span class="o">-</span> <span class="mi">1</span><span class="p">,</span> <span class="n">S</span><span class="p">);</span>
-  <span class="p">}</span> <span class="k">else</span>
-    <span class="n">fixedPointQuantization</span><span class="p">(</span><span class="n">t</span><span class="p">,</span> <span class="n">t</span><span class="p">,(</span><span class="mi">1</span> <span class="o">&lt;&lt;</span> <span class="p">(</span><span class="n">bits_</span> <span class="o">-</span> <span class="mi">1</span><span class="p">))</span> <span class="o">-</span> <span class="mi">1</span><span class="p">,</span> <span class="n">S</span><span class="p">);</span>
-<span class="p">}</span>
-<span class="p">}</span>  <span class="c1">// namespace marian</span>
+<span class="w">  </span><span class="c1">// final quantization</span>
+<span class="w">  </span><span class="k">if</span><span class="p">(</span><span class="n">logQuant_</span><span class="p">)</span><span class="w"> </span><span class="p">{</span><span class="w"></span>
+<span class="w">    </span><span class="n">logQuantization</span><span class="p">(</span><span class="n">t</span><span class="p">,</span><span class="w"> </span><span class="n">t</span><span class="p">,</span><span class="w"> </span><span class="p">(</span><span class="mi">1</span><span class="w"> </span><span class="o">&lt;&lt;</span><span class="w"> </span><span class="p">(</span><span class="n">bits_</span><span class="w"> </span><span class="o">-</span><span class="w"> </span><span class="mi">1</span><span class="p">))</span><span class="w"> </span><span class="o">-</span><span class="w"> </span><span class="mi">1</span><span class="p">,</span><span class="w"> </span><span class="n">S</span><span class="p">);</span><span class="w"></span>
+<span class="w">  </span><span class="p">}</span><span class="w"> </span><span class="k">else</span><span class="w"></span>
+<span class="w">    </span><span class="n">fixedPointQuantization</span><span class="p">(</span><span class="n">t</span><span class="p">,</span><span class="w"> </span><span class="n">t</span><span class="p">,(</span><span class="mi">1</span><span class="w"> </span><span class="o">&lt;&lt;</span><span class="w"> </span><span class="p">(</span><span class="n">bits_</span><span class="w"> </span><span class="o">-</span><span class="w"> </span><span class="mi">1</span><span class="p">))</span><span class="w"> </span><span class="o">-</span><span class="w"> </span><span class="mi">1</span><span class="p">,</span><span class="w"> </span><span class="n">S</span><span class="p">);</span><span class="w"></span>
+<span class="p">}</span><span class="w"></span>
+<span class="p">}</span><span class="w">  </span><span class="c1">// namespace marian</span>
 </pre></div>
 </div>
-</div>
+</section>
 
 
            </div>
-           
           </div>
           <footer>
 
   <hr/>
 
   <div role="contentinfo">
-    <p>
-        &#169; Copyright 2021, Marian NMT Team.
-
-    </p>
+    <p>&#169; Copyright 2021, Marian NMT Team.</p>
   </div>
-    
-    
-    
-    Built with <a href="https://www.sphinx-doc.org/">Sphinx</a> using a
-    
+
+  Built with <a href="https://www.sphinx-doc.org/">Sphinx</a> using a
     <a href="https://github.com/readthedocs/sphinx_rtd_theme">theme</a>
-    
-    provided by <a href="https://readthedocs.org">Read the Docs</a>. 
+    provided by <a href="https://readthedocs.org">Read the Docs</a>.
+   
 
 </footer>
         </div>
       </div>
-
     </section>
-
   </div>
-  
-
-  <script type="text/javascript">
+  <script>
       jQuery(function () {
           SphinxRtdTheme.Navigation.enable(true);
       });
-  </script>
-
-  
-  
-    
-   
+  </script> 
 
 </body>
 </html>

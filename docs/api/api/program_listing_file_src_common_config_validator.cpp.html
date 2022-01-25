@@ -1,78 +1,41 @@
-
-
 <!DOCTYPE html>
 <html class="writer-html5" lang="en" >
 <head>
-  <meta charset="utf-8" />
-  
+  <meta charset="utf-8" /><meta name="generator" content="Docutils 0.17.1: http://docutils.sourceforge.net/" />
+
   <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-  
-  <title>Program Listing for File config_validator.cpp &mdash; Marian NMT v1.10.3 2021-03-22 documentation</title>
-  
-
-  
-  <link rel="stylesheet" href="../_static/css/theme.css" type="text/css" />
-  <link rel="stylesheet" href="../_static/pygments.css" type="text/css" />
-  <link rel="stylesheet" href="../_static/css/custom.css" type="text/css" />
-  <link rel="stylesheet" href="../_static/collapsible-lists/css/tree_view.css" type="text/css" />
-
-  
-  
-
-  
-  
-
-  
+  <title>Program Listing for File config_validator.cpp &mdash; Marian NMT v1.10.27 2022-01-25 documentation</title><link rel="stylesheet" href="../_static/css/theme.css" type="text/css" />
+    <link rel="stylesheet" href="../_static/pygments.css" type="text/css" />
+      <link rel="stylesheet" href="../_static/css/custom.css" type="text/css" />
+      <link rel="stylesheet" href="../_static/collapsible-lists/css/tree_view.css" type="text/css" />
     <link rel="canonical" href="http://marian-nmt.github.io/docs/api/api/program_listing_file_src_common_config_validator.cpp.html" />
-
-  
   <!--[if lt IE 9]>
     <script src="../_static/js/html5shiv.min.js"></script>
   <![endif]-->
-  
-    
-      <script type="text/javascript" id="documentation_options" data-url_root="../" src="../_static/documentation_options.js"></script>
+  <script id="documentation_options" data-url_root="../" src="../_static/documentation_options.js"></script>
         <script src="../_static/jquery.js"></script>
         <script src="../_static/underscore.js"></script>
         <script src="../_static/doctools.js"></script>
         <script src="../_static/language_data.js"></script>
         <script src="../_static/collapsible-lists/js/CollapsibleLists.compressed.js"></script>
         <script src="../_static/collapsible-lists/js/apply-collapsible-lists.js"></script>
-    
-    <script type="text/javascript" src="../_static/js/theme.js"></script>
-
-    
+        <script async="async" src="https://cdnjs.cloudflare.com/ajax/libs/mathjax/2.7.5/latest.js?config=TeX-AMS-MML_HTMLorMML"></script>
+        <script type="text/x-mathjax-config">MathJax.Hub.Config({"tex2jax": {"inlineMath": [["\\(", "\\)"]], "displayMath": [["\\[", "\\]"]], "processRefs": false, "processEnvironments": false}})</script>
+    <script src="../_static/js/theme.js"></script>
     <link rel="index" title="Index" href="../genindex.html" />
     <link rel="search" title="Search" href="../search.html" /> 
 </head>
 
-<body class="wy-body-for-nav">
-
-   
+<body class="wy-body-for-nav"> 
   <div class="wy-grid-for-nav">
-    
     <nav data-toggle="wy-nav-shift" class="wy-nav-side">
       <div class="wy-side-scroll">
         <div class="wy-side-nav-search" >
-          
-
-          
             <a href="../index.html" class="icon icon-home"> Marian NMT
-          
-
-          
           </a>
-
-          
-            
-            
               <div class="version">
-                v1.10.3
+                v1.10.27
               </div>
-            
-          
-
-          
 <div role="search">
   <form id="rtd-search-form" class="wy-form" action="../search.html" method="get">
     <input type="text" name="q" placeholder="Search docs" />
@@ -80,330 +43,273 @@
     <input type="hidden" name="area" value="default" />
   </form>
 </div>
-
-          
-        </div>
-
-        
-        <div class="wy-menu wy-menu-vertical" data-spy="affix" role="navigation" aria-label="main navigation">
-          
-            
-            
-              
-            
-            
-              <p class="caption"><span class="caption-text">Contents:</span></p>
+        </div><div class="wy-menu wy-menu-vertical" data-spy="affix" role="navigation" aria-label="Navigation menu">
+              <p><span class="caption-text">Contents:</span></p>
 <ul>
 <li class="toctree-l1"><a class="reference internal" href="../graph.html">Expression graphs</a></li>
 <li class="toctree-l1"><a class="reference internal" href="../operators.html">Operations in the Expression Graph</a></li>
 <li class="toctree-l1"><a class="reference internal" href="library_index.html">Library API</a></li>
 <li class="toctree-l1"><a class="reference internal" href="../contributing.html">How to contribute to Marian</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../doc_guide.html">Writing documentation</a></li>
 </ul>
 
-            
-          
         </div>
-        
       </div>
     </nav>
 
-    <section data-toggle="wy-nav-shift" class="wy-nav-content-wrap">
-
-      
-      <nav class="wy-nav-top" aria-label="top navigation">
-        
+    <section data-toggle="wy-nav-shift" class="wy-nav-content-wrap"><nav class="wy-nav-top" aria-label="Mobile navigation menu" >
           <i data-toggle="wy-nav-top" class="fa fa-bars"></i>
           <a href="../index.html">Marian NMT</a>
-        
       </nav>
 
-
       <div class="wy-nav-content">
-        
         <div class="rst-content">
-        
-          
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-<div role="navigation" aria-label="breadcrumbs navigation">
-
+          <div role="navigation" aria-label="Page navigation">
   <ul class="wy-breadcrumbs">
-    
       <li><a href="../index.html" class="icon icon-home"></a> &raquo;</li>
-        
       <li>Program Listing for File config_validator.cpp</li>
-    
-    
       <li class="wy-breadcrumbs-aside">
-        
-          
             <a href="../_sources/api/program_listing_file_src_common_config_validator.cpp.rst.txt" rel="nofollow"> View page source</a>
-          
-        
       </li>
-    
   </ul>
-
-  
   <hr/>
 </div>
           <div role="main" class="document" itemscope="itemscope" itemtype="http://schema.org/Article">
            <div itemprop="articleBody">
-            
-  <div class="section" id="program-listing-for-file-config-validator-cpp">
+             
+  <section id="program-listing-for-file-config-validator-cpp">
 <span id="program-listing-file-src-common-config-validator-cpp"></span><h1>Program Listing for File config_validator.cpp<a class="headerlink" href="#program-listing-for-file-config-validator-cpp" title="Permalink to this headline">¶</a></h1>
 <p>↰ <a class="reference internal" href="file_src_common_config_validator.cpp.html#file-src-common-config-validator-cpp"><span class="std std-ref">Return to documentation for file</span></a> (<code class="docutils literal notranslate"><span class="pre">src/common/config_validator.cpp</span></code>)</p>
-<div class="highlight-cpp notranslate"><div class="highlight"><pre><span></span><span class="cp">#include</span> <span class="cpf">&quot;common/config_validator.h&quot;</span><span class="cp"></span>
-<span class="cp">#include</span> <span class="cpf">&quot;common/logging.h&quot;</span><span class="cp"></span>
-<span class="cp">#include</span> <span class="cpf">&quot;common/regex.h&quot;</span><span class="cp"></span>
-<span class="cp">#include</span> <span class="cpf">&quot;common/utils.h&quot;</span><span class="cp"></span>
-<span class="cp">#include</span> <span class="cpf">&quot;common/filesystem.h&quot;</span><span class="cp"></span>
+<div class="highlight-cpp notranslate"><div class="highlight"><pre><span></span><span class="cp">#include</span><span class="w"> </span><span class="cpf">&quot;common/config_validator.h&quot;</span><span class="cp"></span>
+<span class="cp">#include</span><span class="w"> </span><span class="cpf">&quot;common/logging.h&quot;</span><span class="cp"></span>
+<span class="cp">#include</span><span class="w"> </span><span class="cpf">&quot;common/regex.h&quot;</span><span class="cp"></span>
+<span class="cp">#include</span><span class="w"> </span><span class="cpf">&quot;common/utils.h&quot;</span><span class="cp"></span>
+<span class="cp">#include</span><span class="w"> </span><span class="cpf">&quot;common/filesystem.h&quot;</span><span class="cp"></span>
 
-<span class="k">namespace</span> <span class="n">marian</span> <span class="p">{</span>
+<span class="cp">#include</span><span class="w"> </span><span class="cpf">&lt;set&gt;</span><span class="cp"></span>
 
-<span class="kt">bool</span> <span class="n">ConfigValidator</span><span class="o">::</span><span class="n">has</span><span class="p">(</span><span class="k">const</span> <span class="n">std</span><span class="o">::</span><span class="n">string</span><span class="o">&amp;</span> <span class="n">key</span><span class="p">)</span> <span class="k">const</span> <span class="p">{</span>
-  <span class="k">return</span> <span class="n">config_</span><span class="p">[</span><span class="n">key</span><span class="p">];</span>
-<span class="p">}</span>
+<span class="k">namespace</span><span class="w"> </span><span class="nn">marian</span><span class="w"> </span><span class="p">{</span><span class="w"></span>
 
-<span class="n">ConfigValidator</span><span class="o">::</span><span class="n">ConfigValidator</span><span class="p">(</span><span class="k">const</span> <span class="n">YAML</span><span class="o">::</span><span class="n">Node</span><span class="o">&amp;</span> <span class="n">config</span><span class="p">)</span>
-    <span class="o">:</span> <span class="n">config_</span><span class="p">(</span><span class="n">config</span><span class="p">),</span>
-      <span class="n">dumpConfigOnly_</span><span class="p">(</span><span class="n">config</span><span class="p">[</span><span class="s">&quot;dump-config&quot;</span><span class="p">]</span> <span class="o">&amp;&amp;</span> <span class="o">!</span><span class="n">config</span><span class="p">[</span><span class="s">&quot;dump-config&quot;</span><span class="p">].</span><span class="n">as</span><span class="o">&lt;</span><span class="n">std</span><span class="o">::</span><span class="n">string</span><span class="o">&gt;</span><span class="p">().</span><span class="n">empty</span><span class="p">()</span>
-                      <span class="o">&amp;&amp;</span> <span class="n">config</span><span class="p">[</span><span class="s">&quot;dump-config&quot;</span><span class="p">].</span><span class="n">as</span><span class="o">&lt;</span><span class="n">std</span><span class="o">::</span><span class="n">string</span><span class="o">&gt;</span><span class="p">()</span> <span class="o">!=</span> <span class="s">&quot;false&quot;</span><span class="p">)</span> <span class="p">{}</span>
+<span class="kt">bool</span><span class="w"> </span><span class="nf">ConfigValidator::has</span><span class="p">(</span><span class="k">const</span><span class="w"> </span><span class="n">std</span><span class="o">::</span><span class="n">string</span><span class="o">&amp;</span><span class="w"> </span><span class="n">key</span><span class="p">)</span><span class="w"> </span><span class="k">const</span><span class="w"> </span><span class="p">{</span><span class="w"></span>
+<span class="w">  </span><span class="k">return</span><span class="w"> </span><span class="n">config_</span><span class="p">[</span><span class="n">key</span><span class="p">];</span><span class="w"></span>
+<span class="p">}</span><span class="w"></span>
 
-<span class="n">ConfigValidator</span><span class="o">::~</span><span class="n">ConfigValidator</span><span class="p">()</span> <span class="p">{}</span>
+<span class="n">ConfigValidator</span><span class="o">::</span><span class="n">ConfigValidator</span><span class="p">(</span><span class="k">const</span><span class="w"> </span><span class="n">YAML</span><span class="o">::</span><span class="n">Node</span><span class="o">&amp;</span><span class="w"> </span><span class="n">config</span><span class="p">)</span><span class="w"></span>
+<span class="w">    </span><span class="o">:</span><span class="w"> </span><span class="n">config_</span><span class="p">(</span><span class="n">config</span><span class="p">),</span><span class="w"></span>
+<span class="w">      </span><span class="n">dumpConfigOnly_</span><span class="p">(</span><span class="n">config</span><span class="p">[</span><span class="s">&quot;dump-config&quot;</span><span class="p">]</span><span class="w"> </span><span class="o">&amp;&amp;</span><span class="w"> </span><span class="o">!</span><span class="n">config</span><span class="p">[</span><span class="s">&quot;dump-config&quot;</span><span class="p">].</span><span class="n">as</span><span class="o">&lt;</span><span class="n">std</span><span class="o">::</span><span class="n">string</span><span class="o">&gt;</span><span class="p">().</span><span class="n">empty</span><span class="p">()</span><span class="w"></span>
+<span class="w">                      </span><span class="o">&amp;&amp;</span><span class="w"> </span><span class="n">config</span><span class="p">[</span><span class="s">&quot;dump-config&quot;</span><span class="p">].</span><span class="n">as</span><span class="o">&lt;</span><span class="n">std</span><span class="o">::</span><span class="n">string</span><span class="o">&gt;</span><span class="p">()</span><span class="w"> </span><span class="o">!=</span><span class="w"> </span><span class="s">&quot;false&quot;</span><span class="p">)</span><span class="w"> </span><span class="p">{}</span><span class="w"></span>
 
-<span class="kt">void</span> <span class="n">ConfigValidator</span><span class="o">::</span><span class="n">validateOptions</span><span class="p">(</span><span class="n">cli</span><span class="o">::</span><span class="n">mode</span> <span class="n">mode</span><span class="p">)</span> <span class="k">const</span> <span class="p">{</span>
-  <span class="c1">// clang-format off</span>
-  <span class="k">switch</span><span class="p">(</span><span class="n">mode</span><span class="p">)</span> <span class="p">{</span>
-    <span class="k">case</span> <span class="n">cli</span><span class="o">::</span><span class="n">mode</span><span class="o">::</span><span class="nl">translation</span><span class="p">:</span>
-      <span class="n">validateOptionsTranslation</span><span class="p">();</span>
-      <span class="k">break</span><span class="p">;</span>
-    <span class="k">case</span> <span class="n">cli</span><span class="o">::</span><span class="n">mode</span><span class="o">::</span><span class="nl">scoring</span><span class="p">:</span>
-      <span class="n">validateOptionsParallelData</span><span class="p">();</span>
-      <span class="n">validateOptionsScoring</span><span class="p">();</span>
-      <span class="k">break</span><span class="p">;</span>
-    <span class="k">case</span> <span class="n">cli</span><span class="o">::</span><span class="n">mode</span><span class="o">::</span><span class="nl">embedding</span><span class="p">:</span>
-      <span class="n">validateOptionsParallelData</span><span class="p">();</span>
-      <span class="n">validateOptionsScoring</span><span class="p">();</span>
-      <span class="k">break</span><span class="p">;</span>
-    <span class="k">case</span> <span class="n">cli</span><span class="o">::</span><span class="n">mode</span><span class="o">::</span><span class="nl">training</span><span class="p">:</span>
-      <span class="n">validateOptionsParallelData</span><span class="p">();</span>
-      <span class="n">validateOptionsTraining</span><span class="p">();</span>
-      <span class="k">break</span><span class="p">;</span>
-    <span class="k">default</span><span class="o">:</span>
-      <span class="n">ABORT</span><span class="p">(</span><span class="s">&quot;wrong CLI mode&quot;</span><span class="p">);</span>
-      <span class="k">break</span><span class="p">;</span>
-  <span class="p">}</span>
-  <span class="c1">// clang-format on</span>
+<span class="n">ConfigValidator</span><span class="o">::~</span><span class="n">ConfigValidator</span><span class="p">()</span><span class="w"> </span><span class="p">{}</span><span class="w"></span>
 
-  <span class="n">validateModelExtension</span><span class="p">(</span><span class="n">mode</span><span class="p">);</span>
-  <span class="n">validateDevices</span><span class="p">(</span><span class="n">mode</span><span class="p">);</span>
-<span class="p">}</span>
+<span class="kt">void</span><span class="w"> </span><span class="n">ConfigValidator</span><span class="o">::</span><span class="n">validateOptions</span><span class="p">(</span><span class="n">cli</span><span class="o">::</span><span class="n">mode</span><span class="w"> </span><span class="n">mode</span><span class="p">)</span><span class="w"> </span><span class="k">const</span><span class="w"> </span><span class="p">{</span><span class="w"></span>
+<span class="w">  </span><span class="c1">// clang-format off</span>
+<span class="w">  </span><span class="k">switch</span><span class="p">(</span><span class="n">mode</span><span class="p">)</span><span class="w"> </span><span class="p">{</span><span class="w"></span>
+<span class="w">    </span><span class="k">case</span><span class="w"> </span><span class="n">cli</span><span class="o">::</span><span class="n">mode</span><span class="o">::</span><span class="n">translation</span><span class="o">:</span><span class="w"></span>
+<span class="w">      </span><span class="n">validateOptionsTranslation</span><span class="p">();</span><span class="w"></span>
+<span class="w">      </span><span class="k">break</span><span class="p">;</span><span class="w"></span>
+<span class="w">    </span><span class="k">case</span><span class="w"> </span><span class="n">cli</span><span class="o">::</span><span class="n">mode</span><span class="o">::</span><span class="n">scoring</span><span class="o">:</span><span class="w"></span>
+<span class="w">      </span><span class="n">validateOptionsParallelData</span><span class="p">();</span><span class="w"></span>
+<span class="w">      </span><span class="n">validateOptionsScoring</span><span class="p">();</span><span class="w"></span>
+<span class="w">      </span><span class="k">break</span><span class="p">;</span><span class="w"></span>
+<span class="w">    </span><span class="k">case</span><span class="w"> </span><span class="n">cli</span><span class="o">::</span><span class="n">mode</span><span class="o">::</span><span class="n">embedding</span><span class="o">:</span><span class="w"></span>
+<span class="w">      </span><span class="n">validateOptionsParallelData</span><span class="p">();</span><span class="w"></span>
+<span class="w">      </span><span class="n">validateOptionsScoring</span><span class="p">();</span><span class="w"></span>
+<span class="w">      </span><span class="k">break</span><span class="p">;</span><span class="w"></span>
+<span class="w">    </span><span class="k">case</span><span class="w"> </span><span class="n">cli</span><span class="o">::</span><span class="n">mode</span><span class="o">::</span><span class="n">training</span><span class="o">:</span><span class="w"></span>
+<span class="w">      </span><span class="n">validateOptionsParallelData</span><span class="p">();</span><span class="w"></span>
+<span class="w">      </span><span class="n">validateOptionsTraining</span><span class="p">();</span><span class="w"></span>
+<span class="w">      </span><span class="k">break</span><span class="p">;</span><span class="w"></span>
+<span class="w">    </span><span class="k">default</span><span class="o">:</span><span class="w"></span>
+<span class="w">      </span><span class="n">ABORT</span><span class="p">(</span><span class="s">&quot;wrong CLI mode&quot;</span><span class="p">);</span><span class="w"></span>
+<span class="w">      </span><span class="k">break</span><span class="p">;</span><span class="w"></span>
+<span class="w">  </span><span class="p">}</span><span class="w"></span>
+<span class="w">  </span><span class="c1">// clang-format on</span>
 
-<span class="kt">void</span> <span class="n">ConfigValidator</span><span class="o">::</span><span class="n">validateOptionsTranslation</span><span class="p">()</span> <span class="k">const</span> <span class="p">{</span>
-  <span class="k">auto</span> <span class="n">models</span> <span class="o">=</span> <span class="n">get</span><span class="o">&lt;</span><span class="n">std</span><span class="o">::</span><span class="n">vector</span><span class="o">&lt;</span><span class="n">std</span><span class="o">::</span><span class="n">string</span><span class="o">&gt;&gt;</span><span class="p">(</span><span class="s">&quot;models&quot;</span><span class="p">);</span>
-  <span class="k">auto</span> <span class="n">configs</span> <span class="o">=</span> <span class="n">get</span><span class="o">&lt;</span><span class="n">std</span><span class="o">::</span><span class="n">vector</span><span class="o">&lt;</span><span class="n">std</span><span class="o">::</span><span class="n">string</span><span class="o">&gt;&gt;</span><span class="p">(</span><span class="s">&quot;config&quot;</span><span class="p">);</span>
+<span class="w">  </span><span class="n">validateModelExtension</span><span class="p">(</span><span class="n">mode</span><span class="p">);</span><span class="w"></span>
+<span class="w">  </span><span class="n">validateDevices</span><span class="p">(</span><span class="n">mode</span><span class="p">);</span><span class="w"></span>
+<span class="p">}</span><span class="w"></span>
 
-  <span class="n">ABORT_IF</span><span class="p">(</span><span class="n">models</span><span class="p">.</span><span class="n">empty</span><span class="p">()</span> <span class="o">&amp;&amp;</span> <span class="n">configs</span><span class="p">.</span><span class="n">empty</span><span class="p">(),</span>
-           <span class="s">&quot;You need to provide at least one model file or a config file&quot;</span><span class="p">);</span>
+<span class="kt">void</span><span class="w"> </span><span class="n">ConfigValidator</span><span class="o">::</span><span class="n">validateOptionsTranslation</span><span class="p">()</span><span class="w"> </span><span class="k">const</span><span class="w"> </span><span class="p">{</span><span class="w"></span>
+<span class="w">  </span><span class="k">auto</span><span class="w"> </span><span class="n">models</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="n">get</span><span class="o">&lt;</span><span class="n">std</span><span class="o">::</span><span class="n">vector</span><span class="o">&lt;</span><span class="n">std</span><span class="o">::</span><span class="n">string</span><span class="o">&gt;&gt;</span><span class="p">(</span><span class="s">&quot;models&quot;</span><span class="p">);</span><span class="w"></span>
+<span class="w">  </span><span class="k">auto</span><span class="w"> </span><span class="n">configs</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="n">get</span><span class="o">&lt;</span><span class="n">std</span><span class="o">::</span><span class="n">vector</span><span class="o">&lt;</span><span class="n">std</span><span class="o">::</span><span class="n">string</span><span class="o">&gt;&gt;</span><span class="p">(</span><span class="s">&quot;config&quot;</span><span class="p">);</span><span class="w"></span>
 
-  <span class="k">for</span><span class="p">(</span><span class="k">const</span> <span class="k">auto</span><span class="o">&amp;</span> <span class="nl">modelFile</span> <span class="p">:</span> <span class="n">models</span><span class="p">)</span> <span class="p">{</span>
-    <span class="n">filesystem</span><span class="o">::</span><span class="n">Path</span> <span class="n">modelPath</span><span class="p">(</span><span class="n">modelFile</span><span class="p">);</span>
-    <span class="n">ABORT_IF</span><span class="p">(</span><span class="o">!</span><span class="n">filesystem</span><span class="o">::</span><span class="n">exists</span><span class="p">(</span><span class="n">modelPath</span><span class="p">),</span> <span class="s">&quot;Model file does not exist: &quot;</span> <span class="o">+</span> <span class="n">modelFile</span><span class="p">);</span>
-  <span class="p">}</span>
+<span class="w">  </span><span class="n">ABORT_IF</span><span class="p">(</span><span class="n">models</span><span class="p">.</span><span class="n">empty</span><span class="p">()</span><span class="w"> </span><span class="o">&amp;&amp;</span><span class="w"> </span><span class="n">configs</span><span class="p">.</span><span class="n">empty</span><span class="p">(),</span><span class="w"></span>
+<span class="w">           </span><span class="s">&quot;You need to provide at least one model file or a config file&quot;</span><span class="p">);</span><span class="w"></span>
 
-  <span class="k">auto</span> <span class="n">vocabs</span> <span class="o">=</span> <span class="n">get</span><span class="o">&lt;</span><span class="n">std</span><span class="o">::</span><span class="n">vector</span><span class="o">&lt;</span><span class="n">std</span><span class="o">::</span><span class="n">string</span><span class="o">&gt;&gt;</span><span class="p">(</span><span class="s">&quot;vocabs&quot;</span><span class="p">);</span>
-  <span class="n">ABORT_IF</span><span class="p">(</span><span class="n">vocabs</span><span class="p">.</span><span class="n">empty</span><span class="p">(),</span> <span class="s">&quot;Translating, but vocabularies are not given&quot;</span><span class="p">);</span>
+<span class="w">  </span><span class="n">ABORT_IF</span><span class="p">(</span><span class="n">get</span><span class="o">&lt;</span><span class="kt">bool</span><span class="o">&gt;</span><span class="p">(</span><span class="s">&quot;model-mmap&quot;</span><span class="p">)</span><span class="w"> </span><span class="o">&amp;&amp;</span><span class="w"> </span><span class="n">get</span><span class="o">&lt;</span><span class="kt">size_t</span><span class="o">&gt;</span><span class="p">(</span><span class="s">&quot;cpu-threads&quot;</span><span class="p">)</span><span class="w"> </span><span class="o">==</span><span class="w"> </span><span class="mi">0</span><span class="p">,</span><span class="w"></span>
+<span class="w">           </span><span class="s">&quot;Model MMAP is CPU-only, please use --cpu-threads&quot;</span><span class="p">);</span><span class="w"></span>
 
-  <span class="k">for</span><span class="p">(</span><span class="k">const</span> <span class="k">auto</span><span class="o">&amp;</span> <span class="nl">vocabFile</span> <span class="p">:</span> <span class="n">vocabs</span><span class="p">)</span> <span class="p">{</span>
-    <span class="n">filesystem</span><span class="o">::</span><span class="n">Path</span> <span class="n">vocabPath</span><span class="p">(</span><span class="n">vocabFile</span><span class="p">);</span>
-    <span class="n">ABORT_IF</span><span class="p">(</span><span class="o">!</span><span class="n">filesystem</span><span class="o">::</span><span class="n">exists</span><span class="p">(</span><span class="n">vocabPath</span><span class="p">),</span> <span class="s">&quot;Vocabulary file does not exist: &quot;</span> <span class="o">+</span> <span class="n">vocabFile</span><span class="p">);</span>
-  <span class="p">}</span>
-<span class="p">}</span>
+<span class="w">  </span><span class="k">for</span><span class="p">(</span><span class="k">const</span><span class="w"> </span><span class="k">auto</span><span class="o">&amp;</span><span class="w"> </span><span class="n">modelFile</span><span class="w"> </span><span class="o">:</span><span class="w"> </span><span class="n">models</span><span class="p">)</span><span class="w"> </span><span class="p">{</span><span class="w"></span>
+<span class="w">    </span><span class="n">filesystem</span><span class="o">::</span><span class="n">Path</span><span class="w"> </span><span class="nf">modelPath</span><span class="p">(</span><span class="n">modelFile</span><span class="p">);</span><span class="w"></span>
+<span class="w">    </span><span class="n">ABORT_IF</span><span class="p">(</span><span class="o">!</span><span class="n">filesystem</span><span class="o">::</span><span class="n">exists</span><span class="p">(</span><span class="n">modelPath</span><span class="p">),</span><span class="w"> </span><span class="s">&quot;Model file does not exist: &quot;</span><span class="w"> </span><span class="o">+</span><span class="w"> </span><span class="n">modelFile</span><span class="p">);</span><span class="w"></span>
+<span class="w">  </span><span class="p">}</span><span class="w"></span>
 
-<span class="kt">void</span> <span class="n">ConfigValidator</span><span class="o">::</span><span class="n">validateOptionsParallelData</span><span class="p">()</span> <span class="k">const</span> <span class="p">{</span>
-  <span class="c1">// Do not check these constraints if only goal is to dump config</span>
-  <span class="k">if</span><span class="p">(</span><span class="n">dumpConfigOnly_</span><span class="p">)</span>
-    <span class="k">return</span><span class="p">;</span>
+<span class="w">  </span><span class="k">auto</span><span class="w"> </span><span class="n">vocabs</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="n">get</span><span class="o">&lt;</span><span class="n">std</span><span class="o">::</span><span class="n">vector</span><span class="o">&lt;</span><span class="n">std</span><span class="o">::</span><span class="n">string</span><span class="o">&gt;&gt;</span><span class="p">(</span><span class="s">&quot;vocabs&quot;</span><span class="p">);</span><span class="w"></span>
+<span class="w">  </span><span class="n">ABORT_IF</span><span class="p">(</span><span class="n">vocabs</span><span class="p">.</span><span class="n">empty</span><span class="p">(),</span><span class="w"> </span><span class="s">&quot;Translating, but vocabularies are not given&quot;</span><span class="p">);</span><span class="w"></span>
 
-  <span class="k">auto</span> <span class="n">trainSets</span> <span class="o">=</span> <span class="n">get</span><span class="o">&lt;</span><span class="n">std</span><span class="o">::</span><span class="n">vector</span><span class="o">&lt;</span><span class="n">std</span><span class="o">::</span><span class="n">string</span><span class="o">&gt;&gt;</span><span class="p">(</span><span class="s">&quot;train-sets&quot;</span><span class="p">);</span>
-  <span class="n">ABORT_IF</span><span class="p">(</span><span class="n">trainSets</span><span class="p">.</span><span class="n">empty</span><span class="p">(),</span> <span class="s">&quot;No train sets given in config file or on command line&quot;</span><span class="p">);</span>
+<span class="w">  </span><span class="k">for</span><span class="p">(</span><span class="k">const</span><span class="w"> </span><span class="k">auto</span><span class="o">&amp;</span><span class="w"> </span><span class="n">vocabFile</span><span class="w"> </span><span class="o">:</span><span class="w"> </span><span class="n">vocabs</span><span class="p">)</span><span class="w"> </span><span class="p">{</span><span class="w"></span>
+<span class="w">    </span><span class="n">filesystem</span><span class="o">::</span><span class="n">Path</span><span class="w"> </span><span class="nf">vocabPath</span><span class="p">(</span><span class="n">vocabFile</span><span class="p">);</span><span class="w"></span>
+<span class="w">    </span><span class="n">ABORT_IF</span><span class="p">(</span><span class="o">!</span><span class="n">filesystem</span><span class="o">::</span><span class="n">exists</span><span class="p">(</span><span class="n">vocabPath</span><span class="p">),</span><span class="w"> </span><span class="s">&quot;Vocabulary file does not exist: &quot;</span><span class="w"> </span><span class="o">+</span><span class="w"> </span><span class="n">vocabFile</span><span class="p">);</span><span class="w"></span>
+<span class="w">  </span><span class="p">}</span><span class="w"></span>
+<span class="p">}</span><span class="w"></span>
 
-  <span class="k">auto</span> <span class="n">numVocabs</span> <span class="o">=</span> <span class="n">get</span><span class="o">&lt;</span><span class="n">std</span><span class="o">::</span><span class="n">vector</span><span class="o">&lt;</span><span class="n">std</span><span class="o">::</span><span class="n">string</span><span class="o">&gt;&gt;</span><span class="p">(</span><span class="s">&quot;vocabs&quot;</span><span class="p">).</span><span class="n">size</span><span class="p">();</span>
-  <span class="n">ABORT_IF</span><span class="p">(</span><span class="o">!</span><span class="n">get</span><span class="o">&lt;</span><span class="kt">bool</span><span class="o">&gt;</span><span class="p">(</span><span class="s">&quot;tsv&quot;</span><span class="p">)</span> <span class="o">&amp;&amp;</span> <span class="n">numVocabs</span> <span class="o">&gt;</span> <span class="mi">0</span> <span class="o">&amp;&amp;</span> <span class="n">numVocabs</span> <span class="o">!=</span> <span class="n">trainSets</span><span class="p">.</span><span class="n">size</span><span class="p">(),</span>
-           <span class="s">&quot;There should be as many vocabularies as training files&quot;</span><span class="p">);</span>
+<span class="kt">void</span><span class="w"> </span><span class="n">ConfigValidator</span><span class="o">::</span><span class="n">validateOptionsParallelData</span><span class="p">()</span><span class="w"> </span><span class="k">const</span><span class="w"> </span><span class="p">{</span><span class="w"></span>
+<span class="w">  </span><span class="c1">// Do not check these constraints if only goal is to dump config</span>
+<span class="w">  </span><span class="k">if</span><span class="p">(</span><span class="n">dumpConfigOnly_</span><span class="p">)</span><span class="w"></span>
+<span class="w">    </span><span class="k">return</span><span class="p">;</span><span class="w"></span>
 
-  <span class="c1">// disallow, for example --tsv --train-sets file1.tsv file2.tsv</span>
-  <span class="n">ABORT_IF</span><span class="p">(</span><span class="n">get</span><span class="o">&lt;</span><span class="kt">bool</span><span class="o">&gt;</span><span class="p">(</span><span class="s">&quot;tsv&quot;</span><span class="p">)</span> <span class="o">&amp;&amp;</span> <span class="n">trainSets</span><span class="p">.</span><span class="n">size</span><span class="p">()</span> <span class="o">!=</span> <span class="mi">1</span><span class="p">,</span>
-      <span class="s">&quot;A single file must be provided with --train-sets (or stdin) for a tab-separated input&quot;</span><span class="p">);</span>
+<span class="w">  </span><span class="k">auto</span><span class="w"> </span><span class="n">trainSets</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="n">get</span><span class="o">&lt;</span><span class="n">std</span><span class="o">::</span><span class="n">vector</span><span class="o">&lt;</span><span class="n">std</span><span class="o">::</span><span class="n">string</span><span class="o">&gt;&gt;</span><span class="p">(</span><span class="s">&quot;train-sets&quot;</span><span class="p">);</span><span class="w"></span>
+<span class="w">  </span><span class="n">ABORT_IF</span><span class="p">(</span><span class="n">trainSets</span><span class="p">.</span><span class="n">empty</span><span class="p">(),</span><span class="w"> </span><span class="s">&quot;No train sets given in config file or on command line&quot;</span><span class="p">);</span><span class="w"></span>
 
-  <span class="c1">// disallow, for example --train-sets stdin stdin or --train-sets stdin file.tsv</span>
-  <span class="n">ABORT_IF</span><span class="p">(</span><span class="n">trainSets</span><span class="p">.</span><span class="n">size</span><span class="p">()</span> <span class="o">&gt;</span> <span class="mi">1</span>
-               <span class="o">&amp;&amp;</span> <span class="n">std</span><span class="o">::</span><span class="n">any_of</span><span class="p">(</span><span class="n">trainSets</span><span class="p">.</span><span class="n">begin</span><span class="p">(),</span>
-                              <span class="n">trainSets</span><span class="p">.</span><span class="n">end</span><span class="p">(),</span>
-                              <span class="p">[](</span><span class="k">const</span> <span class="n">std</span><span class="o">::</span><span class="n">string</span><span class="o">&amp;</span> <span class="n">s</span><span class="p">)</span> <span class="p">{</span> <span class="k">return</span> <span class="p">(</span><span class="n">s</span> <span class="o">==</span> <span class="s">&quot;stdin&quot;</span><span class="p">)</span> <span class="o">||</span> <span class="p">(</span><span class="n">s</span> <span class="o">==</span> <span class="s">&quot;-&quot;</span><span class="p">);</span> <span class="p">}),</span>
-           <span class="s">&quot;Only one &#39;stdin&#39; or &#39;-&#39; in --train-sets is allowed&quot;</span><span class="p">);</span>
-<span class="p">}</span>
+<span class="w">  </span><span class="k">auto</span><span class="w"> </span><span class="n">numVocabs</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="n">get</span><span class="o">&lt;</span><span class="n">std</span><span class="o">::</span><span class="n">vector</span><span class="o">&lt;</span><span class="n">std</span><span class="o">::</span><span class="n">string</span><span class="o">&gt;&gt;</span><span class="p">(</span><span class="s">&quot;vocabs&quot;</span><span class="p">).</span><span class="n">size</span><span class="p">();</span><span class="w"></span>
+<span class="w">  </span><span class="n">ABORT_IF</span><span class="p">(</span><span class="o">!</span><span class="n">get</span><span class="o">&lt;</span><span class="kt">bool</span><span class="o">&gt;</span><span class="p">(</span><span class="s">&quot;tsv&quot;</span><span class="p">)</span><span class="w"> </span><span class="o">&amp;&amp;</span><span class="w"> </span><span class="n">numVocabs</span><span class="w"> </span><span class="o">&gt;</span><span class="w"> </span><span class="mi">0</span><span class="w"> </span><span class="o">&amp;&amp;</span><span class="w"> </span><span class="n">numVocabs</span><span class="w"> </span><span class="o">!=</span><span class="w"> </span><span class="n">trainSets</span><span class="p">.</span><span class="n">size</span><span class="p">(),</span><span class="w"></span>
+<span class="w">           </span><span class="s">&quot;There should be as many vocabularies as training files&quot;</span><span class="p">);</span><span class="w"></span>
 
-<span class="kt">void</span> <span class="n">ConfigValidator</span><span class="o">::</span><span class="n">validateOptionsScoring</span><span class="p">()</span> <span class="k">const</span> <span class="p">{</span>
-  <span class="n">filesystem</span><span class="o">::</span><span class="n">Path</span> <span class="n">modelPath</span><span class="p">(</span><span class="n">get</span><span class="o">&lt;</span><span class="n">std</span><span class="o">::</span><span class="n">string</span><span class="o">&gt;</span><span class="p">(</span><span class="s">&quot;model&quot;</span><span class="p">));</span>
-  <span class="n">ABORT_IF</span><span class="p">(</span><span class="o">!</span><span class="n">filesystem</span><span class="o">::</span><span class="n">exists</span><span class="p">(</span><span class="n">modelPath</span><span class="p">),</span> <span class="s">&quot;Model file does not exist: &quot;</span> <span class="o">+</span> <span class="n">modelPath</span><span class="p">.</span><span class="n">string</span><span class="p">());</span>
+<span class="w">  </span><span class="c1">// disallow, for example --tsv --train-sets file1.tsv file2.tsv</span>
+<span class="w">  </span><span class="n">ABORT_IF</span><span class="p">(</span><span class="n">get</span><span class="o">&lt;</span><span class="kt">bool</span><span class="o">&gt;</span><span class="p">(</span><span class="s">&quot;tsv&quot;</span><span class="p">)</span><span class="w"> </span><span class="o">&amp;&amp;</span><span class="w"> </span><span class="n">trainSets</span><span class="p">.</span><span class="n">size</span><span class="p">()</span><span class="w"> </span><span class="o">!=</span><span class="w"> </span><span class="mi">1</span><span class="p">,</span><span class="w"></span>
+<span class="w">      </span><span class="s">&quot;A single file must be provided with --train-sets (or stdin) for a tab-separated input&quot;</span><span class="p">);</span><span class="w"></span>
 
-  <span class="k">auto</span> <span class="n">vocabs</span> <span class="o">=</span> <span class="n">get</span><span class="o">&lt;</span><span class="n">std</span><span class="o">::</span><span class="n">vector</span><span class="o">&lt;</span><span class="n">std</span><span class="o">::</span><span class="n">string</span><span class="o">&gt;&gt;</span><span class="p">(</span><span class="s">&quot;vocabs&quot;</span><span class="p">);</span>
-  <span class="n">ABORT_IF</span><span class="p">(</span><span class="n">vocabs</span><span class="p">.</span><span class="n">empty</span><span class="p">(),</span> <span class="s">&quot;Scoring, but vocabularies are not given&quot;</span><span class="p">);</span>
+<span class="w">  </span><span class="c1">// disallow, for example --train-sets stdin stdin or --train-sets stdin file.tsv</span>
+<span class="w">  </span><span class="n">ABORT_IF</span><span class="p">(</span><span class="n">trainSets</span><span class="p">.</span><span class="n">size</span><span class="p">()</span><span class="w"> </span><span class="o">&gt;</span><span class="w"> </span><span class="mi">1</span><span class="w"></span>
+<span class="w">               </span><span class="o">&amp;&amp;</span><span class="w"> </span><span class="n">std</span><span class="o">::</span><span class="n">any_of</span><span class="p">(</span><span class="n">trainSets</span><span class="p">.</span><span class="n">begin</span><span class="p">(),</span><span class="w"></span>
+<span class="w">                              </span><span class="n">trainSets</span><span class="p">.</span><span class="n">end</span><span class="p">(),</span><span class="w"></span>
+<span class="w">                              </span><span class="p">[](</span><span class="k">const</span><span class="w"> </span><span class="n">std</span><span class="o">::</span><span class="n">string</span><span class="o">&amp;</span><span class="w"> </span><span class="n">s</span><span class="p">)</span><span class="w"> </span><span class="p">{</span><span class="w"> </span><span class="k">return</span><span class="w"> </span><span class="p">(</span><span class="n">s</span><span class="w"> </span><span class="o">==</span><span class="w"> </span><span class="s">&quot;stdin&quot;</span><span class="p">)</span><span class="w"> </span><span class="o">||</span><span class="w"> </span><span class="p">(</span><span class="n">s</span><span class="w"> </span><span class="o">==</span><span class="w"> </span><span class="s">&quot;-&quot;</span><span class="p">);</span><span class="w"> </span><span class="p">}),</span><span class="w"></span>
+<span class="w">           </span><span class="s">&quot;Only one &#39;stdin&#39; or &#39;-&#39; in --train-sets is allowed&quot;</span><span class="p">);</span><span class="w"></span>
+<span class="p">}</span><span class="w"></span>
 
-  <span class="k">for</span><span class="p">(</span><span class="k">const</span> <span class="k">auto</span><span class="o">&amp;</span> <span class="nl">vocabFile</span> <span class="p">:</span> <span class="n">vocabs</span><span class="p">)</span> <span class="p">{</span>
-    <span class="n">filesystem</span><span class="o">::</span><span class="n">Path</span> <span class="n">vocabPath</span><span class="p">(</span><span class="n">vocabFile</span><span class="p">);</span>
-    <span class="n">ABORT_IF</span><span class="p">(</span><span class="o">!</span><span class="n">filesystem</span><span class="o">::</span><span class="n">exists</span><span class="p">(</span><span class="n">vocabPath</span><span class="p">),</span> <span class="s">&quot;Vocabulary file does not exist: &quot;</span> <span class="o">+</span> <span class="n">vocabFile</span><span class="p">);</span>
-  <span class="p">}</span>
-<span class="p">}</span>
+<span class="kt">void</span><span class="w"> </span><span class="n">ConfigValidator</span><span class="o">::</span><span class="n">validateOptionsScoring</span><span class="p">()</span><span class="w"> </span><span class="k">const</span><span class="w"> </span><span class="p">{</span><span class="w"></span>
+<span class="w">  </span><span class="n">filesystem</span><span class="o">::</span><span class="n">Path</span><span class="w"> </span><span class="nf">modelPath</span><span class="p">(</span><span class="n">get</span><span class="o">&lt;</span><span class="n">std</span><span class="o">::</span><span class="n">string</span><span class="o">&gt;</span><span class="p">(</span><span class="s">&quot;model&quot;</span><span class="p">));</span><span class="w"></span>
+<span class="w">  </span><span class="n">ABORT_IF</span><span class="p">(</span><span class="o">!</span><span class="n">filesystem</span><span class="o">::</span><span class="n">exists</span><span class="p">(</span><span class="n">modelPath</span><span class="p">),</span><span class="w"> </span><span class="s">&quot;Model file does not exist: &quot;</span><span class="w"> </span><span class="o">+</span><span class="w"> </span><span class="n">modelPath</span><span class="p">.</span><span class="n">string</span><span class="p">());</span><span class="w"></span>
 
-<span class="kt">void</span> <span class="n">ConfigValidator</span><span class="o">::</span><span class="n">validateOptionsTraining</span><span class="p">()</span> <span class="k">const</span> <span class="p">{</span>
-  <span class="k">auto</span> <span class="n">trainSets</span> <span class="o">=</span> <span class="n">get</span><span class="o">&lt;</span><span class="n">std</span><span class="o">::</span><span class="n">vector</span><span class="o">&lt;</span><span class="n">std</span><span class="o">::</span><span class="n">string</span><span class="o">&gt;&gt;</span><span class="p">(</span><span class="s">&quot;train-sets&quot;</span><span class="p">);</span>
+<span class="w">  </span><span class="k">auto</span><span class="w"> </span><span class="n">vocabs</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="n">get</span><span class="o">&lt;</span><span class="n">std</span><span class="o">::</span><span class="n">vector</span><span class="o">&lt;</span><span class="n">std</span><span class="o">::</span><span class="n">string</span><span class="o">&gt;&gt;</span><span class="p">(</span><span class="s">&quot;vocabs&quot;</span><span class="p">);</span><span class="w"></span>
+<span class="w">  </span><span class="n">ABORT_IF</span><span class="p">(</span><span class="n">vocabs</span><span class="p">.</span><span class="n">empty</span><span class="p">(),</span><span class="w"> </span><span class="s">&quot;Scoring, but vocabularies are not given&quot;</span><span class="p">);</span><span class="w"></span>
 
-  <span class="n">ABORT_IF</span><span class="p">(</span><span class="n">has</span><span class="p">(</span><span class="s">&quot;embedding-vectors&quot;</span><span class="p">)</span>
-               <span class="o">&amp;&amp;</span> <span class="n">get</span><span class="o">&lt;</span><span class="n">std</span><span class="o">::</span><span class="n">vector</span><span class="o">&lt;</span><span class="n">std</span><span class="o">::</span><span class="n">string</span><span class="o">&gt;&gt;</span><span class="p">(</span><span class="s">&quot;embedding-vectors&quot;</span><span class="p">).</span><span class="n">size</span><span class="p">()</span> <span class="o">!=</span> <span class="n">trainSets</span><span class="p">.</span><span class="n">size</span><span class="p">()</span>
-               <span class="o">&amp;&amp;</span> <span class="o">!</span><span class="n">get</span><span class="o">&lt;</span><span class="n">std</span><span class="o">::</span><span class="n">vector</span><span class="o">&lt;</span><span class="n">std</span><span class="o">::</span><span class="n">string</span><span class="o">&gt;&gt;</span><span class="p">(</span><span class="s">&quot;embedding-vectors&quot;</span><span class="p">).</span><span class="n">empty</span><span class="p">(),</span>
-           <span class="s">&quot;There should be as many embedding vector files as training files&quot;</span><span class="p">);</span>
+<span class="w">  </span><span class="k">for</span><span class="p">(</span><span class="k">const</span><span class="w"> </span><span class="k">auto</span><span class="o">&amp;</span><span class="w"> </span><span class="n">vocabFile</span><span class="w"> </span><span class="o">:</span><span class="w"> </span><span class="n">vocabs</span><span class="p">)</span><span class="w"> </span><span class="p">{</span><span class="w"></span>
+<span class="w">    </span><span class="n">filesystem</span><span class="o">::</span><span class="n">Path</span><span class="w"> </span><span class="nf">vocabPath</span><span class="p">(</span><span class="n">vocabFile</span><span class="p">);</span><span class="w"></span>
+<span class="w">    </span><span class="n">ABORT_IF</span><span class="p">(</span><span class="o">!</span><span class="n">filesystem</span><span class="o">::</span><span class="n">exists</span><span class="p">(</span><span class="n">vocabPath</span><span class="p">),</span><span class="w"> </span><span class="s">&quot;Vocabulary file does not exist: &quot;</span><span class="w"> </span><span class="o">+</span><span class="w"> </span><span class="n">vocabFile</span><span class="p">);</span><span class="w"></span>
+<span class="w">  </span><span class="p">}</span><span class="w"></span>
+<span class="p">}</span><span class="w"></span>
 
-  <span class="n">filesystem</span><span class="o">::</span><span class="n">Path</span> <span class="n">modelPath</span><span class="p">(</span><span class="n">get</span><span class="o">&lt;</span><span class="n">std</span><span class="o">::</span><span class="n">string</span><span class="o">&gt;</span><span class="p">(</span><span class="s">&quot;model&quot;</span><span class="p">));</span>
+<span class="kt">void</span><span class="w"> </span><span class="n">ConfigValidator</span><span class="o">::</span><span class="n">validateOptionsTraining</span><span class="p">()</span><span class="w"> </span><span class="k">const</span><span class="w"> </span><span class="p">{</span><span class="w"></span>
+<span class="w">  </span><span class="k">auto</span><span class="w"> </span><span class="n">trainSets</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="n">get</span><span class="o">&lt;</span><span class="n">std</span><span class="o">::</span><span class="n">vector</span><span class="o">&lt;</span><span class="n">std</span><span class="o">::</span><span class="n">string</span><span class="o">&gt;&gt;</span><span class="p">(</span><span class="s">&quot;train-sets&quot;</span><span class="p">);</span><span class="w"></span>
 
-  <span class="k">auto</span> <span class="n">modelDir</span> <span class="o">=</span> <span class="n">modelPath</span><span class="p">.</span><span class="n">parentPath</span><span class="p">();</span>
-  <span class="k">if</span><span class="p">(</span><span class="n">modelDir</span><span class="p">.</span><span class="n">empty</span><span class="p">())</span>
-    <span class="n">modelDir</span> <span class="o">=</span> <span class="n">filesystem</span><span class="o">::</span><span class="n">currentPath</span><span class="p">();</span>
+<span class="w">  </span><span class="n">ABORT_IF</span><span class="p">(</span><span class="n">has</span><span class="p">(</span><span class="s">&quot;embedding-vectors&quot;</span><span class="p">)</span><span class="w"></span>
+<span class="w">               </span><span class="o">&amp;&amp;</span><span class="w"> </span><span class="n">get</span><span class="o">&lt;</span><span class="n">std</span><span class="o">::</span><span class="n">vector</span><span class="o">&lt;</span><span class="n">std</span><span class="o">::</span><span class="n">string</span><span class="o">&gt;&gt;</span><span class="p">(</span><span class="s">&quot;embedding-vectors&quot;</span><span class="p">).</span><span class="n">size</span><span class="p">()</span><span class="w"> </span><span class="o">!=</span><span class="w"> </span><span class="n">trainSets</span><span class="p">.</span><span class="n">size</span><span class="p">()</span><span class="w"></span>
+<span class="w">               </span><span class="o">&amp;&amp;</span><span class="w"> </span><span class="o">!</span><span class="n">get</span><span class="o">&lt;</span><span class="n">std</span><span class="o">::</span><span class="n">vector</span><span class="o">&lt;</span><span class="n">std</span><span class="o">::</span><span class="n">string</span><span class="o">&gt;&gt;</span><span class="p">(</span><span class="s">&quot;embedding-vectors&quot;</span><span class="p">).</span><span class="n">empty</span><span class="p">(),</span><span class="w"></span>
+<span class="w">           </span><span class="s">&quot;There should be as many embedding vector files as training files&quot;</span><span class="p">);</span><span class="w"></span>
 
-  <span class="n">ABORT_IF</span><span class="p">(</span><span class="o">!</span><span class="n">modelDir</span><span class="p">.</span><span class="n">empty</span><span class="p">()</span> <span class="o">&amp;&amp;</span> <span class="o">!</span><span class="n">filesystem</span><span class="o">::</span><span class="n">isDirectory</span><span class="p">(</span><span class="n">modelDir</span><span class="p">),</span>
-           <span class="s">&quot;Model directory does not exist&quot;</span><span class="p">);</span>
+<span class="w">  </span><span class="n">filesystem</span><span class="o">::</span><span class="n">Path</span><span class="w"> </span><span class="nf">modelPath</span><span class="p">(</span><span class="n">get</span><span class="o">&lt;</span><span class="n">std</span><span class="o">::</span><span class="n">string</span><span class="o">&gt;</span><span class="p">(</span><span class="s">&quot;model&quot;</span><span class="p">));</span><span class="w"></span>
 
-  <span class="n">std</span><span class="o">::</span><span class="n">string</span> <span class="n">errorMsg</span> <span class="o">=</span> <span class="s">&quot;There should be as many validation files as training files&quot;</span><span class="p">;</span>
-  <span class="k">if</span><span class="p">(</span><span class="n">get</span><span class="o">&lt;</span><span class="kt">bool</span><span class="o">&gt;</span><span class="p">(</span><span class="s">&quot;tsv&quot;</span><span class="p">))</span>
-    <span class="n">errorMsg</span> <span class="o">+=</span> <span class="s">&quot;. If the training set is in the TSV format, validation sets have to also be a single TSV file&quot;</span><span class="p">;</span>
+<span class="w">  </span><span class="k">auto</span><span class="w"> </span><span class="n">modelDir</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="n">modelPath</span><span class="p">.</span><span class="n">parentPath</span><span class="p">();</span><span class="w"></span>
+<span class="w">  </span><span class="k">if</span><span class="p">(</span><span class="n">modelDir</span><span class="p">.</span><span class="n">empty</span><span class="p">())</span><span class="w"></span>
+<span class="w">    </span><span class="n">modelDir</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="n">filesystem</span><span class="o">::</span><span class="n">currentPath</span><span class="p">();</span><span class="w"></span>
 
-  <span class="n">ABORT_IF</span><span class="p">(</span><span class="n">has</span><span class="p">(</span><span class="s">&quot;valid-sets&quot;</span><span class="p">)</span>
-               <span class="o">&amp;&amp;</span> <span class="n">get</span><span class="o">&lt;</span><span class="n">std</span><span class="o">::</span><span class="n">vector</span><span class="o">&lt;</span><span class="n">std</span><span class="o">::</span><span class="n">string</span><span class="o">&gt;&gt;</span><span class="p">(</span><span class="s">&quot;valid-sets&quot;</span><span class="p">).</span><span class="n">size</span><span class="p">()</span> <span class="o">!=</span> <span class="n">trainSets</span><span class="p">.</span><span class="n">size</span><span class="p">()</span>
-               <span class="o">&amp;&amp;</span> <span class="o">!</span><span class="n">get</span><span class="o">&lt;</span><span class="n">std</span><span class="o">::</span><span class="n">vector</span><span class="o">&lt;</span><span class="n">std</span><span class="o">::</span><span class="n">string</span><span class="o">&gt;&gt;</span><span class="p">(</span><span class="s">&quot;valid-sets&quot;</span><span class="p">).</span><span class="n">empty</span><span class="p">(),</span>
-           <span class="n">errorMsg</span><span class="p">);</span>
+<span class="w">  </span><span class="n">ABORT_IF</span><span class="p">(</span><span class="o">!</span><span class="n">modelDir</span><span class="p">.</span><span class="n">empty</span><span class="p">()</span><span class="w"> </span><span class="o">&amp;&amp;</span><span class="w"> </span><span class="o">!</span><span class="n">filesystem</span><span class="o">::</span><span class="n">isDirectory</span><span class="p">(</span><span class="n">modelDir</span><span class="p">),</span><span class="w"></span>
+<span class="w">           </span><span class="s">&quot;Model directory does not exist&quot;</span><span class="p">);</span><span class="w"></span>
 
-  <span class="c1">// validations for learning rate decaying</span>
-  <span class="n">ABORT_IF</span><span class="p">(</span><span class="n">get</span><span class="o">&lt;</span><span class="kt">float</span><span class="o">&gt;</span><span class="p">(</span><span class="s">&quot;lr-decay&quot;</span><span class="p">)</span> <span class="o">&gt;</span> <span class="mf">1.f</span><span class="p">,</span> <span class="s">&quot;Learning rate decay factor greater than 1.0 is unusual&quot;</span><span class="p">);</span>
+<span class="w">  </span><span class="n">std</span><span class="o">::</span><span class="n">string</span><span class="w"> </span><span class="n">errorMsg</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="s">&quot;There should be as many validation files as training files&quot;</span><span class="p">;</span><span class="w"></span>
+<span class="w">  </span><span class="k">if</span><span class="p">(</span><span class="n">get</span><span class="o">&lt;</span><span class="kt">bool</span><span class="o">&gt;</span><span class="p">(</span><span class="s">&quot;tsv&quot;</span><span class="p">))</span><span class="w"></span>
+<span class="w">    </span><span class="n">errorMsg</span><span class="w"> </span><span class="o">+=</span><span class="w"> </span><span class="s">&quot;. If the training set is in the TSV format, validation sets have to also be a single TSV file&quot;</span><span class="p">;</span><span class="w"></span>
 
-  <span class="k">auto</span> <span class="n">strategy</span> <span class="o">=</span> <span class="n">get</span><span class="o">&lt;</span><span class="n">std</span><span class="o">::</span><span class="n">string</span><span class="o">&gt;</span><span class="p">(</span><span class="s">&quot;lr-decay-strategy&quot;</span><span class="p">);</span>
+<span class="w">  </span><span class="n">ABORT_IF</span><span class="p">(</span><span class="n">has</span><span class="p">(</span><span class="s">&quot;valid-sets&quot;</span><span class="p">)</span><span class="w"></span>
+<span class="w">               </span><span class="o">&amp;&amp;</span><span class="w"> </span><span class="n">get</span><span class="o">&lt;</span><span class="n">std</span><span class="o">::</span><span class="n">vector</span><span class="o">&lt;</span><span class="n">std</span><span class="o">::</span><span class="n">string</span><span class="o">&gt;&gt;</span><span class="p">(</span><span class="s">&quot;valid-sets&quot;</span><span class="p">).</span><span class="n">size</span><span class="p">()</span><span class="w"> </span><span class="o">!=</span><span class="w"> </span><span class="n">trainSets</span><span class="p">.</span><span class="n">size</span><span class="p">()</span><span class="w"></span>
+<span class="w">               </span><span class="o">&amp;&amp;</span><span class="w"> </span><span class="o">!</span><span class="n">get</span><span class="o">&lt;</span><span class="n">std</span><span class="o">::</span><span class="n">vector</span><span class="o">&lt;</span><span class="n">std</span><span class="o">::</span><span class="n">string</span><span class="o">&gt;&gt;</span><span class="p">(</span><span class="s">&quot;valid-sets&quot;</span><span class="p">).</span><span class="n">empty</span><span class="p">(),</span><span class="w"></span>
+<span class="w">           </span><span class="n">errorMsg</span><span class="p">);</span><span class="w"></span>
 
-  <span class="n">ABORT_IF</span><span class="p">((</span><span class="n">strategy</span> <span class="o">==</span> <span class="s">&quot;epoch+batches&quot;</span> <span class="o">||</span> <span class="n">strategy</span> <span class="o">==</span> <span class="s">&quot;epoch+stalled&quot;</span><span class="p">)</span>
-               <span class="o">&amp;&amp;</span> <span class="n">get</span><span class="o">&lt;</span><span class="n">std</span><span class="o">::</span><span class="n">vector</span><span class="o">&lt;</span><span class="kt">size_t</span><span class="o">&gt;&gt;</span><span class="p">(</span><span class="s">&quot;lr-decay-start&quot;</span><span class="p">).</span><span class="n">size</span><span class="p">()</span> <span class="o">!=</span> <span class="mi">2</span><span class="p">,</span>
-           <span class="s">&quot;Decay strategies &#39;epoch+batches&#39; and &#39;epoch+stalled&#39; require two values specified with &quot;</span>
-           <span class="s">&quot;--lr-decay-start option&quot;</span><span class="p">);</span>
-  <span class="n">ABORT_IF</span><span class="p">((</span><span class="n">strategy</span> <span class="o">==</span> <span class="s">&quot;epoch&quot;</span> <span class="o">||</span> <span class="n">strategy</span> <span class="o">==</span> <span class="s">&quot;batches&quot;</span> <span class="o">||</span> <span class="n">strategy</span> <span class="o">==</span> <span class="s">&quot;stalled&quot;</span><span class="p">)</span>
-               <span class="o">&amp;&amp;</span> <span class="n">get</span><span class="o">&lt;</span><span class="n">std</span><span class="o">::</span><span class="n">vector</span><span class="o">&lt;</span><span class="kt">size_t</span><span class="o">&gt;&gt;</span><span class="p">(</span><span class="s">&quot;lr-decay-start&quot;</span><span class="p">).</span><span class="n">size</span><span class="p">()</span> <span class="o">!=</span> <span class="mi">1</span><span class="p">,</span>
-           <span class="s">&quot;Single decay strategies require only one value specified with --lr-decay-start option&quot;</span><span class="p">);</span>
+<span class="w">  </span><span class="c1">// check if --early-stopping-on has proper value</span>
+<span class="w">  </span><span class="n">std</span><span class="o">::</span><span class="n">set</span><span class="o">&lt;</span><span class="n">std</span><span class="o">::</span><span class="n">string</span><span class="o">&gt;</span><span class="w"> </span><span class="n">supportedStops</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="p">{</span><span class="s">&quot;first&quot;</span><span class="p">,</span><span class="w"> </span><span class="s">&quot;all&quot;</span><span class="p">,</span><span class="w"> </span><span class="s">&quot;any&quot;</span><span class="p">};</span><span class="w"></span>
+<span class="w">  </span><span class="n">ABORT_IF</span><span class="p">(</span><span class="n">supportedStops</span><span class="p">.</span><span class="n">find</span><span class="p">(</span><span class="n">get</span><span class="o">&lt;</span><span class="n">std</span><span class="o">::</span><span class="n">string</span><span class="o">&gt;</span><span class="p">(</span><span class="s">&quot;early-stopping-on&quot;</span><span class="p">))</span><span class="w"> </span><span class="o">==</span><span class="w"> </span><span class="n">supportedStops</span><span class="p">.</span><span class="n">end</span><span class="p">(),</span><span class="w"></span>
+<span class="w">           </span><span class="s">&quot;Supported options for --early-stopping-on are: first, all, any&quot;</span><span class="p">);</span><span class="w"></span>
 
-  <span class="c1">// validate ULR options</span>
-  <span class="n">ABORT_IF</span><span class="p">((</span><span class="n">has</span><span class="p">(</span><span class="s">&quot;ulr&quot;</span><span class="p">)</span> <span class="o">&amp;&amp;</span> <span class="n">get</span><span class="o">&lt;</span><span class="kt">bool</span><span class="o">&gt;</span><span class="p">(</span><span class="s">&quot;ulr&quot;</span><span class="p">)</span> <span class="o">&amp;&amp;</span> <span class="p">(</span><span class="n">get</span><span class="o">&lt;</span><span class="n">std</span><span class="o">::</span><span class="n">string</span><span class="o">&gt;</span><span class="p">(</span><span class="s">&quot;ulr-query-vectors&quot;</span><span class="p">)</span> <span class="o">==</span> <span class="s">&quot;&quot;</span>
-                                               <span class="o">||</span> <span class="n">get</span><span class="o">&lt;</span><span class="n">std</span><span class="o">::</span><span class="n">string</span><span class="o">&gt;</span><span class="p">(</span><span class="s">&quot;ulr-keys-vectors&quot;</span><span class="p">)</span> <span class="o">==</span> <span class="s">&quot;&quot;</span><span class="p">)),</span>
-           <span class="s">&quot;ULR enablign requires query and keys vectors specified with --ulr-query-vectors and &quot;</span>
-           <span class="s">&quot;--ulr-keys-vectors option&quot;</span><span class="p">);</span>
+<span class="w">  </span><span class="c1">// validations for learning rate decaying</span>
+<span class="w">  </span><span class="n">ABORT_IF</span><span class="p">(</span><span class="n">get</span><span class="o">&lt;</span><span class="kt">float</span><span class="o">&gt;</span><span class="p">(</span><span class="s">&quot;lr-decay&quot;</span><span class="p">)</span><span class="w"> </span><span class="o">&gt;</span><span class="w"> </span><span class="mf">1.f</span><span class="p">,</span><span class="w"> </span><span class="s">&quot;Learning rate decay factor greater than 1.0 is unusual&quot;</span><span class="p">);</span><span class="w"></span>
 
-  <span class="c1">// validate model quantization</span>
-  <span class="kt">size_t</span> <span class="n">bits</span> <span class="o">=</span> <span class="n">get</span><span class="o">&lt;</span><span class="kt">size_t</span><span class="o">&gt;</span><span class="p">(</span><span class="s">&quot;quantize-bits&quot;</span><span class="p">);</span>
-  <span class="n">ABORT_IF</span><span class="p">(</span><span class="n">bits</span> <span class="o">&gt;</span> <span class="mi">32</span><span class="p">,</span> <span class="s">&quot;Invalid quantization bits. Must be from 0 to 32 bits&quot;</span><span class="p">);</span>
+<span class="w">  </span><span class="k">auto</span><span class="w"> </span><span class="n">strategy</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="n">get</span><span class="o">&lt;</span><span class="n">std</span><span class="o">::</span><span class="n">string</span><span class="o">&gt;</span><span class="p">(</span><span class="s">&quot;lr-decay-strategy&quot;</span><span class="p">);</span><span class="w"></span>
 
-  <span class="n">ABORT_IF</span><span class="p">(</span><span class="n">bits</span> <span class="o">&gt;</span> <span class="mi">0</span> <span class="o">&amp;&amp;</span> <span class="o">!</span><span class="n">get</span><span class="o">&lt;</span><span class="kt">bool</span><span class="o">&gt;</span><span class="p">(</span><span class="s">&quot;sync-sgd&quot;</span><span class="p">),</span> <span class="s">&quot;Model quantization only works with synchronous training (--sync-sgd)&quot;</span><span class="p">);</span>
-<span class="p">}</span>
+<span class="w">  </span><span class="n">ABORT_IF</span><span class="p">((</span><span class="n">strategy</span><span class="w"> </span><span class="o">==</span><span class="w"> </span><span class="s">&quot;epoch+batches&quot;</span><span class="w"> </span><span class="o">||</span><span class="w"> </span><span class="n">strategy</span><span class="w"> </span><span class="o">==</span><span class="w"> </span><span class="s">&quot;epoch+stalled&quot;</span><span class="p">)</span><span class="w"></span>
+<span class="w">               </span><span class="o">&amp;&amp;</span><span class="w"> </span><span class="n">get</span><span class="o">&lt;</span><span class="n">std</span><span class="o">::</span><span class="n">vector</span><span class="o">&lt;</span><span class="kt">size_t</span><span class="o">&gt;&gt;</span><span class="p">(</span><span class="s">&quot;lr-decay-start&quot;</span><span class="p">).</span><span class="n">size</span><span class="p">()</span><span class="w"> </span><span class="o">!=</span><span class="w"> </span><span class="mi">2</span><span class="p">,</span><span class="w"></span>
+<span class="w">           </span><span class="s">&quot;Decay strategies &#39;epoch+batches&#39; and &#39;epoch+stalled&#39; require two values specified with &quot;</span><span class="w"></span>
+<span class="w">           </span><span class="s">&quot;--lr-decay-start option&quot;</span><span class="p">);</span><span class="w"></span>
+<span class="w">  </span><span class="n">ABORT_IF</span><span class="p">((</span><span class="n">strategy</span><span class="w"> </span><span class="o">==</span><span class="w"> </span><span class="s">&quot;epoch&quot;</span><span class="w"> </span><span class="o">||</span><span class="w"> </span><span class="n">strategy</span><span class="w"> </span><span class="o">==</span><span class="w"> </span><span class="s">&quot;batches&quot;</span><span class="w"> </span><span class="o">||</span><span class="w"> </span><span class="n">strategy</span><span class="w"> </span><span class="o">==</span><span class="w"> </span><span class="s">&quot;stalled&quot;</span><span class="p">)</span><span class="w"></span>
+<span class="w">               </span><span class="o">&amp;&amp;</span><span class="w"> </span><span class="n">get</span><span class="o">&lt;</span><span class="n">std</span><span class="o">::</span><span class="n">vector</span><span class="o">&lt;</span><span class="kt">size_t</span><span class="o">&gt;&gt;</span><span class="p">(</span><span class="s">&quot;lr-decay-start&quot;</span><span class="p">).</span><span class="n">size</span><span class="p">()</span><span class="w"> </span><span class="o">!=</span><span class="w"> </span><span class="mi">1</span><span class="p">,</span><span class="w"></span>
+<span class="w">           </span><span class="s">&quot;Single decay strategies require only one value specified with --lr-decay-start option&quot;</span><span class="p">);</span><span class="w"></span>
 
-<span class="kt">void</span> <span class="n">ConfigValidator</span><span class="o">::</span><span class="n">validateModelExtension</span><span class="p">(</span><span class="n">cli</span><span class="o">::</span><span class="n">mode</span> <span class="n">mode</span><span class="p">)</span> <span class="k">const</span> <span class="p">{</span>
-  <span class="n">std</span><span class="o">::</span><span class="n">vector</span><span class="o">&lt;</span><span class="n">std</span><span class="o">::</span><span class="n">string</span><span class="o">&gt;</span> <span class="n">models</span><span class="p">;</span>
-  <span class="k">if</span><span class="p">(</span><span class="n">mode</span> <span class="o">==</span> <span class="n">cli</span><span class="o">::</span><span class="n">mode</span><span class="o">::</span><span class="n">translation</span><span class="p">)</span>
-    <span class="n">models</span> <span class="o">=</span> <span class="n">get</span><span class="o">&lt;</span><span class="n">std</span><span class="o">::</span><span class="n">vector</span><span class="o">&lt;</span><span class="n">std</span><span class="o">::</span><span class="n">string</span><span class="o">&gt;&gt;</span><span class="p">(</span><span class="s">&quot;models&quot;</span><span class="p">);</span>
-  <span class="k">else</span>
-    <span class="n">models</span><span class="p">.</span><span class="n">push_back</span><span class="p">(</span><span class="n">get</span><span class="o">&lt;</span><span class="n">std</span><span class="o">::</span><span class="n">string</span><span class="o">&gt;</span><span class="p">(</span><span class="s">&quot;model&quot;</span><span class="p">));</span>
+<span class="w">  </span><span class="c1">// validate ULR options</span>
+<span class="w">  </span><span class="n">ABORT_IF</span><span class="p">((</span><span class="n">has</span><span class="p">(</span><span class="s">&quot;ulr&quot;</span><span class="p">)</span><span class="w"> </span><span class="o">&amp;&amp;</span><span class="w"> </span><span class="n">get</span><span class="o">&lt;</span><span class="kt">bool</span><span class="o">&gt;</span><span class="p">(</span><span class="s">&quot;ulr&quot;</span><span class="p">)</span><span class="w"> </span><span class="o">&amp;&amp;</span><span class="w"> </span><span class="p">(</span><span class="n">get</span><span class="o">&lt;</span><span class="n">std</span><span class="o">::</span><span class="n">string</span><span class="o">&gt;</span><span class="p">(</span><span class="s">&quot;ulr-query-vectors&quot;</span><span class="p">)</span><span class="w"> </span><span class="o">==</span><span class="w"> </span><span class="s">&quot;&quot;</span><span class="w"></span>
+<span class="w">                                               </span><span class="o">||</span><span class="w"> </span><span class="n">get</span><span class="o">&lt;</span><span class="n">std</span><span class="o">::</span><span class="n">string</span><span class="o">&gt;</span><span class="p">(</span><span class="s">&quot;ulr-keys-vectors&quot;</span><span class="p">)</span><span class="w"> </span><span class="o">==</span><span class="w"> </span><span class="s">&quot;&quot;</span><span class="p">)),</span><span class="w"></span>
+<span class="w">           </span><span class="s">&quot;ULR requires query and keys vectors specified with --ulr-query-vectors and &quot;</span><span class="w"></span>
+<span class="w">           </span><span class="s">&quot;--ulr-keys-vectors option&quot;</span><span class="p">);</span><span class="w"></span>
 
-  <span class="k">for</span><span class="p">(</span><span class="k">const</span> <span class="k">auto</span><span class="o">&amp;</span> <span class="nl">modelPath</span> <span class="p">:</span> <span class="n">models</span><span class="p">)</span> <span class="p">{</span>
-    <span class="kt">bool</span> <span class="n">hasProperExt</span> <span class="o">=</span> <span class="n">utils</span><span class="o">::</span><span class="n">endsWith</span><span class="p">(</span><span class="n">modelPath</span><span class="p">,</span> <span class="s">&quot;.npz&quot;</span><span class="p">)</span> <span class="o">||</span> <span class="n">utils</span><span class="o">::</span><span class="n">endsWith</span><span class="p">(</span><span class="n">modelPath</span><span class="p">,</span> <span class="s">&quot;.bin&quot;</span><span class="p">);</span>
-    <span class="n">ABORT_IF</span><span class="p">(</span><span class="o">!</span><span class="n">hasProperExt</span><span class="p">,</span>
-             <span class="s">&quot;Unknown model format for file &#39;{}&#39;. Supported file extensions: .npz, .bin&quot;</span><span class="p">,</span>
-             <span class="n">modelPath</span><span class="p">);</span>
-  <span class="p">}</span>
-<span class="p">}</span>
+<span class="w">  </span><span class="c1">// validate model quantization</span>
+<span class="w">  </span><span class="kt">size_t</span><span class="w"> </span><span class="n">bits</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="n">get</span><span class="o">&lt;</span><span class="kt">size_t</span><span class="o">&gt;</span><span class="p">(</span><span class="s">&quot;quantize-bits&quot;</span><span class="p">);</span><span class="w"></span>
+<span class="w">  </span><span class="n">ABORT_IF</span><span class="p">(</span><span class="n">bits</span><span class="w"> </span><span class="o">&gt;</span><span class="w"> </span><span class="mi">32</span><span class="p">,</span><span class="w"> </span><span class="s">&quot;Invalid quantization bits. Must be from 0 to 32 bits&quot;</span><span class="p">);</span><span class="w"></span>
 
-<span class="kt">void</span> <span class="n">ConfigValidator</span><span class="o">::</span><span class="n">validateDevices</span><span class="p">(</span><span class="n">cli</span><span class="o">::</span><span class="n">mode</span> <span class="cm">/*mode*/</span><span class="p">)</span> <span class="k">const</span> <span class="p">{</span>
-  <span class="n">std</span><span class="o">::</span><span class="n">string</span> <span class="n">devices</span> <span class="o">=</span> <span class="n">utils</span><span class="o">::</span><span class="n">join</span><span class="p">(</span><span class="n">get</span><span class="o">&lt;</span><span class="n">std</span><span class="o">::</span><span class="n">vector</span><span class="o">&lt;</span><span class="n">std</span><span class="o">::</span><span class="n">string</span><span class="o">&gt;&gt;</span><span class="p">(</span><span class="s">&quot;devices&quot;</span><span class="p">));</span>
-  <span class="n">utils</span><span class="o">::</span><span class="n">trim</span><span class="p">(</span><span class="n">devices</span><span class="p">);</span>
+<span class="w">  </span><span class="n">ABORT_IF</span><span class="p">(</span><span class="n">bits</span><span class="w"> </span><span class="o">&gt;</span><span class="w"> </span><span class="mi">0</span><span class="w"> </span><span class="o">&amp;&amp;</span><span class="w"> </span><span class="o">!</span><span class="n">get</span><span class="o">&lt;</span><span class="kt">bool</span><span class="o">&gt;</span><span class="p">(</span><span class="s">&quot;sync-sgd&quot;</span><span class="p">),</span><span class="w"> </span><span class="s">&quot;Model quantization only works with synchronous training (--sync-sgd)&quot;</span><span class="p">);</span><span class="w"></span>
+<span class="p">}</span><span class="w"></span>
 
-  <span class="n">regex</span><span class="o">::</span><span class="n">regex</span> <span class="n">pattern</span><span class="p">;</span>
-  <span class="n">std</span><span class="o">::</span><span class="n">string</span> <span class="n">help</span><span class="p">;</span>
+<span class="kt">void</span><span class="w"> </span><span class="n">ConfigValidator</span><span class="o">::</span><span class="n">validateModelExtension</span><span class="p">(</span><span class="n">cli</span><span class="o">::</span><span class="n">mode</span><span class="w"> </span><span class="n">mode</span><span class="p">)</span><span class="w"> </span><span class="k">const</span><span class="w"> </span><span class="p">{</span><span class="w"></span>
+<span class="w">  </span><span class="n">std</span><span class="o">::</span><span class="n">vector</span><span class="o">&lt;</span><span class="n">std</span><span class="o">::</span><span class="n">string</span><span class="o">&gt;</span><span class="w"> </span><span class="n">models</span><span class="p">;</span><span class="w"></span>
+<span class="w">  </span><span class="k">if</span><span class="p">(</span><span class="n">mode</span><span class="w"> </span><span class="o">==</span><span class="w"> </span><span class="n">cli</span><span class="o">::</span><span class="n">mode</span><span class="o">::</span><span class="n">translation</span><span class="p">)</span><span class="w"></span>
+<span class="w">    </span><span class="n">models</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="n">get</span><span class="o">&lt;</span><span class="n">std</span><span class="o">::</span><span class="n">vector</span><span class="o">&lt;</span><span class="n">std</span><span class="o">::</span><span class="n">string</span><span class="o">&gt;&gt;</span><span class="p">(</span><span class="s">&quot;models&quot;</span><span class="p">);</span><span class="w"></span>
+<span class="w">  </span><span class="k">else</span><span class="w"></span>
+<span class="w">    </span><span class="n">models</span><span class="p">.</span><span class="n">push_back</span><span class="p">(</span><span class="n">get</span><span class="o">&lt;</span><span class="n">std</span><span class="o">::</span><span class="n">string</span><span class="o">&gt;</span><span class="p">(</span><span class="s">&quot;model&quot;</span><span class="p">));</span><span class="w"></span>
 
-  <span class="c1">// valid strings: &#39;0&#39;, &#39;0 1 2 3&#39;, &#39;3 2 0 1&#39;</span>
-  <span class="n">pattern</span> <span class="o">=</span> <span class="s">&quot;[0-9]+( *[0-9]+)*&quot;</span><span class="p">;</span>
-  <span class="n">help</span> <span class="o">=</span> <span class="s">&quot;Supported formats: &#39;0 1 2 3&#39;&quot;</span><span class="p">;</span>
+<span class="w">  </span><span class="k">for</span><span class="p">(</span><span class="k">const</span><span class="w"> </span><span class="k">auto</span><span class="o">&amp;</span><span class="w"> </span><span class="n">modelPath</span><span class="w"> </span><span class="o">:</span><span class="w"> </span><span class="n">models</span><span class="p">)</span><span class="w"> </span><span class="p">{</span><span class="w"></span>
+<span class="w">    </span><span class="kt">bool</span><span class="w"> </span><span class="n">hasProperExt</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="n">utils</span><span class="o">::</span><span class="n">endsWith</span><span class="p">(</span><span class="n">modelPath</span><span class="p">,</span><span class="w"> </span><span class="s">&quot;.npz&quot;</span><span class="p">)</span><span class="w"> </span><span class="o">||</span><span class="w"> </span><span class="n">utils</span><span class="o">::</span><span class="n">endsWith</span><span class="p">(</span><span class="n">modelPath</span><span class="p">,</span><span class="w"> </span><span class="s">&quot;.bin&quot;</span><span class="p">);</span><span class="w"></span>
+<span class="w">    </span><span class="n">ABORT_IF</span><span class="p">(</span><span class="o">!</span><span class="n">hasProperExt</span><span class="p">,</span><span class="w"></span>
+<span class="w">             </span><span class="s">&quot;Unknown model format for file &#39;{}&#39;. Supported file extensions: .npz, .bin&quot;</span><span class="p">,</span><span class="w"></span>
+<span class="w">             </span><span class="n">modelPath</span><span class="p">);</span><span class="w"></span>
+<span class="w">  </span><span class="p">}</span><span class="w"></span>
+<span class="p">}</span><span class="w"></span>
 
-  <span class="n">ABORT_IF</span><span class="p">(</span><span class="o">!</span><span class="n">regex</span><span class="o">::</span><span class="n">regex_match</span><span class="p">(</span><span class="n">devices</span><span class="p">,</span> <span class="n">pattern</span><span class="p">),</span>
-           <span class="s">&quot;the argument &#39;{}&#39; for option &#39;--devices&#39; is invalid. {}&quot;</span><span class="p">,</span>
-           <span class="n">devices</span><span class="p">,</span>
-           <span class="n">help</span><span class="p">);</span>
-<span class="p">}</span>
+<span class="kt">void</span><span class="w"> </span><span class="n">ConfigValidator</span><span class="o">::</span><span class="n">validateDevices</span><span class="p">(</span><span class="n">cli</span><span class="o">::</span><span class="n">mode</span><span class="w"> </span><span class="cm">/*mode*/</span><span class="p">)</span><span class="w"> </span><span class="k">const</span><span class="w"> </span><span class="p">{</span><span class="w"></span>
+<span class="w">  </span><span class="n">std</span><span class="o">::</span><span class="n">string</span><span class="w"> </span><span class="n">devices</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="n">utils</span><span class="o">::</span><span class="n">join</span><span class="p">(</span><span class="n">get</span><span class="o">&lt;</span><span class="n">std</span><span class="o">::</span><span class="n">vector</span><span class="o">&lt;</span><span class="n">std</span><span class="o">::</span><span class="n">string</span><span class="o">&gt;&gt;</span><span class="p">(</span><span class="s">&quot;devices&quot;</span><span class="p">));</span><span class="w"></span>
+<span class="w">  </span><span class="n">utils</span><span class="o">::</span><span class="n">trim</span><span class="p">(</span><span class="n">devices</span><span class="p">);</span><span class="w"></span>
 
-<span class="p">}</span>  <span class="c1">// namespace marian</span>
+<span class="w">  </span><span class="n">regex</span><span class="o">::</span><span class="n">regex</span><span class="w"> </span><span class="n">pattern</span><span class="p">;</span><span class="w"></span>
+<span class="w">  </span><span class="n">std</span><span class="o">::</span><span class="n">string</span><span class="w"> </span><span class="n">help</span><span class="p">;</span><span class="w"></span>
+
+<span class="w">  </span><span class="c1">// valid strings: &#39;0&#39;, &#39;0 1 2 3&#39;, &#39;3 2 0 1&#39;</span>
+<span class="w">  </span><span class="n">pattern</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="s">&quot;[0-9]+( *[0-9]+)*&quot;</span><span class="p">;</span><span class="w"></span>
+<span class="w">  </span><span class="n">help</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="s">&quot;Supported formats: &#39;0 1 2 3&#39;&quot;</span><span class="p">;</span><span class="w"></span>
+
+<span class="w">  </span><span class="n">ABORT_IF</span><span class="p">(</span><span class="o">!</span><span class="n">regex</span><span class="o">::</span><span class="n">regex_match</span><span class="p">(</span><span class="n">devices</span><span class="p">,</span><span class="w"> </span><span class="n">pattern</span><span class="p">),</span><span class="w"></span>
+<span class="w">           </span><span class="s">&quot;the argument &#39;{}&#39; for option &#39;--devices&#39; is invalid. {}&quot;</span><span class="p">,</span><span class="w"></span>
+<span class="w">           </span><span class="n">devices</span><span class="p">,</span><span class="w"></span>
+<span class="w">           </span><span class="n">help</span><span class="p">);</span><span class="w"></span>
+<span class="p">}</span><span class="w"></span>
+
+<span class="p">}</span><span class="w">  </span><span class="c1">// namespace marian</span>
 </pre></div>
 </div>
-</div>
+</section>
 
 
            </div>
-           
           </div>
           <footer>
 
   <hr/>
 
   <div role="contentinfo">
-    <p>
-        &#169; Copyright 2021, Marian NMT Team.
-
-    </p>
+    <p>&#169; Copyright 2021, Marian NMT Team.</p>
   </div>
-    
-    
-    
-    Built with <a href="https://www.sphinx-doc.org/">Sphinx</a> using a
-    
+
+  Built with <a href="https://www.sphinx-doc.org/">Sphinx</a> using a
     <a href="https://github.com/readthedocs/sphinx_rtd_theme">theme</a>
-    
-    provided by <a href="https://readthedocs.org">Read the Docs</a>. 
+    provided by <a href="https://readthedocs.org">Read the Docs</a>.
+   
 
 </footer>
         </div>
       </div>
-
     </section>
-
   </div>
-  
-
-  <script type="text/javascript">
+  <script>
       jQuery(function () {
           SphinxRtdTheme.Navigation.enable(true);
       });
-  </script>
-
-  
-  
-    
-   
+  </script> 
 
 </body>
 </html>

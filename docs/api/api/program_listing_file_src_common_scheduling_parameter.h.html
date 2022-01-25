@@ -1,0 +1,168 @@
+<!DOCTYPE html>
+<html class="writer-html5" lang="en" >
+<head>
+  <meta charset="utf-8" /><meta name="generator" content="Docutils 0.17.1: http://docutils.sourceforge.net/" />
+
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Program Listing for File scheduling_parameter.h &mdash; Marian NMT v1.10.27 2022-01-25 documentation</title><link rel="stylesheet" href="../_static/css/theme.css" type="text/css" />
+    <link rel="stylesheet" href="../_static/pygments.css" type="text/css" />
+      <link rel="stylesheet" href="../_static/css/custom.css" type="text/css" />
+      <link rel="stylesheet" href="../_static/collapsible-lists/css/tree_view.css" type="text/css" />
+    <link rel="canonical" href="http://marian-nmt.github.io/docs/api/api/program_listing_file_src_common_scheduling_parameter.h.html" />
+  <!--[if lt IE 9]>
+    <script src="../_static/js/html5shiv.min.js"></script>
+  <![endif]-->
+  <script id="documentation_options" data-url_root="../" src="../_static/documentation_options.js"></script>
+        <script src="../_static/jquery.js"></script>
+        <script src="../_static/underscore.js"></script>
+        <script src="../_static/doctools.js"></script>
+        <script src="../_static/language_data.js"></script>
+        <script src="../_static/collapsible-lists/js/CollapsibleLists.compressed.js"></script>
+        <script src="../_static/collapsible-lists/js/apply-collapsible-lists.js"></script>
+        <script async="async" src="https://cdnjs.cloudflare.com/ajax/libs/mathjax/2.7.5/latest.js?config=TeX-AMS-MML_HTMLorMML"></script>
+        <script type="text/x-mathjax-config">MathJax.Hub.Config({"tex2jax": {"inlineMath": [["\\(", "\\)"]], "displayMath": [["\\[", "\\]"]], "processRefs": false, "processEnvironments": false}})</script>
+    <script src="../_static/js/theme.js"></script>
+    <link rel="index" title="Index" href="../genindex.html" />
+    <link rel="search" title="Search" href="../search.html" /> 
+</head>
+
+<body class="wy-body-for-nav"> 
+  <div class="wy-grid-for-nav">
+    <nav data-toggle="wy-nav-shift" class="wy-nav-side">
+      <div class="wy-side-scroll">
+        <div class="wy-side-nav-search" >
+            <a href="../index.html" class="icon icon-home"> Marian NMT
+          </a>
+              <div class="version">
+                v1.10.27
+              </div>
+<div role="search">
+  <form id="rtd-search-form" class="wy-form" action="../search.html" method="get">
+    <input type="text" name="q" placeholder="Search docs" />
+    <input type="hidden" name="check_keywords" value="yes" />
+    <input type="hidden" name="area" value="default" />
+  </form>
+</div>
+        </div><div class="wy-menu wy-menu-vertical" data-spy="affix" role="navigation" aria-label="Navigation menu">
+              <p><span class="caption-text">Contents:</span></p>
+<ul>
+<li class="toctree-l1"><a class="reference internal" href="../graph.html">Expression graphs</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../operators.html">Operations in the Expression Graph</a></li>
+<li class="toctree-l1"><a class="reference internal" href="library_index.html">Library API</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../contributing.html">How to contribute to Marian</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../doc_guide.html">Writing documentation</a></li>
+</ul>
+
+        </div>
+      </div>
+    </nav>
+
+    <section data-toggle="wy-nav-shift" class="wy-nav-content-wrap"><nav class="wy-nav-top" aria-label="Mobile navigation menu" >
+          <i data-toggle="wy-nav-top" class="fa fa-bars"></i>
+          <a href="../index.html">Marian NMT</a>
+      </nav>
+
+      <div class="wy-nav-content">
+        <div class="rst-content">
+          <div role="navigation" aria-label="Page navigation">
+  <ul class="wy-breadcrumbs">
+      <li><a href="../index.html" class="icon icon-home"></a> &raquo;</li>
+      <li>Program Listing for File scheduling_parameter.h</li>
+      <li class="wy-breadcrumbs-aside">
+            <a href="../_sources/api/program_listing_file_src_common_scheduling_parameter.h.rst.txt" rel="nofollow"> View page source</a>
+      </li>
+  </ul>
+  <hr/>
+</div>
+          <div role="main" class="document" itemscope="itemscope" itemtype="http://schema.org/Article">
+           <div itemprop="articleBody">
+             
+  <section id="program-listing-for-file-scheduling-parameter-h">
+<span id="program-listing-file-src-common-scheduling-parameter-h"></span><h1>Program Listing for File scheduling_parameter.h<a class="headerlink" href="#program-listing-for-file-scheduling-parameter-h" title="Permalink to this headline">¶</a></h1>
+<p>↰ <a class="reference internal" href="file_src_common_scheduling_parameter.h.html#file-src-common-scheduling-parameter-h"><span class="std std-ref">Return to documentation for file</span></a> (<code class="docutils literal notranslate"><span class="pre">src/common/scheduling_parameter.h</span></code>)</p>
+<div class="highlight-cpp notranslate"><div class="highlight"><pre><span></span><span class="cp">#pragma once</span>
+
+<span class="cp">#include</span><span class="w"> </span><span class="cpf">&quot;common/logging.h&quot;</span><span class="cp"></span>
+<span class="cp">#include</span><span class="w"> </span><span class="cpf">&quot;common/utils.h&quot;</span><span class="cp"></span>
+
+<span class="cp">#include</span><span class="w"> </span><span class="cpf">&lt;string&gt;</span><span class="cp"></span>
+
+<span class="k">namespace</span><span class="w"> </span><span class="nn">marian</span><span class="w"> </span><span class="p">{</span><span class="w"></span>
+
+<span class="c1">// support for scheduling parameters that can be expressed with a unit, such as --lr-decay-inv-sqrt</span>
+<span class="k">enum</span><span class="w"> </span><span class="k">class</span><span class="w"> </span><span class="nc">SchedulingUnit</span><span class="w"> </span><span class="p">{</span><span class="w"></span>
+<span class="w">  </span><span class="n">trgLabels</span><span class="p">,</span><span class="w"> </span><span class="c1">// &quot;t&quot;: number of target labels seen so far</span>
+<span class="w">  </span><span class="n">updates</span><span class="p">,</span><span class="w">   </span><span class="c1">// &quot;u&quot;: number of updates so far (batches)</span>
+<span class="w">  </span><span class="n">epochs</span><span class="w">     </span><span class="c1">// &quot;e&quot;: number of epochs begun so far (very first epoch is 1)</span>
+<span class="p">};</span><span class="w"></span>
+
+<span class="k">struct</span><span class="w"> </span><span class="nc">SchedulingParameter</span><span class="w"> </span><span class="p">{</span><span class="w"></span>
+<span class="w">  </span><span class="kt">size_t</span><span class="w"> </span><span class="n">n</span><span class="p">{</span><span class="mi">0</span><span class="p">};</span><span class="w">                                  </span><span class="c1">// number of steps measured in &#39;unit&#39;</span>
+<span class="w">  </span><span class="n">SchedulingUnit</span><span class="w"> </span><span class="n">unit</span><span class="p">{</span><span class="n">SchedulingUnit</span><span class="o">::</span><span class="n">updates</span><span class="p">};</span><span class="w"> </span><span class="c1">// unit of value</span>
+
+<span class="w">  </span><span class="c1">// parses scheduling parameters of the form NU where N=unsigned int and U=unit</span>
+<span class="w">  </span><span class="c1">// Examples of valid inputs: &quot;16000u&quot; (16000 updates), &quot;32000000t&quot; (32 million target labels),</span>
+<span class="w">  </span><span class="c1">// &quot;100e&quot; (100 epochs).</span>
+<span class="w">  </span><span class="k">static</span><span class="w"> </span><span class="n">SchedulingParameter</span><span class="w"> </span><span class="nf">parse</span><span class="p">(</span><span class="n">std</span><span class="o">::</span><span class="n">string</span><span class="w"> </span><span class="n">param</span><span class="p">)</span><span class="w"> </span><span class="p">{</span><span class="w"></span>
+<span class="w">    </span><span class="n">SchedulingParameter</span><span class="w"> </span><span class="n">res</span><span class="p">;</span><span class="w"></span>
+<span class="w">    </span><span class="k">if</span><span class="p">(</span><span class="o">!</span><span class="n">param</span><span class="p">.</span><span class="n">empty</span><span class="p">()</span><span class="w"> </span><span class="o">&amp;&amp;</span><span class="w"> </span><span class="n">param</span><span class="p">.</span><span class="n">back</span><span class="p">()</span><span class="w"> </span><span class="o">&gt;=</span><span class="w"> </span><span class="sc">&#39;a&#39;</span><span class="p">)</span><span class="w"> </span><span class="p">{</span><span class="w"></span>
+<span class="w">      </span><span class="k">switch</span><span class="p">(</span><span class="n">param</span><span class="p">.</span><span class="n">back</span><span class="p">())</span><span class="w"> </span><span class="p">{</span><span class="w"></span>
+<span class="w">        </span><span class="k">case</span><span class="w"> </span><span class="sc">&#39;t&#39;</span><span class="o">:</span><span class="w"> </span><span class="n">res</span><span class="p">.</span><span class="n">unit</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="n">SchedulingUnit</span><span class="o">::</span><span class="n">trgLabels</span><span class="p">;</span><span class="w"> </span><span class="k">break</span><span class="p">;</span><span class="w"></span>
+<span class="w">        </span><span class="k">case</span><span class="w"> </span><span class="sc">&#39;u&#39;</span><span class="o">:</span><span class="w"> </span><span class="n">res</span><span class="p">.</span><span class="n">unit</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="n">SchedulingUnit</span><span class="o">::</span><span class="n">updates</span><span class="p">;</span><span class="w">   </span><span class="k">break</span><span class="p">;</span><span class="w"></span>
+<span class="w">        </span><span class="k">case</span><span class="w"> </span><span class="sc">&#39;e&#39;</span><span class="o">:</span><span class="w"> </span><span class="n">res</span><span class="p">.</span><span class="n">unit</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="n">SchedulingUnit</span><span class="o">::</span><span class="n">epochs</span><span class="p">;</span><span class="w">    </span><span class="k">break</span><span class="p">;</span><span class="w"></span>
+<span class="w">        </span><span class="k">default</span><span class="o">:</span><span class="w"> </span><span class="n">ABORT</span><span class="p">(</span><span class="s">&quot;invalid unit &#39;{}&#39; in {}&quot;</span><span class="p">,</span><span class="w"> </span><span class="n">param</span><span class="p">.</span><span class="n">back</span><span class="p">(),</span><span class="w"> </span><span class="n">param</span><span class="p">);</span><span class="w"></span>
+<span class="w">      </span><span class="p">}</span><span class="w"></span>
+<span class="w">      </span><span class="n">param</span><span class="p">.</span><span class="n">pop_back</span><span class="p">();</span><span class="w"></span>
+<span class="w">    </span><span class="p">}</span><span class="w"></span>
+<span class="w">    </span><span class="kt">double</span><span class="w"> </span><span class="n">number</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="n">utils</span><span class="o">::</span><span class="n">parseNumber</span><span class="p">(</span><span class="n">param</span><span class="p">);</span><span class="w"></span>
+<span class="w">    </span><span class="n">res</span><span class="p">.</span><span class="n">n</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="p">(</span><span class="kt">size_t</span><span class="p">)</span><span class="n">number</span><span class="p">;</span><span class="w"></span>
+<span class="w">    </span><span class="n">ABORT_IF</span><span class="p">(</span><span class="n">number</span><span class="w"> </span><span class="o">!=</span><span class="w"> </span><span class="p">(</span><span class="kt">double</span><span class="p">)</span><span class="n">res</span><span class="p">.</span><span class="n">n</span><span class="p">,</span><span class="w"> </span><span class="s">&quot;Scheduling parameters must be whole numbers&quot;</span><span class="p">);</span><span class="w"> </span><span class="c1">// @TODO: do they?</span>
+<span class="w">    </span><span class="k">return</span><span class="w"> </span><span class="n">res</span><span class="p">;</span><span class="w"></span>
+<span class="w">  </span><span class="p">}</span><span class="w"></span>
+
+<span class="w">  </span><span class="k">operator</span><span class="w"> </span><span class="kt">bool</span><span class="p">()</span><span class="w"> </span><span class="k">const</span><span class="w"> </span><span class="p">{</span><span class="w"> </span><span class="k">return</span><span class="w"> </span><span class="n">n</span><span class="w"> </span><span class="o">&gt;</span><span class="w"> </span><span class="mi">0</span><span class="p">;</span><span class="w"> </span><span class="p">}</span><span class="w"> </span><span class="c1">// check whether it is specified</span>
+
+<span class="w">  </span><span class="k">operator</span><span class="w"> </span><span class="n">std</span><span class="o">::</span><span class="n">string</span><span class="p">()</span><span class="w"> </span><span class="k">const</span><span class="w"> </span><span class="p">{</span><span class="w"> </span><span class="c1">// convert back for storing in config</span>
+<span class="w">    </span><span class="k">switch</span><span class="p">(</span><span class="n">unit</span><span class="p">)</span><span class="w"> </span><span class="p">{</span><span class="w"></span>
+<span class="w">      </span><span class="k">case</span><span class="w"> </span><span class="n">SchedulingUnit</span><span class="o">::</span><span class="n">trgLabels</span><span class="o">:</span><span class="w"> </span><span class="k">return</span><span class="w"> </span><span class="n">std</span><span class="o">::</span><span class="n">to_string</span><span class="p">(</span><span class="n">n</span><span class="p">)</span><span class="w"> </span><span class="o">+</span><span class="w"> </span><span class="s">&quot;t&quot;</span><span class="p">;</span><span class="w"></span>
+<span class="w">      </span><span class="k">case</span><span class="w"> </span><span class="n">SchedulingUnit</span><span class="o">::</span><span class="n">updates</span><span class="w">  </span><span class="o">:</span><span class="w"> </span><span class="k">return</span><span class="w"> </span><span class="n">std</span><span class="o">::</span><span class="n">to_string</span><span class="p">(</span><span class="n">n</span><span class="p">)</span><span class="w"> </span><span class="o">+</span><span class="w"> </span><span class="s">&quot;u&quot;</span><span class="p">;</span><span class="w"></span>
+<span class="w">      </span><span class="k">case</span><span class="w"> </span><span class="n">SchedulingUnit</span><span class="o">::</span><span class="n">epochs</span><span class="w">   </span><span class="o">:</span><span class="w"> </span><span class="k">return</span><span class="w"> </span><span class="n">std</span><span class="o">::</span><span class="n">to_string</span><span class="p">(</span><span class="n">n</span><span class="p">)</span><span class="w"> </span><span class="o">+</span><span class="w"> </span><span class="s">&quot;e&quot;</span><span class="p">;</span><span class="w"></span>
+<span class="w">      </span><span class="k">default</span><span class="o">:</span><span class="w"> </span><span class="n">ABORT</span><span class="p">(</span><span class="s">&quot;corrupt enum value for scheduling unit&quot;</span><span class="p">);</span><span class="w"></span>
+<span class="w">    </span><span class="p">}</span><span class="w"></span>
+<span class="w">  </span><span class="p">}</span><span class="w"></span>
+<span class="p">};</span><span class="w"></span>
+
+<span class="p">}</span><span class="w"></span>
+</pre></div>
+</div>
+</section>
+
+
+           </div>
+          </div>
+          <footer>
+
+  <hr/>
+
+  <div role="contentinfo">
+    <p>&#169; Copyright 2021, Marian NMT Team.</p>
+  </div>
+
+  Built with <a href="https://www.sphinx-doc.org/">Sphinx</a> using a
+    <a href="https://github.com/readthedocs/sphinx_rtd_theme">theme</a>
+    provided by <a href="https://readthedocs.org">Read the Docs</a>.
+   
+
+</footer>
+        </div>
+      </div>
+    </section>
+  </div>
+  <script>
+      jQuery(function () {
+          SphinxRtdTheme.Navigation.enable(true);
+      });
+  </script> 
+
+</body>
+</html>

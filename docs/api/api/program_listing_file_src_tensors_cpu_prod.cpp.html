@@ -1,78 +1,41 @@
-
-
 <!DOCTYPE html>
 <html class="writer-html5" lang="en" >
 <head>
-  <meta charset="utf-8" />
-  
+  <meta charset="utf-8" /><meta name="generator" content="Docutils 0.17.1: http://docutils.sourceforge.net/" />
+
   <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-  
-  <title>Program Listing for File prod.cpp &mdash; Marian NMT v1.10.3 2021-03-22 documentation</title>
-  
-
-  
-  <link rel="stylesheet" href="../_static/css/theme.css" type="text/css" />
-  <link rel="stylesheet" href="../_static/pygments.css" type="text/css" />
-  <link rel="stylesheet" href="../_static/css/custom.css" type="text/css" />
-  <link rel="stylesheet" href="../_static/collapsible-lists/css/tree_view.css" type="text/css" />
-
-  
-  
-
-  
-  
-
-  
+  <title>Program Listing for File prod.cpp &mdash; Marian NMT v1.10.27 2022-01-25 documentation</title><link rel="stylesheet" href="../_static/css/theme.css" type="text/css" />
+    <link rel="stylesheet" href="../_static/pygments.css" type="text/css" />
+      <link rel="stylesheet" href="../_static/css/custom.css" type="text/css" />
+      <link rel="stylesheet" href="../_static/collapsible-lists/css/tree_view.css" type="text/css" />
     <link rel="canonical" href="http://marian-nmt.github.io/docs/api/api/program_listing_file_src_tensors_cpu_prod.cpp.html" />
-
-  
   <!--[if lt IE 9]>
     <script src="../_static/js/html5shiv.min.js"></script>
   <![endif]-->
-  
-    
-      <script type="text/javascript" id="documentation_options" data-url_root="../" src="../_static/documentation_options.js"></script>
+  <script id="documentation_options" data-url_root="../" src="../_static/documentation_options.js"></script>
         <script src="../_static/jquery.js"></script>
         <script src="../_static/underscore.js"></script>
         <script src="../_static/doctools.js"></script>
         <script src="../_static/language_data.js"></script>
         <script src="../_static/collapsible-lists/js/CollapsibleLists.compressed.js"></script>
         <script src="../_static/collapsible-lists/js/apply-collapsible-lists.js"></script>
-    
-    <script type="text/javascript" src="../_static/js/theme.js"></script>
-
-    
+        <script async="async" src="https://cdnjs.cloudflare.com/ajax/libs/mathjax/2.7.5/latest.js?config=TeX-AMS-MML_HTMLorMML"></script>
+        <script type="text/x-mathjax-config">MathJax.Hub.Config({"tex2jax": {"inlineMath": [["\\(", "\\)"]], "displayMath": [["\\[", "\\]"]], "processRefs": false, "processEnvironments": false}})</script>
+    <script src="../_static/js/theme.js"></script>
     <link rel="index" title="Index" href="../genindex.html" />
     <link rel="search" title="Search" href="../search.html" /> 
 </head>
 
-<body class="wy-body-for-nav">
-
-   
+<body class="wy-body-for-nav"> 
   <div class="wy-grid-for-nav">
-    
     <nav data-toggle="wy-nav-shift" class="wy-nav-side">
       <div class="wy-side-scroll">
         <div class="wy-side-nav-search" >
-          
-
-          
             <a href="../index.html" class="icon icon-home"> Marian NMT
-          
-
-          
           </a>
-
-          
-            
-            
               <div class="version">
-                v1.10.3
+                v1.10.27
               </div>
-            
-          
-
-          
 <div role="search">
   <form id="rtd-search-form" class="wy-form" action="../search.html" method="get">
     <input type="text" name="q" placeholder="Search docs" />
@@ -80,427 +43,533 @@
     <input type="hidden" name="area" value="default" />
   </form>
 </div>
-
-          
-        </div>
-
-        
-        <div class="wy-menu wy-menu-vertical" data-spy="affix" role="navigation" aria-label="main navigation">
-          
-            
-            
-              
-            
-            
-              <p class="caption"><span class="caption-text">Contents:</span></p>
+        </div><div class="wy-menu wy-menu-vertical" data-spy="affix" role="navigation" aria-label="Navigation menu">
+              <p><span class="caption-text">Contents:</span></p>
 <ul>
 <li class="toctree-l1"><a class="reference internal" href="../graph.html">Expression graphs</a></li>
 <li class="toctree-l1"><a class="reference internal" href="../operators.html">Operations in the Expression Graph</a></li>
 <li class="toctree-l1"><a class="reference internal" href="library_index.html">Library API</a></li>
 <li class="toctree-l1"><a class="reference internal" href="../contributing.html">How to contribute to Marian</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../doc_guide.html">Writing documentation</a></li>
 </ul>
 
-            
-          
         </div>
-        
       </div>
     </nav>
 
-    <section data-toggle="wy-nav-shift" class="wy-nav-content-wrap">
-
-      
-      <nav class="wy-nav-top" aria-label="top navigation">
-        
+    <section data-toggle="wy-nav-shift" class="wy-nav-content-wrap"><nav class="wy-nav-top" aria-label="Mobile navigation menu" >
           <i data-toggle="wy-nav-top" class="fa fa-bars"></i>
           <a href="../index.html">Marian NMT</a>
-        
       </nav>
 
-
       <div class="wy-nav-content">
-        
         <div class="rst-content">
-        
-          
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-<div role="navigation" aria-label="breadcrumbs navigation">
-
+          <div role="navigation" aria-label="Page navigation">
   <ul class="wy-breadcrumbs">
-    
       <li><a href="../index.html" class="icon icon-home"></a> &raquo;</li>
-        
       <li>Program Listing for File prod.cpp</li>
-    
-    
       <li class="wy-breadcrumbs-aside">
-        
-          
             <a href="../_sources/api/program_listing_file_src_tensors_cpu_prod.cpp.rst.txt" rel="nofollow"> View page source</a>
-          
-        
       </li>
-    
   </ul>
-
-  
   <hr/>
 </div>
           <div role="main" class="document" itemscope="itemscope" itemtype="http://schema.org/Article">
            <div itemprop="articleBody">
-            
-  <div class="section" id="program-listing-for-file-prod-cpp">
+             
+  <section id="program-listing-for-file-prod-cpp">
 <span id="program-listing-file-src-tensors-cpu-prod-cpp"></span><h1>Program Listing for File prod.cpp<a class="headerlink" href="#program-listing-for-file-prod-cpp" title="Permalink to this headline">¶</a></h1>
 <p>↰ <a class="reference internal" href="file_src_tensors_cpu_prod.cpp.html#file-src-tensors-cpu-prod-cpp"><span class="std std-ref">Return to documentation for file</span></a> (<code class="docutils literal notranslate"><span class="pre">src/tensors/cpu/prod.cpp</span></code>)</p>
 <div class="highlight-cpp notranslate"><div class="highlight"><pre><span></span><span class="cm">/* All or part of this file was contributed by Intel under license:</span>
 <span class="cm"> *   Copyright (C) 2017-2018 Intel Corporation</span>
 <span class="cm"> *   SPDX-License-Identifier: MIT</span>
-<span class="cm"> */</span>
+<span class="cm"> */</span><span class="w"></span>
 
-<span class="cp">#include</span> <span class="cpf">&quot;tensors/cpu/backend.h&quot;</span><span class="cp"></span>
-<span class="cp">#include</span> <span class="cpf">&quot;tensors/tensor.h&quot;</span><span class="cp"></span>
-<span class="cp">#include</span> <span class="cpf">&quot;tensors/tensor_allocator.h&quot;</span><span class="cp"></span>
+<span class="cp">#include</span><span class="w"> </span><span class="cpf">&quot;tensors/cpu/backend.h&quot;</span><span class="cp"></span>
+<span class="cp">#include</span><span class="w"> </span><span class="cpf">&quot;tensors/tensor.h&quot;</span><span class="cp"></span>
+<span class="cp">#include</span><span class="w"> </span><span class="cpf">&quot;tensors/tensor_allocator.h&quot;</span><span class="cp"></span>
 
 <span class="cp">#if MKL_FOUND</span>
-<span class="cp">#include</span> <span class="cpf">&lt;mkl.h&gt;</span><span class="cp"></span>
+<span class="cp">#include</span><span class="w"> </span><span class="cpf">&lt;mkl.h&gt;</span><span class="cp"></span>
 <span class="cp">#else</span>
 <span class="cp">#if BLAS_FOUND</span>
-<span class="cp">#include</span> <span class="cpf">&lt;cblas.h&gt;</span><span class="cp"></span>
+<span class="cp">#include</span><span class="w"> </span><span class="cpf">&lt;cblas.h&gt;</span><span class="cp"></span>
 <span class="cp">#endif</span>
 <span class="cp">#endif</span>
 
-<span class="cp">#include</span> <span class="cpf">&quot;integer_common.h&quot;</span><span class="cp"></span>
-<span class="cp">#include</span> <span class="cpf">&quot;prod_blas.h&quot;</span><span class="cp"></span>
+<span class="cp">#include</span><span class="w"> </span><span class="cpf">&quot;integer_common.h&quot;</span><span class="cp"></span>
+<span class="cp">#include</span><span class="w"> </span><span class="cpf">&quot;prod_blas.h&quot;</span><span class="cp"></span>
 
 
-<span class="k">namespace</span> <span class="n">marian</span> <span class="p">{</span>
+<span class="k">namespace</span><span class="w"> </span><span class="nn">marian</span><span class="w"> </span><span class="p">{</span><span class="w"></span>
 
-<span class="k">namespace</span> <span class="n">cpu</span> <span class="p">{</span>
+<span class="k">namespace</span><span class="w"> </span><span class="nn">cpu</span><span class="w"> </span><span class="p">{</span><span class="w"></span>
 
-<span class="kt">void</span> <span class="nf">Prod</span><span class="p">(</span><span class="n">marian</span><span class="o">::</span><span class="n">Tensor</span> <span class="n">C</span><span class="p">,</span>
-          <span class="k">const</span> <span class="n">marian</span><span class="o">::</span><span class="n">Tensor</span><span class="o">&amp;</span> <span class="n">A</span><span class="p">,</span>
-          <span class="k">const</span> <span class="n">marian</span><span class="o">::</span><span class="n">Tensor</span><span class="o">&amp;</span> <span class="n">B</span><span class="p">,</span>
-          <span class="kt">bool</span> <span class="n">transA</span><span class="p">,</span>
-          <span class="kt">bool</span> <span class="n">transB</span><span class="p">,</span>
-          <span class="kt">float</span> <span class="n">beta</span><span class="p">,</span>
-          <span class="kt">float</span> <span class="n">scalar</span><span class="p">)</span> <span class="p">{</span>
+<span class="kt">void</span><span class="w"> </span><span class="nf">Prod</span><span class="p">(</span><span class="n">marian</span><span class="o">::</span><span class="n">Tensor</span><span class="w"> </span><span class="n">C</span><span class="p">,</span><span class="w"></span>
+<span class="w">          </span><span class="k">const</span><span class="w"> </span><span class="n">marian</span><span class="o">::</span><span class="n">Tensor</span><span class="o">&amp;</span><span class="w"> </span><span class="n">A</span><span class="p">,</span><span class="w"></span>
+<span class="w">          </span><span class="k">const</span><span class="w"> </span><span class="n">marian</span><span class="o">::</span><span class="n">Tensor</span><span class="o">&amp;</span><span class="w"> </span><span class="n">B</span><span class="p">,</span><span class="w"></span>
+<span class="w">          </span><span class="kt">bool</span><span class="w"> </span><span class="n">transA</span><span class="p">,</span><span class="w"></span>
+<span class="w">          </span><span class="kt">bool</span><span class="w"> </span><span class="n">transB</span><span class="p">,</span><span class="w"></span>
+<span class="w">          </span><span class="kt">float</span><span class="w"> </span><span class="n">beta</span><span class="p">,</span><span class="w"></span>
+<span class="w">          </span><span class="kt">float</span><span class="w"> </span><span class="n">scalar</span><span class="p">)</span><span class="w"> </span><span class="p">{</span><span class="w"></span>
 <span class="cp">#if BLAS_FOUND</span>
-  <span class="kt">float</span> <span class="n">alpha</span> <span class="o">=</span> <span class="n">scalar</span><span class="p">;</span>
+<span class="w">  </span><span class="kt">float</span><span class="w"> </span><span class="n">alpha</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="n">scalar</span><span class="p">;</span><span class="w"></span>
 
-  <span class="kt">int</span> <span class="n">m</span> <span class="o">=</span> <span class="n">A</span><span class="o">-&gt;</span><span class="n">shape</span><span class="p">().</span><span class="n">elements</span><span class="p">()</span> <span class="o">/</span> <span class="n">A</span><span class="o">-&gt;</span><span class="n">shape</span><span class="p">()[</span><span class="mi">-1</span><span class="p">];</span>
-  <span class="kt">int</span> <span class="n">k</span> <span class="o">=</span> <span class="n">A</span><span class="o">-&gt;</span><span class="n">shape</span><span class="p">().</span><span class="n">back</span><span class="p">();</span>
-  <span class="k">if</span><span class="p">(</span><span class="n">transA</span><span class="p">)</span>
-    <span class="n">std</span><span class="o">::</span><span class="n">swap</span><span class="p">(</span><span class="n">m</span><span class="p">,</span> <span class="n">k</span><span class="p">);</span>
+<span class="w">  </span><span class="kt">int</span><span class="w"> </span><span class="n">m</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="n">A</span><span class="o">-&gt;</span><span class="n">shape</span><span class="p">().</span><span class="n">elements</span><span class="p">()</span><span class="w"> </span><span class="o">/</span><span class="w"> </span><span class="n">A</span><span class="o">-&gt;</span><span class="n">shape</span><span class="p">()[</span><span class="mi">-1</span><span class="p">];</span><span class="w"></span>
+<span class="w">  </span><span class="kt">int</span><span class="w"> </span><span class="n">k</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="n">A</span><span class="o">-&gt;</span><span class="n">shape</span><span class="p">().</span><span class="n">back</span><span class="p">();</span><span class="w"></span>
+<span class="w">  </span><span class="k">if</span><span class="p">(</span><span class="n">transA</span><span class="p">)</span><span class="w"></span>
+<span class="w">    </span><span class="n">std</span><span class="o">::</span><span class="n">swap</span><span class="p">(</span><span class="n">m</span><span class="p">,</span><span class="w"> </span><span class="n">k</span><span class="p">);</span><span class="w"></span>
 
-  <span class="kt">int</span> <span class="n">l</span> <span class="o">=</span> <span class="n">B</span><span class="o">-&gt;</span><span class="n">shape</span><span class="p">().</span><span class="n">elements</span><span class="p">()</span> <span class="o">/</span> <span class="n">B</span><span class="o">-&gt;</span><span class="n">shape</span><span class="p">()[</span><span class="mi">-1</span><span class="p">];</span>
-  <span class="kt">int</span> <span class="n">n</span> <span class="o">=</span> <span class="n">B</span><span class="o">-&gt;</span><span class="n">shape</span><span class="p">()[</span><span class="mi">-1</span><span class="p">];</span>
-  <span class="k">if</span><span class="p">(</span><span class="n">transB</span><span class="p">)</span>
-    <span class="n">std</span><span class="o">::</span><span class="n">swap</span><span class="p">(</span><span class="n">l</span><span class="p">,</span> <span class="n">n</span><span class="p">);</span>
+<span class="w">  </span><span class="kt">int</span><span class="w"> </span><span class="n">l</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="n">B</span><span class="o">-&gt;</span><span class="n">shape</span><span class="p">().</span><span class="n">elements</span><span class="p">()</span><span class="w"> </span><span class="o">/</span><span class="w"> </span><span class="n">B</span><span class="o">-&gt;</span><span class="n">shape</span><span class="p">()[</span><span class="mi">-1</span><span class="p">];</span><span class="w"></span>
+<span class="w">  </span><span class="kt">int</span><span class="w"> </span><span class="n">n</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="n">B</span><span class="o">-&gt;</span><span class="n">shape</span><span class="p">()[</span><span class="mi">-1</span><span class="p">];</span><span class="w"></span>
+<span class="w">  </span><span class="k">if</span><span class="p">(</span><span class="n">transB</span><span class="p">)</span><span class="w"></span>
+<span class="w">    </span><span class="n">std</span><span class="o">::</span><span class="n">swap</span><span class="p">(</span><span class="n">l</span><span class="p">,</span><span class="w"> </span><span class="n">n</span><span class="p">);</span><span class="w"></span>
 
-  <span class="kt">int</span> <span class="n">lda</span> <span class="o">=</span> <span class="n">A</span><span class="o">-&gt;</span><span class="n">shape</span><span class="p">()[</span><span class="mi">-1</span><span class="p">];</span>
-  <span class="kt">int</span> <span class="n">ldb</span> <span class="o">=</span> <span class="n">B</span><span class="o">-&gt;</span><span class="n">shape</span><span class="p">()[</span><span class="mi">-1</span><span class="p">];</span>
-  <span class="kt">int</span> <span class="n">ldc</span> <span class="o">=</span> <span class="n">B</span><span class="o">-&gt;</span><span class="n">shape</span><span class="p">()[</span><span class="mi">-1</span><span class="p">];</span>
+<span class="w">  </span><span class="kt">int</span><span class="w"> </span><span class="n">lda</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="n">A</span><span class="o">-&gt;</span><span class="n">shape</span><span class="p">()[</span><span class="mi">-1</span><span class="p">];</span><span class="w"></span>
+<span class="w">  </span><span class="kt">int</span><span class="w"> </span><span class="n">ldb</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="n">B</span><span class="o">-&gt;</span><span class="n">shape</span><span class="p">()[</span><span class="mi">-1</span><span class="p">];</span><span class="w"></span>
+<span class="w">  </span><span class="kt">int</span><span class="w"> </span><span class="n">ldc</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="n">B</span><span class="o">-&gt;</span><span class="n">shape</span><span class="p">()[</span><span class="mi">-1</span><span class="p">];</span><span class="w"></span>
 
-  <span class="k">if</span><span class="p">(</span><span class="n">transB</span><span class="p">)</span>
-    <span class="n">ldc</span> <span class="o">=</span> <span class="n">B</span><span class="o">-&gt;</span><span class="n">shape</span><span class="p">().</span><span class="n">elements</span><span class="p">()</span> <span class="o">/</span> <span class="n">B</span><span class="o">-&gt;</span><span class="n">shape</span><span class="p">()[</span><span class="mi">-1</span><span class="p">];</span>
+<span class="w">  </span><span class="k">if</span><span class="p">(</span><span class="n">transB</span><span class="p">)</span><span class="w"></span>
+<span class="w">    </span><span class="n">ldc</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="n">B</span><span class="o">-&gt;</span><span class="n">shape</span><span class="p">().</span><span class="n">elements</span><span class="p">()</span><span class="w"> </span><span class="o">/</span><span class="w"> </span><span class="n">B</span><span class="o">-&gt;</span><span class="n">shape</span><span class="p">()[</span><span class="mi">-1</span><span class="p">];</span><span class="w"></span>
 
-  <span class="n">sgemm</span><span class="p">(</span><span class="n">transA</span><span class="p">,</span>
-        <span class="n">transB</span><span class="p">,</span>
-        <span class="n">m</span><span class="p">,</span>
-        <span class="n">n</span><span class="p">,</span>
-        <span class="n">k</span><span class="p">,</span>
-        <span class="n">alpha</span><span class="p">,</span>
-        <span class="n">A</span><span class="o">-&gt;</span><span class="n">data</span><span class="p">(),</span>
-        <span class="n">lda</span><span class="p">,</span>
-        <span class="n">B</span><span class="o">-&gt;</span><span class="n">data</span><span class="p">(),</span>
-        <span class="n">ldb</span><span class="p">,</span>
-        <span class="n">beta</span><span class="p">,</span>
-        <span class="n">C</span><span class="o">-&gt;</span><span class="n">data</span><span class="p">(),</span>
-        <span class="n">ldc</span><span class="p">);</span>
+<span class="w">  </span><span class="n">sgemm</span><span class="p">(</span><span class="n">transA</span><span class="p">,</span><span class="w"></span>
+<span class="w">        </span><span class="n">transB</span><span class="p">,</span><span class="w"></span>
+<span class="w">        </span><span class="n">m</span><span class="p">,</span><span class="w"></span>
+<span class="w">        </span><span class="n">n</span><span class="p">,</span><span class="w"></span>
+<span class="w">        </span><span class="n">k</span><span class="p">,</span><span class="w"></span>
+<span class="w">        </span><span class="n">alpha</span><span class="p">,</span><span class="w"></span>
+<span class="w">        </span><span class="n">A</span><span class="o">-&gt;</span><span class="n">data</span><span class="p">(),</span><span class="w"></span>
+<span class="w">        </span><span class="n">lda</span><span class="p">,</span><span class="w"></span>
+<span class="w">        </span><span class="n">B</span><span class="o">-&gt;</span><span class="n">data</span><span class="p">(),</span><span class="w"></span>
+<span class="w">        </span><span class="n">ldb</span><span class="p">,</span><span class="w"></span>
+<span class="w">        </span><span class="n">beta</span><span class="p">,</span><span class="w"></span>
+<span class="w">        </span><span class="n">C</span><span class="o">-&gt;</span><span class="n">data</span><span class="p">(),</span><span class="w"></span>
+<span class="w">        </span><span class="n">ldc</span><span class="p">);</span><span class="w"></span>
 <span class="cp">#else</span>
-  <span class="n">C</span><span class="p">;</span> <span class="n">A</span><span class="p">;</span> <span class="n">B</span><span class="p">;</span> <span class="n">transA</span><span class="p">;</span> <span class="n">transB</span><span class="p">;</span> <span class="n">beta</span><span class="p">;</span> <span class="n">scalar</span><span class="p">;</span>
-  <span class="n">ABORT</span><span class="p">(</span><span class="s">&quot;You need to compile with MKL in order to use the CPU version&quot;</span><span class="p">);</span>
+<span class="w">  </span><span class="n">C</span><span class="p">;</span><span class="w"> </span><span class="n">A</span><span class="p">;</span><span class="w"> </span><span class="n">B</span><span class="p">;</span><span class="w"> </span><span class="n">transA</span><span class="p">;</span><span class="w"> </span><span class="n">transB</span><span class="p">;</span><span class="w"> </span><span class="n">beta</span><span class="p">;</span><span class="w"> </span><span class="n">scalar</span><span class="p">;</span><span class="w"></span>
+<span class="w">  </span><span class="n">ABORT</span><span class="p">(</span><span class="s">&quot;You need to compile with MKL in order to use the CPU version&quot;</span><span class="p">);</span><span class="w"></span>
 <span class="cp">#endif</span>
-<span class="p">}</span>
+<span class="p">}</span><span class="w"></span>
 
 <span class="c1">// dummy implementation, computeType doesn&#39;t do anything on CPU</span>
-<span class="kt">void</span> <span class="nf">Prod</span><span class="p">(</span><span class="n">marian</span><span class="o">::</span><span class="n">Tensor</span> <span class="n">C</span><span class="p">,</span>
-          <span class="k">const</span> <span class="n">marian</span><span class="o">::</span><span class="n">Tensor</span><span class="o">&amp;</span> <span class="n">A</span><span class="p">,</span>
-          <span class="k">const</span> <span class="n">marian</span><span class="o">::</span><span class="n">Tensor</span><span class="o">&amp;</span> <span class="n">B</span><span class="p">,</span>
-          <span class="kt">bool</span> <span class="n">transA</span><span class="p">,</span>
-          <span class="kt">bool</span> <span class="n">transB</span><span class="p">,</span>
-          <span class="kt">float</span> <span class="n">beta</span><span class="p">,</span>
-          <span class="kt">float</span> <span class="n">scalar</span><span class="p">,</span>
-          <span class="n">Type</span> <span class="n">computeType</span><span class="p">)</span> <span class="p">{</span>
-  <span class="n">computeType</span><span class="p">;</span> <span class="c1">// make compiler happy</span>
-  <span class="n">cpu</span><span class="o">::</span><span class="n">Prod</span><span class="p">(</span><span class="n">C</span><span class="p">,</span> <span class="n">A</span><span class="p">,</span> <span class="n">B</span><span class="p">,</span> <span class="n">transA</span><span class="p">,</span> <span class="n">transB</span><span class="p">,</span> <span class="n">beta</span><span class="p">,</span> <span class="n">scalar</span><span class="p">);</span>
-<span class="p">}</span>
+<span class="kt">void</span><span class="w"> </span><span class="nf">Prod</span><span class="p">(</span><span class="n">marian</span><span class="o">::</span><span class="n">Tensor</span><span class="w"> </span><span class="n">C</span><span class="p">,</span><span class="w"></span>
+<span class="w">          </span><span class="k">const</span><span class="w"> </span><span class="n">marian</span><span class="o">::</span><span class="n">Tensor</span><span class="o">&amp;</span><span class="w"> </span><span class="n">A</span><span class="p">,</span><span class="w"></span>
+<span class="w">          </span><span class="k">const</span><span class="w"> </span><span class="n">marian</span><span class="o">::</span><span class="n">Tensor</span><span class="o">&amp;</span><span class="w"> </span><span class="n">B</span><span class="p">,</span><span class="w"></span>
+<span class="w">          </span><span class="kt">bool</span><span class="w"> </span><span class="n">transA</span><span class="p">,</span><span class="w"></span>
+<span class="w">          </span><span class="kt">bool</span><span class="w"> </span><span class="n">transB</span><span class="p">,</span><span class="w"></span>
+<span class="w">          </span><span class="kt">float</span><span class="w"> </span><span class="n">beta</span><span class="p">,</span><span class="w"></span>
+<span class="w">          </span><span class="kt">float</span><span class="w"> </span><span class="n">scalar</span><span class="p">,</span><span class="w"></span>
+<span class="w">          </span><span class="n">Type</span><span class="w"> </span><span class="n">computeType</span><span class="p">)</span><span class="w"> </span><span class="p">{</span><span class="w"></span>
+<span class="w">  </span><span class="n">computeType</span><span class="p">;</span><span class="w"> </span><span class="c1">// make compiler happy</span>
+<span class="w">  </span><span class="n">cpu</span><span class="o">::</span><span class="n">Prod</span><span class="p">(</span><span class="n">C</span><span class="p">,</span><span class="w"> </span><span class="n">A</span><span class="p">,</span><span class="w"> </span><span class="n">B</span><span class="p">,</span><span class="w"> </span><span class="n">transA</span><span class="p">,</span><span class="w"> </span><span class="n">transB</span><span class="p">,</span><span class="w"> </span><span class="n">beta</span><span class="p">,</span><span class="w"> </span><span class="n">scalar</span><span class="p">);</span><span class="w"></span>
+<span class="p">}</span><span class="w"></span>
 
-<span class="kt">void</span> <span class="nf">ProdBatched</span><span class="p">(</span><span class="n">marian</span><span class="o">::</span><span class="n">Tensor</span> <span class="n">C</span><span class="p">,</span>
-                 <span class="n">Ptr</span><span class="o">&lt;</span><span class="n">Allocator</span><span class="o">&gt;</span> <span class="cm">/*allocator*/</span><span class="p">,</span>
-                 <span class="k">const</span> <span class="n">marian</span><span class="o">::</span><span class="n">Tensor</span> <span class="n">A</span><span class="p">,</span>
-                 <span class="k">const</span> <span class="n">marian</span><span class="o">::</span><span class="n">Tensor</span> <span class="n">B</span><span class="p">,</span>
-                 <span class="kt">bool</span> <span class="n">transA</span><span class="p">,</span>
-                 <span class="kt">bool</span> <span class="n">transB</span><span class="p">,</span>
-                 <span class="kt">float</span> <span class="n">beta</span><span class="p">,</span>
-                 <span class="kt">float</span> <span class="n">scalar</span><span class="p">)</span> <span class="p">{</span>
+<span class="kt">void</span><span class="w"> </span><span class="nf">ProdBatched</span><span class="p">(</span><span class="n">marian</span><span class="o">::</span><span class="n">Tensor</span><span class="w"> </span><span class="n">C</span><span class="p">,</span><span class="w"></span>
+<span class="w">                 </span><span class="n">Ptr</span><span class="o">&lt;</span><span class="n">Allocator</span><span class="o">&gt;</span><span class="w"> </span><span class="cm">/*allocator*/</span><span class="p">,</span><span class="w"></span>
+<span class="w">                 </span><span class="k">const</span><span class="w"> </span><span class="n">marian</span><span class="o">::</span><span class="n">Tensor</span><span class="w"> </span><span class="n">A</span><span class="p">,</span><span class="w"></span>
+<span class="w">                 </span><span class="k">const</span><span class="w"> </span><span class="n">marian</span><span class="o">::</span><span class="n">Tensor</span><span class="w"> </span><span class="n">B</span><span class="p">,</span><span class="w"></span>
+<span class="w">                 </span><span class="kt">bool</span><span class="w"> </span><span class="n">transA</span><span class="p">,</span><span class="w"></span>
+<span class="w">                 </span><span class="kt">bool</span><span class="w"> </span><span class="n">transB</span><span class="p">,</span><span class="w"></span>
+<span class="w">                 </span><span class="kt">float</span><span class="w"> </span><span class="n">beta</span><span class="p">,</span><span class="w"></span>
+<span class="w">                 </span><span class="kt">float</span><span class="w"> </span><span class="n">scalar</span><span class="p">)</span><span class="w"> </span><span class="p">{</span><span class="w"></span>
 <span class="cp">#if BLAS_FOUND</span>
-  <span class="kt">float</span> <span class="n">alpha</span> <span class="o">=</span> <span class="n">scalar</span><span class="p">;</span>
+<span class="w">  </span><span class="kt">float</span><span class="w"> </span><span class="n">alpha</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="n">scalar</span><span class="p">;</span><span class="w"></span>
 
-  <span class="kt">size_t</span> <span class="n">batchA</span> <span class="o">=</span> <span class="n">A</span><span class="o">-&gt;</span><span class="n">shape</span><span class="p">().</span><span class="n">elements</span><span class="p">()</span> <span class="o">/</span> <span class="p">(</span><span class="n">A</span><span class="o">-&gt;</span><span class="n">shape</span><span class="p">()[</span><span class="mi">-1</span><span class="p">]</span> <span class="o">*</span> <span class="n">A</span><span class="o">-&gt;</span><span class="n">shape</span><span class="p">()[</span><span class="mi">-2</span><span class="p">]);</span>
-  <span class="kt">size_t</span> <span class="n">batchB</span> <span class="o">=</span> <span class="n">B</span><span class="o">-&gt;</span><span class="n">shape</span><span class="p">().</span><span class="n">elements</span><span class="p">()</span> <span class="o">/</span> <span class="p">(</span><span class="n">B</span><span class="o">-&gt;</span><span class="n">shape</span><span class="p">()[</span><span class="mi">-1</span><span class="p">]</span> <span class="o">*</span> <span class="n">B</span><span class="o">-&gt;</span><span class="n">shape</span><span class="p">()[</span><span class="mi">-2</span><span class="p">]);</span>
+<span class="w">  </span><span class="c1">// determine meta-shape of bdot operation. Essentially treat the last two dimensions as single elements</span>
+<span class="w">  </span><span class="c1">// such that (..., m, k) x (..., k, n) -&gt; (..., m, n) where ... is a broadcastable shape as in element-wise kernels.</span>
 
-  <span class="kt">size_t</span> <span class="n">m</span> <span class="o">=</span> <span class="n">A</span><span class="o">-&gt;</span><span class="n">shape</span><span class="p">()[</span><span class="mi">-2</span><span class="p">];</span>
-  <span class="kt">size_t</span> <span class="n">k</span> <span class="o">=</span> <span class="n">A</span><span class="o">-&gt;</span><span class="n">shape</span><span class="p">()[</span><span class="mi">-1</span><span class="p">];</span>
-  <span class="k">if</span><span class="p">(</span><span class="n">transA</span><span class="p">)</span>
-    <span class="n">std</span><span class="o">::</span><span class="n">swap</span><span class="p">(</span><span class="n">m</span><span class="p">,</span> <span class="n">k</span><span class="p">);</span>
+<span class="w">  </span><span class="k">auto</span><span class="w"> </span><span class="n">aShape</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="n">A</span><span class="o">-&gt;</span><span class="n">shape</span><span class="p">();</span><span class="w"></span>
+<span class="w">  </span><span class="k">auto</span><span class="w"> </span><span class="n">bShape</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="n">B</span><span class="o">-&gt;</span><span class="n">shape</span><span class="p">();</span><span class="w"></span>
 
-  <span class="kt">size_t</span> <span class="n">l</span> <span class="o">=</span> <span class="n">B</span><span class="o">-&gt;</span><span class="n">shape</span><span class="p">()[</span><span class="mi">-2</span><span class="p">];</span>
-  <span class="kt">size_t</span> <span class="n">n</span> <span class="o">=</span> <span class="n">B</span><span class="o">-&gt;</span><span class="n">shape</span><span class="p">()[</span><span class="mi">-1</span><span class="p">];</span>
-  <span class="k">if</span><span class="p">(</span><span class="n">transB</span><span class="p">)</span>
-    <span class="n">std</span><span class="o">::</span><span class="n">swap</span><span class="p">(</span><span class="n">l</span><span class="p">,</span> <span class="n">n</span><span class="p">);</span>
+<span class="w">  </span><span class="c1">// make sure both shape have the same number of dimensions via broadcasting</span>
+<span class="w">  </span><span class="kt">size_t</span><span class="w"> </span><span class="n">maxLength</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="n">std</span><span class="o">::</span><span class="n">max</span><span class="p">(</span><span class="n">aShape</span><span class="p">.</span><span class="n">size</span><span class="p">(),</span><span class="w"> </span><span class="n">bShape</span><span class="p">.</span><span class="n">size</span><span class="p">());</span><span class="w"></span>
+<span class="w">  </span><span class="k">if</span><span class="p">(</span><span class="n">aShape</span><span class="p">.</span><span class="n">size</span><span class="p">()</span><span class="w"> </span><span class="o">!=</span><span class="w"> </span><span class="n">bShape</span><span class="p">.</span><span class="n">size</span><span class="p">())</span><span class="w"> </span><span class="p">{</span><span class="w"></span>
+<span class="w">    </span><span class="n">Shape</span><span class="w"> </span><span class="n">ones</span><span class="p">(</span><span class="n">std</span><span class="o">::</span><span class="n">vector</span><span class="o">&lt;</span><span class="kt">int</span><span class="o">&gt;</span><span class="p">(</span><span class="n">maxLength</span><span class="p">,</span><span class="w"> </span><span class="mi">1</span><span class="p">));</span><span class="w"></span>
+<span class="w">    </span><span class="n">aShape</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="n">Shape</span><span class="o">::</span><span class="n">broadcast</span><span class="p">({</span><span class="n">aShape</span><span class="p">,</span><span class="w"> </span><span class="n">ones</span><span class="p">});</span><span class="w"></span>
+<span class="w">    </span><span class="n">bShape</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="n">Shape</span><span class="o">::</span><span class="n">broadcast</span><span class="p">({</span><span class="n">bShape</span><span class="p">,</span><span class="w"> </span><span class="n">ones</span><span class="p">});</span><span class="w"></span>
+<span class="w">  </span><span class="p">}</span><span class="w"></span>
 
-  <span class="kt">size_t</span> <span class="n">lda</span> <span class="o">=</span> <span class="n">A</span><span class="o">-&gt;</span><span class="n">shape</span><span class="p">()[</span><span class="mi">-1</span><span class="p">];</span>
-  <span class="kt">size_t</span> <span class="n">ldb</span> <span class="o">=</span> <span class="n">B</span><span class="o">-&gt;</span><span class="n">shape</span><span class="p">()[</span><span class="mi">-1</span><span class="p">];</span>
-  <span class="kt">size_t</span> <span class="n">ldc</span> <span class="o">=</span> <span class="n">B</span><span class="o">-&gt;</span><span class="n">shape</span><span class="p">()[</span><span class="mi">-1</span><span class="p">];</span>
+<span class="w">  </span><span class="c1">// Create meta-shapes without last 2 dimensions</span>
+<span class="w">  </span><span class="n">Shape</span><span class="w"> </span><span class="n">aShapeMeta</span><span class="p">,</span><span class="w"> </span><span class="n">bShapeMeta</span><span class="p">,</span><span class="w"> </span><span class="n">cShapeMeta</span><span class="p">;</span><span class="w"></span>
+<span class="w">  </span><span class="n">aShapeMeta</span><span class="p">.</span><span class="n">resize</span><span class="p">(</span><span class="n">maxLength</span><span class="w"> </span><span class="o">-</span><span class="w"> </span><span class="mi">2</span><span class="p">);</span><span class="w"></span>
+<span class="w">  </span><span class="n">bShapeMeta</span><span class="p">.</span><span class="n">resize</span><span class="p">(</span><span class="n">maxLength</span><span class="w"> </span><span class="o">-</span><span class="w"> </span><span class="mi">2</span><span class="p">);</span><span class="w"></span>
+<span class="w">  </span><span class="k">for</span><span class="p">(</span><span class="kt">size_t</span><span class="w"> </span><span class="n">i</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="mi">0</span><span class="p">;</span><span class="w"> </span><span class="n">i</span><span class="w"> </span><span class="o">&lt;</span><span class="w"> </span><span class="n">maxLength</span><span class="w"> </span><span class="o">-</span><span class="w"> </span><span class="mi">2</span><span class="p">;</span><span class="w"> </span><span class="o">++</span><span class="n">i</span><span class="p">)</span><span class="w"> </span><span class="p">{</span><span class="w"></span>
+<span class="w">    </span><span class="n">aShapeMeta</span><span class="p">.</span><span class="n">set</span><span class="p">(</span><span class="n">i</span><span class="p">,</span><span class="w"> </span><span class="n">aShape</span><span class="p">[</span><span class="n">i</span><span class="p">]);</span><span class="w"></span>
+<span class="w">    </span><span class="n">bShapeMeta</span><span class="p">.</span><span class="n">set</span><span class="p">(</span><span class="n">i</span><span class="p">,</span><span class="w"> </span><span class="n">bShape</span><span class="p">[</span><span class="n">i</span><span class="p">]);</span><span class="w"></span>
+<span class="w">  </span><span class="p">}</span><span class="w"></span>
+<span class="w">  </span><span class="n">cShapeMeta</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="n">Shape</span><span class="o">::</span><span class="n">broadcast</span><span class="p">({</span><span class="n">aShapeMeta</span><span class="p">,</span><span class="w"> </span><span class="n">bShapeMeta</span><span class="p">});</span><span class="w"></span>
 
-  <span class="k">if</span><span class="p">(</span><span class="n">transB</span><span class="p">)</span>
-    <span class="n">ldc</span> <span class="o">=</span> <span class="n">B</span><span class="o">-&gt;</span><span class="n">shape</span><span class="p">()[</span><span class="mi">-2</span><span class="p">];</span>
+<span class="w">  </span><span class="kt">int</span><span class="w"> </span><span class="n">m</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="n">aShape</span><span class="p">[</span><span class="mi">-2</span><span class="p">];</span><span class="w"></span>
+<span class="w">  </span><span class="kt">int</span><span class="w"> </span><span class="n">k</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="n">aShape</span><span class="p">[</span><span class="mi">-1</span><span class="p">];</span><span class="w"></span>
+<span class="w">  </span><span class="k">if</span><span class="p">(</span><span class="n">transA</span><span class="p">)</span><span class="w"></span>
+<span class="w">    </span><span class="n">std</span><span class="o">::</span><span class="n">swap</span><span class="p">(</span><span class="n">m</span><span class="p">,</span><span class="w"> </span><span class="n">k</span><span class="p">);</span><span class="w"></span>
 
-  <span class="k">auto</span> <span class="n">strideB</span> <span class="o">=</span> <span class="n">batchB</span> <span class="o">==</span> <span class="mi">1</span> <span class="o">?</span> <span class="mi">0</span> <span class="o">:</span> <span class="n">n</span> <span class="o">*</span> <span class="n">k</span><span class="p">;</span>
-  <span class="k">auto</span> <span class="n">strideA</span> <span class="o">=</span> <span class="n">batchA</span> <span class="o">==</span> <span class="mi">1</span> <span class="o">?</span> <span class="mi">0</span> <span class="o">:</span> <span class="n">m</span> <span class="o">*</span> <span class="n">k</span><span class="p">;</span>
-  <span class="k">auto</span> <span class="n">strideC</span> <span class="o">=</span> <span class="n">n</span> <span class="o">*</span> <span class="n">m</span><span class="p">;</span>
+<span class="w">  </span><span class="kt">int</span><span class="w"> </span><span class="n">l</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="n">bShape</span><span class="p">[</span><span class="mi">-2</span><span class="p">];</span><span class="w"></span>
+<span class="w">  </span><span class="kt">int</span><span class="w"> </span><span class="n">n</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="n">bShape</span><span class="p">[</span><span class="mi">-1</span><span class="p">];</span><span class="w"></span>
+<span class="w">  </span><span class="k">if</span><span class="p">(</span><span class="n">transB</span><span class="p">)</span><span class="w"></span>
+<span class="w">    </span><span class="n">std</span><span class="o">::</span><span class="n">swap</span><span class="p">(</span><span class="n">l</span><span class="p">,</span><span class="w"> </span><span class="n">n</span><span class="p">);</span><span class="w"></span>
 
-  <span class="k">auto</span> <span class="n">batchC</span> <span class="o">=</span> <span class="n">std</span><span class="o">::</span><span class="n">max</span><span class="p">(</span><span class="n">batchA</span><span class="p">,</span> <span class="n">batchB</span><span class="p">);</span>
+<span class="w">  </span><span class="kt">int</span><span class="w"> </span><span class="n">lda</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="n">aShape</span><span class="p">[</span><span class="mi">-1</span><span class="p">];</span><span class="w"></span>
+<span class="w">  </span><span class="kt">int</span><span class="w"> </span><span class="n">ldb</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="n">bShape</span><span class="p">[</span><span class="mi">-1</span><span class="p">];</span><span class="w"></span>
+<span class="w">  </span><span class="kt">int</span><span class="w"> </span><span class="n">ldc</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="n">bShape</span><span class="p">[</span><span class="mi">-1</span><span class="p">];</span><span class="w"></span>
+
+<span class="w">  </span><span class="k">if</span><span class="p">(</span><span class="n">transB</span><span class="p">)</span><span class="w"></span>
+<span class="w">    </span><span class="n">ldc</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="n">bShape</span><span class="p">[</span><span class="mi">-2</span><span class="p">];</span><span class="w"></span>
+
+<span class="w">  </span><span class="kt">int</span><span class="w"> </span><span class="n">strideA</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="n">m</span><span class="w"> </span><span class="o">*</span><span class="w"> </span><span class="n">k</span><span class="p">;</span><span class="w"></span>
+<span class="w">  </span><span class="kt">int</span><span class="w"> </span><span class="n">strideB</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="n">n</span><span class="w"> </span><span class="o">*</span><span class="w"> </span><span class="n">k</span><span class="p">;</span><span class="w"></span>
+<span class="w">  </span><span class="kt">int</span><span class="w"> </span><span class="n">strideC</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="n">n</span><span class="w"> </span><span class="o">*</span><span class="w"> </span><span class="n">m</span><span class="p">;</span><span class="w"></span>
+
+<span class="w">  </span><span class="kt">int</span><span class="w"> </span><span class="n">batchC</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="n">cShapeMeta</span><span class="p">.</span><span class="n">elements</span><span class="p">();</span><span class="w"></span>
+
+<span class="w">  </span><span class="c1">// Convert to functional shapes to be able to map dimensions. @TODO merge this</span>
+<span class="w">  </span><span class="n">functional</span><span class="o">::</span><span class="n">Shape</span><span class="w"> </span><span class="n">aShapeMetaF</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="n">aShapeMeta</span><span class="p">;</span><span class="w"></span>
+<span class="w">  </span><span class="n">functional</span><span class="o">::</span><span class="n">Shape</span><span class="w"> </span><span class="n">bShapeMetaF</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="n">bShapeMeta</span><span class="p">;</span><span class="w"></span>
+<span class="w">  </span><span class="n">functional</span><span class="o">::</span><span class="n">Shape</span><span class="w"> </span><span class="n">cShapeMetaF</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="n">cShapeMeta</span><span class="p">;</span><span class="w"></span>
+
 <span class="cp">#if MKL_FOUND</span>
-  <span class="n">CBLAS_TRANSPOSE</span> <span class="n">transA_forarr</span> <span class="o">=</span> <span class="n">CblasNoTrans</span><span class="p">;</span>
-  <span class="n">CBLAS_TRANSPOSE</span> <span class="n">transB_forarr</span> <span class="o">=</span> <span class="n">CblasNoTrans</span><span class="p">;</span>
+<span class="w">  </span><span class="n">CBLAS_TRANSPOSE</span><span class="w"> </span><span class="n">transA_forarr</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="n">CblasNoTrans</span><span class="p">;</span><span class="w"></span>
+<span class="w">  </span><span class="n">CBLAS_TRANSPOSE</span><span class="w"> </span><span class="n">transB_forarr</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="n">CblasNoTrans</span><span class="p">;</span><span class="w"></span>
 
-  <span class="k">if</span><span class="p">(</span><span class="n">transA</span><span class="p">)</span>
-    <span class="n">transA_forarr</span> <span class="o">=</span> <span class="n">CblasTrans</span><span class="p">;</span>
+<span class="w">  </span><span class="k">if</span><span class="p">(</span><span class="n">transA</span><span class="p">)</span><span class="w"></span>
+<span class="w">    </span><span class="n">transA_forarr</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="n">CblasTrans</span><span class="p">;</span><span class="w"></span>
 
-  <span class="k">if</span><span class="p">(</span><span class="n">transB</span><span class="p">)</span>
-    <span class="n">transB_forarr</span> <span class="o">=</span> <span class="n">CblasTrans</span><span class="p">;</span>
+<span class="w">  </span><span class="k">if</span><span class="p">(</span><span class="n">transB</span><span class="p">)</span><span class="w"></span>
+<span class="w">    </span><span class="n">transB_forarr</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="n">CblasTrans</span><span class="p">;</span><span class="w"></span>
 
-  <span class="cm">/* cblas_sgemm_batch allows us to group all the small GEMMs that are done in a for loop with sgemm and compute</span>
+<span class="w">  </span><span class="cm">/* cblas_sgemm_batch allows us to group all the small GEMMs that are done in a for loop with sgemm and compute</span>
 <span class="cm">   * them in only one MKL call. For the API documentation refer to</span>
 <span class="cm">   * https://software.intel.com/content/www/us/en/develop/documentation/mkl-developer-reference-c/top/blas-and-sparse-blas-routines/blas-like-extensions/cblas-gemm-batch.html</span>
 <span class="cm">   * The API supports dependencies, where you can specify one &quot;group&quot; of GEMMs to be computed after another. (This controlled by the group_count parameter).</span>
 <span class="cm">   * In our case, the operations are not dependent on one another so we hardcode one group. The rest of the arguments (with the exception of group_size) are</span>
 <span class="cm">   * the same as the ones that cblas_sgemm expects, with the difference that we are supposed to provide an array pointer (One element per group).</span>
 <span class="cm">   * Weirdly enough, we are required to to provide all of the integer arguments as the MKL_INT datatype</span>
-<span class="cm">   */</span>
+<span class="cm">   */</span><span class="w"></span>
 
-  <span class="k">static</span> <span class="k">const</span> <span class="k">constexpr</span> <span class="kt">size_t</span> <span class="n">group_count</span> <span class="o">=</span> <span class="mi">1</span><span class="p">;</span> <span class="c1">// We have one group</span>
-  <span class="k">const</span> <span class="n">std</span><span class="o">::</span><span class="n">vector</span><span class="o">&lt;</span><span class="n">CBLAS_TRANSPOSE</span><span class="o">&gt;</span> <span class="n">transa_arr</span><span class="p">(</span><span class="n">group_count</span><span class="p">,</span> <span class="n">transA_forarr</span><span class="p">);</span>
-  <span class="k">const</span> <span class="n">std</span><span class="o">::</span><span class="n">vector</span><span class="o">&lt;</span><span class="n">CBLAS_TRANSPOSE</span><span class="o">&gt;</span> <span class="n">transb_arr</span><span class="p">(</span><span class="n">group_count</span><span class="p">,</span> <span class="n">transB_forarr</span><span class="p">);</span>
-  <span class="k">const</span> <span class="n">std</span><span class="o">::</span><span class="n">vector</span><span class="o">&lt;</span><span class="n">MKL_INT</span><span class="o">&gt;</span> <span class="n">m_arr</span><span class="p">(</span><span class="n">group_count</span><span class="p">,</span> <span class="p">(</span><span class="n">MKL_INT</span><span class="p">)</span><span class="n">m</span><span class="p">);</span>
-  <span class="k">const</span> <span class="n">std</span><span class="o">::</span><span class="n">vector</span><span class="o">&lt;</span><span class="n">MKL_INT</span><span class="o">&gt;</span> <span class="n">n_arr</span><span class="p">(</span><span class="n">group_count</span><span class="p">,</span> <span class="p">(</span><span class="n">MKL_INT</span><span class="p">)</span><span class="n">n</span><span class="p">);</span>
-  <span class="k">const</span> <span class="n">std</span><span class="o">::</span><span class="n">vector</span><span class="o">&lt;</span><span class="n">MKL_INT</span><span class="o">&gt;</span> <span class="n">k_arr</span><span class="p">(</span><span class="n">group_count</span><span class="p">,</span> <span class="p">(</span><span class="n">MKL_INT</span><span class="p">)</span><span class="n">k</span><span class="p">);</span>
-  <span class="k">const</span> <span class="n">std</span><span class="o">::</span><span class="n">vector</span><span class="o">&lt;</span><span class="kt">float</span><span class="o">&gt;</span> <span class="n">alpha_arr</span><span class="p">(</span><span class="n">group_count</span><span class="p">,</span> <span class="n">alpha</span><span class="p">);</span>
-  <span class="k">const</span> <span class="n">std</span><span class="o">::</span><span class="n">vector</span><span class="o">&lt;</span><span class="kt">float</span><span class="o">&gt;</span> <span class="n">beta_arr</span><span class="p">(</span><span class="n">group_count</span><span class="p">,</span> <span class="n">beta</span><span class="p">);</span>
-  <span class="k">const</span> <span class="n">std</span><span class="o">::</span><span class="n">vector</span><span class="o">&lt;</span><span class="n">MKL_INT</span><span class="o">&gt;</span> <span class="n">lda_arr</span><span class="p">(</span><span class="n">group_count</span><span class="p">,</span> <span class="p">(</span><span class="n">MKL_INT</span><span class="p">)</span><span class="n">lda</span><span class="p">);</span>
-  <span class="k">const</span> <span class="n">std</span><span class="o">::</span><span class="n">vector</span><span class="o">&lt;</span><span class="n">MKL_INT</span><span class="o">&gt;</span> <span class="n">ldb_arr</span><span class="p">(</span><span class="n">group_count</span><span class="p">,</span> <span class="p">(</span><span class="n">MKL_INT</span><span class="p">)</span><span class="n">ldb</span><span class="p">);</span>
-  <span class="k">const</span> <span class="n">std</span><span class="o">::</span><span class="n">vector</span><span class="o">&lt;</span><span class="n">MKL_INT</span><span class="o">&gt;</span> <span class="n">ldc_arr</span><span class="p">(</span><span class="n">group_count</span><span class="p">,</span> <span class="p">(</span><span class="n">MKL_INT</span><span class="p">)</span><span class="n">ldc</span><span class="p">);</span>
-  <span class="k">const</span> <span class="n">std</span><span class="o">::</span><span class="n">vector</span><span class="o">&lt;</span><span class="n">MKL_INT</span><span class="o">&gt;</span> <span class="n">group_size</span><span class="p">(</span><span class="n">group_count</span><span class="p">,</span> <span class="p">(</span><span class="n">MKL_INT</span><span class="p">)</span><span class="n">batchC</span><span class="p">);</span> <span class="c1">// Group size specifies number of GEMM operations per group (Which is batchC)</span>
+<span class="w">  </span><span class="k">static</span><span class="w"> </span><span class="k">const</span><span class="w"> </span><span class="k">constexpr</span><span class="w"> </span><span class="kt">size_t</span><span class="w"> </span><span class="n">group_count</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="mi">1</span><span class="p">;</span><span class="w"> </span><span class="c1">// We have one group</span>
+<span class="w">  </span><span class="k">const</span><span class="w"> </span><span class="n">std</span><span class="o">::</span><span class="n">vector</span><span class="o">&lt;</span><span class="n">CBLAS_TRANSPOSE</span><span class="o">&gt;</span><span class="w"> </span><span class="n">transa_arr</span><span class="p">(</span><span class="n">group_count</span><span class="p">,</span><span class="w"> </span><span class="n">transA_forarr</span><span class="p">);</span><span class="w"></span>
+<span class="w">  </span><span class="k">const</span><span class="w"> </span><span class="n">std</span><span class="o">::</span><span class="n">vector</span><span class="o">&lt;</span><span class="n">CBLAS_TRANSPOSE</span><span class="o">&gt;</span><span class="w"> </span><span class="n">transb_arr</span><span class="p">(</span><span class="n">group_count</span><span class="p">,</span><span class="w"> </span><span class="n">transB_forarr</span><span class="p">);</span><span class="w"></span>
+<span class="w">  </span><span class="k">const</span><span class="w"> </span><span class="n">std</span><span class="o">::</span><span class="n">vector</span><span class="o">&lt;</span><span class="n">MKL_INT</span><span class="o">&gt;</span><span class="w"> </span><span class="n">m_arr</span><span class="p">(</span><span class="n">group_count</span><span class="p">,</span><span class="w"> </span><span class="p">(</span><span class="n">MKL_INT</span><span class="p">)</span><span class="n">m</span><span class="p">);</span><span class="w"></span>
+<span class="w">  </span><span class="k">const</span><span class="w"> </span><span class="n">std</span><span class="o">::</span><span class="n">vector</span><span class="o">&lt;</span><span class="n">MKL_INT</span><span class="o">&gt;</span><span class="w"> </span><span class="n">n_arr</span><span class="p">(</span><span class="n">group_count</span><span class="p">,</span><span class="w"> </span><span class="p">(</span><span class="n">MKL_INT</span><span class="p">)</span><span class="n">n</span><span class="p">);</span><span class="w"></span>
+<span class="w">  </span><span class="k">const</span><span class="w"> </span><span class="n">std</span><span class="o">::</span><span class="n">vector</span><span class="o">&lt;</span><span class="n">MKL_INT</span><span class="o">&gt;</span><span class="w"> </span><span class="n">k_arr</span><span class="p">(</span><span class="n">group_count</span><span class="p">,</span><span class="w"> </span><span class="p">(</span><span class="n">MKL_INT</span><span class="p">)</span><span class="n">k</span><span class="p">);</span><span class="w"></span>
+<span class="w">  </span><span class="k">const</span><span class="w"> </span><span class="n">std</span><span class="o">::</span><span class="n">vector</span><span class="o">&lt;</span><span class="kt">float</span><span class="o">&gt;</span><span class="w"> </span><span class="n">alpha_arr</span><span class="p">(</span><span class="n">group_count</span><span class="p">,</span><span class="w"> </span><span class="n">alpha</span><span class="p">);</span><span class="w"></span>
+<span class="w">  </span><span class="k">const</span><span class="w"> </span><span class="n">std</span><span class="o">::</span><span class="n">vector</span><span class="o">&lt;</span><span class="kt">float</span><span class="o">&gt;</span><span class="w"> </span><span class="n">beta_arr</span><span class="p">(</span><span class="n">group_count</span><span class="p">,</span><span class="w"> </span><span class="n">beta</span><span class="p">);</span><span class="w"></span>
+<span class="w">  </span><span class="k">const</span><span class="w"> </span><span class="n">std</span><span class="o">::</span><span class="n">vector</span><span class="o">&lt;</span><span class="n">MKL_INT</span><span class="o">&gt;</span><span class="w"> </span><span class="n">lda_arr</span><span class="p">(</span><span class="n">group_count</span><span class="p">,</span><span class="w"> </span><span class="p">(</span><span class="n">MKL_INT</span><span class="p">)</span><span class="n">lda</span><span class="p">);</span><span class="w"></span>
+<span class="w">  </span><span class="k">const</span><span class="w"> </span><span class="n">std</span><span class="o">::</span><span class="n">vector</span><span class="o">&lt;</span><span class="n">MKL_INT</span><span class="o">&gt;</span><span class="w"> </span><span class="n">ldb_arr</span><span class="p">(</span><span class="n">group_count</span><span class="p">,</span><span class="w"> </span><span class="p">(</span><span class="n">MKL_INT</span><span class="p">)</span><span class="n">ldb</span><span class="p">);</span><span class="w"></span>
+<span class="w">  </span><span class="k">const</span><span class="w"> </span><span class="n">std</span><span class="o">::</span><span class="n">vector</span><span class="o">&lt;</span><span class="n">MKL_INT</span><span class="o">&gt;</span><span class="w"> </span><span class="n">ldc_arr</span><span class="p">(</span><span class="n">group_count</span><span class="p">,</span><span class="w"> </span><span class="p">(</span><span class="n">MKL_INT</span><span class="p">)</span><span class="n">ldc</span><span class="p">);</span><span class="w"></span>
+<span class="w">  </span><span class="k">const</span><span class="w"> </span><span class="n">std</span><span class="o">::</span><span class="n">vector</span><span class="o">&lt;</span><span class="n">MKL_INT</span><span class="o">&gt;</span><span class="w"> </span><span class="n">group_size</span><span class="p">(</span><span class="n">group_count</span><span class="p">,</span><span class="w"> </span><span class="p">(</span><span class="n">MKL_INT</span><span class="p">)</span><span class="n">batchC</span><span class="p">);</span><span class="w"> </span><span class="c1">// Group size specifies number of GEMM operations per group (Which is batchC)</span>
 
-  <span class="n">std</span><span class="o">::</span><span class="n">vector</span><span class="o">&lt;</span><span class="k">const</span> <span class="kt">float</span> <span class="o">*&gt;</span> <span class="n">a_array</span><span class="p">(</span><span class="n">batchC</span><span class="p">,</span> <span class="k">nullptr</span><span class="p">);</span>
-  <span class="n">std</span><span class="o">::</span><span class="n">vector</span><span class="o">&lt;</span><span class="k">const</span> <span class="kt">float</span> <span class="o">*&gt;</span> <span class="n">b_array</span><span class="p">(</span><span class="n">batchC</span><span class="p">,</span> <span class="k">nullptr</span><span class="p">);</span>
-  <span class="n">std</span><span class="o">::</span><span class="n">vector</span><span class="o">&lt;</span><span class="kt">float</span> <span class="o">*&gt;</span> <span class="n">c_array</span><span class="p">(</span><span class="n">batchC</span><span class="p">,</span> <span class="k">nullptr</span><span class="p">);</span>
+<span class="w">  </span><span class="n">std</span><span class="o">::</span><span class="n">vector</span><span class="o">&lt;</span><span class="k">const</span><span class="w"> </span><span class="kt">float</span><span class="w"> </span><span class="o">*&gt;</span><span class="w"> </span><span class="n">a_array</span><span class="p">(</span><span class="n">batchC</span><span class="p">,</span><span class="w"> </span><span class="k">nullptr</span><span class="p">);</span><span class="w"></span>
+<span class="w">  </span><span class="n">std</span><span class="o">::</span><span class="n">vector</span><span class="o">&lt;</span><span class="k">const</span><span class="w"> </span><span class="kt">float</span><span class="w"> </span><span class="o">*&gt;</span><span class="w"> </span><span class="n">b_array</span><span class="p">(</span><span class="n">batchC</span><span class="p">,</span><span class="w"> </span><span class="k">nullptr</span><span class="p">);</span><span class="w"></span>
+<span class="w">  </span><span class="n">std</span><span class="o">::</span><span class="n">vector</span><span class="o">&lt;</span><span class="kt">float</span><span class="w"> </span><span class="o">*&gt;</span><span class="w"> </span><span class="n">c_array</span><span class="p">(</span><span class="n">batchC</span><span class="p">,</span><span class="w"> </span><span class="k">nullptr</span><span class="p">);</span><span class="w"></span>
 
-  <span class="c1">// This loop initializes the array pointers in the same way as the for loop</span>
-  <span class="c1">// in the normal sgemm version a few lines below</span>
-  <span class="k">for</span><span class="p">(</span><span class="kt">size_t</span> <span class="n">i</span> <span class="o">=</span> <span class="mi">0</span><span class="p">;</span> <span class="n">i</span> <span class="o">&lt;</span> <span class="n">batchC</span><span class="p">;</span> <span class="o">++</span><span class="n">i</span><span class="p">)</span> <span class="p">{</span>
-    <span class="n">a_array</span><span class="p">[</span><span class="n">i</span><span class="p">]</span> <span class="o">=</span> <span class="n">A</span><span class="o">-&gt;</span><span class="n">data</span><span class="p">()</span> <span class="o">+</span> <span class="p">(</span><span class="n">i</span> <span class="o">%</span> <span class="n">batchA</span><span class="p">)</span> <span class="o">*</span> <span class="n">strideA</span><span class="p">;</span>
-    <span class="n">b_array</span><span class="p">[</span><span class="n">i</span><span class="p">]</span> <span class="o">=</span> <span class="n">B</span><span class="o">-&gt;</span><span class="n">data</span><span class="p">()</span> <span class="o">+</span> <span class="p">(</span><span class="n">i</span> <span class="o">%</span> <span class="n">batchB</span><span class="p">)</span> <span class="o">*</span> <span class="n">strideB</span><span class="p">;</span>
-    <span class="n">c_array</span><span class="p">[</span><span class="n">i</span><span class="p">]</span> <span class="o">=</span> <span class="n">C</span><span class="o">-&gt;</span><span class="n">data</span><span class="p">()</span> <span class="o">+</span> <span class="n">i</span> <span class="o">*</span> <span class="n">strideC</span><span class="p">;</span>
-  <span class="p">}</span>
-  <span class="n">cblas_sgemm_batch</span> <span class="p">(</span><span class="n">CblasRowMajor</span><span class="p">,</span>
-    <span class="o">&amp;</span><span class="n">transa_arr</span><span class="p">[</span><span class="mi">0</span><span class="p">],</span>
-    <span class="o">&amp;</span><span class="n">transb_arr</span><span class="p">[</span><span class="mi">0</span><span class="p">],</span>
-    <span class="o">&amp;</span><span class="n">m_arr</span><span class="p">[</span><span class="mi">0</span><span class="p">],</span>
-    <span class="o">&amp;</span><span class="n">n_arr</span><span class="p">[</span><span class="mi">0</span><span class="p">],</span>
-    <span class="o">&amp;</span><span class="n">k_arr</span><span class="p">[</span><span class="mi">0</span><span class="p">],</span>
-    <span class="o">&amp;</span><span class="n">alpha_arr</span><span class="p">[</span><span class="mi">0</span><span class="p">],</span>
-    <span class="o">&amp;</span><span class="n">a_array</span><span class="p">[</span><span class="mi">0</span><span class="p">],</span>
-    <span class="o">&amp;</span><span class="n">lda_arr</span><span class="p">[</span><span class="mi">0</span><span class="p">],</span>
-    <span class="o">&amp;</span><span class="n">b_array</span><span class="p">[</span><span class="mi">0</span><span class="p">],</span>
-    <span class="o">&amp;</span><span class="n">ldb_arr</span><span class="p">[</span><span class="mi">0</span><span class="p">],</span>
-    <span class="o">&amp;</span><span class="n">beta_arr</span><span class="p">[</span><span class="mi">0</span><span class="p">],</span>
-    <span class="o">&amp;</span><span class="n">c_array</span><span class="p">[</span><span class="mi">0</span><span class="p">],</span>
-    <span class="o">&amp;</span><span class="n">ldc_arr</span><span class="p">[</span><span class="mi">0</span><span class="p">],</span>
-    <span class="n">group_count</span><span class="p">,</span>
-    <span class="o">&amp;</span><span class="n">group_size</span><span class="p">[</span><span class="mi">0</span><span class="p">]);</span>
+<span class="w">  </span><span class="c1">// This loop initializes the array pointers in the same way as the for loop</span>
+<span class="w">  </span><span class="c1">// in the normal sgemm version a few lines below</span>
+<span class="w">  </span><span class="n">functional</span><span class="o">::</span><span class="n">Array</span><span class="o">&lt;</span><span class="kt">int</span><span class="p">,</span><span class="w"> </span><span class="n">functional</span><span class="o">::</span><span class="n">Shape</span><span class="o">::</span><span class="n">size</span><span class="p">()</span><span class="o">&gt;</span><span class="w"> </span><span class="n">dims</span><span class="p">;</span><span class="w"></span>
+<span class="w">  </span><span class="k">for</span><span class="p">(</span><span class="kt">int</span><span class="w"> </span><span class="n">i</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="mi">0</span><span class="p">;</span><span class="w"> </span><span class="n">i</span><span class="w"> </span><span class="o">&lt;</span><span class="w"> </span><span class="n">batchC</span><span class="p">;</span><span class="w"> </span><span class="o">++</span><span class="n">i</span><span class="p">)</span><span class="w"> </span><span class="p">{</span><span class="w"></span>
+<span class="w">    </span><span class="n">cShapeMetaF</span><span class="p">.</span><span class="n">dims</span><span class="p">(</span><span class="n">i</span><span class="p">,</span><span class="w"> </span><span class="n">dims</span><span class="p">);</span><span class="w"></span>
+<span class="w">    </span><span class="k">auto</span><span class="w"> </span><span class="n">aIndex</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="n">aShapeMetaF</span><span class="p">.</span><span class="n">bindex</span><span class="p">(</span><span class="n">dims</span><span class="p">);</span><span class="w"></span>
+<span class="w">    </span><span class="k">auto</span><span class="w"> </span><span class="n">bIndex</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="n">bShapeMetaF</span><span class="p">.</span><span class="n">bindex</span><span class="p">(</span><span class="n">dims</span><span class="p">);</span><span class="w"></span>
+
+<span class="w">    </span><span class="n">a_array</span><span class="p">[</span><span class="n">i</span><span class="p">]</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="n">A</span><span class="o">-&gt;</span><span class="n">data</span><span class="p">()</span><span class="w"> </span><span class="o">+</span><span class="w"> </span><span class="n">aIndex</span><span class="w"> </span><span class="o">*</span><span class="w"> </span><span class="n">strideA</span><span class="p">;</span><span class="w"></span>
+<span class="w">    </span><span class="n">b_array</span><span class="p">[</span><span class="n">i</span><span class="p">]</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="n">B</span><span class="o">-&gt;</span><span class="n">data</span><span class="p">()</span><span class="w"> </span><span class="o">+</span><span class="w"> </span><span class="n">bIndex</span><span class="w"> </span><span class="o">*</span><span class="w"> </span><span class="n">strideB</span><span class="p">;</span><span class="w"></span>
+<span class="w">    </span><span class="n">c_array</span><span class="p">[</span><span class="n">i</span><span class="p">]</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="n">C</span><span class="o">-&gt;</span><span class="n">data</span><span class="p">()</span><span class="w"> </span><span class="o">+</span><span class="w"> </span><span class="n">i</span><span class="w"> </span><span class="o">*</span><span class="w"> </span><span class="n">strideC</span><span class="p">;</span><span class="w"></span>
+<span class="w">  </span><span class="p">}</span><span class="w"></span>
+<span class="w">  </span><span class="n">cblas_sgemm_batch</span><span class="w"> </span><span class="p">(</span><span class="n">CblasRowMajor</span><span class="p">,</span><span class="w"></span>
+<span class="w">    </span><span class="o">&amp;</span><span class="n">transa_arr</span><span class="p">[</span><span class="mi">0</span><span class="p">],</span><span class="w"></span>
+<span class="w">    </span><span class="o">&amp;</span><span class="n">transb_arr</span><span class="p">[</span><span class="mi">0</span><span class="p">],</span><span class="w"></span>
+<span class="w">    </span><span class="o">&amp;</span><span class="n">m_arr</span><span class="p">[</span><span class="mi">0</span><span class="p">],</span><span class="w"></span>
+<span class="w">    </span><span class="o">&amp;</span><span class="n">n_arr</span><span class="p">[</span><span class="mi">0</span><span class="p">],</span><span class="w"></span>
+<span class="w">    </span><span class="o">&amp;</span><span class="n">k_arr</span><span class="p">[</span><span class="mi">0</span><span class="p">],</span><span class="w"></span>
+<span class="w">    </span><span class="o">&amp;</span><span class="n">alpha_arr</span><span class="p">[</span><span class="mi">0</span><span class="p">],</span><span class="w"></span>
+<span class="w">    </span><span class="o">&amp;</span><span class="n">a_array</span><span class="p">[</span><span class="mi">0</span><span class="p">],</span><span class="w"></span>
+<span class="w">    </span><span class="o">&amp;</span><span class="n">lda_arr</span><span class="p">[</span><span class="mi">0</span><span class="p">],</span><span class="w"></span>
+<span class="w">    </span><span class="o">&amp;</span><span class="n">b_array</span><span class="p">[</span><span class="mi">0</span><span class="p">],</span><span class="w"></span>
+<span class="w">    </span><span class="o">&amp;</span><span class="n">ldb_arr</span><span class="p">[</span><span class="mi">0</span><span class="p">],</span><span class="w"></span>
+<span class="w">    </span><span class="o">&amp;</span><span class="n">beta_arr</span><span class="p">[</span><span class="mi">0</span><span class="p">],</span><span class="w"></span>
+<span class="w">    </span><span class="o">&amp;</span><span class="n">c_array</span><span class="p">[</span><span class="mi">0</span><span class="p">],</span><span class="w"></span>
+<span class="w">    </span><span class="o">&amp;</span><span class="n">ldc_arr</span><span class="p">[</span><span class="mi">0</span><span class="p">],</span><span class="w"></span>
+<span class="w">    </span><span class="n">group_count</span><span class="p">,</span><span class="w"></span>
+<span class="w">    </span><span class="o">&amp;</span><span class="n">group_size</span><span class="p">[</span><span class="mi">0</span><span class="p">]);</span><span class="w"></span>
 <span class="cp">#else</span>
-  <span class="k">for</span><span class="p">(</span><span class="kt">size_t</span> <span class="n">i</span> <span class="o">=</span> <span class="mi">0</span><span class="p">;</span> <span class="n">i</span> <span class="o">&lt;</span> <span class="n">batchC</span><span class="p">;</span> <span class="o">++</span><span class="n">i</span><span class="p">)</span> <span class="p">{</span>
-    <span class="n">sgemm</span><span class="p">(</span><span class="n">transA</span><span class="p">,</span>
-          <span class="n">transB</span><span class="p">,</span>
-          <span class="p">(</span><span class="kt">int</span><span class="p">)</span><span class="n">m</span><span class="p">,</span>
-          <span class="p">(</span><span class="kt">int</span><span class="p">)</span><span class="n">n</span><span class="p">,</span>
-          <span class="p">(</span><span class="kt">int</span><span class="p">)</span><span class="n">k</span><span class="p">,</span>
-          <span class="n">alpha</span><span class="p">,</span>
-          <span class="n">A</span><span class="o">-&gt;</span><span class="n">data</span><span class="p">()</span> <span class="o">+</span> <span class="p">(</span><span class="n">i</span> <span class="o">%</span> <span class="n">batchA</span><span class="p">)</span> <span class="o">*</span> <span class="n">strideA</span><span class="p">,</span>
-          <span class="p">(</span><span class="kt">int</span><span class="p">)</span><span class="n">lda</span><span class="p">,</span>
-          <span class="n">B</span><span class="o">-&gt;</span><span class="n">data</span><span class="p">()</span> <span class="o">+</span> <span class="p">(</span><span class="n">i</span> <span class="o">%</span> <span class="n">batchB</span><span class="p">)</span> <span class="o">*</span> <span class="n">strideB</span><span class="p">,</span>
-          <span class="p">(</span><span class="kt">int</span><span class="p">)</span><span class="n">ldb</span><span class="p">,</span>
-          <span class="n">beta</span><span class="p">,</span>
-          <span class="n">C</span><span class="o">-&gt;</span><span class="n">data</span><span class="p">()</span> <span class="o">+</span> <span class="n">i</span> <span class="o">*</span> <span class="n">strideC</span><span class="p">,</span>
-          <span class="p">(</span><span class="kt">int</span><span class="p">)</span><span class="n">ldc</span><span class="p">);</span>
-  <span class="p">}</span>
+<span class="w">  </span><span class="n">functional</span><span class="o">::</span><span class="n">Array</span><span class="o">&lt;</span><span class="kt">int</span><span class="p">,</span><span class="w"> </span><span class="n">functional</span><span class="o">::</span><span class="n">Shape</span><span class="o">::</span><span class="n">size</span><span class="p">()</span><span class="o">&gt;</span><span class="w"> </span><span class="n">dims</span><span class="p">;</span><span class="w"></span>
+<span class="w">  </span><span class="k">for</span><span class="p">(</span><span class="kt">size_t</span><span class="w"> </span><span class="n">i</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="mi">0</span><span class="p">;</span><span class="w"> </span><span class="n">i</span><span class="w"> </span><span class="o">&lt;</span><span class="w"> </span><span class="n">batchC</span><span class="p">;</span><span class="w"> </span><span class="o">++</span><span class="n">i</span><span class="p">)</span><span class="w"> </span><span class="p">{</span><span class="w"></span>
+<span class="w">    </span><span class="n">cShapeMetaF</span><span class="p">.</span><span class="n">dims</span><span class="p">(</span><span class="n">i</span><span class="p">,</span><span class="w"> </span><span class="n">dims</span><span class="p">);</span><span class="w"></span>
+<span class="w">    </span><span class="k">auto</span><span class="w"> </span><span class="n">aIndex</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="n">aShapeMetaF</span><span class="p">.</span><span class="n">bindex</span><span class="p">(</span><span class="n">dims</span><span class="p">);</span><span class="w"></span>
+<span class="w">    </span><span class="k">auto</span><span class="w"> </span><span class="n">bIndex</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="n">bShapeMetaF</span><span class="p">.</span><span class="n">bindex</span><span class="p">(</span><span class="n">dims</span><span class="p">);</span><span class="w"></span>
+
+<span class="w">    </span><span class="n">sgemm</span><span class="p">(</span><span class="n">transA</span><span class="p">,</span><span class="w"></span>
+<span class="w">          </span><span class="n">transB</span><span class="p">,</span><span class="w"></span>
+<span class="w">          </span><span class="n">m</span><span class="p">,</span><span class="w"></span>
+<span class="w">          </span><span class="n">n</span><span class="p">,</span><span class="w"></span>
+<span class="w">          </span><span class="n">k</span><span class="p">,</span><span class="w"></span>
+<span class="w">          </span><span class="n">alpha</span><span class="p">,</span><span class="w"></span>
+<span class="w">          </span><span class="n">A</span><span class="o">-&gt;</span><span class="n">data</span><span class="p">()</span><span class="w"> </span><span class="o">+</span><span class="w"> </span><span class="n">aIndex</span><span class="w"> </span><span class="o">*</span><span class="w"> </span><span class="n">strideA</span><span class="p">,</span><span class="w"></span>
+<span class="w">          </span><span class="n">lda</span><span class="p">,</span><span class="w"></span>
+<span class="w">          </span><span class="n">B</span><span class="o">-&gt;</span><span class="n">data</span><span class="p">()</span><span class="w"> </span><span class="o">+</span><span class="w"> </span><span class="n">bIndex</span><span class="w"> </span><span class="o">*</span><span class="w"> </span><span class="n">strideB</span><span class="p">,</span><span class="w"></span>
+<span class="w">          </span><span class="n">ldb</span><span class="p">,</span><span class="w"></span>
+<span class="w">          </span><span class="n">beta</span><span class="p">,</span><span class="w"></span>
+<span class="w">          </span><span class="n">C</span><span class="o">-&gt;</span><span class="n">data</span><span class="p">()</span><span class="w"> </span><span class="o">+</span><span class="w"> </span><span class="n">i</span><span class="w"> </span><span class="o">*</span><span class="w"> </span><span class="n">strideC</span><span class="p">,</span><span class="w"></span>
+<span class="w">          </span><span class="n">ldc</span><span class="p">);</span><span class="w"></span>
+<span class="w">  </span><span class="p">}</span><span class="w"></span>
 <span class="cp">#endif</span>
 <span class="cp">#else</span>
-  <span class="n">C</span><span class="p">;</span> <span class="n">A</span><span class="p">;</span> <span class="n">B</span><span class="p">;</span> <span class="n">transA</span><span class="p">;</span> <span class="n">transB</span><span class="p">;</span> <span class="n">beta</span><span class="p">;</span> <span class="n">scalar</span><span class="p">;</span>
-  <span class="n">ABORT</span><span class="p">(</span><span class="s">&quot;You need to compile with MKL in order to use the CPU version&quot;</span><span class="p">);</span>
+<span class="w">  </span><span class="n">C</span><span class="p">;</span><span class="w"> </span><span class="n">A</span><span class="p">;</span><span class="w"> </span><span class="n">B</span><span class="p">;</span><span class="w"> </span><span class="n">transA</span><span class="p">;</span><span class="w"> </span><span class="n">transB</span><span class="p">;</span><span class="w"> </span><span class="n">beta</span><span class="p">;</span><span class="w"> </span><span class="n">scalar</span><span class="p">;</span><span class="w"></span>
+<span class="w">  </span><span class="n">ABORT</span><span class="p">(</span><span class="s">&quot;You need to compile with MKL in order to use the CPU version&quot;</span><span class="p">);</span><span class="w"></span>
 <span class="cp">#endif</span>
-<span class="p">}</span>
+<span class="p">}</span><span class="w"></span>
 
-<span class="kt">void</span> <span class="nf">ProdWithBias</span><span class="p">(</span><span class="n">marian</span><span class="o">::</span><span class="n">Tensor</span> <span class="n">C</span><span class="p">,</span>
-                  <span class="k">const</span> <span class="n">marian</span><span class="o">::</span><span class="n">Tensor</span><span class="o">&amp;</span> <span class="n">A</span><span class="p">,</span>
-                  <span class="k">const</span> <span class="n">marian</span><span class="o">::</span><span class="n">Tensor</span><span class="o">&amp;</span> <span class="n">B</span><span class="p">,</span>
-                  <span class="k">const</span> <span class="n">marian</span><span class="o">::</span><span class="n">Tensor</span><span class="o">&amp;</span> <span class="n">bias</span><span class="p">,</span>
-                  <span class="kt">bool</span> <span class="n">transA</span><span class="p">,</span>
-                  <span class="kt">bool</span> <span class="n">transB</span><span class="p">,</span>
-                  <span class="kt">float</span> <span class="n">beta</span><span class="p">,</span>
-                  <span class="kt">float</span> <span class="n">scalar</span><span class="p">)</span> <span class="p">{</span>
-  <span class="n">cpu</span><span class="o">::</span><span class="n">Prod</span><span class="p">(</span><span class="n">C</span><span class="p">,</span> <span class="n">A</span><span class="p">,</span> <span class="n">B</span><span class="p">,</span> <span class="n">transA</span><span class="p">,</span> <span class="n">transB</span><span class="p">,</span> <span class="n">beta</span><span class="p">,</span> <span class="n">scalar</span><span class="p">);</span>
-  <span class="n">cpu</span><span class="o">::</span><span class="n">integer</span><span class="o">::</span><span class="n">AddBias</span><span class="p">(</span><span class="n">C</span><span class="p">,</span> <span class="n">bias</span><span class="p">);</span>
-<span class="p">}</span>
 
-<span class="kt">void</span> <span class="nf">CSRProd</span><span class="p">(</span><span class="n">marian</span><span class="o">::</span><span class="n">Tensor</span> <span class="n">C</span><span class="p">,</span>
-             <span class="n">Ptr</span><span class="o">&lt;</span><span class="n">Allocator</span><span class="o">&gt;</span> <span class="cm">/*allocator*/</span><span class="p">,</span>
-             <span class="k">const</span> <span class="n">marian</span><span class="o">::</span><span class="n">Tensor</span><span class="o">&amp;</span> <span class="n">S_values</span><span class="p">,</span>
-             <span class="k">const</span> <span class="n">marian</span><span class="o">::</span><span class="n">Tensor</span><span class="o">&amp;</span> <span class="n">S_indices</span><span class="p">,</span>
-             <span class="k">const</span> <span class="n">marian</span><span class="o">::</span><span class="n">Tensor</span><span class="o">&amp;</span> <span class="n">S_offsets</span><span class="p">,</span>
-             <span class="k">const</span> <span class="n">marian</span><span class="o">::</span><span class="n">Tensor</span><span class="o">&amp;</span> <span class="n">D</span><span class="p">,</span>
-             <span class="kt">bool</span> <span class="n">transS</span><span class="p">,</span>
-             <span class="kt">bool</span> <span class="n">swapOperands</span><span class="p">,</span>
-             <span class="kt">float</span> <span class="n">beta</span><span class="p">)</span> <span class="p">{</span>
-  <span class="n">C</span><span class="p">,</span> <span class="n">S_values</span><span class="p">,</span> <span class="n">S_indices</span><span class="p">,</span> <span class="n">S_offsets</span><span class="p">,</span> <span class="n">D</span><span class="p">;</span>
+<span class="kt">void</span><span class="w"> </span><span class="nf">ProdBatchedLegacy</span><span class="p">(</span><span class="n">marian</span><span class="o">::</span><span class="n">Tensor</span><span class="w"> </span><span class="n">C</span><span class="p">,</span><span class="w"></span>
+<span class="w">                       </span><span class="n">Ptr</span><span class="o">&lt;</span><span class="n">Allocator</span><span class="o">&gt;</span><span class="w"> </span><span class="cm">/*allocator*/</span><span class="p">,</span><span class="w"></span>
+<span class="w">                       </span><span class="k">const</span><span class="w"> </span><span class="n">marian</span><span class="o">::</span><span class="n">Tensor</span><span class="w"> </span><span class="n">A</span><span class="p">,</span><span class="w"></span>
+<span class="w">                       </span><span class="k">const</span><span class="w"> </span><span class="n">marian</span><span class="o">::</span><span class="n">Tensor</span><span class="w"> </span><span class="n">B</span><span class="p">,</span><span class="w"></span>
+<span class="w">                       </span><span class="kt">bool</span><span class="w"> </span><span class="n">transA</span><span class="p">,</span><span class="w"></span>
+<span class="w">                       </span><span class="kt">bool</span><span class="w"> </span><span class="n">transB</span><span class="p">,</span><span class="w"></span>
+<span class="w">                       </span><span class="kt">float</span><span class="w"> </span><span class="n">beta</span><span class="p">,</span><span class="w"></span>
+<span class="w">                       </span><span class="kt">float</span><span class="w"> </span><span class="n">scalar</span><span class="p">)</span><span class="w"> </span><span class="p">{</span><span class="w"></span>
+<span class="cp">#if BLAS_FOUND</span>
+<span class="w">  </span><span class="kt">float</span><span class="w"> </span><span class="n">alpha</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="n">scalar</span><span class="p">;</span><span class="w"></span>
 
-  <span class="c1">// Note: The CPU implementation currently only implements what&#39;s needed for decoding.</span>
+<span class="w">  </span><span class="kt">size_t</span><span class="w"> </span><span class="n">batchA</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="n">A</span><span class="o">-&gt;</span><span class="n">shape</span><span class="p">().</span><span class="n">elements</span><span class="p">()</span><span class="w"> </span><span class="o">/</span><span class="w"> </span><span class="p">(</span><span class="n">A</span><span class="o">-&gt;</span><span class="n">shape</span><span class="p">()[</span><span class="mi">-1</span><span class="p">]</span><span class="w"> </span><span class="o">*</span><span class="w"> </span><span class="n">A</span><span class="o">-&gt;</span><span class="n">shape</span><span class="p">()[</span><span class="mi">-2</span><span class="p">]);</span><span class="w"></span>
+<span class="w">  </span><span class="kt">size_t</span><span class="w"> </span><span class="n">batchB</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="n">B</span><span class="o">-&gt;</span><span class="n">shape</span><span class="p">().</span><span class="n">elements</span><span class="p">()</span><span class="w"> </span><span class="o">/</span><span class="w"> </span><span class="p">(</span><span class="n">B</span><span class="o">-&gt;</span><span class="n">shape</span><span class="p">()[</span><span class="mi">-1</span><span class="p">]</span><span class="w"> </span><span class="o">*</span><span class="w"> </span><span class="n">B</span><span class="o">-&gt;</span><span class="n">shape</span><span class="p">()[</span><span class="mi">-2</span><span class="p">]);</span><span class="w"></span>
 
-  <span class="c1">// interpret tensor dimensions as matrix dimensions</span>
-  <span class="k">const</span> <span class="k">auto</span><span class="o">&amp;</span> <span class="n">shapeC</span> <span class="o">=</span> <span class="n">C</span><span class="o">-&gt;</span><span class="n">shape</span><span class="p">();</span>
-  <span class="k">const</span> <span class="k">auto</span><span class="o">&amp;</span> <span class="n">shapeD</span> <span class="o">=</span> <span class="n">D</span><span class="o">-&gt;</span><span class="n">shape</span><span class="p">();</span>
-  <span class="c1">// If swapOperands, S and D are swapped (C = D x S instead of C = S x D).</span>
-  <span class="c1">// In that case, in the next 6 lines, please read all dimensions as if they were reversed in order.</span>
-  <span class="k">auto</span> <span class="n">rowsC</span> <span class="o">=</span> <span class="n">shapeC</span><span class="p">[</span><span class="o">-</span><span class="p">(</span><span class="kt">int</span><span class="p">)</span><span class="n">swapOperands</span><span class="p">];</span>
-  <span class="k">auto</span> <span class="n">colsC</span> <span class="o">=</span> <span class="n">shapeC</span><span class="p">.</span><span class="n">elements</span><span class="p">()</span> <span class="o">/</span> <span class="n">rowsC</span><span class="p">;</span>
-  <span class="k">auto</span> <span class="n">rowsD</span> <span class="o">=</span> <span class="n">shapeD</span><span class="p">[</span><span class="o">-</span><span class="p">(</span><span class="kt">int</span><span class="p">)</span><span class="n">swapOperands</span><span class="p">];</span>
-  <span class="k">auto</span> <span class="n">colsD</span> <span class="o">=</span> <span class="n">shapeD</span><span class="p">.</span><span class="n">elements</span><span class="p">()</span> <span class="o">/</span> <span class="n">rowsD</span><span class="p">;</span>
-  <span class="k">auto</span> <span class="n">rowsS</span> <span class="o">=</span> <span class="n">transS</span> <span class="o">?</span> <span class="nl">rowsD</span> <span class="p">:</span> <span class="n">rowsC</span><span class="p">;</span>
-  <span class="k">auto</span> <span class="n">colsS</span> <span class="o">=</span> <span class="n">transS</span> <span class="o">?</span> <span class="nl">rowsC</span> <span class="p">:</span> <span class="n">rowsD</span><span class="p">;</span>
-  <span class="n">ABORT_IF</span><span class="p">(</span><span class="n">colsD</span> <span class="o">!=</span> <span class="n">colsC</span><span class="p">,</span> <span class="s">&quot;Inconsistent outer dimensions in CSR product&quot;</span><span class="p">);</span>
-  <span class="k">if</span> <span class="p">(</span><span class="n">swapOperands</span><span class="p">)</span> <span class="p">{</span> <span class="c1">// make rowsX actual row dimensions again, likewise colsX</span>
-    <span class="n">std</span><span class="o">::</span><span class="n">swap</span><span class="p">(</span><span class="n">rowsC</span><span class="p">,</span> <span class="n">colsC</span><span class="p">);</span>
-    <span class="n">std</span><span class="o">::</span><span class="n">swap</span><span class="p">(</span><span class="n">rowsD</span><span class="p">,</span> <span class="n">colsD</span><span class="p">);</span>
-    <span class="n">std</span><span class="o">::</span><span class="n">swap</span><span class="p">(</span><span class="n">rowsS</span><span class="p">,</span> <span class="n">colsS</span><span class="p">);</span>
-  <span class="p">}</span>
-  <span class="c1">// sparse arrays</span>
-  <span class="k">auto</span> <span class="n">numOffsets</span> <span class="o">=</span> <span class="n">S_offsets</span><span class="o">-&gt;</span><span class="n">shape</span><span class="p">().</span><span class="n">elements</span><span class="p">()</span> <span class="o">-</span> <span class="mi">1</span><span class="p">;</span> <span class="c1">// -1 since last value is length</span>
-  <span class="n">ABORT_IF</span><span class="p">(</span><span class="n">numOffsets</span> <span class="o">!=</span> <span class="n">rowsS</span><span class="p">,</span> <span class="s">&quot;Unexpected number of rows in CSR argument&quot;</span><span class="p">);</span> <span class="n">numOffsets</span><span class="p">;</span>
-  <span class="n">ABORT_IF</span><span class="p">(</span><span class="n">S_values</span><span class="o">-&gt;</span><span class="n">shape</span><span class="p">()</span> <span class="o">!=</span> <span class="n">S_indices</span><span class="o">-&gt;</span><span class="n">shape</span><span class="p">(),</span> <span class="s">&quot;CSR values and indices must have the same size&quot;</span><span class="p">);</span>
-  <span class="k">if</span> <span class="p">(</span><span class="o">!</span><span class="n">transS</span> <span class="o">&amp;&amp;</span> <span class="o">!</span><span class="n">swapOperands</span><span class="p">)</span> <span class="p">{</span>
-    <span class="c1">// C = S * D, where D = CSR matrix</span>
-    <span class="k">const</span> <span class="k">auto</span><span class="o">*</span> <span class="n">offsets</span> <span class="o">=</span> <span class="n">S_offsets</span><span class="o">-&gt;</span><span class="n">data</span><span class="o">&lt;</span><span class="n">IndexType</span><span class="o">&gt;</span><span class="p">();</span>
-    <span class="k">const</span> <span class="k">auto</span><span class="o">*</span> <span class="n">indices</span> <span class="o">=</span> <span class="n">S_indices</span><span class="o">-&gt;</span><span class="n">data</span><span class="o">&lt;</span><span class="n">IndexType</span><span class="o">&gt;</span><span class="p">();</span>
-    <span class="k">const</span> <span class="k">auto</span><span class="o">*</span> <span class="n">values</span>  <span class="o">=</span> <span class="n">S_values</span><span class="o">-&gt;</span><span class="n">data</span><span class="o">&lt;</span><span class="kt">float</span><span class="o">&gt;</span><span class="p">();</span>
-    <span class="k">const</span> <span class="k">auto</span><span class="o">*</span> <span class="n">dataD</span>   <span class="o">=</span> <span class="n">D</span><span class="o">-&gt;</span><span class="n">data</span><span class="o">&lt;</span><span class="kt">float</span><span class="o">&gt;</span><span class="p">();</span>
-    <span class="k">auto</span><span class="o">*</span>       <span class="n">dataC</span>   <span class="o">=</span> <span class="n">C</span><span class="o">-&gt;</span><span class="n">data</span><span class="o">&lt;</span><span class="kt">float</span><span class="o">&gt;</span><span class="p">();</span>
-    <span class="n">ABORT_IF</span><span class="p">(</span><span class="n">beta</span> <span class="o">!=</span> <span class="mi">0</span> <span class="o">&amp;&amp;</span> <span class="n">beta</span> <span class="o">!=</span> <span class="mi">1</span><span class="p">,</span> <span class="s">&quot;cpu::CSRProd only supports beta = 0 or 1&quot;</span><span class="p">);</span>
-    <span class="k">for</span> <span class="p">(</span><span class="kt">size_t</span> <span class="n">i</span> <span class="o">=</span> <span class="mi">0</span><span class="p">;</span> <span class="n">i</span> <span class="o">&lt;</span> <span class="n">rowsC</span><span class="p">;</span> <span class="n">i</span><span class="o">++</span><span class="p">)</span> <span class="p">{</span>
-      <span class="k">auto</span> <span class="n">add</span> <span class="o">=</span> <span class="p">(</span><span class="n">beta</span> <span class="o">==</span> <span class="mi">1</span><span class="p">);</span> <span class="c1">// first element: overwrite or add according to beta; subsequent elements: add</span>
-      <span class="k">for</span> <span class="p">(</span><span class="kt">size_t</span> <span class="n">kk</span> <span class="o">=</span> <span class="n">offsets</span><span class="p">[</span><span class="n">i</span><span class="p">];</span> <span class="n">kk</span> <span class="o">&lt;</span> <span class="n">offsets</span><span class="p">[</span><span class="n">i</span> <span class="o">+</span> <span class="mi">1</span><span class="p">];</span> <span class="n">kk</span><span class="o">++</span><span class="p">)</span> <span class="p">{</span>
-        <span class="k">auto</span> <span class="n">k</span> <span class="o">=</span> <span class="n">indices</span><span class="p">[</span><span class="n">kk</span><span class="p">];</span>    <span class="c1">// fetch the non-zero row</span>
-        <span class="k">auto</span> <span class="n">valS</span> <span class="o">=</span> <span class="n">values</span><span class="p">[</span><span class="n">kk</span><span class="p">];</span> <span class="c1">// and the value from that row</span>
-        <span class="c1">// This code is written with the hope for good vectorization, and the hope</span>
-        <span class="c1">// that adding to memory will be done efficiently by the caching system.</span>
-        <span class="k">if</span> <span class="p">(</span><span class="n">valS</span> <span class="o">==</span> <span class="mi">1</span><span class="p">)</span>
-          <span class="k">if</span> <span class="p">(</span><span class="o">!</span><span class="n">add</span><span class="p">)</span>
-            <span class="k">for</span> <span class="p">(</span><span class="kt">size_t</span> <span class="n">j</span> <span class="o">=</span> <span class="mi">0</span><span class="p">;</span> <span class="n">j</span> <span class="o">&lt;</span> <span class="n">colsC</span><span class="p">;</span> <span class="n">j</span><span class="o">++</span><span class="p">)</span>
-              <span class="n">dataC</span><span class="p">[</span><span class="n">i</span> <span class="o">*</span> <span class="n">colsC</span><span class="cm">/*==colsD*/</span> <span class="o">+</span> <span class="n">j</span><span class="p">]</span> <span class="o">=</span> <span class="n">dataD</span><span class="p">[</span><span class="n">k</span> <span class="o">*</span> <span class="n">colsC</span><span class="cm">/*==colsD*/</span> <span class="o">+</span> <span class="n">j</span><span class="p">];</span> <span class="c1">// this is a memcpy()</span>
-          <span class="k">else</span>
-            <span class="k">for</span> <span class="p">(</span><span class="kt">size_t</span> <span class="n">j</span> <span class="o">=</span> <span class="mi">0</span><span class="p">;</span> <span class="n">j</span> <span class="o">&lt;</span> <span class="n">colsC</span><span class="p">;</span> <span class="n">j</span><span class="o">++</span><span class="p">)</span>
-              <span class="n">dataC</span><span class="p">[</span><span class="n">i</span> <span class="o">*</span> <span class="n">colsC</span><span class="cm">/*==colsD*/</span> <span class="o">+</span> <span class="n">j</span><span class="p">]</span> <span class="o">+=</span> <span class="n">dataD</span><span class="p">[</span><span class="n">k</span> <span class="o">*</span> <span class="n">colsC</span><span class="cm">/*==colsD*/</span> <span class="o">+</span> <span class="n">j</span><span class="p">];</span> <span class="c1">// this is a contiguous-vector addition</span>
-        <span class="k">else</span>
-          <span class="k">if</span> <span class="p">(</span><span class="o">!</span><span class="n">add</span><span class="p">)</span>
-            <span class="k">for</span> <span class="p">(</span><span class="kt">size_t</span> <span class="n">j</span> <span class="o">=</span> <span class="mi">0</span><span class="p">;</span> <span class="n">j</span> <span class="o">&lt;</span> <span class="n">colsC</span><span class="p">;</span> <span class="n">j</span><span class="o">++</span><span class="p">)</span>
-              <span class="n">dataC</span><span class="p">[</span><span class="n">i</span> <span class="o">*</span> <span class="n">colsC</span><span class="cm">/*==colsD*/</span> <span class="o">+</span> <span class="n">j</span><span class="p">]</span> <span class="o">=</span> <span class="n">valS</span> <span class="o">*</span> <span class="n">dataD</span><span class="p">[</span><span class="n">k</span> <span class="o">*</span> <span class="n">colsC</span><span class="cm">/*==colsD*/</span> <span class="o">+</span> <span class="n">j</span><span class="p">];</span>
-          <span class="k">else</span>
-            <span class="k">for</span> <span class="p">(</span><span class="kt">size_t</span> <span class="n">j</span> <span class="o">=</span> <span class="mi">0</span><span class="p">;</span> <span class="n">j</span> <span class="o">&lt;</span> <span class="n">colsC</span><span class="p">;</span> <span class="n">j</span><span class="o">++</span><span class="p">)</span>
-              <span class="n">dataC</span><span class="p">[</span><span class="n">i</span> <span class="o">*</span> <span class="n">colsC</span><span class="cm">/*==colsD*/</span> <span class="o">+</span> <span class="n">j</span><span class="p">]</span> <span class="o">+=</span> <span class="n">valS</span> <span class="o">*</span> <span class="n">dataD</span><span class="p">[</span><span class="n">k</span> <span class="o">*</span> <span class="n">colsC</span><span class="cm">/*==colsD*/</span> <span class="o">+</span> <span class="n">j</span><span class="p">];</span> <span class="c1">// notice the +=</span>
-        <span class="n">add</span> <span class="o">=</span> <span class="nb">true</span><span class="p">;</span> <span class="c1">// next iteration will add to existing result</span>
-      <span class="p">}</span>
-    <span class="p">}</span>
-  <span class="p">}</span>
-  <span class="k">else</span>
-    <span class="n">ABORT</span><span class="p">(</span><span class="s">&quot;CSRProd for transS={}, swapOperands={} is not yet implemented for CPU&quot;</span><span class="p">,</span> <span class="n">transS</span><span class="p">,</span> <span class="n">swapOperands</span><span class="p">);</span>
-<span class="p">}</span>
+<span class="w">  </span><span class="kt">size_t</span><span class="w"> </span><span class="n">m</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="n">A</span><span class="o">-&gt;</span><span class="n">shape</span><span class="p">()[</span><span class="mi">-2</span><span class="p">];</span><span class="w"></span>
+<span class="w">  </span><span class="kt">size_t</span><span class="w"> </span><span class="n">k</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="n">A</span><span class="o">-&gt;</span><span class="n">shape</span><span class="p">()[</span><span class="mi">-1</span><span class="p">];</span><span class="w"></span>
+<span class="w">  </span><span class="k">if</span><span class="p">(</span><span class="n">transA</span><span class="p">)</span><span class="w"></span>
+<span class="w">    </span><span class="n">std</span><span class="o">::</span><span class="n">swap</span><span class="p">(</span><span class="n">m</span><span class="p">,</span><span class="w"> </span><span class="n">k</span><span class="p">);</span><span class="w"></span>
 
-<span class="p">}</span>  <span class="c1">// namespace cpu</span>
-<span class="p">}</span>  <span class="c1">// namespace marian</span>
+<span class="w">  </span><span class="kt">size_t</span><span class="w"> </span><span class="n">l</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="n">B</span><span class="o">-&gt;</span><span class="n">shape</span><span class="p">()[</span><span class="mi">-2</span><span class="p">];</span><span class="w"></span>
+<span class="w">  </span><span class="kt">size_t</span><span class="w"> </span><span class="n">n</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="n">B</span><span class="o">-&gt;</span><span class="n">shape</span><span class="p">()[</span><span class="mi">-1</span><span class="p">];</span><span class="w"></span>
+<span class="w">  </span><span class="k">if</span><span class="p">(</span><span class="n">transB</span><span class="p">)</span><span class="w"></span>
+<span class="w">    </span><span class="n">std</span><span class="o">::</span><span class="n">swap</span><span class="p">(</span><span class="n">l</span><span class="p">,</span><span class="w"> </span><span class="n">n</span><span class="p">);</span><span class="w"></span>
+
+<span class="w">  </span><span class="kt">size_t</span><span class="w"> </span><span class="n">lda</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="n">A</span><span class="o">-&gt;</span><span class="n">shape</span><span class="p">()[</span><span class="mi">-1</span><span class="p">];</span><span class="w"></span>
+<span class="w">  </span><span class="kt">size_t</span><span class="w"> </span><span class="n">ldb</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="n">B</span><span class="o">-&gt;</span><span class="n">shape</span><span class="p">()[</span><span class="mi">-1</span><span class="p">];</span><span class="w"></span>
+<span class="w">  </span><span class="kt">size_t</span><span class="w"> </span><span class="n">ldc</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="n">B</span><span class="o">-&gt;</span><span class="n">shape</span><span class="p">()[</span><span class="mi">-1</span><span class="p">];</span><span class="w"></span>
+
+<span class="w">  </span><span class="k">if</span><span class="p">(</span><span class="n">transB</span><span class="p">)</span><span class="w"></span>
+<span class="w">    </span><span class="n">ldc</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="n">B</span><span class="o">-&gt;</span><span class="n">shape</span><span class="p">()[</span><span class="mi">-2</span><span class="p">];</span><span class="w"></span>
+
+<span class="w">  </span><span class="k">auto</span><span class="w"> </span><span class="n">strideB</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="n">batchB</span><span class="w"> </span><span class="o">==</span><span class="w"> </span><span class="mi">1</span><span class="w"> </span><span class="o">?</span><span class="w"> </span><span class="mi">0</span><span class="w"> </span><span class="o">:</span><span class="w"> </span><span class="n">n</span><span class="w"> </span><span class="o">*</span><span class="w"> </span><span class="n">k</span><span class="p">;</span><span class="w"></span>
+<span class="w">  </span><span class="k">auto</span><span class="w"> </span><span class="n">strideA</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="n">batchA</span><span class="w"> </span><span class="o">==</span><span class="w"> </span><span class="mi">1</span><span class="w"> </span><span class="o">?</span><span class="w"> </span><span class="mi">0</span><span class="w"> </span><span class="o">:</span><span class="w"> </span><span class="n">m</span><span class="w"> </span><span class="o">*</span><span class="w"> </span><span class="n">k</span><span class="p">;</span><span class="w"></span>
+<span class="w">  </span><span class="k">auto</span><span class="w"> </span><span class="n">strideC</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="n">n</span><span class="w"> </span><span class="o">*</span><span class="w"> </span><span class="n">m</span><span class="p">;</span><span class="w"></span>
+
+<span class="w">  </span><span class="k">auto</span><span class="w"> </span><span class="n">batchC</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="n">std</span><span class="o">::</span><span class="n">max</span><span class="p">(</span><span class="n">batchA</span><span class="p">,</span><span class="w"> </span><span class="n">batchB</span><span class="p">);</span><span class="w"></span>
+<span class="cp">#if MKL_FOUND</span>
+<span class="w">  </span><span class="n">CBLAS_TRANSPOSE</span><span class="w"> </span><span class="n">transA_forarr</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="n">CblasNoTrans</span><span class="p">;</span><span class="w"></span>
+<span class="w">  </span><span class="n">CBLAS_TRANSPOSE</span><span class="w"> </span><span class="n">transB_forarr</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="n">CblasNoTrans</span><span class="p">;</span><span class="w"></span>
+
+<span class="w">  </span><span class="k">if</span><span class="p">(</span><span class="n">transA</span><span class="p">)</span><span class="w"></span>
+<span class="w">    </span><span class="n">transA_forarr</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="n">CblasTrans</span><span class="p">;</span><span class="w"></span>
+
+<span class="w">  </span><span class="k">if</span><span class="p">(</span><span class="n">transB</span><span class="p">)</span><span class="w"></span>
+<span class="w">    </span><span class="n">transB_forarr</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="n">CblasTrans</span><span class="p">;</span><span class="w"></span>
+
+<span class="w">  </span><span class="cm">/* cblas_sgemm_batch allows us to group all the small GEMMs that are done in a for loop with sgemm and compute</span>
+<span class="cm">   * them in only one MKL call. For the API documentation refer to</span>
+<span class="cm">   * https://software.intel.com/content/www/us/en/develop/documentation/mkl-developer-reference-c/top/blas-and-sparse-blas-routines/blas-like-extensions/cblas-gemm-batch.html</span>
+<span class="cm">   * The API supports dependencies, where you can specify one &quot;group&quot; of GEMMs to be computed after another. (This controlled by the group_count parameter).</span>
+<span class="cm">   * In our case, the operations are not dependent on one another so we hardcode one group. The rest of the arguments (with the exception of group_size) are</span>
+<span class="cm">   * the same as the ones that cblas_sgemm expects, with the difference that we are supposed to provide an array pointer (One element per group).</span>
+<span class="cm">   * Weirdly enough, we are required to to provide all of the integer arguments as the MKL_INT datatype</span>
+<span class="cm">   */</span><span class="w"></span>
+
+<span class="w">  </span><span class="k">static</span><span class="w"> </span><span class="k">const</span><span class="w"> </span><span class="k">constexpr</span><span class="w"> </span><span class="kt">size_t</span><span class="w"> </span><span class="n">group_count</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="mi">1</span><span class="p">;</span><span class="w"> </span><span class="c1">// We have one group</span>
+<span class="w">  </span><span class="k">const</span><span class="w"> </span><span class="n">std</span><span class="o">::</span><span class="n">vector</span><span class="o">&lt;</span><span class="n">CBLAS_TRANSPOSE</span><span class="o">&gt;</span><span class="w"> </span><span class="n">transa_arr</span><span class="p">(</span><span class="n">group_count</span><span class="p">,</span><span class="w"> </span><span class="n">transA_forarr</span><span class="p">);</span><span class="w"></span>
+<span class="w">  </span><span class="k">const</span><span class="w"> </span><span class="n">std</span><span class="o">::</span><span class="n">vector</span><span class="o">&lt;</span><span class="n">CBLAS_TRANSPOSE</span><span class="o">&gt;</span><span class="w"> </span><span class="n">transb_arr</span><span class="p">(</span><span class="n">group_count</span><span class="p">,</span><span class="w"> </span><span class="n">transB_forarr</span><span class="p">);</span><span class="w"></span>
+<span class="w">  </span><span class="k">const</span><span class="w"> </span><span class="n">std</span><span class="o">::</span><span class="n">vector</span><span class="o">&lt;</span><span class="n">MKL_INT</span><span class="o">&gt;</span><span class="w"> </span><span class="n">m_arr</span><span class="p">(</span><span class="n">group_count</span><span class="p">,</span><span class="w"> </span><span class="p">(</span><span class="n">MKL_INT</span><span class="p">)</span><span class="n">m</span><span class="p">);</span><span class="w"></span>
+<span class="w">  </span><span class="k">const</span><span class="w"> </span><span class="n">std</span><span class="o">::</span><span class="n">vector</span><span class="o">&lt;</span><span class="n">MKL_INT</span><span class="o">&gt;</span><span class="w"> </span><span class="n">n_arr</span><span class="p">(</span><span class="n">group_count</span><span class="p">,</span><span class="w"> </span><span class="p">(</span><span class="n">MKL_INT</span><span class="p">)</span><span class="n">n</span><span class="p">);</span><span class="w"></span>
+<span class="w">  </span><span class="k">const</span><span class="w"> </span><span class="n">std</span><span class="o">::</span><span class="n">vector</span><span class="o">&lt;</span><span class="n">MKL_INT</span><span class="o">&gt;</span><span class="w"> </span><span class="n">k_arr</span><span class="p">(</span><span class="n">group_count</span><span class="p">,</span><span class="w"> </span><span class="p">(</span><span class="n">MKL_INT</span><span class="p">)</span><span class="n">k</span><span class="p">);</span><span class="w"></span>
+<span class="w">  </span><span class="k">const</span><span class="w"> </span><span class="n">std</span><span class="o">::</span><span class="n">vector</span><span class="o">&lt;</span><span class="kt">float</span><span class="o">&gt;</span><span class="w"> </span><span class="n">alpha_arr</span><span class="p">(</span><span class="n">group_count</span><span class="p">,</span><span class="w"> </span><span class="n">alpha</span><span class="p">);</span><span class="w"></span>
+<span class="w">  </span><span class="k">const</span><span class="w"> </span><span class="n">std</span><span class="o">::</span><span class="n">vector</span><span class="o">&lt;</span><span class="kt">float</span><span class="o">&gt;</span><span class="w"> </span><span class="n">beta_arr</span><span class="p">(</span><span class="n">group_count</span><span class="p">,</span><span class="w"> </span><span class="n">beta</span><span class="p">);</span><span class="w"></span>
+<span class="w">  </span><span class="k">const</span><span class="w"> </span><span class="n">std</span><span class="o">::</span><span class="n">vector</span><span class="o">&lt;</span><span class="n">MKL_INT</span><span class="o">&gt;</span><span class="w"> </span><span class="n">lda_arr</span><span class="p">(</span><span class="n">group_count</span><span class="p">,</span><span class="w"> </span><span class="p">(</span><span class="n">MKL_INT</span><span class="p">)</span><span class="n">lda</span><span class="p">);</span><span class="w"></span>
+<span class="w">  </span><span class="k">const</span><span class="w"> </span><span class="n">std</span><span class="o">::</span><span class="n">vector</span><span class="o">&lt;</span><span class="n">MKL_INT</span><span class="o">&gt;</span><span class="w"> </span><span class="n">ldb_arr</span><span class="p">(</span><span class="n">group_count</span><span class="p">,</span><span class="w"> </span><span class="p">(</span><span class="n">MKL_INT</span><span class="p">)</span><span class="n">ldb</span><span class="p">);</span><span class="w"></span>
+<span class="w">  </span><span class="k">const</span><span class="w"> </span><span class="n">std</span><span class="o">::</span><span class="n">vector</span><span class="o">&lt;</span><span class="n">MKL_INT</span><span class="o">&gt;</span><span class="w"> </span><span class="n">ldc_arr</span><span class="p">(</span><span class="n">group_count</span><span class="p">,</span><span class="w"> </span><span class="p">(</span><span class="n">MKL_INT</span><span class="p">)</span><span class="n">ldc</span><span class="p">);</span><span class="w"></span>
+<span class="w">  </span><span class="k">const</span><span class="w"> </span><span class="n">std</span><span class="o">::</span><span class="n">vector</span><span class="o">&lt;</span><span class="n">MKL_INT</span><span class="o">&gt;</span><span class="w"> </span><span class="n">group_size</span><span class="p">(</span><span class="n">group_count</span><span class="p">,</span><span class="w"> </span><span class="p">(</span><span class="n">MKL_INT</span><span class="p">)</span><span class="n">batchC</span><span class="p">);</span><span class="w"> </span><span class="c1">// Group size specifies number of GEMM operations per group (Which is batchC)</span>
+
+<span class="w">  </span><span class="n">std</span><span class="o">::</span><span class="n">vector</span><span class="o">&lt;</span><span class="k">const</span><span class="w"> </span><span class="kt">float</span><span class="w"> </span><span class="o">*&gt;</span><span class="w"> </span><span class="n">a_array</span><span class="p">(</span><span class="n">batchC</span><span class="p">,</span><span class="w"> </span><span class="k">nullptr</span><span class="p">);</span><span class="w"></span>
+<span class="w">  </span><span class="n">std</span><span class="o">::</span><span class="n">vector</span><span class="o">&lt;</span><span class="k">const</span><span class="w"> </span><span class="kt">float</span><span class="w"> </span><span class="o">*&gt;</span><span class="w"> </span><span class="n">b_array</span><span class="p">(</span><span class="n">batchC</span><span class="p">,</span><span class="w"> </span><span class="k">nullptr</span><span class="p">);</span><span class="w"></span>
+<span class="w">  </span><span class="n">std</span><span class="o">::</span><span class="n">vector</span><span class="o">&lt;</span><span class="kt">float</span><span class="w"> </span><span class="o">*&gt;</span><span class="w"> </span><span class="n">c_array</span><span class="p">(</span><span class="n">batchC</span><span class="p">,</span><span class="w"> </span><span class="k">nullptr</span><span class="p">);</span><span class="w"></span>
+
+<span class="w">  </span><span class="c1">// This loop initializes the array pointers in the same way as the for loop</span>
+<span class="w">  </span><span class="c1">// in the normal sgemm version a few lines below</span>
+<span class="w">  </span><span class="k">for</span><span class="p">(</span><span class="kt">size_t</span><span class="w"> </span><span class="n">i</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="mi">0</span><span class="p">;</span><span class="w"> </span><span class="n">i</span><span class="w"> </span><span class="o">&lt;</span><span class="w"> </span><span class="n">batchC</span><span class="p">;</span><span class="w"> </span><span class="o">++</span><span class="n">i</span><span class="p">)</span><span class="w"> </span><span class="p">{</span><span class="w"></span>
+<span class="w">    </span><span class="n">a_array</span><span class="p">[</span><span class="n">i</span><span class="p">]</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="n">A</span><span class="o">-&gt;</span><span class="n">data</span><span class="p">()</span><span class="w"> </span><span class="o">+</span><span class="w"> </span><span class="p">(</span><span class="n">i</span><span class="w"> </span><span class="o">%</span><span class="w"> </span><span class="n">batchA</span><span class="p">)</span><span class="w"> </span><span class="o">*</span><span class="w"> </span><span class="n">strideA</span><span class="p">;</span><span class="w"></span>
+<span class="w">    </span><span class="n">b_array</span><span class="p">[</span><span class="n">i</span><span class="p">]</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="n">B</span><span class="o">-&gt;</span><span class="n">data</span><span class="p">()</span><span class="w"> </span><span class="o">+</span><span class="w"> </span><span class="p">(</span><span class="n">i</span><span class="w"> </span><span class="o">%</span><span class="w"> </span><span class="n">batchB</span><span class="p">)</span><span class="w"> </span><span class="o">*</span><span class="w"> </span><span class="n">strideB</span><span class="p">;</span><span class="w"></span>
+<span class="w">    </span><span class="n">c_array</span><span class="p">[</span><span class="n">i</span><span class="p">]</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="n">C</span><span class="o">-&gt;</span><span class="n">data</span><span class="p">()</span><span class="w"> </span><span class="o">+</span><span class="w"> </span><span class="n">i</span><span class="w"> </span><span class="o">*</span><span class="w"> </span><span class="n">strideC</span><span class="p">;</span><span class="w"></span>
+<span class="w">  </span><span class="p">}</span><span class="w"></span>
+<span class="w">  </span><span class="n">cblas_sgemm_batch</span><span class="w"> </span><span class="p">(</span><span class="n">CblasRowMajor</span><span class="p">,</span><span class="w"></span>
+<span class="w">    </span><span class="o">&amp;</span><span class="n">transa_arr</span><span class="p">[</span><span class="mi">0</span><span class="p">],</span><span class="w"></span>
+<span class="w">    </span><span class="o">&amp;</span><span class="n">transb_arr</span><span class="p">[</span><span class="mi">0</span><span class="p">],</span><span class="w"></span>
+<span class="w">    </span><span class="o">&amp;</span><span class="n">m_arr</span><span class="p">[</span><span class="mi">0</span><span class="p">],</span><span class="w"></span>
+<span class="w">    </span><span class="o">&amp;</span><span class="n">n_arr</span><span class="p">[</span><span class="mi">0</span><span class="p">],</span><span class="w"></span>
+<span class="w">    </span><span class="o">&amp;</span><span class="n">k_arr</span><span class="p">[</span><span class="mi">0</span><span class="p">],</span><span class="w"></span>
+<span class="w">    </span><span class="o">&amp;</span><span class="n">alpha_arr</span><span class="p">[</span><span class="mi">0</span><span class="p">],</span><span class="w"></span>
+<span class="w">    </span><span class="o">&amp;</span><span class="n">a_array</span><span class="p">[</span><span class="mi">0</span><span class="p">],</span><span class="w"></span>
+<span class="w">    </span><span class="o">&amp;</span><span class="n">lda_arr</span><span class="p">[</span><span class="mi">0</span><span class="p">],</span><span class="w"></span>
+<span class="w">    </span><span class="o">&amp;</span><span class="n">b_array</span><span class="p">[</span><span class="mi">0</span><span class="p">],</span><span class="w"></span>
+<span class="w">    </span><span class="o">&amp;</span><span class="n">ldb_arr</span><span class="p">[</span><span class="mi">0</span><span class="p">],</span><span class="w"></span>
+<span class="w">    </span><span class="o">&amp;</span><span class="n">beta_arr</span><span class="p">[</span><span class="mi">0</span><span class="p">],</span><span class="w"></span>
+<span class="w">    </span><span class="o">&amp;</span><span class="n">c_array</span><span class="p">[</span><span class="mi">0</span><span class="p">],</span><span class="w"></span>
+<span class="w">    </span><span class="o">&amp;</span><span class="n">ldc_arr</span><span class="p">[</span><span class="mi">0</span><span class="p">],</span><span class="w"></span>
+<span class="w">    </span><span class="n">group_count</span><span class="p">,</span><span class="w"></span>
+<span class="w">    </span><span class="o">&amp;</span><span class="n">group_size</span><span class="p">[</span><span class="mi">0</span><span class="p">]);</span><span class="w"></span>
+<span class="cp">#else</span>
+<span class="w">  </span><span class="k">for</span><span class="p">(</span><span class="kt">size_t</span><span class="w"> </span><span class="n">i</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="mi">0</span><span class="p">;</span><span class="w"> </span><span class="n">i</span><span class="w"> </span><span class="o">&lt;</span><span class="w"> </span><span class="n">batchC</span><span class="p">;</span><span class="w"> </span><span class="o">++</span><span class="n">i</span><span class="p">)</span><span class="w"> </span><span class="p">{</span><span class="w"></span>
+<span class="w">    </span><span class="n">sgemm</span><span class="p">(</span><span class="n">transA</span><span class="p">,</span><span class="w"></span>
+<span class="w">          </span><span class="n">transB</span><span class="p">,</span><span class="w"></span>
+<span class="w">          </span><span class="p">(</span><span class="kt">int</span><span class="p">)</span><span class="n">m</span><span class="p">,</span><span class="w"></span>
+<span class="w">          </span><span class="p">(</span><span class="kt">int</span><span class="p">)</span><span class="n">n</span><span class="p">,</span><span class="w"></span>
+<span class="w">          </span><span class="p">(</span><span class="kt">int</span><span class="p">)</span><span class="n">k</span><span class="p">,</span><span class="w"></span>
+<span class="w">          </span><span class="n">alpha</span><span class="p">,</span><span class="w"></span>
+<span class="w">          </span><span class="n">A</span><span class="o">-&gt;</span><span class="n">data</span><span class="p">()</span><span class="w"> </span><span class="o">+</span><span class="w"> </span><span class="p">(</span><span class="n">i</span><span class="w"> </span><span class="o">%</span><span class="w"> </span><span class="n">batchA</span><span class="p">)</span><span class="w"> </span><span class="o">*</span><span class="w"> </span><span class="n">strideA</span><span class="p">,</span><span class="w"></span>
+<span class="w">          </span><span class="p">(</span><span class="kt">int</span><span class="p">)</span><span class="n">lda</span><span class="p">,</span><span class="w"></span>
+<span class="w">          </span><span class="n">B</span><span class="o">-&gt;</span><span class="n">data</span><span class="p">()</span><span class="w"> </span><span class="o">+</span><span class="w"> </span><span class="p">(</span><span class="n">i</span><span class="w"> </span><span class="o">%</span><span class="w"> </span><span class="n">batchB</span><span class="p">)</span><span class="w"> </span><span class="o">*</span><span class="w"> </span><span class="n">strideB</span><span class="p">,</span><span class="w"></span>
+<span class="w">          </span><span class="p">(</span><span class="kt">int</span><span class="p">)</span><span class="n">ldb</span><span class="p">,</span><span class="w"></span>
+<span class="w">          </span><span class="n">beta</span><span class="p">,</span><span class="w"></span>
+<span class="w">          </span><span class="n">C</span><span class="o">-&gt;</span><span class="n">data</span><span class="p">()</span><span class="w"> </span><span class="o">+</span><span class="w"> </span><span class="n">i</span><span class="w"> </span><span class="o">*</span><span class="w"> </span><span class="n">strideC</span><span class="p">,</span><span class="w"></span>
+<span class="w">          </span><span class="p">(</span><span class="kt">int</span><span class="p">)</span><span class="n">ldc</span><span class="p">);</span><span class="w"></span>
+<span class="w">  </span><span class="p">}</span><span class="w"></span>
+<span class="cp">#endif</span>
+<span class="cp">#else</span>
+<span class="w">  </span><span class="n">C</span><span class="p">;</span><span class="w"> </span><span class="n">A</span><span class="p">;</span><span class="w"> </span><span class="n">B</span><span class="p">;</span><span class="w"> </span><span class="n">transA</span><span class="p">;</span><span class="w"> </span><span class="n">transB</span><span class="p">;</span><span class="w"> </span><span class="n">beta</span><span class="p">;</span><span class="w"> </span><span class="n">scalar</span><span class="p">;</span><span class="w"></span>
+<span class="w">  </span><span class="n">ABORT</span><span class="p">(</span><span class="s">&quot;You need to compile with MKL in order to use the CPU version&quot;</span><span class="p">);</span><span class="w"></span>
+<span class="cp">#endif</span>
+<span class="p">}</span><span class="w"></span>
+
+<span class="kt">void</span><span class="w"> </span><span class="nf">ProdWithBias</span><span class="p">(</span><span class="n">marian</span><span class="o">::</span><span class="n">Tensor</span><span class="w"> </span><span class="n">C</span><span class="p">,</span><span class="w"></span>
+<span class="w">                  </span><span class="k">const</span><span class="w"> </span><span class="n">marian</span><span class="o">::</span><span class="n">Tensor</span><span class="o">&amp;</span><span class="w"> </span><span class="n">A</span><span class="p">,</span><span class="w"></span>
+<span class="w">                  </span><span class="k">const</span><span class="w"> </span><span class="n">marian</span><span class="o">::</span><span class="n">Tensor</span><span class="o">&amp;</span><span class="w"> </span><span class="n">B</span><span class="p">,</span><span class="w"></span>
+<span class="w">                  </span><span class="k">const</span><span class="w"> </span><span class="n">marian</span><span class="o">::</span><span class="n">Tensor</span><span class="o">&amp;</span><span class="w"> </span><span class="n">bias</span><span class="p">,</span><span class="w"></span>
+<span class="w">                  </span><span class="kt">bool</span><span class="w"> </span><span class="n">transA</span><span class="p">,</span><span class="w"></span>
+<span class="w">                  </span><span class="kt">bool</span><span class="w"> </span><span class="n">transB</span><span class="p">,</span><span class="w"></span>
+<span class="w">                  </span><span class="kt">float</span><span class="w"> </span><span class="n">beta</span><span class="p">,</span><span class="w"></span>
+<span class="w">                  </span><span class="kt">float</span><span class="w"> </span><span class="n">scalar</span><span class="p">)</span><span class="w"> </span><span class="p">{</span><span class="w"></span>
+<span class="w">  </span><span class="n">cpu</span><span class="o">::</span><span class="n">Prod</span><span class="p">(</span><span class="n">C</span><span class="p">,</span><span class="w"> </span><span class="n">A</span><span class="p">,</span><span class="w"> </span><span class="n">B</span><span class="p">,</span><span class="w"> </span><span class="n">transA</span><span class="p">,</span><span class="w"> </span><span class="n">transB</span><span class="p">,</span><span class="w"> </span><span class="n">beta</span><span class="p">,</span><span class="w"> </span><span class="n">scalar</span><span class="p">);</span><span class="w"></span>
+<span class="w">  </span><span class="n">cpu</span><span class="o">::</span><span class="n">integer</span><span class="o">::</span><span class="n">AddBias</span><span class="p">(</span><span class="n">C</span><span class="p">,</span><span class="w"> </span><span class="n">bias</span><span class="p">);</span><span class="w"></span>
+<span class="p">}</span><span class="w"></span>
+
+<span class="kt">void</span><span class="w"> </span><span class="nf">Affine</span><span class="p">(</span><span class="n">marian</span><span class="o">::</span><span class="n">Tensor</span><span class="w"> </span><span class="n">C</span><span class="p">,</span><span class="w"></span>
+<span class="w">            </span><span class="n">Ptr</span><span class="o">&lt;</span><span class="n">Allocator</span><span class="o">&gt;</span><span class="w"> </span><span class="cm">/*allocator*/</span><span class="p">,</span><span class="w"></span>
+<span class="w">            </span><span class="k">const</span><span class="w"> </span><span class="n">marian</span><span class="o">::</span><span class="n">Tensor</span><span class="o">&amp;</span><span class="w"> </span><span class="n">A</span><span class="p">,</span><span class="w"></span>
+<span class="w">            </span><span class="k">const</span><span class="w"> </span><span class="n">marian</span><span class="o">::</span><span class="n">Tensor</span><span class="o">&amp;</span><span class="w"> </span><span class="n">B</span><span class="p">,</span><span class="w"></span>
+<span class="w">            </span><span class="k">const</span><span class="w"> </span><span class="n">marian</span><span class="o">::</span><span class="n">Tensor</span><span class="o">&amp;</span><span class="w"> </span><span class="n">bias</span><span class="p">,</span><span class="w"></span>
+<span class="w">            </span><span class="kt">bool</span><span class="w"> </span><span class="n">transA</span><span class="p">,</span><span class="w"></span>
+<span class="w">            </span><span class="kt">bool</span><span class="w"> </span><span class="n">transB</span><span class="p">,</span><span class="w"></span>
+<span class="w">            </span><span class="kt">float</span><span class="w"> </span><span class="n">beta</span><span class="p">,</span><span class="w"></span>
+<span class="w">            </span><span class="kt">float</span><span class="w"> </span><span class="n">scalar</span><span class="p">,</span><span class="w"></span>
+<span class="w">            </span><span class="kt">bool</span><span class="w"> </span><span class="n">reluPostprocess</span><span class="p">)</span><span class="w"> </span><span class="p">{</span><span class="w"></span>
+<span class="w">  </span><span class="k">using</span><span class="w"> </span><span class="k">namespace</span><span class="w"> </span><span class="nn">functional</span><span class="p">;</span><span class="w"></span>
+<span class="w">  </span><span class="n">ProdWithBias</span><span class="p">(</span><span class="n">C</span><span class="p">,</span><span class="w"> </span><span class="n">A</span><span class="p">,</span><span class="w"> </span><span class="n">B</span><span class="p">,</span><span class="w"> </span><span class="n">bias</span><span class="p">,</span><span class="w"> </span><span class="n">transA</span><span class="p">,</span><span class="w"> </span><span class="n">transB</span><span class="p">,</span><span class="w"> </span><span class="n">beta</span><span class="p">,</span><span class="w"> </span><span class="n">scalar</span><span class="p">);</span><span class="w"></span>
+<span class="w">  </span><span class="k">if</span><span class="p">(</span><span class="n">reluPostprocess</span><span class="p">)</span><span class="w"></span>
+<span class="w">    </span><span class="n">cpu</span><span class="o">::</span><span class="n">Element</span><span class="p">(</span><span class="n">_1</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="n">ReLU</span><span class="p">(</span><span class="n">_1</span><span class="p">),</span><span class="w"> </span><span class="n">C</span><span class="p">);</span><span class="w"> </span><span class="c1">// @TODO: also fuse with AddBias</span>
+<span class="p">}</span><span class="w"></span>
+
+
+<span class="kt">void</span><span class="w"> </span><span class="n">CSRProd</span><span class="p">(</span><span class="n">marian</span><span class="o">::</span><span class="n">Tensor</span><span class="w"> </span><span class="n">C</span><span class="p">,</span><span class="w"></span>
+<span class="w">             </span><span class="n">Ptr</span><span class="o">&lt;</span><span class="n">Allocator</span><span class="o">&gt;</span><span class="w"> </span><span class="cm">/*allocator*/</span><span class="p">,</span><span class="w"></span>
+<span class="w">             </span><span class="k">const</span><span class="w"> </span><span class="n">marian</span><span class="o">::</span><span class="n">Tensor</span><span class="o">&amp;</span><span class="w"> </span><span class="n">S_values</span><span class="p">,</span><span class="w"></span>
+<span class="w">             </span><span class="k">const</span><span class="w"> </span><span class="n">marian</span><span class="o">::</span><span class="n">Tensor</span><span class="o">&amp;</span><span class="w"> </span><span class="n">S_indices</span><span class="p">,</span><span class="w"></span>
+<span class="w">             </span><span class="k">const</span><span class="w"> </span><span class="n">marian</span><span class="o">::</span><span class="n">Tensor</span><span class="o">&amp;</span><span class="w"> </span><span class="n">S_offsets</span><span class="p">,</span><span class="w"></span>
+<span class="w">             </span><span class="k">const</span><span class="w"> </span><span class="n">marian</span><span class="o">::</span><span class="n">Tensor</span><span class="o">&amp;</span><span class="w"> </span><span class="n">D</span><span class="p">,</span><span class="w"></span>
+<span class="w">             </span><span class="kt">bool</span><span class="w"> </span><span class="n">transS</span><span class="p">,</span><span class="w"></span>
+<span class="w">             </span><span class="kt">bool</span><span class="w"> </span><span class="n">swapOperands</span><span class="p">,</span><span class="w"></span>
+<span class="w">             </span><span class="kt">float</span><span class="w"> </span><span class="n">beta</span><span class="p">)</span><span class="w"> </span><span class="p">{</span><span class="w"></span>
+<span class="w">  </span><span class="n">C</span><span class="p">,</span><span class="w"> </span><span class="n">S_values</span><span class="p">,</span><span class="w"> </span><span class="n">S_indices</span><span class="p">,</span><span class="w"> </span><span class="n">S_offsets</span><span class="p">,</span><span class="w"> </span><span class="n">D</span><span class="p">;</span><span class="w"></span>
+
+<span class="w">  </span><span class="c1">// Note: The CPU implementation currently only implements what&#39;s needed for decoding.</span>
+
+<span class="w">  </span><span class="c1">// interpret tensor dimensions as matrix dimensions</span>
+<span class="w">  </span><span class="k">const</span><span class="w"> </span><span class="k">auto</span><span class="o">&amp;</span><span class="w"> </span><span class="n">shapeC</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="n">C</span><span class="o">-&gt;</span><span class="n">shape</span><span class="p">();</span><span class="w"></span>
+<span class="w">  </span><span class="k">const</span><span class="w"> </span><span class="k">auto</span><span class="o">&amp;</span><span class="w"> </span><span class="n">shapeD</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="n">D</span><span class="o">-&gt;</span><span class="n">shape</span><span class="p">();</span><span class="w"></span>
+<span class="w">  </span><span class="c1">// If swapOperands, S and D are swapped (C = D x S instead of C = S x D).</span>
+<span class="w">  </span><span class="c1">// In that case, in the next 6 lines, please read all dimensions as if they were reversed in order.</span>
+<span class="w">  </span><span class="k">auto</span><span class="w"> </span><span class="n">rowsC</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="n">shapeC</span><span class="p">[</span><span class="o">-</span><span class="p">(</span><span class="kt">int</span><span class="p">)</span><span class="n">swapOperands</span><span class="p">];</span><span class="w"></span>
+<span class="w">  </span><span class="k">auto</span><span class="w"> </span><span class="n">colsC</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="n">shapeC</span><span class="p">.</span><span class="n">elements</span><span class="p">()</span><span class="w"> </span><span class="o">/</span><span class="w"> </span><span class="n">rowsC</span><span class="p">;</span><span class="w"></span>
+<span class="w">  </span><span class="k">auto</span><span class="w"> </span><span class="n">rowsD</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="n">shapeD</span><span class="p">[</span><span class="o">-</span><span class="p">(</span><span class="kt">int</span><span class="p">)</span><span class="n">swapOperands</span><span class="p">];</span><span class="w"></span>
+<span class="w">  </span><span class="k">auto</span><span class="w"> </span><span class="n">colsD</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="n">shapeD</span><span class="p">.</span><span class="n">elements</span><span class="p">()</span><span class="w"> </span><span class="o">/</span><span class="w"> </span><span class="n">rowsD</span><span class="p">;</span><span class="w"></span>
+<span class="w">  </span><span class="k">auto</span><span class="w"> </span><span class="n">rowsS</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="n">transS</span><span class="w"> </span><span class="o">?</span><span class="w"> </span><span class="n">rowsD</span><span class="w"> </span><span class="o">:</span><span class="w"> </span><span class="n">rowsC</span><span class="p">;</span><span class="w"></span>
+<span class="w">  </span><span class="k">auto</span><span class="w"> </span><span class="n">colsS</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="n">transS</span><span class="w"> </span><span class="o">?</span><span class="w"> </span><span class="n">rowsC</span><span class="w"> </span><span class="o">:</span><span class="w"> </span><span class="n">rowsD</span><span class="p">;</span><span class="w"></span>
+<span class="w">  </span><span class="n">ABORT_IF</span><span class="p">(</span><span class="n">colsD</span><span class="w"> </span><span class="o">!=</span><span class="w"> </span><span class="n">colsC</span><span class="p">,</span><span class="w"> </span><span class="s">&quot;Inconsistent outer dimensions in CSR product&quot;</span><span class="p">);</span><span class="w"></span>
+<span class="w">  </span><span class="k">if</span><span class="w"> </span><span class="p">(</span><span class="n">swapOperands</span><span class="p">)</span><span class="w"> </span><span class="p">{</span><span class="w"> </span><span class="c1">// make rowsX actual row dimensions again, likewise colsX</span>
+<span class="w">    </span><span class="n">std</span><span class="o">::</span><span class="n">swap</span><span class="p">(</span><span class="n">rowsC</span><span class="p">,</span><span class="w"> </span><span class="n">colsC</span><span class="p">);</span><span class="w"></span>
+<span class="w">    </span><span class="n">std</span><span class="o">::</span><span class="n">swap</span><span class="p">(</span><span class="n">rowsD</span><span class="p">,</span><span class="w"> </span><span class="n">colsD</span><span class="p">);</span><span class="w"></span>
+<span class="w">    </span><span class="n">std</span><span class="o">::</span><span class="n">swap</span><span class="p">(</span><span class="n">rowsS</span><span class="p">,</span><span class="w"> </span><span class="n">colsS</span><span class="p">);</span><span class="w"></span>
+<span class="w">  </span><span class="p">}</span><span class="w"></span>
+<span class="w">  </span><span class="c1">// sparse arrays</span>
+<span class="w">  </span><span class="k">auto</span><span class="w"> </span><span class="n">numOffsets</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="n">S_offsets</span><span class="o">-&gt;</span><span class="n">shape</span><span class="p">().</span><span class="n">elements</span><span class="p">()</span><span class="w"> </span><span class="o">-</span><span class="w"> </span><span class="mi">1</span><span class="p">;</span><span class="w"> </span><span class="c1">// -1 since last value is length</span>
+<span class="w">  </span><span class="n">ABORT_IF</span><span class="p">(</span><span class="n">numOffsets</span><span class="w"> </span><span class="o">!=</span><span class="w"> </span><span class="n">rowsS</span><span class="p">,</span><span class="w"> </span><span class="s">&quot;Unexpected number of rows in CSR argument&quot;</span><span class="p">);</span><span class="w"> </span><span class="n">numOffsets</span><span class="p">;</span><span class="w"></span>
+<span class="w">  </span><span class="n">ABORT_IF</span><span class="p">(</span><span class="n">S_values</span><span class="o">-&gt;</span><span class="n">shape</span><span class="p">()</span><span class="w"> </span><span class="o">!=</span><span class="w"> </span><span class="n">S_indices</span><span class="o">-&gt;</span><span class="n">shape</span><span class="p">(),</span><span class="w"> </span><span class="s">&quot;CSR values and indices must have the same size&quot;</span><span class="p">);</span><span class="w"></span>
+<span class="w">  </span><span class="k">if</span><span class="w"> </span><span class="p">(</span><span class="o">!</span><span class="n">transS</span><span class="w"> </span><span class="o">&amp;&amp;</span><span class="w"> </span><span class="o">!</span><span class="n">swapOperands</span><span class="p">)</span><span class="w"> </span><span class="p">{</span><span class="w"></span>
+<span class="w">    </span><span class="c1">// C = S * D, where D = CSR matrix</span>
+<span class="w">    </span><span class="k">const</span><span class="w"> </span><span class="k">auto</span><span class="o">*</span><span class="w"> </span><span class="n">offsets</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="n">S_offsets</span><span class="o">-&gt;</span><span class="n">data</span><span class="o">&lt;</span><span class="n">IndexType</span><span class="o">&gt;</span><span class="p">();</span><span class="w"></span>
+<span class="w">    </span><span class="k">const</span><span class="w"> </span><span class="k">auto</span><span class="o">*</span><span class="w"> </span><span class="n">indices</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="n">S_indices</span><span class="o">-&gt;</span><span class="n">data</span><span class="o">&lt;</span><span class="n">IndexType</span><span class="o">&gt;</span><span class="p">();</span><span class="w"></span>
+<span class="w">    </span><span class="k">const</span><span class="w"> </span><span class="k">auto</span><span class="o">*</span><span class="w"> </span><span class="n">values</span><span class="w">  </span><span class="o">=</span><span class="w"> </span><span class="n">S_values</span><span class="o">-&gt;</span><span class="n">data</span><span class="o">&lt;</span><span class="kt">float</span><span class="o">&gt;</span><span class="p">();</span><span class="w"></span>
+<span class="w">    </span><span class="k">const</span><span class="w"> </span><span class="k">auto</span><span class="o">*</span><span class="w"> </span><span class="n">dataD</span><span class="w">   </span><span class="o">=</span><span class="w"> </span><span class="n">D</span><span class="o">-&gt;</span><span class="n">data</span><span class="o">&lt;</span><span class="kt">float</span><span class="o">&gt;</span><span class="p">();</span><span class="w"></span>
+<span class="w">    </span><span class="k">auto</span><span class="o">*</span><span class="w">       </span><span class="n">dataC</span><span class="w">   </span><span class="o">=</span><span class="w"> </span><span class="n">C</span><span class="o">-&gt;</span><span class="n">data</span><span class="o">&lt;</span><span class="kt">float</span><span class="o">&gt;</span><span class="p">();</span><span class="w"></span>
+<span class="w">    </span><span class="n">ABORT_IF</span><span class="p">(</span><span class="n">beta</span><span class="w"> </span><span class="o">!=</span><span class="w"> </span><span class="mi">0</span><span class="w"> </span><span class="o">&amp;&amp;</span><span class="w"> </span><span class="n">beta</span><span class="w"> </span><span class="o">!=</span><span class="w"> </span><span class="mi">1</span><span class="p">,</span><span class="w"> </span><span class="s">&quot;cpu::CSRProd only supports beta = 0 or 1&quot;</span><span class="p">);</span><span class="w"></span>
+<span class="w">    </span><span class="k">for</span><span class="w"> </span><span class="p">(</span><span class="kt">size_t</span><span class="w"> </span><span class="n">i</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="mi">0</span><span class="p">;</span><span class="w"> </span><span class="n">i</span><span class="w"> </span><span class="o">&lt;</span><span class="w"> </span><span class="n">rowsC</span><span class="p">;</span><span class="w"> </span><span class="n">i</span><span class="o">++</span><span class="p">)</span><span class="w"> </span><span class="p">{</span><span class="w"></span>
+<span class="w">      </span><span class="k">auto</span><span class="w"> </span><span class="n">add</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="p">(</span><span class="n">beta</span><span class="w"> </span><span class="o">==</span><span class="w"> </span><span class="mi">1</span><span class="p">);</span><span class="w"> </span><span class="c1">// first element: overwrite or add according to beta; subsequent elements: add</span>
+<span class="w">      </span><span class="k">for</span><span class="w"> </span><span class="p">(</span><span class="kt">size_t</span><span class="w"> </span><span class="n">kk</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="n">offsets</span><span class="p">[</span><span class="n">i</span><span class="p">];</span><span class="w"> </span><span class="n">kk</span><span class="w"> </span><span class="o">&lt;</span><span class="w"> </span><span class="n">offsets</span><span class="p">[</span><span class="n">i</span><span class="w"> </span><span class="o">+</span><span class="w"> </span><span class="mi">1</span><span class="p">];</span><span class="w"> </span><span class="n">kk</span><span class="o">++</span><span class="p">)</span><span class="w"> </span><span class="p">{</span><span class="w"></span>
+<span class="w">        </span><span class="k">auto</span><span class="w"> </span><span class="n">k</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="n">indices</span><span class="p">[</span><span class="n">kk</span><span class="p">];</span><span class="w">    </span><span class="c1">// fetch the non-zero row</span>
+<span class="w">        </span><span class="k">auto</span><span class="w"> </span><span class="n">valS</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="n">values</span><span class="p">[</span><span class="n">kk</span><span class="p">];</span><span class="w"> </span><span class="c1">// and the value from that row</span>
+<span class="w">        </span><span class="c1">// This code is written with the hope for good vectorization, and the hope</span>
+<span class="w">        </span><span class="c1">// that adding to memory will be done efficiently by the caching system.</span>
+<span class="w">        </span><span class="k">if</span><span class="w"> </span><span class="p">(</span><span class="n">valS</span><span class="w"> </span><span class="o">==</span><span class="w"> </span><span class="mi">1</span><span class="p">)</span><span class="w"></span>
+<span class="w">          </span><span class="k">if</span><span class="w"> </span><span class="p">(</span><span class="o">!</span><span class="n">add</span><span class="p">)</span><span class="w"></span>
+<span class="w">            </span><span class="k">for</span><span class="w"> </span><span class="p">(</span><span class="kt">size_t</span><span class="w"> </span><span class="n">j</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="mi">0</span><span class="p">;</span><span class="w"> </span><span class="n">j</span><span class="w"> </span><span class="o">&lt;</span><span class="w"> </span><span class="n">colsC</span><span class="p">;</span><span class="w"> </span><span class="n">j</span><span class="o">++</span><span class="p">)</span><span class="w"></span>
+<span class="w">              </span><span class="n">dataC</span><span class="p">[</span><span class="n">i</span><span class="w"> </span><span class="o">*</span><span class="w"> </span><span class="n">colsC</span><span class="cm">/*==colsD*/</span><span class="w"> </span><span class="o">+</span><span class="w"> </span><span class="n">j</span><span class="p">]</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="n">dataD</span><span class="p">[</span><span class="n">k</span><span class="w"> </span><span class="o">*</span><span class="w"> </span><span class="n">colsC</span><span class="cm">/*==colsD*/</span><span class="w"> </span><span class="o">+</span><span class="w"> </span><span class="n">j</span><span class="p">];</span><span class="w"> </span><span class="c1">// this is a memcpy()</span>
+<span class="w">          </span><span class="k">else</span><span class="w"></span>
+<span class="w">            </span><span class="k">for</span><span class="w"> </span><span class="p">(</span><span class="kt">size_t</span><span class="w"> </span><span class="n">j</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="mi">0</span><span class="p">;</span><span class="w"> </span><span class="n">j</span><span class="w"> </span><span class="o">&lt;</span><span class="w"> </span><span class="n">colsC</span><span class="p">;</span><span class="w"> </span><span class="n">j</span><span class="o">++</span><span class="p">)</span><span class="w"></span>
+<span class="w">              </span><span class="n">dataC</span><span class="p">[</span><span class="n">i</span><span class="w"> </span><span class="o">*</span><span class="w"> </span><span class="n">colsC</span><span class="cm">/*==colsD*/</span><span class="w"> </span><span class="o">+</span><span class="w"> </span><span class="n">j</span><span class="p">]</span><span class="w"> </span><span class="o">+=</span><span class="w"> </span><span class="n">dataD</span><span class="p">[</span><span class="n">k</span><span class="w"> </span><span class="o">*</span><span class="w"> </span><span class="n">colsC</span><span class="cm">/*==colsD*/</span><span class="w"> </span><span class="o">+</span><span class="w"> </span><span class="n">j</span><span class="p">];</span><span class="w"> </span><span class="c1">// this is a contiguous-vector addition</span>
+<span class="w">        </span><span class="k">else</span><span class="w"></span>
+<span class="w">          </span><span class="k">if</span><span class="w"> </span><span class="p">(</span><span class="o">!</span><span class="n">add</span><span class="p">)</span><span class="w"></span>
+<span class="w">            </span><span class="k">for</span><span class="w"> </span><span class="p">(</span><span class="kt">size_t</span><span class="w"> </span><span class="n">j</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="mi">0</span><span class="p">;</span><span class="w"> </span><span class="n">j</span><span class="w"> </span><span class="o">&lt;</span><span class="w"> </span><span class="n">colsC</span><span class="p">;</span><span class="w"> </span><span class="n">j</span><span class="o">++</span><span class="p">)</span><span class="w"></span>
+<span class="w">              </span><span class="n">dataC</span><span class="p">[</span><span class="n">i</span><span class="w"> </span><span class="o">*</span><span class="w"> </span><span class="n">colsC</span><span class="cm">/*==colsD*/</span><span class="w"> </span><span class="o">+</span><span class="w"> </span><span class="n">j</span><span class="p">]</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="n">valS</span><span class="w"> </span><span class="o">*</span><span class="w"> </span><span class="n">dataD</span><span class="p">[</span><span class="n">k</span><span class="w"> </span><span class="o">*</span><span class="w"> </span><span class="n">colsC</span><span class="cm">/*==colsD*/</span><span class="w"> </span><span class="o">+</span><span class="w"> </span><span class="n">j</span><span class="p">];</span><span class="w"></span>
+<span class="w">          </span><span class="k">else</span><span class="w"></span>
+<span class="w">            </span><span class="k">for</span><span class="w"> </span><span class="p">(</span><span class="kt">size_t</span><span class="w"> </span><span class="n">j</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="mi">0</span><span class="p">;</span><span class="w"> </span><span class="n">j</span><span class="w"> </span><span class="o">&lt;</span><span class="w"> </span><span class="n">colsC</span><span class="p">;</span><span class="w"> </span><span class="n">j</span><span class="o">++</span><span class="p">)</span><span class="w"></span>
+<span class="w">              </span><span class="n">dataC</span><span class="p">[</span><span class="n">i</span><span class="w"> </span><span class="o">*</span><span class="w"> </span><span class="n">colsC</span><span class="cm">/*==colsD*/</span><span class="w"> </span><span class="o">+</span><span class="w"> </span><span class="n">j</span><span class="p">]</span><span class="w"> </span><span class="o">+=</span><span class="w"> </span><span class="n">valS</span><span class="w"> </span><span class="o">*</span><span class="w"> </span><span class="n">dataD</span><span class="p">[</span><span class="n">k</span><span class="w"> </span><span class="o">*</span><span class="w"> </span><span class="n">colsC</span><span class="cm">/*==colsD*/</span><span class="w"> </span><span class="o">+</span><span class="w"> </span><span class="n">j</span><span class="p">];</span><span class="w"> </span><span class="c1">// notice the +=</span>
+<span class="w">        </span><span class="n">add</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="nb">true</span><span class="p">;</span><span class="w"> </span><span class="c1">// next iteration will add to existing result</span>
+<span class="w">      </span><span class="p">}</span><span class="w"></span>
+<span class="w">    </span><span class="p">}</span><span class="w"></span>
+<span class="w">  </span><span class="p">}</span><span class="w"></span>
+<span class="w">  </span><span class="k">else</span><span class="w"></span>
+<span class="w">    </span><span class="n">ABORT</span><span class="p">(</span><span class="s">&quot;CSRProd for transS={}, swapOperands={} is not yet implemented for CPU&quot;</span><span class="p">,</span><span class="w"> </span><span class="n">transS</span><span class="p">,</span><span class="w"> </span><span class="n">swapOperands</span><span class="p">);</span><span class="w"></span>
+<span class="p">}</span><span class="w"></span>
+
+<span class="p">}</span><span class="w">  </span><span class="c1">// namespace cpu</span>
+<span class="p">}</span><span class="w">  </span><span class="c1">// namespace marian</span>
 </pre></div>
 </div>
-</div>
+</section>
 
 
            </div>
-           
           </div>
           <footer>
 
   <hr/>
 
   <div role="contentinfo">
-    <p>
-        &#169; Copyright 2021, Marian NMT Team.
-
-    </p>
+    <p>&#169; Copyright 2021, Marian NMT Team.</p>
   </div>
-    
-    
-    
-    Built with <a href="https://www.sphinx-doc.org/">Sphinx</a> using a
-    
+
+  Built with <a href="https://www.sphinx-doc.org/">Sphinx</a> using a
     <a href="https://github.com/readthedocs/sphinx_rtd_theme">theme</a>
-    
-    provided by <a href="https://readthedocs.org">Read the Docs</a>. 
+    provided by <a href="https://readthedocs.org">Read the Docs</a>.
+   
 
 </footer>
         </div>
       </div>
-
     </section>
-
   </div>
-  
-
-  <script type="text/javascript">
+  <script>
       jQuery(function () {
           SphinxRtdTheme.Navigation.enable(true);
       });
-  </script>
-
-  
-  
-    
-   
+  </script> 
 
 </body>
 </html>

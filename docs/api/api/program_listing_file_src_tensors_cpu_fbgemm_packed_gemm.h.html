@@ -1,78 +1,41 @@
-
-
 <!DOCTYPE html>
 <html class="writer-html5" lang="en" >
 <head>
-  <meta charset="utf-8" />
-  
+  <meta charset="utf-8" /><meta name="generator" content="Docutils 0.17.1: http://docutils.sourceforge.net/" />
+
   <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-  
-  <title>Program Listing for File packed_gemm.h &mdash; Marian NMT v1.10.3 2021-03-22 documentation</title>
-  
-
-  
-  <link rel="stylesheet" href="../_static/css/theme.css" type="text/css" />
-  <link rel="stylesheet" href="../_static/pygments.css" type="text/css" />
-  <link rel="stylesheet" href="../_static/css/custom.css" type="text/css" />
-  <link rel="stylesheet" href="../_static/collapsible-lists/css/tree_view.css" type="text/css" />
-
-  
-  
-
-  
-  
-
-  
+  <title>Program Listing for File packed_gemm.h &mdash; Marian NMT v1.10.27 2022-01-25 documentation</title><link rel="stylesheet" href="../_static/css/theme.css" type="text/css" />
+    <link rel="stylesheet" href="../_static/pygments.css" type="text/css" />
+      <link rel="stylesheet" href="../_static/css/custom.css" type="text/css" />
+      <link rel="stylesheet" href="../_static/collapsible-lists/css/tree_view.css" type="text/css" />
     <link rel="canonical" href="http://marian-nmt.github.io/docs/api/api/program_listing_file_src_tensors_cpu_fbgemm_packed_gemm.h.html" />
-
-  
   <!--[if lt IE 9]>
     <script src="../_static/js/html5shiv.min.js"></script>
   <![endif]-->
-  
-    
-      <script type="text/javascript" id="documentation_options" data-url_root="../" src="../_static/documentation_options.js"></script>
+  <script id="documentation_options" data-url_root="../" src="../_static/documentation_options.js"></script>
         <script src="../_static/jquery.js"></script>
         <script src="../_static/underscore.js"></script>
         <script src="../_static/doctools.js"></script>
         <script src="../_static/language_data.js"></script>
         <script src="../_static/collapsible-lists/js/CollapsibleLists.compressed.js"></script>
         <script src="../_static/collapsible-lists/js/apply-collapsible-lists.js"></script>
-    
-    <script type="text/javascript" src="../_static/js/theme.js"></script>
-
-    
+        <script async="async" src="https://cdnjs.cloudflare.com/ajax/libs/mathjax/2.7.5/latest.js?config=TeX-AMS-MML_HTMLorMML"></script>
+        <script type="text/x-mathjax-config">MathJax.Hub.Config({"tex2jax": {"inlineMath": [["\\(", "\\)"]], "displayMath": [["\\[", "\\]"]], "processRefs": false, "processEnvironments": false}})</script>
+    <script src="../_static/js/theme.js"></script>
     <link rel="index" title="Index" href="../genindex.html" />
     <link rel="search" title="Search" href="../search.html" /> 
 </head>
 
-<body class="wy-body-for-nav">
-
-   
+<body class="wy-body-for-nav"> 
   <div class="wy-grid-for-nav">
-    
     <nav data-toggle="wy-nav-shift" class="wy-nav-side">
       <div class="wy-side-scroll">
         <div class="wy-side-nav-search" >
-          
-
-          
             <a href="../index.html" class="icon icon-home"> Marian NMT
-          
-
-          
           </a>
-
-          
-            
-            
               <div class="version">
-                v1.10.3
+                v1.10.27
               </div>
-            
-          
-
-          
 <div role="search">
   <form id="rtd-search-form" class="wy-form" action="../search.html" method="get">
     <input type="text" name="q" placeholder="Search docs" />
@@ -80,101 +43,50 @@
     <input type="hidden" name="area" value="default" />
   </form>
 </div>
-
-          
-        </div>
-
-        
-        <div class="wy-menu wy-menu-vertical" data-spy="affix" role="navigation" aria-label="main navigation">
-          
-            
-            
-              
-            
-            
-              <p class="caption"><span class="caption-text">Contents:</span></p>
+        </div><div class="wy-menu wy-menu-vertical" data-spy="affix" role="navigation" aria-label="Navigation menu">
+              <p><span class="caption-text">Contents:</span></p>
 <ul>
 <li class="toctree-l1"><a class="reference internal" href="../graph.html">Expression graphs</a></li>
 <li class="toctree-l1"><a class="reference internal" href="../operators.html">Operations in the Expression Graph</a></li>
 <li class="toctree-l1"><a class="reference internal" href="library_index.html">Library API</a></li>
 <li class="toctree-l1"><a class="reference internal" href="../contributing.html">How to contribute to Marian</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../doc_guide.html">Writing documentation</a></li>
 </ul>
 
-            
-          
         </div>
-        
       </div>
     </nav>
 
-    <section data-toggle="wy-nav-shift" class="wy-nav-content-wrap">
-
-      
-      <nav class="wy-nav-top" aria-label="top navigation">
-        
+    <section data-toggle="wy-nav-shift" class="wy-nav-content-wrap"><nav class="wy-nav-top" aria-label="Mobile navigation menu" >
           <i data-toggle="wy-nav-top" class="fa fa-bars"></i>
           <a href="../index.html">Marian NMT</a>
-        
       </nav>
 
-
       <div class="wy-nav-content">
-        
         <div class="rst-content">
-        
-          
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-<div role="navigation" aria-label="breadcrumbs navigation">
-
+          <div role="navigation" aria-label="Page navigation">
   <ul class="wy-breadcrumbs">
-    
       <li><a href="../index.html" class="icon icon-home"></a> &raquo;</li>
-        
       <li>Program Listing for File packed_gemm.h</li>
-    
-    
       <li class="wy-breadcrumbs-aside">
-        
-          
             <a href="../_sources/api/program_listing_file_src_tensors_cpu_fbgemm_packed_gemm.h.rst.txt" rel="nofollow"> View page source</a>
-          
-        
       </li>
-    
   </ul>
-
-  
   <hr/>
 </div>
           <div role="main" class="document" itemscope="itemscope" itemtype="http://schema.org/Article">
            <div itemprop="articleBody">
-            
-  <div class="section" id="program-listing-for-file-packed-gemm-h">
+             
+  <section id="program-listing-for-file-packed-gemm-h">
 <span id="program-listing-file-src-tensors-cpu-fbgemm-packed-gemm-h"></span><h1>Program Listing for File packed_gemm.h<a class="headerlink" href="#program-listing-for-file-packed-gemm-h" title="Permalink to this headline">¶</a></h1>
 <p>↰ <a class="reference internal" href="file_src_tensors_cpu_fbgemm_packed_gemm.h.html#file-src-tensors-cpu-fbgemm-packed-gemm-h"><span class="std std-ref">Return to documentation for file</span></a> (<code class="docutils literal notranslate"><span class="pre">src/tensors/cpu/fbgemm/packed_gemm.h</span></code>)</p>
 <div class="highlight-cpp notranslate"><div class="highlight"><pre><span></span><span class="cp">#pragma once</span>
 
-<span class="cp">#include</span> <span class="cpf">&quot;tensors/tensor.h&quot;</span><span class="cp"></span>
+<span class="cp">#include</span><span class="w"> </span><span class="cpf">&quot;tensors/tensor.h&quot;</span><span class="cp"></span>
 
-<span class="k">namespace</span> <span class="n">marian</span> <span class="p">{</span>
-<span class="k">namespace</span> <span class="n">cpu</span> <span class="p">{</span>
-<span class="k">namespace</span> <span class="n">variant</span> <span class="p">{</span> <span class="c1">// Variants of GEMM implementations</span>
+<span class="k">namespace</span><span class="w"> </span><span class="nn">marian</span><span class="w"> </span><span class="p">{</span><span class="w"></span>
+<span class="k">namespace</span><span class="w"> </span><span class="nn">cpu</span><span class="w"> </span><span class="p">{</span><span class="w"></span>
+<span class="k">namespace</span><span class="w"> </span><span class="nn">variant</span><span class="w"> </span><span class="p">{</span><span class="w"> </span><span class="c1">// Variants of GEMM implementations</span>
 
 <span class="c1">// Returns the byte size of packed matrix in fp16. It&#39;s calculated by fbgemm&#39;s internal logic due to the paddings and different layouts.</span>
 <span class="c1">// Packing with fp16 only targets AVX2 instruction sets for now.</span>
@@ -182,9 +94,9 @@
 <span class="c1">// shape: shape of the tensor to be packed</span>
 <span class="c1">// transpose: the matrix is transposed</span>
 <span class="c1">// packsize (out): the size of the packed matrix in byte</span>
-<span class="kt">void</span> <span class="nf">fbgemmPacked16PackInfo</span><span class="p">(</span><span class="k">const</span> <span class="n">marian</span><span class="o">::</span><span class="n">Shape</span><span class="o">&amp;</span> <span class="n">shape</span><span class="p">,</span>
-                            <span class="k">const</span> <span class="kt">bool</span> <span class="n">transpose</span><span class="p">,</span>
-                            <span class="cm">/*out*/</span><span class="kt">uint64_t</span><span class="o">&amp;</span> <span class="n">packsize</span><span class="p">);</span>
+<span class="kt">void</span><span class="w"> </span><span class="nf">fbgemmPacked16PackInfo</span><span class="p">(</span><span class="k">const</span><span class="w"> </span><span class="n">marian</span><span class="o">::</span><span class="n">Shape</span><span class="o">&amp;</span><span class="w"> </span><span class="n">shape</span><span class="p">,</span><span class="w"></span>
+<span class="w">                            </span><span class="k">const</span><span class="w"> </span><span class="kt">bool</span><span class="w"> </span><span class="n">transpose</span><span class="p">,</span><span class="w"></span>
+<span class="w">                            </span><span class="cm">/*out*/</span><span class="kt">uint64_t</span><span class="o">&amp;</span><span class="w"> </span><span class="n">packsize</span><span class="p">);</span><span class="w"></span>
 
 <span class="c1">// Returns the byte size of packed matrix in fp16. It&#39;s calculated by fbgemm&#39;s internal logic due to the paddings and different layouts.</span>
 <span class="c1">// This function returns some other extra variables</span>
@@ -201,17 +113,17 @@
 <span class="c1">// nbrow (out): row index in a block</span>
 <span class="c1">// nbcol (out): column index in a block</span>
 <span class="c1">// packsize (out): the size of the packed matrix in byte</span>
-<span class="kt">void</span> <span class="nf">fbgemmPacked16PackInfo</span><span class="p">(</span><span class="k">const</span> <span class="n">marian</span><span class="o">::</span><span class="n">Shape</span><span class="o">&amp;</span> <span class="n">shape</span><span class="p">,</span>
-                          <span class="k">const</span> <span class="kt">bool</span> <span class="n">transpose</span><span class="p">,</span>
-                          <span class="cm">/*out*/</span><span class="kt">int</span><span class="o">&amp;</span> <span class="n">nrow</span><span class="p">,</span>
-                          <span class="cm">/*out*/</span><span class="kt">int</span><span class="o">&amp;</span> <span class="n">ncol</span><span class="p">,</span>
-                          <span class="cm">/*out*/</span><span class="kt">int</span><span class="o">&amp;</span> <span class="n">kernel_ncol_blocks</span><span class="p">,</span>
-                          <span class="cm">/*out*/</span><span class="kt">int</span><span class="o">&amp;</span> <span class="n">brow</span><span class="p">,</span>
-                          <span class="cm">/*out*/</span><span class="kt">int</span><span class="o">&amp;</span> <span class="n">bcol</span><span class="p">,</span>
-                          <span class="cm">/*out*/</span><span class="kt">int</span><span class="o">&amp;</span> <span class="n">last_brow</span><span class="p">,</span>
-                          <span class="cm">/*out*/</span><span class="kt">int</span><span class="o">&amp;</span> <span class="n">nbrow</span><span class="p">,</span>
-                          <span class="cm">/*out*/</span><span class="kt">int</span><span class="o">&amp;</span> <span class="n">nbcol</span><span class="p">,</span>
-                          <span class="cm">/*out*/</span><span class="kt">uint64_t</span><span class="o">&amp;</span> <span class="n">packsize</span><span class="p">);</span> <span class="c1">// @TODO: change to size_t where appropriate</span>
+<span class="kt">void</span><span class="w"> </span><span class="nf">fbgemmPacked16PackInfo</span><span class="p">(</span><span class="k">const</span><span class="w"> </span><span class="n">marian</span><span class="o">::</span><span class="n">Shape</span><span class="o">&amp;</span><span class="w"> </span><span class="n">shape</span><span class="p">,</span><span class="w"></span>
+<span class="w">                          </span><span class="k">const</span><span class="w"> </span><span class="kt">bool</span><span class="w"> </span><span class="n">transpose</span><span class="p">,</span><span class="w"></span>
+<span class="w">                          </span><span class="cm">/*out*/</span><span class="kt">int</span><span class="o">&amp;</span><span class="w"> </span><span class="n">nrow</span><span class="p">,</span><span class="w"></span>
+<span class="w">                          </span><span class="cm">/*out*/</span><span class="kt">int</span><span class="o">&amp;</span><span class="w"> </span><span class="n">ncol</span><span class="p">,</span><span class="w"></span>
+<span class="w">                          </span><span class="cm">/*out*/</span><span class="kt">int</span><span class="o">&amp;</span><span class="w"> </span><span class="n">kernel_ncol_blocks</span><span class="p">,</span><span class="w"></span>
+<span class="w">                          </span><span class="cm">/*out*/</span><span class="kt">int</span><span class="o">&amp;</span><span class="w"> </span><span class="n">brow</span><span class="p">,</span><span class="w"></span>
+<span class="w">                          </span><span class="cm">/*out*/</span><span class="kt">int</span><span class="o">&amp;</span><span class="w"> </span><span class="n">bcol</span><span class="p">,</span><span class="w"></span>
+<span class="w">                          </span><span class="cm">/*out*/</span><span class="kt">int</span><span class="o">&amp;</span><span class="w"> </span><span class="n">last_brow</span><span class="p">,</span><span class="w"></span>
+<span class="w">                          </span><span class="cm">/*out*/</span><span class="kt">int</span><span class="o">&amp;</span><span class="w"> </span><span class="n">nbrow</span><span class="p">,</span><span class="w"></span>
+<span class="w">                          </span><span class="cm">/*out*/</span><span class="kt">int</span><span class="o">&amp;</span><span class="w"> </span><span class="n">nbcol</span><span class="p">,</span><span class="w"></span>
+<span class="w">                          </span><span class="cm">/*out*/</span><span class="kt">uint64_t</span><span class="o">&amp;</span><span class="w"> </span><span class="n">packsize</span><span class="p">);</span><span class="w"> </span><span class="c1">// @TODO: change to size_t where appropriate</span>
 
 <span class="c1">// Returns the byte size of packed matrix in int8. It&#39;s calculated by fbgemm&#39;s internal logic due to the paddings and different layouts.</span>
 <span class="c1">// See &#39;3rd_party/fbgemm/src/PackBMatrix.cc&#39;.</span>
@@ -221,12 +133,12 @@
 <span class="c1">// nrow (out): the number of rows</span>
 <span class="c1">// ncol (out): the number of columns</span>
 <span class="c1">// packsize (out): the size of the packed matrix in byte</span>
-<span class="kt">void</span> <span class="nf">fbgemmPacked8PackInfo</span><span class="p">(</span><span class="k">const</span> <span class="n">marian</span><span class="o">::</span><span class="n">Shape</span><span class="o">&amp;</span> <span class="n">shape</span><span class="p">,</span>
-                           <span class="k">const</span> <span class="n">marian</span><span class="o">::</span><span class="n">Type</span> <span class="n">packType</span><span class="p">,</span>
-                           <span class="k">const</span> <span class="kt">bool</span> <span class="n">transpose</span><span class="p">,</span>
-                           <span class="cm">/*out*/</span><span class="kt">int</span><span class="o">&amp;</span> <span class="n">nrow</span><span class="p">,</span>
-                           <span class="cm">/*out*/</span><span class="kt">int</span><span class="o">&amp;</span> <span class="n">ncol</span><span class="p">,</span>
-                           <span class="cm">/*out*/</span><span class="kt">uint64_t</span><span class="o">&amp;</span> <span class="n">packsize</span><span class="p">);</span>
+<span class="kt">void</span><span class="w"> </span><span class="nf">fbgemmPacked8PackInfo</span><span class="p">(</span><span class="k">const</span><span class="w"> </span><span class="n">marian</span><span class="o">::</span><span class="n">Shape</span><span class="o">&amp;</span><span class="w"> </span><span class="n">shape</span><span class="p">,</span><span class="w"></span>
+<span class="w">                           </span><span class="k">const</span><span class="w"> </span><span class="n">marian</span><span class="o">::</span><span class="n">Type</span><span class="w"> </span><span class="n">packType</span><span class="p">,</span><span class="w"></span>
+<span class="w">                           </span><span class="k">const</span><span class="w"> </span><span class="kt">bool</span><span class="w"> </span><span class="n">transpose</span><span class="p">,</span><span class="w"></span>
+<span class="w">                           </span><span class="cm">/*out*/</span><span class="kt">int</span><span class="o">&amp;</span><span class="w"> </span><span class="n">nrow</span><span class="p">,</span><span class="w"></span>
+<span class="w">                           </span><span class="cm">/*out*/</span><span class="kt">int</span><span class="o">&amp;</span><span class="w"> </span><span class="n">ncol</span><span class="p">,</span><span class="w"></span>
+<span class="w">                           </span><span class="cm">/*out*/</span><span class="kt">uint64_t</span><span class="o">&amp;</span><span class="w"> </span><span class="n">packsize</span><span class="p">);</span><span class="w"></span>
 
 <span class="c1">// Pack a matrix (fp16) into cache utilization efficient way (block format) into fp16</span>
 <span class="c1">// out: output tensor - packed format</span>
@@ -242,18 +154,18 @@
 <span class="c1">// nbcol: column index in a block</span>
 <span class="c1">// packsize: the size of the packed matrix</span>
 <span class="c1">//          (the number of fp16 elements + padding (1024) + extra temporary memory (256))</span>
-<span class="kt">void</span> <span class="nf">fbgemmPacked16Pack</span><span class="p">(</span><span class="n">marian</span><span class="o">::</span><span class="n">Tensor</span> <span class="n">out</span><span class="p">,</span>
-                        <span class="k">const</span> <span class="kt">float</span><span class="o">*</span> <span class="n">inData</span><span class="p">,</span>
-                        <span class="k">const</span> <span class="kt">bool</span> <span class="n">transpose</span><span class="p">,</span>
-                        <span class="k">const</span> <span class="kt">int</span> <span class="n">nrow</span><span class="p">,</span>
-                        <span class="k">const</span> <span class="kt">int</span> <span class="n">ncol</span><span class="p">,</span>
-                        <span class="k">const</span> <span class="kt">int</span> <span class="n">kernel_ncol_blocks</span><span class="p">,</span>
-                        <span class="k">const</span> <span class="kt">int</span> <span class="n">brow</span><span class="p">,</span>
-                        <span class="k">const</span> <span class="kt">int</span> <span class="n">bcol</span><span class="p">,</span>
-                        <span class="k">const</span> <span class="kt">int</span> <span class="n">last_brow</span><span class="p">,</span>
-                        <span class="k">const</span> <span class="kt">int</span> <span class="n">nbrow</span><span class="p">,</span>
-                        <span class="k">const</span> <span class="kt">int</span> <span class="n">nbcol</span><span class="p">,</span>
-                        <span class="k">const</span> <span class="kt">uint64_t</span> <span class="n">packsize</span><span class="p">);</span> <span class="c1">// @TODO: change to size_t where appropriate</span>
+<span class="kt">void</span><span class="w"> </span><span class="nf">fbgemmPacked16Pack</span><span class="p">(</span><span class="n">marian</span><span class="o">::</span><span class="n">Tensor</span><span class="w"> </span><span class="n">out</span><span class="p">,</span><span class="w"></span>
+<span class="w">                        </span><span class="k">const</span><span class="w"> </span><span class="kt">float</span><span class="o">*</span><span class="w"> </span><span class="n">inData</span><span class="p">,</span><span class="w"></span>
+<span class="w">                        </span><span class="k">const</span><span class="w"> </span><span class="kt">bool</span><span class="w"> </span><span class="n">transpose</span><span class="p">,</span><span class="w"></span>
+<span class="w">                        </span><span class="k">const</span><span class="w"> </span><span class="kt">int</span><span class="w"> </span><span class="n">nrow</span><span class="p">,</span><span class="w"></span>
+<span class="w">                        </span><span class="k">const</span><span class="w"> </span><span class="kt">int</span><span class="w"> </span><span class="n">ncol</span><span class="p">,</span><span class="w"></span>
+<span class="w">                        </span><span class="k">const</span><span class="w"> </span><span class="kt">int</span><span class="w"> </span><span class="n">kernel_ncol_blocks</span><span class="p">,</span><span class="w"></span>
+<span class="w">                        </span><span class="k">const</span><span class="w"> </span><span class="kt">int</span><span class="w"> </span><span class="n">brow</span><span class="p">,</span><span class="w"></span>
+<span class="w">                        </span><span class="k">const</span><span class="w"> </span><span class="kt">int</span><span class="w"> </span><span class="n">bcol</span><span class="p">,</span><span class="w"></span>
+<span class="w">                        </span><span class="k">const</span><span class="w"> </span><span class="kt">int</span><span class="w"> </span><span class="n">last_brow</span><span class="p">,</span><span class="w"></span>
+<span class="w">                        </span><span class="k">const</span><span class="w"> </span><span class="kt">int</span><span class="w"> </span><span class="n">nbrow</span><span class="p">,</span><span class="w"></span>
+<span class="w">                        </span><span class="k">const</span><span class="w"> </span><span class="kt">int</span><span class="w"> </span><span class="n">nbcol</span><span class="p">,</span><span class="w"></span>
+<span class="w">                        </span><span class="k">const</span><span class="w"> </span><span class="kt">uint64_t</span><span class="w"> </span><span class="n">packsize</span><span class="p">);</span><span class="w"> </span><span class="c1">// @TODO: change to size_t where appropriate</span>
 
 <span class="c1">// Pack a matrix (int8) into cache utilization efficient way (block format) together with quantization into int8</span>
 <span class="c1">// out: output tensor - packed format and quantized into int8</span>
@@ -271,14 +183,14 @@
 <span class="c1">//                    https://intel.github.io/mkl-dnn/dev_guide_int8_computations.html</span>
 <span class="c1">//                    (e.g. 3.f means the original tensor is quantized</span>
 <span class="c1">//                    from [mean - 3.f * standard deviation, mean + 3.f * standard deviation] to [-64, 63])</span>
-<span class="kt">void</span> <span class="nf">fbgemmPacked8Pack</span><span class="p">(</span><span class="n">marian</span><span class="o">::</span><span class="n">Tensor</span> <span class="n">out</span><span class="p">,</span>
-                       <span class="k">const</span> <span class="kt">float</span><span class="o">*</span> <span class="n">inData</span><span class="p">,</span>
-                       <span class="k">const</span> <span class="n">marian</span><span class="o">::</span><span class="n">Type</span> <span class="n">packType</span><span class="p">,</span>
-                       <span class="k">const</span> <span class="kt">bool</span> <span class="n">transpose</span><span class="p">,</span>
-                       <span class="k">const</span> <span class="kt">int</span> <span class="n">nrow</span><span class="p">,</span>
-                       <span class="k">const</span> <span class="kt">int</span> <span class="n">ncol</span><span class="p">,</span>
-                       <span class="k">const</span> <span class="kt">uint64_t</span> <span class="n">packsize</span><span class="p">,</span>
-                       <span class="k">const</span> <span class="kt">float</span> <span class="n">quantRangeStdDevs</span> <span class="o">=</span> <span class="mf">0.f</span><span class="p">);</span> <span class="c1">// @TODO: change to size_t where appropriate</span>
+<span class="kt">void</span><span class="w"> </span><span class="nf">fbgemmPacked8Pack</span><span class="p">(</span><span class="n">marian</span><span class="o">::</span><span class="n">Tensor</span><span class="w"> </span><span class="n">out</span><span class="p">,</span><span class="w"></span>
+<span class="w">                       </span><span class="k">const</span><span class="w"> </span><span class="kt">float</span><span class="o">*</span><span class="w"> </span><span class="n">inData</span><span class="p">,</span><span class="w"></span>
+<span class="w">                       </span><span class="k">const</span><span class="w"> </span><span class="n">marian</span><span class="o">::</span><span class="n">Type</span><span class="w"> </span><span class="n">packType</span><span class="p">,</span><span class="w"></span>
+<span class="w">                       </span><span class="k">const</span><span class="w"> </span><span class="kt">bool</span><span class="w"> </span><span class="n">transpose</span><span class="p">,</span><span class="w"></span>
+<span class="w">                       </span><span class="k">const</span><span class="w"> </span><span class="kt">int</span><span class="w"> </span><span class="n">nrow</span><span class="p">,</span><span class="w"></span>
+<span class="w">                       </span><span class="k">const</span><span class="w"> </span><span class="kt">int</span><span class="w"> </span><span class="n">ncol</span><span class="p">,</span><span class="w"></span>
+<span class="w">                       </span><span class="k">const</span><span class="w"> </span><span class="kt">uint64_t</span><span class="w"> </span><span class="n">packsize</span><span class="p">,</span><span class="w"></span>
+<span class="w">                       </span><span class="k">const</span><span class="w"> </span><span class="kt">float</span><span class="w"> </span><span class="n">quantRangeStdDevs</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="mf">0.f</span><span class="p">);</span><span class="w"> </span><span class="c1">// @TODO: change to size_t where appropriate</span>
 
 <span class="c1">// GEMM operation on the packed B matrix</span>
 <span class="c1">// C: output matrix</span>
@@ -288,13 +200,13 @@
 <span class="c1">// n: the number of columns in B and C</span>
 <span class="c1">// transA: transpose of A matrix</span>
 <span class="c1">// B is already packed. So, we don&#39;t need transB</span>
-<span class="kt">void</span> <span class="nf">fbgemmPacked16Gemm</span><span class="p">(</span><span class="n">marian</span><span class="o">::</span><span class="n">Tensor</span> <span class="n">C</span><span class="p">,</span>
-                        <span class="k">const</span> <span class="n">marian</span><span class="o">::</span><span class="n">Tensor</span> <span class="n">A</span><span class="p">,</span>
-                        <span class="k">const</span> <span class="n">marian</span><span class="o">::</span><span class="n">Tensor</span> <span class="n">B</span><span class="p">,</span>
-                        <span class="k">const</span> <span class="n">marian</span><span class="o">::</span><span class="n">Tensor</span> <span class="n">bias</span><span class="p">,</span>
-                        <span class="k">const</span> <span class="kt">size_t</span> <span class="n">m</span><span class="p">,</span>
-                        <span class="k">const</span> <span class="kt">size_t</span> <span class="n">n</span><span class="p">,</span>
-                        <span class="k">const</span> <span class="kt">int</span> <span class="n">transA</span> <span class="o">=</span> <span class="mi">0</span><span class="p">);</span>
+<span class="kt">void</span><span class="w"> </span><span class="nf">fbgemmPacked16Gemm</span><span class="p">(</span><span class="n">marian</span><span class="o">::</span><span class="n">Tensor</span><span class="w"> </span><span class="n">C</span><span class="p">,</span><span class="w"></span>
+<span class="w">                        </span><span class="k">const</span><span class="w"> </span><span class="n">marian</span><span class="o">::</span><span class="n">Tensor</span><span class="w"> </span><span class="n">A</span><span class="p">,</span><span class="w"></span>
+<span class="w">                        </span><span class="k">const</span><span class="w"> </span><span class="n">marian</span><span class="o">::</span><span class="n">Tensor</span><span class="w"> </span><span class="n">B</span><span class="p">,</span><span class="w"></span>
+<span class="w">                        </span><span class="k">const</span><span class="w"> </span><span class="n">marian</span><span class="o">::</span><span class="n">Tensor</span><span class="w"> </span><span class="n">bias</span><span class="p">,</span><span class="w"></span>
+<span class="w">                        </span><span class="k">const</span><span class="w"> </span><span class="kt">size_t</span><span class="w"> </span><span class="n">m</span><span class="p">,</span><span class="w"></span>
+<span class="w">                        </span><span class="k">const</span><span class="w"> </span><span class="kt">size_t</span><span class="w"> </span><span class="n">n</span><span class="p">,</span><span class="w"></span>
+<span class="w">                        </span><span class="k">const</span><span class="w"> </span><span class="kt">int</span><span class="w"> </span><span class="n">transA</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="mi">0</span><span class="p">);</span><span class="w"></span>
 
 <span class="c1">// GEMM operation on the packed B matrix in 8 bit integers</span>
 <span class="c1">// C: output matrix</span>
@@ -305,64 +217,49 @@
 <span class="c1">// k: the number of columns in A and rows in B</span>
 <span class="c1">// transA: transpose of A matrix</span>
 <span class="c1">// transB: transpose of B matrix</span>
-<span class="kt">void</span> <span class="nf">fbgemmPacked8Gemm</span><span class="p">(</span><span class="n">marian</span><span class="o">::</span><span class="n">Tensor</span> <span class="n">C</span><span class="p">,</span>
-                       <span class="k">const</span> <span class="n">marian</span><span class="o">::</span><span class="n">Tensor</span> <span class="n">A</span><span class="p">,</span>
-                       <span class="k">const</span> <span class="n">marian</span><span class="o">::</span><span class="n">Tensor</span> <span class="n">B</span><span class="p">,</span>
-                       <span class="k">const</span> <span class="kt">size_t</span> <span class="n">m</span><span class="p">,</span>
-                       <span class="k">const</span> <span class="kt">size_t</span> <span class="n">n</span><span class="p">,</span>
-                       <span class="k">const</span> <span class="kt">size_t</span> <span class="n">k</span><span class="p">,</span>
-                       <span class="k">const</span> <span class="kt">int</span> <span class="n">transA</span> <span class="o">=</span> <span class="mi">0</span><span class="p">,</span>
-                       <span class="k">const</span> <span class="kt">int</span> <span class="n">transB</span> <span class="o">=</span> <span class="mi">0</span><span class="p">);</span>
+<span class="kt">void</span><span class="w"> </span><span class="nf">fbgemmPacked8Gemm</span><span class="p">(</span><span class="n">Type</span><span class="w"> </span><span class="n">packType</span><span class="p">,</span><span class="w"></span>
+<span class="w">                       </span><span class="n">marian</span><span class="o">::</span><span class="n">Tensor</span><span class="w"> </span><span class="n">C</span><span class="p">,</span><span class="w"></span>
+<span class="w">                       </span><span class="k">const</span><span class="w"> </span><span class="n">marian</span><span class="o">::</span><span class="n">Tensor</span><span class="w"> </span><span class="n">A</span><span class="p">,</span><span class="w"></span>
+<span class="w">                       </span><span class="k">const</span><span class="w"> </span><span class="n">marian</span><span class="o">::</span><span class="n">Tensor</span><span class="w"> </span><span class="n">B</span><span class="p">,</span><span class="w"></span>
+<span class="w">                       </span><span class="k">const</span><span class="w"> </span><span class="kt">size_t</span><span class="w"> </span><span class="n">m</span><span class="p">,</span><span class="w"></span>
+<span class="w">                       </span><span class="k">const</span><span class="w"> </span><span class="kt">size_t</span><span class="w"> </span><span class="n">n</span><span class="p">,</span><span class="w"></span>
+<span class="w">                       </span><span class="k">const</span><span class="w"> </span><span class="kt">size_t</span><span class="w"> </span><span class="n">k</span><span class="p">,</span><span class="w"></span>
+<span class="w">                       </span><span class="k">const</span><span class="w"> </span><span class="kt">int</span><span class="w"> </span><span class="n">transA</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="mi">0</span><span class="p">,</span><span class="w"></span>
+<span class="w">                       </span><span class="k">const</span><span class="w"> </span><span class="kt">int</span><span class="w"> </span><span class="n">transB</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="mi">0</span><span class="p">);</span><span class="w"></span>
 
-<span class="p">}</span>  <span class="c1">// namespace variant</span>
-<span class="p">}</span>  <span class="c1">// namespace cpu</span>
-<span class="p">}</span>  <span class="c1">// namespace marian</span>
+<span class="p">}</span><span class="w">  </span><span class="c1">// namespace variant</span>
+<span class="p">}</span><span class="w">  </span><span class="c1">// namespace cpu</span>
+<span class="p">}</span><span class="w">  </span><span class="c1">// namespace marian</span>
 </pre></div>
 </div>
-</div>
+</section>
 
 
            </div>
-           
           </div>
           <footer>
 
   <hr/>
 
   <div role="contentinfo">
-    <p>
-        &#169; Copyright 2021, Marian NMT Team.
-
-    </p>
+    <p>&#169; Copyright 2021, Marian NMT Team.</p>
   </div>
-    
-    
-    
-    Built with <a href="https://www.sphinx-doc.org/">Sphinx</a> using a
-    
+
+  Built with <a href="https://www.sphinx-doc.org/">Sphinx</a> using a
     <a href="https://github.com/readthedocs/sphinx_rtd_theme">theme</a>
-    
-    provided by <a href="https://readthedocs.org">Read the Docs</a>. 
+    provided by <a href="https://readthedocs.org">Read the Docs</a>.
+   
 
 </footer>
         </div>
       </div>
-
     </section>
-
   </div>
-  
-
-  <script type="text/javascript">
+  <script>
       jQuery(function () {
           SphinxRtdTheme.Navigation.enable(true);
       });
-  </script>
-
-  
-  
-    
-   
+  </script> 
 
 </body>
 </html>

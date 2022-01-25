@@ -16,6 +16,8 @@ Program Listing for File config_validator.cpp
    #include "common/utils.h"
    #include "common/filesystem.h"
    
+   #include <set>
+   
    namespace marian {
    
    bool ConfigValidator::has(const std::string& key) const {
@@ -63,6 +65,9 @@ Program Listing for File config_validator.cpp
    
      ABORT_IF(models.empty() && configs.empty(),
               "You need to provide at least one model file or a config file");
+   
+     ABORT_IF(get<bool>("model-mmap") && get<size_t>("cpu-threads") == 0,
+              "Model MMAP is CPU-only, please use --cpu-threads");
    
      for(const auto& modelFile : models) {
        filesystem::Path modelPath(modelFile);
@@ -141,6 +146,11 @@ Program Listing for File config_validator.cpp
                   && !get<std::vector<std::string>>("valid-sets").empty(),
               errorMsg);
    
+     // check if --early-stopping-on has proper value
+     std::set<std::string> supportedStops = {"first", "all", "any"};
+     ABORT_IF(supportedStops.find(get<std::string>("early-stopping-on")) == supportedStops.end(),
+              "Supported options for --early-stopping-on are: first, all, any");
+   
      // validations for learning rate decaying
      ABORT_IF(get<float>("lr-decay") > 1.f, "Learning rate decay factor greater than 1.0 is unusual");
    
@@ -157,7 +167,7 @@ Program Listing for File config_validator.cpp
      // validate ULR options
      ABORT_IF((has("ulr") && get<bool>("ulr") && (get<std::string>("ulr-query-vectors") == ""
                                                   || get<std::string>("ulr-keys-vectors") == "")),
-              "ULR enablign requires query and keys vectors specified with --ulr-query-vectors and "
+              "ULR requires query and keys vectors specified with --ulr-query-vectors and "
               "--ulr-keys-vectors option");
    
      // validate model quantization

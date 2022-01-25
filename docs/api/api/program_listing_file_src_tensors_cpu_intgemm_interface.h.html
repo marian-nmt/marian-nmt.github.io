@@ -1,78 +1,41 @@
-
-
 <!DOCTYPE html>
 <html class="writer-html5" lang="en" >
 <head>
-  <meta charset="utf-8" />
-  
+  <meta charset="utf-8" /><meta name="generator" content="Docutils 0.17.1: http://docutils.sourceforge.net/" />
+
   <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-  
-  <title>Program Listing for File intgemm_interface.h &mdash; Marian NMT v1.10.3 2021-03-22 documentation</title>
-  
-
-  
-  <link rel="stylesheet" href="../_static/css/theme.css" type="text/css" />
-  <link rel="stylesheet" href="../_static/pygments.css" type="text/css" />
-  <link rel="stylesheet" href="../_static/css/custom.css" type="text/css" />
-  <link rel="stylesheet" href="../_static/collapsible-lists/css/tree_view.css" type="text/css" />
-
-  
-  
-
-  
-  
-
-  
+  <title>Program Listing for File intgemm_interface.h &mdash; Marian NMT v1.10.27 2022-01-25 documentation</title><link rel="stylesheet" href="../_static/css/theme.css" type="text/css" />
+    <link rel="stylesheet" href="../_static/pygments.css" type="text/css" />
+      <link rel="stylesheet" href="../_static/css/custom.css" type="text/css" />
+      <link rel="stylesheet" href="../_static/collapsible-lists/css/tree_view.css" type="text/css" />
     <link rel="canonical" href="http://marian-nmt.github.io/docs/api/api/program_listing_file_src_tensors_cpu_intgemm_interface.h.html" />
-
-  
   <!--[if lt IE 9]>
     <script src="../_static/js/html5shiv.min.js"></script>
   <![endif]-->
-  
-    
-      <script type="text/javascript" id="documentation_options" data-url_root="../" src="../_static/documentation_options.js"></script>
+  <script id="documentation_options" data-url_root="../" src="../_static/documentation_options.js"></script>
         <script src="../_static/jquery.js"></script>
         <script src="../_static/underscore.js"></script>
         <script src="../_static/doctools.js"></script>
         <script src="../_static/language_data.js"></script>
         <script src="../_static/collapsible-lists/js/CollapsibleLists.compressed.js"></script>
         <script src="../_static/collapsible-lists/js/apply-collapsible-lists.js"></script>
-    
-    <script type="text/javascript" src="../_static/js/theme.js"></script>
-
-    
+        <script async="async" src="https://cdnjs.cloudflare.com/ajax/libs/mathjax/2.7.5/latest.js?config=TeX-AMS-MML_HTMLorMML"></script>
+        <script type="text/x-mathjax-config">MathJax.Hub.Config({"tex2jax": {"inlineMath": [["\\(", "\\)"]], "displayMath": [["\\[", "\\]"]], "processRefs": false, "processEnvironments": false}})</script>
+    <script src="../_static/js/theme.js"></script>
     <link rel="index" title="Index" href="../genindex.html" />
     <link rel="search" title="Search" href="../search.html" /> 
 </head>
 
-<body class="wy-body-for-nav">
-
-   
+<body class="wy-body-for-nav"> 
   <div class="wy-grid-for-nav">
-    
     <nav data-toggle="wy-nav-shift" class="wy-nav-side">
       <div class="wy-side-scroll">
         <div class="wy-side-nav-search" >
-          
-
-          
             <a href="../index.html" class="icon icon-home"> Marian NMT
-          
-
-          
           </a>
-
-          
-            
-            
               <div class="version">
-                v1.10.3
+                v1.10.27
               </div>
-            
-          
-
-          
 <div role="search">
   <form id="rtd-search-form" class="wy-form" action="../search.html" method="get">
     <input type="text" name="q" placeholder="Search docs" />
@@ -80,126 +43,75 @@
     <input type="hidden" name="area" value="default" />
   </form>
 </div>
-
-          
-        </div>
-
-        
-        <div class="wy-menu wy-menu-vertical" data-spy="affix" role="navigation" aria-label="main navigation">
-          
-            
-            
-              
-            
-            
-              <p class="caption"><span class="caption-text">Contents:</span></p>
+        </div><div class="wy-menu wy-menu-vertical" data-spy="affix" role="navigation" aria-label="Navigation menu">
+              <p><span class="caption-text">Contents:</span></p>
 <ul>
 <li class="toctree-l1"><a class="reference internal" href="../graph.html">Expression graphs</a></li>
 <li class="toctree-l1"><a class="reference internal" href="../operators.html">Operations in the Expression Graph</a></li>
 <li class="toctree-l1"><a class="reference internal" href="library_index.html">Library API</a></li>
 <li class="toctree-l1"><a class="reference internal" href="../contributing.html">How to contribute to Marian</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../doc_guide.html">Writing documentation</a></li>
 </ul>
 
-            
-          
         </div>
-        
       </div>
     </nav>
 
-    <section data-toggle="wy-nav-shift" class="wy-nav-content-wrap">
-
-      
-      <nav class="wy-nav-top" aria-label="top navigation">
-        
+    <section data-toggle="wy-nav-shift" class="wy-nav-content-wrap"><nav class="wy-nav-top" aria-label="Mobile navigation menu" >
           <i data-toggle="wy-nav-top" class="fa fa-bars"></i>
           <a href="../index.html">Marian NMT</a>
-        
       </nav>
 
-
       <div class="wy-nav-content">
-        
         <div class="rst-content">
-        
-          
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-<div role="navigation" aria-label="breadcrumbs navigation">
-
+          <div role="navigation" aria-label="Page navigation">
   <ul class="wy-breadcrumbs">
-    
       <li><a href="../index.html" class="icon icon-home"></a> &raquo;</li>
-        
       <li>Program Listing for File intgemm_interface.h</li>
-    
-    
       <li class="wy-breadcrumbs-aside">
-        
-          
             <a href="../_sources/api/program_listing_file_src_tensors_cpu_intgemm_interface.h.rst.txt" rel="nofollow"> View page source</a>
-          
-        
       </li>
-    
   </ul>
-
-  
   <hr/>
 </div>
           <div role="main" class="document" itemscope="itemscope" itemtype="http://schema.org/Article">
            <div itemprop="articleBody">
-            
-  <div class="section" id="program-listing-for-file-intgemm-interface-h">
+             
+  <section id="program-listing-for-file-intgemm-interface-h">
 <span id="program-listing-file-src-tensors-cpu-intgemm-interface-h"></span><h1>Program Listing for File intgemm_interface.h<a class="headerlink" href="#program-listing-for-file-intgemm-interface-h" title="Permalink to this headline">¶</a></h1>
 <p>↰ <a class="reference internal" href="file_src_tensors_cpu_intgemm_interface.h.html#file-src-tensors-cpu-intgemm-interface-h"><span class="std std-ref">Return to documentation for file</span></a> (<code class="docutils literal notranslate"><span class="pre">src/tensors/cpu/intgemm_interface.h</span></code>)</p>
 <div class="highlight-cpp notranslate"><div class="highlight"><pre><span></span><span class="cp">#pragma once</span>
 
-<span class="cp">#include</span> <span class="cpf">&quot;graph/node.h&quot;</span><span class="cp"></span>
-<span class="cp">#include</span> <span class="cpf">&quot;graph/node_operators_unary.h&quot;</span><span class="cp"></span>
-<span class="cp">#include</span> <span class="cpf">&quot;integer_common.h&quot;</span><span class="cp"></span>
+<span class="cp">#include</span><span class="w"> </span><span class="cpf">&quot;graph/node.h&quot;</span><span class="cp"></span>
+<span class="cp">#include</span><span class="w"> </span><span class="cpf">&quot;graph/node_operators_unary.h&quot;</span><span class="cp"></span>
+<span class="cp">#include</span><span class="w"> </span><span class="cpf">&quot;integer_common.h&quot;</span><span class="cp"></span>
 
-<span class="k">namespace</span> <span class="n">marian</span> <span class="p">{</span>
+<span class="k">namespace</span><span class="w"> </span><span class="nn">marian</span><span class="w"> </span><span class="p">{</span><span class="w"></span>
 
-<span class="k">namespace</span> <span class="n">cpu</span> <span class="p">{</span>
-<span class="k">namespace</span> <span class="n">integer</span> <span class="p">{</span>
+<span class="k">namespace</span><span class="w"> </span><span class="nn">cpu</span><span class="w"> </span><span class="p">{</span><span class="w"></span>
+<span class="k">namespace</span><span class="w"> </span><span class="nn">integer</span><span class="w"> </span><span class="p">{</span><span class="w"></span>
 
 <span class="cp">#if COMPILE_CPU</span>
 <span class="cm">/*</span>
 <span class="cm"> * Prepare an activation matrix into intgemm8/16 format. For now the activation matrix is just quantized.</span>
 <span class="cm"> * Expr input: The input tensor</span>
-<span class="cm"> */</span>
-<span class="k">template</span><span class="o">&lt;</span><span class="n">Type</span> <span class="n">vtype</span><span class="o">&gt;</span>
-<span class="k">static</span> <span class="kr">inline</span> <span class="n">Expr</span> <span class="n">prepareA</span><span class="p">(</span><span class="n">Expr</span> <span class="n">a</span><span class="p">)</span> <span class="p">{</span>
-  <span class="k">auto</span> <span class="n">nodeOp</span> <span class="o">=</span> <span class="p">[](</span><span class="n">Expr</span> <span class="n">out</span><span class="p">,</span> <span class="k">const</span> <span class="n">std</span><span class="o">::</span><span class="n">vector</span><span class="o">&lt;</span><span class="n">Expr</span><span class="o">&gt;&amp;</span> <span class="n">children</span><span class="p">)</span> <span class="p">{</span>
-    <span class="n">Expr</span> <span class="n">in</span> <span class="o">=</span> <span class="n">children</span><span class="p">[</span><span class="mi">0</span><span class="p">];</span>
-    <span class="k">auto</span> <span class="n">quantMult</span> <span class="o">=</span> <span class="n">computeQuantMult</span><span class="o">&lt;</span><span class="n">vtype</span><span class="o">&gt;</span><span class="p">(</span><span class="n">in</span><span class="o">-&gt;</span><span class="n">val</span><span class="p">());</span>
-    <span class="k">typedef</span> <span class="k">typename</span> <span class="nc">intgemm_</span><span class="o">&lt;</span><span class="n">vtype</span><span class="o">&gt;::</span><span class="n">type</span> <span class="n">Integer</span><span class="p">;</span>
-    <span class="n">intgemm_</span><span class="o">&lt;</span><span class="n">vtype</span><span class="o">&gt;::</span><span class="n">width</span><span class="o">::</span><span class="n">PrepareA</span><span class="p">(</span><span class="n">in</span><span class="o">-&gt;</span><span class="n">val</span><span class="p">()</span><span class="o">-&gt;</span><span class="n">data</span><span class="p">(),</span> <span class="cm">/*input*/</span>
-                                     <span class="n">out</span><span class="o">-&gt;</span><span class="n">val</span><span class="p">()</span><span class="o">-&gt;</span><span class="n">data</span><span class="o">&lt;</span><span class="n">Integer</span><span class="o">&gt;</span><span class="p">(),</span> <span class="cm">/*output*/</span>
-                                     <span class="n">quantMult</span><span class="p">,</span> <span class="cm">/*Quant Mult*/</span>
-                                     <span class="n">rows</span><span class="p">(</span><span class="n">in</span><span class="o">-&gt;</span><span class="n">val</span><span class="p">()),</span>
-                                     <span class="n">cols</span><span class="p">(</span><span class="n">in</span><span class="o">-&gt;</span><span class="n">val</span><span class="p">()));</span>
-    <span class="n">getQuantMult</span><span class="o">&lt;</span><span class="n">vtype</span><span class="o">&gt;</span><span class="p">(</span><span class="n">out</span><span class="o">-&gt;</span><span class="n">val</span><span class="p">())</span> <span class="o">=</span> <span class="n">quantMult</span><span class="p">;</span>
-  <span class="p">};</span>
+<span class="cm"> */</span><span class="w"></span>
+<span class="k">template</span><span class="o">&lt;</span><span class="n">Type</span><span class="w"> </span><span class="n">vtype</span><span class="o">&gt;</span><span class="w"></span>
+<span class="k">static</span><span class="w"> </span><span class="kr">inline</span><span class="w"> </span><span class="n">Expr</span><span class="w"> </span><span class="n">prepareA</span><span class="p">(</span><span class="n">Expr</span><span class="w"> </span><span class="n">a</span><span class="p">)</span><span class="w"> </span><span class="p">{</span><span class="w"></span>
+<span class="w">  </span><span class="k">auto</span><span class="w"> </span><span class="n">nodeOp</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="p">[](</span><span class="n">Expr</span><span class="w"> </span><span class="n">out</span><span class="p">,</span><span class="w"> </span><span class="k">const</span><span class="w"> </span><span class="n">std</span><span class="o">::</span><span class="n">vector</span><span class="o">&lt;</span><span class="n">Expr</span><span class="o">&gt;&amp;</span><span class="w"> </span><span class="n">children</span><span class="p">)</span><span class="w"> </span><span class="p">{</span><span class="w"></span>
+<span class="w">    </span><span class="n">Expr</span><span class="w"> </span><span class="n">in</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="n">children</span><span class="p">[</span><span class="mi">0</span><span class="p">];</span><span class="w"></span>
+<span class="w">    </span><span class="k">auto</span><span class="w"> </span><span class="n">quantMult</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="n">computeQuantMult</span><span class="o">&lt;</span><span class="n">vtype</span><span class="o">&gt;</span><span class="p">(</span><span class="n">in</span><span class="o">-&gt;</span><span class="n">val</span><span class="p">());</span><span class="w"></span>
+<span class="w">    </span><span class="k">typedef</span><span class="w"> </span><span class="k">typename</span><span class="w"> </span><span class="nc">intgemm_</span><span class="o">&lt;</span><span class="n">vtype</span><span class="o">&gt;::</span><span class="n">type</span><span class="w"> </span><span class="n">Integer</span><span class="p">;</span><span class="w"></span>
+<span class="w">    </span><span class="n">intgemm_</span><span class="o">&lt;</span><span class="n">vtype</span><span class="o">&gt;::</span><span class="n">width</span><span class="o">::</span><span class="n">PrepareA</span><span class="p">(</span><span class="n">in</span><span class="o">-&gt;</span><span class="n">val</span><span class="p">()</span><span class="o">-&gt;</span><span class="n">data</span><span class="p">(),</span><span class="w"> </span><span class="cm">/*input*/</span><span class="w"></span>
+<span class="w">                                     </span><span class="n">out</span><span class="o">-&gt;</span><span class="n">val</span><span class="p">()</span><span class="o">-&gt;</span><span class="n">data</span><span class="o">&lt;</span><span class="n">Integer</span><span class="o">&gt;</span><span class="p">(),</span><span class="w"> </span><span class="cm">/*output*/</span><span class="w"></span>
+<span class="w">                                     </span><span class="n">quantMult</span><span class="p">,</span><span class="w"> </span><span class="cm">/*Quant Mult*/</span><span class="w"></span>
+<span class="w">                                     </span><span class="n">rows</span><span class="p">(</span><span class="n">in</span><span class="o">-&gt;</span><span class="n">val</span><span class="p">()),</span><span class="w"></span>
+<span class="w">                                     </span><span class="n">cols</span><span class="p">(</span><span class="n">in</span><span class="o">-&gt;</span><span class="n">val</span><span class="p">()));</span><span class="w"></span>
+<span class="w">    </span><span class="n">getQuantMult</span><span class="o">&lt;</span><span class="n">vtype</span><span class="o">&gt;</span><span class="p">(</span><span class="n">out</span><span class="o">-&gt;</span><span class="n">val</span><span class="p">())</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="n">quantMult</span><span class="p">;</span><span class="w"></span>
+<span class="w">  </span><span class="p">};</span><span class="w"></span>
 
-  <span class="k">return</span> <span class="nf">lambda</span><span class="p">({</span><span class="n">a</span><span class="p">},</span> <span class="n">a</span><span class="o">-&gt;</span><span class="n">shape</span><span class="p">(),</span> <span class="n">vtype</span><span class="p">,</span> <span class="n">nodeOp</span><span class="p">);</span>
-<span class="p">}</span>
+<span class="w">  </span><span class="k">return</span><span class="w"> </span><span class="n">lambda</span><span class="p">({</span><span class="n">a</span><span class="p">},</span><span class="w"> </span><span class="n">a</span><span class="o">-&gt;</span><span class="n">shape</span><span class="p">(),</span><span class="w"> </span><span class="n">vtype</span><span class="p">,</span><span class="w"> </span><span class="n">nodeOp</span><span class="p">);</span><span class="w"></span>
+<span class="p">}</span><span class="w"></span>
 <span class="cp">#endif</span>
 
 <span class="cm">/*</span>
@@ -212,140 +124,124 @@
 <span class="cm"> * float scale - scale the output by `scale`</span>
 <span class="cm"> * the template argument controls whether we&#39;re doing 16bit integers or 8bit integers.</span>
 <span class="cm"> * It can be Type::intgemm8 or Type::intgemm16 and all hardware-specific variants</span>
-<span class="cm"> */</span>
-<span class="k">template</span><span class="o">&lt;</span><span class="n">Type</span> <span class="n">vtype</span><span class="o">&gt;</span>
-<span class="k">static</span> <span class="kr">inline</span> <span class="n">Expr</span> <span class="n">affineOrDotTyped</span><span class="p">(</span><span class="n">Expr</span> <span class="n">a</span><span class="p">,</span> <span class="n">Expr</span> <span class="n">bQuant</span><span class="p">,</span> <span class="n">Expr</span> <span class="n">bias</span><span class="p">,</span> <span class="kt">bool</span> <span class="n">transA</span><span class="p">,</span> <span class="kt">bool</span> <span class="cm">/*transB*/</span><span class="p">,</span> <span class="kt">float</span> <span class="n">scale</span><span class="p">)</span> <span class="p">{</span>
+<span class="cm"> */</span><span class="w"></span>
+<span class="k">template</span><span class="o">&lt;</span><span class="n">Type</span><span class="w"> </span><span class="n">vtype</span><span class="o">&gt;</span><span class="w"></span>
+<span class="k">static</span><span class="w"> </span><span class="kr">inline</span><span class="w"> </span><span class="n">Expr</span><span class="w"> </span><span class="n">affineOrDotTyped</span><span class="p">(</span><span class="n">Expr</span><span class="w"> </span><span class="n">a</span><span class="p">,</span><span class="w"> </span><span class="n">Expr</span><span class="w"> </span><span class="n">bQuant</span><span class="p">,</span><span class="w"> </span><span class="n">Expr</span><span class="w"> </span><span class="n">bias</span><span class="p">,</span><span class="w"> </span><span class="kt">bool</span><span class="w"> </span><span class="n">transA</span><span class="p">,</span><span class="w"> </span><span class="kt">bool</span><span class="w"> </span><span class="cm">/*transB*/</span><span class="p">,</span><span class="w"> </span><span class="kt">float</span><span class="w"> </span><span class="n">scale</span><span class="p">)</span><span class="w"> </span><span class="p">{</span><span class="w"></span>
 <span class="cp">#if COMPILE_CPU</span>
-  <span class="n">ABORT_IF</span><span class="p">(</span><span class="o">!</span><span class="n">isFloat</span><span class="p">(</span><span class="n">a</span><span class="o">-&gt;</span><span class="n">value_type</span><span class="p">()),</span> <span class="s">&quot;Intgemm expects type of A to be float32 not {}&quot;</span><span class="p">,</span> <span class="n">a</span><span class="o">-&gt;</span><span class="n">value_type</span><span class="p">());</span>
-  <span class="n">ABORT_IF</span><span class="p">(</span><span class="o">!</span><span class="n">isIntgemm</span><span class="p">(</span><span class="n">bQuant</span><span class="o">-&gt;</span><span class="n">value_type</span><span class="p">()),</span> <span class="s">&quot;Intgemm expects type of B to be a variant of intgemm not {}&quot;</span><span class="p">,</span> <span class="n">bQuant</span><span class="o">-&gt;</span><span class="n">value_type</span><span class="p">());</span>
+<span class="w">  </span><span class="n">ABORT_IF</span><span class="p">(</span><span class="o">!</span><span class="n">isFloat</span><span class="p">(</span><span class="n">a</span><span class="o">-&gt;</span><span class="n">value_type</span><span class="p">()),</span><span class="w"> </span><span class="s">&quot;Intgemm expects type of A to be float32 not {}&quot;</span><span class="p">,</span><span class="w"> </span><span class="n">a</span><span class="o">-&gt;</span><span class="n">value_type</span><span class="p">());</span><span class="w"></span>
+<span class="w">  </span><span class="n">ABORT_IF</span><span class="p">(</span><span class="o">!</span><span class="n">isIntgemm</span><span class="p">(</span><span class="n">bQuant</span><span class="o">-&gt;</span><span class="n">value_type</span><span class="p">()),</span><span class="w"> </span><span class="s">&quot;Intgemm expects type of B to be a variant of intgemm not {}&quot;</span><span class="p">,</span><span class="w"> </span><span class="n">bQuant</span><span class="o">-&gt;</span><span class="n">value_type</span><span class="p">());</span><span class="w"></span>
 
-  <span class="k">auto</span> <span class="n">aQuant</span> <span class="o">=</span> <span class="n">prepareA</span><span class="o">&lt;</span><span class="n">vtype</span><span class="o">&gt;</span><span class="p">(</span><span class="n">transA</span> <span class="o">?</span> <span class="n">transpose</span><span class="p">(</span><span class="n">a</span><span class="p">)</span> <span class="o">:</span> <span class="n">a</span><span class="p">);</span> <span class="c1">// A should not be quantized yet as seen above, hence quantize here</span>
+<span class="w">  </span><span class="k">auto</span><span class="w"> </span><span class="n">aQuant</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="n">prepareA</span><span class="o">&lt;</span><span class="n">vtype</span><span class="o">&gt;</span><span class="p">(</span><span class="n">transA</span><span class="w"> </span><span class="o">?</span><span class="w"> </span><span class="n">transpose</span><span class="p">(</span><span class="n">a</span><span class="p">)</span><span class="w"> </span><span class="o">:</span><span class="w"> </span><span class="n">a</span><span class="p">);</span><span class="w"> </span><span class="c1">// A should not be quantized yet as seen above, hence quantize here</span>
 
-  <span class="c1">// determine the output shape m x n for A: m x k and B: k x n</span>
-  <span class="c1">// since we transpose A beforehand we don&#39;t need to take care of transposed shapes here</span>
-  <span class="n">Shape</span> <span class="n">outShape</span> <span class="o">=</span> <span class="n">aQuant</span><span class="o">-&gt;</span><span class="n">shape</span><span class="p">();</span>
-  <span class="n">outShape</span><span class="p">.</span><span class="n">set</span><span class="p">(</span><span class="mi">-1</span><span class="p">,</span> <span class="n">bQuant</span><span class="o">-&gt;</span><span class="n">shape</span><span class="p">()[</span><span class="mi">-1</span><span class="p">]);</span>
+<span class="w">  </span><span class="c1">// determine the output shape m x n for A: m x k and B: k x n</span>
+<span class="w">  </span><span class="c1">// since we transpose A beforehand we don&#39;t need to take care of transposed shapes here</span>
+<span class="w">  </span><span class="n">Shape</span><span class="w"> </span><span class="n">outShape</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="n">aQuant</span><span class="o">-&gt;</span><span class="n">shape</span><span class="p">();</span><span class="w"></span>
+<span class="w">  </span><span class="n">outShape</span><span class="p">.</span><span class="n">set</span><span class="p">(</span><span class="mi">-1</span><span class="p">,</span><span class="w"> </span><span class="n">bQuant</span><span class="o">-&gt;</span><span class="n">shape</span><span class="p">()[</span><span class="mi">-1</span><span class="p">]);</span><span class="w"></span>
 
-  <span class="c1">// wrap the multiply finctions to be executed in the forward step of a Lambda node</span>
-  <span class="k">auto</span> <span class="n">dotOrAffineNodeOp</span> <span class="o">=</span> <span class="p">[</span><span class="o">=</span><span class="p">](</span><span class="n">Expr</span> <span class="n">out</span><span class="p">,</span> <span class="k">const</span> <span class="n">std</span><span class="o">::</span><span class="n">vector</span><span class="o">&lt;</span><span class="n">Expr</span><span class="o">&gt;&amp;</span> <span class="n">children</span><span class="p">)</span> <span class="p">{</span>
-    <span class="n">Expr</span> <span class="n">aQuant</span> <span class="o">=</span> <span class="n">children</span><span class="p">[</span><span class="mi">0</span><span class="p">];</span>
-    <span class="n">Expr</span> <span class="n">bQuant</span> <span class="o">=</span> <span class="n">children</span><span class="p">[</span><span class="mi">1</span><span class="p">];</span>
-    <span class="n">Expr</span> <span class="n">bias</span>   <span class="o">=</span> <span class="n">children</span><span class="p">.</span><span class="n">size</span><span class="p">()</span> <span class="o">&gt;</span> <span class="mi">2</span> <span class="o">?</span> <span class="n">children</span><span class="p">[</span><span class="mi">2</span><span class="p">]</span> <span class="o">:</span> <span class="k">nullptr</span><span class="p">;</span>
+<span class="w">  </span><span class="c1">// wrap the multiply finctions to be executed in the forward step of a Lambda node</span>
+<span class="w">  </span><span class="k">auto</span><span class="w"> </span><span class="n">dotOrAffineNodeOp</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="p">[</span><span class="o">=</span><span class="p">](</span><span class="n">Expr</span><span class="w"> </span><span class="n">out</span><span class="p">,</span><span class="w"> </span><span class="k">const</span><span class="w"> </span><span class="n">std</span><span class="o">::</span><span class="n">vector</span><span class="o">&lt;</span><span class="n">Expr</span><span class="o">&gt;&amp;</span><span class="w"> </span><span class="n">children</span><span class="p">)</span><span class="w"> </span><span class="p">{</span><span class="w"></span>
+<span class="w">    </span><span class="n">Expr</span><span class="w"> </span><span class="n">aQuant</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="n">children</span><span class="p">[</span><span class="mi">0</span><span class="p">];</span><span class="w"></span>
+<span class="w">    </span><span class="n">Expr</span><span class="w"> </span><span class="n">bQuant</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="n">children</span><span class="p">[</span><span class="mi">1</span><span class="p">];</span><span class="w"></span>
+<span class="w">    </span><span class="n">Expr</span><span class="w"> </span><span class="n">bias</span><span class="w">   </span><span class="o">=</span><span class="w"> </span><span class="n">children</span><span class="p">.</span><span class="n">size</span><span class="p">()</span><span class="w"> </span><span class="o">&gt;</span><span class="w"> </span><span class="mi">2</span><span class="w"> </span><span class="o">?</span><span class="w"> </span><span class="n">children</span><span class="p">[</span><span class="mi">2</span><span class="p">]</span><span class="w"> </span><span class="o">:</span><span class="w"> </span><span class="k">nullptr</span><span class="p">;</span><span class="w"></span>
 
-    <span class="c1">// when we arrive here, A and B are already quantized, so just get the multipliers</span>
-    <span class="kt">float</span> <span class="n">aQuantMult</span> <span class="o">=</span> <span class="n">getQuantMult</span><span class="o">&lt;</span><span class="n">vtype</span><span class="o">&gt;</span><span class="p">(</span><span class="n">aQuant</span><span class="o">-&gt;</span><span class="n">val</span><span class="p">());</span>
-    <span class="kt">float</span> <span class="n">bQuantMult</span> <span class="o">=</span> <span class="n">getQuantMult</span><span class="o">&lt;</span><span class="n">vtype</span><span class="o">&gt;</span><span class="p">(</span><span class="n">bQuant</span><span class="o">-&gt;</span><span class="n">val</span><span class="p">());</span>
+<span class="w">    </span><span class="c1">// when we arrive here, A and B are already quantized, so just get the multipliers</span>
+<span class="w">    </span><span class="kt">float</span><span class="w"> </span><span class="n">aQuantMult</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="n">getQuantMult</span><span class="o">&lt;</span><span class="n">vtype</span><span class="o">&gt;</span><span class="p">(</span><span class="n">aQuant</span><span class="o">-&gt;</span><span class="n">val</span><span class="p">());</span><span class="w"></span>
+<span class="w">    </span><span class="kt">float</span><span class="w"> </span><span class="n">bQuantMult</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="n">getQuantMult</span><span class="o">&lt;</span><span class="n">vtype</span><span class="o">&gt;</span><span class="p">(</span><span class="n">bQuant</span><span class="o">-&gt;</span><span class="n">val</span><span class="p">());</span><span class="w"></span>
 
-    <span class="kt">float</span> <span class="n">unquant_mult</span> <span class="o">=</span> <span class="mf">1.0f</span> <span class="o">/</span> <span class="p">(</span><span class="n">aQuantMult</span> <span class="o">*</span> <span class="n">bQuantMult</span><span class="p">);</span>
-    <span class="n">unquant_mult</span> <span class="o">=</span> <span class="n">unquant_mult</span> <span class="o">*</span> <span class="n">scale</span><span class="p">;</span>
+<span class="w">    </span><span class="kt">float</span><span class="w"> </span><span class="n">unquant_mult</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="mf">1.0f</span><span class="w"> </span><span class="o">/</span><span class="w"> </span><span class="p">(</span><span class="n">aQuantMult</span><span class="w"> </span><span class="o">*</span><span class="w"> </span><span class="n">bQuantMult</span><span class="p">);</span><span class="w"></span>
+<span class="w">    </span><span class="n">unquant_mult</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="n">unquant_mult</span><span class="w"> </span><span class="o">*</span><span class="w"> </span><span class="n">scale</span><span class="p">;</span><span class="w"></span>
 
-    <span class="k">typedef</span> <span class="k">typename</span> <span class="nc">intgemm_</span><span class="o">&lt;</span><span class="n">vtype</span><span class="o">&gt;::</span><span class="n">type</span> <span class="n">Integer</span><span class="p">;</span>
-    <span class="k">if</span><span class="p">(</span><span class="n">bias</span><span class="p">)</span> <span class="p">{</span> <span class="c1">// dispatch a multiply with integrated bias addition i.e affine(...)</span>
-      <span class="n">intgemm_</span><span class="o">&lt;</span><span class="n">vtype</span><span class="o">&gt;::</span><span class="n">width</span><span class="o">::</span><span class="n">Multiply</span><span class="p">(</span><span class="cm">/*A=*/</span><span class="n">aQuant</span><span class="o">-&gt;</span><span class="n">val</span><span class="p">()</span><span class="o">-&gt;</span><span class="n">data</span><span class="o">&lt;</span><span class="n">Integer</span><span class="o">&gt;</span><span class="p">(),</span>
-                                       <span class="cm">/*B=*/</span><span class="n">bQuant</span><span class="o">-&gt;</span><span class="n">val</span><span class="p">()</span><span class="o">-&gt;</span><span class="n">data</span><span class="o">&lt;</span><span class="n">Integer</span><span class="o">&gt;</span><span class="p">(),</span>
-                                       <span class="n">rows</span><span class="p">(</span><span class="n">aQuant</span><span class="o">-&gt;</span><span class="n">val</span><span class="p">()),</span>
-                                       <span class="n">cols</span><span class="p">(</span><span class="n">aQuant</span><span class="o">-&gt;</span><span class="n">val</span><span class="p">()),</span>
-                                       <span class="n">cols</span><span class="p">(</span><span class="n">bQuant</span><span class="o">-&gt;</span><span class="n">val</span><span class="p">()),</span>
-                                       <span class="n">intgemm</span><span class="o">::</span><span class="n">callbacks</span><span class="o">::</span><span class="n">UnquantizeAndAddBiasAndWrite</span><span class="p">(</span><span class="n">unquant_mult</span><span class="p">,</span> <span class="cm">/*bias=*/</span><span class="n">bias</span><span class="o">-&gt;</span><span class="n">val</span><span class="p">()</span><span class="o">-&gt;</span><span class="n">data</span><span class="p">(),</span> <span class="cm">/*output=*/</span><span class="n">out</span><span class="o">-&gt;</span><span class="n">val</span><span class="p">()</span><span class="o">-&gt;</span><span class="n">data</span><span class="p">()));</span>
-    <span class="p">}</span> <span class="k">else</span> <span class="p">{</span> <span class="c1">// dispatch a multiply without bias addition i.e dot(...)</span>
-      <span class="n">intgemm_</span><span class="o">&lt;</span><span class="n">vtype</span><span class="o">&gt;::</span><span class="n">width</span><span class="o">::</span><span class="n">Multiply</span><span class="p">(</span><span class="cm">/*A=*/</span><span class="n">aQuant</span><span class="o">-&gt;</span><span class="n">val</span><span class="p">()</span><span class="o">-&gt;</span><span class="n">data</span><span class="o">&lt;</span><span class="n">Integer</span><span class="o">&gt;</span><span class="p">(),</span>
-                                       <span class="cm">/*B=*/</span><span class="n">bQuant</span><span class="o">-&gt;</span><span class="n">val</span><span class="p">()</span><span class="o">-&gt;</span><span class="n">data</span><span class="o">&lt;</span><span class="n">Integer</span><span class="o">&gt;</span><span class="p">(),</span>
-                                       <span class="n">rows</span><span class="p">(</span><span class="n">aQuant</span><span class="o">-&gt;</span><span class="n">val</span><span class="p">()),</span>
-                                       <span class="n">cols</span><span class="p">(</span><span class="n">aQuant</span><span class="o">-&gt;</span><span class="n">val</span><span class="p">()),</span>
-                                       <span class="n">cols</span><span class="p">(</span><span class="n">bQuant</span><span class="o">-&gt;</span><span class="n">val</span><span class="p">()),</span>
-                                       <span class="n">intgemm</span><span class="o">::</span><span class="n">callbacks</span><span class="o">::</span><span class="n">UnquantizeAndWrite</span><span class="p">(</span><span class="n">unquant_mult</span><span class="p">,</span> <span class="cm">/*output=*/</span><span class="n">out</span><span class="o">-&gt;</span><span class="n">val</span><span class="p">()</span><span class="o">-&gt;</span><span class="n">data</span><span class="p">()));</span>
-    <span class="p">}</span>
-  <span class="p">};</span>
+<span class="w">    </span><span class="k">typedef</span><span class="w"> </span><span class="k">typename</span><span class="w"> </span><span class="nc">intgemm_</span><span class="o">&lt;</span><span class="n">vtype</span><span class="o">&gt;::</span><span class="n">type</span><span class="w"> </span><span class="n">Integer</span><span class="p">;</span><span class="w"></span>
+<span class="w">    </span><span class="k">if</span><span class="p">(</span><span class="n">bias</span><span class="p">)</span><span class="w"> </span><span class="p">{</span><span class="w"> </span><span class="c1">// dispatch a multiply with integrated bias addition i.e affine(...)</span>
+<span class="w">      </span><span class="n">intgemm_</span><span class="o">&lt;</span><span class="n">vtype</span><span class="o">&gt;::</span><span class="n">width</span><span class="o">::</span><span class="n">Multiply</span><span class="p">(</span><span class="cm">/*A=*/</span><span class="n">aQuant</span><span class="o">-&gt;</span><span class="n">val</span><span class="p">()</span><span class="o">-&gt;</span><span class="n">data</span><span class="o">&lt;</span><span class="n">Integer</span><span class="o">&gt;</span><span class="p">(),</span><span class="w"></span>
+<span class="w">                                       </span><span class="cm">/*B=*/</span><span class="n">bQuant</span><span class="o">-&gt;</span><span class="n">val</span><span class="p">()</span><span class="o">-&gt;</span><span class="n">data</span><span class="o">&lt;</span><span class="n">Integer</span><span class="o">&gt;</span><span class="p">(),</span><span class="w"></span>
+<span class="w">                                       </span><span class="n">rows</span><span class="p">(</span><span class="n">aQuant</span><span class="o">-&gt;</span><span class="n">val</span><span class="p">()),</span><span class="w"></span>
+<span class="w">                                       </span><span class="n">cols</span><span class="p">(</span><span class="n">aQuant</span><span class="o">-&gt;</span><span class="n">val</span><span class="p">()),</span><span class="w"></span>
+<span class="w">                                       </span><span class="n">cols</span><span class="p">(</span><span class="n">bQuant</span><span class="o">-&gt;</span><span class="n">val</span><span class="p">()),</span><span class="w"></span>
+<span class="w">                                       </span><span class="n">intgemm</span><span class="o">::</span><span class="n">callbacks</span><span class="o">::</span><span class="n">UnquantizeAndAddBiasAndWrite</span><span class="p">(</span><span class="n">unquant_mult</span><span class="p">,</span><span class="w"> </span><span class="cm">/*bias=*/</span><span class="n">bias</span><span class="o">-&gt;</span><span class="n">val</span><span class="p">()</span><span class="o">-&gt;</span><span class="n">data</span><span class="p">(),</span><span class="w"> </span><span class="cm">/*output=*/</span><span class="n">out</span><span class="o">-&gt;</span><span class="n">val</span><span class="p">()</span><span class="o">-&gt;</span><span class="n">data</span><span class="p">()));</span><span class="w"></span>
+<span class="w">    </span><span class="p">}</span><span class="w"> </span><span class="k">else</span><span class="w"> </span><span class="p">{</span><span class="w"> </span><span class="c1">// dispatch a multiply without bias addition i.e dot(...)</span>
+<span class="w">      </span><span class="n">intgemm_</span><span class="o">&lt;</span><span class="n">vtype</span><span class="o">&gt;::</span><span class="n">width</span><span class="o">::</span><span class="n">Multiply</span><span class="p">(</span><span class="cm">/*A=*/</span><span class="n">aQuant</span><span class="o">-&gt;</span><span class="n">val</span><span class="p">()</span><span class="o">-&gt;</span><span class="n">data</span><span class="o">&lt;</span><span class="n">Integer</span><span class="o">&gt;</span><span class="p">(),</span><span class="w"></span>
+<span class="w">                                       </span><span class="cm">/*B=*/</span><span class="n">bQuant</span><span class="o">-&gt;</span><span class="n">val</span><span class="p">()</span><span class="o">-&gt;</span><span class="n">data</span><span class="o">&lt;</span><span class="n">Integer</span><span class="o">&gt;</span><span class="p">(),</span><span class="w"></span>
+<span class="w">                                       </span><span class="n">rows</span><span class="p">(</span><span class="n">aQuant</span><span class="o">-&gt;</span><span class="n">val</span><span class="p">()),</span><span class="w"></span>
+<span class="w">                                       </span><span class="n">cols</span><span class="p">(</span><span class="n">aQuant</span><span class="o">-&gt;</span><span class="n">val</span><span class="p">()),</span><span class="w"></span>
+<span class="w">                                       </span><span class="n">cols</span><span class="p">(</span><span class="n">bQuant</span><span class="o">-&gt;</span><span class="n">val</span><span class="p">()),</span><span class="w"></span>
+<span class="w">                                       </span><span class="n">intgemm</span><span class="o">::</span><span class="n">callbacks</span><span class="o">::</span><span class="n">UnquantizeAndWrite</span><span class="p">(</span><span class="n">unquant_mult</span><span class="p">,</span><span class="w"> </span><span class="cm">/*output=*/</span><span class="n">out</span><span class="o">-&gt;</span><span class="n">val</span><span class="p">()</span><span class="o">-&gt;</span><span class="n">data</span><span class="p">()));</span><span class="w"></span>
+<span class="w">    </span><span class="p">}</span><span class="w"></span>
+<span class="w">  </span><span class="p">};</span><span class="w"></span>
 
-  <span class="n">std</span><span class="o">::</span><span class="n">vector</span><span class="o">&lt;</span><span class="n">Expr</span><span class="o">&gt;</span> <span class="n">children</span> <span class="o">=</span> <span class="p">{</span><span class="n">aQuant</span><span class="p">,</span> <span class="n">bQuant</span><span class="p">};</span>
-  <span class="k">if</span><span class="p">(</span><span class="n">bias</span><span class="p">)</span>
-    <span class="n">children</span><span class="p">.</span><span class="n">push_back</span><span class="p">(</span><span class="n">bias</span><span class="p">);</span>
+<span class="w">  </span><span class="n">std</span><span class="o">::</span><span class="n">vector</span><span class="o">&lt;</span><span class="n">Expr</span><span class="o">&gt;</span><span class="w"> </span><span class="n">children</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="p">{</span><span class="n">aQuant</span><span class="p">,</span><span class="w"> </span><span class="n">bQuant</span><span class="p">};</span><span class="w"></span>
+<span class="w">  </span><span class="k">if</span><span class="p">(</span><span class="n">bias</span><span class="p">)</span><span class="w"></span>
+<span class="w">    </span><span class="n">children</span><span class="p">.</span><span class="n">push_back</span><span class="p">(</span><span class="n">bias</span><span class="p">);</span><span class="w"></span>
 
-  <span class="k">return</span> <span class="nf">lambda</span><span class="p">(</span><span class="n">children</span><span class="p">,</span> <span class="n">outShape</span><span class="p">,</span> <span class="n">Type</span><span class="o">::</span><span class="n">float32</span><span class="p">,</span> <span class="n">dotOrAffineNodeOp</span><span class="p">);</span> <span class="c1">// inference-only Lambda node</span>
+<span class="w">  </span><span class="k">return</span><span class="w"> </span><span class="n">lambda</span><span class="p">(</span><span class="n">children</span><span class="p">,</span><span class="w"> </span><span class="n">outShape</span><span class="p">,</span><span class="w"> </span><span class="n">Type</span><span class="o">::</span><span class="n">float32</span><span class="p">,</span><span class="w"> </span><span class="n">dotOrAffineNodeOp</span><span class="p">);</span><span class="w"> </span><span class="c1">// inference-only Lambda node</span>
 <span class="cp">#else</span>
-  <span class="n">a</span><span class="p">,</span> <span class="n">bQuant</span><span class="p">,</span> <span class="n">bias</span><span class="p">,</span> <span class="n">transA</span><span class="p">,</span> <span class="n">scale</span><span class="p">;</span>
-  <span class="n">ABORT</span><span class="p">(</span><span class="s">&quot;You need to enable CPU compilation to use this feature. Use cmake .. -DCOMPILE_CPU=ON&quot;</span><span class="p">);</span>
+<span class="w">  </span><span class="n">a</span><span class="p">,</span><span class="w"> </span><span class="n">bQuant</span><span class="p">,</span><span class="w"> </span><span class="n">bias</span><span class="p">,</span><span class="w"> </span><span class="n">transA</span><span class="p">,</span><span class="w"> </span><span class="n">scale</span><span class="p">;</span><span class="w"></span>
+<span class="w">  </span><span class="n">ABORT</span><span class="p">(</span><span class="s">&quot;You need to enable CPU compilation to use this feature. Use cmake .. -DCOMPILE_CPU=ON&quot;</span><span class="p">);</span><span class="w"></span>
 <span class="cp">#endif</span>
-<span class="p">}</span>
+<span class="p">}</span><span class="w"></span>
 
 <span class="c1">// Dispatch correct hardware-agnostic or hardware-specific matrix multiplies</span>
-<span class="k">static</span> <span class="kr">inline</span> <span class="n">Expr</span> <span class="n">affineOrDot</span><span class="p">(</span><span class="n">Expr</span> <span class="n">a</span><span class="p">,</span> <span class="n">Expr</span> <span class="n">bQuant</span><span class="p">,</span> <span class="n">Expr</span> <span class="n">bias</span><span class="p">,</span> <span class="kt">bool</span> <span class="n">transA</span><span class="p">,</span> <span class="kt">bool</span> <span class="n">transB</span><span class="p">,</span> <span class="kt">float</span> <span class="n">scale</span><span class="p">)</span> <span class="p">{</span>
-  <span class="n">Type</span> <span class="n">bQuantElementType</span> <span class="o">=</span> <span class="n">bQuant</span><span class="o">-&gt;</span><span class="n">value_type</span><span class="p">();</span>
-  <span class="k">static</span> <span class="k">const</span> <span class="kt">bool</span> <span class="n">pass</span> <span class="o">=</span> <span class="n">cpu</span><span class="o">::</span><span class="n">integer</span><span class="o">::</span><span class="n">passOrAbort</span><span class="p">(</span><span class="n">bQuantElementType</span><span class="p">);</span>
-  <span class="n">pass</span><span class="p">;</span> <span class="c1">// We declare this variable as static so that passOrAbort is only ever run once during the initialization.</span>
-  <span class="k">switch</span><span class="p">(</span><span class="n">bQuantElementType</span><span class="p">)</span> <span class="p">{</span>
-    <span class="c1">//case Type::intgemm8 :  // The generic case selects CPU automatically, but we set all the types manually anyways.</span>
-    <span class="c1">//  return cpu::integer::affineOrDotTyped&lt;Type::intgemm8&gt;(a, bQuant, bias, transA, transB, scale);</span>
-    <span class="k">case</span> <span class="n">Type</span><span class="o">::</span><span class="nl">intgemm8ssse3</span> <span class="p">:</span>
-      <span class="k">return</span> <span class="n">cpu</span><span class="o">::</span><span class="n">integer</span><span class="o">::</span><span class="n">affineOrDotTyped</span><span class="o">&lt;</span><span class="n">Type</span><span class="o">::</span><span class="n">intgemm8ssse3</span><span class="o">&gt;</span><span class="p">(</span><span class="n">a</span><span class="p">,</span> <span class="n">bQuant</span><span class="p">,</span> <span class="n">bias</span><span class="p">,</span> <span class="n">transA</span><span class="p">,</span> <span class="n">transB</span><span class="p">,</span> <span class="n">scale</span><span class="p">);</span>
-    <span class="k">case</span> <span class="n">Type</span><span class="o">::</span><span class="nl">intgemm8avx2</span> <span class="p">:</span>
-      <span class="k">return</span> <span class="n">cpu</span><span class="o">::</span><span class="n">integer</span><span class="o">::</span><span class="n">affineOrDotTyped</span><span class="o">&lt;</span><span class="n">Type</span><span class="o">::</span><span class="n">intgemm8avx2</span><span class="o">&gt;</span><span class="p">(</span><span class="n">a</span><span class="p">,</span> <span class="n">bQuant</span><span class="p">,</span> <span class="n">bias</span><span class="p">,</span> <span class="n">transA</span><span class="p">,</span> <span class="n">transB</span><span class="p">,</span> <span class="n">scale</span><span class="p">);</span>
-    <span class="k">case</span> <span class="n">Type</span><span class="o">::</span><span class="nl">intgemm8avx512</span> <span class="p">:</span>
-      <span class="k">return</span> <span class="n">cpu</span><span class="o">::</span><span class="n">integer</span><span class="o">::</span><span class="n">affineOrDotTyped</span><span class="o">&lt;</span><span class="n">Type</span><span class="o">::</span><span class="n">intgemm8avx512</span><span class="o">&gt;</span><span class="p">(</span><span class="n">a</span><span class="p">,</span> <span class="n">bQuant</span><span class="p">,</span> <span class="n">bias</span><span class="p">,</span> <span class="n">transA</span><span class="p">,</span> <span class="n">transB</span><span class="p">,</span> <span class="n">scale</span><span class="p">);</span>
-    <span class="k">case</span> <span class="n">Type</span><span class="o">::</span><span class="nl">intgemm8avx512vnni</span> <span class="p">:</span>
-      <span class="k">return</span> <span class="n">cpu</span><span class="o">::</span><span class="n">integer</span><span class="o">::</span><span class="n">affineOrDotTyped</span><span class="o">&lt;</span><span class="n">Type</span><span class="o">::</span><span class="n">intgemm8avx512vnni</span><span class="o">&gt;</span><span class="p">(</span><span class="n">a</span><span class="p">,</span> <span class="n">bQuant</span><span class="p">,</span> <span class="n">bias</span><span class="p">,</span> <span class="n">transA</span><span class="p">,</span> <span class="n">transB</span><span class="p">,</span> <span class="n">scale</span><span class="p">);</span>
-    <span class="c1">//case Type::intgemm16 :  // The generic case selects CPU automatically, but we set all the types manually anyways.</span>
-    <span class="c1">//  return cpu::integer::affineOrDotTyped&lt;Type::intgemm16&gt;(a, bQuant, bias, transA, transB, scale);</span>
-    <span class="k">case</span> <span class="n">Type</span><span class="o">::</span><span class="nl">intgemm16sse2</span> <span class="p">:</span>
-      <span class="k">return</span> <span class="n">cpu</span><span class="o">::</span><span class="n">integer</span><span class="o">::</span><span class="n">affineOrDotTyped</span><span class="o">&lt;</span><span class="n">Type</span><span class="o">::</span><span class="n">intgemm16sse2</span><span class="o">&gt;</span><span class="p">(</span><span class="n">a</span><span class="p">,</span> <span class="n">bQuant</span><span class="p">,</span> <span class="n">bias</span><span class="p">,</span> <span class="n">transA</span><span class="p">,</span> <span class="n">transB</span><span class="p">,</span> <span class="n">scale</span><span class="p">);</span>
-    <span class="k">case</span> <span class="n">Type</span><span class="o">::</span><span class="nl">intgemm16avx2</span> <span class="p">:</span>
-      <span class="k">return</span> <span class="n">cpu</span><span class="o">::</span><span class="n">integer</span><span class="o">::</span><span class="n">affineOrDotTyped</span><span class="o">&lt;</span><span class="n">Type</span><span class="o">::</span><span class="n">intgemm16avx2</span><span class="o">&gt;</span><span class="p">(</span><span class="n">a</span><span class="p">,</span> <span class="n">bQuant</span><span class="p">,</span> <span class="n">bias</span><span class="p">,</span> <span class="n">transA</span><span class="p">,</span> <span class="n">transB</span><span class="p">,</span> <span class="n">scale</span><span class="p">);</span>
-    <span class="k">case</span> <span class="n">Type</span><span class="o">::</span><span class="nl">intgemm16avx512</span> <span class="p">:</span>
-      <span class="k">return</span> <span class="n">cpu</span><span class="o">::</span><span class="n">integer</span><span class="o">::</span><span class="n">affineOrDotTyped</span><span class="o">&lt;</span><span class="n">Type</span><span class="o">::</span><span class="n">intgemm16avx512</span><span class="o">&gt;</span><span class="p">(</span><span class="n">a</span><span class="p">,</span> <span class="n">bQuant</span><span class="p">,</span> <span class="n">bias</span><span class="p">,</span> <span class="n">transA</span><span class="p">,</span> <span class="n">transB</span><span class="p">,</span> <span class="n">scale</span><span class="p">);</span>
-    <span class="k">default</span><span class="o">:</span>
-      <span class="n">ABORT</span><span class="p">(</span><span class="s">&quot;Unsupported type {} for Intgemm type??&quot;</span><span class="p">,</span> <span class="n">bQuantElementType</span><span class="p">);</span>
-  <span class="p">}</span>
-<span class="p">}</span>
+<span class="k">static</span><span class="w"> </span><span class="kr">inline</span><span class="w"> </span><span class="n">Expr</span><span class="w"> </span><span class="n">affineOrDot</span><span class="p">(</span><span class="n">Expr</span><span class="w"> </span><span class="n">a</span><span class="p">,</span><span class="w"> </span><span class="n">Expr</span><span class="w"> </span><span class="n">bQuant</span><span class="p">,</span><span class="w"> </span><span class="n">Expr</span><span class="w"> </span><span class="n">bias</span><span class="p">,</span><span class="w"> </span><span class="kt">bool</span><span class="w"> </span><span class="n">transA</span><span class="p">,</span><span class="w"> </span><span class="kt">bool</span><span class="w"> </span><span class="n">transB</span><span class="p">,</span><span class="w"> </span><span class="kt">float</span><span class="w"> </span><span class="n">scale</span><span class="p">)</span><span class="w"> </span><span class="p">{</span><span class="w"></span>
+<span class="w">  </span><span class="n">Type</span><span class="w"> </span><span class="n">bQuantElementType</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="n">bQuant</span><span class="o">-&gt;</span><span class="n">value_type</span><span class="p">();</span><span class="w"></span>
+<span class="w">  </span><span class="k">static</span><span class="w"> </span><span class="k">const</span><span class="w"> </span><span class="kt">bool</span><span class="w"> </span><span class="n">pass</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="n">cpu</span><span class="o">::</span><span class="n">integer</span><span class="o">::</span><span class="n">passOrAbort</span><span class="p">(</span><span class="n">bQuantElementType</span><span class="p">);</span><span class="w"></span>
+<span class="w">  </span><span class="n">pass</span><span class="p">;</span><span class="w"> </span><span class="c1">// We declare this variable as static so that passOrAbort is only ever run once during the initialization.</span>
+<span class="w">  </span><span class="k">switch</span><span class="p">(</span><span class="n">bQuantElementType</span><span class="p">)</span><span class="w"> </span><span class="p">{</span><span class="w"></span>
+<span class="w">    </span><span class="c1">//case Type::intgemm8 :  // The generic case selects CPU automatically, but we set all the types manually anyways.</span>
+<span class="w">    </span><span class="c1">//  return cpu::integer::affineOrDotTyped&lt;Type::intgemm8&gt;(a, bQuant, bias, transA, transB, scale);</span>
+<span class="w">    </span><span class="k">case</span><span class="w"> </span><span class="n">Type</span><span class="o">::</span><span class="n">intgemm8ssse3</span><span class="w"> </span><span class="o">:</span><span class="w"></span>
+<span class="w">      </span><span class="k">return</span><span class="w"> </span><span class="n">cpu</span><span class="o">::</span><span class="n">integer</span><span class="o">::</span><span class="n">affineOrDotTyped</span><span class="o">&lt;</span><span class="n">Type</span><span class="o">::</span><span class="n">intgemm8ssse3</span><span class="o">&gt;</span><span class="p">(</span><span class="n">a</span><span class="p">,</span><span class="w"> </span><span class="n">bQuant</span><span class="p">,</span><span class="w"> </span><span class="n">bias</span><span class="p">,</span><span class="w"> </span><span class="n">transA</span><span class="p">,</span><span class="w"> </span><span class="n">transB</span><span class="p">,</span><span class="w"> </span><span class="n">scale</span><span class="p">);</span><span class="w"></span>
+<span class="w">    </span><span class="k">case</span><span class="w"> </span><span class="n">Type</span><span class="o">::</span><span class="n">intgemm8avx2</span><span class="w"> </span><span class="o">:</span><span class="w"></span>
+<span class="w">      </span><span class="k">return</span><span class="w"> </span><span class="n">cpu</span><span class="o">::</span><span class="n">integer</span><span class="o">::</span><span class="n">affineOrDotTyped</span><span class="o">&lt;</span><span class="n">Type</span><span class="o">::</span><span class="n">intgemm8avx2</span><span class="o">&gt;</span><span class="p">(</span><span class="n">a</span><span class="p">,</span><span class="w"> </span><span class="n">bQuant</span><span class="p">,</span><span class="w"> </span><span class="n">bias</span><span class="p">,</span><span class="w"> </span><span class="n">transA</span><span class="p">,</span><span class="w"> </span><span class="n">transB</span><span class="p">,</span><span class="w"> </span><span class="n">scale</span><span class="p">);</span><span class="w"></span>
+<span class="w">    </span><span class="k">case</span><span class="w"> </span><span class="n">Type</span><span class="o">::</span><span class="n">intgemm8avx512</span><span class="w"> </span><span class="o">:</span><span class="w"></span>
+<span class="w">      </span><span class="k">return</span><span class="w"> </span><span class="n">cpu</span><span class="o">::</span><span class="n">integer</span><span class="o">::</span><span class="n">affineOrDotTyped</span><span class="o">&lt;</span><span class="n">Type</span><span class="o">::</span><span class="n">intgemm8avx512</span><span class="o">&gt;</span><span class="p">(</span><span class="n">a</span><span class="p">,</span><span class="w"> </span><span class="n">bQuant</span><span class="p">,</span><span class="w"> </span><span class="n">bias</span><span class="p">,</span><span class="w"> </span><span class="n">transA</span><span class="p">,</span><span class="w"> </span><span class="n">transB</span><span class="p">,</span><span class="w"> </span><span class="n">scale</span><span class="p">);</span><span class="w"></span>
+<span class="w">    </span><span class="k">case</span><span class="w"> </span><span class="n">Type</span><span class="o">::</span><span class="n">intgemm8avx512vnni</span><span class="w"> </span><span class="o">:</span><span class="w"></span>
+<span class="w">      </span><span class="k">return</span><span class="w"> </span><span class="n">cpu</span><span class="o">::</span><span class="n">integer</span><span class="o">::</span><span class="n">affineOrDotTyped</span><span class="o">&lt;</span><span class="n">Type</span><span class="o">::</span><span class="n">intgemm8avx512vnni</span><span class="o">&gt;</span><span class="p">(</span><span class="n">a</span><span class="p">,</span><span class="w"> </span><span class="n">bQuant</span><span class="p">,</span><span class="w"> </span><span class="n">bias</span><span class="p">,</span><span class="w"> </span><span class="n">transA</span><span class="p">,</span><span class="w"> </span><span class="n">transB</span><span class="p">,</span><span class="w"> </span><span class="n">scale</span><span class="p">);</span><span class="w"></span>
+<span class="w">    </span><span class="c1">//case Type::intgemm16 :  // The generic case selects CPU automatically, but we set all the types manually anyways.</span>
+<span class="w">    </span><span class="c1">//  return cpu::integer::affineOrDotTyped&lt;Type::intgemm16&gt;(a, bQuant, bias, transA, transB, scale);</span>
+<span class="w">    </span><span class="k">case</span><span class="w"> </span><span class="n">Type</span><span class="o">::</span><span class="n">intgemm16sse2</span><span class="w"> </span><span class="o">:</span><span class="w"></span>
+<span class="w">      </span><span class="k">return</span><span class="w"> </span><span class="n">cpu</span><span class="o">::</span><span class="n">integer</span><span class="o">::</span><span class="n">affineOrDotTyped</span><span class="o">&lt;</span><span class="n">Type</span><span class="o">::</span><span class="n">intgemm16sse2</span><span class="o">&gt;</span><span class="p">(</span><span class="n">a</span><span class="p">,</span><span class="w"> </span><span class="n">bQuant</span><span class="p">,</span><span class="w"> </span><span class="n">bias</span><span class="p">,</span><span class="w"> </span><span class="n">transA</span><span class="p">,</span><span class="w"> </span><span class="n">transB</span><span class="p">,</span><span class="w"> </span><span class="n">scale</span><span class="p">);</span><span class="w"></span>
+<span class="w">    </span><span class="k">case</span><span class="w"> </span><span class="n">Type</span><span class="o">::</span><span class="n">intgemm16avx2</span><span class="w"> </span><span class="o">:</span><span class="w"></span>
+<span class="w">      </span><span class="k">return</span><span class="w"> </span><span class="n">cpu</span><span class="o">::</span><span class="n">integer</span><span class="o">::</span><span class="n">affineOrDotTyped</span><span class="o">&lt;</span><span class="n">Type</span><span class="o">::</span><span class="n">intgemm16avx2</span><span class="o">&gt;</span><span class="p">(</span><span class="n">a</span><span class="p">,</span><span class="w"> </span><span class="n">bQuant</span><span class="p">,</span><span class="w"> </span><span class="n">bias</span><span class="p">,</span><span class="w"> </span><span class="n">transA</span><span class="p">,</span><span class="w"> </span><span class="n">transB</span><span class="p">,</span><span class="w"> </span><span class="n">scale</span><span class="p">);</span><span class="w"></span>
+<span class="w">    </span><span class="k">case</span><span class="w"> </span><span class="n">Type</span><span class="o">::</span><span class="n">intgemm16avx512</span><span class="w"> </span><span class="o">:</span><span class="w"></span>
+<span class="w">      </span><span class="k">return</span><span class="w"> </span><span class="n">cpu</span><span class="o">::</span><span class="n">integer</span><span class="o">::</span><span class="n">affineOrDotTyped</span><span class="o">&lt;</span><span class="n">Type</span><span class="o">::</span><span class="n">intgemm16avx512</span><span class="o">&gt;</span><span class="p">(</span><span class="n">a</span><span class="p">,</span><span class="w"> </span><span class="n">bQuant</span><span class="p">,</span><span class="w"> </span><span class="n">bias</span><span class="p">,</span><span class="w"> </span><span class="n">transA</span><span class="p">,</span><span class="w"> </span><span class="n">transB</span><span class="p">,</span><span class="w"> </span><span class="n">scale</span><span class="p">);</span><span class="w"></span>
+<span class="w">    </span><span class="k">default</span><span class="o">:</span><span class="w"></span>
+<span class="w">      </span><span class="n">ABORT</span><span class="p">(</span><span class="s">&quot;Unsupported type {} for Intgemm type??&quot;</span><span class="p">,</span><span class="w"> </span><span class="n">bQuantElementType</span><span class="p">);</span><span class="w"></span>
+<span class="w">  </span><span class="p">}</span><span class="w"></span>
+<span class="p">}</span><span class="w"></span>
 
-<span class="p">}</span>  <span class="c1">// namespace integer</span>
-<span class="p">}</span>  <span class="c1">// namespace cpu</span>
-<span class="p">}</span>  <span class="c1">// namespace marian</span>
+<span class="p">}</span><span class="w">  </span><span class="c1">// namespace integer</span>
+<span class="p">}</span><span class="w">  </span><span class="c1">// namespace cpu</span>
+<span class="p">}</span><span class="w">  </span><span class="c1">// namespace marian</span>
 </pre></div>
 </div>
-</div>
+</section>
 
 
            </div>
-           
           </div>
           <footer>
 
   <hr/>
 
   <div role="contentinfo">
-    <p>
-        &#169; Copyright 2021, Marian NMT Team.
-
-    </p>
+    <p>&#169; Copyright 2021, Marian NMT Team.</p>
   </div>
-    
-    
-    
-    Built with <a href="https://www.sphinx-doc.org/">Sphinx</a> using a
-    
+
+  Built with <a href="https://www.sphinx-doc.org/">Sphinx</a> using a
     <a href="https://github.com/readthedocs/sphinx_rtd_theme">theme</a>
-    
-    provided by <a href="https://readthedocs.org">Read the Docs</a>. 
+    provided by <a href="https://readthedocs.org">Read the Docs</a>.
+   
 
 </footer>
         </div>
       </div>
-
     </section>
-
   </div>
-  
-
-  <script type="text/javascript">
+  <script>
       jQuery(function () {
           SphinxRtdTheme.Navigation.enable(true);
       });
-  </script>
-
-  
-  
-    
-   
+  </script> 
 
 </body>
 </html>

@@ -1,78 +1,41 @@
-
-
 <!DOCTYPE html>
 <html class="writer-html5" lang="en" >
 <head>
-  <meta charset="utf-8" />
-  
+  <meta charset="utf-8" /><meta name="generator" content="Docutils 0.17.1: http://docutils.sourceforge.net/" />
+
   <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-  
-  <title>Program Listing for File tensor_operators.h &mdash; Marian NMT v1.10.3 2021-03-22 documentation</title>
-  
-
-  
-  <link rel="stylesheet" href="../_static/css/theme.css" type="text/css" />
-  <link rel="stylesheet" href="../_static/pygments.css" type="text/css" />
-  <link rel="stylesheet" href="../_static/css/custom.css" type="text/css" />
-  <link rel="stylesheet" href="../_static/collapsible-lists/css/tree_view.css" type="text/css" />
-
-  
-  
-
-  
-  
-
-  
+  <title>Program Listing for File tensor_operators.h &mdash; Marian NMT v1.10.27 2022-01-25 documentation</title><link rel="stylesheet" href="../_static/css/theme.css" type="text/css" />
+    <link rel="stylesheet" href="../_static/pygments.css" type="text/css" />
+      <link rel="stylesheet" href="../_static/css/custom.css" type="text/css" />
+      <link rel="stylesheet" href="../_static/collapsible-lists/css/tree_view.css" type="text/css" />
     <link rel="canonical" href="http://marian-nmt.github.io/docs/api/api/program_listing_file_src_tensors_tensor_operators.h.html" />
-
-  
   <!--[if lt IE 9]>
     <script src="../_static/js/html5shiv.min.js"></script>
   <![endif]-->
-  
-    
-      <script type="text/javascript" id="documentation_options" data-url_root="../" src="../_static/documentation_options.js"></script>
+  <script id="documentation_options" data-url_root="../" src="../_static/documentation_options.js"></script>
         <script src="../_static/jquery.js"></script>
         <script src="../_static/underscore.js"></script>
         <script src="../_static/doctools.js"></script>
         <script src="../_static/language_data.js"></script>
         <script src="../_static/collapsible-lists/js/CollapsibleLists.compressed.js"></script>
         <script src="../_static/collapsible-lists/js/apply-collapsible-lists.js"></script>
-    
-    <script type="text/javascript" src="../_static/js/theme.js"></script>
-
-    
+        <script async="async" src="https://cdnjs.cloudflare.com/ajax/libs/mathjax/2.7.5/latest.js?config=TeX-AMS-MML_HTMLorMML"></script>
+        <script type="text/x-mathjax-config">MathJax.Hub.Config({"tex2jax": {"inlineMath": [["\\(", "\\)"]], "displayMath": [["\\[", "\\]"]], "processRefs": false, "processEnvironments": false}})</script>
+    <script src="../_static/js/theme.js"></script>
     <link rel="index" title="Index" href="../genindex.html" />
     <link rel="search" title="Search" href="../search.html" /> 
 </head>
 
-<body class="wy-body-for-nav">
-
-   
+<body class="wy-body-for-nav"> 
   <div class="wy-grid-for-nav">
-    
     <nav data-toggle="wy-nav-shift" class="wy-nav-side">
       <div class="wy-side-scroll">
         <div class="wy-side-nav-search" >
-          
-
-          
             <a href="../index.html" class="icon icon-home"> Marian NMT
-          
-
-          
           </a>
-
-          
-            
-            
               <div class="version">
-                v1.10.3
+                v1.10.27
               </div>
-            
-          
-
-          
 <div role="search">
   <form id="rtd-search-form" class="wy-form" action="../search.html" method="get">
     <input type="text" name="q" placeholder="Search docs" />
@@ -80,488 +43,473 @@
     <input type="hidden" name="area" value="default" />
   </form>
 </div>
-
-          
-        </div>
-
-        
-        <div class="wy-menu wy-menu-vertical" data-spy="affix" role="navigation" aria-label="main navigation">
-          
-            
-            
-              
-            
-            
-              <p class="caption"><span class="caption-text">Contents:</span></p>
+        </div><div class="wy-menu wy-menu-vertical" data-spy="affix" role="navigation" aria-label="Navigation menu">
+              <p><span class="caption-text">Contents:</span></p>
 <ul>
 <li class="toctree-l1"><a class="reference internal" href="../graph.html">Expression graphs</a></li>
 <li class="toctree-l1"><a class="reference internal" href="../operators.html">Operations in the Expression Graph</a></li>
 <li class="toctree-l1"><a class="reference internal" href="library_index.html">Library API</a></li>
 <li class="toctree-l1"><a class="reference internal" href="../contributing.html">How to contribute to Marian</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../doc_guide.html">Writing documentation</a></li>
 </ul>
 
-            
-          
         </div>
-        
       </div>
     </nav>
 
-    <section data-toggle="wy-nav-shift" class="wy-nav-content-wrap">
-
-      
-      <nav class="wy-nav-top" aria-label="top navigation">
-        
+    <section data-toggle="wy-nav-shift" class="wy-nav-content-wrap"><nav class="wy-nav-top" aria-label="Mobile navigation menu" >
           <i data-toggle="wy-nav-top" class="fa fa-bars"></i>
           <a href="../index.html">Marian NMT</a>
-        
       </nav>
 
-
       <div class="wy-nav-content">
-        
         <div class="rst-content">
-        
-          
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-<div role="navigation" aria-label="breadcrumbs navigation">
-
+          <div role="navigation" aria-label="Page navigation">
   <ul class="wy-breadcrumbs">
-    
       <li><a href="../index.html" class="icon icon-home"></a> &raquo;</li>
-        
       <li>Program Listing for File tensor_operators.h</li>
-    
-    
       <li class="wy-breadcrumbs-aside">
-        
-          
             <a href="../_sources/api/program_listing_file_src_tensors_tensor_operators.h.rst.txt" rel="nofollow"> View page source</a>
-          
-        
       </li>
-    
   </ul>
-
-  
   <hr/>
 </div>
           <div role="main" class="document" itemscope="itemscope" itemtype="http://schema.org/Article">
            <div itemprop="articleBody">
-            
-  <div class="section" id="program-listing-for-file-tensor-operators-h">
+             
+  <section id="program-listing-for-file-tensor-operators-h">
 <span id="program-listing-file-src-tensors-tensor-operators-h"></span><h1>Program Listing for File tensor_operators.h<a class="headerlink" href="#program-listing-for-file-tensor-operators-h" title="Permalink to this headline">¶</a></h1>
 <p>↰ <a class="reference internal" href="file_src_tensors_tensor_operators.h.html#file-src-tensors-tensor-operators-h"><span class="std std-ref">Return to documentation for file</span></a> (<code class="docutils literal notranslate"><span class="pre">src/tensors/tensor_operators.h</span></code>)</p>
 <div class="highlight-cpp notranslate"><div class="highlight"><pre><span></span><span class="cp">#pragma once</span>
 
-<span class="cp">#include</span> <span class="cpf">&quot;common/definitions.h&quot;</span><span class="cp"></span>
-<span class="cp">#include</span> <span class="cpf">&quot;tensors/allocator.h&quot;</span><span class="cp"></span>
-<span class="cp">#include</span> <span class="cpf">&quot;tensors/tensor.h&quot;</span><span class="cp"></span>
+<span class="cp">#include</span><span class="w"> </span><span class="cpf">&quot;common/definitions.h&quot;</span><span class="cp"></span>
+<span class="cp">#include</span><span class="w"> </span><span class="cpf">&quot;tensors/allocator.h&quot;</span><span class="cp"></span>
+<span class="cp">#include</span><span class="w"> </span><span class="cpf">&quot;tensors/tensor.h&quot;</span><span class="cp"></span>
 
-<span class="cp">#include</span> <span class="cpf">&quot;tensors/dispatch.h&quot;</span><span class="cp"></span>
+<span class="cp">#include</span><span class="w"> </span><span class="cpf">&quot;tensors/dispatch.h&quot;</span><span class="cp"></span>
 
-<span class="cp">#include</span> <span class="cpf">&quot;functional/shape.h&quot;</span><span class="cp"></span>
-<span class="cp">#include</span> <span class="cpf">&quot;functional/tensor.h&quot;</span><span class="cp"></span>
-<span class="cp">#include</span> <span class="cpf">&quot;functional/tmp.h&quot;</span><span class="cp"></span>
+<span class="cp">#include</span><span class="w"> </span><span class="cpf">&quot;functional/shape.h&quot;</span><span class="cp"></span>
+<span class="cp">#include</span><span class="w"> </span><span class="cpf">&quot;functional/tensor.h&quot;</span><span class="cp"></span>
+<span class="cp">#include</span><span class="w"> </span><span class="cpf">&quot;functional/tmp.h&quot;</span><span class="cp"></span>
 
 <span class="cp">#ifdef CUDA_FOUND</span>
-<span class="cp">#include</span> <span class="cpf">&quot;tensors/gpu/add.h&quot;</span><span class="cp"></span>
-<span class="cp">#include</span> <span class="cpf">&quot;tensors/gpu/algorithm.h&quot;</span><span class="cp"></span>
-<span class="cp">#include</span> <span class="cpf">&quot;tensors/gpu/element.h&quot;</span><span class="cp"></span>
-<span class="cp">#include</span> <span class="cpf">&quot;tensors/gpu/prod.h&quot;</span><span class="cp"></span>
+<span class="cp">#include</span><span class="w"> </span><span class="cpf">&quot;tensors/gpu/add.h&quot;</span><span class="cp"></span>
+<span class="cp">#include</span><span class="w"> </span><span class="cpf">&quot;tensors/gpu/algorithm.h&quot;</span><span class="cp"></span>
+<span class="cp">#include</span><span class="w"> </span><span class="cpf">&quot;tensors/gpu/element.h&quot;</span><span class="cp"></span>
+<span class="cp">#include</span><span class="w"> </span><span class="cpf">&quot;tensors/gpu/prod.h&quot;</span><span class="cp"></span>
 <span class="cp">#endif</span>
 
-<span class="cp">#include</span> <span class="cpf">&quot;tensors/cpu/add.h&quot;</span><span class="cp"></span>
-<span class="cp">#include</span> <span class="cpf">&quot;tensors/cpu/element.h&quot;</span><span class="cp"></span>
+<span class="cp">#include</span><span class="w"> </span><span class="cpf">&quot;tensors/cpu/add.h&quot;</span><span class="cp"></span>
+<span class="cp">#include</span><span class="w"> </span><span class="cpf">&quot;tensors/cpu/element.h&quot;</span><span class="cp"></span>
 
-<span class="cp">#include</span> <span class="cpf">&lt;algorithm&gt;</span><span class="cp"></span>
+<span class="cp">#include</span><span class="w"> </span><span class="cpf">&lt;algorithm&gt;</span><span class="cp"></span>
 
-<span class="k">namespace</span> <span class="n">marian</span> <span class="p">{</span>
+<span class="k">namespace</span><span class="w"> </span><span class="nn">marian</span><span class="w"> </span><span class="p">{</span><span class="w"></span>
 
-<span class="k">template</span> <span class="o">&lt;</span><span class="k">typename</span> <span class="nc">InIt</span><span class="p">,</span> <span class="k">typename</span> <span class="nc">OutIt</span><span class="o">&gt;</span>
-<span class="kt">void</span> <span class="n">copy</span><span class="p">(</span><span class="n">Ptr</span><span class="o">&lt;</span><span class="n">Backend</span><span class="o">&gt;&amp;</span> <span class="n">backend</span><span class="p">,</span> <span class="k">const</span> <span class="n">InIt</span> <span class="n">beg</span><span class="p">,</span> <span class="k">const</span> <span class="n">InIt</span> <span class="n">end</span><span class="p">,</span> <span class="n">OutIt</span> <span class="n">it</span><span class="p">)</span> <span class="p">{</span>
+<span class="k">template</span><span class="w"> </span><span class="o">&lt;</span><span class="k">typename</span><span class="w"> </span><span class="nc">InIt</span><span class="p">,</span><span class="w"> </span><span class="k">typename</span><span class="w"> </span><span class="nc">OutIt</span><span class="o">&gt;</span><span class="w"></span>
+<span class="kt">void</span><span class="w"> </span><span class="n">copy</span><span class="p">(</span><span class="n">Ptr</span><span class="o">&lt;</span><span class="n">Backend</span><span class="o">&gt;&amp;</span><span class="w"> </span><span class="n">backend</span><span class="p">,</span><span class="w"> </span><span class="k">const</span><span class="w"> </span><span class="n">InIt</span><span class="w"> </span><span class="n">beg</span><span class="p">,</span><span class="w"> </span><span class="k">const</span><span class="w"> </span><span class="n">InIt</span><span class="w"> </span><span class="n">end</span><span class="p">,</span><span class="w"> </span><span class="n">OutIt</span><span class="w"> </span><span class="n">it</span><span class="p">)</span><span class="w"> </span><span class="p">{</span><span class="w"></span>
 <span class="cp">#ifdef CUDA_FOUND</span>
-  <span class="k">if</span><span class="p">(</span><span class="n">backend</span><span class="o">-&gt;</span><span class="n">getDeviceId</span><span class="p">().</span><span class="n">type</span> <span class="o">==</span> <span class="n">DeviceType</span><span class="o">::</span><span class="n">gpu</span><span class="p">)</span>
-    <span class="n">gpu</span><span class="o">::</span><span class="n">copy</span><span class="p">(</span><span class="n">backend</span><span class="p">,</span> <span class="n">beg</span><span class="p">,</span> <span class="n">end</span><span class="p">,</span> <span class="n">it</span><span class="p">);</span>
-  <span class="k">else</span>
-    <span class="n">std</span><span class="o">::</span><span class="n">copy</span><span class="p">(</span><span class="n">beg</span><span class="p">,</span> <span class="n">end</span><span class="p">,</span> <span class="n">it</span><span class="p">);</span>
+<span class="w">  </span><span class="k">if</span><span class="p">(</span><span class="n">backend</span><span class="o">-&gt;</span><span class="n">getDeviceId</span><span class="p">().</span><span class="n">type</span><span class="w"> </span><span class="o">==</span><span class="w"> </span><span class="n">DeviceType</span><span class="o">::</span><span class="n">gpu</span><span class="p">)</span><span class="w"></span>
+<span class="w">    </span><span class="n">gpu</span><span class="o">::</span><span class="n">copy</span><span class="p">(</span><span class="n">backend</span><span class="p">,</span><span class="w"> </span><span class="n">beg</span><span class="p">,</span><span class="w"> </span><span class="n">end</span><span class="p">,</span><span class="w"> </span><span class="n">it</span><span class="p">);</span><span class="w"></span>
+<span class="w">  </span><span class="k">else</span><span class="w"></span>
+<span class="w">    </span><span class="n">std</span><span class="o">::</span><span class="n">copy</span><span class="p">(</span><span class="n">beg</span><span class="p">,</span><span class="w"> </span><span class="n">end</span><span class="p">,</span><span class="w"> </span><span class="n">it</span><span class="p">);</span><span class="w"></span>
 <span class="cp">#else</span>
-    <span class="n">backend</span><span class="p">;</span>
-    <span class="n">std</span><span class="o">::</span><span class="n">copy</span><span class="p">(</span><span class="n">beg</span><span class="p">,</span> <span class="n">end</span><span class="p">,</span> <span class="n">it</span><span class="p">);</span>
+<span class="w">    </span><span class="n">backend</span><span class="p">;</span><span class="w"></span>
+<span class="w">    </span><span class="n">std</span><span class="o">::</span><span class="n">copy</span><span class="p">(</span><span class="n">beg</span><span class="p">,</span><span class="w"> </span><span class="n">end</span><span class="p">,</span><span class="w"> </span><span class="n">it</span><span class="p">);</span><span class="w"></span>
 <span class="cp">#endif</span>
-<span class="p">}</span>
+<span class="p">}</span><span class="w"></span>
 
-<span class="n">DISPATCH2</span><span class="p">(</span><span class="n">CopyCast</span><span class="p">,</span> <span class="n">marian</span><span class="o">::</span><span class="n">Tensor</span><span class="p">,</span> <span class="k">const</span> <span class="n">marian</span><span class="o">::</span><span class="n">Tensor</span><span class="p">);</span>
-<span class="n">DISPATCH2</span><span class="p">(</span><span class="n">AddCast</span><span class="p">,</span> <span class="n">marian</span><span class="o">::</span><span class="n">Tensor</span><span class="p">,</span> <span class="k">const</span> <span class="n">marian</span><span class="o">::</span><span class="n">Tensor</span><span class="p">);</span>
-<span class="n">DISPATCH4</span><span class="p">(</span><span class="n">IsNaN</span><span class="p">,</span> <span class="k">const</span> <span class="n">Tensor</span><span class="p">,</span> <span class="n">Ptr</span><span class="o">&lt;</span><span class="n">Allocator</span><span class="o">&gt;</span><span class="p">,</span> <span class="kt">bool</span><span class="o">&amp;</span><span class="p">,</span> <span class="kt">bool</span><span class="o">&amp;</span><span class="p">);</span>
+<span class="n">DISPATCH2</span><span class="p">(</span><span class="n">CopyCast</span><span class="p">,</span><span class="w"> </span><span class="n">marian</span><span class="o">::</span><span class="n">Tensor</span><span class="p">,</span><span class="w"> </span><span class="k">const</span><span class="w"> </span><span class="n">marian</span><span class="o">::</span><span class="n">Tensor</span><span class="p">);</span><span class="w"></span>
+<span class="n">DISPATCH2</span><span class="p">(</span><span class="n">AddCast</span><span class="p">,</span><span class="w"> </span><span class="n">marian</span><span class="o">::</span><span class="n">Tensor</span><span class="p">,</span><span class="w"> </span><span class="k">const</span><span class="w"> </span><span class="n">marian</span><span class="o">::</span><span class="n">Tensor</span><span class="p">);</span><span class="w"></span>
+<span class="n">DISPATCH4</span><span class="p">(</span><span class="n">IsNaN</span><span class="p">,</span><span class="w"> </span><span class="k">const</span><span class="w"> </span><span class="n">Tensor</span><span class="p">,</span><span class="w"> </span><span class="n">Ptr</span><span class="o">&lt;</span><span class="n">Allocator</span><span class="o">&gt;</span><span class="p">,</span><span class="w"> </span><span class="kt">bool</span><span class="o">&amp;</span><span class="p">,</span><span class="w"> </span><span class="kt">bool</span><span class="o">&amp;</span><span class="p">);</span><span class="w"></span>
 
-<span class="k">template</span> <span class="o">&lt;</span><span class="k">class</span> <span class="nc">Functor</span><span class="p">,</span> <span class="k">class</span><span class="p">...</span> <span class="n">Tensors</span><span class="o">&gt;</span>
-<span class="kt">void</span> <span class="n">Element</span><span class="p">(</span><span class="n">Functor</span> <span class="n">functor</span><span class="p">,</span> <span class="n">marian</span><span class="o">::</span><span class="n">Tensor</span> <span class="n">out</span><span class="p">,</span> <span class="n">Tensors</span><span class="p">...</span> <span class="n">tensors</span><span class="p">)</span> <span class="p">{</span>
+<span class="k">template</span><span class="w"> </span><span class="o">&lt;</span><span class="k">class</span><span class="w"> </span><span class="nc">Functor</span><span class="p">,</span><span class="w"> </span><span class="k">class</span><span class="p">...</span><span class="w"> </span><span class="n">Tensors</span><span class="o">&gt;</span><span class="w"></span>
+<span class="kt">void</span><span class="w"> </span><span class="n">Element</span><span class="p">(</span><span class="n">Functor</span><span class="w"> </span><span class="n">functor</span><span class="p">,</span><span class="w"> </span><span class="n">marian</span><span class="o">::</span><span class="n">Tensor</span><span class="w"> </span><span class="n">out</span><span class="p">,</span><span class="w"> </span><span class="n">Tensors</span><span class="p">...</span><span class="w"> </span><span class="n">tensors</span><span class="p">)</span><span class="w"> </span><span class="p">{</span><span class="w"></span>
 <span class="cp">#ifdef CUDA_FOUND</span>
-  <span class="k">if</span><span class="p">(</span><span class="n">out</span><span class="o">-&gt;</span><span class="n">getBackend</span><span class="p">()</span><span class="o">-&gt;</span><span class="n">getDeviceId</span><span class="p">().</span><span class="n">type</span> <span class="o">==</span> <span class="n">DeviceType</span><span class="o">::</span><span class="n">gpu</span><span class="p">)</span>
-    <span class="n">gpu</span><span class="o">::</span><span class="n">Element</span><span class="p">(</span><span class="n">functor</span><span class="p">,</span> <span class="n">out</span><span class="p">,</span> <span class="n">tensors</span><span class="p">...);</span>
-  <span class="k">else</span>
+<span class="w">  </span><span class="k">if</span><span class="p">(</span><span class="n">out</span><span class="o">-&gt;</span><span class="n">getBackend</span><span class="p">()</span><span class="o">-&gt;</span><span class="n">getDeviceId</span><span class="p">().</span><span class="n">type</span><span class="w"> </span><span class="o">==</span><span class="w"> </span><span class="n">DeviceType</span><span class="o">::</span><span class="n">gpu</span><span class="p">)</span><span class="w"></span>
+<span class="w">    </span><span class="n">gpu</span><span class="o">::</span><span class="n">Element</span><span class="p">(</span><span class="n">functor</span><span class="p">,</span><span class="w"> </span><span class="n">out</span><span class="p">,</span><span class="w"> </span><span class="n">tensors</span><span class="p">...);</span><span class="w"></span>
+<span class="w">  </span><span class="k">else</span><span class="w"></span>
 <span class="cp">#endif</span>
-    <span class="n">cpu</span><span class="o">::</span><span class="n">Element</span><span class="p">(</span><span class="n">functor</span><span class="p">,</span> <span class="n">out</span><span class="p">,</span> <span class="n">tensors</span><span class="p">...);</span>
-<span class="p">}</span>
+<span class="w">    </span><span class="n">cpu</span><span class="o">::</span><span class="n">Element</span><span class="p">(</span><span class="n">functor</span><span class="p">,</span><span class="w"> </span><span class="n">out</span><span class="p">,</span><span class="w"> </span><span class="n">tensors</span><span class="p">...);</span><span class="w"></span>
+<span class="p">}</span><span class="w"></span>
 
-<span class="k">template</span> <span class="o">&lt;</span><span class="k">class</span> <span class="nc">Functor</span><span class="p">,</span> <span class="k">class</span><span class="p">...</span> <span class="n">Tensors</span><span class="o">&gt;</span>
-<span class="kt">void</span> <span class="n">Add</span><span class="p">(</span><span class="n">Functor</span> <span class="n">functor</span><span class="p">,</span> <span class="kt">float</span> <span class="n">scale</span><span class="p">,</span> <span class="n">marian</span><span class="o">::</span><span class="n">Tensor</span> <span class="n">out</span><span class="p">,</span> <span class="n">Tensors</span><span class="p">...</span> <span class="n">tensors</span><span class="p">)</span> <span class="p">{</span>
+<span class="k">template</span><span class="w"> </span><span class="o">&lt;</span><span class="k">class</span><span class="w"> </span><span class="nc">Functor</span><span class="p">,</span><span class="w"> </span><span class="k">class</span><span class="p">...</span><span class="w"> </span><span class="n">Tensors</span><span class="o">&gt;</span><span class="w"></span>
+<span class="kt">void</span><span class="w"> </span><span class="n">Add</span><span class="p">(</span><span class="n">Functor</span><span class="w"> </span><span class="n">functor</span><span class="p">,</span><span class="w"> </span><span class="kt">float</span><span class="w"> </span><span class="n">scale</span><span class="p">,</span><span class="w"> </span><span class="n">marian</span><span class="o">::</span><span class="n">Tensor</span><span class="w"> </span><span class="n">out</span><span class="p">,</span><span class="w"> </span><span class="n">Tensors</span><span class="p">...</span><span class="w"> </span><span class="n">tensors</span><span class="p">)</span><span class="w"> </span><span class="p">{</span><span class="w"></span>
 <span class="cp">#ifdef CUDA_FOUND</span>
-  <span class="k">if</span><span class="p">(</span><span class="n">out</span><span class="o">-&gt;</span><span class="n">getBackend</span><span class="p">()</span><span class="o">-&gt;</span><span class="n">getDeviceId</span><span class="p">().</span><span class="n">type</span> <span class="o">==</span> <span class="n">DeviceType</span><span class="o">::</span><span class="n">gpu</span><span class="p">)</span>
-    <span class="n">gpu</span><span class="o">::</span><span class="n">Add</span><span class="p">(</span><span class="n">functor</span><span class="p">,</span> <span class="n">scale</span><span class="p">,</span> <span class="n">out</span><span class="p">,</span> <span class="n">tensors</span><span class="p">...);</span>
-  <span class="k">else</span>
+<span class="w">  </span><span class="k">if</span><span class="p">(</span><span class="n">out</span><span class="o">-&gt;</span><span class="n">getBackend</span><span class="p">()</span><span class="o">-&gt;</span><span class="n">getDeviceId</span><span class="p">().</span><span class="n">type</span><span class="w"> </span><span class="o">==</span><span class="w"> </span><span class="n">DeviceType</span><span class="o">::</span><span class="n">gpu</span><span class="p">)</span><span class="w"></span>
+<span class="w">    </span><span class="n">gpu</span><span class="o">::</span><span class="n">Add</span><span class="p">(</span><span class="n">functor</span><span class="p">,</span><span class="w"> </span><span class="n">scale</span><span class="p">,</span><span class="w"> </span><span class="n">out</span><span class="p">,</span><span class="w"> </span><span class="n">tensors</span><span class="p">...);</span><span class="w"></span>
+<span class="w">  </span><span class="k">else</span><span class="w"></span>
 <span class="cp">#endif</span>
-    <span class="n">cpu</span><span class="o">::</span><span class="n">Aggregate</span><span class="p">(</span><span class="n">functor</span><span class="p">,</span> <span class="cm">/*aggInit=*/</span><span class="mf">0.0f</span><span class="p">,</span> <span class="n">functional</span><span class="o">::</span><span class="n">_1</span> <span class="o">+</span> <span class="n">functional</span><span class="o">::</span><span class="n">_2</span><span class="p">,</span> <span class="n">scale</span><span class="p">,</span> <span class="n">out</span><span class="p">,</span> <span class="n">tensors</span><span class="p">...);</span>
-<span class="p">}</span>
+<span class="w">    </span><span class="n">cpu</span><span class="o">::</span><span class="n">Aggregate</span><span class="p">(</span><span class="n">functor</span><span class="p">,</span><span class="w"> </span><span class="cm">/*aggInit=*/</span><span class="mf">0.0f</span><span class="p">,</span><span class="w"> </span><span class="n">functional</span><span class="o">::</span><span class="n">_1</span><span class="w"> </span><span class="o">+</span><span class="w"> </span><span class="n">functional</span><span class="o">::</span><span class="n">_2</span><span class="p">,</span><span class="w"> </span><span class="n">scale</span><span class="p">,</span><span class="w"> </span><span class="n">out</span><span class="p">,</span><span class="w"> </span><span class="n">tensors</span><span class="p">...);</span><span class="w"></span>
+<span class="p">}</span><span class="w"></span>
 
-<span class="k">template</span> <span class="o">&lt;</span><span class="k">class</span> <span class="nc">Functor</span><span class="p">,</span> <span class="k">class</span><span class="p">...</span> <span class="n">Tensors</span><span class="o">&gt;</span>
-<span class="kt">void</span> <span class="n">Add</span><span class="p">(</span><span class="n">Functor</span> <span class="n">functor</span><span class="p">,</span> <span class="n">marian</span><span class="o">::</span><span class="n">Tensor</span> <span class="n">out</span><span class="p">,</span> <span class="n">Tensors</span><span class="p">...</span> <span class="n">tensors</span><span class="p">)</span> <span class="p">{</span>
-  <span class="n">Add</span><span class="p">(</span><span class="n">functor</span><span class="p">,</span> <span class="cm">/*scale=*/</span><span class="mf">1.f</span><span class="p">,</span> <span class="n">out</span><span class="p">,</span> <span class="n">tensors</span><span class="p">...);</span>
-<span class="p">}</span>
+<span class="k">template</span><span class="w"> </span><span class="o">&lt;</span><span class="k">class</span><span class="w"> </span><span class="nc">Functor</span><span class="p">,</span><span class="w"> </span><span class="k">class</span><span class="p">...</span><span class="w"> </span><span class="n">Tensors</span><span class="o">&gt;</span><span class="w"></span>
+<span class="kt">void</span><span class="w"> </span><span class="n">Add</span><span class="p">(</span><span class="n">Functor</span><span class="w"> </span><span class="n">functor</span><span class="p">,</span><span class="w"> </span><span class="n">marian</span><span class="o">::</span><span class="n">Tensor</span><span class="w"> </span><span class="n">out</span><span class="p">,</span><span class="w"> </span><span class="n">Tensors</span><span class="p">...</span><span class="w"> </span><span class="n">tensors</span><span class="p">)</span><span class="w"> </span><span class="p">{</span><span class="w"></span>
+<span class="w">  </span><span class="n">Add</span><span class="p">(</span><span class="n">functor</span><span class="p">,</span><span class="w"> </span><span class="cm">/*scale=*/</span><span class="mf">1.f</span><span class="p">,</span><span class="w"> </span><span class="n">out</span><span class="p">,</span><span class="w"> </span><span class="n">tensors</span><span class="p">...);</span><span class="w"></span>
+<span class="p">}</span><span class="w"></span>
 
-<span class="k">template</span> <span class="o">&lt;</span><span class="k">class</span> <span class="nc">Functor</span><span class="p">,</span> <span class="k">class</span> <span class="nc">AggFunctor</span><span class="p">,</span> <span class="k">class</span><span class="p">...</span> <span class="n">Tensors</span><span class="o">&gt;</span>
-<span class="kt">void</span> <span class="n">Aggregate</span><span class="p">(</span><span class="n">Functor</span> <span class="n">functor</span><span class="p">,</span> <span class="kt">float</span> <span class="n">aggInit</span><span class="p">,</span> <span class="n">AggFunctor</span> <span class="n">aggFunctor</span><span class="p">,</span> <span class="n">marian</span><span class="o">::</span><span class="n">Tensor</span> <span class="n">out</span><span class="p">,</span> <span class="n">Tensors</span><span class="p">...</span> <span class="n">tensors</span><span class="p">)</span> <span class="p">{</span>
+<span class="k">template</span><span class="w"> </span><span class="o">&lt;</span><span class="k">class</span><span class="w"> </span><span class="nc">Functor</span><span class="p">,</span><span class="w"> </span><span class="k">class</span><span class="w"> </span><span class="nc">AggFunctor</span><span class="p">,</span><span class="w"> </span><span class="k">class</span><span class="p">...</span><span class="w"> </span><span class="n">Tensors</span><span class="o">&gt;</span><span class="w"></span>
+<span class="kt">void</span><span class="w"> </span><span class="n">Aggregate</span><span class="p">(</span><span class="n">Functor</span><span class="w"> </span><span class="n">functor</span><span class="p">,</span><span class="w"> </span><span class="kt">float</span><span class="w"> </span><span class="n">aggInit</span><span class="p">,</span><span class="w"> </span><span class="n">AggFunctor</span><span class="w"> </span><span class="n">aggFunctor</span><span class="p">,</span><span class="w"> </span><span class="n">marian</span><span class="o">::</span><span class="n">Tensor</span><span class="w"> </span><span class="n">out</span><span class="p">,</span><span class="w"> </span><span class="n">Tensors</span><span class="p">...</span><span class="w"> </span><span class="n">tensors</span><span class="p">)</span><span class="w"> </span><span class="p">{</span><span class="w"></span>
 <span class="cp">#ifdef CUDA_FOUND</span>
-  <span class="k">if</span><span class="p">(</span><span class="n">out</span><span class="o">-&gt;</span><span class="n">getBackend</span><span class="p">()</span><span class="o">-&gt;</span><span class="n">getDeviceId</span><span class="p">().</span><span class="n">type</span> <span class="o">==</span> <span class="n">DeviceType</span><span class="o">::</span><span class="n">gpu</span><span class="p">)</span>
-    <span class="n">gpu</span><span class="o">::</span><span class="n">Aggregate</span><span class="p">(</span><span class="n">functor</span><span class="p">,</span> <span class="n">aggInit</span><span class="p">,</span> <span class="n">aggFunctor</span><span class="p">,</span> <span class="mf">1.0f</span><span class="p">,</span> <span class="n">out</span><span class="p">,</span> <span class="n">tensors</span><span class="p">...);</span>
-  <span class="k">else</span>
+<span class="w">  </span><span class="k">if</span><span class="p">(</span><span class="n">out</span><span class="o">-&gt;</span><span class="n">getBackend</span><span class="p">()</span><span class="o">-&gt;</span><span class="n">getDeviceId</span><span class="p">().</span><span class="n">type</span><span class="w"> </span><span class="o">==</span><span class="w"> </span><span class="n">DeviceType</span><span class="o">::</span><span class="n">gpu</span><span class="p">)</span><span class="w"></span>
+<span class="w">    </span><span class="n">gpu</span><span class="o">::</span><span class="n">Aggregate</span><span class="p">(</span><span class="n">functor</span><span class="p">,</span><span class="w"> </span><span class="n">aggInit</span><span class="p">,</span><span class="w"> </span><span class="n">aggFunctor</span><span class="p">,</span><span class="w"> </span><span class="mf">1.0f</span><span class="p">,</span><span class="w"> </span><span class="n">out</span><span class="p">,</span><span class="w"> </span><span class="n">tensors</span><span class="p">...);</span><span class="w"></span>
+<span class="w">  </span><span class="k">else</span><span class="w"></span>
 <span class="cp">#endif</span>
-    <span class="n">cpu</span><span class="o">::</span><span class="n">Aggregate</span><span class="p">(</span><span class="n">functor</span><span class="p">,</span> <span class="n">aggInit</span><span class="p">,</span> <span class="n">aggFunctor</span><span class="p">,</span> <span class="mf">1.0f</span><span class="p">,</span> <span class="n">out</span><span class="p">,</span> <span class="n">tensors</span><span class="p">...);</span>
-<span class="p">}</span>
+<span class="w">    </span><span class="n">cpu</span><span class="o">::</span><span class="n">Aggregate</span><span class="p">(</span><span class="n">functor</span><span class="p">,</span><span class="w"> </span><span class="n">aggInit</span><span class="p">,</span><span class="w"> </span><span class="n">aggFunctor</span><span class="p">,</span><span class="w"> </span><span class="mf">1.0f</span><span class="p">,</span><span class="w"> </span><span class="n">out</span><span class="p">,</span><span class="w"> </span><span class="n">tensors</span><span class="p">...);</span><span class="w"></span>
+<span class="p">}</span><span class="w"></span>
 
-<span class="k">template</span> <span class="o">&lt;</span><span class="k">class</span> <span class="nc">Functor</span><span class="p">,</span> <span class="k">class</span><span class="p">...</span> <span class="n">Tensors</span><span class="o">&gt;</span>
-<span class="kt">void</span> <span class="n">Reduce</span><span class="p">(</span><span class="n">Functor</span> <span class="n">functor</span><span class="p">,</span>
-            <span class="kt">float</span> <span class="n">scale</span><span class="p">,</span>
-            <span class="n">marian</span><span class="o">::</span><span class="n">Tensor</span> <span class="n">out</span><span class="p">,</span>
-            <span class="n">Tensors</span><span class="p">...</span> <span class="n">tensors</span><span class="p">)</span> <span class="p">{</span>
-  <span class="n">out</span><span class="o">-&gt;</span><span class="n">set</span><span class="p">(</span><span class="mf">0.f</span><span class="p">);</span>
-  <span class="n">Add</span><span class="p">(</span><span class="n">functor</span><span class="p">,</span> <span class="n">scale</span><span class="p">,</span> <span class="n">out</span><span class="p">,</span> <span class="n">tensors</span><span class="p">...);</span>
-<span class="p">}</span>
+<span class="k">template</span><span class="w"> </span><span class="o">&lt;</span><span class="k">class</span><span class="w"> </span><span class="nc">Functor</span><span class="p">,</span><span class="w"> </span><span class="k">class</span><span class="p">...</span><span class="w"> </span><span class="n">Tensors</span><span class="o">&gt;</span><span class="w"></span>
+<span class="kt">void</span><span class="w"> </span><span class="n">Reduce</span><span class="p">(</span><span class="n">Functor</span><span class="w"> </span><span class="n">functor</span><span class="p">,</span><span class="w"></span>
+<span class="w">            </span><span class="kt">float</span><span class="w"> </span><span class="n">scale</span><span class="p">,</span><span class="w"></span>
+<span class="w">            </span><span class="n">marian</span><span class="o">::</span><span class="n">Tensor</span><span class="w"> </span><span class="n">out</span><span class="p">,</span><span class="w"></span>
+<span class="w">            </span><span class="n">Tensors</span><span class="p">...</span><span class="w"> </span><span class="n">tensors</span><span class="p">)</span><span class="w"> </span><span class="p">{</span><span class="w"></span>
+<span class="w">  </span><span class="n">out</span><span class="o">-&gt;</span><span class="n">set</span><span class="p">(</span><span class="mf">0.f</span><span class="p">);</span><span class="w"></span>
+<span class="w">  </span><span class="n">Add</span><span class="p">(</span><span class="n">functor</span><span class="p">,</span><span class="w"> </span><span class="n">scale</span><span class="p">,</span><span class="w"> </span><span class="n">out</span><span class="p">,</span><span class="w"> </span><span class="n">tensors</span><span class="p">...);</span><span class="w"></span>
+<span class="p">}</span><span class="w"></span>
 
-<span class="k">template</span> <span class="o">&lt;</span><span class="k">class</span> <span class="nc">Functor</span><span class="p">,</span> <span class="k">class</span><span class="p">...</span> <span class="n">Tensors</span><span class="o">&gt;</span>
-<span class="kt">void</span> <span class="n">Reduce</span><span class="p">(</span><span class="n">Functor</span> <span class="n">functor</span><span class="p">,</span> <span class="n">marian</span><span class="o">::</span><span class="n">Tensor</span> <span class="n">out</span><span class="p">,</span> <span class="n">Tensors</span><span class="p">...</span> <span class="n">tensors</span><span class="p">)</span> <span class="p">{</span>
-  <span class="n">out</span><span class="o">-&gt;</span><span class="n">set</span><span class="p">(</span><span class="mf">0.f</span><span class="p">);</span>
-  <span class="n">Add</span><span class="p">(</span><span class="n">functor</span><span class="p">,</span> <span class="n">out</span><span class="p">,</span> <span class="n">tensors</span><span class="p">...);</span>
-<span class="p">}</span>
+<span class="k">template</span><span class="w"> </span><span class="o">&lt;</span><span class="k">class</span><span class="w"> </span><span class="nc">Functor</span><span class="p">,</span><span class="w"> </span><span class="k">class</span><span class="p">...</span><span class="w"> </span><span class="n">Tensors</span><span class="o">&gt;</span><span class="w"></span>
+<span class="kt">void</span><span class="w"> </span><span class="n">Reduce</span><span class="p">(</span><span class="n">Functor</span><span class="w"> </span><span class="n">functor</span><span class="p">,</span><span class="w"> </span><span class="n">marian</span><span class="o">::</span><span class="n">Tensor</span><span class="w"> </span><span class="n">out</span><span class="p">,</span><span class="w"> </span><span class="n">Tensors</span><span class="p">...</span><span class="w"> </span><span class="n">tensors</span><span class="p">)</span><span class="w"> </span><span class="p">{</span><span class="w"></span>
+<span class="w">  </span><span class="n">out</span><span class="o">-&gt;</span><span class="n">set</span><span class="p">(</span><span class="mf">0.f</span><span class="p">);</span><span class="w"></span>
+<span class="w">  </span><span class="n">Add</span><span class="p">(</span><span class="n">functor</span><span class="p">,</span><span class="w"> </span><span class="n">out</span><span class="p">,</span><span class="w"> </span><span class="n">tensors</span><span class="p">...);</span><span class="w"></span>
+<span class="p">}</span><span class="w"></span>
 
-<span class="k">template</span> <span class="o">&lt;</span><span class="k">class</span> <span class="nc">Functor</span><span class="p">,</span> <span class="k">class</span> <span class="nc">AggFunctor</span><span class="p">,</span> <span class="k">class</span><span class="p">...</span> <span class="n">Tensors</span><span class="o">&gt;</span>
-<span class="kt">void</span> <span class="n">Reduce</span><span class="p">(</span><span class="n">Functor</span> <span class="n">functor</span><span class="p">,</span> <span class="n">AggFunctor</span> <span class="n">aggFunctor</span><span class="p">,</span> <span class="kt">float</span> <span class="n">aggInit</span><span class="p">,</span>
-            <span class="n">marian</span><span class="o">::</span><span class="n">Tensor</span> <span class="n">out</span><span class="p">,</span>
-            <span class="n">Tensors</span><span class="p">...</span> <span class="n">tensors</span><span class="p">)</span> <span class="p">{</span>
-  <span class="n">out</span><span class="o">-&gt;</span><span class="n">set</span><span class="p">(</span><span class="n">aggInit</span><span class="p">);</span>
-  <span class="n">Aggregate</span><span class="p">(</span><span class="n">functor</span><span class="p">,</span> <span class="n">aggInit</span><span class="p">,</span> <span class="n">aggFunctor</span><span class="p">,</span> <span class="n">out</span><span class="p">,</span> <span class="n">tensors</span><span class="p">...);</span>
-<span class="p">}</span>
+<span class="k">template</span><span class="w"> </span><span class="o">&lt;</span><span class="k">class</span><span class="w"> </span><span class="nc">Functor</span><span class="p">,</span><span class="w"> </span><span class="k">class</span><span class="w"> </span><span class="nc">AggFunctor</span><span class="p">,</span><span class="w"> </span><span class="k">class</span><span class="p">...</span><span class="w"> </span><span class="n">Tensors</span><span class="o">&gt;</span><span class="w"></span>
+<span class="kt">void</span><span class="w"> </span><span class="n">Reduce</span><span class="p">(</span><span class="n">Functor</span><span class="w"> </span><span class="n">functor</span><span class="p">,</span><span class="w"> </span><span class="n">AggFunctor</span><span class="w"> </span><span class="n">aggFunctor</span><span class="p">,</span><span class="w"> </span><span class="kt">float</span><span class="w"> </span><span class="n">aggInit</span><span class="p">,</span><span class="w"></span>
+<span class="w">            </span><span class="n">marian</span><span class="o">::</span><span class="n">Tensor</span><span class="w"> </span><span class="n">out</span><span class="p">,</span><span class="w"></span>
+<span class="w">            </span><span class="n">Tensors</span><span class="p">...</span><span class="w"> </span><span class="n">tensors</span><span class="p">)</span><span class="w"> </span><span class="p">{</span><span class="w"></span>
+<span class="w">  </span><span class="n">out</span><span class="o">-&gt;</span><span class="n">set</span><span class="p">(</span><span class="n">aggInit</span><span class="p">);</span><span class="w"></span>
+<span class="w">  </span><span class="n">Aggregate</span><span class="p">(</span><span class="n">functor</span><span class="p">,</span><span class="w"> </span><span class="n">aggInit</span><span class="p">,</span><span class="w"> </span><span class="n">aggFunctor</span><span class="p">,</span><span class="w"> </span><span class="n">out</span><span class="p">,</span><span class="w"> </span><span class="n">tensors</span><span class="p">...);</span><span class="w"></span>
+<span class="p">}</span><span class="w"></span>
 
 <span class="c1">// clang-format off</span>
-<span class="n">DISPATCH7</span><span class="p">(</span><span class="n">Prod</span><span class="p">,</span> <span class="n">marian</span><span class="o">::</span><span class="n">Tensor</span><span class="p">,</span> <span class="k">const</span> <span class="n">marian</span><span class="o">::</span><span class="n">Tensor</span><span class="o">&amp;</span><span class="p">,</span> <span class="k">const</span> <span class="n">marian</span><span class="o">::</span><span class="n">Tensor</span><span class="o">&amp;</span><span class="p">,</span> <span class="kt">bool</span><span class="p">,</span> <span class="kt">bool</span><span class="p">,</span> <span class="kt">float</span><span class="p">,</span> <span class="kt">float</span><span class="p">)</span>
-<span class="n">DISPATCH8</span><span class="p">(</span><span class="n">Prod</span><span class="p">,</span> <span class="n">marian</span><span class="o">::</span><span class="n">Tensor</span><span class="p">,</span> <span class="k">const</span> <span class="n">marian</span><span class="o">::</span><span class="n">Tensor</span><span class="o">&amp;</span><span class="p">,</span> <span class="k">const</span> <span class="n">marian</span><span class="o">::</span><span class="n">Tensor</span><span class="o">&amp;</span><span class="p">,</span> <span class="kt">bool</span><span class="p">,</span> <span class="kt">bool</span><span class="p">,</span> <span class="kt">float</span><span class="p">,</span> <span class="kt">float</span><span class="p">,</span> <span class="n">Type</span><span class="p">)</span> <span class="c1">// overloading since we want the default to for computeType be C-&gt;type() which difficult otherwise.</span>
+<span class="n">DISPATCH7</span><span class="p">(</span><span class="n">Prod</span><span class="p">,</span><span class="w"> </span><span class="n">marian</span><span class="o">::</span><span class="n">Tensor</span><span class="p">,</span><span class="w"> </span><span class="k">const</span><span class="w"> </span><span class="n">marian</span><span class="o">::</span><span class="n">Tensor</span><span class="o">&amp;</span><span class="p">,</span><span class="w"> </span><span class="k">const</span><span class="w"> </span><span class="n">marian</span><span class="o">::</span><span class="n">Tensor</span><span class="o">&amp;</span><span class="p">,</span><span class="w"> </span><span class="kt">bool</span><span class="p">,</span><span class="w"> </span><span class="kt">bool</span><span class="p">,</span><span class="w"> </span><span class="kt">float</span><span class="p">,</span><span class="w"> </span><span class="kt">float</span><span class="p">)</span><span class="w"></span>
+<span class="n">DISPATCH8</span><span class="p">(</span><span class="n">Prod</span><span class="p">,</span><span class="w"> </span><span class="n">marian</span><span class="o">::</span><span class="n">Tensor</span><span class="p">,</span><span class="w"> </span><span class="k">const</span><span class="w"> </span><span class="n">marian</span><span class="o">::</span><span class="n">Tensor</span><span class="o">&amp;</span><span class="p">,</span><span class="w"> </span><span class="k">const</span><span class="w"> </span><span class="n">marian</span><span class="o">::</span><span class="n">Tensor</span><span class="o">&amp;</span><span class="p">,</span><span class="w"> </span><span class="kt">bool</span><span class="p">,</span><span class="w"> </span><span class="kt">bool</span><span class="p">,</span><span class="w"> </span><span class="kt">float</span><span class="p">,</span><span class="w"> </span><span class="kt">float</span><span class="p">,</span><span class="w"> </span><span class="n">Type</span><span class="p">)</span><span class="w"> </span><span class="c1">// overloading since we want the default to for computeType be C-&gt;type() which difficult otherwise.</span>
 
-<span class="n">DISPATCH8</span><span class="p">(</span><span class="n">ProdBatched</span><span class="p">,</span> <span class="n">marian</span><span class="o">::</span><span class="n">Tensor</span><span class="p">,</span> <span class="n">Ptr</span><span class="o">&lt;</span><span class="n">Allocator</span><span class="o">&gt;</span><span class="p">,</span> <span class="k">const</span> <span class="n">marian</span><span class="o">::</span><span class="n">Tensor</span><span class="p">,</span> <span class="k">const</span> <span class="n">marian</span><span class="o">::</span><span class="n">Tensor</span><span class="p">,</span> <span class="kt">bool</span><span class="p">,</span> <span class="kt">bool</span><span class="p">,</span> <span class="kt">float</span><span class="p">,</span> <span class="kt">float</span><span class="p">)</span>
-<span class="n">DISPATCH9</span><span class="p">(</span><span class="n">CSRProd</span><span class="p">,</span> <span class="n">marian</span><span class="o">::</span><span class="n">Tensor</span><span class="p">,</span> <span class="n">Ptr</span><span class="o">&lt;</span><span class="n">Allocator</span><span class="o">&gt;</span><span class="p">,</span> <span class="k">const</span> <span class="n">marian</span><span class="o">::</span><span class="n">Tensor</span><span class="o">&amp;</span><span class="p">,</span> <span class="k">const</span> <span class="n">marian</span><span class="o">::</span><span class="n">Tensor</span><span class="o">&amp;</span><span class="p">,</span> <span class="k">const</span> <span class="n">marian</span><span class="o">::</span><span class="n">Tensor</span><span class="o">&amp;</span><span class="p">,</span> <span class="k">const</span> <span class="n">marian</span><span class="o">::</span><span class="n">Tensor</span><span class="o">&amp;</span><span class="p">,</span> <span class="kt">bool</span><span class="p">,</span> <span class="kt">bool</span><span class="p">,</span> <span class="kt">float</span><span class="p">)</span>
+<span class="n">DISPATCH8</span><span class="p">(</span><span class="n">ProdBatched</span><span class="p">,</span><span class="w"> </span><span class="n">marian</span><span class="o">::</span><span class="n">Tensor</span><span class="p">,</span><span class="w"> </span><span class="n">Ptr</span><span class="o">&lt;</span><span class="n">Allocator</span><span class="o">&gt;</span><span class="p">,</span><span class="w"> </span><span class="k">const</span><span class="w"> </span><span class="n">marian</span><span class="o">::</span><span class="n">Tensor</span><span class="p">,</span><span class="w"> </span><span class="k">const</span><span class="w"> </span><span class="n">marian</span><span class="o">::</span><span class="n">Tensor</span><span class="p">,</span><span class="w"> </span><span class="kt">bool</span><span class="p">,</span><span class="w"> </span><span class="kt">bool</span><span class="p">,</span><span class="w"> </span><span class="kt">float</span><span class="p">,</span><span class="w"> </span><span class="kt">float</span><span class="p">)</span><span class="w"></span>
+<span class="n">DISPATCH8</span><span class="p">(</span><span class="n">ProdBatchedLegacy</span><span class="p">,</span><span class="w"> </span><span class="n">marian</span><span class="o">::</span><span class="n">Tensor</span><span class="p">,</span><span class="w"> </span><span class="n">Ptr</span><span class="o">&lt;</span><span class="n">Allocator</span><span class="o">&gt;</span><span class="p">,</span><span class="w"> </span><span class="k">const</span><span class="w"> </span><span class="n">marian</span><span class="o">::</span><span class="n">Tensor</span><span class="p">,</span><span class="w"> </span><span class="k">const</span><span class="w"> </span><span class="n">marian</span><span class="o">::</span><span class="n">Tensor</span><span class="p">,</span><span class="w"> </span><span class="kt">bool</span><span class="p">,</span><span class="w"> </span><span class="kt">bool</span><span class="p">,</span><span class="w"> </span><span class="kt">float</span><span class="p">,</span><span class="w"> </span><span class="kt">float</span><span class="p">)</span><span class="w"></span>
+<span class="n">DISPATCH9</span><span class="p">(</span><span class="n">CSRProd</span><span class="p">,</span><span class="w"> </span><span class="n">marian</span><span class="o">::</span><span class="n">Tensor</span><span class="p">,</span><span class="w"> </span><span class="n">Ptr</span><span class="o">&lt;</span><span class="n">Allocator</span><span class="o">&gt;</span><span class="p">,</span><span class="w"> </span><span class="k">const</span><span class="w"> </span><span class="n">marian</span><span class="o">::</span><span class="n">Tensor</span><span class="o">&amp;</span><span class="p">,</span><span class="w"> </span><span class="k">const</span><span class="w"> </span><span class="n">marian</span><span class="o">::</span><span class="n">Tensor</span><span class="o">&amp;</span><span class="p">,</span><span class="w"> </span><span class="k">const</span><span class="w"> </span><span class="n">marian</span><span class="o">::</span><span class="n">Tensor</span><span class="o">&amp;</span><span class="p">,</span><span class="w"> </span><span class="k">const</span><span class="w"> </span><span class="n">marian</span><span class="o">::</span><span class="n">Tensor</span><span class="o">&amp;</span><span class="p">,</span><span class="w"> </span><span class="kt">bool</span><span class="p">,</span><span class="w"> </span><span class="kt">bool</span><span class="p">,</span><span class="w"> </span><span class="kt">float</span><span class="p">)</span><span class="w"></span>
 
-<span class="n">DISPATCH2</span><span class="p">(</span><span class="n">Softmax</span><span class="p">,</span> <span class="n">marian</span><span class="o">::</span><span class="n">Tensor</span><span class="p">,</span> <span class="n">marian</span><span class="o">::</span><span class="n">Tensor</span><span class="p">)</span>
-<span class="n">DISPATCH3</span><span class="p">(</span><span class="n">SoftmaxGrad</span><span class="p">,</span> <span class="n">marian</span><span class="o">::</span><span class="n">Tensor</span><span class="p">,</span> <span class="n">marian</span><span class="o">::</span><span class="n">Tensor</span><span class="p">,</span> <span class="n">marian</span><span class="o">::</span><span class="n">Tensor</span><span class="p">)</span>
+<span class="n">DISPATCH10</span><span class="p">(</span><span class="n">Affine</span><span class="p">,</span><span class="w"> </span><span class="n">marian</span><span class="o">::</span><span class="n">Tensor</span><span class="p">,</span><span class="w"> </span><span class="n">Ptr</span><span class="o">&lt;</span><span class="n">Allocator</span><span class="o">&gt;</span><span class="p">,</span><span class="w"> </span><span class="k">const</span><span class="w"> </span><span class="n">marian</span><span class="o">::</span><span class="n">Tensor</span><span class="o">&amp;</span><span class="p">,</span><span class="w"> </span><span class="k">const</span><span class="w"> </span><span class="n">marian</span><span class="o">::</span><span class="n">Tensor</span><span class="o">&amp;</span><span class="p">,</span><span class="w"> </span><span class="k">const</span><span class="w"> </span><span class="n">marian</span><span class="o">::</span><span class="n">Tensor</span><span class="o">&amp;</span><span class="p">,</span><span class="w"> </span><span class="kt">bool</span><span class="p">,</span><span class="w"> </span><span class="kt">bool</span><span class="p">,</span><span class="w"> </span><span class="kt">float</span><span class="p">,</span><span class="w"> </span><span class="kt">float</span><span class="p">,</span><span class="w"> </span><span class="kt">bool</span><span class="p">)</span><span class="w"></span>
 
-<span class="n">DISPATCH2</span><span class="p">(</span><span class="n">LogSoftmax</span><span class="p">,</span> <span class="n">marian</span><span class="o">::</span><span class="n">Tensor</span><span class="p">,</span> <span class="n">marian</span><span class="o">::</span><span class="n">Tensor</span><span class="p">)</span>
-<span class="n">DISPATCH3</span><span class="p">(</span><span class="n">LogSoftmaxGrad</span><span class="p">,</span> <span class="n">marian</span><span class="o">::</span><span class="n">Tensor</span><span class="p">,</span> <span class="n">marian</span><span class="o">::</span><span class="n">Tensor</span><span class="p">,</span> <span class="n">marian</span><span class="o">::</span><span class="n">Tensor</span><span class="p">)</span>
+<span class="n">DISPATCH2</span><span class="p">(</span><span class="n">Softmax</span><span class="p">,</span><span class="w"> </span><span class="n">marian</span><span class="o">::</span><span class="n">Tensor</span><span class="p">,</span><span class="w"> </span><span class="n">marian</span><span class="o">::</span><span class="n">Tensor</span><span class="p">)</span><span class="w"></span>
+<span class="n">DISPATCH3</span><span class="p">(</span><span class="n">SoftmaxGrad</span><span class="p">,</span><span class="w"> </span><span class="n">marian</span><span class="o">::</span><span class="n">Tensor</span><span class="p">,</span><span class="w"> </span><span class="n">marian</span><span class="o">::</span><span class="n">Tensor</span><span class="p">,</span><span class="w"> </span><span class="n">marian</span><span class="o">::</span><span class="n">Tensor</span><span class="p">)</span><span class="w"></span>
 
-<span class="n">DISPATCH4</span><span class="p">(</span><span class="n">CrossEntropyPick</span><span class="p">,</span> <span class="n">marian</span><span class="o">::</span><span class="n">Tensor</span><span class="p">,</span> <span class="n">marian</span><span class="o">::</span><span class="n">Tensor</span><span class="p">,</span> <span class="n">marian</span><span class="o">::</span><span class="n">Tensor</span><span class="p">,</span> <span class="kt">float</span><span class="p">)</span>
-<span class="n">DISPATCH5</span><span class="p">(</span><span class="n">CrossEntropyPickBackward</span><span class="p">,</span> <span class="n">marian</span><span class="o">::</span><span class="n">Tensor</span><span class="p">,</span> <span class="n">marian</span><span class="o">::</span><span class="n">Tensor</span><span class="p">,</span> <span class="n">marian</span><span class="o">::</span><span class="n">Tensor</span><span class="p">,</span> <span class="n">marian</span><span class="o">::</span><span class="n">Tensor</span><span class="p">,</span> <span class="kt">float</span><span class="p">)</span>
+<span class="n">DISPATCH2</span><span class="p">(</span><span class="n">LogSoftmax</span><span class="p">,</span><span class="w"> </span><span class="n">marian</span><span class="o">::</span><span class="n">Tensor</span><span class="p">,</span><span class="w"> </span><span class="n">marian</span><span class="o">::</span><span class="n">Tensor</span><span class="p">)</span><span class="w"></span>
+<span class="n">DISPATCH3</span><span class="p">(</span><span class="n">LogSoftmaxGrad</span><span class="p">,</span><span class="w"> </span><span class="n">marian</span><span class="o">::</span><span class="n">Tensor</span><span class="p">,</span><span class="w"> </span><span class="n">marian</span><span class="o">::</span><span class="n">Tensor</span><span class="p">,</span><span class="w"> </span><span class="n">marian</span><span class="o">::</span><span class="n">Tensor</span><span class="p">)</span><span class="w"></span>
 
-<span class="n">DISPATCH3</span><span class="p">(</span><span class="n">TransposeND</span><span class="p">,</span> <span class="n">marian</span><span class="o">::</span><span class="n">Tensor</span><span class="p">,</span> <span class="n">marian</span><span class="o">::</span><span class="n">Tensor</span><span class="p">,</span> <span class="k">const</span> <span class="n">std</span><span class="o">::</span><span class="n">vector</span><span class="o">&lt;</span><span class="kt">int</span><span class="o">&gt;&amp;</span><span class="p">)</span>
-<span class="n">DISPATCH3</span><span class="p">(</span><span class="n">TransposeNDGrad</span><span class="p">,</span> <span class="n">marian</span><span class="o">::</span><span class="n">Tensor</span><span class="p">,</span> <span class="n">marian</span><span class="o">::</span><span class="n">Tensor</span><span class="p">,</span> <span class="k">const</span> <span class="n">std</span><span class="o">::</span><span class="n">vector</span><span class="o">&lt;</span><span class="kt">int</span><span class="o">&gt;&amp;</span><span class="p">)</span>
+<span class="n">DISPATCH4</span><span class="p">(</span><span class="n">CrossEntropyPick</span><span class="p">,</span><span class="w"> </span><span class="n">marian</span><span class="o">::</span><span class="n">Tensor</span><span class="p">,</span><span class="w"> </span><span class="n">marian</span><span class="o">::</span><span class="n">Tensor</span><span class="p">,</span><span class="w"> </span><span class="n">marian</span><span class="o">::</span><span class="n">Tensor</span><span class="p">,</span><span class="w"> </span><span class="kt">float</span><span class="p">)</span><span class="w"></span>
+<span class="n">DISPATCH5</span><span class="p">(</span><span class="n">CrossEntropyPickBackward</span><span class="p">,</span><span class="w"> </span><span class="n">marian</span><span class="o">::</span><span class="n">Tensor</span><span class="p">,</span><span class="w"> </span><span class="n">marian</span><span class="o">::</span><span class="n">Tensor</span><span class="p">,</span><span class="w"> </span><span class="n">marian</span><span class="o">::</span><span class="n">Tensor</span><span class="p">,</span><span class="w"> </span><span class="n">marian</span><span class="o">::</span><span class="n">Tensor</span><span class="p">,</span><span class="w"> </span><span class="kt">float</span><span class="p">)</span><span class="w"></span>
 
-<span class="n">DISPATCH5</span><span class="p">(</span><span class="n">Shift</span><span class="p">,</span> <span class="n">marian</span><span class="o">::</span><span class="n">Tensor</span><span class="p">,</span> <span class="n">marian</span><span class="o">::</span><span class="n">Tensor</span><span class="p">,</span> <span class="n">marian</span><span class="o">::</span><span class="n">Shape</span><span class="p">,</span> <span class="kt">float</span><span class="p">,</span> <span class="kt">bool</span><span class="p">)</span>
-<span class="n">DISPATCH4</span><span class="p">(</span><span class="n">ShiftGrad</span><span class="p">,</span> <span class="n">marian</span><span class="o">::</span><span class="n">Tensor</span><span class="p">,</span> <span class="n">marian</span><span class="o">::</span><span class="n">Tensor</span><span class="p">,</span> <span class="n">marian</span><span class="o">::</span><span class="n">Shape</span><span class="p">,</span> <span class="kt">bool</span><span class="p">)</span>
+<span class="n">DISPATCH3</span><span class="p">(</span><span class="n">TransposeND</span><span class="p">,</span><span class="w"> </span><span class="n">marian</span><span class="o">::</span><span class="n">Tensor</span><span class="p">,</span><span class="w"> </span><span class="n">marian</span><span class="o">::</span><span class="n">Tensor</span><span class="p">,</span><span class="w"> </span><span class="k">const</span><span class="w"> </span><span class="n">std</span><span class="o">::</span><span class="n">vector</span><span class="o">&lt;</span><span class="kt">int</span><span class="o">&gt;&amp;</span><span class="p">)</span><span class="w"></span>
+<span class="n">DISPATCH3</span><span class="p">(</span><span class="n">TransposeNDGrad</span><span class="p">,</span><span class="w"> </span><span class="n">marian</span><span class="o">::</span><span class="n">Tensor</span><span class="p">,</span><span class="w"> </span><span class="n">marian</span><span class="o">::</span><span class="n">Tensor</span><span class="p">,</span><span class="w"> </span><span class="k">const</span><span class="w"> </span><span class="n">std</span><span class="o">::</span><span class="n">vector</span><span class="o">&lt;</span><span class="kt">int</span><span class="o">&gt;&amp;</span><span class="p">)</span><span class="w"></span>
 
-<span class="n">DISPATCH3</span><span class="p">(</span><span class="n">Concatenate</span><span class="p">,</span> <span class="n">marian</span><span class="o">::</span><span class="n">Tensor</span><span class="p">,</span> <span class="k">const</span> <span class="n">std</span><span class="o">::</span><span class="n">vector</span><span class="o">&lt;</span><span class="n">marian</span><span class="o">::</span><span class="n">Tensor</span><span class="o">&gt;&amp;</span><span class="p">,</span> <span class="kt">int</span><span class="p">)</span>
+<span class="n">DISPATCH5</span><span class="p">(</span><span class="n">Shift</span><span class="p">,</span><span class="w"> </span><span class="n">marian</span><span class="o">::</span><span class="n">Tensor</span><span class="p">,</span><span class="w"> </span><span class="n">marian</span><span class="o">::</span><span class="n">Tensor</span><span class="p">,</span><span class="w"> </span><span class="n">marian</span><span class="o">::</span><span class="n">Shape</span><span class="p">,</span><span class="w"> </span><span class="kt">float</span><span class="p">,</span><span class="w"> </span><span class="kt">bool</span><span class="p">)</span><span class="w"></span>
+<span class="n">DISPATCH4</span><span class="p">(</span><span class="n">ShiftGrad</span><span class="p">,</span><span class="w"> </span><span class="n">marian</span><span class="o">::</span><span class="n">Tensor</span><span class="p">,</span><span class="w"> </span><span class="n">marian</span><span class="o">::</span><span class="n">Tensor</span><span class="p">,</span><span class="w"> </span><span class="n">marian</span><span class="o">::</span><span class="n">Shape</span><span class="p">,</span><span class="w"> </span><span class="kt">bool</span><span class="p">)</span><span class="w"></span>
+
+<span class="n">DISPATCH3</span><span class="p">(</span><span class="n">Concatenate</span><span class="p">,</span><span class="w"> </span><span class="n">marian</span><span class="o">::</span><span class="n">Tensor</span><span class="p">,</span><span class="w"> </span><span class="k">const</span><span class="w"> </span><span class="n">std</span><span class="o">::</span><span class="n">vector</span><span class="o">&lt;</span><span class="n">marian</span><span class="o">::</span><span class="n">Tensor</span><span class="o">&gt;&amp;</span><span class="p">,</span><span class="w"> </span><span class="kt">int</span><span class="p">)</span><span class="w"></span>
 
 <span class="c1">// clang-format on</span>
 
 <span class="c1">// Bernoulli(tensor, 0.5f, 2.f, -1.f) generates a tensor composed of 50% of 1 and 50% of -1.</span>
-<span class="k">static</span> <span class="kr">inline</span> <span class="kt">void</span> <span class="n">Bernoulli</span><span class="p">(</span><span class="n">Tensor</span> <span class="n">resultTensor</span><span class="p">,</span> <span class="kt">float</span> <span class="n">keepProb</span><span class="p">,</span> <span class="kt">float</span> <span class="n">scale</span> <span class="o">=</span> <span class="mf">1.f</span><span class="p">,</span> <span class="kt">float</span> <span class="n">shift</span> <span class="o">=</span> <span class="mf">0.f</span><span class="p">)</span> <span class="p">{</span>
-  <span class="c1">// in-place uniform distribution</span>
-  <span class="k">auto</span> <span class="n">rnd</span> <span class="o">=</span> <span class="n">resultTensor</span><span class="o">-&gt;</span><span class="n">getBackend</span><span class="p">()</span><span class="o">-&gt;</span><span class="n">getRandomGenerator</span><span class="p">();</span>
-  <span class="n">rnd</span><span class="o">-&gt;</span><span class="n">uniform</span><span class="p">(</span><span class="n">resultTensor</span><span class="p">,</span> <span class="mf">0.f</span><span class="p">,</span> <span class="mf">1.f</span><span class="p">);</span> <span class="c1">// temporarily mis-use this to hold the random numbers</span>
-  <span class="k">using</span> <span class="k">namespace</span> <span class="n">functional</span><span class="p">;</span>
-  <span class="n">Element</span><span class="p">(</span><span class="n">_1</span> <span class="o">=</span> <span class="p">(</span><span class="n">_1</span> <span class="o">&lt;</span> <span class="n">keepProb</span><span class="p">)</span> <span class="o">*</span> <span class="n">scale</span> <span class="o">+</span> <span class="n">shift</span><span class="p">,</span> <span class="n">resultTensor</span><span class="p">);</span>
-<span class="p">}</span>
+<span class="k">static</span><span class="w"> </span><span class="kr">inline</span><span class="w"> </span><span class="kt">void</span><span class="w"> </span><span class="n">Bernoulli</span><span class="p">(</span><span class="n">Tensor</span><span class="w"> </span><span class="n">resultTensor</span><span class="p">,</span><span class="w"> </span><span class="kt">float</span><span class="w"> </span><span class="n">keepProb</span><span class="p">,</span><span class="w"> </span><span class="kt">float</span><span class="w"> </span><span class="n">scale</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="mf">1.f</span><span class="p">,</span><span class="w"> </span><span class="kt">float</span><span class="w"> </span><span class="n">shift</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="mf">0.f</span><span class="p">)</span><span class="w"> </span><span class="p">{</span><span class="w"></span>
+<span class="w">  </span><span class="c1">// in-place uniform distribution</span>
+<span class="w">  </span><span class="k">auto</span><span class="w"> </span><span class="n">rnd</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="n">resultTensor</span><span class="o">-&gt;</span><span class="n">getBackend</span><span class="p">()</span><span class="o">-&gt;</span><span class="n">getRandomGenerator</span><span class="p">();</span><span class="w"></span>
+<span class="w">  </span><span class="n">rnd</span><span class="o">-&gt;</span><span class="n">uniform</span><span class="p">(</span><span class="n">resultTensor</span><span class="p">,</span><span class="w"> </span><span class="mf">0.f</span><span class="p">,</span><span class="w"> </span><span class="mf">1.f</span><span class="p">);</span><span class="w"> </span><span class="c1">// temporarily mis-use this to hold the random numbers</span>
+<span class="w">  </span><span class="k">using</span><span class="w"> </span><span class="k">namespace</span><span class="w"> </span><span class="nn">functional</span><span class="p">;</span><span class="w"></span>
+<span class="w">  </span><span class="n">Element</span><span class="p">(</span><span class="n">_1</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="p">(</span><span class="n">_1</span><span class="w"> </span><span class="o">&lt;</span><span class="w"> </span><span class="n">keepProb</span><span class="p">)</span><span class="w"> </span><span class="o">*</span><span class="w"> </span><span class="n">scale</span><span class="w"> </span><span class="o">+</span><span class="w"> </span><span class="n">shift</span><span class="p">,</span><span class="w"> </span><span class="n">resultTensor</span><span class="p">);</span><span class="w"></span>
+<span class="p">}</span><span class="w"></span>
 
-<span class="k">static</span> <span class="kr">inline</span> <span class="kt">void</span> <span class="n">Dropout</span><span class="p">(</span><span class="n">Tensor</span> <span class="n">tensor</span><span class="p">,</span> <span class="kt">float</span> <span class="n">dropProb</span><span class="p">)</span> <span class="p">{</span>
-  <span class="kt">float</span> <span class="n">keepProb</span> <span class="o">=</span> <span class="mf">1.f</span> <span class="o">-</span> <span class="n">dropProb</span><span class="p">;</span>
-  <span class="kt">float</span> <span class="n">scale</span> <span class="o">=</span> <span class="mf">1.f</span> <span class="o">/</span> <span class="n">keepProb</span><span class="p">;</span>
-  <span class="n">Bernoulli</span><span class="p">(</span><span class="n">tensor</span><span class="p">,</span> <span class="n">keepProb</span><span class="p">,</span> <span class="n">scale</span><span class="p">,</span> <span class="cm">/*shift=*/</span><span class="mf">0.f</span><span class="p">);</span>
-<span class="p">}</span>
+<span class="k">static</span><span class="w"> </span><span class="kr">inline</span><span class="w"> </span><span class="kt">void</span><span class="w"> </span><span class="n">Dropout</span><span class="p">(</span><span class="n">Tensor</span><span class="w"> </span><span class="n">tensor</span><span class="p">,</span><span class="w"> </span><span class="kt">float</span><span class="w"> </span><span class="n">dropProb</span><span class="p">)</span><span class="w"> </span><span class="p">{</span><span class="w"></span>
+<span class="w">  </span><span class="kt">float</span><span class="w"> </span><span class="n">keepProb</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="mf">1.f</span><span class="w"> </span><span class="o">-</span><span class="w"> </span><span class="n">dropProb</span><span class="p">;</span><span class="w"></span>
+<span class="w">  </span><span class="kt">float</span><span class="w"> </span><span class="n">scale</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="mf">1.f</span><span class="w"> </span><span class="o">/</span><span class="w"> </span><span class="n">keepProb</span><span class="p">;</span><span class="w"></span>
+<span class="w">  </span><span class="n">Bernoulli</span><span class="p">(</span><span class="n">tensor</span><span class="p">,</span><span class="w"> </span><span class="n">keepProb</span><span class="p">,</span><span class="w"> </span><span class="n">scale</span><span class="p">,</span><span class="w"> </span><span class="cm">/*shift=*/</span><span class="mf">0.f</span><span class="p">);</span><span class="w"></span>
+<span class="p">}</span><span class="w"></span>
 
-<span class="n">DISPATCH2</span><span class="p">(</span><span class="n">SinusoidalPositionEmbeddings</span><span class="p">,</span> <span class="n">marian</span><span class="o">::</span><span class="n">Tensor</span><span class="p">,</span> <span class="kt">int</span><span class="p">);</span>
+<span class="n">DISPATCH2</span><span class="p">(</span><span class="n">SinusoidalPositionEmbeddings</span><span class="p">,</span><span class="w"> </span><span class="n">marian</span><span class="o">::</span><span class="n">Tensor</span><span class="p">,</span><span class="w"> </span><span class="kt">int</span><span class="p">);</span><span class="w"></span>
 
 <span class="cp">#ifdef CUDA_FOUND</span>
-<span class="k">namespace</span> <span class="n">gpu</span> <span class="p">{</span>
-<span class="kt">void</span> <span class="nf">Deconcatenate</span><span class="p">(</span><span class="n">std</span><span class="o">::</span><span class="n">vector</span><span class="o">&lt;</span><span class="n">marian</span><span class="o">::</span><span class="n">Tensor</span><span class="o">&gt;&amp;</span> <span class="n">outputs</span><span class="p">,</span>
-                   <span class="k">const</span> <span class="n">marian</span><span class="o">::</span><span class="n">Tensor</span> <span class="n">in</span><span class="p">,</span>
-                   <span class="kt">int</span> <span class="n">ax</span><span class="p">);</span>
-<span class="p">}</span>
+<span class="k">namespace</span><span class="w"> </span><span class="nn">gpu</span><span class="w"> </span><span class="p">{</span><span class="w"></span>
+<span class="kt">void</span><span class="w"> </span><span class="nf">Deconcatenate</span><span class="p">(</span><span class="n">std</span><span class="o">::</span><span class="n">vector</span><span class="o">&lt;</span><span class="n">marian</span><span class="o">::</span><span class="n">Tensor</span><span class="o">&gt;&amp;</span><span class="w"> </span><span class="n">outputs</span><span class="p">,</span><span class="w"></span>
+<span class="w">                   </span><span class="k">const</span><span class="w"> </span><span class="n">marian</span><span class="o">::</span><span class="n">Tensor</span><span class="w"> </span><span class="n">in</span><span class="p">,</span><span class="w"></span>
+<span class="w">                   </span><span class="kt">int</span><span class="w"> </span><span class="n">ax</span><span class="p">);</span><span class="w"></span>
+<span class="p">}</span><span class="w"></span>
 <span class="cp">#endif</span>
 
-<span class="k">namespace</span> <span class="n">cpu</span> <span class="p">{</span>
-<span class="kt">void</span> <span class="nf">Deconcatenate</span><span class="p">(</span><span class="n">std</span><span class="o">::</span><span class="n">vector</span><span class="o">&lt;</span><span class="n">marian</span><span class="o">::</span><span class="n">Tensor</span><span class="o">&gt;&amp;</span> <span class="n">outputs</span><span class="p">,</span>
-                   <span class="k">const</span> <span class="n">marian</span><span class="o">::</span><span class="n">Tensor</span> <span class="n">in</span><span class="p">,</span>
-                   <span class="kt">int</span> <span class="n">ax</span><span class="p">);</span>
-<span class="p">}</span>
+<span class="k">namespace</span><span class="w"> </span><span class="nn">cpu</span><span class="w"> </span><span class="p">{</span><span class="w"></span>
+<span class="kt">void</span><span class="w"> </span><span class="nf">Deconcatenate</span><span class="p">(</span><span class="n">std</span><span class="o">::</span><span class="n">vector</span><span class="o">&lt;</span><span class="n">marian</span><span class="o">::</span><span class="n">Tensor</span><span class="o">&gt;&amp;</span><span class="w"> </span><span class="n">outputs</span><span class="p">,</span><span class="w"></span>
+<span class="w">                   </span><span class="k">const</span><span class="w"> </span><span class="n">marian</span><span class="o">::</span><span class="n">Tensor</span><span class="w"> </span><span class="n">in</span><span class="p">,</span><span class="w"></span>
+<span class="w">                   </span><span class="kt">int</span><span class="w"> </span><span class="n">ax</span><span class="p">);</span><span class="w"></span>
+<span class="p">}</span><span class="w"></span>
 
-<span class="k">static</span> <span class="kr">inline</span> <span class="kt">void</span> <span class="n">Deconcatenate</span><span class="p">(</span><span class="n">std</span><span class="o">::</span><span class="n">vector</span><span class="o">&lt;</span><span class="n">marian</span><span class="o">::</span><span class="n">Tensor</span><span class="o">&gt;&amp;</span> <span class="n">outputs</span><span class="p">,</span>
-                                 <span class="k">const</span> <span class="n">marian</span><span class="o">::</span><span class="n">Tensor</span> <span class="n">in</span><span class="p">,</span>
-                                 <span class="kt">int</span> <span class="n">ax</span><span class="p">)</span> <span class="p">{</span>
+<span class="k">static</span><span class="w"> </span><span class="kr">inline</span><span class="w"> </span><span class="kt">void</span><span class="w"> </span><span class="n">Deconcatenate</span><span class="p">(</span><span class="n">std</span><span class="o">::</span><span class="n">vector</span><span class="o">&lt;</span><span class="n">marian</span><span class="o">::</span><span class="n">Tensor</span><span class="o">&gt;&amp;</span><span class="w"> </span><span class="n">outputs</span><span class="p">,</span><span class="w"></span>
+<span class="w">                                 </span><span class="k">const</span><span class="w"> </span><span class="n">marian</span><span class="o">::</span><span class="n">Tensor</span><span class="w"> </span><span class="n">in</span><span class="p">,</span><span class="w"></span>
+<span class="w">                                 </span><span class="kt">int</span><span class="w"> </span><span class="n">ax</span><span class="p">)</span><span class="w"> </span><span class="p">{</span><span class="w"></span>
 <span class="cp">#ifdef CUDA_FOUND</span>
-  <span class="k">if</span><span class="p">(</span><span class="n">in</span><span class="o">-&gt;</span><span class="n">getBackend</span><span class="p">()</span><span class="o">-&gt;</span><span class="n">getDeviceId</span><span class="p">().</span><span class="n">type</span> <span class="o">==</span> <span class="n">DeviceType</span><span class="o">::</span><span class="n">gpu</span><span class="p">)</span>
-    <span class="n">gpu</span><span class="o">::</span><span class="n">Deconcatenate</span><span class="p">(</span><span class="n">outputs</span><span class="p">,</span> <span class="n">in</span><span class="p">,</span> <span class="n">ax</span><span class="p">);</span>
-  <span class="k">else</span>
+<span class="w">  </span><span class="k">if</span><span class="p">(</span><span class="n">in</span><span class="o">-&gt;</span><span class="n">getBackend</span><span class="p">()</span><span class="o">-&gt;</span><span class="n">getDeviceId</span><span class="p">().</span><span class="n">type</span><span class="w"> </span><span class="o">==</span><span class="w"> </span><span class="n">DeviceType</span><span class="o">::</span><span class="n">gpu</span><span class="p">)</span><span class="w"></span>
+<span class="w">    </span><span class="n">gpu</span><span class="o">::</span><span class="n">Deconcatenate</span><span class="p">(</span><span class="n">outputs</span><span class="p">,</span><span class="w"> </span><span class="n">in</span><span class="p">,</span><span class="w"> </span><span class="n">ax</span><span class="p">);</span><span class="w"></span>
+<span class="w">  </span><span class="k">else</span><span class="w"></span>
 <span class="cp">#endif</span>
-    <span class="n">cpu</span><span class="o">::</span><span class="n">Deconcatenate</span><span class="p">(</span><span class="n">outputs</span><span class="p">,</span> <span class="n">in</span><span class="p">,</span> <span class="n">ax</span><span class="p">);</span>
-<span class="p">}</span>
+<span class="w">    </span><span class="n">cpu</span><span class="o">::</span><span class="n">Deconcatenate</span><span class="p">(</span><span class="n">outputs</span><span class="p">,</span><span class="w"> </span><span class="n">in</span><span class="p">,</span><span class="w"> </span><span class="n">ax</span><span class="p">);</span><span class="w"></span>
+<span class="p">}</span><span class="w"></span>
 
 <span class="c1">// clang-format off</span>
-<span class="n">DISPATCH5</span><span class="p">(</span><span class="n">LayerNormalization</span><span class="p">,</span> <span class="n">marian</span><span class="o">::</span><span class="n">Tensor</span><span class="p">,</span> <span class="n">marian</span><span class="o">::</span><span class="n">Tensor</span><span class="p">,</span> <span class="n">marian</span><span class="o">::</span><span class="n">Tensor</span><span class="p">,</span> <span class="n">marian</span><span class="o">::</span><span class="n">Tensor</span><span class="p">,</span> <span class="kt">float</span><span class="p">)</span>
+<span class="n">DISPATCH5</span><span class="p">(</span><span class="n">LayerNormalization</span><span class="p">,</span><span class="w"> </span><span class="n">marian</span><span class="o">::</span><span class="n">Tensor</span><span class="p">,</span><span class="w"> </span><span class="n">marian</span><span class="o">::</span><span class="n">Tensor</span><span class="p">,</span><span class="w"> </span><span class="n">marian</span><span class="o">::</span><span class="n">Tensor</span><span class="p">,</span><span class="w"> </span><span class="n">marian</span><span class="o">::</span><span class="n">Tensor</span><span class="p">,</span><span class="w"> </span><span class="kt">float</span><span class="p">)</span><span class="w"></span>
 
 <span class="cp">#ifdef CUDA_FOUND</span>
-<span class="k">namespace</span> <span class="n">gpu</span> <span class="p">{</span>
-<span class="kt">void</span> <span class="nf">LayerNormalizationGrad</span><span class="p">(</span><span class="n">Ptr</span><span class="o">&lt;</span><span class="n">Allocator</span><span class="o">&gt;</span> <span class="n">allocator</span><span class="p">,</span>
-                            <span class="n">Tensor</span> <span class="n">gradX</span><span class="p">,</span>
-                            <span class="n">Tensor</span> <span class="n">gradGamma</span><span class="p">,</span>
-                            <span class="n">Tensor</span> <span class="n">gradBeta</span><span class="p">,</span>
-                            <span class="n">Tensor</span> <span class="n">adj</span><span class="p">,</span>
-                            <span class="n">Tensor</span> <span class="n">y</span><span class="p">,</span>
-                            <span class="n">Tensor</span> <span class="n">x</span><span class="p">,</span>
-                            <span class="n">Tensor</span> <span class="n">gamma</span><span class="p">,</span>
-                            <span class="n">Tensor</span> <span class="n">beta</span><span class="p">,</span>
-                            <span class="kt">float</span> <span class="n">eps</span><span class="p">);</span>
-<span class="p">}</span>
+<span class="k">namespace</span><span class="w"> </span><span class="nn">gpu</span><span class="w"> </span><span class="p">{</span><span class="w"></span>
+<span class="kt">void</span><span class="w"> </span><span class="nf">LayerNormalizationGrad</span><span class="p">(</span><span class="n">Ptr</span><span class="o">&lt;</span><span class="n">Allocator</span><span class="o">&gt;</span><span class="w"> </span><span class="n">allocator</span><span class="p">,</span><span class="w"></span>
+<span class="w">                            </span><span class="n">Tensor</span><span class="w"> </span><span class="n">gradX</span><span class="p">,</span><span class="w"></span>
+<span class="w">                            </span><span class="n">Tensor</span><span class="w"> </span><span class="n">gradGamma</span><span class="p">,</span><span class="w"></span>
+<span class="w">                            </span><span class="n">Tensor</span><span class="w"> </span><span class="n">gradBeta</span><span class="p">,</span><span class="w"></span>
+<span class="w">                            </span><span class="n">Tensor</span><span class="w"> </span><span class="n">adj</span><span class="p">,</span><span class="w"></span>
+<span class="w">                            </span><span class="n">Tensor</span><span class="w"> </span><span class="n">y</span><span class="p">,</span><span class="w"></span>
+<span class="w">                            </span><span class="n">Tensor</span><span class="w"> </span><span class="n">x</span><span class="p">,</span><span class="w"></span>
+<span class="w">                            </span><span class="n">Tensor</span><span class="w"> </span><span class="n">gamma</span><span class="p">,</span><span class="w"></span>
+<span class="w">                            </span><span class="n">Tensor</span><span class="w"> </span><span class="n">beta</span><span class="p">,</span><span class="w"></span>
+<span class="w">                            </span><span class="kt">float</span><span class="w"> </span><span class="n">eps</span><span class="p">);</span><span class="w"></span>
+<span class="p">}</span><span class="w"></span>
 <span class="cp">#endif</span>
 
-<span class="k">namespace</span> <span class="n">cpu</span> <span class="p">{</span>
-<span class="kt">void</span> <span class="nf">LayerNormalizationGrad</span><span class="p">(</span><span class="n">Tensor</span> <span class="n">gradX</span><span class="p">,</span>
-                            <span class="n">Tensor</span> <span class="n">gradGamma</span><span class="p">,</span>
-                            <span class="n">Tensor</span> <span class="n">gradBeta</span><span class="p">,</span>
-                            <span class="n">Tensor</span> <span class="n">adj</span><span class="p">,</span>
-                            <span class="n">Tensor</span> <span class="n">y</span><span class="p">,</span>
-                            <span class="n">Tensor</span> <span class="n">x</span><span class="p">,</span>
-                            <span class="n">Tensor</span> <span class="n">gamma</span><span class="p">,</span>
-                            <span class="n">Tensor</span> <span class="n">beta</span><span class="p">,</span>
-                            <span class="kt">float</span> <span class="n">eps</span><span class="p">);</span>
-<span class="p">}</span>
+<span class="k">namespace</span><span class="w"> </span><span class="nn">cpu</span><span class="w"> </span><span class="p">{</span><span class="w"></span>
+<span class="kt">void</span><span class="w"> </span><span class="nf">LayerNormalizationGrad</span><span class="p">(</span><span class="n">Tensor</span><span class="w"> </span><span class="n">gradX</span><span class="p">,</span><span class="w"></span>
+<span class="w">                            </span><span class="n">Tensor</span><span class="w"> </span><span class="n">gradGamma</span><span class="p">,</span><span class="w"></span>
+<span class="w">                            </span><span class="n">Tensor</span><span class="w"> </span><span class="n">gradBeta</span><span class="p">,</span><span class="w"></span>
+<span class="w">                            </span><span class="n">Tensor</span><span class="w"> </span><span class="n">adj</span><span class="p">,</span><span class="w"></span>
+<span class="w">                            </span><span class="n">Tensor</span><span class="w"> </span><span class="n">y</span><span class="p">,</span><span class="w"></span>
+<span class="w">                            </span><span class="n">Tensor</span><span class="w"> </span><span class="n">x</span><span class="p">,</span><span class="w"></span>
+<span class="w">                            </span><span class="n">Tensor</span><span class="w"> </span><span class="n">gamma</span><span class="p">,</span><span class="w"></span>
+<span class="w">                            </span><span class="n">Tensor</span><span class="w"> </span><span class="n">beta</span><span class="p">,</span><span class="w"></span>
+<span class="w">                            </span><span class="kt">float</span><span class="w"> </span><span class="n">eps</span><span class="p">);</span><span class="w"></span>
+<span class="p">}</span><span class="w"></span>
 
-<span class="k">static</span> <span class="kr">inline</span> <span class="kt">void</span> <span class="n">LayerNormalizationGrad</span><span class="p">(</span>
-                            <span class="n">Ptr</span><span class="o">&lt;</span><span class="n">Allocator</span><span class="o">&gt;</span> <span class="n">allocator</span><span class="p">,</span>
-                            <span class="n">Tensor</span> <span class="n">gradX</span><span class="p">,</span>
-                            <span class="n">Tensor</span> <span class="n">gradGamma</span><span class="p">,</span>
-                            <span class="n">Tensor</span> <span class="n">gradBeta</span><span class="p">,</span>
-                            <span class="n">Tensor</span> <span class="n">adj</span><span class="p">,</span>
-                            <span class="n">Tensor</span> <span class="n">y</span><span class="p">,</span>
-                            <span class="n">Tensor</span> <span class="n">x</span><span class="p">,</span>
-                            <span class="n">Tensor</span> <span class="n">gamma</span><span class="p">,</span>
-                            <span class="n">Tensor</span> <span class="n">beta</span><span class="p">,</span>
-                            <span class="kt">float</span> <span class="n">eps</span><span class="p">)</span> <span class="p">{</span>
+<span class="k">static</span><span class="w"> </span><span class="kr">inline</span><span class="w"> </span><span class="kt">void</span><span class="w"> </span><span class="n">LayerNormalizationGrad</span><span class="p">(</span><span class="w"></span>
+<span class="w">                            </span><span class="n">Ptr</span><span class="o">&lt;</span><span class="n">Allocator</span><span class="o">&gt;</span><span class="w"> </span><span class="n">allocator</span><span class="p">,</span><span class="w"></span>
+<span class="w">                            </span><span class="n">Tensor</span><span class="w"> </span><span class="n">gradX</span><span class="p">,</span><span class="w"></span>
+<span class="w">                            </span><span class="n">Tensor</span><span class="w"> </span><span class="n">gradGamma</span><span class="p">,</span><span class="w"></span>
+<span class="w">                            </span><span class="n">Tensor</span><span class="w"> </span><span class="n">gradBeta</span><span class="p">,</span><span class="w"></span>
+<span class="w">                            </span><span class="n">Tensor</span><span class="w"> </span><span class="n">adj</span><span class="p">,</span><span class="w"></span>
+<span class="w">                            </span><span class="n">Tensor</span><span class="w"> </span><span class="n">y</span><span class="p">,</span><span class="w"></span>
+<span class="w">                            </span><span class="n">Tensor</span><span class="w"> </span><span class="n">x</span><span class="p">,</span><span class="w"></span>
+<span class="w">                            </span><span class="n">Tensor</span><span class="w"> </span><span class="n">gamma</span><span class="p">,</span><span class="w"></span>
+<span class="w">                            </span><span class="n">Tensor</span><span class="w"> </span><span class="n">beta</span><span class="p">,</span><span class="w"></span>
+<span class="w">                            </span><span class="kt">float</span><span class="w"> </span><span class="n">eps</span><span class="p">)</span><span class="w"> </span><span class="p">{</span><span class="w"></span>
 <span class="cp">#ifdef CUDA_FOUND</span>
-  <span class="k">if</span><span class="p">(</span><span class="n">gradX</span><span class="o">-&gt;</span><span class="n">getBackend</span><span class="p">()</span><span class="o">-&gt;</span><span class="n">getDeviceId</span><span class="p">().</span><span class="n">type</span> <span class="o">==</span> <span class="n">DeviceType</span><span class="o">::</span><span class="n">gpu</span><span class="p">)</span>
-    <span class="n">gpu</span><span class="o">::</span><span class="n">LayerNormalizationGrad</span><span class="p">(</span><span class="n">allocator</span><span class="p">,</span> <span class="n">gradX</span><span class="p">,</span> <span class="n">gradGamma</span><span class="p">,</span> <span class="n">gradBeta</span><span class="p">,</span> <span class="n">adj</span><span class="p">,</span> <span class="n">y</span><span class="p">,</span> <span class="n">x</span><span class="p">,</span> <span class="n">gamma</span><span class="p">,</span> <span class="n">beta</span><span class="p">,</span> <span class="n">eps</span><span class="p">);</span>
-  <span class="k">else</span>
+<span class="w">  </span><span class="k">if</span><span class="p">(</span><span class="n">gradX</span><span class="o">-&gt;</span><span class="n">getBackend</span><span class="p">()</span><span class="o">-&gt;</span><span class="n">getDeviceId</span><span class="p">().</span><span class="n">type</span><span class="w"> </span><span class="o">==</span><span class="w"> </span><span class="n">DeviceType</span><span class="o">::</span><span class="n">gpu</span><span class="p">)</span><span class="w"></span>
+<span class="w">    </span><span class="n">gpu</span><span class="o">::</span><span class="n">LayerNormalizationGrad</span><span class="p">(</span><span class="n">allocator</span><span class="p">,</span><span class="w"> </span><span class="n">gradX</span><span class="p">,</span><span class="w"> </span><span class="n">gradGamma</span><span class="p">,</span><span class="w"> </span><span class="n">gradBeta</span><span class="p">,</span><span class="w"> </span><span class="n">adj</span><span class="p">,</span><span class="w"> </span><span class="n">y</span><span class="p">,</span><span class="w"> </span><span class="n">x</span><span class="p">,</span><span class="w"> </span><span class="n">gamma</span><span class="p">,</span><span class="w"> </span><span class="n">beta</span><span class="p">,</span><span class="w"> </span><span class="n">eps</span><span class="p">);</span><span class="w"></span>
+<span class="w">  </span><span class="k">else</span><span class="w"></span>
 <span class="cp">#endif</span>
-    <span class="n">cpu</span><span class="o">::</span><span class="n">LayerNormalizationGrad</span><span class="p">(</span><span class="n">gradX</span><span class="p">,</span> <span class="n">gradGamma</span><span class="p">,</span> <span class="n">gradBeta</span><span class="p">,</span> <span class="n">adj</span><span class="p">,</span> <span class="n">y</span><span class="p">,</span> <span class="n">x</span><span class="p">,</span> <span class="n">gamma</span><span class="p">,</span> <span class="n">beta</span><span class="p">,</span> <span class="n">eps</span><span class="p">);</span>
-<span class="p">}</span>
+<span class="w">    </span><span class="n">cpu</span><span class="o">::</span><span class="n">LayerNormalizationGrad</span><span class="p">(</span><span class="n">gradX</span><span class="p">,</span><span class="w"> </span><span class="n">gradGamma</span><span class="p">,</span><span class="w"> </span><span class="n">gradBeta</span><span class="p">,</span><span class="w"> </span><span class="n">adj</span><span class="p">,</span><span class="w"> </span><span class="n">y</span><span class="p">,</span><span class="w"> </span><span class="n">x</span><span class="p">,</span><span class="w"> </span><span class="n">gamma</span><span class="p">,</span><span class="w"> </span><span class="n">beta</span><span class="p">,</span><span class="w"> </span><span class="n">eps</span><span class="p">);</span><span class="w"></span>
+<span class="p">}</span><span class="w"></span>
 
-<span class="n">DISPATCH4</span><span class="p">(</span><span class="n">HighwayForward</span><span class="p">,</span> <span class="n">marian</span><span class="o">::</span><span class="n">Tensor</span><span class="p">,</span> <span class="k">const</span> <span class="n">marian</span><span class="o">::</span><span class="n">Tensor</span><span class="p">,</span> <span class="k">const</span> <span class="n">marian</span><span class="o">::</span><span class="n">Tensor</span><span class="p">,</span> <span class="k">const</span> <span class="n">marian</span><span class="o">::</span><span class="n">Tensor</span><span class="p">)</span>
-<span class="n">DISPATCH7</span><span class="p">(</span><span class="n">HighwayBackward</span><span class="p">,</span> <span class="n">marian</span><span class="o">::</span><span class="n">Tensor</span><span class="p">,</span> <span class="n">marian</span><span class="o">::</span><span class="n">Tensor</span><span class="p">,</span> <span class="n">marian</span><span class="o">::</span><span class="n">Tensor</span><span class="p">,</span> <span class="k">const</span> <span class="n">marian</span><span class="o">::</span><span class="n">Tensor</span><span class="p">,</span> <span class="k">const</span> <span class="n">marian</span><span class="o">::</span><span class="n">Tensor</span><span class="p">,</span> <span class="k">const</span> <span class="n">marian</span><span class="o">::</span><span class="n">Tensor</span><span class="p">,</span> <span class="k">const</span> <span class="n">marian</span><span class="o">::</span><span class="n">Tensor</span><span class="p">)</span>
+<span class="c1">// clang-format off</span>
+<span class="n">DISPATCH5</span><span class="p">(</span><span class="n">RMSNormalization</span><span class="p">,</span><span class="w"> </span><span class="n">marian</span><span class="o">::</span><span class="n">Tensor</span><span class="p">,</span><span class="w"> </span><span class="n">marian</span><span class="o">::</span><span class="n">Tensor</span><span class="p">,</span><span class="w"> </span><span class="n">marian</span><span class="o">::</span><span class="n">Tensor</span><span class="p">,</span><span class="w"> </span><span class="n">marian</span><span class="o">::</span><span class="n">Tensor</span><span class="p">,</span><span class="w"> </span><span class="kt">float</span><span class="p">)</span><span class="w"></span>
 
-<span class="n">DISPATCH3</span><span class="p">(</span><span class="n">CopyRows</span><span class="p">,</span> <span class="n">marian</span><span class="o">::</span><span class="n">Tensor</span><span class="p">,</span> <span class="k">const</span> <span class="n">marian</span><span class="o">::</span><span class="n">Tensor</span><span class="p">,</span> <span class="k">const</span> <span class="n">marian</span><span class="o">::</span><span class="n">Tensor</span><span class="p">)</span>
-<span class="n">DISPATCH3</span><span class="p">(</span><span class="n">PasteRows</span><span class="p">,</span> <span class="n">marian</span><span class="o">::</span><span class="n">Tensor</span><span class="p">,</span> <span class="k">const</span> <span class="n">marian</span><span class="o">::</span><span class="n">Tensor</span><span class="p">,</span> <span class="k">const</span> <span class="n">marian</span><span class="o">::</span><span class="n">Tensor</span><span class="p">)</span>
+<span class="cp">#ifdef CUDA_FOUND</span>
+<span class="k">namespace</span><span class="w"> </span><span class="nn">gpu</span><span class="w"> </span><span class="p">{</span><span class="w"></span>
+<span class="kt">void</span><span class="w"> </span><span class="nf">RMSNormalizationGrad</span><span class="p">(</span><span class="n">Ptr</span><span class="o">&lt;</span><span class="n">Allocator</span><span class="o">&gt;</span><span class="w"> </span><span class="n">allocator</span><span class="p">,</span><span class="w"></span>
+<span class="w">                          </span><span class="n">Tensor</span><span class="w"> </span><span class="n">gradX</span><span class="p">,</span><span class="w"></span>
+<span class="w">                          </span><span class="n">Tensor</span><span class="w"> </span><span class="n">gradGamma</span><span class="p">,</span><span class="w"></span>
+<span class="w">                          </span><span class="n">Tensor</span><span class="w"> </span><span class="n">gradBeta</span><span class="p">,</span><span class="w"></span>
+<span class="w">                          </span><span class="n">Tensor</span><span class="w"> </span><span class="n">adj</span><span class="p">,</span><span class="w"></span>
+<span class="w">                          </span><span class="n">Tensor</span><span class="w"> </span><span class="n">y</span><span class="p">,</span><span class="w"></span>
+<span class="w">                          </span><span class="n">Tensor</span><span class="w"> </span><span class="n">x</span><span class="p">,</span><span class="w"></span>
+<span class="w">                          </span><span class="n">Tensor</span><span class="w"> </span><span class="n">gamma</span><span class="p">,</span><span class="w"></span>
+<span class="w">                          </span><span class="n">Tensor</span><span class="w"> </span><span class="n">beta</span><span class="p">,</span><span class="w"></span>
+<span class="w">                          </span><span class="kt">float</span><span class="w"> </span><span class="n">eps</span><span class="p">);</span><span class="w"></span>
+<span class="p">}</span><span class="w"></span>
+<span class="cp">#endif</span>
 
-<span class="n">DISPATCH3</span><span class="p">(</span><span class="n">CopyCols</span><span class="p">,</span> <span class="n">marian</span><span class="o">::</span><span class="n">Tensor</span><span class="p">,</span> <span class="k">const</span> <span class="n">marian</span><span class="o">::</span><span class="n">Tensor</span><span class="p">,</span> <span class="k">const</span> <span class="n">marian</span><span class="o">::</span><span class="n">Tensor</span><span class="p">)</span>
-<span class="n">DISPATCH3</span><span class="p">(</span><span class="n">PasteCols</span><span class="p">,</span> <span class="n">marian</span><span class="o">::</span><span class="n">Tensor</span><span class="p">,</span> <span class="k">const</span> <span class="n">marian</span><span class="o">::</span><span class="n">Tensor</span><span class="p">,</span> <span class="k">const</span> <span class="n">marian</span><span class="o">::</span><span class="n">Tensor</span><span class="p">)</span>
+<span class="k">namespace</span><span class="w"> </span><span class="nn">cpu</span><span class="w"> </span><span class="p">{</span><span class="w"></span>
+<span class="kt">void</span><span class="w"> </span><span class="nf">RMSNormalizationGrad</span><span class="p">(</span><span class="n">Tensor</span><span class="w"> </span><span class="n">gradX</span><span class="p">,</span><span class="w"></span>
+<span class="w">                          </span><span class="n">Tensor</span><span class="w"> </span><span class="n">gradGamma</span><span class="p">,</span><span class="w"></span>
+<span class="w">                          </span><span class="n">Tensor</span><span class="w"> </span><span class="n">gradBeta</span><span class="p">,</span><span class="w"></span>
+<span class="w">                          </span><span class="n">Tensor</span><span class="w"> </span><span class="n">adj</span><span class="p">,</span><span class="w"></span>
+<span class="w">                          </span><span class="n">Tensor</span><span class="w"> </span><span class="n">y</span><span class="p">,</span><span class="w"></span>
+<span class="w">                          </span><span class="n">Tensor</span><span class="w"> </span><span class="n">x</span><span class="p">,</span><span class="w"></span>
+<span class="w">                          </span><span class="n">Tensor</span><span class="w"> </span><span class="n">gamma</span><span class="p">,</span><span class="w"></span>
+<span class="w">                          </span><span class="n">Tensor</span><span class="w"> </span><span class="n">beta</span><span class="p">,</span><span class="w"></span>
+<span class="w">                          </span><span class="kt">float</span><span class="w"> </span><span class="n">eps</span><span class="p">);</span><span class="w"></span>
+<span class="p">}</span><span class="w"></span>
 
-<span class="n">DISPATCH4</span><span class="p">(</span><span class="n">Select</span><span class="p">,</span> <span class="n">marian</span><span class="o">::</span><span class="n">Tensor</span><span class="p">,</span> <span class="k">const</span> <span class="n">marian</span><span class="o">::</span><span class="n">Tensor</span><span class="p">,</span> <span class="k">const</span> <span class="n">marian</span><span class="o">::</span><span class="n">Tensor</span><span class="p">,</span> <span class="kt">int</span><span class="p">)</span>
-<span class="n">DISPATCH4</span><span class="p">(</span><span class="n">Insert</span><span class="p">,</span> <span class="n">marian</span><span class="o">::</span><span class="n">Tensor</span><span class="p">,</span> <span class="k">const</span> <span class="n">marian</span><span class="o">::</span><span class="n">Tensor</span><span class="p">,</span> <span class="k">const</span> <span class="n">marian</span><span class="o">::</span><span class="n">Tensor</span><span class="p">,</span> <span class="kt">int</span><span class="p">)</span>
+<span class="k">static</span><span class="w"> </span><span class="kr">inline</span><span class="w"> </span><span class="kt">void</span><span class="w"> </span><span class="n">RMSNormalizationGrad</span><span class="p">(</span><span class="w"></span>
+<span class="w">                            </span><span class="n">Ptr</span><span class="o">&lt;</span><span class="n">Allocator</span><span class="o">&gt;</span><span class="w"> </span><span class="n">allocator</span><span class="p">,</span><span class="w"></span>
+<span class="w">                            </span><span class="n">Tensor</span><span class="w"> </span><span class="n">gradX</span><span class="p">,</span><span class="w"></span>
+<span class="w">                            </span><span class="n">Tensor</span><span class="w"> </span><span class="n">gradGamma</span><span class="p">,</span><span class="w"></span>
+<span class="w">                            </span><span class="n">Tensor</span><span class="w"> </span><span class="n">gradBeta</span><span class="p">,</span><span class="w"></span>
+<span class="w">                            </span><span class="n">Tensor</span><span class="w"> </span><span class="n">adj</span><span class="p">,</span><span class="w"></span>
+<span class="w">                            </span><span class="n">Tensor</span><span class="w"> </span><span class="n">y</span><span class="p">,</span><span class="w"></span>
+<span class="w">                            </span><span class="n">Tensor</span><span class="w"> </span><span class="n">x</span><span class="p">,</span><span class="w"></span>
+<span class="w">                            </span><span class="n">Tensor</span><span class="w"> </span><span class="n">gamma</span><span class="p">,</span><span class="w"></span>
+<span class="w">                            </span><span class="n">Tensor</span><span class="w"> </span><span class="n">beta</span><span class="p">,</span><span class="w"></span>
+<span class="w">                            </span><span class="kt">float</span><span class="w"> </span><span class="n">eps</span><span class="p">)</span><span class="w"> </span><span class="p">{</span><span class="w"></span>
+<span class="cp">#ifdef CUDA_FOUND</span>
+<span class="w">  </span><span class="k">if</span><span class="p">(</span><span class="n">gradX</span><span class="o">-&gt;</span><span class="n">getBackend</span><span class="p">()</span><span class="o">-&gt;</span><span class="n">getDeviceId</span><span class="p">().</span><span class="n">type</span><span class="w"> </span><span class="o">==</span><span class="w"> </span><span class="n">DeviceType</span><span class="o">::</span><span class="n">gpu</span><span class="p">)</span><span class="w"></span>
+<span class="w">    </span><span class="n">gpu</span><span class="o">::</span><span class="n">RMSNormalizationGrad</span><span class="p">(</span><span class="n">allocator</span><span class="p">,</span><span class="w"> </span><span class="n">gradX</span><span class="p">,</span><span class="w"> </span><span class="n">gradGamma</span><span class="p">,</span><span class="w"> </span><span class="n">gradBeta</span><span class="p">,</span><span class="w"> </span><span class="n">adj</span><span class="p">,</span><span class="w"> </span><span class="n">y</span><span class="p">,</span><span class="w"> </span><span class="n">x</span><span class="p">,</span><span class="w"> </span><span class="n">gamma</span><span class="p">,</span><span class="w"> </span><span class="n">beta</span><span class="p">,</span><span class="w"> </span><span class="n">eps</span><span class="p">);</span><span class="w"></span>
+<span class="w">  </span><span class="k">else</span><span class="w"></span>
+<span class="cp">#endif</span>
+<span class="w">    </span><span class="n">cpu</span><span class="o">::</span><span class="n">RMSNormalizationGrad</span><span class="p">(</span><span class="n">gradX</span><span class="p">,</span><span class="w"> </span><span class="n">gradGamma</span><span class="p">,</span><span class="w"> </span><span class="n">gradBeta</span><span class="p">,</span><span class="w"> </span><span class="n">adj</span><span class="p">,</span><span class="w"> </span><span class="n">y</span><span class="p">,</span><span class="w"> </span><span class="n">x</span><span class="p">,</span><span class="w"> </span><span class="n">gamma</span><span class="p">,</span><span class="w"> </span><span class="n">beta</span><span class="p">,</span><span class="w"> </span><span class="n">eps</span><span class="p">);</span><span class="w"></span>
+<span class="p">}</span><span class="w"></span>
 
-<span class="n">DISPATCH7</span><span class="p">(</span><span class="n">TopK</span><span class="p">,</span> <span class="n">marian</span><span class="o">::</span><span class="n">Tensor</span><span class="p">,</span> <span class="n">marian</span><span class="o">::</span><span class="n">Tensor</span><span class="p">,</span> <span class="n">Ptr</span><span class="o">&lt;</span><span class="n">Allocator</span><span class="o">&gt;</span><span class="p">,</span> <span class="k">const</span> <span class="n">marian</span><span class="o">::</span><span class="n">Tensor</span><span class="p">,</span> <span class="kt">int</span><span class="p">,</span> <span class="kt">int</span><span class="p">,</span> <span class="kt">bool</span><span class="p">);</span>
+<span class="n">DISPATCH4</span><span class="p">(</span><span class="n">HighwayForward</span><span class="p">,</span><span class="w"> </span><span class="n">marian</span><span class="o">::</span><span class="n">Tensor</span><span class="p">,</span><span class="w"> </span><span class="k">const</span><span class="w"> </span><span class="n">marian</span><span class="o">::</span><span class="n">Tensor</span><span class="p">,</span><span class="w"> </span><span class="k">const</span><span class="w"> </span><span class="n">marian</span><span class="o">::</span><span class="n">Tensor</span><span class="p">,</span><span class="w"> </span><span class="k">const</span><span class="w"> </span><span class="n">marian</span><span class="o">::</span><span class="n">Tensor</span><span class="p">)</span><span class="w"></span>
+<span class="n">DISPATCH7</span><span class="p">(</span><span class="n">HighwayBackward</span><span class="p">,</span><span class="w"> </span><span class="n">marian</span><span class="o">::</span><span class="n">Tensor</span><span class="p">,</span><span class="w"> </span><span class="n">marian</span><span class="o">::</span><span class="n">Tensor</span><span class="p">,</span><span class="w"> </span><span class="n">marian</span><span class="o">::</span><span class="n">Tensor</span><span class="p">,</span><span class="w"> </span><span class="k">const</span><span class="w"> </span><span class="n">marian</span><span class="o">::</span><span class="n">Tensor</span><span class="p">,</span><span class="w"> </span><span class="k">const</span><span class="w"> </span><span class="n">marian</span><span class="o">::</span><span class="n">Tensor</span><span class="p">,</span><span class="w"> </span><span class="k">const</span><span class="w"> </span><span class="n">marian</span><span class="o">::</span><span class="n">Tensor</span><span class="p">,</span><span class="w"> </span><span class="k">const</span><span class="w"> </span><span class="n">marian</span><span class="o">::</span><span class="n">Tensor</span><span class="p">)</span><span class="w"></span>
 
-<span class="n">DISPATCH2</span><span class="p">(</span><span class="n">LSTMCellForward</span><span class="p">,</span> <span class="n">marian</span><span class="o">::</span><span class="n">Tensor</span><span class="p">,</span> <span class="n">std</span><span class="o">::</span><span class="n">vector</span><span class="o">&lt;</span><span class="n">marian</span><span class="o">::</span><span class="n">Tensor</span><span class="o">&gt;</span><span class="p">)</span>
-<span class="n">DISPATCH2</span><span class="p">(</span><span class="n">LSTMOutputForward</span><span class="p">,</span> <span class="n">marian</span><span class="o">::</span><span class="n">Tensor</span><span class="p">,</span> <span class="n">std</span><span class="o">::</span><span class="n">vector</span><span class="o">&lt;</span><span class="n">marian</span><span class="o">::</span><span class="n">Tensor</span><span class="o">&gt;</span><span class="p">);</span>
+<span class="n">DISPATCH3</span><span class="p">(</span><span class="n">CopyRows</span><span class="p">,</span><span class="w"> </span><span class="n">marian</span><span class="o">::</span><span class="n">Tensor</span><span class="p">,</span><span class="w"> </span><span class="k">const</span><span class="w"> </span><span class="n">marian</span><span class="o">::</span><span class="n">Tensor</span><span class="p">,</span><span class="w"> </span><span class="k">const</span><span class="w"> </span><span class="n">marian</span><span class="o">::</span><span class="n">Tensor</span><span class="p">)</span><span class="w"></span>
+<span class="n">DISPATCH3</span><span class="p">(</span><span class="n">PasteRows</span><span class="p">,</span><span class="w"> </span><span class="n">marian</span><span class="o">::</span><span class="n">Tensor</span><span class="p">,</span><span class="w"> </span><span class="k">const</span><span class="w"> </span><span class="n">marian</span><span class="o">::</span><span class="n">Tensor</span><span class="p">,</span><span class="w"> </span><span class="k">const</span><span class="w"> </span><span class="n">marian</span><span class="o">::</span><span class="n">Tensor</span><span class="p">)</span><span class="w"></span>
+
+<span class="n">DISPATCH3</span><span class="p">(</span><span class="n">CopyCols</span><span class="p">,</span><span class="w"> </span><span class="n">marian</span><span class="o">::</span><span class="n">Tensor</span><span class="p">,</span><span class="w"> </span><span class="k">const</span><span class="w"> </span><span class="n">marian</span><span class="o">::</span><span class="n">Tensor</span><span class="p">,</span><span class="w"> </span><span class="k">const</span><span class="w"> </span><span class="n">marian</span><span class="o">::</span><span class="n">Tensor</span><span class="p">)</span><span class="w"></span>
+<span class="n">DISPATCH3</span><span class="p">(</span><span class="n">PasteCols</span><span class="p">,</span><span class="w"> </span><span class="n">marian</span><span class="o">::</span><span class="n">Tensor</span><span class="p">,</span><span class="w"> </span><span class="k">const</span><span class="w"> </span><span class="n">marian</span><span class="o">::</span><span class="n">Tensor</span><span class="p">,</span><span class="w"> </span><span class="k">const</span><span class="w"> </span><span class="n">marian</span><span class="o">::</span><span class="n">Tensor</span><span class="p">)</span><span class="w"></span>
+
+<span class="n">DISPATCH4</span><span class="p">(</span><span class="n">Select</span><span class="p">,</span><span class="w"> </span><span class="n">marian</span><span class="o">::</span><span class="n">Tensor</span><span class="p">,</span><span class="w"> </span><span class="k">const</span><span class="w"> </span><span class="n">marian</span><span class="o">::</span><span class="n">Tensor</span><span class="p">,</span><span class="w"> </span><span class="k">const</span><span class="w"> </span><span class="n">marian</span><span class="o">::</span><span class="n">Tensor</span><span class="p">,</span><span class="w"> </span><span class="kt">int</span><span class="p">)</span><span class="w"></span>
+<span class="n">DISPATCH4</span><span class="p">(</span><span class="n">Insert</span><span class="p">,</span><span class="w"> </span><span class="n">marian</span><span class="o">::</span><span class="n">Tensor</span><span class="p">,</span><span class="w"> </span><span class="k">const</span><span class="w"> </span><span class="n">marian</span><span class="o">::</span><span class="n">Tensor</span><span class="p">,</span><span class="w"> </span><span class="k">const</span><span class="w"> </span><span class="n">marian</span><span class="o">::</span><span class="n">Tensor</span><span class="p">,</span><span class="w"> </span><span class="kt">int</span><span class="p">)</span><span class="w"></span>
+
+<span class="n">DISPATCH7</span><span class="p">(</span><span class="n">TopK</span><span class="p">,</span><span class="w"> </span><span class="n">marian</span><span class="o">::</span><span class="n">Tensor</span><span class="p">,</span><span class="w"> </span><span class="n">marian</span><span class="o">::</span><span class="n">Tensor</span><span class="p">,</span><span class="w"> </span><span class="n">Ptr</span><span class="o">&lt;</span><span class="n">Allocator</span><span class="o">&gt;</span><span class="p">,</span><span class="w"> </span><span class="k">const</span><span class="w"> </span><span class="n">marian</span><span class="o">::</span><span class="n">Tensor</span><span class="p">,</span><span class="w"> </span><span class="kt">int</span><span class="p">,</span><span class="w"> </span><span class="kt">int</span><span class="p">,</span><span class="w"> </span><span class="kt">bool</span><span class="p">);</span><span class="w"></span>
+
+<span class="n">DISPATCH2</span><span class="p">(</span><span class="n">LSTMCellForward</span><span class="p">,</span><span class="w"> </span><span class="n">marian</span><span class="o">::</span><span class="n">Tensor</span><span class="p">,</span><span class="w"> </span><span class="n">std</span><span class="o">::</span><span class="n">vector</span><span class="o">&lt;</span><span class="n">marian</span><span class="o">::</span><span class="n">Tensor</span><span class="o">&gt;</span><span class="p">)</span><span class="w"></span>
+<span class="n">DISPATCH2</span><span class="p">(</span><span class="n">LSTMOutputForward</span><span class="p">,</span><span class="w"> </span><span class="n">marian</span><span class="o">::</span><span class="n">Tensor</span><span class="p">,</span><span class="w"> </span><span class="n">std</span><span class="o">::</span><span class="n">vector</span><span class="o">&lt;</span><span class="n">marian</span><span class="o">::</span><span class="n">Tensor</span><span class="o">&gt;</span><span class="p">);</span><span class="w"></span>
 <span class="c1">// clang-format on</span>
 
 <span class="cp">#ifdef CUDA_FOUND</span>
-<span class="k">namespace</span> <span class="n">gpu</span> <span class="p">{</span>
-<span class="kt">void</span> <span class="nf">LSTMCellBackward</span><span class="p">(</span><span class="n">std</span><span class="o">::</span><span class="n">vector</span><span class="o">&lt;</span><span class="n">marian</span><span class="o">::</span><span class="n">Tensor</span><span class="o">&gt;</span> <span class="n">outputs</span><span class="p">,</span>
-                      <span class="n">std</span><span class="o">::</span><span class="n">vector</span><span class="o">&lt;</span><span class="n">marian</span><span class="o">::</span><span class="n">Tensor</span><span class="o">&gt;</span> <span class="n">inputs</span><span class="p">,</span>
-                      <span class="n">marian</span><span class="o">::</span><span class="n">Tensor</span> <span class="n">adj</span><span class="p">);</span>
-<span class="p">}</span>
+<span class="k">namespace</span><span class="w"> </span><span class="nn">gpu</span><span class="w"> </span><span class="p">{</span><span class="w"></span>
+<span class="kt">void</span><span class="w"> </span><span class="nf">LSTMCellBackward</span><span class="p">(</span><span class="n">std</span><span class="o">::</span><span class="n">vector</span><span class="o">&lt;</span><span class="n">marian</span><span class="o">::</span><span class="n">Tensor</span><span class="o">&gt;</span><span class="w"> </span><span class="n">outputs</span><span class="p">,</span><span class="w"></span>
+<span class="w">                      </span><span class="n">std</span><span class="o">::</span><span class="n">vector</span><span class="o">&lt;</span><span class="n">marian</span><span class="o">::</span><span class="n">Tensor</span><span class="o">&gt;</span><span class="w"> </span><span class="n">inputs</span><span class="p">,</span><span class="w"></span>
+<span class="w">                      </span><span class="n">marian</span><span class="o">::</span><span class="n">Tensor</span><span class="w"> </span><span class="n">adj</span><span class="p">);</span><span class="w"></span>
+<span class="p">}</span><span class="w"></span>
 <span class="cp">#endif</span>
 
-<span class="k">namespace</span> <span class="n">cpu</span> <span class="p">{</span>
-<span class="kt">void</span> <span class="nf">LSTMCellBackward</span><span class="p">(</span><span class="n">std</span><span class="o">::</span><span class="n">vector</span><span class="o">&lt;</span><span class="n">marian</span><span class="o">::</span><span class="n">Tensor</span><span class="o">&gt;</span> <span class="n">outputs</span><span class="p">,</span>
-                      <span class="n">std</span><span class="o">::</span><span class="n">vector</span><span class="o">&lt;</span><span class="n">marian</span><span class="o">::</span><span class="n">Tensor</span><span class="o">&gt;</span> <span class="n">inputs</span><span class="p">,</span>
-                      <span class="n">marian</span><span class="o">::</span><span class="n">Tensor</span> <span class="n">adj</span><span class="p">);</span>
-<span class="p">}</span>
+<span class="k">namespace</span><span class="w"> </span><span class="nn">cpu</span><span class="w"> </span><span class="p">{</span><span class="w"></span>
+<span class="kt">void</span><span class="w"> </span><span class="nf">LSTMCellBackward</span><span class="p">(</span><span class="n">std</span><span class="o">::</span><span class="n">vector</span><span class="o">&lt;</span><span class="n">marian</span><span class="o">::</span><span class="n">Tensor</span><span class="o">&gt;</span><span class="w"> </span><span class="n">outputs</span><span class="p">,</span><span class="w"></span>
+<span class="w">                      </span><span class="n">std</span><span class="o">::</span><span class="n">vector</span><span class="o">&lt;</span><span class="n">marian</span><span class="o">::</span><span class="n">Tensor</span><span class="o">&gt;</span><span class="w"> </span><span class="n">inputs</span><span class="p">,</span><span class="w"></span>
+<span class="w">                      </span><span class="n">marian</span><span class="o">::</span><span class="n">Tensor</span><span class="w"> </span><span class="n">adj</span><span class="p">);</span><span class="w"></span>
+<span class="p">}</span><span class="w"></span>
 
-<span class="k">static</span> <span class="kr">inline</span> <span class="kt">void</span> <span class="n">LSTMCellBackward</span><span class="p">(</span><span class="n">std</span><span class="o">::</span><span class="n">vector</span><span class="o">&lt;</span><span class="n">marian</span><span class="o">::</span><span class="n">Tensor</span><span class="o">&gt;</span> <span class="n">outputs</span><span class="p">,</span>
-                                    <span class="n">std</span><span class="o">::</span><span class="n">vector</span><span class="o">&lt;</span><span class="n">marian</span><span class="o">::</span><span class="n">Tensor</span><span class="o">&gt;</span> <span class="n">inputs</span><span class="p">,</span>
-                                    <span class="n">marian</span><span class="o">::</span><span class="n">Tensor</span> <span class="n">adj</span><span class="p">)</span> <span class="p">{</span>
+<span class="k">static</span><span class="w"> </span><span class="kr">inline</span><span class="w"> </span><span class="kt">void</span><span class="w"> </span><span class="n">LSTMCellBackward</span><span class="p">(</span><span class="n">std</span><span class="o">::</span><span class="n">vector</span><span class="o">&lt;</span><span class="n">marian</span><span class="o">::</span><span class="n">Tensor</span><span class="o">&gt;</span><span class="w"> </span><span class="n">outputs</span><span class="p">,</span><span class="w"></span>
+<span class="w">                                    </span><span class="n">std</span><span class="o">::</span><span class="n">vector</span><span class="o">&lt;</span><span class="n">marian</span><span class="o">::</span><span class="n">Tensor</span><span class="o">&gt;</span><span class="w"> </span><span class="n">inputs</span><span class="p">,</span><span class="w"></span>
+<span class="w">                                    </span><span class="n">marian</span><span class="o">::</span><span class="n">Tensor</span><span class="w"> </span><span class="n">adj</span><span class="p">)</span><span class="w"> </span><span class="p">{</span><span class="w"></span>
 <span class="cp">#ifdef CUDA_FOUND</span>
-  <span class="k">if</span><span class="p">(</span><span class="n">adj</span><span class="o">-&gt;</span><span class="n">getBackend</span><span class="p">()</span><span class="o">-&gt;</span><span class="n">getDeviceId</span><span class="p">().</span><span class="n">type</span> <span class="o">==</span> <span class="n">DeviceType</span><span class="o">::</span><span class="n">gpu</span><span class="p">)</span>
-    <span class="n">gpu</span><span class="o">::</span><span class="n">LSTMCellBackward</span><span class="p">(</span><span class="n">outputs</span><span class="p">,</span> <span class="n">inputs</span><span class="p">,</span> <span class="n">adj</span><span class="p">);</span>
-  <span class="k">else</span>
+<span class="w">  </span><span class="k">if</span><span class="p">(</span><span class="n">adj</span><span class="o">-&gt;</span><span class="n">getBackend</span><span class="p">()</span><span class="o">-&gt;</span><span class="n">getDeviceId</span><span class="p">().</span><span class="n">type</span><span class="w"> </span><span class="o">==</span><span class="w"> </span><span class="n">DeviceType</span><span class="o">::</span><span class="n">gpu</span><span class="p">)</span><span class="w"></span>
+<span class="w">    </span><span class="n">gpu</span><span class="o">::</span><span class="n">LSTMCellBackward</span><span class="p">(</span><span class="n">outputs</span><span class="p">,</span><span class="w"> </span><span class="n">inputs</span><span class="p">,</span><span class="w"> </span><span class="n">adj</span><span class="p">);</span><span class="w"></span>
+<span class="w">  </span><span class="k">else</span><span class="w"></span>
 <span class="cp">#endif</span>
-    <span class="n">cpu</span><span class="o">::</span><span class="n">LSTMCellBackward</span><span class="p">(</span><span class="n">outputs</span><span class="p">,</span> <span class="n">inputs</span><span class="p">,</span> <span class="n">adj</span><span class="p">);</span>
-<span class="p">}</span>
-
-<span class="cp">#ifdef CUDA_FOUND</span>
-<span class="k">namespace</span> <span class="n">gpu</span> <span class="p">{</span>
-<span class="kt">void</span> <span class="nf">LSTMOutputBackward</span><span class="p">(</span><span class="n">std</span><span class="o">::</span><span class="n">vector</span><span class="o">&lt;</span><span class="n">marian</span><span class="o">::</span><span class="n">Tensor</span><span class="o">&gt;</span> <span class="n">outputs</span><span class="p">,</span>
-                        <span class="n">std</span><span class="o">::</span><span class="n">vector</span><span class="o">&lt;</span><span class="n">marian</span><span class="o">::</span><span class="n">Tensor</span><span class="o">&gt;</span> <span class="n">inputs</span><span class="p">,</span>
-                        <span class="n">marian</span><span class="o">::</span><span class="n">Tensor</span> <span class="n">adj</span><span class="p">);</span>
-<span class="p">}</span>
-<span class="cp">#endif</span>
-
-<span class="k">namespace</span> <span class="n">cpu</span> <span class="p">{</span>
-<span class="kt">void</span> <span class="nf">LSTMOutputBackward</span><span class="p">(</span><span class="n">std</span><span class="o">::</span><span class="n">vector</span><span class="o">&lt;</span><span class="n">marian</span><span class="o">::</span><span class="n">Tensor</span><span class="o">&gt;</span> <span class="n">outputs</span><span class="p">,</span>
-                        <span class="n">std</span><span class="o">::</span><span class="n">vector</span><span class="o">&lt;</span><span class="n">marian</span><span class="o">::</span><span class="n">Tensor</span><span class="o">&gt;</span> <span class="n">inputs</span><span class="p">,</span>
-                        <span class="n">marian</span><span class="o">::</span><span class="n">Tensor</span> <span class="n">adj</span><span class="p">);</span>
-<span class="p">}</span>
-
-<span class="k">static</span> <span class="kr">inline</span> <span class="kt">void</span> <span class="n">LSTMOutputBackward</span><span class="p">(</span><span class="n">std</span><span class="o">::</span><span class="n">vector</span><span class="o">&lt;</span><span class="n">marian</span><span class="o">::</span><span class="n">Tensor</span><span class="o">&gt;</span> <span class="n">outputs</span><span class="p">,</span>
-                                      <span class="n">std</span><span class="o">::</span><span class="n">vector</span><span class="o">&lt;</span><span class="n">marian</span><span class="o">::</span><span class="n">Tensor</span><span class="o">&gt;</span> <span class="n">inputs</span><span class="p">,</span>
-                                      <span class="n">marian</span><span class="o">::</span><span class="n">Tensor</span> <span class="n">adj</span><span class="p">)</span> <span class="p">{</span>
-<span class="cp">#ifdef CUDA_FOUND</span>
-  <span class="k">if</span><span class="p">(</span><span class="n">adj</span><span class="o">-&gt;</span><span class="n">getBackend</span><span class="p">()</span><span class="o">-&gt;</span><span class="n">getDeviceId</span><span class="p">().</span><span class="n">type</span> <span class="o">==</span> <span class="n">DeviceType</span><span class="o">::</span><span class="n">gpu</span><span class="p">)</span>
-    <span class="n">gpu</span><span class="o">::</span><span class="n">LSTMOutputBackward</span><span class="p">(</span><span class="n">outputs</span><span class="p">,</span> <span class="n">inputs</span><span class="p">,</span> <span class="n">adj</span><span class="p">);</span>
-  <span class="k">else</span>
-<span class="cp">#endif</span>
-    <span class="n">cpu</span><span class="o">::</span><span class="n">LSTMOutputBackward</span><span class="p">(</span><span class="n">outputs</span><span class="p">,</span> <span class="n">inputs</span><span class="p">,</span> <span class="n">adj</span><span class="p">);</span>
-<span class="p">}</span>
-
-<span class="n">DISPATCH3</span><span class="p">(</span><span class="n">GRUFastForward</span><span class="p">,</span> <span class="n">marian</span><span class="o">::</span><span class="n">Tensor</span><span class="p">,</span> <span class="n">std</span><span class="o">::</span><span class="n">vector</span><span class="o">&lt;</span><span class="n">marian</span><span class="o">::</span><span class="n">Tensor</span><span class="o">&gt;</span><span class="p">,</span> <span class="kt">bool</span><span class="p">)</span>
+<span class="w">    </span><span class="n">cpu</span><span class="o">::</span><span class="n">LSTMCellBackward</span><span class="p">(</span><span class="n">outputs</span><span class="p">,</span><span class="w"> </span><span class="n">inputs</span><span class="p">,</span><span class="w"> </span><span class="n">adj</span><span class="p">);</span><span class="w"></span>
+<span class="p">}</span><span class="w"></span>
 
 <span class="cp">#ifdef CUDA_FOUND</span>
-<span class="k">namespace</span> <span class="n">gpu</span> <span class="p">{</span>
-<span class="kt">void</span> <span class="nf">GRUFastBackward</span><span class="p">(</span><span class="n">Ptr</span><span class="o">&lt;</span><span class="n">Allocator</span><span class="o">&gt;</span> <span class="n">allocator</span><span class="p">,</span>
-                     <span class="n">std</span><span class="o">::</span><span class="n">vector</span><span class="o">&lt;</span><span class="n">marian</span><span class="o">::</span><span class="n">Tensor</span><span class="o">&gt;</span> <span class="n">outputs</span><span class="p">,</span>
-                     <span class="n">std</span><span class="o">::</span><span class="n">vector</span><span class="o">&lt;</span><span class="n">marian</span><span class="o">::</span><span class="n">Tensor</span><span class="o">&gt;</span> <span class="n">inputs</span><span class="p">,</span>
-                     <span class="n">marian</span><span class="o">::</span><span class="n">Tensor</span> <span class="n">adj</span><span class="p">,</span>
-                     <span class="kt">bool</span> <span class="k">final</span><span class="p">);</span>
-<span class="p">}</span>
+<span class="k">namespace</span><span class="w"> </span><span class="nn">gpu</span><span class="w"> </span><span class="p">{</span><span class="w"></span>
+<span class="kt">void</span><span class="w"> </span><span class="nf">LSTMOutputBackward</span><span class="p">(</span><span class="n">std</span><span class="o">::</span><span class="n">vector</span><span class="o">&lt;</span><span class="n">marian</span><span class="o">::</span><span class="n">Tensor</span><span class="o">&gt;</span><span class="w"> </span><span class="n">outputs</span><span class="p">,</span><span class="w"></span>
+<span class="w">                        </span><span class="n">std</span><span class="o">::</span><span class="n">vector</span><span class="o">&lt;</span><span class="n">marian</span><span class="o">::</span><span class="n">Tensor</span><span class="o">&gt;</span><span class="w"> </span><span class="n">inputs</span><span class="p">,</span><span class="w"></span>
+<span class="w">                        </span><span class="n">marian</span><span class="o">::</span><span class="n">Tensor</span><span class="w"> </span><span class="n">adj</span><span class="p">);</span><span class="w"></span>
+<span class="p">}</span><span class="w"></span>
 <span class="cp">#endif</span>
 
-<span class="k">namespace</span> <span class="n">cpu</span> <span class="p">{</span>
-<span class="kt">void</span> <span class="nf">GRUFastBackward</span><span class="p">(</span><span class="n">Ptr</span><span class="o">&lt;</span><span class="n">Allocator</span><span class="o">&gt;</span> <span class="n">allocator</span><span class="p">,</span>
-                     <span class="n">std</span><span class="o">::</span><span class="n">vector</span><span class="o">&lt;</span><span class="n">marian</span><span class="o">::</span><span class="n">Tensor</span><span class="o">&gt;</span> <span class="n">outputs</span><span class="p">,</span>
-                     <span class="n">std</span><span class="o">::</span><span class="n">vector</span><span class="o">&lt;</span><span class="n">marian</span><span class="o">::</span><span class="n">Tensor</span><span class="o">&gt;</span> <span class="n">inputs</span><span class="p">,</span>
-                     <span class="n">marian</span><span class="o">::</span><span class="n">Tensor</span> <span class="n">adj</span><span class="p">,</span>
-                     <span class="kt">bool</span> <span class="k">final</span><span class="p">);</span>
-<span class="p">}</span>
+<span class="k">namespace</span><span class="w"> </span><span class="nn">cpu</span><span class="w"> </span><span class="p">{</span><span class="w"></span>
+<span class="kt">void</span><span class="w"> </span><span class="nf">LSTMOutputBackward</span><span class="p">(</span><span class="n">std</span><span class="o">::</span><span class="n">vector</span><span class="o">&lt;</span><span class="n">marian</span><span class="o">::</span><span class="n">Tensor</span><span class="o">&gt;</span><span class="w"> </span><span class="n">outputs</span><span class="p">,</span><span class="w"></span>
+<span class="w">                        </span><span class="n">std</span><span class="o">::</span><span class="n">vector</span><span class="o">&lt;</span><span class="n">marian</span><span class="o">::</span><span class="n">Tensor</span><span class="o">&gt;</span><span class="w"> </span><span class="n">inputs</span><span class="p">,</span><span class="w"></span>
+<span class="w">                        </span><span class="n">marian</span><span class="o">::</span><span class="n">Tensor</span><span class="w"> </span><span class="n">adj</span><span class="p">);</span><span class="w"></span>
+<span class="p">}</span><span class="w"></span>
 
-<span class="k">static</span> <span class="kr">inline</span> <span class="kt">void</span> <span class="n">GRUFastBackward</span><span class="p">(</span><span class="n">Ptr</span><span class="o">&lt;</span><span class="n">Allocator</span><span class="o">&gt;</span> <span class="n">allocator</span><span class="p">,</span>
-                                   <span class="n">std</span><span class="o">::</span><span class="n">vector</span><span class="o">&lt;</span><span class="n">marian</span><span class="o">::</span><span class="n">Tensor</span><span class="o">&gt;</span> <span class="n">outputs</span><span class="p">,</span>
-                                   <span class="n">std</span><span class="o">::</span><span class="n">vector</span><span class="o">&lt;</span><span class="n">marian</span><span class="o">::</span><span class="n">Tensor</span><span class="o">&gt;</span> <span class="n">inputs</span><span class="p">,</span>
-                                   <span class="n">marian</span><span class="o">::</span><span class="n">Tensor</span> <span class="n">adj</span><span class="p">,</span>
-                                   <span class="kt">bool</span> <span class="k">final</span> <span class="o">=</span> <span class="nb">false</span><span class="p">)</span> <span class="p">{</span>
+<span class="k">static</span><span class="w"> </span><span class="kr">inline</span><span class="w"> </span><span class="kt">void</span><span class="w"> </span><span class="n">LSTMOutputBackward</span><span class="p">(</span><span class="n">std</span><span class="o">::</span><span class="n">vector</span><span class="o">&lt;</span><span class="n">marian</span><span class="o">::</span><span class="n">Tensor</span><span class="o">&gt;</span><span class="w"> </span><span class="n">outputs</span><span class="p">,</span><span class="w"></span>
+<span class="w">                                      </span><span class="n">std</span><span class="o">::</span><span class="n">vector</span><span class="o">&lt;</span><span class="n">marian</span><span class="o">::</span><span class="n">Tensor</span><span class="o">&gt;</span><span class="w"> </span><span class="n">inputs</span><span class="p">,</span><span class="w"></span>
+<span class="w">                                      </span><span class="n">marian</span><span class="o">::</span><span class="n">Tensor</span><span class="w"> </span><span class="n">adj</span><span class="p">)</span><span class="w"> </span><span class="p">{</span><span class="w"></span>
 <span class="cp">#ifdef CUDA_FOUND</span>
-  <span class="k">if</span><span class="p">(</span><span class="n">adj</span><span class="o">-&gt;</span><span class="n">getBackend</span><span class="p">()</span><span class="o">-&gt;</span><span class="n">getDeviceId</span><span class="p">().</span><span class="n">type</span> <span class="o">==</span> <span class="n">DeviceType</span><span class="o">::</span><span class="n">gpu</span><span class="p">)</span>
-    <span class="n">gpu</span><span class="o">::</span><span class="n">GRUFastBackward</span><span class="p">(</span><span class="n">allocator</span><span class="p">,</span> <span class="n">outputs</span><span class="p">,</span> <span class="n">inputs</span><span class="p">,</span> <span class="n">adj</span><span class="p">,</span> <span class="k">final</span><span class="p">);</span>
-  <span class="k">else</span>
+<span class="w">  </span><span class="k">if</span><span class="p">(</span><span class="n">adj</span><span class="o">-&gt;</span><span class="n">getBackend</span><span class="p">()</span><span class="o">-&gt;</span><span class="n">getDeviceId</span><span class="p">().</span><span class="n">type</span><span class="w"> </span><span class="o">==</span><span class="w"> </span><span class="n">DeviceType</span><span class="o">::</span><span class="n">gpu</span><span class="p">)</span><span class="w"></span>
+<span class="w">    </span><span class="n">gpu</span><span class="o">::</span><span class="n">LSTMOutputBackward</span><span class="p">(</span><span class="n">outputs</span><span class="p">,</span><span class="w"> </span><span class="n">inputs</span><span class="p">,</span><span class="w"> </span><span class="n">adj</span><span class="p">);</span><span class="w"></span>
+<span class="w">  </span><span class="k">else</span><span class="w"></span>
 <span class="cp">#endif</span>
-    <span class="n">cpu</span><span class="o">::</span><span class="n">GRUFastBackward</span><span class="p">(</span><span class="n">allocator</span><span class="p">,</span> <span class="n">outputs</span><span class="p">,</span> <span class="n">inputs</span><span class="p">,</span> <span class="n">adj</span><span class="p">,</span> <span class="k">final</span><span class="p">);</span>
-<span class="p">}</span>
+<span class="w">    </span><span class="n">cpu</span><span class="o">::</span><span class="n">LSTMOutputBackward</span><span class="p">(</span><span class="n">outputs</span><span class="p">,</span><span class="w"> </span><span class="n">inputs</span><span class="p">,</span><span class="w"> </span><span class="n">adj</span><span class="p">);</span><span class="w"></span>
+<span class="p">}</span><span class="w"></span>
+
+<span class="n">DISPATCH3</span><span class="p">(</span><span class="n">GRUFastForward</span><span class="p">,</span><span class="w"> </span><span class="n">marian</span><span class="o">::</span><span class="n">Tensor</span><span class="p">,</span><span class="w"> </span><span class="n">std</span><span class="o">::</span><span class="n">vector</span><span class="o">&lt;</span><span class="n">marian</span><span class="o">::</span><span class="n">Tensor</span><span class="o">&gt;</span><span class="p">,</span><span class="w"> </span><span class="kt">bool</span><span class="p">)</span><span class="w"></span>
+
+<span class="cp">#ifdef CUDA_FOUND</span>
+<span class="k">namespace</span><span class="w"> </span><span class="nn">gpu</span><span class="w"> </span><span class="p">{</span><span class="w"></span>
+<span class="kt">void</span><span class="w"> </span><span class="nf">GRUFastBackward</span><span class="p">(</span><span class="n">Ptr</span><span class="o">&lt;</span><span class="n">Allocator</span><span class="o">&gt;</span><span class="w"> </span><span class="n">allocator</span><span class="p">,</span><span class="w"></span>
+<span class="w">                     </span><span class="n">std</span><span class="o">::</span><span class="n">vector</span><span class="o">&lt;</span><span class="n">marian</span><span class="o">::</span><span class="n">Tensor</span><span class="o">&gt;</span><span class="w"> </span><span class="n">outputs</span><span class="p">,</span><span class="w"></span>
+<span class="w">                     </span><span class="n">std</span><span class="o">::</span><span class="n">vector</span><span class="o">&lt;</span><span class="n">marian</span><span class="o">::</span><span class="n">Tensor</span><span class="o">&gt;</span><span class="w"> </span><span class="n">inputs</span><span class="p">,</span><span class="w"></span>
+<span class="w">                     </span><span class="n">marian</span><span class="o">::</span><span class="n">Tensor</span><span class="w"> </span><span class="n">adj</span><span class="p">,</span><span class="w"></span>
+<span class="w">                     </span><span class="kt">bool</span><span class="w"> </span><span class="k">final</span><span class="p">);</span><span class="w"></span>
+<span class="p">}</span><span class="w"></span>
+<span class="cp">#endif</span>
+
+<span class="k">namespace</span><span class="w"> </span><span class="nn">cpu</span><span class="w"> </span><span class="p">{</span><span class="w"></span>
+<span class="kt">void</span><span class="w"> </span><span class="nf">GRUFastBackward</span><span class="p">(</span><span class="n">Ptr</span><span class="o">&lt;</span><span class="n">Allocator</span><span class="o">&gt;</span><span class="w"> </span><span class="n">allocator</span><span class="p">,</span><span class="w"></span>
+<span class="w">                     </span><span class="n">std</span><span class="o">::</span><span class="n">vector</span><span class="o">&lt;</span><span class="n">marian</span><span class="o">::</span><span class="n">Tensor</span><span class="o">&gt;</span><span class="w"> </span><span class="n">outputs</span><span class="p">,</span><span class="w"></span>
+<span class="w">                     </span><span class="n">std</span><span class="o">::</span><span class="n">vector</span><span class="o">&lt;</span><span class="n">marian</span><span class="o">::</span><span class="n">Tensor</span><span class="o">&gt;</span><span class="w"> </span><span class="n">inputs</span><span class="p">,</span><span class="w"></span>
+<span class="w">                     </span><span class="n">marian</span><span class="o">::</span><span class="n">Tensor</span><span class="w"> </span><span class="n">adj</span><span class="p">,</span><span class="w"></span>
+<span class="w">                     </span><span class="kt">bool</span><span class="w"> </span><span class="k">final</span><span class="p">);</span><span class="w"></span>
+<span class="p">}</span><span class="w"></span>
+
+<span class="k">static</span><span class="w"> </span><span class="kr">inline</span><span class="w"> </span><span class="kt">void</span><span class="w"> </span><span class="n">GRUFastBackward</span><span class="p">(</span><span class="n">Ptr</span><span class="o">&lt;</span><span class="n">Allocator</span><span class="o">&gt;</span><span class="w"> </span><span class="n">allocator</span><span class="p">,</span><span class="w"></span>
+<span class="w">                                   </span><span class="n">std</span><span class="o">::</span><span class="n">vector</span><span class="o">&lt;</span><span class="n">marian</span><span class="o">::</span><span class="n">Tensor</span><span class="o">&gt;</span><span class="w"> </span><span class="n">outputs</span><span class="p">,</span><span class="w"></span>
+<span class="w">                                   </span><span class="n">std</span><span class="o">::</span><span class="n">vector</span><span class="o">&lt;</span><span class="n">marian</span><span class="o">::</span><span class="n">Tensor</span><span class="o">&gt;</span><span class="w"> </span><span class="n">inputs</span><span class="p">,</span><span class="w"></span>
+<span class="w">                                   </span><span class="n">marian</span><span class="o">::</span><span class="n">Tensor</span><span class="w"> </span><span class="n">adj</span><span class="p">,</span><span class="w"></span>
+<span class="w">                                   </span><span class="kt">bool</span><span class="w"> </span><span class="k">final</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="nb">false</span><span class="p">)</span><span class="w"> </span><span class="p">{</span><span class="w"></span>
+<span class="cp">#ifdef CUDA_FOUND</span>
+<span class="w">  </span><span class="k">if</span><span class="p">(</span><span class="n">adj</span><span class="o">-&gt;</span><span class="n">getBackend</span><span class="p">()</span><span class="o">-&gt;</span><span class="n">getDeviceId</span><span class="p">().</span><span class="n">type</span><span class="w"> </span><span class="o">==</span><span class="w"> </span><span class="n">DeviceType</span><span class="o">::</span><span class="n">gpu</span><span class="p">)</span><span class="w"></span>
+<span class="w">    </span><span class="n">gpu</span><span class="o">::</span><span class="n">GRUFastBackward</span><span class="p">(</span><span class="n">allocator</span><span class="p">,</span><span class="w"> </span><span class="n">outputs</span><span class="p">,</span><span class="w"> </span><span class="n">inputs</span><span class="p">,</span><span class="w"> </span><span class="n">adj</span><span class="p">,</span><span class="w"> </span><span class="k">final</span><span class="p">);</span><span class="w"></span>
+<span class="w">  </span><span class="k">else</span><span class="w"></span>
+<span class="cp">#endif</span>
+<span class="w">    </span><span class="n">cpu</span><span class="o">::</span><span class="n">GRUFastBackward</span><span class="p">(</span><span class="n">allocator</span><span class="p">,</span><span class="w"> </span><span class="n">outputs</span><span class="p">,</span><span class="w"> </span><span class="n">inputs</span><span class="p">,</span><span class="w"> </span><span class="n">adj</span><span class="p">,</span><span class="w"> </span><span class="k">final</span><span class="p">);</span><span class="w"></span>
+<span class="p">}</span><span class="w"></span>
 
 <span class="c1">// clang-format off</span>
-<span class="n">DISPATCH4</span><span class="p">(</span><span class="n">Att</span><span class="p">,</span> <span class="n">marian</span><span class="o">::</span><span class="n">Tensor</span><span class="p">,</span> <span class="n">marian</span><span class="o">::</span><span class="n">Tensor</span><span class="p">,</span> <span class="n">marian</span><span class="o">::</span><span class="n">Tensor</span><span class="p">,</span> <span class="n">marian</span><span class="o">::</span><span class="n">Tensor</span><span class="p">)</span>
-<span class="n">DISPATCH7</span><span class="p">(</span><span class="n">AttBack</span><span class="p">,</span> <span class="n">marian</span><span class="o">::</span><span class="n">Tensor</span><span class="p">,</span> <span class="n">marian</span><span class="o">::</span><span class="n">Tensor</span><span class="p">,</span> <span class="n">marian</span><span class="o">::</span><span class="n">Tensor</span><span class="p">,</span> <span class="n">marian</span><span class="o">::</span><span class="n">Tensor</span><span class="p">,</span> <span class="n">marian</span><span class="o">::</span><span class="n">Tensor</span><span class="p">,</span> <span class="n">marian</span><span class="o">::</span><span class="n">Tensor</span><span class="p">,</span> <span class="n">marian</span><span class="o">::</span><span class="n">Tensor</span><span class="p">)</span>
+<span class="n">DISPATCH4</span><span class="p">(</span><span class="n">Att</span><span class="p">,</span><span class="w"> </span><span class="n">marian</span><span class="o">::</span><span class="n">Tensor</span><span class="p">,</span><span class="w"> </span><span class="n">marian</span><span class="o">::</span><span class="n">Tensor</span><span class="p">,</span><span class="w"> </span><span class="n">marian</span><span class="o">::</span><span class="n">Tensor</span><span class="p">,</span><span class="w"> </span><span class="n">marian</span><span class="o">::</span><span class="n">Tensor</span><span class="p">)</span><span class="w"></span>
+<span class="n">DISPATCH7</span><span class="p">(</span><span class="n">AttBack</span><span class="p">,</span><span class="w"> </span><span class="n">marian</span><span class="o">::</span><span class="n">Tensor</span><span class="p">,</span><span class="w"> </span><span class="n">marian</span><span class="o">::</span><span class="n">Tensor</span><span class="p">,</span><span class="w"> </span><span class="n">marian</span><span class="o">::</span><span class="n">Tensor</span><span class="p">,</span><span class="w"> </span><span class="n">marian</span><span class="o">::</span><span class="n">Tensor</span><span class="p">,</span><span class="w"> </span><span class="n">marian</span><span class="o">::</span><span class="n">Tensor</span><span class="p">,</span><span class="w"> </span><span class="n">marian</span><span class="o">::</span><span class="n">Tensor</span><span class="p">,</span><span class="w"> </span><span class="n">marian</span><span class="o">::</span><span class="n">Tensor</span><span class="p">)</span><span class="w"></span>
 <span class="c1">// clang-format on</span>
 
 <span class="cp">#ifdef CUDA_FOUND</span>
-<span class="k">namespace</span> <span class="n">gpu</span> <span class="p">{</span>
-<span class="kt">float</span> <span class="nf">L2Norm</span><span class="p">(</span><span class="n">marian</span><span class="o">::</span><span class="n">Tensor</span> <span class="n">in</span><span class="p">,</span> <span class="n">Ptr</span><span class="o">&lt;</span><span class="n">Allocator</span><span class="o">&gt;</span> <span class="n">allocator</span><span class="p">);</span>
-<span class="p">}</span>
+<span class="k">namespace</span><span class="w"> </span><span class="nn">gpu</span><span class="w"> </span><span class="p">{</span><span class="w"></span>
+<span class="kt">float</span><span class="w"> </span><span class="nf">L2Norm</span><span class="p">(</span><span class="n">marian</span><span class="o">::</span><span class="n">Tensor</span><span class="w"> </span><span class="n">in</span><span class="p">,</span><span class="w"> </span><span class="n">Ptr</span><span class="o">&lt;</span><span class="n">Allocator</span><span class="o">&gt;</span><span class="w"> </span><span class="n">allocator</span><span class="p">);</span><span class="w"></span>
+<span class="p">}</span><span class="w"></span>
 <span class="cp">#endif</span>
 
-<span class="k">namespace</span> <span class="n">cpu</span> <span class="p">{</span>
-<span class="kt">float</span> <span class="nf">L2Norm</span><span class="p">(</span><span class="n">marian</span><span class="o">::</span><span class="n">Tensor</span> <span class="n">in</span><span class="p">,</span> <span class="n">Ptr</span><span class="o">&lt;</span><span class="n">Allocator</span><span class="o">&gt;</span> <span class="n">allocator</span><span class="p">);</span>
-<span class="p">}</span>
+<span class="k">namespace</span><span class="w"> </span><span class="nn">cpu</span><span class="w"> </span><span class="p">{</span><span class="w"></span>
+<span class="kt">float</span><span class="w"> </span><span class="nf">L2Norm</span><span class="p">(</span><span class="n">marian</span><span class="o">::</span><span class="n">Tensor</span><span class="w"> </span><span class="n">in</span><span class="p">,</span><span class="w"> </span><span class="n">Ptr</span><span class="o">&lt;</span><span class="n">Allocator</span><span class="o">&gt;</span><span class="w"> </span><span class="n">allocator</span><span class="p">);</span><span class="w"></span>
+<span class="p">}</span><span class="w"></span>
 
-<span class="k">static</span> <span class="kr">inline</span> <span class="kt">float</span> <span class="n">L2Norm</span><span class="p">(</span><span class="n">marian</span><span class="o">::</span><span class="n">Tensor</span> <span class="n">in</span><span class="p">,</span> <span class="n">Ptr</span><span class="o">&lt;</span><span class="n">Allocator</span><span class="o">&gt;</span> <span class="n">allocator</span><span class="p">)</span> <span class="p">{</span>
+<span class="k">static</span><span class="w"> </span><span class="kr">inline</span><span class="w"> </span><span class="kt">float</span><span class="w"> </span><span class="n">L2Norm</span><span class="p">(</span><span class="n">marian</span><span class="o">::</span><span class="n">Tensor</span><span class="w"> </span><span class="n">in</span><span class="p">,</span><span class="w"> </span><span class="n">Ptr</span><span class="o">&lt;</span><span class="n">Allocator</span><span class="o">&gt;</span><span class="w"> </span><span class="n">allocator</span><span class="p">)</span><span class="w"> </span><span class="p">{</span><span class="w"></span>
 <span class="cp">#ifdef CUDA_FOUND</span>
-  <span class="k">if</span><span class="p">(</span><span class="n">in</span><span class="o">-&gt;</span><span class="n">getBackend</span><span class="p">()</span><span class="o">-&gt;</span><span class="n">getDeviceId</span><span class="p">().</span><span class="n">type</span> <span class="o">==</span> <span class="n">DeviceType</span><span class="o">::</span><span class="n">gpu</span><span class="p">)</span>
-    <span class="k">return</span> <span class="n">gpu</span><span class="o">::</span><span class="n">L2Norm</span><span class="p">(</span><span class="n">in</span><span class="p">,</span> <span class="n">allocator</span><span class="p">);</span>
-  <span class="k">else</span>
+<span class="w">  </span><span class="k">if</span><span class="p">(</span><span class="n">in</span><span class="o">-&gt;</span><span class="n">getBackend</span><span class="p">()</span><span class="o">-&gt;</span><span class="n">getDeviceId</span><span class="p">().</span><span class="n">type</span><span class="w"> </span><span class="o">==</span><span class="w"> </span><span class="n">DeviceType</span><span class="o">::</span><span class="n">gpu</span><span class="p">)</span><span class="w"></span>
+<span class="w">    </span><span class="k">return</span><span class="w"> </span><span class="n">gpu</span><span class="o">::</span><span class="n">L2Norm</span><span class="p">(</span><span class="n">in</span><span class="p">,</span><span class="w"> </span><span class="n">allocator</span><span class="p">);</span><span class="w"></span>
+<span class="w">  </span><span class="k">else</span><span class="w"></span>
 <span class="cp">#endif</span>
-    <span class="k">return</span> <span class="n">cpu</span><span class="o">::</span><span class="n">L2Norm</span><span class="p">(</span><span class="n">in</span><span class="p">,</span> <span class="n">allocator</span><span class="p">);</span>
-<span class="p">}</span>
+<span class="w">    </span><span class="k">return</span><span class="w"> </span><span class="n">cpu</span><span class="o">::</span><span class="n">L2Norm</span><span class="p">(</span><span class="n">in</span><span class="p">,</span><span class="w"> </span><span class="n">allocator</span><span class="p">);</span><span class="w"></span>
+<span class="p">}</span><span class="w"></span>
 
 <span class="c1">// clang-format off</span>
-<span class="n">DISPATCH5</span><span class="p">(</span><span class="n">PoolingWithMaskingForward</span><span class="p">,</span> <span class="n">marian</span><span class="o">::</span><span class="n">Tensor</span><span class="p">,</span> <span class="n">marian</span><span class="o">::</span><span class="n">Tensor</span><span class="p">,</span> <span class="n">marian</span><span class="o">::</span><span class="n">Tensor</span><span class="p">,</span> <span class="kt">int</span><span class="p">,</span> <span class="kt">bool</span><span class="p">)</span>
-<span class="n">DISPATCH6</span><span class="p">(</span><span class="n">PoolingWithMaskingBackward</span><span class="p">,</span> <span class="n">marian</span><span class="o">::</span><span class="n">Tensor</span><span class="p">,</span> <span class="n">marian</span><span class="o">::</span><span class="n">Tensor</span><span class="p">,</span> <span class="n">marian</span><span class="o">::</span><span class="n">Tensor</span><span class="p">,</span> <span class="n">marian</span><span class="o">::</span><span class="n">Tensor</span><span class="p">,</span> <span class="kt">int</span><span class="p">,</span> <span class="kt">bool</span><span class="p">)</span>
+<span class="n">DISPATCH5</span><span class="p">(</span><span class="n">PoolingWithMaskingForward</span><span class="p">,</span><span class="w"> </span><span class="n">marian</span><span class="o">::</span><span class="n">Tensor</span><span class="p">,</span><span class="w"> </span><span class="n">marian</span><span class="o">::</span><span class="n">Tensor</span><span class="p">,</span><span class="w"> </span><span class="n">marian</span><span class="o">::</span><span class="n">Tensor</span><span class="p">,</span><span class="w"> </span><span class="kt">int</span><span class="p">,</span><span class="w"> </span><span class="kt">bool</span><span class="p">)</span><span class="w"></span>
+<span class="n">DISPATCH6</span><span class="p">(</span><span class="n">PoolingWithMaskingBackward</span><span class="p">,</span><span class="w"> </span><span class="n">marian</span><span class="o">::</span><span class="n">Tensor</span><span class="p">,</span><span class="w"> </span><span class="n">marian</span><span class="o">::</span><span class="n">Tensor</span><span class="p">,</span><span class="w"> </span><span class="n">marian</span><span class="o">::</span><span class="n">Tensor</span><span class="p">,</span><span class="w"> </span><span class="n">marian</span><span class="o">::</span><span class="n">Tensor</span><span class="p">,</span><span class="w"> </span><span class="kt">int</span><span class="p">,</span><span class="w"> </span><span class="kt">bool</span><span class="p">)</span><span class="w"></span>
 <span class="c1">// clang-format on</span>
-<span class="p">}</span>  <span class="c1">// namespace marian</span>
+<span class="p">}</span><span class="w">  </span><span class="c1">// namespace marian</span>
 </pre></div>
 </div>
-</div>
+</section>
 
 
            </div>
-           
           </div>
           <footer>
 
   <hr/>
 
   <div role="contentinfo">
-    <p>
-        &#169; Copyright 2021, Marian NMT Team.
-
-    </p>
+    <p>&#169; Copyright 2021, Marian NMT Team.</p>
   </div>
-    
-    
-    
-    Built with <a href="https://www.sphinx-doc.org/">Sphinx</a> using a
-    
+
+  Built with <a href="https://www.sphinx-doc.org/">Sphinx</a> using a
     <a href="https://github.com/readthedocs/sphinx_rtd_theme">theme</a>
-    
-    provided by <a href="https://readthedocs.org">Read the Docs</a>. 
+    provided by <a href="https://readthedocs.org">Read the Docs</a>.
+   
 
 </footer>
         </div>
       </div>
-
     </section>
-
   </div>
-  
-
-  <script type="text/javascript">
+  <script>
       jQuery(function () {
           SphinxRtdTheme.Navigation.enable(true);
       });
-  </script>
-
-  
-  
-    
-   
+  </script> 
 
 </body>
 </html>

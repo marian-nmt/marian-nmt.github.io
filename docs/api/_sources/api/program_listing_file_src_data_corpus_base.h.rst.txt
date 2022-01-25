@@ -32,6 +32,7 @@ Program Listing for File corpus_base.h
      std::vector<Words> tuple_;    // [stream index][step index]
      std::vector<float> weights_;  // [stream index]
      WordAlignment alignment_;
+     bool altered_ = false;
    
    public:
      typedef Words value_type;
@@ -41,6 +42,10 @@ Program Listing for File corpus_base.h
      ~SentenceTuple() { tuple_.clear(); }
    
      size_t getId() const { return id_; }
+   
+     bool isAltered() const { return altered_; }
+   
+     void markAltered() { altered_ = true; }
    
      void push_back(const Words& words) { tuple_.push_back(words); }
    
@@ -143,9 +148,6 @@ Program Listing for File corpus_base.h
      }
    
      void setWords(size_t words) { words_ = words; }
-   
-     // experimental: hide inline-fix source tokens from cross attention
-     std::vector<float> crossMaskWithInlineFixSourceSuppressed() const;
    };
    
    class CorpusBatch : public Batch {

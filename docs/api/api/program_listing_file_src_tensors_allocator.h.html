@@ -1,78 +1,41 @@
-
-
 <!DOCTYPE html>
 <html class="writer-html5" lang="en" >
 <head>
-  <meta charset="utf-8" />
-  
+  <meta charset="utf-8" /><meta name="generator" content="Docutils 0.17.1: http://docutils.sourceforge.net/" />
+
   <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-  
-  <title>Program Listing for File allocator.h &mdash; Marian NMT v1.10.3 2021-03-22 documentation</title>
-  
-
-  
-  <link rel="stylesheet" href="../_static/css/theme.css" type="text/css" />
-  <link rel="stylesheet" href="../_static/pygments.css" type="text/css" />
-  <link rel="stylesheet" href="../_static/css/custom.css" type="text/css" />
-  <link rel="stylesheet" href="../_static/collapsible-lists/css/tree_view.css" type="text/css" />
-
-  
-  
-
-  
-  
-
-  
+  <title>Program Listing for File allocator.h &mdash; Marian NMT v1.10.27 2022-01-25 documentation</title><link rel="stylesheet" href="../_static/css/theme.css" type="text/css" />
+    <link rel="stylesheet" href="../_static/pygments.css" type="text/css" />
+      <link rel="stylesheet" href="../_static/css/custom.css" type="text/css" />
+      <link rel="stylesheet" href="../_static/collapsible-lists/css/tree_view.css" type="text/css" />
     <link rel="canonical" href="http://marian-nmt.github.io/docs/api/api/program_listing_file_src_tensors_allocator.h.html" />
-
-  
   <!--[if lt IE 9]>
     <script src="../_static/js/html5shiv.min.js"></script>
   <![endif]-->
-  
-    
-      <script type="text/javascript" id="documentation_options" data-url_root="../" src="../_static/documentation_options.js"></script>
+  <script id="documentation_options" data-url_root="../" src="../_static/documentation_options.js"></script>
         <script src="../_static/jquery.js"></script>
         <script src="../_static/underscore.js"></script>
         <script src="../_static/doctools.js"></script>
         <script src="../_static/language_data.js"></script>
         <script src="../_static/collapsible-lists/js/CollapsibleLists.compressed.js"></script>
         <script src="../_static/collapsible-lists/js/apply-collapsible-lists.js"></script>
-    
-    <script type="text/javascript" src="../_static/js/theme.js"></script>
-
-    
+        <script async="async" src="https://cdnjs.cloudflare.com/ajax/libs/mathjax/2.7.5/latest.js?config=TeX-AMS-MML_HTMLorMML"></script>
+        <script type="text/x-mathjax-config">MathJax.Hub.Config({"tex2jax": {"inlineMath": [["\\(", "\\)"]], "displayMath": [["\\[", "\\]"]], "processRefs": false, "processEnvironments": false}})</script>
+    <script src="../_static/js/theme.js"></script>
     <link rel="index" title="Index" href="../genindex.html" />
     <link rel="search" title="Search" href="../search.html" /> 
 </head>
 
-<body class="wy-body-for-nav">
-
-   
+<body class="wy-body-for-nav"> 
   <div class="wy-grid-for-nav">
-    
     <nav data-toggle="wy-nav-shift" class="wy-nav-side">
       <div class="wy-side-scroll">
         <div class="wy-side-nav-search" >
-          
-
-          
             <a href="../index.html" class="icon icon-home"> Marian NMT
-          
-
-          
           </a>
-
-          
-            
-            
               <div class="version">
-                v1.10.3
+                v1.10.27
               </div>
-            
-          
-
-          
 <div role="search">
   <form id="rtd-search-form" class="wy-form" action="../search.html" method="get">
     <input type="text" name="q" placeholder="Search docs" />
@@ -80,397 +43,331 @@
     <input type="hidden" name="area" value="default" />
   </form>
 </div>
-
-          
-        </div>
-
-        
-        <div class="wy-menu wy-menu-vertical" data-spy="affix" role="navigation" aria-label="main navigation">
-          
-            
-            
-              
-            
-            
-              <p class="caption"><span class="caption-text">Contents:</span></p>
+        </div><div class="wy-menu wy-menu-vertical" data-spy="affix" role="navigation" aria-label="Navigation menu">
+              <p><span class="caption-text">Contents:</span></p>
 <ul>
 <li class="toctree-l1"><a class="reference internal" href="../graph.html">Expression graphs</a></li>
 <li class="toctree-l1"><a class="reference internal" href="../operators.html">Operations in the Expression Graph</a></li>
 <li class="toctree-l1"><a class="reference internal" href="library_index.html">Library API</a></li>
 <li class="toctree-l1"><a class="reference internal" href="../contributing.html">How to contribute to Marian</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../doc_guide.html">Writing documentation</a></li>
 </ul>
 
-            
-          
         </div>
-        
       </div>
     </nav>
 
-    <section data-toggle="wy-nav-shift" class="wy-nav-content-wrap">
-
-      
-      <nav class="wy-nav-top" aria-label="top navigation">
-        
+    <section data-toggle="wy-nav-shift" class="wy-nav-content-wrap"><nav class="wy-nav-top" aria-label="Mobile navigation menu" >
           <i data-toggle="wy-nav-top" class="fa fa-bars"></i>
           <a href="../index.html">Marian NMT</a>
-        
       </nav>
 
-
       <div class="wy-nav-content">
-        
         <div class="rst-content">
-        
-          
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-<div role="navigation" aria-label="breadcrumbs navigation">
-
+          <div role="navigation" aria-label="Page navigation">
   <ul class="wy-breadcrumbs">
-    
       <li><a href="../index.html" class="icon icon-home"></a> &raquo;</li>
-        
       <li>Program Listing for File allocator.h</li>
-    
-    
       <li class="wy-breadcrumbs-aside">
-        
-          
             <a href="../_sources/api/program_listing_file_src_tensors_allocator.h.rst.txt" rel="nofollow"> View page source</a>
-          
-        
       </li>
-    
   </ul>
-
-  
   <hr/>
 </div>
           <div role="main" class="document" itemscope="itemscope" itemtype="http://schema.org/Article">
            <div itemprop="articleBody">
-            
-  <div class="section" id="program-listing-for-file-allocator-h">
+             
+  <section id="program-listing-for-file-allocator-h">
 <span id="program-listing-file-src-tensors-allocator-h"></span><h1>Program Listing for File allocator.h<a class="headerlink" href="#program-listing-for-file-allocator-h" title="Permalink to this headline">¶</a></h1>
 <p>↰ <a class="reference internal" href="file_src_tensors_allocator.h.html#file-src-tensors-allocator-h"><span class="std std-ref">Return to documentation for file</span></a> (<code class="docutils literal notranslate"><span class="pre">src/tensors/allocator.h</span></code>)</p>
 <div class="highlight-cpp notranslate"><div class="highlight"><pre><span></span><span class="cp">#pragma once</span>
 
-<span class="cp">#include</span> <span class="cpf">&lt;cstdint&gt;</span><span class="cp"></span>
-<span class="cp">#include</span> <span class="cpf">&lt;deque&gt;</span><span class="cp"></span>
-<span class="cp">#include</span> <span class="cpf">&lt;memory&gt;</span><span class="cp"></span>
-<span class="cp">#include</span> <span class="cpf">&lt;set&gt;</span><span class="cp"></span>
-<span class="cp">#include</span> <span class="cpf">&lt;unordered_map&gt;</span><span class="cp"></span>
-<span class="cp">#include</span> <span class="cpf">&lt;unordered_set&gt;</span><span class="cp"></span>
-<span class="cp">#include</span> <span class="cpf">&lt;vector&gt;</span><span class="cp"></span>
+<span class="cp">#include</span><span class="w"> </span><span class="cpf">&lt;cstdint&gt;</span><span class="cp"></span>
+<span class="cp">#include</span><span class="w"> </span><span class="cpf">&lt;deque&gt;</span><span class="cp"></span>
+<span class="cp">#include</span><span class="w"> </span><span class="cpf">&lt;memory&gt;</span><span class="cp"></span>
+<span class="cp">#include</span><span class="w"> </span><span class="cpf">&lt;set&gt;</span><span class="cp"></span>
+<span class="cp">#include</span><span class="w"> </span><span class="cpf">&lt;unordered_map&gt;</span><span class="cp"></span>
+<span class="cp">#include</span><span class="w"> </span><span class="cpf">&lt;unordered_set&gt;</span><span class="cp"></span>
+<span class="cp">#include</span><span class="w"> </span><span class="cpf">&lt;vector&gt;</span><span class="cp"></span>
 
-<span class="cp">#include</span> <span class="cpf">&quot;common/definitions.h&quot;</span><span class="cp"></span>
-<span class="cp">#include</span> <span class="cpf">&quot;common/types.h&quot;</span><span class="cp"></span>
-<span class="cp">#include</span> <span class="cpf">&quot;tensors/device.h&quot;</span><span class="cp"></span>
-<span class="cp">#include</span> <span class="cpf">&quot;tensors/memory_piece.h&quot;</span><span class="cp"></span>
+<span class="cp">#include</span><span class="w"> </span><span class="cpf">&quot;common/definitions.h&quot;</span><span class="cp"></span>
+<span class="cp">#include</span><span class="w"> </span><span class="cpf">&quot;common/types.h&quot;</span><span class="cp"></span>
+<span class="cp">#include</span><span class="w"> </span><span class="cpf">&quot;tensors/device.h&quot;</span><span class="cp"></span>
+<span class="cp">#include</span><span class="w"> </span><span class="cpf">&quot;tensors/memory_piece.h&quot;</span><span class="cp"></span>
 
-<span class="k">namespace</span> <span class="n">marian</span> <span class="p">{</span>
+<span class="k">namespace</span><span class="w"> </span><span class="nn">marian</span><span class="w"> </span><span class="p">{</span><span class="w"></span>
 
-<span class="k">class</span> <span class="nc">AllocationException</span> <span class="o">:</span> <span class="k">public</span> <span class="n">std</span><span class="o">::</span><span class="n">exception</span> <span class="p">{</span>
-<span class="k">private</span><span class="o">:</span>
-  <span class="kt">char</span><span class="o">*</span> <span class="n">message_</span><span class="p">;</span>
+<span class="k">class</span><span class="w"> </span><span class="nc">AllocationException</span><span class="w"> </span><span class="o">:</span><span class="w"> </span><span class="k">public</span><span class="w"> </span><span class="n">std</span><span class="o">::</span><span class="n">exception</span><span class="w"> </span><span class="p">{</span><span class="w"></span>
+<span class="k">private</span><span class="o">:</span><span class="w"></span>
+<span class="w">  </span><span class="kt">char</span><span class="o">*</span><span class="w"> </span><span class="n">message_</span><span class="p">;</span><span class="w"></span>
 
-<span class="k">public</span><span class="o">:</span>
-  <span class="n">AllocationException</span><span class="p">(</span><span class="kt">size_t</span> <span class="n">available</span><span class="p">,</span> <span class="kt">size_t</span> <span class="n">asked</span><span class="p">)</span> <span class="p">{</span>
-    <span class="n">std</span><span class="o">::</span><span class="n">string</span> <span class="n">mstr</span> <span class="o">=</span> <span class="s">&quot;Attempted allocation of &quot;</span> <span class="o">+</span> <span class="n">std</span><span class="o">::</span><span class="n">to_string</span><span class="p">(</span><span class="n">asked</span><span class="p">)</span>
-                       <span class="o">+</span> <span class="s">&quot;, but only &quot;</span> <span class="o">+</span> <span class="n">std</span><span class="o">::</span><span class="n">to_string</span><span class="p">(</span><span class="n">available</span><span class="p">)</span> <span class="o">+</span> <span class="s">&quot; free&quot;</span><span class="p">;</span>
+<span class="k">public</span><span class="o">:</span><span class="w"></span>
+<span class="w">  </span><span class="n">AllocationException</span><span class="p">(</span><span class="kt">size_t</span><span class="w"> </span><span class="n">available</span><span class="p">,</span><span class="w"> </span><span class="kt">size_t</span><span class="w"> </span><span class="n">asked</span><span class="p">)</span><span class="w"> </span><span class="p">{</span><span class="w"></span>
+<span class="w">    </span><span class="n">std</span><span class="o">::</span><span class="n">string</span><span class="w"> </span><span class="n">mstr</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="s">&quot;Attempted allocation of &quot;</span><span class="w"> </span><span class="o">+</span><span class="w"> </span><span class="n">std</span><span class="o">::</span><span class="n">to_string</span><span class="p">(</span><span class="n">asked</span><span class="p">)</span><span class="w"></span>
+<span class="w">                       </span><span class="o">+</span><span class="w"> </span><span class="s">&quot;, but only &quot;</span><span class="w"> </span><span class="o">+</span><span class="w"> </span><span class="n">std</span><span class="o">::</span><span class="n">to_string</span><span class="p">(</span><span class="n">available</span><span class="p">)</span><span class="w"> </span><span class="o">+</span><span class="w"> </span><span class="s">&quot; free&quot;</span><span class="p">;</span><span class="w"></span>
 
-    <span class="n">message_</span> <span class="o">=</span> <span class="k">new</span> <span class="kt">char</span><span class="p">[</span><span class="n">mstr</span><span class="p">.</span><span class="n">size</span><span class="p">()</span> <span class="o">+</span> <span class="mi">1</span><span class="p">];</span>
-    <span class="n">std</span><span class="o">::</span><span class="n">copy</span><span class="p">(</span><span class="n">mstr</span><span class="p">.</span><span class="n">begin</span><span class="p">(),</span> <span class="n">mstr</span><span class="p">.</span><span class="n">end</span><span class="p">(),</span> <span class="n">message_</span><span class="p">);</span>
-  <span class="p">}</span>
+<span class="w">    </span><span class="n">message_</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="k">new</span><span class="w"> </span><span class="kt">char</span><span class="p">[</span><span class="n">mstr</span><span class="p">.</span><span class="n">size</span><span class="p">()</span><span class="w"> </span><span class="o">+</span><span class="w"> </span><span class="mi">1</span><span class="p">];</span><span class="w"></span>
+<span class="w">    </span><span class="n">std</span><span class="o">::</span><span class="n">copy</span><span class="p">(</span><span class="n">mstr</span><span class="p">.</span><span class="n">begin</span><span class="p">(),</span><span class="w"> </span><span class="n">mstr</span><span class="p">.</span><span class="n">end</span><span class="p">(),</span><span class="w"> </span><span class="n">message_</span><span class="p">);</span><span class="w"></span>
+<span class="w">  </span><span class="p">}</span><span class="w"></span>
 
-  <span class="o">~</span><span class="n">AllocationException</span><span class="p">()</span> <span class="p">{</span> <span class="k">delete</span><span class="p">[]</span> <span class="n">message_</span><span class="p">;</span> <span class="p">}</span>
+<span class="w">  </span><span class="o">~</span><span class="n">AllocationException</span><span class="p">()</span><span class="w"> </span><span class="p">{</span><span class="w"> </span><span class="k">delete</span><span class="p">[]</span><span class="w"> </span><span class="n">message_</span><span class="p">;</span><span class="w"> </span><span class="p">}</span><span class="w"></span>
 
-  <span class="k">virtual</span> <span class="k">const</span> <span class="kt">char</span><span class="o">*</span> <span class="n">what</span><span class="p">()</span> <span class="k">const</span> <span class="k">noexcept</span> <span class="k">override</span> <span class="p">{</span> <span class="k">return</span> <span class="n">message_</span><span class="p">;</span> <span class="p">}</span>
-<span class="p">};</span>
+<span class="w">  </span><span class="k">virtual</span><span class="w"> </span><span class="k">const</span><span class="w"> </span><span class="kt">char</span><span class="o">*</span><span class="w"> </span><span class="n">what</span><span class="p">()</span><span class="w"> </span><span class="k">const</span><span class="w"> </span><span class="k">noexcept</span><span class="w"> </span><span class="k">override</span><span class="w"> </span><span class="p">{</span><span class="w"> </span><span class="k">return</span><span class="w"> </span><span class="n">message_</span><span class="p">;</span><span class="w"> </span><span class="p">}</span><span class="w"></span>
+<span class="p">};</span><span class="w"></span>
 
-<span class="k">class</span> <span class="nc">Gap</span> <span class="p">{</span>
-<span class="k">private</span><span class="o">:</span>
-  <span class="kt">uint8_t</span><span class="o">*</span> <span class="n">data_</span><span class="p">;</span>
-  <span class="kt">size_t</span> <span class="n">size_</span><span class="p">;</span>
+<span class="k">class</span><span class="w"> </span><span class="nc">Gap</span><span class="w"> </span><span class="p">{</span><span class="w"></span>
+<span class="k">private</span><span class="o">:</span><span class="w"></span>
+<span class="w">  </span><span class="kt">uint8_t</span><span class="o">*</span><span class="w"> </span><span class="n">data_</span><span class="p">;</span><span class="w"></span>
+<span class="w">  </span><span class="kt">size_t</span><span class="w"> </span><span class="n">size_</span><span class="p">;</span><span class="w"></span>
 
-<span class="k">public</span><span class="o">:</span>
-  <span class="n">Gap</span><span class="p">(</span><span class="kt">uint8_t</span><span class="o">*</span> <span class="n">data</span><span class="p">,</span> <span class="kt">size_t</span> <span class="n">size</span><span class="p">)</span> <span class="o">:</span> <span class="n">data_</span><span class="p">(</span><span class="n">data</span><span class="p">),</span> <span class="n">size_</span><span class="p">(</span><span class="n">size</span><span class="p">)</span> <span class="p">{}</span>
+<span class="k">public</span><span class="o">:</span><span class="w"></span>
+<span class="w">  </span><span class="n">Gap</span><span class="p">(</span><span class="kt">uint8_t</span><span class="o">*</span><span class="w"> </span><span class="n">data</span><span class="p">,</span><span class="w"> </span><span class="kt">size_t</span><span class="w"> </span><span class="n">size</span><span class="p">)</span><span class="w"> </span><span class="o">:</span><span class="w"> </span><span class="n">data_</span><span class="p">(</span><span class="n">data</span><span class="p">),</span><span class="w"> </span><span class="n">size_</span><span class="p">(</span><span class="n">size</span><span class="p">)</span><span class="w"> </span><span class="p">{}</span><span class="w"></span>
 
-  <span class="kt">uint8_t</span><span class="o">*</span> <span class="n">data</span><span class="p">()</span> <span class="k">const</span> <span class="p">{</span> <span class="k">return</span> <span class="n">data_</span><span class="p">;</span> <span class="p">}</span>
-  <span class="kt">uint8_t</span><span class="o">*</span> <span class="n">data</span><span class="p">()</span> <span class="p">{</span> <span class="k">return</span> <span class="n">data_</span><span class="p">;</span> <span class="p">}</span>
+<span class="w">  </span><span class="kt">uint8_t</span><span class="o">*</span><span class="w"> </span><span class="n">data</span><span class="p">()</span><span class="w"> </span><span class="k">const</span><span class="w"> </span><span class="p">{</span><span class="w"> </span><span class="k">return</span><span class="w"> </span><span class="n">data_</span><span class="p">;</span><span class="w"> </span><span class="p">}</span><span class="w"></span>
+<span class="w">  </span><span class="kt">uint8_t</span><span class="o">*</span><span class="w"> </span><span class="n">data</span><span class="p">()</span><span class="w"> </span><span class="p">{</span><span class="w"> </span><span class="k">return</span><span class="w"> </span><span class="n">data_</span><span class="p">;</span><span class="w"> </span><span class="p">}</span><span class="w"></span>
 
-  <span class="kt">size_t</span> <span class="n">size</span><span class="p">()</span> <span class="k">const</span> <span class="p">{</span> <span class="k">return</span> <span class="n">size_</span><span class="p">;</span> <span class="p">}</span>
+<span class="w">  </span><span class="kt">size_t</span><span class="w"> </span><span class="n">size</span><span class="p">()</span><span class="w"> </span><span class="k">const</span><span class="w"> </span><span class="p">{</span><span class="w"> </span><span class="k">return</span><span class="w"> </span><span class="n">size_</span><span class="p">;</span><span class="w"> </span><span class="p">}</span><span class="w"></span>
 
-  <span class="kt">bool</span> <span class="k">operator</span><span class="o">&lt;</span><span class="p">(</span><span class="k">const</span> <span class="n">Gap</span><span class="o">&amp;</span> <span class="n">mp</span><span class="p">)</span> <span class="k">const</span> <span class="p">{</span>
-    <span class="k">return</span> <span class="p">(</span><span class="n">size_</span> <span class="o">&lt;</span> <span class="n">mp</span><span class="p">.</span><span class="n">size</span><span class="p">())</span> <span class="o">||</span> <span class="p">(</span><span class="n">size_</span> <span class="o">==</span> <span class="n">mp</span><span class="p">.</span><span class="n">size</span><span class="p">()</span> <span class="o">&amp;&amp;</span> <span class="n">data_</span> <span class="o">&lt;</span> <span class="n">mp</span><span class="p">.</span><span class="n">data</span><span class="p">());</span>
-  <span class="p">}</span>
+<span class="w">  </span><span class="kt">bool</span><span class="w"> </span><span class="k">operator</span><span class="o">&lt;</span><span class="p">(</span><span class="k">const</span><span class="w"> </span><span class="n">Gap</span><span class="o">&amp;</span><span class="w"> </span><span class="n">mp</span><span class="p">)</span><span class="w"> </span><span class="k">const</span><span class="w"> </span><span class="p">{</span><span class="w"></span>
+<span class="w">    </span><span class="k">return</span><span class="w"> </span><span class="p">(</span><span class="n">size_</span><span class="w"> </span><span class="o">&lt;</span><span class="w"> </span><span class="n">mp</span><span class="p">.</span><span class="n">size</span><span class="p">())</span><span class="w"> </span><span class="o">||</span><span class="w"> </span><span class="p">(</span><span class="n">size_</span><span class="w"> </span><span class="o">==</span><span class="w"> </span><span class="n">mp</span><span class="p">.</span><span class="n">size</span><span class="p">()</span><span class="w"> </span><span class="o">&amp;&amp;</span><span class="w"> </span><span class="n">data_</span><span class="w"> </span><span class="o">&lt;</span><span class="w"> </span><span class="n">mp</span><span class="p">.</span><span class="n">data</span><span class="p">());</span><span class="w"></span>
+<span class="w">  </span><span class="p">}</span><span class="w"></span>
 
-  <span class="kt">bool</span> <span class="k">operator</span><span class="o">==</span><span class="p">(</span><span class="k">const</span> <span class="n">Gap</span><span class="o">&amp;</span> <span class="n">mp</span><span class="p">)</span> <span class="k">const</span> <span class="p">{</span>
-    <span class="k">return</span> <span class="n">data_</span> <span class="o">==</span> <span class="n">mp</span><span class="p">.</span><span class="n">data</span><span class="p">()</span> <span class="o">&amp;&amp;</span> <span class="n">size_</span> <span class="o">==</span> <span class="n">mp</span><span class="p">.</span><span class="n">size</span><span class="p">();</span>
-  <span class="p">}</span>
+<span class="w">  </span><span class="kt">bool</span><span class="w"> </span><span class="k">operator</span><span class="o">==</span><span class="p">(</span><span class="k">const</span><span class="w"> </span><span class="n">Gap</span><span class="o">&amp;</span><span class="w"> </span><span class="n">mp</span><span class="p">)</span><span class="w"> </span><span class="k">const</span><span class="w"> </span><span class="p">{</span><span class="w"></span>
+<span class="w">    </span><span class="k">return</span><span class="w"> </span><span class="n">data_</span><span class="w"> </span><span class="o">==</span><span class="w"> </span><span class="n">mp</span><span class="p">.</span><span class="n">data</span><span class="p">()</span><span class="w"> </span><span class="o">&amp;&amp;</span><span class="w"> </span><span class="n">size_</span><span class="w"> </span><span class="o">==</span><span class="w"> </span><span class="n">mp</span><span class="p">.</span><span class="n">size</span><span class="p">();</span><span class="w"></span>
+<span class="w">  </span><span class="p">}</span><span class="w"></span>
 
-  <span class="kt">bool</span> <span class="n">adjacent</span><span class="p">(</span><span class="k">const</span> <span class="n">Gap</span><span class="o">&amp;</span> <span class="n">mp</span><span class="p">)</span> <span class="k">const</span> <span class="p">{</span>
-    <span class="k">return</span> <span class="n">data_</span> <span class="o">+</span> <span class="n">size_</span> <span class="o">==</span> <span class="n">mp</span><span class="p">.</span><span class="n">data</span><span class="p">()</span> <span class="o">||</span> <span class="n">mp</span><span class="p">.</span><span class="n">data</span><span class="p">()</span> <span class="o">+</span> <span class="n">mp</span><span class="p">.</span><span class="n">size</span><span class="p">()</span> <span class="o">==</span> <span class="n">data_</span><span class="p">;</span>
-  <span class="p">}</span>
+<span class="w">  </span><span class="kt">bool</span><span class="w"> </span><span class="n">adjacent</span><span class="p">(</span><span class="k">const</span><span class="w"> </span><span class="n">Gap</span><span class="o">&amp;</span><span class="w"> </span><span class="n">mp</span><span class="p">)</span><span class="w"> </span><span class="k">const</span><span class="w"> </span><span class="p">{</span><span class="w"></span>
+<span class="w">    </span><span class="k">return</span><span class="w"> </span><span class="n">data_</span><span class="w"> </span><span class="o">+</span><span class="w"> </span><span class="n">size_</span><span class="w"> </span><span class="o">==</span><span class="w"> </span><span class="n">mp</span><span class="p">.</span><span class="n">data</span><span class="p">()</span><span class="w"> </span><span class="o">||</span><span class="w"> </span><span class="n">mp</span><span class="p">.</span><span class="n">data</span><span class="p">()</span><span class="w"> </span><span class="o">+</span><span class="w"> </span><span class="n">mp</span><span class="p">.</span><span class="n">size</span><span class="p">()</span><span class="w"> </span><span class="o">==</span><span class="w"> </span><span class="n">data_</span><span class="p">;</span><span class="w"></span>
+<span class="w">  </span><span class="p">}</span><span class="w"></span>
 
-  <span class="k">friend</span> <span class="n">Gap</span> <span class="k">operator</span><span class="o">+</span><span class="p">(</span><span class="k">const</span> <span class="n">Gap</span><span class="o">&amp;</span> <span class="n">mp1</span><span class="p">,</span> <span class="k">const</span> <span class="n">Gap</span><span class="o">&amp;</span> <span class="n">mp2</span><span class="p">)</span> <span class="p">{</span>
-    <span class="k">return</span> <span class="nf">Gap</span><span class="p">(</span><span class="n">mp1</span><span class="p">.</span><span class="n">data</span><span class="p">(),</span> <span class="n">mp1</span><span class="p">.</span><span class="n">size</span><span class="p">()</span> <span class="o">+</span> <span class="n">mp2</span><span class="p">.</span><span class="n">size</span><span class="p">());</span>
-  <span class="p">}</span>
+<span class="w">  </span><span class="k">friend</span><span class="w"> </span><span class="n">Gap</span><span class="w"> </span><span class="k">operator</span><span class="o">+</span><span class="p">(</span><span class="k">const</span><span class="w"> </span><span class="n">Gap</span><span class="o">&amp;</span><span class="w"> </span><span class="n">mp1</span><span class="p">,</span><span class="w"> </span><span class="k">const</span><span class="w"> </span><span class="n">Gap</span><span class="o">&amp;</span><span class="w"> </span><span class="n">mp2</span><span class="p">)</span><span class="w"> </span><span class="p">{</span><span class="w"></span>
+<span class="w">    </span><span class="k">return</span><span class="w"> </span><span class="n">Gap</span><span class="p">(</span><span class="n">mp1</span><span class="p">.</span><span class="n">data</span><span class="p">(),</span><span class="w"> </span><span class="n">mp1</span><span class="p">.</span><span class="n">size</span><span class="p">()</span><span class="w"> </span><span class="o">+</span><span class="w"> </span><span class="n">mp2</span><span class="p">.</span><span class="n">size</span><span class="p">());</span><span class="w"></span>
+<span class="w">  </span><span class="p">}</span><span class="w"></span>
 
-  <span class="k">friend</span> <span class="n">std</span><span class="o">::</span><span class="n">ostream</span><span class="o">&amp;</span> <span class="k">operator</span><span class="o">&lt;&lt;</span><span class="p">(</span><span class="n">std</span><span class="o">::</span><span class="n">ostream</span><span class="o">&amp;</span> <span class="n">out</span><span class="p">,</span> <span class="k">const</span> <span class="n">Gap</span><span class="o">&amp;</span> <span class="n">gap</span><span class="p">)</span> <span class="p">{</span>
-    <span class="n">out</span> <span class="o">&lt;&lt;</span> <span class="s">&quot;gap - ptr: &quot;</span> <span class="o">&lt;&lt;</span> <span class="n">std</span><span class="o">::</span><span class="n">hex</span> <span class="o">&lt;&lt;</span> <span class="p">(</span><span class="kt">size_t</span><span class="p">)</span><span class="n">gap</span><span class="p">.</span><span class="n">data</span><span class="p">()</span> <span class="o">&lt;&lt;</span> <span class="n">std</span><span class="o">::</span><span class="n">dec</span>
-        <span class="o">&lt;&lt;</span> <span class="s">&quot; size: &quot;</span> <span class="o">&lt;&lt;</span> <span class="n">gap</span><span class="p">.</span><span class="n">size</span><span class="p">();</span>
-    <span class="k">return</span> <span class="n">out</span><span class="p">;</span>
-  <span class="p">}</span>
+<span class="w">  </span><span class="k">friend</span><span class="w"> </span><span class="n">std</span><span class="o">::</span><span class="n">ostream</span><span class="o">&amp;</span><span class="w"> </span><span class="k">operator</span><span class="o">&lt;&lt;</span><span class="p">(</span><span class="n">std</span><span class="o">::</span><span class="n">ostream</span><span class="o">&amp;</span><span class="w"> </span><span class="n">out</span><span class="p">,</span><span class="w"> </span><span class="k">const</span><span class="w"> </span><span class="n">Gap</span><span class="o">&amp;</span><span class="w"> </span><span class="n">gap</span><span class="p">)</span><span class="w"> </span><span class="p">{</span><span class="w"></span>
+<span class="w">    </span><span class="n">out</span><span class="w"> </span><span class="o">&lt;&lt;</span><span class="w"> </span><span class="s">&quot;gap - ptr: &quot;</span><span class="w"> </span><span class="o">&lt;&lt;</span><span class="w"> </span><span class="n">std</span><span class="o">::</span><span class="n">hex</span><span class="w"> </span><span class="o">&lt;&lt;</span><span class="w"> </span><span class="p">(</span><span class="kt">size_t</span><span class="p">)</span><span class="n">gap</span><span class="p">.</span><span class="n">data</span><span class="p">()</span><span class="w"> </span><span class="o">&lt;&lt;</span><span class="w"> </span><span class="n">std</span><span class="o">::</span><span class="n">dec</span><span class="w"></span>
+<span class="w">        </span><span class="o">&lt;&lt;</span><span class="w"> </span><span class="s">&quot; size: &quot;</span><span class="w"> </span><span class="o">&lt;&lt;</span><span class="w"> </span><span class="n">gap</span><span class="p">.</span><span class="n">size</span><span class="p">();</span><span class="w"></span>
+<span class="w">    </span><span class="k">return</span><span class="w"> </span><span class="n">out</span><span class="p">;</span><span class="w"></span>
+<span class="w">  </span><span class="p">}</span><span class="w"></span>
 
-  <span class="n">Gap</span> <span class="n">combine</span><span class="p">(</span><span class="k">const</span> <span class="n">Gap</span><span class="o">&amp;</span> <span class="n">mp</span><span class="p">)</span> <span class="k">const</span> <span class="p">{</span>
-    <span class="k">if</span><span class="p">(</span><span class="n">mp</span><span class="p">.</span><span class="n">data</span><span class="p">()</span> <span class="o">&lt;</span> <span class="k">this</span><span class="o">-&gt;</span><span class="n">data</span><span class="p">())</span>
-      <span class="k">return</span> <span class="n">mp</span> <span class="o">+</span> <span class="o">*</span><span class="k">this</span><span class="p">;</span>
-    <span class="k">else</span>
-      <span class="k">return</span> <span class="o">*</span><span class="k">this</span> <span class="o">+</span> <span class="n">mp</span><span class="p">;</span>
-  <span class="p">}</span>
+<span class="w">  </span><span class="n">Gap</span><span class="w"> </span><span class="n">combine</span><span class="p">(</span><span class="k">const</span><span class="w"> </span><span class="n">Gap</span><span class="o">&amp;</span><span class="w"> </span><span class="n">mp</span><span class="p">)</span><span class="w"> </span><span class="k">const</span><span class="w"> </span><span class="p">{</span><span class="w"></span>
+<span class="w">    </span><span class="k">if</span><span class="p">(</span><span class="n">mp</span><span class="p">.</span><span class="n">data</span><span class="p">()</span><span class="w"> </span><span class="o">&lt;</span><span class="w"> </span><span class="k">this</span><span class="o">-&gt;</span><span class="n">data</span><span class="p">())</span><span class="w"></span>
+<span class="w">      </span><span class="k">return</span><span class="w"> </span><span class="n">mp</span><span class="w"> </span><span class="o">+</span><span class="w"> </span><span class="o">*</span><span class="k">this</span><span class="p">;</span><span class="w"></span>
+<span class="w">    </span><span class="k">else</span><span class="w"></span>
+<span class="w">      </span><span class="k">return</span><span class="w"> </span><span class="o">*</span><span class="k">this</span><span class="w"> </span><span class="o">+</span><span class="w"> </span><span class="n">mp</span><span class="p">;</span><span class="w"></span>
+<span class="w">  </span><span class="p">}</span><span class="w"></span>
 
-  <span class="n">Gap</span> <span class="n">rest</span><span class="p">(</span><span class="kt">size_t</span> <span class="n">offset</span><span class="p">)</span> <span class="k">const</span> <span class="p">{</span> <span class="k">return</span> <span class="nf">Gap</span><span class="p">(</span><span class="n">data_</span> <span class="o">+</span> <span class="n">offset</span><span class="p">,</span> <span class="n">size_</span> <span class="o">-</span> <span class="n">offset</span><span class="p">);</span> <span class="p">}</span>
-<span class="p">};</span>
+<span class="w">  </span><span class="n">Gap</span><span class="w"> </span><span class="n">rest</span><span class="p">(</span><span class="kt">size_t</span><span class="w"> </span><span class="n">offset</span><span class="p">)</span><span class="w"> </span><span class="k">const</span><span class="w"> </span><span class="p">{</span><span class="w"> </span><span class="k">return</span><span class="w"> </span><span class="n">Gap</span><span class="p">(</span><span class="n">data_</span><span class="w"> </span><span class="o">+</span><span class="w"> </span><span class="n">offset</span><span class="p">,</span><span class="w"> </span><span class="n">size_</span><span class="w"> </span><span class="o">-</span><span class="w"> </span><span class="n">offset</span><span class="p">);</span><span class="w"> </span><span class="p">}</span><span class="w"></span>
+<span class="p">};</span><span class="w"></span>
 
-<span class="k">class</span> <span class="nc">Allocator</span> <span class="p">{</span>
-<span class="k">private</span><span class="o">:</span>
-  <span class="n">Ptr</span><span class="o">&lt;</span><span class="n">Device</span><span class="o">&gt;</span> <span class="n">device_</span><span class="p">;</span>
-  <span class="kt">size_t</span> <span class="n">available_</span><span class="p">{</span><span class="mi">0</span><span class="p">};</span>
-  <span class="kt">size_t</span> <span class="n">step_</span><span class="p">{</span><span class="mi">128</span> <span class="o">*</span> <span class="mi">1024</span> <span class="o">*</span> <span class="mi">1024</span><span class="p">};</span>
-  <span class="kt">size_t</span> <span class="n">alignment_</span><span class="p">{</span><span class="mi">256</span><span class="p">};</span>
+<span class="k">class</span><span class="w"> </span><span class="nc">Allocator</span><span class="w"> </span><span class="p">{</span><span class="w"></span>
+<span class="k">private</span><span class="o">:</span><span class="w"></span>
+<span class="w">  </span><span class="n">Ptr</span><span class="o">&lt;</span><span class="n">Device</span><span class="o">&gt;</span><span class="w"> </span><span class="n">device_</span><span class="p">;</span><span class="w"></span>
+<span class="w">  </span><span class="kt">size_t</span><span class="w"> </span><span class="n">available_</span><span class="p">{</span><span class="mi">0</span><span class="p">};</span><span class="w"></span>
+<span class="w">  </span><span class="kt">size_t</span><span class="w"> </span><span class="n">step_</span><span class="p">{</span><span class="mi">128</span><span class="w"> </span><span class="o">*</span><span class="w"> </span><span class="mi">1024</span><span class="w"> </span><span class="o">*</span><span class="w"> </span><span class="mi">1024</span><span class="p">};</span><span class="w"></span>
+<span class="w">  </span><span class="kt">size_t</span><span class="w"> </span><span class="n">alignment_</span><span class="p">{</span><span class="mi">256</span><span class="p">};</span><span class="w"></span>
 
-  <span class="kt">bool</span> <span class="n">throw_</span><span class="p">{</span><span class="nb">false</span><span class="p">};</span>
+<span class="w">  </span><span class="kt">bool</span><span class="w"> </span><span class="n">throw_</span><span class="p">{</span><span class="nb">false</span><span class="p">};</span><span class="w"></span>
 
-  <span class="n">std</span><span class="o">::</span><span class="n">set</span><span class="o">&lt;</span><span class="n">Gap</span><span class="o">&gt;</span> <span class="n">gaps_</span><span class="p">;</span>
-  <span class="n">std</span><span class="o">::</span><span class="n">unordered_map</span><span class="o">&lt;</span><span class="kt">uint8_t</span><span class="o">*</span><span class="p">,</span> <span class="n">MemoryPiece</span><span class="o">::</span><span class="n">PtrType</span><span class="o">&gt;</span> <span class="n">allocated_</span><span class="p">;</span>
+<span class="w">  </span><span class="n">std</span><span class="o">::</span><span class="n">set</span><span class="o">&lt;</span><span class="n">Gap</span><span class="o">&gt;</span><span class="w"> </span><span class="n">gaps_</span><span class="p">;</span><span class="w"></span>
+<span class="w">  </span><span class="n">std</span><span class="o">::</span><span class="n">unordered_map</span><span class="o">&lt;</span><span class="kt">uint8_t</span><span class="o">*</span><span class="p">,</span><span class="w"> </span><span class="n">MemoryPiece</span><span class="o">::</span><span class="n">PtrType</span><span class="o">&gt;</span><span class="w"> </span><span class="n">allocated_</span><span class="p">;</span><span class="w"></span>
 
-  <span class="kt">void</span> <span class="nf">grow</span><span class="p">(</span><span class="kt">size_t</span> <span class="n">add</span><span class="p">)</span> <span class="p">{</span>
-    <span class="n">add</span> <span class="o">=</span> <span class="n">alignedSize</span><span class="p">(</span><span class="n">add</span><span class="p">);</span>
-    <span class="kt">uint8_t</span><span class="o">*</span> <span class="n">oldData</span> <span class="o">=</span> <span class="n">device_</span><span class="o">-&gt;</span><span class="n">data</span><span class="p">();</span>
-    <span class="kt">size_t</span> <span class="n">oldSize</span> <span class="o">=</span> <span class="n">device_</span><span class="o">-&gt;</span><span class="n">size</span><span class="p">();</span>
+<span class="w">  </span><span class="kt">void</span><span class="w"> </span><span class="nf">grow</span><span class="p">(</span><span class="kt">size_t</span><span class="w"> </span><span class="n">add</span><span class="p">)</span><span class="w"> </span><span class="p">{</span><span class="w"></span>
+<span class="w">    </span><span class="n">add</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="n">alignedSize</span><span class="p">(</span><span class="n">add</span><span class="p">);</span><span class="w"></span>
+<span class="w">    </span><span class="kt">uint8_t</span><span class="o">*</span><span class="w"> </span><span class="n">oldData</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="n">device_</span><span class="o">-&gt;</span><span class="n">data</span><span class="p">();</span><span class="w"></span>
+<span class="w">    </span><span class="kt">size_t</span><span class="w"> </span><span class="n">oldSize</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="n">device_</span><span class="o">-&gt;</span><span class="n">size</span><span class="p">();</span><span class="w"></span>
 
-    <span class="n">device_</span><span class="o">-&gt;</span><span class="n">reserve</span><span class="p">(</span><span class="n">oldSize</span> <span class="o">+</span> <span class="n">add</span><span class="p">);</span>
+<span class="w">    </span><span class="n">device_</span><span class="o">-&gt;</span><span class="n">reserve</span><span class="p">(</span><span class="n">oldSize</span><span class="w"> </span><span class="o">+</span><span class="w"> </span><span class="n">add</span><span class="p">);</span><span class="w"></span>
 
-    <span class="n">std</span><span class="o">::</span><span class="n">set</span><span class="o">&lt;</span><span class="n">Gap</span><span class="o">&gt;</span> <span class="n">oldGaps</span><span class="p">;</span>
-    <span class="n">gaps_</span><span class="p">.</span><span class="n">swap</span><span class="p">(</span><span class="n">oldGaps</span><span class="p">);</span>
+<span class="w">    </span><span class="n">std</span><span class="o">::</span><span class="n">set</span><span class="o">&lt;</span><span class="n">Gap</span><span class="o">&gt;</span><span class="w"> </span><span class="n">oldGaps</span><span class="p">;</span><span class="w"></span>
+<span class="w">    </span><span class="n">gaps_</span><span class="p">.</span><span class="n">swap</span><span class="p">(</span><span class="n">oldGaps</span><span class="p">);</span><span class="w"></span>
 
-    <span class="k">for</span><span class="p">(</span><span class="k">auto</span> <span class="nl">gap</span> <span class="p">:</span> <span class="n">oldGaps</span><span class="p">)</span>
-      <span class="n">gaps_</span><span class="p">.</span><span class="n">insert</span><span class="p">(</span><span class="n">Gap</span><span class="p">(</span><span class="n">device_</span><span class="o">-&gt;</span><span class="n">data</span><span class="p">()</span> <span class="o">+</span> <span class="n">std</span><span class="o">::</span><span class="n">distance</span><span class="p">(</span><span class="n">oldData</span><span class="p">,</span> <span class="n">gap</span><span class="p">.</span><span class="n">data</span><span class="p">()),</span>
-                       <span class="n">gap</span><span class="p">.</span><span class="n">size</span><span class="p">()));</span>
-    <span class="n">insertGap</span><span class="p">(</span><span class="n">Gap</span><span class="p">(</span><span class="n">device_</span><span class="o">-&gt;</span><span class="n">data</span><span class="p">()</span> <span class="o">+</span> <span class="n">oldSize</span><span class="p">,</span> <span class="n">add</span><span class="p">));</span>
+<span class="w">    </span><span class="k">for</span><span class="p">(</span><span class="k">auto</span><span class="w"> </span><span class="n">gap</span><span class="w"> </span><span class="o">:</span><span class="w"> </span><span class="n">oldGaps</span><span class="p">)</span><span class="w"></span>
+<span class="w">      </span><span class="n">gaps_</span><span class="p">.</span><span class="n">insert</span><span class="p">(</span><span class="n">Gap</span><span class="p">(</span><span class="n">device_</span><span class="o">-&gt;</span><span class="n">data</span><span class="p">()</span><span class="w"> </span><span class="o">+</span><span class="w"> </span><span class="n">std</span><span class="o">::</span><span class="n">distance</span><span class="p">(</span><span class="n">oldData</span><span class="p">,</span><span class="w"> </span><span class="n">gap</span><span class="p">.</span><span class="n">data</span><span class="p">()),</span><span class="w"></span>
+<span class="w">                       </span><span class="n">gap</span><span class="p">.</span><span class="n">size</span><span class="p">()));</span><span class="w"></span>
+<span class="w">    </span><span class="n">insertGap</span><span class="p">(</span><span class="n">Gap</span><span class="p">(</span><span class="n">device_</span><span class="o">-&gt;</span><span class="n">data</span><span class="p">()</span><span class="w"> </span><span class="o">+</span><span class="w"> </span><span class="n">oldSize</span><span class="p">,</span><span class="w"> </span><span class="n">add</span><span class="p">));</span><span class="w"></span>
 
-    <span class="n">std</span><span class="o">::</span><span class="n">unordered_map</span><span class="o">&lt;</span><span class="kt">uint8_t</span><span class="o">*</span><span class="p">,</span> <span class="n">MemoryPiece</span><span class="o">::</span><span class="n">PtrType</span><span class="o">&gt;</span> <span class="n">oldAllocated</span><span class="p">;</span>
-    <span class="n">allocated_</span><span class="p">.</span><span class="n">swap</span><span class="p">(</span><span class="n">oldAllocated</span><span class="p">);</span>
-    <span class="k">for</span><span class="p">(</span><span class="k">auto</span> <span class="nl">it</span> <span class="p">:</span> <span class="n">oldAllocated</span><span class="p">)</span> <span class="p">{</span>
-      <span class="kt">uint8_t</span><span class="o">*</span> <span class="n">newPtr</span> <span class="o">=</span> <span class="n">device_</span><span class="o">-&gt;</span><span class="n">data</span><span class="p">()</span> <span class="o">+</span> <span class="n">std</span><span class="o">::</span><span class="n">distance</span><span class="p">(</span><span class="n">oldData</span><span class="p">,</span> <span class="n">it</span><span class="p">.</span><span class="n">first</span><span class="p">);</span>
-      <span class="n">allocated_</span><span class="p">[</span><span class="n">newPtr</span><span class="p">]</span> <span class="o">=</span> <span class="n">oldAllocated</span><span class="p">[</span><span class="n">it</span><span class="p">.</span><span class="n">first</span><span class="p">];</span>
-      <span class="n">allocated_</span><span class="p">[</span><span class="n">newPtr</span><span class="p">]</span><span class="o">-&gt;</span><span class="n">setPtr</span><span class="p">(</span><span class="n">newPtr</span><span class="p">);</span>
-    <span class="p">}</span>
-  <span class="p">}</span>
+<span class="w">    </span><span class="n">std</span><span class="o">::</span><span class="n">unordered_map</span><span class="o">&lt;</span><span class="kt">uint8_t</span><span class="o">*</span><span class="p">,</span><span class="w"> </span><span class="n">MemoryPiece</span><span class="o">::</span><span class="n">PtrType</span><span class="o">&gt;</span><span class="w"> </span><span class="n">oldAllocated</span><span class="p">;</span><span class="w"></span>
+<span class="w">    </span><span class="n">allocated_</span><span class="p">.</span><span class="n">swap</span><span class="p">(</span><span class="n">oldAllocated</span><span class="p">);</span><span class="w"></span>
+<span class="w">    </span><span class="k">for</span><span class="p">(</span><span class="k">auto</span><span class="w"> </span><span class="n">it</span><span class="w"> </span><span class="o">:</span><span class="w"> </span><span class="n">oldAllocated</span><span class="p">)</span><span class="w"> </span><span class="p">{</span><span class="w"></span>
+<span class="w">      </span><span class="kt">uint8_t</span><span class="o">*</span><span class="w"> </span><span class="n">newPtr</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="n">device_</span><span class="o">-&gt;</span><span class="n">data</span><span class="p">()</span><span class="w"> </span><span class="o">+</span><span class="w"> </span><span class="n">std</span><span class="o">::</span><span class="n">distance</span><span class="p">(</span><span class="n">oldData</span><span class="p">,</span><span class="w"> </span><span class="n">it</span><span class="p">.</span><span class="n">first</span><span class="p">);</span><span class="w"></span>
+<span class="w">      </span><span class="n">allocated_</span><span class="p">[</span><span class="n">newPtr</span><span class="p">]</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="n">oldAllocated</span><span class="p">[</span><span class="n">it</span><span class="p">.</span><span class="n">first</span><span class="p">];</span><span class="w"></span>
+<span class="w">      </span><span class="n">allocated_</span><span class="p">[</span><span class="n">newPtr</span><span class="p">]</span><span class="o">-&gt;</span><span class="n">setPtr</span><span class="p">(</span><span class="n">newPtr</span><span class="p">);</span><span class="w"></span>
+<span class="w">    </span><span class="p">}</span><span class="w"></span>
+<span class="w">  </span><span class="p">}</span><span class="w"></span>
 
-  <span class="n">Gap</span> <span class="nf">getGap</span><span class="p">(</span><span class="kt">size_t</span> <span class="n">size</span><span class="p">)</span> <span class="p">{</span>
-    <span class="n">size</span> <span class="o">=</span> <span class="n">alignedSize</span><span class="p">(</span><span class="n">size</span><span class="p">);</span>
-    <span class="k">auto</span> <span class="n">it</span> <span class="o">=</span> <span class="n">std</span><span class="o">::</span><span class="n">lower_bound</span><span class="p">(</span><span class="n">gaps_</span><span class="p">.</span><span class="n">begin</span><span class="p">(),</span> <span class="n">gaps_</span><span class="p">.</span><span class="n">end</span><span class="p">(),</span> <span class="n">Gap</span><span class="p">(</span><span class="k">nullptr</span><span class="p">,</span> <span class="n">size</span><span class="p">));</span>
+<span class="w">  </span><span class="n">Gap</span><span class="w"> </span><span class="nf">getGap</span><span class="p">(</span><span class="kt">size_t</span><span class="w"> </span><span class="n">size</span><span class="p">)</span><span class="w"> </span><span class="p">{</span><span class="w"></span>
+<span class="w">    </span><span class="n">size</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="n">alignedSize</span><span class="p">(</span><span class="n">size</span><span class="p">);</span><span class="w"></span>
+<span class="w">    </span><span class="k">auto</span><span class="w"> </span><span class="n">it</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="n">std</span><span class="o">::</span><span class="n">lower_bound</span><span class="p">(</span><span class="n">gaps_</span><span class="p">.</span><span class="n">begin</span><span class="p">(),</span><span class="w"> </span><span class="n">gaps_</span><span class="p">.</span><span class="n">end</span><span class="p">(),</span><span class="w"> </span><span class="n">Gap</span><span class="p">(</span><span class="k">nullptr</span><span class="p">,</span><span class="w"> </span><span class="n">size</span><span class="p">));</span><span class="w"></span>
 
-    <span class="k">if</span><span class="p">(</span><span class="n">throw_</span> <span class="o">&amp;&amp;</span> <span class="n">it</span> <span class="o">==</span> <span class="n">gaps_</span><span class="p">.</span><span class="n">end</span><span class="p">())</span> <span class="p">{</span>
-      <span class="c1">//ABORT(&quot;Trying to allocate {}, but only {} available.&quot;, available_, size);</span>
-      <span class="k">throw</span> <span class="n">AllocationException</span><span class="p">(</span><span class="n">available_</span><span class="p">,</span> <span class="n">size</span><span class="p">);</span>
-    <span class="p">}</span>
+<span class="w">    </span><span class="k">if</span><span class="p">(</span><span class="n">throw_</span><span class="w"> </span><span class="o">&amp;&amp;</span><span class="w"> </span><span class="n">it</span><span class="w"> </span><span class="o">==</span><span class="w"> </span><span class="n">gaps_</span><span class="p">.</span><span class="n">end</span><span class="p">())</span><span class="w"> </span><span class="p">{</span><span class="w"></span>
+<span class="w">      </span><span class="c1">//ABORT(&quot;Trying to allocate {}, but only {} available.&quot;, available_, size);</span>
+<span class="w">      </span><span class="k">throw</span><span class="w"> </span><span class="n">AllocationException</span><span class="p">(</span><span class="n">available_</span><span class="p">,</span><span class="w"> </span><span class="n">size</span><span class="p">);</span><span class="w"></span>
+<span class="w">    </span><span class="p">}</span><span class="w"></span>
 
-    <span class="c1">// @TODO: compact memory before re-allocation attempt, maybe by left shifting memory over currently largest gap</span>
-    <span class="k">while</span><span class="p">(</span><span class="n">it</span> <span class="o">==</span> <span class="n">gaps_</span><span class="p">.</span><span class="n">end</span><span class="p">())</span> <span class="p">{</span>
-      <span class="n">grow</span><span class="p">(</span><span class="n">step_</span><span class="p">);</span>
-      <span class="n">it</span> <span class="o">=</span> <span class="n">std</span><span class="o">::</span><span class="n">lower_bound</span><span class="p">(</span><span class="n">gaps_</span><span class="p">.</span><span class="n">begin</span><span class="p">(),</span> <span class="n">gaps_</span><span class="p">.</span><span class="n">end</span><span class="p">(),</span> <span class="n">Gap</span><span class="p">(</span><span class="k">nullptr</span><span class="p">,</span> <span class="n">size</span><span class="p">));</span>
-    <span class="p">}</span>
+<span class="w">    </span><span class="c1">// @TODO: compact memory before re-allocation attempt, maybe by left shifting memory over currently largest gap</span>
+<span class="w">    </span><span class="k">while</span><span class="p">(</span><span class="n">it</span><span class="w"> </span><span class="o">==</span><span class="w"> </span><span class="n">gaps_</span><span class="p">.</span><span class="n">end</span><span class="p">())</span><span class="w"> </span><span class="p">{</span><span class="w"></span>
+<span class="w">      </span><span class="n">grow</span><span class="p">(</span><span class="n">step_</span><span class="p">);</span><span class="w"></span>
+<span class="w">      </span><span class="n">it</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="n">std</span><span class="o">::</span><span class="n">lower_bound</span><span class="p">(</span><span class="n">gaps_</span><span class="p">.</span><span class="n">begin</span><span class="p">(),</span><span class="w"> </span><span class="n">gaps_</span><span class="p">.</span><span class="n">end</span><span class="p">(),</span><span class="w"> </span><span class="n">Gap</span><span class="p">(</span><span class="k">nullptr</span><span class="p">,</span><span class="w"> </span><span class="n">size</span><span class="p">));</span><span class="w"></span>
+<span class="w">    </span><span class="p">}</span><span class="w"></span>
 
-    <span class="n">Gap</span> <span class="n">gap</span> <span class="o">=</span> <span class="o">*</span><span class="n">it</span><span class="p">;</span>
-    <span class="n">gaps_</span><span class="p">.</span><span class="n">erase</span><span class="p">(</span><span class="n">it</span><span class="p">);</span>
+<span class="w">    </span><span class="n">Gap</span><span class="w"> </span><span class="n">gap</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="o">*</span><span class="n">it</span><span class="p">;</span><span class="w"></span>
+<span class="w">    </span><span class="n">gaps_</span><span class="p">.</span><span class="n">erase</span><span class="p">(</span><span class="n">it</span><span class="p">);</span><span class="w"></span>
 
-    <span class="n">available_</span> <span class="o">-=</span> <span class="n">gap</span><span class="p">.</span><span class="n">size</span><span class="p">();</span>
-    <span class="k">return</span> <span class="n">gap</span><span class="p">;</span>
-  <span class="p">}</span>
+<span class="w">    </span><span class="n">available_</span><span class="w"> </span><span class="o">-=</span><span class="w"> </span><span class="n">gap</span><span class="p">.</span><span class="n">size</span><span class="p">();</span><span class="w"></span>
+<span class="w">    </span><span class="k">return</span><span class="w"> </span><span class="n">gap</span><span class="p">;</span><span class="w"></span>
+<span class="w">  </span><span class="p">}</span><span class="w"></span>
 
-  <span class="kt">void</span> <span class="nf">insertGap</span><span class="p">(</span><span class="n">Gap</span> <span class="n">gap</span><span class="p">,</span> <span class="kt">bool</span> <span class="n">consolidate</span> <span class="o">=</span> <span class="nb">true</span><span class="p">)</span> <span class="p">{</span>
-    <span class="n">available_</span> <span class="o">+=</span> <span class="n">gap</span><span class="p">.</span><span class="n">size</span><span class="p">();</span>
-    <span class="k">if</span><span class="p">(</span><span class="n">consolidate</span><span class="p">)</span> <span class="p">{</span>
-      <span class="k">auto</span> <span class="n">it</span> <span class="o">=</span> <span class="n">gaps_</span><span class="p">.</span><span class="n">begin</span><span class="p">();</span>
-      <span class="n">std</span><span class="o">::</span><span class="n">vector</span><span class="o">&lt;</span><span class="k">decltype</span><span class="p">(</span><span class="n">it</span><span class="p">)</span><span class="o">&gt;</span> <span class="n">adjacent</span><span class="p">;</span>
-      <span class="k">while</span><span class="p">(</span><span class="n">it</span> <span class="o">!=</span> <span class="n">gaps_</span><span class="p">.</span><span class="n">end</span><span class="p">())</span> <span class="p">{</span>
-        <span class="k">if</span><span class="p">(</span><span class="n">gap</span><span class="p">.</span><span class="n">adjacent</span><span class="p">(</span><span class="o">*</span><span class="n">it</span><span class="p">))</span> <span class="p">{</span>
-          <span class="n">gap</span> <span class="o">=</span> <span class="n">gap</span><span class="p">.</span><span class="n">combine</span><span class="p">(</span><span class="o">*</span><span class="n">it</span><span class="p">);</span>
-          <span class="n">adjacent</span><span class="p">.</span><span class="n">push_back</span><span class="p">(</span><span class="n">it</span><span class="p">);</span>
-        <span class="p">}</span>
-        <span class="n">it</span><span class="o">++</span><span class="p">;</span>
-      <span class="p">}</span>
-      <span class="k">for</span><span class="p">(</span><span class="k">auto</span><span class="o">&amp;&amp;</span> <span class="nl">a</span> <span class="p">:</span> <span class="n">adjacent</span><span class="p">)</span>
-        <span class="n">gaps_</span><span class="p">.</span><span class="n">erase</span><span class="p">(</span><span class="n">a</span><span class="p">);</span>
-    <span class="p">}</span>
-    <span class="n">gaps_</span><span class="p">.</span><span class="n">insert</span><span class="p">(</span><span class="n">gap</span><span class="p">);</span>
-  <span class="p">}</span>
+<span class="w">  </span><span class="kt">void</span><span class="w"> </span><span class="nf">insertGap</span><span class="p">(</span><span class="n">Gap</span><span class="w"> </span><span class="n">gap</span><span class="p">,</span><span class="w"> </span><span class="kt">bool</span><span class="w"> </span><span class="n">consolidate</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="nb">true</span><span class="p">)</span><span class="w"> </span><span class="p">{</span><span class="w"></span>
+<span class="w">    </span><span class="n">available_</span><span class="w"> </span><span class="o">+=</span><span class="w"> </span><span class="n">gap</span><span class="p">.</span><span class="n">size</span><span class="p">();</span><span class="w"></span>
+<span class="w">    </span><span class="k">if</span><span class="p">(</span><span class="n">consolidate</span><span class="p">)</span><span class="w"> </span><span class="p">{</span><span class="w"></span>
+<span class="w">      </span><span class="k">auto</span><span class="w"> </span><span class="n">it</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="n">gaps_</span><span class="p">.</span><span class="n">begin</span><span class="p">();</span><span class="w"></span>
+<span class="w">      </span><span class="n">std</span><span class="o">::</span><span class="n">vector</span><span class="o">&lt;</span><span class="k">decltype</span><span class="p">(</span><span class="n">it</span><span class="p">)</span><span class="o">&gt;</span><span class="w"> </span><span class="n">adjacent</span><span class="p">;</span><span class="w"></span>
+<span class="w">      </span><span class="k">while</span><span class="p">(</span><span class="n">it</span><span class="w"> </span><span class="o">!=</span><span class="w"> </span><span class="n">gaps_</span><span class="p">.</span><span class="n">end</span><span class="p">())</span><span class="w"> </span><span class="p">{</span><span class="w"></span>
+<span class="w">        </span><span class="k">if</span><span class="p">(</span><span class="n">gap</span><span class="p">.</span><span class="n">adjacent</span><span class="p">(</span><span class="o">*</span><span class="n">it</span><span class="p">))</span><span class="w"> </span><span class="p">{</span><span class="w"></span>
+<span class="w">          </span><span class="n">gap</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="n">gap</span><span class="p">.</span><span class="n">combine</span><span class="p">(</span><span class="o">*</span><span class="n">it</span><span class="p">);</span><span class="w"></span>
+<span class="w">          </span><span class="n">adjacent</span><span class="p">.</span><span class="n">push_back</span><span class="p">(</span><span class="n">it</span><span class="p">);</span><span class="w"></span>
+<span class="w">        </span><span class="p">}</span><span class="w"></span>
+<span class="w">        </span><span class="n">it</span><span class="o">++</span><span class="p">;</span><span class="w"></span>
+<span class="w">      </span><span class="p">}</span><span class="w"></span>
+<span class="w">      </span><span class="k">for</span><span class="p">(</span><span class="k">auto</span><span class="o">&amp;&amp;</span><span class="w"> </span><span class="n">a</span><span class="w"> </span><span class="o">:</span><span class="w"> </span><span class="n">adjacent</span><span class="p">)</span><span class="w"></span>
+<span class="w">        </span><span class="n">gaps_</span><span class="p">.</span><span class="n">erase</span><span class="p">(</span><span class="n">a</span><span class="p">);</span><span class="w"></span>
+<span class="w">    </span><span class="p">}</span><span class="w"></span>
+<span class="w">    </span><span class="n">gaps_</span><span class="p">.</span><span class="n">insert</span><span class="p">(</span><span class="n">gap</span><span class="p">);</span><span class="w"></span>
+<span class="w">  </span><span class="p">}</span><span class="w"></span>
 
-<span class="k">public</span><span class="o">:</span>
-  <span class="n">Allocator</span><span class="p">(</span><span class="n">DeviceId</span> <span class="n">deviceId</span><span class="p">,</span>
-            <span class="kt">size_t</span> <span class="n">bytes</span><span class="p">,</span>
-            <span class="kt">size_t</span> <span class="n">step</span><span class="p">,</span>
-            <span class="kt">size_t</span> <span class="n">alignment</span> <span class="o">=</span> <span class="mi">256</span><span class="p">)</span>
-      <span class="o">:</span> <span class="n">device_</span><span class="p">(</span><span class="n">DispatchDevice</span><span class="p">(</span><span class="n">deviceId</span><span class="p">,</span> <span class="n">alignment</span><span class="p">)),</span>
-        <span class="n">available_</span><span class="p">(</span><span class="mi">0</span><span class="p">),</span>
-        <span class="n">step_</span><span class="p">(</span><span class="n">step</span><span class="p">),</span>
-        <span class="n">alignment_</span><span class="p">(</span><span class="n">alignment</span><span class="p">)</span> <span class="p">{</span>
-    <span class="n">reserve</span><span class="p">(</span><span class="n">bytes</span><span class="p">);</span>
-  <span class="p">}</span>
+<span class="k">public</span><span class="o">:</span><span class="w"></span>
+<span class="w">  </span><span class="n">Allocator</span><span class="p">(</span><span class="n">DeviceId</span><span class="w"> </span><span class="n">deviceId</span><span class="p">,</span><span class="w"></span>
+<span class="w">            </span><span class="kt">size_t</span><span class="w"> </span><span class="n">bytes</span><span class="p">,</span><span class="w"></span>
+<span class="w">            </span><span class="kt">size_t</span><span class="w"> </span><span class="n">step</span><span class="p">,</span><span class="w"></span>
+<span class="w">            </span><span class="kt">size_t</span><span class="w"> </span><span class="n">alignment</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="mi">256</span><span class="p">)</span><span class="w"></span>
+<span class="w">      </span><span class="o">:</span><span class="w"> </span><span class="n">device_</span><span class="p">(</span><span class="n">DispatchDevice</span><span class="p">(</span><span class="n">deviceId</span><span class="p">,</span><span class="w"> </span><span class="n">alignment</span><span class="p">)),</span><span class="w"></span>
+<span class="w">        </span><span class="n">available_</span><span class="p">(</span><span class="mi">0</span><span class="p">),</span><span class="w"></span>
+<span class="w">        </span><span class="n">step_</span><span class="p">(</span><span class="n">step</span><span class="p">),</span><span class="w"></span>
+<span class="w">        </span><span class="n">alignment_</span><span class="p">(</span><span class="n">alignment</span><span class="p">)</span><span class="w"> </span><span class="p">{</span><span class="w"></span>
+<span class="w">    </span><span class="n">reserve</span><span class="p">(</span><span class="n">bytes</span><span class="p">);</span><span class="w"></span>
+<span class="w">  </span><span class="p">}</span><span class="w"></span>
 
-  <span class="n">Allocator</span><span class="p">(</span><span class="n">DeviceId</span> <span class="cm">/*deviceId*/</span><span class="p">,</span>
-            <span class="n">Ptr</span><span class="o">&lt;</span><span class="n">Device</span><span class="o">&gt;</span> <span class="n">device</span><span class="p">,</span>
-            <span class="kt">size_t</span> <span class="n">bytes</span><span class="p">,</span>
-            <span class="kt">size_t</span> <span class="n">step</span><span class="p">,</span>
-            <span class="kt">size_t</span> <span class="n">alignment</span> <span class="o">=</span> <span class="mi">256</span><span class="p">)</span>
-      <span class="o">:</span> <span class="n">device_</span><span class="p">(</span><span class="n">device</span><span class="p">),</span> <span class="n">available_</span><span class="p">(</span><span class="mi">0</span><span class="p">),</span> <span class="n">step_</span><span class="p">(</span><span class="n">step</span><span class="p">),</span> <span class="n">alignment_</span><span class="p">(</span><span class="n">alignment</span><span class="p">)</span> <span class="p">{</span>
-    <span class="n">reserve</span><span class="p">(</span><span class="n">bytes</span><span class="p">);</span>
-  <span class="p">}</span>
+<span class="w">  </span><span class="n">Allocator</span><span class="p">(</span><span class="n">DeviceId</span><span class="w"> </span><span class="cm">/*deviceId*/</span><span class="p">,</span><span class="w"></span>
+<span class="w">            </span><span class="n">Ptr</span><span class="o">&lt;</span><span class="n">Device</span><span class="o">&gt;</span><span class="w"> </span><span class="n">device</span><span class="p">,</span><span class="w"></span>
+<span class="w">            </span><span class="kt">size_t</span><span class="w"> </span><span class="n">bytes</span><span class="p">,</span><span class="w"></span>
+<span class="w">            </span><span class="kt">size_t</span><span class="w"> </span><span class="n">step</span><span class="p">,</span><span class="w"></span>
+<span class="w">            </span><span class="kt">size_t</span><span class="w"> </span><span class="n">alignment</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="mi">256</span><span class="p">)</span><span class="w"></span>
+<span class="w">      </span><span class="o">:</span><span class="w"> </span><span class="n">device_</span><span class="p">(</span><span class="n">device</span><span class="p">),</span><span class="w"> </span><span class="n">available_</span><span class="p">(</span><span class="mi">0</span><span class="p">),</span><span class="w"> </span><span class="n">step_</span><span class="p">(</span><span class="n">step</span><span class="p">),</span><span class="w"> </span><span class="n">alignment_</span><span class="p">(</span><span class="n">alignment</span><span class="p">)</span><span class="w"> </span><span class="p">{</span><span class="w"></span>
+<span class="w">    </span><span class="n">reserve</span><span class="p">(</span><span class="n">bytes</span><span class="p">);</span><span class="w"></span>
+<span class="w">  </span><span class="p">}</span><span class="w"></span>
 
-  <span class="kt">size_t</span> <span class="n">alignedSize</span><span class="p">(</span><span class="kt">size_t</span> <span class="n">size</span><span class="p">)</span> <span class="p">{</span>
-    <span class="k">return</span> <span class="p">(</span><span class="kt">size_t</span><span class="p">)(</span><span class="n">ceil</span><span class="p">(</span><span class="n">size</span> <span class="o">/</span> <span class="p">(</span><span class="kt">double</span><span class="p">)</span><span class="n">alignment_</span><span class="p">)</span> <span class="o">*</span> <span class="n">alignment_</span><span class="p">);</span>
-  <span class="p">}</span>
+<span class="w">  </span><span class="kt">size_t</span><span class="w"> </span><span class="n">alignedSize</span><span class="p">(</span><span class="kt">size_t</span><span class="w"> </span><span class="n">size</span><span class="p">)</span><span class="w"> </span><span class="k">const</span><span class="w"> </span><span class="p">{</span><span class="w"></span>
+<span class="w">    </span><span class="kt">size_t</span><span class="w"> </span><span class="n">over</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="n">size</span><span class="w"> </span><span class="o">+</span><span class="w"> </span><span class="n">alignment_</span><span class="w"> </span><span class="o">-</span><span class="w"> </span><span class="mi">1</span><span class="p">;</span><span class="w"></span>
+<span class="w">    </span><span class="k">return</span><span class="w"> </span><span class="n">over</span><span class="w"> </span><span class="o">-</span><span class="w"> </span><span class="p">(</span><span class="n">over</span><span class="w"> </span><span class="o">%</span><span class="w"> </span><span class="n">alignment_</span><span class="p">);</span><span class="w"></span>
+<span class="w">  </span><span class="p">}</span><span class="w"></span>
 
-  <span class="kt">void</span> <span class="n">throwAtReallocation</span><span class="p">(</span><span class="kt">bool</span> <span class="n">throwRealloc</span><span class="p">)</span> <span class="p">{</span> <span class="n">throw_</span> <span class="o">=</span> <span class="n">throwRealloc</span><span class="p">;</span> <span class="p">}</span>
+<span class="w">  </span><span class="kt">void</span><span class="w"> </span><span class="n">throwAtReallocation</span><span class="p">(</span><span class="kt">bool</span><span class="w"> </span><span class="n">throwRealloc</span><span class="p">)</span><span class="w"> </span><span class="p">{</span><span class="w"> </span><span class="n">throw_</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="n">throwRealloc</span><span class="p">;</span><span class="w"> </span><span class="p">}</span><span class="w"></span>
 
-  <span class="kt">void</span> <span class="n">reserve</span><span class="p">(</span><span class="kt">size_t</span> <span class="n">bytes</span><span class="p">)</span> <span class="p">{</span>
-    <span class="n">bytes</span> <span class="o">=</span> <span class="n">alignedSize</span><span class="p">(</span><span class="n">bytes</span><span class="p">);</span>
-    <span class="k">if</span><span class="p">(</span><span class="n">bytes</span> <span class="o">&gt;</span> <span class="mi">0</span><span class="p">)</span>
-      <span class="n">device_</span><span class="o">-&gt;</span><span class="n">reserve</span><span class="p">(</span><span class="n">bytes</span><span class="p">);</span>
-    <span class="n">clear</span><span class="p">();</span>
-  <span class="p">}</span>
+<span class="w">  </span><span class="kt">void</span><span class="w"> </span><span class="n">reserve</span><span class="p">(</span><span class="kt">size_t</span><span class="w"> </span><span class="n">bytes</span><span class="p">)</span><span class="w"> </span><span class="p">{</span><span class="w"></span>
+<span class="w">    </span><span class="n">bytes</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="n">alignedSize</span><span class="p">(</span><span class="n">bytes</span><span class="p">);</span><span class="w"></span>
+<span class="w">    </span><span class="k">if</span><span class="p">(</span><span class="n">bytes</span><span class="w"> </span><span class="o">&gt;</span><span class="w"> </span><span class="mi">0</span><span class="p">)</span><span class="w"></span>
+<span class="w">      </span><span class="n">device_</span><span class="o">-&gt;</span><span class="n">reserve</span><span class="p">(</span><span class="n">bytes</span><span class="p">);</span><span class="w"></span>
+<span class="w">    </span><span class="n">clear</span><span class="p">();</span><span class="w"></span>
+<span class="w">  </span><span class="p">}</span><span class="w"></span>
 
-  <span class="k">template</span> <span class="o">&lt;</span><span class="k">typename</span> <span class="nc">T</span><span class="o">&gt;</span>
-  <span class="kt">size_t</span> <span class="n">capacity</span><span class="p">(</span><span class="kt">size_t</span> <span class="n">num</span><span class="p">)</span> <span class="p">{</span>
-    <span class="k">return</span> <span class="nf">alignedSize</span><span class="p">(</span><span class="n">num</span> <span class="o">*</span> <span class="k">sizeof</span><span class="p">(</span><span class="n">T</span><span class="p">));</span>
-  <span class="p">}</span>
+<span class="w">  </span><span class="k">template</span><span class="w"> </span><span class="o">&lt;</span><span class="k">typename</span><span class="w"> </span><span class="nc">T</span><span class="o">&gt;</span><span class="w"></span>
+<span class="w">  </span><span class="kt">size_t</span><span class="w"> </span><span class="n">capacity</span><span class="p">(</span><span class="kt">size_t</span><span class="w"> </span><span class="n">num</span><span class="p">)</span><span class="w"> </span><span class="p">{</span><span class="w"></span>
+<span class="w">    </span><span class="k">return</span><span class="w"> </span><span class="n">alignedSize</span><span class="p">(</span><span class="n">num</span><span class="w"> </span><span class="o">*</span><span class="w"> </span><span class="k">sizeof</span><span class="p">(</span><span class="n">T</span><span class="p">));</span><span class="w"></span>
+<span class="w">  </span><span class="p">}</span><span class="w"></span>
 
-  <span class="k">template</span> <span class="o">&lt;</span><span class="k">typename</span> <span class="nc">T</span><span class="o">&gt;</span>
-  <span class="n">MemoryPiece</span><span class="o">::</span><span class="n">PtrType</span> <span class="n">alloc</span><span class="p">(</span><span class="kt">size_t</span> <span class="n">num</span><span class="p">)</span> <span class="p">{</span>
-    <span class="k">return</span> <span class="nf">alloc</span><span class="p">(</span><span class="n">capacity</span><span class="o">&lt;</span><span class="n">T</span><span class="o">&gt;</span><span class="p">(</span><span class="n">num</span><span class="p">));</span>
-  <span class="p">}</span>
+<span class="w">  </span><span class="k">template</span><span class="w"> </span><span class="o">&lt;</span><span class="k">typename</span><span class="w"> </span><span class="nc">T</span><span class="o">&gt;</span><span class="w"></span>
+<span class="w">  </span><span class="n">MemoryPiece</span><span class="o">::</span><span class="n">PtrType</span><span class="w"> </span><span class="n">alloc</span><span class="p">(</span><span class="kt">size_t</span><span class="w"> </span><span class="n">num</span><span class="p">)</span><span class="w"> </span><span class="p">{</span><span class="w"></span>
+<span class="w">    </span><span class="k">return</span><span class="w"> </span><span class="n">alloc</span><span class="p">(</span><span class="n">capacity</span><span class="o">&lt;</span><span class="n">T</span><span class="o">&gt;</span><span class="p">(</span><span class="n">num</span><span class="p">));</span><span class="w"></span>
+<span class="w">  </span><span class="p">}</span><span class="w"></span>
 
-  <span class="n">MemoryPiece</span><span class="o">::</span><span class="n">PtrType</span> <span class="n">alloc</span><span class="p">(</span><span class="kt">size_t</span> <span class="n">bytes</span><span class="p">)</span> <span class="p">{</span>
-    <span class="n">bytes</span> <span class="o">=</span> <span class="n">alignedSize</span><span class="p">(</span><span class="n">bytes</span><span class="p">);</span>
-    <span class="n">Gap</span> <span class="n">gap</span> <span class="o">=</span> <span class="n">getGap</span><span class="p">(</span><span class="n">bytes</span><span class="p">);</span>
+<span class="w">  </span><span class="n">MemoryPiece</span><span class="o">::</span><span class="n">PtrType</span><span class="w"> </span><span class="n">alloc</span><span class="p">(</span><span class="kt">size_t</span><span class="w"> </span><span class="n">bytes</span><span class="p">)</span><span class="w"> </span><span class="p">{</span><span class="w"></span>
+<span class="w">    </span><span class="n">bytes</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="n">alignedSize</span><span class="p">(</span><span class="n">bytes</span><span class="p">);</span><span class="w"></span>
+<span class="w">    </span><span class="n">Gap</span><span class="w"> </span><span class="n">gap</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="n">getGap</span><span class="p">(</span><span class="n">bytes</span><span class="p">);</span><span class="w"></span>
 
-    <span class="k">if</span><span class="p">(</span><span class="n">gap</span><span class="p">.</span><span class="n">size</span><span class="p">()</span> <span class="o">&gt;</span> <span class="n">bytes</span><span class="p">)</span> <span class="p">{</span>
-      <span class="n">insertGap</span><span class="p">(</span><span class="n">gap</span><span class="p">.</span><span class="n">rest</span><span class="p">(</span><span class="n">bytes</span><span class="p">),</span> <span class="nb">false</span><span class="p">);</span>
-    <span class="p">}</span>
+<span class="w">    </span><span class="k">if</span><span class="p">(</span><span class="n">gap</span><span class="p">.</span><span class="n">size</span><span class="p">()</span><span class="w"> </span><span class="o">&gt;</span><span class="w"> </span><span class="n">bytes</span><span class="p">)</span><span class="w"> </span><span class="p">{</span><span class="w"></span>
+<span class="w">      </span><span class="n">insertGap</span><span class="p">(</span><span class="n">gap</span><span class="p">.</span><span class="n">rest</span><span class="p">(</span><span class="n">bytes</span><span class="p">),</span><span class="w"> </span><span class="nb">false</span><span class="p">);</span><span class="w"></span>
+<span class="w">    </span><span class="p">}</span><span class="w"></span>
 
-    <span class="k">auto</span> <span class="n">ptr</span> <span class="o">=</span> <span class="n">gap</span><span class="p">.</span><span class="n">data</span><span class="p">();</span>
-    <span class="k">auto</span> <span class="n">mp</span> <span class="o">=</span> <span class="n">MemoryPiece</span><span class="o">::</span><span class="n">New</span><span class="p">(</span><span class="n">ptr</span><span class="p">,</span> <span class="n">bytes</span><span class="p">);</span>
-    <span class="n">allocated_</span><span class="p">[</span><span class="n">ptr</span><span class="p">]</span> <span class="o">=</span> <span class="n">mp</span><span class="p">;</span>
-    <span class="k">return</span> <span class="n">mp</span><span class="p">;</span>
-  <span class="p">}</span>
+<span class="w">    </span><span class="k">auto</span><span class="w"> </span><span class="n">ptr</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="n">gap</span><span class="p">.</span><span class="n">data</span><span class="p">();</span><span class="w"></span>
+<span class="w">    </span><span class="k">auto</span><span class="w"> </span><span class="n">mp</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="n">MemoryPiece</span><span class="o">::</span><span class="n">New</span><span class="p">(</span><span class="n">ptr</span><span class="p">,</span><span class="w"> </span><span class="n">bytes</span><span class="p">);</span><span class="w"></span>
+<span class="w">    </span><span class="n">allocated_</span><span class="p">[</span><span class="n">ptr</span><span class="p">]</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="n">mp</span><span class="p">;</span><span class="w"></span>
+<span class="w">    </span><span class="k">return</span><span class="w"> </span><span class="n">mp</span><span class="p">;</span><span class="w"></span>
+<span class="w">  </span><span class="p">}</span><span class="w"></span>
 
-  <span class="kt">bool</span> <span class="n">free</span><span class="p">(</span><span class="kt">uint8_t</span><span class="o">*</span> <span class="n">ptr</span><span class="p">,</span> <span class="kt">size_t</span> <span class="n">bytes</span><span class="p">)</span> <span class="p">{</span>
-    <span class="n">bytes</span> <span class="o">=</span> <span class="n">alignedSize</span><span class="p">(</span><span class="n">bytes</span><span class="p">);</span>
+<span class="w">  </span><span class="kt">bool</span><span class="w"> </span><span class="n">free</span><span class="p">(</span><span class="kt">uint8_t</span><span class="o">*</span><span class="w"> </span><span class="n">ptr</span><span class="p">,</span><span class="w"> </span><span class="kt">size_t</span><span class="w"> </span><span class="n">bytes</span><span class="p">)</span><span class="w"> </span><span class="p">{</span><span class="w"></span>
+<span class="w">    </span><span class="n">bytes</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="n">alignedSize</span><span class="p">(</span><span class="n">bytes</span><span class="p">);</span><span class="w"></span>
 
-    <span class="n">ABORT_IF</span><span class="p">(</span><span class="n">ptr</span> <span class="o">==</span> <span class="mi">0</span><span class="p">,</span> <span class="s">&quot;Double free?&quot;</span><span class="p">);</span>
+<span class="w">    </span><span class="n">ABORT_IF</span><span class="p">(</span><span class="n">ptr</span><span class="w"> </span><span class="o">==</span><span class="w"> </span><span class="mi">0</span><span class="p">,</span><span class="w"> </span><span class="s">&quot;Double free?&quot;</span><span class="p">);</span><span class="w"></span>
 
-    <span class="k">if</span><span class="p">(</span><span class="o">!</span><span class="n">ptr</span><span class="p">)</span>
-      <span class="k">return</span> <span class="nb">false</span><span class="p">;</span>
+<span class="w">    </span><span class="k">if</span><span class="p">(</span><span class="o">!</span><span class="n">ptr</span><span class="p">)</span><span class="w"></span>
+<span class="w">      </span><span class="k">return</span><span class="w"> </span><span class="nb">false</span><span class="p">;</span><span class="w"></span>
 
-    <span class="k">auto</span> <span class="n">it</span> <span class="o">=</span> <span class="n">allocated_</span><span class="p">.</span><span class="n">find</span><span class="p">(</span><span class="n">ptr</span><span class="p">);</span>
-    <span class="k">if</span><span class="p">(</span><span class="n">it</span> <span class="o">!=</span> <span class="n">allocated_</span><span class="p">.</span><span class="n">end</span><span class="p">())</span> <span class="p">{</span>
-      <span class="n">allocated_</span><span class="p">.</span><span class="n">erase</span><span class="p">(</span><span class="n">ptr</span><span class="p">);</span>
-      <span class="n">insertGap</span><span class="p">(</span><span class="n">Gap</span><span class="p">(</span><span class="n">ptr</span><span class="p">,</span> <span class="n">bytes</span><span class="p">),</span> <span class="nb">true</span><span class="p">);</span>
-      <span class="k">return</span> <span class="nb">true</span><span class="p">;</span>
-    <span class="p">}</span>
-    <span class="k">return</span> <span class="nb">false</span><span class="p">;</span>
-  <span class="p">}</span>
+<span class="w">    </span><span class="k">auto</span><span class="w"> </span><span class="n">it</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="n">allocated_</span><span class="p">.</span><span class="n">find</span><span class="p">(</span><span class="n">ptr</span><span class="p">);</span><span class="w"></span>
+<span class="w">    </span><span class="k">if</span><span class="p">(</span><span class="n">it</span><span class="w"> </span><span class="o">!=</span><span class="w"> </span><span class="n">allocated_</span><span class="p">.</span><span class="n">end</span><span class="p">())</span><span class="w"> </span><span class="p">{</span><span class="w"></span>
+<span class="w">      </span><span class="n">allocated_</span><span class="p">.</span><span class="n">erase</span><span class="p">(</span><span class="n">ptr</span><span class="p">);</span><span class="w"></span>
+<span class="w">      </span><span class="n">insertGap</span><span class="p">(</span><span class="n">Gap</span><span class="p">(</span><span class="n">ptr</span><span class="p">,</span><span class="w"> </span><span class="n">bytes</span><span class="p">),</span><span class="w"> </span><span class="nb">true</span><span class="p">);</span><span class="w"></span>
+<span class="w">      </span><span class="k">return</span><span class="w"> </span><span class="nb">true</span><span class="p">;</span><span class="w"></span>
+<span class="w">    </span><span class="p">}</span><span class="w"></span>
+<span class="w">    </span><span class="k">return</span><span class="w"> </span><span class="nb">false</span><span class="p">;</span><span class="w"></span>
+<span class="w">  </span><span class="p">}</span><span class="w"></span>
 
-  <span class="kt">bool</span> <span class="n">free</span><span class="p">(</span><span class="n">MemoryPiece</span><span class="o">::</span><span class="n">PtrType</span> <span class="n">mp</span><span class="p">)</span> <span class="p">{</span>
-    <span class="k">if</span><span class="p">(</span><span class="n">free</span><span class="p">(</span><span class="n">mp</span><span class="o">-&gt;</span><span class="n">data</span><span class="p">(),</span> <span class="n">mp</span><span class="o">-&gt;</span><span class="n">size</span><span class="p">()))</span> <span class="p">{</span>
-      <span class="n">mp</span><span class="o">-&gt;</span><span class="n">set</span><span class="p">(</span><span class="k">nullptr</span><span class="p">,</span> <span class="mi">0</span><span class="p">);</span>
-      <span class="k">return</span> <span class="nb">true</span><span class="p">;</span>
-    <span class="p">}</span>
-    <span class="k">return</span> <span class="nb">false</span><span class="p">;</span>
-  <span class="p">}</span>
+<span class="w">  </span><span class="kt">bool</span><span class="w"> </span><span class="n">free</span><span class="p">(</span><span class="n">MemoryPiece</span><span class="o">::</span><span class="n">PtrType</span><span class="w"> </span><span class="n">mp</span><span class="p">)</span><span class="w"> </span><span class="p">{</span><span class="w"></span>
+<span class="w">    </span><span class="k">if</span><span class="p">(</span><span class="n">free</span><span class="p">(</span><span class="n">mp</span><span class="o">-&gt;</span><span class="n">data</span><span class="p">(),</span><span class="w"> </span><span class="n">mp</span><span class="o">-&gt;</span><span class="n">size</span><span class="p">()))</span><span class="w"> </span><span class="p">{</span><span class="w"></span>
+<span class="w">      </span><span class="n">mp</span><span class="o">-&gt;</span><span class="n">set</span><span class="p">(</span><span class="k">nullptr</span><span class="p">,</span><span class="w"> </span><span class="mi">0</span><span class="p">);</span><span class="w"></span>
+<span class="w">      </span><span class="k">return</span><span class="w"> </span><span class="nb">true</span><span class="p">;</span><span class="w"></span>
+<span class="w">    </span><span class="p">}</span><span class="w"></span>
+<span class="w">    </span><span class="k">return</span><span class="w"> </span><span class="nb">false</span><span class="p">;</span><span class="w"></span>
+<span class="w">  </span><span class="p">}</span><span class="w"></span>
 
-  <span class="kt">void</span> <span class="n">clear</span><span class="p">()</span> <span class="p">{</span>
-    <span class="n">available_</span> <span class="o">=</span> <span class="mi">0</span><span class="p">;</span>
-    <span class="n">gaps_</span><span class="p">.</span><span class="n">clear</span><span class="p">();</span>
-    <span class="n">allocated_</span><span class="p">.</span><span class="n">clear</span><span class="p">();</span>
-    <span class="n">insertGap</span><span class="p">({</span><span class="n">device_</span><span class="o">-&gt;</span><span class="n">data</span><span class="p">(),</span> <span class="n">device_</span><span class="o">-&gt;</span><span class="n">size</span><span class="p">()},</span> <span class="nb">false</span><span class="p">);</span>
-  <span class="p">}</span>
+<span class="w">  </span><span class="kt">void</span><span class="w"> </span><span class="n">clear</span><span class="p">()</span><span class="w"> </span><span class="p">{</span><span class="w"></span>
+<span class="w">    </span><span class="n">available_</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="mi">0</span><span class="p">;</span><span class="w"></span>
+<span class="w">    </span><span class="n">gaps_</span><span class="p">.</span><span class="n">clear</span><span class="p">();</span><span class="w"></span>
+<span class="w">    </span><span class="n">allocated_</span><span class="p">.</span><span class="n">clear</span><span class="p">();</span><span class="w"></span>
+<span class="w">    </span><span class="n">insertGap</span><span class="p">({</span><span class="n">device_</span><span class="o">-&gt;</span><span class="n">data</span><span class="p">(),</span><span class="w"> </span><span class="n">device_</span><span class="o">-&gt;</span><span class="n">size</span><span class="p">()},</span><span class="w"> </span><span class="nb">false</span><span class="p">);</span><span class="w"></span>
+<span class="w">  </span><span class="p">}</span><span class="w"></span>
 
-  <span class="n">MemoryPiece</span><span class="o">::</span><span class="n">PtrType</span> <span class="n">memory</span><span class="p">()</span> <span class="p">{</span>
-    <span class="k">return</span> <span class="n">MemoryPiece</span><span class="o">::</span><span class="n">New</span><span class="p">(</span><span class="n">device_</span><span class="o">-&gt;</span><span class="n">data</span><span class="p">(),</span> <span class="n">device_</span><span class="o">-&gt;</span><span class="n">size</span><span class="p">());</span>
-  <span class="p">}</span>
+<span class="w">  </span><span class="n">MemoryPiece</span><span class="o">::</span><span class="n">PtrType</span><span class="w"> </span><span class="n">memory</span><span class="p">()</span><span class="w"> </span><span class="p">{</span><span class="w"></span>
+<span class="w">    </span><span class="k">return</span><span class="w"> </span><span class="n">MemoryPiece</span><span class="o">::</span><span class="n">New</span><span class="p">(</span><span class="n">device_</span><span class="o">-&gt;</span><span class="n">data</span><span class="p">(),</span><span class="w"> </span><span class="n">device_</span><span class="o">-&gt;</span><span class="n">size</span><span class="p">());</span><span class="w"></span>
+<span class="w">  </span><span class="p">}</span><span class="w"></span>
 
-  <span class="kt">size_t</span> <span class="n">size</span><span class="p">()</span> <span class="p">{</span> <span class="k">return</span> <span class="n">device_</span><span class="o">-&gt;</span><span class="n">size</span><span class="p">();</span> <span class="p">}</span>
+<span class="w">  </span><span class="kt">size_t</span><span class="w"> </span><span class="n">size</span><span class="p">()</span><span class="w"> </span><span class="p">{</span><span class="w"> </span><span class="k">return</span><span class="w"> </span><span class="n">device_</span><span class="o">-&gt;</span><span class="n">size</span><span class="p">();</span><span class="w"> </span><span class="p">}</span><span class="w"></span>
 
-  <span class="kt">size_t</span> <span class="n">available</span><span class="p">()</span> <span class="p">{</span> <span class="k">return</span> <span class="n">available_</span><span class="p">;</span> <span class="p">}</span>
+<span class="w">  </span><span class="kt">size_t</span><span class="w"> </span><span class="n">available</span><span class="p">()</span><span class="w"> </span><span class="p">{</span><span class="w"> </span><span class="k">return</span><span class="w"> </span><span class="n">available_</span><span class="p">;</span><span class="w"> </span><span class="p">}</span><span class="w"></span>
 
-  <span class="n">DeviceId</span> <span class="n">getDeviceId</span><span class="p">()</span> <span class="p">{</span> <span class="k">return</span> <span class="n">device_</span><span class="o">-&gt;</span><span class="n">getDeviceId</span><span class="p">();</span> <span class="p">}</span>
-<span class="p">};</span>
-<span class="p">}</span>  <span class="c1">// namespace marian</span>
+<span class="w">  </span><span class="n">DeviceId</span><span class="w"> </span><span class="n">getDeviceId</span><span class="p">()</span><span class="w"> </span><span class="p">{</span><span class="w"> </span><span class="k">return</span><span class="w"> </span><span class="n">device_</span><span class="o">-&gt;</span><span class="n">getDeviceId</span><span class="p">();</span><span class="w"> </span><span class="p">}</span><span class="w"></span>
+<span class="p">};</span><span class="w"></span>
+<span class="p">}</span><span class="w">  </span><span class="c1">// namespace marian</span>
 </pre></div>
 </div>
-</div>
+</section>
 
 
            </div>
-           
           </div>
           <footer>
 
   <hr/>
 
   <div role="contentinfo">
-    <p>
-        &#169; Copyright 2021, Marian NMT Team.
-
-    </p>
+    <p>&#169; Copyright 2021, Marian NMT Team.</p>
   </div>
-    
-    
-    
-    Built with <a href="https://www.sphinx-doc.org/">Sphinx</a> using a
-    
+
+  Built with <a href="https://www.sphinx-doc.org/">Sphinx</a> using a
     <a href="https://github.com/readthedocs/sphinx_rtd_theme">theme</a>
-    
-    provided by <a href="https://readthedocs.org">Read the Docs</a>. 
+    provided by <a href="https://readthedocs.org">Read the Docs</a>.
+   
 
 </footer>
         </div>
       </div>
-
     </section>
-
   </div>
-  
-
-  <script type="text/javascript">
+  <script>
       jQuery(function () {
           SphinxRtdTheme.Navigation.enable(true);
       });
-  </script>
-
-  
-  
-    
-   
+  </script> 
 
 </body>
 </html>

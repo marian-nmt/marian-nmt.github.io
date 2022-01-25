@@ -1,78 +1,41 @@
-
-
 <!DOCTYPE html>
 <html class="writer-html5" lang="en" >
 <head>
-  <meta charset="utf-8" />
-  
+  <meta charset="utf-8" /><meta name="generator" content="Docutils 0.17.1: http://docutils.sourceforge.net/" />
+
   <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-  
-  <title>Program Listing for File batch_generator.h &mdash; Marian NMT v1.10.3 2021-03-22 documentation</title>
-  
-
-  
-  <link rel="stylesheet" href="../_static/css/theme.css" type="text/css" />
-  <link rel="stylesheet" href="../_static/pygments.css" type="text/css" />
-  <link rel="stylesheet" href="../_static/css/custom.css" type="text/css" />
-  <link rel="stylesheet" href="../_static/collapsible-lists/css/tree_view.css" type="text/css" />
-
-  
-  
-
-  
-  
-
-  
+  <title>Program Listing for File batch_generator.h &mdash; Marian NMT v1.10.27 2022-01-25 documentation</title><link rel="stylesheet" href="../_static/css/theme.css" type="text/css" />
+    <link rel="stylesheet" href="../_static/pygments.css" type="text/css" />
+      <link rel="stylesheet" href="../_static/css/custom.css" type="text/css" />
+      <link rel="stylesheet" href="../_static/collapsible-lists/css/tree_view.css" type="text/css" />
     <link rel="canonical" href="http://marian-nmt.github.io/docs/api/api/program_listing_file_src_data_batch_generator.h.html" />
-
-  
   <!--[if lt IE 9]>
     <script src="../_static/js/html5shiv.min.js"></script>
   <![endif]-->
-  
-    
-      <script type="text/javascript" id="documentation_options" data-url_root="../" src="../_static/documentation_options.js"></script>
+  <script id="documentation_options" data-url_root="../" src="../_static/documentation_options.js"></script>
         <script src="../_static/jquery.js"></script>
         <script src="../_static/underscore.js"></script>
         <script src="../_static/doctools.js"></script>
         <script src="../_static/language_data.js"></script>
         <script src="../_static/collapsible-lists/js/CollapsibleLists.compressed.js"></script>
         <script src="../_static/collapsible-lists/js/apply-collapsible-lists.js"></script>
-    
-    <script type="text/javascript" src="../_static/js/theme.js"></script>
-
-    
+        <script async="async" src="https://cdnjs.cloudflare.com/ajax/libs/mathjax/2.7.5/latest.js?config=TeX-AMS-MML_HTMLorMML"></script>
+        <script type="text/x-mathjax-config">MathJax.Hub.Config({"tex2jax": {"inlineMath": [["\\(", "\\)"]], "displayMath": [["\\[", "\\]"]], "processRefs": false, "processEnvironments": false}})</script>
+    <script src="../_static/js/theme.js"></script>
     <link rel="index" title="Index" href="../genindex.html" />
     <link rel="search" title="Search" href="../search.html" /> 
 </head>
 
-<body class="wy-body-for-nav">
-
-   
+<body class="wy-body-for-nav"> 
   <div class="wy-grid-for-nav">
-    
     <nav data-toggle="wy-nav-shift" class="wy-nav-side">
       <div class="wy-side-scroll">
         <div class="wy-side-nav-search" >
-          
-
-          
             <a href="../index.html" class="icon icon-home"> Marian NMT
-          
-
-          
           </a>
-
-          
-            
-            
               <div class="version">
-                v1.10.3
+                v1.10.27
               </div>
-            
-          
-
-          
 <div role="search">
   <form id="rtd-search-form" class="wy-form" action="../search.html" method="get">
     <input type="text" name="q" placeholder="Search docs" />
@@ -80,505 +43,438 @@
     <input type="hidden" name="area" value="default" />
   </form>
 </div>
-
-          
-        </div>
-
-        
-        <div class="wy-menu wy-menu-vertical" data-spy="affix" role="navigation" aria-label="main navigation">
-          
-            
-            
-              
-            
-            
-              <p class="caption"><span class="caption-text">Contents:</span></p>
+        </div><div class="wy-menu wy-menu-vertical" data-spy="affix" role="navigation" aria-label="Navigation menu">
+              <p><span class="caption-text">Contents:</span></p>
 <ul>
 <li class="toctree-l1"><a class="reference internal" href="../graph.html">Expression graphs</a></li>
 <li class="toctree-l1"><a class="reference internal" href="../operators.html">Operations in the Expression Graph</a></li>
 <li class="toctree-l1"><a class="reference internal" href="library_index.html">Library API</a></li>
 <li class="toctree-l1"><a class="reference internal" href="../contributing.html">How to contribute to Marian</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../doc_guide.html">Writing documentation</a></li>
 </ul>
 
-            
-          
         </div>
-        
       </div>
     </nav>
 
-    <section data-toggle="wy-nav-shift" class="wy-nav-content-wrap">
-
-      
-      <nav class="wy-nav-top" aria-label="top navigation">
-        
+    <section data-toggle="wy-nav-shift" class="wy-nav-content-wrap"><nav class="wy-nav-top" aria-label="Mobile navigation menu" >
           <i data-toggle="wy-nav-top" class="fa fa-bars"></i>
           <a href="../index.html">Marian NMT</a>
-        
       </nav>
 
-
       <div class="wy-nav-content">
-        
         <div class="rst-content">
-        
-          
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-<div role="navigation" aria-label="breadcrumbs navigation">
-
+          <div role="navigation" aria-label="Page navigation">
   <ul class="wy-breadcrumbs">
-    
       <li><a href="../index.html" class="icon icon-home"></a> &raquo;</li>
-        
       <li>Program Listing for File batch_generator.h</li>
-    
-    
       <li class="wy-breadcrumbs-aside">
-        
-          
             <a href="../_sources/api/program_listing_file_src_data_batch_generator.h.rst.txt" rel="nofollow"> View page source</a>
-          
-        
       </li>
-    
   </ul>
-
-  
   <hr/>
 </div>
           <div role="main" class="document" itemscope="itemscope" itemtype="http://schema.org/Article">
            <div itemprop="articleBody">
-            
-  <div class="section" id="program-listing-for-file-batch-generator-h">
+             
+  <section id="program-listing-for-file-batch-generator-h">
 <span id="program-listing-file-src-data-batch-generator-h"></span><h1>Program Listing for File batch_generator.h<a class="headerlink" href="#program-listing-for-file-batch-generator-h" title="Permalink to this headline">¶</a></h1>
 <p>↰ <a class="reference internal" href="file_src_data_batch_generator.h.html#file-src-data-batch-generator-h"><span class="std std-ref">Return to documentation for file</span></a> (<code class="docutils literal notranslate"><span class="pre">src/data/batch_generator.h</span></code>)</p>
 <div class="highlight-cpp notranslate"><div class="highlight"><pre><span></span><span class="cp">#pragma once</span>
 
-<span class="cp">#include</span> <span class="cpf">&quot;common/options.h&quot;</span><span class="cp"></span>
-<span class="cp">#include</span> <span class="cpf">&quot;common/signal_handling.h&quot;</span><span class="cp"></span>
-<span class="cp">#include</span> <span class="cpf">&quot;data/batch_stats.h&quot;</span><span class="cp"></span>
-<span class="cp">#include</span> <span class="cpf">&quot;data/rng_engine.h&quot;</span><span class="cp"></span>
-<span class="cp">#include</span> <span class="cpf">&quot;training/training_state.h&quot;</span><span class="cp"></span>
-<span class="cp">#include</span> <span class="cpf">&quot;data/iterator_facade.h&quot;</span><span class="cp"></span>
-<span class="cp">#include</span> <span class="cpf">&quot;3rd_party/threadpool.h&quot;</span><span class="cp"></span>
+<span class="cp">#include</span><span class="w"> </span><span class="cpf">&quot;common/options.h&quot;</span><span class="cp"></span>
+<span class="cp">#include</span><span class="w"> </span><span class="cpf">&quot;common/signal_handling.h&quot;</span><span class="cp"></span>
+<span class="cp">#include</span><span class="w"> </span><span class="cpf">&quot;data/batch_stats.h&quot;</span><span class="cp"></span>
+<span class="cp">#include</span><span class="w"> </span><span class="cpf">&quot;data/rng_engine.h&quot;</span><span class="cp"></span>
+<span class="cp">#include</span><span class="w"> </span><span class="cpf">&quot;training/training_state.h&quot;</span><span class="cp"></span>
+<span class="cp">#include</span><span class="w"> </span><span class="cpf">&quot;data/iterator_facade.h&quot;</span><span class="cp"></span>
+<span class="cp">#include</span><span class="w"> </span><span class="cpf">&quot;3rd_party/threadpool.h&quot;</span><span class="cp"></span>
 
-<span class="cp">#include</span> <span class="cpf">&lt;condition_variable&gt;</span><span class="cp"></span>
-<span class="cp">#include</span> <span class="cpf">&lt;deque&gt;</span><span class="cp"></span>
-<span class="cp">#include</span> <span class="cpf">&lt;functional&gt;</span><span class="cp"></span>
-<span class="cp">#include</span> <span class="cpf">&lt;mutex&gt;</span><span class="cp"></span>
-<span class="cp">#include</span> <span class="cpf">&lt;queue&gt;</span><span class="cp"></span>
+<span class="cp">#include</span><span class="w"> </span><span class="cpf">&lt;condition_variable&gt;</span><span class="cp"></span>
+<span class="cp">#include</span><span class="w"> </span><span class="cpf">&lt;deque&gt;</span><span class="cp"></span>
+<span class="cp">#include</span><span class="w"> </span><span class="cpf">&lt;functional&gt;</span><span class="cp"></span>
+<span class="cp">#include</span><span class="w"> </span><span class="cpf">&lt;mutex&gt;</span><span class="cp"></span>
+<span class="cp">#include</span><span class="w"> </span><span class="cpf">&lt;queue&gt;</span><span class="cp"></span>
 
-<span class="k">namespace</span> <span class="n">marian</span> <span class="p">{</span>
-<span class="k">namespace</span> <span class="n">data</span> <span class="p">{</span>
+<span class="k">namespace</span><span class="w"> </span><span class="nn">marian</span><span class="w"> </span><span class="p">{</span><span class="w"></span>
+<span class="k">namespace</span><span class="w"> </span><span class="nn">data</span><span class="w"> </span><span class="p">{</span><span class="w"></span>
 
 <span class="c1">// Iterator over batches generated by a BatchGenerator. Mean to be the only</span>
 <span class="c1">// interface to create batches.</span>
-<span class="k">template</span> <span class="o">&lt;</span><span class="k">class</span> <span class="nc">BatchGenerator</span><span class="o">&gt;</span>
-<span class="k">class</span> <span class="nc">BatchIterator</span> <span class="o">:</span> <span class="k">public</span> <span class="n">IteratorFacade</span><span class="o">&lt;</span><span class="n">BatchIterator</span><span class="o">&lt;</span><span class="n">BatchGenerator</span><span class="o">&gt;</span><span class="p">,</span>
-                                            <span class="k">typename</span> <span class="nc">BatchGenerator</span><span class="o">::</span><span class="n">BatchPtr</span><span class="o">&gt;</span> <span class="p">{</span>
-<span class="k">private</span><span class="o">:</span>
-  <span class="n">BatchGenerator</span><span class="o">*</span> <span class="n">bg_</span><span class="p">;</span>
-  <span class="k">typename</span> <span class="nc">BatchGenerator</span><span class="o">::</span><span class="n">BatchPtr</span> <span class="n">current_</span><span class="p">;</span>
+<span class="k">template</span><span class="w"> </span><span class="o">&lt;</span><span class="k">class</span><span class="w"> </span><span class="nc">BatchGenerator</span><span class="o">&gt;</span><span class="w"></span>
+<span class="k">class</span><span class="w"> </span><span class="nc">BatchIterator</span><span class="w"> </span><span class="o">:</span><span class="w"> </span><span class="k">public</span><span class="w"> </span><span class="n">IteratorFacade</span><span class="o">&lt;</span><span class="n">BatchIterator</span><span class="o">&lt;</span><span class="n">BatchGenerator</span><span class="o">&gt;</span><span class="p">,</span><span class="w"></span>
+<span class="w">                                            </span><span class="k">typename</span><span class="w"> </span><span class="nc">BatchGenerator</span><span class="o">::</span><span class="n">BatchPtr</span><span class="o">&gt;</span><span class="w"> </span><span class="p">{</span><span class="w"></span>
+<span class="k">private</span><span class="o">:</span><span class="w"></span>
+<span class="w">  </span><span class="n">BatchGenerator</span><span class="o">*</span><span class="w"> </span><span class="n">bg_</span><span class="p">;</span><span class="w"></span>
+<span class="w">  </span><span class="k">typename</span><span class="w"> </span><span class="nc">BatchGenerator</span><span class="o">::</span><span class="n">BatchPtr</span><span class="w"> </span><span class="n">current_</span><span class="p">;</span><span class="w"></span>
 
-  <span class="k">friend</span> <span class="n">BatchGenerator</span><span class="p">;</span>
+<span class="w">  </span><span class="k">friend</span><span class="w"> </span><span class="n">BatchGenerator</span><span class="p">;</span><span class="w"></span>
 
-  <span class="c1">// private, only BatchGenerator is allowed to create pointers</span>
-  <span class="c1">// hence friend class above.</span>
-  <span class="n">BatchIterator</span><span class="p">(</span><span class="n">BatchGenerator</span><span class="o">*</span> <span class="n">bg</span><span class="p">,</span> <span class="k">typename</span> <span class="nc">BatchGenerator</span><span class="o">::</span><span class="n">BatchPtr</span> <span class="n">current</span><span class="p">)</span>
-  <span class="o">:</span> <span class="n">bg_</span><span class="p">(</span><span class="n">bg</span><span class="p">),</span> <span class="n">current_</span><span class="p">(</span><span class="n">current</span><span class="p">)</span> <span class="p">{}</span>
+<span class="w">  </span><span class="c1">// private, only BatchGenerator is allowed to create pointers</span>
+<span class="w">  </span><span class="c1">// hence friend class above.</span>
+<span class="w">  </span><span class="n">BatchIterator</span><span class="p">(</span><span class="n">BatchGenerator</span><span class="o">*</span><span class="w"> </span><span class="n">bg</span><span class="p">,</span><span class="w"> </span><span class="k">typename</span><span class="w"> </span><span class="nc">BatchGenerator</span><span class="o">::</span><span class="n">BatchPtr</span><span class="w"> </span><span class="n">current</span><span class="p">)</span><span class="w"></span>
+<span class="w">  </span><span class="o">:</span><span class="w"> </span><span class="n">bg_</span><span class="p">(</span><span class="n">bg</span><span class="p">),</span><span class="w"> </span><span class="n">current_</span><span class="p">(</span><span class="n">current</span><span class="p">)</span><span class="w"> </span><span class="p">{}</span><span class="w"></span>
 
-<span class="k">public</span><span class="o">:</span>
-  <span class="k">virtual</span> <span class="kt">bool</span> <span class="n">equal</span><span class="p">(</span><span class="k">const</span> <span class="n">BatchIterator</span><span class="o">&amp;</span> <span class="n">other</span><span class="p">)</span> <span class="k">const</span> <span class="k">override</span> <span class="p">{</span>
-    <span class="c1">// iterators are only equal if they point at the same batch or both have nullptr</span>
-    <span class="k">return</span> <span class="n">current_</span> <span class="o">==</span> <span class="n">other</span><span class="p">.</span><span class="n">current_</span><span class="p">;</span>
-  <span class="p">}</span>
+<span class="k">public</span><span class="o">:</span><span class="w"></span>
+<span class="w">  </span><span class="k">virtual</span><span class="w"> </span><span class="kt">bool</span><span class="w"> </span><span class="n">equal</span><span class="p">(</span><span class="k">const</span><span class="w"> </span><span class="n">BatchIterator</span><span class="o">&amp;</span><span class="w"> </span><span class="n">other</span><span class="p">)</span><span class="w"> </span><span class="k">const</span><span class="w"> </span><span class="k">override</span><span class="w"> </span><span class="p">{</span><span class="w"></span>
+<span class="w">    </span><span class="c1">// iterators are only equal if they point at the same batch or both have nullptr</span>
+<span class="w">    </span><span class="k">return</span><span class="w"> </span><span class="n">current_</span><span class="w"> </span><span class="o">==</span><span class="w"> </span><span class="n">other</span><span class="p">.</span><span class="n">current_</span><span class="p">;</span><span class="w"></span>
+<span class="w">  </span><span class="p">}</span><span class="w"></span>
 
-  <span class="c1">// Just returns the batch pointer</span>
-  <span class="k">virtual</span> <span class="k">const</span> <span class="k">typename</span> <span class="nc">BatchGenerator</span><span class="o">::</span><span class="n">BatchPtr</span><span class="o">&amp;</span> <span class="n">dereference</span><span class="p">()</span> <span class="k">const</span> <span class="k">override</span> <span class="p">{</span>
-    <span class="k">return</span> <span class="n">current_</span><span class="p">;</span>
-  <span class="p">}</span>
+<span class="w">  </span><span class="c1">// Just returns the batch pointer</span>
+<span class="w">  </span><span class="k">virtual</span><span class="w"> </span><span class="k">const</span><span class="w"> </span><span class="k">typename</span><span class="w"> </span><span class="nc">BatchGenerator</span><span class="o">::</span><span class="n">BatchPtr</span><span class="o">&amp;</span><span class="w"> </span><span class="n">dereference</span><span class="p">()</span><span class="w"> </span><span class="k">const</span><span class="w"> </span><span class="k">override</span><span class="w"> </span><span class="p">{</span><span class="w"></span>
+<span class="w">    </span><span class="k">return</span><span class="w"> </span><span class="n">current_</span><span class="p">;</span><span class="w"></span>
+<span class="w">  </span><span class="p">}</span><span class="w"></span>
 
-  <span class="c1">// sets current pointer to the next batch pointer, will be nullptr when no</span>
-  <span class="c1">// batches are available. This will evaluate to false in a for loop.</span>
-  <span class="k">virtual</span> <span class="kt">void</span> <span class="n">increment</span><span class="p">()</span> <span class="k">override</span> <span class="p">{</span>
-    <span class="n">current_</span> <span class="o">=</span> <span class="n">bg_</span><span class="o">-&gt;</span><span class="n">next</span><span class="p">();</span>
-  <span class="p">};</span>
-<span class="p">};</span>
+<span class="w">  </span><span class="c1">// sets current pointer to the next batch pointer, will be nullptr when no</span>
+<span class="w">  </span><span class="c1">// batches are available. This will evaluate to false in a for loop.</span>
+<span class="w">  </span><span class="k">virtual</span><span class="w"> </span><span class="kt">void</span><span class="w"> </span><span class="n">increment</span><span class="p">()</span><span class="w"> </span><span class="k">override</span><span class="w"> </span><span class="p">{</span><span class="w"></span>
+<span class="w">    </span><span class="n">current_</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="n">bg_</span><span class="o">-&gt;</span><span class="n">next</span><span class="p">();</span><span class="w"></span>
+<span class="w">  </span><span class="p">};</span><span class="w"></span>
+<span class="p">};</span><span class="w"></span>
 
-<span class="k">template</span> <span class="o">&lt;</span><span class="k">class</span> <span class="nc">DataSet</span><span class="o">&gt;</span>
-<span class="k">class</span> <span class="nc">BatchGenerator</span> <span class="o">:</span> <span class="k">public</span> <span class="n">RNGEngine</span> <span class="p">{</span>
-<span class="k">public</span><span class="o">:</span>
-  <span class="k">typedef</span> <span class="k">typename</span> <span class="nc">DataSet</span><span class="o">::</span><span class="n">batch_ptr</span> <span class="n">BatchPtr</span><span class="p">;</span>
+<span class="k">template</span><span class="w"> </span><span class="o">&lt;</span><span class="k">class</span><span class="w"> </span><span class="nc">DataSet</span><span class="o">&gt;</span><span class="w"></span>
+<span class="k">class</span><span class="w"> </span><span class="nc">BatchGenerator</span><span class="w"> </span><span class="o">:</span><span class="w"> </span><span class="k">public</span><span class="w"> </span><span class="n">RNGEngine</span><span class="w"> </span><span class="p">{</span><span class="w"></span>
+<span class="k">public</span><span class="o">:</span><span class="w"></span>
+<span class="w">  </span><span class="k">typedef</span><span class="w"> </span><span class="k">typename</span><span class="w"> </span><span class="nc">DataSet</span><span class="o">::</span><span class="n">batch_ptr</span><span class="w"> </span><span class="n">BatchPtr</span><span class="p">;</span><span class="w"></span>
 
-  <span class="k">typedef</span> <span class="k">typename</span> <span class="nc">DataSet</span><span class="o">::</span><span class="n">Sample</span> <span class="n">Sample</span><span class="p">;</span>
-  <span class="k">typedef</span> <span class="n">std</span><span class="o">::</span><span class="n">vector</span><span class="o">&lt;</span><span class="n">Sample</span><span class="o">&gt;</span> <span class="n">Samples</span><span class="p">;</span>
+<span class="w">  </span><span class="k">typedef</span><span class="w"> </span><span class="k">typename</span><span class="w"> </span><span class="nc">DataSet</span><span class="o">::</span><span class="n">Sample</span><span class="w"> </span><span class="n">Sample</span><span class="p">;</span><span class="w"></span>
+<span class="w">  </span><span class="k">typedef</span><span class="w"> </span><span class="n">std</span><span class="o">::</span><span class="n">vector</span><span class="o">&lt;</span><span class="n">Sample</span><span class="o">&gt;</span><span class="w"> </span><span class="n">Samples</span><span class="p">;</span><span class="w"></span>
 
-  <span class="k">typedef</span> <span class="n">BatchIterator</span><span class="o">&lt;</span><span class="n">BatchGenerator</span><span class="o">&gt;</span> <span class="n">iterator</span><span class="p">;</span>
-  <span class="k">friend</span> <span class="n">iterator</span><span class="p">;</span>
+<span class="w">  </span><span class="k">typedef</span><span class="w"> </span><span class="n">BatchIterator</span><span class="o">&lt;</span><span class="n">BatchGenerator</span><span class="o">&gt;</span><span class="w"> </span><span class="n">iterator</span><span class="p">;</span><span class="w"></span>
+<span class="w">  </span><span class="k">friend</span><span class="w"> </span><span class="n">iterator</span><span class="p">;</span><span class="w"></span>
 
-<span class="k">protected</span><span class="o">:</span>
-  <span class="n">Ptr</span><span class="o">&lt;</span><span class="n">DataSet</span><span class="o">&gt;</span> <span class="n">data_</span><span class="p">;</span>
-  <span class="n">Ptr</span><span class="o">&lt;</span><span class="n">Options</span><span class="o">&gt;</span> <span class="n">options_</span><span class="p">;</span>
-  <span class="kt">bool</span> <span class="n">restored_</span><span class="p">{</span><span class="nb">false</span><span class="p">};</span>
+<span class="k">protected</span><span class="o">:</span><span class="w"></span>
+<span class="w">  </span><span class="n">Ptr</span><span class="o">&lt;</span><span class="n">DataSet</span><span class="o">&gt;</span><span class="w"> </span><span class="n">data_</span><span class="p">;</span><span class="w"></span>
+<span class="w">  </span><span class="n">Ptr</span><span class="o">&lt;</span><span class="n">Options</span><span class="o">&gt;</span><span class="w"> </span><span class="n">options_</span><span class="p">;</span><span class="w"></span>
+<span class="w">  </span><span class="kt">bool</span><span class="w"> </span><span class="n">restored_</span><span class="p">{</span><span class="nb">false</span><span class="p">};</span><span class="w"></span>
 
-  <span class="c1">// replacing old shuffle_ with two variants that determine more fine-grained shuffling behavior.</span>
-  <span class="c1">// Both set to false is equivalent to old shuffle_ == false.</span>
-  <span class="c1">// Now we can not shuffle the data, but shuffle batches. Useful for linear reading of very large data sets with pre-reading.</span>
-  <span class="c1">// Parameters like maxi-batch determine how much data is pre-read and sorted by length or other criteria.</span>
-  <span class="kt">bool</span> <span class="n">shuffleData_</span><span class="p">{</span><span class="nb">false</span><span class="p">};</span>    <span class="c1">// determine if full data should be shuffled before reading and batching.</span>
-  <span class="kt">bool</span> <span class="n">shuffleBatches_</span><span class="p">{</span><span class="nb">false</span><span class="p">};</span> <span class="c1">// determine if batches should be shuffled after batching.</span>
+<span class="w">  </span><span class="c1">// replacing old shuffle_ with two variants that determine more fine-grained shuffling behavior.</span>
+<span class="w">  </span><span class="c1">// Both set to false is equivalent to old shuffle_ == false.</span>
+<span class="w">  </span><span class="c1">// Now we can not shuffle the data, but shuffle batches. Useful for linear reading of very large data sets with pre-reading.</span>
+<span class="w">  </span><span class="c1">// Parameters like maxi-batch determine how much data is pre-read and sorted by length or other criteria.</span>
+<span class="w">  </span><span class="kt">bool</span><span class="w"> </span><span class="n">shuffleData_</span><span class="p">{</span><span class="nb">false</span><span class="p">};</span><span class="w">    </span><span class="c1">// determine if full data should be shuffled before reading and batching.</span>
+<span class="w">  </span><span class="kt">bool</span><span class="w"> </span><span class="n">shuffleBatches_</span><span class="p">{</span><span class="nb">false</span><span class="p">};</span><span class="w"> </span><span class="c1">// determine if batches should be shuffled after batching.</span>
 
-<span class="k">private</span><span class="o">:</span>
-  <span class="n">Ptr</span><span class="o">&lt;</span><span class="n">BatchStats</span><span class="o">&gt;</span> <span class="n">stats_</span><span class="p">;</span>
+<span class="k">private</span><span class="o">:</span><span class="w"></span>
+<span class="w">  </span><span class="n">Ptr</span><span class="o">&lt;</span><span class="n">BatchStats</span><span class="o">&gt;</span><span class="w"> </span><span class="n">stats_</span><span class="p">;</span><span class="w"></span>
 
-  <span class="kt">bool</span> <span class="n">runAsync_</span><span class="p">{</span><span class="nb">true</span><span class="p">};</span> <span class="c1">// use asynchronous batch pre-fetching by default. We want to be able to disable this when running in library mode and for exception-safety.</span>
+<span class="w">  </span><span class="kt">bool</span><span class="w"> </span><span class="n">runAsync_</span><span class="p">{</span><span class="nb">true</span><span class="p">};</span><span class="w"> </span><span class="c1">// use asynchronous batch pre-fetching by default. We want to be able to disable this when running in library mode and for exception-safety.</span>
 
-  <span class="c1">// state of fetching</span>
-  <span class="n">std</span><span class="o">::</span><span class="n">deque</span><span class="o">&lt;</span><span class="n">BatchPtr</span><span class="o">&gt;</span> <span class="n">bufferedBatches_</span><span class="p">;</span> <span class="c1">// current swath of batches that next() reads from</span>
+<span class="w">  </span><span class="c1">// state of fetching</span>
+<span class="w">  </span><span class="n">std</span><span class="o">::</span><span class="n">deque</span><span class="o">&lt;</span><span class="n">BatchPtr</span><span class="o">&gt;</span><span class="w"> </span><span class="n">bufferedBatches_</span><span class="p">;</span><span class="w"> </span><span class="c1">// current swath of batches that next() reads from</span>
 
-  <span class="c1">// state of reading</span>
-  <span class="k">typename</span> <span class="nc">DataSet</span><span class="o">::</span><span class="n">iterator</span> <span class="n">current_</span><span class="p">;</span>
-  <span class="kt">bool</span> <span class="n">newlyPrepared_</span><span class="p">{</span> <span class="nb">true</span> <span class="p">};</span> <span class="c1">// prepare() was just called: we need to reset current_  --@TODO: can we just reset it directly?</span>
+<span class="w">  </span><span class="c1">// state of reading</span>
+<span class="w">  </span><span class="k">typename</span><span class="w"> </span><span class="nc">DataSet</span><span class="o">::</span><span class="n">iterator</span><span class="w"> </span><span class="n">current_</span><span class="p">;</span><span class="w"></span>
+<span class="w">  </span><span class="kt">bool</span><span class="w"> </span><span class="n">newlyPrepared_</span><span class="p">{</span><span class="w"> </span><span class="nb">true</span><span class="w"> </span><span class="p">};</span><span class="w"> </span><span class="c1">// prepare() was just called: we need to reset current_  --@TODO: can we just reset it directly?</span>
 
-  <span class="c1">// variables for multi-threaded pre-fetching</span>
-  <span class="k">mutable</span> <span class="n">UPtr</span><span class="o">&lt;</span><span class="n">ThreadPool</span><span class="o">&gt;</span> <span class="n">threadPool_</span><span class="p">;</span> <span class="c1">// (we only use one thread, but keep it around)</span>
-  <span class="n">std</span><span class="o">::</span><span class="n">future</span><span class="o">&lt;</span><span class="n">std</span><span class="o">::</span><span class="n">deque</span><span class="o">&lt;</span><span class="n">BatchPtr</span><span class="o">&gt;&gt;</span> <span class="n">futureBufferedBatches_</span><span class="p">;</span> <span class="c1">// next swath of batches is returned via this</span>
+<span class="w">  </span><span class="c1">// variables for multi-threaded pre-fetching</span>
+<span class="w">  </span><span class="k">mutable</span><span class="w"> </span><span class="n">UPtr</span><span class="o">&lt;</span><span class="n">ThreadPool</span><span class="o">&gt;</span><span class="w"> </span><span class="n">threadPool_</span><span class="p">;</span><span class="w"> </span><span class="c1">// (we only use one thread, but keep it around)</span>
+<span class="w">  </span><span class="n">std</span><span class="o">::</span><span class="n">future</span><span class="o">&lt;</span><span class="n">std</span><span class="o">::</span><span class="n">deque</span><span class="o">&lt;</span><span class="n">BatchPtr</span><span class="o">&gt;&gt;</span><span class="w"> </span><span class="n">futureBufferedBatches_</span><span class="p">;</span><span class="w"> </span><span class="c1">// next swath of batches is returned via this</span>
 
-  <span class="c1">// this runs on a bg thread; sequencing is handled by caller, but locking is done in here</span>
-  <span class="n">std</span><span class="o">::</span><span class="n">deque</span><span class="o">&lt;</span><span class="n">BatchPtr</span><span class="o">&gt;</span> <span class="n">fetchBatches</span><span class="p">()</span> <span class="p">{</span>
-    <span class="k">typedef</span> <span class="k">typename</span> <span class="nc">Sample</span><span class="o">::</span><span class="n">value_type</span> <span class="n">Item</span><span class="p">;</span>
-    <span class="k">auto</span> <span class="n">itemCmp</span> <span class="o">=</span> <span class="p">[](</span><span class="k">const</span> <span class="n">Item</span><span class="o">&amp;</span> <span class="n">sa</span><span class="p">,</span> <span class="k">const</span> <span class="n">Item</span><span class="o">&amp;</span> <span class="n">sb</span><span class="p">)</span> <span class="p">{</span> <span class="k">return</span> <span class="n">sa</span><span class="p">.</span><span class="n">size</span><span class="p">()</span> <span class="o">&lt;</span> <span class="n">sb</span><span class="p">.</span><span class="n">size</span><span class="p">();</span> <span class="p">};</span> <span class="c1">// sort by element length, not content</span>
+<span class="w">  </span><span class="c1">// this runs on a bg thread; sequencing is handled by caller, but locking is done in here</span>
+<span class="w">  </span><span class="n">std</span><span class="o">::</span><span class="n">deque</span><span class="o">&lt;</span><span class="n">BatchPtr</span><span class="o">&gt;</span><span class="w"> </span><span class="n">fetchBatches</span><span class="p">()</span><span class="w"> </span><span class="p">{</span><span class="w"></span>
+<span class="w">    </span><span class="k">typedef</span><span class="w"> </span><span class="k">typename</span><span class="w"> </span><span class="nc">Sample</span><span class="o">::</span><span class="n">value_type</span><span class="w"> </span><span class="n">Item</span><span class="p">;</span><span class="w"></span>
+<span class="w">    </span><span class="k">auto</span><span class="w"> </span><span class="n">itemCmp</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="p">[](</span><span class="k">const</span><span class="w"> </span><span class="n">Item</span><span class="o">&amp;</span><span class="w"> </span><span class="n">sa</span><span class="p">,</span><span class="w"> </span><span class="k">const</span><span class="w"> </span><span class="n">Item</span><span class="o">&amp;</span><span class="w"> </span><span class="n">sb</span><span class="p">)</span><span class="w"> </span><span class="p">{</span><span class="w"> </span><span class="k">return</span><span class="w"> </span><span class="n">sa</span><span class="p">.</span><span class="n">size</span><span class="p">()</span><span class="w"> </span><span class="o">&lt;</span><span class="w"> </span><span class="n">sb</span><span class="p">.</span><span class="n">size</span><span class="p">();</span><span class="w"> </span><span class="p">};</span><span class="w"> </span><span class="c1">// sort by element length, not content</span>
 
-    <span class="k">auto</span> <span class="n">cmpSrc</span> <span class="o">=</span> <span class="p">[</span><span class="n">itemCmp</span><span class="p">](</span><span class="k">const</span> <span class="n">Sample</span><span class="o">&amp;</span> <span class="n">a</span><span class="p">,</span> <span class="k">const</span> <span class="n">Sample</span><span class="o">&amp;</span> <span class="n">b</span><span class="p">)</span> <span class="p">{</span>
-      <span class="k">return</span> <span class="n">std</span><span class="o">::</span><span class="n">lexicographical_compare</span><span class="p">(</span>
-          <span class="n">a</span><span class="p">.</span><span class="n">begin</span><span class="p">(),</span> <span class="n">a</span><span class="p">.</span><span class="n">end</span><span class="p">(),</span> <span class="n">b</span><span class="p">.</span><span class="n">begin</span><span class="p">(),</span> <span class="n">b</span><span class="p">.</span><span class="n">end</span><span class="p">(),</span> <span class="n">itemCmp</span><span class="p">);</span>
-    <span class="p">};</span>
+<span class="w">    </span><span class="k">auto</span><span class="w"> </span><span class="n">cmpSrc</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="p">[</span><span class="n">itemCmp</span><span class="p">](</span><span class="k">const</span><span class="w"> </span><span class="n">Sample</span><span class="o">&amp;</span><span class="w"> </span><span class="n">a</span><span class="p">,</span><span class="w"> </span><span class="k">const</span><span class="w"> </span><span class="n">Sample</span><span class="o">&amp;</span><span class="w"> </span><span class="n">b</span><span class="p">)</span><span class="w"> </span><span class="p">{</span><span class="w"></span>
+<span class="w">      </span><span class="k">return</span><span class="w"> </span><span class="n">std</span><span class="o">::</span><span class="n">lexicographical_compare</span><span class="p">(</span><span class="w"></span>
+<span class="w">          </span><span class="n">a</span><span class="p">.</span><span class="n">begin</span><span class="p">(),</span><span class="w"> </span><span class="n">a</span><span class="p">.</span><span class="n">end</span><span class="p">(),</span><span class="w"> </span><span class="n">b</span><span class="p">.</span><span class="n">begin</span><span class="p">(),</span><span class="w"> </span><span class="n">b</span><span class="p">.</span><span class="n">end</span><span class="p">(),</span><span class="w"> </span><span class="n">itemCmp</span><span class="p">);</span><span class="w"></span>
+<span class="w">    </span><span class="p">};</span><span class="w"></span>
 
-    <span class="k">auto</span> <span class="n">cmpTrg</span> <span class="o">=</span> <span class="p">[</span><span class="n">itemCmp</span><span class="p">](</span><span class="k">const</span> <span class="n">Sample</span><span class="o">&amp;</span> <span class="n">a</span><span class="p">,</span> <span class="k">const</span> <span class="n">Sample</span><span class="o">&amp;</span> <span class="n">b</span><span class="p">)</span> <span class="p">{</span>
-      <span class="k">return</span> <span class="n">std</span><span class="o">::</span><span class="n">lexicographical_compare</span><span class="p">(</span>
-          <span class="n">a</span><span class="p">.</span><span class="n">rbegin</span><span class="p">(),</span> <span class="n">a</span><span class="p">.</span><span class="n">rend</span><span class="p">(),</span> <span class="n">b</span><span class="p">.</span><span class="n">rbegin</span><span class="p">(),</span> <span class="n">b</span><span class="p">.</span><span class="n">rend</span><span class="p">(),</span> <span class="n">itemCmp</span><span class="p">);</span>
-    <span class="p">};</span>
+<span class="w">    </span><span class="k">auto</span><span class="w"> </span><span class="n">cmpTrg</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="p">[</span><span class="n">itemCmp</span><span class="p">](</span><span class="k">const</span><span class="w"> </span><span class="n">Sample</span><span class="o">&amp;</span><span class="w"> </span><span class="n">a</span><span class="p">,</span><span class="w"> </span><span class="k">const</span><span class="w"> </span><span class="n">Sample</span><span class="o">&amp;</span><span class="w"> </span><span class="n">b</span><span class="p">)</span><span class="w"> </span><span class="p">{</span><span class="w"></span>
+<span class="w">      </span><span class="k">return</span><span class="w"> </span><span class="n">std</span><span class="o">::</span><span class="n">lexicographical_compare</span><span class="p">(</span><span class="w"></span>
+<span class="w">          </span><span class="n">a</span><span class="p">.</span><span class="n">rbegin</span><span class="p">(),</span><span class="w"> </span><span class="n">a</span><span class="p">.</span><span class="n">rend</span><span class="p">(),</span><span class="w"> </span><span class="n">b</span><span class="p">.</span><span class="n">rbegin</span><span class="p">(),</span><span class="w"> </span><span class="n">b</span><span class="p">.</span><span class="n">rend</span><span class="p">(),</span><span class="w"> </span><span class="n">itemCmp</span><span class="p">);</span><span class="w"></span>
+<span class="w">    </span><span class="p">};</span><span class="w"></span>
 
-    <span class="k">auto</span> <span class="n">cmpNone</span> <span class="o">=</span> <span class="p">[](</span><span class="k">const</span> <span class="n">Sample</span><span class="o">&amp;</span> <span class="n">a</span><span class="p">,</span> <span class="k">const</span> <span class="n">Sample</span><span class="o">&amp;</span> <span class="n">b</span><span class="p">)</span> <span class="p">{</span> <span class="k">return</span> <span class="n">a</span><span class="p">.</span><span class="n">getId</span><span class="p">()</span> <span class="o">&lt;</span> <span class="n">b</span><span class="p">.</span><span class="n">getId</span><span class="p">();</span> <span class="p">};</span> <span class="c1">// sort in order of original ids = original data order unless shuffling</span>
+<span class="w">    </span><span class="k">auto</span><span class="w"> </span><span class="n">cmpNone</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="p">[](</span><span class="k">const</span><span class="w"> </span><span class="n">Sample</span><span class="o">&amp;</span><span class="w"> </span><span class="n">a</span><span class="p">,</span><span class="w"> </span><span class="k">const</span><span class="w"> </span><span class="n">Sample</span><span class="o">&amp;</span><span class="w"> </span><span class="n">b</span><span class="p">)</span><span class="w"> </span><span class="p">{</span><span class="w"> </span><span class="k">return</span><span class="w"> </span><span class="n">a</span><span class="p">.</span><span class="n">getId</span><span class="p">()</span><span class="w"> </span><span class="o">&lt;</span><span class="w"> </span><span class="n">b</span><span class="p">.</span><span class="n">getId</span><span class="p">();</span><span class="w"> </span><span class="p">};</span><span class="w"> </span><span class="c1">// sort in order of original ids = original data order unless shuffling</span>
 
-    <span class="k">typedef</span> <span class="n">std</span><span class="o">::</span><span class="n">function</span><span class="o">&lt;</span><span class="kt">bool</span><span class="p">(</span><span class="k">const</span> <span class="n">Sample</span><span class="o">&amp;</span><span class="p">,</span> <span class="k">const</span> <span class="n">Sample</span><span class="o">&amp;</span><span class="p">)</span><span class="o">&gt;</span> <span class="n">cmp_type</span><span class="p">;</span>
-    <span class="k">typedef</span> <span class="n">std</span><span class="o">::</span><span class="n">priority_queue</span><span class="o">&lt;</span><span class="n">Sample</span><span class="p">,</span> <span class="n">Samples</span><span class="p">,</span> <span class="n">cmp_type</span><span class="o">&gt;</span> <span class="n">sample_queue</span><span class="p">;</span>
+<span class="w">    </span><span class="k">typedef</span><span class="w"> </span><span class="n">std</span><span class="o">::</span><span class="n">function</span><span class="o">&lt;</span><span class="kt">bool</span><span class="p">(</span><span class="k">const</span><span class="w"> </span><span class="n">Sample</span><span class="o">&amp;</span><span class="p">,</span><span class="w"> </span><span class="k">const</span><span class="w"> </span><span class="n">Sample</span><span class="o">&amp;</span><span class="p">)</span><span class="o">&gt;</span><span class="w"> </span><span class="n">cmp_type</span><span class="p">;</span><span class="w"></span>
+<span class="w">    </span><span class="k">typedef</span><span class="w"> </span><span class="n">std</span><span class="o">::</span><span class="n">priority_queue</span><span class="o">&lt;</span><span class="n">Sample</span><span class="p">,</span><span class="w"> </span><span class="n">Samples</span><span class="p">,</span><span class="w"> </span><span class="n">cmp_type</span><span class="o">&gt;</span><span class="w"> </span><span class="n">sample_queue</span><span class="p">;</span><span class="w"></span>
 
-    <span class="n">std</span><span class="o">::</span><span class="n">unique_ptr</span><span class="o">&lt;</span><span class="n">sample_queue</span><span class="o">&gt;</span> <span class="n">maxiBatch</span><span class="p">;</span> <span class="c1">// priority queue, shortest first</span>
+<span class="w">    </span><span class="n">std</span><span class="o">::</span><span class="n">unique_ptr</span><span class="o">&lt;</span><span class="n">sample_queue</span><span class="o">&gt;</span><span class="w"> </span><span class="n">maxiBatch</span><span class="p">;</span><span class="w"> </span><span class="c1">// priority queue, shortest first</span>
 
-    <span class="k">if</span><span class="p">(</span><span class="n">options_</span><span class="o">-&gt;</span><span class="n">has</span><span class="p">(</span><span class="s">&quot;maxi-batch-sort&quot;</span><span class="p">))</span> <span class="p">{</span>
-      <span class="k">if</span><span class="p">(</span><span class="n">options_</span><span class="o">-&gt;</span><span class="n">get</span><span class="o">&lt;</span><span class="n">std</span><span class="o">::</span><span class="n">string</span><span class="o">&gt;</span><span class="p">(</span><span class="s">&quot;maxi-batch-sort&quot;</span><span class="p">)</span> <span class="o">==</span> <span class="s">&quot;src&quot;</span><span class="p">)</span>
-        <span class="n">maxiBatch</span><span class="p">.</span><span class="n">reset</span><span class="p">(</span><span class="k">new</span> <span class="n">sample_queue</span><span class="p">(</span><span class="n">cmpSrc</span><span class="p">));</span>
-      <span class="k">else</span> <span class="nf">if</span><span class="p">(</span><span class="n">options_</span><span class="o">-&gt;</span><span class="n">get</span><span class="o">&lt;</span><span class="n">std</span><span class="o">::</span><span class="n">string</span><span class="o">&gt;</span><span class="p">(</span><span class="s">&quot;maxi-batch-sort&quot;</span><span class="p">)</span> <span class="o">==</span> <span class="s">&quot;none&quot;</span><span class="p">)</span>
-        <span class="n">maxiBatch</span><span class="p">.</span><span class="n">reset</span><span class="p">(</span><span class="k">new</span> <span class="n">sample_queue</span><span class="p">(</span><span class="n">cmpNone</span><span class="p">));</span>
-      <span class="k">else</span>
-        <span class="n">maxiBatch</span><span class="p">.</span><span class="n">reset</span><span class="p">(</span><span class="k">new</span> <span class="n">sample_queue</span><span class="p">(</span><span class="n">cmpTrg</span><span class="p">));</span>
-    <span class="p">}</span> <span class="k">else</span> <span class="p">{</span>
-      <span class="n">maxiBatch</span><span class="p">.</span><span class="n">reset</span><span class="p">(</span><span class="k">new</span> <span class="n">sample_queue</span><span class="p">(</span><span class="n">cmpNone</span><span class="p">));</span>
-    <span class="p">}</span>
+<span class="w">    </span><span class="k">if</span><span class="p">(</span><span class="n">options_</span><span class="o">-&gt;</span><span class="n">has</span><span class="p">(</span><span class="s">&quot;maxi-batch-sort&quot;</span><span class="p">))</span><span class="w"> </span><span class="p">{</span><span class="w"></span>
+<span class="w">      </span><span class="k">if</span><span class="p">(</span><span class="n">options_</span><span class="o">-&gt;</span><span class="n">get</span><span class="o">&lt;</span><span class="n">std</span><span class="o">::</span><span class="n">string</span><span class="o">&gt;</span><span class="p">(</span><span class="s">&quot;maxi-batch-sort&quot;</span><span class="p">)</span><span class="w"> </span><span class="o">==</span><span class="w"> </span><span class="s">&quot;src&quot;</span><span class="p">)</span><span class="w"></span>
+<span class="w">        </span><span class="n">maxiBatch</span><span class="p">.</span><span class="n">reset</span><span class="p">(</span><span class="k">new</span><span class="w"> </span><span class="n">sample_queue</span><span class="p">(</span><span class="n">cmpSrc</span><span class="p">));</span><span class="w"></span>
+<span class="w">      </span><span class="k">else</span><span class="w"> </span><span class="k">if</span><span class="p">(</span><span class="n">options_</span><span class="o">-&gt;</span><span class="n">get</span><span class="o">&lt;</span><span class="n">std</span><span class="o">::</span><span class="n">string</span><span class="o">&gt;</span><span class="p">(</span><span class="s">&quot;maxi-batch-sort&quot;</span><span class="p">)</span><span class="w"> </span><span class="o">==</span><span class="w"> </span><span class="s">&quot;none&quot;</span><span class="p">)</span><span class="w"></span>
+<span class="w">        </span><span class="n">maxiBatch</span><span class="p">.</span><span class="n">reset</span><span class="p">(</span><span class="k">new</span><span class="w"> </span><span class="n">sample_queue</span><span class="p">(</span><span class="n">cmpNone</span><span class="p">));</span><span class="w"></span>
+<span class="w">      </span><span class="k">else</span><span class="w"></span>
+<span class="w">        </span><span class="n">maxiBatch</span><span class="p">.</span><span class="n">reset</span><span class="p">(</span><span class="k">new</span><span class="w"> </span><span class="n">sample_queue</span><span class="p">(</span><span class="n">cmpTrg</span><span class="p">));</span><span class="w"></span>
+<span class="w">    </span><span class="p">}</span><span class="w"> </span><span class="k">else</span><span class="w"> </span><span class="p">{</span><span class="w"></span>
+<span class="w">      </span><span class="n">maxiBatch</span><span class="p">.</span><span class="n">reset</span><span class="p">(</span><span class="k">new</span><span class="w"> </span><span class="n">sample_queue</span><span class="p">(</span><span class="n">cmpNone</span><span class="p">));</span><span class="w"></span>
+<span class="w">    </span><span class="p">}</span><span class="w"></span>
 
-    <span class="kt">size_t</span> <span class="n">maxBatchSize</span> <span class="o">=</span> <span class="n">options_</span><span class="o">-&gt;</span><span class="n">get</span><span class="o">&lt;</span><span class="kt">int</span><span class="o">&gt;</span><span class="p">(</span><span class="s">&quot;mini-batch&quot;</span><span class="p">);</span>
-    <span class="kt">size_t</span> <span class="n">maxSize</span> <span class="o">=</span> <span class="n">maxBatchSize</span> <span class="o">*</span> <span class="n">options_</span><span class="o">-&gt;</span><span class="n">get</span><span class="o">&lt;</span><span class="kt">int</span><span class="o">&gt;</span><span class="p">(</span><span class="s">&quot;maxi-batch&quot;</span><span class="p">);</span>
+<span class="w">    </span><span class="kt">size_t</span><span class="w"> </span><span class="n">maxBatchSize</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="n">options_</span><span class="o">-&gt;</span><span class="n">get</span><span class="o">&lt;</span><span class="kt">int</span><span class="o">&gt;</span><span class="p">(</span><span class="s">&quot;mini-batch&quot;</span><span class="p">);</span><span class="w"></span>
+<span class="w">    </span><span class="kt">size_t</span><span class="w"> </span><span class="n">maxSize</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="n">maxBatchSize</span><span class="w"> </span><span class="o">*</span><span class="w"> </span><span class="n">options_</span><span class="o">-&gt;</span><span class="n">get</span><span class="o">&lt;</span><span class="kt">int</span><span class="o">&gt;</span><span class="p">(</span><span class="s">&quot;maxi-batch&quot;</span><span class="p">);</span><span class="w"></span>
 
-    <span class="c1">// consume data from corpus into maxi-batch (single sentences)</span>
-    <span class="c1">// sorted into specified order (due to queue)</span>
-    <span class="k">if</span><span class="p">(</span><span class="n">newlyPrepared_</span><span class="p">)</span> <span class="p">{</span>
-      <span class="n">current_</span> <span class="o">=</span> <span class="n">data_</span><span class="o">-&gt;</span><span class="n">begin</span><span class="p">();</span>
-      <span class="n">newlyPrepared_</span> <span class="o">=</span> <span class="nb">false</span><span class="p">;</span>
-    <span class="p">}</span> <span class="k">else</span> <span class="p">{</span>
-      <span class="k">if</span><span class="p">(</span><span class="n">current_</span> <span class="o">!=</span> <span class="n">data_</span><span class="o">-&gt;</span><span class="n">end</span><span class="p">())</span>
-        <span class="o">++</span><span class="n">current_</span><span class="p">;</span>
-    <span class="p">}</span>
-    <span class="kt">size_t</span> <span class="n">sets</span> <span class="o">=</span> <span class="mi">0</span><span class="p">;</span>
-    <span class="k">while</span><span class="p">(</span><span class="n">current_</span> <span class="o">!=</span> <span class="n">data_</span><span class="o">-&gt;</span><span class="n">end</span><span class="p">()</span> <span class="o">&amp;&amp;</span> <span class="n">maxiBatch</span><span class="o">-&gt;</span><span class="n">size</span><span class="p">()</span> <span class="o">&lt;</span> <span class="n">maxSize</span><span class="p">)</span> <span class="p">{</span> <span class="c1">// loop over data</span>
-      <span class="k">if</span> <span class="p">(</span><span class="n">saveAndExitRequested</span><span class="p">())</span> <span class="c1">// stop generating batches</span>
-        <span class="k">return</span> <span class="n">std</span><span class="o">::</span><span class="n">deque</span><span class="o">&lt;</span><span class="n">BatchPtr</span><span class="o">&gt;</span><span class="p">();</span>
-      <span class="n">maxiBatch</span><span class="o">-&gt;</span><span class="n">push</span><span class="p">(</span><span class="o">*</span><span class="n">current_</span><span class="p">);</span>
-      <span class="n">sets</span> <span class="o">=</span> <span class="n">current_</span><span class="o">-&gt;</span><span class="n">size</span><span class="p">();</span>
-      <span class="c1">// do not consume more than required for the maxi batch as this causes</span>
-      <span class="c1">// that line-by-line translation is delayed by one sentence</span>
-      <span class="kt">bool</span> <span class="n">last</span> <span class="o">=</span> <span class="n">maxiBatch</span><span class="o">-&gt;</span><span class="n">size</span><span class="p">()</span> <span class="o">==</span> <span class="n">maxSize</span><span class="p">;</span>
-      <span class="k">if</span><span class="p">(</span><span class="o">!</span><span class="n">last</span><span class="p">)</span>
-        <span class="o">++</span><span class="n">current_</span><span class="p">;</span> <span class="c1">// this actually reads the next line and pre-processes it</span>
-    <span class="p">}</span>
-    <span class="kt">size_t</span> <span class="n">numSentencesRead</span> <span class="o">=</span> <span class="n">maxiBatch</span><span class="o">-&gt;</span><span class="n">size</span><span class="p">();</span>
+<span class="w">    </span><span class="c1">// consume data from corpus into maxi-batch (single sentences)</span>
+<span class="w">    </span><span class="c1">// sorted into specified order (due to queue)</span>
+<span class="w">    </span><span class="k">if</span><span class="p">(</span><span class="n">newlyPrepared_</span><span class="p">)</span><span class="w"> </span><span class="p">{</span><span class="w"></span>
+<span class="w">      </span><span class="n">current_</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="n">data_</span><span class="o">-&gt;</span><span class="n">begin</span><span class="p">();</span><span class="w"></span>
+<span class="w">      </span><span class="n">newlyPrepared_</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="nb">false</span><span class="p">;</span><span class="w"></span>
+<span class="w">    </span><span class="p">}</span><span class="w"> </span><span class="k">else</span><span class="w"> </span><span class="p">{</span><span class="w"></span>
+<span class="w">      </span><span class="k">if</span><span class="p">(</span><span class="n">current_</span><span class="w"> </span><span class="o">!=</span><span class="w"> </span><span class="n">data_</span><span class="o">-&gt;</span><span class="n">end</span><span class="p">())</span><span class="w"></span>
+<span class="w">        </span><span class="o">++</span><span class="n">current_</span><span class="p">;</span><span class="w"></span>
+<span class="w">    </span><span class="p">}</span><span class="w"></span>
+<span class="w">    </span><span class="kt">size_t</span><span class="w"> </span><span class="n">sets</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="mi">0</span><span class="p">;</span><span class="w"></span>
+<span class="w">    </span><span class="k">while</span><span class="p">(</span><span class="n">current_</span><span class="w"> </span><span class="o">!=</span><span class="w"> </span><span class="n">data_</span><span class="o">-&gt;</span><span class="n">end</span><span class="p">()</span><span class="w"> </span><span class="o">&amp;&amp;</span><span class="w"> </span><span class="n">maxiBatch</span><span class="o">-&gt;</span><span class="n">size</span><span class="p">()</span><span class="w"> </span><span class="o">&lt;</span><span class="w"> </span><span class="n">maxSize</span><span class="p">)</span><span class="w"> </span><span class="p">{</span><span class="w"> </span><span class="c1">// loop over data</span>
+<span class="w">      </span><span class="k">if</span><span class="w"> </span><span class="p">(</span><span class="n">saveAndExitRequested</span><span class="p">())</span><span class="w"> </span><span class="c1">// stop generating batches</span>
+<span class="w">        </span><span class="k">return</span><span class="w"> </span><span class="n">std</span><span class="o">::</span><span class="n">deque</span><span class="o">&lt;</span><span class="n">BatchPtr</span><span class="o">&gt;</span><span class="p">();</span><span class="w"></span>
+<span class="w">      </span><span class="n">maxiBatch</span><span class="o">-&gt;</span><span class="n">push</span><span class="p">(</span><span class="o">*</span><span class="n">current_</span><span class="p">);</span><span class="w"></span>
+<span class="w">      </span><span class="n">sets</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="n">current_</span><span class="o">-&gt;</span><span class="n">size</span><span class="p">();</span><span class="w"></span>
+<span class="w">      </span><span class="c1">// do not consume more than required for the maxi batch as this causes</span>
+<span class="w">      </span><span class="c1">// that line-by-line translation is delayed by one sentence</span>
+<span class="w">      </span><span class="kt">bool</span><span class="w"> </span><span class="n">last</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="n">maxiBatch</span><span class="o">-&gt;</span><span class="n">size</span><span class="p">()</span><span class="w"> </span><span class="o">==</span><span class="w"> </span><span class="n">maxSize</span><span class="p">;</span><span class="w"></span>
+<span class="w">      </span><span class="k">if</span><span class="p">(</span><span class="o">!</span><span class="n">last</span><span class="p">)</span><span class="w"></span>
+<span class="w">        </span><span class="o">++</span><span class="n">current_</span><span class="p">;</span><span class="w"> </span><span class="c1">// this actually reads the next line and pre-processes it</span>
+<span class="w">    </span><span class="p">}</span><span class="w"></span>
+<span class="w">    </span><span class="kt">size_t</span><span class="w"> </span><span class="n">numSentencesRead</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="n">maxiBatch</span><span class="o">-&gt;</span><span class="n">size</span><span class="p">();</span><span class="w"></span>
 
-    <span class="c1">// construct the actual batches and place them in the queue</span>
-    <span class="n">Samples</span> <span class="n">batchVector</span><span class="p">;</span>
-    <span class="kt">size_t</span> <span class="n">currentWords</span> <span class="o">=</span> <span class="mi">0</span><span class="p">;</span>
-    <span class="n">std</span><span class="o">::</span><span class="n">vector</span><span class="o">&lt;</span><span class="kt">size_t</span><span class="o">&gt;</span> <span class="n">lengths</span><span class="p">(</span><span class="n">sets</span><span class="p">,</span> <span class="mi">0</span><span class="p">);</span> <span class="c1">// records maximum length observed within current batch</span>
+<span class="w">    </span><span class="c1">// construct the actual batches and place them in the queue</span>
+<span class="w">    </span><span class="n">Samples</span><span class="w"> </span><span class="n">batchVector</span><span class="p">;</span><span class="w"></span>
+<span class="w">    </span><span class="kt">size_t</span><span class="w"> </span><span class="n">currentWords</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="mi">0</span><span class="p">;</span><span class="w"></span>
+<span class="w">    </span><span class="n">std</span><span class="o">::</span><span class="n">vector</span><span class="o">&lt;</span><span class="kt">size_t</span><span class="o">&gt;</span><span class="w"> </span><span class="n">lengths</span><span class="p">(</span><span class="n">sets</span><span class="p">,</span><span class="w"> </span><span class="mi">0</span><span class="p">);</span><span class="w"> </span><span class="c1">// records maximum length observed within current batch</span>
 
-    <span class="n">std</span><span class="o">::</span><span class="n">deque</span><span class="o">&lt;</span><span class="n">BatchPtr</span><span class="o">&gt;</span> <span class="n">tempBatches</span><span class="p">;</span>
+<span class="w">    </span><span class="n">std</span><span class="o">::</span><span class="n">deque</span><span class="o">&lt;</span><span class="n">BatchPtr</span><span class="o">&gt;</span><span class="w"> </span><span class="n">tempBatches</span><span class="p">;</span><span class="w"></span>
 
-    <span class="c1">// process all loaded sentences in order of increasing length</span>
-    <span class="c1">// @TODO: we could just use a vector and do a sort() here; would make the cost more explicit</span>
-    <span class="k">const</span> <span class="kt">size_t</span> <span class="n">mbWords</span> <span class="o">=</span> <span class="n">options_</span><span class="o">-&gt;</span><span class="n">get</span><span class="o">&lt;</span><span class="kt">size_t</span><span class="o">&gt;</span><span class="p">(</span><span class="s">&quot;mini-batch-words&quot;</span><span class="p">,</span> <span class="mi">0</span><span class="p">);</span>
-    <span class="k">const</span> <span class="kt">bool</span> <span class="n">useDynamicBatching</span> <span class="o">=</span> <span class="n">options_</span><span class="o">-&gt;</span><span class="n">has</span><span class="p">(</span><span class="s">&quot;mini-batch-fit&quot;</span><span class="p">);</span>
-    <span class="n">BatchStats</span><span class="o">::</span><span class="n">const_iterator</span> <span class="n">cachedStatsIter</span><span class="p">;</span>
-    <span class="k">if</span> <span class="p">(</span><span class="n">stats_</span><span class="p">)</span>
-      <span class="n">cachedStatsIter</span> <span class="o">=</span> <span class="n">stats_</span><span class="o">-&gt;</span><span class="n">begin</span><span class="p">();</span>
-    <span class="k">while</span><span class="p">(</span><span class="o">!</span><span class="n">maxiBatch</span><span class="o">-&gt;</span><span class="n">empty</span><span class="p">())</span> <span class="p">{</span> <span class="c1">// while there are sentences in the queue</span>
-      <span class="k">if</span> <span class="p">(</span><span class="n">saveAndExitRequested</span><span class="p">())</span> <span class="c1">// stop generating batches</span>
-        <span class="k">return</span> <span class="n">std</span><span class="o">::</span><span class="n">deque</span><span class="o">&lt;</span><span class="n">BatchPtr</span><span class="o">&gt;</span><span class="p">();</span>
-      <span class="c1">// push item onto batch</span>
-      <span class="n">batchVector</span><span class="p">.</span><span class="n">push_back</span><span class="p">(</span><span class="n">maxiBatch</span><span class="o">-&gt;</span><span class="n">top</span><span class="p">());</span>
-      <span class="n">maxiBatch</span><span class="o">-&gt;</span><span class="n">pop</span><span class="p">();</span> <span class="c1">// fetch next-shortest</span>
+<span class="w">    </span><span class="c1">// process all loaded sentences in order of increasing length</span>
+<span class="w">    </span><span class="c1">// @TODO: we could just use a vector and do a sort() here; would make the cost more explicit</span>
+<span class="w">    </span><span class="k">const</span><span class="w"> </span><span class="kt">size_t</span><span class="w"> </span><span class="n">mbWords</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="n">options_</span><span class="o">-&gt;</span><span class="n">get</span><span class="o">&lt;</span><span class="kt">size_t</span><span class="o">&gt;</span><span class="p">(</span><span class="s">&quot;mini-batch-words&quot;</span><span class="p">,</span><span class="w"> </span><span class="mi">0</span><span class="p">);</span><span class="w"></span>
+<span class="w">    </span><span class="k">const</span><span class="w"> </span><span class="kt">bool</span><span class="w"> </span><span class="n">useDynamicBatching</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="n">options_</span><span class="o">-&gt;</span><span class="n">has</span><span class="p">(</span><span class="s">&quot;mini-batch-fit&quot;</span><span class="p">);</span><span class="w"></span>
+<span class="w">    </span><span class="n">BatchStats</span><span class="o">::</span><span class="n">const_iterator</span><span class="w"> </span><span class="n">cachedStatsIter</span><span class="p">;</span><span class="w"></span>
+<span class="w">    </span><span class="k">if</span><span class="w"> </span><span class="p">(</span><span class="n">stats_</span><span class="p">)</span><span class="w"></span>
+<span class="w">      </span><span class="n">cachedStatsIter</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="n">stats_</span><span class="o">-&gt;</span><span class="n">begin</span><span class="p">();</span><span class="w"></span>
+<span class="w">    </span><span class="k">while</span><span class="p">(</span><span class="o">!</span><span class="n">maxiBatch</span><span class="o">-&gt;</span><span class="n">empty</span><span class="p">())</span><span class="w"> </span><span class="p">{</span><span class="w"> </span><span class="c1">// while there are sentences in the queue</span>
+<span class="w">      </span><span class="k">if</span><span class="w"> </span><span class="p">(</span><span class="n">saveAndExitRequested</span><span class="p">())</span><span class="w"> </span><span class="c1">// stop generating batches</span>
+<span class="w">        </span><span class="k">return</span><span class="w"> </span><span class="n">std</span><span class="o">::</span><span class="n">deque</span><span class="o">&lt;</span><span class="n">BatchPtr</span><span class="o">&gt;</span><span class="p">();</span><span class="w"></span>
+<span class="w">      </span><span class="c1">// push item onto batch</span>
+<span class="w">      </span><span class="n">batchVector</span><span class="p">.</span><span class="n">push_back</span><span class="p">(</span><span class="n">maxiBatch</span><span class="o">-&gt;</span><span class="n">top</span><span class="p">());</span><span class="w"></span>
+<span class="w">      </span><span class="n">maxiBatch</span><span class="o">-&gt;</span><span class="n">pop</span><span class="p">();</span><span class="w"> </span><span class="c1">// fetch next-shortest</span>
 
-      <span class="c1">// have we reached sufficient amount of data to form a batch?</span>
-      <span class="kt">bool</span> <span class="n">makeBatch</span><span class="p">;</span>
-      <span class="k">if</span><span class="p">(</span><span class="n">useDynamicBatching</span> <span class="o">&amp;&amp;</span> <span class="n">stats_</span><span class="p">)</span> <span class="p">{</span> <span class="c1">// batch size based on dynamic batching</span>
-        <span class="k">for</span><span class="p">(</span><span class="kt">size_t</span> <span class="n">i</span> <span class="o">=</span> <span class="mi">0</span><span class="p">;</span> <span class="n">i</span> <span class="o">&lt;</span> <span class="n">sets</span><span class="p">;</span> <span class="o">++</span><span class="n">i</span><span class="p">)</span>
-          <span class="k">if</span><span class="p">(</span><span class="n">batchVector</span><span class="p">.</span><span class="n">back</span><span class="p">()[</span><span class="n">i</span><span class="p">].</span><span class="n">size</span><span class="p">()</span> <span class="o">&gt;</span> <span class="n">lengths</span><span class="p">[</span><span class="n">i</span><span class="p">])</span>
-            <span class="n">lengths</span><span class="p">[</span><span class="n">i</span><span class="p">]</span> <span class="o">=</span> <span class="n">batchVector</span><span class="p">.</span><span class="n">back</span><span class="p">()[</span><span class="n">i</span><span class="p">].</span><span class="n">size</span><span class="p">();</span> <span class="c1">// record max lengths so far</span>
+<span class="w">      </span><span class="c1">// have we reached sufficient amount of data to form a batch?</span>
+<span class="w">      </span><span class="kt">bool</span><span class="w"> </span><span class="n">makeBatch</span><span class="p">;</span><span class="w"></span>
+<span class="w">      </span><span class="k">if</span><span class="p">(</span><span class="n">useDynamicBatching</span><span class="w"> </span><span class="o">&amp;&amp;</span><span class="w"> </span><span class="n">stats_</span><span class="p">)</span><span class="w"> </span><span class="p">{</span><span class="w"> </span><span class="c1">// batch size based on dynamic batching</span>
+<span class="w">        </span><span class="k">for</span><span class="p">(</span><span class="kt">size_t</span><span class="w"> </span><span class="n">i</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="mi">0</span><span class="p">;</span><span class="w"> </span><span class="n">i</span><span class="w"> </span><span class="o">&lt;</span><span class="w"> </span><span class="n">sets</span><span class="p">;</span><span class="w"> </span><span class="o">++</span><span class="n">i</span><span class="p">)</span><span class="w"></span>
+<span class="w">          </span><span class="k">if</span><span class="p">(</span><span class="n">batchVector</span><span class="p">.</span><span class="n">back</span><span class="p">()[</span><span class="n">i</span><span class="p">].</span><span class="n">size</span><span class="p">()</span><span class="w"> </span><span class="o">&gt;</span><span class="w"> </span><span class="n">lengths</span><span class="p">[</span><span class="n">i</span><span class="p">])</span><span class="w"></span>
+<span class="w">            </span><span class="n">lengths</span><span class="p">[</span><span class="n">i</span><span class="p">]</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="n">batchVector</span><span class="p">.</span><span class="n">back</span><span class="p">()[</span><span class="n">i</span><span class="p">].</span><span class="n">size</span><span class="p">();</span><span class="w"> </span><span class="c1">// record max lengths so far</span>
 
-        <span class="n">maxBatchSize</span> <span class="o">=</span> <span class="n">stats_</span><span class="o">-&gt;</span><span class="n">findBatchSize</span><span class="p">(</span><span class="n">lengths</span><span class="p">,</span> <span class="n">cachedStatsIter</span><span class="p">);</span>
-        <span class="c1">// this optimization makes no difference indeed</span>
+<span class="w">        </span><span class="n">maxBatchSize</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="n">stats_</span><span class="o">-&gt;</span><span class="n">findBatchSize</span><span class="p">(</span><span class="n">lengths</span><span class="p">,</span><span class="w"> </span><span class="n">cachedStatsIter</span><span class="p">);</span><span class="w"></span>
+<span class="w">        </span><span class="c1">// this optimization makes no difference indeed</span>
 <span class="cp">#if 0</span><span class="c">   // sanity check: would we find the same entry if searching from the start?</span>
 <span class="c">        auto it = stats_-&gt;lower_bound(lengths);</span>
 <span class="c">        auto maxBatchSize1 = stats_-&gt;findBatchSize(lengths, it);</span>
 <span class="c">        ABORT_IF(maxBatchSize != maxBatchSize1, &quot;findBatchSize iter caching logic is borked&quot;);</span>
 <span class="cp">#endif</span>
-        <span class="n">makeBatch</span> <span class="o">=</span> <span class="n">batchVector</span><span class="p">.</span><span class="n">size</span><span class="p">()</span> <span class="o">&gt;=</span> <span class="n">maxBatchSize</span><span class="p">;</span>
-        <span class="c1">// if last added sentence caused a bump then we likely have bad padding, so rather move it into the next batch</span>
-        <span class="k">if</span><span class="p">(</span><span class="n">batchVector</span><span class="p">.</span><span class="n">size</span><span class="p">()</span> <span class="o">&gt;</span> <span class="n">maxBatchSize</span><span class="p">)</span> <span class="p">{</span>
-          <span class="n">maxiBatch</span><span class="o">-&gt;</span><span class="n">push</span><span class="p">(</span><span class="n">batchVector</span><span class="p">.</span><span class="n">back</span><span class="p">());</span>
-          <span class="n">batchVector</span><span class="p">.</span><span class="n">pop_back</span><span class="p">();</span>
-        <span class="p">}</span>
-      <span class="p">}</span>
-      <span class="k">else</span> <span class="k">if</span><span class="p">(</span><span class="n">mbWords</span> <span class="o">&gt;</span> <span class="mi">0</span><span class="p">)</span> <span class="p">{</span>
-        <span class="n">currentWords</span> <span class="o">+=</span> <span class="n">batchVector</span><span class="p">.</span><span class="n">back</span><span class="p">()[</span><span class="mi">0</span><span class="p">].</span><span class="n">size</span><span class="p">();</span> <span class="c1">// count words based on first stream =source  --@TODO: shouldn&#39;t we count based on labels?</span>
-        <span class="n">makeBatch</span> <span class="o">=</span> <span class="n">currentWords</span> <span class="o">&gt;</span> <span class="n">mbWords</span><span class="p">;</span> <span class="c1">// Batch size based on sentences</span>
-      <span class="p">}</span>
-      <span class="k">else</span>
-        <span class="n">makeBatch</span> <span class="o">=</span> <span class="n">batchVector</span><span class="p">.</span><span class="n">size</span><span class="p">()</span> <span class="o">==</span> <span class="n">maxBatchSize</span><span class="p">;</span> <span class="c1">// Batch size based on words</span>
+<span class="w">        </span><span class="n">makeBatch</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="n">batchVector</span><span class="p">.</span><span class="n">size</span><span class="p">()</span><span class="w"> </span><span class="o">&gt;=</span><span class="w"> </span><span class="n">maxBatchSize</span><span class="p">;</span><span class="w"></span>
+<span class="w">        </span><span class="c1">// if last added sentence caused a bump then we likely have bad padding, so rather move it into the next batch</span>
+<span class="w">        </span><span class="k">if</span><span class="p">(</span><span class="n">batchVector</span><span class="p">.</span><span class="n">size</span><span class="p">()</span><span class="w"> </span><span class="o">&gt;</span><span class="w"> </span><span class="n">maxBatchSize</span><span class="p">)</span><span class="w"> </span><span class="p">{</span><span class="w"></span>
+<span class="w">          </span><span class="n">maxiBatch</span><span class="o">-&gt;</span><span class="n">push</span><span class="p">(</span><span class="n">batchVector</span><span class="p">.</span><span class="n">back</span><span class="p">());</span><span class="w"></span>
+<span class="w">          </span><span class="n">batchVector</span><span class="p">.</span><span class="n">pop_back</span><span class="p">();</span><span class="w"></span>
+<span class="w">        </span><span class="p">}</span><span class="w"></span>
+<span class="w">      </span><span class="p">}</span><span class="w"></span>
+<span class="w">      </span><span class="k">else</span><span class="w"> </span><span class="k">if</span><span class="p">(</span><span class="n">mbWords</span><span class="w"> </span><span class="o">&gt;</span><span class="w"> </span><span class="mi">0</span><span class="p">)</span><span class="w"> </span><span class="p">{</span><span class="w"></span>
+<span class="w">        </span><span class="n">currentWords</span><span class="w"> </span><span class="o">+=</span><span class="w"> </span><span class="n">batchVector</span><span class="p">.</span><span class="n">back</span><span class="p">()[</span><span class="mi">0</span><span class="p">].</span><span class="n">size</span><span class="p">();</span><span class="w"> </span><span class="c1">// count words based on first stream =source  --@TODO: shouldn&#39;t we count based on labels?</span>
+<span class="w">        </span><span class="n">makeBatch</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="n">currentWords</span><span class="w"> </span><span class="o">&gt;</span><span class="w"> </span><span class="n">mbWords</span><span class="p">;</span><span class="w"> </span><span class="c1">// Batch size based on sentences</span>
+<span class="w">      </span><span class="p">}</span><span class="w"></span>
+<span class="w">      </span><span class="k">else</span><span class="w"></span>
+<span class="w">        </span><span class="n">makeBatch</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="n">batchVector</span><span class="p">.</span><span class="n">size</span><span class="p">()</span><span class="w"> </span><span class="o">==</span><span class="w"> </span><span class="n">maxBatchSize</span><span class="p">;</span><span class="w"> </span><span class="c1">// Batch size based on words</span>
 
-      <span class="c1">// if we reached the desired batch size then create a real batch</span>
-      <span class="k">if</span><span class="p">(</span><span class="n">makeBatch</span><span class="p">)</span> <span class="p">{</span>
-        <span class="n">tempBatches</span><span class="p">.</span><span class="n">push_back</span><span class="p">(</span><span class="n">data_</span><span class="o">-&gt;</span><span class="n">toBatch</span><span class="p">(</span><span class="n">batchVector</span><span class="p">));</span>
+<span class="w">      </span><span class="c1">// if we reached the desired batch size then create a real batch</span>
+<span class="w">      </span><span class="k">if</span><span class="p">(</span><span class="n">makeBatch</span><span class="p">)</span><span class="w"> </span><span class="p">{</span><span class="w"></span>
+<span class="w">        </span><span class="n">tempBatches</span><span class="p">.</span><span class="n">push_back</span><span class="p">(</span><span class="n">data_</span><span class="o">-&gt;</span><span class="n">toBatch</span><span class="p">(</span><span class="n">batchVector</span><span class="p">));</span><span class="w"></span>
 
-        <span class="c1">// prepare for next batch</span>
-        <span class="n">batchVector</span><span class="p">.</span><span class="n">clear</span><span class="p">();</span>
-        <span class="n">currentWords</span> <span class="o">=</span> <span class="mi">0</span><span class="p">;</span>
-        <span class="n">lengths</span><span class="p">.</span><span class="n">assign</span><span class="p">(</span><span class="n">sets</span><span class="p">,</span> <span class="mi">0</span><span class="p">);</span>
-        <span class="k">if</span> <span class="p">(</span><span class="n">stats_</span><span class="p">)</span>
-          <span class="n">cachedStatsIter</span> <span class="o">=</span> <span class="n">stats_</span><span class="o">-&gt;</span><span class="n">begin</span><span class="p">();</span>
-      <span class="p">}</span>
-    <span class="p">}</span>
+<span class="w">        </span><span class="c1">// prepare for next batch</span>
+<span class="w">        </span><span class="n">batchVector</span><span class="p">.</span><span class="n">clear</span><span class="p">();</span><span class="w"></span>
+<span class="w">        </span><span class="n">currentWords</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="mi">0</span><span class="p">;</span><span class="w"></span>
+<span class="w">        </span><span class="n">lengths</span><span class="p">.</span><span class="n">assign</span><span class="p">(</span><span class="n">sets</span><span class="p">,</span><span class="w"> </span><span class="mi">0</span><span class="p">);</span><span class="w"></span>
+<span class="w">        </span><span class="k">if</span><span class="w"> </span><span class="p">(</span><span class="n">stats_</span><span class="p">)</span><span class="w"></span>
+<span class="w">          </span><span class="n">cachedStatsIter</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="n">stats_</span><span class="o">-&gt;</span><span class="n">begin</span><span class="p">();</span><span class="w"></span>
+<span class="w">      </span><span class="p">}</span><span class="w"></span>
+<span class="w">    </span><span class="p">}</span><span class="w"></span>
 
-    <span class="c1">// turn rest into batch</span>
-    <span class="c1">// @BUGBUG: This can create a very small batch, which with ce-mean-words can artificially</span>
-    <span class="c1">// inflate the contribution of the sames in the batch, causing instability.</span>
-    <span class="c1">// I think a good alternative would be to carry over the left-over sentences into the next round.</span>
-    <span class="k">if</span><span class="p">(</span><span class="o">!</span><span class="n">batchVector</span><span class="p">.</span><span class="n">empty</span><span class="p">())</span>
-      <span class="n">tempBatches</span><span class="p">.</span><span class="n">push_back</span><span class="p">(</span><span class="n">data_</span><span class="o">-&gt;</span><span class="n">toBatch</span><span class="p">(</span><span class="n">batchVector</span><span class="p">));</span>
+<span class="w">    </span><span class="c1">// turn rest into batch</span>
+<span class="w">    </span><span class="c1">// @BUGBUG: This can create a very small batch, which with ce-mean-words can artificially</span>
+<span class="w">    </span><span class="c1">// inflate the contribution of the sames in the batch, causing instability.</span>
+<span class="w">    </span><span class="c1">// I think a good alternative would be to carry over the left-over sentences into the next round.</span>
+<span class="w">    </span><span class="k">if</span><span class="p">(</span><span class="o">!</span><span class="n">batchVector</span><span class="p">.</span><span class="n">empty</span><span class="p">())</span><span class="w"></span>
+<span class="w">      </span><span class="n">tempBatches</span><span class="p">.</span><span class="n">push_back</span><span class="p">(</span><span class="n">data_</span><span class="o">-&gt;</span><span class="n">toBatch</span><span class="p">(</span><span class="n">batchVector</span><span class="p">));</span><span class="w"></span>
 
-    <span class="c1">// Shuffle the batches</span>
-    <span class="k">if</span><span class="p">(</span><span class="n">shuffleBatches_</span><span class="p">)</span> <span class="p">{</span>
-      <span class="n">std</span><span class="o">::</span><span class="n">shuffle</span><span class="p">(</span><span class="n">tempBatches</span><span class="p">.</span><span class="n">begin</span><span class="p">(),</span> <span class="n">tempBatches</span><span class="p">.</span><span class="n">end</span><span class="p">(),</span> <span class="n">eng_</span><span class="p">);</span>
-    <span class="p">}</span>
-    <span class="kt">double</span> <span class="n">totalSent</span><span class="p">{},</span> <span class="n">totalLabels</span><span class="p">{};</span>
-    <span class="k">for</span> <span class="p">(</span><span class="k">auto</span><span class="o">&amp;</span> <span class="nl">b</span> <span class="p">:</span> <span class="n">tempBatches</span><span class="p">)</span> <span class="p">{</span>
-      <span class="n">totalSent</span> <span class="o">+=</span> <span class="p">(</span><span class="kt">double</span><span class="p">)</span><span class="n">b</span><span class="o">-&gt;</span><span class="n">size</span><span class="p">();</span>
-      <span class="n">totalLabels</span> <span class="o">+=</span> <span class="p">(</span><span class="kt">double</span><span class="p">)</span><span class="n">b</span><span class="o">-&gt;</span><span class="n">words</span><span class="p">(</span><span class="mi">-1</span><span class="p">);</span>
-    <span class="p">}</span>
-    <span class="k">auto</span> <span class="n">totalDenom</span> <span class="o">=</span> <span class="n">tempBatches</span><span class="p">.</span><span class="n">empty</span><span class="p">()</span> <span class="o">?</span> <span class="mi">1</span> <span class="o">:</span> <span class="n">tempBatches</span><span class="p">.</span><span class="n">size</span><span class="p">();</span> <span class="c1">// (make 0/0 = 0)</span>
-    <span class="n">LOG</span><span class="p">(</span><span class="n">debug</span><span class="p">,</span> <span class="s">&quot;[data] fetched {} batches with {} sentences. Per batch: {} sentences, {} labels.&quot;</span><span class="p">,</span>
-        <span class="n">tempBatches</span><span class="p">.</span><span class="n">size</span><span class="p">(),</span> <span class="n">numSentencesRead</span><span class="p">,</span>
-        <span class="p">(</span><span class="kt">double</span><span class="p">)</span><span class="n">totalSent</span> <span class="o">/</span> <span class="p">(</span><span class="kt">double</span><span class="p">)</span><span class="n">totalDenom</span><span class="p">,</span> <span class="p">(</span><span class="kt">double</span><span class="p">)</span><span class="n">totalLabels</span> <span class="o">/</span> <span class="p">(</span><span class="kt">double</span><span class="p">)</span><span class="n">totalDenom</span><span class="p">);</span>
-    <span class="k">return</span> <span class="n">tempBatches</span><span class="p">;</span>
-  <span class="p">}</span>
+<span class="w">    </span><span class="c1">// Shuffle the batches</span>
+<span class="w">    </span><span class="k">if</span><span class="p">(</span><span class="n">shuffleBatches_</span><span class="p">)</span><span class="w"> </span><span class="p">{</span><span class="w"></span>
+<span class="w">      </span><span class="n">std</span><span class="o">::</span><span class="n">shuffle</span><span class="p">(</span><span class="n">tempBatches</span><span class="p">.</span><span class="n">begin</span><span class="p">(),</span><span class="w"> </span><span class="n">tempBatches</span><span class="p">.</span><span class="n">end</span><span class="p">(),</span><span class="w"> </span><span class="n">eng_</span><span class="p">);</span><span class="w"></span>
+<span class="w">    </span><span class="p">}</span><span class="w"></span>
+<span class="w">    </span><span class="kt">double</span><span class="w"> </span><span class="n">totalSent</span><span class="p">{},</span><span class="w"> </span><span class="n">totalLabels</span><span class="p">{};</span><span class="w"></span>
+<span class="w">    </span><span class="k">for</span><span class="w"> </span><span class="p">(</span><span class="k">auto</span><span class="o">&amp;</span><span class="w"> </span><span class="n">b</span><span class="w"> </span><span class="o">:</span><span class="w"> </span><span class="n">tempBatches</span><span class="p">)</span><span class="w"> </span><span class="p">{</span><span class="w"></span>
+<span class="w">      </span><span class="n">totalSent</span><span class="w"> </span><span class="o">+=</span><span class="w"> </span><span class="p">(</span><span class="kt">double</span><span class="p">)</span><span class="n">b</span><span class="o">-&gt;</span><span class="n">size</span><span class="p">();</span><span class="w"></span>
+<span class="w">      </span><span class="n">totalLabels</span><span class="w"> </span><span class="o">+=</span><span class="w"> </span><span class="p">(</span><span class="kt">double</span><span class="p">)</span><span class="n">b</span><span class="o">-&gt;</span><span class="n">words</span><span class="p">(</span><span class="mi">-1</span><span class="p">);</span><span class="w"></span>
+<span class="w">    </span><span class="p">}</span><span class="w"></span>
+<span class="w">    </span><span class="k">auto</span><span class="w"> </span><span class="n">totalDenom</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="n">tempBatches</span><span class="p">.</span><span class="n">empty</span><span class="p">()</span><span class="w"> </span><span class="o">?</span><span class="w"> </span><span class="mi">1</span><span class="w"> </span><span class="o">:</span><span class="w"> </span><span class="n">tempBatches</span><span class="p">.</span><span class="n">size</span><span class="p">();</span><span class="w"> </span><span class="c1">// (make 0/0 = 0)</span>
+<span class="w">    </span><span class="n">LOG</span><span class="p">(</span><span class="n">debug</span><span class="p">,</span><span class="w"> </span><span class="s">&quot;[data] fetched {} batches with {} sentences. Per batch: {} sentences, {} labels.&quot;</span><span class="p">,</span><span class="w"></span>
+<span class="w">        </span><span class="n">tempBatches</span><span class="p">.</span><span class="n">size</span><span class="p">(),</span><span class="w"> </span><span class="n">numSentencesRead</span><span class="p">,</span><span class="w"></span>
+<span class="w">        </span><span class="p">(</span><span class="kt">double</span><span class="p">)</span><span class="n">totalSent</span><span class="w"> </span><span class="o">/</span><span class="w"> </span><span class="p">(</span><span class="kt">double</span><span class="p">)</span><span class="n">totalDenom</span><span class="p">,</span><span class="w"> </span><span class="p">(</span><span class="kt">double</span><span class="p">)</span><span class="n">totalLabels</span><span class="w"> </span><span class="o">/</span><span class="w"> </span><span class="p">(</span><span class="kt">double</span><span class="p">)</span><span class="n">totalDenom</span><span class="p">);</span><span class="w"></span>
+<span class="w">    </span><span class="k">return</span><span class="w"> </span><span class="n">tempBatches</span><span class="p">;</span><span class="w"></span>
+<span class="w">  </span><span class="p">}</span><span class="w"></span>
 
-  <span class="c1">// this starts fillBatches() as a background operation</span>
-  <span class="kt">void</span> <span class="n">fetchBatchesAsync</span><span class="p">()</span> <span class="p">{</span>
-    <span class="n">ABORT_IF</span><span class="p">(</span><span class="n">futureBufferedBatches_</span><span class="p">.</span><span class="n">valid</span><span class="p">(),</span> <span class="s">&quot;Attempted to restart futureBufferedBatches_ while still running&quot;</span><span class="p">);</span>
-    <span class="n">ABORT_IF</span><span class="p">(</span><span class="o">!</span><span class="n">runAsync_</span><span class="p">,</span> <span class="s">&quot;Trying to run fetchBatchesAsync() but runAsync_ is false??&quot;</span><span class="p">);</span>
-    <span class="n">ABORT_IF</span><span class="p">(</span><span class="o">!</span><span class="n">threadPool_</span><span class="p">,</span> <span class="s">&quot;Trying to run fetchBatchesAsync() without initialized threadPool_??&quot;</span><span class="p">);</span>
-    <span class="n">futureBufferedBatches_</span> <span class="o">=</span> <span class="n">threadPool_</span><span class="o">-&gt;</span><span class="n">enqueue</span><span class="p">([</span><span class="k">this</span><span class="p">]()</span> <span class="p">{</span>
-      <span class="k">return</span> <span class="nf">fetchBatches</span><span class="p">();</span>
-    <span class="p">});</span>
-  <span class="p">}</span>
+<span class="w">  </span><span class="c1">// this starts fillBatches() as a background operation</span>
+<span class="w">  </span><span class="kt">void</span><span class="w"> </span><span class="n">fetchBatchesAsync</span><span class="p">()</span><span class="w"> </span><span class="p">{</span><span class="w"></span>
+<span class="w">    </span><span class="n">ABORT_IF</span><span class="p">(</span><span class="n">futureBufferedBatches_</span><span class="p">.</span><span class="n">valid</span><span class="p">(),</span><span class="w"> </span><span class="s">&quot;Attempted to restart futureBufferedBatches_ while still running&quot;</span><span class="p">);</span><span class="w"></span>
+<span class="w">    </span><span class="n">ABORT_IF</span><span class="p">(</span><span class="o">!</span><span class="n">runAsync_</span><span class="p">,</span><span class="w"> </span><span class="s">&quot;Trying to run fetchBatchesAsync() but runAsync_ is false??&quot;</span><span class="p">);</span><span class="w"></span>
+<span class="w">    </span><span class="n">ABORT_IF</span><span class="p">(</span><span class="o">!</span><span class="n">threadPool_</span><span class="p">,</span><span class="w"> </span><span class="s">&quot;Trying to run fetchBatchesAsync() without initialized threadPool_??&quot;</span><span class="p">);</span><span class="w"></span>
+<span class="w">    </span><span class="n">futureBufferedBatches_</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="n">threadPool_</span><span class="o">-&gt;</span><span class="n">enqueue</span><span class="p">([</span><span class="k">this</span><span class="p">]()</span><span class="w"> </span><span class="p">{</span><span class="w"></span>
+<span class="w">      </span><span class="k">return</span><span class="w"> </span><span class="n">fetchBatches</span><span class="p">();</span><span class="w"></span>
+<span class="w">    </span><span class="p">});</span><span class="w"></span>
+<span class="w">  </span><span class="p">}</span><span class="w"></span>
 
-  <span class="n">BatchPtr</span> <span class="n">next</span><span class="p">()</span> <span class="p">{</span>
-    <span class="k">if</span><span class="p">(</span><span class="n">bufferedBatches_</span><span class="p">.</span><span class="n">empty</span><span class="p">())</span> <span class="p">{</span>
-      <span class="k">if</span><span class="p">(</span><span class="n">runAsync_</span><span class="p">)</span> <span class="p">{</span> <span class="c1">// by default we will run in asynchronous mode</span>
-        <span class="c1">// out of data: need to get next batch from background thread</span>
-        <span class="c1">// We only get here if the future has been scheduled to run; it must be valid.</span>
-        <span class="n">ABORT_IF</span><span class="p">(</span><span class="o">!</span><span class="n">futureBufferedBatches_</span><span class="p">.</span><span class="n">valid</span><span class="p">(),</span> <span class="s">&quot;Attempted to wait for futureBufferedBatches_ when none pending.</span><span class="se">\n</span><span class="s">&quot;</span>
-            <span class="s">&quot;This error often occurs when Marian tries to restore the training data iterator, but the corpus has been changed or replaced.</span><span class="se">\n</span><span class="s">&quot;</span>
-            <span class="s">&quot;If you have changed the training corpus, add --no-restore-corpus to the training command and run it again.&quot;</span><span class="p">);</span>
-        <span class="n">bufferedBatches_</span> <span class="o">=</span> <span class="n">std</span><span class="o">::</span><span class="n">move</span><span class="p">(</span><span class="n">futureBufferedBatches_</span><span class="p">.</span><span class="n">get</span><span class="p">());</span>
-        <span class="c1">// if bg thread returns an empty swath, we hit the end of the epoch</span>
-        <span class="k">if</span> <span class="p">(</span><span class="n">bufferedBatches_</span><span class="p">.</span><span class="n">empty</span><span class="p">()</span> <span class="o">||</span> <span class="n">saveAndExitRequested</span><span class="p">())</span> <span class="p">{</span>
-          <span class="k">return</span> <span class="k">nullptr</span><span class="p">;</span>
-        <span class="p">}</span>
-        <span class="c1">// and kick off the next bg operation</span>
-        <span class="n">fetchBatchesAsync</span><span class="p">();</span>
-      <span class="p">}</span> <span class="k">else</span> <span class="p">{</span> <span class="c1">// don&#39;t spawn any threads, i.e. batch fetching is blocking.</span>
-        <span class="n">bufferedBatches_</span> <span class="o">=</span> <span class="n">fetchBatches</span><span class="p">();</span>
-        <span class="c1">// if bufferedBatches is empty we hit the end of the epoch</span>
-        <span class="k">if</span> <span class="p">(</span><span class="n">bufferedBatches_</span><span class="p">.</span><span class="n">empty</span><span class="p">()</span> <span class="o">||</span> <span class="n">saveAndExitRequested</span><span class="p">())</span> <span class="p">{</span>
-          <span class="k">return</span> <span class="k">nullptr</span><span class="p">;</span>
-        <span class="p">}</span>
-      <span class="p">}</span>
-    <span class="p">}</span>
+<span class="w">  </span><span class="n">BatchPtr</span><span class="w"> </span><span class="n">next</span><span class="p">()</span><span class="w"> </span><span class="p">{</span><span class="w"></span>
+<span class="w">    </span><span class="k">if</span><span class="p">(</span><span class="n">bufferedBatches_</span><span class="p">.</span><span class="n">empty</span><span class="p">())</span><span class="w"> </span><span class="p">{</span><span class="w"></span>
+<span class="w">      </span><span class="k">if</span><span class="p">(</span><span class="n">runAsync_</span><span class="p">)</span><span class="w"> </span><span class="p">{</span><span class="w"> </span><span class="c1">// by default we will run in asynchronous mode</span>
+<span class="w">        </span><span class="c1">// out of data: need to get next batch from background thread</span>
+<span class="w">        </span><span class="c1">// We only get here if the future has been scheduled to run; it must be valid.</span>
+<span class="w">        </span><span class="n">ABORT_IF</span><span class="p">(</span><span class="o">!</span><span class="n">futureBufferedBatches_</span><span class="p">.</span><span class="n">valid</span><span class="p">(),</span><span class="w"> </span><span class="s">&quot;Attempted to wait for futureBufferedBatches_ when none pending.</span><span class="se">\n</span><span class="s">&quot;</span><span class="w"></span>
+<span class="w">            </span><span class="s">&quot;This error often occurs when Marian tries to restore the training data iterator, but the corpus has been changed or replaced.</span><span class="se">\n</span><span class="s">&quot;</span><span class="w"></span>
+<span class="w">            </span><span class="s">&quot;If you have changed the training corpus, add --no-restore-corpus to the training command and run it again.&quot;</span><span class="p">);</span><span class="w"></span>
+<span class="w">        </span><span class="n">bufferedBatches_</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="n">std</span><span class="o">::</span><span class="n">move</span><span class="p">(</span><span class="n">futureBufferedBatches_</span><span class="p">.</span><span class="n">get</span><span class="p">());</span><span class="w"></span>
+<span class="w">        </span><span class="c1">// if bg thread returns an empty swath, we hit the end of the epoch</span>
+<span class="w">        </span><span class="k">if</span><span class="w"> </span><span class="p">(</span><span class="n">bufferedBatches_</span><span class="p">.</span><span class="n">empty</span><span class="p">()</span><span class="w"> </span><span class="o">||</span><span class="w"> </span><span class="n">saveAndExitRequested</span><span class="p">())</span><span class="w"> </span><span class="p">{</span><span class="w"></span>
+<span class="w">          </span><span class="k">return</span><span class="w"> </span><span class="k">nullptr</span><span class="p">;</span><span class="w"></span>
+<span class="w">        </span><span class="p">}</span><span class="w"></span>
+<span class="w">        </span><span class="c1">// and kick off the next bg operation</span>
+<span class="w">        </span><span class="n">fetchBatchesAsync</span><span class="p">();</span><span class="w"></span>
+<span class="w">      </span><span class="p">}</span><span class="w"> </span><span class="k">else</span><span class="w"> </span><span class="p">{</span><span class="w"> </span><span class="c1">// don&#39;t spawn any threads, i.e. batch fetching is blocking.</span>
+<span class="w">        </span><span class="n">bufferedBatches_</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="n">fetchBatches</span><span class="p">();</span><span class="w"></span>
+<span class="w">        </span><span class="c1">// if bufferedBatches is empty we hit the end of the epoch</span>
+<span class="w">        </span><span class="k">if</span><span class="w"> </span><span class="p">(</span><span class="n">bufferedBatches_</span><span class="p">.</span><span class="n">empty</span><span class="p">()</span><span class="w"> </span><span class="o">||</span><span class="w"> </span><span class="n">saveAndExitRequested</span><span class="p">())</span><span class="w"> </span><span class="p">{</span><span class="w"></span>
+<span class="w">          </span><span class="k">return</span><span class="w"> </span><span class="k">nullptr</span><span class="p">;</span><span class="w"></span>
+<span class="w">        </span><span class="p">}</span><span class="w"></span>
+<span class="w">      </span><span class="p">}</span><span class="w"></span>
+<span class="w">    </span><span class="p">}</span><span class="w"></span>
 
-    <span class="k">auto</span> <span class="n">batch</span> <span class="o">=</span> <span class="n">bufferedBatches_</span><span class="p">.</span><span class="n">front</span><span class="p">();</span>
-    <span class="n">bufferedBatches_</span><span class="p">.</span><span class="n">pop_front</span><span class="p">();</span>
-    <span class="k">return</span> <span class="n">batch</span><span class="p">;</span>
-  <span class="p">}</span>
+<span class="w">    </span><span class="k">auto</span><span class="w"> </span><span class="n">batch</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="n">bufferedBatches_</span><span class="p">.</span><span class="n">front</span><span class="p">();</span><span class="w"></span>
+<span class="w">    </span><span class="n">bufferedBatches_</span><span class="p">.</span><span class="n">pop_front</span><span class="p">();</span><span class="w"></span>
+<span class="w">    </span><span class="k">return</span><span class="w"> </span><span class="n">batch</span><span class="p">;</span><span class="w"></span>
+<span class="w">  </span><span class="p">}</span><span class="w"></span>
 
-<span class="k">public</span><span class="o">:</span>
+<span class="k">public</span><span class="o">:</span><span class="w"></span>
 
-  <span class="n">BatchGenerator</span><span class="p">(</span><span class="n">Ptr</span><span class="o">&lt;</span><span class="n">DataSet</span><span class="o">&gt;</span> <span class="n">data</span><span class="p">,</span>
-                 <span class="n">Ptr</span><span class="o">&lt;</span><span class="n">Options</span><span class="o">&gt;</span> <span class="n">options</span><span class="p">,</span>
-                 <span class="n">Ptr</span><span class="o">&lt;</span><span class="n">BatchStats</span><span class="o">&gt;</span> <span class="n">stats</span> <span class="o">=</span> <span class="k">nullptr</span><span class="p">,</span>
-                 <span class="kt">bool</span> <span class="n">runAsync</span> <span class="o">=</span> <span class="nb">true</span><span class="p">)</span>
-      <span class="o">:</span> <span class="n">data_</span><span class="p">(</span><span class="n">data</span><span class="p">),</span> <span class="n">options_</span><span class="p">(</span><span class="n">options</span><span class="p">),</span> <span class="n">stats_</span><span class="p">(</span><span class="n">stats</span><span class="p">),</span>
-        <span class="n">runAsync_</span><span class="p">(</span><span class="n">runAsync</span><span class="p">),</span> <span class="n">threadPool_</span><span class="p">(</span><span class="n">runAsync</span> <span class="o">?</span> <span class="k">new</span> <span class="n">ThreadPool</span><span class="p">(</span><span class="mi">1</span><span class="p">)</span> <span class="o">:</span> <span class="k">nullptr</span><span class="p">)</span> <span class="p">{</span>
-    <span class="k">auto</span> <span class="n">shuffle</span> <span class="o">=</span> <span class="n">options_</span><span class="o">-&gt;</span><span class="n">get</span><span class="o">&lt;</span><span class="n">std</span><span class="o">::</span><span class="n">string</span><span class="o">&gt;</span><span class="p">(</span><span class="s">&quot;shuffle&quot;</span><span class="p">,</span> <span class="s">&quot;none&quot;</span><span class="p">);</span>
-    <span class="n">shuffleData_</span> <span class="o">=</span> <span class="n">shuffle</span> <span class="o">==</span> <span class="s">&quot;data&quot;</span><span class="p">;</span>
-    <span class="n">shuffleBatches_</span> <span class="o">=</span> <span class="n">shuffleData_</span> <span class="o">||</span> <span class="n">shuffle</span> <span class="o">==</span> <span class="s">&quot;batches&quot;</span><span class="p">;</span>
-  <span class="p">}</span>
+<span class="w">  </span><span class="n">BatchGenerator</span><span class="p">(</span><span class="n">Ptr</span><span class="o">&lt;</span><span class="n">DataSet</span><span class="o">&gt;</span><span class="w"> </span><span class="n">data</span><span class="p">,</span><span class="w"></span>
+<span class="w">                 </span><span class="n">Ptr</span><span class="o">&lt;</span><span class="n">Options</span><span class="o">&gt;</span><span class="w"> </span><span class="n">options</span><span class="p">,</span><span class="w"></span>
+<span class="w">                 </span><span class="n">Ptr</span><span class="o">&lt;</span><span class="n">BatchStats</span><span class="o">&gt;</span><span class="w"> </span><span class="n">stats</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="k">nullptr</span><span class="p">,</span><span class="w"></span>
+<span class="w">                 </span><span class="kt">bool</span><span class="w"> </span><span class="n">runAsync</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="nb">true</span><span class="p">)</span><span class="w"></span>
+<span class="w">      </span><span class="o">:</span><span class="w"> </span><span class="n">data_</span><span class="p">(</span><span class="n">data</span><span class="p">),</span><span class="w"> </span><span class="n">options_</span><span class="p">(</span><span class="n">options</span><span class="p">),</span><span class="w"> </span><span class="n">stats_</span><span class="p">(</span><span class="n">stats</span><span class="p">),</span><span class="w"></span>
+<span class="w">        </span><span class="n">runAsync_</span><span class="p">(</span><span class="n">runAsync</span><span class="p">),</span><span class="w"> </span><span class="n">threadPool_</span><span class="p">(</span><span class="n">runAsync</span><span class="w"> </span><span class="o">?</span><span class="w"> </span><span class="k">new</span><span class="w"> </span><span class="n">ThreadPool</span><span class="p">(</span><span class="mi">1</span><span class="p">)</span><span class="w"> </span><span class="o">:</span><span class="w"> </span><span class="k">nullptr</span><span class="p">)</span><span class="w"> </span><span class="p">{</span><span class="w"></span>
+<span class="w">    </span><span class="k">auto</span><span class="w"> </span><span class="n">shuffle</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="n">options_</span><span class="o">-&gt;</span><span class="n">get</span><span class="o">&lt;</span><span class="n">std</span><span class="o">::</span><span class="n">string</span><span class="o">&gt;</span><span class="p">(</span><span class="s">&quot;shuffle&quot;</span><span class="p">,</span><span class="w"> </span><span class="s">&quot;none&quot;</span><span class="p">);</span><span class="w"></span>
+<span class="w">    </span><span class="n">shuffleData_</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="n">shuffle</span><span class="w"> </span><span class="o">==</span><span class="w"> </span><span class="s">&quot;data&quot;</span><span class="p">;</span><span class="w"></span>
+<span class="w">    </span><span class="n">shuffleBatches_</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="n">shuffleData_</span><span class="w"> </span><span class="o">||</span><span class="w"> </span><span class="n">shuffle</span><span class="w"> </span><span class="o">==</span><span class="w"> </span><span class="s">&quot;batches&quot;</span><span class="p">;</span><span class="w"></span>
+<span class="w">  </span><span class="p">}</span><span class="w"></span>
 
-  <span class="o">~</span><span class="n">BatchGenerator</span><span class="p">()</span> <span class="p">{</span>
-    <span class="k">if</span> <span class="p">(</span><span class="n">futureBufferedBatches_</span><span class="p">.</span><span class="n">valid</span><span class="p">())</span> <span class="c1">// bg thread holds a reference to &#39;this&#39;,</span>
-      <span class="n">futureBufferedBatches_</span><span class="p">.</span><span class="n">get</span><span class="p">();</span>     <span class="c1">// so must wait for it to complete</span>
-  <span class="p">}</span>
+<span class="w">  </span><span class="o">~</span><span class="n">BatchGenerator</span><span class="p">()</span><span class="w"> </span><span class="p">{</span><span class="w"></span>
+<span class="w">    </span><span class="k">if</span><span class="w"> </span><span class="p">(</span><span class="n">futureBufferedBatches_</span><span class="p">.</span><span class="n">valid</span><span class="p">())</span><span class="w"> </span><span class="c1">// bg thread holds a reference to &#39;this&#39;,</span>
+<span class="w">      </span><span class="n">futureBufferedBatches_</span><span class="p">.</span><span class="n">get</span><span class="p">();</span><span class="w">     </span><span class="c1">// so must wait for it to complete</span>
+<span class="w">  </span><span class="p">}</span><span class="w"></span>
 
-  <span class="n">iterator</span> <span class="n">begin</span><span class="p">()</span> <span class="p">{</span>
-    <span class="k">return</span> <span class="nf">iterator</span><span class="p">(</span><span class="k">this</span><span class="p">,</span> <span class="n">next</span><span class="p">());</span>
-  <span class="p">}</span>
+<span class="w">  </span><span class="n">iterator</span><span class="w"> </span><span class="n">begin</span><span class="p">()</span><span class="w"> </span><span class="p">{</span><span class="w"></span>
+<span class="w">    </span><span class="k">return</span><span class="w"> </span><span class="n">iterator</span><span class="p">(</span><span class="k">this</span><span class="p">,</span><span class="w"> </span><span class="n">next</span><span class="p">());</span><span class="w"></span>
+<span class="w">  </span><span class="p">}</span><span class="w"></span>
 
-  <span class="n">iterator</span> <span class="n">end</span><span class="p">()</span> <span class="p">{</span>
-    <span class="k">return</span> <span class="nf">iterator</span><span class="p">(</span><span class="k">this</span><span class="p">,</span> <span class="k">nullptr</span><span class="p">);</span>
-  <span class="p">}</span>
+<span class="w">  </span><span class="n">iterator</span><span class="w"> </span><span class="n">end</span><span class="p">()</span><span class="w"> </span><span class="p">{</span><span class="w"></span>
+<span class="w">    </span><span class="k">return</span><span class="w"> </span><span class="n">iterator</span><span class="p">(</span><span class="k">this</span><span class="p">,</span><span class="w"> </span><span class="k">nullptr</span><span class="p">);</span><span class="w"></span>
+<span class="w">  </span><span class="p">}</span><span class="w"></span>
 
-  <span class="c1">// @TODO: get rid of this function, begin() or constructor should figure this out</span>
-  <span class="kt">void</span> <span class="n">prepare</span><span class="p">()</span> <span class="p">{</span>
-    <span class="k">if</span><span class="p">(</span><span class="n">shuffleData_</span><span class="p">)</span>
-      <span class="n">data_</span><span class="o">-&gt;</span><span class="n">shuffle</span><span class="p">();</span>
-    <span class="k">else</span>
-      <span class="n">data_</span><span class="o">-&gt;</span><span class="n">reset</span><span class="p">();</span>
-    <span class="n">newlyPrepared_</span> <span class="o">=</span> <span class="nb">true</span><span class="p">;</span>
+<span class="w">  </span><span class="c1">// @TODO: get rid of this function, begin() or constructor should figure this out</span>
+<span class="w">  </span><span class="kt">void</span><span class="w"> </span><span class="n">prepare</span><span class="p">()</span><span class="w"> </span><span class="p">{</span><span class="w"></span>
+<span class="w">    </span><span class="k">if</span><span class="p">(</span><span class="n">shuffleData_</span><span class="p">)</span><span class="w"></span>
+<span class="w">      </span><span class="n">data_</span><span class="o">-&gt;</span><span class="n">shuffle</span><span class="p">();</span><span class="w"></span>
+<span class="w">    </span><span class="k">else</span><span class="w"></span>
+<span class="w">      </span><span class="n">data_</span><span class="o">-&gt;</span><span class="n">reset</span><span class="p">();</span><span class="w"></span>
+<span class="w">    </span><span class="n">newlyPrepared_</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="nb">true</span><span class="p">;</span><span class="w"></span>
 
-    <span class="c1">// start the background pre-fetch operation when running in asynchronous mode, otherwise we will fetch on demand.</span>
-    <span class="k">if</span><span class="p">(</span><span class="n">runAsync_</span><span class="p">)</span>
-      <span class="n">fetchBatchesAsync</span><span class="p">();</span>
-  <span class="p">}</span>
+<span class="w">    </span><span class="c1">// start the background pre-fetch operation when running in asynchronous mode, otherwise we will fetch on demand.</span>
+<span class="w">    </span><span class="k">if</span><span class="p">(</span><span class="n">runAsync_</span><span class="p">)</span><span class="w"></span>
+<span class="w">      </span><span class="n">fetchBatchesAsync</span><span class="p">();</span><span class="w"></span>
+<span class="w">  </span><span class="p">}</span><span class="w"></span>
 
-  <span class="c1">// Used to restore the state of a BatchGenerator after</span>
-  <span class="c1">// an interrupted and resumed training.</span>
-  <span class="kt">bool</span> <span class="n">restore</span><span class="p">(</span><span class="n">Ptr</span><span class="o">&lt;</span><span class="n">TrainingState</span><span class="o">&gt;</span> <span class="n">state</span><span class="p">)</span> <span class="p">{</span>
-    <span class="k">if</span><span class="p">(</span><span class="n">state</span><span class="o">-&gt;</span><span class="n">epochs</span> <span class="o">==</span> <span class="mi">1</span> <span class="o">&amp;&amp;</span> <span class="n">state</span><span class="o">-&gt;</span><span class="n">batchesEpoch</span> <span class="o">==</span> <span class="mi">0</span><span class="p">)</span>
-      <span class="k">return</span> <span class="nb">false</span><span class="p">;</span>
+<span class="w">  </span><span class="c1">// Used to restore the state of a BatchGenerator after</span>
+<span class="w">  </span><span class="c1">// an interrupted and resumed training.</span>
+<span class="w">  </span><span class="kt">bool</span><span class="w"> </span><span class="n">restore</span><span class="p">(</span><span class="n">Ptr</span><span class="o">&lt;</span><span class="n">TrainingState</span><span class="o">&gt;</span><span class="w"> </span><span class="n">state</span><span class="p">)</span><span class="w"> </span><span class="p">{</span><span class="w"></span>
+<span class="w">    </span><span class="k">if</span><span class="p">(</span><span class="n">state</span><span class="o">-&gt;</span><span class="n">epochs</span><span class="w"> </span><span class="o">==</span><span class="w"> </span><span class="mi">1</span><span class="w"> </span><span class="o">&amp;&amp;</span><span class="w"> </span><span class="n">state</span><span class="o">-&gt;</span><span class="n">batchesEpoch</span><span class="w"> </span><span class="o">==</span><span class="w"> </span><span class="mi">0</span><span class="p">)</span><span class="w"></span>
+<span class="w">      </span><span class="k">return</span><span class="w"> </span><span class="nb">false</span><span class="p">;</span><span class="w"></span>
 
-    <span class="n">LOG</span><span class="p">(</span><span class="n">info</span><span class="p">,</span>
-        <span class="s">&quot;[data] Restoring the corpus state to epoch {}, batch {}&quot;</span><span class="p">,</span>
-        <span class="n">state</span><span class="o">-&gt;</span><span class="n">epochs</span><span class="p">,</span>
-        <span class="n">state</span><span class="o">-&gt;</span><span class="n">batches</span><span class="p">);</span>
+<span class="w">    </span><span class="n">LOG</span><span class="p">(</span><span class="n">info</span><span class="p">,</span><span class="w"></span>
+<span class="w">        </span><span class="s">&quot;[data] Restoring the corpus state to epoch {}, batch {}&quot;</span><span class="p">,</span><span class="w"></span>
+<span class="w">        </span><span class="n">state</span><span class="o">-&gt;</span><span class="n">epochs</span><span class="p">,</span><span class="w"></span>
+<span class="w">        </span><span class="n">state</span><span class="o">-&gt;</span><span class="n">batches</span><span class="p">);</span><span class="w"></span>
 
-    <span class="k">if</span><span class="p">(</span><span class="n">state</span><span class="o">-&gt;</span><span class="n">epochs</span> <span class="o">&gt;</span> <span class="mi">1</span><span class="p">)</span> <span class="p">{</span>
-      <span class="n">data_</span><span class="o">-&gt;</span><span class="n">restore</span><span class="p">(</span><span class="n">state</span><span class="p">);</span>
-      <span class="n">setRNGState</span><span class="p">(</span><span class="n">state</span><span class="o">-&gt;</span><span class="n">seedBatch</span><span class="p">);</span>
-    <span class="p">}</span>
+<span class="w">    </span><span class="k">if</span><span class="p">(</span><span class="n">state</span><span class="o">-&gt;</span><span class="n">epochs</span><span class="w"> </span><span class="o">&gt;</span><span class="w"> </span><span class="mi">1</span><span class="p">)</span><span class="w"> </span><span class="p">{</span><span class="w"></span>
+<span class="w">      </span><span class="n">data_</span><span class="o">-&gt;</span><span class="n">restore</span><span class="p">(</span><span class="n">state</span><span class="p">);</span><span class="w"></span>
+<span class="w">      </span><span class="n">setRNGState</span><span class="p">(</span><span class="n">state</span><span class="o">-&gt;</span><span class="n">seedBatch</span><span class="p">);</span><span class="w"></span>
+<span class="w">    </span><span class="p">}</span><span class="w"></span>
 
-    <span class="n">prepare</span><span class="p">();</span>
-    <span class="k">for</span><span class="p">(</span><span class="kt">size_t</span> <span class="n">i</span> <span class="o">=</span> <span class="mi">0</span><span class="p">;</span> <span class="n">i</span> <span class="o">&lt;</span> <span class="n">state</span><span class="o">-&gt;</span><span class="n">batchesEpoch</span><span class="p">;</span> <span class="o">++</span><span class="n">i</span><span class="p">)</span>
-      <span class="n">next</span><span class="p">();</span>
+<span class="w">    </span><span class="n">prepare</span><span class="p">();</span><span class="w"></span>
+<span class="w">    </span><span class="k">for</span><span class="p">(</span><span class="kt">size_t</span><span class="w"> </span><span class="n">i</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="mi">0</span><span class="p">;</span><span class="w"> </span><span class="n">i</span><span class="w"> </span><span class="o">&lt;</span><span class="w"> </span><span class="n">state</span><span class="o">-&gt;</span><span class="n">batchesEpoch</span><span class="p">;</span><span class="w"> </span><span class="o">++</span><span class="n">i</span><span class="p">)</span><span class="w"></span>
+<span class="w">      </span><span class="n">next</span><span class="p">();</span><span class="w"></span>
 
-    <span class="k">return</span> <span class="nb">true</span><span class="p">;</span>
-  <span class="p">}</span>
+<span class="w">    </span><span class="k">return</span><span class="w"> </span><span class="nb">true</span><span class="p">;</span><span class="w"></span>
+<span class="w">  </span><span class="p">}</span><span class="w"></span>
 
-  <span class="c1">// this is needed for dynamic MB scaling. Returns 0 if size is not known in words.</span>
-  <span class="kt">size_t</span> <span class="n">estimateTypicalTrgBatchWords</span><span class="p">()</span> <span class="k">const</span> <span class="p">{</span>
-    <span class="k">const</span> <span class="kt">size_t</span> <span class="n">mbWords</span> <span class="o">=</span> <span class="n">options_</span><span class="o">-&gt;</span><span class="n">get</span><span class="o">&lt;</span><span class="kt">size_t</span><span class="o">&gt;</span><span class="p">(</span><span class="s">&quot;mini-batch-words&quot;</span><span class="p">,</span> <span class="mi">0</span><span class="p">);</span>
-    <span class="k">const</span> <span class="kt">bool</span> <span class="n">useDynamicBatching</span> <span class="o">=</span> <span class="n">options_</span><span class="o">-&gt;</span><span class="n">has</span><span class="p">(</span><span class="s">&quot;mini-batch-fit&quot;</span><span class="p">);</span>
-    <span class="k">if</span> <span class="p">(</span><span class="n">useDynamicBatching</span> <span class="o">&amp;&amp;</span> <span class="n">stats_</span><span class="p">)</span>
-      <span class="k">return</span> <span class="n">stats_</span><span class="o">-&gt;</span><span class="n">estimateTypicalTrgWords</span><span class="p">();</span>
-    <span class="k">else</span> <span class="nf">if</span> <span class="p">(</span><span class="n">mbWords</span><span class="p">)</span>
-      <span class="k">return</span> <span class="n">mbWords</span><span class="p">;</span>
-    <span class="k">else</span>
-      <span class="k">return</span> <span class="mi">0</span><span class="p">;</span>
-  <span class="p">}</span>
-<span class="p">};</span>
+<span class="w">  </span><span class="c1">// this is needed for dynamic MB scaling. Returns 0 if size is not known in words.</span>
+<span class="w">  </span><span class="kt">size_t</span><span class="w"> </span><span class="n">estimateTypicalTrgBatchWords</span><span class="p">()</span><span class="w"> </span><span class="k">const</span><span class="w"> </span><span class="p">{</span><span class="w"></span>
+<span class="w">    </span><span class="k">const</span><span class="w"> </span><span class="kt">size_t</span><span class="w"> </span><span class="n">mbWords</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="n">options_</span><span class="o">-&gt;</span><span class="n">get</span><span class="o">&lt;</span><span class="kt">size_t</span><span class="o">&gt;</span><span class="p">(</span><span class="s">&quot;mini-batch-words&quot;</span><span class="p">,</span><span class="w"> </span><span class="mi">0</span><span class="p">);</span><span class="w"></span>
+<span class="w">    </span><span class="k">const</span><span class="w"> </span><span class="kt">bool</span><span class="w"> </span><span class="n">useDynamicBatching</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="n">options_</span><span class="o">-&gt;</span><span class="n">has</span><span class="p">(</span><span class="s">&quot;mini-batch-fit&quot;</span><span class="p">);</span><span class="w"></span>
+<span class="w">    </span><span class="k">if</span><span class="w"> </span><span class="p">(</span><span class="n">useDynamicBatching</span><span class="w"> </span><span class="o">&amp;&amp;</span><span class="w"> </span><span class="n">stats_</span><span class="p">)</span><span class="w"></span>
+<span class="w">      </span><span class="k">return</span><span class="w"> </span><span class="n">stats_</span><span class="o">-&gt;</span><span class="n">estimateTypicalTrgWords</span><span class="p">();</span><span class="w"></span>
+<span class="w">    </span><span class="k">else</span><span class="w"> </span><span class="k">if</span><span class="w"> </span><span class="p">(</span><span class="n">mbWords</span><span class="p">)</span><span class="w"></span>
+<span class="w">      </span><span class="k">return</span><span class="w"> </span><span class="n">mbWords</span><span class="p">;</span><span class="w"></span>
+<span class="w">    </span><span class="k">else</span><span class="w"></span>
+<span class="w">      </span><span class="k">return</span><span class="w"> </span><span class="mi">0</span><span class="p">;</span><span class="w"></span>
+<span class="w">  </span><span class="p">}</span><span class="w"></span>
+<span class="p">};</span><span class="w"></span>
 
-<span class="k">class</span> <span class="nc">CorpusBatchGenerator</span> <span class="o">:</span> <span class="k">public</span> <span class="n">BatchGenerator</span><span class="o">&lt;</span><span class="n">CorpusBase</span><span class="o">&gt;</span><span class="p">,</span>
-                             <span class="k">public</span> <span class="n">TrainingObserver</span> <span class="p">{</span>
-<span class="k">public</span><span class="o">:</span>
-  <span class="n">CorpusBatchGenerator</span><span class="p">(</span><span class="n">Ptr</span><span class="o">&lt;</span><span class="n">CorpusBase</span><span class="o">&gt;</span> <span class="n">data</span><span class="p">,</span>
-                       <span class="n">Ptr</span><span class="o">&lt;</span><span class="n">Options</span><span class="o">&gt;</span> <span class="n">options</span><span class="p">,</span>
-                       <span class="n">Ptr</span><span class="o">&lt;</span><span class="n">BatchStats</span><span class="o">&gt;</span> <span class="n">stats</span> <span class="o">=</span> <span class="k">nullptr</span><span class="p">)</span>
-      <span class="o">:</span> <span class="n">BatchGenerator</span><span class="p">(</span><span class="n">data</span><span class="p">,</span> <span class="n">options</span><span class="p">,</span> <span class="n">stats</span><span class="p">)</span> <span class="p">{}</span>
+<span class="k">class</span><span class="w"> </span><span class="nc">CorpusBatchGenerator</span><span class="w"> </span><span class="o">:</span><span class="w"> </span><span class="k">public</span><span class="w"> </span><span class="n">BatchGenerator</span><span class="o">&lt;</span><span class="n">CorpusBase</span><span class="o">&gt;</span><span class="p">,</span><span class="w"></span>
+<span class="w">                             </span><span class="k">public</span><span class="w"> </span><span class="n">TrainingObserver</span><span class="w"> </span><span class="p">{</span><span class="w"></span>
+<span class="k">public</span><span class="o">:</span><span class="w"></span>
+<span class="w">  </span><span class="n">CorpusBatchGenerator</span><span class="p">(</span><span class="n">Ptr</span><span class="o">&lt;</span><span class="n">CorpusBase</span><span class="o">&gt;</span><span class="w"> </span><span class="n">data</span><span class="p">,</span><span class="w"></span>
+<span class="w">                       </span><span class="n">Ptr</span><span class="o">&lt;</span><span class="n">Options</span><span class="o">&gt;</span><span class="w"> </span><span class="n">options</span><span class="p">,</span><span class="w"></span>
+<span class="w">                       </span><span class="n">Ptr</span><span class="o">&lt;</span><span class="n">BatchStats</span><span class="o">&gt;</span><span class="w"> </span><span class="n">stats</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="k">nullptr</span><span class="p">)</span><span class="w"></span>
+<span class="w">      </span><span class="o">:</span><span class="w"> </span><span class="n">BatchGenerator</span><span class="p">(</span><span class="n">data</span><span class="p">,</span><span class="w"> </span><span class="n">options</span><span class="p">,</span><span class="w"> </span><span class="n">stats</span><span class="p">)</span><span class="w"> </span><span class="p">{}</span><span class="w"></span>
 
-  <span class="kt">void</span> <span class="n">actAfterEpoch</span><span class="p">(</span><span class="n">TrainingState</span><span class="o">&amp;</span> <span class="n">state</span><span class="p">)</span> <span class="k">override</span> <span class="p">{</span>
-    <span class="n">state</span><span class="p">.</span><span class="n">seedBatch</span> <span class="o">=</span> <span class="n">getRNGState</span><span class="p">();</span>
-    <span class="n">state</span><span class="p">.</span><span class="n">seedCorpus</span> <span class="o">=</span> <span class="n">data_</span><span class="o">-&gt;</span><span class="n">getRNGState</span><span class="p">();</span>
-  <span class="p">}</span>
-<span class="p">};</span>
-<span class="p">}</span>  <span class="c1">// namespace data</span>
-<span class="p">}</span>  <span class="c1">// namespace marian</span>
+<span class="w">  </span><span class="kt">void</span><span class="w"> </span><span class="n">actAfterEpoch</span><span class="p">(</span><span class="n">TrainingState</span><span class="o">&amp;</span><span class="w"> </span><span class="n">state</span><span class="p">)</span><span class="w"> </span><span class="k">override</span><span class="w"> </span><span class="p">{</span><span class="w"></span>
+<span class="w">    </span><span class="n">state</span><span class="p">.</span><span class="n">seedBatch</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="n">getRNGState</span><span class="p">();</span><span class="w"></span>
+<span class="w">    </span><span class="n">state</span><span class="p">.</span><span class="n">seedCorpus</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="n">data_</span><span class="o">-&gt;</span><span class="n">getRNGState</span><span class="p">();</span><span class="w"></span>
+<span class="w">  </span><span class="p">}</span><span class="w"></span>
+<span class="p">};</span><span class="w"></span>
+<span class="p">}</span><span class="w">  </span><span class="c1">// namespace data</span>
+<span class="p">}</span><span class="w">  </span><span class="c1">// namespace marian</span>
 </pre></div>
 </div>
-</div>
+</section>
 
 
            </div>
-           
           </div>
           <footer>
 
   <hr/>
 
   <div role="contentinfo">
-    <p>
-        &#169; Copyright 2021, Marian NMT Team.
-
-    </p>
+    <p>&#169; Copyright 2021, Marian NMT Team.</p>
   </div>
-    
-    
-    
-    Built with <a href="https://www.sphinx-doc.org/">Sphinx</a> using a
-    
+
+  Built with <a href="https://www.sphinx-doc.org/">Sphinx</a> using a
     <a href="https://github.com/readthedocs/sphinx_rtd_theme">theme</a>
-    
-    provided by <a href="https://readthedocs.org">Read the Docs</a>. 
+    provided by <a href="https://readthedocs.org">Read the Docs</a>.
+   
 
 </footer>
         </div>
       </div>
-
     </section>
-
   </div>
-  
-
-  <script type="text/javascript">
+  <script>
       jQuery(function () {
           SphinxRtdTheme.Navigation.enable(true);
       });
-  </script>
-
-  
-  
-    
-   
+  </script> 
 
 </body>
 </html>

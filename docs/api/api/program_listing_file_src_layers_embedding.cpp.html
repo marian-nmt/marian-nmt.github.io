@@ -1,78 +1,41 @@
-
-
 <!DOCTYPE html>
 <html class="writer-html5" lang="en" >
 <head>
-  <meta charset="utf-8" />
-  
+  <meta charset="utf-8" /><meta name="generator" content="Docutils 0.17.1: http://docutils.sourceforge.net/" />
+
   <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-  
-  <title>Program Listing for File embedding.cpp &mdash; Marian NMT v1.10.3 2021-03-22 documentation</title>
-  
-
-  
-  <link rel="stylesheet" href="../_static/css/theme.css" type="text/css" />
-  <link rel="stylesheet" href="../_static/pygments.css" type="text/css" />
-  <link rel="stylesheet" href="../_static/css/custom.css" type="text/css" />
-  <link rel="stylesheet" href="../_static/collapsible-lists/css/tree_view.css" type="text/css" />
-
-  
-  
-
-  
-  
-
-  
+  <title>Program Listing for File embedding.cpp &mdash; Marian NMT v1.10.27 2022-01-25 documentation</title><link rel="stylesheet" href="../_static/css/theme.css" type="text/css" />
+    <link rel="stylesheet" href="../_static/pygments.css" type="text/css" />
+      <link rel="stylesheet" href="../_static/css/custom.css" type="text/css" />
+      <link rel="stylesheet" href="../_static/collapsible-lists/css/tree_view.css" type="text/css" />
     <link rel="canonical" href="http://marian-nmt.github.io/docs/api/api/program_listing_file_src_layers_embedding.cpp.html" />
-
-  
   <!--[if lt IE 9]>
     <script src="../_static/js/html5shiv.min.js"></script>
   <![endif]-->
-  
-    
-      <script type="text/javascript" id="documentation_options" data-url_root="../" src="../_static/documentation_options.js"></script>
+  <script id="documentation_options" data-url_root="../" src="../_static/documentation_options.js"></script>
         <script src="../_static/jquery.js"></script>
         <script src="../_static/underscore.js"></script>
         <script src="../_static/doctools.js"></script>
         <script src="../_static/language_data.js"></script>
         <script src="../_static/collapsible-lists/js/CollapsibleLists.compressed.js"></script>
         <script src="../_static/collapsible-lists/js/apply-collapsible-lists.js"></script>
-    
-    <script type="text/javascript" src="../_static/js/theme.js"></script>
-
-    
+        <script async="async" src="https://cdnjs.cloudflare.com/ajax/libs/mathjax/2.7.5/latest.js?config=TeX-AMS-MML_HTMLorMML"></script>
+        <script type="text/x-mathjax-config">MathJax.Hub.Config({"tex2jax": {"inlineMath": [["\\(", "\\)"]], "displayMath": [["\\[", "\\]"]], "processRefs": false, "processEnvironments": false}})</script>
+    <script src="../_static/js/theme.js"></script>
     <link rel="index" title="Index" href="../genindex.html" />
     <link rel="search" title="Search" href="../search.html" /> 
 </head>
 
-<body class="wy-body-for-nav">
-
-   
+<body class="wy-body-for-nav"> 
   <div class="wy-grid-for-nav">
-    
     <nav data-toggle="wy-nav-shift" class="wy-nav-side">
       <div class="wy-side-scroll">
         <div class="wy-side-nav-search" >
-          
-
-          
             <a href="../index.html" class="icon icon-home"> Marian NMT
-          
-
-          
           </a>
-
-          
-            
-            
               <div class="version">
-                v1.10.3
+                v1.10.27
               </div>
-            
-          
-
-          
 <div role="search">
   <form id="rtd-search-form" class="wy-form" action="../search.html" method="get">
     <input type="text" name="q" placeholder="Search docs" />
@@ -80,334 +43,296 @@
     <input type="hidden" name="area" value="default" />
   </form>
 </div>
-
-          
-        </div>
-
-        
-        <div class="wy-menu wy-menu-vertical" data-spy="affix" role="navigation" aria-label="main navigation">
-          
-            
-            
-              
-            
-            
-              <p class="caption"><span class="caption-text">Contents:</span></p>
+        </div><div class="wy-menu wy-menu-vertical" data-spy="affix" role="navigation" aria-label="Navigation menu">
+              <p><span class="caption-text">Contents:</span></p>
 <ul>
 <li class="toctree-l1"><a class="reference internal" href="../graph.html">Expression graphs</a></li>
 <li class="toctree-l1"><a class="reference internal" href="../operators.html">Operations in the Expression Graph</a></li>
 <li class="toctree-l1"><a class="reference internal" href="library_index.html">Library API</a></li>
 <li class="toctree-l1"><a class="reference internal" href="../contributing.html">How to contribute to Marian</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../doc_guide.html">Writing documentation</a></li>
 </ul>
 
-            
-          
         </div>
-        
       </div>
     </nav>
 
-    <section data-toggle="wy-nav-shift" class="wy-nav-content-wrap">
-
-      
-      <nav class="wy-nav-top" aria-label="top navigation">
-        
+    <section data-toggle="wy-nav-shift" class="wy-nav-content-wrap"><nav class="wy-nav-top" aria-label="Mobile navigation menu" >
           <i data-toggle="wy-nav-top" class="fa fa-bars"></i>
           <a href="../index.html">Marian NMT</a>
-        
       </nav>
 
-
       <div class="wy-nav-content">
-        
         <div class="rst-content">
-        
-          
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-<div role="navigation" aria-label="breadcrumbs navigation">
-
+          <div role="navigation" aria-label="Page navigation">
   <ul class="wy-breadcrumbs">
-    
       <li><a href="../index.html" class="icon icon-home"></a> &raquo;</li>
-        
       <li>Program Listing for File embedding.cpp</li>
-    
-    
       <li class="wy-breadcrumbs-aside">
-        
-          
             <a href="../_sources/api/program_listing_file_src_layers_embedding.cpp.rst.txt" rel="nofollow"> View page source</a>
-          
-        
       </li>
-    
   </ul>
-
-  
   <hr/>
 </div>
           <div role="main" class="document" itemscope="itemscope" itemtype="http://schema.org/Article">
            <div itemprop="articleBody">
-            
-  <div class="section" id="program-listing-for-file-embedding-cpp">
+             
+  <section id="program-listing-for-file-embedding-cpp">
 <span id="program-listing-file-src-layers-embedding-cpp"></span><h1>Program Listing for File embedding.cpp<a class="headerlink" href="#program-listing-for-file-embedding-cpp" title="Permalink to this headline">¶</a></h1>
 <p>↰ <a class="reference internal" href="file_src_layers_embedding.cpp.html#file-src-layers-embedding-cpp"><span class="std std-ref">Return to documentation for file</span></a> (<code class="docutils literal notranslate"><span class="pre">src/layers/embedding.cpp</span></code>)</p>
-<div class="highlight-cpp notranslate"><div class="highlight"><pre><span></span><span class="cp">#include</span> <span class="cpf">&quot;embedding.h&quot;</span><span class="cp"></span>
-<span class="cp">#include</span> <span class="cpf">&quot;data/factored_vocab.h&quot;</span><span class="cp"></span>
+<div class="highlight-cpp notranslate"><div class="highlight"><pre><span></span><span class="cp">#include</span><span class="w"> </span><span class="cpf">&quot;embedding.h&quot;</span><span class="cp"></span>
+<span class="cp">#include</span><span class="w"> </span><span class="cpf">&quot;data/factored_vocab.h&quot;</span><span class="cp"></span>
 
-<span class="k">namespace</span> <span class="n">marian</span> <span class="p">{</span>
+<span class="k">namespace</span><span class="w"> </span><span class="nn">marian</span><span class="w"> </span><span class="p">{</span><span class="w"></span>
 
-<span class="n">Embedding</span><span class="o">::</span><span class="n">Embedding</span><span class="p">(</span><span class="n">Ptr</span><span class="o">&lt;</span><span class="n">ExpressionGraph</span><span class="o">&gt;</span> <span class="n">graph</span><span class="p">,</span> <span class="n">Ptr</span><span class="o">&lt;</span><span class="n">Options</span><span class="o">&gt;</span> <span class="n">options</span><span class="p">)</span>
-    <span class="o">:</span> <span class="n">LayerBase</span><span class="p">(</span><span class="n">graph</span><span class="p">,</span> <span class="n">options</span><span class="p">),</span> <span class="n">inference_</span><span class="p">(</span><span class="n">opt</span><span class="o">&lt;</span><span class="kt">bool</span><span class="o">&gt;</span><span class="p">(</span><span class="s">&quot;inference&quot;</span><span class="p">))</span> <span class="p">{</span>
-  <span class="n">std</span><span class="o">::</span><span class="n">string</span> <span class="n">name</span> <span class="o">=</span> <span class="n">opt</span><span class="o">&lt;</span><span class="n">std</span><span class="o">::</span><span class="n">string</span><span class="o">&gt;</span><span class="p">(</span><span class="s">&quot;prefix&quot;</span><span class="p">);</span>
-  <span class="kt">int</span> <span class="n">dimVoc</span>       <span class="o">=</span> <span class="n">opt</span><span class="o">&lt;</span><span class="kt">int</span><span class="o">&gt;</span><span class="p">(</span><span class="s">&quot;dimVocab&quot;</span><span class="p">);</span>
-  <span class="kt">int</span> <span class="n">dimEmb</span>       <span class="o">=</span> <span class="n">opt</span><span class="o">&lt;</span><span class="kt">int</span><span class="o">&gt;</span><span class="p">(</span><span class="s">&quot;dimEmb&quot;</span><span class="p">);</span>
+<span class="n">Embedding</span><span class="o">::</span><span class="n">Embedding</span><span class="p">(</span><span class="n">Ptr</span><span class="o">&lt;</span><span class="n">ExpressionGraph</span><span class="o">&gt;</span><span class="w"> </span><span class="n">graph</span><span class="p">,</span><span class="w"> </span><span class="n">Ptr</span><span class="o">&lt;</span><span class="n">Options</span><span class="o">&gt;</span><span class="w"> </span><span class="n">options</span><span class="p">)</span><span class="w"></span>
+<span class="w">    </span><span class="o">:</span><span class="w"> </span><span class="n">LayerBase</span><span class="p">(</span><span class="n">graph</span><span class="p">,</span><span class="w"> </span><span class="n">options</span><span class="p">),</span><span class="w"> </span><span class="n">inference_</span><span class="p">(</span><span class="n">opt</span><span class="o">&lt;</span><span class="kt">bool</span><span class="o">&gt;</span><span class="p">(</span><span class="s">&quot;inference&quot;</span><span class="p">))</span><span class="w"> </span><span class="p">{</span><span class="w"></span>
+<span class="w">  </span><span class="n">std</span><span class="o">::</span><span class="n">string</span><span class="w"> </span><span class="n">name</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="n">opt</span><span class="o">&lt;</span><span class="n">std</span><span class="o">::</span><span class="n">string</span><span class="o">&gt;</span><span class="p">(</span><span class="s">&quot;prefix&quot;</span><span class="p">);</span><span class="w"></span>
+<span class="w">  </span><span class="kt">int</span><span class="w"> </span><span class="n">dimVoc</span><span class="w">       </span><span class="o">=</span><span class="w"> </span><span class="n">opt</span><span class="o">&lt;</span><span class="kt">int</span><span class="o">&gt;</span><span class="p">(</span><span class="s">&quot;dimVocab&quot;</span><span class="p">);</span><span class="w"></span>
+<span class="w">  </span><span class="kt">int</span><span class="w"> </span><span class="n">dimEmb</span><span class="w">       </span><span class="o">=</span><span class="w"> </span><span class="n">opt</span><span class="o">&lt;</span><span class="kt">int</span><span class="o">&gt;</span><span class="p">(</span><span class="s">&quot;dimEmb&quot;</span><span class="p">);</span><span class="w"></span>
+<span class="w">  </span><span class="kt">int</span><span class="w"> </span><span class="n">dimFactorEmb</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="n">opt</span><span class="o">&lt;</span><span class="kt">int</span><span class="o">&gt;</span><span class="p">(</span><span class="s">&quot;dimFactorEmb&quot;</span><span class="p">);</span><span class="w"></span>
 
-  <span class="kt">bool</span> <span class="n">fixed</span> <span class="o">=</span> <span class="n">opt</span><span class="o">&lt;</span><span class="kt">bool</span><span class="o">&gt;</span><span class="p">(</span><span class="s">&quot;fixed&quot;</span><span class="p">,</span> <span class="nb">false</span><span class="p">);</span>
+<span class="w">  </span><span class="kt">bool</span><span class="w"> </span><span class="n">fixed</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="n">opt</span><span class="o">&lt;</span><span class="kt">bool</span><span class="o">&gt;</span><span class="p">(</span><span class="s">&quot;fixed&quot;</span><span class="p">,</span><span class="w"> </span><span class="nb">false</span><span class="p">);</span><span class="w"></span>
 
-  <span class="n">factoredVocab_</span> <span class="o">=</span> <span class="n">FactoredVocab</span><span class="o">::</span><span class="n">tryCreateAndLoad</span><span class="p">(</span><span class="n">options_</span><span class="o">-&gt;</span><span class="n">get</span><span class="o">&lt;</span><span class="n">std</span><span class="o">::</span><span class="n">string</span><span class="o">&gt;</span><span class="p">(</span><span class="s">&quot;vocab&quot;</span><span class="p">,</span> <span class="s">&quot;&quot;</span><span class="p">));</span>
-  <span class="k">if</span><span class="p">(</span><span class="n">factoredVocab_</span><span class="p">)</span> <span class="p">{</span>
-    <span class="n">dimVoc</span> <span class="o">=</span> <span class="p">(</span><span class="kt">int</span><span class="p">)</span><span class="n">factoredVocab_</span><span class="o">-&gt;</span><span class="n">factorVocabSize</span><span class="p">();</span>
-    <span class="n">LOG_ONCE</span><span class="p">(</span><span class="n">info</span><span class="p">,</span> <span class="s">&quot;[embedding] Factored embeddings enabled&quot;</span><span class="p">);</span>
-  <span class="p">}</span>
+<span class="w">  </span><span class="c1">// Embedding layer initialization should depend only on embedding size, hence fanIn=false</span>
+<span class="w">  </span><span class="k">auto</span><span class="w"> </span><span class="n">initFunc</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="n">inits</span><span class="o">::</span><span class="n">glorotUniform</span><span class="p">(</span><span class="w"></span>
+<span class="w">      </span><span class="cm">/*fanIn=*/</span><span class="nb">false</span><span class="p">,</span><span class="w"> </span><span class="cm">/*fanOut=*/</span><span class="nb">true</span><span class="p">);</span><span class="w">  </span><span class="c1">// -&gt; embedding vectors have roughly unit length</span>
 
-  <span class="c1">// Embedding layer initialization should depend only on embedding size, hence fanIn=false</span>
-  <span class="k">auto</span> <span class="n">initFunc</span> <span class="o">=</span> <span class="n">inits</span><span class="o">::</span><span class="n">glorotUniform</span><span class="p">(</span>
-      <span class="cm">/*fanIn=*/</span><span class="nb">false</span><span class="p">,</span> <span class="cm">/*fanOut=*/</span><span class="nb">true</span><span class="p">);</span>  <span class="c1">// -&gt; embedding vectors have roughly unit length</span>
+<span class="w">  </span><span class="n">factoredVocab_</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="n">FactoredVocab</span><span class="o">::</span><span class="n">tryCreateAndLoad</span><span class="p">(</span><span class="n">options_</span><span class="o">-&gt;</span><span class="n">get</span><span class="o">&lt;</span><span class="n">std</span><span class="o">::</span><span class="n">string</span><span class="o">&gt;</span><span class="p">(</span><span class="s">&quot;vocab&quot;</span><span class="p">,</span><span class="w"> </span><span class="s">&quot;&quot;</span><span class="p">));</span><span class="w"></span>
+<span class="w">  </span><span class="k">if</span><span class="p">(</span><span class="n">factoredVocab_</span><span class="p">)</span><span class="w"> </span><span class="p">{</span><span class="w"></span>
+<span class="w">    </span><span class="n">dimVoc</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="p">(</span><span class="kt">int</span><span class="p">)</span><span class="n">factoredVocab_</span><span class="o">-&gt;</span><span class="n">factorVocabSize</span><span class="p">();</span><span class="w"></span>
+<span class="w">    </span><span class="n">LOG_ONCE</span><span class="p">(</span><span class="n">info</span><span class="p">,</span><span class="w"> </span><span class="s">&quot;[embedding] Factored embeddings enabled&quot;</span><span class="p">);</span><span class="w"></span>
+<span class="w">    </span><span class="k">if</span><span class="p">(</span><span class="n">opt</span><span class="o">&lt;</span><span class="n">std</span><span class="o">::</span><span class="n">string</span><span class="o">&gt;</span><span class="p">(</span><span class="s">&quot;factorsCombine&quot;</span><span class="p">)</span><span class="w"> </span><span class="o">==</span><span class="w"> </span><span class="s">&quot;concat&quot;</span><span class="p">)</span><span class="w"> </span><span class="p">{</span><span class="w"></span>
+<span class="w">      </span><span class="n">ABORT_IF</span><span class="p">(</span><span class="n">dimFactorEmb</span><span class="w"> </span><span class="o">==</span><span class="w"> </span><span class="mi">0</span><span class="p">,</span><span class="w"></span>
+<span class="w">               </span><span class="s">&quot;Embedding: If concatenation is chosen to combine the factor embeddings, a factor &quot;</span><span class="w"></span>
+<span class="w">               </span><span class="s">&quot;embedding size must be specified.&quot;</span><span class="p">);</span><span class="w"></span>
+<span class="w">      </span><span class="kt">int</span><span class="w"> </span><span class="n">numberOfFactors</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="p">(</span><span class="kt">int</span><span class="p">)</span><span class="n">factoredVocab_</span><span class="o">-&gt;</span><span class="n">getTotalFactorCount</span><span class="p">();</span><span class="w"></span>
+<span class="w">      </span><span class="n">dimVoc</span><span class="w"> </span><span class="o">-=</span><span class="w"> </span><span class="n">numberOfFactors</span><span class="p">;</span><span class="w"></span>
+<span class="w">      </span><span class="n">FactorEmbMatrix_</span><span class="w"></span>
+<span class="w">          </span><span class="o">=</span><span class="w"> </span><span class="n">graph_</span><span class="o">-&gt;</span><span class="n">param</span><span class="p">(</span><span class="s">&quot;factor_&quot;</span><span class="w"> </span><span class="o">+</span><span class="w"> </span><span class="n">name</span><span class="p">,</span><span class="w"> </span><span class="p">{</span><span class="n">numberOfFactors</span><span class="p">,</span><span class="w"> </span><span class="n">dimFactorEmb</span><span class="p">},</span><span class="w"> </span><span class="n">initFunc</span><span class="p">,</span><span class="w"> </span><span class="n">fixed</span><span class="p">);</span><span class="w"></span>
+<span class="w">      </span><span class="n">LOG_ONCE</span><span class="p">(</span><span class="n">info</span><span class="p">,</span><span class="w"></span>
+<span class="w">               </span><span class="s">&quot;[embedding] Combining lemma and factors embeddings with concatenation enabled&quot;</span><span class="p">);</span><span class="w"></span>
+<span class="w">    </span><span class="p">}</span><span class="w"></span>
+<span class="w">  </span><span class="p">}</span><span class="w"></span>
 
-  <span class="k">if</span><span class="p">(</span><span class="n">options_</span><span class="o">-&gt;</span><span class="n">has</span><span class="p">(</span><span class="s">&quot;embFile&quot;</span><span class="p">))</span> <span class="p">{</span>
-    <span class="n">std</span><span class="o">::</span><span class="n">string</span> <span class="n">file</span> <span class="o">=</span> <span class="n">opt</span><span class="o">&lt;</span><span class="n">std</span><span class="o">::</span><span class="n">string</span><span class="o">&gt;</span><span class="p">(</span><span class="s">&quot;embFile&quot;</span><span class="p">);</span>
-    <span class="k">if</span><span class="p">(</span><span class="o">!</span><span class="n">file</span><span class="p">.</span><span class="n">empty</span><span class="p">())</span> <span class="p">{</span>
-      <span class="kt">bool</span> <span class="n">norm</span> <span class="o">=</span> <span class="n">opt</span><span class="o">&lt;</span><span class="kt">bool</span><span class="o">&gt;</span><span class="p">(</span><span class="s">&quot;normalization&quot;</span><span class="p">,</span> <span class="nb">false</span><span class="p">);</span>
-      <span class="n">initFunc</span>  <span class="o">=</span> <span class="n">inits</span><span class="o">::</span><span class="n">fromWord2vec</span><span class="p">(</span><span class="n">file</span><span class="p">,</span> <span class="n">dimVoc</span><span class="p">,</span> <span class="n">dimEmb</span><span class="p">,</span> <span class="n">norm</span><span class="p">);</span>
-    <span class="p">}</span>
-  <span class="p">}</span>
+<span class="w">  </span><span class="k">if</span><span class="p">(</span><span class="n">options_</span><span class="o">-&gt;</span><span class="n">has</span><span class="p">(</span><span class="s">&quot;embFile&quot;</span><span class="p">))</span><span class="w"> </span><span class="p">{</span><span class="w"></span>
+<span class="w">    </span><span class="n">std</span><span class="o">::</span><span class="n">string</span><span class="w"> </span><span class="n">file</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="n">opt</span><span class="o">&lt;</span><span class="n">std</span><span class="o">::</span><span class="n">string</span><span class="o">&gt;</span><span class="p">(</span><span class="s">&quot;embFile&quot;</span><span class="p">);</span><span class="w"></span>
+<span class="w">    </span><span class="k">if</span><span class="p">(</span><span class="o">!</span><span class="n">file</span><span class="p">.</span><span class="n">empty</span><span class="p">())</span><span class="w"> </span><span class="p">{</span><span class="w"></span>
+<span class="w">      </span><span class="kt">bool</span><span class="w"> </span><span class="n">norm</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="n">opt</span><span class="o">&lt;</span><span class="kt">bool</span><span class="o">&gt;</span><span class="p">(</span><span class="s">&quot;normalization&quot;</span><span class="p">,</span><span class="w"> </span><span class="nb">false</span><span class="p">);</span><span class="w"></span>
+<span class="w">      </span><span class="n">initFunc</span><span class="w">  </span><span class="o">=</span><span class="w"> </span><span class="n">inits</span><span class="o">::</span><span class="n">fromWord2vec</span><span class="p">(</span><span class="n">file</span><span class="p">,</span><span class="w"> </span><span class="n">dimVoc</span><span class="p">,</span><span class="w"> </span><span class="n">dimEmb</span><span class="p">,</span><span class="w"> </span><span class="n">norm</span><span class="p">);</span><span class="w"></span>
+<span class="w">    </span><span class="p">}</span><span class="w"></span>
+<span class="w">  </span><span class="p">}</span><span class="w"></span>
 
-  <span class="n">E_</span> <span class="o">=</span> <span class="n">graph_</span><span class="o">-&gt;</span><span class="n">param</span><span class="p">(</span><span class="n">name</span><span class="p">,</span> <span class="p">{</span><span class="n">dimVoc</span><span class="p">,</span> <span class="n">dimEmb</span><span class="p">},</span> <span class="n">initFunc</span><span class="p">,</span> <span class="n">fixed</span><span class="p">);</span>
-<span class="p">}</span>
+<span class="w">  </span><span class="n">E_</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="n">graph_</span><span class="o">-&gt;</span><span class="n">param</span><span class="p">(</span><span class="n">name</span><span class="p">,</span><span class="w"> </span><span class="p">{</span><span class="n">dimVoc</span><span class="p">,</span><span class="w"> </span><span class="n">dimEmb</span><span class="p">},</span><span class="w"> </span><span class="n">initFunc</span><span class="p">,</span><span class="w"> </span><span class="n">fixed</span><span class="p">);</span><span class="w"></span>
+<span class="p">}</span><span class="w"></span>
+
+<span class="cm">/*private*/</span><span class="w"> </span><span class="n">Expr</span><span class="w"> </span><span class="n">Embedding</span><span class="o">::</span><span class="n">embedWithConcat</span><span class="p">(</span><span class="k">const</span><span class="w"> </span><span class="n">Words</span><span class="o">&amp;</span><span class="w"> </span><span class="n">data</span><span class="p">)</span><span class="w"> </span><span class="k">const</span><span class="w"> </span><span class="p">{</span><span class="w"></span>
+<span class="w">  </span><span class="k">auto</span><span class="w"> </span><span class="n">graph</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="n">E_</span><span class="o">-&gt;</span><span class="n">graph</span><span class="p">();</span><span class="w"></span>
+<span class="w">  </span><span class="n">std</span><span class="o">::</span><span class="n">vector</span><span class="o">&lt;</span><span class="n">IndexType</span><span class="o">&gt;</span><span class="w"> </span><span class="n">lemmaIndices</span><span class="p">;</span><span class="w"></span>
+<span class="w">  </span><span class="n">std</span><span class="o">::</span><span class="n">vector</span><span class="o">&lt;</span><span class="kt">float</span><span class="o">&gt;</span><span class="w"> </span><span class="n">factorIndices</span><span class="p">;</span><span class="w"></span>
+<span class="w">  </span><span class="n">factoredVocab_</span><span class="o">-&gt;</span><span class="n">lemmaAndFactorsIndexes</span><span class="p">(</span><span class="n">data</span><span class="p">,</span><span class="w"> </span><span class="n">lemmaIndices</span><span class="p">,</span><span class="w"> </span><span class="n">factorIndices</span><span class="p">);</span><span class="w"></span>
+<span class="w">  </span><span class="k">auto</span><span class="w"> </span><span class="n">lemmaEmbs</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="n">rows</span><span class="p">(</span><span class="n">E_</span><span class="p">,</span><span class="w"> </span><span class="n">lemmaIndices</span><span class="p">);</span><span class="w"></span>
+<span class="w">  </span><span class="kt">int</span><span class="w"> </span><span class="n">dimFactors</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="n">FactorEmbMatrix_</span><span class="o">-&gt;</span><span class="n">shape</span><span class="p">()[</span><span class="mi">0</span><span class="p">];</span><span class="w"></span>
+<span class="w">  </span><span class="k">auto</span><span class="w"> </span><span class="n">factEmbs</span><span class="w"></span>
+<span class="w">      </span><span class="o">=</span><span class="w"> </span><span class="n">dot</span><span class="p">(</span><span class="n">graph</span><span class="o">-&gt;</span><span class="n">constant</span><span class="p">(</span><span class="w"></span>
+<span class="w">                </span><span class="p">{(</span><span class="kt">int</span><span class="p">)</span><span class="n">data</span><span class="p">.</span><span class="n">size</span><span class="p">(),</span><span class="w"> </span><span class="n">dimFactors</span><span class="p">},</span><span class="w"> </span><span class="n">inits</span><span class="o">::</span><span class="n">fromVector</span><span class="p">(</span><span class="n">factorIndices</span><span class="p">),</span><span class="w"> </span><span class="n">Type</span><span class="o">::</span><span class="n">float32</span><span class="p">),</span><span class="w"></span>
+<span class="w">            </span><span class="n">FactorEmbMatrix_</span><span class="p">);</span><span class="w"></span>
+
+<span class="w">  </span><span class="k">return</span><span class="w"> </span><span class="n">concatenate</span><span class="p">({</span><span class="n">lemmaEmbs</span><span class="p">,</span><span class="w"> </span><span class="n">factEmbs</span><span class="p">},</span><span class="w"> </span><span class="mi">-1</span><span class="p">);</span><span class="w"></span>
+<span class="p">}</span><span class="w"></span>
 
 <span class="c1">// helper to embed a sequence of words (given as indices) via factored embeddings</span>
-<span class="n">Expr</span> <span class="n">Embedding</span><span class="o">::</span><span class="n">multiRows</span><span class="p">(</span><span class="k">const</span> <span class="n">Words</span><span class="o">&amp;</span> <span class="n">data</span><span class="p">,</span> <span class="kt">float</span> <span class="n">dropProb</span><span class="p">)</span> <span class="k">const</span> <span class="p">{</span>
-  <span class="k">auto</span> <span class="n">graph</span>        <span class="o">=</span> <span class="n">E_</span><span class="o">-&gt;</span><span class="n">graph</span><span class="p">();</span>
-  <span class="k">auto</span> <span class="n">factoredData</span> <span class="o">=</span> <span class="n">factoredVocab_</span><span class="o">-&gt;</span><span class="n">csr_rows</span><span class="p">(</span><span class="n">data</span><span class="p">);</span>
-  <span class="c1">// multi-hot factor vectors are represented as a sparse CSR matrix</span>
-  <span class="c1">// [row index = word position index] -&gt; set of factor indices for word at this position</span>
-  <span class="n">ABORT_IF</span><span class="p">(</span><span class="n">factoredData</span><span class="p">.</span><span class="n">shape</span>
-               <span class="o">!=</span> <span class="n">Shape</span><span class="p">({(</span><span class="kt">int</span><span class="p">)</span><span class="n">factoredData</span><span class="p">.</span><span class="n">offsets</span><span class="p">.</span><span class="n">size</span><span class="p">()</span> <span class="o">-</span> <span class="mi">1</span> <span class="cm">/*=rows of CSR*/</span><span class="p">,</span> <span class="n">E_</span><span class="o">-&gt;</span><span class="n">shape</span><span class="p">()[</span><span class="mi">0</span><span class="p">]}),</span>
-           <span class="s">&quot;shape mismatch??&quot;</span><span class="p">);</span>
-  <span class="c1">// the CSR matrix is passed in pieces</span>
-  <span class="k">auto</span> <span class="n">weights</span> <span class="o">=</span> <span class="n">graph</span><span class="o">-&gt;</span><span class="n">constant</span><span class="p">({(</span><span class="kt">int</span><span class="p">)</span><span class="n">factoredData</span><span class="p">.</span><span class="n">weights</span><span class="p">.</span><span class="n">size</span><span class="p">()},</span>
-                                 <span class="n">inits</span><span class="o">::</span><span class="n">fromVector</span><span class="p">(</span><span class="n">factoredData</span><span class="p">.</span><span class="n">weights</span><span class="p">));</span>
-  <span class="k">auto</span> <span class="n">indices</span> <span class="o">=</span> <span class="n">graph</span><span class="o">-&gt;</span><span class="n">constant</span><span class="p">(</span>
-      <span class="p">{(</span><span class="kt">int</span><span class="p">)</span><span class="n">factoredData</span><span class="p">.</span><span class="n">indices</span><span class="p">.</span><span class="n">size</span><span class="p">()},</span> <span class="n">inits</span><span class="o">::</span><span class="n">fromVector</span><span class="p">(</span><span class="n">factoredData</span><span class="p">.</span><span class="n">indices</span><span class="p">),</span> <span class="n">Type</span><span class="o">::</span><span class="n">uint32</span><span class="p">);</span>
-  <span class="k">auto</span> <span class="n">offsets</span> <span class="o">=</span> <span class="n">graph</span><span class="o">-&gt;</span><span class="n">constant</span><span class="p">(</span>
-      <span class="p">{(</span><span class="kt">int</span><span class="p">)</span><span class="n">factoredData</span><span class="p">.</span><span class="n">offsets</span><span class="p">.</span><span class="n">size</span><span class="p">()},</span> <span class="n">inits</span><span class="o">::</span><span class="n">fromVector</span><span class="p">(</span><span class="n">factoredData</span><span class="p">.</span><span class="n">offsets</span><span class="p">),</span> <span class="n">Type</span><span class="o">::</span><span class="n">uint32</span><span class="p">);</span>
-  <span class="c1">// apply dropout</span>
-  <span class="c1">// We apply it to the weights, i.e. factors get dropped out separately, but always as entire</span>
-  <span class="c1">// vectors.</span>
-  <span class="k">if</span><span class="p">(</span><span class="o">!</span><span class="n">inference_</span><span class="p">)</span>
-    <span class="n">weights</span> <span class="o">=</span> <span class="n">dropout</span><span class="p">(</span><span class="n">weights</span><span class="p">,</span> <span class="n">dropProb</span><span class="p">);</span>
-  <span class="c1">// perform the product</span>
-  <span class="k">return</span> <span class="nf">csr_dot</span><span class="p">(</span><span class="n">factoredData</span><span class="p">.</span><span class="n">shape</span><span class="p">,</span> <span class="n">weights</span><span class="p">,</span> <span class="n">indices</span><span class="p">,</span> <span class="n">offsets</span><span class="p">,</span> <span class="n">E_</span><span class="p">);</span>
-<span class="p">}</span>
+<span class="n">Expr</span><span class="w"> </span><span class="n">Embedding</span><span class="o">::</span><span class="n">multiRows</span><span class="p">(</span><span class="k">const</span><span class="w"> </span><span class="n">Words</span><span class="o">&amp;</span><span class="w"> </span><span class="n">data</span><span class="p">,</span><span class="w"> </span><span class="kt">float</span><span class="w"> </span><span class="n">dropProb</span><span class="p">)</span><span class="w"> </span><span class="k">const</span><span class="w"> </span><span class="p">{</span><span class="w"></span>
+<span class="w">  </span><span class="k">auto</span><span class="w"> </span><span class="n">graph</span><span class="w">        </span><span class="o">=</span><span class="w"> </span><span class="n">E_</span><span class="o">-&gt;</span><span class="n">graph</span><span class="p">();</span><span class="w"></span>
+<span class="w">  </span><span class="k">auto</span><span class="w"> </span><span class="n">factoredData</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="n">factoredVocab_</span><span class="o">-&gt;</span><span class="n">csr_rows</span><span class="p">(</span><span class="n">data</span><span class="p">);</span><span class="w"></span>
+<span class="w">  </span><span class="c1">// multi-hot factor vectors are represented as a sparse CSR matrix</span>
+<span class="w">  </span><span class="c1">// [row index = word position index] -&gt; set of factor indices for word at this position</span>
+<span class="w">  </span><span class="n">ABORT_IF</span><span class="p">(</span><span class="n">factoredData</span><span class="p">.</span><span class="n">shape</span><span class="w"></span>
+<span class="w">               </span><span class="o">!=</span><span class="w"> </span><span class="n">Shape</span><span class="p">({(</span><span class="kt">int</span><span class="p">)</span><span class="n">factoredData</span><span class="p">.</span><span class="n">offsets</span><span class="p">.</span><span class="n">size</span><span class="p">()</span><span class="w"> </span><span class="o">-</span><span class="w"> </span><span class="mi">1</span><span class="w"> </span><span class="cm">/*=rows of CSR*/</span><span class="p">,</span><span class="w"> </span><span class="n">E_</span><span class="o">-&gt;</span><span class="n">shape</span><span class="p">()[</span><span class="mi">0</span><span class="p">]}),</span><span class="w"></span>
+<span class="w">           </span><span class="s">&quot;shape mismatch??&quot;</span><span class="p">);</span><span class="w"></span>
+<span class="w">  </span><span class="c1">// the CSR matrix is passed in pieces</span>
+<span class="w">  </span><span class="k">auto</span><span class="w"> </span><span class="n">weights</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="n">graph</span><span class="o">-&gt;</span><span class="n">constant</span><span class="p">({(</span><span class="kt">int</span><span class="p">)</span><span class="n">factoredData</span><span class="p">.</span><span class="n">weights</span><span class="p">.</span><span class="n">size</span><span class="p">()},</span><span class="w"></span>
+<span class="w">                                 </span><span class="n">inits</span><span class="o">::</span><span class="n">fromVector</span><span class="p">(</span><span class="n">factoredData</span><span class="p">.</span><span class="n">weights</span><span class="p">));</span><span class="w"></span>
+<span class="w">  </span><span class="k">auto</span><span class="w"> </span><span class="n">indices</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="n">graph</span><span class="o">-&gt;</span><span class="n">constant</span><span class="p">(</span><span class="w"></span>
+<span class="w">      </span><span class="p">{(</span><span class="kt">int</span><span class="p">)</span><span class="n">factoredData</span><span class="p">.</span><span class="n">indices</span><span class="p">.</span><span class="n">size</span><span class="p">()},</span><span class="w"> </span><span class="n">inits</span><span class="o">::</span><span class="n">fromVector</span><span class="p">(</span><span class="n">factoredData</span><span class="p">.</span><span class="n">indices</span><span class="p">),</span><span class="w"> </span><span class="n">Type</span><span class="o">::</span><span class="n">uint32</span><span class="p">);</span><span class="w"></span>
+<span class="w">  </span><span class="k">auto</span><span class="w"> </span><span class="n">offsets</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="n">graph</span><span class="o">-&gt;</span><span class="n">constant</span><span class="p">(</span><span class="w"></span>
+<span class="w">      </span><span class="p">{(</span><span class="kt">int</span><span class="p">)</span><span class="n">factoredData</span><span class="p">.</span><span class="n">offsets</span><span class="p">.</span><span class="n">size</span><span class="p">()},</span><span class="w"> </span><span class="n">inits</span><span class="o">::</span><span class="n">fromVector</span><span class="p">(</span><span class="n">factoredData</span><span class="p">.</span><span class="n">offsets</span><span class="p">),</span><span class="w"> </span><span class="n">Type</span><span class="o">::</span><span class="n">uint32</span><span class="p">);</span><span class="w"></span>
+<span class="w">  </span><span class="c1">// apply dropout</span>
+<span class="w">  </span><span class="c1">// We apply it to the weights, i.e. factors get dropped out separately, but always as entire</span>
+<span class="w">  </span><span class="c1">// vectors.</span>
+<span class="w">  </span><span class="k">if</span><span class="p">(</span><span class="o">!</span><span class="n">inference_</span><span class="p">)</span><span class="w"></span>
+<span class="w">    </span><span class="n">weights</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="n">dropout</span><span class="p">(</span><span class="n">weights</span><span class="p">,</span><span class="w"> </span><span class="n">dropProb</span><span class="p">);</span><span class="w"></span>
+<span class="w">  </span><span class="c1">// perform the product</span>
+<span class="w">  </span><span class="k">return</span><span class="w"> </span><span class="n">csr_dot</span><span class="p">(</span><span class="n">factoredData</span><span class="p">.</span><span class="n">shape</span><span class="p">,</span><span class="w"> </span><span class="n">weights</span><span class="p">,</span><span class="w"> </span><span class="n">indices</span><span class="p">,</span><span class="w"> </span><span class="n">offsets</span><span class="p">,</span><span class="w"> </span><span class="n">E_</span><span class="p">);</span><span class="w"></span>
+<span class="p">}</span><span class="w"></span>
 
-<span class="n">std</span><span class="o">::</span><span class="n">tuple</span><span class="o">&lt;</span><span class="n">Expr</span> <span class="cm">/*embeddings*/</span><span class="p">,</span> <span class="n">Expr</span> <span class="cm">/*mask*/</span><span class="o">&gt;</span> <span class="n">Embedding</span><span class="o">::</span><span class="n">apply</span><span class="p">(</span><span class="n">Ptr</span><span class="o">&lt;</span><span class="n">data</span><span class="o">::</span><span class="n">SubBatch</span><span class="o">&gt;</span> <span class="n">subBatch</span><span class="p">)</span> <span class="k">const</span>
-<span class="cm">/*override final*/</span> <span class="p">{</span>
-  <span class="k">auto</span> <span class="n">graph</span>   <span class="o">=</span> <span class="n">E_</span><span class="o">-&gt;</span><span class="n">graph</span><span class="p">();</span>
-  <span class="kt">int</span> <span class="n">dimBatch</span> <span class="o">=</span> <span class="p">(</span><span class="kt">int</span><span class="p">)</span><span class="n">subBatch</span><span class="o">-&gt;</span><span class="n">batchSize</span><span class="p">();</span>
-  <span class="kt">int</span> <span class="n">dimEmb</span>   <span class="o">=</span> <span class="n">E_</span><span class="o">-&gt;</span><span class="n">shape</span><span class="p">()[</span><span class="mi">-1</span><span class="p">];</span>
-  <span class="kt">int</span> <span class="n">dimWidth</span> <span class="o">=</span> <span class="p">(</span><span class="kt">int</span><span class="p">)</span><span class="n">subBatch</span><span class="o">-&gt;</span><span class="n">batchWidth</span><span class="p">();</span>
+<span class="n">std</span><span class="o">::</span><span class="n">tuple</span><span class="o">&lt;</span><span class="n">Expr</span><span class="w"> </span><span class="cm">/*embeddings*/</span><span class="p">,</span><span class="w"> </span><span class="n">Expr</span><span class="w"> </span><span class="cm">/*mask*/</span><span class="o">&gt;</span><span class="w"> </span><span class="n">Embedding</span><span class="o">::</span><span class="n">apply</span><span class="p">(</span><span class="n">Ptr</span><span class="o">&lt;</span><span class="n">data</span><span class="o">::</span><span class="n">SubBatch</span><span class="o">&gt;</span><span class="w"> </span><span class="n">subBatch</span><span class="p">)</span><span class="w"> </span><span class="k">const</span><span class="w"></span>
+<span class="cm">/*override final*/</span><span class="w"> </span><span class="p">{</span><span class="w"></span>
+<span class="w">  </span><span class="k">auto</span><span class="w"> </span><span class="n">graph</span><span class="w">   </span><span class="o">=</span><span class="w"> </span><span class="n">E_</span><span class="o">-&gt;</span><span class="n">graph</span><span class="p">();</span><span class="w"></span>
+<span class="w">  </span><span class="kt">int</span><span class="w"> </span><span class="n">dimBatch</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="p">(</span><span class="kt">int</span><span class="p">)</span><span class="n">subBatch</span><span class="o">-&gt;</span><span class="n">batchSize</span><span class="p">();</span><span class="w"></span>
+<span class="w">  </span><span class="kt">int</span><span class="w"> </span><span class="n">dimEmb</span><span class="w">   </span><span class="o">=</span><span class="w"> </span><span class="p">(</span><span class="n">factoredVocab_</span><span class="w"> </span><span class="o">&amp;&amp;</span><span class="w"> </span><span class="n">opt</span><span class="o">&lt;</span><span class="n">std</span><span class="o">::</span><span class="n">string</span><span class="o">&gt;</span><span class="p">(</span><span class="s">&quot;factorsCombine&quot;</span><span class="p">)</span><span class="w"> </span><span class="o">==</span><span class="w"> </span><span class="s">&quot;concat&quot;</span><span class="p">)</span><span class="w"></span>
+<span class="w">                   </span><span class="o">?</span><span class="w"> </span><span class="n">E_</span><span class="o">-&gt;</span><span class="n">shape</span><span class="p">()[</span><span class="mi">-1</span><span class="p">]</span><span class="w"> </span><span class="o">+</span><span class="w"> </span><span class="n">FactorEmbMatrix_</span><span class="o">-&gt;</span><span class="n">shape</span><span class="p">()[</span><span class="mi">-1</span><span class="p">]</span><span class="w"></span>
+<span class="w">                   </span><span class="o">:</span><span class="w"> </span><span class="n">E_</span><span class="o">-&gt;</span><span class="n">shape</span><span class="p">()[</span><span class="mi">-1</span><span class="p">];</span><span class="w"></span>
+<span class="w">  </span><span class="kt">int</span><span class="w"> </span><span class="n">dimWidth</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="p">(</span><span class="kt">int</span><span class="p">)</span><span class="n">subBatch</span><span class="o">-&gt;</span><span class="n">batchWidth</span><span class="p">();</span><span class="w"></span>
 
-  <span class="c1">// factored embeddings:</span>
-  <span class="c1">//  - regular:</span>
-  <span class="c1">//     - y = x @ E    x:[B x 1ofV] ; E:[V x D] ; y:[B x D]</span>
-  <span class="c1">//  - factored:</span>
-  <span class="c1">//     - u = x @ M    one-hot to U-dimensional multi-hot (all factors in one concatenated space)</span>
-  <span class="c1">//        - each row of M contains the set of factors for one word =&gt; we want a CSR matrix</span>
-  <span class="c1">//     - y = (x @ M) @ E   (x:[B x 1ofV] ; M:[V x U]) ; E:[U x D] ; y:[B x D]</span>
-  <span class="c1">//  - first compute x @ M on the CPU</span>
-  <span class="c1">//     - (Uvalues, Uindices, Uoffsets) = csr_rows(Mvalues, Mindices, Moffsets, subBatch-&gt;data()):</span>
-  <span class="c1">//        - shape (U, specifically) not actually needed here</span>
-  <span class="c1">//     - foreach input x[i]</span>
-  <span class="c1">//        - locate row M[i,*]</span>
-  <span class="c1">//        - copy through its index values (std::vector&lt;push_back&gt;)</span>
-  <span class="c1">//     - create a matching ones vector (we can keep growing)</span>
-  <span class="c1">//     - convert to GPU-side CSR matrix. CSR matrix now has #rows equal to len(x)</span>
-  <span class="c1">//     - CSR matrix product with E</span>
-  <span class="c1">//     - csr_dot(Uvalues, Uindices, Uoffsets, E_, transposeU)</span>
-  <span class="c1">//        - double-check if all dimensions are specified. Probably not for transpose (which would</span>
-  <span class="c1">//        be like csc_dot()).</span>
-  <span class="c1">//  - weighting:</span>
-  <span class="c1">//     - core factors&#39; gradients are sums over all words that use the factors;</span>
-  <span class="c1">//        - core factors&#39; embeddings move very fast</span>
-  <span class="c1">//        - words will need to make up for the move; rare words cannot</span>
-  <span class="c1">//     - so, we multiply each factor with 1/refCount</span>
-  <span class="c1">//        - core factors get weighed down a lot</span>
-  <span class="c1">//        - no impact on gradients, as Adam makes up for it; embeddings still move fast just as</span>
-  <span class="c1">//        before</span>
-  <span class="c1">//        - but forward pass weighs them down, so that all factors are in a similar numeric range</span>
-  <span class="c1">//        - if it is required to be in a different range, the embeddings can still learn that, but</span>
-  <span class="c1">//        more slowly</span>
+<span class="w">  </span><span class="c1">// factored embeddings:</span>
+<span class="w">  </span><span class="c1">//  - regular:</span>
+<span class="w">  </span><span class="c1">//     - y = x @ E    x:[B x 1ofV] ; E:[V x D] ; y:[B x D]</span>
+<span class="w">  </span><span class="c1">//  - factored:</span>
+<span class="w">  </span><span class="c1">//     - u = x @ M    one-hot to U-dimensional multi-hot (all factors in one concatenated space)</span>
+<span class="w">  </span><span class="c1">//        - each row of M contains the set of factors for one word =&gt; we want a CSR matrix</span>
+<span class="w">  </span><span class="c1">//     - y = (x @ M) @ E   (x:[B x 1ofV] ; M:[V x U]) ; E:[U x D] ; y:[B x D]</span>
+<span class="w">  </span><span class="c1">//  - first compute x @ M on the CPU</span>
+<span class="w">  </span><span class="c1">//     - (Uvalues, Uindices, Uoffsets) = csr_rows(Mvalues, Mindices, Moffsets, subBatch-&gt;data()):</span>
+<span class="w">  </span><span class="c1">//        - shape (U, specifically) not actually needed here</span>
+<span class="w">  </span><span class="c1">//     - foreach input x[i]</span>
+<span class="w">  </span><span class="c1">//        - locate row M[i,*]</span>
+<span class="w">  </span><span class="c1">//        - copy through its index values (std::vector&lt;push_back&gt;)</span>
+<span class="w">  </span><span class="c1">//     - create a matching ones vector (we can keep growing)</span>
+<span class="w">  </span><span class="c1">//     - convert to GPU-side CSR matrix. CSR matrix now has #rows equal to len(x)</span>
+<span class="w">  </span><span class="c1">//     - CSR matrix product with E</span>
+<span class="w">  </span><span class="c1">//     - csr_dot(Uvalues, Uindices, Uoffsets, E_, transposeU)</span>
+<span class="w">  </span><span class="c1">//        - double-check if all dimensions are specified. Probably not for transpose (which would</span>
+<span class="w">  </span><span class="c1">//        be like csc_dot()).</span>
+<span class="w">  </span><span class="c1">//  - weighting:</span>
+<span class="w">  </span><span class="c1">//     - core factors&#39; gradients are sums over all words that use the factors;</span>
+<span class="w">  </span><span class="c1">//        - core factors&#39; embeddings move very fast</span>
+<span class="w">  </span><span class="c1">//        - words will need to make up for the move; rare words cannot</span>
+<span class="w">  </span><span class="c1">//     - so, we multiply each factor with 1/refCount</span>
+<span class="w">  </span><span class="c1">//        - core factors get weighed down a lot</span>
+<span class="w">  </span><span class="c1">//        - no impact on gradients, as Adam makes up for it; embeddings still move fast just as</span>
+<span class="w">  </span><span class="c1">//        before</span>
+<span class="w">  </span><span class="c1">//        - but forward pass weighs them down, so that all factors are in a similar numeric range</span>
+<span class="w">  </span><span class="c1">//        - if it is required to be in a different range, the embeddings can still learn that, but</span>
+<span class="w">  </span><span class="c1">//        more slowly</span>
 
-  <span class="k">auto</span> <span class="n">batchEmbeddings</span> <span class="o">=</span> <span class="n">apply</span><span class="p">(</span><span class="n">subBatch</span><span class="o">-&gt;</span><span class="n">data</span><span class="p">(),</span> <span class="p">{</span><span class="n">dimWidth</span><span class="p">,</span> <span class="n">dimBatch</span><span class="p">,</span> <span class="n">dimEmb</span><span class="p">});</span>
-<span class="cp">#if 1</span>
-  <span class="k">auto</span> <span class="n">batchMask</span> <span class="o">=</span> <span class="n">graph</span><span class="o">-&gt;</span><span class="n">constant</span><span class="p">({</span><span class="n">dimWidth</span><span class="p">,</span> <span class="n">dimBatch</span><span class="p">,</span> <span class="mi">1</span><span class="p">},</span> <span class="n">inits</span><span class="o">::</span><span class="n">fromVector</span><span class="p">(</span><span class="n">subBatch</span><span class="o">-&gt;</span><span class="n">mask</span><span class="p">()));</span>
-<span class="cp">#else  </span><span class="c1">// @TODO: this is dead code now, get rid of it</span>
-  <span class="c1">// experimental: hide inline-fix source tokens from cross attention</span>
-  <span class="k">auto</span> <span class="n">batchMask</span>
-      <span class="o">=</span> <span class="n">graph</span><span class="o">-&gt;</span><span class="n">constant</span><span class="p">({</span><span class="n">dimWidth</span><span class="p">,</span> <span class="n">dimBatch</span><span class="p">,</span> <span class="mi">1</span><span class="p">},</span>
-                        <span class="n">inits</span><span class="o">::</span><span class="n">fromVector</span><span class="p">(</span><span class="n">subBatch</span><span class="o">-&gt;</span><span class="n">crossMaskWithInlineFixSourceSuppressed</span><span class="p">()));</span>
-<span class="cp">#endif</span>
-  <span class="c1">// give the graph inputs readable names for debugging and ONNX</span>
-  <span class="n">batchMask</span><span class="o">-&gt;</span><span class="n">set_name</span><span class="p">(</span><span class="s">&quot;data_&quot;</span> <span class="o">+</span> <span class="n">std</span><span class="o">::</span><span class="n">to_string</span><span class="p">(</span><span class="cm">/*batchIndex_=*/</span><span class="mi">0</span><span class="p">)</span> <span class="o">+</span> <span class="s">&quot;_mask&quot;</span><span class="p">);</span>
+<span class="w">  </span><span class="k">auto</span><span class="w"> </span><span class="n">batchEmbeddings</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="n">apply</span><span class="p">(</span><span class="n">subBatch</span><span class="o">-&gt;</span><span class="n">data</span><span class="p">(),</span><span class="w"> </span><span class="p">{</span><span class="n">dimWidth</span><span class="p">,</span><span class="w"> </span><span class="n">dimBatch</span><span class="p">,</span><span class="w"> </span><span class="n">dimEmb</span><span class="p">});</span><span class="w"></span>
 
-  <span class="k">return</span> <span class="n">std</span><span class="o">::</span><span class="n">make_tuple</span><span class="p">(</span><span class="n">batchEmbeddings</span><span class="p">,</span> <span class="n">batchMask</span><span class="p">);</span>
-<span class="p">}</span>
+<span class="w">  </span><span class="k">auto</span><span class="w"> </span><span class="n">batchMask</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="n">graph</span><span class="o">-&gt;</span><span class="n">constant</span><span class="p">({</span><span class="n">dimWidth</span><span class="p">,</span><span class="w"> </span><span class="n">dimBatch</span><span class="p">,</span><span class="w"> </span><span class="mi">1</span><span class="p">},</span><span class="w"> </span><span class="n">inits</span><span class="o">::</span><span class="n">fromVector</span><span class="p">(</span><span class="n">subBatch</span><span class="o">-&gt;</span><span class="n">mask</span><span class="p">()));</span><span class="w"></span>
+<span class="w">  </span><span class="c1">// give the graph inputs readable names for debugging and ONNX</span>
+<span class="w">  </span><span class="n">batchMask</span><span class="o">-&gt;</span><span class="n">set_name</span><span class="p">(</span><span class="s">&quot;data_&quot;</span><span class="w"> </span><span class="o">+</span><span class="w"> </span><span class="n">std</span><span class="o">::</span><span class="n">to_string</span><span class="p">(</span><span class="cm">/*batchIndex_=*/</span><span class="mi">0</span><span class="p">)</span><span class="w"> </span><span class="o">+</span><span class="w"> </span><span class="s">&quot;_mask&quot;</span><span class="p">);</span><span class="w"></span>
 
-<span class="n">Expr</span> <span class="n">Embedding</span><span class="o">::</span><span class="n">apply</span><span class="p">(</span><span class="k">const</span> <span class="n">Words</span><span class="o">&amp;</span> <span class="n">words</span><span class="p">,</span> <span class="k">const</span> <span class="n">Shape</span><span class="o">&amp;</span> <span class="n">shape</span><span class="p">)</span> <span class="k">const</span> <span class="cm">/*override final*/</span> <span class="p">{</span>
-  <span class="k">if</span><span class="p">(</span><span class="n">factoredVocab_</span><span class="p">)</span> <span class="p">{</span>
-    <span class="n">Expr</span> <span class="n">selectedEmbs</span> <span class="o">=</span> <span class="n">multiRows</span><span class="p">(</span><span class="n">words</span><span class="p">,</span> <span class="n">options_</span><span class="o">-&gt;</span><span class="n">get</span><span class="o">&lt;</span><span class="kt">float</span><span class="o">&gt;</span><span class="p">(</span><span class="s">&quot;dropout&quot;</span><span class="p">,</span> <span class="mf">0.0f</span><span class="p">));</span>  <span class="c1">// [(B*W) x E]</span>
-    <span class="n">selectedEmbs</span>      <span class="o">=</span> <span class="n">reshape</span><span class="p">(</span><span class="n">selectedEmbs</span><span class="p">,</span> <span class="n">shape</span><span class="p">);</span>                             <span class="c1">// [W, B, E]</span>
-    <span class="c1">// selectedEmbs = dropout(selectedEmbs, options_-&gt;get&lt;float&gt;(&quot;dropout&quot;, 0.0f), {</span>
-    <span class="c1">// selectedEmbs-&gt;shape()[-3], 1, 1 }); // @TODO: replace with factor dropout</span>
-    <span class="k">return</span> <span class="n">selectedEmbs</span><span class="p">;</span>
-  <span class="p">}</span> <span class="k">else</span>
-    <span class="k">return</span> <span class="n">applyIndices</span><span class="p">(</span><span class="n">toWordIndexVector</span><span class="p">(</span><span class="n">words</span><span class="p">),</span> <span class="n">shape</span><span class="p">);</span>
-<span class="p">}</span>
+<span class="w">  </span><span class="k">return</span><span class="w"> </span><span class="n">std</span><span class="o">::</span><span class="n">make_tuple</span><span class="p">(</span><span class="n">batchEmbeddings</span><span class="p">,</span><span class="w"> </span><span class="n">batchMask</span><span class="p">);</span><span class="w"></span>
+<span class="p">}</span><span class="w"></span>
 
-<span class="n">Expr</span> <span class="n">Embedding</span><span class="o">::</span><span class="n">applyIndices</span><span class="p">(</span><span class="k">const</span> <span class="n">std</span><span class="o">::</span><span class="n">vector</span><span class="o">&lt;</span><span class="n">WordIndex</span><span class="o">&gt;&amp;</span> <span class="n">embIdx</span><span class="p">,</span> <span class="k">const</span> <span class="n">Shape</span><span class="o">&amp;</span> <span class="n">shape</span><span class="p">)</span> <span class="k">const</span>
-<span class="cm">/*override final*/</span> <span class="p">{</span>
-  <span class="n">ABORT_IF</span><span class="p">(</span><span class="n">factoredVocab_</span><span class="p">,</span> <span class="s">&quot;Embedding: applyIndices must not be used with a factored vocabulary&quot;</span><span class="p">);</span>
-  <span class="k">auto</span> <span class="n">embIdxExpr</span> <span class="o">=</span> <span class="n">E_</span><span class="o">-&gt;</span><span class="n">graph</span><span class="p">()</span><span class="o">-&gt;</span><span class="n">indices</span><span class="p">(</span><span class="n">embIdx</span><span class="p">);</span>
-  <span class="n">embIdxExpr</span><span class="o">-&gt;</span><span class="n">set_name</span><span class="p">(</span><span class="s">&quot;data_&quot;</span>
-                       <span class="o">+</span> <span class="n">std</span><span class="o">::</span><span class="n">to_string</span><span class="p">(</span><span class="cm">/*batchIndex_=*/</span><span class="mi">0</span><span class="p">));</span>  <span class="c1">// @TODO: how to know the batch index?</span>
-  <span class="k">auto</span> <span class="n">selectedEmbs</span> <span class="o">=</span> <span class="n">rows</span><span class="p">(</span><span class="n">E_</span><span class="p">,</span> <span class="n">embIdxExpr</span><span class="p">);</span>                   <span class="c1">// [(B*W) x E]</span>
-  <span class="n">selectedEmbs</span>      <span class="o">=</span> <span class="n">reshape</span><span class="p">(</span><span class="n">selectedEmbs</span><span class="p">,</span> <span class="n">shape</span><span class="p">);</span>           <span class="c1">// [W, B, E]</span>
-  <span class="c1">// @BUGBUG: We should not broadcast along dimBatch=[-2]. Then we can also dropout before reshape()</span>
-  <span class="c1">// (test that separately)</span>
-  <span class="k">if</span><span class="p">(</span><span class="o">!</span><span class="n">inference_</span><span class="p">)</span>
-    <span class="n">selectedEmbs</span> <span class="o">=</span> <span class="n">dropout</span><span class="p">(</span>
-        <span class="n">selectedEmbs</span><span class="p">,</span> <span class="n">options_</span><span class="o">-&gt;</span><span class="n">get</span><span class="o">&lt;</span><span class="kt">float</span><span class="o">&gt;</span><span class="p">(</span><span class="s">&quot;dropout&quot;</span><span class="p">,</span> <span class="mf">0.0f</span><span class="p">),</span> <span class="p">{</span><span class="n">selectedEmbs</span><span class="o">-&gt;</span><span class="n">shape</span><span class="p">()[</span><span class="mi">-3</span><span class="p">],</span> <span class="mi">1</span><span class="p">,</span> <span class="mi">1</span><span class="p">});</span>
-  <span class="k">return</span> <span class="n">selectedEmbs</span><span class="p">;</span>
-<span class="p">}</span>
+<span class="n">Expr</span><span class="w"> </span><span class="n">Embedding</span><span class="o">::</span><span class="n">apply</span><span class="p">(</span><span class="k">const</span><span class="w"> </span><span class="n">Words</span><span class="o">&amp;</span><span class="w"> </span><span class="n">words</span><span class="p">,</span><span class="w"> </span><span class="k">const</span><span class="w"> </span><span class="n">Shape</span><span class="o">&amp;</span><span class="w"> </span><span class="n">shape</span><span class="p">)</span><span class="w"> </span><span class="k">const</span><span class="w"> </span><span class="cm">/*override final*/</span><span class="w"> </span><span class="p">{</span><span class="w"></span>
+<span class="w">  </span><span class="k">if</span><span class="p">(</span><span class="n">factoredVocab_</span><span class="p">)</span><span class="w"> </span><span class="p">{</span><span class="w"></span>
+<span class="w">    </span><span class="n">Expr</span><span class="w"> </span><span class="n">selectedEmbs</span><span class="p">;</span><span class="w"></span>
+<span class="w">    </span><span class="k">if</span><span class="p">(</span><span class="n">opt</span><span class="o">&lt;</span><span class="n">std</span><span class="o">::</span><span class="n">string</span><span class="o">&gt;</span><span class="p">(</span><span class="s">&quot;factorsCombine&quot;</span><span class="p">)</span><span class="w"> </span><span class="o">==</span><span class="w"> </span><span class="s">&quot;concat&quot;</span><span class="p">)</span><span class="w"></span>
+<span class="w">      </span><span class="n">selectedEmbs</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="n">embedWithConcat</span><span class="p">(</span><span class="n">words</span><span class="p">);</span><span class="w">  </span><span class="c1">// [(B*W) x E]</span>
+<span class="w">    </span><span class="k">else</span><span class="w"></span>
+<span class="w">      </span><span class="n">selectedEmbs</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="n">multiRows</span><span class="p">(</span><span class="n">words</span><span class="p">,</span><span class="w"> </span><span class="n">options_</span><span class="o">-&gt;</span><span class="n">get</span><span class="o">&lt;</span><span class="kt">float</span><span class="o">&gt;</span><span class="p">(</span><span class="s">&quot;dropout&quot;</span><span class="p">,</span><span class="w"> </span><span class="mf">0.0f</span><span class="p">));</span><span class="w">  </span><span class="c1">// [(B*W) x E]</span>
+<span class="w">    </span><span class="n">selectedEmbs</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="n">reshape</span><span class="p">(</span><span class="n">selectedEmbs</span><span class="p">,</span><span class="w"> </span><span class="n">shape</span><span class="p">);</span><span class="w">                               </span><span class="c1">// [W, B, E]</span>
+<span class="w">    </span><span class="c1">// selectedEmbs = dropout(selectedEmbs, options_-&gt;get&lt;float&gt;(&quot;dropout&quot;, 0.0f), {</span>
+<span class="w">    </span><span class="c1">// selectedEmbs-&gt;shape()[-3], 1, 1 }); // @TODO: replace with factor dropout</span>
+<span class="w">    </span><span class="k">return</span><span class="w"> </span><span class="n">selectedEmbs</span><span class="p">;</span><span class="w"></span>
+<span class="w">  </span><span class="p">}</span><span class="w"> </span><span class="k">else</span><span class="w"></span>
+<span class="w">    </span><span class="k">return</span><span class="w"> </span><span class="n">applyIndices</span><span class="p">(</span><span class="n">toWordIndexVector</span><span class="p">(</span><span class="n">words</span><span class="p">),</span><span class="w"> </span><span class="n">shape</span><span class="p">);</span><span class="w"></span>
+<span class="p">}</span><span class="w"></span>
+
+<span class="n">Expr</span><span class="w"> </span><span class="n">Embedding</span><span class="o">::</span><span class="n">applyIndices</span><span class="p">(</span><span class="k">const</span><span class="w"> </span><span class="n">std</span><span class="o">::</span><span class="n">vector</span><span class="o">&lt;</span><span class="n">WordIndex</span><span class="o">&gt;&amp;</span><span class="w"> </span><span class="n">embIdx</span><span class="p">,</span><span class="w"> </span><span class="k">const</span><span class="w"> </span><span class="n">Shape</span><span class="o">&amp;</span><span class="w"> </span><span class="n">shape</span><span class="p">)</span><span class="w"> </span><span class="k">const</span><span class="w"></span>
+<span class="cm">/*override final*/</span><span class="w"> </span><span class="p">{</span><span class="w"></span>
+<span class="w">  </span><span class="n">ABORT_IF</span><span class="p">(</span><span class="n">factoredVocab_</span><span class="p">,</span><span class="w"> </span><span class="s">&quot;Embedding: applyIndices must not be used with a factored vocabulary&quot;</span><span class="p">);</span><span class="w"></span>
+<span class="w">  </span><span class="k">auto</span><span class="w"> </span><span class="n">embIdxExpr</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="n">E_</span><span class="o">-&gt;</span><span class="n">graph</span><span class="p">()</span><span class="o">-&gt;</span><span class="n">indices</span><span class="p">(</span><span class="n">embIdx</span><span class="p">);</span><span class="w"></span>
+<span class="w">  </span><span class="n">embIdxExpr</span><span class="o">-&gt;</span><span class="n">set_name</span><span class="p">(</span><span class="s">&quot;data_&quot;</span><span class="w"></span>
+<span class="w">                       </span><span class="o">+</span><span class="w"> </span><span class="n">std</span><span class="o">::</span><span class="n">to_string</span><span class="p">(</span><span class="cm">/*batchIndex_=*/</span><span class="mi">0</span><span class="p">));</span><span class="w">  </span><span class="c1">// @TODO: how to know the batch index?</span>
+<span class="w">  </span><span class="k">auto</span><span class="w"> </span><span class="n">selectedEmbs</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="n">rows</span><span class="p">(</span><span class="n">E_</span><span class="p">,</span><span class="w"> </span><span class="n">embIdxExpr</span><span class="p">);</span><span class="w">                   </span><span class="c1">// [(B*W) x E]</span>
+<span class="w">  </span><span class="n">selectedEmbs</span><span class="w">      </span><span class="o">=</span><span class="w"> </span><span class="n">reshape</span><span class="p">(</span><span class="n">selectedEmbs</span><span class="p">,</span><span class="w"> </span><span class="n">shape</span><span class="p">);</span><span class="w">           </span><span class="c1">// [W, B, E]</span>
+<span class="w">  </span><span class="c1">// @BUGBUG: We should not broadcast along dimBatch=[-2]. Then we can also dropout before reshape()</span>
+<span class="w">  </span><span class="c1">// (test that separately)</span>
+<span class="w">  </span><span class="k">if</span><span class="p">(</span><span class="o">!</span><span class="n">inference_</span><span class="p">)</span><span class="w"></span>
+<span class="w">    </span><span class="n">selectedEmbs</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="n">dropout</span><span class="p">(</span><span class="w"></span>
+<span class="w">        </span><span class="n">selectedEmbs</span><span class="p">,</span><span class="w"> </span><span class="n">options_</span><span class="o">-&gt;</span><span class="n">get</span><span class="o">&lt;</span><span class="kt">float</span><span class="o">&gt;</span><span class="p">(</span><span class="s">&quot;dropout&quot;</span><span class="p">,</span><span class="w"> </span><span class="mf">0.0f</span><span class="p">),</span><span class="w"> </span><span class="p">{</span><span class="n">selectedEmbs</span><span class="o">-&gt;</span><span class="n">shape</span><span class="p">()[</span><span class="mi">-3</span><span class="p">],</span><span class="w"> </span><span class="mi">1</span><span class="p">,</span><span class="w"> </span><span class="mi">1</span><span class="p">});</span><span class="w"></span>
+<span class="w">  </span><span class="k">return</span><span class="w"> </span><span class="n">selectedEmbs</span><span class="p">;</span><span class="w"></span>
+<span class="p">}</span><span class="w"></span>
 
 <span class="c1">// standard encoder word embeddings</span>
-<span class="cm">/*private*/</span> <span class="n">Ptr</span><span class="o">&lt;</span><span class="n">IEmbeddingLayer</span><span class="o">&gt;</span> <span class="n">EncoderDecoderLayerBase</span><span class="o">::</span><span class="n">createEmbeddingLayer</span><span class="p">()</span> <span class="k">const</span> <span class="p">{</span>
-  <span class="c1">// clang-format off</span>
-  <span class="k">auto</span> <span class="n">options</span> <span class="o">=</span> <span class="n">New</span><span class="o">&lt;</span><span class="n">Options</span><span class="o">&gt;</span><span class="p">(</span>
-      <span class="s">&quot;dimVocab&quot;</span><span class="p">,</span>  <span class="n">opt</span><span class="o">&lt;</span><span class="n">std</span><span class="o">::</span><span class="n">vector</span><span class="o">&lt;</span><span class="kt">int</span><span class="o">&gt;&gt;</span><span class="p">(</span><span class="s">&quot;dim-vocabs&quot;</span><span class="p">)[</span><span class="n">batchIndex_</span><span class="p">],</span>
-      <span class="s">&quot;dimEmb&quot;</span><span class="p">,</span>    <span class="n">opt</span><span class="o">&lt;</span><span class="kt">int</span><span class="o">&gt;</span><span class="p">(</span><span class="s">&quot;dim-emb&quot;</span><span class="p">),</span>
-      <span class="s">&quot;dropout&quot;</span><span class="p">,</span>   <span class="n">dropoutEmbeddings_</span><span class="p">,</span>
-      <span class="s">&quot;inference&quot;</span><span class="p">,</span> <span class="n">inference_</span><span class="p">,</span>
-      <span class="s">&quot;prefix&quot;</span><span class="p">,</span>    <span class="p">(</span><span class="n">opt</span><span class="o">&lt;</span><span class="kt">bool</span><span class="o">&gt;</span><span class="p">(</span><span class="s">&quot;tied-embeddings-src&quot;</span><span class="p">)</span> <span class="o">||</span> <span class="n">opt</span><span class="o">&lt;</span><span class="kt">bool</span><span class="o">&gt;</span><span class="p">(</span><span class="s">&quot;tied-embeddings-all&quot;</span><span class="p">))</span> <span class="o">?</span> <span class="s">&quot;Wemb&quot;</span>
-                                                                                          <span class="o">:</span> <span class="n">prefix_</span> <span class="o">+</span> <span class="s">&quot;_Wemb&quot;</span><span class="p">,</span>
-      <span class="s">&quot;fixed&quot;</span><span class="p">,</span>     <span class="n">embeddingFix_</span><span class="p">,</span>
-      <span class="s">&quot;vocab&quot;</span><span class="p">,</span>     <span class="n">opt</span><span class="o">&lt;</span><span class="n">std</span><span class="o">::</span><span class="n">vector</span><span class="o">&lt;</span><span class="n">std</span><span class="o">::</span><span class="n">string</span><span class="o">&gt;&gt;</span><span class="p">(</span><span class="s">&quot;vocabs&quot;</span><span class="p">)[</span><span class="n">batchIndex_</span><span class="p">]);</span>  <span class="c1">// for factored embeddings</span>
-  <span class="c1">// clang-format on</span>
-  <span class="k">if</span><span class="p">(</span><span class="n">options_</span><span class="o">-&gt;</span><span class="n">hasAndNotEmpty</span><span class="p">(</span><span class="s">&quot;embedding-vectors&quot;</span><span class="p">))</span> <span class="p">{</span>
-    <span class="k">auto</span> <span class="n">embFiles</span> <span class="o">=</span> <span class="n">opt</span><span class="o">&lt;</span><span class="n">std</span><span class="o">::</span><span class="n">vector</span><span class="o">&lt;</span><span class="n">std</span><span class="o">::</span><span class="n">string</span><span class="o">&gt;&gt;</span><span class="p">(</span><span class="s">&quot;embedding-vectors&quot;</span><span class="p">);</span>
-    <span class="n">options</span><span class="o">-&gt;</span><span class="n">set</span><span class="p">(</span>
-        <span class="s">&quot;embFile&quot;</span><span class="p">,</span> <span class="n">embFiles</span><span class="p">[</span><span class="n">batchIndex_</span><span class="p">],</span> <span class="s">&quot;normalization&quot;</span><span class="p">,</span> <span class="n">opt</span><span class="o">&lt;</span><span class="kt">bool</span><span class="o">&gt;</span><span class="p">(</span><span class="s">&quot;embedding-normalization&quot;</span><span class="p">));</span>
-  <span class="p">}</span>
-  <span class="k">return</span> <span class="n">New</span><span class="o">&lt;</span><span class="n">Embedding</span><span class="o">&gt;</span><span class="p">(</span><span class="n">graph_</span><span class="p">,</span> <span class="n">options</span><span class="p">);</span>
-<span class="p">}</span>
+<span class="cm">/*private*/</span><span class="w"> </span><span class="n">Ptr</span><span class="o">&lt;</span><span class="n">IEmbeddingLayer</span><span class="o">&gt;</span><span class="w"> </span><span class="n">EncoderDecoderLayerBase</span><span class="o">::</span><span class="n">createEmbeddingLayer</span><span class="p">()</span><span class="w"> </span><span class="k">const</span><span class="w"> </span><span class="p">{</span><span class="w"></span>
+<span class="w">  </span><span class="c1">// clang-format off</span>
+<span class="w">  </span><span class="k">auto</span><span class="w"> </span><span class="n">options</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="n">New</span><span class="o">&lt;</span><span class="n">Options</span><span class="o">&gt;</span><span class="p">(</span><span class="w"></span>
+<span class="w">      </span><span class="s">&quot;dimVocab&quot;</span><span class="p">,</span><span class="w">       </span><span class="n">opt</span><span class="o">&lt;</span><span class="n">std</span><span class="o">::</span><span class="n">vector</span><span class="o">&lt;</span><span class="kt">int</span><span class="o">&gt;&gt;</span><span class="p">(</span><span class="s">&quot;dim-vocabs&quot;</span><span class="p">)[</span><span class="n">batchIndex_</span><span class="p">],</span><span class="w"></span>
+<span class="w">      </span><span class="s">&quot;dimEmb&quot;</span><span class="p">,</span><span class="w">         </span><span class="n">opt</span><span class="o">&lt;</span><span class="kt">int</span><span class="o">&gt;</span><span class="p">(</span><span class="s">&quot;dim-emb&quot;</span><span class="p">),</span><span class="w"></span>
+<span class="w">      </span><span class="s">&quot;dropout&quot;</span><span class="p">,</span><span class="w">        </span><span class="n">dropoutEmbeddings_</span><span class="p">,</span><span class="w"></span>
+<span class="w">      </span><span class="s">&quot;inference&quot;</span><span class="p">,</span><span class="w">      </span><span class="n">inference_</span><span class="p">,</span><span class="w"></span>
+<span class="w">      </span><span class="s">&quot;prefix&quot;</span><span class="p">,</span><span class="w">         </span><span class="p">(</span><span class="n">opt</span><span class="o">&lt;</span><span class="kt">bool</span><span class="o">&gt;</span><span class="p">(</span><span class="s">&quot;tied-embeddings-src&quot;</span><span class="p">)</span><span class="w"> </span><span class="o">||</span><span class="w"> </span><span class="n">opt</span><span class="o">&lt;</span><span class="kt">bool</span><span class="o">&gt;</span><span class="p">(</span><span class="s">&quot;tied-embeddings-all&quot;</span><span class="p">))</span><span class="w"> </span><span class="o">?</span><span class="w"> </span><span class="s">&quot;Wemb&quot;</span><span class="w"></span>
+<span class="w">                                                                                          </span><span class="o">:</span><span class="w"> </span><span class="n">prefix_</span><span class="w"> </span><span class="o">+</span><span class="w"> </span><span class="s">&quot;_Wemb&quot;</span><span class="p">,</span><span class="w"></span>
+<span class="w">      </span><span class="s">&quot;fixed&quot;</span><span class="p">,</span><span class="w">          </span><span class="n">embeddingFix_</span><span class="p">,</span><span class="w"></span>
+<span class="w">      </span><span class="s">&quot;dimFactorEmb&quot;</span><span class="p">,</span><span class="w">   </span><span class="n">opt</span><span class="o">&lt;</span><span class="kt">int</span><span class="o">&gt;</span><span class="p">(</span><span class="s">&quot;factors-dim-emb&quot;</span><span class="p">),</span><span class="w">  </span><span class="c1">// for factored embeddings</span>
+<span class="w">      </span><span class="s">&quot;factorsCombine&quot;</span><span class="p">,</span><span class="w"> </span><span class="n">opt</span><span class="o">&lt;</span><span class="n">std</span><span class="o">::</span><span class="n">string</span><span class="o">&gt;</span><span class="p">(</span><span class="s">&quot;factors-combine&quot;</span><span class="p">),</span><span class="w">  </span><span class="c1">// for factored embeddings</span>
+<span class="w">      </span><span class="s">&quot;vocab&quot;</span><span class="p">,</span><span class="w">     </span><span class="n">opt</span><span class="o">&lt;</span><span class="n">std</span><span class="o">::</span><span class="n">vector</span><span class="o">&lt;</span><span class="n">std</span><span class="o">::</span><span class="n">string</span><span class="o">&gt;&gt;</span><span class="p">(</span><span class="s">&quot;vocabs&quot;</span><span class="p">)[</span><span class="n">batchIndex_</span><span class="p">]);</span><span class="w">  </span><span class="c1">// for factored embeddings</span>
+<span class="w">  </span><span class="c1">// clang-format on</span>
+<span class="w">  </span><span class="k">if</span><span class="p">(</span><span class="n">options_</span><span class="o">-&gt;</span><span class="n">hasAndNotEmpty</span><span class="p">(</span><span class="s">&quot;embedding-vectors&quot;</span><span class="p">))</span><span class="w"> </span><span class="p">{</span><span class="w"></span>
+<span class="w">    </span><span class="k">auto</span><span class="w"> </span><span class="n">embFiles</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="n">opt</span><span class="o">&lt;</span><span class="n">std</span><span class="o">::</span><span class="n">vector</span><span class="o">&lt;</span><span class="n">std</span><span class="o">::</span><span class="n">string</span><span class="o">&gt;&gt;</span><span class="p">(</span><span class="s">&quot;embedding-vectors&quot;</span><span class="p">);</span><span class="w"></span>
+<span class="w">    </span><span class="n">options</span><span class="o">-&gt;</span><span class="n">set</span><span class="p">(</span><span class="w"></span>
+<span class="w">        </span><span class="s">&quot;embFile&quot;</span><span class="p">,</span><span class="w"> </span><span class="n">embFiles</span><span class="p">[</span><span class="n">batchIndex_</span><span class="p">],</span><span class="w"> </span><span class="s">&quot;normalization&quot;</span><span class="p">,</span><span class="w"> </span><span class="n">opt</span><span class="o">&lt;</span><span class="kt">bool</span><span class="o">&gt;</span><span class="p">(</span><span class="s">&quot;embedding-normalization&quot;</span><span class="p">));</span><span class="w"></span>
+<span class="w">  </span><span class="p">}</span><span class="w"></span>
+<span class="w">  </span><span class="k">return</span><span class="w"> </span><span class="n">New</span><span class="o">&lt;</span><span class="n">Embedding</span><span class="o">&gt;</span><span class="p">(</span><span class="n">graph_</span><span class="p">,</span><span class="w"> </span><span class="n">options</span><span class="p">);</span><span class="w"></span>
+<span class="p">}</span><span class="w"></span>
 
 <span class="c1">// ULR word embeddings</span>
-<span class="cm">/*private*/</span> <span class="n">Ptr</span><span class="o">&lt;</span><span class="n">IEmbeddingLayer</span><span class="o">&gt;</span> <span class="n">EncoderDecoderLayerBase</span><span class="o">::</span><span class="n">createULREmbeddingLayer</span><span class="p">()</span> <span class="k">const</span> <span class="p">{</span>
-  <span class="c1">// clang-format off</span>
-  <span class="k">return</span> <span class="n">New</span><span class="o">&lt;</span><span class="n">ULREmbedding</span><span class="o">&gt;</span><span class="p">(</span><span class="n">graph_</span><span class="p">,</span> <span class="n">New</span><span class="o">&lt;</span><span class="n">Options</span><span class="o">&gt;</span><span class="p">(</span>
-      <span class="s">&quot;dimSrcVoc&quot;</span><span class="p">,</span>         <span class="n">opt</span><span class="o">&lt;</span><span class="n">std</span><span class="o">::</span><span class="n">vector</span><span class="o">&lt;</span><span class="kt">int</span><span class="o">&gt;&gt;</span><span class="p">(</span><span class="s">&quot;dim-vocabs&quot;</span><span class="p">)[</span><span class="mi">0</span><span class="p">],</span>  <span class="c1">// ULR multi-lingual src</span>
-      <span class="s">&quot;dimTgtVoc&quot;</span><span class="p">,</span>         <span class="n">opt</span><span class="o">&lt;</span><span class="n">std</span><span class="o">::</span><span class="n">vector</span><span class="o">&lt;</span><span class="kt">int</span><span class="o">&gt;&gt;</span><span class="p">(</span><span class="s">&quot;dim-vocabs&quot;</span><span class="p">)[</span><span class="mi">1</span><span class="p">],</span>  <span class="c1">// ULR monon tgt</span>
-      <span class="s">&quot;dimUlrEmb&quot;</span><span class="p">,</span>         <span class="n">opt</span><span class="o">&lt;</span><span class="kt">int</span><span class="o">&gt;</span><span class="p">(</span><span class="s">&quot;ulr-dim-emb&quot;</span><span class="p">),</span>
-      <span class="s">&quot;dimEmb&quot;</span><span class="p">,</span>            <span class="n">opt</span><span class="o">&lt;</span><span class="kt">int</span><span class="o">&gt;</span><span class="p">(</span><span class="s">&quot;dim-emb&quot;</span><span class="p">),</span>
-      <span class="s">&quot;ulr-dropout&quot;</span><span class="p">,</span>       <span class="n">opt</span><span class="o">&lt;</span><span class="kt">float</span><span class="o">&gt;</span><span class="p">(</span><span class="s">&quot;ulr-dropout&quot;</span><span class="p">),</span>
-      <span class="s">&quot;dropout&quot;</span><span class="p">,</span>           <span class="n">dropoutEmbeddings_</span><span class="p">,</span>
-      <span class="s">&quot;inference&quot;</span><span class="p">,</span>         <span class="n">inference_</span><span class="p">,</span>
-      <span class="s">&quot;ulrTrainTransform&quot;</span><span class="p">,</span> <span class="n">opt</span><span class="o">&lt;</span><span class="kt">bool</span><span class="o">&gt;</span><span class="p">(</span><span class="s">&quot;ulr-trainable-transformation&quot;</span><span class="p">),</span>
-      <span class="s">&quot;ulrQueryFile&quot;</span><span class="p">,</span>      <span class="n">opt</span><span class="o">&lt;</span><span class="n">std</span><span class="o">::</span><span class="n">string</span><span class="o">&gt;</span><span class="p">(</span><span class="s">&quot;ulr-query-vectors&quot;</span><span class="p">),</span>
-      <span class="s">&quot;ulrKeysFile&quot;</span><span class="p">,</span>       <span class="n">opt</span><span class="o">&lt;</span><span class="n">std</span><span class="o">::</span><span class="n">string</span><span class="o">&gt;</span><span class="p">(</span><span class="s">&quot;ulr-keys-vectors&quot;</span><span class="p">)</span>
-    <span class="p">));</span>
-  <span class="c1">// clang-format on</span>
-<span class="p">}</span>
+<span class="cm">/*private*/</span><span class="w"> </span><span class="n">Ptr</span><span class="o">&lt;</span><span class="n">IEmbeddingLayer</span><span class="o">&gt;</span><span class="w"> </span><span class="n">EncoderDecoderLayerBase</span><span class="o">::</span><span class="n">createULREmbeddingLayer</span><span class="p">()</span><span class="w"> </span><span class="k">const</span><span class="w"> </span><span class="p">{</span><span class="w"></span>
+<span class="w">  </span><span class="c1">// clang-format off</span>
+<span class="w">  </span><span class="k">return</span><span class="w"> </span><span class="n">New</span><span class="o">&lt;</span><span class="n">ULREmbedding</span><span class="o">&gt;</span><span class="p">(</span><span class="n">graph_</span><span class="p">,</span><span class="w"> </span><span class="n">New</span><span class="o">&lt;</span><span class="n">Options</span><span class="o">&gt;</span><span class="p">(</span><span class="w"></span>
+<span class="w">      </span><span class="s">&quot;dimSrcVoc&quot;</span><span class="p">,</span><span class="w">         </span><span class="n">opt</span><span class="o">&lt;</span><span class="n">std</span><span class="o">::</span><span class="n">vector</span><span class="o">&lt;</span><span class="kt">int</span><span class="o">&gt;&gt;</span><span class="p">(</span><span class="s">&quot;dim-vocabs&quot;</span><span class="p">)[</span><span class="mi">0</span><span class="p">],</span><span class="w">  </span><span class="c1">// ULR multi-lingual src</span>
+<span class="w">      </span><span class="s">&quot;dimTgtVoc&quot;</span><span class="p">,</span><span class="w">         </span><span class="n">opt</span><span class="o">&lt;</span><span class="n">std</span><span class="o">::</span><span class="n">vector</span><span class="o">&lt;</span><span class="kt">int</span><span class="o">&gt;&gt;</span><span class="p">(</span><span class="s">&quot;dim-vocabs&quot;</span><span class="p">)[</span><span class="mi">1</span><span class="p">],</span><span class="w">  </span><span class="c1">// ULR monon tgt</span>
+<span class="w">      </span><span class="s">&quot;dimUlrEmb&quot;</span><span class="p">,</span><span class="w">         </span><span class="n">opt</span><span class="o">&lt;</span><span class="kt">int</span><span class="o">&gt;</span><span class="p">(</span><span class="s">&quot;ulr-dim-emb&quot;</span><span class="p">),</span><span class="w"></span>
+<span class="w">      </span><span class="s">&quot;dimEmb&quot;</span><span class="p">,</span><span class="w">            </span><span class="n">opt</span><span class="o">&lt;</span><span class="kt">int</span><span class="o">&gt;</span><span class="p">(</span><span class="s">&quot;dim-emb&quot;</span><span class="p">),</span><span class="w"></span>
+<span class="w">      </span><span class="s">&quot;ulr-dropout&quot;</span><span class="p">,</span><span class="w">       </span><span class="n">opt</span><span class="o">&lt;</span><span class="kt">float</span><span class="o">&gt;</span><span class="p">(</span><span class="s">&quot;ulr-dropout&quot;</span><span class="p">),</span><span class="w"></span>
+<span class="w">      </span><span class="s">&quot;dropout&quot;</span><span class="p">,</span><span class="w">           </span><span class="n">dropoutEmbeddings_</span><span class="p">,</span><span class="w"></span>
+<span class="w">      </span><span class="s">&quot;inference&quot;</span><span class="p">,</span><span class="w">         </span><span class="n">inference_</span><span class="p">,</span><span class="w"></span>
+<span class="w">      </span><span class="s">&quot;ulrTrainTransform&quot;</span><span class="p">,</span><span class="w"> </span><span class="n">opt</span><span class="o">&lt;</span><span class="kt">bool</span><span class="o">&gt;</span><span class="p">(</span><span class="s">&quot;ulr-trainable-transformation&quot;</span><span class="p">),</span><span class="w"></span>
+<span class="w">      </span><span class="s">&quot;ulrQueryFile&quot;</span><span class="p">,</span><span class="w">      </span><span class="n">opt</span><span class="o">&lt;</span><span class="n">std</span><span class="o">::</span><span class="n">string</span><span class="o">&gt;</span><span class="p">(</span><span class="s">&quot;ulr-query-vectors&quot;</span><span class="p">),</span><span class="w"></span>
+<span class="w">      </span><span class="s">&quot;ulrKeysFile&quot;</span><span class="p">,</span><span class="w">       </span><span class="n">opt</span><span class="o">&lt;</span><span class="n">std</span><span class="o">::</span><span class="n">string</span><span class="o">&gt;</span><span class="p">(</span><span class="s">&quot;ulr-keys-vectors&quot;</span><span class="p">)</span><span class="w"></span>
+<span class="w">    </span><span class="p">));</span><span class="w"></span>
+<span class="w">  </span><span class="c1">// clang-format on</span>
+<span class="p">}</span><span class="w"></span>
 
 <span class="c1">// get embedding layer for this encoder or decoder</span>
 <span class="c1">// This is lazy mostly because the constructors of the consuming objects are not</span>
 <span class="c1">// guaranteed presently to have access to their graph.</span>
-<span class="n">Ptr</span><span class="o">&lt;</span><span class="n">IEmbeddingLayer</span><span class="o">&gt;</span> <span class="n">EncoderDecoderLayerBase</span><span class="o">::</span><span class="n">getEmbeddingLayer</span><span class="p">(</span><span class="kt">bool</span> <span class="n">ulr</span><span class="p">)</span> <span class="k">const</span> <span class="p">{</span>
-  <span class="k">if</span><span class="p">(</span><span class="n">embeddingLayers_</span><span class="p">.</span><span class="n">size</span><span class="p">()</span> <span class="o">&lt;=</span> <span class="n">batchIndex_</span> <span class="o">||</span> <span class="o">!</span><span class="n">embeddingLayers_</span><span class="p">[</span><span class="n">batchIndex_</span><span class="p">])</span> <span class="p">{</span>  <span class="c1">// lazy</span>
-    <span class="k">if</span><span class="p">(</span><span class="n">embeddingLayers_</span><span class="p">.</span><span class="n">size</span><span class="p">()</span> <span class="o">&lt;=</span> <span class="n">batchIndex_</span><span class="p">)</span>
-      <span class="n">embeddingLayers_</span><span class="p">.</span><span class="n">resize</span><span class="p">(</span><span class="n">batchIndex_</span> <span class="o">+</span> <span class="mi">1</span><span class="p">);</span>
-    <span class="k">if</span><span class="p">(</span><span class="n">ulr</span><span class="p">)</span>
-      <span class="n">embeddingLayers_</span><span class="p">[</span><span class="n">batchIndex_</span><span class="p">]</span> <span class="o">=</span> <span class="n">createULREmbeddingLayer</span><span class="p">();</span>  <span class="c1">// embedding uses ULR</span>
-    <span class="k">else</span>
-      <span class="n">embeddingLayers_</span><span class="p">[</span><span class="n">batchIndex_</span><span class="p">]</span> <span class="o">=</span> <span class="n">createEmbeddingLayer</span><span class="p">();</span>
-  <span class="p">}</span>
-  <span class="k">return</span> <span class="n">embeddingLayers_</span><span class="p">[</span><span class="n">batchIndex_</span><span class="p">];</span>
-<span class="p">}</span>
+<span class="n">Ptr</span><span class="o">&lt;</span><span class="n">IEmbeddingLayer</span><span class="o">&gt;</span><span class="w"> </span><span class="n">EncoderDecoderLayerBase</span><span class="o">::</span><span class="n">getEmbeddingLayer</span><span class="p">(</span><span class="kt">bool</span><span class="w"> </span><span class="n">ulr</span><span class="p">)</span><span class="w"> </span><span class="k">const</span><span class="w"> </span><span class="p">{</span><span class="w"></span>
+<span class="w">  </span><span class="k">if</span><span class="p">(</span><span class="n">embeddingLayers_</span><span class="p">.</span><span class="n">size</span><span class="p">()</span><span class="w"> </span><span class="o">&lt;=</span><span class="w"> </span><span class="n">batchIndex_</span><span class="w"> </span><span class="o">||</span><span class="w"> </span><span class="o">!</span><span class="n">embeddingLayers_</span><span class="p">[</span><span class="n">batchIndex_</span><span class="p">])</span><span class="w"> </span><span class="p">{</span><span class="w">  </span><span class="c1">// lazy</span>
+<span class="w">    </span><span class="k">if</span><span class="p">(</span><span class="n">embeddingLayers_</span><span class="p">.</span><span class="n">size</span><span class="p">()</span><span class="w"> </span><span class="o">&lt;=</span><span class="w"> </span><span class="n">batchIndex_</span><span class="p">)</span><span class="w"></span>
+<span class="w">      </span><span class="n">embeddingLayers_</span><span class="p">.</span><span class="n">resize</span><span class="p">(</span><span class="n">batchIndex_</span><span class="w"> </span><span class="o">+</span><span class="w"> </span><span class="mi">1</span><span class="p">);</span><span class="w"></span>
+<span class="w">    </span><span class="k">if</span><span class="p">(</span><span class="n">ulr</span><span class="p">)</span><span class="w"></span>
+<span class="w">      </span><span class="n">embeddingLayers_</span><span class="p">[</span><span class="n">batchIndex_</span><span class="p">]</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="n">createULREmbeddingLayer</span><span class="p">();</span><span class="w">  </span><span class="c1">// embedding uses ULR</span>
+<span class="w">    </span><span class="k">else</span><span class="w"></span>
+<span class="w">      </span><span class="n">embeddingLayers_</span><span class="p">[</span><span class="n">batchIndex_</span><span class="p">]</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="n">createEmbeddingLayer</span><span class="p">();</span><span class="w"></span>
+<span class="w">  </span><span class="p">}</span><span class="w"></span>
+<span class="w">  </span><span class="k">return</span><span class="w"> </span><span class="n">embeddingLayers_</span><span class="p">[</span><span class="n">batchIndex_</span><span class="p">];</span><span class="w"></span>
+<span class="p">}</span><span class="w"></span>
 
-<span class="p">}</span>  <span class="c1">// namespace marian</span>
+<span class="p">}</span><span class="w">  </span><span class="c1">// namespace marian</span>
 </pre></div>
 </div>
-</div>
+</section>
 
 
            </div>
-           
           </div>
           <footer>
 
   <hr/>
 
   <div role="contentinfo">
-    <p>
-        &#169; Copyright 2021, Marian NMT Team.
-
-    </p>
+    <p>&#169; Copyright 2021, Marian NMT Team.</p>
   </div>
-    
-    
-    
-    Built with <a href="https://www.sphinx-doc.org/">Sphinx</a> using a
-    
+
+  Built with <a href="https://www.sphinx-doc.org/">Sphinx</a> using a
     <a href="https://github.com/readthedocs/sphinx_rtd_theme">theme</a>
-    
-    provided by <a href="https://readthedocs.org">Read the Docs</a>. 
+    provided by <a href="https://readthedocs.org">Read the Docs</a>.
+   
 
 </footer>
         </div>
       </div>
-
     </section>
-
   </div>
-  
-
-  <script type="text/javascript">
+  <script>
       jQuery(function () {
           SphinxRtdTheme.Navigation.enable(true);
       });
-  </script>
-
-  
-  
-    
-   
+  </script> 
 
 </body>
 </html>

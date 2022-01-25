@@ -1,78 +1,41 @@
-
-
 <!DOCTYPE html>
 <html class="writer-html5" lang="en" >
 <head>
-  <meta charset="utf-8" />
-  
+  <meta charset="utf-8" /><meta name="generator" content="Docutils 0.17.1: http://docutils.sourceforge.net/" />
+
   <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-  
-  <title>Program Listing for File element.cu &mdash; Marian NMT v1.10.3 2021-03-22 documentation</title>
-  
-
-  
-  <link rel="stylesheet" href="../_static/css/theme.css" type="text/css" />
-  <link rel="stylesheet" href="../_static/pygments.css" type="text/css" />
-  <link rel="stylesheet" href="../_static/css/custom.css" type="text/css" />
-  <link rel="stylesheet" href="../_static/collapsible-lists/css/tree_view.css" type="text/css" />
-
-  
-  
-
-  
-  
-
-  
+  <title>Program Listing for File element.cu &mdash; Marian NMT v1.10.27 2022-01-25 documentation</title><link rel="stylesheet" href="../_static/css/theme.css" type="text/css" />
+    <link rel="stylesheet" href="../_static/pygments.css" type="text/css" />
+      <link rel="stylesheet" href="../_static/css/custom.css" type="text/css" />
+      <link rel="stylesheet" href="../_static/collapsible-lists/css/tree_view.css" type="text/css" />
     <link rel="canonical" href="http://marian-nmt.github.io/docs/api/api/program_listing_file_src_tensors_gpu_element.cu.html" />
-
-  
   <!--[if lt IE 9]>
     <script src="../_static/js/html5shiv.min.js"></script>
   <![endif]-->
-  
-    
-      <script type="text/javascript" id="documentation_options" data-url_root="../" src="../_static/documentation_options.js"></script>
+  <script id="documentation_options" data-url_root="../" src="../_static/documentation_options.js"></script>
         <script src="../_static/jquery.js"></script>
         <script src="../_static/underscore.js"></script>
         <script src="../_static/doctools.js"></script>
         <script src="../_static/language_data.js"></script>
         <script src="../_static/collapsible-lists/js/CollapsibleLists.compressed.js"></script>
         <script src="../_static/collapsible-lists/js/apply-collapsible-lists.js"></script>
-    
-    <script type="text/javascript" src="../_static/js/theme.js"></script>
-
-    
+        <script async="async" src="https://cdnjs.cloudflare.com/ajax/libs/mathjax/2.7.5/latest.js?config=TeX-AMS-MML_HTMLorMML"></script>
+        <script type="text/x-mathjax-config">MathJax.Hub.Config({"tex2jax": {"inlineMath": [["\\(", "\\)"]], "displayMath": [["\\[", "\\]"]], "processRefs": false, "processEnvironments": false}})</script>
+    <script src="../_static/js/theme.js"></script>
     <link rel="index" title="Index" href="../genindex.html" />
     <link rel="search" title="Search" href="../search.html" /> 
 </head>
 
-<body class="wy-body-for-nav">
-
-   
+<body class="wy-body-for-nav"> 
   <div class="wy-grid-for-nav">
-    
     <nav data-toggle="wy-nav-shift" class="wy-nav-side">
       <div class="wy-side-scroll">
         <div class="wy-side-nav-search" >
-          
-
-          
             <a href="../index.html" class="icon icon-home"> Marian NMT
-          
-
-          
           </a>
-
-          
-            
-            
               <div class="version">
-                v1.10.3
+                v1.10.27
               </div>
-            
-          
-
-          
 <div role="search">
   <form id="rtd-search-form" class="wy-form" action="../search.html" method="get">
     <input type="text" name="q" placeholder="Search docs" />
@@ -80,227 +43,160 @@
     <input type="hidden" name="area" value="default" />
   </form>
 </div>
-
-          
-        </div>
-
-        
-        <div class="wy-menu wy-menu-vertical" data-spy="affix" role="navigation" aria-label="main navigation">
-          
-            
-            
-              
-            
-            
-              <p class="caption"><span class="caption-text">Contents:</span></p>
+        </div><div class="wy-menu wy-menu-vertical" data-spy="affix" role="navigation" aria-label="Navigation menu">
+              <p><span class="caption-text">Contents:</span></p>
 <ul>
 <li class="toctree-l1"><a class="reference internal" href="../graph.html">Expression graphs</a></li>
 <li class="toctree-l1"><a class="reference internal" href="../operators.html">Operations in the Expression Graph</a></li>
 <li class="toctree-l1"><a class="reference internal" href="library_index.html">Library API</a></li>
 <li class="toctree-l1"><a class="reference internal" href="../contributing.html">How to contribute to Marian</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../doc_guide.html">Writing documentation</a></li>
 </ul>
 
-            
-          
         </div>
-        
       </div>
     </nav>
 
-    <section data-toggle="wy-nav-shift" class="wy-nav-content-wrap">
-
-      
-      <nav class="wy-nav-top" aria-label="top navigation">
-        
+    <section data-toggle="wy-nav-shift" class="wy-nav-content-wrap"><nav class="wy-nav-top" aria-label="Mobile navigation menu" >
           <i data-toggle="wy-nav-top" class="fa fa-bars"></i>
           <a href="../index.html">Marian NMT</a>
-        
       </nav>
 
-
       <div class="wy-nav-content">
-        
         <div class="rst-content">
-        
-          
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-<div role="navigation" aria-label="breadcrumbs navigation">
-
+          <div role="navigation" aria-label="Page navigation">
   <ul class="wy-breadcrumbs">
-    
       <li><a href="../index.html" class="icon icon-home"></a> &raquo;</li>
-        
       <li>Program Listing for File element.cu</li>
-    
-    
       <li class="wy-breadcrumbs-aside">
-        
-          
             <a href="../_sources/api/program_listing_file_src_tensors_gpu_element.cu.rst.txt" rel="nofollow"> View page source</a>
-          
-        
       </li>
-    
   </ul>
-
-  
   <hr/>
 </div>
           <div role="main" class="document" itemscope="itemscope" itemtype="http://schema.org/Article">
            <div itemprop="articleBody">
-            
-  <div class="section" id="program-listing-for-file-element-cu">
+             
+  <section id="program-listing-for-file-element-cu">
 <span id="program-listing-file-src-tensors-gpu-element-cu"></span><h1>Program Listing for File element.cu<a class="headerlink" href="#program-listing-for-file-element-cu" title="Permalink to this headline">¶</a></h1>
 <p>↰ <a class="reference internal" href="file_src_tensors_gpu_element.cu.html#file-src-tensors-gpu-element-cu"><span class="std std-ref">Return to documentation for file</span></a> (<code class="docutils literal notranslate"><span class="pre">src/tensors/gpu/element.cu</span></code>)</p>
-<div class="highlight-cpp notranslate"><div class="highlight"><pre><span></span><span class="cp">#include</span> <span class="cpf">&quot;tensors/gpu/element.h&quot;</span><span class="cp"></span>
+<div class="highlight-cpp notranslate"><div class="highlight"><pre><span></span><span class="cp">#include</span><span class="w"> </span><span class="cpf">&quot;tensors/gpu/element.h&quot;</span><span class="cp"></span>
 
-<span class="cp">#include</span> <span class="cpf">&quot;functional/array.h&quot;</span><span class="cp"></span>
-<span class="cp">#include</span> <span class="cpf">&quot;functional/functional.h&quot;</span><span class="cp"></span>
-<span class="cp">#include</span> <span class="cpf">&quot;functional/tensor.h&quot;</span><span class="cp"></span>
-<span class="cp">#include</span> <span class="cpf">&quot;functional/tmp.h&quot;</span><span class="cp"></span>
+<span class="cp">#include</span><span class="w"> </span><span class="cpf">&quot;functional/array.h&quot;</span><span class="cp"></span>
+<span class="cp">#include</span><span class="w"> </span><span class="cpf">&quot;functional/functional.h&quot;</span><span class="cp"></span>
+<span class="cp">#include</span><span class="w"> </span><span class="cpf">&quot;functional/tensor.h&quot;</span><span class="cp"></span>
+<span class="cp">#include</span><span class="w"> </span><span class="cpf">&quot;functional/tmp.h&quot;</span><span class="cp"></span>
 
-<span class="cp">#include</span> <span class="cpf">&quot;tensors/gpu/cuda_helpers.h&quot;</span><span class="cp"></span>
+<span class="cp">#include</span><span class="w"> </span><span class="cpf">&quot;tensors/gpu/cuda_helpers.h&quot;</span><span class="cp"></span>
 
-<span class="k">namespace</span> <span class="n">marian</span> <span class="p">{</span>
-<span class="k">namespace</span> <span class="n">gpu</span> <span class="p">{</span>
+<span class="k">namespace</span><span class="w"> </span><span class="nn">marian</span><span class="w"> </span><span class="p">{</span><span class="w"></span>
+<span class="k">namespace</span><span class="w"> </span><span class="nn">gpu</span><span class="w"> </span><span class="p">{</span><span class="w"></span>
 
-<span class="k">template</span> <span class="o">&lt;</span><span class="kt">size_t</span> <span class="n">K</span><span class="p">,</span> <span class="kt">bool</span> <span class="n">broadcast</span><span class="p">,</span> <span class="k">class</span> <span class="nc">Functor</span><span class="p">,</span> <span class="k">typename</span> <span class="nc">T</span><span class="o">&gt;</span>
-<span class="n">__global__</span> <span class="kt">void</span> <span class="n">gElement</span><span class="p">(</span>
-    <span class="n">Functor</span> <span class="n">functor</span><span class="p">,</span>
-    <span class="n">functional</span><span class="o">::</span><span class="n">Array</span><span class="o">&lt;</span><span class="n">functional</span><span class="o">::</span><span class="n">Tensor</span><span class="o">&lt;</span><span class="n">T</span><span class="o">&gt;</span><span class="p">,</span> <span class="n">K</span><span class="o">&gt;</span> <span class="n">tensors</span><span class="p">)</span> <span class="p">{</span>
-  <span class="kt">int</span> <span class="n">length</span> <span class="o">=</span> <span class="n">tensors</span><span class="p">[</span><span class="mi">0</span><span class="p">].</span><span class="n">shape</span><span class="p">().</span><span class="n">elements</span><span class="p">();</span>
-  <span class="n">functional</span><span class="o">::</span><span class="n">Array</span><span class="o">&lt;</span><span class="kt">int</span><span class="p">,</span> <span class="n">functional</span><span class="o">::</span><span class="n">Shape</span><span class="o">::</span><span class="n">size</span><span class="p">()</span><span class="o">&gt;</span> <span class="n">dims</span><span class="p">;</span>
-  <span class="n">functional</span><span class="o">::</span><span class="n">Array</span><span class="o">&lt;</span><span class="kt">int</span><span class="p">,</span> <span class="n">K</span><span class="o">&gt;</span> <span class="n">indices</span><span class="p">;</span>
+<span class="k">template</span><span class="w"> </span><span class="o">&lt;</span><span class="kt">size_t</span><span class="w"> </span><span class="n">K</span><span class="p">,</span><span class="w"> </span><span class="kt">bool</span><span class="w"> </span><span class="n">broadcast</span><span class="p">,</span><span class="w"> </span><span class="k">class</span><span class="w"> </span><span class="nc">Functor</span><span class="p">,</span><span class="w"> </span><span class="k">typename</span><span class="w"> </span><span class="nc">T</span><span class="o">&gt;</span><span class="w"></span>
+<span class="n">__global__</span><span class="w"> </span><span class="kt">void</span><span class="w"> </span><span class="n">gElement</span><span class="p">(</span><span class="w"></span>
+<span class="w">    </span><span class="n">Functor</span><span class="w"> </span><span class="n">functor</span><span class="p">,</span><span class="w"></span>
+<span class="w">    </span><span class="n">functional</span><span class="o">::</span><span class="n">Array</span><span class="o">&lt;</span><span class="n">functional</span><span class="o">::</span><span class="n">Tensor</span><span class="o">&lt;</span><span class="n">T</span><span class="o">&gt;</span><span class="p">,</span><span class="w"> </span><span class="n">K</span><span class="o">&gt;</span><span class="w"> </span><span class="n">tensors</span><span class="p">)</span><span class="w"> </span><span class="p">{</span><span class="w"></span>
+<span class="w">  </span><span class="kt">int</span><span class="w"> </span><span class="n">length</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="n">tensors</span><span class="p">[</span><span class="mi">0</span><span class="p">].</span><span class="n">shape</span><span class="p">().</span><span class="n">elements</span><span class="p">();</span><span class="w"></span>
+<span class="w">  </span><span class="n">functional</span><span class="o">::</span><span class="n">Array</span><span class="o">&lt;</span><span class="kt">int</span><span class="p">,</span><span class="w"> </span><span class="n">functional</span><span class="o">::</span><span class="n">Shape</span><span class="o">::</span><span class="n">size</span><span class="p">()</span><span class="o">&gt;</span><span class="w"> </span><span class="n">dims</span><span class="p">;</span><span class="w"></span>
+<span class="w">  </span><span class="n">functional</span><span class="o">::</span><span class="n">Array</span><span class="o">&lt;</span><span class="kt">int</span><span class="p">,</span><span class="w"> </span><span class="n">K</span><span class="o">&gt;</span><span class="w"> </span><span class="n">indices</span><span class="p">;</span><span class="w"></span>
 
-  <span class="k">for</span><span class="p">(</span><span class="kt">int</span> <span class="n">bid</span> <span class="o">=</span> <span class="mi">0</span><span class="p">;</span> <span class="n">bid</span> <span class="o">&lt;</span> <span class="n">length</span><span class="p">;</span> <span class="n">bid</span> <span class="o">+=</span> <span class="n">blockDim</span><span class="p">.</span><span class="n">x</span> <span class="o">*</span> <span class="n">gridDim</span><span class="p">.</span><span class="n">x</span><span class="p">)</span> <span class="p">{</span>
-    <span class="kt">int</span> <span class="n">index</span> <span class="o">=</span> <span class="n">bid</span> <span class="o">+</span> <span class="n">blockDim</span><span class="p">.</span><span class="n">x</span> <span class="o">*</span> <span class="n">blockIdx</span><span class="p">.</span><span class="n">x</span> <span class="o">+</span> <span class="n">threadIdx</span><span class="p">.</span><span class="n">x</span><span class="p">;</span>
-    <span class="k">if</span><span class="p">(</span><span class="n">index</span> <span class="o">&lt;</span> <span class="n">length</span><span class="p">)</span> <span class="p">{</span>
-      <span class="n">indices</span><span class="p">.</span><span class="n">fill</span><span class="p">(</span><span class="n">index</span><span class="p">);</span>
+<span class="w">  </span><span class="k">for</span><span class="p">(</span><span class="kt">int</span><span class="w"> </span><span class="n">bid</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="mi">0</span><span class="p">;</span><span class="w"> </span><span class="n">bid</span><span class="w"> </span><span class="o">&lt;</span><span class="w"> </span><span class="n">length</span><span class="p">;</span><span class="w"> </span><span class="n">bid</span><span class="w"> </span><span class="o">+=</span><span class="w"> </span><span class="n">blockDim</span><span class="p">.</span><span class="n">x</span><span class="w"> </span><span class="o">*</span><span class="w"> </span><span class="n">gridDim</span><span class="p">.</span><span class="n">x</span><span class="p">)</span><span class="w"> </span><span class="p">{</span><span class="w"></span>
+<span class="w">    </span><span class="kt">int</span><span class="w"> </span><span class="n">index</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="n">bid</span><span class="w"> </span><span class="o">+</span><span class="w"> </span><span class="n">blockDim</span><span class="p">.</span><span class="n">x</span><span class="w"> </span><span class="o">*</span><span class="w"> </span><span class="n">blockIdx</span><span class="p">.</span><span class="n">x</span><span class="w"> </span><span class="o">+</span><span class="w"> </span><span class="n">threadIdx</span><span class="p">.</span><span class="n">x</span><span class="p">;</span><span class="w"></span>
+<span class="w">    </span><span class="k">if</span><span class="p">(</span><span class="n">index</span><span class="w"> </span><span class="o">&lt;</span><span class="w"> </span><span class="n">length</span><span class="p">)</span><span class="w"> </span><span class="p">{</span><span class="w"></span>
+<span class="w">      </span><span class="n">indices</span><span class="p">.</span><span class="n">fill</span><span class="p">(</span><span class="n">index</span><span class="p">);</span><span class="w"></span>
 
-      <span class="k">if</span><span class="p">(</span><span class="n">broadcast</span><span class="p">)</span> <span class="p">{</span>
-        <span class="n">tensors</span><span class="p">[</span><span class="mi">0</span><span class="p">].</span><span class="n">shape</span><span class="p">().</span><span class="n">dims</span><span class="p">(</span><span class="n">index</span><span class="p">,</span> <span class="n">dims</span><span class="p">);</span>
-        <span class="k">for</span><span class="p">(</span><span class="kt">int</span> <span class="n">i</span> <span class="o">=</span> <span class="mi">1</span><span class="p">;</span> <span class="n">i</span> <span class="o">&lt;</span> <span class="n">K</span><span class="p">;</span> <span class="o">++</span><span class="n">i</span><span class="p">)</span>
-          <span class="n">indices</span><span class="p">[</span><span class="n">i</span><span class="p">]</span> <span class="o">=</span> <span class="n">tensors</span><span class="p">[</span><span class="n">i</span><span class="p">].</span><span class="n">shape</span><span class="p">().</span><span class="n">bindex</span><span class="p">(</span><span class="n">dims</span><span class="p">);</span>
-      <span class="p">}</span>
+<span class="w">      </span><span class="k">if</span><span class="p">(</span><span class="n">broadcast</span><span class="p">)</span><span class="w"> </span><span class="p">{</span><span class="w"></span>
+<span class="w">        </span><span class="n">tensors</span><span class="p">[</span><span class="mi">0</span><span class="p">].</span><span class="n">shape</span><span class="p">().</span><span class="n">dims</span><span class="p">(</span><span class="n">index</span><span class="p">,</span><span class="w"> </span><span class="n">dims</span><span class="p">);</span><span class="w"></span>
+<span class="w">        </span><span class="k">for</span><span class="p">(</span><span class="kt">int</span><span class="w"> </span><span class="n">i</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="mi">1</span><span class="p">;</span><span class="w"> </span><span class="n">i</span><span class="w"> </span><span class="o">&lt;</span><span class="w"> </span><span class="n">K</span><span class="p">;</span><span class="w"> </span><span class="o">++</span><span class="n">i</span><span class="p">)</span><span class="w"></span>
+<span class="w">          </span><span class="n">indices</span><span class="p">[</span><span class="n">i</span><span class="p">]</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="n">tensors</span><span class="p">[</span><span class="n">i</span><span class="p">].</span><span class="n">shape</span><span class="p">().</span><span class="n">bindex</span><span class="p">(</span><span class="n">dims</span><span class="p">);</span><span class="w"></span>
+<span class="w">      </span><span class="p">}</span><span class="w"></span>
 
-      <span class="n">tensors</span><span class="p">[</span><span class="mi">0</span><span class="p">].</span><span class="n">data</span><span class="p">()[</span><span class="n">index</span><span class="p">]</span> <span class="o">=</span> <span class="n">functional</span><span class="o">::</span><span class="n">apply</span><span class="p">(</span><span class="n">functor</span><span class="p">,</span> <span class="n">tensors</span><span class="p">,</span> <span class="n">indices</span><span class="p">);</span>
-    <span class="p">}</span>
-  <span class="p">}</span>
-<span class="p">}</span>
+<span class="w">      </span><span class="n">tensors</span><span class="p">[</span><span class="mi">0</span><span class="p">].</span><span class="n">data</span><span class="p">()[</span><span class="n">index</span><span class="p">]</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="n">functional</span><span class="o">::</span><span class="n">apply</span><span class="p">(</span><span class="n">functor</span><span class="p">,</span><span class="w"> </span><span class="n">tensors</span><span class="p">,</span><span class="w"> </span><span class="n">indices</span><span class="p">);</span><span class="w"></span>
+<span class="w">    </span><span class="p">}</span><span class="w"></span>
+<span class="w">  </span><span class="p">}</span><span class="w"></span>
+<span class="p">}</span><span class="w"></span>
 
 
-<span class="k">template</span> <span class="o">&lt;</span><span class="k">typename</span> <span class="nc">T</span><span class="p">,</span> <span class="k">class</span> <span class="nc">Functor</span><span class="p">,</span> <span class="k">class</span><span class="p">...</span> <span class="n">Tensors</span><span class="o">&gt;</span>
-<span class="kt">void</span> <span class="n">ElementTyped</span><span class="p">(</span><span class="n">Functor</span> <span class="n">functor</span><span class="p">,</span> <span class="n">Tensor</span> <span class="n">out</span><span class="p">,</span> <span class="n">Tensors</span><span class="p">...</span> <span class="n">tensors</span><span class="p">)</span> <span class="p">{</span>
-  <span class="c1">//matchOrAbort&lt;T&gt;(out-&gt;type()); // @TODO: figure out undefined reference</span>
+<span class="k">template</span><span class="w"> </span><span class="o">&lt;</span><span class="k">typename</span><span class="w"> </span><span class="nc">T</span><span class="p">,</span><span class="w"> </span><span class="k">class</span><span class="w"> </span><span class="nc">Functor</span><span class="p">,</span><span class="w"> </span><span class="k">class</span><span class="p">...</span><span class="w"> </span><span class="n">Tensors</span><span class="o">&gt;</span><span class="w"></span>
+<span class="kt">void</span><span class="w"> </span><span class="n">ElementTyped</span><span class="p">(</span><span class="n">Functor</span><span class="w"> </span><span class="n">functor</span><span class="p">,</span><span class="w"> </span><span class="n">Tensor</span><span class="w"> </span><span class="n">out</span><span class="p">,</span><span class="w"> </span><span class="n">Tensors</span><span class="p">...</span><span class="w"> </span><span class="n">tensors</span><span class="p">)</span><span class="w"> </span><span class="p">{</span><span class="w"></span>
+<span class="w">  </span><span class="c1">//matchOrAbort&lt;T&gt;(out-&gt;type()); // @TODO: figure out undefined reference</span>
 
-  <span class="n">cudaSetDevice</span><span class="p">(</span><span class="n">out</span><span class="o">-&gt;</span><span class="n">getDeviceId</span><span class="p">().</span><span class="n">no</span><span class="p">);</span>
+<span class="w">  </span><span class="n">cudaSetDevice</span><span class="p">(</span><span class="n">out</span><span class="o">-&gt;</span><span class="n">getDeviceId</span><span class="p">().</span><span class="n">no</span><span class="p">);</span><span class="w"></span>
 
-  <span class="kt">int</span> <span class="n">length</span> <span class="o">=</span> <span class="n">out</span><span class="o">-&gt;</span><span class="n">shape</span><span class="p">().</span><span class="n">elements</span><span class="p">();</span>
-  <span class="kt">int</span> <span class="n">threads</span> <span class="o">=</span> <span class="n">std</span><span class="o">::</span><span class="n">min</span><span class="p">(</span><span class="n">MAX_THREADS</span><span class="p">,</span> <span class="n">length</span><span class="p">);</span>
-  <span class="kt">int</span> <span class="n">blocks</span> <span class="o">=</span> <span class="n">std</span><span class="o">::</span><span class="n">min</span><span class="p">(</span><span class="n">MAX_BLOCKS</span><span class="p">,</span> <span class="n">length</span> <span class="o">/</span> <span class="n">threads</span> <span class="o">+</span> <span class="p">(</span><span class="n">length</span> <span class="o">%</span> <span class="n">threads</span> <span class="o">!=</span> <span class="mi">0</span><span class="p">));</span>
+<span class="w">  </span><span class="kt">int</span><span class="w"> </span><span class="n">length</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="n">out</span><span class="o">-&gt;</span><span class="n">shape</span><span class="p">().</span><span class="n">elements</span><span class="p">();</span><span class="w"></span>
+<span class="w">  </span><span class="kt">int</span><span class="w"> </span><span class="n">threads</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="n">std</span><span class="o">::</span><span class="n">min</span><span class="p">(</span><span class="n">MAX_THREADS</span><span class="p">,</span><span class="w"> </span><span class="n">length</span><span class="p">);</span><span class="w"></span>
+<span class="w">  </span><span class="kt">int</span><span class="w"> </span><span class="n">blocks</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="n">std</span><span class="o">::</span><span class="n">min</span><span class="p">(</span><span class="n">MAX_BLOCKS</span><span class="p">,</span><span class="w"> </span><span class="n">length</span><span class="w"> </span><span class="o">/</span><span class="w"> </span><span class="n">threads</span><span class="w"> </span><span class="o">+</span><span class="w"> </span><span class="p">(</span><span class="n">length</span><span class="w"> </span><span class="o">%</span><span class="w"> </span><span class="n">threads</span><span class="w"> </span><span class="o">!=</span><span class="w"> </span><span class="mi">0</span><span class="p">));</span><span class="w"></span>
 
-  <span class="k">constexpr</span> <span class="kt">size_t</span> <span class="n">K</span> <span class="o">=</span> <span class="k">sizeof</span><span class="p">...(</span><span class="n">tensors</span><span class="p">)</span> <span class="o">+</span> <span class="mi">1</span><span class="p">;</span>
-  <span class="n">functional</span><span class="o">::</span><span class="n">Array</span><span class="o">&lt;</span><span class="n">functional</span><span class="o">::</span><span class="n">Tensor</span><span class="o">&lt;</span><span class="n">T</span><span class="o">&gt;</span><span class="p">,</span> <span class="n">K</span><span class="o">&gt;</span> <span class="n">gTensors</span> <span class="o">=</span> <span class="p">{</span><span class="n">out</span><span class="p">,</span> <span class="n">tensors</span><span class="p">...};</span>
+<span class="w">  </span><span class="k">constexpr</span><span class="w"> </span><span class="kt">size_t</span><span class="w"> </span><span class="n">K</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="k">sizeof</span><span class="p">...(</span><span class="n">tensors</span><span class="p">)</span><span class="w"> </span><span class="o">+</span><span class="w"> </span><span class="mi">1</span><span class="p">;</span><span class="w"></span>
+<span class="w">  </span><span class="n">functional</span><span class="o">::</span><span class="n">Array</span><span class="o">&lt;</span><span class="n">functional</span><span class="o">::</span><span class="n">Tensor</span><span class="o">&lt;</span><span class="n">T</span><span class="o">&gt;</span><span class="p">,</span><span class="w"> </span><span class="n">K</span><span class="o">&gt;</span><span class="w"> </span><span class="n">gTensors</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="p">{</span><span class="n">out</span><span class="p">,</span><span class="w"> </span><span class="n">tensors</span><span class="p">...};</span><span class="w"></span>
 
-  <span class="kt">bool</span> <span class="n">broadcast</span> <span class="o">=</span> <span class="nb">false</span><span class="p">;</span>
-  <span class="k">for</span><span class="p">(</span><span class="kt">int</span> <span class="n">i</span> <span class="o">=</span> <span class="mi">1</span><span class="p">;</span> <span class="n">i</span> <span class="o">&lt;</span> <span class="n">K</span><span class="p">;</span> <span class="o">++</span><span class="n">i</span><span class="p">)</span>
-    <span class="n">broadcast</span> <span class="o">=</span> <span class="n">broadcast</span> <span class="o">||</span> <span class="n">gTensors</span><span class="p">[</span><span class="mi">0</span><span class="p">].</span><span class="n">shape</span><span class="p">()</span> <span class="o">!=</span> <span class="n">gTensors</span><span class="p">[</span><span class="n">i</span><span class="p">].</span><span class="n">shape</span><span class="p">();</span>
-  <span class="k">if</span><span class="p">(</span><span class="n">broadcast</span><span class="p">)</span>
-    <span class="n">gElement</span><span class="o">&lt;</span><span class="n">K</span><span class="p">,</span> <span class="nb">true</span><span class="o">&gt;&lt;&lt;&lt;</span><span class="n">blocks</span><span class="p">,</span> <span class="n">threads</span><span class="o">&gt;&gt;&gt;</span><span class="p">(</span><span class="n">functor</span><span class="p">,</span> <span class="n">gTensors</span><span class="p">);</span>
-  <span class="k">else</span>
-    <span class="n">gElement</span><span class="o">&lt;</span><span class="n">K</span><span class="p">,</span> <span class="nb">false</span><span class="o">&gt;&lt;&lt;&lt;</span><span class="n">blocks</span><span class="p">,</span> <span class="n">threads</span><span class="o">&gt;&gt;&gt;</span><span class="p">(</span><span class="n">functor</span><span class="p">,</span> <span class="n">gTensors</span><span class="p">);</span>
-<span class="p">}</span>
+<span class="w">  </span><span class="kt">bool</span><span class="w"> </span><span class="n">broadcast</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="nb">false</span><span class="p">;</span><span class="w"></span>
+<span class="w">  </span><span class="k">for</span><span class="p">(</span><span class="kt">int</span><span class="w"> </span><span class="n">i</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="mi">1</span><span class="p">;</span><span class="w"> </span><span class="n">i</span><span class="w"> </span><span class="o">&lt;</span><span class="w"> </span><span class="n">K</span><span class="p">;</span><span class="w"> </span><span class="o">++</span><span class="n">i</span><span class="p">)</span><span class="w"></span>
+<span class="w">    </span><span class="n">broadcast</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="n">broadcast</span><span class="w"> </span><span class="o">||</span><span class="w"> </span><span class="n">gTensors</span><span class="p">[</span><span class="mi">0</span><span class="p">].</span><span class="n">shape</span><span class="p">()</span><span class="w"> </span><span class="o">!=</span><span class="w"> </span><span class="n">gTensors</span><span class="p">[</span><span class="n">i</span><span class="p">].</span><span class="n">shape</span><span class="p">();</span><span class="w"></span>
+<span class="w">  </span><span class="k">if</span><span class="p">(</span><span class="n">broadcast</span><span class="p">)</span><span class="w"></span>
+<span class="w">    </span><span class="n">gElement</span><span class="o">&lt;</span><span class="n">K</span><span class="p">,</span><span class="w"> </span><span class="nb">true</span><span class="o">&gt;&lt;&lt;&lt;</span><span class="n">blocks</span><span class="p">,</span><span class="w"> </span><span class="n">threads</span><span class="o">&gt;&gt;&gt;</span><span class="p">(</span><span class="n">functor</span><span class="p">,</span><span class="w"> </span><span class="n">gTensors</span><span class="p">);</span><span class="w"></span>
+<span class="w">  </span><span class="k">else</span><span class="w"></span>
+<span class="w">    </span><span class="n">gElement</span><span class="o">&lt;</span><span class="n">K</span><span class="p">,</span><span class="w"> </span><span class="nb">false</span><span class="o">&gt;&lt;&lt;&lt;</span><span class="n">blocks</span><span class="p">,</span><span class="w"> </span><span class="n">threads</span><span class="o">&gt;&gt;&gt;</span><span class="p">(</span><span class="n">functor</span><span class="p">,</span><span class="w"> </span><span class="n">gTensors</span><span class="p">);</span><span class="w"></span>
+<span class="p">}</span><span class="w"></span>
 
-<span class="k">template</span> <span class="o">&lt;</span><span class="k">class</span> <span class="nc">Functor</span><span class="p">,</span> <span class="k">class</span><span class="p">...</span> <span class="n">Tensors</span><span class="o">&gt;</span>
-<span class="kt">void</span> <span class="n">Element</span><span class="p">(</span><span class="n">Functor</span> <span class="n">functor</span><span class="p">,</span> <span class="n">Tensor</span> <span class="n">out</span><span class="p">,</span> <span class="n">Tensors</span><span class="p">...</span> <span class="n">tensors</span><span class="p">)</span> <span class="p">{</span>
-  <span class="n">checkCommonType</span><span class="p">(</span><span class="n">out</span><span class="p">,</span> <span class="n">tensors</span><span class="p">...);</span>
+<span class="k">template</span><span class="w"> </span><span class="o">&lt;</span><span class="k">class</span><span class="w"> </span><span class="nc">Functor</span><span class="p">,</span><span class="w"> </span><span class="k">class</span><span class="p">...</span><span class="w"> </span><span class="n">Tensors</span><span class="o">&gt;</span><span class="w"></span>
+<span class="kt">void</span><span class="w"> </span><span class="n">Element</span><span class="p">(</span><span class="n">Functor</span><span class="w"> </span><span class="n">functor</span><span class="p">,</span><span class="w"> </span><span class="n">Tensor</span><span class="w"> </span><span class="n">out</span><span class="p">,</span><span class="w"> </span><span class="n">Tensors</span><span class="p">...</span><span class="w"> </span><span class="n">tensors</span><span class="p">)</span><span class="w"> </span><span class="p">{</span><span class="w"></span>
+<span class="w">  </span><span class="n">checkCommonType</span><span class="p">(</span><span class="n">out</span><span class="p">,</span><span class="w"> </span><span class="n">tensors</span><span class="p">...);</span><span class="w"></span>
 
-  <span class="k">if</span><span class="p">(</span><span class="n">out</span><span class="o">-&gt;</span><span class="n">type</span><span class="p">()</span> <span class="o">==</span> <span class="n">Type</span><span class="o">::</span><span class="n">float32</span><span class="p">)</span> <span class="p">{</span>
-    <span class="n">ElementTyped</span><span class="o">&lt;</span><span class="kt">float</span><span class="o">&gt;</span><span class="p">(</span><span class="n">functor</span><span class="p">,</span> <span class="n">out</span><span class="p">,</span> <span class="n">tensors</span><span class="p">...);</span>
-  <span class="p">}</span> <span class="k">else</span> <span class="k">if</span><span class="p">(</span><span class="n">out</span><span class="o">-&gt;</span><span class="n">type</span><span class="p">()</span> <span class="o">==</span> <span class="n">Type</span><span class="o">::</span><span class="n">float16</span><span class="p">)</span> <span class="p">{</span>
+<span class="w">  </span><span class="k">if</span><span class="p">(</span><span class="n">out</span><span class="o">-&gt;</span><span class="n">type</span><span class="p">()</span><span class="w"> </span><span class="o">==</span><span class="w"> </span><span class="n">Type</span><span class="o">::</span><span class="n">float32</span><span class="p">)</span><span class="w"> </span><span class="p">{</span><span class="w"></span>
+<span class="w">    </span><span class="n">ElementTyped</span><span class="o">&lt;</span><span class="kt">float</span><span class="o">&gt;</span><span class="p">(</span><span class="n">functor</span><span class="p">,</span><span class="w"> </span><span class="n">out</span><span class="p">,</span><span class="w"> </span><span class="n">tensors</span><span class="p">...);</span><span class="w"></span>
+<span class="w">  </span><span class="p">}</span><span class="w"> </span><span class="k">else</span><span class="w"> </span><span class="k">if</span><span class="p">(</span><span class="n">out</span><span class="o">-&gt;</span><span class="n">type</span><span class="p">()</span><span class="w"> </span><span class="o">==</span><span class="w"> </span><span class="n">Type</span><span class="o">::</span><span class="n">float16</span><span class="p">)</span><span class="w"> </span><span class="p">{</span><span class="w"></span>
 <span class="cp">#if COMPILE_FP16</span>
-    <span class="n">std</span><span class="o">::</span><span class="n">vector</span><span class="o">&lt;</span><span class="n">marian</span><span class="o">::</span><span class="n">Tensor</span><span class="o">&gt;</span> <span class="n">ts</span><span class="p">({</span><span class="n">out</span><span class="p">,</span> <span class="n">tensors</span><span class="p">...});</span>
-    <span class="kt">bool</span> <span class="n">div2</span> <span class="o">=</span> <span class="n">std</span><span class="o">::</span><span class="n">all_of</span><span class="p">(</span><span class="n">ts</span><span class="p">.</span><span class="n">cbegin</span><span class="p">(),</span> <span class="n">ts</span><span class="p">.</span><span class="n">cend</span><span class="p">(),</span> <span class="p">[](</span><span class="n">marian</span><span class="o">::</span><span class="n">Tensor</span> <span class="n">t</span><span class="p">){</span> <span class="k">return</span> <span class="n">t</span><span class="o">-&gt;</span><span class="n">shape</span><span class="p">()[</span><span class="mi">-1</span><span class="p">]</span> <span class="o">%</span> <span class="mi">2</span> <span class="o">==</span> <span class="mi">0</span><span class="p">;</span> <span class="p">});</span>
-    <span class="k">if</span><span class="p">(</span><span class="n">div2</span><span class="p">)</span> <span class="p">{</span>
-      <span class="n">ElementTyped</span><span class="o">&lt;</span><span class="n">halfx2</span><span class="o">&gt;</span><span class="p">(</span><span class="n">functor</span><span class="p">,</span> <span class="n">out</span><span class="p">,</span> <span class="n">tensors</span><span class="p">...);</span>
-    <span class="p">}</span> <span class="k">else</span> <span class="p">{</span>
-      <span class="n">ElementTyped</span><span class="o">&lt;</span><span class="n">half</span><span class="o">&gt;</span><span class="p">(</span><span class="n">functor</span><span class="p">,</span> <span class="n">out</span><span class="p">,</span> <span class="n">tensors</span><span class="p">...);</span>
-    <span class="p">}</span>
+<span class="w">    </span><span class="n">std</span><span class="o">::</span><span class="n">vector</span><span class="o">&lt;</span><span class="n">marian</span><span class="o">::</span><span class="n">Tensor</span><span class="o">&gt;</span><span class="w"> </span><span class="n">ts</span><span class="p">({</span><span class="n">out</span><span class="p">,</span><span class="w"> </span><span class="n">tensors</span><span class="p">...});</span><span class="w"></span>
+<span class="w">    </span><span class="kt">bool</span><span class="w"> </span><span class="n">div2</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="n">std</span><span class="o">::</span><span class="n">all_of</span><span class="p">(</span><span class="n">ts</span><span class="p">.</span><span class="n">cbegin</span><span class="p">(),</span><span class="w"> </span><span class="n">ts</span><span class="p">.</span><span class="n">cend</span><span class="p">(),</span><span class="w"> </span><span class="p">[](</span><span class="n">marian</span><span class="o">::</span><span class="n">Tensor</span><span class="w"> </span><span class="n">t</span><span class="p">){</span><span class="w"> </span><span class="k">return</span><span class="w"> </span><span class="n">t</span><span class="o">-&gt;</span><span class="n">shape</span><span class="p">()[</span><span class="mi">-1</span><span class="p">]</span><span class="w"> </span><span class="o">%</span><span class="w"> </span><span class="mi">2</span><span class="w"> </span><span class="o">==</span><span class="w"> </span><span class="mi">0</span><span class="p">;</span><span class="w"> </span><span class="p">});</span><span class="w"></span>
+<span class="w">    </span><span class="k">if</span><span class="p">(</span><span class="n">div2</span><span class="p">)</span><span class="w"> </span><span class="p">{</span><span class="w"></span>
+<span class="w">      </span><span class="n">ElementTyped</span><span class="o">&lt;</span><span class="n">halfx2</span><span class="o">&gt;</span><span class="p">(</span><span class="n">functor</span><span class="p">,</span><span class="w"> </span><span class="n">out</span><span class="p">,</span><span class="w"> </span><span class="n">tensors</span><span class="p">...);</span><span class="w"></span>
+<span class="w">    </span><span class="p">}</span><span class="w"> </span><span class="k">else</span><span class="w"> </span><span class="p">{</span><span class="w"></span>
+<span class="w">      </span><span class="n">ElementTyped</span><span class="o">&lt;</span><span class="n">half</span><span class="o">&gt;</span><span class="p">(</span><span class="n">functor</span><span class="p">,</span><span class="w"> </span><span class="n">out</span><span class="p">,</span><span class="w"> </span><span class="n">tensors</span><span class="p">...);</span><span class="w"></span>
+<span class="w">    </span><span class="p">}</span><span class="w"></span>
 <span class="cp">#else</span>
-    <span class="n">ABORT</span><span class="p">(</span><span class="s">&quot;FP16 not supported with chosen current hardware or CUDA version&quot;</span><span class="p">);</span>
+<span class="w">    </span><span class="n">ABORT</span><span class="p">(</span><span class="s">&quot;FP16 not supported with chosen current hardware or CUDA version&quot;</span><span class="p">);</span><span class="w"></span>
 <span class="cp">#endif</span>
-  <span class="p">}</span> <span class="k">else</span> <span class="k">if</span><span class="p">(</span><span class="n">out</span><span class="o">-&gt;</span><span class="n">type</span><span class="p">()</span> <span class="o">==</span> <span class="n">Type</span><span class="o">::</span><span class="n">float64</span><span class="p">)</span> <span class="p">{</span>
-    <span class="n">ElementTyped</span><span class="o">&lt;</span><span class="kt">double</span><span class="o">&gt;</span><span class="p">(</span><span class="n">functor</span><span class="p">,</span> <span class="n">out</span><span class="p">,</span> <span class="n">tensors</span><span class="p">...);</span>
-  <span class="p">}</span> <span class="k">else</span> <span class="p">{</span>
-    <span class="n">ABORT</span><span class="p">(</span><span class="s">&quot;Type {} not yet supported&quot;</span><span class="p">,</span> <span class="n">out</span><span class="o">-&gt;</span><span class="n">type</span><span class="p">());</span>
-  <span class="p">}</span>
-<span class="p">}</span>
+<span class="w">  </span><span class="p">}</span><span class="w"> </span><span class="k">else</span><span class="w"> </span><span class="k">if</span><span class="p">(</span><span class="n">out</span><span class="o">-&gt;</span><span class="n">type</span><span class="p">()</span><span class="w"> </span><span class="o">==</span><span class="w"> </span><span class="n">Type</span><span class="o">::</span><span class="n">float64</span><span class="p">)</span><span class="w"> </span><span class="p">{</span><span class="w"></span>
+<span class="w">    </span><span class="n">ElementTyped</span><span class="o">&lt;</span><span class="kt">double</span><span class="o">&gt;</span><span class="p">(</span><span class="n">functor</span><span class="p">,</span><span class="w"> </span><span class="n">out</span><span class="p">,</span><span class="w"> </span><span class="n">tensors</span><span class="p">...);</span><span class="w"></span>
+<span class="w">  </span><span class="p">}</span><span class="w"> </span><span class="k">else</span><span class="w"> </span><span class="p">{</span><span class="w"></span>
+<span class="w">    </span><span class="n">ABORT</span><span class="p">(</span><span class="s">&quot;Type {} not yet supported&quot;</span><span class="p">,</span><span class="w"> </span><span class="n">out</span><span class="o">-&gt;</span><span class="n">type</span><span class="p">());</span><span class="w"></span>
+<span class="w">  </span><span class="p">}</span><span class="w"></span>
+<span class="p">}</span><span class="w"></span>
 
-<span class="cp">#include</span> <span class="cpf">&quot;tensors/gpu/element.inc&quot;</span><span class="cp"></span>
-<span class="p">}</span>  <span class="c1">// namespace gpu</span>
-<span class="p">}</span>  <span class="c1">// namespace marian</span>
+<span class="cp">#include</span><span class="w"> </span><span class="cpf">&quot;tensors/gpu/element.inc&quot;</span><span class="cp"></span>
+<span class="p">}</span><span class="w">  </span><span class="c1">// namespace gpu</span>
+<span class="p">}</span><span class="w">  </span><span class="c1">// namespace marian</span>
 </pre></div>
 </div>
-</div>
+</section>
 
 
            </div>
-           
           </div>
           <footer>
 
   <hr/>
 
   <div role="contentinfo">
-    <p>
-        &#169; Copyright 2021, Marian NMT Team.
-
-    </p>
+    <p>&#169; Copyright 2021, Marian NMT Team.</p>
   </div>
-    
-    
-    
-    Built with <a href="https://www.sphinx-doc.org/">Sphinx</a> using a
-    
+
+  Built with <a href="https://www.sphinx-doc.org/">Sphinx</a> using a
     <a href="https://github.com/readthedocs/sphinx_rtd_theme">theme</a>
-    
-    provided by <a href="https://readthedocs.org">Read the Docs</a>. 
+    provided by <a href="https://readthedocs.org">Read the Docs</a>.
+   
 
 </footer>
         </div>
       </div>
-
     </section>
-
   </div>
-  
-
-  <script type="text/javascript">
+  <script>
       jQuery(function () {
           SphinxRtdTheme.Navigation.enable(true);
       });
-  </script>
-
-  
-  
-    
-   
+  </script> 
 
 </body>
 </html>

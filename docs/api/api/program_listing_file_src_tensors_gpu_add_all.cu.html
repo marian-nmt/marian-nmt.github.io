@@ -1,78 +1,41 @@
-
-
 <!DOCTYPE html>
 <html class="writer-html5" lang="en" >
 <head>
-  <meta charset="utf-8" />
-  
+  <meta charset="utf-8" /><meta name="generator" content="Docutils 0.17.1: http://docutils.sourceforge.net/" />
+
   <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-  
-  <title>Program Listing for File add_all.cu &mdash; Marian NMT v1.10.3 2021-03-22 documentation</title>
-  
-
-  
-  <link rel="stylesheet" href="../_static/css/theme.css" type="text/css" />
-  <link rel="stylesheet" href="../_static/pygments.css" type="text/css" />
-  <link rel="stylesheet" href="../_static/css/custom.css" type="text/css" />
-  <link rel="stylesheet" href="../_static/collapsible-lists/css/tree_view.css" type="text/css" />
-
-  
-  
-
-  
-  
-
-  
+  <title>Program Listing for File add_all.cu &mdash; Marian NMT v1.10.27 2022-01-25 documentation</title><link rel="stylesheet" href="../_static/css/theme.css" type="text/css" />
+    <link rel="stylesheet" href="../_static/pygments.css" type="text/css" />
+      <link rel="stylesheet" href="../_static/css/custom.css" type="text/css" />
+      <link rel="stylesheet" href="../_static/collapsible-lists/css/tree_view.css" type="text/css" />
     <link rel="canonical" href="http://marian-nmt.github.io/docs/api/api/program_listing_file_src_tensors_gpu_add_all.cu.html" />
-
-  
   <!--[if lt IE 9]>
     <script src="../_static/js/html5shiv.min.js"></script>
   <![endif]-->
-  
-    
-      <script type="text/javascript" id="documentation_options" data-url_root="../" src="../_static/documentation_options.js"></script>
+  <script id="documentation_options" data-url_root="../" src="../_static/documentation_options.js"></script>
         <script src="../_static/jquery.js"></script>
         <script src="../_static/underscore.js"></script>
         <script src="../_static/doctools.js"></script>
         <script src="../_static/language_data.js"></script>
         <script src="../_static/collapsible-lists/js/CollapsibleLists.compressed.js"></script>
         <script src="../_static/collapsible-lists/js/apply-collapsible-lists.js"></script>
-    
-    <script type="text/javascript" src="../_static/js/theme.js"></script>
-
-    
+        <script async="async" src="https://cdnjs.cloudflare.com/ajax/libs/mathjax/2.7.5/latest.js?config=TeX-AMS-MML_HTMLorMML"></script>
+        <script type="text/x-mathjax-config">MathJax.Hub.Config({"tex2jax": {"inlineMath": [["\\(", "\\)"]], "displayMath": [["\\[", "\\]"]], "processRefs": false, "processEnvironments": false}})</script>
+    <script src="../_static/js/theme.js"></script>
     <link rel="index" title="Index" href="../genindex.html" />
     <link rel="search" title="Search" href="../search.html" /> 
 </head>
 
-<body class="wy-body-for-nav">
-
-   
+<body class="wy-body-for-nav"> 
   <div class="wy-grid-for-nav">
-    
     <nav data-toggle="wy-nav-shift" class="wy-nav-side">
       <div class="wy-side-scroll">
         <div class="wy-side-nav-search" >
-          
-
-          
             <a href="../index.html" class="icon icon-home"> Marian NMT
-          
-
-          
           </a>
-
-          
-            
-            
               <div class="version">
-                v1.10.3
+                v1.10.27
               </div>
-            
-          
-
-          
 <div role="search">
   <form id="rtd-search-form" class="wy-form" action="../search.html" method="get">
     <input type="text" name="q" placeholder="Search docs" />
@@ -80,256 +43,189 @@
     <input type="hidden" name="area" value="default" />
   </form>
 </div>
-
-          
-        </div>
-
-        
-        <div class="wy-menu wy-menu-vertical" data-spy="affix" role="navigation" aria-label="main navigation">
-          
-            
-            
-              
-            
-            
-              <p class="caption"><span class="caption-text">Contents:</span></p>
+        </div><div class="wy-menu wy-menu-vertical" data-spy="affix" role="navigation" aria-label="Navigation menu">
+              <p><span class="caption-text">Contents:</span></p>
 <ul>
 <li class="toctree-l1"><a class="reference internal" href="../graph.html">Expression graphs</a></li>
 <li class="toctree-l1"><a class="reference internal" href="../operators.html">Operations in the Expression Graph</a></li>
 <li class="toctree-l1"><a class="reference internal" href="library_index.html">Library API</a></li>
 <li class="toctree-l1"><a class="reference internal" href="../contributing.html">How to contribute to Marian</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../doc_guide.html">Writing documentation</a></li>
 </ul>
 
-            
-          
         </div>
-        
       </div>
     </nav>
 
-    <section data-toggle="wy-nav-shift" class="wy-nav-content-wrap">
-
-      
-      <nav class="wy-nav-top" aria-label="top navigation">
-        
+    <section data-toggle="wy-nav-shift" class="wy-nav-content-wrap"><nav class="wy-nav-top" aria-label="Mobile navigation menu" >
           <i data-toggle="wy-nav-top" class="fa fa-bars"></i>
           <a href="../index.html">Marian NMT</a>
-        
       </nav>
 
-
       <div class="wy-nav-content">
-        
         <div class="rst-content">
-        
-          
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-<div role="navigation" aria-label="breadcrumbs navigation">
-
+          <div role="navigation" aria-label="Page navigation">
   <ul class="wy-breadcrumbs">
-    
       <li><a href="../index.html" class="icon icon-home"></a> &raquo;</li>
-        
       <li>Program Listing for File add_all.cu</li>
-    
-    
       <li class="wy-breadcrumbs-aside">
-        
-          
             <a href="../_sources/api/program_listing_file_src_tensors_gpu_add_all.cu.rst.txt" rel="nofollow"> View page source</a>
-          
-        
       </li>
-    
   </ul>
-
-  
   <hr/>
 </div>
           <div role="main" class="document" itemscope="itemscope" itemtype="http://schema.org/Article">
            <div itemprop="articleBody">
-            
-  <div class="section" id="program-listing-for-file-add-all-cu">
+             
+  <section id="program-listing-for-file-add-all-cu">
 <span id="program-listing-file-src-tensors-gpu-add-all-cu"></span><h1>Program Listing for File add_all.cu<a class="headerlink" href="#program-listing-for-file-add-all-cu" title="Permalink to this headline">¶</a></h1>
 <p>↰ <a class="reference internal" href="file_src_tensors_gpu_add_all.cu.html#file-src-tensors-gpu-add-all-cu"><span class="std std-ref">Return to documentation for file</span></a> (<code class="docutils literal notranslate"><span class="pre">src/tensors/gpu/add_all.cu</span></code>)</p>
-<div class="highlight-cpp notranslate"><div class="highlight"><pre><span></span><span class="cp">#include</span> <span class="cpf">&quot;tensors/gpu/add_all.h&quot;</span><span class="cp"></span>
-<span class="cp">#include</span> <span class="cpf">&quot;tensors/gpu/cuda_helpers.h&quot;</span><span class="cp"></span>
-<span class="cp">#include</span> <span class="cpf">&quot;functional/functional.h&quot;</span><span class="cp"></span>
-<span class="cp">#include</span> <span class="cpf">&quot;tensors/tensor_operators.h&quot;</span><span class="cp"></span>
-<span class="cp">#include</span> <span class="cpf">&quot;3rd_party/reduce_all.h&quot;</span><span class="c1"> // only works with CUDA &gt;9.0, we are dropping CUDA 8.0 support, also changed in CMakeLists.txt</span><span class="cp"></span>
+<div class="highlight-cpp notranslate"><div class="highlight"><pre><span></span><span class="cp">#include</span><span class="w"> </span><span class="cpf">&quot;tensors/gpu/add_all.h&quot;</span><span class="cp"></span>
+<span class="cp">#include</span><span class="w"> </span><span class="cpf">&quot;tensors/gpu/cuda_helpers.h&quot;</span><span class="cp"></span>
+<span class="cp">#include</span><span class="w"> </span><span class="cpf">&quot;functional/functional.h&quot;</span><span class="cp"></span>
+<span class="cp">#include</span><span class="w"> </span><span class="cpf">&quot;tensors/tensor_operators.h&quot;</span><span class="cp"></span>
+<span class="cp">#include</span><span class="w"> </span><span class="cpf">&quot;3rd_party/reduce_all.h&quot;</span><span class="c1"> // only works with CUDA &gt;9.0, we are dropping CUDA 8.0 support, also changed in CMakeLists.txt</span><span class="cp"></span>
 
-<span class="k">namespace</span> <span class="n">marian</span> <span class="p">{</span>
+<span class="k">namespace</span><span class="w"> </span><span class="nn">marian</span><span class="w"> </span><span class="p">{</span><span class="w"></span>
 
 <span class="cp">#if COMPILE_FP16</span>
 <span class="c1">// local overload to determine tensor type</span>
-<span class="k">template</span> <span class="o">&lt;&gt;</span> <span class="kr">inline</span> <span class="n">Type</span> <span class="n">typeId</span><span class="o">&lt;</span><span class="n">half</span><span class="o">&gt;</span><span class="p">()</span>  <span class="p">{</span> <span class="k">return</span> <span class="n">Type</span><span class="o">::</span><span class="n">float16</span><span class="p">;</span> <span class="p">}</span>
+<span class="k">template</span><span class="w"> </span><span class="o">&lt;&gt;</span><span class="w"> </span><span class="kr">inline</span><span class="w"> </span><span class="n">Type</span><span class="w"> </span><span class="n">typeId</span><span class="o">&lt;</span><span class="n">half</span><span class="o">&gt;</span><span class="p">()</span><span class="w">  </span><span class="p">{</span><span class="w"> </span><span class="k">return</span><span class="w"> </span><span class="n">Type</span><span class="o">::</span><span class="n">float16</span><span class="p">;</span><span class="w"> </span><span class="p">}</span><span class="w"></span>
 <span class="cp">#endif</span>
 
 <span class="c1">// Version with variadic template arguments, called by version with explicit arguments below</span>
-<span class="k">template</span> <span class="o">&lt;</span><span class="k">typename</span> <span class="nc">T</span><span class="p">,</span> <span class="k">typename</span> <span class="nc">AccType</span><span class="p">,</span> <span class="k">class</span> <span class="nc">Functor</span><span class="p">,</span> <span class="k">class</span> <span class="nc">AggFunctor</span><span class="p">,</span> <span class="k">class</span><span class="p">...</span> <span class="n">Tensors</span><span class="o">&gt;</span>
-<span class="kt">void</span> <span class="n">AggregateAllVar</span><span class="p">(</span><span class="n">Ptr</span><span class="o">&lt;</span><span class="n">Allocator</span><span class="o">&gt;</span> <span class="n">allocator</span><span class="p">,</span>
-                     <span class="n">Functor</span> <span class="n">functor</span><span class="p">,</span>
-                     <span class="n">AccType</span> <span class="n">aggInit</span><span class="p">,</span>
-                     <span class="n">AggFunctor</span> <span class="n">aggFunctor</span><span class="p">,</span>
-                     <span class="n">AccType</span> <span class="n">scale</span><span class="p">,</span>
-                     <span class="n">marian</span><span class="o">::</span><span class="n">Tensor</span> <span class="n">out</span><span class="p">,</span>
-                     <span class="k">const</span> <span class="n">Tensors</span><span class="p">...</span> <span class="n">tensors</span><span class="p">)</span> <span class="p">{</span>
-  <span class="n">cudaSetDevice</span><span class="p">(</span><span class="n">out</span><span class="o">-&gt;</span><span class="n">getDeviceId</span><span class="p">().</span><span class="n">no</span><span class="p">);</span>
+<span class="k">template</span><span class="w"> </span><span class="o">&lt;</span><span class="k">typename</span><span class="w"> </span><span class="nc">T</span><span class="p">,</span><span class="w"> </span><span class="k">typename</span><span class="w"> </span><span class="nc">AccType</span><span class="p">,</span><span class="w"> </span><span class="k">class</span><span class="w"> </span><span class="nc">Functor</span><span class="p">,</span><span class="w"> </span><span class="k">class</span><span class="w"> </span><span class="nc">AggFunctor</span><span class="p">,</span><span class="w"> </span><span class="k">class</span><span class="p">...</span><span class="w"> </span><span class="n">Tensors</span><span class="o">&gt;</span><span class="w"></span>
+<span class="kt">void</span><span class="w"> </span><span class="n">AggregateAllVar</span><span class="p">(</span><span class="n">Ptr</span><span class="o">&lt;</span><span class="n">Allocator</span><span class="o">&gt;</span><span class="w"> </span><span class="n">allocator</span><span class="p">,</span><span class="w"></span>
+<span class="w">                     </span><span class="n">Functor</span><span class="w"> </span><span class="n">functor</span><span class="p">,</span><span class="w"></span>
+<span class="w">                     </span><span class="n">AccType</span><span class="w"> </span><span class="n">aggInit</span><span class="p">,</span><span class="w"></span>
+<span class="w">                     </span><span class="n">AggFunctor</span><span class="w"> </span><span class="n">aggFunctor</span><span class="p">,</span><span class="w"></span>
+<span class="w">                     </span><span class="n">AccType</span><span class="w"> </span><span class="n">scale</span><span class="p">,</span><span class="w"></span>
+<span class="w">                     </span><span class="n">marian</span><span class="o">::</span><span class="n">Tensor</span><span class="w"> </span><span class="n">out</span><span class="p">,</span><span class="w"></span>
+<span class="w">                     </span><span class="k">const</span><span class="w"> </span><span class="n">Tensors</span><span class="p">...</span><span class="w"> </span><span class="n">tensors</span><span class="p">)</span><span class="w"> </span><span class="p">{</span><span class="w"></span>
+<span class="w">  </span><span class="n">cudaSetDevice</span><span class="p">(</span><span class="n">out</span><span class="o">-&gt;</span><span class="n">getDeviceId</span><span class="p">().</span><span class="n">no</span><span class="p">);</span><span class="w"></span>
 
-  <span class="k">static_assert</span><span class="p">(</span><span class="n">CUDA_VERSION</span> <span class="o">&gt;=</span> <span class="mi">9000</span><span class="p">,</span> <span class="s">&quot;Marian requires CUDA_VERSION &gt;= 9000 (9.0)&quot;</span><span class="p">);</span>
+<span class="w">  </span><span class="k">static_assert</span><span class="p">(</span><span class="n">CUDA_VERSION</span><span class="w"> </span><span class="o">&gt;=</span><span class="w"> </span><span class="mi">9000</span><span class="p">,</span><span class="w"> </span><span class="s">&quot;Marian requires CUDA_VERSION &gt;= 9000 (9.0)&quot;</span><span class="p">);</span><span class="w"></span>
 
-  <span class="k">constexpr</span> <span class="kt">size_t</span> <span class="n">K</span> <span class="o">=</span> <span class="k">sizeof</span><span class="p">...(</span><span class="n">Tensors</span><span class="p">);</span>                         <span class="c1">// obtain arity K of tensors...</span>
-  <span class="n">functional</span><span class="o">::</span><span class="n">Array</span><span class="o">&lt;</span><span class="n">functional</span><span class="o">::</span><span class="n">Tensor</span><span class="o">&lt;</span><span class="n">T</span><span class="o">&gt;</span><span class="p">,</span> <span class="n">K</span><span class="o">&gt;</span> <span class="n">gIns</span> <span class="o">=</span> <span class="p">{</span><span class="n">tensors</span><span class="p">...};</span> <span class="c1">// convert to array of K objects of type functional::Tensor&lt;T&gt;</span>
-  <span class="n">functional</span><span class="o">::</span><span class="n">Shape</span> <span class="n">full</span> <span class="o">=</span> <span class="n">marian</span><span class="o">::</span><span class="n">Shape</span><span class="o">::</span><span class="n">broadcast</span><span class="p">({</span><span class="n">tensors</span><span class="p">...});</span> <span class="c1">// compute maximal broadcasted shape</span>
+<span class="w">  </span><span class="k">constexpr</span><span class="w"> </span><span class="kt">size_t</span><span class="w"> </span><span class="n">K</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="k">sizeof</span><span class="p">...(</span><span class="n">Tensors</span><span class="p">);</span><span class="w">                         </span><span class="c1">// obtain arity K of tensors...</span>
+<span class="w">  </span><span class="n">functional</span><span class="o">::</span><span class="n">Array</span><span class="o">&lt;</span><span class="n">functional</span><span class="o">::</span><span class="n">Tensor</span><span class="o">&lt;</span><span class="n">T</span><span class="o">&gt;</span><span class="p">,</span><span class="w"> </span><span class="n">K</span><span class="o">&gt;</span><span class="w"> </span><span class="n">gIns</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="p">{</span><span class="n">tensors</span><span class="p">...};</span><span class="w"> </span><span class="c1">// convert to array of K objects of type functional::Tensor&lt;T&gt;</span>
+<span class="w">  </span><span class="n">functional</span><span class="o">::</span><span class="n">Shape</span><span class="w"> </span><span class="n">full</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="n">marian</span><span class="o">::</span><span class="n">Shape</span><span class="o">::</span><span class="n">broadcast</span><span class="p">({</span><span class="n">tensors</span><span class="p">...});</span><span class="w"> </span><span class="c1">// compute maximal broadcasted shape</span>
 
-  <span class="kt">int</span> <span class="n">size</span> <span class="o">=</span> <span class="n">full</span><span class="p">.</span><span class="n">elements</span><span class="p">();</span>
-  <span class="kt">int</span> <span class="n">threads</span> <span class="o">=</span> <span class="p">(</span><span class="n">size</span> <span class="o">&lt;</span> <span class="n">MAX_THREADS</span> <span class="o">*</span> <span class="mi">2</span><span class="p">)</span> <span class="o">?</span> <span class="n">nextPow2</span><span class="p">((</span><span class="n">size</span> <span class="o">+</span> <span class="mi">1</span><span class="p">)</span> <span class="o">/</span> <span class="mi">2</span><span class="p">)</span> <span class="o">:</span> <span class="n">MAX_THREADS</span><span class="p">;</span> <span class="c1">// suggested in NVidia example for the all_reduce kernel</span>
-  <span class="kt">int</span> <span class="n">blocks</span>  <span class="o">=</span> <span class="n">std</span><span class="o">::</span><span class="n">min</span><span class="p">(</span><span class="n">MAX_BLOCKS</span><span class="p">,</span> <span class="p">(</span><span class="n">size</span> <span class="o">+</span> <span class="p">(</span><span class="n">threads</span> <span class="o">*</span> <span class="mi">2</span> <span class="o">-</span> <span class="mi">1</span><span class="p">))</span> <span class="o">/</span> <span class="p">(</span><span class="n">threads</span> <span class="o">*</span> <span class="mi">2</span><span class="p">));</span>  <span class="c1">// suggested in NVidia example for the all_reduce kernel</span>
+<span class="w">  </span><span class="kt">int</span><span class="w"> </span><span class="n">size</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="n">full</span><span class="p">.</span><span class="n">elements</span><span class="p">();</span><span class="w"></span>
+<span class="w">  </span><span class="kt">int</span><span class="w"> </span><span class="n">threads</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="p">(</span><span class="n">size</span><span class="w"> </span><span class="o">&lt;</span><span class="w"> </span><span class="n">MAX_THREADS</span><span class="w"> </span><span class="o">*</span><span class="w"> </span><span class="mi">2</span><span class="p">)</span><span class="w"> </span><span class="o">?</span><span class="w"> </span><span class="n">nextPow2</span><span class="p">((</span><span class="n">size</span><span class="w"> </span><span class="o">+</span><span class="w"> </span><span class="mi">1</span><span class="p">)</span><span class="w"> </span><span class="o">/</span><span class="w"> </span><span class="mi">2</span><span class="p">)</span><span class="w"> </span><span class="o">:</span><span class="w"> </span><span class="n">MAX_THREADS</span><span class="p">;</span><span class="w"> </span><span class="c1">// suggested in NVidia example for the all_reduce kernel</span>
+<span class="w">  </span><span class="kt">int</span><span class="w"> </span><span class="n">blocks</span><span class="w">  </span><span class="o">=</span><span class="w"> </span><span class="n">std</span><span class="o">::</span><span class="n">min</span><span class="p">(</span><span class="n">MAX_BLOCKS</span><span class="p">,</span><span class="w"> </span><span class="p">(</span><span class="n">size</span><span class="w"> </span><span class="o">+</span><span class="w"> </span><span class="p">(</span><span class="n">threads</span><span class="w"> </span><span class="o">*</span><span class="w"> </span><span class="mi">2</span><span class="w"> </span><span class="o">-</span><span class="w"> </span><span class="mi">1</span><span class="p">))</span><span class="w"> </span><span class="o">/</span><span class="w"> </span><span class="p">(</span><span class="n">threads</span><span class="w"> </span><span class="o">*</span><span class="w"> </span><span class="mi">2</span><span class="p">));</span><span class="w">  </span><span class="c1">// suggested in NVidia example for the all_reduce kernel</span>
 
-  <span class="c1">// The all_reduce kernel by nivida needs to perform multiple passes if the number of blocks needed to perform the reduction is larger than 1.</span>
-  <span class="c1">// Here we allocate the memory for the intermediate reductions for each block.</span>
-  <span class="n">marian</span><span class="o">::</span><span class="n">Tensor</span> <span class="n">blockMem</span><span class="p">;</span>
-  <span class="k">if</span><span class="p">(</span><span class="n">blocks</span> <span class="o">&gt;</span> <span class="mi">1</span> <span class="o">||</span> <span class="n">out</span><span class="o">-&gt;</span><span class="n">type</span><span class="p">()</span> <span class="o">!=</span> <span class="n">typeId</span><span class="o">&lt;</span><span class="n">AccType</span><span class="o">&gt;</span><span class="p">())</span> <span class="p">{</span> <span class="c1">// if the out tensor does not have elementType AccType we need to allocate and convert later</span>
-    <span class="n">MemoryPiece</span><span class="o">::</span><span class="n">PtrType</span> <span class="n">temporaryMemory</span><span class="p">;</span>
-    <span class="k">if</span><span class="p">(</span><span class="n">allocator</span><span class="p">)</span> <span class="p">{</span>
-      <span class="n">temporaryMemory</span> <span class="o">=</span> <span class="n">allocator</span><span class="o">-&gt;</span><span class="n">alloc</span><span class="o">&lt;</span><span class="n">AccType</span><span class="o">&gt;</span><span class="p">(</span><span class="n">blocks</span><span class="p">);</span>
-    <span class="p">}</span> <span class="k">else</span> <span class="p">{</span> <span class="c1">// @TODO: get rid of this branch</span>
-      <span class="kt">uint8_t</span><span class="o">*</span> <span class="n">temporaryMemoryPtr</span> <span class="o">=</span> <span class="mi">0</span><span class="p">;</span>
-      <span class="n">CUDA_CHECK</span><span class="p">(</span><span class="n">cudaMalloc</span><span class="p">(</span><span class="o">&amp;</span><span class="n">temporaryMemoryPtr</span><span class="p">,</span> <span class="k">sizeof</span><span class="p">(</span><span class="n">AccType</span><span class="p">)</span> <span class="o">*</span> <span class="n">blocks</span><span class="p">));</span>
-      <span class="n">temporaryMemory</span> <span class="o">=</span> <span class="n">MemoryPiece</span><span class="o">::</span><span class="n">New</span><span class="p">(</span><span class="n">temporaryMemoryPtr</span><span class="p">,</span> <span class="k">sizeof</span><span class="p">(</span><span class="n">AccType</span><span class="p">)</span> <span class="o">*</span> <span class="n">blocks</span><span class="p">);</span> <span class="c1">// @TODO: consider implementing MemoryPiece::cudaMalloc&lt;T&gt;(size) for managed memory</span>
-    <span class="p">}</span>
-    <span class="n">blockMem</span> <span class="o">=</span> <span class="n">TensorBase</span><span class="o">::</span><span class="n">New</span><span class="p">(</span><span class="n">temporaryMemory</span><span class="p">,</span>
-                               <span class="n">marian</span><span class="o">::</span><span class="n">Shape</span><span class="p">({</span><span class="n">blocks</span><span class="p">}),</span>
-                               <span class="n">typeId</span><span class="o">&lt;</span><span class="n">AccType</span><span class="o">&gt;</span><span class="p">(),</span>
-                               <span class="n">out</span><span class="o">-&gt;</span><span class="n">getBackend</span><span class="p">());</span>
-    <span class="n">blockMem</span><span class="o">-&gt;</span><span class="n">set</span><span class="p">(</span><span class="n">aggInit</span><span class="p">);</span> <span class="c1">// set temporary memory to aggInit</span>
-  <span class="p">}</span>
-  <span class="k">else</span> <span class="p">{</span>            <span class="c1">// we are reducing into a single element now and the type matches, just use out as memory</span>
-    <span class="n">blockMem</span> <span class="o">=</span> <span class="n">out</span><span class="p">;</span> <span class="c1">// do not set final output memory as we might be summing gradients... needs to be handled outside this function</span>
-  <span class="p">}</span>
+<span class="w">  </span><span class="c1">// The all_reduce kernel by nivida needs to perform multiple passes if the number of blocks needed to perform the reduction is larger than 1.</span>
+<span class="w">  </span><span class="c1">// Here we allocate the memory for the intermediate reductions for each block.</span>
+<span class="w">  </span><span class="n">marian</span><span class="o">::</span><span class="n">Tensor</span><span class="w"> </span><span class="n">blockMem</span><span class="p">;</span><span class="w"></span>
+<span class="w">  </span><span class="k">if</span><span class="p">(</span><span class="n">blocks</span><span class="w"> </span><span class="o">&gt;</span><span class="w"> </span><span class="mi">1</span><span class="w"> </span><span class="o">||</span><span class="w"> </span><span class="n">out</span><span class="o">-&gt;</span><span class="n">type</span><span class="p">()</span><span class="w"> </span><span class="o">!=</span><span class="w"> </span><span class="n">typeId</span><span class="o">&lt;</span><span class="n">AccType</span><span class="o">&gt;</span><span class="p">())</span><span class="w"> </span><span class="p">{</span><span class="w"> </span><span class="c1">// if the out tensor does not have elementType AccType we need to allocate and convert later</span>
+<span class="w">    </span><span class="n">MemoryPiece</span><span class="o">::</span><span class="n">PtrType</span><span class="w"> </span><span class="n">temporaryMemory</span><span class="p">;</span><span class="w"></span>
+<span class="w">    </span><span class="k">if</span><span class="p">(</span><span class="n">allocator</span><span class="p">)</span><span class="w"> </span><span class="p">{</span><span class="w"></span>
+<span class="w">      </span><span class="n">temporaryMemory</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="n">allocator</span><span class="o">-&gt;</span><span class="n">alloc</span><span class="o">&lt;</span><span class="n">AccType</span><span class="o">&gt;</span><span class="p">(</span><span class="n">blocks</span><span class="p">);</span><span class="w"></span>
+<span class="w">    </span><span class="p">}</span><span class="w"> </span><span class="k">else</span><span class="w"> </span><span class="p">{</span><span class="w"> </span><span class="c1">// @TODO: get rid of this branch</span>
+<span class="w">      </span><span class="kt">uint8_t</span><span class="o">*</span><span class="w"> </span><span class="n">temporaryMemoryPtr</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="mi">0</span><span class="p">;</span><span class="w"></span>
+<span class="w">      </span><span class="n">CUDA_CHECK</span><span class="p">(</span><span class="n">cudaMalloc</span><span class="p">(</span><span class="o">&amp;</span><span class="n">temporaryMemoryPtr</span><span class="p">,</span><span class="w"> </span><span class="k">sizeof</span><span class="p">(</span><span class="n">AccType</span><span class="p">)</span><span class="w"> </span><span class="o">*</span><span class="w"> </span><span class="n">blocks</span><span class="p">));</span><span class="w"></span>
+<span class="w">      </span><span class="n">temporaryMemory</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="n">MemoryPiece</span><span class="o">::</span><span class="n">New</span><span class="p">(</span><span class="n">temporaryMemoryPtr</span><span class="p">,</span><span class="w"> </span><span class="k">sizeof</span><span class="p">(</span><span class="n">AccType</span><span class="p">)</span><span class="w"> </span><span class="o">*</span><span class="w"> </span><span class="n">blocks</span><span class="p">);</span><span class="w"> </span><span class="c1">// @TODO: consider implementing MemoryPiece::cudaMalloc&lt;T&gt;(size) for managed memory</span>
+<span class="w">    </span><span class="p">}</span><span class="w"></span>
+<span class="w">    </span><span class="n">blockMem</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="n">TensorBase</span><span class="o">::</span><span class="n">New</span><span class="p">(</span><span class="n">temporaryMemory</span><span class="p">,</span><span class="w"></span>
+<span class="w">                               </span><span class="n">marian</span><span class="o">::</span><span class="n">Shape</span><span class="p">({</span><span class="n">blocks</span><span class="p">}),</span><span class="w"></span>
+<span class="w">                               </span><span class="n">typeId</span><span class="o">&lt;</span><span class="n">AccType</span><span class="o">&gt;</span><span class="p">(),</span><span class="w"></span>
+<span class="w">                               </span><span class="n">out</span><span class="o">-&gt;</span><span class="n">getBackend</span><span class="p">());</span><span class="w"></span>
+<span class="w">    </span><span class="n">blockMem</span><span class="o">-&gt;</span><span class="n">set</span><span class="p">(</span><span class="n">aggInit</span><span class="p">);</span><span class="w"> </span><span class="c1">// set temporary memory to aggInit</span>
+<span class="w">  </span><span class="p">}</span><span class="w"></span>
+<span class="w">  </span><span class="k">else</span><span class="w"> </span><span class="p">{</span><span class="w">            </span><span class="c1">// we are reducing into a single element now and the type matches, just use out as memory</span>
+<span class="w">    </span><span class="n">blockMem</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="n">out</span><span class="p">;</span><span class="w"> </span><span class="c1">// do not set final output memory as we might be summing gradients... needs to be handled outside this function</span>
+<span class="w">  </span><span class="p">}</span><span class="w"></span>
 
-  <span class="n">functional</span><span class="o">::</span><span class="n">Tensor</span><span class="o">&lt;</span><span class="n">AccType</span><span class="o">&gt;</span> <span class="n">gBlockMem</span> <span class="o">=</span> <span class="n">blockMem</span><span class="p">;</span>
-  <span class="n">reduceSinglePass</span><span class="o">&lt;</span><span class="n">T</span><span class="p">,</span> <span class="n">AccType</span><span class="o">&gt;</span><span class="p">(</span><span class="n">functor</span><span class="p">,</span> <span class="n">aggInit</span><span class="p">,</span> <span class="n">aggFunctor</span><span class="p">,</span> <span class="n">scale</span><span class="p">,</span> <span class="n">full</span><span class="p">,</span> <span class="cm">/*out=*/</span><span class="n">gBlockMem</span><span class="p">,</span> <span class="cm">/*in=*/</span><span class="n">gIns</span><span class="p">,</span> <span class="n">threads</span><span class="p">,</span> <span class="n">blocks</span><span class="p">);</span>  <span class="c1">// First pass reduction into intermediate memory</span>
+<span class="w">  </span><span class="n">functional</span><span class="o">::</span><span class="n">Tensor</span><span class="o">&lt;</span><span class="n">AccType</span><span class="o">&gt;</span><span class="w"> </span><span class="n">gBlockMem</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="n">blockMem</span><span class="p">;</span><span class="w"></span>
+<span class="w">  </span><span class="n">reduceSinglePass</span><span class="o">&lt;</span><span class="n">T</span><span class="p">,</span><span class="w"> </span><span class="n">AccType</span><span class="o">&gt;</span><span class="p">(</span><span class="n">functor</span><span class="p">,</span><span class="w"> </span><span class="n">aggInit</span><span class="p">,</span><span class="w"> </span><span class="n">aggFunctor</span><span class="p">,</span><span class="w"> </span><span class="n">scale</span><span class="p">,</span><span class="w"> </span><span class="n">full</span><span class="p">,</span><span class="w"> </span><span class="cm">/*out=*/</span><span class="n">gBlockMem</span><span class="p">,</span><span class="w"> </span><span class="cm">/*in=*/</span><span class="n">gIns</span><span class="p">,</span><span class="w"> </span><span class="n">threads</span><span class="p">,</span><span class="w"> </span><span class="n">blocks</span><span class="p">);</span><span class="w">  </span><span class="c1">// First pass reduction into intermediate memory</span>
 
-  <span class="c1">// If we actually needed more than one block to perform the first pass reduction, recursively run a second pass reduction over block memory until block memory has size 1.</span>
-  <span class="k">if</span><span class="p">(</span><span class="n">blocks</span> <span class="o">&gt;</span> <span class="mi">1</span><span class="p">)</span> <span class="p">{</span>
-    <span class="k">using</span> <span class="k">namespace</span> <span class="n">functional</span><span class="p">;</span>
-    <span class="k">auto</span> <span class="n">identity</span> <span class="o">=</span> <span class="n">_1</span><span class="p">;</span> <span class="c1">// transformation was done in first pass, hence only identity</span>
-    <span class="n">AggregateAll</span><span class="o">&lt;</span><span class="n">AccType</span><span class="p">,</span> <span class="n">AccType</span><span class="o">&gt;</span><span class="p">(</span><span class="n">allocator</span><span class="p">,</span> <span class="n">identity</span><span class="p">,</span> <span class="n">aggInit</span><span class="p">,</span> <span class="n">aggFunctor</span><span class="p">,</span> <span class="n">scale</span><span class="p">,</span> <span class="n">out</span><span class="p">,</span> <span class="cm">/*in=*/</span><span class="n">blockMem</span><span class="p">);</span> <span class="c1">// Reducing AccType in AccType now (meta-reduction)</span>
-  <span class="p">}</span> <span class="k">else</span> <span class="k">if</span><span class="p">(</span><span class="n">out</span><span class="o">-&gt;</span><span class="n">type</span><span class="p">()</span> <span class="o">!=</span> <span class="n">typeId</span><span class="o">&lt;</span><span class="n">AccType</span><span class="o">&gt;</span><span class="p">())</span> <span class="p">{</span> <span class="c1">// it&#39;s only a single block, but we need to convert to different type, as mentioned above</span>
-    <span class="n">CopyCast</span><span class="p">(</span><span class="n">out</span><span class="p">,</span> <span class="n">blockMem</span><span class="p">);</span>
-  <span class="p">}</span>
+<span class="w">  </span><span class="c1">// If we actually needed more than one block to perform the first pass reduction, recursively run a second pass reduction over block memory until block memory has size 1.</span>
+<span class="w">  </span><span class="k">if</span><span class="p">(</span><span class="n">blocks</span><span class="w"> </span><span class="o">&gt;</span><span class="w"> </span><span class="mi">1</span><span class="p">)</span><span class="w"> </span><span class="p">{</span><span class="w"></span>
+<span class="w">    </span><span class="k">using</span><span class="w"> </span><span class="k">namespace</span><span class="w"> </span><span class="nn">functional</span><span class="p">;</span><span class="w"></span>
+<span class="w">    </span><span class="k">auto</span><span class="w"> </span><span class="n">identity</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="n">_1</span><span class="p">;</span><span class="w"> </span><span class="c1">// transformation was done in first pass, hence only identity</span>
+<span class="w">    </span><span class="n">AggregateAll</span><span class="o">&lt;</span><span class="n">AccType</span><span class="p">,</span><span class="w"> </span><span class="n">AccType</span><span class="o">&gt;</span><span class="p">(</span><span class="n">allocator</span><span class="p">,</span><span class="w"> </span><span class="n">identity</span><span class="p">,</span><span class="w"> </span><span class="n">aggInit</span><span class="p">,</span><span class="w"> </span><span class="n">aggFunctor</span><span class="p">,</span><span class="w"> </span><span class="n">scale</span><span class="p">,</span><span class="w"> </span><span class="n">out</span><span class="p">,</span><span class="w"> </span><span class="cm">/*in=*/</span><span class="n">blockMem</span><span class="p">);</span><span class="w"> </span><span class="c1">// Reducing AccType in AccType now (meta-reduction)</span>
+<span class="w">  </span><span class="p">}</span><span class="w"> </span><span class="k">else</span><span class="w"> </span><span class="k">if</span><span class="p">(</span><span class="n">out</span><span class="o">-&gt;</span><span class="n">type</span><span class="p">()</span><span class="w"> </span><span class="o">!=</span><span class="w"> </span><span class="n">typeId</span><span class="o">&lt;</span><span class="n">AccType</span><span class="o">&gt;</span><span class="p">())</span><span class="w"> </span><span class="p">{</span><span class="w"> </span><span class="c1">// it&#39;s only a single block, but we need to convert to different type, as mentioned above</span>
+<span class="w">    </span><span class="n">CopyCast</span><span class="p">(</span><span class="n">out</span><span class="p">,</span><span class="w"> </span><span class="n">blockMem</span><span class="p">);</span><span class="w"></span>
+<span class="w">  </span><span class="p">}</span><span class="w"></span>
 
-  <span class="k">if</span><span class="p">(</span><span class="n">blockMem</span> <span class="o">!=</span> <span class="n">out</span><span class="p">)</span> <span class="p">{</span>
-    <span class="c1">// Free temporary memory whether allocated in allocator or via cudaMalloc</span>
-    <span class="k">if</span><span class="p">(</span><span class="n">allocator</span><span class="p">)</span>
-      <span class="n">allocator</span><span class="o">-&gt;</span><span class="n">free</span><span class="p">(</span><span class="n">blockMem</span><span class="o">-&gt;</span><span class="n">memory</span><span class="p">());</span>
-    <span class="k">else</span> <span class="nf">if</span><span class="p">(</span><span class="n">blockMem</span><span class="o">-&gt;</span><span class="n">memory</span><span class="p">()</span><span class="o">-&gt;</span><span class="n">data</span><span class="p">())</span>
-      <span class="n">CUDA_CHECK</span><span class="p">(</span><span class="n">cudaFree</span><span class="p">(</span><span class="n">blockMem</span><span class="o">-&gt;</span><span class="n">memory</span><span class="p">()</span><span class="o">-&gt;</span><span class="n">data</span><span class="p">()));</span>
-  <span class="p">}</span>
-<span class="p">}</span>
+<span class="w">  </span><span class="k">if</span><span class="p">(</span><span class="n">blockMem</span><span class="w"> </span><span class="o">!=</span><span class="w"> </span><span class="n">out</span><span class="p">)</span><span class="w"> </span><span class="p">{</span><span class="w"></span>
+<span class="w">    </span><span class="c1">// Free temporary memory whether allocated in allocator or via cudaMalloc</span>
+<span class="w">    </span><span class="k">if</span><span class="p">(</span><span class="n">allocator</span><span class="p">)</span><span class="w"></span>
+<span class="w">      </span><span class="n">allocator</span><span class="o">-&gt;</span><span class="n">free</span><span class="p">(</span><span class="n">blockMem</span><span class="o">-&gt;</span><span class="n">memory</span><span class="p">());</span><span class="w"></span>
+<span class="w">    </span><span class="k">else</span><span class="w"> </span><span class="k">if</span><span class="p">(</span><span class="n">blockMem</span><span class="o">-&gt;</span><span class="n">memory</span><span class="p">()</span><span class="o">-&gt;</span><span class="n">data</span><span class="p">())</span><span class="w"></span>
+<span class="w">      </span><span class="n">CUDA_CHECK</span><span class="p">(</span><span class="n">cudaFree</span><span class="p">(</span><span class="n">blockMem</span><span class="o">-&gt;</span><span class="n">memory</span><span class="p">()</span><span class="o">-&gt;</span><span class="n">data</span><span class="p">()));</span><span class="w"></span>
+<span class="w">  </span><span class="p">}</span><span class="w"></span>
+<span class="p">}</span><span class="w"></span>
 
-<span class="k">template</span> <span class="o">&lt;</span><span class="k">typename</span> <span class="nc">T</span><span class="p">,</span> <span class="k">typename</span> <span class="nc">AccType</span><span class="p">,</span> <span class="k">class</span> <span class="nc">Functor</span><span class="p">,</span> <span class="k">class</span> <span class="nc">AggFunctor</span><span class="o">&gt;</span>
-<span class="kt">void</span> <span class="n">AggregateAll</span><span class="p">(</span><span class="n">Ptr</span><span class="o">&lt;</span><span class="n">Allocator</span><span class="o">&gt;</span> <span class="n">allocator</span><span class="p">,</span>
-                  <span class="n">Functor</span> <span class="n">functor</span><span class="p">,</span>
-                  <span class="n">AccType</span> <span class="n">aggInit</span><span class="p">,</span>
-                  <span class="n">AggFunctor</span> <span class="n">aggFunctor</span><span class="p">,</span>
-                  <span class="n">AccType</span> <span class="n">scale</span><span class="p">,</span>
-                  <span class="n">marian</span><span class="o">::</span><span class="n">Tensor</span> <span class="n">out</span><span class="p">,</span>
-                  <span class="k">const</span> <span class="n">marian</span><span class="o">::</span><span class="n">Tensor</span> <span class="n">in1</span><span class="p">)</span> <span class="p">{</span>
-  <span class="n">AggregateAllVar</span><span class="o">&lt;</span><span class="n">T</span><span class="p">,</span> <span class="n">AccType</span><span class="o">&gt;</span><span class="p">(</span><span class="n">allocator</span><span class="p">,</span> <span class="n">functor</span><span class="p">,</span> <span class="n">aggInit</span><span class="p">,</span> <span class="n">aggFunctor</span><span class="p">,</span> <span class="n">scale</span><span class="p">,</span> <span class="n">out</span><span class="p">,</span> <span class="n">in1</span><span class="p">);</span>
-<span class="p">}</span>
+<span class="k">template</span><span class="w"> </span><span class="o">&lt;</span><span class="k">typename</span><span class="w"> </span><span class="nc">T</span><span class="p">,</span><span class="w"> </span><span class="k">typename</span><span class="w"> </span><span class="nc">AccType</span><span class="p">,</span><span class="w"> </span><span class="k">class</span><span class="w"> </span><span class="nc">Functor</span><span class="p">,</span><span class="w"> </span><span class="k">class</span><span class="w"> </span><span class="nc">AggFunctor</span><span class="o">&gt;</span><span class="w"></span>
+<span class="kt">void</span><span class="w"> </span><span class="n">AggregateAll</span><span class="p">(</span><span class="n">Ptr</span><span class="o">&lt;</span><span class="n">Allocator</span><span class="o">&gt;</span><span class="w"> </span><span class="n">allocator</span><span class="p">,</span><span class="w"></span>
+<span class="w">                  </span><span class="n">Functor</span><span class="w"> </span><span class="n">functor</span><span class="p">,</span><span class="w"></span>
+<span class="w">                  </span><span class="n">AccType</span><span class="w"> </span><span class="n">aggInit</span><span class="p">,</span><span class="w"></span>
+<span class="w">                  </span><span class="n">AggFunctor</span><span class="w"> </span><span class="n">aggFunctor</span><span class="p">,</span><span class="w"></span>
+<span class="w">                  </span><span class="n">AccType</span><span class="w"> </span><span class="n">scale</span><span class="p">,</span><span class="w"></span>
+<span class="w">                  </span><span class="n">marian</span><span class="o">::</span><span class="n">Tensor</span><span class="w"> </span><span class="n">out</span><span class="p">,</span><span class="w"></span>
+<span class="w">                  </span><span class="k">const</span><span class="w"> </span><span class="n">marian</span><span class="o">::</span><span class="n">Tensor</span><span class="w"> </span><span class="n">in1</span><span class="p">)</span><span class="w"> </span><span class="p">{</span><span class="w"></span>
+<span class="w">  </span><span class="n">AggregateAllVar</span><span class="o">&lt;</span><span class="n">T</span><span class="p">,</span><span class="w"> </span><span class="n">AccType</span><span class="o">&gt;</span><span class="p">(</span><span class="n">allocator</span><span class="p">,</span><span class="w"> </span><span class="n">functor</span><span class="p">,</span><span class="w"> </span><span class="n">aggInit</span><span class="p">,</span><span class="w"> </span><span class="n">aggFunctor</span><span class="p">,</span><span class="w"> </span><span class="n">scale</span><span class="p">,</span><span class="w"> </span><span class="n">out</span><span class="p">,</span><span class="w"> </span><span class="n">in1</span><span class="p">);</span><span class="w"></span>
+<span class="p">}</span><span class="w"></span>
 
-<span class="k">template</span> <span class="o">&lt;</span><span class="k">typename</span> <span class="nc">T</span><span class="p">,</span> <span class="k">typename</span> <span class="nc">AccType</span><span class="p">,</span> <span class="k">class</span> <span class="nc">Functor</span><span class="p">,</span> <span class="k">class</span> <span class="nc">AggFunctor</span><span class="o">&gt;</span>
-<span class="kt">void</span> <span class="n">AggregateAll</span><span class="p">(</span><span class="n">Ptr</span><span class="o">&lt;</span><span class="n">Allocator</span><span class="o">&gt;</span> <span class="n">allocator</span><span class="p">,</span>
-                  <span class="n">Functor</span> <span class="n">functor</span><span class="p">,</span>
-                  <span class="n">AccType</span> <span class="n">aggInit</span><span class="p">,</span>
-                  <span class="n">AggFunctor</span> <span class="n">aggFunctor</span><span class="p">,</span>
-                  <span class="n">AccType</span> <span class="n">scale</span><span class="p">,</span>
-                  <span class="n">marian</span><span class="o">::</span><span class="n">Tensor</span> <span class="n">out</span><span class="p">,</span>
-                  <span class="k">const</span> <span class="n">marian</span><span class="o">::</span><span class="n">Tensor</span> <span class="n">in1</span><span class="p">,</span>
-                  <span class="k">const</span> <span class="n">marian</span><span class="o">::</span><span class="n">Tensor</span> <span class="n">in2</span><span class="p">)</span> <span class="p">{</span>
-  <span class="n">AggregateAllVar</span><span class="o">&lt;</span><span class="n">T</span><span class="p">,</span> <span class="n">AccType</span><span class="o">&gt;</span><span class="p">(</span><span class="n">allocator</span><span class="p">,</span> <span class="n">functor</span><span class="p">,</span> <span class="n">aggInit</span><span class="p">,</span> <span class="n">aggFunctor</span><span class="p">,</span> <span class="n">scale</span><span class="p">,</span> <span class="n">out</span><span class="p">,</span> <span class="n">in1</span><span class="p">,</span> <span class="n">in2</span><span class="p">);</span>
-<span class="p">}</span>
+<span class="k">template</span><span class="w"> </span><span class="o">&lt;</span><span class="k">typename</span><span class="w"> </span><span class="nc">T</span><span class="p">,</span><span class="w"> </span><span class="k">typename</span><span class="w"> </span><span class="nc">AccType</span><span class="p">,</span><span class="w"> </span><span class="k">class</span><span class="w"> </span><span class="nc">Functor</span><span class="p">,</span><span class="w"> </span><span class="k">class</span><span class="w"> </span><span class="nc">AggFunctor</span><span class="o">&gt;</span><span class="w"></span>
+<span class="kt">void</span><span class="w"> </span><span class="n">AggregateAll</span><span class="p">(</span><span class="n">Ptr</span><span class="o">&lt;</span><span class="n">Allocator</span><span class="o">&gt;</span><span class="w"> </span><span class="n">allocator</span><span class="p">,</span><span class="w"></span>
+<span class="w">                  </span><span class="n">Functor</span><span class="w"> </span><span class="n">functor</span><span class="p">,</span><span class="w"></span>
+<span class="w">                  </span><span class="n">AccType</span><span class="w"> </span><span class="n">aggInit</span><span class="p">,</span><span class="w"></span>
+<span class="w">                  </span><span class="n">AggFunctor</span><span class="w"> </span><span class="n">aggFunctor</span><span class="p">,</span><span class="w"></span>
+<span class="w">                  </span><span class="n">AccType</span><span class="w"> </span><span class="n">scale</span><span class="p">,</span><span class="w"></span>
+<span class="w">                  </span><span class="n">marian</span><span class="o">::</span><span class="n">Tensor</span><span class="w"> </span><span class="n">out</span><span class="p">,</span><span class="w"></span>
+<span class="w">                  </span><span class="k">const</span><span class="w"> </span><span class="n">marian</span><span class="o">::</span><span class="n">Tensor</span><span class="w"> </span><span class="n">in1</span><span class="p">,</span><span class="w"></span>
+<span class="w">                  </span><span class="k">const</span><span class="w"> </span><span class="n">marian</span><span class="o">::</span><span class="n">Tensor</span><span class="w"> </span><span class="n">in2</span><span class="p">)</span><span class="w"> </span><span class="p">{</span><span class="w"></span>
+<span class="w">  </span><span class="n">AggregateAllVar</span><span class="o">&lt;</span><span class="n">T</span><span class="p">,</span><span class="w"> </span><span class="n">AccType</span><span class="o">&gt;</span><span class="p">(</span><span class="n">allocator</span><span class="p">,</span><span class="w"> </span><span class="n">functor</span><span class="p">,</span><span class="w"> </span><span class="n">aggInit</span><span class="p">,</span><span class="w"> </span><span class="n">aggFunctor</span><span class="p">,</span><span class="w"> </span><span class="n">scale</span><span class="p">,</span><span class="w"> </span><span class="n">out</span><span class="p">,</span><span class="w"> </span><span class="n">in1</span><span class="p">,</span><span class="w"> </span><span class="n">in2</span><span class="p">);</span><span class="w"></span>
+<span class="p">}</span><span class="w"></span>
 
-<span class="k">template</span> <span class="o">&lt;</span><span class="k">typename</span> <span class="nc">T</span><span class="p">,</span> <span class="k">typename</span> <span class="nc">AccType</span><span class="p">,</span> <span class="k">class</span> <span class="nc">Functor</span><span class="p">,</span> <span class="k">class</span> <span class="nc">AggFunctor</span><span class="o">&gt;</span>
-<span class="kt">void</span> <span class="n">AggregateAll</span><span class="p">(</span><span class="n">Ptr</span><span class="o">&lt;</span><span class="n">Allocator</span><span class="o">&gt;</span> <span class="n">allocator</span><span class="p">,</span>
-                  <span class="n">Functor</span> <span class="n">functor</span><span class="p">,</span>
-                  <span class="n">AccType</span> <span class="n">aggInit</span><span class="p">,</span>
-                  <span class="n">AggFunctor</span> <span class="n">aggFunctor</span><span class="p">,</span>
-                  <span class="n">AccType</span> <span class="n">scale</span><span class="p">,</span>
-                  <span class="n">marian</span><span class="o">::</span><span class="n">Tensor</span> <span class="n">out</span><span class="p">,</span>
-                  <span class="k">const</span> <span class="n">marian</span><span class="o">::</span><span class="n">Tensor</span> <span class="n">in1</span><span class="p">,</span>
-                  <span class="k">const</span> <span class="n">marian</span><span class="o">::</span><span class="n">Tensor</span> <span class="n">in2</span><span class="p">,</span>
-                  <span class="k">const</span> <span class="n">marian</span><span class="o">::</span><span class="n">Tensor</span> <span class="n">in3</span><span class="p">)</span> <span class="p">{</span>
-  <span class="n">AggregateAllVar</span><span class="o">&lt;</span><span class="n">T</span><span class="p">,</span> <span class="n">AccType</span><span class="o">&gt;</span><span class="p">(</span><span class="n">allocator</span><span class="p">,</span> <span class="n">functor</span><span class="p">,</span> <span class="n">aggInit</span><span class="p">,</span> <span class="n">aggFunctor</span><span class="p">,</span> <span class="n">scale</span><span class="p">,</span> <span class="n">out</span><span class="p">,</span> <span class="n">in1</span><span class="p">,</span> <span class="n">in2</span><span class="p">,</span> <span class="n">in3</span><span class="p">);</span>
-<span class="p">}</span>
+<span class="k">template</span><span class="w"> </span><span class="o">&lt;</span><span class="k">typename</span><span class="w"> </span><span class="nc">T</span><span class="p">,</span><span class="w"> </span><span class="k">typename</span><span class="w"> </span><span class="nc">AccType</span><span class="p">,</span><span class="w"> </span><span class="k">class</span><span class="w"> </span><span class="nc">Functor</span><span class="p">,</span><span class="w"> </span><span class="k">class</span><span class="w"> </span><span class="nc">AggFunctor</span><span class="o">&gt;</span><span class="w"></span>
+<span class="kt">void</span><span class="w"> </span><span class="n">AggregateAll</span><span class="p">(</span><span class="n">Ptr</span><span class="o">&lt;</span><span class="n">Allocator</span><span class="o">&gt;</span><span class="w"> </span><span class="n">allocator</span><span class="p">,</span><span class="w"></span>
+<span class="w">                  </span><span class="n">Functor</span><span class="w"> </span><span class="n">functor</span><span class="p">,</span><span class="w"></span>
+<span class="w">                  </span><span class="n">AccType</span><span class="w"> </span><span class="n">aggInit</span><span class="p">,</span><span class="w"></span>
+<span class="w">                  </span><span class="n">AggFunctor</span><span class="w"> </span><span class="n">aggFunctor</span><span class="p">,</span><span class="w"></span>
+<span class="w">                  </span><span class="n">AccType</span><span class="w"> </span><span class="n">scale</span><span class="p">,</span><span class="w"></span>
+<span class="w">                  </span><span class="n">marian</span><span class="o">::</span><span class="n">Tensor</span><span class="w"> </span><span class="n">out</span><span class="p">,</span><span class="w"></span>
+<span class="w">                  </span><span class="k">const</span><span class="w"> </span><span class="n">marian</span><span class="o">::</span><span class="n">Tensor</span><span class="w"> </span><span class="n">in1</span><span class="p">,</span><span class="w"></span>
+<span class="w">                  </span><span class="k">const</span><span class="w"> </span><span class="n">marian</span><span class="o">::</span><span class="n">Tensor</span><span class="w"> </span><span class="n">in2</span><span class="p">,</span><span class="w"></span>
+<span class="w">                  </span><span class="k">const</span><span class="w"> </span><span class="n">marian</span><span class="o">::</span><span class="n">Tensor</span><span class="w"> </span><span class="n">in3</span><span class="p">)</span><span class="w"> </span><span class="p">{</span><span class="w"></span>
+<span class="w">  </span><span class="n">AggregateAllVar</span><span class="o">&lt;</span><span class="n">T</span><span class="p">,</span><span class="w"> </span><span class="n">AccType</span><span class="o">&gt;</span><span class="p">(</span><span class="n">allocator</span><span class="p">,</span><span class="w"> </span><span class="n">functor</span><span class="p">,</span><span class="w"> </span><span class="n">aggInit</span><span class="p">,</span><span class="w"> </span><span class="n">aggFunctor</span><span class="p">,</span><span class="w"> </span><span class="n">scale</span><span class="p">,</span><span class="w"> </span><span class="n">out</span><span class="p">,</span><span class="w"> </span><span class="n">in1</span><span class="p">,</span><span class="w"> </span><span class="n">in2</span><span class="p">,</span><span class="w"> </span><span class="n">in3</span><span class="p">);</span><span class="w"></span>
+<span class="p">}</span><span class="w"></span>
 
-<span class="cp">#include</span> <span class="cpf">&quot;tensors/gpu/add_all.inc&quot;</span><span class="cp"></span>
+<span class="cp">#include</span><span class="w"> </span><span class="cpf">&quot;tensors/gpu/add_all.inc&quot;</span><span class="cp"></span>
 
-<span class="p">}</span>
+<span class="p">}</span><span class="w"></span>
 </pre></div>
 </div>
-</div>
+</section>
 
 
            </div>
-           
           </div>
           <footer>
 
   <hr/>
 
   <div role="contentinfo">
-    <p>
-        &#169; Copyright 2021, Marian NMT Team.
-
-    </p>
+    <p>&#169; Copyright 2021, Marian NMT Team.</p>
   </div>
-    
-    
-    
-    Built with <a href="https://www.sphinx-doc.org/">Sphinx</a> using a
-    
+
+  Built with <a href="https://www.sphinx-doc.org/">Sphinx</a> using a
     <a href="https://github.com/readthedocs/sphinx_rtd_theme">theme</a>
-    
-    provided by <a href="https://readthedocs.org">Read the Docs</a>. 
+    provided by <a href="https://readthedocs.org">Read the Docs</a>.
+   
 
 </footer>
         </div>
       </div>
-
     </section>
-
   </div>
-  
-
-  <script type="text/javascript">
+  <script>
       jQuery(function () {
           SphinxRtdTheme.Navigation.enable(true);
       });
-  </script>
-
-  
-  
-    
-   
+  </script> 
 
 </body>
 </html>

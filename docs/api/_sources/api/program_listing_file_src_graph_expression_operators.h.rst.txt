@@ -24,9 +24,13 @@ Program Listing for File expression_operators.h
    
    typedef std::function<void(Expr out, const std::vector<Expr>& in)> LambdaNodeFunctor;
    
-   Expr lambda(const std::vector<Expr>& nodes, Shape shape, Type type, LambdaNodeFunctor fwd);
+   Expr lambda(const std::vector<Expr>& nodes, Shape shape, Type type, LambdaNodeFunctor fwd, size_t hash = 0);
    
-   Expr lambda(const std::vector<Expr>& nodes, Shape shape, Type type, LambdaNodeFunctor fwd, LambdaNodeFunctor bwd);
+   Expr lambda(const std::vector<Expr>& nodes, Shape shape, Type type, LambdaNodeFunctor fwd, LambdaNodeFunctor bwd, size_t hash = 0);
+   
+   
+   typedef std::function<void(Expr)> LambdaNodeCallback;
+   Expr callback(Expr node, LambdaNodeCallback call);
    
    Expr plus(const std::vector<Expr>& nodes);
    
@@ -62,12 +66,12 @@ Program Listing for File expression_operators.h
    
    Expr prelu(const std::vector<Expr>&, float alpha = 0.01);
    
-   
+   // Exponentiation and Logarithmic functions
    Expr log(Expr a);
    
    Expr exp(Expr a);
    
-   
+   // Trigonometric functions
    Expr sin(Expr a);
    
    Expr cos(Expr a);
@@ -108,7 +112,13 @@ Program Listing for File expression_operators.h
    Expr logaddexp(Expr a, Expr b);
    
    
-   
+   /*
+    * Element-wise min/max
+    * Performs an element-wise min max comparison between expressions.
+    * @see min, max for axis level operations
+    * @see MinimumNodeOp, MaximumNodeOp
+    * @todo implement version without ExpressionGraph::constant.
+    */
    
    Expr maximum(Expr a, Expr b);
    
@@ -134,6 +144,9 @@ Program Listing for File expression_operators.h
    Expr2 argmin(Expr a, int axis);
    
    
+   /*
+    * Expr-Expr comparisons
+    */
    Expr lt(Expr a, Expr b);  
    Expr eq(Expr a, Expr b);  
    Expr gt(Expr a, Expr b);  
@@ -141,6 +154,10 @@ Program Listing for File expression_operators.h
    Expr ne(Expr a, Expr b);  
    Expr le(Expr a, Expr b);  
    
+   /*
+    * Float-Expr comparisons
+    * Floats are promoted to a @ref ExpressionGraph::constant and use the Expr-Expr methods
+    */
    Expr lt(float a, Expr b);  
    Expr eq(float a, Expr b);  
    Expr gt(float a, Expr b);  
@@ -168,12 +185,25 @@ Program Listing for File expression_operators.h
              bool transB = false,
              float scalar = 1.f);
    
+   Expr bdot_legacy(Expr a,
+                    Expr b,
+                    bool transA = false,
+                    bool transB = false,
+                    float scalar = 1.f);
+   
    Expr affine(Expr a,
                Expr b,
-               Expr c,
+               Expr bias,
                bool transA = false,
                bool transB = false,
                float scalar = 1.f);
+   
+   Expr affineWithRelu(Expr a,
+                       Expr b,
+                       Expr bias,
+                       bool transA = false,
+                       bool transB = false,
+                       float scalar = 1.f);
    
    Expr csr_dot(const Shape& A_shape, Expr Avalues, Expr Aindices, Expr Aoffsets, Expr B, bool transA = false);
    
@@ -283,6 +313,7 @@ Program Listing for File expression_operators.h
    
    /*********************************************************/
    
+   // Aggregations
    
    Expr sum(Expr a, int ax = 0);
    
@@ -317,6 +348,8 @@ Program Listing for File expression_operators.h
    
    
    Expr layerNorm(Expr x, Expr gamma, Expr beta = nullptr, float eps = 1e-9);
+   
+   Expr rmsNorm(Expr x, Expr gamma, Expr beta = nullptr, float eps = 1e-9);
    
    Expr highway(Expr y, Expr x, Expr t);
    

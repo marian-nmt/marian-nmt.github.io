@@ -1,0 +1,397 @@
+<!DOCTYPE html>
+<html class="writer-html5" lang="en" >
+<head>
+  <meta charset="utf-8" /><meta name="generator" content="Docutils 0.17.1: http://docutils.sourceforge.net/" />
+
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Program Listing for File unicode_conversions.h &mdash; Marian NMT v1.10.27 2022-01-25 documentation</title><link rel="stylesheet" href="../_static/css/theme.css" type="text/css" />
+    <link rel="stylesheet" href="../_static/pygments.css" type="text/css" />
+      <link rel="stylesheet" href="../_static/css/custom.css" type="text/css" />
+      <link rel="stylesheet" href="../_static/collapsible-lists/css/tree_view.css" type="text/css" />
+    <link rel="canonical" href="http://marian-nmt.github.io/docs/api/api/program_listing_file_src_microsoft_unicode_conversions.h.html" />
+  <!--[if lt IE 9]>
+    <script src="../_static/js/html5shiv.min.js"></script>
+  <![endif]-->
+  <script id="documentation_options" data-url_root="../" src="../_static/documentation_options.js"></script>
+        <script src="../_static/jquery.js"></script>
+        <script src="../_static/underscore.js"></script>
+        <script src="../_static/doctools.js"></script>
+        <script src="../_static/language_data.js"></script>
+        <script src="../_static/collapsible-lists/js/CollapsibleLists.compressed.js"></script>
+        <script src="../_static/collapsible-lists/js/apply-collapsible-lists.js"></script>
+        <script async="async" src="https://cdnjs.cloudflare.com/ajax/libs/mathjax/2.7.5/latest.js?config=TeX-AMS-MML_HTMLorMML"></script>
+        <script type="text/x-mathjax-config">MathJax.Hub.Config({"tex2jax": {"inlineMath": [["\\(", "\\)"]], "displayMath": [["\\[", "\\]"]], "processRefs": false, "processEnvironments": false}})</script>
+    <script src="../_static/js/theme.js"></script>
+    <link rel="index" title="Index" href="../genindex.html" />
+    <link rel="search" title="Search" href="../search.html" /> 
+</head>
+
+<body class="wy-body-for-nav"> 
+  <div class="wy-grid-for-nav">
+    <nav data-toggle="wy-nav-shift" class="wy-nav-side">
+      <div class="wy-side-scroll">
+        <div class="wy-side-nav-search" >
+            <a href="../index.html" class="icon icon-home"> Marian NMT
+          </a>
+              <div class="version">
+                v1.10.27
+              </div>
+<div role="search">
+  <form id="rtd-search-form" class="wy-form" action="../search.html" method="get">
+    <input type="text" name="q" placeholder="Search docs" />
+    <input type="hidden" name="check_keywords" value="yes" />
+    <input type="hidden" name="area" value="default" />
+  </form>
+</div>
+        </div><div class="wy-menu wy-menu-vertical" data-spy="affix" role="navigation" aria-label="Navigation menu">
+              <p><span class="caption-text">Contents:</span></p>
+<ul>
+<li class="toctree-l1"><a class="reference internal" href="../graph.html">Expression graphs</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../operators.html">Operations in the Expression Graph</a></li>
+<li class="toctree-l1"><a class="reference internal" href="library_index.html">Library API</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../contributing.html">How to contribute to Marian</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../doc_guide.html">Writing documentation</a></li>
+</ul>
+
+        </div>
+      </div>
+    </nav>
+
+    <section data-toggle="wy-nav-shift" class="wy-nav-content-wrap"><nav class="wy-nav-top" aria-label="Mobile navigation menu" >
+          <i data-toggle="wy-nav-top" class="fa fa-bars"></i>
+          <a href="../index.html">Marian NMT</a>
+      </nav>
+
+      <div class="wy-nav-content">
+        <div class="rst-content">
+          <div role="navigation" aria-label="Page navigation">
+  <ul class="wy-breadcrumbs">
+      <li><a href="../index.html" class="icon icon-home"></a> &raquo;</li>
+      <li>Program Listing for File unicode_conversions.h</li>
+      <li class="wy-breadcrumbs-aside">
+            <a href="../_sources/api/program_listing_file_src_microsoft_unicode_conversions.h.rst.txt" rel="nofollow"> View page source</a>
+      </li>
+  </ul>
+  <hr/>
+</div>
+          <div role="main" class="document" itemscope="itemscope" itemtype="http://schema.org/Article">
+           <div itemprop="articleBody">
+             
+  <section id="program-listing-for-file-unicode-conversions-h">
+<span id="program-listing-file-src-microsoft-unicode-conversions-h"></span><h1>Program Listing for File unicode_conversions.h<a class="headerlink" href="#program-listing-for-file-unicode-conversions-h" title="Permalink to this headline">¶</a></h1>
+<p>↰ <a class="reference internal" href="file_src_microsoft_unicode_conversions.h.html#file-src-microsoft-unicode-conversions-h"><span class="std std-ref">Return to documentation for file</span></a> (<code class="docutils literal notranslate"><span class="pre">src/microsoft/unicode_conversions.h</span></code>)</p>
+<div class="highlight-cpp notranslate"><div class="highlight"><pre><span></span><span class="c1">// Copyright (c) Microsoft Corporation.</span>
+<span class="c1">// Licensed under the MIT license.</span>
+
+<span class="c1">// This was extracted from https://github.com/microsoft/cpprestsdk/blob/cdae258bfb22f948c7b768b4dc56f5f4a2d9b2ce/Release/src/utilities/asyncrt_utils.cpp#L305</span>
+
+<span class="cp">#include</span><span class="w"> </span><span class="cpf">&lt;string&gt;</span><span class="cp"></span>
+<span class="cp">#include</span><span class="w"> </span><span class="cpf">&lt;stdexcept&gt;</span><span class="cp"></span>
+
+<span class="k">typedef</span><span class="w"> </span><span class="n">std</span><span class="o">::</span><span class="n">basic_string</span><span class="o">&lt;</span><span class="kt">uint16_t</span><span class="o">&gt;</span><span class="w"> </span><span class="n">utf16string</span><span class="p">;</span><span class="w"></span>
+
+<span class="cp">#define LOW_3BITS 0x7</span>
+<span class="cp">#define LOW_4BITS 0xF</span>
+<span class="cp">#define LOW_5BITS 0x1F</span>
+<span class="cp">#define LOW_6BITS 0x3F</span>
+<span class="cp">#define BIT4 0x8</span>
+<span class="cp">#define BIT5 0x10</span>
+<span class="cp">#define BIT6 0x20</span>
+<span class="cp">#define BIT7 0x40</span>
+<span class="cp">#define BIT8 0x80</span>
+<span class="cp">#define L_SURROGATE_START 0xDC00</span>
+<span class="cp">#define L_SURROGATE_END 0xDFFF</span>
+<span class="cp">#define H_SURROGATE_START 0xD800</span>
+<span class="cp">#define H_SURROGATE_END 0xDBFF</span>
+<span class="cp">#define SURROGATE_PAIR_START 0x10000</span>
+
+<span class="c1">// Create a dedicated type for characters to avoid the issue</span>
+<span class="c1">// of different platforms defaulting char to be either signed</span>
+<span class="c1">// or unsigned.</span>
+<span class="k">using</span><span class="w"> </span><span class="n">UtilCharInternal_t</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="kt">signed</span><span class="w"> </span><span class="kt">char</span><span class="p">;</span><span class="w"></span>
+
+<span class="kr">inline</span><span class="w"> </span><span class="kt">size_t</span><span class="w"> </span><span class="nf">count_utf8_to_utf16</span><span class="p">(</span><span class="k">const</span><span class="w"> </span><span class="n">std</span><span class="o">::</span><span class="n">string</span><span class="o">&amp;</span><span class="w"> </span><span class="n">s</span><span class="p">)</span><span class="w"></span>
+<span class="p">{</span><span class="w"></span>
+<span class="w">  </span><span class="k">const</span><span class="w"> </span><span class="kt">size_t</span><span class="w"> </span><span class="n">sSize</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="n">s</span><span class="p">.</span><span class="n">size</span><span class="p">();</span><span class="w"></span>
+<span class="w">  </span><span class="k">auto</span><span class="w"> </span><span class="k">const</span><span class="w"> </span><span class="n">sData</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="k">reinterpret_cast</span><span class="o">&lt;</span><span class="k">const</span><span class="w"> </span><span class="n">UtilCharInternal_t</span><span class="o">*&gt;</span><span class="p">(</span><span class="n">s</span><span class="p">.</span><span class="n">data</span><span class="p">());</span><span class="w"></span>
+<span class="w">  </span><span class="kt">size_t</span><span class="w"> </span><span class="n">result</span><span class="w"> </span><span class="p">{</span><span class="n">sSize</span><span class="p">};</span><span class="w"></span>
+
+<span class="w">  </span><span class="k">for</span><span class="w"> </span><span class="p">(</span><span class="kt">size_t</span><span class="w"> </span><span class="n">index</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="mi">0</span><span class="p">;</span><span class="w"> </span><span class="n">index</span><span class="w"> </span><span class="o">&lt;</span><span class="w"> </span><span class="n">sSize</span><span class="p">;)</span><span class="w"></span>
+<span class="w">  </span><span class="p">{</span><span class="w"></span>
+<span class="w">    </span><span class="k">if</span><span class="w"> </span><span class="p">(</span><span class="n">sData</span><span class="p">[</span><span class="n">index</span><span class="p">]</span><span class="w"> </span><span class="o">&gt;=</span><span class="w"> </span><span class="mi">0</span><span class="p">)</span><span class="w"></span>
+<span class="w">    </span><span class="p">{</span><span class="w"></span>
+<span class="w">      </span><span class="c1">// use fast inner loop to skip single byte code points (which are</span>
+<span class="w">      </span><span class="c1">// expected to be the most frequent)</span>
+<span class="w">      </span><span class="k">while</span><span class="w"> </span><span class="p">((</span><span class="o">++</span><span class="n">index</span><span class="w"> </span><span class="o">&lt;</span><span class="w"> </span><span class="n">sSize</span><span class="p">)</span><span class="w"> </span><span class="o">&amp;&amp;</span><span class="w"> </span><span class="p">(</span><span class="n">sData</span><span class="p">[</span><span class="n">index</span><span class="p">]</span><span class="w"> </span><span class="o">&gt;=</span><span class="w"> </span><span class="mi">0</span><span class="p">))</span><span class="w"></span>
+<span class="w">        </span><span class="p">;</span><span class="w"></span>
+
+<span class="w">      </span><span class="k">if</span><span class="w"> </span><span class="p">(</span><span class="n">index</span><span class="w"> </span><span class="o">&gt;=</span><span class="w"> </span><span class="n">sSize</span><span class="p">)</span><span class="w"> </span><span class="k">break</span><span class="p">;</span><span class="w"></span>
+<span class="w">    </span><span class="p">}</span><span class="w"></span>
+
+<span class="w">    </span><span class="c1">// start special handling for multi-byte code points</span>
+<span class="w">    </span><span class="k">const</span><span class="w"> </span><span class="n">UtilCharInternal_t</span><span class="w"> </span><span class="n">c</span><span class="w"> </span><span class="p">{</span><span class="n">sData</span><span class="p">[</span><span class="n">index</span><span class="o">++</span><span class="p">]};</span><span class="w"></span>
+
+<span class="w">    </span><span class="k">if</span><span class="w"> </span><span class="p">((</span><span class="n">c</span><span class="w"> </span><span class="o">&amp;</span><span class="w"> </span><span class="n">BIT7</span><span class="p">)</span><span class="w"> </span><span class="o">==</span><span class="w"> </span><span class="mi">0</span><span class="p">)</span><span class="w"></span>
+<span class="w">    </span><span class="p">{</span><span class="w"></span>
+<span class="w">      </span><span class="k">throw</span><span class="w"> </span><span class="n">std</span><span class="o">::</span><span class="n">range_error</span><span class="p">(</span><span class="s">&quot;UTF-8 string character can never start with 10xxxxxx&quot;</span><span class="p">);</span><span class="w"></span>
+<span class="w">    </span><span class="p">}</span><span class="w"></span>
+<span class="w">    </span><span class="k">else</span><span class="w"> </span><span class="k">if</span><span class="w"> </span><span class="p">((</span><span class="n">c</span><span class="w"> </span><span class="o">&amp;</span><span class="w"> </span><span class="n">BIT6</span><span class="p">)</span><span class="w"> </span><span class="o">==</span><span class="w"> </span><span class="mi">0</span><span class="p">)</span><span class="w"> </span><span class="c1">// 2 byte character, 0x80 to 0x7FF</span>
+<span class="w">    </span><span class="p">{</span><span class="w"></span>
+<span class="w">      </span><span class="k">if</span><span class="w"> </span><span class="p">(</span><span class="n">index</span><span class="w"> </span><span class="o">==</span><span class="w"> </span><span class="n">sSize</span><span class="p">)</span><span class="w"></span>
+<span class="w">      </span><span class="p">{</span><span class="w"></span>
+<span class="w">        </span><span class="k">throw</span><span class="w"> </span><span class="n">std</span><span class="o">::</span><span class="n">range_error</span><span class="p">(</span><span class="s">&quot;UTF-8 string is missing bytes in character&quot;</span><span class="p">);</span><span class="w"></span>
+<span class="w">      </span><span class="p">}</span><span class="w"></span>
+
+<span class="w">      </span><span class="k">const</span><span class="w"> </span><span class="n">UtilCharInternal_t</span><span class="w"> </span><span class="n">c2</span><span class="w"> </span><span class="p">{</span><span class="n">sData</span><span class="p">[</span><span class="n">index</span><span class="o">++</span><span class="p">]};</span><span class="w"></span>
+<span class="w">      </span><span class="k">if</span><span class="w"> </span><span class="p">((</span><span class="n">c2</span><span class="w"> </span><span class="o">&amp;</span><span class="w"> </span><span class="mh">0xC0</span><span class="p">)</span><span class="w"> </span><span class="o">!=</span><span class="w"> </span><span class="n">BIT8</span><span class="p">)</span><span class="w"></span>
+<span class="w">      </span><span class="p">{</span><span class="w"></span>
+<span class="w">        </span><span class="k">throw</span><span class="w"> </span><span class="n">std</span><span class="o">::</span><span class="n">range_error</span><span class="p">(</span><span class="s">&quot;UTF-8 continuation byte is missing leading bit mask&quot;</span><span class="p">);</span><span class="w"></span>
+<span class="w">      </span><span class="p">}</span><span class="w"></span>
+
+<span class="w">      </span><span class="c1">// can&#39;t require surrogates for 7FF</span>
+<span class="w">      </span><span class="o">--</span><span class="n">result</span><span class="p">;</span><span class="w"></span>
+<span class="w">    </span><span class="p">}</span><span class="w"></span>
+<span class="w">    </span><span class="k">else</span><span class="w"> </span><span class="k">if</span><span class="w"> </span><span class="p">((</span><span class="n">c</span><span class="w"> </span><span class="o">&amp;</span><span class="w"> </span><span class="n">BIT5</span><span class="p">)</span><span class="w"> </span><span class="o">==</span><span class="w"> </span><span class="mi">0</span><span class="p">)</span><span class="w"> </span><span class="c1">// 3 byte character, 0x800 to 0xFFFF</span>
+<span class="w">    </span><span class="p">{</span><span class="w"></span>
+<span class="w">      </span><span class="k">if</span><span class="w"> </span><span class="p">(</span><span class="n">sSize</span><span class="w"> </span><span class="o">-</span><span class="w"> </span><span class="n">index</span><span class="w"> </span><span class="o">&lt;</span><span class="w"> </span><span class="mi">2</span><span class="p">)</span><span class="w"></span>
+<span class="w">      </span><span class="p">{</span><span class="w"></span>
+<span class="w">        </span><span class="k">throw</span><span class="w"> </span><span class="n">std</span><span class="o">::</span><span class="n">range_error</span><span class="p">(</span><span class="s">&quot;UTF-8 string is missing bytes in character&quot;</span><span class="p">);</span><span class="w"></span>
+<span class="w">      </span><span class="p">}</span><span class="w"></span>
+
+<span class="w">      </span><span class="k">const</span><span class="w"> </span><span class="n">UtilCharInternal_t</span><span class="w"> </span><span class="n">c2</span><span class="w"> </span><span class="p">{</span><span class="n">sData</span><span class="p">[</span><span class="n">index</span><span class="o">++</span><span class="p">]};</span><span class="w"></span>
+<span class="w">      </span><span class="k">const</span><span class="w"> </span><span class="n">UtilCharInternal_t</span><span class="w"> </span><span class="n">c3</span><span class="w"> </span><span class="p">{</span><span class="n">sData</span><span class="p">[</span><span class="n">index</span><span class="o">++</span><span class="p">]};</span><span class="w"></span>
+<span class="w">      </span><span class="k">if</span><span class="w"> </span><span class="p">(((</span><span class="n">c2</span><span class="w"> </span><span class="o">|</span><span class="w"> </span><span class="n">c3</span><span class="p">)</span><span class="w"> </span><span class="o">&amp;</span><span class="w"> </span><span class="mh">0xC0</span><span class="p">)</span><span class="w"> </span><span class="o">!=</span><span class="w"> </span><span class="n">BIT8</span><span class="p">)</span><span class="w"></span>
+<span class="w">      </span><span class="p">{</span><span class="w"></span>
+<span class="w">        </span><span class="k">throw</span><span class="w"> </span><span class="n">std</span><span class="o">::</span><span class="n">range_error</span><span class="p">(</span><span class="s">&quot;UTF-8 continuation byte is missing leading bit mask&quot;</span><span class="p">);</span><span class="w"></span>
+<span class="w">      </span><span class="p">}</span><span class="w"></span>
+
+<span class="w">      </span><span class="n">result</span><span class="w"> </span><span class="o">-=</span><span class="w"> </span><span class="mi">2</span><span class="p">;</span><span class="w"></span>
+<span class="w">    </span><span class="p">}</span><span class="w"></span>
+<span class="w">    </span><span class="k">else</span><span class="w"> </span><span class="k">if</span><span class="w"> </span><span class="p">((</span><span class="n">c</span><span class="w"> </span><span class="o">&amp;</span><span class="w"> </span><span class="n">BIT4</span><span class="p">)</span><span class="w"> </span><span class="o">==</span><span class="w"> </span><span class="mi">0</span><span class="p">)</span><span class="w"> </span><span class="c1">// 4 byte character, 0x10000 to 0x10FFFF</span>
+<span class="w">    </span><span class="p">{</span><span class="w"></span>
+<span class="w">      </span><span class="k">if</span><span class="w"> </span><span class="p">(</span><span class="n">sSize</span><span class="w"> </span><span class="o">-</span><span class="w"> </span><span class="n">index</span><span class="w"> </span><span class="o">&lt;</span><span class="w"> </span><span class="mi">3</span><span class="p">)</span><span class="w"></span>
+<span class="w">      </span><span class="p">{</span><span class="w"></span>
+<span class="w">        </span><span class="k">throw</span><span class="w"> </span><span class="n">std</span><span class="o">::</span><span class="n">range_error</span><span class="p">(</span><span class="s">&quot;UTF-8 string is missing bytes in character&quot;</span><span class="p">);</span><span class="w"></span>
+<span class="w">      </span><span class="p">}</span><span class="w"></span>
+
+<span class="w">      </span><span class="k">const</span><span class="w"> </span><span class="n">UtilCharInternal_t</span><span class="w"> </span><span class="n">c2</span><span class="w"> </span><span class="p">{</span><span class="n">sData</span><span class="p">[</span><span class="n">index</span><span class="o">++</span><span class="p">]};</span><span class="w"></span>
+<span class="w">      </span><span class="k">const</span><span class="w"> </span><span class="n">UtilCharInternal_t</span><span class="w"> </span><span class="n">c3</span><span class="w"> </span><span class="p">{</span><span class="n">sData</span><span class="p">[</span><span class="n">index</span><span class="o">++</span><span class="p">]};</span><span class="w"></span>
+<span class="w">      </span><span class="k">const</span><span class="w"> </span><span class="n">UtilCharInternal_t</span><span class="w"> </span><span class="n">c4</span><span class="w"> </span><span class="p">{</span><span class="n">sData</span><span class="p">[</span><span class="n">index</span><span class="o">++</span><span class="p">]};</span><span class="w"></span>
+<span class="w">      </span><span class="k">if</span><span class="w"> </span><span class="p">(((</span><span class="n">c2</span><span class="w"> </span><span class="o">|</span><span class="w"> </span><span class="n">c3</span><span class="w"> </span><span class="o">|</span><span class="w"> </span><span class="n">c4</span><span class="p">)</span><span class="w"> </span><span class="o">&amp;</span><span class="w"> </span><span class="mh">0xC0</span><span class="p">)</span><span class="w"> </span><span class="o">!=</span><span class="w"> </span><span class="n">BIT8</span><span class="p">)</span><span class="w"></span>
+<span class="w">      </span><span class="p">{</span><span class="w"></span>
+<span class="w">        </span><span class="k">throw</span><span class="w"> </span><span class="n">std</span><span class="o">::</span><span class="n">range_error</span><span class="p">(</span><span class="s">&quot;UTF-8 continuation byte is missing leading bit mask&quot;</span><span class="p">);</span><span class="w"></span>
+<span class="w">      </span><span class="p">}</span><span class="w"></span>
+
+<span class="w">      </span><span class="k">const</span><span class="w"> </span><span class="kt">uint32_t</span><span class="w"> </span><span class="n">codePoint</span><span class="w"> </span><span class="o">=</span><span class="w"></span>
+<span class="w">          </span><span class="p">((</span><span class="n">c</span><span class="w"> </span><span class="o">&amp;</span><span class="w"> </span><span class="n">LOW_3BITS</span><span class="p">)</span><span class="w"> </span><span class="o">&lt;&lt;</span><span class="w"> </span><span class="mi">18</span><span class="p">)</span><span class="w"> </span><span class="o">|</span><span class="w"> </span><span class="p">((</span><span class="n">c2</span><span class="w"> </span><span class="o">&amp;</span><span class="w"> </span><span class="n">LOW_6BITS</span><span class="p">)</span><span class="w"> </span><span class="o">&lt;&lt;</span><span class="w"> </span><span class="mi">12</span><span class="p">)</span><span class="w"> </span><span class="o">|</span><span class="w"> </span><span class="p">((</span><span class="n">c3</span><span class="w"> </span><span class="o">&amp;</span><span class="w"> </span><span class="n">LOW_6BITS</span><span class="p">)</span><span class="w"> </span><span class="o">&lt;&lt;</span><span class="w"> </span><span class="mi">6</span><span class="p">)</span><span class="w"> </span><span class="o">|</span><span class="w"> </span><span class="p">(</span><span class="n">c4</span><span class="w"> </span><span class="o">&amp;</span><span class="w"> </span><span class="n">LOW_6BITS</span><span class="p">);</span><span class="w"></span>
+<span class="w">      </span><span class="n">result</span><span class="w"> </span><span class="o">-=</span><span class="w"> </span><span class="p">(</span><span class="mi">3</span><span class="w"> </span><span class="o">-</span><span class="w"> </span><span class="p">(</span><span class="n">codePoint</span><span class="w"> </span><span class="o">&gt;=</span><span class="w"> </span><span class="n">SURROGATE_PAIR_START</span><span class="p">));</span><span class="w"></span>
+<span class="w">    </span><span class="p">}</span><span class="w"></span>
+<span class="w">    </span><span class="k">else</span><span class="w"></span>
+<span class="w">    </span><span class="p">{</span><span class="w"></span>
+<span class="w">      </span><span class="k">throw</span><span class="w"> </span><span class="n">std</span><span class="o">::</span><span class="n">range_error</span><span class="p">(</span><span class="s">&quot;UTF-8 string has invalid Unicode code point&quot;</span><span class="p">);</span><span class="w"></span>
+<span class="w">    </span><span class="p">}</span><span class="w"></span>
+<span class="w">  </span><span class="p">}</span><span class="w"></span>
+
+<span class="w">  </span><span class="k">return</span><span class="w"> </span><span class="n">result</span><span class="p">;</span><span class="w"></span>
+<span class="p">}</span><span class="w"></span>
+
+<span class="n">utf16string</span><span class="w"> </span><span class="cm">/*__cdecl conversions::*/</span><span class="n">utf8_to_utf16</span><span class="p">(</span><span class="k">const</span><span class="w"> </span><span class="n">std</span><span class="o">::</span><span class="n">string</span><span class="o">&amp;</span><span class="w"> </span><span class="n">s</span><span class="p">)</span><span class="w"></span>
+<span class="p">{</span><span class="w"></span>
+<span class="w">  </span><span class="c1">// Save repeated heap allocations, use the length of resulting sequence.</span>
+<span class="w">  </span><span class="k">const</span><span class="w"> </span><span class="kt">size_t</span><span class="w"> </span><span class="n">srcSize</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="n">s</span><span class="p">.</span><span class="n">size</span><span class="p">();</span><span class="w"></span>
+<span class="w">  </span><span class="k">auto</span><span class="w"> </span><span class="k">const</span><span class="w"> </span><span class="n">srcData</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="k">reinterpret_cast</span><span class="o">&lt;</span><span class="k">const</span><span class="w"> </span><span class="n">UtilCharInternal_t</span><span class="o">*&gt;</span><span class="p">(</span><span class="n">s</span><span class="p">.</span><span class="n">data</span><span class="p">());</span><span class="w"></span>
+<span class="w">  </span><span class="n">utf16string</span><span class="w"> </span><span class="nf">dest</span><span class="p">(</span><span class="n">count_utf8_to_utf16</span><span class="p">(</span><span class="n">s</span><span class="p">),</span><span class="w"> </span><span class="sa">L</span><span class="sc">&#39;\0&#39;</span><span class="p">);</span><span class="w"></span>
+<span class="w">  </span><span class="n">utf16string</span><span class="o">::</span><span class="n">value_type</span><span class="o">*</span><span class="w"> </span><span class="k">const</span><span class="w"> </span><span class="n">destData</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="o">&amp;</span><span class="n">dest</span><span class="p">[</span><span class="mi">0</span><span class="p">];</span><span class="w"></span>
+<span class="w">  </span><span class="kt">size_t</span><span class="w"> </span><span class="n">destIndex</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="mi">0</span><span class="p">;</span><span class="w"></span>
+
+<span class="w">  </span><span class="k">for</span><span class="w"> </span><span class="p">(</span><span class="kt">size_t</span><span class="w"> </span><span class="n">index</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="mi">0</span><span class="p">;</span><span class="w"> </span><span class="n">index</span><span class="w"> </span><span class="o">&lt;</span><span class="w"> </span><span class="n">srcSize</span><span class="p">;</span><span class="w"> </span><span class="o">++</span><span class="n">index</span><span class="p">)</span><span class="w"></span>
+<span class="w">  </span><span class="p">{</span><span class="w"></span>
+<span class="w">    </span><span class="n">UtilCharInternal_t</span><span class="w"> </span><span class="n">src</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="n">srcData</span><span class="p">[</span><span class="n">index</span><span class="p">];</span><span class="w"></span>
+<span class="w">    </span><span class="k">switch</span><span class="w"> </span><span class="p">(</span><span class="n">src</span><span class="w"> </span><span class="o">&amp;</span><span class="w"> </span><span class="mh">0xF0</span><span class="p">)</span><span class="w"></span>
+<span class="w">    </span><span class="p">{</span><span class="w"></span>
+<span class="w">      </span><span class="k">case</span><span class="w"> </span><span class="mh">0xF0</span><span class="o">:</span><span class="w"> </span><span class="c1">// 4 byte character, 0x10000 to 0x10FFFF</span>
+<span class="w">      </span><span class="p">{</span><span class="w"></span>
+<span class="w">        </span><span class="k">const</span><span class="w"> </span><span class="n">UtilCharInternal_t</span><span class="w"> </span><span class="n">c2</span><span class="w"> </span><span class="p">{</span><span class="n">srcData</span><span class="p">[</span><span class="o">++</span><span class="n">index</span><span class="p">]};</span><span class="w"></span>
+<span class="w">        </span><span class="k">const</span><span class="w"> </span><span class="n">UtilCharInternal_t</span><span class="w"> </span><span class="n">c3</span><span class="w"> </span><span class="p">{</span><span class="n">srcData</span><span class="p">[</span><span class="o">++</span><span class="n">index</span><span class="p">]};</span><span class="w"></span>
+<span class="w">        </span><span class="k">const</span><span class="w"> </span><span class="n">UtilCharInternal_t</span><span class="w"> </span><span class="n">c4</span><span class="w"> </span><span class="p">{</span><span class="n">srcData</span><span class="p">[</span><span class="o">++</span><span class="n">index</span><span class="p">]};</span><span class="w"></span>
+<span class="w">        </span><span class="kt">uint32_t</span><span class="w"> </span><span class="n">codePoint</span><span class="w"> </span><span class="o">=</span><span class="w"></span>
+<span class="w">            </span><span class="p">((</span><span class="n">src</span><span class="w"> </span><span class="o">&amp;</span><span class="w"> </span><span class="n">LOW_3BITS</span><span class="p">)</span><span class="w"> </span><span class="o">&lt;&lt;</span><span class="w"> </span><span class="mi">18</span><span class="p">)</span><span class="w"> </span><span class="o">|</span><span class="w"> </span><span class="p">((</span><span class="n">c2</span><span class="w"> </span><span class="o">&amp;</span><span class="w"> </span><span class="n">LOW_6BITS</span><span class="p">)</span><span class="w"> </span><span class="o">&lt;&lt;</span><span class="w"> </span><span class="mi">12</span><span class="p">)</span><span class="w"> </span><span class="o">|</span><span class="w"> </span><span class="p">((</span><span class="n">c3</span><span class="w"> </span><span class="o">&amp;</span><span class="w"> </span><span class="n">LOW_6BITS</span><span class="p">)</span><span class="w"> </span><span class="o">&lt;&lt;</span><span class="w"> </span><span class="mi">6</span><span class="p">)</span><span class="w"> </span><span class="o">|</span><span class="w"> </span><span class="p">(</span><span class="n">c4</span><span class="w"> </span><span class="o">&amp;</span><span class="w"> </span><span class="n">LOW_6BITS</span><span class="p">);</span><span class="w"></span>
+<span class="w">        </span><span class="k">if</span><span class="w"> </span><span class="p">(</span><span class="n">codePoint</span><span class="w"> </span><span class="o">&gt;=</span><span class="w"> </span><span class="n">SURROGATE_PAIR_START</span><span class="p">)</span><span class="w"></span>
+<span class="w">        </span><span class="p">{</span><span class="w"></span>
+<span class="w">          </span><span class="c1">// In UTF-16 U+10000 to U+10FFFF are represented as two 16-bit code units, surrogate pairs.</span>
+<span class="w">          </span><span class="c1">//  - 0x10000 is subtracted from the code point</span>
+<span class="w">          </span><span class="c1">//  - high surrogate is 0xD800 added to the top ten bits</span>
+<span class="w">          </span><span class="c1">//  - low surrogate is 0xDC00 added to the low ten bits</span>
+<span class="w">          </span><span class="n">codePoint</span><span class="w"> </span><span class="o">-=</span><span class="w"> </span><span class="n">SURROGATE_PAIR_START</span><span class="p">;</span><span class="w"></span>
+<span class="w">          </span><span class="n">destData</span><span class="p">[</span><span class="n">destIndex</span><span class="o">++</span><span class="p">]</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="k">static_cast</span><span class="o">&lt;</span><span class="n">utf16string</span><span class="o">::</span><span class="n">value_type</span><span class="o">&gt;</span><span class="p">((</span><span class="n">codePoint</span><span class="w"> </span><span class="o">&gt;&gt;</span><span class="w"> </span><span class="mi">10</span><span class="p">)</span><span class="w"> </span><span class="o">|</span><span class="w"> </span><span class="n">H_SURROGATE_START</span><span class="p">);</span><span class="w"></span>
+<span class="w">          </span><span class="n">destData</span><span class="p">[</span><span class="n">destIndex</span><span class="o">++</span><span class="p">]</span><span class="w"> </span><span class="o">=</span><span class="w"></span>
+<span class="w">              </span><span class="k">static_cast</span><span class="o">&lt;</span><span class="n">utf16string</span><span class="o">::</span><span class="n">value_type</span><span class="o">&gt;</span><span class="p">((</span><span class="n">codePoint</span><span class="w"> </span><span class="o">&amp;</span><span class="w"> </span><span class="mh">0x3FF</span><span class="p">)</span><span class="w"> </span><span class="o">|</span><span class="w"> </span><span class="n">L_SURROGATE_START</span><span class="p">);</span><span class="w"></span>
+<span class="w">        </span><span class="p">}</span><span class="w"></span>
+<span class="w">        </span><span class="k">else</span><span class="w"></span>
+<span class="w">        </span><span class="p">{</span><span class="w"></span>
+<span class="w">          </span><span class="c1">// In UTF-16 U+0000 to U+D7FF and U+E000 to U+FFFF are represented exactly as the Unicode code point</span>
+<span class="w">          </span><span class="c1">// value. U+D800 to U+DFFF are not valid characters, for simplicity we assume they are not present</span>
+<span class="w">          </span><span class="c1">// but will encode them if encountered.</span>
+<span class="w">          </span><span class="n">destData</span><span class="p">[</span><span class="n">destIndex</span><span class="o">++</span><span class="p">]</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="k">static_cast</span><span class="o">&lt;</span><span class="n">utf16string</span><span class="o">::</span><span class="n">value_type</span><span class="o">&gt;</span><span class="p">(</span><span class="n">codePoint</span><span class="p">);</span><span class="w"></span>
+<span class="w">        </span><span class="p">}</span><span class="w"></span>
+<span class="w">      </span><span class="p">}</span><span class="w"></span>
+<span class="w">        </span><span class="k">break</span><span class="p">;</span><span class="w"></span>
+<span class="w">      </span><span class="k">case</span><span class="w"> </span><span class="mh">0xE0</span><span class="o">:</span><span class="w"> </span><span class="c1">// 3 byte character, 0x800 to 0xFFFF</span>
+<span class="w">      </span><span class="p">{</span><span class="w"></span>
+<span class="w">        </span><span class="k">const</span><span class="w"> </span><span class="n">UtilCharInternal_t</span><span class="w"> </span><span class="n">c2</span><span class="w"> </span><span class="p">{</span><span class="n">srcData</span><span class="p">[</span><span class="o">++</span><span class="n">index</span><span class="p">]};</span><span class="w"></span>
+<span class="w">        </span><span class="k">const</span><span class="w"> </span><span class="n">UtilCharInternal_t</span><span class="w"> </span><span class="n">c3</span><span class="w"> </span><span class="p">{</span><span class="n">srcData</span><span class="p">[</span><span class="o">++</span><span class="n">index</span><span class="p">]};</span><span class="w"></span>
+<span class="w">        </span><span class="n">destData</span><span class="p">[</span><span class="n">destIndex</span><span class="o">++</span><span class="p">]</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="k">static_cast</span><span class="o">&lt;</span><span class="n">utf16string</span><span class="o">::</span><span class="n">value_type</span><span class="o">&gt;</span><span class="p">(</span><span class="w"></span>
+<span class="w">            </span><span class="p">((</span><span class="n">src</span><span class="w"> </span><span class="o">&amp;</span><span class="w"> </span><span class="n">LOW_4BITS</span><span class="p">)</span><span class="w"> </span><span class="o">&lt;&lt;</span><span class="w"> </span><span class="mi">12</span><span class="p">)</span><span class="w"> </span><span class="o">|</span><span class="w"> </span><span class="p">((</span><span class="n">c2</span><span class="w"> </span><span class="o">&amp;</span><span class="w"> </span><span class="n">LOW_6BITS</span><span class="p">)</span><span class="w"> </span><span class="o">&lt;&lt;</span><span class="w"> </span><span class="mi">6</span><span class="p">)</span><span class="w"> </span><span class="o">|</span><span class="w"> </span><span class="p">(</span><span class="n">c3</span><span class="w"> </span><span class="o">&amp;</span><span class="w"> </span><span class="n">LOW_6BITS</span><span class="p">));</span><span class="w"></span>
+<span class="w">      </span><span class="p">}</span><span class="w"></span>
+<span class="w">        </span><span class="k">break</span><span class="p">;</span><span class="w"></span>
+<span class="w">      </span><span class="k">case</span><span class="w"> </span><span class="mh">0xD0</span><span class="o">:</span><span class="w"> </span><span class="c1">// 2 byte character, 0x80 to 0x7FF</span>
+<span class="w">      </span><span class="k">case</span><span class="w"> </span><span class="mh">0xC0</span><span class="o">:</span><span class="w"></span>
+<span class="w">      </span><span class="p">{</span><span class="w"></span>
+<span class="w">        </span><span class="k">const</span><span class="w"> </span><span class="n">UtilCharInternal_t</span><span class="w"> </span><span class="n">c2</span><span class="w"> </span><span class="p">{</span><span class="n">srcData</span><span class="p">[</span><span class="o">++</span><span class="n">index</span><span class="p">]};</span><span class="w"></span>
+<span class="w">        </span><span class="n">destData</span><span class="p">[</span><span class="n">destIndex</span><span class="o">++</span><span class="p">]</span><span class="w"> </span><span class="o">=</span><span class="w"></span>
+<span class="w">            </span><span class="k">static_cast</span><span class="o">&lt;</span><span class="n">utf16string</span><span class="o">::</span><span class="n">value_type</span><span class="o">&gt;</span><span class="p">(((</span><span class="n">src</span><span class="w"> </span><span class="o">&amp;</span><span class="w"> </span><span class="n">LOW_5BITS</span><span class="p">)</span><span class="w"> </span><span class="o">&lt;&lt;</span><span class="w"> </span><span class="mi">6</span><span class="p">)</span><span class="w"> </span><span class="o">|</span><span class="w"> </span><span class="p">(</span><span class="n">c2</span><span class="w"> </span><span class="o">&amp;</span><span class="w"> </span><span class="n">LOW_6BITS</span><span class="p">));</span><span class="w"></span>
+<span class="w">      </span><span class="p">}</span><span class="w"></span>
+<span class="w">        </span><span class="k">break</span><span class="p">;</span><span class="w"></span>
+<span class="w">      </span><span class="k">default</span><span class="o">:</span><span class="w"> </span><span class="c1">// single byte character, 0x0 to 0x7F</span>
+<span class="w">        </span><span class="c1">// try to use a fast inner loop for following single byte characters,</span>
+<span class="w">        </span><span class="c1">// since they are quite probable</span>
+<span class="w">        </span><span class="k">do</span><span class="w"></span>
+<span class="w">        </span><span class="p">{</span><span class="w"></span>
+<span class="w">          </span><span class="n">destData</span><span class="p">[</span><span class="n">destIndex</span><span class="o">++</span><span class="p">]</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="k">static_cast</span><span class="o">&lt;</span><span class="n">utf16string</span><span class="o">::</span><span class="n">value_type</span><span class="o">&gt;</span><span class="p">(</span><span class="n">srcData</span><span class="p">[</span><span class="n">index</span><span class="o">++</span><span class="p">]);</span><span class="w"></span>
+<span class="w">        </span><span class="p">}</span><span class="w"> </span><span class="k">while</span><span class="w"> </span><span class="p">(</span><span class="n">index</span><span class="w"> </span><span class="o">&lt;</span><span class="w"> </span><span class="n">srcSize</span><span class="w"> </span><span class="o">&amp;&amp;</span><span class="w"> </span><span class="n">srcData</span><span class="p">[</span><span class="n">index</span><span class="p">]</span><span class="w"> </span><span class="o">&gt;</span><span class="w"> </span><span class="mi">0</span><span class="p">);</span><span class="w"></span>
+<span class="w">        </span><span class="c1">// adjust index since it will be incremented by the for loop</span>
+<span class="w">        </span><span class="o">--</span><span class="n">index</span><span class="p">;</span><span class="w"></span>
+<span class="w">    </span><span class="p">}</span><span class="w"></span>
+<span class="w">  </span><span class="p">}</span><span class="w"></span>
+<span class="w">  </span><span class="k">return</span><span class="w"> </span><span class="n">dest</span><span class="p">;</span><span class="w"></span>
+<span class="p">}</span><span class="w"></span>
+
+<span class="kr">inline</span><span class="w"> </span><span class="kt">size_t</span><span class="w"> </span><span class="n">count_utf16_to_utf8</span><span class="p">(</span><span class="k">const</span><span class="w"> </span><span class="n">utf16string</span><span class="o">&amp;</span><span class="w"> </span><span class="n">w</span><span class="p">)</span><span class="w"></span>
+<span class="p">{</span><span class="w"></span>
+<span class="w">  </span><span class="k">const</span><span class="w"> </span><span class="n">utf16string</span><span class="o">::</span><span class="n">value_type</span><span class="o">*</span><span class="w"> </span><span class="k">const</span><span class="w"> </span><span class="n">srcData</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="o">&amp;</span><span class="n">w</span><span class="p">[</span><span class="mi">0</span><span class="p">];</span><span class="w"></span>
+<span class="w">  </span><span class="k">const</span><span class="w"> </span><span class="kt">size_t</span><span class="w"> </span><span class="n">srcSize</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="n">w</span><span class="p">.</span><span class="n">size</span><span class="p">();</span><span class="w"></span>
+<span class="w">  </span><span class="kt">size_t</span><span class="w"> </span><span class="nf">destSize</span><span class="p">(</span><span class="n">srcSize</span><span class="p">);</span><span class="w"></span>
+<span class="w">  </span><span class="k">for</span><span class="w"> </span><span class="p">(</span><span class="kt">size_t</span><span class="w"> </span><span class="n">index</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="mi">0</span><span class="p">;</span><span class="w"> </span><span class="n">index</span><span class="w"> </span><span class="o">&lt;</span><span class="w"> </span><span class="n">srcSize</span><span class="p">;</span><span class="w"> </span><span class="o">++</span><span class="n">index</span><span class="p">)</span><span class="w"></span>
+<span class="w">  </span><span class="p">{</span><span class="w"></span>
+<span class="w">    </span><span class="k">const</span><span class="w"> </span><span class="n">utf16string</span><span class="o">::</span><span class="n">value_type</span><span class="w"> </span><span class="nf">ch</span><span class="p">(</span><span class="n">srcData</span><span class="p">[</span><span class="n">index</span><span class="p">]);</span><span class="w"></span>
+<span class="w">    </span><span class="k">if</span><span class="w"> </span><span class="p">(</span><span class="n">ch</span><span class="w"> </span><span class="o">&lt;=</span><span class="w"> </span><span class="mh">0x7FF</span><span class="p">)</span><span class="w"></span>
+<span class="w">    </span><span class="p">{</span><span class="w"></span>
+<span class="w">      </span><span class="k">if</span><span class="w"> </span><span class="p">(</span><span class="n">ch</span><span class="w"> </span><span class="o">&gt;</span><span class="w"> </span><span class="mh">0x7F</span><span class="p">)</span><span class="w"> </span><span class="c1">// 2 bytes needed (11 bits used)</span>
+<span class="w">      </span><span class="p">{</span><span class="w"></span>
+<span class="w">        </span><span class="o">++</span><span class="n">destSize</span><span class="p">;</span><span class="w"></span>
+<span class="w">      </span><span class="p">}</span><span class="w"></span>
+<span class="w">    </span><span class="p">}</span><span class="w"></span>
+<span class="w">      </span><span class="c1">// Check for high surrogate.</span>
+<span class="w">    </span><span class="k">else</span><span class="w"> </span><span class="k">if</span><span class="w"> </span><span class="p">(</span><span class="n">ch</span><span class="w"> </span><span class="o">&gt;=</span><span class="w"> </span><span class="n">H_SURROGATE_START</span><span class="w"> </span><span class="o">&amp;&amp;</span><span class="w"> </span><span class="n">ch</span><span class="w"> </span><span class="o">&lt;=</span><span class="w"> </span><span class="n">H_SURROGATE_END</span><span class="p">)</span><span class="w"> </span><span class="c1">// 4 bytes needed (21 bits used)</span>
+<span class="w">    </span><span class="p">{</span><span class="w"></span>
+<span class="w">      </span><span class="o">++</span><span class="n">index</span><span class="p">;</span><span class="w"></span>
+<span class="w">      </span><span class="k">if</span><span class="w"> </span><span class="p">(</span><span class="n">index</span><span class="w"> </span><span class="o">==</span><span class="w"> </span><span class="n">srcSize</span><span class="p">)</span><span class="w"></span>
+<span class="w">      </span><span class="p">{</span><span class="w"></span>
+<span class="w">        </span><span class="k">throw</span><span class="w"> </span><span class="n">std</span><span class="o">::</span><span class="n">range_error</span><span class="p">(</span><span class="s">&quot;UTF-16 string is missing low surrogate&quot;</span><span class="p">);</span><span class="w"></span>
+<span class="w">      </span><span class="p">}</span><span class="w"></span>
+
+<span class="w">      </span><span class="k">const</span><span class="w"> </span><span class="k">auto</span><span class="w"> </span><span class="n">lowSurrogate</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="n">srcData</span><span class="p">[</span><span class="n">index</span><span class="p">];</span><span class="w"></span>
+<span class="w">      </span><span class="k">if</span><span class="w"> </span><span class="p">(</span><span class="n">lowSurrogate</span><span class="w"> </span><span class="o">&lt;</span><span class="w"> </span><span class="n">L_SURROGATE_START</span><span class="w"> </span><span class="o">||</span><span class="w"> </span><span class="n">lowSurrogate</span><span class="w"> </span><span class="o">&gt;</span><span class="w"> </span><span class="n">L_SURROGATE_END</span><span class="p">)</span><span class="w"></span>
+<span class="w">      </span><span class="p">{</span><span class="w"></span>
+<span class="w">        </span><span class="k">throw</span><span class="w"> </span><span class="n">std</span><span class="o">::</span><span class="n">range_error</span><span class="p">(</span><span class="s">&quot;UTF-16 string has invalid low surrogate&quot;</span><span class="p">);</span><span class="w"></span>
+<span class="w">      </span><span class="p">}</span><span class="w"></span>
+
+<span class="w">      </span><span class="n">destSize</span><span class="w"> </span><span class="o">+=</span><span class="w"> </span><span class="mi">2</span><span class="p">;</span><span class="w"></span>
+<span class="w">    </span><span class="p">}</span><span class="w"></span>
+<span class="w">    </span><span class="k">else</span><span class="w"> </span><span class="c1">// 3 bytes needed (16 bits used)</span>
+<span class="w">    </span><span class="p">{</span><span class="w"></span>
+<span class="w">      </span><span class="n">destSize</span><span class="w"> </span><span class="o">+=</span><span class="w"> </span><span class="mi">2</span><span class="p">;</span><span class="w"></span>
+<span class="w">    </span><span class="p">}</span><span class="w"></span>
+<span class="w">  </span><span class="p">}</span><span class="w"></span>
+
+<span class="w">  </span><span class="k">return</span><span class="w"> </span><span class="n">destSize</span><span class="p">;</span><span class="w"></span>
+<span class="p">}</span><span class="w"></span>
+
+<span class="n">std</span><span class="o">::</span><span class="n">string</span><span class="w"> </span><span class="cm">/*__cdecl conversions::*/</span><span class="n">utf16_to_utf8</span><span class="p">(</span><span class="k">const</span><span class="w"> </span><span class="n">utf16string</span><span class="o">&amp;</span><span class="w"> </span><span class="n">w</span><span class="p">)</span><span class="w"></span>
+<span class="p">{</span><span class="w"></span>
+<span class="w">  </span><span class="k">const</span><span class="w"> </span><span class="kt">size_t</span><span class="w"> </span><span class="n">srcSize</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="n">w</span><span class="p">.</span><span class="n">size</span><span class="p">();</span><span class="w"></span>
+<span class="w">  </span><span class="k">const</span><span class="w"> </span><span class="n">utf16string</span><span class="o">::</span><span class="n">value_type</span><span class="o">*</span><span class="w"> </span><span class="k">const</span><span class="w"> </span><span class="n">srcData</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="o">&amp;</span><span class="n">w</span><span class="p">[</span><span class="mi">0</span><span class="p">];</span><span class="w"></span>
+<span class="w">  </span><span class="n">std</span><span class="o">::</span><span class="n">string</span><span class="w"> </span><span class="nf">dest</span><span class="p">(</span><span class="n">count_utf16_to_utf8</span><span class="p">(</span><span class="n">w</span><span class="p">),</span><span class="w"> </span><span class="sc">&#39;\0&#39;</span><span class="p">);</span><span class="w"></span>
+<span class="w">  </span><span class="n">std</span><span class="o">::</span><span class="n">string</span><span class="o">::</span><span class="n">value_type</span><span class="o">*</span><span class="w"> </span><span class="k">const</span><span class="w"> </span><span class="n">destData</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="o">&amp;</span><span class="n">dest</span><span class="p">[</span><span class="mi">0</span><span class="p">];</span><span class="w"></span>
+<span class="w">  </span><span class="kt">size_t</span><span class="w"> </span><span class="nf">destIndex</span><span class="p">(</span><span class="mi">0</span><span class="p">);</span><span class="w"></span>
+
+<span class="w">  </span><span class="k">for</span><span class="w"> </span><span class="p">(</span><span class="kt">size_t</span><span class="w"> </span><span class="n">index</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="mi">0</span><span class="p">;</span><span class="w"> </span><span class="n">index</span><span class="w"> </span><span class="o">&lt;</span><span class="w"> </span><span class="n">srcSize</span><span class="p">;</span><span class="w"> </span><span class="o">++</span><span class="n">index</span><span class="p">)</span><span class="w"></span>
+<span class="w">  </span><span class="p">{</span><span class="w"></span>
+<span class="w">    </span><span class="k">const</span><span class="w"> </span><span class="n">utf16string</span><span class="o">::</span><span class="n">value_type</span><span class="w"> </span><span class="n">src</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="n">srcData</span><span class="p">[</span><span class="n">index</span><span class="p">];</span><span class="w"></span>
+<span class="w">    </span><span class="k">if</span><span class="w"> </span><span class="p">(</span><span class="n">src</span><span class="w"> </span><span class="o">&lt;=</span><span class="w"> </span><span class="mh">0x7FF</span><span class="p">)</span><span class="w"></span>
+<span class="w">    </span><span class="p">{</span><span class="w"></span>
+<span class="w">      </span><span class="k">if</span><span class="w"> </span><span class="p">(</span><span class="n">src</span><span class="w"> </span><span class="o">&lt;=</span><span class="w"> </span><span class="mh">0x7F</span><span class="p">)</span><span class="w"> </span><span class="c1">// single byte character</span>
+<span class="w">      </span><span class="p">{</span><span class="w"></span>
+<span class="w">        </span><span class="n">destData</span><span class="p">[</span><span class="n">destIndex</span><span class="o">++</span><span class="p">]</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="k">static_cast</span><span class="o">&lt;</span><span class="kt">char</span><span class="o">&gt;</span><span class="p">(</span><span class="n">src</span><span class="p">);</span><span class="w"></span>
+<span class="w">      </span><span class="p">}</span><span class="w"></span>
+<span class="w">      </span><span class="k">else</span><span class="w"> </span><span class="c1">// 2 bytes needed (11 bits used)</span>
+<span class="w">      </span><span class="p">{</span><span class="w"></span>
+<span class="w">        </span><span class="n">destData</span><span class="p">[</span><span class="n">destIndex</span><span class="o">++</span><span class="p">]</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="k">static_cast</span><span class="o">&lt;</span><span class="kt">char</span><span class="o">&gt;</span><span class="p">(</span><span class="kt">char</span><span class="p">((</span><span class="n">src</span><span class="w"> </span><span class="o">&gt;&gt;</span><span class="w"> </span><span class="mi">6</span><span class="p">)</span><span class="w"> </span><span class="o">|</span><span class="w"> </span><span class="mh">0xC0</span><span class="p">));</span><span class="w">        </span><span class="c1">// leading 5 bits</span>
+<span class="w">        </span><span class="n">destData</span><span class="p">[</span><span class="n">destIndex</span><span class="o">++</span><span class="p">]</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="k">static_cast</span><span class="o">&lt;</span><span class="kt">char</span><span class="o">&gt;</span><span class="p">(</span><span class="kt">char</span><span class="p">((</span><span class="n">src</span><span class="w"> </span><span class="o">&amp;</span><span class="w"> </span><span class="n">LOW_6BITS</span><span class="p">)</span><span class="w"> </span><span class="o">|</span><span class="w"> </span><span class="n">BIT8</span><span class="p">));</span><span class="w"> </span><span class="c1">// trailing 6 bits</span>
+<span class="w">      </span><span class="p">}</span><span class="w"></span>
+<span class="w">    </span><span class="p">}</span><span class="w"></span>
+<span class="w">      </span><span class="c1">// Check for high surrogate.</span>
+<span class="w">    </span><span class="k">else</span><span class="w"> </span><span class="k">if</span><span class="w"> </span><span class="p">(</span><span class="n">src</span><span class="w"> </span><span class="o">&gt;=</span><span class="w"> </span><span class="n">H_SURROGATE_START</span><span class="w"> </span><span class="o">&amp;&amp;</span><span class="w"> </span><span class="n">src</span><span class="w"> </span><span class="o">&lt;=</span><span class="w"> </span><span class="n">H_SURROGATE_END</span><span class="p">)</span><span class="w"></span>
+<span class="w">    </span><span class="p">{</span><span class="w"></span>
+<span class="w">      </span><span class="k">const</span><span class="w"> </span><span class="k">auto</span><span class="w"> </span><span class="n">highSurrogate</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="n">src</span><span class="p">;</span><span class="w"></span>
+<span class="w">      </span><span class="k">const</span><span class="w"> </span><span class="k">auto</span><span class="w"> </span><span class="n">lowSurrogate</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="n">srcData</span><span class="p">[</span><span class="o">++</span><span class="n">index</span><span class="p">];</span><span class="w"></span>
+
+<span class="w">      </span><span class="c1">// To get from surrogate pair to Unicode code point:</span>
+<span class="w">      </span><span class="c1">// - subtract 0xD800 from high surrogate, this forms top ten bits</span>
+<span class="w">      </span><span class="c1">// - subtract 0xDC00 from low surrogate, this forms low ten bits</span>
+<span class="w">      </span><span class="c1">// - add 0x10000</span>
+<span class="w">      </span><span class="c1">// Leaves a code point in U+10000 to U+10FFFF range.</span>
+<span class="w">      </span><span class="kt">uint32_t</span><span class="w"> </span><span class="n">codePoint</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="n">highSurrogate</span><span class="w"> </span><span class="o">-</span><span class="w"> </span><span class="n">H_SURROGATE_START</span><span class="p">;</span><span class="w"></span>
+<span class="w">      </span><span class="n">codePoint</span><span class="w"> </span><span class="o">&lt;&lt;=</span><span class="w"> </span><span class="mi">10</span><span class="p">;</span><span class="w"></span>
+<span class="w">      </span><span class="n">codePoint</span><span class="w"> </span><span class="o">|=</span><span class="w"> </span><span class="n">lowSurrogate</span><span class="w"> </span><span class="o">-</span><span class="w"> </span><span class="n">L_SURROGATE_START</span><span class="p">;</span><span class="w"></span>
+<span class="w">      </span><span class="n">codePoint</span><span class="w"> </span><span class="o">+=</span><span class="w"> </span><span class="n">SURROGATE_PAIR_START</span><span class="p">;</span><span class="w"></span>
+
+<span class="w">      </span><span class="c1">// 4 bytes needed (21 bits used)</span>
+<span class="w">      </span><span class="n">destData</span><span class="p">[</span><span class="n">destIndex</span><span class="o">++</span><span class="p">]</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="k">static_cast</span><span class="o">&lt;</span><span class="kt">char</span><span class="o">&gt;</span><span class="p">((</span><span class="n">codePoint</span><span class="w"> </span><span class="o">&gt;&gt;</span><span class="w"> </span><span class="mi">18</span><span class="p">)</span><span class="w"> </span><span class="o">|</span><span class="w"> </span><span class="mh">0xF0</span><span class="p">);</span><span class="w">               </span><span class="c1">// leading 3 bits</span>
+<span class="w">      </span><span class="n">destData</span><span class="p">[</span><span class="n">destIndex</span><span class="o">++</span><span class="p">]</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="k">static_cast</span><span class="o">&lt;</span><span class="kt">char</span><span class="o">&gt;</span><span class="p">(((</span><span class="n">codePoint</span><span class="w"> </span><span class="o">&gt;&gt;</span><span class="w"> </span><span class="mi">12</span><span class="p">)</span><span class="w"> </span><span class="o">&amp;</span><span class="w"> </span><span class="n">LOW_6BITS</span><span class="p">)</span><span class="w"> </span><span class="o">|</span><span class="w"> </span><span class="n">BIT8</span><span class="p">);</span><span class="w"> </span><span class="c1">// next 6 bits</span>
+<span class="w">      </span><span class="n">destData</span><span class="p">[</span><span class="n">destIndex</span><span class="o">++</span><span class="p">]</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="k">static_cast</span><span class="o">&lt;</span><span class="kt">char</span><span class="o">&gt;</span><span class="p">(((</span><span class="n">codePoint</span><span class="w"> </span><span class="o">&gt;&gt;</span><span class="w"> </span><span class="mi">6</span><span class="p">)</span><span class="w"> </span><span class="o">&amp;</span><span class="w"> </span><span class="n">LOW_6BITS</span><span class="p">)</span><span class="w"> </span><span class="o">|</span><span class="w"> </span><span class="n">BIT8</span><span class="p">);</span><span class="w">  </span><span class="c1">// next 6 bits</span>
+<span class="w">      </span><span class="n">destData</span><span class="p">[</span><span class="n">destIndex</span><span class="o">++</span><span class="p">]</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="k">static_cast</span><span class="o">&lt;</span><span class="kt">char</span><span class="o">&gt;</span><span class="p">((</span><span class="n">codePoint</span><span class="w"> </span><span class="o">&amp;</span><span class="w"> </span><span class="n">LOW_6BITS</span><span class="p">)</span><span class="w"> </span><span class="o">|</span><span class="w"> </span><span class="n">BIT8</span><span class="p">);</span><span class="w">         </span><span class="c1">// trailing 6 bits</span>
+<span class="w">    </span><span class="p">}</span><span class="w"></span>
+<span class="w">    </span><span class="k">else</span><span class="w"> </span><span class="c1">// 3 bytes needed (16 bits used)</span>
+<span class="w">    </span><span class="p">{</span><span class="w"></span>
+<span class="w">      </span><span class="n">destData</span><span class="p">[</span><span class="n">destIndex</span><span class="o">++</span><span class="p">]</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="k">static_cast</span><span class="o">&lt;</span><span class="kt">char</span><span class="o">&gt;</span><span class="p">((</span><span class="n">src</span><span class="w"> </span><span class="o">&gt;&gt;</span><span class="w"> </span><span class="mi">12</span><span class="p">)</span><span class="w"> </span><span class="o">|</span><span class="w"> </span><span class="mh">0xE0</span><span class="p">);</span><span class="w">              </span><span class="c1">// leading 4 bits</span>
+<span class="w">      </span><span class="n">destData</span><span class="p">[</span><span class="n">destIndex</span><span class="o">++</span><span class="p">]</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="k">static_cast</span><span class="o">&lt;</span><span class="kt">char</span><span class="o">&gt;</span><span class="p">(((</span><span class="n">src</span><span class="w"> </span><span class="o">&gt;&gt;</span><span class="w"> </span><span class="mi">6</span><span class="p">)</span><span class="w"> </span><span class="o">&amp;</span><span class="w"> </span><span class="n">LOW_6BITS</span><span class="p">)</span><span class="w"> </span><span class="o">|</span><span class="w"> </span><span class="n">BIT8</span><span class="p">);</span><span class="w"> </span><span class="c1">// middle 6 bits</span>
+<span class="w">      </span><span class="n">destData</span><span class="p">[</span><span class="n">destIndex</span><span class="o">++</span><span class="p">]</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="k">static_cast</span><span class="o">&lt;</span><span class="kt">char</span><span class="o">&gt;</span><span class="p">((</span><span class="n">src</span><span class="w"> </span><span class="o">&amp;</span><span class="w"> </span><span class="n">LOW_6BITS</span><span class="p">)</span><span class="w"> </span><span class="o">|</span><span class="w"> </span><span class="n">BIT8</span><span class="p">);</span><span class="w">        </span><span class="c1">// trailing 6 bits</span>
+<span class="w">    </span><span class="p">}</span><span class="w"></span>
+<span class="w">  </span><span class="p">}</span><span class="w"></span>
+
+<span class="w">  </span><span class="k">return</span><span class="w"> </span><span class="n">dest</span><span class="p">;</span><span class="w"></span>
+<span class="p">}</span><span class="w"></span>
+</pre></div>
+</div>
+</section>
+
+
+           </div>
+          </div>
+          <footer>
+
+  <hr/>
+
+  <div role="contentinfo">
+    <p>&#169; Copyright 2021, Marian NMT Team.</p>
+  </div>
+
+  Built with <a href="https://www.sphinx-doc.org/">Sphinx</a> using a
+    <a href="https://github.com/readthedocs/sphinx_rtd_theme">theme</a>
+    provided by <a href="https://readthedocs.org">Read the Docs</a>.
+   
+
+</footer>
+        </div>
+      </div>
+    </section>
+  </div>
+  <script>
+      jQuery(function () {
+          SphinxRtdTheme.Navigation.enable(true);
+      });
+  </script> 
+
+</body>
+</html>

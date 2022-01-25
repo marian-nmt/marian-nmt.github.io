@@ -67,6 +67,12 @@ jobs:
               echo '::set-output name=changed::true';
             fi
 
+            # Always run on re-run jobs
+            if [ "${{ github.run_attempt }}" -gt "1" ]; then
+              echo '::set-output name=changed::true';
+            fi
+
+
   # Compile Marian to get CLI options
   cli:
     name: Build CLI documentation

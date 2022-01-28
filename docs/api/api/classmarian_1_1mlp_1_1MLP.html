@@ -4,7 +4,7 @@
   <meta charset="utf-8" /><meta name="generator" content="Docutils 0.17.1: http://docutils.sourceforge.net/" />
 
   <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-  <title>Class MLP &mdash; Marian NMT v1.10.27 2022-01-25 documentation</title><link rel="stylesheet" href="../_static/css/theme.css" type="text/css" />
+  <title>Class MLP &mdash; Marian NMT v1.10.28 2022-01-28 documentation</title><link rel="stylesheet" href="../_static/css/theme.css" type="text/css" />
     <link rel="stylesheet" href="../_static/pygments.css" type="text/css" />
       <link rel="stylesheet" href="../_static/css/custom.css" type="text/css" />
       <link rel="stylesheet" href="../_static/collapsible-lists/css/tree_view.css" type="text/css" />
@@ -36,7 +36,7 @@
             <a href="../index.html" class="icon icon-home"> Marian NMT
           </a>
               <div class="version">
-                v1.10.27
+                v1.10.28
               </div>
 <div role="search">
   <form id="rtd-search-form" class="wy-form" action="../search.html" method="get">
@@ -49,7 +49,9 @@
               <p><span class="caption-text">Contents:</span></p>
 <ul>
 <li class="toctree-l1"><a class="reference internal" href="../graph.html">Expression graphs</a></li>
-<li class="toctree-l1"><a class="reference internal" href="../operators.html">Operations in the Expression Graph</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../operators.html">Operations in the expression graph</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../layer.html">Layers</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../factors.html">Using Marian with factors</a></li>
 <li class="toctree-l1"><a class="reference internal" href="library_index.html">Library API</a></li>
 <li class="toctree-l1"><a class="reference internal" href="../contributing.html">How to contribute to Marian</a></li>
 <li class="toctree-l1"><a class="reference internal" href="../doc_guide.html">Writing documentation</a></li>
@@ -106,47 +108,121 @@
 <dl class="function">
 <dt id="_CPPv4N6marian3mlp3MLP3MLPE3PtrI15ExpressionGraphE3PtrI7OptionsE">
 <span id="_CPPv3N6marian3mlp3MLP3MLPE3PtrI15ExpressionGraphE3PtrI7OptionsE"></span><span id="_CPPv2N6marian3mlp3MLP3MLPE3PtrI15ExpressionGraphE3PtrI7OptionsE"></span><span id="marian::mlp::MLP::MLP__Ptr:ExpressionGraph:.Ptr:Options:"></span><span class="target" id="classmarian_1_1mlp_1_1MLP_1a40be5a4c5ed64d560e9c302998b0244b"></span><code class="sig-name descname">MLP</code><span class="sig-paren">(</span><a class="reference internal" href="typedef_namespacemarian_1ad1a373be43a00ef9ce35666145137b08.html#_CPPv4N6marian3PtrE" title="marian::Ptr">Ptr</a>&lt;<a class="reference internal" href="classmarian_1_1ExpressionGraph.html#_CPPv4N6marian15ExpressionGraphE" title="marian::ExpressionGraph">ExpressionGraph</a>&gt; <em>graph</em>, <a class="reference internal" href="typedef_namespacemarian_1ad1a373be43a00ef9ce35666145137b08.html#_CPPv4N6marian3PtrE" title="marian::Ptr">Ptr</a>&lt;<a class="reference internal" href="classmarian_1_1Options.html#_CPPv4N6marian7OptionsE" title="marian::Options">Options</a>&gt; <em>options</em><span class="sig-paren">)</span><a class="headerlink" href="#_CPPv4N6marian3mlp3MLP3MLPE3PtrI15ExpressionGraphE3PtrI7OptionsE" title="Permalink to this definition">¶</a><br /></dt>
-<dd></dd></dl>
+<dd><p>Construct a <a class="reference internal" href="#classmarian_1_1mlp_1_1MLP"><span class="std std-ref">MLP</span></a> container in the graph. </p>
+<p><dl class="simple">
+<dt><strong>Parameters</strong></dt><dd><ul class="breatheparameterlist simple">
+<li><p><code class="docutils literal notranslate"><span class="pre">graph</span></code>: The expression graph. </p></li>
+<li><p><code class="docutils literal notranslate"><span class="pre">options</span></code>: The options used for this mlp container. </p></li>
+</ul>
+</dd>
+</dl>
+</p>
+</dd></dl>
 
 <dl class="function">
 <dt id="_CPPv4N6marian3mlp3MLP5applyERKNSt6vectorI4ExprEE">
 <span id="_CPPv3N6marian3mlp3MLP5applyERKNSt6vectorI4ExprEE"></span><span id="_CPPv2N6marian3mlp3MLP5applyERKNSt6vectorI4ExprEE"></span><span id="marian::mlp::MLP::apply__std::vector:Expr:CR"></span><span class="target" id="classmarian_1_1mlp_1_1MLP_1a2dc81d3b171569819aaed3ac69ff3501"></span><a class="reference internal" href="typedef_namespacemarian_1ac8ecc2cc66a7afcc6da94a9bbde5eaa7.html#_CPPv4N6marian4ExprE" title="marian::Expr">Expr</a> <code class="sig-name descname">apply</code><span class="sig-paren">(</span><em class="property">const</em> <a class="reference internal" href="function_group__graph__ops__mathematical_1gaf4e69a5f7167b63522135a1f6b8a5dd8.html#_CPPv4N6marianStE4Expri" title="marian::std">std</a>::vector&lt;<a class="reference internal" href="typedef_namespacemarian_1ac8ecc2cc66a7afcc6da94a9bbde5eaa7.html#_CPPv4N6marian4ExprE" title="marian::Expr">Expr</a>&gt; &amp;<em>av</em><span class="sig-paren">)</span><a class="headerlink" href="#_CPPv4N6marian3mlp3MLP5applyERKNSt6vectorI4ExprEE" title="Permalink to this definition">¶</a><br /></dt>
-<dd></dd></dl>
+<dd><p>Apply/Link a vector of mlp layers (with the given inputs) to the expression graph. </p>
+<p><dl class="simple">
+<dt><strong>Return</strong></dt><dd><p>The expression holding the mlp container </p>
+</dd>
+<dt><strong>Parameters</strong></dt><dd><ul class="breatheparameterlist simple">
+<li><p><code class="docutils literal notranslate"><span class="pre">av</span></code>: The vector of input expressions </p></li>
+</ul>
+</dd>
+</dl>
+</p>
+</dd></dl>
 
 <dl class="function">
 <dt id="_CPPv4N6marian3mlp3MLP13applyAsLogitsERKNSt6vectorI4ExprEE">
 <span id="_CPPv3N6marian3mlp3MLP13applyAsLogitsERKNSt6vectorI4ExprEE"></span><span id="_CPPv2N6marian3mlp3MLP13applyAsLogitsERKNSt6vectorI4ExprEE"></span><span id="marian::mlp::MLP::applyAsLogits__std::vector:Expr:CR"></span><span class="target" id="classmarian_1_1mlp_1_1MLP_1a2482774028e3bdeb0c5ef356330380ef"></span><a class="reference internal" href="classmarian_1_1Logits.html#_CPPv4N6marian6LogitsE" title="marian::Logits">Logits</a> <code class="sig-name descname">applyAsLogits</code><span class="sig-paren">(</span><em class="property">const</em> <a class="reference internal" href="function_group__graph__ops__mathematical_1gaf4e69a5f7167b63522135a1f6b8a5dd8.html#_CPPv4N6marianStE4Expri" title="marian::std">std</a>::vector&lt;<a class="reference internal" href="typedef_namespacemarian_1ac8ecc2cc66a7afcc6da94a9bbde5eaa7.html#_CPPv4N6marian4ExprE" title="marian::Expr">Expr</a>&gt; &amp;<em>av</em><span class="sig-paren">)</span><a class="headerlink" href="#_CPPv4N6marian3mlp3MLP13applyAsLogitsERKNSt6vectorI4ExprEE" title="Permalink to this definition">¶</a><br /></dt>
-<dd></dd></dl>
+<dd><p>Apply/Link a vector of mlp layers (with the given inputs) to the expression graph. </p>
+<p><dl class="simple">
+<dt><strong>Return</strong></dt><dd><p>The expression holding the mlp container as a <a class="reference external" href="https://en.wikipedia.org/wiki/Logit">Logits</a> object </p>
+</dd>
+<dt><strong>Parameters</strong></dt><dd><ul class="breatheparameterlist simple">
+<li><p><code class="docutils literal notranslate"><span class="pre">av</span></code>: The vector of input expressions </p></li>
+</ul>
+</dd>
+</dl>
+</p>
+</dd></dl>
 
 <dl class="function">
 <dt id="_CPPv4N6marian3mlp3MLP5applyE4Expr">
 <span id="_CPPv3N6marian3mlp3MLP5applyE4Expr"></span><span id="_CPPv2N6marian3mlp3MLP5applyE4Expr"></span><span id="marian::mlp::MLP::apply__Expr"></span><span class="target" id="classmarian_1_1mlp_1_1MLP_1a911c1836338cdb2d1512e86c5cd4aeeb"></span><a class="reference internal" href="typedef_namespacemarian_1ac8ecc2cc66a7afcc6da94a9bbde5eaa7.html#_CPPv4N6marian4ExprE" title="marian::Expr">Expr</a> <code class="sig-name descname">apply</code><span class="sig-paren">(</span><a class="reference internal" href="typedef_namespacemarian_1ac8ecc2cc66a7afcc6da94a9bbde5eaa7.html#_CPPv4N6marian4ExprE" title="marian::Expr">Expr</a> <em>e</em><span class="sig-paren">)</span><a class="headerlink" href="#_CPPv4N6marian3mlp3MLP5applyE4Expr" title="Permalink to this definition">¶</a><br /></dt>
-<dd></dd></dl>
+<dd><p>Apply/Link a mlp layer (with the given input) to the expression graph. </p>
+<p><dl class="simple">
+<dt><strong>Return</strong></dt><dd><p>The expression holding the mlp container </p>
+</dd>
+<dt><strong>Parameters</strong></dt><dd><ul class="breatheparameterlist simple">
+<li><p><code class="docutils literal notranslate"><span class="pre">e</span></code>: The input expression </p></li>
+</ul>
+</dd>
+</dl>
+</p>
+</dd></dl>
 
 <dl class="function">
 <dt id="_CPPv4N6marian3mlp3MLP13applyAsLogitsE4Expr">
 <span id="_CPPv3N6marian3mlp3MLP13applyAsLogitsE4Expr"></span><span id="_CPPv2N6marian3mlp3MLP13applyAsLogitsE4Expr"></span><span id="marian::mlp::MLP::applyAsLogits__Expr"></span><span class="target" id="classmarian_1_1mlp_1_1MLP_1a8ffeb3d247799a3f809fab3f859235bf"></span><a class="reference internal" href="classmarian_1_1Logits.html#_CPPv4N6marian6LogitsE" title="marian::Logits">Logits</a> <code class="sig-name descname">applyAsLogits</code><span class="sig-paren">(</span><a class="reference internal" href="typedef_namespacemarian_1ac8ecc2cc66a7afcc6da94a9bbde5eaa7.html#_CPPv4N6marian4ExprE" title="marian::Expr">Expr</a> <em>e</em><span class="sig-paren">)</span><a class="headerlink" href="#_CPPv4N6marian3mlp3MLP13applyAsLogitsE4Expr" title="Permalink to this definition">¶</a><br /></dt>
-<dd></dd></dl>
+<dd><p>Apply/Link a mlp layer (with the given input) to the expression graph. </p>
+<p><dl class="simple">
+<dt><strong>Return</strong></dt><dd><p>The expression holding the mlp container as a <a class="reference external" href="https://en.wikipedia.org/wiki/Logit">Logits</a> object </p>
+</dd>
+<dt><strong>Parameters</strong></dt><dd><ul class="breatheparameterlist simple">
+<li><p><code class="docutils literal notranslate"><span class="pre">e</span></code>: The input expression </p></li>
+</ul>
+</dd>
+</dl>
+</p>
+</dd></dl>
 
 <dl class="function">
 <dt id="_CPPv4N6marian3mlp3MLP9push_backE3PtrI11IUnaryLayerE">
 <span id="_CPPv3N6marian3mlp3MLP9push_backE3PtrI11IUnaryLayerE"></span><span id="_CPPv2N6marian3mlp3MLP9push_backE3PtrI11IUnaryLayerE"></span><span id="marian::mlp::MLP::push_back__Ptr:IUnaryLayer:"></span><span class="target" id="classmarian_1_1mlp_1_1MLP_1a93f691f35c8c7999edcdb62386e2c378"></span>void <code class="sig-name descname">push_back</code><span class="sig-paren">(</span><a class="reference internal" href="typedef_namespacemarian_1ad1a373be43a00ef9ce35666145137b08.html#_CPPv4N6marian3PtrE" title="marian::Ptr">Ptr</a>&lt;<a class="reference internal" href="structmarian_1_1IUnaryLayer.html#_CPPv4N6marian11IUnaryLayerE" title="marian::IUnaryLayer">IUnaryLayer</a>&gt; <em>layer</em><span class="sig-paren">)</span><a class="headerlink" href="#_CPPv4N6marian3mlp3MLP9push_backE3PtrI11IUnaryLayerE" title="Permalink to this definition">¶</a><br /></dt>
-<dd></dd></dl>
+<dd><p>Stack a mlp layer to the mlp container. </p>
+<p><dl class="simple">
+<dt><strong>Parameters</strong></dt><dd><ul class="breatheparameterlist simple">
+<li><p><code class="docutils literal notranslate"><span class="pre">layer</span></code>: The mlp layer </p></li>
+</ul>
+</dd>
+</dl>
+</p>
+</dd></dl>
 
 <dl class="function">
 <dt id="_CPPv4N6marian3mlp3MLP9push_backE3PtrI16IUnaryLogitLayerE">
 <span id="_CPPv3N6marian3mlp3MLP9push_backE3PtrI16IUnaryLogitLayerE"></span><span id="_CPPv2N6marian3mlp3MLP9push_backE3PtrI16IUnaryLogitLayerE"></span><span id="marian::mlp::MLP::push_back__Ptr:IUnaryLogitLayer:"></span><span class="target" id="classmarian_1_1mlp_1_1MLP_1a5fb01010fdd6ff4b1a64242a6d958c22"></span>void <code class="sig-name descname">push_back</code><span class="sig-paren">(</span><a class="reference internal" href="typedef_namespacemarian_1ad1a373be43a00ef9ce35666145137b08.html#_CPPv4N6marian3PtrE" title="marian::Ptr">Ptr</a>&lt;<a class="reference internal" href="structmarian_1_1IUnaryLogitLayer.html#_CPPv4N6marian16IUnaryLogitLayerE" title="marian::IUnaryLogitLayer">IUnaryLogitLayer</a>&gt; <em>layer</em><span class="sig-paren">)</span><a class="headerlink" href="#_CPPv4N6marian3mlp3MLP9push_backE3PtrI16IUnaryLogitLayerE" title="Permalink to this definition">¶</a><br /></dt>
-<dd></dd></dl>
+<dd><p>Stack a mlp layer with <a class="reference external" href="https://en.wikipedia.org/wiki/Logit">Logits</a> object to the mlp container. </p>
+<p><dl class="simple">
+<dt><strong>Parameters</strong></dt><dd><ul class="breatheparameterlist simple">
+<li><p><code class="docutils literal notranslate"><span class="pre">layer</span></code>: The mlp layer with <a class="reference external" href="https://en.wikipedia.org/wiki/Logit">Logits</a> object </p></li>
+</ul>
+</dd>
+</dl>
+</p>
+</dd></dl>
 
 <dl class="function">
 <dt id="_CPPv4N6marian3mlp3MLP12setShortlistE3PtrIN4data9ShortlistEE">
 <span id="_CPPv3N6marian3mlp3MLP12setShortlistE3PtrIN4data9ShortlistEE"></span><span id="_CPPv2N6marian3mlp3MLP12setShortlistE3PtrIN4data9ShortlistEE"></span><span id="marian::mlp::MLP::setShortlist__Ptr:data::Shortlist:"></span><span class="target" id="classmarian_1_1mlp_1_1MLP_1ac782eb6a7c7c85152212f2284b110dd4"></span>void <code class="sig-name descname">setShortlist</code><span class="sig-paren">(</span><a class="reference internal" href="typedef_namespacemarian_1ad1a373be43a00ef9ce35666145137b08.html#_CPPv4N6marian3PtrE" title="marian::Ptr">Ptr</a>&lt;data::<a class="reference internal" href="classmarian_1_1data_1_1Shortlist.html#_CPPv4N6marian4data9ShortlistE" title="marian::data::Shortlist">Shortlist</a>&gt; <em>shortlist</em><span class="sig-paren">)</span><a class="headerlink" href="#_CPPv4N6marian3mlp3MLP12setShortlistE3PtrIN4data9ShortlistEE" title="Permalink to this definition">¶</a><br /></dt>
-<dd></dd></dl>
+<dd><p>Set shortlisted words to the mlp container. </p>
+<p><dl class="simple">
+<dt><strong>Parameters</strong></dt><dd><ul class="breatheparameterlist simple">
+<li><p><code class="docutils literal notranslate"><span class="pre">shortlist</span></code>: The given shortlisted words </p></li>
+</ul>
+</dd>
+</dl>
+</p>
+</dd></dl>
 
 <dl class="function">
 <dt id="_CPPv4N6marian3mlp3MLP5clearEv">
 <span id="_CPPv3N6marian3mlp3MLP5clearEv"></span><span id="_CPPv2N6marian3mlp3MLP5clearEv"></span><span id="marian::mlp::MLP::clear"></span><span class="target" id="classmarian_1_1mlp_1_1MLP_1a6e03d2bfc42e688cbe7e03af8179269f"></span>void <code class="sig-name descname">clear</code><span class="sig-paren">(</span><span class="sig-paren">)</span><a class="headerlink" href="#_CPPv4N6marian3mlp3MLP5clearEv" title="Permalink to this definition">¶</a><br /></dt>
-<dd></dd></dl>
+<dd><p>Remove shortlisted words from the mlp container. </p>
+</dd></dl>
 
 </div>
 <div class="breathe-sectiondef docutils container">

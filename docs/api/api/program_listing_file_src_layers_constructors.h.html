@@ -4,7 +4,7 @@
   <meta charset="utf-8" /><meta name="generator" content="Docutils 0.17.1: http://docutils.sourceforge.net/" />
 
   <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-  <title>Program Listing for File constructors.h &mdash; Marian NMT v1.10.27 2022-01-25 documentation</title><link rel="stylesheet" href="../_static/css/theme.css" type="text/css" />
+  <title>Program Listing for File constructors.h &mdash; Marian NMT v1.10.28 2022-01-28 documentation</title><link rel="stylesheet" href="../_static/css/theme.css" type="text/css" />
     <link rel="stylesheet" href="../_static/pygments.css" type="text/css" />
       <link rel="stylesheet" href="../_static/css/custom.css" type="text/css" />
       <link rel="stylesheet" href="../_static/collapsible-lists/css/tree_view.css" type="text/css" />
@@ -34,7 +34,7 @@
             <a href="../index.html" class="icon icon-home"> Marian NMT
           </a>
               <div class="version">
-                v1.10.27
+                v1.10.28
               </div>
 <div role="search">
   <form id="rtd-search-form" class="wy-form" action="../search.html" method="get">
@@ -47,7 +47,9 @@
               <p><span class="caption-text">Contents:</span></p>
 <ul>
 <li class="toctree-l1"><a class="reference internal" href="../graph.html">Expression graphs</a></li>
-<li class="toctree-l1"><a class="reference internal" href="../operators.html">Operations in the Expression Graph</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../operators.html">Operations in the expression graph</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../layer.html">Layers</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../factors.html">Using Marian with factors</a></li>
 <li class="toctree-l1"><a class="reference internal" href="library_index.html">Library API</a></li>
 <li class="toctree-l1"><a class="reference internal" href="../contributing.html">How to contribute to Marian</a></li>
 <li class="toctree-l1"><a class="reference internal" href="../doc_guide.html">Writing documentation</a></li>
@@ -107,7 +109,6 @@
 <span class="w">  </span><span class="p">}</span><span class="w"></span>
 <span class="p">};</span><span class="w"></span>
 
-<span class="c1">// @TODO: change naming convention</span>
 <span class="k">typedef</span><span class="w"> </span><span class="n">Accumulator</span><span class="o">&lt;</span><span class="n">DenseFactory</span><span class="o">&gt;</span><span class="w"> </span><span class="n">dense</span><span class="p">;</span><span class="w"></span>
 
 <span class="k">struct</span><span class="w"> </span><span class="nc">LogitLayerFactory</span><span class="w"> </span><span class="o">:</span><span class="w"> </span><span class="k">public</span><span class="w"> </span><span class="n">Factory</span><span class="w"> </span><span class="p">{</span><span class="w"></span>
@@ -115,7 +116,6 @@
 <span class="w">  </span><span class="k">virtual</span><span class="w"> </span><span class="n">Ptr</span><span class="o">&lt;</span><span class="n">IUnaryLogitLayer</span><span class="o">&gt;</span><span class="w"> </span><span class="n">construct</span><span class="p">(</span><span class="n">Ptr</span><span class="o">&lt;</span><span class="n">ExpressionGraph</span><span class="o">&gt;</span><span class="w"> </span><span class="n">graph</span><span class="p">)</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="mi">0</span><span class="p">;</span><span class="w"></span>
 <span class="p">};</span><span class="w"></span>
 
-<span class="c1">// @TODO: In the long run, I hope we can get rid of the abstract factories altogether.</span>
 <span class="k">class</span><span class="w"> </span><span class="nc">OutputFactory</span><span class="w"> </span><span class="o">:</span><span class="w"> </span><span class="k">public</span><span class="w"> </span><span class="n">LogitLayerFactory</span><span class="w"> </span><span class="p">{</span><span class="w"></span>
 <span class="w">  </span><span class="k">using</span><span class="w"> </span><span class="n">LogitLayerFactory</span><span class="o">::</span><span class="n">LogitLayerFactory</span><span class="p">;</span><span class="w"></span>
 
@@ -147,7 +147,6 @@
 <span class="w">  </span><span class="p">}</span><span class="w"></span>
 <span class="p">};</span><span class="w"></span>
 
-<span class="c1">// @TODO: change naming convention</span>
 <span class="k">typedef</span><span class="w"> </span><span class="n">Accumulator</span><span class="o">&lt;</span><span class="n">OutputFactory</span><span class="o">&gt;</span><span class="w"> </span><span class="n">output</span><span class="p">;</span><span class="w"></span>
 
 <span class="k">class</span><span class="w"> </span><span class="nc">MLP</span><span class="w"> </span><span class="o">:</span><span class="w"> </span><span class="k">public</span><span class="w"> </span><span class="n">IUnaryLogitLayer</span><span class="p">,</span><span class="w"> </span><span class="k">public</span><span class="w"> </span><span class="n">IHasShortList</span><span class="w"> </span><span class="p">{</span><span class="w"></span>
@@ -159,7 +158,6 @@
 
 <span class="k">public</span><span class="o">:</span><span class="w"></span>
 <span class="w">  </span><span class="n">MLP</span><span class="p">(</span><span class="n">Ptr</span><span class="o">&lt;</span><span class="n">ExpressionGraph</span><span class="o">&gt;</span><span class="w"> </span><span class="n">graph</span><span class="p">,</span><span class="w"> </span><span class="n">Ptr</span><span class="o">&lt;</span><span class="n">Options</span><span class="o">&gt;</span><span class="w"> </span><span class="n">options</span><span class="p">)</span><span class="w"> </span><span class="o">:</span><span class="w"> </span><span class="n">graph_</span><span class="p">(</span><span class="n">graph</span><span class="p">),</span><span class="w"> </span><span class="n">options_</span><span class="p">(</span><span class="n">options</span><span class="p">)</span><span class="w"> </span><span class="p">{}</span><span class="w"></span>
-
 <span class="w">  </span><span class="n">Expr</span><span class="w"> </span><span class="n">apply</span><span class="p">(</span><span class="k">const</span><span class="w"> </span><span class="n">std</span><span class="o">::</span><span class="n">vector</span><span class="o">&lt;</span><span class="n">Expr</span><span class="o">&gt;&amp;</span><span class="w"> </span><span class="n">av</span><span class="p">)</span><span class="w"> </span><span class="k">override</span><span class="w"> </span><span class="p">{</span><span class="w"></span>
 <span class="w">    </span><span class="n">Expr</span><span class="w"> </span><span class="n">output</span><span class="p">;</span><span class="w"></span>
 <span class="w">    </span><span class="k">if</span><span class="p">(</span><span class="n">av</span><span class="p">.</span><span class="n">size</span><span class="p">()</span><span class="w"> </span><span class="o">==</span><span class="w"> </span><span class="mi">1</span><span class="p">)</span><span class="w"></span>
@@ -172,7 +170,6 @@
 
 <span class="w">    </span><span class="k">return</span><span class="w"> </span><span class="n">output</span><span class="p">;</span><span class="w"></span>
 <span class="w">  </span><span class="p">}</span><span class="w"></span>
-
 <span class="w">  </span><span class="n">Logits</span><span class="w"> </span><span class="n">applyAsLogits</span><span class="p">(</span><span class="k">const</span><span class="w"> </span><span class="n">std</span><span class="o">::</span><span class="n">vector</span><span class="o">&lt;</span><span class="n">Expr</span><span class="o">&gt;&amp;</span><span class="w"> </span><span class="n">av</span><span class="p">)</span><span class="w"> </span><span class="k">override</span><span class="w"> </span><span class="p">{</span><span class="w"></span>
 <span class="w">    </span><span class="c1">// same as apply() except  for the last layer, we invoke applyAsLogits(), which has a different</span>
 <span class="w">    </span><span class="c1">// return type</span>
@@ -196,13 +193,10 @@
 <span class="w">      </span><span class="k">return</span><span class="w"> </span><span class="n">lastLayer</span><span class="o">-&gt;</span><span class="n">applyAsLogits</span><span class="p">(</span><span class="n">output</span><span class="p">);</span><span class="w"></span>
 <span class="w">    </span><span class="p">}</span><span class="w"></span>
 <span class="w">  </span><span class="p">}</span><span class="w"></span>
-
 <span class="w">  </span><span class="n">Expr</span><span class="w"> </span><span class="n">apply</span><span class="p">(</span><span class="n">Expr</span><span class="w"> </span><span class="n">e</span><span class="p">)</span><span class="w"> </span><span class="k">override</span><span class="w"> </span><span class="p">{</span><span class="w"> </span><span class="k">return</span><span class="w"> </span><span class="n">apply</span><span class="p">(</span><span class="n">std</span><span class="o">::</span><span class="n">vector</span><span class="o">&lt;</span><span class="n">Expr</span><span class="o">&gt;</span><span class="p">{</span><span class="n">e</span><span class="p">});</span><span class="w"> </span><span class="p">}</span><span class="w"></span>
 <span class="w">  </span><span class="n">Logits</span><span class="w"> </span><span class="n">applyAsLogits</span><span class="p">(</span><span class="n">Expr</span><span class="w"> </span><span class="n">e</span><span class="p">)</span><span class="w"> </span><span class="k">override</span><span class="w"> </span><span class="p">{</span><span class="w"> </span><span class="k">return</span><span class="w"> </span><span class="n">applyAsLogits</span><span class="p">(</span><span class="n">std</span><span class="o">::</span><span class="n">vector</span><span class="o">&lt;</span><span class="n">Expr</span><span class="o">&gt;</span><span class="p">{</span><span class="n">e</span><span class="p">});</span><span class="w"> </span><span class="p">}</span><span class="w"></span>
-
 <span class="w">  </span><span class="kt">void</span><span class="w"> </span><span class="n">push_back</span><span class="p">(</span><span class="n">Ptr</span><span class="o">&lt;</span><span class="n">IUnaryLayer</span><span class="o">&gt;</span><span class="w"> </span><span class="n">layer</span><span class="p">)</span><span class="w"> </span><span class="p">{</span><span class="w"> </span><span class="n">layers_</span><span class="p">.</span><span class="n">push_back</span><span class="p">(</span><span class="n">layer</span><span class="p">);</span><span class="w"> </span><span class="p">}</span><span class="w"></span>
 <span class="w">  </span><span class="kt">void</span><span class="w"> </span><span class="n">push_back</span><span class="p">(</span><span class="n">Ptr</span><span class="o">&lt;</span><span class="n">IUnaryLogitLayer</span><span class="o">&gt;</span><span class="w"> </span><span class="n">layer</span><span class="p">)</span><span class="w"> </span><span class="p">{</span><span class="w"> </span><span class="n">layers_</span><span class="p">.</span><span class="n">push_back</span><span class="p">(</span><span class="n">layer</span><span class="p">);</span><span class="w"> </span><span class="p">}</span><span class="w"></span>
-
 <span class="w">  </span><span class="kt">void</span><span class="w"> </span><span class="n">setShortlist</span><span class="p">(</span><span class="n">Ptr</span><span class="o">&lt;</span><span class="n">data</span><span class="o">::</span><span class="n">Shortlist</span><span class="o">&gt;</span><span class="w"> </span><span class="n">shortlist</span><span class="p">)</span><span class="w"> </span><span class="k">override</span><span class="w"> </span><span class="k">final</span><span class="w"> </span><span class="p">{</span><span class="w"></span>
 <span class="w">    </span><span class="k">auto</span><span class="w"> </span><span class="n">p</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="n">tryAsHasShortlist</span><span class="p">();</span><span class="w"></span>
 <span class="w">    </span><span class="n">ABORT_IF</span><span class="p">(</span><span class="w"></span>
@@ -210,7 +204,6 @@
 <span class="w">        </span><span class="s">&quot;setShortlist() called on an MLP with an output layer that does not support short lists&quot;</span><span class="p">);</span><span class="w"></span>
 <span class="w">    </span><span class="n">p</span><span class="o">-&gt;</span><span class="n">setShortlist</span><span class="p">(</span><span class="n">shortlist</span><span class="p">);</span><span class="w"></span>
 <span class="w">  </span><span class="p">}</span><span class="w"></span>
-
 <span class="w">  </span><span class="kt">void</span><span class="w"> </span><span class="n">clear</span><span class="p">()</span><span class="w"> </span><span class="k">override</span><span class="w"> </span><span class="k">final</span><span class="w"> </span><span class="p">{</span><span class="w"></span>
 <span class="w">    </span><span class="k">auto</span><span class="w"> </span><span class="n">p</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="n">tryAsHasShortlist</span><span class="p">();</span><span class="w"></span>
 <span class="w">    </span><span class="k">if</span><span class="p">(</span><span class="n">p</span><span class="p">)</span><span class="w"></span>
@@ -238,7 +231,6 @@
 <span class="w">    </span><span class="p">}</span><span class="w"></span>
 <span class="w">    </span><span class="k">return</span><span class="w"> </span><span class="n">mlp</span><span class="p">;</span><span class="w"></span>
 <span class="w">  </span><span class="p">}</span><span class="w"></span>
-
 <span class="w">  </span><span class="k">template</span><span class="w"> </span><span class="o">&lt;</span><span class="k">class</span><span class="w"> </span><span class="nc">LF</span><span class="o">&gt;</span><span class="w"></span>
 <span class="w">  </span><span class="n">Accumulator</span><span class="o">&lt;</span><span class="n">MLPFactory</span><span class="o">&gt;</span><span class="w"> </span><span class="n">push_back</span><span class="p">(</span><span class="k">const</span><span class="w"> </span><span class="n">LF</span><span class="o">&amp;</span><span class="w"> </span><span class="n">lf</span><span class="p">)</span><span class="w"> </span><span class="p">{</span><span class="w"></span>
 <span class="w">    </span><span class="n">layers_</span><span class="p">.</span><span class="n">push_back</span><span class="p">(</span><span class="n">New</span><span class="o">&lt;</span><span class="n">LF</span><span class="o">&gt;</span><span class="p">(</span><span class="n">lf</span><span class="p">));</span><span class="w"></span>
@@ -274,7 +266,7 @@
 <span class="w">  </span><span class="p">}</span><span class="w"></span>
 <span class="p">};</span><span class="w"></span>
 
-<span class="c1">// @TODO: change naming convention.</span>
+
 <span class="k">typedef</span><span class="w"> </span><span class="n">Accumulator</span><span class="o">&lt;</span><span class="n">MLPFactory</span><span class="o">&gt;</span><span class="w"> </span><span class="n">mlp</span><span class="p">;</span><span class="w"></span>
 <span class="p">}</span><span class="w">  </span><span class="c1">// namespace mlp</span>
 

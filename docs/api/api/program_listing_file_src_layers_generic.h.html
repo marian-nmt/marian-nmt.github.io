@@ -4,7 +4,7 @@
   <meta charset="utf-8" /><meta name="generator" content="Docutils 0.17.1: http://docutils.sourceforge.net/" />
 
   <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-  <title>Program Listing for File generic.h &mdash; Marian NMT v1.10.27 2022-01-25 documentation</title><link rel="stylesheet" href="../_static/css/theme.css" type="text/css" />
+  <title>Program Listing for File generic.h &mdash; Marian NMT v1.10.28 2022-01-28 documentation</title><link rel="stylesheet" href="../_static/css/theme.css" type="text/css" />
     <link rel="stylesheet" href="../_static/pygments.css" type="text/css" />
       <link rel="stylesheet" href="../_static/css/custom.css" type="text/css" />
       <link rel="stylesheet" href="../_static/collapsible-lists/css/tree_view.css" type="text/css" />
@@ -34,7 +34,7 @@
             <a href="../index.html" class="icon icon-home"> Marian NMT
           </a>
               <div class="version">
-                v1.10.27
+                v1.10.28
               </div>
 <div role="search">
   <form id="rtd-search-form" class="wy-form" action="../search.html" method="get">
@@ -47,7 +47,9 @@
               <p><span class="caption-text">Contents:</span></p>
 <ul>
 <li class="toctree-l1"><a class="reference internal" href="../graph.html">Expression graphs</a></li>
-<li class="toctree-l1"><a class="reference internal" href="../operators.html">Operations in the Expression Graph</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../operators.html">Operations in the expression graph</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../layer.html">Layers</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../factors.html">Using Marian with factors</a></li>
 <li class="toctree-l1"><a class="reference internal" href="library_index.html">Library API</a></li>
 <li class="toctree-l1"><a class="reference internal" href="../contributing.html">How to contribute to Marian</a></li>
 <li class="toctree-l1"><a class="reference internal" href="../doc_guide.html">Writing documentation</a></li>
@@ -97,9 +99,6 @@
 
 <span class="k">namespace</span><span class="w"> </span><span class="nn">marian</span><span class="w"> </span><span class="p">{</span><span class="w"></span>
 
-<span class="c1">// Each layer consists of LayerBase and IXXXLayer which defines one or more apply()</span>
-<span class="c1">// functions for the respective layer type (different layers may require different signatures).</span>
-<span class="c1">// This base class contains configuration info for creating parameters and executing apply().</span>
 <span class="k">class</span><span class="w"> </span><span class="nc">LayerBase</span><span class="w"> </span><span class="p">{</span><span class="w"></span>
 <span class="k">protected</span><span class="o">:</span><span class="w"></span>
 <span class="w">  </span><span class="n">Ptr</span><span class="o">&lt;</span><span class="n">ExpressionGraph</span><span class="o">&gt;</span><span class="w"> </span><span class="n">graph_</span><span class="p">;</span><span class="w"></span>
@@ -119,7 +118,6 @@
 <span class="w">  </span><span class="p">}</span><span class="w"></span>
 <span class="p">};</span><span class="w"></span>
 
-<span class="c1">// Simplest layer interface: Unary function</span>
 <span class="k">struct</span><span class="w"> </span><span class="nc">IUnaryLayer</span><span class="w"> </span><span class="p">{</span><span class="w"></span>
 <span class="w">  </span><span class="k">virtual</span><span class="w"> </span><span class="o">~</span><span class="n">IUnaryLayer</span><span class="p">()</span><span class="w"> </span><span class="p">{}</span><span class="w"></span>
 <span class="w">  </span><span class="k">virtual</span><span class="w"> </span><span class="n">Expr</span><span class="w"> </span><span class="n">apply</span><span class="p">(</span><span class="n">Expr</span><span class="p">)</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="mi">0</span><span class="p">;</span><span class="w"></span>
@@ -134,7 +132,6 @@
 <span class="w">  </span><span class="k">virtual</span><span class="w"> </span><span class="kt">void</span><span class="w"> </span><span class="nf">clear</span><span class="p">()</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="mi">0</span><span class="p">;</span><span class="w"></span>
 <span class="p">};</span><span class="w"></span>
 
-<span class="c1">// Embedding from corpus sub-batch to (emb, mask)</span>
 <span class="k">struct</span><span class="w"> </span><span class="nc">IEmbeddingLayer</span><span class="w"> </span><span class="p">{</span><span class="w"></span>
 <span class="w">  </span><span class="k">virtual</span><span class="w"> </span><span class="n">std</span><span class="o">::</span><span class="n">tuple</span><span class="o">&lt;</span><span class="n">Expr</span><span class="w"> </span><span class="cm">/*embeddings*/</span><span class="p">,</span><span class="w"> </span><span class="n">Expr</span><span class="w"> </span><span class="cm">/*mask*/</span><span class="o">&gt;</span><span class="w"> </span><span class="n">apply</span><span class="p">(</span><span class="w"></span>
 <span class="w">      </span><span class="n">Ptr</span><span class="o">&lt;</span><span class="n">data</span><span class="o">::</span><span class="n">SubBatch</span><span class="o">&gt;</span><span class="w"> </span><span class="n">subBatch</span><span class="p">)</span><span class="w"> </span><span class="k">const</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="mi">0</span><span class="p">;</span><span class="w"></span>
@@ -146,8 +143,6 @@
 <span class="w">  </span><span class="k">virtual</span><span class="w"> </span><span class="o">~</span><span class="n">IEmbeddingLayer</span><span class="p">()</span><span class="w"> </span><span class="p">{}</span><span class="w"></span>
 <span class="p">};</span><span class="w"></span>
 
-<span class="c1">// base class for Encoder and Decoder classes, which have embeddings and a batch index (=stream</span>
-<span class="c1">// index)</span>
 <span class="k">class</span><span class="w"> </span><span class="nc">EncoderDecoderLayerBase</span><span class="w"> </span><span class="o">:</span><span class="w"> </span><span class="k">public</span><span class="w"> </span><span class="n">LayerBase</span><span class="w"> </span><span class="p">{</span><span class="w"></span>
 <span class="k">protected</span><span class="o">:</span><span class="w"></span>
 <span class="w">  </span><span class="k">const</span><span class="w"> </span><span class="n">std</span><span class="o">::</span><span class="n">string</span><span class="w"> </span><span class="n">prefix_</span><span class="p">;</span><span class="w"></span>
@@ -177,7 +172,6 @@
 <span class="w">  </span><span class="n">Ptr</span><span class="o">&lt;</span><span class="n">IEmbeddingLayer</span><span class="o">&gt;</span><span class="w"> </span><span class="n">createULREmbeddingLayer</span><span class="p">()</span><span class="w"> </span><span class="k">const</span><span class="p">;</span><span class="w"></span>
 
 <span class="k">public</span><span class="o">:</span><span class="w"></span>
-<span class="w">  </span><span class="c1">// get embedding layer; lazily create on first call</span>
 <span class="w">  </span><span class="n">Ptr</span><span class="o">&lt;</span><span class="n">IEmbeddingLayer</span><span class="o">&gt;</span><span class="w"> </span><span class="n">getEmbeddingLayer</span><span class="p">(</span><span class="kt">bool</span><span class="w"> </span><span class="n">ulr</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="nb">false</span><span class="p">)</span><span class="w"> </span><span class="k">const</span><span class="p">;</span><span class="w"></span>
 <span class="p">};</span><span class="w"></span>
 
@@ -186,7 +180,6 @@
 <span class="k">class</span><span class="w"> </span><span class="nc">Dense</span><span class="w"> </span><span class="o">:</span><span class="w"> </span><span class="k">public</span><span class="w"> </span><span class="n">LayerBase</span><span class="p">,</span><span class="w"> </span><span class="k">public</span><span class="w"> </span><span class="n">IUnaryLayer</span><span class="w"> </span><span class="p">{</span><span class="w"></span>
 <span class="k">public</span><span class="o">:</span><span class="w"></span>
 <span class="w">  </span><span class="n">Dense</span><span class="p">(</span><span class="n">Ptr</span><span class="o">&lt;</span><span class="n">ExpressionGraph</span><span class="o">&gt;</span><span class="w"> </span><span class="n">graph</span><span class="p">,</span><span class="w"> </span><span class="n">Ptr</span><span class="o">&lt;</span><span class="n">Options</span><span class="o">&gt;</span><span class="w"> </span><span class="n">options</span><span class="p">)</span><span class="w"> </span><span class="o">:</span><span class="w"> </span><span class="n">LayerBase</span><span class="p">(</span><span class="n">graph</span><span class="p">,</span><span class="w"> </span><span class="n">options</span><span class="p">)</span><span class="w"> </span><span class="p">{}</span><span class="w"></span>
-
 <span class="w">  </span><span class="n">Expr</span><span class="w"> </span><span class="n">apply</span><span class="p">(</span><span class="k">const</span><span class="w"> </span><span class="n">std</span><span class="o">::</span><span class="n">vector</span><span class="o">&lt;</span><span class="n">Expr</span><span class="o">&gt;&amp;</span><span class="w"> </span><span class="n">inputs</span><span class="p">)</span><span class="w"> </span><span class="k">override</span><span class="w"> </span><span class="p">{</span><span class="w"></span>
 <span class="w">    </span><span class="n">ABORT_IF</span><span class="p">(</span><span class="n">inputs</span><span class="p">.</span><span class="n">empty</span><span class="p">(),</span><span class="w"> </span><span class="s">&quot;No inputs&quot;</span><span class="p">);</span><span class="w"></span>
 
@@ -240,7 +233,6 @@
 <span class="w">    </span><span class="p">}</span><span class="w"></span>
 <span class="w">    </span><span class="c1">// clang-format on</span>
 <span class="w">  </span><span class="p">};</span><span class="w"></span>
-
 <span class="w">  </span><span class="n">Expr</span><span class="w"> </span><span class="nf">apply</span><span class="p">(</span><span class="n">Expr</span><span class="w"> </span><span class="n">input</span><span class="p">)</span><span class="w"> </span><span class="k">override</span><span class="w"> </span><span class="p">{</span><span class="w"> </span><span class="k">return</span><span class="w"> </span><span class="n">apply</span><span class="p">(</span><span class="n">std</span><span class="o">::</span><span class="n">vector</span><span class="o">&lt;</span><span class="n">Expr</span><span class="o">&gt;</span><span class="p">({</span><span class="n">input</span><span class="p">}));</span><span class="w"> </span><span class="p">}</span><span class="w"></span>
 <span class="p">};</span><span class="w"></span>
 

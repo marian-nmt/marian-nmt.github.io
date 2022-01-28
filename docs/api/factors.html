@@ -4,7 +4,7 @@
   <meta charset="utf-8" /><meta name="generator" content="Docutils 0.17.1: http://docutils.sourceforge.net/" />
 
   <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-  <title>Using marian with factors &mdash; Marian NMT v1.10.27 2022-01-25 documentation</title><link rel="stylesheet" href="_static/css/theme.css" type="text/css" />
+  <title>Using Marian with factors &mdash; Marian NMT v1.10.28 2022-01-28 documentation</title><link rel="stylesheet" href="_static/css/theme.css" type="text/css" />
     <link rel="stylesheet" href="_static/pygments.css" type="text/css" />
       <link rel="stylesheet" href="_static/css/custom.css" type="text/css" />
       <link rel="stylesheet" href="_static/collapsible-lists/css/tree_view.css" type="text/css" />
@@ -23,7 +23,9 @@
         <script type="text/x-mathjax-config">MathJax.Hub.Config({"tex2jax": {"inlineMath": [["\\(", "\\)"]], "displayMath": [["\\[", "\\]"]], "processRefs": false, "processEnvironments": false}})</script>
     <script src="_static/js/theme.js"></script>
     <link rel="index" title="Index" href="genindex.html" />
-    <link rel="search" title="Search" href="search.html" /> 
+    <link rel="search" title="Search" href="search.html" />
+    <link rel="next" title="Library API" href="api/library_index.html" />
+    <link rel="prev" title="Layers" href="layer.html" /> 
 </head>
 
 <body class="wy-body-for-nav"> 
@@ -34,7 +36,7 @@
             <a href="index.html" class="icon icon-home"> Marian NMT
           </a>
               <div class="version">
-                v1.10.27
+                v1.10.28
               </div>
 <div role="search">
   <form id="rtd-search-form" class="wy-form" action="search.html" method="get">
@@ -45,9 +47,27 @@
 </div>
         </div><div class="wy-menu wy-menu-vertical" data-spy="affix" role="navigation" aria-label="Navigation menu">
               <p><span class="caption-text">Contents:</span></p>
-<ul>
+<ul class="current">
 <li class="toctree-l1"><a class="reference internal" href="graph.html">Expression graphs</a></li>
-<li class="toctree-l1"><a class="reference internal" href="operators.html">Operations in the Expression Graph</a></li>
+<li class="toctree-l1"><a class="reference internal" href="operators.html">Operations in the expression graph</a></li>
+<li class="toctree-l1"><a class="reference internal" href="layer.html">Layers</a></li>
+<li class="toctree-l1 current"><a class="current reference internal" href="#">Using Marian with factors</a><ul>
+<li class="toctree-l2"><a class="reference internal" href="#requirements">Requirements:</a></li>
+<li class="toctree-l2"><a class="reference internal" href="#define-factors">Define factors</a></li>
+<li class="toctree-l2"><a class="reference internal" href="#data-preparation">Data preparation</a></li>
+<li class="toctree-l2"><a class="reference internal" href="#create-the-factored-vocabulary">Create the factored vocabulary</a><ul>
+<li class="toctree-l3"><a class="reference internal" href="#other-requirements">Other Requirements</a></li>
+<li class="toctree-l3"><a class="reference internal" href="#full-fsv-file">Full <code class="docutils literal notranslate"><span class="pre">.fsv</span></code> file</a></li>
+</ul>
+</li>
+<li class="toctree-l2"><a class="reference internal" href="#training-options">Training options</a><ul>
+<li class="toctree-l3"><a class="reference internal" href="#prediction">Prediction</a></li>
+<li class="toctree-l3"><a class="reference internal" href="#weight-tying">Weight tying</a></li>
+</ul>
+</li>
+<li class="toctree-l2"><a class="reference internal" href="#examples">Examples</a></li>
+</ul>
+</li>
 <li class="toctree-l1"><a class="reference internal" href="api/library_index.html">Library API</a></li>
 <li class="toctree-l1"><a class="reference internal" href="contributing.html">How to contribute to Marian</a></li>
 <li class="toctree-l1"><a class="reference internal" href="doc_guide.html">Writing documentation</a></li>
@@ -67,7 +87,7 @@
           <div role="navigation" aria-label="Page navigation">
   <ul class="wy-breadcrumbs">
       <li><a href="index.html" class="icon icon-home"></a> &raquo;</li>
-      <li>Using marian with factors</li>
+      <li>Using Marian with factors</li>
       <li class="wy-breadcrumbs-aside">
             <a href="_sources/factors.md.txt" rel="nofollow"> View page source</a>
       </li>
@@ -78,7 +98,7 @@
            <div itemprop="articleBody">
              
   <section id="using-marian-with-factors">
-<h1>Using marian with factors<a class="headerlink" href="#using-marian-with-factors" title="Permalink to this headline">¶</a></h1>
+<h1>Using Marian with factors<a class="headerlink" href="#using-marian-with-factors" title="Permalink to this headline">¶</a></h1>
 <p>Following this README should allow the user to train a model with source and/or target side factors. To train with factors, the data must be formatted in a certain way. A special vocabulary file format is also required, and its extension should be <code class="docutils literal notranslate"><span class="pre">.fsv</span></code> as providing a source and/or target vocabulary file with this extension is what triggers the usage of source and/or target factors. See details below.</p>
 <section id="requirements">
 <h2>Requirements:<a class="headerlink" href="#requirements" title="Permalink to this headline">¶</a></h2>
@@ -285,7 +305,10 @@
 
            </div>
           </div>
-          <footer>
+          <footer><div class="rst-footer-buttons" role="navigation" aria-label="Footer">
+        <a href="layer.html" class="btn btn-neutral float-left" title="Layers" accesskey="p" rel="prev"><span class="fa fa-arrow-circle-left" aria-hidden="true"></span> Previous</a>
+        <a href="api/library_index.html" class="btn btn-neutral float-right" title="Library API" accesskey="n" rel="next">Next <span class="fa fa-arrow-circle-right" aria-hidden="true"></span></a>
+    </div>
 
   <hr/>
 

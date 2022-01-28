@@ -4,7 +4,7 @@
   <meta charset="utf-8" /><meta name="generator" content="Docutils 0.17.1: http://docutils.sourceforge.net/" />
 
   <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-  <title>Class LayerBase &mdash; Marian NMT v1.10.27 2022-01-25 documentation</title><link rel="stylesheet" href="../_static/css/theme.css" type="text/css" />
+  <title>Class LayerBase &mdash; Marian NMT v1.10.28 2022-01-28 documentation</title><link rel="stylesheet" href="../_static/css/theme.css" type="text/css" />
     <link rel="stylesheet" href="../_static/pygments.css" type="text/css" />
       <link rel="stylesheet" href="../_static/css/custom.css" type="text/css" />
       <link rel="stylesheet" href="../_static/collapsible-lists/css/tree_view.css" type="text/css" />
@@ -36,7 +36,7 @@
             <a href="../index.html" class="icon icon-home"> Marian NMT
           </a>
               <div class="version">
-                v1.10.27
+                v1.10.28
               </div>
 <div role="search">
   <form id="rtd-search-form" class="wy-form" action="../search.html" method="get">
@@ -49,7 +49,9 @@
               <p><span class="caption-text">Contents:</span></p>
 <ul>
 <li class="toctree-l1"><a class="reference internal" href="../graph.html">Expression graphs</a></li>
-<li class="toctree-l1"><a class="reference internal" href="../operators.html">Operations in the Expression Graph</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../operators.html">Operations in the expression graph</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../layer.html">Layers</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../factors.html">Using Marian with factors</a></li>
 <li class="toctree-l1"><a class="reference internal" href="library_index.html">Library API</a></li>
 <li class="toctree-l1"><a class="reference internal" href="../contributing.html">How to contribute to Marian</a></li>
 <li class="toctree-l1"><a class="reference internal" href="../doc_guide.html">Writing documentation</a></li>
@@ -106,7 +108,9 @@
 <dl class="class">
 <dt id="_CPPv4N6marian9LayerBaseE">
 <span id="_CPPv3N6marian9LayerBaseE"></span><span id="_CPPv2N6marian9LayerBaseE"></span><span id="marian::LayerBase"></span><span class="target" id="classmarian_1_1LayerBase"></span><em class="property">class </em><code class="sig-name descname">LayerBase</code><a class="headerlink" href="#_CPPv4N6marian9LayerBaseE" title="Permalink to this definition">¶</a><br /></dt>
-<dd><p>Subclassed by <a class="reference internal" href="classmarian_1_1ClassifierBase.html#classmarian_1_1ClassifierBase"><span class="std std-ref">marian::ClassifierBase</span></a>, <a class="reference internal" href="classmarian_1_1Embedding.html#classmarian_1_1Embedding"><span class="std std-ref">marian::Embedding</span></a>, <a class="reference internal" href="classmarian_1_1EncoderDecoder.html#classmarian_1_1EncoderDecoder"><span class="std std-ref">marian::EncoderDecoder</span></a>, <a class="reference internal" href="classmarian_1_1EncoderDecoderLayerBase.html#classmarian_1_1EncoderDecoderLayerBase"><span class="std std-ref">marian::EncoderDecoderLayerBase</span></a>, <a class="reference internal" href="classmarian_1_1mlp_1_1Dense.html#classmarian_1_1mlp_1_1Dense"><span class="std std-ref">marian::mlp::Dense</span></a>, <a class="reference internal" href="classmarian_1_1mlp_1_1Output.html#classmarian_1_1mlp_1_1Output"><span class="std std-ref">marian::mlp::Output</span></a>, <a class="reference internal" href="classmarian_1_1PoolerBase.html#classmarian_1_1PoolerBase"><span class="std std-ref">marian::PoolerBase</span></a>, <a class="reference internal" href="classmarian_1_1ULREmbedding.html#classmarian_1_1ULREmbedding"><span class="std std-ref">marian::ULREmbedding</span></a></p>
+<dd><p>Base class for a layer. </p>
+<p>Each layer consists of <a class="reference internal" href="#classmarian_1_1LayerBase"><span class="std std-ref">LayerBase</span></a> and IXXXLayer which defines one or more apply() functions for the respective layer type (different layers may require different signatures). This base class contains configuration info for creating parameters and executing apply(). </p>
+<p>Subclassed by <a class="reference internal" href="classmarian_1_1ClassifierBase.html#classmarian_1_1ClassifierBase"><span class="std std-ref">marian::ClassifierBase</span></a>, <a class="reference internal" href="classmarian_1_1Embedding.html#classmarian_1_1Embedding"><span class="std std-ref">marian::Embedding</span></a>, <a class="reference internal" href="classmarian_1_1EncoderDecoder.html#classmarian_1_1EncoderDecoder"><span class="std std-ref">marian::EncoderDecoder</span></a>, <a class="reference internal" href="classmarian_1_1EncoderDecoderLayerBase.html#classmarian_1_1EncoderDecoderLayerBase"><span class="std std-ref">marian::EncoderDecoderLayerBase</span></a>, <a class="reference internal" href="classmarian_1_1mlp_1_1Dense.html#classmarian_1_1mlp_1_1Dense"><span class="std std-ref">marian::mlp::Dense</span></a>, <a class="reference internal" href="classmarian_1_1mlp_1_1Output.html#classmarian_1_1mlp_1_1Output"><span class="std std-ref">marian::mlp::Output</span></a>, <a class="reference internal" href="classmarian_1_1PoolerBase.html#classmarian_1_1PoolerBase"><span class="std std-ref">marian::PoolerBase</span></a>, <a class="reference internal" href="classmarian_1_1ULREmbedding.html#classmarian_1_1ULREmbedding"><span class="std std-ref">marian::ULREmbedding</span></a></p>
 <div class="breathe-sectiondef docutils container">
 <p class="breathe-sectiondef-title rubric">Public Functions</p>
 <dl class="function">

@@ -18,10 +18,6 @@ Program Listing for File embedding.h
    
    class FactoredVocab;
    
-   // A regular embedding layer.
-   // Note that this also applies dropout if the option is passed (pass 0 when in inference mode).
-   // It is best to not use Embedding directly, but rather via getEmbeddingLayer() in
-   // EncoderDecoderLayerBase, which knows to pass on all required parameters from options.
    class Embedding : public LayerBase, public IEmbeddingLayer {
      Expr E_;
      Expr FactorEmbMatrix_; // Factors embedding matrix if combining lemma and factors embeddings with concatenation

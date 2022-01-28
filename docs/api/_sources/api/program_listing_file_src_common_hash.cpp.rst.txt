@@ -1,0 +1,24 @@
+
+.. _program_listing_file_src_common_hash.cpp:
+
+Program Listing for File hash.cpp
+=================================
+
+|exhale_lsh| :ref:`Return to documentation for file <file_src_common_hash.cpp>` (``src/common/hash.cpp``)
+
+.. |exhale_lsh| unicode:: U+021B0 .. UPWARDS ARROW WITH TIP LEFTWARDS
+
+.. code-block:: cpp
+
+   #include <string>
+   
+   #include "hash.h"
+   #include "common/shape.h"
+   
+   namespace std {
+   size_t hash<pair<string, marian::Shape>>::operator()(pair<string, marian::Shape> const& k) const {
+     size_t seed = hash<string>{}(k.first);
+     marian::util::hash_combine(seed, k.second.hash());
+     return seed;
+   }
+   }  // namespace std

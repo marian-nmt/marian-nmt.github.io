@@ -1,0 +1,587 @@
+<!DOCTYPE html>
+<html class="writer-html5" lang="en" >
+<head>
+  <meta charset="utf-8" /><meta name="generator" content="Docutils 0.17.1: http://docutils.sourceforge.net/" />
+
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Layers &mdash; Marian NMT v1.10.28 2022-01-28 documentation</title><link rel="stylesheet" href="_static/css/theme.css" type="text/css" />
+    <link rel="stylesheet" href="_static/pygments.css" type="text/css" />
+      <link rel="stylesheet" href="_static/css/custom.css" type="text/css" />
+      <link rel="stylesheet" href="_static/collapsible-lists/css/tree_view.css" type="text/css" />
+    <link rel="canonical" href="http://marian-nmt.github.io/docs/api/layer.html" />
+  <!--[if lt IE 9]>
+    <script src="_static/js/html5shiv.min.js"></script>
+  <![endif]-->
+  <script id="documentation_options" data-url_root="./" src="_static/documentation_options.js"></script>
+        <script src="_static/jquery.js"></script>
+        <script src="_static/underscore.js"></script>
+        <script src="_static/doctools.js"></script>
+        <script src="_static/language_data.js"></script>
+        <script src="_static/collapsible-lists/js/CollapsibleLists.compressed.js"></script>
+        <script src="_static/collapsible-lists/js/apply-collapsible-lists.js"></script>
+        <script async="async" src="https://cdnjs.cloudflare.com/ajax/libs/mathjax/2.7.5/latest.js?config=TeX-AMS-MML_HTMLorMML"></script>
+        <script type="text/x-mathjax-config">MathJax.Hub.Config({"tex2jax": {"inlineMath": [["\\(", "\\)"]], "displayMath": [["\\[", "\\]"]], "processRefs": false, "processEnvironments": false}})</script>
+    <script src="_static/js/theme.js"></script>
+    <link rel="index" title="Index" href="genindex.html" />
+    <link rel="search" title="Search" href="search.html" />
+    <link rel="next" title="Using Marian with factors" href="factors.html" />
+    <link rel="prev" title="Operations in the expression graph" href="operators.html" /> 
+</head>
+
+<body class="wy-body-for-nav"> 
+  <div class="wy-grid-for-nav">
+    <nav data-toggle="wy-nav-shift" class="wy-nav-side">
+      <div class="wy-side-scroll">
+        <div class="wy-side-nav-search" >
+            <a href="index.html" class="icon icon-home"> Marian NMT
+          </a>
+              <div class="version">
+                v1.10.28
+              </div>
+<div role="search">
+  <form id="rtd-search-form" class="wy-form" action="search.html" method="get">
+    <input type="text" name="q" placeholder="Search docs" />
+    <input type="hidden" name="check_keywords" value="yes" />
+    <input type="hidden" name="area" value="default" />
+  </form>
+</div>
+        </div><div class="wy-menu wy-menu-vertical" data-spy="affix" role="navigation" aria-label="Navigation menu">
+              <p><span class="caption-text">Contents:</span></p>
+<ul class="current">
+<li class="toctree-l1"><a class="reference internal" href="graph.html">Expression graphs</a></li>
+<li class="toctree-l1"><a class="reference internal" href="operators.html">Operations in the expression graph</a></li>
+<li class="toctree-l1 current"><a class="current reference internal" href="#">Layers</a><ul>
+<li class="toctree-l2"><a class="reference internal" href="#convolution-layer">Convolution layer</a></li>
+<li class="toctree-l2"><a class="reference internal" href="#mlp-layers">MLP layers</a></li>
+<li class="toctree-l2"><a class="reference internal" href="#rnn-layers">RNN layers</a></li>
+<li class="toctree-l2"><a class="reference internal" href="#embedding-layer">Embedding layer</a></li>
+</ul>
+</li>
+<li class="toctree-l1"><a class="reference internal" href="factors.html">Using Marian with factors</a></li>
+<li class="toctree-l1"><a class="reference internal" href="api/library_index.html">Library API</a></li>
+<li class="toctree-l1"><a class="reference internal" href="contributing.html">How to contribute to Marian</a></li>
+<li class="toctree-l1"><a class="reference internal" href="doc_guide.html">Writing documentation</a></li>
+</ul>
+
+        </div>
+      </div>
+    </nav>
+
+    <section data-toggle="wy-nav-shift" class="wy-nav-content-wrap"><nav class="wy-nav-top" aria-label="Mobile navigation menu" >
+          <i data-toggle="wy-nav-top" class="fa fa-bars"></i>
+          <a href="index.html">Marian NMT</a>
+      </nav>
+
+      <div class="wy-nav-content">
+        <div class="rst-content">
+          <div role="navigation" aria-label="Page navigation">
+  <ul class="wy-breadcrumbs">
+      <li><a href="index.html" class="icon icon-home"></a> &raquo;</li>
+      <li>Layers</li>
+      <li class="wy-breadcrumbs-aside">
+            <a href="_sources/layer.md.txt" rel="nofollow"> View page source</a>
+      </li>
+  </ul>
+  <hr/>
+</div>
+          <div role="main" class="document" itemscope="itemscope" itemtype="http://schema.org/Article">
+           <div itemprop="articleBody">
+             
+  <section id="layers">
+<h1>Layers<a class="headerlink" href="#layers" title="Permalink to this headline">¶</a></h1>
+<p>In a typical deep neural network, highest-level blocks, which perform different kinds of
+transformations on their inputs are called layers. A layer wraps a group of nodes and performs a
+specific mathematical computation, offering a shortcut for building a more complex neural network.</p>
+<p>In Marian, for example, the <code class="docutils literal notranslate"><span class="pre">mlp::dense</span></code> layer represents a fully connected layer, which implements
+the operation <code class="docutils literal notranslate"><span class="pre">output</span> <span class="pre">=</span> <span class="pre">activation(input</span> <span class="pre">*</span> <span class="pre">weight</span> <span class="pre">+</span> <span class="pre">bias)</span></code>.  A dense layer in the graph can be
+constructed with the following code:</p>
+<div class="highlight-cpp notranslate"><div class="highlight"><pre><span></span><span class="c1">// add input node x</span>
+<span class="k">auto</span><span class="w"> </span><span class="n">x</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="n">graph</span><span class="o">-&gt;</span><span class="n">constant</span><span class="p">({</span><span class="mi">120</span><span class="p">,</span><span class="mi">5</span><span class="p">},</span><span class="w"> </span><span class="n">inits</span><span class="o">::</span><span class="n">fromVector</span><span class="p">(</span><span class="n">inputData</span><span class="p">));</span><span class="w"></span>
+<span class="c1">// construct a dense layer in the graph</span>
+<span class="k">auto</span><span class="w"> </span><span class="n">layer1</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="n">mlp</span><span class="o">::</span><span class="n">dense</span><span class="p">()</span><span class="w"></span>
+<span class="w">      </span><span class="p">(</span><span class="s">&quot;prefix&quot;</span><span class="p">,</span><span class="w"> </span><span class="s">&quot;layer1&quot;</span><span class="p">)</span><span class="w">                  </span><span class="c1">// prefix name is layer1</span>
+<span class="w">      </span><span class="p">(</span><span class="s">&quot;dim&quot;</span><span class="p">,</span><span class="w"> </span><span class="mi">5</span><span class="p">)</span><span class="w">                            </span><span class="c1">// output dimension is 5</span>
+<span class="w">      </span><span class="p">(</span><span class="s">&quot;activation&quot;</span><span class="p">,</span><span class="w"> </span><span class="p">(</span><span class="kt">int</span><span class="p">)</span><span class="n">mlp</span><span class="o">::</span><span class="n">act</span><span class="o">::</span><span class="n">tanh</span><span class="p">)</span><span class="w">   </span><span class="c1">// activation function is tanh</span>
+<span class="w">      </span><span class="p">.</span><span class="n">construct</span><span class="p">(</span><span class="n">graph</span><span class="p">)</span><span class="o">-&gt;</span><span class="n">apply</span><span class="p">(</span><span class="n">x</span><span class="p">);</span><span class="w">          </span><span class="c1">// construct this layer in graph</span>
+<span class="w">                                            </span><span class="c1">// and link node x as the input</span>
+</pre></div>
+</div>
+<p>The options are passed to the layer using pairs of <code class="docutils literal notranslate"><span class="pre">(key,</span> <span class="pre">value)</span></code>, where <code class="docutils literal notranslate"><span class="pre">key</span></code> is a predefined
+option, and <code class="docutils literal notranslate"><span class="pre">value</span></code> is the option value.  Then <code class="docutils literal notranslate"><span class="pre">construct()</span></code> is called to create a layer instance in
+the graph, and <code class="docutils literal notranslate"><span class="pre">apply()</span></code> to link the input with this layer.</p>
+<p>Alternatively, the same layer can be created defining nodes and operations directly:</p>
+<div class="highlight-cpp notranslate"><div class="highlight"><pre><span></span><span class="c1">// construct a dense layer using nodes</span>
+<span class="k">auto</span><span class="w"> </span><span class="n">W1</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="n">graph</span><span class="o">-&gt;</span><span class="n">param</span><span class="p">(</span><span class="s">&quot;W1&quot;</span><span class="p">,</span><span class="w"> </span><span class="p">{</span><span class="mi">120</span><span class="p">,</span><span class="w"> </span><span class="mi">5</span><span class="p">},</span><span class="w"> </span><span class="n">inits</span><span class="o">::</span><span class="n">glorotUniform</span><span class="p">());</span><span class="w"></span>
+<span class="k">auto</span><span class="w"> </span><span class="n">b1</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="n">graph</span><span class="o">-&gt;</span><span class="n">param</span><span class="p">(</span><span class="s">&quot;b1&quot;</span><span class="p">,</span><span class="w"> </span><span class="p">{</span><span class="mi">1</span><span class="p">,</span><span class="w"> </span><span class="mi">5</span><span class="p">},</span><span class="w"> </span><span class="n">inits</span><span class="o">::</span><span class="n">zeros</span><span class="p">());</span><span class="w"></span>
+<span class="k">auto</span><span class="w"> </span><span class="n">h</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="n">tanh</span><span class="p">(</span><span class="n">affine</span><span class="p">(</span><span class="n">x</span><span class="p">,</span><span class="w"> </span><span class="n">W1</span><span class="p">,</span><span class="w"> </span><span class="n">b1</span><span class="p">));</span><span class="w"></span>
+</pre></div>
+</div>
+<p>There are four categories of layers implemented in Marian, described in the sections below.</p>
+<section id="convolution-layer">
+<h2>Convolution layer<a class="headerlink" href="#convolution-layer" title="Permalink to this headline">¶</a></h2>
+<p>To use a <code class="docutils literal notranslate"><span class="pre">convolution</span></code> layer, you first need to install <a class="reference external" href="https://developer.nvidia.com/cudnn">NVIDIA cuDNN</a>.
+The convolution layer supported by Marian is a 2D
+<a class="reference external" href="https://en.wikipedia.org/wiki/Convolutional_neural_network#Convolutional_layers">convolution layer</a>.
+This layer creates a convolution kernel which is used to convolved with the input. The options that
+can be passed to a <code class="docutils literal notranslate"><span class="pre">convolution</span></code> layer are the following:</p>
+<table class="colwidths-auto docutils align-default">
+<thead>
+<tr class="row-odd"><th class="head"><p>Option Name</p></th>
+<th class="head"><p>Definition</p></th>
+<th class="head"><p>Value Type</p></th>
+<th class="head"><p>Default Value</p></th>
+</tr>
+</thead>
+<tbody>
+<tr class="row-even"><td><p>prefix</p></td>
+<td><p>Prefix name (used to form the parameter names)</p></td>
+<td><p><code class="docutils literal notranslate"><span class="pre">std::string</span></code></p></td>
+<td><p><code class="docutils literal notranslate"><span class="pre">None</span></code></p></td>
+</tr>
+<tr class="row-odd"><td><p>kernel-dims</p></td>
+<td><p>The height and width of the kernel</p></td>
+<td><p><code class="docutils literal notranslate"><span class="pre">std::pair&lt;int,</span> <span class="pre">int&gt;</span></code></p></td>
+<td><p><code class="docutils literal notranslate"><span class="pre">None</span></code></p></td>
+</tr>
+<tr class="row-even"><td><p>kernel-num</p></td>
+<td><p>The number of kernel</p></td>
+<td><p><code class="docutils literal notranslate"><span class="pre">int</span></code></p></td>
+<td><p><code class="docutils literal notranslate"><span class="pre">None</span></code></p></td>
+</tr>
+<tr class="row-odd"><td><p>paddings</p></td>
+<td><p>The height and width of paddings</p></td>
+<td><p><code class="docutils literal notranslate"><span class="pre">std::pair&lt;int,</span> <span class="pre">int&gt;</span></code></p></td>
+<td><p><code class="docutils literal notranslate"><span class="pre">(0,0)</span></code></p></td>
+</tr>
+<tr class="row-even"><td><p>strides</p></td>
+<td><p>The height and width of strides</p></td>
+<td><p><code class="docutils literal notranslate"><span class="pre">std::pair&lt;int,</span> <span class="pre">int&gt;</span></code></p></td>
+<td><p><code class="docutils literal notranslate"><span class="pre">(1,1)</span></code></p></td>
+</tr>
+</tbody>
+</table>
+<p>Example:</p>
+<div class="highlight-cpp notranslate"><div class="highlight"><pre><span></span><span class="c1">// construct a convolution layer</span>
+<span class="k">auto</span><span class="w"> </span><span class="n">conv_1</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="n">convolution</span><span class="p">(</span><span class="n">graph</span><span class="p">)</span><span class="w">              </span><span class="c1">// pass graph pointer to the layer</span>
+<span class="w">      </span><span class="p">(</span><span class="s">&quot;prefix&quot;</span><span class="p">,</span><span class="w"> </span><span class="s">&quot;conv_1&quot;</span><span class="p">)</span><span class="w">                    </span><span class="c1">// prefix name is conv_1</span>
+<span class="w">      </span><span class="p">(</span><span class="s">&quot;kernel-dims&quot;</span><span class="p">,</span><span class="w"> </span><span class="n">std</span><span class="o">::</span><span class="n">make_pair</span><span class="p">(</span><span class="mi">3</span><span class="p">,</span><span class="mi">3</span><span class="p">))</span><span class="w">    </span><span class="c1">// kernel is 3*3</span>
+<span class="w">      </span><span class="p">(</span><span class="s">&quot;kernel-num&quot;</span><span class="p">,</span><span class="w"> </span><span class="mi">32</span><span class="p">)</span><span class="w">                      </span><span class="c1">// kernel no. is 32</span>
+<span class="w">      </span><span class="p">.</span><span class="n">apply</span><span class="p">(</span><span class="n">x</span><span class="p">);</span><span class="w">                              </span><span class="c1">// link node x as the input</span>
+</pre></div>
+</div>
+</section>
+<section id="mlp-layers">
+<h2>MLP layers<a class="headerlink" href="#mlp-layers" title="Permalink to this headline">¶</a></h2>
+<p>Marian offers <code class="docutils literal notranslate"><span class="pre">mlp::mlp</span></code>, which creates a
+<a class="reference external" href="https://en.wikipedia.org/wiki/Multilayer_perceptron">multilayer perceptron (MLP)</a> network.
+It is a container which can stack multiple layers using <code class="docutils literal notranslate"><span class="pre">push_back()</span></code> function. There are two types
+of MLP layers provided by Marian: <code class="docutils literal notranslate"><span class="pre">mlp::dense</span></code> and <code class="docutils literal notranslate"><span class="pre">mlp::output</span></code>.</p>
+<p>The <code class="docutils literal notranslate"><span class="pre">mlp::dense</span></code> layer, as introduced before, is a fully connected layer, and it accepts the
+following options:</p>
+<table class="colwidths-auto docutils align-default">
+<thead>
+<tr class="row-odd"><th class="head"><p>Option Name</p></th>
+<th class="head"><p>Definition</p></th>
+<th class="head"><p>Value Type</p></th>
+<th class="head"><p>Default Value</p></th>
+</tr>
+</thead>
+<tbody>
+<tr class="row-even"><td><p>prefix</p></td>
+<td><p>Prefix name (used to form the parameter names)</p></td>
+<td><p><code class="docutils literal notranslate"><span class="pre">std::string</span></code></p></td>
+<td><p><code class="docutils literal notranslate"><span class="pre">None</span></code></p></td>
+</tr>
+<tr class="row-odd"><td><p>dim</p></td>
+<td><p>Output dimension</p></td>
+<td><p><code class="docutils literal notranslate"><span class="pre">int</span></code></p></td>
+<td><p><code class="docutils literal notranslate"><span class="pre">None</span></code></p></td>
+</tr>
+<tr class="row-even"><td><p>layer-normalization</p></td>
+<td><p>Whether to normalise the layer output or not</p></td>
+<td><p><code class="docutils literal notranslate"><span class="pre">bool</span></code></p></td>
+<td><p><code class="docutils literal notranslate"><span class="pre">false</span></code></p></td>
+</tr>
+<tr class="row-odd"><td><p>nematus-normalization</p></td>
+<td><p>Whether to use Nematus layer normalisation or not</p></td>
+<td><p><code class="docutils literal notranslate"><span class="pre">bool</span></code></p></td>
+<td><p><code class="docutils literal notranslate"><span class="pre">false</span></code></p></td>
+</tr>
+<tr class="row-even"><td><p>activation</p></td>
+<td><p>Activation function</p></td>
+<td><p><code class="docutils literal notranslate"><span class="pre">int</span></code></p></td>
+<td><p><code class="docutils literal notranslate"><span class="pre">mlp::act::linear</span></code></p></td>
+</tr>
+</tbody>
+</table>
+<p>The available activation functions for mlp are <code class="docutils literal notranslate"><span class="pre">mlp::act::linear</span></code>, <code class="docutils literal notranslate"><span class="pre">mlp::act::tanh</span></code>,
+<code class="docutils literal notranslate"><span class="pre">mlp::act::sigmoid</span></code>, <code class="docutils literal notranslate"><span class="pre">mlp::act::ReLU</span></code>, <code class="docutils literal notranslate"><span class="pre">mlp::act::LeakyReLU</span></code>, <code class="docutils literal notranslate"><span class="pre">mlp::act::PReLU</span></code>, and
+<code class="docutils literal notranslate"><span class="pre">mlp::act::swish</span></code>.</p>
+<p>Example:</p>
+<div class="highlight-cpp notranslate"><div class="highlight"><pre><span></span><span class="c1">// construct a mlp::dense layer</span>
+<span class="k">auto</span><span class="w"> </span><span class="n">dense_layer</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="n">mlp</span><span class="o">::</span><span class="n">dense</span><span class="p">()</span><span class="w"></span>
+<span class="w">      </span><span class="p">(</span><span class="s">&quot;prefix&quot;</span><span class="p">,</span><span class="w"> </span><span class="s">&quot;dense_layer&quot;</span><span class="p">)</span><span class="w">                 </span><span class="c1">// prefix name is dense_layer</span>
+<span class="w">      </span><span class="p">(</span><span class="s">&quot;dim&quot;</span><span class="p">,</span><span class="w"> </span><span class="mi">3</span><span class="p">)</span><span class="w">                                </span><span class="c1">// output dimension is 3</span>
+<span class="w">      </span><span class="p">(</span><span class="s">&quot;activation&quot;</span><span class="p">,</span><span class="w"> </span><span class="p">(</span><span class="kt">int</span><span class="p">)</span><span class="n">mlp</span><span class="o">::</span><span class="n">act</span><span class="o">::</span><span class="n">sigmoid</span><span class="p">)</span><span class="w">    </span><span class="c1">// activation function is sigmoid</span>
+<span class="w">      </span><span class="p">.</span><span class="n">construct</span><span class="p">(</span><span class="n">graph</span><span class="p">)</span><span class="o">-&gt;</span><span class="n">apply</span><span class="p">(</span><span class="n">x</span><span class="p">);</span><span class="w">              </span><span class="c1">// construct this layer in graph and link node x as the input</span>
+</pre></div>
+</div>
+<p>The <code class="docutils literal notranslate"><span class="pre">mlp::output</span></code> layer is used, as the name suggests, to construct an output layer. You can tie
+embedding layers to <code class="docutils literal notranslate"><span class="pre">mlp::output</span></code> layer using <code class="docutils literal notranslate"><span class="pre">tieTransposed()</span></code>, or set shortlisted words using
+<code class="docutils literal notranslate"><span class="pre">setShortlist()</span></code>. The general options of <code class="docutils literal notranslate"><span class="pre">mlp::output</span></code> layer are listed below:</p>
+<table class="colwidths-auto docutils align-default">
+<thead>
+<tr class="row-odd"><th class="head"><p>Option Name</p></th>
+<th class="head"><p>Definition</p></th>
+<th class="head"><p>Value Type</p></th>
+<th class="head"><p>Default Value</p></th>
+</tr>
+</thead>
+<tbody>
+<tr class="row-even"><td><p>prefix</p></td>
+<td><p>Prefix name (used to form the parameter names)</p></td>
+<td><p><code class="docutils literal notranslate"><span class="pre">std::string</span></code></p></td>
+<td><p><code class="docutils literal notranslate"><span class="pre">None</span></code></p></td>
+</tr>
+<tr class="row-odd"><td><p>dim</p></td>
+<td><p>Output dimension</p></td>
+<td><p><code class="docutils literal notranslate"><span class="pre">int</span></code></p></td>
+<td><p><code class="docutils literal notranslate"><span class="pre">None</span></code></p></td>
+</tr>
+<tr class="row-even"><td><p>vocab</p></td>
+<td><p>File path to the factored vocabulary</p></td>
+<td><p><code class="docutils literal notranslate"><span class="pre">std::string</span></code></p></td>
+<td><p><code class="docutils literal notranslate"><span class="pre">None</span></code></p></td>
+</tr>
+<tr class="row-odd"><td><p>output-omit-bias</p></td>
+<td><p>Whether this layer has a bias parameter</p></td>
+<td><p><code class="docutils literal notranslate"><span class="pre">bool</span></code></p></td>
+<td><p><code class="docutils literal notranslate"><span class="pre">true</span></code></p></td>
+</tr>
+<tr class="row-even"><td><p>lemma-dim-emb</p></td>
+<td><p>Re-embedding dimension of lemma in factors, must be used with <code class="docutils literal notranslate"><span class="pre">vocab</span></code> option</p></td>
+<td><p><code class="docutils literal notranslate"><span class="pre">int</span></code></p></td>
+<td><p><code class="docutils literal notranslate"><span class="pre">0</span></code></p></td>
+</tr>
+<tr class="row-odd"><td><p>output-approx-knn</p></td>
+<td><p>Parameters for LSH-based output approximation, i.e., <code class="docutils literal notranslate"><span class="pre">k</span></code> (the first element) and <code class="docutils literal notranslate"><span class="pre">nbit</span></code> (the second element)</p></td>
+<td><p><code class="docutils literal notranslate"><span class="pre">std::vector&lt;int&gt;</span></code></p></td>
+<td><p>None</p></td>
+</tr>
+</tbody>
+</table>
+<p>Example:</p>
+<div class="highlight-cpp notranslate"><div class="highlight"><pre><span></span><span class="c1">// construct a mlp::output layer</span>
+<span class="k">auto</span><span class="w"> </span><span class="n">last</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="n">mlp</span><span class="o">::</span><span class="n">output</span><span class="p">()</span><span class="w"></span>
+<span class="w">      </span><span class="p">(</span><span class="s">&quot;prefix&quot;</span><span class="p">,</span><span class="w"> </span><span class="s">&quot;last&quot;</span><span class="p">)</span><span class="w">    </span><span class="c1">// prefix name is dense_layer</span>
+<span class="w">      </span><span class="p">(</span><span class="s">&quot;dim&quot;</span><span class="p">,</span><span class="w"> </span><span class="mi">5</span><span class="p">);</span><span class="w">           </span><span class="c1">// output dimension is 5</span>
+</pre></div>
+</div>
+<p>Finally, an example showing how to create a <code class="docutils literal notranslate"><span class="pre">mlp::mlp</span></code> network containing multiple layers:</p>
+<div class="highlight-cpp notranslate"><div class="highlight"><pre><span></span><span class="c1">// construct a mlp::mlp network</span>
+<span class="k">auto</span><span class="w"> </span><span class="n">mlp_networks</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="n">mlp</span><span class="o">::</span><span class="n">mlp</span><span class="p">()</span><span class="w">                                       </span><span class="c1">// construct a mpl container</span>
+<span class="w">                     </span><span class="p">.</span><span class="n">push_back</span><span class="p">(</span><span class="n">mlp</span><span class="o">::</span><span class="n">dense</span><span class="p">()</span><span class="w">                         </span><span class="c1">// construct a dense layer</span>
+<span class="w">                                 </span><span class="p">(</span><span class="s">&quot;prefix&quot;</span><span class="p">,</span><span class="w"> </span><span class="s">&quot;dense&quot;</span><span class="p">)</span><span class="w">                 </span><span class="c1">// prefix name is dense</span>
+<span class="w">                                 </span><span class="p">(</span><span class="s">&quot;dim&quot;</span><span class="p">,</span><span class="w"> </span><span class="mi">5</span><span class="p">)</span><span class="w">                          </span><span class="c1">// dimension is 5</span>
+<span class="w">                                 </span><span class="p">(</span><span class="s">&quot;activation&quot;</span><span class="p">,</span><span class="w"> </span><span class="p">(</span><span class="kt">int</span><span class="p">)</span><span class="n">mlp</span><span class="o">::</span><span class="n">act</span><span class="o">::</span><span class="n">tanh</span><span class="p">))</span><span class="c1">// activation function is tanh</span>
+<span class="w">                     </span><span class="p">.</span><span class="n">push_back</span><span class="p">(</span><span class="n">mlp</span><span class="o">::</span><span class="n">output</span><span class="p">()</span><span class="w">                        </span><span class="c1">// construct a output layer</span>
+<span class="w">                                 </span><span class="p">(</span><span class="s">&quot;dim&quot;</span><span class="p">,</span><span class="w"> </span><span class="mi">5</span><span class="p">))</span><span class="w">                         </span><span class="c1">// dimension is 5</span>
+<span class="w">                     </span><span class="p">(</span><span class="s">&quot;prefix&quot;</span><span class="p">,</span><span class="w"> </span><span class="s">&quot;mlp_network&quot;</span><span class="p">)</span><span class="w">                       </span><span class="c1">// prefix name is mlp_network</span>
+<span class="w">                     </span><span class="p">.</span><span class="n">construct</span><span class="p">(</span><span class="n">graph</span><span class="p">);</span><span class="w">                              </span><span class="c1">// construct this mlp layers in graph</span>
+</pre></div>
+</div>
+</section>
+<section id="rnn-layers">
+<h2>RNN layers<a class="headerlink" href="#rnn-layers" title="Permalink to this headline">¶</a></h2>
+<p>Marian offers <code class="docutils literal notranslate"><span class="pre">rnn::rnn</span></code> for creating a <a class="reference external" href="https://en.wikipedia.org/wiki/Recurrent_neural_network">recurrent neural network
+(RNN)</a> network. Just like <code class="docutils literal notranslate"><span class="pre">mlp::mlp</span></code>,
+<code class="docutils literal notranslate"><span class="pre">rnn::rnn</span></code> is a container which can stack multiple layers using <code class="docutils literal notranslate"><span class="pre">push_back()</span></code> function. Unlike mlp
+layers, Marian only provides cell-level APIs to construct RNN. RNN cells only process a single
+timestep instead of the whole batches of input sequences. There are two types of rnn layers provided
+by Marian: <code class="docutils literal notranslate"><span class="pre">rnn::cell</span></code> and <code class="docutils literal notranslate"><span class="pre">rnn::stacked_cell</span></code>.</p>
+<p>The <code class="docutils literal notranslate"><span class="pre">rnn::cell</span></code> is the base component of RNN and <code class="docutils literal notranslate"><span class="pre">rnn::stacked_cell</span></code> is a stack of <code class="docutils literal notranslate"><span class="pre">rnn::cell</span></code>. The
+few options of <code class="docutils literal notranslate"><span class="pre">rnn::cell</span></code> layer are listed below:</p>
+<table class="colwidths-auto docutils align-default">
+<thead>
+<tr class="row-odd"><th class="head"><p>Option Name</p></th>
+<th class="head"><p>Definition</p></th>
+<th class="head"><p>Value Type</p></th>
+<th class="head"><p>Default Value</p></th>
+</tr>
+</thead>
+<tbody>
+<tr class="row-even"><td><p>type</p></td>
+<td><p>Type of RNN cell</p></td>
+<td><p><code class="docutils literal notranslate"><span class="pre">std::string</span></code></p></td>
+<td><p><code class="docutils literal notranslate"><span class="pre">None</span></code></p></td>
+</tr>
+</tbody>
+</table>
+<p>There are nine types of RNN cells provided by Marian: <code class="docutils literal notranslate"><span class="pre">gru</span></code>, <code class="docutils literal notranslate"><span class="pre">gru-nematus</span></code>, <code class="docutils literal notranslate"><span class="pre">lstm</span></code>, <code class="docutils literal notranslate"><span class="pre">mlstm</span></code>, <code class="docutils literal notranslate"><span class="pre">mgru</span></code>,
+<code class="docutils literal notranslate"><span class="pre">tanh</span></code>, <code class="docutils literal notranslate"><span class="pre">relu</span></code>, <code class="docutils literal notranslate"><span class="pre">sru</span></code>, <code class="docutils literal notranslate"><span class="pre">ssru</span></code>. The general options for all RNN cells are the following:</p>
+<table class="colwidths-auto docutils align-default">
+<thead>
+<tr class="row-odd"><th class="head"><p>Option Name</p></th>
+<th class="head"><p>Definition</p></th>
+<th class="head"><p>Value Type</p></th>
+<th class="head"><p>Default Value</p></th>
+</tr>
+</thead>
+<tbody>
+<tr class="row-even"><td><p>dimInput</p></td>
+<td><p>Input dimension</p></td>
+<td><p><code class="docutils literal notranslate"><span class="pre">int</span></code></p></td>
+<td><p><code class="docutils literal notranslate"><span class="pre">None</span></code></p></td>
+</tr>
+<tr class="row-odd"><td><p>dimState</p></td>
+<td><p>Dimension of hidden state</p></td>
+<td><p><code class="docutils literal notranslate"><span class="pre">int</span></code></p></td>
+<td><p><code class="docutils literal notranslate"><span class="pre">None</span></code></p></td>
+</tr>
+<tr class="row-even"><td><p>prefix</p></td>
+<td><p>Prefix name (used to form the parameter names)</p></td>
+<td><p><code class="docutils literal notranslate"><span class="pre">std::string</span></code></p></td>
+<td><p><code class="docutils literal notranslate"><span class="pre">None</span></code></p></td>
+</tr>
+<tr class="row-odd"><td><p>layer-normalization</p></td>
+<td><p>Whether to normalise the layer output or not</p></td>
+<td><p><code class="docutils literal notranslate"><span class="pre">bool</span></code></p></td>
+<td><p><code class="docutils literal notranslate"><span class="pre">false</span></code></p></td>
+</tr>
+<tr class="row-even"><td><p>dropout</p></td>
+<td><p>Dropout probability</p></td>
+<td><p><code class="docutils literal notranslate"><span class="pre">float</span></code></p></td>
+<td><p><code class="docutils literal notranslate"><span class="pre">0</span></code></p></td>
+</tr>
+<tr class="row-odd"><td><p>transition</p></td>
+<td><p>Whether it is a transition layer</p></td>
+<td><p><code class="docutils literal notranslate"><span class="pre">bool</span></code></p></td>
+<td><p><code class="docutils literal notranslate"><span class="pre">false</span></code></p></td>
+</tr>
+<tr class="row-even"><td><p>final</p></td>
+<td><p>Whether it is an RNN final layer or hidden layer</p></td>
+<td><p><code class="docutils literal notranslate"><span class="pre">bool</span></code></p></td>
+<td><p><code class="docutils literal notranslate"><span class="pre">false</span></code></p></td>
+</tr>
+</tbody>
+</table>
+<div class="admonition note">
+<p class="admonition-title">Note</p>
+<p>Not all the options listed above are available for all the cells. For example, <code class="docutils literal notranslate"><span class="pre">final</span></code> option is
+only used for <code class="docutils literal notranslate"><span class="pre">gru</span></code> and <code class="docutils literal notranslate"><span class="pre">gru-nematus</span></code> cells.</p>
+</div>
+<p>Example for <code class="docutils literal notranslate"><span class="pre">rnn::cell</span></code>:</p>
+<div class="highlight-cpp notranslate"><div class="highlight"><pre><span></span><span class="c1">// construct a rnn cell</span>
+<span class="k">auto</span><span class="w"> </span><span class="n">rnn_cell</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="n">rnn</span><span class="o">::</span><span class="n">cell</span><span class="p">()</span><span class="w"></span>
+<span class="w">         </span><span class="p">(</span><span class="s">&quot;type&quot;</span><span class="p">,</span><span class="w"> </span><span class="s">&quot;gru&quot;</span><span class="p">)</span><span class="w">              </span><span class="c1">// type of rnn cell is gru</span>
+<span class="w">         </span><span class="p">(</span><span class="s">&quot;prefix&quot;</span><span class="p">,</span><span class="w"> </span><span class="s">&quot;gru_cell&quot;</span><span class="p">)</span><span class="w">       </span><span class="c1">// prefix name is gru_cell</span>
+<span class="w">         </span><span class="p">(</span><span class="s">&quot;final&quot;</span><span class="p">,</span><span class="w"> </span><span class="nb">false</span><span class="p">);</span><span class="w">            </span><span class="c1">// this cell is the final layer</span>
+</pre></div>
+</div>
+<p>Example for <code class="docutils literal notranslate"><span class="pre">rnn::stacked_cell</span></code>:</p>
+<div class="highlight-cpp notranslate"><div class="highlight"><pre><span></span><span class="c1">// construct a stack of rnn cells</span>
+<span class="k">auto</span><span class="w"> </span><span class="n">highCell</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="n">rnn</span><span class="o">::</span><span class="n">stacked_cell</span><span class="p">();</span><span class="w"></span>
+<span class="c1">// for loop to add rnn cells into the stack</span>
+<span class="k">for</span><span class="p">(</span><span class="kt">size_t</span><span class="w"> </span><span class="n">j</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="mi">1</span><span class="p">;</span><span class="w"> </span><span class="n">j</span><span class="w"> </span><span class="o">&lt;=</span><span class="w"> </span><span class="mi">512</span><span class="p">;</span><span class="w"> </span><span class="n">j</span><span class="o">++</span><span class="p">)</span><span class="w"> </span><span class="p">{</span><span class="w"></span>
+<span class="w">    </span><span class="k">auto</span><span class="w"> </span><span class="n">paramPrefix</span><span class="w"> </span><span class="o">=</span><span class="s">&quot;cell&quot;</span><span class="w"> </span><span class="o">+</span><span class="w"> </span><span class="n">std</span><span class="o">::</span><span class="n">to_string</span><span class="p">(</span><span class="n">j</span><span class="p">);</span><span class="w"></span>
+<span class="w">    </span><span class="n">highCell</span><span class="p">.</span><span class="n">push_back</span><span class="p">(</span><span class="n">rnn</span><span class="o">::</span><span class="n">cell</span><span class="p">()(</span><span class="s">&quot;prefix&quot;</span><span class="p">,</span><span class="w"> </span><span class="n">paramPrefix</span><span class="p">));</span><span class="w"></span>
+<span class="p">}</span><span class="w"></span>
+</pre></div>
+</div>
+<p>The list of available options for <code class="docutils literal notranslate"><span class="pre">rnn::rnn</span></code> layers:</p>
+<table class="colwidths-auto docutils align-default">
+<thead>
+<tr class="row-odd"><th class="head"><p>Option Name</p></th>
+<th class="head"><p>Definition</p></th>
+<th class="head"><p>Value Type</p></th>
+<th class="head"><p>Default Value</p></th>
+</tr>
+</thead>
+<tbody>
+<tr class="row-even"><td><p>type</p></td>
+<td><p>Type of RNN layer</p></td>
+<td><p><code class="docutils literal notranslate"><span class="pre">std::string</span></code></p></td>
+<td><p><code class="docutils literal notranslate"><span class="pre">gru</span></code></p></td>
+</tr>
+<tr class="row-odd"><td><p>direction</p></td>
+<td><p>RNN direction</p></td>
+<td><p><code class="docutils literal notranslate"><span class="pre">int</span></code></p></td>
+<td><p><code class="docutils literal notranslate"><span class="pre">rnn::dir::forward</span></code></p></td>
+</tr>
+<tr class="row-even"><td><p>dimInput</p></td>
+<td><p>Input dimension</p></td>
+<td><p><code class="docutils literal notranslate"><span class="pre">int</span></code></p></td>
+<td><p><code class="docutils literal notranslate"><span class="pre">None</span></code></p></td>
+</tr>
+<tr class="row-odd"><td><p>dimState</p></td>
+<td><p>Dimension of hidden state</p></td>
+<td><p><code class="docutils literal notranslate"><span class="pre">int</span></code></p></td>
+<td><p><code class="docutils literal notranslate"><span class="pre">None</span></code></p></td>
+</tr>
+<tr class="row-even"><td><p>prefix</p></td>
+<td><p>Prefix name (used to form the parameter names)</p></td>
+<td><p><code class="docutils literal notranslate"><span class="pre">std::string</span></code></p></td>
+<td><p><code class="docutils literal notranslate"><span class="pre">None</span></code></p></td>
+</tr>
+<tr class="row-odd"><td><p>layer-normalization</p></td>
+<td><p>Whether to normalise the layer output or not</p></td>
+<td><p><code class="docutils literal notranslate"><span class="pre">bool</span></code></p></td>
+<td><p><code class="docutils literal notranslate"><span class="pre">false</span></code></p></td>
+</tr>
+<tr class="row-even"><td><p>nematus-normalization</p></td>
+<td><p>Whether to use Nematus layer normalisation or not</p></td>
+<td><p><code class="docutils literal notranslate"><span class="pre">bool</span></code></p></td>
+<td><p><code class="docutils literal notranslate"><span class="pre">false</span></code></p></td>
+</tr>
+<tr class="row-odd"><td><p>dropout</p></td>
+<td><p>Dropout probability</p></td>
+<td><p><code class="docutils literal notranslate"><span class="pre">float</span></code></p></td>
+<td><p><code class="docutils literal notranslate"><span class="pre">0</span></code></p></td>
+</tr>
+<tr class="row-even"><td><p>skip</p></td>
+<td><p>Whether to use skip connections</p></td>
+<td><p><code class="docutils literal notranslate"><span class="pre">bool</span></code></p></td>
+<td><p><code class="docutils literal notranslate"><span class="pre">false</span></code></p></td>
+</tr>
+<tr class="row-odd"><td><p>skipFirst</p></td>
+<td><p>Whether to use skip connections for the layer(s) with <code class="docutils literal notranslate"><span class="pre">index</span> <span class="pre">&gt;</span> <span class="pre">0</span></code></p></td>
+<td><p><code class="docutils literal notranslate"><span class="pre">bool</span></code></p></td>
+<td><p><code class="docutils literal notranslate"><span class="pre">false</span></code></p></td>
+</tr>
+</tbody>
+</table>
+<p>Examples for <code class="docutils literal notranslate"><span class="pre">rnn::rnn()</span></code>:</p>
+<div class="highlight-cpp notranslate"><div class="highlight"><pre><span></span><span class="c1">// construct a `rnn::rnn()` container</span>
+<span class="k">auto</span><span class="w"> </span><span class="n">rnn_container</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="n">rnn</span><span class="o">::</span><span class="n">rnn</span><span class="p">(</span><span class="w"></span>
+<span class="w">               </span><span class="s">&quot;type&quot;</span><span class="p">,</span><span class="w"> </span><span class="s">&quot;gru&quot;</span><span class="p">,</span><span class="w">                  </span><span class="c1">// type of rnn cell is gru</span>
+<span class="w">               </span><span class="s">&quot;prefix&quot;</span><span class="p">,</span><span class="w"> </span><span class="s">&quot;rnn_layers&quot;</span><span class="p">,</span><span class="w">         </span><span class="c1">// prefix name is rnn_layers</span>
+<span class="w">               </span><span class="s">&quot;dimInput&quot;</span><span class="p">,</span><span class="w"> </span><span class="mi">10</span><span class="p">,</span><span class="w">                 </span><span class="c1">// input dimension is 10</span>
+<span class="w">               </span><span class="s">&quot;dimState&quot;</span><span class="p">,</span><span class="w"> </span><span class="mi">5</span><span class="p">,</span><span class="w">                  </span><span class="c1">// dimension of hidden state is 5</span>
+<span class="w">               </span><span class="s">&quot;dropout&quot;</span><span class="p">,</span><span class="w"> </span><span class="mi">0</span><span class="p">,</span><span class="w">                   </span><span class="c1">// dropout probability is 0</span>
+<span class="w">               </span><span class="s">&quot;layer-normalization&quot;</span><span class="p">,</span><span class="w"> </span><span class="nb">false</span><span class="p">)</span><span class="w">   </span><span class="c1">// do not normalise the layer output</span>
+<span class="w">               </span><span class="p">.</span><span class="n">push_back</span><span class="p">(</span><span class="n">rnn</span><span class="o">::</span><span class="n">cell</span><span class="p">())</span><span class="w">         </span><span class="c1">// add a rnn::cell in this rnn container</span>
+<span class="w">               </span><span class="p">.</span><span class="n">construct</span><span class="p">(</span><span class="n">graph</span><span class="p">);</span><span class="w">              </span><span class="c1">// construct this rnn container in graph</span>
+</pre></div>
+</div>
+<p>Marian provides four RNN directions in <code class="docutils literal notranslate"><span class="pre">rnn::dir</span></code> enumerator: <code class="docutils literal notranslate"><span class="pre">rnn::dir::forward</span></code>,
+<code class="docutils literal notranslate"><span class="pre">rnn::dir::backward</span></code>, <code class="docutils literal notranslate"><span class="pre">rnn::dir::alternating_forward</span></code> and <code class="docutils literal notranslate"><span class="pre">rnn::dir::alternating_backward</span></code>.
+For rnn::rnn(), you can use <code class="docutils literal notranslate"><span class="pre">transduce()</span></code> to map the input state to the output state.</p>
+<p>An example for <code class="docutils literal notranslate"><span class="pre">transduce()</span></code>:</p>
+<div class="highlight-cpp notranslate"><div class="highlight"><pre><span></span><span class="k">auto</span><span class="w"> </span><span class="n">output</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="n">rnn</span><span class="p">.</span><span class="n">construct</span><span class="p">(</span><span class="n">graph</span><span class="p">)</span><span class="o">-&gt;</span><span class="n">transduce</span><span class="p">(</span><span class="n">input</span><span class="p">);</span><span class="w"></span>
+</pre></div>
+</div>
+</section>
+<section id="embedding-layer">
+<h2>Embedding layer<a class="headerlink" href="#embedding-layer" title="Permalink to this headline">¶</a></h2>
+<p>Marian provides a shortcut to construct a regular embedding layer <code class="docutils literal notranslate"><span class="pre">embedding</span></code> for words embedding.
+For <code class="docutils literal notranslate"><span class="pre">embedding</span></code> layers, there are following options available:</p>
+<table class="colwidths-auto docutils align-default">
+<thead>
+<tr class="row-odd"><th class="head"><p>Option Name</p></th>
+<th class="head"><p>Definition</p></th>
+<th class="head"><p>Value Type</p></th>
+<th class="head"><p>Default Value</p></th>
+</tr>
+</thead>
+<tbody>
+<tr class="row-even"><td><p>dimVocab</p></td>
+<td><p>Size of vocabulary</p></td>
+<td><p><code class="docutils literal notranslate"><span class="pre">int</span></code></p></td>
+<td><p><code class="docutils literal notranslate"><span class="pre">None</span></code></p></td>
+</tr>
+<tr class="row-odd"><td><p>dimEmb</p></td>
+<td><p>Size of embedding vector</p></td>
+<td><p><code class="docutils literal notranslate"><span class="pre">int</span></code></p></td>
+<td><p><code class="docutils literal notranslate"><span class="pre">None</span></code></p></td>
+</tr>
+<tr class="row-even"><td><p>dropout</p></td>
+<td><p>Dropout probability</p></td>
+<td><p><code class="docutils literal notranslate"><span class="pre">float</span></code></p></td>
+<td><p><code class="docutils literal notranslate"><span class="pre">0</span></code></p></td>
+</tr>
+<tr class="row-odd"><td><p>inference</p></td>
+<td><p>Whether it is used for inference</p></td>
+<td><p><code class="docutils literal notranslate"><span class="pre">bool</span></code></p></td>
+<td><p><code class="docutils literal notranslate"><span class="pre">false</span></code></p></td>
+</tr>
+<tr class="row-even"><td><p>prefix</p></td>
+<td><p>Prefix name (used to form the parameter names)</p></td>
+<td><p><code class="docutils literal notranslate"><span class="pre">std::string</span></code></p></td>
+<td><p><code class="docutils literal notranslate"><span class="pre">None</span></code></p></td>
+</tr>
+<tr class="row-odd"><td><p>fixed</p></td>
+<td><p>whether this layer is fixed (not trainable)</p></td>
+<td><p><code class="docutils literal notranslate"><span class="pre">bool</span></code></p></td>
+<td><p><code class="docutils literal notranslate"><span class="pre">false</span></code></p></td>
+</tr>
+<tr class="row-even"><td><p>dimFactorEmb</p></td>
+<td><p>Size of factored embedding vector</p></td>
+<td><p><code class="docutils literal notranslate"><span class="pre">int</span></code></p></td>
+<td><p><code class="docutils literal notranslate"><span class="pre">None</span></code></p></td>
+</tr>
+<tr class="row-odd"><td><p>factorsCombine</p></td>
+<td><p>Which strategy is chosen to combine the factor embeddings; it can be <code class="docutils literal notranslate"><span class="pre">&quot;concat&quot;</span></code></p></td>
+<td><p><code class="docutils literal notranslate"><span class="pre">std::string</span></code></p></td>
+<td><p><code class="docutils literal notranslate"><span class="pre">None</span></code></p></td>
+</tr>
+<tr class="row-even"><td><p>vocab</p></td>
+<td><p>File path to the factored vocabulary</p></td>
+<td><p><code class="docutils literal notranslate"><span class="pre">std::string</span></code></p></td>
+<td><p><code class="docutils literal notranslate"><span class="pre">None</span></code></p></td>
+</tr>
+<tr class="row-odd"><td><p>embFile</p></td>
+<td><p>Paths to the factored embedding vectors</p></td>
+<td><p><code class="docutils literal notranslate"><span class="pre">std::string&gt;</span></code></p></td>
+<td><p><code class="docutils literal notranslate"><span class="pre">None</span></code></p></td>
+</tr>
+<tr class="row-even"><td><p>normalization</p></td>
+<td><p>Whether to normalise the layer output or not</p></td>
+<td><p><code class="docutils literal notranslate"><span class="pre">bool</span></code></p></td>
+<td><p><code class="docutils literal notranslate"><span class="pre">false</span></code></p></td>
+</tr>
+</tbody>
+</table>
+<p>Example to construct an embedding layer:</p>
+<div class="highlight-cpp notranslate"><div class="highlight"><pre><span></span><span class="c1">// construct an embedding layer</span>
+<span class="k">auto</span><span class="w"> </span><span class="n">embedding_layer</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="n">embedding</span><span class="p">()</span><span class="w"></span>
+<span class="w">        </span><span class="p">(</span><span class="s">&quot;prefix&quot;</span><span class="p">,</span><span class="w"> </span><span class="s">&quot;embedding&quot;</span><span class="p">)</span><span class="w">       </span><span class="c1">// prefix name is embedding</span>
+<span class="w">        </span><span class="p">(</span><span class="s">&quot;dimVocab&quot;</span><span class="p">,</span><span class="w"> </span><span class="mi">1024</span><span class="p">)</span><span class="w">            </span><span class="c1">// vocabulary size is 1024</span>
+<span class="w">        </span><span class="p">(</span><span class="s">&quot;dimEmb&quot;</span><span class="p">,</span><span class="w"> </span><span class="mi">512</span><span class="p">)</span><span class="w">               </span><span class="c1">// size of embedding vector is 512</span>
+<span class="w">        </span><span class="p">.</span><span class="n">construct</span><span class="p">(</span><span class="n">graph</span><span class="p">);</span><span class="w">            </span><span class="c1">// construct this embedding layer in graph</span>
+</pre></div>
+</div>
+</section>
+</section>
+
+
+           </div>
+          </div>
+          <footer><div class="rst-footer-buttons" role="navigation" aria-label="Footer">
+        <a href="operators.html" class="btn btn-neutral float-left" title="Operations in the expression graph" accesskey="p" rel="prev"><span class="fa fa-arrow-circle-left" aria-hidden="true"></span> Previous</a>
+        <a href="factors.html" class="btn btn-neutral float-right" title="Using Marian with factors" accesskey="n" rel="next">Next <span class="fa fa-arrow-circle-right" aria-hidden="true"></span></a>
+    </div>
+
+  <hr/>
+
+  <div role="contentinfo">
+    <p>&#169; Copyright 2021, Marian NMT Team.</p>
+  </div>
+
+  Built with <a href="https://www.sphinx-doc.org/">Sphinx</a> using a
+    <a href="https://github.com/readthedocs/sphinx_rtd_theme">theme</a>
+    provided by <a href="https://readthedocs.org">Read the Docs</a>.
+   
+
+</footer>
+        </div>
+      </div>
+    </section>
+  </div>
+  <script>
+      jQuery(function () {
+          SphinxRtdTheme.Navigation.enable(true);
+      });
+  </script> 
+
+</body>
+</html>

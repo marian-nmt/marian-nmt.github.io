@@ -4,7 +4,7 @@
   <meta charset="utf-8" /><meta name="generator" content="Docutils 0.17.1: http://docutils.sourceforge.net/" />
 
   <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-  <title>Class Embedding &mdash; Marian NMT v1.10.27 2022-01-25 documentation</title><link rel="stylesheet" href="../_static/css/theme.css" type="text/css" />
+  <title>Class Embedding &mdash; Marian NMT v1.10.28 2022-01-28 documentation</title><link rel="stylesheet" href="../_static/css/theme.css" type="text/css" />
     <link rel="stylesheet" href="../_static/pygments.css" type="text/css" />
       <link rel="stylesheet" href="../_static/css/custom.css" type="text/css" />
       <link rel="stylesheet" href="../_static/collapsible-lists/css/tree_view.css" type="text/css" />
@@ -36,7 +36,7 @@
             <a href="../index.html" class="icon icon-home"> Marian NMT
           </a>
               <div class="version">
-                v1.10.27
+                v1.10.28
               </div>
 <div role="search">
   <form id="rtd-search-form" class="wy-form" action="../search.html" method="get">
@@ -49,7 +49,9 @@
               <p><span class="caption-text">Contents:</span></p>
 <ul>
 <li class="toctree-l1"><a class="reference internal" href="../graph.html">Expression graphs</a></li>
-<li class="toctree-l1"><a class="reference internal" href="../operators.html">Operations in the Expression Graph</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../operators.html">Operations in the expression graph</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../layer.html">Layers</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../factors.html">Using Marian with factors</a></li>
 <li class="toctree-l1"><a class="reference internal" href="library_index.html">Library API</a></li>
 <li class="toctree-l1"><a class="reference internal" href="../contributing.html">How to contribute to Marian</a></li>
 <li class="toctree-l1"><a class="reference internal" href="../doc_guide.html">Writing documentation</a></li>
@@ -100,27 +102,70 @@
 <dl class="class">
 <dt id="_CPPv4N6marian9EmbeddingE">
 <span id="_CPPv3N6marian9EmbeddingE"></span><span id="_CPPv2N6marian9EmbeddingE"></span><span id="marian::Embedding"></span><span class="target" id="classmarian_1_1Embedding"></span><em class="property">class </em><code class="sig-name descname">Embedding</code> : <em class="property">public</em> marian::<a class="reference internal" href="classmarian_1_1LayerBase.html#_CPPv4N6marian9LayerBaseE" title="marian::LayerBase">LayerBase</a>, <em class="property">public</em> marian::<a class="reference internal" href="structmarian_1_1IEmbeddingLayer.html#_CPPv4N6marian15IEmbeddingLayerE" title="marian::IEmbeddingLayer">IEmbeddingLayer</a><a class="headerlink" href="#_CPPv4N6marian9EmbeddingE" title="Permalink to this definition">¶</a><br /></dt>
-<dd><div class="breathe-sectiondef docutils container">
+<dd><p>A regular embedding layer. </p>
+<p>Note that this also applies dropout if the option is passed (pass 0 when in inference mode). It is best to not use <a class="reference internal" href="#classmarian_1_1Embedding"><span class="std std-ref">Embedding</span></a> directly, but rather via getEmbeddingLayer() in <a class="reference internal" href="classmarian_1_1EncoderDecoderLayerBase.html#classmarian_1_1EncoderDecoderLayerBase"><span class="std std-ref">EncoderDecoderLayerBase</span></a>, which knows to pass on all required parameters from options. </p>
+<div class="breathe-sectiondef docutils container">
 <p class="breathe-sectiondef-title rubric">Public Functions</p>
 <dl class="function">
 <dt id="_CPPv4N6marian9Embedding9EmbeddingE3PtrI15ExpressionGraphE3PtrI7OptionsE">
 <span id="_CPPv3N6marian9Embedding9EmbeddingE3PtrI15ExpressionGraphE3PtrI7OptionsE"></span><span id="_CPPv2N6marian9Embedding9EmbeddingE3PtrI15ExpressionGraphE3PtrI7OptionsE"></span><span id="marian::Embedding::Embedding__Ptr:ExpressionGraph:.Ptr:Options:"></span><span class="target" id="classmarian_1_1Embedding_1a1aca3bcdb257fa450413b35437a73e0a"></span><code class="sig-name descname">Embedding</code><span class="sig-paren">(</span><a class="reference internal" href="typedef_namespacemarian_1ad1a373be43a00ef9ce35666145137b08.html#_CPPv4N6marian3PtrE" title="marian::Ptr">Ptr</a>&lt;<a class="reference internal" href="classmarian_1_1ExpressionGraph.html#_CPPv4N6marian15ExpressionGraphE" title="marian::ExpressionGraph">ExpressionGraph</a>&gt; <em>graph</em>, <a class="reference internal" href="typedef_namespacemarian_1ad1a373be43a00ef9ce35666145137b08.html#_CPPv4N6marian3PtrE" title="marian::Ptr">Ptr</a>&lt;<a class="reference internal" href="classmarian_1_1Options.html#_CPPv4N6marian7OptionsE" title="marian::Options">Options</a>&gt; <em>options</em><span class="sig-paren">)</span><a class="headerlink" href="#_CPPv4N6marian9Embedding9EmbeddingE3PtrI15ExpressionGraphE3PtrI7OptionsE" title="Permalink to this definition">¶</a><br /></dt>
-<dd></dd></dl>
+<dd><p>Construct a regular embedding layer in the graph. </p>
+<p><dl class="simple">
+<dt><strong>Parameters</strong></dt><dd><ul class="breatheparameterlist simple">
+<li><p><code class="docutils literal notranslate"><span class="pre">graph</span></code>: The expression graph. </p></li>
+<li><p><code class="docutils literal notranslate"><span class="pre">options</span></code>: The options used for this embedding layer. </p></li>
+</ul>
+</dd>
+</dl>
+</p>
+</dd></dl>
 
 <dl class="function">
 <dt id="_CPPv4NK6marian9Embedding5applyE3PtrIN4data8SubBatchEE">
 <span id="_CPPv3NK6marian9Embedding5applyE3PtrIN4data8SubBatchEE"></span><span id="_CPPv2NK6marian9Embedding5applyE3PtrIN4data8SubBatchEE"></span><span id="marian::Embedding::apply__Ptr:data::SubBatch:C"></span><span class="target" id="classmarian_1_1Embedding_1a2d055853931e224737824c4c80d9e7c1"></span><a class="reference internal" href="function_group__graph__ops__mathematical_1gaf4e69a5f7167b63522135a1f6b8a5dd8.html#_CPPv4N6marianStE4Expri" title="marian::std">std</a>::tuple&lt;<a class="reference internal" href="typedef_namespacemarian_1ac8ecc2cc66a7afcc6da94a9bbde5eaa7.html#_CPPv4N6marian4ExprE" title="marian::Expr">Expr</a>, <a class="reference internal" href="typedef_namespacemarian_1ac8ecc2cc66a7afcc6da94a9bbde5eaa7.html#_CPPv4N6marian4ExprE" title="marian::Expr">Expr</a>&gt; <code class="sig-name descname">apply</code><span class="sig-paren">(</span><a class="reference internal" href="typedef_namespacemarian_1ad1a373be43a00ef9ce35666145137b08.html#_CPPv4N6marian3PtrE" title="marian::Ptr">Ptr</a>&lt;data::<a class="reference internal" href="classmarian_1_1data_1_1SubBatch.html#_CPPv4N6marian4data8SubBatchE" title="marian::data::SubBatch">SubBatch</a>&gt; <em>subBatch</em><span class="sig-paren">)</span> <em class="property">const</em><a class="headerlink" href="#_CPPv4NK6marian9Embedding5applyE3PtrIN4data8SubBatchEE" title="Permalink to this definition">¶</a><br /></dt>
-<dd></dd></dl>
+<dd><p>Apply/Link this embedding layer (with the given batch of sentences) to the expression graph. </p>
+<p><dl class="simple">
+<dt><strong>Return</strong></dt><dd><p>The expression tuple holding the embedding layer and the masking layer </p>
+</dd>
+<dt><strong>Parameters</strong></dt><dd><ul class="breatheparameterlist simple">
+<li><p><code class="docutils literal notranslate"><span class="pre">subBatch</span></code>: The batch of sentences </p></li>
+</ul>
+</dd>
+</dl>
+</p>
+</dd></dl>
 
 <dl class="function">
 <dt id="_CPPv4NK6marian9Embedding5applyERK5WordsRK5Shape">
 <span id="_CPPv3NK6marian9Embedding5applyERK5WordsRK5Shape"></span><span id="_CPPv2NK6marian9Embedding5applyERK5WordsRK5Shape"></span><span id="marian::Embedding::apply__WordsCR.ShapeCRC"></span><span class="target" id="classmarian_1_1Embedding_1aefded25a5b1e35511e1d0931bd815572"></span><a class="reference internal" href="typedef_namespacemarian_1ac8ecc2cc66a7afcc6da94a9bbde5eaa7.html#_CPPv4N6marian4ExprE" title="marian::Expr">Expr</a> <code class="sig-name descname">apply</code><span class="sig-paren">(</span><em class="property">const</em> <a class="reference internal" href="typedef_namespacemarian_1a81f026d9529d47fd44a64a27954775fd.html#_CPPv4N6marian5WordsE" title="marian::Words">Words</a> &amp;<em>words</em>, <em class="property">const</em> <a class="reference internal" href="structmarian_1_1Shape.html#_CPPv4N6marian5ShapeE" title="marian::Shape">Shape</a> &amp;<em>shape</em><span class="sig-paren">)</span> <em class="property">const</em><a class="headerlink" href="#_CPPv4NK6marian9Embedding5applyERK5WordsRK5Shape" title="Permalink to this definition">¶</a><br /></dt>
-<dd></dd></dl>
+<dd><p>Apply/Link this embedding layer (with the given words and shape) to the expression graph. </p>
+<p><dl class="simple">
+<dt><strong>Return</strong></dt><dd><p>The expression holding the embedding layer </p>
+</dd>
+<dt><strong>Parameters</strong></dt><dd><ul class="breatheparameterlist simple">
+<li><p><code class="docutils literal notranslate"><span class="pre">words</span></code>: Sequence of vocabulary items </p></li>
+<li><p><code class="docutils literal notranslate"><span class="pre">shape</span></code>: <a class="reference internal" href="structmarian_1_1Shape.html#structmarian_1_1Shape"><span class="std std-ref">Shape</span></a> of the words </p></li>
+</ul>
+</dd>
+</dl>
+</p>
+</dd></dl>
 
 <dl class="function">
 <dt id="_CPPv4NK6marian9Embedding12applyIndicesERKNSt6vectorI9WordIndexEERK5Shape">
 <span id="_CPPv3NK6marian9Embedding12applyIndicesERKNSt6vectorI9WordIndexEERK5Shape"></span><span id="_CPPv2NK6marian9Embedding12applyIndicesERKNSt6vectorI9WordIndexEERK5Shape"></span><span id="marian::Embedding::applyIndices__std::vector:WordIndex:CR.ShapeCRC"></span><span class="target" id="classmarian_1_1Embedding_1a8172f061729b432f9502d189f1828e37"></span><a class="reference internal" href="typedef_namespacemarian_1ac8ecc2cc66a7afcc6da94a9bbde5eaa7.html#_CPPv4N6marian4ExprE" title="marian::Expr">Expr</a> <code class="sig-name descname">applyIndices</code><span class="sig-paren">(</span><em class="property">const</em> <a class="reference internal" href="function_group__graph__ops__mathematical_1gaf4e69a5f7167b63522135a1f6b8a5dd8.html#_CPPv4N6marianStE4Expri" title="marian::std">std</a>::vector&lt;<a class="reference internal" href="typedef_namespacemarian_1ae7167b339fc21c2985d7f2ddef03d25e.html#_CPPv4N6marian9WordIndexE" title="marian::WordIndex">WordIndex</a>&gt; &amp;<em>embIdx</em>, <em class="property">const</em> <a class="reference internal" href="structmarian_1_1Shape.html#_CPPv4N6marian5ShapeE" title="marian::Shape">Shape</a> &amp;<em>shape</em><span class="sig-paren">)</span> <em class="property">const</em><a class="headerlink" href="#_CPPv4NK6marian9Embedding12applyIndicesERKNSt6vectorI9WordIndexEERK5Shape" title="Permalink to this definition">¶</a><br /></dt>
-<dd></dd></dl>
+<dd><p>Apply/Link this embedding layer (with the given WordIndex vector and shape) to the expression graph. </p>
+<p><dl class="simple">
+<dt><strong>Return</strong></dt><dd><p>The expression holding the embedding layer </p>
+</dd>
+<dt><strong>Parameters</strong></dt><dd><ul class="breatheparameterlist simple">
+<li><p><code class="docutils literal notranslate"><span class="pre">embIdx</span></code>: The vector of WordIndex objects </p></li>
+<li><p><code class="docutils literal notranslate"><span class="pre">shape</span></code>: <a class="reference internal" href="structmarian_1_1Shape.html#structmarian_1_1Shape"><span class="std std-ref">Shape</span></a> of the WordIndex vector </p></li>
+</ul>
+</dd>
+</dl>
+</p>
+</dd></dl>
 
 </div>
 </dd></dl>

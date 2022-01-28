@@ -4,7 +4,7 @@
   <meta charset="utf-8" /><meta name="generator" content="Docutils 0.17.1: http://docutils.sourceforge.net/" />
 
   <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-  <title>Class Dense &mdash; Marian NMT v1.10.27 2022-01-25 documentation</title><link rel="stylesheet" href="../_static/css/theme.css" type="text/css" />
+  <title>Class Dense &mdash; Marian NMT v1.10.28 2022-01-28 documentation</title><link rel="stylesheet" href="../_static/css/theme.css" type="text/css" />
     <link rel="stylesheet" href="../_static/pygments.css" type="text/css" />
       <link rel="stylesheet" href="../_static/css/custom.css" type="text/css" />
       <link rel="stylesheet" href="../_static/collapsible-lists/css/tree_view.css" type="text/css" />
@@ -36,7 +36,7 @@
             <a href="../index.html" class="icon icon-home"> Marian NMT
           </a>
               <div class="version">
-                v1.10.27
+                v1.10.28
               </div>
 <div role="search">
   <form id="rtd-search-form" class="wy-form" action="../search.html" method="get">
@@ -49,7 +49,9 @@
               <p><span class="caption-text">Contents:</span></p>
 <ul>
 <li class="toctree-l1"><a class="reference internal" href="../graph.html">Expression graphs</a></li>
-<li class="toctree-l1"><a class="reference internal" href="../operators.html">Operations in the Expression Graph</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../operators.html">Operations in the expression graph</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../layer.html">Layers</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../factors.html">Using Marian with factors</a></li>
 <li class="toctree-l1"><a class="reference internal" href="library_index.html">Library API</a></li>
 <li class="toctree-l1"><a class="reference internal" href="../contributing.html">How to contribute to Marian</a></li>
 <li class="toctree-l1"><a class="reference internal" href="../doc_guide.html">Writing documentation</a></li>
@@ -100,22 +102,53 @@
 <dl class="class">
 <dt id="_CPPv4N6marian3mlp5DenseE">
 <span id="_CPPv3N6marian3mlp5DenseE"></span><span id="_CPPv2N6marian3mlp5DenseE"></span><span id="marian::mlp::Dense"></span><span class="target" id="classmarian_1_1mlp_1_1Dense"></span><em class="property">class </em><code class="sig-name descname">Dense</code> : <em class="property">public</em> marian::<a class="reference internal" href="classmarian_1_1LayerBase.html#_CPPv4N6marian9LayerBaseE" title="marian::LayerBase">LayerBase</a>, <em class="property">public</em> marian::<a class="reference internal" href="structmarian_1_1IUnaryLayer.html#_CPPv4N6marian11IUnaryLayerE" title="marian::IUnaryLayer">IUnaryLayer</a><a class="headerlink" href="#_CPPv4N6marian3mlp5DenseE" title="Permalink to this definition">¶</a><br /></dt>
-<dd><div class="breathe-sectiondef docutils container">
+<dd><p>Base class for a fully connected layer. </p>
+<p>Implement the operations <code class="docutils literal notranslate"><span class="pre">output</span> <span class="pre">=</span> <span class="pre">activation(input</span> <span class="pre">*</span> <span class="pre">weight</span> <span class="pre">+</span> <span class="pre">bias)</span></code>. </p>
+<div class="breathe-sectiondef docutils container">
 <p class="breathe-sectiondef-title rubric">Public Functions</p>
 <dl class="function">
 <dt id="_CPPv4N6marian3mlp5Dense5DenseE3PtrI15ExpressionGraphE3PtrI7OptionsE">
 <span id="_CPPv3N6marian3mlp5Dense5DenseE3PtrI15ExpressionGraphE3PtrI7OptionsE"></span><span id="_CPPv2N6marian3mlp5Dense5DenseE3PtrI15ExpressionGraphE3PtrI7OptionsE"></span><span id="marian::mlp::Dense::Dense__Ptr:ExpressionGraph:.Ptr:Options:"></span><span class="target" id="classmarian_1_1mlp_1_1Dense_1a794ac38997a477b5501c9e746ca83bc6"></span><code class="sig-name descname">Dense</code><span class="sig-paren">(</span><a class="reference internal" href="typedef_namespacemarian_1ad1a373be43a00ef9ce35666145137b08.html#_CPPv4N6marian3PtrE" title="marian::Ptr">Ptr</a>&lt;<a class="reference internal" href="classmarian_1_1ExpressionGraph.html#_CPPv4N6marian15ExpressionGraphE" title="marian::ExpressionGraph">ExpressionGraph</a>&gt; <em>graph</em>, <a class="reference internal" href="typedef_namespacemarian_1ad1a373be43a00ef9ce35666145137b08.html#_CPPv4N6marian3PtrE" title="marian::Ptr">Ptr</a>&lt;<a class="reference internal" href="classmarian_1_1Options.html#_CPPv4N6marian7OptionsE" title="marian::Options">Options</a>&gt; <em>options</em><span class="sig-paren">)</span><a class="headerlink" href="#_CPPv4N6marian3mlp5Dense5DenseE3PtrI15ExpressionGraphE3PtrI7OptionsE" title="Permalink to this definition">¶</a><br /></dt>
-<dd></dd></dl>
+<dd><p>Construct a dense layer in the graph. </p>
+<p><dl class="simple">
+<dt><strong>Parameters</strong></dt><dd><ul class="breatheparameterlist simple">
+<li><p><code class="docutils literal notranslate"><span class="pre">graph</span></code>: The expression graph. </p></li>
+<li><p><code class="docutils literal notranslate"><span class="pre">options</span></code>: The options used for this dense layer. </p></li>
+</ul>
+</dd>
+</dl>
+</p>
+</dd></dl>
 
 <dl class="function">
 <dt id="_CPPv4N6marian3mlp5Dense5applyERKNSt6vectorI4ExprEE">
 <span id="_CPPv3N6marian3mlp5Dense5applyERKNSt6vectorI4ExprEE"></span><span id="_CPPv2N6marian3mlp5Dense5applyERKNSt6vectorI4ExprEE"></span><span id="marian::mlp::Dense::apply__std::vector:Expr:CR"></span><span class="target" id="classmarian_1_1mlp_1_1Dense_1a34727f34d26d0cbf692236bf0fe6ec18"></span><a class="reference internal" href="typedef_namespacemarian_1ac8ecc2cc66a7afcc6da94a9bbde5eaa7.html#_CPPv4N6marian4ExprE" title="marian::Expr">Expr</a> <code class="sig-name descname">apply</code><span class="sig-paren">(</span><em class="property">const</em> <a class="reference internal" href="function_group__graph__ops__mathematical_1gaf4e69a5f7167b63522135a1f6b8a5dd8.html#_CPPv4N6marianStE4Expri" title="marian::std">std</a>::vector&lt;<a class="reference internal" href="typedef_namespacemarian_1ac8ecc2cc66a7afcc6da94a9bbde5eaa7.html#_CPPv4N6marian4ExprE" title="marian::Expr">Expr</a>&gt; &amp;<em>inputs</em><span class="sig-paren">)</span><a class="headerlink" href="#_CPPv4N6marian3mlp5Dense5applyERKNSt6vectorI4ExprEE" title="Permalink to this definition">¶</a><br /></dt>
-<dd></dd></dl>
+<dd><p>Apply/Link a vector of dense layers (with the given inputs) to the expression graph. </p>
+<p><dl class="simple">
+<dt><strong>Return</strong></dt><dd><p>The expression holding the dense layers </p>
+</dd>
+<dt><strong>Parameters</strong></dt><dd><ul class="breatheparameterlist simple">
+<li><p><code class="docutils literal notranslate"><span class="pre">inputs</span></code>: The vector of the input expressions </p></li>
+</ul>
+</dd>
+</dl>
+</p>
+</dd></dl>
 
 <dl class="function">
 <dt id="_CPPv4N6marian3mlp5Dense5applyE4Expr">
 <span id="_CPPv3N6marian3mlp5Dense5applyE4Expr"></span><span id="_CPPv2N6marian3mlp5Dense5applyE4Expr"></span><span id="marian::mlp::Dense::apply__Expr"></span><span class="target" id="classmarian_1_1mlp_1_1Dense_1ae9446f6b4be37aade0f72812e4b60ce6"></span><a class="reference internal" href="typedef_namespacemarian_1ac8ecc2cc66a7afcc6da94a9bbde5eaa7.html#_CPPv4N6marian4ExprE" title="marian::Expr">Expr</a> <code class="sig-name descname">apply</code><span class="sig-paren">(</span><a class="reference internal" href="typedef_namespacemarian_1ac8ecc2cc66a7afcc6da94a9bbde5eaa7.html#_CPPv4N6marian4ExprE" title="marian::Expr">Expr</a> <em>input</em><span class="sig-paren">)</span><a class="headerlink" href="#_CPPv4N6marian3mlp5Dense5applyE4Expr" title="Permalink to this definition">¶</a><br /></dt>
-<dd></dd></dl>
+<dd><p>Apply/Link this dense layer (with the given input) to the expression graph. </p>
+<p><dl class="simple">
+<dt><strong>Return</strong></dt><dd><p>The expression holding the dense layer </p>
+</dd>
+<dt><strong>Parameters</strong></dt><dd><ul class="breatheparameterlist simple">
+<li><p><code class="docutils literal notranslate"><span class="pre">input</span></code>: The input expression </p></li>
+</ul>
+</dd>
+</dl>
+</p>
+</dd></dl>
 
 </div>
 </dd></dl>

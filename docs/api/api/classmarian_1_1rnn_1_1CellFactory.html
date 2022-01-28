@@ -4,7 +4,7 @@
   <meta charset="utf-8" /><meta name="generator" content="Docutils 0.17.1: http://docutils.sourceforge.net/" />
 
   <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-  <title>Class CellFactory &mdash; Marian NMT v1.10.27 2022-01-25 documentation</title><link rel="stylesheet" href="../_static/css/theme.css" type="text/css" />
+  <title>Class CellFactory &mdash; Marian NMT v1.10.28 2022-01-28 documentation</title><link rel="stylesheet" href="../_static/css/theme.css" type="text/css" />
     <link rel="stylesheet" href="../_static/pygments.css" type="text/css" />
       <link rel="stylesheet" href="../_static/css/custom.css" type="text/css" />
       <link rel="stylesheet" href="../_static/collapsible-lists/css/tree_view.css" type="text/css" />
@@ -36,7 +36,7 @@
             <a href="../index.html" class="icon icon-home"> Marian NMT
           </a>
               <div class="version">
-                v1.10.27
+                v1.10.28
               </div>
 <div role="search">
   <form id="rtd-search-form" class="wy-form" action="../search.html" method="get">
@@ -49,7 +49,9 @@
               <p><span class="caption-text">Contents:</span></p>
 <ul>
 <li class="toctree-l1"><a class="reference internal" href="../graph.html">Expression graphs</a></li>
-<li class="toctree-l1"><a class="reference internal" href="../operators.html">Operations in the Expression Graph</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../operators.html">Operations in the expression graph</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../layer.html">Layers</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../factors.html">Using Marian with factors</a></li>
 <li class="toctree-l1"><a class="reference internal" href="library_index.html">Library API</a></li>
 <li class="toctree-l1"><a class="reference internal" href="../contributing.html">How to contribute to Marian</a></li>
 <li class="toctree-l1"><a class="reference internal" href="../doc_guide.html">Writing documentation</a></li>
@@ -105,7 +107,9 @@
 <dl class="class">
 <dt id="_CPPv4N6marian3rnn11CellFactoryE">
 <span id="_CPPv3N6marian3rnn11CellFactoryE"></span><span id="_CPPv2N6marian3rnn11CellFactoryE"></span><span id="marian::rnn::CellFactory"></span><span class="target" id="classmarian_1_1rnn_1_1CellFactory"></span><em class="property">class </em><code class="sig-name descname">CellFactory</code> : <em class="property">public</em> marian::<a class="reference internal" href="classmarian_1_1Factory.html#_CPPv4N6marian7FactoryE" title="marian::Factory">Factory</a><a class="headerlink" href="#_CPPv4N6marian3rnn11CellFactoryE" title="Permalink to this definition">¶</a><br /></dt>
-<dd><p>Subclassed by <a class="reference internal" href="classmarian_1_1rnn_1_1StackedCellFactory.html#classmarian_1_1rnn_1_1StackedCellFactory"><span class="std std-ref">marian::rnn::StackedCellFactory</span></a></p>
+<dd><p>Base class for constructing RNN cells. </p>
+<p>RNN cells only process a single timestep instead of the whole batches of input sequences. There are nine types of RNN cells provided by Marian, i.e., <code class="docutils literal notranslate"><span class="pre">gru</span></code>, <code class="docutils literal notranslate"><span class="pre">gru-nematus</span></code>, <code class="docutils literal notranslate"><span class="pre">lstm</span></code>, <code class="docutils literal notranslate"><span class="pre">mlstm</span></code>, <code class="docutils literal notranslate"><span class="pre">mgru</span></code>, <code class="docutils literal notranslate"><span class="pre">tanh</span></code>, <code class="docutils literal notranslate"><span class="pre">relu</span></code>, <code class="docutils literal notranslate"><span class="pre">sru</span></code>, <code class="docutils literal notranslate"><span class="pre">ssru</span></code>. </p>
+<p>Subclassed by <a class="reference internal" href="classmarian_1_1rnn_1_1StackedCellFactory.html#classmarian_1_1rnn_1_1StackedCellFactory"><span class="std std-ref">marian::rnn::StackedCellFactory</span></a></p>
 <div class="breathe-sectiondef docutils container">
 <p class="breathe-sectiondef-title rubric">Public Functions</p>
 <dl class="function">

@@ -15,7 +15,6 @@ Program Listing for File factory.h
    #include "marian.h"
    
    namespace marian {
-   
    class Factory : public std::enable_shared_from_this<Factory> {
    protected:
      Ptr<Options> options_;
@@ -80,8 +79,6 @@ Program Listing for File factory.h
      template <class Cast>
      inline bool is() { return std::dynamic_pointer_cast<Cast>(shared_from_this()) != nullptr; }
    };
-   
-   // simplest form of Factory that just passes on options to the constructor of a layer type
    template<class Class>
    struct ConstructingFactory : public Factory {
      using Factory::Factory;

@@ -4,7 +4,7 @@
   <meta charset="utf-8" /><meta name="generator" content="Docutils 0.17.1: http://docutils.sourceforge.net/" />
 
   <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-  <title>Class MLPFactory &mdash; Marian NMT v1.10.27 2022-01-25 documentation</title><link rel="stylesheet" href="../_static/css/theme.css" type="text/css" />
+  <title>Class MLPFactory &mdash; Marian NMT v1.10.28 2022-01-28 documentation</title><link rel="stylesheet" href="../_static/css/theme.css" type="text/css" />
     <link rel="stylesheet" href="../_static/pygments.css" type="text/css" />
       <link rel="stylesheet" href="../_static/css/custom.css" type="text/css" />
       <link rel="stylesheet" href="../_static/collapsible-lists/css/tree_view.css" type="text/css" />
@@ -36,7 +36,7 @@
             <a href="../index.html" class="icon icon-home"> Marian NMT
           </a>
               <div class="version">
-                v1.10.27
+                v1.10.28
               </div>
 <div role="search">
   <form id="rtd-search-form" class="wy-form" action="../search.html" method="get">
@@ -49,7 +49,9 @@
               <p><span class="caption-text">Contents:</span></p>
 <ul>
 <li class="toctree-l1"><a class="reference internal" href="../graph.html">Expression graphs</a></li>
-<li class="toctree-l1"><a class="reference internal" href="../operators.html">Operations in the Expression Graph</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../operators.html">Operations in the expression graph</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../layer.html">Layers</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../factors.html">Using Marian with factors</a></li>
 <li class="toctree-l1"><a class="reference internal" href="library_index.html">Library API</a></li>
 <li class="toctree-l1"><a class="reference internal" href="../contributing.html">How to contribute to Marian</a></li>
 <li class="toctree-l1"><a class="reference internal" href="../doc_guide.html">Writing documentation</a></li>
@@ -115,17 +117,47 @@
 <dl class="function">
 <dt id="_CPPv4N6marian3mlp10MLPFactory9constructE3PtrI15ExpressionGraphE">
 <span id="_CPPv3N6marian3mlp10MLPFactory9constructE3PtrI15ExpressionGraphE"></span><span id="_CPPv2N6marian3mlp10MLPFactory9constructE3PtrI15ExpressionGraphE"></span><span id="marian::mlp::MLPFactory::construct__Ptr:ExpressionGraph:"></span><span class="target" id="classmarian_1_1mlp_1_1MLPFactory_1ae1d5455cd7bf4843e38330a3f614edf8"></span><a class="reference internal" href="typedef_namespacemarian_1ad1a373be43a00ef9ce35666145137b08.html#_CPPv4N6marian3PtrE" title="marian::Ptr">Ptr</a>&lt;<a class="reference internal" href="classmarian_1_1mlp_1_1MLP.html#_CPPv4N6marian3mlp3MLPE" title="marian::mlp::MLP">MLP</a>&gt; <code class="sig-name descname">construct</code><span class="sig-paren">(</span><a class="reference internal" href="typedef_namespacemarian_1ad1a373be43a00ef9ce35666145137b08.html#_CPPv4N6marian3PtrE" title="marian::Ptr">Ptr</a>&lt;<a class="reference internal" href="classmarian_1_1ExpressionGraph.html#_CPPv4N6marian15ExpressionGraphE" title="marian::ExpressionGraph">ExpressionGraph</a>&gt; <em>graph</em><span class="sig-paren">)</span><a class="headerlink" href="#_CPPv4N6marian3mlp10MLPFactory9constructE3PtrI15ExpressionGraphE" title="Permalink to this definition">¶</a><br /></dt>
-<dd></dd></dl>
+<dd><p>Create a <a class="reference internal" href="classmarian_1_1mlp_1_1MLP.html#classmarian_1_1mlp_1_1MLP"><span class="std std-ref">MLP</span></a> container instance in the expression graph. </p>
+<p>Used to accumulate options for later lazy construction. <dl class="simple">
+<dt><strong>Return</strong></dt><dd><p>The shared pointer to the <a class="reference internal" href="classmarian_1_1mlp_1_1MLP.html#classmarian_1_1mlp_1_1MLP"><span class="std std-ref">MLP</span></a> container </p>
+</dd>
+<dt><strong>Parameters</strong></dt><dd><ul class="breatheparameterlist simple">
+<li><p><code class="docutils literal notranslate"><span class="pre">graph</span></code>: The expression graph </p></li>
+</ul>
+</dd>
+</dl>
+</p>
+</dd></dl>
 
 <dl class="function">
 <dt id="_CPPv4I0EN6marian3mlp10MLPFactory9push_backE11AccumulatorI10MLPFactoryERK2LF">
 <span id="_CPPv3I0EN6marian3mlp10MLPFactory9push_backERK2LF"></span><span id="_CPPv2I0EN6marian3mlp10MLPFactory9push_backERK2LF"></span><span class="target" id="classmarian_1_1mlp_1_1MLPFactory_1a7920938cb7287430fd3f8feac3f9729d"></span>template&lt;class <code class="sig-name descname">LF</code>&gt;<br />Accumulator&lt;<a class="reference internal" href="#_CPPv4N6marian3mlp10MLPFactoryE" title="marian::mlp::MLPFactory">MLPFactory</a>&gt; <code class="sig-name descname">push_back</code><span class="sig-paren">(</span><em class="property">const</em> <a class="reference internal" href="#_CPPv4I0EN6marian3mlp10MLPFactory9push_backE11AccumulatorI10MLPFactoryERK2LF" title="marian::mlp::MLPFactory::push_back::LF">LF</a> &amp;<em>lf</em><span class="sig-paren">)</span><a class="headerlink" href="#_CPPv4I0EN6marian3mlp10MLPFactory9push_backE11AccumulatorI10MLPFactoryERK2LF" title="Permalink to this definition">¶</a><br /></dt>
-<dd></dd></dl>
+<dd><p>Stack a layer to the mlp container. </p>
+<p><dl class="simple">
+<dt><strong>Return</strong></dt><dd><p>The <a class="reference internal" href="classmarian_1_1Accumulator.html#classmarian_1_1Accumulator"><span class="std std-ref">Accumulator</span></a> object holding the mlp container </p>
+</dd>
+<dt><strong>Parameters</strong></dt><dd><ul class="breatheparameterlist simple">
+<li><p><code class="docutils literal notranslate"><span class="pre">lf</span></code>: The layer </p></li>
+</ul>
+</dd>
+</dl>
+</p>
+</dd></dl>
 
 <dl class="function">
 <dt id="_CPPv4N6marian3mlp10MLPFactory9push_backERK11AccumulatorI13OutputFactoryE">
 <span id="_CPPv3N6marian3mlp10MLPFactory9push_backERK11AccumulatorI13OutputFactoryE"></span><span id="_CPPv2N6marian3mlp10MLPFactory9push_backERK11AccumulatorI13OutputFactoryE"></span><span id="marian::mlp::MLPFactory::push_back__Accumulator:OutputFactory:CR"></span><span class="target" id="classmarian_1_1mlp_1_1MLPFactory_1aa3cde4fcce1a6b47c6f69fa2a0de423f"></span>Accumulator&lt;<a class="reference internal" href="#_CPPv4N6marian3mlp10MLPFactoryE" title="marian::mlp::MLPFactory">MLPFactory</a>&gt; <code class="sig-name descname">push_back</code><span class="sig-paren">(</span><em class="property">const</em> Accumulator&lt;<a class="reference internal" href="classmarian_1_1mlp_1_1OutputFactory.html#_CPPv4N6marian3mlp13OutputFactoryE" title="marian::mlp::OutputFactory">OutputFactory</a>&gt; &amp;<em>lf</em><span class="sig-paren">)</span><a class="headerlink" href="#_CPPv4N6marian3mlp10MLPFactory9push_backERK11AccumulatorI13OutputFactoryE" title="Permalink to this definition">¶</a><br /></dt>
-<dd></dd></dl>
+<dd><p>Stack a mlp output layer to the mlp container. </p>
+<p><dl class="simple">
+<dt><strong>Return</strong></dt><dd><p>The <a class="reference internal" href="classmarian_1_1Accumulator.html#classmarian_1_1Accumulator"><span class="std std-ref">Accumulator</span></a> object holding the mlp container </p>
+</dd>
+<dt><strong>Parameters</strong></dt><dd><ul class="breatheparameterlist simple">
+<li><p><code class="docutils literal notranslate"><span class="pre">lf</span></code>: The mlp output layer </p></li>
+</ul>
+</dd>
+</dl>
+</p>
+</dd></dl>
 
 </div>
 </dd></dl>

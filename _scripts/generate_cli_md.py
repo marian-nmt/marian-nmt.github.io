@@ -14,6 +14,7 @@ It enables the follow tags:
 
 from collections import defaultdict
 import argparse
+import re
 import os
 import sys
 
@@ -94,9 +95,12 @@ def parse_help(help_file):
             # Skip empty
             continue
 
+        if is_block(mode):
+            line = re.sub(r"^\s{2}", "", line)
+
         # Append line to mode
         if mode >= 0:
-            output[modes[mode]].append(line.strip())
+            output[modes[mode]].append(line.rstrip())
 
     # Tidy up blocks
     if is_block(mode):

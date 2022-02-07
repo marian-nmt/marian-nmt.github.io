@@ -48,11 +48,8 @@ $(MARIAN)/marian.sha:
 
 ## Build CLI markdown file
 docs/cmd/%.md: docs/cmd/_template.tmp $(MARIAN)/%.version $(MARIAN)/%.help
-	sed "s/<COMMAND>/$*/" $< > $@
-	echo "Version: " >> $@
-	cat $(MARIAN)/$*.version >> $@
-	echo "" >> $@
-	cat $(MARIAN)/$*.help | bash _scripts/help2markdown.sh | python _scripts/wrap_help.py >> $@
+	python _scripts/generate_cli_md.py $* $(MARIAN)/$*.version $(MARIAN)/$*.help \
+	| python _scripts/wrap_help.py > $@
 
 ## Compile Marian
 $(MARIAN):

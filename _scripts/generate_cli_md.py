@@ -75,6 +75,7 @@ def parse_help(help_file):
         # Set usage mode
         if line.startswith("Usage:"):
             mode = 1
+            line = line.replace("Usage: ","")
 
         # Set options mode
         if line.strip().endswith("options:"):

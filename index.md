@@ -89,7 +89,8 @@ Research and Innovation Programme under grant agreements No
 644402 (<a target="_blank" href="http://www.himl.eu/">HimL</a>; 2015-2017),
 825303 (<a target="_blank" href="https://browser.mt/">Bergamot</a>; 2019-2021),
 825627 (<a target="_blank" href="https://european-language-grid.eu/">ELG</a>; 2019-2021),
-
+the European Union's Connecting Europe Facility project
+2019-EU-IA-0045 (<a target="_blank" href="https://marian-project.eu/">User-focused Marian</a>; 2020-2022),
 the Amazon Academic Research Awards program,
 the World Intellectual Property Organization,
 the eBay Research and University Partnership for Technology program,

@@ -40,28 +40,6 @@ for [previous releases]({% link docs/cmd/index.md %}).
 
 
 
-### Model types
-
-- `s2s`: An RNN-based encoder-decoder model with attention mechanism. The
-  architecture is equivalent to the
-  [DL4MT](https://github.com/nyu-dl/dl4mt-tutorial) or
-  [Nematus](https://github.com/EdinburghNLP/nematus) models ([Senrich et al.,
-  2017](https://arxiv.org/abs/1703.04357)).
-- `transformer`: A model originally proposed by Google [(Vaswani et al.,
-  2017)](https://arxiv.org/abs/1706.03762) based solely on attention mechanisms.
-- `multi-s2s`: As `s2s`, but uses two or more encoders allowing multi-source
-  neural machine translation.
-- `multi-transformer`: As `transformer`, but uses multiple encoders.
-- `amun`: A model equivalent to Nematus models unless layer normalization is
-  used. Can be decoded with Amun as _nematus_ model type.
-- `nematus`: A model type developed for decoding deep RNN-based encoder-decoder
-  models created by the Edinburgh MT group for WMT 2017 using Nematus toolkit.
-  Can be decoded with Amun as _nematus2_ model type.
-- `lm`: An RNN language model.
-- `lm-transformer`: An transformer-based language model.
-
-
-
 ### Developer API
 
 [The developer documentation for Marian]({{ 'docs/api/' | relative_url }}) is
@@ -283,6 +261,28 @@ Command-line options overwrite options stored in the configuration file.
 
 
 
+### Model types
+
+- `s2s`: An RNN-based encoder-decoder model with attention mechanism. The
+  architecture is equivalent to the
+  [DL4MT](https://github.com/nyu-dl/dl4mt-tutorial) or
+  [Nematus](https://github.com/EdinburghNLP/nematus) models ([Senrich et al.,
+  2017](https://arxiv.org/abs/1703.04357)).
+- `transformer`: A model originally proposed by Google [(Vaswani et al.,
+  2017)](https://arxiv.org/abs/1706.03762) based solely on attention mechanisms.
+- `multi-s2s`: As `s2s`, but uses two or more encoders allowing multi-source
+  neural machine translation.
+- `multi-transformer`: As `transformer`, but uses multiple encoders.
+- `amun`: A model equivalent to Nematus models unless layer normalization is
+  used. Can be decoded with Amun as _nematus_ model type.
+- `nematus`: A model type developed for decoding deep RNN-based encoder-decoder
+  models created by the Edinburgh MT group for WMT 2017 using Nematus toolkit.
+  Can be decoded with Amun as _nematus2_ model type.
+- `lm`: An RNN language model.
+- `lm-transformer`: An transformer-based language model.
+
+
+
 ### Multi-GPU training
 
 For multi-GPU training you only need to specify the device ids of the GPUs you
@@ -489,6 +489,11 @@ words in the corresponding target training sentence.
 
 
 
+### Tied embeddings
+
+TODO
+
+
 ### Custom embeddings
 
 Marian can handle custom embedding vectors trained with
@@ -516,6 +521,21 @@ Other options for managing embedding vectors:
 - `--embedding-fix-trg` fixes target embeddings in all decoders
 - `--embedding-normalization` normalizes vector values into [-1,1] range
 
+
+
+### Model pre-training
+
+TODO
+
+
+### Fine-tuning
+
+TODO
+
+
+### Right-to-left models
+
+TODO
 
 
 ### Guided alignment
@@ -549,6 +569,31 @@ Marian has a few more options related to guided alignment training:
 - `--guided-alignment-weight` - weight for guided alignment cost
 - `--transformer-guided-alignment-layer` - number of layer to use for guided
   alignment training; only for training transformer models
+
+
+### Pre-defined architecture settings
+
+TODO
+
+
+### Factored models
+
+TODO
+
+
+### FP16 training
+
+TODO
+
+
+### Multi-node training
+
+TODO
+
+
+### Training from stdin
+
+TODO
 
 
 
@@ -693,6 +738,21 @@ directory contains `fast_align` and `atools` from
 [fast_align](https://github.com/clab/fast_align) and `extract_lex` from
 [extract-lex](https://github.com/marian-nmt/extract-lex).
 
+
+
+### Word-level scores
+
+TODO
+
+
+### Noisy back-translation
+
+TODO
+
+
+### Binary models
+
+TODO
 
 
 ### Web server

@@ -571,30 +571,106 @@ Marian has a few more options related to guided alignment training:
   alignment training; only for training transformer models
 
 
-### Pre-defined architecture settings
+### Pre-defined configurations
 
-TODO
+Marian provides the `--task` options, which is a handy shortcut for setting
+model architecture and training options for common NMT model configurations.
+The list of predefined configurations includes:
+
+- `best-deep` - the RNN BiDeep architecture proposed by [Miceli Barone et al.
+  (2017)](http://www.aclweb.org/anthology/W17-4710)
+- `transformer-base` and `transformer-big` - architectures and proposed
+  training settings for a Transformer "base" model and Transformer "big" model,
+  respectively, both introduced in [Vaswani et al.
+  (2019)](https://papers.nips.cc/paper/7181-attention-is-all-you-need.pdf)
+- `transformer-base-prenorm` and `transformer-big-prenorm` - variants of two
+  Transformer models with "prenorm", i.e. the layer normalization is performed
+  as the first block-wise preprocessing step.
+
+Options that are automatically set via `--task <arg>` can be overwritten by
+separately specifying those options in the command line. For example, `--task
+transformer-base --dim-emb 1024` will train a transformer "base" but with the
+embedding size of 1024 instead of 512.
 
 
 ### Factored models
 
-TODO
+Marian supports training models with source and/or target side factors. To
+train a factored model, the training data needs to be in a specific format, and
+a special vocabulary is required.  More information on using Marian with
+factors can be found in [the documentation on factored
+models](https://marian-nmt.github.io/docs/api/factors).
 
 
-### FP16 training
+### Mixed precision training
 
-TODO
+Marian supports mixed precision training available in NVIDIA Volta and newer
+architectures. The option `--fp16` provides a shortcut with default settings
+for mixed precision training with float16 and cost-scaling.
+
+Other options related to mixed precision training:
+
+- `--precision` - defines types for forward/backward pass and optimization,
+- `--cost-scaling` - option values for dynamic cost scaling,
+- `--gradient-norm-average` - window size over which the exponential average of
+  the gradient norm is recorded,
+- `--dynamic-gradient-scaling` - re-scale gradient to have average gradient
+  norm if (log) gradient norm diverges from average by the given sigmas,
+- `--check-gradient-nan` - skip parameter update in case of NaNs in gradient.
 
 
+<!--
 ### Multi-node training
-
-TODO
+-->
 
 
 ### Training from stdin
 
-TODO
+Parallel training data can be provided to Marian in a tab-separated file, where
+commonly the first field corresponds to the source side and the second field
+corresponds to the target side of the parallel corpus, for example, instead of
+providing two files to `--train-sets`:
 
+```
+./build/marian -c config.yml -t file.src file.trg
+```
+
+a single file can be specified with `--tsv` option:
+```
+./build/marian -c config.yml --tsv -t file.src-trg
+```
+
+The example can be further extended to train from the corpus provided directly
+into the standard input:
+
+```
+paste file.src file.trg | ./build/marian -c config.yml -t stdin --no-shuffle
+```
+
+This might be useful when using a custom tool for training data preparation.
+Note that the user takes responsibility for randomizing the input data - this
+is why `--no-shuffle` is added to the training command (alternatively,
+`--shuffle batches` can be used).
+
+#### Logical epochs
+
+The notion of an epoch is less clear when providing the training data into
+stdin as the corpus cannot be easily rewinded and shuffled by Marian. Thus, it
+is possible to define a logical epoch in terms of the number of updates or
+labes, for example `--logical-epoch 1Gt` will re-define the epoch as 1 billion
+target tokens, instead of the traditional one pass over the training data. This
+is especially useful if the data can be provided in an invinite stream into
+stdin.
+
+#### Guided alignment and data weighting
+
+Training with guided alignment and data weighting is supported when providing
+the corpus in stdin. Simply add new fields to the input TSV file and specify
+the indices of fields with word alignments or weights. For example:
+
+```
+cat file.src-trg-aln-w | ./build/marian -t stdin --guided-alignment 2 --data-weighting 3
+```
 
 
 ## Translation

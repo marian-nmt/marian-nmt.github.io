@@ -578,8 +578,10 @@ model with a pre-trained language model or deep models with shallow models.
 ### Right-to-left models
 
 Marian provides an option for training on reversed input sequence via
-`--right-left`. Combining a traditional left-to-right models and right-to-left
-models may lead to an improved performance for some tasks.
+`--right-left`. Combining traditional left-to-right models and right-to-left
+models may lead to an improved performance for some tasks. One such approach
+would be to perform sequential decoding. However, combining left-to-right and
+right-to-left models together in an ensemble is not possible.
 
 
 ### Guided alignment
@@ -703,7 +705,7 @@ stdin as the corpus cannot be easily rewinded and shuffled by Marian. Thus, it
 is possible to define a logical epoch in terms of the number of updates or
 labes, for example `--logical-epoch 1Gt` will re-define the epoch as 1 billion
 target tokens, instead of the traditional one pass over the training data. This
-is especially useful if the data can be provided in an invinite stream into
+is especially useful if the data can be provided in an infinite stream into
 stdin.
 
 #### Guided alignment and data weighting
@@ -888,15 +890,15 @@ The option `--word-scores` is also available in `marian-scorer`.
 
 ### Noisy back-translation
 
-The `--output-sampling` option in Marian allows to noise output layer with
-gumbel noise, which can be used for generating [noisy
+The `--output-sampling` option in Marian allows one to noise the output layer
+with gumbel noise, which can be used for generating [noisy
 back-translations](https://aclanthology.org/D18-1045.pdf).
 ```
 ./build/marian-decoder -b 1 -i input.src --output-sampling
 ```
 
-By default the sampling is from full model distribution. Top-k sampling can be
-achieved providing `topk N` as arguments, for example:
+By default the sampling is from the full model distribution. Top-k sampling can
+be achieved providing `topk N` as arguments, for example:
 ```
 ./build/marian-decoder -b 1 -i input.src --output-sampling topk 10
 ```

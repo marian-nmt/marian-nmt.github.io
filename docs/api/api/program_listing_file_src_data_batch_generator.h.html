@@ -4,7 +4,7 @@
   <meta charset="utf-8" /><meta name="generator" content="Docutils 0.17.1: http://docutils.sourceforge.net/" />
 
   <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-  <title>Program Listing for File batch_generator.h &mdash; Marian NMT v1.10.28 2022-01-28 documentation</title><link rel="stylesheet" href="../_static/css/theme.css" type="text/css" />
+  <title>Program Listing for File batch_generator.h &mdash; Marian NMT v1.11.3 2022-02-11 documentation</title><link rel="stylesheet" href="../_static/css/theme.css" type="text/css" />
     <link rel="stylesheet" href="../_static/pygments.css" type="text/css" />
       <link rel="stylesheet" href="../_static/css/custom.css" type="text/css" />
       <link rel="stylesheet" href="../_static/collapsible-lists/css/tree_view.css" type="text/css" />
@@ -34,7 +34,7 @@
             <a href="../index.html" class="icon icon-home"> Marian NMT
           </a>
               <div class="version">
-                v1.10.28
+                v1.11.3
               </div>
 <div role="search">
   <form id="rtd-search-form" class="wy-form" action="../search.html" method="get">
@@ -46,6 +46,7 @@
         </div><div class="wy-menu wy-menu-vertical" data-spy="affix" role="navigation" aria-label="Navigation menu">
               <p><span class="caption-text">Contents:</span></p>
 <ul>
+<li class="toctree-l1"><a class="reference internal" href="../structure.html">Code Organisation</a></li>
 <li class="toctree-l1"><a class="reference internal" href="../graph.html">Expression graphs</a></li>
 <li class="toctree-l1"><a class="reference internal" href="../operators.html">Operations in the expression graph</a></li>
 <li class="toctree-l1"><a class="reference internal" href="../layer.html">Layers</a></li>
@@ -86,6 +87,7 @@
 
 <span class="cp">#include</span><span class="w"> </span><span class="cpf">&quot;common/options.h&quot;</span><span class="cp"></span>
 <span class="cp">#include</span><span class="w"> </span><span class="cpf">&quot;common/signal_handling.h&quot;</span><span class="cp"></span>
+<span class="cp">#include</span><span class="w"> </span><span class="cpf">&quot;common/timer.h&quot;</span><span class="cp"></span>
 <span class="cp">#include</span><span class="w"> </span><span class="cpf">&quot;data/batch_stats.h&quot;</span><span class="cp"></span>
 <span class="cp">#include</span><span class="w"> </span><span class="cpf">&quot;data/rng_engine.h&quot;</span><span class="cp"></span>
 <span class="cp">#include</span><span class="w"> </span><span class="cpf">&quot;training/training_state.h&quot;</span><span class="cp"></span>
@@ -176,6 +178,8 @@
 
 <span class="w">  </span><span class="c1">// this runs on a bg thread; sequencing is handled by caller, but locking is done in here</span>
 <span class="w">  </span><span class="n">std</span><span class="o">::</span><span class="n">deque</span><span class="o">&lt;</span><span class="n">BatchPtr</span><span class="o">&gt;</span><span class="w"> </span><span class="n">fetchBatches</span><span class="p">()</span><span class="w"> </span><span class="p">{</span><span class="w"></span>
+<span class="w">    </span><span class="n">timer</span><span class="o">::</span><span class="n">Timer</span><span class="w"> </span><span class="n">total</span><span class="p">;</span><span class="w"></span>
+
 <span class="w">    </span><span class="k">typedef</span><span class="w"> </span><span class="k">typename</span><span class="w"> </span><span class="nc">Sample</span><span class="o">::</span><span class="n">value_type</span><span class="w"> </span><span class="n">Item</span><span class="p">;</span><span class="w"></span>
 <span class="w">    </span><span class="k">auto</span><span class="w"> </span><span class="n">itemCmp</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="p">[](</span><span class="k">const</span><span class="w"> </span><span class="n">Item</span><span class="o">&amp;</span><span class="w"> </span><span class="n">sa</span><span class="p">,</span><span class="w"> </span><span class="k">const</span><span class="w"> </span><span class="n">Item</span><span class="o">&amp;</span><span class="w"> </span><span class="n">sb</span><span class="p">)</span><span class="w"> </span><span class="p">{</span><span class="w"> </span><span class="k">return</span><span class="w"> </span><span class="n">sa</span><span class="p">.</span><span class="n">size</span><span class="p">()</span><span class="w"> </span><span class="o">&lt;</span><span class="w"> </span><span class="n">sb</span><span class="p">.</span><span class="n">size</span><span class="p">();</span><span class="w"> </span><span class="p">};</span><span class="w"> </span><span class="c1">// sort by element length, not content</span>
 
@@ -219,19 +223,29 @@
 <span class="w">      </span><span class="k">if</span><span class="p">(</span><span class="n">current_</span><span class="w"> </span><span class="o">!=</span><span class="w"> </span><span class="n">data_</span><span class="o">-&gt;</span><span class="n">end</span><span class="p">())</span><span class="w"></span>
 <span class="w">        </span><span class="o">++</span><span class="n">current_</span><span class="p">;</span><span class="w"></span>
 <span class="w">    </span><span class="p">}</span><span class="w"></span>
-<span class="w">    </span><span class="kt">size_t</span><span class="w"> </span><span class="n">sets</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="mi">0</span><span class="p">;</span><span class="w"></span>
-<span class="w">    </span><span class="k">while</span><span class="p">(</span><span class="n">current_</span><span class="w"> </span><span class="o">!=</span><span class="w"> </span><span class="n">data_</span><span class="o">-&gt;</span><span class="n">end</span><span class="p">()</span><span class="w"> </span><span class="o">&amp;&amp;</span><span class="w"> </span><span class="n">maxiBatch</span><span class="o">-&gt;</span><span class="n">size</span><span class="p">()</span><span class="w"> </span><span class="o">&lt;</span><span class="w"> </span><span class="n">maxSize</span><span class="p">)</span><span class="w"> </span><span class="p">{</span><span class="w"> </span><span class="c1">// loop over data</span>
+
+<span class="w">    </span><span class="n">Samples</span><span class="w"> </span><span class="n">maxiBatchTemp</span><span class="p">;</span><span class="w"></span>
+<span class="w">    </span><span class="k">while</span><span class="p">(</span><span class="n">current_</span><span class="w"> </span><span class="o">!=</span><span class="w"> </span><span class="n">data_</span><span class="o">-&gt;</span><span class="n">end</span><span class="p">()</span><span class="w"> </span><span class="o">&amp;&amp;</span><span class="w"> </span><span class="n">maxiBatchTemp</span><span class="p">.</span><span class="n">size</span><span class="p">()</span><span class="w"> </span><span class="o">&lt;</span><span class="w"> </span><span class="n">maxSize</span><span class="p">)</span><span class="w"> </span><span class="p">{</span><span class="w"> </span><span class="c1">// loop over data</span>
 <span class="w">      </span><span class="k">if</span><span class="w"> </span><span class="p">(</span><span class="n">saveAndExitRequested</span><span class="p">())</span><span class="w"> </span><span class="c1">// stop generating batches</span>
 <span class="w">        </span><span class="k">return</span><span class="w"> </span><span class="n">std</span><span class="o">::</span><span class="n">deque</span><span class="o">&lt;</span><span class="n">BatchPtr</span><span class="o">&gt;</span><span class="p">();</span><span class="w"></span>
-<span class="w">      </span><span class="n">maxiBatch</span><span class="o">-&gt;</span><span class="n">push</span><span class="p">(</span><span class="o">*</span><span class="n">current_</span><span class="p">);</span><span class="w"></span>
-<span class="w">      </span><span class="n">sets</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="n">current_</span><span class="o">-&gt;</span><span class="n">size</span><span class="p">();</span><span class="w"></span>
+
+<span class="w">      </span><span class="n">maxiBatchTemp</span><span class="p">.</span><span class="n">push_back</span><span class="p">(</span><span class="o">*</span><span class="n">current_</span><span class="p">);</span><span class="w"></span>
+
 <span class="w">      </span><span class="c1">// do not consume more than required for the maxi batch as this causes</span>
 <span class="w">      </span><span class="c1">// that line-by-line translation is delayed by one sentence</span>
-<span class="w">      </span><span class="kt">bool</span><span class="w"> </span><span class="n">last</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="n">maxiBatch</span><span class="o">-&gt;</span><span class="n">size</span><span class="p">()</span><span class="w"> </span><span class="o">==</span><span class="w"> </span><span class="n">maxSize</span><span class="p">;</span><span class="w"></span>
+<span class="w">      </span><span class="kt">bool</span><span class="w"> </span><span class="n">last</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="n">maxiBatchTemp</span><span class="p">.</span><span class="n">size</span><span class="p">()</span><span class="w"> </span><span class="o">==</span><span class="w"> </span><span class="n">maxSize</span><span class="p">;</span><span class="w"></span>
 <span class="w">      </span><span class="k">if</span><span class="p">(</span><span class="o">!</span><span class="n">last</span><span class="p">)</span><span class="w"></span>
 <span class="w">        </span><span class="o">++</span><span class="n">current_</span><span class="p">;</span><span class="w"> </span><span class="c1">// this actually reads the next line and pre-processes it</span>
 <span class="w">    </span><span class="p">}</span><span class="w"></span>
-<span class="w">    </span><span class="kt">size_t</span><span class="w"> </span><span class="n">numSentencesRead</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="n">maxiBatch</span><span class="o">-&gt;</span><span class="n">size</span><span class="p">();</span><span class="w"></span>
+<span class="w">    </span><span class="kt">size_t</span><span class="w"> </span><span class="n">numSentencesRead</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="n">maxiBatchTemp</span><span class="p">.</span><span class="n">size</span><span class="p">();</span><span class="w"></span>
+
+<span class="w">    </span><span class="kt">size_t</span><span class="w"> </span><span class="n">sets</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="mi">0</span><span class="p">;</span><span class="w"></span>
+<span class="w">    </span><span class="k">for</span><span class="p">(</span><span class="k">auto</span><span class="o">&amp;&amp;</span><span class="w"> </span><span class="n">s</span><span class="w"> </span><span class="o">:</span><span class="w"> </span><span class="n">maxiBatchTemp</span><span class="p">)</span><span class="w"> </span><span class="p">{</span><span class="w"></span>
+<span class="w">      </span><span class="k">if</span><span class="p">(</span><span class="o">!</span><span class="n">s</span><span class="p">.</span><span class="n">empty</span><span class="p">())</span><span class="w"> </span><span class="p">{</span><span class="w"></span>
+<span class="w">        </span><span class="n">sets</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="n">s</span><span class="p">.</span><span class="n">size</span><span class="p">();</span><span class="w"></span>
+<span class="w">        </span><span class="n">maxiBatch</span><span class="o">-&gt;</span><span class="n">push</span><span class="p">(</span><span class="n">s</span><span class="p">);</span><span class="w"></span>
+<span class="w">      </span><span class="p">}</span><span class="w"></span>
+<span class="w">    </span><span class="p">}</span><span class="w"></span>
 
 <span class="w">    </span><span class="c1">// construct the actual batches and place them in the queue</span>
 <span class="w">    </span><span class="n">Samples</span><span class="w"> </span><span class="n">batchVector</span><span class="p">;</span><span class="w"></span>
@@ -247,6 +261,7 @@
 <span class="w">    </span><span class="n">BatchStats</span><span class="o">::</span><span class="n">const_iterator</span><span class="w"> </span><span class="n">cachedStatsIter</span><span class="p">;</span><span class="w"></span>
 <span class="w">    </span><span class="k">if</span><span class="w"> </span><span class="p">(</span><span class="n">stats_</span><span class="p">)</span><span class="w"></span>
 <span class="w">      </span><span class="n">cachedStatsIter</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="n">stats_</span><span class="o">-&gt;</span><span class="n">begin</span><span class="p">();</span><span class="w"></span>
+
 <span class="w">    </span><span class="k">while</span><span class="p">(</span><span class="o">!</span><span class="n">maxiBatch</span><span class="o">-&gt;</span><span class="n">empty</span><span class="p">())</span><span class="w"> </span><span class="p">{</span><span class="w"> </span><span class="c1">// while there are sentences in the queue</span>
 <span class="w">      </span><span class="k">if</span><span class="w"> </span><span class="p">(</span><span class="n">saveAndExitRequested</span><span class="p">())</span><span class="w"> </span><span class="c1">// stop generating batches</span>
 <span class="w">        </span><span class="k">return</span><span class="w"> </span><span class="n">std</span><span class="o">::</span><span class="n">deque</span><span class="o">&lt;</span><span class="n">BatchPtr</span><span class="o">&gt;</span><span class="p">();</span><span class="w"></span>
@@ -262,12 +277,7 @@
 <span class="w">            </span><span class="n">lengths</span><span class="p">[</span><span class="n">i</span><span class="p">]</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="n">batchVector</span><span class="p">.</span><span class="n">back</span><span class="p">()[</span><span class="n">i</span><span class="p">].</span><span class="n">size</span><span class="p">();</span><span class="w"> </span><span class="c1">// record max lengths so far</span>
 
 <span class="w">        </span><span class="n">maxBatchSize</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="n">stats_</span><span class="o">-&gt;</span><span class="n">findBatchSize</span><span class="p">(</span><span class="n">lengths</span><span class="p">,</span><span class="w"> </span><span class="n">cachedStatsIter</span><span class="p">);</span><span class="w"></span>
-<span class="w">        </span><span class="c1">// this optimization makes no difference indeed</span>
-<span class="cp">#if 0</span><span class="c">   // sanity check: would we find the same entry if searching from the start?</span>
-<span class="c">        auto it = stats_-&gt;lower_bound(lengths);</span>
-<span class="c">        auto maxBatchSize1 = stats_-&gt;findBatchSize(lengths, it);</span>
-<span class="c">        ABORT_IF(maxBatchSize != maxBatchSize1, &quot;findBatchSize iter caching logic is borked&quot;);</span>
-<span class="cp">#endif</span>
+
 <span class="w">        </span><span class="n">makeBatch</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="n">batchVector</span><span class="p">.</span><span class="n">size</span><span class="p">()</span><span class="w"> </span><span class="o">&gt;=</span><span class="w"> </span><span class="n">maxBatchSize</span><span class="p">;</span><span class="w"></span>
 <span class="w">        </span><span class="c1">// if last added sentence caused a bump then we likely have bad padding, so rather move it into the next batch</span>
 <span class="w">        </span><span class="k">if</span><span class="p">(</span><span class="n">batchVector</span><span class="p">.</span><span class="n">size</span><span class="p">()</span><span class="w"> </span><span class="o">&gt;</span><span class="w"> </span><span class="n">maxBatchSize</span><span class="p">)</span><span class="w"> </span><span class="p">{</span><span class="w"></span>
@@ -315,6 +325,8 @@
 <span class="w">    </span><span class="n">LOG</span><span class="p">(</span><span class="n">debug</span><span class="p">,</span><span class="w"> </span><span class="s">&quot;[data] fetched {} batches with {} sentences. Per batch: {} sentences, {} labels.&quot;</span><span class="p">,</span><span class="w"></span>
 <span class="w">        </span><span class="n">tempBatches</span><span class="p">.</span><span class="n">size</span><span class="p">(),</span><span class="w"> </span><span class="n">numSentencesRead</span><span class="p">,</span><span class="w"></span>
 <span class="w">        </span><span class="p">(</span><span class="kt">double</span><span class="p">)</span><span class="n">totalSent</span><span class="w"> </span><span class="o">/</span><span class="w"> </span><span class="p">(</span><span class="kt">double</span><span class="p">)</span><span class="n">totalDenom</span><span class="p">,</span><span class="w"> </span><span class="p">(</span><span class="kt">double</span><span class="p">)</span><span class="n">totalLabels</span><span class="w"> </span><span class="o">/</span><span class="w"> </span><span class="p">(</span><span class="kt">double</span><span class="p">)</span><span class="n">totalDenom</span><span class="p">);</span><span class="w"></span>
+<span class="w">    </span><span class="n">LOG</span><span class="p">(</span><span class="n">debug</span><span class="p">,</span><span class="w"> </span><span class="s">&quot;[data] fetching batches took {:.2f} seconds, {:.2f} sents/s&quot;</span><span class="p">,</span><span class="w"> </span><span class="n">total</span><span class="p">.</span><span class="n">elapsed</span><span class="p">(),</span><span class="w">  </span><span class="p">(</span><span class="kt">double</span><span class="p">)</span><span class="n">numSentencesRead</span><span class="w"> </span><span class="o">/</span><span class="w"> </span><span class="n">total</span><span class="p">.</span><span class="n">elapsed</span><span class="p">());</span><span class="w"></span>
+
 <span class="w">    </span><span class="k">return</span><span class="w"> </span><span class="n">tempBatches</span><span class="p">;</span><span class="w"></span>
 <span class="w">  </span><span class="p">}</span><span class="w"></span>
 

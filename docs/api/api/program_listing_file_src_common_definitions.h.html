@@ -4,7 +4,7 @@
   <meta charset="utf-8" /><meta name="generator" content="Docutils 0.17.1: http://docutils.sourceforge.net/" />
 
   <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-  <title>Program Listing for File definitions.h &mdash; Marian NMT v1.10.28 2022-01-28 documentation</title><link rel="stylesheet" href="../_static/css/theme.css" type="text/css" />
+  <title>Program Listing for File definitions.h &mdash; Marian NMT v1.11.3 2022-02-11 documentation</title><link rel="stylesheet" href="../_static/css/theme.css" type="text/css" />
     <link rel="stylesheet" href="../_static/pygments.css" type="text/css" />
       <link rel="stylesheet" href="../_static/css/custom.css" type="text/css" />
       <link rel="stylesheet" href="../_static/collapsible-lists/css/tree_view.css" type="text/css" />
@@ -34,7 +34,7 @@
             <a href="../index.html" class="icon icon-home"> Marian NMT
           </a>
               <div class="version">
-                v1.10.28
+                v1.11.3
               </div>
 <div role="search">
   <form id="rtd-search-form" class="wy-form" action="../search.html" method="get">
@@ -46,6 +46,7 @@
         </div><div class="wy-menu wy-menu-vertical" data-spy="affix" role="navigation" aria-label="Navigation menu">
               <p><span class="caption-text">Contents:</span></p>
 <ul>
+<li class="toctree-l1"><a class="reference internal" href="../structure.html">Code Organisation</a></li>
 <li class="toctree-l1"><a class="reference internal" href="../graph.html">Expression graphs</a></li>
 <li class="toctree-l1"><a class="reference internal" href="../operators.html">Operations in the expression graph</a></li>
 <li class="toctree-l1"><a class="reference internal" href="../layer.html">Layers</a></li>
@@ -94,7 +95,7 @@
 <span class="cp">#include</span><span class="w"> </span><span class="cpf">&lt;string&gt;</span><span class="cp"></span>
 <span class="cp">#include</span><span class="w"> </span><span class="cpf">&lt;vector&gt;</span><span class="cp"></span>
 
-<span class="cp">#define THREAD_GUARD(body) [&amp;]() { body; }() </span><span class="c1">// test if THREAD_GUARD is neccessary, remove if no problems occur.</span>
+<span class="cp">#define THREAD_GUARD(body) [&amp;]() { body; }() </span><span class="c1">// test if THREAD_GUARD is necessary, remove if no problems occur.</span>
 <span class="cp">#define NodeOp(op) [=]() { op; }</span>
 
 <span class="c1">// helper macro to disable optimization (gcc only)</span>
@@ -188,22 +189,22 @@
 <span class="k">using</span><span class="w"> </span><span class="n">Weak</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="n">std</span><span class="o">::</span><span class="n">weak_ptr</span><span class="o">&lt;</span><span class="n">T</span><span class="o">&gt;</span><span class="p">;</span><span class="w"></span>
 
 <span class="k">template</span><span class="w"> </span><span class="o">&lt;</span><span class="k">class</span><span class="w"> </span><span class="nc">T</span><span class="p">,</span><span class="w"> </span><span class="k">typename</span><span class="p">...</span><span class="w"> </span><span class="n">Args</span><span class="o">&gt;</span><span class="w"></span>
-<span class="n">Ptr</span><span class="o">&lt;</span><span class="n">T</span><span class="o">&gt;</span><span class="w"> </span><span class="n">New</span><span class="p">(</span><span class="n">Args</span><span class="o">&amp;&amp;</span><span class="p">...</span><span class="w"> </span><span class="n">args</span><span class="p">)</span><span class="w"> </span><span class="p">{</span><span class="w"></span>
-<span class="w">  </span><span class="k">return</span><span class="w"> </span><span class="n">Ptr</span><span class="o">&lt;</span><span class="n">T</span><span class="o">&gt;</span><span class="p">(</span><span class="k">new</span><span class="w"> </span><span class="n">T</span><span class="p">(</span><span class="n">std</span><span class="o">::</span><span class="n">forward</span><span class="o">&lt;</span><span class="n">Args</span><span class="o">&gt;</span><span class="p">(</span><span class="n">args</span><span class="p">)...));</span><span class="w"></span>
+<span class="kr">inline</span><span class="w"> </span><span class="n">Ptr</span><span class="o">&lt;</span><span class="n">T</span><span class="o">&gt;</span><span class="w"> </span><span class="n">New</span><span class="p">(</span><span class="n">Args</span><span class="o">&amp;&amp;</span><span class="p">...</span><span class="w"> </span><span class="n">args</span><span class="p">)</span><span class="w"> </span><span class="p">{</span><span class="w"></span>
+<span class="w">  </span><span class="k">return</span><span class="w"> </span><span class="n">std</span><span class="o">::</span><span class="n">make_shared</span><span class="o">&lt;</span><span class="n">T</span><span class="o">&gt;</span><span class="p">(</span><span class="n">std</span><span class="o">::</span><span class="n">forward</span><span class="o">&lt;</span><span class="n">Args</span><span class="o">&gt;</span><span class="p">(</span><span class="n">args</span><span class="p">)...);</span><span class="w"></span>
 <span class="p">}</span><span class="w"></span>
 
 <span class="k">template</span><span class="w"> </span><span class="o">&lt;</span><span class="k">class</span><span class="w"> </span><span class="nc">T</span><span class="o">&gt;</span><span class="w"></span>
-<span class="n">Ptr</span><span class="o">&lt;</span><span class="n">T</span><span class="o">&gt;</span><span class="w"> </span><span class="n">New</span><span class="p">(</span><span class="n">Ptr</span><span class="o">&lt;</span><span class="n">T</span><span class="o">&gt;</span><span class="w"> </span><span class="n">p</span><span class="p">)</span><span class="w"> </span><span class="p">{</span><span class="w"></span>
+<span class="kr">inline</span><span class="w"> </span><span class="n">Ptr</span><span class="o">&lt;</span><span class="n">T</span><span class="o">&gt;</span><span class="w"> </span><span class="n">New</span><span class="p">(</span><span class="n">Ptr</span><span class="o">&lt;</span><span class="n">T</span><span class="o">&gt;</span><span class="w"> </span><span class="n">p</span><span class="p">)</span><span class="w"> </span><span class="p">{</span><span class="w"></span>
 <span class="w">  </span><span class="k">return</span><span class="w"> </span><span class="n">Ptr</span><span class="o">&lt;</span><span class="n">T</span><span class="o">&gt;</span><span class="p">(</span><span class="n">p</span><span class="p">);</span><span class="w"></span>
 <span class="p">}</span><span class="w"></span>
 
 <span class="k">template</span><span class="w"> </span><span class="o">&lt;</span><span class="k">class</span><span class="w"> </span><span class="nc">T</span><span class="p">,</span><span class="w"> </span><span class="k">typename</span><span class="p">...</span><span class="w"> </span><span class="n">Args</span><span class="o">&gt;</span><span class="w"></span>
-<span class="n">IPtr</span><span class="o">&lt;</span><span class="n">T</span><span class="o">&gt;</span><span class="w"> </span><span class="n">INew</span><span class="p">(</span><span class="n">Args</span><span class="o">&amp;&amp;</span><span class="p">...</span><span class="w"> </span><span class="n">args</span><span class="p">)</span><span class="w"> </span><span class="p">{</span><span class="w"></span>
+<span class="kr">inline</span><span class="w"> </span><span class="n">IPtr</span><span class="o">&lt;</span><span class="n">T</span><span class="o">&gt;</span><span class="w"> </span><span class="n">INew</span><span class="p">(</span><span class="n">Args</span><span class="o">&amp;&amp;</span><span class="p">...</span><span class="w"> </span><span class="n">args</span><span class="p">)</span><span class="w"> </span><span class="p">{</span><span class="w"></span>
 <span class="w">  </span><span class="k">return</span><span class="w"> </span><span class="n">IPtr</span><span class="o">&lt;</span><span class="n">T</span><span class="o">&gt;</span><span class="p">(</span><span class="k">new</span><span class="w"> </span><span class="n">T</span><span class="p">(</span><span class="n">std</span><span class="o">::</span><span class="n">forward</span><span class="o">&lt;</span><span class="n">Args</span><span class="o">&gt;</span><span class="p">(</span><span class="n">args</span><span class="p">)...));</span><span class="w"></span>
 <span class="p">}</span><span class="w"></span>
 
 <span class="k">template</span><span class="w"> </span><span class="o">&lt;</span><span class="k">class</span><span class="w"> </span><span class="nc">T</span><span class="o">&gt;</span><span class="w"></span>
-<span class="n">IPtr</span><span class="o">&lt;</span><span class="n">T</span><span class="o">&gt;</span><span class="w"> </span><span class="n">INew</span><span class="p">(</span><span class="n">Ptr</span><span class="o">&lt;</span><span class="n">T</span><span class="o">&gt;</span><span class="w"> </span><span class="n">p</span><span class="p">)</span><span class="w"> </span><span class="p">{</span><span class="w"></span>
+<span class="kr">inline</span><span class="w"> </span><span class="n">IPtr</span><span class="o">&lt;</span><span class="n">T</span><span class="o">&gt;</span><span class="w"> </span><span class="n">INew</span><span class="p">(</span><span class="n">Ptr</span><span class="o">&lt;</span><span class="n">T</span><span class="o">&gt;</span><span class="w"> </span><span class="n">p</span><span class="p">)</span><span class="w"> </span><span class="p">{</span><span class="w"></span>
 <span class="w">  </span><span class="k">return</span><span class="w"> </span><span class="n">IPtr</span><span class="o">&lt;</span><span class="n">T</span><span class="o">&gt;</span><span class="p">(</span><span class="n">p</span><span class="p">);</span><span class="w"></span>
 <span class="p">}</span><span class="w"></span>
 

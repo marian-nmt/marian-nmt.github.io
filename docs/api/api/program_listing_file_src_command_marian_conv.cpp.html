@@ -4,7 +4,7 @@
   <meta charset="utf-8" /><meta name="generator" content="Docutils 0.17.1: http://docutils.sourceforge.net/" />
 
   <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-  <title>Program Listing for File marian_conv.cpp &mdash; Marian NMT v1.10.28 2022-01-28 documentation</title><link rel="stylesheet" href="../_static/css/theme.css" type="text/css" />
+  <title>Program Listing for File marian_conv.cpp &mdash; Marian NMT v1.11.3 2022-02-11 documentation</title><link rel="stylesheet" href="../_static/css/theme.css" type="text/css" />
     <link rel="stylesheet" href="../_static/pygments.css" type="text/css" />
       <link rel="stylesheet" href="../_static/css/custom.css" type="text/css" />
       <link rel="stylesheet" href="../_static/collapsible-lists/css/tree_view.css" type="text/css" />
@@ -34,7 +34,7 @@
             <a href="../index.html" class="icon icon-home"> Marian NMT
           </a>
               <div class="version">
-                v1.10.28
+                v1.11.3
               </div>
 <div role="search">
   <form id="rtd-search-form" class="wy-form" action="../search.html" method="get">
@@ -46,6 +46,7 @@
         </div><div class="wy-menu wy-menu-vertical" data-spy="affix" role="navigation" aria-label="Navigation menu">
               <p><span class="caption-text">Contents:</span></p>
 <ul>
+<li class="toctree-l1"><a class="reference internal" href="../structure.html">Code Organisation</a></li>
 <li class="toctree-l1"><a class="reference internal" href="../graph.html">Expression graphs</a></li>
 <li class="toctree-l1"><a class="reference internal" href="../operators.html">Operations in the expression graph</a></li>
 <li class="toctree-l1"><a class="reference internal" href="../layer.html">Layers</a></li>
@@ -170,11 +171,17 @@
 <span class="w">    </span><span class="n">graph</span><span class="o">-&gt;</span><span class="n">setDevice</span><span class="p">(</span><span class="n">CPU0</span><span class="p">);</span><span class="w"></span>
 <span class="w">    </span><span class="n">graph</span><span class="o">-&gt;</span><span class="n">load</span><span class="p">(</span><span class="n">modelFrom</span><span class="p">);</span><span class="w"></span>
 
+<span class="w">    </span><span class="n">std</span><span class="o">::</span><span class="n">vector</span><span class="o">&lt;</span><span class="n">lsh</span><span class="o">::</span><span class="n">ParamConvInfo</span><span class="o">&gt;</span><span class="w"> </span><span class="n">toBeLSHed</span><span class="p">;</span><span class="w"></span>
 <span class="w">    </span><span class="k">if</span><span class="p">(</span><span class="n">addLsh</span><span class="p">)</span><span class="w"> </span><span class="p">{</span><span class="w"></span>
 <span class="w">      </span><span class="c1">// Add dummy parameters for the LSH before the model gets actually initialized.</span>
 <span class="w">      </span><span class="c1">// This create the parameters with useless values in the tensors, but it gives us the memory we need.</span>
+<span class="w">      </span><span class="n">toBeLSHed</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="p">{</span><span class="w"></span>
+<span class="w">        </span><span class="p">{</span><span class="n">lshOutputWeights</span><span class="p">,</span><span class="w"> </span><span class="s">&quot;lsh_output_codes&quot;</span><span class="p">,</span><span class="w"> </span><span class="s">&quot;lsh_output_rotation&quot;</span><span class="p">,</span><span class="w"> </span><span class="n">lshNBits</span><span class="p">}</span><span class="w"></span>
+<span class="w">      </span><span class="p">};</span><span class="w"></span>
+
 <span class="w">      </span><span class="n">graph</span><span class="o">-&gt;</span><span class="n">setReloaded</span><span class="p">(</span><span class="nb">false</span><span class="p">);</span><span class="w"></span>
-<span class="w">      </span><span class="n">lsh</span><span class="o">::</span><span class="n">addDummyParameters</span><span class="p">(</span><span class="n">graph</span><span class="p">,</span><span class="w"> </span><span class="cm">/*weights=*/</span><span class="n">lshOutputWeights</span><span class="p">,</span><span class="w"> </span><span class="cm">/*nBits=*/</span><span class="n">lshNBits</span><span class="p">);</span><span class="w"></span>
+<span class="w">      </span><span class="k">for</span><span class="p">(</span><span class="k">auto</span><span class="w"> </span><span class="n">p</span><span class="w"> </span><span class="o">:</span><span class="w"> </span><span class="n">toBeLSHed</span><span class="p">)</span><span class="w"></span>
+<span class="w">        </span><span class="n">lsh</span><span class="o">::</span><span class="n">addDummyParameters</span><span class="p">(</span><span class="n">graph</span><span class="p">,</span><span class="w"> </span><span class="cm">/*paramInfo=*/</span><span class="n">p</span><span class="p">);</span><span class="w"></span>
 <span class="w">      </span><span class="n">graph</span><span class="o">-&gt;</span><span class="n">setReloaded</span><span class="p">(</span><span class="nb">true</span><span class="p">);</span><span class="w"></span>
 <span class="w">    </span><span class="p">}</span><span class="w"></span>
 
@@ -183,7 +190,8 @@
 <span class="w">    </span><span class="k">if</span><span class="p">(</span><span class="n">addLsh</span><span class="p">)</span><span class="w"> </span><span class="p">{</span><span class="w"></span>
 <span class="w">      </span><span class="c1">// After initialization, hijack the paramters for the LSH and force-overwrite with correct values.</span>
 <span class="w">      </span><span class="c1">// Once this is done we can just pack and save as normal.</span>
-<span class="w">      </span><span class="n">lsh</span><span class="o">::</span><span class="n">overwriteDummyParameters</span><span class="p">(</span><span class="n">graph</span><span class="p">,</span><span class="w"> </span><span class="cm">/*weights=*/</span><span class="n">lshOutputWeights</span><span class="p">);</span><span class="w"></span>
+<span class="w">      </span><span class="k">for</span><span class="p">(</span><span class="k">auto</span><span class="w"> </span><span class="n">p</span><span class="w"> </span><span class="o">:</span><span class="w"> </span><span class="n">toBeLSHed</span><span class="p">)</span><span class="w"></span>
+<span class="w">        </span><span class="n">lsh</span><span class="o">::</span><span class="n">overwriteDummyParameters</span><span class="p">(</span><span class="n">graph</span><span class="p">,</span><span class="w"> </span><span class="cm">/*paramInfo=*/</span><span class="n">p</span><span class="p">);</span><span class="w"></span>
 <span class="w">    </span><span class="p">}</span><span class="w"></span>
 
 <span class="w">    </span><span class="c1">// added a flag if the weights needs to be packed or not</span>

@@ -4,7 +4,7 @@
   <meta charset="utf-8" /><meta name="generator" content="Docutils 0.17.1: http://docutils.sourceforge.net/" />
 
   <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-  <title>Program Listing for File graph_group.h &mdash; Marian NMT v1.10.28 2022-01-28 documentation</title><link rel="stylesheet" href="../_static/css/theme.css" type="text/css" />
+  <title>Program Listing for File graph_group.h &mdash; Marian NMT v1.11.3 2022-02-11 documentation</title><link rel="stylesheet" href="../_static/css/theme.css" type="text/css" />
     <link rel="stylesheet" href="../_static/pygments.css" type="text/css" />
       <link rel="stylesheet" href="../_static/css/custom.css" type="text/css" />
       <link rel="stylesheet" href="../_static/collapsible-lists/css/tree_view.css" type="text/css" />
@@ -34,7 +34,7 @@
             <a href="../index.html" class="icon icon-home"> Marian NMT
           </a>
               <div class="version">
-                v1.10.28
+                v1.11.3
               </div>
 <div role="search">
   <form id="rtd-search-form" class="wy-form" action="../search.html" method="get">
@@ -46,6 +46,7 @@
         </div><div class="wy-menu wy-menu-vertical" data-spy="affix" role="navigation" aria-label="Navigation menu">
               <p><span class="caption-text">Contents:</span></p>
 <ul>
+<li class="toctree-l1"><a class="reference internal" href="../structure.html">Code Organisation</a></li>
 <li class="toctree-l1"><a class="reference internal" href="../graph.html">Expression graphs</a></li>
 <li class="toctree-l1"><a class="reference internal" href="../operators.html">Operations in the expression graph</a></li>
 <li class="toctree-l1"><a class="reference internal" href="../layer.html">Layers</a></li>
@@ -140,21 +141,21 @@
 <span class="w">  </span><span class="kt">double</span><span class="w"> </span><span class="n">typicalTrgBatchWords_</span><span class="p">{</span><span class="mi">0</span><span class="p">};</span><span class="w"> </span><span class="c1">// for dynamic batch sizing: typical batch size in words</span>
 <span class="w">  </span><span class="kt">bool</span><span class="w"> </span><span class="n">mbRoundUp_</span><span class="p">{</span><span class="nb">true</span><span class="p">};</span><span class="w"> </span><span class="c1">// round up batches for more efficient training but can make batch size less stable, disable with --mini-batch-round-up=false</span>
 
-<span class="w">  </span><span class="kt">bool</span><span class="w"> </span><span class="n">costScale_</span><span class="p">{</span><span class="nb">false</span><span class="p">};</span><span class="w"></span>
-<span class="w">  </span><span class="kt">float</span><span class="w"> </span><span class="n">costScaleFactor_</span><span class="p">{</span><span class="mf">1.f</span><span class="p">};</span><span class="w"> </span><span class="c1">// @TODO, add current costScaleFactor_ to trainingState for serialization</span>
-<span class="w">  </span><span class="kt">size_t</span><span class="w"> </span><span class="n">costScaleFreq_</span><span class="p">{</span><span class="mi">2000</span><span class="p">};</span><span class="w"></span>
-<span class="w">  </span><span class="kt">float</span><span class="w"> </span><span class="n">costScaleMultiplier_</span><span class="p">{</span><span class="mf">2.f</span><span class="p">};</span><span class="w"></span>
-<span class="w">  </span><span class="kt">float</span><span class="w"> </span><span class="n">costScaleNanTolerance_</span><span class="p">{</span><span class="mf">0.f</span><span class="p">};</span><span class="w"></span>
-<span class="w">  </span><span class="kt">size_t</span><span class="w"> </span><span class="n">costScaleNanRange_</span><span class="p">{</span><span class="mi">1</span><span class="p">};</span><span class="w"></span>
-<span class="w">  </span><span class="kt">float</span><span class="w"> </span><span class="n">costScaleFactorMinimum_</span><span class="p">{</span><span class="mf">1.f</span><span class="p">};</span><span class="w"> </span><span class="c1">// @TODO make this configureable</span>
+<span class="w">  </span><span class="kt">bool</span><span class="w"> </span><span class="n">costScaling_</span><span class="p">{</span><span class="nb">false</span><span class="p">};</span><span class="w"></span>
+<span class="w">  </span><span class="kt">float</span><span class="w"> </span><span class="n">costScalingFactor_</span><span class="p">{</span><span class="mf">1.f</span><span class="p">};</span><span class="w"> </span><span class="c1">// @TODO, add current costScalingFactor_ to trainingState for serialization</span>
+<span class="w">  </span><span class="kt">size_t</span><span class="w"> </span><span class="n">costScalingFreq_</span><span class="p">{</span><span class="mi">2000</span><span class="p">};</span><span class="w"></span>
+<span class="w">  </span><span class="kt">float</span><span class="w"> </span><span class="n">costScalingMultiplier_</span><span class="p">{</span><span class="mf">2.f</span><span class="p">};</span><span class="w"></span>
+<span class="w">  </span><span class="kt">float</span><span class="w"> </span><span class="n">costScalingFactorMinimum_</span><span class="p">{</span><span class="mf">1.f</span><span class="p">};</span><span class="w"></span>
+
 <span class="w">  </span><span class="kt">size_t</span><span class="w"> </span><span class="n">noNanSeen_</span><span class="p">{</span><span class="mi">0</span><span class="p">};</span><span class="w"> </span><span class="c1">// @TODO, add current noNanSeen_ to trainingState for serialization</span>
 <span class="w">  </span><span class="kt">size_t</span><span class="w"> </span><span class="n">nanSeen_</span><span class="p">{</span><span class="mi">0</span><span class="p">};</span><span class="w"></span>
+
+<span class="w">  </span><span class="kt">bool</span><span class="w"> </span><span class="n">checkGradientNan_</span><span class="p">{</span><span class="nb">false</span><span class="p">};</span><span class="w"></span>
 
 <span class="w">  </span><span class="kt">bool</span><span class="w"> </span><span class="n">dynamicGradientScaling_</span><span class="p">{</span><span class="nb">false</span><span class="p">};</span><span class="w"></span>
 <span class="w">  </span><span class="kt">float</span><span class="w"> </span><span class="n">dynamicGradientScalingFactor_</span><span class="p">{</span><span class="mf">2.f</span><span class="p">};</span><span class="w"></span>
 <span class="w">  </span><span class="kt">bool</span><span class="w"> </span><span class="n">dynamicGradientScalingUseLogs_</span><span class="p">{</span><span class="nb">false</span><span class="p">};</span><span class="w"></span>
-
-<span class="w">  </span><span class="kt">bool</span><span class="w"> </span><span class="n">checkGradientNan_</span><span class="p">{</span><span class="nb">false</span><span class="p">};</span><span class="w"></span>
+<span class="w">  </span><span class="kt">size_t</span><span class="w"> </span><span class="n">dynamicGradientScalingFadeout_</span><span class="p">{</span><span class="mi">0ul</span><span class="p">};</span><span class="w"></span>
 
 <span class="w">  </span><span class="c1">// determines the number of input streams (i.e. input files or fields in the TSV input) that need</span>
 <span class="w">  </span><span class="c1">// to be included in the batch, i.e. without alignments and weights</span>

@@ -4,7 +4,7 @@
   <meta charset="utf-8" /><meta name="generator" content="Docutils 0.17.1: http://docutils.sourceforge.net/" />
 
   <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-  <title>Program Listing for File graph_group_sync.cpp &mdash; Marian NMT v1.10.28 2022-01-28 documentation</title><link rel="stylesheet" href="../_static/css/theme.css" type="text/css" />
+  <title>Program Listing for File graph_group_sync.cpp &mdash; Marian NMT v1.11.3 2022-02-11 documentation</title><link rel="stylesheet" href="../_static/css/theme.css" type="text/css" />
     <link rel="stylesheet" href="../_static/pygments.css" type="text/css" />
       <link rel="stylesheet" href="../_static/css/custom.css" type="text/css" />
       <link rel="stylesheet" href="../_static/collapsible-lists/css/tree_view.css" type="text/css" />
@@ -34,7 +34,7 @@
             <a href="../index.html" class="icon icon-home"> Marian NMT
           </a>
               <div class="version">
-                v1.10.28
+                v1.11.3
               </div>
 <div role="search">
   <form id="rtd-search-form" class="wy-form" action="../search.html" method="get">
@@ -46,6 +46,7 @@
         </div><div class="wy-menu wy-menu-vertical" data-spy="affix" role="navigation" aria-label="Navigation menu">
               <p><span class="caption-text">Contents:</span></p>
 <ul>
+<li class="toctree-l1"><a class="reference internal" href="../structure.html">Code Organisation</a></li>
 <li class="toctree-l1"><a class="reference internal" href="../graph.html">Expression graphs</a></li>
 <li class="toctree-l1"><a class="reference internal" href="../operators.html">Operations in the expression graph</a></li>
 <li class="toctree-l1"><a class="reference internal" href="../layer.html">Layers</a></li>
@@ -336,8 +337,8 @@
 
 <span class="w">      </span><span class="p">{</span><span class="w"> </span><span class="c1">// let loss go out of scope, frees memory</span>
 <span class="w">        </span><span class="k">auto</span><span class="w"> </span><span class="n">rationalLoss</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="n">models_</span><span class="p">[</span><span class="n">localDeviceIndex</span><span class="p">]</span><span class="o">-&gt;</span><span class="n">build</span><span class="p">(</span><span class="n">graph</span><span class="p">,</span><span class="w"> </span><span class="n">subBatch</span><span class="p">);</span><span class="w"></span>
-<span class="w">        </span><span class="k">if</span><span class="p">(</span><span class="n">costScaleFactor_</span><span class="w"> </span><span class="o">!=</span><span class="w"> </span><span class="mf">1.f</span><span class="p">)</span><span class="w"></span>
-<span class="w">          </span><span class="n">rationalLoss</span><span class="o">-&gt;</span><span class="n">loss</span><span class="p">()</span><span class="w"> </span><span class="o">*</span><span class="w"> </span><span class="n">costScaleFactor_</span><span class="p">;</span><span class="w"></span>
+<span class="w">        </span><span class="k">if</span><span class="p">(</span><span class="n">costScalingFactor_</span><span class="w"> </span><span class="o">!=</span><span class="w"> </span><span class="mf">1.f</span><span class="p">)</span><span class="w"></span>
+<span class="w">          </span><span class="n">rationalLoss</span><span class="o">-&gt;</span><span class="n">loss</span><span class="p">()</span><span class="w"> </span><span class="o">*</span><span class="w"> </span><span class="n">costScalingFactor_</span><span class="p">;</span><span class="w"></span>
 <span class="w">        </span><span class="n">graph</span><span class="o">-&gt;</span><span class="n">forward</span><span class="p">();</span><span class="w"></span>
 
 <span class="w">        </span><span class="n">localDeviceLosses</span><span class="p">[</span><span class="n">localDeviceIndex</span><span class="p">]</span><span class="w"> </span><span class="o">+=</span><span class="w"> </span><span class="o">*</span><span class="n">rationalLoss</span><span class="p">;</span><span class="w"></span>
@@ -346,18 +347,18 @@
 <span class="w">      </span><span class="n">graph</span><span class="o">-&gt;</span><span class="n">backward</span><span class="p">(</span><span class="cm">/*zero=*/</span><span class="nb">false</span><span class="p">);</span><span class="w"> </span><span class="c1">// (gradients are reset before we get here)</span>
 <span class="w">    </span><span class="p">}</span><span class="w"></span>
 
-<span class="cp">#if 1</span>
-<span class="w">    </span><span class="c1">// experimental and should eventually be somewhere else</span>
-<span class="w">    </span><span class="c1">// Handle local gradient explosion but only clip to largest possible value</span>
-<span class="w">    </span><span class="c1">// given number of GPUs and type. Should clip rarely. Also clips inf</span>
-<span class="w">    </span><span class="c1">// We do another clipping/rescaling after summation.</span>
-<span class="w">    </span><span class="k">auto</span><span class="w"> </span><span class="n">gradType</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="n">graph</span><span class="o">-&gt;</span><span class="n">params</span><span class="p">()</span><span class="o">-&gt;</span><span class="n">grads</span><span class="p">()</span><span class="o">-&gt;</span><span class="n">type</span><span class="p">();</span><span class="w"></span>
-<span class="w">    </span><span class="k">if</span><span class="p">(</span><span class="n">sizeOf</span><span class="p">(</span><span class="n">gradType</span><span class="p">)</span><span class="w"> </span><span class="o">&lt;</span><span class="w"> </span><span class="n">sizeOf</span><span class="p">(</span><span class="n">Type</span><span class="o">::</span><span class="n">float32</span><span class="p">))</span><span class="w"> </span><span class="p">{</span><span class="w"></span>
-<span class="w">      </span><span class="k">using</span><span class="w"> </span><span class="k">namespace</span><span class="w"> </span><span class="nn">functional</span><span class="p">;</span><span class="w"></span>
-<span class="w">      </span><span class="kt">size_t</span><span class="w"> </span><span class="n">numGpus</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="n">mpi_</span><span class="o">-&gt;</span><span class="n">numMPIProcesses</span><span class="p">()</span><span class="w"> </span><span class="o">*</span><span class="w"> </span><span class="n">devices_</span><span class="p">.</span><span class="n">size</span><span class="p">();</span><span class="w"></span>
-<span class="w">      </span><span class="kt">float</span><span class="w"> </span><span class="n">clipValue</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="n">NumericLimits</span><span class="o">&lt;</span><span class="kt">float</span><span class="o">&gt;</span><span class="p">(</span><span class="n">gradType</span><span class="p">).</span><span class="n">max</span><span class="w"> </span><span class="o">/</span><span class="w"> </span><span class="p">(</span><span class="kt">float</span><span class="p">)</span><span class="n">numGpus</span><span class="p">;</span><span class="w"></span>
-<span class="w">      </span><span class="n">Element</span><span class="p">(</span><span class="n">_1</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="n">clip</span><span class="p">(</span><span class="n">_1</span><span class="p">,</span><span class="w"> </span><span class="n">clipValue</span><span class="p">),</span><span class="w"> </span><span class="n">graph</span><span class="o">-&gt;</span><span class="n">params</span><span class="p">()</span><span class="o">-&gt;</span><span class="n">grads</span><span class="p">());</span><span class="w"></span>
-<span class="w">    </span><span class="p">}</span><span class="w"></span>
+<span class="cp">#if 0</span><span class="c"> // @TODO: this can probably be removed now, keep around until confirmed.</span>
+<span class="c">    // experimental and should eventually be somewhere else</span>
+<span class="c">    // Handle local gradient explosion but only clip to largest possible value</span>
+<span class="c">    // given number of GPUs and type. Should clip rarely. Also clips inf</span>
+<span class="c">    // We do another clipping/rescaling after summation.</span>
+<span class="c">    auto gradType = graph-&gt;params()-&gt;grads()-&gt;type();</span>
+<span class="c">    if(sizeOf(gradType) &lt; sizeOf(Type::float32)) {</span>
+<span class="c">      using namespace functional;</span>
+<span class="c">      size_t numGpus = mpi_-&gt;numMPIProcesses() * devices_.size();</span>
+<span class="c">      float clipValue = NumericLimits&lt;float&gt;(gradType).max / (float)numGpus;</span>
+<span class="c">      Element(_1 = clip(_1, clipValue), graph-&gt;params()-&gt;grads());</span>
+<span class="c">    }</span>
 <span class="cp">#endif</span>
 
 <span class="w">    </span><span class="k">return</span><span class="w"> </span><span class="nb">true</span><span class="p">;</span><span class="w"> </span><span class="c1">// dummy success</span>
@@ -368,7 +369,7 @@
 <span class="w">  </span><span class="n">comm_</span><span class="o">-&gt;</span><span class="n">scatterReduceAndResetGrads</span><span class="p">();</span><span class="w"> </span><span class="c1">// reduce gradients across all devices (globally) into shards</span>
 
 <span class="w">  </span><span class="kt">float</span><span class="w"> </span><span class="n">gradNorm</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="mf">0.f</span><span class="p">;</span><span class="w"></span>
-<span class="w">  </span><span class="k">if</span><span class="p">(</span><span class="n">costScale_</span><span class="w"> </span><span class="o">||</span><span class="w"> </span><span class="n">dynamicGradientScaling_</span><span class="w"> </span><span class="o">||</span><span class="w"> </span><span class="n">checkGradientNan_</span><span class="p">)</span><span class="w"> </span><span class="p">{</span><span class="w"></span>
+<span class="w">  </span><span class="k">if</span><span class="p">(</span><span class="n">costScaling_</span><span class="w"> </span><span class="o">||</span><span class="w"> </span><span class="n">dynamicGradientScaling_</span><span class="w"> </span><span class="o">||</span><span class="w"> </span><span class="n">checkGradientNan_</span><span class="p">)</span><span class="w"> </span><span class="p">{</span><span class="w"></span>
 <span class="w">    </span><span class="c1">// Wrapping member function</span>
 <span class="w">    </span><span class="k">auto</span><span class="w"> </span><span class="n">checkNanOrNorm</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="p">[</span><span class="o">&amp;</span><span class="p">](</span><span class="kt">size_t</span><span class="w"> </span><span class="n">i</span><span class="p">,</span><span class="w"> </span><span class="kt">size_t</span><span class="w"> </span><span class="n">begin</span><span class="p">,</span><span class="w"> </span><span class="kt">size_t</span><span class="w"> </span><span class="n">end</span><span class="p">)</span><span class="w"> </span><span class="p">{</span><span class="w"></span>
 <span class="w">      </span><span class="k">return</span><span class="w"> </span><span class="n">GraphGroup</span><span class="o">::</span><span class="n">checkNanOrNorm</span><span class="p">(</span><span class="n">i</span><span class="p">,</span><span class="w"> </span><span class="n">begin</span><span class="p">,</span><span class="w"> </span><span class="n">end</span><span class="p">);</span><span class="w"></span>

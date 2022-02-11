@@ -4,7 +4,7 @@
   <meta charset="utf-8" /><meta name="generator" content="Docutils 0.17.1: http://docutils.sourceforge.net/" />
 
   <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-  <title>Class SentenceTuple &mdash; Marian NMT v1.10.28 2022-01-28 documentation</title><link rel="stylesheet" href="../_static/css/theme.css" type="text/css" />
+  <title>Class SentenceTuple &mdash; Marian NMT v1.11.3 2022-02-11 documentation</title><link rel="stylesheet" href="../_static/css/theme.css" type="text/css" />
     <link rel="stylesheet" href="../_static/pygments.css" type="text/css" />
       <link rel="stylesheet" href="../_static/css/custom.css" type="text/css" />
       <link rel="stylesheet" href="../_static/collapsible-lists/css/tree_view.css" type="text/css" />
@@ -24,7 +24,7 @@
     <script src="../_static/js/theme.js"></script>
     <link rel="index" title="Index" href="../genindex.html" />
     <link rel="search" title="Search" href="../search.html" />
-    <link rel="next" title="Class Shortlist" href="classmarian_1_1data_1_1Shortlist.html" />
+    <link rel="next" title="Class SentenceTupleImpl" href="classmarian_1_1data_1_1SentenceTupleImpl.html" />
     <link rel="prev" title="Class RNGEngine" href="classmarian_1_1data_1_1RNGEngine.html" /> 
 </head>
 
@@ -36,7 +36,7 @@
             <a href="../index.html" class="icon icon-home"> Marian NMT
           </a>
               <div class="version">
-                v1.10.28
+                v1.11.3
               </div>
 <div role="search">
   <form id="rtd-search-form" class="wy-form" action="../search.html" method="get">
@@ -48,6 +48,7 @@
         </div><div class="wy-menu wy-menu-vertical" data-spy="affix" role="navigation" aria-label="Navigation menu">
               <p><span class="caption-text">Contents:</span></p>
 <ul>
+<li class="toctree-l1"><a class="reference internal" href="../structure.html">Code Organisation</a></li>
 <li class="toctree-l1"><a class="reference internal" href="../graph.html">Expression graphs</a></li>
 <li class="toctree-l1"><a class="reference internal" href="../operators.html">Operations in the expression graph</a></li>
 <li class="toctree-l1"><a class="reference internal" href="../layer.html">Layers</a></li>
@@ -92,9 +93,7 @@
 <dl class="class">
 <dt id="_CPPv4N6marian4data13SentenceTupleE">
 <span id="_CPPv3N6marian4data13SentenceTupleE"></span><span id="_CPPv2N6marian4data13SentenceTupleE"></span><span id="marian::data::SentenceTuple"></span><span class="target" id="classmarian_1_1data_1_1SentenceTuple"></span><em class="property">class </em><code class="sig-name descname">SentenceTuple</code><a class="headerlink" href="#_CPPv4N6marian4data13SentenceTupleE" title="Permalink to this definition">¶</a><br /></dt>
-<dd><p>A sentence tuple that stores all sources and target sentences for a specific “line” from a parallel corpus. </p>
-<p>Sentence tuples store sentences from external files and a basis for construction of <a class="reference internal" href="classmarian_1_1data_1_1CorpusBatch.html#classmarian_1_1data_1_1CorpusBatch"><span class="std std-ref">marian::data::CorpusBatch</span></a> objects. They are not a part of <a class="reference internal" href="classmarian_1_1data_1_1CorpusBatch.html#classmarian_1_1data_1_1CorpusBatch"><span class="std std-ref">marian::data::CorpusBatch</span></a>. </p>
-<div class="breathe-sectiondef docutils container">
+<dd><div class="breathe-sectiondef docutils container">
 <p class="breathe-sectiondef-title rubric">Public Types</p>
 <dl class="type">
 <dt id="_CPPv4N6marian4data13SentenceTuple10value_typeE">
@@ -105,14 +104,24 @@
 <div class="breathe-sectiondef docutils container">
 <p class="breathe-sectiondef-title rubric">Public Functions</p>
 <dl class="function">
-<dt id="_CPPv4N6marian4data13SentenceTuple13SentenceTupleE6size_t">
-<span id="_CPPv3N6marian4data13SentenceTuple13SentenceTupleE6size_t"></span><span id="_CPPv2N6marian4data13SentenceTuple13SentenceTupleE6size_t"></span><span id="marian::data::SentenceTuple::SentenceTuple__s"></span><span class="target" id="classmarian_1_1data_1_1SentenceTuple_1a53dba33c13ccbcc8b3e05bf2a0e4fe06"></span><code class="sig-name descname">SentenceTuple</code><span class="sig-paren">(</span>size_t <em>id</em><span class="sig-paren">)</span><a class="headerlink" href="#_CPPv4N6marian4data13SentenceTuple13SentenceTupleE6size_t" title="Permalink to this definition">¶</a><br /></dt>
-<dd><p>Creates an empty tuple with the given Id. </p>
+<dt id="_CPPv4N6marian4data13SentenceTuple13SentenceTupleEv">
+<span id="_CPPv3N6marian4data13SentenceTuple13SentenceTupleEv"></span><span id="_CPPv2N6marian4data13SentenceTuple13SentenceTupleEv"></span><span id="marian::data::SentenceTuple::SentenceTuple"></span><span class="target" id="classmarian_1_1data_1_1SentenceTuple_1a1a3bf4ae664ec882481f38cb9412424b"></span><code class="sig-name descname">SentenceTuple</code><span class="sig-paren">(</span><span class="sig-paren">)</span><a class="headerlink" href="#_CPPv4N6marian4data13SentenceTuple13SentenceTupleEv" title="Permalink to this definition">¶</a><br /></dt>
+<dd><p>Creates an empty tuple with no associated future. </p>
 </dd></dl>
 
 <dl class="function">
-<dt id="_CPPv4N6marian4data13SentenceTupleD0Ev">
-<span id="_CPPv3N6marian4data13SentenceTupleD0Ev"></span><span id="_CPPv2N6marian4data13SentenceTupleD0Ev"></span><span id="marian::data::SentenceTuple::~SentenceTuple"></span><span class="target" id="classmarian_1_1data_1_1SentenceTuple_1ac361a79106e555ff199ac6db1d1f321b"></span><code class="sig-name descname">~SentenceTuple</code><span class="sig-paren">(</span><span class="sig-paren">)</span><a class="headerlink" href="#_CPPv4N6marian4data13SentenceTupleD0Ev" title="Permalink to this definition">¶</a><br /></dt>
+<dt id="_CPPv4N6marian4data13SentenceTuple13SentenceTupleERK17SentenceTupleImpl">
+<span id="_CPPv3N6marian4data13SentenceTuple13SentenceTupleERK17SentenceTupleImpl"></span><span id="_CPPv2N6marian4data13SentenceTuple13SentenceTupleERK17SentenceTupleImpl"></span><span id="marian::data::SentenceTuple::SentenceTuple__SentenceTupleImplCR"></span><span class="target" id="classmarian_1_1data_1_1SentenceTuple_1ad63b82e2c0cb030f7a1232e02a07f9b0"></span><code class="sig-name descname">SentenceTuple</code><span class="sig-paren">(</span><em class="property">const</em> <a class="reference internal" href="classmarian_1_1data_1_1SentenceTupleImpl.html#_CPPv4N6marian4data17SentenceTupleImplE" title="marian::data::SentenceTupleImpl">SentenceTupleImpl</a> &amp;<em>tupImpl</em><span class="sig-paren">)</span><a class="headerlink" href="#_CPPv4N6marian4data13SentenceTuple13SentenceTupleERK17SentenceTupleImpl" title="Permalink to this definition">¶</a><br /></dt>
+<dd></dd></dl>
+
+<dl class="function">
+<dt id="_CPPv4N6marian4data13SentenceTuple13SentenceTupleERRNSt6futureI17SentenceTupleImplEE">
+<span id="_CPPv3N6marian4data13SentenceTuple13SentenceTupleERRNSt6futureI17SentenceTupleImplEE"></span><span id="_CPPv2N6marian4data13SentenceTuple13SentenceTupleERRNSt6futureI17SentenceTupleImplEE"></span><span id="marian::data::SentenceTuple::SentenceTuple__std::future:SentenceTupleImpl:RR"></span><span class="target" id="classmarian_1_1data_1_1SentenceTuple_1a912cf2794392883ebdece6bcef10df13"></span><code class="sig-name descname">SentenceTuple</code><span class="sig-paren">(</span><a class="reference internal" href="function_group__graph__ops__mathematical_1gaf4e69a5f7167b63522135a1f6b8a5dd8.html#_CPPv4N6marianStE4Expri" title="marian::std">std</a>::future&lt;<a class="reference internal" href="classmarian_1_1data_1_1SentenceTupleImpl.html#_CPPv4N6marian4data17SentenceTupleImplE" title="marian::data::SentenceTupleImpl">SentenceTupleImpl</a>&gt; &amp;&amp;<em>fImpl</em><span class="sig-paren">)</span><a class="headerlink" href="#_CPPv4N6marian4data13SentenceTuple13SentenceTupleERRNSt6futureI17SentenceTupleImplEE" title="Permalink to this definition">¶</a><br /></dt>
+<dd></dd></dl>
+
+<dl class="function">
+<dt id="_CPPv4NK6marian4data13SentenceTuple3getEv">
+<span id="_CPPv3NK6marian4data13SentenceTuple3getEv"></span><span id="_CPPv2NK6marian4data13SentenceTuple3getEv"></span><span id="marian::data::SentenceTuple::getC"></span><span class="target" id="classmarian_1_1data_1_1SentenceTuple_1a66e0f65fe7d94a0f47450a0e37cb71af"></span><a class="reference internal" href="classmarian_1_1data_1_1SentenceTupleImpl.html#_CPPv4N6marian4data17SentenceTupleImplE" title="marian::data::SentenceTupleImpl">SentenceTupleImpl</a> &amp;<code class="sig-name descname">get</code><span class="sig-paren">(</span><span class="sig-paren">)</span> <em class="property">const</em><a class="headerlink" href="#_CPPv4NK6marian4data13SentenceTuple3getEv" title="Permalink to this definition">¶</a><br /></dt>
 <dd></dd></dl>
 
 <dl class="function">
@@ -128,29 +137,16 @@
 </dd></dl>
 
 <dl class="function">
-<dt id="_CPPv4N6marian4data13SentenceTuple11markAlteredEv">
-<span id="_CPPv3N6marian4data13SentenceTuple11markAlteredEv"></span><span id="_CPPv2N6marian4data13SentenceTuple11markAlteredEv"></span><span id="marian::data::SentenceTuple::markAltered"></span><span class="target" id="classmarian_1_1data_1_1SentenceTuple_1a1ae9402d74c8418aecc68f5012c45289"></span>void <code class="sig-name descname">markAltered</code><span class="sig-paren">(</span><span class="sig-paren">)</span><a class="headerlink" href="#_CPPv4N6marian4data13SentenceTuple11markAlteredEv" title="Permalink to this definition">¶</a><br /></dt>
-<dd><p>Mark that this Tuple was internally altered or augmented by Marian. </p>
-</dd></dl>
-
-<dl class="function">
-<dt id="_CPPv4N6marian4data13SentenceTuple9push_backERK5Words">
-<span id="_CPPv3N6marian4data13SentenceTuple9push_backERK5Words"></span><span id="_CPPv2N6marian4data13SentenceTuple9push_backERK5Words"></span><span id="marian::data::SentenceTuple::push_back__WordsCR"></span><span class="target" id="classmarian_1_1data_1_1SentenceTuple_1a749e5acf8c894f139153f03abafc5ccb"></span>void <code class="sig-name descname">push_back</code><span class="sig-paren">(</span><em class="property">const</em> <a class="reference internal" href="typedef_namespacemarian_1a81f026d9529d47fd44a64a27954775fd.html#_CPPv4N6marian5WordsE" title="marian::Words">Words</a> &amp;<em>words</em><span class="sig-paren">)</span><a class="headerlink" href="#_CPPv4N6marian4data13SentenceTuple9push_backERK5Words" title="Permalink to this definition">¶</a><br /></dt>
-<dd><p>Adds a new sentence at the end of the tuple. </p>
-<p><dl class="simple">
-<dt><strong>Parameters</strong></dt><dd><ul class="breatheparameterlist simple">
-<li><p><code class="docutils literal notranslate"><span class="pre">words</span></code>: A vector of word indices. </p></li>
-</ul>
-</dd>
-</dl>
-</p>
-</dd></dl>
-
-<dl class="function">
 <dt id="_CPPv4NK6marian4data13SentenceTuple4sizeEv">
 <span id="_CPPv3NK6marian4data13SentenceTuple4sizeEv"></span><span id="_CPPv2NK6marian4data13SentenceTuple4sizeEv"></span><span id="marian::data::SentenceTuple::sizeC"></span><span class="target" id="classmarian_1_1data_1_1SentenceTuple_1a2c4ee819cca97e094bb54f60cfd81a25"></span>size_t <code class="sig-name descname">size</code><span class="sig-paren">(</span><span class="sig-paren">)</span> <em class="property">const</em><a class="headerlink" href="#_CPPv4NK6marian4data13SentenceTuple4sizeEv" title="Permalink to this definition">¶</a><br /></dt>
 <dd><p>The size of the tuple, e.g. </p>
 <p>two for parallel data with a source and target sentences. </p>
+</dd></dl>
+
+<dl class="function">
+<dt id="_CPPv4NK6marian4data13SentenceTuple5validEv">
+<span id="_CPPv3NK6marian4data13SentenceTuple5validEv"></span><span id="_CPPv2NK6marian4data13SentenceTuple5validEv"></span><span id="marian::data::SentenceTuple::validC"></span><span class="target" id="classmarian_1_1data_1_1SentenceTuple_1a24cbc7d44d9980d7bbf360ff36a5fc1c"></span>bool <code class="sig-name descname">valid</code><span class="sig-paren">(</span><span class="sig-paren">)</span> <em class="property">const</em><a class="headerlink" href="#_CPPv4NK6marian4data13SentenceTuple5validEv" title="Permalink to this definition">¶</a><br /></dt>
+<dd><p>confirms that the tuple has been populated with data </p>
 </dd></dl>
 
 <dl class="function">
@@ -191,22 +187,22 @@
 
 <dl class="function">
 <dt id="_CPPv4NK6marian4data13SentenceTuple5beginEv">
-<span id="_CPPv3NK6marian4data13SentenceTuple5beginEv"></span><span id="_CPPv2NK6marian4data13SentenceTuple5beginEv"></span><span id="marian::data::SentenceTuple::beginC"></span><span class="target" id="classmarian_1_1data_1_1SentenceTuple_1a42ecb52eb072d42775a99d9a63aae2cd"></span>auto <code class="sig-name descname">begin</code><span class="sig-paren">(</span><span class="sig-paren">)</span> <em class="property">const</em><a class="headerlink" href="#_CPPv4NK6marian4data13SentenceTuple5beginEv" title="Permalink to this definition">¶</a><br /></dt>
+<span id="_CPPv3NK6marian4data13SentenceTuple5beginEv"></span><span id="_CPPv2NK6marian4data13SentenceTuple5beginEv"></span><span id="marian::data::SentenceTuple::beginC"></span><span class="target" id="classmarian_1_1data_1_1SentenceTuple_1a273664403f9a48d31e55dadd243aa2b4"></span>auto <code class="sig-name descname">begin</code><span class="sig-paren">(</span><span class="sig-paren">)</span> <em class="property">const</em><a class="headerlink" href="#_CPPv4NK6marian4data13SentenceTuple5beginEv" title="Permalink to this definition">¶</a><br /></dt>
 <dd></dd></dl>
 
 <dl class="function">
 <dt id="_CPPv4NK6marian4data13SentenceTuple3endEv">
-<span id="_CPPv3NK6marian4data13SentenceTuple3endEv"></span><span id="_CPPv2NK6marian4data13SentenceTuple3endEv"></span><span id="marian::data::SentenceTuple::endC"></span><span class="target" id="classmarian_1_1data_1_1SentenceTuple_1abf896efb8ad0ee1a233204003805c1c7"></span>auto <code class="sig-name descname">end</code><span class="sig-paren">(</span><span class="sig-paren">)</span> <em class="property">const</em><a class="headerlink" href="#_CPPv4NK6marian4data13SentenceTuple3endEv" title="Permalink to this definition">¶</a><br /></dt>
+<span id="_CPPv3NK6marian4data13SentenceTuple3endEv"></span><span id="_CPPv2NK6marian4data13SentenceTuple3endEv"></span><span id="marian::data::SentenceTuple::endC"></span><span class="target" id="classmarian_1_1data_1_1SentenceTuple_1adf5f02fa14a61ea927d07eaad791f3de"></span>auto <code class="sig-name descname">end</code><span class="sig-paren">(</span><span class="sig-paren">)</span> <em class="property">const</em><a class="headerlink" href="#_CPPv4NK6marian4data13SentenceTuple3endEv" title="Permalink to this definition">¶</a><br /></dt>
 <dd></dd></dl>
 
 <dl class="function">
 <dt id="_CPPv4NK6marian4data13SentenceTuple6rbeginEv">
-<span id="_CPPv3NK6marian4data13SentenceTuple6rbeginEv"></span><span id="_CPPv2NK6marian4data13SentenceTuple6rbeginEv"></span><span id="marian::data::SentenceTuple::rbeginC"></span><span class="target" id="classmarian_1_1data_1_1SentenceTuple_1a5c18cb15762039ce224c66807d9b1b65"></span>auto <code class="sig-name descname">rbegin</code><span class="sig-paren">(</span><span class="sig-paren">)</span> <em class="property">const</em><a class="headerlink" href="#_CPPv4NK6marian4data13SentenceTuple6rbeginEv" title="Permalink to this definition">¶</a><br /></dt>
+<span id="_CPPv3NK6marian4data13SentenceTuple6rbeginEv"></span><span id="_CPPv2NK6marian4data13SentenceTuple6rbeginEv"></span><span id="marian::data::SentenceTuple::rbeginC"></span><span class="target" id="classmarian_1_1data_1_1SentenceTuple_1a83697e51bb5ebed539a17dec3ce36e23"></span>auto <code class="sig-name descname">rbegin</code><span class="sig-paren">(</span><span class="sig-paren">)</span> <em class="property">const</em><a class="headerlink" href="#_CPPv4NK6marian4data13SentenceTuple6rbeginEv" title="Permalink to this definition">¶</a><br /></dt>
 <dd></dd></dl>
 
 <dl class="function">
 <dt id="_CPPv4NK6marian4data13SentenceTuple4rendEv">
-<span id="_CPPv3NK6marian4data13SentenceTuple4rendEv"></span><span id="_CPPv2NK6marian4data13SentenceTuple4rendEv"></span><span id="marian::data::SentenceTuple::rendC"></span><span class="target" id="classmarian_1_1data_1_1SentenceTuple_1ab60a7e60ddd9427a45904821d21e3d26"></span>auto <code class="sig-name descname">rend</code><span class="sig-paren">(</span><span class="sig-paren">)</span> <em class="property">const</em><a class="headerlink" href="#_CPPv4NK6marian4data13SentenceTuple4rendEv" title="Permalink to this definition">¶</a><br /></dt>
+<span id="_CPPv3NK6marian4data13SentenceTuple4rendEv"></span><span id="_CPPv2NK6marian4data13SentenceTuple4rendEv"></span><span id="marian::data::SentenceTuple::rendC"></span><span class="target" id="classmarian_1_1data_1_1SentenceTuple_1a0a455bcdd8d6188dcaea71ff374d5e0e"></span>auto <code class="sig-name descname">rend</code><span class="sig-paren">(</span><span class="sig-paren">)</span> <em class="property">const</em><a class="headerlink" href="#_CPPv4NK6marian4data13SentenceTuple4rendEv" title="Permalink to this definition">¶</a><br /></dt>
 <dd></dd></dl>
 
 <dl class="function">
@@ -217,20 +213,8 @@
 </dd></dl>
 
 <dl class="function">
-<dt id="_CPPv4N6marian4data13SentenceTuple10setWeightsERKNSt6vectorIfEE">
-<span id="_CPPv3N6marian4data13SentenceTuple10setWeightsERKNSt6vectorIfEE"></span><span id="_CPPv2N6marian4data13SentenceTuple10setWeightsERKNSt6vectorIfEE"></span><span id="marian::data::SentenceTuple::setWeights__std::vector:float:CR"></span><span class="target" id="classmarian_1_1data_1_1SentenceTuple_1a5a4f93068de4ecc6a4d845b5b70f0e5a"></span>void <code class="sig-name descname">setWeights</code><span class="sig-paren">(</span><em class="property">const</em> <a class="reference internal" href="function_group__graph__ops__mathematical_1gaf4e69a5f7167b63522135a1f6b8a5dd8.html#_CPPv4N6marianStE4Expri" title="marian::std">std</a>::vector&lt;float&gt; &amp;<em>weights</em><span class="sig-paren">)</span><a class="headerlink" href="#_CPPv4N6marian4data13SentenceTuple10setWeightsERKNSt6vectorIfEE" title="Permalink to this definition">¶</a><br /></dt>
-<dd><p>Set sentence weights. </p>
-<p>For word weights (i.e. weights.size() &gt; 1) it checks if there is as many weights as target tokens. If not, it aborts. Because of this, this function must becalled <em>after</em> adding source and target tokens. </p>
-</dd></dl>
-
-<dl class="function">
 <dt id="_CPPv4NK6marian4data13SentenceTuple12getAlignmentEv">
 <span id="_CPPv3NK6marian4data13SentenceTuple12getAlignmentEv"></span><span id="_CPPv2NK6marian4data13SentenceTuple12getAlignmentEv"></span><span id="marian::data::SentenceTuple::getAlignmentC"></span><span class="target" id="classmarian_1_1data_1_1SentenceTuple_1a2ffd1cad33f65530e273f25f4493649a"></span><em class="property">const</em> <a class="reference internal" href="classmarian_1_1data_1_1WordAlignment.html#_CPPv4N6marian4data13WordAlignmentE" title="marian::data::WordAlignment">WordAlignment</a> &amp;<code class="sig-name descname">getAlignment</code><span class="sig-paren">(</span><span class="sig-paren">)</span> <em class="property">const</em><a class="headerlink" href="#_CPPv4NK6marian4data13SentenceTuple12getAlignmentEv" title="Permalink to this definition">¶</a><br /></dt>
-<dd></dd></dl>
-
-<dl class="function">
-<dt id="_CPPv4N6marian4data13SentenceTuple12setAlignmentERK13WordAlignment">
-<span id="_CPPv3N6marian4data13SentenceTuple12setAlignmentERK13WordAlignment"></span><span id="_CPPv2N6marian4data13SentenceTuple12setAlignmentERK13WordAlignment"></span><span id="marian::data::SentenceTuple::setAlignment__WordAlignmentCR"></span><span class="target" id="classmarian_1_1data_1_1SentenceTuple_1a1d76c78d198ca6a32b7a2602d65f5c25"></span>void <code class="sig-name descname">setAlignment</code><span class="sig-paren">(</span><em class="property">const</em> <a class="reference internal" href="classmarian_1_1data_1_1WordAlignment.html#_CPPv4N6marian4data13WordAlignmentE" title="marian::data::WordAlignment">WordAlignment</a> &amp;<em>alignment</em><span class="sig-paren">)</span><a class="headerlink" href="#_CPPv4N6marian4data13SentenceTuple12setAlignmentERK13WordAlignment" title="Permalink to this definition">¶</a><br /></dt>
 <dd></dd></dl>
 
 </div>
@@ -244,7 +228,7 @@
           </div>
           <footer><div class="rst-footer-buttons" role="navigation" aria-label="Footer">
         <a href="classmarian_1_1data_1_1RNGEngine.html" class="btn btn-neutral float-left" title="Class RNGEngine" accesskey="p" rel="prev"><span class="fa fa-arrow-circle-left" aria-hidden="true"></span> Previous</a>
-        <a href="classmarian_1_1data_1_1Shortlist.html" class="btn btn-neutral float-right" title="Class Shortlist" accesskey="n" rel="next">Next <span class="fa fa-arrow-circle-right" aria-hidden="true"></span></a>
+        <a href="classmarian_1_1data_1_1SentenceTupleImpl.html" class="btn btn-neutral float-right" title="Class SentenceTupleImpl" accesskey="n" rel="next">Next <span class="fa fa-arrow-circle-right" aria-hidden="true"></span></a>
     </div>
 
   <hr/>

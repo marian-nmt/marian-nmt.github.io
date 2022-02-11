@@ -1,0 +1,252 @@
+<!DOCTYPE html>
+<html class="writer-html5" lang="en" >
+<head>
+  <meta charset="utf-8" /><meta name="generator" content="Docutils 0.17.1: http://docutils.sourceforge.net/" />
+
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Code Organisation &mdash; Marian NMT v1.11.3 2022-02-11 documentation</title><link rel="stylesheet" href="_static/css/theme.css" type="text/css" />
+    <link rel="stylesheet" href="_static/pygments.css" type="text/css" />
+      <link rel="stylesheet" href="_static/css/custom.css" type="text/css" />
+      <link rel="stylesheet" href="_static/collapsible-lists/css/tree_view.css" type="text/css" />
+    <link rel="canonical" href="http://marian-nmt.github.io/docs/api/structure.html" />
+  <!--[if lt IE 9]>
+    <script src="_static/js/html5shiv.min.js"></script>
+  <![endif]-->
+  <script id="documentation_options" data-url_root="./" src="_static/documentation_options.js"></script>
+        <script src="_static/jquery.js"></script>
+        <script src="_static/underscore.js"></script>
+        <script src="_static/doctools.js"></script>
+        <script src="_static/language_data.js"></script>
+        <script src="_static/collapsible-lists/js/CollapsibleLists.compressed.js"></script>
+        <script src="_static/collapsible-lists/js/apply-collapsible-lists.js"></script>
+        <script async="async" src="https://cdnjs.cloudflare.com/ajax/libs/mathjax/2.7.5/latest.js?config=TeX-AMS-MML_HTMLorMML"></script>
+        <script type="text/x-mathjax-config">MathJax.Hub.Config({"tex2jax": {"inlineMath": [["\\(", "\\)"]], "displayMath": [["\\[", "\\]"]], "processRefs": false, "processEnvironments": false}})</script>
+    <script src="_static/js/theme.js"></script>
+    <link rel="index" title="Index" href="genindex.html" />
+    <link rel="search" title="Search" href="search.html" />
+    <link rel="next" title="Expression graphs" href="graph.html" />
+    <link rel="prev" title="Welcome to Marian’s documentation!" href="index.html" /> 
+</head>
+
+<body class="wy-body-for-nav"> 
+  <div class="wy-grid-for-nav">
+    <nav data-toggle="wy-nav-shift" class="wy-nav-side">
+      <div class="wy-side-scroll">
+        <div class="wy-side-nav-search" >
+            <a href="index.html" class="icon icon-home"> Marian NMT
+          </a>
+              <div class="version">
+                v1.11.3
+              </div>
+<div role="search">
+  <form id="rtd-search-form" class="wy-form" action="search.html" method="get">
+    <input type="text" name="q" placeholder="Search docs" />
+    <input type="hidden" name="check_keywords" value="yes" />
+    <input type="hidden" name="area" value="default" />
+  </form>
+</div>
+        </div><div class="wy-menu wy-menu-vertical" data-spy="affix" role="navigation" aria-label="Navigation menu">
+              <p><span class="caption-text">Contents:</span></p>
+<ul class="current">
+<li class="toctree-l1 current"><a class="current reference internal" href="#">Code Organisation</a><ul>
+<li class="toctree-l2"><a class="reference internal" href="#operating-modes">Operating Modes</a></li>
+<li class="toctree-l2"><a class="reference internal" href="#data">Data</a></li>
+<li class="toctree-l2"><a class="reference internal" href="#expression-graph">Expression Graph</a></li>
+<li class="toctree-l2"><a class="reference internal" href="#model">Model</a></li>
+<li class="toctree-l2"><a class="reference internal" href="#utility">Utility</a></li>
+<li class="toctree-l2"><a class="reference internal" href="#external-libraries">External Libraries</a></li>
+<li class="toctree-l2"><a class="reference internal" href="#tests-and-examples">Tests and Examples</a></li>
+</ul>
+</li>
+<li class="toctree-l1"><a class="reference internal" href="graph.html">Expression graphs</a></li>
+<li class="toctree-l1"><a class="reference internal" href="operators.html">Operations in the expression graph</a></li>
+<li class="toctree-l1"><a class="reference internal" href="layer.html">Layers</a></li>
+<li class="toctree-l1"><a class="reference internal" href="factors.html">Using Marian with factors</a></li>
+<li class="toctree-l1"><a class="reference internal" href="api/library_index.html">Library API</a></li>
+<li class="toctree-l1"><a class="reference internal" href="contributing.html">How to contribute to Marian</a></li>
+<li class="toctree-l1"><a class="reference internal" href="doc_guide.html">Writing documentation</a></li>
+</ul>
+
+        </div>
+      </div>
+    </nav>
+
+    <section data-toggle="wy-nav-shift" class="wy-nav-content-wrap"><nav class="wy-nav-top" aria-label="Mobile navigation menu" >
+          <i data-toggle="wy-nav-top" class="fa fa-bars"></i>
+          <a href="index.html">Marian NMT</a>
+      </nav>
+
+      <div class="wy-nav-content">
+        <div class="rst-content">
+          <div role="navigation" aria-label="Page navigation">
+  <ul class="wy-breadcrumbs">
+      <li><a href="index.html" class="icon icon-home"></a> &raquo;</li>
+      <li>Code Organisation</li>
+      <li class="wy-breadcrumbs-aside">
+            <a href="_sources/structure.md.txt" rel="nofollow"> View page source</a>
+      </li>
+  </ul>
+  <hr/>
+</div>
+          <div role="main" class="document" itemscope="itemscope" itemtype="http://schema.org/Article">
+           <div itemprop="articleBody">
+             
+  <section id="code-organisation">
+<h1>Code Organisation<a class="headerlink" href="#code-organisation" title="Permalink to this headline">¶</a></h1>
+<p>This purpose of this document is to outline the organisational structure of the Marian codebase. Each section of this document approaches an architectural component and highlights a subset of directories that are relevant to it.</p>
+<section id="operating-modes">
+<h2>Operating Modes<a class="headerlink" href="#operating-modes" title="Permalink to this headline">¶</a></h2>
+<div class="highlight-cpp notranslate"><div class="highlight"><pre><span></span>marian/src
+├── command
+├── rescorer
+├── training
+└── translator
+</pre></div>
+</div>
+<p>The Marian toolkit provides several commands, covering different modes of operation. These are:</p>
+<ul class="simple">
+<li><p><code class="docutils literal notranslate"><span class="pre">marian</span></code></p></li>
+<li><p><code class="docutils literal notranslate"><span class="pre">marian-decoder</span></code></p></li>
+<li><p><code class="docutils literal notranslate"><span class="pre">marian-server</span></code></p></li>
+<li><p><code class="docutils literal notranslate"><span class="pre">marian-scorer</span></code></p></li>
+<li><p><code class="docutils literal notranslate"><span class="pre">marian-vocab</span></code></p></li>
+<li><p><code class="docutils literal notranslate"><span class="pre">marian-conv</span></code></p></li>
+</ul>
+<p>Each of which has a corresponding file in the <code class="docutils literal notranslate"><span class="pre">command</span></code> directory.</p>
+<p>The main <code class="docutils literal notranslate"><span class="pre">marian</span></code> command is capable of running all other modes (except server), see <code class="docutils literal notranslate"><span class="pre">marian-main.cpp</span></code> for the implementation. By default, it operates in <code class="docutils literal notranslate"><span class="pre">train</span></code> mode and corresponds to <code class="docutils literal notranslate"><span class="pre">marian-train.cpp</span></code>. Other modes may be accessed by calling <code class="docutils literal notranslate"><span class="pre">marian</span> <span class="pre">&lt;X&gt;</span></code> instead of <code class="docutils literal notranslate"><span class="pre">marian-&lt;X&gt;</span></code>.</p>
+<p>Training is covered by the main <code class="docutils literal notranslate"><span class="pre">marian</span></code> command, with relevant implementation details kept inside the <code class="docutils literal notranslate"><span class="pre">training</span></code> subdirectory. Translation is facilitated by code in the <code class="docutils literal notranslate"><span class="pre">translator</span></code> subdirectory and is handled by the <code class="docutils literal notranslate"><span class="pre">marian-decoder</span></code> command, as well as <code class="docutils literal notranslate"><span class="pre">marian-server</span></code> which provides a web-socket service. <code class="docutils literal notranslate"><span class="pre">marian-scorer</span></code> is the tool used to re-score parallel inputs or n-best lists, and uses code in the <code class="docutils literal notranslate"><span class="pre">rescorer</span></code> subdirectory.</p>
+<p>The remaining commands <code class="docutils literal notranslate"><span class="pre">marian-vocab</span></code> and <code class="docutils literal notranslate"><span class="pre">marian-conv</span></code> provide useful auxiliary functions.  <code class="docutils literal notranslate"><span class="pre">marian-vocab</span></code> is a tool to create a vocabulary file from a given text corpus. This uses components described in the Data section of this document.
+<code class="docutils literal notranslate"><span class="pre">marian-conv</span></code> exists to convert Marian model files from <code class="docutils literal notranslate"><span class="pre">.npz</span></code>, <code class="docutils literal notranslate"><span class="pre">.bin</span></code> as well as lexical shortlists to binary shortlists. It is also possible to use this command to emit an ONNX-compliant model representation. In addition to components defined in the Data section, this also makes use of Model specific components.</p>
+<p>Finally, the implementation of the command-line-interface for these commands is described in the Utility section.</p>
+</section>
+<section id="data">
+<h2>Data<a class="headerlink" href="#data" title="Permalink to this headline">¶</a></h2>
+<div class="highlight-cpp notranslate"><div class="highlight"><pre><span></span>marian/src
+└── data
+</pre></div>
+</div>
+<p>Data refers to the handling and representation of the text input to Marian.
+This consists of source code for the representation of the corpus, vocabulary and batches.</p>
+<p>Internally, tokens are represented as indices, or <code class="docutils literal notranslate"><span class="pre">Words</span></code>; some indices are reserved for special tokens, such as <code class="docutils literal notranslate"><span class="pre">EOS</span></code>, <code class="docutils literal notranslate"><span class="pre">UNK</span></code>. Vocabulary implementations are responsible for encoding and decoding sentences to and from the internal representation, whether that be a SentencePiece, Factors or Plain Text/YAML defined vocabulary file.</p>
+<p>This directory is also responsible for generating batches from a corpus and performing any shuffling of the corpus or batches, as requested. Furthermore, when using a shortlist, their behaviour is also defined here.</p>
+<p>Once the batches are generated they are passed as input to the expression graph.</p>
+</section>
+<section id="expression-graph">
+<h2>Expression Graph<a class="headerlink" href="#expression-graph" title="Permalink to this headline">¶</a></h2>
+<div class="highlight-cpp notranslate"><div class="highlight"><pre><span></span>marian/src
+├── functional
+├── graph
+├── optimizers
+└── tensors
+</pre></div>
+</div>
+<p>Marian implements a reverse-mode auto-differentiation computation graph. The relevant components reside in these subdirectories. The <code class="docutils literal notranslate"><span class="pre">graph</span></code> subdirectory concerns the structure of the graph, its nodes: operators, parameters and constants, as well as how to traverse it, both forwards and backwards. Moreover, it defines the APIs for operations that the graph is able to perform.</p>
+<p>The <code class="docutils literal notranslate"><span class="pre">tensors</span></code> and <code class="docutils literal notranslate"><span class="pre">functional</span></code> subdirectories contain the implementation of operations for the graph.</p>
+<p>One component of the <code class="docutils literal notranslate"><span class="pre">functional</span></code> subdirectory describes how functions operate on the underlying data types. This is a combination of standard operations on fundamental types, and SIMD intrinsics on extended types where available. The <code class="docutils literal notranslate"><span class="pre">functional</span></code> namespace also provides useful abstractions that enable generic formulas to be written. It defines variable-like objects <code class="docutils literal notranslate"><span class="pre">_1,_2</span></code>, such that <code class="docutils literal notranslate"><span class="pre">_1</span> <span class="pre">*</span> <span class="pre">cos(_2)</span></code> represents the product of the argument at index 1 with the cosine of the argument at index 2.</p>
+<p>The <code class="docutils literal notranslate"><span class="pre">tensors</span></code> subdirectory contains the definition of a tensor object. In Marian, a tensor is a piece of memory which is ascribed a shape and type which is associated with a backend (the compute device).
+This directory also contains the implementations of tensor operations on CPU and GPU, as well as universal functions that dispatches the call to the relevant device.</p>
+<p>More specific documentation is available that describes the <a class="reference external" href="https://marian-nmt.github.io/docs/api/graph.html">graph</a>, and how its <a class="reference external" href="https://marian-nmt.github.io/docs/api/operators.html">operators</a> are implemented.</p>
+</section>
+<section id="model">
+<h2>Model<a class="headerlink" href="#model" title="Permalink to this headline">¶</a></h2>
+<div class="highlight-cpp notranslate"><div class="highlight"><pre><span></span>marian/src
+├── models
+├── layers
+└── rnn
+</pre></div>
+</div>
+<p>The subdirectories above constitute the components of a Model. There are two main types of model:</p>
+<ul class="simple">
+<li><p><code class="docutils literal notranslate"><span class="pre">IModel</span></code>, which maps inputs to predictions</p></li>
+<li><p><code class="docutils literal notranslate"><span class="pre">ICriterionFunction</span></code>, which maps (inputs, references) to losses</p></li>
+</ul>
+<p>The usage of these interfaces sometimes combined. As an example, <code class="docutils literal notranslate"><span class="pre">Trainer</span></code>, an implementation of the <code class="docutils literal notranslate"><span class="pre">ICriterionFunction</span></code> interface used in training contains an <code class="docutils literal notranslate"><span class="pre">IModel</span></code> member from which it then computes the loss.</p>
+<p>An important specialisation of <code class="docutils literal notranslate"><span class="pre">IModel</span></code> is <code class="docutils literal notranslate"><span class="pre">IEncoderDecoder</span></code>, this specifies the interface for the <code class="docutils literal notranslate"><span class="pre">EncoderDecoder</span></code> class. <code class="docutils literal notranslate"><span class="pre">EncoderDecoder</span></code> consists of a set of Encoders and Decoders objects, which implement the interface of <code class="docutils literal notranslate"><span class="pre">EncoderBase</span></code> and <code class="docutils literal notranslate"><span class="pre">DecoderBase</span></code>, respectively. This composite object defines the behaviour of general Encoder-Decoder models. For instance, the <code class="docutils literal notranslate"><span class="pre">s2s</span></code> models implement a <code class="docutils literal notranslate"><span class="pre">EncoderS2S</span></code> and <code class="docutils literal notranslate"><span class="pre">DecoderS2S</span></code>, while <code class="docutils literal notranslate"><span class="pre">transformer</span></code> models implement a <code class="docutils literal notranslate"><span class="pre">EncoderTransformer</span></code> <code class="docutils literal notranslate"><span class="pre">DecoderTransformer</span></code>. These two use cases are both encapsulated in the <code class="docutils literal notranslate"><span class="pre">EncoderDecoder</span></code> framework. The addition of new encoder-decoder models only need implement their encoder and decoder classes. The <code class="docutils literal notranslate"><span class="pre">EncoderDecoder</span></code> models are constructed using a factory pattern in <code class="docutils literal notranslate"><span class="pre">src/models/model_factory.cpp</span></code>.</p>
+<p>The export of an ONNX-compliant model is handled by code here.</p>
+<div class="highlight-cpp notranslate"><div class="highlight"><pre><span></span>marian/src
+└── onnx
+</pre></div>
+</div>
+</section>
+<section id="utility">
+<h2>Utility<a class="headerlink" href="#utility" title="Permalink to this headline">¶</a></h2>
+<div class="highlight-cpp notranslate"><div class="highlight"><pre><span></span>marian/src
+└── common
+</pre></div>
+</div>
+<p>The <code class="docutils literal notranslate"><span class="pre">common</span></code> subdirectory contains many useful helper functions and classes.
+The majority of which fall under one of these categories:</p>
+<ul class="simple">
+<li><p>Command-line interface definition an Options object</p></li>
+<li><p>Definitions, macros and typedefs</p></li>
+<li><p>Filesystem and IO helpers</p></li>
+<li><p>Logging</p></li>
+<li><p>Memory management</p></li>
+<li><p>Signal handling</p></li>
+<li><p>Text manipulation</p></li>
+<li><p>Type-based dispatching and properties</p></li>
+</ul>
+<p>Beyond these areas, this folder also contains metadata, such as the program version, list of contributors, and the build flags used to compile it.</p>
+</section>
+<section id="external-libraries">
+<h2>External Libraries<a class="headerlink" href="#external-libraries" title="Permalink to this headline">¶</a></h2>
+<div class="highlight-cpp notranslate"><div class="highlight"><pre><span></span>marian/src
+└── 3rd_party
+</pre></div>
+</div>
+<p>Many of the external libraries that Marian depends on are contained in <code class="docutils literal notranslate"><span class="pre">3rd_party</span></code>.</p>
+<p>These libraries are either copied into place here and version-controlled via the marian repository, or are included here as a submodule. Of these submodules, many have been forked and are maintained under the marian-nmt organisation.</p>
+</section>
+<section id="tests-and-examples">
+<h2>Tests and Examples<a class="headerlink" href="#tests-and-examples" title="Permalink to this headline">¶</a></h2>
+<div class="highlight-cpp notranslate"><div class="highlight"><pre><span></span>marian/src
+├── examples
+└── tests
+</pre></div>
+</div>
+<p>There are basic tests and examples contained in <code class="docutils literal notranslate"><span class="pre">marian/src</span></code>.</p>
+<p>The unit tests cover basic graph functionality, checks on the output of operators, and the implementation of RNN attention, as well IO of binary files and manipulation of the options structure.</p>
+<p>The examples in this subdirectory demonstrate Marian’s functionality using common datasets: Iris and MNIST. The Iris example, builds a simple dense feedforward network to perform a classification task. Over 200 epochs, it trains the network on target using mean cross-entropy. It then reports the accuracy of the model on the test-set. The MNIST example showcases more advanced features of Marian. It offers a choice of models (FFNN, LeNet), can leverage multi-device environments and uses a validator during training. This example more closely replicates the workflow of a typical Marian model, with batching of data and a model implemented in terms of Marian’s model interfaces.</p>
+<div class="highlight-cpp notranslate"><div class="highlight"><pre><span></span>marian
+├── examples
+└── regression-tests
+</pre></div>
+</div>
+<p>Further tests and examples are contained in the root of the marian source code. The examples here are end-to-end tutorials on how to use Marian. These range from covering the basics of training a Marian model, to replicating the types of models presented at the Conference on Machine Translation (WMT).
+Similarly, the tests in <code class="docutils literal notranslate"><span class="pre">regression-tests</span></code> are more numerous and detailed. They cover some 250+ areas of the code. While the unit tests described above check basic consistency of certain functions, the regression tests offer end-to-end verification of the functionality of Marian.</p>
+<!-- Links -->
+</section>
+</section>
+
+
+           </div>
+          </div>
+          <footer><div class="rst-footer-buttons" role="navigation" aria-label="Footer">
+        <a href="index.html" class="btn btn-neutral float-left" title="Welcome to Marian’s documentation!" accesskey="p" rel="prev"><span class="fa fa-arrow-circle-left" aria-hidden="true"></span> Previous</a>
+        <a href="graph.html" class="btn btn-neutral float-right" title="Expression graphs" accesskey="n" rel="next">Next <span class="fa fa-arrow-circle-right" aria-hidden="true"></span></a>
+    </div>
+
+  <hr/>
+
+  <div role="contentinfo">
+    <p>&#169; Copyright 2021, Marian NMT Team.</p>
+  </div>
+
+  Built with <a href="https://www.sphinx-doc.org/">Sphinx</a> using a
+    <a href="https://github.com/readthedocs/sphinx_rtd_theme">theme</a>
+    provided by <a href="https://readthedocs.org">Read the Docs</a>.
+   
+
+</footer>
+        </div>
+      </div>
+    </section>
+  </div>
+  <script>
+      jQuery(function () {
+          SphinxRtdTheme.Navigation.enable(true);
+      });
+  </script> 
+
+</body>
+</html>

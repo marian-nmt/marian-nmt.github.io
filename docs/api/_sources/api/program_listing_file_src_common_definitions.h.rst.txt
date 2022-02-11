@@ -22,7 +22,7 @@ Program Listing for File definitions.h
    #include <string>
    #include <vector>
    
-   #define THREAD_GUARD(body) [&]() { body; }() // test if THREAD_GUARD is neccessary, remove if no problems occur.
+   #define THREAD_GUARD(body) [&]() { body; }() // test if THREAD_GUARD is necessary, remove if no problems occur.
    #define NodeOp(op) [=]() { op; }
    
    // helper macro to disable optimization (gcc only)
@@ -116,22 +116,22 @@ Program Listing for File definitions.h
    using Weak = std::weak_ptr<T>;
    
    template <class T, typename... Args>
-   Ptr<T> New(Args&&... args) {
-     return Ptr<T>(new T(std::forward<Args>(args)...));
+   inline Ptr<T> New(Args&&... args) {
+     return std::make_shared<T>(std::forward<Args>(args)...);
    }
    
    template <class T>
-   Ptr<T> New(Ptr<T> p) {
+   inline Ptr<T> New(Ptr<T> p) {
      return Ptr<T>(p);
    }
    
    template <class T, typename... Args>
-   IPtr<T> INew(Args&&... args) {
+   inline IPtr<T> INew(Args&&... args) {
      return IPtr<T>(new T(std::forward<Args>(args)...));
    }
    
    template <class T>
-   IPtr<T> INew(Ptr<T> p) {
+   inline IPtr<T> INew(Ptr<T> p) {
      return IPtr<T>(p);
    }
    

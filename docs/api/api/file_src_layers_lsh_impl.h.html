@@ -1,0 +1,179 @@
+<!DOCTYPE html>
+<html class="writer-html5" lang="en" >
+<head>
+  <meta charset="utf-8" /><meta name="generator" content="Docutils 0.17.1: http://docutils.sourceforge.net/" />
+
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>File lsh_impl.h &mdash; Marian NMT v1.11.3 2022-02-11 documentation</title><link rel="stylesheet" href="../_static/css/theme.css" type="text/css" />
+    <link rel="stylesheet" href="../_static/pygments.css" type="text/css" />
+      <link rel="stylesheet" href="../_static/css/custom.css" type="text/css" />
+      <link rel="stylesheet" href="../_static/collapsible-lists/css/tree_view.css" type="text/css" />
+    <link rel="canonical" href="http://marian-nmt.github.io/docs/api/api/file_src_layers_lsh_impl.h.html" />
+  <!--[if lt IE 9]>
+    <script src="../_static/js/html5shiv.min.js"></script>
+  <![endif]-->
+  <script id="documentation_options" data-url_root="../" src="../_static/documentation_options.js"></script>
+        <script src="../_static/jquery.js"></script>
+        <script src="../_static/underscore.js"></script>
+        <script src="../_static/doctools.js"></script>
+        <script src="../_static/language_data.js"></script>
+        <script src="../_static/collapsible-lists/js/CollapsibleLists.compressed.js"></script>
+        <script src="../_static/collapsible-lists/js/apply-collapsible-lists.js"></script>
+        <script async="async" src="https://cdnjs.cloudflare.com/ajax/libs/mathjax/2.7.5/latest.js?config=TeX-AMS-MML_HTMLorMML"></script>
+        <script type="text/x-mathjax-config">MathJax.Hub.Config({"tex2jax": {"inlineMath": [["\\(", "\\)"]], "displayMath": [["\\[", "\\]"]], "processRefs": false, "processEnvironments": false}})</script>
+    <script src="../_static/js/theme.js"></script>
+    <link rel="index" title="Index" href="../genindex.html" />
+    <link rel="search" title="Search" href="../search.html" /> 
+</head>
+
+<body class="wy-body-for-nav"> 
+  <div class="wy-grid-for-nav">
+    <nav data-toggle="wy-nav-shift" class="wy-nav-side">
+      <div class="wy-side-scroll">
+        <div class="wy-side-nav-search" >
+            <a href="../index.html" class="icon icon-home"> Marian NMT
+          </a>
+              <div class="version">
+                v1.11.3
+              </div>
+<div role="search">
+  <form id="rtd-search-form" class="wy-form" action="../search.html" method="get">
+    <input type="text" name="q" placeholder="Search docs" />
+    <input type="hidden" name="check_keywords" value="yes" />
+    <input type="hidden" name="area" value="default" />
+  </form>
+</div>
+        </div><div class="wy-menu wy-menu-vertical" data-spy="affix" role="navigation" aria-label="Navigation menu">
+              <p><span class="caption-text">Contents:</span></p>
+<ul>
+<li class="toctree-l1"><a class="reference internal" href="../structure.html">Code Organisation</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../graph.html">Expression graphs</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../operators.html">Operations in the expression graph</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../layer.html">Layers</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../factors.html">Using Marian with factors</a></li>
+<li class="toctree-l1"><a class="reference internal" href="library_index.html">Library API</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../contributing.html">How to contribute to Marian</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../doc_guide.html">Writing documentation</a></li>
+</ul>
+
+        </div>
+      </div>
+    </nav>
+
+    <section data-toggle="wy-nav-shift" class="wy-nav-content-wrap"><nav class="wy-nav-top" aria-label="Mobile navigation menu" >
+          <i data-toggle="wy-nav-top" class="fa fa-bars"></i>
+          <a href="../index.html">Marian NMT</a>
+      </nav>
+
+      <div class="wy-nav-content">
+        <div class="rst-content">
+          <div role="navigation" aria-label="Page navigation">
+  <ul class="wy-breadcrumbs">
+      <li><a href="../index.html" class="icon icon-home"></a> &raquo;</li>
+      <li>File lsh_impl.h</li>
+      <li class="wy-breadcrumbs-aside">
+            <a href="../_sources/api/file_src_layers_lsh_impl.h.rst.txt" rel="nofollow"> View page source</a>
+      </li>
+  </ul>
+  <hr/>
+</div>
+          <div role="main" class="document" itemscope="itemscope" itemtype="http://schema.org/Article">
+           <div itemprop="articleBody">
+             
+  <section id="file-lsh-impl-h">
+<span id="file-src-layers-lsh-impl-h"></span><h1>File lsh_impl.h<a class="headerlink" href="#file-lsh-impl-h" title="Permalink to this headline">¶</a></h1>
+<p>↰ <a class="reference internal" href="dir_src_layers.html#dir-src-layers"><span class="std std-ref">Parent directory</span></a> (<code class="docutils literal notranslate"><span class="pre">src/layers</span></code>)</p>
+<div class="contents local topic" id="contents">
+<p class="topic-title">Contents</p>
+<ul class="simple">
+<li><p><a class="reference internal" href="#definition-src-layers-lsh-impl-h" id="id1">Definition (<code class="docutils literal notranslate"><span class="pre">src/layers/lsh_impl.h</span></code>)</a></p></li>
+<li><p><a class="reference internal" href="#includes" id="id2">Includes</a></p></li>
+<li><p><a class="reference internal" href="#included-by" id="id3">Included By</a></p></li>
+<li><p><a class="reference internal" href="#namespaces" id="id4">Namespaces</a></p></li>
+<li><p><a class="reference internal" href="#classes" id="id5">Classes</a></p></li>
+<li><p><a class="reference internal" href="#functions" id="id6">Functions</a></p></li>
+<li><p><a class="reference internal" href="#typedefs" id="id7">Typedefs</a></p></li>
+</ul>
+</div>
+<section id="definition-src-layers-lsh-impl-h">
+<h2>Definition (<code class="docutils literal notranslate"><span class="pre">src/layers/lsh_impl.h</span></code>)<a class="headerlink" href="#definition-src-layers-lsh-impl-h" title="Permalink to this headline">¶</a></h2>
+<div class="toctree-wrapper compound">
+<ul>
+<li class="toctree-l1"><a class="reference internal" href="program_listing_file_src_layers_lsh_impl.h.html">Program Listing for File lsh_impl.h</a></li>
+</ul>
+</div>
+</section>
+<section id="includes">
+<h2>Includes<a class="headerlink" href="#includes" title="Permalink to this headline">¶</a></h2>
+<ul class="simple">
+<li><p><code class="docutils literal notranslate"><span class="pre">vector</span></code> (<a class="reference internal" href="file_src_embedder_vector_collector.cpp.html#file-src-embedder-vector-collector-cpp"><span class="std std-ref">File vector_collector.cpp</span></a>)</p></li>
+</ul>
+</section>
+<section id="included-by">
+<h2>Included By<a class="headerlink" href="#included-by" title="Permalink to this headline">¶</a></h2>
+<ul class="simple">
+<li><p><a class="reference internal" href="file_src_layers_lsh.cpp.html#file-src-layers-lsh-cpp"><span class="std std-ref">File lsh.cpp</span></a></p></li>
+</ul>
+</section>
+<section id="namespaces">
+<h2>Namespaces<a class="headerlink" href="#namespaces" title="Permalink to this headline">¶</a></h2>
+<ul class="simple">
+<li><p><a class="reference internal" href="namespace_marian.html#namespace-marian"><span class="std std-ref">Namespace marian</span></a></p></li>
+<li><p><a class="reference internal" href="namespace_marian__lsh.html#namespace-marian-lsh"><span class="std std-ref">Namespace marian::lsh</span></a></p></li>
+</ul>
+</section>
+<section id="classes">
+<h2>Classes<a class="headerlink" href="#classes" title="Permalink to this headline">¶</a></h2>
+<ul class="simple">
+<li><p><a class="reference internal" href="structmarian_1_1lsh_1_1Parameters.html#exhale-struct-structmarian-1-1lsh-1-1parameters"><span class="std std-ref">Struct Parameters</span></a></p></li>
+</ul>
+</section>
+<section id="functions">
+<h2>Functions<a class="headerlink" href="#functions" title="Permalink to this headline">¶</a></h2>
+<ul class="simple">
+<li><p><a class="reference internal" href="function_lsh__impl_8h_1a2fe5bf99ac13295c39011f749b575289.html#exhale-function-lsh-impl-8h-1a2fe5bf99ac13295c39011f749b575289"><span class="std std-ref">Template Function marian::lsh::getStaticOrDynamic</span></a></p></li>
+<li><p><a class="reference internal" href="function_lsh__impl_8h_1a09fe1c6b6dcc1cb5224734af0e77df6e.html#exhale-function-lsh-impl-8h-1a09fe1c6b6dcc1cb5224734af0e77df6e"><span class="std std-ref">Template Function marian::lsh::hamming</span></a></p></li>
+<li><p><a class="reference internal" href="function_lsh__impl_8h_1a440d6afc55b936f58ae59957cd9fb8ab.html#exhale-function-lsh-impl-8h-1a440d6afc55b936f58ae59957cd9fb8ab"><span class="std std-ref">Template Function marian::lsh::hammingTopK</span></a></p></li>
+<li><p><a class="reference internal" href="function_lsh__impl_8h_1a58e196a9095ce6395a4777294b69cbb2.html#exhale-function-lsh-impl-8h-1a58e196a9095ce6395a4777294b69cbb2"><span class="std std-ref">Template Function marian::lsh::hammingTopKUnroll</span></a></p></li>
+<li><p><a class="reference internal" href="function_lsh__impl_8h_1a31cee06d5d9fbf5a8194926568fcda34.html#exhale-function-lsh-impl-8h-1a31cee06d5d9fbf5a8194926568fcda34"><span class="std std-ref">Template Function marian::lsh::hammingTopKUnrollWarp</span></a></p></li>
+<li><p><a class="reference internal" href="function_lsh__impl_8h_1a97c4f0396e9dfbf1fe2b0ea495bdf6ca.html#exhale-function-lsh-impl-8h-1a97c4f0396e9dfbf1fe2b0ea495bdf6ca"><span class="std std-ref">Function marian::lsh::popcount</span></a></p></li>
+</ul>
+</section>
+<section id="typedefs">
+<h2>Typedefs<a class="headerlink" href="#typedefs" title="Permalink to this headline">¶</a></h2>
+<ul class="simple">
+<li><p><a class="reference internal" href="typedef_lsh__impl_8h_1ae08e1cb14fc89d98d0c49ec22ceffeb5.html#exhale-typedef-lsh-impl-8h-1ae08e1cb14fc89d98d0c49ec22ceffeb5"><span class="std std-ref">Typedef marian::lsh::ChunkType</span></a></p></li>
+<li><p><a class="reference internal" href="typedef_lsh__impl_8h_1a351eb54d0ba66c7e6576f475606673cc.html#exhale-typedef-lsh-impl-8h-1a351eb54d0ba66c7e6576f475606673cc"><span class="std std-ref">Typedef marian::lsh::DistType</span></a></p></li>
+</ul>
+</section>
+</section>
+
+
+           </div>
+          </div>
+          <footer>
+
+  <hr/>
+
+  <div role="contentinfo">
+    <p>&#169; Copyright 2021, Marian NMT Team.</p>
+  </div>
+
+  Built with <a href="https://www.sphinx-doc.org/">Sphinx</a> using a
+    <a href="https://github.com/readthedocs/sphinx_rtd_theme">theme</a>
+    provided by <a href="https://readthedocs.org">Read the Docs</a>.
+   
+
+</footer>
+        </div>
+      </div>
+    </section>
+  </div>
+  <script>
+      jQuery(function () {
+          SphinxRtdTheme.Navigation.enable(true);
+      });
+  </script> 
+
+</body>
+</html>

@@ -4,7 +4,7 @@
   <meta charset="utf-8" /><meta name="generator" content="Docutils 0.17.1: http://docutils.sourceforge.net/" />
 
   <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-  <title>Program Listing for File corpus.h &mdash; Marian NMT v1.10.28 2022-01-28 documentation</title><link rel="stylesheet" href="../_static/css/theme.css" type="text/css" />
+  <title>Program Listing for File corpus.h &mdash; Marian NMT v1.11.3 2022-02-11 documentation</title><link rel="stylesheet" href="../_static/css/theme.css" type="text/css" />
     <link rel="stylesheet" href="../_static/pygments.css" type="text/css" />
       <link rel="stylesheet" href="../_static/css/custom.css" type="text/css" />
       <link rel="stylesheet" href="../_static/collapsible-lists/css/tree_view.css" type="text/css" />
@@ -34,7 +34,7 @@
             <a href="../index.html" class="icon icon-home"> Marian NMT
           </a>
               <div class="version">
-                v1.10.28
+                v1.11.3
               </div>
 <div role="search">
   <form id="rtd-search-form" class="wy-form" action="../search.html" method="get">
@@ -46,6 +46,7 @@
         </div><div class="wy-menu wy-menu-vertical" data-spy="affix" role="navigation" aria-label="Navigation menu">
               <p><span class="caption-text">Contents:</span></p>
 <ul>
+<li class="toctree-l1"><a class="reference internal" href="../structure.html">Code Organisation</a></li>
 <li class="toctree-l1"><a class="reference internal" href="../graph.html">Expression graphs</a></li>
 <li class="toctree-l1"><a class="reference internal" href="../operators.html">Operations in the expression graph</a></li>
 <li class="toctree-l1"><a class="reference internal" href="../layer.html">Layers</a></li>
@@ -88,6 +89,7 @@
 <span class="cp">#include</span><span class="w"> </span><span class="cpf">&lt;iostream&gt;</span><span class="cp"></span>
 <span class="cp">#include</span><span class="w"> </span><span class="cpf">&lt;random&gt;</span><span class="cp"></span>
 
+<span class="cp">#include</span><span class="w"> </span><span class="cpf">&quot;3rd_party/threadpool.h&quot;</span><span class="cp"></span>
 <span class="cp">#include</span><span class="w"> </span><span class="cpf">&quot;common/definitions.h&quot;</span><span class="cp"></span>
 <span class="cp">#include</span><span class="w"> </span><span class="cpf">&quot;common/file_stream.h&quot;</span><span class="cp"></span>
 <span class="cp">#include</span><span class="w"> </span><span class="cpf">&quot;common/options.h&quot;</span><span class="cp"></span>
@@ -104,6 +106,8 @@
 <span class="k">private</span><span class="o">:</span><span class="w"></span>
 <span class="w">  </span><span class="n">std</span><span class="o">::</span><span class="n">vector</span><span class="o">&lt;</span><span class="n">UPtr</span><span class="o">&lt;</span><span class="n">io</span><span class="o">::</span><span class="n">TemporaryFile</span><span class="o">&gt;&gt;</span><span class="w"> </span><span class="n">tempFiles_</span><span class="p">;</span><span class="w"></span>
 <span class="w">  </span><span class="n">std</span><span class="o">::</span><span class="n">vector</span><span class="o">&lt;</span><span class="kt">size_t</span><span class="o">&gt;</span><span class="w"> </span><span class="n">ids_</span><span class="p">;</span><span class="w"></span>
+
+<span class="w">  </span><span class="n">UPtr</span><span class="o">&lt;</span><span class="n">ThreadPool</span><span class="o">&gt;</span><span class="w"> </span><span class="n">threadPool_</span><span class="p">;</span><span class="w"> </span><span class="c1">// thread pool for parallelized data reading</span>
 
 <span class="w">  </span><span class="c1">// for shuffle-in-ram</span>
 <span class="w">  </span><span class="kt">bool</span><span class="w"> </span><span class="n">shuffleInRAM_</span><span class="p">{</span><span class="nb">false</span><span class="p">};</span><span class="w"></span>

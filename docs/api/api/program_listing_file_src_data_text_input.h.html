@@ -4,7 +4,7 @@
   <meta charset="utf-8" /><meta name="generator" content="Docutils 0.17.1: http://docutils.sourceforge.net/" />
 
   <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-  <title>Program Listing for File text_input.h &mdash; Marian NMT v1.10.28 2022-01-28 documentation</title><link rel="stylesheet" href="../_static/css/theme.css" type="text/css" />
+  <title>Program Listing for File text_input.h &mdash; Marian NMT v1.11.3 2022-02-11 documentation</title><link rel="stylesheet" href="../_static/css/theme.css" type="text/css" />
     <link rel="stylesheet" href="../_static/pygments.css" type="text/css" />
       <link rel="stylesheet" href="../_static/css/custom.css" type="text/css" />
       <link rel="stylesheet" href="../_static/collapsible-lists/css/tree_view.css" type="text/css" />
@@ -34,7 +34,7 @@
             <a href="../index.html" class="icon icon-home"> Marian NMT
           </a>
               <div class="version">
-                v1.10.28
+                v1.11.3
               </div>
 <div role="search">
   <form id="rtd-search-form" class="wy-form" action="../search.html" method="get">
@@ -46,6 +46,7 @@
         </div><div class="wy-menu wy-menu-vertical" data-spy="affix" role="navigation" aria-label="Navigation menu">
               <p><span class="caption-text">Contents:</span></p>
 <ul>
+<li class="toctree-l1"><a class="reference internal" href="../structure.html">Code Organisation</a></li>
 <li class="toctree-l1"><a class="reference internal" href="../graph.html">Expression graphs</a></li>
 <li class="toctree-l1"><a class="reference internal" href="../operators.html">Operations in the expression graph</a></li>
 <li class="toctree-l1"><a class="reference internal" href="../layer.html">Layers</a></li>
@@ -121,12 +122,10 @@
 <span class="w">  </span><span class="kt">bool</span><span class="w"> </span><span class="n">maxLengthCrop_</span><span class="p">{</span><span class="nb">false</span><span class="p">};</span><span class="w"></span>
 
 <span class="k">public</span><span class="o">:</span><span class="w"></span>
-<span class="w">  </span><span class="k">typedef</span><span class="w"> </span><span class="n">SentenceTuple</span><span class="w"> </span><span class="n">Sample</span><span class="p">;</span><span class="w"></span>
-
 <span class="w">  </span><span class="n">TextInput</span><span class="p">(</span><span class="n">std</span><span class="o">::</span><span class="n">vector</span><span class="o">&lt;</span><span class="n">std</span><span class="o">::</span><span class="n">string</span><span class="o">&gt;</span><span class="w"> </span><span class="n">inputs</span><span class="p">,</span><span class="w"> </span><span class="n">std</span><span class="o">::</span><span class="n">vector</span><span class="o">&lt;</span><span class="n">Ptr</span><span class="o">&lt;</span><span class="n">Vocab</span><span class="o">&gt;&gt;</span><span class="w"> </span><span class="n">vocabs</span><span class="p">,</span><span class="w"> </span><span class="n">Ptr</span><span class="o">&lt;</span><span class="n">Options</span><span class="o">&gt;</span><span class="w"> </span><span class="n">options</span><span class="p">);</span><span class="w"></span>
 <span class="w">  </span><span class="k">virtual</span><span class="w"> </span><span class="o">~</span><span class="n">TextInput</span><span class="p">()</span><span class="w"> </span><span class="p">{}</span><span class="w"></span>
 
-<span class="w">  </span><span class="n">Sample</span><span class="w"> </span><span class="n">next</span><span class="p">()</span><span class="w"> </span><span class="k">override</span><span class="p">;</span><span class="w"></span>
+<span class="w">  </span><span class="n">SentenceTuple</span><span class="w"> </span><span class="n">next</span><span class="p">()</span><span class="w"> </span><span class="k">override</span><span class="p">;</span><span class="w"></span>
 
 <span class="w">  </span><span class="kt">void</span><span class="w"> </span><span class="nf">shuffle</span><span class="p">()</span><span class="w"> </span><span class="k">override</span><span class="w"> </span><span class="p">{}</span><span class="w"></span>
 <span class="w">  </span><span class="kt">void</span><span class="w"> </span><span class="nf">reset</span><span class="p">()</span><span class="w"> </span><span class="k">override</span><span class="w"> </span><span class="p">{}</span><span class="w"></span>
@@ -136,7 +135,7 @@
 
 <span class="w">  </span><span class="c1">// TODO: There are half dozen functions called toBatch(), which are very</span>
 <span class="w">  </span><span class="c1">// similar. Factor them.</span>
-<span class="w">  </span><span class="n">batch_ptr</span><span class="w"> </span><span class="nf">toBatch</span><span class="p">(</span><span class="k">const</span><span class="w"> </span><span class="n">std</span><span class="o">::</span><span class="n">vector</span><span class="o">&lt;</span><span class="n">Sample</span><span class="o">&gt;&amp;</span><span class="w"> </span><span class="n">batchVector</span><span class="p">)</span><span class="w"> </span><span class="k">override</span><span class="w"> </span><span class="p">{</span><span class="w"></span>
+<span class="w">  </span><span class="n">batch_ptr</span><span class="w"> </span><span class="nf">toBatch</span><span class="p">(</span><span class="k">const</span><span class="w"> </span><span class="n">std</span><span class="o">::</span><span class="n">vector</span><span class="o">&lt;</span><span class="n">SentenceTuple</span><span class="o">&gt;&amp;</span><span class="w"> </span><span class="n">batchVector</span><span class="p">)</span><span class="w"> </span><span class="k">override</span><span class="w"> </span><span class="p">{</span><span class="w"></span>
 <span class="w">    </span><span class="kt">size_t</span><span class="w"> </span><span class="n">batchSize</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="n">batchVector</span><span class="p">.</span><span class="n">size</span><span class="p">();</span><span class="w"></span>
 
 <span class="w">    </span><span class="n">std</span><span class="o">::</span><span class="n">vector</span><span class="o">&lt;</span><span class="kt">size_t</span><span class="o">&gt;</span><span class="w"> </span><span class="n">sentenceIds</span><span class="p">;</span><span class="w"></span>

@@ -4,7 +4,7 @@
   <meta charset="utf-8" /><meta name="generator" content="Docutils 0.17.1: http://docutils.sourceforge.net/" />
 
   <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-  <title>Program Listing for File corpus_sqlite.cpp &mdash; Marian NMT v1.10.28 2022-01-28 documentation</title><link rel="stylesheet" href="../_static/css/theme.css" type="text/css" />
+  <title>Program Listing for File corpus_sqlite.cpp &mdash; Marian NMT v1.11.3 2022-02-11 documentation</title><link rel="stylesheet" href="../_static/css/theme.css" type="text/css" />
     <link rel="stylesheet" href="../_static/pygments.css" type="text/css" />
       <link rel="stylesheet" href="../_static/css/custom.css" type="text/css" />
       <link rel="stylesheet" href="../_static/collapsible-lists/css/tree_view.css" type="text/css" />
@@ -34,7 +34,7 @@
             <a href="../index.html" class="icon icon-home"> Marian NMT
           </a>
               <div class="version">
-                v1.10.28
+                v1.11.3
               </div>
 <div role="search">
   <form id="rtd-search-form" class="wy-form" action="../search.html" method="get">
@@ -46,6 +46,7 @@
         </div><div class="wy-menu wy-menu-vertical" data-spy="affix" role="navigation" aria-label="Navigation menu">
               <p><span class="caption-text">Contents:</span></p>
 <ul>
+<li class="toctree-l1"><a class="reference internal" href="../structure.html">Code Organisation</a></li>
 <li class="toctree-l1"><a class="reference internal" href="../graph.html">Expression graphs</a></li>
 <li class="toctree-l1"><a class="reference internal" href="../operators.html">Operations in the expression graph</a></li>
 <li class="toctree-l1"><a class="reference internal" href="../layer.html">Layers</a></li>
@@ -193,7 +194,7 @@
 <span class="w">  </span><span class="k">while</span><span class="p">(</span><span class="n">select_</span><span class="o">-&gt;</span><span class="n">executeStep</span><span class="p">())</span><span class="w"> </span><span class="p">{</span><span class="w"></span>
 <span class="w">    </span><span class="c1">// fill up the sentence tuple with sentences from all input files</span>
 <span class="w">    </span><span class="kt">size_t</span><span class="w"> </span><span class="n">curId</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="n">select_</span><span class="o">-&gt;</span><span class="n">getColumn</span><span class="p">(</span><span class="mi">0</span><span class="p">).</span><span class="n">getInt</span><span class="p">();</span><span class="w"></span>
-<span class="w">    </span><span class="n">SentenceTuple</span><span class="w"> </span><span class="nf">tup</span><span class="p">(</span><span class="n">curId</span><span class="p">);</span><span class="w"></span>
+<span class="w">    </span><span class="n">SentenceTupleImpl</span><span class="w"> </span><span class="nf">tup</span><span class="p">(</span><span class="n">curId</span><span class="p">);</span><span class="w"></span>
 
 <span class="w">    </span><span class="k">for</span><span class="p">(</span><span class="kt">size_t</span><span class="w"> </span><span class="n">i</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="mi">0</span><span class="p">;</span><span class="w"> </span><span class="n">i</span><span class="w"> </span><span class="o">&lt;</span><span class="w"> </span><span class="n">files_</span><span class="p">.</span><span class="n">size</span><span class="p">();</span><span class="w"> </span><span class="o">++</span><span class="n">i</span><span class="p">)</span><span class="w"> </span><span class="p">{</span><span class="w"></span>
 <span class="w">      </span><span class="k">auto</span><span class="w"> </span><span class="n">line</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="n">select_</span><span class="o">-&gt;</span><span class="n">getColumn</span><span class="p">((</span><span class="kt">int</span><span class="p">)(</span><span class="n">i</span><span class="w"> </span><span class="o">+</span><span class="w"> </span><span class="mi">1</span><span class="p">));</span><span class="w"></span>
@@ -210,9 +211,9 @@
 <span class="w">    </span><span class="k">if</span><span class="p">(</span><span class="n">std</span><span class="o">::</span><span class="n">all_of</span><span class="p">(</span><span class="n">tup</span><span class="p">.</span><span class="n">begin</span><span class="p">(),</span><span class="w"> </span><span class="n">tup</span><span class="p">.</span><span class="n">end</span><span class="p">(),</span><span class="w"> </span><span class="p">[</span><span class="o">=</span><span class="p">](</span><span class="k">const</span><span class="w"> </span><span class="n">Words</span><span class="o">&amp;</span><span class="w"> </span><span class="n">words</span><span class="p">)</span><span class="w"> </span><span class="p">{</span><span class="w"></span>
 <span class="w">         </span><span class="k">return</span><span class="w"> </span><span class="n">words</span><span class="p">.</span><span class="n">size</span><span class="p">()</span><span class="w"> </span><span class="o">&gt;</span><span class="w"> </span><span class="mi">0</span><span class="w"> </span><span class="o">&amp;&amp;</span><span class="w"> </span><span class="n">words</span><span class="p">.</span><span class="n">size</span><span class="p">()</span><span class="w"> </span><span class="o">&lt;=</span><span class="w"> </span><span class="n">maxLength_</span><span class="p">;</span><span class="w"></span>
 <span class="w">       </span><span class="p">}))</span><span class="w"></span>
-<span class="w">      </span><span class="k">return</span><span class="w"> </span><span class="n">tup</span><span class="p">;</span><span class="w"></span>
+<span class="w">      </span><span class="k">return</span><span class="w"> </span><span class="n">SentenceTuple</span><span class="p">(</span><span class="n">tup</span><span class="p">);</span><span class="w"></span>
 <span class="w">  </span><span class="p">}</span><span class="w"></span>
-<span class="w">  </span><span class="k">return</span><span class="w"> </span><span class="n">SentenceTuple</span><span class="p">(</span><span class="mi">0</span><span class="p">);</span><span class="w"></span>
+<span class="w">  </span><span class="k">return</span><span class="w"> </span><span class="n">SentenceTuple</span><span class="p">();</span><span class="w"></span>
 <span class="p">}</span><span class="w"></span>
 
 <span class="kt">void</span><span class="w"> </span><span class="n">CorpusSQLite</span><span class="o">::</span><span class="n">shuffle</span><span class="p">()</span><span class="w"> </span><span class="p">{</span><span class="w"></span>

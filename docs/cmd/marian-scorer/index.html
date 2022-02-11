@@ -197,7 +197,7 @@
               <h2 id="marian-scorer">marian-scorer</h2>
 <p>Marian: Fast Neural Machine Translation in C++</p>
 
-<p>Version: v1.10.28; 71b5454 2022-01-26 15:17:38 +0000</p>
+<p>Version: v1.11.3 b8bf086 2022-02-11 06:04:38 -0800</p>
 
 <p>Usage: <code class="highlighter-rouge">./marian-scorer [OPTIONS]</code></p>
 
@@ -209,8 +209,8 @@
 --build-info TEXT                     Print CMake build options and exit. Set to 'all' to print 
                                       advanced options
 -c,--config VECTOR ...                Configuration file(s). If multiple, later overrides earlier
--w,--workspace UINT=2048              Preallocate  arg  MB of work space
---log TEXT                            Log training process information to file given by  arg
+-w,--workspace UINT=2048              Preallocate arg MB of work space
+--log TEXT                            Log training process information to file given by arg
 --log-level TEXT=info                 Set verbosity level of logging: trace, debug, info, warn, 
                                       err(or), critical, off
 --log-time-zone TEXT                  Set time zone for the date shown on logging
@@ -271,7 +271,11 @@
 --transformer-pool                    Pool encoder states instead of using cross attention 
                                       (selects first encoder state, best used with special token)
 --transformer-dim-ffn INT=2048        Size of position-wise feed-forward network (transformer)
+--transformer-decoder-dim-ffn INT=0   Size of position-wise feed-forward network in decoder 
+                                      (transformer). Uses --transformer-dim-ffn if 0.
 --transformer-ffn-depth INT=2         Depth of filters (transformer)
+--transformer-decoder-ffn-depth INT=0 Depth of filters in decoder (transformer). Uses 
+                                      --transformer-ffn-depth if 0
 --transformer-ffn-activation TEXT=swish
                                       Activation between filters: swish or relu (transformer)
 --transformer-dim-aan INT=2048        Size of position-wise feed-forward network in AAN 
@@ -343,6 +347,8 @@
 --maxi-batch INT=100                  Number of batches to preload for length-based sorting
 --maxi-batch-sort TEXT=trg            Sorting strategy for maxi-batch: none, src, trg (not 
                                       available for decoder)
+--data-threads UINT=8                 Number of concurrent threads to use during data reading and 
+                                      processing
 --fp16                                Shortcut for mixed precision inference with float16, 
                                       corresponds to: --precision float16
 --precision VECTOR=float32 ...        Mixed precision for inference, set parameter type in 

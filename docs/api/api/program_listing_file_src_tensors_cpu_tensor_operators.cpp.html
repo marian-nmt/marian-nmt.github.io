@@ -4,7 +4,7 @@
   <meta charset="utf-8" /><meta name="generator" content="Docutils 0.17.1: http://docutils.sourceforge.net/" />
 
   <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-  <title>Program Listing for File tensor_operators.cpp &mdash; Marian NMT v1.10.28 2022-01-28 documentation</title><link rel="stylesheet" href="../_static/css/theme.css" type="text/css" />
+  <title>Program Listing for File tensor_operators.cpp &mdash; Marian NMT v1.11.3 2022-02-11 documentation</title><link rel="stylesheet" href="../_static/css/theme.css" type="text/css" />
     <link rel="stylesheet" href="../_static/pygments.css" type="text/css" />
       <link rel="stylesheet" href="../_static/css/custom.css" type="text/css" />
       <link rel="stylesheet" href="../_static/collapsible-lists/css/tree_view.css" type="text/css" />
@@ -34,7 +34,7 @@
             <a href="../index.html" class="icon icon-home"> Marian NMT
           </a>
               <div class="version">
-                v1.10.28
+                v1.11.3
               </div>
 <div role="search">
   <form id="rtd-search-form" class="wy-form" action="../search.html" method="get">
@@ -46,6 +46,7 @@
         </div><div class="wy-menu wy-menu-vertical" data-spy="affix" role="navigation" aria-label="Navigation menu">
               <p><span class="caption-text">Contents:</span></p>
 <ul>
+<li class="toctree-l1"><a class="reference internal" href="../structure.html">Code Organisation</a></li>
 <li class="toctree-l1"><a class="reference internal" href="../graph.html">Expression graphs</a></li>
 <li class="toctree-l1"><a class="reference internal" href="../operators.html">Operations in the expression graph</a></li>
 <li class="toctree-l1"><a class="reference internal" href="../layer.html">Layers</a></li>
@@ -105,6 +106,10 @@
 <span class="k">namespace</span><span class="w"> </span><span class="nn">cpu</span><span class="w"> </span><span class="p">{</span><span class="w"></span>
 
 <span class="kt">void</span><span class="w"> </span><span class="nf">IsNaN</span><span class="p">(</span><span class="k">const</span><span class="w"> </span><span class="n">Tensor</span><span class="w"> </span><span class="cm">/*in*/</span><span class="p">,</span><span class="w"> </span><span class="n">Ptr</span><span class="o">&lt;</span><span class="n">Allocator</span><span class="o">&gt;</span><span class="w"> </span><span class="cm">/*allocator*/</span><span class="p">,</span><span class="w"> </span><span class="kt">bool</span><span class="o">&amp;</span><span class="w"> </span><span class="cm">/*isNaN*/</span><span class="p">,</span><span class="w"> </span><span class="kt">bool</span><span class="o">&amp;</span><span class="w"> </span><span class="cm">/*isInf*/</span><span class="p">)</span><span class="w"> </span><span class="p">{</span><span class="w"></span>
+<span class="w">  </span><span class="n">ABORT</span><span class="p">(</span><span class="s">&quot;Not implemented&quot;</span><span class="p">);</span><span class="w"></span>
+<span class="p">}</span><span class="w"></span>
+
+<span class="kt">bool</span><span class="w"> </span><span class="nf">SanitizeGradient</span><span class="p">(</span><span class="n">marian</span><span class="o">::</span><span class="n">Tensor</span><span class="w"> </span><span class="cm">/*in*/</span><span class="p">,</span><span class="w"> </span><span class="n">Ptr</span><span class="o">&lt;</span><span class="n">Allocator</span><span class="o">&gt;</span><span class="w"> </span><span class="cm">/*allocator*/</span><span class="p">,</span><span class="w"> </span><span class="kt">bool</span><span class="w"> </span><span class="cm">/*pruneNaN*/</span><span class="p">,</span><span class="w"> </span><span class="kt">bool</span><span class="w"> </span><span class="cm">/*clipInf*/</span><span class="p">)</span><span class="w"> </span><span class="p">{</span><span class="w"></span>
 <span class="w">  </span><span class="n">ABORT</span><span class="p">(</span><span class="s">&quot;Not implemented&quot;</span><span class="p">);</span><span class="w"></span>
 <span class="p">}</span><span class="w"></span>
 
@@ -819,6 +824,7 @@
 <span class="w">  </span><span class="p">}</span><span class="w"></span>
 <span class="p">}</span><span class="w"></span>
 
+<span class="k">template</span><span class="w"> </span><span class="o">&lt;</span><span class="kt">bool</span><span class="w"> </span><span class="n">add</span><span class="o">&gt;</span><span class="w"></span>
 <span class="kt">void</span><span class="w"> </span><span class="n">Insert</span><span class="p">(</span><span class="n">Tensor</span><span class="w"> </span><span class="n">out</span><span class="p">,</span><span class="w"></span>
 <span class="w">            </span><span class="k">const</span><span class="w"> </span><span class="n">Tensor</span><span class="w"> </span><span class="n">in</span><span class="p">,</span><span class="w"></span>
 <span class="w">            </span><span class="k">const</span><span class="w"> </span><span class="n">Tensor</span><span class="w"> </span><span class="n">indices</span><span class="p">,</span><span class="w"></span>
@@ -840,11 +846,17 @@
 <span class="w">    </span><span class="kt">int</span><span class="w"> </span><span class="n">idxIndex</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="n">idxShape</span><span class="p">.</span><span class="n">bindex</span><span class="p">(</span><span class="n">dims</span><span class="p">);</span><span class="w"> </span><span class="c1">// broadcast index into indices tensor</span>
 <span class="w">    </span><span class="n">dims</span><span class="p">[</span><span class="n">axisCPU</span><span class="p">]</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="p">(</span><span class="kt">int</span><span class="p">)</span><span class="n">indices</span><span class="o">-&gt;</span><span class="n">data</span><span class="o">&lt;</span><span class="n">IndexType</span><span class="o">&gt;</span><span class="p">()[</span><span class="n">idxIndex</span><span class="p">];</span><span class="w"></span>
 <span class="w">    </span><span class="kt">int</span><span class="w"> </span><span class="n">outIndex</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="n">outShape</span><span class="p">.</span><span class="n">index</span><span class="p">(</span><span class="n">dims</span><span class="p">);</span><span class="w"></span>
-<span class="w">    </span><span class="n">out</span><span class="o">-&gt;</span><span class="n">data</span><span class="p">()[</span><span class="n">outIndex</span><span class="p">]</span><span class="w"> </span><span class="o">+=</span><span class="w"> </span><span class="n">in</span><span class="o">-&gt;</span><span class="n">data</span><span class="p">()[</span><span class="n">index</span><span class="p">];</span><span class="w"></span>
+<span class="w">    </span><span class="k">if</span><span class="p">(</span><span class="n">add</span><span class="p">)</span><span class="w"></span>
+<span class="w">      </span><span class="n">out</span><span class="o">-&gt;</span><span class="n">data</span><span class="p">()[</span><span class="n">outIndex</span><span class="p">]</span><span class="w"> </span><span class="o">+=</span><span class="w"> </span><span class="n">in</span><span class="o">-&gt;</span><span class="n">data</span><span class="p">()[</span><span class="n">index</span><span class="p">];</span><span class="w"></span>
+<span class="w">    </span><span class="k">else</span><span class="w"></span>
+<span class="w">      </span><span class="n">out</span><span class="o">-&gt;</span><span class="n">data</span><span class="p">()[</span><span class="n">outIndex</span><span class="p">]</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="n">in</span><span class="o">-&gt;</span><span class="n">data</span><span class="p">()[</span><span class="n">index</span><span class="p">];</span><span class="w"></span>
 <span class="w">  </span><span class="p">}</span><span class="w"></span>
 <span class="p">}</span><span class="w"></span>
 
-<span class="kt">void</span><span class="w"> </span><span class="n">GRUFastForward</span><span class="p">(</span><span class="n">Tensor</span><span class="w"> </span><span class="n">out_</span><span class="p">,</span><span class="w"> </span><span class="n">std</span><span class="o">::</span><span class="n">vector</span><span class="o">&lt;</span><span class="n">Tensor</span><span class="o">&gt;</span><span class="w"> </span><span class="n">inputs</span><span class="p">,</span><span class="w"> </span><span class="kt">bool</span><span class="w"> </span><span class="k">final</span><span class="p">)</span><span class="w"> </span><span class="p">{</span><span class="w"></span>
+<span class="k">template</span><span class="w"> </span><span class="kt">void</span><span class="w"> </span><span class="n">Insert</span><span class="o">&lt;</span><span class="nb">true</span><span class="o">&gt;</span><span class="p">(</span><span class="n">Tensor</span><span class="w"> </span><span class="n">out</span><span class="p">,</span><span class="w"> </span><span class="k">const</span><span class="w"> </span><span class="n">Tensor</span><span class="w"> </span><span class="n">in</span><span class="p">,</span><span class="w"> </span><span class="k">const</span><span class="w"> </span><span class="n">Tensor</span><span class="w"> </span><span class="n">indices</span><span class="p">,</span><span class="w"> </span><span class="kt">int</span><span class="w"> </span><span class="n">axis</span><span class="p">);</span><span class="w"></span>
+<span class="k">template</span><span class="w"> </span><span class="kt">void</span><span class="w"> </span><span class="n">Insert</span><span class="o">&lt;</span><span class="nb">false</span><span class="o">&gt;</span><span class="p">(</span><span class="n">Tensor</span><span class="w"> </span><span class="n">out</span><span class="p">,</span><span class="w"> </span><span class="k">const</span><span class="w"> </span><span class="n">Tensor</span><span class="w"> </span><span class="n">in</span><span class="p">,</span><span class="w"> </span><span class="k">const</span><span class="w"> </span><span class="n">Tensor</span><span class="w"> </span><span class="n">indices</span><span class="p">,</span><span class="w"> </span><span class="kt">int</span><span class="w"> </span><span class="n">axis</span><span class="p">);</span><span class="w"></span>
+
+<span class="kt">void</span><span class="w"> </span><span class="nf">GRUFastForward</span><span class="p">(</span><span class="n">Tensor</span><span class="w"> </span><span class="n">out_</span><span class="p">,</span><span class="w"> </span><span class="n">std</span><span class="o">::</span><span class="n">vector</span><span class="o">&lt;</span><span class="n">Tensor</span><span class="o">&gt;</span><span class="w"> </span><span class="n">inputs</span><span class="p">,</span><span class="w"> </span><span class="kt">bool</span><span class="w"> </span><span class="k">final</span><span class="p">)</span><span class="w"> </span><span class="p">{</span><span class="w"></span>
 <span class="w">  </span><span class="kt">int</span><span class="w"> </span><span class="n">rows</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="n">out_</span><span class="o">-&gt;</span><span class="n">shape</span><span class="p">().</span><span class="n">elements</span><span class="p">()</span><span class="w"> </span><span class="o">/</span><span class="w"> </span><span class="n">out_</span><span class="o">-&gt;</span><span class="n">shape</span><span class="p">().</span><span class="n">back</span><span class="p">();</span><span class="w"></span>
 <span class="w">  </span><span class="kt">int</span><span class="w"> </span><span class="n">cols</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="n">out_</span><span class="o">-&gt;</span><span class="n">shape</span><span class="p">().</span><span class="n">back</span><span class="p">();</span><span class="w"></span>
 
@@ -886,7 +898,7 @@
 <span class="w">  </span><span class="p">}</span><span class="w"></span>
 <span class="p">}</span><span class="w"></span>
 
-<span class="kt">void</span><span class="w"> </span><span class="n">GRUFastBackward</span><span class="p">(</span><span class="n">Ptr</span><span class="o">&lt;</span><span class="n">Allocator</span><span class="o">&gt;</span><span class="w"> </span><span class="cm">/*allocator*/</span><span class="p">,</span><span class="w"></span>
+<span class="kt">void</span><span class="w"> </span><span class="nf">GRUFastBackward</span><span class="p">(</span><span class="n">Ptr</span><span class="o">&lt;</span><span class="n">Allocator</span><span class="o">&gt;</span><span class="w"> </span><span class="cm">/*allocator*/</span><span class="p">,</span><span class="w"></span>
 <span class="w">                     </span><span class="n">std</span><span class="o">::</span><span class="n">vector</span><span class="o">&lt;</span><span class="n">Tensor</span><span class="o">&gt;</span><span class="w"> </span><span class="n">outputs</span><span class="p">,</span><span class="w"></span>
 <span class="w">                     </span><span class="n">std</span><span class="o">::</span><span class="n">vector</span><span class="o">&lt;</span><span class="n">Tensor</span><span class="o">&gt;</span><span class="w"> </span><span class="n">inputs</span><span class="p">,</span><span class="w"></span>
 <span class="w">                     </span><span class="n">Tensor</span><span class="w"> </span><span class="n">adj_</span><span class="p">,</span><span class="w"></span>
@@ -979,7 +991,7 @@
 <span class="w">  </span><span class="p">}</span><span class="w"></span>
 <span class="p">}</span><span class="w"></span>
 
-<span class="kt">void</span><span class="w"> </span><span class="n">CrossEntropyPick</span><span class="p">(</span><span class="n">Tensor</span><span class="w"> </span><span class="n">out</span><span class="p">,</span><span class="w"> </span><span class="n">Tensor</span><span class="w"> </span><span class="n">in</span><span class="p">,</span><span class="w"> </span><span class="n">Tensor</span><span class="w"> </span><span class="n">labelIndices</span><span class="p">,</span><span class="w"> </span><span class="kt">float</span><span class="w"> </span><span class="n">labelSmoothingAlpha</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="mf">0.f</span><span class="p">)</span><span class="w"> </span><span class="p">{</span><span class="w"></span>
+<span class="kt">void</span><span class="w"> </span><span class="nf">CrossEntropyPick</span><span class="p">(</span><span class="n">Tensor</span><span class="w"> </span><span class="n">out</span><span class="p">,</span><span class="w"> </span><span class="n">Tensor</span><span class="w"> </span><span class="n">in</span><span class="p">,</span><span class="w"> </span><span class="n">Tensor</span><span class="w"> </span><span class="n">labelIndices</span><span class="p">,</span><span class="w"> </span><span class="kt">float</span><span class="w"> </span><span class="n">labelSmoothingAlpha</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="mf">0.f</span><span class="p">)</span><span class="w"> </span><span class="p">{</span><span class="w"></span>
 <span class="w">  </span><span class="n">matchOrAbort</span><span class="o">&lt;</span><span class="n">IndexType</span><span class="o">&gt;</span><span class="p">(</span><span class="n">labelIndices</span><span class="o">-&gt;</span><span class="n">type</span><span class="p">());</span><span class="w"></span>
 
 <span class="w">  </span><span class="c1">// Shape&amp; outShape = out_-&gt;shape();</span>
@@ -1020,7 +1032,7 @@
 <span class="w">  </span><span class="p">}</span><span class="w"></span>
 <span class="p">}</span><span class="w"></span>
 
-<span class="kt">void</span><span class="w"> </span><span class="n">CrossEntropyPickBackward</span><span class="p">(</span><span class="n">Tensor</span><span class="w"> </span><span class="n">out</span><span class="p">,</span><span class="w"></span>
+<span class="kt">void</span><span class="w"> </span><span class="nf">CrossEntropyPickBackward</span><span class="p">(</span><span class="n">Tensor</span><span class="w"> </span><span class="n">out</span><span class="p">,</span><span class="w"></span>
 <span class="w">                              </span><span class="n">Tensor</span><span class="w"> </span><span class="n">adj</span><span class="p">,</span><span class="w"></span>
 <span class="w">                              </span><span class="n">Tensor</span><span class="w"> </span><span class="n">in</span><span class="p">,</span><span class="w"></span>
 <span class="w">                              </span><span class="n">Tensor</span><span class="w"> </span><span class="n">labelIndices</span><span class="p">,</span><span class="w"></span>
@@ -1057,7 +1069,7 @@
 <span class="w">  </span><span class="p">}</span><span class="w"></span>
 <span class="p">}</span><span class="w"></span>
 
-<span class="kt">float</span><span class="w"> </span><span class="n">L2Norm</span><span class="p">(</span><span class="n">Tensor</span><span class="w"> </span><span class="n">in</span><span class="p">,</span><span class="w"> </span><span class="n">Ptr</span><span class="o">&lt;</span><span class="n">Allocator</span><span class="o">&gt;</span><span class="w"> </span><span class="cm">/*not used*/</span><span class="p">)</span><span class="w"> </span><span class="p">{</span><span class="w"></span>
+<span class="kt">float</span><span class="w"> </span><span class="nf">L2Norm</span><span class="p">(</span><span class="n">Tensor</span><span class="w"> </span><span class="n">in</span><span class="p">,</span><span class="w"> </span><span class="n">Ptr</span><span class="o">&lt;</span><span class="n">Allocator</span><span class="o">&gt;</span><span class="w"> </span><span class="cm">/*not used*/</span><span class="p">)</span><span class="w"> </span><span class="p">{</span><span class="w"></span>
 <span class="w">  </span><span class="kt">float</span><span class="w"> </span><span class="n">sum</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="mf">0.f</span><span class="p">;</span><span class="w"></span>
 <span class="w">  </span><span class="kt">size_t</span><span class="w"> </span><span class="n">size</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="n">in</span><span class="o">-&gt;</span><span class="n">size</span><span class="p">();</span><span class="w"></span>
 <span class="w">  </span><span class="k">const</span><span class="w"> </span><span class="kt">float</span><span class="o">*</span><span class="w"> </span><span class="n">data</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="n">in</span><span class="o">-&gt;</span><span class="n">data</span><span class="p">();</span><span class="w"></span>
@@ -1068,7 +1080,7 @@
 <span class="w">  </span><span class="k">return</span><span class="w"> </span><span class="n">std</span><span class="o">::</span><span class="n">sqrt</span><span class="p">(</span><span class="n">sum</span><span class="p">);</span><span class="w"></span>
 <span class="p">}</span><span class="w"></span>
 
-<span class="kt">void</span><span class="w"> </span><span class="n">Att</span><span class="p">(</span><span class="n">Tensor</span><span class="w"> </span><span class="n">out_</span><span class="p">,</span><span class="w"> </span><span class="n">Tensor</span><span class="w"> </span><span class="n">va_</span><span class="p">,</span><span class="w"> </span><span class="n">Tensor</span><span class="w"> </span><span class="n">context_</span><span class="p">,</span><span class="w"> </span><span class="n">Tensor</span><span class="w"> </span><span class="n">state_</span><span class="p">)</span><span class="w"> </span><span class="p">{</span><span class="w"></span>
+<span class="kt">void</span><span class="w"> </span><span class="nf">Att</span><span class="p">(</span><span class="n">Tensor</span><span class="w"> </span><span class="n">out_</span><span class="p">,</span><span class="w"> </span><span class="n">Tensor</span><span class="w"> </span><span class="n">va_</span><span class="p">,</span><span class="w"> </span><span class="n">Tensor</span><span class="w"> </span><span class="n">context_</span><span class="p">,</span><span class="w"> </span><span class="n">Tensor</span><span class="w"> </span><span class="n">state_</span><span class="p">)</span><span class="w"> </span><span class="p">{</span><span class="w"></span>
 <span class="w">  </span><span class="kt">float</span><span class="o">*</span><span class="w"> </span><span class="n">out</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="n">out_</span><span class="o">-&gt;</span><span class="n">data</span><span class="p">();</span><span class="w"></span>
 <span class="w">  </span><span class="k">const</span><span class="w"> </span><span class="kt">float</span><span class="o">*</span><span class="w"> </span><span class="n">va</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="n">va_</span><span class="o">-&gt;</span><span class="n">data</span><span class="p">();</span><span class="w"></span>
 <span class="w">  </span><span class="k">const</span><span class="w"> </span><span class="kt">float</span><span class="o">*</span><span class="w"> </span><span class="n">ctx</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="n">context_</span><span class="o">-&gt;</span><span class="n">data</span><span class="p">();</span><span class="w"></span>
@@ -1099,7 +1111,7 @@
 <span class="w">  </span><span class="p">}</span><span class="w"></span>
 <span class="p">}</span><span class="w"></span>
 
-<span class="kt">void</span><span class="w"> </span><span class="n">AttBack</span><span class="p">(</span><span class="n">Tensor</span><span class="w"> </span><span class="n">gVa_</span><span class="p">,</span><span class="w"></span>
+<span class="kt">void</span><span class="w"> </span><span class="nf">AttBack</span><span class="p">(</span><span class="n">Tensor</span><span class="w"> </span><span class="n">gVa_</span><span class="p">,</span><span class="w"></span>
 <span class="w">             </span><span class="n">Tensor</span><span class="w"> </span><span class="n">gContext_</span><span class="p">,</span><span class="w"></span>
 <span class="w">             </span><span class="n">Tensor</span><span class="w"> </span><span class="n">gState_</span><span class="p">,</span><span class="w"></span>
 <span class="w">             </span><span class="n">Tensor</span><span class="w"> </span><span class="n">va_</span><span class="p">,</span><span class="w"></span>

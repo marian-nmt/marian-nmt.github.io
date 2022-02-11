@@ -4,7 +4,7 @@
   <meta charset="utf-8" /><meta name="generator" content="Docutils 0.17.1: http://docutils.sourceforge.net/" />
 
   <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-  <title>Program Listing for File translator.h &mdash; Marian NMT v1.10.28 2022-01-28 documentation</title><link rel="stylesheet" href="../_static/css/theme.css" type="text/css" />
+  <title>Program Listing for File translator.h &mdash; Marian NMT v1.11.3 2022-02-11 documentation</title><link rel="stylesheet" href="../_static/css/theme.css" type="text/css" />
     <link rel="stylesheet" href="../_static/pygments.css" type="text/css" />
       <link rel="stylesheet" href="../_static/css/custom.css" type="text/css" />
       <link rel="stylesheet" href="../_static/collapsible-lists/css/tree_view.css" type="text/css" />
@@ -34,7 +34,7 @@
             <a href="../index.html" class="icon icon-home"> Marian NMT
           </a>
               <div class="version">
-                v1.10.28
+                v1.11.3
               </div>
 <div role="search">
   <form id="rtd-search-form" class="wy-form" action="../search.html" method="get">
@@ -46,6 +46,7 @@
         </div><div class="wy-menu wy-menu-vertical" data-spy="affix" role="navigation" aria-label="Navigation menu">
               <p><span class="caption-text">Contents:</span></p>
 <ul>
+<li class="toctree-l1"><a class="reference internal" href="../structure.html">Code Organisation</a></li>
 <li class="toctree-l1"><a class="reference internal" href="../graph.html">Expression graphs</a></li>
 <li class="toctree-l1"><a class="reference internal" href="../operators.html">Operations in the expression graph</a></li>
 <li class="toctree-l1"><a class="reference internal" href="../layer.html">Layers</a></li>
@@ -206,7 +207,7 @@
 <span class="w">      </span><span class="n">threadPool</span><span class="p">.</span><span class="n">enqueue</span><span class="p">(</span><span class="n">task</span><span class="p">,</span><span class="w"> </span><span class="n">device</span><span class="p">,</span><span class="w"> </span><span class="n">id</span><span class="o">++</span><span class="p">);</span><span class="w"></span>
 <span class="w">    </span><span class="p">}</span><span class="w"></span>
 
-<span class="w">    </span><span class="k">if</span><span class="p">(</span><span class="n">options_</span><span class="o">-&gt;</span><span class="n">get</span><span class="o">&lt;</span><span class="kt">bool</span><span class="o">&gt;</span><span class="p">(</span><span class="s">&quot;output-sampling&quot;</span><span class="p">,</span><span class="w"> </span><span class="nb">false</span><span class="p">))</span><span class="w"> </span><span class="p">{</span><span class="w"></span>
+<span class="w">    </span><span class="k">if</span><span class="p">(</span><span class="n">options_</span><span class="o">-&gt;</span><span class="n">hasAndNotEmpty</span><span class="p">(</span><span class="s">&quot;output-sampling&quot;</span><span class="p">))</span><span class="w"> </span><span class="p">{</span><span class="w"></span>
 <span class="w">      </span><span class="k">if</span><span class="p">(</span><span class="n">options_</span><span class="o">-&gt;</span><span class="n">get</span><span class="o">&lt;</span><span class="kt">size_t</span><span class="o">&gt;</span><span class="p">(</span><span class="s">&quot;beam-size&quot;</span><span class="p">)</span><span class="w"> </span><span class="o">&gt;</span><span class="w"> </span><span class="mi">1</span><span class="p">)</span><span class="w"></span>
 <span class="w">        </span><span class="n">LOG</span><span class="p">(</span><span class="n">warn</span><span class="p">,</span><span class="w"></span>
 <span class="w">            </span><span class="s">&quot;[warning] Output sampling and beam search (beam-size &gt; 1) are contradictory methods &quot;</span><span class="w"></span>
@@ -414,7 +415,7 @@
 <span class="w">                      </span><span class="o">?</span><span class="w"> </span><span class="n">convertTsvToLists</span><span class="p">(</span><span class="n">input</span><span class="p">,</span><span class="w"> </span><span class="n">options_</span><span class="o">-&gt;</span><span class="n">get</span><span class="o">&lt;</span><span class="kt">size_t</span><span class="o">&gt;</span><span class="p">(</span><span class="s">&quot;tsv-fields&quot;</span><span class="p">,</span><span class="w"> </span><span class="mi">1</span><span class="p">))</span><span class="w"></span>
 <span class="w">                      </span><span class="o">:</span><span class="w"> </span><span class="n">std</span><span class="o">::</span><span class="n">vector</span><span class="o">&lt;</span><span class="n">std</span><span class="o">::</span><span class="n">string</span><span class="o">&gt;</span><span class="p">({</span><span class="n">input</span><span class="p">});</span><span class="w"></span>
 <span class="w">    </span><span class="k">auto</span><span class="w"> </span><span class="n">corpus_</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="n">New</span><span class="o">&lt;</span><span class="n">data</span><span class="o">::</span><span class="n">TextInput</span><span class="o">&gt;</span><span class="p">(</span><span class="n">inputs</span><span class="p">,</span><span class="w"> </span><span class="n">srcVocabs_</span><span class="p">,</span><span class="w"> </span><span class="n">options_</span><span class="p">);</span><span class="w"></span>
-<span class="w">    </span><span class="n">data</span><span class="o">::</span><span class="n">BatchGenerator</span><span class="o">&lt;</span><span class="n">data</span><span class="o">::</span><span class="n">TextInput</span><span class="o">&gt;</span><span class="w"> </span><span class="n">batchGenerator</span><span class="p">(</span><span class="n">corpus_</span><span class="p">,</span><span class="w"> </span><span class="n">options_</span><span class="p">);</span><span class="w"></span>
+<span class="w">    </span><span class="n">data</span><span class="o">::</span><span class="n">BatchGenerator</span><span class="o">&lt;</span><span class="n">data</span><span class="o">::</span><span class="n">TextInput</span><span class="o">&gt;</span><span class="w"> </span><span class="n">batchGenerator</span><span class="p">(</span><span class="n">corpus_</span><span class="p">,</span><span class="w"> </span><span class="n">options_</span><span class="p">,</span><span class="w"> </span><span class="k">nullptr</span><span class="p">,</span><span class="w"> </span><span class="cm">/*runAsync=*/</span><span class="nb">false</span><span class="p">);</span><span class="w"></span>
 
 <span class="w">    </span><span class="k">auto</span><span class="w"> </span><span class="n">collector</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="n">New</span><span class="o">&lt;</span><span class="n">StringCollector</span><span class="o">&gt;</span><span class="p">(</span><span class="n">options_</span><span class="o">-&gt;</span><span class="n">get</span><span class="o">&lt;</span><span class="kt">bool</span><span class="o">&gt;</span><span class="p">(</span><span class="s">&quot;quiet-translation&quot;</span><span class="p">,</span><span class="w"> </span><span class="nb">false</span><span class="p">));</span><span class="w"></span>
 <span class="w">    </span><span class="k">auto</span><span class="w"> </span><span class="n">printer</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="n">New</span><span class="o">&lt;</span><span class="n">OutputPrinter</span><span class="o">&gt;</span><span class="p">(</span><span class="n">options_</span><span class="p">,</span><span class="w"> </span><span class="n">trgVocab_</span><span class="p">);</span><span class="w"></span>

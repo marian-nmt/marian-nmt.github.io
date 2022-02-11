@@ -4,7 +4,7 @@
   <meta charset="utf-8" /><meta name="generator" content="Docutils 0.17.1: http://docutils.sourceforge.net/" />
 
   <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-  <title>Program Listing for File prod.cpp &mdash; Marian NMT v1.10.28 2022-01-28 documentation</title><link rel="stylesheet" href="../_static/css/theme.css" type="text/css" />
+  <title>Program Listing for File prod.cpp &mdash; Marian NMT v1.11.3 2022-02-11 documentation</title><link rel="stylesheet" href="../_static/css/theme.css" type="text/css" />
     <link rel="stylesheet" href="../_static/pygments.css" type="text/css" />
       <link rel="stylesheet" href="../_static/css/custom.css" type="text/css" />
       <link rel="stylesheet" href="../_static/collapsible-lists/css/tree_view.css" type="text/css" />
@@ -34,7 +34,7 @@
             <a href="../index.html" class="icon icon-home"> Marian NMT
           </a>
               <div class="version">
-                v1.10.28
+                v1.11.3
               </div>
 <div role="search">
   <form id="rtd-search-form" class="wy-form" action="../search.html" method="get">
@@ -46,6 +46,7 @@
         </div><div class="wy-menu wy-menu-vertical" data-spy="affix" role="navigation" aria-label="Navigation menu">
               <p><span class="caption-text">Contents:</span></p>
 <ul>
+<li class="toctree-l1"><a class="reference internal" href="../structure.html">Code Organisation</a></li>
 <li class="toctree-l1"><a class="reference internal" href="../graph.html">Expression graphs</a></li>
 <li class="toctree-l1"><a class="reference internal" href="../operators.html">Operations in the expression graph</a></li>
 <li class="toctree-l1"><a class="reference internal" href="../layer.html">Layers</a></li>
@@ -645,7 +646,11 @@
 <span class="w">    </span><span class="n">ProdBatchedTypedLegacy</span><span class="o">&lt;</span><span class="kt">float</span><span class="p">,</span><span class="w"> </span><span class="kt">float</span><span class="o">&gt;</span><span class="p">(</span><span class="n">C</span><span class="p">,</span><span class="w"> </span><span class="n">allocator</span><span class="p">,</span><span class="w"> </span><span class="n">A</span><span class="p">,</span><span class="w"> </span><span class="n">B</span><span class="p">,</span><span class="w"> </span><span class="n">transA</span><span class="p">,</span><span class="w"> </span><span class="n">transB</span><span class="p">,</span><span class="w"> </span><span class="n">beta</span><span class="p">,</span><span class="w"> </span><span class="n">scalar</span><span class="p">);</span><span class="w"></span>
 <span class="cp">#if COMPILE_FP16</span>
 <span class="w">  </span><span class="p">}</span><span class="w"> </span><span class="k">else</span><span class="w"> </span><span class="k">if</span><span class="p">(</span><span class="n">C</span><span class="o">-&gt;</span><span class="n">type</span><span class="p">()</span><span class="w"> </span><span class="o">==</span><span class="w"> </span><span class="n">Type</span><span class="o">::</span><span class="n">float16</span><span class="p">)</span><span class="w"> </span><span class="p">{</span><span class="w"> </span><span class="c1">// not a *.cu file</span>
-<span class="w">    </span><span class="n">ProdBatchedTypedLegacy</span><span class="o">&lt;</span><span class="n">half</span><span class="p">,</span><span class="w"> </span><span class="n">half</span><span class="o">&gt;</span><span class="p">(</span><span class="n">C</span><span class="p">,</span><span class="w"> </span><span class="n">allocator</span><span class="p">,</span><span class="w"> </span><span class="n">A</span><span class="p">,</span><span class="w"> </span><span class="n">B</span><span class="p">,</span><span class="w"> </span><span class="n">transA</span><span class="p">,</span><span class="w"> </span><span class="n">transB</span><span class="p">,</span><span class="w"> </span><span class="n">__float2half</span><span class="p">(</span><span class="n">beta</span><span class="p">),</span><span class="w"> </span><span class="n">__float2half</span><span class="p">(</span><span class="n">scalar</span><span class="p">));</span><span class="w"></span>
+<span class="w">    </span><span class="c1">// we use computeType=float here for fp16 training as this seems more stable and roughly as fast</span>
+<span class="w">    </span><span class="n">ProdBatchedTypedLegacy</span><span class="o">&lt;</span><span class="n">half</span><span class="p">,</span><span class="w"> </span><span class="kt">float</span><span class="o">&gt;</span><span class="p">(</span><span class="n">C</span><span class="p">,</span><span class="w"> </span><span class="n">allocator</span><span class="p">,</span><span class="w"> </span><span class="n">A</span><span class="p">,</span><span class="w"> </span><span class="n">B</span><span class="p">,</span><span class="w"> </span><span class="n">transA</span><span class="p">,</span><span class="w"> </span><span class="n">transB</span><span class="p">,</span><span class="w"> </span><span class="n">beta</span><span class="p">,</span><span class="w"> </span><span class="n">scalar</span><span class="p">);</span><span class="w"></span>
+
+<span class="w">    </span><span class="c1">// original for reference:</span>
+<span class="w">    </span><span class="c1">// ProdBatchedTypedLegacy&lt;half, half&gt;(C, allocator, A, B, transA, transB, __float2half(beta), __float2half(scalar));</span>
 <span class="cp">#endif</span>
 <span class="w">  </span><span class="p">}</span><span class="w"> </span><span class="k">else</span><span class="w"> </span><span class="p">{</span><span class="w"></span>
 <span class="w">    </span><span class="n">ABORT</span><span class="p">(</span><span class="s">&quot;ProdBatchedLegacy not implemented for element type {}&quot;</span><span class="p">,</span><span class="w"> </span><span class="n">C</span><span class="o">-&gt;</span><span class="n">type</span><span class="p">());</span><span class="w"></span>

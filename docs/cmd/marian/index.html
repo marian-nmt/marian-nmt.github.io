@@ -197,7 +197,7 @@
               <h2 id="marian">marian</h2>
 <p>Marian: Fast Neural Machine Translation in C++</p>
 
-<p>Version: v1.10.28; 71b5454 2022-01-26 15:17:38 +0000</p>
+<p>Version: v1.11.3 b8bf086 2022-02-11 06:04:38 -0800</p>
 
 <p>Usage: <code class="highlighter-rouge">./marian [OPTIONS]</code></p>
 
@@ -209,8 +209,8 @@
 --build-info TEXT                     Print CMake build options and exit. Set to 'all' to print 
                                       advanced options
 -c,--config VECTOR ...                Configuration file(s). If multiple, later overrides earlier
--w,--workspace UINT=2048              Preallocate  arg  MB of work space
---log TEXT                            Log training process information to file given by  arg
+-w,--workspace UINT=2048              Preallocate arg MB of work space
+--log TEXT                            Log training process information to file given by arg
 --log-level TEXT=info                 Set verbosity level of logging: trace, debug, info, warn, 
                                       err(or), critical, off
 --log-time-zone TEXT                  Set time zone for the date shown on logging
@@ -273,7 +273,11 @@
 --transformer-pool                    Pool encoder states instead of using cross attention 
                                       (selects first encoder state, best used with special token)
 --transformer-dim-ffn INT=2048        Size of position-wise feed-forward network (transformer)
+--transformer-decoder-dim-ffn INT=0   Size of position-wise feed-forward network in decoder 
+                                      (transformer). Uses --transformer-dim-ffn if 0.
 --transformer-ffn-depth INT=2         Depth of filters (transformer)
+--transformer-decoder-ffn-depth INT=0 Depth of filters in decoder (transformer). Uses 
+                                      --transformer-ffn-depth if 0
 --transformer-ffn-activation TEXT=swish
                                       Activation between filters: swish or relu (transformer)
 --transformer-dim-aan INT=2048        Size of position-wise feed-forward network in AAN 
@@ -347,12 +351,12 @@
 -a,--after TEXT=0e                    Finish after this many chosen training units, 0 is infinity 
                                       (e.g. 100e = 100 epochs, 10Gt = 10 billion target labels, 
                                       100Ku = 100,000 updates
---disp-freq TEXT=1000u                Display information every  arg  updates (append 't' for 
-                                      every  arg  target labels)
---disp-first UINT                     Display information for the first  arg  updates
+--disp-freq TEXT=1000u                Display information every arg updates (append 't' for every 
+                                      arg target labels)
+--disp-first UINT                     Display information for the first arg updates
 --disp-label-counts=true              Display label counts when logging loss progress
---save-freq TEXT=10000u               Save model file every  arg  updates (append 't' for every  
-                                      arg  target labels)
+--save-freq TEXT=10000u               Save model file every arg updates (append 't' for every arg 
+                                      target labels)
 --logical-epoch VECTOR=1e,0 ...       Redefine logical epoch counter as multiple of data epochs 
                                       (e.g. 1e), updates (e.g. 100Ku) or labels (e.g. 1Gt). 
                                       Second parameter defines width of fractional display, 0 by 
@@ -398,6 +402,8 @@
 --maxi-batch-sort TEXT=trg            Sorting strategy for maxi-batch: none, src, trg (not 
                                       available for decoder)
 --shuffle-in-ram                      Keep shuffled corpus in RAM, do not write to temp file
+--data-threads UINT=8                 Number of concurrent threads to use during data reading and 
+                                      processing
 --all-caps-every UINT                 When forming minibatches, preprocess every Nth line on the 
                                       fly to all-caps. Assumes UTF-8
 --english-title-case-every UINT       When forming minibatches, preprocess every Nth line on the 
@@ -437,25 +443,25 @@
                                       decays
 --lr-decay-repeat-warmup              Repeat learning rate warmup when learning rate is decayed
 --lr-decay-inv-sqrt VECTOR=0 ...      Decrease learning rate at arg / sqrt(no. batches) starting 
-                                      at arg  (append 't' or 'e' for sqrt(target labels or 
+                                      at arg (append 't' or 'e' for sqrt(target labels or 
                                       epochs)). Add second argument to define the starting point 
                                       (default: same as first value)
---lr-warmup TEXT=0                    Increase learning rate linearly for  arg  first batches 
-                                      (append 't' for  arg  first target labels)
+--lr-warmup TEXT=0                    Increase learning rate linearly for arg first batches 
+                                      (append 't' for arg first target labels)
 --lr-warmup-start-rate FLOAT          Start value for learning rate warmup
 --lr-warmup-cycle                     Apply cyclic warmup
 --lr-warmup-at-reload                 Repeat warmup after interrupted training
 --label-smoothing FLOAT               Epsilon for label smoothing (0 to disable)
 --factor-weight FLOAT=1               Weight for loss function for factors (factored vocab only) 
                                       (1 to disable)
---clip-norm FLOAT=1                   Clip gradient norm to  arg  (0 to disable)
+--clip-norm FLOAT=1                   Clip gradient norm to arg (0 to disable)
 --exponential-smoothing FLOAT=0       Maintain smoothed version of parameters for validation and 
                                       saving with smoothing factor. 0 to disable. Auto-adjusted 
                                       to --mini-batch-words-ref if given.
 --guided-alignment TEXT=none          Path to a file with word alignments. Use guided alignment to 
                                       guide attention or 'none'. If --tsv it specifies the index 
                                       of a TSV field that contains the alignments (0-based)
---guided-alignment-cost TEXT=mse      Cost type for guided alignment: ce (cross-entropy), mse 
+--guided-alignment-cost TEXT=ce       Cost type for guided alignment: ce (cross-entropy), mse 
                                       (mean square error), mult (multiplication)
 --guided-alignment-weight FLOAT=0.1   Weight for guided alignment cost
 --data-weighting TEXT                 Path to a file with sentence or word weights. If --tsv it 
@@ -468,14 +474,13 @@
 --embedding-fix-trg                   Fix target embeddings. Affects all decoders
 --fp16                                Shortcut for mixed precision training with float16 and 
                                       cost-scaling, corresponds to: --precision float16 float32 
-                                      --cost-scaling 0 1000 2 0.05 10 1e-5f
+                                      --cost-scaling 256.f 1000 2.f 256.f
 --precision VECTOR=float32,float32 ...
                                       Mixed precision training for forward/backward pass and 
                                       optimizaton. Defines types for: forward/backward pass, 
                                       optimization.
---cost-scaling VECTOR ...             Dynamic cost scaling for mixed precision training: power of 
-                                      2, scaling window, scaling factor, tolerance, range, 
-                                      minimum factor
+--cost-scaling VECTOR ...             Dynamic cost scaling for mixed precision training: scaling 
+                                      factor, frequency, multiplier, minimum factor
 --gradient-norm-average-window UINT=100
                                       Window size over which the exponential average of the 
                                       gradient norm is recorded (for logging and scaling). After 
@@ -498,7 +503,7 @@
 --ulr                                 Enable ULR (Universal Language Representation)
 --ulr-query-vectors TEXT              Path to file with universal sources embeddings from 
                                       projection into universal space
---ulr-keys-vectors TEXT               Path to file with universal sources embeddings of traget 
+--ulr-keys-vectors TEXT               Path to file with universal sources embeddings of target 
                                       keys from projection into universal space
 --ulr-trainable-transformation        Make Query Transformation Matrix A trainable
 --ulr-dim-emb INT                     ULR monolingual embeddings dimension
@@ -511,8 +516,8 @@
 </code></pre></div></div>
 <h3 id="validation-set-options">Validation set options</h3>
 <div class="highlighter-rouge"><div class="highlight"><pre class="highlight"><code>--valid-sets VECTOR ...               Paths to validation corpora: source target
---valid-freq TEXT=10000u              Validate model every  arg  updates (append 't' for every  
-                                      arg  target labels)
+--valid-freq TEXT=10000u              Validate model every arg updates (append 't' for every arg 
+                                      target labels)
 --valid-metrics VECTOR=cross-entropy ...
                                       Metric to use during validation: cross-entropy, 
                                       ce-mean-words, perplexity, valid-script, translation, bleu, 
@@ -520,8 +525,8 @@
                                       chrf. Multiple metrics can be specified
 --valid-reset-stalled                 Reset all stalled validation metrics when the training is 
                                       restarted
---early-stopping UINT=10              Stop if the first validation metric does not improve for  
-                                      arg  consecutive validation steps
+--early-stopping UINT=10              Stop if the first validation metric does not improve for arg 
+                                      consecutive validation steps
 --early-stopping-on TEXT=first        Decide if early stopping should take into account first, 
                                       all, or any validation metricsPossible values: first, all, 
                                       any
@@ -550,7 +555,7 @@
                                       within epoch; {U} for total No. of updates; {T} for total 
                                       No. of tokens seen.
 --keep-best                           Keep best model for each validation metric
---valid-log TEXT                      Log validation scores to file given by  arg
+--valid-log TEXT                      Log validation scores to file given by arg
 </code></pre></div></div>
 
 

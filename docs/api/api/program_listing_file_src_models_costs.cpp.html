@@ -4,7 +4,7 @@
   <meta charset="utf-8" /><meta name="generator" content="Docutils 0.17.1: http://docutils.sourceforge.net/" />
 
   <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-  <title>Program Listing for File costs.cpp &mdash; Marian NMT v1.10.28 2022-01-28 documentation</title><link rel="stylesheet" href="../_static/css/theme.css" type="text/css" />
+  <title>Program Listing for File costs.cpp &mdash; Marian NMT v1.11.3 2022-02-11 documentation</title><link rel="stylesheet" href="../_static/css/theme.css" type="text/css" />
     <link rel="stylesheet" href="../_static/pygments.css" type="text/css" />
       <link rel="stylesheet" href="../_static/css/custom.css" type="text/css" />
       <link rel="stylesheet" href="../_static/collapsible-lists/css/tree_view.css" type="text/css" />
@@ -34,7 +34,7 @@
             <a href="../index.html" class="icon icon-home"> Marian NMT
           </a>
               <div class="version">
-                v1.10.28
+                v1.11.3
               </div>
 <div role="search">
   <form id="rtd-search-form" class="wy-form" action="../search.html" method="get">
@@ -46,6 +46,7 @@
         </div><div class="wy-menu wy-menu-vertical" data-spy="affix" role="navigation" aria-label="Navigation menu">
               <p><span class="caption-text">Contents:</span></p>
 <ul>
+<li class="toctree-l1"><a class="reference internal" href="../structure.html">Code Organisation</a></li>
 <li class="toctree-l1"><a class="reference internal" href="../graph.html">Expression graphs</a></li>
 <li class="toctree-l1"><a class="reference internal" href="../operators.html">Operations in the expression graph</a></li>
 <li class="toctree-l1"><a class="reference internal" href="../layer.html">Layers</a></li>
@@ -91,6 +92,41 @@
 <span class="w">  </span><span class="c1">// decoder needs normalized probabilities (note: skipped if beam 1 and --skip-cost)</span>
 <span class="w">  </span><span class="n">state</span><span class="o">-&gt;</span><span class="n">setLogProbs</span><span class="p">(</span><span class="n">state</span><span class="o">-&gt;</span><span class="n">getLogProbs</span><span class="p">().</span><span class="n">applyUnaryFunction</span><span class="p">(</span><span class="n">logsoftmax</span><span class="p">));</span><span class="w"></span>
 <span class="w">  </span><span class="c1">// @TODO: This is becoming more and more opaque ^^. Can we simplify this?</span>
+<span class="w">  </span><span class="k">return</span><span class="w"> </span><span class="n">state</span><span class="p">;</span><span class="w"></span>
+<span class="p">}</span><span class="w"></span>
+
+<span class="n">Ptr</span><span class="o">&lt;</span><span class="n">DecoderState</span><span class="o">&gt;</span><span class="w"> </span><span class="n">GumbelSoftmaxStep</span><span class="o">::</span><span class="n">apply</span><span class="p">(</span><span class="n">Ptr</span><span class="o">&lt;</span><span class="n">DecoderState</span><span class="o">&gt;</span><span class="w"> </span><span class="n">state</span><span class="p">)</span><span class="w"> </span><span class="p">{</span><span class="w"></span>
+<span class="w">  </span><span class="n">state</span><span class="o">-&gt;</span><span class="n">setLogProbs</span><span class="p">(</span><span class="n">state</span><span class="o">-&gt;</span><span class="n">getLogProbs</span><span class="p">().</span><span class="n">applyUnaryFunctions</span><span class="p">(</span><span class="w"></span>
+<span class="w">      </span><span class="p">[](</span><span class="n">Expr</span><span class="w"> </span><span class="n">logits</span><span class="p">)</span><span class="w"> </span><span class="p">{</span><span class="w">  </span><span class="c1">// lemma gets gumbelled</span>
+<span class="w">        </span><span class="k">return</span><span class="w"> </span><span class="n">logsoftmax</span><span class="p">(</span><span class="n">logits</span><span class="w"> </span><span class="o">+</span><span class="w"> </span><span class="n">constant_like</span><span class="p">(</span><span class="n">logits</span><span class="p">,</span><span class="w"> </span><span class="n">inits</span><span class="o">::</span><span class="n">gumbel</span><span class="p">()));</span><span class="w"></span>
+<span class="w">      </span><span class="p">},</span><span class="w"></span>
+<span class="w">      </span><span class="n">logsoftmax</span><span class="p">));</span><span class="w">  </span><span class="c1">// factors don&#39;t</span>
+<span class="w">  </span><span class="k">return</span><span class="w"> </span><span class="n">state</span><span class="p">;</span><span class="w"></span>
+<span class="p">}</span><span class="w"></span>
+
+<span class="n">TopkGumbelSoftmaxStep</span><span class="o">::</span><span class="n">TopkGumbelSoftmaxStep</span><span class="p">(</span><span class="kt">int</span><span class="w"> </span><span class="n">k</span><span class="p">)</span><span class="w"> </span><span class="o">:</span><span class="w"> </span><span class="n">k_</span><span class="p">{</span><span class="n">k</span><span class="p">}</span><span class="w"> </span><span class="p">{}</span><span class="w"></span>
+
+<span class="n">Ptr</span><span class="o">&lt;</span><span class="n">DecoderState</span><span class="o">&gt;</span><span class="w"> </span><span class="n">TopkGumbelSoftmaxStep</span><span class="o">::</span><span class="n">apply</span><span class="p">(</span><span class="n">Ptr</span><span class="o">&lt;</span><span class="n">DecoderState</span><span class="o">&gt;</span><span class="w"> </span><span class="n">state</span><span class="p">)</span><span class="w"> </span><span class="p">{</span><span class="w"></span>
+<span class="w">  </span><span class="n">state</span><span class="o">-&gt;</span><span class="n">setLogProbs</span><span class="p">(</span><span class="n">state</span><span class="o">-&gt;</span><span class="n">getLogProbs</span><span class="p">().</span><span class="n">applyUnaryFunctions</span><span class="p">(</span><span class="w"></span>
+<span class="w">      </span><span class="p">[</span><span class="o">=</span><span class="p">](</span><span class="n">Expr</span><span class="w"> </span><span class="n">logits</span><span class="p">)</span><span class="w"> </span><span class="p">{</span><span class="w">  </span><span class="c1">// lemma gets gumbelled</span>
+<span class="w">        </span><span class="c1">// create logits-sized tensor consisting only of invalid path scores</span>
+<span class="w">        </span><span class="kt">float</span><span class="w"> </span><span class="n">invalidPathScore</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="n">NumericLimits</span><span class="o">&lt;</span><span class="kt">float</span><span class="o">&gt;</span><span class="p">(</span><span class="n">logits</span><span class="o">-&gt;</span><span class="n">value_type</span><span class="p">()).</span><span class="n">lowest</span><span class="p">;</span><span class="w"></span>
+<span class="w">        </span><span class="n">Expr</span><span class="w"> </span><span class="n">invalidLogits</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="n">constant_like</span><span class="p">(</span><span class="n">logits</span><span class="p">,</span><span class="w"> </span><span class="n">inits</span><span class="o">::</span><span class="n">fromValue</span><span class="p">(</span><span class="n">invalidPathScore</span><span class="p">));</span><span class="w"></span>
+
+<span class="w">        </span><span class="c1">// select top-k values</span>
+<span class="w">        </span><span class="n">Expr</span><span class="w"> </span><span class="n">val</span><span class="p">,</span><span class="w"> </span><span class="n">idx</span><span class="p">;</span><span class="w"></span>
+<span class="w">        </span><span class="n">std</span><span class="o">::</span><span class="n">tie</span><span class="p">(</span><span class="n">val</span><span class="p">,</span><span class="w"> </span><span class="n">idx</span><span class="p">)</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="n">topk</span><span class="p">(</span><span class="n">logits</span><span class="p">,</span><span class="w"> </span><span class="n">k_</span><span class="p">,</span><span class="w"> </span><span class="cm">/*axis=*/</span><span class="mi">-1</span><span class="p">,</span><span class="w"> </span><span class="cm">/*descending=*/</span><span class="nb">true</span><span class="p">);</span><span class="w"></span>
+
+<span class="w">        </span><span class="c1">// uncomment below to display probability mass in top-k selection</span>
+<span class="w">        </span><span class="c1">// debug(sum(gather(softmax(logits), -1, idx), -1), &quot;sum&quot;);</span>
+
+<span class="w">        </span><span class="c1">// Add Gumbel noise to top-k values only and compute logsoftmax, used for argmax sampling later in beam-search</span>
+<span class="w">        </span><span class="n">Expr</span><span class="w"> </span><span class="n">gumbelVal</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="n">logsoftmax</span><span class="p">(</span><span class="n">val</span><span class="w"> </span><span class="o">+</span><span class="w"> </span><span class="n">constant_like</span><span class="p">(</span><span class="n">val</span><span class="p">,</span><span class="w"> </span><span class="n">inits</span><span class="o">::</span><span class="n">gumbel</span><span class="p">()));</span><span class="w"></span>
+
+<span class="w">        </span><span class="c1">// Scatter gumbelled values back into logits to fill with usable values</span>
+<span class="w">        </span><span class="k">return</span><span class="w"> </span><span class="n">scatter</span><span class="p">(</span><span class="n">invalidLogits</span><span class="p">,</span><span class="w"> </span><span class="mi">-1</span><span class="p">,</span><span class="w"> </span><span class="n">idx</span><span class="p">,</span><span class="w"> </span><span class="n">gumbelVal</span><span class="p">);</span><span class="w"></span>
+<span class="w">      </span><span class="p">},</span><span class="w"></span>
+<span class="w">      </span><span class="n">logsoftmax</span><span class="p">));</span><span class="w">  </span><span class="c1">// factors don&#39;t</span>
 <span class="w">  </span><span class="k">return</span><span class="w"> </span><span class="n">state</span><span class="p">;</span><span class="w"></span>
 <span class="p">}</span><span class="w"></span>
 

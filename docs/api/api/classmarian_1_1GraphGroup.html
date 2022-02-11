@@ -4,7 +4,7 @@
   <meta charset="utf-8" /><meta name="generator" content="Docutils 0.17.1: http://docutils.sourceforge.net/" />
 
   <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-  <title>Class GraphGroup &mdash; Marian NMT v1.10.28 2022-01-28 documentation</title><link rel="stylesheet" href="../_static/css/theme.css" type="text/css" />
+  <title>Class GraphGroup &mdash; Marian NMT v1.11.3 2022-02-11 documentation</title><link rel="stylesheet" href="../_static/css/theme.css" type="text/css" />
     <link rel="stylesheet" href="../_static/pygments.css" type="text/css" />
       <link rel="stylesheet" href="../_static/css/custom.css" type="text/css" />
       <link rel="stylesheet" href="../_static/collapsible-lists/css/tree_view.css" type="text/css" />
@@ -36,7 +36,7 @@
             <a href="../index.html" class="icon icon-home"> Marian NMT
           </a>
               <div class="version">
-                v1.10.28
+                v1.11.3
               </div>
 <div role="search">
   <form id="rtd-search-form" class="wy-form" action="../search.html" method="get">
@@ -48,6 +48,7 @@
         </div><div class="wy-menu wy-menu-vertical" data-spy="affix" role="navigation" aria-label="Navigation menu">
               <p><span class="caption-text">Contents:</span></p>
 <ul>
+<li class="toctree-l1"><a class="reference internal" href="../structure.html">Code Organisation</a></li>
 <li class="toctree-l1"><a class="reference internal" href="../graph.html">Expression graphs</a></li>
 <li class="toctree-l1"><a class="reference internal" href="../operators.html">Operations in the expression graph</a></li>
 <li class="toctree-l1"><a class="reference internal" href="../layer.html">Layers</a></li>
@@ -208,6 +209,7 @@
 <dt id="_CPPv4N6marian10GraphGroup12collectStatsE3PtrI15ExpressionGraphE3PtrIN6models18ICriterionFunctionEERKNSt6vectorI3PtrI5VocabEEEd">
 <span id="_CPPv3N6marian10GraphGroup12collectStatsE3PtrI15ExpressionGraphE3PtrIN6models18ICriterionFunctionEERKNSt6vectorI3PtrI5VocabEEEd"></span><span id="_CPPv2N6marian10GraphGroup12collectStatsE3PtrI15ExpressionGraphE3PtrIN6models18ICriterionFunctionEERKNSt6vectorI3PtrI5VocabEEEd"></span><span id="marian::GraphGroup::collectStats__Ptr:ExpressionGraph:.Ptr:models::ICriterionFunction:.std::vector:Ptr:Vocab::CR.double"></span><span class="target" id="classmarian_1_1GraphGroup_1aedbdb275fce1db9d8501f7a5ed3e4018"></span><a class="reference internal" href="typedef_namespacemarian_1ad1a373be43a00ef9ce35666145137b08.html#_CPPv4N6marian3PtrE" title="marian::Ptr">Ptr</a>&lt;data::<a class="reference internal" href="classmarian_1_1data_1_1BatchStats.html#_CPPv4N6marian4data10BatchStatsE" title="marian::data::BatchStats">BatchStats</a>&gt; <code class="sig-name descname">collectStats</code><span class="sig-paren">(</span><a class="reference internal" href="typedef_namespacemarian_1ad1a373be43a00ef9ce35666145137b08.html#_CPPv4N6marian3PtrE" title="marian::Ptr">Ptr</a>&lt;<a class="reference internal" href="classmarian_1_1ExpressionGraph.html#_CPPv4N6marian15ExpressionGraphE" title="marian::ExpressionGraph">ExpressionGraph</a>&gt; <em>graph</em>, <a class="reference internal" href="typedef_namespacemarian_1ad1a373be43a00ef9ce35666145137b08.html#_CPPv4N6marian3PtrE" title="marian::Ptr">Ptr</a>&lt;models::ICriterionFunction&gt; <em>model</em>, <em class="property">const</em> <a class="reference internal" href="function_group__graph__ops__mathematical_1gaf4e69a5f7167b63522135a1f6b8a5dd8.html#_CPPv4N6marianStE4Expri" title="marian::std">std</a>::vector&lt;<a class="reference internal" href="typedef_namespacemarian_1ad1a373be43a00ef9ce35666145137b08.html#_CPPv4N6marian3PtrE" title="marian::Ptr">Ptr</a>&lt;<a class="reference internal" href="classmarian_1_1Vocab.html#_CPPv4N6marian5VocabE" title="marian::Vocab">Vocab</a>&gt;&gt; &amp;<em>vocabs</em>, double <em>multiplier</em> = 1.<span class="sig-paren">)</span><a class="headerlink" href="#_CPPv4N6marian10GraphGroup12collectStatsE3PtrI15ExpressionGraphE3PtrIN6models18ICriterionFunctionEERKNSt6vectorI3PtrI5VocabEEEd" title="Permalink to this definition">¶</a><br /></dt>
 <dd><p>Determine maximal batch size that can fit into the given workspace so that reallocation does not happen. </p>
+<p>Rather adjust the batch size based on the statistics collected here. Activated with <code class="docutils literal notranslate"><span class="pre">--mini-batch-fit</span></code>. In a multi-GPU scenario, the first GPU is used to determine the size. The actual allowed size is then determined by multiplying it with the number of devices, which is passed in as the ‘multiplier’.</p>
 <p>Rather adjust the batch size based on the stastistics collected here. Activated with <code class="docutils literal notranslate"><span class="pre">--mini-batch-fit</span></code>. In a multi-GPU scenario, the first GPU is used to determine the size. The actual allowed size is then determined by multiplying it with the number of devices, which is passed in as the ‘multiplier’. </p>
 </dd></dl>
 
@@ -303,38 +305,28 @@
 <dd></dd></dl>
 
 <dl class="member">
-<dt id="_CPPv4N6marian10GraphGroup10costScale_E">
-<span id="_CPPv3N6marian10GraphGroup10costScale_E"></span><span id="_CPPv2N6marian10GraphGroup10costScale_E"></span><span id="marian::GraphGroup::costScale___b"></span><span class="target" id="classmarian_1_1GraphGroup_1ad30fef09548129e38c92256f6a082c91"></span>bool <code class="sig-name descname">costScale_</code> = {false}<a class="headerlink" href="#_CPPv4N6marian10GraphGroup10costScale_E" title="Permalink to this definition">¶</a><br /></dt>
+<dt id="_CPPv4N6marian10GraphGroup12costScaling_E">
+<span id="_CPPv3N6marian10GraphGroup12costScaling_E"></span><span id="_CPPv2N6marian10GraphGroup12costScaling_E"></span><span id="marian::GraphGroup::costScaling___b"></span><span class="target" id="classmarian_1_1GraphGroup_1ae853a564d1bd3fc7f37d937037686ebd"></span>bool <code class="sig-name descname">costScaling_</code> = {false}<a class="headerlink" href="#_CPPv4N6marian10GraphGroup12costScaling_E" title="Permalink to this definition">¶</a><br /></dt>
 <dd></dd></dl>
 
 <dl class="member">
-<dt id="_CPPv4N6marian10GraphGroup16costScaleFactor_E">
-<span id="_CPPv3N6marian10GraphGroup16costScaleFactor_E"></span><span id="_CPPv2N6marian10GraphGroup16costScaleFactor_E"></span><span id="marian::GraphGroup::costScaleFactor___float"></span><span class="target" id="classmarian_1_1GraphGroup_1a518b8e3a9f13f8ce39b802d9728cfa2e"></span>float <code class="sig-name descname">costScaleFactor_</code> = {1.f}<a class="headerlink" href="#_CPPv4N6marian10GraphGroup16costScaleFactor_E" title="Permalink to this definition">¶</a><br /></dt>
+<dt id="_CPPv4N6marian10GraphGroup18costScalingFactor_E">
+<span id="_CPPv3N6marian10GraphGroup18costScalingFactor_E"></span><span id="_CPPv2N6marian10GraphGroup18costScalingFactor_E"></span><span id="marian::GraphGroup::costScalingFactor___float"></span><span class="target" id="classmarian_1_1GraphGroup_1a4788e22226574ea058c41669aeb2d8c2"></span>float <code class="sig-name descname">costScalingFactor_</code> = {1.f}<a class="headerlink" href="#_CPPv4N6marian10GraphGroup18costScalingFactor_E" title="Permalink to this definition">¶</a><br /></dt>
 <dd></dd></dl>
 
 <dl class="member">
-<dt id="_CPPv4N6marian10GraphGroup14costScaleFreq_E">
-<span id="_CPPv3N6marian10GraphGroup14costScaleFreq_E"></span><span id="_CPPv2N6marian10GraphGroup14costScaleFreq_E"></span><span id="marian::GraphGroup::costScaleFreq___s"></span><span class="target" id="classmarian_1_1GraphGroup_1a1fa278c660a1782ac5254a96b1b41ff0"></span>size_t <code class="sig-name descname">costScaleFreq_</code> = {2000}<a class="headerlink" href="#_CPPv4N6marian10GraphGroup14costScaleFreq_E" title="Permalink to this definition">¶</a><br /></dt>
+<dt id="_CPPv4N6marian10GraphGroup16costScalingFreq_E">
+<span id="_CPPv3N6marian10GraphGroup16costScalingFreq_E"></span><span id="_CPPv2N6marian10GraphGroup16costScalingFreq_E"></span><span id="marian::GraphGroup::costScalingFreq___s"></span><span class="target" id="classmarian_1_1GraphGroup_1aad6066ac6e0f6c1fd82358fa625413e4"></span>size_t <code class="sig-name descname">costScalingFreq_</code> = {2000}<a class="headerlink" href="#_CPPv4N6marian10GraphGroup16costScalingFreq_E" title="Permalink to this definition">¶</a><br /></dt>
 <dd></dd></dl>
 
 <dl class="member">
-<dt id="_CPPv4N6marian10GraphGroup20costScaleMultiplier_E">
-<span id="_CPPv3N6marian10GraphGroup20costScaleMultiplier_E"></span><span id="_CPPv2N6marian10GraphGroup20costScaleMultiplier_E"></span><span id="marian::GraphGroup::costScaleMultiplier___float"></span><span class="target" id="classmarian_1_1GraphGroup_1a9b5155550e8dacae500bb3b9121c027f"></span>float <code class="sig-name descname">costScaleMultiplier_</code> = {2.f}<a class="headerlink" href="#_CPPv4N6marian10GraphGroup20costScaleMultiplier_E" title="Permalink to this definition">¶</a><br /></dt>
+<dt id="_CPPv4N6marian10GraphGroup22costScalingMultiplier_E">
+<span id="_CPPv3N6marian10GraphGroup22costScalingMultiplier_E"></span><span id="_CPPv2N6marian10GraphGroup22costScalingMultiplier_E"></span><span id="marian::GraphGroup::costScalingMultiplier___float"></span><span class="target" id="classmarian_1_1GraphGroup_1a1386e85b1eed2cf8b3c2e7f23ba7b527"></span>float <code class="sig-name descname">costScalingMultiplier_</code> = {2.f}<a class="headerlink" href="#_CPPv4N6marian10GraphGroup22costScalingMultiplier_E" title="Permalink to this definition">¶</a><br /></dt>
 <dd></dd></dl>
 
 <dl class="member">
-<dt id="_CPPv4N6marian10GraphGroup22costScaleNanTolerance_E">
-<span id="_CPPv3N6marian10GraphGroup22costScaleNanTolerance_E"></span><span id="_CPPv2N6marian10GraphGroup22costScaleNanTolerance_E"></span><span id="marian::GraphGroup::costScaleNanTolerance___float"></span><span class="target" id="classmarian_1_1GraphGroup_1a28cefeb9dd52bccc54b63b2d8456f270"></span>float <code class="sig-name descname">costScaleNanTolerance_</code> = {0.f}<a class="headerlink" href="#_CPPv4N6marian10GraphGroup22costScaleNanTolerance_E" title="Permalink to this definition">¶</a><br /></dt>
-<dd></dd></dl>
-
-<dl class="member">
-<dt id="_CPPv4N6marian10GraphGroup18costScaleNanRange_E">
-<span id="_CPPv3N6marian10GraphGroup18costScaleNanRange_E"></span><span id="_CPPv2N6marian10GraphGroup18costScaleNanRange_E"></span><span id="marian::GraphGroup::costScaleNanRange___s"></span><span class="target" id="classmarian_1_1GraphGroup_1a14658f2307570b3463b043fc2eda686c"></span>size_t <code class="sig-name descname">costScaleNanRange_</code> = {1}<a class="headerlink" href="#_CPPv4N6marian10GraphGroup18costScaleNanRange_E" title="Permalink to this definition">¶</a><br /></dt>
-<dd></dd></dl>
-
-<dl class="member">
-<dt id="_CPPv4N6marian10GraphGroup23costScaleFactorMinimum_E">
-<span id="_CPPv3N6marian10GraphGroup23costScaleFactorMinimum_E"></span><span id="_CPPv2N6marian10GraphGroup23costScaleFactorMinimum_E"></span><span id="marian::GraphGroup::costScaleFactorMinimum___float"></span><span class="target" id="classmarian_1_1GraphGroup_1a41f7a358eb96eceaedd762d82aa0d740"></span>float <code class="sig-name descname">costScaleFactorMinimum_</code> = {1.f}<a class="headerlink" href="#_CPPv4N6marian10GraphGroup23costScaleFactorMinimum_E" title="Permalink to this definition">¶</a><br /></dt>
+<dt id="_CPPv4N6marian10GraphGroup25costScalingFactorMinimum_E">
+<span id="_CPPv3N6marian10GraphGroup25costScalingFactorMinimum_E"></span><span id="_CPPv2N6marian10GraphGroup25costScalingFactorMinimum_E"></span><span id="marian::GraphGroup::costScalingFactorMinimum___float"></span><span class="target" id="classmarian_1_1GraphGroup_1af2b885b0c0f92441a4f3b33651a3fd74"></span>float <code class="sig-name descname">costScalingFactorMinimum_</code> = {1.f}<a class="headerlink" href="#_CPPv4N6marian10GraphGroup25costScalingFactorMinimum_E" title="Permalink to this definition">¶</a><br /></dt>
 <dd></dd></dl>
 
 <dl class="member">
@@ -345,6 +337,11 @@
 <dl class="member">
 <dt id="_CPPv4N6marian10GraphGroup8nanSeen_E">
 <span id="_CPPv3N6marian10GraphGroup8nanSeen_E"></span><span id="_CPPv2N6marian10GraphGroup8nanSeen_E"></span><span id="marian::GraphGroup::nanSeen___s"></span><span class="target" id="classmarian_1_1GraphGroup_1a5dbaa4eb877a8c4ef1670c05d9c9a298"></span>size_t <code class="sig-name descname">nanSeen_</code> = {0}<a class="headerlink" href="#_CPPv4N6marian10GraphGroup8nanSeen_E" title="Permalink to this definition">¶</a><br /></dt>
+<dd></dd></dl>
+
+<dl class="member">
+<dt id="_CPPv4N6marian10GraphGroup17checkGradientNan_E">
+<span id="_CPPv3N6marian10GraphGroup17checkGradientNan_E"></span><span id="_CPPv2N6marian10GraphGroup17checkGradientNan_E"></span><span id="marian::GraphGroup::checkGradientNan___b"></span><span class="target" id="classmarian_1_1GraphGroup_1a89d0724d936fdf4b295c7b3c66808bcc"></span>bool <code class="sig-name descname">checkGradientNan_</code> = {false}<a class="headerlink" href="#_CPPv4N6marian10GraphGroup17checkGradientNan_E" title="Permalink to this definition">¶</a><br /></dt>
 <dd></dd></dl>
 
 <dl class="member">
@@ -363,8 +360,8 @@
 <dd></dd></dl>
 
 <dl class="member">
-<dt id="_CPPv4N6marian10GraphGroup17checkGradientNan_E">
-<span id="_CPPv3N6marian10GraphGroup17checkGradientNan_E"></span><span id="_CPPv2N6marian10GraphGroup17checkGradientNan_E"></span><span id="marian::GraphGroup::checkGradientNan___b"></span><span class="target" id="classmarian_1_1GraphGroup_1a89d0724d936fdf4b295c7b3c66808bcc"></span>bool <code class="sig-name descname">checkGradientNan_</code> = {false}<a class="headerlink" href="#_CPPv4N6marian10GraphGroup17checkGradientNan_E" title="Permalink to this definition">¶</a><br /></dt>
+<dt id="_CPPv4N6marian10GraphGroup30dynamicGradientScalingFadeout_E">
+<span id="_CPPv3N6marian10GraphGroup30dynamicGradientScalingFadeout_E"></span><span id="_CPPv2N6marian10GraphGroup30dynamicGradientScalingFadeout_E"></span><span id="marian::GraphGroup::dynamicGradientScalingFadeout___s"></span><span class="target" id="classmarian_1_1GraphGroup_1a43a37026e8cdd74f724dcf7cd340366e"></span>size_t <code class="sig-name descname">dynamicGradientScalingFadeout_</code> = {0ul}<a class="headerlink" href="#_CPPv4N6marian10GraphGroup30dynamicGradientScalingFadeout_E" title="Permalink to this definition">¶</a><br /></dt>
 <dd></dd></dl>
 
 </div>

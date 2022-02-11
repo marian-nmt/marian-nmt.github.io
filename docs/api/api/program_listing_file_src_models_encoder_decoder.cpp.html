@@ -4,7 +4,7 @@
   <meta charset="utf-8" /><meta name="generator" content="Docutils 0.17.1: http://docutils.sourceforge.net/" />
 
   <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-  <title>Program Listing for File encoder_decoder.cpp &mdash; Marian NMT v1.10.28 2022-01-28 documentation</title><link rel="stylesheet" href="../_static/css/theme.css" type="text/css" />
+  <title>Program Listing for File encoder_decoder.cpp &mdash; Marian NMT v1.11.3 2022-02-11 documentation</title><link rel="stylesheet" href="../_static/css/theme.css" type="text/css" />
     <link rel="stylesheet" href="../_static/pygments.css" type="text/css" />
       <link rel="stylesheet" href="../_static/css/custom.css" type="text/css" />
       <link rel="stylesheet" href="../_static/collapsible-lists/css/tree_view.css" type="text/css" />
@@ -34,7 +34,7 @@
             <a href="../index.html" class="icon icon-home"> Marian NMT
           </a>
               <div class="version">
-                v1.10.28
+                v1.11.3
               </div>
 <div role="search">
   <form id="rtd-search-form" class="wy-form" action="../search.html" method="get">
@@ -46,6 +46,7 @@
         </div><div class="wy-menu wy-menu-vertical" data-spy="affix" role="navigation" aria-label="Navigation menu">
               <p><span class="caption-text">Contents:</span></p>
 <ul>
+<li class="toctree-l1"><a class="reference internal" href="../structure.html">Code Organisation</a></li>
 <li class="toctree-l1"><a class="reference internal" href="../graph.html">Expression graphs</a></li>
 <li class="toctree-l1"><a class="reference internal" href="../operators.html">Operations in the expression graph</a></li>
 <li class="toctree-l1"><a class="reference internal" href="../layer.html">Layers</a></li>
@@ -122,7 +123,9 @@
 <span class="w">  </span><span class="n">modelFeatures_</span><span class="p">.</span><span class="n">insert</span><span class="p">(</span><span class="s">&quot;transformer-heads&quot;</span><span class="p">);</span><span class="w"></span>
 <span class="w">  </span><span class="n">modelFeatures_</span><span class="p">.</span><span class="n">insert</span><span class="p">(</span><span class="s">&quot;transformer-no-projection&quot;</span><span class="p">);</span><span class="w"></span>
 <span class="w">  </span><span class="n">modelFeatures_</span><span class="p">.</span><span class="n">insert</span><span class="p">(</span><span class="s">&quot;transformer-dim-ffn&quot;</span><span class="p">);</span><span class="w"></span>
+<span class="w">  </span><span class="n">modelFeatures_</span><span class="p">.</span><span class="n">insert</span><span class="p">(</span><span class="s">&quot;transformer-decoder-dim-ffn&quot;</span><span class="p">);</span><span class="w"></span>
 <span class="w">  </span><span class="n">modelFeatures_</span><span class="p">.</span><span class="n">insert</span><span class="p">(</span><span class="s">&quot;transformer-ffn-depth&quot;</span><span class="p">);</span><span class="w"></span>
+<span class="w">  </span><span class="n">modelFeatures_</span><span class="p">.</span><span class="n">insert</span><span class="p">(</span><span class="s">&quot;transformer-decoder-ffn-depth&quot;</span><span class="p">);</span><span class="w"></span>
 <span class="w">  </span><span class="n">modelFeatures_</span><span class="p">.</span><span class="n">insert</span><span class="p">(</span><span class="s">&quot;transformer-ffn-activation&quot;</span><span class="p">);</span><span class="w"></span>
 <span class="w">  </span><span class="n">modelFeatures_</span><span class="p">.</span><span class="n">insert</span><span class="p">(</span><span class="s">&quot;transformer-dim-aan&quot;</span><span class="p">);</span><span class="w"></span>
 <span class="w">  </span><span class="n">modelFeatures_</span><span class="p">.</span><span class="n">insert</span><span class="p">(</span><span class="s">&quot;transformer-aan-depth&quot;</span><span class="p">);</span><span class="w"></span>
@@ -304,7 +307,7 @@
 <span class="w">  </span><span class="k">if</span><span class="p">(</span><span class="n">clearGraph</span><span class="p">)</span><span class="w"></span>
 <span class="w">    </span><span class="n">clear</span><span class="p">(</span><span class="n">graph</span><span class="p">);</span><span class="w"></span>
 
-<span class="w">  </span><span class="c1">// Required first step, also intializes shortlist</span>
+<span class="w">  </span><span class="c1">// Required first step, also initializes shortlist</span>
 <span class="w">  </span><span class="k">auto</span><span class="w"> </span><span class="n">state</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="n">startState</span><span class="p">(</span><span class="n">graph</span><span class="p">,</span><span class="w"> </span><span class="n">batch</span><span class="p">);</span><span class="w"></span>
 
 <span class="w">  </span><span class="c1">// Fill state with embeddings from batch (ground truth)</span>

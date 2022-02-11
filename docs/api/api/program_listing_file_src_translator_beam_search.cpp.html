@@ -4,7 +4,7 @@
   <meta charset="utf-8" /><meta name="generator" content="Docutils 0.17.1: http://docutils.sourceforge.net/" />
 
   <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-  <title>Program Listing for File beam_search.cpp &mdash; Marian NMT v1.10.28 2022-01-28 documentation</title><link rel="stylesheet" href="../_static/css/theme.css" type="text/css" />
+  <title>Program Listing for File beam_search.cpp &mdash; Marian NMT v1.11.3 2022-02-11 documentation</title><link rel="stylesheet" href="../_static/css/theme.css" type="text/css" />
     <link rel="stylesheet" href="../_static/pygments.css" type="text/css" />
       <link rel="stylesheet" href="../_static/css/custom.css" type="text/css" />
       <link rel="stylesheet" href="../_static/collapsible-lists/css/tree_view.css" type="text/css" />
@@ -34,7 +34,7 @@
             <a href="../index.html" class="icon icon-home"> Marian NMT
           </a>
               <div class="version">
-                v1.10.28
+                v1.11.3
               </div>
 <div role="search">
   <form id="rtd-search-form" class="wy-form" action="../search.html" method="get">
@@ -46,6 +46,7 @@
         </div><div class="wy-menu wy-menu-vertical" data-spy="affix" role="navigation" aria-label="Navigation menu">
               <p><span class="caption-text">Contents:</span></p>
 <ul>
+<li class="toctree-l1"><a class="reference internal" href="../structure.html">Code Organisation</a></li>
 <li class="toctree-l1"><a class="reference internal" href="../graph.html">Expression graphs</a></li>
 <li class="toctree-l1"><a class="reference internal" href="../operators.html">Operations in the expression graph</a></li>
 <li class="toctree-l1"><a class="reference internal" href="../layer.html">Layers</a></li>
@@ -178,7 +179,7 @@
 <span class="w">      </span><span class="c1">// For factored decoding, the word is built over multiple decoding steps,</span>
 <span class="w">      </span><span class="c1">// starting with the lemma, then adding factors one by one.</span>
 <span class="w">      </span><span class="k">if</span><span class="w"> </span><span class="p">(</span><span class="n">factorGroup</span><span class="w"> </span><span class="o">==</span><span class="w"> </span><span class="mi">0</span><span class="p">)</span><span class="w"> </span><span class="p">{</span><span class="w"></span>
-<span class="w">        </span><span class="n">word</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="n">factoredVocab</span><span class="o">-&gt;</span><span class="n">lemma2Word</span><span class="p">(</span><span class="n">shortlist</span><span class="w"> </span><span class="o">?</span><span class="w"> </span><span class="n">shortlist</span><span class="o">-&gt;</span><span class="n">reverseMap</span><span class="p">((</span><span class="kt">int</span><span class="p">)</span><span class="w"> </span><span class="n">prevBeamHypIdx</span><span class="p">,</span><span class="w"> </span><span class="p">(</span><span class="kt">int</span><span class="p">)</span><span class="w"> </span><span class="n">currentBatchIdx</span><span class="p">,</span><span class="w"> </span><span class="n">wordIdx</span><span class="p">)</span><span class="w"> </span><span class="o">:</span><span class="w"> </span><span class="n">wordIdx</span><span class="p">);</span><span class="w"> </span><span class="c1">// @BUGBUG: reverseMap is only correct if factoredVocab_-&gt;getGroupRange(0).first == 0</span>
+<span class="w">        </span><span class="n">word</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="n">factoredVocab</span><span class="o">-&gt;</span><span class="n">lemma2Word</span><span class="p">(</span><span class="n">shortlist</span><span class="w"> </span><span class="o">?</span><span class="w"> </span><span class="n">shortlist</span><span class="o">-&gt;</span><span class="n">reverseMap</span><span class="p">((</span><span class="kt">int</span><span class="p">)</span><span class="w"> </span><span class="n">prevBeamHypIdx</span><span class="p">,</span><span class="w"> </span><span class="p">(</span><span class="kt">int</span><span class="p">)</span><span class="w"> </span><span class="n">currentBatchIdx</span><span class="p">,</span><span class="w"> </span><span class="n">wordIdx</span><span class="p">)</span><span class="w"> </span><span class="o">:</span><span class="w"> </span><span class="n">wordIdx</span><span class="p">);</span><span class="w"></span>
 <span class="w">        </span><span class="n">std</span><span class="o">::</span><span class="n">vector</span><span class="o">&lt;</span><span class="kt">size_t</span><span class="o">&gt;</span><span class="w"> </span><span class="n">factorIndices</span><span class="p">;</span><span class="w"> </span><span class="n">factoredVocab</span><span class="o">-&gt;</span><span class="n">word2factors</span><span class="p">(</span><span class="n">word</span><span class="p">,</span><span class="w"> </span><span class="n">factorIndices</span><span class="p">);</span><span class="w"></span>
 <span class="w">        </span><span class="c1">//LOG(info, &quot;{} + {} ({}) -&gt; {} -&gt; {}&quot;,</span>
 <span class="w">        </span><span class="c1">//    factoredVocab-&gt;decode(prevHyp-&gt;tracebackWords()),</span>
@@ -199,7 +200,7 @@
 <span class="w">      </span><span class="p">}</span><span class="w"></span>
 <span class="w">    </span><span class="p">}</span><span class="w"></span>
 <span class="w">    </span><span class="k">else</span><span class="w"> </span><span class="k">if</span><span class="w"> </span><span class="p">(</span><span class="n">shortlist</span><span class="p">)</span><span class="w"></span>
-<span class="w">      </span><span class="n">word</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="n">Word</span><span class="o">::</span><span class="n">fromWordIndex</span><span class="p">(</span><span class="n">shortlist</span><span class="o">-&gt;</span><span class="n">reverseMap</span><span class="p">((</span><span class="kt">int</span><span class="p">)</span><span class="w"> </span><span class="n">prevBeamHypIdx</span><span class="p">,</span><span class="w"> </span><span class="p">(</span><span class="kt">int</span><span class="p">)</span><span class="w"> </span><span class="n">origBatchIdx</span><span class="p">,</span><span class="w"> </span><span class="n">wordIdx</span><span class="p">));</span><span class="w"></span>
+<span class="w">      </span><span class="n">word</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="n">Word</span><span class="o">::</span><span class="n">fromWordIndex</span><span class="p">(</span><span class="n">shortlist</span><span class="o">-&gt;</span><span class="n">reverseMap</span><span class="p">((</span><span class="kt">int</span><span class="p">)</span><span class="w"> </span><span class="n">prevBeamHypIdx</span><span class="p">,</span><span class="w"> </span><span class="p">(</span><span class="kt">int</span><span class="p">)</span><span class="w"> </span><span class="n">currentBatchIdx</span><span class="p">,</span><span class="w"> </span><span class="n">wordIdx</span><span class="p">));</span><span class="w"></span>
 <span class="w">    </span><span class="k">else</span><span class="w"></span>
 <span class="w">      </span><span class="n">word</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="n">Word</span><span class="o">::</span><span class="n">fromWordIndex</span><span class="p">(</span><span class="n">wordIdx</span><span class="p">);</span><span class="w"></span>
 
@@ -414,6 +415,7 @@
 <span class="w">  </span><span class="k">auto</span><span class="w"> </span><span class="n">prevBatchIdxMap</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="n">batchIdxMap</span><span class="p">;</span><span class="w"> </span><span class="c1">// [origBatchIdx -&gt; currentBatchIdx] but shifted by one time step</span>
 <span class="w">  </span><span class="c1">// main loop over output time steps</span>
 <span class="w">  </span><span class="k">for</span><span class="w"> </span><span class="p">(</span><span class="kt">size_t</span><span class="w"> </span><span class="n">t</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="mi">0</span><span class="p">;</span><span class="w"> </span><span class="p">;</span><span class="w"> </span><span class="n">t</span><span class="o">++</span><span class="p">)</span><span class="w"> </span><span class="p">{</span><span class="w"></span>
+<span class="w">    </span><span class="c1">//std::cerr &lt;&lt; &quot;\nstep=&quot; &lt;&lt; t &lt;&lt; std::endl;</span>
 <span class="w">    </span><span class="n">ABORT_IF</span><span class="p">(</span><span class="n">origDimBatch</span><span class="w"> </span><span class="o">!=</span><span class="w"> </span><span class="n">beams</span><span class="p">.</span><span class="n">size</span><span class="p">(),</span><span class="w"> </span><span class="s">&quot;Lost a batch entry??&quot;</span><span class="p">);</span><span class="w"></span>
 <span class="w">    </span><span class="c1">// determine beam size for next output time step, as max over still-active sentences</span>
 <span class="w">    </span><span class="c1">// E.g. if all batch entries are down from beam 5 to no more than 4 surviving hyps, then</span>

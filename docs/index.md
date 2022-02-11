@@ -491,7 +491,19 @@ words in the corresponding target training sentence.
 
 ### Tied embeddings
 
-TODO
+The tying of embedding matrices can help to reduce models size and memory
+footprints during training. Tying target embeddings and the last layer of the
+output does not decrease quality and helps saving significant amounts of
+parameters. Tying all embedding layers and output layers is a common practice
+for translation models between languages using the same scripts.
+
+Related options:
+
+- `--tied-embeddings` - tie target embeddings and output embeddings in output
+  layer,
+- `--tied-embeddings-src` - tie source and target embeddings,
+- `--tied-embeddings-all` - tie all embedding layers and output layer.
+
 
 
 ### Custom embeddings
@@ -523,19 +535,48 @@ Other options for managing embedding vectors:
 
 
 
-### Model pre-training
-
-TODO
-
-
 ### Fine-tuning
 
-TODO
+A common domain adaptation technique is continued training via fine-tuning of
+an existing model on new training data.
+
+You can start continued training by copying your model to a new folder and
+setting the `--model` option to point to that model. This will reload the model
+from the path and also overwrite it during the next checkpoint saving. Note
+that this overrides the model parameters with the model parameters from the
+file, so the architectures cannot be changed between continued trainings.
+
+This method also works well for normal continued training. You can interrupt
+your running training, change the training corpus and run the same command you
+used before for the training to resume. In the case where the training files
+change, the option `--no-restore-corpus` should be added to not restore the
+corpus positions. If your validation data change, consider adding
+`--valid-reset-stalled` to reset validation counters. You can also change other
+training parameters like learning rate or early stopping criteria. If the new
+training corpus is much smaller, it is usually recommended to decrease the
+learning rate and validate the model more frequently.
+
+See also [model pre-training]({{ 'docs#model-pre-training' | relative_url }}).
+
+
+### Model pre-training
+
+A transfer learning technique related to fine-tuning is initializing model
+weights from a pre-trained model. Marian provides the `--pretrained-model
+model.npz` option that will load weight matrices from the pre-trained model
+that match in name corresponding parameters from the model's architecture.
+Matrices that are not present in the pre-trained model are initialized randomly
+by default.
+
+For instance, you can initialize the decoder of a encoder-decoder translation
+model with a pre-trained language model or deep models with shallow models.
 
 
 ### Right-to-left models
 
-TODO
+Marian provides an option for training on reversed input sequence via
+`--right-left`. Combining a traditional left-to-right models and right-to-left
+models may lead to an improved performance for some tasks.
 
 
 ### Guided alignment
@@ -599,7 +640,7 @@ Marian supports training models with source and/or target side factors. To
 train a factored model, the training data needs to be in a specific format, and
 a special vocabulary is required.  More information on using Marian with
 factors can be found in [the documentation on factored
-models](https://marian-nmt.github.io/docs/api/factors).
+models]({{ 'docs/api/factors' | relative_url }}).
 
 
 ### Mixed precision training
@@ -818,7 +859,28 @@ directory contains `fast_align` and `atools` from
 
 ### Word-level scores
 
-TODO
+
+In addition to sentence-level scores, Marian can also output word-level scores.
+The option `--word-scores` prints one score per subword unit, for example:
+
+```
+echo "This is a test." | ./build/marian-decoder -c config.yml --word-scores
+Tohle je test. ||| WordScores= -1.51923 -0.21951 -1.48668 -0.24813 -0.22176
+```
+
+Note that if you use the built-in SentencePiece subword segmentation, the
+number of scores will not much the output tokens.  Also, word scores are not
+normalized even if `--normalize` is used. You may want to normalize and map the
+word scores into output tokens as a custom post-processing step. Adding
+`--no-spm-decode` or `--alignment` will deliver all information that is needed
+to do that:
+
+```
+echo "This is a test." | ./build/marian-decoder -c config.yml --word-scores --no-spm-decode --alignment
+▁Tohle ▁je ▁test . </s> ||| 1-0 5-1 5-2 5-3 5-4 ||| WordScores= -1.51923 -0.21951 -1.48668 -0.24813 -0.22176
+```
+
+The option `--word-scores` is also available in `marian-scorer`.
 
 
 ### Noisy back-translation

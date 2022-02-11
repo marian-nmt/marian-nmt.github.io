@@ -410,6 +410,9 @@ By default we use early stopping with patience of 10, i.e. `--early-stopping
 steps. Usually this will signal convergence or --- if the scores get worse with
 later validation steps --- potential overfitting.
 
+If using multiple metrics in validation, the stopping condition can be applied
+to `any` or `all` of these metrics. This is achieved using the flag
+`--early-stopping-on`. The default considers only the `first` listed metric.
 
 
 ### Regularization

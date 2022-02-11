@@ -190,7 +190,7 @@
           </h1>
           <div class="meta">
             <i class="fa fa-clock-o"></i>
-            Last updated: 25 January 2022
+            Last updated: 11 February 2022
           </div>
         </div><!--//doc-header-->
 
@@ -228,28 +228,6 @@ its separate repository and is available from:
 
 <p>Click on the tool name above for a list of command line options. See options
 for <a href="/docs/cmd/">previous releases</a>.</p>
-
-<h3 id="model-types">Model types</h3>
-
-<ul>
-  <li><code class="highlighter-rouge">s2s</code>: An RNN-based encoder-decoder model with attention mechanism. The
-architecture is equivalent to the
-<a href="https://github.com/nyu-dl/dl4mt-tutorial">DL4MT</a> or
-<a href="https://github.com/EdinburghNLP/nematus">Nematus</a> models (<a href="https://arxiv.org/abs/1703.04357">Senrich et al.,
-2017</a>).</li>
-  <li><code class="highlighter-rouge">transformer</code>: A model originally proposed by Google <a href="https://arxiv.org/abs/1706.03762">(Vaswani et al.,
-2017)</a> based solely on attention mechanisms.</li>
-  <li><code class="highlighter-rouge">multi-s2s</code>: As <code class="highlighter-rouge">s2s</code>, but uses two or more encoders allowing multi-source
-neural machine translation.</li>
-  <li><code class="highlighter-rouge">multi-transformer</code>: As <code class="highlighter-rouge">transformer</code>, but uses multiple encoders.</li>
-  <li><code class="highlighter-rouge">amun</code>: A model equivalent to Nematus models unless layer normalization is
-used. Can be decoded with Amun as <em>nematus</em> model type.</li>
-  <li><code class="highlighter-rouge">nematus</code>: A model type developed for decoding deep RNN-based encoder-decoder
-models created by the Edinburgh MT group for WMT 2017 using Nematus toolkit.
-Can be decoded with Amun as <em>nematus2</em> model type.</li>
-  <li><code class="highlighter-rouge">lm</code>: An RNN language model.</li>
-  <li><code class="highlighter-rouge">lm-transformer</code>: An transformer-based language model.</li>
-</ul>
 
 <h3 id="developer-api">Developer API</h3>
 
@@ -475,6 +453,28 @@ machine translation model:</p>
 
 <p>Command-line options overwrite options stored in the configuration file.</p>
 
+<h3 id="model-types">Model types</h3>
+
+<ul>
+  <li><code class="highlighter-rouge">s2s</code>: An RNN-based encoder-decoder model with attention mechanism. The
+architecture is equivalent to the
+<a href="https://github.com/nyu-dl/dl4mt-tutorial">DL4MT</a> or
+<a href="https://github.com/EdinburghNLP/nematus">Nematus</a> models (<a href="https://arxiv.org/abs/1703.04357">Senrich et al.,
+2017</a>).</li>
+  <li><code class="highlighter-rouge">transformer</code>: A model originally proposed by Google <a href="https://arxiv.org/abs/1706.03762">(Vaswani et al.,
+2017)</a> based solely on attention mechanisms.</li>
+  <li><code class="highlighter-rouge">multi-s2s</code>: As <code class="highlighter-rouge">s2s</code>, but uses two or more encoders allowing multi-source
+neural machine translation.</li>
+  <li><code class="highlighter-rouge">multi-transformer</code>: As <code class="highlighter-rouge">transformer</code>, but uses multiple encoders.</li>
+  <li><code class="highlighter-rouge">amun</code>: A model equivalent to Nematus models unless layer normalization is
+used. Can be decoded with Amun as <em>nematus</em> model type.</li>
+  <li><code class="highlighter-rouge">nematus</code>: A model type developed for decoding deep RNN-based encoder-decoder
+models created by the Edinburgh MT group for WMT 2017 using Nematus toolkit.
+Can be decoded with Amun as <em>nematus2</em> model type.</li>
+  <li><code class="highlighter-rouge">lm</code>: An RNN language model.</li>
+  <li><code class="highlighter-rouge">lm-transformer</code>: An transformer-based language model.</li>
+</ul>
+
 <h3 id="multi-gpu-training">Multi-GPU training</h3>
 
 <p>For multi-GPU training you only need to specify the device ids of the GPUs you
@@ -600,6 +600,10 @@ model based on a heuristic involving a validation set.</p>
 steps. Usually this will signal convergence or — if the scores get worse with
 later validation steps — potential overfitting.</p>
 
+<p>If using multiple metrics in validation, the stopping condition can be applied
+to <code class="highlighter-rouge">any</code> or <code class="highlighter-rouge">all</code> of these metrics. This is achieved using the flag
+<code class="highlighter-rouge">--early-stopping-on</code>. The default considers only the <code class="highlighter-rouge">first</code> listed metric.</p>
+
 <h3 id="regularization">Regularization</h3>
 
 <p>Marian has several regularization techniques implemented that help to prevent
@@ -676,6 +680,23 @@ strategy, each line of that file contains a real-value weight:</p>
 line of the weight file should contain as many real-value weights as there are
 words in the corresponding target training sentence.</p>
 
+<h3 id="tied-embeddings">Tied embeddings</h3>
+
+<p>The tying of embedding matrices can help to reduce models size and memory
+footprints during training. Tying target embeddings and the last layer of the
+output does not decrease quality and helps saving significant amounts of
+parameters. Tying all embedding layers and output layers is a common practice
+for translation models between languages using the same scripts.</p>
+
+<p>Related options:</p>
+
+<ul>
+  <li><code class="highlighter-rouge">--tied-embeddings</code> - tie target embeddings and output embeddings in output
+layer,</li>
+  <li><code class="highlighter-rouge">--tied-embeddings-src</code> - tie source and target embeddings,</li>
+  <li><code class="highlighter-rouge">--tied-embeddings-all</code> - tie all embedding layers and output layer.</li>
+</ul>
+
 <h3 id="custom-embeddings">Custom embeddings</h3>
 
 <p>Marian can handle custom embedding vectors trained with
@@ -703,6 +724,49 @@ trained w.r.t to vocabulary using <a class="github-link" href="https://github.co
   <li><code class="highlighter-rouge">--embedding-fix-trg</code> fixes target embeddings in all decoders</li>
   <li><code class="highlighter-rouge">--embedding-normalization</code> normalizes vector values into [-1,1] range</li>
 </ul>
+
+<h3 id="fine-tuning">Fine-tuning</h3>
+
+<p>A common domain adaptation technique is continued training via fine-tuning of
+an existing model on new training data.</p>
+
+<p>You can start continued training by copying your model to a new folder and
+setting the <code class="highlighter-rouge">--model</code> option to point to that model. This will reload the model
+from the path and also overwrite it during the next checkpoint saving. Note
+that this overrides the model parameters with the model parameters from the
+file, so the architectures cannot be changed between continued trainings.</p>
+
+<p>This method also works well for normal continued training. You can interrupt
+your running training, change the training corpus and run the same command you
+used before for the training to resume. In the case where the training files
+change, the option <code class="highlighter-rouge">--no-restore-corpus</code> should be added to not restore the
+corpus positions. If your validation data change, consider adding
+<code class="highlighter-rouge">--valid-reset-stalled</code> to reset validation counters. You can also change other
+training parameters like learning rate or early stopping criteria. If the new
+training corpus is much smaller, it is usually recommended to decrease the
+learning rate and validate the model more frequently.</p>
+
+<p>See also <a href="/docs#model-pre-training">model pre-training</a>.</p>
+
+<h3 id="model-pre-training">Model pre-training</h3>
+
+<p>A transfer learning technique related to fine-tuning is initializing model
+weights from a pre-trained model. Marian provides the <code class="highlighter-rouge">--pretrained-model
+model.npz</code> option that will load weight matrices from the pre-trained model
+that match in name corresponding parameters from the model’s architecture.
+Matrices that are not present in the pre-trained model are initialized randomly
+by default.</p>
+
+<p>For instance, you can initialize the decoder of a encoder-decoder translation
+model with a pre-trained language model or deep models with shallow models.</p>
+
+<h3 id="right-to-left-models">Right-to-left models</h3>
+
+<p>Marian provides an option for training on reversed input sequence via
+<code class="highlighter-rouge">--right-left</code>. Combining traditional left-to-right models and right-to-left
+models may lead to an improved performance for some tasks. One such approach
+would be to perform sequential decoding. However, combining left-to-right and
+right-to-left models together in an ensemble is not possible.</p>
 
 <h3 id="guided-alignment">Guided alignment</h3>
 
@@ -740,6 +804,103 @@ fast_align/build/atools -c grow-diag-final -i forward.align -j reverse.align &gt
   <li><code class="highlighter-rouge">--transformer-guided-alignment-layer</code> - number of layer to use for guided
 alignment training; only for training transformer models</li>
 </ul>
+
+<h3 id="pre-defined-configurations">Pre-defined configurations</h3>
+
+<p>Marian provides the <code class="highlighter-rouge">--task</code> options, which is a handy shortcut for setting
+model architecture and training options for common NMT model configurations.
+The list of predefined configurations includes:</p>
+
+<ul>
+  <li><code class="highlighter-rouge">best-deep</code> - the RNN BiDeep architecture proposed by <a href="http://www.aclweb.org/anthology/W17-4710">Miceli Barone et al.
+(2017)</a></li>
+  <li><code class="highlighter-rouge">transformer-base</code> and <code class="highlighter-rouge">transformer-big</code> - architectures and proposed
+training settings for a Transformer “base” model and Transformer “big” model,
+respectively, both introduced in <a href="https://papers.nips.cc/paper/7181-attention-is-all-you-need.pdf">Vaswani et al.
+(2019)</a></li>
+  <li><code class="highlighter-rouge">transformer-base-prenorm</code> and <code class="highlighter-rouge">transformer-big-prenorm</code> - variants of two
+Transformer models with “prenorm”, i.e. the layer normalization is performed
+as the first block-wise preprocessing step.</li>
+</ul>
+
+<p>Options that are automatically set via <code class="highlighter-rouge">--task &lt;arg&gt;</code> can be overwritten by
+separately specifying those options in the command line. For example, <code class="highlighter-rouge">--task
+transformer-base --dim-emb 1024</code> will train a transformer “base” but with the
+embedding size of 1024 instead of 512.</p>
+
+<h3 id="factored-models">Factored models</h3>
+
+<p>Marian supports training models with source and/or target side factors. To
+train a factored model, the training data needs to be in a specific format, and
+a special vocabulary is required.  More information on using Marian with
+factors can be found in <a href="/docs/api/factors">the documentation on factored
+models</a>.</p>
+
+<h3 id="mixed-precision-training">Mixed precision training</h3>
+
+<p>Marian supports mixed precision training available in NVIDIA Volta and newer
+architectures. The option <code class="highlighter-rouge">--fp16</code> provides a shortcut with default settings
+for mixed precision training with float16 and cost-scaling.</p>
+
+<p>Other options related to mixed precision training:</p>
+
+<ul>
+  <li><code class="highlighter-rouge">--precision</code> - defines types for forward/backward pass and optimization,</li>
+  <li><code class="highlighter-rouge">--cost-scaling</code> - option values for dynamic cost scaling,</li>
+  <li><code class="highlighter-rouge">--gradient-norm-average</code> - window size over which the exponential average of
+the gradient norm is recorded,</li>
+  <li><code class="highlighter-rouge">--dynamic-gradient-scaling</code> - re-scale gradient to have average gradient
+norm if (log) gradient norm diverges from average by the given sigmas,</li>
+  <li><code class="highlighter-rouge">--check-gradient-nan</code> - skip parameter update in case of NaNs in gradient.</li>
+</ul>
+
+<!--
+### Multi-node training
+-->
+
+<h3 id="training-from-stdin">Training from stdin</h3>
+
+<p>Parallel training data can be provided to Marian in a tab-separated file, where
+commonly the first field corresponds to the source side and the second field
+corresponds to the target side of the parallel corpus, for example, instead of
+providing two files to <code class="highlighter-rouge">--train-sets</code>:</p>
+
+<div class="highlighter-rouge"><div class="highlight"><pre class="highlight"><code>./build/marian -c config.yml -t file.src file.trg
+</code></pre></div></div>
+
+<p>a single file can be specified with <code class="highlighter-rouge">--tsv</code> option:</p>
+<div class="highlighter-rouge"><div class="highlight"><pre class="highlight"><code>./build/marian -c config.yml --tsv -t file.src-trg
+</code></pre></div></div>
+
+<p>The example can be further extended to train from the corpus provided directly
+into the standard input:</p>
+
+<div class="highlighter-rouge"><div class="highlight"><pre class="highlight"><code>paste file.src file.trg | ./build/marian -c config.yml -t stdin --no-shuffle
+</code></pre></div></div>
+
+<p>This might be useful when using a custom tool for training data preparation.
+Note that the user takes responsibility for randomizing the input data - this
+is why <code class="highlighter-rouge">--no-shuffle</code> is added to the training command (alternatively,
+<code class="highlighter-rouge">--shuffle batches</code> can be used).</p>
+
+<h4 id="logical-epochs">Logical epochs</h4>
+
+<p>The notion of an epoch is less clear when providing the training data into
+stdin as the corpus cannot be easily rewinded and shuffled by Marian. Thus, it
+is possible to define a logical epoch in terms of the number of updates or
+labes, for example <code class="highlighter-rouge">--logical-epoch 1Gt</code> will re-define the epoch as 1 billion
+target tokens, instead of the traditional one pass over the training data. This
+is especially useful if the data can be provided in an infinite stream into
+stdin.</p>
+
+<h4 id="guided-alignment-and-data-weighting">Guided alignment and data weighting</h4>
+
+<p>Training with guided alignment and data weighting is supported when providing
+the corpus in stdin. Simply add new fields to the input TSV file and specify
+the indices of fields with word alignments or weights. For example:</p>
+
+<div class="highlighter-rouge"><div class="highlight"><pre class="highlight"><code>cat file.src-trg-aln-w | ./build/marian -t stdin --guided-alignment 2 --data-weighting 3
+</code></pre></div></div>
 
 <h2 id="translation">Translation</h2>
 
@@ -900,6 +1061,84 @@ most probable translations for every source word in a batch.</p>
 directory contains <code class="highlighter-rouge">fast_align</code> and <code class="highlighter-rouge">atools</code> from
 <a href="https://github.com/clab/fast_align">fast_align</a> and <code class="highlighter-rouge">extract_lex</code> from
 <a href="https://github.com/marian-nmt/extract-lex">extract-lex</a>.</p>
+
+<h3 id="word-level-scores">Word-level scores</h3>
+
+<p>In addition to sentence-level scores, Marian can also output word-level scores.
+The option <code class="highlighter-rouge">--word-scores</code> prints one score per subword unit, for example:</p>
+
+<div class="highlighter-rouge"><div class="highlight"><pre class="highlight"><code>echo "This is a test." | ./build/marian-decoder -c config.yml --word-scores
+Tohle je test. ||| WordScores= -1.51923 -0.21951 -1.48668 -0.24813 -0.22176
+</code></pre></div></div>
+
+<p>Note that if you use the built-in SentencePiece subword segmentation, the
+number of scores will not much the output tokens.  Also, word scores are not
+normalized even if <code class="highlighter-rouge">--normalize</code> is used. You may want to normalize and map the
+word scores into output tokens as a custom post-processing step. Adding
+<code class="highlighter-rouge">--no-spm-decode</code> or <code class="highlighter-rouge">--alignment</code> will deliver all information that is needed
+to do that:</p>
+
+<div class="highlighter-rouge"><div class="highlight"><pre class="highlight"><code>echo "This is a test." | ./build/marian-decoder -c config.yml --word-scores --no-spm-decode --alignment
+▁Tohle ▁je ▁test . &lt;/s&gt; ||| 1-0 5-1 5-2 5-3 5-4 ||| WordScores= -1.51923 -0.21951 -1.48668 -0.24813 -0.22176
+</code></pre></div></div>
+
+<p>The option <code class="highlighter-rouge">--word-scores</code> is also available in <code class="highlighter-rouge">marian-scorer</code>.</p>
+
+<h3 id="noisy-back-translation">Noisy back-translation</h3>
+
+<p>The <code class="highlighter-rouge">--output-sampling</code> option in Marian allows one to noise the output layer
+with gumbel noise, which can be used for generating <a href="https://aclanthology.org/D18-1045.pdf">noisy
+back-translations</a>.</p>
+<div class="highlighter-rouge"><div class="highlight"><pre class="highlight"><code>./build/marian-decoder -b 1 -i input.src --output-sampling
+</code></pre></div></div>
+
+<p>By default the sampling is from the full model distribution. Top-k sampling can
+be achieved providing <code class="highlighter-rouge">topk N</code> as arguments, for example:</p>
+<div class="highlighter-rouge"><div class="highlight"><pre class="highlight"><code>./build/marian-decoder -b 1 -i input.src --output-sampling topk 10
+</code></pre></div></div>
+
+<p>Note that output sampling and beam search are generally contradictory methods
+and using them together is not recommended, so we advise to set <code class="highlighter-rouge">--beam-size 1</code>
+when using the sampling.</p>
+
+<h3 id="binary-models">Binary models</h3>
+
+<p>Marian has support for models in a custom binary format. This format supports
+mmap loading as well as both normal and packed memory layouts. Binary models
+offer decreased load times compared to <code class="highlighter-rouge">.npz</code>, and are identifiable by their
+<code class="highlighter-rouge">.bin</code> extension.</p>
+
+<p>The <code class="highlighter-rouge">marian-conv</code> command is able to convert to and from <code class="highlighter-rouge">npz</code> and <code class="highlighter-rouge">bin</code>
+models. The memory layout of the binary model is influenced by the
+<code class="highlighter-rouge">--gemm-type</code> flag, by default this is retained as <code class="highlighter-rouge">float32</code>.</p>
+
+<p>To generate a binary model from an <code class="highlighter-rouge">npz</code> model</p>
+<div class="language-shell highlighter-rouge"><div class="highlight"><pre class="highlight"><code>./marian-conv <span class="nt">--from</span> model.npz <span class="nt">--to</span> model.bin
+</code></pre></div></div>
+
+<p>The basic usage is as simple as replacing <code class="highlighter-rouge">model.npz</code> with <code class="highlighter-rouge">model.bin</code> in your
+command arguments.  When decoding on CPU, it is possible to enable mmap loading
+with the flag <code class="highlighter-rouge">--model-mmap</code>.</p>
+
+<p>Lexical shortlists also have a binary format. From a shortlist <code class="highlighter-rouge">lex.s2t</code> the
+binary version can be generated by</p>
+<div class="language-shell highlighter-rouge"><div class="highlight"><pre class="highlight"><code>./marian-conv <span class="nt">--shortlist</span> lex.s2t 50 50 0 <span class="se">\</span>
+              <span class="nt">--dump</span> lex.bin <span class="se">\</span>
+              <span class="nt">--vocabs</span> vocab.l1.spm vocab.l2.spm
+</code></pre></div></div>
+<p>The <code class="highlighter-rouge">--shortlist</code> argument points to the lexical shortlist file, and specifies
+the <code class="highlighter-rouge">first</code> (50) <code class="highlighter-rouge">best</code> (50) <code class="highlighter-rouge">prune</code> (0) options for the shortlist. Note that
+these options are <strong>hardcoded</strong> into the binary shortlist at conversion!  The
+<code class="highlighter-rouge">--dump</code> option gives the location for the binary shortlist and <code class="highlighter-rouge">--vocabs</code>
+specifies the vocabulary files for the source (l1) and target (l2) languages.</p>
+
+<p>To use the binary shortlist the <code class="highlighter-rouge">--shortlist lex.s2t 50 50 0</code> argument in your
+command should be replaced with</p>
+<div class="highlighter-rouge"><div class="highlight"><pre class="highlight"><code>--shortlist lex.bin false
+</code></pre></div></div>
+<p>which provides the path to the binary shortlist <code class="highlighter-rouge">lex.bin</code>, and the second
+option <code class="highlighter-rouge">false</code> (optional, true by default) specifies whether the contents
+should be verified.</p>
 
 <h3 id="web-server">Web server</h3>
 

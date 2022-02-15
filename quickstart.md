@@ -10,25 +10,24 @@ menu: 1
 
 ### GPU version
 
-For Ubuntu 16.04/18.04 LTS the standard packages should work. On newer versions
-of Ubuntu, there may be problems due to incompatibilities of the default g++
-compiler and CUDA. Minimal requirements:
+Minimal requirements tested on Ubuntu 18.04 LTS:
 
- - CMake 3.5.1
- - GCC/G++ 5.4
- - CUDA 9.0 or newer
+ - CMake 3.10.2
+ - GCC/G++ 7.3
+ - CUDA 9.2
 
 Notes:
 
-* CUDA 10.0+ requires CMake 3.12.2+ due to some bugs in earlier versions
-* Compiling the web-server tool requires also Boost 1.65.1+
+* GCC 8+/CUDA 10+ or higher are recommended
+* CUDA 10.0+ requires CMake 3.12.2+ due to bugs in earlier versions
+* Compilation of the web-server tool requires Boost 1.65.1+
 
 
 ### CPU version
 
 A Marian CPU build requires [Intel MKL](https://software.intel.com/en-us/mkl)
 (recommended) or [OpenBLAS](https://www.openblas.net/).
-It can be enabled by adding `-DCOMPILE_CPU=on` to the CMake command.
+CPU build can be enabled by adding `-DCOMPILE_CPU=on` to the CMake command.
 
 
 ### Ubuntu packages
@@ -40,11 +39,9 @@ installed to compile Marian with minimal dependencies:
 
       sudo apt-get install git cmake build-essential
 
-* Ubuntu 16.04 + CUDA 9.2 (gcc 5.4.0):
-
-      sudo apt-get install git cmake build-essential zlib1g-dev
-
-
+In general the standard packages of recent Ubuntu LTS editions should work, but
+some configurations of C++ compiler and CUDA may be incompatible with each
+other.
 Additional [packages](/docs/#ubuntu-packages) can be installed to compile
 Marian with the web server, built-in SentencePiece and TCMalloc support.
 

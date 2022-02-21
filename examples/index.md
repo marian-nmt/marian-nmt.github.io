@@ -47,6 +47,12 @@ menu: 4
 
 ## Tutorials
 
+### Training with Marian
+The **[training with Marian]({% link examples/training-overview.md %})** guide
+is an overview aimed at new practitioners to machine translation. It covers the
+model training pipeline in general, and provides a foundation from which to
+better comprehend the other examples and tutorials presented here.
+
 ### MT Marathon 2019 Efficiency
 
 **[The Machine Translation Marathon 2019 Tutorial]({% link examples/mtm2019.md %})** shows

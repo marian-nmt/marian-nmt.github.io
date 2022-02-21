@@ -93,6 +93,7 @@ quality data. As an example, such rules may impose limits on:
   - the ratio between alphabet to non-alphabet characters
   - the ratio between alphabet to non-alphabet words
   - the result of a model-based language classifier
+
 Deduplication is also commonly applied as part of corpus cleaning.
 
 These rules are motivated from the desire to remove overly long segments that

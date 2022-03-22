@@ -960,6 +960,8 @@ marian-dev/scripts/server/client_example.py %}:
 
     ./scripts/server/client_example.py -p 8080 < input.txt
 
+Note that `marian-server` is not compiled by default. It requires Boost and adding
+`-DCOMPILE_SERVER=on` to the CMake compilation command.
 
 
 ### Nematus models

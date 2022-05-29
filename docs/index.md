@@ -40,28 +40,6 @@ for [previous releases]({% link docs/cmd/index.md %}).
 
 
 
-### Model types
-
-- `s2s`: An RNN-based encoder-decoder model with attention mechanism. The
-  architecture is equivalent to the
-  [DL4MT](https://github.com/nyu-dl/dl4mt-tutorial) or
-  [Nematus](https://github.com/EdinburghNLP/nematus) models ([Senrich et al.,
-  2017](https://arxiv.org/abs/1703.04357)).
-- `transformer`: A model originally proposed by Google [(Vaswani et al.,
-  2017)](https://arxiv.org/abs/1706.03762) based solely on attention mechanisms.
-- `multi-s2s`: As `s2s`, but uses two or more encoders allowing multi-source
-  neural machine translation.
-- `multi-transformer`: As `transformer`, but uses multiple encoders.
-- `amun`: A model equivalent to Nematus models unless layer normalization is
-  used. Can be decoded with Amun as _nematus_ model type.
-- `nematus`: A model type developed for decoding deep RNN-based encoder-decoder
-  models created by the Edinburgh MT group for WMT 2017 using Nematus toolkit.
-  Can be decoded with Amun as _nematus2_ model type.
-- `lm`: An RNN language model.
-- `lm-transformer`: An transformer-based language model.
-
-
-
 ### Developer API
 
 [The developer documentation for Marian]({{ 'docs/api/' | relative_url }}) is
@@ -118,13 +96,7 @@ built-in SentencePiece and TCMalloc support.
 
       sudo apt-get install git cmake build-essential libboost-system-dev zlib1g-dev libprotobuf9v5 protobuf-compiler libprotobuf-dev openssl libssl-dev libgoogle-perftools-dev
 
-* Ubuntu 14.04: gcc 4.8.4 and CUDA 8.0 that are available from the default
-  package repositories are no longer supported, so first install gcc-5, g++-5
-  and CUDA 9.0 or higher, then:
-
-      sudo apt-get install git cmake3 build-essential libboost-all-dev libprotobuf8 protobuf-compiler libprotobuf-dev openssl libssl-dev libgoogle-perftools-dev
-
-Please see the [GCC/CUDA compatibility
+Refer to the [GCC/CUDA compatibility
 table](https://github.com/marian-nmt/marian-dev/issues/526) if you experience
 compilation issues with different versions of GCC and CUDA.
 
@@ -283,6 +255,28 @@ Command-line options overwrite options stored in the configuration file.
 
 
 
+### Model types
+
+- `s2s`: An RNN-based encoder-decoder model with attention mechanism. The
+  architecture is equivalent to the
+  [DL4MT](https://github.com/nyu-dl/dl4mt-tutorial) or
+  [Nematus](https://github.com/EdinburghNLP/nematus) models ([Senrich et al.,
+  2017](https://arxiv.org/abs/1703.04357)).
+- `transformer`: A model originally proposed by Google [(Vaswani et al.,
+  2017)](https://arxiv.org/abs/1706.03762) based solely on attention mechanisms.
+- `multi-s2s`: As `s2s`, but uses two or more encoders allowing multi-source
+  neural machine translation.
+- `multi-transformer`: As `transformer`, but uses multiple encoders.
+- `amun`: A model equivalent to Nematus models unless layer normalization is
+  used. Can be decoded with Amun as _nematus_ model type.
+- `nematus`: A model type developed for decoding deep RNN-based encoder-decoder
+  models created by the Edinburgh MT group for WMT 2017 using Nematus toolkit.
+  Can be decoded with Amun as _nematus2_ model type.
+- `lm`: An RNN language model.
+- `lm-transformer`: An transformer-based language model.
+
+
+
 ### Multi-GPU training
 
 For multi-GPU training you only need to specify the device ids of the GPUs you
@@ -410,6 +404,9 @@ By default we use early stopping with patience of 10, i.e. `--early-stopping
 steps. Usually this will signal convergence or --- if the scores get worse with
 later validation steps --- potential overfitting.
 
+If using multiple metrics in validation, the stopping condition can be applied
+to `any` or `all` of these metrics. This is achieved using the flag
+`--early-stopping-on`. The default considers only the `first` listed metric.
 
 
 ### Regularization
@@ -489,6 +486,23 @@ words in the corresponding target training sentence.
 
 
 
+### Tied embeddings
+
+The tying of embedding matrices can help to reduce models size and memory
+footprints during training. Tying target embeddings and the last layer of the
+output does not decrease quality and helps saving significant amounts of
+parameters. Tying all embedding layers and output layers is a common practice
+for translation models between languages using the same scripts.
+
+Related options:
+
+- `--tied-embeddings` - tie target embeddings and output embeddings in output
+  layer,
+- `--tied-embeddings-src` - tie source and target embeddings,
+- `--tied-embeddings-all` - tie all embedding layers and output layer.
+
+
+
 ### Custom embeddings
 
 Marian can handle custom embedding vectors trained with
@@ -516,6 +530,52 @@ Other options for managing embedding vectors:
 - `--embedding-fix-trg` fixes target embeddings in all decoders
 - `--embedding-normalization` normalizes vector values into [-1,1] range
 
+
+
+### Fine-tuning
+
+A common domain adaptation technique is continued training via fine-tuning of
+an existing model on new training data.
+
+You can start continued training by copying your model to a new folder and
+setting the `--model` option to point to that model. This will reload the model
+from the path and also overwrite it during the next checkpoint saving. Note
+that this overrides the model parameters with the model parameters from the
+file, so the architectures cannot be changed between continued trainings.
+
+This method also works well for normal continued training. You can interrupt
+your running training, change the training corpus and run the same command you
+used before for the training to resume. In the case where the training files
+change, the option `--no-restore-corpus` should be added to not restore the
+corpus positions. If your validation data change, consider adding
+`--valid-reset-stalled` to reset validation counters. You can also change other
+training parameters like learning rate or early stopping criteria. If the new
+training corpus is much smaller, it is usually recommended to decrease the
+learning rate and validate the model more frequently.
+
+See also [model pre-training]({{ 'docs#model-pre-training' | relative_url }}).
+
+
+### Model pre-training
+
+A transfer learning technique related to fine-tuning is initializing model
+weights from a pre-trained model. Marian provides the `--pretrained-model
+model.npz` option that will load weight matrices from the pre-trained model
+that match in name corresponding parameters from the model's architecture.
+Matrices that are not present in the pre-trained model are initialized randomly
+by default.
+
+For instance, you can initialize the decoder of a encoder-decoder translation
+model with a pre-trained language model or deep models with shallow models.
+
+
+### Right-to-left models
+
+Marian provides an option for training on reversed input sequence via
+`--right-left`. Combining traditional left-to-right models and right-to-left
+models may lead to an improved performance for some tasks. One such approach
+would be to perform sequential decoding. However, combining left-to-right and
+right-to-left models together in an ensemble is not possible.
 
 
 ### Guided alignment
@@ -550,6 +610,107 @@ Marian has a few more options related to guided alignment training:
 - `--transformer-guided-alignment-layer` - number of layer to use for guided
   alignment training; only for training transformer models
 
+
+### Pre-defined configurations
+
+Marian provides the `--task` options, which is a handy shortcut for setting
+model architecture and training options for common NMT model configurations.
+The list of predefined configurations includes:
+
+- `best-deep` - the RNN BiDeep architecture proposed by [Miceli Barone et al.
+  (2017)](http://www.aclweb.org/anthology/W17-4710)
+- `transformer-base` and `transformer-big` - architectures and proposed
+  training settings for a Transformer "base" model and Transformer "big" model,
+  respectively, both introduced in [Vaswani et al.
+  (2019)](https://papers.nips.cc/paper/7181-attention-is-all-you-need.pdf)
+- `transformer-base-prenorm` and `transformer-big-prenorm` - variants of two
+  Transformer models with "prenorm", i.e. the layer normalization is performed
+  as the first block-wise preprocessing step.
+
+Options that are automatically set via `--task <arg>` can be overwritten by
+separately specifying those options in the command line. For example, `--task
+transformer-base --dim-emb 1024` will train a transformer "base" but with the
+embedding size of 1024 instead of 512.
+
+
+### Factored models
+
+Marian supports training models with source and/or target side factors. To
+train a factored model, the training data needs to be in a specific format, and
+a special vocabulary is required.  More information on using Marian with
+factors can be found in [the documentation on factored
+models]({{ 'docs/api/factors' | relative_url }}).
+
+
+### Mixed precision training
+
+Marian supports mixed precision training available in NVIDIA Volta and newer
+architectures. The option `--fp16` provides a shortcut with default settings
+for mixed precision training with float16 and cost-scaling.
+
+Other options related to mixed precision training:
+
+- `--precision` - defines types for forward/backward pass and optimization,
+- `--cost-scaling` - option values for dynamic cost scaling,
+- `--gradient-norm-average` - window size over which the exponential average of
+  the gradient norm is recorded,
+- `--dynamic-gradient-scaling` - re-scale gradient to have average gradient
+  norm if (log) gradient norm diverges from average by the given sigmas,
+- `--check-gradient-nan` - skip parameter update in case of NaNs in gradient.
+
+
+<!--
+### Multi-node training
+-->
+
+
+### Training from stdin
+
+Parallel training data can be provided to Marian in a tab-separated file, where
+commonly the first field corresponds to the source side and the second field
+corresponds to the target side of the parallel corpus, for example, instead of
+providing two files to `--train-sets`:
+
+```
+./build/marian -c config.yml -t file.src file.trg
+```
+
+a single file can be specified with `--tsv` option:
+```
+./build/marian -c config.yml --tsv -t file.src-trg
+```
+
+The example can be further extended to train from the corpus provided directly
+into the standard input:
+
+```
+paste file.src file.trg | ./build/marian -c config.yml -t stdin --no-shuffle
+```
+
+This might be useful when using a custom tool for training data preparation.
+Note that the user takes responsibility for randomizing the input data - this
+is why `--no-shuffle` is added to the training command (alternatively,
+`--shuffle batches` can be used).
+
+#### Logical epochs
+
+The notion of an epoch is less clear when providing the training data into
+stdin as the corpus cannot be easily rewinded and shuffled by Marian. Thus, it
+is possible to define a logical epoch in terms of the number of updates or
+labes, for example `--logical-epoch 1Gt` will re-define the epoch as 1 billion
+target tokens, instead of the traditional one pass over the training data. This
+is especially useful if the data can be provided in an infinite stream into
+stdin.
+
+#### Guided alignment and data weighting
+
+Training with guided alignment and data weighting is supported when providing
+the corpus in stdin. Simply add new fields to the input TSV file and specify
+the indices of fields with word alignments or weights. For example:
+
+```
+cat file.src-trg-aln-w | ./build/marian -t stdin --guided-alignment 2 --data-weighting 3
+```
 
 
 ## Translation
@@ -695,6 +856,95 @@ directory contains `fast_align` and `atools` from
 
 
 
+### Word-level scores
+
+
+In addition to sentence-level scores, Marian can also output word-level scores.
+The option `--word-scores` prints one score per subword unit, for example:
+
+```
+echo "This is a test." | ./build/marian-decoder -c config.yml --word-scores
+Tohle je test. ||| WordScores= -1.51923 -0.21951 -1.48668 -0.24813 -0.22176
+```
+
+Note that if you use the built-in SentencePiece subword segmentation, the
+number of scores will not much the output tokens.  Also, word scores are not
+normalized even if `--normalize` is used. You may want to normalize and map the
+word scores into output tokens as a custom post-processing step. Adding
+`--no-spm-decode` or `--alignment` will deliver all information that is needed
+to do that:
+
+```
+echo "This is a test." | ./build/marian-decoder -c config.yml --word-scores --no-spm-decode --alignment
+▁Tohle ▁je ▁test . </s> ||| 1-0 5-1 5-2 5-3 5-4 ||| WordScores= -1.51923 -0.21951 -1.48668 -0.24813 -0.22176
+```
+
+The option `--word-scores` is also available in `marian-scorer`.
+
+
+### Noisy back-translation
+
+The `--output-sampling` option in Marian allows one to noise the output layer
+with gumbel noise, which can be used for generating [noisy
+back-translations](https://aclanthology.org/D18-1045.pdf).
+```
+./build/marian-decoder -b 1 -i input.src --output-sampling
+```
+
+By default the sampling is from the full model distribution. Top-k sampling can
+be achieved providing `topk N` as arguments, for example:
+```
+./build/marian-decoder -b 1 -i input.src --output-sampling topk 10
+```
+
+Note that output sampling and beam search are generally contradictory methods
+and using them together is not recommended, so we advise to set `--beam-size 1`
+when using the sampling.
+
+
+### Binary models
+
+Marian has support for models in a custom binary format. This format supports
+mmap loading as well as both normal and packed memory layouts. Binary models
+offer decreased load times compared to `.npz`, and are identifiable by their
+`.bin` extension.
+
+The `marian-conv` command is able to convert to and from `npz` and `bin`
+models. The memory layout of the binary model is influenced by the
+`--gemm-type` flag, by default this is retained as `float32`.
+
+To generate a binary model from an `npz` model
+```shell
+./marian-conv --from model.npz --to model.bin
+```
+
+The basic usage is as simple as replacing `model.npz` with `model.bin` in your
+command arguments.  When decoding on CPU, it is possible to enable mmap loading
+with the flag `--model-mmap`.
+
+Lexical shortlists also have a binary format. From a shortlist `lex.s2t` the
+binary version can be generated by
+```shell
+./marian-conv --shortlist lex.s2t 50 50 0 \
+              --dump lex.bin \
+              --vocabs vocab.l1.spm vocab.l2.spm
+```
+The `--shortlist` argument points to the lexical shortlist file, and specifies
+the `first` (50) `best` (50) `prune` (0) options for the shortlist. Note that
+these options are **hardcoded** into the binary shortlist at conversion!  The
+`--dump` option gives the location for the binary shortlist and `--vocabs`
+specifies the vocabulary files for the source (l1) and target (l2) languages.
+
+To use the binary shortlist the `--shortlist lex.s2t 50 50 0` argument in your
+command should be replaced with
+```
+--shortlist lex.bin false
+```
+which provides the path to the binary shortlist `lex.bin`, and the second
+option `false` (optional, true by default) specifies whether the contents
+should be verified.
+
+
 ### Web server
 
 The `marian-server` command starts a web-socket server providing CPU and GPU
@@ -710,6 +960,8 @@ marian-dev/scripts/server/client_example.py %}:
 
     ./scripts/server/client_example.py -p 8080 < input.txt
 
+Note that `marian-server` is not compiled by default. It requires Boost and adding
+`-DCOMPILE_SERVER=on` to the CMake compilation command.
 
 
 ### Nematus models

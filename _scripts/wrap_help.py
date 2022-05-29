@@ -10,12 +10,18 @@ COLUMN_WIDTH = 40
 LINE_WIDTH = 100
 DEBUG = False
 
+codeblock="```"
+in_block = False
 
 for l, line in enumerate(sys.stdin):
     text = line.rstrip()
-    if len(text) <= LINE_WIDTH:
+
+    if text == codeblock:
+        in_block = not in_block
         print(text)
-    else:
+        continue
+
+    if in_block and len(text) > LINE_WIDTH:
         if DEBUG:
             print('>>> line {} has length {}'.format(l, len(text)))
         space_left = LINE_WIDTH
@@ -42,4 +48,5 @@ for l, line in enumerate(sys.stdin):
             if i > 0:
                 print(" " * (COLUMN_WIDTH - 2), end='')
             print(text[s:e])
-
+    else:
+        print(text)

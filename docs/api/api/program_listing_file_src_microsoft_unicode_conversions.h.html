@@ -4,7 +4,7 @@
   <meta charset="utf-8" /><meta name="generator" content="Docutils 0.17.1: http://docutils.sourceforge.net/" />
 
   <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-  <title>Program Listing for File unicode_conversions.h &mdash; Marian NMT v1.11.3 2022-02-11 documentation</title><link rel="stylesheet" href="../_static/css/theme.css" type="text/css" />
+  <title>Program Listing for File unicode_conversions.h &mdash; Marian NMT v1.11.5 2022-05-29 documentation</title><link rel="stylesheet" href="../_static/css/theme.css" type="text/css" />
     <link rel="stylesheet" href="../_static/pygments.css" type="text/css" />
       <link rel="stylesheet" href="../_static/css/custom.css" type="text/css" />
       <link rel="stylesheet" href="../_static/collapsible-lists/css/tree_view.css" type="text/css" />
@@ -34,7 +34,7 @@
             <a href="../index.html" class="icon icon-home"> Marian NMT
           </a>
               <div class="version">
-                v1.11.3
+                v1.11.5
               </div>
 <div role="search">
   <form id="rtd-search-form" class="wy-form" action="../search.html" method="get">
@@ -212,7 +212,7 @@
 <span class="w">    </span><span class="n">UtilCharInternal_t</span><span class="w"> </span><span class="n">src</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="n">srcData</span><span class="p">[</span><span class="n">index</span><span class="p">];</span><span class="w"></span>
 <span class="w">    </span><span class="k">switch</span><span class="w"> </span><span class="p">(</span><span class="n">src</span><span class="w"> </span><span class="o">&amp;</span><span class="w"> </span><span class="mh">0xF0</span><span class="p">)</span><span class="w"></span>
 <span class="w">    </span><span class="p">{</span><span class="w"></span>
-<span class="w">      </span><span class="k">case</span><span class="w"> </span><span class="mh">0xF0</span><span class="o">:</span><span class="w"> </span><span class="c1">// 4 byte character, 0x10000 to 0x10FFFF</span>
+<span class="w">      </span><span class="k">case</span><span class="w"> </span><span class="mh">0xF0</span><span class="p">:</span><span class="w"> </span><span class="c1">// 4 byte character, 0x10000 to 0x10FFFF</span>
 <span class="w">      </span><span class="p">{</span><span class="w"></span>
 <span class="w">        </span><span class="k">const</span><span class="w"> </span><span class="n">UtilCharInternal_t</span><span class="w"> </span><span class="n">c2</span><span class="w"> </span><span class="p">{</span><span class="n">srcData</span><span class="p">[</span><span class="o">++</span><span class="n">index</span><span class="p">]};</span><span class="w"></span>
 <span class="w">        </span><span class="k">const</span><span class="w"> </span><span class="n">UtilCharInternal_t</span><span class="w"> </span><span class="n">c3</span><span class="w"> </span><span class="p">{</span><span class="n">srcData</span><span class="p">[</span><span class="o">++</span><span class="n">index</span><span class="p">]};</span><span class="w"></span>
@@ -239,7 +239,7 @@
 <span class="w">        </span><span class="p">}</span><span class="w"></span>
 <span class="w">      </span><span class="p">}</span><span class="w"></span>
 <span class="w">        </span><span class="k">break</span><span class="p">;</span><span class="w"></span>
-<span class="w">      </span><span class="k">case</span><span class="w"> </span><span class="mh">0xE0</span><span class="o">:</span><span class="w"> </span><span class="c1">// 3 byte character, 0x800 to 0xFFFF</span>
+<span class="w">      </span><span class="k">case</span><span class="w"> </span><span class="mh">0xE0</span><span class="p">:</span><span class="w"> </span><span class="c1">// 3 byte character, 0x800 to 0xFFFF</span>
 <span class="w">      </span><span class="p">{</span><span class="w"></span>
 <span class="w">        </span><span class="k">const</span><span class="w"> </span><span class="n">UtilCharInternal_t</span><span class="w"> </span><span class="n">c2</span><span class="w"> </span><span class="p">{</span><span class="n">srcData</span><span class="p">[</span><span class="o">++</span><span class="n">index</span><span class="p">]};</span><span class="w"></span>
 <span class="w">        </span><span class="k">const</span><span class="w"> </span><span class="n">UtilCharInternal_t</span><span class="w"> </span><span class="n">c3</span><span class="w"> </span><span class="p">{</span><span class="n">srcData</span><span class="p">[</span><span class="o">++</span><span class="n">index</span><span class="p">]};</span><span class="w"></span>
@@ -247,8 +247,8 @@
 <span class="w">            </span><span class="p">((</span><span class="n">src</span><span class="w"> </span><span class="o">&amp;</span><span class="w"> </span><span class="n">LOW_4BITS</span><span class="p">)</span><span class="w"> </span><span class="o">&lt;&lt;</span><span class="w"> </span><span class="mi">12</span><span class="p">)</span><span class="w"> </span><span class="o">|</span><span class="w"> </span><span class="p">((</span><span class="n">c2</span><span class="w"> </span><span class="o">&amp;</span><span class="w"> </span><span class="n">LOW_6BITS</span><span class="p">)</span><span class="w"> </span><span class="o">&lt;&lt;</span><span class="w"> </span><span class="mi">6</span><span class="p">)</span><span class="w"> </span><span class="o">|</span><span class="w"> </span><span class="p">(</span><span class="n">c3</span><span class="w"> </span><span class="o">&amp;</span><span class="w"> </span><span class="n">LOW_6BITS</span><span class="p">));</span><span class="w"></span>
 <span class="w">      </span><span class="p">}</span><span class="w"></span>
 <span class="w">        </span><span class="k">break</span><span class="p">;</span><span class="w"></span>
-<span class="w">      </span><span class="k">case</span><span class="w"> </span><span class="mh">0xD0</span><span class="o">:</span><span class="w"> </span><span class="c1">// 2 byte character, 0x80 to 0x7FF</span>
-<span class="w">      </span><span class="k">case</span><span class="w"> </span><span class="mh">0xC0</span><span class="o">:</span><span class="w"></span>
+<span class="w">      </span><span class="k">case</span><span class="w"> </span><span class="mh">0xD0</span><span class="p">:</span><span class="w"> </span><span class="c1">// 2 byte character, 0x80 to 0x7FF</span>
+<span class="w">      </span><span class="k">case</span><span class="w"> </span><span class="mh">0xC0</span><span class="p">:</span><span class="w"></span>
 <span class="w">      </span><span class="p">{</span><span class="w"></span>
 <span class="w">        </span><span class="k">const</span><span class="w"> </span><span class="n">UtilCharInternal_t</span><span class="w"> </span><span class="n">c2</span><span class="w"> </span><span class="p">{</span><span class="n">srcData</span><span class="p">[</span><span class="o">++</span><span class="n">index</span><span class="p">]};</span><span class="w"></span>
 <span class="w">        </span><span class="n">destData</span><span class="p">[</span><span class="n">destIndex</span><span class="o">++</span><span class="p">]</span><span class="w"> </span><span class="o">=</span><span class="w"></span>

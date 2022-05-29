@@ -4,7 +4,7 @@
   <meta charset="utf-8" /><meta name="generator" content="Docutils 0.17.1: http://docutils.sourceforge.net/" />
 
   <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-  <title>Program Listing for File integer_common.h &mdash; Marian NMT v1.11.3 2022-02-11 documentation</title><link rel="stylesheet" href="../_static/css/theme.css" type="text/css" />
+  <title>Program Listing for File integer_common.h &mdash; Marian NMT v1.11.5 2022-05-29 documentation</title><link rel="stylesheet" href="../_static/css/theme.css" type="text/css" />
     <link rel="stylesheet" href="../_static/pygments.css" type="text/css" />
       <link rel="stylesheet" href="../_static/css/custom.css" type="text/css" />
       <link rel="stylesheet" href="../_static/collapsible-lists/css/tree_view.css" type="text/css" />
@@ -34,7 +34,7 @@
             <a href="../index.html" class="icon icon-home"> Marian NMT
           </a>
               <div class="version">
-                v1.11.3
+                v1.11.5
               </div>
 <div role="search">
   <form id="rtd-search-form" class="wy-form" action="../search.html" method="get">
@@ -96,21 +96,21 @@
 <span class="k">namespace</span><span class="w"> </span><span class="nn">intgemm</span><span class="w"> </span><span class="p">{</span><span class="w"></span>
 <span class="w">  </span><span class="k">struct</span><span class="w"> </span><span class="nc">Int8</span><span class="p">;</span><span class="w"></span>
 <span class="w">  </span><span class="k">struct</span><span class="w"> </span><span class="nc">Int16</span><span class="p">;</span><span class="w"></span>
-<span class="w">  </span><span class="k">namespace</span><span class="w"> </span><span class="nn">ssse3</span><span class="w"> </span><span class="p">{</span><span class="w"></span>
+<span class="w">  </span><span class="k">namespace</span><span class="w"> </span><span class="nn">SSSE3</span><span class="w"> </span><span class="p">{</span><span class="w"></span>
 <span class="w">    </span><span class="k">struct</span><span class="w"> </span><span class="nc">Kernels8</span><span class="p">;</span><span class="w"></span>
 <span class="w">  </span><span class="p">}</span><span class="w"></span>
-<span class="w">  </span><span class="k">namespace</span><span class="w"> </span><span class="nn">sse2</span><span class="w"> </span><span class="p">{</span><span class="w"></span>
+<span class="w">  </span><span class="k">namespace</span><span class="w"> </span><span class="nn">SSE2</span><span class="w"> </span><span class="p">{</span><span class="w"></span>
 <span class="w">    </span><span class="k">struct</span><span class="w"> </span><span class="nc">Kernels16</span><span class="p">;</span><span class="w"></span>
 <span class="w">  </span><span class="p">}</span><span class="w"></span>
-<span class="w">  </span><span class="k">namespace</span><span class="w"> </span><span class="nn">avx2</span><span class="w"> </span><span class="p">{</span><span class="w"></span>
-<span class="w">    </span><span class="k">struct</span><span class="w"> </span><span class="nc">Kernels8</span><span class="p">;</span><span class="w"></span>
-<span class="w">    </span><span class="k">struct</span><span class="w"> </span><span class="nc">Kernels16</span><span class="p">;</span><span class="w"></span>
-<span class="w">  </span><span class="p">}</span><span class="w"></span>
-<span class="w">  </span><span class="k">namespace</span><span class="w"> </span><span class="nn">avx512bw</span><span class="w"> </span><span class="p">{</span><span class="w"></span>
+<span class="w">  </span><span class="k">namespace</span><span class="w"> </span><span class="nn">AVX2</span><span class="w"> </span><span class="p">{</span><span class="w"></span>
 <span class="w">    </span><span class="k">struct</span><span class="w"> </span><span class="nc">Kernels8</span><span class="p">;</span><span class="w"></span>
 <span class="w">    </span><span class="k">struct</span><span class="w"> </span><span class="nc">Kernels16</span><span class="p">;</span><span class="w"></span>
 <span class="w">  </span><span class="p">}</span><span class="w"></span>
-<span class="w">  </span><span class="k">namespace</span><span class="w"> </span><span class="nn">avx512vnni</span><span class="w"> </span><span class="p">{</span><span class="w"></span>
+<span class="w">  </span><span class="k">namespace</span><span class="w"> </span><span class="nn">AVX512BW</span><span class="w"> </span><span class="p">{</span><span class="w"></span>
+<span class="w">    </span><span class="k">struct</span><span class="w"> </span><span class="nc">Kernels8</span><span class="p">;</span><span class="w"></span>
+<span class="w">    </span><span class="k">struct</span><span class="w"> </span><span class="nc">Kernels16</span><span class="p">;</span><span class="w"></span>
+<span class="w">  </span><span class="p">}</span><span class="w"></span>
+<span class="w">  </span><span class="k">namespace</span><span class="w"> </span><span class="nn">AVX512VNNI</span><span class="w"> </span><span class="p">{</span><span class="w"></span>
 <span class="w">    </span><span class="k">struct</span><span class="w"> </span><span class="nc">Kernels8</span><span class="p">;</span><span class="w"></span>
 <span class="w">  </span><span class="p">}</span><span class="w"></span>
 <span class="p">}</span><span class="w"></span>
@@ -142,22 +142,22 @@
 <span class="p">};</span><span class="w"></span>
 
 <span class="k">template</span><span class="w"> </span><span class="o">&lt;&gt;</span><span class="w"> </span><span class="k">struct</span><span class="w"> </span><span class="nc">intgemm_</span><span class="o">&lt;</span><span class="n">Type</span><span class="o">::</span><span class="n">intgemm8ssse3</span><span class="o">&gt;</span><span class="w"> </span><span class="p">{</span><span class="w"></span>
-<span class="w">  </span><span class="k">using</span><span class="w"> </span><span class="n">width</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="n">intgemm</span><span class="o">::</span><span class="n">ssse3</span><span class="o">::</span><span class="n">Kernels8</span><span class="p">;</span><span class="w"></span>
+<span class="w">  </span><span class="k">using</span><span class="w"> </span><span class="n">width</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="n">intgemm</span><span class="o">::</span><span class="n">SSSE3</span><span class="o">::</span><span class="n">Kernels8</span><span class="p">;</span><span class="w"></span>
 <span class="w">  </span><span class="k">using</span><span class="w"> </span><span class="n">type</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="kt">int8_t</span><span class="p">;</span><span class="w"></span>
 <span class="p">};</span><span class="w"></span>
 
 <span class="k">template</span><span class="w"> </span><span class="o">&lt;&gt;</span><span class="w"> </span><span class="k">struct</span><span class="w"> </span><span class="nc">intgemm_</span><span class="o">&lt;</span><span class="n">Type</span><span class="o">::</span><span class="n">intgemm8avx2</span><span class="o">&gt;</span><span class="w"> </span><span class="p">{</span><span class="w"></span>
-<span class="w">  </span><span class="k">using</span><span class="w"> </span><span class="n">width</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="n">intgemm</span><span class="o">::</span><span class="n">avx2</span><span class="o">::</span><span class="n">Kernels8</span><span class="p">;</span><span class="w"></span>
+<span class="w">  </span><span class="k">using</span><span class="w"> </span><span class="n">width</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="n">intgemm</span><span class="o">::</span><span class="n">AVX2</span><span class="o">::</span><span class="n">Kernels8</span><span class="p">;</span><span class="w"></span>
 <span class="w">  </span><span class="k">using</span><span class="w"> </span><span class="n">type</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="kt">int8_t</span><span class="p">;</span><span class="w"></span>
 <span class="p">};</span><span class="w"></span>
 
 <span class="k">template</span><span class="w"> </span><span class="o">&lt;&gt;</span><span class="w"> </span><span class="k">struct</span><span class="w"> </span><span class="nc">intgemm_</span><span class="o">&lt;</span><span class="n">Type</span><span class="o">::</span><span class="n">intgemm8avx512</span><span class="o">&gt;</span><span class="w"> </span><span class="p">{</span><span class="w"></span>
-<span class="w">  </span><span class="k">using</span><span class="w"> </span><span class="n">width</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="n">intgemm</span><span class="o">::</span><span class="n">avx512bw</span><span class="o">::</span><span class="n">Kernels8</span><span class="p">;</span><span class="w"></span>
+<span class="w">  </span><span class="k">using</span><span class="w"> </span><span class="n">width</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="n">intgemm</span><span class="o">::</span><span class="n">AVX512BW</span><span class="o">::</span><span class="n">Kernels8</span><span class="p">;</span><span class="w"></span>
 <span class="w">  </span><span class="k">using</span><span class="w"> </span><span class="n">type</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="kt">int8_t</span><span class="p">;</span><span class="w"></span>
 <span class="p">};</span><span class="w"></span>
 
 <span class="k">template</span><span class="w"> </span><span class="o">&lt;&gt;</span><span class="w"> </span><span class="k">struct</span><span class="w"> </span><span class="nc">intgemm_</span><span class="o">&lt;</span><span class="n">Type</span><span class="o">::</span><span class="n">intgemm8avx512vnni</span><span class="o">&gt;</span><span class="w"> </span><span class="p">{</span><span class="w"></span>
-<span class="w">  </span><span class="k">using</span><span class="w"> </span><span class="n">width</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="n">intgemm</span><span class="o">::</span><span class="n">avx512vnni</span><span class="o">::</span><span class="n">Kernels8</span><span class="p">;</span><span class="w"></span>
+<span class="w">  </span><span class="k">using</span><span class="w"> </span><span class="n">width</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="n">intgemm</span><span class="o">::</span><span class="n">AVX512VNNI</span><span class="o">::</span><span class="n">Kernels8</span><span class="p">;</span><span class="w"></span>
 <span class="w">  </span><span class="k">using</span><span class="w"> </span><span class="n">type</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="kt">int8_t</span><span class="p">;</span><span class="w"></span>
 <span class="p">};</span><span class="w"></span>
 
@@ -167,17 +167,17 @@
 <span class="p">};</span><span class="w"></span>
 
 <span class="k">template</span><span class="w"> </span><span class="o">&lt;&gt;</span><span class="w"> </span><span class="k">struct</span><span class="w"> </span><span class="nc">intgemm_</span><span class="o">&lt;</span><span class="n">Type</span><span class="o">::</span><span class="n">intgemm16sse2</span><span class="o">&gt;</span><span class="w"> </span><span class="p">{</span><span class="w"></span>
-<span class="w">  </span><span class="k">using</span><span class="w"> </span><span class="n">width</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="n">intgemm</span><span class="o">::</span><span class="n">sse2</span><span class="o">::</span><span class="n">Kernels16</span><span class="p">;</span><span class="w"></span>
+<span class="w">  </span><span class="k">using</span><span class="w"> </span><span class="n">width</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="n">intgemm</span><span class="o">::</span><span class="n">SSE2</span><span class="o">::</span><span class="n">Kernels16</span><span class="p">;</span><span class="w"></span>
 <span class="w">  </span><span class="k">using</span><span class="w"> </span><span class="n">type</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="kt">int16_t</span><span class="p">;</span><span class="w"></span>
 <span class="p">};</span><span class="w"></span>
 
 <span class="k">template</span><span class="w"> </span><span class="o">&lt;&gt;</span><span class="w"> </span><span class="k">struct</span><span class="w"> </span><span class="nc">intgemm_</span><span class="o">&lt;</span><span class="n">Type</span><span class="o">::</span><span class="n">intgemm16avx2</span><span class="o">&gt;</span><span class="w"> </span><span class="p">{</span><span class="w"></span>
-<span class="w">  </span><span class="k">using</span><span class="w"> </span><span class="n">width</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="n">intgemm</span><span class="o">::</span><span class="n">avx2</span><span class="o">::</span><span class="n">Kernels16</span><span class="p">;</span><span class="w"></span>
+<span class="w">  </span><span class="k">using</span><span class="w"> </span><span class="n">width</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="n">intgemm</span><span class="o">::</span><span class="n">AVX2</span><span class="o">::</span><span class="n">Kernels16</span><span class="p">;</span><span class="w"></span>
 <span class="w">  </span><span class="k">using</span><span class="w"> </span><span class="n">type</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="kt">int16_t</span><span class="p">;</span><span class="w"></span>
 <span class="p">};</span><span class="w"></span>
 
 <span class="k">template</span><span class="w"> </span><span class="o">&lt;&gt;</span><span class="w"> </span><span class="k">struct</span><span class="w"> </span><span class="nc">intgemm_</span><span class="o">&lt;</span><span class="n">Type</span><span class="o">::</span><span class="n">intgemm16avx512</span><span class="o">&gt;</span><span class="w"> </span><span class="p">{</span><span class="w"></span>
-<span class="w">  </span><span class="k">using</span><span class="w"> </span><span class="n">width</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="n">intgemm</span><span class="o">::</span><span class="n">avx512bw</span><span class="o">::</span><span class="n">Kernels16</span><span class="p">;</span><span class="w"></span>
+<span class="w">  </span><span class="k">using</span><span class="w"> </span><span class="n">width</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="n">intgemm</span><span class="o">::</span><span class="n">AVX512BW</span><span class="o">::</span><span class="n">Kernels16</span><span class="p">;</span><span class="w"></span>
 <span class="w">  </span><span class="k">using</span><span class="w"> </span><span class="n">type</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="kt">int16_t</span><span class="p">;</span><span class="w"></span>
 <span class="p">};</span><span class="w"></span>
 

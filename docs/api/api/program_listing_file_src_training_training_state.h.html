@@ -4,7 +4,7 @@
   <meta charset="utf-8" /><meta name="generator" content="Docutils 0.17.1: http://docutils.sourceforge.net/" />
 
   <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-  <title>Program Listing for File training_state.h &mdash; Marian NMT v1.11.3 2022-02-11 documentation</title><link rel="stylesheet" href="../_static/css/theme.css" type="text/css" />
+  <title>Program Listing for File training_state.h &mdash; Marian NMT v1.11.5 2022-05-29 documentation</title><link rel="stylesheet" href="../_static/css/theme.css" type="text/css" />
     <link rel="stylesheet" href="../_static/pygments.css" type="text/css" />
       <link rel="stylesheet" href="../_static/css/custom.css" type="text/css" />
       <link rel="stylesheet" href="../_static/collapsible-lists/css/tree_view.css" type="text/css" />
@@ -34,7 +34,7 @@
             <a href="../index.html" class="icon icon-home"> Marian NMT
           </a>
               <div class="version">
-                v1.11.3
+                v1.11.5
               </div>
 <div role="search">
   <form id="rtd-search-form" class="wy-form" action="../search.html" method="get">
@@ -190,9 +190,9 @@
 <span class="w">  </span><span class="c1">// return the totals count that corresponds to the given unit (batches, labels, or epochs)</span>
 <span class="w">  </span><span class="kt">size_t</span><span class="w"> </span><span class="n">getProgressIn</span><span class="p">(</span><span class="n">SchedulingUnit</span><span class="w"> </span><span class="n">u</span><span class="p">)</span><span class="w"> </span><span class="k">const</span><span class="w"> </span><span class="p">{</span><span class="w"></span>
 <span class="w">    </span><span class="k">switch</span><span class="p">(</span><span class="n">u</span><span class="p">)</span><span class="w"> </span><span class="p">{</span><span class="w"></span>
-<span class="w">      </span><span class="k">case</span><span class="w"> </span><span class="n">SchedulingUnit</span><span class="o">::</span><span class="n">trgLabels</span><span class="o">:</span><span class="w"> </span><span class="k">return</span><span class="w"> </span><span class="n">labelsTotal</span><span class="p">;</span><span class="w"></span>
-<span class="w">      </span><span class="k">case</span><span class="w"> </span><span class="n">SchedulingUnit</span><span class="o">::</span><span class="n">updates</span><span class="w">  </span><span class="o">:</span><span class="w"> </span><span class="k">return</span><span class="w"> </span><span class="n">batches</span><span class="p">;</span><span class="w"></span>
-<span class="w">      </span><span class="k">case</span><span class="w"> </span><span class="n">SchedulingUnit</span><span class="o">::</span><span class="n">epochs</span><span class="w">   </span><span class="o">:</span><span class="w"> </span><span class="k">return</span><span class="w"> </span><span class="n">epochs</span><span class="p">;</span><span class="w"></span>
+<span class="w">      </span><span class="k">case</span><span class="w"> </span><span class="no">SchedulingUnit</span><span class="o">::</span><span class="no">trgLabels</span><span class="p">:</span><span class="w"> </span><span class="k">return</span><span class="w"> </span><span class="n">labelsTotal</span><span class="p">;</span><span class="w"></span>
+<span class="w">      </span><span class="k">case</span><span class="w"> </span><span class="no">SchedulingUnit</span><span class="o">::</span><span class="no">updates</span><span class="w">  </span><span class="p">:</span><span class="w"> </span><span class="k">return</span><span class="w"> </span><span class="n">batches</span><span class="p">;</span><span class="w"></span>
+<span class="w">      </span><span class="k">case</span><span class="w"> </span><span class="no">SchedulingUnit</span><span class="o">::</span><span class="no">epochs</span><span class="w">   </span><span class="p">:</span><span class="w"> </span><span class="k">return</span><span class="w"> </span><span class="n">epochs</span><span class="p">;</span><span class="w"></span>
 <span class="w">      </span><span class="k">default</span><span class="o">:</span><span class="w"> </span><span class="n">ABORT</span><span class="p">(</span><span class="s">&quot;corrupt enum value&quot;</span><span class="p">);</span><span class="w"></span>
 <span class="w">    </span><span class="p">}</span><span class="w"></span>
 <span class="w">  </span><span class="p">}</span><span class="w"></span>
@@ -207,9 +207,9 @@
 
 <span class="w">  </span><span class="kt">size_t</span><span class="w"> </span><span class="n">getPreviousProgressIn</span><span class="p">(</span><span class="n">SchedulingUnit</span><span class="w"> </span><span class="n">u</span><span class="p">)</span><span class="w"> </span><span class="k">const</span><span class="w"> </span><span class="p">{</span><span class="w"></span>
 <span class="w">    </span><span class="k">switch</span><span class="p">(</span><span class="n">u</span><span class="p">)</span><span class="w"> </span><span class="p">{</span><span class="w"></span>
-<span class="w">      </span><span class="k">case</span><span class="w"> </span><span class="n">SchedulingUnit</span><span class="o">::</span><span class="n">trgLabels</span><span class="o">:</span><span class="w"> </span><span class="k">return</span><span class="w"> </span><span class="n">prevLabelsTotal</span><span class="p">;</span><span class="w"></span>
-<span class="w">      </span><span class="k">case</span><span class="w"> </span><span class="n">SchedulingUnit</span><span class="o">::</span><span class="n">updates</span><span class="w">  </span><span class="o">:</span><span class="w"> </span><span class="k">return</span><span class="w"> </span><span class="n">prevBatches</span><span class="p">;</span><span class="w"></span>
-<span class="w">      </span><span class="k">case</span><span class="w"> </span><span class="n">SchedulingUnit</span><span class="o">::</span><span class="n">epochs</span><span class="w">   </span><span class="o">:</span><span class="w"> </span><span class="k">return</span><span class="w"> </span><span class="n">prevEpochs</span><span class="p">;</span><span class="w"></span>
+<span class="w">      </span><span class="k">case</span><span class="w"> </span><span class="no">SchedulingUnit</span><span class="o">::</span><span class="no">trgLabels</span><span class="p">:</span><span class="w"> </span><span class="k">return</span><span class="w"> </span><span class="n">prevLabelsTotal</span><span class="p">;</span><span class="w"></span>
+<span class="w">      </span><span class="k">case</span><span class="w"> </span><span class="no">SchedulingUnit</span><span class="o">::</span><span class="no">updates</span><span class="w">  </span><span class="p">:</span><span class="w"> </span><span class="k">return</span><span class="w"> </span><span class="n">prevBatches</span><span class="p">;</span><span class="w"></span>
+<span class="w">      </span><span class="k">case</span><span class="w"> </span><span class="no">SchedulingUnit</span><span class="o">::</span><span class="no">epochs</span><span class="w">   </span><span class="p">:</span><span class="w"> </span><span class="k">return</span><span class="w"> </span><span class="n">prevEpochs</span><span class="p">;</span><span class="w"></span>
 <span class="w">      </span><span class="k">default</span><span class="o">:</span><span class="w"> </span><span class="n">ABORT</span><span class="p">(</span><span class="s">&quot;corrupt enum value&quot;</span><span class="p">);</span><span class="w"></span>
 <span class="w">    </span><span class="p">}</span><span class="w"></span>
 <span class="w">  </span><span class="p">}</span><span class="w"></span>

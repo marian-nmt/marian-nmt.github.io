@@ -42,7 +42,7 @@ jobs:
       name: Check for source changes
       outputs:
         changed: ${{ steps.check.outputs.changed }}
-      runs-on: ubuntu-latest
+      runs-on: ubuntu-20.04
       steps:
         - name: Checkout source code
           uses: actions/checkout@v2
@@ -77,12 +77,12 @@ jobs:
   cli:
     name: Build CLI documentation
     env:
-      gcc: 7
+      gcc: 9
       cuda: "11.2"
     defaults:
       run:
         working-directory: marian-dev
-    runs-on: ubuntu-latest
+    runs-on: ubuntu-20.04
     steps:
       - name: Checkout source code
         uses: actions/checkout@v2
@@ -172,7 +172,7 @@ jobs:
   site:
     name: Build website
     needs: [cli]
-    runs-on: ubuntu-latest
+    runs-on: ubuntu-20.04
     steps:
       - name: Checkout website source
         uses: actions/checkout@v2
@@ -248,7 +248,7 @@ jobs:
     name: Build API documentation
     needs: [check_source]
     if: needs.check_source.outputs.changed == 'true'
-    runs-on: ubuntu-latest
+    runs-on: ubuntu-20.04
     defaults:
       run:
         working-directory: marian-dev

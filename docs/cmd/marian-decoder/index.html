@@ -199,7 +199,7 @@
               <h2 id="marian-decoder">marian-decoder</h2>
 <p>Marian: Fast Neural Machine Translation in C++</p>
 
-<p>Version: v1.11.5 95720ae 2022-05-18 11:11:28 +0100</p>
+<p>Version: v1.12.0 65bf82f 2023-02-21 09:56:29 -0800</p>
 
 <p>Usage: <code class="highlighter-rouge">./marian-decoder [OPTIONS]</code></p>
 
@@ -211,7 +211,9 @@
 --build-info TEXT                     Print CMake build options and exit. Set to 'all' to print 
                                       advanced options
 -c,--config VECTOR ...                Configuration file(s). If multiple, later overrides earlier
--w,--workspace UINT=512               Preallocate arg MB of work space
+-w,--workspace INT=512                Preallocate arg MB of work space. Negative `--workspace -N` 
+                                      value allocates workspace as total available GPU memory 
+                                      minus N megabytes.
 --log TEXT                            Log training process information to file given by arg
 --log-level TEXT=info                 Set verbosity level of logging: trace, debug, info, warn, 
                                       err(or), critical, off
@@ -271,6 +273,7 @@
 --transformer-heads INT=8             Number of heads in multi-head attention (transformer)
 --transformer-no-projection           Omit linear projection after multi-head attention 
                                       (transformer)
+--transformer-rnn-projection          Add linear projection after rnn layer (transformer)
 --transformer-pool                    Pool encoder states instead of using cross attention 
                                       (selects first encoder state, best used with special token)
 --transformer-dim-ffn INT=2048        Size of position-wise feed-forward network (transformer)
@@ -331,6 +334,14 @@
                                       newline symbol
 --n-best                              Generate n-best list
 --alignment TEXT                      Return word alignment. Possible values: 0.0-1.0, hard, soft
+--force-decode                        Use force-decoding of given prefixes. Forces decoding to 
+                                      follow vocab IDs from last stream in the batch (or the 
+                                      first stream, if there is only one). Use either as 
+                                      `./marian-decoder --force-decode --input source.txt 
+                                      prefixes.txt [...]` where inputs and prefixes align on 
+                                      line-level or as `paste source.txt prefixes.txt | 
+                                      ./marian-decoder --force-decode --tsv --tsv-fields 2 [...]` 
+                                      when reading from stdin.
 --word-scores                         Print word-level scores. One score per subword unit, not 
                                       normalized even if --normalize
 --stat-freq TEXT=0                    Display speed information every arg mini-batches. Disabled 
@@ -364,8 +375,9 @@
 --shortlist VECTOR ...                Use softmax shortlist: path first best prune
 --weights VECTOR ...                  Scorer weights
 --output-sampling VECTOR ...          Noise output layer with gumbel noise. Implicit default is 
-                                      'full' for sampling from full distribution.  Also accepts 
-                                      'topk num' (e.g. topk 100) for top-100 sampling.
+                                      'full 1.0' for sampling from full distribution with softmax 
+                                      temperature 1.0. Also accepts 'topk num temp' (e.g. topk 
+                                      100 0.1) for top-100 sampling with temperature 0.1
 --output-approx-knn VECTOR ...        Use approximate knn search in output layer (currently only 
                                       in transformer)
 --optimize=false                      Optimize the graph on-the-fly

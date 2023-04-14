@@ -199,7 +199,7 @@
               <h2 id="marian-scorer">marian-scorer</h2>
 <p>Marian: Fast Neural Machine Translation in C++</p>
 
-<p>Version: v1.11.5 95720ae 2022-05-18 11:11:28 +0100</p>
+<p>Version: v1.12.0 65bf82f 2023-02-21 09:56:29 -0800</p>
 
 <p>Usage: <code class="highlighter-rouge">./marian-scorer [OPTIONS]</code></p>
 
@@ -211,7 +211,9 @@
 --build-info TEXT                     Print CMake build options and exit. Set to 'all' to print 
                                       advanced options
 -c,--config VECTOR ...                Configuration file(s). If multiple, later overrides earlier
--w,--workspace UINT=2048              Preallocate arg MB of work space
+-w,--workspace INT=2048               Preallocate arg MB of work space. Negative `--workspace -N` 
+                                      value allocates workspace as total available GPU memory 
+                                      minus N megabytes.
 --log TEXT                            Log training process information to file given by arg
 --log-level TEXT=info                 Set verbosity level of logging: trace, debug, info, warn, 
                                       err(or), critical, off
@@ -270,6 +272,7 @@
 --transformer-heads INT=8             Number of heads in multi-head attention (transformer)
 --transformer-no-projection           Omit linear projection after multi-head attention 
                                       (transformer)
+--transformer-rnn-projection          Add linear projection after rnn layer (transformer)
 --transformer-pool                    Pool encoder states instead of using cross attention 
                                       (selects first encoder state, best used with special token)
 --transformer-dim-ffn INT=2048        Size of position-wise feed-forward network (transformer)

@@ -199,7 +199,7 @@
               <h2 id="marian">marian</h2>
 <p>Marian: Fast Neural Machine Translation in C++</p>
 
-<p>Version: v1.11.5 95720ae 2022-05-18 11:11:28 +0100</p>
+<p>Version: v1.12.0 65bf82f 2023-02-21 09:56:29 -0800</p>
 
 <p>Usage: <code class="highlighter-rouge">./marian [OPTIONS]</code></p>
 
@@ -211,7 +211,9 @@
 --build-info TEXT                     Print CMake build options and exit. Set to 'all' to print 
                                       advanced options
 -c,--config VECTOR ...                Configuration file(s). If multiple, later overrides earlier
--w,--workspace UINT=2048              Preallocate arg MB of work space
+-w,--workspace INT=2048               Preallocate arg MB of work space. Negative `--workspace -N` 
+                                      value allocates workspace as total available GPU memory 
+                                      minus N megabytes.
 --log TEXT                            Log training process information to file given by arg
 --log-level TEXT=info                 Set verbosity level of logging: trace, debug, info, warn, 
                                       err(or), critical, off
@@ -272,6 +274,7 @@
 --transformer-heads INT=8             Number of heads in multi-head attention (transformer)
 --transformer-no-projection           Omit linear projection after multi-head attention 
                                       (transformer)
+--transformer-rnn-projection          Add linear projection after rnn layer (transformer)
 --transformer-pool                    Pool encoder states instead of using cross attention 
                                       (selects first encoder state, best used with special token)
 --transformer-dim-ffn INT=2048        Size of position-wise feed-forward network (transformer)
@@ -476,7 +479,7 @@
 --embedding-fix-trg                   Fix target embeddings. Affects all decoders
 --fp16                                Shortcut for mixed precision training with float16 and 
                                       cost-scaling, corresponds to: --precision float16 float32 
-                                      --cost-scaling 256.f 1000 2.f 256.f
+                                      --cost-scaling 8.f 10000 1.f 8.f
 --precision VECTOR=float32,float32 ...
                                       Mixed precision training for forward/backward pass and 
                                       optimizaton. Defines types for: forward/backward pass, 
@@ -525,8 +528,9 @@
                                       ce-mean-words, perplexity, valid-script, translation, bleu, 
                                       bleu-detok (deprecated, same as bleu), bleu-segmented, 
                                       chrf. Multiple metrics can be specified
---valid-reset-stalled                 Reset all stalled validation metrics when the training is 
+--valid-reset-stalled                 Reset stalled validation metrics when the training is 
                                       restarted
+--valid-reset-all                     Reset all validation metrics when the training is restarted
 --early-stopping UINT=10              Stop if the first validation metric does not improve for arg 
                                       consecutive validation steps
 --early-stopping-on TEXT=first        Decide if early stopping should take into account first, 
